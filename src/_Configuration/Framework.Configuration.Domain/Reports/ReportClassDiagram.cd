@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Framework.Configuration.Domain.Reports.Report">
+    <Position X="6" Y="2.25" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="Filters" Type="Framework.Configuration.Domain.Reports.ReportFilter" FixedToPoint="true">
+      <Path>
+        <Point X="7.375" Y="5.155" />
+        <Point X="7.375" Y="8" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.433" Y="0.018" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Parameters" Type="Framework.Configuration.Domain.Reports.ReportParameter" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8.5" Y="3.703" />
+        <Point X="11.75" Y="3.703" />
+        <Point X="11.75" Y="6.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAgAgAAAAIIAAAASAAhAEAQAAgIAAAACCAAA=</HashCode>
+      <FileName>Reports\Report.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Properties" />
+      <Property Name="Filters" />
+      <Property Name="Parameters" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Framework.Configuration.Domain.Reports.ReportParameter">
+    <Position X="9.75" Y="6.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAQAAAAEABAAAAAQAACABAA=</HashCode>
+      <FileName>Reports\ReportParameter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Framework.Configuration.Domain.Reports.ReportProperty">
+    <Position X="0.75" Y="6" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAEEAgABAAIAAAAAAAAAAAAAAAAAAAAAAAgAAACIBAA=</HashCode>
+      <FileName>Reports\ReportProperty.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Framework.Configuration.Domain.Reports.ReportFilter">
+    <Position X="5.25" Y="8" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="Report" Type="Framework.Configuration.Domain.Reports.Report" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.5" Y="9.682" />
+        <Point X="8.25" Y="9.682" />
+        <Point X="8.25" Y="5.155" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAACAAAAEgAQCBBAE=</HashCode>
+      <FileName>Reports\ReportFilter.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Report" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

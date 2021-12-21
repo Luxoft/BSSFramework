@@ -1,0 +1,669 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="Framework.Workflow.Domain" auto-import="false" schema="Workflow.dbo" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Framework.Workflow.Domain.Definition.Command" table="Command">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Description" column="description" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_name_taskCommand" access="field.camelcase" />
+    <property name="OrderIndex" column="orderIndex" access="field.camelcase" />
+    <many-to-one name="ExecuteAction" column="executeActionId" class="Framework.Workflow.Domain.Definition.WorkflowLambda" access="field.camelcase" />
+    <many-to-one name="Task" column="taskId" class="Framework.Workflow.Domain.Definition.Task" unique-key="UIX_name_taskCommand" access="field.camelcase" />
+    <set name="InternalEvents" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="ownerId" />
+      <one-to-many class="Framework.Workflow.Domain.Definition.CommandEvent" />
+    </set>
+    <set name="Metadatas" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="commandId" />
+      <one-to-many class="Framework.Workflow.Domain.Definition.CommandMetadata" />
+    </set>
+    <set name="Parameters" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="commandId" />
+      <one-to-many class="Framework.Workflow.Domain.Definition.CommandParameter" />
+    </set>
+    <set name="RoleAccesses" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="commandId" />
+      <one-to-many class="Framework.Workflow.Domain.Definition.CommandRoleAccess" />
+    </set>
+  </class>
+  <class name="Framework.Workflow.Domain.Definition.CommandMetadata" table="CommandMetadata">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Description" column="description" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_command_nameCommandMetadata" access="field.camelcase" />
+    <property name="Value" column="value" access="field.camelcase" />
+    <many-to-one name="Command" column="commandId" class="Framework.Workflow.Domain.Definition.Command" unique-key="UIX_command_nameCommandMetadata" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Definition.CommandParameter" table="CommandParameter">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="AllowNull" column="allowNull" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Description" column="description" access="field.camelcase" />
+    <property name="IsReadOnly" column="isReadOnly" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_command_nameCommandParameter" access="field.camelcase" />
+    <many-to-one name="Command" column="commandId" class="Framework.Workflow.Domain.Definition.Command" unique-key="UIX_command_nameCommandParameter" access="field.camelcase" />
+    <many-to-one name="Type" column="typeId" class="Framework.Workflow.Domain.Definition.DomainType" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Definition.CommandRoleAccess" table="CommandRoleAccess">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <many-to-one name="Command" column="commandId" class="Framework.Workflow.Domain.Definition.Command" unique-key="UIX_command_roleCommandRoleAccess" access="field.camelcase" />
+    <many-to-one name="Role" column="roleId" class="Framework.Workflow.Domain.Definition.Role" unique-key="UIX_command_roleCommandRoleAccess" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Definition.DomainType" table="DomainType">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Description" column="description" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_name_nameSpace_targetSystemDomainType" access="field.camelcase" />
+    <property name="NameSpace" column="nameSpace" unique-key="UIX_name_nameSpace_targetSystemDomainType" access="field.camelcase" />
+    <property name="Role" column="role" access="field.camelcase" />
+    <many-to-one name="TargetSystem" column="targetSystemId" class="Framework.Workflow.Domain.Definition.TargetSystem" unique-key="UIX_name_nameSpace_targetSystemDomainType" access="field.camelcase" />
+    <set name="WorkflowSources" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="typeId" />
+      <one-to-many class="Framework.Workflow.Domain.Definition.WorkflowSource" />
+    </set>
+  </class>
+  <class name="Framework.Workflow.Domain.Definition.Event" table="Event">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Description" column="description" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <joined-subclass name="Framework.Workflow.Domain.Definition.CommandEvent" table="CommandEvent">
+      <key column="id" />
+      <many-to-one name="Owner" column="ownerId" class="Framework.Workflow.Domain.Definition.Command" access="field.camelcase" />
+    </joined-subclass>
+    <joined-subclass name="Framework.Workflow.Domain.Definition.ConditionStateEvent" table="ConditionStateEvent">
+      <key column="id" />
+      <property name="IsTrue" column="isTrue" access="field.camelcase" />
+      <many-to-one name="Owner" column="ownerId" class="Framework.Workflow.Domain.Definition.ConditionState" access="field.camelcase" />
+    </joined-subclass>
+    <joined-subclass name="Framework.Workflow.Domain.Definition.ParallelStateFinalEvent" table="ParallelStateFinalEvent">
+      <key column="id" />
+      <property name="OrderIndex" column="orderIndex" access="field.camelcase" />
+      <many-to-one name="Condition" column="conditionId" class="Framework.Workflow.Domain.Definition.WorkflowLambda" access="field.camelcase" />
+      <many-to-one name="Owner" column="ownerId" class="Framework.Workflow.Domain.Definition.ParallelState" access="field.camelcase" />
+    </joined-subclass>
+    <joined-subclass name="Framework.Workflow.Domain.Definition.StateDomainObjectEvent" table="StateDomainObjectEvent">
+      <key column="id" />
+      <many-to-one name="Condition" column="conditionId" class="Framework.Workflow.Domain.Definition.WorkflowLambda" access="field.camelcase" />
+      <many-to-one name="Owner" column="ownerId" class="Framework.Workflow.Domain.Definition.State" access="field.camelcase" />
+    </joined-subclass>
+    <joined-subclass name="Framework.Workflow.Domain.Definition.StateTimeoutEvent" table="StateTimeoutEvent">
+      <key column="id" />
+      <many-to-one name="Condition" column="conditionId" class="Framework.Workflow.Domain.Definition.WorkflowLambda" access="field.camelcase" />
+      <many-to-one name="Owner" column="ownerId" class="Framework.Workflow.Domain.Definition.State" access="field.camelcase" />
+    </joined-subclass>
+  </class>
+  <class name="Framework.Workflow.Domain.Definition.ParallelStateStartItem" table="ParallelStateStartItem">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <many-to-one name="Factory" column="factoryId" class="Framework.Workflow.Domain.Definition.WorkflowLambda" access="field.camelcase" />
+    <many-to-one name="State" column="stateId" class="Framework.Workflow.Domain.Definition.ParallelState" access="field.camelcase" />
+    <many-to-one name="SubWorkflow" column="subWorkflowId" class="Framework.Workflow.Domain.Definition.Workflow" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Definition.Role" table="Role">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Description" column="description" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_name_workflowRole" access="field.camelcase" />
+    <property name="SecurityOperationId" column="securityOperationId" unique-key="Security_Role" access="field.camelcase" />
+    <many-to-one name="CustomSecurityProvider" column="customSecurityProviderId" class="Framework.Workflow.Domain.Definition.WorkflowLambda" unique-key="Security_Role" access="field.camelcase" />
+    <many-to-one name="Workflow" column="workflowId" class="Framework.Workflow.Domain.Definition.Workflow" unique-key="UIX_name_workflowRole,Security_Role" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Definition.StartWorkflowDomainObjectCondition" table="StartWorkflowDomainObjectCondition">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <many-to-one name="Condition" column="conditionId" class="Framework.Workflow.Domain.Definition.WorkflowLambda" unique-key="UIX_condition_factory_workflowStartWorkflowDomainObjectCondition" access="field.camelcase" />
+    <many-to-one name="Factory" column="factoryId" class="Framework.Workflow.Domain.Definition.WorkflowLambda" unique-key="UIX_condition_factory_workflowStartWorkflowDomainObjectCondition" access="field.camelcase" />
+    <many-to-one name="Workflow" column="workflowId" class="Framework.Workflow.Domain.Definition.Workflow" unique-key="UIX_condition_factory_workflowStartWorkflowDomainObjectCondition" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Definition.StateBase" table="StateBase">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="AutoSetStatePropertyName" column="autoSetStatePropertyName" access="field.camelcase" />
+    <property name="AutoSetStatePropertyValue" column="autoSetStatePropertyValue" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Description" column="description" access="field.camelcase" />
+    <property name="IsInitial" column="isInitial" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <property name="Type" column="type" access="field.camelcase" />
+    <many-to-one name="Workflow" column="workflowId" class="Framework.Workflow.Domain.Definition.Workflow" access="field.camelcase" />
+    <joined-subclass name="Framework.Workflow.Domain.Definition.ConditionState" table="ConditionState">
+      <key column="id" />
+      <many-to-one name="Condition" column="conditionId" class="Framework.Workflow.Domain.Definition.WorkflowLambda" access="field.camelcase" />
+      <set name="InternalEvents" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+        <key column="ownerId" />
+        <one-to-many class="Framework.Workflow.Domain.Definition.ConditionStateEvent" />
+      </set>
+    </joined-subclass>
+    <joined-subclass name="Framework.Workflow.Domain.Definition.ParallelState" table="ParallelState">
+      <key column="id" />
+      <set name="FinalEvents" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+        <key column="ownerId" />
+        <one-to-many class="Framework.Workflow.Domain.Definition.ParallelStateFinalEvent" />
+      </set>
+      <set name="StartItems" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+        <key column="stateId" />
+        <one-to-many class="Framework.Workflow.Domain.Definition.ParallelStateStartItem" />
+      </set>
+    </joined-subclass>
+    <joined-subclass name="Framework.Workflow.Domain.Definition.State" table="State">
+      <key column="id" />
+      <property name="IsFinal" column="isFinal" access="field.camelcase" />
+      <set name="DomainObjectEvents" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+        <key column="ownerId" />
+        <one-to-many class="Framework.Workflow.Domain.Definition.StateDomainObjectEvent" />
+      </set>
+      <set name="Tasks" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+        <key column="stateId" />
+        <one-to-many class="Framework.Workflow.Domain.Definition.Task" />
+      </set>
+      <set name="TimeoutEvents" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+        <key column="ownerId" />
+        <one-to-many class="Framework.Workflow.Domain.Definition.StateTimeoutEvent" />
+      </set>
+    </joined-subclass>
+  </class>
+  <class name="Framework.Workflow.Domain.Definition.TargetSystem" table="TargetSystem">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Description" column="description" access="field.camelcase" />
+    <property name="IsBase" column="isBase" access="field.camelcase" />
+    <property name="IsMain" column="isMain" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_nameTargetSystem" access="field.camelcase" />
+    <set name="DomainTypes" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="targetSystemId" />
+      <one-to-many class="Framework.Workflow.Domain.Definition.DomainType" />
+    </set>
+  </class>
+  <class name="Framework.Workflow.Domain.Definition.Task" table="Task">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Description" column="description" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <many-to-one name="State" column="stateId" class="Framework.Workflow.Domain.Definition.State" access="field.camelcase" />
+    <set name="Commands" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="taskId" />
+      <one-to-many class="Framework.Workflow.Domain.Definition.Command" />
+    </set>
+    <set name="Metadatas" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="taskId" />
+      <one-to-many class="Framework.Workflow.Domain.Definition.TaskMetadata" />
+    </set>
+  </class>
+  <class name="Framework.Workflow.Domain.Definition.TaskMetadata" table="TaskMetadata">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Description" column="description" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_name_taskTaskMetadata" access="field.camelcase" />
+    <property name="Value" column="value" access="field.camelcase" />
+    <many-to-one name="Task" column="taskId" class="Framework.Workflow.Domain.Definition.Task" unique-key="UIX_name_taskTaskMetadata" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Definition.Transition" table="Transition">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Description" column="description" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_name_workflowTransition" access="field.camelcase" />
+    <many-to-one name="From" column="fromId" class="Framework.Workflow.Domain.Definition.StateBase" access="field.camelcase" />
+    <many-to-one name="To" column="toId" class="Framework.Workflow.Domain.Definition.StateBase" access="field.camelcase" />
+    <many-to-one name="TriggerEvent" column="triggerEventId" class="Framework.Workflow.Domain.Definition.Event" access="field.camelcase" />
+    <many-to-one name="Workflow" column="workflowId" class="Framework.Workflow.Domain.Definition.Workflow" unique-key="UIX_name_workflowTransition" access="field.camelcase" />
+    <set name="PostActions" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="transitionId" />
+      <one-to-many class="Framework.Workflow.Domain.Definition.TransitionAction" />
+    </set>
+  </class>
+  <class name="Framework.Workflow.Domain.Definition.TransitionAction" table="TransitionAction">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="OrderIndex" column="orderIndex" access="field.camelcase" />
+    <many-to-one name="Action" column="actionId" class="Framework.Workflow.Domain.Definition.WorkflowLambda" access="field.camelcase" />
+    <many-to-one name="Transition" column="transitionId" class="Framework.Workflow.Domain.Definition.Transition" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Definition.Workflow" table="Workflow">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="AutoRemoveWithDomainObject" column="autoRemoveWithDomainObject" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Description" column="description" access="field.camelcase" />
+    <property name="HasAttachments" column="hasAttachments" access="field.camelcase" />
+    <property name="IsValid" column="isValid" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_name_ownerWorkflow" access="field.camelcase" />
+    <property name="ValidationError" column="validationError" length="2147483647" access="field.camelcase" />
+    <many-to-one name="ActiveCondition" column="activeConditionId" class="Framework.Workflow.Domain.Definition.WorkflowLambda" access="field.camelcase" />
+    <many-to-one name="DomainType" column="domainTypeId" class="Framework.Workflow.Domain.Definition.DomainType" access="field.camelcase" />
+    <many-to-one name="Owner" column="ownerId" class="Framework.Workflow.Domain.Definition.Workflow" unique-key="UIX_name_ownerWorkflow" access="field.camelcase" />
+    <set name="ConditionStates" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="workflowId" />
+      <one-to-many class="Framework.Workflow.Domain.Definition.ConditionState" />
+    </set>
+    <set name="Lambdas" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="workflowId" />
+      <one-to-many class="Framework.Workflow.Domain.Definition.WorkflowLambda" />
+    </set>
+    <set name="Metadatas" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="workflowId" />
+      <one-to-many class="Framework.Workflow.Domain.Definition.WorkflowMetadata" />
+    </set>
+    <set name="ParallelStates" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="workflowId" />
+      <one-to-many class="Framework.Workflow.Domain.Definition.ParallelState" />
+    </set>
+    <set name="Parameters" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="workflowId" />
+      <one-to-many class="Framework.Workflow.Domain.Definition.WorkflowParameter" />
+    </set>
+    <set name="Roles" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="workflowId" />
+      <one-to-many class="Framework.Workflow.Domain.Definition.Role" />
+    </set>
+    <set name="Sources" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="workflowId" />
+      <one-to-many class="Framework.Workflow.Domain.Definition.WorkflowSource" />
+    </set>
+    <set name="StartConditions" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="workflowId" />
+      <one-to-many class="Framework.Workflow.Domain.Definition.StartWorkflowDomainObjectCondition" />
+    </set>
+    <set name="States" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="workflowId" />
+      <one-to-many class="Framework.Workflow.Domain.Definition.State" />
+    </set>
+    <set name="SubWorkflows" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="ownerId" />
+      <one-to-many class="Framework.Workflow.Domain.Definition.Workflow" />
+    </set>
+    <set name="Transitions" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="workflowId" />
+      <one-to-many class="Framework.Workflow.Domain.Definition.Transition" />
+    </set>
+  </class>
+  <class name="Framework.Workflow.Domain.Definition.WorkflowLambda" table="WorkflowLambda">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Description" column="description" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_name_workflowWorkflowLambda" access="field.camelcase" />
+    <property name="Value" column="value" length="2147483647" access="field.camelcase" />
+    <many-to-one name="Workflow" column="workflowId" class="Framework.Workflow.Domain.Definition.Workflow" unique-key="UIX_name_workflowWorkflowLambda" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Definition.WorkflowMetadata" table="WorkflowMetadata">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Description" column="description" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_name_workflowWorkflowMetadata" access="field.camelcase" />
+    <property name="Value" column="value" access="field.camelcase" />
+    <many-to-one name="Workflow" column="workflowId" class="Framework.Workflow.Domain.Definition.Workflow" unique-key="UIX_name_workflowWorkflowMetadata" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Definition.WorkflowParameter" table="WorkflowParameter">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="AllowNull" column="allowNull" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Description" column="description" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_name_workflowWorkflowParameter" access="field.camelcase" />
+    <many-to-one name="Type" column="typeId" class="Framework.Workflow.Domain.Definition.DomainType" access="field.camelcase" />
+    <many-to-one name="Workflow" column="workflowId" class="Framework.Workflow.Domain.Definition.Workflow" unique-key="UIX_name_workflowWorkflowParameter" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Definition.WorkflowSource" table="WorkflowSource">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Description" column="description" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_name_workflowWorkflowSource" access="field.camelcase" />
+    <many-to-one name="Elements" column="elementsId" class="Framework.Workflow.Domain.Definition.WorkflowLambda" access="field.camelcase" />
+    <many-to-one name="Path" column="pathId" class="Framework.Workflow.Domain.Definition.WorkflowLambda" access="field.camelcase" />
+    <many-to-one name="Type" column="typeId" class="Framework.Workflow.Domain.Definition.DomainType" access="field.camelcase" />
+    <many-to-one name="Workflow" column="workflowId" class="Framework.Workflow.Domain.Definition.Workflow" unique-key="UIX_name_workflowWorkflowSource" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.NamedLock" table="NamedLock">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="LockOperation" column="lockOperation" unique-key="UIX_lockOperationNamedLock" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Runtime.ExecutedCommand" table="ExecutedCommand">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <many-to-one name="Definition" column="definitionId" class="Framework.Workflow.Domain.Definition.Command" unique-key="UIX_definition_taskExecutedCommand" access="field.camelcase" />
+    <many-to-one name="Task" column="taskId" class="Framework.Workflow.Domain.Runtime.TaskInstance" unique-key="UIX_definition_taskExecutedCommand" access="field.camelcase" />
+    <set name="Parameters" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="commandId" />
+      <one-to-many class="Framework.Workflow.Domain.Runtime.ExecutedCommandParameter" />
+    </set>
+  </class>
+  <class name="Framework.Workflow.Domain.Runtime.ExecutedCommandParameter" table="ExecutedCommandParameter">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Value" column="value" length="2147483647" access="field.camelcase" />
+    <many-to-one name="Command" column="commandId" class="Framework.Workflow.Domain.Runtime.ExecutedCommand" unique-key="UIX_command_definitionExecutedCommandParameter" access="field.camelcase" />
+    <many-to-one name="Definition" column="definitionId" class="Framework.Workflow.Domain.Definition.CommandParameter" unique-key="UIX_command_definitionExecutedCommandParameter" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Runtime.StateInstance" table="StateInstance">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <many-to-one name="Definition" column="definitionId" class="Framework.Workflow.Domain.Definition.StateBase" access="field.camelcase" />
+    <many-to-one name="Workflow" column="workflowId" class="Framework.Workflow.Domain.Runtime.WorkflowInstance" access="field.camelcase" />
+    <set name="SubWorkflows" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="ownerStateId" />
+      <one-to-many class="Framework.Workflow.Domain.Runtime.WorkflowInstance" />
+    </set>
+    <set name="Tasks" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="stateId" />
+      <one-to-many class="Framework.Workflow.Domain.Runtime.TaskInstance" />
+    </set>
+  </class>
+  <class name="Framework.Workflow.Domain.Runtime.TaskInstance" table="TaskInstance">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <many-to-one name="Definition" column="definitionId" class="Framework.Workflow.Domain.Definition.Task" unique-key="UIX_definition_stateTaskInstance" access="field.camelcase" />
+    <many-to-one name="State" column="stateId" class="Framework.Workflow.Domain.Runtime.StateInstance" unique-key="UIX_definition_stateTaskInstance" access="field.camelcase" />
+    <set name="Commands" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="taskId" />
+      <one-to-many class="Framework.Workflow.Domain.Runtime.ExecutedCommand" />
+    </set>
+  </class>
+  <class name="Framework.Workflow.Domain.Runtime.TransitionInstance" table="TransitionInstance">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <many-to-one name="Definition" column="definitionId" class="Framework.Workflow.Domain.Definition.Transition" access="field.camelcase" />
+    <many-to-one name="From" column="fromId" class="Framework.Workflow.Domain.Runtime.StateInstance" access="field.camelcase" />
+    <many-to-one name="To" column="toId" class="Framework.Workflow.Domain.Runtime.StateInstance" access="field.camelcase" />
+    <many-to-one name="WorkflowInstance" column="workflowInstanceId" class="Framework.Workflow.Domain.Runtime.WorkflowInstance" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Runtime.WorkflowInstance" table="WorkflowInstance">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Description" column="description" length="2147483647" access="field.camelcase" />
+    <property name="DomainObjectId" column="domainObjectId" access="field.camelcase" />
+    <property name="IsAborted" column="isAborted" access="field.camelcase" />
+    <property name="IsFinished" column="isFinished" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" length="2147483647" access="field.camelcase" />
+    <many-to-one name="CurrentState" column="currentStateId" class="Framework.Workflow.Domain.Runtime.StateInstance" access="field.camelcase" />
+    <many-to-one name="Definition" column="definitionId" class="Framework.Workflow.Domain.Definition.Workflow" access="field.camelcase" />
+    <many-to-one name="OwnerState" column="ownerStateId" class="Framework.Workflow.Domain.Runtime.StateInstance" access="field.camelcase" />
+    <set name="Parameters" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="workflowInstanceId" />
+      <one-to-many class="Framework.Workflow.Domain.Runtime.WorkflowInstanceParameter" />
+    </set>
+    <set name="States" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="workflowId" />
+      <one-to-many class="Framework.Workflow.Domain.Runtime.StateInstance" />
+    </set>
+    <set name="Transitions" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="workflowInstanceId" />
+      <one-to-many class="Framework.Workflow.Domain.Runtime.TransitionInstance" />
+    </set>
+    <set name="Watchers" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="workflowInstanceId" />
+      <one-to-many class="Framework.Workflow.Domain.Runtime.WorkflowInstanceWatcher" />
+    </set>
+  </class>
+  <class name="Framework.Workflow.Domain.Runtime.WorkflowInstanceParameter" table="WorkflowInstanceParameter">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Value" column="value" length="2147483647" access="field.camelcase" />
+    <many-to-one name="Definition" column="definitionId" class="Framework.Workflow.Domain.Definition.WorkflowParameter" unique-key="UIX_definition_workflowInstanceWorkflowInstanceParameter" access="field.camelcase" />
+    <many-to-one name="WorkflowInstance" column="workflowInstanceId" class="Framework.Workflow.Domain.Runtime.WorkflowInstance" unique-key="UIX_definition_workflowInstanceWorkflowInstanceParameter" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Runtime.WorkflowInstanceWatcher" table="WorkflowInstanceWatcher">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Login" column="login" unique-key="UIX_login_workflowInstanceWorkflowInstanceWatcher" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <many-to-one name="WorkflowInstance" column="workflowInstanceId" class="Framework.Workflow.Domain.Runtime.WorkflowInstance" unique-key="UIX_login_workflowInstanceWorkflowInstanceWatcher" access="field.camelcase" />
+  </class>
+</hibernate-mapping>

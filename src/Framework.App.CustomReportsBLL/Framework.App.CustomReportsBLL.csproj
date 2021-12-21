@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+  <IncludeBuildOutput>false</IncludeBuildOutput>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.App.CustomReports\Framework.App.CustomReports.csproj" />
+    <ProjectReference Include="..\Framework.CustomReports.BLL\Framework.CustomReports.BLL.csproj" />
+  </ItemGroup>
+
+</Project>

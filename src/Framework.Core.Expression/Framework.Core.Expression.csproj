@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Core.Delegate\Framework.Core.Delegate.csproj" />
+    <ProjectReference Include="..\Framework.Core.DictionaryCache\Framework.Core.DictionaryCache.csproj" />
+    <ProjectReference Include="..\Framework.Core.Maybe\Framework.Core.Maybe.csproj" />
+    <ProjectReference Include="..\Framework.Core.Nullable\Framework.Core.Nullable.csproj" />
+    <ProjectReference Include="..\Framework.Core.Enumerable\Framework.Core.Enumerable.csproj" />
+    <ProjectReference Include="..\Framework.Core.Pipe\Framework.Core.Pipe.csproj" />
+    <ProjectReference Include="..\Framework.Core.TypeMemberReflection\Framework.Core.TypeMemberReflection.csproj" />
+    <ProjectReference Include="..\Framework.Core.String\Framework.Core.String.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Core.AnonymousTypeBuilder\Framework.Core.AnonymousTypeBuilder.csproj" />
+    <ProjectReference Include="..\Framework.Persistent\Framework.Persistent.csproj" />
+    <ProjectReference Include="..\Framework.Restriction\Framework.Restriction.csproj" />
+  </ItemGroup>
+</Project>

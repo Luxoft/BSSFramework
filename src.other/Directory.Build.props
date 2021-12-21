@@ -1,0 +1,38 @@
+<Project>
+  <!-- Package settings -->
+  <PropertyGroup>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Copyright>Luxoft 2009-2021</Copyright>
+    <Authors>Luxoft BSS</Authors>
+    <RepositoryUrl>https://tfs/tfs/DefaultCollection/IAD_Framework/_git/IAD_Framework</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://tfs/tfs/DefaultCollection/IAD_Framework/</PackageProjectUrl>
+    <IsPackable>true</IsPackable>
+    <MinClientVersion>3.6</MinClientVersion>
+  </PropertyGroup>
+
+  <!-- PDB settings -->
+  <PropertyGroup>
+
+    <LangVersion>latest</LangVersion>
+    <!-- Include PDB into DLL -->
+    <DebugType>embedded</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <!-- Include all sources into PDB -->
+    <EmbedAllSources>true</EmbedAllSources>
+    <!-- All PDB already included -->
+    <IncludeSymbols>false</IncludeSymbols>
+	</PropertyGroup>
+
+  <!-- Build settings -->
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>1591</NoWarn>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+</Project>

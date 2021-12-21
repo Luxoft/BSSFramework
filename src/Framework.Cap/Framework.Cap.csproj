@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="DotNetCore.CAP" Version="5.2.0" />
+    <PackageReference Include="DotNetCore.CAP.Dashboard" Version="5.2.0" />
+    <PackageReference Include="DotNetCore.CAP.SqlServer" Version="5.2.0" />
+    <PackageReference Include="Savorboard.CAP.InMemoryMessageQueue" Version="5.1.1" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\_Authorization\Framework.Authorization.BLL.Core\Framework.Authorization.BLL.Core.csproj" />
+    <ProjectReference Include="..\_Authorization\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
+    <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.ServiceModel\Framework.DomainDriven.ServiceModel.csproj" />
+  </ItemGroup>
+</Project>

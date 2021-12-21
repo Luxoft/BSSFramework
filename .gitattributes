@@ -1,0 +1,33 @@
+# These files are text and should be normalized (Convert lf => crlf)
+*.asax text eol=crlf
+*.ashx text eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.config text eol=crlf
+*.cs text eol=crlf diff=csharp 
+*.cshtml text eol=crlf
+*.csproj text eol=crlf
+#*.css text eol=crlf
+#*.csv text eol=crlf
+*.h text eol=crlf
+#*.js text eol=crlf
+#*.less text eol=crlf
+*.md text eol=crlf
+*.msbuild text eol=crlf
+*.ps1 text eol=crlf
+*.resx text eol=crlf
+*.sln text eol=crlf
+#*.sql text eol=crlf
+*.svc text eol=crlf
+*.svcinfo text eol=crlf
+*.svcmap text eol=crlf
+#*.ts text eol=crlf
+*.tt text eol=crlf
+*.wsdl text eol=crlf
+*.xaml text eol=crlf
+
+# These files are text and should be normalized (Convert crlf => lf)
+*.gitattributes text eol=lf
+.gitignore text eol=lf
+*.md text eol=lf
+*.sh text eol=lf

@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="Serilog" Version="2.10.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework.ExpressionParsers\Framework.ExpressionParsers.csproj" />
+    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.BLL.Core\Framework.Authorization.BLL.Core.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.Events\Framework.Events.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.Notification.DTO\Framework.Notification.DTO.csproj" />
+    <ProjectReference Include="..\..\_Report\Framework.Report\Framework.Report.csproj" />
+    <ProjectReference Include="..\Framework.Configuration.Domain.Models\Framework.Configuration.Domain.Models.csproj" />
+    <ProjectReference Include="..\Framework.Configuration.SubscriptionModeling\Framework.Configuration.SubscriptionModeling.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+    <Compile Update="Definition\Command\Command.Mini.cs">
+      <DependentUpon>Command.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Definition\Workflow\Workflow.Mini.cs">
+      <DependentUpon>Workflow.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Definition\Workflow\WorkflowSource.Mini.cs">
+      <DependentUpon>WorkflowSource.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Definition\_Metadata\ObjectMetadata.Mini.cs">
+      <DependentUpon>ObjectMetadata.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Definition\Task\Task.Mini.cs">
+      <DependentUpon>Task.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Runtime\Task\TaskInstance.Mini.cs">
+      <DependentUpon>TaskInstance.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL.Security\Framework.DomainDriven.BLL.Security.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL\Framework.DomainDriven.BLL.csproj" />
+    <ProjectReference Include="..\Framework.Workflow.Core\Framework.Workflow.Core.csproj" />
+  </ItemGroup>
+</Project>

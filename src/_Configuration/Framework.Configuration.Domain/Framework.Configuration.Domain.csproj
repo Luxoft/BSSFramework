@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL.Configuration\Framework.DomainDriven.BLL.Configuration.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL.Security\Framework.DomainDriven.BLL.Security.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL\Framework.DomainDriven.BLL.csproj" />
+    <ProjectReference Include="..\Framework.Configuration.Core\Framework.Configuration.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Reports\ReportClassDiagram.cd" />
+  </ItemGroup>
+</Project>

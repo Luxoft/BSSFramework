@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+  <IncludeBuildOutput>false</IncludeBuildOutput>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\_Configuration\Framework.Configuration.BLL.Core\Framework.Configuration.BLL.Core.csproj" />
+    <ProjectReference Include="..\_Workflow\Framework.Workflow.BLL.Core\Framework.Workflow.BLL.Core.csproj" />
+  </ItemGroup>
+</Project>

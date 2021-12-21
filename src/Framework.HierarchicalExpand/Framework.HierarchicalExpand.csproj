@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Core.Enumerable\Framework.Core.Enumerable.csproj" />
+    <ProjectReference Include="..\Framework.Core.TypeMemberReflection\Framework.Core.TypeMemberReflection.csproj" />
+    <ProjectReference Include="..\Framework.HierarchicalExpand.Abstract\Framework.HierarchicalExpand.Abstract.csproj" />
+    <ProjectReference Include="..\Framework.QueryableSource\Framework.QueryableSource.csproj" />
+  </ItemGroup>
+
+</Project>

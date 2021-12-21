@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+
+
+  <ItemGroup>
+    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Async\Framework.Async.csproj" />
+    <ProjectReference Include="..\Framework.Core.Maybe\Framework.Core.Maybe.csproj" />
+  </ItemGroup>
+
+</Project>

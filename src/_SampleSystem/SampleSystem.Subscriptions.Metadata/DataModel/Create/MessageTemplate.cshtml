@@ -1,0 +1,8 @@
+﻿@* Generator: Template*@@{}
+@using Framework.Configuration.SubscriptionModeling
+@using SampleSystem.Domain.Models.Custom
+@inherits RazorTemplate<DateModel>
+@functions {
+    public override string Subject => $"Date model for {Current.Year} created";
+}
+<h2>Hi there!!!</h2>

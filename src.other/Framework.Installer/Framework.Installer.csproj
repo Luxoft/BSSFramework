@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProjectGuid>{5A46F3A9-1E7B-4A06-A383-59F6FB6210FD}</ProjectGuid>
+    <TargetFramework>net5.0</TargetFramework>
+    <Title>BSS Installer</Title>
+    <PackageTags>installer msi</PackageTags>
+    <Description>Contains functionality by creation installation package (MSI)</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AjaxMin" Version="5.14.5506.26202" />
+    <PackageReference Include="WixSharp.bin" Version="1.18.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.XML" />
+  </ItemGroup>
+</Project>

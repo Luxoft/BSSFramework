@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="SampleSystem.Domain.LegacyProjections" auto-import="false" schema="SampleSystem.dbo" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="SampleSystem.Domain.Projections.SecurityBusinessUnit" table="BusinessUnit">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <many-to-one name="Parent_Security" column="parentId" class="SampleSystem.Domain.Projections.SecurityBusinessUnit" access="field.camelcase" insert="false" update="false" />
+    <set name="Children_Security" inverse="true" access="field.camelcase" cascade="None">
+      <key column="parentId" />
+      <one-to-many class="SampleSystem.Domain.Projections.SecurityBusinessUnit" />
+    </set>
+  </class>
+  <class name="SampleSystem.Domain.Projections.SecurityBusinessUnitAncestorLink" table="BusinessUnitAncestorLink">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <many-to-one name="Ancestor_Security" column="ancestorId" class="SampleSystem.Domain.Projections.SecurityBusinessUnit" access="field.camelcase" insert="false" update="false" />
+    <many-to-one name="Child_Security" column="childId" class="SampleSystem.Domain.Projections.SecurityBusinessUnit" access="field.camelcase" insert="false" update="false" />
+  </class>
+  <class name="SampleSystem.Domain.Projections.SecurityBusinessUnitToAncestorChildView" table="BusinessUnitToAncestorChildView" mutable="false" schema-action="none">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <many-to-one name="ChildOrAncestor_Security" column="childOrAncestorId" class="SampleSystem.Domain.Projections.SecurityBusinessUnit" access="field.camelcase" insert="false" update="false" />
+    <many-to-one name="Source_Security" column="sourceId" class="SampleSystem.Domain.Projections.SecurityBusinessUnit" access="field.camelcase" insert="false" update="false" />
+  </class>
+  <class name="SampleSystem.Domain.Projections.SecurityEmployee" table="Employee">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Login_Security" column="login" insert="false" update="false" access="field.camelcase" />
+    <many-to-one name="BusinessUnit_Security" column="coreBusinessUnitId" class="SampleSystem.Domain.Projections.SecurityBusinessUnit" access="field.camelcase" insert="false" update="false" />
+    <many-to-one name="Department_Security" column="hRDepartmentId" class="SampleSystem.Domain.Projections.SecurityHRDepartment" access="field.camelcase" insert="false" update="false" />
+  </class>
+  <class name="SampleSystem.Domain.Projections.SecurityHRDepartment" table="HRDepartment">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <many-to-one name="Location_Security" column="locationId" class="SampleSystem.Domain.Projections.SecurityLocation" access="field.camelcase" insert="false" update="false" />
+    <many-to-one name="Parent_Security" column="parentId" class="SampleSystem.Domain.Projections.SecurityHRDepartment" access="field.camelcase" insert="false" update="false" />
+    <set name="Children_Security" inverse="true" access="field.camelcase" cascade="None">
+      <key column="parentId" />
+      <one-to-many class="SampleSystem.Domain.Projections.SecurityHRDepartment" />
+    </set>
+  </class>
+  <class name="SampleSystem.Domain.Projections.SecurityLocation" table="Location">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <many-to-one name="Parent_Security" column="parentId" class="SampleSystem.Domain.Projections.SecurityLocation" access="field.camelcase" insert="false" update="false" />
+    <set name="Children_Security" inverse="true" access="field.camelcase" cascade="None">
+      <key column="parentId" />
+      <one-to-many class="SampleSystem.Domain.Projections.SecurityLocation" />
+    </set>
+  </class>
+  <class name="SampleSystem.Domain.Projections.TestLegacyEmployee" table="Employee">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Login" column="login" insert="false" update="false" access="field.camelcase" />
+    <property name="Login_Security" column="login" insert="false" update="false" access="field.camelcase" />
+    <many-to-one name="BusinessUnit_Security" column="coreBusinessUnitId" class="SampleSystem.Domain.Projections.SecurityBusinessUnit" access="field.camelcase" insert="false" update="false" />
+    <many-to-one name="Department_Security" column="hRDepartmentId" class="SampleSystem.Domain.Projections.SecurityHRDepartment" access="field.camelcase" insert="false" update="false" />
+    <many-to-one name="Role_Auto" column="roleId" class="SampleSystem.Domain.Projections.TestLegacyEmployee_AutoProp_Role" access="field.camelcase" insert="false" update="false" />
+  </class>
+  <class name="SampleSystem.Domain.Projections.TestLegacyEmployee_AutoProp_Role" table="EmployeeRole">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Name_Last_RoleName" column="name" insert="false" update="false" access="field.camelcase" />
+  </class>
+</hibernate-mapping>

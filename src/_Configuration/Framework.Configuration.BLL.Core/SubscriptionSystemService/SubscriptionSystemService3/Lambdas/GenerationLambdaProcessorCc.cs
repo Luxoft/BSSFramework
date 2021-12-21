@@ -1,0 +1,46 @@
+﻿using System;
+using System.Collections.Generic;
+using Framework.Configuration.Domain;
+using Framework.Notification;
+
+namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
+{
+    /// <summary>
+    /// Процессор лямбда-выражения типа "CopyGeneration".
+    /// </summary>
+    /// <seealso cref="LambdaProcessor" />
+    public class GenerationLambdaProcessorCc<TBLLContext> : GenerationLambdaProcessorBase<TBLLContext>
+        where TBLLContext : class
+    {
+        /// <summary>Создаёт экземпляр класса <see cref="GenerationLambdaProcessorCc"/>.</summary>
+        /// <param name="bllContext">Контекст бизнес-логики.</param>
+        /// <param name="parserFactory">Фабрика парсеров лямбда-выражений.</param>
+        public GenerationLambdaProcessorCc(TBLLContext bllContext, IExpressionParserFactory parserFactory)
+            : base(bllContext, parserFactory)
+        {
+        }
+
+        /// <inheritdoc/>
+        protected override string LambdaName => "CopyGeneration";
+
+        /// <inheritdoc/>
+        protected override SubscriptionLambda GetSubscriptionLambda(Subscription subscription)
+        {
+            return subscription.CopyGeneration;
+        }
+
+        /// <inheritdoc/>
+        protected override Func<T, T, IEnumerable<NotificationMessageGenerationInfo>> GetNonContextDelegate<T>(
+            Subscription subscription)
+        {
+            return this.ParserFactory.GetBySubscriptionCopyGeneration<T>().GetDelegate(subscription);
+        }
+
+        /// <inheritdoc/>
+        protected override Func<TBLLContext, T, T, IEnumerable<NotificationMessageGenerationInfo>> GetContextDelegate
+            <T>(Subscription subscription)
+        {
+            return this.ParserFactory.GetBySubscriptionCopyGeneration<TBLLContext, T>().GetDelegate(subscription);
+        }
+    }
+}

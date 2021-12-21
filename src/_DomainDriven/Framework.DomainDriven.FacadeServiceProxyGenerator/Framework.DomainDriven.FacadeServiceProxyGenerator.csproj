@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework.ServiceModel.Async\Framework.ServiceModel.Async.csproj" />
+    <ProjectReference Include="..\Framework.DomainDriven.DTOGenerator.Client\Framework.DomainDriven.DTOGenerator.Client.csproj" />
+    <ProjectReference Include="..\Framework.DomainDriven.DTOGenerator.TypeScript\Framework.DomainDriven.DTOGenerator.TypeScript.csproj" />
+  </ItemGroup>
+
+</Project>

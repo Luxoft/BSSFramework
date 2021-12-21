@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="4.5.3.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Report.Excel.EPPlus\Framework.Report.Excel.EPPlus.csproj" />
+    <ProjectReference Include="..\Framework.Report.Spring\Framework.Report.Spring.csproj" />
+  </ItemGroup>
+</Project>

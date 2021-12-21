@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+  <IncludeBuildOutput>false</IncludeBuildOutput>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.BLLCoreGenerator\Framework.DomainDriven.BLLCoreGenerator.csproj" />
+    <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.DTOGenerator.TypeScript\Framework.DomainDriven.DTOGenerator.TypeScript.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,64 @@
+﻿using System;
+using System.Collections.Generic;
+
+using Framework.DomainDriven.BLL.Tracking;
+using Framework.Persistent;
+
+namespace Framework.DomainDriven.BLL
+{
+    public interface IDBSession
+    {
+        event EventHandler Closed;
+
+        [Obsolete("Use AfterTransactionCompleted", true)]
+        event EventHandler<DALChangesEventArgs> TransactionCompleted;
+
+        /// <summary>
+        /// Евент срабатывает циклично, пока происходят изменения доменных объектов
+        /// </summary>
+        event EventHandler<DALChangesEventArgs> Flushed;
+
+        /// <summary>
+        /// Евент срабатывает только 1 раз перед закрытием сессии, изменения в базу в этот момент разрешены
+        /// </summary>
+        event EventHandler<DALChangesEventArgs> BeforeTransactionCompleted;
+
+        /// <summary>
+        /// Евент срабатывает только 1 раз перед закрытием сессии, изменения в базу в этот момент запрещены
+        /// </summary>
+        event EventHandler<DALChangesEventArgs> AfterTransactionCompleted;
+
+        TResult Evaluate<TResult>(Func<IDBSession, TResult> getResult);
+
+        IObjectStateService GetObjectStateService();
+
+        IDALFactory<TPersistentDomainObjectBase, TIdent> GetDALFactory<TPersistentDomainObjectBase, TIdent>()
+            where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>;
+
+        /// <summary>
+        /// Мануальный флаш сессии, при его вызове срабатывают только Flushed-евенты, TransactionCompleted-евенты вызываются только при закрытие сессии
+        /// </summary>
+        void Flush();
+
+        /// <summary>
+        /// Получение текущей ревизии из аудита (пока возвращает 0, если вызван до флаша сессии)
+        /// </summary>
+        /// <returns></returns>
+        long GetCurrentRevision();
+
+        IEnumerable<ObjectModification> GetModifiedObjectsFromLogic();
+
+        IEnumerable<ObjectModification> GetModifiedObjectsFromLogic<TPersistentDomainObjectBase>();
+
+        /// <summary>
+        /// Закрывает текущую транзакцию без применения изменений.
+        /// </summary>
+        void ManualFault();
+
+        /// <summary>
+        /// Gets the maximum audit revision.
+        /// </summary>
+        /// <returns>System.Int64.</returns>
+        long GetMaxRevision();
+    }
+}

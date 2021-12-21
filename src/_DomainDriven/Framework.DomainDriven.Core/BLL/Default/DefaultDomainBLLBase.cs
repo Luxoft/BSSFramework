@@ -1,0 +1,549 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+
+using Framework.Core;
+using Framework.Exceptions;
+using Framework.HierarchicalExpand;
+using Framework.OData;
+using Framework.Persistent;
+
+using JetBrains.Annotations;
+
+using nuSpec.Abstraction;
+
+namespace Framework.DomainDriven.BLL
+{
+    public abstract partial class DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObjectBase, TDomainObject, TIdent, TOperation> :
+        BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObjectBase, TDomainObject, TIdent, TOperation>,
+        IDefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObjectBase, TDomainObject, TIdent>
+        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
+        where TDomainObjectBase : class
+        where TDomainObject : class, TPersistentDomainObjectBase
+        where TOperation : struct, Enum
+        where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent>, IHierarchicalObjectExpanderFactoryContainer<TIdent>
+    {
+        private const int MaxItemsInSql = 2000;
+
+        private static readonly Lazy<PropertyInfo> DefaultIdProperty =
+            LazyHelper.Create(() => typeof(TPersistentDomainObjectBase).GetProperty("Id", () => new Exception("Id property not found")));
+
+        protected DefaultDomainBLLBase(TBLLContext context, ISpecificationEvaluator specificationEvaluator = null)
+            : base(context, specificationEvaluator)
+        {
+        }
+
+        protected virtual PropertyInfo IdProperty
+        {
+            get
+            {
+                return DefaultIdProperty.Value;
+            }
+        }
+
+        public TDomainObject GetById(TIdent id, IdCheckMode idCheckMode, IFetchContainer<TDomainObject> fetchContainer = null, LockRole lockRole = LockRole.None)
+        {
+            switch (idCheckMode)
+            {
+                case IdCheckMode.DontCheck:
+                    return this.GetById(id, false, fetchContainer, lockRole);
+
+                case IdCheckMode.CheckAll:
+                    return this.GetById(id, true, fetchContainer, lockRole);
+
+                case IdCheckMode.SkipEmpty:
+                    return id.IsDefault() ? null : this.GetById(id, true, fetchContainer, lockRole);
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(idCheckMode));
+            }
+        }
+
+        public TDomainObject GetById(
+            TIdent id,
+            IdCheckMode idCheckMode,
+            Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch,
+            params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs)
+        {
+            if (firstFetch == null)
+            {
+                throw new ArgumentNullException(nameof(firstFetch));
+            }
+
+            if (otherFetchs == null)
+            {
+                throw new ArgumentNullException(nameof(otherFetchs));
+            }
+
+            return this.GetById(id, idCheckMode, new[] { firstFetch }.Concat(otherFetchs));
+        }
+
+        public TDomainObject GetById(TIdent id, IdCheckMode idCheckMode, IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs)
+        {
+            if (fetchs == null)
+            {
+                throw new ArgumentNullException(nameof(fetchs));
+            }
+
+            return this.GetById(id, idCheckMode, fetchs.ToFetchContainer());
+        }
+
+        public TDomainObject GetNested(TDomainObject domainObject)
+        {
+            var method = new Func<TDomainObject, TDomainObject>(this.GetNested<TDomainObject>).Method.GetGenericMethodDefinition();
+
+            var request = from t in typeof(TDomainObject).Assembly.GetTypes()
+                          where t != typeof(TDomainObject) && !t.IsAbstract && !t.IsGenericTypeDefinition && typeof(TDomainObject).IsAssignableFrom(t)
+                          let nestedDomainObject =
+                          t.IsInstanceOfType(domainObject) ? domainObject : method.MakeGenericMethod(t).Invoke<TDomainObject>(this, new[] { domainObject })
+                          where nestedDomainObject != null
+                          select nestedDomainObject;
+
+            return request.Single(() => new Exception($"Can't find nested type for {typeof(TDomainObject).Name}"));
+        }
+
+        /// <inheritdoc />
+        public virtual List<HierarchicalNode<TDomainObject, TIdent>> GetTree(IFetchContainer<TDomainObject> fetchs = null)
+        {
+            return this.GetTree(this.GetFullList(fetchs), x => this.GetSecureQueryable().Select(domainObject => domainObject.Id), this.ExpandQueryableWithParents);
+        }
+
+        /// <inheritdoc />
+        public virtual SelectOperationResult<HierarchicalNode<TDomainObject, TIdent>> GetTreeByOData(
+                [NotNull] SelectOperation<TDomainObject> selectOperation,
+                IFetchContainer<TDomainObject> fetchs = null)
+        {
+            if (selectOperation == null)
+            {
+                throw new ArgumentNullException(nameof(selectOperation));
+            }
+
+            var odataResult = this.GetObjectsByOData(selectOperation, fetchs);
+
+            var tree = this.GetTree(odataResult.Items, x => x.ToList(domainObject => domainObject.Id), this.ExpandEnumerableWithParents);
+
+            return new SelectOperationResult<HierarchicalNode<TDomainObject, TIdent>>(tree, tree.Count);
+        }
+
+        private List<HierarchicalNode<TDomainObject, TIdent>> GetTree<TIdentCollection>(
+                [NotNull] List<TDomainObject> startProjections,
+                Func<IEnumerable<TDomainObject>, TIdentCollection> identsSelector,
+                Func<TIdentCollection, HierarchicalExpandType, Dictionary<TIdent, TIdent>> parentsExpander,
+                IFetchContainer<TDomainObject> fetchs = null)
+            where TIdentCollection : IEnumerable<TIdent>
+        {
+            if (startProjections == null)
+            {
+                throw new ArgumentNullException(nameof(startProjections));
+            }
+
+            var projectionsIdents = identsSelector(startProjections);
+
+            var parentExpandMode = this.Context.AllowedExpandTreeParents<TDomainObject>() ? HierarchicalExpandType.Parents : HierarchicalExpandType.None;
+
+            var allIdentDict = parentsExpander(projectionsIdents, parentExpandMode);
+
+            var expandedParents = allIdentDict.Keys.Except(projectionsIdents).ToList();
+
+            var parents = this.Context.Logics.Default.Create<TDomainObject>().GetListByIdents(expandedParents, fetchs);
+
+            return startProjections.Select(item => new { Item = item, OnlyView = false })
+                                   .Concat(parents.Select(item => new { Item = item, OnlyView = true }))
+                                   .ToList(
+                                           pair => new HierarchicalNode<TDomainObject, TIdent>
+                                           {
+                                               Item = pair.Item,
+                                               OnlyView = pair.OnlyView,
+                                               ParentId = allIdentDict[pair.Item.Id]
+                                           });
+        }
+
+        private Dictionary<TIdent, TIdent> ExpandEnumerableWithParents(IEnumerable<TIdent> projectionsIdents, HierarchicalExpandType parentExpandMode)
+        {
+            var hierarchicalObjectExpander = this.Context.HierarchicalObjectExpanderFactory.Create(typeof(TDomainObject));
+            return projectionsIdents.Split(MaxItemsInSql)
+                                                .SelectMany(z => hierarchicalObjectExpander.ExpandWithParents(z, parentExpandMode))
+                                                .Distinct()
+                                                .ToDictionary(z => z.Key, z => z.Value);
+        }
+
+        private Dictionary<TIdent, TIdent> ExpandQueryableWithParents(IQueryable<TIdent> projectionsIdents, HierarchicalExpandType parentExpandMode)
+        {
+            return this.Context.HierarchicalObjectExpanderFactory.Create(typeof(TDomainObject)).ExpandWithParents(projectionsIdents, parentExpandMode);
+        }
+
+        public List<TDomainObject> GetListByIdents<TIdentity>(IEnumerable<TIdentity> idents, IFetchContainer<TDomainObject> fetchContainer = null)
+            where TIdentity : IIdentityObject<TIdent>
+        {
+            return this.GetListByIdents(idents.Select(ident => ident.Id), fetchContainer);
+        }
+
+        public List<TDomainObject> GetListByIdents(IEnumerable<TIdent> baseIdents, IFetchContainer<TDomainObject> fetchContainer = null)
+        {
+            if (baseIdents == null)
+            {
+                throw new ArgumentNullException(nameof(baseIdents));
+            }
+
+            var idents = baseIdents.ToList();
+
+            var uniqueIdents = idents.Distinct().ToList();
+
+            var uniqueResult = uniqueIdents.Split(MaxItemsInSql).SelectMany(path => this.GetListBy(v => path.Contains(v.Id), fetchContainer)).ToList();
+
+            if (uniqueResult.Count == uniqueIdents.Count)
+            {
+                var resultRequest = from ident in idents
+                                    join domainObject in uniqueResult on ident equals domainObject.Id
+                                    select domainObject;
+
+                return resultRequest.ToList();
+            }
+
+            throw uniqueIdents.Except(uniqueResult.Select(v => v.Id)).Select(this.GetMissingObjectException).Aggregate();
+        }
+
+        public List<TDomainObject> GetListByIdents(
+            IEnumerable<TIdent> baseIdents,
+            Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch,
+            params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs)
+        {
+            if (baseIdents == null)
+            {
+                throw new ArgumentNullException(nameof(baseIdents));
+            }
+
+            if (firstFetch == null)
+            {
+                throw new ArgumentNullException(nameof(firstFetch));
+            }
+
+            if (otherFetchs == null)
+            {
+                throw new ArgumentNullException(nameof(otherFetchs));
+            }
+
+            return this.GetListByIdents(baseIdents, new[] { firstFetch }.Concat(otherFetchs));
+        }
+
+        public List<TDomainObject> GetListByIdents(IEnumerable<TIdent> baseIdents, IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs)
+        {
+            if (baseIdents == null)
+            {
+                throw new ArgumentNullException(nameof(baseIdents));
+            }
+
+            if (fetchs == null)
+            {
+                throw new ArgumentNullException(nameof(fetchs));
+            }
+
+            return this.GetListByIdents(baseIdents, fetchs.ToFetchContainer());
+        }
+
+        public override SelectOperationResult<TDomainObject> GetObjectsByOData(
+            SelectOperation selectOperation,
+            IFetchContainer<TDomainObject> fetchContainer = null)
+        {
+            var typedSelectOperation = this.Context.StandartExpressionBuilder.ToTyped<TDomainObject>(selectOperation);
+
+            return this.GetObjectsByOData(typedSelectOperation, fetchContainer);
+        }
+
+        /// <summary>
+        /// For Projections (reports)
+        /// </summary>
+        /// <remarks>
+        /// Метод пока что не используется и это походу проблема #IADFRAME-943
+        /// </remarks>
+        public override SelectOperationResult<TProjection> GetObjectsByOData<TProjection>(SelectOperation<TProjection> selectOperation, Expression<Func<TDomainObject, TProjection>> projectionSelector)
+        {
+            if (selectOperation == null)
+            {
+                throw new ArgumentNullException(nameof(selectOperation));
+            }
+
+            if (selectOperation.HasPaging)
+            {
+                var countQuery = this.GetSecureQueryable().Select(projectionSelector).Pipe(z => selectOperation.ToCountOperation().Process(z));
+
+                var selection = this.GetSecureQueryable()
+                                    .Select(projectionSelector)
+                                    .Pipe(z => selectOperation.WithoutPaging().Process(z))
+                                    .Select(domainObject => ((IIdentityObject<TIdent>)domainObject).Id);
+
+                if (!selectOperation.Orders.Any())
+                {
+                    selection = selection.OrderBy(x => x);
+                }
+
+                var idents = selection
+                                .Skip(selectOperation.SkipCount)
+                                .Take(selectOperation.TakeCount);
+
+                var result = this.GetListByIdentsNoSecurable(idents, projectionSelector);
+
+                var count = countQuery.Count();
+
+                return new SelectOperationResult<TProjection>(result, count);
+            }
+            else
+            {
+                var result = this.GetSecureQueryable().Select(projectionSelector).Pipe(selectOperation.Process);
+
+                return new SelectOperationResult<TProjection>(result);
+            }
+        }
+
+        public override SelectOperationResult<TDomainObject> GetObjectsByOData(
+            SelectOperation<TDomainObject> selectOperation,
+            IFetchContainer<TDomainObject> fetchContainer = null)
+        {
+            if (selectOperation == null)
+            {
+                throw new ArgumentNullException(nameof(selectOperation));
+            }
+
+            if (!this.Context.AllowVirtualPropertyInOdata(typeof(TDomainObject)) && selectOperation.IsVirtual)
+            {
+                throw new ArgumentException(
+                    $"GetObjectsByOData: It's not allowed to use virtual property in OData select query: {selectOperation.Filter.Body}. You should either allow using virtual properties by overriding AllowVirtualPropertyInOdata property in BLL or don’t use them in OData query.");
+            }
+
+            if (selectOperation.HasPaging)
+            {
+                var countQuery = this.GetSecureQueryable(selectOperation.ToCountOperation());
+
+                var selection = this.GetSecureQueryable(selectOperation.WithoutPaging())
+                                    .Select(domainObject => domainObject.Id);
+
+                if (!selectOperation.Orders.Any())
+                {
+                    selection = selection.OrderBy(x => x);
+                }
+
+                var idents =
+                    selection
+                        .Skip(selectOperation.SkipCount)
+                        .Take(selectOperation.TakeCount);
+
+                var result = this.GetListByIdentsNoSecurable(idents, fetchContainer);
+
+                var count = countQuery.Count();
+
+                return new SelectOperationResult<TDomainObject>(result, count);
+            }
+            else
+            {
+                var result = this.GetSecureQueryable(selectOperation, fetchContainer);
+
+                return new SelectOperationResult<TDomainObject>(result);
+            }
+        }
+
+        public List<TDomainObject> GetListByIdentsUnsafe(IEnumerable<TIdent> baseIdents, IFetchContainer<TDomainObject> fetchContainer = null)
+        {
+            if (baseIdents == null)
+            {
+                throw new ArgumentNullException(nameof(baseIdents));
+            }
+
+            return baseIdents.Distinct().Split(MaxItemsInSql).SelectMany(path => this.GetListBy(v => path.Contains(v.Id), fetchContainer)).ToList();
+        }
+
+        public List<TDomainObject> GetListByIdentsUnsafe(
+            IEnumerable<TIdent> baseIdents,
+            Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch,
+            params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs)
+        {
+            if (baseIdents == null)
+            {
+                throw new ArgumentNullException(nameof(baseIdents));
+            }
+
+            if (firstFetch == null)
+            {
+                throw new ArgumentNullException(nameof(firstFetch));
+            }
+
+            if (otherFetchs == null)
+            {
+                throw new ArgumentNullException(nameof(otherFetchs));
+            }
+
+            return this.GetListByIdentsUnsafe(baseIdents, new[] { firstFetch }.Concat(otherFetchs));
+        }
+
+        public List<TDomainObject> GetListByIdentsUnsafe(
+            IEnumerable<TIdent> baseIdents,
+            IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs)
+        {
+            if (baseIdents == null)
+            {
+                throw new ArgumentNullException(nameof(baseIdents));
+            }
+
+            if (fetchs == null)
+            {
+                throw new ArgumentNullException(nameof(fetchs));
+            }
+
+            return this.GetListByIdentsUnsafe(baseIdents, fetchs.ToFetchContainer());
+        }
+
+        public TDomainObject GetById(TIdent id, bool throwOnNotFound = false, IFetchContainer<TDomainObject> fetchContainer = null, LockRole lockRole = LockRole.None)
+        {
+            var result = this.GetListBy(domainObject => domainObject.Id.Equals(id), fetchContainer, lockRole).FirstOrDefault();
+
+            if (result == null && throwOnNotFound)
+            {
+                throw this.GetMissingObjectException(id);
+            }
+
+            return result;
+        }
+
+        public TDomainObject GetById(
+            TIdent id,
+            bool throwOnNotFound,
+            Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch,
+            params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs)
+        {
+            if (firstFetch == null)
+            {
+                throw new ArgumentNullException(nameof(firstFetch));
+            }
+
+            if (otherFetchs == null)
+            {
+                throw new ArgumentNullException(nameof(otherFetchs));
+            }
+
+            return this.GetById(id, throwOnNotFound, new[] { firstFetch }.Concat(otherFetchs));
+        }
+
+        public TDomainObject GetById(TIdent id, bool throwOnNotFound, IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs)
+        {
+            if (fetchs == null)
+            {
+                throw new ArgumentNullException(nameof(fetchs));
+            }
+
+            return this.GetById(id, throwOnNotFound, fetchs.ToFetchContainer());
+        }
+
+        protected List<TDomainObject> GetListByIdentsQueryable(IQueryable<TIdent> baseIdents, IFetchContainer<TDomainObject> fetchContainer = null)
+        {
+            if (baseIdents == null)
+            {
+                throw new ArgumentNullException(nameof(baseIdents));
+            }
+
+            var result = this.GetListBy(v => baseIdents.Contains(v.Id), fetchContainer).ToList();
+
+            return result;
+        }
+
+        protected List<TProjection> GetListByIdentsNoSecurable<TProjection>(IEnumerable<TIdent> baseIdents, Expression<Func<TDomainObject, TProjection>> projectionSelector, IFetchContainer<TDomainObject> fetchContainer = null)
+        {
+            if (baseIdents == null) throw new ArgumentNullException(nameof(baseIdents));
+
+            var idents = baseIdents.ToList();
+
+            var uniqueIdents = idents.Distinct().ToList();
+
+            var uniqueResult = uniqueIdents.Split(MaxItemsInSql).SelectMany(path => this.GetUnsecureQueryable(fetchContainer).Where(v => path.Contains(v.Id)).Select(projectionSelector)).ToList();
+
+            if (uniqueResult.Count == uniqueIdents.Count)
+            {
+                var resultRequest = from ident in idents
+                                    join projection in uniqueResult on ident equals ((IIdentityObject<TIdent>)projection).Id
+                                    select projection;
+
+                return resultRequest.ToList();
+            }
+            else
+            {
+                throw uniqueIdents.Except(uniqueResult.Select(v => ((IIdentityObject<TIdent>)v).Id)).Select(this.GetMissingObjectException).Aggregate();
+            }
+        }
+
+        protected List<TDomainObject> GetListByIdentsNoSecurable(IEnumerable<TIdent> baseIdents, IFetchContainer<TDomainObject> fetchContainer = null)
+        {
+            if (baseIdents == null)
+            {
+                throw new ArgumentNullException(nameof(baseIdents));
+            }
+
+            var idents = baseIdents.ToList();
+
+            var uniqueIdents = idents.Distinct().ToList();
+
+            var uniqueResult = uniqueIdents.Split(MaxItemsInSql).SelectMany(path => this.GetUnsecureQueryable(fetchContainer).Where(v => path.Contains(v.Id))).ToList();
+
+            if (uniqueResult.Count == uniqueIdents.Count)
+            {
+                var resultRequest = from ident in idents
+                                    join domainObject in uniqueResult on ident equals domainObject.Id
+                                    select domainObject;
+
+                return resultRequest.ToList();
+            }
+
+            throw uniqueIdents.Except(uniqueResult.Select(v => v.Id)).Select(this.GetMissingObjectException).Aggregate();
+        }
+
+        protected virtual Exception GetMissingObjectException(TIdent id)
+        {
+            return new ObjectByIdNotFoundException<TIdent>(typeof(TDomainObject), id);
+        }
+
+        // TODO gtsaplin: подумать над выносом из текущего generic-класса, т.к. коллекция будет создаваться под каждую комбинаию типов данных, переданную в качестве generic (warning S2743)
+        private static readonly IReadOnlyCollection<ExpressionVisitor> DefaultVisitors = new[]
+            {
+                typeof(IVisualIdentityObject),
+                typeof(ICodeObject<>),
+                typeof(IDomainType),
+                typeof(IIdentityObject<>),
+                typeof(IParentSource<>),
+                typeof(IChildrenSource<>),
+                typeof(IEmployee)
+            }.ToReadOnlyCollection(type => new OverrideCallInterfacePropertiesVisitor(type));
+
+        /// <summary> Returns Expression Visitors for NHibernate Linq extensibility
+        /// </summary>
+        /// <returns>Expression Visitors collection</returns>
+        protected override IEnumerable<ExpressionVisitor> GetVisitors()
+        {
+            foreach (var visitor in DefaultVisitors)
+            {
+                yield return visitor;
+            }
+
+            yield return RestoreQueryableCallsVisitor.Value;
+
+            yield return OverrideInstanceContainsIdentMethodVisitor<TIdent>.HashSet;
+            yield return OverrideInstanceContainsIdentMethodVisitor<TIdent>.CollectionInterface;
+
+            // TODO gtsaplin: remove OverrideHashSetVisitor, NH4.0 and above support HashSet
+            yield return OverrideHashSetVisitor<TIdent>.Value;
+
+            yield return OverrideListContainsVisitor<TIdent>.GetOrCreate(this.IdProperty);
+            yield return OverrideEqualsDomainObjectVisitor<TIdent>.GetOrCreate(this.IdProperty);
+            yield return OverrideIdEqualsMethodVisitor<TIdent>.GetOrCreate(this.IdProperty);
+            yield return OverrideHasFlagVisitor.Value;
+            yield return ExpandPathVisitor.Value;
+            yield return EscapeUnderscoreVisitor.Value;
+
+            yield return new OverrideExpandContainsVisitor<TBLLContext, TIdent>(this.Context, this.IdProperty);
+        }
+
+        private TDomainObject GetNested<TNestedDomainObject>(TDomainObject domainObject)
+            where TNestedDomainObject : class, TDomainObject
+        {
+            return this.Context.Logics.Default.Create<TNestedDomainObject>().GetById(domainObject.Id);
+        }
+    }
+}

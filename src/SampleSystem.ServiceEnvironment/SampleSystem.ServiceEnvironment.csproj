@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+  <IsPackable>false</IsPackable>
+  <RootNamespace>SampleSystem.ServiceEnvironmentStandard</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.App.ServiceEnvironment\Framework.App.ServiceEnvironment.csproj" />
+    <ProjectReference Include="..\_SampleSystem\SampleSystem.BLL\SampleSystem.BLL.csproj" />
+    <ProjectReference Include="..\_SampleSystem\SampleSystem.Events\SampleSystem.Events.csproj" />
+    <ProjectReference Include="..\_SampleSystem\SampleSystem.Generated.DAL.NHibernate\SampleSystem.Generated.DAL.NHibernate.csproj" />
+    <ProjectReference Include="..\_SampleSystem\SampleSystem.Subscriptions.Metadata\SampleSystem.Subscriptions.Metadata.csproj" />
+  </ItemGroup>
+</Project>

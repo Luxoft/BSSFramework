@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework.CodeDom\Framework.CodeDom.csproj" />
+    <ProjectReference Include="..\..\Framework.DomainDriven.Metadata\Framework.DomainDriven.Metadata.csproj" />
+    <ProjectReference Include="..\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
+  </ItemGroup>
+</Project>

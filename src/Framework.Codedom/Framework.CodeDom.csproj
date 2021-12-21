@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+    <PackageReference Include="System.CodeDom" Version="6.0.0" />
+    <Compile Update="TypeScript\TypeScriptCodeDomProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Core.AnonymousTypeBuilder\Framework.Core.AnonymousTypeBuilder.csproj" />
+    <ProjectReference Include="..\Framework.Core.Reflection\Framework.Core.Reflection.csproj" />
+    <ProjectReference Include="..\Framework.Persistent\Framework.Persistent.csproj" />
+  </ItemGroup>
+</Project>

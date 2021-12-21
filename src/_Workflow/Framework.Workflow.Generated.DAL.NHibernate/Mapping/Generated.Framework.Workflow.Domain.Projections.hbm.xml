@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="Framework.Workflow.Domain.Projections" auto-import="false" schema="Workflow.dbo" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Framework.Workflow.Domain.Projections.MiniCommand" table="Command">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Description" column="description" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <property name="OrderIndex" column="orderIndex" access="field.camelcase" />
+    <many-to-one name="Task" column="taskId" class="Framework.Workflow.Domain.Projections.MiniTask" access="field.camelcase" />
+    <set name="Metadatas" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="commandId" />
+      <one-to-many class="Framework.Workflow.Domain.Projections.MiniCommandMetadata" />
+    </set>
+    <set name="Parameters" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="commandId" />
+      <one-to-many class="Framework.Workflow.Domain.Projections.MiniCommandParameter" />
+    </set>
+  </class>
+  <class name="Framework.Workflow.Domain.Projections.MiniCommandMetadata" table="CommandMetadata">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Name" column="name" access="field.camelcase" />
+    <property name="Value" column="value" access="field.camelcase" />
+    <many-to-one name="Command" column="commandId" class="Framework.Workflow.Domain.Projections.MiniCommand" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Projections.MiniCommandParameter" table="CommandParameter">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="IsReadOnly" column="isReadOnly" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <many-to-one name="Command" column="commandId" class="Framework.Workflow.Domain.Projections.MiniCommand" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Projections.MiniState" table="State">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Name" column="name" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Projections.MiniStateBase" table="StateBase">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Name" column="name" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Projections.MiniTask" table="Task">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Description" column="description" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <many-to-one name="State" column="stateId" class="Framework.Workflow.Domain.Projections.MiniState" access="field.camelcase" />
+    <set name="Commands" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="taskId" />
+      <one-to-many class="Framework.Workflow.Domain.Projections.MiniCommand" />
+    </set>
+    <set name="Metadatas" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="taskId" />
+      <one-to-many class="Framework.Workflow.Domain.Projections.MiniTaskMetadata" />
+    </set>
+  </class>
+  <class name="Framework.Workflow.Domain.Projections.MiniTaskInstance" table="TaskInstance">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <many-to-one name="Workflow" column="workflowId" class="Framework.Workflow.Domain.Projections.MiniWorkflowInstance" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Projections.MiniTaskMetadata" table="TaskMetadata">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Name" column="name" access="field.camelcase" />
+    <property name="Value" column="value" access="field.camelcase" />
+    <many-to-one name="Task" column="taskId" class="Framework.Workflow.Domain.Projections.MiniTask" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Projections.MiniWorkflow" table="Workflow">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Description" column="description" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <many-to-one name="DomainType" column="domainTypeId" class="Framework.Workflow.Domain.Projections.VisualDomainType" access="field.camelcase" />
+    <many-to-one name="Owner" column="ownerId" class="Framework.Workflow.Domain.Projections.VisualWorkflow" access="field.camelcase" />
+    <set name="Metadatas" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="workflowId" />
+      <one-to-many class="Framework.Workflow.Domain.Projections.MiniWorkflowMetadata" />
+    </set>
+  </class>
+  <class name="Framework.Workflow.Domain.Projections.MiniWorkflowInstance" table="WorkflowInstance">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Name" column="name" length="2147483647" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Projections.MiniWorkflowMetadata" table="WorkflowMetadata">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Name" column="name" access="field.camelcase" />
+    <property name="Value" column="value" access="field.camelcase" />
+    <many-to-one name="Workflow" column="workflowId" class="Framework.Workflow.Domain.Projections.MiniWorkflow" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Projections.MiniWorkflowSource" table="WorkflowSource">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Description" column="description" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <many-to-one name="Type" column="typeId" class="Framework.Workflow.Domain.Projections.VisualDomainType" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Projections.VisualDomainType" table="DomainType">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Name" column="name" access="field.camelcase" />
+  </class>
+  <class name="Framework.Workflow.Domain.Projections.VisualWorkflow" table="Workflow">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Name" column="name" access="field.camelcase" />
+  </class>
+</hibernate-mapping>

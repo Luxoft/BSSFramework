@@ -1,0 +1,590 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="Framework.Configuration.Domain" auto-import="false" schema="Configuration.dbo" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Framework.Configuration.Domain.Attachment" table="Attachment">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="Content" column="content" length="2147483647" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_container_nameAttachment" access="field.camelcase" />
+    <many-to-one name="Container" column="containerId" class="Framework.Configuration.Domain.AttachmentContainer" unique-key="UIX_container_nameAttachment" access="field.camelcase" />
+    <set name="Tags" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="attachmentId" />
+      <one-to-many class="Framework.Configuration.Domain.AttachmentTag" />
+    </set>
+  </class>
+  <class name="Framework.Configuration.Domain.AttachmentContainer" table="AttachmentContainer">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="ObjectId" column="objectId" unique-key="UIX_domainType_objectIdAttachmentContainer" access="field.camelcase" />
+    <many-to-one name="DomainType" column="domainTypeId" class="Framework.Configuration.Domain.DomainType" unique-key="UIX_domainType_objectIdAttachmentContainer" access="field.camelcase" />
+    <set name="Attachments" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="containerId" />
+      <one-to-many class="Framework.Configuration.Domain.Attachment" />
+    </set>
+  </class>
+  <class name="Framework.Configuration.Domain.AttachmentTag" table="AttachmentTag">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_attachment_nameAttachmentTag" access="field.camelcase" />
+    <property name="Value" column="value" access="field.camelcase" />
+    <many-to-one name="Attachment" column="attachmentId" class="Framework.Configuration.Domain.Attachment" unique-key="UIX_attachment_nameAttachmentTag" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.CodeFirstSubscription" table="CodeFirstSubscription">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="Code" column="code" unique-key="UIX_codeCodeFirstSubscription" length="512" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.ControlSettings" table="ControlSettings">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="AccountName" column="accountName" access="field.camelcase" />
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" length="2147483647" access="field.camelcase" />
+    <property name="Type" column="type" access="field.camelcase" />
+    <many-to-one name="Parent" column="parentId" class="Framework.Configuration.Domain.ControlSettings" access="field.camelcase" />
+    <set name="Children" inverse="true" access="field.camelcase" cascade="None">
+      <key column="parentId" />
+      <one-to-many class="Framework.Configuration.Domain.ControlSettings" />
+    </set>
+    <set name="ControlSettingsParams" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="controlSettingsId" />
+      <one-to-many class="Framework.Configuration.Domain.ControlSettingsParam" />
+    </set>
+  </class>
+  <class name="Framework.Configuration.Domain.ControlSettingsParam" table="ControlSettingsParam">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Type" column="type" access="field.camelcase" />
+    <many-to-one name="ControlSettings" column="controlSettingsId" class="Framework.Configuration.Domain.ControlSettings" access="field.camelcase" />
+    <set name="ControlSettingsParamValues" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="controlSettingsParamId" />
+      <one-to-many class="Framework.Configuration.Domain.ControlSettingsParamValue" />
+    </set>
+  </class>
+  <class name="Framework.Configuration.Domain.ControlSettingsParamValue" table="ControlSettingsParamValue">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Culture" column="culture" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Value" column="value" length="2147483647" access="field.camelcase" />
+    <property name="ValueTypeName" column="valueTypeName" access="field.camelcase" />
+    <many-to-one name="ControlSettingsParam" column="controlSettingsParamId" class="Framework.Configuration.Domain.ControlSettingsParam" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.DomainObjectEvent" table="DomainObjectEvent">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="DomainObjectId" column="domainObjectId" access="field.camelcase" />
+    <property name="HostName" column="hostName" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="ProcessDate" column="processDate" type="timestamp" access="field.camelcase" />
+    <property name="QueueTag" column="queueTag" access="field.camelcase" />
+    <property name="Revision" column="revision" access="field.camelcase" />
+    <property name="SerializeData" column="serializeData" length="2147483647" access="field.camelcase" />
+    <property name="SerializeType" column="serializeType" length="2147483647" access="field.camelcase" />
+    <property name="Size" column="size" access="field.camelcase" />
+    <property name="Status" column="status" access="field.camelcase" />
+    <many-to-one name="Operation" column="operationId" class="Framework.Configuration.Domain.DomainTypeEventOperation" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.DomainObjectModification" table="DomainObjectModification">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="DomainObjectId" column="domainObjectId" unique-key="UIX_domainObjectId_domainType_revisionDomainObjectModification" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Processed" column="processed" access="field.camelcase" />
+    <property name="Revision" column="revision" unique-key="UIX_domainObjectId_domainType_revisionDomainObjectModification" access="field.camelcase" />
+    <property name="Type" column="type" access="field.camelcase" />
+    <many-to-one name="DomainType" column="domainTypeId" class="Framework.Configuration.Domain.DomainType" unique-key="UIX_domainObjectId_domainType_revisionDomainObjectModification" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.DomainObjectNotification" table="DomainObjectNotification">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="HostName" column="hostName" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="ProcessDate" column="processDate" type="timestamp" access="field.camelcase" />
+    <property name="SerializeData" column="serializeData" length="2147483647" access="field.camelcase" />
+    <property name="Size" column="size" access="field.camelcase" />
+    <property name="Status" column="status" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.DomainType" table="DomainType">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="HasSecurityAttachment" column="hasSecurityAttachment" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_name_nameSpace_targetSystemDomainType" access="field.camelcase" />
+    <property name="NameSpace" column="nameSpace" unique-key="UIX_name_nameSpace_targetSystemDomainType" access="field.camelcase" />
+    <many-to-one name="TargetSystem" column="targetSystemId" class="Framework.Configuration.Domain.TargetSystem" unique-key="UIX_name_nameSpace_targetSystemDomainType" access="field.camelcase" />
+    <set name="EventOperations" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="domainTypeId" />
+      <one-to-many class="Framework.Configuration.Domain.DomainTypeEventOperation" />
+    </set>
+  </class>
+  <class name="Framework.Configuration.Domain.DomainTypeEventOperation" table="DomainTypeEventOperation">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_domainType_nameDomainTypeEventOperation" access="field.camelcase" />
+    <many-to-one name="DomainType" column="domainTypeId" class="Framework.Configuration.Domain.DomainType" unique-key="UIX_domainType_nameDomainTypeEventOperation" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.ExceptionMessage" table="ExceptionMessage">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="IsClient" column="isClient" access="field.camelcase" />
+    <property name="IsRoot" column="isRoot" access="field.camelcase" />
+    <property name="Message" column="message" length="2147483647" access="field.camelcase" />
+    <property name="MessageType" column="messageType" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="StackTrace" column="stackTrace" length="2147483647" access="field.camelcase" />
+    <many-to-one name="InnerException" column="innerExceptionId" class="Framework.Configuration.Domain.ExceptionMessage" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.LogMessage" table="LogMessage">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Action" column="action" length="512" access="field.camelcase" />
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="InputMessage" column="inputMessage" length="2147483647" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="OutputMessage" column="outputMessage" length="2147483647" access="field.camelcase" />
+    <property name="UserName" column="userName" length="512" access="field.camelcase" />
+    <component name="Period" class="Framework.Core.Period, Framework.Core" access="field.camelcase">
+      <property name="EndDate" column="periodendDate" access="field.camelcase" type="timestamp" />
+      <property name="StartDate" column="periodstartDate" access="field.camelcase" type="timestamp" />
+    </component>
+  </class>
+  <class name="Framework.Configuration.Domain.MessageTemplate" table="MessageTemplate">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="Code" column="code" unique-key="UIX_codeMessageTemplate" access="field.camelcase" />
+    <property name="Comment" column="comment" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Message" column="message" length="2147483647" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Renderer" column="renderer" access="field.camelcase" />
+    <property name="Subject" column="subject" length="500" access="field.camelcase" />
+    <many-to-one name="DomainType" column="domainTypeId" class="Framework.Configuration.Domain.DomainType" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.NamedLock" table="NamedLock">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="LockOperation" column="lockOperation" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.RegularJob" table="RegularJob">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ExpectedNextStartTime" column="expectedNextStartTime" type="timestamp" access="field.camelcase" />
+    <property name="Function" column="function" length="2147483647" access="field.camelcase" />
+    <property name="LastPulseTime" column="lastPulseTime" type="timestamp" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_nameRegularJob" access="field.camelcase" />
+    <property name="State" column="state" access="field.camelcase" />
+    <property name="WrapUpSession" column="wrapUpSession" access="field.camelcase" />
+    <component name="ExecutionResult" class="Framework.Configuration.Domain.ExecuteRegularJobResult, Framework.Configuration.Domain" access="field.camelcase">
+      <property name="Description" column="executionResultdescription" access="field.camelcase" length="2147483647" />
+      <property name="ExecutionTime" column="executionResultexecutionTime" access="field.camelcase" />
+      <property name="Status" column="executionResultstatus" access="field.camelcase" />
+      <property name="Time" column="executionResulttime" access="field.camelcase" />
+    </component>
+    <component name="ShedulerTime" class="Framework.Configuration.Domain.ShedulerTime, Framework.Configuration.Domain" access="field.camelcase">
+      <property name="Value" column="shedulerTimevalue" access="field.camelcase" />
+      <property name="ValueType" column="shedulerTimevalueType" access="field.camelcase" />
+    </component>
+  </class>
+  <class name="Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight" table="AccessableBusinessRoleReportRight">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Value" column="value" access="field.camelcase" />
+    <many-to-one name="Report" column="reportId" class="Framework.Configuration.Domain.Reports.Report" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.Reports.AccessableOperationReportRight" table="AccessableOperationReportRight">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Value" column="value" access="field.camelcase" />
+    <many-to-one name="Report" column="reportId" class="Framework.Configuration.Domain.Reports.Report" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight" table="AccessablePrincipalReportRight">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Value" column="value" access="field.camelcase" />
+    <many-to-one name="Report" column="reportId" class="Framework.Configuration.Domain.Reports.Report" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.Reports.Report" table="Report">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Description" column="description" length="2147483647" access="field.camelcase" />
+    <property name="DomainTypeName" column="domainTypeName" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <property name="Owner" column="owner" access="field.camelcase" />
+    <property name="ReportType" column="reportType" access="field.camelcase" />
+    <property name="SecurityOperationCode" column="securityOperationCode" access="field.camelcase" />
+    <set name="AccessableBusinessRoles" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="reportId" />
+      <one-to-many class="Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight" />
+    </set>
+    <set name="AccessableOperations" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="reportId" />
+      <one-to-many class="Framework.Configuration.Domain.Reports.AccessableOperationReportRight" />
+    </set>
+    <set name="AccessablePrincipals" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="reportId" />
+      <one-to-many class="Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight" />
+    </set>
+    <set name="Filters" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="reportId" />
+      <one-to-many class="Framework.Configuration.Domain.Reports.ReportFilter" />
+    </set>
+    <set name="Parameters" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="reportId" />
+      <one-to-many class="Framework.Configuration.Domain.Reports.ReportParameter" />
+    </set>
+    <set name="Properties" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="reportId" />
+      <one-to-many class="Framework.Configuration.Domain.Reports.ReportProperty" />
+    </set>
+  </class>
+  <class name="Framework.Configuration.Domain.Reports.ReportFilter" table="ReportFilter">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="FilterOperator" column="filterOperator" access="field.camelcase" />
+    <property name="IsValueFromParameters" column="isValueFromParameters" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Property" column="property" access="field.camelcase" />
+    <property name="Value" column="value" access="field.camelcase" />
+    <many-to-one name="Report" column="reportId" class="Framework.Configuration.Domain.Reports.Report" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.Reports.ReportParameter" table="ReportParameter">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="DisplayValueProperty" column="displayValueProperty" access="field.camelcase" />
+    <property name="IsCollection" column="isCollection" access="field.camelcase" />
+    <property name="IsRequired" column="isRequired" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_name_reportReportParameter" access="field.camelcase" />
+    <property name="Order" column="order" access="field.camelcase" />
+    <property name="TypeName" column="typeName" access="field.camelcase" />
+    <many-to-one name="Report" column="reportId" class="Framework.Configuration.Domain.Reports.Report" unique-key="UIX_name_reportReportParameter" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.Reports.ReportProperty" table="ReportProperty">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="Alias" column="alias" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Formula" column="formula" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Order" column="order" access="field.camelcase" />
+    <property name="PropertyPath" column="propertyPath" access="field.camelcase" />
+    <property name="SortOrdered" column="sortOrdered" access="field.camelcase" />
+    <property name="SortType" column="sortType" access="field.camelcase" />
+    <many-to-one name="Report" column="reportId" class="Framework.Configuration.Domain.Reports.Report" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.SentMessage" table="SentMessage">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="Comment" column="comment" access="field.camelcase" />
+    <property name="ContextObjectId" column="contextObjectId" access="field.camelcase" />
+    <property name="ContextObjectType" column="contextObjectType" access="field.camelcase" />
+    <property name="Copy" column="copy" length="2147483647" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="From" column="from" access="field.camelcase" />
+    <property name="Message" column="message" length="2147483647" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="ReplyTo" column="replyTo" length="2147483647" access="field.camelcase" />
+    <property name="Subject" column="subject" length="1000" access="field.camelcase" />
+    <property name="TemplateName" column="templateName" access="field.camelcase" />
+    <property name="To" column="to" length="2147483647" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.Sequence" table="Sequence">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_nameSequence" access="field.camelcase" />
+    <property name="Number" column="number" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.SubBusinessRole" table="SubBusinessRole">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="BusinessRoleId" column="businessRoleId" unique-key="UIX_businessRoleId_subscriptionSubBusinessRole" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <many-to-one name="Subscription" column="subscriptionId" class="Framework.Configuration.Domain.Subscription" unique-key="UIX_businessRoleId_subscriptionSubBusinessRole" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.Subscription" table="Subscription">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="AllowEmptyListOfRecipients" column="allowEmptyListOfRecipients" access="field.camelcase" />
+    <property name="Code" column="code" unique-key="UIX_codeSubscription" length="500" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="DynamicSourceExpandType" column="principalForRoleExpandType" access="field.camelcase" />
+    <property name="ExcludeCurrentUser" column="excludeCurrentUser" access="field.camelcase" />
+    <property name="IncludeAttachments" column="includeAttachments" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="RecepientsMode" column="recepientsMode" access="field.camelcase" />
+    <property name="SenderEmail" column="senderEmail" length="500" access="field.camelcase" />
+    <property name="SenderName" column="senderName" length="500" access="field.camelcase" />
+    <property name="SendIndividualLetters" column="sendIndividualLetters" access="field.camelcase" />
+    <many-to-one name="Attachment" column="attachmentId" class="Framework.Configuration.Domain.SubscriptionLambda" access="field.camelcase" />
+    <many-to-one name="Condition" column="conditionId" class="Framework.Configuration.Domain.SubscriptionLambda" access="field.camelcase" />
+    <many-to-one name="CopyGeneration" column="copyGenerationId" class="Framework.Configuration.Domain.SubscriptionLambda" access="field.camelcase" />
+    <many-to-one name="DomainType" column="domainTypeId" class="Framework.Configuration.Domain.DomainType" access="field.camelcase" />
+    <many-to-one name="DynamicSource" column="dynamicSourceId" class="Framework.Configuration.Domain.SubscriptionLambda" access="field.camelcase" />
+    <many-to-one name="Generation" column="generationId" class="Framework.Configuration.Domain.SubscriptionLambda" access="field.camelcase" />
+    <many-to-one name="MessageTemplate" column="messageTemplateId" class="Framework.Configuration.Domain.MessageTemplate" access="field.camelcase" />
+    <many-to-one name="ReplyToGeneration" column="replyToGenerationId" class="Framework.Configuration.Domain.SubscriptionLambda" access="field.camelcase" />
+    <set name="SecurityItems" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="subscriptionId" />
+      <one-to-many class="Framework.Configuration.Domain.SubscriptionSecurityItem" />
+    </set>
+    <set name="SubBusinessRoles" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="subscriptionId" />
+      <one-to-many class="Framework.Configuration.Domain.SubBusinessRole" />
+    </set>
+  </class>
+  <class name="Framework.Configuration.Domain.SubscriptionLambda" table="SubscriptionLambda">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="AuthDomainTypeId" column="authDomainTypeId" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="FormattedType" column="formattedType" length="2147483647" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_nameSubscriptionLambda" access="field.camelcase" />
+    <property name="RequiredModeNext" column="requiredModeNext" access="field.camelcase" />
+    <property name="RequiredModePrev" column="requiredModePrev" access="field.camelcase" />
+    <property name="Type" column="type" access="field.camelcase" />
+    <property name="Value" column="value" length="2147483647" access="field.camelcase" />
+    <property name="WithContext" column="withContext" access="field.camelcase" />
+    <many-to-one name="DomainType" column="domainTypeId" class="Framework.Configuration.Domain.DomainType" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.SubscriptionSecurityItem" table="SubscriptionSecurityItem">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="AuthDomainTypeId" column="authDomainTypeId" unique-key="UIX_authDomainTypeId_subscriptionSubscriptionSecurityItem" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ExpandType" column="expandType" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <many-to-one name="Source" column="sourceId" class="Framework.Configuration.Domain.SubscriptionLambda" access="field.camelcase" />
+    <many-to-one name="Subscription" column="subscriptionId" class="Framework.Configuration.Domain.Subscription" unique-key="UIX_authDomainTypeId_subscriptionSubscriptionSecurityItem" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.SystemConstant" table="SystemConstant">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="Code" column="code" unique-key="UIX_codeSystemConstant" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="Description" column="description" length="2147483647" access="field.camelcase" />
+    <property name="IsManual" column="isManual" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Value" column="value" length="2147483647" access="field.camelcase" />
+    <many-to-one name="Type" column="typeId" class="Framework.Configuration.Domain.DomainType" access="field.camelcase" />
+  </class>
+  <class name="Framework.Configuration.Domain.TargetSystem" table="TargetSystem">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="IsBase" column="isBase" access="field.camelcase" />
+    <property name="IsMain" column="isMain" access="field.camelcase" />
+    <property name="IsRevision" column="isRevision" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" unique-key="UIX_nameTargetSystem" access="field.camelcase" />
+    <property name="SubscriptionEnabled" column="subscriptionEnabled" access="field.camelcase" />
+    <set name="DomainTypes" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="targetSystemId" />
+      <one-to-many class="Framework.Configuration.Domain.DomainType" />
+    </set>
+  </class>
+  <class name="Framework.Configuration.Domain.UserAction" table="UserAction">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <property name="UserName" column="userName" access="field.camelcase" />
+    <many-to-one name="DomainType" column="domainTypeId" class="Framework.Configuration.Domain.DomainType" access="field.camelcase" />
+    <set name="ObjectIdentities" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="userActionId" />
+      <one-to-many class="Framework.Configuration.Domain.UserActionObject" />
+    </set>
+  </class>
+  <class name="Framework.Configuration.Domain.UserActionObject" table="UserActionObject">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <property name="ObjectIdentity" column="objectIdentity" access="field.camelcase" />
+    <many-to-one name="UserAction" column="userActionId" class="Framework.Configuration.Domain.UserAction" access="field.camelcase" />
+  </class>
+</hibernate-mapping>

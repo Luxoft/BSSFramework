@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Parsing\Framework.Parsing.csproj" />
+    <ProjectReference Include="..\Framework.QueryLanguage\Framework.QueryLanguage.csproj" />
+  </ItemGroup>
+</Project>

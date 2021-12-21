@@ -1,0 +1,10 @@
+﻿@* Generator: Template*@@{}
+@using Framework.Configuration.SubscriptionModeling
+@using SampleSystem.Domain
+@inherits RazorTemplate<Employee>
+@functions {
+    public override string Subject => $"Employee {Current.NameNative} has been changed";
+}
+<h2>Hi there!!!</h2>
+
+My test employee Name: @Current.NameNative

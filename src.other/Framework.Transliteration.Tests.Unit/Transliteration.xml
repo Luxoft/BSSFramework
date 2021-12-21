@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<translit>
+  <alphabet culture="ru-ru">
+    <code native="а" lat="a" />
+    <code native="б" lat="b" />
+    <code native="в" lat="v" />
+    <code native="г" lat="g" />
+    <code native="д" lat="d" />
+    <code native="е" lat="e" />
+    <code native="ж" lat="zh" />
+    <code native="з" lat="z" />
+    <code native="и" lat="i" />
+    <code native="й" lat="j" />
+    <code native="к" lat="k" />
+    <code native="л" lat="l" />
+    <code native="м" lat="m" />
+    <code native="н" lat="n" />
+    <code native="о" lat="o" />
+    <code native="п" lat="p" />
+    <code native="р" lat="r" />
+    <code native="с" lat="s" />
+    <code native="т" lat="t" />
+    <code native="у" lat="u" />
+    <code native="ф" lat="f" />
+    <code native="х" lat="kh" />
+    <code native="ц" lat="ts" />
+    <code native="ч" lat="ch" />
+    <code native="ш" lat="sh" />
+    <code native="щ" lat="shch" />
+    <code native="ъ" lat="" />
+    <code native="ы" lat="y" />
+    <code native="ь" lat="" />
+    <code native="э" lat="e" />
+    <code native="ю" lat="iu" />
+    <code native="я" lat="ya" />
+  </alphabet>
+  <alphabet culture="uk-UA">
+    <code native="а" lat="a" />
+    <code native="б" lat="b" />
+    <code native="в" lat="v" />
+    <code native="г" lat="h" />
+    <code native="ґ" lat="g" />
+    <code native="д" lat="d" />
+    <code native="е" lat="e" />
+    <code native="є" lat="ie" atStart="ye" />
+    <code native="ж" lat="zh" />
+    <code native="з" lat="z" />
+    <code native="и" lat="y" />
+    <code native="і" lat="i" />
+    <code native="ї" lat="i" atStart="yi" />
+    <code native="й" lat="i" atStart="y" />
+    <code native="к" lat="k" />
+    <code native="л" lat="l" />
+    <code native="м" lat="m" />
+    <code native="н" lat="n" />
+    <code native="о" lat="o" />
+    <code native="п" lat="p" />
+    <code native="р" lat="r" />
+    <code native="с" lat="s" />
+    <code native="т" lat="t" />
+    <code native="у" lat="u" />
+    <code native="ф" lat="f" />
+    <code native="х" lat="kh" />
+    <code native="ц" lat="ts" />
+    <code native="ч" lat="ch" />
+    <code native="ш" lat="sh" />
+    <code native="щ" lat="shch" />
+    <code native="ю" lat="iu" atStart="yu"/>
+    <code native="я" lat="ia" atStart="ya"/>
+    <code native="зг" lat="zgh" />
+
+    <code native="ь" lat="" />
+    <code native="ъ" lat="" />
+    <code native="ы" lat="" />
+    <code native="'" lat="" />
+    
+  </alphabet>
+</translit>

@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework.Projection.Environment\Framework.Projection.Environment.csproj" />
+    <ProjectReference Include="..\Framework.DomainDriven.Generation\Framework.DomainDriven.Generation.csproj" />
+  </ItemGroup>
+</Project>

@@ -187,7 +187,7 @@ namespace SampleSystem.CodeGenerate
         {
             var generator = new ProjectionFileGenerator(this.environment.MainProjection);
 
-            yield return generator.GenerateSingle(TargetSystemPath + @"\SampleSystem.Domain.Projections", "SampleSystem.Generated", this.CheckOutService, false);
+            yield return generator.GenerateSingle(TargetSystemPath + @"/SampleSystem.Domain.Projections", "SampleSystem.Generated", this.CheckOutService, false);
         }
 
         [TestMethod]
@@ -200,7 +200,7 @@ namespace SampleSystem.CodeGenerate
         {
             var generator = new ProjectionFileGenerator(this.environment.LegacyProjection);
 
-            yield return generator.GenerateSingle(TargetSystemPath + @"\SampleSystem.Domain.LegacyProjections", "SampleSystem.Generated", this.CheckOutService, false);
+            yield return generator.GenerateSingle(TargetSystemPath + @"/SampleSystem.Domain.LegacyProjections", "SampleSystem.Generated", this.CheckOutService, false);
         }
 
         [TestMethod]
@@ -218,7 +218,7 @@ namespace SampleSystem.CodeGenerate
             var generator = new SampleSystemBLLCoreFileGenerator(this.environment.BLLCore);
 
             return generator.GenerateGroup(
-                TargetSystemPath + @"\SampleSystem.BLL.Core\_Generated",
+                TargetSystemPath + @"/SampleSystem.BLL.Core/_Generated",
                 decl => decl.Name.Contains("FetchService") ? "SampleSystem.FetchService.Generated"
                     : decl.Name.Contains("ValidationMap") ? "SampleSystem.ValidationMap.Generated"
                     : decl.Name.Contains("Validator") ? "SampleSystem.Validator.Generated"
@@ -236,7 +236,7 @@ namespace SampleSystem.CodeGenerate
         {
             var generator = new BLLFileGenerator(this.environment.BLL);
 
-            yield return generator.GenerateSingle(TargetSystemPath + @"\SampleSystem.BLL\_Generated", "SampleSystem.Generated", this.CheckOutService);
+            yield return generator.GenerateSingle(TargetSystemPath + @"/SampleSystem.BLL/_Generated", "SampleSystem.Generated", this.CheckOutService);
         }
 
         [TestMethod]
@@ -250,7 +250,7 @@ namespace SampleSystem.CodeGenerate
             var generator = new ServerDTO.SampleSystemServerFileGenerator<ServerDTO.ServerDTOGeneratorConfiguration>(this.environment.ServerDTO);
 
             return generator.GenerateGroup(
-                TargetSystemPath + @"\SampleSystem.Generated.DTO",
+                TargetSystemPath + @"/SampleSystem.Generated.DTO",
                 decl => decl.Name.Contains("Client") && decl.Name.Contains("DTOMappingService") ? "SampleSystemClientMappingService.Generated"
                     : decl.Name.Contains("DTOMappingService") ? "SampleSystemMappingService.Generated"
                     : (decl.UserData["FileType"] as DTOFileType).Maybe(type => type.Role == DTORole.Event) ? "SampleSystem.Event.Generated"
@@ -271,7 +271,7 @@ namespace SampleSystem.CodeGenerate
         {
             var dtoGenerator = new AuditDTOModelFileGenerator(this.environment.AuditDTO);
 
-            yield return dtoGenerator.GenerateSingle(TargetSystemPath + @"\SampleSystem.Generated.DTO", "SampleSystem.Audit.Generated");
+            yield return dtoGenerator.GenerateSingle(TargetSystemPath + @"/SampleSystem.Generated.DTO", "SampleSystem.Audit.Generated");
 
             var generator = new ServerDTO.SampleSystemServerFileGenerator<ServerDTO.ServerDTOGeneratorConfiguration>(this.environment.ServerDTO);
         }
@@ -286,7 +286,7 @@ namespace SampleSystem.CodeGenerate
         {
             var generator = new ClientDTO.SampleSystemClientFileGenerator<ClientDTO.ClientDTOGeneratorConfiguration>(this.environment.ClientDTO);
 
-            yield return generator.GenerateSingle(TargetSystemPath + @"\SampleSystem.Generated.DTO.Silverlight", "SampleSystem.Generated", this.CheckOutService);
+            yield return generator.GenerateSingle(TargetSystemPath + @"/SampleSystem.Generated.DTO.Silverlight", "SampleSystem.Generated", this.CheckOutService);
         }
 
         [TestMethod]
@@ -299,7 +299,7 @@ namespace SampleSystem.CodeGenerate
         {
             var generator = new DALFileGenerator(this.environment.DAL);
 
-            return generator.Generate(TargetSystemPath + @"\SampleSystem.Generated.DAL.NHibernate\Mapping", this.CheckOutService);
+            return generator.Generate(TargetSystemPath + @"/SampleSystem.Generated.DAL.NHibernate\Mapping", this.CheckOutService);
         }
 
         [TestMethod]
@@ -311,7 +311,7 @@ namespace SampleSystem.CodeGenerate
         private IEnumerable<FileInfo> GenerateCustomReportsBLL()
         {
             var customReportBLLGenerator = new CustomReportBLLGenerator(new ReportBLLGeneratorConfiguration(this.environment));
-            var path = System.IO.Path.Combine(TargetSystemPath, @"SampleSystem.CustomReports.BLL\_Generated");
+            var path = System.IO.Path.Combine(TargetSystemPath, @"SampleSystem.CustomReports.BLL/_Generated");
             yield return customReportBLLGenerator.GenerateSingle(path, "SampleSystem.CustomReports.BLL.Generated", this.CheckOutService);
         }
     }

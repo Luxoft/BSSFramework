@@ -39,7 +39,7 @@ namespace Framework.Authorization.TestGenerate
             var generator = new BLLCoreFileGenerator(this.Environment.BLLCore);
 
             return generator.GenerateGroup(
-                this.GeneratePath + @"\Framework.Authorization.BLL.Core\_Generated",
+                this.GeneratePath + @"/Framework.Authorization.BLL.Core/_Generated",
                 decl => decl.Name.Contains("FetchService") ? "Authorization.FetchService.Generated"
                     : decl.Name.Contains("ValidationMap") ? "Authorization.ValidationMap.Generated"
                     : decl.Name.Contains("Validator") ? "Authorization.Validator.Generated"
@@ -58,7 +58,7 @@ namespace Framework.Authorization.TestGenerate
             var generator = new BLLFileGenerator(this.Environment.BLL);
 
             yield return generator.GenerateSingle(
-                this.GeneratePath + @"\Framework.Authorization.BLL\_Generated",
+                this.GeneratePath + @"/Framework.Authorization.BLL/_Generated",
                 "Authorization.Generated",
                 this.CheckOutService);
         }
@@ -74,7 +74,7 @@ namespace Framework.Authorization.TestGenerate
             var generator = new ServerFileGenerator(this.Environment.ServerDTO);
 
             yield return generator.GenerateSingle(
-                this.GeneratePath + @"\Framework.Authorization.Generated.DTO",
+                this.GeneratePath + @"/Framework.Authorization.Generated.DTO",
                 "Authorization.Generated",
                 this.CheckOutService);
         }
@@ -89,7 +89,7 @@ namespace Framework.Authorization.TestGenerate
         {
             var generator = new DALFileGenerator(this.Environment.DAL);
 
-            return generator.Generate(this.GeneratePath + @"\Framework.Authorization.Generated.DAL.NHibernate\Mapping", this.CheckOutService);
+            return generator.Generate(this.GeneratePath + @"/Framework.Authorization.Generated.DAL.NHibernate/Mapping", this.CheckOutService);
         }
     }
 }

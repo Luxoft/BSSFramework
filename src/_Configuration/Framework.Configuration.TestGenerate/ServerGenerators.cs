@@ -39,7 +39,7 @@ namespace Framework.Configuration.TestGenerate
             var generator = new BLLCoreFileGenerator(this.Environment.BLLCore);
 
             return generator.GenerateGroup(
-                this.GeneratePath + @"\Framework.Configuration.BLL.Core\_Generated",
+                this.GeneratePath + @"/Framework.Configuration.BLL.Core/_Generated",
                 decl => decl.Name.Contains("FetchService") ? "Configuration.FetchService.Generated"
                     : decl.Name.Contains("ValidationMap") ? "Configuration.ValidationMap.Generated"
                     : decl.Name.Contains("Validator") ? "Configuration.Validator.Generated"
@@ -58,7 +58,7 @@ namespace Framework.Configuration.TestGenerate
             var generator = new BLLFileGenerator(this.Environment.BLL);
 
             yield return generator.GenerateSingle(
-                this.GeneratePath + @"\Framework.Configuration.BLL\_Generated",
+                this.GeneratePath + @"/Framework.Configuration.BLL/_Generated",
                 "Configuration.Generated",
                 this.CheckOutService);
         }
@@ -74,7 +74,7 @@ namespace Framework.Configuration.TestGenerate
             var generator = new ServerFileGenerator(this.Environment.ServerDTO);
 
             yield return generator.GenerateSingle(
-                this.GeneratePath + @"\Framework.Configuration.Generated.DTO",
+                this.GeneratePath + @"/Framework.Configuration.Generated.DTO",
                 "Configuration.Generated",
                 this.CheckOutService);
         }
@@ -89,7 +89,7 @@ namespace Framework.Configuration.TestGenerate
         {
             var generator = new DALFileGenerator(this.Environment.DAL);
 
-            return generator.Generate(this.GeneratePath + @"\Framework.Configuration.Generated.DAL.NHibernate\Mapping", this.CheckOutService);
+            return generator.Generate(this.GeneratePath + @"/Framework.Configuration.Generated.DAL.NHibernate/Mapping", this.CheckOutService);
         }
     }
 }

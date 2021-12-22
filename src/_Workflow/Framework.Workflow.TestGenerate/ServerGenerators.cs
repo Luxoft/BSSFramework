@@ -40,7 +40,7 @@ namespace Framework.Workflow.TestGenerate
         {
             var generator = new ProjectionFileGenerator(this.Environment.Projection);
 
-            yield return generator.GenerateSingle(this.GeneratePath + @"\Framework.Workflow.Domain.Projections", "Workflow.Generated", this.CheckOutService, parallel: this.genParallel);
+            yield return generator.GenerateSingle(this.GeneratePath + @"/Framework.Workflow.Domain.Projections", "Workflow.Generated", this.CheckOutService, parallel: this.genParallel);
         }
 
         [TestMethod]
@@ -54,7 +54,7 @@ namespace Framework.Workflow.TestGenerate
             var generator = new BLLCoreFileGenerator(this.Environment.BLLCore);
 
             return generator.GenerateGroup(
-                this.GeneratePath + @"\Framework.Workflow.BLL.Core\_Generated",
+                this.GeneratePath + @"/Framework.Workflow.BLL.Core/_Generated",
                 decl => decl.Name.Contains("FetchService") ? "Workflow.FetchService.Generated"
                     : decl.Name.Contains("ValidationMap") ? "Workflow.ValidationMap.Generated"
                     : decl.Name.Contains("Validator") ? "Workflow.Validator.Generated"
@@ -73,7 +73,7 @@ namespace Framework.Workflow.TestGenerate
         {
             var generator = new BLLFileGenerator(this.Environment.BLL);
 
-            yield return generator.GenerateSingle(this.GeneratePath + @"\Framework.Workflow.BLL\_Generated", "Workflow.Generated", this.CheckOutService, parallel: this.genParallel);
+            yield return generator.GenerateSingle(this.GeneratePath + @"/Framework.Workflow.BLL/_Generated", "Workflow.Generated", this.CheckOutService, parallel: this.genParallel);
         }
 
         [TestMethod]
@@ -86,7 +86,7 @@ namespace Framework.Workflow.TestGenerate
         {
             var clientGenerator = new ServerFileGenerator(this.Environment.ServerDTO);
 
-            yield return clientGenerator.GenerateSingle(this.GeneratePath + @"\Framework.Workflow.Generated.DTO", "Workflow.Generated", this.CheckOutService, parallel: this.genParallel);
+            yield return clientGenerator.GenerateSingle(this.GeneratePath + @"/Framework.Workflow.Generated.DTO", "Workflow.Generated", this.CheckOutService, parallel: this.genParallel);
         }
 
         [TestMethod]
@@ -99,7 +99,7 @@ namespace Framework.Workflow.TestGenerate
         {
             var generator = new DALFileGenerator(this.Environment.DAL);
 
-            return generator.Generate(this.GeneratePath + @"\Framework.Workflow.Generated.DAL.NHibernate\Mapping", this.CheckOutService);
+            return generator.Generate(this.GeneratePath + @"/Framework.Workflow.Generated.DAL.NHibernate/Mapping", this.CheckOutService);
         }
     }
 }

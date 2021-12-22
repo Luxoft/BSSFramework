@@ -1,4 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.App.Subscriptions</PackageId>
+  </PropertyGroup>
 
   <PropertyGroup>
   <IncludeBuildOutput>false</IncludeBuildOutput>

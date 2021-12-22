@@ -1,6 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.DomainDriven.FacadeServiceProxyGenerator</PackageId>
+  </PropertyGroup>
 
-
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.ServiceModel.Async\Framework.ServiceModel.Async.csproj" />

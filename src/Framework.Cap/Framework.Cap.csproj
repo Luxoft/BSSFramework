@@ -1,5 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.Cap</PackageId>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="DotNetCore.CAP" Version="5.2.0" />
     <PackageReference Include="DotNetCore.CAP.Dashboard" Version="5.2.0" />

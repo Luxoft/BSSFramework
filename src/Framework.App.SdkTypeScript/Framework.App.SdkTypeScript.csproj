@@ -1,5 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.App.SdkTypeScript</PackageId>
+  </PropertyGroup>
   <PropertyGroup>
   <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>

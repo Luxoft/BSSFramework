@@ -1,4 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.Report.Razor.Text</PackageId>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="RazorEngine.NetCore" Version="3.1.0" />
   </ItemGroup>

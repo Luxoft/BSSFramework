@@ -34,6 +34,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__SolutionItems", "__Soluti
 		__SolutionItems\CommonAssemblyInfo.cs = __SolutionItems\CommonAssemblyInfo.cs
 		Settings.StyleCop = Settings.StyleCop
 		tfs.runsettings = tfs.runsettings
+		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Authorization.Generated.DAL.NHibernate", "_Authorization\Framework.Authorization.Generated.DAL.NHibernate\Framework.Authorization.Generated.DAL.NHibernate.csproj", "{E7D683B2-E015-4EEB-BB4A-BC3A2927882E}"
@@ -226,8 +227,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Configs", "_Configs", "{621D8E83-5142-4213-96E3-769F400896E3}"
 	ProjectSection(SolutionItems) = preProject
 		_SampleSystem\_Configs\appsettings.json = _SampleSystem\_Configs\appsettings.json
-		_SampleSystem\_Configs\iatsuta.appsettings.json = _SampleSystem\_Configs\iatsuta.appsettings.json
-		_SampleSystem\_Configs\negorov3.appsettings.json = _SampleSystem\_Configs\negorov3.appsettings.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleSystem.BLL.Test", "_SampleSystem\_Tests\SampleSystem.BLL.Test\SampleSystem.BLL.Test.csproj", "{632CD0F0-12CA-4CCA-AF5A-DC644AA11F76}"

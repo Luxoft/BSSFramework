@@ -1,5 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <PackageId>Luxoft.Framework.DomainDriven.Tests.Unit</PackageId>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <ProjectGuid>{6E5D27A8-3D46-488C-A7C2-A65C2AC0B633}</ProjectGuid>
 
   </PropertyGroup>

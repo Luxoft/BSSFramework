@@ -1,5 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.DomainDriven.Abstractions</PackageId>
+  </PropertyGroup>
 
 </Project>

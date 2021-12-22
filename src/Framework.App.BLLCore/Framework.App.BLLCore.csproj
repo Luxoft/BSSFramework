@@ -1,5 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <PackageId>Luxoft.Framework.App.BLLCore</PackageId>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
   <ItemGroup>

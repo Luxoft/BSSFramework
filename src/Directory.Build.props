@@ -5,7 +5,7 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Copyright>Luxoft 2009-2021</Copyright>
     <Authors>Luxoft BSS</Authors>
-    <RepositoryUrl>https://tfs/tfs/DefaultCollection/IAD_Framework/_git/IAD_Framework</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Luxoft/BSSFramework</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://tfs/tfs/DefaultCollection/IAD_Framework/</PackageProjectUrl>
     <IsPackable>true</IsPackable>

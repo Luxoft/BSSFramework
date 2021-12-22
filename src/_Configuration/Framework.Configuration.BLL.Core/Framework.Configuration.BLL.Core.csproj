@@ -1,5 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.Configuration.BLL.Core</PackageId>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Serilog" Version="2.10.0" />
   </ItemGroup>

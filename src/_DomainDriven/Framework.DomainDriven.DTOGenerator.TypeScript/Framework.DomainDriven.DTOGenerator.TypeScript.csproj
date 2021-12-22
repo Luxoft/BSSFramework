@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-<PropertyGroup>
-    <StartupObject />
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.DomainDriven.DTOGenerator.TypeScript</PackageId>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />

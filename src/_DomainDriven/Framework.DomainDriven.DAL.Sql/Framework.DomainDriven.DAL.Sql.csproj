@@ -1,5 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.DomainDriven.DAL.Sql</PackageId>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="161.46521.71" />
   </ItemGroup>

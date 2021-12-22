@@ -25,6 +25,8 @@
 *.tt text eol=crlf
 *.wsdl text eol=crlf
 *.xaml text eol=crlf
+*.xml text eol=lf
+*.ts text eol=lf
 
 # These files are text and should be normalized (Convert crlf => lf)
 *.gitattributes text eol=lf

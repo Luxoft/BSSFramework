@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
+using FluentAssertions;
+
 using Framework.Core;
 using Framework.DomainDriven.DTOGenerator.TypeScript.Facade;
 
@@ -85,6 +87,12 @@ namespace Framework.Generation.Tests
             var changedFiles = generatedFiles.Where(x => x.FileState == FileInfo.State.Modified).ToList();
             var newFiles = generatedFiles.Where(x => x.FileState == FileInfo.State.New).ToList();
 
+            if (changedFiles.Any())
+            {
+                var f = changedFiles.First();
+                f.Content.Should().Be(f.PrevContent);
+            }
+
             if (changedFiles.Any() || newFiles.Any())
             {
                 Assert.Fail(
@@ -98,7 +106,7 @@ Modified files are:
 
         private static string GetAggregatedMessage(IReadOnlyCollection<FileInfo> source)
             => source.Any()
-                   ? source.Select(x => "\t" + x.AbsolutePath).Aggregate((total, next) => total + Environment.NewLine + next)
-                   : string.Empty;
+                       ? source.Select(x => "\t" + x.AbsolutePath).Aggregate((total, next) => total + Environment.NewLine + next)
+                       : string.Empty;
     }
 }

@@ -23,6 +23,12 @@ namespace Framework.DomainDriven.Generation
 
         public string Content { get; }
 
+        public string PrevContent
+        {
+            get;
+            private set;
+        }
+
         public string AbsolutePath { get; private set; } = null;
 
         public State FileState { get; private set; } = State.Unknown;
@@ -46,9 +52,9 @@ namespace Framework.DomainDriven.Generation
 
             if (File.Exists(absolutePath))
             {
-                var prevContent = File.ReadAllText(absolutePath, usingEncoding);
+                this.PrevContent = File.ReadAllText(absolutePath, usingEncoding);
 
-                if (prevContent != this.Content)
+                if (this.PrevContent != this.Content)
                 {
                     state = State.Modified;
                     this.InternalSave(absolutePath, checkOutService, usingEncoding);

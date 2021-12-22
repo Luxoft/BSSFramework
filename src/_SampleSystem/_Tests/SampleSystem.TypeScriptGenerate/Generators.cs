@@ -15,7 +15,7 @@ namespace SampleSystem.TypeScriptGenerate
     [TestClass]
     public class Generators
     {
-        private string FrameworkPath { get; } = Environment.CurrentDirectory.TakeWhileNot(@"/src", StringComparison.InvariantCultureIgnoreCase);
+        private string FrameworkPath { get; } = Environment.CurrentDirectory.Replace(@"\",@"/").TakeWhileNot(@"/src", StringComparison.InvariantCultureIgnoreCase);
 
         private string TargetSystemPath => this.FrameworkPath + @"/src";
 

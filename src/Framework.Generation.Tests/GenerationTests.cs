@@ -90,7 +90,7 @@ namespace Framework.Generation.Tests
             if (changedFiles.Any())
             {
                 var f = changedFiles.First();
-                f.Content.Take(200).Should().BeEquivalentTo(f.PrevContent.Take(200));
+                f.Content.Should().Be(f.PrevContent);
             }
             if (changedFiles.Any() || newFiles.Any())
             {

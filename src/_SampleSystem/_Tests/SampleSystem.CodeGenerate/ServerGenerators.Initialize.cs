@@ -17,7 +17,7 @@ namespace SampleSystem.CodeGenerate
 
         private readonly string webApiNetCorePath = Path.Combine(TargetSystemPath, "../SampleSystem.WebApiCore", @"Controllers/_Generated");
 
-        private static string FrameworkPath { get; } = Environment.CurrentDirectory.TakeWhileNot(@"/src", StringComparison.InvariantCultureIgnoreCase) + @"/src";
+        private static string FrameworkPath { get; } = Environment.CurrentDirectory.Replace(@"\",@"/").TakeWhileNot(@"/src", StringComparison.InvariantCultureIgnoreCase) + @"/src";
 
         private static string TargetSystemPath => FrameworkPath + @"/_SampleSystem";
 

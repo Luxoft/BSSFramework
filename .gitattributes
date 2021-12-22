@@ -4,7 +4,7 @@
 *.bat text eol=crlf
 *.cmd text eol=crlf
 *.config text eol=crlf
-*.cs text eol=crlf diff=csharp 
+*.cs text eol=lf diff=csharp 
 *.cshtml text eol=crlf
 *.csproj text eol=crlf
 #*.css text eol=crlf

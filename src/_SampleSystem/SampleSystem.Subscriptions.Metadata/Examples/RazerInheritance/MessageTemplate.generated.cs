@@ -11,46 +11,26 @@
 
 namespace ASP
 {
-    
-    #line 2 "..\..\Examples\RazerInheritance\MessageTemplate.cshtml"
     using System;
-    
-    #line default
-    #line hidden
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    
-    #line 3 "..\..\Examples\RazerInheritance\MessageTemplate.cshtml"
     using SampleSystem.Domain;
-    
-    #line default
-    #line hidden
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     public partial class _Examples_RazerInheritance_MessageTemplate_cshtml : LuxIM.Subscriptions.Metadata.LocalRazorTemplate<Employee>
     {
 #line hidden
 
-        #line 5 "..\..\Examples\RazerInheritance\MessageTemplate.cshtml"
-
     public override string Subject => $"Employee {Current.NameNative} has been changed";
-
-        #line default
-        #line hidden
 
         public override void Execute()
         {
 
 
 
-            
-            #line 1 "..\..\Examples\RazerInheritance\MessageTemplate.cshtml"
-                          
+                                
 
-            
-            #line default
-            #line hidden
 
 
 
@@ -58,23 +38,13 @@ namespace ASP
 WriteLiteral("<h2>Hi there!!!</h2>\nMy test employee Name: ");
 
 
-            
-            #line 8 "..\..\Examples\RazerInheritance\MessageTemplate.cshtml"
                   Write(this.GetEmployeeName(Current));
 
-            
-            #line default
-            #line hidden
 WriteLiteral("\nDate: ");
 
 
-            
-            #line 9 "..\..\Examples\RazerInheritance\MessageTemplate.cshtml"
  Write(this.GetDateString(new DateTime(2015, 10, 21)));
 
-            
-            #line default
-            #line hidden
 
         }
     }

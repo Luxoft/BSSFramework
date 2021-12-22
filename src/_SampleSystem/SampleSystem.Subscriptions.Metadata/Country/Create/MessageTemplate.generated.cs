@@ -15,57 +15,32 @@ namespace ASP
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    
-    #line 2 "..\..\Country\Create\MessageTemplate.cshtml"
     using Framework.Configuration.SubscriptionModeling;
-    
-    #line default
-    #line hidden
-    
-    #line 3 "..\..\Country\Create\MessageTemplate.cshtml"
     using SampleSystem.Domain;
-    
-    #line default
-    #line hidden
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     public partial class _Country_Create_MessageTemplate_cshtml : RazorTemplate<Country>
     {
 #line hidden
 
-        #line 5 "..\..\Country\Create\MessageTemplate.cshtml"
-
     public override string Subject => $"Country {Current.Code} has been create";
-
-        #line default
-        #line hidden
 
         public override void Execute()
         {
 
 
 
-            
-            #line 1 "..\..\Country\Create\MessageTemplate.cshtml"
-                          
-
-            
-            #line default
-            #line hidden
+                                 
 
 
 
 
-WriteLiteral("\r\n<h2>Hi there!!!</h2>\r\n\r\nMy test country Code: ");
+
+WriteLiteral("\n<h2>Hi there!!!</h2>\n\nMy test country Code: ");
 
 
-            
-            #line 10 "..\..\Country\Create\MessageTemplate.cshtml"
                  Write(Current.Code);
 
-            
-            #line default
-            #line hidden
 
         }
     }

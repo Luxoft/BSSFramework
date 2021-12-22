@@ -15,43 +15,23 @@ namespace ASP
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    
-    #line 2 "..\..\Employee\Update\MessageTemplate.cshtml"
     using Framework.Configuration.SubscriptionModeling;
-    
-    #line default
-    #line hidden
-    
-    #line 3 "..\..\Employee\Update\MessageTemplate.cshtml"
     using SampleSystem.Domain;
-    
-    #line default
-    #line hidden
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     public partial class _Employee_Update_MessageTemplate_cshtml : RazorTemplate<Employee>
     {
 #line hidden
 
-        #line 5 "..\..\Employee\Update\MessageTemplate.cshtml"
-
     public override string Subject => $"Employee {Current.NameNative} has been changed";
-
-        #line default
-        #line hidden
 
         public override void Execute()
         {
 
 
 
-            
-            #line 1 "..\..\Employee\Update\MessageTemplate.cshtml"
-                          
+                                
 
-            
-            #line default
-            #line hidden
 
 
 
@@ -59,13 +39,8 @@ namespace ASP
 WriteLiteral("\n<h2>Hi there!!!</h2>\n\nMy test employee Name: ");
 
 
-            
-            #line 10 "..\..\Employee\Update\MessageTemplate.cshtml"
                   Write(Current.NameNative);
 
-            
-            #line default
-            #line hidden
 
         }
     }

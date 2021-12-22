@@ -15,48 +15,28 @@ namespace ASP
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    
-    #line 2 "..\..\WorkflowCreateModel\Create\MessageTemplate.cshtml"
     using Framework.Configuration.SubscriptionModeling;
-    
-    #line default
-    #line hidden
-    
-    #line 3 "..\..\WorkflowCreateModel\Create\MessageTemplate.cshtml"
     using Framework.Workflow.Domain;
-    
-    #line default
-    #line hidden
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     public partial class _WorkflowCreateModel_Create_MessageTemplate_cshtml : RazorTemplate<WorkflowCreateModel>
     {
 #line hidden
 
-        #line 5 "..\..\WorkflowCreateModel\Create\MessageTemplate.cshtml"
-
     public override string Subject => "Workflow create model created";
-
-        #line default
-        #line hidden
 
         public override void Execute()
         {
 
 
 
-            
-            #line 1 "..\..\WorkflowCreateModel\Create\MessageTemplate.cshtml"
-                          
-
-            
-            #line default
-            #line hidden
+                                
 
 
 
 
-WriteLiteral("\r\n<h2>Hi there!!!</h2>");
+
+WriteLiteral("\n<h2>Hi there!!!</h2>");
 
 
         }

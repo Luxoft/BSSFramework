@@ -15,55 +15,25 @@ namespace ASP
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    
-    #line 2 "..\..\Examples\AttachmentInline\MessageTemplate.cshtml"
     using Framework.Configuration.SubscriptionModeling;
-    
-    #line default
-    #line hidden
-    
-    #line 3 "..\..\Examples\AttachmentInline\MessageTemplate.cshtml"
     using SampleSystem.Domain;
-    
-    #line default
-    #line hidden
-    
-    #line 4 "..\..\Examples\AttachmentInline\MessageTemplate.cshtml"
     using SampleSystem.Subscriptions.Metadata.Examples.Attachment;
-    
-    #line default
-    #line hidden
-    
-    #line 5 "..\..\Examples\AttachmentInline\MessageTemplate.cshtml"
     using SampleSystem.Subscriptions.Metadata.Examples.AttachmentInline;
-    
-    #line default
-    #line hidden
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     public partial class _Examples_AttachmentInline_MessageTemplate_cshtml : RazorTemplate<Employee>
     {
 #line hidden
 
-        #line 7 "..\..\Examples\AttachmentInline\MessageTemplate.cshtml"
-
     public override string Subject => $"Employee {Current.NameNative} has been changed. Inline attach test";
-
-        #line default
-        #line hidden
 
         public override void Execute()
         {
 
 
 
-            
-            #line 1 "..\..\Examples\AttachmentInline\MessageTemplate.cshtml"
-                          
+                                
 
-            
-            #line default
-            #line hidden
 
 
 
@@ -73,23 +43,13 @@ namespace ASP
 WriteLiteral("<html><head><title></title></head><body>");
 
 
-            
-            #line 9 "..\..\Examples\AttachmentInline\MessageTemplate.cshtml"
                                     Write(Current.NameNative);
 
-            
-            #line default
-            #line hidden
 WriteLiteral("<br/><img src=\"");
 
 
-            
-            #line 9 "..\..\Examples\AttachmentInline\MessageTemplate.cshtml"
                                                                       Write(AttachmentLambda.AttachmentName);
 
-            
-            #line default
-            #line hidden
 WriteLiteral("\"/></body></html>");
 
 

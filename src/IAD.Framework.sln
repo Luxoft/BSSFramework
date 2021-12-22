@@ -88,7 +88,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.QueryLanguage", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Security", "Framework.Security\Framework.Security.csproj", "{1F188E18-E2AF-44B2-A708-F2056AAA46C1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.CodeDom", "Framework.Codedom\Framework.CodeDom.csproj", "{47AA8C11-FC3E-482F-8C08-E37D97A84894}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.CodeDom", "Framework.CodeDom\Framework.CodeDom.csproj", "{47AA8C11-FC3E-482F-8C08-E37D97A84894}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DomainDriven.Core", "_DomainDriven\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj", "{7B1CA2E4-C010-4BDF-8A17-76F2E5DE0BF9}"
 EndProject
@@ -292,7 +292,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Projection.Enviro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.CustomReports.Tests.Unit", "_Report\Framework.CustomReports.Tests.Unit\Framework.CustomReports.Tests.Unit.csproj", "{808BDC9E-32EA-4B3C-B718-3936CD91B91D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleSystem.TypescriptGenerate", "_SampleSystem\_Tests\SampleSystem.TypescriptGenerate\SampleSystem.TypescriptGenerate.csproj", "{83A37102-448A-421C-BA75-78F23B8F03FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleSystem.TypeScriptGenerate", "_SampleSystem\_Tests\SampleSystem.TypeScriptGenerate\SampleSystem.TypeScriptGenerate.csproj", "{83A37102-448A-421C-BA75-78F23B8F03FC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Generation.Tests", "Framework.Generation.Tests\Framework.Generation.Tests.csproj", "{8B8A8BBF-1E32-4C89-9185-789669701854}"
 EndProject

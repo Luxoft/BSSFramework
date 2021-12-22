@@ -17,7 +17,7 @@ namespace SampleSystem.TypeScriptGenerate
     {
         private string FrameworkPath { get; } = Environment.CurrentDirectory.TakeWhileNot(@"/src", StringComparison.InvariantCultureIgnoreCase);
 
-        private string TargetSystemPath => this.FrameworkPath + @"/src/_SampleSystem";
+        private string TargetSystemPath => this.FrameworkPath + @"/src";
 
         private ICheckOutService CheckOutService { get; } = Framework.DomainDriven.Generation.CheckOutService.Trace;
 

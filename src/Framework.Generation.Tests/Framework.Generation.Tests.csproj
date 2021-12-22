@@ -11,6 +11,6 @@
     <ProjectReference Include="..\_Authorization\Framework.Authorization.ClientGenerate\Framework.Authorization.ClientGenerate.csproj" />
     <ProjectReference Include="..\_Configuration\Framework.Configuration.ClientGenerate\Framework.Configuration.ClientGenerate.csproj" />
     <ProjectReference Include="..\_Workflow\Framework.Workflow.ClientGenerate\Framework.Workflow.ClientGenerate.csproj" />
-    <ProjectReference Include="..\_SampleSystem\_Tests\SampleSystem.TypescriptGenerate\SampleSystem.TypeScriptGenerate.csproj" />
+    <ProjectReference Include="..\_SampleSystem\_Tests\SampleSystem.TypeScriptGenerate\SampleSystem.TypeScriptGenerate.csproj" />
   </ItemGroup>
 </Project>

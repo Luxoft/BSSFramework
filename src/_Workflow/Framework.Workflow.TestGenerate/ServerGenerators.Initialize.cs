@@ -20,6 +20,6 @@ namespace Framework.Workflow.TestGenerate
             this.Environment = environment ?? throw new ArgumentNullException(nameof(environment));
         }
 
-        protected override string GeneratePath => this.FrameworkPath + @"\src\_Workflow";
+        protected override string GeneratePath => this.FrameworkPath + @"/src/_Workflow";
     }
 }

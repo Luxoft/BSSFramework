@@ -16,6 +16,6 @@ namespace Framework.Configuration.TestGenerate
             this.Environment = environment ?? throw new ArgumentNullException(nameof(environment));
         }
 
-        protected override string GeneratePath => this.FrameworkPath + @"\src\_Configuration";
+        protected override string GeneratePath => this.FrameworkPath + @"/src/_Configuration";
     }
 }

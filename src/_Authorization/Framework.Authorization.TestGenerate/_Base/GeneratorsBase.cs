@@ -10,7 +10,7 @@ namespace Framework.Authorization.TestGenerate
     {
         protected ICheckOutService CheckOutService { get; } = Framework.DomainDriven.Generation.CheckOutService.Trace;
 
-        protected virtual string FrameworkPath { get; } = System.Environment.CurrentDirectory.TakeWhileNot(@"\src\", StringComparison.InvariantCultureIgnoreCase);
+        protected virtual string FrameworkPath { get; } = System.Environment.CurrentDirectory.TakeWhileNot(@"/src/", StringComparison.InvariantCultureIgnoreCase);
 
         protected abstract string GeneratePath { get; }
     }

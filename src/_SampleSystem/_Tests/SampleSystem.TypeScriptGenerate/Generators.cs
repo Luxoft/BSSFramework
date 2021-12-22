@@ -15,9 +15,9 @@ namespace SampleSystem.TypeScriptGenerate
     [TestClass]
     public class Generators
     {
-        private string FrameworkPath { get; } = Environment.CurrentDirectory.TakeWhileNot(@"\src", StringComparison.InvariantCultureIgnoreCase);
+        private string FrameworkPath { get; } = Environment.CurrentDirectory.TakeWhileNot(@"/src", StringComparison.InvariantCultureIgnoreCase);
 
-        private string TargetSystemPath => this.FrameworkPath + @"\src\_SampleSystem";
+        private string TargetSystemPath => this.FrameworkPath + @"/src/_SampleSystem";
 
         private ICheckOutService CheckOutService { get; } = Framework.DomainDriven.Generation.CheckOutService.Trace;
 
@@ -56,7 +56,7 @@ namespace SampleSystem.TypeScriptGenerate
             var generator = new TypeScriptDTOFileGenerator(this.authorizationEnvironment.ClientDTO);
 
             yield return generator.GenerateSingle(
-                this.TargetSystemPath + @"\SampleSystem.WebApiCore\js\generated\dto",
+                this.TargetSystemPath + @"/SampleSystem.WebApiCore/js/generated/dto",
                 "authorization.generated",
                 this.CheckOutService);
         }
@@ -72,7 +72,7 @@ namespace SampleSystem.TypeScriptGenerate
             var generator = new TypeScriptDTOFileGenerator(this.configurationEnvironment.ClientDTO);
 
             yield return generator.GenerateSingle(
-                this.TargetSystemPath + @"\SampleSystem.WebApiCore\js\generated\dto",
+                this.TargetSystemPath + @"/SampleSystem.WebApiCore/js/generated/dto",
                 "configuration.generated",
                 this.CheckOutService);
         }
@@ -88,7 +88,7 @@ namespace SampleSystem.TypeScriptGenerate
             var generator = new TypeScriptDTOFileGenerator(this.mainEnvironment.ClientDTO);
 
             yield return generator.GenerateSingle(
-                this.TargetSystemPath + @"\SampleSystem.WebApiCore\js\generated\dto",
+                this.TargetSystemPath + @"/SampleSystem.WebApiCore/js/generated/dto",
                 "entities.generated",
                 this.CheckOutService);
         }
@@ -104,7 +104,7 @@ namespace SampleSystem.TypeScriptGenerate
             var generator = new TypeScriptFacadeFileGenerator(this.mainEnvironment.ClientMainFacade);
 
             yield return generator.GenerateSingle(
-                this.TargetSystemPath + @"\SampleSystem.WebApiCore\js\generated\facade",
+                this.TargetSystemPath + @"/SampleSystem.WebApiCore/js/generated/facade",
                 "facade.generated",
                 this.CheckOutService);
         }
@@ -120,7 +120,7 @@ namespace SampleSystem.TypeScriptGenerate
             var generator = new TypeScriptFacadeFileGenerator(this.mainEnvironment.ClientQueryMainFacade);
 
             yield return generator.GenerateSingle(
-                this.TargetSystemPath + @"\SampleSystem.WebApiCore\js\generated\facade",
+                this.TargetSystemPath + @"/SampleSystem.WebApiCore/js/generated/facade",
                 "query.facade.generated",
                 this.CheckOutService);
         }
@@ -136,7 +136,7 @@ namespace SampleSystem.TypeScriptGenerate
             var generator = new TypeScriptFacadeFileGenerator(this.configurationEnvironment.ConfigurationFacade);
 
             yield return generator.GenerateSingle(
-                this.TargetSystemPath + @"\SampleSystem.WebApiCore\js\generated\facade",
+                this.TargetSystemPath + @"/SampleSystem.WebApiCore/js/generated/facade",
                 "configuration.facade.generated",
                 this.CheckOutService);
         }
@@ -152,7 +152,7 @@ namespace SampleSystem.TypeScriptGenerate
             var generator = new TypeScriptFacadeFileGenerator(this.authorizationEnvironment.AuthFacade);
 
             yield return generator.GenerateSingle(
-                this.TargetSystemPath + @"\SampleSystem.WebApiCore\js\generated\facade",
+                this.TargetSystemPath + @"/SampleSystem.WebApiCore/js/generated/facade",
                 "authorization.facade.generated",
                 this.CheckOutService);
         }
@@ -168,7 +168,7 @@ namespace SampleSystem.TypeScriptGenerate
             var generator = new TypeScriptFacadeFileGenerator(this.configurationEnvironment.ReportFacade);
 
             yield return generator.GenerateSingle(
-                this.TargetSystemPath + @"\SampleSystem.WebApiCore\js\generated\facade",
+                this.TargetSystemPath + @"/SampleSystem.WebApiCore/js/generated/facade",
                 "report.facade.generated",
                 this.CheckOutService);
         }

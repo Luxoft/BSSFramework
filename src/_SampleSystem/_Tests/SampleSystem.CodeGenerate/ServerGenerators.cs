@@ -299,7 +299,7 @@ namespace SampleSystem.CodeGenerate
         {
             var generator = new DALFileGenerator(this.environment.DAL);
 
-            return generator.Generate(TargetSystemPath + @"/SampleSystem.Generated.DAL.NHibernate\Mapping", this.CheckOutService);
+            return generator.Generate(TargetSystemPath + @"/SampleSystem.Generated.DAL.NHibernate/Mapping", this.CheckOutService);
         }
 
         [TestMethod]

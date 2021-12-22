@@ -87,12 +87,6 @@ namespace Framework.Generation.Tests
             var changedFiles = generatedFiles.Where(x => x.FileState == FileInfo.State.Modified).ToList();
             var newFiles = generatedFiles.Where(x => x.FileState == FileInfo.State.New).ToList();
 
-            if (changedFiles.Any())
-            {
-                var f = changedFiles.First();
-                f.Content.Should().Be(f.PrevContent);
-            }
-
             if (changedFiles.Any() || newFiles.Any())
             {
                 Assert.Fail(

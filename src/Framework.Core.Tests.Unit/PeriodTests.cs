@@ -221,15 +221,15 @@ namespace Framework.Core.Tests.Unit
         [TestCase(5, 2015, 5, 2015, "en-US", ExpectedResult = "5/15-5/15")]
         [TestCase(5, 2015, 5, 2015, "ro-RO", ExpectedResult = "15.05-15.05")]
         [TestCase(5, 2015, 5, 2015, "fr-CH", ExpectedResult = "15.05-15.05")]
-        [TestCase(5, 2015, 5, 2015, "pl-PL", ExpectedResult = "05-15-05-15")]
-        [TestCase(5, 2015, 5, 2015, "xh-ZA", ExpectedResult = "05/15-05/15")]
+        [TestCase(5, 2015, 5, 2015, "pl-PL", ExpectedResult = "15.05-15.05")]
+        [TestCase(5, 2015, 5, 2015, "xh-ZA", ExpectedResult = "05-15-05-15")]
 
         [TestCase(5, 2014, 5, 2016, "ru-RU", ExpectedResult = "15.05.2014-15.05.2016")]
         [TestCase(5, 2014, 5, 2016, "en-US", ExpectedResult = "5/15/2014-5/15/2016")]
         [TestCase(5, 2014, 5, 2016, "ro-RO", ExpectedResult = "15.05.2014-15.05.2016")]
         [TestCase(5, 2014, 5, 2016, "fr-CH", ExpectedResult = "15.05.2014-15.05.2016")]
-        [TestCase(5, 2014, 5, 2016, "pl-PL", ExpectedResult = "2014-05-15-2016-05-15")]
-        [TestCase(5, 2014, 5, 2016, "xh-ZA", ExpectedResult = "2014/05/15-2016/05/15")]
+        [TestCase(5, 2014, 5, 2016, "pl-PL", ExpectedResult = "15.05.2014-15.05.2016")]
+        [TestCase(5, 2014, 5, 2016, "xh-ZA", ExpectedResult = "2014-05-15-2016-05-15")]
         public string ToExtraShortString_CorrectPeriodWithCulture_ResultInSelectedCulture(int startMonth, int startYear, int endMonth, int endYear, string isoCultureName)
         {
             // Arrange
@@ -244,8 +244,8 @@ namespace Framework.Core.Tests.Unit
 
         [TestCase(5, 2015, "ru-RU", ExpectedResult = "15.05.2015-∞")]
         [TestCase(5, 2015, "en-US", ExpectedResult = "5/15/2015-∞")]
-        [TestCase(5, 2015, "pl-PL", ExpectedResult = "2015-05-15-∞")]
-        [TestCase(5, 2015, "xh-ZA", ExpectedResult = "2015/05/15-∞")]
+        [TestCase(5, 2015, "pl-PL", ExpectedResult = "15.05.2015-∞")]
+        [TestCase(5, 2015, "xh-ZA", ExpectedResult = "2015-05-15-∞")]
         public string ToExtraShortString_CorrectPeriodWithCultureAndWithoutEndDate_ResultInSelectedCulture(int startMonth, int startYear, string isoCultureName)
         {
             // Arrange

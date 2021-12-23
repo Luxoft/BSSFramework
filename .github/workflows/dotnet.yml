@@ -36,15 +36,33 @@ jobs:
       run: |
         dotnet test src/Framework.Generation.Tests/Framework.Generation.Tests.csproj --no-build --verbosity normal
     
-    - name: Unit tessts
+    - name: Unit test#1
       run: |
         dotnet test src/Framework.Core.Tests.Unit --no-build --verbosity normal
+    - name: Unit test#2
+      run: |
         dotnet test src/Framework.OData.Tests.Unit --no-build --verbosity normal
+    - name: Unit test#3
+      run: |
         dotnet test src/Framework.Validation.Tests.Unit --no-build --verbosity normal
+    - name: Unit test#4
+      run: |
         dotnet test src/Framework.SecuritySystem.DiTests --no-build --verbosity normal
+    - name: Unit test#5
+      run: |
         dotnet test src/_Configuration/Framework.Configuration.BLL.Core.Tests.Unit --no-build --verbosity normal
+    - name: Unit test#6
+      run: |
         dotnet test src/_Configuration/Framework.Configuration.Core.Tests.Unit --no-build --verbosity normal
+    - name: Unit test#7
+      run: |
         dotnet test src/_Configuration/Framework.Configuration.SubscriptionModeling.Tests.Unit --no-build --verbosity normal
+    - name: Unit test#8
+      run: |
         dotnet test src/_DomainDriven/Framework.DomainDriven.ServiceModel.Tests.Unit --no-build --verbosity normal
+    - name: Unit test#9
+      run: |
         dotnet test src/_Authorization/Framework.Authorization.BLL.Tests.Unit --no-build --verbosity normal
+    - name: Unit test#10
+      run: |
         dotnet test src/_DomainDriven/Framework.DomainDriven.DBGenerator.Tests.Unit --no-build --verbosity normal

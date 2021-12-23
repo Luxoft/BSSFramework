@@ -102,10 +102,10 @@ namespace Framework.Core.Tests.Unit
             return actualResult;
         }
 
-        [TestCase(1, 2015, 1, 2015, ExpectedResult = "январь 2015 г.")]
-        [TestCase(1, 2015, 2, 2015, ExpectedResult = "январь 2015 г. - февраль 2015 г.")]
-        [TestCase(2, 2015, 2, 2015, ExpectedResult = "февраль 2015 г.")]
-        [TestCase(5, 2014, 5, 2016, ExpectedResult = "май 2014 г. - май 2016 г.")]
+        [TestCase(1, 2015, 1, 2015, ExpectedResult = "Январь 2015 г.")]
+        [TestCase(1, 2015, 2, 2015, ExpectedResult = "Январь 2015 г. - Февраль 2015 г.")]
+        [TestCase(2, 2015, 2, 2015, ExpectedResult = "Февраль 2015 г.")]
+        [TestCase(5, 2014, 5, 2016, ExpectedResult = "Май 2014 г. - Май 2016 г.")]
         public string GetMonthAndYearStrRus_CorrectPeriod_NameMonthInNominative(int startMonth, int startYear, int endMonth, int endYear)
         {
             // Arrange

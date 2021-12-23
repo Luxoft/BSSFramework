@@ -133,7 +133,7 @@ namespace Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory.Facade
                     Statements = { root.ToMethodReturnStatement() }
                 };
 
-                yield return new CodeSnippetTypeMember($"export let {methodName}AsyncFunc = {functionName}(); \r\n");
+                yield return new CodeSnippetTypeMember($"export let {methodName}AsyncFunc = {functionName}();" + Environment.NewLine);
 
                 yield return memberMethod;
             }

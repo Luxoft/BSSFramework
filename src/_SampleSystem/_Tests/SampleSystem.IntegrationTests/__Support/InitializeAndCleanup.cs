@@ -25,8 +25,6 @@ namespace SampleSystem.IntegrationTests.__Support
 
             AppSettings.Initialize();
 
-            testContext.WriteLine(AppSettings.Default.GetDebugView());
-
             DatabaseUtil = new SampleSystemDatabaseUtil();
 
             AssemblyInitializeAndCleanup.EnvironmentInitialize(DatabaseUtil);

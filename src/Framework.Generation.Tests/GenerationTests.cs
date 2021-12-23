@@ -79,7 +79,27 @@ namespace Framework.Generation.Tests
             var generatedFiles = target.GenerateMain().ToList();
 
             // Assert
-            ShouldBeNoNewAndModifiedFiles(generatedFiles);
+            //ShouldBeNoNewAndModifiedFiles(generatedFiles);
+            var changedFiles = generatedFiles.Where(x => x.FileState == FileInfo.State.Modified).ToList();
+            var newFiles = generatedFiles.Where(x => x.FileState == FileInfo.State.New).ToList();
+            if (changedFiles.Any())
+            {
+                var f = changedFiles.First();
+
+                for (var i = 0; i < f.PrevContent.Length; i++)
+                {
+                    var pc = f.PrevContent[i];
+                    var cc = f.Content[i];
+                    if (pc != cc)
+                    {
+                        Assert.Fail("i:" + i  + Environment.NewLine + (int)pc + Environment.NewLine + (int)cc);
+                    }
+                }
+
+                // var p = f.PrevContent.Select(c => ((int)c).ToString()).Take(200).Join(", ");
+                // var c = f.Content.Select(c => ((int)c).ToString()).Take(200).Join(", ");
+                // Assert.Fail(p + Environment.NewLine + c);
+            }
         }
 
         private static void ShouldBeNoNewAndModifiedFiles(IReadOnlyCollection<FileInfo> generatedFiles)

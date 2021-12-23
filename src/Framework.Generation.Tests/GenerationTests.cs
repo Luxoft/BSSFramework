@@ -85,7 +85,10 @@ namespace Framework.Generation.Tests
             if (changedFiles.Any())
             {
                 var f = changedFiles.First();
-                Assert.Fail(string.Concat(f.PrevContent.Intersect(f.Content).Select(c => ((int)c).ToString()).Join(", ")));
+
+                var p = f.PrevContent.Select(c => ((int)c).ToString()).Take(200).Join(", ");
+                var c = f.Content.Select(c => ((int)c).ToString()).Take(200).Join(", ");
+                Assert.Fail(p + Environment.NewLine + c);
             }
         }
 

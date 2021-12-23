@@ -86,9 +86,19 @@ namespace Framework.Generation.Tests
             {
                 var f = changedFiles.First();
 
-                var p = f.PrevContent.Select(c => ((int)c).ToString()).Take(200).Join(", ");
-                var c = f.Content.Select(c => ((int)c).ToString()).Take(200).Join(", ");
-                Assert.Fail(p + Environment.NewLine + c);
+                for (var i = 0; i < f.PrevContent.Length; i++)
+                {
+                    var pc = f.PrevContent[i];
+                    var cc = f.Content[i];
+                    if (pc != cc)
+                    {
+                        Assert.Fail("i:" + i  + Environment.NewLine + (int)pc + Environment.NewLine + (int)cc);
+                    }
+                }
+
+                // var p = f.PrevContent.Select(c => ((int)c).ToString()).Take(200).Join(", ");
+                // var c = f.Content.Select(c => ((int)c).ToString()).Take(200).Join(", ");
+                // Assert.Fail(p + Environment.NewLine + c);
             }
         }
 

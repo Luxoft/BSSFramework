@@ -69,18 +69,25 @@ namespace Framework.Generation.Tests
             ShouldBeNoNewAndModifiedFiles(generatedFiles);
         }
 
-        // [TestMethod]
-        // public void SampleSystemTypeScriptGeneration_CheckUpdatedFiles_ShouldBeNothing()
-        // {
-        //     // Arrange
-        //     var target = new SampleSystem.TypeScriptGenerate.Generators();
-        //
-        //     // Act
-        //     var generatedFiles = target.GenerateMain().ToList();
-        //
-        //     // Assert
-        //     ShouldBeNoNewAndModifiedFiles(generatedFiles);
-        // }
+        [TestMethod]
+        public void SampleSystemTypeScriptGeneration_CheckUpdatedFiles_ShouldBeNothing()
+        {
+            // Arrange
+            var target = new SampleSystem.TypeScriptGenerate.Generators();
+
+            // Act
+            var generatedFiles = target.GenerateMain().ToList();
+
+            // Assert
+            //ShouldBeNoNewAndModifiedFiles(generatedFiles);
+            var changedFiles = generatedFiles.Where(x => x.FileState == FileInfo.State.Modified).ToList();
+            var newFiles = generatedFiles.Where(x => x.FileState == FileInfo.State.New).ToList();
+            if (changedFiles.Any())
+            {
+                var f = changedFiles.First();
+                Assert.Fail(string.Concat(f.PrevContent.Intersect(f.Content).Select(c => ((int)c).ToString()).Join(", ")));
+            }
+        }
 
         private static void ShouldBeNoNewAndModifiedFiles(IReadOnlyCollection<FileInfo> generatedFiles)
         {

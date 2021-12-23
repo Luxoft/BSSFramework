@@ -12,7 +12,8 @@ on:
 jobs:
   build:
 
-    runs-on: windows-latest
+    #runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - run: git config --global core.autocrlf true
@@ -25,7 +26,7 @@ jobs:
 
     - name: Set up SqlServer
       run: |
-        docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=P@ssw0rd" -e "MSSQL_PID=Express" -p 1433:1433 -d --name sqlexpress microsoft/mssql-server-windows-developer;
+        docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=P@ssw0rd" -e "MSSQL_PID=Express" -p 1433:1433 -d --name sqlexpress mcr.microsoft.com/mssql/server:2019-latest;
 
     - name: Restore dependencies
       working-directory: ./src
@@ -36,18 +37,22 @@ jobs:
       run: |
         dotnet build src/IAD.Framework.sln --no-restore
 
-    - name: Check Generation
+    - name: Integration Tests
       run: |
-        dotnet test src/Framework.Generation.Tests/Framework.Generation.Tests.csproj --no-build --verbosity normal
+        dotnet test src/_SampleSystem/_Tests/SampleSystem.IntegrationTests --no-build --verbosity normal
+
+    # - name: Check Generation
+    #   run: |
+    #     dotnet test src/Framework.Generation.Tests/Framework.Generation.Tests.csproj --no-build --verbosity normal
     
-    - name: Unit tests
-      run: |
-        dotnet test src/Framework.Core.Tests.Unit --no-build --verbosity normal
-        dotnet test src/Framework.OData.Tests.Unit --no-build --verbosity normal
-        dotnet test src/Framework.SecuritySystem.DiTests --no-build --verbosity normal
-        dotnet test src/Framework.Validation.Tests.Unit --no-build --verbosity normal
-        dotnet test src/_Configuration/Framework.Configuration.BLL.Core.Tests.Unit --no-build --verbosity normal
-        dotnet test src/_Configuration/Framework.Configuration.Core.Tests.Unit --no-build --verbosity normal
-        dotnet test src/_Configuration/Framework.Configuration.SubscriptionModeling.Tests.Unit --no-build --verbosity normal
-        dotnet test src/_DomainDriven/Framework.DomainDriven.ServiceModel.Tests.Unit --no-build --verbosity normal
-        dotnet test src/_DomainDriven/Framework.DomainDriven.DBGenerator.Tests.Unit --no-build --verbosity normal
+    # - name: Unit tests
+    #   run: |
+    #     dotnet test src/Framework.Core.Tests.Unit --no-build --verbosity normal
+    #     dotnet test src/Framework.OData.Tests.Unit --no-build --verbosity normal
+    #     dotnet test src/Framework.SecuritySystem.DiTests --no-build --verbosity normal
+    #     dotnet test src/Framework.Validation.Tests.Unit --no-build --verbosity normal
+    #     dotnet test src/_Configuration/Framework.Configuration.BLL.Core.Tests.Unit --no-build --verbosity normal
+    #     dotnet test src/_Configuration/Framework.Configuration.Core.Tests.Unit --no-build --verbosity normal
+    #     dotnet test src/_Configuration/Framework.Configuration.SubscriptionModeling.Tests.Unit --no-build --verbosity normal
+    #     dotnet test src/_DomainDriven/Framework.DomainDriven.ServiceModel.Tests.Unit --no-build --verbosity normal
+    #     dotnet test src/_DomainDriven/Framework.DomainDriven.DBGenerator.Tests.Unit --no-build --verbosity normal

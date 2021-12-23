@@ -224,7 +224,7 @@ namespace Framework.Core.Tests.Unit
         [TestCase(5, 2015, 5, 2015, "xh-ZA", ExpectedResult = "05-15-05-15")]
 
         [TestCase(5, 2014, 5, 2016, "ru-RU", ExpectedResult = "15.05.2014-15.05.2016")]
-        [TestCase(5, 2014, 5, 2016, "en-US", ExpectedResult = "15-May-14-15-May-16")]
+        [TestCase(5, 2014, 5, 2016, "en-US", ExpectedResult = "5/15/2014-5/15/2016")]
         [TestCase(5, 2014, 5, 2016, "ro-RO", ExpectedResult = "15.05.2014-15.05.2016")]
         [TestCase(5, 2014, 5, 2016, "fr-CH", ExpectedResult = "15.05.2014-15.05.2016")]
         [TestCase(5, 2014, 5, 2016, "pl-PL", ExpectedResult = "15.05.2014-15.05.2016")]

@@ -48,6 +48,7 @@ namespace SampleSystem.DbGenerate
                 DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnTargetDatabase,
                 ICollection<string> ignoredIndexes = null,
                 bool skipFrameworkDatabases = false,
+                UserCredential credential = null,
                 params string[] migrationScriptFolderPaths)
         {
             if (!skipFrameworkDatabases)
@@ -58,7 +59,8 @@ namespace SampleSystem.DbGenerate
                                                    new DatabaseName(mainDatabaseName, "auth").ToDefaultAudit(),
                                                    this.userAuthenticationService,
                                                    mode,
-                                                   true);
+                                                   true,
+                                                   credential);
 
                 this.GenerateConfigurationDatabase(
                                                    serverName,
@@ -66,7 +68,8 @@ namespace SampleSystem.DbGenerate
                                                    new DatabaseName(mainDatabaseName, "configuration").ToDefaultAudit(),
                                                    this.userAuthenticationService,
                                                    mode,
-                                                   true);
+                                                   true,
+                                                   credential);
 
                 this.GenerateWorkflowDatabase(
                                               serverName,
@@ -74,7 +77,8 @@ namespace SampleSystem.DbGenerate
                                               new DatabaseName(mainDatabaseName, "workflow").ToDefaultAudit(),
                                               this.userAuthenticationService,
                                               mode,
-                                              false);
+                                              false,
+                                              credential);
             }
 
             var result = this.GenerateSampleSystemDB(
@@ -86,7 +90,8 @@ namespace SampleSystem.DbGenerate
                                                      generatorMode: generatorMode,
                                                      migrationScriptFolderPaths: migrationScriptFolderPaths,
                                                      preserveSchemaDatabase: true,
-                                                     ignoredIndexes: ignoredIndexes);
+                                                     ignoredIndexes: ignoredIndexes,
+                                                     credential: credential);
 
             return result;
         }
@@ -101,7 +106,8 @@ namespace SampleSystem.DbGenerate
                 IEnumerable<string> migrationScriptFolderPaths = null,
                 IEnumerable<string> auditMigrationScriptFolderPaths = null,
                 bool preserveSchemaDatabase = false,
-                ICollection<string> ignoredIndexes = null)
+                ICollection<string> ignoredIndexes = null,
+                UserCredential credential = null)
         {
             var generator = new SampleSystemDBGenerator(this.GetMappingSettings(serverName, databaseName, auditDatabaseName));
 
@@ -113,7 +119,8 @@ namespace SampleSystem.DbGenerate
                                             migrationScriptFolderPaths: migrationScriptFolderPaths,
                                             auditMigrationScriptFolderPaths: auditMigrationScriptFolderPaths,
                                             preserveSchemaDatabase: preserveSchemaDatabase,
-                                            ignoredIndexes: ignoredIndexes);
+                                            ignoredIndexes: ignoredIndexes,
+                                            credentials: credential);
 
             var lines = result.ToNewLinesCombined();
             return lines;
@@ -125,7 +132,8 @@ namespace SampleSystem.DbGenerate
                 AuditDatabaseName auditDatabaseName,
                 IUserAuthenticationService userAuthenticationService,
                 DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnCopySchemeDatabase,
-                bool preserveSchemaDatabase = false)
+                bool preserveSchemaDatabase = false,
+                UserCredential credential = null)
         {
             string[] migrationScriptFolderPaths = null;
 
@@ -139,7 +147,8 @@ namespace SampleSystem.DbGenerate
                                 userAuthenticationService,
                                 migrationScriptFolderPaths: migrationScriptFolderPaths,
                                 mode: mode,
-                                preserveSchemaDatabase: preserveSchemaDatabase);
+                                preserveSchemaDatabase: preserveSchemaDatabase,
+                                credentials: credential);
 
             var lines = resultScript;
             Console.WriteLine("------ end Utilities");
@@ -152,7 +161,8 @@ namespace SampleSystem.DbGenerate
                 AuditDatabaseName auditDatabaseName,
                 IUserAuthenticationService userAuthenticationService,
                 DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnCopySchemeDatabase,
-                bool preserveSchemaDatabase = false)
+                bool preserveSchemaDatabase = false,
+                UserCredential credential = null)
         {
             string[] migrationScriptFolderPaths = null;
 
@@ -165,7 +175,8 @@ namespace SampleSystem.DbGenerate
              mode: mode,
              generatorMode: DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript
                             | DatabaseScriptGeneratorMode.RemoveObsoleteColumns,
-             preserveSchemaDatabase: preserveSchemaDatabase);
+             preserveSchemaDatabase: preserveSchemaDatabase,
+             credentials: credential);
 
             Console.WriteLine(result);
         }
@@ -176,7 +187,8 @@ namespace SampleSystem.DbGenerate
                 AuditDatabaseName auditDatabaseName,
                 IUserAuthenticationService userAuthenticationService,
                 DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnCopySchemeDatabase,
-                bool preserveSchemaDatabase = false)
+                bool preserveSchemaDatabase = false,
+                UserCredential credential = null)
         {
             string[] migrationScriptFolderPaths = null;
             var result = new Framework.Authorization.TestGenerate.ServerGenerators().GenerateDB(
@@ -186,7 +198,8 @@ namespace SampleSystem.DbGenerate
              userAuthenticationService,
              migrationScriptFolderPaths: migrationScriptFolderPaths,
              mode: mode,
-             preserveSchemaDatabase: preserveSchemaDatabase);
+             preserveSchemaDatabase: preserveSchemaDatabase,
+             credentials: credential);
 
             Console.WriteLine(result);
         }
@@ -199,7 +212,7 @@ namespace SampleSystem.DbGenerate
                                                    initMappingAction,
                                                    dbName,
                                                    dbAuditName,
-                                                   $"Data Source={serverName};Initial Catalog={dbName.Name};Integrated Security=True;Application Name=SampleSystem");
+                                                   $"Data Source={serverName};Initial Catalog={dbName.Name};Application Name=SampleSystem");
         }
     }
 }

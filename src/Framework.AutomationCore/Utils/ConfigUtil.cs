@@ -14,14 +14,12 @@ namespace Automation.Utils
         private static readonly Lazy<string> DataDirectory = new Lazy<string>(
             () =>
             {
-                return "/";
-
-                if (!Directory.Exists(Path.Combine(ServerRootFolder.Value, "DATA")))
+                if (!Directory.Exists(Path.Combine(ServerRootFolder.Value, "data")))
                 {
-                    Directory.CreateDirectory(Path.Combine(ServerRootFolder.Value, "DATA"));
+                    Directory.CreateDirectory(Path.Combine(ServerRootFolder.Value, "data"));
                 }
 
-                return Path.Combine(ServerRootFolder.Value, "DATA");
+                return Path.Combine(ServerRootFolder.Value, "data");
             });
 
         private static readonly Lazy<string> ServerRootFolder = new Lazy<string>(() => AppSettings.Default["TestRunServerRootFolder"]);

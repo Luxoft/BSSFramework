@@ -26,9 +26,8 @@ jobs:
 
     - name: Set up SqlServer
       run: |
-        docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=P@ssw0rd" -e "MSSQL_PID=Express" -p 1433:1433 -d --name sqlexpress mcr.microsoft.com/mssql/server:2019-latest;
-
-#-v /var/opt/mssql/data:/var/opt/mssql/data
+        mkdir /var/opt/mssql/data
+        docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=P@ssw0rd" -e "MSSQL_PID=Express" -v /var/opt/mssql/data:/var/opt/mssql/data -p 1433:1433 -d --name sqlexpress mcr.microsoft.com/mssql/server:2019-latest;
 
     - name: Restore dependencies
       working-directory: ./src

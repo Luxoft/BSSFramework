@@ -65,7 +65,7 @@ namespace Automation.Utils
             {
                 var srv = ServerLazy.Value;
 
-                srv.Refresh();
+                //srv.Refresh();
 
                 return srv;
             }

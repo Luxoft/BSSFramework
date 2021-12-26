@@ -14,6 +14,8 @@ namespace Automation.Utils
         private static readonly Lazy<string> DataDirectory = new Lazy<string>(
             () =>
             {
+                return string.Empty;
+
                 if (!Directory.Exists(Path.Combine(ServerRootFolder.Value, "DATA")))
                 {
                     Directory.CreateDirectory(Path.Combine(ServerRootFolder.Value, "DATA"));

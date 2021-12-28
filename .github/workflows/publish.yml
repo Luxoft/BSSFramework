@@ -17,6 +17,11 @@ jobs:
       with:
         dotnet-version: 6.0.x
   
+    - id: get_version
+      uses: battila7/get-version-action@v2
+
+    - run: echo ${{ steps.get_version.outputs.version-without-v }}
+
     - name: Restore dependencies
       working-directory: ./src
       run: |

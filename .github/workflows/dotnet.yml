@@ -26,15 +26,6 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
-    - uses: aarnott/nbgv@v0.3 # https://github.com/AArnott/nbgv
-      id: nbgv
-
-    - name: Versioning
-      run: |
-        echo ${{ steps.nbgv.outputs.SemVer2 }}
-        echo ${{ steps.nbgv.outputs.AssemblyVersion }}
-
-
     - name: Restore dependencies
       working-directory: ./src
       run: |

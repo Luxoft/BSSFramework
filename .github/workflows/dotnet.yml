@@ -20,6 +20,15 @@ jobs:
     - run: git config --global core.autocrlf true
     - uses: actions/checkout@v2
 
+    - uses: aarnott/nbgv@v0.3 # https://github.com/AArnott/nbgv
+      id: nbgv
+
+    - name: Versioning
+      run: |
+        echo ${{ steps.nbgv.outputs.SemVer2 }}
+        echo ${{ steps.nbgv.outputs.AssemblyVersion }}
+        
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:

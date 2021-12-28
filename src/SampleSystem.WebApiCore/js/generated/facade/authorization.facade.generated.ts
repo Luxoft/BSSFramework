@@ -18,8 +18,8 @@ import { Core } from 'luxite/framework/framework';
 import * as dto from '../dto/authorization.generated';
 import * as mockdto from '../../mocked-dto';
 
-export let getCurrentPrincipalAsyncFunc = _getCurrentPrincipal(); 
-export let getSecurityOperationsAsyncFunc = _getSecurityOperations(); 
+export let getCurrentPrincipalAsyncFunc = _getCurrentPrincipal();
+export let getSecurityOperationsAsyncFunc = _getSecurityOperations();
 
 function _getCurrentPrincipal(): async.AsyncFunc2<dto.PrincipalFullDTO, dto.PrincipalObservableFullDTO, dto.PrincipalFullDTO, dto.PrincipalObservableFullDTO> {
     return new async.AsyncFunc2(() => {

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-  <IsPackable>false</IsPackable>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="FluentMigrator" Version="3.3.1" />
@@ -24,10 +24,9 @@
     <ProjectReference Include="..\..\..\SampleSystem.WebApiCore\SampleSystem.WebApiCore.csproj" />
     <ProjectReference Include="..\SampleSystem.DbGenerate\SampleSystem.DbGenerate.csproj" />
   </ItemGroup>
-  <Target Name="Foo" AfterTargets="Build">
-    <ItemGroup>
-      <SharedConfigs Include="..\..\_Configs\*.json;" />
-    </ItemGroup>
-    <Copy SourceFiles="@(SharedConfigs)" DestinationFolder="$(OutputPath)" />
-  </Target>
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

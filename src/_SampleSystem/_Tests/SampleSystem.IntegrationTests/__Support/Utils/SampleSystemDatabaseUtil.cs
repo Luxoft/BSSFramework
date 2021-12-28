@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Automation.Utils;
 using Automation.Utils.Utils.DatabaseUtils;
 
+using Framework.DomainDriven.DBGenerator;
+
 using SampleSystem.DbGenerate;
 using SampleSystem.DbMigrator;
 using SampleSystem.IntegrationTests.__Support;
@@ -18,9 +20,12 @@ namespace SampleSystem.IntegrationTests.Support.Utils
 
         public new ConnectionSettings ConnectionSettings => base.ConnectionSettings;
 
-        public override void GenerateDatabases() =>
+        public override void GenerateDatabases()
+        {
             new DbGeneratorTest().GenerateAllDB(
-                this.ConnectionSettings.DataSource);
+                                                this.ConnectionSettings.DataSource,
+                                                credential: UserCredential.Create(this.ConnectionSettings.UserId,this.ConnectionSettings.Password));
+        }
 
         public override void CheckTestDatabase()
         {

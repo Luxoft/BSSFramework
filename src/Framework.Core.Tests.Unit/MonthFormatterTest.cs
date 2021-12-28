@@ -23,10 +23,10 @@ namespace Framework.Core.Tests.Unit
             return actualResult;
         }
 
-        [TestCase(2015, 1, ExpectedResult = "январь 2015 г.")]
-        [TestCase(2025, 5, ExpectedResult = "май 2025 г.")]
-        [TestCase(200, 12, ExpectedResult = "декабрь 200 г.")]
-        [TestCase(3015, 3, ExpectedResult = "март 3015 г.")]
+        [TestCase(2015, 1, ExpectedResult = "Январь 2015 г.")]
+        [TestCase(2025, 5, ExpectedResult = "Май 2025 г.")]
+        [TestCase(200, 12, ExpectedResult = "Декабрь 200 г.")]
+        [TestCase(3015, 3, ExpectedResult = "Март 3015 г.")]
         public string GetMonthAndYearStrRus_AnyCorrectDate_StringInNominative(int year, int month)
         {
             // Arrange

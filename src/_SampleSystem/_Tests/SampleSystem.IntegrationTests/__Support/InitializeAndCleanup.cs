@@ -8,6 +8,8 @@ using SampleSystem.IntegrationTests.__Support.Utils.Framework;
 using Automation;
 using Automation.Utils;
 
+using Microsoft.Extensions.Configuration;
+
 using SampleSystem.IntegrationTests.Support.Utils;
 
 namespace SampleSystem.IntegrationTests.__Support
@@ -20,6 +22,7 @@ namespace SampleSystem.IntegrationTests.__Support
         [AssemblyInitialize]
         public static void EnvironmentInitialize(TestContext testContext)
         {
+
             AppSettings.Initialize();
 
             DatabaseUtil = new SampleSystemDatabaseUtil();

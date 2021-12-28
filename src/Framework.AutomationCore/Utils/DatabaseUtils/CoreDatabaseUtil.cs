@@ -218,6 +218,9 @@ namespace Automation.Utils
         {
             DetachDatabase();
 
+            Console.WriteLine(SourceDataPath);
+            Console.WriteLine(CopyDataPath);
+
             new FileInfo(SourceDataPath).CopyTo(CopyDataPath, true);
             new FileInfo(SourceLogPath).CopyTo(CopyLogPath, true);
         }

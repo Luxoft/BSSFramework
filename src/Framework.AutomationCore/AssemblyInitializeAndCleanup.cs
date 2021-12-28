@@ -27,7 +27,7 @@ namespace Automation
         {
             RunAction("Create new localdb instance if UseLocalDb = true", CoreDatabaseUtil.CreateLocalDb);
 
-            RunAction("Check Server Name in allowed list", baseDatabaseUtil.CheckServerAllowed);
+            //RunAction("Check Server Name in allowed list", baseDatabaseUtil.CheckServerAllowed);
 
             switch (ConfigUtil.TestRunMode)
             {

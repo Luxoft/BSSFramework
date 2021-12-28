@@ -18,22 +18,22 @@ import { Core } from 'luxite/framework/framework';
 import * as dto from 'luxite/report-generation/dto/all';
 import { Stream } from '../../mocked-system';
 
-export let doHealthCheckAsyncFunc = _doHealthCheck(); 
-export let getReportParameterValuePositionAsyncFunc = _getReportParameterValuePosition(); 
-export let getReportParameterValuePositionByTypeNameAsyncFunc = _getReportParameterValuePositionByTypeName(); 
-export let getReportParameterValuePositionsAsyncFunc = _getReportParameterValuePositions(); 
-export let getReportParameterValuePositionsByTypeNameAsyncFunc = _getReportParameterValuePositionsByTypeName(); 
-export let getRichReportAsyncFunc = _getRichReport(); 
-export let getRichReportGenerationRequestModelAsyncFunc = _getRichReportGenerationRequestModel(); 
-export let getSimpleReportFiltersAsyncFunc = _getSimpleReportFilters(); 
-export let getSimpleReportParametersAsyncFunc = _getSimpleReportParameters(); 
-export let getSimpleReportParameterValuesAsyncFunc = _getSimpleReportParameterValues(); 
-export let getSimpleReportParameterValuesByTypeNameAsyncFunc = _getSimpleReportParameterValuesByTypeName(); 
-export let getSimpleReportPropertiesAsyncFunc = _getSimpleReportProperties(); 
-export let getSimpleReportsAsyncFunc = _getSimpleReports(); 
-export let getTypeMetadatasAsyncFunc = _getTypeMetadatas(); 
-export let removeReportAsyncFunc = _removeReport(); 
-export let saveReportAsyncFunc = _saveReport(); 
+export let doHealthCheckAsyncFunc = _doHealthCheck();
+export let getReportParameterValuePositionAsyncFunc = _getReportParameterValuePosition();
+export let getReportParameterValuePositionByTypeNameAsyncFunc = _getReportParameterValuePositionByTypeName();
+export let getReportParameterValuePositionsAsyncFunc = _getReportParameterValuePositions();
+export let getReportParameterValuePositionsByTypeNameAsyncFunc = _getReportParameterValuePositionsByTypeName();
+export let getRichReportAsyncFunc = _getRichReport();
+export let getRichReportGenerationRequestModelAsyncFunc = _getRichReportGenerationRequestModel();
+export let getSimpleReportFiltersAsyncFunc = _getSimpleReportFilters();
+export let getSimpleReportParametersAsyncFunc = _getSimpleReportParameters();
+export let getSimpleReportParameterValuesAsyncFunc = _getSimpleReportParameterValues();
+export let getSimpleReportParameterValuesByTypeNameAsyncFunc = _getSimpleReportParameterValuesByTypeName();
+export let getSimpleReportPropertiesAsyncFunc = _getSimpleReportProperties();
+export let getSimpleReportsAsyncFunc = _getSimpleReports();
+export let getTypeMetadatasAsyncFunc = _getTypeMetadatas();
+export let removeReportAsyncFunc = _removeReport();
+export let saveReportAsyncFunc = _saveReport();
 
 function _doHealthCheck(): async.SimpleAsyncFunc1<string> {
     return new async.SimpleAsyncFunc1(() => {

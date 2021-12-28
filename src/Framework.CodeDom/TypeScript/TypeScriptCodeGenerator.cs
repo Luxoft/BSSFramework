@@ -2090,7 +2090,7 @@ namespace Framework.CodeDom.TypeScript
                     (!this.IsSurrogateStart(chars[i]) || !this.IsSurrogateEnd(chars[i + 1])))
                 {
                     nextBreak = i + MaxLineLength;
-                    b.Append("' + \r\n'"); //???
+                    b.Append($"' + {Environment.NewLine}'"); //???
                 }
             }
 

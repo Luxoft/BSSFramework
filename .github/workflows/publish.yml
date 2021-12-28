@@ -1,0 +1,48 @@
+name: Publish to Nuget
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump env
+        run: env | sort
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Test
+        run: echo ${{ github.event.release.tag_name }}
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+  
+    - name: Restore dependencies
+      working-directory: ./src
+      run: |
+        dotnet restore
+
+    - name: Build and Pack
+      working-directory: ./src
+      run: |
+        dotnet pack src/IAD.Framework.sln --no-restore /p:PackageVersion=15.0.0 -c Release -o out
+
+    # - name: Publish
+    #   working-directory: ./src/out
+    #   run: |
+    #     dotnet nuget push *.nupkg -s https://api.nuget.org/v3/index.json --api-key ${NUGET_TOKEN}
+    #   env:
+    #     NUGET_TOKEN: ${{ secrets.NUGET_BSSFRAMEWORK }}

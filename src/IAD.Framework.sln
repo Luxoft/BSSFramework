@@ -30,7 +30,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__SolutionItems", "__SolutionItems", "{9DC208F7-EDAD-4BBE-A9BC-F4841F3185B0}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		..\docs\source\changelog.rst = ..\docs\source\changelog.rst
 		__SolutionItems\CommonAssemblyInfo.cs = __SolutionItems\CommonAssemblyInfo.cs
 		Settings.StyleCop = Settings.StyleCop
 		tfs.runsettings = tfs.runsettings

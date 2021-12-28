@@ -1,3 +1,6 @@
+[![license](https://img.shields.io/github/license/luxoft/BSSFramework)](https://github.com/Luxoft/BSSFramework/blob/main/LICENSE.txt)
+
+
 # BSS Framework
 Platform for rapid software development
 
@@ -19,9 +22,3 @@ Features:
     - TypeScript Generation
 - **Unit Testing**
 - **Integration Testing**
-
-
-# Peoples
-
-
-# Links

@@ -32,7 +32,6 @@ jobs:
         dotnet restore
 
     - name: Build
-      working-directory: ./src
       run: |
         dotnet build src/IAD.Framework.sln --no-restore
 

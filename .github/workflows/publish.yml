@@ -5,19 +5,6 @@ on:
     types: [published]
 
 jobs:
-  debug:
-    name: Debug
-    runs-on: ubuntu-latest
-    steps:
-      - name: Dump env
-        run: env | sort
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: Test
-        run: echo ${{ github.event.release.tag_name }}
-
   build:
 
     runs-on: ubuntu-latest
@@ -30,6 +17,11 @@ jobs:
       with:
         dotnet-version: 6.0.x
   
+    - id: get_version
+      uses: battila7/get-version-action@v2
+
+    - run: echo ${{ steps.get_version.outputs.version-without-v }}
+
     - name: Restore dependencies
       working-directory: ./src
       run: |
@@ -38,7 +30,7 @@ jobs:
     - name: Build and Pack
       working-directory: ./src
       run: |
-        dotnet pack src/IAD.Framework.sln --no-restore /p:PackageVersion=15.0.0 -c Release -o out
+        dotnet pack IAD.Framework.sln --no-restore /p:PackageVersion=${{ github.event.release.tag_name }} -c Release -o out
 
     # - name: Publish
     #   working-directory: ./src/out

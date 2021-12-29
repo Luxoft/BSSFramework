@@ -84,7 +84,7 @@ jobs:
 
     - name: Integration Tests
       run: |           
-        dotnet test src/_SampleSystem/_Tests/SampleSystem.IntegrationTests --no-build --verbosity normal;
+        dotnet test --blame src/_SampleSystem/_Tests/SampleSystem.IntegrationTests --no-build --verbosity normal;
         
 
     # - name: Check Generation

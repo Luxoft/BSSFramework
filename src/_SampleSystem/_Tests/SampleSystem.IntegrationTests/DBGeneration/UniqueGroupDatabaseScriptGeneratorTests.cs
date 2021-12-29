@@ -7,6 +7,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.DbGenerate;
+using SampleSystem.IntegrationTests.__Support;
+using Framework.DomainDriven.DBGenerator;
 
 namespace SampleSystem.IntegrationTests.DBGeneration
 {
@@ -38,7 +40,7 @@ namespace SampleSystem.IntegrationTests.DBGeneration
             newIndex.Create();
 
             // Act
-            generator.GenerateAllDB(this.DefaultDatabaseServer, this.DatabaseName, skipFrameworkDatabases: true);
+            generator.GenerateAllDB(InitializeAndCleanup.DatabaseUtil.ConnectionSettings.DataSource, credential: UserCredential.Create(InitializeAndCleanup.DatabaseUtil.ConnectionSettings.UserId, InitializeAndCleanup.DatabaseUtil.ConnectionSettings.Password), skipFrameworkDatabases: true);
             var changedTable = this.DataHelper.GetTable(this.DefaultDatabaseServer, this.DatabaseName, tableName);
             var indexes = changedTable.Indexes.Cast<Index>().ToList();
 

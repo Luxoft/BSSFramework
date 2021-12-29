@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.DbGenerate;
+using Automation.Utils;
 
 namespace SampleSystem.IntegrationTests.DBGeneration
 {
@@ -16,12 +17,10 @@ namespace SampleSystem.IntegrationTests.DBGeneration
         public void SchemeUpdate_ExistsDatabase_ShouldNotFail()
         {
             // Arrange
-            var connectionString =
-                    $"Data Source={this.DefaultDatabaseServer};Initial Catalog={this.DatabaseName};Integrated Security=True;Application Name=SampleSystem";
             var generator = new UseSchemeUpdateTest();
 
             // Act
-            var action = new Action(() => UseSchemeUpdateTest.UseSchemeUpdate(connectionString));
+            var action = new Action(() => UseSchemeUpdateTest.UseSchemeUpdate(AppSettings.Default["ConnectionStrings"]));
 
             // Assert
             action.Should().NotThrow();

@@ -85,7 +85,7 @@ namespace SampleSystem.IntegrationTests.Subscriptions_Metadata
         {
             // Arrange
             var employee = this.CreateEmployee();
-            var message = "<h2>Hi there!!!</h2>\nMy test employee Name:  John Doe \nDate: 21 Oct 2015";
+            var message = $"<h2>Hi there!!!</h2>{System.Environment.NewLine}My test employee Name:  John Doe {System.Environment.NewLine}Date: 21 Oct 2015";
 
             // Act
             var results = this.DataHelper.ProcessChangedObjectUntyped(typeof(Employee), employee, employee);

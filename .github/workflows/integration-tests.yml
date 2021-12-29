@@ -1,0 +1,45 @@
+name: Integration tests
+
+on:
+  push:
+    branches: 
+      - 'main'
+  pull_request:
+    branches: [ main ]
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - run: git config --global core.autocrlf true
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Set up SqlServer
+      run: |
+        sudo mkdir -p /var/opt/mssql/data;
+        sudo chmod -R 777 /var/opt/mssql/data;
+        sudo chown $(id -u ${USER}) /var/opt/mssql/data;
+        sudo docker run -u $(id -u ${USER}) -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=P@ssw0rd" -e "MSSQL_PID=Express" -v /var/opt/mssql/data:/var/opt/mssql/data -p 1433:1433 -d --name sqlexpress mcr.microsoft.com/mssql/server:2019-latest;
+
+    - name: Restore dependencies
+      working-directory: ./src
+      run: |
+        dotnet restore
+
+    - name: Build
+      working-directory: ./src
+      run: |
+        dotnet build ./IAD.Framework.sln --no-restore
+
+    - name: Integration Tests
+      run: |           
+        dotnet test --blame src/_SampleSystem/_Tests/SampleSystem.IntegrationTests --no-build --verbosity normal;

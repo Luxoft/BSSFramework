@@ -48,6 +48,8 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
             this.SetCurrentDateTime(DateTime.Now);
             this.DataHelper = new DataHelper();
             this.AuthHelper = new AuthHelper();
+
+            // Workaround for System.Drawing.Common problem https://chowdera.com/2021/12/202112240234238356.html
             System.AppContext.SetSwitch("System.Drawing.EnableUnixSupport", true);
         }
 

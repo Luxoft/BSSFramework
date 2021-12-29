@@ -5,6 +5,8 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.DbGenerate;
+using Framework.DomainDriven.DBGenerator;
+using SampleSystem.IntegrationTests.__Support;
 
 namespace SampleSystem.IntegrationTests.DBGeneration
 {
@@ -18,7 +20,9 @@ namespace SampleSystem.IntegrationTests.DBGeneration
             var generator = new DbGeneratorTest();
 
             // Act
-            var action = new Action(() => generator.GenerateAllDB(this.DefaultDatabaseServer, this.DatabaseName));
+            var action = new Action(() => generator.GenerateAllDB(
+                                                InitializeAndCleanup.DatabaseUtil.ConnectionSettings.DataSource,
+                                                credential: UserCredential.Create(InitializeAndCleanup.DatabaseUtil.ConnectionSettings.UserId, InitializeAndCleanup.DatabaseUtil.ConnectionSettings.Password)));
 
             // Assert
             action.Should().NotThrow();

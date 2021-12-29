@@ -48,6 +48,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
             this.SetCurrentDateTime(DateTime.Now);
             this.DataHelper = new DataHelper();
             this.AuthHelper = new AuthHelper();
+            System.AppContext.SetSwitch("System.Drawing.EnableUnixSupport", true);
         }
 
         protected TestServiceEnvironment Environment => EnvironmentLazy.Value;

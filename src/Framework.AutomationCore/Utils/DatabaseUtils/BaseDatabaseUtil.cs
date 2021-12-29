@@ -31,7 +31,7 @@ namespace Automation.Utils
         public virtual void DropDatabase() => CoreDatabaseUtil.Drop();
 
         public virtual void ExecuteInsertsForDatabases() =>
-            CoreDatabaseUtil.ExecuteSqlFromFolder(@"__Support\Scripts", CoreDatabaseUtil.DatabaseName);
+            CoreDatabaseUtil.ExecuteSqlFromFolder(@"__Support/Scripts", CoreDatabaseUtil.DatabaseName);
 
         public void DropAllDatabases()
         {

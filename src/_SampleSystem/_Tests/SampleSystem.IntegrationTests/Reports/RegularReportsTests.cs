@@ -1020,7 +1020,7 @@ namespace SampleSystem.IntegrationTests.Reports
             nameEng.GetType().Should().Be(typeof(string));
             nameNative.GetType().Should().Be(typeof(string));
             hireDateCell.Value.Should().BeNull();
-            hireDateCell.Formula.Should().Be("=CONCATENATE(MONTH(VALUE(02.01.2010 0:00:00)), \"-\", YEAR(VALUE(02.01.2010 0:00:00)))");
+            hireDateCell.Formula.Should().Be($"=CONCATENATE(MONTH(VALUE({new DateTime(2010, 1, 2)})), \"-\", YEAR(VALUE({new DateTime(2010, 1, 2)})))");
         }
 
         [TestMethod]

@@ -19,11 +19,13 @@ namespace Framework.DomainDriven.NHibernate
     public class WriteNHibSession : NHibSession
     {
         private readonly ISet<ObjectModification> modifiedObjectsFromLogic = new HashSet<ObjectModification>();
+
         private readonly CollectChangesEventListener collectChangedEventListener;
+
         private bool manualFault;
 
         internal WriteNHibSession(NHibSessionFactory sessionFactory)
-            : base(sessionFactory, DBSessionMode.Write)
+                : base(sessionFactory, DBSessionMode.Write)
         {
             this.SessionFactory = sessionFactory ?? throw new ArgumentNullException(nameof(sessionFactory));
 
@@ -34,10 +36,12 @@ namespace Framework.DomainDriven.NHibernate
         {
             var result = new EventListeners();
 
-            result.PostDeleteEventListeners = source.PostDeleteEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
-            result.PostUpdateEventListeners = source.PostUpdateEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
-            result.PostInsertEventListeners = source.PostInsertEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
-
+            result.PostDeleteEventListeners =
+                    source.PostDeleteEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
+            result.PostUpdateEventListeners =
+                    source.PostUpdateEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
+            result.PostInsertEventListeners =
+                    source.PostInsertEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
 
             result.LoadEventListeners = source.LoadEventListeners;
             result.SaveOrUpdateEventListeners = source.SaveOrUpdateEventListeners;
@@ -81,7 +85,8 @@ namespace Framework.DomainDriven.NHibernate
 
         public override IEnumerable<ObjectModification> GetModifiedObjectsFromLogic<TPersistentDomainObjectBase>()
         {
-            return this.GetModifiedObjectsFromLogic().Where(obj => typeof(TPersistentDomainObjectBase).IsAssignableFrom(obj.ObjectType));
+            return this.GetModifiedObjectsFromLogic()
+                       .Where(obj => typeof(TPersistentDomainObjectBase).IsAssignableFrom(obj.ObjectType));
         }
 
         public override void ManualFault()
@@ -95,40 +100,21 @@ namespace Framework.DomainDriven.NHibernate
             {
                 TResult result;
 
-                using (var scope = this.CreateTransactionScope())
+                if (this.SessionFactory.EnableTransactionScope)
                 {
-                    using (this.InnerSession = this.SessionFactory.InternalSessionFactory.OpenSession().Self(z => z.FlushMode = FlushMode.Never))
+                    using (var scope = this.CreateTransactionScope())
                     {
-                        using (var currentTransaction = this.InnerSession.BeginTransaction())
+                        result = this.EvaluateInternal(getResult);
+
+                        if (!this.manualFault)
                         {
-                            this.SessionFactory.ProcessTransaction(GetDbTransaction(currentTransaction, this.InnerSession));
-
-                            this.InnerSessionConfigure();
-
-                            result = getResult(this);
-
-                            if (this.manualFault)
-                            {
-                                if (!currentTransaction.WasRolledBack)
-                                {
-                                    currentTransaction.Rollback();
-                                }
-                            }
-                            else
-                            {
-                                this.Flush(true);
-
-                                currentTransaction.Commit();
-                            }
-
-                            this.OnClosed(EventArgs.Empty);
+                            scope.Complete();
                         }
                     }
-
-                    if (!this.manualFault)
-                    {
-                        scope.Complete();
-                    }
+                }
+                else
+                {
+                    result = this.EvaluateInternal(getResult);
                 }
 
                 return result;
@@ -139,6 +125,41 @@ namespace Framework.DomainDriven.NHibernate
                 this.ClearFlushed();
                 this.ClearTransactionCompleted();
             }
+        }
+
+        protected virtual TResult EvaluateInternal<TResult>(Func<IDBSession, TResult> getResult)
+        {
+            TResult result;
+            using (this.InnerSession =
+                           this.SessionFactory.InternalSessionFactory.OpenSession().Self(z => z.FlushMode = FlushMode.Never))
+            {
+                using (var currentTransaction = this.InnerSession.BeginTransaction())
+                {
+                    this.SessionFactory.ProcessTransaction(GetDbTransaction(currentTransaction, this.InnerSession));
+
+                    this.InnerSessionConfigure();
+
+                    result = getResult(this);
+
+                    if (this.manualFault)
+                    {
+                        if (!currentTransaction.WasRolledBack)
+                        {
+                            currentTransaction.Rollback();
+                        }
+                    }
+                    else
+                    {
+                        this.Flush(true);
+
+                        currentTransaction.Commit();
+                    }
+
+                    this.OnClosed(EventArgs.Empty);
+                }
+            }
+
+            return result;
         }
 
         private static IDbTransaction GetDbTransaction(ITransaction transaction, ISession session)
@@ -160,14 +181,14 @@ namespace Framework.DomainDriven.NHibernate
             sessionImpl.OverrideListeners(this.GetOverrideEventListenersFrom(sessionImplementation.Listeners));
         }
 
-        private TransactionScope CreateTransactionScope()
-        {
-            return new TransactionScope(TransactionScopeOption.Required, new TransactionOptions
-            {
-                Timeout = this.SessionFactory.TransactionTimeout,
-                IsolationLevel = IsolationLevel.Serializable
-            });
-        }
+        private TransactionScope CreateTransactionScope() =>
+                new(
+                    TransactionScopeOption.Required,
+                    new TransactionOptions
+                    {
+                            Timeout = this.SessionFactory.TransactionTimeout,
+                            IsolationLevel = IsolationLevel.Serializable
+                    });
 
         /// <inheritdoc />
         public override void Flush()
@@ -201,8 +222,7 @@ namespace Framework.DomainDriven.NHibernate
 
                         this.OnFlushed(changedEventArgs);
                     }
-                }
-                while (this.HasFlushedListeners);
+                } while (this.HasFlushedListeners);
 
                 if (withTransactionCompleted)
                 {
@@ -212,11 +232,14 @@ namespace Framework.DomainDriven.NHibernate
 
                     this.InnerSession.Flush();
 
-                    var afterTransactionCompletedChangeState = new[] { beforeTransactionCompletedChangeState, this.collectChangedEventListener.EvictChanges() }.Composite();
+                    var afterTransactionCompletedChangeState =
+                            new[] { beforeTransactionCompletedChangeState, this.collectChangedEventListener.EvictChanges() }
+                                    .Composite();
 
                     this.OnAfterTransactionCompleted(new DALChangesEventArgs(afterTransactionCompletedChangeState));
 
-                    this.InnerSession.Flush(); // Флашим для того, чтобы проверить, что никто ничего не менял в объектах после AfterTransactionCompleted-евента
+                    this.InnerSession
+                        .Flush(); // Флашим для того, чтобы проверить, что никто ничего не менял в объектах после AfterTransactionCompleted-евента
 
                     if (this.collectChangedEventListener.HasAny())
                     {

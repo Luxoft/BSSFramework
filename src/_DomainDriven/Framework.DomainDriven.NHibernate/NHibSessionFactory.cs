@@ -178,6 +178,15 @@ namespace Framework.DomainDriven.NHibernate
             // Do nothing
         }
 
+        /// <summary>
+        /// Backward compatibility for TransactionScope
+        /// </summary>
+        public bool EnableTransactionScope
+        {
+            get;
+            set;
+        } = true;
+
         protected internal void OnSessionFlushed([NotNull] SessionFlushedEventArgs e)
         {
             if (e == null) throw new ArgumentNullException(nameof(e));

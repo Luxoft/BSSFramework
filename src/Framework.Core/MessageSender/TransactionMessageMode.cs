@@ -1,4 +1,6 @@
-﻿namespace Framework.Core
+﻿using System;
+
+namespace Framework.Core
 {
     /// <summary>
     /// Константы, определяющие режим отправки сообщений
@@ -13,6 +15,7 @@
         /// <summary>
         /// Use transactionScope
         /// </summary>
+        [Obsolete("Please do not use TransactionScope as legacy API")]
         DTSTransaction,
 
         /// <summary>

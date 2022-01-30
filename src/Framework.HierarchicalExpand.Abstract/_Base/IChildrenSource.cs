@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 
-namespace Framework.Persistent
+namespace Framework.Persistent;
+
+public interface IChildrenSource<out T>
 {
-    public interface IChildrenSource<out T>
+    IEnumerable<T> Children
     {
-        IEnumerable<T> Children { get; }
+        get;
     }
 }

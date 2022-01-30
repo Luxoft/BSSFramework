@@ -1,4 +1,6 @@
-﻿using Framework.Core.Services;
+﻿using System.Transactions;
+
+using Framework.Core.Services;
 
 using Microsoft.AspNetCore.Http;
 
@@ -12,6 +14,6 @@ namespace SampleSystem.WebApiCore.Env
 
         public string GetUserName() => CurrentUser;
 
-        public static string CurrentUser { get; } = "LUXOFT\\Bot";
+        public static string CurrentUser { get; } = $"{System.Environment.UserDomainName}\\{System.Environment.UserName}";
     }
 }

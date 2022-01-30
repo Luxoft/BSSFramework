@@ -83,16 +83,6 @@ namespace Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory.Facade
 
                 var parametersStatement = new CodeVariableDeclarationStatement("const ", "baseParameters", this.GetMethodParametersCollection(methodInfo));
 
-                var realParametersExpr = methodInfo.TryExtractAutoRequestParameter().Select(p =>
-                {
-                    var parametersCollection = new JsObjectCreateExpression();
-
-                    parametersCollection.AddParameter(p.Name, parametersStatement.Name);
-
-                    return (CodeExpression)parametersCollection;
-                }).GetValueOrDefault(() => (CodeExpression)parametersStatement.ToVariableReferenceExpression());
-                var realParametersStatement = new CodeVariableDeclarationStatement("const ", "realParameters", realParametersExpr);
-
                 var varialableStatement = new CodeVariableDeclarationStatement("const ", variable, facadeMethodInvokeExpression);
 
                 var typeCreateExpression = new JsObjectCreateExpression();
@@ -108,7 +98,7 @@ namespace Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory.Facade
                     codePrimitiveExpressions.Add(typeCreateExpression);
                 }
 
-                codePrimitiveExpressions.Add(realParametersStatement.ToVariableReferenceExpression());
+                codePrimitiveExpressions.Add(parametersStatement.ToVariableReferenceExpression());
 
                 var serviceMethodInvokationName = this.IsHierarchicalResultType(typeDeclarationExpressionCollection) ? "getHierarchicalData" : "getData";
                 var initiStatement = new CodeVariableReferenceExpression { VariableName = variable }
@@ -117,7 +107,7 @@ namespace Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory.Facade
                 var callbackExpression = new CodeLambdaExpression
                 {
                     Parameters = this.GetParameterDeclarationExpressionCollection(methodInfo),
-                    Statements = { parametersStatement, realParametersStatement, varialableStatement, initiStatement.ToMethodReturnStatement() }
+                    Statements = { parametersStatement, parametersStatement, varialableStatement, initiStatement.ToMethodReturnStatement() }
                 };
 
                 var root = new CodeObjectCreateExpression(genericClass, callbackExpression);

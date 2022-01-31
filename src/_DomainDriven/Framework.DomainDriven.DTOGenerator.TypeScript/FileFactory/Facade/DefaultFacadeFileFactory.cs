@@ -83,16 +83,6 @@ namespace Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory.Facade
 
                 var parametersStatement = new CodeVariableDeclarationStatement("const ", "baseParameters", this.GetMethodParametersCollection(methodInfo));
 
-                var realParametersExpr = methodInfo.TryExtractAutoRequestParameter().Select(p =>
-                {
-                    var parametersCollection = new JsObjectCreateExpression();
-
-                    parametersCollection.AddParameter(p.Name, parametersStatement.Name);
-
-                    return (CodeExpression)parametersCollection;
-                }).GetValueOrDefault(() => (CodeExpression)parametersStatement.ToVariableReferenceExpression());
-                var realParametersStatement = new CodeVariableDeclarationStatement("const ", "realParameters", realParametersExpr);
-
                 var varialableStatement = new CodeVariableDeclarationStatement("const ", variable, facadeMethodInvokeExpression);
 
                 var typeCreateExpression = new JsObjectCreateExpression();
@@ -108,7 +98,7 @@ namespace Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory.Facade
                     codePrimitiveExpressions.Add(typeCreateExpression);
                 }
 
-                codePrimitiveExpressions.Add(realParametersStatement.ToVariableReferenceExpression());
+                codePrimitiveExpressions.Add(parametersStatement.ToVariableReferenceExpression());
 
                 var serviceMethodInvokationName = this.IsHierarchicalResultType(typeDeclarationExpressionCollection) ? "getHierarchicalData" : "getData";
                 var initiStatement = new CodeVariableReferenceExpression { VariableName = variable }
@@ -117,7 +107,7 @@ namespace Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory.Facade
                 var callbackExpression = new CodeLambdaExpression
                 {
                     Parameters = this.GetParameterDeclarationExpressionCollection(methodInfo),
-                    Statements = { parametersStatement, realParametersStatement, varialableStatement, initiStatement.ToMethodReturnStatement() }
+                    Statements = { parametersStatement, varialableStatement, initiStatement.ToMethodReturnStatement() }
                 };
 
                 var root = new CodeObjectCreateExpression(genericClass, callbackExpression);
@@ -139,30 +129,44 @@ namespace Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory.Facade
             }
         }
 
-        private JsObjectCreateExpression GetMethodParametersCollection(MethodInfo method)
+        private CodeExpression GetMethodParametersCollection(MethodInfo method)
         {
-            var parametersCollection = new JsObjectCreateExpression();
-            foreach (var parameter in method.GetParametersWithExpandAutoRequest().Select(parameter => new { parameter.Name, parameter.ParameterType }).ToList())
+            var parameters  = method.GetParametersWithExpandAutoRequest().Select(parameter => new { parameter.Name, parameter.ParameterType }).ToList();
+            
+            if (parameters.Count() == 1)
             {
-                if (parameter.ParameterType.Name.EndsWith("StrictDTO"))
-                {
-                    parametersCollection.AddParameter(parameter.Name, parameter.Name + ".toNativeJson()");
-                }
-                else if (parameter.ParameterType.IsPeriod())
-                {
-                    parametersCollection.AddParameter(parameter.Name, Constants.PeriodToOdata(parameter.Name));
-                }
-                else if (parameter.ParameterType.IsDateTime())
-                {
-                    parametersCollection.AddParameter(parameter.Name, Constants.DateToOdata(parameter.Name));
-                }
-                else
-                {
-                    parametersCollection.AddParameter(parameter.Name, parameter.Name);
-                }
-            }
+                var p = parameters.Single();
 
-            return parametersCollection;
+                return new CodeVariableReferenceExpression(GetParameterAction(p.ParameterType, p.Name));
+            }
+            else
+            {
+                var parametersCollection = new JsObjectCreateExpression();
+                
+                parameters.Foreach(pair => parametersCollection.AddParameter(pair.Name, GetParameterAction(pair.ParameterType, pair.Name)));
+
+                return parametersCollection;
+            }
+        }
+
+        private static string GetParameterAction(Type parameterType, string parameterName)
+        {
+            if (parameterType.Name.EndsWith("StrictDTO"))
+            {
+                return parameterName + ".toNativeJson()";
+            }
+            else if (parameterType.IsPeriod())
+            {
+                return Constants.PeriodToOdata(parameterName);
+            }
+            else if (parameterType.IsDateTime())
+            {
+                return Constants.DateToOdata(parameterName);
+            }
+            else
+            {
+                return parameterName;
+            }
         }
 
         private List<CodeTypeReference> GetParameterCodeTypeDeclarationExpressionCollection(MethodInfo methodInfo)

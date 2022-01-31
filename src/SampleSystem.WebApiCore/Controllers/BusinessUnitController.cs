@@ -50,5 +50,11 @@ namespace SampleSystem.WebApiCore.Controllers.Main
                     return odataTree.SelectN(x => x.ToFullDTO(evaluateData.MappingService));
                 });
         }
+
+        [HttpPost(nameof(TestPeriod))]
+        public List<HierarchicalNode<BusinessUnitFullDTO, Guid>> TestPeriod(Framework.Core.Period period)
+        {
+            return null;
+        }
     }
 }

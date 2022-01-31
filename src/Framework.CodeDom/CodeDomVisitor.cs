@@ -310,10 +310,24 @@ namespace Framework.CodeDom
             {
                 return this.VisitTypeReferenceExpression(codeExpression as CodeTypeReferenceExpression);
             }
+            else if(codeExpression is CodeLambdaExpression)
+            {
+                return this.VisitLambdaExpression(codeExpression as CodeLambdaExpression);
+            }
             else
             {
                 return codeExpression;
             }
+        }
+
+        public virtual CodeExpression VisitLambdaExpression(CodeLambdaExpression codeExpression)
+        {
+            return new CodeLambdaExpression
+                   {
+                           Parameters =
+                                   this.VisitParameterDeclarationExpressionCollection(codeExpression.Parameters),
+                           Statements = this.VisitStatementCollection(codeExpression.Statements),
+                   }.WithCopyUserDataFrom(codeExpression);
         }
 
         public virtual CodeExpression VisitThisReferenceExpression(CodeThisReferenceExpression codeExpression)

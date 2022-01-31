@@ -143,1118 +143,996 @@ export let getVisualWorkingCalendar1676sByODataQueryStringAsyncFunc = _getVisual
 
 function _getBusinessUnitProgramClassesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.BusinessUnitProgramClassProjectionDTO>, OData.SelectOperationResult<dto.BusinessUnitProgramClassObservableProjectionDTO>, dto.BusinessUnitProgramClassProjectionDTO, dto.BusinessUnitProgramClassObservableProjectionDTO> {
     return new async.AsyncFunc3((odataQueryString: string) => {
-        let baseParameters = {odataQueryString : odataQueryString};
-        let realParameters = baseParameters;
+        let baseParameters = odataQueryString;
         let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.BusinessUnitProgramClassProjectionDTO>, OData.SelectOperationResult<dto.BusinessUnitProgramClassObservableProjectionDTO>, dto.BusinessUnitProgramClassProjectionDTO, dto.BusinessUnitProgramClassObservableProjectionDTO>();
-        return service.getData('BusinessUnitQuery/GetBusinessUnitProgramClassesByODataQueryString', {plain : dto.BusinessUnitProgramClassProjectionDTO, observable : dto.BusinessUnitProgramClassObservableProjectionDTO}, realParameters);
+        return service.getData('BusinessUnitQuery/GetBusinessUnitProgramClassesByODataQueryString', {plain : dto.BusinessUnitProgramClassProjectionDTO, observable : dto.BusinessUnitProgramClassObservableProjectionDTO}, baseParameters);
     });
 }
 
     function _getBusinessUnitProgramClassesByODataQueryStringWithFilter(): async.AsyncFunc4<string, dto.BusinessUnitProgramClassFilterModelStrictDTO, OData.SelectOperationResult<dto.BusinessUnitProgramClassProjectionDTO>, OData.SelectOperationResult<dto.BusinessUnitProgramClassObservableProjectionDTO>, dto.BusinessUnitProgramClassProjectionDTO, dto.BusinessUnitProgramClassObservableProjectionDTO> {
         return new async.AsyncFunc4((odataQueryString: string, filter: dto.BusinessUnitProgramClassFilterModelStrictDTO) => {
             let baseParameters = {odataQueryString : odataQueryString, filter : filter.toNativeJson()};
-            let realParameters = {getBusinessUnitProgramClassesByODataQueryStringWithFilterAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.BusinessUnitProgramClassProjectionDTO>, OData.SelectOperationResult<dto.BusinessUnitProgramClassObservableProjectionDTO>, dto.BusinessUnitProgramClassProjectionDTO, dto.BusinessUnitProgramClassObservableProjectionDTO>();
-            return service.getData('BusinessUnitQuery/GetBusinessUnitProgramClassesByODataQueryStringWithFilter', {plain : dto.BusinessUnitProgramClassProjectionDTO, observable : dto.BusinessUnitProgramClassObservableProjectionDTO}, realParameters);
+            return service.getData('BusinessUnitQuery/GetBusinessUnitProgramClassesByODataQueryStringWithFilter', {plain : dto.BusinessUnitProgramClassProjectionDTO, observable : dto.BusinessUnitProgramClassObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getBusinessUnitProgramClassesByOperation(): async.AsyncFunc4<string, dto.SampleSystemBusinessUnitSecurityOperationCode, OData.SelectOperationResult<dto.BusinessUnitProgramClassProjectionDTO>, OData.SelectOperationResult<dto.BusinessUnitProgramClassObservableProjectionDTO>, dto.BusinessUnitProgramClassProjectionDTO, dto.BusinessUnitProgramClassObservableProjectionDTO> {
         return new async.AsyncFunc4((odataQueryString: string, securityOperationCode: dto.SampleSystemBusinessUnitSecurityOperationCode) => {
             let baseParameters = {odataQueryString : odataQueryString, securityOperationCode : securityOperationCode};
-            let realParameters = {getBusinessUnitProgramClassesByOperationAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.BusinessUnitProgramClassProjectionDTO>, OData.SelectOperationResult<dto.BusinessUnitProgramClassObservableProjectionDTO>, dto.BusinessUnitProgramClassProjectionDTO, dto.BusinessUnitProgramClassObservableProjectionDTO>();
-            return service.getData('BusinessUnitQuery/GetBusinessUnitProgramClassesByOperation', {plain : dto.BusinessUnitProgramClassProjectionDTO, observable : dto.BusinessUnitProgramClassObservableProjectionDTO}, realParameters);
+            return service.getData('BusinessUnitQuery/GetBusinessUnitProgramClassesByOperation', {plain : dto.BusinessUnitProgramClassProjectionDTO, observable : dto.BusinessUnitProgramClassObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getBusinessUnitProgramClassTreeByOperation(): async.AsyncFunc4<string, dto.SampleSystemBusinessUnitSecurityOperationCode, OData.SelectOperationResult<persistent.HierarchicalNode<dto.BusinessUnitProgramClassProjectionDTO,Guid>>, OData.SelectOperationResult<persistent.HierarchicalNode<dto.BusinessUnitProgramClassObservableProjectionDTO,Guid>>, dto.BusinessUnitProgramClassProjectionDTO, dto.BusinessUnitProgramClassObservableProjectionDTO> {
         return new async.AsyncFunc4((odataQueryString: string, securityOperationCode: dto.SampleSystemBusinessUnitSecurityOperationCode) => {
             let baseParameters = {odataQueryString : odataQueryString, securityOperationCode : securityOperationCode};
-            let realParameters = {getBusinessUnitProgramClassTreeByOperationAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<persistent.HierarchicalNode<dto.BusinessUnitProgramClassProjectionDTO,Guid>>, OData.SelectOperationResult<persistent.HierarchicalNode<dto.BusinessUnitProgramClassObservableProjectionDTO,Guid>>, dto.BusinessUnitProgramClassProjectionDTO, dto.BusinessUnitProgramClassObservableProjectionDTO>();
-            return service.getHierarchicalData('BusinessUnitQuery/GetBusinessUnitProgramClassTreeByOperation', {plain : dto.BusinessUnitProgramClassProjectionDTO, observable : dto.BusinessUnitProgramClassObservableProjectionDTO}, realParameters);
+            return service.getHierarchicalData('BusinessUnitQuery/GetBusinessUnitProgramClassTreeByOperation', {plain : dto.BusinessUnitProgramClassProjectionDTO, observable : dto.BusinessUnitProgramClassObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getCustomCompanyLegalEntitiesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.CustomCompanyLegalEntityProjectionDTO>, OData.SelectOperationResult<dto.CustomCompanyLegalEntityObservableProjectionDTO>, dto.CustomCompanyLegalEntityProjectionDTO, dto.CustomCompanyLegalEntityObservableProjectionDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.CustomCompanyLegalEntityProjectionDTO>, OData.SelectOperationResult<dto.CustomCompanyLegalEntityObservableProjectionDTO>, dto.CustomCompanyLegalEntityProjectionDTO, dto.CustomCompanyLegalEntityObservableProjectionDTO>();
-            return service.getData('CompanyLegalEntityQuery/GetCustomCompanyLegalEntitiesByODataQueryString', {plain : dto.CustomCompanyLegalEntityProjectionDTO, observable : dto.CustomCompanyLegalEntityObservableProjectionDTO}, realParameters);
+            return service.getData('CompanyLegalEntityQuery/GetCustomCompanyLegalEntitiesByODataQueryString', {plain : dto.CustomCompanyLegalEntityProjectionDTO, observable : dto.CustomCompanyLegalEntityObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnitHrDepartmentsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.BusinessUnitHrDepartmentFullDTO>, OData.SelectOperationResult<dto.BusinessUnitHrDepartmentObservableFullDTO>, dto.BusinessUnitHrDepartmentFullDTO, dto.BusinessUnitHrDepartmentObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.BusinessUnitHrDepartmentFullDTO>, OData.SelectOperationResult<dto.BusinessUnitHrDepartmentObservableFullDTO>, dto.BusinessUnitHrDepartmentFullDTO, dto.BusinessUnitHrDepartmentObservableFullDTO>();
-            return service.getData('BusinessUnitHrDepartmentQuery/GetFullBusinessUnitHrDepartmentsByODataQueryString', {plain : dto.BusinessUnitHrDepartmentFullDTO, observable : dto.BusinessUnitHrDepartmentObservableFullDTO}, realParameters);
+            return service.getData('BusinessUnitHrDepartmentQuery/GetFullBusinessUnitHrDepartmentsByODataQueryString', {plain : dto.BusinessUnitHrDepartmentFullDTO, observable : dto.BusinessUnitHrDepartmentObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnitManagerCommissionLinksByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.BusinessUnitManagerCommissionLinkFullDTO>, OData.SelectOperationResult<dto.BusinessUnitManagerCommissionLinkObservableFullDTO>, dto.BusinessUnitManagerCommissionLinkFullDTO, dto.BusinessUnitManagerCommissionLinkObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.BusinessUnitManagerCommissionLinkFullDTO>, OData.SelectOperationResult<dto.BusinessUnitManagerCommissionLinkObservableFullDTO>, dto.BusinessUnitManagerCommissionLinkFullDTO, dto.BusinessUnitManagerCommissionLinkObservableFullDTO>();
             return service.getData('BusinessUnitManagerCommissionLinkQuery/GetFullBusinessUnitManagerCommissionLinksB' + 
-'yODataQueryString', {plain : dto.BusinessUnitManagerCommissionLinkFullDTO, observable : dto.BusinessUnitManagerCommissionLinkObservableFullDTO}, realParameters);
+'yODataQueryString', {plain : dto.BusinessUnitManagerCommissionLinkFullDTO, observable : dto.BusinessUnitManagerCommissionLinkObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnitsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.BusinessUnitFullDTO>, OData.SelectOperationResult<dto.BusinessUnitObservableFullDTO>, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.BusinessUnitFullDTO>, OData.SelectOperationResult<dto.BusinessUnitObservableFullDTO>, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO>();
-            return service.getData('BusinessUnitQuery/GetFullBusinessUnitsByODataQueryString', {plain : dto.BusinessUnitFullDTO, observable : dto.BusinessUnitObservableFullDTO}, realParameters);
+            return service.getData('BusinessUnitQuery/GetFullBusinessUnitsByODataQueryString', {plain : dto.BusinessUnitFullDTO, observable : dto.BusinessUnitObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnitTypesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.BusinessUnitTypeFullDTO>, OData.SelectOperationResult<dto.BusinessUnitTypeObservableFullDTO>, dto.BusinessUnitTypeFullDTO, dto.BusinessUnitTypeObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.BusinessUnitTypeFullDTO>, OData.SelectOperationResult<dto.BusinessUnitTypeObservableFullDTO>, dto.BusinessUnitTypeFullDTO, dto.BusinessUnitTypeObservableFullDTO>();
-            return service.getData('BusinessUnitTypeQuery/GetFullBusinessUnitTypesByODataQueryString', {plain : dto.BusinessUnitTypeFullDTO, observable : dto.BusinessUnitTypeObservableFullDTO}, realParameters);
+            return service.getData('BusinessUnitTypeQuery/GetFullBusinessUnitTypesByODataQueryString', {plain : dto.BusinessUnitTypeFullDTO, observable : dto.BusinessUnitTypeObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullCompanyLegalEntitiesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.CompanyLegalEntityFullDTO>, OData.SelectOperationResult<dto.CompanyLegalEntityObservableFullDTO>, dto.CompanyLegalEntityFullDTO, dto.CompanyLegalEntityObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.CompanyLegalEntityFullDTO>, OData.SelectOperationResult<dto.CompanyLegalEntityObservableFullDTO>, dto.CompanyLegalEntityFullDTO, dto.CompanyLegalEntityObservableFullDTO>();
-            return service.getData('CompanyLegalEntityQuery/GetFullCompanyLegalEntitiesByODataQueryString', {plain : dto.CompanyLegalEntityFullDTO, observable : dto.CompanyLegalEntityObservableFullDTO}, realParameters);
+            return service.getData('CompanyLegalEntityQuery/GetFullCompanyLegalEntitiesByODataQueryString', {plain : dto.CompanyLegalEntityFullDTO, observable : dto.CompanyLegalEntityObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullCountriesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.CountryFullDTO>, OData.SelectOperationResult<dto.CountryObservableFullDTO>, dto.CountryFullDTO, dto.CountryObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.CountryFullDTO>, OData.SelectOperationResult<dto.CountryObservableFullDTO>, dto.CountryFullDTO, dto.CountryObservableFullDTO>();
-            return service.getData('CountryQuery/GetFullCountriesByODataQueryString', {plain : dto.CountryFullDTO, observable : dto.CountryObservableFullDTO}, realParameters);
+            return service.getData('CountryQuery/GetFullCountriesByODataQueryString', {plain : dto.CountryFullDTO, observable : dto.CountryObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeInformationsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeeInformationFullDTO>, OData.SelectOperationResult<dto.EmployeeInformationObservableFullDTO>, dto.EmployeeInformationFullDTO, dto.EmployeeInformationObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeeInformationFullDTO>, OData.SelectOperationResult<dto.EmployeeInformationObservableFullDTO>, dto.EmployeeInformationFullDTO, dto.EmployeeInformationObservableFullDTO>();
-            return service.getData('EmployeeInformationQuery/GetFullEmployeeInformationsByODataQueryString', {plain : dto.EmployeeInformationFullDTO, observable : dto.EmployeeInformationObservableFullDTO}, realParameters);
+            return service.getData('EmployeeInformationQuery/GetFullEmployeeInformationsByODataQueryString', {plain : dto.EmployeeInformationFullDTO, observable : dto.EmployeeInformationObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeePhotosByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeePhotoFullDTO>, OData.SelectOperationResult<dto.EmployeePhotoObservableFullDTO>, dto.EmployeePhotoFullDTO, dto.EmployeePhotoObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeePhotoFullDTO>, OData.SelectOperationResult<dto.EmployeePhotoObservableFullDTO>, dto.EmployeePhotoFullDTO, dto.EmployeePhotoObservableFullDTO>();
-            return service.getData('EmployeePhotoQuery/GetFullEmployeePhotosByODataQueryString', {plain : dto.EmployeePhotoFullDTO, observable : dto.EmployeePhotoObservableFullDTO}, realParameters);
+            return service.getData('EmployeePhotoQuery/GetFullEmployeePhotosByODataQueryString', {plain : dto.EmployeePhotoFullDTO, observable : dto.EmployeePhotoObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeePositionsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeePositionFullDTO>, OData.SelectOperationResult<dto.EmployeePositionObservableFullDTO>, dto.EmployeePositionFullDTO, dto.EmployeePositionObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeePositionFullDTO>, OData.SelectOperationResult<dto.EmployeePositionObservableFullDTO>, dto.EmployeePositionFullDTO, dto.EmployeePositionObservableFullDTO>();
-            return service.getData('EmployeePositionQuery/GetFullEmployeePositionsByODataQueryString', {plain : dto.EmployeePositionFullDTO, observable : dto.EmployeePositionObservableFullDTO}, realParameters);
+            return service.getData('EmployeePositionQuery/GetFullEmployeePositionsByODataQueryString', {plain : dto.EmployeePositionFullDTO, observable : dto.EmployeePositionObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeRegistrationTypesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeeRegistrationTypeFullDTO>, OData.SelectOperationResult<dto.EmployeeRegistrationTypeObservableFullDTO>, dto.EmployeeRegistrationTypeFullDTO, dto.EmployeeRegistrationTypeObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeeRegistrationTypeFullDTO>, OData.SelectOperationResult<dto.EmployeeRegistrationTypeObservableFullDTO>, dto.EmployeeRegistrationTypeFullDTO, dto.EmployeeRegistrationTypeObservableFullDTO>();
-            return service.getData('EmployeeRegistrationTypeQuery/GetFullEmployeeRegistrationTypesByODataQueryString', {plain : dto.EmployeeRegistrationTypeFullDTO, observable : dto.EmployeeRegistrationTypeObservableFullDTO}, realParameters);
+            return service.getData('EmployeeRegistrationTypeQuery/GetFullEmployeeRegistrationTypesByODataQueryString', {plain : dto.EmployeeRegistrationTypeFullDTO, observable : dto.EmployeeRegistrationTypeObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeRoleDegreesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeeRoleDegreeFullDTO>, OData.SelectOperationResult<dto.EmployeeRoleDegreeObservableFullDTO>, dto.EmployeeRoleDegreeFullDTO, dto.EmployeeRoleDegreeObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeeRoleDegreeFullDTO>, OData.SelectOperationResult<dto.EmployeeRoleDegreeObservableFullDTO>, dto.EmployeeRoleDegreeFullDTO, dto.EmployeeRoleDegreeObservableFullDTO>();
-            return service.getData('EmployeeRoleDegreeQuery/GetFullEmployeeRoleDegreesByODataQueryString', {plain : dto.EmployeeRoleDegreeFullDTO, observable : dto.EmployeeRoleDegreeObservableFullDTO}, realParameters);
+            return service.getData('EmployeeRoleDegreeQuery/GetFullEmployeeRoleDegreesByODataQueryString', {plain : dto.EmployeeRoleDegreeFullDTO, observable : dto.EmployeeRoleDegreeObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeRolesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeeRoleFullDTO>, OData.SelectOperationResult<dto.EmployeeRoleObservableFullDTO>, dto.EmployeeRoleFullDTO, dto.EmployeeRoleObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeeRoleFullDTO>, OData.SelectOperationResult<dto.EmployeeRoleObservableFullDTO>, dto.EmployeeRoleFullDTO, dto.EmployeeRoleObservableFullDTO>();
-            return service.getData('EmployeeRoleQuery/GetFullEmployeeRolesByODataQueryString', {plain : dto.EmployeeRoleFullDTO, observable : dto.EmployeeRoleObservableFullDTO}, realParameters);
+            return service.getData('EmployeeRoleQuery/GetFullEmployeeRolesByODataQueryString', {plain : dto.EmployeeRoleFullDTO, observable : dto.EmployeeRoleObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeeFullDTO>, OData.SelectOperationResult<dto.EmployeeObservableFullDTO>, dto.EmployeeFullDTO, dto.EmployeeObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeeFullDTO>, OData.SelectOperationResult<dto.EmployeeObservableFullDTO>, dto.EmployeeFullDTO, dto.EmployeeObservableFullDTO>();
-            return service.getData('EmployeeQuery/GetFullEmployeesByODataQueryString', {plain : dto.EmployeeFullDTO, observable : dto.EmployeeObservableFullDTO}, realParameters);
+            return service.getData('EmployeeQuery/GetFullEmployeesByODataQueryString', {plain : dto.EmployeeFullDTO, observable : dto.EmployeeObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeSpecializationsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeeSpecializationFullDTO>, OData.SelectOperationResult<dto.EmployeeSpecializationObservableFullDTO>, dto.EmployeeSpecializationFullDTO, dto.EmployeeSpecializationObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeeSpecializationFullDTO>, OData.SelectOperationResult<dto.EmployeeSpecializationObservableFullDTO>, dto.EmployeeSpecializationFullDTO, dto.EmployeeSpecializationObservableFullDTO>();
-            return service.getData('EmployeeSpecializationQuery/GetFullEmployeeSpecializationsByODataQueryString', {plain : dto.EmployeeSpecializationFullDTO, observable : dto.EmployeeSpecializationObservableFullDTO}, realParameters);
+            return service.getData('EmployeeSpecializationQuery/GetFullEmployeeSpecializationsByODataQueryString', {plain : dto.EmployeeSpecializationFullDTO, observable : dto.EmployeeSpecializationObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullExample1sByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.Example1FullDTO>, OData.SelectOperationResult<dto.Example1ObservableFullDTO>, dto.Example1FullDTO, dto.Example1ObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.Example1FullDTO>, OData.SelectOperationResult<dto.Example1ObservableFullDTO>, dto.Example1FullDTO, dto.Example1ObservableFullDTO>();
-            return service.getData('Example1Query/GetFullExample1sByODataQueryString', {plain : dto.Example1FullDTO, observable : dto.Example1ObservableFullDTO}, realParameters);
+            return service.getData('Example1Query/GetFullExample1sByODataQueryString', {plain : dto.Example1FullDTO, observable : dto.Example1ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullHRDepartmentsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.HRDepartmentFullDTO>, OData.SelectOperationResult<dto.HRDepartmentObservableFullDTO>, dto.HRDepartmentFullDTO, dto.HRDepartmentObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.HRDepartmentFullDTO>, OData.SelectOperationResult<dto.HRDepartmentObservableFullDTO>, dto.HRDepartmentFullDTO, dto.HRDepartmentObservableFullDTO>();
-            return service.getData('HRDepartmentQuery/GetFullHRDepartmentsByODataQueryString', {plain : dto.HRDepartmentFullDTO, observable : dto.HRDepartmentObservableFullDTO}, realParameters);
+            return service.getData('HRDepartmentQuery/GetFullHRDepartmentsByODataQueryString', {plain : dto.HRDepartmentFullDTO, observable : dto.HRDepartmentObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullIMRequestsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.IMRequestFullDTO>, OData.SelectOperationResult<dto.IMRequestObservableFullDTO>, dto.IMRequestFullDTO, dto.IMRequestObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.IMRequestFullDTO>, OData.SelectOperationResult<dto.IMRequestObservableFullDTO>, dto.IMRequestFullDTO, dto.IMRequestObservableFullDTO>();
-            return service.getData('IMRequestQuery/GetFullIMRequestsByODataQueryString', {plain : dto.IMRequestFullDTO, observable : dto.IMRequestObservableFullDTO}, realParameters);
+            return service.getData('IMRequestQuery/GetFullIMRequestsByODataQueryString', {plain : dto.IMRequestFullDTO, observable : dto.IMRequestObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullInformationsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.InformationFullDTO>, OData.SelectOperationResult<dto.InformationObservableFullDTO>, dto.InformationFullDTO, dto.InformationObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.InformationFullDTO>, OData.SelectOperationResult<dto.InformationObservableFullDTO>, dto.InformationFullDTO, dto.InformationObservableFullDTO>();
-            return service.getData('InformationQuery/GetFullInformationsByODataQueryString', {plain : dto.InformationFullDTO, observable : dto.InformationObservableFullDTO}, realParameters);
+            return service.getData('InformationQuery/GetFullInformationsByODataQueryString', {plain : dto.InformationFullDTO, observable : dto.InformationObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullLocation1676sByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.Location1676FullDTO>, OData.SelectOperationResult<dto.Location1676ObservableFullDTO>, dto.Location1676FullDTO, dto.Location1676ObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.Location1676FullDTO>, OData.SelectOperationResult<dto.Location1676ObservableFullDTO>, dto.Location1676FullDTO, dto.Location1676ObservableFullDTO>();
-            return service.getData('Location1676Query/GetFullLocation1676sByODataQueryString', {plain : dto.Location1676FullDTO, observable : dto.Location1676ObservableFullDTO}, realParameters);
+            return service.getData('Location1676Query/GetFullLocation1676sByODataQueryString', {plain : dto.Location1676FullDTO, observable : dto.Location1676ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullLocationsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.LocationFullDTO>, OData.SelectOperationResult<dto.LocationObservableFullDTO>, dto.LocationFullDTO, dto.LocationObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.LocationFullDTO>, OData.SelectOperationResult<dto.LocationObservableFullDTO>, dto.LocationFullDTO, dto.LocationObservableFullDTO>();
-            return service.getData('LocationQuery/GetFullLocationsByODataQueryString', {plain : dto.LocationFullDTO, observable : dto.LocationObservableFullDTO}, realParameters);
+            return service.getData('LocationQuery/GetFullLocationsByODataQueryString', {plain : dto.LocationFullDTO, observable : dto.LocationObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullManagementUnitAndBusinessUnitLinksByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.ManagementUnitAndBusinessUnitLinkFullDTO>, OData.SelectOperationResult<dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO>, dto.ManagementUnitAndBusinessUnitLinkFullDTO, dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.ManagementUnitAndBusinessUnitLinkFullDTO>, OData.SelectOperationResult<dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO>, dto.ManagementUnitAndBusinessUnitLinkFullDTO, dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO>();
             return service.getData('ManagementUnitAndBusinessUnitLinkQuery/GetFullManagementUnitAndBusinessUnitLinksB' + 
-'yODataQueryString', {plain : dto.ManagementUnitAndBusinessUnitLinkFullDTO, observable : dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO}, realParameters);
+'yODataQueryString', {plain : dto.ManagementUnitAndBusinessUnitLinkFullDTO, observable : dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullManagementUnitAndHRDepartmentLinksByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.ManagementUnitAndHRDepartmentLinkFullDTO>, OData.SelectOperationResult<dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO>, dto.ManagementUnitAndHRDepartmentLinkFullDTO, dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.ManagementUnitAndHRDepartmentLinkFullDTO>, OData.SelectOperationResult<dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO>, dto.ManagementUnitAndHRDepartmentLinkFullDTO, dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO>();
             return service.getData('ManagementUnitAndHRDepartmentLinkQuery/GetFullManagementUnitAndHRDepartmentLinksB' + 
-'yODataQueryString', {plain : dto.ManagementUnitAndHRDepartmentLinkFullDTO, observable : dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO}, realParameters);
+'yODataQueryString', {plain : dto.ManagementUnitAndHRDepartmentLinkFullDTO, observable : dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullManagementUnitsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.ManagementUnitFullDTO>, OData.SelectOperationResult<dto.ManagementUnitObservableFullDTO>, dto.ManagementUnitFullDTO, dto.ManagementUnitObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.ManagementUnitFullDTO>, OData.SelectOperationResult<dto.ManagementUnitObservableFullDTO>, dto.ManagementUnitFullDTO, dto.ManagementUnitObservableFullDTO>();
-            return service.getData('ManagementUnitQuery/GetFullManagementUnitsByODataQueryString', {plain : dto.ManagementUnitFullDTO, observable : dto.ManagementUnitObservableFullDTO}, realParameters);
+            return service.getData('ManagementUnitQuery/GetFullManagementUnitsByODataQueryString', {plain : dto.ManagementUnitFullDTO, observable : dto.ManagementUnitObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullMessageTemplateContainersByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.MessageTemplateContainerFullDTO>, OData.SelectOperationResult<dto.MessageTemplateContainerObservableFullDTO>, dto.MessageTemplateContainerFullDTO, dto.MessageTemplateContainerObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.MessageTemplateContainerFullDTO>, OData.SelectOperationResult<dto.MessageTemplateContainerObservableFullDTO>, dto.MessageTemplateContainerFullDTO, dto.MessageTemplateContainerObservableFullDTO>();
-            return service.getData('MessageTemplateContainerQuery/GetFullMessageTemplateContainersByODataQueryString', {plain : dto.MessageTemplateContainerFullDTO, observable : dto.MessageTemplateContainerObservableFullDTO}, realParameters);
+            return service.getData('MessageTemplateContainerQuery/GetFullMessageTemplateContainersByODataQueryString', {plain : dto.MessageTemplateContainerFullDTO, observable : dto.MessageTemplateContainerObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullPrincipalsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.PrincipalFullDTO>, OData.SelectOperationResult<dto.PrincipalObservableFullDTO>, dto.PrincipalFullDTO, dto.PrincipalObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.PrincipalFullDTO>, OData.SelectOperationResult<dto.PrincipalObservableFullDTO>, dto.PrincipalFullDTO, dto.PrincipalObservableFullDTO>();
-            return service.getData('PrincipalQuery/GetFullPrincipalsByODataQueryString', {plain : dto.PrincipalFullDTO, observable : dto.PrincipalObservableFullDTO}, realParameters);
+            return service.getData('PrincipalQuery/GetFullPrincipalsByODataQueryString', {plain : dto.PrincipalFullDTO, observable : dto.PrincipalObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullRegularJobResultsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.RegularJobResultFullDTO>, OData.SelectOperationResult<dto.RegularJobResultObservableFullDTO>, dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.RegularJobResultFullDTO>, OData.SelectOperationResult<dto.RegularJobResultObservableFullDTO>, dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO>();
-            return service.getData('RegularJobResultQuery/GetFullRegularJobResultsByODataQueryString', {plain : dto.RegularJobResultFullDTO, observable : dto.RegularJobResultObservableFullDTO}, realParameters);
+            return service.getData('RegularJobResultQuery/GetFullRegularJobResultsByODataQueryString', {plain : dto.RegularJobResultFullDTO, observable : dto.RegularJobResultObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullSampleSystemMessageTemplatesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.SampleSystemMessageTemplateFullDTO>, OData.SelectOperationResult<dto.SampleSystemMessageTemplateObservableFullDTO>, dto.SampleSystemMessageTemplateFullDTO, dto.SampleSystemMessageTemplateObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.SampleSystemMessageTemplateFullDTO>, OData.SelectOperationResult<dto.SampleSystemMessageTemplateObservableFullDTO>, dto.SampleSystemMessageTemplateFullDTO, dto.SampleSystemMessageTemplateObservableFullDTO>();
             return service.getData('SampleSystemMessageTemplateQuery/GetFullSampleSystemMessageTemplatesByODataQueryS' + 
-'tring', {plain : dto.SampleSystemMessageTemplateFullDTO, observable : dto.SampleSystemMessageTemplateObservableFullDTO}, realParameters);
+'tring', {plain : dto.SampleSystemMessageTemplateFullDTO, observable : dto.SampleSystemMessageTemplateObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullSqlParserTestObjContainersByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.SqlParserTestObjContainerFullDTO>, OData.SelectOperationResult<dto.SqlParserTestObjContainerObservableFullDTO>, dto.SqlParserTestObjContainerFullDTO, dto.SqlParserTestObjContainerObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.SqlParserTestObjContainerFullDTO>, OData.SelectOperationResult<dto.SqlParserTestObjContainerObservableFullDTO>, dto.SqlParserTestObjContainerFullDTO, dto.SqlParserTestObjContainerObservableFullDTO>();
             return service.getData('SqlParserTestObjContainerQuery/GetFullSqlParserTestObjContainersByODataQueryStrin' + 
-'g', {plain : dto.SqlParserTestObjContainerFullDTO, observable : dto.SqlParserTestObjContainerObservableFullDTO}, realParameters);
+'g', {plain : dto.SqlParserTestObjContainerFullDTO, observable : dto.SqlParserTestObjContainerObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullSqlParserTestObjsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.SqlParserTestObjFullDTO>, OData.SelectOperationResult<dto.SqlParserTestObjObservableFullDTO>, dto.SqlParserTestObjFullDTO, dto.SqlParserTestObjObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.SqlParserTestObjFullDTO>, OData.SelectOperationResult<dto.SqlParserTestObjObservableFullDTO>, dto.SqlParserTestObjFullDTO, dto.SqlParserTestObjObservableFullDTO>();
-            return service.getData('SqlParserTestObjQuery/GetFullSqlParserTestObjsByODataQueryString', {plain : dto.SqlParserTestObjFullDTO, observable : dto.SqlParserTestObjObservableFullDTO}, realParameters);
+            return service.getData('SqlParserTestObjQuery/GetFullSqlParserTestObjsByODataQueryString', {plain : dto.SqlParserTestObjFullDTO, observable : dto.SqlParserTestObjObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestCustomContextSecurityObjsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestCustomContextSecurityObjFullDTO>, OData.SelectOperationResult<dto.TestCustomContextSecurityObjObservableFullDTO>, dto.TestCustomContextSecurityObjFullDTO, dto.TestCustomContextSecurityObjObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestCustomContextSecurityObjFullDTO>, OData.SelectOperationResult<dto.TestCustomContextSecurityObjObservableFullDTO>, dto.TestCustomContextSecurityObjFullDTO, dto.TestCustomContextSecurityObjObservableFullDTO>();
             return service.getData('TestCustomContextSecurityObjQuery/GetFullTestCustomContextSecurityObjsByODataQuer' + 
-'yString', {plain : dto.TestCustomContextSecurityObjFullDTO, observable : dto.TestCustomContextSecurityObjObservableFullDTO}, realParameters);
+'yString', {plain : dto.TestCustomContextSecurityObjFullDTO, observable : dto.TestCustomContextSecurityObjObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestImmutableObjsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestImmutableObjFullDTO>, OData.SelectOperationResult<dto.TestImmutableObjObservableFullDTO>, dto.TestImmutableObjFullDTO, dto.TestImmutableObjObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestImmutableObjFullDTO>, OData.SelectOperationResult<dto.TestImmutableObjObservableFullDTO>, dto.TestImmutableObjFullDTO, dto.TestImmutableObjObservableFullDTO>();
-            return service.getData('TestImmutableObjQuery/GetFullTestImmutableObjsByODataQueryString', {plain : dto.TestImmutableObjFullDTO, observable : dto.TestImmutableObjObservableFullDTO}, realParameters);
+            return service.getData('TestImmutableObjQuery/GetFullTestImmutableObjsByODataQueryString', {plain : dto.TestImmutableObjFullDTO, observable : dto.TestImmutableObjObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestRootSecurityObjsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestRootSecurityObjFullDTO>, OData.SelectOperationResult<dto.TestRootSecurityObjObservableFullDTO>, dto.TestRootSecurityObjFullDTO, dto.TestRootSecurityObjObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestRootSecurityObjFullDTO>, OData.SelectOperationResult<dto.TestRootSecurityObjObservableFullDTO>, dto.TestRootSecurityObjFullDTO, dto.TestRootSecurityObjObservableFullDTO>();
-            return service.getData('TestRootSecurityObjQuery/GetFullTestRootSecurityObjsByODataQueryString', {plain : dto.TestRootSecurityObjFullDTO, observable : dto.TestRootSecurityObjObservableFullDTO}, realParameters);
+            return service.getData('TestRootSecurityObjQuery/GetFullTestRootSecurityObjsByODataQueryString', {plain : dto.TestRootSecurityObjFullDTO, observable : dto.TestRootSecurityObjObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestSecurityObjItemsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestSecurityObjItemFullDTO>, OData.SelectOperationResult<dto.TestSecurityObjItemObservableFullDTO>, dto.TestSecurityObjItemFullDTO, dto.TestSecurityObjItemObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestSecurityObjItemFullDTO>, OData.SelectOperationResult<dto.TestSecurityObjItemObservableFullDTO>, dto.TestSecurityObjItemFullDTO, dto.TestSecurityObjItemObservableFullDTO>();
-            return service.getData('TestSecurityObjItemQuery/GetFullTestSecurityObjItemsByODataQueryString', {plain : dto.TestSecurityObjItemFullDTO, observable : dto.TestSecurityObjItemObservableFullDTO}, realParameters);
+            return service.getData('TestSecurityObjItemQuery/GetFullTestSecurityObjItemsByODataQueryString', {plain : dto.TestSecurityObjItemFullDTO, observable : dto.TestSecurityObjItemObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestSecuritySubObjItem2sByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestSecuritySubObjItem2FullDTO>, OData.SelectOperationResult<dto.TestSecuritySubObjItem2ObservableFullDTO>, dto.TestSecuritySubObjItem2FullDTO, dto.TestSecuritySubObjItem2ObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestSecuritySubObjItem2FullDTO>, OData.SelectOperationResult<dto.TestSecuritySubObjItem2ObservableFullDTO>, dto.TestSecuritySubObjItem2FullDTO, dto.TestSecuritySubObjItem2ObservableFullDTO>();
-            return service.getData('TestSecuritySubObjItem2Query/GetFullTestSecuritySubObjItem2sByODataQueryString', {plain : dto.TestSecuritySubObjItem2FullDTO, observable : dto.TestSecuritySubObjItem2ObservableFullDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem2Query/GetFullTestSecuritySubObjItem2sByODataQueryString', {plain : dto.TestSecuritySubObjItem2FullDTO, observable : dto.TestSecuritySubObjItem2ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestSecuritySubObjItem3sByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestSecuritySubObjItem3FullDTO>, OData.SelectOperationResult<dto.TestSecuritySubObjItem3ObservableFullDTO>, dto.TestSecuritySubObjItem3FullDTO, dto.TestSecuritySubObjItem3ObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestSecuritySubObjItem3FullDTO>, OData.SelectOperationResult<dto.TestSecuritySubObjItem3ObservableFullDTO>, dto.TestSecuritySubObjItem3FullDTO, dto.TestSecuritySubObjItem3ObservableFullDTO>();
-            return service.getData('TestSecuritySubObjItem3Query/GetFullTestSecuritySubObjItem3sByODataQueryString', {plain : dto.TestSecuritySubObjItem3FullDTO, observable : dto.TestSecuritySubObjItem3ObservableFullDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem3Query/GetFullTestSecuritySubObjItem3sByODataQueryString', {plain : dto.TestSecuritySubObjItem3FullDTO, observable : dto.TestSecuritySubObjItem3ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestSecuritySubObjItemsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestSecuritySubObjItemFullDTO>, OData.SelectOperationResult<dto.TestSecuritySubObjItemObservableFullDTO>, dto.TestSecuritySubObjItemFullDTO, dto.TestSecuritySubObjItemObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestSecuritySubObjItemFullDTO>, OData.SelectOperationResult<dto.TestSecuritySubObjItemObservableFullDTO>, dto.TestSecuritySubObjItemFullDTO, dto.TestSecuritySubObjItemObservableFullDTO>();
-            return service.getData('TestSecuritySubObjItemQuery/GetFullTestSecuritySubObjItemsByODataQueryString', {plain : dto.TestSecuritySubObjItemFullDTO, observable : dto.TestSecuritySubObjItemObservableFullDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItemQuery/GetFullTestSecuritySubObjItemsByODataQueryString', {plain : dto.TestSecuritySubObjItemFullDTO, observable : dto.TestSecuritySubObjItemObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullWorkingCalendar1676sByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.WorkingCalendar1676FullDTO>, OData.SelectOperationResult<dto.WorkingCalendar1676ObservableFullDTO>, dto.WorkingCalendar1676FullDTO, dto.WorkingCalendar1676ObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.WorkingCalendar1676FullDTO>, OData.SelectOperationResult<dto.WorkingCalendar1676ObservableFullDTO>, dto.WorkingCalendar1676FullDTO, dto.WorkingCalendar1676ObservableFullDTO>();
-            return service.getData('WorkingCalendar1676Query/GetFullWorkingCalendar1676sByODataQueryString', {plain : dto.WorkingCalendar1676FullDTO, observable : dto.WorkingCalendar1676ObservableFullDTO}, realParameters);
+            return service.getData('WorkingCalendar1676Query/GetFullWorkingCalendar1676sByODataQueryString', {plain : dto.WorkingCalendar1676FullDTO, observable : dto.WorkingCalendar1676ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getSimpleBusinessUnitHrDepartmentsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.BusinessUnitHrDepartmentSimpleDTO>, OData.SelectOperationResult<dto.BusinessUnitHrDepartmentObservableSimpleDTO>, dto.BusinessUnitHrDepartmentSimpleDTO, dto.BusinessUnitHrDepartmentObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.BusinessUnitHrDepartmentSimpleDTO>, OData.SelectOperationResult<dto.BusinessUnitHrDepartmentObservableSimpleDTO>, dto.BusinessUnitHrDepartmentSimpleDTO, dto.BusinessUnitHrDepartmentObservableSimpleDTO>();
             return service.getData('BusinessUnitHrDepartmentQuery/GetSimpleBusinessUnitHrDepartmentsByODataQueryStrin' + 
-'g', {plain : dto.BusinessUnitHrDepartmentSimpleDTO, observable : dto.BusinessUnitHrDepartmentObservableSimpleDTO}, realParameters);
+'g', {plain : dto.BusinessUnitHrDepartmentSimpleDTO, observable : dto.BusinessUnitHrDepartmentObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleBusinessUnitManagerCommissionLinksByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.BusinessUnitManagerCommissionLinkSimpleDTO>, OData.SelectOperationResult<dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO>, dto.BusinessUnitManagerCommissionLinkSimpleDTO, dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.BusinessUnitManagerCommissionLinkSimpleDTO>, OData.SelectOperationResult<dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO>, dto.BusinessUnitManagerCommissionLinkSimpleDTO, dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO>();
             return service.getData('BusinessUnitManagerCommissionLinkQuery/GetSimpleBusinessUnitManagerCommissionLink' + 
-'sByODataQueryString', {plain : dto.BusinessUnitManagerCommissionLinkSimpleDTO, observable : dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO}, realParameters);
+'sByODataQueryString', {plain : dto.BusinessUnitManagerCommissionLinkSimpleDTO, observable : dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleBusinessUnitsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.BusinessUnitSimpleDTO>, OData.SelectOperationResult<dto.BusinessUnitObservableSimpleDTO>, dto.BusinessUnitSimpleDTO, dto.BusinessUnitObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.BusinessUnitSimpleDTO>, OData.SelectOperationResult<dto.BusinessUnitObservableSimpleDTO>, dto.BusinessUnitSimpleDTO, dto.BusinessUnitObservableSimpleDTO>();
-            return service.getData('BusinessUnitQuery/GetSimpleBusinessUnitsByODataQueryString', {plain : dto.BusinessUnitSimpleDTO, observable : dto.BusinessUnitObservableSimpleDTO}, realParameters);
+            return service.getData('BusinessUnitQuery/GetSimpleBusinessUnitsByODataQueryString', {plain : dto.BusinessUnitSimpleDTO, observable : dto.BusinessUnitObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleBusinessUnitTypesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.BusinessUnitTypeSimpleDTO>, OData.SelectOperationResult<dto.BusinessUnitTypeObservableSimpleDTO>, dto.BusinessUnitTypeSimpleDTO, dto.BusinessUnitTypeObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.BusinessUnitTypeSimpleDTO>, OData.SelectOperationResult<dto.BusinessUnitTypeObservableSimpleDTO>, dto.BusinessUnitTypeSimpleDTO, dto.BusinessUnitTypeObservableSimpleDTO>();
-            return service.getData('BusinessUnitTypeQuery/GetSimpleBusinessUnitTypesByODataQueryString', {plain : dto.BusinessUnitTypeSimpleDTO, observable : dto.BusinessUnitTypeObservableSimpleDTO}, realParameters);
+            return service.getData('BusinessUnitTypeQuery/GetSimpleBusinessUnitTypesByODataQueryString', {plain : dto.BusinessUnitTypeSimpleDTO, observable : dto.BusinessUnitTypeObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleCompanyLegalEntitiesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.CompanyLegalEntitySimpleDTO>, OData.SelectOperationResult<dto.CompanyLegalEntityObservableSimpleDTO>, dto.CompanyLegalEntitySimpleDTO, dto.CompanyLegalEntityObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.CompanyLegalEntitySimpleDTO>, OData.SelectOperationResult<dto.CompanyLegalEntityObservableSimpleDTO>, dto.CompanyLegalEntitySimpleDTO, dto.CompanyLegalEntityObservableSimpleDTO>();
-            return service.getData('CompanyLegalEntityQuery/GetSimpleCompanyLegalEntitiesByODataQueryString', {plain : dto.CompanyLegalEntitySimpleDTO, observable : dto.CompanyLegalEntityObservableSimpleDTO}, realParameters);
+            return service.getData('CompanyLegalEntityQuery/GetSimpleCompanyLegalEntitiesByODataQueryString', {plain : dto.CompanyLegalEntitySimpleDTO, observable : dto.CompanyLegalEntityObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleCountriesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.CountrySimpleDTO>, OData.SelectOperationResult<dto.CountryObservableSimpleDTO>, dto.CountrySimpleDTO, dto.CountryObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.CountrySimpleDTO>, OData.SelectOperationResult<dto.CountryObservableSimpleDTO>, dto.CountrySimpleDTO, dto.CountryObservableSimpleDTO>();
-            return service.getData('CountryQuery/GetSimpleCountriesByODataQueryString', {plain : dto.CountrySimpleDTO, observable : dto.CountryObservableSimpleDTO}, realParameters);
+            return service.getData('CountryQuery/GetSimpleCountriesByODataQueryString', {plain : dto.CountrySimpleDTO, observable : dto.CountryObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeInformationsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeeInformationSimpleDTO>, OData.SelectOperationResult<dto.EmployeeInformationObservableSimpleDTO>, dto.EmployeeInformationSimpleDTO, dto.EmployeeInformationObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeeInformationSimpleDTO>, OData.SelectOperationResult<dto.EmployeeInformationObservableSimpleDTO>, dto.EmployeeInformationSimpleDTO, dto.EmployeeInformationObservableSimpleDTO>();
-            return service.getData('EmployeeInformationQuery/GetSimpleEmployeeInformationsByODataQueryString', {plain : dto.EmployeeInformationSimpleDTO, observable : dto.EmployeeInformationObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeInformationQuery/GetSimpleEmployeeInformationsByODataQueryString', {plain : dto.EmployeeInformationSimpleDTO, observable : dto.EmployeeInformationObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeePhotosByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeePhotoSimpleDTO>, OData.SelectOperationResult<dto.EmployeePhotoObservableSimpleDTO>, dto.EmployeePhotoSimpleDTO, dto.EmployeePhotoObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeePhotoSimpleDTO>, OData.SelectOperationResult<dto.EmployeePhotoObservableSimpleDTO>, dto.EmployeePhotoSimpleDTO, dto.EmployeePhotoObservableSimpleDTO>();
-            return service.getData('EmployeePhotoQuery/GetSimpleEmployeePhotosByODataQueryString', {plain : dto.EmployeePhotoSimpleDTO, observable : dto.EmployeePhotoObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeePhotoQuery/GetSimpleEmployeePhotosByODataQueryString', {plain : dto.EmployeePhotoSimpleDTO, observable : dto.EmployeePhotoObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeePositionsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeePositionSimpleDTO>, OData.SelectOperationResult<dto.EmployeePositionObservableSimpleDTO>, dto.EmployeePositionSimpleDTO, dto.EmployeePositionObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeePositionSimpleDTO>, OData.SelectOperationResult<dto.EmployeePositionObservableSimpleDTO>, dto.EmployeePositionSimpleDTO, dto.EmployeePositionObservableSimpleDTO>();
-            return service.getData('EmployeePositionQuery/GetSimpleEmployeePositionsByODataQueryString', {plain : dto.EmployeePositionSimpleDTO, observable : dto.EmployeePositionObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeePositionQuery/GetSimpleEmployeePositionsByODataQueryString', {plain : dto.EmployeePositionSimpleDTO, observable : dto.EmployeePositionObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeRegistrationTypesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeeRegistrationTypeSimpleDTO>, OData.SelectOperationResult<dto.EmployeeRegistrationTypeObservableSimpleDTO>, dto.EmployeeRegistrationTypeSimpleDTO, dto.EmployeeRegistrationTypeObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeeRegistrationTypeSimpleDTO>, OData.SelectOperationResult<dto.EmployeeRegistrationTypeObservableSimpleDTO>, dto.EmployeeRegistrationTypeSimpleDTO, dto.EmployeeRegistrationTypeObservableSimpleDTO>();
             return service.getData('EmployeeRegistrationTypeQuery/GetSimpleEmployeeRegistrationTypesByODataQueryStrin' + 
-'g', {plain : dto.EmployeeRegistrationTypeSimpleDTO, observable : dto.EmployeeRegistrationTypeObservableSimpleDTO}, realParameters);
+'g', {plain : dto.EmployeeRegistrationTypeSimpleDTO, observable : dto.EmployeeRegistrationTypeObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeRoleDegreesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeeRoleDegreeSimpleDTO>, OData.SelectOperationResult<dto.EmployeeRoleDegreeObservableSimpleDTO>, dto.EmployeeRoleDegreeSimpleDTO, dto.EmployeeRoleDegreeObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeeRoleDegreeSimpleDTO>, OData.SelectOperationResult<dto.EmployeeRoleDegreeObservableSimpleDTO>, dto.EmployeeRoleDegreeSimpleDTO, dto.EmployeeRoleDegreeObservableSimpleDTO>();
-            return service.getData('EmployeeRoleDegreeQuery/GetSimpleEmployeeRoleDegreesByODataQueryString', {plain : dto.EmployeeRoleDegreeSimpleDTO, observable : dto.EmployeeRoleDegreeObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeRoleDegreeQuery/GetSimpleEmployeeRoleDegreesByODataQueryString', {plain : dto.EmployeeRoleDegreeSimpleDTO, observable : dto.EmployeeRoleDegreeObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeRolesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeeRoleSimpleDTO>, OData.SelectOperationResult<dto.EmployeeRoleObservableSimpleDTO>, dto.EmployeeRoleSimpleDTO, dto.EmployeeRoleObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeeRoleSimpleDTO>, OData.SelectOperationResult<dto.EmployeeRoleObservableSimpleDTO>, dto.EmployeeRoleSimpleDTO, dto.EmployeeRoleObservableSimpleDTO>();
-            return service.getData('EmployeeRoleQuery/GetSimpleEmployeeRolesByODataQueryString', {plain : dto.EmployeeRoleSimpleDTO, observable : dto.EmployeeRoleObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeRoleQuery/GetSimpleEmployeeRolesByODataQueryString', {plain : dto.EmployeeRoleSimpleDTO, observable : dto.EmployeeRoleObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeeSimpleDTO>, OData.SelectOperationResult<dto.EmployeeObservableSimpleDTO>, dto.EmployeeSimpleDTO, dto.EmployeeObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeeSimpleDTO>, OData.SelectOperationResult<dto.EmployeeObservableSimpleDTO>, dto.EmployeeSimpleDTO, dto.EmployeeObservableSimpleDTO>();
-            return service.getData('EmployeeQuery/GetSimpleEmployeesByODataQueryString', {plain : dto.EmployeeSimpleDTO, observable : dto.EmployeeObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeQuery/GetSimpleEmployeesByODataQueryString', {plain : dto.EmployeeSimpleDTO, observable : dto.EmployeeObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeSpecializationsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeeSpecializationSimpleDTO>, OData.SelectOperationResult<dto.EmployeeSpecializationObservableSimpleDTO>, dto.EmployeeSpecializationSimpleDTO, dto.EmployeeSpecializationObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeeSpecializationSimpleDTO>, OData.SelectOperationResult<dto.EmployeeSpecializationObservableSimpleDTO>, dto.EmployeeSpecializationSimpleDTO, dto.EmployeeSpecializationObservableSimpleDTO>();
-            return service.getData('EmployeeSpecializationQuery/GetSimpleEmployeeSpecializationsByODataQueryString', {plain : dto.EmployeeSpecializationSimpleDTO, observable : dto.EmployeeSpecializationObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeSpecializationQuery/GetSimpleEmployeeSpecializationsByODataQueryString', {plain : dto.EmployeeSpecializationSimpleDTO, observable : dto.EmployeeSpecializationObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleExample1sByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.Example1SimpleDTO>, OData.SelectOperationResult<dto.Example1ObservableSimpleDTO>, dto.Example1SimpleDTO, dto.Example1ObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.Example1SimpleDTO>, OData.SelectOperationResult<dto.Example1ObservableSimpleDTO>, dto.Example1SimpleDTO, dto.Example1ObservableSimpleDTO>();
-            return service.getData('Example1Query/GetSimpleExample1sByODataQueryString', {plain : dto.Example1SimpleDTO, observable : dto.Example1ObservableSimpleDTO}, realParameters);
+            return service.getData('Example1Query/GetSimpleExample1sByODataQueryString', {plain : dto.Example1SimpleDTO, observable : dto.Example1ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleHRDepartmentsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.HRDepartmentSimpleDTO>, OData.SelectOperationResult<dto.HRDepartmentObservableSimpleDTO>, dto.HRDepartmentSimpleDTO, dto.HRDepartmentObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.HRDepartmentSimpleDTO>, OData.SelectOperationResult<dto.HRDepartmentObservableSimpleDTO>, dto.HRDepartmentSimpleDTO, dto.HRDepartmentObservableSimpleDTO>();
-            return service.getData('HRDepartmentQuery/GetSimpleHRDepartmentsByODataQueryString', {plain : dto.HRDepartmentSimpleDTO, observable : dto.HRDepartmentObservableSimpleDTO}, realParameters);
+            return service.getData('HRDepartmentQuery/GetSimpleHRDepartmentsByODataQueryString', {plain : dto.HRDepartmentSimpleDTO, observable : dto.HRDepartmentObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleIMRequestsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.IMRequestSimpleDTO>, OData.SelectOperationResult<dto.IMRequestObservableSimpleDTO>, dto.IMRequestSimpleDTO, dto.IMRequestObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.IMRequestSimpleDTO>, OData.SelectOperationResult<dto.IMRequestObservableSimpleDTO>, dto.IMRequestSimpleDTO, dto.IMRequestObservableSimpleDTO>();
-            return service.getData('IMRequestQuery/GetSimpleIMRequestsByODataQueryString', {plain : dto.IMRequestSimpleDTO, observable : dto.IMRequestObservableSimpleDTO}, realParameters);
+            return service.getData('IMRequestQuery/GetSimpleIMRequestsByODataQueryString', {plain : dto.IMRequestSimpleDTO, observable : dto.IMRequestObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleInformationsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.InformationSimpleDTO>, OData.SelectOperationResult<dto.InformationObservableSimpleDTO>, dto.InformationSimpleDTO, dto.InformationObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.InformationSimpleDTO>, OData.SelectOperationResult<dto.InformationObservableSimpleDTO>, dto.InformationSimpleDTO, dto.InformationObservableSimpleDTO>();
-            return service.getData('InformationQuery/GetSimpleInformationsByODataQueryString', {plain : dto.InformationSimpleDTO, observable : dto.InformationObservableSimpleDTO}, realParameters);
+            return service.getData('InformationQuery/GetSimpleInformationsByODataQueryString', {plain : dto.InformationSimpleDTO, observable : dto.InformationObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleLocation1676sByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.Location1676SimpleDTO>, OData.SelectOperationResult<dto.Location1676ObservableSimpleDTO>, dto.Location1676SimpleDTO, dto.Location1676ObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.Location1676SimpleDTO>, OData.SelectOperationResult<dto.Location1676ObservableSimpleDTO>, dto.Location1676SimpleDTO, dto.Location1676ObservableSimpleDTO>();
-            return service.getData('Location1676Query/GetSimpleLocation1676sByODataQueryString', {plain : dto.Location1676SimpleDTO, observable : dto.Location1676ObservableSimpleDTO}, realParameters);
+            return service.getData('Location1676Query/GetSimpleLocation1676sByODataQueryString', {plain : dto.Location1676SimpleDTO, observable : dto.Location1676ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleLocationsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.LocationSimpleDTO>, OData.SelectOperationResult<dto.LocationObservableSimpleDTO>, dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.LocationSimpleDTO>, OData.SelectOperationResult<dto.LocationObservableSimpleDTO>, dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO>();
-            return service.getData('LocationQuery/GetSimpleLocationsByODataQueryString', {plain : dto.LocationSimpleDTO, observable : dto.LocationObservableSimpleDTO}, realParameters);
+            return service.getData('LocationQuery/GetSimpleLocationsByODataQueryString', {plain : dto.LocationSimpleDTO, observable : dto.LocationObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleManagementUnitAndBusinessUnitLinksByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.ManagementUnitAndBusinessUnitLinkSimpleDTO>, OData.SelectOperationResult<dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO>, dto.ManagementUnitAndBusinessUnitLinkSimpleDTO, dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.ManagementUnitAndBusinessUnitLinkSimpleDTO>, OData.SelectOperationResult<dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO>, dto.ManagementUnitAndBusinessUnitLinkSimpleDTO, dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO>();
             return service.getData('ManagementUnitAndBusinessUnitLinkQuery/GetSimpleManagementUnitAndBusinessUnitLink' + 
-'sByODataQueryString', {plain : dto.ManagementUnitAndBusinessUnitLinkSimpleDTO, observable : dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO}, realParameters);
+'sByODataQueryString', {plain : dto.ManagementUnitAndBusinessUnitLinkSimpleDTO, observable : dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleManagementUnitAndHRDepartmentLinksByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.ManagementUnitAndHRDepartmentLinkSimpleDTO>, OData.SelectOperationResult<dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO>, dto.ManagementUnitAndHRDepartmentLinkSimpleDTO, dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.ManagementUnitAndHRDepartmentLinkSimpleDTO>, OData.SelectOperationResult<dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO>, dto.ManagementUnitAndHRDepartmentLinkSimpleDTO, dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO>();
             return service.getData('ManagementUnitAndHRDepartmentLinkQuery/GetSimpleManagementUnitAndHRDepartmentLink' + 
-'sByODataQueryString', {plain : dto.ManagementUnitAndHRDepartmentLinkSimpleDTO, observable : dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO}, realParameters);
+'sByODataQueryString', {plain : dto.ManagementUnitAndHRDepartmentLinkSimpleDTO, observable : dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleManagementUnitsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.ManagementUnitSimpleDTO>, OData.SelectOperationResult<dto.ManagementUnitObservableSimpleDTO>, dto.ManagementUnitSimpleDTO, dto.ManagementUnitObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.ManagementUnitSimpleDTO>, OData.SelectOperationResult<dto.ManagementUnitObservableSimpleDTO>, dto.ManagementUnitSimpleDTO, dto.ManagementUnitObservableSimpleDTO>();
-            return service.getData('ManagementUnitQuery/GetSimpleManagementUnitsByODataQueryString', {plain : dto.ManagementUnitSimpleDTO, observable : dto.ManagementUnitObservableSimpleDTO}, realParameters);
+            return service.getData('ManagementUnitQuery/GetSimpleManagementUnitsByODataQueryString', {plain : dto.ManagementUnitSimpleDTO, observable : dto.ManagementUnitObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleMessageTemplateContainersByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.MessageTemplateContainerSimpleDTO>, OData.SelectOperationResult<dto.MessageTemplateContainerObservableSimpleDTO>, dto.MessageTemplateContainerSimpleDTO, dto.MessageTemplateContainerObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.MessageTemplateContainerSimpleDTO>, OData.SelectOperationResult<dto.MessageTemplateContainerObservableSimpleDTO>, dto.MessageTemplateContainerSimpleDTO, dto.MessageTemplateContainerObservableSimpleDTO>();
             return service.getData('MessageTemplateContainerQuery/GetSimpleMessageTemplateContainersByODataQueryStrin' + 
-'g', {plain : dto.MessageTemplateContainerSimpleDTO, observable : dto.MessageTemplateContainerObservableSimpleDTO}, realParameters);
+'g', {plain : dto.MessageTemplateContainerSimpleDTO, observable : dto.MessageTemplateContainerObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimplePrincipalsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.PrincipalSimpleDTO>, OData.SelectOperationResult<dto.PrincipalObservableSimpleDTO>, dto.PrincipalSimpleDTO, dto.PrincipalObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.PrincipalSimpleDTO>, OData.SelectOperationResult<dto.PrincipalObservableSimpleDTO>, dto.PrincipalSimpleDTO, dto.PrincipalObservableSimpleDTO>();
-            return service.getData('PrincipalQuery/GetSimplePrincipalsByODataQueryString', {plain : dto.PrincipalSimpleDTO, observable : dto.PrincipalObservableSimpleDTO}, realParameters);
+            return service.getData('PrincipalQuery/GetSimplePrincipalsByODataQueryString', {plain : dto.PrincipalSimpleDTO, observable : dto.PrincipalObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleRegularJobResultsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.RegularJobResultSimpleDTO>, OData.SelectOperationResult<dto.RegularJobResultObservableSimpleDTO>, dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.RegularJobResultSimpleDTO>, OData.SelectOperationResult<dto.RegularJobResultObservableSimpleDTO>, dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO>();
-            return service.getData('RegularJobResultQuery/GetSimpleRegularJobResultsByODataQueryString', {plain : dto.RegularJobResultSimpleDTO, observable : dto.RegularJobResultObservableSimpleDTO}, realParameters);
+            return service.getData('RegularJobResultQuery/GetSimpleRegularJobResultsByODataQueryString', {plain : dto.RegularJobResultSimpleDTO, observable : dto.RegularJobResultObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleSampleSystemMessageTemplatesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.SampleSystemMessageTemplateSimpleDTO>, OData.SelectOperationResult<dto.SampleSystemMessageTemplateObservableSimpleDTO>, dto.SampleSystemMessageTemplateSimpleDTO, dto.SampleSystemMessageTemplateObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.SampleSystemMessageTemplateSimpleDTO>, OData.SelectOperationResult<dto.SampleSystemMessageTemplateObservableSimpleDTO>, dto.SampleSystemMessageTemplateSimpleDTO, dto.SampleSystemMessageTemplateObservableSimpleDTO>();
             return service.getData('SampleSystemMessageTemplateQuery/GetSimpleSampleSystemMessageTemplatesByODataQuer' + 
-'yString', {plain : dto.SampleSystemMessageTemplateSimpleDTO, observable : dto.SampleSystemMessageTemplateObservableSimpleDTO}, realParameters);
+'yString', {plain : dto.SampleSystemMessageTemplateSimpleDTO, observable : dto.SampleSystemMessageTemplateObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleSqlParserTestObjContainersByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.SqlParserTestObjContainerSimpleDTO>, OData.SelectOperationResult<dto.SqlParserTestObjContainerObservableSimpleDTO>, dto.SqlParserTestObjContainerSimpleDTO, dto.SqlParserTestObjContainerObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.SqlParserTestObjContainerSimpleDTO>, OData.SelectOperationResult<dto.SqlParserTestObjContainerObservableSimpleDTO>, dto.SqlParserTestObjContainerSimpleDTO, dto.SqlParserTestObjContainerObservableSimpleDTO>();
             return service.getData('SqlParserTestObjContainerQuery/GetSimpleSqlParserTestObjContainersByODataQueryStr' + 
-'ing', {plain : dto.SqlParserTestObjContainerSimpleDTO, observable : dto.SqlParserTestObjContainerObservableSimpleDTO}, realParameters);
+'ing', {plain : dto.SqlParserTestObjContainerSimpleDTO, observable : dto.SqlParserTestObjContainerObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleSqlParserTestObjsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.SqlParserTestObjSimpleDTO>, OData.SelectOperationResult<dto.SqlParserTestObjObservableSimpleDTO>, dto.SqlParserTestObjSimpleDTO, dto.SqlParserTestObjObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.SqlParserTestObjSimpleDTO>, OData.SelectOperationResult<dto.SqlParserTestObjObservableSimpleDTO>, dto.SqlParserTestObjSimpleDTO, dto.SqlParserTestObjObservableSimpleDTO>();
-            return service.getData('SqlParserTestObjQuery/GetSimpleSqlParserTestObjsByODataQueryString', {plain : dto.SqlParserTestObjSimpleDTO, observable : dto.SqlParserTestObjObservableSimpleDTO}, realParameters);
+            return service.getData('SqlParserTestObjQuery/GetSimpleSqlParserTestObjsByODataQueryString', {plain : dto.SqlParserTestObjSimpleDTO, observable : dto.SqlParserTestObjObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestCustomContextSecurityObjsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestCustomContextSecurityObjSimpleDTO>, OData.SelectOperationResult<dto.TestCustomContextSecurityObjObservableSimpleDTO>, dto.TestCustomContextSecurityObjSimpleDTO, dto.TestCustomContextSecurityObjObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestCustomContextSecurityObjSimpleDTO>, OData.SelectOperationResult<dto.TestCustomContextSecurityObjObservableSimpleDTO>, dto.TestCustomContextSecurityObjSimpleDTO, dto.TestCustomContextSecurityObjObservableSimpleDTO>();
             return service.getData('TestCustomContextSecurityObjQuery/GetSimpleTestCustomContextSecurityObjsByODataQu' + 
-'eryString', {plain : dto.TestCustomContextSecurityObjSimpleDTO, observable : dto.TestCustomContextSecurityObjObservableSimpleDTO}, realParameters);
+'eryString', {plain : dto.TestCustomContextSecurityObjSimpleDTO, observable : dto.TestCustomContextSecurityObjObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestImmutableObjsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestImmutableObjSimpleDTO>, OData.SelectOperationResult<dto.TestImmutableObjObservableSimpleDTO>, dto.TestImmutableObjSimpleDTO, dto.TestImmutableObjObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestImmutableObjSimpleDTO>, OData.SelectOperationResult<dto.TestImmutableObjObservableSimpleDTO>, dto.TestImmutableObjSimpleDTO, dto.TestImmutableObjObservableSimpleDTO>();
-            return service.getData('TestImmutableObjQuery/GetSimpleTestImmutableObjsByODataQueryString', {plain : dto.TestImmutableObjSimpleDTO, observable : dto.TestImmutableObjObservableSimpleDTO}, realParameters);
+            return service.getData('TestImmutableObjQuery/GetSimpleTestImmutableObjsByODataQueryString', {plain : dto.TestImmutableObjSimpleDTO, observable : dto.TestImmutableObjObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestRootSecurityObjsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestRootSecurityObjSimpleDTO>, OData.SelectOperationResult<dto.TestRootSecurityObjObservableSimpleDTO>, dto.TestRootSecurityObjSimpleDTO, dto.TestRootSecurityObjObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestRootSecurityObjSimpleDTO>, OData.SelectOperationResult<dto.TestRootSecurityObjObservableSimpleDTO>, dto.TestRootSecurityObjSimpleDTO, dto.TestRootSecurityObjObservableSimpleDTO>();
-            return service.getData('TestRootSecurityObjQuery/GetSimpleTestRootSecurityObjsByODataQueryString', {plain : dto.TestRootSecurityObjSimpleDTO, observable : dto.TestRootSecurityObjObservableSimpleDTO}, realParameters);
+            return service.getData('TestRootSecurityObjQuery/GetSimpleTestRootSecurityObjsByODataQueryString', {plain : dto.TestRootSecurityObjSimpleDTO, observable : dto.TestRootSecurityObjObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestSecurityObjItemsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestSecurityObjItemSimpleDTO>, OData.SelectOperationResult<dto.TestSecurityObjItemObservableSimpleDTO>, dto.TestSecurityObjItemSimpleDTO, dto.TestSecurityObjItemObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestSecurityObjItemSimpleDTO>, OData.SelectOperationResult<dto.TestSecurityObjItemObservableSimpleDTO>, dto.TestSecurityObjItemSimpleDTO, dto.TestSecurityObjItemObservableSimpleDTO>();
-            return service.getData('TestSecurityObjItemQuery/GetSimpleTestSecurityObjItemsByODataQueryString', {plain : dto.TestSecurityObjItemSimpleDTO, observable : dto.TestSecurityObjItemObservableSimpleDTO}, realParameters);
+            return service.getData('TestSecurityObjItemQuery/GetSimpleTestSecurityObjItemsByODataQueryString', {plain : dto.TestSecurityObjItemSimpleDTO, observable : dto.TestSecurityObjItemObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestSecuritySubObjItem2sByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestSecuritySubObjItem2SimpleDTO>, OData.SelectOperationResult<dto.TestSecuritySubObjItem2ObservableSimpleDTO>, dto.TestSecuritySubObjItem2SimpleDTO, dto.TestSecuritySubObjItem2ObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestSecuritySubObjItem2SimpleDTO>, OData.SelectOperationResult<dto.TestSecuritySubObjItem2ObservableSimpleDTO>, dto.TestSecuritySubObjItem2SimpleDTO, dto.TestSecuritySubObjItem2ObservableSimpleDTO>();
-            return service.getData('TestSecuritySubObjItem2Query/GetSimpleTestSecuritySubObjItem2sByODataQueryString', {plain : dto.TestSecuritySubObjItem2SimpleDTO, observable : dto.TestSecuritySubObjItem2ObservableSimpleDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem2Query/GetSimpleTestSecuritySubObjItem2sByODataQueryString', {plain : dto.TestSecuritySubObjItem2SimpleDTO, observable : dto.TestSecuritySubObjItem2ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestSecuritySubObjItem3sByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestSecuritySubObjItem3SimpleDTO>, OData.SelectOperationResult<dto.TestSecuritySubObjItem3ObservableSimpleDTO>, dto.TestSecuritySubObjItem3SimpleDTO, dto.TestSecuritySubObjItem3ObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestSecuritySubObjItem3SimpleDTO>, OData.SelectOperationResult<dto.TestSecuritySubObjItem3ObservableSimpleDTO>, dto.TestSecuritySubObjItem3SimpleDTO, dto.TestSecuritySubObjItem3ObservableSimpleDTO>();
-            return service.getData('TestSecuritySubObjItem3Query/GetSimpleTestSecuritySubObjItem3sByODataQueryString', {plain : dto.TestSecuritySubObjItem3SimpleDTO, observable : dto.TestSecuritySubObjItem3ObservableSimpleDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem3Query/GetSimpleTestSecuritySubObjItem3sByODataQueryString', {plain : dto.TestSecuritySubObjItem3SimpleDTO, observable : dto.TestSecuritySubObjItem3ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestSecuritySubObjItemsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestSecuritySubObjItemSimpleDTO>, OData.SelectOperationResult<dto.TestSecuritySubObjItemObservableSimpleDTO>, dto.TestSecuritySubObjItemSimpleDTO, dto.TestSecuritySubObjItemObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestSecuritySubObjItemSimpleDTO>, OData.SelectOperationResult<dto.TestSecuritySubObjItemObservableSimpleDTO>, dto.TestSecuritySubObjItemSimpleDTO, dto.TestSecuritySubObjItemObservableSimpleDTO>();
-            return service.getData('TestSecuritySubObjItemQuery/GetSimpleTestSecuritySubObjItemsByODataQueryString', {plain : dto.TestSecuritySubObjItemSimpleDTO, observable : dto.TestSecuritySubObjItemObservableSimpleDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItemQuery/GetSimpleTestSecuritySubObjItemsByODataQueryString', {plain : dto.TestSecuritySubObjItemSimpleDTO, observable : dto.TestSecuritySubObjItemObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleWorkingCalendar1676sByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.WorkingCalendar1676SimpleDTO>, OData.SelectOperationResult<dto.WorkingCalendar1676ObservableSimpleDTO>, dto.WorkingCalendar1676SimpleDTO, dto.WorkingCalendar1676ObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.WorkingCalendar1676SimpleDTO>, OData.SelectOperationResult<dto.WorkingCalendar1676ObservableSimpleDTO>, dto.WorkingCalendar1676SimpleDTO, dto.WorkingCalendar1676ObservableSimpleDTO>();
-            return service.getData('WorkingCalendar1676Query/GetSimpleWorkingCalendar1676sByODataQueryString', {plain : dto.WorkingCalendar1676SimpleDTO, observable : dto.WorkingCalendar1676ObservableSimpleDTO}, realParameters);
+            return service.getData('WorkingCalendar1676Query/GetSimpleWorkingCalendar1676sByODataQueryString', {plain : dto.WorkingCalendar1676SimpleDTO, observable : dto.WorkingCalendar1676ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getTestBusinessUnitsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestBusinessUnitProjectionDTO>, OData.SelectOperationResult<dto.TestBusinessUnitObservableProjectionDTO>, dto.TestBusinessUnitProjectionDTO, dto.TestBusinessUnitObservableProjectionDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestBusinessUnitProjectionDTO>, OData.SelectOperationResult<dto.TestBusinessUnitObservableProjectionDTO>, dto.TestBusinessUnitProjectionDTO, dto.TestBusinessUnitObservableProjectionDTO>();
-            return service.getData('BusinessUnitQuery/GetTestBusinessUnitsByODataQueryString', {plain : dto.TestBusinessUnitProjectionDTO, observable : dto.TestBusinessUnitObservableProjectionDTO}, realParameters);
+            return service.getData('BusinessUnitQuery/GetTestBusinessUnitsByODataQueryString', {plain : dto.TestBusinessUnitProjectionDTO, observable : dto.TestBusinessUnitObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestBusinessUnitsByOperation(): async.AsyncFunc4<string, dto.SampleSystemBusinessUnitSecurityOperationCode, OData.SelectOperationResult<dto.TestBusinessUnitProjectionDTO>, OData.SelectOperationResult<dto.TestBusinessUnitObservableProjectionDTO>, dto.TestBusinessUnitProjectionDTO, dto.TestBusinessUnitObservableProjectionDTO> {
         return new async.AsyncFunc4((odataQueryString: string, securityOperationCode: dto.SampleSystemBusinessUnitSecurityOperationCode) => {
             let baseParameters = {odataQueryString : odataQueryString, securityOperationCode : securityOperationCode};
-            let realParameters = {getTestBusinessUnitsByOperationAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestBusinessUnitProjectionDTO>, OData.SelectOperationResult<dto.TestBusinessUnitObservableProjectionDTO>, dto.TestBusinessUnitProjectionDTO, dto.TestBusinessUnitObservableProjectionDTO>();
-            return service.getData('BusinessUnitQuery/GetTestBusinessUnitsByOperation', {plain : dto.TestBusinessUnitProjectionDTO, observable : dto.TestBusinessUnitObservableProjectionDTO}, realParameters);
+            return service.getData('BusinessUnitQuery/GetTestBusinessUnitsByOperation', {plain : dto.TestBusinessUnitProjectionDTO, observable : dto.TestBusinessUnitObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestBusinessUnitTreeByODataQueryStringWithHierarchicalBusinessUnitFilter(): async.AsyncFunc4<string, dto.HierarchicalBusinessUnitFilterModelStrictDTO, OData.SelectOperationResult<persistent.HierarchicalNode<dto.TestBusinessUnitProjectionDTO,Guid>>, OData.SelectOperationResult<persistent.HierarchicalNode<dto.TestBusinessUnitObservableProjectionDTO,Guid>>, dto.TestBusinessUnitProjectionDTO, dto.TestBusinessUnitObservableProjectionDTO> {
         return new async.AsyncFunc4((odataQueryString: string, filter: dto.HierarchicalBusinessUnitFilterModelStrictDTO) => {
             let baseParameters = {odataQueryString : odataQueryString, filter : filter.toNativeJson()};
-            let realParameters = {getTestBusinessUnitTreeByODataQueryStringWithHierarchicalBusinessUnitFilterAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<persistent.HierarchicalNode<dto.TestBusinessUnitProjectionDTO,Guid>>, OData.SelectOperationResult<persistent.HierarchicalNode<dto.TestBusinessUnitObservableProjectionDTO,Guid>>, dto.TestBusinessUnitProjectionDTO, dto.TestBusinessUnitObservableProjectionDTO>();
             return service.getHierarchicalData('BusinessUnitQuery/GetTestBusinessUnitTreeByODataQueryStringWithHierarchicalBusine' + 
-'ssUnitFilter', {plain : dto.TestBusinessUnitProjectionDTO, observable : dto.TestBusinessUnitObservableProjectionDTO}, realParameters);
+'ssUnitFilter', {plain : dto.TestBusinessUnitProjectionDTO, observable : dto.TestBusinessUnitObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestBusinessUnitTreeByOperation(): async.AsyncFunc4<string, dto.SampleSystemBusinessUnitSecurityOperationCode, OData.SelectOperationResult<persistent.HierarchicalNode<dto.TestBusinessUnitProjectionDTO,Guid>>, OData.SelectOperationResult<persistent.HierarchicalNode<dto.TestBusinessUnitObservableProjectionDTO,Guid>>, dto.TestBusinessUnitProjectionDTO, dto.TestBusinessUnitObservableProjectionDTO> {
         return new async.AsyncFunc4((odataQueryString: string, securityOperationCode: dto.SampleSystemBusinessUnitSecurityOperationCode) => {
             let baseParameters = {odataQueryString : odataQueryString, securityOperationCode : securityOperationCode};
-            let realParameters = {getTestBusinessUnitTreeByOperationAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<persistent.HierarchicalNode<dto.TestBusinessUnitProjectionDTO,Guid>>, OData.SelectOperationResult<persistent.HierarchicalNode<dto.TestBusinessUnitObservableProjectionDTO,Guid>>, dto.TestBusinessUnitProjectionDTO, dto.TestBusinessUnitObservableProjectionDTO>();
-            return service.getHierarchicalData('BusinessUnitQuery/GetTestBusinessUnitTreeByOperation', {plain : dto.TestBusinessUnitProjectionDTO, observable : dto.TestBusinessUnitObservableProjectionDTO}, realParameters);
+            return service.getHierarchicalData('BusinessUnitQuery/GetTestBusinessUnitTreeByOperation', {plain : dto.TestBusinessUnitProjectionDTO, observable : dto.TestBusinessUnitObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestCustomContextSecurityObjProjectionsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestCustomContextSecurityObjProjectionDTO>, OData.SelectOperationResult<dto.TestCustomContextSecurityObjObservableProjectionDTO>, dto.TestCustomContextSecurityObjProjectionDTO, dto.TestCustomContextSecurityObjObservableProjectionDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestCustomContextSecurityObjProjectionDTO>, OData.SelectOperationResult<dto.TestCustomContextSecurityObjObservableProjectionDTO>, dto.TestCustomContextSecurityObjProjectionDTO, dto.TestCustomContextSecurityObjObservableProjectionDTO>();
             return service.getData('TestCustomContextSecurityObjQuery/GetTestCustomContextSecurityObjProjectionsByODa' + 
-'taQueryString', {plain : dto.TestCustomContextSecurityObjProjectionDTO, observable : dto.TestCustomContextSecurityObjObservableProjectionDTO}, realParameters);
+'taQueryString', {plain : dto.TestCustomContextSecurityObjProjectionDTO, observable : dto.TestCustomContextSecurityObjObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestDepartmentsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestDepartmentProjectionDTO>, OData.SelectOperationResult<dto.TestDepartmentObservableProjectionDTO>, dto.TestDepartmentProjectionDTO, dto.TestDepartmentObservableProjectionDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestDepartmentProjectionDTO>, OData.SelectOperationResult<dto.TestDepartmentObservableProjectionDTO>, dto.TestDepartmentProjectionDTO, dto.TestDepartmentObservableProjectionDTO>();
-            return service.getData('HRDepartmentQuery/GetTestDepartmentsByODataQueryString', {plain : dto.TestDepartmentProjectionDTO, observable : dto.TestDepartmentObservableProjectionDTO}, realParameters);
+            return service.getData('HRDepartmentQuery/GetTestDepartmentsByODataQueryString', {plain : dto.TestDepartmentProjectionDTO, observable : dto.TestDepartmentObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestDepartmentsByOperation(): async.AsyncFunc4<string, dto.SampleSystemHRDepartmentSecurityOperationCode, OData.SelectOperationResult<dto.TestDepartmentProjectionDTO>, OData.SelectOperationResult<dto.TestDepartmentObservableProjectionDTO>, dto.TestDepartmentProjectionDTO, dto.TestDepartmentObservableProjectionDTO> {
         return new async.AsyncFunc4((odataQueryString: string, securityOperationCode: dto.SampleSystemHRDepartmentSecurityOperationCode) => {
             let baseParameters = {odataQueryString : odataQueryString, securityOperationCode : securityOperationCode};
-            let realParameters = {getTestDepartmentsByOperationAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestDepartmentProjectionDTO>, OData.SelectOperationResult<dto.TestDepartmentObservableProjectionDTO>, dto.TestDepartmentProjectionDTO, dto.TestDepartmentObservableProjectionDTO>();
-            return service.getData('HRDepartmentQuery/GetTestDepartmentsByOperation', {plain : dto.TestDepartmentProjectionDTO, observable : dto.TestDepartmentObservableProjectionDTO}, realParameters);
+            return service.getData('HRDepartmentQuery/GetTestDepartmentsByOperation', {plain : dto.TestDepartmentProjectionDTO, observable : dto.TestDepartmentObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestDepartmentTreeByOperation(): async.AsyncFunc4<string, dto.SampleSystemHRDepartmentSecurityOperationCode, OData.SelectOperationResult<persistent.HierarchicalNode<dto.TestDepartmentProjectionDTO,Guid>>, OData.SelectOperationResult<persistent.HierarchicalNode<dto.TestDepartmentObservableProjectionDTO,Guid>>, dto.TestDepartmentProjectionDTO, dto.TestDepartmentObservableProjectionDTO> {
         return new async.AsyncFunc4((odataQueryString: string, securityOperationCode: dto.SampleSystemHRDepartmentSecurityOperationCode) => {
             let baseParameters = {odataQueryString : odataQueryString, securityOperationCode : securityOperationCode};
-            let realParameters = {getTestDepartmentTreeByOperationAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<persistent.HierarchicalNode<dto.TestDepartmentProjectionDTO,Guid>>, OData.SelectOperationResult<persistent.HierarchicalNode<dto.TestDepartmentObservableProjectionDTO,Guid>>, dto.TestDepartmentProjectionDTO, dto.TestDepartmentObservableProjectionDTO>();
-            return service.getHierarchicalData('HRDepartmentQuery/GetTestDepartmentTreeByOperation', {plain : dto.TestDepartmentProjectionDTO, observable : dto.TestDepartmentObservableProjectionDTO}, realParameters);
+            return service.getHierarchicalData('HRDepartmentQuery/GetTestDepartmentTreeByOperation', {plain : dto.TestDepartmentProjectionDTO, observable : dto.TestDepartmentObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestEmployeesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestEmployeeProjectionDTO>, OData.SelectOperationResult<dto.TestEmployeeObservableProjectionDTO>, dto.TestEmployeeProjectionDTO, dto.TestEmployeeObservableProjectionDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestEmployeeProjectionDTO>, OData.SelectOperationResult<dto.TestEmployeeObservableProjectionDTO>, dto.TestEmployeeProjectionDTO, dto.TestEmployeeObservableProjectionDTO>();
-            return service.getData('EmployeeQuery/GetTestEmployeesByODataQueryString', {plain : dto.TestEmployeeProjectionDTO, observable : dto.TestEmployeeObservableProjectionDTO}, realParameters);
+            return service.getData('EmployeeQuery/GetTestEmployeesByODataQueryString', {plain : dto.TestEmployeeProjectionDTO, observable : dto.TestEmployeeObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestEmployeesByODataQueryStringWithFilter(): async.AsyncFunc4<string, dto.TestEmployeeFilterStrictDTO, OData.SelectOperationResult<dto.TestEmployeeProjectionDTO>, OData.SelectOperationResult<dto.TestEmployeeObservableProjectionDTO>, dto.TestEmployeeProjectionDTO, dto.TestEmployeeObservableProjectionDTO> {
         return new async.AsyncFunc4((odataQueryString: string, filter: dto.TestEmployeeFilterStrictDTO) => {
             let baseParameters = {odataQueryString : odataQueryString, filter : filter.toNativeJson()};
-            let realParameters = {getTestEmployeesByODataQueryStringWithFilterAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestEmployeeProjectionDTO>, OData.SelectOperationResult<dto.TestEmployeeObservableProjectionDTO>, dto.TestEmployeeProjectionDTO, dto.TestEmployeeObservableProjectionDTO>();
-            return service.getData('EmployeeQuery/GetTestEmployeesByODataQueryStringWithFilter', {plain : dto.TestEmployeeProjectionDTO, observable : dto.TestEmployeeObservableProjectionDTO}, realParameters);
+            return service.getData('EmployeeQuery/GetTestEmployeesByODataQueryStringWithFilter', {plain : dto.TestEmployeeProjectionDTO, observable : dto.TestEmployeeObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestIMRequestsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestIMRequestProjectionDTO>, OData.SelectOperationResult<dto.TestIMRequestObservableProjectionDTO>, dto.TestIMRequestProjectionDTO, dto.TestIMRequestObservableProjectionDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestIMRequestProjectionDTO>, OData.SelectOperationResult<dto.TestIMRequestObservableProjectionDTO>, dto.TestIMRequestProjectionDTO, dto.TestIMRequestObservableProjectionDTO>();
-            return service.getData('IMRequestQuery/GetTestIMRequestsByODataQueryString', {plain : dto.TestIMRequestProjectionDTO, observable : dto.TestIMRequestObservableProjectionDTO}, realParameters);
+            return service.getData('IMRequestQuery/GetTestIMRequestsByODataQueryString', {plain : dto.TestIMRequestProjectionDTO, observable : dto.TestIMRequestObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestLegacyEmployeesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestLegacyEmployeeProjectionDTO>, OData.SelectOperationResult<dto.TestLegacyEmployeeObservableProjectionDTO>, dto.TestLegacyEmployeeProjectionDTO, dto.TestLegacyEmployeeObservableProjectionDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestLegacyEmployeeProjectionDTO>, OData.SelectOperationResult<dto.TestLegacyEmployeeObservableProjectionDTO>, dto.TestLegacyEmployeeProjectionDTO, dto.TestLegacyEmployeeObservableProjectionDTO>();
-            return service.getData('EmployeeQuery/GetTestLegacyEmployeesByODataQueryString', {plain : dto.TestLegacyEmployeeProjectionDTO, observable : dto.TestLegacyEmployeeObservableProjectionDTO}, realParameters);
+            return service.getData('EmployeeQuery/GetTestLegacyEmployeesByODataQueryString', {plain : dto.TestLegacyEmployeeProjectionDTO, observable : dto.TestLegacyEmployeeObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestLocationCollectionPropertiessByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestLocationCollectionPropertiesProjectionDTO>, OData.SelectOperationResult<dto.TestLocationCollectionPropertiesObservableProjectionDTO>, dto.TestLocationCollectionPropertiesProjectionDTO, dto.TestLocationCollectionPropertiesObservableProjectionDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestLocationCollectionPropertiesProjectionDTO>, OData.SelectOperationResult<dto.TestLocationCollectionPropertiesObservableProjectionDTO>, dto.TestLocationCollectionPropertiesProjectionDTO, dto.TestLocationCollectionPropertiesObservableProjectionDTO>();
-            return service.getData('LocationQuery/GetTestLocationCollectionPropertiessByODataQueryString', {plain : dto.TestLocationCollectionPropertiesProjectionDTO, observable : dto.TestLocationCollectionPropertiesObservableProjectionDTO}, realParameters);
+            return service.getData('LocationQuery/GetTestLocationCollectionPropertiessByODataQueryString', {plain : dto.TestLocationCollectionPropertiesProjectionDTO, observable : dto.TestLocationCollectionPropertiesObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestLocationCollectionPropertiessByOperation(): async.AsyncFunc4<string, dto.SampleSystemLocationSecurityOperationCode, OData.SelectOperationResult<dto.TestLocationCollectionPropertiesProjectionDTO>, OData.SelectOperationResult<dto.TestLocationCollectionPropertiesObservableProjectionDTO>, dto.TestLocationCollectionPropertiesProjectionDTO, dto.TestLocationCollectionPropertiesObservableProjectionDTO> {
         return new async.AsyncFunc4((odataQueryString: string, securityOperationCode: dto.SampleSystemLocationSecurityOperationCode) => {
             let baseParameters = {odataQueryString : odataQueryString, securityOperationCode : securityOperationCode};
-            let realParameters = {getTestLocationCollectionPropertiessByOperationAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestLocationCollectionPropertiesProjectionDTO>, OData.SelectOperationResult<dto.TestLocationCollectionPropertiesObservableProjectionDTO>, dto.TestLocationCollectionPropertiesProjectionDTO, dto.TestLocationCollectionPropertiesObservableProjectionDTO>();
-            return service.getData('LocationQuery/GetTestLocationCollectionPropertiessByOperation', {plain : dto.TestLocationCollectionPropertiesProjectionDTO, observable : dto.TestLocationCollectionPropertiesObservableProjectionDTO}, realParameters);
+            return service.getData('LocationQuery/GetTestLocationCollectionPropertiessByOperation', {plain : dto.TestLocationCollectionPropertiesProjectionDTO, observable : dto.TestLocationCollectionPropertiesObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestLocationCollectionPropertiesTreeByOperation(): async.AsyncFunc4<string, dto.SampleSystemLocationSecurityOperationCode, OData.SelectOperationResult<persistent.HierarchicalNode<dto.TestLocationCollectionPropertiesProjectionDTO,Guid>>, OData.SelectOperationResult<persistent.HierarchicalNode<dto.TestLocationCollectionPropertiesObservableProjectionDTO,Guid>>, dto.TestLocationCollectionPropertiesProjectionDTO, dto.TestLocationCollectionPropertiesObservableProjectionDTO> {
         return new async.AsyncFunc4((odataQueryString: string, securityOperationCode: dto.SampleSystemLocationSecurityOperationCode) => {
             let baseParameters = {odataQueryString : odataQueryString, securityOperationCode : securityOperationCode};
-            let realParameters = {getTestLocationCollectionPropertiesTreeByOperationAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<persistent.HierarchicalNode<dto.TestLocationCollectionPropertiesProjectionDTO,Guid>>, OData.SelectOperationResult<persistent.HierarchicalNode<dto.TestLocationCollectionPropertiesObservableProjectionDTO,Guid>>, dto.TestLocationCollectionPropertiesProjectionDTO, dto.TestLocationCollectionPropertiesObservableProjectionDTO>();
-            return service.getHierarchicalData('LocationQuery/GetTestLocationCollectionPropertiesTreeByOperation', {plain : dto.TestLocationCollectionPropertiesProjectionDTO, observable : dto.TestLocationCollectionPropertiesObservableProjectionDTO}, realParameters);
+            return service.getHierarchicalData('LocationQuery/GetTestLocationCollectionPropertiesTreeByOperation', {plain : dto.TestLocationCollectionPropertiesProjectionDTO, observable : dto.TestLocationCollectionPropertiesObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestLocationsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestLocationProjectionDTO>, OData.SelectOperationResult<dto.TestLocationObservableProjectionDTO>, dto.TestLocationProjectionDTO, dto.TestLocationObservableProjectionDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestLocationProjectionDTO>, OData.SelectOperationResult<dto.TestLocationObservableProjectionDTO>, dto.TestLocationProjectionDTO, dto.TestLocationObservableProjectionDTO>();
-            return service.getData('LocationQuery/GetTestLocationsByODataQueryString', {plain : dto.TestLocationProjectionDTO, observable : dto.TestLocationObservableProjectionDTO}, realParameters);
+            return service.getData('LocationQuery/GetTestLocationsByODataQueryString', {plain : dto.TestLocationProjectionDTO, observable : dto.TestLocationObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestLocationsByOperation(): async.AsyncFunc4<string, dto.SampleSystemLocationSecurityOperationCode, OData.SelectOperationResult<dto.TestLocationProjectionDTO>, OData.SelectOperationResult<dto.TestLocationObservableProjectionDTO>, dto.TestLocationProjectionDTO, dto.TestLocationObservableProjectionDTO> {
         return new async.AsyncFunc4((odataQueryString: string, securityOperationCode: dto.SampleSystemLocationSecurityOperationCode) => {
             let baseParameters = {odataQueryString : odataQueryString, securityOperationCode : securityOperationCode};
-            let realParameters = {getTestLocationsByOperationAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestLocationProjectionDTO>, OData.SelectOperationResult<dto.TestLocationObservableProjectionDTO>, dto.TestLocationProjectionDTO, dto.TestLocationObservableProjectionDTO>();
-            return service.getData('LocationQuery/GetTestLocationsByOperation', {plain : dto.TestLocationProjectionDTO, observable : dto.TestLocationObservableProjectionDTO}, realParameters);
+            return service.getData('LocationQuery/GetTestLocationsByOperation', {plain : dto.TestLocationProjectionDTO, observable : dto.TestLocationObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestLocationTreeByOperation(): async.AsyncFunc4<string, dto.SampleSystemLocationSecurityOperationCode, OData.SelectOperationResult<persistent.HierarchicalNode<dto.TestLocationProjectionDTO,Guid>>, OData.SelectOperationResult<persistent.HierarchicalNode<dto.TestLocationObservableProjectionDTO,Guid>>, dto.TestLocationProjectionDTO, dto.TestLocationObservableProjectionDTO> {
         return new async.AsyncFunc4((odataQueryString: string, securityOperationCode: dto.SampleSystemLocationSecurityOperationCode) => {
             let baseParameters = {odataQueryString : odataQueryString, securityOperationCode : securityOperationCode};
-            let realParameters = {getTestLocationTreeByOperationAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<persistent.HierarchicalNode<dto.TestLocationProjectionDTO,Guid>>, OData.SelectOperationResult<persistent.HierarchicalNode<dto.TestLocationObservableProjectionDTO,Guid>>, dto.TestLocationProjectionDTO, dto.TestLocationObservableProjectionDTO>();
-            return service.getHierarchicalData('LocationQuery/GetTestLocationTreeByOperation', {plain : dto.TestLocationProjectionDTO, observable : dto.TestLocationObservableProjectionDTO}, realParameters);
+            return service.getHierarchicalData('LocationQuery/GetTestLocationTreeByOperation', {plain : dto.TestLocationProjectionDTO, observable : dto.TestLocationObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestManualEmployeeProjectionsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestManualEmployeeProjectionDTO>, OData.SelectOperationResult<dto.TestManualEmployeeObservableProjectionDTO>, dto.TestManualEmployeeProjectionDTO, dto.TestManualEmployeeObservableProjectionDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestManualEmployeeProjectionDTO>, OData.SelectOperationResult<dto.TestManualEmployeeObservableProjectionDTO>, dto.TestManualEmployeeProjectionDTO, dto.TestManualEmployeeObservableProjectionDTO>();
-            return service.getData('EmployeeQuery/GetTestManualEmployeeProjectionsByODataQueryString', {plain : dto.TestManualEmployeeProjectionDTO, observable : dto.TestManualEmployeeObservableProjectionDTO}, realParameters);
+            return service.getData('EmployeeQuery/GetTestManualEmployeeProjectionsByODataQueryString', {plain : dto.TestManualEmployeeProjectionDTO, observable : dto.TestManualEmployeeObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestSecurityObjItemProjectionsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestSecurityObjItemProjectionDTO>, OData.SelectOperationResult<dto.TestSecurityObjItemObservableProjectionDTO>, dto.TestSecurityObjItemProjectionDTO, dto.TestSecurityObjItemObservableProjectionDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestSecurityObjItemProjectionDTO>, OData.SelectOperationResult<dto.TestSecurityObjItemObservableProjectionDTO>, dto.TestSecurityObjItemProjectionDTO, dto.TestSecurityObjItemObservableProjectionDTO>();
-            return service.getData('TestSecurityObjItemQuery/GetTestSecurityObjItemProjectionsByODataQueryString', {plain : dto.TestSecurityObjItemProjectionDTO, observable : dto.TestSecurityObjItemObservableProjectionDTO}, realParameters);
+            return service.getData('TestSecurityObjItemQuery/GetTestSecurityObjItemProjectionsByODataQueryString', {plain : dto.TestSecurityObjItemProjectionDTO, observable : dto.TestSecurityObjItemObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getVisualBusinessUnitsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.BusinessUnitVisualDTO>, OData.SelectOperationResult<dto.BusinessUnitObservableVisualDTO>, dto.BusinessUnitVisualDTO, dto.BusinessUnitObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.BusinessUnitVisualDTO>, OData.SelectOperationResult<dto.BusinessUnitObservableVisualDTO>, dto.BusinessUnitVisualDTO, dto.BusinessUnitObservableVisualDTO>();
-            return service.getData('BusinessUnitQuery/GetVisualBusinessUnitsByODataQueryString', {plain : dto.BusinessUnitVisualDTO, observable : dto.BusinessUnitObservableVisualDTO}, realParameters);
+            return service.getData('BusinessUnitQuery/GetVisualBusinessUnitsByODataQueryString', {plain : dto.BusinessUnitVisualDTO, observable : dto.BusinessUnitObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualBusinessUnitTypesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.BusinessUnitTypeVisualDTO>, OData.SelectOperationResult<dto.BusinessUnitTypeObservableVisualDTO>, dto.BusinessUnitTypeVisualDTO, dto.BusinessUnitTypeObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.BusinessUnitTypeVisualDTO>, OData.SelectOperationResult<dto.BusinessUnitTypeObservableVisualDTO>, dto.BusinessUnitTypeVisualDTO, dto.BusinessUnitTypeObservableVisualDTO>();
-            return service.getData('BusinessUnitTypeQuery/GetVisualBusinessUnitTypesByODataQueryString', {plain : dto.BusinessUnitTypeVisualDTO, observable : dto.BusinessUnitTypeObservableVisualDTO}, realParameters);
+            return service.getData('BusinessUnitTypeQuery/GetVisualBusinessUnitTypesByODataQueryString', {plain : dto.BusinessUnitTypeVisualDTO, observable : dto.BusinessUnitTypeObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualCompanyLegalEntitiesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.CompanyLegalEntityVisualDTO>, OData.SelectOperationResult<dto.CompanyLegalEntityObservableVisualDTO>, dto.CompanyLegalEntityVisualDTO, dto.CompanyLegalEntityObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.CompanyLegalEntityVisualDTO>, OData.SelectOperationResult<dto.CompanyLegalEntityObservableVisualDTO>, dto.CompanyLegalEntityVisualDTO, dto.CompanyLegalEntityObservableVisualDTO>();
-            return service.getData('CompanyLegalEntityQuery/GetVisualCompanyLegalEntitiesByODataQueryString', {plain : dto.CompanyLegalEntityVisualDTO, observable : dto.CompanyLegalEntityObservableVisualDTO}, realParameters);
+            return service.getData('CompanyLegalEntityQuery/GetVisualCompanyLegalEntitiesByODataQueryString', {plain : dto.CompanyLegalEntityVisualDTO, observable : dto.CompanyLegalEntityObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualCountriesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.CountryVisualDTO>, OData.SelectOperationResult<dto.CountryObservableVisualDTO>, dto.CountryVisualDTO, dto.CountryObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.CountryVisualDTO>, OData.SelectOperationResult<dto.CountryObservableVisualDTO>, dto.CountryVisualDTO, dto.CountryObservableVisualDTO>();
-            return service.getData('CountryQuery/GetVisualCountriesByODataQueryString', {plain : dto.CountryVisualDTO, observable : dto.CountryObservableVisualDTO}, realParameters);
+            return service.getData('CountryQuery/GetVisualCountriesByODataQueryString', {plain : dto.CountryVisualDTO, observable : dto.CountryObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeInformationsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeeInformationVisualDTO>, OData.SelectOperationResult<dto.EmployeeInformationObservableVisualDTO>, dto.EmployeeInformationVisualDTO, dto.EmployeeInformationObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeeInformationVisualDTO>, OData.SelectOperationResult<dto.EmployeeInformationObservableVisualDTO>, dto.EmployeeInformationVisualDTO, dto.EmployeeInformationObservableVisualDTO>();
-            return service.getData('EmployeeInformationQuery/GetVisualEmployeeInformationsByODataQueryString', {plain : dto.EmployeeInformationVisualDTO, observable : dto.EmployeeInformationObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeInformationQuery/GetVisualEmployeeInformationsByODataQueryString', {plain : dto.EmployeeInformationVisualDTO, observable : dto.EmployeeInformationObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeePositionsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeePositionVisualDTO>, OData.SelectOperationResult<dto.EmployeePositionObservableVisualDTO>, dto.EmployeePositionVisualDTO, dto.EmployeePositionObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeePositionVisualDTO>, OData.SelectOperationResult<dto.EmployeePositionObservableVisualDTO>, dto.EmployeePositionVisualDTO, dto.EmployeePositionObservableVisualDTO>();
-            return service.getData('EmployeePositionQuery/GetVisualEmployeePositionsByODataQueryString', {plain : dto.EmployeePositionVisualDTO, observable : dto.EmployeePositionObservableVisualDTO}, realParameters);
+            return service.getData('EmployeePositionQuery/GetVisualEmployeePositionsByODataQueryString', {plain : dto.EmployeePositionVisualDTO, observable : dto.EmployeePositionObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeRegistrationTypesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeeRegistrationTypeVisualDTO>, OData.SelectOperationResult<dto.EmployeeRegistrationTypeObservableVisualDTO>, dto.EmployeeRegistrationTypeVisualDTO, dto.EmployeeRegistrationTypeObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeeRegistrationTypeVisualDTO>, OData.SelectOperationResult<dto.EmployeeRegistrationTypeObservableVisualDTO>, dto.EmployeeRegistrationTypeVisualDTO, dto.EmployeeRegistrationTypeObservableVisualDTO>();
             return service.getData('EmployeeRegistrationTypeQuery/GetVisualEmployeeRegistrationTypesByODataQueryStrin' + 
-'g', {plain : dto.EmployeeRegistrationTypeVisualDTO, observable : dto.EmployeeRegistrationTypeObservableVisualDTO}, realParameters);
+'g', {plain : dto.EmployeeRegistrationTypeVisualDTO, observable : dto.EmployeeRegistrationTypeObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeRoleDegreesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeeRoleDegreeVisualDTO>, OData.SelectOperationResult<dto.EmployeeRoleDegreeObservableVisualDTO>, dto.EmployeeRoleDegreeVisualDTO, dto.EmployeeRoleDegreeObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeeRoleDegreeVisualDTO>, OData.SelectOperationResult<dto.EmployeeRoleDegreeObservableVisualDTO>, dto.EmployeeRoleDegreeVisualDTO, dto.EmployeeRoleDegreeObservableVisualDTO>();
-            return service.getData('EmployeeRoleDegreeQuery/GetVisualEmployeeRoleDegreesByODataQueryString', {plain : dto.EmployeeRoleDegreeVisualDTO, observable : dto.EmployeeRoleDegreeObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeRoleDegreeQuery/GetVisualEmployeeRoleDegreesByODataQueryString', {plain : dto.EmployeeRoleDegreeVisualDTO, observable : dto.EmployeeRoleDegreeObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeRolesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeeRoleVisualDTO>, OData.SelectOperationResult<dto.EmployeeRoleObservableVisualDTO>, dto.EmployeeRoleVisualDTO, dto.EmployeeRoleObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeeRoleVisualDTO>, OData.SelectOperationResult<dto.EmployeeRoleObservableVisualDTO>, dto.EmployeeRoleVisualDTO, dto.EmployeeRoleObservableVisualDTO>();
-            return service.getData('EmployeeRoleQuery/GetVisualEmployeeRolesByODataQueryString', {plain : dto.EmployeeRoleVisualDTO, observable : dto.EmployeeRoleObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeRoleQuery/GetVisualEmployeeRolesByODataQueryString', {plain : dto.EmployeeRoleVisualDTO, observable : dto.EmployeeRoleObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeSpecializationsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.EmployeeSpecializationVisualDTO>, OData.SelectOperationResult<dto.EmployeeSpecializationObservableVisualDTO>, dto.EmployeeSpecializationVisualDTO, dto.EmployeeSpecializationObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.EmployeeSpecializationVisualDTO>, OData.SelectOperationResult<dto.EmployeeSpecializationObservableVisualDTO>, dto.EmployeeSpecializationVisualDTO, dto.EmployeeSpecializationObservableVisualDTO>();
-            return service.getData('EmployeeSpecializationQuery/GetVisualEmployeeSpecializationsByODataQueryString', {plain : dto.EmployeeSpecializationVisualDTO, observable : dto.EmployeeSpecializationObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeSpecializationQuery/GetVisualEmployeeSpecializationsByODataQueryString', {plain : dto.EmployeeSpecializationVisualDTO, observable : dto.EmployeeSpecializationObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualHRDepartmentsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.HRDepartmentVisualDTO>, OData.SelectOperationResult<dto.HRDepartmentObservableVisualDTO>, dto.HRDepartmentVisualDTO, dto.HRDepartmentObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.HRDepartmentVisualDTO>, OData.SelectOperationResult<dto.HRDepartmentObservableVisualDTO>, dto.HRDepartmentVisualDTO, dto.HRDepartmentObservableVisualDTO>();
-            return service.getData('HRDepartmentQuery/GetVisualHRDepartmentsByODataQueryString', {plain : dto.HRDepartmentVisualDTO, observable : dto.HRDepartmentObservableVisualDTO}, realParameters);
+            return service.getData('HRDepartmentQuery/GetVisualHRDepartmentsByODataQueryString', {plain : dto.HRDepartmentVisualDTO, observable : dto.HRDepartmentObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualIMRequestsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.IMRequestVisualDTO>, OData.SelectOperationResult<dto.IMRequestObservableVisualDTO>, dto.IMRequestVisualDTO, dto.IMRequestObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.IMRequestVisualDTO>, OData.SelectOperationResult<dto.IMRequestObservableVisualDTO>, dto.IMRequestVisualDTO, dto.IMRequestObservableVisualDTO>();
-            return service.getData('IMRequestQuery/GetVisualIMRequestsByODataQueryString', {plain : dto.IMRequestVisualDTO, observable : dto.IMRequestObservableVisualDTO}, realParameters);
+            return service.getData('IMRequestQuery/GetVisualIMRequestsByODataQueryString', {plain : dto.IMRequestVisualDTO, observable : dto.IMRequestObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualInformationsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.InformationVisualDTO>, OData.SelectOperationResult<dto.InformationObservableVisualDTO>, dto.InformationVisualDTO, dto.InformationObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.InformationVisualDTO>, OData.SelectOperationResult<dto.InformationObservableVisualDTO>, dto.InformationVisualDTO, dto.InformationObservableVisualDTO>();
-            return service.getData('InformationQuery/GetVisualInformationsByODataQueryString', {plain : dto.InformationVisualDTO, observable : dto.InformationObservableVisualDTO}, realParameters);
+            return service.getData('InformationQuery/GetVisualInformationsByODataQueryString', {plain : dto.InformationVisualDTO, observable : dto.InformationObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualLocation1676sByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.Location1676VisualDTO>, OData.SelectOperationResult<dto.Location1676ObservableVisualDTO>, dto.Location1676VisualDTO, dto.Location1676ObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.Location1676VisualDTO>, OData.SelectOperationResult<dto.Location1676ObservableVisualDTO>, dto.Location1676VisualDTO, dto.Location1676ObservableVisualDTO>();
-            return service.getData('Location1676Query/GetVisualLocation1676sByODataQueryString', {plain : dto.Location1676VisualDTO, observable : dto.Location1676ObservableVisualDTO}, realParameters);
+            return service.getData('Location1676Query/GetVisualLocation1676sByODataQueryString', {plain : dto.Location1676VisualDTO, observable : dto.Location1676ObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualLocationsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.LocationVisualDTO>, OData.SelectOperationResult<dto.LocationObservableVisualDTO>, dto.LocationVisualDTO, dto.LocationObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.LocationVisualDTO>, OData.SelectOperationResult<dto.LocationObservableVisualDTO>, dto.LocationVisualDTO, dto.LocationObservableVisualDTO>();
-            return service.getData('LocationQuery/GetVisualLocationsByODataQueryString', {plain : dto.LocationVisualDTO, observable : dto.LocationObservableVisualDTO}, realParameters);
+            return service.getData('LocationQuery/GetVisualLocationsByODataQueryString', {plain : dto.LocationVisualDTO, observable : dto.LocationObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualManagementUnitsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.ManagementUnitVisualDTO>, OData.SelectOperationResult<dto.ManagementUnitObservableVisualDTO>, dto.ManagementUnitVisualDTO, dto.ManagementUnitObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.ManagementUnitVisualDTO>, OData.SelectOperationResult<dto.ManagementUnitObservableVisualDTO>, dto.ManagementUnitVisualDTO, dto.ManagementUnitObservableVisualDTO>();
-            return service.getData('ManagementUnitQuery/GetVisualManagementUnitsByODataQueryString', {plain : dto.ManagementUnitVisualDTO, observable : dto.ManagementUnitObservableVisualDTO}, realParameters);
+            return service.getData('ManagementUnitQuery/GetVisualManagementUnitsByODataQueryString', {plain : dto.ManagementUnitVisualDTO, observable : dto.ManagementUnitObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestCustomContextSecurityObjsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestCustomContextSecurityObjVisualDTO>, OData.SelectOperationResult<dto.TestCustomContextSecurityObjObservableVisualDTO>, dto.TestCustomContextSecurityObjVisualDTO, dto.TestCustomContextSecurityObjObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestCustomContextSecurityObjVisualDTO>, OData.SelectOperationResult<dto.TestCustomContextSecurityObjObservableVisualDTO>, dto.TestCustomContextSecurityObjVisualDTO, dto.TestCustomContextSecurityObjObservableVisualDTO>();
             return service.getData('TestCustomContextSecurityObjQuery/GetVisualTestCustomContextSecurityObjsByODataQu' + 
-'eryString', {plain : dto.TestCustomContextSecurityObjVisualDTO, observable : dto.TestCustomContextSecurityObjObservableVisualDTO}, realParameters);
+'eryString', {plain : dto.TestCustomContextSecurityObjVisualDTO, observable : dto.TestCustomContextSecurityObjObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestRootSecurityObjsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestRootSecurityObjVisualDTO>, OData.SelectOperationResult<dto.TestRootSecurityObjObservableVisualDTO>, dto.TestRootSecurityObjVisualDTO, dto.TestRootSecurityObjObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestRootSecurityObjVisualDTO>, OData.SelectOperationResult<dto.TestRootSecurityObjObservableVisualDTO>, dto.TestRootSecurityObjVisualDTO, dto.TestRootSecurityObjObservableVisualDTO>();
-            return service.getData('TestRootSecurityObjQuery/GetVisualTestRootSecurityObjsByODataQueryString', {plain : dto.TestRootSecurityObjVisualDTO, observable : dto.TestRootSecurityObjObservableVisualDTO}, realParameters);
+            return service.getData('TestRootSecurityObjQuery/GetVisualTestRootSecurityObjsByODataQueryString', {plain : dto.TestRootSecurityObjVisualDTO, observable : dto.TestRootSecurityObjObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestSecurityObjItemsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestSecurityObjItemVisualDTO>, OData.SelectOperationResult<dto.TestSecurityObjItemObservableVisualDTO>, dto.TestSecurityObjItemVisualDTO, dto.TestSecurityObjItemObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestSecurityObjItemVisualDTO>, OData.SelectOperationResult<dto.TestSecurityObjItemObservableVisualDTO>, dto.TestSecurityObjItemVisualDTO, dto.TestSecurityObjItemObservableVisualDTO>();
-            return service.getData('TestSecurityObjItemQuery/GetVisualTestSecurityObjItemsByODataQueryString', {plain : dto.TestSecurityObjItemVisualDTO, observable : dto.TestSecurityObjItemObservableVisualDTO}, realParameters);
+            return service.getData('TestSecurityObjItemQuery/GetVisualTestSecurityObjItemsByODataQueryString', {plain : dto.TestSecurityObjItemVisualDTO, observable : dto.TestSecurityObjItemObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestSecuritySubObjItem2sByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestSecuritySubObjItem2VisualDTO>, OData.SelectOperationResult<dto.TestSecuritySubObjItem2ObservableVisualDTO>, dto.TestSecuritySubObjItem2VisualDTO, dto.TestSecuritySubObjItem2ObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestSecuritySubObjItem2VisualDTO>, OData.SelectOperationResult<dto.TestSecuritySubObjItem2ObservableVisualDTO>, dto.TestSecuritySubObjItem2VisualDTO, dto.TestSecuritySubObjItem2ObservableVisualDTO>();
-            return service.getData('TestSecuritySubObjItem2Query/GetVisualTestSecuritySubObjItem2sByODataQueryString', {plain : dto.TestSecuritySubObjItem2VisualDTO, observable : dto.TestSecuritySubObjItem2ObservableVisualDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem2Query/GetVisualTestSecuritySubObjItem2sByODataQueryString', {plain : dto.TestSecuritySubObjItem2VisualDTO, observable : dto.TestSecuritySubObjItem2ObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestSecuritySubObjItem3sByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestSecuritySubObjItem3VisualDTO>, OData.SelectOperationResult<dto.TestSecuritySubObjItem3ObservableVisualDTO>, dto.TestSecuritySubObjItem3VisualDTO, dto.TestSecuritySubObjItem3ObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestSecuritySubObjItem3VisualDTO>, OData.SelectOperationResult<dto.TestSecuritySubObjItem3ObservableVisualDTO>, dto.TestSecuritySubObjItem3VisualDTO, dto.TestSecuritySubObjItem3ObservableVisualDTO>();
-            return service.getData('TestSecuritySubObjItem3Query/GetVisualTestSecuritySubObjItem3sByODataQueryString', {plain : dto.TestSecuritySubObjItem3VisualDTO, observable : dto.TestSecuritySubObjItem3ObservableVisualDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem3Query/GetVisualTestSecuritySubObjItem3sByODataQueryString', {plain : dto.TestSecuritySubObjItem3VisualDTO, observable : dto.TestSecuritySubObjItem3ObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestSecuritySubObjItemsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestSecuritySubObjItemVisualDTO>, OData.SelectOperationResult<dto.TestSecuritySubObjItemObservableVisualDTO>, dto.TestSecuritySubObjItemVisualDTO, dto.TestSecuritySubObjItemObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestSecuritySubObjItemVisualDTO>, OData.SelectOperationResult<dto.TestSecuritySubObjItemObservableVisualDTO>, dto.TestSecuritySubObjItemVisualDTO, dto.TestSecuritySubObjItemObservableVisualDTO>();
-            return service.getData('TestSecuritySubObjItemQuery/GetVisualTestSecuritySubObjItemsByODataQueryString', {plain : dto.TestSecuritySubObjItemVisualDTO, observable : dto.TestSecuritySubObjItemObservableVisualDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItemQuery/GetVisualTestSecuritySubObjItemsByODataQueryString', {plain : dto.TestSecuritySubObjItemVisualDTO, observable : dto.TestSecuritySubObjItemObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualWorkingCalendar1676sByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.WorkingCalendar1676VisualDTO>, OData.SelectOperationResult<dto.WorkingCalendar1676ObservableVisualDTO>, dto.WorkingCalendar1676VisualDTO, dto.WorkingCalendar1676ObservableVisualDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.WorkingCalendar1676VisualDTO>, OData.SelectOperationResult<dto.WorkingCalendar1676ObservableVisualDTO>, dto.WorkingCalendar1676VisualDTO, dto.WorkingCalendar1676ObservableVisualDTO>();
-            return service.getData('WorkingCalendar1676Query/GetVisualWorkingCalendar1676sByODataQueryString', {plain : dto.WorkingCalendar1676VisualDTO, observable : dto.WorkingCalendar1676ObservableVisualDTO}, realParameters);
+            return service.getData('WorkingCalendar1676Query/GetVisualWorkingCalendar1676sByODataQueryString', {plain : dto.WorkingCalendar1676VisualDTO, observable : dto.WorkingCalendar1676ObservableVisualDTO}, baseParameters);
         });
     }
 

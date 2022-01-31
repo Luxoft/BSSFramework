@@ -3,6 +3,8 @@ using System.Linq;
 
 using FluentAssertions;
 
+using Framework.CustomReports.WebApi;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -87,7 +89,11 @@ namespace SampleSystem.IntegrationTests.Reports
             var parameters = this.GetController<SampleSystemGenericReportController>().GetSimpleReportParameters(reportId);
 
             // Act
-            var values = this.GetController<SampleSystemGenericReportController>().GetSimpleReportParameterValues(parameters.First(x => x.Name.Equals("Position", StringComparison.InvariantCultureIgnoreCase)).Identity, string.Empty);
+            var values = this.GetController<SampleSystemGenericReportController>().GetSimpleReportParameterValues(new GetSimpleReportParameterValuesRequest
+            {
+                    identity = parameters.First(x => x.Name.Equals("Position", StringComparison.InvariantCultureIgnoreCase)).Identity,
+                    odataQueryString = string.Empty
+            });
 
             // Assert
             values.TotalCount.Should().Be(1);
@@ -109,7 +115,11 @@ namespace SampleSystem.IntegrationTests.Reports
             var parameters = this.GetController<SampleSystemGenericReportController>().GetSimpleReportParameters(reportId);
 
             // Act
-            var values = this.GetController<SampleSystemGenericReportController>().GetSimpleReportParameterValues(parameters.First(x => x.Name.Equals("Position", StringComparison.InvariantCultureIgnoreCase)).Identity, string.Empty);
+            var values = this.GetController<SampleSystemGenericReportController>().GetSimpleReportParameterValues(new GetSimpleReportParameterValuesRequest
+            {
+                    identity = parameters.First(x => x.Name.Equals("Position", StringComparison.InvariantCultureIgnoreCase)).Identity,
+                    odataQueryString = string.Empty
+            });
 
             // Assert
             values.TotalCount.Should().Be(0);
@@ -122,7 +132,12 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportId = new Guid("7DBDCCDF-1F43-43FA-854A-D465F5F4ED53");
 
             var parameters = this.GetController<SampleSystemGenericReportController>().GetSimpleReportParameters(reportId);
-            var values = this.GetController<SampleSystemGenericReportController>().GetSimpleReportParameterValues(parameters.First(x => x.Name.Equals("Position", StringComparison.InvariantCultureIgnoreCase)).Identity, string.Empty);
+            var values = this.GetController<SampleSystemGenericReportController>().GetSimpleReportParameterValues(new GetSimpleReportParameterValuesRequest
+            {
+                identity = parameters.First(x => x.Name.Equals("Position", StringComparison.InvariantCultureIgnoreCase)).Identity,
+                odataQueryString = string.Empty
+            });
+
             var positionId = new Guid(values.Items.First().Value);
 
             // Act

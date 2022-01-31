@@ -11,6 +11,7 @@ using Framework.Configuration.Domain.Reports;
 using Framework.Configuration.Generated.DTO;
 using Framework.Core;
 using Framework.CustomReports.Services.ExcelBuilder;
+using Framework.CustomReports.WebApi;
 using Framework.DomainDriven.BLL;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -810,7 +811,11 @@ namespace SampleSystem.IntegrationTests.Reports
 
             this.DataHelper.SaveLocation(name: expectedLocationName);
 
-            var results = sampleSystemGenericReportController.GetSimpleReportParameterValuesByTypeName("Location", "$select=Id, DesignValue&$top=80&$orderby=DesignValue");
+            var results = sampleSystemGenericReportController.GetSimpleReportParameterValuesByTypeName(new GetSimpleReportParameterValuesByTypeNameRequest
+            {
+                    typeName = "Location",
+                    odataQueryString = "$select=Id, DesignValue&$top=80&$orderby=DesignValue"
+            });
 
             Assert.IsTrue(results.Items.Any(z => z.DesignValue == expectedLocationName));
         }

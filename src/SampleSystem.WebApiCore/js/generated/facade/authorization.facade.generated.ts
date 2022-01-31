@@ -24,18 +24,16 @@ export let getSecurityOperationsAsyncFunc = _getSecurityOperations();
 function _getCurrentPrincipal(): async.AsyncFunc2<dto.PrincipalFullDTO, dto.PrincipalObservableFullDTO, dto.PrincipalFullDTO, dto.PrincipalObservableFullDTO> {
     return new async.AsyncFunc2(() => {
         let baseParameters = {};
-        let realParameters = baseParameters;
         let service = Environment.current.context.facadeFactory.createAuthService<dto.PrincipalFullDTO, dto.PrincipalObservableFullDTO, dto.PrincipalFullDTO, dto.PrincipalObservableFullDTO>();
-        return service.getData('Principal/GetCurrentPrincipal', {plain : dto.PrincipalFullDTO, observable : dto.PrincipalObservableFullDTO}, realParameters);
+        return service.getData('Principal/GetCurrentPrincipal', {plain : dto.PrincipalFullDTO, observable : dto.PrincipalObservableFullDTO}, baseParameters);
     });
 }
 
     function _getSecurityOperations(): async.AsyncFunc2<Array<string>, Array<string>, string, string> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createAuthService<Array<string>, Array<string>, string, string>();
-            return service.getData('Operation/GetSecurityOperations', {plain : SimpleObject, observable : ObservableSimpleObject}, realParameters);
+            return service.getData('Operation/GetSecurityOperations', {plain : SimpleObject, observable : ObservableSimpleObject}, baseParameters);
         });
     }
 

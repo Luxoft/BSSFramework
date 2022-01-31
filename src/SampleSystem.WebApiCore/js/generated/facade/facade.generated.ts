@@ -584,5124 +584,4565 @@ export let savePrincipalAsyncFunc = _savePrincipal();
 export let saveSqlParserTestObjAsyncFunc = _saveSqlParserTestObj();
 export let saveSqlParserTestObjContainerAsyncFunc = _saveSqlParserTestObjContainer();
 export let saveTestImmutableObjAsyncFunc = _saveTestImmutableObj();
+export let testPeriodAsyncFunc = _testPeriod();
 export let updateEmployeeAsyncFunc = _updateEmployee();
 export let updateExample1AsyncFunc = _updateExample1();
 
 function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeModelStrictDTO, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO> {
     return new async.AsyncFunc3((employeeChangeModel: dto.EmployeeComplexChangeModelStrictDTO) => {
-        let baseParameters = {employeeChangeModel : employeeChangeModel.toNativeJson()};
-        let realParameters = baseParameters;
+        let baseParameters = employeeChangeModel.toNativeJson();
         let service = Environment.current.context.facadeFactory.createService<dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO>();
-        return service.getData('Employee/ChangeEmployeeByComplex', {plain : dto.EmployeeIdentityDTO, observable : dto.EmployeeObservableIdentityDTO}, realParameters);
+        return service.getData('Employee/ChangeEmployeeByComplex', {plain : dto.EmployeeIdentityDTO, observable : dto.EmployeeObservableIdentityDTO}, baseParameters);
     });
 }
 
     function _changeEmployeeByEmail(): async.AsyncFunc3<dto.EmployeeEmailChangeModelStrictDTO, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO> {
         return new async.AsyncFunc3((employeeChangeModel: dto.EmployeeEmailChangeModelStrictDTO) => {
-            let baseParameters = {employeeChangeModel : employeeChangeModel.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = employeeChangeModel.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO>();
-            return service.getData('Employee/ChangeEmployeeByEmail', {plain : dto.EmployeeIdentityDTO, observable : dto.EmployeeObservableIdentityDTO}, realParameters);
+            return service.getData('Employee/ChangeEmployeeByEmail', {plain : dto.EmployeeIdentityDTO, observable : dto.EmployeeObservableIdentityDTO}, baseParameters);
         });
     }
 
     function _checkBusinessUnitAccess(): async.SimpleAsyncFunc3<dto.BusinessUnitIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((businessUnitIdent: dto.BusinessUnitIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {businessUnitIdent : businessUnitIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkBusinessUnitAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('BusinessUnit/CheckBusinessUnitAccess', realParameters);
+            return service.getData('BusinessUnit/CheckBusinessUnitAccess', baseParameters);
         });
     }
 
     function _checkBusinessUnitHrDepartmentAccess(): async.SimpleAsyncFunc3<dto.BusinessUnitHrDepartmentIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((businessUnitHrDepartmentIdent: dto.BusinessUnitHrDepartmentIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {businessUnitHrDepartmentIdent : businessUnitHrDepartmentIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkBusinessUnitHrDepartmentAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('BusinessUnitHrDepartment/CheckBusinessUnitHrDepartmentAccess', realParameters);
+            return service.getData('BusinessUnitHrDepartment/CheckBusinessUnitHrDepartmentAccess', baseParameters);
         });
     }
 
     function _checkBusinessUnitManagerCommissionLinkAccess(): async.SimpleAsyncFunc3<dto.BusinessUnitManagerCommissionLinkIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((businessUnitManagerCommissionLinkIdent: dto.BusinessUnitManagerCommissionLinkIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {businessUnitManagerCommissionLinkIdent : businessUnitManagerCommissionLinkIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkBusinessUnitManagerCommissionLinkAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('BusinessUnitManagerCommissionLink/CheckBusinessUnitManagerCommissionLinkAccess', realParameters);
+            return service.getData('BusinessUnitManagerCommissionLink/CheckBusinessUnitManagerCommissionLinkAccess', baseParameters);
         });
     }
 
     function _checkBusinessUnitTypeAccess(): async.SimpleAsyncFunc3<dto.BusinessUnitTypeIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((businessUnitTypeIdent: dto.BusinessUnitTypeIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {businessUnitTypeIdent : businessUnitTypeIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkBusinessUnitTypeAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('BusinessUnitType/CheckBusinessUnitTypeAccess', realParameters);
+            return service.getData('BusinessUnitType/CheckBusinessUnitTypeAccess', baseParameters);
         });
     }
 
     function _checkCompanyLegalEntityAccess(): async.SimpleAsyncFunc3<dto.CompanyLegalEntityIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((companyLegalEntityIdent: dto.CompanyLegalEntityIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {companyLegalEntityIdent : companyLegalEntityIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkCompanyLegalEntityAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('CompanyLegalEntity/CheckCompanyLegalEntityAccess', realParameters);
+            return service.getData('CompanyLegalEntity/CheckCompanyLegalEntityAccess', baseParameters);
         });
     }
 
     function _checkCountryAccess(): async.SimpleAsyncFunc3<dto.CountryIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((countryIdent: dto.CountryIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {countryIdent : countryIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkCountryAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('Country/CheckCountryAccess', realParameters);
+            return service.getData('Country/CheckCountryAccess', baseParameters);
         });
     }
 
     function _checkEmployeeAccess(): async.SimpleAsyncFunc3<dto.EmployeeIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((employeeIdent: dto.EmployeeIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {employeeIdent : employeeIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkEmployeeAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('Employee/CheckEmployeeAccess', realParameters);
+            return service.getData('Employee/CheckEmployeeAccess', baseParameters);
         });
     }
 
     function _checkEmployeeInformationAccess(): async.SimpleAsyncFunc3<dto.EmployeeInformationIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((employeeInformationIdent: dto.EmployeeInformationIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {employeeInformationIdent : employeeInformationIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkEmployeeInformationAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('EmployeeInformation/CheckEmployeeInformationAccess', realParameters);
+            return service.getData('EmployeeInformation/CheckEmployeeInformationAccess', baseParameters);
         });
     }
 
     function _checkEmployeePhotoAccess(): async.SimpleAsyncFunc3<dto.EmployeePhotoIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((employeePhotoIdent: dto.EmployeePhotoIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {employeePhotoIdent : employeePhotoIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkEmployeePhotoAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('EmployeePhoto/CheckEmployeePhotoAccess', realParameters);
+            return service.getData('EmployeePhoto/CheckEmployeePhotoAccess', baseParameters);
         });
     }
 
     function _checkEmployeePositionAccess(): async.SimpleAsyncFunc3<dto.EmployeePositionIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((employeePositionIdent: dto.EmployeePositionIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {employeePositionIdent : employeePositionIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkEmployeePositionAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('EmployeePosition/CheckEmployeePositionAccess', realParameters);
+            return service.getData('EmployeePosition/CheckEmployeePositionAccess', baseParameters);
         });
     }
 
     function _checkEmployeeRegistrationTypeAccess(): async.SimpleAsyncFunc3<dto.EmployeeRegistrationTypeIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((employeeRegistrationTypeIdent: dto.EmployeeRegistrationTypeIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {employeeRegistrationTypeIdent : employeeRegistrationTypeIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkEmployeeRegistrationTypeAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('EmployeeRegistrationType/CheckEmployeeRegistrationTypeAccess', realParameters);
+            return service.getData('EmployeeRegistrationType/CheckEmployeeRegistrationTypeAccess', baseParameters);
         });
     }
 
     function _checkEmployeeRoleAccess(): async.SimpleAsyncFunc3<dto.EmployeeRoleIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((employeeRoleIdent: dto.EmployeeRoleIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {employeeRoleIdent : employeeRoleIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkEmployeeRoleAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('EmployeeRole/CheckEmployeeRoleAccess', realParameters);
+            return service.getData('EmployeeRole/CheckEmployeeRoleAccess', baseParameters);
         });
     }
 
     function _checkEmployeeRoleDegreeAccess(): async.SimpleAsyncFunc3<dto.EmployeeRoleDegreeIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((employeeRoleDegreeIdent: dto.EmployeeRoleDegreeIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {employeeRoleDegreeIdent : employeeRoleDegreeIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkEmployeeRoleDegreeAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('EmployeeRoleDegree/CheckEmployeeRoleDegreeAccess', realParameters);
+            return service.getData('EmployeeRoleDegree/CheckEmployeeRoleDegreeAccess', baseParameters);
         });
     }
 
     function _checkEmployeeSpecializationAccess(): async.SimpleAsyncFunc3<dto.EmployeeSpecializationIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((employeeSpecializationIdent: dto.EmployeeSpecializationIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {employeeSpecializationIdent : employeeSpecializationIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkEmployeeSpecializationAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('EmployeeSpecialization/CheckEmployeeSpecializationAccess', realParameters);
+            return service.getData('EmployeeSpecialization/CheckEmployeeSpecializationAccess', baseParameters);
         });
     }
 
     function _checkExample1Access(): async.SimpleAsyncFunc3<dto.Example1IdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((example1Ident: dto.Example1IdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {example1Ident : example1Ident, securityOperationCode : securityOperationCode};
-            let realParameters = {checkExample1AccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('Example1/CheckExample1Access', realParameters);
+            return service.getData('Example1/CheckExample1Access', baseParameters);
         });
     }
 
     function _checkHRDepartmentAccess(): async.SimpleAsyncFunc3<dto.HRDepartmentIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((hRDepartmentIdent: dto.HRDepartmentIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {hRDepartmentIdent : hRDepartmentIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkHRDepartmentAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('HRDepartment/CheckHRDepartmentAccess', realParameters);
+            return service.getData('HRDepartment/CheckHRDepartmentAccess', baseParameters);
         });
     }
 
     function _checkIMRequestAccess(): async.SimpleAsyncFunc3<dto.IMRequestIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((iMRequestIdent: dto.IMRequestIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {iMRequestIdent : iMRequestIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkIMRequestAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('IMRequest/CheckIMRequestAccess', realParameters);
+            return service.getData('IMRequest/CheckIMRequestAccess', baseParameters);
         });
     }
 
     function _checkInformationAccess(): async.SimpleAsyncFunc3<dto.InformationIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((informationIdent: dto.InformationIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {informationIdent : informationIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkInformationAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('Information/CheckInformationAccess', realParameters);
+            return service.getData('Information/CheckInformationAccess', baseParameters);
         });
     }
 
     function _checkLocation1676Access(): async.SimpleAsyncFunc3<dto.Location1676IdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((location1676Ident: dto.Location1676IdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {location1676Ident : location1676Ident, securityOperationCode : securityOperationCode};
-            let realParameters = {checkLocation1676AccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('Location1676/CheckLocation1676Access', realParameters);
+            return service.getData('Location1676/CheckLocation1676Access', baseParameters);
         });
     }
 
     function _checkLocationAccess(): async.SimpleAsyncFunc3<dto.LocationIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((locationIdent: dto.LocationIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {locationIdent : locationIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkLocationAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('Location/CheckLocationAccess', realParameters);
+            return service.getData('Location/CheckLocationAccess', baseParameters);
         });
     }
 
     function _checkManagementUnitAccess(): async.SimpleAsyncFunc3<dto.ManagementUnitIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((managementUnitIdent: dto.ManagementUnitIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {managementUnitIdent : managementUnitIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkManagementUnitAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('ManagementUnit/CheckManagementUnitAccess', realParameters);
+            return service.getData('ManagementUnit/CheckManagementUnitAccess', baseParameters);
         });
     }
 
     function _checkManagementUnitAndBusinessUnitLinkAccess(): async.SimpleAsyncFunc3<dto.ManagementUnitAndBusinessUnitLinkIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((managementUnitAndBusinessUnitLinkIdent: dto.ManagementUnitAndBusinessUnitLinkIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {managementUnitAndBusinessUnitLinkIdent : managementUnitAndBusinessUnitLinkIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkManagementUnitAndBusinessUnitLinkAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('ManagementUnitAndBusinessUnitLink/CheckManagementUnitAndBusinessUnitLinkAccess', realParameters);
+            return service.getData('ManagementUnitAndBusinessUnitLink/CheckManagementUnitAndBusinessUnitLinkAccess', baseParameters);
         });
     }
 
     function _checkManagementUnitAndHRDepartmentLinkAccess(): async.SimpleAsyncFunc3<dto.ManagementUnitAndHRDepartmentLinkIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((managementUnitAndHRDepartmentLinkIdent: dto.ManagementUnitAndHRDepartmentLinkIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {managementUnitAndHRDepartmentLinkIdent : managementUnitAndHRDepartmentLinkIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkManagementUnitAndHRDepartmentLinkAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('ManagementUnitAndHRDepartmentLink/CheckManagementUnitAndHRDepartmentLinkAccess', realParameters);
+            return service.getData('ManagementUnitAndHRDepartmentLink/CheckManagementUnitAndHRDepartmentLinkAccess', baseParameters);
         });
     }
 
     function _checkMessageTemplateContainerAccess(): async.SimpleAsyncFunc3<dto.MessageTemplateContainerIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((messageTemplateContainerIdent: dto.MessageTemplateContainerIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {messageTemplateContainerIdent : messageTemplateContainerIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkMessageTemplateContainerAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('MessageTemplateContainer/CheckMessageTemplateContainerAccess', realParameters);
+            return service.getData('MessageTemplateContainer/CheckMessageTemplateContainerAccess', baseParameters);
         });
     }
 
     function _checkPrincipalAccess(): async.SimpleAsyncFunc3<dto.PrincipalIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((principalIdent: dto.PrincipalIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {principalIdent : principalIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkPrincipalAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('Principal/CheckPrincipalAccess', realParameters);
+            return service.getData('Principal/CheckPrincipalAccess', baseParameters);
         });
     }
 
     function _checkRegularJobResultAccess(): async.SimpleAsyncFunc3<dto.RegularJobResultIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((regularJobResultIdent: dto.RegularJobResultIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {regularJobResultIdent : regularJobResultIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkRegularJobResultAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('RegularJobResult/CheckRegularJobResultAccess', realParameters);
+            return service.getData('RegularJobResult/CheckRegularJobResultAccess', baseParameters);
         });
     }
 
     function _checkSampleSystemMessageTemplateAccess(): async.SimpleAsyncFunc3<dto.SampleSystemMessageTemplateIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((sampleSystemMessageTemplateIdent: dto.SampleSystemMessageTemplateIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {sampleSystemMessageTemplateIdent : sampleSystemMessageTemplateIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkSampleSystemMessageTemplateAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('SampleSystemMessageTemplate/CheckSampleSystemMessageTemplateAccess', realParameters);
+            return service.getData('SampleSystemMessageTemplate/CheckSampleSystemMessageTemplateAccess', baseParameters);
         });
     }
 
     function _checkSqlParserTestObjAccess(): async.SimpleAsyncFunc3<dto.SqlParserTestObjIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((sqlParserTestObjIdent: dto.SqlParserTestObjIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {sqlParserTestObjIdent : sqlParserTestObjIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkSqlParserTestObjAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('SqlParserTestObj/CheckSqlParserTestObjAccess', realParameters);
+            return service.getData('SqlParserTestObj/CheckSqlParserTestObjAccess', baseParameters);
         });
     }
 
     function _checkSqlParserTestObjContainerAccess(): async.SimpleAsyncFunc3<dto.SqlParserTestObjContainerIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((sqlParserTestObjContainerIdent: dto.SqlParserTestObjContainerIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {sqlParserTestObjContainerIdent : sqlParserTestObjContainerIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkSqlParserTestObjContainerAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('SqlParserTestObjContainer/CheckSqlParserTestObjContainerAccess', realParameters);
+            return service.getData('SqlParserTestObjContainer/CheckSqlParserTestObjContainerAccess', baseParameters);
         });
     }
 
     function _checkTestImmutableObjAccess(): async.SimpleAsyncFunc3<dto.TestImmutableObjIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((testImmutableObjIdent: dto.TestImmutableObjIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {testImmutableObjIdent : testImmutableObjIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkTestImmutableObjAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('TestImmutableObj/CheckTestImmutableObjAccess', realParameters);
+            return service.getData('TestImmutableObj/CheckTestImmutableObjAccess', baseParameters);
         });
     }
 
     function _checkTestRootSecurityObjAccess(): async.SimpleAsyncFunc3<dto.TestRootSecurityObjIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((testRootSecurityObjIdent: dto.TestRootSecurityObjIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {testRootSecurityObjIdent : testRootSecurityObjIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {checkTestRootSecurityObjAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('TestRootSecurityObj/CheckTestRootSecurityObjAccess', realParameters);
+            return service.getData('TestRootSecurityObj/CheckTestRootSecurityObjAccess', baseParameters);
         });
     }
 
     function _checkWorkingCalendar1676Access(): async.SimpleAsyncFunc3<dto.WorkingCalendar1676IdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((workingCalendar1676Ident: dto.WorkingCalendar1676IdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {workingCalendar1676Ident : workingCalendar1676Ident, securityOperationCode : securityOperationCode};
-            let realParameters = {checkWorkingCalendar1676AccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('WorkingCalendar1676/CheckWorkingCalendar1676Access', realParameters);
+            return service.getData('WorkingCalendar1676/CheckWorkingCalendar1676Access', baseParameters);
         });
     }
 
     function _getBusinessUnitProgramClass(): async.AsyncFunc3<dto.BusinessUnitIdentityDTO, dto.BusinessUnitProgramClassProjectionDTO, dto.BusinessUnitProgramClassObservableProjectionDTO, dto.BusinessUnitProgramClassProjectionDTO, dto.BusinessUnitProgramClassObservableProjectionDTO> {
         return new async.AsyncFunc3((businessUnitProgramClassIdentity: dto.BusinessUnitIdentityDTO) => {
-            let baseParameters = {businessUnitProgramClassIdentity : businessUnitProgramClassIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitProgramClassIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitProgramClassProjectionDTO, dto.BusinessUnitProgramClassObservableProjectionDTO, dto.BusinessUnitProgramClassProjectionDTO, dto.BusinessUnitProgramClassObservableProjectionDTO>();
-            return service.getData('BusinessUnit/GetBusinessUnitProgramClass', {plain : dto.BusinessUnitProgramClassProjectionDTO, observable : dto.BusinessUnitProgramClassObservableProjectionDTO}, realParameters);
+            return service.getData('BusinessUnit/GetBusinessUnitProgramClass', {plain : dto.BusinessUnitProgramClassProjectionDTO, observable : dto.BusinessUnitProgramClassObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getBusinessUnitProgramClassesByOperation(): async.AsyncFunc3<dto.SampleSystemBusinessUnitSecurityOperationCode, Array<dto.BusinessUnitProgramClassProjectionDTO>, Array<dto.BusinessUnitProgramClassObservableProjectionDTO>, dto.BusinessUnitProgramClassProjectionDTO, dto.BusinessUnitProgramClassObservableProjectionDTO> {
         return new async.AsyncFunc3((securityOperationCode: dto.SampleSystemBusinessUnitSecurityOperationCode) => {
-            let baseParameters = {securityOperationCode : securityOperationCode};
-            let realParameters = baseParameters;
+            let baseParameters = securityOperationCode;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitProgramClassProjectionDTO>, Array<dto.BusinessUnitProgramClassObservableProjectionDTO>, dto.BusinessUnitProgramClassProjectionDTO, dto.BusinessUnitProgramClassObservableProjectionDTO>();
-            return service.getData('BusinessUnit/GetBusinessUnitProgramClassesByOperation', {plain : dto.BusinessUnitProgramClassProjectionDTO, observable : dto.BusinessUnitProgramClassObservableProjectionDTO}, realParameters);
+            return service.getData('BusinessUnit/GetBusinessUnitProgramClassesByOperation', {plain : dto.BusinessUnitProgramClassProjectionDTO, observable : dto.BusinessUnitProgramClassObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getCustomCompanyLegalEntity(): async.AsyncFunc3<dto.CompanyLegalEntityIdentityDTO, dto.CustomCompanyLegalEntityProjectionDTO, dto.CustomCompanyLegalEntityObservableProjectionDTO, dto.CustomCompanyLegalEntityProjectionDTO, dto.CustomCompanyLegalEntityObservableProjectionDTO> {
         return new async.AsyncFunc3((customCompanyLegalEntityIdentity: dto.CompanyLegalEntityIdentityDTO) => {
-            let baseParameters = {customCompanyLegalEntityIdentity : customCompanyLegalEntityIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = customCompanyLegalEntityIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.CustomCompanyLegalEntityProjectionDTO, dto.CustomCompanyLegalEntityObservableProjectionDTO, dto.CustomCompanyLegalEntityProjectionDTO, dto.CustomCompanyLegalEntityObservableProjectionDTO>();
-            return service.getData('CompanyLegalEntity/GetCustomCompanyLegalEntity', {plain : dto.CustomCompanyLegalEntityProjectionDTO, observable : dto.CustomCompanyLegalEntityObservableProjectionDTO}, realParameters);
+            return service.getData('CompanyLegalEntity/GetCustomCompanyLegalEntity', {plain : dto.CustomCompanyLegalEntityProjectionDTO, observable : dto.CustomCompanyLegalEntityObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnit(): async.AsyncFunc3<dto.BusinessUnitIdentityDTO, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO> {
         return new async.AsyncFunc3((businessUnitIdentity: dto.BusinessUnitIdentityDTO) => {
-            let baseParameters = {businessUnitIdentity : businessUnitIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO>();
-            return service.getData('BusinessUnit/GetFullBusinessUnit', {plain : dto.BusinessUnitFullDTO, observable : dto.BusinessUnitObservableFullDTO}, realParameters);
+            return service.getData('BusinessUnit/GetFullBusinessUnit', {plain : dto.BusinessUnitFullDTO, observable : dto.BusinessUnitObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnitByName(): async.AsyncFunc3<string, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO> {
         return new async.AsyncFunc3((businessUnitName: string) => {
-            let baseParameters = {businessUnitName : businessUnitName};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitName;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO>();
-            return service.getData('BusinessUnit/GetFullBusinessUnitByName', {plain : dto.BusinessUnitFullDTO, observable : dto.BusinessUnitObservableFullDTO}, realParameters);
+            return service.getData('BusinessUnit/GetFullBusinessUnitByName', {plain : dto.BusinessUnitFullDTO, observable : dto.BusinessUnitObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnitHrDepartment(): async.AsyncFunc3<dto.BusinessUnitHrDepartmentIdentityDTO, dto.BusinessUnitHrDepartmentFullDTO, dto.BusinessUnitHrDepartmentObservableFullDTO, dto.BusinessUnitHrDepartmentFullDTO, dto.BusinessUnitHrDepartmentObservableFullDTO> {
         return new async.AsyncFunc3((businessUnitHrDepartmentIdentity: dto.BusinessUnitHrDepartmentIdentityDTO) => {
-            let baseParameters = {businessUnitHrDepartmentIdentity : businessUnitHrDepartmentIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitHrDepartmentIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitHrDepartmentFullDTO, dto.BusinessUnitHrDepartmentObservableFullDTO, dto.BusinessUnitHrDepartmentFullDTO, dto.BusinessUnitHrDepartmentObservableFullDTO>();
-            return service.getData('BusinessUnitHrDepartment/GetFullBusinessUnitHrDepartment', {plain : dto.BusinessUnitHrDepartmentFullDTO, observable : dto.BusinessUnitHrDepartmentObservableFullDTO}, realParameters);
+            return service.getData('BusinessUnitHrDepartment/GetFullBusinessUnitHrDepartment', {plain : dto.BusinessUnitHrDepartmentFullDTO, observable : dto.BusinessUnitHrDepartmentObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnitHrDepartments(): async.AsyncFunc2<Array<dto.BusinessUnitHrDepartmentFullDTO>, Array<dto.BusinessUnitHrDepartmentObservableFullDTO>, dto.BusinessUnitHrDepartmentFullDTO, dto.BusinessUnitHrDepartmentObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitHrDepartmentFullDTO>, Array<dto.BusinessUnitHrDepartmentObservableFullDTO>, dto.BusinessUnitHrDepartmentFullDTO, dto.BusinessUnitHrDepartmentObservableFullDTO>();
-            return service.getData('BusinessUnitHrDepartment/GetFullBusinessUnitHrDepartments', {plain : dto.BusinessUnitHrDepartmentFullDTO, observable : dto.BusinessUnitHrDepartmentObservableFullDTO}, realParameters);
+            return service.getData('BusinessUnitHrDepartment/GetFullBusinessUnitHrDepartments', {plain : dto.BusinessUnitHrDepartmentFullDTO, observable : dto.BusinessUnitHrDepartmentObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnitHrDepartmentsByIdents(): async.AsyncFunc3<dto.BusinessUnitHrDepartmentIdentityDTO[], Array<dto.BusinessUnitHrDepartmentFullDTO>, Array<dto.BusinessUnitHrDepartmentObservableFullDTO>, dto.BusinessUnitHrDepartmentFullDTO, dto.BusinessUnitHrDepartmentObservableFullDTO> {
         return new async.AsyncFunc3((businessUnitHrDepartmentIdents: dto.BusinessUnitHrDepartmentIdentityDTO[]) => {
-            let baseParameters = {businessUnitHrDepartmentIdents : businessUnitHrDepartmentIdents};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitHrDepartmentIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitHrDepartmentFullDTO>, Array<dto.BusinessUnitHrDepartmentObservableFullDTO>, dto.BusinessUnitHrDepartmentFullDTO, dto.BusinessUnitHrDepartmentObservableFullDTO>();
-            return service.getData('BusinessUnitHrDepartment/GetFullBusinessUnitHrDepartmentsByIdents', {plain : dto.BusinessUnitHrDepartmentFullDTO, observable : dto.BusinessUnitHrDepartmentObservableFullDTO}, realParameters);
+            return service.getData('BusinessUnitHrDepartment/GetFullBusinessUnitHrDepartmentsByIdents', {plain : dto.BusinessUnitHrDepartmentFullDTO, observable : dto.BusinessUnitHrDepartmentObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnitManagerCommissionLink(): async.AsyncFunc3<dto.BusinessUnitManagerCommissionLinkIdentityDTO, dto.BusinessUnitManagerCommissionLinkFullDTO, dto.BusinessUnitManagerCommissionLinkObservableFullDTO, dto.BusinessUnitManagerCommissionLinkFullDTO, dto.BusinessUnitManagerCommissionLinkObservableFullDTO> {
         return new async.AsyncFunc3((businessUnitManagerCommissionLinkIdentity: dto.BusinessUnitManagerCommissionLinkIdentityDTO) => {
-            let baseParameters = {businessUnitManagerCommissionLinkIdentity : businessUnitManagerCommissionLinkIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitManagerCommissionLinkIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitManagerCommissionLinkFullDTO, dto.BusinessUnitManagerCommissionLinkObservableFullDTO, dto.BusinessUnitManagerCommissionLinkFullDTO, dto.BusinessUnitManagerCommissionLinkObservableFullDTO>();
-            return service.getData('BusinessUnitManagerCommissionLink/GetFullBusinessUnitManagerCommissionLink', {plain : dto.BusinessUnitManagerCommissionLinkFullDTO, observable : dto.BusinessUnitManagerCommissionLinkObservableFullDTO}, realParameters);
+            return service.getData('BusinessUnitManagerCommissionLink/GetFullBusinessUnitManagerCommissionLink', {plain : dto.BusinessUnitManagerCommissionLinkFullDTO, observable : dto.BusinessUnitManagerCommissionLinkObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnitManagerCommissionLinks(): async.AsyncFunc2<Array<dto.BusinessUnitManagerCommissionLinkFullDTO>, Array<dto.BusinessUnitManagerCommissionLinkObservableFullDTO>, dto.BusinessUnitManagerCommissionLinkFullDTO, dto.BusinessUnitManagerCommissionLinkObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitManagerCommissionLinkFullDTO>, Array<dto.BusinessUnitManagerCommissionLinkObservableFullDTO>, dto.BusinessUnitManagerCommissionLinkFullDTO, dto.BusinessUnitManagerCommissionLinkObservableFullDTO>();
-            return service.getData('BusinessUnitManagerCommissionLink/GetFullBusinessUnitManagerCommissionLinks', {plain : dto.BusinessUnitManagerCommissionLinkFullDTO, observable : dto.BusinessUnitManagerCommissionLinkObservableFullDTO}, realParameters);
+            return service.getData('BusinessUnitManagerCommissionLink/GetFullBusinessUnitManagerCommissionLinks', {plain : dto.BusinessUnitManagerCommissionLinkFullDTO, observable : dto.BusinessUnitManagerCommissionLinkObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnitManagerCommissionLinksByIdents(): async.AsyncFunc3<dto.BusinessUnitManagerCommissionLinkIdentityDTO[], Array<dto.BusinessUnitManagerCommissionLinkFullDTO>, Array<dto.BusinessUnitManagerCommissionLinkObservableFullDTO>, dto.BusinessUnitManagerCommissionLinkFullDTO, dto.BusinessUnitManagerCommissionLinkObservableFullDTO> {
         return new async.AsyncFunc3((businessUnitManagerCommissionLinkIdents: dto.BusinessUnitManagerCommissionLinkIdentityDTO[]) => {
-            let baseParameters = {businessUnitManagerCommissionLinkIdents : businessUnitManagerCommissionLinkIdents};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitManagerCommissionLinkIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitManagerCommissionLinkFullDTO>, Array<dto.BusinessUnitManagerCommissionLinkObservableFullDTO>, dto.BusinessUnitManagerCommissionLinkFullDTO, dto.BusinessUnitManagerCommissionLinkObservableFullDTO>();
             return service.getData('BusinessUnitManagerCommissionLink/GetFullBusinessUnitManagerCommissionLinksByIden' + 
-'ts', {plain : dto.BusinessUnitManagerCommissionLinkFullDTO, observable : dto.BusinessUnitManagerCommissionLinkObservableFullDTO}, realParameters);
+'ts', {plain : dto.BusinessUnitManagerCommissionLinkFullDTO, observable : dto.BusinessUnitManagerCommissionLinkObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnits(): async.AsyncFunc2<Array<dto.BusinessUnitFullDTO>, Array<dto.BusinessUnitObservableFullDTO>, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitFullDTO>, Array<dto.BusinessUnitObservableFullDTO>, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO>();
-            return service.getData('BusinessUnit/GetFullBusinessUnits', {plain : dto.BusinessUnitFullDTO, observable : dto.BusinessUnitObservableFullDTO}, realParameters);
+            return service.getData('BusinessUnit/GetFullBusinessUnits', {plain : dto.BusinessUnitFullDTO, observable : dto.BusinessUnitObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnitsByIdents(): async.AsyncFunc3<dto.BusinessUnitIdentityDTO[], Array<dto.BusinessUnitFullDTO>, Array<dto.BusinessUnitObservableFullDTO>, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO> {
         return new async.AsyncFunc3((businessUnitIdents: dto.BusinessUnitIdentityDTO[]) => {
-            let baseParameters = {businessUnitIdents : businessUnitIdents};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitFullDTO>, Array<dto.BusinessUnitObservableFullDTO>, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO>();
-            return service.getData('BusinessUnit/GetFullBusinessUnitsByIdents', {plain : dto.BusinessUnitFullDTO, observable : dto.BusinessUnitObservableFullDTO}, realParameters);
+            return service.getData('BusinessUnit/GetFullBusinessUnitsByIdents', {plain : dto.BusinessUnitFullDTO, observable : dto.BusinessUnitObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnitsByOperation(): async.AsyncFunc3<dto.SampleSystemBusinessUnitSecurityOperationCode, Array<dto.BusinessUnitFullDTO>, Array<dto.BusinessUnitObservableFullDTO>, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO> {
         return new async.AsyncFunc3((securityOperationCode: dto.SampleSystemBusinessUnitSecurityOperationCode) => {
-            let baseParameters = {securityOperationCode : securityOperationCode};
-            let realParameters = baseParameters;
+            let baseParameters = securityOperationCode;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitFullDTO>, Array<dto.BusinessUnitObservableFullDTO>, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO>();
-            return service.getData('BusinessUnit/GetFullBusinessUnitsByOperation', {plain : dto.BusinessUnitFullDTO, observable : dto.BusinessUnitObservableFullDTO}, realParameters);
+            return service.getData('BusinessUnit/GetFullBusinessUnitsByOperation', {plain : dto.BusinessUnitFullDTO, observable : dto.BusinessUnitObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnitsByRootFilter(): async.AsyncFunc3<dto.BusinessUnitRootFilterModelStrictDTO, Array<dto.BusinessUnitFullDTO>, Array<dto.BusinessUnitObservableFullDTO>, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO> {
         return new async.AsyncFunc3((filter: dto.BusinessUnitRootFilterModelStrictDTO) => {
-            let baseParameters = {filter : filter.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = filter.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitFullDTO>, Array<dto.BusinessUnitObservableFullDTO>, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO>();
-            return service.getData('BusinessUnit/GetFullBusinessUnitsByRootFilter', {plain : dto.BusinessUnitFullDTO, observable : dto.BusinessUnitObservableFullDTO}, realParameters);
+            return service.getData('BusinessUnit/GetFullBusinessUnitsByRootFilter', {plain : dto.BusinessUnitFullDTO, observable : dto.BusinessUnitObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnitsTree(): async.AsyncFunc2<Array<persistent.HierarchicalNode<dto.BusinessUnitFullDTO,Guid>>, Array<persistent.HierarchicalNode<dto.BusinessUnitObservableFullDTO,Guid>>, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<persistent.HierarchicalNode<dto.BusinessUnitFullDTO,Guid>>, Array<persistent.HierarchicalNode<dto.BusinessUnitObservableFullDTO,Guid>>, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO>();
-            return service.getHierarchicalData('BusinessUnit/GetFullBusinessUnitsTree', {plain : dto.BusinessUnitFullDTO, observable : dto.BusinessUnitObservableFullDTO}, realParameters);
+            return service.getHierarchicalData('BusinessUnit/GetFullBusinessUnitsTree', {plain : dto.BusinessUnitFullDTO, observable : dto.BusinessUnitObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnitsTreeByOData(): async.AsyncFunc3<string, OData.SelectOperationResult<persistent.HierarchicalNode<dto.BusinessUnitFullDTO,Guid>>, OData.SelectOperationResult<persistent.HierarchicalNode<dto.BusinessUnitObservableFullDTO,Guid>>, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = {odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<persistent.HierarchicalNode<dto.BusinessUnitFullDTO,Guid>>, OData.SelectOperationResult<persistent.HierarchicalNode<dto.BusinessUnitObservableFullDTO,Guid>>, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO>();
-            return service.getHierarchicalData('BusinessUnit/GetFullBusinessUnitsTreeByOData', {plain : dto.BusinessUnitFullDTO, observable : dto.BusinessUnitObservableFullDTO}, realParameters);
+            return service.getHierarchicalData('BusinessUnit/GetFullBusinessUnitsTreeByOData', {plain : dto.BusinessUnitFullDTO, observable : dto.BusinessUnitObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnitType(): async.AsyncFunc3<dto.BusinessUnitTypeIdentityDTO, dto.BusinessUnitTypeFullDTO, dto.BusinessUnitTypeObservableFullDTO, dto.BusinessUnitTypeFullDTO, dto.BusinessUnitTypeObservableFullDTO> {
         return new async.AsyncFunc3((businessUnitTypeIdentity: dto.BusinessUnitTypeIdentityDTO) => {
-            let baseParameters = {businessUnitTypeIdentity : businessUnitTypeIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitTypeIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitTypeFullDTO, dto.BusinessUnitTypeObservableFullDTO, dto.BusinessUnitTypeFullDTO, dto.BusinessUnitTypeObservableFullDTO>();
-            return service.getData('BusinessUnitType/GetFullBusinessUnitType', {plain : dto.BusinessUnitTypeFullDTO, observable : dto.BusinessUnitTypeObservableFullDTO}, realParameters);
+            return service.getData('BusinessUnitType/GetFullBusinessUnitType', {plain : dto.BusinessUnitTypeFullDTO, observable : dto.BusinessUnitTypeObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnitTypeByName(): async.AsyncFunc3<string, dto.BusinessUnitTypeFullDTO, dto.BusinessUnitTypeObservableFullDTO, dto.BusinessUnitTypeFullDTO, dto.BusinessUnitTypeObservableFullDTO> {
         return new async.AsyncFunc3((businessUnitTypeName: string) => {
-            let baseParameters = {businessUnitTypeName : businessUnitTypeName};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitTypeName;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitTypeFullDTO, dto.BusinessUnitTypeObservableFullDTO, dto.BusinessUnitTypeFullDTO, dto.BusinessUnitTypeObservableFullDTO>();
-            return service.getData('BusinessUnitType/GetFullBusinessUnitTypeByName', {plain : dto.BusinessUnitTypeFullDTO, observable : dto.BusinessUnitTypeObservableFullDTO}, realParameters);
+            return service.getData('BusinessUnitType/GetFullBusinessUnitTypeByName', {plain : dto.BusinessUnitTypeFullDTO, observable : dto.BusinessUnitTypeObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnitTypes(): async.AsyncFunc2<Array<dto.BusinessUnitTypeFullDTO>, Array<dto.BusinessUnitTypeObservableFullDTO>, dto.BusinessUnitTypeFullDTO, dto.BusinessUnitTypeObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitTypeFullDTO>, Array<dto.BusinessUnitTypeObservableFullDTO>, dto.BusinessUnitTypeFullDTO, dto.BusinessUnitTypeObservableFullDTO>();
-            return service.getData('BusinessUnitType/GetFullBusinessUnitTypes', {plain : dto.BusinessUnitTypeFullDTO, observable : dto.BusinessUnitTypeObservableFullDTO}, realParameters);
+            return service.getData('BusinessUnitType/GetFullBusinessUnitTypes', {plain : dto.BusinessUnitTypeFullDTO, observable : dto.BusinessUnitTypeObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullBusinessUnitTypesByIdents(): async.AsyncFunc3<dto.BusinessUnitTypeIdentityDTO[], Array<dto.BusinessUnitTypeFullDTO>, Array<dto.BusinessUnitTypeObservableFullDTO>, dto.BusinessUnitTypeFullDTO, dto.BusinessUnitTypeObservableFullDTO> {
         return new async.AsyncFunc3((businessUnitTypeIdents: dto.BusinessUnitTypeIdentityDTO[]) => {
-            let baseParameters = {businessUnitTypeIdents : businessUnitTypeIdents};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitTypeIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitTypeFullDTO>, Array<dto.BusinessUnitTypeObservableFullDTO>, dto.BusinessUnitTypeFullDTO, dto.BusinessUnitTypeObservableFullDTO>();
-            return service.getData('BusinessUnitType/GetFullBusinessUnitTypesByIdents', {plain : dto.BusinessUnitTypeFullDTO, observable : dto.BusinessUnitTypeObservableFullDTO}, realParameters);
+            return service.getData('BusinessUnitType/GetFullBusinessUnitTypesByIdents', {plain : dto.BusinessUnitTypeFullDTO, observable : dto.BusinessUnitTypeObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullCompanyLegalEntities(): async.AsyncFunc2<Array<dto.CompanyLegalEntityFullDTO>, Array<dto.CompanyLegalEntityObservableFullDTO>, dto.CompanyLegalEntityFullDTO, dto.CompanyLegalEntityObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.CompanyLegalEntityFullDTO>, Array<dto.CompanyLegalEntityObservableFullDTO>, dto.CompanyLegalEntityFullDTO, dto.CompanyLegalEntityObservableFullDTO>();
-            return service.getData('CompanyLegalEntity/GetFullCompanyLegalEntities', {plain : dto.CompanyLegalEntityFullDTO, observable : dto.CompanyLegalEntityObservableFullDTO}, realParameters);
+            return service.getData('CompanyLegalEntity/GetFullCompanyLegalEntities', {plain : dto.CompanyLegalEntityFullDTO, observable : dto.CompanyLegalEntityObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullCompanyLegalEntitiesByIdents(): async.AsyncFunc3<dto.CompanyLegalEntityIdentityDTO[], Array<dto.CompanyLegalEntityFullDTO>, Array<dto.CompanyLegalEntityObservableFullDTO>, dto.CompanyLegalEntityFullDTO, dto.CompanyLegalEntityObservableFullDTO> {
         return new async.AsyncFunc3((companyLegalEntityIdents: dto.CompanyLegalEntityIdentityDTO[]) => {
-            let baseParameters = {companyLegalEntityIdents : companyLegalEntityIdents};
-            let realParameters = baseParameters;
+            let baseParameters = companyLegalEntityIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.CompanyLegalEntityFullDTO>, Array<dto.CompanyLegalEntityObservableFullDTO>, dto.CompanyLegalEntityFullDTO, dto.CompanyLegalEntityObservableFullDTO>();
-            return service.getData('CompanyLegalEntity/GetFullCompanyLegalEntitiesByIdents', {plain : dto.CompanyLegalEntityFullDTO, observable : dto.CompanyLegalEntityObservableFullDTO}, realParameters);
+            return service.getData('CompanyLegalEntity/GetFullCompanyLegalEntitiesByIdents', {plain : dto.CompanyLegalEntityFullDTO, observable : dto.CompanyLegalEntityObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullCompanyLegalEntity(): async.AsyncFunc3<dto.CompanyLegalEntityIdentityDTO, dto.CompanyLegalEntityFullDTO, dto.CompanyLegalEntityObservableFullDTO, dto.CompanyLegalEntityFullDTO, dto.CompanyLegalEntityObservableFullDTO> {
         return new async.AsyncFunc3((companyLegalEntityIdentity: dto.CompanyLegalEntityIdentityDTO) => {
-            let baseParameters = {companyLegalEntityIdentity : companyLegalEntityIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = companyLegalEntityIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.CompanyLegalEntityFullDTO, dto.CompanyLegalEntityObservableFullDTO, dto.CompanyLegalEntityFullDTO, dto.CompanyLegalEntityObservableFullDTO>();
-            return service.getData('CompanyLegalEntity/GetFullCompanyLegalEntity', {plain : dto.CompanyLegalEntityFullDTO, observable : dto.CompanyLegalEntityObservableFullDTO}, realParameters);
+            return service.getData('CompanyLegalEntity/GetFullCompanyLegalEntity', {plain : dto.CompanyLegalEntityFullDTO, observable : dto.CompanyLegalEntityObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullCompanyLegalEntityByCode(): async.AsyncFunc3<string, dto.CompanyLegalEntityFullDTO, dto.CompanyLegalEntityObservableFullDTO, dto.CompanyLegalEntityFullDTO, dto.CompanyLegalEntityObservableFullDTO> {
         return new async.AsyncFunc3((companyLegalEntityCode: string) => {
-            let baseParameters = {companyLegalEntityCode : companyLegalEntityCode};
-            let realParameters = baseParameters;
+            let baseParameters = companyLegalEntityCode;
             let service = Environment.current.context.facadeFactory.createService<dto.CompanyLegalEntityFullDTO, dto.CompanyLegalEntityObservableFullDTO, dto.CompanyLegalEntityFullDTO, dto.CompanyLegalEntityObservableFullDTO>();
-            return service.getData('CompanyLegalEntity/GetFullCompanyLegalEntityByCode', {plain : dto.CompanyLegalEntityFullDTO, observable : dto.CompanyLegalEntityObservableFullDTO}, realParameters);
+            return service.getData('CompanyLegalEntity/GetFullCompanyLegalEntityByCode', {plain : dto.CompanyLegalEntityFullDTO, observable : dto.CompanyLegalEntityObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullCompanyLegalEntityByName(): async.AsyncFunc3<string, dto.CompanyLegalEntityFullDTO, dto.CompanyLegalEntityObservableFullDTO, dto.CompanyLegalEntityFullDTO, dto.CompanyLegalEntityObservableFullDTO> {
         return new async.AsyncFunc3((companyLegalEntityName: string) => {
-            let baseParameters = {companyLegalEntityName : companyLegalEntityName};
-            let realParameters = baseParameters;
+            let baseParameters = companyLegalEntityName;
             let service = Environment.current.context.facadeFactory.createService<dto.CompanyLegalEntityFullDTO, dto.CompanyLegalEntityObservableFullDTO, dto.CompanyLegalEntityFullDTO, dto.CompanyLegalEntityObservableFullDTO>();
-            return service.getData('CompanyLegalEntity/GetFullCompanyLegalEntityByName', {plain : dto.CompanyLegalEntityFullDTO, observable : dto.CompanyLegalEntityObservableFullDTO}, realParameters);
+            return service.getData('CompanyLegalEntity/GetFullCompanyLegalEntityByName', {plain : dto.CompanyLegalEntityFullDTO, observable : dto.CompanyLegalEntityObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullCountries(): async.AsyncFunc2<Array<dto.CountryFullDTO>, Array<dto.CountryObservableFullDTO>, dto.CountryFullDTO, dto.CountryObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.CountryFullDTO>, Array<dto.CountryObservableFullDTO>, dto.CountryFullDTO, dto.CountryObservableFullDTO>();
-            return service.getData('Country/GetFullCountries', {plain : dto.CountryFullDTO, observable : dto.CountryObservableFullDTO}, realParameters);
+            return service.getData('Country/GetFullCountries', {plain : dto.CountryFullDTO, observable : dto.CountryObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullCountriesByIdents(): async.AsyncFunc3<dto.CountryIdentityDTO[], Array<dto.CountryFullDTO>, Array<dto.CountryObservableFullDTO>, dto.CountryFullDTO, dto.CountryObservableFullDTO> {
         return new async.AsyncFunc3((countryIdents: dto.CountryIdentityDTO[]) => {
-            let baseParameters = {countryIdents : countryIdents};
-            let realParameters = baseParameters;
+            let baseParameters = countryIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.CountryFullDTO>, Array<dto.CountryObservableFullDTO>, dto.CountryFullDTO, dto.CountryObservableFullDTO>();
-            return service.getData('Country/GetFullCountriesByIdents', {plain : dto.CountryFullDTO, observable : dto.CountryObservableFullDTO}, realParameters);
+            return service.getData('Country/GetFullCountriesByIdents', {plain : dto.CountryFullDTO, observable : dto.CountryObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullCountry(): async.AsyncFunc3<dto.CountryIdentityDTO, dto.CountryFullDTO, dto.CountryObservableFullDTO, dto.CountryFullDTO, dto.CountryObservableFullDTO> {
         return new async.AsyncFunc3((countryIdentity: dto.CountryIdentityDTO) => {
-            let baseParameters = {countryIdentity : countryIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = countryIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.CountryFullDTO, dto.CountryObservableFullDTO, dto.CountryFullDTO, dto.CountryObservableFullDTO>();
-            return service.getData('Country/GetFullCountry', {plain : dto.CountryFullDTO, observable : dto.CountryObservableFullDTO}, realParameters);
+            return service.getData('Country/GetFullCountry', {plain : dto.CountryFullDTO, observable : dto.CountryObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullCountryByCode(): async.AsyncFunc3<string, dto.CountryFullDTO, dto.CountryObservableFullDTO, dto.CountryFullDTO, dto.CountryObservableFullDTO> {
         return new async.AsyncFunc3((countryCode: string) => {
-            let baseParameters = {countryCode : countryCode};
-            let realParameters = baseParameters;
+            let baseParameters = countryCode;
             let service = Environment.current.context.facadeFactory.createService<dto.CountryFullDTO, dto.CountryObservableFullDTO, dto.CountryFullDTO, dto.CountryObservableFullDTO>();
-            return service.getData('Country/GetFullCountryByCode', {plain : dto.CountryFullDTO, observable : dto.CountryObservableFullDTO}, realParameters);
+            return service.getData('Country/GetFullCountryByCode', {plain : dto.CountryFullDTO, observable : dto.CountryObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullCountryByName(): async.AsyncFunc3<string, dto.CountryFullDTO, dto.CountryObservableFullDTO, dto.CountryFullDTO, dto.CountryObservableFullDTO> {
         return new async.AsyncFunc3((countryName: string) => {
-            let baseParameters = {countryName : countryName};
-            let realParameters = baseParameters;
+            let baseParameters = countryName;
             let service = Environment.current.context.facadeFactory.createService<dto.CountryFullDTO, dto.CountryObservableFullDTO, dto.CountryFullDTO, dto.CountryObservableFullDTO>();
-            return service.getData('Country/GetFullCountryByName', {plain : dto.CountryFullDTO, observable : dto.CountryObservableFullDTO}, realParameters);
+            return service.getData('Country/GetFullCountryByName', {plain : dto.CountryFullDTO, observable : dto.CountryObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployee(): async.AsyncFunc3<dto.EmployeeIdentityDTO, dto.EmployeeFullDTO, dto.EmployeeObservableFullDTO, dto.EmployeeFullDTO, dto.EmployeeObservableFullDTO> {
         return new async.AsyncFunc3((employeeIdentity: dto.EmployeeIdentityDTO) => {
-            let baseParameters = {employeeIdentity : employeeIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeFullDTO, dto.EmployeeObservableFullDTO, dto.EmployeeFullDTO, dto.EmployeeObservableFullDTO>();
-            return service.getData('Employee/GetFullEmployee', {plain : dto.EmployeeFullDTO, observable : dto.EmployeeObservableFullDTO}, realParameters);
+            return service.getData('Employee/GetFullEmployee', {plain : dto.EmployeeFullDTO, observable : dto.EmployeeObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeInformation(): async.AsyncFunc3<dto.EmployeeInformationIdentityDTO, dto.EmployeeInformationFullDTO, dto.EmployeeInformationObservableFullDTO, dto.EmployeeInformationFullDTO, dto.EmployeeInformationObservableFullDTO> {
         return new async.AsyncFunc3((employeeInformationIdentity: dto.EmployeeInformationIdentityDTO) => {
-            let baseParameters = {employeeInformationIdentity : employeeInformationIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeInformationIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeInformationFullDTO, dto.EmployeeInformationObservableFullDTO, dto.EmployeeInformationFullDTO, dto.EmployeeInformationObservableFullDTO>();
-            return service.getData('EmployeeInformation/GetFullEmployeeInformation', {plain : dto.EmployeeInformationFullDTO, observable : dto.EmployeeInformationObservableFullDTO}, realParameters);
+            return service.getData('EmployeeInformation/GetFullEmployeeInformation', {plain : dto.EmployeeInformationFullDTO, observable : dto.EmployeeInformationObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeInformationByName(): async.AsyncFunc3<string, dto.EmployeeInformationFullDTO, dto.EmployeeInformationObservableFullDTO, dto.EmployeeInformationFullDTO, dto.EmployeeInformationObservableFullDTO> {
         return new async.AsyncFunc3((employeeInformationName: string) => {
-            let baseParameters = {employeeInformationName : employeeInformationName};
-            let realParameters = baseParameters;
+            let baseParameters = employeeInformationName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeInformationFullDTO, dto.EmployeeInformationObservableFullDTO, dto.EmployeeInformationFullDTO, dto.EmployeeInformationObservableFullDTO>();
-            return service.getData('EmployeeInformation/GetFullEmployeeInformationByName', {plain : dto.EmployeeInformationFullDTO, observable : dto.EmployeeInformationObservableFullDTO}, realParameters);
+            return service.getData('EmployeeInformation/GetFullEmployeeInformationByName', {plain : dto.EmployeeInformationFullDTO, observable : dto.EmployeeInformationObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeInformations(): async.AsyncFunc2<Array<dto.EmployeeInformationFullDTO>, Array<dto.EmployeeInformationObservableFullDTO>, dto.EmployeeInformationFullDTO, dto.EmployeeInformationObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeInformationFullDTO>, Array<dto.EmployeeInformationObservableFullDTO>, dto.EmployeeInformationFullDTO, dto.EmployeeInformationObservableFullDTO>();
-            return service.getData('EmployeeInformation/GetFullEmployeeInformations', {plain : dto.EmployeeInformationFullDTO, observable : dto.EmployeeInformationObservableFullDTO}, realParameters);
+            return service.getData('EmployeeInformation/GetFullEmployeeInformations', {plain : dto.EmployeeInformationFullDTO, observable : dto.EmployeeInformationObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeInformationsByIdents(): async.AsyncFunc3<dto.EmployeeInformationIdentityDTO[], Array<dto.EmployeeInformationFullDTO>, Array<dto.EmployeeInformationObservableFullDTO>, dto.EmployeeInformationFullDTO, dto.EmployeeInformationObservableFullDTO> {
         return new async.AsyncFunc3((employeeInformationIdents: dto.EmployeeInformationIdentityDTO[]) => {
-            let baseParameters = {employeeInformationIdents : employeeInformationIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeeInformationIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeInformationFullDTO>, Array<dto.EmployeeInformationObservableFullDTO>, dto.EmployeeInformationFullDTO, dto.EmployeeInformationObservableFullDTO>();
-            return service.getData('EmployeeInformation/GetFullEmployeeInformationsByIdents', {plain : dto.EmployeeInformationFullDTO, observable : dto.EmployeeInformationObservableFullDTO}, realParameters);
+            return service.getData('EmployeeInformation/GetFullEmployeeInformationsByIdents', {plain : dto.EmployeeInformationFullDTO, observable : dto.EmployeeInformationObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeePhoto(): async.AsyncFunc3<dto.EmployeePhotoIdentityDTO, dto.EmployeePhotoFullDTO, dto.EmployeePhotoObservableFullDTO, dto.EmployeePhotoFullDTO, dto.EmployeePhotoObservableFullDTO> {
         return new async.AsyncFunc3((employeePhotoIdentity: dto.EmployeePhotoIdentityDTO) => {
-            let baseParameters = {employeePhotoIdentity : employeePhotoIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeePhotoIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeePhotoFullDTO, dto.EmployeePhotoObservableFullDTO, dto.EmployeePhotoFullDTO, dto.EmployeePhotoObservableFullDTO>();
-            return service.getData('EmployeePhoto/GetFullEmployeePhoto', {plain : dto.EmployeePhotoFullDTO, observable : dto.EmployeePhotoObservableFullDTO}, realParameters);
+            return service.getData('EmployeePhoto/GetFullEmployeePhoto', {plain : dto.EmployeePhotoFullDTO, observable : dto.EmployeePhotoObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeePhotos(): async.AsyncFunc2<Array<dto.EmployeePhotoFullDTO>, Array<dto.EmployeePhotoObservableFullDTO>, dto.EmployeePhotoFullDTO, dto.EmployeePhotoObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeePhotoFullDTO>, Array<dto.EmployeePhotoObservableFullDTO>, dto.EmployeePhotoFullDTO, dto.EmployeePhotoObservableFullDTO>();
-            return service.getData('EmployeePhoto/GetFullEmployeePhotos', {plain : dto.EmployeePhotoFullDTO, observable : dto.EmployeePhotoObservableFullDTO}, realParameters);
+            return service.getData('EmployeePhoto/GetFullEmployeePhotos', {plain : dto.EmployeePhotoFullDTO, observable : dto.EmployeePhotoObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeePhotosByIdents(): async.AsyncFunc3<dto.EmployeePhotoIdentityDTO[], Array<dto.EmployeePhotoFullDTO>, Array<dto.EmployeePhotoObservableFullDTO>, dto.EmployeePhotoFullDTO, dto.EmployeePhotoObservableFullDTO> {
         return new async.AsyncFunc3((employeePhotoIdents: dto.EmployeePhotoIdentityDTO[]) => {
-            let baseParameters = {employeePhotoIdents : employeePhotoIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeePhotoIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeePhotoFullDTO>, Array<dto.EmployeePhotoObservableFullDTO>, dto.EmployeePhotoFullDTO, dto.EmployeePhotoObservableFullDTO>();
-            return service.getData('EmployeePhoto/GetFullEmployeePhotosByIdents', {plain : dto.EmployeePhotoFullDTO, observable : dto.EmployeePhotoObservableFullDTO}, realParameters);
+            return service.getData('EmployeePhoto/GetFullEmployeePhotosByIdents', {plain : dto.EmployeePhotoFullDTO, observable : dto.EmployeePhotoObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeePosition(): async.AsyncFunc3<dto.EmployeePositionIdentityDTO, dto.EmployeePositionFullDTO, dto.EmployeePositionObservableFullDTO, dto.EmployeePositionFullDTO, dto.EmployeePositionObservableFullDTO> {
         return new async.AsyncFunc3((employeePositionIdentity: dto.EmployeePositionIdentityDTO) => {
-            let baseParameters = {employeePositionIdentity : employeePositionIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeePositionIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeePositionFullDTO, dto.EmployeePositionObservableFullDTO, dto.EmployeePositionFullDTO, dto.EmployeePositionObservableFullDTO>();
-            return service.getData('EmployeePosition/GetFullEmployeePosition', {plain : dto.EmployeePositionFullDTO, observable : dto.EmployeePositionObservableFullDTO}, realParameters);
+            return service.getData('EmployeePosition/GetFullEmployeePosition', {plain : dto.EmployeePositionFullDTO, observable : dto.EmployeePositionObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeePositionByName(): async.AsyncFunc3<string, dto.EmployeePositionFullDTO, dto.EmployeePositionObservableFullDTO, dto.EmployeePositionFullDTO, dto.EmployeePositionObservableFullDTO> {
         return new async.AsyncFunc3((employeePositionName: string) => {
-            let baseParameters = {employeePositionName : employeePositionName};
-            let realParameters = baseParameters;
+            let baseParameters = employeePositionName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeePositionFullDTO, dto.EmployeePositionObservableFullDTO, dto.EmployeePositionFullDTO, dto.EmployeePositionObservableFullDTO>();
-            return service.getData('EmployeePosition/GetFullEmployeePositionByName', {plain : dto.EmployeePositionFullDTO, observable : dto.EmployeePositionObservableFullDTO}, realParameters);
+            return service.getData('EmployeePosition/GetFullEmployeePositionByName', {plain : dto.EmployeePositionFullDTO, observable : dto.EmployeePositionObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeePositions(): async.AsyncFunc2<Array<dto.EmployeePositionFullDTO>, Array<dto.EmployeePositionObservableFullDTO>, dto.EmployeePositionFullDTO, dto.EmployeePositionObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeePositionFullDTO>, Array<dto.EmployeePositionObservableFullDTO>, dto.EmployeePositionFullDTO, dto.EmployeePositionObservableFullDTO>();
-            return service.getData('EmployeePosition/GetFullEmployeePositions', {plain : dto.EmployeePositionFullDTO, observable : dto.EmployeePositionObservableFullDTO}, realParameters);
+            return service.getData('EmployeePosition/GetFullEmployeePositions', {plain : dto.EmployeePositionFullDTO, observable : dto.EmployeePositionObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeePositionsByIdents(): async.AsyncFunc3<dto.EmployeePositionIdentityDTO[], Array<dto.EmployeePositionFullDTO>, Array<dto.EmployeePositionObservableFullDTO>, dto.EmployeePositionFullDTO, dto.EmployeePositionObservableFullDTO> {
         return new async.AsyncFunc3((employeePositionIdents: dto.EmployeePositionIdentityDTO[]) => {
-            let baseParameters = {employeePositionIdents : employeePositionIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeePositionIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeePositionFullDTO>, Array<dto.EmployeePositionObservableFullDTO>, dto.EmployeePositionFullDTO, dto.EmployeePositionObservableFullDTO>();
-            return service.getData('EmployeePosition/GetFullEmployeePositionsByIdents', {plain : dto.EmployeePositionFullDTO, observable : dto.EmployeePositionObservableFullDTO}, realParameters);
+            return service.getData('EmployeePosition/GetFullEmployeePositionsByIdents', {plain : dto.EmployeePositionFullDTO, observable : dto.EmployeePositionObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeRegistrationType(): async.AsyncFunc3<dto.EmployeeRegistrationTypeIdentityDTO, dto.EmployeeRegistrationTypeFullDTO, dto.EmployeeRegistrationTypeObservableFullDTO, dto.EmployeeRegistrationTypeFullDTO, dto.EmployeeRegistrationTypeObservableFullDTO> {
         return new async.AsyncFunc3((employeeRegistrationTypeIdentity: dto.EmployeeRegistrationTypeIdentityDTO) => {
-            let baseParameters = {employeeRegistrationTypeIdentity : employeeRegistrationTypeIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRegistrationTypeIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRegistrationTypeFullDTO, dto.EmployeeRegistrationTypeObservableFullDTO, dto.EmployeeRegistrationTypeFullDTO, dto.EmployeeRegistrationTypeObservableFullDTO>();
-            return service.getData('EmployeeRegistrationType/GetFullEmployeeRegistrationType', {plain : dto.EmployeeRegistrationTypeFullDTO, observable : dto.EmployeeRegistrationTypeObservableFullDTO}, realParameters);
+            return service.getData('EmployeeRegistrationType/GetFullEmployeeRegistrationType', {plain : dto.EmployeeRegistrationTypeFullDTO, observable : dto.EmployeeRegistrationTypeObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeRegistrationTypeByName(): async.AsyncFunc3<string, dto.EmployeeRegistrationTypeFullDTO, dto.EmployeeRegistrationTypeObservableFullDTO, dto.EmployeeRegistrationTypeFullDTO, dto.EmployeeRegistrationTypeObservableFullDTO> {
         return new async.AsyncFunc3((employeeRegistrationTypeName: string) => {
-            let baseParameters = {employeeRegistrationTypeName : employeeRegistrationTypeName};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRegistrationTypeName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRegistrationTypeFullDTO, dto.EmployeeRegistrationTypeObservableFullDTO, dto.EmployeeRegistrationTypeFullDTO, dto.EmployeeRegistrationTypeObservableFullDTO>();
-            return service.getData('EmployeeRegistrationType/GetFullEmployeeRegistrationTypeByName', {plain : dto.EmployeeRegistrationTypeFullDTO, observable : dto.EmployeeRegistrationTypeObservableFullDTO}, realParameters);
+            return service.getData('EmployeeRegistrationType/GetFullEmployeeRegistrationTypeByName', {plain : dto.EmployeeRegistrationTypeFullDTO, observable : dto.EmployeeRegistrationTypeObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeRegistrationTypes(): async.AsyncFunc2<Array<dto.EmployeeRegistrationTypeFullDTO>, Array<dto.EmployeeRegistrationTypeObservableFullDTO>, dto.EmployeeRegistrationTypeFullDTO, dto.EmployeeRegistrationTypeObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeRegistrationTypeFullDTO>, Array<dto.EmployeeRegistrationTypeObservableFullDTO>, dto.EmployeeRegistrationTypeFullDTO, dto.EmployeeRegistrationTypeObservableFullDTO>();
-            return service.getData('EmployeeRegistrationType/GetFullEmployeeRegistrationTypes', {plain : dto.EmployeeRegistrationTypeFullDTO, observable : dto.EmployeeRegistrationTypeObservableFullDTO}, realParameters);
+            return service.getData('EmployeeRegistrationType/GetFullEmployeeRegistrationTypes', {plain : dto.EmployeeRegistrationTypeFullDTO, observable : dto.EmployeeRegistrationTypeObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeRegistrationTypesByIdents(): async.AsyncFunc3<dto.EmployeeRegistrationTypeIdentityDTO[], Array<dto.EmployeeRegistrationTypeFullDTO>, Array<dto.EmployeeRegistrationTypeObservableFullDTO>, dto.EmployeeRegistrationTypeFullDTO, dto.EmployeeRegistrationTypeObservableFullDTO> {
         return new async.AsyncFunc3((employeeRegistrationTypeIdents: dto.EmployeeRegistrationTypeIdentityDTO[]) => {
-            let baseParameters = {employeeRegistrationTypeIdents : employeeRegistrationTypeIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRegistrationTypeIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeRegistrationTypeFullDTO>, Array<dto.EmployeeRegistrationTypeObservableFullDTO>, dto.EmployeeRegistrationTypeFullDTO, dto.EmployeeRegistrationTypeObservableFullDTO>();
-            return service.getData('EmployeeRegistrationType/GetFullEmployeeRegistrationTypesByIdents', {plain : dto.EmployeeRegistrationTypeFullDTO, observable : dto.EmployeeRegistrationTypeObservableFullDTO}, realParameters);
+            return service.getData('EmployeeRegistrationType/GetFullEmployeeRegistrationTypesByIdents', {plain : dto.EmployeeRegistrationTypeFullDTO, observable : dto.EmployeeRegistrationTypeObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeRole(): async.AsyncFunc3<dto.EmployeeRoleIdentityDTO, dto.EmployeeRoleFullDTO, dto.EmployeeRoleObservableFullDTO, dto.EmployeeRoleFullDTO, dto.EmployeeRoleObservableFullDTO> {
         return new async.AsyncFunc3((employeeRoleIdentity: dto.EmployeeRoleIdentityDTO) => {
-            let baseParameters = {employeeRoleIdentity : employeeRoleIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRoleFullDTO, dto.EmployeeRoleObservableFullDTO, dto.EmployeeRoleFullDTO, dto.EmployeeRoleObservableFullDTO>();
-            return service.getData('EmployeeRole/GetFullEmployeeRole', {plain : dto.EmployeeRoleFullDTO, observable : dto.EmployeeRoleObservableFullDTO}, realParameters);
+            return service.getData('EmployeeRole/GetFullEmployeeRole', {plain : dto.EmployeeRoleFullDTO, observable : dto.EmployeeRoleObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeRoleByName(): async.AsyncFunc3<string, dto.EmployeeRoleFullDTO, dto.EmployeeRoleObservableFullDTO, dto.EmployeeRoleFullDTO, dto.EmployeeRoleObservableFullDTO> {
         return new async.AsyncFunc3((employeeRoleName: string) => {
-            let baseParameters = {employeeRoleName : employeeRoleName};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRoleFullDTO, dto.EmployeeRoleObservableFullDTO, dto.EmployeeRoleFullDTO, dto.EmployeeRoleObservableFullDTO>();
-            return service.getData('EmployeeRole/GetFullEmployeeRoleByName', {plain : dto.EmployeeRoleFullDTO, observable : dto.EmployeeRoleObservableFullDTO}, realParameters);
+            return service.getData('EmployeeRole/GetFullEmployeeRoleByName', {plain : dto.EmployeeRoleFullDTO, observable : dto.EmployeeRoleObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeRoleDegree(): async.AsyncFunc3<dto.EmployeeRoleDegreeIdentityDTO, dto.EmployeeRoleDegreeFullDTO, dto.EmployeeRoleDegreeObservableFullDTO, dto.EmployeeRoleDegreeFullDTO, dto.EmployeeRoleDegreeObservableFullDTO> {
         return new async.AsyncFunc3((employeeRoleDegreeIdentity: dto.EmployeeRoleDegreeIdentityDTO) => {
-            let baseParameters = {employeeRoleDegreeIdentity : employeeRoleDegreeIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleDegreeIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRoleDegreeFullDTO, dto.EmployeeRoleDegreeObservableFullDTO, dto.EmployeeRoleDegreeFullDTO, dto.EmployeeRoleDegreeObservableFullDTO>();
-            return service.getData('EmployeeRoleDegree/GetFullEmployeeRoleDegree', {plain : dto.EmployeeRoleDegreeFullDTO, observable : dto.EmployeeRoleDegreeObservableFullDTO}, realParameters);
+            return service.getData('EmployeeRoleDegree/GetFullEmployeeRoleDegree', {plain : dto.EmployeeRoleDegreeFullDTO, observable : dto.EmployeeRoleDegreeObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeRoleDegreeByName(): async.AsyncFunc3<string, dto.EmployeeRoleDegreeFullDTO, dto.EmployeeRoleDegreeObservableFullDTO, dto.EmployeeRoleDegreeFullDTO, dto.EmployeeRoleDegreeObservableFullDTO> {
         return new async.AsyncFunc3((employeeRoleDegreeName: string) => {
-            let baseParameters = {employeeRoleDegreeName : employeeRoleDegreeName};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleDegreeName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRoleDegreeFullDTO, dto.EmployeeRoleDegreeObservableFullDTO, dto.EmployeeRoleDegreeFullDTO, dto.EmployeeRoleDegreeObservableFullDTO>();
-            return service.getData('EmployeeRoleDegree/GetFullEmployeeRoleDegreeByName', {plain : dto.EmployeeRoleDegreeFullDTO, observable : dto.EmployeeRoleDegreeObservableFullDTO}, realParameters);
+            return service.getData('EmployeeRoleDegree/GetFullEmployeeRoleDegreeByName', {plain : dto.EmployeeRoleDegreeFullDTO, observable : dto.EmployeeRoleDegreeObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeRoleDegrees(): async.AsyncFunc2<Array<dto.EmployeeRoleDegreeFullDTO>, Array<dto.EmployeeRoleDegreeObservableFullDTO>, dto.EmployeeRoleDegreeFullDTO, dto.EmployeeRoleDegreeObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeRoleDegreeFullDTO>, Array<dto.EmployeeRoleDegreeObservableFullDTO>, dto.EmployeeRoleDegreeFullDTO, dto.EmployeeRoleDegreeObservableFullDTO>();
-            return service.getData('EmployeeRoleDegree/GetFullEmployeeRoleDegrees', {plain : dto.EmployeeRoleDegreeFullDTO, observable : dto.EmployeeRoleDegreeObservableFullDTO}, realParameters);
+            return service.getData('EmployeeRoleDegree/GetFullEmployeeRoleDegrees', {plain : dto.EmployeeRoleDegreeFullDTO, observable : dto.EmployeeRoleDegreeObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeRoleDegreesByIdents(): async.AsyncFunc3<dto.EmployeeRoleDegreeIdentityDTO[], Array<dto.EmployeeRoleDegreeFullDTO>, Array<dto.EmployeeRoleDegreeObservableFullDTO>, dto.EmployeeRoleDegreeFullDTO, dto.EmployeeRoleDegreeObservableFullDTO> {
         return new async.AsyncFunc3((employeeRoleDegreeIdents: dto.EmployeeRoleDegreeIdentityDTO[]) => {
-            let baseParameters = {employeeRoleDegreeIdents : employeeRoleDegreeIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleDegreeIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeRoleDegreeFullDTO>, Array<dto.EmployeeRoleDegreeObservableFullDTO>, dto.EmployeeRoleDegreeFullDTO, dto.EmployeeRoleDegreeObservableFullDTO>();
-            return service.getData('EmployeeRoleDegree/GetFullEmployeeRoleDegreesByIdents', {plain : dto.EmployeeRoleDegreeFullDTO, observable : dto.EmployeeRoleDegreeObservableFullDTO}, realParameters);
+            return service.getData('EmployeeRoleDegree/GetFullEmployeeRoleDegreesByIdents', {plain : dto.EmployeeRoleDegreeFullDTO, observable : dto.EmployeeRoleDegreeObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeRoles(): async.AsyncFunc2<Array<dto.EmployeeRoleFullDTO>, Array<dto.EmployeeRoleObservableFullDTO>, dto.EmployeeRoleFullDTO, dto.EmployeeRoleObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeRoleFullDTO>, Array<dto.EmployeeRoleObservableFullDTO>, dto.EmployeeRoleFullDTO, dto.EmployeeRoleObservableFullDTO>();
-            return service.getData('EmployeeRole/GetFullEmployeeRoles', {plain : dto.EmployeeRoleFullDTO, observable : dto.EmployeeRoleObservableFullDTO}, realParameters);
+            return service.getData('EmployeeRole/GetFullEmployeeRoles', {plain : dto.EmployeeRoleFullDTO, observable : dto.EmployeeRoleObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeRolesByIdents(): async.AsyncFunc3<dto.EmployeeRoleIdentityDTO[], Array<dto.EmployeeRoleFullDTO>, Array<dto.EmployeeRoleObservableFullDTO>, dto.EmployeeRoleFullDTO, dto.EmployeeRoleObservableFullDTO> {
         return new async.AsyncFunc3((employeeRoleIdents: dto.EmployeeRoleIdentityDTO[]) => {
-            let baseParameters = {employeeRoleIdents : employeeRoleIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeRoleFullDTO>, Array<dto.EmployeeRoleObservableFullDTO>, dto.EmployeeRoleFullDTO, dto.EmployeeRoleObservableFullDTO>();
-            return service.getData('EmployeeRole/GetFullEmployeeRolesByIdents', {plain : dto.EmployeeRoleFullDTO, observable : dto.EmployeeRoleObservableFullDTO}, realParameters);
+            return service.getData('EmployeeRole/GetFullEmployeeRolesByIdents', {plain : dto.EmployeeRoleFullDTO, observable : dto.EmployeeRoleObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployees(): async.AsyncFunc2<Array<dto.EmployeeFullDTO>, Array<dto.EmployeeObservableFullDTO>, dto.EmployeeFullDTO, dto.EmployeeObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeFullDTO>, Array<dto.EmployeeObservableFullDTO>, dto.EmployeeFullDTO, dto.EmployeeObservableFullDTO>();
-            return service.getData('Employee/GetFullEmployees', {plain : dto.EmployeeFullDTO, observable : dto.EmployeeObservableFullDTO}, realParameters);
+            return service.getData('Employee/GetFullEmployees', {plain : dto.EmployeeFullDTO, observable : dto.EmployeeObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeesByFilter(): async.AsyncFunc3<dto.EmployeeFilterModelStrictDTO, Array<dto.EmployeeFullDTO>, Array<dto.EmployeeObservableFullDTO>, dto.EmployeeFullDTO, dto.EmployeeObservableFullDTO> {
         return new async.AsyncFunc3((filter: dto.EmployeeFilterModelStrictDTO) => {
-            let baseParameters = {filter : filter.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = filter.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeFullDTO>, Array<dto.EmployeeObservableFullDTO>, dto.EmployeeFullDTO, dto.EmployeeObservableFullDTO>();
-            return service.getData('Employee/GetFullEmployeesByFilter', {plain : dto.EmployeeFullDTO, observable : dto.EmployeeObservableFullDTO}, realParameters);
+            return service.getData('Employee/GetFullEmployeesByFilter', {plain : dto.EmployeeFullDTO, observable : dto.EmployeeObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeesByIdents(): async.AsyncFunc3<dto.EmployeeIdentityDTO[], Array<dto.EmployeeFullDTO>, Array<dto.EmployeeObservableFullDTO>, dto.EmployeeFullDTO, dto.EmployeeObservableFullDTO> {
         return new async.AsyncFunc3((employeeIdents: dto.EmployeeIdentityDTO[]) => {
-            let baseParameters = {employeeIdents : employeeIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeeIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeFullDTO>, Array<dto.EmployeeObservableFullDTO>, dto.EmployeeFullDTO, dto.EmployeeObservableFullDTO>();
-            return service.getData('Employee/GetFullEmployeesByIdents', {plain : dto.EmployeeFullDTO, observable : dto.EmployeeObservableFullDTO}, realParameters);
+            return service.getData('Employee/GetFullEmployeesByIdents', {plain : dto.EmployeeFullDTO, observable : dto.EmployeeObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeesByRootFilter(): async.AsyncFunc3<dto.EmployeeRootFilterModelStrictDTO, Array<dto.EmployeeFullDTO>, Array<dto.EmployeeObservableFullDTO>, dto.EmployeeFullDTO, dto.EmployeeObservableFullDTO> {
         return new async.AsyncFunc3((filter: dto.EmployeeRootFilterModelStrictDTO) => {
-            let baseParameters = {filter : filter.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = filter.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeFullDTO>, Array<dto.EmployeeObservableFullDTO>, dto.EmployeeFullDTO, dto.EmployeeObservableFullDTO>();
-            return service.getData('Employee/GetFullEmployeesByRootFilter', {plain : dto.EmployeeFullDTO, observable : dto.EmployeeObservableFullDTO}, realParameters);
+            return service.getData('Employee/GetFullEmployeesByRootFilter', {plain : dto.EmployeeFullDTO, observable : dto.EmployeeObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeSpecialization(): async.AsyncFunc3<dto.EmployeeSpecializationIdentityDTO, dto.EmployeeSpecializationFullDTO, dto.EmployeeSpecializationObservableFullDTO, dto.EmployeeSpecializationFullDTO, dto.EmployeeSpecializationObservableFullDTO> {
         return new async.AsyncFunc3((employeeSpecializationIdentity: dto.EmployeeSpecializationIdentityDTO) => {
-            let baseParameters = {employeeSpecializationIdentity : employeeSpecializationIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeSpecializationIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeSpecializationFullDTO, dto.EmployeeSpecializationObservableFullDTO, dto.EmployeeSpecializationFullDTO, dto.EmployeeSpecializationObservableFullDTO>();
-            return service.getData('EmployeeSpecialization/GetFullEmployeeSpecialization', {plain : dto.EmployeeSpecializationFullDTO, observable : dto.EmployeeSpecializationObservableFullDTO}, realParameters);
+            return service.getData('EmployeeSpecialization/GetFullEmployeeSpecialization', {plain : dto.EmployeeSpecializationFullDTO, observable : dto.EmployeeSpecializationObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeSpecializationByName(): async.AsyncFunc3<string, dto.EmployeeSpecializationFullDTO, dto.EmployeeSpecializationObservableFullDTO, dto.EmployeeSpecializationFullDTO, dto.EmployeeSpecializationObservableFullDTO> {
         return new async.AsyncFunc3((employeeSpecializationName: string) => {
-            let baseParameters = {employeeSpecializationName : employeeSpecializationName};
-            let realParameters = baseParameters;
+            let baseParameters = employeeSpecializationName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeSpecializationFullDTO, dto.EmployeeSpecializationObservableFullDTO, dto.EmployeeSpecializationFullDTO, dto.EmployeeSpecializationObservableFullDTO>();
-            return service.getData('EmployeeSpecialization/GetFullEmployeeSpecializationByName', {plain : dto.EmployeeSpecializationFullDTO, observable : dto.EmployeeSpecializationObservableFullDTO}, realParameters);
+            return service.getData('EmployeeSpecialization/GetFullEmployeeSpecializationByName', {plain : dto.EmployeeSpecializationFullDTO, observable : dto.EmployeeSpecializationObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeSpecializations(): async.AsyncFunc2<Array<dto.EmployeeSpecializationFullDTO>, Array<dto.EmployeeSpecializationObservableFullDTO>, dto.EmployeeSpecializationFullDTO, dto.EmployeeSpecializationObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeSpecializationFullDTO>, Array<dto.EmployeeSpecializationObservableFullDTO>, dto.EmployeeSpecializationFullDTO, dto.EmployeeSpecializationObservableFullDTO>();
-            return service.getData('EmployeeSpecialization/GetFullEmployeeSpecializations', {plain : dto.EmployeeSpecializationFullDTO, observable : dto.EmployeeSpecializationObservableFullDTO}, realParameters);
+            return service.getData('EmployeeSpecialization/GetFullEmployeeSpecializations', {plain : dto.EmployeeSpecializationFullDTO, observable : dto.EmployeeSpecializationObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullEmployeeSpecializationsByIdents(): async.AsyncFunc3<dto.EmployeeSpecializationIdentityDTO[], Array<dto.EmployeeSpecializationFullDTO>, Array<dto.EmployeeSpecializationObservableFullDTO>, dto.EmployeeSpecializationFullDTO, dto.EmployeeSpecializationObservableFullDTO> {
         return new async.AsyncFunc3((employeeSpecializationIdents: dto.EmployeeSpecializationIdentityDTO[]) => {
-            let baseParameters = {employeeSpecializationIdents : employeeSpecializationIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeeSpecializationIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeSpecializationFullDTO>, Array<dto.EmployeeSpecializationObservableFullDTO>, dto.EmployeeSpecializationFullDTO, dto.EmployeeSpecializationObservableFullDTO>();
-            return service.getData('EmployeeSpecialization/GetFullEmployeeSpecializationsByIdents', {plain : dto.EmployeeSpecializationFullDTO, observable : dto.EmployeeSpecializationObservableFullDTO}, realParameters);
+            return service.getData('EmployeeSpecialization/GetFullEmployeeSpecializationsByIdents', {plain : dto.EmployeeSpecializationFullDTO, observable : dto.EmployeeSpecializationObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullExample1(): async.AsyncFunc3<dto.Example1IdentityDTO, dto.Example1FullDTO, dto.Example1ObservableFullDTO, dto.Example1FullDTO, dto.Example1ObservableFullDTO> {
         return new async.AsyncFunc3((example1Identity: dto.Example1IdentityDTO) => {
-            let baseParameters = {example1Identity : example1Identity};
-            let realParameters = baseParameters;
+            let baseParameters = example1Identity;
             let service = Environment.current.context.facadeFactory.createService<dto.Example1FullDTO, dto.Example1ObservableFullDTO, dto.Example1FullDTO, dto.Example1ObservableFullDTO>();
-            return service.getData('Example1/GetFullExample1', {plain : dto.Example1FullDTO, observable : dto.Example1ObservableFullDTO}, realParameters);
+            return service.getData('Example1/GetFullExample1', {plain : dto.Example1FullDTO, observable : dto.Example1ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullExample1s(): async.AsyncFunc2<Array<dto.Example1FullDTO>, Array<dto.Example1ObservableFullDTO>, dto.Example1FullDTO, dto.Example1ObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.Example1FullDTO>, Array<dto.Example1ObservableFullDTO>, dto.Example1FullDTO, dto.Example1ObservableFullDTO>();
-            return service.getData('Example1/GetFullExample1s', {plain : dto.Example1FullDTO, observable : dto.Example1ObservableFullDTO}, realParameters);
+            return service.getData('Example1/GetFullExample1s', {plain : dto.Example1FullDTO, observable : dto.Example1ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullExample1sByIdents(): async.AsyncFunc3<dto.Example1IdentityDTO[], Array<dto.Example1FullDTO>, Array<dto.Example1ObservableFullDTO>, dto.Example1FullDTO, dto.Example1ObservableFullDTO> {
         return new async.AsyncFunc3((example1Idents: dto.Example1IdentityDTO[]) => {
-            let baseParameters = {example1Idents : example1Idents};
-            let realParameters = baseParameters;
+            let baseParameters = example1Idents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.Example1FullDTO>, Array<dto.Example1ObservableFullDTO>, dto.Example1FullDTO, dto.Example1ObservableFullDTO>();
-            return service.getData('Example1/GetFullExample1sByIdents', {plain : dto.Example1FullDTO, observable : dto.Example1ObservableFullDTO}, realParameters);
+            return service.getData('Example1/GetFullExample1sByIdents', {plain : dto.Example1FullDTO, observable : dto.Example1ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullHRDepartment(): async.AsyncFunc3<dto.HRDepartmentIdentityDTO, dto.HRDepartmentFullDTO, dto.HRDepartmentObservableFullDTO, dto.HRDepartmentFullDTO, dto.HRDepartmentObservableFullDTO> {
         return new async.AsyncFunc3((hRDepartmentIdentity: dto.HRDepartmentIdentityDTO) => {
-            let baseParameters = {hRDepartmentIdentity : hRDepartmentIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = hRDepartmentIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.HRDepartmentFullDTO, dto.HRDepartmentObservableFullDTO, dto.HRDepartmentFullDTO, dto.HRDepartmentObservableFullDTO>();
-            return service.getData('HRDepartment/GetFullHRDepartment', {plain : dto.HRDepartmentFullDTO, observable : dto.HRDepartmentObservableFullDTO}, realParameters);
+            return service.getData('HRDepartment/GetFullHRDepartment', {plain : dto.HRDepartmentFullDTO, observable : dto.HRDepartmentObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullHRDepartmentByCode(): async.AsyncFunc3<string, dto.HRDepartmentFullDTO, dto.HRDepartmentObservableFullDTO, dto.HRDepartmentFullDTO, dto.HRDepartmentObservableFullDTO> {
         return new async.AsyncFunc3((hRDepartmentCode: string) => {
-            let baseParameters = {hRDepartmentCode : hRDepartmentCode};
-            let realParameters = baseParameters;
+            let baseParameters = hRDepartmentCode;
             let service = Environment.current.context.facadeFactory.createService<dto.HRDepartmentFullDTO, dto.HRDepartmentObservableFullDTO, dto.HRDepartmentFullDTO, dto.HRDepartmentObservableFullDTO>();
-            return service.getData('HRDepartment/GetFullHRDepartmentByCode', {plain : dto.HRDepartmentFullDTO, observable : dto.HRDepartmentObservableFullDTO}, realParameters);
+            return service.getData('HRDepartment/GetFullHRDepartmentByCode', {plain : dto.HRDepartmentFullDTO, observable : dto.HRDepartmentObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullHRDepartmentByName(): async.AsyncFunc3<string, dto.HRDepartmentFullDTO, dto.HRDepartmentObservableFullDTO, dto.HRDepartmentFullDTO, dto.HRDepartmentObservableFullDTO> {
         return new async.AsyncFunc3((hRDepartmentName: string) => {
-            let baseParameters = {hRDepartmentName : hRDepartmentName};
-            let realParameters = baseParameters;
+            let baseParameters = hRDepartmentName;
             let service = Environment.current.context.facadeFactory.createService<dto.HRDepartmentFullDTO, dto.HRDepartmentObservableFullDTO, dto.HRDepartmentFullDTO, dto.HRDepartmentObservableFullDTO>();
-            return service.getData('HRDepartment/GetFullHRDepartmentByName', {plain : dto.HRDepartmentFullDTO, observable : dto.HRDepartmentObservableFullDTO}, realParameters);
+            return service.getData('HRDepartment/GetFullHRDepartmentByName', {plain : dto.HRDepartmentFullDTO, observable : dto.HRDepartmentObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullHRDepartments(): async.AsyncFunc2<Array<dto.HRDepartmentFullDTO>, Array<dto.HRDepartmentObservableFullDTO>, dto.HRDepartmentFullDTO, dto.HRDepartmentObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.HRDepartmentFullDTO>, Array<dto.HRDepartmentObservableFullDTO>, dto.HRDepartmentFullDTO, dto.HRDepartmentObservableFullDTO>();
-            return service.getData('HRDepartment/GetFullHRDepartments', {plain : dto.HRDepartmentFullDTO, observable : dto.HRDepartmentObservableFullDTO}, realParameters);
+            return service.getData('HRDepartment/GetFullHRDepartments', {plain : dto.HRDepartmentFullDTO, observable : dto.HRDepartmentObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullHRDepartmentsByIdents(): async.AsyncFunc3<dto.HRDepartmentIdentityDTO[], Array<dto.HRDepartmentFullDTO>, Array<dto.HRDepartmentObservableFullDTO>, dto.HRDepartmentFullDTO, dto.HRDepartmentObservableFullDTO> {
         return new async.AsyncFunc3((hRDepartmentIdents: dto.HRDepartmentIdentityDTO[]) => {
-            let baseParameters = {hRDepartmentIdents : hRDepartmentIdents};
-            let realParameters = baseParameters;
+            let baseParameters = hRDepartmentIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.HRDepartmentFullDTO>, Array<dto.HRDepartmentObservableFullDTO>, dto.HRDepartmentFullDTO, dto.HRDepartmentObservableFullDTO>();
-            return service.getData('HRDepartment/GetFullHRDepartmentsByIdents', {plain : dto.HRDepartmentFullDTO, observable : dto.HRDepartmentObservableFullDTO}, realParameters);
+            return service.getData('HRDepartment/GetFullHRDepartmentsByIdents', {plain : dto.HRDepartmentFullDTO, observable : dto.HRDepartmentObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullHRDepartmentsByOperation(): async.AsyncFunc3<dto.SampleSystemHRDepartmentSecurityOperationCode, Array<dto.HRDepartmentFullDTO>, Array<dto.HRDepartmentObservableFullDTO>, dto.HRDepartmentFullDTO, dto.HRDepartmentObservableFullDTO> {
         return new async.AsyncFunc3((securityOperationCode: dto.SampleSystemHRDepartmentSecurityOperationCode) => {
-            let baseParameters = {securityOperationCode : securityOperationCode};
-            let realParameters = baseParameters;
+            let baseParameters = securityOperationCode;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.HRDepartmentFullDTO>, Array<dto.HRDepartmentObservableFullDTO>, dto.HRDepartmentFullDTO, dto.HRDepartmentObservableFullDTO>();
-            return service.getData('HRDepartment/GetFullHRDepartmentsByOperation', {plain : dto.HRDepartmentFullDTO, observable : dto.HRDepartmentObservableFullDTO}, realParameters);
+            return service.getData('HRDepartment/GetFullHRDepartmentsByOperation', {plain : dto.HRDepartmentFullDTO, observable : dto.HRDepartmentObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullIMRequest(): async.AsyncFunc3<dto.IMRequestIdentityDTO, dto.IMRequestFullDTO, dto.IMRequestObservableFullDTO, dto.IMRequestFullDTO, dto.IMRequestObservableFullDTO> {
         return new async.AsyncFunc3((iMRequestIdentity: dto.IMRequestIdentityDTO) => {
-            let baseParameters = {iMRequestIdentity : iMRequestIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = iMRequestIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.IMRequestFullDTO, dto.IMRequestObservableFullDTO, dto.IMRequestFullDTO, dto.IMRequestObservableFullDTO>();
-            return service.getData('IMRequest/GetFullIMRequest', {plain : dto.IMRequestFullDTO, observable : dto.IMRequestObservableFullDTO}, realParameters);
+            return service.getData('IMRequest/GetFullIMRequest', {plain : dto.IMRequestFullDTO, observable : dto.IMRequestObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullIMRequestByName(): async.AsyncFunc3<string, dto.IMRequestFullDTO, dto.IMRequestObservableFullDTO, dto.IMRequestFullDTO, dto.IMRequestObservableFullDTO> {
         return new async.AsyncFunc3((iMRequestName: string) => {
-            let baseParameters = {iMRequestName : iMRequestName};
-            let realParameters = baseParameters;
+            let baseParameters = iMRequestName;
             let service = Environment.current.context.facadeFactory.createService<dto.IMRequestFullDTO, dto.IMRequestObservableFullDTO, dto.IMRequestFullDTO, dto.IMRequestObservableFullDTO>();
-            return service.getData('IMRequest/GetFullIMRequestByName', {plain : dto.IMRequestFullDTO, observable : dto.IMRequestObservableFullDTO}, realParameters);
+            return service.getData('IMRequest/GetFullIMRequestByName', {plain : dto.IMRequestFullDTO, observable : dto.IMRequestObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullIMRequests(): async.AsyncFunc2<Array<dto.IMRequestFullDTO>, Array<dto.IMRequestObservableFullDTO>, dto.IMRequestFullDTO, dto.IMRequestObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.IMRequestFullDTO>, Array<dto.IMRequestObservableFullDTO>, dto.IMRequestFullDTO, dto.IMRequestObservableFullDTO>();
-            return service.getData('IMRequest/GetFullIMRequests', {plain : dto.IMRequestFullDTO, observable : dto.IMRequestObservableFullDTO}, realParameters);
+            return service.getData('IMRequest/GetFullIMRequests', {plain : dto.IMRequestFullDTO, observable : dto.IMRequestObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullIMRequestsByIdents(): async.AsyncFunc3<dto.IMRequestIdentityDTO[], Array<dto.IMRequestFullDTO>, Array<dto.IMRequestObservableFullDTO>, dto.IMRequestFullDTO, dto.IMRequestObservableFullDTO> {
         return new async.AsyncFunc3((iMRequestIdents: dto.IMRequestIdentityDTO[]) => {
-            let baseParameters = {iMRequestIdents : iMRequestIdents};
-            let realParameters = baseParameters;
+            let baseParameters = iMRequestIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.IMRequestFullDTO>, Array<dto.IMRequestObservableFullDTO>, dto.IMRequestFullDTO, dto.IMRequestObservableFullDTO>();
-            return service.getData('IMRequest/GetFullIMRequestsByIdents', {plain : dto.IMRequestFullDTO, observable : dto.IMRequestObservableFullDTO}, realParameters);
+            return service.getData('IMRequest/GetFullIMRequestsByIdents', {plain : dto.IMRequestFullDTO, observable : dto.IMRequestObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullInformation(): async.AsyncFunc3<dto.InformationIdentityDTO, dto.InformationFullDTO, dto.InformationObservableFullDTO, dto.InformationFullDTO, dto.InformationObservableFullDTO> {
         return new async.AsyncFunc3((informationIdentity: dto.InformationIdentityDTO) => {
-            let baseParameters = {informationIdentity : informationIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = informationIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.InformationFullDTO, dto.InformationObservableFullDTO, dto.InformationFullDTO, dto.InformationObservableFullDTO>();
-            return service.getData('Information/GetFullInformation', {plain : dto.InformationFullDTO, observable : dto.InformationObservableFullDTO}, realParameters);
+            return service.getData('Information/GetFullInformation', {plain : dto.InformationFullDTO, observable : dto.InformationObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullInformationByName(): async.AsyncFunc3<string, dto.InformationFullDTO, dto.InformationObservableFullDTO, dto.InformationFullDTO, dto.InformationObservableFullDTO> {
         return new async.AsyncFunc3((informationName: string) => {
-            let baseParameters = {informationName : informationName};
-            let realParameters = baseParameters;
+            let baseParameters = informationName;
             let service = Environment.current.context.facadeFactory.createService<dto.InformationFullDTO, dto.InformationObservableFullDTO, dto.InformationFullDTO, dto.InformationObservableFullDTO>();
-            return service.getData('Information/GetFullInformationByName', {plain : dto.InformationFullDTO, observable : dto.InformationObservableFullDTO}, realParameters);
+            return service.getData('Information/GetFullInformationByName', {plain : dto.InformationFullDTO, observable : dto.InformationObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullInformations(): async.AsyncFunc2<Array<dto.InformationFullDTO>, Array<dto.InformationObservableFullDTO>, dto.InformationFullDTO, dto.InformationObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.InformationFullDTO>, Array<dto.InformationObservableFullDTO>, dto.InformationFullDTO, dto.InformationObservableFullDTO>();
-            return service.getData('Information/GetFullInformations', {plain : dto.InformationFullDTO, observable : dto.InformationObservableFullDTO}, realParameters);
+            return service.getData('Information/GetFullInformations', {plain : dto.InformationFullDTO, observable : dto.InformationObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullInformationsByIdents(): async.AsyncFunc3<dto.InformationIdentityDTO[], Array<dto.InformationFullDTO>, Array<dto.InformationObservableFullDTO>, dto.InformationFullDTO, dto.InformationObservableFullDTO> {
         return new async.AsyncFunc3((informationIdents: dto.InformationIdentityDTO[]) => {
-            let baseParameters = {informationIdents : informationIdents};
-            let realParameters = baseParameters;
+            let baseParameters = informationIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.InformationFullDTO>, Array<dto.InformationObservableFullDTO>, dto.InformationFullDTO, dto.InformationObservableFullDTO>();
-            return service.getData('Information/GetFullInformationsByIdents', {plain : dto.InformationFullDTO, observable : dto.InformationObservableFullDTO}, realParameters);
+            return service.getData('Information/GetFullInformationsByIdents', {plain : dto.InformationFullDTO, observable : dto.InformationObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullLocation(): async.AsyncFunc3<dto.LocationIdentityDTO, dto.LocationFullDTO, dto.LocationObservableFullDTO, dto.LocationFullDTO, dto.LocationObservableFullDTO> {
         return new async.AsyncFunc3((locationIdentity: dto.LocationIdentityDTO) => {
-            let baseParameters = {locationIdentity : locationIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = locationIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.LocationFullDTO, dto.LocationObservableFullDTO, dto.LocationFullDTO, dto.LocationObservableFullDTO>();
-            return service.getData('Location/GetFullLocation', {plain : dto.LocationFullDTO, observable : dto.LocationObservableFullDTO}, realParameters);
+            return service.getData('Location/GetFullLocation', {plain : dto.LocationFullDTO, observable : dto.LocationObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullLocation1676(): async.AsyncFunc3<dto.Location1676IdentityDTO, dto.Location1676FullDTO, dto.Location1676ObservableFullDTO, dto.Location1676FullDTO, dto.Location1676ObservableFullDTO> {
         return new async.AsyncFunc3((location1676Identity: dto.Location1676IdentityDTO) => {
-            let baseParameters = {location1676Identity : location1676Identity};
-            let realParameters = baseParameters;
+            let baseParameters = location1676Identity;
             let service = Environment.current.context.facadeFactory.createService<dto.Location1676FullDTO, dto.Location1676ObservableFullDTO, dto.Location1676FullDTO, dto.Location1676ObservableFullDTO>();
-            return service.getData('Location1676/GetFullLocation1676', {plain : dto.Location1676FullDTO, observable : dto.Location1676ObservableFullDTO}, realParameters);
+            return service.getData('Location1676/GetFullLocation1676', {plain : dto.Location1676FullDTO, observable : dto.Location1676ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullLocation1676ByName(): async.AsyncFunc3<string, dto.Location1676FullDTO, dto.Location1676ObservableFullDTO, dto.Location1676FullDTO, dto.Location1676ObservableFullDTO> {
         return new async.AsyncFunc3((location1676Name: string) => {
-            let baseParameters = {location1676Name : location1676Name};
-            let realParameters = baseParameters;
+            let baseParameters = location1676Name;
             let service = Environment.current.context.facadeFactory.createService<dto.Location1676FullDTO, dto.Location1676ObservableFullDTO, dto.Location1676FullDTO, dto.Location1676ObservableFullDTO>();
-            return service.getData('Location1676/GetFullLocation1676ByName', {plain : dto.Location1676FullDTO, observable : dto.Location1676ObservableFullDTO}, realParameters);
+            return service.getData('Location1676/GetFullLocation1676ByName', {plain : dto.Location1676FullDTO, observable : dto.Location1676ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullLocation1676s(): async.AsyncFunc2<Array<dto.Location1676FullDTO>, Array<dto.Location1676ObservableFullDTO>, dto.Location1676FullDTO, dto.Location1676ObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.Location1676FullDTO>, Array<dto.Location1676ObservableFullDTO>, dto.Location1676FullDTO, dto.Location1676ObservableFullDTO>();
-            return service.getData('Location1676/GetFullLocation1676s', {plain : dto.Location1676FullDTO, observable : dto.Location1676ObservableFullDTO}, realParameters);
+            return service.getData('Location1676/GetFullLocation1676s', {plain : dto.Location1676FullDTO, observable : dto.Location1676ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullLocation1676sByIdents(): async.AsyncFunc3<dto.Location1676IdentityDTO[], Array<dto.Location1676FullDTO>, Array<dto.Location1676ObservableFullDTO>, dto.Location1676FullDTO, dto.Location1676ObservableFullDTO> {
         return new async.AsyncFunc3((location1676Idents: dto.Location1676IdentityDTO[]) => {
-            let baseParameters = {location1676Idents : location1676Idents};
-            let realParameters = baseParameters;
+            let baseParameters = location1676Idents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.Location1676FullDTO>, Array<dto.Location1676ObservableFullDTO>, dto.Location1676FullDTO, dto.Location1676ObservableFullDTO>();
-            return service.getData('Location1676/GetFullLocation1676sByIdents', {plain : dto.Location1676FullDTO, observable : dto.Location1676ObservableFullDTO}, realParameters);
+            return service.getData('Location1676/GetFullLocation1676sByIdents', {plain : dto.Location1676FullDTO, observable : dto.Location1676ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullLocationByName(): async.AsyncFunc3<string, dto.LocationFullDTO, dto.LocationObservableFullDTO, dto.LocationFullDTO, dto.LocationObservableFullDTO> {
         return new async.AsyncFunc3((locationName: string) => {
-            let baseParameters = {locationName : locationName};
-            let realParameters = baseParameters;
+            let baseParameters = locationName;
             let service = Environment.current.context.facadeFactory.createService<dto.LocationFullDTO, dto.LocationObservableFullDTO, dto.LocationFullDTO, dto.LocationObservableFullDTO>();
-            return service.getData('Location/GetFullLocationByName', {plain : dto.LocationFullDTO, observable : dto.LocationObservableFullDTO}, realParameters);
+            return service.getData('Location/GetFullLocationByName', {plain : dto.LocationFullDTO, observable : dto.LocationObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullLocations(): async.AsyncFunc2<Array<dto.LocationFullDTO>, Array<dto.LocationObservableFullDTO>, dto.LocationFullDTO, dto.LocationObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.LocationFullDTO>, Array<dto.LocationObservableFullDTO>, dto.LocationFullDTO, dto.LocationObservableFullDTO>();
-            return service.getData('Location/GetFullLocations', {plain : dto.LocationFullDTO, observable : dto.LocationObservableFullDTO}, realParameters);
+            return service.getData('Location/GetFullLocations', {plain : dto.LocationFullDTO, observable : dto.LocationObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullLocationsByIdents(): async.AsyncFunc3<dto.LocationIdentityDTO[], Array<dto.LocationFullDTO>, Array<dto.LocationObservableFullDTO>, dto.LocationFullDTO, dto.LocationObservableFullDTO> {
         return new async.AsyncFunc3((locationIdents: dto.LocationIdentityDTO[]) => {
-            let baseParameters = {locationIdents : locationIdents};
-            let realParameters = baseParameters;
+            let baseParameters = locationIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.LocationFullDTO>, Array<dto.LocationObservableFullDTO>, dto.LocationFullDTO, dto.LocationObservableFullDTO>();
-            return service.getData('Location/GetFullLocationsByIdents', {plain : dto.LocationFullDTO, observable : dto.LocationObservableFullDTO}, realParameters);
+            return service.getData('Location/GetFullLocationsByIdents', {plain : dto.LocationFullDTO, observable : dto.LocationObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullLocationsByOperation(): async.AsyncFunc3<dto.SampleSystemLocationSecurityOperationCode, Array<dto.LocationFullDTO>, Array<dto.LocationObservableFullDTO>, dto.LocationFullDTO, dto.LocationObservableFullDTO> {
         return new async.AsyncFunc3((securityOperationCode: dto.SampleSystemLocationSecurityOperationCode) => {
-            let baseParameters = {securityOperationCode : securityOperationCode};
-            let realParameters = baseParameters;
+            let baseParameters = securityOperationCode;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.LocationFullDTO>, Array<dto.LocationObservableFullDTO>, dto.LocationFullDTO, dto.LocationObservableFullDTO>();
-            return service.getData('Location/GetFullLocationsByOperation', {plain : dto.LocationFullDTO, observable : dto.LocationObservableFullDTO}, realParameters);
+            return service.getData('Location/GetFullLocationsByOperation', {plain : dto.LocationFullDTO, observable : dto.LocationObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullManagementUnit(): async.AsyncFunc3<dto.ManagementUnitIdentityDTO, dto.ManagementUnitFullDTO, dto.ManagementUnitObservableFullDTO, dto.ManagementUnitFullDTO, dto.ManagementUnitObservableFullDTO> {
         return new async.AsyncFunc3((managementUnitIdentity: dto.ManagementUnitIdentityDTO) => {
-            let baseParameters = {managementUnitIdentity : managementUnitIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.ManagementUnitFullDTO, dto.ManagementUnitObservableFullDTO, dto.ManagementUnitFullDTO, dto.ManagementUnitObservableFullDTO>();
-            return service.getData('ManagementUnit/GetFullManagementUnit', {plain : dto.ManagementUnitFullDTO, observable : dto.ManagementUnitObservableFullDTO}, realParameters);
+            return service.getData('ManagementUnit/GetFullManagementUnit', {plain : dto.ManagementUnitFullDTO, observable : dto.ManagementUnitObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullManagementUnitAndBusinessUnitLink(): async.AsyncFunc3<dto.ManagementUnitAndBusinessUnitLinkIdentityDTO, dto.ManagementUnitAndBusinessUnitLinkFullDTO, dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO, dto.ManagementUnitAndBusinessUnitLinkFullDTO, dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO> {
         return new async.AsyncFunc3((managementUnitAndBusinessUnitLinkIdentity: dto.ManagementUnitAndBusinessUnitLinkIdentityDTO) => {
-            let baseParameters = {managementUnitAndBusinessUnitLinkIdentity : managementUnitAndBusinessUnitLinkIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitAndBusinessUnitLinkIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.ManagementUnitAndBusinessUnitLinkFullDTO, dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO, dto.ManagementUnitAndBusinessUnitLinkFullDTO, dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO>();
-            return service.getData('ManagementUnitAndBusinessUnitLink/GetFullManagementUnitAndBusinessUnitLink', {plain : dto.ManagementUnitAndBusinessUnitLinkFullDTO, observable : dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO}, realParameters);
+            return service.getData('ManagementUnitAndBusinessUnitLink/GetFullManagementUnitAndBusinessUnitLink', {plain : dto.ManagementUnitAndBusinessUnitLinkFullDTO, observable : dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullManagementUnitAndBusinessUnitLinks(): async.AsyncFunc2<Array<dto.ManagementUnitAndBusinessUnitLinkFullDTO>, Array<dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO>, dto.ManagementUnitAndBusinessUnitLinkFullDTO, dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.ManagementUnitAndBusinessUnitLinkFullDTO>, Array<dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO>, dto.ManagementUnitAndBusinessUnitLinkFullDTO, dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO>();
-            return service.getData('ManagementUnitAndBusinessUnitLink/GetFullManagementUnitAndBusinessUnitLinks', {plain : dto.ManagementUnitAndBusinessUnitLinkFullDTO, observable : dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO}, realParameters);
+            return service.getData('ManagementUnitAndBusinessUnitLink/GetFullManagementUnitAndBusinessUnitLinks', {plain : dto.ManagementUnitAndBusinessUnitLinkFullDTO, observable : dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullManagementUnitAndBusinessUnitLinksByIdents(): async.AsyncFunc3<dto.ManagementUnitAndBusinessUnitLinkIdentityDTO[], Array<dto.ManagementUnitAndBusinessUnitLinkFullDTO>, Array<dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO>, dto.ManagementUnitAndBusinessUnitLinkFullDTO, dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO> {
         return new async.AsyncFunc3((managementUnitAndBusinessUnitLinkIdents: dto.ManagementUnitAndBusinessUnitLinkIdentityDTO[]) => {
-            let baseParameters = {managementUnitAndBusinessUnitLinkIdents : managementUnitAndBusinessUnitLinkIdents};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitAndBusinessUnitLinkIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.ManagementUnitAndBusinessUnitLinkFullDTO>, Array<dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO>, dto.ManagementUnitAndBusinessUnitLinkFullDTO, dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO>();
             return service.getData('ManagementUnitAndBusinessUnitLink/GetFullManagementUnitAndBusinessUnitLinksByIden' + 
-'ts', {plain : dto.ManagementUnitAndBusinessUnitLinkFullDTO, observable : dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO}, realParameters);
+'ts', {plain : dto.ManagementUnitAndBusinessUnitLinkFullDTO, observable : dto.ManagementUnitAndBusinessUnitLinkObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullManagementUnitAndHRDepartmentLink(): async.AsyncFunc3<dto.ManagementUnitAndHRDepartmentLinkIdentityDTO, dto.ManagementUnitAndHRDepartmentLinkFullDTO, dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO, dto.ManagementUnitAndHRDepartmentLinkFullDTO, dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO> {
         return new async.AsyncFunc3((managementUnitAndHRDepartmentLinkIdentity: dto.ManagementUnitAndHRDepartmentLinkIdentityDTO) => {
-            let baseParameters = {managementUnitAndHRDepartmentLinkIdentity : managementUnitAndHRDepartmentLinkIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitAndHRDepartmentLinkIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.ManagementUnitAndHRDepartmentLinkFullDTO, dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO, dto.ManagementUnitAndHRDepartmentLinkFullDTO, dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO>();
-            return service.getData('ManagementUnitAndHRDepartmentLink/GetFullManagementUnitAndHRDepartmentLink', {plain : dto.ManagementUnitAndHRDepartmentLinkFullDTO, observable : dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO}, realParameters);
+            return service.getData('ManagementUnitAndHRDepartmentLink/GetFullManagementUnitAndHRDepartmentLink', {plain : dto.ManagementUnitAndHRDepartmentLinkFullDTO, observable : dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullManagementUnitAndHRDepartmentLinks(): async.AsyncFunc2<Array<dto.ManagementUnitAndHRDepartmentLinkFullDTO>, Array<dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO>, dto.ManagementUnitAndHRDepartmentLinkFullDTO, dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.ManagementUnitAndHRDepartmentLinkFullDTO>, Array<dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO>, dto.ManagementUnitAndHRDepartmentLinkFullDTO, dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO>();
-            return service.getData('ManagementUnitAndHRDepartmentLink/GetFullManagementUnitAndHRDepartmentLinks', {plain : dto.ManagementUnitAndHRDepartmentLinkFullDTO, observable : dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO}, realParameters);
+            return service.getData('ManagementUnitAndHRDepartmentLink/GetFullManagementUnitAndHRDepartmentLinks', {plain : dto.ManagementUnitAndHRDepartmentLinkFullDTO, observable : dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullManagementUnitAndHRDepartmentLinksByIdents(): async.AsyncFunc3<dto.ManagementUnitAndHRDepartmentLinkIdentityDTO[], Array<dto.ManagementUnitAndHRDepartmentLinkFullDTO>, Array<dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO>, dto.ManagementUnitAndHRDepartmentLinkFullDTO, dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO> {
         return new async.AsyncFunc3((managementUnitAndHRDepartmentLinkIdents: dto.ManagementUnitAndHRDepartmentLinkIdentityDTO[]) => {
-            let baseParameters = {managementUnitAndHRDepartmentLinkIdents : managementUnitAndHRDepartmentLinkIdents};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitAndHRDepartmentLinkIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.ManagementUnitAndHRDepartmentLinkFullDTO>, Array<dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO>, dto.ManagementUnitAndHRDepartmentLinkFullDTO, dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO>();
             return service.getData('ManagementUnitAndHRDepartmentLink/GetFullManagementUnitAndHRDepartmentLinksByIden' + 
-'ts', {plain : dto.ManagementUnitAndHRDepartmentLinkFullDTO, observable : dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO}, realParameters);
+'ts', {plain : dto.ManagementUnitAndHRDepartmentLinkFullDTO, observable : dto.ManagementUnitAndHRDepartmentLinkObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullManagementUnitByName(): async.AsyncFunc3<string, dto.ManagementUnitFullDTO, dto.ManagementUnitObservableFullDTO, dto.ManagementUnitFullDTO, dto.ManagementUnitObservableFullDTO> {
         return new async.AsyncFunc3((managementUnitName: string) => {
-            let baseParameters = {managementUnitName : managementUnitName};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitName;
             let service = Environment.current.context.facadeFactory.createService<dto.ManagementUnitFullDTO, dto.ManagementUnitObservableFullDTO, dto.ManagementUnitFullDTO, dto.ManagementUnitObservableFullDTO>();
-            return service.getData('ManagementUnit/GetFullManagementUnitByName', {plain : dto.ManagementUnitFullDTO, observable : dto.ManagementUnitObservableFullDTO}, realParameters);
+            return service.getData('ManagementUnit/GetFullManagementUnitByName', {plain : dto.ManagementUnitFullDTO, observable : dto.ManagementUnitObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullManagementUnits(): async.AsyncFunc2<Array<dto.ManagementUnitFullDTO>, Array<dto.ManagementUnitObservableFullDTO>, dto.ManagementUnitFullDTO, dto.ManagementUnitObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.ManagementUnitFullDTO>, Array<dto.ManagementUnitObservableFullDTO>, dto.ManagementUnitFullDTO, dto.ManagementUnitObservableFullDTO>();
-            return service.getData('ManagementUnit/GetFullManagementUnits', {plain : dto.ManagementUnitFullDTO, observable : dto.ManagementUnitObservableFullDTO}, realParameters);
+            return service.getData('ManagementUnit/GetFullManagementUnits', {plain : dto.ManagementUnitFullDTO, observable : dto.ManagementUnitObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullManagementUnitsByIdents(): async.AsyncFunc3<dto.ManagementUnitIdentityDTO[], Array<dto.ManagementUnitFullDTO>, Array<dto.ManagementUnitObservableFullDTO>, dto.ManagementUnitFullDTO, dto.ManagementUnitObservableFullDTO> {
         return new async.AsyncFunc3((managementUnitIdents: dto.ManagementUnitIdentityDTO[]) => {
-            let baseParameters = {managementUnitIdents : managementUnitIdents};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.ManagementUnitFullDTO>, Array<dto.ManagementUnitObservableFullDTO>, dto.ManagementUnitFullDTO, dto.ManagementUnitObservableFullDTO>();
-            return service.getData('ManagementUnit/GetFullManagementUnitsByIdents', {plain : dto.ManagementUnitFullDTO, observable : dto.ManagementUnitObservableFullDTO}, realParameters);
+            return service.getData('ManagementUnit/GetFullManagementUnitsByIdents', {plain : dto.ManagementUnitFullDTO, observable : dto.ManagementUnitObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullManagementUnitsByOperation(): async.AsyncFunc3<dto.SampleSystemManagementUnitSecurityOperationCode, Array<dto.ManagementUnitFullDTO>, Array<dto.ManagementUnitObservableFullDTO>, dto.ManagementUnitFullDTO, dto.ManagementUnitObservableFullDTO> {
         return new async.AsyncFunc3((securityOperationCode: dto.SampleSystemManagementUnitSecurityOperationCode) => {
-            let baseParameters = {securityOperationCode : securityOperationCode};
-            let realParameters = baseParameters;
+            let baseParameters = securityOperationCode;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.ManagementUnitFullDTO>, Array<dto.ManagementUnitObservableFullDTO>, dto.ManagementUnitFullDTO, dto.ManagementUnitObservableFullDTO>();
-            return service.getData('ManagementUnit/GetFullManagementUnitsByOperation', {plain : dto.ManagementUnitFullDTO, observable : dto.ManagementUnitObservableFullDTO}, realParameters);
+            return service.getData('ManagementUnit/GetFullManagementUnitsByOperation', {plain : dto.ManagementUnitFullDTO, observable : dto.ManagementUnitObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullManagementUnitTreeByOperation(): async.AsyncFunc3<dto.SampleSystemManagementUnitSecurityOperationCode, Array<persistent.HierarchicalNode<dto.ManagementUnitFullDTO,Guid>>, Array<persistent.HierarchicalNode<dto.ManagementUnitObservableFullDTO,Guid>>, dto.ManagementUnitFullDTO, dto.ManagementUnitObservableFullDTO> {
         return new async.AsyncFunc3((securityOperationCode: dto.SampleSystemManagementUnitSecurityOperationCode) => {
-            let baseParameters = {securityOperationCode : securityOperationCode};
-            let realParameters = baseParameters;
+            let baseParameters = securityOperationCode;
             let service = Environment.current.context.facadeFactory.createService<Array<persistent.HierarchicalNode<dto.ManagementUnitFullDTO,Guid>>, Array<persistent.HierarchicalNode<dto.ManagementUnitObservableFullDTO,Guid>>, dto.ManagementUnitFullDTO, dto.ManagementUnitObservableFullDTO>();
-            return service.getHierarchicalData('ManagementUnit/GetFullManagementUnitTreeByOperation', {plain : dto.ManagementUnitFullDTO, observable : dto.ManagementUnitObservableFullDTO}, realParameters);
+            return service.getHierarchicalData('ManagementUnit/GetFullManagementUnitTreeByOperation', {plain : dto.ManagementUnitFullDTO, observable : dto.ManagementUnitObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullMessageTemplateContainer(): async.AsyncFunc3<dto.MessageTemplateContainerIdentityDTO, dto.MessageTemplateContainerFullDTO, dto.MessageTemplateContainerObservableFullDTO, dto.MessageTemplateContainerFullDTO, dto.MessageTemplateContainerObservableFullDTO> {
         return new async.AsyncFunc3((messageTemplateContainerIdentity: dto.MessageTemplateContainerIdentityDTO) => {
-            let baseParameters = {messageTemplateContainerIdentity : messageTemplateContainerIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = messageTemplateContainerIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.MessageTemplateContainerFullDTO, dto.MessageTemplateContainerObservableFullDTO, dto.MessageTemplateContainerFullDTO, dto.MessageTemplateContainerObservableFullDTO>();
-            return service.getData('MessageTemplateContainer/GetFullMessageTemplateContainer', {plain : dto.MessageTemplateContainerFullDTO, observable : dto.MessageTemplateContainerObservableFullDTO}, realParameters);
+            return service.getData('MessageTemplateContainer/GetFullMessageTemplateContainer', {plain : dto.MessageTemplateContainerFullDTO, observable : dto.MessageTemplateContainerObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullMessageTemplateContainers(): async.AsyncFunc2<Array<dto.MessageTemplateContainerFullDTO>, Array<dto.MessageTemplateContainerObservableFullDTO>, dto.MessageTemplateContainerFullDTO, dto.MessageTemplateContainerObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.MessageTemplateContainerFullDTO>, Array<dto.MessageTemplateContainerObservableFullDTO>, dto.MessageTemplateContainerFullDTO, dto.MessageTemplateContainerObservableFullDTO>();
-            return service.getData('MessageTemplateContainer/GetFullMessageTemplateContainers', {plain : dto.MessageTemplateContainerFullDTO, observable : dto.MessageTemplateContainerObservableFullDTO}, realParameters);
+            return service.getData('MessageTemplateContainer/GetFullMessageTemplateContainers', {plain : dto.MessageTemplateContainerFullDTO, observable : dto.MessageTemplateContainerObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullMessageTemplateContainersByIdents(): async.AsyncFunc3<dto.MessageTemplateContainerIdentityDTO[], Array<dto.MessageTemplateContainerFullDTO>, Array<dto.MessageTemplateContainerObservableFullDTO>, dto.MessageTemplateContainerFullDTO, dto.MessageTemplateContainerObservableFullDTO> {
         return new async.AsyncFunc3((messageTemplateContainerIdents: dto.MessageTemplateContainerIdentityDTO[]) => {
-            let baseParameters = {messageTemplateContainerIdents : messageTemplateContainerIdents};
-            let realParameters = baseParameters;
+            let baseParameters = messageTemplateContainerIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.MessageTemplateContainerFullDTO>, Array<dto.MessageTemplateContainerObservableFullDTO>, dto.MessageTemplateContainerFullDTO, dto.MessageTemplateContainerObservableFullDTO>();
-            return service.getData('MessageTemplateContainer/GetFullMessageTemplateContainersByIdents', {plain : dto.MessageTemplateContainerFullDTO, observable : dto.MessageTemplateContainerObservableFullDTO}, realParameters);
+            return service.getData('MessageTemplateContainer/GetFullMessageTemplateContainersByIdents', {plain : dto.MessageTemplateContainerFullDTO, observable : dto.MessageTemplateContainerObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullPrincipal(): async.AsyncFunc3<dto.PrincipalIdentityDTO, dto.PrincipalFullDTO, dto.PrincipalObservableFullDTO, dto.PrincipalFullDTO, dto.PrincipalObservableFullDTO> {
         return new async.AsyncFunc3((principalIdentity: dto.PrincipalIdentityDTO) => {
-            let baseParameters = {principalIdentity : principalIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = principalIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.PrincipalFullDTO, dto.PrincipalObservableFullDTO, dto.PrincipalFullDTO, dto.PrincipalObservableFullDTO>();
-            return service.getData('Principal/GetFullPrincipal', {plain : dto.PrincipalFullDTO, observable : dto.PrincipalObservableFullDTO}, realParameters);
+            return service.getData('Principal/GetFullPrincipal', {plain : dto.PrincipalFullDTO, observable : dto.PrincipalObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullPrincipals(): async.AsyncFunc2<Array<dto.PrincipalFullDTO>, Array<dto.PrincipalObservableFullDTO>, dto.PrincipalFullDTO, dto.PrincipalObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.PrincipalFullDTO>, Array<dto.PrincipalObservableFullDTO>, dto.PrincipalFullDTO, dto.PrincipalObservableFullDTO>();
-            return service.getData('Principal/GetFullPrincipals', {plain : dto.PrincipalFullDTO, observable : dto.PrincipalObservableFullDTO}, realParameters);
+            return service.getData('Principal/GetFullPrincipals', {plain : dto.PrincipalFullDTO, observable : dto.PrincipalObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullPrincipalsByIdents(): async.AsyncFunc3<dto.PrincipalIdentityDTO[], Array<dto.PrincipalFullDTO>, Array<dto.PrincipalObservableFullDTO>, dto.PrincipalFullDTO, dto.PrincipalObservableFullDTO> {
         return new async.AsyncFunc3((principalIdents: dto.PrincipalIdentityDTO[]) => {
-            let baseParameters = {principalIdents : principalIdents};
-            let realParameters = baseParameters;
+            let baseParameters = principalIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.PrincipalFullDTO>, Array<dto.PrincipalObservableFullDTO>, dto.PrincipalFullDTO, dto.PrincipalObservableFullDTO>();
-            return service.getData('Principal/GetFullPrincipalsByIdents', {plain : dto.PrincipalFullDTO, observable : dto.PrincipalObservableFullDTO}, realParameters);
+            return service.getData('Principal/GetFullPrincipalsByIdents', {plain : dto.PrincipalFullDTO, observable : dto.PrincipalObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullRegularJobResult(): async.AsyncFunc3<dto.RegularJobResultIdentityDTO, dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO, dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO> {
         return new async.AsyncFunc3((regularJobResultIdentity: dto.RegularJobResultIdentityDTO) => {
-            let baseParameters = {regularJobResultIdentity : regularJobResultIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = regularJobResultIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO, dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO>();
-            return service.getData('RegularJobResult/GetFullRegularJobResult', {plain : dto.RegularJobResultFullDTO, observable : dto.RegularJobResultObservableFullDTO}, realParameters);
+            return service.getData('RegularJobResult/GetFullRegularJobResult', {plain : dto.RegularJobResultFullDTO, observable : dto.RegularJobResultObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullRegularJobResults(): async.AsyncFunc2<Array<dto.RegularJobResultFullDTO>, Array<dto.RegularJobResultObservableFullDTO>, dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.RegularJobResultFullDTO>, Array<dto.RegularJobResultObservableFullDTO>, dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO>();
-            return service.getData('RegularJobResult/GetFullRegularJobResults', {plain : dto.RegularJobResultFullDTO, observable : dto.RegularJobResultObservableFullDTO}, realParameters);
+            return service.getData('RegularJobResult/GetFullRegularJobResults', {plain : dto.RegularJobResultFullDTO, observable : dto.RegularJobResultObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullRegularJobResultsByIdents(): async.AsyncFunc3<dto.RegularJobResultIdentityDTO[], Array<dto.RegularJobResultFullDTO>, Array<dto.RegularJobResultObservableFullDTO>, dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO> {
         return new async.AsyncFunc3((regularJobResultIdents: dto.RegularJobResultIdentityDTO[]) => {
-            let baseParameters = {regularJobResultIdents : regularJobResultIdents};
-            let realParameters = baseParameters;
+            let baseParameters = regularJobResultIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.RegularJobResultFullDTO>, Array<dto.RegularJobResultObservableFullDTO>, dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO>();
-            return service.getData('RegularJobResult/GetFullRegularJobResultsByIdents', {plain : dto.RegularJobResultFullDTO, observable : dto.RegularJobResultObservableFullDTO}, realParameters);
+            return service.getData('RegularJobResult/GetFullRegularJobResultsByIdents', {plain : dto.RegularJobResultFullDTO, observable : dto.RegularJobResultObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullSampleSystemMessageTemplate(): async.AsyncFunc3<dto.SampleSystemMessageTemplateIdentityDTO, dto.SampleSystemMessageTemplateFullDTO, dto.SampleSystemMessageTemplateObservableFullDTO, dto.SampleSystemMessageTemplateFullDTO, dto.SampleSystemMessageTemplateObservableFullDTO> {
         return new async.AsyncFunc3((sampleSystemMessageTemplateIdentity: dto.SampleSystemMessageTemplateIdentityDTO) => {
-            let baseParameters = {sampleSystemMessageTemplateIdentity : sampleSystemMessageTemplateIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = sampleSystemMessageTemplateIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.SampleSystemMessageTemplateFullDTO, dto.SampleSystemMessageTemplateObservableFullDTO, dto.SampleSystemMessageTemplateFullDTO, dto.SampleSystemMessageTemplateObservableFullDTO>();
-            return service.getData('SampleSystemMessageTemplate/GetFullSampleSystemMessageTemplate', {plain : dto.SampleSystemMessageTemplateFullDTO, observable : dto.SampleSystemMessageTemplateObservableFullDTO}, realParameters);
+            return service.getData('SampleSystemMessageTemplate/GetFullSampleSystemMessageTemplate', {plain : dto.SampleSystemMessageTemplateFullDTO, observable : dto.SampleSystemMessageTemplateObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullSampleSystemMessageTemplates(): async.AsyncFunc2<Array<dto.SampleSystemMessageTemplateFullDTO>, Array<dto.SampleSystemMessageTemplateObservableFullDTO>, dto.SampleSystemMessageTemplateFullDTO, dto.SampleSystemMessageTemplateObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.SampleSystemMessageTemplateFullDTO>, Array<dto.SampleSystemMessageTemplateObservableFullDTO>, dto.SampleSystemMessageTemplateFullDTO, dto.SampleSystemMessageTemplateObservableFullDTO>();
-            return service.getData('SampleSystemMessageTemplate/GetFullSampleSystemMessageTemplates', {plain : dto.SampleSystemMessageTemplateFullDTO, observable : dto.SampleSystemMessageTemplateObservableFullDTO}, realParameters);
+            return service.getData('SampleSystemMessageTemplate/GetFullSampleSystemMessageTemplates', {plain : dto.SampleSystemMessageTemplateFullDTO, observable : dto.SampleSystemMessageTemplateObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullSampleSystemMessageTemplatesByIdents(): async.AsyncFunc3<dto.SampleSystemMessageTemplateIdentityDTO[], Array<dto.SampleSystemMessageTemplateFullDTO>, Array<dto.SampleSystemMessageTemplateObservableFullDTO>, dto.SampleSystemMessageTemplateFullDTO, dto.SampleSystemMessageTemplateObservableFullDTO> {
         return new async.AsyncFunc3((sampleSystemMessageTemplateIdents: dto.SampleSystemMessageTemplateIdentityDTO[]) => {
-            let baseParameters = {sampleSystemMessageTemplateIdents : sampleSystemMessageTemplateIdents};
-            let realParameters = baseParameters;
+            let baseParameters = sampleSystemMessageTemplateIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.SampleSystemMessageTemplateFullDTO>, Array<dto.SampleSystemMessageTemplateObservableFullDTO>, dto.SampleSystemMessageTemplateFullDTO, dto.SampleSystemMessageTemplateObservableFullDTO>();
-            return service.getData('SampleSystemMessageTemplate/GetFullSampleSystemMessageTemplatesByIdents', {plain : dto.SampleSystemMessageTemplateFullDTO, observable : dto.SampleSystemMessageTemplateObservableFullDTO}, realParameters);
+            return service.getData('SampleSystemMessageTemplate/GetFullSampleSystemMessageTemplatesByIdents', {plain : dto.SampleSystemMessageTemplateFullDTO, observable : dto.SampleSystemMessageTemplateObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullSqlParserTestObj(): async.AsyncFunc3<dto.SqlParserTestObjIdentityDTO, dto.SqlParserTestObjFullDTO, dto.SqlParserTestObjObservableFullDTO, dto.SqlParserTestObjFullDTO, dto.SqlParserTestObjObservableFullDTO> {
         return new async.AsyncFunc3((sqlParserTestObjIdentity: dto.SqlParserTestObjIdentityDTO) => {
-            let baseParameters = {sqlParserTestObjIdentity : sqlParserTestObjIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = sqlParserTestObjIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.SqlParserTestObjFullDTO, dto.SqlParserTestObjObservableFullDTO, dto.SqlParserTestObjFullDTO, dto.SqlParserTestObjObservableFullDTO>();
-            return service.getData('SqlParserTestObj/GetFullSqlParserTestObj', {plain : dto.SqlParserTestObjFullDTO, observable : dto.SqlParserTestObjObservableFullDTO}, realParameters);
+            return service.getData('SqlParserTestObj/GetFullSqlParserTestObj', {plain : dto.SqlParserTestObjFullDTO, observable : dto.SqlParserTestObjObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullSqlParserTestObjContainer(): async.AsyncFunc3<dto.SqlParserTestObjContainerIdentityDTO, dto.SqlParserTestObjContainerFullDTO, dto.SqlParserTestObjContainerObservableFullDTO, dto.SqlParserTestObjContainerFullDTO, dto.SqlParserTestObjContainerObservableFullDTO> {
         return new async.AsyncFunc3((sqlParserTestObjContainerIdentity: dto.SqlParserTestObjContainerIdentityDTO) => {
-            let baseParameters = {sqlParserTestObjContainerIdentity : sqlParserTestObjContainerIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = sqlParserTestObjContainerIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.SqlParserTestObjContainerFullDTO, dto.SqlParserTestObjContainerObservableFullDTO, dto.SqlParserTestObjContainerFullDTO, dto.SqlParserTestObjContainerObservableFullDTO>();
-            return service.getData('SqlParserTestObjContainer/GetFullSqlParserTestObjContainer', {plain : dto.SqlParserTestObjContainerFullDTO, observable : dto.SqlParserTestObjContainerObservableFullDTO}, realParameters);
+            return service.getData('SqlParserTestObjContainer/GetFullSqlParserTestObjContainer', {plain : dto.SqlParserTestObjContainerFullDTO, observable : dto.SqlParserTestObjContainerObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullSqlParserTestObjContainers(): async.AsyncFunc2<Array<dto.SqlParserTestObjContainerFullDTO>, Array<dto.SqlParserTestObjContainerObservableFullDTO>, dto.SqlParserTestObjContainerFullDTO, dto.SqlParserTestObjContainerObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.SqlParserTestObjContainerFullDTO>, Array<dto.SqlParserTestObjContainerObservableFullDTO>, dto.SqlParserTestObjContainerFullDTO, dto.SqlParserTestObjContainerObservableFullDTO>();
-            return service.getData('SqlParserTestObjContainer/GetFullSqlParserTestObjContainers', {plain : dto.SqlParserTestObjContainerFullDTO, observable : dto.SqlParserTestObjContainerObservableFullDTO}, realParameters);
+            return service.getData('SqlParserTestObjContainer/GetFullSqlParserTestObjContainers', {plain : dto.SqlParserTestObjContainerFullDTO, observable : dto.SqlParserTestObjContainerObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullSqlParserTestObjContainersByIdents(): async.AsyncFunc3<dto.SqlParserTestObjContainerIdentityDTO[], Array<dto.SqlParserTestObjContainerFullDTO>, Array<dto.SqlParserTestObjContainerObservableFullDTO>, dto.SqlParserTestObjContainerFullDTO, dto.SqlParserTestObjContainerObservableFullDTO> {
         return new async.AsyncFunc3((sqlParserTestObjContainerIdents: dto.SqlParserTestObjContainerIdentityDTO[]) => {
-            let baseParameters = {sqlParserTestObjContainerIdents : sqlParserTestObjContainerIdents};
-            let realParameters = baseParameters;
+            let baseParameters = sqlParserTestObjContainerIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.SqlParserTestObjContainerFullDTO>, Array<dto.SqlParserTestObjContainerObservableFullDTO>, dto.SqlParserTestObjContainerFullDTO, dto.SqlParserTestObjContainerObservableFullDTO>();
-            return service.getData('SqlParserTestObjContainer/GetFullSqlParserTestObjContainersByIdents', {plain : dto.SqlParserTestObjContainerFullDTO, observable : dto.SqlParserTestObjContainerObservableFullDTO}, realParameters);
+            return service.getData('SqlParserTestObjContainer/GetFullSqlParserTestObjContainersByIdents', {plain : dto.SqlParserTestObjContainerFullDTO, observable : dto.SqlParserTestObjContainerObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullSqlParserTestObjs(): async.AsyncFunc2<Array<dto.SqlParserTestObjFullDTO>, Array<dto.SqlParserTestObjObservableFullDTO>, dto.SqlParserTestObjFullDTO, dto.SqlParserTestObjObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.SqlParserTestObjFullDTO>, Array<dto.SqlParserTestObjObservableFullDTO>, dto.SqlParserTestObjFullDTO, dto.SqlParserTestObjObservableFullDTO>();
-            return service.getData('SqlParserTestObj/GetFullSqlParserTestObjs', {plain : dto.SqlParserTestObjFullDTO, observable : dto.SqlParserTestObjObservableFullDTO}, realParameters);
+            return service.getData('SqlParserTestObj/GetFullSqlParserTestObjs', {plain : dto.SqlParserTestObjFullDTO, observable : dto.SqlParserTestObjObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullSqlParserTestObjsByIdents(): async.AsyncFunc3<dto.SqlParserTestObjIdentityDTO[], Array<dto.SqlParserTestObjFullDTO>, Array<dto.SqlParserTestObjObservableFullDTO>, dto.SqlParserTestObjFullDTO, dto.SqlParserTestObjObservableFullDTO> {
         return new async.AsyncFunc3((sqlParserTestObjIdents: dto.SqlParserTestObjIdentityDTO[]) => {
-            let baseParameters = {sqlParserTestObjIdents : sqlParserTestObjIdents};
-            let realParameters = baseParameters;
+            let baseParameters = sqlParserTestObjIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.SqlParserTestObjFullDTO>, Array<dto.SqlParserTestObjObservableFullDTO>, dto.SqlParserTestObjFullDTO, dto.SqlParserTestObjObservableFullDTO>();
-            return service.getData('SqlParserTestObj/GetFullSqlParserTestObjsByIdents', {plain : dto.SqlParserTestObjFullDTO, observable : dto.SqlParserTestObjObservableFullDTO}, realParameters);
+            return service.getData('SqlParserTestObj/GetFullSqlParserTestObjsByIdents', {plain : dto.SqlParserTestObjFullDTO, observable : dto.SqlParserTestObjObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestCustomContextSecurityObj(): async.AsyncFunc3<dto.TestCustomContextSecurityObjIdentityDTO, dto.TestCustomContextSecurityObjFullDTO, dto.TestCustomContextSecurityObjObservableFullDTO, dto.TestCustomContextSecurityObjFullDTO, dto.TestCustomContextSecurityObjObservableFullDTO> {
         return new async.AsyncFunc3((testCustomContextSecurityObjIdentity: dto.TestCustomContextSecurityObjIdentityDTO) => {
-            let baseParameters = {testCustomContextSecurityObjIdentity : testCustomContextSecurityObjIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testCustomContextSecurityObjIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestCustomContextSecurityObjFullDTO, dto.TestCustomContextSecurityObjObservableFullDTO, dto.TestCustomContextSecurityObjFullDTO, dto.TestCustomContextSecurityObjObservableFullDTO>();
-            return service.getData('TestCustomContextSecurityObj/GetFullTestCustomContextSecurityObj', {plain : dto.TestCustomContextSecurityObjFullDTO, observable : dto.TestCustomContextSecurityObjObservableFullDTO}, realParameters);
+            return service.getData('TestCustomContextSecurityObj/GetFullTestCustomContextSecurityObj', {plain : dto.TestCustomContextSecurityObjFullDTO, observable : dto.TestCustomContextSecurityObjObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestCustomContextSecurityObjByName(): async.AsyncFunc3<string, dto.TestCustomContextSecurityObjFullDTO, dto.TestCustomContextSecurityObjObservableFullDTO, dto.TestCustomContextSecurityObjFullDTO, dto.TestCustomContextSecurityObjObservableFullDTO> {
         return new async.AsyncFunc3((testCustomContextSecurityObjName: string) => {
-            let baseParameters = {testCustomContextSecurityObjName : testCustomContextSecurityObjName};
-            let realParameters = baseParameters;
+            let baseParameters = testCustomContextSecurityObjName;
             let service = Environment.current.context.facadeFactory.createService<dto.TestCustomContextSecurityObjFullDTO, dto.TestCustomContextSecurityObjObservableFullDTO, dto.TestCustomContextSecurityObjFullDTO, dto.TestCustomContextSecurityObjObservableFullDTO>();
-            return service.getData('TestCustomContextSecurityObj/GetFullTestCustomContextSecurityObjByName', {plain : dto.TestCustomContextSecurityObjFullDTO, observable : dto.TestCustomContextSecurityObjObservableFullDTO}, realParameters);
+            return service.getData('TestCustomContextSecurityObj/GetFullTestCustomContextSecurityObjByName', {plain : dto.TestCustomContextSecurityObjFullDTO, observable : dto.TestCustomContextSecurityObjObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestCustomContextSecurityObjs(): async.AsyncFunc2<Array<dto.TestCustomContextSecurityObjFullDTO>, Array<dto.TestCustomContextSecurityObjObservableFullDTO>, dto.TestCustomContextSecurityObjFullDTO, dto.TestCustomContextSecurityObjObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestCustomContextSecurityObjFullDTO>, Array<dto.TestCustomContextSecurityObjObservableFullDTO>, dto.TestCustomContextSecurityObjFullDTO, dto.TestCustomContextSecurityObjObservableFullDTO>();
-            return service.getData('TestCustomContextSecurityObj/GetFullTestCustomContextSecurityObjs', {plain : dto.TestCustomContextSecurityObjFullDTO, observable : dto.TestCustomContextSecurityObjObservableFullDTO}, realParameters);
+            return service.getData('TestCustomContextSecurityObj/GetFullTestCustomContextSecurityObjs', {plain : dto.TestCustomContextSecurityObjFullDTO, observable : dto.TestCustomContextSecurityObjObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestCustomContextSecurityObjsByIdents(): async.AsyncFunc3<dto.TestCustomContextSecurityObjIdentityDTO[], Array<dto.TestCustomContextSecurityObjFullDTO>, Array<dto.TestCustomContextSecurityObjObservableFullDTO>, dto.TestCustomContextSecurityObjFullDTO, dto.TestCustomContextSecurityObjObservableFullDTO> {
         return new async.AsyncFunc3((testCustomContextSecurityObjIdents: dto.TestCustomContextSecurityObjIdentityDTO[]) => {
-            let baseParameters = {testCustomContextSecurityObjIdents : testCustomContextSecurityObjIdents};
-            let realParameters = baseParameters;
+            let baseParameters = testCustomContextSecurityObjIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestCustomContextSecurityObjFullDTO>, Array<dto.TestCustomContextSecurityObjObservableFullDTO>, dto.TestCustomContextSecurityObjFullDTO, dto.TestCustomContextSecurityObjObservableFullDTO>();
-            return service.getData('TestCustomContextSecurityObj/GetFullTestCustomContextSecurityObjsByIdents', {plain : dto.TestCustomContextSecurityObjFullDTO, observable : dto.TestCustomContextSecurityObjObservableFullDTO}, realParameters);
+            return service.getData('TestCustomContextSecurityObj/GetFullTestCustomContextSecurityObjsByIdents', {plain : dto.TestCustomContextSecurityObjFullDTO, observable : dto.TestCustomContextSecurityObjObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestImmutableObj(): async.AsyncFunc3<dto.TestImmutableObjIdentityDTO, dto.TestImmutableObjFullDTO, dto.TestImmutableObjObservableFullDTO, dto.TestImmutableObjFullDTO, dto.TestImmutableObjObservableFullDTO> {
         return new async.AsyncFunc3((testImmutableObjIdentity: dto.TestImmutableObjIdentityDTO) => {
-            let baseParameters = {testImmutableObjIdentity : testImmutableObjIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testImmutableObjIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestImmutableObjFullDTO, dto.TestImmutableObjObservableFullDTO, dto.TestImmutableObjFullDTO, dto.TestImmutableObjObservableFullDTO>();
-            return service.getData('TestImmutableObj/GetFullTestImmutableObj', {plain : dto.TestImmutableObjFullDTO, observable : dto.TestImmutableObjObservableFullDTO}, realParameters);
+            return service.getData('TestImmutableObj/GetFullTestImmutableObj', {plain : dto.TestImmutableObjFullDTO, observable : dto.TestImmutableObjObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestImmutableObjs(): async.AsyncFunc2<Array<dto.TestImmutableObjFullDTO>, Array<dto.TestImmutableObjObservableFullDTO>, dto.TestImmutableObjFullDTO, dto.TestImmutableObjObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestImmutableObjFullDTO>, Array<dto.TestImmutableObjObservableFullDTO>, dto.TestImmutableObjFullDTO, dto.TestImmutableObjObservableFullDTO>();
-            return service.getData('TestImmutableObj/GetFullTestImmutableObjs', {plain : dto.TestImmutableObjFullDTO, observable : dto.TestImmutableObjObservableFullDTO}, realParameters);
+            return service.getData('TestImmutableObj/GetFullTestImmutableObjs', {plain : dto.TestImmutableObjFullDTO, observable : dto.TestImmutableObjObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestImmutableObjsByIdents(): async.AsyncFunc3<dto.TestImmutableObjIdentityDTO[], Array<dto.TestImmutableObjFullDTO>, Array<dto.TestImmutableObjObservableFullDTO>, dto.TestImmutableObjFullDTO, dto.TestImmutableObjObservableFullDTO> {
         return new async.AsyncFunc3((testImmutableObjIdents: dto.TestImmutableObjIdentityDTO[]) => {
-            let baseParameters = {testImmutableObjIdents : testImmutableObjIdents};
-            let realParameters = baseParameters;
+            let baseParameters = testImmutableObjIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestImmutableObjFullDTO>, Array<dto.TestImmutableObjObservableFullDTO>, dto.TestImmutableObjFullDTO, dto.TestImmutableObjObservableFullDTO>();
-            return service.getData('TestImmutableObj/GetFullTestImmutableObjsByIdents', {plain : dto.TestImmutableObjFullDTO, observable : dto.TestImmutableObjObservableFullDTO}, realParameters);
+            return service.getData('TestImmutableObj/GetFullTestImmutableObjsByIdents', {plain : dto.TestImmutableObjFullDTO, observable : dto.TestImmutableObjObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestRootSecurityObj(): async.AsyncFunc3<dto.TestRootSecurityObjIdentityDTO, dto.TestRootSecurityObjFullDTO, dto.TestRootSecurityObjObservableFullDTO, dto.TestRootSecurityObjFullDTO, dto.TestRootSecurityObjObservableFullDTO> {
         return new async.AsyncFunc3((testRootSecurityObjIdentity: dto.TestRootSecurityObjIdentityDTO) => {
-            let baseParameters = {testRootSecurityObjIdentity : testRootSecurityObjIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testRootSecurityObjIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestRootSecurityObjFullDTO, dto.TestRootSecurityObjObservableFullDTO, dto.TestRootSecurityObjFullDTO, dto.TestRootSecurityObjObservableFullDTO>();
-            return service.getData('TestRootSecurityObj/GetFullTestRootSecurityObj', {plain : dto.TestRootSecurityObjFullDTO, observable : dto.TestRootSecurityObjObservableFullDTO}, realParameters);
+            return service.getData('TestRootSecurityObj/GetFullTestRootSecurityObj', {plain : dto.TestRootSecurityObjFullDTO, observable : dto.TestRootSecurityObjObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestRootSecurityObjByName(): async.AsyncFunc3<string, dto.TestRootSecurityObjFullDTO, dto.TestRootSecurityObjObservableFullDTO, dto.TestRootSecurityObjFullDTO, dto.TestRootSecurityObjObservableFullDTO> {
         return new async.AsyncFunc3((testRootSecurityObjName: string) => {
-            let baseParameters = {testRootSecurityObjName : testRootSecurityObjName};
-            let realParameters = baseParameters;
+            let baseParameters = testRootSecurityObjName;
             let service = Environment.current.context.facadeFactory.createService<dto.TestRootSecurityObjFullDTO, dto.TestRootSecurityObjObservableFullDTO, dto.TestRootSecurityObjFullDTO, dto.TestRootSecurityObjObservableFullDTO>();
-            return service.getData('TestRootSecurityObj/GetFullTestRootSecurityObjByName', {plain : dto.TestRootSecurityObjFullDTO, observable : dto.TestRootSecurityObjObservableFullDTO}, realParameters);
+            return service.getData('TestRootSecurityObj/GetFullTestRootSecurityObjByName', {plain : dto.TestRootSecurityObjFullDTO, observable : dto.TestRootSecurityObjObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestRootSecurityObjs(): async.AsyncFunc2<Array<dto.TestRootSecurityObjFullDTO>, Array<dto.TestRootSecurityObjObservableFullDTO>, dto.TestRootSecurityObjFullDTO, dto.TestRootSecurityObjObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestRootSecurityObjFullDTO>, Array<dto.TestRootSecurityObjObservableFullDTO>, dto.TestRootSecurityObjFullDTO, dto.TestRootSecurityObjObservableFullDTO>();
-            return service.getData('TestRootSecurityObj/GetFullTestRootSecurityObjs', {plain : dto.TestRootSecurityObjFullDTO, observable : dto.TestRootSecurityObjObservableFullDTO}, realParameters);
+            return service.getData('TestRootSecurityObj/GetFullTestRootSecurityObjs', {plain : dto.TestRootSecurityObjFullDTO, observable : dto.TestRootSecurityObjObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestRootSecurityObjsByIdents(): async.AsyncFunc3<dto.TestRootSecurityObjIdentityDTO[], Array<dto.TestRootSecurityObjFullDTO>, Array<dto.TestRootSecurityObjObservableFullDTO>, dto.TestRootSecurityObjFullDTO, dto.TestRootSecurityObjObservableFullDTO> {
         return new async.AsyncFunc3((testRootSecurityObjIdents: dto.TestRootSecurityObjIdentityDTO[]) => {
-            let baseParameters = {testRootSecurityObjIdents : testRootSecurityObjIdents};
-            let realParameters = baseParameters;
+            let baseParameters = testRootSecurityObjIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestRootSecurityObjFullDTO>, Array<dto.TestRootSecurityObjObservableFullDTO>, dto.TestRootSecurityObjFullDTO, dto.TestRootSecurityObjObservableFullDTO>();
-            return service.getData('TestRootSecurityObj/GetFullTestRootSecurityObjsByIdents', {plain : dto.TestRootSecurityObjFullDTO, observable : dto.TestRootSecurityObjObservableFullDTO}, realParameters);
+            return service.getData('TestRootSecurityObj/GetFullTestRootSecurityObjsByIdents', {plain : dto.TestRootSecurityObjFullDTO, observable : dto.TestRootSecurityObjObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestSecurityObjItem(): async.AsyncFunc3<dto.TestSecurityObjItemIdentityDTO, dto.TestSecurityObjItemFullDTO, dto.TestSecurityObjItemObservableFullDTO, dto.TestSecurityObjItemFullDTO, dto.TestSecurityObjItemObservableFullDTO> {
         return new async.AsyncFunc3((testSecurityObjItemIdentity: dto.TestSecurityObjItemIdentityDTO) => {
-            let baseParameters = {testSecurityObjItemIdentity : testSecurityObjItemIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testSecurityObjItemIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecurityObjItemFullDTO, dto.TestSecurityObjItemObservableFullDTO, dto.TestSecurityObjItemFullDTO, dto.TestSecurityObjItemObservableFullDTO>();
-            return service.getData('TestSecurityObjItem/GetFullTestSecurityObjItem', {plain : dto.TestSecurityObjItemFullDTO, observable : dto.TestSecurityObjItemObservableFullDTO}, realParameters);
+            return service.getData('TestSecurityObjItem/GetFullTestSecurityObjItem', {plain : dto.TestSecurityObjItemFullDTO, observable : dto.TestSecurityObjItemObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestSecurityObjItemByName(): async.AsyncFunc3<string, dto.TestSecurityObjItemFullDTO, dto.TestSecurityObjItemObservableFullDTO, dto.TestSecurityObjItemFullDTO, dto.TestSecurityObjItemObservableFullDTO> {
         return new async.AsyncFunc3((testSecurityObjItemName: string) => {
-            let baseParameters = {testSecurityObjItemName : testSecurityObjItemName};
-            let realParameters = baseParameters;
+            let baseParameters = testSecurityObjItemName;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecurityObjItemFullDTO, dto.TestSecurityObjItemObservableFullDTO, dto.TestSecurityObjItemFullDTO, dto.TestSecurityObjItemObservableFullDTO>();
-            return service.getData('TestSecurityObjItem/GetFullTestSecurityObjItemByName', {plain : dto.TestSecurityObjItemFullDTO, observable : dto.TestSecurityObjItemObservableFullDTO}, realParameters);
+            return service.getData('TestSecurityObjItem/GetFullTestSecurityObjItemByName', {plain : dto.TestSecurityObjItemFullDTO, observable : dto.TestSecurityObjItemObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestSecurityObjItems(): async.AsyncFunc2<Array<dto.TestSecurityObjItemFullDTO>, Array<dto.TestSecurityObjItemObservableFullDTO>, dto.TestSecurityObjItemFullDTO, dto.TestSecurityObjItemObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecurityObjItemFullDTO>, Array<dto.TestSecurityObjItemObservableFullDTO>, dto.TestSecurityObjItemFullDTO, dto.TestSecurityObjItemObservableFullDTO>();
-            return service.getData('TestSecurityObjItem/GetFullTestSecurityObjItems', {plain : dto.TestSecurityObjItemFullDTO, observable : dto.TestSecurityObjItemObservableFullDTO}, realParameters);
+            return service.getData('TestSecurityObjItem/GetFullTestSecurityObjItems', {plain : dto.TestSecurityObjItemFullDTO, observable : dto.TestSecurityObjItemObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestSecurityObjItemsByIdents(): async.AsyncFunc3<dto.TestSecurityObjItemIdentityDTO[], Array<dto.TestSecurityObjItemFullDTO>, Array<dto.TestSecurityObjItemObservableFullDTO>, dto.TestSecurityObjItemFullDTO, dto.TestSecurityObjItemObservableFullDTO> {
         return new async.AsyncFunc3((testSecurityObjItemIdents: dto.TestSecurityObjItemIdentityDTO[]) => {
-            let baseParameters = {testSecurityObjItemIdents : testSecurityObjItemIdents};
-            let realParameters = baseParameters;
+            let baseParameters = testSecurityObjItemIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecurityObjItemFullDTO>, Array<dto.TestSecurityObjItemObservableFullDTO>, dto.TestSecurityObjItemFullDTO, dto.TestSecurityObjItemObservableFullDTO>();
-            return service.getData('TestSecurityObjItem/GetFullTestSecurityObjItemsByIdents', {plain : dto.TestSecurityObjItemFullDTO, observable : dto.TestSecurityObjItemObservableFullDTO}, realParameters);
+            return service.getData('TestSecurityObjItem/GetFullTestSecurityObjItemsByIdents', {plain : dto.TestSecurityObjItemFullDTO, observable : dto.TestSecurityObjItemObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestSecuritySubObjItem(): async.AsyncFunc3<dto.TestSecuritySubObjItemIdentityDTO, dto.TestSecuritySubObjItemFullDTO, dto.TestSecuritySubObjItemObservableFullDTO, dto.TestSecuritySubObjItemFullDTO, dto.TestSecuritySubObjItemObservableFullDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItemIdentity: dto.TestSecuritySubObjItemIdentityDTO) => {
-            let baseParameters = {testSecuritySubObjItemIdentity : testSecuritySubObjItemIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItemIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItemFullDTO, dto.TestSecuritySubObjItemObservableFullDTO, dto.TestSecuritySubObjItemFullDTO, dto.TestSecuritySubObjItemObservableFullDTO>();
-            return service.getData('TestSecuritySubObjItem/GetFullTestSecuritySubObjItem', {plain : dto.TestSecuritySubObjItemFullDTO, observable : dto.TestSecuritySubObjItemObservableFullDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem/GetFullTestSecuritySubObjItem', {plain : dto.TestSecuritySubObjItemFullDTO, observable : dto.TestSecuritySubObjItemObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestSecuritySubObjItem2(): async.AsyncFunc3<dto.TestSecuritySubObjItem2IdentityDTO, dto.TestSecuritySubObjItem2FullDTO, dto.TestSecuritySubObjItem2ObservableFullDTO, dto.TestSecuritySubObjItem2FullDTO, dto.TestSecuritySubObjItem2ObservableFullDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem2Identity: dto.TestSecuritySubObjItem2IdentityDTO) => {
-            let baseParameters = {testSecuritySubObjItem2Identity : testSecuritySubObjItem2Identity};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem2Identity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItem2FullDTO, dto.TestSecuritySubObjItem2ObservableFullDTO, dto.TestSecuritySubObjItem2FullDTO, dto.TestSecuritySubObjItem2ObservableFullDTO>();
-            return service.getData('TestSecuritySubObjItem2/GetFullTestSecuritySubObjItem2', {plain : dto.TestSecuritySubObjItem2FullDTO, observable : dto.TestSecuritySubObjItem2ObservableFullDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem2/GetFullTestSecuritySubObjItem2', {plain : dto.TestSecuritySubObjItem2FullDTO, observable : dto.TestSecuritySubObjItem2ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestSecuritySubObjItem2ByName(): async.AsyncFunc3<string, dto.TestSecuritySubObjItem2FullDTO, dto.TestSecuritySubObjItem2ObservableFullDTO, dto.TestSecuritySubObjItem2FullDTO, dto.TestSecuritySubObjItem2ObservableFullDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem2Name: string) => {
-            let baseParameters = {testSecuritySubObjItem2Name : testSecuritySubObjItem2Name};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem2Name;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItem2FullDTO, dto.TestSecuritySubObjItem2ObservableFullDTO, dto.TestSecuritySubObjItem2FullDTO, dto.TestSecuritySubObjItem2ObservableFullDTO>();
-            return service.getData('TestSecuritySubObjItem2/GetFullTestSecuritySubObjItem2ByName', {plain : dto.TestSecuritySubObjItem2FullDTO, observable : dto.TestSecuritySubObjItem2ObservableFullDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem2/GetFullTestSecuritySubObjItem2ByName', {plain : dto.TestSecuritySubObjItem2FullDTO, observable : dto.TestSecuritySubObjItem2ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestSecuritySubObjItem2s(): async.AsyncFunc2<Array<dto.TestSecuritySubObjItem2FullDTO>, Array<dto.TestSecuritySubObjItem2ObservableFullDTO>, dto.TestSecuritySubObjItem2FullDTO, dto.TestSecuritySubObjItem2ObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecuritySubObjItem2FullDTO>, Array<dto.TestSecuritySubObjItem2ObservableFullDTO>, dto.TestSecuritySubObjItem2FullDTO, dto.TestSecuritySubObjItem2ObservableFullDTO>();
-            return service.getData('TestSecuritySubObjItem2/GetFullTestSecuritySubObjItem2s', {plain : dto.TestSecuritySubObjItem2FullDTO, observable : dto.TestSecuritySubObjItem2ObservableFullDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem2/GetFullTestSecuritySubObjItem2s', {plain : dto.TestSecuritySubObjItem2FullDTO, observable : dto.TestSecuritySubObjItem2ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestSecuritySubObjItem2sByIdents(): async.AsyncFunc3<dto.TestSecuritySubObjItem2IdentityDTO[], Array<dto.TestSecuritySubObjItem2FullDTO>, Array<dto.TestSecuritySubObjItem2ObservableFullDTO>, dto.TestSecuritySubObjItem2FullDTO, dto.TestSecuritySubObjItem2ObservableFullDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem2Idents: dto.TestSecuritySubObjItem2IdentityDTO[]) => {
-            let baseParameters = {testSecuritySubObjItem2Idents : testSecuritySubObjItem2Idents};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem2Idents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecuritySubObjItem2FullDTO>, Array<dto.TestSecuritySubObjItem2ObservableFullDTO>, dto.TestSecuritySubObjItem2FullDTO, dto.TestSecuritySubObjItem2ObservableFullDTO>();
-            return service.getData('TestSecuritySubObjItem2/GetFullTestSecuritySubObjItem2sByIdents', {plain : dto.TestSecuritySubObjItem2FullDTO, observable : dto.TestSecuritySubObjItem2ObservableFullDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem2/GetFullTestSecuritySubObjItem2sByIdents', {plain : dto.TestSecuritySubObjItem2FullDTO, observable : dto.TestSecuritySubObjItem2ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestSecuritySubObjItem3(): async.AsyncFunc3<dto.TestSecuritySubObjItem3IdentityDTO, dto.TestSecuritySubObjItem3FullDTO, dto.TestSecuritySubObjItem3ObservableFullDTO, dto.TestSecuritySubObjItem3FullDTO, dto.TestSecuritySubObjItem3ObservableFullDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem3Identity: dto.TestSecuritySubObjItem3IdentityDTO) => {
-            let baseParameters = {testSecuritySubObjItem3Identity : testSecuritySubObjItem3Identity};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem3Identity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItem3FullDTO, dto.TestSecuritySubObjItem3ObservableFullDTO, dto.TestSecuritySubObjItem3FullDTO, dto.TestSecuritySubObjItem3ObservableFullDTO>();
-            return service.getData('TestSecuritySubObjItem3/GetFullTestSecuritySubObjItem3', {plain : dto.TestSecuritySubObjItem3FullDTO, observable : dto.TestSecuritySubObjItem3ObservableFullDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem3/GetFullTestSecuritySubObjItem3', {plain : dto.TestSecuritySubObjItem3FullDTO, observable : dto.TestSecuritySubObjItem3ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestSecuritySubObjItem3ByName(): async.AsyncFunc3<string, dto.TestSecuritySubObjItem3FullDTO, dto.TestSecuritySubObjItem3ObservableFullDTO, dto.TestSecuritySubObjItem3FullDTO, dto.TestSecuritySubObjItem3ObservableFullDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem3Name: string) => {
-            let baseParameters = {testSecuritySubObjItem3Name : testSecuritySubObjItem3Name};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem3Name;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItem3FullDTO, dto.TestSecuritySubObjItem3ObservableFullDTO, dto.TestSecuritySubObjItem3FullDTO, dto.TestSecuritySubObjItem3ObservableFullDTO>();
-            return service.getData('TestSecuritySubObjItem3/GetFullTestSecuritySubObjItem3ByName', {plain : dto.TestSecuritySubObjItem3FullDTO, observable : dto.TestSecuritySubObjItem3ObservableFullDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem3/GetFullTestSecuritySubObjItem3ByName', {plain : dto.TestSecuritySubObjItem3FullDTO, observable : dto.TestSecuritySubObjItem3ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestSecuritySubObjItem3s(): async.AsyncFunc2<Array<dto.TestSecuritySubObjItem3FullDTO>, Array<dto.TestSecuritySubObjItem3ObservableFullDTO>, dto.TestSecuritySubObjItem3FullDTO, dto.TestSecuritySubObjItem3ObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecuritySubObjItem3FullDTO>, Array<dto.TestSecuritySubObjItem3ObservableFullDTO>, dto.TestSecuritySubObjItem3FullDTO, dto.TestSecuritySubObjItem3ObservableFullDTO>();
-            return service.getData('TestSecuritySubObjItem3/GetFullTestSecuritySubObjItem3s', {plain : dto.TestSecuritySubObjItem3FullDTO, observable : dto.TestSecuritySubObjItem3ObservableFullDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem3/GetFullTestSecuritySubObjItem3s', {plain : dto.TestSecuritySubObjItem3FullDTO, observable : dto.TestSecuritySubObjItem3ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestSecuritySubObjItem3sByIdents(): async.AsyncFunc3<dto.TestSecuritySubObjItem3IdentityDTO[], Array<dto.TestSecuritySubObjItem3FullDTO>, Array<dto.TestSecuritySubObjItem3ObservableFullDTO>, dto.TestSecuritySubObjItem3FullDTO, dto.TestSecuritySubObjItem3ObservableFullDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem3Idents: dto.TestSecuritySubObjItem3IdentityDTO[]) => {
-            let baseParameters = {testSecuritySubObjItem3Idents : testSecuritySubObjItem3Idents};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem3Idents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecuritySubObjItem3FullDTO>, Array<dto.TestSecuritySubObjItem3ObservableFullDTO>, dto.TestSecuritySubObjItem3FullDTO, dto.TestSecuritySubObjItem3ObservableFullDTO>();
-            return service.getData('TestSecuritySubObjItem3/GetFullTestSecuritySubObjItem3sByIdents', {plain : dto.TestSecuritySubObjItem3FullDTO, observable : dto.TestSecuritySubObjItem3ObservableFullDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem3/GetFullTestSecuritySubObjItem3sByIdents', {plain : dto.TestSecuritySubObjItem3FullDTO, observable : dto.TestSecuritySubObjItem3ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestSecuritySubObjItemByName(): async.AsyncFunc3<string, dto.TestSecuritySubObjItemFullDTO, dto.TestSecuritySubObjItemObservableFullDTO, dto.TestSecuritySubObjItemFullDTO, dto.TestSecuritySubObjItemObservableFullDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItemName: string) => {
-            let baseParameters = {testSecuritySubObjItemName : testSecuritySubObjItemName};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItemName;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItemFullDTO, dto.TestSecuritySubObjItemObservableFullDTO, dto.TestSecuritySubObjItemFullDTO, dto.TestSecuritySubObjItemObservableFullDTO>();
-            return service.getData('TestSecuritySubObjItem/GetFullTestSecuritySubObjItemByName', {plain : dto.TestSecuritySubObjItemFullDTO, observable : dto.TestSecuritySubObjItemObservableFullDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem/GetFullTestSecuritySubObjItemByName', {plain : dto.TestSecuritySubObjItemFullDTO, observable : dto.TestSecuritySubObjItemObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestSecuritySubObjItems(): async.AsyncFunc2<Array<dto.TestSecuritySubObjItemFullDTO>, Array<dto.TestSecuritySubObjItemObservableFullDTO>, dto.TestSecuritySubObjItemFullDTO, dto.TestSecuritySubObjItemObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecuritySubObjItemFullDTO>, Array<dto.TestSecuritySubObjItemObservableFullDTO>, dto.TestSecuritySubObjItemFullDTO, dto.TestSecuritySubObjItemObservableFullDTO>();
-            return service.getData('TestSecuritySubObjItem/GetFullTestSecuritySubObjItems', {plain : dto.TestSecuritySubObjItemFullDTO, observable : dto.TestSecuritySubObjItemObservableFullDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem/GetFullTestSecuritySubObjItems', {plain : dto.TestSecuritySubObjItemFullDTO, observable : dto.TestSecuritySubObjItemObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullTestSecuritySubObjItemsByIdents(): async.AsyncFunc3<dto.TestSecuritySubObjItemIdentityDTO[], Array<dto.TestSecuritySubObjItemFullDTO>, Array<dto.TestSecuritySubObjItemObservableFullDTO>, dto.TestSecuritySubObjItemFullDTO, dto.TestSecuritySubObjItemObservableFullDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItemIdents: dto.TestSecuritySubObjItemIdentityDTO[]) => {
-            let baseParameters = {testSecuritySubObjItemIdents : testSecuritySubObjItemIdents};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItemIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecuritySubObjItemFullDTO>, Array<dto.TestSecuritySubObjItemObservableFullDTO>, dto.TestSecuritySubObjItemFullDTO, dto.TestSecuritySubObjItemObservableFullDTO>();
-            return service.getData('TestSecuritySubObjItem/GetFullTestSecuritySubObjItemsByIdents', {plain : dto.TestSecuritySubObjItemFullDTO, observable : dto.TestSecuritySubObjItemObservableFullDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem/GetFullTestSecuritySubObjItemsByIdents', {plain : dto.TestSecuritySubObjItemFullDTO, observable : dto.TestSecuritySubObjItemObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullWorkingCalendar1676(): async.AsyncFunc3<dto.WorkingCalendar1676IdentityDTO, dto.WorkingCalendar1676FullDTO, dto.WorkingCalendar1676ObservableFullDTO, dto.WorkingCalendar1676FullDTO, dto.WorkingCalendar1676ObservableFullDTO> {
         return new async.AsyncFunc3((workingCalendar1676Identity: dto.WorkingCalendar1676IdentityDTO) => {
-            let baseParameters = {workingCalendar1676Identity : workingCalendar1676Identity};
-            let realParameters = baseParameters;
+            let baseParameters = workingCalendar1676Identity;
             let service = Environment.current.context.facadeFactory.createService<dto.WorkingCalendar1676FullDTO, dto.WorkingCalendar1676ObservableFullDTO, dto.WorkingCalendar1676FullDTO, dto.WorkingCalendar1676ObservableFullDTO>();
-            return service.getData('WorkingCalendar1676/GetFullWorkingCalendar1676', {plain : dto.WorkingCalendar1676FullDTO, observable : dto.WorkingCalendar1676ObservableFullDTO}, realParameters);
+            return service.getData('WorkingCalendar1676/GetFullWorkingCalendar1676', {plain : dto.WorkingCalendar1676FullDTO, observable : dto.WorkingCalendar1676ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullWorkingCalendar1676ByName(): async.AsyncFunc3<string, dto.WorkingCalendar1676FullDTO, dto.WorkingCalendar1676ObservableFullDTO, dto.WorkingCalendar1676FullDTO, dto.WorkingCalendar1676ObservableFullDTO> {
         return new async.AsyncFunc3((workingCalendar1676Name: string) => {
-            let baseParameters = {workingCalendar1676Name : workingCalendar1676Name};
-            let realParameters = baseParameters;
+            let baseParameters = workingCalendar1676Name;
             let service = Environment.current.context.facadeFactory.createService<dto.WorkingCalendar1676FullDTO, dto.WorkingCalendar1676ObservableFullDTO, dto.WorkingCalendar1676FullDTO, dto.WorkingCalendar1676ObservableFullDTO>();
-            return service.getData('WorkingCalendar1676/GetFullWorkingCalendar1676ByName', {plain : dto.WorkingCalendar1676FullDTO, observable : dto.WorkingCalendar1676ObservableFullDTO}, realParameters);
+            return service.getData('WorkingCalendar1676/GetFullWorkingCalendar1676ByName', {plain : dto.WorkingCalendar1676FullDTO, observable : dto.WorkingCalendar1676ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullWorkingCalendar1676s(): async.AsyncFunc2<Array<dto.WorkingCalendar1676FullDTO>, Array<dto.WorkingCalendar1676ObservableFullDTO>, dto.WorkingCalendar1676FullDTO, dto.WorkingCalendar1676ObservableFullDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.WorkingCalendar1676FullDTO>, Array<dto.WorkingCalendar1676ObservableFullDTO>, dto.WorkingCalendar1676FullDTO, dto.WorkingCalendar1676ObservableFullDTO>();
-            return service.getData('WorkingCalendar1676/GetFullWorkingCalendar1676s', {plain : dto.WorkingCalendar1676FullDTO, observable : dto.WorkingCalendar1676ObservableFullDTO}, realParameters);
+            return service.getData('WorkingCalendar1676/GetFullWorkingCalendar1676s', {plain : dto.WorkingCalendar1676FullDTO, observable : dto.WorkingCalendar1676ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getFullWorkingCalendar1676sByIdents(): async.AsyncFunc3<dto.WorkingCalendar1676IdentityDTO[], Array<dto.WorkingCalendar1676FullDTO>, Array<dto.WorkingCalendar1676ObservableFullDTO>, dto.WorkingCalendar1676FullDTO, dto.WorkingCalendar1676ObservableFullDTO> {
         return new async.AsyncFunc3((workingCalendar1676Idents: dto.WorkingCalendar1676IdentityDTO[]) => {
-            let baseParameters = {workingCalendar1676Idents : workingCalendar1676Idents};
-            let realParameters = baseParameters;
+            let baseParameters = workingCalendar1676Idents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.WorkingCalendar1676FullDTO>, Array<dto.WorkingCalendar1676ObservableFullDTO>, dto.WorkingCalendar1676FullDTO, dto.WorkingCalendar1676ObservableFullDTO>();
-            return service.getData('WorkingCalendar1676/GetFullWorkingCalendar1676sByIdents', {plain : dto.WorkingCalendar1676FullDTO, observable : dto.WorkingCalendar1676ObservableFullDTO}, realParameters);
+            return service.getData('WorkingCalendar1676/GetFullWorkingCalendar1676sByIdents', {plain : dto.WorkingCalendar1676FullDTO, observable : dto.WorkingCalendar1676ObservableFullDTO}, baseParameters);
         });
     }
 
     function _getMassChangeEmployeeByEmail(): async.AsyncFunc3<dto.EmployeeIdentityDTO[], dto.EmployeeEmailMassChangeModelRichDTO, dto.EmployeeEmailMassChangeModelObservableRichDTO, dto.EmployeeEmailMassChangeModelRichDTO, dto.EmployeeEmailMassChangeModelObservableRichDTO> {
         return new async.AsyncFunc3((employeeIdent: dto.EmployeeIdentityDTO[]) => {
-            let baseParameters = {employeeIdent : employeeIdent};
-            let realParameters = baseParameters;
+            let baseParameters = employeeIdent;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeEmailMassChangeModelRichDTO, dto.EmployeeEmailMassChangeModelObservableRichDTO, dto.EmployeeEmailMassChangeModelRichDTO, dto.EmployeeEmailMassChangeModelObservableRichDTO>();
-            return service.getData('Employee/GetMassChangeEmployeeByEmail', {plain : dto.EmployeeEmailMassChangeModelRichDTO, observable : dto.EmployeeEmailMassChangeModelObservableRichDTO}, realParameters);
+            return service.getData('Employee/GetMassChangeEmployeeByEmail', {plain : dto.EmployeeEmailMassChangeModelRichDTO, observable : dto.EmployeeEmailMassChangeModelObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichBusinessUnit(): async.AsyncFunc3<dto.BusinessUnitIdentityDTO, dto.BusinessUnitRichDTO, dto.BusinessUnitObservableRichDTO, dto.BusinessUnitRichDTO, dto.BusinessUnitObservableRichDTO> {
         return new async.AsyncFunc3((businessUnitIdentity: dto.BusinessUnitIdentityDTO) => {
-            let baseParameters = {businessUnitIdentity : businessUnitIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitRichDTO, dto.BusinessUnitObservableRichDTO, dto.BusinessUnitRichDTO, dto.BusinessUnitObservableRichDTO>();
-            return service.getData('BusinessUnit/GetRichBusinessUnit', {plain : dto.BusinessUnitRichDTO, observable : dto.BusinessUnitObservableRichDTO}, realParameters);
+            return service.getData('BusinessUnit/GetRichBusinessUnit', {plain : dto.BusinessUnitRichDTO, observable : dto.BusinessUnitObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichBusinessUnitByName(): async.AsyncFunc3<string, dto.BusinessUnitRichDTO, dto.BusinessUnitObservableRichDTO, dto.BusinessUnitRichDTO, dto.BusinessUnitObservableRichDTO> {
         return new async.AsyncFunc3((businessUnitName: string) => {
-            let baseParameters = {businessUnitName : businessUnitName};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitName;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitRichDTO, dto.BusinessUnitObservableRichDTO, dto.BusinessUnitRichDTO, dto.BusinessUnitObservableRichDTO>();
-            return service.getData('BusinessUnit/GetRichBusinessUnitByName', {plain : dto.BusinessUnitRichDTO, observable : dto.BusinessUnitObservableRichDTO}, realParameters);
+            return service.getData('BusinessUnit/GetRichBusinessUnitByName', {plain : dto.BusinessUnitRichDTO, observable : dto.BusinessUnitObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichBusinessUnitHrDepartment(): async.AsyncFunc3<dto.BusinessUnitHrDepartmentIdentityDTO, dto.BusinessUnitHrDepartmentRichDTO, dto.BusinessUnitHrDepartmentObservableRichDTO, dto.BusinessUnitHrDepartmentRichDTO, dto.BusinessUnitHrDepartmentObservableRichDTO> {
         return new async.AsyncFunc3((businessUnitHrDepartmentIdentity: dto.BusinessUnitHrDepartmentIdentityDTO) => {
-            let baseParameters = {businessUnitHrDepartmentIdentity : businessUnitHrDepartmentIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitHrDepartmentIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitHrDepartmentRichDTO, dto.BusinessUnitHrDepartmentObservableRichDTO, dto.BusinessUnitHrDepartmentRichDTO, dto.BusinessUnitHrDepartmentObservableRichDTO>();
-            return service.getData('BusinessUnitHrDepartment/GetRichBusinessUnitHrDepartment', {plain : dto.BusinessUnitHrDepartmentRichDTO, observable : dto.BusinessUnitHrDepartmentObservableRichDTO}, realParameters);
+            return service.getData('BusinessUnitHrDepartment/GetRichBusinessUnitHrDepartment', {plain : dto.BusinessUnitHrDepartmentRichDTO, observable : dto.BusinessUnitHrDepartmentObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichBusinessUnitManagerCommissionLink(): async.AsyncFunc3<dto.BusinessUnitManagerCommissionLinkIdentityDTO, dto.BusinessUnitManagerCommissionLinkRichDTO, dto.BusinessUnitManagerCommissionLinkObservableRichDTO, dto.BusinessUnitManagerCommissionLinkRichDTO, dto.BusinessUnitManagerCommissionLinkObservableRichDTO> {
         return new async.AsyncFunc3((businessUnitManagerCommissionLinkIdentity: dto.BusinessUnitManagerCommissionLinkIdentityDTO) => {
-            let baseParameters = {businessUnitManagerCommissionLinkIdentity : businessUnitManagerCommissionLinkIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitManagerCommissionLinkIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitManagerCommissionLinkRichDTO, dto.BusinessUnitManagerCommissionLinkObservableRichDTO, dto.BusinessUnitManagerCommissionLinkRichDTO, dto.BusinessUnitManagerCommissionLinkObservableRichDTO>();
-            return service.getData('BusinessUnitManagerCommissionLink/GetRichBusinessUnitManagerCommissionLink', {plain : dto.BusinessUnitManagerCommissionLinkRichDTO, observable : dto.BusinessUnitManagerCommissionLinkObservableRichDTO}, realParameters);
+            return service.getData('BusinessUnitManagerCommissionLink/GetRichBusinessUnitManagerCommissionLink', {plain : dto.BusinessUnitManagerCommissionLinkRichDTO, observable : dto.BusinessUnitManagerCommissionLinkObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichBusinessUnitType(): async.AsyncFunc3<dto.BusinessUnitTypeIdentityDTO, dto.BusinessUnitTypeRichDTO, dto.BusinessUnitTypeObservableRichDTO, dto.BusinessUnitTypeRichDTO, dto.BusinessUnitTypeObservableRichDTO> {
         return new async.AsyncFunc3((businessUnitTypeIdentity: dto.BusinessUnitTypeIdentityDTO) => {
-            let baseParameters = {businessUnitTypeIdentity : businessUnitTypeIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitTypeIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitTypeRichDTO, dto.BusinessUnitTypeObservableRichDTO, dto.BusinessUnitTypeRichDTO, dto.BusinessUnitTypeObservableRichDTO>();
-            return service.getData('BusinessUnitType/GetRichBusinessUnitType', {plain : dto.BusinessUnitTypeRichDTO, observable : dto.BusinessUnitTypeObservableRichDTO}, realParameters);
+            return service.getData('BusinessUnitType/GetRichBusinessUnitType', {plain : dto.BusinessUnitTypeRichDTO, observable : dto.BusinessUnitTypeObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichBusinessUnitTypeByName(): async.AsyncFunc3<string, dto.BusinessUnitTypeRichDTO, dto.BusinessUnitTypeObservableRichDTO, dto.BusinessUnitTypeRichDTO, dto.BusinessUnitTypeObservableRichDTO> {
         return new async.AsyncFunc3((businessUnitTypeName: string) => {
-            let baseParameters = {businessUnitTypeName : businessUnitTypeName};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitTypeName;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitTypeRichDTO, dto.BusinessUnitTypeObservableRichDTO, dto.BusinessUnitTypeRichDTO, dto.BusinessUnitTypeObservableRichDTO>();
-            return service.getData('BusinessUnitType/GetRichBusinessUnitTypeByName', {plain : dto.BusinessUnitTypeRichDTO, observable : dto.BusinessUnitTypeObservableRichDTO}, realParameters);
+            return service.getData('BusinessUnitType/GetRichBusinessUnitTypeByName', {plain : dto.BusinessUnitTypeRichDTO, observable : dto.BusinessUnitTypeObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichCompanyLegalEntity(): async.AsyncFunc3<dto.CompanyLegalEntityIdentityDTO, dto.CompanyLegalEntityRichDTO, dto.CompanyLegalEntityObservableRichDTO, dto.CompanyLegalEntityRichDTO, dto.CompanyLegalEntityObservableRichDTO> {
         return new async.AsyncFunc3((companyLegalEntityIdentity: dto.CompanyLegalEntityIdentityDTO) => {
-            let baseParameters = {companyLegalEntityIdentity : companyLegalEntityIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = companyLegalEntityIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.CompanyLegalEntityRichDTO, dto.CompanyLegalEntityObservableRichDTO, dto.CompanyLegalEntityRichDTO, dto.CompanyLegalEntityObservableRichDTO>();
-            return service.getData('CompanyLegalEntity/GetRichCompanyLegalEntity', {plain : dto.CompanyLegalEntityRichDTO, observable : dto.CompanyLegalEntityObservableRichDTO}, realParameters);
+            return service.getData('CompanyLegalEntity/GetRichCompanyLegalEntity', {plain : dto.CompanyLegalEntityRichDTO, observable : dto.CompanyLegalEntityObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichCompanyLegalEntityByCode(): async.AsyncFunc3<string, dto.CompanyLegalEntityRichDTO, dto.CompanyLegalEntityObservableRichDTO, dto.CompanyLegalEntityRichDTO, dto.CompanyLegalEntityObservableRichDTO> {
         return new async.AsyncFunc3((companyLegalEntityCode: string) => {
-            let baseParameters = {companyLegalEntityCode : companyLegalEntityCode};
-            let realParameters = baseParameters;
+            let baseParameters = companyLegalEntityCode;
             let service = Environment.current.context.facadeFactory.createService<dto.CompanyLegalEntityRichDTO, dto.CompanyLegalEntityObservableRichDTO, dto.CompanyLegalEntityRichDTO, dto.CompanyLegalEntityObservableRichDTO>();
-            return service.getData('CompanyLegalEntity/GetRichCompanyLegalEntityByCode', {plain : dto.CompanyLegalEntityRichDTO, observable : dto.CompanyLegalEntityObservableRichDTO}, realParameters);
+            return service.getData('CompanyLegalEntity/GetRichCompanyLegalEntityByCode', {plain : dto.CompanyLegalEntityRichDTO, observable : dto.CompanyLegalEntityObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichCompanyLegalEntityByName(): async.AsyncFunc3<string, dto.CompanyLegalEntityRichDTO, dto.CompanyLegalEntityObservableRichDTO, dto.CompanyLegalEntityRichDTO, dto.CompanyLegalEntityObservableRichDTO> {
         return new async.AsyncFunc3((companyLegalEntityName: string) => {
-            let baseParameters = {companyLegalEntityName : companyLegalEntityName};
-            let realParameters = baseParameters;
+            let baseParameters = companyLegalEntityName;
             let service = Environment.current.context.facadeFactory.createService<dto.CompanyLegalEntityRichDTO, dto.CompanyLegalEntityObservableRichDTO, dto.CompanyLegalEntityRichDTO, dto.CompanyLegalEntityObservableRichDTO>();
-            return service.getData('CompanyLegalEntity/GetRichCompanyLegalEntityByName', {plain : dto.CompanyLegalEntityRichDTO, observable : dto.CompanyLegalEntityObservableRichDTO}, realParameters);
+            return service.getData('CompanyLegalEntity/GetRichCompanyLegalEntityByName', {plain : dto.CompanyLegalEntityRichDTO, observable : dto.CompanyLegalEntityObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichCountry(): async.AsyncFunc3<dto.CountryIdentityDTO, dto.CountryRichDTO, dto.CountryObservableRichDTO, dto.CountryRichDTO, dto.CountryObservableRichDTO> {
         return new async.AsyncFunc3((countryIdentity: dto.CountryIdentityDTO) => {
-            let baseParameters = {countryIdentity : countryIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = countryIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.CountryRichDTO, dto.CountryObservableRichDTO, dto.CountryRichDTO, dto.CountryObservableRichDTO>();
-            return service.getData('Country/GetRichCountry', {plain : dto.CountryRichDTO, observable : dto.CountryObservableRichDTO}, realParameters);
+            return service.getData('Country/GetRichCountry', {plain : dto.CountryRichDTO, observable : dto.CountryObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichCountryByCode(): async.AsyncFunc3<string, dto.CountryRichDTO, dto.CountryObservableRichDTO, dto.CountryRichDTO, dto.CountryObservableRichDTO> {
         return new async.AsyncFunc3((countryCode: string) => {
-            let baseParameters = {countryCode : countryCode};
-            let realParameters = baseParameters;
+            let baseParameters = countryCode;
             let service = Environment.current.context.facadeFactory.createService<dto.CountryRichDTO, dto.CountryObservableRichDTO, dto.CountryRichDTO, dto.CountryObservableRichDTO>();
-            return service.getData('Country/GetRichCountryByCode', {plain : dto.CountryRichDTO, observable : dto.CountryObservableRichDTO}, realParameters);
+            return service.getData('Country/GetRichCountryByCode', {plain : dto.CountryRichDTO, observable : dto.CountryObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichCountryByName(): async.AsyncFunc3<string, dto.CountryRichDTO, dto.CountryObservableRichDTO, dto.CountryRichDTO, dto.CountryObservableRichDTO> {
         return new async.AsyncFunc3((countryName: string) => {
-            let baseParameters = {countryName : countryName};
-            let realParameters = baseParameters;
+            let baseParameters = countryName;
             let service = Environment.current.context.facadeFactory.createService<dto.CountryRichDTO, dto.CountryObservableRichDTO, dto.CountryRichDTO, dto.CountryObservableRichDTO>();
-            return service.getData('Country/GetRichCountryByName', {plain : dto.CountryRichDTO, observable : dto.CountryObservableRichDTO}, realParameters);
+            return service.getData('Country/GetRichCountryByName', {plain : dto.CountryRichDTO, observable : dto.CountryObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichEmployeeInformation(): async.AsyncFunc3<dto.EmployeeInformationIdentityDTO, dto.EmployeeInformationRichDTO, dto.EmployeeInformationObservableRichDTO, dto.EmployeeInformationRichDTO, dto.EmployeeInformationObservableRichDTO> {
         return new async.AsyncFunc3((employeeInformationIdentity: dto.EmployeeInformationIdentityDTO) => {
-            let baseParameters = {employeeInformationIdentity : employeeInformationIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeInformationIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeInformationRichDTO, dto.EmployeeInformationObservableRichDTO, dto.EmployeeInformationRichDTO, dto.EmployeeInformationObservableRichDTO>();
-            return service.getData('EmployeeInformation/GetRichEmployeeInformation', {plain : dto.EmployeeInformationRichDTO, observable : dto.EmployeeInformationObservableRichDTO}, realParameters);
+            return service.getData('EmployeeInformation/GetRichEmployeeInformation', {plain : dto.EmployeeInformationRichDTO, observable : dto.EmployeeInformationObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichEmployeeInformationByName(): async.AsyncFunc3<string, dto.EmployeeInformationRichDTO, dto.EmployeeInformationObservableRichDTO, dto.EmployeeInformationRichDTO, dto.EmployeeInformationObservableRichDTO> {
         return new async.AsyncFunc3((employeeInformationName: string) => {
-            let baseParameters = {employeeInformationName : employeeInformationName};
-            let realParameters = baseParameters;
+            let baseParameters = employeeInformationName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeInformationRichDTO, dto.EmployeeInformationObservableRichDTO, dto.EmployeeInformationRichDTO, dto.EmployeeInformationObservableRichDTO>();
-            return service.getData('EmployeeInformation/GetRichEmployeeInformationByName', {plain : dto.EmployeeInformationRichDTO, observable : dto.EmployeeInformationObservableRichDTO}, realParameters);
+            return service.getData('EmployeeInformation/GetRichEmployeeInformationByName', {plain : dto.EmployeeInformationRichDTO, observable : dto.EmployeeInformationObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichEmployeePhoto(): async.AsyncFunc3<dto.EmployeePhotoIdentityDTO, dto.EmployeePhotoRichDTO, dto.EmployeePhotoObservableRichDTO, dto.EmployeePhotoRichDTO, dto.EmployeePhotoObservableRichDTO> {
         return new async.AsyncFunc3((employeePhotoIdentity: dto.EmployeePhotoIdentityDTO) => {
-            let baseParameters = {employeePhotoIdentity : employeePhotoIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeePhotoIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeePhotoRichDTO, dto.EmployeePhotoObservableRichDTO, dto.EmployeePhotoRichDTO, dto.EmployeePhotoObservableRichDTO>();
-            return service.getData('EmployeePhoto/GetRichEmployeePhoto', {plain : dto.EmployeePhotoRichDTO, observable : dto.EmployeePhotoObservableRichDTO}, realParameters);
+            return service.getData('EmployeePhoto/GetRichEmployeePhoto', {plain : dto.EmployeePhotoRichDTO, observable : dto.EmployeePhotoObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichEmployeePosition(): async.AsyncFunc3<dto.EmployeePositionIdentityDTO, dto.EmployeePositionRichDTO, dto.EmployeePositionObservableRichDTO, dto.EmployeePositionRichDTO, dto.EmployeePositionObservableRichDTO> {
         return new async.AsyncFunc3((employeePositionIdentity: dto.EmployeePositionIdentityDTO) => {
-            let baseParameters = {employeePositionIdentity : employeePositionIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeePositionIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeePositionRichDTO, dto.EmployeePositionObservableRichDTO, dto.EmployeePositionRichDTO, dto.EmployeePositionObservableRichDTO>();
-            return service.getData('EmployeePosition/GetRichEmployeePosition', {plain : dto.EmployeePositionRichDTO, observable : dto.EmployeePositionObservableRichDTO}, realParameters);
+            return service.getData('EmployeePosition/GetRichEmployeePosition', {plain : dto.EmployeePositionRichDTO, observable : dto.EmployeePositionObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichEmployeePositionByName(): async.AsyncFunc3<string, dto.EmployeePositionRichDTO, dto.EmployeePositionObservableRichDTO, dto.EmployeePositionRichDTO, dto.EmployeePositionObservableRichDTO> {
         return new async.AsyncFunc3((employeePositionName: string) => {
-            let baseParameters = {employeePositionName : employeePositionName};
-            let realParameters = baseParameters;
+            let baseParameters = employeePositionName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeePositionRichDTO, dto.EmployeePositionObservableRichDTO, dto.EmployeePositionRichDTO, dto.EmployeePositionObservableRichDTO>();
-            return service.getData('EmployeePosition/GetRichEmployeePositionByName', {plain : dto.EmployeePositionRichDTO, observable : dto.EmployeePositionObservableRichDTO}, realParameters);
+            return service.getData('EmployeePosition/GetRichEmployeePositionByName', {plain : dto.EmployeePositionRichDTO, observable : dto.EmployeePositionObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichEmployeeRegistrationType(): async.AsyncFunc3<dto.EmployeeRegistrationTypeIdentityDTO, dto.EmployeeRegistrationTypeRichDTO, dto.EmployeeRegistrationTypeObservableRichDTO, dto.EmployeeRegistrationTypeRichDTO, dto.EmployeeRegistrationTypeObservableRichDTO> {
         return new async.AsyncFunc3((employeeRegistrationTypeIdentity: dto.EmployeeRegistrationTypeIdentityDTO) => {
-            let baseParameters = {employeeRegistrationTypeIdentity : employeeRegistrationTypeIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRegistrationTypeIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRegistrationTypeRichDTO, dto.EmployeeRegistrationTypeObservableRichDTO, dto.EmployeeRegistrationTypeRichDTO, dto.EmployeeRegistrationTypeObservableRichDTO>();
-            return service.getData('EmployeeRegistrationType/GetRichEmployeeRegistrationType', {plain : dto.EmployeeRegistrationTypeRichDTO, observable : dto.EmployeeRegistrationTypeObservableRichDTO}, realParameters);
+            return service.getData('EmployeeRegistrationType/GetRichEmployeeRegistrationType', {plain : dto.EmployeeRegistrationTypeRichDTO, observable : dto.EmployeeRegistrationTypeObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichEmployeeRegistrationTypeByName(): async.AsyncFunc3<string, dto.EmployeeRegistrationTypeRichDTO, dto.EmployeeRegistrationTypeObservableRichDTO, dto.EmployeeRegistrationTypeRichDTO, dto.EmployeeRegistrationTypeObservableRichDTO> {
         return new async.AsyncFunc3((employeeRegistrationTypeName: string) => {
-            let baseParameters = {employeeRegistrationTypeName : employeeRegistrationTypeName};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRegistrationTypeName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRegistrationTypeRichDTO, dto.EmployeeRegistrationTypeObservableRichDTO, dto.EmployeeRegistrationTypeRichDTO, dto.EmployeeRegistrationTypeObservableRichDTO>();
-            return service.getData('EmployeeRegistrationType/GetRichEmployeeRegistrationTypeByName', {plain : dto.EmployeeRegistrationTypeRichDTO, observable : dto.EmployeeRegistrationTypeObservableRichDTO}, realParameters);
+            return service.getData('EmployeeRegistrationType/GetRichEmployeeRegistrationTypeByName', {plain : dto.EmployeeRegistrationTypeRichDTO, observable : dto.EmployeeRegistrationTypeObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichEmployeeRole(): async.AsyncFunc3<dto.EmployeeRoleIdentityDTO, dto.EmployeeRoleRichDTO, dto.EmployeeRoleObservableRichDTO, dto.EmployeeRoleRichDTO, dto.EmployeeRoleObservableRichDTO> {
         return new async.AsyncFunc3((employeeRoleIdentity: dto.EmployeeRoleIdentityDTO) => {
-            let baseParameters = {employeeRoleIdentity : employeeRoleIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRoleRichDTO, dto.EmployeeRoleObservableRichDTO, dto.EmployeeRoleRichDTO, dto.EmployeeRoleObservableRichDTO>();
-            return service.getData('EmployeeRole/GetRichEmployeeRole', {plain : dto.EmployeeRoleRichDTO, observable : dto.EmployeeRoleObservableRichDTO}, realParameters);
+            return service.getData('EmployeeRole/GetRichEmployeeRole', {plain : dto.EmployeeRoleRichDTO, observable : dto.EmployeeRoleObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichEmployeeRoleByName(): async.AsyncFunc3<string, dto.EmployeeRoleRichDTO, dto.EmployeeRoleObservableRichDTO, dto.EmployeeRoleRichDTO, dto.EmployeeRoleObservableRichDTO> {
         return new async.AsyncFunc3((employeeRoleName: string) => {
-            let baseParameters = {employeeRoleName : employeeRoleName};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRoleRichDTO, dto.EmployeeRoleObservableRichDTO, dto.EmployeeRoleRichDTO, dto.EmployeeRoleObservableRichDTO>();
-            return service.getData('EmployeeRole/GetRichEmployeeRoleByName', {plain : dto.EmployeeRoleRichDTO, observable : dto.EmployeeRoleObservableRichDTO}, realParameters);
+            return service.getData('EmployeeRole/GetRichEmployeeRoleByName', {plain : dto.EmployeeRoleRichDTO, observable : dto.EmployeeRoleObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichEmployeeRoleDegree(): async.AsyncFunc3<dto.EmployeeRoleDegreeIdentityDTO, dto.EmployeeRoleDegreeRichDTO, dto.EmployeeRoleDegreeObservableRichDTO, dto.EmployeeRoleDegreeRichDTO, dto.EmployeeRoleDegreeObservableRichDTO> {
         return new async.AsyncFunc3((employeeRoleDegreeIdentity: dto.EmployeeRoleDegreeIdentityDTO) => {
-            let baseParameters = {employeeRoleDegreeIdentity : employeeRoleDegreeIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleDegreeIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRoleDegreeRichDTO, dto.EmployeeRoleDegreeObservableRichDTO, dto.EmployeeRoleDegreeRichDTO, dto.EmployeeRoleDegreeObservableRichDTO>();
-            return service.getData('EmployeeRoleDegree/GetRichEmployeeRoleDegree', {plain : dto.EmployeeRoleDegreeRichDTO, observable : dto.EmployeeRoleDegreeObservableRichDTO}, realParameters);
+            return service.getData('EmployeeRoleDegree/GetRichEmployeeRoleDegree', {plain : dto.EmployeeRoleDegreeRichDTO, observable : dto.EmployeeRoleDegreeObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichEmployeeRoleDegreeByName(): async.AsyncFunc3<string, dto.EmployeeRoleDegreeRichDTO, dto.EmployeeRoleDegreeObservableRichDTO, dto.EmployeeRoleDegreeRichDTO, dto.EmployeeRoleDegreeObservableRichDTO> {
         return new async.AsyncFunc3((employeeRoleDegreeName: string) => {
-            let baseParameters = {employeeRoleDegreeName : employeeRoleDegreeName};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleDegreeName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRoleDegreeRichDTO, dto.EmployeeRoleDegreeObservableRichDTO, dto.EmployeeRoleDegreeRichDTO, dto.EmployeeRoleDegreeObservableRichDTO>();
-            return service.getData('EmployeeRoleDegree/GetRichEmployeeRoleDegreeByName', {plain : dto.EmployeeRoleDegreeRichDTO, observable : dto.EmployeeRoleDegreeObservableRichDTO}, realParameters);
+            return service.getData('EmployeeRoleDegree/GetRichEmployeeRoleDegreeByName', {plain : dto.EmployeeRoleDegreeRichDTO, observable : dto.EmployeeRoleDegreeObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichEmployeeSpecialization(): async.AsyncFunc3<dto.EmployeeSpecializationIdentityDTO, dto.EmployeeSpecializationRichDTO, dto.EmployeeSpecializationObservableRichDTO, dto.EmployeeSpecializationRichDTO, dto.EmployeeSpecializationObservableRichDTO> {
         return new async.AsyncFunc3((employeeSpecializationIdentity: dto.EmployeeSpecializationIdentityDTO) => {
-            let baseParameters = {employeeSpecializationIdentity : employeeSpecializationIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeSpecializationIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeSpecializationRichDTO, dto.EmployeeSpecializationObservableRichDTO, dto.EmployeeSpecializationRichDTO, dto.EmployeeSpecializationObservableRichDTO>();
-            return service.getData('EmployeeSpecialization/GetRichEmployeeSpecialization', {plain : dto.EmployeeSpecializationRichDTO, observable : dto.EmployeeSpecializationObservableRichDTO}, realParameters);
+            return service.getData('EmployeeSpecialization/GetRichEmployeeSpecialization', {plain : dto.EmployeeSpecializationRichDTO, observable : dto.EmployeeSpecializationObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichEmployeeSpecializationByName(): async.AsyncFunc3<string, dto.EmployeeSpecializationRichDTO, dto.EmployeeSpecializationObservableRichDTO, dto.EmployeeSpecializationRichDTO, dto.EmployeeSpecializationObservableRichDTO> {
         return new async.AsyncFunc3((employeeSpecializationName: string) => {
-            let baseParameters = {employeeSpecializationName : employeeSpecializationName};
-            let realParameters = baseParameters;
+            let baseParameters = employeeSpecializationName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeSpecializationRichDTO, dto.EmployeeSpecializationObservableRichDTO, dto.EmployeeSpecializationRichDTO, dto.EmployeeSpecializationObservableRichDTO>();
-            return service.getData('EmployeeSpecialization/GetRichEmployeeSpecializationByName', {plain : dto.EmployeeSpecializationRichDTO, observable : dto.EmployeeSpecializationObservableRichDTO}, realParameters);
+            return service.getData('EmployeeSpecialization/GetRichEmployeeSpecializationByName', {plain : dto.EmployeeSpecializationRichDTO, observable : dto.EmployeeSpecializationObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichExample1(): async.AsyncFunc3<dto.Example1IdentityDTO, dto.Example1RichDTO, dto.Example1ObservableRichDTO, dto.Example1RichDTO, dto.Example1ObservableRichDTO> {
         return new async.AsyncFunc3((example1Identity: dto.Example1IdentityDTO) => {
-            let baseParameters = {example1Identity : example1Identity};
-            let realParameters = baseParameters;
+            let baseParameters = example1Identity;
             let service = Environment.current.context.facadeFactory.createService<dto.Example1RichDTO, dto.Example1ObservableRichDTO, dto.Example1RichDTO, dto.Example1ObservableRichDTO>();
-            return service.getData('Example1/GetRichExample1', {plain : dto.Example1RichDTO, observable : dto.Example1ObservableRichDTO}, realParameters);
+            return service.getData('Example1/GetRichExample1', {plain : dto.Example1RichDTO, observable : dto.Example1ObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichHRDepartment(): async.AsyncFunc3<dto.HRDepartmentIdentityDTO, dto.HRDepartmentRichDTO, dto.HRDepartmentObservableRichDTO, dto.HRDepartmentRichDTO, dto.HRDepartmentObservableRichDTO> {
         return new async.AsyncFunc3((hRDepartmentIdentity: dto.HRDepartmentIdentityDTO) => {
-            let baseParameters = {hRDepartmentIdentity : hRDepartmentIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = hRDepartmentIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.HRDepartmentRichDTO, dto.HRDepartmentObservableRichDTO, dto.HRDepartmentRichDTO, dto.HRDepartmentObservableRichDTO>();
-            return service.getData('HRDepartment/GetRichHRDepartment', {plain : dto.HRDepartmentRichDTO, observable : dto.HRDepartmentObservableRichDTO}, realParameters);
+            return service.getData('HRDepartment/GetRichHRDepartment', {plain : dto.HRDepartmentRichDTO, observable : dto.HRDepartmentObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichHRDepartmentByCode(): async.AsyncFunc3<string, dto.HRDepartmentRichDTO, dto.HRDepartmentObservableRichDTO, dto.HRDepartmentRichDTO, dto.HRDepartmentObservableRichDTO> {
         return new async.AsyncFunc3((hRDepartmentCode: string) => {
-            let baseParameters = {hRDepartmentCode : hRDepartmentCode};
-            let realParameters = baseParameters;
+            let baseParameters = hRDepartmentCode;
             let service = Environment.current.context.facadeFactory.createService<dto.HRDepartmentRichDTO, dto.HRDepartmentObservableRichDTO, dto.HRDepartmentRichDTO, dto.HRDepartmentObservableRichDTO>();
-            return service.getData('HRDepartment/GetRichHRDepartmentByCode', {plain : dto.HRDepartmentRichDTO, observable : dto.HRDepartmentObservableRichDTO}, realParameters);
+            return service.getData('HRDepartment/GetRichHRDepartmentByCode', {plain : dto.HRDepartmentRichDTO, observable : dto.HRDepartmentObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichHRDepartmentByName(): async.AsyncFunc3<string, dto.HRDepartmentRichDTO, dto.HRDepartmentObservableRichDTO, dto.HRDepartmentRichDTO, dto.HRDepartmentObservableRichDTO> {
         return new async.AsyncFunc3((hRDepartmentName: string) => {
-            let baseParameters = {hRDepartmentName : hRDepartmentName};
-            let realParameters = baseParameters;
+            let baseParameters = hRDepartmentName;
             let service = Environment.current.context.facadeFactory.createService<dto.HRDepartmentRichDTO, dto.HRDepartmentObservableRichDTO, dto.HRDepartmentRichDTO, dto.HRDepartmentObservableRichDTO>();
-            return service.getData('HRDepartment/GetRichHRDepartmentByName', {plain : dto.HRDepartmentRichDTO, observable : dto.HRDepartmentObservableRichDTO}, realParameters);
+            return service.getData('HRDepartment/GetRichHRDepartmentByName', {plain : dto.HRDepartmentRichDTO, observable : dto.HRDepartmentObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichIMRequest(): async.AsyncFunc3<dto.IMRequestIdentityDTO, dto.IMRequestRichDTO, dto.IMRequestObservableRichDTO, dto.IMRequestRichDTO, dto.IMRequestObservableRichDTO> {
         return new async.AsyncFunc3((iMRequestIdentity: dto.IMRequestIdentityDTO) => {
-            let baseParameters = {iMRequestIdentity : iMRequestIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = iMRequestIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.IMRequestRichDTO, dto.IMRequestObservableRichDTO, dto.IMRequestRichDTO, dto.IMRequestObservableRichDTO>();
-            return service.getData('IMRequest/GetRichIMRequest', {plain : dto.IMRequestRichDTO, observable : dto.IMRequestObservableRichDTO}, realParameters);
+            return service.getData('IMRequest/GetRichIMRequest', {plain : dto.IMRequestRichDTO, observable : dto.IMRequestObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichIMRequestByName(): async.AsyncFunc3<string, dto.IMRequestRichDTO, dto.IMRequestObservableRichDTO, dto.IMRequestRichDTO, dto.IMRequestObservableRichDTO> {
         return new async.AsyncFunc3((iMRequestName: string) => {
-            let baseParameters = {iMRequestName : iMRequestName};
-            let realParameters = baseParameters;
+            let baseParameters = iMRequestName;
             let service = Environment.current.context.facadeFactory.createService<dto.IMRequestRichDTO, dto.IMRequestObservableRichDTO, dto.IMRequestRichDTO, dto.IMRequestObservableRichDTO>();
-            return service.getData('IMRequest/GetRichIMRequestByName', {plain : dto.IMRequestRichDTO, observable : dto.IMRequestObservableRichDTO}, realParameters);
+            return service.getData('IMRequest/GetRichIMRequestByName', {plain : dto.IMRequestRichDTO, observable : dto.IMRequestObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichInformation(): async.AsyncFunc3<dto.InformationIdentityDTO, dto.InformationRichDTO, dto.InformationObservableRichDTO, dto.InformationRichDTO, dto.InformationObservableRichDTO> {
         return new async.AsyncFunc3((informationIdentity: dto.InformationIdentityDTO) => {
-            let baseParameters = {informationIdentity : informationIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = informationIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.InformationRichDTO, dto.InformationObservableRichDTO, dto.InformationRichDTO, dto.InformationObservableRichDTO>();
-            return service.getData('Information/GetRichInformation', {plain : dto.InformationRichDTO, observable : dto.InformationObservableRichDTO}, realParameters);
+            return service.getData('Information/GetRichInformation', {plain : dto.InformationRichDTO, observable : dto.InformationObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichInformationByName(): async.AsyncFunc3<string, dto.InformationRichDTO, dto.InformationObservableRichDTO, dto.InformationRichDTO, dto.InformationObservableRichDTO> {
         return new async.AsyncFunc3((informationName: string) => {
-            let baseParameters = {informationName : informationName};
-            let realParameters = baseParameters;
+            let baseParameters = informationName;
             let service = Environment.current.context.facadeFactory.createService<dto.InformationRichDTO, dto.InformationObservableRichDTO, dto.InformationRichDTO, dto.InformationObservableRichDTO>();
-            return service.getData('Information/GetRichInformationByName', {plain : dto.InformationRichDTO, observable : dto.InformationObservableRichDTO}, realParameters);
+            return service.getData('Information/GetRichInformationByName', {plain : dto.InformationRichDTO, observable : dto.InformationObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichLocation(): async.AsyncFunc3<dto.LocationIdentityDTO, dto.LocationRichDTO, dto.LocationObservableRichDTO, dto.LocationRichDTO, dto.LocationObservableRichDTO> {
         return new async.AsyncFunc3((locationIdentity: dto.LocationIdentityDTO) => {
-            let baseParameters = {locationIdentity : locationIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = locationIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.LocationRichDTO, dto.LocationObservableRichDTO, dto.LocationRichDTO, dto.LocationObservableRichDTO>();
-            return service.getData('Location/GetRichLocation', {plain : dto.LocationRichDTO, observable : dto.LocationObservableRichDTO}, realParameters);
+            return service.getData('Location/GetRichLocation', {plain : dto.LocationRichDTO, observable : dto.LocationObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichLocation1676(): async.AsyncFunc3<dto.Location1676IdentityDTO, dto.Location1676RichDTO, dto.Location1676ObservableRichDTO, dto.Location1676RichDTO, dto.Location1676ObservableRichDTO> {
         return new async.AsyncFunc3((location1676Identity: dto.Location1676IdentityDTO) => {
-            let baseParameters = {location1676Identity : location1676Identity};
-            let realParameters = baseParameters;
+            let baseParameters = location1676Identity;
             let service = Environment.current.context.facadeFactory.createService<dto.Location1676RichDTO, dto.Location1676ObservableRichDTO, dto.Location1676RichDTO, dto.Location1676ObservableRichDTO>();
-            return service.getData('Location1676/GetRichLocation1676', {plain : dto.Location1676RichDTO, observable : dto.Location1676ObservableRichDTO}, realParameters);
+            return service.getData('Location1676/GetRichLocation1676', {plain : dto.Location1676RichDTO, observable : dto.Location1676ObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichLocation1676ByName(): async.AsyncFunc3<string, dto.Location1676RichDTO, dto.Location1676ObservableRichDTO, dto.Location1676RichDTO, dto.Location1676ObservableRichDTO> {
         return new async.AsyncFunc3((location1676Name: string) => {
-            let baseParameters = {location1676Name : location1676Name};
-            let realParameters = baseParameters;
+            let baseParameters = location1676Name;
             let service = Environment.current.context.facadeFactory.createService<dto.Location1676RichDTO, dto.Location1676ObservableRichDTO, dto.Location1676RichDTO, dto.Location1676ObservableRichDTO>();
-            return service.getData('Location1676/GetRichLocation1676ByName', {plain : dto.Location1676RichDTO, observable : dto.Location1676ObservableRichDTO}, realParameters);
+            return service.getData('Location1676/GetRichLocation1676ByName', {plain : dto.Location1676RichDTO, observable : dto.Location1676ObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichLocationByName(): async.AsyncFunc3<string, dto.LocationRichDTO, dto.LocationObservableRichDTO, dto.LocationRichDTO, dto.LocationObservableRichDTO> {
         return new async.AsyncFunc3((locationName: string) => {
-            let baseParameters = {locationName : locationName};
-            let realParameters = baseParameters;
+            let baseParameters = locationName;
             let service = Environment.current.context.facadeFactory.createService<dto.LocationRichDTO, dto.LocationObservableRichDTO, dto.LocationRichDTO, dto.LocationObservableRichDTO>();
-            return service.getData('Location/GetRichLocationByName', {plain : dto.LocationRichDTO, observable : dto.LocationObservableRichDTO}, realParameters);
+            return service.getData('Location/GetRichLocationByName', {plain : dto.LocationRichDTO, observable : dto.LocationObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichManagementUnit(): async.AsyncFunc3<dto.ManagementUnitIdentityDTO, dto.ManagementUnitRichDTO, dto.ManagementUnitObservableRichDTO, dto.ManagementUnitRichDTO, dto.ManagementUnitObservableRichDTO> {
         return new async.AsyncFunc3((managementUnitIdentity: dto.ManagementUnitIdentityDTO) => {
-            let baseParameters = {managementUnitIdentity : managementUnitIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.ManagementUnitRichDTO, dto.ManagementUnitObservableRichDTO, dto.ManagementUnitRichDTO, dto.ManagementUnitObservableRichDTO>();
-            return service.getData('ManagementUnit/GetRichManagementUnit', {plain : dto.ManagementUnitRichDTO, observable : dto.ManagementUnitObservableRichDTO}, realParameters);
+            return service.getData('ManagementUnit/GetRichManagementUnit', {plain : dto.ManagementUnitRichDTO, observable : dto.ManagementUnitObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichManagementUnitAndBusinessUnitLink(): async.AsyncFunc3<dto.ManagementUnitAndBusinessUnitLinkIdentityDTO, dto.ManagementUnitAndBusinessUnitLinkRichDTO, dto.ManagementUnitAndBusinessUnitLinkObservableRichDTO, dto.ManagementUnitAndBusinessUnitLinkRichDTO, dto.ManagementUnitAndBusinessUnitLinkObservableRichDTO> {
         return new async.AsyncFunc3((managementUnitAndBusinessUnitLinkIdentity: dto.ManagementUnitAndBusinessUnitLinkIdentityDTO) => {
-            let baseParameters = {managementUnitAndBusinessUnitLinkIdentity : managementUnitAndBusinessUnitLinkIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitAndBusinessUnitLinkIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.ManagementUnitAndBusinessUnitLinkRichDTO, dto.ManagementUnitAndBusinessUnitLinkObservableRichDTO, dto.ManagementUnitAndBusinessUnitLinkRichDTO, dto.ManagementUnitAndBusinessUnitLinkObservableRichDTO>();
-            return service.getData('ManagementUnitAndBusinessUnitLink/GetRichManagementUnitAndBusinessUnitLink', {plain : dto.ManagementUnitAndBusinessUnitLinkRichDTO, observable : dto.ManagementUnitAndBusinessUnitLinkObservableRichDTO}, realParameters);
+            return service.getData('ManagementUnitAndBusinessUnitLink/GetRichManagementUnitAndBusinessUnitLink', {plain : dto.ManagementUnitAndBusinessUnitLinkRichDTO, observable : dto.ManagementUnitAndBusinessUnitLinkObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichManagementUnitAndHRDepartmentLink(): async.AsyncFunc3<dto.ManagementUnitAndHRDepartmentLinkIdentityDTO, dto.ManagementUnitAndHRDepartmentLinkRichDTO, dto.ManagementUnitAndHRDepartmentLinkObservableRichDTO, dto.ManagementUnitAndHRDepartmentLinkRichDTO, dto.ManagementUnitAndHRDepartmentLinkObservableRichDTO> {
         return new async.AsyncFunc3((managementUnitAndHRDepartmentLinkIdentity: dto.ManagementUnitAndHRDepartmentLinkIdentityDTO) => {
-            let baseParameters = {managementUnitAndHRDepartmentLinkIdentity : managementUnitAndHRDepartmentLinkIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitAndHRDepartmentLinkIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.ManagementUnitAndHRDepartmentLinkRichDTO, dto.ManagementUnitAndHRDepartmentLinkObservableRichDTO, dto.ManagementUnitAndHRDepartmentLinkRichDTO, dto.ManagementUnitAndHRDepartmentLinkObservableRichDTO>();
-            return service.getData('ManagementUnitAndHRDepartmentLink/GetRichManagementUnitAndHRDepartmentLink', {plain : dto.ManagementUnitAndHRDepartmentLinkRichDTO, observable : dto.ManagementUnitAndHRDepartmentLinkObservableRichDTO}, realParameters);
+            return service.getData('ManagementUnitAndHRDepartmentLink/GetRichManagementUnitAndHRDepartmentLink', {plain : dto.ManagementUnitAndHRDepartmentLinkRichDTO, observable : dto.ManagementUnitAndHRDepartmentLinkObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichManagementUnitByName(): async.AsyncFunc3<string, dto.ManagementUnitRichDTO, dto.ManagementUnitObservableRichDTO, dto.ManagementUnitRichDTO, dto.ManagementUnitObservableRichDTO> {
         return new async.AsyncFunc3((managementUnitName: string) => {
-            let baseParameters = {managementUnitName : managementUnitName};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitName;
             let service = Environment.current.context.facadeFactory.createService<dto.ManagementUnitRichDTO, dto.ManagementUnitObservableRichDTO, dto.ManagementUnitRichDTO, dto.ManagementUnitObservableRichDTO>();
-            return service.getData('ManagementUnit/GetRichManagementUnitByName', {plain : dto.ManagementUnitRichDTO, observable : dto.ManagementUnitObservableRichDTO}, realParameters);
+            return service.getData('ManagementUnit/GetRichManagementUnitByName', {plain : dto.ManagementUnitRichDTO, observable : dto.ManagementUnitObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichMessageTemplateContainer(): async.AsyncFunc3<dto.MessageTemplateContainerIdentityDTO, dto.MessageTemplateContainerRichDTO, dto.MessageTemplateContainerObservableRichDTO, dto.MessageTemplateContainerRichDTO, dto.MessageTemplateContainerObservableRichDTO> {
         return new async.AsyncFunc3((messageTemplateContainerIdentity: dto.MessageTemplateContainerIdentityDTO) => {
-            let baseParameters = {messageTemplateContainerIdentity : messageTemplateContainerIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = messageTemplateContainerIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.MessageTemplateContainerRichDTO, dto.MessageTemplateContainerObservableRichDTO, dto.MessageTemplateContainerRichDTO, dto.MessageTemplateContainerObservableRichDTO>();
-            return service.getData('MessageTemplateContainer/GetRichMessageTemplateContainer', {plain : dto.MessageTemplateContainerRichDTO, observable : dto.MessageTemplateContainerObservableRichDTO}, realParameters);
+            return service.getData('MessageTemplateContainer/GetRichMessageTemplateContainer', {plain : dto.MessageTemplateContainerRichDTO, observable : dto.MessageTemplateContainerObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichPrincipal(): async.AsyncFunc3<dto.PrincipalIdentityDTO, dto.PrincipalRichDTO, dto.PrincipalObservableRichDTO, dto.PrincipalRichDTO, dto.PrincipalObservableRichDTO> {
         return new async.AsyncFunc3((principalIdentity: dto.PrincipalIdentityDTO) => {
-            let baseParameters = {principalIdentity : principalIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = principalIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.PrincipalRichDTO, dto.PrincipalObservableRichDTO, dto.PrincipalRichDTO, dto.PrincipalObservableRichDTO>();
-            return service.getData('Principal/GetRichPrincipal', {plain : dto.PrincipalRichDTO, observable : dto.PrincipalObservableRichDTO}, realParameters);
+            return service.getData('Principal/GetRichPrincipal', {plain : dto.PrincipalRichDTO, observable : dto.PrincipalObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichRegularJobResult(): async.AsyncFunc3<dto.RegularJobResultIdentityDTO, dto.RegularJobResultRichDTO, dto.RegularJobResultObservableRichDTO, dto.RegularJobResultRichDTO, dto.RegularJobResultObservableRichDTO> {
         return new async.AsyncFunc3((regularJobResultIdentity: dto.RegularJobResultIdentityDTO) => {
-            let baseParameters = {regularJobResultIdentity : regularJobResultIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = regularJobResultIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.RegularJobResultRichDTO, dto.RegularJobResultObservableRichDTO, dto.RegularJobResultRichDTO, dto.RegularJobResultObservableRichDTO>();
-            return service.getData('RegularJobResult/GetRichRegularJobResult', {plain : dto.RegularJobResultRichDTO, observable : dto.RegularJobResultObservableRichDTO}, realParameters);
+            return service.getData('RegularJobResult/GetRichRegularJobResult', {plain : dto.RegularJobResultRichDTO, observable : dto.RegularJobResultObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichSampleSystemMessageTemplate(): async.AsyncFunc3<dto.SampleSystemMessageTemplateIdentityDTO, dto.SampleSystemMessageTemplateRichDTO, dto.SampleSystemMessageTemplateObservableRichDTO, dto.SampleSystemMessageTemplateRichDTO, dto.SampleSystemMessageTemplateObservableRichDTO> {
         return new async.AsyncFunc3((sampleSystemMessageTemplateIdentity: dto.SampleSystemMessageTemplateIdentityDTO) => {
-            let baseParameters = {sampleSystemMessageTemplateIdentity : sampleSystemMessageTemplateIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = sampleSystemMessageTemplateIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.SampleSystemMessageTemplateRichDTO, dto.SampleSystemMessageTemplateObservableRichDTO, dto.SampleSystemMessageTemplateRichDTO, dto.SampleSystemMessageTemplateObservableRichDTO>();
-            return service.getData('SampleSystemMessageTemplate/GetRichSampleSystemMessageTemplate', {plain : dto.SampleSystemMessageTemplateRichDTO, observable : dto.SampleSystemMessageTemplateObservableRichDTO}, realParameters);
+            return service.getData('SampleSystemMessageTemplate/GetRichSampleSystemMessageTemplate', {plain : dto.SampleSystemMessageTemplateRichDTO, observable : dto.SampleSystemMessageTemplateObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichTestCustomContextSecurityObj(): async.AsyncFunc3<dto.TestCustomContextSecurityObjIdentityDTO, dto.TestCustomContextSecurityObjRichDTO, dto.TestCustomContextSecurityObjObservableRichDTO, dto.TestCustomContextSecurityObjRichDTO, dto.TestCustomContextSecurityObjObservableRichDTO> {
         return new async.AsyncFunc3((testCustomContextSecurityObjIdentity: dto.TestCustomContextSecurityObjIdentityDTO) => {
-            let baseParameters = {testCustomContextSecurityObjIdentity : testCustomContextSecurityObjIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testCustomContextSecurityObjIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestCustomContextSecurityObjRichDTO, dto.TestCustomContextSecurityObjObservableRichDTO, dto.TestCustomContextSecurityObjRichDTO, dto.TestCustomContextSecurityObjObservableRichDTO>();
-            return service.getData('TestCustomContextSecurityObj/GetRichTestCustomContextSecurityObj', {plain : dto.TestCustomContextSecurityObjRichDTO, observable : dto.TestCustomContextSecurityObjObservableRichDTO}, realParameters);
+            return service.getData('TestCustomContextSecurityObj/GetRichTestCustomContextSecurityObj', {plain : dto.TestCustomContextSecurityObjRichDTO, observable : dto.TestCustomContextSecurityObjObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichTestCustomContextSecurityObjByName(): async.AsyncFunc3<string, dto.TestCustomContextSecurityObjRichDTO, dto.TestCustomContextSecurityObjObservableRichDTO, dto.TestCustomContextSecurityObjRichDTO, dto.TestCustomContextSecurityObjObservableRichDTO> {
         return new async.AsyncFunc3((testCustomContextSecurityObjName: string) => {
-            let baseParameters = {testCustomContextSecurityObjName : testCustomContextSecurityObjName};
-            let realParameters = baseParameters;
+            let baseParameters = testCustomContextSecurityObjName;
             let service = Environment.current.context.facadeFactory.createService<dto.TestCustomContextSecurityObjRichDTO, dto.TestCustomContextSecurityObjObservableRichDTO, dto.TestCustomContextSecurityObjRichDTO, dto.TestCustomContextSecurityObjObservableRichDTO>();
-            return service.getData('TestCustomContextSecurityObj/GetRichTestCustomContextSecurityObjByName', {plain : dto.TestCustomContextSecurityObjRichDTO, observable : dto.TestCustomContextSecurityObjObservableRichDTO}, realParameters);
+            return service.getData('TestCustomContextSecurityObj/GetRichTestCustomContextSecurityObjByName', {plain : dto.TestCustomContextSecurityObjRichDTO, observable : dto.TestCustomContextSecurityObjObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichTestImmutableObj(): async.AsyncFunc3<dto.TestImmutableObjIdentityDTO, dto.TestImmutableObjRichDTO, dto.TestImmutableObjObservableRichDTO, dto.TestImmutableObjRichDTO, dto.TestImmutableObjObservableRichDTO> {
         return new async.AsyncFunc3((testImmutableObjIdentity: dto.TestImmutableObjIdentityDTO) => {
-            let baseParameters = {testImmutableObjIdentity : testImmutableObjIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testImmutableObjIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestImmutableObjRichDTO, dto.TestImmutableObjObservableRichDTO, dto.TestImmutableObjRichDTO, dto.TestImmutableObjObservableRichDTO>();
-            return service.getData('TestImmutableObj/GetRichTestImmutableObj', {plain : dto.TestImmutableObjRichDTO, observable : dto.TestImmutableObjObservableRichDTO}, realParameters);
+            return service.getData('TestImmutableObj/GetRichTestImmutableObj', {plain : dto.TestImmutableObjRichDTO, observable : dto.TestImmutableObjObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichTestRootSecurityObj(): async.AsyncFunc3<dto.TestRootSecurityObjIdentityDTO, dto.TestRootSecurityObjRichDTO, dto.TestRootSecurityObjObservableRichDTO, dto.TestRootSecurityObjRichDTO, dto.TestRootSecurityObjObservableRichDTO> {
         return new async.AsyncFunc3((testRootSecurityObjIdentity: dto.TestRootSecurityObjIdentityDTO) => {
-            let baseParameters = {testRootSecurityObjIdentity : testRootSecurityObjIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testRootSecurityObjIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestRootSecurityObjRichDTO, dto.TestRootSecurityObjObservableRichDTO, dto.TestRootSecurityObjRichDTO, dto.TestRootSecurityObjObservableRichDTO>();
-            return service.getData('TestRootSecurityObj/GetRichTestRootSecurityObj', {plain : dto.TestRootSecurityObjRichDTO, observable : dto.TestRootSecurityObjObservableRichDTO}, realParameters);
+            return service.getData('TestRootSecurityObj/GetRichTestRootSecurityObj', {plain : dto.TestRootSecurityObjRichDTO, observable : dto.TestRootSecurityObjObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichTestRootSecurityObjByName(): async.AsyncFunc3<string, dto.TestRootSecurityObjRichDTO, dto.TestRootSecurityObjObservableRichDTO, dto.TestRootSecurityObjRichDTO, dto.TestRootSecurityObjObservableRichDTO> {
         return new async.AsyncFunc3((testRootSecurityObjName: string) => {
-            let baseParameters = {testRootSecurityObjName : testRootSecurityObjName};
-            let realParameters = baseParameters;
+            let baseParameters = testRootSecurityObjName;
             let service = Environment.current.context.facadeFactory.createService<dto.TestRootSecurityObjRichDTO, dto.TestRootSecurityObjObservableRichDTO, dto.TestRootSecurityObjRichDTO, dto.TestRootSecurityObjObservableRichDTO>();
-            return service.getData('TestRootSecurityObj/GetRichTestRootSecurityObjByName', {plain : dto.TestRootSecurityObjRichDTO, observable : dto.TestRootSecurityObjObservableRichDTO}, realParameters);
+            return service.getData('TestRootSecurityObj/GetRichTestRootSecurityObjByName', {plain : dto.TestRootSecurityObjRichDTO, observable : dto.TestRootSecurityObjObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichTestSecurityObjItem(): async.AsyncFunc3<dto.TestSecurityObjItemIdentityDTO, dto.TestSecurityObjItemRichDTO, dto.TestSecurityObjItemObservableRichDTO, dto.TestSecurityObjItemRichDTO, dto.TestSecurityObjItemObservableRichDTO> {
         return new async.AsyncFunc3((testSecurityObjItemIdentity: dto.TestSecurityObjItemIdentityDTO) => {
-            let baseParameters = {testSecurityObjItemIdentity : testSecurityObjItemIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testSecurityObjItemIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecurityObjItemRichDTO, dto.TestSecurityObjItemObservableRichDTO, dto.TestSecurityObjItemRichDTO, dto.TestSecurityObjItemObservableRichDTO>();
-            return service.getData('TestSecurityObjItem/GetRichTestSecurityObjItem', {plain : dto.TestSecurityObjItemRichDTO, observable : dto.TestSecurityObjItemObservableRichDTO}, realParameters);
+            return service.getData('TestSecurityObjItem/GetRichTestSecurityObjItem', {plain : dto.TestSecurityObjItemRichDTO, observable : dto.TestSecurityObjItemObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichTestSecurityObjItemByName(): async.AsyncFunc3<string, dto.TestSecurityObjItemRichDTO, dto.TestSecurityObjItemObservableRichDTO, dto.TestSecurityObjItemRichDTO, dto.TestSecurityObjItemObservableRichDTO> {
         return new async.AsyncFunc3((testSecurityObjItemName: string) => {
-            let baseParameters = {testSecurityObjItemName : testSecurityObjItemName};
-            let realParameters = baseParameters;
+            let baseParameters = testSecurityObjItemName;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecurityObjItemRichDTO, dto.TestSecurityObjItemObservableRichDTO, dto.TestSecurityObjItemRichDTO, dto.TestSecurityObjItemObservableRichDTO>();
-            return service.getData('TestSecurityObjItem/GetRichTestSecurityObjItemByName', {plain : dto.TestSecurityObjItemRichDTO, observable : dto.TestSecurityObjItemObservableRichDTO}, realParameters);
+            return service.getData('TestSecurityObjItem/GetRichTestSecurityObjItemByName', {plain : dto.TestSecurityObjItemRichDTO, observable : dto.TestSecurityObjItemObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichTestSecuritySubObjItem(): async.AsyncFunc3<dto.TestSecuritySubObjItemIdentityDTO, dto.TestSecuritySubObjItemRichDTO, dto.TestSecuritySubObjItemObservableRichDTO, dto.TestSecuritySubObjItemRichDTO, dto.TestSecuritySubObjItemObservableRichDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItemIdentity: dto.TestSecuritySubObjItemIdentityDTO) => {
-            let baseParameters = {testSecuritySubObjItemIdentity : testSecuritySubObjItemIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItemIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItemRichDTO, dto.TestSecuritySubObjItemObservableRichDTO, dto.TestSecuritySubObjItemRichDTO, dto.TestSecuritySubObjItemObservableRichDTO>();
-            return service.getData('TestSecuritySubObjItem/GetRichTestSecuritySubObjItem', {plain : dto.TestSecuritySubObjItemRichDTO, observable : dto.TestSecuritySubObjItemObservableRichDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem/GetRichTestSecuritySubObjItem', {plain : dto.TestSecuritySubObjItemRichDTO, observable : dto.TestSecuritySubObjItemObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichTestSecuritySubObjItem2(): async.AsyncFunc3<dto.TestSecuritySubObjItem2IdentityDTO, dto.TestSecuritySubObjItem2RichDTO, dto.TestSecuritySubObjItem2ObservableRichDTO, dto.TestSecuritySubObjItem2RichDTO, dto.TestSecuritySubObjItem2ObservableRichDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem2Identity: dto.TestSecuritySubObjItem2IdentityDTO) => {
-            let baseParameters = {testSecuritySubObjItem2Identity : testSecuritySubObjItem2Identity};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem2Identity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItem2RichDTO, dto.TestSecuritySubObjItem2ObservableRichDTO, dto.TestSecuritySubObjItem2RichDTO, dto.TestSecuritySubObjItem2ObservableRichDTO>();
-            return service.getData('TestSecuritySubObjItem2/GetRichTestSecuritySubObjItem2', {plain : dto.TestSecuritySubObjItem2RichDTO, observable : dto.TestSecuritySubObjItem2ObservableRichDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem2/GetRichTestSecuritySubObjItem2', {plain : dto.TestSecuritySubObjItem2RichDTO, observable : dto.TestSecuritySubObjItem2ObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichTestSecuritySubObjItem2ByName(): async.AsyncFunc3<string, dto.TestSecuritySubObjItem2RichDTO, dto.TestSecuritySubObjItem2ObservableRichDTO, dto.TestSecuritySubObjItem2RichDTO, dto.TestSecuritySubObjItem2ObservableRichDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem2Name: string) => {
-            let baseParameters = {testSecuritySubObjItem2Name : testSecuritySubObjItem2Name};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem2Name;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItem2RichDTO, dto.TestSecuritySubObjItem2ObservableRichDTO, dto.TestSecuritySubObjItem2RichDTO, dto.TestSecuritySubObjItem2ObservableRichDTO>();
-            return service.getData('TestSecuritySubObjItem2/GetRichTestSecuritySubObjItem2ByName', {plain : dto.TestSecuritySubObjItem2RichDTO, observable : dto.TestSecuritySubObjItem2ObservableRichDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem2/GetRichTestSecuritySubObjItem2ByName', {plain : dto.TestSecuritySubObjItem2RichDTO, observable : dto.TestSecuritySubObjItem2ObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichTestSecuritySubObjItem3(): async.AsyncFunc3<dto.TestSecuritySubObjItem3IdentityDTO, dto.TestSecuritySubObjItem3RichDTO, dto.TestSecuritySubObjItem3ObservableRichDTO, dto.TestSecuritySubObjItem3RichDTO, dto.TestSecuritySubObjItem3ObservableRichDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem3Identity: dto.TestSecuritySubObjItem3IdentityDTO) => {
-            let baseParameters = {testSecuritySubObjItem3Identity : testSecuritySubObjItem3Identity};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem3Identity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItem3RichDTO, dto.TestSecuritySubObjItem3ObservableRichDTO, dto.TestSecuritySubObjItem3RichDTO, dto.TestSecuritySubObjItem3ObservableRichDTO>();
-            return service.getData('TestSecuritySubObjItem3/GetRichTestSecuritySubObjItem3', {plain : dto.TestSecuritySubObjItem3RichDTO, observable : dto.TestSecuritySubObjItem3ObservableRichDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem3/GetRichTestSecuritySubObjItem3', {plain : dto.TestSecuritySubObjItem3RichDTO, observable : dto.TestSecuritySubObjItem3ObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichTestSecuritySubObjItem3ByName(): async.AsyncFunc3<string, dto.TestSecuritySubObjItem3RichDTO, dto.TestSecuritySubObjItem3ObservableRichDTO, dto.TestSecuritySubObjItem3RichDTO, dto.TestSecuritySubObjItem3ObservableRichDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem3Name: string) => {
-            let baseParameters = {testSecuritySubObjItem3Name : testSecuritySubObjItem3Name};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem3Name;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItem3RichDTO, dto.TestSecuritySubObjItem3ObservableRichDTO, dto.TestSecuritySubObjItem3RichDTO, dto.TestSecuritySubObjItem3ObservableRichDTO>();
-            return service.getData('TestSecuritySubObjItem3/GetRichTestSecuritySubObjItem3ByName', {plain : dto.TestSecuritySubObjItem3RichDTO, observable : dto.TestSecuritySubObjItem3ObservableRichDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem3/GetRichTestSecuritySubObjItem3ByName', {plain : dto.TestSecuritySubObjItem3RichDTO, observable : dto.TestSecuritySubObjItem3ObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichTestSecuritySubObjItemByName(): async.AsyncFunc3<string, dto.TestSecuritySubObjItemRichDTO, dto.TestSecuritySubObjItemObservableRichDTO, dto.TestSecuritySubObjItemRichDTO, dto.TestSecuritySubObjItemObservableRichDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItemName: string) => {
-            let baseParameters = {testSecuritySubObjItemName : testSecuritySubObjItemName};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItemName;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItemRichDTO, dto.TestSecuritySubObjItemObservableRichDTO, dto.TestSecuritySubObjItemRichDTO, dto.TestSecuritySubObjItemObservableRichDTO>();
-            return service.getData('TestSecuritySubObjItem/GetRichTestSecuritySubObjItemByName', {plain : dto.TestSecuritySubObjItemRichDTO, observable : dto.TestSecuritySubObjItemObservableRichDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem/GetRichTestSecuritySubObjItemByName', {plain : dto.TestSecuritySubObjItemRichDTO, observable : dto.TestSecuritySubObjItemObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichWorkingCalendar1676(): async.AsyncFunc3<dto.WorkingCalendar1676IdentityDTO, dto.WorkingCalendar1676RichDTO, dto.WorkingCalendar1676ObservableRichDTO, dto.WorkingCalendar1676RichDTO, dto.WorkingCalendar1676ObservableRichDTO> {
         return new async.AsyncFunc3((workingCalendar1676Identity: dto.WorkingCalendar1676IdentityDTO) => {
-            let baseParameters = {workingCalendar1676Identity : workingCalendar1676Identity};
-            let realParameters = baseParameters;
+            let baseParameters = workingCalendar1676Identity;
             let service = Environment.current.context.facadeFactory.createService<dto.WorkingCalendar1676RichDTO, dto.WorkingCalendar1676ObservableRichDTO, dto.WorkingCalendar1676RichDTO, dto.WorkingCalendar1676ObservableRichDTO>();
-            return service.getData('WorkingCalendar1676/GetRichWorkingCalendar1676', {plain : dto.WorkingCalendar1676RichDTO, observable : dto.WorkingCalendar1676ObservableRichDTO}, realParameters);
+            return service.getData('WorkingCalendar1676/GetRichWorkingCalendar1676', {plain : dto.WorkingCalendar1676RichDTO, observable : dto.WorkingCalendar1676ObservableRichDTO}, baseParameters);
         });
     }
 
     function _getRichWorkingCalendar1676ByName(): async.AsyncFunc3<string, dto.WorkingCalendar1676RichDTO, dto.WorkingCalendar1676ObservableRichDTO, dto.WorkingCalendar1676RichDTO, dto.WorkingCalendar1676ObservableRichDTO> {
         return new async.AsyncFunc3((workingCalendar1676Name: string) => {
-            let baseParameters = {workingCalendar1676Name : workingCalendar1676Name};
-            let realParameters = baseParameters;
+            let baseParameters = workingCalendar1676Name;
             let service = Environment.current.context.facadeFactory.createService<dto.WorkingCalendar1676RichDTO, dto.WorkingCalendar1676ObservableRichDTO, dto.WorkingCalendar1676RichDTO, dto.WorkingCalendar1676ObservableRichDTO>();
-            return service.getData('WorkingCalendar1676/GetRichWorkingCalendar1676ByName', {plain : dto.WorkingCalendar1676RichDTO, observable : dto.WorkingCalendar1676ObservableRichDTO}, realParameters);
+            return service.getData('WorkingCalendar1676/GetRichWorkingCalendar1676ByName', {plain : dto.WorkingCalendar1676RichDTO, observable : dto.WorkingCalendar1676ObservableRichDTO}, baseParameters);
         });
     }
 
     function _getSimpleBusinessUnit(): async.AsyncFunc3<dto.BusinessUnitIdentityDTO, dto.BusinessUnitSimpleDTO, dto.BusinessUnitObservableSimpleDTO, dto.BusinessUnitSimpleDTO, dto.BusinessUnitObservableSimpleDTO> {
         return new async.AsyncFunc3((businessUnitIdentity: dto.BusinessUnitIdentityDTO) => {
-            let baseParameters = {businessUnitIdentity : businessUnitIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitSimpleDTO, dto.BusinessUnitObservableSimpleDTO, dto.BusinessUnitSimpleDTO, dto.BusinessUnitObservableSimpleDTO>();
-            return service.getData('BusinessUnit/GetSimpleBusinessUnit', {plain : dto.BusinessUnitSimpleDTO, observable : dto.BusinessUnitObservableSimpleDTO}, realParameters);
+            return service.getData('BusinessUnit/GetSimpleBusinessUnit', {plain : dto.BusinessUnitSimpleDTO, observable : dto.BusinessUnitObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleBusinessUnitByName(): async.AsyncFunc3<string, dto.BusinessUnitSimpleDTO, dto.BusinessUnitObservableSimpleDTO, dto.BusinessUnitSimpleDTO, dto.BusinessUnitObservableSimpleDTO> {
         return new async.AsyncFunc3((businessUnitName: string) => {
-            let baseParameters = {businessUnitName : businessUnitName};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitName;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitSimpleDTO, dto.BusinessUnitObservableSimpleDTO, dto.BusinessUnitSimpleDTO, dto.BusinessUnitObservableSimpleDTO>();
-            return service.getData('BusinessUnit/GetSimpleBusinessUnitByName', {plain : dto.BusinessUnitSimpleDTO, observable : dto.BusinessUnitObservableSimpleDTO}, realParameters);
+            return service.getData('BusinessUnit/GetSimpleBusinessUnitByName', {plain : dto.BusinessUnitSimpleDTO, observable : dto.BusinessUnitObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleBusinessUnitHrDepartment(): async.AsyncFunc3<dto.BusinessUnitHrDepartmentIdentityDTO, dto.BusinessUnitHrDepartmentSimpleDTO, dto.BusinessUnitHrDepartmentObservableSimpleDTO, dto.BusinessUnitHrDepartmentSimpleDTO, dto.BusinessUnitHrDepartmentObservableSimpleDTO> {
         return new async.AsyncFunc3((businessUnitHrDepartmentIdentity: dto.BusinessUnitHrDepartmentIdentityDTO) => {
-            let baseParameters = {businessUnitHrDepartmentIdentity : businessUnitHrDepartmentIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitHrDepartmentIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitHrDepartmentSimpleDTO, dto.BusinessUnitHrDepartmentObservableSimpleDTO, dto.BusinessUnitHrDepartmentSimpleDTO, dto.BusinessUnitHrDepartmentObservableSimpleDTO>();
-            return service.getData('BusinessUnitHrDepartment/GetSimpleBusinessUnitHrDepartment', {plain : dto.BusinessUnitHrDepartmentSimpleDTO, observable : dto.BusinessUnitHrDepartmentObservableSimpleDTO}, realParameters);
+            return service.getData('BusinessUnitHrDepartment/GetSimpleBusinessUnitHrDepartment', {plain : dto.BusinessUnitHrDepartmentSimpleDTO, observable : dto.BusinessUnitHrDepartmentObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleBusinessUnitHrDepartments(): async.AsyncFunc2<Array<dto.BusinessUnitHrDepartmentSimpleDTO>, Array<dto.BusinessUnitHrDepartmentObservableSimpleDTO>, dto.BusinessUnitHrDepartmentSimpleDTO, dto.BusinessUnitHrDepartmentObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitHrDepartmentSimpleDTO>, Array<dto.BusinessUnitHrDepartmentObservableSimpleDTO>, dto.BusinessUnitHrDepartmentSimpleDTO, dto.BusinessUnitHrDepartmentObservableSimpleDTO>();
-            return service.getData('BusinessUnitHrDepartment/GetSimpleBusinessUnitHrDepartments', {plain : dto.BusinessUnitHrDepartmentSimpleDTO, observable : dto.BusinessUnitHrDepartmentObservableSimpleDTO}, realParameters);
+            return service.getData('BusinessUnitHrDepartment/GetSimpleBusinessUnitHrDepartments', {plain : dto.BusinessUnitHrDepartmentSimpleDTO, observable : dto.BusinessUnitHrDepartmentObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleBusinessUnitHrDepartmentsByIdents(): async.AsyncFunc3<dto.BusinessUnitHrDepartmentIdentityDTO[], Array<dto.BusinessUnitHrDepartmentSimpleDTO>, Array<dto.BusinessUnitHrDepartmentObservableSimpleDTO>, dto.BusinessUnitHrDepartmentSimpleDTO, dto.BusinessUnitHrDepartmentObservableSimpleDTO> {
         return new async.AsyncFunc3((businessUnitHrDepartmentIdents: dto.BusinessUnitHrDepartmentIdentityDTO[]) => {
-            let baseParameters = {businessUnitHrDepartmentIdents : businessUnitHrDepartmentIdents};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitHrDepartmentIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitHrDepartmentSimpleDTO>, Array<dto.BusinessUnitHrDepartmentObservableSimpleDTO>, dto.BusinessUnitHrDepartmentSimpleDTO, dto.BusinessUnitHrDepartmentObservableSimpleDTO>();
-            return service.getData('BusinessUnitHrDepartment/GetSimpleBusinessUnitHrDepartmentsByIdents', {plain : dto.BusinessUnitHrDepartmentSimpleDTO, observable : dto.BusinessUnitHrDepartmentObservableSimpleDTO}, realParameters);
+            return service.getData('BusinessUnitHrDepartment/GetSimpleBusinessUnitHrDepartmentsByIdents', {plain : dto.BusinessUnitHrDepartmentSimpleDTO, observable : dto.BusinessUnitHrDepartmentObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleBusinessUnitManagerCommissionLink(): async.AsyncFunc3<dto.BusinessUnitManagerCommissionLinkIdentityDTO, dto.BusinessUnitManagerCommissionLinkSimpleDTO, dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO, dto.BusinessUnitManagerCommissionLinkSimpleDTO, dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO> {
         return new async.AsyncFunc3((businessUnitManagerCommissionLinkIdentity: dto.BusinessUnitManagerCommissionLinkIdentityDTO) => {
-            let baseParameters = {businessUnitManagerCommissionLinkIdentity : businessUnitManagerCommissionLinkIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitManagerCommissionLinkIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitManagerCommissionLinkSimpleDTO, dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO, dto.BusinessUnitManagerCommissionLinkSimpleDTO, dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO>();
-            return service.getData('BusinessUnitManagerCommissionLink/GetSimpleBusinessUnitManagerCommissionLink', {plain : dto.BusinessUnitManagerCommissionLinkSimpleDTO, observable : dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO}, realParameters);
+            return service.getData('BusinessUnitManagerCommissionLink/GetSimpleBusinessUnitManagerCommissionLink', {plain : dto.BusinessUnitManagerCommissionLinkSimpleDTO, observable : dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleBusinessUnitManagerCommissionLinks(): async.AsyncFunc2<Array<dto.BusinessUnitManagerCommissionLinkSimpleDTO>, Array<dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO>, dto.BusinessUnitManagerCommissionLinkSimpleDTO, dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitManagerCommissionLinkSimpleDTO>, Array<dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO>, dto.BusinessUnitManagerCommissionLinkSimpleDTO, dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO>();
-            return service.getData('BusinessUnitManagerCommissionLink/GetSimpleBusinessUnitManagerCommissionLinks', {plain : dto.BusinessUnitManagerCommissionLinkSimpleDTO, observable : dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO}, realParameters);
+            return service.getData('BusinessUnitManagerCommissionLink/GetSimpleBusinessUnitManagerCommissionLinks', {plain : dto.BusinessUnitManagerCommissionLinkSimpleDTO, observable : dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleBusinessUnitManagerCommissionLinksByIdents(): async.AsyncFunc3<dto.BusinessUnitManagerCommissionLinkIdentityDTO[], Array<dto.BusinessUnitManagerCommissionLinkSimpleDTO>, Array<dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO>, dto.BusinessUnitManagerCommissionLinkSimpleDTO, dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO> {
         return new async.AsyncFunc3((businessUnitManagerCommissionLinkIdents: dto.BusinessUnitManagerCommissionLinkIdentityDTO[]) => {
-            let baseParameters = {businessUnitManagerCommissionLinkIdents : businessUnitManagerCommissionLinkIdents};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitManagerCommissionLinkIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitManagerCommissionLinkSimpleDTO>, Array<dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO>, dto.BusinessUnitManagerCommissionLinkSimpleDTO, dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO>();
             return service.getData('BusinessUnitManagerCommissionLink/GetSimpleBusinessUnitManagerCommissionLinksById' + 
-'ents', {plain : dto.BusinessUnitManagerCommissionLinkSimpleDTO, observable : dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO}, realParameters);
+'ents', {plain : dto.BusinessUnitManagerCommissionLinkSimpleDTO, observable : dto.BusinessUnitManagerCommissionLinkObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleBusinessUnits(): async.AsyncFunc2<Array<dto.BusinessUnitSimpleDTO>, Array<dto.BusinessUnitObservableSimpleDTO>, dto.BusinessUnitSimpleDTO, dto.BusinessUnitObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitSimpleDTO>, Array<dto.BusinessUnitObservableSimpleDTO>, dto.BusinessUnitSimpleDTO, dto.BusinessUnitObservableSimpleDTO>();
-            return service.getData('BusinessUnit/GetSimpleBusinessUnits', {plain : dto.BusinessUnitSimpleDTO, observable : dto.BusinessUnitObservableSimpleDTO}, realParameters);
+            return service.getData('BusinessUnit/GetSimpleBusinessUnits', {plain : dto.BusinessUnitSimpleDTO, observable : dto.BusinessUnitObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleBusinessUnitsByIdents(): async.AsyncFunc3<dto.BusinessUnitIdentityDTO[], Array<dto.BusinessUnitSimpleDTO>, Array<dto.BusinessUnitObservableSimpleDTO>, dto.BusinessUnitSimpleDTO, dto.BusinessUnitObservableSimpleDTO> {
         return new async.AsyncFunc3((businessUnitIdents: dto.BusinessUnitIdentityDTO[]) => {
-            let baseParameters = {businessUnitIdents : businessUnitIdents};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitSimpleDTO>, Array<dto.BusinessUnitObservableSimpleDTO>, dto.BusinessUnitSimpleDTO, dto.BusinessUnitObservableSimpleDTO>();
-            return service.getData('BusinessUnit/GetSimpleBusinessUnitsByIdents', {plain : dto.BusinessUnitSimpleDTO, observable : dto.BusinessUnitObservableSimpleDTO}, realParameters);
+            return service.getData('BusinessUnit/GetSimpleBusinessUnitsByIdents', {plain : dto.BusinessUnitSimpleDTO, observable : dto.BusinessUnitObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleBusinessUnitsByOperation(): async.AsyncFunc3<dto.SampleSystemBusinessUnitSecurityOperationCode, Array<dto.BusinessUnitSimpleDTO>, Array<dto.BusinessUnitObservableSimpleDTO>, dto.BusinessUnitSimpleDTO, dto.BusinessUnitObservableSimpleDTO> {
         return new async.AsyncFunc3((securityOperationCode: dto.SampleSystemBusinessUnitSecurityOperationCode) => {
-            let baseParameters = {securityOperationCode : securityOperationCode};
-            let realParameters = baseParameters;
+            let baseParameters = securityOperationCode;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitSimpleDTO>, Array<dto.BusinessUnitObservableSimpleDTO>, dto.BusinessUnitSimpleDTO, dto.BusinessUnitObservableSimpleDTO>();
-            return service.getData('BusinessUnit/GetSimpleBusinessUnitsByOperation', {plain : dto.BusinessUnitSimpleDTO, observable : dto.BusinessUnitObservableSimpleDTO}, realParameters);
+            return service.getData('BusinessUnit/GetSimpleBusinessUnitsByOperation', {plain : dto.BusinessUnitSimpleDTO, observable : dto.BusinessUnitObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleBusinessUnitsByRootFilter(): async.AsyncFunc3<dto.BusinessUnitRootFilterModelStrictDTO, Array<dto.BusinessUnitSimpleDTO>, Array<dto.BusinessUnitObservableSimpleDTO>, dto.BusinessUnitSimpleDTO, dto.BusinessUnitObservableSimpleDTO> {
         return new async.AsyncFunc3((filter: dto.BusinessUnitRootFilterModelStrictDTO) => {
-            let baseParameters = {filter : filter.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = filter.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitSimpleDTO>, Array<dto.BusinessUnitObservableSimpleDTO>, dto.BusinessUnitSimpleDTO, dto.BusinessUnitObservableSimpleDTO>();
-            return service.getData('BusinessUnit/GetSimpleBusinessUnitsByRootFilter', {plain : dto.BusinessUnitSimpleDTO, observable : dto.BusinessUnitObservableSimpleDTO}, realParameters);
+            return service.getData('BusinessUnit/GetSimpleBusinessUnitsByRootFilter', {plain : dto.BusinessUnitSimpleDTO, observable : dto.BusinessUnitObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleBusinessUnitType(): async.AsyncFunc3<dto.BusinessUnitTypeIdentityDTO, dto.BusinessUnitTypeSimpleDTO, dto.BusinessUnitTypeObservableSimpleDTO, dto.BusinessUnitTypeSimpleDTO, dto.BusinessUnitTypeObservableSimpleDTO> {
         return new async.AsyncFunc3((businessUnitTypeIdentity: dto.BusinessUnitTypeIdentityDTO) => {
-            let baseParameters = {businessUnitTypeIdentity : businessUnitTypeIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitTypeIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitTypeSimpleDTO, dto.BusinessUnitTypeObservableSimpleDTO, dto.BusinessUnitTypeSimpleDTO, dto.BusinessUnitTypeObservableSimpleDTO>();
-            return service.getData('BusinessUnitType/GetSimpleBusinessUnitType', {plain : dto.BusinessUnitTypeSimpleDTO, observable : dto.BusinessUnitTypeObservableSimpleDTO}, realParameters);
+            return service.getData('BusinessUnitType/GetSimpleBusinessUnitType', {plain : dto.BusinessUnitTypeSimpleDTO, observable : dto.BusinessUnitTypeObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleBusinessUnitTypeByName(): async.AsyncFunc3<string, dto.BusinessUnitTypeSimpleDTO, dto.BusinessUnitTypeObservableSimpleDTO, dto.BusinessUnitTypeSimpleDTO, dto.BusinessUnitTypeObservableSimpleDTO> {
         return new async.AsyncFunc3((businessUnitTypeName: string) => {
-            let baseParameters = {businessUnitTypeName : businessUnitTypeName};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitTypeName;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitTypeSimpleDTO, dto.BusinessUnitTypeObservableSimpleDTO, dto.BusinessUnitTypeSimpleDTO, dto.BusinessUnitTypeObservableSimpleDTO>();
-            return service.getData('BusinessUnitType/GetSimpleBusinessUnitTypeByName', {plain : dto.BusinessUnitTypeSimpleDTO, observable : dto.BusinessUnitTypeObservableSimpleDTO}, realParameters);
+            return service.getData('BusinessUnitType/GetSimpleBusinessUnitTypeByName', {plain : dto.BusinessUnitTypeSimpleDTO, observable : dto.BusinessUnitTypeObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleBusinessUnitTypes(): async.AsyncFunc2<Array<dto.BusinessUnitTypeSimpleDTO>, Array<dto.BusinessUnitTypeObservableSimpleDTO>, dto.BusinessUnitTypeSimpleDTO, dto.BusinessUnitTypeObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitTypeSimpleDTO>, Array<dto.BusinessUnitTypeObservableSimpleDTO>, dto.BusinessUnitTypeSimpleDTO, dto.BusinessUnitTypeObservableSimpleDTO>();
-            return service.getData('BusinessUnitType/GetSimpleBusinessUnitTypes', {plain : dto.BusinessUnitTypeSimpleDTO, observable : dto.BusinessUnitTypeObservableSimpleDTO}, realParameters);
+            return service.getData('BusinessUnitType/GetSimpleBusinessUnitTypes', {plain : dto.BusinessUnitTypeSimpleDTO, observable : dto.BusinessUnitTypeObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleBusinessUnitTypesByIdents(): async.AsyncFunc3<dto.BusinessUnitTypeIdentityDTO[], Array<dto.BusinessUnitTypeSimpleDTO>, Array<dto.BusinessUnitTypeObservableSimpleDTO>, dto.BusinessUnitTypeSimpleDTO, dto.BusinessUnitTypeObservableSimpleDTO> {
         return new async.AsyncFunc3((businessUnitTypeIdents: dto.BusinessUnitTypeIdentityDTO[]) => {
-            let baseParameters = {businessUnitTypeIdents : businessUnitTypeIdents};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitTypeIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitTypeSimpleDTO>, Array<dto.BusinessUnitTypeObservableSimpleDTO>, dto.BusinessUnitTypeSimpleDTO, dto.BusinessUnitTypeObservableSimpleDTO>();
-            return service.getData('BusinessUnitType/GetSimpleBusinessUnitTypesByIdents', {plain : dto.BusinessUnitTypeSimpleDTO, observable : dto.BusinessUnitTypeObservableSimpleDTO}, realParameters);
+            return service.getData('BusinessUnitType/GetSimpleBusinessUnitTypesByIdents', {plain : dto.BusinessUnitTypeSimpleDTO, observable : dto.BusinessUnitTypeObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleCompanyLegalEntities(): async.AsyncFunc2<Array<dto.CompanyLegalEntitySimpleDTO>, Array<dto.CompanyLegalEntityObservableSimpleDTO>, dto.CompanyLegalEntitySimpleDTO, dto.CompanyLegalEntityObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.CompanyLegalEntitySimpleDTO>, Array<dto.CompanyLegalEntityObservableSimpleDTO>, dto.CompanyLegalEntitySimpleDTO, dto.CompanyLegalEntityObservableSimpleDTO>();
-            return service.getData('CompanyLegalEntity/GetSimpleCompanyLegalEntities', {plain : dto.CompanyLegalEntitySimpleDTO, observable : dto.CompanyLegalEntityObservableSimpleDTO}, realParameters);
+            return service.getData('CompanyLegalEntity/GetSimpleCompanyLegalEntities', {plain : dto.CompanyLegalEntitySimpleDTO, observable : dto.CompanyLegalEntityObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleCompanyLegalEntitiesByIdents(): async.AsyncFunc3<dto.CompanyLegalEntityIdentityDTO[], Array<dto.CompanyLegalEntitySimpleDTO>, Array<dto.CompanyLegalEntityObservableSimpleDTO>, dto.CompanyLegalEntitySimpleDTO, dto.CompanyLegalEntityObservableSimpleDTO> {
         return new async.AsyncFunc3((companyLegalEntityIdents: dto.CompanyLegalEntityIdentityDTO[]) => {
-            let baseParameters = {companyLegalEntityIdents : companyLegalEntityIdents};
-            let realParameters = baseParameters;
+            let baseParameters = companyLegalEntityIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.CompanyLegalEntitySimpleDTO>, Array<dto.CompanyLegalEntityObservableSimpleDTO>, dto.CompanyLegalEntitySimpleDTO, dto.CompanyLegalEntityObservableSimpleDTO>();
-            return service.getData('CompanyLegalEntity/GetSimpleCompanyLegalEntitiesByIdents', {plain : dto.CompanyLegalEntitySimpleDTO, observable : dto.CompanyLegalEntityObservableSimpleDTO}, realParameters);
+            return service.getData('CompanyLegalEntity/GetSimpleCompanyLegalEntitiesByIdents', {plain : dto.CompanyLegalEntitySimpleDTO, observable : dto.CompanyLegalEntityObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleCompanyLegalEntity(): async.AsyncFunc3<dto.CompanyLegalEntityIdentityDTO, dto.CompanyLegalEntitySimpleDTO, dto.CompanyLegalEntityObservableSimpleDTO, dto.CompanyLegalEntitySimpleDTO, dto.CompanyLegalEntityObservableSimpleDTO> {
         return new async.AsyncFunc3((companyLegalEntityIdentity: dto.CompanyLegalEntityIdentityDTO) => {
-            let baseParameters = {companyLegalEntityIdentity : companyLegalEntityIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = companyLegalEntityIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.CompanyLegalEntitySimpleDTO, dto.CompanyLegalEntityObservableSimpleDTO, dto.CompanyLegalEntitySimpleDTO, dto.CompanyLegalEntityObservableSimpleDTO>();
-            return service.getData('CompanyLegalEntity/GetSimpleCompanyLegalEntity', {plain : dto.CompanyLegalEntitySimpleDTO, observable : dto.CompanyLegalEntityObservableSimpleDTO}, realParameters);
+            return service.getData('CompanyLegalEntity/GetSimpleCompanyLegalEntity', {plain : dto.CompanyLegalEntitySimpleDTO, observable : dto.CompanyLegalEntityObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleCompanyLegalEntityByCode(): async.AsyncFunc3<string, dto.CompanyLegalEntitySimpleDTO, dto.CompanyLegalEntityObservableSimpleDTO, dto.CompanyLegalEntitySimpleDTO, dto.CompanyLegalEntityObservableSimpleDTO> {
         return new async.AsyncFunc3((companyLegalEntityCode: string) => {
-            let baseParameters = {companyLegalEntityCode : companyLegalEntityCode};
-            let realParameters = baseParameters;
+            let baseParameters = companyLegalEntityCode;
             let service = Environment.current.context.facadeFactory.createService<dto.CompanyLegalEntitySimpleDTO, dto.CompanyLegalEntityObservableSimpleDTO, dto.CompanyLegalEntitySimpleDTO, dto.CompanyLegalEntityObservableSimpleDTO>();
-            return service.getData('CompanyLegalEntity/GetSimpleCompanyLegalEntityByCode', {plain : dto.CompanyLegalEntitySimpleDTO, observable : dto.CompanyLegalEntityObservableSimpleDTO}, realParameters);
+            return service.getData('CompanyLegalEntity/GetSimpleCompanyLegalEntityByCode', {plain : dto.CompanyLegalEntitySimpleDTO, observable : dto.CompanyLegalEntityObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleCompanyLegalEntityByName(): async.AsyncFunc3<string, dto.CompanyLegalEntitySimpleDTO, dto.CompanyLegalEntityObservableSimpleDTO, dto.CompanyLegalEntitySimpleDTO, dto.CompanyLegalEntityObservableSimpleDTO> {
         return new async.AsyncFunc3((companyLegalEntityName: string) => {
-            let baseParameters = {companyLegalEntityName : companyLegalEntityName};
-            let realParameters = baseParameters;
+            let baseParameters = companyLegalEntityName;
             let service = Environment.current.context.facadeFactory.createService<dto.CompanyLegalEntitySimpleDTO, dto.CompanyLegalEntityObservableSimpleDTO, dto.CompanyLegalEntitySimpleDTO, dto.CompanyLegalEntityObservableSimpleDTO>();
-            return service.getData('CompanyLegalEntity/GetSimpleCompanyLegalEntityByName', {plain : dto.CompanyLegalEntitySimpleDTO, observable : dto.CompanyLegalEntityObservableSimpleDTO}, realParameters);
+            return service.getData('CompanyLegalEntity/GetSimpleCompanyLegalEntityByName', {plain : dto.CompanyLegalEntitySimpleDTO, observable : dto.CompanyLegalEntityObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleCountries(): async.AsyncFunc2<Array<dto.CountrySimpleDTO>, Array<dto.CountryObservableSimpleDTO>, dto.CountrySimpleDTO, dto.CountryObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.CountrySimpleDTO>, Array<dto.CountryObservableSimpleDTO>, dto.CountrySimpleDTO, dto.CountryObservableSimpleDTO>();
-            return service.getData('Country/GetSimpleCountries', {plain : dto.CountrySimpleDTO, observable : dto.CountryObservableSimpleDTO}, realParameters);
+            return service.getData('Country/GetSimpleCountries', {plain : dto.CountrySimpleDTO, observable : dto.CountryObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleCountriesByIdents(): async.AsyncFunc3<dto.CountryIdentityDTO[], Array<dto.CountrySimpleDTO>, Array<dto.CountryObservableSimpleDTO>, dto.CountrySimpleDTO, dto.CountryObservableSimpleDTO> {
         return new async.AsyncFunc3((countryIdents: dto.CountryIdentityDTO[]) => {
-            let baseParameters = {countryIdents : countryIdents};
-            let realParameters = baseParameters;
+            let baseParameters = countryIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.CountrySimpleDTO>, Array<dto.CountryObservableSimpleDTO>, dto.CountrySimpleDTO, dto.CountryObservableSimpleDTO>();
-            return service.getData('Country/GetSimpleCountriesByIdents', {plain : dto.CountrySimpleDTO, observable : dto.CountryObservableSimpleDTO}, realParameters);
+            return service.getData('Country/GetSimpleCountriesByIdents', {plain : dto.CountrySimpleDTO, observable : dto.CountryObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleCountry(): async.AsyncFunc3<dto.CountryIdentityDTO, dto.CountrySimpleDTO, dto.CountryObservableSimpleDTO, dto.CountrySimpleDTO, dto.CountryObservableSimpleDTO> {
         return new async.AsyncFunc3((countryIdentity: dto.CountryIdentityDTO) => {
-            let baseParameters = {countryIdentity : countryIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = countryIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.CountrySimpleDTO, dto.CountryObservableSimpleDTO, dto.CountrySimpleDTO, dto.CountryObservableSimpleDTO>();
-            return service.getData('Country/GetSimpleCountry', {plain : dto.CountrySimpleDTO, observable : dto.CountryObservableSimpleDTO}, realParameters);
+            return service.getData('Country/GetSimpleCountry', {plain : dto.CountrySimpleDTO, observable : dto.CountryObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleCountryByCode(): async.AsyncFunc3<string, dto.CountrySimpleDTO, dto.CountryObservableSimpleDTO, dto.CountrySimpleDTO, dto.CountryObservableSimpleDTO> {
         return new async.AsyncFunc3((countryCode: string) => {
-            let baseParameters = {countryCode : countryCode};
-            let realParameters = baseParameters;
+            let baseParameters = countryCode;
             let service = Environment.current.context.facadeFactory.createService<dto.CountrySimpleDTO, dto.CountryObservableSimpleDTO, dto.CountrySimpleDTO, dto.CountryObservableSimpleDTO>();
-            return service.getData('Country/GetSimpleCountryByCode', {plain : dto.CountrySimpleDTO, observable : dto.CountryObservableSimpleDTO}, realParameters);
+            return service.getData('Country/GetSimpleCountryByCode', {plain : dto.CountrySimpleDTO, observable : dto.CountryObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleCountryByName(): async.AsyncFunc3<string, dto.CountrySimpleDTO, dto.CountryObservableSimpleDTO, dto.CountrySimpleDTO, dto.CountryObservableSimpleDTO> {
         return new async.AsyncFunc3((countryName: string) => {
-            let baseParameters = {countryName : countryName};
-            let realParameters = baseParameters;
+            let baseParameters = countryName;
             let service = Environment.current.context.facadeFactory.createService<dto.CountrySimpleDTO, dto.CountryObservableSimpleDTO, dto.CountrySimpleDTO, dto.CountryObservableSimpleDTO>();
-            return service.getData('Country/GetSimpleCountryByName', {plain : dto.CountrySimpleDTO, observable : dto.CountryObservableSimpleDTO}, realParameters);
+            return service.getData('Country/GetSimpleCountryByName', {plain : dto.CountrySimpleDTO, observable : dto.CountryObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployee(): async.AsyncFunc3<dto.EmployeeIdentityDTO, dto.EmployeeSimpleDTO, dto.EmployeeObservableSimpleDTO, dto.EmployeeSimpleDTO, dto.EmployeeObservableSimpleDTO> {
         return new async.AsyncFunc3((employeeIdentity: dto.EmployeeIdentityDTO) => {
-            let baseParameters = {employeeIdentity : employeeIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeSimpleDTO, dto.EmployeeObservableSimpleDTO, dto.EmployeeSimpleDTO, dto.EmployeeObservableSimpleDTO>();
-            return service.getData('Employee/GetSimpleEmployee', {plain : dto.EmployeeSimpleDTO, observable : dto.EmployeeObservableSimpleDTO}, realParameters);
+            return service.getData('Employee/GetSimpleEmployee', {plain : dto.EmployeeSimpleDTO, observable : dto.EmployeeObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeInformation(): async.AsyncFunc3<dto.EmployeeInformationIdentityDTO, dto.EmployeeInformationSimpleDTO, dto.EmployeeInformationObservableSimpleDTO, dto.EmployeeInformationSimpleDTO, dto.EmployeeInformationObservableSimpleDTO> {
         return new async.AsyncFunc3((employeeInformationIdentity: dto.EmployeeInformationIdentityDTO) => {
-            let baseParameters = {employeeInformationIdentity : employeeInformationIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeInformationIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeInformationSimpleDTO, dto.EmployeeInformationObservableSimpleDTO, dto.EmployeeInformationSimpleDTO, dto.EmployeeInformationObservableSimpleDTO>();
-            return service.getData('EmployeeInformation/GetSimpleEmployeeInformation', {plain : dto.EmployeeInformationSimpleDTO, observable : dto.EmployeeInformationObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeInformation/GetSimpleEmployeeInformation', {plain : dto.EmployeeInformationSimpleDTO, observable : dto.EmployeeInformationObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeInformationByName(): async.AsyncFunc3<string, dto.EmployeeInformationSimpleDTO, dto.EmployeeInformationObservableSimpleDTO, dto.EmployeeInformationSimpleDTO, dto.EmployeeInformationObservableSimpleDTO> {
         return new async.AsyncFunc3((employeeInformationName: string) => {
-            let baseParameters = {employeeInformationName : employeeInformationName};
-            let realParameters = baseParameters;
+            let baseParameters = employeeInformationName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeInformationSimpleDTO, dto.EmployeeInformationObservableSimpleDTO, dto.EmployeeInformationSimpleDTO, dto.EmployeeInformationObservableSimpleDTO>();
-            return service.getData('EmployeeInformation/GetSimpleEmployeeInformationByName', {plain : dto.EmployeeInformationSimpleDTO, observable : dto.EmployeeInformationObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeInformation/GetSimpleEmployeeInformationByName', {plain : dto.EmployeeInformationSimpleDTO, observable : dto.EmployeeInformationObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeInformations(): async.AsyncFunc2<Array<dto.EmployeeInformationSimpleDTO>, Array<dto.EmployeeInformationObservableSimpleDTO>, dto.EmployeeInformationSimpleDTO, dto.EmployeeInformationObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeInformationSimpleDTO>, Array<dto.EmployeeInformationObservableSimpleDTO>, dto.EmployeeInformationSimpleDTO, dto.EmployeeInformationObservableSimpleDTO>();
-            return service.getData('EmployeeInformation/GetSimpleEmployeeInformations', {plain : dto.EmployeeInformationSimpleDTO, observable : dto.EmployeeInformationObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeInformation/GetSimpleEmployeeInformations', {plain : dto.EmployeeInformationSimpleDTO, observable : dto.EmployeeInformationObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeInformationsByIdents(): async.AsyncFunc3<dto.EmployeeInformationIdentityDTO[], Array<dto.EmployeeInformationSimpleDTO>, Array<dto.EmployeeInformationObservableSimpleDTO>, dto.EmployeeInformationSimpleDTO, dto.EmployeeInformationObservableSimpleDTO> {
         return new async.AsyncFunc3((employeeInformationIdents: dto.EmployeeInformationIdentityDTO[]) => {
-            let baseParameters = {employeeInformationIdents : employeeInformationIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeeInformationIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeInformationSimpleDTO>, Array<dto.EmployeeInformationObservableSimpleDTO>, dto.EmployeeInformationSimpleDTO, dto.EmployeeInformationObservableSimpleDTO>();
-            return service.getData('EmployeeInformation/GetSimpleEmployeeInformationsByIdents', {plain : dto.EmployeeInformationSimpleDTO, observable : dto.EmployeeInformationObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeInformation/GetSimpleEmployeeInformationsByIdents', {plain : dto.EmployeeInformationSimpleDTO, observable : dto.EmployeeInformationObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeePhoto(): async.AsyncFunc3<dto.EmployeePhotoIdentityDTO, dto.EmployeePhotoSimpleDTO, dto.EmployeePhotoObservableSimpleDTO, dto.EmployeePhotoSimpleDTO, dto.EmployeePhotoObservableSimpleDTO> {
         return new async.AsyncFunc3((employeePhotoIdentity: dto.EmployeePhotoIdentityDTO) => {
-            let baseParameters = {employeePhotoIdentity : employeePhotoIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeePhotoIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeePhotoSimpleDTO, dto.EmployeePhotoObservableSimpleDTO, dto.EmployeePhotoSimpleDTO, dto.EmployeePhotoObservableSimpleDTO>();
-            return service.getData('EmployeePhoto/GetSimpleEmployeePhoto', {plain : dto.EmployeePhotoSimpleDTO, observable : dto.EmployeePhotoObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeePhoto/GetSimpleEmployeePhoto', {plain : dto.EmployeePhotoSimpleDTO, observable : dto.EmployeePhotoObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeePhotos(): async.AsyncFunc2<Array<dto.EmployeePhotoSimpleDTO>, Array<dto.EmployeePhotoObservableSimpleDTO>, dto.EmployeePhotoSimpleDTO, dto.EmployeePhotoObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeePhotoSimpleDTO>, Array<dto.EmployeePhotoObservableSimpleDTO>, dto.EmployeePhotoSimpleDTO, dto.EmployeePhotoObservableSimpleDTO>();
-            return service.getData('EmployeePhoto/GetSimpleEmployeePhotos', {plain : dto.EmployeePhotoSimpleDTO, observable : dto.EmployeePhotoObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeePhoto/GetSimpleEmployeePhotos', {plain : dto.EmployeePhotoSimpleDTO, observable : dto.EmployeePhotoObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeePhotosByIdents(): async.AsyncFunc3<dto.EmployeePhotoIdentityDTO[], Array<dto.EmployeePhotoSimpleDTO>, Array<dto.EmployeePhotoObservableSimpleDTO>, dto.EmployeePhotoSimpleDTO, dto.EmployeePhotoObservableSimpleDTO> {
         return new async.AsyncFunc3((employeePhotoIdents: dto.EmployeePhotoIdentityDTO[]) => {
-            let baseParameters = {employeePhotoIdents : employeePhotoIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeePhotoIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeePhotoSimpleDTO>, Array<dto.EmployeePhotoObservableSimpleDTO>, dto.EmployeePhotoSimpleDTO, dto.EmployeePhotoObservableSimpleDTO>();
-            return service.getData('EmployeePhoto/GetSimpleEmployeePhotosByIdents', {plain : dto.EmployeePhotoSimpleDTO, observable : dto.EmployeePhotoObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeePhoto/GetSimpleEmployeePhotosByIdents', {plain : dto.EmployeePhotoSimpleDTO, observable : dto.EmployeePhotoObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeePosition(): async.AsyncFunc3<dto.EmployeePositionIdentityDTO, dto.EmployeePositionSimpleDTO, dto.EmployeePositionObservableSimpleDTO, dto.EmployeePositionSimpleDTO, dto.EmployeePositionObservableSimpleDTO> {
         return new async.AsyncFunc3((employeePositionIdentity: dto.EmployeePositionIdentityDTO) => {
-            let baseParameters = {employeePositionIdentity : employeePositionIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeePositionIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeePositionSimpleDTO, dto.EmployeePositionObservableSimpleDTO, dto.EmployeePositionSimpleDTO, dto.EmployeePositionObservableSimpleDTO>();
-            return service.getData('EmployeePosition/GetSimpleEmployeePosition', {plain : dto.EmployeePositionSimpleDTO, observable : dto.EmployeePositionObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeePosition/GetSimpleEmployeePosition', {plain : dto.EmployeePositionSimpleDTO, observable : dto.EmployeePositionObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeePositionByName(): async.AsyncFunc3<string, dto.EmployeePositionSimpleDTO, dto.EmployeePositionObservableSimpleDTO, dto.EmployeePositionSimpleDTO, dto.EmployeePositionObservableSimpleDTO> {
         return new async.AsyncFunc3((employeePositionName: string) => {
-            let baseParameters = {employeePositionName : employeePositionName};
-            let realParameters = baseParameters;
+            let baseParameters = employeePositionName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeePositionSimpleDTO, dto.EmployeePositionObservableSimpleDTO, dto.EmployeePositionSimpleDTO, dto.EmployeePositionObservableSimpleDTO>();
-            return service.getData('EmployeePosition/GetSimpleEmployeePositionByName', {plain : dto.EmployeePositionSimpleDTO, observable : dto.EmployeePositionObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeePosition/GetSimpleEmployeePositionByName', {plain : dto.EmployeePositionSimpleDTO, observable : dto.EmployeePositionObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeePositions(): async.AsyncFunc2<Array<dto.EmployeePositionSimpleDTO>, Array<dto.EmployeePositionObservableSimpleDTO>, dto.EmployeePositionSimpleDTO, dto.EmployeePositionObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeePositionSimpleDTO>, Array<dto.EmployeePositionObservableSimpleDTO>, dto.EmployeePositionSimpleDTO, dto.EmployeePositionObservableSimpleDTO>();
-            return service.getData('EmployeePosition/GetSimpleEmployeePositions', {plain : dto.EmployeePositionSimpleDTO, observable : dto.EmployeePositionObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeePosition/GetSimpleEmployeePositions', {plain : dto.EmployeePositionSimpleDTO, observable : dto.EmployeePositionObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeePositionsByIdents(): async.AsyncFunc3<dto.EmployeePositionIdentityDTO[], Array<dto.EmployeePositionSimpleDTO>, Array<dto.EmployeePositionObservableSimpleDTO>, dto.EmployeePositionSimpleDTO, dto.EmployeePositionObservableSimpleDTO> {
         return new async.AsyncFunc3((employeePositionIdents: dto.EmployeePositionIdentityDTO[]) => {
-            let baseParameters = {employeePositionIdents : employeePositionIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeePositionIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeePositionSimpleDTO>, Array<dto.EmployeePositionObservableSimpleDTO>, dto.EmployeePositionSimpleDTO, dto.EmployeePositionObservableSimpleDTO>();
-            return service.getData('EmployeePosition/GetSimpleEmployeePositionsByIdents', {plain : dto.EmployeePositionSimpleDTO, observable : dto.EmployeePositionObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeePosition/GetSimpleEmployeePositionsByIdents', {plain : dto.EmployeePositionSimpleDTO, observable : dto.EmployeePositionObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeRegistrationType(): async.AsyncFunc3<dto.EmployeeRegistrationTypeIdentityDTO, dto.EmployeeRegistrationTypeSimpleDTO, dto.EmployeeRegistrationTypeObservableSimpleDTO, dto.EmployeeRegistrationTypeSimpleDTO, dto.EmployeeRegistrationTypeObservableSimpleDTO> {
         return new async.AsyncFunc3((employeeRegistrationTypeIdentity: dto.EmployeeRegistrationTypeIdentityDTO) => {
-            let baseParameters = {employeeRegistrationTypeIdentity : employeeRegistrationTypeIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRegistrationTypeIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRegistrationTypeSimpleDTO, dto.EmployeeRegistrationTypeObservableSimpleDTO, dto.EmployeeRegistrationTypeSimpleDTO, dto.EmployeeRegistrationTypeObservableSimpleDTO>();
-            return service.getData('EmployeeRegistrationType/GetSimpleEmployeeRegistrationType', {plain : dto.EmployeeRegistrationTypeSimpleDTO, observable : dto.EmployeeRegistrationTypeObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeRegistrationType/GetSimpleEmployeeRegistrationType', {plain : dto.EmployeeRegistrationTypeSimpleDTO, observable : dto.EmployeeRegistrationTypeObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeRegistrationTypeByName(): async.AsyncFunc3<string, dto.EmployeeRegistrationTypeSimpleDTO, dto.EmployeeRegistrationTypeObservableSimpleDTO, dto.EmployeeRegistrationTypeSimpleDTO, dto.EmployeeRegistrationTypeObservableSimpleDTO> {
         return new async.AsyncFunc3((employeeRegistrationTypeName: string) => {
-            let baseParameters = {employeeRegistrationTypeName : employeeRegistrationTypeName};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRegistrationTypeName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRegistrationTypeSimpleDTO, dto.EmployeeRegistrationTypeObservableSimpleDTO, dto.EmployeeRegistrationTypeSimpleDTO, dto.EmployeeRegistrationTypeObservableSimpleDTO>();
-            return service.getData('EmployeeRegistrationType/GetSimpleEmployeeRegistrationTypeByName', {plain : dto.EmployeeRegistrationTypeSimpleDTO, observable : dto.EmployeeRegistrationTypeObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeRegistrationType/GetSimpleEmployeeRegistrationTypeByName', {plain : dto.EmployeeRegistrationTypeSimpleDTO, observable : dto.EmployeeRegistrationTypeObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeRegistrationTypes(): async.AsyncFunc2<Array<dto.EmployeeRegistrationTypeSimpleDTO>, Array<dto.EmployeeRegistrationTypeObservableSimpleDTO>, dto.EmployeeRegistrationTypeSimpleDTO, dto.EmployeeRegistrationTypeObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeRegistrationTypeSimpleDTO>, Array<dto.EmployeeRegistrationTypeObservableSimpleDTO>, dto.EmployeeRegistrationTypeSimpleDTO, dto.EmployeeRegistrationTypeObservableSimpleDTO>();
-            return service.getData('EmployeeRegistrationType/GetSimpleEmployeeRegistrationTypes', {plain : dto.EmployeeRegistrationTypeSimpleDTO, observable : dto.EmployeeRegistrationTypeObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeRegistrationType/GetSimpleEmployeeRegistrationTypes', {plain : dto.EmployeeRegistrationTypeSimpleDTO, observable : dto.EmployeeRegistrationTypeObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeRegistrationTypesByIdents(): async.AsyncFunc3<dto.EmployeeRegistrationTypeIdentityDTO[], Array<dto.EmployeeRegistrationTypeSimpleDTO>, Array<dto.EmployeeRegistrationTypeObservableSimpleDTO>, dto.EmployeeRegistrationTypeSimpleDTO, dto.EmployeeRegistrationTypeObservableSimpleDTO> {
         return new async.AsyncFunc3((employeeRegistrationTypeIdents: dto.EmployeeRegistrationTypeIdentityDTO[]) => {
-            let baseParameters = {employeeRegistrationTypeIdents : employeeRegistrationTypeIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRegistrationTypeIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeRegistrationTypeSimpleDTO>, Array<dto.EmployeeRegistrationTypeObservableSimpleDTO>, dto.EmployeeRegistrationTypeSimpleDTO, dto.EmployeeRegistrationTypeObservableSimpleDTO>();
-            return service.getData('EmployeeRegistrationType/GetSimpleEmployeeRegistrationTypesByIdents', {plain : dto.EmployeeRegistrationTypeSimpleDTO, observable : dto.EmployeeRegistrationTypeObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeRegistrationType/GetSimpleEmployeeRegistrationTypesByIdents', {plain : dto.EmployeeRegistrationTypeSimpleDTO, observable : dto.EmployeeRegistrationTypeObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeRole(): async.AsyncFunc3<dto.EmployeeRoleIdentityDTO, dto.EmployeeRoleSimpleDTO, dto.EmployeeRoleObservableSimpleDTO, dto.EmployeeRoleSimpleDTO, dto.EmployeeRoleObservableSimpleDTO> {
         return new async.AsyncFunc3((employeeRoleIdentity: dto.EmployeeRoleIdentityDTO) => {
-            let baseParameters = {employeeRoleIdentity : employeeRoleIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRoleSimpleDTO, dto.EmployeeRoleObservableSimpleDTO, dto.EmployeeRoleSimpleDTO, dto.EmployeeRoleObservableSimpleDTO>();
-            return service.getData('EmployeeRole/GetSimpleEmployeeRole', {plain : dto.EmployeeRoleSimpleDTO, observable : dto.EmployeeRoleObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeRole/GetSimpleEmployeeRole', {plain : dto.EmployeeRoleSimpleDTO, observable : dto.EmployeeRoleObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeRoleByName(): async.AsyncFunc3<string, dto.EmployeeRoleSimpleDTO, dto.EmployeeRoleObservableSimpleDTO, dto.EmployeeRoleSimpleDTO, dto.EmployeeRoleObservableSimpleDTO> {
         return new async.AsyncFunc3((employeeRoleName: string) => {
-            let baseParameters = {employeeRoleName : employeeRoleName};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRoleSimpleDTO, dto.EmployeeRoleObservableSimpleDTO, dto.EmployeeRoleSimpleDTO, dto.EmployeeRoleObservableSimpleDTO>();
-            return service.getData('EmployeeRole/GetSimpleEmployeeRoleByName', {plain : dto.EmployeeRoleSimpleDTO, observable : dto.EmployeeRoleObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeRole/GetSimpleEmployeeRoleByName', {plain : dto.EmployeeRoleSimpleDTO, observable : dto.EmployeeRoleObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeRoleDegree(): async.AsyncFunc3<dto.EmployeeRoleDegreeIdentityDTO, dto.EmployeeRoleDegreeSimpleDTO, dto.EmployeeRoleDegreeObservableSimpleDTO, dto.EmployeeRoleDegreeSimpleDTO, dto.EmployeeRoleDegreeObservableSimpleDTO> {
         return new async.AsyncFunc3((employeeRoleDegreeIdentity: dto.EmployeeRoleDegreeIdentityDTO) => {
-            let baseParameters = {employeeRoleDegreeIdentity : employeeRoleDegreeIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleDegreeIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRoleDegreeSimpleDTO, dto.EmployeeRoleDegreeObservableSimpleDTO, dto.EmployeeRoleDegreeSimpleDTO, dto.EmployeeRoleDegreeObservableSimpleDTO>();
-            return service.getData('EmployeeRoleDegree/GetSimpleEmployeeRoleDegree', {plain : dto.EmployeeRoleDegreeSimpleDTO, observable : dto.EmployeeRoleDegreeObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeRoleDegree/GetSimpleEmployeeRoleDegree', {plain : dto.EmployeeRoleDegreeSimpleDTO, observable : dto.EmployeeRoleDegreeObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeRoleDegreeByName(): async.AsyncFunc3<string, dto.EmployeeRoleDegreeSimpleDTO, dto.EmployeeRoleDegreeObservableSimpleDTO, dto.EmployeeRoleDegreeSimpleDTO, dto.EmployeeRoleDegreeObservableSimpleDTO> {
         return new async.AsyncFunc3((employeeRoleDegreeName: string) => {
-            let baseParameters = {employeeRoleDegreeName : employeeRoleDegreeName};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleDegreeName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRoleDegreeSimpleDTO, dto.EmployeeRoleDegreeObservableSimpleDTO, dto.EmployeeRoleDegreeSimpleDTO, dto.EmployeeRoleDegreeObservableSimpleDTO>();
-            return service.getData('EmployeeRoleDegree/GetSimpleEmployeeRoleDegreeByName', {plain : dto.EmployeeRoleDegreeSimpleDTO, observable : dto.EmployeeRoleDegreeObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeRoleDegree/GetSimpleEmployeeRoleDegreeByName', {plain : dto.EmployeeRoleDegreeSimpleDTO, observable : dto.EmployeeRoleDegreeObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeRoleDegrees(): async.AsyncFunc2<Array<dto.EmployeeRoleDegreeSimpleDTO>, Array<dto.EmployeeRoleDegreeObservableSimpleDTO>, dto.EmployeeRoleDegreeSimpleDTO, dto.EmployeeRoleDegreeObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeRoleDegreeSimpleDTO>, Array<dto.EmployeeRoleDegreeObservableSimpleDTO>, dto.EmployeeRoleDegreeSimpleDTO, dto.EmployeeRoleDegreeObservableSimpleDTO>();
-            return service.getData('EmployeeRoleDegree/GetSimpleEmployeeRoleDegrees', {plain : dto.EmployeeRoleDegreeSimpleDTO, observable : dto.EmployeeRoleDegreeObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeRoleDegree/GetSimpleEmployeeRoleDegrees', {plain : dto.EmployeeRoleDegreeSimpleDTO, observable : dto.EmployeeRoleDegreeObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeRoleDegreesByIdents(): async.AsyncFunc3<dto.EmployeeRoleDegreeIdentityDTO[], Array<dto.EmployeeRoleDegreeSimpleDTO>, Array<dto.EmployeeRoleDegreeObservableSimpleDTO>, dto.EmployeeRoleDegreeSimpleDTO, dto.EmployeeRoleDegreeObservableSimpleDTO> {
         return new async.AsyncFunc3((employeeRoleDegreeIdents: dto.EmployeeRoleDegreeIdentityDTO[]) => {
-            let baseParameters = {employeeRoleDegreeIdents : employeeRoleDegreeIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleDegreeIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeRoleDegreeSimpleDTO>, Array<dto.EmployeeRoleDegreeObservableSimpleDTO>, dto.EmployeeRoleDegreeSimpleDTO, dto.EmployeeRoleDegreeObservableSimpleDTO>();
-            return service.getData('EmployeeRoleDegree/GetSimpleEmployeeRoleDegreesByIdents', {plain : dto.EmployeeRoleDegreeSimpleDTO, observable : dto.EmployeeRoleDegreeObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeRoleDegree/GetSimpleEmployeeRoleDegreesByIdents', {plain : dto.EmployeeRoleDegreeSimpleDTO, observable : dto.EmployeeRoleDegreeObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeRoles(): async.AsyncFunc2<Array<dto.EmployeeRoleSimpleDTO>, Array<dto.EmployeeRoleObservableSimpleDTO>, dto.EmployeeRoleSimpleDTO, dto.EmployeeRoleObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeRoleSimpleDTO>, Array<dto.EmployeeRoleObservableSimpleDTO>, dto.EmployeeRoleSimpleDTO, dto.EmployeeRoleObservableSimpleDTO>();
-            return service.getData('EmployeeRole/GetSimpleEmployeeRoles', {plain : dto.EmployeeRoleSimpleDTO, observable : dto.EmployeeRoleObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeRole/GetSimpleEmployeeRoles', {plain : dto.EmployeeRoleSimpleDTO, observable : dto.EmployeeRoleObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeRolesByIdents(): async.AsyncFunc3<dto.EmployeeRoleIdentityDTO[], Array<dto.EmployeeRoleSimpleDTO>, Array<dto.EmployeeRoleObservableSimpleDTO>, dto.EmployeeRoleSimpleDTO, dto.EmployeeRoleObservableSimpleDTO> {
         return new async.AsyncFunc3((employeeRoleIdents: dto.EmployeeRoleIdentityDTO[]) => {
-            let baseParameters = {employeeRoleIdents : employeeRoleIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeRoleSimpleDTO>, Array<dto.EmployeeRoleObservableSimpleDTO>, dto.EmployeeRoleSimpleDTO, dto.EmployeeRoleObservableSimpleDTO>();
-            return service.getData('EmployeeRole/GetSimpleEmployeeRolesByIdents', {plain : dto.EmployeeRoleSimpleDTO, observable : dto.EmployeeRoleObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeRole/GetSimpleEmployeeRolesByIdents', {plain : dto.EmployeeRoleSimpleDTO, observable : dto.EmployeeRoleObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployees(): async.AsyncFunc2<Array<dto.EmployeeSimpleDTO>, Array<dto.EmployeeObservableSimpleDTO>, dto.EmployeeSimpleDTO, dto.EmployeeObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeSimpleDTO>, Array<dto.EmployeeObservableSimpleDTO>, dto.EmployeeSimpleDTO, dto.EmployeeObservableSimpleDTO>();
-            return service.getData('Employee/GetSimpleEmployees', {plain : dto.EmployeeSimpleDTO, observable : dto.EmployeeObservableSimpleDTO}, realParameters);
+            return service.getData('Employee/GetSimpleEmployees', {plain : dto.EmployeeSimpleDTO, observable : dto.EmployeeObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeesByFilter(): async.AsyncFunc3<dto.EmployeeFilterModelStrictDTO, Array<dto.EmployeeSimpleDTO>, Array<dto.EmployeeObservableSimpleDTO>, dto.EmployeeSimpleDTO, dto.EmployeeObservableSimpleDTO> {
         return new async.AsyncFunc3((filter: dto.EmployeeFilterModelStrictDTO) => {
-            let baseParameters = {filter : filter.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = filter.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeSimpleDTO>, Array<dto.EmployeeObservableSimpleDTO>, dto.EmployeeSimpleDTO, dto.EmployeeObservableSimpleDTO>();
-            return service.getData('Employee/GetSimpleEmployeesByFilter', {plain : dto.EmployeeSimpleDTO, observable : dto.EmployeeObservableSimpleDTO}, realParameters);
+            return service.getData('Employee/GetSimpleEmployeesByFilter', {plain : dto.EmployeeSimpleDTO, observable : dto.EmployeeObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeesByIdents(): async.AsyncFunc3<dto.EmployeeIdentityDTO[], Array<dto.EmployeeSimpleDTO>, Array<dto.EmployeeObservableSimpleDTO>, dto.EmployeeSimpleDTO, dto.EmployeeObservableSimpleDTO> {
         return new async.AsyncFunc3((employeeIdents: dto.EmployeeIdentityDTO[]) => {
-            let baseParameters = {employeeIdents : employeeIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeeIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeSimpleDTO>, Array<dto.EmployeeObservableSimpleDTO>, dto.EmployeeSimpleDTO, dto.EmployeeObservableSimpleDTO>();
-            return service.getData('Employee/GetSimpleEmployeesByIdents', {plain : dto.EmployeeSimpleDTO, observable : dto.EmployeeObservableSimpleDTO}, realParameters);
+            return service.getData('Employee/GetSimpleEmployeesByIdents', {plain : dto.EmployeeSimpleDTO, observable : dto.EmployeeObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeesByRootFilter(): async.AsyncFunc3<dto.EmployeeRootFilterModelStrictDTO, Array<dto.EmployeeSimpleDTO>, Array<dto.EmployeeObservableSimpleDTO>, dto.EmployeeSimpleDTO, dto.EmployeeObservableSimpleDTO> {
         return new async.AsyncFunc3((filter: dto.EmployeeRootFilterModelStrictDTO) => {
-            let baseParameters = {filter : filter.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = filter.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeSimpleDTO>, Array<dto.EmployeeObservableSimpleDTO>, dto.EmployeeSimpleDTO, dto.EmployeeObservableSimpleDTO>();
-            return service.getData('Employee/GetSimpleEmployeesByRootFilter', {plain : dto.EmployeeSimpleDTO, observable : dto.EmployeeObservableSimpleDTO}, realParameters);
+            return service.getData('Employee/GetSimpleEmployeesByRootFilter', {plain : dto.EmployeeSimpleDTO, observable : dto.EmployeeObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeSpecialization(): async.AsyncFunc3<dto.EmployeeSpecializationIdentityDTO, dto.EmployeeSpecializationSimpleDTO, dto.EmployeeSpecializationObservableSimpleDTO, dto.EmployeeSpecializationSimpleDTO, dto.EmployeeSpecializationObservableSimpleDTO> {
         return new async.AsyncFunc3((employeeSpecializationIdentity: dto.EmployeeSpecializationIdentityDTO) => {
-            let baseParameters = {employeeSpecializationIdentity : employeeSpecializationIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeSpecializationIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeSpecializationSimpleDTO, dto.EmployeeSpecializationObservableSimpleDTO, dto.EmployeeSpecializationSimpleDTO, dto.EmployeeSpecializationObservableSimpleDTO>();
-            return service.getData('EmployeeSpecialization/GetSimpleEmployeeSpecialization', {plain : dto.EmployeeSpecializationSimpleDTO, observable : dto.EmployeeSpecializationObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeSpecialization/GetSimpleEmployeeSpecialization', {plain : dto.EmployeeSpecializationSimpleDTO, observable : dto.EmployeeSpecializationObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeSpecializationByName(): async.AsyncFunc3<string, dto.EmployeeSpecializationSimpleDTO, dto.EmployeeSpecializationObservableSimpleDTO, dto.EmployeeSpecializationSimpleDTO, dto.EmployeeSpecializationObservableSimpleDTO> {
         return new async.AsyncFunc3((employeeSpecializationName: string) => {
-            let baseParameters = {employeeSpecializationName : employeeSpecializationName};
-            let realParameters = baseParameters;
+            let baseParameters = employeeSpecializationName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeSpecializationSimpleDTO, dto.EmployeeSpecializationObservableSimpleDTO, dto.EmployeeSpecializationSimpleDTO, dto.EmployeeSpecializationObservableSimpleDTO>();
-            return service.getData('EmployeeSpecialization/GetSimpleEmployeeSpecializationByName', {plain : dto.EmployeeSpecializationSimpleDTO, observable : dto.EmployeeSpecializationObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeSpecialization/GetSimpleEmployeeSpecializationByName', {plain : dto.EmployeeSpecializationSimpleDTO, observable : dto.EmployeeSpecializationObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeSpecializations(): async.AsyncFunc2<Array<dto.EmployeeSpecializationSimpleDTO>, Array<dto.EmployeeSpecializationObservableSimpleDTO>, dto.EmployeeSpecializationSimpleDTO, dto.EmployeeSpecializationObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeSpecializationSimpleDTO>, Array<dto.EmployeeSpecializationObservableSimpleDTO>, dto.EmployeeSpecializationSimpleDTO, dto.EmployeeSpecializationObservableSimpleDTO>();
-            return service.getData('EmployeeSpecialization/GetSimpleEmployeeSpecializations', {plain : dto.EmployeeSpecializationSimpleDTO, observable : dto.EmployeeSpecializationObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeSpecialization/GetSimpleEmployeeSpecializations', {plain : dto.EmployeeSpecializationSimpleDTO, observable : dto.EmployeeSpecializationObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleEmployeeSpecializationsByIdents(): async.AsyncFunc3<dto.EmployeeSpecializationIdentityDTO[], Array<dto.EmployeeSpecializationSimpleDTO>, Array<dto.EmployeeSpecializationObservableSimpleDTO>, dto.EmployeeSpecializationSimpleDTO, dto.EmployeeSpecializationObservableSimpleDTO> {
         return new async.AsyncFunc3((employeeSpecializationIdents: dto.EmployeeSpecializationIdentityDTO[]) => {
-            let baseParameters = {employeeSpecializationIdents : employeeSpecializationIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeeSpecializationIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeSpecializationSimpleDTO>, Array<dto.EmployeeSpecializationObservableSimpleDTO>, dto.EmployeeSpecializationSimpleDTO, dto.EmployeeSpecializationObservableSimpleDTO>();
-            return service.getData('EmployeeSpecialization/GetSimpleEmployeeSpecializationsByIdents', {plain : dto.EmployeeSpecializationSimpleDTO, observable : dto.EmployeeSpecializationObservableSimpleDTO}, realParameters);
+            return service.getData('EmployeeSpecialization/GetSimpleEmployeeSpecializationsByIdents', {plain : dto.EmployeeSpecializationSimpleDTO, observable : dto.EmployeeSpecializationObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleExample1(): async.AsyncFunc3<dto.Example1IdentityDTO, dto.Example1SimpleDTO, dto.Example1ObservableSimpleDTO, dto.Example1SimpleDTO, dto.Example1ObservableSimpleDTO> {
         return new async.AsyncFunc3((example1Identity: dto.Example1IdentityDTO) => {
-            let baseParameters = {example1Identity : example1Identity};
-            let realParameters = baseParameters;
+            let baseParameters = example1Identity;
             let service = Environment.current.context.facadeFactory.createService<dto.Example1SimpleDTO, dto.Example1ObservableSimpleDTO, dto.Example1SimpleDTO, dto.Example1ObservableSimpleDTO>();
-            return service.getData('Example1/GetSimpleExample1', {plain : dto.Example1SimpleDTO, observable : dto.Example1ObservableSimpleDTO}, realParameters);
+            return service.getData('Example1/GetSimpleExample1', {plain : dto.Example1SimpleDTO, observable : dto.Example1ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleExample1s(): async.AsyncFunc2<Array<dto.Example1SimpleDTO>, Array<dto.Example1ObservableSimpleDTO>, dto.Example1SimpleDTO, dto.Example1ObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.Example1SimpleDTO>, Array<dto.Example1ObservableSimpleDTO>, dto.Example1SimpleDTO, dto.Example1ObservableSimpleDTO>();
-            return service.getData('Example1/GetSimpleExample1s', {plain : dto.Example1SimpleDTO, observable : dto.Example1ObservableSimpleDTO}, realParameters);
+            return service.getData('Example1/GetSimpleExample1s', {plain : dto.Example1SimpleDTO, observable : dto.Example1ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleExample1sByIdents(): async.AsyncFunc3<dto.Example1IdentityDTO[], Array<dto.Example1SimpleDTO>, Array<dto.Example1ObservableSimpleDTO>, dto.Example1SimpleDTO, dto.Example1ObservableSimpleDTO> {
         return new async.AsyncFunc3((example1Idents: dto.Example1IdentityDTO[]) => {
-            let baseParameters = {example1Idents : example1Idents};
-            let realParameters = baseParameters;
+            let baseParameters = example1Idents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.Example1SimpleDTO>, Array<dto.Example1ObservableSimpleDTO>, dto.Example1SimpleDTO, dto.Example1ObservableSimpleDTO>();
-            return service.getData('Example1/GetSimpleExample1sByIdents', {plain : dto.Example1SimpleDTO, observable : dto.Example1ObservableSimpleDTO}, realParameters);
+            return service.getData('Example1/GetSimpleExample1sByIdents', {plain : dto.Example1SimpleDTO, observable : dto.Example1ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleHRDepartment(): async.AsyncFunc3<dto.HRDepartmentIdentityDTO, dto.HRDepartmentSimpleDTO, dto.HRDepartmentObservableSimpleDTO, dto.HRDepartmentSimpleDTO, dto.HRDepartmentObservableSimpleDTO> {
         return new async.AsyncFunc3((hRDepartmentIdentity: dto.HRDepartmentIdentityDTO) => {
-            let baseParameters = {hRDepartmentIdentity : hRDepartmentIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = hRDepartmentIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.HRDepartmentSimpleDTO, dto.HRDepartmentObservableSimpleDTO, dto.HRDepartmentSimpleDTO, dto.HRDepartmentObservableSimpleDTO>();
-            return service.getData('HRDepartment/GetSimpleHRDepartment', {plain : dto.HRDepartmentSimpleDTO, observable : dto.HRDepartmentObservableSimpleDTO}, realParameters);
+            return service.getData('HRDepartment/GetSimpleHRDepartment', {plain : dto.HRDepartmentSimpleDTO, observable : dto.HRDepartmentObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleHRDepartmentByCode(): async.AsyncFunc3<string, dto.HRDepartmentSimpleDTO, dto.HRDepartmentObservableSimpleDTO, dto.HRDepartmentSimpleDTO, dto.HRDepartmentObservableSimpleDTO> {
         return new async.AsyncFunc3((hRDepartmentCode: string) => {
-            let baseParameters = {hRDepartmentCode : hRDepartmentCode};
-            let realParameters = baseParameters;
+            let baseParameters = hRDepartmentCode;
             let service = Environment.current.context.facadeFactory.createService<dto.HRDepartmentSimpleDTO, dto.HRDepartmentObservableSimpleDTO, dto.HRDepartmentSimpleDTO, dto.HRDepartmentObservableSimpleDTO>();
-            return service.getData('HRDepartment/GetSimpleHRDepartmentByCode', {plain : dto.HRDepartmentSimpleDTO, observable : dto.HRDepartmentObservableSimpleDTO}, realParameters);
+            return service.getData('HRDepartment/GetSimpleHRDepartmentByCode', {plain : dto.HRDepartmentSimpleDTO, observable : dto.HRDepartmentObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleHRDepartmentByName(): async.AsyncFunc3<string, dto.HRDepartmentSimpleDTO, dto.HRDepartmentObservableSimpleDTO, dto.HRDepartmentSimpleDTO, dto.HRDepartmentObservableSimpleDTO> {
         return new async.AsyncFunc3((hRDepartmentName: string) => {
-            let baseParameters = {hRDepartmentName : hRDepartmentName};
-            let realParameters = baseParameters;
+            let baseParameters = hRDepartmentName;
             let service = Environment.current.context.facadeFactory.createService<dto.HRDepartmentSimpleDTO, dto.HRDepartmentObservableSimpleDTO, dto.HRDepartmentSimpleDTO, dto.HRDepartmentObservableSimpleDTO>();
-            return service.getData('HRDepartment/GetSimpleHRDepartmentByName', {plain : dto.HRDepartmentSimpleDTO, observable : dto.HRDepartmentObservableSimpleDTO}, realParameters);
+            return service.getData('HRDepartment/GetSimpleHRDepartmentByName', {plain : dto.HRDepartmentSimpleDTO, observable : dto.HRDepartmentObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleHRDepartments(): async.AsyncFunc2<Array<dto.HRDepartmentSimpleDTO>, Array<dto.HRDepartmentObservableSimpleDTO>, dto.HRDepartmentSimpleDTO, dto.HRDepartmentObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.HRDepartmentSimpleDTO>, Array<dto.HRDepartmentObservableSimpleDTO>, dto.HRDepartmentSimpleDTO, dto.HRDepartmentObservableSimpleDTO>();
-            return service.getData('HRDepartment/GetSimpleHRDepartments', {plain : dto.HRDepartmentSimpleDTO, observable : dto.HRDepartmentObservableSimpleDTO}, realParameters);
+            return service.getData('HRDepartment/GetSimpleHRDepartments', {plain : dto.HRDepartmentSimpleDTO, observable : dto.HRDepartmentObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleHRDepartmentsByIdents(): async.AsyncFunc3<dto.HRDepartmentIdentityDTO[], Array<dto.HRDepartmentSimpleDTO>, Array<dto.HRDepartmentObservableSimpleDTO>, dto.HRDepartmentSimpleDTO, dto.HRDepartmentObservableSimpleDTO> {
         return new async.AsyncFunc3((hRDepartmentIdents: dto.HRDepartmentIdentityDTO[]) => {
-            let baseParameters = {hRDepartmentIdents : hRDepartmentIdents};
-            let realParameters = baseParameters;
+            let baseParameters = hRDepartmentIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.HRDepartmentSimpleDTO>, Array<dto.HRDepartmentObservableSimpleDTO>, dto.HRDepartmentSimpleDTO, dto.HRDepartmentObservableSimpleDTO>();
-            return service.getData('HRDepartment/GetSimpleHRDepartmentsByIdents', {plain : dto.HRDepartmentSimpleDTO, observable : dto.HRDepartmentObservableSimpleDTO}, realParameters);
+            return service.getData('HRDepartment/GetSimpleHRDepartmentsByIdents', {plain : dto.HRDepartmentSimpleDTO, observable : dto.HRDepartmentObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleHRDepartmentsByOperation(): async.AsyncFunc3<dto.SampleSystemHRDepartmentSecurityOperationCode, Array<dto.HRDepartmentSimpleDTO>, Array<dto.HRDepartmentObservableSimpleDTO>, dto.HRDepartmentSimpleDTO, dto.HRDepartmentObservableSimpleDTO> {
         return new async.AsyncFunc3((securityOperationCode: dto.SampleSystemHRDepartmentSecurityOperationCode) => {
-            let baseParameters = {securityOperationCode : securityOperationCode};
-            let realParameters = baseParameters;
+            let baseParameters = securityOperationCode;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.HRDepartmentSimpleDTO>, Array<dto.HRDepartmentObservableSimpleDTO>, dto.HRDepartmentSimpleDTO, dto.HRDepartmentObservableSimpleDTO>();
-            return service.getData('HRDepartment/GetSimpleHRDepartmentsByOperation', {plain : dto.HRDepartmentSimpleDTO, observable : dto.HRDepartmentObservableSimpleDTO}, realParameters);
+            return service.getData('HRDepartment/GetSimpleHRDepartmentsByOperation', {plain : dto.HRDepartmentSimpleDTO, observable : dto.HRDepartmentObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleIMRequest(): async.AsyncFunc3<dto.IMRequestIdentityDTO, dto.IMRequestSimpleDTO, dto.IMRequestObservableSimpleDTO, dto.IMRequestSimpleDTO, dto.IMRequestObservableSimpleDTO> {
         return new async.AsyncFunc3((iMRequestIdentity: dto.IMRequestIdentityDTO) => {
-            let baseParameters = {iMRequestIdentity : iMRequestIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = iMRequestIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.IMRequestSimpleDTO, dto.IMRequestObservableSimpleDTO, dto.IMRequestSimpleDTO, dto.IMRequestObservableSimpleDTO>();
-            return service.getData('IMRequest/GetSimpleIMRequest', {plain : dto.IMRequestSimpleDTO, observable : dto.IMRequestObservableSimpleDTO}, realParameters);
+            return service.getData('IMRequest/GetSimpleIMRequest', {plain : dto.IMRequestSimpleDTO, observable : dto.IMRequestObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleIMRequestByName(): async.AsyncFunc3<string, dto.IMRequestSimpleDTO, dto.IMRequestObservableSimpleDTO, dto.IMRequestSimpleDTO, dto.IMRequestObservableSimpleDTO> {
         return new async.AsyncFunc3((iMRequestName: string) => {
-            let baseParameters = {iMRequestName : iMRequestName};
-            let realParameters = baseParameters;
+            let baseParameters = iMRequestName;
             let service = Environment.current.context.facadeFactory.createService<dto.IMRequestSimpleDTO, dto.IMRequestObservableSimpleDTO, dto.IMRequestSimpleDTO, dto.IMRequestObservableSimpleDTO>();
-            return service.getData('IMRequest/GetSimpleIMRequestByName', {plain : dto.IMRequestSimpleDTO, observable : dto.IMRequestObservableSimpleDTO}, realParameters);
+            return service.getData('IMRequest/GetSimpleIMRequestByName', {plain : dto.IMRequestSimpleDTO, observable : dto.IMRequestObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleIMRequests(): async.AsyncFunc2<Array<dto.IMRequestSimpleDTO>, Array<dto.IMRequestObservableSimpleDTO>, dto.IMRequestSimpleDTO, dto.IMRequestObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.IMRequestSimpleDTO>, Array<dto.IMRequestObservableSimpleDTO>, dto.IMRequestSimpleDTO, dto.IMRequestObservableSimpleDTO>();
-            return service.getData('IMRequest/GetSimpleIMRequests', {plain : dto.IMRequestSimpleDTO, observable : dto.IMRequestObservableSimpleDTO}, realParameters);
+            return service.getData('IMRequest/GetSimpleIMRequests', {plain : dto.IMRequestSimpleDTO, observable : dto.IMRequestObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleIMRequestsByIdents(): async.AsyncFunc3<dto.IMRequestIdentityDTO[], Array<dto.IMRequestSimpleDTO>, Array<dto.IMRequestObservableSimpleDTO>, dto.IMRequestSimpleDTO, dto.IMRequestObservableSimpleDTO> {
         return new async.AsyncFunc3((iMRequestIdents: dto.IMRequestIdentityDTO[]) => {
-            let baseParameters = {iMRequestIdents : iMRequestIdents};
-            let realParameters = baseParameters;
+            let baseParameters = iMRequestIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.IMRequestSimpleDTO>, Array<dto.IMRequestObservableSimpleDTO>, dto.IMRequestSimpleDTO, dto.IMRequestObservableSimpleDTO>();
-            return service.getData('IMRequest/GetSimpleIMRequestsByIdents', {plain : dto.IMRequestSimpleDTO, observable : dto.IMRequestObservableSimpleDTO}, realParameters);
+            return service.getData('IMRequest/GetSimpleIMRequestsByIdents', {plain : dto.IMRequestSimpleDTO, observable : dto.IMRequestObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleInformation(): async.AsyncFunc3<dto.InformationIdentityDTO, dto.InformationSimpleDTO, dto.InformationObservableSimpleDTO, dto.InformationSimpleDTO, dto.InformationObservableSimpleDTO> {
         return new async.AsyncFunc3((informationIdentity: dto.InformationIdentityDTO) => {
-            let baseParameters = {informationIdentity : informationIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = informationIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.InformationSimpleDTO, dto.InformationObservableSimpleDTO, dto.InformationSimpleDTO, dto.InformationObservableSimpleDTO>();
-            return service.getData('Information/GetSimpleInformation', {plain : dto.InformationSimpleDTO, observable : dto.InformationObservableSimpleDTO}, realParameters);
+            return service.getData('Information/GetSimpleInformation', {plain : dto.InformationSimpleDTO, observable : dto.InformationObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleInformationByName(): async.AsyncFunc3<string, dto.InformationSimpleDTO, dto.InformationObservableSimpleDTO, dto.InformationSimpleDTO, dto.InformationObservableSimpleDTO> {
         return new async.AsyncFunc3((informationName: string) => {
-            let baseParameters = {informationName : informationName};
-            let realParameters = baseParameters;
+            let baseParameters = informationName;
             let service = Environment.current.context.facadeFactory.createService<dto.InformationSimpleDTO, dto.InformationObservableSimpleDTO, dto.InformationSimpleDTO, dto.InformationObservableSimpleDTO>();
-            return service.getData('Information/GetSimpleInformationByName', {plain : dto.InformationSimpleDTO, observable : dto.InformationObservableSimpleDTO}, realParameters);
+            return service.getData('Information/GetSimpleInformationByName', {plain : dto.InformationSimpleDTO, observable : dto.InformationObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleInformations(): async.AsyncFunc2<Array<dto.InformationSimpleDTO>, Array<dto.InformationObservableSimpleDTO>, dto.InformationSimpleDTO, dto.InformationObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.InformationSimpleDTO>, Array<dto.InformationObservableSimpleDTO>, dto.InformationSimpleDTO, dto.InformationObservableSimpleDTO>();
-            return service.getData('Information/GetSimpleInformations', {plain : dto.InformationSimpleDTO, observable : dto.InformationObservableSimpleDTO}, realParameters);
+            return service.getData('Information/GetSimpleInformations', {plain : dto.InformationSimpleDTO, observable : dto.InformationObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleInformationsByIdents(): async.AsyncFunc3<dto.InformationIdentityDTO[], Array<dto.InformationSimpleDTO>, Array<dto.InformationObservableSimpleDTO>, dto.InformationSimpleDTO, dto.InformationObservableSimpleDTO> {
         return new async.AsyncFunc3((informationIdents: dto.InformationIdentityDTO[]) => {
-            let baseParameters = {informationIdents : informationIdents};
-            let realParameters = baseParameters;
+            let baseParameters = informationIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.InformationSimpleDTO>, Array<dto.InformationObservableSimpleDTO>, dto.InformationSimpleDTO, dto.InformationObservableSimpleDTO>();
-            return service.getData('Information/GetSimpleInformationsByIdents', {plain : dto.InformationSimpleDTO, observable : dto.InformationObservableSimpleDTO}, realParameters);
+            return service.getData('Information/GetSimpleInformationsByIdents', {plain : dto.InformationSimpleDTO, observable : dto.InformationObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleLocation(): async.AsyncFunc3<dto.LocationIdentityDTO, dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO, dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO> {
         return new async.AsyncFunc3((locationIdentity: dto.LocationIdentityDTO) => {
-            let baseParameters = {locationIdentity : locationIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = locationIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO, dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO>();
-            return service.getData('Location/GetSimpleLocation', {plain : dto.LocationSimpleDTO, observable : dto.LocationObservableSimpleDTO}, realParameters);
+            return service.getData('Location/GetSimpleLocation', {plain : dto.LocationSimpleDTO, observable : dto.LocationObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleLocation1676(): async.AsyncFunc3<dto.Location1676IdentityDTO, dto.Location1676SimpleDTO, dto.Location1676ObservableSimpleDTO, dto.Location1676SimpleDTO, dto.Location1676ObservableSimpleDTO> {
         return new async.AsyncFunc3((location1676Identity: dto.Location1676IdentityDTO) => {
-            let baseParameters = {location1676Identity : location1676Identity};
-            let realParameters = baseParameters;
+            let baseParameters = location1676Identity;
             let service = Environment.current.context.facadeFactory.createService<dto.Location1676SimpleDTO, dto.Location1676ObservableSimpleDTO, dto.Location1676SimpleDTO, dto.Location1676ObservableSimpleDTO>();
-            return service.getData('Location1676/GetSimpleLocation1676', {plain : dto.Location1676SimpleDTO, observable : dto.Location1676ObservableSimpleDTO}, realParameters);
+            return service.getData('Location1676/GetSimpleLocation1676', {plain : dto.Location1676SimpleDTO, observable : dto.Location1676ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleLocation1676ByName(): async.AsyncFunc3<string, dto.Location1676SimpleDTO, dto.Location1676ObservableSimpleDTO, dto.Location1676SimpleDTO, dto.Location1676ObservableSimpleDTO> {
         return new async.AsyncFunc3((location1676Name: string) => {
-            let baseParameters = {location1676Name : location1676Name};
-            let realParameters = baseParameters;
+            let baseParameters = location1676Name;
             let service = Environment.current.context.facadeFactory.createService<dto.Location1676SimpleDTO, dto.Location1676ObservableSimpleDTO, dto.Location1676SimpleDTO, dto.Location1676ObservableSimpleDTO>();
-            return service.getData('Location1676/GetSimpleLocation1676ByName', {plain : dto.Location1676SimpleDTO, observable : dto.Location1676ObservableSimpleDTO}, realParameters);
+            return service.getData('Location1676/GetSimpleLocation1676ByName', {plain : dto.Location1676SimpleDTO, observable : dto.Location1676ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleLocation1676s(): async.AsyncFunc2<Array<dto.Location1676SimpleDTO>, Array<dto.Location1676ObservableSimpleDTO>, dto.Location1676SimpleDTO, dto.Location1676ObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.Location1676SimpleDTO>, Array<dto.Location1676ObservableSimpleDTO>, dto.Location1676SimpleDTO, dto.Location1676ObservableSimpleDTO>();
-            return service.getData('Location1676/GetSimpleLocation1676s', {plain : dto.Location1676SimpleDTO, observable : dto.Location1676ObservableSimpleDTO}, realParameters);
+            return service.getData('Location1676/GetSimpleLocation1676s', {plain : dto.Location1676SimpleDTO, observable : dto.Location1676ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleLocation1676sByIdents(): async.AsyncFunc3<dto.Location1676IdentityDTO[], Array<dto.Location1676SimpleDTO>, Array<dto.Location1676ObservableSimpleDTO>, dto.Location1676SimpleDTO, dto.Location1676ObservableSimpleDTO> {
         return new async.AsyncFunc3((location1676Idents: dto.Location1676IdentityDTO[]) => {
-            let baseParameters = {location1676Idents : location1676Idents};
-            let realParameters = baseParameters;
+            let baseParameters = location1676Idents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.Location1676SimpleDTO>, Array<dto.Location1676ObservableSimpleDTO>, dto.Location1676SimpleDTO, dto.Location1676ObservableSimpleDTO>();
-            return service.getData('Location1676/GetSimpleLocation1676sByIdents', {plain : dto.Location1676SimpleDTO, observable : dto.Location1676ObservableSimpleDTO}, realParameters);
+            return service.getData('Location1676/GetSimpleLocation1676sByIdents', {plain : dto.Location1676SimpleDTO, observable : dto.Location1676ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleLocationByName(): async.AsyncFunc3<string, dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO, dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO> {
         return new async.AsyncFunc3((locationName: string) => {
-            let baseParameters = {locationName : locationName};
-            let realParameters = baseParameters;
+            let baseParameters = locationName;
             let service = Environment.current.context.facadeFactory.createService<dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO, dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO>();
-            return service.getData('Location/GetSimpleLocationByName', {plain : dto.LocationSimpleDTO, observable : dto.LocationObservableSimpleDTO}, realParameters);
+            return service.getData('Location/GetSimpleLocationByName', {plain : dto.LocationSimpleDTO, observable : dto.LocationObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleLocations(): async.AsyncFunc2<Array<dto.LocationSimpleDTO>, Array<dto.LocationObservableSimpleDTO>, dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.LocationSimpleDTO>, Array<dto.LocationObservableSimpleDTO>, dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO>();
-            return service.getData('Location/GetSimpleLocations', {plain : dto.LocationSimpleDTO, observable : dto.LocationObservableSimpleDTO}, realParameters);
+            return service.getData('Location/GetSimpleLocations', {plain : dto.LocationSimpleDTO, observable : dto.LocationObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleLocationsByIdents(): async.AsyncFunc3<dto.LocationIdentityDTO[], Array<dto.LocationSimpleDTO>, Array<dto.LocationObservableSimpleDTO>, dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO> {
         return new async.AsyncFunc3((locationIdents: dto.LocationIdentityDTO[]) => {
-            let baseParameters = {locationIdents : locationIdents};
-            let realParameters = baseParameters;
+            let baseParameters = locationIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.LocationSimpleDTO>, Array<dto.LocationObservableSimpleDTO>, dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO>();
-            return service.getData('Location/GetSimpleLocationsByIdents', {plain : dto.LocationSimpleDTO, observable : dto.LocationObservableSimpleDTO}, realParameters);
+            return service.getData('Location/GetSimpleLocationsByIdents', {plain : dto.LocationSimpleDTO, observable : dto.LocationObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleLocationsByOperation(): async.AsyncFunc3<dto.SampleSystemLocationSecurityOperationCode, Array<dto.LocationSimpleDTO>, Array<dto.LocationObservableSimpleDTO>, dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO> {
         return new async.AsyncFunc3((securityOperationCode: dto.SampleSystemLocationSecurityOperationCode) => {
-            let baseParameters = {securityOperationCode : securityOperationCode};
-            let realParameters = baseParameters;
+            let baseParameters = securityOperationCode;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.LocationSimpleDTO>, Array<dto.LocationObservableSimpleDTO>, dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO>();
-            return service.getData('Location/GetSimpleLocationsByOperation', {plain : dto.LocationSimpleDTO, observable : dto.LocationObservableSimpleDTO}, realParameters);
+            return service.getData('Location/GetSimpleLocationsByOperation', {plain : dto.LocationSimpleDTO, observable : dto.LocationObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleManagementUnit(): async.AsyncFunc3<dto.ManagementUnitIdentityDTO, dto.ManagementUnitSimpleDTO, dto.ManagementUnitObservableSimpleDTO, dto.ManagementUnitSimpleDTO, dto.ManagementUnitObservableSimpleDTO> {
         return new async.AsyncFunc3((managementUnitIdentity: dto.ManagementUnitIdentityDTO) => {
-            let baseParameters = {managementUnitIdentity : managementUnitIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.ManagementUnitSimpleDTO, dto.ManagementUnitObservableSimpleDTO, dto.ManagementUnitSimpleDTO, dto.ManagementUnitObservableSimpleDTO>();
-            return service.getData('ManagementUnit/GetSimpleManagementUnit', {plain : dto.ManagementUnitSimpleDTO, observable : dto.ManagementUnitObservableSimpleDTO}, realParameters);
+            return service.getData('ManagementUnit/GetSimpleManagementUnit', {plain : dto.ManagementUnitSimpleDTO, observable : dto.ManagementUnitObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleManagementUnitAndBusinessUnitLink(): async.AsyncFunc3<dto.ManagementUnitAndBusinessUnitLinkIdentityDTO, dto.ManagementUnitAndBusinessUnitLinkSimpleDTO, dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO, dto.ManagementUnitAndBusinessUnitLinkSimpleDTO, dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO> {
         return new async.AsyncFunc3((managementUnitAndBusinessUnitLinkIdentity: dto.ManagementUnitAndBusinessUnitLinkIdentityDTO) => {
-            let baseParameters = {managementUnitAndBusinessUnitLinkIdentity : managementUnitAndBusinessUnitLinkIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitAndBusinessUnitLinkIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.ManagementUnitAndBusinessUnitLinkSimpleDTO, dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO, dto.ManagementUnitAndBusinessUnitLinkSimpleDTO, dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO>();
-            return service.getData('ManagementUnitAndBusinessUnitLink/GetSimpleManagementUnitAndBusinessUnitLink', {plain : dto.ManagementUnitAndBusinessUnitLinkSimpleDTO, observable : dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO}, realParameters);
+            return service.getData('ManagementUnitAndBusinessUnitLink/GetSimpleManagementUnitAndBusinessUnitLink', {plain : dto.ManagementUnitAndBusinessUnitLinkSimpleDTO, observable : dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleManagementUnitAndBusinessUnitLinks(): async.AsyncFunc2<Array<dto.ManagementUnitAndBusinessUnitLinkSimpleDTO>, Array<dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO>, dto.ManagementUnitAndBusinessUnitLinkSimpleDTO, dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.ManagementUnitAndBusinessUnitLinkSimpleDTO>, Array<dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO>, dto.ManagementUnitAndBusinessUnitLinkSimpleDTO, dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO>();
-            return service.getData('ManagementUnitAndBusinessUnitLink/GetSimpleManagementUnitAndBusinessUnitLinks', {plain : dto.ManagementUnitAndBusinessUnitLinkSimpleDTO, observable : dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO}, realParameters);
+            return service.getData('ManagementUnitAndBusinessUnitLink/GetSimpleManagementUnitAndBusinessUnitLinks', {plain : dto.ManagementUnitAndBusinessUnitLinkSimpleDTO, observable : dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleManagementUnitAndBusinessUnitLinksByIdents(): async.AsyncFunc3<dto.ManagementUnitAndBusinessUnitLinkIdentityDTO[], Array<dto.ManagementUnitAndBusinessUnitLinkSimpleDTO>, Array<dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO>, dto.ManagementUnitAndBusinessUnitLinkSimpleDTO, dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO> {
         return new async.AsyncFunc3((managementUnitAndBusinessUnitLinkIdents: dto.ManagementUnitAndBusinessUnitLinkIdentityDTO[]) => {
-            let baseParameters = {managementUnitAndBusinessUnitLinkIdents : managementUnitAndBusinessUnitLinkIdents};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitAndBusinessUnitLinkIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.ManagementUnitAndBusinessUnitLinkSimpleDTO>, Array<dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO>, dto.ManagementUnitAndBusinessUnitLinkSimpleDTO, dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO>();
             return service.getData('ManagementUnitAndBusinessUnitLink/GetSimpleManagementUnitAndBusinessUnitLinksById' + 
-'ents', {plain : dto.ManagementUnitAndBusinessUnitLinkSimpleDTO, observable : dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO}, realParameters);
+'ents', {plain : dto.ManagementUnitAndBusinessUnitLinkSimpleDTO, observable : dto.ManagementUnitAndBusinessUnitLinkObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleManagementUnitAndHRDepartmentLink(): async.AsyncFunc3<dto.ManagementUnitAndHRDepartmentLinkIdentityDTO, dto.ManagementUnitAndHRDepartmentLinkSimpleDTO, dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO, dto.ManagementUnitAndHRDepartmentLinkSimpleDTO, dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO> {
         return new async.AsyncFunc3((managementUnitAndHRDepartmentLinkIdentity: dto.ManagementUnitAndHRDepartmentLinkIdentityDTO) => {
-            let baseParameters = {managementUnitAndHRDepartmentLinkIdentity : managementUnitAndHRDepartmentLinkIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitAndHRDepartmentLinkIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.ManagementUnitAndHRDepartmentLinkSimpleDTO, dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO, dto.ManagementUnitAndHRDepartmentLinkSimpleDTO, dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO>();
-            return service.getData('ManagementUnitAndHRDepartmentLink/GetSimpleManagementUnitAndHRDepartmentLink', {plain : dto.ManagementUnitAndHRDepartmentLinkSimpleDTO, observable : dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO}, realParameters);
+            return service.getData('ManagementUnitAndHRDepartmentLink/GetSimpleManagementUnitAndHRDepartmentLink', {plain : dto.ManagementUnitAndHRDepartmentLinkSimpleDTO, observable : dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleManagementUnitAndHRDepartmentLinks(): async.AsyncFunc2<Array<dto.ManagementUnitAndHRDepartmentLinkSimpleDTO>, Array<dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO>, dto.ManagementUnitAndHRDepartmentLinkSimpleDTO, dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.ManagementUnitAndHRDepartmentLinkSimpleDTO>, Array<dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO>, dto.ManagementUnitAndHRDepartmentLinkSimpleDTO, dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO>();
-            return service.getData('ManagementUnitAndHRDepartmentLink/GetSimpleManagementUnitAndHRDepartmentLinks', {plain : dto.ManagementUnitAndHRDepartmentLinkSimpleDTO, observable : dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO}, realParameters);
+            return service.getData('ManagementUnitAndHRDepartmentLink/GetSimpleManagementUnitAndHRDepartmentLinks', {plain : dto.ManagementUnitAndHRDepartmentLinkSimpleDTO, observable : dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleManagementUnitAndHRDepartmentLinksByIdents(): async.AsyncFunc3<dto.ManagementUnitAndHRDepartmentLinkIdentityDTO[], Array<dto.ManagementUnitAndHRDepartmentLinkSimpleDTO>, Array<dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO>, dto.ManagementUnitAndHRDepartmentLinkSimpleDTO, dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO> {
         return new async.AsyncFunc3((managementUnitAndHRDepartmentLinkIdents: dto.ManagementUnitAndHRDepartmentLinkIdentityDTO[]) => {
-            let baseParameters = {managementUnitAndHRDepartmentLinkIdents : managementUnitAndHRDepartmentLinkIdents};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitAndHRDepartmentLinkIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.ManagementUnitAndHRDepartmentLinkSimpleDTO>, Array<dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO>, dto.ManagementUnitAndHRDepartmentLinkSimpleDTO, dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO>();
             return service.getData('ManagementUnitAndHRDepartmentLink/GetSimpleManagementUnitAndHRDepartmentLinksById' + 
-'ents', {plain : dto.ManagementUnitAndHRDepartmentLinkSimpleDTO, observable : dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO}, realParameters);
+'ents', {plain : dto.ManagementUnitAndHRDepartmentLinkSimpleDTO, observable : dto.ManagementUnitAndHRDepartmentLinkObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleManagementUnitByName(): async.AsyncFunc3<string, dto.ManagementUnitSimpleDTO, dto.ManagementUnitObservableSimpleDTO, dto.ManagementUnitSimpleDTO, dto.ManagementUnitObservableSimpleDTO> {
         return new async.AsyncFunc3((managementUnitName: string) => {
-            let baseParameters = {managementUnitName : managementUnitName};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitName;
             let service = Environment.current.context.facadeFactory.createService<dto.ManagementUnitSimpleDTO, dto.ManagementUnitObservableSimpleDTO, dto.ManagementUnitSimpleDTO, dto.ManagementUnitObservableSimpleDTO>();
-            return service.getData('ManagementUnit/GetSimpleManagementUnitByName', {plain : dto.ManagementUnitSimpleDTO, observable : dto.ManagementUnitObservableSimpleDTO}, realParameters);
+            return service.getData('ManagementUnit/GetSimpleManagementUnitByName', {plain : dto.ManagementUnitSimpleDTO, observable : dto.ManagementUnitObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleManagementUnits(): async.AsyncFunc2<Array<dto.ManagementUnitSimpleDTO>, Array<dto.ManagementUnitObservableSimpleDTO>, dto.ManagementUnitSimpleDTO, dto.ManagementUnitObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.ManagementUnitSimpleDTO>, Array<dto.ManagementUnitObservableSimpleDTO>, dto.ManagementUnitSimpleDTO, dto.ManagementUnitObservableSimpleDTO>();
-            return service.getData('ManagementUnit/GetSimpleManagementUnits', {plain : dto.ManagementUnitSimpleDTO, observable : dto.ManagementUnitObservableSimpleDTO}, realParameters);
+            return service.getData('ManagementUnit/GetSimpleManagementUnits', {plain : dto.ManagementUnitSimpleDTO, observable : dto.ManagementUnitObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleManagementUnitsByIdents(): async.AsyncFunc3<dto.ManagementUnitIdentityDTO[], Array<dto.ManagementUnitSimpleDTO>, Array<dto.ManagementUnitObservableSimpleDTO>, dto.ManagementUnitSimpleDTO, dto.ManagementUnitObservableSimpleDTO> {
         return new async.AsyncFunc3((managementUnitIdents: dto.ManagementUnitIdentityDTO[]) => {
-            let baseParameters = {managementUnitIdents : managementUnitIdents};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.ManagementUnitSimpleDTO>, Array<dto.ManagementUnitObservableSimpleDTO>, dto.ManagementUnitSimpleDTO, dto.ManagementUnitObservableSimpleDTO>();
-            return service.getData('ManagementUnit/GetSimpleManagementUnitsByIdents', {plain : dto.ManagementUnitSimpleDTO, observable : dto.ManagementUnitObservableSimpleDTO}, realParameters);
+            return service.getData('ManagementUnit/GetSimpleManagementUnitsByIdents', {plain : dto.ManagementUnitSimpleDTO, observable : dto.ManagementUnitObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleManagementUnitsByOperation(): async.AsyncFunc3<dto.SampleSystemManagementUnitSecurityOperationCode, Array<dto.ManagementUnitSimpleDTO>, Array<dto.ManagementUnitObservableSimpleDTO>, dto.ManagementUnitSimpleDTO, dto.ManagementUnitObservableSimpleDTO> {
         return new async.AsyncFunc3((securityOperationCode: dto.SampleSystemManagementUnitSecurityOperationCode) => {
-            let baseParameters = {securityOperationCode : securityOperationCode};
-            let realParameters = baseParameters;
+            let baseParameters = securityOperationCode;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.ManagementUnitSimpleDTO>, Array<dto.ManagementUnitObservableSimpleDTO>, dto.ManagementUnitSimpleDTO, dto.ManagementUnitObservableSimpleDTO>();
-            return service.getData('ManagementUnit/GetSimpleManagementUnitsByOperation', {plain : dto.ManagementUnitSimpleDTO, observable : dto.ManagementUnitObservableSimpleDTO}, realParameters);
+            return service.getData('ManagementUnit/GetSimpleManagementUnitsByOperation', {plain : dto.ManagementUnitSimpleDTO, observable : dto.ManagementUnitObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleMessageTemplateContainer(): async.AsyncFunc3<dto.MessageTemplateContainerIdentityDTO, dto.MessageTemplateContainerSimpleDTO, dto.MessageTemplateContainerObservableSimpleDTO, dto.MessageTemplateContainerSimpleDTO, dto.MessageTemplateContainerObservableSimpleDTO> {
         return new async.AsyncFunc3((messageTemplateContainerIdentity: dto.MessageTemplateContainerIdentityDTO) => {
-            let baseParameters = {messageTemplateContainerIdentity : messageTemplateContainerIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = messageTemplateContainerIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.MessageTemplateContainerSimpleDTO, dto.MessageTemplateContainerObservableSimpleDTO, dto.MessageTemplateContainerSimpleDTO, dto.MessageTemplateContainerObservableSimpleDTO>();
-            return service.getData('MessageTemplateContainer/GetSimpleMessageTemplateContainer', {plain : dto.MessageTemplateContainerSimpleDTO, observable : dto.MessageTemplateContainerObservableSimpleDTO}, realParameters);
+            return service.getData('MessageTemplateContainer/GetSimpleMessageTemplateContainer', {plain : dto.MessageTemplateContainerSimpleDTO, observable : dto.MessageTemplateContainerObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleMessageTemplateContainers(): async.AsyncFunc2<Array<dto.MessageTemplateContainerSimpleDTO>, Array<dto.MessageTemplateContainerObservableSimpleDTO>, dto.MessageTemplateContainerSimpleDTO, dto.MessageTemplateContainerObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.MessageTemplateContainerSimpleDTO>, Array<dto.MessageTemplateContainerObservableSimpleDTO>, dto.MessageTemplateContainerSimpleDTO, dto.MessageTemplateContainerObservableSimpleDTO>();
-            return service.getData('MessageTemplateContainer/GetSimpleMessageTemplateContainers', {plain : dto.MessageTemplateContainerSimpleDTO, observable : dto.MessageTemplateContainerObservableSimpleDTO}, realParameters);
+            return service.getData('MessageTemplateContainer/GetSimpleMessageTemplateContainers', {plain : dto.MessageTemplateContainerSimpleDTO, observable : dto.MessageTemplateContainerObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleMessageTemplateContainersByIdents(): async.AsyncFunc3<dto.MessageTemplateContainerIdentityDTO[], Array<dto.MessageTemplateContainerSimpleDTO>, Array<dto.MessageTemplateContainerObservableSimpleDTO>, dto.MessageTemplateContainerSimpleDTO, dto.MessageTemplateContainerObservableSimpleDTO> {
         return new async.AsyncFunc3((messageTemplateContainerIdents: dto.MessageTemplateContainerIdentityDTO[]) => {
-            let baseParameters = {messageTemplateContainerIdents : messageTemplateContainerIdents};
-            let realParameters = baseParameters;
+            let baseParameters = messageTemplateContainerIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.MessageTemplateContainerSimpleDTO>, Array<dto.MessageTemplateContainerObservableSimpleDTO>, dto.MessageTemplateContainerSimpleDTO, dto.MessageTemplateContainerObservableSimpleDTO>();
-            return service.getData('MessageTemplateContainer/GetSimpleMessageTemplateContainersByIdents', {plain : dto.MessageTemplateContainerSimpleDTO, observable : dto.MessageTemplateContainerObservableSimpleDTO}, realParameters);
+            return service.getData('MessageTemplateContainer/GetSimpleMessageTemplateContainersByIdents', {plain : dto.MessageTemplateContainerSimpleDTO, observable : dto.MessageTemplateContainerObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimplePrincipal(): async.AsyncFunc3<dto.PrincipalIdentityDTO, dto.PrincipalSimpleDTO, dto.PrincipalObservableSimpleDTO, dto.PrincipalSimpleDTO, dto.PrincipalObservableSimpleDTO> {
         return new async.AsyncFunc3((principalIdentity: dto.PrincipalIdentityDTO) => {
-            let baseParameters = {principalIdentity : principalIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = principalIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.PrincipalSimpleDTO, dto.PrincipalObservableSimpleDTO, dto.PrincipalSimpleDTO, dto.PrincipalObservableSimpleDTO>();
-            return service.getData('Principal/GetSimplePrincipal', {plain : dto.PrincipalSimpleDTO, observable : dto.PrincipalObservableSimpleDTO}, realParameters);
+            return service.getData('Principal/GetSimplePrincipal', {plain : dto.PrincipalSimpleDTO, observable : dto.PrincipalObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimplePrincipals(): async.AsyncFunc2<Array<dto.PrincipalSimpleDTO>, Array<dto.PrincipalObservableSimpleDTO>, dto.PrincipalSimpleDTO, dto.PrincipalObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.PrincipalSimpleDTO>, Array<dto.PrincipalObservableSimpleDTO>, dto.PrincipalSimpleDTO, dto.PrincipalObservableSimpleDTO>();
-            return service.getData('Principal/GetSimplePrincipals', {plain : dto.PrincipalSimpleDTO, observable : dto.PrincipalObservableSimpleDTO}, realParameters);
+            return service.getData('Principal/GetSimplePrincipals', {plain : dto.PrincipalSimpleDTO, observable : dto.PrincipalObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimplePrincipalsByIdents(): async.AsyncFunc3<dto.PrincipalIdentityDTO[], Array<dto.PrincipalSimpleDTO>, Array<dto.PrincipalObservableSimpleDTO>, dto.PrincipalSimpleDTO, dto.PrincipalObservableSimpleDTO> {
         return new async.AsyncFunc3((principalIdents: dto.PrincipalIdentityDTO[]) => {
-            let baseParameters = {principalIdents : principalIdents};
-            let realParameters = baseParameters;
+            let baseParameters = principalIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.PrincipalSimpleDTO>, Array<dto.PrincipalObservableSimpleDTO>, dto.PrincipalSimpleDTO, dto.PrincipalObservableSimpleDTO>();
-            return service.getData('Principal/GetSimplePrincipalsByIdents', {plain : dto.PrincipalSimpleDTO, observable : dto.PrincipalObservableSimpleDTO}, realParameters);
+            return service.getData('Principal/GetSimplePrincipalsByIdents', {plain : dto.PrincipalSimpleDTO, observable : dto.PrincipalObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleRegularJobResult(): async.AsyncFunc3<dto.RegularJobResultIdentityDTO, dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO, dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO> {
         return new async.AsyncFunc3((regularJobResultIdentity: dto.RegularJobResultIdentityDTO) => {
-            let baseParameters = {regularJobResultIdentity : regularJobResultIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = regularJobResultIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO, dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO>();
-            return service.getData('RegularJobResult/GetSimpleRegularJobResult', {plain : dto.RegularJobResultSimpleDTO, observable : dto.RegularJobResultObservableSimpleDTO}, realParameters);
+            return service.getData('RegularJobResult/GetSimpleRegularJobResult', {plain : dto.RegularJobResultSimpleDTO, observable : dto.RegularJobResultObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleRegularJobResults(): async.AsyncFunc2<Array<dto.RegularJobResultSimpleDTO>, Array<dto.RegularJobResultObservableSimpleDTO>, dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.RegularJobResultSimpleDTO>, Array<dto.RegularJobResultObservableSimpleDTO>, dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO>();
-            return service.getData('RegularJobResult/GetSimpleRegularJobResults', {plain : dto.RegularJobResultSimpleDTO, observable : dto.RegularJobResultObservableSimpleDTO}, realParameters);
+            return service.getData('RegularJobResult/GetSimpleRegularJobResults', {plain : dto.RegularJobResultSimpleDTO, observable : dto.RegularJobResultObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleRegularJobResultsByIdents(): async.AsyncFunc3<dto.RegularJobResultIdentityDTO[], Array<dto.RegularJobResultSimpleDTO>, Array<dto.RegularJobResultObservableSimpleDTO>, dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO> {
         return new async.AsyncFunc3((regularJobResultIdents: dto.RegularJobResultIdentityDTO[]) => {
-            let baseParameters = {regularJobResultIdents : regularJobResultIdents};
-            let realParameters = baseParameters;
+            let baseParameters = regularJobResultIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.RegularJobResultSimpleDTO>, Array<dto.RegularJobResultObservableSimpleDTO>, dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO>();
-            return service.getData('RegularJobResult/GetSimpleRegularJobResultsByIdents', {plain : dto.RegularJobResultSimpleDTO, observable : dto.RegularJobResultObservableSimpleDTO}, realParameters);
+            return service.getData('RegularJobResult/GetSimpleRegularJobResultsByIdents', {plain : dto.RegularJobResultSimpleDTO, observable : dto.RegularJobResultObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleSampleSystemMessageTemplate(): async.AsyncFunc3<dto.SampleSystemMessageTemplateIdentityDTO, dto.SampleSystemMessageTemplateSimpleDTO, dto.SampleSystemMessageTemplateObservableSimpleDTO, dto.SampleSystemMessageTemplateSimpleDTO, dto.SampleSystemMessageTemplateObservableSimpleDTO> {
         return new async.AsyncFunc3((sampleSystemMessageTemplateIdentity: dto.SampleSystemMessageTemplateIdentityDTO) => {
-            let baseParameters = {sampleSystemMessageTemplateIdentity : sampleSystemMessageTemplateIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = sampleSystemMessageTemplateIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.SampleSystemMessageTemplateSimpleDTO, dto.SampleSystemMessageTemplateObservableSimpleDTO, dto.SampleSystemMessageTemplateSimpleDTO, dto.SampleSystemMessageTemplateObservableSimpleDTO>();
-            return service.getData('SampleSystemMessageTemplate/GetSimpleSampleSystemMessageTemplate', {plain : dto.SampleSystemMessageTemplateSimpleDTO, observable : dto.SampleSystemMessageTemplateObservableSimpleDTO}, realParameters);
+            return service.getData('SampleSystemMessageTemplate/GetSimpleSampleSystemMessageTemplate', {plain : dto.SampleSystemMessageTemplateSimpleDTO, observable : dto.SampleSystemMessageTemplateObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleSampleSystemMessageTemplates(): async.AsyncFunc2<Array<dto.SampleSystemMessageTemplateSimpleDTO>, Array<dto.SampleSystemMessageTemplateObservableSimpleDTO>, dto.SampleSystemMessageTemplateSimpleDTO, dto.SampleSystemMessageTemplateObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.SampleSystemMessageTemplateSimpleDTO>, Array<dto.SampleSystemMessageTemplateObservableSimpleDTO>, dto.SampleSystemMessageTemplateSimpleDTO, dto.SampleSystemMessageTemplateObservableSimpleDTO>();
-            return service.getData('SampleSystemMessageTemplate/GetSimpleSampleSystemMessageTemplates', {plain : dto.SampleSystemMessageTemplateSimpleDTO, observable : dto.SampleSystemMessageTemplateObservableSimpleDTO}, realParameters);
+            return service.getData('SampleSystemMessageTemplate/GetSimpleSampleSystemMessageTemplates', {plain : dto.SampleSystemMessageTemplateSimpleDTO, observable : dto.SampleSystemMessageTemplateObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleSampleSystemMessageTemplatesByIdents(): async.AsyncFunc3<dto.SampleSystemMessageTemplateIdentityDTO[], Array<dto.SampleSystemMessageTemplateSimpleDTO>, Array<dto.SampleSystemMessageTemplateObservableSimpleDTO>, dto.SampleSystemMessageTemplateSimpleDTO, dto.SampleSystemMessageTemplateObservableSimpleDTO> {
         return new async.AsyncFunc3((sampleSystemMessageTemplateIdents: dto.SampleSystemMessageTemplateIdentityDTO[]) => {
-            let baseParameters = {sampleSystemMessageTemplateIdents : sampleSystemMessageTemplateIdents};
-            let realParameters = baseParameters;
+            let baseParameters = sampleSystemMessageTemplateIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.SampleSystemMessageTemplateSimpleDTO>, Array<dto.SampleSystemMessageTemplateObservableSimpleDTO>, dto.SampleSystemMessageTemplateSimpleDTO, dto.SampleSystemMessageTemplateObservableSimpleDTO>();
-            return service.getData('SampleSystemMessageTemplate/GetSimpleSampleSystemMessageTemplatesByIdents', {plain : dto.SampleSystemMessageTemplateSimpleDTO, observable : dto.SampleSystemMessageTemplateObservableSimpleDTO}, realParameters);
+            return service.getData('SampleSystemMessageTemplate/GetSimpleSampleSystemMessageTemplatesByIdents', {plain : dto.SampleSystemMessageTemplateSimpleDTO, observable : dto.SampleSystemMessageTemplateObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleSqlParserTestObj(): async.AsyncFunc3<dto.SqlParserTestObjIdentityDTO, dto.SqlParserTestObjSimpleDTO, dto.SqlParserTestObjObservableSimpleDTO, dto.SqlParserTestObjSimpleDTO, dto.SqlParserTestObjObservableSimpleDTO> {
         return new async.AsyncFunc3((sqlParserTestObjIdentity: dto.SqlParserTestObjIdentityDTO) => {
-            let baseParameters = {sqlParserTestObjIdentity : sqlParserTestObjIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = sqlParserTestObjIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.SqlParserTestObjSimpleDTO, dto.SqlParserTestObjObservableSimpleDTO, dto.SqlParserTestObjSimpleDTO, dto.SqlParserTestObjObservableSimpleDTO>();
-            return service.getData('SqlParserTestObj/GetSimpleSqlParserTestObj', {plain : dto.SqlParserTestObjSimpleDTO, observable : dto.SqlParserTestObjObservableSimpleDTO}, realParameters);
+            return service.getData('SqlParserTestObj/GetSimpleSqlParserTestObj', {plain : dto.SqlParserTestObjSimpleDTO, observable : dto.SqlParserTestObjObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleSqlParserTestObjContainer(): async.AsyncFunc3<dto.SqlParserTestObjContainerIdentityDTO, dto.SqlParserTestObjContainerSimpleDTO, dto.SqlParserTestObjContainerObservableSimpleDTO, dto.SqlParserTestObjContainerSimpleDTO, dto.SqlParserTestObjContainerObservableSimpleDTO> {
         return new async.AsyncFunc3((sqlParserTestObjContainerIdentity: dto.SqlParserTestObjContainerIdentityDTO) => {
-            let baseParameters = {sqlParserTestObjContainerIdentity : sqlParserTestObjContainerIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = sqlParserTestObjContainerIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.SqlParserTestObjContainerSimpleDTO, dto.SqlParserTestObjContainerObservableSimpleDTO, dto.SqlParserTestObjContainerSimpleDTO, dto.SqlParserTestObjContainerObservableSimpleDTO>();
-            return service.getData('SqlParserTestObjContainer/GetSimpleSqlParserTestObjContainer', {plain : dto.SqlParserTestObjContainerSimpleDTO, observable : dto.SqlParserTestObjContainerObservableSimpleDTO}, realParameters);
+            return service.getData('SqlParserTestObjContainer/GetSimpleSqlParserTestObjContainer', {plain : dto.SqlParserTestObjContainerSimpleDTO, observable : dto.SqlParserTestObjContainerObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleSqlParserTestObjContainers(): async.AsyncFunc2<Array<dto.SqlParserTestObjContainerSimpleDTO>, Array<dto.SqlParserTestObjContainerObservableSimpleDTO>, dto.SqlParserTestObjContainerSimpleDTO, dto.SqlParserTestObjContainerObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.SqlParserTestObjContainerSimpleDTO>, Array<dto.SqlParserTestObjContainerObservableSimpleDTO>, dto.SqlParserTestObjContainerSimpleDTO, dto.SqlParserTestObjContainerObservableSimpleDTO>();
-            return service.getData('SqlParserTestObjContainer/GetSimpleSqlParserTestObjContainers', {plain : dto.SqlParserTestObjContainerSimpleDTO, observable : dto.SqlParserTestObjContainerObservableSimpleDTO}, realParameters);
+            return service.getData('SqlParserTestObjContainer/GetSimpleSqlParserTestObjContainers', {plain : dto.SqlParserTestObjContainerSimpleDTO, observable : dto.SqlParserTestObjContainerObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleSqlParserTestObjContainersByIdents(): async.AsyncFunc3<dto.SqlParserTestObjContainerIdentityDTO[], Array<dto.SqlParserTestObjContainerSimpleDTO>, Array<dto.SqlParserTestObjContainerObservableSimpleDTO>, dto.SqlParserTestObjContainerSimpleDTO, dto.SqlParserTestObjContainerObservableSimpleDTO> {
         return new async.AsyncFunc3((sqlParserTestObjContainerIdents: dto.SqlParserTestObjContainerIdentityDTO[]) => {
-            let baseParameters = {sqlParserTestObjContainerIdents : sqlParserTestObjContainerIdents};
-            let realParameters = baseParameters;
+            let baseParameters = sqlParserTestObjContainerIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.SqlParserTestObjContainerSimpleDTO>, Array<dto.SqlParserTestObjContainerObservableSimpleDTO>, dto.SqlParserTestObjContainerSimpleDTO, dto.SqlParserTestObjContainerObservableSimpleDTO>();
-            return service.getData('SqlParserTestObjContainer/GetSimpleSqlParserTestObjContainersByIdents', {plain : dto.SqlParserTestObjContainerSimpleDTO, observable : dto.SqlParserTestObjContainerObservableSimpleDTO}, realParameters);
+            return service.getData('SqlParserTestObjContainer/GetSimpleSqlParserTestObjContainersByIdents', {plain : dto.SqlParserTestObjContainerSimpleDTO, observable : dto.SqlParserTestObjContainerObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleSqlParserTestObjs(): async.AsyncFunc2<Array<dto.SqlParserTestObjSimpleDTO>, Array<dto.SqlParserTestObjObservableSimpleDTO>, dto.SqlParserTestObjSimpleDTO, dto.SqlParserTestObjObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.SqlParserTestObjSimpleDTO>, Array<dto.SqlParserTestObjObservableSimpleDTO>, dto.SqlParserTestObjSimpleDTO, dto.SqlParserTestObjObservableSimpleDTO>();
-            return service.getData('SqlParserTestObj/GetSimpleSqlParserTestObjs', {plain : dto.SqlParserTestObjSimpleDTO, observable : dto.SqlParserTestObjObservableSimpleDTO}, realParameters);
+            return service.getData('SqlParserTestObj/GetSimpleSqlParserTestObjs', {plain : dto.SqlParserTestObjSimpleDTO, observable : dto.SqlParserTestObjObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleSqlParserTestObjsByIdents(): async.AsyncFunc3<dto.SqlParserTestObjIdentityDTO[], Array<dto.SqlParserTestObjSimpleDTO>, Array<dto.SqlParserTestObjObservableSimpleDTO>, dto.SqlParserTestObjSimpleDTO, dto.SqlParserTestObjObservableSimpleDTO> {
         return new async.AsyncFunc3((sqlParserTestObjIdents: dto.SqlParserTestObjIdentityDTO[]) => {
-            let baseParameters = {sqlParserTestObjIdents : sqlParserTestObjIdents};
-            let realParameters = baseParameters;
+            let baseParameters = sqlParserTestObjIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.SqlParserTestObjSimpleDTO>, Array<dto.SqlParserTestObjObservableSimpleDTO>, dto.SqlParserTestObjSimpleDTO, dto.SqlParserTestObjObservableSimpleDTO>();
-            return service.getData('SqlParserTestObj/GetSimpleSqlParserTestObjsByIdents', {plain : dto.SqlParserTestObjSimpleDTO, observable : dto.SqlParserTestObjObservableSimpleDTO}, realParameters);
+            return service.getData('SqlParserTestObj/GetSimpleSqlParserTestObjsByIdents', {plain : dto.SqlParserTestObjSimpleDTO, observable : dto.SqlParserTestObjObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestCustomContextSecurityObj(): async.AsyncFunc3<dto.TestCustomContextSecurityObjIdentityDTO, dto.TestCustomContextSecurityObjSimpleDTO, dto.TestCustomContextSecurityObjObservableSimpleDTO, dto.TestCustomContextSecurityObjSimpleDTO, dto.TestCustomContextSecurityObjObservableSimpleDTO> {
         return new async.AsyncFunc3((testCustomContextSecurityObjIdentity: dto.TestCustomContextSecurityObjIdentityDTO) => {
-            let baseParameters = {testCustomContextSecurityObjIdentity : testCustomContextSecurityObjIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testCustomContextSecurityObjIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestCustomContextSecurityObjSimpleDTO, dto.TestCustomContextSecurityObjObservableSimpleDTO, dto.TestCustomContextSecurityObjSimpleDTO, dto.TestCustomContextSecurityObjObservableSimpleDTO>();
-            return service.getData('TestCustomContextSecurityObj/GetSimpleTestCustomContextSecurityObj', {plain : dto.TestCustomContextSecurityObjSimpleDTO, observable : dto.TestCustomContextSecurityObjObservableSimpleDTO}, realParameters);
+            return service.getData('TestCustomContextSecurityObj/GetSimpleTestCustomContextSecurityObj', {plain : dto.TestCustomContextSecurityObjSimpleDTO, observable : dto.TestCustomContextSecurityObjObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestCustomContextSecurityObjByName(): async.AsyncFunc3<string, dto.TestCustomContextSecurityObjSimpleDTO, dto.TestCustomContextSecurityObjObservableSimpleDTO, dto.TestCustomContextSecurityObjSimpleDTO, dto.TestCustomContextSecurityObjObservableSimpleDTO> {
         return new async.AsyncFunc3((testCustomContextSecurityObjName: string) => {
-            let baseParameters = {testCustomContextSecurityObjName : testCustomContextSecurityObjName};
-            let realParameters = baseParameters;
+            let baseParameters = testCustomContextSecurityObjName;
             let service = Environment.current.context.facadeFactory.createService<dto.TestCustomContextSecurityObjSimpleDTO, dto.TestCustomContextSecurityObjObservableSimpleDTO, dto.TestCustomContextSecurityObjSimpleDTO, dto.TestCustomContextSecurityObjObservableSimpleDTO>();
-            return service.getData('TestCustomContextSecurityObj/GetSimpleTestCustomContextSecurityObjByName', {plain : dto.TestCustomContextSecurityObjSimpleDTO, observable : dto.TestCustomContextSecurityObjObservableSimpleDTO}, realParameters);
+            return service.getData('TestCustomContextSecurityObj/GetSimpleTestCustomContextSecurityObjByName', {plain : dto.TestCustomContextSecurityObjSimpleDTO, observable : dto.TestCustomContextSecurityObjObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestCustomContextSecurityObjs(): async.AsyncFunc2<Array<dto.TestCustomContextSecurityObjSimpleDTO>, Array<dto.TestCustomContextSecurityObjObservableSimpleDTO>, dto.TestCustomContextSecurityObjSimpleDTO, dto.TestCustomContextSecurityObjObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestCustomContextSecurityObjSimpleDTO>, Array<dto.TestCustomContextSecurityObjObservableSimpleDTO>, dto.TestCustomContextSecurityObjSimpleDTO, dto.TestCustomContextSecurityObjObservableSimpleDTO>();
-            return service.getData('TestCustomContextSecurityObj/GetSimpleTestCustomContextSecurityObjs', {plain : dto.TestCustomContextSecurityObjSimpleDTO, observable : dto.TestCustomContextSecurityObjObservableSimpleDTO}, realParameters);
+            return service.getData('TestCustomContextSecurityObj/GetSimpleTestCustomContextSecurityObjs', {plain : dto.TestCustomContextSecurityObjSimpleDTO, observable : dto.TestCustomContextSecurityObjObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestCustomContextSecurityObjsByIdents(): async.AsyncFunc3<dto.TestCustomContextSecurityObjIdentityDTO[], Array<dto.TestCustomContextSecurityObjSimpleDTO>, Array<dto.TestCustomContextSecurityObjObservableSimpleDTO>, dto.TestCustomContextSecurityObjSimpleDTO, dto.TestCustomContextSecurityObjObservableSimpleDTO> {
         return new async.AsyncFunc3((testCustomContextSecurityObjIdents: dto.TestCustomContextSecurityObjIdentityDTO[]) => {
-            let baseParameters = {testCustomContextSecurityObjIdents : testCustomContextSecurityObjIdents};
-            let realParameters = baseParameters;
+            let baseParameters = testCustomContextSecurityObjIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestCustomContextSecurityObjSimpleDTO>, Array<dto.TestCustomContextSecurityObjObservableSimpleDTO>, dto.TestCustomContextSecurityObjSimpleDTO, dto.TestCustomContextSecurityObjObservableSimpleDTO>();
-            return service.getData('TestCustomContextSecurityObj/GetSimpleTestCustomContextSecurityObjsByIdents', {plain : dto.TestCustomContextSecurityObjSimpleDTO, observable : dto.TestCustomContextSecurityObjObservableSimpleDTO}, realParameters);
+            return service.getData('TestCustomContextSecurityObj/GetSimpleTestCustomContextSecurityObjsByIdents', {plain : dto.TestCustomContextSecurityObjSimpleDTO, observable : dto.TestCustomContextSecurityObjObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestImmutableObj(): async.AsyncFunc3<dto.TestImmutableObjIdentityDTO, dto.TestImmutableObjSimpleDTO, dto.TestImmutableObjObservableSimpleDTO, dto.TestImmutableObjSimpleDTO, dto.TestImmutableObjObservableSimpleDTO> {
         return new async.AsyncFunc3((testImmutableObjIdentity: dto.TestImmutableObjIdentityDTO) => {
-            let baseParameters = {testImmutableObjIdentity : testImmutableObjIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testImmutableObjIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestImmutableObjSimpleDTO, dto.TestImmutableObjObservableSimpleDTO, dto.TestImmutableObjSimpleDTO, dto.TestImmutableObjObservableSimpleDTO>();
-            return service.getData('TestImmutableObj/GetSimpleTestImmutableObj', {plain : dto.TestImmutableObjSimpleDTO, observable : dto.TestImmutableObjObservableSimpleDTO}, realParameters);
+            return service.getData('TestImmutableObj/GetSimpleTestImmutableObj', {plain : dto.TestImmutableObjSimpleDTO, observable : dto.TestImmutableObjObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestImmutableObjs(): async.AsyncFunc2<Array<dto.TestImmutableObjSimpleDTO>, Array<dto.TestImmutableObjObservableSimpleDTO>, dto.TestImmutableObjSimpleDTO, dto.TestImmutableObjObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestImmutableObjSimpleDTO>, Array<dto.TestImmutableObjObservableSimpleDTO>, dto.TestImmutableObjSimpleDTO, dto.TestImmutableObjObservableSimpleDTO>();
-            return service.getData('TestImmutableObj/GetSimpleTestImmutableObjs', {plain : dto.TestImmutableObjSimpleDTO, observable : dto.TestImmutableObjObservableSimpleDTO}, realParameters);
+            return service.getData('TestImmutableObj/GetSimpleTestImmutableObjs', {plain : dto.TestImmutableObjSimpleDTO, observable : dto.TestImmutableObjObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestImmutableObjsByIdents(): async.AsyncFunc3<dto.TestImmutableObjIdentityDTO[], Array<dto.TestImmutableObjSimpleDTO>, Array<dto.TestImmutableObjObservableSimpleDTO>, dto.TestImmutableObjSimpleDTO, dto.TestImmutableObjObservableSimpleDTO> {
         return new async.AsyncFunc3((testImmutableObjIdents: dto.TestImmutableObjIdentityDTO[]) => {
-            let baseParameters = {testImmutableObjIdents : testImmutableObjIdents};
-            let realParameters = baseParameters;
+            let baseParameters = testImmutableObjIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestImmutableObjSimpleDTO>, Array<dto.TestImmutableObjObservableSimpleDTO>, dto.TestImmutableObjSimpleDTO, dto.TestImmutableObjObservableSimpleDTO>();
-            return service.getData('TestImmutableObj/GetSimpleTestImmutableObjsByIdents', {plain : dto.TestImmutableObjSimpleDTO, observable : dto.TestImmutableObjObservableSimpleDTO}, realParameters);
+            return service.getData('TestImmutableObj/GetSimpleTestImmutableObjsByIdents', {plain : dto.TestImmutableObjSimpleDTO, observable : dto.TestImmutableObjObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestRootSecurityObj(): async.AsyncFunc3<dto.TestRootSecurityObjIdentityDTO, dto.TestRootSecurityObjSimpleDTO, dto.TestRootSecurityObjObservableSimpleDTO, dto.TestRootSecurityObjSimpleDTO, dto.TestRootSecurityObjObservableSimpleDTO> {
         return new async.AsyncFunc3((testRootSecurityObjIdentity: dto.TestRootSecurityObjIdentityDTO) => {
-            let baseParameters = {testRootSecurityObjIdentity : testRootSecurityObjIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testRootSecurityObjIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestRootSecurityObjSimpleDTO, dto.TestRootSecurityObjObservableSimpleDTO, dto.TestRootSecurityObjSimpleDTO, dto.TestRootSecurityObjObservableSimpleDTO>();
-            return service.getData('TestRootSecurityObj/GetSimpleTestRootSecurityObj', {plain : dto.TestRootSecurityObjSimpleDTO, observable : dto.TestRootSecurityObjObservableSimpleDTO}, realParameters);
+            return service.getData('TestRootSecurityObj/GetSimpleTestRootSecurityObj', {plain : dto.TestRootSecurityObjSimpleDTO, observable : dto.TestRootSecurityObjObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestRootSecurityObjByName(): async.AsyncFunc3<string, dto.TestRootSecurityObjSimpleDTO, dto.TestRootSecurityObjObservableSimpleDTO, dto.TestRootSecurityObjSimpleDTO, dto.TestRootSecurityObjObservableSimpleDTO> {
         return new async.AsyncFunc3((testRootSecurityObjName: string) => {
-            let baseParameters = {testRootSecurityObjName : testRootSecurityObjName};
-            let realParameters = baseParameters;
+            let baseParameters = testRootSecurityObjName;
             let service = Environment.current.context.facadeFactory.createService<dto.TestRootSecurityObjSimpleDTO, dto.TestRootSecurityObjObservableSimpleDTO, dto.TestRootSecurityObjSimpleDTO, dto.TestRootSecurityObjObservableSimpleDTO>();
-            return service.getData('TestRootSecurityObj/GetSimpleTestRootSecurityObjByName', {plain : dto.TestRootSecurityObjSimpleDTO, observable : dto.TestRootSecurityObjObservableSimpleDTO}, realParameters);
+            return service.getData('TestRootSecurityObj/GetSimpleTestRootSecurityObjByName', {plain : dto.TestRootSecurityObjSimpleDTO, observable : dto.TestRootSecurityObjObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestRootSecurityObjs(): async.AsyncFunc2<Array<dto.TestRootSecurityObjSimpleDTO>, Array<dto.TestRootSecurityObjObservableSimpleDTO>, dto.TestRootSecurityObjSimpleDTO, dto.TestRootSecurityObjObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestRootSecurityObjSimpleDTO>, Array<dto.TestRootSecurityObjObservableSimpleDTO>, dto.TestRootSecurityObjSimpleDTO, dto.TestRootSecurityObjObservableSimpleDTO>();
-            return service.getData('TestRootSecurityObj/GetSimpleTestRootSecurityObjs', {plain : dto.TestRootSecurityObjSimpleDTO, observable : dto.TestRootSecurityObjObservableSimpleDTO}, realParameters);
+            return service.getData('TestRootSecurityObj/GetSimpleTestRootSecurityObjs', {plain : dto.TestRootSecurityObjSimpleDTO, observable : dto.TestRootSecurityObjObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestRootSecurityObjsByIdents(): async.AsyncFunc3<dto.TestRootSecurityObjIdentityDTO[], Array<dto.TestRootSecurityObjSimpleDTO>, Array<dto.TestRootSecurityObjObservableSimpleDTO>, dto.TestRootSecurityObjSimpleDTO, dto.TestRootSecurityObjObservableSimpleDTO> {
         return new async.AsyncFunc3((testRootSecurityObjIdents: dto.TestRootSecurityObjIdentityDTO[]) => {
-            let baseParameters = {testRootSecurityObjIdents : testRootSecurityObjIdents};
-            let realParameters = baseParameters;
+            let baseParameters = testRootSecurityObjIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestRootSecurityObjSimpleDTO>, Array<dto.TestRootSecurityObjObservableSimpleDTO>, dto.TestRootSecurityObjSimpleDTO, dto.TestRootSecurityObjObservableSimpleDTO>();
-            return service.getData('TestRootSecurityObj/GetSimpleTestRootSecurityObjsByIdents', {plain : dto.TestRootSecurityObjSimpleDTO, observable : dto.TestRootSecurityObjObservableSimpleDTO}, realParameters);
+            return service.getData('TestRootSecurityObj/GetSimpleTestRootSecurityObjsByIdents', {plain : dto.TestRootSecurityObjSimpleDTO, observable : dto.TestRootSecurityObjObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestSecurityObjItem(): async.AsyncFunc3<dto.TestSecurityObjItemIdentityDTO, dto.TestSecurityObjItemSimpleDTO, dto.TestSecurityObjItemObservableSimpleDTO, dto.TestSecurityObjItemSimpleDTO, dto.TestSecurityObjItemObservableSimpleDTO> {
         return new async.AsyncFunc3((testSecurityObjItemIdentity: dto.TestSecurityObjItemIdentityDTO) => {
-            let baseParameters = {testSecurityObjItemIdentity : testSecurityObjItemIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testSecurityObjItemIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecurityObjItemSimpleDTO, dto.TestSecurityObjItemObservableSimpleDTO, dto.TestSecurityObjItemSimpleDTO, dto.TestSecurityObjItemObservableSimpleDTO>();
-            return service.getData('TestSecurityObjItem/GetSimpleTestSecurityObjItem', {plain : dto.TestSecurityObjItemSimpleDTO, observable : dto.TestSecurityObjItemObservableSimpleDTO}, realParameters);
+            return service.getData('TestSecurityObjItem/GetSimpleTestSecurityObjItem', {plain : dto.TestSecurityObjItemSimpleDTO, observable : dto.TestSecurityObjItemObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestSecurityObjItemByName(): async.AsyncFunc3<string, dto.TestSecurityObjItemSimpleDTO, dto.TestSecurityObjItemObservableSimpleDTO, dto.TestSecurityObjItemSimpleDTO, dto.TestSecurityObjItemObservableSimpleDTO> {
         return new async.AsyncFunc3((testSecurityObjItemName: string) => {
-            let baseParameters = {testSecurityObjItemName : testSecurityObjItemName};
-            let realParameters = baseParameters;
+            let baseParameters = testSecurityObjItemName;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecurityObjItemSimpleDTO, dto.TestSecurityObjItemObservableSimpleDTO, dto.TestSecurityObjItemSimpleDTO, dto.TestSecurityObjItemObservableSimpleDTO>();
-            return service.getData('TestSecurityObjItem/GetSimpleTestSecurityObjItemByName', {plain : dto.TestSecurityObjItemSimpleDTO, observable : dto.TestSecurityObjItemObservableSimpleDTO}, realParameters);
+            return service.getData('TestSecurityObjItem/GetSimpleTestSecurityObjItemByName', {plain : dto.TestSecurityObjItemSimpleDTO, observable : dto.TestSecurityObjItemObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestSecurityObjItems(): async.AsyncFunc2<Array<dto.TestSecurityObjItemSimpleDTO>, Array<dto.TestSecurityObjItemObservableSimpleDTO>, dto.TestSecurityObjItemSimpleDTO, dto.TestSecurityObjItemObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecurityObjItemSimpleDTO>, Array<dto.TestSecurityObjItemObservableSimpleDTO>, dto.TestSecurityObjItemSimpleDTO, dto.TestSecurityObjItemObservableSimpleDTO>();
-            return service.getData('TestSecurityObjItem/GetSimpleTestSecurityObjItems', {plain : dto.TestSecurityObjItemSimpleDTO, observable : dto.TestSecurityObjItemObservableSimpleDTO}, realParameters);
+            return service.getData('TestSecurityObjItem/GetSimpleTestSecurityObjItems', {plain : dto.TestSecurityObjItemSimpleDTO, observable : dto.TestSecurityObjItemObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestSecurityObjItemsByIdents(): async.AsyncFunc3<dto.TestSecurityObjItemIdentityDTO[], Array<dto.TestSecurityObjItemSimpleDTO>, Array<dto.TestSecurityObjItemObservableSimpleDTO>, dto.TestSecurityObjItemSimpleDTO, dto.TestSecurityObjItemObservableSimpleDTO> {
         return new async.AsyncFunc3((testSecurityObjItemIdents: dto.TestSecurityObjItemIdentityDTO[]) => {
-            let baseParameters = {testSecurityObjItemIdents : testSecurityObjItemIdents};
-            let realParameters = baseParameters;
+            let baseParameters = testSecurityObjItemIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecurityObjItemSimpleDTO>, Array<dto.TestSecurityObjItemObservableSimpleDTO>, dto.TestSecurityObjItemSimpleDTO, dto.TestSecurityObjItemObservableSimpleDTO>();
-            return service.getData('TestSecurityObjItem/GetSimpleTestSecurityObjItemsByIdents', {plain : dto.TestSecurityObjItemSimpleDTO, observable : dto.TestSecurityObjItemObservableSimpleDTO}, realParameters);
+            return service.getData('TestSecurityObjItem/GetSimpleTestSecurityObjItemsByIdents', {plain : dto.TestSecurityObjItemSimpleDTO, observable : dto.TestSecurityObjItemObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestSecuritySubObjItem(): async.AsyncFunc3<dto.TestSecuritySubObjItemIdentityDTO, dto.TestSecuritySubObjItemSimpleDTO, dto.TestSecuritySubObjItemObservableSimpleDTO, dto.TestSecuritySubObjItemSimpleDTO, dto.TestSecuritySubObjItemObservableSimpleDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItemIdentity: dto.TestSecuritySubObjItemIdentityDTO) => {
-            let baseParameters = {testSecuritySubObjItemIdentity : testSecuritySubObjItemIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItemIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItemSimpleDTO, dto.TestSecuritySubObjItemObservableSimpleDTO, dto.TestSecuritySubObjItemSimpleDTO, dto.TestSecuritySubObjItemObservableSimpleDTO>();
-            return service.getData('TestSecuritySubObjItem/GetSimpleTestSecuritySubObjItem', {plain : dto.TestSecuritySubObjItemSimpleDTO, observable : dto.TestSecuritySubObjItemObservableSimpleDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem/GetSimpleTestSecuritySubObjItem', {plain : dto.TestSecuritySubObjItemSimpleDTO, observable : dto.TestSecuritySubObjItemObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestSecuritySubObjItem2(): async.AsyncFunc3<dto.TestSecuritySubObjItem2IdentityDTO, dto.TestSecuritySubObjItem2SimpleDTO, dto.TestSecuritySubObjItem2ObservableSimpleDTO, dto.TestSecuritySubObjItem2SimpleDTO, dto.TestSecuritySubObjItem2ObservableSimpleDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem2Identity: dto.TestSecuritySubObjItem2IdentityDTO) => {
-            let baseParameters = {testSecuritySubObjItem2Identity : testSecuritySubObjItem2Identity};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem2Identity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItem2SimpleDTO, dto.TestSecuritySubObjItem2ObservableSimpleDTO, dto.TestSecuritySubObjItem2SimpleDTO, dto.TestSecuritySubObjItem2ObservableSimpleDTO>();
-            return service.getData('TestSecuritySubObjItem2/GetSimpleTestSecuritySubObjItem2', {plain : dto.TestSecuritySubObjItem2SimpleDTO, observable : dto.TestSecuritySubObjItem2ObservableSimpleDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem2/GetSimpleTestSecuritySubObjItem2', {plain : dto.TestSecuritySubObjItem2SimpleDTO, observable : dto.TestSecuritySubObjItem2ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestSecuritySubObjItem2ByName(): async.AsyncFunc3<string, dto.TestSecuritySubObjItem2SimpleDTO, dto.TestSecuritySubObjItem2ObservableSimpleDTO, dto.TestSecuritySubObjItem2SimpleDTO, dto.TestSecuritySubObjItem2ObservableSimpleDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem2Name: string) => {
-            let baseParameters = {testSecuritySubObjItem2Name : testSecuritySubObjItem2Name};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem2Name;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItem2SimpleDTO, dto.TestSecuritySubObjItem2ObservableSimpleDTO, dto.TestSecuritySubObjItem2SimpleDTO, dto.TestSecuritySubObjItem2ObservableSimpleDTO>();
-            return service.getData('TestSecuritySubObjItem2/GetSimpleTestSecuritySubObjItem2ByName', {plain : dto.TestSecuritySubObjItem2SimpleDTO, observable : dto.TestSecuritySubObjItem2ObservableSimpleDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem2/GetSimpleTestSecuritySubObjItem2ByName', {plain : dto.TestSecuritySubObjItem2SimpleDTO, observable : dto.TestSecuritySubObjItem2ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestSecuritySubObjItem2s(): async.AsyncFunc2<Array<dto.TestSecuritySubObjItem2SimpleDTO>, Array<dto.TestSecuritySubObjItem2ObservableSimpleDTO>, dto.TestSecuritySubObjItem2SimpleDTO, dto.TestSecuritySubObjItem2ObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecuritySubObjItem2SimpleDTO>, Array<dto.TestSecuritySubObjItem2ObservableSimpleDTO>, dto.TestSecuritySubObjItem2SimpleDTO, dto.TestSecuritySubObjItem2ObservableSimpleDTO>();
-            return service.getData('TestSecuritySubObjItem2/GetSimpleTestSecuritySubObjItem2s', {plain : dto.TestSecuritySubObjItem2SimpleDTO, observable : dto.TestSecuritySubObjItem2ObservableSimpleDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem2/GetSimpleTestSecuritySubObjItem2s', {plain : dto.TestSecuritySubObjItem2SimpleDTO, observable : dto.TestSecuritySubObjItem2ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestSecuritySubObjItem2sByIdents(): async.AsyncFunc3<dto.TestSecuritySubObjItem2IdentityDTO[], Array<dto.TestSecuritySubObjItem2SimpleDTO>, Array<dto.TestSecuritySubObjItem2ObservableSimpleDTO>, dto.TestSecuritySubObjItem2SimpleDTO, dto.TestSecuritySubObjItem2ObservableSimpleDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem2Idents: dto.TestSecuritySubObjItem2IdentityDTO[]) => {
-            let baseParameters = {testSecuritySubObjItem2Idents : testSecuritySubObjItem2Idents};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem2Idents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecuritySubObjItem2SimpleDTO>, Array<dto.TestSecuritySubObjItem2ObservableSimpleDTO>, dto.TestSecuritySubObjItem2SimpleDTO, dto.TestSecuritySubObjItem2ObservableSimpleDTO>();
-            return service.getData('TestSecuritySubObjItem2/GetSimpleTestSecuritySubObjItem2sByIdents', {plain : dto.TestSecuritySubObjItem2SimpleDTO, observable : dto.TestSecuritySubObjItem2ObservableSimpleDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem2/GetSimpleTestSecuritySubObjItem2sByIdents', {plain : dto.TestSecuritySubObjItem2SimpleDTO, observable : dto.TestSecuritySubObjItem2ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestSecuritySubObjItem3(): async.AsyncFunc3<dto.TestSecuritySubObjItem3IdentityDTO, dto.TestSecuritySubObjItem3SimpleDTO, dto.TestSecuritySubObjItem3ObservableSimpleDTO, dto.TestSecuritySubObjItem3SimpleDTO, dto.TestSecuritySubObjItem3ObservableSimpleDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem3Identity: dto.TestSecuritySubObjItem3IdentityDTO) => {
-            let baseParameters = {testSecuritySubObjItem3Identity : testSecuritySubObjItem3Identity};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem3Identity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItem3SimpleDTO, dto.TestSecuritySubObjItem3ObservableSimpleDTO, dto.TestSecuritySubObjItem3SimpleDTO, dto.TestSecuritySubObjItem3ObservableSimpleDTO>();
-            return service.getData('TestSecuritySubObjItem3/GetSimpleTestSecuritySubObjItem3', {plain : dto.TestSecuritySubObjItem3SimpleDTO, observable : dto.TestSecuritySubObjItem3ObservableSimpleDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem3/GetSimpleTestSecuritySubObjItem3', {plain : dto.TestSecuritySubObjItem3SimpleDTO, observable : dto.TestSecuritySubObjItem3ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestSecuritySubObjItem3ByName(): async.AsyncFunc3<string, dto.TestSecuritySubObjItem3SimpleDTO, dto.TestSecuritySubObjItem3ObservableSimpleDTO, dto.TestSecuritySubObjItem3SimpleDTO, dto.TestSecuritySubObjItem3ObservableSimpleDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem3Name: string) => {
-            let baseParameters = {testSecuritySubObjItem3Name : testSecuritySubObjItem3Name};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem3Name;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItem3SimpleDTO, dto.TestSecuritySubObjItem3ObservableSimpleDTO, dto.TestSecuritySubObjItem3SimpleDTO, dto.TestSecuritySubObjItem3ObservableSimpleDTO>();
-            return service.getData('TestSecuritySubObjItem3/GetSimpleTestSecuritySubObjItem3ByName', {plain : dto.TestSecuritySubObjItem3SimpleDTO, observable : dto.TestSecuritySubObjItem3ObservableSimpleDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem3/GetSimpleTestSecuritySubObjItem3ByName', {plain : dto.TestSecuritySubObjItem3SimpleDTO, observable : dto.TestSecuritySubObjItem3ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestSecuritySubObjItem3s(): async.AsyncFunc2<Array<dto.TestSecuritySubObjItem3SimpleDTO>, Array<dto.TestSecuritySubObjItem3ObservableSimpleDTO>, dto.TestSecuritySubObjItem3SimpleDTO, dto.TestSecuritySubObjItem3ObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecuritySubObjItem3SimpleDTO>, Array<dto.TestSecuritySubObjItem3ObservableSimpleDTO>, dto.TestSecuritySubObjItem3SimpleDTO, dto.TestSecuritySubObjItem3ObservableSimpleDTO>();
-            return service.getData('TestSecuritySubObjItem3/GetSimpleTestSecuritySubObjItem3s', {plain : dto.TestSecuritySubObjItem3SimpleDTO, observable : dto.TestSecuritySubObjItem3ObservableSimpleDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem3/GetSimpleTestSecuritySubObjItem3s', {plain : dto.TestSecuritySubObjItem3SimpleDTO, observable : dto.TestSecuritySubObjItem3ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestSecuritySubObjItem3sByIdents(): async.AsyncFunc3<dto.TestSecuritySubObjItem3IdentityDTO[], Array<dto.TestSecuritySubObjItem3SimpleDTO>, Array<dto.TestSecuritySubObjItem3ObservableSimpleDTO>, dto.TestSecuritySubObjItem3SimpleDTO, dto.TestSecuritySubObjItem3ObservableSimpleDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem3Idents: dto.TestSecuritySubObjItem3IdentityDTO[]) => {
-            let baseParameters = {testSecuritySubObjItem3Idents : testSecuritySubObjItem3Idents};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem3Idents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecuritySubObjItem3SimpleDTO>, Array<dto.TestSecuritySubObjItem3ObservableSimpleDTO>, dto.TestSecuritySubObjItem3SimpleDTO, dto.TestSecuritySubObjItem3ObservableSimpleDTO>();
-            return service.getData('TestSecuritySubObjItem3/GetSimpleTestSecuritySubObjItem3sByIdents', {plain : dto.TestSecuritySubObjItem3SimpleDTO, observable : dto.TestSecuritySubObjItem3ObservableSimpleDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem3/GetSimpleTestSecuritySubObjItem3sByIdents', {plain : dto.TestSecuritySubObjItem3SimpleDTO, observable : dto.TestSecuritySubObjItem3ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestSecuritySubObjItemByName(): async.AsyncFunc3<string, dto.TestSecuritySubObjItemSimpleDTO, dto.TestSecuritySubObjItemObservableSimpleDTO, dto.TestSecuritySubObjItemSimpleDTO, dto.TestSecuritySubObjItemObservableSimpleDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItemName: string) => {
-            let baseParameters = {testSecuritySubObjItemName : testSecuritySubObjItemName};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItemName;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItemSimpleDTO, dto.TestSecuritySubObjItemObservableSimpleDTO, dto.TestSecuritySubObjItemSimpleDTO, dto.TestSecuritySubObjItemObservableSimpleDTO>();
-            return service.getData('TestSecuritySubObjItem/GetSimpleTestSecuritySubObjItemByName', {plain : dto.TestSecuritySubObjItemSimpleDTO, observable : dto.TestSecuritySubObjItemObservableSimpleDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem/GetSimpleTestSecuritySubObjItemByName', {plain : dto.TestSecuritySubObjItemSimpleDTO, observable : dto.TestSecuritySubObjItemObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestSecuritySubObjItems(): async.AsyncFunc2<Array<dto.TestSecuritySubObjItemSimpleDTO>, Array<dto.TestSecuritySubObjItemObservableSimpleDTO>, dto.TestSecuritySubObjItemSimpleDTO, dto.TestSecuritySubObjItemObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecuritySubObjItemSimpleDTO>, Array<dto.TestSecuritySubObjItemObservableSimpleDTO>, dto.TestSecuritySubObjItemSimpleDTO, dto.TestSecuritySubObjItemObservableSimpleDTO>();
-            return service.getData('TestSecuritySubObjItem/GetSimpleTestSecuritySubObjItems', {plain : dto.TestSecuritySubObjItemSimpleDTO, observable : dto.TestSecuritySubObjItemObservableSimpleDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem/GetSimpleTestSecuritySubObjItems', {plain : dto.TestSecuritySubObjItemSimpleDTO, observable : dto.TestSecuritySubObjItemObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleTestSecuritySubObjItemsByIdents(): async.AsyncFunc3<dto.TestSecuritySubObjItemIdentityDTO[], Array<dto.TestSecuritySubObjItemSimpleDTO>, Array<dto.TestSecuritySubObjItemObservableSimpleDTO>, dto.TestSecuritySubObjItemSimpleDTO, dto.TestSecuritySubObjItemObservableSimpleDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItemIdents: dto.TestSecuritySubObjItemIdentityDTO[]) => {
-            let baseParameters = {testSecuritySubObjItemIdents : testSecuritySubObjItemIdents};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItemIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecuritySubObjItemSimpleDTO>, Array<dto.TestSecuritySubObjItemObservableSimpleDTO>, dto.TestSecuritySubObjItemSimpleDTO, dto.TestSecuritySubObjItemObservableSimpleDTO>();
-            return service.getData('TestSecuritySubObjItem/GetSimpleTestSecuritySubObjItemsByIdents', {plain : dto.TestSecuritySubObjItemSimpleDTO, observable : dto.TestSecuritySubObjItemObservableSimpleDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem/GetSimpleTestSecuritySubObjItemsByIdents', {plain : dto.TestSecuritySubObjItemSimpleDTO, observable : dto.TestSecuritySubObjItemObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleWorkingCalendar1676(): async.AsyncFunc3<dto.WorkingCalendar1676IdentityDTO, dto.WorkingCalendar1676SimpleDTO, dto.WorkingCalendar1676ObservableSimpleDTO, dto.WorkingCalendar1676SimpleDTO, dto.WorkingCalendar1676ObservableSimpleDTO> {
         return new async.AsyncFunc3((workingCalendar1676Identity: dto.WorkingCalendar1676IdentityDTO) => {
-            let baseParameters = {workingCalendar1676Identity : workingCalendar1676Identity};
-            let realParameters = baseParameters;
+            let baseParameters = workingCalendar1676Identity;
             let service = Environment.current.context.facadeFactory.createService<dto.WorkingCalendar1676SimpleDTO, dto.WorkingCalendar1676ObservableSimpleDTO, dto.WorkingCalendar1676SimpleDTO, dto.WorkingCalendar1676ObservableSimpleDTO>();
-            return service.getData('WorkingCalendar1676/GetSimpleWorkingCalendar1676', {plain : dto.WorkingCalendar1676SimpleDTO, observable : dto.WorkingCalendar1676ObservableSimpleDTO}, realParameters);
+            return service.getData('WorkingCalendar1676/GetSimpleWorkingCalendar1676', {plain : dto.WorkingCalendar1676SimpleDTO, observable : dto.WorkingCalendar1676ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleWorkingCalendar1676ByName(): async.AsyncFunc3<string, dto.WorkingCalendar1676SimpleDTO, dto.WorkingCalendar1676ObservableSimpleDTO, dto.WorkingCalendar1676SimpleDTO, dto.WorkingCalendar1676ObservableSimpleDTO> {
         return new async.AsyncFunc3((workingCalendar1676Name: string) => {
-            let baseParameters = {workingCalendar1676Name : workingCalendar1676Name};
-            let realParameters = baseParameters;
+            let baseParameters = workingCalendar1676Name;
             let service = Environment.current.context.facadeFactory.createService<dto.WorkingCalendar1676SimpleDTO, dto.WorkingCalendar1676ObservableSimpleDTO, dto.WorkingCalendar1676SimpleDTO, dto.WorkingCalendar1676ObservableSimpleDTO>();
-            return service.getData('WorkingCalendar1676/GetSimpleWorkingCalendar1676ByName', {plain : dto.WorkingCalendar1676SimpleDTO, observable : dto.WorkingCalendar1676ObservableSimpleDTO}, realParameters);
+            return service.getData('WorkingCalendar1676/GetSimpleWorkingCalendar1676ByName', {plain : dto.WorkingCalendar1676SimpleDTO, observable : dto.WorkingCalendar1676ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleWorkingCalendar1676s(): async.AsyncFunc2<Array<dto.WorkingCalendar1676SimpleDTO>, Array<dto.WorkingCalendar1676ObservableSimpleDTO>, dto.WorkingCalendar1676SimpleDTO, dto.WorkingCalendar1676ObservableSimpleDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.WorkingCalendar1676SimpleDTO>, Array<dto.WorkingCalendar1676ObservableSimpleDTO>, dto.WorkingCalendar1676SimpleDTO, dto.WorkingCalendar1676ObservableSimpleDTO>();
-            return service.getData('WorkingCalendar1676/GetSimpleWorkingCalendar1676s', {plain : dto.WorkingCalendar1676SimpleDTO, observable : dto.WorkingCalendar1676ObservableSimpleDTO}, realParameters);
+            return service.getData('WorkingCalendar1676/GetSimpleWorkingCalendar1676s', {plain : dto.WorkingCalendar1676SimpleDTO, observable : dto.WorkingCalendar1676ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getSimpleWorkingCalendar1676sByIdents(): async.AsyncFunc3<dto.WorkingCalendar1676IdentityDTO[], Array<dto.WorkingCalendar1676SimpleDTO>, Array<dto.WorkingCalendar1676ObservableSimpleDTO>, dto.WorkingCalendar1676SimpleDTO, dto.WorkingCalendar1676ObservableSimpleDTO> {
         return new async.AsyncFunc3((workingCalendar1676Idents: dto.WorkingCalendar1676IdentityDTO[]) => {
-            let baseParameters = {workingCalendar1676Idents : workingCalendar1676Idents};
-            let realParameters = baseParameters;
+            let baseParameters = workingCalendar1676Idents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.WorkingCalendar1676SimpleDTO>, Array<dto.WorkingCalendar1676ObservableSimpleDTO>, dto.WorkingCalendar1676SimpleDTO, dto.WorkingCalendar1676ObservableSimpleDTO>();
-            return service.getData('WorkingCalendar1676/GetSimpleWorkingCalendar1676sByIdents', {plain : dto.WorkingCalendar1676SimpleDTO, observable : dto.WorkingCalendar1676ObservableSimpleDTO}, realParameters);
+            return service.getData('WorkingCalendar1676/GetSimpleWorkingCalendar1676sByIdents', {plain : dto.WorkingCalendar1676SimpleDTO, observable : dto.WorkingCalendar1676ObservableSimpleDTO}, baseParameters);
         });
     }
 
     function _getTestBusinessUnit(): async.AsyncFunc3<dto.BusinessUnitIdentityDTO, dto.TestBusinessUnitProjectionDTO, dto.TestBusinessUnitObservableProjectionDTO, dto.TestBusinessUnitProjectionDTO, dto.TestBusinessUnitObservableProjectionDTO> {
         return new async.AsyncFunc3((testBusinessUnitIdentity: dto.BusinessUnitIdentityDTO) => {
-            let baseParameters = {testBusinessUnitIdentity : testBusinessUnitIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testBusinessUnitIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestBusinessUnitProjectionDTO, dto.TestBusinessUnitObservableProjectionDTO, dto.TestBusinessUnitProjectionDTO, dto.TestBusinessUnitObservableProjectionDTO>();
-            return service.getData('BusinessUnit/GetTestBusinessUnit', {plain : dto.TestBusinessUnitProjectionDTO, observable : dto.TestBusinessUnitObservableProjectionDTO}, realParameters);
+            return service.getData('BusinessUnit/GetTestBusinessUnit', {plain : dto.TestBusinessUnitProjectionDTO, observable : dto.TestBusinessUnitObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestBusinessUnitsByOperation(): async.AsyncFunc3<dto.SampleSystemBusinessUnitSecurityOperationCode, Array<dto.TestBusinessUnitProjectionDTO>, Array<dto.TestBusinessUnitObservableProjectionDTO>, dto.TestBusinessUnitProjectionDTO, dto.TestBusinessUnitObservableProjectionDTO> {
         return new async.AsyncFunc3((securityOperationCode: dto.SampleSystemBusinessUnitSecurityOperationCode) => {
-            let baseParameters = {securityOperationCode : securityOperationCode};
-            let realParameters = baseParameters;
+            let baseParameters = securityOperationCode;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestBusinessUnitProjectionDTO>, Array<dto.TestBusinessUnitObservableProjectionDTO>, dto.TestBusinessUnitProjectionDTO, dto.TestBusinessUnitObservableProjectionDTO>();
-            return service.getData('BusinessUnit/GetTestBusinessUnitsByOperation', {plain : dto.TestBusinessUnitProjectionDTO, observable : dto.TestBusinessUnitObservableProjectionDTO}, realParameters);
+            return service.getData('BusinessUnit/GetTestBusinessUnitsByOperation', {plain : dto.TestBusinessUnitProjectionDTO, observable : dto.TestBusinessUnitObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestCustomContextSecurityObjProjection(): async.AsyncFunc3<dto.TestCustomContextSecurityObjIdentityDTO, dto.TestCustomContextSecurityObjProjectionDTO, dto.TestCustomContextSecurityObjObservableProjectionDTO, dto.TestCustomContextSecurityObjProjectionDTO, dto.TestCustomContextSecurityObjObservableProjectionDTO> {
         return new async.AsyncFunc3((testCustomContextSecurityObjProjectionIdentity: dto.TestCustomContextSecurityObjIdentityDTO) => {
-            let baseParameters = {testCustomContextSecurityObjProjectionIdentity : testCustomContextSecurityObjProjectionIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testCustomContextSecurityObjProjectionIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestCustomContextSecurityObjProjectionDTO, dto.TestCustomContextSecurityObjObservableProjectionDTO, dto.TestCustomContextSecurityObjProjectionDTO, dto.TestCustomContextSecurityObjObservableProjectionDTO>();
-            return service.getData('TestCustomContextSecurityObj/GetTestCustomContextSecurityObjProjection', {plain : dto.TestCustomContextSecurityObjProjectionDTO, observable : dto.TestCustomContextSecurityObjObservableProjectionDTO}, realParameters);
+            return service.getData('TestCustomContextSecurityObj/GetTestCustomContextSecurityObjProjection', {plain : dto.TestCustomContextSecurityObjProjectionDTO, observable : dto.TestCustomContextSecurityObjObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestDepartment(): async.AsyncFunc3<dto.HRDepartmentIdentityDTO, dto.TestDepartmentProjectionDTO, dto.TestDepartmentObservableProjectionDTO, dto.TestDepartmentProjectionDTO, dto.TestDepartmentObservableProjectionDTO> {
         return new async.AsyncFunc3((testDepartmentIdentity: dto.HRDepartmentIdentityDTO) => {
-            let baseParameters = {testDepartmentIdentity : testDepartmentIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testDepartmentIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestDepartmentProjectionDTO, dto.TestDepartmentObservableProjectionDTO, dto.TestDepartmentProjectionDTO, dto.TestDepartmentObservableProjectionDTO>();
-            return service.getData('HRDepartment/GetTestDepartment', {plain : dto.TestDepartmentProjectionDTO, observable : dto.TestDepartmentObservableProjectionDTO}, realParameters);
+            return service.getData('HRDepartment/GetTestDepartment', {plain : dto.TestDepartmentProjectionDTO, observable : dto.TestDepartmentObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestDepartmentsByOperation(): async.AsyncFunc3<dto.SampleSystemHRDepartmentSecurityOperationCode, Array<dto.TestDepartmentProjectionDTO>, Array<dto.TestDepartmentObservableProjectionDTO>, dto.TestDepartmentProjectionDTO, dto.TestDepartmentObservableProjectionDTO> {
         return new async.AsyncFunc3((securityOperationCode: dto.SampleSystemHRDepartmentSecurityOperationCode) => {
-            let baseParameters = {securityOperationCode : securityOperationCode};
-            let realParameters = baseParameters;
+            let baseParameters = securityOperationCode;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestDepartmentProjectionDTO>, Array<dto.TestDepartmentObservableProjectionDTO>, dto.TestDepartmentProjectionDTO, dto.TestDepartmentObservableProjectionDTO>();
-            return service.getData('HRDepartment/GetTestDepartmentsByOperation', {plain : dto.TestDepartmentProjectionDTO, observable : dto.TestDepartmentObservableProjectionDTO}, realParameters);
+            return service.getData('HRDepartment/GetTestDepartmentsByOperation', {plain : dto.TestDepartmentProjectionDTO, observable : dto.TestDepartmentObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestEmployee(): async.AsyncFunc3<dto.EmployeeIdentityDTO, dto.TestEmployeeProjectionDTO, dto.TestEmployeeObservableProjectionDTO, dto.TestEmployeeProjectionDTO, dto.TestEmployeeObservableProjectionDTO> {
         return new async.AsyncFunc3((testEmployeeIdentity: dto.EmployeeIdentityDTO) => {
-            let baseParameters = {testEmployeeIdentity : testEmployeeIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testEmployeeIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestEmployeeProjectionDTO, dto.TestEmployeeObservableProjectionDTO, dto.TestEmployeeProjectionDTO, dto.TestEmployeeObservableProjectionDTO>();
-            return service.getData('Employee/GetTestEmployee', {plain : dto.TestEmployeeProjectionDTO, observable : dto.TestEmployeeObservableProjectionDTO}, realParameters);
+            return service.getData('Employee/GetTestEmployee', {plain : dto.TestEmployeeProjectionDTO, observable : dto.TestEmployeeObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestEmployeeBySingleEmployeeFilter(): async.AsyncFunc3<dto.SingleEmployeeFilterModelStrictDTO, dto.TestEmployeeProjectionDTO, dto.TestEmployeeObservableProjectionDTO, dto.TestEmployeeProjectionDTO, dto.TestEmployeeObservableProjectionDTO> {
         return new async.AsyncFunc3((filter: dto.SingleEmployeeFilterModelStrictDTO) => {
-            let baseParameters = {filter : filter.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = filter.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.TestEmployeeProjectionDTO, dto.TestEmployeeObservableProjectionDTO, dto.TestEmployeeProjectionDTO, dto.TestEmployeeObservableProjectionDTO>();
-            return service.getData('Employee/GetTestEmployeeBySingleEmployeeFilter', {plain : dto.TestEmployeeProjectionDTO, observable : dto.TestEmployeeObservableProjectionDTO}, realParameters);
+            return service.getData('Employee/GetTestEmployeeBySingleEmployeeFilter', {plain : dto.TestEmployeeProjectionDTO, observable : dto.TestEmployeeObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestEmployeesByEmployeeFilter(): async.AsyncFunc3<dto.EmployeeFilterModelStrictDTO, Array<dto.TestEmployeeProjectionDTO>, Array<dto.TestEmployeeObservableProjectionDTO>, dto.TestEmployeeProjectionDTO, dto.TestEmployeeObservableProjectionDTO> {
         return new async.AsyncFunc3((filter: dto.EmployeeFilterModelStrictDTO) => {
-            let baseParameters = {filter : filter.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = filter.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestEmployeeProjectionDTO>, Array<dto.TestEmployeeObservableProjectionDTO>, dto.TestEmployeeProjectionDTO, dto.TestEmployeeObservableProjectionDTO>();
-            return service.getData('Employee/GetTestEmployeesByEmployeeFilter', {plain : dto.TestEmployeeProjectionDTO, observable : dto.TestEmployeeObservableProjectionDTO}, realParameters);
+            return service.getData('Employee/GetTestEmployeesByEmployeeFilter', {plain : dto.TestEmployeeProjectionDTO, observable : dto.TestEmployeeObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestEmployeesByFilter(): async.AsyncFunc3<dto.TestEmployeeFilterStrictDTO, Array<dto.TestEmployeeProjectionDTO>, Array<dto.TestEmployeeObservableProjectionDTO>, dto.TestEmployeeProjectionDTO, dto.TestEmployeeObservableProjectionDTO> {
         return new async.AsyncFunc3((filter: dto.TestEmployeeFilterStrictDTO) => {
-            let baseParameters = {filter : filter.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = filter.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestEmployeeProjectionDTO>, Array<dto.TestEmployeeObservableProjectionDTO>, dto.TestEmployeeProjectionDTO, dto.TestEmployeeObservableProjectionDTO>();
-            return service.getData('Employee/GetTestEmployeesByFilter', {plain : dto.TestEmployeeProjectionDTO, observable : dto.TestEmployeeObservableProjectionDTO}, realParameters);
+            return service.getData('Employee/GetTestEmployeesByFilter', {plain : dto.TestEmployeeProjectionDTO, observable : dto.TestEmployeeObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestIMRequest(): async.AsyncFunc3<dto.IMRequestIdentityDTO, dto.TestIMRequestProjectionDTO, dto.TestIMRequestObservableProjectionDTO, dto.TestIMRequestProjectionDTO, dto.TestIMRequestObservableProjectionDTO> {
         return new async.AsyncFunc3((testIMRequestIdentity: dto.IMRequestIdentityDTO) => {
-            let baseParameters = {testIMRequestIdentity : testIMRequestIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testIMRequestIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestIMRequestProjectionDTO, dto.TestIMRequestObservableProjectionDTO, dto.TestIMRequestProjectionDTO, dto.TestIMRequestObservableProjectionDTO>();
-            return service.getData('IMRequest/GetTestIMRequest', {plain : dto.TestIMRequestProjectionDTO, observable : dto.TestIMRequestObservableProjectionDTO}, realParameters);
+            return service.getData('IMRequest/GetTestIMRequest', {plain : dto.TestIMRequestProjectionDTO, observable : dto.TestIMRequestObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestLegacyEmployee(): async.AsyncFunc3<dto.EmployeeIdentityDTO, dto.TestLegacyEmployeeProjectionDTO, dto.TestLegacyEmployeeObservableProjectionDTO, dto.TestLegacyEmployeeProjectionDTO, dto.TestLegacyEmployeeObservableProjectionDTO> {
         return new async.AsyncFunc3((testLegacyEmployeeIdentity: dto.EmployeeIdentityDTO) => {
-            let baseParameters = {testLegacyEmployeeIdentity : testLegacyEmployeeIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testLegacyEmployeeIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestLegacyEmployeeProjectionDTO, dto.TestLegacyEmployeeObservableProjectionDTO, dto.TestLegacyEmployeeProjectionDTO, dto.TestLegacyEmployeeObservableProjectionDTO>();
-            return service.getData('Employee/GetTestLegacyEmployee', {plain : dto.TestLegacyEmployeeProjectionDTO, observable : dto.TestLegacyEmployeeObservableProjectionDTO}, realParameters);
+            return service.getData('Employee/GetTestLegacyEmployee', {plain : dto.TestLegacyEmployeeProjectionDTO, observable : dto.TestLegacyEmployeeObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestLegacyEmployeesByEmployeeFilter(): async.AsyncFunc3<dto.EmployeeFilterModelStrictDTO, Array<dto.TestLegacyEmployeeProjectionDTO>, Array<dto.TestLegacyEmployeeObservableProjectionDTO>, dto.TestLegacyEmployeeProjectionDTO, dto.TestLegacyEmployeeObservableProjectionDTO> {
         return new async.AsyncFunc3((filter: dto.EmployeeFilterModelStrictDTO) => {
-            let baseParameters = {filter : filter.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = filter.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestLegacyEmployeeProjectionDTO>, Array<dto.TestLegacyEmployeeObservableProjectionDTO>, dto.TestLegacyEmployeeProjectionDTO, dto.TestLegacyEmployeeObservableProjectionDTO>();
-            return service.getData('Employee/GetTestLegacyEmployeesByEmployeeFilter', {plain : dto.TestLegacyEmployeeProjectionDTO, observable : dto.TestLegacyEmployeeObservableProjectionDTO}, realParameters);
+            return service.getData('Employee/GetTestLegacyEmployeesByEmployeeFilter', {plain : dto.TestLegacyEmployeeProjectionDTO, observable : dto.TestLegacyEmployeeObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestLocation(): async.AsyncFunc3<dto.LocationIdentityDTO, dto.TestLocationProjectionDTO, dto.TestLocationObservableProjectionDTO, dto.TestLocationProjectionDTO, dto.TestLocationObservableProjectionDTO> {
         return new async.AsyncFunc3((testLocationIdentity: dto.LocationIdentityDTO) => {
-            let baseParameters = {testLocationIdentity : testLocationIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testLocationIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestLocationProjectionDTO, dto.TestLocationObservableProjectionDTO, dto.TestLocationProjectionDTO, dto.TestLocationObservableProjectionDTO>();
-            return service.getData('Location/GetTestLocation', {plain : dto.TestLocationProjectionDTO, observable : dto.TestLocationObservableProjectionDTO}, realParameters);
+            return service.getData('Location/GetTestLocation', {plain : dto.TestLocationProjectionDTO, observable : dto.TestLocationObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestLocationCollectionProperties(): async.AsyncFunc3<dto.LocationIdentityDTO, dto.TestLocationCollectionPropertiesProjectionDTO, dto.TestLocationCollectionPropertiesObservableProjectionDTO, dto.TestLocationCollectionPropertiesProjectionDTO, dto.TestLocationCollectionPropertiesObservableProjectionDTO> {
         return new async.AsyncFunc3((testLocationCollectionPropertiesIdentity: dto.LocationIdentityDTO) => {
-            let baseParameters = {testLocationCollectionPropertiesIdentity : testLocationCollectionPropertiesIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testLocationCollectionPropertiesIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestLocationCollectionPropertiesProjectionDTO, dto.TestLocationCollectionPropertiesObservableProjectionDTO, dto.TestLocationCollectionPropertiesProjectionDTO, dto.TestLocationCollectionPropertiesObservableProjectionDTO>();
-            return service.getData('Location/GetTestLocationCollectionProperties', {plain : dto.TestLocationCollectionPropertiesProjectionDTO, observable : dto.TestLocationCollectionPropertiesObservableProjectionDTO}, realParameters);
+            return service.getData('Location/GetTestLocationCollectionProperties', {plain : dto.TestLocationCollectionPropertiesProjectionDTO, observable : dto.TestLocationCollectionPropertiesObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestLocationCollectionPropertiessByOperation(): async.AsyncFunc3<dto.SampleSystemLocationSecurityOperationCode, Array<dto.TestLocationCollectionPropertiesProjectionDTO>, Array<dto.TestLocationCollectionPropertiesObservableProjectionDTO>, dto.TestLocationCollectionPropertiesProjectionDTO, dto.TestLocationCollectionPropertiesObservableProjectionDTO> {
         return new async.AsyncFunc3((securityOperationCode: dto.SampleSystemLocationSecurityOperationCode) => {
-            let baseParameters = {securityOperationCode : securityOperationCode};
-            let realParameters = baseParameters;
+            let baseParameters = securityOperationCode;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestLocationCollectionPropertiesProjectionDTO>, Array<dto.TestLocationCollectionPropertiesObservableProjectionDTO>, dto.TestLocationCollectionPropertiesProjectionDTO, dto.TestLocationCollectionPropertiesObservableProjectionDTO>();
-            return service.getData('Location/GetTestLocationCollectionPropertiessByOperation', {plain : dto.TestLocationCollectionPropertiesProjectionDTO, observable : dto.TestLocationCollectionPropertiesObservableProjectionDTO}, realParameters);
+            return service.getData('Location/GetTestLocationCollectionPropertiessByOperation', {plain : dto.TestLocationCollectionPropertiesProjectionDTO, observable : dto.TestLocationCollectionPropertiesObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestLocationsByOperation(): async.AsyncFunc3<dto.SampleSystemLocationSecurityOperationCode, Array<dto.TestLocationProjectionDTO>, Array<dto.TestLocationObservableProjectionDTO>, dto.TestLocationProjectionDTO, dto.TestLocationObservableProjectionDTO> {
         return new async.AsyncFunc3((securityOperationCode: dto.SampleSystemLocationSecurityOperationCode) => {
-            let baseParameters = {securityOperationCode : securityOperationCode};
-            let realParameters = baseParameters;
+            let baseParameters = securityOperationCode;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestLocationProjectionDTO>, Array<dto.TestLocationObservableProjectionDTO>, dto.TestLocationProjectionDTO, dto.TestLocationObservableProjectionDTO>();
-            return service.getData('Location/GetTestLocationsByOperation', {plain : dto.TestLocationProjectionDTO, observable : dto.TestLocationObservableProjectionDTO}, realParameters);
+            return service.getData('Location/GetTestLocationsByOperation', {plain : dto.TestLocationProjectionDTO, observable : dto.TestLocationObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestManualEmployeeProjection(): async.AsyncFunc3<dto.EmployeeIdentityDTO, dto.TestManualEmployeeProjectionDTO, dto.TestManualEmployeeObservableProjectionDTO, dto.TestManualEmployeeProjectionDTO, dto.TestManualEmployeeObservableProjectionDTO> {
         return new async.AsyncFunc3((testManualEmployeeProjectionIdentity: dto.EmployeeIdentityDTO) => {
-            let baseParameters = {testManualEmployeeProjectionIdentity : testManualEmployeeProjectionIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testManualEmployeeProjectionIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestManualEmployeeProjectionDTO, dto.TestManualEmployeeObservableProjectionDTO, dto.TestManualEmployeeProjectionDTO, dto.TestManualEmployeeObservableProjectionDTO>();
-            return service.getData('Employee/GetTestManualEmployeeProjection', {plain : dto.TestManualEmployeeProjectionDTO, observable : dto.TestManualEmployeeObservableProjectionDTO}, realParameters);
+            return service.getData('Employee/GetTestManualEmployeeProjection', {plain : dto.TestManualEmployeeProjectionDTO, observable : dto.TestManualEmployeeObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestSecurityObjItemProjection(): async.AsyncFunc3<dto.TestSecurityObjItemIdentityDTO, dto.TestSecurityObjItemProjectionDTO, dto.TestSecurityObjItemObservableProjectionDTO, dto.TestSecurityObjItemProjectionDTO, dto.TestSecurityObjItemObservableProjectionDTO> {
         return new async.AsyncFunc3((testSecurityObjItemProjectionIdentity: dto.TestSecurityObjItemIdentityDTO) => {
-            let baseParameters = {testSecurityObjItemProjectionIdentity : testSecurityObjItemProjectionIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testSecurityObjItemProjectionIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecurityObjItemProjectionDTO, dto.TestSecurityObjItemObservableProjectionDTO, dto.TestSecurityObjItemProjectionDTO, dto.TestSecurityObjItemObservableProjectionDTO>();
-            return service.getData('TestSecurityObjItem/GetTestSecurityObjItemProjection', {plain : dto.TestSecurityObjItemProjectionDTO, observable : dto.TestSecurityObjItemObservableProjectionDTO}, realParameters);
+            return service.getData('TestSecurityObjItem/GetTestSecurityObjItemProjection', {plain : dto.TestSecurityObjItemProjectionDTO, observable : dto.TestSecurityObjItemObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getTestSecurityObjItemProjections(): async.AsyncFunc2<Array<dto.TestSecurityObjItemProjectionDTO>, Array<dto.TestSecurityObjItemObservableProjectionDTO>, dto.TestSecurityObjItemProjectionDTO, dto.TestSecurityObjItemObservableProjectionDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecurityObjItemProjectionDTO>, Array<dto.TestSecurityObjItemObservableProjectionDTO>, dto.TestSecurityObjItemProjectionDTO, dto.TestSecurityObjItemObservableProjectionDTO>();
-            return service.getData('TestSecurityObjItem/GetTestSecurityObjItemProjections', {plain : dto.TestSecurityObjItemProjectionDTO, observable : dto.TestSecurityObjItemObservableProjectionDTO}, realParameters);
+            return service.getData('TestSecurityObjItem/GetTestSecurityObjItemProjections', {plain : dto.TestSecurityObjItemProjectionDTO, observable : dto.TestSecurityObjItemObservableProjectionDTO}, baseParameters);
         });
     }
 
     function _getVisualBusinessUnit(): async.AsyncFunc3<dto.BusinessUnitIdentityDTO, dto.BusinessUnitVisualDTO, dto.BusinessUnitObservableVisualDTO, dto.BusinessUnitVisualDTO, dto.BusinessUnitObservableVisualDTO> {
         return new async.AsyncFunc3((businessUnitIdentity: dto.BusinessUnitIdentityDTO) => {
-            let baseParameters = {businessUnitIdentity : businessUnitIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitVisualDTO, dto.BusinessUnitObservableVisualDTO, dto.BusinessUnitVisualDTO, dto.BusinessUnitObservableVisualDTO>();
-            return service.getData('BusinessUnit/GetVisualBusinessUnit', {plain : dto.BusinessUnitVisualDTO, observable : dto.BusinessUnitObservableVisualDTO}, realParameters);
+            return service.getData('BusinessUnit/GetVisualBusinessUnit', {plain : dto.BusinessUnitVisualDTO, observable : dto.BusinessUnitObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualBusinessUnitByName(): async.AsyncFunc3<string, dto.BusinessUnitVisualDTO, dto.BusinessUnitObservableVisualDTO, dto.BusinessUnitVisualDTO, dto.BusinessUnitObservableVisualDTO> {
         return new async.AsyncFunc3((businessUnitName: string) => {
-            let baseParameters = {businessUnitName : businessUnitName};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitName;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitVisualDTO, dto.BusinessUnitObservableVisualDTO, dto.BusinessUnitVisualDTO, dto.BusinessUnitObservableVisualDTO>();
-            return service.getData('BusinessUnit/GetVisualBusinessUnitByName', {plain : dto.BusinessUnitVisualDTO, observable : dto.BusinessUnitObservableVisualDTO}, realParameters);
+            return service.getData('BusinessUnit/GetVisualBusinessUnitByName', {plain : dto.BusinessUnitVisualDTO, observable : dto.BusinessUnitObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualBusinessUnits(): async.AsyncFunc2<Array<dto.BusinessUnitVisualDTO>, Array<dto.BusinessUnitObservableVisualDTO>, dto.BusinessUnitVisualDTO, dto.BusinessUnitObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitVisualDTO>, Array<dto.BusinessUnitObservableVisualDTO>, dto.BusinessUnitVisualDTO, dto.BusinessUnitObservableVisualDTO>();
-            return service.getData('BusinessUnit/GetVisualBusinessUnits', {plain : dto.BusinessUnitVisualDTO, observable : dto.BusinessUnitObservableVisualDTO}, realParameters);
+            return service.getData('BusinessUnit/GetVisualBusinessUnits', {plain : dto.BusinessUnitVisualDTO, observable : dto.BusinessUnitObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualBusinessUnitsByIdents(): async.AsyncFunc3<dto.BusinessUnitIdentityDTO[], Array<dto.BusinessUnitVisualDTO>, Array<dto.BusinessUnitObservableVisualDTO>, dto.BusinessUnitVisualDTO, dto.BusinessUnitObservableVisualDTO> {
         return new async.AsyncFunc3((businessUnitIdents: dto.BusinessUnitIdentityDTO[]) => {
-            let baseParameters = {businessUnitIdents : businessUnitIdents};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitVisualDTO>, Array<dto.BusinessUnitObservableVisualDTO>, dto.BusinessUnitVisualDTO, dto.BusinessUnitObservableVisualDTO>();
-            return service.getData('BusinessUnit/GetVisualBusinessUnitsByIdents', {plain : dto.BusinessUnitVisualDTO, observable : dto.BusinessUnitObservableVisualDTO}, realParameters);
+            return service.getData('BusinessUnit/GetVisualBusinessUnitsByIdents', {plain : dto.BusinessUnitVisualDTO, observable : dto.BusinessUnitObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualBusinessUnitsByOperation(): async.AsyncFunc3<dto.SampleSystemBusinessUnitSecurityOperationCode, Array<dto.BusinessUnitVisualDTO>, Array<dto.BusinessUnitObservableVisualDTO>, dto.BusinessUnitVisualDTO, dto.BusinessUnitObservableVisualDTO> {
         return new async.AsyncFunc3((securityOperationCode: dto.SampleSystemBusinessUnitSecurityOperationCode) => {
-            let baseParameters = {securityOperationCode : securityOperationCode};
-            let realParameters = baseParameters;
+            let baseParameters = securityOperationCode;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitVisualDTO>, Array<dto.BusinessUnitObservableVisualDTO>, dto.BusinessUnitVisualDTO, dto.BusinessUnitObservableVisualDTO>();
-            return service.getData('BusinessUnit/GetVisualBusinessUnitsByOperation', {plain : dto.BusinessUnitVisualDTO, observable : dto.BusinessUnitObservableVisualDTO}, realParameters);
+            return service.getData('BusinessUnit/GetVisualBusinessUnitsByOperation', {plain : dto.BusinessUnitVisualDTO, observable : dto.BusinessUnitObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualBusinessUnitsByRootFilter(): async.AsyncFunc3<dto.BusinessUnitRootFilterModelStrictDTO, Array<dto.BusinessUnitVisualDTO>, Array<dto.BusinessUnitObservableVisualDTO>, dto.BusinessUnitVisualDTO, dto.BusinessUnitObservableVisualDTO> {
         return new async.AsyncFunc3((filter: dto.BusinessUnitRootFilterModelStrictDTO) => {
-            let baseParameters = {filter : filter.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = filter.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitVisualDTO>, Array<dto.BusinessUnitObservableVisualDTO>, dto.BusinessUnitVisualDTO, dto.BusinessUnitObservableVisualDTO>();
-            return service.getData('BusinessUnit/GetVisualBusinessUnitsByRootFilter', {plain : dto.BusinessUnitVisualDTO, observable : dto.BusinessUnitObservableVisualDTO}, realParameters);
+            return service.getData('BusinessUnit/GetVisualBusinessUnitsByRootFilter', {plain : dto.BusinessUnitVisualDTO, observable : dto.BusinessUnitObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualBusinessUnitType(): async.AsyncFunc3<dto.BusinessUnitTypeIdentityDTO, dto.BusinessUnitTypeVisualDTO, dto.BusinessUnitTypeObservableVisualDTO, dto.BusinessUnitTypeVisualDTO, dto.BusinessUnitTypeObservableVisualDTO> {
         return new async.AsyncFunc3((businessUnitTypeIdentity: dto.BusinessUnitTypeIdentityDTO) => {
-            let baseParameters = {businessUnitTypeIdentity : businessUnitTypeIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitTypeIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitTypeVisualDTO, dto.BusinessUnitTypeObservableVisualDTO, dto.BusinessUnitTypeVisualDTO, dto.BusinessUnitTypeObservableVisualDTO>();
-            return service.getData('BusinessUnitType/GetVisualBusinessUnitType', {plain : dto.BusinessUnitTypeVisualDTO, observable : dto.BusinessUnitTypeObservableVisualDTO}, realParameters);
+            return service.getData('BusinessUnitType/GetVisualBusinessUnitType', {plain : dto.BusinessUnitTypeVisualDTO, observable : dto.BusinessUnitTypeObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualBusinessUnitTypeByName(): async.AsyncFunc3<string, dto.BusinessUnitTypeVisualDTO, dto.BusinessUnitTypeObservableVisualDTO, dto.BusinessUnitTypeVisualDTO, dto.BusinessUnitTypeObservableVisualDTO> {
         return new async.AsyncFunc3((businessUnitTypeName: string) => {
-            let baseParameters = {businessUnitTypeName : businessUnitTypeName};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitTypeName;
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitTypeVisualDTO, dto.BusinessUnitTypeObservableVisualDTO, dto.BusinessUnitTypeVisualDTO, dto.BusinessUnitTypeObservableVisualDTO>();
-            return service.getData('BusinessUnitType/GetVisualBusinessUnitTypeByName', {plain : dto.BusinessUnitTypeVisualDTO, observable : dto.BusinessUnitTypeObservableVisualDTO}, realParameters);
+            return service.getData('BusinessUnitType/GetVisualBusinessUnitTypeByName', {plain : dto.BusinessUnitTypeVisualDTO, observable : dto.BusinessUnitTypeObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualBusinessUnitTypes(): async.AsyncFunc2<Array<dto.BusinessUnitTypeVisualDTO>, Array<dto.BusinessUnitTypeObservableVisualDTO>, dto.BusinessUnitTypeVisualDTO, dto.BusinessUnitTypeObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitTypeVisualDTO>, Array<dto.BusinessUnitTypeObservableVisualDTO>, dto.BusinessUnitTypeVisualDTO, dto.BusinessUnitTypeObservableVisualDTO>();
-            return service.getData('BusinessUnitType/GetVisualBusinessUnitTypes', {plain : dto.BusinessUnitTypeVisualDTO, observable : dto.BusinessUnitTypeObservableVisualDTO}, realParameters);
+            return service.getData('BusinessUnitType/GetVisualBusinessUnitTypes', {plain : dto.BusinessUnitTypeVisualDTO, observable : dto.BusinessUnitTypeObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualBusinessUnitTypesByIdents(): async.AsyncFunc3<dto.BusinessUnitTypeIdentityDTO[], Array<dto.BusinessUnitTypeVisualDTO>, Array<dto.BusinessUnitTypeObservableVisualDTO>, dto.BusinessUnitTypeVisualDTO, dto.BusinessUnitTypeObservableVisualDTO> {
         return new async.AsyncFunc3((businessUnitTypeIdents: dto.BusinessUnitTypeIdentityDTO[]) => {
-            let baseParameters = {businessUnitTypeIdents : businessUnitTypeIdents};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitTypeIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitTypeVisualDTO>, Array<dto.BusinessUnitTypeObservableVisualDTO>, dto.BusinessUnitTypeVisualDTO, dto.BusinessUnitTypeObservableVisualDTO>();
-            return service.getData('BusinessUnitType/GetVisualBusinessUnitTypesByIdents', {plain : dto.BusinessUnitTypeVisualDTO, observable : dto.BusinessUnitTypeObservableVisualDTO}, realParameters);
+            return service.getData('BusinessUnitType/GetVisualBusinessUnitTypesByIdents', {plain : dto.BusinessUnitTypeVisualDTO, observable : dto.BusinessUnitTypeObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualCompanyLegalEntities(): async.AsyncFunc2<Array<dto.CompanyLegalEntityVisualDTO>, Array<dto.CompanyLegalEntityObservableVisualDTO>, dto.CompanyLegalEntityVisualDTO, dto.CompanyLegalEntityObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.CompanyLegalEntityVisualDTO>, Array<dto.CompanyLegalEntityObservableVisualDTO>, dto.CompanyLegalEntityVisualDTO, dto.CompanyLegalEntityObservableVisualDTO>();
-            return service.getData('CompanyLegalEntity/GetVisualCompanyLegalEntities', {plain : dto.CompanyLegalEntityVisualDTO, observable : dto.CompanyLegalEntityObservableVisualDTO}, realParameters);
+            return service.getData('CompanyLegalEntity/GetVisualCompanyLegalEntities', {plain : dto.CompanyLegalEntityVisualDTO, observable : dto.CompanyLegalEntityObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualCompanyLegalEntitiesByIdents(): async.AsyncFunc3<dto.CompanyLegalEntityIdentityDTO[], Array<dto.CompanyLegalEntityVisualDTO>, Array<dto.CompanyLegalEntityObservableVisualDTO>, dto.CompanyLegalEntityVisualDTO, dto.CompanyLegalEntityObservableVisualDTO> {
         return new async.AsyncFunc3((companyLegalEntityIdents: dto.CompanyLegalEntityIdentityDTO[]) => {
-            let baseParameters = {companyLegalEntityIdents : companyLegalEntityIdents};
-            let realParameters = baseParameters;
+            let baseParameters = companyLegalEntityIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.CompanyLegalEntityVisualDTO>, Array<dto.CompanyLegalEntityObservableVisualDTO>, dto.CompanyLegalEntityVisualDTO, dto.CompanyLegalEntityObservableVisualDTO>();
-            return service.getData('CompanyLegalEntity/GetVisualCompanyLegalEntitiesByIdents', {plain : dto.CompanyLegalEntityVisualDTO, observable : dto.CompanyLegalEntityObservableVisualDTO}, realParameters);
+            return service.getData('CompanyLegalEntity/GetVisualCompanyLegalEntitiesByIdents', {plain : dto.CompanyLegalEntityVisualDTO, observable : dto.CompanyLegalEntityObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualCompanyLegalEntity(): async.AsyncFunc3<dto.CompanyLegalEntityIdentityDTO, dto.CompanyLegalEntityVisualDTO, dto.CompanyLegalEntityObservableVisualDTO, dto.CompanyLegalEntityVisualDTO, dto.CompanyLegalEntityObservableVisualDTO> {
         return new async.AsyncFunc3((companyLegalEntityIdentity: dto.CompanyLegalEntityIdentityDTO) => {
-            let baseParameters = {companyLegalEntityIdentity : companyLegalEntityIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = companyLegalEntityIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.CompanyLegalEntityVisualDTO, dto.CompanyLegalEntityObservableVisualDTO, dto.CompanyLegalEntityVisualDTO, dto.CompanyLegalEntityObservableVisualDTO>();
-            return service.getData('CompanyLegalEntity/GetVisualCompanyLegalEntity', {plain : dto.CompanyLegalEntityVisualDTO, observable : dto.CompanyLegalEntityObservableVisualDTO}, realParameters);
+            return service.getData('CompanyLegalEntity/GetVisualCompanyLegalEntity', {plain : dto.CompanyLegalEntityVisualDTO, observable : dto.CompanyLegalEntityObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualCompanyLegalEntityByCode(): async.AsyncFunc3<string, dto.CompanyLegalEntityVisualDTO, dto.CompanyLegalEntityObservableVisualDTO, dto.CompanyLegalEntityVisualDTO, dto.CompanyLegalEntityObservableVisualDTO> {
         return new async.AsyncFunc3((companyLegalEntityCode: string) => {
-            let baseParameters = {companyLegalEntityCode : companyLegalEntityCode};
-            let realParameters = baseParameters;
+            let baseParameters = companyLegalEntityCode;
             let service = Environment.current.context.facadeFactory.createService<dto.CompanyLegalEntityVisualDTO, dto.CompanyLegalEntityObservableVisualDTO, dto.CompanyLegalEntityVisualDTO, dto.CompanyLegalEntityObservableVisualDTO>();
-            return service.getData('CompanyLegalEntity/GetVisualCompanyLegalEntityByCode', {plain : dto.CompanyLegalEntityVisualDTO, observable : dto.CompanyLegalEntityObservableVisualDTO}, realParameters);
+            return service.getData('CompanyLegalEntity/GetVisualCompanyLegalEntityByCode', {plain : dto.CompanyLegalEntityVisualDTO, observable : dto.CompanyLegalEntityObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualCompanyLegalEntityByName(): async.AsyncFunc3<string, dto.CompanyLegalEntityVisualDTO, dto.CompanyLegalEntityObservableVisualDTO, dto.CompanyLegalEntityVisualDTO, dto.CompanyLegalEntityObservableVisualDTO> {
         return new async.AsyncFunc3((companyLegalEntityName: string) => {
-            let baseParameters = {companyLegalEntityName : companyLegalEntityName};
-            let realParameters = baseParameters;
+            let baseParameters = companyLegalEntityName;
             let service = Environment.current.context.facadeFactory.createService<dto.CompanyLegalEntityVisualDTO, dto.CompanyLegalEntityObservableVisualDTO, dto.CompanyLegalEntityVisualDTO, dto.CompanyLegalEntityObservableVisualDTO>();
-            return service.getData('CompanyLegalEntity/GetVisualCompanyLegalEntityByName', {plain : dto.CompanyLegalEntityVisualDTO, observable : dto.CompanyLegalEntityObservableVisualDTO}, realParameters);
+            return service.getData('CompanyLegalEntity/GetVisualCompanyLegalEntityByName', {plain : dto.CompanyLegalEntityVisualDTO, observable : dto.CompanyLegalEntityObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualCountries(): async.AsyncFunc2<Array<dto.CountryVisualDTO>, Array<dto.CountryObservableVisualDTO>, dto.CountryVisualDTO, dto.CountryObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.CountryVisualDTO>, Array<dto.CountryObservableVisualDTO>, dto.CountryVisualDTO, dto.CountryObservableVisualDTO>();
-            return service.getData('Country/GetVisualCountries', {plain : dto.CountryVisualDTO, observable : dto.CountryObservableVisualDTO}, realParameters);
+            return service.getData('Country/GetVisualCountries', {plain : dto.CountryVisualDTO, observable : dto.CountryObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualCountriesByIdents(): async.AsyncFunc3<dto.CountryIdentityDTO[], Array<dto.CountryVisualDTO>, Array<dto.CountryObservableVisualDTO>, dto.CountryVisualDTO, dto.CountryObservableVisualDTO> {
         return new async.AsyncFunc3((countryIdents: dto.CountryIdentityDTO[]) => {
-            let baseParameters = {countryIdents : countryIdents};
-            let realParameters = baseParameters;
+            let baseParameters = countryIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.CountryVisualDTO>, Array<dto.CountryObservableVisualDTO>, dto.CountryVisualDTO, dto.CountryObservableVisualDTO>();
-            return service.getData('Country/GetVisualCountriesByIdents', {plain : dto.CountryVisualDTO, observable : dto.CountryObservableVisualDTO}, realParameters);
+            return service.getData('Country/GetVisualCountriesByIdents', {plain : dto.CountryVisualDTO, observable : dto.CountryObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualCountry(): async.AsyncFunc3<dto.CountryIdentityDTO, dto.CountryVisualDTO, dto.CountryObservableVisualDTO, dto.CountryVisualDTO, dto.CountryObservableVisualDTO> {
         return new async.AsyncFunc3((countryIdentity: dto.CountryIdentityDTO) => {
-            let baseParameters = {countryIdentity : countryIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = countryIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.CountryVisualDTO, dto.CountryObservableVisualDTO, dto.CountryVisualDTO, dto.CountryObservableVisualDTO>();
-            return service.getData('Country/GetVisualCountry', {plain : dto.CountryVisualDTO, observable : dto.CountryObservableVisualDTO}, realParameters);
+            return service.getData('Country/GetVisualCountry', {plain : dto.CountryVisualDTO, observable : dto.CountryObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualCountryByCode(): async.AsyncFunc3<string, dto.CountryVisualDTO, dto.CountryObservableVisualDTO, dto.CountryVisualDTO, dto.CountryObservableVisualDTO> {
         return new async.AsyncFunc3((countryCode: string) => {
-            let baseParameters = {countryCode : countryCode};
-            let realParameters = baseParameters;
+            let baseParameters = countryCode;
             let service = Environment.current.context.facadeFactory.createService<dto.CountryVisualDTO, dto.CountryObservableVisualDTO, dto.CountryVisualDTO, dto.CountryObservableVisualDTO>();
-            return service.getData('Country/GetVisualCountryByCode', {plain : dto.CountryVisualDTO, observable : dto.CountryObservableVisualDTO}, realParameters);
+            return service.getData('Country/GetVisualCountryByCode', {plain : dto.CountryVisualDTO, observable : dto.CountryObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualCountryByName(): async.AsyncFunc3<string, dto.CountryVisualDTO, dto.CountryObservableVisualDTO, dto.CountryVisualDTO, dto.CountryObservableVisualDTO> {
         return new async.AsyncFunc3((countryName: string) => {
-            let baseParameters = {countryName : countryName};
-            let realParameters = baseParameters;
+            let baseParameters = countryName;
             let service = Environment.current.context.facadeFactory.createService<dto.CountryVisualDTO, dto.CountryObservableVisualDTO, dto.CountryVisualDTO, dto.CountryObservableVisualDTO>();
-            return service.getData('Country/GetVisualCountryByName', {plain : dto.CountryVisualDTO, observable : dto.CountryObservableVisualDTO}, realParameters);
+            return service.getData('Country/GetVisualCountryByName', {plain : dto.CountryVisualDTO, observable : dto.CountryObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeInformation(): async.AsyncFunc3<dto.EmployeeInformationIdentityDTO, dto.EmployeeInformationVisualDTO, dto.EmployeeInformationObservableVisualDTO, dto.EmployeeInformationVisualDTO, dto.EmployeeInformationObservableVisualDTO> {
         return new async.AsyncFunc3((employeeInformationIdentity: dto.EmployeeInformationIdentityDTO) => {
-            let baseParameters = {employeeInformationIdentity : employeeInformationIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeInformationIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeInformationVisualDTO, dto.EmployeeInformationObservableVisualDTO, dto.EmployeeInformationVisualDTO, dto.EmployeeInformationObservableVisualDTO>();
-            return service.getData('EmployeeInformation/GetVisualEmployeeInformation', {plain : dto.EmployeeInformationVisualDTO, observable : dto.EmployeeInformationObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeInformation/GetVisualEmployeeInformation', {plain : dto.EmployeeInformationVisualDTO, observable : dto.EmployeeInformationObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeInformationByName(): async.AsyncFunc3<string, dto.EmployeeInformationVisualDTO, dto.EmployeeInformationObservableVisualDTO, dto.EmployeeInformationVisualDTO, dto.EmployeeInformationObservableVisualDTO> {
         return new async.AsyncFunc3((employeeInformationName: string) => {
-            let baseParameters = {employeeInformationName : employeeInformationName};
-            let realParameters = baseParameters;
+            let baseParameters = employeeInformationName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeInformationVisualDTO, dto.EmployeeInformationObservableVisualDTO, dto.EmployeeInformationVisualDTO, dto.EmployeeInformationObservableVisualDTO>();
-            return service.getData('EmployeeInformation/GetVisualEmployeeInformationByName', {plain : dto.EmployeeInformationVisualDTO, observable : dto.EmployeeInformationObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeInformation/GetVisualEmployeeInformationByName', {plain : dto.EmployeeInformationVisualDTO, observable : dto.EmployeeInformationObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeInformations(): async.AsyncFunc2<Array<dto.EmployeeInformationVisualDTO>, Array<dto.EmployeeInformationObservableVisualDTO>, dto.EmployeeInformationVisualDTO, dto.EmployeeInformationObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeInformationVisualDTO>, Array<dto.EmployeeInformationObservableVisualDTO>, dto.EmployeeInformationVisualDTO, dto.EmployeeInformationObservableVisualDTO>();
-            return service.getData('EmployeeInformation/GetVisualEmployeeInformations', {plain : dto.EmployeeInformationVisualDTO, observable : dto.EmployeeInformationObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeInformation/GetVisualEmployeeInformations', {plain : dto.EmployeeInformationVisualDTO, observable : dto.EmployeeInformationObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeInformationsByIdents(): async.AsyncFunc3<dto.EmployeeInformationIdentityDTO[], Array<dto.EmployeeInformationVisualDTO>, Array<dto.EmployeeInformationObservableVisualDTO>, dto.EmployeeInformationVisualDTO, dto.EmployeeInformationObservableVisualDTO> {
         return new async.AsyncFunc3((employeeInformationIdents: dto.EmployeeInformationIdentityDTO[]) => {
-            let baseParameters = {employeeInformationIdents : employeeInformationIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeeInformationIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeInformationVisualDTO>, Array<dto.EmployeeInformationObservableVisualDTO>, dto.EmployeeInformationVisualDTO, dto.EmployeeInformationObservableVisualDTO>();
-            return service.getData('EmployeeInformation/GetVisualEmployeeInformationsByIdents', {plain : dto.EmployeeInformationVisualDTO, observable : dto.EmployeeInformationObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeInformation/GetVisualEmployeeInformationsByIdents', {plain : dto.EmployeeInformationVisualDTO, observable : dto.EmployeeInformationObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeePosition(): async.AsyncFunc3<dto.EmployeePositionIdentityDTO, dto.EmployeePositionVisualDTO, dto.EmployeePositionObservableVisualDTO, dto.EmployeePositionVisualDTO, dto.EmployeePositionObservableVisualDTO> {
         return new async.AsyncFunc3((employeePositionIdentity: dto.EmployeePositionIdentityDTO) => {
-            let baseParameters = {employeePositionIdentity : employeePositionIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeePositionIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeePositionVisualDTO, dto.EmployeePositionObservableVisualDTO, dto.EmployeePositionVisualDTO, dto.EmployeePositionObservableVisualDTO>();
-            return service.getData('EmployeePosition/GetVisualEmployeePosition', {plain : dto.EmployeePositionVisualDTO, observable : dto.EmployeePositionObservableVisualDTO}, realParameters);
+            return service.getData('EmployeePosition/GetVisualEmployeePosition', {plain : dto.EmployeePositionVisualDTO, observable : dto.EmployeePositionObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeePositionByName(): async.AsyncFunc3<string, dto.EmployeePositionVisualDTO, dto.EmployeePositionObservableVisualDTO, dto.EmployeePositionVisualDTO, dto.EmployeePositionObservableVisualDTO> {
         return new async.AsyncFunc3((employeePositionName: string) => {
-            let baseParameters = {employeePositionName : employeePositionName};
-            let realParameters = baseParameters;
+            let baseParameters = employeePositionName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeePositionVisualDTO, dto.EmployeePositionObservableVisualDTO, dto.EmployeePositionVisualDTO, dto.EmployeePositionObservableVisualDTO>();
-            return service.getData('EmployeePosition/GetVisualEmployeePositionByName', {plain : dto.EmployeePositionVisualDTO, observable : dto.EmployeePositionObservableVisualDTO}, realParameters);
+            return service.getData('EmployeePosition/GetVisualEmployeePositionByName', {plain : dto.EmployeePositionVisualDTO, observable : dto.EmployeePositionObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeePositions(): async.AsyncFunc2<Array<dto.EmployeePositionVisualDTO>, Array<dto.EmployeePositionObservableVisualDTO>, dto.EmployeePositionVisualDTO, dto.EmployeePositionObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeePositionVisualDTO>, Array<dto.EmployeePositionObservableVisualDTO>, dto.EmployeePositionVisualDTO, dto.EmployeePositionObservableVisualDTO>();
-            return service.getData('EmployeePosition/GetVisualEmployeePositions', {plain : dto.EmployeePositionVisualDTO, observable : dto.EmployeePositionObservableVisualDTO}, realParameters);
+            return service.getData('EmployeePosition/GetVisualEmployeePositions', {plain : dto.EmployeePositionVisualDTO, observable : dto.EmployeePositionObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeePositionsByIdents(): async.AsyncFunc3<dto.EmployeePositionIdentityDTO[], Array<dto.EmployeePositionVisualDTO>, Array<dto.EmployeePositionObservableVisualDTO>, dto.EmployeePositionVisualDTO, dto.EmployeePositionObservableVisualDTO> {
         return new async.AsyncFunc3((employeePositionIdents: dto.EmployeePositionIdentityDTO[]) => {
-            let baseParameters = {employeePositionIdents : employeePositionIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeePositionIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeePositionVisualDTO>, Array<dto.EmployeePositionObservableVisualDTO>, dto.EmployeePositionVisualDTO, dto.EmployeePositionObservableVisualDTO>();
-            return service.getData('EmployeePosition/GetVisualEmployeePositionsByIdents', {plain : dto.EmployeePositionVisualDTO, observable : dto.EmployeePositionObservableVisualDTO}, realParameters);
+            return service.getData('EmployeePosition/GetVisualEmployeePositionsByIdents', {plain : dto.EmployeePositionVisualDTO, observable : dto.EmployeePositionObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeRegistrationType(): async.AsyncFunc3<dto.EmployeeRegistrationTypeIdentityDTO, dto.EmployeeRegistrationTypeVisualDTO, dto.EmployeeRegistrationTypeObservableVisualDTO, dto.EmployeeRegistrationTypeVisualDTO, dto.EmployeeRegistrationTypeObservableVisualDTO> {
         return new async.AsyncFunc3((employeeRegistrationTypeIdentity: dto.EmployeeRegistrationTypeIdentityDTO) => {
-            let baseParameters = {employeeRegistrationTypeIdentity : employeeRegistrationTypeIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRegistrationTypeIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRegistrationTypeVisualDTO, dto.EmployeeRegistrationTypeObservableVisualDTO, dto.EmployeeRegistrationTypeVisualDTO, dto.EmployeeRegistrationTypeObservableVisualDTO>();
-            return service.getData('EmployeeRegistrationType/GetVisualEmployeeRegistrationType', {plain : dto.EmployeeRegistrationTypeVisualDTO, observable : dto.EmployeeRegistrationTypeObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeRegistrationType/GetVisualEmployeeRegistrationType', {plain : dto.EmployeeRegistrationTypeVisualDTO, observable : dto.EmployeeRegistrationTypeObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeRegistrationTypeByName(): async.AsyncFunc3<string, dto.EmployeeRegistrationTypeVisualDTO, dto.EmployeeRegistrationTypeObservableVisualDTO, dto.EmployeeRegistrationTypeVisualDTO, dto.EmployeeRegistrationTypeObservableVisualDTO> {
         return new async.AsyncFunc3((employeeRegistrationTypeName: string) => {
-            let baseParameters = {employeeRegistrationTypeName : employeeRegistrationTypeName};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRegistrationTypeName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRegistrationTypeVisualDTO, dto.EmployeeRegistrationTypeObservableVisualDTO, dto.EmployeeRegistrationTypeVisualDTO, dto.EmployeeRegistrationTypeObservableVisualDTO>();
-            return service.getData('EmployeeRegistrationType/GetVisualEmployeeRegistrationTypeByName', {plain : dto.EmployeeRegistrationTypeVisualDTO, observable : dto.EmployeeRegistrationTypeObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeRegistrationType/GetVisualEmployeeRegistrationTypeByName', {plain : dto.EmployeeRegistrationTypeVisualDTO, observable : dto.EmployeeRegistrationTypeObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeRegistrationTypes(): async.AsyncFunc2<Array<dto.EmployeeRegistrationTypeVisualDTO>, Array<dto.EmployeeRegistrationTypeObservableVisualDTO>, dto.EmployeeRegistrationTypeVisualDTO, dto.EmployeeRegistrationTypeObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeRegistrationTypeVisualDTO>, Array<dto.EmployeeRegistrationTypeObservableVisualDTO>, dto.EmployeeRegistrationTypeVisualDTO, dto.EmployeeRegistrationTypeObservableVisualDTO>();
-            return service.getData('EmployeeRegistrationType/GetVisualEmployeeRegistrationTypes', {plain : dto.EmployeeRegistrationTypeVisualDTO, observable : dto.EmployeeRegistrationTypeObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeRegistrationType/GetVisualEmployeeRegistrationTypes', {plain : dto.EmployeeRegistrationTypeVisualDTO, observable : dto.EmployeeRegistrationTypeObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeRegistrationTypesByIdents(): async.AsyncFunc3<dto.EmployeeRegistrationTypeIdentityDTO[], Array<dto.EmployeeRegistrationTypeVisualDTO>, Array<dto.EmployeeRegistrationTypeObservableVisualDTO>, dto.EmployeeRegistrationTypeVisualDTO, dto.EmployeeRegistrationTypeObservableVisualDTO> {
         return new async.AsyncFunc3((employeeRegistrationTypeIdents: dto.EmployeeRegistrationTypeIdentityDTO[]) => {
-            let baseParameters = {employeeRegistrationTypeIdents : employeeRegistrationTypeIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRegistrationTypeIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeRegistrationTypeVisualDTO>, Array<dto.EmployeeRegistrationTypeObservableVisualDTO>, dto.EmployeeRegistrationTypeVisualDTO, dto.EmployeeRegistrationTypeObservableVisualDTO>();
-            return service.getData('EmployeeRegistrationType/GetVisualEmployeeRegistrationTypesByIdents', {plain : dto.EmployeeRegistrationTypeVisualDTO, observable : dto.EmployeeRegistrationTypeObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeRegistrationType/GetVisualEmployeeRegistrationTypesByIdents', {plain : dto.EmployeeRegistrationTypeVisualDTO, observable : dto.EmployeeRegistrationTypeObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeRole(): async.AsyncFunc3<dto.EmployeeRoleIdentityDTO, dto.EmployeeRoleVisualDTO, dto.EmployeeRoleObservableVisualDTO, dto.EmployeeRoleVisualDTO, dto.EmployeeRoleObservableVisualDTO> {
         return new async.AsyncFunc3((employeeRoleIdentity: dto.EmployeeRoleIdentityDTO) => {
-            let baseParameters = {employeeRoleIdentity : employeeRoleIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRoleVisualDTO, dto.EmployeeRoleObservableVisualDTO, dto.EmployeeRoleVisualDTO, dto.EmployeeRoleObservableVisualDTO>();
-            return service.getData('EmployeeRole/GetVisualEmployeeRole', {plain : dto.EmployeeRoleVisualDTO, observable : dto.EmployeeRoleObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeRole/GetVisualEmployeeRole', {plain : dto.EmployeeRoleVisualDTO, observable : dto.EmployeeRoleObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeRoleByName(): async.AsyncFunc3<string, dto.EmployeeRoleVisualDTO, dto.EmployeeRoleObservableVisualDTO, dto.EmployeeRoleVisualDTO, dto.EmployeeRoleObservableVisualDTO> {
         return new async.AsyncFunc3((employeeRoleName: string) => {
-            let baseParameters = {employeeRoleName : employeeRoleName};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRoleVisualDTO, dto.EmployeeRoleObservableVisualDTO, dto.EmployeeRoleVisualDTO, dto.EmployeeRoleObservableVisualDTO>();
-            return service.getData('EmployeeRole/GetVisualEmployeeRoleByName', {plain : dto.EmployeeRoleVisualDTO, observable : dto.EmployeeRoleObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeRole/GetVisualEmployeeRoleByName', {plain : dto.EmployeeRoleVisualDTO, observable : dto.EmployeeRoleObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeRoleDegree(): async.AsyncFunc3<dto.EmployeeRoleDegreeIdentityDTO, dto.EmployeeRoleDegreeVisualDTO, dto.EmployeeRoleDegreeObservableVisualDTO, dto.EmployeeRoleDegreeVisualDTO, dto.EmployeeRoleDegreeObservableVisualDTO> {
         return new async.AsyncFunc3((employeeRoleDegreeIdentity: dto.EmployeeRoleDegreeIdentityDTO) => {
-            let baseParameters = {employeeRoleDegreeIdentity : employeeRoleDegreeIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleDegreeIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRoleDegreeVisualDTO, dto.EmployeeRoleDegreeObservableVisualDTO, dto.EmployeeRoleDegreeVisualDTO, dto.EmployeeRoleDegreeObservableVisualDTO>();
-            return service.getData('EmployeeRoleDegree/GetVisualEmployeeRoleDegree', {plain : dto.EmployeeRoleDegreeVisualDTO, observable : dto.EmployeeRoleDegreeObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeRoleDegree/GetVisualEmployeeRoleDegree', {plain : dto.EmployeeRoleDegreeVisualDTO, observable : dto.EmployeeRoleDegreeObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeRoleDegreeByName(): async.AsyncFunc3<string, dto.EmployeeRoleDegreeVisualDTO, dto.EmployeeRoleDegreeObservableVisualDTO, dto.EmployeeRoleDegreeVisualDTO, dto.EmployeeRoleDegreeObservableVisualDTO> {
         return new async.AsyncFunc3((employeeRoleDegreeName: string) => {
-            let baseParameters = {employeeRoleDegreeName : employeeRoleDegreeName};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleDegreeName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeRoleDegreeVisualDTO, dto.EmployeeRoleDegreeObservableVisualDTO, dto.EmployeeRoleDegreeVisualDTO, dto.EmployeeRoleDegreeObservableVisualDTO>();
-            return service.getData('EmployeeRoleDegree/GetVisualEmployeeRoleDegreeByName', {plain : dto.EmployeeRoleDegreeVisualDTO, observable : dto.EmployeeRoleDegreeObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeRoleDegree/GetVisualEmployeeRoleDegreeByName', {plain : dto.EmployeeRoleDegreeVisualDTO, observable : dto.EmployeeRoleDegreeObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeRoleDegrees(): async.AsyncFunc2<Array<dto.EmployeeRoleDegreeVisualDTO>, Array<dto.EmployeeRoleDegreeObservableVisualDTO>, dto.EmployeeRoleDegreeVisualDTO, dto.EmployeeRoleDegreeObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeRoleDegreeVisualDTO>, Array<dto.EmployeeRoleDegreeObservableVisualDTO>, dto.EmployeeRoleDegreeVisualDTO, dto.EmployeeRoleDegreeObservableVisualDTO>();
-            return service.getData('EmployeeRoleDegree/GetVisualEmployeeRoleDegrees', {plain : dto.EmployeeRoleDegreeVisualDTO, observable : dto.EmployeeRoleDegreeObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeRoleDegree/GetVisualEmployeeRoleDegrees', {plain : dto.EmployeeRoleDegreeVisualDTO, observable : dto.EmployeeRoleDegreeObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeRoleDegreesByIdents(): async.AsyncFunc3<dto.EmployeeRoleDegreeIdentityDTO[], Array<dto.EmployeeRoleDegreeVisualDTO>, Array<dto.EmployeeRoleDegreeObservableVisualDTO>, dto.EmployeeRoleDegreeVisualDTO, dto.EmployeeRoleDegreeObservableVisualDTO> {
         return new async.AsyncFunc3((employeeRoleDegreeIdents: dto.EmployeeRoleDegreeIdentityDTO[]) => {
-            let baseParameters = {employeeRoleDegreeIdents : employeeRoleDegreeIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleDegreeIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeRoleDegreeVisualDTO>, Array<dto.EmployeeRoleDegreeObservableVisualDTO>, dto.EmployeeRoleDegreeVisualDTO, dto.EmployeeRoleDegreeObservableVisualDTO>();
-            return service.getData('EmployeeRoleDegree/GetVisualEmployeeRoleDegreesByIdents', {plain : dto.EmployeeRoleDegreeVisualDTO, observable : dto.EmployeeRoleDegreeObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeRoleDegree/GetVisualEmployeeRoleDegreesByIdents', {plain : dto.EmployeeRoleDegreeVisualDTO, observable : dto.EmployeeRoleDegreeObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeRoles(): async.AsyncFunc2<Array<dto.EmployeeRoleVisualDTO>, Array<dto.EmployeeRoleObservableVisualDTO>, dto.EmployeeRoleVisualDTO, dto.EmployeeRoleObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeRoleVisualDTO>, Array<dto.EmployeeRoleObservableVisualDTO>, dto.EmployeeRoleVisualDTO, dto.EmployeeRoleObservableVisualDTO>();
-            return service.getData('EmployeeRole/GetVisualEmployeeRoles', {plain : dto.EmployeeRoleVisualDTO, observable : dto.EmployeeRoleObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeRole/GetVisualEmployeeRoles', {plain : dto.EmployeeRoleVisualDTO, observable : dto.EmployeeRoleObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeRolesByIdents(): async.AsyncFunc3<dto.EmployeeRoleIdentityDTO[], Array<dto.EmployeeRoleVisualDTO>, Array<dto.EmployeeRoleObservableVisualDTO>, dto.EmployeeRoleVisualDTO, dto.EmployeeRoleObservableVisualDTO> {
         return new async.AsyncFunc3((employeeRoleIdents: dto.EmployeeRoleIdentityDTO[]) => {
-            let baseParameters = {employeeRoleIdents : employeeRoleIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeeRoleIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeRoleVisualDTO>, Array<dto.EmployeeRoleObservableVisualDTO>, dto.EmployeeRoleVisualDTO, dto.EmployeeRoleObservableVisualDTO>();
-            return service.getData('EmployeeRole/GetVisualEmployeeRolesByIdents', {plain : dto.EmployeeRoleVisualDTO, observable : dto.EmployeeRoleObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeRole/GetVisualEmployeeRolesByIdents', {plain : dto.EmployeeRoleVisualDTO, observable : dto.EmployeeRoleObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeSpecialization(): async.AsyncFunc3<dto.EmployeeSpecializationIdentityDTO, dto.EmployeeSpecializationVisualDTO, dto.EmployeeSpecializationObservableVisualDTO, dto.EmployeeSpecializationVisualDTO, dto.EmployeeSpecializationObservableVisualDTO> {
         return new async.AsyncFunc3((employeeSpecializationIdentity: dto.EmployeeSpecializationIdentityDTO) => {
-            let baseParameters = {employeeSpecializationIdentity : employeeSpecializationIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = employeeSpecializationIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeSpecializationVisualDTO, dto.EmployeeSpecializationObservableVisualDTO, dto.EmployeeSpecializationVisualDTO, dto.EmployeeSpecializationObservableVisualDTO>();
-            return service.getData('EmployeeSpecialization/GetVisualEmployeeSpecialization', {plain : dto.EmployeeSpecializationVisualDTO, observable : dto.EmployeeSpecializationObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeSpecialization/GetVisualEmployeeSpecialization', {plain : dto.EmployeeSpecializationVisualDTO, observable : dto.EmployeeSpecializationObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeSpecializationByName(): async.AsyncFunc3<string, dto.EmployeeSpecializationVisualDTO, dto.EmployeeSpecializationObservableVisualDTO, dto.EmployeeSpecializationVisualDTO, dto.EmployeeSpecializationObservableVisualDTO> {
         return new async.AsyncFunc3((employeeSpecializationName: string) => {
-            let baseParameters = {employeeSpecializationName : employeeSpecializationName};
-            let realParameters = baseParameters;
+            let baseParameters = employeeSpecializationName;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeSpecializationVisualDTO, dto.EmployeeSpecializationObservableVisualDTO, dto.EmployeeSpecializationVisualDTO, dto.EmployeeSpecializationObservableVisualDTO>();
-            return service.getData('EmployeeSpecialization/GetVisualEmployeeSpecializationByName', {plain : dto.EmployeeSpecializationVisualDTO, observable : dto.EmployeeSpecializationObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeSpecialization/GetVisualEmployeeSpecializationByName', {plain : dto.EmployeeSpecializationVisualDTO, observable : dto.EmployeeSpecializationObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeSpecializations(): async.AsyncFunc2<Array<dto.EmployeeSpecializationVisualDTO>, Array<dto.EmployeeSpecializationObservableVisualDTO>, dto.EmployeeSpecializationVisualDTO, dto.EmployeeSpecializationObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeSpecializationVisualDTO>, Array<dto.EmployeeSpecializationObservableVisualDTO>, dto.EmployeeSpecializationVisualDTO, dto.EmployeeSpecializationObservableVisualDTO>();
-            return service.getData('EmployeeSpecialization/GetVisualEmployeeSpecializations', {plain : dto.EmployeeSpecializationVisualDTO, observable : dto.EmployeeSpecializationObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeSpecialization/GetVisualEmployeeSpecializations', {plain : dto.EmployeeSpecializationVisualDTO, observable : dto.EmployeeSpecializationObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualEmployeeSpecializationsByIdents(): async.AsyncFunc3<dto.EmployeeSpecializationIdentityDTO[], Array<dto.EmployeeSpecializationVisualDTO>, Array<dto.EmployeeSpecializationObservableVisualDTO>, dto.EmployeeSpecializationVisualDTO, dto.EmployeeSpecializationObservableVisualDTO> {
         return new async.AsyncFunc3((employeeSpecializationIdents: dto.EmployeeSpecializationIdentityDTO[]) => {
-            let baseParameters = {employeeSpecializationIdents : employeeSpecializationIdents};
-            let realParameters = baseParameters;
+            let baseParameters = employeeSpecializationIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeSpecializationVisualDTO>, Array<dto.EmployeeSpecializationObservableVisualDTO>, dto.EmployeeSpecializationVisualDTO, dto.EmployeeSpecializationObservableVisualDTO>();
-            return service.getData('EmployeeSpecialization/GetVisualEmployeeSpecializationsByIdents', {plain : dto.EmployeeSpecializationVisualDTO, observable : dto.EmployeeSpecializationObservableVisualDTO}, realParameters);
+            return service.getData('EmployeeSpecialization/GetVisualEmployeeSpecializationsByIdents', {plain : dto.EmployeeSpecializationVisualDTO, observable : dto.EmployeeSpecializationObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualHRDepartment(): async.AsyncFunc3<dto.HRDepartmentIdentityDTO, dto.HRDepartmentVisualDTO, dto.HRDepartmentObservableVisualDTO, dto.HRDepartmentVisualDTO, dto.HRDepartmentObservableVisualDTO> {
         return new async.AsyncFunc3((hRDepartmentIdentity: dto.HRDepartmentIdentityDTO) => {
-            let baseParameters = {hRDepartmentIdentity : hRDepartmentIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = hRDepartmentIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.HRDepartmentVisualDTO, dto.HRDepartmentObservableVisualDTO, dto.HRDepartmentVisualDTO, dto.HRDepartmentObservableVisualDTO>();
-            return service.getData('HRDepartment/GetVisualHRDepartment', {plain : dto.HRDepartmentVisualDTO, observable : dto.HRDepartmentObservableVisualDTO}, realParameters);
+            return service.getData('HRDepartment/GetVisualHRDepartment', {plain : dto.HRDepartmentVisualDTO, observable : dto.HRDepartmentObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualHRDepartmentByCode(): async.AsyncFunc3<string, dto.HRDepartmentVisualDTO, dto.HRDepartmentObservableVisualDTO, dto.HRDepartmentVisualDTO, dto.HRDepartmentObservableVisualDTO> {
         return new async.AsyncFunc3((hRDepartmentCode: string) => {
-            let baseParameters = {hRDepartmentCode : hRDepartmentCode};
-            let realParameters = baseParameters;
+            let baseParameters = hRDepartmentCode;
             let service = Environment.current.context.facadeFactory.createService<dto.HRDepartmentVisualDTO, dto.HRDepartmentObservableVisualDTO, dto.HRDepartmentVisualDTO, dto.HRDepartmentObservableVisualDTO>();
-            return service.getData('HRDepartment/GetVisualHRDepartmentByCode', {plain : dto.HRDepartmentVisualDTO, observable : dto.HRDepartmentObservableVisualDTO}, realParameters);
+            return service.getData('HRDepartment/GetVisualHRDepartmentByCode', {plain : dto.HRDepartmentVisualDTO, observable : dto.HRDepartmentObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualHRDepartmentByName(): async.AsyncFunc3<string, dto.HRDepartmentVisualDTO, dto.HRDepartmentObservableVisualDTO, dto.HRDepartmentVisualDTO, dto.HRDepartmentObservableVisualDTO> {
         return new async.AsyncFunc3((hRDepartmentName: string) => {
-            let baseParameters = {hRDepartmentName : hRDepartmentName};
-            let realParameters = baseParameters;
+            let baseParameters = hRDepartmentName;
             let service = Environment.current.context.facadeFactory.createService<dto.HRDepartmentVisualDTO, dto.HRDepartmentObservableVisualDTO, dto.HRDepartmentVisualDTO, dto.HRDepartmentObservableVisualDTO>();
-            return service.getData('HRDepartment/GetVisualHRDepartmentByName', {plain : dto.HRDepartmentVisualDTO, observable : dto.HRDepartmentObservableVisualDTO}, realParameters);
+            return service.getData('HRDepartment/GetVisualHRDepartmentByName', {plain : dto.HRDepartmentVisualDTO, observable : dto.HRDepartmentObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualHRDepartments(): async.AsyncFunc2<Array<dto.HRDepartmentVisualDTO>, Array<dto.HRDepartmentObservableVisualDTO>, dto.HRDepartmentVisualDTO, dto.HRDepartmentObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.HRDepartmentVisualDTO>, Array<dto.HRDepartmentObservableVisualDTO>, dto.HRDepartmentVisualDTO, dto.HRDepartmentObservableVisualDTO>();
-            return service.getData('HRDepartment/GetVisualHRDepartments', {plain : dto.HRDepartmentVisualDTO, observable : dto.HRDepartmentObservableVisualDTO}, realParameters);
+            return service.getData('HRDepartment/GetVisualHRDepartments', {plain : dto.HRDepartmentVisualDTO, observable : dto.HRDepartmentObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualHRDepartmentsByIdents(): async.AsyncFunc3<dto.HRDepartmentIdentityDTO[], Array<dto.HRDepartmentVisualDTO>, Array<dto.HRDepartmentObservableVisualDTO>, dto.HRDepartmentVisualDTO, dto.HRDepartmentObservableVisualDTO> {
         return new async.AsyncFunc3((hRDepartmentIdents: dto.HRDepartmentIdentityDTO[]) => {
-            let baseParameters = {hRDepartmentIdents : hRDepartmentIdents};
-            let realParameters = baseParameters;
+            let baseParameters = hRDepartmentIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.HRDepartmentVisualDTO>, Array<dto.HRDepartmentObservableVisualDTO>, dto.HRDepartmentVisualDTO, dto.HRDepartmentObservableVisualDTO>();
-            return service.getData('HRDepartment/GetVisualHRDepartmentsByIdents', {plain : dto.HRDepartmentVisualDTO, observable : dto.HRDepartmentObservableVisualDTO}, realParameters);
+            return service.getData('HRDepartment/GetVisualHRDepartmentsByIdents', {plain : dto.HRDepartmentVisualDTO, observable : dto.HRDepartmentObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualHRDepartmentsByOperation(): async.AsyncFunc3<dto.SampleSystemHRDepartmentSecurityOperationCode, Array<dto.HRDepartmentVisualDTO>, Array<dto.HRDepartmentObservableVisualDTO>, dto.HRDepartmentVisualDTO, dto.HRDepartmentObservableVisualDTO> {
         return new async.AsyncFunc3((securityOperationCode: dto.SampleSystemHRDepartmentSecurityOperationCode) => {
-            let baseParameters = {securityOperationCode : securityOperationCode};
-            let realParameters = baseParameters;
+            let baseParameters = securityOperationCode;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.HRDepartmentVisualDTO>, Array<dto.HRDepartmentObservableVisualDTO>, dto.HRDepartmentVisualDTO, dto.HRDepartmentObservableVisualDTO>();
-            return service.getData('HRDepartment/GetVisualHRDepartmentsByOperation', {plain : dto.HRDepartmentVisualDTO, observable : dto.HRDepartmentObservableVisualDTO}, realParameters);
+            return service.getData('HRDepartment/GetVisualHRDepartmentsByOperation', {plain : dto.HRDepartmentVisualDTO, observable : dto.HRDepartmentObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualIMRequest(): async.AsyncFunc3<dto.IMRequestIdentityDTO, dto.IMRequestVisualDTO, dto.IMRequestObservableVisualDTO, dto.IMRequestVisualDTO, dto.IMRequestObservableVisualDTO> {
         return new async.AsyncFunc3((iMRequestIdentity: dto.IMRequestIdentityDTO) => {
-            let baseParameters = {iMRequestIdentity : iMRequestIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = iMRequestIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.IMRequestVisualDTO, dto.IMRequestObservableVisualDTO, dto.IMRequestVisualDTO, dto.IMRequestObservableVisualDTO>();
-            return service.getData('IMRequest/GetVisualIMRequest', {plain : dto.IMRequestVisualDTO, observable : dto.IMRequestObservableVisualDTO}, realParameters);
+            return service.getData('IMRequest/GetVisualIMRequest', {plain : dto.IMRequestVisualDTO, observable : dto.IMRequestObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualIMRequestByName(): async.AsyncFunc3<string, dto.IMRequestVisualDTO, dto.IMRequestObservableVisualDTO, dto.IMRequestVisualDTO, dto.IMRequestObservableVisualDTO> {
         return new async.AsyncFunc3((iMRequestName: string) => {
-            let baseParameters = {iMRequestName : iMRequestName};
-            let realParameters = baseParameters;
+            let baseParameters = iMRequestName;
             let service = Environment.current.context.facadeFactory.createService<dto.IMRequestVisualDTO, dto.IMRequestObservableVisualDTO, dto.IMRequestVisualDTO, dto.IMRequestObservableVisualDTO>();
-            return service.getData('IMRequest/GetVisualIMRequestByName', {plain : dto.IMRequestVisualDTO, observable : dto.IMRequestObservableVisualDTO}, realParameters);
+            return service.getData('IMRequest/GetVisualIMRequestByName', {plain : dto.IMRequestVisualDTO, observable : dto.IMRequestObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualIMRequests(): async.AsyncFunc2<Array<dto.IMRequestVisualDTO>, Array<dto.IMRequestObservableVisualDTO>, dto.IMRequestVisualDTO, dto.IMRequestObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.IMRequestVisualDTO>, Array<dto.IMRequestObservableVisualDTO>, dto.IMRequestVisualDTO, dto.IMRequestObservableVisualDTO>();
-            return service.getData('IMRequest/GetVisualIMRequests', {plain : dto.IMRequestVisualDTO, observable : dto.IMRequestObservableVisualDTO}, realParameters);
+            return service.getData('IMRequest/GetVisualIMRequests', {plain : dto.IMRequestVisualDTO, observable : dto.IMRequestObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualIMRequestsByIdents(): async.AsyncFunc3<dto.IMRequestIdentityDTO[], Array<dto.IMRequestVisualDTO>, Array<dto.IMRequestObservableVisualDTO>, dto.IMRequestVisualDTO, dto.IMRequestObservableVisualDTO> {
         return new async.AsyncFunc3((iMRequestIdents: dto.IMRequestIdentityDTO[]) => {
-            let baseParameters = {iMRequestIdents : iMRequestIdents};
-            let realParameters = baseParameters;
+            let baseParameters = iMRequestIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.IMRequestVisualDTO>, Array<dto.IMRequestObservableVisualDTO>, dto.IMRequestVisualDTO, dto.IMRequestObservableVisualDTO>();
-            return service.getData('IMRequest/GetVisualIMRequestsByIdents', {plain : dto.IMRequestVisualDTO, observable : dto.IMRequestObservableVisualDTO}, realParameters);
+            return service.getData('IMRequest/GetVisualIMRequestsByIdents', {plain : dto.IMRequestVisualDTO, observable : dto.IMRequestObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualInformation(): async.AsyncFunc3<dto.InformationIdentityDTO, dto.InformationVisualDTO, dto.InformationObservableVisualDTO, dto.InformationVisualDTO, dto.InformationObservableVisualDTO> {
         return new async.AsyncFunc3((informationIdentity: dto.InformationIdentityDTO) => {
-            let baseParameters = {informationIdentity : informationIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = informationIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.InformationVisualDTO, dto.InformationObservableVisualDTO, dto.InformationVisualDTO, dto.InformationObservableVisualDTO>();
-            return service.getData('Information/GetVisualInformation', {plain : dto.InformationVisualDTO, observable : dto.InformationObservableVisualDTO}, realParameters);
+            return service.getData('Information/GetVisualInformation', {plain : dto.InformationVisualDTO, observable : dto.InformationObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualInformationByName(): async.AsyncFunc3<string, dto.InformationVisualDTO, dto.InformationObservableVisualDTO, dto.InformationVisualDTO, dto.InformationObservableVisualDTO> {
         return new async.AsyncFunc3((informationName: string) => {
-            let baseParameters = {informationName : informationName};
-            let realParameters = baseParameters;
+            let baseParameters = informationName;
             let service = Environment.current.context.facadeFactory.createService<dto.InformationVisualDTO, dto.InformationObservableVisualDTO, dto.InformationVisualDTO, dto.InformationObservableVisualDTO>();
-            return service.getData('Information/GetVisualInformationByName', {plain : dto.InformationVisualDTO, observable : dto.InformationObservableVisualDTO}, realParameters);
+            return service.getData('Information/GetVisualInformationByName', {plain : dto.InformationVisualDTO, observable : dto.InformationObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualInformations(): async.AsyncFunc2<Array<dto.InformationVisualDTO>, Array<dto.InformationObservableVisualDTO>, dto.InformationVisualDTO, dto.InformationObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.InformationVisualDTO>, Array<dto.InformationObservableVisualDTO>, dto.InformationVisualDTO, dto.InformationObservableVisualDTO>();
-            return service.getData('Information/GetVisualInformations', {plain : dto.InformationVisualDTO, observable : dto.InformationObservableVisualDTO}, realParameters);
+            return service.getData('Information/GetVisualInformations', {plain : dto.InformationVisualDTO, observable : dto.InformationObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualInformationsByIdents(): async.AsyncFunc3<dto.InformationIdentityDTO[], Array<dto.InformationVisualDTO>, Array<dto.InformationObservableVisualDTO>, dto.InformationVisualDTO, dto.InformationObservableVisualDTO> {
         return new async.AsyncFunc3((informationIdents: dto.InformationIdentityDTO[]) => {
-            let baseParameters = {informationIdents : informationIdents};
-            let realParameters = baseParameters;
+            let baseParameters = informationIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.InformationVisualDTO>, Array<dto.InformationObservableVisualDTO>, dto.InformationVisualDTO, dto.InformationObservableVisualDTO>();
-            return service.getData('Information/GetVisualInformationsByIdents', {plain : dto.InformationVisualDTO, observable : dto.InformationObservableVisualDTO}, realParameters);
+            return service.getData('Information/GetVisualInformationsByIdents', {plain : dto.InformationVisualDTO, observable : dto.InformationObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualLocation(): async.AsyncFunc3<dto.LocationIdentityDTO, dto.LocationVisualDTO, dto.LocationObservableVisualDTO, dto.LocationVisualDTO, dto.LocationObservableVisualDTO> {
         return new async.AsyncFunc3((locationIdentity: dto.LocationIdentityDTO) => {
-            let baseParameters = {locationIdentity : locationIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = locationIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.LocationVisualDTO, dto.LocationObservableVisualDTO, dto.LocationVisualDTO, dto.LocationObservableVisualDTO>();
-            return service.getData('Location/GetVisualLocation', {plain : dto.LocationVisualDTO, observable : dto.LocationObservableVisualDTO}, realParameters);
+            return service.getData('Location/GetVisualLocation', {plain : dto.LocationVisualDTO, observable : dto.LocationObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualLocation1676(): async.AsyncFunc3<dto.Location1676IdentityDTO, dto.Location1676VisualDTO, dto.Location1676ObservableVisualDTO, dto.Location1676VisualDTO, dto.Location1676ObservableVisualDTO> {
         return new async.AsyncFunc3((location1676Identity: dto.Location1676IdentityDTO) => {
-            let baseParameters = {location1676Identity : location1676Identity};
-            let realParameters = baseParameters;
+            let baseParameters = location1676Identity;
             let service = Environment.current.context.facadeFactory.createService<dto.Location1676VisualDTO, dto.Location1676ObservableVisualDTO, dto.Location1676VisualDTO, dto.Location1676ObservableVisualDTO>();
-            return service.getData('Location1676/GetVisualLocation1676', {plain : dto.Location1676VisualDTO, observable : dto.Location1676ObservableVisualDTO}, realParameters);
+            return service.getData('Location1676/GetVisualLocation1676', {plain : dto.Location1676VisualDTO, observable : dto.Location1676ObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualLocation1676ByName(): async.AsyncFunc3<string, dto.Location1676VisualDTO, dto.Location1676ObservableVisualDTO, dto.Location1676VisualDTO, dto.Location1676ObservableVisualDTO> {
         return new async.AsyncFunc3((location1676Name: string) => {
-            let baseParameters = {location1676Name : location1676Name};
-            let realParameters = baseParameters;
+            let baseParameters = location1676Name;
             let service = Environment.current.context.facadeFactory.createService<dto.Location1676VisualDTO, dto.Location1676ObservableVisualDTO, dto.Location1676VisualDTO, dto.Location1676ObservableVisualDTO>();
-            return service.getData('Location1676/GetVisualLocation1676ByName', {plain : dto.Location1676VisualDTO, observable : dto.Location1676ObservableVisualDTO}, realParameters);
+            return service.getData('Location1676/GetVisualLocation1676ByName', {plain : dto.Location1676VisualDTO, observable : dto.Location1676ObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualLocation1676s(): async.AsyncFunc2<Array<dto.Location1676VisualDTO>, Array<dto.Location1676ObservableVisualDTO>, dto.Location1676VisualDTO, dto.Location1676ObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.Location1676VisualDTO>, Array<dto.Location1676ObservableVisualDTO>, dto.Location1676VisualDTO, dto.Location1676ObservableVisualDTO>();
-            return service.getData('Location1676/GetVisualLocation1676s', {plain : dto.Location1676VisualDTO, observable : dto.Location1676ObservableVisualDTO}, realParameters);
+            return service.getData('Location1676/GetVisualLocation1676s', {plain : dto.Location1676VisualDTO, observable : dto.Location1676ObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualLocation1676sByIdents(): async.AsyncFunc3<dto.Location1676IdentityDTO[], Array<dto.Location1676VisualDTO>, Array<dto.Location1676ObservableVisualDTO>, dto.Location1676VisualDTO, dto.Location1676ObservableVisualDTO> {
         return new async.AsyncFunc3((location1676Idents: dto.Location1676IdentityDTO[]) => {
-            let baseParameters = {location1676Idents : location1676Idents};
-            let realParameters = baseParameters;
+            let baseParameters = location1676Idents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.Location1676VisualDTO>, Array<dto.Location1676ObservableVisualDTO>, dto.Location1676VisualDTO, dto.Location1676ObservableVisualDTO>();
-            return service.getData('Location1676/GetVisualLocation1676sByIdents', {plain : dto.Location1676VisualDTO, observable : dto.Location1676ObservableVisualDTO}, realParameters);
+            return service.getData('Location1676/GetVisualLocation1676sByIdents', {plain : dto.Location1676VisualDTO, observable : dto.Location1676ObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualLocationByName(): async.AsyncFunc3<string, dto.LocationVisualDTO, dto.LocationObservableVisualDTO, dto.LocationVisualDTO, dto.LocationObservableVisualDTO> {
         return new async.AsyncFunc3((locationName: string) => {
-            let baseParameters = {locationName : locationName};
-            let realParameters = baseParameters;
+            let baseParameters = locationName;
             let service = Environment.current.context.facadeFactory.createService<dto.LocationVisualDTO, dto.LocationObservableVisualDTO, dto.LocationVisualDTO, dto.LocationObservableVisualDTO>();
-            return service.getData('Location/GetVisualLocationByName', {plain : dto.LocationVisualDTO, observable : dto.LocationObservableVisualDTO}, realParameters);
+            return service.getData('Location/GetVisualLocationByName', {plain : dto.LocationVisualDTO, observable : dto.LocationObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualLocations(): async.AsyncFunc2<Array<dto.LocationVisualDTO>, Array<dto.LocationObservableVisualDTO>, dto.LocationVisualDTO, dto.LocationObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.LocationVisualDTO>, Array<dto.LocationObservableVisualDTO>, dto.LocationVisualDTO, dto.LocationObservableVisualDTO>();
-            return service.getData('Location/GetVisualLocations', {plain : dto.LocationVisualDTO, observable : dto.LocationObservableVisualDTO}, realParameters);
+            return service.getData('Location/GetVisualLocations', {plain : dto.LocationVisualDTO, observable : dto.LocationObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualLocationsByIdents(): async.AsyncFunc3<dto.LocationIdentityDTO[], Array<dto.LocationVisualDTO>, Array<dto.LocationObservableVisualDTO>, dto.LocationVisualDTO, dto.LocationObservableVisualDTO> {
         return new async.AsyncFunc3((locationIdents: dto.LocationIdentityDTO[]) => {
-            let baseParameters = {locationIdents : locationIdents};
-            let realParameters = baseParameters;
+            let baseParameters = locationIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.LocationVisualDTO>, Array<dto.LocationObservableVisualDTO>, dto.LocationVisualDTO, dto.LocationObservableVisualDTO>();
-            return service.getData('Location/GetVisualLocationsByIdents', {plain : dto.LocationVisualDTO, observable : dto.LocationObservableVisualDTO}, realParameters);
+            return service.getData('Location/GetVisualLocationsByIdents', {plain : dto.LocationVisualDTO, observable : dto.LocationObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualLocationsByOperation(): async.AsyncFunc3<dto.SampleSystemLocationSecurityOperationCode, Array<dto.LocationVisualDTO>, Array<dto.LocationObservableVisualDTO>, dto.LocationVisualDTO, dto.LocationObservableVisualDTO> {
         return new async.AsyncFunc3((securityOperationCode: dto.SampleSystemLocationSecurityOperationCode) => {
-            let baseParameters = {securityOperationCode : securityOperationCode};
-            let realParameters = baseParameters;
+            let baseParameters = securityOperationCode;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.LocationVisualDTO>, Array<dto.LocationObservableVisualDTO>, dto.LocationVisualDTO, dto.LocationObservableVisualDTO>();
-            return service.getData('Location/GetVisualLocationsByOperation', {plain : dto.LocationVisualDTO, observable : dto.LocationObservableVisualDTO}, realParameters);
+            return service.getData('Location/GetVisualLocationsByOperation', {plain : dto.LocationVisualDTO, observable : dto.LocationObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualManagementUnit(): async.AsyncFunc3<dto.ManagementUnitIdentityDTO, dto.ManagementUnitVisualDTO, dto.ManagementUnitObservableVisualDTO, dto.ManagementUnitVisualDTO, dto.ManagementUnitObservableVisualDTO> {
         return new async.AsyncFunc3((managementUnitIdentity: dto.ManagementUnitIdentityDTO) => {
-            let baseParameters = {managementUnitIdentity : managementUnitIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.ManagementUnitVisualDTO, dto.ManagementUnitObservableVisualDTO, dto.ManagementUnitVisualDTO, dto.ManagementUnitObservableVisualDTO>();
-            return service.getData('ManagementUnit/GetVisualManagementUnit', {plain : dto.ManagementUnitVisualDTO, observable : dto.ManagementUnitObservableVisualDTO}, realParameters);
+            return service.getData('ManagementUnit/GetVisualManagementUnit', {plain : dto.ManagementUnitVisualDTO, observable : dto.ManagementUnitObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualManagementUnitByName(): async.AsyncFunc3<string, dto.ManagementUnitVisualDTO, dto.ManagementUnitObservableVisualDTO, dto.ManagementUnitVisualDTO, dto.ManagementUnitObservableVisualDTO> {
         return new async.AsyncFunc3((managementUnitName: string) => {
-            let baseParameters = {managementUnitName : managementUnitName};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitName;
             let service = Environment.current.context.facadeFactory.createService<dto.ManagementUnitVisualDTO, dto.ManagementUnitObservableVisualDTO, dto.ManagementUnitVisualDTO, dto.ManagementUnitObservableVisualDTO>();
-            return service.getData('ManagementUnit/GetVisualManagementUnitByName', {plain : dto.ManagementUnitVisualDTO, observable : dto.ManagementUnitObservableVisualDTO}, realParameters);
+            return service.getData('ManagementUnit/GetVisualManagementUnitByName', {plain : dto.ManagementUnitVisualDTO, observable : dto.ManagementUnitObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualManagementUnits(): async.AsyncFunc2<Array<dto.ManagementUnitVisualDTO>, Array<dto.ManagementUnitObservableVisualDTO>, dto.ManagementUnitVisualDTO, dto.ManagementUnitObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.ManagementUnitVisualDTO>, Array<dto.ManagementUnitObservableVisualDTO>, dto.ManagementUnitVisualDTO, dto.ManagementUnitObservableVisualDTO>();
-            return service.getData('ManagementUnit/GetVisualManagementUnits', {plain : dto.ManagementUnitVisualDTO, observable : dto.ManagementUnitObservableVisualDTO}, realParameters);
+            return service.getData('ManagementUnit/GetVisualManagementUnits', {plain : dto.ManagementUnitVisualDTO, observable : dto.ManagementUnitObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualManagementUnitsByIdents(): async.AsyncFunc3<dto.ManagementUnitIdentityDTO[], Array<dto.ManagementUnitVisualDTO>, Array<dto.ManagementUnitObservableVisualDTO>, dto.ManagementUnitVisualDTO, dto.ManagementUnitObservableVisualDTO> {
         return new async.AsyncFunc3((managementUnitIdents: dto.ManagementUnitIdentityDTO[]) => {
-            let baseParameters = {managementUnitIdents : managementUnitIdents};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.ManagementUnitVisualDTO>, Array<dto.ManagementUnitObservableVisualDTO>, dto.ManagementUnitVisualDTO, dto.ManagementUnitObservableVisualDTO>();
-            return service.getData('ManagementUnit/GetVisualManagementUnitsByIdents', {plain : dto.ManagementUnitVisualDTO, observable : dto.ManagementUnitObservableVisualDTO}, realParameters);
+            return service.getData('ManagementUnit/GetVisualManagementUnitsByIdents', {plain : dto.ManagementUnitVisualDTO, observable : dto.ManagementUnitObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualManagementUnitsByOperation(): async.AsyncFunc3<dto.SampleSystemManagementUnitSecurityOperationCode, Array<dto.ManagementUnitVisualDTO>, Array<dto.ManagementUnitObservableVisualDTO>, dto.ManagementUnitVisualDTO, dto.ManagementUnitObservableVisualDTO> {
         return new async.AsyncFunc3((securityOperationCode: dto.SampleSystemManagementUnitSecurityOperationCode) => {
-            let baseParameters = {securityOperationCode : securityOperationCode};
-            let realParameters = baseParameters;
+            let baseParameters = securityOperationCode;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.ManagementUnitVisualDTO>, Array<dto.ManagementUnitObservableVisualDTO>, dto.ManagementUnitVisualDTO, dto.ManagementUnitObservableVisualDTO>();
-            return service.getData('ManagementUnit/GetVisualManagementUnitsByOperation', {plain : dto.ManagementUnitVisualDTO, observable : dto.ManagementUnitObservableVisualDTO}, realParameters);
+            return service.getData('ManagementUnit/GetVisualManagementUnitsByOperation', {plain : dto.ManagementUnitVisualDTO, observable : dto.ManagementUnitObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestCustomContextSecurityObj(): async.AsyncFunc3<dto.TestCustomContextSecurityObjIdentityDTO, dto.TestCustomContextSecurityObjVisualDTO, dto.TestCustomContextSecurityObjObservableVisualDTO, dto.TestCustomContextSecurityObjVisualDTO, dto.TestCustomContextSecurityObjObservableVisualDTO> {
         return new async.AsyncFunc3((testCustomContextSecurityObjIdentity: dto.TestCustomContextSecurityObjIdentityDTO) => {
-            let baseParameters = {testCustomContextSecurityObjIdentity : testCustomContextSecurityObjIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testCustomContextSecurityObjIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestCustomContextSecurityObjVisualDTO, dto.TestCustomContextSecurityObjObservableVisualDTO, dto.TestCustomContextSecurityObjVisualDTO, dto.TestCustomContextSecurityObjObservableVisualDTO>();
-            return service.getData('TestCustomContextSecurityObj/GetVisualTestCustomContextSecurityObj', {plain : dto.TestCustomContextSecurityObjVisualDTO, observable : dto.TestCustomContextSecurityObjObservableVisualDTO}, realParameters);
+            return service.getData('TestCustomContextSecurityObj/GetVisualTestCustomContextSecurityObj', {plain : dto.TestCustomContextSecurityObjVisualDTO, observable : dto.TestCustomContextSecurityObjObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestCustomContextSecurityObjByName(): async.AsyncFunc3<string, dto.TestCustomContextSecurityObjVisualDTO, dto.TestCustomContextSecurityObjObservableVisualDTO, dto.TestCustomContextSecurityObjVisualDTO, dto.TestCustomContextSecurityObjObservableVisualDTO> {
         return new async.AsyncFunc3((testCustomContextSecurityObjName: string) => {
-            let baseParameters = {testCustomContextSecurityObjName : testCustomContextSecurityObjName};
-            let realParameters = baseParameters;
+            let baseParameters = testCustomContextSecurityObjName;
             let service = Environment.current.context.facadeFactory.createService<dto.TestCustomContextSecurityObjVisualDTO, dto.TestCustomContextSecurityObjObservableVisualDTO, dto.TestCustomContextSecurityObjVisualDTO, dto.TestCustomContextSecurityObjObservableVisualDTO>();
-            return service.getData('TestCustomContextSecurityObj/GetVisualTestCustomContextSecurityObjByName', {plain : dto.TestCustomContextSecurityObjVisualDTO, observable : dto.TestCustomContextSecurityObjObservableVisualDTO}, realParameters);
+            return service.getData('TestCustomContextSecurityObj/GetVisualTestCustomContextSecurityObjByName', {plain : dto.TestCustomContextSecurityObjVisualDTO, observable : dto.TestCustomContextSecurityObjObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestCustomContextSecurityObjs(): async.AsyncFunc2<Array<dto.TestCustomContextSecurityObjVisualDTO>, Array<dto.TestCustomContextSecurityObjObservableVisualDTO>, dto.TestCustomContextSecurityObjVisualDTO, dto.TestCustomContextSecurityObjObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestCustomContextSecurityObjVisualDTO>, Array<dto.TestCustomContextSecurityObjObservableVisualDTO>, dto.TestCustomContextSecurityObjVisualDTO, dto.TestCustomContextSecurityObjObservableVisualDTO>();
-            return service.getData('TestCustomContextSecurityObj/GetVisualTestCustomContextSecurityObjs', {plain : dto.TestCustomContextSecurityObjVisualDTO, observable : dto.TestCustomContextSecurityObjObservableVisualDTO}, realParameters);
+            return service.getData('TestCustomContextSecurityObj/GetVisualTestCustomContextSecurityObjs', {plain : dto.TestCustomContextSecurityObjVisualDTO, observable : dto.TestCustomContextSecurityObjObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestCustomContextSecurityObjsByIdents(): async.AsyncFunc3<dto.TestCustomContextSecurityObjIdentityDTO[], Array<dto.TestCustomContextSecurityObjVisualDTO>, Array<dto.TestCustomContextSecurityObjObservableVisualDTO>, dto.TestCustomContextSecurityObjVisualDTO, dto.TestCustomContextSecurityObjObservableVisualDTO> {
         return new async.AsyncFunc3((testCustomContextSecurityObjIdents: dto.TestCustomContextSecurityObjIdentityDTO[]) => {
-            let baseParameters = {testCustomContextSecurityObjIdents : testCustomContextSecurityObjIdents};
-            let realParameters = baseParameters;
+            let baseParameters = testCustomContextSecurityObjIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestCustomContextSecurityObjVisualDTO>, Array<dto.TestCustomContextSecurityObjObservableVisualDTO>, dto.TestCustomContextSecurityObjVisualDTO, dto.TestCustomContextSecurityObjObservableVisualDTO>();
-            return service.getData('TestCustomContextSecurityObj/GetVisualTestCustomContextSecurityObjsByIdents', {plain : dto.TestCustomContextSecurityObjVisualDTO, observable : dto.TestCustomContextSecurityObjObservableVisualDTO}, realParameters);
+            return service.getData('TestCustomContextSecurityObj/GetVisualTestCustomContextSecurityObjsByIdents', {plain : dto.TestCustomContextSecurityObjVisualDTO, observable : dto.TestCustomContextSecurityObjObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestRootSecurityObj(): async.AsyncFunc3<dto.TestRootSecurityObjIdentityDTO, dto.TestRootSecurityObjVisualDTO, dto.TestRootSecurityObjObservableVisualDTO, dto.TestRootSecurityObjVisualDTO, dto.TestRootSecurityObjObservableVisualDTO> {
         return new async.AsyncFunc3((testRootSecurityObjIdentity: dto.TestRootSecurityObjIdentityDTO) => {
-            let baseParameters = {testRootSecurityObjIdentity : testRootSecurityObjIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testRootSecurityObjIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestRootSecurityObjVisualDTO, dto.TestRootSecurityObjObservableVisualDTO, dto.TestRootSecurityObjVisualDTO, dto.TestRootSecurityObjObservableVisualDTO>();
-            return service.getData('TestRootSecurityObj/GetVisualTestRootSecurityObj', {plain : dto.TestRootSecurityObjVisualDTO, observable : dto.TestRootSecurityObjObservableVisualDTO}, realParameters);
+            return service.getData('TestRootSecurityObj/GetVisualTestRootSecurityObj', {plain : dto.TestRootSecurityObjVisualDTO, observable : dto.TestRootSecurityObjObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestRootSecurityObjByName(): async.AsyncFunc3<string, dto.TestRootSecurityObjVisualDTO, dto.TestRootSecurityObjObservableVisualDTO, dto.TestRootSecurityObjVisualDTO, dto.TestRootSecurityObjObservableVisualDTO> {
         return new async.AsyncFunc3((testRootSecurityObjName: string) => {
-            let baseParameters = {testRootSecurityObjName : testRootSecurityObjName};
-            let realParameters = baseParameters;
+            let baseParameters = testRootSecurityObjName;
             let service = Environment.current.context.facadeFactory.createService<dto.TestRootSecurityObjVisualDTO, dto.TestRootSecurityObjObservableVisualDTO, dto.TestRootSecurityObjVisualDTO, dto.TestRootSecurityObjObservableVisualDTO>();
-            return service.getData('TestRootSecurityObj/GetVisualTestRootSecurityObjByName', {plain : dto.TestRootSecurityObjVisualDTO, observable : dto.TestRootSecurityObjObservableVisualDTO}, realParameters);
+            return service.getData('TestRootSecurityObj/GetVisualTestRootSecurityObjByName', {plain : dto.TestRootSecurityObjVisualDTO, observable : dto.TestRootSecurityObjObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestRootSecurityObjs(): async.AsyncFunc2<Array<dto.TestRootSecurityObjVisualDTO>, Array<dto.TestRootSecurityObjObservableVisualDTO>, dto.TestRootSecurityObjVisualDTO, dto.TestRootSecurityObjObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestRootSecurityObjVisualDTO>, Array<dto.TestRootSecurityObjObservableVisualDTO>, dto.TestRootSecurityObjVisualDTO, dto.TestRootSecurityObjObservableVisualDTO>();
-            return service.getData('TestRootSecurityObj/GetVisualTestRootSecurityObjs', {plain : dto.TestRootSecurityObjVisualDTO, observable : dto.TestRootSecurityObjObservableVisualDTO}, realParameters);
+            return service.getData('TestRootSecurityObj/GetVisualTestRootSecurityObjs', {plain : dto.TestRootSecurityObjVisualDTO, observable : dto.TestRootSecurityObjObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestRootSecurityObjsByIdents(): async.AsyncFunc3<dto.TestRootSecurityObjIdentityDTO[], Array<dto.TestRootSecurityObjVisualDTO>, Array<dto.TestRootSecurityObjObservableVisualDTO>, dto.TestRootSecurityObjVisualDTO, dto.TestRootSecurityObjObservableVisualDTO> {
         return new async.AsyncFunc3((testRootSecurityObjIdents: dto.TestRootSecurityObjIdentityDTO[]) => {
-            let baseParameters = {testRootSecurityObjIdents : testRootSecurityObjIdents};
-            let realParameters = baseParameters;
+            let baseParameters = testRootSecurityObjIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestRootSecurityObjVisualDTO>, Array<dto.TestRootSecurityObjObservableVisualDTO>, dto.TestRootSecurityObjVisualDTO, dto.TestRootSecurityObjObservableVisualDTO>();
-            return service.getData('TestRootSecurityObj/GetVisualTestRootSecurityObjsByIdents', {plain : dto.TestRootSecurityObjVisualDTO, observable : dto.TestRootSecurityObjObservableVisualDTO}, realParameters);
+            return service.getData('TestRootSecurityObj/GetVisualTestRootSecurityObjsByIdents', {plain : dto.TestRootSecurityObjVisualDTO, observable : dto.TestRootSecurityObjObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestSecurityObjItem(): async.AsyncFunc3<dto.TestSecurityObjItemIdentityDTO, dto.TestSecurityObjItemVisualDTO, dto.TestSecurityObjItemObservableVisualDTO, dto.TestSecurityObjItemVisualDTO, dto.TestSecurityObjItemObservableVisualDTO> {
         return new async.AsyncFunc3((testSecurityObjItemIdentity: dto.TestSecurityObjItemIdentityDTO) => {
-            let baseParameters = {testSecurityObjItemIdentity : testSecurityObjItemIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testSecurityObjItemIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecurityObjItemVisualDTO, dto.TestSecurityObjItemObservableVisualDTO, dto.TestSecurityObjItemVisualDTO, dto.TestSecurityObjItemObservableVisualDTO>();
-            return service.getData('TestSecurityObjItem/GetVisualTestSecurityObjItem', {plain : dto.TestSecurityObjItemVisualDTO, observable : dto.TestSecurityObjItemObservableVisualDTO}, realParameters);
+            return service.getData('TestSecurityObjItem/GetVisualTestSecurityObjItem', {plain : dto.TestSecurityObjItemVisualDTO, observable : dto.TestSecurityObjItemObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestSecurityObjItemByName(): async.AsyncFunc3<string, dto.TestSecurityObjItemVisualDTO, dto.TestSecurityObjItemObservableVisualDTO, dto.TestSecurityObjItemVisualDTO, dto.TestSecurityObjItemObservableVisualDTO> {
         return new async.AsyncFunc3((testSecurityObjItemName: string) => {
-            let baseParameters = {testSecurityObjItemName : testSecurityObjItemName};
-            let realParameters = baseParameters;
+            let baseParameters = testSecurityObjItemName;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecurityObjItemVisualDTO, dto.TestSecurityObjItemObservableVisualDTO, dto.TestSecurityObjItemVisualDTO, dto.TestSecurityObjItemObservableVisualDTO>();
-            return service.getData('TestSecurityObjItem/GetVisualTestSecurityObjItemByName', {plain : dto.TestSecurityObjItemVisualDTO, observable : dto.TestSecurityObjItemObservableVisualDTO}, realParameters);
+            return service.getData('TestSecurityObjItem/GetVisualTestSecurityObjItemByName', {plain : dto.TestSecurityObjItemVisualDTO, observable : dto.TestSecurityObjItemObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestSecurityObjItems(): async.AsyncFunc2<Array<dto.TestSecurityObjItemVisualDTO>, Array<dto.TestSecurityObjItemObservableVisualDTO>, dto.TestSecurityObjItemVisualDTO, dto.TestSecurityObjItemObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecurityObjItemVisualDTO>, Array<dto.TestSecurityObjItemObservableVisualDTO>, dto.TestSecurityObjItemVisualDTO, dto.TestSecurityObjItemObservableVisualDTO>();
-            return service.getData('TestSecurityObjItem/GetVisualTestSecurityObjItems', {plain : dto.TestSecurityObjItemVisualDTO, observable : dto.TestSecurityObjItemObservableVisualDTO}, realParameters);
+            return service.getData('TestSecurityObjItem/GetVisualTestSecurityObjItems', {plain : dto.TestSecurityObjItemVisualDTO, observable : dto.TestSecurityObjItemObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestSecurityObjItemsByIdents(): async.AsyncFunc3<dto.TestSecurityObjItemIdentityDTO[], Array<dto.TestSecurityObjItemVisualDTO>, Array<dto.TestSecurityObjItemObservableVisualDTO>, dto.TestSecurityObjItemVisualDTO, dto.TestSecurityObjItemObservableVisualDTO> {
         return new async.AsyncFunc3((testSecurityObjItemIdents: dto.TestSecurityObjItemIdentityDTO[]) => {
-            let baseParameters = {testSecurityObjItemIdents : testSecurityObjItemIdents};
-            let realParameters = baseParameters;
+            let baseParameters = testSecurityObjItemIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecurityObjItemVisualDTO>, Array<dto.TestSecurityObjItemObservableVisualDTO>, dto.TestSecurityObjItemVisualDTO, dto.TestSecurityObjItemObservableVisualDTO>();
-            return service.getData('TestSecurityObjItem/GetVisualTestSecurityObjItemsByIdents', {plain : dto.TestSecurityObjItemVisualDTO, observable : dto.TestSecurityObjItemObservableVisualDTO}, realParameters);
+            return service.getData('TestSecurityObjItem/GetVisualTestSecurityObjItemsByIdents', {plain : dto.TestSecurityObjItemVisualDTO, observable : dto.TestSecurityObjItemObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestSecuritySubObjItem(): async.AsyncFunc3<dto.TestSecuritySubObjItemIdentityDTO, dto.TestSecuritySubObjItemVisualDTO, dto.TestSecuritySubObjItemObservableVisualDTO, dto.TestSecuritySubObjItemVisualDTO, dto.TestSecuritySubObjItemObservableVisualDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItemIdentity: dto.TestSecuritySubObjItemIdentityDTO) => {
-            let baseParameters = {testSecuritySubObjItemIdentity : testSecuritySubObjItemIdentity};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItemIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItemVisualDTO, dto.TestSecuritySubObjItemObservableVisualDTO, dto.TestSecuritySubObjItemVisualDTO, dto.TestSecuritySubObjItemObservableVisualDTO>();
-            return service.getData('TestSecuritySubObjItem/GetVisualTestSecuritySubObjItem', {plain : dto.TestSecuritySubObjItemVisualDTO, observable : dto.TestSecuritySubObjItemObservableVisualDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem/GetVisualTestSecuritySubObjItem', {plain : dto.TestSecuritySubObjItemVisualDTO, observable : dto.TestSecuritySubObjItemObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestSecuritySubObjItem2(): async.AsyncFunc3<dto.TestSecuritySubObjItem2IdentityDTO, dto.TestSecuritySubObjItem2VisualDTO, dto.TestSecuritySubObjItem2ObservableVisualDTO, dto.TestSecuritySubObjItem2VisualDTO, dto.TestSecuritySubObjItem2ObservableVisualDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem2Identity: dto.TestSecuritySubObjItem2IdentityDTO) => {
-            let baseParameters = {testSecuritySubObjItem2Identity : testSecuritySubObjItem2Identity};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem2Identity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItem2VisualDTO, dto.TestSecuritySubObjItem2ObservableVisualDTO, dto.TestSecuritySubObjItem2VisualDTO, dto.TestSecuritySubObjItem2ObservableVisualDTO>();
-            return service.getData('TestSecuritySubObjItem2/GetVisualTestSecuritySubObjItem2', {plain : dto.TestSecuritySubObjItem2VisualDTO, observable : dto.TestSecuritySubObjItem2ObservableVisualDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem2/GetVisualTestSecuritySubObjItem2', {plain : dto.TestSecuritySubObjItem2VisualDTO, observable : dto.TestSecuritySubObjItem2ObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestSecuritySubObjItem2ByName(): async.AsyncFunc3<string, dto.TestSecuritySubObjItem2VisualDTO, dto.TestSecuritySubObjItem2ObservableVisualDTO, dto.TestSecuritySubObjItem2VisualDTO, dto.TestSecuritySubObjItem2ObservableVisualDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem2Name: string) => {
-            let baseParameters = {testSecuritySubObjItem2Name : testSecuritySubObjItem2Name};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem2Name;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItem2VisualDTO, dto.TestSecuritySubObjItem2ObservableVisualDTO, dto.TestSecuritySubObjItem2VisualDTO, dto.TestSecuritySubObjItem2ObservableVisualDTO>();
-            return service.getData('TestSecuritySubObjItem2/GetVisualTestSecuritySubObjItem2ByName', {plain : dto.TestSecuritySubObjItem2VisualDTO, observable : dto.TestSecuritySubObjItem2ObservableVisualDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem2/GetVisualTestSecuritySubObjItem2ByName', {plain : dto.TestSecuritySubObjItem2VisualDTO, observable : dto.TestSecuritySubObjItem2ObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestSecuritySubObjItem2s(): async.AsyncFunc2<Array<dto.TestSecuritySubObjItem2VisualDTO>, Array<dto.TestSecuritySubObjItem2ObservableVisualDTO>, dto.TestSecuritySubObjItem2VisualDTO, dto.TestSecuritySubObjItem2ObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecuritySubObjItem2VisualDTO>, Array<dto.TestSecuritySubObjItem2ObservableVisualDTO>, dto.TestSecuritySubObjItem2VisualDTO, dto.TestSecuritySubObjItem2ObservableVisualDTO>();
-            return service.getData('TestSecuritySubObjItem2/GetVisualTestSecuritySubObjItem2s', {plain : dto.TestSecuritySubObjItem2VisualDTO, observable : dto.TestSecuritySubObjItem2ObservableVisualDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem2/GetVisualTestSecuritySubObjItem2s', {plain : dto.TestSecuritySubObjItem2VisualDTO, observable : dto.TestSecuritySubObjItem2ObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestSecuritySubObjItem2sByIdents(): async.AsyncFunc3<dto.TestSecuritySubObjItem2IdentityDTO[], Array<dto.TestSecuritySubObjItem2VisualDTO>, Array<dto.TestSecuritySubObjItem2ObservableVisualDTO>, dto.TestSecuritySubObjItem2VisualDTO, dto.TestSecuritySubObjItem2ObservableVisualDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem2Idents: dto.TestSecuritySubObjItem2IdentityDTO[]) => {
-            let baseParameters = {testSecuritySubObjItem2Idents : testSecuritySubObjItem2Idents};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem2Idents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecuritySubObjItem2VisualDTO>, Array<dto.TestSecuritySubObjItem2ObservableVisualDTO>, dto.TestSecuritySubObjItem2VisualDTO, dto.TestSecuritySubObjItem2ObservableVisualDTO>();
-            return service.getData('TestSecuritySubObjItem2/GetVisualTestSecuritySubObjItem2sByIdents', {plain : dto.TestSecuritySubObjItem2VisualDTO, observable : dto.TestSecuritySubObjItem2ObservableVisualDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem2/GetVisualTestSecuritySubObjItem2sByIdents', {plain : dto.TestSecuritySubObjItem2VisualDTO, observable : dto.TestSecuritySubObjItem2ObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestSecuritySubObjItem3(): async.AsyncFunc3<dto.TestSecuritySubObjItem3IdentityDTO, dto.TestSecuritySubObjItem3VisualDTO, dto.TestSecuritySubObjItem3ObservableVisualDTO, dto.TestSecuritySubObjItem3VisualDTO, dto.TestSecuritySubObjItem3ObservableVisualDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem3Identity: dto.TestSecuritySubObjItem3IdentityDTO) => {
-            let baseParameters = {testSecuritySubObjItem3Identity : testSecuritySubObjItem3Identity};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem3Identity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItem3VisualDTO, dto.TestSecuritySubObjItem3ObservableVisualDTO, dto.TestSecuritySubObjItem3VisualDTO, dto.TestSecuritySubObjItem3ObservableVisualDTO>();
-            return service.getData('TestSecuritySubObjItem3/GetVisualTestSecuritySubObjItem3', {plain : dto.TestSecuritySubObjItem3VisualDTO, observable : dto.TestSecuritySubObjItem3ObservableVisualDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem3/GetVisualTestSecuritySubObjItem3', {plain : dto.TestSecuritySubObjItem3VisualDTO, observable : dto.TestSecuritySubObjItem3ObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestSecuritySubObjItem3ByName(): async.AsyncFunc3<string, dto.TestSecuritySubObjItem3VisualDTO, dto.TestSecuritySubObjItem3ObservableVisualDTO, dto.TestSecuritySubObjItem3VisualDTO, dto.TestSecuritySubObjItem3ObservableVisualDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem3Name: string) => {
-            let baseParameters = {testSecuritySubObjItem3Name : testSecuritySubObjItem3Name};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem3Name;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItem3VisualDTO, dto.TestSecuritySubObjItem3ObservableVisualDTO, dto.TestSecuritySubObjItem3VisualDTO, dto.TestSecuritySubObjItem3ObservableVisualDTO>();
-            return service.getData('TestSecuritySubObjItem3/GetVisualTestSecuritySubObjItem3ByName', {plain : dto.TestSecuritySubObjItem3VisualDTO, observable : dto.TestSecuritySubObjItem3ObservableVisualDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem3/GetVisualTestSecuritySubObjItem3ByName', {plain : dto.TestSecuritySubObjItem3VisualDTO, observable : dto.TestSecuritySubObjItem3ObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestSecuritySubObjItem3s(): async.AsyncFunc2<Array<dto.TestSecuritySubObjItem3VisualDTO>, Array<dto.TestSecuritySubObjItem3ObservableVisualDTO>, dto.TestSecuritySubObjItem3VisualDTO, dto.TestSecuritySubObjItem3ObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecuritySubObjItem3VisualDTO>, Array<dto.TestSecuritySubObjItem3ObservableVisualDTO>, dto.TestSecuritySubObjItem3VisualDTO, dto.TestSecuritySubObjItem3ObservableVisualDTO>();
-            return service.getData('TestSecuritySubObjItem3/GetVisualTestSecuritySubObjItem3s', {plain : dto.TestSecuritySubObjItem3VisualDTO, observable : dto.TestSecuritySubObjItem3ObservableVisualDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem3/GetVisualTestSecuritySubObjItem3s', {plain : dto.TestSecuritySubObjItem3VisualDTO, observable : dto.TestSecuritySubObjItem3ObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestSecuritySubObjItem3sByIdents(): async.AsyncFunc3<dto.TestSecuritySubObjItem3IdentityDTO[], Array<dto.TestSecuritySubObjItem3VisualDTO>, Array<dto.TestSecuritySubObjItem3ObservableVisualDTO>, dto.TestSecuritySubObjItem3VisualDTO, dto.TestSecuritySubObjItem3ObservableVisualDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItem3Idents: dto.TestSecuritySubObjItem3IdentityDTO[]) => {
-            let baseParameters = {testSecuritySubObjItem3Idents : testSecuritySubObjItem3Idents};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItem3Idents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecuritySubObjItem3VisualDTO>, Array<dto.TestSecuritySubObjItem3ObservableVisualDTO>, dto.TestSecuritySubObjItem3VisualDTO, dto.TestSecuritySubObjItem3ObservableVisualDTO>();
-            return service.getData('TestSecuritySubObjItem3/GetVisualTestSecuritySubObjItem3sByIdents', {plain : dto.TestSecuritySubObjItem3VisualDTO, observable : dto.TestSecuritySubObjItem3ObservableVisualDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem3/GetVisualTestSecuritySubObjItem3sByIdents', {plain : dto.TestSecuritySubObjItem3VisualDTO, observable : dto.TestSecuritySubObjItem3ObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestSecuritySubObjItemByName(): async.AsyncFunc3<string, dto.TestSecuritySubObjItemVisualDTO, dto.TestSecuritySubObjItemObservableVisualDTO, dto.TestSecuritySubObjItemVisualDTO, dto.TestSecuritySubObjItemObservableVisualDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItemName: string) => {
-            let baseParameters = {testSecuritySubObjItemName : testSecuritySubObjItemName};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItemName;
             let service = Environment.current.context.facadeFactory.createService<dto.TestSecuritySubObjItemVisualDTO, dto.TestSecuritySubObjItemObservableVisualDTO, dto.TestSecuritySubObjItemVisualDTO, dto.TestSecuritySubObjItemObservableVisualDTO>();
-            return service.getData('TestSecuritySubObjItem/GetVisualTestSecuritySubObjItemByName', {plain : dto.TestSecuritySubObjItemVisualDTO, observable : dto.TestSecuritySubObjItemObservableVisualDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem/GetVisualTestSecuritySubObjItemByName', {plain : dto.TestSecuritySubObjItemVisualDTO, observable : dto.TestSecuritySubObjItemObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestSecuritySubObjItems(): async.AsyncFunc2<Array<dto.TestSecuritySubObjItemVisualDTO>, Array<dto.TestSecuritySubObjItemObservableVisualDTO>, dto.TestSecuritySubObjItemVisualDTO, dto.TestSecuritySubObjItemObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecuritySubObjItemVisualDTO>, Array<dto.TestSecuritySubObjItemObservableVisualDTO>, dto.TestSecuritySubObjItemVisualDTO, dto.TestSecuritySubObjItemObservableVisualDTO>();
-            return service.getData('TestSecuritySubObjItem/GetVisualTestSecuritySubObjItems', {plain : dto.TestSecuritySubObjItemVisualDTO, observable : dto.TestSecuritySubObjItemObservableVisualDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem/GetVisualTestSecuritySubObjItems', {plain : dto.TestSecuritySubObjItemVisualDTO, observable : dto.TestSecuritySubObjItemObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualTestSecuritySubObjItemsByIdents(): async.AsyncFunc3<dto.TestSecuritySubObjItemIdentityDTO[], Array<dto.TestSecuritySubObjItemVisualDTO>, Array<dto.TestSecuritySubObjItemObservableVisualDTO>, dto.TestSecuritySubObjItemVisualDTO, dto.TestSecuritySubObjItemObservableVisualDTO> {
         return new async.AsyncFunc3((testSecuritySubObjItemIdents: dto.TestSecuritySubObjItemIdentityDTO[]) => {
-            let baseParameters = {testSecuritySubObjItemIdents : testSecuritySubObjItemIdents};
-            let realParameters = baseParameters;
+            let baseParameters = testSecuritySubObjItemIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.TestSecuritySubObjItemVisualDTO>, Array<dto.TestSecuritySubObjItemObservableVisualDTO>, dto.TestSecuritySubObjItemVisualDTO, dto.TestSecuritySubObjItemObservableVisualDTO>();
-            return service.getData('TestSecuritySubObjItem/GetVisualTestSecuritySubObjItemsByIdents', {plain : dto.TestSecuritySubObjItemVisualDTO, observable : dto.TestSecuritySubObjItemObservableVisualDTO}, realParameters);
+            return service.getData('TestSecuritySubObjItem/GetVisualTestSecuritySubObjItemsByIdents', {plain : dto.TestSecuritySubObjItemVisualDTO, observable : dto.TestSecuritySubObjItemObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualWorkingCalendar1676(): async.AsyncFunc3<dto.WorkingCalendar1676IdentityDTO, dto.WorkingCalendar1676VisualDTO, dto.WorkingCalendar1676ObservableVisualDTO, dto.WorkingCalendar1676VisualDTO, dto.WorkingCalendar1676ObservableVisualDTO> {
         return new async.AsyncFunc3((workingCalendar1676Identity: dto.WorkingCalendar1676IdentityDTO) => {
-            let baseParameters = {workingCalendar1676Identity : workingCalendar1676Identity};
-            let realParameters = baseParameters;
+            let baseParameters = workingCalendar1676Identity;
             let service = Environment.current.context.facadeFactory.createService<dto.WorkingCalendar1676VisualDTO, dto.WorkingCalendar1676ObservableVisualDTO, dto.WorkingCalendar1676VisualDTO, dto.WorkingCalendar1676ObservableVisualDTO>();
-            return service.getData('WorkingCalendar1676/GetVisualWorkingCalendar1676', {plain : dto.WorkingCalendar1676VisualDTO, observable : dto.WorkingCalendar1676ObservableVisualDTO}, realParameters);
+            return service.getData('WorkingCalendar1676/GetVisualWorkingCalendar1676', {plain : dto.WorkingCalendar1676VisualDTO, observable : dto.WorkingCalendar1676ObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualWorkingCalendar1676ByName(): async.AsyncFunc3<string, dto.WorkingCalendar1676VisualDTO, dto.WorkingCalendar1676ObservableVisualDTO, dto.WorkingCalendar1676VisualDTO, dto.WorkingCalendar1676ObservableVisualDTO> {
         return new async.AsyncFunc3((workingCalendar1676Name: string) => {
-            let baseParameters = {workingCalendar1676Name : workingCalendar1676Name};
-            let realParameters = baseParameters;
+            let baseParameters = workingCalendar1676Name;
             let service = Environment.current.context.facadeFactory.createService<dto.WorkingCalendar1676VisualDTO, dto.WorkingCalendar1676ObservableVisualDTO, dto.WorkingCalendar1676VisualDTO, dto.WorkingCalendar1676ObservableVisualDTO>();
-            return service.getData('WorkingCalendar1676/GetVisualWorkingCalendar1676ByName', {plain : dto.WorkingCalendar1676VisualDTO, observable : dto.WorkingCalendar1676ObservableVisualDTO}, realParameters);
+            return service.getData('WorkingCalendar1676/GetVisualWorkingCalendar1676ByName', {plain : dto.WorkingCalendar1676VisualDTO, observable : dto.WorkingCalendar1676ObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualWorkingCalendar1676s(): async.AsyncFunc2<Array<dto.WorkingCalendar1676VisualDTO>, Array<dto.WorkingCalendar1676ObservableVisualDTO>, dto.WorkingCalendar1676VisualDTO, dto.WorkingCalendar1676ObservableVisualDTO> {
         return new async.AsyncFunc2(() => {
             let baseParameters = {};
-            let realParameters = baseParameters;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.WorkingCalendar1676VisualDTO>, Array<dto.WorkingCalendar1676ObservableVisualDTO>, dto.WorkingCalendar1676VisualDTO, dto.WorkingCalendar1676ObservableVisualDTO>();
-            return service.getData('WorkingCalendar1676/GetVisualWorkingCalendar1676s', {plain : dto.WorkingCalendar1676VisualDTO, observable : dto.WorkingCalendar1676ObservableVisualDTO}, realParameters);
+            return service.getData('WorkingCalendar1676/GetVisualWorkingCalendar1676s', {plain : dto.WorkingCalendar1676VisualDTO, observable : dto.WorkingCalendar1676ObservableVisualDTO}, baseParameters);
         });
     }
 
     function _getVisualWorkingCalendar1676sByIdents(): async.AsyncFunc3<dto.WorkingCalendar1676IdentityDTO[], Array<dto.WorkingCalendar1676VisualDTO>, Array<dto.WorkingCalendar1676ObservableVisualDTO>, dto.WorkingCalendar1676VisualDTO, dto.WorkingCalendar1676ObservableVisualDTO> {
         return new async.AsyncFunc3((workingCalendar1676Idents: dto.WorkingCalendar1676IdentityDTO[]) => {
-            let baseParameters = {workingCalendar1676Idents : workingCalendar1676Idents};
-            let realParameters = baseParameters;
+            let baseParameters = workingCalendar1676Idents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.WorkingCalendar1676VisualDTO>, Array<dto.WorkingCalendar1676ObservableVisualDTO>, dto.WorkingCalendar1676VisualDTO, dto.WorkingCalendar1676ObservableVisualDTO>();
-            return service.getData('WorkingCalendar1676/GetVisualWorkingCalendar1676sByIdents', {plain : dto.WorkingCalendar1676VisualDTO, observable : dto.WorkingCalendar1676ObservableVisualDTO}, realParameters);
+            return service.getData('WorkingCalendar1676/GetVisualWorkingCalendar1676sByIdents', {plain : dto.WorkingCalendar1676VisualDTO, observable : dto.WorkingCalendar1676ObservableVisualDTO}, baseParameters);
         });
     }
 
     function _hasBusinessUnitAccess(): async.SimpleAsyncFunc3<dto.BusinessUnitIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((businessUnitIdent: dto.BusinessUnitIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {businessUnitIdent : businessUnitIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasBusinessUnitAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('BusinessUnit/HasBusinessUnitAccess', realParameters);
+            return service.getData('BusinessUnit/HasBusinessUnitAccess', baseParameters);
         });
     }
 
     function _hasBusinessUnitHrDepartmentAccess(): async.SimpleAsyncFunc3<dto.BusinessUnitHrDepartmentIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((businessUnitHrDepartmentIdent: dto.BusinessUnitHrDepartmentIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {businessUnitHrDepartmentIdent : businessUnitHrDepartmentIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasBusinessUnitHrDepartmentAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('BusinessUnitHrDepartment/HasBusinessUnitHrDepartmentAccess', realParameters);
+            return service.getData('BusinessUnitHrDepartment/HasBusinessUnitHrDepartmentAccess', baseParameters);
         });
     }
 
     function _hasBusinessUnitManagerCommissionLinkAccess(): async.SimpleAsyncFunc3<dto.BusinessUnitManagerCommissionLinkIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((businessUnitManagerCommissionLinkIdent: dto.BusinessUnitManagerCommissionLinkIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {businessUnitManagerCommissionLinkIdent : businessUnitManagerCommissionLinkIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasBusinessUnitManagerCommissionLinkAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('BusinessUnitManagerCommissionLink/HasBusinessUnitManagerCommissionLinkAccess', realParameters);
+            return service.getData('BusinessUnitManagerCommissionLink/HasBusinessUnitManagerCommissionLinkAccess', baseParameters);
         });
     }
 
     function _hasBusinessUnitTypeAccess(): async.SimpleAsyncFunc3<dto.BusinessUnitTypeIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((businessUnitTypeIdent: dto.BusinessUnitTypeIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {businessUnitTypeIdent : businessUnitTypeIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasBusinessUnitTypeAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('BusinessUnitType/HasBusinessUnitTypeAccess', realParameters);
+            return service.getData('BusinessUnitType/HasBusinessUnitTypeAccess', baseParameters);
         });
     }
 
     function _hasCompanyLegalEntityAccess(): async.SimpleAsyncFunc3<dto.CompanyLegalEntityIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((companyLegalEntityIdent: dto.CompanyLegalEntityIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {companyLegalEntityIdent : companyLegalEntityIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasCompanyLegalEntityAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('CompanyLegalEntity/HasCompanyLegalEntityAccess', realParameters);
+            return service.getData('CompanyLegalEntity/HasCompanyLegalEntityAccess', baseParameters);
         });
     }
 
     function _hasCountryAccess(): async.SimpleAsyncFunc3<dto.CountryIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((countryIdent: dto.CountryIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {countryIdent : countryIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasCountryAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('Country/HasCountryAccess', realParameters);
+            return service.getData('Country/HasCountryAccess', baseParameters);
         });
     }
 
     function _hasEmployeeAccess(): async.SimpleAsyncFunc3<dto.EmployeeIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((employeeIdent: dto.EmployeeIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {employeeIdent : employeeIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasEmployeeAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('Employee/HasEmployeeAccess', realParameters);
+            return service.getData('Employee/HasEmployeeAccess', baseParameters);
         });
     }
 
     function _hasEmployeeInformationAccess(): async.SimpleAsyncFunc3<dto.EmployeeInformationIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((employeeInformationIdent: dto.EmployeeInformationIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {employeeInformationIdent : employeeInformationIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasEmployeeInformationAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('EmployeeInformation/HasEmployeeInformationAccess', realParameters);
+            return service.getData('EmployeeInformation/HasEmployeeInformationAccess', baseParameters);
         });
     }
 
     function _hasEmployeePhotoAccess(): async.SimpleAsyncFunc3<dto.EmployeePhotoIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((employeePhotoIdent: dto.EmployeePhotoIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {employeePhotoIdent : employeePhotoIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasEmployeePhotoAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('EmployeePhoto/HasEmployeePhotoAccess', realParameters);
+            return service.getData('EmployeePhoto/HasEmployeePhotoAccess', baseParameters);
         });
     }
 
     function _hasEmployeePositionAccess(): async.SimpleAsyncFunc3<dto.EmployeePositionIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((employeePositionIdent: dto.EmployeePositionIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {employeePositionIdent : employeePositionIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasEmployeePositionAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('EmployeePosition/HasEmployeePositionAccess', realParameters);
+            return service.getData('EmployeePosition/HasEmployeePositionAccess', baseParameters);
         });
     }
 
     function _hasEmployeeRegistrationTypeAccess(): async.SimpleAsyncFunc3<dto.EmployeeRegistrationTypeIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((employeeRegistrationTypeIdent: dto.EmployeeRegistrationTypeIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {employeeRegistrationTypeIdent : employeeRegistrationTypeIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasEmployeeRegistrationTypeAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('EmployeeRegistrationType/HasEmployeeRegistrationTypeAccess', realParameters);
+            return service.getData('EmployeeRegistrationType/HasEmployeeRegistrationTypeAccess', baseParameters);
         });
     }
 
     function _hasEmployeeRoleAccess(): async.SimpleAsyncFunc3<dto.EmployeeRoleIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((employeeRoleIdent: dto.EmployeeRoleIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {employeeRoleIdent : employeeRoleIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasEmployeeRoleAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('EmployeeRole/HasEmployeeRoleAccess', realParameters);
+            return service.getData('EmployeeRole/HasEmployeeRoleAccess', baseParameters);
         });
     }
 
     function _hasEmployeeRoleDegreeAccess(): async.SimpleAsyncFunc3<dto.EmployeeRoleDegreeIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((employeeRoleDegreeIdent: dto.EmployeeRoleDegreeIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {employeeRoleDegreeIdent : employeeRoleDegreeIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasEmployeeRoleDegreeAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('EmployeeRoleDegree/HasEmployeeRoleDegreeAccess', realParameters);
+            return service.getData('EmployeeRoleDegree/HasEmployeeRoleDegreeAccess', baseParameters);
         });
     }
 
     function _hasEmployeeSpecializationAccess(): async.SimpleAsyncFunc3<dto.EmployeeSpecializationIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((employeeSpecializationIdent: dto.EmployeeSpecializationIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {employeeSpecializationIdent : employeeSpecializationIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasEmployeeSpecializationAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('EmployeeSpecialization/HasEmployeeSpecializationAccess', realParameters);
+            return service.getData('EmployeeSpecialization/HasEmployeeSpecializationAccess', baseParameters);
         });
     }
 
     function _hasExample1Access(): async.SimpleAsyncFunc3<dto.Example1IdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((example1Ident: dto.Example1IdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {example1Ident : example1Ident, securityOperationCode : securityOperationCode};
-            let realParameters = {hasExample1AccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('Example1/HasExample1Access', realParameters);
+            return service.getData('Example1/HasExample1Access', baseParameters);
         });
     }
 
     function _hasHRDepartmentAccess(): async.SimpleAsyncFunc3<dto.HRDepartmentIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((hRDepartmentIdent: dto.HRDepartmentIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {hRDepartmentIdent : hRDepartmentIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasHRDepartmentAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('HRDepartment/HasHRDepartmentAccess', realParameters);
+            return service.getData('HRDepartment/HasHRDepartmentAccess', baseParameters);
         });
     }
 
     function _hasIMRequestAccess(): async.SimpleAsyncFunc3<dto.IMRequestIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((iMRequestIdent: dto.IMRequestIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {iMRequestIdent : iMRequestIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasIMRequestAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('IMRequest/HasIMRequestAccess', realParameters);
+            return service.getData('IMRequest/HasIMRequestAccess', baseParameters);
         });
     }
 
     function _hasInformationAccess(): async.SimpleAsyncFunc3<dto.InformationIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((informationIdent: dto.InformationIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {informationIdent : informationIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasInformationAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('Information/HasInformationAccess', realParameters);
+            return service.getData('Information/HasInformationAccess', baseParameters);
         });
     }
 
     function _hasLocation1676Access(): async.SimpleAsyncFunc3<dto.Location1676IdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((location1676Ident: dto.Location1676IdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {location1676Ident : location1676Ident, securityOperationCode : securityOperationCode};
-            let realParameters = {hasLocation1676AccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('Location1676/HasLocation1676Access', realParameters);
+            return service.getData('Location1676/HasLocation1676Access', baseParameters);
         });
     }
 
     function _hasLocationAccess(): async.SimpleAsyncFunc3<dto.LocationIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((locationIdent: dto.LocationIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {locationIdent : locationIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasLocationAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('Location/HasLocationAccess', realParameters);
+            return service.getData('Location/HasLocationAccess', baseParameters);
         });
     }
 
     function _hasManagementUnitAccess(): async.SimpleAsyncFunc3<dto.ManagementUnitIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((managementUnitIdent: dto.ManagementUnitIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {managementUnitIdent : managementUnitIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasManagementUnitAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('ManagementUnit/HasManagementUnitAccess', realParameters);
+            return service.getData('ManagementUnit/HasManagementUnitAccess', baseParameters);
         });
     }
 
     function _hasManagementUnitAndBusinessUnitLinkAccess(): async.SimpleAsyncFunc3<dto.ManagementUnitAndBusinessUnitLinkIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((managementUnitAndBusinessUnitLinkIdent: dto.ManagementUnitAndBusinessUnitLinkIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {managementUnitAndBusinessUnitLinkIdent : managementUnitAndBusinessUnitLinkIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasManagementUnitAndBusinessUnitLinkAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('ManagementUnitAndBusinessUnitLink/HasManagementUnitAndBusinessUnitLinkAccess', realParameters);
+            return service.getData('ManagementUnitAndBusinessUnitLink/HasManagementUnitAndBusinessUnitLinkAccess', baseParameters);
         });
     }
 
     function _hasManagementUnitAndHRDepartmentLinkAccess(): async.SimpleAsyncFunc3<dto.ManagementUnitAndHRDepartmentLinkIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((managementUnitAndHRDepartmentLinkIdent: dto.ManagementUnitAndHRDepartmentLinkIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {managementUnitAndHRDepartmentLinkIdent : managementUnitAndHRDepartmentLinkIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasManagementUnitAndHRDepartmentLinkAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('ManagementUnitAndHRDepartmentLink/HasManagementUnitAndHRDepartmentLinkAccess', realParameters);
+            return service.getData('ManagementUnitAndHRDepartmentLink/HasManagementUnitAndHRDepartmentLinkAccess', baseParameters);
         });
     }
 
     function _hasMessageTemplateContainerAccess(): async.SimpleAsyncFunc3<dto.MessageTemplateContainerIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((messageTemplateContainerIdent: dto.MessageTemplateContainerIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {messageTemplateContainerIdent : messageTemplateContainerIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasMessageTemplateContainerAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('MessageTemplateContainer/HasMessageTemplateContainerAccess', realParameters);
+            return service.getData('MessageTemplateContainer/HasMessageTemplateContainerAccess', baseParameters);
         });
     }
 
     function _hasPrincipalAccess(): async.SimpleAsyncFunc3<dto.PrincipalIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((principalIdent: dto.PrincipalIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {principalIdent : principalIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasPrincipalAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('Principal/HasPrincipalAccess', realParameters);
+            return service.getData('Principal/HasPrincipalAccess', baseParameters);
         });
     }
 
     function _hasRegularJobResultAccess(): async.SimpleAsyncFunc3<dto.RegularJobResultIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((regularJobResultIdent: dto.RegularJobResultIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {regularJobResultIdent : regularJobResultIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasRegularJobResultAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('RegularJobResult/HasRegularJobResultAccess', realParameters);
+            return service.getData('RegularJobResult/HasRegularJobResultAccess', baseParameters);
         });
     }
 
     function _hasSampleSystemMessageTemplateAccess(): async.SimpleAsyncFunc3<dto.SampleSystemMessageTemplateIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((sampleSystemMessageTemplateIdent: dto.SampleSystemMessageTemplateIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {sampleSystemMessageTemplateIdent : sampleSystemMessageTemplateIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasSampleSystemMessageTemplateAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('SampleSystemMessageTemplate/HasSampleSystemMessageTemplateAccess', realParameters);
+            return service.getData('SampleSystemMessageTemplate/HasSampleSystemMessageTemplateAccess', baseParameters);
         });
     }
 
     function _hasSqlParserTestObjAccess(): async.SimpleAsyncFunc3<dto.SqlParserTestObjIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((sqlParserTestObjIdent: dto.SqlParserTestObjIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {sqlParserTestObjIdent : sqlParserTestObjIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasSqlParserTestObjAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('SqlParserTestObj/HasSqlParserTestObjAccess', realParameters);
+            return service.getData('SqlParserTestObj/HasSqlParserTestObjAccess', baseParameters);
         });
     }
 
     function _hasSqlParserTestObjContainerAccess(): async.SimpleAsyncFunc3<dto.SqlParserTestObjContainerIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((sqlParserTestObjContainerIdent: dto.SqlParserTestObjContainerIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {sqlParserTestObjContainerIdent : sqlParserTestObjContainerIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasSqlParserTestObjContainerAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('SqlParserTestObjContainer/HasSqlParserTestObjContainerAccess', realParameters);
+            return service.getData('SqlParserTestObjContainer/HasSqlParserTestObjContainerAccess', baseParameters);
         });
     }
 
     function _hasTestImmutableObjAccess(): async.SimpleAsyncFunc3<dto.TestImmutableObjIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((testImmutableObjIdent: dto.TestImmutableObjIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {testImmutableObjIdent : testImmutableObjIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasTestImmutableObjAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('TestImmutableObj/HasTestImmutableObjAccess', realParameters);
+            return service.getData('TestImmutableObj/HasTestImmutableObjAccess', baseParameters);
         });
     }
 
     function _hasTestRootSecurityObjAccess(): async.SimpleAsyncFunc3<dto.TestRootSecurityObjIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((testRootSecurityObjIdent: dto.TestRootSecurityObjIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {testRootSecurityObjIdent : testRootSecurityObjIdent, securityOperationCode : securityOperationCode};
-            let realParameters = {hasTestRootSecurityObjAccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('TestRootSecurityObj/HasTestRootSecurityObjAccess', realParameters);
+            return service.getData('TestRootSecurityObj/HasTestRootSecurityObjAccess', baseParameters);
         });
     }
 
     function _hasWorkingCalendar1676Access(): async.SimpleAsyncFunc3<dto.WorkingCalendar1676IdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((workingCalendar1676Ident: dto.WorkingCalendar1676IdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {workingCalendar1676Ident : workingCalendar1676Ident, securityOperationCode : securityOperationCode};
-            let realParameters = {hasWorkingCalendar1676AccessAutoRequest : baseParameters};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('WorkingCalendar1676/HasWorkingCalendar1676Access', realParameters);
+            return service.getData('WorkingCalendar1676/HasWorkingCalendar1676Access', baseParameters);
         });
     }
 
     function _massChangeEmployeeByEmail(): async.AsyncFunc3<dto.EmployeeEmailMassChangeModelStrictDTO, Array<dto.EmployeeIdentityDTO>, Array<dto.EmployeeObservableIdentityDTO>, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO> {
         return new async.AsyncFunc3((employeeChangeModel: dto.EmployeeEmailMassChangeModelStrictDTO) => {
-            let baseParameters = {employeeChangeModel : employeeChangeModel.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = employeeChangeModel.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<Array<dto.EmployeeIdentityDTO>, Array<dto.EmployeeObservableIdentityDTO>, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO>();
-            return service.getData('Employee/MassChangeEmployeeByEmail', {plain : dto.EmployeeIdentityDTO, observable : dto.EmployeeObservableIdentityDTO}, realParameters);
+            return service.getData('Employee/MassChangeEmployeeByEmail', {plain : dto.EmployeeIdentityDTO, observable : dto.EmployeeObservableIdentityDTO}, baseParameters);
         });
     }
 
     function _removeBusinessUnitHrDepartment(): async.SimpleAsyncFunc2<dto.BusinessUnitHrDepartmentIdentityDTO, void> {
         return new async.SimpleAsyncFunc2((businessUnitHrDepartmentIdent: dto.BusinessUnitHrDepartmentIdentityDTO) => {
-            let baseParameters = {businessUnitHrDepartmentIdent : businessUnitHrDepartmentIdent};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitHrDepartmentIdent;
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('BusinessUnitHrDepartment/RemoveBusinessUnitHrDepartment', realParameters);
+            return service.getData('BusinessUnitHrDepartment/RemoveBusinessUnitHrDepartment', baseParameters);
         });
     }
 
     function _removeCompanyLegalEntity(): async.SimpleAsyncFunc2<dto.CompanyLegalEntityIdentityDTO, void> {
         return new async.SimpleAsyncFunc2((companyLegalEntityIdent: dto.CompanyLegalEntityIdentityDTO) => {
-            let baseParameters = {companyLegalEntityIdent : companyLegalEntityIdent};
-            let realParameters = baseParameters;
+            let baseParameters = companyLegalEntityIdent;
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('CompanyLegalEntity/RemoveCompanyLegalEntity', realParameters);
+            return service.getData('CompanyLegalEntity/RemoveCompanyLegalEntity', baseParameters);
         });
     }
 
     function _removeCountry(): async.SimpleAsyncFunc2<dto.CountryIdentityDTO, void> {
         return new async.SimpleAsyncFunc2((countryIdent: dto.CountryIdentityDTO) => {
-            let baseParameters = {countryIdent : countryIdent};
-            let realParameters = baseParameters;
+            let baseParameters = countryIdent;
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('Country/RemoveCountry', realParameters);
+            return service.getData('Country/RemoveCountry', baseParameters);
         });
     }
 
     function _removeHRDepartment(): async.SimpleAsyncFunc2<dto.HRDepartmentIdentityDTO, void> {
         return new async.SimpleAsyncFunc2((hRDepartmentIdent: dto.HRDepartmentIdentityDTO) => {
-            let baseParameters = {hRDepartmentIdent : hRDepartmentIdent};
-            let realParameters = baseParameters;
+            let baseParameters = hRDepartmentIdent;
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('HRDepartment/RemoveHRDepartment', realParameters);
+            return service.getData('HRDepartment/RemoveHRDepartment', baseParameters);
         });
     }
 
     function _removeLocation(): async.SimpleAsyncFunc2<dto.LocationIdentityDTO, void> {
         return new async.SimpleAsyncFunc2((locationIdent: dto.LocationIdentityDTO) => {
-            let baseParameters = {locationIdent : locationIdent};
-            let realParameters = baseParameters;
+            let baseParameters = locationIdent;
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('Location/RemoveLocation', realParameters);
+            return service.getData('Location/RemoveLocation', baseParameters);
         });
     }
 
     function _removeManagementUnitAndBusinessUnitLink(): async.SimpleAsyncFunc2<dto.ManagementUnitAndBusinessUnitLinkIdentityDTO, void> {
         return new async.SimpleAsyncFunc2((managementUnitAndBusinessUnitLinkIdent: dto.ManagementUnitAndBusinessUnitLinkIdentityDTO) => {
-            let baseParameters = {managementUnitAndBusinessUnitLinkIdent : managementUnitAndBusinessUnitLinkIdent};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitAndBusinessUnitLinkIdent;
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('ManagementUnitAndBusinessUnitLink/RemoveManagementUnitAndBusinessUnitLink', realParameters);
+            return service.getData('ManagementUnitAndBusinessUnitLink/RemoveManagementUnitAndBusinessUnitLink', baseParameters);
         });
     }
 
     function _removeManagementUnitAndHRDepartmentLink(): async.SimpleAsyncFunc2<dto.ManagementUnitAndHRDepartmentLinkIdentityDTO, void> {
         return new async.SimpleAsyncFunc2((managementUnitAndHRDepartmentLinkIdent: dto.ManagementUnitAndHRDepartmentLinkIdentityDTO) => {
-            let baseParameters = {managementUnitAndHRDepartmentLinkIdent : managementUnitAndHRDepartmentLinkIdent};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitAndHRDepartmentLinkIdent;
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('ManagementUnitAndHRDepartmentLink/RemoveManagementUnitAndHRDepartmentLink', realParameters);
+            return service.getData('ManagementUnitAndHRDepartmentLink/RemoveManagementUnitAndHRDepartmentLink', baseParameters);
         });
     }
 
     function _removeSqlParserTestObj(): async.SimpleAsyncFunc2<dto.SqlParserTestObjIdentityDTO, void> {
         return new async.SimpleAsyncFunc2((sqlParserTestObjIdent: dto.SqlParserTestObjIdentityDTO) => {
-            let baseParameters = {sqlParserTestObjIdent : sqlParserTestObjIdent};
-            let realParameters = baseParameters;
+            let baseParameters = sqlParserTestObjIdent;
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('SqlParserTestObj/RemoveSqlParserTestObj', realParameters);
+            return service.getData('SqlParserTestObj/RemoveSqlParserTestObj', baseParameters);
         });
     }
 
     function _saveBusinessUnit(): async.AsyncFunc3<dto.BusinessUnitStrictDTO, dto.BusinessUnitIdentityDTO, dto.BusinessUnitObservableIdentityDTO, dto.BusinessUnitIdentityDTO, dto.BusinessUnitObservableIdentityDTO> {
         return new async.AsyncFunc3((businessUnitStrict: dto.BusinessUnitStrictDTO) => {
-            let baseParameters = {businessUnitStrict : businessUnitStrict.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitStrict.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitIdentityDTO, dto.BusinessUnitObservableIdentityDTO, dto.BusinessUnitIdentityDTO, dto.BusinessUnitObservableIdentityDTO>();
-            return service.getData('BusinessUnit/SaveBusinessUnit', {plain : dto.BusinessUnitIdentityDTO, observable : dto.BusinessUnitObservableIdentityDTO}, realParameters);
+            return service.getData('BusinessUnit/SaveBusinessUnit', {plain : dto.BusinessUnitIdentityDTO, observable : dto.BusinessUnitObservableIdentityDTO}, baseParameters);
         });
     }
 
     function _saveBusinessUnitHrDepartment(): async.AsyncFunc3<dto.BusinessUnitHrDepartmentStrictDTO, dto.BusinessUnitHrDepartmentIdentityDTO, dto.BusinessUnitHrDepartmentObservableIdentityDTO, dto.BusinessUnitHrDepartmentIdentityDTO, dto.BusinessUnitHrDepartmentObservableIdentityDTO> {
         return new async.AsyncFunc3((businessUnitHrDepartmentStrict: dto.BusinessUnitHrDepartmentStrictDTO) => {
-            let baseParameters = {businessUnitHrDepartmentStrict : businessUnitHrDepartmentStrict.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitHrDepartmentStrict.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitHrDepartmentIdentityDTO, dto.BusinessUnitHrDepartmentObservableIdentityDTO, dto.BusinessUnitHrDepartmentIdentityDTO, dto.BusinessUnitHrDepartmentObservableIdentityDTO>();
-            return service.getData('BusinessUnitHrDepartment/SaveBusinessUnitHrDepartment', {plain : dto.BusinessUnitHrDepartmentIdentityDTO, observable : dto.BusinessUnitHrDepartmentObservableIdentityDTO}, realParameters);
+            return service.getData('BusinessUnitHrDepartment/SaveBusinessUnitHrDepartment', {plain : dto.BusinessUnitHrDepartmentIdentityDTO, observable : dto.BusinessUnitHrDepartmentObservableIdentityDTO}, baseParameters);
         });
     }
 
     function _saveBusinessUnitType(): async.AsyncFunc3<dto.BusinessUnitTypeStrictDTO, dto.BusinessUnitTypeIdentityDTO, dto.BusinessUnitTypeObservableIdentityDTO, dto.BusinessUnitTypeIdentityDTO, dto.BusinessUnitTypeObservableIdentityDTO> {
         return new async.AsyncFunc3((businessUnitTypeStrict: dto.BusinessUnitTypeStrictDTO) => {
-            let baseParameters = {businessUnitTypeStrict : businessUnitTypeStrict.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = businessUnitTypeStrict.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.BusinessUnitTypeIdentityDTO, dto.BusinessUnitTypeObservableIdentityDTO, dto.BusinessUnitTypeIdentityDTO, dto.BusinessUnitTypeObservableIdentityDTO>();
-            return service.getData('BusinessUnitType/SaveBusinessUnitType', {plain : dto.BusinessUnitTypeIdentityDTO, observable : dto.BusinessUnitTypeObservableIdentityDTO}, realParameters);
+            return service.getData('BusinessUnitType/SaveBusinessUnitType', {plain : dto.BusinessUnitTypeIdentityDTO, observable : dto.BusinessUnitTypeObservableIdentityDTO}, baseParameters);
         });
     }
 
     function _saveCompanyLegalEntity(): async.AsyncFunc3<dto.CompanyLegalEntityStrictDTO, dto.CompanyLegalEntityIdentityDTO, dto.CompanyLegalEntityObservableIdentityDTO, dto.CompanyLegalEntityIdentityDTO, dto.CompanyLegalEntityObservableIdentityDTO> {
         return new async.AsyncFunc3((companyLegalEntityStrict: dto.CompanyLegalEntityStrictDTO) => {
-            let baseParameters = {companyLegalEntityStrict : companyLegalEntityStrict.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = companyLegalEntityStrict.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.CompanyLegalEntityIdentityDTO, dto.CompanyLegalEntityObservableIdentityDTO, dto.CompanyLegalEntityIdentityDTO, dto.CompanyLegalEntityObservableIdentityDTO>();
-            return service.getData('CompanyLegalEntity/SaveCompanyLegalEntity', {plain : dto.CompanyLegalEntityIdentityDTO, observable : dto.CompanyLegalEntityObservableIdentityDTO}, realParameters);
+            return service.getData('CompanyLegalEntity/SaveCompanyLegalEntity', {plain : dto.CompanyLegalEntityIdentityDTO, observable : dto.CompanyLegalEntityObservableIdentityDTO}, baseParameters);
         });
     }
 
     function _saveCountry(): async.AsyncFunc3<dto.CountryStrictDTO, dto.CountryIdentityDTO, dto.CountryObservableIdentityDTO, dto.CountryIdentityDTO, dto.CountryObservableIdentityDTO> {
         return new async.AsyncFunc3((countryStrict: dto.CountryStrictDTO) => {
-            let baseParameters = {countryStrict : countryStrict.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = countryStrict.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.CountryIdentityDTO, dto.CountryObservableIdentityDTO, dto.CountryIdentityDTO, dto.CountryObservableIdentityDTO>();
-            return service.getData('Country/SaveCountry', {plain : dto.CountryIdentityDTO, observable : dto.CountryObservableIdentityDTO}, realParameters);
+            return service.getData('Country/SaveCountry', {plain : dto.CountryIdentityDTO, observable : dto.CountryObservableIdentityDTO}, baseParameters);
         });
     }
 
     function _saveEmployee(): async.AsyncFunc3<dto.EmployeeStrictDTO, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO> {
         return new async.AsyncFunc3((employeeStrict: dto.EmployeeStrictDTO) => {
-            let baseParameters = {employeeStrict : employeeStrict.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = employeeStrict.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO>();
-            return service.getData('Employee/SaveEmployee', {plain : dto.EmployeeIdentityDTO, observable : dto.EmployeeObservableIdentityDTO}, realParameters);
+            return service.getData('Employee/SaveEmployee', {plain : dto.EmployeeIdentityDTO, observable : dto.EmployeeObservableIdentityDTO}, baseParameters);
         });
     }
 
     function _saveExample1(): async.AsyncFunc3<dto.Example1StrictDTO, dto.Example1IdentityDTO, dto.Example1ObservableIdentityDTO, dto.Example1IdentityDTO, dto.Example1ObservableIdentityDTO> {
         return new async.AsyncFunc3((example1Strict: dto.Example1StrictDTO) => {
-            let baseParameters = {example1Strict : example1Strict.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = example1Strict.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.Example1IdentityDTO, dto.Example1ObservableIdentityDTO, dto.Example1IdentityDTO, dto.Example1ObservableIdentityDTO>();
-            return service.getData('Example1/SaveExample1', {plain : dto.Example1IdentityDTO, observable : dto.Example1ObservableIdentityDTO}, realParameters);
+            return service.getData('Example1/SaveExample1', {plain : dto.Example1IdentityDTO, observable : dto.Example1ObservableIdentityDTO}, baseParameters);
         });
     }
 
     function _saveHRDepartment(): async.AsyncFunc3<dto.HRDepartmentStrictDTO, dto.HRDepartmentIdentityDTO, dto.HRDepartmentObservableIdentityDTO, dto.HRDepartmentIdentityDTO, dto.HRDepartmentObservableIdentityDTO> {
         return new async.AsyncFunc3((hRDepartmentStrict: dto.HRDepartmentStrictDTO) => {
-            let baseParameters = {hRDepartmentStrict : hRDepartmentStrict.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = hRDepartmentStrict.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.HRDepartmentIdentityDTO, dto.HRDepartmentObservableIdentityDTO, dto.HRDepartmentIdentityDTO, dto.HRDepartmentObservableIdentityDTO>();
-            return service.getData('HRDepartment/SaveHRDepartment', {plain : dto.HRDepartmentIdentityDTO, observable : dto.HRDepartmentObservableIdentityDTO}, realParameters);
+            return service.getData('HRDepartment/SaveHRDepartment', {plain : dto.HRDepartmentIdentityDTO, observable : dto.HRDepartmentObservableIdentityDTO}, baseParameters);
         });
     }
 
     function _saveLocation(): async.AsyncFunc3<dto.LocationStrictDTO, dto.LocationIdentityDTO, dto.LocationObservableIdentityDTO, dto.LocationIdentityDTO, dto.LocationObservableIdentityDTO> {
         return new async.AsyncFunc3((locationStrict: dto.LocationStrictDTO) => {
-            let baseParameters = {locationStrict : locationStrict.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = locationStrict.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.LocationIdentityDTO, dto.LocationObservableIdentityDTO, dto.LocationIdentityDTO, dto.LocationObservableIdentityDTO>();
-            return service.getData('Location/SaveLocation', {plain : dto.LocationIdentityDTO, observable : dto.LocationObservableIdentityDTO}, realParameters);
+            return service.getData('Location/SaveLocation', {plain : dto.LocationIdentityDTO, observable : dto.LocationObservableIdentityDTO}, baseParameters);
         });
     }
 
     function _saveManagementUnit(): async.AsyncFunc3<dto.ManagementUnitStrictDTO, dto.ManagementUnitIdentityDTO, dto.ManagementUnitObservableIdentityDTO, dto.ManagementUnitIdentityDTO, dto.ManagementUnitObservableIdentityDTO> {
         return new async.AsyncFunc3((managementUnitStrict: dto.ManagementUnitStrictDTO) => {
-            let baseParameters = {managementUnitStrict : managementUnitStrict.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitStrict.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.ManagementUnitIdentityDTO, dto.ManagementUnitObservableIdentityDTO, dto.ManagementUnitIdentityDTO, dto.ManagementUnitObservableIdentityDTO>();
-            return service.getData('ManagementUnit/SaveManagementUnit', {plain : dto.ManagementUnitIdentityDTO, observable : dto.ManagementUnitObservableIdentityDTO}, realParameters);
+            return service.getData('ManagementUnit/SaveManagementUnit', {plain : dto.ManagementUnitIdentityDTO, observable : dto.ManagementUnitObservableIdentityDTO}, baseParameters);
         });
     }
 
     function _saveManagementUnitAndBusinessUnitLink(): async.AsyncFunc3<dto.ManagementUnitAndBusinessUnitLinkStrictDTO, dto.ManagementUnitAndBusinessUnitLinkIdentityDTO, dto.ManagementUnitAndBusinessUnitLinkObservableIdentityDTO, dto.ManagementUnitAndBusinessUnitLinkIdentityDTO, dto.ManagementUnitAndBusinessUnitLinkObservableIdentityDTO> {
         return new async.AsyncFunc3((managementUnitAndBusinessUnitLinkStrict: dto.ManagementUnitAndBusinessUnitLinkStrictDTO) => {
-            let baseParameters = {managementUnitAndBusinessUnitLinkStrict : managementUnitAndBusinessUnitLinkStrict.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitAndBusinessUnitLinkStrict.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.ManagementUnitAndBusinessUnitLinkIdentityDTO, dto.ManagementUnitAndBusinessUnitLinkObservableIdentityDTO, dto.ManagementUnitAndBusinessUnitLinkIdentityDTO, dto.ManagementUnitAndBusinessUnitLinkObservableIdentityDTO>();
-            return service.getData('ManagementUnitAndBusinessUnitLink/SaveManagementUnitAndBusinessUnitLink', {plain : dto.ManagementUnitAndBusinessUnitLinkIdentityDTO, observable : dto.ManagementUnitAndBusinessUnitLinkObservableIdentityDTO}, realParameters);
+            return service.getData('ManagementUnitAndBusinessUnitLink/SaveManagementUnitAndBusinessUnitLink', {plain : dto.ManagementUnitAndBusinessUnitLinkIdentityDTO, observable : dto.ManagementUnitAndBusinessUnitLinkObservableIdentityDTO}, baseParameters);
         });
     }
 
     function _saveManagementUnitAndHRDepartmentLink(): async.AsyncFunc3<dto.ManagementUnitAndHRDepartmentLinkStrictDTO, dto.ManagementUnitAndHRDepartmentLinkIdentityDTO, dto.ManagementUnitAndHRDepartmentLinkObservableIdentityDTO, dto.ManagementUnitAndHRDepartmentLinkIdentityDTO, dto.ManagementUnitAndHRDepartmentLinkObservableIdentityDTO> {
         return new async.AsyncFunc3((managementUnitAndHRDepartmentLinkStrict: dto.ManagementUnitAndHRDepartmentLinkStrictDTO) => {
-            let baseParameters = {managementUnitAndHRDepartmentLinkStrict : managementUnitAndHRDepartmentLinkStrict.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = managementUnitAndHRDepartmentLinkStrict.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.ManagementUnitAndHRDepartmentLinkIdentityDTO, dto.ManagementUnitAndHRDepartmentLinkObservableIdentityDTO, dto.ManagementUnitAndHRDepartmentLinkIdentityDTO, dto.ManagementUnitAndHRDepartmentLinkObservableIdentityDTO>();
-            return service.getData('ManagementUnitAndHRDepartmentLink/SaveManagementUnitAndHRDepartmentLink', {plain : dto.ManagementUnitAndHRDepartmentLinkIdentityDTO, observable : dto.ManagementUnitAndHRDepartmentLinkObservableIdentityDTO}, realParameters);
+            return service.getData('ManagementUnitAndHRDepartmentLink/SaveManagementUnitAndHRDepartmentLink', {plain : dto.ManagementUnitAndHRDepartmentLinkIdentityDTO, observable : dto.ManagementUnitAndHRDepartmentLinkObservableIdentityDTO}, baseParameters);
         });
     }
 
     function _saveMessageTemplateContainer(): async.AsyncFunc3<dto.MessageTemplateContainerStrictDTO, dto.MessageTemplateContainerIdentityDTO, dto.MessageTemplateContainerObservableIdentityDTO, dto.MessageTemplateContainerIdentityDTO, dto.MessageTemplateContainerObservableIdentityDTO> {
         return new async.AsyncFunc3((messageTemplateContainerStrict: dto.MessageTemplateContainerStrictDTO) => {
-            let baseParameters = {messageTemplateContainerStrict : messageTemplateContainerStrict.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = messageTemplateContainerStrict.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.MessageTemplateContainerIdentityDTO, dto.MessageTemplateContainerObservableIdentityDTO, dto.MessageTemplateContainerIdentityDTO, dto.MessageTemplateContainerObservableIdentityDTO>();
-            return service.getData('MessageTemplateContainer/SaveMessageTemplateContainer', {plain : dto.MessageTemplateContainerIdentityDTO, observable : dto.MessageTemplateContainerObservableIdentityDTO}, realParameters);
+            return service.getData('MessageTemplateContainer/SaveMessageTemplateContainer', {plain : dto.MessageTemplateContainerIdentityDTO, observable : dto.MessageTemplateContainerObservableIdentityDTO}, baseParameters);
         });
     }
 
     function _savePrincipal(): async.AsyncFunc3<dto.PrincipalStrictDTO, dto.PrincipalIdentityDTO, dto.PrincipalObservableIdentityDTO, dto.PrincipalIdentityDTO, dto.PrincipalObservableIdentityDTO> {
         return new async.AsyncFunc3((principalStrict: dto.PrincipalStrictDTO) => {
-            let baseParameters = {principalStrict : principalStrict.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = principalStrict.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.PrincipalIdentityDTO, dto.PrincipalObservableIdentityDTO, dto.PrincipalIdentityDTO, dto.PrincipalObservableIdentityDTO>();
-            return service.getData('Principal/SavePrincipal', {plain : dto.PrincipalIdentityDTO, observable : dto.PrincipalObservableIdentityDTO}, realParameters);
+            return service.getData('Principal/SavePrincipal', {plain : dto.PrincipalIdentityDTO, observable : dto.PrincipalObservableIdentityDTO}, baseParameters);
         });
     }
 
     function _saveSqlParserTestObj(): async.AsyncFunc3<dto.SqlParserTestObjStrictDTO, dto.SqlParserTestObjIdentityDTO, dto.SqlParserTestObjObservableIdentityDTO, dto.SqlParserTestObjIdentityDTO, dto.SqlParserTestObjObservableIdentityDTO> {
         return new async.AsyncFunc3((sqlParserTestObjStrict: dto.SqlParserTestObjStrictDTO) => {
-            let baseParameters = {sqlParserTestObjStrict : sqlParserTestObjStrict.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = sqlParserTestObjStrict.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.SqlParserTestObjIdentityDTO, dto.SqlParserTestObjObservableIdentityDTO, dto.SqlParserTestObjIdentityDTO, dto.SqlParserTestObjObservableIdentityDTO>();
-            return service.getData('SqlParserTestObj/SaveSqlParserTestObj', {plain : dto.SqlParserTestObjIdentityDTO, observable : dto.SqlParserTestObjObservableIdentityDTO}, realParameters);
+            return service.getData('SqlParserTestObj/SaveSqlParserTestObj', {plain : dto.SqlParserTestObjIdentityDTO, observable : dto.SqlParserTestObjObservableIdentityDTO}, baseParameters);
         });
     }
 
     function _saveSqlParserTestObjContainer(): async.AsyncFunc3<dto.SqlParserTestObjContainerStrictDTO, dto.SqlParserTestObjContainerIdentityDTO, dto.SqlParserTestObjContainerObservableIdentityDTO, dto.SqlParserTestObjContainerIdentityDTO, dto.SqlParserTestObjContainerObservableIdentityDTO> {
         return new async.AsyncFunc3((sqlParserTestObjContainerStrict: dto.SqlParserTestObjContainerStrictDTO) => {
-            let baseParameters = {sqlParserTestObjContainerStrict : sqlParserTestObjContainerStrict.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = sqlParserTestObjContainerStrict.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.SqlParserTestObjContainerIdentityDTO, dto.SqlParserTestObjContainerObservableIdentityDTO, dto.SqlParserTestObjContainerIdentityDTO, dto.SqlParserTestObjContainerObservableIdentityDTO>();
-            return service.getData('SqlParserTestObjContainer/SaveSqlParserTestObjContainer', {plain : dto.SqlParserTestObjContainerIdentityDTO, observable : dto.SqlParserTestObjContainerObservableIdentityDTO}, realParameters);
+            return service.getData('SqlParserTestObjContainer/SaveSqlParserTestObjContainer', {plain : dto.SqlParserTestObjContainerIdentityDTO, observable : dto.SqlParserTestObjContainerObservableIdentityDTO}, baseParameters);
         });
     }
 
     function _saveTestImmutableObj(): async.AsyncFunc3<dto.TestImmutableObjStrictDTO, dto.TestImmutableObjIdentityDTO, dto.TestImmutableObjObservableIdentityDTO, dto.TestImmutableObjIdentityDTO, dto.TestImmutableObjObservableIdentityDTO> {
         return new async.AsyncFunc3((testImmutableObjStrict: dto.TestImmutableObjStrictDTO) => {
-            let baseParameters = {testImmutableObjStrict : testImmutableObjStrict.toNativeJson()};
-            let realParameters = baseParameters;
+            let baseParameters = testImmutableObjStrict.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.TestImmutableObjIdentityDTO, dto.TestImmutableObjObservableIdentityDTO, dto.TestImmutableObjIdentityDTO, dto.TestImmutableObjObservableIdentityDTO>();
-            return service.getData('TestImmutableObj/SaveTestImmutableObj', {plain : dto.TestImmutableObjIdentityDTO, observable : dto.TestImmutableObjObservableIdentityDTO}, realParameters);
+            return service.getData('TestImmutableObj/SaveTestImmutableObj', {plain : dto.TestImmutableObjIdentityDTO, observable : dto.TestImmutableObjObservableIdentityDTO}, baseParameters);
+        });
+    }
+
+    function _testPeriod(): async.AsyncFunc3<Core.Period, Array<persistent.HierarchicalNode<dto.BusinessUnitFullDTO,Guid>>, Array<persistent.HierarchicalNode<dto.BusinessUnitObservableFullDTO,Guid>>, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO> {
+        return new async.AsyncFunc3((period: Core.Period) => {
+            let baseParameters = Core.Period.toOData(period);
+            let service = Environment.current.context.facadeFactory.createService<Array<persistent.HierarchicalNode<dto.BusinessUnitFullDTO,Guid>>, Array<persistent.HierarchicalNode<dto.BusinessUnitObservableFullDTO,Guid>>, dto.BusinessUnitFullDTO, dto.BusinessUnitObservableFullDTO>();
+            return service.getHierarchicalData('BusinessUnit/TestPeriod', {plain : dto.BusinessUnitFullDTO, observable : dto.BusinessUnitObservableFullDTO}, baseParameters);
         });
     }
 
     function _updateEmployee(): async.AsyncFunc3<dto.EmployeeUpdateDTO, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO> {
         return new async.AsyncFunc3((employeeUpdate: dto.EmployeeUpdateDTO) => {
-            let baseParameters = {employeeUpdate : employeeUpdate};
-            let realParameters = baseParameters;
+            let baseParameters = employeeUpdate;
             let service = Environment.current.context.facadeFactory.createService<dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO>();
-            return service.getData('Employee/UpdateEmployee', {plain : dto.EmployeeIdentityDTO, observable : dto.EmployeeObservableIdentityDTO}, realParameters);
+            return service.getData('Employee/UpdateEmployee', {plain : dto.EmployeeIdentityDTO, observable : dto.EmployeeObservableIdentityDTO}, baseParameters);
         });
     }
 
     function _updateExample1(): async.AsyncFunc3<dto.Example1UpdateDTO, dto.Example1IdentityDTO, dto.Example1ObservableIdentityDTO, dto.Example1IdentityDTO, dto.Example1ObservableIdentityDTO> {
         return new async.AsyncFunc3((example1Update: dto.Example1UpdateDTO) => {
-            let baseParameters = {example1Update : example1Update};
-            let realParameters = baseParameters;
+            let baseParameters = example1Update;
             let service = Environment.current.context.facadeFactory.createService<dto.Example1IdentityDTO, dto.Example1ObservableIdentityDTO, dto.Example1IdentityDTO, dto.Example1ObservableIdentityDTO>();
-            return service.getData('Example1/UpdateExample1', {plain : dto.Example1IdentityDTO, observable : dto.Example1ObservableIdentityDTO}, realParameters);
+            return service.getData('Example1/UpdateExample1', {plain : dto.Example1IdentityDTO, observable : dto.Example1ObservableIdentityDTO}, baseParameters);
         });
     }
 

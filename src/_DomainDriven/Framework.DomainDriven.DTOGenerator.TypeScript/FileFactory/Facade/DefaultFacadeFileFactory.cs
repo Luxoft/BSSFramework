@@ -107,7 +107,7 @@ namespace Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory.Facade
                 var callbackExpression = new CodeLambdaExpression
                 {
                     Parameters = this.GetParameterDeclarationExpressionCollection(methodInfo),
-                    Statements = { parametersStatement, parametersStatement, varialableStatement, initiStatement.ToMethodReturnStatement() }
+                    Statements = { parametersStatement, varialableStatement, initiStatement.ToMethodReturnStatement() }
                 };
 
                 var root = new CodeObjectCreateExpression(genericClass, callbackExpression);
@@ -129,30 +129,44 @@ namespace Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory.Facade
             }
         }
 
-        private JsObjectCreateExpression GetMethodParametersCollection(MethodInfo method)
+        private CodeExpression GetMethodParametersCollection(MethodInfo method)
         {
-            var parametersCollection = new JsObjectCreateExpression();
-            foreach (var parameter in method.GetParametersWithExpandAutoRequest().Select(parameter => new { parameter.Name, parameter.ParameterType }).ToList())
+            var parameters  = method.GetParametersWithExpandAutoRequest().Select(parameter => new { parameter.Name, parameter.ParameterType }).ToList();
+            
+            if (parameters.Count() == 1)
             {
-                if (parameter.ParameterType.Name.EndsWith("StrictDTO"))
-                {
-                    parametersCollection.AddParameter(parameter.Name, parameter.Name + ".toNativeJson()");
-                }
-                else if (parameter.ParameterType.IsPeriod())
-                {
-                    parametersCollection.AddParameter(parameter.Name, Constants.PeriodToOdata(parameter.Name));
-                }
-                else if (parameter.ParameterType.IsDateTime())
-                {
-                    parametersCollection.AddParameter(parameter.Name, Constants.DateToOdata(parameter.Name));
-                }
-                else
-                {
-                    parametersCollection.AddParameter(parameter.Name, parameter.Name);
-                }
-            }
+                var p = parameters.Single();
 
-            return parametersCollection;
+                return new CodeVariableReferenceExpression(GetParameterAction(p.ParameterType, p.Name));
+            }
+            else
+            {
+                var parametersCollection = new JsObjectCreateExpression();
+                
+                parameters.Foreach(pair => parametersCollection.AddParameter(pair.Name, GetParameterAction(pair.ParameterType, pair.Name)));
+
+                return parametersCollection;
+            }
+        }
+
+        private static string GetParameterAction(Type parameterType, string parameterName)
+        {
+            if (parameterType.Name.EndsWith("StrictDTO"))
+            {
+                return parameterName + ".toNativeJson()";
+            }
+            else if (parameterType.IsPeriod())
+            {
+                return Constants.PeriodToOdata(parameterName);
+            }
+            else if (parameterType.IsDateTime())
+            {
+                return Constants.DateToOdata(parameterName);
+            }
+            else
+            {
+                return parameterName;
+            }
         }
 
         private List<CodeTypeReference> GetParameterCodeTypeDeclarationExpressionCollection(MethodInfo methodInfo)

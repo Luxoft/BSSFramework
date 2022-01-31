@@ -1,7 +1,10 @@
-﻿namespace Framework.Persistent
+﻿#nullable enable
+namespace Framework.Persistent;
+
+public interface IParentSource<out T>
 {
-    public interface IParentSource<out T>
+    T? Parent
     {
-        T Parent { get; }
+        get;
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -470,42 +469,38 @@ namespace Framework.Core
 
             return source.Aggregate(func, (_, v) => () => v)();
         }
-
+#nullable enable
         /// <summary>
-        ///
+        /// Merge Target collection into Source collection.
+        /// Call <see cref="createFunc"/> for not existing objects in Source
+        /// Call <see cref="removeAction"/> for exists in Source but not exists in Target
+        /// Call <see cref="mapAction"/> for exists in both collection and created items
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <typeparam name="S"></typeparam>
-        /// <typeparam name="TKey"></typeparam>
-        /// <param name="source"></param>
-        /// <param name="target"></param>
-        /// <param name="getSKey"></param>
-        /// <param name="getTKey"></param>
-        /// <param name="createFunc"></param>
-        /// <param name="removeAction"></param>
-        /// <param name="map">Target,Source</param>
-        /// <param name="isDefaultKey"></param>
-        public static void Merge<T, S, TKey>(
-            this IEnumerable<T> source,
-            IEnumerable<S> target,
-            Func<S, TKey> getSKey,
-            Func<T, TKey> getTKey,
-            Func<S, T> createFunc,
-            Action<IEnumerable<T>> removeAction,
-            Action<S, T> map,
-            Func<TKey, bool> isDefaultKey = null)
+        public static void Merge<TSource, TTarget, TKey>(
+                this IEnumerable<TSource> source,
+                IEnumerable<TTarget> target,
+                Func<TTarget, TKey> getTargetKey,
+                Func<TSource, TKey> getSourceKey,
+                Func<TTarget, TSource> createFunc,
+                Action<IEnumerable<TSource>> removeAction,
+                Action<TTarget, TSource> mapAction,
+                Func<TKey, bool>? isDefaultKey = null)
+                where TKey : notnull
         {
             var isDefaultKeyF = isDefaultKey ?? (v => v.IsDefault());
 
-            var targetMap = target.ToDictionary(s => isDefaultKeyF(getSKey(s)) ? new object() : getSKey(s));
-            List<T> removed = new List<T>();
+            var targetMap = target.ToDictionary(
+                                                s => isDefaultKeyF(getTargetKey(s))
+                                                             ? new object()
+                                                             : getTargetKey(s));
+            var removed = new List<TSource>();
+
             foreach (var sourceItem in source.ToList())
             {
-                S targetItem;
-                var key = getTKey(sourceItem);
-                if (targetMap.TryGetValue(key, out targetItem))
+                var key = getSourceKey(sourceItem);
+                if (targetMap.TryGetValue(key, out var targetItem))
                 {
-                    map(targetItem, sourceItem);
+                    mapAction(targetItem, sourceItem);
                     targetMap.Remove(key);
                 }
                 else
@@ -513,14 +508,16 @@ namespace Framework.Core
                     removed.Add(sourceItem);
                 }
             }
+
             removeAction(removed);
-            foreach (S sourceItem in targetMap.Values)
+
+            foreach (var sourceItem in targetMap.Values)
             {
-                T targetItem = createFunc(sourceItem);
-                map(sourceItem, targetItem);
+                var targetItem = createFunc(sourceItem);
+                mapAction(sourceItem, targetItem);
             }
         }
-
+#nullable disable
         public static void Merge<T, S, TKey>(
             this IEnumerable<T> source,
             IEnumerable<S> target,

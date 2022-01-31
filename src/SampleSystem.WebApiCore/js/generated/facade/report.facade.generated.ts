@@ -56,7 +56,7 @@ function _doHealthCheck(): async.SimpleAsyncFunc1<string> {
     function _getReportParameterValuePositionByTypeName(): async.SimpleAsyncFunc4<string, Guid, string, number> {
         return new async.SimpleAsyncFunc4((typeName: string, id: Guid, odataQueryString: string) => {
             let baseParameters = {typeName : typeName, id : id, odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let realParameters = {request : baseParameters};
             let service = Environment.current.context.facadeFactory.createReportSimpleService<number>();
             return service.getData('SampleSystemGenericReport/GetReportParameterValuePositionByTypeName', realParameters);
         });
@@ -74,7 +74,7 @@ function _doHealthCheck(): async.SimpleAsyncFunc1<string> {
     function _getReportParameterValuePositionsByTypeName(): async.AsyncFunc5<string, Array<Guid>, string, Array<number>, Array<number>, number, number> {
         return new async.AsyncFunc5((typeName: string, ids: Array<Guid>, odataQueryString: string) => {
             let baseParameters = {typeName : typeName, ids : ids, odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let realParameters = {request : baseParameters};
             let service = Environment.current.context.facadeFactory.createReportService<Array<number>, Array<number>, number, number>();
             return service.getData('SampleSystemGenericReport/GetReportParameterValuePositionsByTypeName', {plain : SimpleObject, observable : ObservableSimpleObject}, realParameters);
         });
@@ -119,7 +119,7 @@ function _doHealthCheck(): async.SimpleAsyncFunc1<string> {
     function _getSimpleReportParameterValues(): async.AsyncFunc4<dto.ReportParameterIdentityDTO, string, OData.SelectOperationResult<dto.ReportParameterValueSimpleDTO>, OData.SelectOperationResult<dto.ReportParameterValueObservableSimpleDTO>, dto.ReportParameterValueSimpleDTO, dto.ReportParameterValueObservableSimpleDTO> {
         return new async.AsyncFunc4((identity: dto.ReportParameterIdentityDTO, odataQueryString: string) => {
             let baseParameters = {identity : identity, odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let realParameters = {request : baseParameters};
             let service = Environment.current.context.facadeFactory.createReportService<OData.SelectOperationResult<dto.ReportParameterValueSimpleDTO>, OData.SelectOperationResult<dto.ReportParameterValueObservableSimpleDTO>, dto.ReportParameterValueSimpleDTO, dto.ReportParameterValueObservableSimpleDTO>();
             return service.getData('SampleSystemGenericReport/GetSimpleReportParameterValues', {plain : dto.ReportParameterValueSimpleDTO, observable : dto.ReportParameterValueObservableSimpleDTO}, realParameters);
         });
@@ -128,7 +128,7 @@ function _doHealthCheck(): async.SimpleAsyncFunc1<string> {
     function _getSimpleReportParameterValuesByTypeName(): async.AsyncFunc4<string, string, OData.SelectOperationResult<dto.ReportParameterValueSimpleDTO>, OData.SelectOperationResult<dto.ReportParameterValueObservableSimpleDTO>, dto.ReportParameterValueSimpleDTO, dto.ReportParameterValueObservableSimpleDTO> {
         return new async.AsyncFunc4((typeName: string, odataQueryString: string) => {
             let baseParameters = {typeName : typeName, odataQueryString : odataQueryString};
-            let realParameters = baseParameters;
+            let realParameters = {request : baseParameters};
             let service = Environment.current.context.facadeFactory.createReportService<OData.SelectOperationResult<dto.ReportParameterValueSimpleDTO>, OData.SelectOperationResult<dto.ReportParameterValueObservableSimpleDTO>, dto.ReportParameterValueSimpleDTO, dto.ReportParameterValueObservableSimpleDTO>();
             return service.getData('SampleSystemGenericReport/GetSimpleReportParameterValuesByTypeName', {plain : dto.ReportParameterValueSimpleDTO, observable : dto.ReportParameterValueObservableSimpleDTO}, realParameters);
         });

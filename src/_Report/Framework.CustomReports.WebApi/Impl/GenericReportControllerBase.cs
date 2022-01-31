@@ -57,18 +57,22 @@ namespace Framework.CustomReports.WebApi
     {
         private Lazy<Dictionary<string, TypeMetadata>> typeMetadataDictLazy;
 
-        public GenericReportControllerBase(TServiceEnvironment environment, IExceptionProcessor exceptionProcessor)
+
+        protected GenericReportControllerBase(TServiceEnvironment environment, IExceptionProcessor exceptionProcessor)
             : base(environment, exceptionProcessor)
         {
             this.InitDict();
         }
 
+
+        [HttpPost(nameof(DoHealthCheck))]
         public string DoHealthCheck()
         {
             return PerformanceHelper.GetHealthStatus(() => this.EvaluateRead((evaluatedData) => evaluatedData.Context.Configuration.Logics.Report.GetUnsecureQueryable().FirstOrDefault()));
         }
 
-        public SelectOperationResult<ReportSimpleDTO> GetSimpleReports(string odataQueryString)
+        [HttpPost(nameof(GetSimpleReports))]
+        public SelectOperationResult<ReportSimpleDTO> GetSimpleReports([FromBody]string odataQueryString)
         {
             return base.Evaluate(DBSessionMode.Read, evaludatedData =>
             {
@@ -80,12 +84,8 @@ namespace Framework.CustomReports.WebApi
             });
         }
 
-        private ReportServiceContext<TBLLContext, TSecurityOperationCode> GetReportServiceContext(TBLLContext context)
-        {
-            return new ReportServiceContext<TBLLContext, TSecurityOperationCode>(context, this.ServiceEnvironment.SystemMetadataTypeBuilder, this.ServiceEnvironment.SecurityOperationCodeProvider);
-        }
-
-        public IEnumerable<ReportPropertySimpleDTO> GetSimpleReportProperties(Guid reportIdentity)
+        [HttpPost(nameof(GetSimpleReportProperties))]
+        public IEnumerable<ReportPropertySimpleDTO> GetSimpleReportProperties([FromBody] Guid reportIdentity)
         {
             return this.Evaluate(DBSessionMode.Read, evaludatedData =>
             {
@@ -99,7 +99,8 @@ namespace Framework.CustomReports.WebApi
             });
         }
 
-        public IEnumerable<ReportFilterSimpleDTO> GetSimpleReportFilters(Guid reportIdentity)
+        [HttpPost(nameof(GetSimpleReportFilters))]
+        public IEnumerable<ReportFilterSimpleDTO> GetSimpleReportFilters([FromBody] Guid reportIdentity)
         {
             return this.Evaluate(DBSessionMode.Read, evaludatedData =>
             {
@@ -113,7 +114,9 @@ namespace Framework.CustomReports.WebApi
             });
         }
 
-        public IEnumerable<ReportParameterSimpleDTO> GetSimpleReportParameters(Guid reportIdentity)
+        [HttpPost(nameof(GetSimpleReportParameters))]
+
+        public IEnumerable<ReportParameterSimpleDTO> GetSimpleReportParameters([FromBody] Guid reportIdentity)
         {
             return base.Evaluate(DBSessionMode.Read, evaludatedData =>
             {
@@ -127,7 +130,8 @@ namespace Framework.CustomReports.WebApi
             });
         }
 
-        public ReportGenerationRequestModelRichDTO GetRichReportGenerationRequestModel(Guid reportIdentity)
+        [HttpPost(nameof(GetRichReportGenerationRequestModel))]
+        public ReportGenerationRequestModelRichDTO GetRichReportGenerationRequestModel([FromBody] Guid reportIdentity)
         {
             return base.Evaluate(DBSessionMode.Read, evaludatedData =>
             {
@@ -146,18 +150,19 @@ namespace Framework.CustomReports.WebApi
                 return new ReportGenerationRequestModelRichDTO() { Parameters = parameters, TypeMetadatas = typeMetadatas };
             });
         }
-
-        public SelectOperationResult<ReportParameterValueSimpleDTO> GetSimpleReportParameterValues(ReportParameterIdentityDTO identity, string odataQueryString)
+        
+        [HttpPost(nameof(GetSimpleReportParameterValues))]
+        public SelectOperationResult<ReportParameterValueSimpleDTO> GetSimpleReportParameterValues(GetSimpleReportParameterValuesRequest request)
         {
             return this.Evaluate(DBSessionMode.Read, evaludatedData =>
             {
                 var context = evaludatedData.Context.Configuration;
 
-                var parameter = context.Logics.ReportParameter.GetById(identity.Id, true, z => z.Select(q => q.Report));
+                var parameter = context.Logics.ReportParameter.GetById(request.identity.Id, true, z => z.Select(q => q.Report));
 
                 this.CreateReportLogic(evaludatedData.Context, BLLSecurityMode.View).CheckAccess(parameter.Report);
 
-                var selectOperation = context.StandartExpressionBuilder.ToTyped<ReportParameterValue>(SelectOperation.Parse(odataQueryString));
+                var selectOperation = context.StandartExpressionBuilder.ToTyped<ReportParameterValue>(SelectOperation.Parse(request.odataQueryString));
 
                 var reportServiceContext = this.GetReportServiceContext(evaludatedData.Context);
 
@@ -167,22 +172,24 @@ namespace Framework.CustomReports.WebApi
             });
         }
 
-        public SelectOperationResult<ReportParameterValueSimpleDTO> GetSimpleReportParameterValuesByTypeName(string typeName, string odataQueryString)
+        [HttpPost(nameof(GetSimpleReportParameterValuesByTypeName))]
+        public SelectOperationResult<ReportParameterValueSimpleDTO> GetSimpleReportParameterValuesByTypeName(GetSimpleReportParameterValuesByTypeNameRequest request)
         {
             return this.Evaluate(DBSessionMode.Read, evaludatedData =>
             {
                 var context = evaludatedData.Context.Configuration;
 
-                var selectOperation = context.StandartExpressionBuilder.ToTyped<ReportParameterValue>(SelectOperation.Parse(odataQueryString));
+                var selectOperation = context.StandartExpressionBuilder.ToTyped<ReportParameterValue>(SelectOperation.Parse(request.odataQueryString));
 
                 var reportServiceContext = this.GetReportServiceContext(evaludatedData.Context);
 
-                var result = this.ServiceEnvironment.ReportParameterValueService.GetParameterValuesBy(reportServiceContext, typeName, selectOperation);
+                var result = this.ServiceEnvironment.ReportParameterValueService.GetParameterValuesBy(reportServiceContext, request.typeName, selectOperation);
 
                 return new SelectOperationResult<ReportParameterValueSimpleDTO>(result.Items.ToSimpleDTOList(this.GetConfigurationMappingService(evaludatedData)), result.TotalCount);
             });
         }
 
+        [HttpPost(nameof(GetReportParameterValuePositions))]
         public IList<int> GetReportParameterValuePositions(IEnumerable<ReportParameterValueStrictDTO> parameterValuesDto)
         {
             return this.Evaluate(DBSessionMode.Read, evaludatedData =>
@@ -212,7 +219,8 @@ namespace Framework.CustomReports.WebApi
                 return result;
             });
         }
-
+        
+        [HttpPost(nameof(GetReportParameterValuePosition))]
         public int GetReportParameterValuePosition(ReportParameterValueStrictDTO parameterValueStrictDTO)
         {
             return this.GetReportParameterValuePositions(new[] { parameterValueStrictDTO }).FirstOrDefault();
@@ -223,9 +231,15 @@ namespace Framework.CustomReports.WebApi
         /// <param name="id">ИД значения параметра</param>
         /// <param name="odataQueryString">OData запрос (как правило предназначен для сортировки)</param>
         /// <returns>Позизция значения параметра, если значение не было найдено, то возвращается -1</returns>
-        public int GetReportParameterValuePositionByTypeName(string typeName, Guid id, string odataQueryString)
+        [HttpPost(nameof(GetReportParameterValuePositionByTypeName))]
+        public int GetReportParameterValuePositionByTypeName(GetReportParameterValuePositionByTypeNameRequest request)
         {
-            return this.GetReportParameterValuePositionsByTypeName(typeName, new[] { id }, odataQueryString).Single();
+            return this.GetReportParameterValuePositionsByTypeName(new GetReportParameterValuePositionsByTypeNameRequest
+            {
+                typeName = request.typeName,
+                ids = new[] { request.id },
+                odataQueryString = request.odataQueryString
+            }).Single();
         }
 
         /// <summary> Получить позиции значений параметров по типу параметра </summary>
@@ -233,32 +247,34 @@ namespace Framework.CustomReports.WebApi
         /// <param name="ids">ИД значений параметров</param>
         /// <param name="odataQueryString">OData запрос (как правило предназначен для сортировки)</param>
         /// <returns>Список позиций значений параметра, в том порядке, в котором идут ИД значений в списке ids (если значение не было найдено, то в позции указывается -1)</returns>
-        public IEnumerable<int> GetReportParameterValuePositionsByTypeName(string typeName, IEnumerable<Guid> ids, string odataQueryString)
+        [HttpPost(nameof(GetReportParameterValuePositionsByTypeName))]
+        public IEnumerable<int> GetReportParameterValuePositionsByTypeName(GetReportParameterValuePositionsByTypeNameRequest request)
         {
-            if (ids == null)
+            if (request == null)
             {
-                throw new ArgumentNullException(nameof(ids));
+                throw new ArgumentNullException(nameof(request));
             }
 
             return this.Evaluate(DBSessionMode.Read, evaludatedData =>
             {
                 var context = evaludatedData.Context.Configuration;
 
-                var selectOperation = context.StandartExpressionBuilder.ToTyped<ReportParameterValue>(SelectOperation.Parse(odataQueryString));
+                var selectOperation = context.StandartExpressionBuilder.ToTyped<ReportParameterValue>(SelectOperation.Parse(request.odataQueryString));
 
                 var reportServiceContext = this.GetReportServiceContext(evaludatedData.Context);
 
-                var parameterValues = this.ServiceEnvironment.ReportParameterValueService.GetParameterValuesBy(reportServiceContext, typeName, selectOperation);
+                var parameterValues = this.ServiceEnvironment.ReportParameterValueService.GetParameterValuesBy(reportServiceContext, request.typeName, selectOperation);
 
                 var values = parameterValues.Items.Select((item, index) => new { Id = Guid.Parse(item.Value), Index = index });
 
-                return from id in ids
+                return from id in request.ids
                        join value in values on id equals value.Id into tmpValue
                        from value in tmpValue.DefaultIfEmpty()
                        select value != null ? value.Index : -1;
             });
         }
 
+        [HttpPost(nameof(SaveReport))]
         public ReportIdentityDTO SaveReport(ReportStrictDTO reportStrict)
         {
             return this.Evaluate(DBSessionMode.Write, evaluateData =>
@@ -275,6 +291,7 @@ namespace Framework.CustomReports.WebApi
             });
         }
 
+        [HttpPost(nameof(RemoveReport))]
         public void RemoveReport(ReportIdentityDTO reportIdent)
         {
             this.Evaluate(DBSessionMode.Write, evaluateData =>
@@ -287,6 +304,7 @@ namespace Framework.CustomReports.WebApi
             });
         }
 
+        [HttpPost(nameof(GetRichReport))]
         public ReportRichDTO GetRichReport(ReportIdentityDTO reportIdentity)
         {
             return this.Evaluate(DBSessionMode.Read, evaluateData =>
@@ -299,6 +317,7 @@ namespace Framework.CustomReports.WebApi
             });
         }
 
+        [HttpPost(nameof(GetStream))]
         public virtual FileStreamResult GetStream(ReportGenerationModelStrictDTO modelDTO)
         {
             return this.Evaluate(DBSessionMode.Read, eval =>
@@ -318,6 +337,13 @@ namespace Framework.CustomReports.WebApi
                 return this.GetReportResult(reportStream);
             });
         }
+
+        [HttpPost(nameof(GetStream))]
+        public IEnumerable<TypeMetadata> GetTypeMetadatas()
+        {
+            return this.ServiceEnvironment.SystemMetadataTypeBuilder.SystemMetadata.Types;
+        }
+
 
         protected virtual IEnumerable<ReportGenerationPredefineValue> GetPredefineFilterParameters(ReportGenerationModel model, ReportServiceContext<TBLLContext, TSecurityOperationCode> reportServiceContext)
         {
@@ -380,14 +406,14 @@ namespace Framework.CustomReports.WebApi
             return this.GetConfigurationMappingService(evaludatedData.Context.Configuration);
         }
 
-        public IEnumerable<TypeMetadata> GetTypeMetadatas()
-        {
-            return (IEnumerable<TypeMetadata>)this.ServiceEnvironment.SystemMetadataTypeBuilder.SystemMetadata.Types;
-        }
-
         private void InitDict()
         {
             this.typeMetadataDictLazy = new Lazy<Dictionary<string, TypeMetadata>>(() => this.GetTypeMetadataDict(), true);
+        }
+        
+        private ReportServiceContext<TBLLContext, TSecurityOperationCode> GetReportServiceContext(TBLLContext context)
+        {
+            return new ReportServiceContext<TBLLContext, TSecurityOperationCode>(context, this.ServiceEnvironment.SystemMetadataTypeBuilder, this.ServiceEnvironment.SecurityOperationCodeProvider);
         }
 
         private Dictionary<string, TypeMetadata> GetTypeMetadataDict()

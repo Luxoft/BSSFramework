@@ -338,7 +338,7 @@ namespace Framework.CustomReports.WebApi
             });
         }
 
-        [HttpPost(nameof(GetStream))]
+        [HttpPost(nameof(GetTypeMetadatas))]
         public IEnumerable<TypeMetadata> GetTypeMetadatas()
         {
             return this.ServiceEnvironment.SystemMetadataTypeBuilder.SystemMetadata.Types;

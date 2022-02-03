@@ -42,7 +42,7 @@ namespace Framework.SecuritySystem
 
                 var messageBody = $" with {this.PrintElement(first.Key, first.Value)}";
 
-                var messagePostfix = other.Any() ? $" ({other.Join(", ", pair => this.PrintElement(pair.Key, pair.Value))}" : "";
+                var messagePostfix = other.Any() ? $" ({other.Join(", ", pair => this.PrintElement(pair.Key, pair.Value))})" : "";
 
                 var realFormatMessageFunc = formatMessageFunc ?? (v => v);
 

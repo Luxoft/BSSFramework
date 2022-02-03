@@ -17,7 +17,7 @@ namespace SampleSystem.WebApiCore.Controllers.Report
 {
     [ApiController]
     [ApiVersion("1.0")]
-    [Route("reportApi/v{version:apiVersion}/[controller]/[action]")]
+    [Route("reportApi/v{version:apiVersion}/[controller]")]
     public class SampleSystemGenericReportController : GenericReportControllerBase<SampleSystemCustomReportsServiceEnvironment, ISampleSystemBLLContext,
         PersistentDomainObjectBase,
         SampleSystemSecurityOperationCode, Guid, ISampleSystemDTOMappingService>

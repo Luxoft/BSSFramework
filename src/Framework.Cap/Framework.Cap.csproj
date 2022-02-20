@@ -6,9 +6,9 @@
     <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DotNetCore.CAP" Version="6.0.0" />
-    <PackageReference Include="DotNetCore.CAP.Dashboard" Version="6.0.0" />
-    <PackageReference Include="DotNetCore.CAP.SqlServer" Version="6.0.0" />
+    <PackageReference Include="DotNetCore.CAP" Version="6.0.1" />
+    <PackageReference Include="DotNetCore.CAP.Dashboard" Version="6.0.1" />
+    <PackageReference Include="DotNetCore.CAP.SqlServer" Version="6.0.1" />
     <PackageReference Include="Savorboard.CAP.InMemoryMessageQueue" Version="6.0.0" />
     <PackageReference Include="MediatR" Version="10.0.1" />
   </ItemGroup>

@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Framework.Cap\Framework.Cap.csproj" />
-    <ProjectReference Include="..\Framework.DomainDriven.ServiceModel.TemplateEvaluator\Framework.DomainDriven.ServiceModel.TemplateEvaluator.csproj" />
     <ProjectReference Include="..\Framework.HangfireCore\Framework.HangfireCore.csproj" />
     <ProjectReference Include="..\Framework.NotificationCore\Framework.NotificationCore.csproj" />
     <ProjectReference Include="..\SampleSystem.ServiceEnvironment\SampleSystem.ServiceEnvironment.csproj" />

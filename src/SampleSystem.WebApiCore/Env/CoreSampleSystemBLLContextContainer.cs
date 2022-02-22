@@ -5,7 +5,7 @@ using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.DomainDriven.ServiceModel.TemplateEvaluator;
+using Framework.Notification;
 using Framework.Notification.DTO;
 using Framework.NotificationCore.Senders;
 using Framework.NotificationCore.Services;
@@ -44,12 +44,12 @@ namespace SampleSystem.WebApiCore
             this.rewriteReceiversService = rewriteReceiversService;
         }
 
-        protected override ITemplateEvaluatorFactory GetTemplateEvaluatorFactory() => new TemplateEvaluatorFactory();
-
         protected override IStandardSubscriptionService CreateSubscriptionService() => new LocalDBSubscriptionService(this.Configuration);
 
         protected override IMessageSender<NotificationEventDTO> GetMessageTemplateSender() =>
             new SmtpMessageSender(LazyHelper.Create(() => this.smtpSettings), LazyHelper.Create(() => this.rewriteReceiversService), this.Configuration);
+
+        protected override INotificationService CreateNotificationService() => throw new NotImplementedException();
 
         protected override IMessageSender<Exception> GetExceptionSender()
         {

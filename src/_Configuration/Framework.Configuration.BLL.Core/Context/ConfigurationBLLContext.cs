@@ -68,8 +68,6 @@ namespace Framework.Configuration.BLL
             IEnumerable<ITargetSystemService> targetSystemServices,
             IMessageSender<RunRegularJobModel> regularJobMessageSender,
             [NotNull] ISerializerFactory<string> systemConstantSerializerFactory,
-            [NotNull] ITemplateEvaluatorFactory templateEvaluatorFactory,
-            [NotNull] IFormatter<MessageTemplateNotification, NotificationEventDTO> messageTemplateNotificationFormatter,
             [NotNull] IContextEvaluator<IConfigurationBLLContext> rootContextEvaluator,
             [NotNull] object serviceEnvironmentSource,
             [NotNull] IExceptionService exceptionService,
@@ -105,8 +103,6 @@ namespace Framework.Configuration.BLL
                 new EqualityComparerImpl<IDomainType>((dt1, dt2) => dt1.Name == dt2.Name && dt1.NameSpace == dt2.NameSpace, dt => dt.Name.GetHashCode() ^ dt.NameSpace.GetHashCode())).WithLock();
 
             this.SystemConstantSerializerFactory = systemConstantSerializerFactory ?? throw new ArgumentNullException(nameof(systemConstantSerializerFactory));
-            this.TemplateEvaluatorFactory = templateEvaluatorFactory ?? throw new ArgumentNullException(nameof(templateEvaluatorFactory));
-            this.MessageTemplateNotificationFormatter = messageTemplateNotificationFormatter ?? throw new ArgumentNullException(nameof(messageTemplateNotificationFormatter));
             this.RootContextEvaluator = rootContextEvaluator ?? throw new ArgumentNullException(nameof(rootContextEvaluator));
             this.ServiceEnvironmentSource = serviceEnvironmentSource ?? throw new ArgumentNullException(nameof(serviceEnvironmentSource));
 
@@ -149,10 +145,6 @@ namespace Framework.Configuration.BLL
         public IExceptionService ExceptionService { get; }
 
         public ISerializerFactory<string> SystemConstantSerializerFactory { get; }
-
-        public ITemplateEvaluatorFactory TemplateEvaluatorFactory { get; }
-
-        public IFormatter<MessageTemplateNotification, NotificationEventDTO> MessageTemplateNotificationFormatter { get; }
 
         /// <inheritdoc />
         public IContextEvaluator<IConfigurationBLLContext> RootContextEvaluator { get; }

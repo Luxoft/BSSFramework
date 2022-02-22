@@ -42,10 +42,6 @@ namespace Framework.Configuration.BLL
 
         ITypeResolver<DomainType> ComplexDomainTypeResolver { get; }
 
-        ITemplateEvaluatorFactory TemplateEvaluatorFactory { get; }
-
-        IFormatter<MessageTemplateNotification, NotificationEventDTO> MessageTemplateNotificationFormatter { get; }
-
         /// <summary>
         /// Фабрика контектов (нужно для RegularJob-ов)
         /// </summary>

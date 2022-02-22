@@ -32,8 +32,6 @@ using Framework.Workflow.BLL;
 
 using JetBrains.Annotations;
 
-using IExpressionParserFactory = Framework.Configuration.BLL.IExpressionParserFactory;
-
 namespace Framework.DomainDriven.ServiceModel.IAD
 {
     public abstract partial class ServiceEnvironmentBase :
@@ -50,10 +48,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         private readonly Framework.Workflow.BLL.IExpressionParserFactory _workflowLambdaProcessorFactory =
 
             new Framework.Workflow.BLL.ExpressionParserFactory(CSharpNativeExpressionParser.Composite);
-
-        private readonly Framework.Configuration.BLL.IExpressionParserFactory configurationLambdaProcessorFactory =
-
-            new Framework.Configuration.BLL.ExpressionParserFactory(CSharpNativeExpressionParser.Compile);
 
         private readonly IValidator workflowAnonymousObjectValidator = new Validator(new ValidationMap(ValidationExtendedData.Infinity).ToCompileCache());
 
@@ -167,15 +161,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         public bool IsInitialize { get; private set; }
 
         public IObjectStorage ObjectStorage { get; private set; }
-
-        public IExpressionParserFactory ExpressionParsers
-        {
-            get
-            {
-                return this.configurationLambdaProcessorFactory;
-            }
-        }
-
+        
         /// <summary>
         /// Получает хранилище описаний подписок.
         /// </summary>
@@ -301,7 +287,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
                 this.StandartExpressionBuilder = LazyInterfaceImplementHelper.CreateProxy(this.GetStandartExpressionBuilder);
 
-                this.NotificationService = LazyInterfaceImplementHelper.CreateProxy(this.GetNotificationService);
+                this.NotificationService = LazyInterfaceImplementHelper.CreateProxy(this.CreateNotificationService);
 
                 this.targetSystems = LazyHelper.Create(() => this.GetConfigurationTargetSystemServices(serviceEnvironment.SubscriptionMetadataStore)).Unwrap();
 
@@ -425,10 +411,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     this.GetEmployeeSource,
                     this.targetSystems,
                     this.ServiceEnvironment.RegularJobMessageSender,
-                    this.ServiceEnvironment.configurationLambdaProcessorFactory,
                     this.SystemConstantSerializerFactory,
-                    this.GetTemplateEvaluatorFactory(),
-                    this.GetMessageTemplateNotificationFormatter(),
                     new RootContextEvaluator<IConfigurationBLLContext>(this.ServiceEnvironment, this.ServiceEnvironment.RootServiceProvider),
                     this.ServiceEnvironment,
                     LazyInterfaceImplementHelper.CreateProxy(this.GetExceptionService),
@@ -493,14 +476,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             {
                 return new WorkflowApproveProcessor(this.Authorization);
             }
-
-            /// <summary>
-            /// Эвалюатор шаблонных докуметов (xls, docx, docm, txt, html)
-            /// Используется в основном для процессинга аттачей в нотификациях
-            /// Но может использоваться и в других местах
-            /// </summary>
-            /// <returns></returns>
-            protected abstract ITemplateEvaluatorFactory GetTemplateEvaluatorFactory();
 
             /// <summary>
             /// Подписка на евенты
@@ -572,23 +547,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                 return new Framework.SecuritySystem.Rules.Builders.V1.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>(context.HierarchicalObjectExpanderFactory, context.Authorization);
             }
 
-            protected INotificationService GetNotificationService()
-            {
-                var templateSender = this.GetMainTemplateSender().ToMessageTemplateSender(this.Configuration, this.ServiceEnvironment.NotificationContext.Sender);
-
-                var notificationSender = this.GetMainTemplateSender().ToNotificationSender(this.Configuration, this.ServiceEnvironment.NotificationContext.Sender);
-
-                var subscriptionMessageSender = this.GetSubscriptionTemplateSender().ToMessageTemplateSender(this.Configuration, this.ServiceEnvironment.NotificationContext.Sender);
-
-                var exceptionSender = this.GetExceptionSender();
-
-                return new NotificationService(templateSender, notificationSender, subscriptionMessageSender, exceptionSender);
-            }
-
-            protected virtual IFormatter<MessageTemplateNotification, NotificationEventDTO> GetMessageTemplateNotificationFormatter()
-            {
-                return new MessageTemplateDTOFormatter(this.Configuration, this.ServiceEnvironment.NotificationContext.Sender);
-            }
+            protected abstract INotificationService CreateNotificationService();
 
             /// <summary>
             /// Создаёт экземпляр класса, который рассылает уведомления об исключениях.

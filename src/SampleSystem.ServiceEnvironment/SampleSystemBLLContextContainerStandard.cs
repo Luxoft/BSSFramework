@@ -195,8 +195,6 @@ namespace SampleSystem.ServiceEnvironment
             return new CustomWorkflowApproveProcessor(this.Authorization, this.MainContext);
         }
 
-        protected abstract override ITemplateEvaluatorFactory GetTemplateEvaluatorFactory();
-
         /// <summary>
         /// Сохранение модификаций в локальную бд
         /// </summary>

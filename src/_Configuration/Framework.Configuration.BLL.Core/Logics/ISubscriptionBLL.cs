@@ -13,21 +13,11 @@ namespace Framework.Configuration.BLL
         bool HasActiveSubscriptions(Type type);
 
         bool HasActiveSubscriptions(DomainType domainType);
-
-        IQueryable<Subscription> GetActiveSubscriptions(DomainType domainType, bool withCondition = true);
-
+        
         IList<ITryResult<Subscription>> Process(ObjectModificationInfo<Guid> changedObjectInfo);
 
         IList<ITryResult<Subscription>> ProcessChangedObjectUntyped(object prev, object next, Type type);
 
         SubscriptionRecipientInfo GetRecipientsUntyped(Type type, object prev, object next, string subscriptionCode);
-
-        void ValidateAllBusunessRoles();
-
-        void ValidateBusunessRole(Subscription subscription);
-
-        void SynchronizeAllBusunessRoles(bool strong);
-
-        void SynchronizeBusunessRole(Subscription subscription, bool strong);
     }
 }

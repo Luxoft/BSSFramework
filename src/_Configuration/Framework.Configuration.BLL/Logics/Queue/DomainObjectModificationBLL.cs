@@ -36,7 +36,7 @@ namespace Framework.Configuration.BLL
 
                 Log.Verbose("Process modification {DomainObjectId}", modification.DomainObjectId);
 
-                foreach (var tryResult in this.Context.Logics.Subscription.Process(info))
+                foreach (var tryResult in new SubscriptionBLL(this.Context).Process(info))
                 {
                     tryResult.Match(_ => { }, ex =>
                     {

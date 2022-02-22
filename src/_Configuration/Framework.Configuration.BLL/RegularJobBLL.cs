@@ -209,24 +209,15 @@ namespace Framework.Configuration.BLL
             }
             else
             {
-                Action<object, IExpressionParserFactory, string> methodTemplate =
-                    this.ExecuteEnvironmentLambda;
-
-                methodTemplate.CreateGenericMethod(this.Context.ServiceEnvironmentSource.GetType())
-                              .Invoke(this, new[] { this.Context.ServiceEnvironmentSource, this.Context.ExpressionParsers, regularJob.Function });
+                throw new NotImplementedException("Delete");
             }
         }
 
         private void ExecuteEnvironmentLambda<TServiceEnvironment>(
             TServiceEnvironment environment,
-            IExpressionParserFactory expressionParserFactory,
             string value)
         {
-            var del = expressionParserFactory
-                      .GetRegularJobFunctionExpressionParser<TServiceEnvironment>()
-                      .GetDelegate(value);
-
-            del(environment);
+            throw new NotImplementedException("Delete");
         }
 
         private void RunRegularJobs(IList<RegularJob> allJobs, IList<RegularJob> needRunningJobs, RunRegularJobMode runRegularJobMode)

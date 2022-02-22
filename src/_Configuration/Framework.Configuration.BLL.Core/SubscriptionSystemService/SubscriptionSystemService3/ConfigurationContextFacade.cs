@@ -229,45 +229,7 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3
 
             return result;
         }
-
-        /// <summary>
-        ///     Возвращает список подписок для заданного типа доменного объекта.
-        /// </summary>
-        /// <param name="domainObjectType">Тип доменного объекта.</param>
-        /// <returns>Экземпляр <see cref="IQueryable{Subscription}" />.</returns>
-        /// <exception cref="ArgumentNullException">Аргумент domainObjectType равен null.</exception>
-        public virtual IQueryable<Subscription> GetSubscriptions([NotNull] Type domainObjectType)
-        {
-            if (domainObjectType == null)
-            {
-                throw new ArgumentNullException(nameof(domainObjectType));
-            }
-
-            var domainType = this.context.GetDomainType(domainObjectType, true);
-            var result = this.context.Logics.Subscription.GetActiveSubscriptions(domainType);
-
-            return result;
-        }
-
-        /// <summary>
-        ///     Определяет что для заданного типа доменного объекта существуют активные подписки.
-        /// </summary>
-        /// <param name="domainObjectType">Тип доменного объекта.</param>
-        /// <returns>
-        ///     <c>true</c> если для заданного типа доменного объекта существуют активные подписки;
-        ///     в противном случае <c>false</c>.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">Аргумент domainObjectType равен null.</exception>
-        public virtual bool IsActiveSubscriptionsExists([NotNull] Type domainObjectType)
-        {
-            if (domainObjectType == null)
-            {
-                throw new ArgumentNullException(nameof(domainObjectType));
-            }
-
-            var result = this.context.Logics.Subscription.HasActiveSubscriptions(domainObjectType);
-            return result;
-        }
+        
 
         /// <summary>
         /// Возвращает коды активных code first подписок.

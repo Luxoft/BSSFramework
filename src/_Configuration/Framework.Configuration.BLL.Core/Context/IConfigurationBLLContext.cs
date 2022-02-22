@@ -32,8 +32,6 @@ namespace Framework.Configuration.BLL
 
         IDateTimeServiceContainer
     {
-        IExpressionParserFactory ExpressionParsers { get; }
-
         IMessageSender<MessageTemplateNotification> SubscriptionSender { get; }
 
         IMessageSender<RunRegularJobModel> RegularJobMessageSender { get; }

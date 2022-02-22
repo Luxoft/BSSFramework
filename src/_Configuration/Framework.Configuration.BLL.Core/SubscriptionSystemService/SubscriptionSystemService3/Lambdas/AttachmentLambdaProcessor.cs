@@ -18,8 +18,8 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
     public class AttachmentLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLContext>
         where TBLLContext : class
     {
-        public AttachmentLambdaProcessor([NotNull] TBLLContext bllContext, [NotNull] IExpressionParserFactory parserFactory)
-            : base(bllContext, parserFactory)
+        public AttachmentLambdaProcessor([NotNull] TBLLContext bllContext)
+            : base(bllContext)
         {
         }
 

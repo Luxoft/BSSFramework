@@ -15,8 +15,8 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
         /// <summary>Создаёт экземпляр класса <see cref="GenerationLambdaProcessorTo"/>.</summary>
         /// <param name="bllContext">Контекст бизнес-логики.</param>
         /// <param name="parserFactory">Фабрика парсеров лямбда-выражений.</param>
-        public GenerationLambdaProcessorTo(TBLLContext bllContext, IExpressionParserFactory parserFactory)
-            : base(bllContext, parserFactory)
+        public GenerationLambdaProcessorTo(TBLLContext bllContext)
+            : base(bllContext)
         {
         }
 
@@ -27,20 +27,6 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
         protected override SubscriptionLambda GetSubscriptionLambda(Subscription subscription)
         {
             return subscription.Generation;
-        }
-
-        /// <inheritdoc/>
-        protected override Func<T, T, IEnumerable<NotificationMessageGenerationInfo>> GetNonContextDelegate<T>(
-            Subscription subscription)
-        {
-            return this.ParserFactory.GetBySubscriptionGeneration<T>().GetDelegate(subscription);
-        }
-
-        /// <inheritdoc/>
-        protected override Func<TBLLContext, T, T, IEnumerable<NotificationMessageGenerationInfo>> GetContextDelegate
-            <T>(Subscription subscription)
-        {
-            return this.ParserFactory.GetBySubscriptionGeneration<TBLLContext, T>().GetDelegate(subscription);
         }
     }
 }

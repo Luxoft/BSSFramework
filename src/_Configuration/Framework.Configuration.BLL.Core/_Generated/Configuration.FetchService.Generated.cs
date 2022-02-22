@@ -244,10 +244,6 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetLogMessageContainer(rule)));
             }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.MessageTemplate)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetMessageTemplateContainer(rule)));
-            }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.NamedLock)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetNamedLockContainer(rule)));
@@ -291,22 +287,6 @@ namespace Framework.Configuration.BLL
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Sequence)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetSequenceContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SubBusinessRole)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetSubBusinessRoleContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Subscription)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetSubscriptionContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SubscriptionLambda)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetSubscriptionLambdaContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SubscriptionSecurityItem)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetSubscriptionSecurityItemContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SystemConstant)))
             {
@@ -577,30 +557,6 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.MessageTemplate> GetMessageTemplateContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.MessageTemplate>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.MessageTemplate>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.MessageTemplate>(fetchRootRule => fetchRootRule.SelectNested(messageTemplate => messageTemplate.DomainType).SelectNested(domainType => domainType.TargetSystem));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.MessageTemplate>(fetchRootRule => fetchRootRule.SelectNested(messageTemplate => messageTemplate.DomainType).SelectNested(domainType => domainType.TargetSystem));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
         protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.NamedLock> GetNamedLockContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
@@ -792,122 +748,6 @@ namespace Framework.Configuration.BLL
             else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
             {
                 return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.Sequence>.Empty;
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.SubBusinessRole> GetSubBusinessRoleContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.SubBusinessRole>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.SubBusinessRole>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.SubBusinessRole>(fetchRootRule => fetchRootRule.SelectNested(subBusinessRole => subBusinessRole.Subscription));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.SubBusinessRole>(fetchRootRule => fetchRootRule.SelectNested(subBusinessRole => subBusinessRole.Subscription));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.Subscription> GetSubscriptionContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.Subscription>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.Subscription>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.Subscription>(
-                    fetchRootRule => fetchRootRule.SelectNested(subscription => subscription.Condition),
-                    fetchRootRule => fetchRootRule.SelectNested(subscription => subscription.CopyGeneration),
-                    fetchRootRule => fetchRootRule.SelectNested(subscription => subscription.DomainType).SelectNested(domainType => domainType.TargetSystem),
-                    fetchRootRule => fetchRootRule.SelectNested(subscription => subscription.DynamicSource),
-                    fetchRootRule => fetchRootRule.SelectNested(subscription => subscription.Generation),
-                    fetchRootRule => fetchRootRule.SelectNested(subscription => subscription.MessageTemplate),
-                    fetchRootRule => fetchRootRule.SelectNested(subscription => subscription.ReplyToGeneration));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.Subscription>(
-                    fetchRootRule => fetchRootRule.SelectNested(subscription => subscription.Condition),
-                    fetchRootRule => fetchRootRule.SelectNested(subscription => subscription.CopyGeneration),
-                    fetchRootRule => fetchRootRule.SelectNested(subscription => subscription.DomainType).SelectNested(domainType => domainType.TargetSystem),
-                    fetchRootRule => fetchRootRule.SelectNested(subscription => subscription.DynamicSource),
-                    fetchRootRule => fetchRootRule.SelectNested(subscription => subscription.Generation),
-                    fetchRootRule => fetchRootRule.SelectNested(subscription => subscription.MessageTemplate),
-                    fetchRootRule => fetchRootRule.SelectNested(subscription => subscription.ReplyToGeneration),
-                    fetchRootRule => fetchRootRule.SelectMany(subscription => subscription.SecurityItems).SelectNested(subscriptionSecurityItem => subscriptionSecurityItem.Source),
-                    fetchRootRule => fetchRootRule.SelectMany(subscription => subscription.SubBusinessRoles));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.SubscriptionLambda> GetSubscriptionLambdaContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.SubscriptionLambda>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.SubscriptionLambda>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.SubscriptionLambda>(fetchRootRule => fetchRootRule.SelectNested(subscriptionLambda => subscriptionLambda.DomainType).SelectNested(domainType => domainType.TargetSystem));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.SubscriptionLambda>(fetchRootRule => fetchRootRule.SelectNested(subscriptionLambda => subscriptionLambda.DomainType).SelectNested(domainType => domainType.TargetSystem));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.SubscriptionSecurityItem> GetSubscriptionSecurityItemContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.SubscriptionSecurityItem>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.SubscriptionSecurityItem>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.SubscriptionSecurityItem>(
-                    fetchRootRule => fetchRootRule.SelectNested(subscriptionSecurityItem => subscriptionSecurityItem.Source),
-                    fetchRootRule => fetchRootRule.SelectNested(subscriptionSecurityItem => subscriptionSecurityItem.Subscription));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.SubscriptionSecurityItem>(
-                    fetchRootRule => fetchRootRule.SelectNested(subscriptionSecurityItem => subscriptionSecurityItem.Source),
-                    fetchRootRule => fetchRootRule.SelectNested(subscriptionSecurityItem => subscriptionSecurityItem.Subscription));
             }
             else
             {

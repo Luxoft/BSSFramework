@@ -61,11 +61,6 @@ namespace Framework.Configuration.BLL
             TBLLContext targetSystemContext,
             SubscriptionMetadataStore subscriptionMetadataStore)
         {
-            if (!this.IsNewSubscriptionServiceRequired())
-            {
-                return new DBSubscription.SubscriptionSystemService<TBLLContext>(this.Context, this);
-            }
-
             if (subscriptionMetadataStore == null)
             {
                 throw new InvalidOperationException("SubscriptionMetadataStore instance can not be null for use new subscription services.");

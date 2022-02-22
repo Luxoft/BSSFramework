@@ -38,18 +38,20 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions
         /// <inheritdoc/>
         public override IEnumerable<Subscription> Resolve<T>([NotNull] DomainObjectVersions<T> versions)
         {
-            if (versions == null)
-            {
-                throw new ArgumentNullException(nameof(versions));
-            }
+            throw new NotImplementedException("Delete?");
 
-            this.logger.Verbose("Search active subscriptions in database for domain object type '{DomainObjectType}'.", versions.DomainObjectType);
+            //if (versions == null)
+            //{
+            //    throw new ArgumentNullException(nameof(versions));
+            //}
 
-            var result = this.configurationContextFacade.GetSubscriptions(versions.DomainObjectType);
+            //this.logger.Verbose("Search active subscriptions in database for domain object type '{DomainObjectType}'.", versions.DomainObjectType);
 
-            this.logger.Verbose("'{resultCount}' active subscriptions has been found in database for domain object type '{DomainObjectType}'.", result.Count(), versions.DomainObjectType);
+            //var result = this.configurationContextFacade.GetSubscriptions(versions.DomainObjectType);
 
-            return result;
+            //this.logger.Verbose("'{resultCount}' active subscriptions has been found in database for domain object type '{DomainObjectType}'.", result.Count(), versions.DomainObjectType);
+
+            //return result;
         }
 
         /// <inheritdoc/>
@@ -88,18 +90,20 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions
         /// <inheritdoc/>
         public override bool IsActiveSubscriptionForTypeExists([NotNull] Type domainObjectType)
         {
-            if (domainObjectType == null)
-            {
-                throw new ArgumentNullException(nameof(domainObjectType));
-            }
+            throw new NotImplementedException("Delete?");
 
-            this.logger.Verbose("Define is active subscription for type '{domainObjectType}' exists.", domainObjectType);
+            //if (domainObjectType == null)
+            //{
+            //    throw new ArgumentNullException(nameof(domainObjectType));
+            //}
 
-            var result = this.configurationContextFacade.IsActiveSubscriptionsExists(domainObjectType);
+            //this.logger.Verbose("Define is active subscription for type '{domainObjectType}' exists.", domainObjectType);
 
-            this.logger.Verbose("Is active subscription for type '{domainObjectType}' exists: '{result}'.", domainObjectType, result);
+            //var result = this.configurationContextFacade.IsActiveSubscriptionsExists(domainObjectType);
 
-            return result;
+            //this.logger.Verbose("Is active subscription for type '{domainObjectType}' exists: '{result}'.", domainObjectType, result);
+
+            //return result;
         }
     }
 }

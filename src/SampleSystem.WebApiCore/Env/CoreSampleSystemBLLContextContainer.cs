@@ -1,23 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 
-using Framework.Authorization.BLL;
-using Framework.Configuration.BLL;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
-using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
 using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.ServiceModel.TemplateEvaluator;
-using Framework.Events;
 using Framework.Notification.DTO;
 using Framework.NotificationCore.Senders;
 using Framework.NotificationCore.Services;
 using Framework.NotificationCore.Settings;
-using Framework.Persistent;
 using Framework.Report;
 using Framework.Security.Cryptography;
 using Framework.Validation;
@@ -62,50 +54,6 @@ namespace SampleSystem.WebApiCore
         protected override IMessageSender<Exception> GetExceptionSender()
         {
             return MessageSender<Exception>.Trace;
-        }
-
-        protected override IEnumerable<ITargetSystemService> GetConfigurationTargetSystemServices(
-            SubscriptionMetadataStore subscriptionMetadataStore)
-        {
-            yield return new CustomTargetSystemService<ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase>(
-                this.Configuration,
-                this.MainContext,
-                this.Configuration.Logics.TargetSystem.GetObjectBy(ts => ts.IsMain, true),
-                this.GetMainEventDALListeners(),
-                this.ServiceEnvironment.SubscriptionMetadataStore);
-
-            yield return new CustomTargetSystemService<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase>(
-                this.Configuration,
-                this.Configuration,
-                this.Configuration.Logics.TargetSystem.GetByName(TargetSystemHelper.ConfigurationName, true),
-                this.GetConfigurationEventDALListeners(),
-                this.ServiceEnvironment.SubscriptionMetadataStore);
-
-            yield return new CustomTargetSystemService<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase>(
-                this.Configuration,
-                this.Authorization,
-                this.Configuration.Logics.TargetSystem.GetByName(TargetSystemHelper.AuthorizationName, true),
-                this.GetAuthorizationEventDALListeners(),
-                this.ServiceEnvironment.SubscriptionMetadataStore);
-        }
-
-        private class CustomTargetSystemService<TBLLContext, TPersistentDomainObjectBase> : TargetSystemService<TBLLContext, TPersistentDomainObjectBase>
-            where TBLLContext : class, ITypeResolverContainer<string>,
-            ISecurityServiceContainer<IRootSecurityService<TBLLContext, TPersistentDomainObjectBase>>,
-            IDefaultBLLContext<TPersistentDomainObjectBase, Guid>, IBLLOperationEventContext<TPersistentDomainObjectBase>
-            where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
-        {
-            public CustomTargetSystemService(
-                IConfigurationBLLContext context,
-                TBLLContext targetSystemContext,
-                TargetSystem targetSystem,
-                IEnumerable<IManualEventDALListener<TPersistentDomainObjectBase>> eventDalListeners,
-                SubscriptionMetadataStore subscriptionMetadataStore = null)
-                : base(context, targetSystemContext, targetSystem, eventDalListeners, subscriptionMetadataStore)
-            {
-            }
-
-            protected override bool IsNewSubscriptionServiceRequired() => true;
         }
     }
 }

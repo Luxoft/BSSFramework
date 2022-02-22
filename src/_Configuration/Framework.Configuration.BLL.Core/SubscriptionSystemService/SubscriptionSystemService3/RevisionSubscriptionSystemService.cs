@@ -62,39 +62,6 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3
         }
 
         /// <summary>
-        /// Предназначен для тестирования конкретной подписки и связанных с ней уведомлений.
-        /// </summary>
-        /// <param name="subscription">Подписка.</param>
-        /// <param name="revision">Номер версии доменного объекта.</param>
-        /// <param name="domainObjectId">Идентификатор доменного объекта.</param>
-        /// <returns>Экземпляр <see cref="IList{ITryResult}"/>.</returns>
-        /// <exception cref="ArgumentNullException">Аргумент subscription равен null.</exception>
-        public ITryResult<Subscription> Process([NotNull] Subscription subscription, long? revision, Guid domainObjectId)
-        {
-            if (subscription == null)
-            {
-                throw new ArgumentNullException(nameof(subscription));
-            }
-
-            if (domainObjectId == Guid.Empty)
-            {
-                throw new ArgumentOutOfRangeException(nameof(domainObjectId));
-            }
-
-            try
-            {
-                var service = this.CreateTestingService();
-                var result = service.TestSubscription(subscription, domainObjectId, revision);
-
-                return result;
-            }
-            catch (Exception ex)
-            {
-                return TryResult.CreateFault<Subscription>(ex);
-            }
-        }
-
-        /// <summary>
         /// Выполняет рассылку уведомлений по всем подпискам, привязанным к типу изменяемого доменного объекта.
         /// </summary>
         /// <param name="changedObjectInfo">Данные об изменяемом доменном объекте.</param>
@@ -145,11 +112,6 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3
 
             var result = notificationService.NotifyDomainObjectChanged(versions);
             return result;
-        }
-
-        private TestingService<TBLLContext> CreateTestingService()
-        {
-            return this.servicesFactory.CreateTestingService();
         }
 
         private RevisionService<TDomainObject> CreateRevisionService<TDomainObject>()

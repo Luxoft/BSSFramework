@@ -26,19 +26,14 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
         ///     или
         ///     parserFactory равен null.
         /// </exception>
-        protected LambdaProcessor([NotNull] TBLLContext bllContext, [NotNull] IExpressionParserFactory parserFactory)
+        protected LambdaProcessor([NotNull] TBLLContext bllContext)
         {
             this.BllContext = bllContext ?? throw new ArgumentNullException(nameof(bllContext));
-            this.ParserFactory = parserFactory ?? throw new ArgumentNullException(nameof(parserFactory));
         }
 
         /// <summary>Возвращает имя лямбда-выражения.</summary>
         /// <value>Имя лямбда-выражения.</value>
         protected abstract string LambdaName { get; }
-
-        /// <summary>Возвращает фабрику парсеров лямбда-выражений.</summary>
-        /// <value>Фабрику парсеров лямбда-выражений.</value>
-        protected IExpressionParserFactory ParserFactory { get; }
 
         /// <summary>Возвращает контекст бизнес-логики.</summary>
         /// <value>Контекст бизнес-логики.</value>

@@ -22,8 +22,6 @@ namespace Framework.Configuration.BLL
 
         SubscriptionRecipientInfo GetRecipientsUntyped(Type type, object prev, object next, string subscriptionCode);
 
-        string Test(TestSubscriptionModel testModel);
-
         void ValidateAllBusunessRoles();
 
         void ValidateBusunessRole(Subscription subscription);
@@ -31,9 +29,5 @@ namespace Framework.Configuration.BLL
         void SynchronizeAllBusunessRoles(bool strong);
 
         void SynchronizeBusunessRole(Subscription subscription, bool strong);
-
-        SubscriptionContainer GetSubscriptionContainer(IEnumerable<Subscription> subscriptions);
-
-        void Import(SubscriptionContainer subscriptionContainer);
     }
 }

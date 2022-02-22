@@ -15,15 +15,8 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients
     public class ByRolesRecipientsResolver<TBLLContext>
         where TBLLContext : class
     {
-        private static readonly Dictionary<SubscriptionSourceMode, Func<ConfigurationContextFacade, LambdaProcessorFactory<TBLLContext>, ByRolesRecipientsResolverBase<TBLLContext>>>
-            Resolvers =
-            new Dictionary<SubscriptionSourceMode, Func<ConfigurationContextFacade, LambdaProcessorFactory<TBLLContext>, ByRolesRecipientsResolverBase<TBLLContext>>>
-            {
-                { SubscriptionSourceMode.Dynamic, (cf, pf) => new ByRolesRecipientsResolverDynamic<TBLLContext>(cf, pf) },
-                { SubscriptionSourceMode.Typed, (cf, pf) => new ByRolesRecipientsResolverTyped<TBLLContext>(cf, pf) },
-                { SubscriptionSourceMode.NonContext, (cf, pf) => new ByRolesRecipientsResolverNonContext<TBLLContext>(cf, pf) },
-                { SubscriptionSourceMode.Invalid, (cf, pf) => new ByRolesRecipientsResolverBase<TBLLContext>(cf, pf) }
-            };
+        private static readonly Func<ConfigurationContextFacade, LambdaProcessorFactory<TBLLContext>, ByRolesRecipientsResolverBase<TBLLContext>>
+            Resolver = (cf, pf) => new ByRolesRecipientsResolverTyped<TBLLContext>(cf, pf);
 
         private readonly ConfigurationContextFacade configurationContextFacade;
         private readonly LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory;
@@ -79,15 +72,15 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients
                 throw new ArgumentNullException(nameof(versions));
             }
 
-            var resolver = this.CreateResolver(subscription.SourceMode);
+            var resolver = this.CreateResolver();
             var result = resolver.Resolve(subscription, versions);
 
             return result;
         }
 
-        private ByRolesRecipientsResolverBase<TBLLContext> CreateResolver(SubscriptionSourceMode mode)
+        private ByRolesRecipientsResolverBase<TBLLContext> CreateResolver()
         {
-            var createResolver = Resolvers[mode];
+            var createResolver = Resolver;
             var result = createResolver(this.configurationContextFacade, this.lambdaProcessorFactory);
 
             return result;

@@ -25,24 +25,13 @@ namespace Framework.Configuration.Domain
     [ConfigurationEditDomainObject(ConfigurationSecurityOperationCode.SubscriptionEdit)]
     [BLLViewRole, BLLSaveRole, BLLRemoveRole]
     [NotAuditedClass]
-    public class Subscription : AuditPersistentDomainObjectBase,
-        IMaster<SubBusinessRole>,
-        IMaster<SubscriptionSecurityItem>,
-        ISubscription,
-        ICodeObject,
-        ITargetSystemElement<TargetSystem>,
-        IDomainTypeElement<DomainType>,
-        ISubscriptionElement
+    public class Subscription : ISubscription
     {
         private readonly ICollection<SubBusinessRole> subBusinessRoles = new List<SubBusinessRole>();
 
         private readonly ICollection<SubscriptionSecurityItem> securityItems = new List<SubscriptionSecurityItem>();
-
-        private DomainType domainType;
-
+        
         private SubscriptionLambda condition;
-
-        private MessageTemplate messageTemplate;
 
         private SubscriptionLambda generation;
 
@@ -53,6 +42,7 @@ namespace Framework.Configuration.Domain
         private SubscriptionLambda dynamicSource;
 
         private SubscriptionLambda attachment;
+
 
         private string code;
 
@@ -71,6 +61,7 @@ namespace Framework.Configuration.Domain
         private RecepientsSelectorMode recepientsMode;
 
         private bool allowEmptyListOfRecipients;
+
 
         [NotPersistentField]
         private Type razorMessageTemplateType;
@@ -103,45 +94,16 @@ namespace Framework.Configuration.Domain
             get { return this.securityItems; }
         }
 
-        public virtual DomainType DomainType
-        {
-            get { return this.domainType; }
-            set { this.domainType = value; }
-        }
-
-        /// <summary>
-        /// Целевая система, к которой относится подписка подпсики
-        /// </summary>
-        [ExpandPath("DomainType.TargetSystem")]
-        public virtual TargetSystem TargetSystem
-        {
-            get { return this.DomainType.Maybe(v => v.TargetSystem); }
-        }
-
         /// <summary>
         /// Условие подписки
         /// </summary>
         /// <remarks>
         /// Лямбда подписки типа "Condition"
         /// </remarks>
-        [DomainTypeValidator]
-        [SubscriptionLambdaTypeValidator(SubscriptionLambdaType.Condition)]
-        [RevisionTargetSystemRequiredValidator]
         public virtual SubscriptionLambda Condition
         {
             get { return this.condition; }
             set { this.condition = value; }
-        }
-
-        /// <summary>
-        /// Шаблон сообщения подписки, отправляемого пользователю в нотификации
-        /// </summary>
-        [Required]
-        [DomainTypeValidator]
-        public virtual MessageTemplate MessageTemplate
-        {
-            get { return this.messageTemplate; }
-            set { this.messageTemplate = value; }
         }
 
         /// <summary>
@@ -150,8 +112,6 @@ namespace Framework.Configuration.Domain
         /// <remarks>
         /// Лямбда подписки типа "Generation"
         /// </remarks>
-        [DomainTypeValidator]
-        [SubscriptionLambdaTypeValidator(SubscriptionLambdaType.Generation)]
         public virtual SubscriptionLambda Generation
         {
             get { return this.generation; }
@@ -164,8 +124,6 @@ namespace Framework.Configuration.Domain
         /// <remarks>
         /// Лямбда подписки типа "Generation"
         /// </remarks>
-        [DomainTypeValidator]
-        [SubscriptionLambdaTypeValidator(SubscriptionLambdaType.Generation)]
         public virtual SubscriptionLambda CopyGeneration
         {
             get { return this.copyGeneration; }
@@ -178,8 +136,6 @@ namespace Framework.Configuration.Domain
         /// <remarks>
         /// Лямбда подписки типа "Generation"
         /// </remarks>
-        [DomainTypeValidator]
-        [SubscriptionLambdaTypeValidator(SubscriptionLambdaType.Generation)]
         public virtual SubscriptionLambda ReplyToGeneration
         {
             get { return this.replyToGeneration; }
@@ -194,9 +150,6 @@ namespace Framework.Configuration.Domain
         /// Лямбда подписки типа "Attachment" не для хранения в базе данных.
         /// Используется только для CodeFirst подписок
         /// </remarks>
-        [DomainTypeValidator]
-        [CustomSerialization(CustomSerializationMode.Ignore)]
-        [SubscriptionLambdaTypeValidator(SubscriptionLambdaType.Attachment)]
         public virtual SubscriptionLambda Attachment
         {
             get { return this.attachment; }
@@ -210,8 +163,6 @@ namespace Framework.Configuration.Domain
         /// Лямбда подписки типа "DynamicSource"
         /// </remarks>
         [UniqueElement("DynamicSourceMode")]
-        [DomainTypeValidator]
-        [SubscriptionLambdaTypeValidator(SubscriptionLambdaType.DynamicSource)]
         public virtual SubscriptionLambda DynamicSource
         {
             get { return this.dynamicSource; }
@@ -246,10 +197,10 @@ namespace Framework.Configuration.Domain
         /// Признак того, что механизм подписки включен
         /// </summary>
         [CustomSerialization(CustomSerializationMode.Normal)]
-        public override bool Active
+        public virtual bool Active
         {
-            get { return base.Active; }
-            set { base.Active = value; }
+            get;
+            set;
         }
 
         /// <summary>
@@ -260,39 +211,7 @@ namespace Framework.Configuration.Domain
             get { return this.allowEmptyListOfRecipients; }
             set { this.allowEmptyListOfRecipients = value; }
         }
-
-        /// <summary>
-        /// Вычисляемое свойство результатов состояний работы с контекстами
-        /// </summary>
-        [CustomSerialization(CustomSerializationMode.Ignore)]
-        [Required, RestrictionExtension(typeof(RequiredAttribute), CustomError = "Invalid source mode")]
-        public virtual SubscriptionSourceMode SourceMode
-        {
-            get
-            {
-                var isDynamicSourceMode = this.DynamicSource != null && this.DynamicSourceExpandType != null;
-                var isTypeSourceMode = this.SecurityItems.Any();
-
-                if (isDynamicSourceMode && isTypeSourceMode)
-                {
-                    return SubscriptionSourceMode.Invalid;
-                }
-                else if (isDynamicSourceMode)
-                {
-                    return SubscriptionSourceMode.Dynamic;
-                }
-                else if (isTypeSourceMode)
-                {
-                    return SubscriptionSourceMode.Typed;
-                }
-                else
-                {
-                    return SubscriptionSourceMode.NonContext;
-                }
-            }
-        }
-
-
+        
         /// <summary>
         /// Электроннный адрес отправителя
         /// </summary>
@@ -425,20 +344,5 @@ namespace Framework.Configuration.Domain
         }
 
         #endregion
-
-        ICollection<SubBusinessRole> IMaster<SubBusinessRole>.Details
-        {
-            get { return (ICollection<SubBusinessRole>)this.SubBusinessRoles; }
-        }
-
-        ICollection<SubscriptionSecurityItem> IMaster<SubscriptionSecurityItem>.Details
-        {
-            get { return (ICollection<SubscriptionSecurityItem>)this.SecurityItems; }
-        }
-
-        Subscription ISubscriptionElement.Subscription
-        {
-            get { return this; }
-        }
     }
 }

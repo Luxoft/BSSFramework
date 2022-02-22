@@ -26,11 +26,6 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients
 
         internal override RecipientCollection Resolve<T>(Subscription subscription, DomainObjectVersions<T> versions)
         {
-            if (subscription.SourceMode != SubscriptionSourceMode.Typed)
-            {
-                return new RecipientCollection();
-            }
-
             var businessRolesIds = this.GetBusinessRolesIds(subscription);
             var filterGroups = this.GetNotificationFilterGroups(subscription, versions);
             var principals = this.ConfigurationContextFacade.GetNotificationPrincipals(businessRolesIds, filterGroups);
@@ -86,12 +81,7 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients
 
         private Type GetSecurityItemType(SubscriptionSecurityItem securityItem)
         {
-            var result = securityItem.Source?.AuthDomainType ?? this.ConfigurationContextFacade.GetSecurityType(securityItem.AuthDomainTypeId);
-
-            if (result == null)
-            {
-                throw new SubscriptionServicesException($"Security item type for security item with Id: '{securityItem.AuthDomainTypeId}' not found.");
-            }
+            var result = securityItem.Source.AuthDomainType;
 
             return result;
         }

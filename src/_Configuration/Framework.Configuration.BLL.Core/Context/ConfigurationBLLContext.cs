@@ -67,7 +67,6 @@ namespace Framework.Configuration.BLL
             Func<BLLSecurityMode, IBLLSimpleQueryBase<IEmployee>> getEmployeeSourceFunc,
             IEnumerable<ITargetSystemService> targetSystemServices,
             IMessageSender<RunRegularJobModel> regularJobMessageSender,
-            IExpressionParserFactory expressionParsers,
             [NotNull] ISerializerFactory<string> systemConstantSerializerFactory,
             [NotNull] ITemplateEvaluatorFactory templateEvaluatorFactory,
             [NotNull] IFormatter<MessageTemplateNotification, NotificationEventDTO> messageTemplateNotificationFormatter,
@@ -105,7 +104,6 @@ namespace Framework.Configuration.BLL
                 domainType => this.Logics.DomainType.GetByDomainType(domainType),
                 new EqualityComparerImpl<IDomainType>((dt1, dt2) => dt1.Name == dt2.Name && dt1.NameSpace == dt2.NameSpace, dt => dt.Name.GetHashCode() ^ dt.NameSpace.GetHashCode())).WithLock();
 
-            this.ExpressionParsers = expressionParsers ?? throw new ArgumentNullException(nameof(expressionParsers));
             this.SystemConstantSerializerFactory = systemConstantSerializerFactory ?? throw new ArgumentNullException(nameof(systemConstantSerializerFactory));
             this.TemplateEvaluatorFactory = templateEvaluatorFactory ?? throw new ArgumentNullException(nameof(templateEvaluatorFactory));
             this.MessageTemplateNotificationFormatter = messageTemplateNotificationFormatter ?? throw new ArgumentNullException(nameof(messageTemplateNotificationFormatter));
@@ -141,8 +139,6 @@ namespace Framework.Configuration.BLL
         public IMessageSender<RunRegularJobModel> RegularJobMessageSender { get; }
 
         public override IConfigurationBLLFactoryContainer Logics => this.lazyLogics.Value;
-
-        public IExpressionParserFactory ExpressionParsers { get; }
 
         public IAuthorizationBLLContext Authorization { get; }
 
@@ -188,11 +184,6 @@ namespace Framework.Configuration.BLL
                                               .Any(ac => ac.ObjectId == domainObject.Id
                                                       && ac.DomainType.TargetSystem == s.TargetSystem
                                                       && ac.Attachments.Any()));
-        }
-
-        public IMessageTemplate GetMessageTemplate(Guid messageTemplateId, IdCheckMode idCheckMode)
-        {
-            return this.Logics.MessageTemplate.GetById(messageTemplateId, idCheckMode);
         }
 
         public IPersistentTargetSystemService GetPersistentTargetSystemService(TargetSystem targetSystem)

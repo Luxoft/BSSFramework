@@ -179,27 +179,6 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class MessageTemplateBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.MessageTemplate, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IMessageTemplateBLL
-    {
-        
-		partial void Initialize();
-        
-        public MessageTemplateBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.MessageTemplate> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityProvider, specificationEvaluator)
-        {
-            this.Initialize();
-        }
-    }
-    
-    public partial class MessageTemplateBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.IMessageTemplateBLL, Framework.Configuration.BLL.MessageTemplateBLL, Framework.Configuration.Domain.MessageTemplate, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.IMessageTemplateBLLFactory
-    {
-        
-        public MessageTemplateBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
     public partial class NamedLockBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.NamedLock, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.INamedLockBLL
     {
         
@@ -347,48 +326,6 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class SubscriptionBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.Subscription, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.ISubscriptionBLL
-    {
-        
-		partial void Initialize();
-        
-        public SubscriptionBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Subscription> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityProvider, specificationEvaluator)
-        {
-            this.Initialize();
-        }
-    }
-    
-    public partial class SubscriptionBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.ISubscriptionBLL, Framework.Configuration.BLL.SubscriptionBLL, Framework.Configuration.Domain.Subscription, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ISubscriptionBLLFactory
-    {
-        
-        public SubscriptionBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
-    public partial class SubscriptionLambdaBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.SubscriptionLambda, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.ISubscriptionLambdaBLL
-    {
-        
-		partial void Initialize();
-        
-        public SubscriptionLambdaBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.SubscriptionLambda> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityProvider, specificationEvaluator)
-        {
-            this.Initialize();
-        }
-    }
-    
-    public partial class SubscriptionLambdaBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.ISubscriptionLambdaBLL, Framework.Configuration.BLL.SubscriptionLambdaBLL, Framework.Configuration.Domain.SubscriptionLambda, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ISubscriptionLambdaBLLFactory
-    {
-        
-        public SubscriptionLambdaBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
     public partial class SystemConstantBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.SystemConstant, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.ISystemConstantBLL
     {
         
@@ -496,8 +433,6 @@ namespace Framework.Configuration.BLL
         
         private Framework.Configuration.BLL.ConfigurationImplementedBLLFactory implementedBLLFactory;
         
-        private Framework.Configuration.BLL.IMessageTemplateBLL messageTemplateBLL;
-        
         private Framework.Configuration.BLL.INamedLockBLL namedLockBLL;
         
         private Framework.Configuration.BLL.IRegularJobBLL regularJobBLL;
@@ -511,10 +446,6 @@ namespace Framework.Configuration.BLL
         private Framework.Configuration.BLL.IReportPropertyBLL reportPropertyBLL;
         
         private Framework.Configuration.BLL.ISequenceBLL sequenceBLL;
-        
-        private Framework.Configuration.BLL.ISubscriptionBLL subscriptionBLL;
-        
-        private Framework.Configuration.BLL.ISubscriptionLambdaBLL subscriptionLambdaBLL;
         
         private Framework.Configuration.BLL.ISystemConstantBLL systemConstantBLL;
         
@@ -713,26 +644,6 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        public Framework.Configuration.BLL.IMessageTemplateBLL MessageTemplate
-        {
-            get
-            {
-                if (object.ReferenceEquals(this.messageTemplateBLL, null))
-                {
-                    this.messageTemplateBLL = this.MessageTemplateFactory.Create();
-                }
-                return this.messageTemplateBLL;
-            }
-        }
-        
-        public Framework.Configuration.BLL.IMessageTemplateBLLFactory MessageTemplateFactory
-        {
-            get
-            {
-                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Framework.Configuration.BLL.IMessageTemplateBLLFactory>(this.Context.ServiceProvider);
-            }
-        }
-        
         public Framework.Configuration.BLL.INamedLockBLL NamedLock
         {
             get
@@ -873,46 +784,6 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        public Framework.Configuration.BLL.ISubscriptionBLL Subscription
-        {
-            get
-            {
-                if (object.ReferenceEquals(this.subscriptionBLL, null))
-                {
-                    this.subscriptionBLL = this.SubscriptionFactory.Create();
-                }
-                return this.subscriptionBLL;
-            }
-        }
-        
-        public Framework.Configuration.BLL.ISubscriptionBLLFactory SubscriptionFactory
-        {
-            get
-            {
-                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Framework.Configuration.BLL.ISubscriptionBLLFactory>(this.Context.ServiceProvider);
-            }
-        }
-        
-        public Framework.Configuration.BLL.ISubscriptionLambdaBLL SubscriptionLambda
-        {
-            get
-            {
-                if (object.ReferenceEquals(this.subscriptionLambdaBLL, null))
-                {
-                    this.subscriptionLambdaBLL = this.SubscriptionLambdaFactory.Create();
-                }
-                return this.subscriptionLambdaBLL;
-            }
-        }
-        
-        public Framework.Configuration.BLL.ISubscriptionLambdaBLLFactory SubscriptionLambdaFactory
-        {
-            get
-            {
-                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Framework.Configuration.BLL.ISubscriptionLambdaBLLFactory>(this.Context.ServiceProvider);
-            }
-        }
-        
         public Framework.Configuration.BLL.ISystemConstantBLL SystemConstant
         {
             get
@@ -1003,7 +874,6 @@ namespace Framework.Configuration.BLL
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IDomainObjectNotificationBLLFactory, Framework.Configuration.BLL.DomainObjectNotificationBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IDomainTypeBLLFactory, Framework.Configuration.BLL.DomainTypeBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IExceptionMessageBLLFactory, Framework.Configuration.BLL.ExceptionMessageBLLFactory>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IMessageTemplateBLLFactory, Framework.Configuration.BLL.MessageTemplateBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.INamedLockBLLFactory, Framework.Configuration.BLL.NamedLockBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IRegularJobBLLFactory, Framework.Configuration.BLL.RegularJobBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IReportBLLFactory, Framework.Configuration.BLL.ReportBLLFactory>(serviceCollection);
@@ -1011,8 +881,6 @@ namespace Framework.Configuration.BLL
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IReportParameterBLLFactory, Framework.Configuration.BLL.ReportParameterBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IReportPropertyBLLFactory, Framework.Configuration.BLL.ReportPropertyBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ISequenceBLLFactory, Framework.Configuration.BLL.SequenceBLLFactory>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ISubscriptionBLLFactory, Framework.Configuration.BLL.SubscriptionBLLFactory>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ISubscriptionLambdaBLLFactory, Framework.Configuration.BLL.SubscriptionLambdaBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ISystemConstantBLLFactory, Framework.Configuration.BLL.SystemConstantBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ITargetSystemBLLFactory, Framework.Configuration.BLL.TargetSystemBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IUserActionBLLFactory, Framework.Configuration.BLL.UserActionBLLFactory>(serviceCollection);
@@ -1076,10 +944,6 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ExceptionMessage));
             }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.MessageTemplate)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.MessageTemplate));
-            }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.NamedLock)))
             {
                 return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.NamedLock));
@@ -1107,14 +971,6 @@ namespace Framework.Configuration.BLL
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Sequence)))
             {
                 return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.Sequence));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Subscription)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.Subscription));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SubscriptionLambda)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SubscriptionLambda));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SystemConstant)))
             {
@@ -1172,10 +1028,6 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ExceptionMessageFactory.Create(((Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.ExceptionMessage>)(securityProvider)))));
             }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.MessageTemplate)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.MessageTemplateFactory.Create(((Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.MessageTemplate>)(securityProvider)))));
-            }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.NamedLock)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.NamedLockFactory.Create()));
@@ -1203,14 +1055,6 @@ namespace Framework.Configuration.BLL
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Sequence)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SequenceFactory.Create(((Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Sequence>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Subscription)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SubscriptionFactory.Create(((Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Subscription>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SubscriptionLambda)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SubscriptionLambdaFactory.Create(((Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.SubscriptionLambda>)(securityProvider)))));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SystemConstant)))
             {
@@ -1268,10 +1112,6 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ExceptionMessageFactory.Create(securityOperation)));
             }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.MessageTemplate)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.MessageTemplateFactory.Create(securityOperation)));
-            }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.NamedLock)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.NamedLockFactory.Create()));
@@ -1299,14 +1139,6 @@ namespace Framework.Configuration.BLL
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Sequence)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SequenceFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Subscription)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SubscriptionFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SubscriptionLambda)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SubscriptionLambdaFactory.Create(securityOperation)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SystemConstant)))
             {
@@ -1364,10 +1196,6 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ExceptionMessageFactory.Create(bllSecurityMode)));
             }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.MessageTemplate)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.MessageTemplateFactory.Create(bllSecurityMode)));
-            }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.NamedLock)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.NamedLockFactory.Create()));
@@ -1395,14 +1223,6 @@ namespace Framework.Configuration.BLL
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Sequence)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SequenceFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Subscription)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SubscriptionFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SubscriptionLambda)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SubscriptionLambdaFactory.Create(bllSecurityMode)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SystemConstant)))
             {

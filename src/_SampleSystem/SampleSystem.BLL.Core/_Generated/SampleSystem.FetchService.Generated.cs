@@ -768,10 +768,6 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTestManualEmployeeProjectionContainer(rule)));
             }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.MessageTemplateContainer)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetMessageTemplateContainerContainer(rule)));
-            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.NamedLock)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetNamedLockContainer(rule)));
@@ -867,10 +863,6 @@ namespace SampleSystem.BLL
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.RoleRoleDegreeLink)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetRoleRoleDegreeLinkContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SampleSystemMessageTemplate)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetSampleSystemMessageTemplateContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SqlParserTestObj)))
             {
@@ -1980,30 +1972,6 @@ namespace SampleSystem.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.MessageTemplateContainer> GetMessageTemplateContainerContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.MessageTemplateContainer>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.MessageTemplateContainer>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.MessageTemplateContainer>(fetchRootRule => fetchRootRule.SelectNested(messageTemplateContainer => messageTemplateContainer.MessageTemplate));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.MessageTemplateContainer>(fetchRootRule => fetchRootRule.SelectNested(messageTemplateContainer => messageTemplateContainer.MessageTemplate));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
         protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Projections.MiniBusinessUnitEmployeeRole> GetMiniBusinessUnitEmployeeRoleContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
@@ -2175,30 +2143,6 @@ namespace SampleSystem.BLL
                     fetchRootRule => fetchRootRule.SelectNested(roleRoleDegreeLink => roleRoleDegreeLink.AnotherRole),
                     fetchRootRule => fetchRootRule.SelectNested(roleRoleDegreeLink => roleRoleDegreeLink.Role),
                     fetchRootRule => fetchRootRule.SelectNested(roleRoleDegreeLink => roleRoleDegreeLink.RoleDegree));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.SampleSystemMessageTemplate> GetSampleSystemMessageTemplateContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.SampleSystemMessageTemplate>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.SampleSystemMessageTemplate>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.SampleSystemMessageTemplate>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.SampleSystemMessageTemplate>.Empty;
             }
             else
             {

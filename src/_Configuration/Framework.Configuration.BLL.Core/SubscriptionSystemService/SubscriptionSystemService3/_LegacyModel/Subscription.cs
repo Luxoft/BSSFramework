@@ -29,7 +29,7 @@ namespace Framework.Configuration.Domain
     {
         private readonly ICollection<SubBusinessRole> subBusinessRoles = new List<SubBusinessRole>();
 
-        private readonly ICollection<SubscriptionSecurityItem> securityItems = new List<SubscriptionSecurityItem>();
+        private IEnumerable<SubscriptionSecurityItem> securityItems = new List<SubscriptionSecurityItem>();
         
         private SubscriptionLambda condition;
 
@@ -76,6 +76,8 @@ namespace Framework.Configuration.Domain
         {
         }
 
+        public virtual MessageTemplate MessageTemplate { get; set; }
+
         /// <summary>
         /// Коллекция дочерних ролей
         /// </summary>
@@ -89,9 +91,10 @@ namespace Framework.Configuration.Domain
         /// Коллекция элементов секьюрного контекста
         /// </summary>
         [UniqueGroup]
-        public virtual IEnumerable<SubscriptionSecurityItem> SecurityItems
+        public IEnumerable<SubscriptionSecurityItem> SecurityItems
         {
             get { return this.securityItems; }
+            set { this.securityItems = value; }
         }
 
         /// <summary>

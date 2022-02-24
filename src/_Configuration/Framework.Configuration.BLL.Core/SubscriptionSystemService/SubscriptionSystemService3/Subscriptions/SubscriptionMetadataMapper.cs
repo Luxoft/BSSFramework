@@ -85,6 +85,9 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions
             MapSubBusinessRoles(metadata, subscription);
             MapSecurityItems(metadata, subscription);
 
+            subscription.MessageTemplate = new MessageTemplate();
+
+
             return subscription;
         }
 

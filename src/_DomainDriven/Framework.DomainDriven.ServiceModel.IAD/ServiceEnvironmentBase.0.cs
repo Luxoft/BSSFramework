@@ -546,8 +546,18 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             {
                 return new Framework.SecuritySystem.Rules.Builders.V1.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>(context.HierarchicalObjectExpanderFactory, context.Authorization);
             }
+            protected virtual INotificationService CreateNotificationService()
+            {
+                var templateSender = this.GetMainTemplateSender().ToMessageTemplateSender(this.Configuration, this.ServiceEnvironment.NotificationContext.Sender);
 
-            protected abstract INotificationService CreateNotificationService();
+                var notificationSender = this.GetMainTemplateSender().ToNotificationSender(this.Configuration, this.ServiceEnvironment.NotificationContext.Sender);
+
+                var subscriptionMessageSender = this.GetSubscriptionTemplateSender().ToMessageTemplateSender(this.Configuration, this.ServiceEnvironment.NotificationContext.Sender);
+
+                var exceptionSender = this.GetExceptionSender();
+
+                return new NotificationService(templateSender, notificationSender, subscriptionMessageSender, exceptionSender);
+            }
 
             /// <summary>
             /// Создаёт экземпляр класса, который рассылает уведомления об исключениях.

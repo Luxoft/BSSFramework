@@ -65,7 +65,6 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
             subscription.AllowEmptyListOfRecipients.Should().Be(metadata.AllowEmptyListOfRecipients);
             subscription.RazorMessageTemplateType.Should().Be(metadata.MessageTemplateType);
             subscription.RecepientsMode.Should().Be(metadata.RecepientsSelectorMode);
-            subscription.DomainType.Should().Be(domainType);
             subscription.SecurityItems.Should().HaveCount(1);
             subscription.MetadataSourceType.Should().Be(metadata.GetType());
 
@@ -84,8 +83,6 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
             CheckLambdaMapping(metadata.ConditionLambda, subscription.Condition);
             CheckLambdaMapping(metadata.GenerationLambda, subscription.Generation);
             CheckLambdaMapping(metadata.CopyGenerationLambda, subscription.CopyGeneration);
-
-            subscription.MessageTemplate.Should().NotBeNull();
         }
 
         [Test]
@@ -156,7 +153,6 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
 
         private static void CheckLambdaMapping(ILambdaMetadata expected, SubscriptionLambda actual)
         {
-            actual.WithContext.Should().BeTrue();
             actual.FuncValue.Should().Be(expected.Lambda);
             actual.MetadataSourceType.Should().Be(expected.GetType());
         }

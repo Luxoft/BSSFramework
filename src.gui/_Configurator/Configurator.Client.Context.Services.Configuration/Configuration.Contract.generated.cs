@@ -15,23 +15,11 @@ namespace Configurator.Client.Context.ConfigurationService
     public partial interface ConfigSLJsonController
     {
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/CreateMessageTemplate", ReplyAction="http://tempuri.org/ConfigSLJsonController/CreateMessageTemplateResponse")]
-        System.IAsyncResult BeginCreateMessageTemplate(Framework.Configuration.Generated.DTO.MessageTemplateCreateModelStrictDTO messageTemplateCreateModel, System.AsyncCallback callback, object asyncState);
-        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/CreateSequence", ReplyAction="http://tempuri.org/ConfigSLJsonController/CreateSequenceResponse")]
         System.IAsyncResult BeginCreateSequence(Framework.Configuration.Generated.DTO.SequenceCreateModelStrictDTO sequenceCreateModel, System.AsyncCallback callback, object asyncState);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/CreateSubscription", ReplyAction="http://tempuri.org/ConfigSLJsonController/CreateSubscriptionResponse")]
-        System.IAsyncResult BeginCreateSubscription(Framework.Configuration.Generated.DTO.SubscriptionCreateModelStrictDTO subscriptionCreateModel, System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/CreateSubscriptionLambda", ReplyAction="http://tempuri.org/ConfigSLJsonController/CreateSubscriptionLambdaResponse")]
-        System.IAsyncResult BeginCreateSubscriptionLambda(Framework.Configuration.Generated.DTO.SubscriptionLambdaCreateModelStrictDTO subscriptionLambdaCreateModel, System.AsyncCallback callback, object asyncState);
-        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/CreateUserAction", ReplyAction="http://tempuri.org/ConfigSLJsonController/CreateUserActionResponse")]
         System.IAsyncResult BeginCreateUserAction(Framework.Configuration.Generated.DTO.UserActionCreateModelStrictDTO userActionCreateModel, System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/ExportSubscriptions", ReplyAction="http://tempuri.org/ConfigSLJsonController/ExportSubscriptionsResponse")]
-        System.IAsyncResult BeginExportSubscriptions(System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.SubscriptionIdentityDTO> idents, System.AsyncCallback callback, object asyncState);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/ForceDomainTypeEvent", ReplyAction="http://tempuri.org/ConfigSLJsonController/ForceDomainTypeEventResponse")]
         System.IAsyncResult BeginForceDomainTypeEvent(Framework.Configuration.Generated.DTO.DomainTypeEventModelStrictDTO domainTypeEventModel, System.AsyncCallback callback, object asyncState);
@@ -68,14 +56,6 @@ namespace Configurator.Client.Context.ConfigurationService
             "ponse")]
         System.IAsyncResult BeginGetFullExceptionMessagesByRootFilter(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO filter, System.AsyncCallback callback, object asyncState);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetFullMessageTemplatesByIdents", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetFullMessageTemplatesByIdentsResponse" +
-            "")]
-        System.IAsyncResult BeginGetFullMessageTemplatesByIdents(System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.MessageTemplateIdentityDTO> messageTemplateIdents, System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetFullMessageTemplatesByRootFilter", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetFullMessageTemplatesByRootFilterResp" +
-            "onse")]
-        System.IAsyncResult BeginGetFullMessageTemplatesByRootFilter(Framework.Configuration.Generated.DTO.MessageTemplateRootFilterModelStrictDTO filter, System.AsyncCallback callback, object asyncState);
-        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetFullRegularJob", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetFullRegularJobResponse")]
         System.IAsyncResult BeginGetFullRegularJob(Framework.Configuration.Generated.DTO.RegularJobIdentityDTO regularJobIdentity, System.AsyncCallback callback, object asyncState);
         
@@ -94,27 +74,6 @@ namespace Configurator.Client.Context.ConfigurationService
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetFullSequencesByRootFilter", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetFullSequencesByRootFilterResponse")]
         System.IAsyncResult BeginGetFullSequencesByRootFilter(Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter, System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetFullSubscription", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetFullSubscriptionResponse")]
-        System.IAsyncResult BeginGetFullSubscription(Framework.Configuration.Generated.DTO.SubscriptionIdentityDTO subscriptionIdentity, System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetFullSubscriptionLambda", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetFullSubscriptionLambdaResponse")]
-        System.IAsyncResult BeginGetFullSubscriptionLambda(Framework.Configuration.Generated.DTO.SubscriptionLambdaIdentityDTO subscriptionLambdaIdentity, System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetFullSubscriptionLambdasByIdents", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetFullSubscriptionLambdasByIdentsRespo" +
-            "nse")]
-        System.IAsyncResult BeginGetFullSubscriptionLambdasByIdents(System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.SubscriptionLambdaIdentityDTO> subscriptionLambdaIdents, System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetFullSubscriptionLambdasByRootFilter", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetFullSubscriptionLambdasByRootFilterR" +
-            "esponse")]
-        System.IAsyncResult BeginGetFullSubscriptionLambdasByRootFilter(Framework.Configuration.Generated.DTO.SubscriptionLambdaRootFilterModelStrictDTO filter, System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetFullSubscriptionsByIdents", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetFullSubscriptionsByIdentsResponse")]
-        System.IAsyncResult BeginGetFullSubscriptionsByIdents(System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.SubscriptionIdentityDTO> subscriptionIdents, System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetFullSubscriptionsByRootFilter", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetFullSubscriptionsByRootFilterRespons" +
-            "e")]
-        System.IAsyncResult BeginGetFullSubscriptionsByRootFilter(Framework.Configuration.Generated.DTO.SubscriptionRootFilterModelStrictDTO filter, System.AsyncCallback callback, object asyncState);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetFullSystemConstant", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetFullSystemConstantResponse")]
         System.IAsyncResult BeginGetFullSystemConstant(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity, System.AsyncCallback callback, object asyncState);
@@ -167,20 +126,11 @@ namespace Configurator.Client.Context.ConfigurationService
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetRichExceptionMessage", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetRichExceptionMessageResponse")]
         System.IAsyncResult BeginGetRichExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdentity, System.AsyncCallback callback, object asyncState);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetRichMessageTemplate", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetRichMessageTemplateResponse")]
-        System.IAsyncResult BeginGetRichMessageTemplate(Framework.Configuration.Generated.DTO.MessageTemplateIdentityDTO messageTemplateIdentity, System.AsyncCallback callback, object asyncState);
-        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetRichRegularJob", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetRichRegularJobResponse")]
         System.IAsyncResult BeginGetRichRegularJob(Framework.Configuration.Generated.DTO.RegularJobIdentityDTO regularJobIdentity, System.AsyncCallback callback, object asyncState);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetRichSequence", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetRichSequenceResponse")]
         System.IAsyncResult BeginGetRichSequence(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity, System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetRichSubscription", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetRichSubscriptionResponse")]
-        System.IAsyncResult BeginGetRichSubscription(Framework.Configuration.Generated.DTO.SubscriptionIdentityDTO subscriptionIdentity, System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetRichSubscriptionLambda", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetRichSubscriptionLambdaResponse")]
-        System.IAsyncResult BeginGetRichSubscriptionLambda(Framework.Configuration.Generated.DTO.SubscriptionLambdaIdentityDTO subscriptionLambdaIdentity, System.AsyncCallback callback, object asyncState);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetRichSystemConstant", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetRichSystemConstantResponse")]
         System.IAsyncResult BeginGetRichSystemConstant(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity, System.AsyncCallback callback, object asyncState);
@@ -213,25 +163,6 @@ namespace Configurator.Client.Context.ConfigurationService
             "e")]
         System.IAsyncResult BeginGetSimpleDomainTypesByRootFilter(Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO filter, System.AsyncCallback callback, object asyncState);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetSimpleMessageTemplates", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetSimpleMessageTemplatesResponse")]
-        System.IAsyncResult BeginGetSimpleMessageTemplates(System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetSimpleMessageTemplatesByRootFilter", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetSimpleMessageTemplatesByRootFilterRe" +
-            "sponse")]
-        System.IAsyncResult BeginGetSimpleMessageTemplatesByRootFilter(Framework.Configuration.Generated.DTO.MessageTemplateRootFilterModelStrictDTO filter, System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetSimpleSubscriptionLambdas", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetSimpleSubscriptionLambdasResponse")]
-        System.IAsyncResult BeginGetSimpleSubscriptionLambdas(System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetSimpleSubscriptionLambdasByRootFilte" +
-            "r", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetSimpleSubscriptionLambdasByRootFilte" +
-            "rResponse")]
-        System.IAsyncResult BeginGetSimpleSubscriptionLambdasByRootFilter(Framework.Configuration.Generated.DTO.SubscriptionLambdaRootFilterModelStrictDTO filter, System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetSimpleSubscriptionsByRootFilter", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetSimpleSubscriptionsByRootFilterRespo" +
-            "nse")]
-        System.IAsyncResult BeginGetSimpleSubscriptionsByRootFilter(Framework.Configuration.Generated.DTO.SubscriptionRootFilterModelStrictDTO filter, System.AsyncCallback callback, object asyncState);
-        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetSimpleSystemConstant", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetSimpleSystemConstantResponse")]
         System.IAsyncResult BeginGetSimpleSystemConstant(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity, System.AsyncCallback callback, object asyncState);
         
@@ -245,9 +176,6 @@ namespace Configurator.Client.Context.ConfigurationService
             "nse")]
         System.IAsyncResult BeginGetSimpleTargetSystemsByRootFilter(Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO filter, System.AsyncCallback callback, object asyncState);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/ImportSubscriptions", ReplyAction="http://tempuri.org/ConfigSLJsonController/ImportSubscriptionsResponse")]
-        System.IAsyncResult BeginImportSubscriptions(Framework.Configuration.Generated.DTO.ImportSubscriptionsRequest request, System.AsyncCallback callback, object asyncState);
-        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/ProcessModifications", ReplyAction="http://tempuri.org/ConfigSLJsonController/ProcessModificationsResponse")]
         System.IAsyncResult BeginProcessModifications(int limit, System.AsyncCallback callback, object asyncState);
         
@@ -258,20 +186,11 @@ namespace Configurator.Client.Context.ConfigurationService
             "")]
         System.IAsyncResult BeginRemoveControlSettingsCollection(System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO> controlSettingsIdCollection, System.AsyncCallback callback, object asyncState);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/RemoveMessageTemplate", ReplyAction="http://tempuri.org/ConfigSLJsonController/RemoveMessageTemplateResponse")]
-        System.IAsyncResult BeginRemoveMessageTemplate(Framework.Configuration.Generated.DTO.MessageTemplateIdentityDTO messageTemplateIdent, System.AsyncCallback callback, object asyncState);
-        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/RemoveRegularJob", ReplyAction="http://tempuri.org/ConfigSLJsonController/RemoveRegularJobResponse")]
         System.IAsyncResult BeginRemoveRegularJob(Framework.Configuration.Generated.DTO.RegularJobIdentityDTO regularJobIdent, System.AsyncCallback callback, object asyncState);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/RemoveSequence", ReplyAction="http://tempuri.org/ConfigSLJsonController/RemoveSequenceResponse")]
         System.IAsyncResult BeginRemoveSequence(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent, System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/RemoveSubscription", ReplyAction="http://tempuri.org/ConfigSLJsonController/RemoveSubscriptionResponse")]
-        System.IAsyncResult BeginRemoveSubscription(Framework.Configuration.Generated.DTO.SubscriptionIdentityDTO subscriptionIdent, System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/RemoveSubscriptionLambda", ReplyAction="http://tempuri.org/ConfigSLJsonController/RemoveSubscriptionLambdaResponse")]
-        System.IAsyncResult BeginRemoveSubscriptionLambda(Framework.Configuration.Generated.DTO.SubscriptionLambdaIdentityDTO subscriptionLambdaIdent, System.AsyncCallback callback, object asyncState);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/SaveAttachment", ReplyAction="http://tempuri.org/ConfigSLJsonController/SaveAttachmentResponse")]
         System.IAsyncResult BeginSaveAttachment(Framework.Configuration.Generated.DTO.SaveAttachmentRequest request, System.AsyncCallback callback, object asyncState);
@@ -285,20 +204,11 @@ namespace Configurator.Client.Context.ConfigurationService
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/SaveExceptionMessage", ReplyAction="http://tempuri.org/ConfigSLJsonController/SaveExceptionMessageResponse")]
         System.IAsyncResult BeginSaveExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO exceptionMessageStrict, System.AsyncCallback callback, object asyncState);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/SaveMessageTemplate", ReplyAction="http://tempuri.org/ConfigSLJsonController/SaveMessageTemplateResponse")]
-        System.IAsyncResult BeginSaveMessageTemplate(Framework.Configuration.Generated.DTO.MessageTemplateStrictDTO messageTemplateStrict, System.AsyncCallback callback, object asyncState);
-        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/SaveRegularJob", ReplyAction="http://tempuri.org/ConfigSLJsonController/SaveRegularJobResponse")]
         System.IAsyncResult BeginSaveRegularJob(Framework.Configuration.Generated.DTO.RegularJobStrictDTO regularJobStrict, System.AsyncCallback callback, object asyncState);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/SaveSequence", ReplyAction="http://tempuri.org/ConfigSLJsonController/SaveSequenceResponse")]
         System.IAsyncResult BeginSaveSequence(Framework.Configuration.Generated.DTO.SequenceStrictDTO sequenceStrict, System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/SaveSubscription", ReplyAction="http://tempuri.org/ConfigSLJsonController/SaveSubscriptionResponse")]
-        System.IAsyncResult BeginSaveSubscription(Framework.Configuration.Generated.DTO.SubscriptionStrictDTO subscriptionStrict, System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/SaveSubscriptionLambda", ReplyAction="http://tempuri.org/ConfigSLJsonController/SaveSubscriptionLambdaResponse")]
-        System.IAsyncResult BeginSaveSubscriptionLambda(Framework.Configuration.Generated.DTO.SubscriptionLambdaStrictDTO subscriptionLambdaStrict, System.AsyncCallback callback, object asyncState);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/SaveSystemConstant", ReplyAction="http://tempuri.org/ConfigSLJsonController/SaveSystemConstantResponse")]
         System.IAsyncResult BeginSaveSystemConstant(Framework.Configuration.Generated.DTO.SystemConstantStrictDTO systemConstantStrict, System.AsyncCallback callback, object asyncState);
@@ -312,20 +222,9 @@ namespace Configurator.Client.Context.ConfigurationService
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/SyncPulseJobs", ReplyAction="http://tempuri.org/ConfigSLJsonController/SyncPulseJobsResponse")]
         System.IAsyncResult BeginSyncPulseJobs(System.AsyncCallback callback, object asyncState);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/TestSubscription", ReplyAction="http://tempuri.org/ConfigSLJsonController/TestSubscriptionResponse")]
-        System.IAsyncResult BeginTestSubscription(Framework.Configuration.Generated.DTO.TestSubscriptionModelStrictDTO testSubscription, System.AsyncCallback callback, object asyncState);
-        
-        Framework.Configuration.Generated.DTO.MessageTemplateRichDTO EndCreateMessageTemplate(System.IAsyncResult result);
-        
         Framework.Configuration.Generated.DTO.SequenceRichDTO EndCreateSequence(System.IAsyncResult result);
         
-        Framework.Configuration.Generated.DTO.SubscriptionRichDTO EndCreateSubscription(System.IAsyncResult result);
-        
-        Framework.Configuration.Generated.DTO.SubscriptionLambdaRichDTO EndCreateSubscriptionLambda(System.IAsyncResult result);
-        
         Framework.Configuration.Generated.DTO.UserActionRichDTO EndCreateUserAction(System.IAsyncResult result);
-        
-        Framework.Configuration.Generated.DTO.SubscriptionContainerRichDTO EndExportSubscriptions(System.IAsyncResult result);
         
         void EndForceDomainTypeEvent(System.IAsyncResult result);
         
@@ -347,10 +246,6 @@ namespace Configurator.Client.Context.ConfigurationService
         
         System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO> EndGetFullExceptionMessagesByRootFilter(System.IAsyncResult result);
         
-        System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.MessageTemplateFullDTO> EndGetFullMessageTemplatesByIdents(System.IAsyncResult result);
-        
-        System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.MessageTemplateFullDTO> EndGetFullMessageTemplatesByRootFilter(System.IAsyncResult result);
-        
         Framework.Configuration.Generated.DTO.RegularJobFullDTO EndGetFullRegularJob(System.IAsyncResult result);
         
         System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobRevisionModelFullDTO> EndGetFullRegularJobRevisionModelsBy(System.IAsyncResult result);
@@ -362,18 +257,6 @@ namespace Configurator.Client.Context.ConfigurationService
         System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.SequenceFullDTO> EndGetFullSequencesByIdents(System.IAsyncResult result);
         
         System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.SequenceFullDTO> EndGetFullSequencesByRootFilter(System.IAsyncResult result);
-        
-        Framework.Configuration.Generated.DTO.SubscriptionFullDTO EndGetFullSubscription(System.IAsyncResult result);
-        
-        Framework.Configuration.Generated.DTO.SubscriptionLambdaFullDTO EndGetFullSubscriptionLambda(System.IAsyncResult result);
-        
-        System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.SubscriptionLambdaFullDTO> EndGetFullSubscriptionLambdasByIdents(System.IAsyncResult result);
-        
-        System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.SubscriptionLambdaFullDTO> EndGetFullSubscriptionLambdasByRootFilter(System.IAsyncResult result);
-        
-        System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.SubscriptionFullDTO> EndGetFullSubscriptionsByIdents(System.IAsyncResult result);
-        
-        System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.SubscriptionFullDTO> EndGetFullSubscriptionsByRootFilter(System.IAsyncResult result);
         
         Framework.Configuration.Generated.DTO.SystemConstantFullDTO EndGetFullSystemConstant(System.IAsyncResult result);
         
@@ -405,15 +288,9 @@ namespace Configurator.Client.Context.ConfigurationService
         
         Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO EndGetRichExceptionMessage(System.IAsyncResult result);
         
-        Framework.Configuration.Generated.DTO.MessageTemplateRichDTO EndGetRichMessageTemplate(System.IAsyncResult result);
-        
         Framework.Configuration.Generated.DTO.RegularJobRichDTO EndGetRichRegularJob(System.IAsyncResult result);
         
         Framework.Configuration.Generated.DTO.SequenceRichDTO EndGetRichSequence(System.IAsyncResult result);
-        
-        Framework.Configuration.Generated.DTO.SubscriptionRichDTO EndGetRichSubscription(System.IAsyncResult result);
-        
-        Framework.Configuration.Generated.DTO.SubscriptionLambdaRichDTO EndGetRichSubscriptionLambda(System.IAsyncResult result);
         
         Framework.Configuration.Generated.DTO.SystemConstantRichDTO EndGetRichSystemConstant(System.IAsyncResult result);
         
@@ -433,16 +310,6 @@ namespace Configurator.Client.Context.ConfigurationService
         
         System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO> EndGetSimpleDomainTypesByRootFilter(System.IAsyncResult result);
         
-        System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.MessageTemplateSimpleDTO> EndGetSimpleMessageTemplates(System.IAsyncResult result);
-        
-        System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.MessageTemplateSimpleDTO> EndGetSimpleMessageTemplatesByRootFilter(System.IAsyncResult result);
-        
-        System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.SubscriptionLambdaSimpleDTO> EndGetSimpleSubscriptionLambdas(System.IAsyncResult result);
-        
-        System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.SubscriptionLambdaSimpleDTO> EndGetSimpleSubscriptionLambdasByRootFilter(System.IAsyncResult result);
-        
-        System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.SubscriptionSimpleDTO> EndGetSimpleSubscriptionsByRootFilter(System.IAsyncResult result);
-        
         Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO EndGetSimpleSystemConstant(System.IAsyncResult result);
         
         System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO> EndGetSimpleSystemConstants(System.IAsyncResult result);
@@ -451,23 +318,15 @@ namespace Configurator.Client.Context.ConfigurationService
         
         System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO> EndGetSimpleTargetSystemsByRootFilter(System.IAsyncResult result);
         
-        void EndImportSubscriptions(System.IAsyncResult result);
-        
         int EndProcessModifications(System.IAsyncResult result);
         
         void EndRemoveAttachment(System.IAsyncResult result);
         
         void EndRemoveControlSettingsCollection(System.IAsyncResult result);
         
-        void EndRemoveMessageTemplate(System.IAsyncResult result);
-        
         void EndRemoveRegularJob(System.IAsyncResult result);
         
         void EndRemoveSequence(System.IAsyncResult result);
-        
-        void EndRemoveSubscription(System.IAsyncResult result);
-        
-        void EndRemoveSubscriptionLambda(System.IAsyncResult result);
         
         Framework.Configuration.Generated.DTO.AttachmentIdentityDTO EndSaveAttachment(System.IAsyncResult result);
         
@@ -477,15 +336,9 @@ namespace Configurator.Client.Context.ConfigurationService
         
         Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO EndSaveExceptionMessage(System.IAsyncResult result);
         
-        Framework.Configuration.Generated.DTO.MessageTemplateIdentityDTO EndSaveMessageTemplate(System.IAsyncResult result);
-        
         Framework.Configuration.Generated.DTO.RegularJobIdentityDTO EndSaveRegularJob(System.IAsyncResult result);
         
         Framework.Configuration.Generated.DTO.SequenceIdentityDTO EndSaveSequence(System.IAsyncResult result);
-        
-        Framework.Configuration.Generated.DTO.SubscriptionIdentityDTO EndSaveSubscription(System.IAsyncResult result);
-        
-        Framework.Configuration.Generated.DTO.SubscriptionLambdaIdentityDTO EndSaveSubscriptionLambda(System.IAsyncResult result);
         
         Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO EndSaveSystemConstant(System.IAsyncResult result);
         
@@ -494,7 +347,5 @@ namespace Configurator.Client.Context.ConfigurationService
         void EndSetAttachmentTags(System.IAsyncResult result);
         
         void EndSyncPulseJobs(System.IAsyncResult result);
-        
-        string EndTestSubscription(System.IAsyncResult result);
     }
 }

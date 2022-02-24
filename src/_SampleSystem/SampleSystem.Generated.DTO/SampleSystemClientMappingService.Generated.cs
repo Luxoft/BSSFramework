@@ -64,8 +64,6 @@ namespace SampleSystem.Generated.DTO
         
         void MapBaseAuditPersistentToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
-        void MapBaseAuditPersistentToStrictForMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO currentSource);
-        
         void MapBaseAuditPersistentToStrictForPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
         void MapBaseAuditPersistentToStrictForSqlParserTestObj(SampleSystem.Generated.DTO.SqlParserTestObjStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO currentSource);
@@ -123,8 +121,6 @@ namespace SampleSystem.Generated.DTO
         void MapBasePersistentToStrictForManagementUnitAndBusinessUnitLink(SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO currentSource);
         
         void MapBasePersistentToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO currentSource);
-        
-        void MapBasePersistentToStrictForMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO currentSource);
         
         void MapBasePersistentToStrictForPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO currentSource);
         
@@ -216,8 +212,6 @@ namespace SampleSystem.Generated.DTO
         
         void MapFullToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkFullDTO currentSource);
         
-        void MapFullToStrictForMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO target, SampleSystem.Generated.DTO.MessageTemplateContainerFullDTO currentSource);
-        
         void MapFullToStrictForPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO target, SampleSystem.Generated.DTO.PrincipalFullDTO currentSource);
         
         void MapFullToStrictForSqlParserTestObj(SampleSystem.Generated.DTO.SqlParserTestObjStrictDTO target, SampleSystem.Generated.DTO.SqlParserTestObjFullDTO currentSource);
@@ -280,8 +274,6 @@ namespace SampleSystem.Generated.DTO
         
         void MapRichToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkRichDTO currentSource);
         
-        void MapRichToStrictForMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO target, SampleSystem.Generated.DTO.MessageTemplateContainerRichDTO currentSource);
-        
         void MapRichToStrictForPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO target, SampleSystem.Generated.DTO.PrincipalRichDTO currentSource);
         
         void MapRichToStrictForTestImmutableObj(SampleSystem.Generated.DTO.TestImmutableObjStrictDTO target, SampleSystem.Generated.DTO.TestImmutableObjRichDTO currentSource);
@@ -339,8 +331,6 @@ namespace SampleSystem.Generated.DTO
         void MapSimpleToStrictForManagementUnitAndBusinessUnitLink(SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO target, SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkSimpleDTO currentSource);
         
         void MapSimpleToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkSimpleDTO currentSource);
-        
-        void MapSimpleToStrictForMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO target, SampleSystem.Generated.DTO.MessageTemplateContainerSimpleDTO currentSource);
         
         void MapSimpleToStrictForPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO target, SampleSystem.Generated.DTO.PrincipalSimpleDTO currentSource);
         
@@ -672,19 +662,6 @@ namespace SampleSystem.Generated.DTO
         }
         
         public virtual void MapBaseAuditPersistentToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            target.Version = source.Version;
-        }
-        
-        public virtual void MapBaseAuditPersistentToStrictForMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -1062,19 +1039,6 @@ namespace SampleSystem.Generated.DTO
         }
         
         public virtual void MapBasePersistentToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            target.Id = source.Id;
-        }
-        
-        public virtual void MapBasePersistentToStrictForMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -2228,26 +2192,6 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public virtual void MapFullToStrictForMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO target, SampleSystem.Generated.DTO.MessageTemplateContainerFullDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            if (!object.ReferenceEquals(source.MessageTemplate, null))
-            {
-                target.MessageTemplate = source.MessageTemplate.Identity;
-            }
-            else
-            {
-                target.MessageTemplate = SampleSystem.Generated.DTO.SampleSystemMessageTemplateIdentityDTO.Empty;
-            }
-        }
-        
         public virtual void MapFullToStrictForPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO target, SampleSystem.Generated.DTO.PrincipalFullDTO source)
         {
             if (object.ReferenceEquals(source, null))
@@ -2730,18 +2674,6 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public virtual void MapRichToStrictForMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO target, SampleSystem.Generated.DTO.MessageTemplateContainerRichDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
         public virtual void MapRichToStrictForPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO target, SampleSystem.Generated.DTO.PrincipalRichDTO source)
         {
             if (object.ReferenceEquals(source, null))
@@ -3197,18 +3129,6 @@ namespace SampleSystem.Generated.DTO
         }
         
         public virtual void MapSimpleToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
-        public virtual void MapSimpleToStrictForMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO target, SampleSystem.Generated.DTO.MessageTemplateContainerSimpleDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {

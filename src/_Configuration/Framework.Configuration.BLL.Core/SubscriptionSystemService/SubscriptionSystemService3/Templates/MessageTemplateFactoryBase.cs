@@ -29,7 +29,7 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Templates
             where TModelObjectType : class
         {
             var template = new MessageTemplateNotification(
-                "",
+                subscription.MessageTemplate.Code,
                 versions,
                 versions.DomainObjectType,
                 to,

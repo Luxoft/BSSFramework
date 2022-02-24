@@ -83,20 +83,7 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
             // Assert
             service.Should().NotBeNull();
         }
-
-        [Test]
-        public void CreateTestingService_Call_ServiceInstance()
-        {
-            // Arrange
-            var factory = this.Fixture.Create<SubscriptionServicesFactory<ITestBLLContext, IdentityObject>>();
-
-            // Act
-            var service = factory.CreateTestingService();
-
-            // Assert
-            service.Should().NotBeNull();
-        }
-
+        
         [Test]
         public void CreateRevisionServiceByType_Call_ServiceInstance()
         {

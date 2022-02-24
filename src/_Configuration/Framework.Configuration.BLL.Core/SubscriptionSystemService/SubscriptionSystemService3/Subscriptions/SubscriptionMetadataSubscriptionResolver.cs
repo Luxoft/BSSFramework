@@ -124,8 +124,7 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions
                 throw new ArgumentNullException(nameof(domainObjectType));
             }
 
-            var exists = this.IsSubscriptionExists(domainObjectType)
-                         || this.wrappedResolver.IsActiveSubscriptionForTypeExists(domainObjectType);
+            var exists = this.IsSubscriptionExists(domainObjectType);
 
             return exists;
         }

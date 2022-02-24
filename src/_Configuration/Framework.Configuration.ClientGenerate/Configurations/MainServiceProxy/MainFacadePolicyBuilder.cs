@@ -9,34 +9,17 @@ namespace Framework.Configuration.ClientGenerate
     {
         public MainFacadePolicyBuilder()
         {
-            this.AddMessageTemplateMethods();
             this.AddSystemConstantMethods();
             this.AddCodeFirstSubscriptionMethods();
             this.AddExceptionMessageMethods();
-            this.AddSubscriptionMethods();
             this.AddRegularJobMethods();
             this.AddSequenceMethods();
-            this.AddSubscriptionLambdaMethods();
             this.AddTargetSystemMethods();
 
             this.AddUserActionMethods();
 
             this.AddAttachmentMethods();
             this.AddUnsortedMethods();
-        }
-
-        private void AddMessageTemplateMethods()
-        {
-            this.Add(facade => facade.GetSimpleMessageTemplatesByRootFilter(default));
-
-            this.Add(facade => facade.GetSimpleMessageTemplates());
-            this.Add(facade => facade.GetFullMessageTemplatesByIdents(default));
-            this.Add(facade => facade.GetFullMessageTemplatesByRootFilter(default));
-
-            this.Add(facade => facade.GetRichMessageTemplate(default));
-            this.Add(facade => facade.CreateMessageTemplate(default));
-            this.Add(facade => facade.SaveMessageTemplate(default));
-            this.Add(facade => facade.RemoveMessageTemplate(default));
         }
 
         private void AddSystemConstantMethods()
@@ -74,21 +57,6 @@ namespace Framework.Configuration.ClientGenerate
             this.Add(facade => facade.SaveExceptionMessage(default));
         }
 
-        private void AddSubscriptionMethods()
-        {
-            this.Add(facade => facade.GetSimpleSubscriptionsByRootFilter(default));
-
-            this.Add(facade => facade.GetFullSubscriptionsByIdents(default));
-            this.Add(facade => facade.GetFullSubscriptionsByRootFilter(default));
-
-            this.Add(facade => facade.GetFullSubscription(default));
-            this.Add(facade => facade.GetRichSubscription(default));
-
-            this.Add(facade => facade.CreateSubscription(default));
-            this.Add(facade => facade.SaveSubscription(default));
-            this.Add(facade => facade.RemoveSubscription(default));
-        }
-
         private void AddRegularJobMethods()
         {
             this.Add(facade => facade.GetFullRegularJobs());
@@ -117,26 +85,6 @@ namespace Framework.Configuration.ClientGenerate
             this.Add(facade => facade.CreateSequence(default));
             this.Add(facade => facade.SaveSequence(default));
             this.Add(facade => facade.RemoveSequence(default));
-        }
-
-        private void AddSubscriptionLambdaMethods()
-        {
-            this.Add(facade => facade.GetSimpleSubscriptionLambdas());
-            this.Add(facade => facade.GetSimpleSubscriptionLambdasByRootFilter(default));
-
-            this.Add(facade => facade.GetFullSubscriptionLambdasByIdents(default));
-            this.Add(facade => facade.GetFullSubscriptionLambdasByRootFilter(default));
-
-            this.Add(facade => facade.GetFullSubscriptionLambda(default));
-            this.Add(facade => facade.GetRichSubscriptionLambda(default));
-
-            this.Add(facade => facade.CreateSubscriptionLambda(default));
-            this.Add(facade => facade.SaveSubscriptionLambda(default));
-            this.Add(facade => facade.RemoveSubscriptionLambda(default));
-
-            this.Add(facade => facade.ImportSubscriptions(default));
-            this.Add(facade => facade.ExportSubscriptions(default));
-            this.Add(facade => facade.TestSubscription(default));
         }
 
         private void AddTargetSystemMethods()

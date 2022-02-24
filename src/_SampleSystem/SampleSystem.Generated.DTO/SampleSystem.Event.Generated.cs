@@ -130,8 +130,6 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ManagementUnitFluentMappingRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewRemoveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.MessageTemplateContainerSaveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.MessageTemplateContainerRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.DateModelSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.DateModelRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitProgramClassFilterModelSaveEventDTO))]
@@ -154,8 +152,6 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.RegularJobResultRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.RoleRoleDegreeLinkSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.RoleRoleDegreeLinkRemoveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.SampleSystemMessageTemplateSaveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.SampleSystemMessageTemplateRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.SqlParserTestObjSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.SqlParserTestObjRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.SqlParserTestObjContainerSaveEventDTO))]
@@ -6200,81 +6196,6 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.MessageTemplateContainer), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class MessageTemplateContainerSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.MessageTemplateContainerEventRichDTO MessageTemplateContainer;
-        
-        public MessageTemplateContainerSaveEventDTO()
-        {
-        }
-        
-        public MessageTemplateContainerSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.MessageTemplateContainer domainObject)
-        {
-            this.MessageTemplateContainer = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.MessageTemplateContainer), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class MessageTemplateContainerRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.MessageTemplateContainerEventRichDTO MessageTemplateContainer;
-        
-        public MessageTemplateContainerRemoveEventDTO()
-        {
-        }
-        
-        public MessageTemplateContainerRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.MessageTemplateContainer domainObject)
-        {
-            this.MessageTemplateContainer = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.MessageTemplateContainer), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class MessageTemplateContainerEventRichDTO
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.SampleSystemMessageTemplateEventSimpleDTO MessageTemplate;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
-        
-        public MessageTemplateContainerEventRichDTO()
-        {
-        }
-        
-        public MessageTemplateContainerEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.MessageTemplateContainer domainObject)
-        {
-            mappingService.MapMessageTemplateContainer(domainObject, this);
-        }
-    }
-    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Models.Custom.DateModel), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class DateModelSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
@@ -7001,120 +6922,6 @@ namespace SampleSystem.Generated.DTO
         public RoleRoleDegreeLinkEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.RoleRoleDegreeLink domainObject)
         {
             mappingService.MapRoleRoleDegreeLink(domainObject, this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.SampleSystemMessageTemplate), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class SampleSystemMessageTemplateSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.SampleSystemMessageTemplateEventRichDTO SampleSystemMessageTemplate;
-        
-        public SampleSystemMessageTemplateSaveEventDTO()
-        {
-        }
-        
-        public SampleSystemMessageTemplateSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.SampleSystemMessageTemplate domainObject)
-        {
-            this.SampleSystemMessageTemplate = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.SampleSystemMessageTemplate), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class SampleSystemMessageTemplateRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.SampleSystemMessageTemplateEventRichDTO SampleSystemMessageTemplate;
-        
-        public SampleSystemMessageTemplateRemoveEventDTO()
-        {
-        }
-        
-        public SampleSystemMessageTemplateRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.SampleSystemMessageTemplate domainObject)
-        {
-            this.SampleSystemMessageTemplate = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.SampleSystemMessageTemplate), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class SampleSystemMessageTemplateEventRichDTO
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Code;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
-        
-        public SampleSystemMessageTemplateEventRichDTO()
-        {
-        }
-        
-        public SampleSystemMessageTemplateEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.SampleSystemMessageTemplate domainObject)
-        {
-            mappingService.MapSampleSystemMessageTemplate(domainObject, this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.SampleSystemMessageTemplate), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class SampleSystemMessageTemplateEventSimpleDTO
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Code;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
-        
-        public SampleSystemMessageTemplateEventSimpleDTO()
-        {
-        }
-        
-        public SampleSystemMessageTemplateEventSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.SampleSystemMessageTemplate domainObject)
-        {
-            mappingService.MapSampleSystemMessageTemplate(domainObject, this);
         }
     }
     

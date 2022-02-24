@@ -64,8 +64,6 @@ namespace SampleSystem.Generated.DTO
         
         void MapBaseAuditPersistentToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
-        void MapBaseAuditPersistentToStrictForMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO currentSource);
-        
         void MapBaseAuditPersistentToStrictForPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
         void MapBaseAuditPersistentToStrictForSqlParserTestObj(SampleSystem.Generated.DTO.SqlParserTestObjStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO currentSource);
@@ -123,8 +121,6 @@ namespace SampleSystem.Generated.DTO
         void MapBasePersistentToStrictForManagementUnitAndBusinessUnitLink(SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO currentSource);
         
         void MapBasePersistentToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO currentSource);
-        
-        void MapBasePersistentToStrictForMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO currentSource);
         
         void MapBasePersistentToStrictForPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO currentSource);
         
@@ -216,8 +212,6 @@ namespace SampleSystem.Generated.DTO
         
         void MapFullToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkFullDTO currentSource);
         
-        void MapFullToStrictForMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO target, SampleSystem.Generated.DTO.MessageTemplateContainerFullDTO currentSource);
-        
         void MapFullToStrictForPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO target, SampleSystem.Generated.DTO.PrincipalFullDTO currentSource);
         
         void MapFullToStrictForSqlParserTestObj(SampleSystem.Generated.DTO.SqlParserTestObjStrictDTO target, SampleSystem.Generated.DTO.SqlParserTestObjFullDTO currentSource);
@@ -280,8 +274,6 @@ namespace SampleSystem.Generated.DTO
         
         void MapRichToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkRichDTO currentSource);
         
-        void MapRichToStrictForMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO target, SampleSystem.Generated.DTO.MessageTemplateContainerRichDTO currentSource);
-        
         void MapRichToStrictForPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO target, SampleSystem.Generated.DTO.PrincipalRichDTO currentSource);
         
         void MapRichToStrictForTestImmutableObj(SampleSystem.Generated.DTO.TestImmutableObjStrictDTO target, SampleSystem.Generated.DTO.TestImmutableObjRichDTO currentSource);
@@ -339,8 +331,6 @@ namespace SampleSystem.Generated.DTO
         void MapSimpleToStrictForManagementUnitAndBusinessUnitLink(SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO target, SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkSimpleDTO currentSource);
         
         void MapSimpleToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkSimpleDTO currentSource);
-        
-        void MapSimpleToStrictForMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO target, SampleSystem.Generated.DTO.MessageTemplateContainerSimpleDTO currentSource);
         
         void MapSimpleToStrictForPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO target, SampleSystem.Generated.DTO.PrincipalSimpleDTO currentSource);
         
@@ -672,19 +662,6 @@ namespace SampleSystem.Generated.DTO
         }
         
         public virtual void MapBaseAuditPersistentToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO currentSource)
-        {
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            if (object.ReferenceEquals(currentSource, null))
-            {
-                throw new System.ArgumentNullException("currentSource");
-            }
-            target.Version = currentSource.Version;
-        }
-        
-        public virtual void MapBaseAuditPersistentToStrictForMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO target, SampleSystem.Generated.DTO.BaseAuditPersistentDTO currentSource)
         {
             if (object.ReferenceEquals(target, null))
             {
@@ -1062,19 +1039,6 @@ namespace SampleSystem.Generated.DTO
         }
         
         public virtual void MapBasePersistentToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO currentSource)
-        {
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            if (object.ReferenceEquals(currentSource, null))
-            {
-                throw new System.ArgumentNullException("currentSource");
-            }
-            target.Id = currentSource.Id;
-        }
-        
-        public virtual void MapBasePersistentToStrictForMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO target, SampleSystem.Generated.DTO.BasePersistentDTO currentSource)
         {
             if (object.ReferenceEquals(target, null))
             {
@@ -2228,26 +2192,6 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public virtual void MapFullToStrictForMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO target, SampleSystem.Generated.DTO.MessageTemplateContainerFullDTO currentSource)
-        {
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            if (object.ReferenceEquals(currentSource, null))
-            {
-                throw new System.ArgumentNullException("currentSource");
-            }
-            if (!object.ReferenceEquals(currentSource.MessageTemplate, null))
-            {
-                target.MessageTemplate = currentSource.MessageTemplate.Identity;
-            }
-            else
-            {
-                target.MessageTemplate = SampleSystem.Generated.DTO.SampleSystemMessageTemplateIdentityDTO.Empty;
-            }
-        }
-        
         public virtual void MapFullToStrictForPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO target, SampleSystem.Generated.DTO.PrincipalFullDTO currentSource)
         {
             if (object.ReferenceEquals(target, null))
@@ -2730,18 +2674,6 @@ namespace SampleSystem.Generated.DTO
             }
         }
         
-        public virtual void MapRichToStrictForMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO target, SampleSystem.Generated.DTO.MessageTemplateContainerRichDTO currentSource)
-        {
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            if (object.ReferenceEquals(currentSource, null))
-            {
-                throw new System.ArgumentNullException("currentSource");
-            }
-        }
-        
         public virtual void MapRichToStrictForPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO target, SampleSystem.Generated.DTO.PrincipalRichDTO currentSource)
         {
             if (object.ReferenceEquals(target, null))
@@ -3206,18 +3138,6 @@ namespace SampleSystem.Generated.DTO
         }
         
         public virtual void MapSimpleToStrictForManagementUnitAndHRDepartmentLink(SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO target, SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkSimpleDTO currentSource)
-        {
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            if (object.ReferenceEquals(currentSource, null))
-            {
-                throw new System.ArgumentNullException("currentSource");
-            }
-        }
-        
-        public virtual void MapSimpleToStrictForMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO target, SampleSystem.Generated.DTO.MessageTemplateContainerSimpleDTO currentSource)
         {
             if (object.ReferenceEquals(target, null))
             {
@@ -6756,78 +6676,6 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct MessageTemplateContainerIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.MessageTemplateContainerIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.MessageTemplateContainerIdentityDTO EmptyField = new SampleSystem.Generated.DTO.MessageTemplateContainerIdentityDTO(System.Guid.Empty);
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
-        
-        public MessageTemplateContainerIdentityDTO(System.Guid id)
-        {
-            this.Id = id;
-        }
-        
-        public MessageTemplateContainerIdentityDTO(SampleSystem.Generated.DTO.MessageTemplateContainerSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this.Id = source.Id;
-        }
-        
-        public static SampleSystem.Generated.DTO.MessageTemplateContainerIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.MessageTemplateContainerIdentityDTO.EmptyField;
-            }
-        }
-        
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.MessageTemplateContainerIdentityDTO identity1, SampleSystem.Generated.DTO.MessageTemplateContainerIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.MessageTemplateContainerIdentityDTO identity1, SampleSystem.Generated.DTO.MessageTemplateContainerIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.MessageTemplateContainerIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.MessageTemplateContainerIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.MessageTemplateContainerIdentityDTO other)
-        {
-            return (this.Id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct NamedLockIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.NamedLockIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -7139,77 +6987,6 @@ namespace SampleSystem.Generated.DTO
         }
         
         public bool Equals(SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO other)
-        {
-            return (this.Id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public struct SampleSystemMessageTemplateIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.SampleSystemMessageTemplateIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
-    {
-        
-        private static SampleSystem.Generated.DTO.SampleSystemMessageTemplateIdentityDTO EmptyField = new SampleSystem.Generated.DTO.SampleSystemMessageTemplateIdentityDTO(System.Guid.Empty);
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
-        
-        public SampleSystemMessageTemplateIdentityDTO(System.Guid id)
-        {
-            this.Id = id;
-        }
-        
-        public SampleSystemMessageTemplateIdentityDTO(SampleSystem.Generated.DTO.SampleSystemMessageTemplateSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this.Id = source.Id;
-        }
-        
-        public static SampleSystem.Generated.DTO.SampleSystemMessageTemplateIdentityDTO Empty
-        {
-            get
-            {
-                return SampleSystem.Generated.DTO.SampleSystemMessageTemplateIdentityDTO.EmptyField;
-            }
-        }
-        
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(SampleSystem.Generated.DTO.SampleSystemMessageTemplateIdentityDTO identity1, SampleSystem.Generated.DTO.SampleSystemMessageTemplateIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(SampleSystem.Generated.DTO.SampleSystemMessageTemplateIdentityDTO identity1, SampleSystem.Generated.DTO.SampleSystemMessageTemplateIdentityDTO identity2)
-        {
-            return identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.SampleSystemMessageTemplateIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.SampleSystemMessageTemplateIdentityDTO)(other)));
-        }
-        
-        public bool Equals(SampleSystem.Generated.DTO.SampleSystemMessageTemplateIdentityDTO other)
         {
             return (this.Id == other.Id);
         }
@@ -27040,300 +26817,6 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.MessageTemplateContainerFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.MessageTemplateContainerRichDTO))]
-    public partial class MessageTemplateContainerSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, SampleSystem.Generated.DTO.IMessageTemplateContainerSimpleDTO, System.ICloneable<SampleSystem.Generated.DTO.MessageTemplateContainerSimpleDTO>, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.MessageTemplateContainerIdentityDTO>
-    {
-        
-        public MessageTemplateContainerSimpleDTO()
-        {
-        }
-        
-        public MessageTemplateContainerSimpleDTO(SampleSystem.Generated.DTO.IMessageTemplateContainerSimpleDTO source) : 
-                this(source, true)
-        {
-        }
-        
-        public MessageTemplateContainerSimpleDTO(SampleSystem.Generated.DTO.IMessageTemplateContainerSimpleDTO source, bool copyId) : 
-                base(source, copyId)
-        {
-        }
-        
-        public SampleSystem.Generated.DTO.MessageTemplateContainerIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.MessageTemplateContainerIdentityDTO(this.Id);
-            }
-        }
-        
-        public SampleSystem.Generated.DTO.MessageTemplateContainerSimpleDTO Clone(bool copyId)
-        {
-            return new SampleSystem.Generated.DTO.MessageTemplateContainerSimpleDTO(this, copyId);
-        }
-        
-        object System.ICloneable.Clone()
-        {
-            return this.Clone();
-        }
-        
-        public SampleSystem.Generated.DTO.MessageTemplateContainerSimpleDTO Clone()
-        {
-            return new SampleSystem.Generated.DTO.MessageTemplateContainerSimpleDTO(this);
-        }
-        
-        public new SampleSystem.Generated.DTO.MessageTemplateContainerSimpleDTO ToSimple()
-        {
-            return new SampleSystem.Generated.DTO.MessageTemplateContainerSimpleDTO(this);
-        }
-        
-        public virtual SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO(this);
-        }
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.MessageTemplateContainerRichDTO))]
-    public partial class MessageTemplateContainerFullDTO : SampleSystem.Generated.DTO.MessageTemplateContainerSimpleDTO, SampleSystem.Generated.DTO.IMessageTemplateContainerFullDTO, System.ICloneable<SampleSystem.Generated.DTO.MessageTemplateContainerFullDTO>
-    {
-        
-        private SampleSystem.Generated.DTO.SampleSystemMessageTemplateSimpleDTO _messageTemplate;
-        
-        public MessageTemplateContainerFullDTO()
-        {
-        }
-        
-        public MessageTemplateContainerFullDTO(SampleSystem.Generated.DTO.IMessageTemplateContainerFullDTO source) : 
-                this(source, true)
-        {
-        }
-        
-        public MessageTemplateContainerFullDTO(SampleSystem.Generated.DTO.IMessageTemplateContainerFullDTO source, bool copyId) : 
-                base(source, copyId)
-        {
-            this.MessageTemplate = source.MessageTemplate;
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.SampleSystemMessageTemplateSimpleDTO MessageTemplate
-        {
-            get
-            {
-                return this._messageTemplate;
-            }
-            set
-            {
-                SampleSystem.Generated.DTO.SampleSystemMessageTemplateSimpleDTO newValue;
-                newValue = value;
-                if (!object.Equals(this._messageTemplate, newValue))
-                {
-                    base.RaisePropertyChanging("MessageTemplate");
-                    this._messageTemplate = newValue;
-                    base.RaisePropertyChanged("MessageTemplate");
-                }
-            }
-        }
-        
-        public SampleSystem.Generated.DTO.MessageTemplateContainerFullDTO Clone(bool copyId)
-        {
-            return new SampleSystem.Generated.DTO.MessageTemplateContainerFullDTO(this, copyId);
-        }
-        
-        object System.ICloneable.Clone()
-        {
-            return this.Clone();
-        }
-        
-        public new SampleSystem.Generated.DTO.MessageTemplateContainerFullDTO Clone()
-        {
-            return new SampleSystem.Generated.DTO.MessageTemplateContainerFullDTO(this);
-        }
-        
-        public new SampleSystem.Generated.DTO.MessageTemplateContainerFullDTO ToFull()
-        {
-            return new SampleSystem.Generated.DTO.MessageTemplateContainerFullDTO(this);
-        }
-        
-        public override SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO(this);
-        }
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class MessageTemplateContainerRichDTO : SampleSystem.Generated.DTO.MessageTemplateContainerFullDTO, SampleSystem.Generated.DTO.IMessageTemplateContainerRichDTO, System.ICloneable<SampleSystem.Generated.DTO.MessageTemplateContainerRichDTO>
-    {
-        
-        public MessageTemplateContainerRichDTO()
-        {
-        }
-        
-        public MessageTemplateContainerRichDTO(SampleSystem.Generated.DTO.IMessageTemplateContainerRichDTO source) : 
-                this(source, true)
-        {
-        }
-        
-        public MessageTemplateContainerRichDTO(SampleSystem.Generated.DTO.IMessageTemplateContainerRichDTO source, bool copyId) : 
-                base(source, copyId)
-        {
-        }
-        
-        public SampleSystem.Generated.DTO.MessageTemplateContainerRichDTO Clone(bool copyId)
-        {
-            return new SampleSystem.Generated.DTO.MessageTemplateContainerRichDTO(this, copyId);
-        }
-        
-        object System.ICloneable.Clone()
-        {
-            return this.Clone();
-        }
-        
-        public new SampleSystem.Generated.DTO.MessageTemplateContainerRichDTO Clone()
-        {
-            return new SampleSystem.Generated.DTO.MessageTemplateContainerRichDTO(this);
-        }
-        
-        public new SampleSystem.Generated.DTO.MessageTemplateContainerRichDTO ToRich()
-        {
-            return new SampleSystem.Generated.DTO.MessageTemplateContainerRichDTO(this);
-        }
-        
-        public override SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO ToStrict()
-        {
-            return new SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO(this);
-        }
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class MessageTemplateContainerStrictDTO : Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.MessageTemplateContainerIdentityDTO>
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.SampleSystemMessageTemplateIdentityDTO MessageTemplate;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
-        
-        public MessageTemplateContainerStrictDTO()
-        {
-        }
-        
-        public MessageTemplateContainerStrictDTO(SampleSystem.Generated.DTO.MessageTemplateContainerRichDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.MessageTemplateContainerFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForMessageTemplateContainer(this, source);
-        }
-        
-        public MessageTemplateContainerStrictDTO(SampleSystem.Generated.DTO.MessageTemplateContainerRichDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public MessageTemplateContainerStrictDTO(SampleSystem.Generated.DTO.MessageTemplateContainerFullDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.MessageTemplateContainerSimpleDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapFullToStrictForMessageTemplateContainer(this, source);
-        }
-        
-        public MessageTemplateContainerStrictDTO(SampleSystem.Generated.DTO.MessageTemplateContainerFullDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public MessageTemplateContainerStrictDTO(SampleSystem.Generated.DTO.MessageTemplateContainerSimpleDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.BaseAuditPersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapSimpleToStrictForMessageTemplateContainer(this, source);
-        }
-        
-        public MessageTemplateContainerStrictDTO(SampleSystem.Generated.DTO.MessageTemplateContainerSimpleDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private MessageTemplateContainerStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService) : 
-                this(((SampleSystem.Generated.DTO.BasePersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBaseAuditPersistentToStrictForMessageTemplateContainer(this, source);
-        }
-        
-        private MessageTemplateContainerStrictDTO(SampleSystem.Generated.DTO.BaseAuditPersistentDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private MessageTemplateContainerStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source, SampleSystem.Generated.DTO.ISampleSystemClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBasePersistentToStrictForMessageTemplateContainer(this, source);
-        }
-        
-        private MessageTemplateContainerStrictDTO(SampleSystem.Generated.DTO.BasePersistentDTO source) : 
-                this(source, SampleSystem.Generated.DTO.SampleSystemClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public SampleSystem.Generated.DTO.MessageTemplateContainerIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.MessageTemplateContainerIdentityDTO(this.Id);
-            }
-        }
-    }
-    
-    public partial interface IMessageTemplateContainerSimpleDTO : SampleSystem.Generated.DTO.IBaseAuditPersistentDTO
-    {
-    }
-    
-    public partial interface IMessageTemplateContainerFullDTO : SampleSystem.Generated.DTO.IMessageTemplateContainerSimpleDTO
-    {
-        
-        SampleSystem.Generated.DTO.SampleSystemMessageTemplateSimpleDTO MessageTemplate
-        {
-            get;
-            set;
-        }
-    }
-    
-    public partial interface IMessageTemplateContainerRichDTO : SampleSystem.Generated.DTO.IMessageTemplateContainerFullDTO
-    {
-    }
-    
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class EmployeeFilterModelStrictDTO
     {
@@ -28311,176 +27794,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     public partial interface IRegularJobResultRichDTO : SampleSystem.Generated.DTO.IRegularJobResultFullDTO
-    {
-    }
-    
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.SampleSystemMessageTemplateFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.SampleSystemMessageTemplateRichDTO))]
-    public partial class SampleSystemMessageTemplateSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, SampleSystem.Generated.DTO.ISampleSystemMessageTemplateSimpleDTO, System.ICloneable<SampleSystem.Generated.DTO.SampleSystemMessageTemplateSimpleDTO>, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.SampleSystemMessageTemplateIdentityDTO>
-    {
-        
-        private string _code;
-        
-        public SampleSystemMessageTemplateSimpleDTO()
-        {
-        }
-        
-        public SampleSystemMessageTemplateSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemMessageTemplateSimpleDTO source) : 
-                this(source, true)
-        {
-        }
-        
-        public SampleSystemMessageTemplateSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemMessageTemplateSimpleDTO source, bool copyId) : 
-                base(source, copyId)
-        {
-            this.Code = source.Code;
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Code
-        {
-            get
-            {
-                return Framework.Core.StringExtensions.TrimNull(this._code);
-            }
-            set
-            {
-                string newValue;
-                newValue = Framework.Core.StringExtensions.TrimNull(value);
-                if (!object.Equals(this._code, newValue))
-                {
-                    base.RaisePropertyChanging("Code");
-                    this._code = newValue;
-                    base.RaisePropertyChanged("Code");
-                }
-            }
-        }
-        
-        public SampleSystem.Generated.DTO.SampleSystemMessageTemplateIdentityDTO Identity
-        {
-            get
-            {
-                return new SampleSystem.Generated.DTO.SampleSystemMessageTemplateIdentityDTO(this.Id);
-            }
-        }
-        
-        public SampleSystem.Generated.DTO.SampleSystemMessageTemplateSimpleDTO Clone(bool copyId)
-        {
-            return new SampleSystem.Generated.DTO.SampleSystemMessageTemplateSimpleDTO(this, copyId);
-        }
-        
-        object System.ICloneable.Clone()
-        {
-            return this.Clone();
-        }
-        
-        public SampleSystem.Generated.DTO.SampleSystemMessageTemplateSimpleDTO Clone()
-        {
-            return new SampleSystem.Generated.DTO.SampleSystemMessageTemplateSimpleDTO(this);
-        }
-        
-        public new SampleSystem.Generated.DTO.SampleSystemMessageTemplateSimpleDTO ToSimple()
-        {
-            return new SampleSystem.Generated.DTO.SampleSystemMessageTemplateSimpleDTO(this);
-        }
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.SampleSystemMessageTemplateRichDTO))]
-    public partial class SampleSystemMessageTemplateFullDTO : SampleSystem.Generated.DTO.SampleSystemMessageTemplateSimpleDTO, SampleSystem.Generated.DTO.ISampleSystemMessageTemplateFullDTO, System.ICloneable<SampleSystem.Generated.DTO.SampleSystemMessageTemplateFullDTO>
-    {
-        
-        public SampleSystemMessageTemplateFullDTO()
-        {
-        }
-        
-        public SampleSystemMessageTemplateFullDTO(SampleSystem.Generated.DTO.ISampleSystemMessageTemplateFullDTO source) : 
-                this(source, true)
-        {
-        }
-        
-        public SampleSystemMessageTemplateFullDTO(SampleSystem.Generated.DTO.ISampleSystemMessageTemplateFullDTO source, bool copyId) : 
-                base(source, copyId)
-        {
-        }
-        
-        public SampleSystem.Generated.DTO.SampleSystemMessageTemplateFullDTO Clone(bool copyId)
-        {
-            return new SampleSystem.Generated.DTO.SampleSystemMessageTemplateFullDTO(this, copyId);
-        }
-        
-        object System.ICloneable.Clone()
-        {
-            return this.Clone();
-        }
-        
-        public new SampleSystem.Generated.DTO.SampleSystemMessageTemplateFullDTO Clone()
-        {
-            return new SampleSystem.Generated.DTO.SampleSystemMessageTemplateFullDTO(this);
-        }
-        
-        public new SampleSystem.Generated.DTO.SampleSystemMessageTemplateFullDTO ToFull()
-        {
-            return new SampleSystem.Generated.DTO.SampleSystemMessageTemplateFullDTO(this);
-        }
-    }
-    
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class SampleSystemMessageTemplateRichDTO : SampleSystem.Generated.DTO.SampleSystemMessageTemplateFullDTO, SampleSystem.Generated.DTO.ISampleSystemMessageTemplateRichDTO, System.ICloneable<SampleSystem.Generated.DTO.SampleSystemMessageTemplateRichDTO>
-    {
-        
-        public SampleSystemMessageTemplateRichDTO()
-        {
-        }
-        
-        public SampleSystemMessageTemplateRichDTO(SampleSystem.Generated.DTO.ISampleSystemMessageTemplateRichDTO source) : 
-                this(source, true)
-        {
-        }
-        
-        public SampleSystemMessageTemplateRichDTO(SampleSystem.Generated.DTO.ISampleSystemMessageTemplateRichDTO source, bool copyId) : 
-                base(source, copyId)
-        {
-        }
-        
-        public SampleSystem.Generated.DTO.SampleSystemMessageTemplateRichDTO Clone(bool copyId)
-        {
-            return new SampleSystem.Generated.DTO.SampleSystemMessageTemplateRichDTO(this, copyId);
-        }
-        
-        object System.ICloneable.Clone()
-        {
-            return this.Clone();
-        }
-        
-        public new SampleSystem.Generated.DTO.SampleSystemMessageTemplateRichDTO Clone()
-        {
-            return new SampleSystem.Generated.DTO.SampleSystemMessageTemplateRichDTO(this);
-        }
-        
-        public new SampleSystem.Generated.DTO.SampleSystemMessageTemplateRichDTO ToRich()
-        {
-            return new SampleSystem.Generated.DTO.SampleSystemMessageTemplateRichDTO(this);
-        }
-    }
-    
-    public partial interface ISampleSystemMessageTemplateSimpleDTO : SampleSystem.Generated.DTO.IBaseAuditPersistentDTO
-    {
-        
-        string Code
-        {
-            get;
-            set;
-        }
-    }
-    
-    public partial interface ISampleSystemMessageTemplateFullDTO : SampleSystem.Generated.DTO.ISampleSystemMessageTemplateSimpleDTO
-    {
-    }
-    
-    public partial interface ISampleSystemMessageTemplateRichDTO : SampleSystem.Generated.DTO.ISampleSystemMessageTemplateFullDTO
     {
     }
     

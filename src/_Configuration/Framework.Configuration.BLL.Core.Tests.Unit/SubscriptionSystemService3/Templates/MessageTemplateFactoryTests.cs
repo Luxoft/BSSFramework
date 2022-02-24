@@ -147,7 +147,6 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
             var template = factory.Create(new[] { this.subscription }, this.domainObjectVersions).Single();
 
             // Asssert
-            template.MessageTemplateCode.Should().Be(this.subscription.MessageTemplate.Code);
             template.Receivers.Should().BeEquivalentTo(this.to.Select(r => r.Email));
             template.CopyReceivers.Should().BeEquivalentTo(this.cc.Select(r => r.Email));
             template.ReplyTo.Should().BeEquivalentTo(this.replyTo.Select(r => r.Email));
@@ -175,7 +174,6 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
             var template = factory.Create(new[] { this.subscription }, this.domainObjectVersions).Single();
 
             // Asssert
-            template.MessageTemplateCode.Should().Be(this.subscription.MessageTemplate.Code);
             template.Receivers.Should().BeEquivalentTo(this.to.Select(r => r.Email));
             template.CopyReceivers.Should().BeEquivalentTo(this.cc.Select(r => r.Email));
             template.ReplyTo.Should().BeEquivalentTo(new List<string>());
@@ -203,7 +201,6 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
             var template = factory.Create(new[] { this.subscription }, this.domainObjectVersions).First();
 
             // Asssert
-            template.MessageTemplateCode.Should().Be(this.subscription.MessageTemplate.Code);
             template.Receivers.Should().BeEquivalentTo(this.to.First().Email);
             template.CopyReceivers.Should().BeEmpty();
             template.Subscription.Should().Be(this.subscription);

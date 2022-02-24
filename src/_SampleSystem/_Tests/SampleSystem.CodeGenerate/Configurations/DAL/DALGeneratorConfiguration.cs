@@ -5,8 +5,6 @@ using System.Linq;
 using Framework.Core;
 using Framework.DomainDriven.Metadata;
 
-using SampleSystem.Domain;
-
 namespace SampleSystem.CodeGenerate
 {
     public class DALGeneratorConfiguration : Framework.DomainDriven.NHibernate.DALGenerator.GeneratorConfigurationBase<ServerGenerationEnvironment>
@@ -39,9 +37,9 @@ namespace SampleSystem.CodeGenerate
 
         private (Type fromType, string propertyName)[] GetIgnoreFields()
         {
-            return new[]
+            return new (Type fromType, string propertyName)[0]
                    {
-                       (fromType: typeof(SampleSystemMessageTemplate), propertyName: nameof(SampleSystemMessageTemplate.Version))
+                       
                    };
         }
     }

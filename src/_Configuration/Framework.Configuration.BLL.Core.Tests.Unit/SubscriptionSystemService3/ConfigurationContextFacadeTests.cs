@@ -48,7 +48,6 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
             this.codeFirstSubscriptionBLL = this.CreateStub<ICodeFirstSubscriptionBLL>();
 
             var configurationLogics = this.CreateStub<IConfigurationBLLFactoryContainer>();
-            configurationLogics.Subscription.Returns(this.subscriptionBll);
             configurationLogics.DomainType.Returns(this.domainTypeBll);
             configurationLogics.CodeFirstSubscription.Returns(this.codeFirstSubscriptionBLL);
 
@@ -99,45 +98,6 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
         }
 
         [Test]
-        public void IsActiveSubscriptionsExists_Call_True()
-        {
-            // Arrange
-            this.subscriptionBll
-                .HasActiveSubscriptions(typeof(object))
-                .Returns(true);
-
-            // Act
-            var configurationContextFacade = this.Fixture.Create<ConfigurationContextFacade>();
-            var result = configurationContextFacade.IsActiveSubscriptionsExists(typeof(object));
-
-            // Assert
-            result.Should().BeTrue();
-        }
-
-        [Test]
-        public void GetSubscriptions_Call_SubscriptionsQueryable()
-        {
-            // Arrange
-            var subscriptions = this.Fixture.CreateMany<Subscription>().AsQueryable();
-            var domainType = this.Fixture.Create<DomainType>();
-
-            this.context
-                .GetDomainType(typeof(object), true)
-                .Returns(domainType);
-
-            this.subscriptionBll
-                .GetActiveSubscriptions(domainType)
-                .Returns(subscriptions);
-
-            // Act
-            var configurationContextFacade = this.Fixture.Create<ConfigurationContextFacade>();
-            var result = configurationContextFacade.GetSubscriptions(typeof(object));
-
-            // Assert
-            result.Should().BeEquivalentTo(subscriptions);
-        }
-
-        [Test]
         public void GetNotificationPrincipals_Call_CollectionOfPrincipals()
         {
             // Arrange
@@ -174,47 +134,6 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
 
             // Assert
             result.Should().BeEquivalentTo(principals);
-        }
-
-        [Test]
-        public void GetSecurityType_EntityType_FoundType()
-        {
-            //Arrange
-            var entityType = this.Fixture.Create<EntityType>();
-
-            this.securityTypeResolver
-                .Resolve(entityType)
-                .Returns(typeof(object));
-
-            // Act
-            var configurationContextFacade = this.Fixture.Create<ConfigurationContextFacade>();
-            var result = configurationContextFacade.GetSecurityType(entityType);
-
-            // Assert
-            result.Should().Be(typeof(object));
-        }
-
-        [Test]
-        public void GetSecurityType_AuthDomainTypeId_FoundType()
-        {
-            //Arrange
-            var authDomainTypeId = Guid.NewGuid();
-            var entityType = this.Fixture.Create<EntityType>();
-
-            this.entityTypeBll
-                .GetById(authDomainTypeId)
-                .Returns(entityType);
-
-            this.securityTypeResolver
-                .Resolve(entityType)
-                .Returns(typeof(object));
-
-            // Act
-            var configurationContextFacade = this.Fixture.Create<ConfigurationContextFacade>();
-            var result = configurationContextFacade.GetSecurityType(authDomainTypeId);
-
-            // Assert
-            result.Should().Be(typeof(object));
         }
 
         [Test]

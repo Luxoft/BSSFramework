@@ -593,27 +593,6 @@ namespace SampleSystem.BLL
         }
     }
     
-    public partial class MessageTemplateContainerBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.MessageTemplateContainer, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IMessageTemplateContainerBLL
-    {
-        
-		partial void Initialize();
-        
-        public MessageTemplateContainerBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.MessageTemplateContainer> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityProvider, specificationEvaluator)
-        {
-            this.Initialize();
-        }
-    }
-    
-    public partial class MessageTemplateContainerBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.IMessageTemplateContainerBLL, SampleSystem.BLL.MessageTemplateContainerBLL, SampleSystem.Domain.MessageTemplateContainer, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.IMessageTemplateContainerBLLFactory
-    {
-        
-        public MessageTemplateContainerBLLFactory(SampleSystem.BLL.ISampleSystemBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
     public partial class NamedLockBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.NamedLock, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.INamedLockBLL
     {
         
@@ -929,27 +908,6 @@ namespace SampleSystem.BLL
         }
     }
     
-    public partial class SampleSystemMessageTemplateBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.SampleSystemMessageTemplate, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ISampleSystemMessageTemplateBLL
-    {
-        
-		partial void Initialize();
-        
-        public SampleSystemMessageTemplateBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.SampleSystemMessageTemplate> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityProvider, specificationEvaluator)
-        {
-            this.Initialize();
-        }
-    }
-    
-    public partial class SampleSystemMessageTemplateBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ISampleSystemMessageTemplateBLL, SampleSystem.BLL.SampleSystemMessageTemplateBLL, SampleSystem.Domain.SampleSystemMessageTemplate, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.ISampleSystemMessageTemplateBLLFactory
-    {
-        
-        public SampleSystemMessageTemplateBLLFactory(SampleSystem.BLL.ISampleSystemBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
     public partial class SqlParserTestObjBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.SqlParserTestObj, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ISqlParserTestObjBLL
     {
         
@@ -1202,8 +1160,6 @@ namespace SampleSystem.BLL
         
         private SampleSystem.BLL.IManagementUnitFluentMappingBLL managementUnitFluentMappingBLL;
         
-        private SampleSystem.BLL.IMessageTemplateContainerBLL messageTemplateContainerBLL;
-        
         private SampleSystem.BLL.INamedLockBLL namedLockBLL;
         
         private SampleSystem.BLL.IPrincipalBLL principalBLL;
@@ -1211,8 +1167,6 @@ namespace SampleSystem.BLL
         private SampleSystem.BLL.IRegularJobResultBLL regularJobResultBLL;
         
         private SampleSystem.BLL.IRoleRoleDegreeLinkBLL roleRoleDegreeLinkBLL;
-        
-        private SampleSystem.BLL.ISampleSystemMessageTemplateBLL sampleSystemMessageTemplateBLL;
         
         private SampleSystem.BLL.ISqlParserTestObjBLL sqlParserTestObjBLL;
         
@@ -1843,26 +1797,6 @@ namespace SampleSystem.BLL
             }
         }
         
-        public SampleSystem.BLL.IMessageTemplateContainerBLL MessageTemplateContainer
-        {
-            get
-            {
-                if (object.ReferenceEquals(this.messageTemplateContainerBLL, null))
-                {
-                    this.messageTemplateContainerBLL = this.MessageTemplateContainerFactory.Create();
-                }
-                return this.messageTemplateContainerBLL;
-            }
-        }
-        
-        public SampleSystem.BLL.IMessageTemplateContainerBLLFactory MessageTemplateContainerFactory
-        {
-            get
-            {
-                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<SampleSystem.BLL.IMessageTemplateContainerBLLFactory>(this.Context.ServiceProvider);
-            }
-        }
-        
         public SampleSystem.BLL.INamedLockBLL NamedLock
         {
             get
@@ -1940,26 +1874,6 @@ namespace SampleSystem.BLL
             get
             {
                 return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<SampleSystem.BLL.IRoleRoleDegreeLinkBLLFactory>(this.Context.ServiceProvider);
-            }
-        }
-        
-        public SampleSystem.BLL.ISampleSystemMessageTemplateBLL SampleSystemMessageTemplate
-        {
-            get
-            {
-                if (object.ReferenceEquals(this.sampleSystemMessageTemplateBLL, null))
-                {
-                    this.sampleSystemMessageTemplateBLL = this.SampleSystemMessageTemplateFactory.Create();
-                }
-                return this.sampleSystemMessageTemplateBLL;
-            }
-        }
-        
-        public SampleSystem.BLL.ISampleSystemMessageTemplateBLLFactory SampleSystemMessageTemplateFactory
-        {
-            get
-            {
-                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<SampleSystem.BLL.ISampleSystemMessageTemplateBLLFactory>(this.Context.ServiceProvider);
             }
         }
         
@@ -2393,7 +2307,6 @@ namespace SampleSystem.BLL
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IManagementUnitAndHRDepartmentLinkBLLFactory, SampleSystem.BLL.ManagementUnitAndHRDepartmentLinkBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IManagementUnitFluentMappingBLLFactory, SampleSystem.BLL.ManagementUnitFluentMappingBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestManualEmployeeProjectionBLLFactory, SampleSystem.BLL.TestManualEmployeeProjectionBLLFactory>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IMessageTemplateContainerBLLFactory, SampleSystem.BLL.MessageTemplateContainerBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.INamedLockBLLFactory, SampleSystem.BLL.NamedLockBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IPrincipalBLLFactory, SampleSystem.BLL.PrincipalBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IBusinessUnitProgramClassBLLFactory, SampleSystem.BLL.BusinessUnitProgramClassBLLFactory>(serviceCollection);
@@ -2409,7 +2322,6 @@ namespace SampleSystem.BLL
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestSecurityObjItemProjectionBLLFactory, SampleSystem.BLL.TestSecurityObjItemProjectionBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IRegularJobResultBLLFactory, SampleSystem.BLL.RegularJobResultBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IRoleRoleDegreeLinkBLLFactory, SampleSystem.BLL.RoleRoleDegreeLinkBLLFactory>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ISampleSystemMessageTemplateBLLFactory, SampleSystem.BLL.SampleSystemMessageTemplateBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ISqlParserTestObjBLLFactory, SampleSystem.BLL.SqlParserTestObjBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ISqlParserTestObjContainerBLLFactory, SampleSystem.BLL.SqlParserTestObjContainerBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestCustomContextSecurityObjBLLFactory, SampleSystem.BLL.TestCustomContextSecurityObjBLLFactory>(serviceCollection);
@@ -2558,10 +2470,6 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestManualEmployeeProjection));
             }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.MessageTemplateContainer)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.MessageTemplateContainer));
-            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.NamedLock)))
             {
                 return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.NamedLock));
@@ -2621,10 +2529,6 @@ namespace SampleSystem.BLL
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.RoleRoleDegreeLink)))
             {
                 return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.RoleRoleDegreeLink));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SampleSystemMessageTemplate)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SampleSystemMessageTemplate));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SqlParserTestObj)))
             {
@@ -2782,10 +2686,6 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestManualEmployeeProjectionFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>)(securityProvider)))));
             }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.MessageTemplateContainer)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.MessageTemplateContainerFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.MessageTemplateContainer>)(securityProvider)))));
-            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.NamedLock)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.NamedLockFactory.Create()));
@@ -2845,10 +2745,6 @@ namespace SampleSystem.BLL
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.RoleRoleDegreeLink)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.RoleRoleDegreeLinkFactory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SampleSystemMessageTemplate)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SampleSystemMessageTemplateFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.SampleSystemMessageTemplate>)(securityProvider)))));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SqlParserTestObj)))
             {
@@ -3006,10 +2902,6 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestManualEmployeeProjectionFactory.Create(securityOperation)));
             }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.MessageTemplateContainer)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.MessageTemplateContainerFactory.Create(securityOperation)));
-            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.NamedLock)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.NamedLockFactory.Create()));
@@ -3069,10 +2961,6 @@ namespace SampleSystem.BLL
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.RoleRoleDegreeLink)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.RoleRoleDegreeLinkFactory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SampleSystemMessageTemplate)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SampleSystemMessageTemplateFactory.Create(securityOperation)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SqlParserTestObj)))
             {
@@ -3230,10 +3118,6 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestManualEmployeeProjectionFactory.Create(bllSecurityMode)));
             }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.MessageTemplateContainer)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.MessageTemplateContainerFactory.Create(bllSecurityMode)));
-            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.NamedLock)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.NamedLockFactory.Create()));
@@ -3293,10 +3177,6 @@ namespace SampleSystem.BLL
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.RoleRoleDegreeLink)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.RoleRoleDegreeLinkFactory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SampleSystemMessageTemplate)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SampleSystemMessageTemplateFactory.Create(bllSecurityMode)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.SqlParserTestObj)))
             {

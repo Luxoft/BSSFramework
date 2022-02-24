@@ -630,16 +630,6 @@ namespace SampleSystem.Generated.DTO
         
         void MapManagementUnitToAncestorChildView(SampleSystem.Domain.ManagementUnitToAncestorChildView domainObject, SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewEventRichDTO mappingObject);
         
-        void MapMessageTemplateContainer(SampleSystem.Domain.MessageTemplateContainer domainObject, SampleSystem.Generated.DTO.MessageTemplateContainerSimpleDTO mappingObject);
-        
-        void MapMessageTemplateContainer(SampleSystem.Domain.MessageTemplateContainer domainObject, SampleSystem.Generated.DTO.MessageTemplateContainerFullDTO mappingObject);
-        
-        void MapMessageTemplateContainer(SampleSystem.Domain.MessageTemplateContainer domainObject, SampleSystem.Generated.DTO.MessageTemplateContainerRichDTO mappingObject);
-        
-        void MapMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO mappingObject, SampleSystem.Domain.MessageTemplateContainer domainObject);
-        
-        void MapMessageTemplateContainer(SampleSystem.Domain.MessageTemplateContainer domainObject, SampleSystem.Generated.DTO.MessageTemplateContainerEventRichDTO mappingObject);
-        
         void MapMiniBusinessUnitEmployeeRole(SampleSystem.Domain.Projections.MiniBusinessUnitEmployeeRole domainObject, SampleSystem.Generated.DTO.MiniBusinessUnitEmployeeRoleProjectionDTO mappingObject);
         
         void MapNamedLock(SampleSystem.Domain.NamedLock domainObject, SampleSystem.Generated.DTO.NamedLockEventRichDTO mappingObject);
@@ -671,16 +661,6 @@ namespace SampleSystem.Generated.DTO
         void MapRegularJobResult(SampleSystem.Domain.RegularJobResult domainObject, SampleSystem.Generated.DTO.RegularJobResultEventRichDTO mappingObject);
         
         void MapRoleRoleDegreeLink(SampleSystem.Domain.RoleRoleDegreeLink domainObject, SampleSystem.Generated.DTO.RoleRoleDegreeLinkEventRichDTO mappingObject);
-        
-        void MapSampleSystemMessageTemplate(SampleSystem.Domain.SampleSystemMessageTemplate domainObject, SampleSystem.Generated.DTO.SampleSystemMessageTemplateSimpleDTO mappingObject);
-        
-        void MapSampleSystemMessageTemplate(SampleSystem.Domain.SampleSystemMessageTemplate domainObject, SampleSystem.Generated.DTO.SampleSystemMessageTemplateFullDTO mappingObject);
-        
-        void MapSampleSystemMessageTemplate(SampleSystem.Domain.SampleSystemMessageTemplate domainObject, SampleSystem.Generated.DTO.SampleSystemMessageTemplateRichDTO mappingObject);
-        
-        void MapSampleSystemMessageTemplate(SampleSystem.Domain.SampleSystemMessageTemplate domainObject, SampleSystem.Generated.DTO.SampleSystemMessageTemplateEventRichDTO mappingObject);
-        
-        void MapSampleSystemMessageTemplate(SampleSystem.Domain.SampleSystemMessageTemplate domainObject, SampleSystem.Generated.DTO.SampleSystemMessageTemplateEventSimpleDTO mappingObject);
         
         void MapSingleEmployeeFilterModel(SampleSystem.Generated.DTO.SingleEmployeeFilterModelStrictDTO mappingObject, SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel domainObject);
         
@@ -1162,12 +1142,6 @@ namespace SampleSystem.Generated.DTO
         
         SampleSystem.Domain.ManagementUnitToAncestorChildView ToManagementUnitToAncestorChildView(SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewIdentityDTO managementUnitToAncestorChildViewIdentityDTO);
         
-        SampleSystem.Domain.MessageTemplateContainer ToMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerIdentityDTO messageTemplateContainerIdentityDTO);
-        
-        SampleSystem.Domain.MessageTemplateContainer ToMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO messageTemplateContainerStrictDTO);
-        
-        SampleSystem.Domain.MessageTemplateContainer ToMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO messageTemplateContainerStrictDTO, bool allowCreate);
-        
         SampleSystem.Domain.NamedLock ToNamedLock(SampleSystem.Generated.DTO.NamedLockIdentityDTO namedLockIdentityDTO);
         
         SampleSystem.Domain.UniqueByMaster.ParentEntity ToParentEntity(SampleSystem.Generated.DTO.ParentEntityIdentityDTO parentEntityIdentityDTO);
@@ -1183,8 +1157,6 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.RegularJobResult ToRegularJobResult(SampleSystem.Generated.DTO.RegularJobResultIdentityDTO regularJobResultIdentityDTO);
         
         SampleSystem.Domain.RoleRoleDegreeLink ToRoleRoleDegreeLink(SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO roleRoleDegreeLinkIdentityDTO);
-        
-        SampleSystem.Domain.SampleSystemMessageTemplate ToSampleSystemMessageTemplate(SampleSystem.Generated.DTO.SampleSystemMessageTemplateIdentityDTO sampleSystemMessageTemplateIdentityDTO);
         
         SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel ToSingleEmployeeFilterModel(SampleSystem.Generated.DTO.SingleEmployeeFilterModelStrictDTO singleEmployeeFilterModelStrictDTO);
         
@@ -6241,58 +6213,6 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Version = domainObject.Version;
         }
         
-        public virtual void MapMessageTemplateContainer(SampleSystem.Domain.MessageTemplateContainer domainObject, SampleSystem.Generated.DTO.MessageTemplateContainerSimpleDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapMessageTemplateContainer(SampleSystem.Domain.MessageTemplateContainer domainObject, SampleSystem.Generated.DTO.MessageTemplateContainerFullDTO mappingObject)
-        {
-            if (!object.ReferenceEquals(domainObject.MessageTemplate, null))
-            {
-                mappingObject.MessageTemplate = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.MessageTemplate, this);
-            }
-            else
-            {
-                mappingObject.MessageTemplate = null;
-            }
-        }
-        
-        public virtual void MapMessageTemplateContainer(SampleSystem.Domain.MessageTemplateContainer domainObject, SampleSystem.Generated.DTO.MessageTemplateContainerRichDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO mappingObject, SampleSystem.Domain.MessageTemplateContainer domainObject)
-        {
-            domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
-            if (!object.Equals(mappingObject.MessageTemplate, default(SampleSystem.Generated.DTO.SampleSystemMessageTemplateIdentityDTO)))
-            {
-                domainObject.MessageTemplate = this.ToSampleSystemMessageTemplate(mappingObject.MessageTemplate);
-            }
-            else
-            {
-                domainObject.MessageTemplate = null;
-            }
-        }
-        
-        public virtual void MapMessageTemplateContainer(SampleSystem.Domain.MessageTemplateContainer domainObject, SampleSystem.Generated.DTO.MessageTemplateContainerEventRichDTO mappingObject)
-        {
-            mappingObject.Active = domainObject.Active;
-            mappingObject.CreateDate = domainObject.CreateDate;
-            mappingObject.CreatedBy = domainObject.CreatedBy;
-            mappingObject.Id = domainObject.Id;
-            if (!object.ReferenceEquals(domainObject.MessageTemplate, null))
-            {
-                mappingObject.MessageTemplate = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.MessageTemplate, this);
-            }
-            else
-            {
-                mappingObject.MessageTemplate = null;
-            }
-            mappingObject.ModifiedBy = domainObject.ModifiedBy;
-            mappingObject.ModifyDate = domainObject.ModifyDate;
-            mappingObject.Version = domainObject.Version;
-        }
-        
         public virtual void MapMiniBusinessUnitEmployeeRole(SampleSystem.Domain.Projections.MiniBusinessUnitEmployeeRole domainObject, SampleSystem.Generated.DTO.MiniBusinessUnitEmployeeRoleProjectionDTO mappingObject)
         {
             if (!object.ReferenceEquals(domainObject.Employee, null))
@@ -6456,43 +6376,6 @@ namespace SampleSystem.Generated.DTO
             {
                 mappingObject.RoleDegree = null;
             }
-            mappingObject.Version = domainObject.Version;
-        }
-        
-        public virtual void MapSampleSystemMessageTemplate(SampleSystem.Domain.SampleSystemMessageTemplate domainObject, SampleSystem.Generated.DTO.SampleSystemMessageTemplateSimpleDTO mappingObject)
-        {
-            mappingObject.Code = domainObject.Code;
-        }
-        
-        public virtual void MapSampleSystemMessageTemplate(SampleSystem.Domain.SampleSystemMessageTemplate domainObject, SampleSystem.Generated.DTO.SampleSystemMessageTemplateFullDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapSampleSystemMessageTemplate(SampleSystem.Domain.SampleSystemMessageTemplate domainObject, SampleSystem.Generated.DTO.SampleSystemMessageTemplateRichDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapSampleSystemMessageTemplate(SampleSystem.Domain.SampleSystemMessageTemplate domainObject, SampleSystem.Generated.DTO.SampleSystemMessageTemplateEventRichDTO mappingObject)
-        {
-            mappingObject.Active = domainObject.Active;
-            mappingObject.Code = domainObject.Code;
-            mappingObject.CreateDate = domainObject.CreateDate;
-            mappingObject.CreatedBy = domainObject.CreatedBy;
-            mappingObject.Id = domainObject.Id;
-            mappingObject.ModifiedBy = domainObject.ModifiedBy;
-            mappingObject.ModifyDate = domainObject.ModifyDate;
-            mappingObject.Version = domainObject.Version;
-        }
-        
-        public virtual void MapSampleSystemMessageTemplate(SampleSystem.Domain.SampleSystemMessageTemplate domainObject, SampleSystem.Generated.DTO.SampleSystemMessageTemplateEventSimpleDTO mappingObject)
-        {
-            mappingObject.Active = domainObject.Active;
-            mappingObject.Code = domainObject.Code;
-            mappingObject.CreateDate = domainObject.CreateDate;
-            mappingObject.CreatedBy = domainObject.CreatedBy;
-            mappingObject.Id = domainObject.Id;
-            mappingObject.ModifiedBy = domainObject.ModifiedBy;
-            mappingObject.ModifyDate = domainObject.ModifyDate;
             mappingObject.Version = domainObject.Version;
         }
         
@@ -8344,28 +8227,6 @@ namespace SampleSystem.Generated.DTO
             return this.GetById<SampleSystem.Domain.ManagementUnitToAncestorChildView>(managementUnitToAncestorChildViewIdentityDTO.Id);
         }
         
-        public virtual SampleSystem.Domain.MessageTemplateContainer ToMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerIdentityDTO messageTemplateContainerIdentityDTO)
-        {
-            return this.GetById<SampleSystem.Domain.MessageTemplateContainer>(messageTemplateContainerIdentityDTO.Id);
-        }
-        
-        public virtual SampleSystem.Domain.MessageTemplateContainer ToMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO messageTemplateContainerStrictDTO)
-        {
-            return this.ToDomainObject<SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO, SampleSystem.Domain.MessageTemplateContainer>(messageTemplateContainerStrictDTO);
-        }
-        
-        public virtual SampleSystem.Domain.MessageTemplateContainer ToMessageTemplateContainer(SampleSystem.Generated.DTO.MessageTemplateContainerStrictDTO messageTemplateContainerStrictDTO, bool allowCreate)
-        {
-            if (allowCreate)
-            {
-                return this.ToDomainObject(messageTemplateContainerStrictDTO, () => new SampleSystem.Domain.MessageTemplateContainer());
-            }
-            else
-            {
-                return this.ToMessageTemplateContainer(messageTemplateContainerStrictDTO);
-            }
-        }
-        
         public virtual SampleSystem.Domain.NamedLock ToNamedLock(SampleSystem.Generated.DTO.NamedLockIdentityDTO namedLockIdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.NamedLock>(namedLockIdentityDTO.Id);
@@ -8411,11 +8272,6 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.RoleRoleDegreeLink ToRoleRoleDegreeLink(SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO roleRoleDegreeLinkIdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.RoleRoleDegreeLink>(roleRoleDegreeLinkIdentityDTO.Id);
-        }
-        
-        public virtual SampleSystem.Domain.SampleSystemMessageTemplate ToSampleSystemMessageTemplate(SampleSystem.Generated.DTO.SampleSystemMessageTemplateIdentityDTO sampleSystemMessageTemplateIdentityDTO)
-        {
-            return this.GetById<SampleSystem.Domain.SampleSystemMessageTemplate>(sampleSystemMessageTemplateIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel ToSingleEmployeeFilterModel(SampleSystem.Generated.DTO.SingleEmployeeFilterModelStrictDTO singleEmployeeFilterModelStrictDTO)

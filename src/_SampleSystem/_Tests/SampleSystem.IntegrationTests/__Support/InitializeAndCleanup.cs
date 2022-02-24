@@ -22,8 +22,7 @@ namespace SampleSystem.IntegrationTests.__Support
         [AssemblyInitialize]
         public static void EnvironmentInitialize(TestContext testContext)
         {
-
-            AppSettings.Initialize();
+            AppSettings.Initialize(nameof(SampleSystem) + "_");
 
             DatabaseUtil = new SampleSystemDatabaseUtil();
 

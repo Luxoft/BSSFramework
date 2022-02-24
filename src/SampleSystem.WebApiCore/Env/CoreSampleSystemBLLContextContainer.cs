@@ -48,9 +48,7 @@ namespace SampleSystem.WebApiCore
 
         protected override IMessageSender<NotificationEventDTO> GetMessageTemplateSender() =>
             new SmtpMessageSender(LazyHelper.Create(() => this.smtpSettings), LazyHelper.Create(() => this.rewriteReceiversService), this.Configuration);
-
-        protected override INotificationService CreateNotificationService() => throw new NotImplementedException();
-
+        
         protected override IMessageSender<Exception> GetExceptionSender()
         {
             return MessageSender<Exception>.Trace;

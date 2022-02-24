@@ -55,6 +55,25 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions
         }
 
         /// <inheritdoc/>
+        public override bool IsActiveSubscriptionForTypeExists([NotNull] Type domainObjectType)
+        {
+            throw new NotImplementedException("Delete?");
+
+            //if (domainObjectType == null)
+            //{
+            //    throw new ArgumentNullException(nameof(domainObjectType));
+            //}
+
+            //this.logger.Verbose("Define is active subscription for type '{domainObjectType}' exists.", domainObjectType);
+
+            //var result = this.configurationContextFacade.IsActiveSubscriptionsExists(domainObjectType);
+
+            //this.logger.Verbose("Is active subscription for type '{domainObjectType}' exists: '{result}'.", domainObjectType, result);
+
+            //return result;
+        }
+
+        /// <inheritdoc/>
         public override Subscription Resolve<T>(
             [NotNull] string subscriptionCode,
             [NotNull] DomainObjectVersions<T> versions)
@@ -85,25 +104,6 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions
             this.logger.Verbose("Active subscription for code '{subscriptionCode}' and domain object type '{DomainObjectType}' has been found.", subscriptionCode, versions.DomainObjectType);
 
             return result;
-        }
-
-        /// <inheritdoc/>
-        public override bool IsActiveSubscriptionForTypeExists([NotNull] Type domainObjectType)
-        {
-            throw new NotImplementedException("Delete?");
-
-            //if (domainObjectType == null)
-            //{
-            //    throw new ArgumentNullException(nameof(domainObjectType));
-            //}
-
-            //this.logger.Verbose("Define is active subscription for type '{domainObjectType}' exists.", domainObjectType);
-
-            //var result = this.configurationContextFacade.IsActiveSubscriptionsExists(domainObjectType);
-
-            //this.logger.Verbose("Is active subscription for type '{domainObjectType}' exists: '{result}'.", domainObjectType, result);
-
-            //return result;
         }
     }
 }

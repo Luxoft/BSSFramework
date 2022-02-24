@@ -25,8 +25,7 @@ namespace SampleSystem.Subscriptions.Metadata.Examples.AttachmentTemplateEvaluat
             ISampleSystemBLLContext context,
             DomainObjectVersions<Domain.Employee> versions)
         {
-            // Tamplates could be get from any storage: Assembly Resources, Database, File system
-            var template = Encoding.UTF8.GetBytes("Hello world! #{Current.NameNative}");
+            var template = Encoding.UTF8.GetBytes($"Hello world! {versions.Current.NameNative}");
             
             return new[] { new System.Net.Mail.Attachment(new MemoryStream(template), AttachmentLambdaTemplateEvaluator.AttachmentName) };
         }

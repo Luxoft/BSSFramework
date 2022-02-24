@@ -52,7 +52,6 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Services
 
             return new ConditionCheckSubscriptionsResolver<TBLLContext>(
                 new SubscriptionMetadataSubscriptionResolver(
-                    new DomainObjectSubscriptionsResolver(contextFacade),
                     this.subscriptionMetadataStore,
                     new SubscriptionMetadataMapper(contextFacade),
                     contextFacade),

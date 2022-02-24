@@ -112,7 +112,7 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
 
             // Act
             var resolver = this.Fixture.Create<ByRolesRecipientsResolver<ITestBLLContext>>();
-            stovar recipient = resolver.Resolve(subscription, versions).Single();
+            var recipient = resolver.Resolve(subscription, versions).Single();
 
             // Assert
             recipient.Login.Should().Be(employees.Single().Login);

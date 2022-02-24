@@ -100,7 +100,7 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions
 
             foreach (var id in metadata.SubBusinessRoleIds)
             {
-                var role = new SubBusinessRole();
+                var role = new SubBusinessRole(subscription);
                 role.BusinessRoleId = id;
             }
         }

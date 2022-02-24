@@ -66,10 +66,6 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
                 .With(s => s.DynamicSourceExpandType, NotificationExpandType.All)
                 .Create();
 
-            var si = new SubscriptionSecurityItem(subscription);
-
-            subscription.SecurityItems = new[] { si };
-
             // Act
             var resolver = this.Fixture.Create<ByRolesRecipientsResolver<ITestBLLContext>>();
             var result = resolver.Resolve(subscription, versions);
@@ -116,7 +112,7 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
 
             // Act
             var resolver = this.Fixture.Create<ByRolesRecipientsResolver<ITestBLLContext>>();
-            var recipient = resolver.Resolve(subscription, versions).Single();
+            stovar recipient = resolver.Resolve(subscription, versions).Single();
 
             // Assert
             recipient.Login.Should().Be(employees.Single().Login);

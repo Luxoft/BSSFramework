@@ -12,18 +12,23 @@ namespace Framework.Configuration.Domain
     /// Элемент типизированного контекста
     /// </summary>
     [NotAuditedClass]
-    public class SubscriptionSecurityItem
+    public class SubscriptionSecurityItem : IIdentityObject<Guid>
     {
-
         private NotificationExpandType expandType;
 
         private SubscriptionLambda source;
 
+        public SubscriptionSecurityItem()
+        {
+        }
+
         public SubscriptionSecurityItem([NotNull] Subscription subscription)
         {
             this.Subscription = subscription ?? throw new ArgumentNullException(nameof(subscription));
+            this.Subscription.SecurityItems.Add(this);
         }
-        public Subscription Subscription { get; }
+
+        public virtual Subscription Subscription { get; }
 
         /// <summary>
         /// Лямбла, получающая типизированный контекст для ролей подписки
@@ -46,5 +51,7 @@ namespace Framework.Configuration.Domain
             get { return this.expandType; }
             set { this.expandType = value; }
         }
+
+        Guid IIdentityObject<Guid>.Id => Guid.Empty;
     }
 }

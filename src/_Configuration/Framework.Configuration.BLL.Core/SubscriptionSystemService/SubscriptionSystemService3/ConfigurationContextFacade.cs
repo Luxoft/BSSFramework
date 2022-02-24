@@ -60,6 +60,44 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3
             return employees;
         }
 
+        /// <summary>Возращает тип контекста безопасности доменного типа.</summary>
+        /// <param name="authDomainTypeId">Идентификатор доменного типа контекста безопасности.</param>
+        /// <returns>
+        ///     Экземпляр <see cref="Type" />, тип контекста безопасности доменного типа.
+        ///     Или null, если тип по предоставленому <paramref name="authDomainTypeId" />
+        ///     тип контекста безопасности доменного типа не найден.
+        /// </returns>
+        public virtual Type GetSecurityType(Guid authDomainTypeId)
+        {
+            var entityType = this.context.Authorization.Logics.EntityType.GetById(authDomainTypeId);
+
+            if (entityType == null)
+            {
+                return null;
+            }
+
+            var result = this.GetSecurityType(entityType);
+
+            return result;
+        }
+
+        /// <summary>
+        ///     Возращает тип контекста безопасности доменного типа.
+        /// </summary>
+        /// <param name="entityType">Описатель доменного типа.</param>
+        /// <returns>Экземпляр <see cref="Type" />.</returns>
+        /// <exception cref="ArgumentNullException">Аргумент entityType равен null.</exception>
+        public virtual Type GetSecurityType([NotNull] EntityType entityType)
+        {
+            if (entityType == null)
+            {
+                throw new ArgumentNullException(nameof(entityType));
+            }
+
+            var result = this.context.Authorization.SecurityTypeResolver.Resolve(entityType, true);
+            return result;
+        }
+
         /// <summary>
         ///     Возвращает описатель сущности в котексте которой выдаются права пользователю.
         /// </summary>

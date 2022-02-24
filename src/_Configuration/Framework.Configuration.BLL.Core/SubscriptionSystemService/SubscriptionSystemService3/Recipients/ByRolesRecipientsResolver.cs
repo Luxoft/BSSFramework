@@ -15,8 +15,15 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients
     public class ByRolesRecipientsResolver<TBLLContext>
         where TBLLContext : class
     {
-        private static readonly Func<ConfigurationContextFacade, LambdaProcessorFactory<TBLLContext>, ByRolesRecipientsResolverBase<TBLLContext>>
-            Resolver = (cf, pf) => new ByRolesRecipientsResolverTyped<TBLLContext>(cf, pf);
+        private static readonly Dictionary<SubscriptionSourceMode, Func<ConfigurationContextFacade, LambdaProcessorFactory<TBLLContext>, ByRolesRecipientsResolverBase<TBLLContext>>>
+                Resolvers =
+                        new Dictionary<SubscriptionSourceMode, Func<ConfigurationContextFacade, LambdaProcessorFactory<TBLLContext>, ByRolesRecipientsResolverBase<TBLLContext>>>
+                        {
+                                { SubscriptionSourceMode.Dynamic, (cf, pf) => new ByRolesRecipientsResolverDynamic<TBLLContext>(cf, pf) },
+                                { SubscriptionSourceMode.Typed, (cf, pf) => new ByRolesRecipientsResolverTyped<TBLLContext>(cf, pf) },
+                                { SubscriptionSourceMode.NonContext, (cf, pf) => new ByRolesRecipientsResolverNonContext<TBLLContext>(cf, pf) },
+                                { SubscriptionSourceMode.Invalid, (cf, pf) => new ByRolesRecipientsResolverBase<TBLLContext>(cf, pf) }
+                        };
 
         private readonly ConfigurationContextFacade configurationContextFacade;
         private readonly LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory;
@@ -33,18 +40,8 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients
             [NotNull] ConfigurationContextFacade configurationContextFacade,
             [NotNull] LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
         {
-            if (configurationContextFacade == null)
-            {
-                throw new ArgumentNullException(nameof(configurationContextFacade));
-            }
-
-            if (lambdaProcessorFactory == null)
-            {
-                throw new ArgumentNullException(nameof(lambdaProcessorFactory));
-            }
-
-            this.configurationContextFacade = configurationContextFacade;
-            this.lambdaProcessorFactory = lambdaProcessorFactory;
+            this.configurationContextFacade = configurationContextFacade ?? throw new ArgumentNullException(nameof(configurationContextFacade));
+            this.lambdaProcessorFactory = lambdaProcessorFactory ?? throw new ArgumentNullException(nameof(lambdaProcessorFactory));
         }
 
         /// <summary>Выполняет поиск получателей уведомлений по подписке.</summary>
@@ -72,15 +69,15 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients
                 throw new ArgumentNullException(nameof(versions));
             }
 
-            var resolver = this.CreateResolver();
+            var resolver = this.CreateResolver(subscription.SourceMode);
             var result = resolver.Resolve(subscription, versions);
 
             return result;
         }
 
-        private ByRolesRecipientsResolverBase<TBLLContext> CreateResolver()
+        private ByRolesRecipientsResolverBase<TBLLContext> CreateResolver(SubscriptionSourceMode mode)
         {
-            var createResolver = Resolver;
+            var createResolver = Resolvers[mode];
             var result = createResolver(this.configurationContextFacade, this.lambdaProcessorFactory);
 
             return result;

@@ -27,10 +27,6 @@ namespace Framework.Configuration.Domain
     [NotAuditedClass]
     public class Subscription : ISubscription
     {
-        private readonly ICollection<SubBusinessRole> subBusinessRoles = new List<SubBusinessRole>();
-
-        private IEnumerable<SubscriptionSecurityItem> securityItems = new List<SubscriptionSecurityItem>();
-        
         private SubscriptionLambda condition;
 
         private SubscriptionLambda generation;
@@ -81,21 +77,12 @@ namespace Framework.Configuration.Domain
         /// <summary>
         /// Коллекция дочерних ролей
         /// </summary>
-        [UniqueGroup]
-        public virtual IEnumerable<SubBusinessRole> SubBusinessRoles
-        {
-            get { return this.subBusinessRoles; }
-        }
+        public List<SubBusinessRole> SubBusinessRoles { get; set; } = new ();
 
         /// <summary>
         /// Коллекция элементов секьюрного контекста
         /// </summary>
-        [UniqueGroup]
-        public IEnumerable<SubscriptionSecurityItem> SecurityItems
-        {
-            get { return this.securityItems; }
-            set { this.securityItems = value; }
-        }
+        public List<SubscriptionSecurityItem> SecurityItems { get; set; } = new ();
 
         /// <summary>
         /// Условие подписки
@@ -214,7 +201,37 @@ namespace Framework.Configuration.Domain
             get { return this.allowEmptyListOfRecipients; }
             set { this.allowEmptyListOfRecipients = value; }
         }
-        
+        /// <summary>
+        /// Вычисляемое свойство результатов состояний работы с контекстами
+        /// </summary>
+        [CustomSerialization(CustomSerializationMode.Ignore)]
+        [Required, RestrictionExtension(typeof(RequiredAttribute), CustomError = "Invalid source mode")]
+        public virtual SubscriptionSourceMode SourceMode
+        {
+            get
+            {
+                var isDynamicSourceMode = this.DynamicSource != null && this.DynamicSourceExpandType != null;
+                var isTypeSourceMode = this.SecurityItems.Any();
+
+                if (isDynamicSourceMode && isTypeSourceMode)
+                {
+                    return SubscriptionSourceMode.Invalid;
+                }
+                else if (isDynamicSourceMode)
+                {
+                    return SubscriptionSourceMode.Dynamic;
+                }
+                else if (isTypeSourceMode)
+                {
+                    return SubscriptionSourceMode.Typed;
+                }
+                else
+                {
+                    return SubscriptionSourceMode.NonContext;
+                }
+            }
+        }
+
         /// <summary>
         /// Электроннный адрес отправителя
         /// </summary>

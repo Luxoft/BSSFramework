@@ -46,10 +46,8 @@ export let getFullLocationsByODataQueryStringAsyncFunc = _getFullLocationsByODat
 export let getFullManagementUnitAndBusinessUnitLinksByODataQueryStringAsyncFunc = _getFullManagementUnitAndBusinessUnitLinksByODataQueryString();
 export let getFullManagementUnitAndHRDepartmentLinksByODataQueryStringAsyncFunc = _getFullManagementUnitAndHRDepartmentLinksByODataQueryString();
 export let getFullManagementUnitsByODataQueryStringAsyncFunc = _getFullManagementUnitsByODataQueryString();
-export let getFullMessageTemplateContainersByODataQueryStringAsyncFunc = _getFullMessageTemplateContainersByODataQueryString();
 export let getFullPrincipalsByODataQueryStringAsyncFunc = _getFullPrincipalsByODataQueryString();
 export let getFullRegularJobResultsByODataQueryStringAsyncFunc = _getFullRegularJobResultsByODataQueryString();
-export let getFullSampleSystemMessageTemplatesByODataQueryStringAsyncFunc = _getFullSampleSystemMessageTemplatesByODataQueryString();
 export let getFullSqlParserTestObjContainersByODataQueryStringAsyncFunc = _getFullSqlParserTestObjContainersByODataQueryString();
 export let getFullSqlParserTestObjsByODataQueryStringAsyncFunc = _getFullSqlParserTestObjsByODataQueryString();
 export let getFullTestCustomContextSecurityObjsByODataQueryStringAsyncFunc = _getFullTestCustomContextSecurityObjsByODataQueryString();
@@ -83,10 +81,8 @@ export let getSimpleLocationsByODataQueryStringAsyncFunc = _getSimpleLocationsBy
 export let getSimpleManagementUnitAndBusinessUnitLinksByODataQueryStringAsyncFunc = _getSimpleManagementUnitAndBusinessUnitLinksByODataQueryString();
 export let getSimpleManagementUnitAndHRDepartmentLinksByODataQueryStringAsyncFunc = _getSimpleManagementUnitAndHRDepartmentLinksByODataQueryString();
 export let getSimpleManagementUnitsByODataQueryStringAsyncFunc = _getSimpleManagementUnitsByODataQueryString();
-export let getSimpleMessageTemplateContainersByODataQueryStringAsyncFunc = _getSimpleMessageTemplateContainersByODataQueryString();
 export let getSimplePrincipalsByODataQueryStringAsyncFunc = _getSimplePrincipalsByODataQueryString();
 export let getSimpleRegularJobResultsByODataQueryStringAsyncFunc = _getSimpleRegularJobResultsByODataQueryString();
-export let getSimpleSampleSystemMessageTemplatesByODataQueryStringAsyncFunc = _getSimpleSampleSystemMessageTemplatesByODataQueryString();
 export let getSimpleSqlParserTestObjContainersByODataQueryStringAsyncFunc = _getSimpleSqlParserTestObjContainersByODataQueryString();
 export let getSimpleSqlParserTestObjsByODataQueryStringAsyncFunc = _getSimpleSqlParserTestObjsByODataQueryString();
 export let getSimpleTestCustomContextSecurityObjsByODataQueryStringAsyncFunc = _getSimpleTestCustomContextSecurityObjsByODataQueryString();
@@ -368,14 +364,6 @@ function _getBusinessUnitProgramClassesByODataQueryString(): async.AsyncFunc3<st
         });
     }
 
-    function _getFullMessageTemplateContainersByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.MessageTemplateContainerFullDTO>, OData.SelectOperationResult<dto.MessageTemplateContainerObservableFullDTO>, dto.MessageTemplateContainerFullDTO, dto.MessageTemplateContainerObservableFullDTO> {
-        return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = odataQueryString;
-            let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.MessageTemplateContainerFullDTO>, OData.SelectOperationResult<dto.MessageTemplateContainerObservableFullDTO>, dto.MessageTemplateContainerFullDTO, dto.MessageTemplateContainerObservableFullDTO>();
-            return service.getData('MessageTemplateContainerQuery/GetFullMessageTemplateContainersByODataQueryString', {plain : dto.MessageTemplateContainerFullDTO, observable : dto.MessageTemplateContainerObservableFullDTO}, baseParameters);
-        });
-    }
-
     function _getFullPrincipalsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.PrincipalFullDTO>, OData.SelectOperationResult<dto.PrincipalObservableFullDTO>, dto.PrincipalFullDTO, dto.PrincipalObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
             let baseParameters = odataQueryString;
@@ -389,15 +377,6 @@ function _getBusinessUnitProgramClassesByODataQueryString(): async.AsyncFunc3<st
             let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.RegularJobResultFullDTO>, OData.SelectOperationResult<dto.RegularJobResultObservableFullDTO>, dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO>();
             return service.getData('RegularJobResultQuery/GetFullRegularJobResultsByODataQueryString', {plain : dto.RegularJobResultFullDTO, observable : dto.RegularJobResultObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullSampleSystemMessageTemplatesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.SampleSystemMessageTemplateFullDTO>, OData.SelectOperationResult<dto.SampleSystemMessageTemplateObservableFullDTO>, dto.SampleSystemMessageTemplateFullDTO, dto.SampleSystemMessageTemplateObservableFullDTO> {
-        return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = odataQueryString;
-            let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.SampleSystemMessageTemplateFullDTO>, OData.SelectOperationResult<dto.SampleSystemMessageTemplateObservableFullDTO>, dto.SampleSystemMessageTemplateFullDTO, dto.SampleSystemMessageTemplateObservableFullDTO>();
-            return service.getData('SampleSystemMessageTemplateQuery/GetFullSampleSystemMessageTemplatesByODataQueryS' + 
-'tring', {plain : dto.SampleSystemMessageTemplateFullDTO, observable : dto.SampleSystemMessageTemplateObservableFullDTO}, baseParameters);
         });
     }
 
@@ -672,15 +651,6 @@ function _getBusinessUnitProgramClassesByODataQueryString(): async.AsyncFunc3<st
         });
     }
 
-    function _getSimpleMessageTemplateContainersByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.MessageTemplateContainerSimpleDTO>, OData.SelectOperationResult<dto.MessageTemplateContainerObservableSimpleDTO>, dto.MessageTemplateContainerSimpleDTO, dto.MessageTemplateContainerObservableSimpleDTO> {
-        return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = odataQueryString;
-            let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.MessageTemplateContainerSimpleDTO>, OData.SelectOperationResult<dto.MessageTemplateContainerObservableSimpleDTO>, dto.MessageTemplateContainerSimpleDTO, dto.MessageTemplateContainerObservableSimpleDTO>();
-            return service.getData('MessageTemplateContainerQuery/GetSimpleMessageTemplateContainersByODataQueryStrin' + 
-'g', {plain : dto.MessageTemplateContainerSimpleDTO, observable : dto.MessageTemplateContainerObservableSimpleDTO}, baseParameters);
-        });
-    }
-
     function _getSimplePrincipalsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.PrincipalSimpleDTO>, OData.SelectOperationResult<dto.PrincipalObservableSimpleDTO>, dto.PrincipalSimpleDTO, dto.PrincipalObservableSimpleDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
             let baseParameters = odataQueryString;
@@ -694,15 +664,6 @@ function _getBusinessUnitProgramClassesByODataQueryString(): async.AsyncFunc3<st
             let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.RegularJobResultSimpleDTO>, OData.SelectOperationResult<dto.RegularJobResultObservableSimpleDTO>, dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO>();
             return service.getData('RegularJobResultQuery/GetSimpleRegularJobResultsByODataQueryString', {plain : dto.RegularJobResultSimpleDTO, observable : dto.RegularJobResultObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleSampleSystemMessageTemplatesByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.SampleSystemMessageTemplateSimpleDTO>, OData.SelectOperationResult<dto.SampleSystemMessageTemplateObservableSimpleDTO>, dto.SampleSystemMessageTemplateSimpleDTO, dto.SampleSystemMessageTemplateObservableSimpleDTO> {
-        return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = odataQueryString;
-            let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.SampleSystemMessageTemplateSimpleDTO>, OData.SelectOperationResult<dto.SampleSystemMessageTemplateObservableSimpleDTO>, dto.SampleSystemMessageTemplateSimpleDTO, dto.SampleSystemMessageTemplateObservableSimpleDTO>();
-            return service.getData('SampleSystemMessageTemplateQuery/GetSimpleSampleSystemMessageTemplatesByODataQuer' + 
-'yString', {plain : dto.SampleSystemMessageTemplateSimpleDTO, observable : dto.SampleSystemMessageTemplateObservableSimpleDTO}, baseParameters);
         });
     }
 

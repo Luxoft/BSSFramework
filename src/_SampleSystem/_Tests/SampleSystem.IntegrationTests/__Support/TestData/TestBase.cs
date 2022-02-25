@@ -201,36 +201,6 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
             this.EvaluateWrite(context => context.Configuration.Logics.DomainObjectModification.Pipe(bll => bll.Remove(bll.GetFullList())));
         }
 
-        /// <summary>
-        /// Отчистка существующих джобов и их результатов
-        /// </summary>
-        protected void ClearRegularJobs()
-        {
-            this.EvaluateWrite(context =>
-            {
-                context.Logics.RegularJobResult.Pipe(bll => bll.Remove(bll.GetFullList()));
-
-                context.Configuration.Logics.RegularJob.Pipe(bll => bll.Remove(bll.GetFullList()));
-            });
-        }
-
-        /// <summary>
-        /// Отчистка виртуальной MSMQ-очереди
-        /// </summary>
-        protected void ClearRegularJobsMessages()
-        {
-            FakeRegularJobMessageSender.Instance.Queue.Clear();
-        }
-
-        /// <summary>
-        /// Получение сообщений из витуальной MSMQ-очереди
-        /// </summary>
-        /// <returns></returns>
-        protected IEnumerable<RunRegularJobModelStrictDTO> GetRegularJobsMessages()
-        {
-            return FakeRegularJobMessageSender.Instance.Queue;
-        }
-
         protected TResult EvaluateWrite<TResult>(Func<ISampleSystemBLLContext, TResult> func)
         {
             return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, this.PrincipalName, func);

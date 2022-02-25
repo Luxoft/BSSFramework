@@ -11,7 +11,7 @@ namespace Configurator.Client.Context.ConfigurationService
 {
     
     
-    public partial class ConfigSLJsonControllerServiceProxy : Framework.ServiceModel.Async.ServiceProxy<Configurator.Client.Context.ConfigurationService.ConfigSLJsonControllerClient>, Framework.ServiceModel.Async.IAsyncCreateService<Framework.Configuration.Generated.DTO.SequenceCreateModelStrictDTO, Framework.Configuration.Generated.DTO.SequenceRichDTO>, Framework.ServiceModel.Async.IAsyncCreateService<Framework.Configuration.Generated.DTO.SequenceCreateModelRichDTO, Framework.Configuration.Generated.DTO.SequenceRichDTO>, Framework.ServiceModel.Async.IAsyncCreateService<Framework.Configuration.Generated.DTO.UserActionCreateModelStrictDTO, Framework.Configuration.Generated.DTO.UserActionRichDTO>, Framework.ServiceModel.Async.IAsyncCreateService<Framework.Configuration.Generated.DTO.UserActionCreateModelRichDTO, Framework.Configuration.Generated.DTO.UserActionRichDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByIdentsService<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO>, Framework.ServiceModel.Async.IAsyncSourceService<Framework.Configuration.Generated.DTO.DomainTypeFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByIdentsService<Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO, Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO, Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO, Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO, Framework.Configuration.Generated.DTO.RegularJobFullDTO>, Framework.ServiceModel.Async.IAsyncSourceService<Framework.Configuration.Generated.DTO.RegularJobFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByIdentsService<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO, Framework.Configuration.Generated.DTO.RegularJobFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByIdentsService<Framework.Configuration.Generated.DTO.SequenceIdentityDTO, Framework.Configuration.Generated.DTO.SequenceFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO, Framework.Configuration.Generated.DTO.SequenceFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.SequenceRootFilterModelRichDTO, Framework.Configuration.Generated.DTO.SequenceFullDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO, Framework.Configuration.Generated.DTO.SystemConstantFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByIdentsService<Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO, Framework.Configuration.Generated.DTO.SystemConstantFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelStrictDTO, Framework.Configuration.Generated.DTO.SystemConstantFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelRichDTO, Framework.Configuration.Generated.DTO.SystemConstantFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByIdentsService<Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO, Framework.Configuration.Generated.DTO.TargetSystemFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO, Framework.Configuration.Generated.DTO.TargetSystemFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelRichDTO, Framework.Configuration.Generated.DTO.TargetSystemFullDTO>, Framework.ServiceModel.Async.IAsyncSourceService<Framework.Configuration.Generated.DTO.UserActionObjectFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByIdentsService<Framework.Configuration.Generated.DTO.UserActionObjectIdentityDTO, Framework.Configuration.Generated.DTO.UserActionObjectFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.UserActionObjectRootFilterModelStrictDTO, Framework.Configuration.Generated.DTO.UserActionObjectFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.UserActionObjectRootFilterModelRichDTO, Framework.Configuration.Generated.DTO.UserActionObjectFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByIdentsService<Framework.Configuration.Generated.DTO.UserActionIdentityDTO, Framework.Configuration.Generated.DTO.UserActionFullDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO, Framework.Configuration.Generated.DTO.DomainTypeRichDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO, Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO, Framework.Configuration.Generated.DTO.RegularJobRichDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.SequenceIdentityDTO, Framework.Configuration.Generated.DTO.SequenceRichDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO, Framework.Configuration.Generated.DTO.SystemConstantRichDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO, Framework.Configuration.Generated.DTO.TargetSystemRichDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.AttachmentIdentityDTO, Framework.Configuration.Generated.DTO.AttachmentSimpleDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO>, Framework.ServiceModel.Async.IAsyncSourceService<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO>, Framework.ServiceModel.Async.IAsyncSourceService<Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO, Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelRichDTO, Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO, Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO>, Framework.ServiceModel.Async.IAsyncSourceService<Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO>, Framework.ServiceModel.Async.IAsyncSourceService<Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO, Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelRichDTO, Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO>, Framework.ServiceModel.Async.IAsyncRemoveService<Framework.Configuration.Generated.DTO.AttachmentIdentityDTO>, Framework.ServiceModel.Async.IAsyncRemoveService<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO>, Framework.ServiceModel.Async.IAsyncRemoveService<Framework.Configuration.Generated.DTO.SequenceIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO, Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO, Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.RegularJobStrictDTO, Framework.Configuration.Generated.DTO.RegularJobIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.RegularJobRichDTO, Framework.Configuration.Generated.DTO.RegularJobIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.SequenceStrictDTO, Framework.Configuration.Generated.DTO.SequenceIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.SequenceRichDTO, Framework.Configuration.Generated.DTO.SequenceIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.SystemConstantStrictDTO, Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.SystemConstantRichDTO, Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.TargetSystemStrictDTO, Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.TargetSystemRichDTO, Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO>
+    public partial class ConfigSLJsonControllerServiceProxy : Framework.ServiceModel.Async.ServiceProxy<Configurator.Client.Context.ConfigurationService.ConfigSLJsonControllerClient>, Framework.ServiceModel.Async.IAsyncCreateService<Framework.Configuration.Generated.DTO.SequenceCreateModelStrictDTO, Framework.Configuration.Generated.DTO.SequenceRichDTO>, Framework.ServiceModel.Async.IAsyncCreateService<Framework.Configuration.Generated.DTO.SequenceCreateModelRichDTO, Framework.Configuration.Generated.DTO.SequenceRichDTO>, Framework.ServiceModel.Async.IAsyncCreateService<Framework.Configuration.Generated.DTO.UserActionCreateModelStrictDTO, Framework.Configuration.Generated.DTO.UserActionRichDTO>, Framework.ServiceModel.Async.IAsyncCreateService<Framework.Configuration.Generated.DTO.UserActionCreateModelRichDTO, Framework.Configuration.Generated.DTO.UserActionRichDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByIdentsService<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelRichDTO, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO>, Framework.ServiceModel.Async.IAsyncSourceService<Framework.Configuration.Generated.DTO.DomainTypeFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByIdentsService<Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO, Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO, Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO, Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByIdentsService<Framework.Configuration.Generated.DTO.SequenceIdentityDTO, Framework.Configuration.Generated.DTO.SequenceFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO, Framework.Configuration.Generated.DTO.SequenceFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.SequenceRootFilterModelRichDTO, Framework.Configuration.Generated.DTO.SequenceFullDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO, Framework.Configuration.Generated.DTO.SystemConstantFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByIdentsService<Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO, Framework.Configuration.Generated.DTO.SystemConstantFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelStrictDTO, Framework.Configuration.Generated.DTO.SystemConstantFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelRichDTO, Framework.Configuration.Generated.DTO.SystemConstantFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByIdentsService<Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO, Framework.Configuration.Generated.DTO.TargetSystemFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO, Framework.Configuration.Generated.DTO.TargetSystemFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelRichDTO, Framework.Configuration.Generated.DTO.TargetSystemFullDTO>, Framework.ServiceModel.Async.IAsyncSourceService<Framework.Configuration.Generated.DTO.UserActionObjectFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByIdentsService<Framework.Configuration.Generated.DTO.UserActionObjectIdentityDTO, Framework.Configuration.Generated.DTO.UserActionObjectFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.UserActionObjectRootFilterModelStrictDTO, Framework.Configuration.Generated.DTO.UserActionObjectFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.UserActionObjectRootFilterModelRichDTO, Framework.Configuration.Generated.DTO.UserActionObjectFullDTO>, Framework.ServiceModel.Async.IAsyncSourceByIdentsService<Framework.Configuration.Generated.DTO.UserActionIdentityDTO, Framework.Configuration.Generated.DTO.UserActionFullDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO, Framework.Configuration.Generated.DTO.DomainTypeRichDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO, Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.SequenceIdentityDTO, Framework.Configuration.Generated.DTO.SequenceRichDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO, Framework.Configuration.Generated.DTO.SystemConstantRichDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO, Framework.Configuration.Generated.DTO.TargetSystemRichDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.AttachmentIdentityDTO, Framework.Configuration.Generated.DTO.AttachmentSimpleDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO>, Framework.ServiceModel.Async.IAsyncSourceService<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO>, Framework.ServiceModel.Async.IAsyncSourceService<Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO, Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelRichDTO, Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO>, Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO, Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO>, Framework.ServiceModel.Async.IAsyncSourceService<Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO>, Framework.ServiceModel.Async.IAsyncSourceService<Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO, Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO>, Framework.ServiceModel.Async.IAsyncSourceByFilterService<Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelRichDTO, Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO>, Framework.ServiceModel.Async.IAsyncRemoveService<Framework.Configuration.Generated.DTO.AttachmentIdentityDTO>, Framework.ServiceModel.Async.IAsyncRemoveService<Framework.Configuration.Generated.DTO.SequenceIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO, Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO, Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.SequenceStrictDTO, Framework.Configuration.Generated.DTO.SequenceIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.SequenceRichDTO, Framework.Configuration.Generated.DTO.SequenceIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.SystemConstantStrictDTO, Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.SystemConstantRichDTO, Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.TargetSystemStrictDTO, Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO>, Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.TargetSystemRichDTO, Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO>
     {
         
         private Configurator.Client.Context.ConfigurationService.ConfigSLJsonController _service;
@@ -105,15 +105,6 @@ namespace Configurator.Client.Context.ConfigurationService
             }
         }
         
-        public virtual Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.ForceRegularJobsRequest, Framework.Core.Ignore> ForceRegularJobsAsyncFunc
-        {
-            get
-            {
-                Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.ForceRegularJobsRequest, Framework.Core.Ignore> asyncFunc = Framework.Async.AsyncProcessFunc.Create<Framework.Configuration.Generated.DTO.ForceRegularJobsRequest>((request, callback, state) => this._service.BeginForceRegularJobs(request, callback, state), asyncResult => this._service.EndForceRegularJobs(asyncResult));
-                return Framework.Async.AsyncProcessFuncBaseExtensions.WithSync(asyncFunc);
-            }
-        }
-        
         public virtual Framework.Async.IAsyncProcessFunc<string, Framework.Configuration.Generated.DTO.ControlSettingsRichDTO> GetControlSettingsAsyncFunc
         {
             get
@@ -199,50 +190,6 @@ namespace Configurator.Client.Context.ConfigurationService
             get
             {
                 return Framework.Async.AsyncProcessFunc.Create<Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO, System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO>>((filter, callback) => this.GetFullExceptionMessagesByRootFilterAsyncFunc.Run(filter.ToStrict(), callback));
-            }
-        }
-        
-        public virtual Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO, Framework.Configuration.Generated.DTO.RegularJobFullDTO> GetFullRegularJobAsyncFunc
-        {
-            get
-            {
-                Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO, Framework.Configuration.Generated.DTO.RegularJobFullDTO> asyncFunc = Framework.Async.AsyncProcessFunc.Create<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO, Framework.Configuration.Generated.DTO.RegularJobFullDTO>((regularJobIdentity, callback, state) => this._service.BeginGetFullRegularJob(regularJobIdentity, callback, state), asyncResult => this._service.EndGetFullRegularJob(asyncResult));
-                return Framework.Async.AsyncProcessFuncBaseExtensions.WithSync(asyncFunc);
-            }
-        }
-        
-        public virtual Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelStrictDTO, System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobRevisionModelFullDTO>> GetFullRegularJobRevisionModelsByAsyncFunc
-        {
-            get
-            {
-                Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelStrictDTO, System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobRevisionModelFullDTO>> asyncFunc = Framework.Async.AsyncProcessFunc.Create<Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelStrictDTO, System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobRevisionModelFullDTO>>((filter, callback, state) => this._service.BeginGetFullRegularJobRevisionModelsBy(filter, callback, state), asyncResult => this._service.EndGetFullRegularJobRevisionModelsBy(asyncResult));
-                return Framework.Async.AsyncProcessFuncBaseExtensions.WithSync(asyncFunc);
-            }
-        }
-        
-        public virtual Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelRichDTO, System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobRevisionModelFullDTO>> GetFullRegularJobRevisionModelsByAsyncFuncR
-        {
-            get
-            {
-                return Framework.Async.AsyncProcessFunc.Create<Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelRichDTO, System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobRevisionModelFullDTO>>((filter, callback) => this.GetFullRegularJobRevisionModelsByAsyncFunc.Run(filter.ToStrict(), callback));
-            }
-        }
-        
-        public virtual Framework.Async.IAsyncProcessFunc<Framework.Core.Ignore, System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobFullDTO>> GetFullRegularJobsAsyncFunc
-        {
-            get
-            {
-                Framework.Async.IAsyncProcessFunc<Framework.Core.Ignore, System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobFullDTO>> asyncFunc = Framework.Async.AsyncProcessFunc.Create<Framework.Core.Ignore, System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobFullDTO>>((_, callback, state) => this._service.BeginGetFullRegularJobs(callback, state), asyncResult => this._service.EndGetFullRegularJobs(asyncResult));
-                return Framework.Async.AsyncProcessFuncBaseExtensions.WithSync(asyncFunc);
-            }
-        }
-        
-        public virtual Framework.Async.IAsyncProcessFunc<System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO>, System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobFullDTO>> GetFullRegularJobsByIdentsAsyncFunc
-        {
-            get
-            {
-                Framework.Async.IAsyncProcessFunc<System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO>, System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobFullDTO>> asyncFunc = Framework.Async.AsyncProcessFunc.Create<System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO>, System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobFullDTO>>((regularJobIdents, callback, state) => this._service.BeginGetFullRegularJobsByIdents(regularJobIdents, callback, state), asyncResult => this._service.EndGetFullRegularJobsByIdents(asyncResult));
-                return Framework.Async.AsyncProcessFuncBaseExtensions.WithSync(asyncFunc);
             }
         }
         
@@ -431,15 +378,6 @@ namespace Configurator.Client.Context.ConfigurationService
             }
         }
         
-        public virtual Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO, Framework.Configuration.Generated.DTO.RegularJobRichDTO> GetRichRegularJobAsyncFunc
-        {
-            get
-            {
-                Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO, Framework.Configuration.Generated.DTO.RegularJobRichDTO> asyncFunc = Framework.Async.AsyncProcessFunc.Create<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO, Framework.Configuration.Generated.DTO.RegularJobRichDTO>((regularJobIdentity, callback, state) => this._service.BeginGetRichRegularJob(regularJobIdentity, callback, state), asyncResult => this._service.EndGetRichRegularJob(asyncResult));
-                return Framework.Async.AsyncProcessFuncBaseExtensions.WithSync(asyncFunc);
-            }
-        }
-        
         public virtual Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.SequenceIdentityDTO, Framework.Configuration.Generated.DTO.SequenceRichDTO> GetRichSequenceAsyncFunc
         {
             get
@@ -607,14 +545,6 @@ namespace Configurator.Client.Context.ConfigurationService
             }
         }
         
-        Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO, Framework.Core.Ignore> Framework.ServiceModel.Async.IAsyncRemoveService<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO>.RemoveAction
-        {
-            get
-            {
-                return this.RemoveRegularJobAsyncFunc;
-            }
-        }
-        
         Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.SequenceIdentityDTO, Framework.Core.Ignore> Framework.ServiceModel.Async.IAsyncRemoveService<Framework.Configuration.Generated.DTO.SequenceIdentityDTO>.RemoveAction
         {
             get
@@ -637,15 +567,6 @@ namespace Configurator.Client.Context.ConfigurationService
             get
             {
                 Framework.Async.IAsyncProcessFunc<System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO>, Framework.Core.Ignore> asyncFunc = Framework.Async.AsyncProcessFunc.Create<System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO>>((controlSettingsIdCollection, callback, state) => this._service.BeginRemoveControlSettingsCollection(controlSettingsIdCollection, callback, state), asyncResult => this._service.EndRemoveControlSettingsCollection(asyncResult));
-                return Framework.Async.AsyncProcessFuncBaseExtensions.WithSync(asyncFunc);
-            }
-        }
-        
-        public virtual Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO, Framework.Core.Ignore> RemoveRegularJobAsyncFunc
-        {
-            get
-            {
-                Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO, Framework.Core.Ignore> asyncFunc = Framework.Async.AsyncProcessFunc.Create<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO>((regularJobIdent, callback, state) => this._service.BeginRemoveRegularJob(regularJobIdent, callback, state), asyncResult => this._service.EndRemoveRegularJob(asyncResult));
                 return Framework.Async.AsyncProcessFuncBaseExtensions.WithSync(asyncFunc);
             }
         }
@@ -743,22 +664,6 @@ namespace Configurator.Client.Context.ConfigurationService
             }
         }
         
-        Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.RegularJobStrictDTO, Framework.Configuration.Generated.DTO.RegularJobIdentityDTO> Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.RegularJobStrictDTO, Framework.Configuration.Generated.DTO.RegularJobIdentityDTO>.SaveFunc
-        {
-            get
-            {
-                return this.SaveRegularJobAsyncFunc;
-            }
-        }
-        
-        Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.RegularJobRichDTO, Framework.Configuration.Generated.DTO.RegularJobIdentityDTO> Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.RegularJobRichDTO, Framework.Configuration.Generated.DTO.RegularJobIdentityDTO>.SaveFunc
-        {
-            get
-            {
-                return this.SaveRegularJobAsyncFuncR;
-            }
-        }
-        
         Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.SequenceStrictDTO, Framework.Configuration.Generated.DTO.SequenceIdentityDTO> Framework.ServiceModel.Async.IAsyncSaveService<Framework.Configuration.Generated.DTO.SequenceStrictDTO, Framework.Configuration.Generated.DTO.SequenceIdentityDTO>.SaveFunc
         {
             get
@@ -804,23 +709,6 @@ namespace Configurator.Client.Context.ConfigurationService
             get
             {
                 return this.SaveTargetSystemAsyncFuncR;
-            }
-        }
-        
-        public virtual Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.RegularJobStrictDTO, Framework.Configuration.Generated.DTO.RegularJobIdentityDTO> SaveRegularJobAsyncFunc
-        {
-            get
-            {
-                Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.RegularJobStrictDTO, Framework.Configuration.Generated.DTO.RegularJobIdentityDTO> asyncFunc = Framework.Async.AsyncProcessFunc.Create<Framework.Configuration.Generated.DTO.RegularJobStrictDTO, Framework.Configuration.Generated.DTO.RegularJobIdentityDTO>((regularJobStrict, callback, state) => this._service.BeginSaveRegularJob(regularJobStrict, callback, state), asyncResult => this._service.EndSaveRegularJob(asyncResult));
-                return Framework.Async.AsyncProcessFuncBaseExtensions.WithSync(asyncFunc);
-            }
-        }
-        
-        public virtual Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.RegularJobRichDTO, Framework.Configuration.Generated.DTO.RegularJobIdentityDTO> SaveRegularJobAsyncFuncR
-        {
-            get
-            {
-                return Framework.Async.AsyncProcessFunc.Create<Framework.Configuration.Generated.DTO.RegularJobRichDTO, Framework.Configuration.Generated.DTO.RegularJobIdentityDTO>((regularJobStrict, callback) => this.SaveRegularJobAsyncFunc.Run(regularJobStrict.ToStrict(), callback));
             }
         }
         
@@ -937,22 +825,6 @@ namespace Configurator.Client.Context.ConfigurationService
             get
             {
                 return this.GetFullExceptionMessagesByRootFilterAsyncFuncR;
-            }
-        }
-        
-        Framework.Async.IAsyncProcessFunc<Framework.Core.Ignore, System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobFullDTO>> Framework.ServiceModel.Async.IAsyncSourceService<Framework.Configuration.Generated.DTO.RegularJobFullDTO>.SourceFunc
-        {
-            get
-            {
-                return this.GetFullRegularJobsAsyncFunc;
-            }
-        }
-        
-        Framework.Async.IAsyncProcessFunc<System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO>, System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobFullDTO>> Framework.ServiceModel.Async.IAsyncSourceByIdentsService<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO, Framework.Configuration.Generated.DTO.RegularJobFullDTO>.SourceFunc
-        {
-            get
-            {
-                return this.GetFullRegularJobsByIdentsAsyncFunc;
             }
         }
         
@@ -1132,28 +1004,11 @@ namespace Configurator.Client.Context.ConfigurationService
             }
         }
         
-        public virtual Framework.Async.IAsyncProcessFunc<Framework.Core.Ignore, Framework.Core.Ignore> SyncPulseJobsAsyncFunc
-        {
-            get
-            {
-                Framework.Async.IAsyncProcessFunc<Framework.Core.Ignore, Framework.Core.Ignore> asyncFunc = Framework.Async.AsyncProcessFunc.Create<Framework.Core.Ignore>((_, callback, state) => this._service.BeginSyncPulseJobs(callback, state), asyncResult => this._service.EndSyncPulseJobs(asyncResult));
-                return Framework.Async.AsyncProcessFuncBaseExtensions.WithSync(asyncFunc);
-            }
-        }
-        
         Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO> Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO, Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO>.ViewFunc
         {
             get
             {
                 return this.GetFullCodeFirstSubscriptionAsyncFunc;
-            }
-        }
-        
-        Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO, Framework.Configuration.Generated.DTO.RegularJobFullDTO> Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO, Framework.Configuration.Generated.DTO.RegularJobFullDTO>.ViewFunc
-        {
-            get
-            {
-                return this.GetFullRegularJobAsyncFunc;
             }
         }
         
@@ -1186,14 +1041,6 @@ namespace Configurator.Client.Context.ConfigurationService
             get
             {
                 return this.GetRichExceptionMessageAsyncFunc;
-            }
-        }
-        
-        Framework.Async.IAsyncProcessFunc<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO, Framework.Configuration.Generated.DTO.RegularJobRichDTO> Framework.ServiceModel.Async.IAsyncViewService<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO, Framework.Configuration.Generated.DTO.RegularJobRichDTO>.ViewFunc
-        {
-            get
-            {
-                return this.GetRichRegularJobAsyncFunc;
             }
         }
         

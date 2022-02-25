@@ -47,13 +47,12 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
             IServiceProvider serviceProvider,
             IDBSessionFactory sessionFactory,
             EnvironmentSettings settings,
-            IMessageSender<Framework.Configuration.Domain.RunRegularJobModel> regularJobSender = null,
             bool? isDebugMode = null)
 
             : base(serviceProvider, sessionFactory, settings.NotificationContext, IntegrationTestAuthenticationService.Instance,
                    new OptionsWrapper<SmtpSettings>(new SmtpSettings() { OutputFolder = @"C:\SampleSystem\Smtp" }),
                   LazyInterfaceImplementHelper.CreateNotImplemented<IRewriteReceiversService>(),
-                  regularJobSender, isDebugMode)
+                   isDebugMode)
         {
             this.Settings = settings;
         }
@@ -96,7 +95,6 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .AddSingleton<IDateTimeService>(new IntegrationTestDateTimeService())
                                   .AddDatabaseSettings(InitializeAndCleanup.DatabaseUtil.ConnectionSettings.ConnectionString)
                                   .AddSingleton(EnvironmentSettings.Trace)
-                                  .AddSingleton<IMessageSender<Framework.Configuration.Domain.RunRegularJobModel>>(TestData.FakeRegularJobMessageSender.Instance)
                                   .AddSingleton<TestServiceEnvironment>()
                                   .AddScoped<IExceptionProcessor, ApiControllerExceptionService<TestServiceEnvironment, ISampleSystemBLLContext>> ()
                                   .AddSingleton<ISpecificationEvaluator, NhSpecificationEvaluator>()

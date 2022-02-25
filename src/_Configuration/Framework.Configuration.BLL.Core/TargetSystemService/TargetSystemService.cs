@@ -303,22 +303,6 @@ namespace Framework.Configuration.BLL
 
         public abstract ISubscriptionSystemService SubscriptionService { get; }
 
-
-        public void ExecuteRegularJob(RegularJob job)
-        {
-            throw new Exception("Del RegularJob");
-        }
-
-        public void ExecuteBLLContextLambda(ILambdaObject lambdaObject)
-        {
-            throw new Exception("Del RegularJob");
-        }
-
-        public void ValidateRegularJob(RegularJob job)
-        {
-            throw new Exception("Del RegularJob");
-        }
-
         public abstract bool IsAssignable(Type domainType);
 
 

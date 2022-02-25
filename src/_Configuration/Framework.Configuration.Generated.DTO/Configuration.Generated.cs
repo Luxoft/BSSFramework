@@ -50,8 +50,6 @@ namespace Framework.Configuration.Generated.DTO
         
         void MapBaseAuditPersistentToStrictForNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
-        void MapBaseAuditPersistentToStrictForRegularJob(Framework.Configuration.Generated.DTO.RegularJobStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
-        
         void MapBaseAuditPersistentToStrictForReport(Framework.Configuration.Generated.DTO.ReportStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
         
         void MapBaseAuditPersistentToStrictForReportFilter(Framework.Configuration.Generated.DTO.ReportFilterStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO currentSource);
@@ -107,8 +105,6 @@ namespace Framework.Configuration.Generated.DTO
         void MapBasePersistentToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
         
         void MapBasePersistentToStrictForNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
-        
-        void MapBasePersistentToStrictForRegularJob(Framework.Configuration.Generated.DTO.RegularJobStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
         
         void MapBasePersistentToStrictForReport(Framework.Configuration.Generated.DTO.ReportStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO currentSource);
         
@@ -172,19 +168,11 @@ namespace Framework.Configuration.Generated.DTO
         
         void MapFullToStrictForExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelFullDTO currentSource);
         
-        void MapFullToStrictForExecuteRegularJobResult(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultStrictDTO target, Framework.Configuration.Generated.DTO.ExecuteRegularJobResultFullDTO currentSource);
-        
         void MapFullToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.LogMessageFullDTO currentSource);
         
         void MapFullToStrictForNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO target, Framework.Configuration.Generated.DTO.NamedLockFullDTO currentSource);
         
         void MapFullToStrictForQueueProcessingState(Framework.Configuration.Generated.DTO.QueueProcessingStateStrictDTO target, Framework.Configuration.Generated.DTO.QueueProcessingStateFullDTO currentSource);
-        
-        void MapFullToStrictForRegularJob(Framework.Configuration.Generated.DTO.RegularJobStrictDTO target, Framework.Configuration.Generated.DTO.RegularJobFullDTO currentSource);
-        
-        void MapFullToStrictForRegularJobRevisionFilterModel(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelFullDTO currentSource);
-        
-        void MapFullToStrictForRegularJobRevisionModel(Framework.Configuration.Generated.DTO.RegularJobRevisionModelStrictDTO target, Framework.Configuration.Generated.DTO.RegularJobRevisionModelFullDTO currentSource);
         
         void MapFullToStrictForReport(Framework.Configuration.Generated.DTO.ReportStrictDTO target, Framework.Configuration.Generated.DTO.ReportFullDTO currentSource);
         
@@ -201,8 +189,6 @@ namespace Framework.Configuration.Generated.DTO
         void MapFullToStrictForReportParameterValue(Framework.Configuration.Generated.DTO.ReportParameterValueStrictDTO target, Framework.Configuration.Generated.DTO.ReportParameterValueFullDTO currentSource);
         
         void MapFullToStrictForReportProperty(Framework.Configuration.Generated.DTO.ReportPropertyStrictDTO target, Framework.Configuration.Generated.DTO.ReportPropertyFullDTO currentSource);
-        
-        void MapFullToStrictForRunRegularJobModel(Framework.Configuration.Generated.DTO.RunRegularJobModelStrictDTO target, Framework.Configuration.Generated.DTO.RunRegularJobModelFullDTO currentSource);
         
         void MapFullToStrictForSentMessage(Framework.Configuration.Generated.DTO.SentMessageStrictDTO target, Framework.Configuration.Generated.DTO.SentMessageFullDTO currentSource);
         
@@ -272,19 +258,11 @@ namespace Framework.Configuration.Generated.DTO
         
         void MapRichToStrictForExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO currentSource);
         
-        void MapRichToStrictForExecuteRegularJobResult(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultStrictDTO target, Framework.Configuration.Generated.DTO.ExecuteRegularJobResultRichDTO currentSource);
-        
         void MapRichToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.LogMessageRichDTO currentSource);
         
         void MapRichToStrictForNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO target, Framework.Configuration.Generated.DTO.NamedLockRichDTO currentSource);
         
         void MapRichToStrictForQueueProcessingState(Framework.Configuration.Generated.DTO.QueueProcessingStateStrictDTO target, Framework.Configuration.Generated.DTO.QueueProcessingStateRichDTO currentSource);
-        
-        void MapRichToStrictForRegularJob(Framework.Configuration.Generated.DTO.RegularJobStrictDTO target, Framework.Configuration.Generated.DTO.RegularJobRichDTO currentSource);
-        
-        void MapRichToStrictForRegularJobRevisionFilterModel(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelRichDTO currentSource);
-        
-        void MapRichToStrictForRegularJobRevisionModel(Framework.Configuration.Generated.DTO.RegularJobRevisionModelStrictDTO target, Framework.Configuration.Generated.DTO.RegularJobRevisionModelRichDTO currentSource);
         
         void MapRichToStrictForReport(Framework.Configuration.Generated.DTO.ReportStrictDTO target, Framework.Configuration.Generated.DTO.ReportRichDTO currentSource);
         
@@ -301,8 +279,6 @@ namespace Framework.Configuration.Generated.DTO
         void MapRichToStrictForReportParameterValue(Framework.Configuration.Generated.DTO.ReportParameterValueStrictDTO target, Framework.Configuration.Generated.DTO.ReportParameterValueRichDTO currentSource);
         
         void MapRichToStrictForReportProperty(Framework.Configuration.Generated.DTO.ReportPropertyStrictDTO target, Framework.Configuration.Generated.DTO.ReportPropertyRichDTO currentSource);
-        
-        void MapRichToStrictForRunRegularJobModel(Framework.Configuration.Generated.DTO.RunRegularJobModelStrictDTO target, Framework.Configuration.Generated.DTO.RunRegularJobModelRichDTO currentSource);
         
         void MapRichToStrictForSentMessage(Framework.Configuration.Generated.DTO.SentMessageStrictDTO target, Framework.Configuration.Generated.DTO.SentMessageRichDTO currentSource);
         
@@ -372,19 +348,11 @@ namespace Framework.Configuration.Generated.DTO
         
         void MapSimpleToStrictForExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelSimpleDTO currentSource);
         
-        void MapSimpleToStrictForExecuteRegularJobResult(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultStrictDTO target, Framework.Configuration.Generated.DTO.ExecuteRegularJobResultSimpleDTO currentSource);
-        
         void MapSimpleToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.LogMessageSimpleDTO currentSource);
         
         void MapSimpleToStrictForNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO target, Framework.Configuration.Generated.DTO.NamedLockSimpleDTO currentSource);
         
         void MapSimpleToStrictForQueueProcessingState(Framework.Configuration.Generated.DTO.QueueProcessingStateStrictDTO target, Framework.Configuration.Generated.DTO.QueueProcessingStateSimpleDTO currentSource);
-        
-        void MapSimpleToStrictForRegularJob(Framework.Configuration.Generated.DTO.RegularJobStrictDTO target, Framework.Configuration.Generated.DTO.RegularJobSimpleDTO currentSource);
-        
-        void MapSimpleToStrictForRegularJobRevisionFilterModel(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelSimpleDTO currentSource);
-        
-        void MapSimpleToStrictForRegularJobRevisionModel(Framework.Configuration.Generated.DTO.RegularJobRevisionModelStrictDTO target, Framework.Configuration.Generated.DTO.RegularJobRevisionModelSimpleDTO currentSource);
         
         void MapSimpleToStrictForReport(Framework.Configuration.Generated.DTO.ReportStrictDTO target, Framework.Configuration.Generated.DTO.ReportSimpleDTO currentSource);
         
@@ -401,8 +369,6 @@ namespace Framework.Configuration.Generated.DTO
         void MapSimpleToStrictForReportParameterValue(Framework.Configuration.Generated.DTO.ReportParameterValueStrictDTO target, Framework.Configuration.Generated.DTO.ReportParameterValueSimpleDTO currentSource);
         
         void MapSimpleToStrictForReportProperty(Framework.Configuration.Generated.DTO.ReportPropertyStrictDTO target, Framework.Configuration.Generated.DTO.ReportPropertySimpleDTO currentSource);
-        
-        void MapSimpleToStrictForRunRegularJobModel(Framework.Configuration.Generated.DTO.RunRegularJobModelStrictDTO target, Framework.Configuration.Generated.DTO.RunRegularJobModelSimpleDTO currentSource);
         
         void MapSimpleToStrictForSentMessage(Framework.Configuration.Generated.DTO.SentMessageStrictDTO target, Framework.Configuration.Generated.DTO.SentMessageSimpleDTO currentSource);
         
@@ -649,19 +615,6 @@ namespace Framework.Configuration.Generated.DTO
             {
                 throw new System.ArgumentNullException("target");
             }
-        }
-        
-        public virtual void MapBaseAuditPersistentToStrictForRegularJob(Framework.Configuration.Generated.DTO.RegularJobStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            target.Active = source.Active;
         }
         
         public virtual void MapBaseAuditPersistentToStrictForReport(Framework.Configuration.Generated.DTO.ReportStrictDTO target, Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source)
@@ -1007,19 +960,6 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         public virtual void MapBasePersistentToStrictForNamedLock(Framework.Configuration.Generated.DTO.NamedLockStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            target.Id = source.Id;
-        }
-        
-        public virtual void MapBasePersistentToStrictForRegularJob(Framework.Configuration.Generated.DTO.RegularJobStrictDTO target, Framework.Configuration.Generated.DTO.BasePersistentDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -1470,18 +1410,6 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        public virtual void MapFullToStrictForExecuteRegularJobResult(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultStrictDTO target, Framework.Configuration.Generated.DTO.ExecuteRegularJobResultFullDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
         public virtual void MapFullToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.LogMessageFullDTO source)
         {
             if (object.ReferenceEquals(source, null))
@@ -1507,50 +1435,6 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         public virtual void MapFullToStrictForQueueProcessingState(Framework.Configuration.Generated.DTO.QueueProcessingStateStrictDTO target, Framework.Configuration.Generated.DTO.QueueProcessingStateFullDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
-        public virtual void MapFullToStrictForRegularJob(Framework.Configuration.Generated.DTO.RegularJobStrictDTO target, Framework.Configuration.Generated.DTO.RegularJobFullDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
-        public virtual void MapFullToStrictForRegularJobRevisionFilterModel(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelFullDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            if (!object.ReferenceEquals(source.RegularJob, null))
-            {
-                target.RegularJob = source.RegularJob.Identity;
-            }
-            else
-            {
-                target.RegularJob = default(Framework.Configuration.Generated.DTO.RegularJobIdentityDTO);
-            }
-        }
-        
-        public virtual void MapFullToStrictForRegularJobRevisionModel(Framework.Configuration.Generated.DTO.RegularJobRevisionModelStrictDTO target, Framework.Configuration.Generated.DTO.RegularJobRevisionModelFullDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -1679,26 +1563,6 @@ namespace Framework.Configuration.Generated.DTO
             if (object.ReferenceEquals(target, null))
             {
                 throw new System.ArgumentNullException("target");
-            }
-        }
-        
-        public virtual void MapFullToStrictForRunRegularJobModel(Framework.Configuration.Generated.DTO.RunRegularJobModelStrictDTO target, Framework.Configuration.Generated.DTO.RunRegularJobModelFullDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            if (!object.ReferenceEquals(source.RegularJob, null))
-            {
-                target.RegularJob = source.RegularJob.Identity;
-            }
-            else
-            {
-                target.RegularJob = default(Framework.Configuration.Generated.DTO.RegularJobIdentityDTO);
             }
         }
         
@@ -2155,18 +2019,6 @@ namespace Framework.Configuration.Generated.DTO
             }
         }
         
-        public virtual void MapRichToStrictForExecuteRegularJobResult(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultStrictDTO target, Framework.Configuration.Generated.DTO.ExecuteRegularJobResultRichDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
         public virtual void MapRichToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.LogMessageRichDTO source)
         {
             if (object.ReferenceEquals(source, null))
@@ -2192,42 +2044,6 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         public virtual void MapRichToStrictForQueueProcessingState(Framework.Configuration.Generated.DTO.QueueProcessingStateStrictDTO target, Framework.Configuration.Generated.DTO.QueueProcessingStateRichDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
-        public virtual void MapRichToStrictForRegularJob(Framework.Configuration.Generated.DTO.RegularJobStrictDTO target, Framework.Configuration.Generated.DTO.RegularJobRichDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
-        public virtual void MapRichToStrictForRegularJobRevisionFilterModel(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelRichDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
-        public virtual void MapRichToStrictForRegularJobRevisionModel(Framework.Configuration.Generated.DTO.RegularJobRevisionModelStrictDTO target, Framework.Configuration.Generated.DTO.RegularJobRevisionModelRichDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -2357,18 +2173,6 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         public virtual void MapRichToStrictForReportProperty(Framework.Configuration.Generated.DTO.ReportPropertyStrictDTO target, Framework.Configuration.Generated.DTO.ReportPropertyRichDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
-        public virtual void MapRichToStrictForRunRegularJobModel(Framework.Configuration.Generated.DTO.RunRegularJobModelStrictDTO target, Framework.Configuration.Generated.DTO.RunRegularJobModelRichDTO source)
         {
             if (object.ReferenceEquals(source, null))
             {
@@ -2832,18 +2636,6 @@ namespace Framework.Configuration.Generated.DTO
             target.Period = source.Period;
         }
         
-        public virtual void MapSimpleToStrictForExecuteRegularJobResult(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultStrictDTO target, Framework.Configuration.Generated.DTO.ExecuteRegularJobResultSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-        }
-        
         public virtual void MapSimpleToStrictForLogMessage(Framework.Configuration.Generated.DTO.LogMessageStrictDTO target, Framework.Configuration.Generated.DTO.LogMessageSimpleDTO source)
         {
             if (object.ReferenceEquals(source, null))
@@ -2886,50 +2678,6 @@ namespace Framework.Configuration.Generated.DTO
             }
             target.LastProcessedItemDateTime = source.LastProcessedItemDateTime;
             target.UnprocessedCount = source.UnprocessedCount;
-        }
-        
-        public virtual void MapSimpleToStrictForRegularJob(Framework.Configuration.Generated.DTO.RegularJobStrictDTO target, Framework.Configuration.Generated.DTO.RegularJobSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            target.ExpectedNextStartTime = source.ExpectedNextStartTime;
-            target.Function = source.Function;
-            target.Name = source.Name;
-            target.ShedulerTime = source.ShedulerTime;
-            target.State = source.State;
-            target.Version = source.Version;
-            target.WrapUpSession = source.WrapUpSession;
-        }
-        
-        public virtual void MapSimpleToStrictForRegularJobRevisionFilterModel(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelStrictDTO target, Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            target.CountingEntities = source.CountingEntities;
-        }
-        
-        public virtual void MapSimpleToStrictForRegularJobRevisionModel(Framework.Configuration.Generated.DTO.RegularJobRevisionModelStrictDTO target, Framework.Configuration.Generated.DTO.RegularJobRevisionModelSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
         }
         
         public virtual void MapSimpleToStrictForReport(Framework.Configuration.Generated.DTO.ReportStrictDTO target, Framework.Configuration.Generated.DTO.ReportSimpleDTO source)
@@ -3053,20 +2801,6 @@ namespace Framework.Configuration.Generated.DTO
             target.PropertyPath = source.PropertyPath;
             target.SortOrdered = source.SortOrdered;
             target.SortType = source.SortType;
-        }
-        
-        public virtual void MapSimpleToStrictForRunRegularJobModel(Framework.Configuration.Generated.DTO.RunRegularJobModelStrictDTO target, Framework.Configuration.Generated.DTO.RunRegularJobModelSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            if (object.ReferenceEquals(target, null))
-            {
-                throw new System.ArgumentNullException("target");
-            }
-            target.InstanceServerName = source.InstanceServerName;
-            target.Mode = source.Mode;
         }
         
         public virtual void MapSimpleToStrictForSentMessage(Framework.Configuration.Generated.DTO.SentMessageStrictDTO target, Framework.Configuration.Generated.DTO.SentMessageSimpleDTO source)
@@ -4844,114 +4578,6 @@ namespace Framework.Configuration.Generated.DTO
         public Framework.Configuration.Domain.NamedLock ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToNamedLock(this);
-        }
-        
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
-    }
-    
-    [Framework.Configuration.ConfigurationEditDomainObjectAttribute(Framework.Configuration.ConfigurationSecurityOperationCode.RegularJobEdit)]
-    [Framework.Configuration.ConfigurationViewDomainObjectAttribute(Framework.Configuration.ConfigurationSecurityOperationCode.RegularJobView)]
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.RegularJob), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class RegularJobIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
-    {
-        
-        private static Framework.Configuration.Generated.DTO.RegularJobIdentityDTO EmptyField = new Framework.Configuration.Generated.DTO.RegularJobIdentityDTO(System.Guid.Empty);
-        
-        private System.Guid _id;
-        
-        public RegularJobIdentityDTO(System.Guid id)
-        {
-            this._id = id;
-        }
-        
-        public RegularJobIdentityDTO(Framework.Configuration.Generated.DTO.RegularJobSimpleDTO source)
-        {
-            if (object.ReferenceEquals(source, null))
-            {
-                throw new System.ArgumentNullException("source");
-            }
-            this._id = source.Id;
-        }
-        
-        public RegularJobIdentityDTO(Framework.Configuration.Domain.RegularJob domainObject)
-        {
-            if (object.ReferenceEquals(domainObject, null))
-            {
-                throw new System.ArgumentNullException("domainObject");
-            }
-            this._id = domainObject.Id;
-        }
-        
-        public RegularJobIdentityDTO()
-        {
-        }
-        
-        public RegularJobIdentityDTO(string id) : 
-                this(new System.Guid(id))
-        {
-        }
-        
-        public static Framework.Configuration.Generated.DTO.RegularJobIdentityDTO Empty
-        {
-            get
-            {
-                return Framework.Configuration.Generated.DTO.RegularJobIdentityDTO.EmptyField;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public static bool operator !=(Framework.Configuration.Generated.DTO.RegularJobIdentityDTO identity1, Framework.Configuration.Generated.DTO.RegularJobIdentityDTO identity2)
-        {
-            return !(identity1 == identity2);
-        }
-        
-        public static bool operator ==(Framework.Configuration.Generated.DTO.RegularJobIdentityDTO identity1, Framework.Configuration.Generated.DTO.RegularJobIdentityDTO identity2)
-        {
-            return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Configuration.Generated.DTO.RegularJobIdentityDTO)) && identity1.Equals(identity2);
-        }
-        
-        public override bool Equals(object other)
-        {
-            return !object.ReferenceEquals(other, null) && (typeof(Framework.Configuration.Generated.DTO.RegularJobIdentityDTO) == other.GetType()) && this.Equals(((Framework.Configuration.Generated.DTO.RegularJobIdentityDTO)(other)));
-        }
-        
-        public bool Equals(Framework.Configuration.Generated.DTO.RegularJobIdentityDTO other)
-        {
-            return !object.ReferenceEquals(other, null) && (this._id == other.Id);
-        }
-        
-        public override int GetHashCode()
-        {
-            return this.Id.GetHashCode();
-        }
-        
-        public Framework.Configuration.Domain.RegularJob ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToRegularJob(this);
         }
         
         public override string ToString()
@@ -12263,218 +11889,6 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ExecuteRegularJobResult), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultRichDTO))]
-    public partial class ExecuteRegularJobResultSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ExecuteRegularJobResult>
-    {
-        
-        private string _description;
-        
-        private long? _executionTime;
-        
-        private Framework.Configuration.Domain.RegularJobStatus _status;
-        
-        private long? _time;
-        
-        public ExecuteRegularJobResultSimpleDTO()
-        {
-        }
-        
-        public ExecuteRegularJobResultSimpleDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ExecuteRegularJobResult domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapExecuteRegularJobResult(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Description
-        {
-            get
-            {
-                return this._description;
-            }
-            set
-            {
-                this._description = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long? ExecutionTime
-        {
-            get
-            {
-                return this._executionTime;
-            }
-            set
-            {
-                this._executionTime = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Domain.RegularJobStatus Status
-        {
-            get
-            {
-                return this._status;
-            }
-            set
-            {
-                this._status = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long? Time
-        {
-            get
-            {
-                return this._time;
-            }
-            set
-            {
-                this._time = value;
-            }
-        }
-        
-        public virtual void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ExecuteRegularJobResult domainObject)
-        {
-            mappingService.MapExecuteRegularJobResult(this, domainObject);
-        }
-        
-        public virtual Framework.Configuration.Generated.DTO.ExecuteRegularJobResultStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.ExecuteRegularJobResultStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ExecuteRegularJobResult), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultRichDTO))]
-    public partial class ExecuteRegularJobResultFullDTO : Framework.Configuration.Generated.DTO.ExecuteRegularJobResultSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ExecuteRegularJobResult>
-    {
-        
-        public ExecuteRegularJobResultFullDTO()
-        {
-        }
-        
-        public ExecuteRegularJobResultFullDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ExecuteRegularJobResult domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapExecuteRegularJobResult(domainObject, this);
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ExecuteRegularJobResult domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapExecuteRegularJobResult(this, domainObject);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.ExecuteRegularJobResultStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.ExecuteRegularJobResultStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ExecuteRegularJobResult), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class ExecuteRegularJobResultRichDTO : Framework.Configuration.Generated.DTO.ExecuteRegularJobResultFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ExecuteRegularJobResult>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ExecuteRegularJobResult>
-    {
-        
-        public ExecuteRegularJobResultRichDTO()
-        {
-        }
-        
-        public ExecuteRegularJobResultRichDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ExecuteRegularJobResult domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapExecuteRegularJobResult(domainObject, this);
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ExecuteRegularJobResult domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapExecuteRegularJobResult(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.ExecuteRegularJobResult ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToExecuteRegularJobResult(this);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.ExecuteRegularJobResultStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.ExecuteRegularJobResultStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ExecuteRegularJobResult), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class ExecuteRegularJobResultStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ExecuteRegularJobResult>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.ExecuteRegularJobResult>
-    {
-        
-        public ExecuteRegularJobResultStrictDTO()
-        {
-        }
-        
-        public ExecuteRegularJobResultStrictDTO(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultRichDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.ExecuteRegularJobResultFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForExecuteRegularJobResult(this, source);
-        }
-        
-        public ExecuteRegularJobResultStrictDTO(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultRichDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public ExecuteRegularJobResultStrictDTO(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultFullDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.ExecuteRegularJobResultSimpleDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapFullToStrictForExecuteRegularJobResult(this, source);
-        }
-        
-        public ExecuteRegularJobResultStrictDTO(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultFullDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public ExecuteRegularJobResultStrictDTO(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultSimpleDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapSimpleToStrictForExecuteRegularJobResult(this, source);
-        }
-        
-        public ExecuteRegularJobResultStrictDTO(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultSimpleDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.ExecuteRegularJobResult domainObject)
-        {
-            mappingService.MapExecuteRegularJobResult(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.ExecuteRegularJobResult ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToExecuteRegularJobResult(this);
-        }
-    }
-    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.LogMessage), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.LogMessageFullDTO))]
@@ -14228,218 +13642,6 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelRichDTO))]
-    public partial class RegularJobRevisionFilterModelSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel>
-    {
-        
-        private int _countingEntities;
-        
-        public RegularJobRevisionFilterModelSimpleDTO()
-        {
-        }
-        
-        public RegularJobRevisionFilterModelSimpleDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapRegularJobRevisionFilterModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int CountingEntities
-        {
-            get
-            {
-                return this._countingEntities;
-            }
-            set
-            {
-                this._countingEntities = value;
-            }
-        }
-        
-        public virtual void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject)
-        {
-            mappingService.MapRegularJobRevisionFilterModel(this, domainObject);
-        }
-        
-        public virtual Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelRichDTO))]
-    public partial class RegularJobRevisionFilterModelFullDTO : Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel>
-    {
-        
-        private Framework.Configuration.Generated.DTO.RegularJobSimpleDTO _regularJob;
-        
-        public RegularJobRevisionFilterModelFullDTO()
-        {
-        }
-        
-        public RegularJobRevisionFilterModelFullDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapRegularJobRevisionFilterModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.RegularJobSimpleDTO RegularJob
-        {
-            get
-            {
-                return this._regularJob;
-            }
-            set
-            {
-                this._regularJob = value;
-            }
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapRegularJobRevisionFilterModel(this, domainObject);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class RegularJobRevisionFilterModelRichDTO : Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel>
-    {
-        
-        public RegularJobRevisionFilterModelRichDTO()
-        {
-        }
-        
-        public RegularJobRevisionFilterModelRichDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapRegularJobRevisionFilterModel(domainObject, this);
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapRegularJobRevisionFilterModel(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToRegularJobRevisionFilterModel(this);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class RegularJobRevisionFilterModelStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel>
-    {
-        
-        private int _countingEntities;
-        
-        private Framework.Configuration.Generated.DTO.RegularJobIdentityDTO _regularJob;
-        
-        public RegularJobRevisionFilterModelStrictDTO()
-        {
-        }
-        
-        public RegularJobRevisionFilterModelStrictDTO(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelRichDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForRegularJobRevisionFilterModel(this, source);
-        }
-        
-        public RegularJobRevisionFilterModelStrictDTO(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelRichDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public RegularJobRevisionFilterModelStrictDTO(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelFullDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelSimpleDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapFullToStrictForRegularJobRevisionFilterModel(this, source);
-        }
-        
-        public RegularJobRevisionFilterModelStrictDTO(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelFullDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public RegularJobRevisionFilterModelStrictDTO(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelSimpleDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapSimpleToStrictForRegularJobRevisionFilterModel(this, source);
-        }
-        
-        public RegularJobRevisionFilterModelStrictDTO(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelSimpleDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int CountingEntities
-        {
-            get
-            {
-                return this._countingEntities;
-            }
-            set
-            {
-                this._countingEntities = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.RegularJobIdentityDTO RegularJob
-        {
-            get
-            {
-                return this._regularJob;
-            }
-            set
-            {
-                this._regularJob = value;
-            }
-        }
-        
-        public void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject)
-        {
-            mappingService.MapRegularJobRevisionFilterModel(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToRegularJobRevisionFilterModel(this);
-        }
-    }
-    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.UserActionObjectRootFilterModelFullDTO))]
@@ -15192,743 +14394,6 @@ namespace Framework.Configuration.Generated.DTO
         public Framework.Configuration.Domain.QueueProcessingState ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToQueueProcessingState(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.RegularJob), "VisualDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class RegularJobVisualDTO : Framework.Configuration.Generated.DTO.BasePersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.RegularJob, System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO>
-    {
-        
-        private string _name;
-        
-        public RegularJobVisualDTO()
-        {
-        }
-        
-        public RegularJobVisualDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RegularJob domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapRegularJob(domainObject, this);
-        }
-        
-        public Framework.Configuration.Generated.DTO.RegularJobIdentityDTO Identity
-        {
-            get
-            {
-                return new Framework.Configuration.Generated.DTO.RegularJobIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-        
-        public virtual void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RegularJob domainObject)
-        {
-            mappingService.MapRegularJob(this, domainObject);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.RegularJob), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.RegularJobFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.RegularJobRichDTO))]
-    public partial class RegularJobSimpleDTO : Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.RegularJob, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.RegularJob>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO>
-    {
-        
-        private System.DateTime _expectedNextStartTime;
-        
-        private string _function;
-        
-        private System.DateTime? _lastPulseTime;
-        
-        private string _name;
-        
-        private Framework.Configuration.Domain.ShedulerTime _shedulerTime;
-        
-        private Framework.Configuration.Domain.RegularJobState _state;
-        
-        private long _version;
-        
-        private bool _wrapUpSession;
-        
-        public RegularJobSimpleDTO()
-        {
-        }
-        
-        public RegularJobSimpleDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RegularJob domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapRegularJob(domainObject, this);
-        }
-        
-        public RegularJobSimpleDTO(string id)
-        {
-            this.Id = new System.Guid(id);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime ExpectedNextStartTime
-        {
-            get
-            {
-                return this._expectedNextStartTime;
-            }
-            set
-            {
-                this._expectedNextStartTime = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Function
-        {
-            get
-            {
-                return this._function;
-            }
-            set
-            {
-                this._function = value;
-            }
-        }
-        
-        public Framework.Configuration.Generated.DTO.RegularJobIdentityDTO Identity
-        {
-            get
-            {
-                return new Framework.Configuration.Generated.DTO.RegularJobIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? LastPulseTime
-        {
-            get
-            {
-                return this._lastPulseTime;
-            }
-            set
-            {
-                this._lastPulseTime = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Domain.ShedulerTime ShedulerTime
-        {
-            get
-            {
-                return this._shedulerTime;
-            }
-            set
-            {
-                this._shedulerTime = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Domain.RegularJobState State
-        {
-            get
-            {
-                return this._state;
-            }
-            set
-            {
-                this._state = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version
-        {
-            get
-            {
-                return this._version;
-            }
-            set
-            {
-                this._version = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool WrapUpSession
-        {
-            get
-            {
-                return this._wrapUpSession;
-            }
-            set
-            {
-                this._wrapUpSession = value;
-            }
-        }
-        
-        public virtual void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RegularJob domainObject)
-        {
-            mappingService.MapRegularJob(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.RegularJob ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToRegularJob(this);
-        }
-        
-        public virtual Framework.Configuration.Generated.DTO.RegularJobStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.RegularJobStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.RegularJob), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.RegularJobRichDTO))]
-    public partial class RegularJobFullDTO : Framework.Configuration.Generated.DTO.RegularJobSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.RegularJob, System.Guid>
-    {
-        
-        private Framework.Configuration.Generated.DTO.ExecuteRegularJobResultSimpleDTO _executionResult;
-        
-        public RegularJobFullDTO()
-        {
-        }
-        
-        public RegularJobFullDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RegularJob domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapRegularJob(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.ExecuteRegularJobResultSimpleDTO ExecutionResult
-        {
-            get
-            {
-                return this._executionResult;
-            }
-            set
-            {
-                this._executionResult = value;
-            }
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RegularJob domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapRegularJob(this, domainObject);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.RegularJobStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.RegularJobStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.RegularJob), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class RegularJobRichDTO : Framework.Configuration.Generated.DTO.RegularJobFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.RegularJob, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.RegularJob>
-    {
-        
-        public RegularJobRichDTO()
-        {
-        }
-        
-        public RegularJobRichDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RegularJob domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapRegularJob(domainObject, this);
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RegularJob domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapRegularJob(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.RegularJob ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToRegularJob(this);
-        }
-        
-        public Framework.Configuration.Domain.RegularJob ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, bool allowCreate)
-        {
-            return mappingService.ToRegularJob(this, allowCreate);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.RegularJobStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.RegularJobStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.RegularJob), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class RegularJobStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.RegularJob, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.RegularJob>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO>
-    {
-        
-        private bool _active = true;
-        
-        private System.DateTime _expectedNextStartTime;
-        
-        private string _function;
-        
-        private System.Guid _id;
-        
-        private string _name;
-        
-        private Framework.Configuration.Domain.ShedulerTime _shedulerTime;
-        
-        private Framework.Configuration.Domain.RegularJobState _state;
-        
-        private long _version;
-        
-        private bool _wrapUpSession;
-        
-        public RegularJobStrictDTO()
-        {
-        }
-        
-        public RegularJobStrictDTO(Framework.Configuration.Generated.DTO.RegularJobRichDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.RegularJobFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForRegularJob(this, source);
-        }
-        
-        public RegularJobStrictDTO(Framework.Configuration.Generated.DTO.RegularJobRichDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public RegularJobStrictDTO(Framework.Configuration.Generated.DTO.RegularJobFullDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.RegularJobSimpleDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapFullToStrictForRegularJob(this, source);
-        }
-        
-        public RegularJobStrictDTO(Framework.Configuration.Generated.DTO.RegularJobFullDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public RegularJobStrictDTO(Framework.Configuration.Generated.DTO.RegularJobSimpleDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapSimpleToStrictForRegularJob(this, source);
-        }
-        
-        public RegularJobStrictDTO(Framework.Configuration.Generated.DTO.RegularJobSimpleDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private RegularJobStrictDTO(Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.BasePersistentDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBaseAuditPersistentToStrictForRegularJob(this, source);
-        }
-        
-        private RegularJobStrictDTO(Framework.Configuration.Generated.DTO.BaseAuditPersistentDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        private RegularJobStrictDTO(Framework.Configuration.Generated.DTO.BasePersistentDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapBasePersistentToStrictForRegularJob(this, source);
-        }
-        
-        private RegularJobStrictDTO(Framework.Configuration.Generated.DTO.BasePersistentDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active
-        {
-            get
-            {
-                return this._active;
-            }
-            set
-            {
-                this._active = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime ExpectedNextStartTime
-        {
-            get
-            {
-                return this._expectedNextStartTime;
-            }
-            set
-            {
-                this._expectedNextStartTime = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Function
-        {
-            get
-            {
-                return this._function;
-            }
-            set
-            {
-                this._function = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
-        }
-        
-        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
-        {
-            get
-            {
-                return this.Id;
-            }
-        }
-        
-        public Framework.Configuration.Generated.DTO.RegularJobIdentityDTO Identity
-        {
-            get
-            {
-                return new Framework.Configuration.Generated.DTO.RegularJobIdentityDTO(this.Id);
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Domain.ShedulerTime ShedulerTime
-        {
-            get
-            {
-                return this._shedulerTime;
-            }
-            set
-            {
-                this._shedulerTime = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Domain.RegularJobState State
-        {
-            get
-            {
-                return this._state;
-            }
-            set
-            {
-                this._state = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version
-        {
-            get
-            {
-                return this._version;
-            }
-            set
-            {
-                this._version = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool WrapUpSession
-        {
-            get
-            {
-                return this._wrapUpSession;
-            }
-            set
-            {
-                this._wrapUpSession = value;
-            }
-        }
-        
-        public void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RegularJob domainObject)
-        {
-            mappingService.MapRegularJob(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.RegularJob ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToRegularJob(this);
-        }
-        
-        public Framework.Configuration.Domain.RegularJob ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, bool allowCreate)
-        {
-            return mappingService.ToRegularJob(this, allowCreate);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.RegularJobRevisionModel), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.RegularJobRevisionModelFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.RegularJobRevisionModelRichDTO))]
-    public partial class RegularJobRevisionModelSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.RegularJobRevisionModel>
-    {
-        
-        private long _revisionNumber;
-        
-        public RegularJobRevisionModelSimpleDTO()
-        {
-        }
-        
-        public RegularJobRevisionModelSimpleDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RegularJobRevisionModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapRegularJobRevisionModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long RevisionNumber
-        {
-            get
-            {
-                return this._revisionNumber;
-            }
-            set
-            {
-                this._revisionNumber = value;
-            }
-        }
-        
-        public virtual void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RegularJobRevisionModel domainObject)
-        {
-            mappingService.MapRegularJobRevisionModel(this, domainObject);
-        }
-        
-        public virtual Framework.Configuration.Generated.DTO.RegularJobRevisionModelStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.RegularJobRevisionModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.RegularJobRevisionModel), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.RegularJobRevisionModelRichDTO))]
-    public partial class RegularJobRevisionModelFullDTO : Framework.Configuration.Generated.DTO.RegularJobRevisionModelSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.RegularJobRevisionModel>
-    {
-        
-        private Framework.Configuration.Generated.DTO.ExecuteRegularJobResultSimpleDTO _executionResult;
-        
-        private Framework.Configuration.Generated.DTO.RegularJobSimpleDTO _extendedObject;
-        
-        public RegularJobRevisionModelFullDTO()
-        {
-        }
-        
-        public RegularJobRevisionModelFullDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RegularJobRevisionModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapRegularJobRevisionModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.ExecuteRegularJobResultSimpleDTO ExecutionResult
-        {
-            get
-            {
-                return this._executionResult;
-            }
-            set
-            {
-                this._executionResult = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.RegularJobSimpleDTO ExtendedObject
-        {
-            get
-            {
-                return this._extendedObject;
-            }
-            set
-            {
-                this._extendedObject = value;
-            }
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RegularJobRevisionModel domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapRegularJobRevisionModel(this, domainObject);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.RegularJobRevisionModelStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.RegularJobRevisionModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.RegularJobRevisionModel), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class RegularJobRevisionModelRichDTO : Framework.Configuration.Generated.DTO.RegularJobRevisionModelFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.RegularJobRevisionModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.RegularJobRevisionModel>
-    {
-        
-        public RegularJobRevisionModelRichDTO()
-        {
-        }
-        
-        public RegularJobRevisionModelRichDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RegularJobRevisionModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapRegularJobRevisionModel(domainObject, this);
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RegularJobRevisionModel domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapRegularJobRevisionModel(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.RegularJobRevisionModel ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToRegularJobRevisionModel(this);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.RegularJobRevisionModelStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.RegularJobRevisionModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.RegularJobRevisionModel), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class RegularJobRevisionModelStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.RegularJobRevisionModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.RegularJobRevisionModel>
-    {
-        
-        public RegularJobRevisionModelStrictDTO()
-        {
-        }
-        
-        public RegularJobRevisionModelStrictDTO(Framework.Configuration.Generated.DTO.RegularJobRevisionModelRichDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.RegularJobRevisionModelFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForRegularJobRevisionModel(this, source);
-        }
-        
-        public RegularJobRevisionModelStrictDTO(Framework.Configuration.Generated.DTO.RegularJobRevisionModelRichDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public RegularJobRevisionModelStrictDTO(Framework.Configuration.Generated.DTO.RegularJobRevisionModelFullDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.RegularJobRevisionModelSimpleDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapFullToStrictForRegularJobRevisionModel(this, source);
-        }
-        
-        public RegularJobRevisionModelStrictDTO(Framework.Configuration.Generated.DTO.RegularJobRevisionModelFullDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public RegularJobRevisionModelStrictDTO(Framework.Configuration.Generated.DTO.RegularJobRevisionModelSimpleDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapSimpleToStrictForRegularJobRevisionModel(this, source);
-        }
-        
-        public RegularJobRevisionModelStrictDTO(Framework.Configuration.Generated.DTO.RegularJobRevisionModelSimpleDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RegularJobRevisionModel domainObject)
-        {
-            mappingService.MapRegularJobRevisionModel(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.RegularJobRevisionModel ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToRegularJobRevisionModel(this);
         }
     }
     
@@ -18651,248 +17116,6 @@ namespace Framework.Configuration.Generated.DTO
         public Framework.Configuration.Domain.Reports.ReportProperty ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return mappingService.ToReportProperty(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.RunRegularJobModel), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.RunRegularJobModelFullDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.RunRegularJobModelRichDTO))]
-    public partial class RunRegularJobModelSimpleDTO : Framework.Configuration.Generated.DTO.BaseAbstractDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.RunRegularJobModel>
-    {
-        
-        private string _instanceServerName;
-        
-        private Framework.Configuration.RunRegularJobMode _mode;
-        
-        public RunRegularJobModelSimpleDTO()
-        {
-        }
-        
-        public RunRegularJobModelSimpleDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RunRegularJobModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapRunRegularJobModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string InstanceServerName
-        {
-            get
-            {
-                return this._instanceServerName;
-            }
-            set
-            {
-                this._instanceServerName = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.RunRegularJobMode Mode
-        {
-            get
-            {
-                return this._mode;
-            }
-            set
-            {
-                this._mode = value;
-            }
-        }
-        
-        public virtual void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RunRegularJobModel domainObject)
-        {
-            mappingService.MapRunRegularJobModel(this, domainObject);
-        }
-        
-        public virtual Framework.Configuration.Generated.DTO.RunRegularJobModelStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.RunRegularJobModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.RunRegularJobModel), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Configuration.Generated.DTO.RunRegularJobModelRichDTO))]
-    public partial class RunRegularJobModelFullDTO : Framework.Configuration.Generated.DTO.RunRegularJobModelSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.RunRegularJobModel>
-    {
-        
-        private Framework.Configuration.Generated.DTO.RegularJobSimpleDTO _regularJob;
-        
-        public RunRegularJobModelFullDTO()
-        {
-        }
-        
-        public RunRegularJobModelFullDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RunRegularJobModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapRunRegularJobModel(domainObject, this);
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.RegularJobSimpleDTO RegularJob
-        {
-            get
-            {
-                return this._regularJob;
-            }
-            set
-            {
-                this._regularJob = value;
-            }
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RunRegularJobModel domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapRunRegularJobModel(this, domainObject);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.RunRegularJobModelStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.RunRegularJobModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.RunRegularJobModel), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class RunRegularJobModelRichDTO : Framework.Configuration.Generated.DTO.RunRegularJobModelFullDTO, Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.RunRegularJobModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.RunRegularJobModel>
-    {
-        
-        public RunRegularJobModelRichDTO()
-        {
-        }
-        
-        public RunRegularJobModelRichDTO(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RunRegularJobModel domainObject) : 
-                base(mappingService, domainObject)
-        {
-            mappingService.MapRunRegularJobModel(domainObject, this);
-        }
-        
-        public override void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RunRegularJobModel domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapRunRegularJobModel(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.RunRegularJobModel ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToRunRegularJobModel(this);
-        }
-        
-        public override Framework.Configuration.Generated.DTO.RunRegularJobModelStrictDTO ToStrict()
-        {
-            return new Framework.Configuration.Generated.DTO.RunRegularJobModelStrictDTO(this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.RunRegularJobModel), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class RunRegularJobModelStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.RunRegularJobModel>, Framework.DomainDriven.IConvertMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, Framework.Configuration.Domain.RunRegularJobModel>
-    {
-        
-        private string _instanceServerName;
-        
-        private Framework.Configuration.RunRegularJobMode _mode;
-        
-        private Framework.Configuration.Generated.DTO.RegularJobIdentityDTO _regularJob;
-        
-        public RunRegularJobModelStrictDTO()
-        {
-        }
-        
-        public RunRegularJobModelStrictDTO(Framework.Configuration.Generated.DTO.RunRegularJobModelRichDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.RunRegularJobModelFullDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapRichToStrictForRunRegularJobModel(this, source);
-        }
-        
-        public RunRegularJobModelStrictDTO(Framework.Configuration.Generated.DTO.RunRegularJobModelRichDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public RunRegularJobModelStrictDTO(Framework.Configuration.Generated.DTO.RunRegularJobModelFullDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService) : 
-                this(((Framework.Configuration.Generated.DTO.RunRegularJobModelSimpleDTO)(source)), mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapFullToStrictForRunRegularJobModel(this, source);
-        }
-        
-        public RunRegularJobModelStrictDTO(Framework.Configuration.Generated.DTO.RunRegularJobModelFullDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        public RunRegularJobModelStrictDTO(Framework.Configuration.Generated.DTO.RunRegularJobModelSimpleDTO source, Framework.Configuration.Generated.DTO.IConfigurationClientDTOMappingService mappingService)
-        {
-            if (object.ReferenceEquals(mappingService, null))
-            {
-                throw new System.ArgumentNullException("mappingService");
-            }
-            mappingService.MapSimpleToStrictForRunRegularJobModel(this, source);
-        }
-        
-        public RunRegularJobModelStrictDTO(Framework.Configuration.Generated.DTO.RunRegularJobModelSimpleDTO source) : 
-                this(source, Framework.Configuration.Generated.DTO.ConfigurationClientPrimitiveDTOMappingService.Default)
-        {
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string InstanceServerName
-        {
-            get
-            {
-                return this._instanceServerName;
-            }
-            set
-            {
-                this._instanceServerName = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.RunRegularJobMode Mode
-        {
-            get
-            {
-                return this._mode;
-            }
-            set
-            {
-                this._mode = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Configuration.Generated.DTO.RegularJobIdentityDTO RegularJob
-        {
-            get
-            {
-                return this._regularJob;
-            }
-            set
-            {
-                this._regularJob = value;
-            }
-        }
-        
-        public void MapToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService, Framework.Configuration.Domain.RunRegularJobModel domainObject)
-        {
-            mappingService.MapRunRegularJobModel(this, domainObject);
-        }
-        
-        public Framework.Configuration.Domain.RunRegularJobModel ToDomainObject(Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return mappingService.ToRunRegularJobModel(this);
         }
     }
     
@@ -21867,11 +20090,6 @@ namespace Framework.Configuration.Generated.DTO
             return new Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelFullDTO(mappingService, domainObject);
         }
         
-        public static Framework.Configuration.Generated.DTO.ExecuteRegularJobResultFullDTO ToFullDTO(this Framework.Configuration.Domain.ExecuteRegularJobResult domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.ExecuteRegularJobResultFullDTO(mappingService, domainObject);
-        }
-        
         public static Framework.Configuration.Generated.DTO.LogMessageFullDTO ToFullDTO(this Framework.Configuration.Domain.LogMessage domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.LogMessageFullDTO(mappingService, domainObject);
@@ -21907,11 +20125,6 @@ namespace Framework.Configuration.Generated.DTO
             return new Framework.Configuration.Generated.DTO.ReportParameterValueFullDTO(mappingService, domainObject);
         }
         
-        public static Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelFullDTO ToFullDTO(this Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelFullDTO(mappingService, domainObject);
-        }
-        
         public static Framework.Configuration.Generated.DTO.UserActionObjectRootFilterModelFullDTO ToFullDTO(this Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.UserActionObjectRootFilterModelFullDTO(mappingService, domainObject);
@@ -21925,16 +20138,6 @@ namespace Framework.Configuration.Generated.DTO
         public static Framework.Configuration.Generated.DTO.QueueProcessingStateFullDTO ToFullDTO(this Framework.Configuration.Domain.QueueProcessingState domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.QueueProcessingStateFullDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.RegularJobFullDTO ToFullDTO(this Framework.Configuration.Domain.RegularJob domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.RegularJobFullDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.RegularJobRevisionModelFullDTO ToFullDTO(this Framework.Configuration.Domain.RegularJobRevisionModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.RegularJobRevisionModelFullDTO(mappingService, domainObject);
         }
         
         public static Framework.Configuration.Generated.DTO.AccessableBusinessRoleReportRightFullDTO ToFullDTO(this Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
@@ -21970,11 +20173,6 @@ namespace Framework.Configuration.Generated.DTO
         public static Framework.Configuration.Generated.DTO.ReportPropertyFullDTO ToFullDTO(this Framework.Configuration.Domain.Reports.ReportProperty domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.ReportPropertyFullDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.RunRegularJobModelFullDTO ToFullDTO(this Framework.Configuration.Domain.RunRegularJobModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.RunRegularJobModelFullDTO(mappingService, domainObject);
         }
         
         public static Framework.Configuration.Generated.DTO.SentMessageFullDTO ToFullDTO(this Framework.Configuration.Domain.SentMessage domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
@@ -22117,11 +20315,6 @@ namespace Framework.Configuration.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ExecuteRegularJobResultFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ExecuteRegularJobResult> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
-        }
-        
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.LogMessageFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.LogMessage> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
@@ -22157,11 +20350,6 @@ namespace Framework.Configuration.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
-        }
-        
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.UserActionObjectRootFilterModelFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
@@ -22173,16 +20361,6 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.QueueProcessingStateFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.QueueProcessingState> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.RegularJobFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.RegularJob> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.RegularJobRevisionModelFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.RegularJobRevisionModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
@@ -22218,11 +20396,6 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ReportPropertyFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.ReportProperty> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.RunRegularJobModelFullDTO> ToFullDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.RunRegularJobModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToFullDTO(domainObject, mappingService));
         }
@@ -22350,11 +20523,6 @@ namespace Framework.Configuration.Generated.DTO
         public static Framework.Configuration.Generated.DTO.NamedLockIdentityDTO ToIdentityDTO(this Framework.Configuration.Domain.NamedLock domainObject)
         {
             return new Framework.Configuration.Generated.DTO.NamedLockIdentityDTO(domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.RegularJobIdentityDTO ToIdentityDTO(this Framework.Configuration.Domain.RegularJob domainObject)
-        {
-            return new Framework.Configuration.Generated.DTO.RegularJobIdentityDTO(domainObject);
         }
         
         public static Framework.Configuration.Generated.DTO.AccessableBusinessRoleReportRightIdentityDTO ToIdentityDTO(this Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight domainObject)
@@ -22493,11 +20661,6 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.NamedLockIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.NamedLock> domainObjects)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.RegularJob> domainObjects)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
@@ -22657,11 +20820,6 @@ namespace Framework.Configuration.Generated.DTO
             return new Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelRichDTO(mappingService, domainObject);
         }
         
-        public static Framework.Configuration.Generated.DTO.ExecuteRegularJobResultRichDTO ToRichDTO(this Framework.Configuration.Domain.ExecuteRegularJobResult domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.ExecuteRegularJobResultRichDTO(mappingService, domainObject);
-        }
-        
         public static Framework.Configuration.Generated.DTO.LogMessageRichDTO ToRichDTO(this Framework.Configuration.Domain.LogMessage domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.LogMessageRichDTO(mappingService, domainObject);
@@ -22697,11 +20855,6 @@ namespace Framework.Configuration.Generated.DTO
             return new Framework.Configuration.Generated.DTO.ReportParameterValueRichDTO(mappingService, domainObject);
         }
         
-        public static Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelRichDTO ToRichDTO(this Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelRichDTO(mappingService, domainObject);
-        }
-        
         public static Framework.Configuration.Generated.DTO.UserActionObjectRootFilterModelRichDTO ToRichDTO(this Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.UserActionObjectRootFilterModelRichDTO(mappingService, domainObject);
@@ -22715,16 +20868,6 @@ namespace Framework.Configuration.Generated.DTO
         public static Framework.Configuration.Generated.DTO.QueueProcessingStateRichDTO ToRichDTO(this Framework.Configuration.Domain.QueueProcessingState domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.QueueProcessingStateRichDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.RegularJobRichDTO ToRichDTO(this Framework.Configuration.Domain.RegularJob domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.RegularJobRichDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.RegularJobRevisionModelRichDTO ToRichDTO(this Framework.Configuration.Domain.RegularJobRevisionModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.RegularJobRevisionModelRichDTO(mappingService, domainObject);
         }
         
         public static Framework.Configuration.Generated.DTO.AccessableBusinessRoleReportRightRichDTO ToRichDTO(this Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
@@ -22760,11 +20903,6 @@ namespace Framework.Configuration.Generated.DTO
         public static Framework.Configuration.Generated.DTO.ReportPropertyRichDTO ToRichDTO(this Framework.Configuration.Domain.Reports.ReportProperty domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.ReportPropertyRichDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.RunRegularJobModelRichDTO ToRichDTO(this Framework.Configuration.Domain.RunRegularJobModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.RunRegularJobModelRichDTO(mappingService, domainObject);
         }
         
         public static Framework.Configuration.Generated.DTO.SentMessageRichDTO ToRichDTO(this Framework.Configuration.Domain.SentMessage domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
@@ -22907,11 +21045,6 @@ namespace Framework.Configuration.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ExecuteRegularJobResultRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ExecuteRegularJobResult> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
-        }
-        
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.LogMessageRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.LogMessage> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
@@ -22947,11 +21080,6 @@ namespace Framework.Configuration.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
-        }
-        
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.UserActionObjectRootFilterModelRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
@@ -22963,16 +21091,6 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.QueueProcessingStateRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.QueueProcessingState> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.RegularJobRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.RegularJob> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.RegularJobRevisionModelRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.RegularJobRevisionModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
@@ -23008,11 +21126,6 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ReportPropertyRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.ReportProperty> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.RunRegularJobModelRichDTO> ToRichDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.RunRegularJobModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
@@ -23157,11 +21270,6 @@ namespace Framework.Configuration.Generated.DTO
             return new Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelSimpleDTO(mappingService, domainObject);
         }
         
-        public static Framework.Configuration.Generated.DTO.ExecuteRegularJobResultSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.ExecuteRegularJobResult domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.ExecuteRegularJobResultSimpleDTO(mappingService, domainObject);
-        }
-        
         public static Framework.Configuration.Generated.DTO.LogMessageSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.LogMessage domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.LogMessageSimpleDTO(mappingService, domainObject);
@@ -23197,11 +21305,6 @@ namespace Framework.Configuration.Generated.DTO
             return new Framework.Configuration.Generated.DTO.ReportParameterValueSimpleDTO(mappingService, domainObject);
         }
         
-        public static Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelSimpleDTO(mappingService, domainObject);
-        }
-        
         public static Framework.Configuration.Generated.DTO.UserActionObjectRootFilterModelSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.UserActionObjectRootFilterModelSimpleDTO(mappingService, domainObject);
@@ -23215,16 +21318,6 @@ namespace Framework.Configuration.Generated.DTO
         public static Framework.Configuration.Generated.DTO.QueueProcessingStateSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.QueueProcessingState domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.QueueProcessingStateSimpleDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.RegularJobSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.RegularJob domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.RegularJobSimpleDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.RegularJobRevisionModelSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.RegularJobRevisionModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.RegularJobRevisionModelSimpleDTO(mappingService, domainObject);
         }
         
         public static Framework.Configuration.Generated.DTO.AccessableBusinessRoleReportRightSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
@@ -23260,11 +21353,6 @@ namespace Framework.Configuration.Generated.DTO
         public static Framework.Configuration.Generated.DTO.ReportPropertySimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.Reports.ReportProperty domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.ReportPropertySimpleDTO(mappingService, domainObject);
-        }
-        
-        public static Framework.Configuration.Generated.DTO.RunRegularJobModelSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.RunRegularJobModel domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.RunRegularJobModelSimpleDTO(mappingService, domainObject);
         }
         
         public static Framework.Configuration.Generated.DTO.SentMessageSimpleDTO ToSimpleDTO(this Framework.Configuration.Domain.SentMessage domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
@@ -23407,11 +21495,6 @@ namespace Framework.Configuration.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ExecuteRegularJobResultSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ExecuteRegularJobResult> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
-        }
-        
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.LogMessageSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.LogMessage> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
@@ -23447,11 +21530,6 @@ namespace Framework.Configuration.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
-        }
-        
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.UserActionObjectRootFilterModelSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
@@ -23463,16 +21541,6 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.QueueProcessingStateSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.QueueProcessingState> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.RegularJobSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.RegularJob> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.RegularJobRevisionModelSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.RegularJobRevisionModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
@@ -23508,11 +21576,6 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.ReportPropertySimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.ReportProperty> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.RunRegularJobModelSimpleDTO> ToSimpleDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.RunRegularJobModel> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
@@ -23592,11 +21655,6 @@ namespace Framework.Configuration.Generated.DTO
             return new Framework.Configuration.Generated.DTO.DomainTypeEventOperationVisualDTO(mappingService, domainObject);
         }
         
-        public static Framework.Configuration.Generated.DTO.RegularJobVisualDTO ToVisualDTO(this Framework.Configuration.Domain.RegularJob domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return new Framework.Configuration.Generated.DTO.RegularJobVisualDTO(mappingService, domainObject);
-        }
-        
         public static Framework.Configuration.Generated.DTO.SequenceVisualDTO ToVisualDTO(this Framework.Configuration.Domain.Sequence domainObject, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return new Framework.Configuration.Generated.DTO.SequenceVisualDTO(mappingService, domainObject);
@@ -23633,11 +21691,6 @@ namespace Framework.Configuration.Generated.DTO
         }
         
         public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.DomainTypeEventOperationVisualDTO> ToVisualDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.DomainTypeEventOperation> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, mappingService));
-        }
-        
-        public static System.Collections.Generic.List<Framework.Configuration.Generated.DTO.RegularJobVisualDTO> ToVisualDTOList(this System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.RegularJob> domainObjects, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Configuration.Generated.DTO.LambdaHelper.ToVisualDTO(domainObject, mappingService));
         }
@@ -23980,20 +22033,6 @@ namespace Framework.Configuration.Generated.DTO
         
         void MapExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO mappingObject, Framework.Configuration.Domain.ExceptionMessageRootFilterModel domainObject);
         
-        void MapExecuteRegularJobResult(Framework.Configuration.Domain.ExecuteRegularJobResult domainObject, Framework.Configuration.Generated.DTO.ExecuteRegularJobResultSimpleDTO mappingObject);
-        
-        void MapExecuteRegularJobResult(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultSimpleDTO mappingObject, Framework.Configuration.Domain.ExecuteRegularJobResult domainObject);
-        
-        void MapExecuteRegularJobResult(Framework.Configuration.Domain.ExecuteRegularJobResult domainObject, Framework.Configuration.Generated.DTO.ExecuteRegularJobResultFullDTO mappingObject);
-        
-        void MapExecuteRegularJobResult(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultFullDTO mappingObject, Framework.Configuration.Domain.ExecuteRegularJobResult domainObject);
-        
-        void MapExecuteRegularJobResult(Framework.Configuration.Domain.ExecuteRegularJobResult domainObject, Framework.Configuration.Generated.DTO.ExecuteRegularJobResultRichDTO mappingObject);
-        
-        void MapExecuteRegularJobResult(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultRichDTO mappingObject, Framework.Configuration.Domain.ExecuteRegularJobResult domainObject);
-        
-        void MapExecuteRegularJobResult(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultStrictDTO mappingObject, Framework.Configuration.Domain.ExecuteRegularJobResult domainObject);
-        
         void MapLogMessage(Framework.Configuration.Domain.LogMessage domainObject, Framework.Configuration.Generated.DTO.LogMessageSimpleDTO mappingObject);
         
         void MapLogMessage(Framework.Configuration.Generated.DTO.LogMessageSimpleDTO mappingObject, Framework.Configuration.Domain.LogMessage domainObject);
@@ -24037,52 +22076,6 @@ namespace Framework.Configuration.Generated.DTO
         void MapQueueProcessingState(Framework.Configuration.Generated.DTO.QueueProcessingStateRichDTO mappingObject, Framework.Configuration.Domain.QueueProcessingState domainObject);
         
         void MapQueueProcessingState(Framework.Configuration.Generated.DTO.QueueProcessingStateStrictDTO mappingObject, Framework.Configuration.Domain.QueueProcessingState domainObject);
-        
-        void MapRegularJob(Framework.Configuration.Domain.RegularJob domainObject, Framework.Configuration.Generated.DTO.RegularJobVisualDTO mappingObject);
-        
-        void MapRegularJob(Framework.Configuration.Generated.DTO.RegularJobVisualDTO mappingObject, Framework.Configuration.Domain.RegularJob domainObject);
-        
-        void MapRegularJob(Framework.Configuration.Domain.RegularJob domainObject, Framework.Configuration.Generated.DTO.RegularJobSimpleDTO mappingObject);
-        
-        void MapRegularJob(Framework.Configuration.Generated.DTO.RegularJobSimpleDTO mappingObject, Framework.Configuration.Domain.RegularJob domainObject);
-        
-        void MapRegularJob(Framework.Configuration.Domain.RegularJob domainObject, Framework.Configuration.Generated.DTO.RegularJobFullDTO mappingObject);
-        
-        void MapRegularJob(Framework.Configuration.Generated.DTO.RegularJobFullDTO mappingObject, Framework.Configuration.Domain.RegularJob domainObject);
-        
-        void MapRegularJob(Framework.Configuration.Domain.RegularJob domainObject, Framework.Configuration.Generated.DTO.RegularJobRichDTO mappingObject);
-        
-        void MapRegularJob(Framework.Configuration.Generated.DTO.RegularJobRichDTO mappingObject, Framework.Configuration.Domain.RegularJob domainObject);
-        
-        void MapRegularJob(Framework.Configuration.Generated.DTO.RegularJobStrictDTO mappingObject, Framework.Configuration.Domain.RegularJob domainObject);
-        
-        void MapRegularJobRevisionFilterModel(Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject, Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelSimpleDTO mappingObject);
-        
-        void MapRegularJobRevisionFilterModel(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelSimpleDTO mappingObject, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject);
-        
-        void MapRegularJobRevisionFilterModel(Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject, Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelFullDTO mappingObject);
-        
-        void MapRegularJobRevisionFilterModel(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelFullDTO mappingObject, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject);
-        
-        void MapRegularJobRevisionFilterModel(Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject, Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelRichDTO mappingObject);
-        
-        void MapRegularJobRevisionFilterModel(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelRichDTO mappingObject, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject);
-        
-        void MapRegularJobRevisionFilterModel(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelStrictDTO mappingObject, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject);
-        
-        void MapRegularJobRevisionModel(Framework.Configuration.Domain.RegularJobRevisionModel domainObject, Framework.Configuration.Generated.DTO.RegularJobRevisionModelSimpleDTO mappingObject);
-        
-        void MapRegularJobRevisionModel(Framework.Configuration.Generated.DTO.RegularJobRevisionModelSimpleDTO mappingObject, Framework.Configuration.Domain.RegularJobRevisionModel domainObject);
-        
-        void MapRegularJobRevisionModel(Framework.Configuration.Domain.RegularJobRevisionModel domainObject, Framework.Configuration.Generated.DTO.RegularJobRevisionModelFullDTO mappingObject);
-        
-        void MapRegularJobRevisionModel(Framework.Configuration.Generated.DTO.RegularJobRevisionModelFullDTO mappingObject, Framework.Configuration.Domain.RegularJobRevisionModel domainObject);
-        
-        void MapRegularJobRevisionModel(Framework.Configuration.Domain.RegularJobRevisionModel domainObject, Framework.Configuration.Generated.DTO.RegularJobRevisionModelRichDTO mappingObject);
-        
-        void MapRegularJobRevisionModel(Framework.Configuration.Generated.DTO.RegularJobRevisionModelRichDTO mappingObject, Framework.Configuration.Domain.RegularJobRevisionModel domainObject);
-        
-        void MapRegularJobRevisionModel(Framework.Configuration.Generated.DTO.RegularJobRevisionModelStrictDTO mappingObject, Framework.Configuration.Domain.RegularJobRevisionModel domainObject);
         
         void MapReport(Framework.Configuration.Domain.Reports.Report domainObject, Framework.Configuration.Generated.DTO.ReportSimpleDTO mappingObject);
         
@@ -24195,20 +22188,6 @@ namespace Framework.Configuration.Generated.DTO
         void MapReportProperty(Framework.Configuration.Generated.DTO.ReportPropertyRichDTO mappingObject, Framework.Configuration.Domain.Reports.ReportProperty domainObject);
         
         void MapReportProperty(Framework.Configuration.Generated.DTO.ReportPropertyStrictDTO mappingObject, Framework.Configuration.Domain.Reports.ReportProperty domainObject);
-        
-        void MapRunRegularJobModel(Framework.Configuration.Domain.RunRegularJobModel domainObject, Framework.Configuration.Generated.DTO.RunRegularJobModelSimpleDTO mappingObject);
-        
-        void MapRunRegularJobModel(Framework.Configuration.Generated.DTO.RunRegularJobModelSimpleDTO mappingObject, Framework.Configuration.Domain.RunRegularJobModel domainObject);
-        
-        void MapRunRegularJobModel(Framework.Configuration.Domain.RunRegularJobModel domainObject, Framework.Configuration.Generated.DTO.RunRegularJobModelFullDTO mappingObject);
-        
-        void MapRunRegularJobModel(Framework.Configuration.Generated.DTO.RunRegularJobModelFullDTO mappingObject, Framework.Configuration.Domain.RunRegularJobModel domainObject);
-        
-        void MapRunRegularJobModel(Framework.Configuration.Domain.RunRegularJobModel domainObject, Framework.Configuration.Generated.DTO.RunRegularJobModelRichDTO mappingObject);
-        
-        void MapRunRegularJobModel(Framework.Configuration.Generated.DTO.RunRegularJobModelRichDTO mappingObject, Framework.Configuration.Domain.RunRegularJobModel domainObject);
-        
-        void MapRunRegularJobModel(Framework.Configuration.Generated.DTO.RunRegularJobModelStrictDTO mappingObject, Framework.Configuration.Domain.RunRegularJobModel domainObject);
         
         void MapSentMessage(Framework.Configuration.Domain.SentMessage domainObject, Framework.Configuration.Generated.DTO.SentMessageSimpleDTO mappingObject);
         
@@ -24590,10 +22569,6 @@ namespace Framework.Configuration.Generated.DTO
         
         Framework.Configuration.Domain.ExceptionMessageRootFilterModel ToExceptionMessageRootFilterModel(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO exceptionMessageRootFilterModelStrictDTO);
         
-        Framework.Configuration.Domain.ExecuteRegularJobResult ToExecuteRegularJobResult(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultRichDTO executeRegularJobResultRichDTO);
-        
-        Framework.Configuration.Domain.ExecuteRegularJobResult ToExecuteRegularJobResult(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultStrictDTO executeRegularJobResultStrictDTO);
-        
         Framework.Configuration.Domain.LogMessage ToLogMessage(Framework.Configuration.Generated.DTO.LogMessageIdentityDTO logMessageIdentityDTO);
         
         Framework.Configuration.Domain.LogMessage ToLogMessage(Framework.Configuration.Generated.DTO.LogMessageSimpleDTO logMessageSimpleDTO);
@@ -24621,26 +22596,6 @@ namespace Framework.Configuration.Generated.DTO
         Framework.Configuration.Domain.QueueProcessingState ToQueueProcessingState(Framework.Configuration.Generated.DTO.QueueProcessingStateRichDTO queueProcessingStateRichDTO);
         
         Framework.Configuration.Domain.QueueProcessingState ToQueueProcessingState(Framework.Configuration.Generated.DTO.QueueProcessingStateStrictDTO queueProcessingStateStrictDTO);
-        
-        Framework.Configuration.Domain.RegularJob ToRegularJob(Framework.Configuration.Generated.DTO.RegularJobIdentityDTO regularJobIdentityDTO);
-        
-        Framework.Configuration.Domain.RegularJob ToRegularJob(Framework.Configuration.Generated.DTO.RegularJobSimpleDTO regularJobSimpleDTO);
-        
-        Framework.Configuration.Domain.RegularJob ToRegularJob(Framework.Configuration.Generated.DTO.RegularJobRichDTO regularJobRichDTO);
-        
-        Framework.Configuration.Domain.RegularJob ToRegularJob(Framework.Configuration.Generated.DTO.RegularJobRichDTO regularJobRichDTO, bool allowCreate);
-        
-        Framework.Configuration.Domain.RegularJob ToRegularJob(Framework.Configuration.Generated.DTO.RegularJobStrictDTO regularJobStrictDTO);
-        
-        Framework.Configuration.Domain.RegularJob ToRegularJob(Framework.Configuration.Generated.DTO.RegularJobStrictDTO regularJobStrictDTO, bool allowCreate);
-        
-        Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel ToRegularJobRevisionFilterModel(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelRichDTO regularJobRevisionFilterModelRichDTO);
-        
-        Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel ToRegularJobRevisionFilterModel(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelStrictDTO regularJobRevisionFilterModelStrictDTO);
-        
-        Framework.Configuration.Domain.RegularJobRevisionModel ToRegularJobRevisionModel(Framework.Configuration.Generated.DTO.RegularJobRevisionModelRichDTO regularJobRevisionModelRichDTO);
-        
-        Framework.Configuration.Domain.RegularJobRevisionModel ToRegularJobRevisionModel(Framework.Configuration.Generated.DTO.RegularJobRevisionModelStrictDTO regularJobRevisionModelStrictDTO);
         
         Framework.Configuration.Domain.Reports.Report ToReport(Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdentityDTO);
         
@@ -24699,10 +22654,6 @@ namespace Framework.Configuration.Generated.DTO
         Framework.Configuration.Domain.Reports.ReportProperty ToReportProperty(Framework.Configuration.Generated.DTO.ReportPropertyStrictDTO reportPropertyStrictDTO);
         
         Framework.Configuration.Domain.Reports.ReportProperty ToReportProperty(Framework.Configuration.Generated.DTO.ReportPropertyStrictDTO reportPropertyStrictDTO, Framework.Configuration.Domain.Reports.Report master);
-        
-        Framework.Configuration.Domain.RunRegularJobModel ToRunRegularJobModel(Framework.Configuration.Generated.DTO.RunRegularJobModelRichDTO runRegularJobModelRichDTO);
-        
-        Framework.Configuration.Domain.RunRegularJobModel ToRunRegularJobModel(Framework.Configuration.Generated.DTO.RunRegularJobModelStrictDTO runRegularJobModelStrictDTO);
         
         Framework.Configuration.Domain.SentMessage ToSentMessage(Framework.Configuration.Generated.DTO.SentMessageIdentityDTO sentMessageIdentityDTO);
         
@@ -25890,38 +23841,6 @@ namespace Framework.Configuration.Generated.DTO
             domainObject.Period = mappingObject.Period;
         }
         
-        public virtual void MapExecuteRegularJobResult(Framework.Configuration.Domain.ExecuteRegularJobResult domainObject, Framework.Configuration.Generated.DTO.ExecuteRegularJobResultSimpleDTO mappingObject)
-        {
-            mappingObject.Description = domainObject.Description;
-            mappingObject.ExecutionTime = domainObject.ExecutionTime;
-            mappingObject.Status = domainObject.Status;
-            mappingObject.Time = domainObject.Time;
-        }
-        
-        public virtual void MapExecuteRegularJobResult(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultSimpleDTO mappingObject, Framework.Configuration.Domain.ExecuteRegularJobResult domainObject)
-        {
-        }
-        
-        public virtual void MapExecuteRegularJobResult(Framework.Configuration.Domain.ExecuteRegularJobResult domainObject, Framework.Configuration.Generated.DTO.ExecuteRegularJobResultFullDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapExecuteRegularJobResult(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultFullDTO mappingObject, Framework.Configuration.Domain.ExecuteRegularJobResult domainObject)
-        {
-        }
-        
-        public virtual void MapExecuteRegularJobResult(Framework.Configuration.Domain.ExecuteRegularJobResult domainObject, Framework.Configuration.Generated.DTO.ExecuteRegularJobResultRichDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapExecuteRegularJobResult(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultRichDTO mappingObject, Framework.Configuration.Domain.ExecuteRegularJobResult domainObject)
-        {
-        }
-        
-        public virtual void MapExecuteRegularJobResult(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultStrictDTO mappingObject, Framework.Configuration.Domain.ExecuteRegularJobResult domainObject)
-        {
-        }
-        
         public virtual void MapLogMessage(Framework.Configuration.Domain.LogMessage domainObject, Framework.Configuration.Generated.DTO.LogMessageSimpleDTO mappingObject)
         {
             mappingObject.Action = domainObject.Action;
@@ -26033,175 +23952,6 @@ namespace Framework.Configuration.Generated.DTO
         {
             domainObject.LastProcessedItemDateTime = mappingObject.LastProcessedItemDateTime;
             domainObject.UnprocessedCount = mappingObject.UnprocessedCount;
-        }
-        
-        public virtual void MapRegularJob(Framework.Configuration.Domain.RegularJob domainObject, Framework.Configuration.Generated.DTO.RegularJobVisualDTO mappingObject)
-        {
-            mappingObject.Name = domainObject.Name;
-        }
-        
-        public virtual void MapRegularJob(Framework.Configuration.Generated.DTO.RegularJobVisualDTO mappingObject, Framework.Configuration.Domain.RegularJob domainObject)
-        {
-            domainObject.Name = mappingObject.Name;
-        }
-        
-        public virtual void MapRegularJob(Framework.Configuration.Domain.RegularJob domainObject, Framework.Configuration.Generated.DTO.RegularJobSimpleDTO mappingObject)
-        {
-            mappingObject.ExpectedNextStartTime = domainObject.ExpectedNextStartTime;
-            mappingObject.Function = domainObject.Function;
-            mappingObject.LastPulseTime = domainObject.LastPulseTime;
-            mappingObject.Name = domainObject.Name;
-            mappingObject.ShedulerTime = domainObject.ShedulerTime;
-            mappingObject.State = domainObject.State;
-            mappingObject.Version = domainObject.Version;
-            mappingObject.WrapUpSession = domainObject.WrapUpSession;
-        }
-        
-        public virtual void MapRegularJob(Framework.Configuration.Generated.DTO.RegularJobSimpleDTO mappingObject, Framework.Configuration.Domain.RegularJob domainObject)
-        {
-            domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
-            domainObject.ExpectedNextStartTime = mappingObject.ExpectedNextStartTime;
-            domainObject.Function = mappingObject.Function;
-            domainObject.Name = mappingObject.Name;
-            domainObject.ShedulerTime = mappingObject.ShedulerTime;
-            domainObject.State = mappingObject.State;
-            domainObject.WrapUpSession = mappingObject.WrapUpSession;
-        }
-        
-        public virtual void MapRegularJob(Framework.Configuration.Domain.RegularJob domainObject, Framework.Configuration.Generated.DTO.RegularJobFullDTO mappingObject)
-        {
-            if (!object.ReferenceEquals(domainObject.ExecutionResult, null))
-            {
-                mappingObject.ExecutionResult = Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.ExecutionResult, this);
-            }
-            else
-            {
-                mappingObject.ExecutionResult = null;
-            }
-        }
-        
-        public virtual void MapRegularJob(Framework.Configuration.Generated.DTO.RegularJobFullDTO mappingObject, Framework.Configuration.Domain.RegularJob domainObject)
-        {
-        }
-        
-        public virtual void MapRegularJob(Framework.Configuration.Domain.RegularJob domainObject, Framework.Configuration.Generated.DTO.RegularJobRichDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapRegularJob(Framework.Configuration.Generated.DTO.RegularJobRichDTO mappingObject, Framework.Configuration.Domain.RegularJob domainObject)
-        {
-        }
-        
-        public virtual void MapRegularJob(Framework.Configuration.Generated.DTO.RegularJobStrictDTO mappingObject, Framework.Configuration.Domain.RegularJob domainObject)
-        {
-            domainObject.Version = this.VersionService.GetVersion(mappingObject.Version, domainObject);
-            domainObject.Active = mappingObject.Active;
-            domainObject.ExpectedNextStartTime = mappingObject.ExpectedNextStartTime;
-            domainObject.Function = mappingObject.Function;
-            domainObject.Name = mappingObject.Name;
-            domainObject.ShedulerTime = mappingObject.ShedulerTime;
-            domainObject.State = mappingObject.State;
-            domainObject.WrapUpSession = mappingObject.WrapUpSession;
-        }
-        
-        public virtual void MapRegularJobRevisionFilterModel(Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject, Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelSimpleDTO mappingObject)
-        {
-            mappingObject.CountingEntities = domainObject.CountingEntities;
-        }
-        
-        public virtual void MapRegularJobRevisionFilterModel(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelSimpleDTO mappingObject, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject)
-        {
-            domainObject.CountingEntities = mappingObject.CountingEntities;
-        }
-        
-        public virtual void MapRegularJobRevisionFilterModel(Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject, Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelFullDTO mappingObject)
-        {
-            if (!object.ReferenceEquals(domainObject.RegularJob, null))
-            {
-                mappingObject.RegularJob = Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.RegularJob, this);
-            }
-            else
-            {
-                mappingObject.RegularJob = null;
-            }
-        }
-        
-        public virtual void MapRegularJobRevisionFilterModel(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelFullDTO mappingObject, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject)
-        {
-            if (!object.Equals(mappingObject.RegularJob, default(Framework.Configuration.Generated.DTO.RegularJobSimpleDTO)))
-            {
-                domainObject.RegularJob = this.ToRegularJob(mappingObject.RegularJob);
-            }
-            else
-            {
-                domainObject.RegularJob = null;
-            }
-        }
-        
-        public virtual void MapRegularJobRevisionFilterModel(Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject, Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelRichDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapRegularJobRevisionFilterModel(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelRichDTO mappingObject, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject)
-        {
-        }
-        
-        public virtual void MapRegularJobRevisionFilterModel(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelStrictDTO mappingObject, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel domainObject)
-        {
-            domainObject.CountingEntities = mappingObject.CountingEntities;
-            if (!object.Equals(mappingObject.RegularJob, default(Framework.Configuration.Generated.DTO.RegularJobIdentityDTO)))
-            {
-                domainObject.RegularJob = this.ToRegularJob(mappingObject.RegularJob);
-            }
-            else
-            {
-                domainObject.RegularJob = null;
-            }
-        }
-        
-        public virtual void MapRegularJobRevisionModel(Framework.Configuration.Domain.RegularJobRevisionModel domainObject, Framework.Configuration.Generated.DTO.RegularJobRevisionModelSimpleDTO mappingObject)
-        {
-            mappingObject.RevisionNumber = domainObject.RevisionNumber;
-        }
-        
-        public virtual void MapRegularJobRevisionModel(Framework.Configuration.Generated.DTO.RegularJobRevisionModelSimpleDTO mappingObject, Framework.Configuration.Domain.RegularJobRevisionModel domainObject)
-        {
-        }
-        
-        public virtual void MapRegularJobRevisionModel(Framework.Configuration.Domain.RegularJobRevisionModel domainObject, Framework.Configuration.Generated.DTO.RegularJobRevisionModelFullDTO mappingObject)
-        {
-            if (!object.ReferenceEquals(domainObject.ExecutionResult, null))
-            {
-                mappingObject.ExecutionResult = Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.ExecutionResult, this);
-            }
-            else
-            {
-                mappingObject.ExecutionResult = null;
-            }
-            if (!object.ReferenceEquals(domainObject.ExtendedObject, null))
-            {
-                mappingObject.ExtendedObject = Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.ExtendedObject, this);
-            }
-            else
-            {
-                mappingObject.ExtendedObject = null;
-            }
-        }
-        
-        public virtual void MapRegularJobRevisionModel(Framework.Configuration.Generated.DTO.RegularJobRevisionModelFullDTO mappingObject, Framework.Configuration.Domain.RegularJobRevisionModel domainObject)
-        {
-        }
-        
-        public virtual void MapRegularJobRevisionModel(Framework.Configuration.Domain.RegularJobRevisionModel domainObject, Framework.Configuration.Generated.DTO.RegularJobRevisionModelRichDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapRegularJobRevisionModel(Framework.Configuration.Generated.DTO.RegularJobRevisionModelRichDTO mappingObject, Framework.Configuration.Domain.RegularJobRevisionModel domainObject)
-        {
-        }
-        
-        public virtual void MapRegularJobRevisionModel(Framework.Configuration.Generated.DTO.RegularJobRevisionModelStrictDTO mappingObject, Framework.Configuration.Domain.RegularJobRevisionModel domainObject)
-        {
         }
         
         public virtual void MapReport(Framework.Configuration.Domain.Reports.Report domainObject, Framework.Configuration.Generated.DTO.ReportSimpleDTO mappingObject)
@@ -26681,64 +24431,6 @@ namespace Framework.Configuration.Generated.DTO
             domainObject.PropertyPath = mappingObject.PropertyPath;
             domainObject.SortOrdered = mappingObject.SortOrdered;
             domainObject.SortType = mappingObject.SortType;
-        }
-        
-        public virtual void MapRunRegularJobModel(Framework.Configuration.Domain.RunRegularJobModel domainObject, Framework.Configuration.Generated.DTO.RunRegularJobModelSimpleDTO mappingObject)
-        {
-            mappingObject.InstanceServerName = domainObject.InstanceServerName;
-            mappingObject.Mode = domainObject.Mode;
-        }
-        
-        public virtual void MapRunRegularJobModel(Framework.Configuration.Generated.DTO.RunRegularJobModelSimpleDTO mappingObject, Framework.Configuration.Domain.RunRegularJobModel domainObject)
-        {
-            domainObject.InstanceServerName = mappingObject.InstanceServerName;
-            domainObject.Mode = mappingObject.Mode;
-        }
-        
-        public virtual void MapRunRegularJobModel(Framework.Configuration.Domain.RunRegularJobModel domainObject, Framework.Configuration.Generated.DTO.RunRegularJobModelFullDTO mappingObject)
-        {
-            if (!object.ReferenceEquals(domainObject.RegularJob, null))
-            {
-                mappingObject.RegularJob = Framework.Configuration.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.RegularJob, this);
-            }
-            else
-            {
-                mappingObject.RegularJob = null;
-            }
-        }
-        
-        public virtual void MapRunRegularJobModel(Framework.Configuration.Generated.DTO.RunRegularJobModelFullDTO mappingObject, Framework.Configuration.Domain.RunRegularJobModel domainObject)
-        {
-            if (!object.Equals(mappingObject.RegularJob, default(Framework.Configuration.Generated.DTO.RegularJobSimpleDTO)))
-            {
-                domainObject.RegularJob = this.ToRegularJob(mappingObject.RegularJob);
-            }
-            else
-            {
-                domainObject.RegularJob = null;
-            }
-        }
-        
-        public virtual void MapRunRegularJobModel(Framework.Configuration.Domain.RunRegularJobModel domainObject, Framework.Configuration.Generated.DTO.RunRegularJobModelRichDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapRunRegularJobModel(Framework.Configuration.Generated.DTO.RunRegularJobModelRichDTO mappingObject, Framework.Configuration.Domain.RunRegularJobModel domainObject)
-        {
-        }
-        
-        public virtual void MapRunRegularJobModel(Framework.Configuration.Generated.DTO.RunRegularJobModelStrictDTO mappingObject, Framework.Configuration.Domain.RunRegularJobModel domainObject)
-        {
-            domainObject.InstanceServerName = mappingObject.InstanceServerName;
-            domainObject.Mode = mappingObject.Mode;
-            if (!object.Equals(mappingObject.RegularJob, default(Framework.Configuration.Generated.DTO.RegularJobIdentityDTO)))
-            {
-                domainObject.RegularJob = this.ToRegularJob(mappingObject.RegularJob);
-            }
-            else
-            {
-                domainObject.RegularJob = null;
-            }
         }
         
         public virtual void MapSentMessage(Framework.Configuration.Domain.SentMessage domainObject, Framework.Configuration.Generated.DTO.SentMessageSimpleDTO mappingObject)
@@ -27879,16 +25571,6 @@ namespace Framework.Configuration.Generated.DTO
             return this.ToDomainObjectBase<Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO, Framework.Configuration.Domain.ExceptionMessageRootFilterModel>(exceptionMessageRootFilterModelStrictDTO);
         }
         
-        public virtual Framework.Configuration.Domain.ExecuteRegularJobResult ToExecuteRegularJobResult(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultRichDTO executeRegularJobResultRichDTO)
-        {
-            return this.ToDomainObjectBase<Framework.Configuration.Generated.DTO.ExecuteRegularJobResultRichDTO, Framework.Configuration.Domain.ExecuteRegularJobResult>(executeRegularJobResultRichDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.ExecuteRegularJobResult ToExecuteRegularJobResult(Framework.Configuration.Generated.DTO.ExecuteRegularJobResultStrictDTO executeRegularJobResultStrictDTO)
-        {
-            return this.ToDomainObjectBase<Framework.Configuration.Generated.DTO.ExecuteRegularJobResultStrictDTO, Framework.Configuration.Domain.ExecuteRegularJobResult>(executeRegularJobResultStrictDTO);
-        }
-        
         public virtual Framework.Configuration.Domain.LogMessage ToLogMessage(Framework.Configuration.Generated.DTO.LogMessageIdentityDTO logMessageIdentityDTO)
         {
             return this.GetById<Framework.Configuration.Domain.LogMessage>(logMessageIdentityDTO.Id);
@@ -27985,70 +25667,6 @@ namespace Framework.Configuration.Generated.DTO
         public virtual Framework.Configuration.Domain.QueueProcessingState ToQueueProcessingState(Framework.Configuration.Generated.DTO.QueueProcessingStateStrictDTO queueProcessingStateStrictDTO)
         {
             return this.ToDomainObjectBase<Framework.Configuration.Generated.DTO.QueueProcessingStateStrictDTO, Framework.Configuration.Domain.QueueProcessingState>(queueProcessingStateStrictDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.RegularJob ToRegularJob(Framework.Configuration.Generated.DTO.RegularJobIdentityDTO regularJobIdentityDTO)
-        {
-            return this.GetById<Framework.Configuration.Domain.RegularJob>(regularJobIdentityDTO.Id);
-        }
-        
-        public virtual Framework.Configuration.Domain.RegularJob ToRegularJob(Framework.Configuration.Generated.DTO.RegularJobSimpleDTO regularJobSimpleDTO)
-        {
-            return this.GetById<Framework.Configuration.Domain.RegularJob>(regularJobSimpleDTO.Id);
-        }
-        
-        public virtual Framework.Configuration.Domain.RegularJob ToRegularJob(Framework.Configuration.Generated.DTO.RegularJobRichDTO regularJobRichDTO)
-        {
-            return this.ToDomainObject<Framework.Configuration.Generated.DTO.RegularJobRichDTO, Framework.Configuration.Domain.RegularJob>(regularJobRichDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.RegularJob ToRegularJob(Framework.Configuration.Generated.DTO.RegularJobRichDTO regularJobRichDTO, bool allowCreate)
-        {
-            if (allowCreate)
-            {
-                return this.ToDomainObject(regularJobRichDTO, () => new Framework.Configuration.Domain.RegularJob());
-            }
-            else
-            {
-                return this.ToRegularJob(regularJobRichDTO);
-            }
-        }
-        
-        public virtual Framework.Configuration.Domain.RegularJob ToRegularJob(Framework.Configuration.Generated.DTO.RegularJobStrictDTO regularJobStrictDTO)
-        {
-            return this.ToDomainObject<Framework.Configuration.Generated.DTO.RegularJobStrictDTO, Framework.Configuration.Domain.RegularJob>(regularJobStrictDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.RegularJob ToRegularJob(Framework.Configuration.Generated.DTO.RegularJobStrictDTO regularJobStrictDTO, bool allowCreate)
-        {
-            if (allowCreate)
-            {
-                return this.ToDomainObject(regularJobStrictDTO, () => new Framework.Configuration.Domain.RegularJob());
-            }
-            else
-            {
-                return this.ToRegularJob(regularJobStrictDTO);
-            }
-        }
-        
-        public virtual Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel ToRegularJobRevisionFilterModel(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelRichDTO regularJobRevisionFilterModelRichDTO)
-        {
-            return this.ToDomainObjectBase<Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelRichDTO, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel>(regularJobRevisionFilterModelRichDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel ToRegularJobRevisionFilterModel(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelStrictDTO regularJobRevisionFilterModelStrictDTO)
-        {
-            return this.ToDomainObjectBase<Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelStrictDTO, Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel>(regularJobRevisionFilterModelStrictDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.RegularJobRevisionModel ToRegularJobRevisionModel(Framework.Configuration.Generated.DTO.RegularJobRevisionModelRichDTO regularJobRevisionModelRichDTO)
-        {
-            return this.ToDomainObjectBase<Framework.Configuration.Generated.DTO.RegularJobRevisionModelRichDTO, Framework.Configuration.Domain.RegularJobRevisionModel>(regularJobRevisionModelRichDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.RegularJobRevisionModel ToRegularJobRevisionModel(Framework.Configuration.Generated.DTO.RegularJobRevisionModelStrictDTO regularJobRevisionModelStrictDTO)
-        {
-            return this.ToDomainObjectBase<Framework.Configuration.Generated.DTO.RegularJobRevisionModelStrictDTO, Framework.Configuration.Domain.RegularJobRevisionModel>(regularJobRevisionModelStrictDTO);
         }
         
         public virtual Framework.Configuration.Domain.Reports.Report ToReport(Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdentityDTO)
@@ -28223,16 +25841,6 @@ namespace Framework.Configuration.Generated.DTO
         public virtual Framework.Configuration.Domain.Reports.ReportProperty ToReportProperty(Framework.Configuration.Generated.DTO.ReportPropertyStrictDTO reportPropertyStrictDTO, Framework.Configuration.Domain.Reports.Report report)
         {
             return this.ToDomainObject(reportPropertyStrictDTO, () => new Framework.Configuration.Domain.Reports.ReportProperty(report));
-        }
-        
-        public virtual Framework.Configuration.Domain.RunRegularJobModel ToRunRegularJobModel(Framework.Configuration.Generated.DTO.RunRegularJobModelRichDTO runRegularJobModelRichDTO)
-        {
-            return this.ToDomainObjectBase<Framework.Configuration.Generated.DTO.RunRegularJobModelRichDTO, Framework.Configuration.Domain.RunRegularJobModel>(runRegularJobModelRichDTO);
-        }
-        
-        public virtual Framework.Configuration.Domain.RunRegularJobModel ToRunRegularJobModel(Framework.Configuration.Generated.DTO.RunRegularJobModelStrictDTO runRegularJobModelStrictDTO)
-        {
-            return this.ToDomainObjectBase<Framework.Configuration.Generated.DTO.RunRegularJobModelStrictDTO, Framework.Configuration.Domain.RunRegularJobModel>(runRegularJobModelStrictDTO);
         }
         
         public virtual Framework.Configuration.Domain.SentMessage ToSentMessage(Framework.Configuration.Generated.DTO.SentMessageIdentityDTO sentMessageIdentityDTO)

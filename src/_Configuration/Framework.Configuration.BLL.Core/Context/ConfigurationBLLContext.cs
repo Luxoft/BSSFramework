@@ -66,7 +66,6 @@ namespace Framework.Configuration.BLL
             IAuthorizationBLLContext authorizationBLLContext,
             Func<BLLSecurityMode, IBLLSimpleQueryBase<IEmployee>> getEmployeeSourceFunc,
             IEnumerable<ITargetSystemService> targetSystemServices,
-            IMessageSender<RunRegularJobModel> regularJobMessageSender,
             [NotNull] ISerializerFactory<string> systemConstantSerializerFactory,
             [NotNull] IContextEvaluator<IConfigurationBLLContext> rootContextEvaluator,
             [NotNull] object serviceEnvironmentSource,
@@ -91,8 +90,6 @@ namespace Framework.Configuration.BLL
             this.ExceptionService = exceptionService ?? throw new ArgumentNullException(nameof(exceptionService));
 
             this.lazyTargetSystemServiceCache = LazyHelper.Create(() => targetSystemServices.ToDictionary(s => s.TargetSystem));
-
-            this.RegularJobMessageSender = regularJobMessageSender ?? MessageSender<RunRegularJobModel>.NotImplemented;
 
             this.domainTypeCache = new DictionaryCache<Type, DomainType>(type =>
 
@@ -131,8 +128,6 @@ namespace Framework.Configuration.BLL
         public ITypeResolver<string> TypeResolver => CurrentTargetSystemTypeResolver;
 
         public ITypeResolver<DomainType> ComplexDomainTypeResolver { get; }
-
-        public IMessageSender<RunRegularJobModel> RegularJobMessageSender { get; }
 
         public override IConfigurationBLLFactoryContainer Logics => this.lazyLogics.Value;
 

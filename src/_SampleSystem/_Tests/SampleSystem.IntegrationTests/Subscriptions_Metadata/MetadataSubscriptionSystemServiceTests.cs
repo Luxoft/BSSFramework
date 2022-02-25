@@ -214,22 +214,6 @@ namespace SampleSystem.IntegrationTests.Subscriptions_Metadata
 
         [TestMethod]
         [Ignore]
-        public void RunRegularJobCreateModelSubscriptionTest()
-        {
-            // Arrange
-
-            // Act
-            this.DataHelper.ProcessChangedObjectUntyped(typeof(RunRegularJobModel), null, new RunRegularJobModel());
-
-            var expectedNotifications = this.GetNotifications()
-                                            .Where(n => n.From == "RunRegularJobModelCreateSampleSystem@luxoft.com");
-
-            // Assert
-            expectedNotifications.Should().HaveCount(1);
-        }
-
-        [TestMethod]
-        [Ignore]
         public void PrincipalCreateModelSubscriptionTest()
         {
             // Arrange

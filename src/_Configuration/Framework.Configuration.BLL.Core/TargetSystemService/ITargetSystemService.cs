@@ -23,12 +23,6 @@ namespace Framework.Configuration.BLL
         ITypeResolver<string> TypeResolverS { get; }
 
         bool IsAssignable(Type domainType);
-
-//        void ExecuteRegularJob(RegularJob job);
-
-        void ExecuteBLLContextLambda(ILambdaObject lambdaObject);
-
-        void ValidateRegularJob(RegularJob job);
     }
 
     public interface ITargetSystemService<out TBLLContext> : ITargetSystemService

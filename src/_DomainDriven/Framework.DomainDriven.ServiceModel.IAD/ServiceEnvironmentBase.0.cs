@@ -64,7 +64,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             [NotNull] IDBSessionFactory sessionFactory,
             [NotNull] INotificationContext notificationContext,
             [NotNull] IUserAuthenticationService userAuthenticationService,
-            IMessageSender<Framework.Configuration.Domain.RunRegularJobModel> regularJobSender = null,
             ISubscriptionMetadataFinder subscriptionsMetadataFinder = null)
         {
             this.RootServiceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
@@ -102,9 +101,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     .ToBLLContextValidationExtendedData<Framework.Workflow.BLL.IWorkflowBLLContext, Framework.Workflow.Domain.PersistentDomainObjectBase, Guid>()
                     .Pipe(extendedValidationData => new WorkflowValidationMap(extendedValidationData))
                     .ToCompileCache();
-
-            this.RegularJobMessageSender = regularJobSender ?? MessageSender<Framework.Configuration.Domain.RunRegularJobModel>.NotImplemented;
-
+            
             this.authorizationFetchService = new AuthorizationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Authorization.Domain.PersistentDomainObjectBase>.OData);
 
             this.workflowFetchService = new WorkflowMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Workflow.Domain.PersistentDomainObjectBase>.OData);
@@ -151,8 +148,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             get { return NativeDotVisualizer.Configuration.OverrideInput((DotGraph graph) => graph.ToString()); }
         }
 
-        public IMessageSender<Framework.Configuration.Domain.RunRegularJobModel> RegularJobMessageSender { get; }
-
         public virtual bool IsDebugMode => Debugger.IsAttached;
 
         /// <summary>
@@ -161,7 +156,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         public bool IsInitialize { get; private set; }
 
         public IObjectStorage ObjectStorage { get; private set; }
-        
+
         /// <summary>
         /// Получает хранилище описаний подписок.
         /// </summary>
@@ -410,7 +405,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     this.Authorization,
                     this.GetEmployeeSource,
                     this.targetSystems,
-                    this.ServiceEnvironment.RegularJobMessageSender,
                     this.SystemConstantSerializerFactory,
                     new RootContextEvaluator<IConfigurationBLLContext>(this.ServiceEnvironment, this.ServiceEnvironment.RootServiceProvider),
                     this.ServiceEnvironment,

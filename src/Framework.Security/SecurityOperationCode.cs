@@ -65,32 +65,6 @@
 
         #endregion
 
-        #region MessageTemplate
-
-        [SecurityOperation("Open MessageTemplate Module", false, "A7F32FF3-F514-4C65-AEB2-DF07A4773DBB", "MessageTemplate", DomainType = "MessageTemplate", IsClient = true)]
-        MessageTemplateOpenModule,
-
-        [SecurityOperation("View MessageTemplate", false, "32389C1C-0BEF-47AE-9C77-E06CA16E3649", "Can view MessageTemplate", DomainType = "MessageTemplate")]
-        MessageTemplateView,
-
-        [SecurityOperation("Edit MessageTemplate", false, "8FCC9513-EABF-404B-A435-CCCFEFDCB3F4", "Can edit MessageTemplate", DomainType = "MessageTemplate")]
-        MessageTemplateEdit,
-
-        #endregion
-
-        #region ExceptionTemplate
-
-        [SecurityOperation("Open ExceptionTemplate Module", false, "{AC71795B-871A-484A-90BC-58641BB28F9F}", "Can open ExceptionTemplate module", DomainType = "ExceptionTemplate", IsClient = true)]
-        ExceptionTemplateOpenModule,
-
-        [SecurityOperation("View ExceptionTemplate", false, "{A98C3C63-520C-4694-84F4-56C66D0F61DE}", "Can view ExceptionTemplate", DomainType = "ExceptionTemplate")]
-        ExceptionTemplateView,
-
-        [SecurityOperation("Edit ExceptionTemplate", false, "{74FA95AB-AA44-46C2-BE81-F9435A40FAA1}", "Can edit ExceptionTemplate", DomainType = "ExceptionTemplate")]
-        ExceptionTemplateEdit,
-
-        #endregion
-
         #region Subscription
 
         [SecurityOperation("Open Subscription Module", false, "{4065A2DF-AE7E-4DDB-AB94-7825DAA9D30A}", DomainType = "Subscription", IsClient = true)]
@@ -101,28 +75,6 @@
 
         [SecurityOperation("SubscriptionEdit", false, "3C209F89-023F-44E5-B30C-CF0A20647CD6", "Subscriptions", DomainType = "Subscription")]
         SubscriptionEdit,
-
-        [SecurityOperation("SubscriptionTest", false, "{9A3FE9E8-642F-4FFD-BABF-A82771AFB397}", "Subscriptions", DomainType = "Subscription")]
-        SubscriptionTest,
-
-        #endregion
-
-        #region RegularJob
-
-        [SecurityOperation("Open RegularJob Module", false, "B4169486-700B-4273-B558-542BE0EF987E", DomainType = "RegularJob", IsClient = true)]
-        RegularJobModuleOpenModule,
-
-        [SecurityOperation("RegularJobView", false, "AB46D7C9-22E3-4055-AEB3-9D7E6ADE6028", "RegularJob", DomainType = "RegularJob")]
-        RegularJobView,
-
-        [SecurityOperation("RegularJobEdit", false, "85AA19B0-3428-40FA-B01F-0441D74A7F17", "RegularJob", DomainType = "RegularJob")]
-        RegularJobEdit,
-
-        /// <summary>
-        /// Форсирование запуска RegularJob-а
-        /// </summary>
-        [SecurityOperation("RegularJob", false, "{874BB5AF-262B-4399-A971-FDD423292383}", "Force Run RegularJob", DomainType = "RegularJob")]
-        RegularJobForce,
 
         #endregion
 

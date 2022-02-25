@@ -200,27 +200,6 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class RegularJobBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.RegularJob, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IRegularJobBLL
-    {
-        
-		partial void Initialize();
-        
-        public RegularJobBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.RegularJob> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityProvider, specificationEvaluator)
-        {
-            this.Initialize();
-        }
-    }
-    
-    public partial class RegularJobBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.IRegularJobBLL, Framework.Configuration.BLL.RegularJobBLL, Framework.Configuration.Domain.RegularJob, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.IRegularJobBLLFactory
-    {
-        
-        public RegularJobBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
     public partial class ReportBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.Reports.Report, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IReportBLL
     {
         
@@ -434,8 +413,6 @@ namespace Framework.Configuration.BLL
         private Framework.Configuration.BLL.ConfigurationImplementedBLLFactory implementedBLLFactory;
         
         private Framework.Configuration.BLL.INamedLockBLL namedLockBLL;
-        
-        private Framework.Configuration.BLL.IRegularJobBLL regularJobBLL;
         
         private Framework.Configuration.BLL.IReportBLL reportBLL;
         
@@ -664,26 +641,6 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        public Framework.Configuration.BLL.IRegularJobBLL RegularJob
-        {
-            get
-            {
-                if (object.ReferenceEquals(this.regularJobBLL, null))
-                {
-                    this.regularJobBLL = this.RegularJobFactory.Create();
-                }
-                return this.regularJobBLL;
-            }
-        }
-        
-        public Framework.Configuration.BLL.IRegularJobBLLFactory RegularJobFactory
-        {
-            get
-            {
-                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Framework.Configuration.BLL.IRegularJobBLLFactory>(this.Context.ServiceProvider);
-            }
-        }
-        
         public Framework.Configuration.BLL.IReportBLL Report
         {
             get
@@ -875,7 +832,6 @@ namespace Framework.Configuration.BLL
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IDomainTypeBLLFactory, Framework.Configuration.BLL.DomainTypeBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IExceptionMessageBLLFactory, Framework.Configuration.BLL.ExceptionMessageBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.INamedLockBLLFactory, Framework.Configuration.BLL.NamedLockBLLFactory>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IRegularJobBLLFactory, Framework.Configuration.BLL.RegularJobBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IReportBLLFactory, Framework.Configuration.BLL.ReportBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IReportFilterBLLFactory, Framework.Configuration.BLL.ReportFilterBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IReportParameterBLLFactory, Framework.Configuration.BLL.ReportParameterBLLFactory>(serviceCollection);
@@ -947,10 +903,6 @@ namespace Framework.Configuration.BLL
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.NamedLock)))
             {
                 return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.NamedLock));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.RegularJob)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.RegularJob));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.Report)))
             {
@@ -1032,10 +984,6 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.NamedLockFactory.Create()));
             }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.RegularJob)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.RegularJobFactory.Create(((Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.RegularJob>)(securityProvider)))));
-            }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.Report)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ReportFactory.Create(((Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Reports.Report>)(securityProvider)))));
@@ -1116,10 +1064,6 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.NamedLockFactory.Create()));
             }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.RegularJob)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.RegularJobFactory.Create(securityOperation)));
-            }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.Report)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ReportFactory.Create(securityOperation)));
@@ -1199,10 +1143,6 @@ namespace Framework.Configuration.BLL
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.NamedLock)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.NamedLockFactory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.RegularJob)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.RegularJobFactory.Create(bllSecurityMode)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.Report)))
             {

@@ -22,9 +22,8 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             IDBSessionFactory sessionFactory,
             INotificationContext notificationContext,
             IUserAuthenticationService userAuthenticationService,
-            IMessageSender<RunRegularJobModel> regularJobSender = null,
             ISubscriptionMetadataFinder subscriptionsMetadataFinder = null)
-            : base(serviceProvider, sessionFactory, notificationContext, userAuthenticationService, regularJobSender, subscriptionsMetadataFinder)
+            : base(serviceProvider, sessionFactory, notificationContext, userAuthenticationService, subscriptionsMetadataFinder)
         {
             this.ServiceProvider = serviceProvider;
         }

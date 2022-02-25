@@ -34,8 +34,6 @@ namespace Framework.Configuration.BLL
     {
         IMessageSender<MessageTemplateNotification> SubscriptionSender { get; }
 
-        IMessageSender<RunRegularJobModel> RegularJobMessageSender { get; }
-
         bool SubscriptionEnabled { get; }
 
         ISerializerFactory<string> SystemConstantSerializerFactory { get; }

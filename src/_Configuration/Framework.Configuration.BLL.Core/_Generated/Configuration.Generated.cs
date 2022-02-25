@@ -24,19 +24,9 @@ namespace Framework.Configuration.BLL
         
         private static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> _forceDomainTypeEvent = new Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode>(Framework.Configuration.ConfigurationSecurityOperationCode.ForceDomainTypeEvent);
         
-        private static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> _messageTemplateEdit = new Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode>(Framework.Configuration.ConfigurationSecurityOperationCode.MessageTemplateEdit);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> _messageTemplateView = new Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode>(Framework.Configuration.ConfigurationSecurityOperationCode.MessageTemplateView);
-        
         private static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> _processModifications = new Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode>(Framework.Configuration.ConfigurationSecurityOperationCode.ProcessModifications);
         
         private static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> _queueMonitoring = new Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode>(Framework.Configuration.ConfigurationSecurityOperationCode.QueueMonitoring);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> _regularJobEdit = new Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode>(Framework.Configuration.ConfigurationSecurityOperationCode.RegularJobEdit);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> _regularJobForce = new Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode>(Framework.Configuration.ConfigurationSecurityOperationCode.RegularJobForce);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> _regularJobView = new Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode>(Framework.Configuration.ConfigurationSecurityOperationCode.RegularJobView);
         
         private static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> _reportEdit = new Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode>(Framework.Configuration.ConfigurationSecurityOperationCode.ReportEdit);
         
@@ -49,8 +39,6 @@ namespace Framework.Configuration.BLL
         private static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> _sequenceView = new Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode>(Framework.Configuration.ConfigurationSecurityOperationCode.SequenceView);
         
         private static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> _subscriptionEdit = new Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode>(Framework.Configuration.ConfigurationSecurityOperationCode.SubscriptionEdit);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> _subscriptionTest = new Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode>(Framework.Configuration.ConfigurationSecurityOperationCode.SubscriptionTest);
         
         private static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> _subscriptionView = new Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode>(Framework.Configuration.ConfigurationSecurityOperationCode.SubscriptionView);
         
@@ -98,22 +86,6 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        public static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> MessageTemplateEdit
-        {
-            get
-            {
-                return _messageTemplateEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> MessageTemplateView
-        {
-            get
-            {
-                return _messageTemplateView;
-            }
-        }
-        
         public static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> ProcessModifications
         {
             get
@@ -127,30 +99,6 @@ namespace Framework.Configuration.BLL
             get
             {
                 return _queueMonitoring;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> RegularJobEdit
-        {
-            get
-            {
-                return _regularJobEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> RegularJobForce
-        {
-            get
-            {
-                return _regularJobForce;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> RegularJobView
-        {
-            get
-            {
-                return _regularJobView;
             }
         }
         
@@ -199,14 +147,6 @@ namespace Framework.Configuration.BLL
             get
             {
                 return _subscriptionEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> SubscriptionTest
-        {
-            get
-            {
-                return _subscriptionTest;
             }
         }
         
@@ -276,14 +216,6 @@ namespace Framework.Configuration.BLL
             {
                 return Framework.Configuration.BLL.ConfigurationSecurityOperation.ExceptionMessageView;
             }
-            else if ((code == Framework.Configuration.ConfigurationSecurityOperationCode.MessageTemplateView))
-            {
-                return Framework.Configuration.BLL.ConfigurationSecurityOperation.MessageTemplateView;
-            }
-            else if ((code == Framework.Configuration.ConfigurationSecurityOperationCode.MessageTemplateEdit))
-            {
-                return Framework.Configuration.BLL.ConfigurationSecurityOperation.MessageTemplateEdit;
-            }
             else if ((code == Framework.Configuration.ConfigurationSecurityOperationCode.SubscriptionView))
             {
                 return Framework.Configuration.BLL.ConfigurationSecurityOperation.SubscriptionView;
@@ -291,22 +223,6 @@ namespace Framework.Configuration.BLL
             else if ((code == Framework.Configuration.ConfigurationSecurityOperationCode.SubscriptionEdit))
             {
                 return Framework.Configuration.BLL.ConfigurationSecurityOperation.SubscriptionEdit;
-            }
-            else if ((code == Framework.Configuration.ConfigurationSecurityOperationCode.SubscriptionTest))
-            {
-                return Framework.Configuration.BLL.ConfigurationSecurityOperation.SubscriptionTest;
-            }
-            else if ((code == Framework.Configuration.ConfigurationSecurityOperationCode.RegularJobView))
-            {
-                return Framework.Configuration.BLL.ConfigurationSecurityOperation.RegularJobView;
-            }
-            else if ((code == Framework.Configuration.ConfigurationSecurityOperationCode.RegularJobEdit))
-            {
-                return Framework.Configuration.BLL.ConfigurationSecurityOperation.RegularJobEdit;
-            }
-            else if ((code == Framework.Configuration.ConfigurationSecurityOperationCode.RegularJobForce))
-            {
-                return Framework.Configuration.BLL.ConfigurationSecurityOperation.RegularJobForce;
             }
             else if ((code == Framework.Configuration.ConfigurationSecurityOperationCode.SystemConstantView))
             {
@@ -405,14 +321,6 @@ namespace Framework.Configuration.BLL
             else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(Framework.Configuration.Domain.ExceptionMessage) == domainType))
             {
                 return Framework.Configuration.ConfigurationSecurityOperationCode.ExceptionMessageView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(Framework.Configuration.Domain.RegularJob) == domainType))
-            {
-                return Framework.Configuration.ConfigurationSecurityOperationCode.RegularJobView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(Framework.Configuration.Domain.RegularJob) == domainType))
-            {
-                return Framework.Configuration.ConfigurationSecurityOperationCode.RegularJobEdit;
             }
             else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(Framework.Configuration.Domain.Reports.Report) == domainType))
             {
@@ -614,7 +522,6 @@ namespace Framework.Configuration.BLL
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.CodeFirstSubscription, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationCodeFirstSubscriptionSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.DomainType, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationDomainTypeSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.ExceptionMessage, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationExceptionMessageSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.RegularJob, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationRegularJobSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Reports.Report, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationReportSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Reports.ReportFilter, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationReportFilterSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Reports.ReportParameter, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationReportParameterSecurityService>(serviceCollection);
@@ -675,15 +582,6 @@ namespace Framework.Configuration.BLL
     {
         
         public ConfigurationExceptionMessageSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class ConfigurationRegularJobSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.RegularJob, System.Guid, Framework.Configuration.ConfigurationSecurityOperationCode>
-    {
-        
-        public ConfigurationRegularJobSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -863,16 +761,6 @@ namespace Framework.Configuration.BLL
             get;
         }
         
-        Framework.Configuration.BLL.IRegularJobBLL RegularJob
-        {
-            get;
-        }
-        
-        Framework.Configuration.BLL.IRegularJobBLLFactory RegularJobFactory
-        {
-            get;
-        }
-        
         Framework.Configuration.BLL.IReportBLL Report
         {
             get;
@@ -1033,14 +921,6 @@ namespace Framework.Configuration.BLL
     }
     
     public partial interface INamedLockBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.INamedLockBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.NamedLock>>
-    {
-    }
-    
-    public partial interface IRegularJobBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.RegularJob, System.Guid>
-    {
-    }
-    
-    public partial interface IRegularJobBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IRegularJobBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.RegularJob>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IRegularJobBLL, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IRegularJobBLL, Framework.SecuritySystem.SecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IRegularJobBLL, Framework.SecuritySystem.BLLSecurityMode>
     {
     }
     

@@ -8,9 +8,6 @@ namespace Framework.Configuration.Domain
     /// </summary>
     public enum NamedLockOperation
     {
-        [GlobalLock(typeof(RegularJob))]
-        RegularJobLock,
-
         [GlobalLock(typeof(DomainType))]
         UpdateDomainTypeLock,
 

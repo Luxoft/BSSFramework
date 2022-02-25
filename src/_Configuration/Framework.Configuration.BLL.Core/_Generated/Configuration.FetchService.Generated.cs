@@ -248,10 +248,6 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetNamedLockContainer(rule)));
             }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.RegularJob)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetRegularJobContainer(rule)));
-            }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetAccessableBusinessRoleReportRightContainer(rule)));
@@ -574,30 +570,6 @@ namespace Framework.Configuration.BLL
             else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
             {
                 return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.NamedLock>.Empty;
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.RegularJob> GetRegularJobContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.RegularJob>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.RegularJob>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.RegularJob>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.RegularJob>.Empty;
             }
             else
             {

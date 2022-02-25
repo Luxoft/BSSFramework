@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 
-using Framework.DomainDriven.Attributes;
 using Framework.Persistent;
 using Framework.Restriction;
 
@@ -11,7 +11,6 @@ namespace Framework.Configuration.Domain
     /// <summary>
     /// Элемент типизированного контекста
     /// </summary>
-    [NotAuditedClass]
     public class SubscriptionSecurityItem : IIdentityObject<Guid>
     {
         private NotificationExpandType expandType;
@@ -25,10 +24,10 @@ namespace Framework.Configuration.Domain
         public SubscriptionSecurityItem([NotNull] Subscription subscription)
         {
             this.Subscription = subscription ?? throw new ArgumentNullException(nameof(subscription));
-            this.Subscription.SecurityItems.Add(this);
+            ((ICollection<SubscriptionSecurityItem>)this.Subscription.SecurityItems).Add(this);
         }
 
-        public virtual Subscription Subscription { get; }
+        public virtual Subscription Subscription { get; set; }
 
         /// <summary>
         /// Лямбла, получающая типизированный контекст для ролей подписки

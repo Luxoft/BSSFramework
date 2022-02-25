@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Framework.Persistent;
 
@@ -18,10 +19,10 @@ namespace Framework.Configuration.Domain
         public SubBusinessRole(Subscription subscription)
         {
             this.Subscription = subscription ?? throw new ArgumentNullException(nameof(subscription));
-            this.Subscription.SubBusinessRoles.Add(this);
+            ((ICollection<SubBusinessRole>)this.Subscription.SubBusinessRoles).Add(this);
         }
 
-        public virtual Subscription Subscription { get; }
+        public virtual Subscription Subscription { get; set; }
 
         /// <summary>
         /// ID бизнес-роли

@@ -77,12 +77,12 @@ namespace Framework.Configuration.Domain
         /// <summary>
         /// Коллекция дочерних ролей
         /// </summary>
-        public List<SubBusinessRole> SubBusinessRoles { get; set; } = new ();
+        public virtual IEnumerable<SubBusinessRole> SubBusinessRoles { get; set; } = new List<SubBusinessRole> ();
 
         /// <summary>
         /// Коллекция элементов секьюрного контекста
         /// </summary>
-        public List<SubscriptionSecurityItem> SecurityItems { get; set; } = new ();
+        public virtual IEnumerable<SubscriptionSecurityItem> SecurityItems { get; set; } = new List<SubscriptionSecurityItem>();
 
         /// <summary>
         /// Условие подписки

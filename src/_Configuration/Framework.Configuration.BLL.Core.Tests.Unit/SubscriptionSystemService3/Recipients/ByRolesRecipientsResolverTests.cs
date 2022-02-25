@@ -27,12 +27,18 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
     public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
     {
         private SecurityItemSourceLambdaProcessor<ITestBLLContext> securityItemSourceLambdaProcessor;
+        private DynamicSourceLambdaProcessor<ITestBLLContext> dynamicSourceLambdaProcessor;
         private ConfigurationContextFacade configurationContextFacade;
 
         [SetUp]
         public void SetUp()
         {
+            //var subscriptionDynamicSourceLegacyLambdaProcessorMock = this.Fixture.RegisterStub<>()
+
+            //this.parserFactory.GetBySubscriptionDynamicSourceLegacy<string>().Returns(new SubscriptionDynamicSourceLegacyLambdaProcessor<string>())
+
             this.securityItemSourceLambdaProcessor = this.Fixture.RegisterStub<SecurityItemSourceLambdaProcessor<ITestBLLContext>>();
+            this.dynamicSourceLambdaProcessor = this.Fixture.RegisterStub<DynamicSourceLambdaProcessor<ITestBLLContext>>();
             this.configurationContextFacade = this.Fixture.RegisterStub<ConfigurationContextFacade>();
 
             var lambdaProcessorFactory = this.Fixture.RegisterStub<LambdaProcessorFactory<ITestBLLContext>>();
@@ -40,6 +46,10 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
             lambdaProcessorFactory
                 .Create<SecurityItemSourceLambdaProcessor<ITestBLLContext>>()
                 .Returns(this.securityItemSourceLambdaProcessor);
+
+            lambdaProcessorFactory
+                .Create<DynamicSourceLambdaProcessor<ITestBLLContext>>()
+                .Returns(this.dynamicSourceLambdaProcessor);
         }
 
         [Test]
@@ -64,7 +74,11 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
                 .Build<Subscription>()
                 .With(s => s.DynamicSource, new SubscriptionLambda())
                 .With(s => s.DynamicSourceExpandType, NotificationExpandType.All)
+                .With(s => s.SecurityItems, new List<SubscriptionSecurityItem>())
+                .With(s => s.SubBusinessRoles, new List<SubBusinessRole>())
                 .Create();
+
+            ((List<SubscriptionSecurityItem>)subscription.SecurityItems).Add(new SubscriptionSecurityItem(subscription));
 
             // Act
             var resolver = this.Fixture.Create<ByRolesRecipientsResolver<ITestBLLContext>>();
@@ -84,6 +98,7 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
             var versions = this.Fixture.Create<DomainObjectVersions<string>>();
             var fid = new FilterItemIdentity("name", Guid.NewGuid());
             var entityType = this.Fixture.Create<EntityType>();
+            var securityType = typeof(object);
 
             var principals = new[] { this.Fixture.Create<Principal>() };
             var employees = new RecipientCollection(new[] { this.Fixture.Create<Recipient>() });
@@ -92,6 +107,8 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
                 .Build<Subscription>()
                 .With(s => s.DynamicSource, new SubscriptionLambda())
                 .With(s => s.DynamicSourceExpandType, NotificationExpandType.All)
+                .With(s => s.SecurityItems, new List<SubscriptionSecurityItem>())
+                .With(s => s.SubBusinessRoles, new List<SubBusinessRole>())
                 .Create();
 
             ((List<SubBusinessRole>)subscription.SubBusinessRoles).Add(businessRole);
@@ -102,9 +119,17 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
                     Arg.Is<IEnumerable<NotificationFilterGroup>>(v => v != null))
                 .Returns(principals);
 
+            this.dynamicSourceLambdaProcessor
+                .Invoke(subscription, versions)
+                .Returns(new[] { fid });
+
             this.configurationContextFacade
                 .GetEntityType(fid.EntityName.ToLowerInvariant())
                 .Returns(entityType);
+
+            this.configurationContextFacade
+                .GetSecurityType(entityType)
+                .Returns(securityType);
 
             this.configurationContextFacade
                 .ConvertPrincipals(principals)
@@ -135,6 +160,8 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
                 .Build<Subscription>()
                 .With(s => s.DynamicSource, default(SubscriptionLambda))
                 .With(s => s.DynamicSourceExpandType)
+                .With(s => s.SecurityItems, new List<SubscriptionSecurityItem>())
+                .With(s => s.SubBusinessRoles, new List<SubBusinessRole>())
                 .Create();
 
             ((List<SubBusinessRole>)subscription.SubBusinessRoles).Add(businessRole);
@@ -162,12 +189,21 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
             // Arrange
             var versions = this.Fixture.Create<DomainObjectVersions<string>>();
 
+            var subscription = this.Fixture
+                                   .Build<Subscription>()
+                                   .With(s => s.DynamicSource, default(SubscriptionLambda))
+                                   .With(s => s.DynamicSourceExpandType)
+                                   .With(s => s.SecurityItems, new List<SubscriptionSecurityItem>())
+                                   .With(s => s.SubBusinessRoles, new List<SubBusinessRole>())
+                                   .Create();
+
             var securityItem = this.Fixture
                 .Build<SubscriptionSecurityItem>()
-                .With(item => item.Source,  default(SubscriptionLambda))
+                .With(item => item.Source, new SubscriptionLambda() { AuthDomainType = typeof(IdentityObject) })
+                .With(item => item.Subscription, subscription)
                 .Create();
 
-            var businessRole = this.Fixture.Create<SubBusinessRole>();
+            var businessRole = this.Fixture.Build<SubBusinessRole>().With(item => item.Subscription, subscription).Create();
             var buisnessRoleIds = new[] { businessRole.BusinessRoleId };
 
             var identityObject = this.Fixture.Create<IdentityObject>();
@@ -175,11 +211,6 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
             var principals = new[] { this.Fixture.Create<Principal>() };
             var employees = new RecipientCollection(new[] { this.Fixture.Create<Recipient>() });
 
-            var subscription = this.Fixture
-                .Build<Subscription>()
-                .With(s => s.DynamicSource, default(SubscriptionLambda))
-                .With(s => s.DynamicSourceExpandType)
-                .Create();
 
             ((List<SubBusinessRole>)subscription.SubBusinessRoles).Add(businessRole);
             ((List<SubscriptionSecurityItem>)subscription.SecurityItems).Add(securityItem);
@@ -230,10 +261,18 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
                 .Build<Subscription>()
                 .With(s => s.DynamicSource, default(SubscriptionLambda))
                 .With(s => s.DynamicSourceExpandType)
+                .With(s => s.SecurityItems, new List<SubscriptionSecurityItem>())
+                .With(s => s.SubBusinessRoles, new List<SubBusinessRole>())
                 .Create();
 
             ((List<SubBusinessRole>)subscription.SubBusinessRoles).Add(businessRole);
             ((List<SubscriptionSecurityItem>)subscription.SecurityItems).Add(securityItem);
+
+            //this.configurationContextFacade
+            //    .GetSecurityType(securityItem.Id)
+            //    .Returns(default(Type))
+                //.Repeat.Never()
+                ;
 
             this.configurationContextFacade
                 .GetNotificationPrincipals(

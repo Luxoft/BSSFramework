@@ -21,6 +21,7 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions
     /// <seealso cref="SubscriptionResolver" />
     public sealed class SubscriptionMetadataSubscriptionResolver : SubscriptionResolver
     {
+        private readonly SubscriptionResolver wrappedResolver;
         private readonly SubscriptionMetadataStore metadataStore;
         private readonly SubscriptionMetadataMapper metadataMapper;
         private readonly ConfigurationContextFacade configurationContextFacade;
@@ -45,10 +46,16 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions
         ///     равен null.
         /// </exception>
         public SubscriptionMetadataSubscriptionResolver(
+            [NotNull] SubscriptionResolver resolver,
             [NotNull] SubscriptionMetadataStore metadataStore,
             [NotNull] SubscriptionMetadataMapper metadataMapper,
             [NotNull] ConfigurationContextFacade configurationContextFacade)
         {
+            if (resolver == null)
+            {
+                throw new ArgumentNullException(nameof(resolver));
+            }
+
             if (metadataStore == null)
             {
                 throw new ArgumentNullException(nameof(metadataStore));
@@ -63,7 +70,8 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions
             {
                 throw new ArgumentNullException(nameof(configurationContextFacade));
             }
-            
+
+            this.wrappedResolver = resolver;
             this.metadataStore = metadataStore;
             this.metadataMapper = metadataMapper;
             this.configurationContextFacade = configurationContextFacade;
@@ -80,7 +88,8 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions
             }
 
             var thisResult = this.GetSubscriptionsFromMetadata(versions.DomainObjectType);
-            var result = thisResult;
+            var otherResult = this.wrappedResolver.Resolve(versions);
+            var result = thisResult.Concat(otherResult);
 
             return result;
         }
@@ -115,7 +124,8 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions
                 throw new ArgumentNullException(nameof(domainObjectType));
             }
 
-            var exists = this.IsSubscriptionExists(domainObjectType);
+            var exists = this.IsSubscriptionExists(domainObjectType)
+                         || this.wrappedResolver.IsActiveSubscriptionForTypeExists(domainObjectType);
 
             return exists;
         }

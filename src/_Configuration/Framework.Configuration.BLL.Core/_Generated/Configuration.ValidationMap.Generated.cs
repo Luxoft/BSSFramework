@@ -871,21 +871,6 @@ namespace Framework.Configuration.BLL
             return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.ExceptionMessage>(this.GetExceptionMessageProperties);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ExecuteRegularJobResult, string>> GetExecuteRegularJobResult_DescriptionValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.ExecuteRegularJobResult>(2147483647);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.ExecuteRegularJobResult>> GetExecuteRegularJobResultProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.ExecuteRegularJobResult> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.ExecuteRegularJobResult, string>(source => source.Description, currentClass, this.GetExecuteRegularJobResult_DescriptionValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.ExecuteRegularJobResult> GetExecuteRegularJobResultValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.ExecuteRegularJobResult>(this.GetExecuteRegularJobResultProperties);
-        }
-        
         protected override Framework.Validation.IClassValidationMap<TSource> GetInternalClassMap<TSource>()
         {
             if ((typeof(TSource) == typeof(Framework.Configuration.Domain.Attachment)))
@@ -960,10 +945,6 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetExceptionMessageRootFilterModelValidationMap()));
             }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.ExecuteRegularJobResult)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetExecuteRegularJobResultValidationMap()));
-            }
             else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.LogMessage)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetLogMessageValidationMap()));
@@ -992,10 +973,6 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetReportParameterValueValidationMap()));
             }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetRegularJobRevisionFilterModelValidationMap()));
-            }
             else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetUserActionObjectRootFilterModelValidationMap()));
@@ -1007,14 +984,6 @@ namespace Framework.Configuration.BLL
             else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.QueueProcessingState)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetQueueProcessingStateValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.RegularJob)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetRegularJobValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.RegularJobRevisionModel)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetRegularJobRevisionModelValidationMap()));
             }
             else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight)))
             {
@@ -1043,10 +1012,6 @@ namespace Framework.Configuration.BLL
             else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.Reports.ReportProperty)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetReportPropertyValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.RunRegularJobModel)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetRunRegularJobModelValidationMap()));
             }
             else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.SentMessage)))
             {
@@ -1203,90 +1168,6 @@ namespace Framework.Configuration.BLL
         protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.QueueProcessingState> GetQueueProcessingStateValidationMap()
         {
             return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.QueueProcessingState>(this.GetQueueProcessingStateProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.RegularJob, System.DateTime?>> GetRegularJob_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.RegularJob>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.RegularJob, string>> GetRegularJob_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.RegularJob>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.RegularJob, System.DateTime>> GetRegularJob_ExpectedNextStartTimeValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.Create<Framework.Configuration.Domain.RegularJob>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.RegularJob, string>> GetRegularJob_FunctionValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.RegularJob>(2147483647);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.RegularJob, System.DateTime?>> GetRegularJob_LastPulseTimeValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.RegularJob>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.RegularJob, string>> GetRegularJob_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.RegularJob>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.RegularJob, System.DateTime?>> GetRegularJob_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.RegularJob>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.RegularJob, string>> GetRegularJob_NameValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.RegularJob>(this.AvailableValues.GetAvailableSize<string>());
-            yield return new Framework.Validation.RequiredValidator<Framework.Configuration.Domain.RegularJob, string>(Framework.Restriction.RequiredMode.Default);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.RegularJob>> GetRegularJobProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.RegularJob> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.RegularJob, System.DateTime?>(source => source.CreateDate, currentClass, this.GetRegularJob_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.RegularJob, string>(source => source.CreatedBy, currentClass, this.GetRegularJob_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.RegularJob, System.DateTime>(source => source.ExpectedNextStartTime, currentClass, this.GetRegularJob_ExpectedNextStartTimeValidators(), this.GetClassMap<System.DateTime>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.RegularJob, string>(source => source.Function, currentClass, this.GetRegularJob_FunctionValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.RegularJob, System.DateTime?>(source => source.LastPulseTime, currentClass, this.GetRegularJob_LastPulseTimeValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.RegularJob, string>(source => source.ModifiedBy, currentClass, this.GetRegularJob_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.RegularJob, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetRegularJob_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.RegularJob, string>(source => source.Name, currentClass, this.GetRegularJob_NameValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel, int>> GetRegularJobRevisionFilterModel_CountingEntitiesValidators()
-        {
-            yield return Framework.Validation.PropertyValidatorExtensions.Unbox<Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel, object, int, object>(new Framework.Validation.SignValidator(Framework.Validation.SignType.Positive));
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel, Framework.Configuration.Domain.RegularJob>> GetRegularJobRevisionFilterModel_RegularJobValidators()
-        {
-            yield return new Framework.Validation.RequiredValidator<Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel, Framework.Configuration.Domain.RegularJob>(Framework.Restriction.RequiredMode.Default);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel>> GetRegularJobRevisionFilterModelProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel, int>(source => source.CountingEntities, currentClass, this.GetRegularJobRevisionFilterModel_CountingEntitiesValidators(), this.GetClassMap<int>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel, Framework.Configuration.Domain.RegularJob>(source => source.RegularJob, currentClass, this.GetRegularJobRevisionFilterModel_RegularJobValidators(), this.GetClassMap<Framework.Configuration.Domain.RegularJob>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel> GetRegularJobRevisionFilterModelValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel>(this.GetRegularJobRevisionFilterModelProperties);
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.RegularJobRevisionModel> GetRegularJobRevisionModelValidationMap()
-        {
-            return Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.RegularJobRevisionModel>.Empty;
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.RegularJob> GetRegularJobValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.RegularJob>(this.GetRegularJobProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.Report, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight>>> GetReport_AccessableBusinessRolesValidators()
@@ -1644,21 +1525,6 @@ namespace Framework.Configuration.BLL
         protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Reports.Report> GetReportValidationMap()
         {
             return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.Reports.Report>(this.GetReportProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.RunRegularJobModel, string>> GetRunRegularJobModel_InstanceServerNameValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.RunRegularJobModel>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.RunRegularJobModel>> GetRunRegularJobModelProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.RunRegularJobModel> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.RunRegularJobModel, string>(source => source.InstanceServerName, currentClass, this.GetRunRegularJobModel_InstanceServerNameValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.RunRegularJobModel> GetRunRegularJobModelValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.RunRegularJobModel>(this.GetRunRegularJobModelProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.SentMessage, string>> GetSentMessage_CommentValidators()

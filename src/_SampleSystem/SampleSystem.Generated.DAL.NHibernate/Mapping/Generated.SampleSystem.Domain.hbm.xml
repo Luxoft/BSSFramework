@@ -946,20 +946,6 @@
     <property name="StartDate" column="startDate" type="timestamp" access="field.camelcase" />
     <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BusinessUnit" access="field.camelcase" />
   </class>
-  <class name="SampleSystem.Domain.RegularJobResult" table="RegularJobResult">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="TestValue" column="testValue" access="field.camelcase" />
-  </class>
   <class name="SampleSystem.Domain.RoleRoleDegreeLink" table="RoleRoleDegreeLink">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />

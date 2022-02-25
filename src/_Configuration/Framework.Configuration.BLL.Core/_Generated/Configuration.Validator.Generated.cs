@@ -35,7 +35,6 @@ namespace Framework.Configuration.BLL
             base.RegisterHandler<Framework.Configuration.Domain.DomainTypeRootFilterModel>(this.GetDomainTypeRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.ExceptionMessage>(this.GetExceptionMessageValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.ExceptionMessageRootFilterModel>(this.GetExceptionMessageRootFilterModelValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.ExecuteRegularJobResult>(this.GetExecuteRegularJobResultValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.LogMessage>(this.GetLogMessageValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Models.Create.UserActionCreateModel>(this.GetUserActionCreateModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Models.Create.UserActionObjectModel>(this.GetUserActionObjectModelValidationResult);
@@ -43,12 +42,9 @@ namespace Framework.Configuration.BLL
             base.RegisterHandler<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationRequestModel>(this.GetReportGenerationRequestModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationValue>(this.GetReportGenerationValueValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Models.Custom.Reports.ReportParameterValue>(this.GetReportParameterValueValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel>(this.GetRegularJobRevisionFilterModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel>(this.GetUserActionObjectRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.NamedLock>(this.GetNamedLockValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.QueueProcessingState>(this.GetQueueProcessingStateValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.RegularJob>(this.GetRegularJobValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.RegularJobRevisionModel>(this.GetRegularJobRevisionModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight>(this.GetAccessableBusinessRoleReportRightValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Reports.AccessableOperationReportRight>(this.GetAccessableOperationReportRightValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight>(this.GetAccessablePrincipalReportRightValidationResult);
@@ -56,7 +52,6 @@ namespace Framework.Configuration.BLL
             base.RegisterHandler<Framework.Configuration.Domain.Reports.ReportFilter>(this.GetReportFilterValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Reports.ReportParameter>(this.GetReportParameterValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Reports.ReportProperty>(this.GetReportPropertyValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.RunRegularJobModel>(this.GetRunRegularJobModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.SentMessage>(this.GetSentMessageValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Sequence>(this.GetSequenceValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.SequenceCreateModel>(this.GetSequenceCreateModelValidationResult);
@@ -174,11 +169,6 @@ namespace Framework.Configuration.BLL
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetExecuteRegularJobResultValidationResult(Framework.Configuration.Domain.ExecuteRegularJobResult source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
         protected virtual Framework.Validation.ValidationResult GetLogMessageValidationResult(Framework.Configuration.Domain.LogMessage source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
@@ -190,21 +180,6 @@ namespace Framework.Configuration.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetQueueProcessingStateValidationResult(Framework.Configuration.Domain.QueueProcessingState source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetRegularJobRevisionFilterModelValidationResult(Framework.Configuration.Domain.Models.Filters.RegularJobRevisionFilterModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetRegularJobRevisionModelValidationResult(Framework.Configuration.Domain.RegularJobRevisionModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetRegularJobValidationResult(Framework.Configuration.Domain.RegularJob source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
@@ -245,11 +220,6 @@ namespace Framework.Configuration.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetReportValidationResult(Framework.Configuration.Domain.Reports.Report source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetRunRegularJobModelValidationResult(Framework.Configuration.Domain.RunRegularJobModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

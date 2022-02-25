@@ -34,23 +34,11 @@ namespace Framework.Configuration.BLL
     {
         IMessageSender<MessageTemplateNotification> SubscriptionSender { get; }
 
-        IMessageSender<RunRegularJobModel> RegularJobMessageSender { get; }
-
         bool SubscriptionEnabled { get; }
 
         ISerializerFactory<string> SystemConstantSerializerFactory { get; }
 
         ITypeResolver<DomainType> ComplexDomainTypeResolver { get; }
-
-        /// <summary>
-        /// Фабрика контектов (нужно для RegularJob-ов)
-        /// </summary>
-        IContextEvaluator<IConfigurationBLLContext> RootContextEvaluator { get; }
-
-        /// <summary>
-        /// Envirmoment системы (нужно для RegularJob-ов)
-        /// </summary>
-        object ServiceEnvironmentSource { get; }
 
         DomainType GetDomainType(Type type, bool throwOnNotFound);
 

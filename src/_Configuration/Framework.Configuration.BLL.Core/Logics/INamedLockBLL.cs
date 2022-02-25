@@ -7,6 +7,6 @@ namespace Framework.Configuration.BLL
     {
         void CheckInit();
 
-        void Lock(NamedLockOperation regularJobLock, LockRole lockRole);
+        void Lock(NamedLockOperation lockOperation, LockRole lockRole);
     }
 }

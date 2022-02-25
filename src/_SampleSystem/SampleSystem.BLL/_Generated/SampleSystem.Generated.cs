@@ -866,27 +866,6 @@ namespace SampleSystem.BLL
         }
     }
     
-    public partial class RegularJobResultBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.RegularJobResult, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IRegularJobResultBLL
-    {
-        
-		partial void Initialize();
-        
-        public RegularJobResultBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.RegularJobResult> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityProvider, specificationEvaluator)
-        {
-            this.Initialize();
-        }
-    }
-    
-    public partial class RegularJobResultBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.IRegularJobResultBLL, SampleSystem.BLL.RegularJobResultBLL, SampleSystem.Domain.RegularJobResult, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.IRegularJobResultBLLFactory
-    {
-        
-        public RegularJobResultBLLFactory(SampleSystem.BLL.ISampleSystemBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
     public partial class RoleRoleDegreeLinkBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.RoleRoleDegreeLink, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IRoleRoleDegreeLinkBLL
     {
         
@@ -1163,8 +1142,6 @@ namespace SampleSystem.BLL
         private SampleSystem.BLL.INamedLockBLL namedLockBLL;
         
         private SampleSystem.BLL.IPrincipalBLL principalBLL;
-        
-        private SampleSystem.BLL.IRegularJobResultBLL regularJobResultBLL;
         
         private SampleSystem.BLL.IRoleRoleDegreeLinkBLL roleRoleDegreeLinkBLL;
         
@@ -1837,26 +1814,6 @@ namespace SampleSystem.BLL
             }
         }
         
-        public SampleSystem.BLL.IRegularJobResultBLL RegularJobResult
-        {
-            get
-            {
-                if (object.ReferenceEquals(this.regularJobResultBLL, null))
-                {
-                    this.regularJobResultBLL = this.RegularJobResultFactory.Create();
-                }
-                return this.regularJobResultBLL;
-            }
-        }
-        
-        public SampleSystem.BLL.IRegularJobResultBLLFactory RegularJobResultFactory
-        {
-            get
-            {
-                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<SampleSystem.BLL.IRegularJobResultBLLFactory>(this.Context.ServiceProvider);
-            }
-        }
-        
         public SampleSystem.BLL.IRoleRoleDegreeLinkBLL RoleRoleDegreeLink
         {
             get
@@ -2320,7 +2277,6 @@ namespace SampleSystem.BLL
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestLocationBLLFactory, SampleSystem.BLL.TestLocationBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestLocationCollectionPropertiesBLLFactory, SampleSystem.BLL.TestLocationCollectionPropertiesBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestSecurityObjItemProjectionBLLFactory, SampleSystem.BLL.TestSecurityObjItemProjectionBLLFactory>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IRegularJobResultBLLFactory, SampleSystem.BLL.RegularJobResultBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IRoleRoleDegreeLinkBLLFactory, SampleSystem.BLL.RoleRoleDegreeLinkBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ISqlParserTestObjBLLFactory, SampleSystem.BLL.SqlParserTestObjBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ISqlParserTestObjContainerBLLFactory, SampleSystem.BLL.SqlParserTestObjContainerBLLFactory>(serviceCollection);
@@ -2521,10 +2477,6 @@ namespace SampleSystem.BLL
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestSecurityObjItemProjection)))
             {
                 return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecurityObjItemProjection));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.RegularJobResult)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.RegularJobResult));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.RoleRoleDegreeLink)))
             {
@@ -2738,10 +2690,6 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecurityObjItemProjectionFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>)(securityProvider)))));
             }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.RegularJobResult)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.RegularJobResultFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.RegularJobResult>)(securityProvider)))));
-            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.RoleRoleDegreeLink)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.RoleRoleDegreeLinkFactory.Create()));
@@ -2954,10 +2902,6 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecurityObjItemProjectionFactory.Create(securityOperation)));
             }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.RegularJobResult)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.RegularJobResultFactory.Create(securityOperation)));
-            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.RoleRoleDegreeLink)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.RoleRoleDegreeLinkFactory.Create()));
@@ -3169,10 +3113,6 @@ namespace SampleSystem.BLL
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.Projections.TestSecurityObjItemProjection)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecurityObjItemProjectionFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.RegularJobResult)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.RegularJobResultFactory.Create(bllSecurityMode)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.RoleRoleDegreeLink)))
             {

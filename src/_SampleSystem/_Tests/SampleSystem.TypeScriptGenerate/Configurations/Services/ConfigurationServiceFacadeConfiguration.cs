@@ -19,7 +19,7 @@ namespace SampleSystem.TypeScriptGenerate.Configurations.Services
 
         public override IEnumerable<Type> GetFacadeTypes()
         {
-            var t = typeof(Configuration.WebApi.Controllers.RegularJobController);
+            var t = typeof(Configuration.WebApi.Controllers.SystemConstantController);
 
             return t.Assembly.GetTypes().Where(v => typeof(ControllerBase).IsAssignableFrom(v) && v.Namespace == t.Namespace);
         }

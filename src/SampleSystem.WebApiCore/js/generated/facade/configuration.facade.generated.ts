@@ -21,7 +21,6 @@ import * as mockdto from '../../mocked-dto';
 export let checkCodeFirstSubscriptionAccessAsyncFunc = _checkCodeFirstSubscriptionAccess();
 export let checkDomainTypeAccessAsyncFunc = _checkDomainTypeAccess();
 export let checkExceptionMessageAccessAsyncFunc = _checkExceptionMessageAccess();
-export let checkRegularJobAccessAsyncFunc = _checkRegularJobAccess();
 export let checkReportAccessAsyncFunc = _checkReportAccess();
 export let checkReportFilterAccessAsyncFunc = _checkReportFilterAccess();
 export let checkReportParameterAccessAsyncFunc = _checkReportParameterAccess();
@@ -47,10 +46,6 @@ export let getFullExceptionMessageAsyncFunc = _getFullExceptionMessage();
 export let getFullExceptionMessagesAsyncFunc = _getFullExceptionMessages();
 export let getFullExceptionMessagesByIdentsAsyncFunc = _getFullExceptionMessagesByIdents();
 export let getFullExceptionMessagesByRootFilterAsyncFunc = _getFullExceptionMessagesByRootFilter();
-export let getFullRegularJobAsyncFunc = _getFullRegularJob();
-export let getFullRegularJobByNameAsyncFunc = _getFullRegularJobByName();
-export let getFullRegularJobsAsyncFunc = _getFullRegularJobs();
-export let getFullRegularJobsByIdentsAsyncFunc = _getFullRegularJobsByIdents();
 export let getFullReportAsyncFunc = _getFullReport();
 export let getFullReportFilterAsyncFunc = _getFullReportFilter();
 export let getFullReportFiltersAsyncFunc = _getFullReportFilters();
@@ -92,8 +87,6 @@ export let getRichCodeFirstSubscriptionByCodeAsyncFunc = _getRichCodeFirstSubscr
 export let getRichDomainTypeAsyncFunc = _getRichDomainType();
 export let getRichDomainTypeByNameAsyncFunc = _getRichDomainTypeByName();
 export let getRichExceptionMessageAsyncFunc = _getRichExceptionMessage();
-export let getRichRegularJobAsyncFunc = _getRichRegularJob();
-export let getRichRegularJobByNameAsyncFunc = _getRichRegularJobByName();
 export let getRichReportAsyncFunc = _getRichReport();
 export let getRichReportFilterAsyncFunc = _getRichReportFilter();
 export let getRichReportParameterAsyncFunc = _getRichReportParameter();
@@ -122,10 +115,6 @@ export let getSimpleExceptionMessageAsyncFunc = _getSimpleExceptionMessage();
 export let getSimpleExceptionMessagesAsyncFunc = _getSimpleExceptionMessages();
 export let getSimpleExceptionMessagesByIdentsAsyncFunc = _getSimpleExceptionMessagesByIdents();
 export let getSimpleExceptionMessagesByRootFilterAsyncFunc = _getSimpleExceptionMessagesByRootFilter();
-export let getSimpleRegularJobAsyncFunc = _getSimpleRegularJob();
-export let getSimpleRegularJobByNameAsyncFunc = _getSimpleRegularJobByName();
-export let getSimpleRegularJobsAsyncFunc = _getSimpleRegularJobs();
-export let getSimpleRegularJobsByIdentsAsyncFunc = _getSimpleRegularJobsByIdents();
 export let getSimpleReportAsyncFunc = _getSimpleReport();
 export let getSimpleReportFilterAsyncFunc = _getSimpleReportFilter();
 export let getSimpleReportFiltersAsyncFunc = _getSimpleReportFilters();
@@ -167,10 +156,6 @@ export let getVisualDomainTypeByNameAsyncFunc = _getVisualDomainTypeByName();
 export let getVisualDomainTypesAsyncFunc = _getVisualDomainTypes();
 export let getVisualDomainTypesByIdentsAsyncFunc = _getVisualDomainTypesByIdents();
 export let getVisualDomainTypesByRootFilterAsyncFunc = _getVisualDomainTypesByRootFilter();
-export let getVisualRegularJobAsyncFunc = _getVisualRegularJob();
-export let getVisualRegularJobByNameAsyncFunc = _getVisualRegularJobByName();
-export let getVisualRegularJobsAsyncFunc = _getVisualRegularJobs();
-export let getVisualRegularJobsByIdentsAsyncFunc = _getVisualRegularJobsByIdents();
 export let getVisualSequenceAsyncFunc = _getVisualSequence();
 export let getVisualSequenceByNameAsyncFunc = _getVisualSequenceByName();
 export let getVisualSequencesAsyncFunc = _getVisualSequences();
@@ -189,7 +174,6 @@ export let getVisualTargetSystemsByRootFilterAsyncFunc = _getVisualTargetSystems
 export let hasCodeFirstSubscriptionAccessAsyncFunc = _hasCodeFirstSubscriptionAccess();
 export let hasDomainTypeAccessAsyncFunc = _hasDomainTypeAccess();
 export let hasExceptionMessageAccessAsyncFunc = _hasExceptionMessageAccess();
-export let hasRegularJobAccessAsyncFunc = _hasRegularJobAccess();
 export let hasReportAccessAsyncFunc = _hasReportAccess();
 export let hasReportFilterAccessAsyncFunc = _hasReportFilterAccess();
 export let hasReportParameterAccessAsyncFunc = _hasReportParameterAccess();
@@ -199,11 +183,9 @@ export let hasSystemConstantAccessAsyncFunc = _hasSystemConstantAccess();
 export let hasTargetSystemAccessAsyncFunc = _hasTargetSystemAccess();
 export let hasUserActionAccessAsyncFunc = _hasUserActionAccess();
 export let hasUserActionObjectAccessAsyncFunc = _hasUserActionObjectAccess();
-export let removeRegularJobAsyncFunc = _removeRegularJob();
 export let removeReportAsyncFunc = _removeReport();
 export let removeSequenceAsyncFunc = _removeSequence();
 export let saveCodeFirstSubscriptionAsyncFunc = _saveCodeFirstSubscription();
-export let saveRegularJobAsyncFunc = _saveRegularJob();
 export let saveReportAsyncFunc = _saveReport();
 export let saveSequenceAsyncFunc = _saveSequence();
 export let saveSystemConstantAsyncFunc = _saveSystemConstant();
@@ -230,14 +212,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
             let baseParameters = {exceptionMessageIdent : exceptionMessageIdent, securityOperationCode : securityOperationCode};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
             return service.getData('ExceptionMessage/CheckExceptionMessageAccess', baseParameters);
-        });
-    }
-
-    function _checkRegularJobAccess(): async.SimpleAsyncFunc3<dto.RegularJobIdentityDTO, dto.ConfigurationSecurityOperationCode, void> {
-        return new async.SimpleAsyncFunc3((regularJobIdent: dto.RegularJobIdentityDTO, securityOperationCode: dto.ConfigurationSecurityOperationCode) => {
-            let baseParameters = {regularJobIdent : regularJobIdent, securityOperationCode : securityOperationCode};
-            let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('RegularJob/CheckRegularJobAccess', baseParameters);
         });
     }
 
@@ -438,38 +412,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
             let baseParameters = filter.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<Array<dto.ExceptionMessageFullDTO>, Array<dto.ExceptionMessageObservableFullDTO>, dto.ExceptionMessageFullDTO, dto.ExceptionMessageObservableFullDTO>();
             return service.getData('ExceptionMessage/GetFullExceptionMessagesByRootFilter', {plain : dto.ExceptionMessageFullDTO, observable : dto.ExceptionMessageObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullRegularJob(): async.AsyncFunc3<dto.RegularJobIdentityDTO, dto.RegularJobFullDTO, dto.RegularJobObservableFullDTO, dto.RegularJobFullDTO, dto.RegularJobObservableFullDTO> {
-        return new async.AsyncFunc3((regularJobIdentity: dto.RegularJobIdentityDTO) => {
-            let baseParameters = regularJobIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.RegularJobFullDTO, dto.RegularJobObservableFullDTO, dto.RegularJobFullDTO, dto.RegularJobObservableFullDTO>();
-            return service.getData('RegularJob/GetFullRegularJob', {plain : dto.RegularJobFullDTO, observable : dto.RegularJobObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullRegularJobByName(): async.AsyncFunc3<string, dto.RegularJobFullDTO, dto.RegularJobObservableFullDTO, dto.RegularJobFullDTO, dto.RegularJobObservableFullDTO> {
-        return new async.AsyncFunc3((regularJobName: string) => {
-            let baseParameters = regularJobName;
-            let service = Environment.current.context.facadeFactory.createService<dto.RegularJobFullDTO, dto.RegularJobObservableFullDTO, dto.RegularJobFullDTO, dto.RegularJobObservableFullDTO>();
-            return service.getData('RegularJob/GetFullRegularJobByName', {plain : dto.RegularJobFullDTO, observable : dto.RegularJobObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullRegularJobs(): async.AsyncFunc2<Array<dto.RegularJobFullDTO>, Array<dto.RegularJobObservableFullDTO>, dto.RegularJobFullDTO, dto.RegularJobObservableFullDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.RegularJobFullDTO>, Array<dto.RegularJobObservableFullDTO>, dto.RegularJobFullDTO, dto.RegularJobObservableFullDTO>();
-            return service.getData('RegularJob/GetFullRegularJobs', {plain : dto.RegularJobFullDTO, observable : dto.RegularJobObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullRegularJobsByIdents(): async.AsyncFunc3<dto.RegularJobIdentityDTO[], Array<dto.RegularJobFullDTO>, Array<dto.RegularJobObservableFullDTO>, dto.RegularJobFullDTO, dto.RegularJobObservableFullDTO> {
-        return new async.AsyncFunc3((regularJobIdents: dto.RegularJobIdentityDTO[]) => {
-            let baseParameters = regularJobIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.RegularJobFullDTO>, Array<dto.RegularJobObservableFullDTO>, dto.RegularJobFullDTO, dto.RegularJobObservableFullDTO>();
-            return service.getData('RegularJob/GetFullRegularJobsByIdents', {plain : dto.RegularJobFullDTO, observable : dto.RegularJobObservableFullDTO}, baseParameters);
         });
     }
 
@@ -801,22 +743,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
         });
     }
 
-    function _getRichRegularJob(): async.AsyncFunc3<dto.RegularJobIdentityDTO, dto.RegularJobRichDTO, dto.RegularJobObservableRichDTO, dto.RegularJobRichDTO, dto.RegularJobObservableRichDTO> {
-        return new async.AsyncFunc3((regularJobIdentity: dto.RegularJobIdentityDTO) => {
-            let baseParameters = regularJobIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.RegularJobRichDTO, dto.RegularJobObservableRichDTO, dto.RegularJobRichDTO, dto.RegularJobObservableRichDTO>();
-            return service.getData('RegularJob/GetRichRegularJob', {plain : dto.RegularJobRichDTO, observable : dto.RegularJobObservableRichDTO}, baseParameters);
-        });
-    }
-
-    function _getRichRegularJobByName(): async.AsyncFunc3<string, dto.RegularJobRichDTO, dto.RegularJobObservableRichDTO, dto.RegularJobRichDTO, dto.RegularJobObservableRichDTO> {
-        return new async.AsyncFunc3((regularJobName: string) => {
-            let baseParameters = regularJobName;
-            let service = Environment.current.context.facadeFactory.createService<dto.RegularJobRichDTO, dto.RegularJobObservableRichDTO, dto.RegularJobRichDTO, dto.RegularJobObservableRichDTO>();
-            return service.getData('RegularJob/GetRichRegularJobByName', {plain : dto.RegularJobRichDTO, observable : dto.RegularJobObservableRichDTO}, baseParameters);
-        });
-    }
-
     function _getRichReport(): async.AsyncFunc3<dto.ReportIdentityDTO, dto.ReportRichDTO, dto.ReportObservableRichDTO, dto.ReportRichDTO, dto.ReportObservableRichDTO> {
         return new async.AsyncFunc3((reportIdentity: dto.ReportIdentityDTO) => {
             let baseParameters = reportIdentity;
@@ -1038,38 +964,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
             let baseParameters = filter.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<Array<dto.ExceptionMessageSimpleDTO>, Array<dto.ExceptionMessageObservableSimpleDTO>, dto.ExceptionMessageSimpleDTO, dto.ExceptionMessageObservableSimpleDTO>();
             return service.getData('ExceptionMessage/GetSimpleExceptionMessagesByRootFilter', {plain : dto.ExceptionMessageSimpleDTO, observable : dto.ExceptionMessageObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleRegularJob(): async.AsyncFunc3<dto.RegularJobIdentityDTO, dto.RegularJobSimpleDTO, dto.RegularJobObservableSimpleDTO, dto.RegularJobSimpleDTO, dto.RegularJobObservableSimpleDTO> {
-        return new async.AsyncFunc3((regularJobIdentity: dto.RegularJobIdentityDTO) => {
-            let baseParameters = regularJobIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.RegularJobSimpleDTO, dto.RegularJobObservableSimpleDTO, dto.RegularJobSimpleDTO, dto.RegularJobObservableSimpleDTO>();
-            return service.getData('RegularJob/GetSimpleRegularJob', {plain : dto.RegularJobSimpleDTO, observable : dto.RegularJobObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleRegularJobByName(): async.AsyncFunc3<string, dto.RegularJobSimpleDTO, dto.RegularJobObservableSimpleDTO, dto.RegularJobSimpleDTO, dto.RegularJobObservableSimpleDTO> {
-        return new async.AsyncFunc3((regularJobName: string) => {
-            let baseParameters = regularJobName;
-            let service = Environment.current.context.facadeFactory.createService<dto.RegularJobSimpleDTO, dto.RegularJobObservableSimpleDTO, dto.RegularJobSimpleDTO, dto.RegularJobObservableSimpleDTO>();
-            return service.getData('RegularJob/GetSimpleRegularJobByName', {plain : dto.RegularJobSimpleDTO, observable : dto.RegularJobObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleRegularJobs(): async.AsyncFunc2<Array<dto.RegularJobSimpleDTO>, Array<dto.RegularJobObservableSimpleDTO>, dto.RegularJobSimpleDTO, dto.RegularJobObservableSimpleDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.RegularJobSimpleDTO>, Array<dto.RegularJobObservableSimpleDTO>, dto.RegularJobSimpleDTO, dto.RegularJobObservableSimpleDTO>();
-            return service.getData('RegularJob/GetSimpleRegularJobs', {plain : dto.RegularJobSimpleDTO, observable : dto.RegularJobObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleRegularJobsByIdents(): async.AsyncFunc3<dto.RegularJobIdentityDTO[], Array<dto.RegularJobSimpleDTO>, Array<dto.RegularJobObservableSimpleDTO>, dto.RegularJobSimpleDTO, dto.RegularJobObservableSimpleDTO> {
-        return new async.AsyncFunc3((regularJobIdents: dto.RegularJobIdentityDTO[]) => {
-            let baseParameters = regularJobIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.RegularJobSimpleDTO>, Array<dto.RegularJobObservableSimpleDTO>, dto.RegularJobSimpleDTO, dto.RegularJobObservableSimpleDTO>();
-            return service.getData('RegularJob/GetSimpleRegularJobsByIdents', {plain : dto.RegularJobSimpleDTO, observable : dto.RegularJobObservableSimpleDTO}, baseParameters);
         });
     }
 
@@ -1401,38 +1295,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
         });
     }
 
-    function _getVisualRegularJob(): async.AsyncFunc3<dto.RegularJobIdentityDTO, dto.RegularJobVisualDTO, dto.RegularJobObservableVisualDTO, dto.RegularJobVisualDTO, dto.RegularJobObservableVisualDTO> {
-        return new async.AsyncFunc3((regularJobIdentity: dto.RegularJobIdentityDTO) => {
-            let baseParameters = regularJobIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.RegularJobVisualDTO, dto.RegularJobObservableVisualDTO, dto.RegularJobVisualDTO, dto.RegularJobObservableVisualDTO>();
-            return service.getData('RegularJob/GetVisualRegularJob', {plain : dto.RegularJobVisualDTO, observable : dto.RegularJobObservableVisualDTO}, baseParameters);
-        });
-    }
-
-    function _getVisualRegularJobByName(): async.AsyncFunc3<string, dto.RegularJobVisualDTO, dto.RegularJobObservableVisualDTO, dto.RegularJobVisualDTO, dto.RegularJobObservableVisualDTO> {
-        return new async.AsyncFunc3((regularJobName: string) => {
-            let baseParameters = regularJobName;
-            let service = Environment.current.context.facadeFactory.createService<dto.RegularJobVisualDTO, dto.RegularJobObservableVisualDTO, dto.RegularJobVisualDTO, dto.RegularJobObservableVisualDTO>();
-            return service.getData('RegularJob/GetVisualRegularJobByName', {plain : dto.RegularJobVisualDTO, observable : dto.RegularJobObservableVisualDTO}, baseParameters);
-        });
-    }
-
-    function _getVisualRegularJobs(): async.AsyncFunc2<Array<dto.RegularJobVisualDTO>, Array<dto.RegularJobObservableVisualDTO>, dto.RegularJobVisualDTO, dto.RegularJobObservableVisualDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.RegularJobVisualDTO>, Array<dto.RegularJobObservableVisualDTO>, dto.RegularJobVisualDTO, dto.RegularJobObservableVisualDTO>();
-            return service.getData('RegularJob/GetVisualRegularJobs', {plain : dto.RegularJobVisualDTO, observable : dto.RegularJobObservableVisualDTO}, baseParameters);
-        });
-    }
-
-    function _getVisualRegularJobsByIdents(): async.AsyncFunc3<dto.RegularJobIdentityDTO[], Array<dto.RegularJobVisualDTO>, Array<dto.RegularJobObservableVisualDTO>, dto.RegularJobVisualDTO, dto.RegularJobObservableVisualDTO> {
-        return new async.AsyncFunc3((regularJobIdents: dto.RegularJobIdentityDTO[]) => {
-            let baseParameters = regularJobIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.RegularJobVisualDTO>, Array<dto.RegularJobObservableVisualDTO>, dto.RegularJobVisualDTO, dto.RegularJobObservableVisualDTO>();
-            return service.getData('RegularJob/GetVisualRegularJobsByIdents', {plain : dto.RegularJobVisualDTO, observable : dto.RegularJobObservableVisualDTO}, baseParameters);
-        });
-    }
-
     function _getVisualSequence(): async.AsyncFunc3<dto.SequenceIdentityDTO, dto.SequenceVisualDTO, dto.SequenceObservableVisualDTO, dto.SequenceVisualDTO, dto.SequenceObservableVisualDTO> {
         return new async.AsyncFunc3((sequenceIdentity: dto.SequenceIdentityDTO) => {
             let baseParameters = sequenceIdentity;
@@ -1577,14 +1439,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
         });
     }
 
-    function _hasRegularJobAccess(): async.SimpleAsyncFunc3<dto.RegularJobIdentityDTO, dto.ConfigurationSecurityOperationCode, boolean> {
-        return new async.SimpleAsyncFunc3((regularJobIdent: dto.RegularJobIdentityDTO, securityOperationCode: dto.ConfigurationSecurityOperationCode) => {
-            let baseParameters = {regularJobIdent : regularJobIdent, securityOperationCode : securityOperationCode};
-            let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('RegularJob/HasRegularJobAccess', baseParameters);
-        });
-    }
-
     function _hasReportAccess(): async.SimpleAsyncFunc3<dto.ReportIdentityDTO, dto.ConfigurationSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((reportIdent: dto.ReportIdentityDTO, securityOperationCode: dto.ConfigurationSecurityOperationCode) => {
             let baseParameters = {reportIdent : reportIdent, securityOperationCode : securityOperationCode};
@@ -1657,14 +1511,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
         });
     }
 
-    function _removeRegularJob(): async.SimpleAsyncFunc2<dto.RegularJobIdentityDTO, void> {
-        return new async.SimpleAsyncFunc2((regularJobIdent: dto.RegularJobIdentityDTO) => {
-            let baseParameters = regularJobIdent;
-            let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('RegularJob/RemoveRegularJob', baseParameters);
-        });
-    }
-
     function _removeReport(): async.SimpleAsyncFunc2<dto.ReportIdentityDTO, void> {
         return new async.SimpleAsyncFunc2((reportIdent: dto.ReportIdentityDTO) => {
             let baseParameters = reportIdent;
@@ -1686,14 +1532,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
             let baseParameters = codeFirstSubscriptionStrict.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.CodeFirstSubscriptionIdentityDTO, dto.CodeFirstSubscriptionObservableIdentityDTO, dto.CodeFirstSubscriptionIdentityDTO, dto.CodeFirstSubscriptionObservableIdentityDTO>();
             return service.getData('CodeFirstSubscription/SaveCodeFirstSubscription', {plain : dto.CodeFirstSubscriptionIdentityDTO, observable : dto.CodeFirstSubscriptionObservableIdentityDTO}, baseParameters);
-        });
-    }
-
-    function _saveRegularJob(): async.AsyncFunc3<dto.RegularJobStrictDTO, dto.RegularJobIdentityDTO, dto.RegularJobObservableIdentityDTO, dto.RegularJobIdentityDTO, dto.RegularJobObservableIdentityDTO> {
-        return new async.AsyncFunc3((regularJobStrict: dto.RegularJobStrictDTO) => {
-            let baseParameters = regularJobStrict.toNativeJson();
-            let service = Environment.current.context.facadeFactory.createService<dto.RegularJobIdentityDTO, dto.RegularJobObservableIdentityDTO, dto.RegularJobIdentityDTO, dto.RegularJobObservableIdentityDTO>();
-            return service.getData('RegularJob/SaveRegularJob', {plain : dto.RegularJobIdentityDTO, observable : dto.RegularJobObservableIdentityDTO}, baseParameters);
         });
     }
 

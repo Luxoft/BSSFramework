@@ -1348,36 +1348,6 @@ export class PrincipalIdentityDTO {
 
 }
 
-export class RegularJobResultIdentityDTO {
-    public static Empty = new RegularJobResultIdentityDTO(Guid.Empty);
-
-    public __type = 'RegularJobResultIdentityDTO';
-
-    private _regularjobresultidentitydto: string;
-
-    public Id: Guid;
-
-    constructor (id: Guid) {
-        if (!(id)) {
-            throw new Error('Parameter id should be specified');
-        }
-        this.Id = id;
-
-    }
-
-    public static fromJs(source: any): RegularJobResultIdentityDTO {
-        if (!(source)) {
-            return undefined;
-        }
-        return new RegularJobResultIdentityDTO(source.Id);
-    }
-
-    public toNativeJson(): RegularJobResultIdentityDTO {
-        return this;
-    }
-
-}
-
 export class SqlParserTestObjIdentityDTO {
     public static Empty = new SqlParserTestObjIdentityDTO(Guid.Empty);
 
@@ -7851,111 +7821,6 @@ export class VisualProjectObservableProjectionDTO extends BaseObservablePersiste
 
 }
 
-export class RegularJobResultObservableIdentityDTO {
-    public Id: Guid;
-
-    constructor (id: Guid) {
-        if (!(id)) {
-            throw new Error('Parameter id should be specified');
-        }
-        this.Id = id;
-
-    }
-
-    public static fromJs(source: any): RegularJobResultObservableIdentityDTO {
-        if (!(source)) {
-            return undefined;
-        }
-        return new RegularJobResultObservableIdentityDTO(source.Id);
-    }
-
-}
-
-export class RegularJobResultObservableSimpleDTO extends BaseObservableAuditPersistentDTO {
-    public __type = 'RegularJobResultObservableSimpleDTO';
-
-    private _regularjobresultobservablesimpledto: string;
-
-    public TestValue = observable<string>();
-
-    public static fromJs(source: IRegularJobResultSimpleDTO): RegularJobResultObservableSimpleDTO {
-        if (!(source)) {
-            return undefined;
-        }
-        let e = new RegularJobResultObservableSimpleDTO();
-        e.fromJs(source);
-        return e;
-    }
-
-    public fromJs(source: IRegularJobResultSimpleDTO): void {
-        super.fromJs(source);
-        this.TestValue(source.TestValue);
-    }
-
-    public identity(): RegularJobResultIdentityDTO {
-        return new RegularJobResultIdentityDTO(this.Id());
-    }
-
-    public toJs(): RegularJobResultSimpleDTO {
-        let e = new RegularJobResultSimpleDTO();
-        e.fromObservable(this);
-        return e;
-    }
-
-}
-
-export class RegularJobResultObservableFullDTO extends RegularJobResultObservableSimpleDTO {
-    public __type = 'RegularJobResultObservableFullDTO';
-
-    private _regularjobresultobservablefulldto: string;
-
-    public static fromJs(source: IRegularJobResultFullDTO): RegularJobResultObservableFullDTO {
-        if (!(source)) {
-            return undefined;
-        }
-        let e = new RegularJobResultObservableFullDTO();
-        e.fromJs(source);
-        return e;
-    }
-
-    public fromJs(source: IRegularJobResultFullDTO): void {
-        super.fromJs(source);
-    }
-
-    public toJs(): RegularJobResultFullDTO {
-        let e = new RegularJobResultFullDTO();
-        e.fromObservable(this);
-        return e;
-    }
-
-}
-
-export class RegularJobResultObservableRichDTO extends RegularJobResultObservableFullDTO {
-    public __type = 'RegularJobResultObservableRichDTO';
-
-    private _regularjobresultobservablerichdto: string;
-
-    public static fromJs(source: IRegularJobResultRichDTO): RegularJobResultObservableRichDTO {
-        if (!(source)) {
-            return undefined;
-        }
-        let e = new RegularJobResultObservableRichDTO();
-        e.fromJs(source);
-        return e;
-    }
-
-    public fromJs(source: IRegularJobResultRichDTO): void {
-        super.fromJs(source);
-    }
-
-    public toJs(): RegularJobResultRichDTO {
-        let e = new RegularJobResultRichDTO();
-        e.fromObservable(this);
-        return e;
-    }
-
-}
-
 export class SqlParserTestObjObservableIdentityDTO {
     public Id: Guid;
 
@@ -14201,104 +14066,6 @@ export class PrincipalRichDTO extends PrincipalFullDTO {
 
 }
 
-export class RegularJobResultSimpleDTO extends BaseAuditPersistentDTO {
-    public __type = 'RegularJobResultSimpleDTO';
-
-    private _regularjobresultsimpledto: string;
-
-    public TestValue: string;
-
-    public get Identity() : RegularJobResultIdentityDTO {
-        return new RegularJobResultIdentityDTO(this.Id);
-    }
-
-    public static fromJs(source: IRegularJobResultSimpleDTO): RegularJobResultSimpleDTO {
-        if (!(source)) {
-            return undefined;
-        }
-        let e = new RegularJobResultSimpleDTO();
-        e.fromJs(source);
-        return e;
-    }
-
-    public fromJs(source: IRegularJobResultSimpleDTO): void {
-        super.fromJs(source);
-        this.TestValue = source.TestValue;
-    }
-
-    public fromObservable(source: RegularJobResultObservableSimpleDTO): void {
-        super.fromObservable(source);
-        this.TestValue = unwrap(source.TestValue);
-    }
-
-    public toObservable(): RegularJobResultObservableSimpleDTO {
-        let e = new RegularJobResultObservableSimpleDTO();
-        e.fromJs(this);
-        return e;
-    }
-
-}
-
-export class RegularJobResultFullDTO extends RegularJobResultSimpleDTO {
-    public __type = 'RegularJobResultFullDTO';
-
-    private _regularjobresultfulldto: string;
-
-    public static fromJs(source: IRegularJobResultFullDTO): RegularJobResultFullDTO {
-        if (!(source)) {
-            return undefined;
-        }
-        let e = new RegularJobResultFullDTO();
-        e.fromJs(source);
-        return e;
-    }
-
-    public fromJs(source: IRegularJobResultFullDTO): void {
-        super.fromJs(source);
-    }
-
-    public fromObservable(source: RegularJobResultObservableFullDTO): void {
-        super.fromObservable(source);
-    }
-
-    public toObservable(): RegularJobResultObservableFullDTO {
-        let e = new RegularJobResultObservableFullDTO();
-        e.fromJs(this);
-        return e;
-    }
-
-}
-
-export class RegularJobResultRichDTO extends RegularJobResultFullDTO {
-    public __type = 'RegularJobResultRichDTO';
-
-    private _regularjobresultrichdto: string;
-
-    public static fromJs(source: IRegularJobResultRichDTO): RegularJobResultRichDTO {
-        if (!(source)) {
-            return undefined;
-        }
-        let e = new RegularJobResultRichDTO();
-        e.fromJs(source);
-        return e;
-    }
-
-    public fromJs(source: IRegularJobResultRichDTO): void {
-        super.fromJs(source);
-    }
-
-    public fromObservable(source: RegularJobResultObservableRichDTO): void {
-        super.fromObservable(source);
-    }
-
-    public toObservable(): RegularJobResultObservableRichDTO {
-        let e = new RegularJobResultObservableRichDTO();
-        e.fromJs(this);
-        return e;
-    }
-
-}
-
 export class SqlParserTestObjSimpleDTO extends BaseAuditPersistentDTO {
     public __type = 'SqlParserTestObjSimpleDTO';
 
@@ -16506,16 +16273,6 @@ export interface IPrincipalFullDTO extends IPrincipalSimpleDTO {
 }
 
 export interface IPrincipalRichDTO extends IPrincipalFullDTO {
-}
-
-export interface IRegularJobResultSimpleDTO extends IBaseAuditPersistentDTO {
-    TestValue : string;
-}
-
-export interface IRegularJobResultFullDTO extends IRegularJobResultSimpleDTO {
-}
-
-export interface IRegularJobResultRichDTO extends IRegularJobResultFullDTO {
 }
 
 export interface ISqlParserTestObjSimpleDTO extends IBaseAuditPersistentDTO {

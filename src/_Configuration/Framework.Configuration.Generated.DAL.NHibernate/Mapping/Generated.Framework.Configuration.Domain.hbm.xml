@@ -237,35 +237,6 @@
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
   </class>
-  <class name="Framework.Configuration.Domain.RegularJob" table="RegularJob">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <version name="Version" generated="never" type="Int64">
-      <column name="Version" not-null="false" sql-type="bigint" />
-    </version>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ExpectedNextStartTime" column="expectedNextStartTime" type="timestamp" access="field.camelcase" />
-    <property name="Function" column="function" length="2147483647" access="field.camelcase" />
-    <property name="LastPulseTime" column="lastPulseTime" type="timestamp" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="Name" column="name" unique-key="UIX_nameRegularJob" access="field.camelcase" />
-    <property name="State" column="state" access="field.camelcase" />
-    <property name="WrapUpSession" column="wrapUpSession" access="field.camelcase" />
-    <component name="ExecutionResult" class="Framework.Configuration.Domain.ExecuteRegularJobResult, Framework.Configuration.Domain" access="field.camelcase">
-      <property name="Description" column="executionResultdescription" access="field.camelcase" length="2147483647" />
-      <property name="ExecutionTime" column="executionResultexecutionTime" access="field.camelcase" />
-      <property name="Status" column="executionResultstatus" access="field.camelcase" />
-      <property name="Time" column="executionResulttime" access="field.camelcase" />
-    </component>
-    <component name="ShedulerTime" class="Framework.Configuration.Domain.ShedulerTime, Framework.Configuration.Domain" access="field.camelcase">
-      <property name="Value" column="shedulerTimevalue" access="field.camelcase" />
-      <property name="ValueType" column="shedulerTimevalueType" access="field.camelcase" />
-    </component>
-  </class>
   <class name="Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight" table="AccessableBusinessRoleReportRight">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />

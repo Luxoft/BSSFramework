@@ -66,10 +66,7 @@ namespace Framework.Configuration.BLL
             IAuthorizationBLLContext authorizationBLLContext,
             Func<BLLSecurityMode, IBLLSimpleQueryBase<IEmployee>> getEmployeeSourceFunc,
             IEnumerable<ITargetSystemService> targetSystemServices,
-            IMessageSender<RunRegularJobModel> regularJobMessageSender,
             [NotNull] ISerializerFactory<string> systemConstantSerializerFactory,
-            [NotNull] IContextEvaluator<IConfigurationBLLContext> rootContextEvaluator,
-            [NotNull] object serviceEnvironmentSource,
             [NotNull] IExceptionService exceptionService,
             [NotNull] Func<long> getCurrentRevision)
             : base(serviceProvider, dalFactory, operationListeners, sourceListeners, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService, dateTimeService)
@@ -92,8 +89,6 @@ namespace Framework.Configuration.BLL
 
             this.lazyTargetSystemServiceCache = LazyHelper.Create(() => targetSystemServices.ToDictionary(s => s.TargetSystem));
 
-            this.RegularJobMessageSender = regularJobMessageSender ?? MessageSender<RunRegularJobModel>.NotImplemented;
-
             this.domainTypeCache = new DictionaryCache<Type, DomainType>(type =>
 
                 this.GetTargetSystemService(type, false).Maybe(targetService => this.GetDomainType(targetService, type))).WithLock();
@@ -103,8 +98,6 @@ namespace Framework.Configuration.BLL
                 new EqualityComparerImpl<IDomainType>((dt1, dt2) => dt1.Name == dt2.Name && dt1.NameSpace == dt2.NameSpace, dt => dt.Name.GetHashCode() ^ dt.NameSpace.GetHashCode())).WithLock();
 
             this.SystemConstantSerializerFactory = systemConstantSerializerFactory ?? throw new ArgumentNullException(nameof(systemConstantSerializerFactory));
-            this.RootContextEvaluator = rootContextEvaluator ?? throw new ArgumentNullException(nameof(rootContextEvaluator));
-            this.ServiceEnvironmentSource = serviceEnvironmentSource ?? throw new ArgumentNullException(nameof(serviceEnvironmentSource));
 
             this.ComplexDomainTypeResolver = TypeResolverHelper.Create(
                 (DomainType domainType) =>
@@ -132,8 +125,6 @@ namespace Framework.Configuration.BLL
 
         public ITypeResolver<DomainType> ComplexDomainTypeResolver { get; }
 
-        public IMessageSender<RunRegularJobModel> RegularJobMessageSender { get; }
-
         public override IConfigurationBLLFactoryContainer Logics => this.lazyLogics.Value;
 
         public IAuthorizationBLLContext Authorization { get; }
@@ -145,12 +136,6 @@ namespace Framework.Configuration.BLL
         public IExceptionService ExceptionService { get; }
 
         public ISerializerFactory<string> SystemConstantSerializerFactory { get; }
-
-        /// <inheritdoc />
-        public IContextEvaluator<IConfigurationBLLContext> RootContextEvaluator { get; }
-
-        /// <inheritdoc />
-        public object ServiceEnvironmentSource { get; }
 
         public bool SubscriptionEnabled => this.lazyTargetSystemServiceCache.Value.Values.Any(tss => tss.TargetSystem.SubscriptionEnabled);
 

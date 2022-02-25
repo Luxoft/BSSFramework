@@ -47,10 +47,9 @@ namespace SampleSystem.ServiceEnvironment
             IDBSessionFactory sessionFactory,
             INotificationContext notificationContext,
             IUserAuthenticationService userAuthenticationService,
-            IMessageSender<RunRegularJobModel> regularJobSender = null,
             bool? isDebugMode = null,
             Func<ISampleSystemBLLContext, ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, Guid>> securityExpressionBuilderFactoryFunc = null)
-            : base(serviceProvider, sessionFactory, notificationContext, userAuthenticationService, regularJobSender, new SampleSystemSubscriptionsMetadataFinder())
+            : base(serviceProvider, sessionFactory, notificationContext, userAuthenticationService, new SampleSystemSubscriptionsMetadataFinder())
         {
             this.InitLogger();
 

@@ -24,9 +24,6 @@ namespace Configurator.Client.Context.ConfigurationService
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/ForceDomainTypeEvent", ReplyAction="http://tempuri.org/ConfigSLJsonController/ForceDomainTypeEventResponse")]
         System.IAsyncResult BeginForceDomainTypeEvent(Framework.Configuration.Generated.DTO.DomainTypeEventModelStrictDTO domainTypeEventModel, System.AsyncCallback callback, object asyncState);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/ForceRegularJobs", ReplyAction="http://tempuri.org/ConfigSLJsonController/ForceRegularJobsResponse")]
-        System.IAsyncResult BeginForceRegularJobs(Framework.Configuration.Generated.DTO.ForceRegularJobsRequest request, System.AsyncCallback callback, object asyncState);
-        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetControlSettings", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetControlSettingsResponse")]
         System.IAsyncResult BeginGetControlSettings(string name, System.AsyncCallback callback, object asyncState);
         
@@ -55,19 +52,6 @@ namespace Configurator.Client.Context.ConfigurationService
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetFullExceptionMessagesByRootFilter", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetFullExceptionMessagesByRootFilterRes" +
             "ponse")]
         System.IAsyncResult BeginGetFullExceptionMessagesByRootFilter(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO filter, System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetFullRegularJob", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetFullRegularJobResponse")]
-        System.IAsyncResult BeginGetFullRegularJob(Framework.Configuration.Generated.DTO.RegularJobIdentityDTO regularJobIdentity, System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetFullRegularJobRevisionModelsBy", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetFullRegularJobRevisionModelsByRespon" +
-            "se")]
-        System.IAsyncResult BeginGetFullRegularJobRevisionModelsBy(Framework.Configuration.Generated.DTO.RegularJobRevisionFilterModelStrictDTO filter, System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetFullRegularJobs", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetFullRegularJobsResponse")]
-        System.IAsyncResult BeginGetFullRegularJobs(System.AsyncCallback callback, object asyncState);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetFullRegularJobsByIdents", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetFullRegularJobsByIdentsResponse")]
-        System.IAsyncResult BeginGetFullRegularJobsByIdents(System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobIdentityDTO> regularJobIdents, System.AsyncCallback callback, object asyncState);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetFullSequencesByIdents", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetFullSequencesByIdentsResponse")]
         System.IAsyncResult BeginGetFullSequencesByIdents(System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.SequenceIdentityDTO> sequenceIdents, System.AsyncCallback callback, object asyncState);
@@ -126,9 +110,6 @@ namespace Configurator.Client.Context.ConfigurationService
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetRichExceptionMessage", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetRichExceptionMessageResponse")]
         System.IAsyncResult BeginGetRichExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdentity, System.AsyncCallback callback, object asyncState);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetRichRegularJob", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetRichRegularJobResponse")]
-        System.IAsyncResult BeginGetRichRegularJob(Framework.Configuration.Generated.DTO.RegularJobIdentityDTO regularJobIdentity, System.AsyncCallback callback, object asyncState);
-        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/GetRichSequence", ReplyAction="http://tempuri.org/ConfigSLJsonController/GetRichSequenceResponse")]
         System.IAsyncResult BeginGetRichSequence(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity, System.AsyncCallback callback, object asyncState);
         
@@ -186,9 +167,6 @@ namespace Configurator.Client.Context.ConfigurationService
             "")]
         System.IAsyncResult BeginRemoveControlSettingsCollection(System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.ControlSettingsIdentityDTO> controlSettingsIdCollection, System.AsyncCallback callback, object asyncState);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/RemoveRegularJob", ReplyAction="http://tempuri.org/ConfigSLJsonController/RemoveRegularJobResponse")]
-        System.IAsyncResult BeginRemoveRegularJob(Framework.Configuration.Generated.DTO.RegularJobIdentityDTO regularJobIdent, System.AsyncCallback callback, object asyncState);
-        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/RemoveSequence", ReplyAction="http://tempuri.org/ConfigSLJsonController/RemoveSequenceResponse")]
         System.IAsyncResult BeginRemoveSequence(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent, System.AsyncCallback callback, object asyncState);
         
@@ -204,9 +182,6 @@ namespace Configurator.Client.Context.ConfigurationService
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/SaveExceptionMessage", ReplyAction="http://tempuri.org/ConfigSLJsonController/SaveExceptionMessageResponse")]
         System.IAsyncResult BeginSaveExceptionMessage(Framework.Configuration.Generated.DTO.ExceptionMessageStrictDTO exceptionMessageStrict, System.AsyncCallback callback, object asyncState);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/SaveRegularJob", ReplyAction="http://tempuri.org/ConfigSLJsonController/SaveRegularJobResponse")]
-        System.IAsyncResult BeginSaveRegularJob(Framework.Configuration.Generated.DTO.RegularJobStrictDTO regularJobStrict, System.AsyncCallback callback, object asyncState);
-        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/SaveSequence", ReplyAction="http://tempuri.org/ConfigSLJsonController/SaveSequenceResponse")]
         System.IAsyncResult BeginSaveSequence(Framework.Configuration.Generated.DTO.SequenceStrictDTO sequenceStrict, System.AsyncCallback callback, object asyncState);
         
@@ -219,16 +194,11 @@ namespace Configurator.Client.Context.ConfigurationService
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/SetAttachmentTags", ReplyAction="http://tempuri.org/ConfigSLJsonController/SetAttachmentTagsResponse")]
         System.IAsyncResult BeginSetAttachmentTags(Framework.Configuration.Generated.DTO.SetAttachmentTagsRequest request, System.AsyncCallback callback, object asyncState);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ConfigSLJsonController/SyncPulseJobs", ReplyAction="http://tempuri.org/ConfigSLJsonController/SyncPulseJobsResponse")]
-        System.IAsyncResult BeginSyncPulseJobs(System.AsyncCallback callback, object asyncState);
-        
         Framework.Configuration.Generated.DTO.SequenceRichDTO EndCreateSequence(System.IAsyncResult result);
         
         Framework.Configuration.Generated.DTO.UserActionRichDTO EndCreateUserAction(System.IAsyncResult result);
         
         void EndForceDomainTypeEvent(System.IAsyncResult result);
-        
-        void EndForceRegularJobs(System.IAsyncResult result);
         
         Framework.Configuration.Generated.DTO.ControlSettingsRichDTO EndGetControlSettings(System.IAsyncResult result);
         
@@ -245,14 +215,6 @@ namespace Configurator.Client.Context.ConfigurationService
         System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO> EndGetFullExceptionMessagesByIdents(System.IAsyncResult result);
         
         System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO> EndGetFullExceptionMessagesByRootFilter(System.IAsyncResult result);
-        
-        Framework.Configuration.Generated.DTO.RegularJobFullDTO EndGetFullRegularJob(System.IAsyncResult result);
-        
-        System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobRevisionModelFullDTO> EndGetFullRegularJobRevisionModelsBy(System.IAsyncResult result);
-        
-        System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobFullDTO> EndGetFullRegularJobs(System.IAsyncResult result);
-        
-        System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.RegularJobFullDTO> EndGetFullRegularJobsByIdents(System.IAsyncResult result);
         
         System.Collections.ObjectModel.ObservableCollection<Framework.Configuration.Generated.DTO.SequenceFullDTO> EndGetFullSequencesByIdents(System.IAsyncResult result);
         
@@ -288,8 +250,6 @@ namespace Configurator.Client.Context.ConfigurationService
         
         Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO EndGetRichExceptionMessage(System.IAsyncResult result);
         
-        Framework.Configuration.Generated.DTO.RegularJobRichDTO EndGetRichRegularJob(System.IAsyncResult result);
-        
         Framework.Configuration.Generated.DTO.SequenceRichDTO EndGetRichSequence(System.IAsyncResult result);
         
         Framework.Configuration.Generated.DTO.SystemConstantRichDTO EndGetRichSystemConstant(System.IAsyncResult result);
@@ -324,8 +284,6 @@ namespace Configurator.Client.Context.ConfigurationService
         
         void EndRemoveControlSettingsCollection(System.IAsyncResult result);
         
-        void EndRemoveRegularJob(System.IAsyncResult result);
-        
         void EndRemoveSequence(System.IAsyncResult result);
         
         Framework.Configuration.Generated.DTO.AttachmentIdentityDTO EndSaveAttachment(System.IAsyncResult result);
@@ -336,8 +294,6 @@ namespace Configurator.Client.Context.ConfigurationService
         
         Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO EndSaveExceptionMessage(System.IAsyncResult result);
         
-        Framework.Configuration.Generated.DTO.RegularJobIdentityDTO EndSaveRegularJob(System.IAsyncResult result);
-        
         Framework.Configuration.Generated.DTO.SequenceIdentityDTO EndSaveSequence(System.IAsyncResult result);
         
         Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO EndSaveSystemConstant(System.IAsyncResult result);
@@ -345,7 +301,5 @@ namespace Configurator.Client.Context.ConfigurationService
         Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO EndSaveTargetSystem(System.IAsyncResult result);
         
         void EndSetAttachmentTags(System.IAsyncResult result);
-        
-        void EndSyncPulseJobs(System.IAsyncResult result);
     }
 }

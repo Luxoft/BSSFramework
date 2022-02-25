@@ -64,7 +64,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             [NotNull] IDBSessionFactory sessionFactory,
             [NotNull] INotificationContext notificationContext,
             [NotNull] IUserAuthenticationService userAuthenticationService,
-            IMessageSender<Framework.Configuration.Domain.RunRegularJobModel> regularJobSender = null,
             ISubscriptionMetadataFinder subscriptionsMetadataFinder = null)
         {
             this.RootServiceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
@@ -102,8 +101,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     .ToBLLContextValidationExtendedData<Framework.Workflow.BLL.IWorkflowBLLContext, Framework.Workflow.Domain.PersistentDomainObjectBase, Guid>()
                     .Pipe(extendedValidationData => new WorkflowValidationMap(extendedValidationData))
                     .ToCompileCache();
-
-            this.RegularJobMessageSender = regularJobSender ?? MessageSender<Framework.Configuration.Domain.RunRegularJobModel>.NotImplemented;
 
             this.authorizationFetchService = new AuthorizationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Authorization.Domain.PersistentDomainObjectBase>.OData);
 
@@ -151,8 +148,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             get { return NativeDotVisualizer.Configuration.OverrideInput((DotGraph graph) => graph.ToString()); }
         }
 
-        public IMessageSender<Framework.Configuration.Domain.RunRegularJobModel> RegularJobMessageSender { get; }
-
         public virtual bool IsDebugMode => Debugger.IsAttached;
 
         /// <summary>
@@ -161,7 +156,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         public bool IsInitialize { get; private set; }
 
         public IObjectStorage ObjectStorage { get; private set; }
-        
+
         /// <summary>
         /// Получает хранилище описаний подписок.
         /// </summary>
@@ -277,7 +272,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
             private readonly Lazy<IEventsSubscriptionManager<IWorkflowBLLContext, Framework.Workflow.Domain.PersistentDomainObjectBase>> lazyWorkflowEventsSubscriptionManager;
 
-            protected ServiceEnvironmentBLLContextContainer([NotNull]ServiceEnvironmentBase serviceEnvironment, [NotNull] IServiceProvider scopedServiceProvider, [NotNull] IDBSession session, string currentPrincipalName)
+            protected ServiceEnvironmentBLLContextContainer([NotNull] ServiceEnvironmentBase serviceEnvironment, [NotNull] IServiceProvider scopedServiceProvider, [NotNull] IDBSession session, string currentPrincipalName)
             {
                 this.ServiceEnvironment = serviceEnvironment ?? throw new ArgumentNullException(nameof(serviceEnvironment));
                 this.ScopedServiceProvider = scopedServiceProvider ?? throw new ArgumentNullException(nameof(scopedServiceProvider));
@@ -410,10 +405,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     this.Authorization,
                     this.GetEmployeeSource,
                     this.targetSystems,
-                    this.ServiceEnvironment.RegularJobMessageSender,
                     this.SystemConstantSerializerFactory,
-                    new RootContextEvaluator<IConfigurationBLLContext>(this.ServiceEnvironment, this.ServiceEnvironment.RootServiceProvider),
-                    this.ServiceEnvironment,
                     LazyInterfaceImplementHelper.CreateProxy(this.GetExceptionService),
                     this.Session.GetCurrentRevision);
             }

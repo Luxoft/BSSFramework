@@ -53,10 +53,9 @@ namespace SampleSystem.WebApiCore
             IUserAuthenticationService userAuthenticationService,
             IOptions<SmtpSettings> smtpSettings,
             IRewriteReceiversService rewriteReceiversService = null,
-            IMessageSender<RunRegularJobModel> regularJobSender = null,
             bool? isDebugMode = null,
             Func<ISampleSystemBLLContext, ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>> securityExpressionBuilderFactoryFunc = null)
-            : base(serviceProvider, sessionFactory, notificationContext, userAuthenticationService, regularJobSender, isDebugMode, securityExpressionBuilderFactoryFunc)
+            : base(serviceProvider, sessionFactory, notificationContext, userAuthenticationService, isDebugMode, securityExpressionBuilderFactoryFunc)
         {
             this.smtpSettings = smtpSettings.Value;
             this.rewriteReceiversService = rewriteReceiversService;

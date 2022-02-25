@@ -18,8 +18,6 @@ namespace SampleSystem.ServiceEnvironment
 
         public readonly string NotificationQueueName;
 
-        public readonly string RegularJobQueueName;
-
         public readonly string NotificationFromAddress;
 
         public readonly string NotificationFromAddressDisplayName;
@@ -33,7 +31,6 @@ namespace SampleSystem.ServiceEnvironment
             var msmqServerName = ConfigurationManager.AppSettings["MsmqServer"];
             var integrationEventQueueName = ConfigurationManager.AppSettings["IntegrationEventQueueName"];
             var notificationQueueName = ConfigurationManager.AppSettings["NotificationsQueueName"];
-            var regularJobQueueName = ConfigurationManager.AppSettings["RegularJobQueueName"];  // REGULARJOBQUEUE
             var notificationFromAddress = ConfigurationManager.AppSettings["notificationFromAddress"];
             var notificationFromAddressDisplayName = ConfigurationManager.AppSettings["notificationFromAddressDisplayName"];
             var exceptionNotificationEmails = ConfigurationManager.AppSettings["ExceptionNotificationEmails"];
@@ -45,7 +42,6 @@ namespace SampleSystem.ServiceEnvironment
                 msmqServerName,
                 integrationEventQueueName,
                 notificationQueueName,
-                regularJobQueueName,
                 notificationFromAddress,
                 notificationFromAddressDisplayName,
                 exceptionNotificationEmails,
@@ -57,7 +53,6 @@ namespace SampleSystem.ServiceEnvironment
             [NotNull] string msmqServerName,
             [NotNull] string integrationEventQueueName,
             [NotNull] string notificationQueueName,
-            [NotNull] string regularJobQueueName,
             [NotNull] string notificationFromAddress,
             [NotNull] string notificationFromAddressDisplayName,
             [NotNull] string exceptionNotificationEmails,
@@ -67,7 +62,6 @@ namespace SampleSystem.ServiceEnvironment
             if (msmqServerName == null) throw new ArgumentNullException(nameof(msmqServerName));
             if (integrationEventQueueName == null) throw new ArgumentNullException(nameof(integrationEventQueueName));
             if (notificationQueueName == null) throw new ArgumentNullException(nameof(notificationQueueName));
-            if (regularJobQueueName == null) throw new ArgumentNullException(nameof(regularJobQueueName));
             if (notificationFromAddress == null) throw new ArgumentNullException(nameof(notificationFromAddress));
             if (notificationFromAddressDisplayName == null) throw new ArgumentNullException(nameof(notificationFromAddressDisplayName));
             if (exceptionNotificationEmails == null) throw new ArgumentNullException(nameof(exceptionNotificationEmails));
@@ -75,7 +69,6 @@ namespace SampleSystem.ServiceEnvironment
             this.MsmqServerName = msmqServerName;
             this.IntegrationEventQueueName = integrationEventQueueName;
             this.NotificationQueueName = notificationQueueName;
-            this.RegularJobQueueName = regularJobQueueName;
             this.NotificationFromAddress = notificationFromAddress;
             this.NotificationFromAddressDisplayName = notificationFromAddressDisplayName;
             this.ExceptionNotificationEmails = exceptionNotificationEmails;

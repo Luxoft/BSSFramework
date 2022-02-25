@@ -13,16 +13,6 @@ namespace Framework.Configuration
 
         #endregion
 
-        #region MessageTemplate
-
-        [SecurityOperation(SecurityOperationCode.MessageTemplateView)]
-        MessageTemplateView,
-
-        [SecurityOperation(SecurityOperationCode.MessageTemplateEdit)]
-        MessageTemplateEdit,
-
-        #endregion
-
         #region Subscription
 
         [SecurityOperation(SecurityOperationCode.SubscriptionView)]
@@ -30,25 +20,6 @@ namespace Framework.Configuration
 
         [SecurityOperation(SecurityOperationCode.SubscriptionEdit)]
         SubscriptionEdit,
-
-        [SecurityOperation(SecurityOperationCode.SubscriptionTest)]
-        SubscriptionTest,
-
-        #endregion
-
-        #region RegularJob
-
-        [SecurityOperation(SecurityOperationCode.RegularJobView)]
-        RegularJobView,
-
-        [SecurityOperation(SecurityOperationCode.RegularJobEdit)]
-        RegularJobEdit,
-
-        /// <summary>
-        /// Форсирование запуска RegularJob-а
-        /// </summary>
-        [SecurityOperation(SecurityOperationCode.RegularJobForce)]
-        RegularJobForce,
 
         #endregion
 

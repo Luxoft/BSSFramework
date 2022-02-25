@@ -12,7 +12,6 @@ namespace Framework.Configuration.ClientGenerate
             this.AddSystemConstantMethods();
             this.AddCodeFirstSubscriptionMethods();
             this.AddExceptionMessageMethods();
-            this.AddRegularJobMethods();
             this.AddSequenceMethods();
             this.AddTargetSystemMethods();
 
@@ -56,25 +55,7 @@ namespace Framework.Configuration.ClientGenerate
             this.Add(facade => facade.GetRichExceptionMessage(default));
             this.Add(facade => facade.SaveExceptionMessage(default));
         }
-
-        private void AddRegularJobMethods()
-        {
-            this.Add(facade => facade.GetFullRegularJobs());
-
-            this.Add(facade => facade.GetFullRegularJobsByIdents(default));
-
-            this.Add(facade => facade.GetFullRegularJob(default));
-            this.Add(facade => facade.GetRichRegularJob(default));
-
-            this.Add(facade => facade.SaveRegularJob(default));
-            this.Add(facade => facade.RemoveRegularJob(default));
-
-            this.Add(facade => facade.GetFullRegularJobRevisionModelsBy(default));
-
-            this.Add(facade => facade.SyncPulseJobs());
-            this.Add(facade => facade.ForceRegularJobs(default));
-        }
-
+        
         private void AddSequenceMethods()
         {
             this.Add(facade => facade.GetFullSequencesByIdents(default));

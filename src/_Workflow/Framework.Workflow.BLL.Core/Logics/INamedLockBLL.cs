@@ -6,6 +6,6 @@ namespace Framework.Workflow.BLL
     {
         void CheckInit();
 
-        void Lock(NamedLockOperation regularJobLock);
+        void Lock(NamedLockOperation lockOperation);
     }
 }

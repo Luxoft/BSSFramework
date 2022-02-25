@@ -47,7 +47,6 @@ export let getFullManagementUnitAndBusinessUnitLinksByODataQueryStringAsyncFunc 
 export let getFullManagementUnitAndHRDepartmentLinksByODataQueryStringAsyncFunc = _getFullManagementUnitAndHRDepartmentLinksByODataQueryString();
 export let getFullManagementUnitsByODataQueryStringAsyncFunc = _getFullManagementUnitsByODataQueryString();
 export let getFullPrincipalsByODataQueryStringAsyncFunc = _getFullPrincipalsByODataQueryString();
-export let getFullRegularJobResultsByODataQueryStringAsyncFunc = _getFullRegularJobResultsByODataQueryString();
 export let getFullSqlParserTestObjContainersByODataQueryStringAsyncFunc = _getFullSqlParserTestObjContainersByODataQueryString();
 export let getFullSqlParserTestObjsByODataQueryStringAsyncFunc = _getFullSqlParserTestObjsByODataQueryString();
 export let getFullTestCustomContextSecurityObjsByODataQueryStringAsyncFunc = _getFullTestCustomContextSecurityObjsByODataQueryString();
@@ -82,7 +81,6 @@ export let getSimpleManagementUnitAndBusinessUnitLinksByODataQueryStringAsyncFun
 export let getSimpleManagementUnitAndHRDepartmentLinksByODataQueryStringAsyncFunc = _getSimpleManagementUnitAndHRDepartmentLinksByODataQueryString();
 export let getSimpleManagementUnitsByODataQueryStringAsyncFunc = _getSimpleManagementUnitsByODataQueryString();
 export let getSimplePrincipalsByODataQueryStringAsyncFunc = _getSimplePrincipalsByODataQueryString();
-export let getSimpleRegularJobResultsByODataQueryStringAsyncFunc = _getSimpleRegularJobResultsByODataQueryString();
 export let getSimpleSqlParserTestObjContainersByODataQueryStringAsyncFunc = _getSimpleSqlParserTestObjContainersByODataQueryString();
 export let getSimpleSqlParserTestObjsByODataQueryStringAsyncFunc = _getSimpleSqlParserTestObjsByODataQueryString();
 export let getSimpleTestCustomContextSecurityObjsByODataQueryStringAsyncFunc = _getSimpleTestCustomContextSecurityObjsByODataQueryString();
@@ -372,14 +370,6 @@ function _getBusinessUnitProgramClassesByODataQueryString(): async.AsyncFunc3<st
         });
     }
 
-    function _getFullRegularJobResultsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.RegularJobResultFullDTO>, OData.SelectOperationResult<dto.RegularJobResultObservableFullDTO>, dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO> {
-        return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = odataQueryString;
-            let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.RegularJobResultFullDTO>, OData.SelectOperationResult<dto.RegularJobResultObservableFullDTO>, dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO>();
-            return service.getData('RegularJobResultQuery/GetFullRegularJobResultsByODataQueryString', {plain : dto.RegularJobResultFullDTO, observable : dto.RegularJobResultObservableFullDTO}, baseParameters);
-        });
-    }
-
     function _getFullSqlParserTestObjContainersByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.SqlParserTestObjContainerFullDTO>, OData.SelectOperationResult<dto.SqlParserTestObjContainerObservableFullDTO>, dto.SqlParserTestObjContainerFullDTO, dto.SqlParserTestObjContainerObservableFullDTO> {
         return new async.AsyncFunc3((odataQueryString: string) => {
             let baseParameters = odataQueryString;
@@ -656,14 +646,6 @@ function _getBusinessUnitProgramClassesByODataQueryString(): async.AsyncFunc3<st
             let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.PrincipalSimpleDTO>, OData.SelectOperationResult<dto.PrincipalObservableSimpleDTO>, dto.PrincipalSimpleDTO, dto.PrincipalObservableSimpleDTO>();
             return service.getData('PrincipalQuery/GetSimplePrincipalsByODataQueryString', {plain : dto.PrincipalSimpleDTO, observable : dto.PrincipalObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleRegularJobResultsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.RegularJobResultSimpleDTO>, OData.SelectOperationResult<dto.RegularJobResultObservableSimpleDTO>, dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO> {
-        return new async.AsyncFunc3((odataQueryString: string) => {
-            let baseParameters = odataQueryString;
-            let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.RegularJobResultSimpleDTO>, OData.SelectOperationResult<dto.RegularJobResultObservableSimpleDTO>, dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO>();
-            return service.getData('RegularJobResultQuery/GetSimpleRegularJobResultsByODataQueryString', {plain : dto.RegularJobResultSimpleDTO, observable : dto.RegularJobResultObservableSimpleDTO}, baseParameters);
         });
     }
 

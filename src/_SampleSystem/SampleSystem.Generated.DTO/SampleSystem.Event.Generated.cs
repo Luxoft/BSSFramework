@@ -148,8 +148,6 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.PrincipalRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ProjectSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ProjectRemoveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.RegularJobResultSaveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.RegularJobResultRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.RoleRoleDegreeLinkSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.RoleRoleDegreeLinkRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.SqlParserTestObjSaveEventDTO))]
@@ -6766,81 +6764,6 @@ namespace SampleSystem.Generated.DTO
         public ProjectEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.Project domainObject)
         {
             mappingService.MapProject(domainObject, this);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.RegularJobResult), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class RegularJobResultSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.RegularJobResultEventRichDTO RegularJobResult;
-        
-        public RegularJobResultSaveEventDTO()
-        {
-        }
-        
-        public RegularJobResultSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.RegularJobResult domainObject)
-        {
-            this.RegularJobResult = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.RegularJobResult), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class RegularJobResultRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.RegularJobResultEventRichDTO RegularJobResult;
-        
-        public RegularJobResultRemoveEventDTO()
-        {
-        }
-        
-        public RegularJobResultRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.RegularJobResult domainObject)
-        {
-            this.RegularJobResult = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.RegularJobResult), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class RegularJobResultEventRichDTO
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Active;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? CreateDate;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CreatedBy;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid Id;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedBy;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime? ModifyDate;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string TestValue;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long Version;
-        
-        public RegularJobResultEventRichDTO()
-        {
-        }
-        
-        public RegularJobResultEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.RegularJobResult domainObject)
-        {
-            mappingService.MapRegularJobResult(domainObject, this);
         }
     }
     

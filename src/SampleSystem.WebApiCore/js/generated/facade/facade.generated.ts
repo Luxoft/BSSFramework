@@ -44,7 +44,6 @@ export let checkManagementUnitAccessAsyncFunc = _checkManagementUnitAccess();
 export let checkManagementUnitAndBusinessUnitLinkAccessAsyncFunc = _checkManagementUnitAndBusinessUnitLinkAccess();
 export let checkManagementUnitAndHRDepartmentLinkAccessAsyncFunc = _checkManagementUnitAndHRDepartmentLinkAccess();
 export let checkPrincipalAccessAsyncFunc = _checkPrincipalAccess();
-export let checkRegularJobResultAccessAsyncFunc = _checkRegularJobResultAccess();
 export let checkSqlParserTestObjAccessAsyncFunc = _checkSqlParserTestObjAccess();
 export let checkSqlParserTestObjContainerAccessAsyncFunc = _checkSqlParserTestObjContainerAccess();
 export let checkTestImmutableObjAccessAsyncFunc = _checkTestImmutableObjAccess();
@@ -154,9 +153,6 @@ export let getFullManagementUnitTreeByOperationAsyncFunc = _getFullManagementUni
 export let getFullPrincipalAsyncFunc = _getFullPrincipal();
 export let getFullPrincipalsAsyncFunc = _getFullPrincipals();
 export let getFullPrincipalsByIdentsAsyncFunc = _getFullPrincipalsByIdents();
-export let getFullRegularJobResultAsyncFunc = _getFullRegularJobResult();
-export let getFullRegularJobResultsAsyncFunc = _getFullRegularJobResults();
-export let getFullRegularJobResultsByIdentsAsyncFunc = _getFullRegularJobResultsByIdents();
 export let getFullSqlParserTestObjAsyncFunc = _getFullSqlParserTestObj();
 export let getFullSqlParserTestObjContainerAsyncFunc = _getFullSqlParserTestObjContainer();
 export let getFullSqlParserTestObjContainersAsyncFunc = _getFullSqlParserTestObjContainers();
@@ -237,7 +233,6 @@ export let getRichManagementUnitAndBusinessUnitLinkAsyncFunc = _getRichManagemen
 export let getRichManagementUnitAndHRDepartmentLinkAsyncFunc = _getRichManagementUnitAndHRDepartmentLink();
 export let getRichManagementUnitByNameAsyncFunc = _getRichManagementUnitByName();
 export let getRichPrincipalAsyncFunc = _getRichPrincipal();
-export let getRichRegularJobResultAsyncFunc = _getRichRegularJobResult();
 export let getRichTestCustomContextSecurityObjAsyncFunc = _getRichTestCustomContextSecurityObj();
 export let getRichTestCustomContextSecurityObjByNameAsyncFunc = _getRichTestCustomContextSecurityObjByName();
 export let getRichTestImmutableObjAsyncFunc = _getRichTestImmutableObj();
@@ -351,9 +346,6 @@ export let getSimpleManagementUnitsByOperationAsyncFunc = _getSimpleManagementUn
 export let getSimplePrincipalAsyncFunc = _getSimplePrincipal();
 export let getSimplePrincipalsAsyncFunc = _getSimplePrincipals();
 export let getSimplePrincipalsByIdentsAsyncFunc = _getSimplePrincipalsByIdents();
-export let getSimpleRegularJobResultAsyncFunc = _getSimpleRegularJobResult();
-export let getSimpleRegularJobResultsAsyncFunc = _getSimpleRegularJobResults();
-export let getSimpleRegularJobResultsByIdentsAsyncFunc = _getSimpleRegularJobResultsByIdents();
 export let getSimpleSqlParserTestObjAsyncFunc = _getSimpleSqlParserTestObj();
 export let getSimpleSqlParserTestObjContainerAsyncFunc = _getSimpleSqlParserTestObjContainer();
 export let getSimpleSqlParserTestObjContainersAsyncFunc = _getSimpleSqlParserTestObjContainers();
@@ -534,7 +526,6 @@ export let hasManagementUnitAccessAsyncFunc = _hasManagementUnitAccess();
 export let hasManagementUnitAndBusinessUnitLinkAccessAsyncFunc = _hasManagementUnitAndBusinessUnitLinkAccess();
 export let hasManagementUnitAndHRDepartmentLinkAccessAsyncFunc = _hasManagementUnitAndHRDepartmentLinkAccess();
 export let hasPrincipalAccessAsyncFunc = _hasPrincipalAccess();
-export let hasRegularJobResultAccessAsyncFunc = _hasRegularJobResultAccess();
 export let hasSqlParserTestObjAccessAsyncFunc = _hasSqlParserTestObjAccess();
 export let hasSqlParserTestObjContainerAccessAsyncFunc = _hasSqlParserTestObjContainerAccess();
 export let hasTestImmutableObjAccessAsyncFunc = _hasTestImmutableObjAccess();
@@ -774,14 +765,6 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
             let baseParameters = {principalIdent : principalIdent, securityOperationCode : securityOperationCode};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
             return service.getData('Principal/CheckPrincipalAccess', baseParameters);
-        });
-    }
-
-    function _checkRegularJobResultAccess(): async.SimpleAsyncFunc3<dto.RegularJobResultIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
-        return new async.SimpleAsyncFunc3((regularJobResultIdent: dto.RegularJobResultIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
-            let baseParameters = {regularJobResultIdent : regularJobResultIdent, securityOperationCode : securityOperationCode};
-            let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('RegularJobResult/CheckRegularJobResultAccess', baseParameters);
         });
     }
 
@@ -1660,30 +1643,6 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
         });
     }
 
-    function _getFullRegularJobResult(): async.AsyncFunc3<dto.RegularJobResultIdentityDTO, dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO, dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO> {
-        return new async.AsyncFunc3((regularJobResultIdentity: dto.RegularJobResultIdentityDTO) => {
-            let baseParameters = regularJobResultIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO, dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO>();
-            return service.getData('RegularJobResult/GetFullRegularJobResult', {plain : dto.RegularJobResultFullDTO, observable : dto.RegularJobResultObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullRegularJobResults(): async.AsyncFunc2<Array<dto.RegularJobResultFullDTO>, Array<dto.RegularJobResultObservableFullDTO>, dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.RegularJobResultFullDTO>, Array<dto.RegularJobResultObservableFullDTO>, dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO>();
-            return service.getData('RegularJobResult/GetFullRegularJobResults', {plain : dto.RegularJobResultFullDTO, observable : dto.RegularJobResultObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullRegularJobResultsByIdents(): async.AsyncFunc3<dto.RegularJobResultIdentityDTO[], Array<dto.RegularJobResultFullDTO>, Array<dto.RegularJobResultObservableFullDTO>, dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO> {
-        return new async.AsyncFunc3((regularJobResultIdents: dto.RegularJobResultIdentityDTO[]) => {
-            let baseParameters = regularJobResultIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.RegularJobResultFullDTO>, Array<dto.RegularJobResultObservableFullDTO>, dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO>();
-            return service.getData('RegularJobResult/GetFullRegularJobResultsByIdents', {plain : dto.RegularJobResultFullDTO, observable : dto.RegularJobResultObservableFullDTO}, baseParameters);
-        });
-    }
-
     function _getFullSqlParserTestObj(): async.AsyncFunc3<dto.SqlParserTestObjIdentityDTO, dto.SqlParserTestObjFullDTO, dto.SqlParserTestObjObservableFullDTO, dto.SqlParserTestObjFullDTO, dto.SqlParserTestObjObservableFullDTO> {
         return new async.AsyncFunc3((sqlParserTestObjIdentity: dto.SqlParserTestObjIdentityDTO) => {
             let baseParameters = sqlParserTestObjIdentity;
@@ -2321,14 +2280,6 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
             let baseParameters = principalIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.PrincipalRichDTO, dto.PrincipalObservableRichDTO, dto.PrincipalRichDTO, dto.PrincipalObservableRichDTO>();
             return service.getData('Principal/GetRichPrincipal', {plain : dto.PrincipalRichDTO, observable : dto.PrincipalObservableRichDTO}, baseParameters);
-        });
-    }
-
-    function _getRichRegularJobResult(): async.AsyncFunc3<dto.RegularJobResultIdentityDTO, dto.RegularJobResultRichDTO, dto.RegularJobResultObservableRichDTO, dto.RegularJobResultRichDTO, dto.RegularJobResultObservableRichDTO> {
-        return new async.AsyncFunc3((regularJobResultIdentity: dto.RegularJobResultIdentityDTO) => {
-            let baseParameters = regularJobResultIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.RegularJobResultRichDTO, dto.RegularJobResultObservableRichDTO, dto.RegularJobResultRichDTO, dto.RegularJobResultObservableRichDTO>();
-            return service.getData('RegularJobResult/GetRichRegularJobResult', {plain : dto.RegularJobResultRichDTO, observable : dto.RegularJobResultObservableRichDTO}, baseParameters);
         });
     }
 
@@ -3236,30 +3187,6 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
             let baseParameters = principalIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.PrincipalSimpleDTO>, Array<dto.PrincipalObservableSimpleDTO>, dto.PrincipalSimpleDTO, dto.PrincipalObservableSimpleDTO>();
             return service.getData('Principal/GetSimplePrincipalsByIdents', {plain : dto.PrincipalSimpleDTO, observable : dto.PrincipalObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleRegularJobResult(): async.AsyncFunc3<dto.RegularJobResultIdentityDTO, dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO, dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO> {
-        return new async.AsyncFunc3((regularJobResultIdentity: dto.RegularJobResultIdentityDTO) => {
-            let baseParameters = regularJobResultIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO, dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO>();
-            return service.getData('RegularJobResult/GetSimpleRegularJobResult', {plain : dto.RegularJobResultSimpleDTO, observable : dto.RegularJobResultObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleRegularJobResults(): async.AsyncFunc2<Array<dto.RegularJobResultSimpleDTO>, Array<dto.RegularJobResultObservableSimpleDTO>, dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.RegularJobResultSimpleDTO>, Array<dto.RegularJobResultObservableSimpleDTO>, dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO>();
-            return service.getData('RegularJobResult/GetSimpleRegularJobResults', {plain : dto.RegularJobResultSimpleDTO, observable : dto.RegularJobResultObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleRegularJobResultsByIdents(): async.AsyncFunc3<dto.RegularJobResultIdentityDTO[], Array<dto.RegularJobResultSimpleDTO>, Array<dto.RegularJobResultObservableSimpleDTO>, dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO> {
-        return new async.AsyncFunc3((regularJobResultIdents: dto.RegularJobResultIdentityDTO[]) => {
-            let baseParameters = regularJobResultIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.RegularJobResultSimpleDTO>, Array<dto.RegularJobResultObservableSimpleDTO>, dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO>();
-            return service.getData('RegularJobResult/GetSimpleRegularJobResultsByIdents', {plain : dto.RegularJobResultSimpleDTO, observable : dto.RegularJobResultObservableSimpleDTO}, baseParameters);
         });
     }
 
@@ -4700,14 +4627,6 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
             let baseParameters = {principalIdent : principalIdent, securityOperationCode : securityOperationCode};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
             return service.getData('Principal/HasPrincipalAccess', baseParameters);
-        });
-    }
-
-    function _hasRegularJobResultAccess(): async.SimpleAsyncFunc3<dto.RegularJobResultIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
-        return new async.SimpleAsyncFunc3((regularJobResultIdent: dto.RegularJobResultIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
-            let baseParameters = {regularJobResultIdent : regularJobResultIdent, securityOperationCode : securityOperationCode};
-            let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('RegularJobResult/HasRegularJobResultAccess', baseParameters);
         });
     }
 

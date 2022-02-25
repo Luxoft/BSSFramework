@@ -40,16 +40,6 @@ namespace Framework.Configuration.BLL
 
         ITypeResolver<DomainType> ComplexDomainTypeResolver { get; }
 
-        /// <summary>
-        /// Фабрика контектов (нужно для RegularJob-ов)
-        /// </summary>
-        IContextEvaluator<IConfigurationBLLContext> RootContextEvaluator { get; }
-
-        /// <summary>
-        /// Envirmoment системы (нужно для RegularJob-ов)
-        /// </summary>
-        object ServiceEnvironmentSource { get; }
-
         DomainType GetDomainType(Type type, bool throwOnNotFound);
 
         DomainType GetDomainType(IDomainType type, bool throwOnNotFound = true);

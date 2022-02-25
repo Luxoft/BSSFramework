@@ -73,16 +73,7 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
         /// Environment Settings
         /// </summary>
         public EnvironmentSettings Settings { get; private set; }
-
-        /// <summary>
-        /// Нужен для тестов
-        /// </summary>
-        /// <param name="testValue">Тестовое сохраняемое значение</param>
-        public void SaveRegularJobTestValue(string testValue)
-        {
-            this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context => context.Logics.RegularJobResult.SaveTestValue(testValue));
-        }
-
+        
         private static TestServiceEnvironment CreateIntegrationEnvironment()
         {
             var serviceProvider = new ServiceCollection()

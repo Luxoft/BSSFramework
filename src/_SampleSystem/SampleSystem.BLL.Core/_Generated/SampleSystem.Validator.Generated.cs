@@ -85,7 +85,6 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.NamedLock>(this.GetNamedLockValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Principal>(this.GetPrincipalValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Project>(this.GetProjectValidationResult);
-            base.RegisterHandler<SampleSystem.Domain.RegularJobResult>(this.GetRegularJobResultValidationResult);
             base.RegisterHandler<SampleSystem.Domain.RoleRoleDegreeLink>(this.GetRoleRoleDegreeLinkValidationResult);
             base.RegisterHandler<SampleSystem.Domain.SqlParserTestObj>(this.GetSqlParserTestObjValidationResult);
             base.RegisterHandler<SampleSystem.Domain.SqlParserTestObjContainer>(this.GetSqlParserTestObjContainerValidationResult);
@@ -472,11 +471,6 @@ namespace SampleSystem.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetProjectValidationResult(SampleSystem.Domain.Project source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetRegularJobResultValidationResult(SampleSystem.Domain.RegularJobResult source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

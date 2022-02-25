@@ -652,14 +652,6 @@ namespace SampleSystem.Generated.DTO
         
         void MapProject(SampleSystem.Domain.Project domainObject, SampleSystem.Generated.DTO.ProjectEventRichDTO mappingObject);
         
-        void MapRegularJobResult(SampleSystem.Domain.RegularJobResult domainObject, SampleSystem.Generated.DTO.RegularJobResultSimpleDTO mappingObject);
-        
-        void MapRegularJobResult(SampleSystem.Domain.RegularJobResult domainObject, SampleSystem.Generated.DTO.RegularJobResultFullDTO mappingObject);
-        
-        void MapRegularJobResult(SampleSystem.Domain.RegularJobResult domainObject, SampleSystem.Generated.DTO.RegularJobResultRichDTO mappingObject);
-        
-        void MapRegularJobResult(SampleSystem.Domain.RegularJobResult domainObject, SampleSystem.Generated.DTO.RegularJobResultEventRichDTO mappingObject);
-        
         void MapRoleRoleDegreeLink(SampleSystem.Domain.RoleRoleDegreeLink domainObject, SampleSystem.Generated.DTO.RoleRoleDegreeLinkEventRichDTO mappingObject);
         
         void MapSingleEmployeeFilterModel(SampleSystem.Generated.DTO.SingleEmployeeFilterModelStrictDTO mappingObject, SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel domainObject);
@@ -1153,8 +1145,6 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.Principal ToPrincipal(SampleSystem.Generated.DTO.PrincipalStrictDTO principalStrictDTO, bool allowCreate);
         
         SampleSystem.Domain.Project ToProject(SampleSystem.Generated.DTO.ProjectIdentityDTO projectIdentityDTO);
-        
-        SampleSystem.Domain.RegularJobResult ToRegularJobResult(SampleSystem.Generated.DTO.RegularJobResultIdentityDTO regularJobResultIdentityDTO);
         
         SampleSystem.Domain.RoleRoleDegreeLink ToRoleRoleDegreeLink(SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO roleRoleDegreeLinkIdentityDTO);
         
@@ -6319,31 +6309,6 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Version = domainObject.Version;
         }
         
-        public virtual void MapRegularJobResult(SampleSystem.Domain.RegularJobResult domainObject, SampleSystem.Generated.DTO.RegularJobResultSimpleDTO mappingObject)
-        {
-            mappingObject.TestValue = domainObject.TestValue;
-        }
-        
-        public virtual void MapRegularJobResult(SampleSystem.Domain.RegularJobResult domainObject, SampleSystem.Generated.DTO.RegularJobResultFullDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapRegularJobResult(SampleSystem.Domain.RegularJobResult domainObject, SampleSystem.Generated.DTO.RegularJobResultRichDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapRegularJobResult(SampleSystem.Domain.RegularJobResult domainObject, SampleSystem.Generated.DTO.RegularJobResultEventRichDTO mappingObject)
-        {
-            mappingObject.Active = domainObject.Active;
-            mappingObject.CreateDate = domainObject.CreateDate;
-            mappingObject.CreatedBy = domainObject.CreatedBy;
-            mappingObject.Id = domainObject.Id;
-            mappingObject.ModifiedBy = domainObject.ModifiedBy;
-            mappingObject.ModifyDate = domainObject.ModifyDate;
-            mappingObject.TestValue = domainObject.TestValue;
-            mappingObject.Version = domainObject.Version;
-        }
-        
         public virtual void MapRoleRoleDegreeLink(SampleSystem.Domain.RoleRoleDegreeLink domainObject, SampleSystem.Generated.DTO.RoleRoleDegreeLinkEventRichDTO mappingObject)
         {
             mappingObject.Active = domainObject.Active;
@@ -8262,11 +8227,6 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.Project ToProject(SampleSystem.Generated.DTO.ProjectIdentityDTO projectIdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.Project>(projectIdentityDTO.Id);
-        }
-        
-        public virtual SampleSystem.Domain.RegularJobResult ToRegularJobResult(SampleSystem.Generated.DTO.RegularJobResultIdentityDTO regularJobResultIdentityDTO)
-        {
-            return this.GetById<SampleSystem.Domain.RegularJobResult>(regularJobResultIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.RoleRoleDegreeLink ToRoleRoleDegreeLink(SampleSystem.Generated.DTO.RoleRoleDegreeLinkIdentityDTO roleRoleDegreeLinkIdentityDTO)

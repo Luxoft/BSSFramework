@@ -2721,10 +2721,6 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetProjectValidationMap()));
             }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.RegularJobResult)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetRegularJobResultValidationMap()));
-            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.RoleRoleDegreeLink)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetRoleRoleDegreeLinkValidationMap()));
@@ -3411,45 +3407,6 @@ namespace SampleSystem.BLL
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.Project> GetProjectValidationMap()
         {
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.Project>(this.GetProjectProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.RegularJobResult, System.DateTime?>> GetRegularJobResult_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.RegularJobResult>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.RegularJobResult, string>> GetRegularJobResult_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.RegularJobResult>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.RegularJobResult, string>> GetRegularJobResult_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.RegularJobResult>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.RegularJobResult, System.DateTime?>> GetRegularJobResult_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.RegularJobResult>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.RegularJobResult, string>> GetRegularJobResult_TestValueValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.RegularJobResult>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.RegularJobResult>> GetRegularJobResultProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.RegularJobResult> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.RegularJobResult, System.DateTime?>(source => source.CreateDate, currentClass, this.GetRegularJobResult_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.RegularJobResult, string>(source => source.CreatedBy, currentClass, this.GetRegularJobResult_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.RegularJobResult, string>(source => source.ModifiedBy, currentClass, this.GetRegularJobResult_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.RegularJobResult, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetRegularJobResult_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.RegularJobResult, string>(source => source.TestValue, currentClass, this.GetRegularJobResult_TestValueValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.RegularJobResult> GetRegularJobResultValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.RegularJobResult>(this.GetRegularJobResultProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.RoleRoleDegreeLink, System.DateTime?>> GetRoleRoleDegreeLink_CreateDateValidators()

@@ -810,10 +810,6 @@ namespace SampleSystem.BLL
             {
                 return SampleSystem.SampleSystemSecurityOperationCode.EmployeeEdit;
             }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.RegularJobResult) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
-            }
             else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.SqlParserTestObj) == domainType))
             {
                 return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
@@ -1025,7 +1021,6 @@ namespace SampleSystem.BLL
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLocationCollectionProperties, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestLocationCollectionPropertiesSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestSecurityObjItemProjection, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestSecurityObjItemProjectionSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.VisualEmployee, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemVisualEmployeeSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.RegularJobResult, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemRegularJobResultSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SqlParserTestObj, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemSqlParserTestObjSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SqlParserTestObjContainer, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemSqlParserTestObjContainerSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestCustomContextSecurityObj, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestCustomContextSecurityObjSecurityService>(serviceCollection);
@@ -1578,15 +1573,6 @@ namespace SampleSystem.BLL
         }
     }
     
-    public partial class SampleSystemRegularJobResultSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.RegularJobResult, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemRegularJobResultSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
     public partial class SampleSystemSqlParserTestObjSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.SqlParserTestObj, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
@@ -2007,16 +1993,6 @@ namespace SampleSystem.BLL
         }
         
         SampleSystem.BLL.IPrincipalBLLFactory PrincipalFactory
-        {
-            get;
-        }
-        
-        SampleSystem.BLL.IRegularJobResultBLL RegularJobResult
-        {
-            get;
-        }
-        
-        SampleSystem.BLL.IRegularJobResultBLLFactory RegularJobResultFactory
         {
             get;
         }
@@ -2587,14 +2563,6 @@ namespace SampleSystem.BLL
     }
     
     public partial interface ITestSecurityObjItemProjectionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemProjectionBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemProjectionBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemProjectionBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecurityObjItemProjectionBLL, Framework.SecuritySystem.BLLSecurityMode>
-    {
-    }
-    
-    public partial interface IRegularJobResultBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.RegularJobResult, System.Guid>
-    {
-    }
-    
-    public partial interface IRegularJobResultBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IRegularJobResultBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.RegularJobResult>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IRegularJobResultBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IRegularJobResultBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IRegularJobResultBLL, Framework.SecuritySystem.BLLSecurityMode>
     {
     }
     

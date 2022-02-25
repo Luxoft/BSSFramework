@@ -76,7 +76,6 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(this.GetManagementUnitAndHRDepartmentLinkValidationResult);
             base.RegisterHandler<SampleSystem.Domain.ManagementUnitFluentMapping>(this.GetManagementUnitFluentMappingValidationResult);
             base.RegisterHandler<SampleSystem.Domain.ManagementUnitToAncestorChildView>(this.GetManagementUnitToAncestorChildViewValidationResult);
-            base.RegisterHandler<SampleSystem.Domain.MessageTemplateContainer>(this.GetMessageTemplateContainerValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Models.Custom.DateModel>(this.GetDateModelValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Models.Filters.BusinessUnitProgramClassFilterModel>(this.GetBusinessUnitProgramClassFilterModelValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Models.Filters.EmployeeFilterModel>(this.GetEmployeeFilterModelValidationResult);
@@ -88,7 +87,6 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.Project>(this.GetProjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.RegularJobResult>(this.GetRegularJobResultValidationResult);
             base.RegisterHandler<SampleSystem.Domain.RoleRoleDegreeLink>(this.GetRoleRoleDegreeLinkValidationResult);
-            base.RegisterHandler<SampleSystem.Domain.SampleSystemMessageTemplate>(this.GetSampleSystemMessageTemplateValidationResult);
             base.RegisterHandler<SampleSystem.Domain.SqlParserTestObj>(this.GetSqlParserTestObjValidationResult);
             base.RegisterHandler<SampleSystem.Domain.SqlParserTestObjContainer>(this.GetSqlParserTestObjContainerValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestCustomContextSecurityObj>(this.GetTestCustomContextSecurityObjValidationResult);
@@ -458,11 +456,6 @@ namespace SampleSystem.BLL
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetMessageTemplateContainerValidationResult(SampleSystem.Domain.MessageTemplateContainer source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
         protected virtual Framework.Validation.ValidationResult GetNamedLockValidationResult(SampleSystem.Domain.NamedLock source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
@@ -489,11 +482,6 @@ namespace SampleSystem.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetRoleRoleDegreeLinkValidationResult(SampleSystem.Domain.RoleRoleDegreeLink source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetSampleSystemMessageTemplateValidationResult(SampleSystem.Domain.SampleSystemMessageTemplate source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

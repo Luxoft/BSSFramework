@@ -4,7 +4,6 @@ using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Templates;
-using Framework.ExpressionParsers;
 
 using JetBrains.Annotations;
 
@@ -44,11 +43,8 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Services
             this.bllContext = bllContext ?? throw new ArgumentNullException(nameof(bllContext));
             this.subscriptionMetadataStore = subscriptionMetadataStore ?? throw new ArgumentNullException(nameof(subscriptionMetadataStore));
         }
-
         private LambdaProcessorFactory<TBLLContext> CreateLambdaProcessorFactory() =>
-            new LambdaProcessorFactory<TBLLContext>(
-                this.bllContext,
-                new ExpressionParserFactory(CSharpNativeExpressionParser.Compile));
+                new LambdaProcessorFactory<TBLLContext>(this.bllContext);
 
         protected ConditionCheckSubscriptionsResolver<TBLLContext> CreateSubscriptionsResolver()
         {
@@ -56,10 +52,10 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Services
 
             return new ConditionCheckSubscriptionsResolver<TBLLContext>(
                 new SubscriptionMetadataSubscriptionResolver(
-                    new DomainObjectSubscriptionsResolver(contextFacade),
-                    this.subscriptionMetadataStore,
-                    new SubscriptionMetadataMapper(contextFacade),
-                    contextFacade),
+                 new DomainObjectSubscriptionsResolver(contextFacade),
+                 this.subscriptionMetadataStore,
+                 new SubscriptionMetadataMapper(contextFacade),
+                 contextFacade),
                 this.CreateLambdaProcessorFactory(),
                 contextFacade);
         }
@@ -103,14 +99,6 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Services
                 this.CreateRecipientsResolver(),
                 contextFacade);
 
-            return result;
-        }
-
-        /// <summary>Создаёт экземпляр службы тестирования подписок.</summary>
-        /// <returns>Экземпляр службы тестирования подписок.</returns>
-        public virtual TestingService<TBLLContext> CreateTestingService()
-        {
-            var result = new TestingService<TBLLContext>(this, this.CreateConfigurationContextFacade());
             return result;
         }
 

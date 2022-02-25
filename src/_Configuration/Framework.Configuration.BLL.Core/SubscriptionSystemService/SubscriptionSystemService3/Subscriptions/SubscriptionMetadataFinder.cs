@@ -37,16 +37,7 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions
         /// <returns>Список имён исключаемых типов.</returns>
         protected virtual IEnumerable<string> GetSubscriptionsMetadataExclusions()
         {
-            const string Key = "iad.framework.ignoreSubscriptionsMetadata";
-
-            var setting = ConfigurationManager.AppSettings[Key] ?? string.Empty;
-
-            var ignoredTypeNames = setting
-                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(s => s.Trim('\r', '\n', ' '))
-                .ToList();
-
-            return ignoredTypeNames;
+            yield break;
         }
 
         /// <summary>

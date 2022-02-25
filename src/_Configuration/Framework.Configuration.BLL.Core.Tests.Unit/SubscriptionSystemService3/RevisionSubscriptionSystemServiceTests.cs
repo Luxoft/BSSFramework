@@ -23,7 +23,6 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
     {
         private SubscriptionNotificationService<ITestBLLContext> notificationService;
         private RevisionService<IdentityObject> revisionService;
-        private TestingService<ITestBLLContext> testingService;
         private ConfigurationContextFacade configurationContextFacade;
 
         [SetUp]
@@ -31,13 +30,11 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
         {
             this.notificationService = this.Fixture.RegisterStub<SubscriptionNotificationService<ITestBLLContext>>();
             this.revisionService = this.Fixture.RegisterStub<RevisionService<IdentityObject>>();
-            this.testingService = this.Fixture.RegisterStub<TestingService<ITestBLLContext>>();
             this.configurationContextFacade = this.Fixture.RegisterDynamicMock<ConfigurationContextFacade>();
 
             var servicesFactory = this.Fixture.RegisterStub<SubscriptionServicesFactory<ITestBLLContext, IdentityObject>>();
             servicesFactory.CreateNotificationService().Returns(this.notificationService);
             servicesFactory.CreateRevisionService<IdentityObject >().Returns(this.revisionService);
-            servicesFactory.CreateTestingService().Returns(this.testingService);
             servicesFactory.CreateConfigurationContextFacade().Returns(this.configurationContextFacade);
         }
 
@@ -121,27 +118,6 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
             // Act
             var sut = this.Fixture.Create<RevisionSubscriptionSystemService<ITestBLLContext, IdentityObject>>();
             var actualResult = sut.GetObjectModifications(changes);
-
-            // Assert
-            actualResult.Should().BeSameAs(expectedResult);
-        }
-
-        [Test]
-        public void Process_Call_NonEmptyTryResultCollection()
-        {
-            // Arrange
-            var subscription = this.Fixture.Create<Subscription>();
-            var revision = this.Fixture.Create<long?>();
-            var objectId = this.Fixture.Create<Guid>();
-            var expectedResult = TryResult.Return(subscription);
-
-            this.testingService
-                .TestSubscription(subscription, objectId, revision)
-                .Returns(expectedResult);
-
-            // Act
-            var sut = this.Fixture.Create<RevisionSubscriptionSystemService<ITestBLLContext, IdentityObject >>();
-            var actualResult = sut.Process(subscription, revision, objectId);
 
             // Assert
             actualResult.Should().BeSameAs(expectedResult);

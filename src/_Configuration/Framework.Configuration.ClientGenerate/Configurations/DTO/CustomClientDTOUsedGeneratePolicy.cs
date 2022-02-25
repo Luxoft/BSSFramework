@@ -18,7 +18,7 @@ namespace Framework.Configuration.ClientGenerate
 
             if (identity == FileType.StrictDTO)
             {
-                return new[] { typeof(Attachment), typeof(SubscriptionContainer) }.Contains(domainType);
+                return new[] { typeof(Attachment) }.Contains(domainType);
             }
 
             return false;

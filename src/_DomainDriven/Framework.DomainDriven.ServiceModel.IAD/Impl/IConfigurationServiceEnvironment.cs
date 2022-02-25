@@ -6,7 +6,5 @@ namespace Framework.DomainDriven.ServiceModel.IAD
     public interface IConfigurationServiceEnvironment : IServiceEnvironment<IConfigurationBLLContext>
     {
         IObjectStorage ObjectStorage { get; }
-
-        IExpressionParserFactory ExpressionParsers { get; }
     }
 }

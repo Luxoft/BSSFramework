@@ -16,14 +16,14 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients
         where TBLLContext : class
     {
         private static readonly Dictionary<SubscriptionSourceMode, Func<ConfigurationContextFacade, LambdaProcessorFactory<TBLLContext>, ByRolesRecipientsResolverBase<TBLLContext>>>
-            Resolvers =
-            new Dictionary<SubscriptionSourceMode, Func<ConfigurationContextFacade, LambdaProcessorFactory<TBLLContext>, ByRolesRecipientsResolverBase<TBLLContext>>>
-            {
-                { SubscriptionSourceMode.Dynamic, (cf, pf) => new ByRolesRecipientsResolverDynamic<TBLLContext>(cf, pf) },
-                { SubscriptionSourceMode.Typed, (cf, pf) => new ByRolesRecipientsResolverTyped<TBLLContext>(cf, pf) },
-                { SubscriptionSourceMode.NonContext, (cf, pf) => new ByRolesRecipientsResolverNonContext<TBLLContext>(cf, pf) },
-                { SubscriptionSourceMode.Invalid, (cf, pf) => new ByRolesRecipientsResolverBase<TBLLContext>(cf, pf) }
-            };
+                Resolvers =
+                        new Dictionary<SubscriptionSourceMode, Func<ConfigurationContextFacade, LambdaProcessorFactory<TBLLContext>, ByRolesRecipientsResolverBase<TBLLContext>>>
+                        {
+                                { SubscriptionSourceMode.Dynamic, (cf, pf) => new ByRolesRecipientsResolverDynamic<TBLLContext>(cf, pf) },
+                                { SubscriptionSourceMode.Typed, (cf, pf) => new ByRolesRecipientsResolverTyped<TBLLContext>(cf, pf) },
+                                { SubscriptionSourceMode.NonContext, (cf, pf) => new ByRolesRecipientsResolverNonContext<TBLLContext>(cf, pf) },
+                                { SubscriptionSourceMode.Invalid, (cf, pf) => new ByRolesRecipientsResolverBase<TBLLContext>(cf, pf) }
+                        };
 
         private readonly ConfigurationContextFacade configurationContextFacade;
         private readonly LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory;
@@ -40,18 +40,8 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients
             [NotNull] ConfigurationContextFacade configurationContextFacade,
             [NotNull] LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
         {
-            if (configurationContextFacade == null)
-            {
-                throw new ArgumentNullException(nameof(configurationContextFacade));
-            }
-
-            if (lambdaProcessorFactory == null)
-            {
-                throw new ArgumentNullException(nameof(lambdaProcessorFactory));
-            }
-
-            this.configurationContextFacade = configurationContextFacade;
-            this.lambdaProcessorFactory = lambdaProcessorFactory;
+            this.configurationContextFacade = configurationContextFacade ?? throw new ArgumentNullException(nameof(configurationContextFacade));
+            this.lambdaProcessorFactory = lambdaProcessorFactory ?? throw new ArgumentNullException(nameof(lambdaProcessorFactory));
         }
 
         /// <summary>Выполняет поиск получателей уведомлений по подписке.</summary>

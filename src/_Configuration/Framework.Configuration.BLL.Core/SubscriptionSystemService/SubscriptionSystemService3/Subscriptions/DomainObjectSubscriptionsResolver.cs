@@ -38,18 +38,13 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions
         /// <inheritdoc/>
         public override IEnumerable<Subscription> Resolve<T>([NotNull] DomainObjectVersions<T> versions)
         {
-            if (versions == null)
-            {
-                throw new ArgumentNullException(nameof(versions));
-            }
+            yield break;
+        }
 
-            this.logger.Verbose("Search active subscriptions in database for domain object type '{DomainObjectType}'.", versions.DomainObjectType);
-
-            var result = this.configurationContextFacade.GetSubscriptions(versions.DomainObjectType);
-
-            this.logger.Verbose("'{resultCount}' active subscriptions has been found in database for domain object type '{DomainObjectType}'.", result.Count(), versions.DomainObjectType);
-
-            return result;
+        /// <inheritdoc/>
+        public override bool IsActiveSubscriptionForTypeExists([NotNull] Type domainObjectType)
+        {
+            return false;
         }
 
         /// <inheritdoc/>
@@ -81,23 +76,6 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions
             }
 
             this.logger.Verbose("Active subscription for code '{subscriptionCode}' and domain object type '{DomainObjectType}' has been found.", subscriptionCode, versions.DomainObjectType);
-
-            return result;
-        }
-
-        /// <inheritdoc/>
-        public override bool IsActiveSubscriptionForTypeExists([NotNull] Type domainObjectType)
-        {
-            if (domainObjectType == null)
-            {
-                throw new ArgumentNullException(nameof(domainObjectType));
-            }
-
-            this.logger.Verbose("Define is active subscription for type '{domainObjectType}' exists.", domainObjectType);
-
-            var result = this.configurationContextFacade.IsActiveSubscriptionsExists(domainObjectType);
-
-            this.logger.Verbose("Is active subscription for type '{domainObjectType}' exists: '{result}'.", domainObjectType, result);
 
             return result;
         }

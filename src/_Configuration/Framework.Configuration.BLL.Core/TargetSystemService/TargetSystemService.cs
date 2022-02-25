@@ -172,15 +172,6 @@ namespace Framework.Configuration.BLL
             IMessageSender<MessageTemplateNotification> subscriptionSender,
             SubscriptionMetadataStore subscriptionMetadataStore)
         {
-            if (!this.IsNewSubscriptionServiceRequired())
-            {
-                return new DBSubscription.RevisionSubscriptionService<TBLLContext, TPersistentDomainObjectBase>(
-                    this.Context,
-                    this,
-                    logger,
-                    subscriptionSender);
-            }
-
             if (subscriptionMetadataStore == null)
             {
                 throw new InvalidOperationException("SubscriptionMetadataStore instance can not be null for use new subscription services.");
@@ -315,21 +306,17 @@ namespace Framework.Configuration.BLL
 
         public void ExecuteRegularJob(RegularJob job)
         {
-            var del = this.Context.ExpressionParsers.GetRegularJobFunctionExpressionParser<TBLLContext>().GetDelegate(job);
-
-            del(this.TargetSystemContext);
+            throw new Exception("Del RegularJob");
         }
 
         public void ExecuteBLLContextLambda(ILambdaObject lambdaObject)
         {
-            var del = this.Context.ExpressionParsers.GetRegularJobFunctionExpressionParser<TBLLContext>().GetDelegate(lambdaObject.Value);
-
-            del(this.TargetSystemContext);
+            throw new Exception("Del RegularJob");
         }
 
         public void ValidateRegularJob(RegularJob job)
         {
-            this.Context.ExpressionParsers.GetRegularJobFunctionExpressionParser<TBLLContext>().Validate(job);
+            throw new Exception("Del RegularJob");
         }
 
         public abstract bool IsAssignable(Type domainType);
@@ -343,23 +330,6 @@ namespace Framework.Configuration.BLL
         Type ITargetSystemService.TargetSystemContextType
         {
             get { return typeof(TBLLContext); }
-        }
-
-        /// <summary>
-        /// Required flag for 'code first' subscriptions
-        /// </summary>
-        protected virtual bool IsNewSubscriptionServiceRequired()
-        {
-            const string key = "iad.framework.useNewSubscriptionRevisionService";
-            var setting = ConfigurationManagerHelper.GetAppSettings(key, false);
-            bool useNewService;
-
-            if (!bool.TryParse(setting, out useNewService))
-            {
-                useNewService = false;
-            }
-
-            return useNewService;
         }
     }
 }

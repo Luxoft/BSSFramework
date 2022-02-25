@@ -72,7 +72,6 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions
             subscription.AllowEmptyListOfRecipients = metadata.AllowEmptyListOfRecipients;
             subscription.RazorMessageTemplateType = metadata.MessageTemplateType;
             subscription.RecepientsMode = metadata.RecepientsSelectorMode;
-            subscription.DomainType = this.configurationContextFacade.GetDomainType(metadata.DomainObjectType);
             subscription.MetadataSourceType = metadata.GetType();
 
             subscription.Condition = MapLambda(metadata.GetConditionLambda());
@@ -87,6 +86,7 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions
             MapSecurityItems(metadata, subscription);
 
             subscription.MessageTemplate = new MessageTemplate();
+
 
             return subscription;
         }
@@ -131,9 +131,9 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions
             }
 
             var lambda = new SubscriptionLambda();
-            lambda.WithContext = true;
             lambda.FuncValue = metadata.Lambda;
             lambda.MetadataSourceType = metadata.GetType();
+
 
             var requirements = Requirements[metadata.DomainObjectChangeType];
 

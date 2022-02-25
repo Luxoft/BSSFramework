@@ -11,6 +11,7 @@ using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Configuration.SubscriptionModeling;
 using Framework.Core;
+using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.Notification;
 
@@ -21,23 +22,13 @@ using MAttachment = System.Net.Mail.Attachment;
 
 namespace Framework.Configuration.BLL
 {
-    public partial class MessageTemplateBLL
+    public class MessageTemplateBLL : BLLContextContainer<IConfigurationBLLContext>
     {
-        public MessageTemplate Create(MessageTemplateCreateModel _)
+        public MessageTemplateBLL(IConfigurationBLLContext context)
+            : base(context)
         {
-            return new MessageTemplate();
         }
 
-        /// <summary>
-        /// Creates the mail message.
-        /// </summary>
-        /// <param name="messageTemplate">The message template.</param>
-        /// <param name="includeAttachments">if set to <c>true</c> [include attachments].</param>
-        /// <param name="rootObject">The root object.</param>
-        /// <param name="sender">The sender.</param>
-        /// <param name="targetEmails">The target emails.</param>
-        /// <param name="carbonCopyEmails">Carbon Copy (CC) emails.</param>
-        /// <returns>Instance of <see cref="MailMessage"/>.</returns>
         public MailMessage CreateMailMessage(
             MessageTemplate messageTemplate,
             bool includeAttachments,
@@ -199,18 +190,20 @@ namespace Framework.Configuration.BLL
         {
             if (attachment.HasTag("IsTemplate"))
             {
-                var evaluator = context.TemplateEvaluatorFactory.Create<byte[]>(attachment);
 
-                if (evaluator != null)
-                {
-                    var result = evaluator.Evaluate(attachment.Content, rootObject, variables);
+                throw null;
+                //var evaluator = context.TemplateEvaluatorFactory.Create<byte[]>(attachment);
 
-                    var fileName = attachment.Name.Contains("{0}")
-                        ? string.Format(attachment.Name, context.DateTimeService.Now.ToString("yyyy-MM-dd_hh-mm-ss"))
-                        : attachment.Name;
+                //if (evaluator != null)
+                //{
+                //    var result = evaluator.Evaluate(attachment.Content, rootObject, variables);
 
-                    return new MAttachment(new MemoryStream(result), fileName);
-                }
+                //    var fileName = attachment.Name.Contains("{0}")
+                //        ? string.Format(attachment.Name, context.DateTimeService.Now.ToString("yyyy-MM-dd_hh-mm-ss"))
+                //        : attachment.Name;
+
+                //    return new MAttachment(new MemoryStream(result), fileName);
+                //}
             }
 
             return new MAttachment(new MemoryStream(attachment.Content), attachment.Name);
@@ -283,10 +276,6 @@ namespace Framework.Configuration.BLL
                         attachmentContainer.Attachments.Select(
                             dto => new MAttachment(new MemoryStream(dto.Content), dto.Name)));
                 }
-
-                resultAttachments.AddRange(
-                    this.Context.Logics.Attachment.GetObjectsBy(messageTemplate).Select(
-                        currentFileListItem => CreateAttachment(this.Context, currentFileListItem, rootObject, variables)));
             }
 
             var result = this.CreateMailMessage(subject, body, sender, recipients, copyRecipients, replyTo, resultAttachments);
@@ -302,10 +291,12 @@ namespace Framework.Configuration.BLL
         {
             if (messageTemplateNotification?.RazorMessageTemplateType == null)
             {
-                var evaluator = this.Context.TemplateEvaluatorFactory.Create<string>(messageTemplate);
-                var subject = evaluator.Evaluate(messageTemplate.Subject, rootObject, variables).SubStringUnsafe(500);
-                var body = evaluator.Evaluate(messageTemplate.Message, rootObject, variables);
-                return new Tuple<string, string>(subject, body);
+                throw null;
+
+                //var evaluator = this.Context.TemplateEvaluatorFactory.Create<string>(messageTemplate);
+                //var subject = evaluator.Evaluate(messageTemplate.Subject, rootObject, variables).SubStringUnsafe(500);
+                //var body = evaluator.Evaluate(messageTemplate.Message, rootObject, variables);
+                //return new Tuple<string, string>(subject, body);
             }
 
             var method = this.GetType()

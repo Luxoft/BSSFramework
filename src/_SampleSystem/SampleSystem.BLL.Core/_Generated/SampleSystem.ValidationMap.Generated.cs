@@ -2685,10 +2685,6 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetManagementUnitToAncestorChildViewValidationMap()));
             }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.MessageTemplateContainer)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetMessageTemplateContainerValidationMap()));
-            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.Models.Custom.DateModel)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetDateModelValidationMap()));
@@ -2732,10 +2728,6 @@ namespace SampleSystem.BLL
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.RoleRoleDegreeLink)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetRoleRoleDegreeLinkValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.SampleSystemMessageTemplate)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetSampleSystemMessageTemplateValidationMap()));
             }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.SqlParserTestObj)))
             {
@@ -3250,39 +3242,6 @@ namespace SampleSystem.BLL
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.ManagementUnit>(this.GetManagementUnitProperties);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.MessageTemplateContainer, System.DateTime?>> GetMessageTemplateContainer_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.MessageTemplateContainer>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.MessageTemplateContainer, string>> GetMessageTemplateContainer_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.MessageTemplateContainer>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.MessageTemplateContainer, string>> GetMessageTemplateContainer_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.MessageTemplateContainer>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.MessageTemplateContainer, System.DateTime?>> GetMessageTemplateContainer_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.MessageTemplateContainer>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.MessageTemplateContainer>> GetMessageTemplateContainerProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.MessageTemplateContainer> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.MessageTemplateContainer, System.DateTime?>(source => source.CreateDate, currentClass, this.GetMessageTemplateContainer_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.MessageTemplateContainer, string>(source => source.CreatedBy, currentClass, this.GetMessageTemplateContainer_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.MessageTemplateContainer, string>(source => source.ModifiedBy, currentClass, this.GetMessageTemplateContainer_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.MessageTemplateContainer, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetMessageTemplateContainer_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.MessageTemplateContainer> GetMessageTemplateContainerValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.MessageTemplateContainer>(this.GetMessageTemplateContainerProperties);
-        }
-        
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.NamedLock, System.DateTime?>> GetNamedLock_CreateDateValidators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.NamedLock>(this.AvailableValues.GetAvailableRange<System.DateTime>());
@@ -3524,45 +3483,6 @@ namespace SampleSystem.BLL
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.RoleRoleDegreeLink> GetRoleRoleDegreeLinkValidationMap()
         {
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.RoleRoleDegreeLink>(this.GetRoleRoleDegreeLinkProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.SampleSystemMessageTemplate, string>> GetSampleSystemMessageTemplate_CodeValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.SampleSystemMessageTemplate>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.SampleSystemMessageTemplate, System.DateTime?>> GetSampleSystemMessageTemplate_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.SampleSystemMessageTemplate>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.SampleSystemMessageTemplate, string>> GetSampleSystemMessageTemplate_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.SampleSystemMessageTemplate>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.SampleSystemMessageTemplate, string>> GetSampleSystemMessageTemplate_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.SampleSystemMessageTemplate>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.SampleSystemMessageTemplate, System.DateTime?>> GetSampleSystemMessageTemplate_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.SampleSystemMessageTemplate>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.SampleSystemMessageTemplate>> GetSampleSystemMessageTemplateProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.SampleSystemMessageTemplate> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.SampleSystemMessageTemplate, string>(source => source.Code, currentClass, this.GetSampleSystemMessageTemplate_CodeValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.SampleSystemMessageTemplate, System.DateTime?>(source => source.CreateDate, currentClass, this.GetSampleSystemMessageTemplate_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.SampleSystemMessageTemplate, string>(source => source.CreatedBy, currentClass, this.GetSampleSystemMessageTemplate_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.SampleSystemMessageTemplate, string>(source => source.ModifiedBy, currentClass, this.GetSampleSystemMessageTemplate_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.SampleSystemMessageTemplate, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetSampleSystemMessageTemplate_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.SampleSystemMessageTemplate> GetSampleSystemMessageTemplateValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.SampleSystemMessageTemplate>(this.GetSampleSystemMessageTemplateProperties);
         }
         
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel> GetSingleEmployeeFilterModelValidationMap()

@@ -25,19 +25,9 @@ namespace SampleSystem.Subscriptions.Metadata.Examples.AttachmentTemplateEvaluat
             ISampleSystemBLLContext context,
             DomainObjectVersions<Domain.Employee> versions)
         {
-            // Tamplates could be get from any storage: Assembly Resources, Database, File system
-            var template = Encoding.UTF8.GetBytes("Hello world! #{Current.NameNative}");
-
-            var templateEvaluator = context.Configuration.TemplateEvaluatorFactory.Create<byte[]>(new FakeTemplateContainer());
-
-            var result = templateEvaluator.Evaluate(template, versions);
-
-            return new[] { new System.Net.Mail.Attachment(new MemoryStream(result), AttachmentLambdaTemplateEvaluator.AttachmentName) };
-        }
-
-        private class FakeTemplateContainer : ITemplateContainer
-        {
-            public string Name => AttachmentName;
+            var template = Encoding.UTF8.GetBytes($"Hello world! {versions.Current.NameNative}");
+            
+            return new[] { new System.Net.Mail.Attachment(new MemoryStream(template), AttachmentLambdaTemplateEvaluator.AttachmentName) };
         }
     }
 }

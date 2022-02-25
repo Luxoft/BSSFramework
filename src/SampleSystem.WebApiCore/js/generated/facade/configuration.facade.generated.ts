@@ -21,23 +21,17 @@ import * as mockdto from '../../mocked-dto';
 export let checkCodeFirstSubscriptionAccessAsyncFunc = _checkCodeFirstSubscriptionAccess();
 export let checkDomainTypeAccessAsyncFunc = _checkDomainTypeAccess();
 export let checkExceptionMessageAccessAsyncFunc = _checkExceptionMessageAccess();
-export let checkMessageTemplateAccessAsyncFunc = _checkMessageTemplateAccess();
 export let checkRegularJobAccessAsyncFunc = _checkRegularJobAccess();
 export let checkReportAccessAsyncFunc = _checkReportAccess();
 export let checkReportFilterAccessAsyncFunc = _checkReportFilterAccess();
 export let checkReportParameterAccessAsyncFunc = _checkReportParameterAccess();
 export let checkReportPropertyAccessAsyncFunc = _checkReportPropertyAccess();
 export let checkSequenceAccessAsyncFunc = _checkSequenceAccess();
-export let checkSubscriptionAccessAsyncFunc = _checkSubscriptionAccess();
-export let checkSubscriptionLambdaAccessAsyncFunc = _checkSubscriptionLambdaAccess();
 export let checkSystemConstantAccessAsyncFunc = _checkSystemConstantAccess();
 export let checkTargetSystemAccessAsyncFunc = _checkTargetSystemAccess();
 export let checkUserActionAccessAsyncFunc = _checkUserActionAccess();
 export let checkUserActionObjectAccessAsyncFunc = _checkUserActionObjectAccess();
-export let createMessageTemplateAsyncFunc = _createMessageTemplate();
 export let createSequenceAsyncFunc = _createSequence();
-export let createSubscriptionAsyncFunc = _createSubscription();
-export let createSubscriptionLambdaAsyncFunc = _createSubscriptionLambda();
 export let createUserActionAsyncFunc = _createUserAction();
 export let getFullCodeFirstSubscriptionAsyncFunc = _getFullCodeFirstSubscription();
 export let getFullCodeFirstSubscriptionByCodeAsyncFunc = _getFullCodeFirstSubscriptionByCode();
@@ -53,11 +47,6 @@ export let getFullExceptionMessageAsyncFunc = _getFullExceptionMessage();
 export let getFullExceptionMessagesAsyncFunc = _getFullExceptionMessages();
 export let getFullExceptionMessagesByIdentsAsyncFunc = _getFullExceptionMessagesByIdents();
 export let getFullExceptionMessagesByRootFilterAsyncFunc = _getFullExceptionMessagesByRootFilter();
-export let getFullMessageTemplateAsyncFunc = _getFullMessageTemplate();
-export let getFullMessageTemplateByCodeAsyncFunc = _getFullMessageTemplateByCode();
-export let getFullMessageTemplatesAsyncFunc = _getFullMessageTemplates();
-export let getFullMessageTemplatesByIdentsAsyncFunc = _getFullMessageTemplatesByIdents();
-export let getFullMessageTemplatesByRootFilterAsyncFunc = _getFullMessageTemplatesByRootFilter();
 export let getFullRegularJobAsyncFunc = _getFullRegularJob();
 export let getFullRegularJobByNameAsyncFunc = _getFullRegularJobByName();
 export let getFullRegularJobsAsyncFunc = _getFullRegularJobs();
@@ -79,16 +68,6 @@ export let getFullSequenceByNameAsyncFunc = _getFullSequenceByName();
 export let getFullSequencesAsyncFunc = _getFullSequences();
 export let getFullSequencesByIdentsAsyncFunc = _getFullSequencesByIdents();
 export let getFullSequencesByRootFilterAsyncFunc = _getFullSequencesByRootFilter();
-export let getFullSubscriptionAsyncFunc = _getFullSubscription();
-export let getFullSubscriptionByCodeAsyncFunc = _getFullSubscriptionByCode();
-export let getFullSubscriptionLambdaAsyncFunc = _getFullSubscriptionLambda();
-export let getFullSubscriptionLambdaByNameAsyncFunc = _getFullSubscriptionLambdaByName();
-export let getFullSubscriptionLambdasAsyncFunc = _getFullSubscriptionLambdas();
-export let getFullSubscriptionLambdasByIdentsAsyncFunc = _getFullSubscriptionLambdasByIdents();
-export let getFullSubscriptionLambdasByRootFilterAsyncFunc = _getFullSubscriptionLambdasByRootFilter();
-export let getFullSubscriptionsAsyncFunc = _getFullSubscriptions();
-export let getFullSubscriptionsByIdentsAsyncFunc = _getFullSubscriptionsByIdents();
-export let getFullSubscriptionsByRootFilterAsyncFunc = _getFullSubscriptionsByRootFilter();
 export let getFullSystemConstantAsyncFunc = _getFullSystemConstant();
 export let getFullSystemConstantByCodeAsyncFunc = _getFullSystemConstantByCode();
 export let getFullSystemConstantsAsyncFunc = _getFullSystemConstants();
@@ -113,8 +92,6 @@ export let getRichCodeFirstSubscriptionByCodeAsyncFunc = _getRichCodeFirstSubscr
 export let getRichDomainTypeAsyncFunc = _getRichDomainType();
 export let getRichDomainTypeByNameAsyncFunc = _getRichDomainTypeByName();
 export let getRichExceptionMessageAsyncFunc = _getRichExceptionMessage();
-export let getRichMessageTemplateAsyncFunc = _getRichMessageTemplate();
-export let getRichMessageTemplateByCodeAsyncFunc = _getRichMessageTemplateByCode();
 export let getRichRegularJobAsyncFunc = _getRichRegularJob();
 export let getRichRegularJobByNameAsyncFunc = _getRichRegularJobByName();
 export let getRichReportAsyncFunc = _getRichReport();
@@ -123,10 +100,6 @@ export let getRichReportParameterAsyncFunc = _getRichReportParameter();
 export let getRichReportPropertyAsyncFunc = _getRichReportProperty();
 export let getRichSequenceAsyncFunc = _getRichSequence();
 export let getRichSequenceByNameAsyncFunc = _getRichSequenceByName();
-export let getRichSubscriptionAsyncFunc = _getRichSubscription();
-export let getRichSubscriptionByCodeAsyncFunc = _getRichSubscriptionByCode();
-export let getRichSubscriptionLambdaAsyncFunc = _getRichSubscriptionLambda();
-export let getRichSubscriptionLambdaByNameAsyncFunc = _getRichSubscriptionLambdaByName();
 export let getRichSystemConstantAsyncFunc = _getRichSystemConstant();
 export let getRichSystemConstantByCodeAsyncFunc = _getRichSystemConstantByCode();
 export let getRichTargetSystemAsyncFunc = _getRichTargetSystem();
@@ -149,11 +122,6 @@ export let getSimpleExceptionMessageAsyncFunc = _getSimpleExceptionMessage();
 export let getSimpleExceptionMessagesAsyncFunc = _getSimpleExceptionMessages();
 export let getSimpleExceptionMessagesByIdentsAsyncFunc = _getSimpleExceptionMessagesByIdents();
 export let getSimpleExceptionMessagesByRootFilterAsyncFunc = _getSimpleExceptionMessagesByRootFilter();
-export let getSimpleMessageTemplateAsyncFunc = _getSimpleMessageTemplate();
-export let getSimpleMessageTemplateByCodeAsyncFunc = _getSimpleMessageTemplateByCode();
-export let getSimpleMessageTemplatesAsyncFunc = _getSimpleMessageTemplates();
-export let getSimpleMessageTemplatesByIdentsAsyncFunc = _getSimpleMessageTemplatesByIdents();
-export let getSimpleMessageTemplatesByRootFilterAsyncFunc = _getSimpleMessageTemplatesByRootFilter();
 export let getSimpleRegularJobAsyncFunc = _getSimpleRegularJob();
 export let getSimpleRegularJobByNameAsyncFunc = _getSimpleRegularJobByName();
 export let getSimpleRegularJobsAsyncFunc = _getSimpleRegularJobs();
@@ -175,16 +143,6 @@ export let getSimpleSequenceByNameAsyncFunc = _getSimpleSequenceByName();
 export let getSimpleSequencesAsyncFunc = _getSimpleSequences();
 export let getSimpleSequencesByIdentsAsyncFunc = _getSimpleSequencesByIdents();
 export let getSimpleSequencesByRootFilterAsyncFunc = _getSimpleSequencesByRootFilter();
-export let getSimpleSubscriptionAsyncFunc = _getSimpleSubscription();
-export let getSimpleSubscriptionByCodeAsyncFunc = _getSimpleSubscriptionByCode();
-export let getSimpleSubscriptionLambdaAsyncFunc = _getSimpleSubscriptionLambda();
-export let getSimpleSubscriptionLambdaByNameAsyncFunc = _getSimpleSubscriptionLambdaByName();
-export let getSimpleSubscriptionLambdasAsyncFunc = _getSimpleSubscriptionLambdas();
-export let getSimpleSubscriptionLambdasByIdentsAsyncFunc = _getSimpleSubscriptionLambdasByIdents();
-export let getSimpleSubscriptionLambdasByRootFilterAsyncFunc = _getSimpleSubscriptionLambdasByRootFilter();
-export let getSimpleSubscriptionsAsyncFunc = _getSimpleSubscriptions();
-export let getSimpleSubscriptionsByIdentsAsyncFunc = _getSimpleSubscriptionsByIdents();
-export let getSimpleSubscriptionsByRootFilterAsyncFunc = _getSimpleSubscriptionsByRootFilter();
 export let getSimpleSystemConstantAsyncFunc = _getSimpleSystemConstant();
 export let getSimpleSystemConstantByCodeAsyncFunc = _getSimpleSystemConstantByCode();
 export let getSimpleSystemConstantsAsyncFunc = _getSimpleSystemConstants();
@@ -209,11 +167,6 @@ export let getVisualDomainTypeByNameAsyncFunc = _getVisualDomainTypeByName();
 export let getVisualDomainTypesAsyncFunc = _getVisualDomainTypes();
 export let getVisualDomainTypesByIdentsAsyncFunc = _getVisualDomainTypesByIdents();
 export let getVisualDomainTypesByRootFilterAsyncFunc = _getVisualDomainTypesByRootFilter();
-export let getVisualMessageTemplateAsyncFunc = _getVisualMessageTemplate();
-export let getVisualMessageTemplateByCodeAsyncFunc = _getVisualMessageTemplateByCode();
-export let getVisualMessageTemplatesAsyncFunc = _getVisualMessageTemplates();
-export let getVisualMessageTemplatesByIdentsAsyncFunc = _getVisualMessageTemplatesByIdents();
-export let getVisualMessageTemplatesByRootFilterAsyncFunc = _getVisualMessageTemplatesByRootFilter();
 export let getVisualRegularJobAsyncFunc = _getVisualRegularJob();
 export let getVisualRegularJobByNameAsyncFunc = _getVisualRegularJobByName();
 export let getVisualRegularJobsAsyncFunc = _getVisualRegularJobs();
@@ -223,16 +176,6 @@ export let getVisualSequenceByNameAsyncFunc = _getVisualSequenceByName();
 export let getVisualSequencesAsyncFunc = _getVisualSequences();
 export let getVisualSequencesByIdentsAsyncFunc = _getVisualSequencesByIdents();
 export let getVisualSequencesByRootFilterAsyncFunc = _getVisualSequencesByRootFilter();
-export let getVisualSubscriptionAsyncFunc = _getVisualSubscription();
-export let getVisualSubscriptionByCodeAsyncFunc = _getVisualSubscriptionByCode();
-export let getVisualSubscriptionLambdaAsyncFunc = _getVisualSubscriptionLambda();
-export let getVisualSubscriptionLambdaByNameAsyncFunc = _getVisualSubscriptionLambdaByName();
-export let getVisualSubscriptionLambdasAsyncFunc = _getVisualSubscriptionLambdas();
-export let getVisualSubscriptionLambdasByIdentsAsyncFunc = _getVisualSubscriptionLambdasByIdents();
-export let getVisualSubscriptionLambdasByRootFilterAsyncFunc = _getVisualSubscriptionLambdasByRootFilter();
-export let getVisualSubscriptionsAsyncFunc = _getVisualSubscriptions();
-export let getVisualSubscriptionsByIdentsAsyncFunc = _getVisualSubscriptionsByIdents();
-export let getVisualSubscriptionsByRootFilterAsyncFunc = _getVisualSubscriptionsByRootFilter();
 export let getVisualSystemConstantAsyncFunc = _getVisualSystemConstant();
 export let getVisualSystemConstantByCodeAsyncFunc = _getVisualSystemConstantByCode();
 export let getVisualSystemConstantsAsyncFunc = _getVisualSystemConstants();
@@ -246,32 +189,23 @@ export let getVisualTargetSystemsByRootFilterAsyncFunc = _getVisualTargetSystems
 export let hasCodeFirstSubscriptionAccessAsyncFunc = _hasCodeFirstSubscriptionAccess();
 export let hasDomainTypeAccessAsyncFunc = _hasDomainTypeAccess();
 export let hasExceptionMessageAccessAsyncFunc = _hasExceptionMessageAccess();
-export let hasMessageTemplateAccessAsyncFunc = _hasMessageTemplateAccess();
 export let hasRegularJobAccessAsyncFunc = _hasRegularJobAccess();
 export let hasReportAccessAsyncFunc = _hasReportAccess();
 export let hasReportFilterAccessAsyncFunc = _hasReportFilterAccess();
 export let hasReportParameterAccessAsyncFunc = _hasReportParameterAccess();
 export let hasReportPropertyAccessAsyncFunc = _hasReportPropertyAccess();
 export let hasSequenceAccessAsyncFunc = _hasSequenceAccess();
-export let hasSubscriptionAccessAsyncFunc = _hasSubscriptionAccess();
-export let hasSubscriptionLambdaAccessAsyncFunc = _hasSubscriptionLambdaAccess();
 export let hasSystemConstantAccessAsyncFunc = _hasSystemConstantAccess();
 export let hasTargetSystemAccessAsyncFunc = _hasTargetSystemAccess();
 export let hasUserActionAccessAsyncFunc = _hasUserActionAccess();
 export let hasUserActionObjectAccessAsyncFunc = _hasUserActionObjectAccess();
-export let removeMessageTemplateAsyncFunc = _removeMessageTemplate();
 export let removeRegularJobAsyncFunc = _removeRegularJob();
 export let removeReportAsyncFunc = _removeReport();
 export let removeSequenceAsyncFunc = _removeSequence();
-export let removeSubscriptionAsyncFunc = _removeSubscription();
-export let removeSubscriptionLambdaAsyncFunc = _removeSubscriptionLambda();
 export let saveCodeFirstSubscriptionAsyncFunc = _saveCodeFirstSubscription();
-export let saveMessageTemplateAsyncFunc = _saveMessageTemplate();
 export let saveRegularJobAsyncFunc = _saveRegularJob();
 export let saveReportAsyncFunc = _saveReport();
 export let saveSequenceAsyncFunc = _saveSequence();
-export let saveSubscriptionAsyncFunc = _saveSubscription();
-export let saveSubscriptionLambdaAsyncFunc = _saveSubscriptionLambda();
 export let saveSystemConstantAsyncFunc = _saveSystemConstant();
 export let saveTargetSystemAsyncFunc = _saveTargetSystem();
 
@@ -296,14 +230,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
             let baseParameters = {exceptionMessageIdent : exceptionMessageIdent, securityOperationCode : securityOperationCode};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
             return service.getData('ExceptionMessage/CheckExceptionMessageAccess', baseParameters);
-        });
-    }
-
-    function _checkMessageTemplateAccess(): async.SimpleAsyncFunc3<dto.MessageTemplateIdentityDTO, dto.ConfigurationSecurityOperationCode, void> {
-        return new async.SimpleAsyncFunc3((messageTemplateIdent: dto.MessageTemplateIdentityDTO, securityOperationCode: dto.ConfigurationSecurityOperationCode) => {
-            let baseParameters = {messageTemplateIdent : messageTemplateIdent, securityOperationCode : securityOperationCode};
-            let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('MessageTemplate/CheckMessageTemplateAccess', baseParameters);
         });
     }
 
@@ -355,22 +281,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
         });
     }
 
-    function _checkSubscriptionAccess(): async.SimpleAsyncFunc3<dto.SubscriptionIdentityDTO, dto.ConfigurationSecurityOperationCode, void> {
-        return new async.SimpleAsyncFunc3((subscriptionIdent: dto.SubscriptionIdentityDTO, securityOperationCode: dto.ConfigurationSecurityOperationCode) => {
-            let baseParameters = {subscriptionIdent : subscriptionIdent, securityOperationCode : securityOperationCode};
-            let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('Subscription/CheckSubscriptionAccess', baseParameters);
-        });
-    }
-
-    function _checkSubscriptionLambdaAccess(): async.SimpleAsyncFunc3<dto.SubscriptionLambdaIdentityDTO, dto.ConfigurationSecurityOperationCode, void> {
-        return new async.SimpleAsyncFunc3((subscriptionLambdaIdent: dto.SubscriptionLambdaIdentityDTO, securityOperationCode: dto.ConfigurationSecurityOperationCode) => {
-            let baseParameters = {subscriptionLambdaIdent : subscriptionLambdaIdent, securityOperationCode : securityOperationCode};
-            let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('SubscriptionLambda/CheckSubscriptionLambdaAccess', baseParameters);
-        });
-    }
-
     function _checkSystemConstantAccess(): async.SimpleAsyncFunc3<dto.SystemConstantIdentityDTO, dto.ConfigurationSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((systemConstantIdent: dto.SystemConstantIdentityDTO, securityOperationCode: dto.ConfigurationSecurityOperationCode) => {
             let baseParameters = {systemConstantIdent : systemConstantIdent, securityOperationCode : securityOperationCode};
@@ -403,35 +313,11 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
         });
     }
 
-    function _createMessageTemplate(): async.AsyncFunc3<dto.MessageTemplateCreateModelStrictDTO, dto.MessageTemplateRichDTO, dto.MessageTemplateObservableRichDTO, dto.MessageTemplateRichDTO, dto.MessageTemplateObservableRichDTO> {
-        return new async.AsyncFunc3((messageTemplateCreateModel: dto.MessageTemplateCreateModelStrictDTO) => {
-            let baseParameters = messageTemplateCreateModel.toNativeJson();
-            let service = Environment.current.context.facadeFactory.createService<dto.MessageTemplateRichDTO, dto.MessageTemplateObservableRichDTO, dto.MessageTemplateRichDTO, dto.MessageTemplateObservableRichDTO>();
-            return service.getData('MessageTemplate/CreateMessageTemplate', {plain : dto.MessageTemplateRichDTO, observable : dto.MessageTemplateObservableRichDTO}, baseParameters);
-        });
-    }
-
     function _createSequence(): async.AsyncFunc3<dto.SequenceCreateModelStrictDTO, dto.SequenceRichDTO, dto.SequenceObservableRichDTO, dto.SequenceRichDTO, dto.SequenceObservableRichDTO> {
         return new async.AsyncFunc3((sequenceCreateModel: dto.SequenceCreateModelStrictDTO) => {
             let baseParameters = sequenceCreateModel.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.SequenceRichDTO, dto.SequenceObservableRichDTO, dto.SequenceRichDTO, dto.SequenceObservableRichDTO>();
             return service.getData('Sequence/CreateSequence', {plain : dto.SequenceRichDTO, observable : dto.SequenceObservableRichDTO}, baseParameters);
-        });
-    }
-
-    function _createSubscription(): async.AsyncFunc3<dto.SubscriptionCreateModelStrictDTO, dto.SubscriptionRichDTO, dto.SubscriptionObservableRichDTO, dto.SubscriptionRichDTO, dto.SubscriptionObservableRichDTO> {
-        return new async.AsyncFunc3((subscriptionCreateModel: dto.SubscriptionCreateModelStrictDTO) => {
-            let baseParameters = subscriptionCreateModel.toNativeJson();
-            let service = Environment.current.context.facadeFactory.createService<dto.SubscriptionRichDTO, dto.SubscriptionObservableRichDTO, dto.SubscriptionRichDTO, dto.SubscriptionObservableRichDTO>();
-            return service.getData('Subscription/CreateSubscription', {plain : dto.SubscriptionRichDTO, observable : dto.SubscriptionObservableRichDTO}, baseParameters);
-        });
-    }
-
-    function _createSubscriptionLambda(): async.AsyncFunc3<dto.SubscriptionLambdaCreateModelStrictDTO, dto.SubscriptionLambdaRichDTO, dto.SubscriptionLambdaObservableRichDTO, dto.SubscriptionLambdaRichDTO, dto.SubscriptionLambdaObservableRichDTO> {
-        return new async.AsyncFunc3((subscriptionLambdaCreateModel: dto.SubscriptionLambdaCreateModelStrictDTO) => {
-            let baseParameters = subscriptionLambdaCreateModel.toNativeJson();
-            let service = Environment.current.context.facadeFactory.createService<dto.SubscriptionLambdaRichDTO, dto.SubscriptionLambdaObservableRichDTO, dto.SubscriptionLambdaRichDTO, dto.SubscriptionLambdaObservableRichDTO>();
-            return service.getData('SubscriptionLambda/CreateSubscriptionLambda', {plain : dto.SubscriptionLambdaRichDTO, observable : dto.SubscriptionLambdaObservableRichDTO}, baseParameters);
         });
     }
 
@@ -552,46 +438,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
             let baseParameters = filter.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<Array<dto.ExceptionMessageFullDTO>, Array<dto.ExceptionMessageObservableFullDTO>, dto.ExceptionMessageFullDTO, dto.ExceptionMessageObservableFullDTO>();
             return service.getData('ExceptionMessage/GetFullExceptionMessagesByRootFilter', {plain : dto.ExceptionMessageFullDTO, observable : dto.ExceptionMessageObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullMessageTemplate(): async.AsyncFunc3<dto.MessageTemplateIdentityDTO, dto.MessageTemplateFullDTO, dto.MessageTemplateObservableFullDTO, dto.MessageTemplateFullDTO, dto.MessageTemplateObservableFullDTO> {
-        return new async.AsyncFunc3((messageTemplateIdentity: dto.MessageTemplateIdentityDTO) => {
-            let baseParameters = messageTemplateIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.MessageTemplateFullDTO, dto.MessageTemplateObservableFullDTO, dto.MessageTemplateFullDTO, dto.MessageTemplateObservableFullDTO>();
-            return service.getData('MessageTemplate/GetFullMessageTemplate', {plain : dto.MessageTemplateFullDTO, observable : dto.MessageTemplateObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullMessageTemplateByCode(): async.AsyncFunc3<string, dto.MessageTemplateFullDTO, dto.MessageTemplateObservableFullDTO, dto.MessageTemplateFullDTO, dto.MessageTemplateObservableFullDTO> {
-        return new async.AsyncFunc3((messageTemplateCode: string) => {
-            let baseParameters = messageTemplateCode;
-            let service = Environment.current.context.facadeFactory.createService<dto.MessageTemplateFullDTO, dto.MessageTemplateObservableFullDTO, dto.MessageTemplateFullDTO, dto.MessageTemplateObservableFullDTO>();
-            return service.getData('MessageTemplate/GetFullMessageTemplateByCode', {plain : dto.MessageTemplateFullDTO, observable : dto.MessageTemplateObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullMessageTemplates(): async.AsyncFunc2<Array<dto.MessageTemplateFullDTO>, Array<dto.MessageTemplateObservableFullDTO>, dto.MessageTemplateFullDTO, dto.MessageTemplateObservableFullDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.MessageTemplateFullDTO>, Array<dto.MessageTemplateObservableFullDTO>, dto.MessageTemplateFullDTO, dto.MessageTemplateObservableFullDTO>();
-            return service.getData('MessageTemplate/GetFullMessageTemplates', {plain : dto.MessageTemplateFullDTO, observable : dto.MessageTemplateObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullMessageTemplatesByIdents(): async.AsyncFunc3<dto.MessageTemplateIdentityDTO[], Array<dto.MessageTemplateFullDTO>, Array<dto.MessageTemplateObservableFullDTO>, dto.MessageTemplateFullDTO, dto.MessageTemplateObservableFullDTO> {
-        return new async.AsyncFunc3((messageTemplateIdents: dto.MessageTemplateIdentityDTO[]) => {
-            let baseParameters = messageTemplateIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.MessageTemplateFullDTO>, Array<dto.MessageTemplateObservableFullDTO>, dto.MessageTemplateFullDTO, dto.MessageTemplateObservableFullDTO>();
-            return service.getData('MessageTemplate/GetFullMessageTemplatesByIdents', {plain : dto.MessageTemplateFullDTO, observable : dto.MessageTemplateObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullMessageTemplatesByRootFilter(): async.AsyncFunc3<dto.MessageTemplateRootFilterModelStrictDTO, Array<dto.MessageTemplateFullDTO>, Array<dto.MessageTemplateObservableFullDTO>, dto.MessageTemplateFullDTO, dto.MessageTemplateObservableFullDTO> {
-        return new async.AsyncFunc3((filter: dto.MessageTemplateRootFilterModelStrictDTO) => {
-            let baseParameters = filter.toNativeJson();
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.MessageTemplateFullDTO>, Array<dto.MessageTemplateObservableFullDTO>, dto.MessageTemplateFullDTO, dto.MessageTemplateObservableFullDTO>();
-            return service.getData('MessageTemplate/GetFullMessageTemplatesByRootFilter', {plain : dto.MessageTemplateFullDTO, observable : dto.MessageTemplateObservableFullDTO}, baseParameters);
         });
     }
 
@@ -760,86 +606,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
             let baseParameters = filter.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<Array<dto.SequenceFullDTO>, Array<dto.SequenceObservableFullDTO>, dto.SequenceFullDTO, dto.SequenceObservableFullDTO>();
             return service.getData('Sequence/GetFullSequencesByRootFilter', {plain : dto.SequenceFullDTO, observable : dto.SequenceObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullSubscription(): async.AsyncFunc3<dto.SubscriptionIdentityDTO, dto.SubscriptionFullDTO, dto.SubscriptionObservableFullDTO, dto.SubscriptionFullDTO, dto.SubscriptionObservableFullDTO> {
-        return new async.AsyncFunc3((subscriptionIdentity: dto.SubscriptionIdentityDTO) => {
-            let baseParameters = subscriptionIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.SubscriptionFullDTO, dto.SubscriptionObservableFullDTO, dto.SubscriptionFullDTO, dto.SubscriptionObservableFullDTO>();
-            return service.getData('Subscription/GetFullSubscription', {plain : dto.SubscriptionFullDTO, observable : dto.SubscriptionObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullSubscriptionByCode(): async.AsyncFunc3<string, dto.SubscriptionFullDTO, dto.SubscriptionObservableFullDTO, dto.SubscriptionFullDTO, dto.SubscriptionObservableFullDTO> {
-        return new async.AsyncFunc3((subscriptionCode: string) => {
-            let baseParameters = subscriptionCode;
-            let service = Environment.current.context.facadeFactory.createService<dto.SubscriptionFullDTO, dto.SubscriptionObservableFullDTO, dto.SubscriptionFullDTO, dto.SubscriptionObservableFullDTO>();
-            return service.getData('Subscription/GetFullSubscriptionByCode', {plain : dto.SubscriptionFullDTO, observable : dto.SubscriptionObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullSubscriptionLambda(): async.AsyncFunc3<dto.SubscriptionLambdaIdentityDTO, dto.SubscriptionLambdaFullDTO, dto.SubscriptionLambdaObservableFullDTO, dto.SubscriptionLambdaFullDTO, dto.SubscriptionLambdaObservableFullDTO> {
-        return new async.AsyncFunc3((subscriptionLambdaIdentity: dto.SubscriptionLambdaIdentityDTO) => {
-            let baseParameters = subscriptionLambdaIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.SubscriptionLambdaFullDTO, dto.SubscriptionLambdaObservableFullDTO, dto.SubscriptionLambdaFullDTO, dto.SubscriptionLambdaObservableFullDTO>();
-            return service.getData('SubscriptionLambda/GetFullSubscriptionLambda', {plain : dto.SubscriptionLambdaFullDTO, observable : dto.SubscriptionLambdaObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullSubscriptionLambdaByName(): async.AsyncFunc3<string, dto.SubscriptionLambdaFullDTO, dto.SubscriptionLambdaObservableFullDTO, dto.SubscriptionLambdaFullDTO, dto.SubscriptionLambdaObservableFullDTO> {
-        return new async.AsyncFunc3((subscriptionLambdaName: string) => {
-            let baseParameters = subscriptionLambdaName;
-            let service = Environment.current.context.facadeFactory.createService<dto.SubscriptionLambdaFullDTO, dto.SubscriptionLambdaObservableFullDTO, dto.SubscriptionLambdaFullDTO, dto.SubscriptionLambdaObservableFullDTO>();
-            return service.getData('SubscriptionLambda/GetFullSubscriptionLambdaByName', {plain : dto.SubscriptionLambdaFullDTO, observable : dto.SubscriptionLambdaObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullSubscriptionLambdas(): async.AsyncFunc2<Array<dto.SubscriptionLambdaFullDTO>, Array<dto.SubscriptionLambdaObservableFullDTO>, dto.SubscriptionLambdaFullDTO, dto.SubscriptionLambdaObservableFullDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SubscriptionLambdaFullDTO>, Array<dto.SubscriptionLambdaObservableFullDTO>, dto.SubscriptionLambdaFullDTO, dto.SubscriptionLambdaObservableFullDTO>();
-            return service.getData('SubscriptionLambda/GetFullSubscriptionLambdas', {plain : dto.SubscriptionLambdaFullDTO, observable : dto.SubscriptionLambdaObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullSubscriptionLambdasByIdents(): async.AsyncFunc3<dto.SubscriptionLambdaIdentityDTO[], Array<dto.SubscriptionLambdaFullDTO>, Array<dto.SubscriptionLambdaObservableFullDTO>, dto.SubscriptionLambdaFullDTO, dto.SubscriptionLambdaObservableFullDTO> {
-        return new async.AsyncFunc3((subscriptionLambdaIdents: dto.SubscriptionLambdaIdentityDTO[]) => {
-            let baseParameters = subscriptionLambdaIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SubscriptionLambdaFullDTO>, Array<dto.SubscriptionLambdaObservableFullDTO>, dto.SubscriptionLambdaFullDTO, dto.SubscriptionLambdaObservableFullDTO>();
-            return service.getData('SubscriptionLambda/GetFullSubscriptionLambdasByIdents', {plain : dto.SubscriptionLambdaFullDTO, observable : dto.SubscriptionLambdaObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullSubscriptionLambdasByRootFilter(): async.AsyncFunc3<dto.SubscriptionLambdaRootFilterModelStrictDTO, Array<dto.SubscriptionLambdaFullDTO>, Array<dto.SubscriptionLambdaObservableFullDTO>, dto.SubscriptionLambdaFullDTO, dto.SubscriptionLambdaObservableFullDTO> {
-        return new async.AsyncFunc3((filter: dto.SubscriptionLambdaRootFilterModelStrictDTO) => {
-            let baseParameters = filter.toNativeJson();
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SubscriptionLambdaFullDTO>, Array<dto.SubscriptionLambdaObservableFullDTO>, dto.SubscriptionLambdaFullDTO, dto.SubscriptionLambdaObservableFullDTO>();
-            return service.getData('SubscriptionLambda/GetFullSubscriptionLambdasByRootFilter', {plain : dto.SubscriptionLambdaFullDTO, observable : dto.SubscriptionLambdaObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullSubscriptions(): async.AsyncFunc2<Array<dto.SubscriptionFullDTO>, Array<dto.SubscriptionObservableFullDTO>, dto.SubscriptionFullDTO, dto.SubscriptionObservableFullDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SubscriptionFullDTO>, Array<dto.SubscriptionObservableFullDTO>, dto.SubscriptionFullDTO, dto.SubscriptionObservableFullDTO>();
-            return service.getData('Subscription/GetFullSubscriptions', {plain : dto.SubscriptionFullDTO, observable : dto.SubscriptionObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullSubscriptionsByIdents(): async.AsyncFunc3<dto.SubscriptionIdentityDTO[], Array<dto.SubscriptionFullDTO>, Array<dto.SubscriptionObservableFullDTO>, dto.SubscriptionFullDTO, dto.SubscriptionObservableFullDTO> {
-        return new async.AsyncFunc3((subscriptionIdents: dto.SubscriptionIdentityDTO[]) => {
-            let baseParameters = subscriptionIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SubscriptionFullDTO>, Array<dto.SubscriptionObservableFullDTO>, dto.SubscriptionFullDTO, dto.SubscriptionObservableFullDTO>();
-            return service.getData('Subscription/GetFullSubscriptionsByIdents', {plain : dto.SubscriptionFullDTO, observable : dto.SubscriptionObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullSubscriptionsByRootFilter(): async.AsyncFunc3<dto.SubscriptionRootFilterModelStrictDTO, Array<dto.SubscriptionFullDTO>, Array<dto.SubscriptionObservableFullDTO>, dto.SubscriptionFullDTO, dto.SubscriptionObservableFullDTO> {
-        return new async.AsyncFunc3((filter: dto.SubscriptionRootFilterModelStrictDTO) => {
-            let baseParameters = filter.toNativeJson();
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SubscriptionFullDTO>, Array<dto.SubscriptionObservableFullDTO>, dto.SubscriptionFullDTO, dto.SubscriptionObservableFullDTO>();
-            return service.getData('Subscription/GetFullSubscriptionsByRootFilter', {plain : dto.SubscriptionFullDTO, observable : dto.SubscriptionObservableFullDTO}, baseParameters);
         });
     }
 
@@ -1035,22 +801,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
         });
     }
 
-    function _getRichMessageTemplate(): async.AsyncFunc3<dto.MessageTemplateIdentityDTO, dto.MessageTemplateRichDTO, dto.MessageTemplateObservableRichDTO, dto.MessageTemplateRichDTO, dto.MessageTemplateObservableRichDTO> {
-        return new async.AsyncFunc3((messageTemplateIdentity: dto.MessageTemplateIdentityDTO) => {
-            let baseParameters = messageTemplateIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.MessageTemplateRichDTO, dto.MessageTemplateObservableRichDTO, dto.MessageTemplateRichDTO, dto.MessageTemplateObservableRichDTO>();
-            return service.getData('MessageTemplate/GetRichMessageTemplate', {plain : dto.MessageTemplateRichDTO, observable : dto.MessageTemplateObservableRichDTO}, baseParameters);
-        });
-    }
-
-    function _getRichMessageTemplateByCode(): async.AsyncFunc3<string, dto.MessageTemplateRichDTO, dto.MessageTemplateObservableRichDTO, dto.MessageTemplateRichDTO, dto.MessageTemplateObservableRichDTO> {
-        return new async.AsyncFunc3((messageTemplateCode: string) => {
-            let baseParameters = messageTemplateCode;
-            let service = Environment.current.context.facadeFactory.createService<dto.MessageTemplateRichDTO, dto.MessageTemplateObservableRichDTO, dto.MessageTemplateRichDTO, dto.MessageTemplateObservableRichDTO>();
-            return service.getData('MessageTemplate/GetRichMessageTemplateByCode', {plain : dto.MessageTemplateRichDTO, observable : dto.MessageTemplateObservableRichDTO}, baseParameters);
-        });
-    }
-
     function _getRichRegularJob(): async.AsyncFunc3<dto.RegularJobIdentityDTO, dto.RegularJobRichDTO, dto.RegularJobObservableRichDTO, dto.RegularJobRichDTO, dto.RegularJobObservableRichDTO> {
         return new async.AsyncFunc3((regularJobIdentity: dto.RegularJobIdentityDTO) => {
             let baseParameters = regularJobIdentity;
@@ -1112,38 +862,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
             let baseParameters = sequenceName;
             let service = Environment.current.context.facadeFactory.createService<dto.SequenceRichDTO, dto.SequenceObservableRichDTO, dto.SequenceRichDTO, dto.SequenceObservableRichDTO>();
             return service.getData('Sequence/GetRichSequenceByName', {plain : dto.SequenceRichDTO, observable : dto.SequenceObservableRichDTO}, baseParameters);
-        });
-    }
-
-    function _getRichSubscription(): async.AsyncFunc3<dto.SubscriptionIdentityDTO, dto.SubscriptionRichDTO, dto.SubscriptionObservableRichDTO, dto.SubscriptionRichDTO, dto.SubscriptionObservableRichDTO> {
-        return new async.AsyncFunc3((subscriptionIdentity: dto.SubscriptionIdentityDTO) => {
-            let baseParameters = subscriptionIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.SubscriptionRichDTO, dto.SubscriptionObservableRichDTO, dto.SubscriptionRichDTO, dto.SubscriptionObservableRichDTO>();
-            return service.getData('Subscription/GetRichSubscription', {plain : dto.SubscriptionRichDTO, observable : dto.SubscriptionObservableRichDTO}, baseParameters);
-        });
-    }
-
-    function _getRichSubscriptionByCode(): async.AsyncFunc3<string, dto.SubscriptionRichDTO, dto.SubscriptionObservableRichDTO, dto.SubscriptionRichDTO, dto.SubscriptionObservableRichDTO> {
-        return new async.AsyncFunc3((subscriptionCode: string) => {
-            let baseParameters = subscriptionCode;
-            let service = Environment.current.context.facadeFactory.createService<dto.SubscriptionRichDTO, dto.SubscriptionObservableRichDTO, dto.SubscriptionRichDTO, dto.SubscriptionObservableRichDTO>();
-            return service.getData('Subscription/GetRichSubscriptionByCode', {plain : dto.SubscriptionRichDTO, observable : dto.SubscriptionObservableRichDTO}, baseParameters);
-        });
-    }
-
-    function _getRichSubscriptionLambda(): async.AsyncFunc3<dto.SubscriptionLambdaIdentityDTO, dto.SubscriptionLambdaRichDTO, dto.SubscriptionLambdaObservableRichDTO, dto.SubscriptionLambdaRichDTO, dto.SubscriptionLambdaObservableRichDTO> {
-        return new async.AsyncFunc3((subscriptionLambdaIdentity: dto.SubscriptionLambdaIdentityDTO) => {
-            let baseParameters = subscriptionLambdaIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.SubscriptionLambdaRichDTO, dto.SubscriptionLambdaObservableRichDTO, dto.SubscriptionLambdaRichDTO, dto.SubscriptionLambdaObservableRichDTO>();
-            return service.getData('SubscriptionLambda/GetRichSubscriptionLambda', {plain : dto.SubscriptionLambdaRichDTO, observable : dto.SubscriptionLambdaObservableRichDTO}, baseParameters);
-        });
-    }
-
-    function _getRichSubscriptionLambdaByName(): async.AsyncFunc3<string, dto.SubscriptionLambdaRichDTO, dto.SubscriptionLambdaObservableRichDTO, dto.SubscriptionLambdaRichDTO, dto.SubscriptionLambdaObservableRichDTO> {
-        return new async.AsyncFunc3((subscriptionLambdaName: string) => {
-            let baseParameters = subscriptionLambdaName;
-            let service = Environment.current.context.facadeFactory.createService<dto.SubscriptionLambdaRichDTO, dto.SubscriptionLambdaObservableRichDTO, dto.SubscriptionLambdaRichDTO, dto.SubscriptionLambdaObservableRichDTO>();
-            return service.getData('SubscriptionLambda/GetRichSubscriptionLambdaByName', {plain : dto.SubscriptionLambdaRichDTO, observable : dto.SubscriptionLambdaObservableRichDTO}, baseParameters);
         });
     }
 
@@ -1323,46 +1041,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
         });
     }
 
-    function _getSimpleMessageTemplate(): async.AsyncFunc3<dto.MessageTemplateIdentityDTO, dto.MessageTemplateSimpleDTO, dto.MessageTemplateObservableSimpleDTO, dto.MessageTemplateSimpleDTO, dto.MessageTemplateObservableSimpleDTO> {
-        return new async.AsyncFunc3((messageTemplateIdentity: dto.MessageTemplateIdentityDTO) => {
-            let baseParameters = messageTemplateIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.MessageTemplateSimpleDTO, dto.MessageTemplateObservableSimpleDTO, dto.MessageTemplateSimpleDTO, dto.MessageTemplateObservableSimpleDTO>();
-            return service.getData('MessageTemplate/GetSimpleMessageTemplate', {plain : dto.MessageTemplateSimpleDTO, observable : dto.MessageTemplateObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleMessageTemplateByCode(): async.AsyncFunc3<string, dto.MessageTemplateSimpleDTO, dto.MessageTemplateObservableSimpleDTO, dto.MessageTemplateSimpleDTO, dto.MessageTemplateObservableSimpleDTO> {
-        return new async.AsyncFunc3((messageTemplateCode: string) => {
-            let baseParameters = messageTemplateCode;
-            let service = Environment.current.context.facadeFactory.createService<dto.MessageTemplateSimpleDTO, dto.MessageTemplateObservableSimpleDTO, dto.MessageTemplateSimpleDTO, dto.MessageTemplateObservableSimpleDTO>();
-            return service.getData('MessageTemplate/GetSimpleMessageTemplateByCode', {plain : dto.MessageTemplateSimpleDTO, observable : dto.MessageTemplateObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleMessageTemplates(): async.AsyncFunc2<Array<dto.MessageTemplateSimpleDTO>, Array<dto.MessageTemplateObservableSimpleDTO>, dto.MessageTemplateSimpleDTO, dto.MessageTemplateObservableSimpleDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.MessageTemplateSimpleDTO>, Array<dto.MessageTemplateObservableSimpleDTO>, dto.MessageTemplateSimpleDTO, dto.MessageTemplateObservableSimpleDTO>();
-            return service.getData('MessageTemplate/GetSimpleMessageTemplates', {plain : dto.MessageTemplateSimpleDTO, observable : dto.MessageTemplateObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleMessageTemplatesByIdents(): async.AsyncFunc3<dto.MessageTemplateIdentityDTO[], Array<dto.MessageTemplateSimpleDTO>, Array<dto.MessageTemplateObservableSimpleDTO>, dto.MessageTemplateSimpleDTO, dto.MessageTemplateObservableSimpleDTO> {
-        return new async.AsyncFunc3((messageTemplateIdents: dto.MessageTemplateIdentityDTO[]) => {
-            let baseParameters = messageTemplateIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.MessageTemplateSimpleDTO>, Array<dto.MessageTemplateObservableSimpleDTO>, dto.MessageTemplateSimpleDTO, dto.MessageTemplateObservableSimpleDTO>();
-            return service.getData('MessageTemplate/GetSimpleMessageTemplatesByIdents', {plain : dto.MessageTemplateSimpleDTO, observable : dto.MessageTemplateObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleMessageTemplatesByRootFilter(): async.AsyncFunc3<dto.MessageTemplateRootFilterModelStrictDTO, Array<dto.MessageTemplateSimpleDTO>, Array<dto.MessageTemplateObservableSimpleDTO>, dto.MessageTemplateSimpleDTO, dto.MessageTemplateObservableSimpleDTO> {
-        return new async.AsyncFunc3((filter: dto.MessageTemplateRootFilterModelStrictDTO) => {
-            let baseParameters = filter.toNativeJson();
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.MessageTemplateSimpleDTO>, Array<dto.MessageTemplateObservableSimpleDTO>, dto.MessageTemplateSimpleDTO, dto.MessageTemplateObservableSimpleDTO>();
-            return service.getData('MessageTemplate/GetSimpleMessageTemplatesByRootFilter', {plain : dto.MessageTemplateSimpleDTO, observable : dto.MessageTemplateObservableSimpleDTO}, baseParameters);
-        });
-    }
-
     function _getSimpleRegularJob(): async.AsyncFunc3<dto.RegularJobIdentityDTO, dto.RegularJobSimpleDTO, dto.RegularJobObservableSimpleDTO, dto.RegularJobSimpleDTO, dto.RegularJobObservableSimpleDTO> {
         return new async.AsyncFunc3((regularJobIdentity: dto.RegularJobIdentityDTO) => {
             let baseParameters = regularJobIdentity;
@@ -1528,86 +1206,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
             let baseParameters = filter.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<Array<dto.SequenceSimpleDTO>, Array<dto.SequenceObservableSimpleDTO>, dto.SequenceSimpleDTO, dto.SequenceObservableSimpleDTO>();
             return service.getData('Sequence/GetSimpleSequencesByRootFilter', {plain : dto.SequenceSimpleDTO, observable : dto.SequenceObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleSubscription(): async.AsyncFunc3<dto.SubscriptionIdentityDTO, dto.SubscriptionSimpleDTO, dto.SubscriptionObservableSimpleDTO, dto.SubscriptionSimpleDTO, dto.SubscriptionObservableSimpleDTO> {
-        return new async.AsyncFunc3((subscriptionIdentity: dto.SubscriptionIdentityDTO) => {
-            let baseParameters = subscriptionIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.SubscriptionSimpleDTO, dto.SubscriptionObservableSimpleDTO, dto.SubscriptionSimpleDTO, dto.SubscriptionObservableSimpleDTO>();
-            return service.getData('Subscription/GetSimpleSubscription', {plain : dto.SubscriptionSimpleDTO, observable : dto.SubscriptionObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleSubscriptionByCode(): async.AsyncFunc3<string, dto.SubscriptionSimpleDTO, dto.SubscriptionObservableSimpleDTO, dto.SubscriptionSimpleDTO, dto.SubscriptionObservableSimpleDTO> {
-        return new async.AsyncFunc3((subscriptionCode: string) => {
-            let baseParameters = subscriptionCode;
-            let service = Environment.current.context.facadeFactory.createService<dto.SubscriptionSimpleDTO, dto.SubscriptionObservableSimpleDTO, dto.SubscriptionSimpleDTO, dto.SubscriptionObservableSimpleDTO>();
-            return service.getData('Subscription/GetSimpleSubscriptionByCode', {plain : dto.SubscriptionSimpleDTO, observable : dto.SubscriptionObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleSubscriptionLambda(): async.AsyncFunc3<dto.SubscriptionLambdaIdentityDTO, dto.SubscriptionLambdaSimpleDTO, dto.SubscriptionLambdaObservableSimpleDTO, dto.SubscriptionLambdaSimpleDTO, dto.SubscriptionLambdaObservableSimpleDTO> {
-        return new async.AsyncFunc3((subscriptionLambdaIdentity: dto.SubscriptionLambdaIdentityDTO) => {
-            let baseParameters = subscriptionLambdaIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.SubscriptionLambdaSimpleDTO, dto.SubscriptionLambdaObservableSimpleDTO, dto.SubscriptionLambdaSimpleDTO, dto.SubscriptionLambdaObservableSimpleDTO>();
-            return service.getData('SubscriptionLambda/GetSimpleSubscriptionLambda', {plain : dto.SubscriptionLambdaSimpleDTO, observable : dto.SubscriptionLambdaObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleSubscriptionLambdaByName(): async.AsyncFunc3<string, dto.SubscriptionLambdaSimpleDTO, dto.SubscriptionLambdaObservableSimpleDTO, dto.SubscriptionLambdaSimpleDTO, dto.SubscriptionLambdaObservableSimpleDTO> {
-        return new async.AsyncFunc3((subscriptionLambdaName: string) => {
-            let baseParameters = subscriptionLambdaName;
-            let service = Environment.current.context.facadeFactory.createService<dto.SubscriptionLambdaSimpleDTO, dto.SubscriptionLambdaObservableSimpleDTO, dto.SubscriptionLambdaSimpleDTO, dto.SubscriptionLambdaObservableSimpleDTO>();
-            return service.getData('SubscriptionLambda/GetSimpleSubscriptionLambdaByName', {plain : dto.SubscriptionLambdaSimpleDTO, observable : dto.SubscriptionLambdaObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleSubscriptionLambdas(): async.AsyncFunc2<Array<dto.SubscriptionLambdaSimpleDTO>, Array<dto.SubscriptionLambdaObservableSimpleDTO>, dto.SubscriptionLambdaSimpleDTO, dto.SubscriptionLambdaObservableSimpleDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SubscriptionLambdaSimpleDTO>, Array<dto.SubscriptionLambdaObservableSimpleDTO>, dto.SubscriptionLambdaSimpleDTO, dto.SubscriptionLambdaObservableSimpleDTO>();
-            return service.getData('SubscriptionLambda/GetSimpleSubscriptionLambdas', {plain : dto.SubscriptionLambdaSimpleDTO, observable : dto.SubscriptionLambdaObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleSubscriptionLambdasByIdents(): async.AsyncFunc3<dto.SubscriptionLambdaIdentityDTO[], Array<dto.SubscriptionLambdaSimpleDTO>, Array<dto.SubscriptionLambdaObservableSimpleDTO>, dto.SubscriptionLambdaSimpleDTO, dto.SubscriptionLambdaObservableSimpleDTO> {
-        return new async.AsyncFunc3((subscriptionLambdaIdents: dto.SubscriptionLambdaIdentityDTO[]) => {
-            let baseParameters = subscriptionLambdaIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SubscriptionLambdaSimpleDTO>, Array<dto.SubscriptionLambdaObservableSimpleDTO>, dto.SubscriptionLambdaSimpleDTO, dto.SubscriptionLambdaObservableSimpleDTO>();
-            return service.getData('SubscriptionLambda/GetSimpleSubscriptionLambdasByIdents', {plain : dto.SubscriptionLambdaSimpleDTO, observable : dto.SubscriptionLambdaObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleSubscriptionLambdasByRootFilter(): async.AsyncFunc3<dto.SubscriptionLambdaRootFilterModelStrictDTO, Array<dto.SubscriptionLambdaSimpleDTO>, Array<dto.SubscriptionLambdaObservableSimpleDTO>, dto.SubscriptionLambdaSimpleDTO, dto.SubscriptionLambdaObservableSimpleDTO> {
-        return new async.AsyncFunc3((filter: dto.SubscriptionLambdaRootFilterModelStrictDTO) => {
-            let baseParameters = filter.toNativeJson();
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SubscriptionLambdaSimpleDTO>, Array<dto.SubscriptionLambdaObservableSimpleDTO>, dto.SubscriptionLambdaSimpleDTO, dto.SubscriptionLambdaObservableSimpleDTO>();
-            return service.getData('SubscriptionLambda/GetSimpleSubscriptionLambdasByRootFilter', {plain : dto.SubscriptionLambdaSimpleDTO, observable : dto.SubscriptionLambdaObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleSubscriptions(): async.AsyncFunc2<Array<dto.SubscriptionSimpleDTO>, Array<dto.SubscriptionObservableSimpleDTO>, dto.SubscriptionSimpleDTO, dto.SubscriptionObservableSimpleDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SubscriptionSimpleDTO>, Array<dto.SubscriptionObservableSimpleDTO>, dto.SubscriptionSimpleDTO, dto.SubscriptionObservableSimpleDTO>();
-            return service.getData('Subscription/GetSimpleSubscriptions', {plain : dto.SubscriptionSimpleDTO, observable : dto.SubscriptionObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleSubscriptionsByIdents(): async.AsyncFunc3<dto.SubscriptionIdentityDTO[], Array<dto.SubscriptionSimpleDTO>, Array<dto.SubscriptionObservableSimpleDTO>, dto.SubscriptionSimpleDTO, dto.SubscriptionObservableSimpleDTO> {
-        return new async.AsyncFunc3((subscriptionIdents: dto.SubscriptionIdentityDTO[]) => {
-            let baseParameters = subscriptionIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SubscriptionSimpleDTO>, Array<dto.SubscriptionObservableSimpleDTO>, dto.SubscriptionSimpleDTO, dto.SubscriptionObservableSimpleDTO>();
-            return service.getData('Subscription/GetSimpleSubscriptionsByIdents', {plain : dto.SubscriptionSimpleDTO, observable : dto.SubscriptionObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleSubscriptionsByRootFilter(): async.AsyncFunc3<dto.SubscriptionRootFilterModelStrictDTO, Array<dto.SubscriptionSimpleDTO>, Array<dto.SubscriptionObservableSimpleDTO>, dto.SubscriptionSimpleDTO, dto.SubscriptionObservableSimpleDTO> {
-        return new async.AsyncFunc3((filter: dto.SubscriptionRootFilterModelStrictDTO) => {
-            let baseParameters = filter.toNativeJson();
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SubscriptionSimpleDTO>, Array<dto.SubscriptionObservableSimpleDTO>, dto.SubscriptionSimpleDTO, dto.SubscriptionObservableSimpleDTO>();
-            return service.getData('Subscription/GetSimpleSubscriptionsByRootFilter', {plain : dto.SubscriptionSimpleDTO, observable : dto.SubscriptionObservableSimpleDTO}, baseParameters);
         });
     }
 
@@ -1803,46 +1401,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
         });
     }
 
-    function _getVisualMessageTemplate(): async.AsyncFunc3<dto.MessageTemplateIdentityDTO, dto.MessageTemplateVisualDTO, dto.MessageTemplateObservableVisualDTO, dto.MessageTemplateVisualDTO, dto.MessageTemplateObservableVisualDTO> {
-        return new async.AsyncFunc3((messageTemplateIdentity: dto.MessageTemplateIdentityDTO) => {
-            let baseParameters = messageTemplateIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.MessageTemplateVisualDTO, dto.MessageTemplateObservableVisualDTO, dto.MessageTemplateVisualDTO, dto.MessageTemplateObservableVisualDTO>();
-            return service.getData('MessageTemplate/GetVisualMessageTemplate', {plain : dto.MessageTemplateVisualDTO, observable : dto.MessageTemplateObservableVisualDTO}, baseParameters);
-        });
-    }
-
-    function _getVisualMessageTemplateByCode(): async.AsyncFunc3<string, dto.MessageTemplateVisualDTO, dto.MessageTemplateObservableVisualDTO, dto.MessageTemplateVisualDTO, dto.MessageTemplateObservableVisualDTO> {
-        return new async.AsyncFunc3((messageTemplateCode: string) => {
-            let baseParameters = messageTemplateCode;
-            let service = Environment.current.context.facadeFactory.createService<dto.MessageTemplateVisualDTO, dto.MessageTemplateObservableVisualDTO, dto.MessageTemplateVisualDTO, dto.MessageTemplateObservableVisualDTO>();
-            return service.getData('MessageTemplate/GetVisualMessageTemplateByCode', {plain : dto.MessageTemplateVisualDTO, observable : dto.MessageTemplateObservableVisualDTO}, baseParameters);
-        });
-    }
-
-    function _getVisualMessageTemplates(): async.AsyncFunc2<Array<dto.MessageTemplateVisualDTO>, Array<dto.MessageTemplateObservableVisualDTO>, dto.MessageTemplateVisualDTO, dto.MessageTemplateObservableVisualDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.MessageTemplateVisualDTO>, Array<dto.MessageTemplateObservableVisualDTO>, dto.MessageTemplateVisualDTO, dto.MessageTemplateObservableVisualDTO>();
-            return service.getData('MessageTemplate/GetVisualMessageTemplates', {plain : dto.MessageTemplateVisualDTO, observable : dto.MessageTemplateObservableVisualDTO}, baseParameters);
-        });
-    }
-
-    function _getVisualMessageTemplatesByIdents(): async.AsyncFunc3<dto.MessageTemplateIdentityDTO[], Array<dto.MessageTemplateVisualDTO>, Array<dto.MessageTemplateObservableVisualDTO>, dto.MessageTemplateVisualDTO, dto.MessageTemplateObservableVisualDTO> {
-        return new async.AsyncFunc3((messageTemplateIdents: dto.MessageTemplateIdentityDTO[]) => {
-            let baseParameters = messageTemplateIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.MessageTemplateVisualDTO>, Array<dto.MessageTemplateObservableVisualDTO>, dto.MessageTemplateVisualDTO, dto.MessageTemplateObservableVisualDTO>();
-            return service.getData('MessageTemplate/GetVisualMessageTemplatesByIdents', {plain : dto.MessageTemplateVisualDTO, observable : dto.MessageTemplateObservableVisualDTO}, baseParameters);
-        });
-    }
-
-    function _getVisualMessageTemplatesByRootFilter(): async.AsyncFunc3<dto.MessageTemplateRootFilterModelStrictDTO, Array<dto.MessageTemplateVisualDTO>, Array<dto.MessageTemplateObservableVisualDTO>, dto.MessageTemplateVisualDTO, dto.MessageTemplateObservableVisualDTO> {
-        return new async.AsyncFunc3((filter: dto.MessageTemplateRootFilterModelStrictDTO) => {
-            let baseParameters = filter.toNativeJson();
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.MessageTemplateVisualDTO>, Array<dto.MessageTemplateObservableVisualDTO>, dto.MessageTemplateVisualDTO, dto.MessageTemplateObservableVisualDTO>();
-            return service.getData('MessageTemplate/GetVisualMessageTemplatesByRootFilter', {plain : dto.MessageTemplateVisualDTO, observable : dto.MessageTemplateObservableVisualDTO}, baseParameters);
-        });
-    }
-
     function _getVisualRegularJob(): async.AsyncFunc3<dto.RegularJobIdentityDTO, dto.RegularJobVisualDTO, dto.RegularJobObservableVisualDTO, dto.RegularJobVisualDTO, dto.RegularJobObservableVisualDTO> {
         return new async.AsyncFunc3((regularJobIdentity: dto.RegularJobIdentityDTO) => {
             let baseParameters = regularJobIdentity;
@@ -1912,86 +1470,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
             let baseParameters = filter.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<Array<dto.SequenceVisualDTO>, Array<dto.SequenceObservableVisualDTO>, dto.SequenceVisualDTO, dto.SequenceObservableVisualDTO>();
             return service.getData('Sequence/GetVisualSequencesByRootFilter', {plain : dto.SequenceVisualDTO, observable : dto.SequenceObservableVisualDTO}, baseParameters);
-        });
-    }
-
-    function _getVisualSubscription(): async.AsyncFunc3<dto.SubscriptionIdentityDTO, dto.SubscriptionVisualDTO, dto.SubscriptionObservableVisualDTO, dto.SubscriptionVisualDTO, dto.SubscriptionObservableVisualDTO> {
-        return new async.AsyncFunc3((subscriptionIdentity: dto.SubscriptionIdentityDTO) => {
-            let baseParameters = subscriptionIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.SubscriptionVisualDTO, dto.SubscriptionObservableVisualDTO, dto.SubscriptionVisualDTO, dto.SubscriptionObservableVisualDTO>();
-            return service.getData('Subscription/GetVisualSubscription', {plain : dto.SubscriptionVisualDTO, observable : dto.SubscriptionObservableVisualDTO}, baseParameters);
-        });
-    }
-
-    function _getVisualSubscriptionByCode(): async.AsyncFunc3<string, dto.SubscriptionVisualDTO, dto.SubscriptionObservableVisualDTO, dto.SubscriptionVisualDTO, dto.SubscriptionObservableVisualDTO> {
-        return new async.AsyncFunc3((subscriptionCode: string) => {
-            let baseParameters = subscriptionCode;
-            let service = Environment.current.context.facadeFactory.createService<dto.SubscriptionVisualDTO, dto.SubscriptionObservableVisualDTO, dto.SubscriptionVisualDTO, dto.SubscriptionObservableVisualDTO>();
-            return service.getData('Subscription/GetVisualSubscriptionByCode', {plain : dto.SubscriptionVisualDTO, observable : dto.SubscriptionObservableVisualDTO}, baseParameters);
-        });
-    }
-
-    function _getVisualSubscriptionLambda(): async.AsyncFunc3<dto.SubscriptionLambdaIdentityDTO, dto.SubscriptionLambdaVisualDTO, dto.SubscriptionLambdaObservableVisualDTO, dto.SubscriptionLambdaVisualDTO, dto.SubscriptionLambdaObservableVisualDTO> {
-        return new async.AsyncFunc3((subscriptionLambdaIdentity: dto.SubscriptionLambdaIdentityDTO) => {
-            let baseParameters = subscriptionLambdaIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.SubscriptionLambdaVisualDTO, dto.SubscriptionLambdaObservableVisualDTO, dto.SubscriptionLambdaVisualDTO, dto.SubscriptionLambdaObservableVisualDTO>();
-            return service.getData('SubscriptionLambda/GetVisualSubscriptionLambda', {plain : dto.SubscriptionLambdaVisualDTO, observable : dto.SubscriptionLambdaObservableVisualDTO}, baseParameters);
-        });
-    }
-
-    function _getVisualSubscriptionLambdaByName(): async.AsyncFunc3<string, dto.SubscriptionLambdaVisualDTO, dto.SubscriptionLambdaObservableVisualDTO, dto.SubscriptionLambdaVisualDTO, dto.SubscriptionLambdaObservableVisualDTO> {
-        return new async.AsyncFunc3((subscriptionLambdaName: string) => {
-            let baseParameters = subscriptionLambdaName;
-            let service = Environment.current.context.facadeFactory.createService<dto.SubscriptionLambdaVisualDTO, dto.SubscriptionLambdaObservableVisualDTO, dto.SubscriptionLambdaVisualDTO, dto.SubscriptionLambdaObservableVisualDTO>();
-            return service.getData('SubscriptionLambda/GetVisualSubscriptionLambdaByName', {plain : dto.SubscriptionLambdaVisualDTO, observable : dto.SubscriptionLambdaObservableVisualDTO}, baseParameters);
-        });
-    }
-
-    function _getVisualSubscriptionLambdas(): async.AsyncFunc2<Array<dto.SubscriptionLambdaVisualDTO>, Array<dto.SubscriptionLambdaObservableVisualDTO>, dto.SubscriptionLambdaVisualDTO, dto.SubscriptionLambdaObservableVisualDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SubscriptionLambdaVisualDTO>, Array<dto.SubscriptionLambdaObservableVisualDTO>, dto.SubscriptionLambdaVisualDTO, dto.SubscriptionLambdaObservableVisualDTO>();
-            return service.getData('SubscriptionLambda/GetVisualSubscriptionLambdas', {plain : dto.SubscriptionLambdaVisualDTO, observable : dto.SubscriptionLambdaObservableVisualDTO}, baseParameters);
-        });
-    }
-
-    function _getVisualSubscriptionLambdasByIdents(): async.AsyncFunc3<dto.SubscriptionLambdaIdentityDTO[], Array<dto.SubscriptionLambdaVisualDTO>, Array<dto.SubscriptionLambdaObservableVisualDTO>, dto.SubscriptionLambdaVisualDTO, dto.SubscriptionLambdaObservableVisualDTO> {
-        return new async.AsyncFunc3((subscriptionLambdaIdents: dto.SubscriptionLambdaIdentityDTO[]) => {
-            let baseParameters = subscriptionLambdaIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SubscriptionLambdaVisualDTO>, Array<dto.SubscriptionLambdaObservableVisualDTO>, dto.SubscriptionLambdaVisualDTO, dto.SubscriptionLambdaObservableVisualDTO>();
-            return service.getData('SubscriptionLambda/GetVisualSubscriptionLambdasByIdents', {plain : dto.SubscriptionLambdaVisualDTO, observable : dto.SubscriptionLambdaObservableVisualDTO}, baseParameters);
-        });
-    }
-
-    function _getVisualSubscriptionLambdasByRootFilter(): async.AsyncFunc3<dto.SubscriptionLambdaRootFilterModelStrictDTO, Array<dto.SubscriptionLambdaVisualDTO>, Array<dto.SubscriptionLambdaObservableVisualDTO>, dto.SubscriptionLambdaVisualDTO, dto.SubscriptionLambdaObservableVisualDTO> {
-        return new async.AsyncFunc3((filter: dto.SubscriptionLambdaRootFilterModelStrictDTO) => {
-            let baseParameters = filter.toNativeJson();
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SubscriptionLambdaVisualDTO>, Array<dto.SubscriptionLambdaObservableVisualDTO>, dto.SubscriptionLambdaVisualDTO, dto.SubscriptionLambdaObservableVisualDTO>();
-            return service.getData('SubscriptionLambda/GetVisualSubscriptionLambdasByRootFilter', {plain : dto.SubscriptionLambdaVisualDTO, observable : dto.SubscriptionLambdaObservableVisualDTO}, baseParameters);
-        });
-    }
-
-    function _getVisualSubscriptions(): async.AsyncFunc2<Array<dto.SubscriptionVisualDTO>, Array<dto.SubscriptionObservableVisualDTO>, dto.SubscriptionVisualDTO, dto.SubscriptionObservableVisualDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SubscriptionVisualDTO>, Array<dto.SubscriptionObservableVisualDTO>, dto.SubscriptionVisualDTO, dto.SubscriptionObservableVisualDTO>();
-            return service.getData('Subscription/GetVisualSubscriptions', {plain : dto.SubscriptionVisualDTO, observable : dto.SubscriptionObservableVisualDTO}, baseParameters);
-        });
-    }
-
-    function _getVisualSubscriptionsByIdents(): async.AsyncFunc3<dto.SubscriptionIdentityDTO[], Array<dto.SubscriptionVisualDTO>, Array<dto.SubscriptionObservableVisualDTO>, dto.SubscriptionVisualDTO, dto.SubscriptionObservableVisualDTO> {
-        return new async.AsyncFunc3((subscriptionIdents: dto.SubscriptionIdentityDTO[]) => {
-            let baseParameters = subscriptionIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SubscriptionVisualDTO>, Array<dto.SubscriptionObservableVisualDTO>, dto.SubscriptionVisualDTO, dto.SubscriptionObservableVisualDTO>();
-            return service.getData('Subscription/GetVisualSubscriptionsByIdents', {plain : dto.SubscriptionVisualDTO, observable : dto.SubscriptionObservableVisualDTO}, baseParameters);
-        });
-    }
-
-    function _getVisualSubscriptionsByRootFilter(): async.AsyncFunc3<dto.SubscriptionRootFilterModelStrictDTO, Array<dto.SubscriptionVisualDTO>, Array<dto.SubscriptionObservableVisualDTO>, dto.SubscriptionVisualDTO, dto.SubscriptionObservableVisualDTO> {
-        return new async.AsyncFunc3((filter: dto.SubscriptionRootFilterModelStrictDTO) => {
-            let baseParameters = filter.toNativeJson();
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SubscriptionVisualDTO>, Array<dto.SubscriptionObservableVisualDTO>, dto.SubscriptionVisualDTO, dto.SubscriptionObservableVisualDTO>();
-            return service.getData('Subscription/GetVisualSubscriptionsByRootFilter', {plain : dto.SubscriptionVisualDTO, observable : dto.SubscriptionObservableVisualDTO}, baseParameters);
         });
     }
 
@@ -2099,14 +1577,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
         });
     }
 
-    function _hasMessageTemplateAccess(): async.SimpleAsyncFunc3<dto.MessageTemplateIdentityDTO, dto.ConfigurationSecurityOperationCode, boolean> {
-        return new async.SimpleAsyncFunc3((messageTemplateIdent: dto.MessageTemplateIdentityDTO, securityOperationCode: dto.ConfigurationSecurityOperationCode) => {
-            let baseParameters = {messageTemplateIdent : messageTemplateIdent, securityOperationCode : securityOperationCode};
-            let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('MessageTemplate/HasMessageTemplateAccess', baseParameters);
-        });
-    }
-
     function _hasRegularJobAccess(): async.SimpleAsyncFunc3<dto.RegularJobIdentityDTO, dto.ConfigurationSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((regularJobIdent: dto.RegularJobIdentityDTO, securityOperationCode: dto.ConfigurationSecurityOperationCode) => {
             let baseParameters = {regularJobIdent : regularJobIdent, securityOperationCode : securityOperationCode};
@@ -2155,22 +1625,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
         });
     }
 
-    function _hasSubscriptionAccess(): async.SimpleAsyncFunc3<dto.SubscriptionIdentityDTO, dto.ConfigurationSecurityOperationCode, boolean> {
-        return new async.SimpleAsyncFunc3((subscriptionIdent: dto.SubscriptionIdentityDTO, securityOperationCode: dto.ConfigurationSecurityOperationCode) => {
-            let baseParameters = {subscriptionIdent : subscriptionIdent, securityOperationCode : securityOperationCode};
-            let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('Subscription/HasSubscriptionAccess', baseParameters);
-        });
-    }
-
-    function _hasSubscriptionLambdaAccess(): async.SimpleAsyncFunc3<dto.SubscriptionLambdaIdentityDTO, dto.ConfigurationSecurityOperationCode, boolean> {
-        return new async.SimpleAsyncFunc3((subscriptionLambdaIdent: dto.SubscriptionLambdaIdentityDTO, securityOperationCode: dto.ConfigurationSecurityOperationCode) => {
-            let baseParameters = {subscriptionLambdaIdent : subscriptionLambdaIdent, securityOperationCode : securityOperationCode};
-            let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('SubscriptionLambda/HasSubscriptionLambdaAccess', baseParameters);
-        });
-    }
-
     function _hasSystemConstantAccess(): async.SimpleAsyncFunc3<dto.SystemConstantIdentityDTO, dto.ConfigurationSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((systemConstantIdent: dto.SystemConstantIdentityDTO, securityOperationCode: dto.ConfigurationSecurityOperationCode) => {
             let baseParameters = {systemConstantIdent : systemConstantIdent, securityOperationCode : securityOperationCode};
@@ -2203,14 +1657,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
         });
     }
 
-    function _removeMessageTemplate(): async.SimpleAsyncFunc2<dto.MessageTemplateIdentityDTO, void> {
-        return new async.SimpleAsyncFunc2((messageTemplateIdent: dto.MessageTemplateIdentityDTO) => {
-            let baseParameters = messageTemplateIdent;
-            let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('MessageTemplate/RemoveMessageTemplate', baseParameters);
-        });
-    }
-
     function _removeRegularJob(): async.SimpleAsyncFunc2<dto.RegularJobIdentityDTO, void> {
         return new async.SimpleAsyncFunc2((regularJobIdent: dto.RegularJobIdentityDTO) => {
             let baseParameters = regularJobIdent;
@@ -2235,35 +1681,11 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
         });
     }
 
-    function _removeSubscription(): async.SimpleAsyncFunc2<dto.SubscriptionIdentityDTO, void> {
-        return new async.SimpleAsyncFunc2((subscriptionIdent: dto.SubscriptionIdentityDTO) => {
-            let baseParameters = subscriptionIdent;
-            let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('Subscription/RemoveSubscription', baseParameters);
-        });
-    }
-
-    function _removeSubscriptionLambda(): async.SimpleAsyncFunc2<dto.SubscriptionLambdaIdentityDTO, void> {
-        return new async.SimpleAsyncFunc2((subscriptionLambdaIdent: dto.SubscriptionLambdaIdentityDTO) => {
-            let baseParameters = subscriptionLambdaIdent;
-            let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('SubscriptionLambda/RemoveSubscriptionLambda', baseParameters);
-        });
-    }
-
     function _saveCodeFirstSubscription(): async.AsyncFunc3<dto.CodeFirstSubscriptionStrictDTO, dto.CodeFirstSubscriptionIdentityDTO, dto.CodeFirstSubscriptionObservableIdentityDTO, dto.CodeFirstSubscriptionIdentityDTO, dto.CodeFirstSubscriptionObservableIdentityDTO> {
         return new async.AsyncFunc3((codeFirstSubscriptionStrict: dto.CodeFirstSubscriptionStrictDTO) => {
             let baseParameters = codeFirstSubscriptionStrict.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.CodeFirstSubscriptionIdentityDTO, dto.CodeFirstSubscriptionObservableIdentityDTO, dto.CodeFirstSubscriptionIdentityDTO, dto.CodeFirstSubscriptionObservableIdentityDTO>();
             return service.getData('CodeFirstSubscription/SaveCodeFirstSubscription', {plain : dto.CodeFirstSubscriptionIdentityDTO, observable : dto.CodeFirstSubscriptionObservableIdentityDTO}, baseParameters);
-        });
-    }
-
-    function _saveMessageTemplate(): async.AsyncFunc3<dto.MessageTemplateStrictDTO, dto.MessageTemplateIdentityDTO, dto.MessageTemplateObservableIdentityDTO, dto.MessageTemplateIdentityDTO, dto.MessageTemplateObservableIdentityDTO> {
-        return new async.AsyncFunc3((messageTemplateStrict: dto.MessageTemplateStrictDTO) => {
-            let baseParameters = messageTemplateStrict.toNativeJson();
-            let service = Environment.current.context.facadeFactory.createService<dto.MessageTemplateIdentityDTO, dto.MessageTemplateObservableIdentityDTO, dto.MessageTemplateIdentityDTO, dto.MessageTemplateObservableIdentityDTO>();
-            return service.getData('MessageTemplate/SaveMessageTemplate', {plain : dto.MessageTemplateIdentityDTO, observable : dto.MessageTemplateObservableIdentityDTO}, baseParameters);
         });
     }
 
@@ -2288,22 +1710,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
             let baseParameters = sequenceStrict.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.SequenceIdentityDTO, dto.SequenceObservableIdentityDTO, dto.SequenceIdentityDTO, dto.SequenceObservableIdentityDTO>();
             return service.getData('Sequence/SaveSequence', {plain : dto.SequenceIdentityDTO, observable : dto.SequenceObservableIdentityDTO}, baseParameters);
-        });
-    }
-
-    function _saveSubscription(): async.AsyncFunc3<dto.SubscriptionStrictDTO, dto.SubscriptionIdentityDTO, dto.SubscriptionObservableIdentityDTO, dto.SubscriptionIdentityDTO, dto.SubscriptionObservableIdentityDTO> {
-        return new async.AsyncFunc3((subscriptionStrict: dto.SubscriptionStrictDTO) => {
-            let baseParameters = subscriptionStrict.toNativeJson();
-            let service = Environment.current.context.facadeFactory.createService<dto.SubscriptionIdentityDTO, dto.SubscriptionObservableIdentityDTO, dto.SubscriptionIdentityDTO, dto.SubscriptionObservableIdentityDTO>();
-            return service.getData('Subscription/SaveSubscription', {plain : dto.SubscriptionIdentityDTO, observable : dto.SubscriptionObservableIdentityDTO}, baseParameters);
-        });
-    }
-
-    function _saveSubscriptionLambda(): async.AsyncFunc3<dto.SubscriptionLambdaStrictDTO, dto.SubscriptionLambdaIdentityDTO, dto.SubscriptionLambdaObservableIdentityDTO, dto.SubscriptionLambdaIdentityDTO, dto.SubscriptionLambdaObservableIdentityDTO> {
-        return new async.AsyncFunc3((subscriptionLambdaStrict: dto.SubscriptionLambdaStrictDTO) => {
-            let baseParameters = subscriptionLambdaStrict.toNativeJson();
-            let service = Environment.current.context.facadeFactory.createService<dto.SubscriptionLambdaIdentityDTO, dto.SubscriptionLambdaObservableIdentityDTO, dto.SubscriptionLambdaIdentityDTO, dto.SubscriptionLambdaObservableIdentityDTO>();
-            return service.getData('SubscriptionLambda/SaveSubscriptionLambda', {plain : dto.SubscriptionLambdaIdentityDTO, observable : dto.SubscriptionLambdaObservableIdentityDTO}, baseParameters);
         });
     }
 

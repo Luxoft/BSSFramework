@@ -19,11 +19,9 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
     {
         /// <summary>Создаёт экземпляр класса <see cref="SecurityItemSourceLambdaProcessor"/>.</summary>
         /// <param name="bllContext">Контекст бизнес-логики.</param>
-        /// <param name="parserFactory">Фабрика парсеров лямбда-выражений.</param>
         public SecurityItemSourceLambdaProcessor(
-            TBLLContext bllContext,
-            IExpressionParserFactory parserFactory)
-            : base(bllContext, parserFactory)
+            TBLLContext bllContext)
+            : base(bllContext)
         {
         }
 
@@ -82,24 +80,7 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
             where T : class
             where TSecurityItem : IIdentityObject<Guid>
         {
-            var result = securityItem.Source.WithContext
-                ? this.InvokeWithTypedContext<T, TSecurityItem>(securityItem, versions)
-                : this.InvokeWithoutContext<T, TSecurityItem>(securityItem, versions);
-
-            return result;
-        }
-
-        private IEnumerable<TSecurityItem> InvokeWithoutContext<T, TSecurityItem>(
-            SubscriptionSecurityItem securityItem,
-            DomainObjectVersions<T> versions)
-            where T : class
-            where TSecurityItem : IIdentityObject<Guid>
-        {
-            var @delegate = this.ParserFactory
-                .GetBySubscriptionSecurityItemSource<T, TSecurityItem>()
-                .GetDelegate(securityItem);
-
-            var result = @delegate(versions.Previous, versions.Current);
+            var result = this.InvokeWithTypedContext<T, TSecurityItem>(securityItem, versions);
 
             return result;
         }
@@ -114,18 +95,7 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
             IEnumerable<TSecurityItem> result;
             var funcValue = securityItem.Source.FuncValue;
 
-            if (funcValue != null)
-            {
-                result = this.TryCast<IEnumerable<TSecurityItem>>(funcValue(this.BllContext, versions));
-            }
-            else
-            {
-                var @delegate = this.ParserFactory
-                .GetBySubscriptionSecurityItemSource<TBLLContext, T, TSecurityItem>()
-                .GetDelegate(securityItem);
-
-                result = @delegate(this.BllContext, versions.Previous, versions.Current);
-            }
+            result = this.TryCast<IEnumerable<TSecurityItem>>(funcValue(this.BllContext, versions));
 
             return result;
         }

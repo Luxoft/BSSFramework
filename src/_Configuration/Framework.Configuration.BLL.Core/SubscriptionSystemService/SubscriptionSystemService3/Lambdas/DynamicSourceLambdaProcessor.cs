@@ -19,11 +19,9 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
     {
         /// <summary>Создаёт экземпляр класса <see cref="DynamicSourceLambdaProcessor"/>.</summary>
         /// <param name="bllContext">Контекст бизнес-логики.</param>
-        /// <param name="parserFactory">Фабрика парсеров лямбда-выражений.</param>
         public DynamicSourceLambdaProcessor(
-            TBLLContext bllContext,
-            IExpressionParserFactory parserFactory)
-            : base(bllContext, parserFactory)
+            TBLLContext bllContext)
+            : base(bllContext)
         {
         }
 
@@ -72,23 +70,7 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
             DomainObjectVersions<T> versions)
             where T : class
         {
-            var result = subscription.DynamicSource.WithContext
-                ? this.InvokeWithTypedContext(subscription, versions)
-                : this.InvokeWithoutContext(subscription, versions);
-
-            return result;
-        }
-
-        private IEnumerable<FilterItemIdentity> InvokeWithoutContext<T>(
-            Subscription subscription,
-            DomainObjectVersions<T> versions)
-            where T : class
-        {
-            var @delegate = this.ParserFactory
-                .GetBySubscriptionDynamicSourceLegacy<T>()
-                .GetDelegate(subscription);
-
-            var result = @delegate(versions.Previous, versions.Current);
+            var result = this.InvokeWithTypedContext(subscription, versions);
 
             return result;
         }
@@ -100,12 +82,14 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
             DomainObjectVersions<T> versions)
             where T : class
         {
-            var @delegate = this.ParserFactory
-                .GetBySubscriptionDynamicSourceLegacy<TBLLContext, T>().GetDelegate(subscription);
+            var funcValue = subscription.Attachment?.FuncValue;
 
-            var result = @delegate(this.BllContext, versions.Previous, versions.Current);
+            if (funcValue != null)
+            {
+                return this.TryCast<IEnumerable<FilterItemIdentity>>(funcValue(this.BllContext, versions));
+            }
 
-            return result;
+            return Enumerable.Empty<FilterItemIdentity>();
         }
     }
 }

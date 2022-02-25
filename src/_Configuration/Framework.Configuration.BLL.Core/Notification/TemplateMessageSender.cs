@@ -126,9 +126,7 @@ namespace Framework.Configuration.BLL.Notification
                     throw new ArgumentNullException(nameof(message));
                 }
 
-                var messageTemplateBLL = this.Context.Logics.MessageTemplate;
-
-                var messageTemplate = messageTemplateBLL.GetByCode(message.MessageTemplateCode, false) ?? new MessageTemplate();
+                var messageTemplate = new MessageTemplate();
 
                 var splittedReceivers = message.Receivers.SelectMany(z => z.Split(new[] { ';', ' ' }, StringSplitOptions.RemoveEmptyEntries)).ToList();
                 var splittedCarbonCopy = message.CopyReceivers.SelectMany(z => z.Split(new[] { ';', ' ' }, StringSplitOptions.RemoveEmptyEntries)).ToList();
@@ -137,6 +135,8 @@ namespace Framework.Configuration.BLL.Notification
                 var includeAttachments = message.Subscription.Maybe(s => s.IncludeAttachments, true);
 
                 var sender = message.Subscription.Maybe(s => s.Sender) ?? this._defaultSender;
+
+                var messageTemplateBLL = new MessageTemplateBLL(this.Context);
 
                 var mailMessage = messageTemplateBLL.CreateMailMessage(
                     message,

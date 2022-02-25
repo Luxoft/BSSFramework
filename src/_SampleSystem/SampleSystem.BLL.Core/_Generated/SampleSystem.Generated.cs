@@ -790,14 +790,6 @@ namespace SampleSystem.BLL
             {
                 return SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitEdit;
             }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.MessageTemplateContainer) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.MessageTemplateContainer) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
-            }
             else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.Principal) == domainType))
             {
                 return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
@@ -819,10 +811,6 @@ namespace SampleSystem.BLL
                 return SampleSystem.SampleSystemSecurityOperationCode.EmployeeEdit;
             }
             else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.RegularJobResult) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.SampleSystemMessageTemplate) == domainType))
             {
                 return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
             }
@@ -1021,7 +1009,6 @@ namespace SampleSystem.BLL
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemManagementUnitAndHRDepartmentLinkSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitFluentMapping, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemManagementUnitFluentMappingSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestManualEmployeeProjectionSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.MessageTemplateContainer, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemMessageTemplateContainerSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Principal, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemPrincipalSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.BusinessUnitIdentity, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemBusinessUnitIdentitySecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.BusinessUnitProgramClass, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemBusinessUnitProgramClassSecurityService>(serviceCollection);
@@ -1039,7 +1026,6 @@ namespace SampleSystem.BLL
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestSecurityObjItemProjection, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestSecurityObjItemProjectionSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.VisualEmployee, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemVisualEmployeeSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.RegularJobResult, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemRegularJobResultSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SampleSystemMessageTemplate, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemSampleSystemMessageTemplateSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SqlParserTestObj, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemSqlParserTestObjSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SqlParserTestObjContainer, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemSqlParserTestObjContainerSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestCustomContextSecurityObj, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestCustomContextSecurityObjSecurityService>(serviceCollection);
@@ -1457,15 +1443,6 @@ namespace SampleSystem.BLL
         }
     }
     
-    public partial class SampleSystemMessageTemplateContainerSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.MessageTemplateContainer, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemMessageTemplateContainerSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
     public partial class SampleSystemPrincipalSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Principal, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
@@ -1605,15 +1582,6 @@ namespace SampleSystem.BLL
     {
         
         public SampleSystemRegularJobResultSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class SampleSystemSampleSystemMessageTemplateSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.SampleSystemMessageTemplate, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
-    {
-        
-        public SampleSystemSampleSystemMessageTemplateSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -2023,16 +1991,6 @@ namespace SampleSystem.BLL
             get;
         }
         
-        SampleSystem.BLL.IMessageTemplateContainerBLL MessageTemplateContainer
-        {
-            get;
-        }
-        
-        SampleSystem.BLL.IMessageTemplateContainerBLLFactory MessageTemplateContainerFactory
-        {
-            get;
-        }
-        
         SampleSystem.BLL.INamedLockBLL NamedLock
         {
             get;
@@ -2069,16 +2027,6 @@ namespace SampleSystem.BLL
         }
         
         SampleSystem.BLL.IRoleRoleDegreeLinkBLLFactory RoleRoleDegreeLinkFactory
-        {
-            get;
-        }
-        
-        SampleSystem.BLL.ISampleSystemMessageTemplateBLL SampleSystemMessageTemplate
-        {
-            get;
-        }
-        
-        SampleSystem.BLL.ISampleSystemMessageTemplateBLLFactory SampleSystemMessageTemplateFactory
         {
             get;
         }
@@ -2524,14 +2472,6 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface IMessageTemplateContainerBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.MessageTemplateContainer, System.Guid>
-    {
-    }
-    
-    public partial interface IMessageTemplateContainerBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IMessageTemplateContainerBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.MessageTemplateContainer>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IMessageTemplateContainerBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IMessageTemplateContainerBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IMessageTemplateContainerBLL, Framework.SecuritySystem.BLLSecurityMode>
-    {
-    }
-    
     public partial interface INamedLockBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.NamedLock, System.Guid>
     {
     }
@@ -2663,14 +2603,6 @@ namespace SampleSystem.BLL
     }
     
     public partial interface IRoleRoleDegreeLinkBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IRoleRoleDegreeLinkBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.RoleRoleDegreeLink>>
-    {
-    }
-    
-    public partial interface ISampleSystemMessageTemplateBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.SampleSystemMessageTemplate, System.Guid>
-    {
-    }
-    
-    public partial interface ISampleSystemMessageTemplateBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISampleSystemMessageTemplateBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.SampleSystemMessageTemplate>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISampleSystemMessageTemplateBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISampleSystemMessageTemplateBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ISampleSystemMessageTemplateBLL, Framework.SecuritySystem.BLLSecurityMode>
     {
     }
     

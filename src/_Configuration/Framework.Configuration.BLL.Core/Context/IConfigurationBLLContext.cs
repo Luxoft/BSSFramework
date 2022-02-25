@@ -32,8 +32,6 @@ namespace Framework.Configuration.BLL
 
         IDateTimeServiceContainer
     {
-        IExpressionParserFactory ExpressionParsers { get; }
-
         IMessageSender<MessageTemplateNotification> SubscriptionSender { get; }
 
         IMessageSender<RunRegularJobModel> RegularJobMessageSender { get; }
@@ -43,10 +41,6 @@ namespace Framework.Configuration.BLL
         ISerializerFactory<string> SystemConstantSerializerFactory { get; }
 
         ITypeResolver<DomainType> ComplexDomainTypeResolver { get; }
-
-        ITemplateEvaluatorFactory TemplateEvaluatorFactory { get; }
-
-        IFormatter<MessageTemplateNotification, NotificationEventDTO> MessageTemplateNotificationFormatter { get; }
 
         /// <summary>
         /// Фабрика контектов (нужно для RegularJob-ов)

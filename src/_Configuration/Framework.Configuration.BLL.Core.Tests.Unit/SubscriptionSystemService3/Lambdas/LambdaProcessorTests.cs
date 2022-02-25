@@ -77,8 +77,8 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
 
         public class TestLambdaProcessor : LambdaProcessor<ITestBLLContext>
         {
-            public TestLambdaProcessor([NotNull] ITestBLLContext bllContext, [NotNull] IExpressionParserFactory parserFactory)
-                : base(bllContext, parserFactory)
+            public TestLambdaProcessor([NotNull] ITestBLLContext bllContext)
+                : base(bllContext)
             {
             }
 

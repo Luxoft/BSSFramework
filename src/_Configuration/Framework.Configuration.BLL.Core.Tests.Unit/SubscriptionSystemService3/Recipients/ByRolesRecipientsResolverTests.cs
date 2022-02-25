@@ -74,6 +74,8 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
                 .Build<Subscription>()
                 .With(s => s.DynamicSource, new SubscriptionLambda())
                 .With(s => s.DynamicSourceExpandType, NotificationExpandType.All)
+                .With(s => s.SecurityItems, new List<SubscriptionSecurityItem>())
+                .With(s => s.SubBusinessRoles, new List<SubBusinessRole>())
                 .Create();
 
             ((List<SubscriptionSecurityItem>)subscription.SecurityItems).Add(new SubscriptionSecurityItem(subscription));
@@ -105,6 +107,8 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
                 .Build<Subscription>()
                 .With(s => s.DynamicSource, new SubscriptionLambda())
                 .With(s => s.DynamicSourceExpandType, NotificationExpandType.All)
+                .With(s => s.SecurityItems, new List<SubscriptionSecurityItem>())
+                .With(s => s.SubBusinessRoles, new List<SubBusinessRole>())
                 .Create();
 
             ((List<SubBusinessRole>)subscription.SubBusinessRoles).Add(businessRole);
@@ -156,6 +160,8 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
                 .Build<Subscription>()
                 .With(s => s.DynamicSource, default(SubscriptionLambda))
                 .With(s => s.DynamicSourceExpandType)
+                .With(s => s.SecurityItems, new List<SubscriptionSecurityItem>())
+                .With(s => s.SubBusinessRoles, new List<SubBusinessRole>())
                 .Create();
 
             ((List<SubBusinessRole>)subscription.SubBusinessRoles).Add(businessRole);
@@ -182,15 +188,22 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
         {
             // Arrange
             var versions = this.Fixture.Create<DomainObjectVersions<string>>();
-            var authDomainTypeId = Guid.NewGuid();
+
+            var subscription = this.Fixture
+                                   .Build<Subscription>()
+                                   .With(s => s.DynamicSource, default(SubscriptionLambda))
+                                   .With(s => s.DynamicSourceExpandType)
+                                   .With(s => s.SecurityItems, new List<SubscriptionSecurityItem>())
+                                   .With(s => s.SubBusinessRoles, new List<SubBusinessRole>())
+                                   .Create();
 
             var securityItem = this.Fixture
                 .Build<SubscriptionSecurityItem>()
-                .With(item => item.Source,  default(SubscriptionLambda))
-                .With(item => item.AuthDomainTypeId, authDomainTypeId)
+                .With(item => item.Source, new SubscriptionLambda() { AuthDomainType = typeof(IdentityObject) })
+                .With(item => item.Subscription, subscription)
                 .Create();
 
-            var businessRole = this.Fixture.Create<SubBusinessRole>();
+            var businessRole = this.Fixture.Build<SubBusinessRole>().With(item => item.Subscription, subscription).Create();
             var buisnessRoleIds = new[] { businessRole.BusinessRoleId };
 
             var identityObject = this.Fixture.Create<IdentityObject>();
@@ -198,18 +211,9 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
             var principals = new[] { this.Fixture.Create<Principal>() };
             var employees = new RecipientCollection(new[] { this.Fixture.Create<Recipient>() });
 
-            var subscription = this.Fixture
-                .Build<Subscription>()
-                .With(s => s.DynamicSource, default(SubscriptionLambda))
-                .With(s => s.DynamicSourceExpandType)
-                .Create();
 
             ((List<SubBusinessRole>)subscription.SubBusinessRoles).Add(businessRole);
             ((List<SubscriptionSecurityItem>)subscription.SecurityItems).Add(securityItem);
-
-            this.configurationContextFacade
-                .GetSecurityType(securityItem.AuthDomainTypeId)
-                .Returns(typeof(IdentityObject));
 
             this.configurationContextFacade
                 .GetNotificationPrincipals(
@@ -257,14 +261,16 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
                 .Build<Subscription>()
                 .With(s => s.DynamicSource, default(SubscriptionLambda))
                 .With(s => s.DynamicSourceExpandType)
+                .With(s => s.SecurityItems, new List<SubscriptionSecurityItem>())
+                .With(s => s.SubBusinessRoles, new List<SubBusinessRole>())
                 .Create();
 
             ((List<SubBusinessRole>)subscription.SubBusinessRoles).Add(businessRole);
             ((List<SubscriptionSecurityItem>)subscription.SecurityItems).Add(securityItem);
 
-            this.configurationContextFacade
-                .GetSecurityType(securityItem.Id)
-                .Returns(default(Type))
+            //this.configurationContextFacade
+            //    .GetSecurityType(securityItem.Id)
+            //    .Returns(default(Type))
                 //.Repeat.Never()
                 ;
 

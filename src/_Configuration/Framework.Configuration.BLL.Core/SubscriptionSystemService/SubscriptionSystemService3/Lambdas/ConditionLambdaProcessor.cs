@@ -16,9 +16,8 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
     {
         /// <summary>Создаёт экземпляр класса <see cref="ConditionLambdaProcessor"/>.</summary>
         /// <param name="bllContext">Контекст бизнес-логики.</param>
-        /// <param name="parserFactory">Фабрика парсеров лямбда-выражений.</param>
-        public ConditionLambdaProcessor(TBLLContext bllContext, IExpressionParserFactory parserFactory)
-            : base(bllContext, parserFactory)
+        public ConditionLambdaProcessor(TBLLContext bllContext)
+            : base(bllContext)
         {
         }
 
@@ -64,21 +63,11 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
         private bool InvokeInternal<T>(Subscription subscription, DomainObjectVersions<T> versions)
             where T : class
         {
-            var result = subscription.Condition.WithContext
-                ? this.InvokeWithTypedContext(subscription, versions)
-                : this.InvokeWithoutContext(subscription, versions);
+            var result = this.InvokeWithTypedContext(subscription, versions);
 
             return result;
         }
 
-        private bool InvokeWithoutContext<T>(Subscription subscription, DomainObjectVersions<T> versions)
-            where T : class
-        {
-            var @delegate = this.ParserFactory.GetBySubscriptionCondition<T>().GetDelegate(subscription);
-            var result = @delegate(versions.Previous, versions.Current);
-
-            return result;
-        }
 
         [UsedImplicitly]
         private bool InvokeWithTypedContext<T>(
@@ -89,15 +78,7 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
             bool result;
             var funcValue = subscription.Condition.FuncValue;
 
-            if (funcValue != null)
-            {
-                result = this.TryCast<bool>(funcValue(this.BllContext, versions));
-            }
-            else
-            {
-                var @delegate = this.ParserFactory.GetBySubscriptionCondition<TBLLContext, T>().GetDelegate(subscription);
-                result = @delegate(this.BllContext, versions.Previous, versions.Current);
-            }
+            result = this.TryCast<bool>(funcValue(this.BllContext, versions));
 
             return result;
         }

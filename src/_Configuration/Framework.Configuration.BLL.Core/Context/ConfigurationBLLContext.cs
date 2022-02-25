@@ -67,10 +67,7 @@ namespace Framework.Configuration.BLL
             Func<BLLSecurityMode, IBLLSimpleQueryBase<IEmployee>> getEmployeeSourceFunc,
             IEnumerable<ITargetSystemService> targetSystemServices,
             IMessageSender<RunRegularJobModel> regularJobMessageSender,
-            IExpressionParserFactory expressionParsers,
             [NotNull] ISerializerFactory<string> systemConstantSerializerFactory,
-            [NotNull] ITemplateEvaluatorFactory templateEvaluatorFactory,
-            [NotNull] IFormatter<MessageTemplateNotification, NotificationEventDTO> messageTemplateNotificationFormatter,
             [NotNull] IContextEvaluator<IConfigurationBLLContext> rootContextEvaluator,
             [NotNull] object serviceEnvironmentSource,
             [NotNull] IExceptionService exceptionService,
@@ -105,10 +102,7 @@ namespace Framework.Configuration.BLL
                 domainType => this.Logics.DomainType.GetByDomainType(domainType),
                 new EqualityComparerImpl<IDomainType>((dt1, dt2) => dt1.Name == dt2.Name && dt1.NameSpace == dt2.NameSpace, dt => dt.Name.GetHashCode() ^ dt.NameSpace.GetHashCode())).WithLock();
 
-            this.ExpressionParsers = expressionParsers ?? throw new ArgumentNullException(nameof(expressionParsers));
             this.SystemConstantSerializerFactory = systemConstantSerializerFactory ?? throw new ArgumentNullException(nameof(systemConstantSerializerFactory));
-            this.TemplateEvaluatorFactory = templateEvaluatorFactory ?? throw new ArgumentNullException(nameof(templateEvaluatorFactory));
-            this.MessageTemplateNotificationFormatter = messageTemplateNotificationFormatter ?? throw new ArgumentNullException(nameof(messageTemplateNotificationFormatter));
             this.RootContextEvaluator = rootContextEvaluator ?? throw new ArgumentNullException(nameof(rootContextEvaluator));
             this.ServiceEnvironmentSource = serviceEnvironmentSource ?? throw new ArgumentNullException(nameof(serviceEnvironmentSource));
 
@@ -142,8 +136,6 @@ namespace Framework.Configuration.BLL
 
         public override IConfigurationBLLFactoryContainer Logics => this.lazyLogics.Value;
 
-        public IExpressionParserFactory ExpressionParsers { get; }
-
         public IAuthorizationBLLContext Authorization { get; }
 
         public ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory { get; }
@@ -153,10 +145,6 @@ namespace Framework.Configuration.BLL
         public IExceptionService ExceptionService { get; }
 
         public ISerializerFactory<string> SystemConstantSerializerFactory { get; }
-
-        public ITemplateEvaluatorFactory TemplateEvaluatorFactory { get; }
-
-        public IFormatter<MessageTemplateNotification, NotificationEventDTO> MessageTemplateNotificationFormatter { get; }
 
         /// <inheritdoc />
         public IContextEvaluator<IConfigurationBLLContext> RootContextEvaluator { get; }
@@ -188,11 +176,6 @@ namespace Framework.Configuration.BLL
                                               .Any(ac => ac.ObjectId == domainObject.Id
                                                       && ac.DomainType.TargetSystem == s.TargetSystem
                                                       && ac.Attachments.Any()));
-        }
-
-        public IMessageTemplate GetMessageTemplate(Guid messageTemplateId, IdCheckMode idCheckMode)
-        {
-            return this.Logics.MessageTemplate.GetById(messageTemplateId, idCheckMode);
         }
 
         public IPersistentTargetSystemService GetPersistentTargetSystemService(TargetSystem targetSystem)

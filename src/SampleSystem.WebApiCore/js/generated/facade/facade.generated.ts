@@ -43,10 +43,8 @@ export let checkLocationAccessAsyncFunc = _checkLocationAccess();
 export let checkManagementUnitAccessAsyncFunc = _checkManagementUnitAccess();
 export let checkManagementUnitAndBusinessUnitLinkAccessAsyncFunc = _checkManagementUnitAndBusinessUnitLinkAccess();
 export let checkManagementUnitAndHRDepartmentLinkAccessAsyncFunc = _checkManagementUnitAndHRDepartmentLinkAccess();
-export let checkMessageTemplateContainerAccessAsyncFunc = _checkMessageTemplateContainerAccess();
 export let checkPrincipalAccessAsyncFunc = _checkPrincipalAccess();
 export let checkRegularJobResultAccessAsyncFunc = _checkRegularJobResultAccess();
-export let checkSampleSystemMessageTemplateAccessAsyncFunc = _checkSampleSystemMessageTemplateAccess();
 export let checkSqlParserTestObjAccessAsyncFunc = _checkSqlParserTestObjAccess();
 export let checkSqlParserTestObjContainerAccessAsyncFunc = _checkSqlParserTestObjContainerAccess();
 export let checkTestImmutableObjAccessAsyncFunc = _checkTestImmutableObjAccess();
@@ -153,18 +151,12 @@ export let getFullManagementUnitsAsyncFunc = _getFullManagementUnits();
 export let getFullManagementUnitsByIdentsAsyncFunc = _getFullManagementUnitsByIdents();
 export let getFullManagementUnitsByOperationAsyncFunc = _getFullManagementUnitsByOperation();
 export let getFullManagementUnitTreeByOperationAsyncFunc = _getFullManagementUnitTreeByOperation();
-export let getFullMessageTemplateContainerAsyncFunc = _getFullMessageTemplateContainer();
-export let getFullMessageTemplateContainersAsyncFunc = _getFullMessageTemplateContainers();
-export let getFullMessageTemplateContainersByIdentsAsyncFunc = _getFullMessageTemplateContainersByIdents();
 export let getFullPrincipalAsyncFunc = _getFullPrincipal();
 export let getFullPrincipalsAsyncFunc = _getFullPrincipals();
 export let getFullPrincipalsByIdentsAsyncFunc = _getFullPrincipalsByIdents();
 export let getFullRegularJobResultAsyncFunc = _getFullRegularJobResult();
 export let getFullRegularJobResultsAsyncFunc = _getFullRegularJobResults();
 export let getFullRegularJobResultsByIdentsAsyncFunc = _getFullRegularJobResultsByIdents();
-export let getFullSampleSystemMessageTemplateAsyncFunc = _getFullSampleSystemMessageTemplate();
-export let getFullSampleSystemMessageTemplatesAsyncFunc = _getFullSampleSystemMessageTemplates();
-export let getFullSampleSystemMessageTemplatesByIdentsAsyncFunc = _getFullSampleSystemMessageTemplatesByIdents();
 export let getFullSqlParserTestObjAsyncFunc = _getFullSqlParserTestObj();
 export let getFullSqlParserTestObjContainerAsyncFunc = _getFullSqlParserTestObjContainer();
 export let getFullSqlParserTestObjContainersAsyncFunc = _getFullSqlParserTestObjContainers();
@@ -244,10 +236,8 @@ export let getRichManagementUnitAsyncFunc = _getRichManagementUnit();
 export let getRichManagementUnitAndBusinessUnitLinkAsyncFunc = _getRichManagementUnitAndBusinessUnitLink();
 export let getRichManagementUnitAndHRDepartmentLinkAsyncFunc = _getRichManagementUnitAndHRDepartmentLink();
 export let getRichManagementUnitByNameAsyncFunc = _getRichManagementUnitByName();
-export let getRichMessageTemplateContainerAsyncFunc = _getRichMessageTemplateContainer();
 export let getRichPrincipalAsyncFunc = _getRichPrincipal();
 export let getRichRegularJobResultAsyncFunc = _getRichRegularJobResult();
-export let getRichSampleSystemMessageTemplateAsyncFunc = _getRichSampleSystemMessageTemplate();
 export let getRichTestCustomContextSecurityObjAsyncFunc = _getRichTestCustomContextSecurityObj();
 export let getRichTestCustomContextSecurityObjByNameAsyncFunc = _getRichTestCustomContextSecurityObjByName();
 export let getRichTestImmutableObjAsyncFunc = _getRichTestImmutableObj();
@@ -358,18 +348,12 @@ export let getSimpleManagementUnitByNameAsyncFunc = _getSimpleManagementUnitByNa
 export let getSimpleManagementUnitsAsyncFunc = _getSimpleManagementUnits();
 export let getSimpleManagementUnitsByIdentsAsyncFunc = _getSimpleManagementUnitsByIdents();
 export let getSimpleManagementUnitsByOperationAsyncFunc = _getSimpleManagementUnitsByOperation();
-export let getSimpleMessageTemplateContainerAsyncFunc = _getSimpleMessageTemplateContainer();
-export let getSimpleMessageTemplateContainersAsyncFunc = _getSimpleMessageTemplateContainers();
-export let getSimpleMessageTemplateContainersByIdentsAsyncFunc = _getSimpleMessageTemplateContainersByIdents();
 export let getSimplePrincipalAsyncFunc = _getSimplePrincipal();
 export let getSimplePrincipalsAsyncFunc = _getSimplePrincipals();
 export let getSimplePrincipalsByIdentsAsyncFunc = _getSimplePrincipalsByIdents();
 export let getSimpleRegularJobResultAsyncFunc = _getSimpleRegularJobResult();
 export let getSimpleRegularJobResultsAsyncFunc = _getSimpleRegularJobResults();
 export let getSimpleRegularJobResultsByIdentsAsyncFunc = _getSimpleRegularJobResultsByIdents();
-export let getSimpleSampleSystemMessageTemplateAsyncFunc = _getSimpleSampleSystemMessageTemplate();
-export let getSimpleSampleSystemMessageTemplatesAsyncFunc = _getSimpleSampleSystemMessageTemplates();
-export let getSimpleSampleSystemMessageTemplatesByIdentsAsyncFunc = _getSimpleSampleSystemMessageTemplatesByIdents();
 export let getSimpleSqlParserTestObjAsyncFunc = _getSimpleSqlParserTestObj();
 export let getSimpleSqlParserTestObjContainerAsyncFunc = _getSimpleSqlParserTestObjContainer();
 export let getSimpleSqlParserTestObjContainersAsyncFunc = _getSimpleSqlParserTestObjContainers();
@@ -549,10 +533,8 @@ export let hasLocationAccessAsyncFunc = _hasLocationAccess();
 export let hasManagementUnitAccessAsyncFunc = _hasManagementUnitAccess();
 export let hasManagementUnitAndBusinessUnitLinkAccessAsyncFunc = _hasManagementUnitAndBusinessUnitLinkAccess();
 export let hasManagementUnitAndHRDepartmentLinkAccessAsyncFunc = _hasManagementUnitAndHRDepartmentLinkAccess();
-export let hasMessageTemplateContainerAccessAsyncFunc = _hasMessageTemplateContainerAccess();
 export let hasPrincipalAccessAsyncFunc = _hasPrincipalAccess();
 export let hasRegularJobResultAccessAsyncFunc = _hasRegularJobResultAccess();
-export let hasSampleSystemMessageTemplateAccessAsyncFunc = _hasSampleSystemMessageTemplateAccess();
 export let hasSqlParserTestObjAccessAsyncFunc = _hasSqlParserTestObjAccess();
 export let hasSqlParserTestObjContainerAccessAsyncFunc = _hasSqlParserTestObjContainerAccess();
 export let hasTestImmutableObjAccessAsyncFunc = _hasTestImmutableObjAccess();
@@ -579,7 +561,6 @@ export let saveLocationAsyncFunc = _saveLocation();
 export let saveManagementUnitAsyncFunc = _saveManagementUnit();
 export let saveManagementUnitAndBusinessUnitLinkAsyncFunc = _saveManagementUnitAndBusinessUnitLink();
 export let saveManagementUnitAndHRDepartmentLinkAsyncFunc = _saveManagementUnitAndHRDepartmentLink();
-export let saveMessageTemplateContainerAsyncFunc = _saveMessageTemplateContainer();
 export let savePrincipalAsyncFunc = _savePrincipal();
 export let saveSqlParserTestObjAsyncFunc = _saveSqlParserTestObj();
 export let saveSqlParserTestObjContainerAsyncFunc = _saveSqlParserTestObjContainer();
@@ -788,14 +769,6 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
         });
     }
 
-    function _checkMessageTemplateContainerAccess(): async.SimpleAsyncFunc3<dto.MessageTemplateContainerIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
-        return new async.SimpleAsyncFunc3((messageTemplateContainerIdent: dto.MessageTemplateContainerIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
-            let baseParameters = {messageTemplateContainerIdent : messageTemplateContainerIdent, securityOperationCode : securityOperationCode};
-            let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('MessageTemplateContainer/CheckMessageTemplateContainerAccess', baseParameters);
-        });
-    }
-
     function _checkPrincipalAccess(): async.SimpleAsyncFunc3<dto.PrincipalIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
         return new async.SimpleAsyncFunc3((principalIdent: dto.PrincipalIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {principalIdent : principalIdent, securityOperationCode : securityOperationCode};
@@ -809,14 +782,6 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
             let baseParameters = {regularJobResultIdent : regularJobResultIdent, securityOperationCode : securityOperationCode};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
             return service.getData('RegularJobResult/CheckRegularJobResultAccess', baseParameters);
-        });
-    }
-
-    function _checkSampleSystemMessageTemplateAccess(): async.SimpleAsyncFunc3<dto.SampleSystemMessageTemplateIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
-        return new async.SimpleAsyncFunc3((sampleSystemMessageTemplateIdent: dto.SampleSystemMessageTemplateIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
-            let baseParameters = {sampleSystemMessageTemplateIdent : sampleSystemMessageTemplateIdent, securityOperationCode : securityOperationCode};
-            let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('SampleSystemMessageTemplate/CheckSampleSystemMessageTemplateAccess', baseParameters);
         });
     }
 
@@ -1671,30 +1636,6 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
         });
     }
 
-    function _getFullMessageTemplateContainer(): async.AsyncFunc3<dto.MessageTemplateContainerIdentityDTO, dto.MessageTemplateContainerFullDTO, dto.MessageTemplateContainerObservableFullDTO, dto.MessageTemplateContainerFullDTO, dto.MessageTemplateContainerObservableFullDTO> {
-        return new async.AsyncFunc3((messageTemplateContainerIdentity: dto.MessageTemplateContainerIdentityDTO) => {
-            let baseParameters = messageTemplateContainerIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.MessageTemplateContainerFullDTO, dto.MessageTemplateContainerObservableFullDTO, dto.MessageTemplateContainerFullDTO, dto.MessageTemplateContainerObservableFullDTO>();
-            return service.getData('MessageTemplateContainer/GetFullMessageTemplateContainer', {plain : dto.MessageTemplateContainerFullDTO, observable : dto.MessageTemplateContainerObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullMessageTemplateContainers(): async.AsyncFunc2<Array<dto.MessageTemplateContainerFullDTO>, Array<dto.MessageTemplateContainerObservableFullDTO>, dto.MessageTemplateContainerFullDTO, dto.MessageTemplateContainerObservableFullDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.MessageTemplateContainerFullDTO>, Array<dto.MessageTemplateContainerObservableFullDTO>, dto.MessageTemplateContainerFullDTO, dto.MessageTemplateContainerObservableFullDTO>();
-            return service.getData('MessageTemplateContainer/GetFullMessageTemplateContainers', {plain : dto.MessageTemplateContainerFullDTO, observable : dto.MessageTemplateContainerObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullMessageTemplateContainersByIdents(): async.AsyncFunc3<dto.MessageTemplateContainerIdentityDTO[], Array<dto.MessageTemplateContainerFullDTO>, Array<dto.MessageTemplateContainerObservableFullDTO>, dto.MessageTemplateContainerFullDTO, dto.MessageTemplateContainerObservableFullDTO> {
-        return new async.AsyncFunc3((messageTemplateContainerIdents: dto.MessageTemplateContainerIdentityDTO[]) => {
-            let baseParameters = messageTemplateContainerIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.MessageTemplateContainerFullDTO>, Array<dto.MessageTemplateContainerObservableFullDTO>, dto.MessageTemplateContainerFullDTO, dto.MessageTemplateContainerObservableFullDTO>();
-            return service.getData('MessageTemplateContainer/GetFullMessageTemplateContainersByIdents', {plain : dto.MessageTemplateContainerFullDTO, observable : dto.MessageTemplateContainerObservableFullDTO}, baseParameters);
-        });
-    }
-
     function _getFullPrincipal(): async.AsyncFunc3<dto.PrincipalIdentityDTO, dto.PrincipalFullDTO, dto.PrincipalObservableFullDTO, dto.PrincipalFullDTO, dto.PrincipalObservableFullDTO> {
         return new async.AsyncFunc3((principalIdentity: dto.PrincipalIdentityDTO) => {
             let baseParameters = principalIdentity;
@@ -1740,30 +1681,6 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
             let baseParameters = regularJobResultIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.RegularJobResultFullDTO>, Array<dto.RegularJobResultObservableFullDTO>, dto.RegularJobResultFullDTO, dto.RegularJobResultObservableFullDTO>();
             return service.getData('RegularJobResult/GetFullRegularJobResultsByIdents', {plain : dto.RegularJobResultFullDTO, observable : dto.RegularJobResultObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullSampleSystemMessageTemplate(): async.AsyncFunc3<dto.SampleSystemMessageTemplateIdentityDTO, dto.SampleSystemMessageTemplateFullDTO, dto.SampleSystemMessageTemplateObservableFullDTO, dto.SampleSystemMessageTemplateFullDTO, dto.SampleSystemMessageTemplateObservableFullDTO> {
-        return new async.AsyncFunc3((sampleSystemMessageTemplateIdentity: dto.SampleSystemMessageTemplateIdentityDTO) => {
-            let baseParameters = sampleSystemMessageTemplateIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.SampleSystemMessageTemplateFullDTO, dto.SampleSystemMessageTemplateObservableFullDTO, dto.SampleSystemMessageTemplateFullDTO, dto.SampleSystemMessageTemplateObservableFullDTO>();
-            return service.getData('SampleSystemMessageTemplate/GetFullSampleSystemMessageTemplate', {plain : dto.SampleSystemMessageTemplateFullDTO, observable : dto.SampleSystemMessageTemplateObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullSampleSystemMessageTemplates(): async.AsyncFunc2<Array<dto.SampleSystemMessageTemplateFullDTO>, Array<dto.SampleSystemMessageTemplateObservableFullDTO>, dto.SampleSystemMessageTemplateFullDTO, dto.SampleSystemMessageTemplateObservableFullDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SampleSystemMessageTemplateFullDTO>, Array<dto.SampleSystemMessageTemplateObservableFullDTO>, dto.SampleSystemMessageTemplateFullDTO, dto.SampleSystemMessageTemplateObservableFullDTO>();
-            return service.getData('SampleSystemMessageTemplate/GetFullSampleSystemMessageTemplates', {plain : dto.SampleSystemMessageTemplateFullDTO, observable : dto.SampleSystemMessageTemplateObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullSampleSystemMessageTemplatesByIdents(): async.AsyncFunc3<dto.SampleSystemMessageTemplateIdentityDTO[], Array<dto.SampleSystemMessageTemplateFullDTO>, Array<dto.SampleSystemMessageTemplateObservableFullDTO>, dto.SampleSystemMessageTemplateFullDTO, dto.SampleSystemMessageTemplateObservableFullDTO> {
-        return new async.AsyncFunc3((sampleSystemMessageTemplateIdents: dto.SampleSystemMessageTemplateIdentityDTO[]) => {
-            let baseParameters = sampleSystemMessageTemplateIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SampleSystemMessageTemplateFullDTO>, Array<dto.SampleSystemMessageTemplateObservableFullDTO>, dto.SampleSystemMessageTemplateFullDTO, dto.SampleSystemMessageTemplateObservableFullDTO>();
-            return service.getData('SampleSystemMessageTemplate/GetFullSampleSystemMessageTemplatesByIdents', {plain : dto.SampleSystemMessageTemplateFullDTO, observable : dto.SampleSystemMessageTemplateObservableFullDTO}, baseParameters);
         });
     }
 
@@ -2399,14 +2316,6 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
         });
     }
 
-    function _getRichMessageTemplateContainer(): async.AsyncFunc3<dto.MessageTemplateContainerIdentityDTO, dto.MessageTemplateContainerRichDTO, dto.MessageTemplateContainerObservableRichDTO, dto.MessageTemplateContainerRichDTO, dto.MessageTemplateContainerObservableRichDTO> {
-        return new async.AsyncFunc3((messageTemplateContainerIdentity: dto.MessageTemplateContainerIdentityDTO) => {
-            let baseParameters = messageTemplateContainerIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.MessageTemplateContainerRichDTO, dto.MessageTemplateContainerObservableRichDTO, dto.MessageTemplateContainerRichDTO, dto.MessageTemplateContainerObservableRichDTO>();
-            return service.getData('MessageTemplateContainer/GetRichMessageTemplateContainer', {plain : dto.MessageTemplateContainerRichDTO, observable : dto.MessageTemplateContainerObservableRichDTO}, baseParameters);
-        });
-    }
-
     function _getRichPrincipal(): async.AsyncFunc3<dto.PrincipalIdentityDTO, dto.PrincipalRichDTO, dto.PrincipalObservableRichDTO, dto.PrincipalRichDTO, dto.PrincipalObservableRichDTO> {
         return new async.AsyncFunc3((principalIdentity: dto.PrincipalIdentityDTO) => {
             let baseParameters = principalIdentity;
@@ -2420,14 +2329,6 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
             let baseParameters = regularJobResultIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.RegularJobResultRichDTO, dto.RegularJobResultObservableRichDTO, dto.RegularJobResultRichDTO, dto.RegularJobResultObservableRichDTO>();
             return service.getData('RegularJobResult/GetRichRegularJobResult', {plain : dto.RegularJobResultRichDTO, observable : dto.RegularJobResultObservableRichDTO}, baseParameters);
-        });
-    }
-
-    function _getRichSampleSystemMessageTemplate(): async.AsyncFunc3<dto.SampleSystemMessageTemplateIdentityDTO, dto.SampleSystemMessageTemplateRichDTO, dto.SampleSystemMessageTemplateObservableRichDTO, dto.SampleSystemMessageTemplateRichDTO, dto.SampleSystemMessageTemplateObservableRichDTO> {
-        return new async.AsyncFunc3((sampleSystemMessageTemplateIdentity: dto.SampleSystemMessageTemplateIdentityDTO) => {
-            let baseParameters = sampleSystemMessageTemplateIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.SampleSystemMessageTemplateRichDTO, dto.SampleSystemMessageTemplateObservableRichDTO, dto.SampleSystemMessageTemplateRichDTO, dto.SampleSystemMessageTemplateObservableRichDTO>();
-            return service.getData('SampleSystemMessageTemplate/GetRichSampleSystemMessageTemplate', {plain : dto.SampleSystemMessageTemplateRichDTO, observable : dto.SampleSystemMessageTemplateObservableRichDTO}, baseParameters);
         });
     }
 
@@ -3314,30 +3215,6 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
         });
     }
 
-    function _getSimpleMessageTemplateContainer(): async.AsyncFunc3<dto.MessageTemplateContainerIdentityDTO, dto.MessageTemplateContainerSimpleDTO, dto.MessageTemplateContainerObservableSimpleDTO, dto.MessageTemplateContainerSimpleDTO, dto.MessageTemplateContainerObservableSimpleDTO> {
-        return new async.AsyncFunc3((messageTemplateContainerIdentity: dto.MessageTemplateContainerIdentityDTO) => {
-            let baseParameters = messageTemplateContainerIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.MessageTemplateContainerSimpleDTO, dto.MessageTemplateContainerObservableSimpleDTO, dto.MessageTemplateContainerSimpleDTO, dto.MessageTemplateContainerObservableSimpleDTO>();
-            return service.getData('MessageTemplateContainer/GetSimpleMessageTemplateContainer', {plain : dto.MessageTemplateContainerSimpleDTO, observable : dto.MessageTemplateContainerObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleMessageTemplateContainers(): async.AsyncFunc2<Array<dto.MessageTemplateContainerSimpleDTO>, Array<dto.MessageTemplateContainerObservableSimpleDTO>, dto.MessageTemplateContainerSimpleDTO, dto.MessageTemplateContainerObservableSimpleDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.MessageTemplateContainerSimpleDTO>, Array<dto.MessageTemplateContainerObservableSimpleDTO>, dto.MessageTemplateContainerSimpleDTO, dto.MessageTemplateContainerObservableSimpleDTO>();
-            return service.getData('MessageTemplateContainer/GetSimpleMessageTemplateContainers', {plain : dto.MessageTemplateContainerSimpleDTO, observable : dto.MessageTemplateContainerObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleMessageTemplateContainersByIdents(): async.AsyncFunc3<dto.MessageTemplateContainerIdentityDTO[], Array<dto.MessageTemplateContainerSimpleDTO>, Array<dto.MessageTemplateContainerObservableSimpleDTO>, dto.MessageTemplateContainerSimpleDTO, dto.MessageTemplateContainerObservableSimpleDTO> {
-        return new async.AsyncFunc3((messageTemplateContainerIdents: dto.MessageTemplateContainerIdentityDTO[]) => {
-            let baseParameters = messageTemplateContainerIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.MessageTemplateContainerSimpleDTO>, Array<dto.MessageTemplateContainerObservableSimpleDTO>, dto.MessageTemplateContainerSimpleDTO, dto.MessageTemplateContainerObservableSimpleDTO>();
-            return service.getData('MessageTemplateContainer/GetSimpleMessageTemplateContainersByIdents', {plain : dto.MessageTemplateContainerSimpleDTO, observable : dto.MessageTemplateContainerObservableSimpleDTO}, baseParameters);
-        });
-    }
-
     function _getSimplePrincipal(): async.AsyncFunc3<dto.PrincipalIdentityDTO, dto.PrincipalSimpleDTO, dto.PrincipalObservableSimpleDTO, dto.PrincipalSimpleDTO, dto.PrincipalObservableSimpleDTO> {
         return new async.AsyncFunc3((principalIdentity: dto.PrincipalIdentityDTO) => {
             let baseParameters = principalIdentity;
@@ -3383,30 +3260,6 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
             let baseParameters = regularJobResultIdents;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.RegularJobResultSimpleDTO>, Array<dto.RegularJobResultObservableSimpleDTO>, dto.RegularJobResultSimpleDTO, dto.RegularJobResultObservableSimpleDTO>();
             return service.getData('RegularJobResult/GetSimpleRegularJobResultsByIdents', {plain : dto.RegularJobResultSimpleDTO, observable : dto.RegularJobResultObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleSampleSystemMessageTemplate(): async.AsyncFunc3<dto.SampleSystemMessageTemplateIdentityDTO, dto.SampleSystemMessageTemplateSimpleDTO, dto.SampleSystemMessageTemplateObservableSimpleDTO, dto.SampleSystemMessageTemplateSimpleDTO, dto.SampleSystemMessageTemplateObservableSimpleDTO> {
-        return new async.AsyncFunc3((sampleSystemMessageTemplateIdentity: dto.SampleSystemMessageTemplateIdentityDTO) => {
-            let baseParameters = sampleSystemMessageTemplateIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.SampleSystemMessageTemplateSimpleDTO, dto.SampleSystemMessageTemplateObservableSimpleDTO, dto.SampleSystemMessageTemplateSimpleDTO, dto.SampleSystemMessageTemplateObservableSimpleDTO>();
-            return service.getData('SampleSystemMessageTemplate/GetSimpleSampleSystemMessageTemplate', {plain : dto.SampleSystemMessageTemplateSimpleDTO, observable : dto.SampleSystemMessageTemplateObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleSampleSystemMessageTemplates(): async.AsyncFunc2<Array<dto.SampleSystemMessageTemplateSimpleDTO>, Array<dto.SampleSystemMessageTemplateObservableSimpleDTO>, dto.SampleSystemMessageTemplateSimpleDTO, dto.SampleSystemMessageTemplateObservableSimpleDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SampleSystemMessageTemplateSimpleDTO>, Array<dto.SampleSystemMessageTemplateObservableSimpleDTO>, dto.SampleSystemMessageTemplateSimpleDTO, dto.SampleSystemMessageTemplateObservableSimpleDTO>();
-            return service.getData('SampleSystemMessageTemplate/GetSimpleSampleSystemMessageTemplates', {plain : dto.SampleSystemMessageTemplateSimpleDTO, observable : dto.SampleSystemMessageTemplateObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleSampleSystemMessageTemplatesByIdents(): async.AsyncFunc3<dto.SampleSystemMessageTemplateIdentityDTO[], Array<dto.SampleSystemMessageTemplateSimpleDTO>, Array<dto.SampleSystemMessageTemplateObservableSimpleDTO>, dto.SampleSystemMessageTemplateSimpleDTO, dto.SampleSystemMessageTemplateObservableSimpleDTO> {
-        return new async.AsyncFunc3((sampleSystemMessageTemplateIdents: dto.SampleSystemMessageTemplateIdentityDTO[]) => {
-            let baseParameters = sampleSystemMessageTemplateIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.SampleSystemMessageTemplateSimpleDTO>, Array<dto.SampleSystemMessageTemplateObservableSimpleDTO>, dto.SampleSystemMessageTemplateSimpleDTO, dto.SampleSystemMessageTemplateObservableSimpleDTO>();
-            return service.getData('SampleSystemMessageTemplate/GetSimpleSampleSystemMessageTemplatesByIdents', {plain : dto.SampleSystemMessageTemplateSimpleDTO, observable : dto.SampleSystemMessageTemplateObservableSimpleDTO}, baseParameters);
         });
     }
 
@@ -4842,14 +4695,6 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
         });
     }
 
-    function _hasMessageTemplateContainerAccess(): async.SimpleAsyncFunc3<dto.MessageTemplateContainerIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
-        return new async.SimpleAsyncFunc3((messageTemplateContainerIdent: dto.MessageTemplateContainerIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
-            let baseParameters = {messageTemplateContainerIdent : messageTemplateContainerIdent, securityOperationCode : securityOperationCode};
-            let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('MessageTemplateContainer/HasMessageTemplateContainerAccess', baseParameters);
-        });
-    }
-
     function _hasPrincipalAccess(): async.SimpleAsyncFunc3<dto.PrincipalIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
         return new async.SimpleAsyncFunc3((principalIdent: dto.PrincipalIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
             let baseParameters = {principalIdent : principalIdent, securityOperationCode : securityOperationCode};
@@ -4863,14 +4708,6 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
             let baseParameters = {regularJobResultIdent : regularJobResultIdent, securityOperationCode : securityOperationCode};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
             return service.getData('RegularJobResult/HasRegularJobResultAccess', baseParameters);
-        });
-    }
-
-    function _hasSampleSystemMessageTemplateAccess(): async.SimpleAsyncFunc3<dto.SampleSystemMessageTemplateIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
-        return new async.SimpleAsyncFunc3((sampleSystemMessageTemplateIdent: dto.SampleSystemMessageTemplateIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
-            let baseParameters = {sampleSystemMessageTemplateIdent : sampleSystemMessageTemplateIdent, securityOperationCode : securityOperationCode};
-            let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('SampleSystemMessageTemplate/HasSampleSystemMessageTemplateAccess', baseParameters);
         });
     }
 
@@ -5079,14 +4916,6 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
             let baseParameters = managementUnitAndHRDepartmentLinkStrict.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.ManagementUnitAndHRDepartmentLinkIdentityDTO, dto.ManagementUnitAndHRDepartmentLinkObservableIdentityDTO, dto.ManagementUnitAndHRDepartmentLinkIdentityDTO, dto.ManagementUnitAndHRDepartmentLinkObservableIdentityDTO>();
             return service.getData('ManagementUnitAndHRDepartmentLink/SaveManagementUnitAndHRDepartmentLink', {plain : dto.ManagementUnitAndHRDepartmentLinkIdentityDTO, observable : dto.ManagementUnitAndHRDepartmentLinkObservableIdentityDTO}, baseParameters);
-        });
-    }
-
-    function _saveMessageTemplateContainer(): async.AsyncFunc3<dto.MessageTemplateContainerStrictDTO, dto.MessageTemplateContainerIdentityDTO, dto.MessageTemplateContainerObservableIdentityDTO, dto.MessageTemplateContainerIdentityDTO, dto.MessageTemplateContainerObservableIdentityDTO> {
-        return new async.AsyncFunc3((messageTemplateContainerStrict: dto.MessageTemplateContainerStrictDTO) => {
-            let baseParameters = messageTemplateContainerStrict.toNativeJson();
-            let service = Environment.current.context.facadeFactory.createService<dto.MessageTemplateContainerIdentityDTO, dto.MessageTemplateContainerObservableIdentityDTO, dto.MessageTemplateContainerIdentityDTO, dto.MessageTemplateContainerObservableIdentityDTO>();
-            return service.getData('MessageTemplateContainer/SaveMessageTemplateContainer', {plain : dto.MessageTemplateContainerIdentityDTO, observable : dto.MessageTemplateContainerObservableIdentityDTO}, baseParameters);
         });
     }
 

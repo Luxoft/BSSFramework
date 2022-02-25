@@ -16,21 +16,8 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
         public void SetUp()
         {
             this.factory = new LambdaProcessorFactory<ITestBLLContext>(
-                new TestBLLContext(),
-                this.CreateStub<IExpressionParserFactory>());
+                new TestBLLContext());
         }
-
-        //[Test]
-        //public void PublicSurface_NullArguments_ArgumentNullException()
-        //{
-        //    // Arrange
-        //    var assertion = new GuardClauseAssertion(this.Fixture);
-
-        //    // Act
-
-        //    // Assert
-        //    assertion.Verify(typeof(LambdaProcessorFactory<ITestBLLContext>));
-        //}
 
         [Test]
         public void Create_ConditionLambdaProcessor_ProcessorCreated()
@@ -42,17 +29,7 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
             // Assert
             this.factory.Create<ConditionLambdaProcessor<ITestBLLContext>>().Should().NotBeNull();
         }
-
-        [Test]
-        public void Create_DynamicSourceLambdaProcessor_ProcessorCreated()
-        {
-            // Arrange
-
-            // Act
-
-            // Assert
-            this.factory.Create<DynamicSourceLambdaProcessor<ITestBLLContext>>().Should().NotBeNull();
-        }
+        
 
         [Test]
         public void Create_GenerationLambdaProcessorTo_ProcessorCreated()

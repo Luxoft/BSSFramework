@@ -19,9 +19,8 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
     {
         /// <summary>Создаёт экземпляр класса <see cref="GenerationLambdaProcessorBase"/>.</summary>
         /// <param name="bllContext">Контекст бизнес-логики.</param>
-        /// <param name="parserFactory">Фабрика парсеров лямбда-выражений.</param>
-        protected GenerationLambdaProcessorBase(TBLLContext bllContext, IExpressionParserFactory parserFactory)
-            : base(bllContext, parserFactory)
+        protected GenerationLambdaProcessorBase(TBLLContext bllContext)
+            : base(bllContext)
         {
         }
 
@@ -62,21 +61,6 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
             return result;
         }
 
-        /// <summary>Возвращает делегат для вызова лямбда-выражения без контекста бизнес-логики.</summary>
-        /// <typeparam name="T">Тип доменного объекта.</typeparam>
-        /// <param name="subscription">Подписка.</param>
-        /// <returns>Делегат для вызова лямбда-выражения без контекста бизнес-логики.</returns>
-        protected abstract Func<T, T, IEnumerable<NotificationMessageGenerationInfo>> GetNonContextDelegate<T>(
-            Subscription subscription);
-
-        /// <summary>Возвращает делегат для вызова лямбда-выражения с контекстом бизнес-логики.</summary>
-        /// <typeparam name="TBLLContext">Тип контекста бизнес-логики.</typeparam>
-        /// <typeparam name="T">Тип доменного объекта.</typeparam>
-        /// <param name="subscription">Подписка.</param>
-        /// <returns>Делегат для вызова лямбда-выражения с контекстом бизнес-логики.</returns>
-        protected abstract Func<TBLLContext, T, T, IEnumerable<NotificationMessageGenerationInfo>> GetContextDelegate
-            <T>(Subscription subscription);
-
         /// <summary>Возвращает лямбда-выражения подписки.</summary>
         /// <param name="subscription">Подписка.</param>
         /// <returns>Лямбда-выражение подписки.</returns>
@@ -96,26 +80,7 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
             IEnumerable<NotificationMessageGenerationInfo> result;
             var funcValue = this.GetSubscriptionLambda(subscription).FuncValue;
 
-            if (funcValue != null)
-            {
-                result = this.TryCast<IEnumerable<NotificationMessageGenerationInfo>>(funcValue(this.BllContext, versions));
-            }
-            else
-            {
-                var @delegate = this.GetContextDelegate<T>(subscription);
-                result = @delegate(this.BllContext, versions.Previous, versions.Current);
-            }
-
-            return result;
-        }
-
-        private IEnumerable<NotificationMessageGenerationInfo> InvokeWithoutContext<T>(
-            Subscription subscription,
-            DomainObjectVersions<T> versions)
-            where T : class
-        {
-            var @delegate = this.GetNonContextDelegate<T>(subscription);
-            var result = @delegate(versions.Previous, versions.Current);
+            result = this.TryCast<IEnumerable<NotificationMessageGenerationInfo>>(funcValue(this.BllContext, versions));
 
             return result;
         }
@@ -125,11 +90,7 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
             DomainObjectVersions<T> versions)
             where T : class
         {
-            var result = this.GetSubscriptionLambda(subscription).WithContext
-                ? this.InvokeWithTypedContext(subscription, versions)
-                : this.InvokeWithoutContext(subscription, versions);
-
-            return result;
+            return this.InvokeWithTypedContext(subscription, versions);
         }
     }
 }

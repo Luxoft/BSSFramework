@@ -37,9 +37,6 @@ namespace Framework.Configuration.BLL
             base.RegisterHandler<Framework.Configuration.Domain.ExceptionMessageRootFilterModel>(this.GetExceptionMessageRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.ExecuteRegularJobResult>(this.GetExecuteRegularJobResultValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.LogMessage>(this.GetLogMessageValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.MessageTemplate>(this.GetMessageTemplateValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.MessageTemplateCreateModel>(this.GetMessageTemplateCreateModelValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.MessageTemplateRootFilterModel>(this.GetMessageTemplateRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Models.Create.UserActionCreateModel>(this.GetUserActionCreateModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Models.Create.UserActionObjectModel>(this.GetUserActionObjectModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationModel>(this.GetReportGenerationModelValidationResult);
@@ -64,20 +61,10 @@ namespace Framework.Configuration.BLL
             base.RegisterHandler<Framework.Configuration.Domain.Sequence>(this.GetSequenceValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.SequenceCreateModel>(this.GetSequenceCreateModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.SequenceRootFilterModel>(this.GetSequenceRootFilterModelValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.SubBusinessRole>(this.GetSubBusinessRoleValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.Subscription>(this.GetSubscriptionValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.SubscriptionContainer>(this.GetSubscriptionContainerValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.SubscriptionCreateModel>(this.GetSubscriptionCreateModelValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.SubscriptionLambda>(this.GetSubscriptionLambdaValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.SubscriptionLambdaCreateModel>(this.GetSubscriptionLambdaCreateModelValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.SubscriptionLambdaRootFilterModel>(this.GetSubscriptionLambdaRootFilterModelValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.SubscriptionRootFilterModel>(this.GetSubscriptionRootFilterModelValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.SubscriptionSecurityItem>(this.GetSubscriptionSecurityItemValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.SystemConstant>(this.GetSystemConstantValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.SystemConstantRootFilterModel>(this.GetSystemConstantRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.TargetSystem>(this.GetTargetSystemValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.TargetSystemRootFilterModel>(this.GetTargetSystemRootFilterModelValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.TestSubscriptionModel>(this.GetTestSubscriptionModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.UserAction>(this.GetUserActionValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.UserActionObject>(this.GetUserActionObjectValidationResult);
         }
@@ -197,21 +184,6 @@ namespace Framework.Configuration.BLL
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetMessageTemplateCreateModelValidationResult(Framework.Configuration.Domain.MessageTemplateCreateModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetMessageTemplateRootFilterModelValidationResult(Framework.Configuration.Domain.MessageTemplateRootFilterModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetMessageTemplateValidationResult(Framework.Configuration.Domain.MessageTemplate source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
         protected virtual Framework.Validation.ValidationResult GetNamedLockValidationResult(Framework.Configuration.Domain.NamedLock source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
@@ -302,51 +274,6 @@ namespace Framework.Configuration.BLL
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
-        protected virtual Framework.Validation.ValidationResult GetSubBusinessRoleValidationResult(Framework.Configuration.Domain.SubBusinessRole source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetSubscriptionContainerValidationResult(Framework.Configuration.Domain.SubscriptionContainer source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetSubscriptionCreateModelValidationResult(Framework.Configuration.Domain.SubscriptionCreateModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetSubscriptionLambdaCreateModelValidationResult(Framework.Configuration.Domain.SubscriptionLambdaCreateModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetSubscriptionLambdaRootFilterModelValidationResult(Framework.Configuration.Domain.SubscriptionLambdaRootFilterModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetSubscriptionLambdaValidationResult(Framework.Configuration.Domain.SubscriptionLambda source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetSubscriptionRootFilterModelValidationResult(Framework.Configuration.Domain.SubscriptionRootFilterModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetSubscriptionSecurityItemValidationResult(Framework.Configuration.Domain.SubscriptionSecurityItem source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetSubscriptionValidationResult(Framework.Configuration.Domain.Subscription source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
         protected virtual Framework.Validation.ValidationResult GetSystemConstantRootFilterModelValidationResult(Framework.Configuration.Domain.SystemConstantRootFilterModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
@@ -363,11 +290,6 @@ namespace Framework.Configuration.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetTargetSystemValidationResult(Framework.Configuration.Domain.TargetSystem source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetTestSubscriptionModelValidationResult(Framework.Configuration.Domain.TestSubscriptionModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

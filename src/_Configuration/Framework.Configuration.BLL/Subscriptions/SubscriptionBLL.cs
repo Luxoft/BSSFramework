@@ -10,8 +10,13 @@ using Framework.Exceptions;
 
 namespace Framework.Configuration.BLL
 {
-    public partial class SubscriptionBLL
+    public partial class SubscriptionBLL : BLLContextContainer<IConfigurationBLLContext>
     {
+        public SubscriptionBLL(IConfigurationBLLContext context)
+                : base(context)
+        {
+        }
+
         public bool HasActiveSubscriptions(Type type)
         {
             if (type == null) throw new ArgumentNullException(nameof(type));
@@ -23,58 +28,7 @@ namespace Framework.Configuration.BLL
         {
             if (domainType == null) throw new ArgumentNullException(nameof(domainType));
 
-            return domainType.TargetSystem.SubscriptionEnabled && this.GetActiveSubscriptions(domainType).Any();
-        }
-
-        public IQueryable<Subscription> GetActiveSubscriptions(DomainType domainType, bool withCondition = true)
-        {
-            return this.GetUnsecureQueryable()
-                       .Where(subscription => subscription.Active
-                                           && subscription.DomainType == domainType
-                                           && subscription.DomainType.TargetSystem.SubscriptionEnabled)
-                       .Pipe(withCondition, q => q.Where(subscription => subscription.Condition != null));
-        }
-
-        public Subscription Create(SubscriptionCreateModel _)
-        {
-            return new Subscription ();
-        }
-
-        public override void Save(Subscription subscription)
-        {
-            if (subscription == null) throw new ArgumentNullException(nameof(subscription));
-
-            this.ValidateBusunessRole(subscription);
-
-            this.InitBusunessRoleNames(subscription);
-
-            this.Validate(subscription);
-
-            this.Recalculate(subscription);
-
-            base.Save(subscription, false);
-        }
-
-        private void Validate(Subscription subscription)
-        {
-            this.Context.Validator.Validate(subscription);
-
-            foreach (var securityItem in subscription.SecurityItems)
-            {
-                var entityType = this.Context.Authorization.GetEntityType(securityItem.AuthDomainTypeId);
-
-                if (!entityType.Expandable && securityItem.ExpandType.IsHierarchical())
-                {
-                    throw new BusinessLogicException("Can't apply expandable mode {0} to {1}", securityItem.ExpandType, entityType.Name);
-                }
-            }
-        }
-
-        private void Recalculate(Subscription subscription)
-        {
-            if (subscription == null) throw new ArgumentNullException(nameof(subscription));
-
-            this.InitBusunessRoleNames(subscription);
+            return domainType.TargetSystem.SubscriptionEnabled;
         }
     }
 }

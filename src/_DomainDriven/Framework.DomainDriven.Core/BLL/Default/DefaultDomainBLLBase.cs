@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -10,9 +11,9 @@ using Framework.HierarchicalExpand;
 using Framework.OData;
 using Framework.Persistent;
 
-using JetBrains.Annotations;
-
 using nuSpec.Abstraction;
+
+#nullable enable
 
 namespace Framework.DomainDriven.BLL
 {
@@ -30,38 +31,23 @@ namespace Framework.DomainDriven.BLL
         private static readonly Lazy<PropertyInfo> DefaultIdProperty =
             LazyHelper.Create(() => typeof(TPersistentDomainObjectBase).GetProperty("Id", () => new Exception("Id property not found")));
 
-        protected DefaultDomainBLLBase(TBLLContext context, ISpecificationEvaluator specificationEvaluator = null)
+        protected DefaultDomainBLLBase(TBLLContext context, ISpecificationEvaluator? specificationEvaluator = null)
             : base(context, specificationEvaluator)
         {
         }
 
-        protected virtual PropertyInfo IdProperty
-        {
-            get
-            {
-                return DefaultIdProperty.Value;
-            }
-        }
+        protected virtual PropertyInfo IdProperty => DefaultIdProperty.Value;
 
-        public TDomainObject GetById(TIdent id, IdCheckMode idCheckMode, IFetchContainer<TDomainObject> fetchContainer = null, LockRole lockRole = LockRole.None)
-        {
-            switch (idCheckMode)
-            {
-                case IdCheckMode.DontCheck:
-                    return this.GetById(id, false, fetchContainer, lockRole);
+        public TDomainObject? GetById(TIdent id, IdCheckMode idCheckMode, IFetchContainer<TDomainObject>? fetchContainer = null, LockRole lockRole = LockRole.None) =>
+                idCheckMode switch
+                {
+                        IdCheckMode.DontCheck => this.GetById(id, false, fetchContainer, lockRole),
+                        IdCheckMode.CheckAll => this.GetById(id, true, fetchContainer, lockRole),
+                        IdCheckMode.SkipEmpty => id.IsDefault() ? null : this.GetById(id, true, fetchContainer, lockRole),
+                        _ => throw new ArgumentOutOfRangeException(nameof(idCheckMode))
+                };
 
-                case IdCheckMode.CheckAll:
-                    return this.GetById(id, true, fetchContainer, lockRole);
-
-                case IdCheckMode.SkipEmpty:
-                    return id.IsDefault() ? null : this.GetById(id, true, fetchContainer, lockRole);
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(idCheckMode));
-            }
-        }
-
-        public TDomainObject GetById(
+        public TDomainObject? GetById(
             TIdent id,
             IdCheckMode idCheckMode,
             Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch,
@@ -80,7 +66,7 @@ namespace Framework.DomainDriven.BLL
             return this.GetById(id, idCheckMode, new[] { firstFetch }.Concat(otherFetchs));
         }
 
-        public TDomainObject GetById(TIdent id, IdCheckMode idCheckMode, IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs)
+        public TDomainObject? GetById(TIdent id, IdCheckMode idCheckMode, IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs)
         {
             if (fetchs == null)
             {
@@ -105,15 +91,13 @@ namespace Framework.DomainDriven.BLL
         }
 
         /// <inheritdoc />
-        public virtual List<HierarchicalNode<TDomainObject, TIdent>> GetTree(IFetchContainer<TDomainObject> fetchs = null)
-        {
-            return this.GetTree(this.GetFullList(fetchs), x => this.GetSecureQueryable().Select(domainObject => domainObject.Id), this.ExpandQueryableWithParents);
-        }
+        public virtual List<HierarchicalNode<TDomainObject, TIdent>> GetTree(IFetchContainer<TDomainObject>? fetchs = null) =>
+                this.GetTree(this.GetFullList(fetchs), _ => this.GetSecureQueryable().Select(domainObject => domainObject.Id), this.ExpandQueryableWithParents);
 
         /// <inheritdoc />
         public virtual SelectOperationResult<HierarchicalNode<TDomainObject, TIdent>> GetTreeByOData(
-                [NotNull] SelectOperation<TDomainObject> selectOperation,
-                IFetchContainer<TDomainObject> fetchs = null)
+                SelectOperation<TDomainObject> selectOperation,
+                IFetchContainer<TDomainObject>? fetchs = null)
         {
             if (selectOperation == null)
             {
@@ -128,10 +112,10 @@ namespace Framework.DomainDriven.BLL
         }
 
         private List<HierarchicalNode<TDomainObject, TIdent>> GetTree<TIdentCollection>(
-                [NotNull] List<TDomainObject> startProjections,
+                List<TDomainObject> startProjections,
                 Func<IEnumerable<TDomainObject>, TIdentCollection> identsSelector,
                 Func<TIdentCollection, HierarchicalExpandType, Dictionary<TIdent, TIdent>> parentsExpander,
-                IFetchContainer<TDomainObject> fetchs = null)
+                IFetchContainer<TDomainObject>? fetchs = null)
             where TIdentCollection : IEnumerable<TIdent>
         {
             if (startProjections == null)
@@ -174,13 +158,13 @@ namespace Framework.DomainDriven.BLL
             return this.Context.HierarchicalObjectExpanderFactory.Create(typeof(TDomainObject)).ExpandWithParents(projectionsIdents, parentExpandMode);
         }
 
-        public List<TDomainObject> GetListByIdents<TIdentity>(IEnumerable<TIdentity> idents, IFetchContainer<TDomainObject> fetchContainer = null)
+        public List<TDomainObject> GetListByIdents<TIdentity>(IEnumerable<TIdentity> idents, IFetchContainer<TDomainObject>? fetchContainer = null)
             where TIdentity : IIdentityObject<TIdent>
         {
             return this.GetListByIdents(idents.Select(ident => ident.Id), fetchContainer);
         }
 
-        public List<TDomainObject> GetListByIdents(IEnumerable<TIdent> baseIdents, IFetchContainer<TDomainObject> fetchContainer = null)
+        public List<TDomainObject> GetListByIdents(IEnumerable<TIdent> baseIdents, IFetchContainer<TDomainObject>? fetchContainer = null)
         {
             if (baseIdents == null)
             {
@@ -245,7 +229,7 @@ namespace Framework.DomainDriven.BLL
 
         public override SelectOperationResult<TDomainObject> GetObjectsByOData(
             SelectOperation selectOperation,
-            IFetchContainer<TDomainObject> fetchContainer = null)
+            IFetchContainer<TDomainObject>? fetchContainer = null)
         {
             var typedSelectOperation = this.Context.StandartExpressionBuilder.ToTyped<TDomainObject>(selectOperation);
 
@@ -299,7 +283,7 @@ namespace Framework.DomainDriven.BLL
 
         public override SelectOperationResult<TDomainObject> GetObjectsByOData(
             SelectOperation<TDomainObject> selectOperation,
-            IFetchContainer<TDomainObject> fetchContainer = null)
+            IFetchContainer<TDomainObject>? fetchContainer = null)
         {
             if (selectOperation == null)
             {
@@ -343,7 +327,7 @@ namespace Framework.DomainDriven.BLL
             }
         }
 
-        public List<TDomainObject> GetListByIdentsUnsafe(IEnumerable<TIdent> baseIdents, IFetchContainer<TDomainObject> fetchContainer = null)
+        public List<TDomainObject> GetListByIdentsUnsafe(IEnumerable<TIdent> baseIdents, IFetchContainer<TDomainObject>? fetchContainer = null)
         {
             if (baseIdents == null)
             {
@@ -393,7 +377,7 @@ namespace Framework.DomainDriven.BLL
             return this.GetListByIdentsUnsafe(baseIdents, fetchs.ToFetchContainer());
         }
 
-        public TDomainObject GetById(TIdent id, bool throwOnNotFound = false, IFetchContainer<TDomainObject> fetchContainer = null, LockRole lockRole = LockRole.None)
+        public TDomainObject? GetById(TIdent id, [DoesNotReturnIf(true)] bool throwOnNotFound = false, IFetchContainer<TDomainObject>? fetchContainer = null, LockRole lockRole = LockRole.None)
         {
             var result = this.GetListBy(domainObject => domainObject.Id.Equals(id), fetchContainer, lockRole).FirstOrDefault();
 
@@ -405,9 +389,9 @@ namespace Framework.DomainDriven.BLL
             return result;
         }
 
-        public TDomainObject GetById(
+        public TDomainObject? GetById(
             TIdent id,
-            bool throwOnNotFound,
+            [DoesNotReturnIf(true)] bool throwOnNotFound,
             Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch,
             params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs)
         {
@@ -424,7 +408,7 @@ namespace Framework.DomainDriven.BLL
             return this.GetById(id, throwOnNotFound, new[] { firstFetch }.Concat(otherFetchs));
         }
 
-        public TDomainObject GetById(TIdent id, bool throwOnNotFound, IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs)
+        public TDomainObject? GetById(TIdent id,[DoesNotReturnIf(true)] bool throwOnNotFound, IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs)
         {
             if (fetchs == null)
             {
@@ -434,7 +418,7 @@ namespace Framework.DomainDriven.BLL
             return this.GetById(id, throwOnNotFound, fetchs.ToFetchContainer());
         }
 
-        protected List<TDomainObject> GetListByIdentsQueryable(IQueryable<TIdent> baseIdents, IFetchContainer<TDomainObject> fetchContainer = null)
+        protected List<TDomainObject> GetListByIdentsQueryable(IQueryable<TIdent> baseIdents, IFetchContainer<TDomainObject>? fetchContainer = null)
         {
             if (baseIdents == null)
             {
@@ -446,7 +430,10 @@ namespace Framework.DomainDriven.BLL
             return result;
         }
 
-        protected List<TProjection> GetListByIdentsNoSecurable<TProjection>(IEnumerable<TIdent> baseIdents, Expression<Func<TDomainObject, TProjection>> projectionSelector, IFetchContainer<TDomainObject> fetchContainer = null)
+        protected List<TProjection> GetListByIdentsNoSecurable<TProjection>(
+                IEnumerable<TIdent> baseIdents,
+                Expression<Func<TDomainObject, TProjection>> projectionSelector,
+                IFetchContainer<TDomainObject>? fetchContainer = null)
         {
             if (baseIdents == null) throw new ArgumentNullException(nameof(baseIdents));
 
@@ -454,7 +441,12 @@ namespace Framework.DomainDriven.BLL
 
             var uniqueIdents = idents.Distinct().ToList();
 
-            var uniqueResult = uniqueIdents.Split(MaxItemsInSql).SelectMany(path => this.GetUnsecureQueryable(fetchContainer).Where(v => path.Contains(v.Id)).Select(projectionSelector)).ToList();
+            var uniqueResult = uniqueIdents.Split(MaxItemsInSql)
+                                           .SelectMany(
+                                                       path => this.GetUnsecureQueryable(fetchContainer)
+                                                                   .Where(v => path.Contains(v.Id))
+                                                                   .Select(projectionSelector))
+                                           .ToList();
 
             if (uniqueResult.Count == uniqueIdents.Count)
             {
@@ -466,11 +458,13 @@ namespace Framework.DomainDriven.BLL
             }
             else
             {
-                throw uniqueIdents.Except(uniqueResult.Select(v => ((IIdentityObject<TIdent>)v).Id)).Select(this.GetMissingObjectException).Aggregate();
+                throw uniqueIdents.Except(uniqueResult.Select(v => ((IIdentityObject<TIdent>)v!).Id))
+                                  .Select(this.GetMissingObjectException)
+                                  .Aggregate();
             }
         }
 
-        protected List<TDomainObject> GetListByIdentsNoSecurable(IEnumerable<TIdent> baseIdents, IFetchContainer<TDomainObject> fetchContainer = null)
+        protected List<TDomainObject> GetListByIdentsNoSecurable(IEnumerable<TIdent> baseIdents, IFetchContainer<TDomainObject>? fetchContainer = null)
         {
             if (baseIdents == null)
             {
@@ -540,10 +534,8 @@ namespace Framework.DomainDriven.BLL
             yield return new OverrideExpandContainsVisitor<TBLLContext, TIdent>(this.Context, this.IdProperty);
         }
 
-        private TDomainObject GetNested<TNestedDomainObject>(TDomainObject domainObject)
-            where TNestedDomainObject : class, TDomainObject
-        {
-            return this.Context.Logics.Default.Create<TNestedDomainObject>().GetById(domainObject.Id);
-        }
+        private TDomainObject? GetNested<TNestedDomainObject>(TDomainObject domainObject)
+            where TNestedDomainObject : class, TDomainObject =>
+                this.Context.Logics.Default.Create<TNestedDomainObject>().GetById(domainObject.Id);
     }
 }

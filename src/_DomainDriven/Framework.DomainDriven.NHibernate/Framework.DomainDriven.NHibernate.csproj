@@ -3,8 +3,8 @@
     <PackageId>Luxoft.Framework.DomainDriven.NHibernate</PackageId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="4.0.1" />
-    <PackageReference Include="NHibernate" Version="5.3.10" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="4.1.0" />
+    <PackageReference Include="NHibernate" Version="5.3.11" />
     <PackageReference Include="NHibernate.Envers" Version="5.3.2" />
   </ItemGroup>
   <ItemGroup>

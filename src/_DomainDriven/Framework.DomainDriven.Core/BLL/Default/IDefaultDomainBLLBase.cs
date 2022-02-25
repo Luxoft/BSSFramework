@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 
 using Framework.Core;
 using Framework.OData;
 using Framework.Persistent;
+
+#nullable enable
 
 namespace Framework.DomainDriven.BLL
 {
@@ -14,36 +16,36 @@ namespace Framework.DomainDriven.BLL
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase
     {
-        TDomainObject GetById(TIdent id, IdCheckMode idCheckMode, IFetchContainer<TDomainObject> fetchContainer = null, LockRole lockRole = LockRole.None);
+        TDomainObject? GetById(TIdent id, IdCheckMode idCheckMode, IFetchContainer<TDomainObject>? fetchContainer = null, LockRole lockRole = LockRole.None);
 
-        TDomainObject GetById(TIdent id, IdCheckMode idCheckMode, Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch, params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs);
+        TDomainObject? GetById(TIdent id, IdCheckMode idCheckMode, Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch, params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs);
 
-        TDomainObject GetById(TIdent id, IdCheckMode idCheckMode, IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs);
-
-
-        TDomainObject GetById(TIdent id, bool throwOnNotFound = false, IFetchContainer<TDomainObject> fetchContainer = null, LockRole lockRole = LockRole.None);
-
-        TDomainObject GetById(TIdent id, bool throwOnNotFound, Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch, params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs);
-
-        TDomainObject GetById(TIdent id, bool throwOnNotFound, IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs);
+        TDomainObject? GetById(TIdent id, IdCheckMode idCheckMode, IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs);
 
 
+        TDomainObject? GetById(TIdent id, [DoesNotReturnIf(true)] bool throwOnNotFound = false, IFetchContainer<TDomainObject>? fetchContainer = null, LockRole lockRole = LockRole.None);
 
-        List<TDomainObject> GetListByIdents(IEnumerable<TIdent> baseIdents, IFetchContainer<TDomainObject> fetchContainer = null);
+        TDomainObject? GetById(TIdent id,  [DoesNotReturnIf(true)] bool throwOnNotFound, Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch, params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs);
+
+        TDomainObject? GetById(TIdent id, [DoesNotReturnIf(true)] bool throwOnNotFound, IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs);
+
+
+
+        List<TDomainObject> GetListByIdents(IEnumerable<TIdent> baseIdents, IFetchContainer<TDomainObject>? fetchContainer = null);
 
         List<TDomainObject> GetListByIdents(IEnumerable<TIdent> baseIdents, Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch, params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs);
 
         List<TDomainObject> GetListByIdents(IEnumerable<TIdent> baseIdents, IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs);
 
 
-        List<TDomainObject> GetListByIdentsUnsafe(IEnumerable<TIdent> baseIdents, IFetchContainer<TDomainObject> fetchContainer = null);
+        List<TDomainObject> GetListByIdentsUnsafe(IEnumerable<TIdent> baseIdents, IFetchContainer<TDomainObject>? fetchContainer = null);
 
         List<TDomainObject> GetListByIdentsUnsafe(IEnumerable<TIdent> baseIdents, Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch, params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs);
 
         List<TDomainObject> GetListByIdentsUnsafe(IEnumerable<TIdent> baseIdents, IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs);
 
 
-        List<TDomainObject> GetListByIdents<TIdentity>(IEnumerable<TIdentity> idents, IFetchContainer<TDomainObject> fetchContainer = null)
+        List<TDomainObject> GetListByIdents<TIdentity>(IEnumerable<TIdentity> idents, IFetchContainer<TDomainObject>? fetchContainer = null)
             where TIdentity : IIdentityObject<TIdent>;
 
         TDomainObject GetNested(TDomainObject domainObject);
@@ -53,7 +55,7 @@ namespace Framework.DomainDriven.BLL
         /// </summary>
         /// <param name="fetchs">Подгружаемые свойства</param>
         /// <returns></returns>
-        List<HierarchicalNode<TDomainObject, TIdent>> GetTree(IFetchContainer<TDomainObject> fetchs = null);
+        List<HierarchicalNode<TDomainObject, TIdent>> GetTree(IFetchContainer<TDomainObject>? fetchs = null);
 
         /// <summary>
         /// Получение дерева объектов по OData-запросу
@@ -61,7 +63,7 @@ namespace Framework.DomainDriven.BLL
         /// <param name="selectOperation">OData-запрос</param>
         /// <param name="fetchs">Подгружаемые свойства</param>
         /// <returns></returns>
-        SelectOperationResult<HierarchicalNode<TDomainObject, TIdent>> GetTreeByOData(SelectOperation<TDomainObject> selectOperation, IFetchContainer<TDomainObject> fetchs = null);
+        SelectOperationResult<HierarchicalNode<TDomainObject, TIdent>> GetTreeByOData(SelectOperation<TDomainObject> selectOperation, IFetchContainer<TDomainObject>? fetchs = null);
     }
 
 

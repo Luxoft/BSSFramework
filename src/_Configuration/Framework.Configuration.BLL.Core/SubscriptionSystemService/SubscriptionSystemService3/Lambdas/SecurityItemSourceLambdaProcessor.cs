@@ -19,7 +19,6 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
     {
         /// <summary>Создаёт экземпляр класса <see cref="SecurityItemSourceLambdaProcessor"/>.</summary>
         /// <param name="bllContext">Контекст бизнес-логики.</param>
-        /// <param name="parserFactory">Фабрика парсеров лямбда-выражений.</param>
         public SecurityItemSourceLambdaProcessor(
             TBLLContext bllContext)
             : base(bllContext)

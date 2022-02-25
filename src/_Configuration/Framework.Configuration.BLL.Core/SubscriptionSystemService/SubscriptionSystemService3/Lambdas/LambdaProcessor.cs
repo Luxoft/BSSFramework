@@ -19,7 +19,6 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
 
         /// <summary>Инициализирует экземпляр конкретного процессора лямбда-выражений.</summary>
         /// <param name="bllContext">Контекст бизнес-логики.</param>
-        /// <param name="parserFactory">Фабрика парсеров лямбда-выражений.</param>
         /// <exception cref="ArgumentNullException">
         ///     Аргумент
         ///     bllContext

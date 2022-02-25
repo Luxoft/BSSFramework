@@ -16,7 +16,6 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
     {
         /// <summary>Создаёт экземпляр класса <see cref="ConditionLambdaProcessor"/>.</summary>
         /// <param name="bllContext">Контекст бизнес-логики.</param>
-        /// <param name="parserFactory">Фабрика парсеров лямбда-выражений.</param>
         public ConditionLambdaProcessor(TBLLContext bllContext)
             : base(bllContext)
         {

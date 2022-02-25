@@ -26,7 +26,6 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
 
         /// <summary>Создаёт экземпляр класса <see cref="LambdaProcessorFactory"/>.</summary>
         /// <param name="bllContext">Контекст бизнес-логики.</param>
-        /// <param name="parserFactory">Фабрика парсеров лямбда-выражений.</param>
         /// <exception cref="ArgumentNullException">Аргумент
         /// bllContext
         /// или

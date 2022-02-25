@@ -26,7 +26,6 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
     {
         private IConfigurationBLLContext context;
         private IBLLSimpleQueryBase<IEmployee> simpleQuery;
-        private ISubscriptionBLL subscriptionBll;
         private IPermissionBLL permissionBll;
         private ITypeResolver<EntityType> securityTypeResolver;
         private IAuthorizationBLLContext authorizationContext;
@@ -39,7 +38,6 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
         public void SetUp()
         {
             this.simpleQuery = this.CreateStub<IBLLSimpleQueryBase<IEmployee>>();
-            this.subscriptionBll = this.CreateStub<ISubscriptionBLL>();
             this.permissionBll = this.CreateStub<IPermissionBLL>();
             this.securityTypeResolver = this.CreateStub<ITypeResolver<EntityType>>();
             this.domainTypeResolver = this.CreateStub<ITypeResolver<DomainType>>();

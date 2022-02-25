@@ -8,7 +8,7 @@ using Framework.DomainDriven.DAL.Revisions;
 
 namespace Framework.Configuration.BLL
 {
-    public partial class SubscriptionBLL : ISubscriptionBLL
+    public partial class SubscriptionBLL
     {
         public IList<ITryResult<Subscription>> Process(ObjectModificationInfo<Guid> changedObjectInfo)
         {

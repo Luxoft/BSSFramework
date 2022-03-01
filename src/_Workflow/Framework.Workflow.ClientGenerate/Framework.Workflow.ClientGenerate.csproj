@@ -18,7 +18,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.FacadeServiceProxyGenerator\Framework.DomainDriven.FacadeServiceProxyGenerator.csproj" />
     <ProjectReference Include="..\Framework.Workflow.TestGenerate\Framework.Workflow.TestGenerate.csproj" />
-    <ProjectReference Include="..\Framework.Workflow.WebApi\Framework.Workflow.WebApi.csproj" />
   </ItemGroup>
 
 </Project>

@@ -38,8 +38,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         IConfigurationServiceEnvironment,
         IDisposable
     {
-        private readonly IValidator workflowAnonymousObjectValidator = new Validator(new ValidationMap(ValidationExtendedData.Infinity).ToCompileCache());
-
         private readonly IFetchService<Framework.Authorization.Domain.PersistentDomainObjectBase, FetchBuildRule> authorizationFetchService;
 
         private readonly IFetchService<Framework.Configuration.Domain.PersistentDomainObjectBase, FetchBuildRule> configurationFetchService;
@@ -280,9 +278,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             }
 
             #endregion
-
-            #region IBLLContextContainer<WorkflowBLLContext> Members
-
+            
             protected INotificationService NotificationService { get; }
 
             protected IStandartExpressionBuilder StandartExpressionBuilder { get; }
@@ -290,8 +286,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             protected IHierarchicalObjectExpanderFactory<Guid> HierarchicalObjectExpanderFactory { get; }
 
             protected virtual ISerializerFactory<string> SystemConstantSerializerFactory { get; }
-
-            #endregion
 
             protected virtual IAuthorizationBLLContext CreateAuthorizationBLLContext()
             {

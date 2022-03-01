@@ -1,9 +1,11 @@
 ﻿using System;
+
 using Framework.Core;
 using Framework.DomainDriven.BLL;
+
 using SampleSystem.BLL;
 using SampleSystem.Generated.DTO;
-using SampleSystem.WebApiCore;
+using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
 {

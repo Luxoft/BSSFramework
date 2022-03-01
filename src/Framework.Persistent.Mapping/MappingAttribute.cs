@@ -25,8 +25,7 @@ namespace Framework.Persistent.Mapping
         /// <remarks>
         ///     Внимание!!! Свойство, отмеченное как Mapping(IsOneToOne = true), материализуется всегда.
         ///     Говоря проще, lazy loading в этом случае не работает.
-        ///     Однако, если всё-таки очень нужно, можно применить подход,
-        ///     использованный в классе Framework.Workflow.Domain.Definition.SingleEventContainerBase.
+        ///     Однако, если всё-таки очень нужно, можно применить подход:
         ///
         ///     <code>
         ///         public virtual TEvent Event

@@ -9,8 +9,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework.App.SdkTypeScript\Framework.App.SdkTypeScript.csproj" />
-    <ProjectReference Include="..\..\..\SampleSystem.WebApiCore\SampleSystem.WebApiCore.csproj" />
+
     <ProjectReference Include="..\..\SampleSystem.Domain.Projections\SampleSystem.Domain.Projections.csproj" />
+    <ProjectReference Include="..\..\SampleSystem.WebApiCore\SampleSystem.WebApiCore.csproj" />
+
     <ProjectReference Include="..\SampleSystem.CodeGenerate\SampleSystem.CodeGenerate.csproj" />
   </ItemGroup>
 </Project>

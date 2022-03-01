@@ -95,8 +95,7 @@ IF NOT EXISTS ( SELECT * FROM sys.schemas WHERE name = N'app' ) EXEC('CREATE SCH
 IF NOT EXISTS ( SELECT * FROM sys.schemas WHERE name = N'configuration' ) EXEC('CREATE SCHEMA [configuration]');
 IF NOT EXISTS ( SELECT * FROM sys.schemas WHERE name = N'configurationAudit' ) EXEC('CREATE SCHEMA [configurationAudit]');
 IF NOT EXISTS ( SELECT * FROM sys.schemas WHERE name = N'auth' ) EXEC('CREATE SCHEMA [auth]');
-IF NOT EXISTS ( SELECT * FROM sys.schemas WHERE name = N'authAudit' ) EXEC('CREATE SCHEMA [authAudit]');
-IF NOT EXISTS ( SELECT * FROM sys.schemas WHERE name = N'workflow' ) EXEC('CREATE SCHEMA [workflow]');";
+IF NOT EXISTS ( SELECT * FROM sys.schemas WHERE name = N'authAudit' ) EXEC('CREATE SCHEMA [authAudit]');";
                 command.ExecuteNonQuery();
             }
 

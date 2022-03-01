@@ -5,7 +5,7 @@ using Framework.Exceptions;
 
 using Microsoft.AspNetCore.Mvc;
 
-using SampleSystem.WebApiCore;
+using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.BLL.Test
 {

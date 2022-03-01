@@ -9,7 +9,6 @@ using Framework.DomainDriven.Generation.Domain;
 
 using SampleSystem.TypeScriptGenerate.Configurations.DTO;
 using SampleSystem.TypeScriptGenerate.Configurations.Services;
-using SampleSystem.WebApiCore.Controllers;
 
 using AuditPersistentDomainObjectBase = Framework.Configuration.Domain.AuditPersistentDomainObjectBase;
 using DomainObjectBase = Framework.Configuration.Domain.DomainObjectBase;

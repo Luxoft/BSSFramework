@@ -16,8 +16,7 @@
     <Compile Include="..\..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\SampleSystem.WebApiCore\SampleSystem.WebApiCore.csproj" />
-    <ProjectReference Include="..\..\..\_Workflow\Framework.Workflow.Domain.Projections\Framework.Workflow.Domain.Projections.csproj" />
+    <ProjectReference Include="..\..\SampleSystem.WebApiCore\SampleSystem.WebApiCore.csproj" />
     <ProjectReference Include="..\..\SampleSystem.Domain.Projections\SampleSystem.Domain.Projections.csproj" />
     <ProjectReference Include="..\..\SampleSystem.Domain.LegacyProjections\SampleSystem.Domain.LegacyProjections.csproj" />
     <ProjectReference Include="..\..\SampleSystem.Generated.DAL.NHibernate\SampleSystem.Generated.DAL.NHibernate.csproj" />

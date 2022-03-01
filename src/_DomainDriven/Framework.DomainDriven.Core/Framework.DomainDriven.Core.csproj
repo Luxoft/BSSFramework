@@ -6,7 +6,6 @@
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.DomainDriven.Abstractions\Framework.DomainDriven.Abstractions.csproj" />
     <ProjectReference Include="..\..\Framework.HierarchicalExpand\Framework.HierarchicalExpand.csproj" />
     <ProjectReference Include="..\..\Framework.OData\Framework.OData.csproj" />
     <ProjectReference Include="..\..\Framework.Persistent.Mapping\Framework.Persistent.Mapping.csproj" />

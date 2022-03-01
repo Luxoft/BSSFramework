@@ -19,7 +19,7 @@ using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.WebApiCore
 {
-    public class CoreSampleSystemBLLContextContainer : SampleSystemBLLContextContainerStandard
+    public class CoreSampleSystemBLLContextContainer : SampleSystemBLLContextContainer
     {
         private readonly SmtpSettings smtpSettings;
 
@@ -35,9 +35,7 @@ namespace SampleSystem.WebApiCore
             ICryptService<CryptSystem> cryptService,
             ITypeResolver<string> currentTargetSystemTypeResolver,
             IDBSession session,
-            string currentPrincipalName,
-            SmtpSettings smtpSettings,
-            IRewriteReceiversService rewriteReceiversService)
+            string currentPrincipalName)
             : base(serviceEnvironment, scopedServiceProvider, defaultAuthorizationValidatorCompileCache, validatorCompileCache, securityExpressionBuilderFactoryFunc, fetchService, cryptService, currentTargetSystemTypeResolver, session, currentPrincipalName)
         {
             this.smtpSettings = smtpSettings;

@@ -14,7 +14,6 @@ using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.Security.Cryptography;
 using Framework.SecuritySystem.Rules.Builders;
 using Framework.Validation;
-using Framework.Workflow.BLL;
 
 using SampleSystem.BLL;
 using SampleSystem.Generated.DTO;
@@ -27,7 +26,7 @@ using PersistentDomainObjectBase = SampleSystem.Domain.PersistentDomainObjectBas
 namespace SampleSystem.ServiceEnvironment
 {
     public abstract class SampleSystemServiceEnvironmentStandard :
-        ServiceEnvironmentBase<SampleSystemBLLContextContainerStandard, ISampleSystemBLLContext, PersistentDomainObjectBase,
+        ServiceEnvironmentBase<SampleSystemBLLContextContainer, ISampleSystemBLLContext, PersistentDomainObjectBase,
         AuditPersistentDomainObjectBase, SampleSystemSecurityOperationCode, NamedLock, NamedLockOperation>,
         ISystemMetadataTypeBuilderContainer
     {
@@ -90,13 +89,6 @@ namespace SampleSystem.ServiceEnvironment
                 DBSessionMode.Write,
                 context =>
                 {
-                    context.Workflow.Logics.NamedLock.CheckInit();
-                });
-
-            contextEvaluator.Evaluate(
-                DBSessionMode.Write,
-                context =>
-                {
                     context.Logics.NamedLock.CheckInit();
                 });
 
@@ -115,12 +107,7 @@ namespace SampleSystem.ServiceEnvironment
                                    };
 
                     context.Configuration.Logics.TargetSystem.Register<Framework.Configuration.Domain.PersistentDomainObjectBase>(false, true, extTypes: extTypes);
-
                     context.Configuration.Logics.TargetSystem.Register<Framework.Authorization.Domain.PersistentDomainObjectBase>(false, true);
-
-                    context.Workflow.Logics.TargetSystem.RegisterBase();
-                    context.Workflow.Logics.TargetSystem.Register<SampleSystem.Domain.PersistentDomainObjectBase>(true);
-                    context.Workflow.Logics.TargetSystem.Register<Framework.Authorization.Domain.PersistentDomainObjectBase>(false);
                 });
 
             contextEvaluator.Evaluate(

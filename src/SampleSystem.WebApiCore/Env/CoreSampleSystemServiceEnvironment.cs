@@ -61,7 +61,7 @@ namespace SampleSystem.WebApiCore
             this.rewriteReceiversService = rewriteReceiversService;
         }
 
-        protected override SampleSystemBLLContextContainerStandard CreateBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null)
+        protected override SampleSystemBLLContextContainer CreateBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null)
         {
             return new CoreSampleSystemBLLContextContainer(
                                                            this,

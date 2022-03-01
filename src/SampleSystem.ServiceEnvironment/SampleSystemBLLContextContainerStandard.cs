@@ -15,6 +15,8 @@ using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.Events;
 using Framework.Notification.DTO;
 using Framework.Notification.New;
+using Framework.NotificationCore.Services;
+using Framework.NotificationCore.Settings;
 using Framework.Persistent;
 using Framework.Report;
 using Framework.Security.Cryptography;
@@ -33,7 +35,7 @@ using Principal = Framework.Authorization.Domain.Principal;
 
 namespace SampleSystem.ServiceEnvironment
 {
-    public abstract class SampleSystemBLLContextContainerStandard : SampleSystemServiceEnvironmentStandard.ServiceEnvironmentBLLContextContainer
+    public class SampleSystemBLLContextContainer : SampleSystemServiceEnvironmentStandard.ServiceEnvironmentBLLContextContainer
     {
         private readonly BLLOperationEventListenerContainer<DomainObjectBase> mainOperationListeners = new BLLOperationEventListenerContainer<DomainObjectBase>();
 
@@ -54,7 +56,11 @@ namespace SampleSystem.ServiceEnvironment
 
         private readonly ITypeResolver<string> currentTargetSystemTypeResolver;
 
-        protected SampleSystemBLLContextContainerStandard(
+        private readonly SmtpSettings smtpSettings;
+
+        private readonly IRewriteReceiversService rewriteReceiversService;
+
+        protected SampleSystemBLLContextContainer(
             SampleSystemServiceEnvironmentStandard serviceEnvironment,
             IServiceProvider scopedServiceProvider,
             ValidatorCompileCache defaultAuthorizationValidatorCompileCache,
@@ -64,7 +70,9 @@ namespace SampleSystem.ServiceEnvironment
             ICryptService<CryptSystem> cryptService,
             ITypeResolver<string> currentTargetSystemTypeResolver,
             IDBSession session,
-            string currentPrincipalName)
+            string currentPrincipalName,
+            SmtpSettings smtpSettings,
+            IRewriteReceiversService rewriteReceiversService)
             : base(serviceEnvironment, scopedServiceProvider, session, currentPrincipalName)
         {
             this.defaultAuthorizationValidatorCompileCache = defaultAuthorizationValidatorCompileCache;
@@ -76,7 +84,12 @@ namespace SampleSystem.ServiceEnvironment
 
             this.aribaSubscriptionManager = LazyInterfaceImplementHelper.CreateProxy<IEventsSubscriptionManager<ISampleSystemBLLContext, PersistentDomainObjectBase>>(
                 () => new SampleSystemAribaEventsSubscriptionManager(this.MainContext, new SampleSystemAribaLocalDBEventMessageSender(this.MainContext, this.Configuration)));
+
+
+            this.smtpSettings = smtpSettings;
+            this.rewriteReceiversService = rewriteReceiversService;
         }
+
 
         protected override ISampleSystemBLLContext CreateMainContext()
         {
@@ -101,7 +114,6 @@ namespace SampleSystem.ServiceEnvironment
                 LazyInterfaceImplementHelper.CreateProxy<ISampleSystemBLLFactoryContainer>(() => new SampleSystemBLLFactoryContainer(this.MainContext)),
                 this.Authorization,
                 this.Configuration,
-                this.Workflow,
                 this.cryptService,
                 this.Impersonate,
                 this.currentTargetSystemTypeResolver);
@@ -115,16 +127,22 @@ namespace SampleSystem.ServiceEnvironment
         {
             return new SampleSystemCustomAuthValidator(this.Authorization, this.defaultAuthorizationValidatorCompileCache);
         }
-
-        /// <inheritdoc />
         protected override IMessageSender<Exception> GetExceptionSender()
         {
-            return new SampleSystemExceptionMessageSender(
-                                                          this.Configuration,
-                                                          SmtpMessageSender.Configuration,
-                                                          this.ServiceEnvironment.NotificationContext.Sender,
-                                                          this.ServiceEnvironment.NotificationContext.ExceptionReceivers);
+            return MessageSender<Exception>.Trace;
         }
+
+        ///// <inheritdoc />
+        //protected override IMessageSender<Exception> GetExceptionSender()
+        //{
+        //    return MessageSender<Exception>.Trace;
+
+        //    return new SampleSystemExceptionMessageSender(
+        //                                                  this.Configuration,
+        //                                                  SmtpMessageSender.Configuration,
+        //                                                  this.ServiceEnvironment.NotificationContext.Sender,
+        //                                                  this.ServiceEnvironment.NotificationContext.ExceptionReceivers);
+        //}
 
         /// <inheritdoc />
         protected override IEnumerable<IManualEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>> GetAuthorizationEventDALListeners()
@@ -171,13 +189,6 @@ namespace SampleSystem.ServiceEnvironment
                                                               new AuthorizationLocalDBEventMessageSender(this.Authorization, this.Configuration)); // Sender для отправки евентов в локальную бд
         }
 
-        protected override IEnumerable<Framework.Workflow.BLL.ITargetSystemService> GetWorkflowTargetSystemServices(
-            SubscriptionMetadataStore subscriptionMetadataStore)
-        {
-            yield return this.GetMainWorkflowTargetSystemService(new HashSet<Type>(new[] { typeof(Domain.Location) }));
-            yield return this.GetAuthorizationWorkflowTargetSystemService();
-        }
-
         protected override IEnumerable<Framework.Configuration.BLL.ITargetSystemService> GetConfigurationTargetSystemServices(SubscriptionMetadataStore subscriptionMetadataStore)
         {
             yield return this.GetMainConfigurationTargetSystemService();
@@ -190,11 +201,6 @@ namespace SampleSystem.ServiceEnvironment
             return this.MainContext.Logics.EmployeeFactory.Create(securityMode);
         }
 
-        protected override IWorkflowApproveProcessor GetWorkflowApproveProcessor()
-        {
-            return new CustomWorkflowApproveProcessor(this.Authorization, this.MainContext);
-        }
-
         /// <summary>
         /// Сохранение модификаций в локальную бд
         /// </summary>
@@ -204,14 +210,17 @@ namespace SampleSystem.ServiceEnvironment
             return new LocalDBSubscriptionService(this.Configuration);
         }
 
-        /// <summary>
-        /// Сохранение нотификаций в локальной бд, откуда их будет забирать Biztalk
-        /// </summary>
-        /// <returns></returns>
-        protected override IMessageSender<NotificationEventDTO> GetMessageTemplateSender()
-        {
-            return new LocalDBNotificationEventDTOMessageSender(this.Configuration);
-        }
+        ///// <summary>
+        ///// Сохранение нотификаций в локальной бд, откуда их будет забирать Biztalk
+        ///// </summary>
+        ///// <returns></returns>
+        //protected override IMessageSender<NotificationEventDTO> GetMessageTemplateSender()
+        //{
+        //    return new LocalDBNotificationEventDTOMessageSender(this.Configuration);
+        //}
+
+        protected override IMessageSender<NotificationEventDTO> GetMessageTemplateSender() =>
+                new Framework.NotificationCore.Senders.SmtpMessageSender(LazyHelper.Create(() => this.smtpSettings), LazyHelper.Create(() => this.rewriteReceiversService), this.Configuration);
 
         /// <summary>
         /// Добавление подписок на евенты для арибы

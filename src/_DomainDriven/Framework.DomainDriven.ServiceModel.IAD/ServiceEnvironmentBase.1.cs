@@ -6,10 +6,7 @@ using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
-using Framework.Configuration.Domain;
 using Framework.Core.Services;
-using Framework.Events;
-using Framework.Workflow.BLL;
 
 namespace Framework.DomainDriven.ServiceModel.IAD
 {
@@ -32,10 +29,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
         protected virtual IEnumerable<IDALListener> GetDALFlushedListeners(TBLLContextContainer container)
         {
-            foreach (var listener in this.GetWorkflowDALListeners(container.Workflow))
-            {
-                yield return listener;
-            }
+            yield break;
         }
 
         protected virtual IEnumerable<IDALListener> GetBeforeTransactionCompletedListeners(TBLLContextContainer container)
@@ -83,13 +77,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                    where targetSystemService.TargetSystem.SubscriptionEnabled
 
                    select new SubscriptionDALListener(targetSystemService, container.SubscriptionService);
-        }
-
-        private IEnumerable<IDALListener> GetWorkflowDALListeners(IWorkflowBLLContext context)
-        {
-            return from targetSystemService in context.GetTargetSystemServices()
-
-                   select new WorkflowDALListener(targetSystemService);
         }
 
         IBLLContextContainer<TBLLContext> IServiceEnvironment<TBLLContext>.GetBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName)
@@ -178,7 +165,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     this.serviceEnvironment.GetBeforeTransactionCompletedListeners((TBLLContextContainer)this),
                     this.GetAuthorizationEventDALListeners(),
                     this.GetConfigurationEventDALListeners(),
-                    this.GetWorkflowEventDALListeners()
                 };
 
                 return dalListeners.SelectMany();

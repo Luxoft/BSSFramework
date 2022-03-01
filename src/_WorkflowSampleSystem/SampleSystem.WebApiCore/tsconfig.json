@@ -1,0 +1,25 @@
+﻿{
+  "compilerOptions": {
+    "target": "es5",
+    "baseUrl": "src",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "noImplicitThis": true,
+    "removeComments": true,
+    "sourceMap": false,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "pretty": true,
+    "suppressImplicitAnyIndexErrors": false,
+    "lib": [ "dom", "es5", "es2015.promise" ]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "wwwroot",
+    "build"
+  ]
+}

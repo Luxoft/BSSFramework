@@ -16,5 +16,7 @@
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.NHibernate.DALGenerator\Framework.DomainDriven.NHibernate.DALGenerator.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ProjectionGenerator\Framework.DomainDriven.ProjectionGenerator.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModelGenerator\Framework.DomainDriven.ServiceModelGenerator.csproj" />
+
+    <ProjectReference Include="..\Framework.Workflow.Domain.Models\Framework.Workflow.Domain.Models.csproj" />
   </ItemGroup>
 </Project>

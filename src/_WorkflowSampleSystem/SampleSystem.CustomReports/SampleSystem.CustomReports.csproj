@@ -1,9 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-  <IsPackable>false</IsPackable>
-  </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Framework.App.CustomReports\Framework.App.CustomReports.csproj" />
-    <ProjectReference Include="..\SampleSystem.Domain\SampleSystem.Domain.csproj" />
-  </ItemGroup>
-</Project>

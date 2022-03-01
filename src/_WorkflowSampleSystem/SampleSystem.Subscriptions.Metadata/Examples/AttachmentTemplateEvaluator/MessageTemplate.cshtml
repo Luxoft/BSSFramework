@@ -1,8 +1,0 @@
-﻿@* Generator: Template
-    DisableLinePragmas: true*@@{}
-@using Framework.Configuration.SubscriptionModeling
-@using SampleSystem.Domain
-@inherits RazorTemplate<Employee>
-@functions {
-    public override string Subject => $"Employee {Current.NameNative} has been changed. Inline attach test";
-}<html><head><title></title></head><body>@Current.NameNative<br/></body></html>

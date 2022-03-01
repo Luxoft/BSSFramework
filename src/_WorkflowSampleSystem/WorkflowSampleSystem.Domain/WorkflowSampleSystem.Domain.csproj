@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+  <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework.App.Domain\Framework.App.Domain.csproj" />
+    <ProjectReference Include="..\WorkflowSampleSystem.Core\WorkflowSampleSystem.Core.csproj" />
+  </ItemGroup>
+</Project>

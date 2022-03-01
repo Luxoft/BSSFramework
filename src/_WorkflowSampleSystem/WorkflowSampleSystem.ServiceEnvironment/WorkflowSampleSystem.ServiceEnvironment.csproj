@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>WorkflowSampleSystem.ServiceEnvironmentStandard</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework.App.ServiceEnvironment\Framework.App.ServiceEnvironment.csproj" />
+
+    <ProjectReference Include="..\WorkflowSampleSystem.BLL\WorkflowSampleSystem.BLL.csproj" />
+    <ProjectReference Include="..\WorkflowSampleSystem.Events\WorkflowSampleSystem.Events.csproj" />
+    <ProjectReference Include="..\WorkflowSampleSystem.Generated.DAL.NHibernate\WorkflowSampleSystem.Generated.DAL.NHibernate.csproj" />
+    <ProjectReference Include="..\WorkflowSampleSystem.Subscriptions.Metadata\WorkflowSampleSystem.Subscriptions.Metadata.csproj" />
+
+    <ProjectReference Include="..\..\Framework.NotificationCore\Framework.NotificationCore.csproj" />
+  </ItemGroup>
+
+</Project>

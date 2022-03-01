@@ -35,7 +35,7 @@ jobs:
 
     - name: Check Generation
       run: |
-        dotnet test src/Framework.Generation.Tests/Framework.Generation.Tests.csproj --no-build --verbosity normal
+        dotnet test src\_SampleSystem\_Tests\SampleSystem.CheckGenTests.csproj --no-build --verbosity normal
     
     - name: Unit tests
       run: |

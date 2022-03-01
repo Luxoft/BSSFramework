@@ -24,6 +24,5 @@
     <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.ServiceModel.IAD.DTO\Framework.DomainDriven.ServiceModel.IAD.DTO.csproj" />
     <ProjectReference Include="..\_Report\Framework.CustomReports.WebApi\Framework.CustomReports.WebApi.csproj" />
     <ProjectReference Include="..\_SampleSystem\SampleSystem.CustomReports.BLL\SampleSystem.CustomReports.BLL.csproj" />
-    <ProjectReference Include="..\_Workflow\Framework.Workflow.WebApi\Framework.Workflow.WebApi.csproj" />
   </ItemGroup>
 </Project>

@@ -28,6 +28,7 @@ using SampleSystem.BLL;
 using SampleSystem.BLL.Core.Jobs;
 using SampleSystem.BLL.Jobs;
 using SampleSystem.Domain;
+using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.NewtonsoftJson;
 
 namespace SampleSystem.WebApiCore
@@ -124,7 +125,7 @@ namespace SampleSystem.WebApiCore
                                                             .AddEnvironment(this.Configuration)
                                                             .BuildServiceProvider();
 
-                                return serviceProvider.GetRequiredService<CoreSampleSystemServiceEnvironment>();
+                                return serviceProvider.GetRequiredService<SampleSystemServiceEnvironment>();
                             });
 
             app.UseHangfireBss(
@@ -146,7 +147,6 @@ namespace SampleSystem.WebApiCore
 
             services.RegisterAuthorizationBLL();
             services.RegisterConfigurationBLL();
-            services.RegisterWorkflowBLL();
             services.RegisterMainBLL();
 
             return services;

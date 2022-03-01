@@ -21,12 +21,12 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
         {
         }
 
-        public AuthHelper(CoreSampleSystemServiceEnvironment environment)
+        public AuthHelper(SampleSystemServiceEnvironment environment)
         {
             this.Environment = environment;
         }
 
-        public CoreSampleSystemServiceEnvironment Environment { get; set; }
+        public SampleSystemServiceEnvironment Environment { get; set; }
 
         public void SetUserRole(EmployeeIdentityDTO employee, params IPermissionDefinition[] permissions)
         {

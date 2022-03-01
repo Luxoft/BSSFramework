@@ -8,6 +8,7 @@ using Framework.NotificationCore.Monitoring;
 using Hangfire.Dashboard;
 
 using SampleSystem.BLL;
+using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.Env;
 
 namespace SampleSystem.WebApiCore
@@ -18,11 +19,11 @@ namespace SampleSystem.WebApiCore
     /// </summary>
     public class SampleSystemHangfireAuthorization : IDashboardAuthorizationFilter
     {
-        private readonly Lazy<CoreSampleSystemServiceEnvironment> environment;
+        private readonly Lazy<SampleSystemServiceEnvironment> environment;
 
         private readonly IDashboardAuthorizationFilter baseFilter;
 
-        public SampleSystemHangfireAuthorization(Lazy<CoreSampleSystemServiceEnvironment> environment)
+        public SampleSystemHangfireAuthorization(Lazy<SampleSystemServiceEnvironment> environment)
         {
             this.baseFilter = new AdminHangfireAuthorization<ISampleSystemBLLContext>(LazyHelper.Create(() => (IServiceEnvironment<ISampleSystemBLLContext>)this.environment.Value));
 

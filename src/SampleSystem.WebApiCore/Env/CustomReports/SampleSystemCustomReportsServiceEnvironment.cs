@@ -13,18 +13,18 @@ using SampleSystem.CustomReports.Employee;
 
 namespace SampleSystem.WebApiCore.CustomReports
 {
-    public class SampleSystemCustomReportsServiceEnvironment : ReportDefinitionServiceEnvironment<CoreSampleSystemServiceEnvironment,
+    public class SampleSystemCustomReportsServiceEnvironment : ReportDefinitionServiceEnvironment<SampleSystemServiceEnvironment,
                                                                ISampleSystemBLLContext, PersistentDomainObjectBase, SampleSystemSecurityOperationCode>,
                                                                ISecurityOperationCodeProviderContainer<SampleSystemSecurityOperationCode>
     {
-        private static CoreSampleSystemServiceEnvironment env;
+        private static SampleSystemServiceEnvironment env;
 
         private static readonly Lazy<SampleSystemCustomReportsServiceEnvironment> CurrentLazy = LazyHelper.Create(
             () => new SampleSystemCustomReportsServiceEnvironment(env));
 
 
         private readonly SecurityOperationCodeProvider securityOperationCodeProvider = new SecurityOperationCodeProvider();
-        public SampleSystemCustomReportsServiceEnvironment(CoreSampleSystemServiceEnvironment serviceEnvironment) : base(serviceEnvironment, new CustomReportAssembly().WithDomainAssembly(typeof(EmployeeReport).Assembly).WithBLLAssembly(typeof(EmployeeReportBLL).Assembly))
+        public SampleSystemCustomReportsServiceEnvironment(SampleSystemServiceEnvironment serviceEnvironment) : base(serviceEnvironment, new CustomReportAssembly().WithDomainAssembly(typeof(EmployeeReport).Assembly).WithBLLAssembly(typeof(EmployeeReportBLL).Assembly))
         {
             env = serviceEnvironment;
         }

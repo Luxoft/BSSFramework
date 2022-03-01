@@ -11,9 +11,13 @@ using Framework.DomainDriven.Serialization;
 using Framework.DomainDriven.SerializeMetadata;
 using Framework.DomainDriven.ServiceModel;
 using Framework.DomainDriven.ServiceModel.IAD;
+using Framework.NotificationCore.Services;
+using Framework.NotificationCore.Settings;
 using Framework.Security.Cryptography;
 using Framework.SecuritySystem.Rules.Builders;
 using Framework.Validation;
+
+using Microsoft.Extensions.Options;
 
 using SampleSystem.BLL;
 using SampleSystem.Generated.DTO;
@@ -25,7 +29,7 @@ using PersistentDomainObjectBase = SampleSystem.Domain.PersistentDomainObjectBas
 
 namespace SampleSystem.ServiceEnvironment
 {
-    public abstract class SampleSystemServiceEnvironmentStandard :
+    public abstract class SampleSystemServiceEnvironment :
         ServiceEnvironmentBase<SampleSystemBLLContextContainer, ISampleSystemBLLContext, PersistentDomainObjectBase,
         AuditPersistentDomainObjectBase, SampleSystemSecurityOperationCode, NamedLock, NamedLockOperation>,
         ISystemMetadataTypeBuilderContainer
@@ -40,18 +44,22 @@ namespace SampleSystem.ServiceEnvironment
         protected readonly IFetchService<PersistentDomainObjectBase, FetchBuildRule> FetchService;
         protected readonly Func<ISampleSystemBLLContext, ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>> SecurityExpressionBuilderFactoryFunc;
 
+        protected readonly SmtpSettings smtpSettings;
 
-        protected SampleSystemServiceEnvironmentStandard(
+        protected readonly IRewriteReceiversService rewriteReceiversService;
+
+
+        protected SampleSystemServiceEnvironment(
             IServiceProvider serviceProvider,
             IDBSessionFactory sessionFactory,
             INotificationContext notificationContext,
             IUserAuthenticationService userAuthenticationService,
+            IOptions<SmtpSettings> smtpSettings,
+            IRewriteReceiversService rewriteReceiversService = null,
             bool? isDebugMode = null,
             Func<ISampleSystemBLLContext, ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, Guid>> securityExpressionBuilderFactoryFunc = null)
             : base(serviceProvider, sessionFactory, notificationContext, userAuthenticationService, new SampleSystemSubscriptionsMetadataFinder())
         {
-            this.InitLogger();
-
             this.SystemMetadataTypeBuilder = new SystemMetadataTypeBuilder<PersistentDomainObjectBase>(DTORole.All, typeof(PersistentDomainObjectBase).Assembly);
             this.SecurityExpressionBuilderFactoryFunc = securityExpressionBuilderFactoryFunc;
             this.isDebugMode = isDebugMode;
@@ -72,7 +80,25 @@ namespace SampleSystem.ServiceEnvironment
 
         public override bool IsDebugMode => this.isDebugMode ?? base.IsDebugMode;
 
-        protected abstract void InitLogger();
+
+
+        protected override SampleSystemBLLContextContainer CreateBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null)
+        {
+            return new SampleSystemBLLContextContainer(
+                                                       this,
+                                                       scopedServiceProvider,
+                                                       this.DefaultAuthorizationValidatorCompileCache,
+                                                       this.ValidatorCompileCache,
+                                                       this.SecurityExpressionBuilderFactoryFunc,
+                                                       this.FetchService,
+                                                       this.CryptService,
+                                                       CurrentTargetSystemTypeResolver,
+                                                       session,
+                                                       currentPrincipalName,
+                                                       this.smtpSettings,
+                                                       this.rewriteReceiversService);
+        }
+
 
         public void Initialize()
         {

@@ -9,7 +9,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
 {
     public partial class DataHelper
     {
-        public CoreSampleSystemServiceEnvironment Environment { get; set; }
+        public SampleSystemServiceEnvironment Environment { get; set; }
 
         public string PrincipalName { private get; set; }
 

@@ -1,7 +1,4 @@
-﻿
-using WorkflowSampleSystem.Domain;
-
-namespace WorkflowSampleSystem.Domain
+﻿namespace WorkflowSampleSystem.Domain
 {
     public enum NamedLockOperation
     {

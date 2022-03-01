@@ -23,7 +23,7 @@ namespace Framework.DomainDriven.Generation.Domain
 
         private readonly Lazy<ReadOnlyCollection<Assembly>> _domainObjectAssemblies;
 
-        protected GenerationEnvironment(Expression<Func<TPersistentDomainObjectBase, TIdent>> identityPropertyExpr, Assembly modelAssembly)
+        protected GenerationEnvironment(Expression<Func<TPersistentDomainObjectBase, TIdent>> identityPropertyExpr, Assembly modelAssembly = null)
         {
             if (identityPropertyExpr == null) throw new ArgumentNullException(nameof(identityPropertyExpr));
 

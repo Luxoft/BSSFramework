@@ -16,7 +16,6 @@ using Framework.Validation;
 using JetBrains.Annotations;
 
 using WorkflowSampleSystem.Domain;
-using WorkflowSampleSystem.Domain.Projections;
 
 namespace WorkflowSampleSystem.BLL
 {
@@ -77,11 +76,6 @@ namespace WorkflowSampleSystem.BLL
         public IWorkflowSampleSystemBLLContext Impersonate(string principalName)
         {
             return this._impersonateFunc(principalName);
-        }
-
-        public override bool AllowVirtualPropertyInOdata(Type domainType)
-        {
-            return base.AllowVirtualPropertyInOdata(domainType) || domainType == typeof(BusinessUnitProgramClass);
         }
     }
 }

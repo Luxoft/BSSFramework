@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
@@ -14,20 +13,14 @@ using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.Events;
 using Framework.Notification.DTO;
-using Framework.Notification.New;
 using Framework.NotificationCore.Services;
 using Framework.NotificationCore.Settings;
 using Framework.Persistent;
-using Framework.Report;
 using Framework.Security.Cryptography;
 using Framework.SecuritySystem;
 using Framework.Validation;
 
-using JetBrains.Annotations;
-
 using WorkflowSampleSystem.BLL;
-using WorkflowSampleSystem.Domain;
-using WorkflowSampleSystem.Events;
 
 using DomainObjectBase = WorkflowSampleSystem.Domain.DomainObjectBase;
 using PersistentDomainObjectBase = WorkflowSampleSystem.Domain.PersistentDomainObjectBase;
@@ -56,10 +49,6 @@ namespace WorkflowSampleSystem.ServiceEnvironment
 
         private readonly ITypeResolver<string> currentTargetSystemTypeResolver;
 
-        private readonly SmtpSettings smtpSettings;
-
-        private readonly IRewriteReceiversService rewriteReceiversService;
-
         public WorkflowSampleSystemBLLContextContainer(
             WorkflowSampleSystemServiceEnvironment serviceEnvironment,
             IServiceProvider scopedServiceProvider,
@@ -81,13 +70,6 @@ namespace WorkflowSampleSystem.ServiceEnvironment
             this.fetchService = fetchService;
             this.cryptService = cryptService;
             this.currentTargetSystemTypeResolver = currentTargetSystemTypeResolver;
-
-            this.aribaSubscriptionManager = LazyInterfaceImplementHelper.CreateProxy<IEventsSubscriptionManager<IWorkflowSampleSystemBLLContext, PersistentDomainObjectBase>>(
-                () => new WorkflowSampleSystemAribaEventsSubscriptionManager(this.MainContext, new WorkflowSampleSystemAribaLocalDBEventMessageSender(this.MainContext, this.Configuration)));
-
-
-            this.smtpSettings = smtpSettings;
-            this.rewriteReceiversService = rewriteReceiversService;
         }
 
 
@@ -119,31 +101,11 @@ namespace WorkflowSampleSystem.ServiceEnvironment
                 this.currentTargetSystemTypeResolver);
         }
 
-        /// <summary>
-        /// Пример переопределения валидатора для авторизации
-        /// </summary>
-        /// <returns></returns>
-        protected override AuthorizationValidator CreateAuthorizationValidator()
-        {
-            return new WorkflowSampleSystemCustomAuthValidator(this.Authorization, this.defaultAuthorizationValidatorCompileCache);
-        }
         protected override IMessageSender<Exception> GetExceptionSender()
         {
             return MessageSender<Exception>.Trace;
         }
-
-        ///// <inheritdoc />
-        //protected override IMessageSender<Exception> GetExceptionSender()
-        //{
-        //    return MessageSender<Exception>.Trace;
-
-        //    return new WorkflowSampleSystemExceptionMessageSender(
-        //                                                  this.Configuration,
-        //                                                  SmtpMessageSender.Configuration,
-        //                                                  this.ServiceEnvironment.NotificationContext.Sender,
-        //                                                  this.ServiceEnvironment.NotificationContext.ExceptionReceivers);
-        //}
-
+        
         /// <inheritdoc />
         protected override IEnumerable<IManualEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>> GetAuthorizationEventDALListeners()
         {
@@ -173,13 +135,6 @@ namespace WorkflowSampleSystem.ServiceEnvironment
             var messageSender = new AuthorizationLocalDBEventMessageSender(this.Authorization, this.Configuration, "authDALQuery");
 
             return new DefaultAuthDALListener(this.Authorization, authEventTypes, messageSender, dependencyEvents);
-        }
-
-        protected override IEventsSubscriptionManager<IWorkflowSampleSystemBLLContext, PersistentDomainObjectBase> CreateMainEventsSubscriptionManager()
-        {
-            return new WorkflowSampleSystemEventsSubscriptionManager(
-                                                             this.MainContext,
-                                                             new WorkflowSampleSystemLocalDBEventMessageSender(this.MainContext, this.Configuration)); // Sender для отправки евентов в локальную бд
         }
 
         protected override IEventsSubscriptionManager<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase> CreateAuthorizationEventsSubscriptionManager()
@@ -219,8 +174,7 @@ namespace WorkflowSampleSystem.ServiceEnvironment
         //    return new LocalDBNotificationEventDTOMessageSender(this.Configuration);
         //}
 
-        protected override IMessageSender<NotificationEventDTO> GetMessageTemplateSender() =>
-                new Framework.NotificationCore.Senders.SmtpMessageSender(LazyHelper.Create(() => this.smtpSettings), LazyHelper.Create(() => this.rewriteReceiversService), this.Configuration);
+        protected override IMessageSender<NotificationEventDTO> GetMessageTemplateSender() => new LocalDBNotificationEventDTOMessageSender(this.Configuration);
 
         /// <summary>
         /// Добавление подписок на евенты для арибы

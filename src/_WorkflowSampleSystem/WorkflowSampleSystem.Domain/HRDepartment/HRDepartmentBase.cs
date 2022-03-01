@@ -8,7 +8,7 @@ namespace WorkflowSampleSystem.Domain
     [Framework.Restriction.UniqueGroup("Uni_Code")]
     [Framework.Restriction.UniqueGroup("Uni_CodeNative")]
     [Framework.Restriction.UniqueGroup("Uni_NameNative")]
-    public abstract class HRDepartmentBase : BaseDirectory, IExternalSynchronizable, ICodeObject
+    public abstract class HRDepartmentBase : BaseDirectory, ICodeObject
     {
         private string code;
         private string codeNative;
@@ -16,7 +16,6 @@ namespace WorkflowSampleSystem.Domain
         private Location location;
         private Employee head;
         private long externalId;
-        private CompanyLegalEntity companyLegalEntity;
         private bool isProduction;
         private bool isLegal;
 
@@ -36,16 +35,6 @@ namespace WorkflowSampleSystem.Domain
         {
             get { return this.isLegal; }
             set { this.isLegal = value; }
-        }
-
-        [RequiredValidator(OperationContext = (int)(WorkflowSampleSystemOperationContext.Request | WorkflowSampleSystemOperationContext.Register))]
-        [CustomName("Luxoft Legal Entity")]
-        [Framework.Restriction.UniqueElement("Uni_Name")]
-        [Framework.Restriction.UniqueElement("Uni_NameNative")]
-        public virtual CompanyLegalEntity CompanyLegalEntity
-        {
-            get { return this.companyLegalEntity; }
-            set { this.companyLegalEntity = value; }
         }
 
         [Framework.Restriction.UniqueElement("Uni_Name")]

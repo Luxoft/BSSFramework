@@ -7,6 +7,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.App.BLL\Framework.App.BLL.csproj" />
+
     <ProjectReference Include="..\WorkflowSampleSystem.BLL.Core\WorkflowSampleSystem.BLL.Core.csproj" />
   </ItemGroup>
 </Project>

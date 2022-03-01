@@ -13,13 +13,10 @@ using Framework.SecuritySystem;
 using Framework.Transfering;
 using Framework.Validation;
 
-using WorkflowSampleSystem.Domain.Enums;
 using WorkflowSampleSystem.Domain.Inline;
-using WorkflowSampleSystem.Domain.Validators.Employee;
 
 namespace WorkflowSampleSystem.Domain
 {
-    [EmployeeValidator]
     [UniqueGroup(UseDbEvaluation = true)]
     [BLLViewRole(Max = MainDTOType.FullDTO)]
     [BLLSaveRole(SaveType = BLLSaveType.Both)]
@@ -30,36 +27,17 @@ namespace WorkflowSampleSystem.Domain
     [DomainType("{AA46DA53-9B21-4DEC-9C70-720BDA1CB198}")]
     public partial class Employee :
         AuditPersistentDomainObjectBase,
-        IMaster<EmployeePersonalCellPhone>,
-        IMaster<EmployeeCellPhone>,
-        IMaster<EmployeeToEmployeeLink>,
-        IMaster<EmployeeAndEmployeeSpecializationLink>,
-        IMaster<EmployeePhoto>,
-        ISecurityContext,
         IEmployee
     {
-        private readonly ICollection<EmployeePhoto> employeePhotos = new List<EmployeePhoto>();
-
-        private readonly ICollection<EmployeeCellPhone> cellPhones = new List<EmployeeCellPhone>();
-
-        private readonly ICollection<EmployeePersonalCellPhone> personalCellPhones = new List<EmployeePersonalCellPhone>();
-
-        private readonly ICollection<EmployeeToEmployeeLink> employeeToEmployeeLinks = new List<EmployeeToEmployeeLink>();
-
-        private readonly ICollection<EmployeeAndEmployeeSpecializationLink> specializations = new List<EmployeeAndEmployeeSpecializationLink>();
-
         private BusinessUnit coreBusinessUnit;
         private HRDepartment hRDepartment;
-        private EmployeePosition position;
         private Employee ppm;
 
         private Period educationDuration;
-        private Gender gender;
 
         private FioShort nameEng = new FioShort();
         private Fio nameNative = new Fio();
         private Fio nameRussian = new Fio();
-        private EmployeeRegistrationType registrationType;
 
         private string email;
         private string login;
@@ -74,14 +52,8 @@ namespace WorkflowSampleSystem.Domain
         private string landlinephone;
         private Employee vacationApprover;
 
-        // ReSharper disable once InconsistentNaming
-        private bool canBePPM;
-
         private string cellPhone;
         private string personalCellPhone;
-        private ManagementUnit managementUnit;
-        private EmployeeRole role;
-        private EmployeeRoleDegree roleDegree;
         private Period workPeriod;
 
         private int age;
@@ -106,44 +78,6 @@ namespace WorkflowSampleSystem.Domain
             set { this.validateVirtualField = value; }
         }
 
-
-        [UniqueGroup]
-        [CustomSerialization(CustomSerializationMode.Ignore)]
-        public virtual IEnumerable<EmployeePhoto> EmployeePhotos
-        {
-            get { return this.employeePhotos; }
-        }
-
-        public virtual IEnumerable<EmployeeCellPhone> CellPhones
-        {
-            get { return this.cellPhones; }
-        }
-
-        public virtual IEnumerable<EmployeeToEmployeeLink> EmployeeToEmployeeLinks
-        {
-            get { return this.employeeToEmployeeLinks; }
-        }
-
-        [UniqueGroup]
-        public virtual IEnumerable<EmployeeAndEmployeeSpecializationLink> Specializations
-        {
-            get { return this.specializations; }
-        }
-
-        [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Event | DTORole.Integration)]
-        [WorkflowSampleSystemViewDomainObject(WorkflowSampleSystemSecurityOperationCode.EmployeePersonalCellPhoneView)]
-        [WorkflowSampleSystemEditDomainObject(WorkflowSampleSystemSecurityOperationCode.EmployeePersonalCellPhoneEdit)]
-        public virtual IEnumerable<EmployeePersonalCellPhone> PersonalCellPhones
-        {
-            get { return this.personalCellPhones; }
-        }
-
-        [CustomSerialization(CustomSerializationMode.Ignore)]
-        public virtual EmployeePhoto DefaultPhoto
-        {
-            get { return this.EmployeePhotos.SingleOrDefault(z => z.IsDefault); }
-        }
-
         public virtual string AccountName
         {
             get { return this.Login.Split('\\').LastOrDefault().TrimNull(); }
@@ -152,36 +86,6 @@ namespace WorkflowSampleSystem.Domain
         public virtual string MailAccountName
         {
             get { return this.Email.Split('@').FirstOrDefault().TrimNull(); }
-        }
-
-        [FetchPath("EmployeeToEmployeeLinks.LinkedEmployee")]
-        public virtual Employee PersonalAssistant
-        {
-            get
-            {
-                return
-                    this.EmployeeToEmployeeLinks.FirstOrDefault(
-                        x => x.EmployeeLinkType == EmployeeLinkType.PersonalAssistant).Maybe(x => x.LinkedEmployee);
-            }
-        }
-
-        public virtual EmployeeRole Role
-        {
-            get { return this.role; }
-            set { this.role = value; }
-        }
-
-        public virtual EmployeeRoleDegree RoleDegree
-        {
-            get { return this.roleDegree; }
-            set { this.roleDegree = value; }
-        }
-
-        [Obsolete("#IAD-20612")]
-        public virtual bool CanBePPM
-        {
-            get { return this.canBePPM; }
-            set { this.canBePPM = value; }
         }
 
         public virtual long ExternalId
@@ -302,13 +206,6 @@ namespace WorkflowSampleSystem.Domain
             get { return this.HRDepartment?.Location; }
         }
 
-
-        [ExpandPath("HRDepartment.Location.Code")]
-        public virtual int? LocationCode
-        {
-            get { return this.Location?.Code; }
-        }
-
         public virtual BusinessUnit CoreBusinessUnit
         {
             get { return this.coreBusinessUnit; }
@@ -321,51 +218,16 @@ namespace WorkflowSampleSystem.Domain
             get { return this.CoreBusinessUnit?.Period; }
         }
 
-        public virtual ManagementUnit ManagementUnit
-        {
-            get { return this.managementUnit; }
-            protected internal set { this.managementUnit = value; }
-        }
-
         public virtual HRDepartment HRDepartment
         {
             get { return this.hRDepartment; }
             protected internal set { this.hRDepartment = value; }
         }
 
-        [CustomSerialization(CustomSerializationMode.ReadOnly, DTORole.Event | DTORole.Integration)]
-        [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client)]
-        [ExpandPath("HRDepartment.CompanyLegalEntity")]
-        [DetailRole(false)]
-        public virtual CompanyLegalEntity CompanyLegalEntity
-        {
-            get { return this.HRDepartment.Maybe(x => x.CompanyLegalEntity); }
-        }
-
         public virtual DateTime? LastActionDate
         {
             get { return this.lastActionDate; }
             set { this.lastActionDate = value; }
-        }
-
-        [WorkflowSampleSystemEditDomainObject(WorkflowSampleSystemSecurityOperationCode.EmployeePositionEdit)]
-        [WorkflowSampleSystemViewDomainObject(WorkflowSampleSystemSecurityOperationCode.EmployeePositionView)]
-        public virtual EmployeePosition Position
-        {
-            get { return this.position; }
-            set { this.position = value; }
-        }
-
-        ////public virtual WorkplaceElement Workplace
-        ////{
-        ////    get { return this.workplace; }
-        ////    set { this.workplace = value; }
-        ////}
-
-        public virtual EmployeeRegistrationType RegistrationType
-        {
-            get { return this.registrationType; }
-            set { this.registrationType = value; }
         }
 
         [Obsolete("#IAD-20612")]
@@ -388,12 +250,6 @@ namespace WorkflowSampleSystem.Domain
             set { this.educationDuration = value; }
         }
 
-        public virtual Gender Gender
-        {
-            get { return this.gender; }
-            set { this.gender = value; }
-        }
-
         public virtual Period WorkPeriod
         {
             get { return this.workPeriod; }
@@ -413,35 +269,6 @@ namespace WorkflowSampleSystem.Domain
             }
         }
 
-        #region IMaster<EmployeePersonalCellPhone> Members
-
-        ICollection<EmployeePersonalCellPhone> IMaster<EmployeePersonalCellPhone>.Details
-        {
-            get { return this.personalCellPhones; }
-        }
-
-        ICollection<EmployeeCellPhone> IMaster<EmployeeCellPhone>.Details
-        {
-            get { return this.cellPhones; }
-        }
-
-        ICollection<EmployeeToEmployeeLink> IMaster<EmployeeToEmployeeLink>.Details
-        {
-            get { return this.employeeToEmployeeLinks; }
-        }
-
-        #endregion
-
-        ICollection<EmployeeAndEmployeeSpecializationLink> IMaster<EmployeeAndEmployeeSpecializationLink>.Details
-        {
-            get { return this.specializations; }
-        }
-
-        ICollection<EmployeePhoto> IMaster<EmployeePhoto>.Details
-        {
-            get { return this.employeePhotos; }
-        }
-
         public virtual int Age
         {
             get
@@ -451,11 +278,6 @@ namespace WorkflowSampleSystem.Domain
             {
                 this.age = value;
             }
-        }
-
-        public virtual int? GetPin()
-        {
-            return this.Pin;
         }
 
         public override string ToString()

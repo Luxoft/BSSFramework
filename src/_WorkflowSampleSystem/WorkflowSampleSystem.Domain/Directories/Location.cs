@@ -16,7 +16,7 @@ namespace WorkflowSampleSystem.Domain
     [WorkflowSampleSystemViewDomainObject(WorkflowSampleSystemSecurityOperationCode.LocationView, WorkflowSampleSystemSecurityOperationCode.HRDepartmentEdit)]
     [WorkflowSampleSystemEditDomainObject(WorkflowSampleSystemSecurityOperationCode.LocationEdit)]
     [UniqueGroup]
-    public partial class Location :
+    public class Location :
         BaseDirectory,
         IDefaultHierarchicalPersistentDomainObjectBase<Location>,
         IMaster<Location>,
@@ -25,15 +25,7 @@ namespace WorkflowSampleSystem.Domain
     {
         private readonly ICollection<Location> children = new List<Location>();
 
-        private Country country;
-        private bool isFinancial;
-        private LocationType locationType;
         private Location parent;
-
-        private int closeDate;
-        private int code;
-
-        private byte[] binaryData;
 
         public Location()
         {
@@ -48,55 +40,6 @@ namespace WorkflowSampleSystem.Domain
             }
         }
 
-        public virtual byte[] BinaryData
-        {
-            get => this.binaryData;
-            set => this.binaryData = value;
-        }
-
-        [FetchPath("Children")]
-        public virtual bool IsLeaf
-        {
-            get { return !this.Children.Any(); }
-        }
-
-        [FetchPath("Children")]
-        public virtual bool ContainsOnlyInactiveChildren
-        {
-            get { return this.Children.All(x => !x.Active); }
-        }
-
-        public virtual Country Country
-        {
-            get { return this.country; }
-            set { this.country = value; }
-        }
-
-        [CustomSerialization(CustomSerializationMode.Ignore)]
-        public virtual Location Root
-        {
-            get { return this.Parent == null ? this : this.Parent.Root; }
-        }
-
-        public virtual LocationType LocationType
-        {
-            get { return this.locationType; }
-            set { this.locationType = value; }
-        }
-
-        public virtual bool IsFinancial
-        {
-            get { return this.isFinancial; }
-            set { this.isFinancial = value; }
-        }
-
-        [Required]
-        public virtual int CloseDate
-        {
-            get { return this.closeDate; }
-            set { this.closeDate = value; }
-        }
-
         [CustomSerialization(CustomSerializationMode.ReadOnly)]
         public virtual IEnumerable<Location> Children
         {
@@ -107,20 +50,6 @@ namespace WorkflowSampleSystem.Domain
         {
             get { return this.parent; }
             set { this.parent = value; }
-        }
-
-        [Required]
-        public virtual int Code
-        {
-            get
-            {
-                return this.code;
-            }
-
-            set
-            {
-                this.code = value;
-            }
         }
 
         [CustomSerialization(CustomSerializationMode.Normal)]

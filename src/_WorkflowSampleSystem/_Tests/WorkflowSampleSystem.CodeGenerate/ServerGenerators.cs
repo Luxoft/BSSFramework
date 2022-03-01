@@ -7,9 +7,11 @@ using Framework.CodeDom;
 using Framework.Core;
 using Framework.CustomReports.Generation.BLL;
 using Framework.DomainDriven;
+using Framework.DomainDriven.BLLCoreGenerator;
 using Framework.DomainDriven.BLLGenerator;
 using Framework.DomainDriven.DTOGenerator;
 using Framework.DomainDriven.DTOGenerator.Audit;
+using Framework.DomainDriven.DTOGenerator.Server;
 using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.NHibernate.DALGenerator;
 using Framework.DomainDriven.ProjectionGenerator;
@@ -36,22 +38,15 @@ namespace WorkflowSampleSystem.CodeGenerate
 
         public IEnumerable<FileInfo> GenerateMain()
         {
-            return this.GenerateMainProjections()
-                       .Concat(this.GenerateLegacyProjections())
-                       .Concat(this.GenerateBLLCore())
+            return this.GenerateBLLCore()
                        .Concat(this.GenerateBLL())
                        .Concat(this.GenerateServerDTO())
-                       .Concat(this.GenerateAuditDTO())
-                       .Concat(this.GenerateClientDTO())
                        .Concat(this.GenerateDAL())
-                       .Concat(this.GenerateCustomReportsBLL())
                        .Concat(this.GenerateMainWebApiNetCore())
                        .Concat(this.GenerateMainQueryWebApiNetCore())
-                       .Concat(this.GenerateIntegrationWebApiNetCore())
                        .Concat(this.GenerateAuthWebApiNetCoreTest())
-                       .Concat(this.GenerateAuditWebApiNetCore())
-                       .Concat(this.GenerateCustomReportWebApiNetCore())
-                       .Concat(this.GenerateConfigurationWebApiNetCoreTest());
+                       .Concat(this.GenerateConfigurationWebApiNetCoreTest())
+                       .Concat(this.GenerateWorkflowWebApiNetCoreTest());
         }
 
         [TestMethod]
@@ -91,55 +86,6 @@ namespace WorkflowSampleSystem.CodeGenerate
             return generator.DecorateProjectionsToRootControllerNetCore("Query").WithAutoRequestMethods().Generate<CodeNamespace>(Path.Combine(this.webApiNetCorePath, "MainQuery"));
         }
 
-
-        public IEnumerable<FileInfo> GenerateIntegrationWebApiNetCore()
-        {
-            var configurators = new Framework.DomainDriven.ServiceModelGenerator.IGeneratorConfigurationBase<Framework.DomainDriven.ServiceModelGenerator.IGenerationEnvironmentBase>[]
-                                {
-                                    this.environment.IntegrationService
-                                };
-
-            var attr = new CodeAttributeDeclaration(
-                typeof(RouteAttribute).ToTypeReference(),
-                new CodeAttributeArgument(new CodePrimitiveExpression("integrationApi/v{version:apiVersion}/[controller]")));
-
-            var generator = new WebApiNetCoreFileGenerator(this.environment.ToWebApiNetCore(configurators, nameSpace: "WorkflowSampleSystem.WebApiCore.Controllers.Integration"), additionalControllerAttributes: new[] { attr }.ToList());
-
-            return generator.DecorateProjectionsToRootControllerNetCore().WithAutoRequestMethods().Generate<CodeNamespace>(Path.Combine(this.webApiNetCorePath, "Integration"));
-        }
-
-        public IEnumerable<FileInfo> GenerateAuditWebApiNetCore()
-        {
-            var configurators = new Framework.DomainDriven.ServiceModelGenerator.IGeneratorConfigurationBase<Framework.DomainDriven.ServiceModelGenerator.IGenerationEnvironmentBase>[]
-                                {
-                                    this.environment.AuditService
-                                };
-
-            var attr = new CodeAttributeDeclaration(
-                typeof(RouteAttribute).ToTypeReference(),
-                new CodeAttributeArgument(new CodePrimitiveExpression("mainAuditApi/v{version:apiVersion}/[controller]")));
-
-            var generator = new WebApiNetCoreFileGenerator(this.environment.ToWebApiNetCore(configurators, nameSpace: "WorkflowSampleSystem.WebApiCore.Controllers.Audit"), additionalControllerAttributes: new[] { attr }.ToList());
-
-            return generator.DecorateProjectionsToRootControllerNetCore().WithAutoRequestMethods().Generate<CodeNamespace>(Path.Combine(this.webApiNetCorePath, "Audit"));
-        }
-
-        public IEnumerable<FileInfo> GenerateCustomReportWebApiNetCore()
-        {
-            var configurators = new Framework.DomainDriven.ServiceModelGenerator.IGeneratorConfigurationBase<Framework.DomainDriven.ServiceModelGenerator.IGenerationEnvironmentBase>[]
-                                {
-                                    this.environment.CustomReportService
-                                };
-
-            var attr = new CodeAttributeDeclaration(
-                typeof(RouteAttribute).ToTypeReference(),
-                new CodeAttributeArgument(new CodePrimitiveExpression("reportAuditApi/v{version:apiVersion}/[controller]")));
-
-            var generator = new WebApiNetCoreFileGenerator(this.environment.ToWebApiNetCore(configurators, nameSpace: "WorkflowSampleSystem.WebApiCore.Controllers.CustomReport"), additionalControllerAttributes: new[] { attr }.ToList());
-
-            return generator.DecorateProjectionsToRootControllerNetCore().WithAutoRequestMethods().Generate<CodeNamespace>(Path.Combine(this.webApiNetCorePath, "CustomReport"));
-        }
-
         public IEnumerable<FileInfo> GenerateAuthWebApiNetCoreTest()
         {
             var e = new Framework.Authorization.TestGenerate.ServerGenerationEnvironment(new DatabaseName("$", "$"));
@@ -176,31 +122,22 @@ namespace WorkflowSampleSystem.CodeGenerate
             return generator.DecorateProjectionsToRootControllerNetCore().WithAutoRequestMethods().Generate<CodeNamespace>(Path.Combine(this.webApiNetCorePath, "Configuration"));
         }
 
-        [TestMethod]
-        public void GenerateMainProjectionsTest()
+        public IEnumerable<FileInfo> GenerateWorkflowWebApiNetCoreTest()
         {
-            this.GenerateMainProjections().ToList();
-        }
+            var e = new Framework.Workflow.TestGenerate.ServerGenerationEnvironment(new DatabaseName("$", "$"));
 
+            var configurators = new Framework.DomainDriven.ServiceModelGenerator.IGeneratorConfigurationBase<Framework.DomainDriven.ServiceModelGenerator.IGenerationEnvironmentBase>[]
+                                {
+                                        e.MainService,
+                                };
 
-        private IEnumerable<FileInfo> GenerateMainProjections()
-        {
-            var generator = new ProjectionFileGenerator(this.environment.MainProjection);
+            var attr = new CodeAttributeDeclaration(
+                                                    typeof(RouteAttribute).ToTypeReference(),
+                                                    new CodeAttributeArgument(new CodePrimitiveExpression("workflowApi/v{version:apiVersion}/[controller]")));
 
-            yield return generator.GenerateSingle(TargetSystemPath + @"/WorkflowSampleSystem.Domain.Projections", "WorkflowSampleSystem.Generated", this.CheckOutService, false);
-        }
+            var generator = new WebApiNetCoreFileGenerator(e.ToWebApiNetCore(configurators), additionalControllerAttributes: new[] { attr }.ToList());
 
-        [TestMethod]
-        public void GenerateLegacyProjectionsTest()
-        {
-            this.GenerateLegacyProjections().ToList();
-        }
-
-        private IEnumerable<FileInfo> GenerateLegacyProjections()
-        {
-            var generator = new ProjectionFileGenerator(this.environment.LegacyProjection);
-
-            yield return generator.GenerateSingle(TargetSystemPath + @"/WorkflowSampleSystem.Domain.LegacyProjections", "WorkflowSampleSystem.Generated", this.CheckOutService, false);
+            return generator.DecorateProjectionsToRootControllerNetCore().WithAutoRequestMethods().Generate<CodeNamespace>(Path.Combine(this.webApiNetCorePath, "Workflow"));
         }
 
         [TestMethod]
@@ -215,7 +152,7 @@ namespace WorkflowSampleSystem.CodeGenerate
         /// <returns></returns>
         private IEnumerable<FileInfo> GenerateBLLCore()
         {
-            var generator = new WorkflowSampleSystemBLLCoreFileGenerator(this.environment.BLLCore);
+            var generator = new BLLCoreFileGenerator(this.environment.BLLCore);
 
             return generator.GenerateGroup(
                 TargetSystemPath + @"/WorkflowSampleSystem.BLL.Core/_Generated",
@@ -247,7 +184,7 @@ namespace WorkflowSampleSystem.CodeGenerate
 
         private IEnumerable<FileInfo> GenerateServerDTO()
         {
-            var generator = new ServerDTO.WorkflowSampleSystemServerFileGenerator<ServerDTO.ServerDTOGeneratorConfiguration>(this.environment.ServerDTO);
+            var generator = new ServerFileGenerator(this.environment.ServerDTO);
 
             return generator.GenerateGroup(
                 TargetSystemPath + @"/WorkflowSampleSystem.Generated.DTO",
@@ -262,34 +199,6 @@ namespace WorkflowSampleSystem.CodeGenerate
         }
 
         [TestMethod]
-        public void GenerateAuditDTOTest()
-        {
-            this.GenerateAuditDTO().ToList();
-        }
-
-        private IEnumerable<FileInfo> GenerateAuditDTO()
-        {
-            var dtoGenerator = new AuditDTOModelFileGenerator(this.environment.AuditDTO);
-
-            yield return dtoGenerator.GenerateSingle(TargetSystemPath + @"/WorkflowSampleSystem.Generated.DTO", "WorkflowSampleSystem.Audit.Generated");
-
-            var generator = new ServerDTO.WorkflowSampleSystemServerFileGenerator<ServerDTO.ServerDTOGeneratorConfiguration>(this.environment.ServerDTO);
-        }
-
-        [TestMethod]
-        public void GenerateClientDTOTest()
-        {
-            this.GenerateClientDTO().ToList();
-        }
-
-        private IEnumerable<FileInfo> GenerateClientDTO()
-        {
-            var generator = new ClientDTO.WorkflowSampleSystemClientFileGenerator<ClientDTO.ClientDTOGeneratorConfiguration>(this.environment.ClientDTO);
-
-            yield return generator.GenerateSingle(TargetSystemPath + @"/WorkflowSampleSystem.Generated.DTO.Silverlight", "WorkflowSampleSystem.Generated", this.CheckOutService);
-        }
-
-        [TestMethod]
         public void GenerateDALTest()
         {
             this.GenerateDAL().ToList();
@@ -300,19 +209,6 @@ namespace WorkflowSampleSystem.CodeGenerate
             var generator = new DALFileGenerator(this.environment.DAL);
 
             return generator.Generate(TargetSystemPath + @"/WorkflowSampleSystem.Generated.DAL.NHibernate/Mapping", this.CheckOutService);
-        }
-
-        [TestMethod]
-        public void GenerateCustomReportsBLLTest()
-        {
-            this.GenerateCustomReportsBLL().ToList();
-        }
-
-        private IEnumerable<FileInfo> GenerateCustomReportsBLL()
-        {
-            var customReportBLLGenerator = new CustomReportBLLGenerator(new ReportBLLGeneratorConfiguration(this.environment));
-            var path = System.IO.Path.Combine(TargetSystemPath, @"WorkflowSampleSystem.CustomReports.BLL/_Generated");
-            yield return customReportBLLGenerator.GenerateSingle(path, "WorkflowSampleSystem.CustomReports.BLL.Generated", this.CheckOutService);
         }
     }
 }

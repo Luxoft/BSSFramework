@@ -1,7 +1,5 @@
 ﻿using System;
 
-using WorkflowSampleSystem.Domain;
-
 namespace WorkflowSampleSystem.CodeGenerate
 {
     public class BLLGeneratorConfiguration : Framework.DomainDriven.BLLGenerator.GeneratorConfigurationBase<
@@ -11,15 +9,5 @@ namespace WorkflowSampleSystem.CodeGenerate
                 : base(environment)
         {
         }
-
-        /// <summary>
-        /// Do not generate BLL Constructors
-        /// </summary>
-        public override bool GenerateBllConstructor(Type domainType) =>
-                domainType switch
-                {
-                        { } type when type == typeof(Country) => false,
-                        _ => base.GenerateBllConstructor(domainType)
-                };
     }
 }

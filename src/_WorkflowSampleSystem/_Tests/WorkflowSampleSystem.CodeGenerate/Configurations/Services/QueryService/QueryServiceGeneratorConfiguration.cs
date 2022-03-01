@@ -1,5 +1,4 @@
-﻿using Framework.DomainDriven.Generation.Domain;
-using Framework.DomainDriven.ServiceModelGenerator;
+﻿using Framework.DomainDriven.ServiceModelGenerator;
 
 namespace WorkflowSampleSystem.CodeGenerate
 {

@@ -7,13 +7,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.App.BLLCore\Framework.App.BLLCore.csproj" />
+
     <ProjectReference Include="..\..\Framework.Cap\Framework.Cap.csproj" />
-    <ProjectReference Include="..\WorkflowSampleSystem.CustomReports\WorkflowSampleSystem.CustomReports.csproj" />
-    <ProjectReference Include="..\WorkflowSampleSystem.Domain.Projections\WorkflowSampleSystem.Domain.Projections.csproj" />
-    <ProjectReference Include="..\WorkflowSampleSystem.Domain.LegacyProjections\WorkflowSampleSystem.Domain.LegacyProjections.csproj" />
-    <ProjectReference Include="..\WorkflowSampleSystem.Domain.ManualProjections\WorkflowSampleSystem.Domain.ManualProjections.csproj" />
+
+    <ProjectReference Include="..\WorkflowSampleSystem.Domain\WorkflowSampleSystem.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR" Version="10.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="_Generated\" />
   </ItemGroup>
 </Project>

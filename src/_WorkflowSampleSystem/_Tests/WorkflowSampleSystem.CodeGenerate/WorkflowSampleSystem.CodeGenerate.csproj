@@ -12,9 +12,10 @@
     <Compile Include="..\..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Framework.App.Sdk\Framework.App.Sdk.csproj" />
-    <ProjectReference Include="..\..\WorkflowSampleSystem.CustomReports\WorkflowSampleSystem.CustomReports.csproj" />
-    <ProjectReference Include="..\..\WorkflowSampleSystem.Domain.ManualProjections\WorkflowSampleSystem.Domain.ManualProjections.csproj" />
-    <ProjectReference Include="..\..\WorkflowSampleSystem.Domain.Models\WorkflowSampleSystem.Domain.Models.csproj" />
+    <ProjectReference Include="..\..\..\Framework.App.Sdk\Framework.App.Sdk.csproj" />    <ProjectReference Include="..\..\..\_Workflow\Framework.Workflow.TestGenerate\Framework.Workflow.TestGenerate.csproj" />
+
+    
+    <ProjectReference Include="..\..\WorkflowSampleSystem.Domain\WorkflowSampleSystem.Domain.csproj" />
+    
   </ItemGroup>
 </Project>

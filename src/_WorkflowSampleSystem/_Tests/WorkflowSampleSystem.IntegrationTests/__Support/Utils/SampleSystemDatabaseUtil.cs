@@ -7,7 +7,6 @@ using Automation.Utils.Utils.DatabaseUtils;
 using Framework.DomainDriven.DBGenerator;
 
 using WorkflowSampleSystem.DbGenerate;
-using WorkflowSampleSystem.DbMigrator;
 using WorkflowSampleSystem.IntegrationTests.__Support;
 using WorkflowSampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using WorkflowSampleSystem.IntegrationTests.__Support.TestData;
@@ -45,6 +44,7 @@ namespace WorkflowSampleSystem.IntegrationTests.Support.Utils
             CoreDatabaseUtil.ExecuteSqlFromFolder(@"__Support/Scripts/Authorization", CoreDatabaseUtil.DatabaseName);
             CoreDatabaseUtil.ExecuteSqlFromFolder(@"__Support/Scripts/Configuration", CoreDatabaseUtil.DatabaseName);
             CoreDatabaseUtil.ExecuteSqlFromFolder(@"__Support/Scripts/WorkflowSampleSystem", CoreDatabaseUtil.DatabaseName);
+            CoreDatabaseUtil.ExecuteSqlFromFolder(@"__Support/Scripts/Workflow", CoreDatabaseUtil.DatabaseName);
 
             new BssFluentMigrator(this.ConnectionSettings.ConnectionString, typeof(InitNumberInDomainObjectEventMigration).Assembly).Migrate();
         }

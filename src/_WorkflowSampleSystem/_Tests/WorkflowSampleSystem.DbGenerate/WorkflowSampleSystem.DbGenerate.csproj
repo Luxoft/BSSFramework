@@ -17,8 +17,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\WorkflowSampleSystem.WebApiCore\WorkflowSampleSystem.WebApiCore.csproj" />
-    <ProjectReference Include="..\..\WorkflowSampleSystem.Domain.Projections\WorkflowSampleSystem.Domain.Projections.csproj" />
-    <ProjectReference Include="..\..\WorkflowSampleSystem.Domain.LegacyProjections\WorkflowSampleSystem.Domain.LegacyProjections.csproj" />
+    <ProjectReference Include="..\..\WorkflowSampleSystem.Domain\WorkflowSampleSystem.Domain.csproj" />
     <ProjectReference Include="..\..\WorkflowSampleSystem.Generated.DAL.NHibernate\WorkflowSampleSystem.Generated.DAL.NHibernate.csproj" />
     <ProjectReference Include="..\WorkflowSampleSystem.CodeGenerate\WorkflowSampleSystem.CodeGenerate.csproj" />
   </ItemGroup>

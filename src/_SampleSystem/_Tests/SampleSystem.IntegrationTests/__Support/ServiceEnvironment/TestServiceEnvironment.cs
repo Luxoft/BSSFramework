@@ -96,7 +96,7 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
             return serviceProvider.GetRequiredService<TestServiceEnvironment>();
         }
 
-        protected override SampleSystemBLLContextContainer CreateBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null)
+        protected override SampleSystemBllContextContainer CreateBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null)
         {
             return new TestSampleSystemBLLContextContainerStandard(
                 this,
@@ -113,7 +113,7 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                 this.rewriteReceiversService);
         }
 
-        private class TestSampleSystemBLLContextContainerStandard : SampleSystemBLLContextContainer
+        private class TestSampleSystemBLLContextContainerStandard : SampleSystemBllContextContainer
         {
 
             public TestSampleSystemBLLContextContainerStandard(SampleSystemServiceEnvironment serviceEnvironment, IServiceProvider scopedServiceProvider, ValidatorCompileCache defaultAuthorizationValidatorCompileCache, ValidatorCompileCache validatorCompileCache, Func<ISampleSystemBLLContext, ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>> securityExpressionBuilderFactoryFunc, IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService, ICryptService<CryptSystem> cryptService, ITypeResolver<string> currentTargetSystemTypeResolver, IDBSession session, string currentPrincipalName, SmtpSettings smtpSettings, IRewriteReceiversService rewriteReceiversService)

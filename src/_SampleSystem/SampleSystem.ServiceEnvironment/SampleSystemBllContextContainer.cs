@@ -35,7 +35,7 @@ using Principal = Framework.Authorization.Domain.Principal;
 
 namespace SampleSystem.ServiceEnvironment
 {
-    public class SampleSystemBLLContextContainer : SampleSystemServiceEnvironment.ServiceEnvironmentBLLContextContainer
+    public class SampleSystemBllContextContainer : SampleSystemServiceEnvironment.ServiceEnvironmentBLLContextContainer
     {
         private readonly BLLOperationEventListenerContainer<DomainObjectBase> mainOperationListeners = new BLLOperationEventListenerContainer<DomainObjectBase>();
 
@@ -60,7 +60,7 @@ namespace SampleSystem.ServiceEnvironment
 
         private readonly IRewriteReceiversService rewriteReceiversService;
 
-        public SampleSystemBLLContextContainer(
+        public SampleSystemBllContextContainer(
             SampleSystemServiceEnvironment serviceEnvironment,
             IServiceProvider scopedServiceProvider,
             ValidatorCompileCache defaultAuthorizationValidatorCompileCache,

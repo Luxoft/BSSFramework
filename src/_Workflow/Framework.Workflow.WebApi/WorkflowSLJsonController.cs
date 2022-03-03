@@ -26,6 +26,7 @@ namespace Framework.Workflow.WebApi
         protected WorkflowSLJsonController(IWorkflowServiceEnvironment environment, IExceptionProcessor exceptionProcessor)
             : base(environment, exceptionProcessor)
         {
+
         }
 
         protected override EvaluatedData<IWorkflowBLLContext, IWorkflowDTOMappingService> GetEvaluatedData(IDBSession session, IWorkflowBLLContext context)

@@ -1,92 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
-using FluentAssertions;
-
-using Framework.Core;
-using Framework.DomainDriven.DTOGenerator.TypeScript.Facade;
+using Framework.DomainDriven.Generation;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using FileInfo = Framework.DomainDriven.Generation.FileInfo;
 
 namespace WorkflowSampleSystem.CheckGenTests
 {
     [TestClass]
     public class GenerationTests
     {
+
         [TestMethod]
-        public void AuthorizationGeneration_CheckUpdatedFiles_ShouldBeNothing()
+        public void WorkflowGeneration_CheckUpdatedFiles_ShouldBeNothing()
         {
             // Arrange
-            var target = new Framework.Authorization.TestGenerate.ServerGenerators();
+            var target = new Framework.Workflow.TestGenerate.ServerGenerators();
 
             // Act
             var generatedFiles = target.GenerateMain().ToList();
 
             // Assert
             ShouldBeNoNewAndModifiedFiles(generatedFiles);
-        }
-
-        [TestMethod]
-        public void ConfigurationGeneration_CheckUpdatedFiles_ShouldBeNothing()
-        {
-            // Arrange
-            var target = new Framework.Configuration.TestGenerate.ServerGenerators();
-
-            // Act
-            var generatedFiles = target.GenerateMain().ToList();
-
-            // Assert
-            ShouldBeNoNewAndModifiedFiles(generatedFiles);
-        }
-
-        [TestMethod]
-        public void WorkflowSampleSystemServerGeneration_CheckUpdatedFiles_ShouldBeNothing()
-        {
-            // Arrange
-            var target = new WorkflowSampleSystem.CodeGenerate.ServerGenerators();
-
-            // Act
-            var generatedFiles = target.GenerateMain().ToList();
-
-            // Assert
-            ShouldBeNoNewAndModifiedFiles(generatedFiles);
-        }
-
-        [TestMethod]
-        public void WorkflowSampleSystemTypeScriptGeneration_CheckUpdatedFiles_ShouldBeNothing()
-        {
-            // Arrange
-            var target = new WorkflowSampleSystem.TypeScriptGenerate.Generators();
-
-            // Act
-            var generatedFiles = target.GenerateMain().ToList();
-
-            // Assert
-            //ShouldBeNoNewAndModifiedFiles(generatedFiles);
-            var changedFiles = generatedFiles.Where(x => x.FileState == FileInfo.State.Modified).ToList();
-            var newFiles = generatedFiles.Where(x => x.FileState == FileInfo.State.New).ToList();
-            if (changedFiles.Any())
-            {
-                var f = changedFiles.First();
-
-                for (var i = 0; i < f.PrevContent.Length; i++)
-                {
-                    var pc = f.PrevContent[i];
-                    var cc = f.Content[i];
-                    if (pc != cc)
-                    {
-                        Assert.Fail("i:" + i  + Environment.NewLine + (int)pc + Environment.NewLine + (int)cc);
-                    }
-                }
-
-                // var p = f.PrevContent.Select(c => ((int)c).ToString()).Take(200).Join(", ");
-                // var c = f.Content.Select(c => ((int)c).ToString()).Take(200).Join(", ");
-                // Assert.Fail(p + Environment.NewLine + c);
-            }
         }
 
         private static void ShouldBeNoNewAndModifiedFiles(IReadOnlyCollection<FileInfo> generatedFiles)

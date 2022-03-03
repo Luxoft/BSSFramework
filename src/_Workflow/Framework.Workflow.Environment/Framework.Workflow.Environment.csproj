@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.Workflow.Environment</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework.Graphviz\Framework.Graphviz.csproj" />
+
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModel\Framework.DomainDriven.ServiceModel.csproj" />
+
+    <ProjectReference Include="..\Framework.Workflow.BLL.Core\Framework.Workflow.BLL.Core.csproj" />
+  </ItemGroup>
+
+</Project>

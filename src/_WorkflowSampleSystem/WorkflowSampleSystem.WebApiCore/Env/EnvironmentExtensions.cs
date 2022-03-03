@@ -2,7 +2,6 @@
 using Framework.Authorization.Generated.DAL.NHibernate;
 using Framework.Cap;
 using Framework.Configuration.BLL;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Generated.DAL.NHibernate;
 using Framework.Core.Services;
 using Framework.DependencyInjection;
@@ -22,7 +21,6 @@ using nuSpec.NHibernate;
 using WorkflowSampleSystem.BLL;
 using WorkflowSampleSystem.Generated.DAL.NHibernate;
 using WorkflowSampleSystem.ServiceEnvironment;
-using WorkflowSampleSystem.WebApiCore.CustomReports;
 using WorkflowSampleSystem.WebApiCore.Env.Database;
 
 using UserAuthenticationService = WorkflowSampleSystem.WebApiCore.Env.UserAuthenticationService;
@@ -41,9 +39,6 @@ namespace WorkflowSampleSystem.WebApiCore
             services.AddDatabaseSettings(connectionString);
             services.AddCapBss(connectionString);
 
-            // Notifications
-            services
-                .AddSingleton<ISubscriptionMetadataFinder, WorkflowSampleSystemSubscriptionsMetadataFinder>();
             services.RegisterMessageSenderDependencies<WorkflowSampleSystemServiceEnvironment, IWorkflowSampleSystemBLLContext>(configuration);
             services.RegisterRewriteReceiversDependencies(configuration);
 
@@ -72,8 +67,6 @@ namespace WorkflowSampleSystem.WebApiCore
         {
             services.AddSingleton<IExceptionProcessor, ApiControllerExceptionService<IServiceEnvironment<IWorkflowSampleSystemBLLContext>, IWorkflowSampleSystemBLLContext>>();
 
-            services.AddSingleton<WorkflowSampleSystemCustomReportsServiceEnvironment>();
-
             // Environment
             services
                 .AddSingleton<IServiceEnvironment<IWorkflowSampleSystemBLLContext>>(x => x.GetRequiredService<WorkflowSampleSystemServiceEnvironment>())
@@ -82,6 +75,5 @@ namespace WorkflowSampleSystem.WebApiCore
 
             return services;
         }
-
     }
 }

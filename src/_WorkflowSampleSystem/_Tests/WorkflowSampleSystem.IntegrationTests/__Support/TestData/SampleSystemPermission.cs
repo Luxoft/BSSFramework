@@ -22,18 +22,14 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData
         public WorkflowSampleSystemPermission(
             BusinessRole role,
             BusinessUnitIdentityDTO? businessUnit,
-            ManagementUnitIdentityDTO? managementUnit,
             LocationIdentityDTO? location)
         {
             this.Role = role;
             this.BusinessUnit = businessUnit;
-            this.ManagementUnit = managementUnit;
             this.Location = location;
         }
 
         public BusinessRole Role { get; set; }
-
-        public ManagementUnitIdentityDTO? ManagementUnit { get; set; }
 
         public BusinessUnitIdentityDTO? BusinessUnit { get; set; }
 
@@ -41,11 +37,6 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData
 
         public IEnumerable<Tuple<string, Guid>> GetEntities()
         {
-            if (this.ManagementUnit != null)
-            {
-                yield return Tuple.Create(DefaultConstants.ENTITY_TYPE_MANAGEMENT_UNIT_NAME, ((ManagementUnitIdentityDTO)this.ManagementUnit).Id);
-            }
-
             if (this.BusinessUnit != null)
             {
                 yield return Tuple.Create(DefaultConstants.ENTITY_TYPE_FINANCIAL_BUSINESS_UNIT_NAME, ((BusinessUnitIdentityDTO)this.BusinessUnit).Id);

@@ -17,7 +17,6 @@ using WorkflowSampleSystem.Domain.Inline;
 using WorkflowSampleSystem.Generated.DTO;
 using WorkflowSampleSystem.IntegrationTests.__Support.Utils.Framework;
 using WorkflowSampleSystem.WebApiCore.Controllers.Main;
-using WorkflowSampleSystem.WebApiCore.Controllers.Report;
 
 namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData.Helpers
 {
@@ -47,57 +46,17 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData.Helpers
                 });
         }
 
-        public CountryIdentityDTO SaveCountry(
-            Guid? id = null,
-            string name = null,
-            string nativeName = null,
-            string code = null,
-            string culture = null,
-            bool active = true)
-        {
-            name = name ?? StringUtil.UniqueString("Country");
-            nativeName = nativeName ?? StringUtil.UniqueString("Country");
-            code = code ?? StringUtil.UniqueString("Code");
-            culture = culture ?? StringUtil.UniqueString("Culture");
-
-            return this.EvaluateWrite(
-                context =>
-                {
-                    var countryBLL = context.Logics.Country;
-                    var country = countryBLL.GetById(this.GetGuid(id));
-
-                    if (country == null)
-                    {
-                        country = new Country
-                        {
-                            Active = active,
-                            Code = code,
-                            Name = name,
-                            NameNative = nativeName,
-                            Culture = culture,
-                        };
-
-                        countryBLL.Insert(country, this.GetGuid(id));
-                    }
-
-                    return country.ToIdentityDTO();
-                });
-        }
-
         public LocationIdentityDTO SaveLocation(
             Guid? id = null,
             string name = null,
             LocationIdentityDTO? parent = null,
-            CountryIdentityDTO? country = null,
             bool isFinancial = true,
-            LocationType locationType = LocationType.Country,
             int code = 1,
             bool active = true,
             int closeDate = 20)
         {
             name = name ?? StringUtil.UniqueString("Location");
             var parentId = parent != null ? ((LocationIdentityDTO)parent).Id : DefaultConstants.LOCATION_PARENT_ID;
-            var countryId = country != null ? ((CountryIdentityDTO)country).Id : DefaultConstants.COUNTRY_RUSSIA_ID;
 
             return this.EvaluateWrite(
                 context =>
@@ -110,12 +69,7 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData.Helpers
                         {
                             Active = active,
                             Name = name,
-                            IsFinancial = isFinancial,
-                            LocationType = locationType,
                             Parent = context.Logics.Location.GetById(parentId),
-                            Country = context.Logics.Country.GetById(countryId),
-                            CloseDate = closeDate,
-                            Code = code
                         };
 
                         context.Logics.Location.Insert(location, this.GetGuid(id));
@@ -125,157 +79,10 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData.Helpers
                 });
         }
 
-        public BusinessUnitTypeIdentityDTO SaveBusinessUnitType(
-            Guid? id = null,
-            string name = null,
-            bool startConfirm = false,
-            bool transferConfirm = false,
-            bool billProjectAreNotAllowed = false,
-            bool canBeIsCommission = false,
-            bool canBeLinkedToDepartment = true,
-            bool canBeNewBusiness = true,
-            bool canBeResourcePool = true,
-            bool isAdministrative = true,
-            bool needVertical = true,
-            PossibleStartDate possibleStartDate = 0,
-            PossibleStartDate possibleTransferDate = 0,
-            bool projectStartAllowed = true,
-            bool startBOConfirm = true,
-            bool transferBOConfirm = true,
-            List<BusinessUnitTypeIdentityDTO> possibleParents = null,
-            List<FinancialProjectType> possibleFinancialProjectTypes = null,
-            List<BusinessUnitTypeIdentityDTO> transferTo = null,
-            bool currentTypeInPossibleParents = false,
-            bool currentTypeInTransferTo = false,
-            bool active = true,
-            bool canBeLinkedToClient = false)
-        {
-            name = name ?? StringUtil.UniqueString("Type");
-
-            BusinessUnitType type = null;
-
-            this.EvaluateWrite(
-                context =>
-                {
-                    type = (context.Logics.BusinessUnitType.GetById(this.GetGuid(id)) ??
-                            context.Logics.BusinessUnitType.GetByName(name)) ?? new BusinessUnitType();
-
-                    type.Active = active;
-                    type.Name = name;
-                    type.AdditionalStartConfirm = startConfirm;
-                    type.AdditionalTransferConfirm = transferConfirm;
-                    type.BillingProjectAreNotAllowed = billProjectAreNotAllowed;
-                    type.CanBeIsSpecialCommission = canBeIsCommission;
-                    type.CanBeLinkedToDepartment = canBeLinkedToDepartment;
-                    type.CanBeNewBusiness = canBeNewBusiness;
-                    type.CanBeResourcePool = canBeResourcePool;
-                    type.IsAdministrative = isAdministrative;
-                    type.NeedVertical = needVertical;
-                    type.PossibleStartDate = possibleStartDate;
-                    type.PossibleTransferDate = possibleTransferDate;
-                    type.ProjectStartAllowed = projectStartAllowed;
-                    type.StartBOConfirm = startBOConfirm;
-                    type.TransferBOConfirm = transferBOConfirm;
-                    type.CanBeLinkedToClient = canBeLinkedToClient;
-
-                    if (type.IsNew)
-                    {
-                        context.Logics.BusinessUnitType.Insert(type, this.GetGuid(id));
-                    }
-                    else
-                    {
-                        context.Logics.BusinessUnitType.Save(type);
-                    }
-                });
-
-            if (possibleParents == null && transferTo == null && currentTypeInPossibleParents == false &&
-                currentTypeInTransferTo == false)
-            {
-                return type.ToIdentityDTO();
-            }
-
-            var businessUnitTypeController = this.GetController<BusinessUnitTypeController>();
-            var buTypeStrict = new BusinessUnitTypeStrictDTO(businessUnitTypeController.GetFullBusinessUnitType(type.ToIdentityDTO()));
-
-            possibleParents = possibleParents ?? new List<BusinessUnitTypeIdentityDTO>();
-            possibleParents.Add(type.ToIdentityDTO());
-
-            var possibleParentsList =
-                new List<BusinessUnitTypeLinkWithPossibleParentStrictDTO>
-                {
-                    new BusinessUnitTypeLinkWithPossibleParentStrictDTO
-                    {
-                        BusinessUnitType = type.ToIdentityDTO(), PossibleParent = type.ToIdentityDTO()
-                    }
-                };
-
-            possibleParentsList.AddRange(
-                possibleParents.Select(
-                    possibleParent => new BusinessUnitTypeLinkWithPossibleParentStrictDTO
-                    {
-                        BusinessUnitType = type.ToIdentityDTO(),
-                        PossibleParent = possibleParent
-                    }));
-
-            if (!currentTypeInPossibleParents)
-            {
-                possibleParentsList.RemoveBy(p => p.PossibleParent == type.ToIdentityDTO());
-            }
-
-            buTypeStrict.PossibleParents = possibleParentsList;
-
-            if (transferTo != null)
-            {
-                var transferToList =
-                    new List<BusinessUnitTypeLinkWithTransferToStrictDTO>
-                    {
-                        new BusinessUnitTypeLinkWithTransferToStrictDTO
-                        {
-                            BusinessUnitType = type.ToIdentityDTO(), TransferTo = type.ToIdentityDTO()
-                        }
-                    };
-
-                transferToList.AddRange(
-                    transferTo.Select(
-                        transfer => new BusinessUnitTypeLinkWithTransferToStrictDTO
-                        {
-                            BusinessUnitType = type.ToIdentityDTO(),
-                            TransferTo = transfer
-                        }));
-
-                if (!currentTypeInTransferTo)
-                {
-                    transferToList.RemoveBy(p => p.TransferTo == type.ToIdentityDTO());
-                }
-
-                buTypeStrict.TransferTo = transferToList;
-            }
-
-            if (possibleFinancialProjectTypes != null)
-            {
-                buTypeStrict.PossibleFinancialProjectTypes =
-                    possibleFinancialProjectTypes.Select(
-                        t =>
-                            new BusinessUnitTypeLinkWithPossibleFinancialProjectTypeStrictDTO
-                            {
-                                FinancialProjectType = t,
-                                BusinessUnitType = buTypeStrict.Identity
-                            })
-                        .ToList();
-            }
-
-
-            businessUnitTypeController.SaveBusinessUnitType(buTypeStrict);
-
-            return type.ToIdentityDTO();
-        }
-
-
         public BusinessUnitIdentityDTO SaveBusinessUnit(
             Guid? id = null,
             string name = null,
             BusinessUnitIdentityDTO? parent = null,
-            BusinessUnitTypeIdentityDTO? type = null,
             bool parentIsNeeded = true,
             Period? period = null,
             bool isPool = true,
@@ -293,10 +100,6 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData.Helpers
                 ? ((BusinessUnitIdentityDTO)parent).Id
                 : DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_ID;
 
-            var typeId = type != null
-                ? ((BusinessUnitTypeIdentityDTO)type).Id
-                : DefaultConstants.BUSINESS_UNIT_TYPE_PROGRAM_ID;
-
             BusinessUnit businessUnit;
 
             return this.EvaluateWrite(
@@ -312,17 +115,6 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData.Helpers
                             {
                                 Active = active,
                                 Name = name,
-                                BusinessUnitForRent = null,
-                                IsPool = isPool,
-                                IsNewBusiness = isNewBusiness,
-                                IsSpecialCommission = isSpecialCommision,
-                                Commission = commision,
-                                NewBusinessStatusLeft = newBusinessStatusLeft,
-                                BusinessUnitStatus = BusinessUnitStatus.Current,
-                                Options = BusinessUnitOptions.None,
-                                Rank = rank,
-                                IsProduction = isProduction,
-                                BusinessUnitType = context.Logics.BusinessUnitType.GetById(typeId),
                                 Parent = context.Logics.BusinessUnit.GetById(parentId),
                                 Period = period.Value
                             };
@@ -334,53 +126,12 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData.Helpers
                 });
         }
 
-        public ManagementUnitIdentityDTO SaveManagementUnit(
-            Guid? id = null,
-            string name = null,
-            ManagementUnitIdentityDTO? parent = null,
-            bool parentIsNeeded = true,
-            Period? period = null,
-            bool isProduction = true,
-            bool active = true)
-        {
-            ManagementUnit unit;
-            name = name ?? StringUtil.UniqueString("ManagementUnit");
-
-            var parentId = parent != null
-                ? ((ManagementUnitIdentityDTO)parent).Id
-                : DefaultConstants.MANAGEMENT_UNIT_PARENT_COMPANY_ID;
-
-            return this.EvaluateWrite(
-                context =>
-                {
-                    unit = context.Logics.ManagementUnit.GetById(this.GetGuid(id));
-                    period = period ?? new Period(context.DateTimeService.CurrentFinancialYear.StartDate);
-                    if (unit == null)
-                    {
-                        unit = new ManagementUnit
-                        {
-                            Active = active,
-                            Name = name,
-                            Parent = parentIsNeeded ? context.Logics.ManagementUnit.GetById(parentId) : null,
-                            Period = (Period)period,
-                            IsProduction = isProduction
-                        };
-
-                        context.Logics.ManagementUnit.Insert(unit, this.GetGuid(id));
-                    }
-
-                    return unit.ToIdentityDTO();
-                });
-        }
-
-
         public HRDepartmentIdentityDTO SaveHRDepartment(
             Guid? id = null,
             string name = null,
             string nameNative = null,
             HRDepartmentIdentityDTO? parent = null,
             EmployeeIdentityDTO? employee = null,
-            CompanyLegalEntityIdentityDTO? companyLegalEntity = null,
             string code = null,
             string codeNative = null,
             LocationIdentityDTO? location = null,
@@ -402,10 +153,6 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData.Helpers
                 ? ((HRDepartmentIdentityDTO)parent).Id
                 : DefaultConstants.HRDEPARTMENT_PARENT_ID;
 
-            var companyLegalEntityId = companyLegalEntity != null
-                ? ((CompanyLegalEntityIdentityDTO)companyLegalEntity).Id
-                : DefaultConstants.COMPANY_LEGAL_ENTITY_ID;
-
             return this.EvaluateWrite(
                 context =>
                 {
@@ -425,7 +172,6 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData.Helpers
                             Location = context.Logics.Location.GetById(locationId),
                             Parent = context.Logics.HRDepartment.GetById(parentId),
                             Head = head,
-                            CompanyLegalEntity = context.Logics.CompanyLegalEntity.GetById(companyLegalEntityId),
                             Code = code,
                             CodeNative = codeNative,
                             IsLegal = isLegal,
@@ -439,50 +185,6 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData.Helpers
                     return department.ToIdentityDTO();
                 });
         }
-
-        public CompanyLegalEntityIdentityDTO SaveCompanyLegalEntity(
-            Guid? id = null,
-            string name = null,
-            CompanyLegalEntityIdentityDTO? parent = null,
-            string nameEnglish = null,
-            string code = null,
-            CompanyLegalEntityType? type = null,
-            bool active = true)
-        {
-            name = name ?? StringUtil.UniqueString("Legal");
-            nameEnglish = nameEnglish ?? name;
-            code = code ?? name;
-            type = type ?? CompanyLegalEntityType.LegalEntity;
-
-            return this.EvaluateWrite(
-                context =>
-                {
-                    var legal = context.Logics.CompanyLegalEntity.GetById(this.GetGuid(id));
-
-                    if (legal == null)
-                    {
-                        CompanyLegalEntity parentDomainObject = (parent == null)
-                            ? null
-                            : context.Logics.CompanyLegalEntity.GetById(parent.Value.Id);
-
-                        legal = new CompanyLegalEntity
-                        {
-                            Active = active,
-                            Name = name,
-                            NameEnglish = nameEnglish,
-                            Code = code,
-                            Type = (CompanyLegalEntityType)type,
-                            Parent = parentDomainObject
-                        };
-
-                        context.Logics.CompanyLegalEntity.Insert(legal, this.GetGuid(id));
-                    }
-
-                    return legal.ToIdentityDTO();
-                });
-
-        }
-
         public Employee SaveEmployee(string name, string login = null)
         {
             var result = this.EvaluateWrite(context =>
@@ -625,7 +327,7 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData.Helpers
     {
         public static IServiceCollection RegisterControllers(this IServiceCollection services)
         {
-            foreach (var controllerType in typeof(WorkflowSampleSystemGenericReportController).Assembly.GetTypes().Where(t => typeof(ControllerBase).IsAssignableFrom(t)))
+            foreach (var controllerType in typeof(EmployeeController).Assembly.GetTypes().Where(t => typeof(ControllerBase).IsAssignableFrom(t)))
             {
                 services.AddScoped(controllerType);
             }

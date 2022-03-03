@@ -49,10 +49,7 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.ServiceEnvironment
             EnvironmentSettings settings,
             bool? isDebugMode = null)
 
-            : base(serviceProvider, sessionFactory, settings.NotificationContext, IntegrationTestAuthenticationService.Instance,
-                   new OptionsWrapper<SmtpSettings>(new SmtpSettings() { OutputFolder = @"C:\WorkflowSampleSystem\Smtp" }),
-                  LazyInterfaceImplementHelper.CreateNotImplemented<IRewriteReceiversService>(),
-                   isDebugMode)
+            : base(serviceProvider, sessionFactory, settings.NotificationContext, IntegrationTestAuthenticationService.Instance, isDebugMode)
         {
             this.Settings = settings;
         }
@@ -73,7 +70,6 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.ServiceEnvironment
         /// Environment Settings
         /// </summary>
         public EnvironmentSettings Settings { get; private set; }
-        
         private static TestServiceEnvironment CreateIntegrationEnvironment()
         {
             var serviceProvider = new ServiceCollection()

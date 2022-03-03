@@ -25,8 +25,6 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 
 using WorkflowSampleSystem.BLL;
-using WorkflowSampleSystem.BLL.Core.Jobs;
-using WorkflowSampleSystem.BLL.Jobs;
 using WorkflowSampleSystem.Domain;
 using WorkflowSampleSystem.ServiceEnvironment;
 using WorkflowSampleSystem.WebApiCore.NewtonsoftJson;
@@ -102,39 +100,15 @@ namespace WorkflowSampleSystem.WebApiCore
 
                 .UseHttpsRedirection()
                 .UseRouting()
-                //// .UseAuthentication()
-                //// .UseAuthorization()
                 .UseEndpoints(z => z.MapControllers());
 
             if (env.IsProduction())
             {
                 app.UseMetricsAllMiddleware();
-                this.UseHangfireBss(app);
             }
 
             app.UseCapDashboard();
 
-        }
-
-        private void UseHangfireBss(IApplicationBuilder app)
-        {
-            var environment = LazyHelper.Create(
-                            () =>
-                            {
-                                var serviceProvider = new ServiceCollection()
-                                                            .AddEnvironment(this.Configuration)
-                                                            .BuildServiceProvider();
-
-                                return serviceProvider.GetRequiredService<WorkflowSampleSystemServiceEnvironment>();
-                            });
-
-            app.UseHangfireBss(
-                this.Configuration,
-                z =>
-                {
-                    JobList.RunAll(z);
-                },
-                authorizationFilter: new WorkflowSampleSystemHangfireAuthorization(environment));
         }
     }
 
@@ -180,8 +154,6 @@ namespace WorkflowSampleSystem.WebApiCore
         public static IServiceCollection RegisterDependencyInjections(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddEnvironment(configuration);
-
-            services.AddScoped<ISampleJob, SampleJob>();
 
             return services;
         }

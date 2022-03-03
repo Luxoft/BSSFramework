@@ -3,7 +3,6 @@
   <PropertyGroup>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <IsPackable>false</IsPackable>
-    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,9 +21,8 @@
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.WebApi\Framework.Configuration.WebApi.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModel.IAD.DTO\Framework.DomainDriven.ServiceModel.IAD.DTO.csproj" />
 
-    <ProjectReference Include="..\..\_Report\Framework.CustomReports.WebApi\Framework.CustomReports.WebApi.csproj" />
+    <ProjectReference Include="..\..\_Workflow\Framework.Workflow.WebApi\Framework.Workflow.WebApi.csproj" />
 
-    <ProjectReference Include="..\WorkflowSampleSystem.CustomReports.BLL\WorkflowSampleSystem.CustomReports.BLL.csproj" />
     <ProjectReference Include="..\WorkflowSampleSystem.ServiceEnvironment\WorkflowSampleSystem.ServiceEnvironment.csproj" />
   </ItemGroup>
 </Project>

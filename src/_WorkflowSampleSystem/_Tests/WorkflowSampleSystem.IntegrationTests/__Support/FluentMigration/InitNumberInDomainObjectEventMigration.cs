@@ -1,10 +1,7 @@
-﻿using Microsoft.Data.SqlClient;
-
-using FluentMigrator;
+﻿using FluentMigrator;
 using FluentMigrator.SqlServer;
 
 using Framework.Configuration.Domain;
-
 
 namespace WorkflowSampleSystem.IntegrationTests.__Support
 {

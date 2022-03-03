@@ -21,11 +21,6 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData.Helpers
             Fio nameRussian = null,
             BusinessUnitIdentityDTO? coreBusinessUnit = null,
             HRDepartmentIdentityDTO? hrDepartment = null,
-            ManagementUnitIdentityDTO? managementUnit = null,
-            EmployeePositionIdentityDTO? position = null,
-            EmployeeRegistrationTypeIdentityDTO? registrationType = null,
-            EmployeeRoleIdentityDTO? role = null,
-            EmployeeRoleDegreeIdentityDTO? roleDegree = null,
             string email = null,
             int? pin = null,
             DateTime? birthDate = null,
@@ -74,22 +69,6 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData.Helpers
                 ? DefaultConstants.HRDEPARTMENT_PARENT_ID
                 : this.SaveHRDepartment(location: location).Id;
 
-            var positionId = position != null
-                ? ((EmployeePositionIdentityDTO)position).Id
-                : DefaultConstants.EMPLOYEE_POSITION_TESTER_ID;
-
-            var registrationId = registrationType != null
-                ? ((EmployeeRegistrationTypeIdentityDTO)registrationType).Id
-                : DefaultConstants.EMPLOYEE_REGISTRATION_TYPE_STAFF_ID;
-
-            var roleId = role != null
-                ? ((EmployeeRoleIdentityDTO)role).Id
-                : DefaultConstants.EMPLOYEE_ROLE_TESTER_ID;
-
-            var roleDegreeId = roleDegree != null
-                ? ((EmployeeRoleDegreeIdentityDTO)roleDegree).Id
-                : DefaultConstants.EMPLOYEE_ROLE_DEGREE_REGULAR_ID;
-
             birthDate = birthDate ?? new DateTime(1990, 2, 15);
 
             var rnd = new Random();
@@ -118,11 +97,6 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData.Helpers
                         NameNative = nameNative,
                         NameRussian = nameRussian,
                         Pin = pin,
-                        ManagementUnit = null, //context.Logics.ManagementUnit.GetById(managementUnitId, isObjectRequired),
-                        Position = context.Logics.EmployeePosition.GetById(positionId),
-                        RegistrationType = context.Logics.EmployeeRegistrationType.GetById(registrationId),
-                        Role = context.Logics.EmployeeRole.GetById(roleId),
-                        RoleDegree = context.Logics.EmployeeRoleDegree.GetById(roleDegreeId),
                         CellPhone = cellPhone,
                         Interphone = "3365",
                         Landlinephone = "3365",
@@ -145,122 +119,6 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData.Helpers
                     return employee.ToIdentityDTO();
                 });
         }
-
-        public EmployeePositionIdentityDTO SaveEmployeePosition(
-            Guid? id = null,
-            string name = null,
-            string englishName = null,
-            LocationIdentityDTO? location = null,
-            long externalId = 1,
-            bool active = true)
-        {
-            EmployeePosition position;
-            name = name ?? StringUtil.UniqueString("Position");
-            englishName = englishName ?? name;
-
-            var locationId = location != null ? ((LocationIdentityDTO)location).Id : DefaultConstants.LOCATION_PARENT_ID;
-
-            return this.EvaluateWrite(
-                context =>
-                {
-                    position = context.Logics.EmployeePosition.GetById(this.GetGuid(id));
-
-                    if (position == null)
-                    {
-                        position = new EmployeePosition
-                        {
-                            Active = active,
-                            Name = name,
-                            EnglishName = englishName,
-                            ExternalId = externalId,
-                            Location = context.Logics.Location.GetById(locationId)
-                        };
-
-                        context.Logics.EmployeePosition.Insert(position, this.GetGuid(id));
-                    }
-
-                    return position.ToIdentityDTO();
-                });
-        }
-
-        public EmployeeRegistrationTypeIdentityDTO SaveEmployeeRegistrationType(
-            Guid? id = null,
-            string name = null,
-            long externalId = 1,
-            bool active = true)
-        {
-            EmployeeRegistrationType type;
-            name = name ?? StringUtil.UniqueString("Type");
-
-            return this.EvaluateWrite(
-                context =>
-                {
-                    type = context.Logics.EmployeeRegistrationType.GetById(this.GetGuid(id));
-
-                    if (type == null)
-                    {
-                        type = new EmployeeRegistrationType
-                        {
-                            Active = active,
-                            Name = name,
-                            ExternalId = externalId
-                        };
-
-                        context.Logics.EmployeeRegistrationType.Insert(type, this.GetGuid(id));
-                    }
-
-                    return type.ToIdentityDTO();
-                });
-        }
-
-        public EmployeeRoleIdentityDTO SaveEmployeeRole(
-            Guid? id = null,
-            string name = null,
-            bool active = true)
-        {
-            EmployeeRole role;
-            name = name ?? StringUtil.UniqueString("Role");
-
-            return this.EvaluateWrite(
-                context =>
-                {
-                    role = context.Logics.EmployeeRole.GetById(this.GetGuid(id));
-
-                    if (role == null)
-                    {
-                        role = new EmployeeRole { Active = active, Name = name };
-
-                        context.Logics.EmployeeRole.Insert(role, this.GetGuid(id));
-                    }
-
-                    return role.ToIdentityDTO();
-                });
-        }
-
-        public EmployeeRoleDegreeIdentityDTO SaveEmployeeRoleDegree(
-            Guid? id = null,
-            string name = null,
-            bool active = true)
-        {
-            EmployeeRoleDegree roleDegree;
-            name = name ?? StringUtil.UniqueString("RoleDegree");
-
-            return this.EvaluateWrite(
-                context =>
-                {
-                    roleDegree = context.Logics.EmployeeRoleDegree.GetById(this.GetGuid(id));
-
-                    if (roleDegree == null)
-                    {
-                        roleDegree = new EmployeeRoleDegree { Active = active, Name = name };
-
-                        context.Logics.EmployeeRoleDegree.Insert(roleDegree, this.GetGuid(id));
-                    }
-
-                    return roleDegree.ToIdentityDTO();
-                });
-        }
-
         public EmployeeIdentityDTO GetEmployeeByLogin(string login)
         {
             return this.EvaluateRead(context =>
@@ -273,41 +131,6 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData.Helpers
         {
             return this.EvaluateRead(context =>
                 context.Logics.Employee.GetObjectBy(e => e.Login == context.Authorization.CurrentPrincipalName).ToSimpleDTO(new WorkflowSampleSystemServerPrimitiveDTOMappingService(context)));
-        }
-
-        public EmployeeSpecializationIdentityDTO SaveSpecialization(Guid? id = null, string name = null)
-        {
-            return this.EvaluateWrite(
-                context =>
-                {
-                    var specialization = new EmployeeSpecialization
-                    {
-                        Id = id ?? Guid.NewGuid(),
-                        Name = name ?? StringUtil.UniqueString("EmployeeSpecialization")
-                    };
-
-                    context.Logics.EmployeeSpecialization.Insert(specialization, specialization.Id);
-
-                    return specialization.ToIdentityDTO();
-                });
-        }
-
-        public void SaveRoleRoleDegreeLink(EmployeeRoleIdentityDTO employeeRoleIdentity, EmployeeRoleDegreeIdentityDTO employeeRoleDegreeIdentity, Guid? id = null)
-        {
-            this.EvaluateWrite(
-                context =>
-                {
-                    var employeeRole = context.Logics.EmployeeRole.GetById(employeeRoleIdentity.Id, true);
-                    var employeeRoleDegree = context.Logics.EmployeeRoleDegree.GetById(employeeRoleDegreeIdentity.Id, true);
-                    var result = new RoleRoleDegreeLink
-                    {
-                        Id = id ?? Guid.NewGuid(),
-                        Role = employeeRole,
-                        RoleDegree = employeeRoleDegree
-                    };
-
-                    context.Logics.RoleRoleDegreeLink.Insert(result, result.Id);
-                });
         }
     }
 }

@@ -70,6 +70,14 @@ namespace WorkflowSampleSystem.DbGenerate
                                                    mode,
                                                    true,
                                                    credential);
+
+                this.GenerateWorkflowDatabase(serverName,
+                                              new DatabaseName(mainDatabaseName, "workflow"),
+                                              new DatabaseName(mainDatabaseName, "workflow").ToDefaultAudit(),
+                                              this.userAuthenticationService,
+                                              mode,
+                                              false,
+                                              credential);
             }
 
             var result = this.GenerateWorkflowSampleSystemDB(
@@ -169,6 +177,34 @@ namespace WorkflowSampleSystem.DbGenerate
 
             Console.WriteLine(result);
         }
+
+
+        private void GenerateWorkflowDatabase(
+                string serverName,
+                DatabaseName mainDatabaseName,
+                AuditDatabaseName auditDatabaseName,
+                IUserAuthenticationService userAuthenticationService,
+                DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnCopySchemeDatabase,
+                bool preserveSchemaDatabase = false,
+                UserCredential credential = null)
+        {
+            string[] migrationScriptFolderPaths = null;
+
+            var result = new Framework.Workflow.TestGenerate.ServerGenerators().GenerateDB(
+             serverName,
+             mainDatabaseName,
+             auditDatabaseName,
+             userAuthenticationService,
+             migrationScriptFolderPaths: migrationScriptFolderPaths,
+             mode: mode,
+             generatorMode: DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript
+                            | DatabaseScriptGeneratorMode.RemoveObsoleteColumns,
+             preserveSchemaDatabase: preserveSchemaDatabase,
+             credentials: credential);
+
+            Console.WriteLine(result);
+        }
+
 
         private IMappingSettings GetMappingSettings(string serverName, DatabaseName dbName, AuditDatabaseName dbAuditName)
         {

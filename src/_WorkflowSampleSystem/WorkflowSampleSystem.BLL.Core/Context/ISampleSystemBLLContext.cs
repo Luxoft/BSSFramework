@@ -7,6 +7,7 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.BLL.Tracking;
 using Framework.Security.Cryptography;
+using Framework.Workflow.BLL;
 
 using WorkflowSampleSystem.Domain;
 
@@ -15,6 +16,8 @@ namespace WorkflowSampleSystem.BLL
     public partial interface IWorkflowSampleSystemBLLContext :
 
         ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, DomainObjectBase, Guid>,
+
+        IWorkflowBLLContextContainer,
 
         ITrackingServiceContainer<PersistentDomainObjectBase>,
 

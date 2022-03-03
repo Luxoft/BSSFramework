@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+
+using Framework.DomainDriven.ServiceModel.IAD;
+using Framework.Workflow.BLL;
+using Framework.Workflow.Environment;
+
+using JetBrains.Annotations;
+
+using WorkflowSampleSystem.BLL;
+using WorkflowSampleSystem.Domain;
+
+namespace WorkflowSampleSystem.ServiceEnvironment;
+
+public class WorkflowSamplSystemBLLContextContainerModule : WorkflowBLLContextContainerModule<WorkflowSampleSystemServiceEnvironment, WorkflowSampleSystemBLLContextContainer, IWorkflowSampleSystemBLLContext, PersistentDomainObjectBase, WorkflowSampleSystemSecurityOperationCode>
+{
+    public WorkflowSamplSystemBLLContextContainerModule([NotNull] WorkflowServiceEnvironmentModule<WorkflowSampleSystemServiceEnvironment, WorkflowSampleSystemBLLContextContainer, IWorkflowSampleSystemBLLContext, PersistentDomainObjectBase> workflowServiceEnvironment, [NotNull] WorkflowSampleSystemServiceEnvironment mainServiceEnvironment, WorkflowSampleSystemBLLContextContainer bllContextContainer)
+            : base(workflowServiceEnvironment, mainServiceEnvironment, bllContextContainer)
+    {
+    }
+
+    protected override IEnumerable<ITargetSystemService> GetWorkflowTargetSystemServices()
+    {
+        yield return this.GetMainWorkflowTargetSystemService(new HashSet<Type>(new[] { typeof(Domain.Location) }));
+        yield return this.GetAuthorizationWorkflowTargetSystemService();
+    }
+}

@@ -48,11 +48,12 @@ namespace WorkflowSampleSystem.ServiceEnvironment
         protected readonly IRewriteReceiversService rewriteReceiversService;
 
 
-        protected WorkflowSampleSystemServiceEnvironment(
+        public WorkflowSampleSystemServiceEnvironment(
             IServiceProvider serviceProvider,
             IDBSessionFactory sessionFactory,
             INotificationContext notificationContext,
             IUserAuthenticationService userAuthenticationService,
+
             bool? isDebugMode = null,
             Func<IWorkflowSampleSystemBLLContext, ISecurityExpressionBuilderFactory<WorkflowSampleSystem.Domain.PersistentDomainObjectBase, Guid>> securityExpressionBuilderFactoryFunc = null)
             : base(serviceProvider, sessionFactory, notificationContext, userAuthenticationService)

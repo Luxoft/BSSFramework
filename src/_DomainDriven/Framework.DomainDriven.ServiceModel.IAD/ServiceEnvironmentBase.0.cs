@@ -278,12 +278,12 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             }
 
             #endregion
-            
+
             protected INotificationService NotificationService { get; }
 
-            protected IStandartExpressionBuilder StandartExpressionBuilder { get; }
+            public IStandartExpressionBuilder StandartExpressionBuilder { get; }
 
-            protected IHierarchicalObjectExpanderFactory<Guid> HierarchicalObjectExpanderFactory { get; }
+            public IHierarchicalObjectExpanderFactory<Guid> HierarchicalObjectExpanderFactory { get; }
 
             protected virtual ISerializerFactory<string> SystemConstantSerializerFactory { get; }
 
@@ -414,7 +414,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                 return null;
             }
 
-            protected virtual ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> GetSecurityExpressionBuilderFactory<TBLLContext, TPersistentDomainObjectBase, TIdent>(TBLLContext context)
+            public virtual ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> GetSecurityExpressionBuilderFactory<TBLLContext, TPersistentDomainObjectBase, TIdent>(TBLLContext context)
                 where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
                 where TBLLContext : class, ISecurityBLLContext<IAuthorizationBLLContext<TIdent>, TPersistentDomainObjectBase, TIdent>, IHierarchicalObjectExpanderFactoryContainer<TIdent>
             {
@@ -445,7 +445,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     this.ServiceEnvironment.NotificationContext.ExceptionReceivers);
             }
 
-            protected virtual IDateTimeService GetDateTimeService()
+            public virtual IDateTimeService GetDateTimeService()
             {
                 return DateTimeService.Default;
             }
@@ -505,7 +505,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
             protected abstract IHierarchicalObjectExpanderFactory<Guid> GetHierarchicalObjectExpanderFactory();
 
-            protected virtual IAccessDeniedExceptionService<TPersistentDomainObjectBase> GetAccessDeniedExceptionService<TPersistentDomainObjectBase, TIdent>()
+            public virtual IAccessDeniedExceptionService<TPersistentDomainObjectBase> GetAccessDeniedExceptionService<TPersistentDomainObjectBase, TIdent>()
                 where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
             {
                 return new AccessDeniedExceptionService<TPersistentDomainObjectBase, TIdent>();
@@ -531,7 +531,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     this.ServiceEnvironment.SubscriptionMetadataStore);
             }
 
-            private ServiceEnvironmentBLLContextContainer Impersonate(string principalName)
+            public ServiceEnvironmentBLLContextContainer Impersonate(string principalName)
             {
                 return this.ServiceEnvironment.GetBLLContextContainerBase(this.ScopedServiceProvider, this.Session, principalName);
             }

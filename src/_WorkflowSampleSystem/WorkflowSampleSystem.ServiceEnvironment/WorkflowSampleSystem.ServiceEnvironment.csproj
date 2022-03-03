@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.App.ServiceEnvironment\Framework.App.ServiceEnvironment.csproj" />
+    <ProjectReference Include="..\..\_Workflow\Framework.Workflow.Environment\Framework.Workflow.Environment.csproj" />
 
     <ProjectReference Include="..\WorkflowSampleSystem.BLL\WorkflowSampleSystem.BLL.csproj" />
     <ProjectReference Include="..\WorkflowSampleSystem.Generated.DAL.NHibernate\WorkflowSampleSystem.Generated.DAL.NHibernate.csproj" />

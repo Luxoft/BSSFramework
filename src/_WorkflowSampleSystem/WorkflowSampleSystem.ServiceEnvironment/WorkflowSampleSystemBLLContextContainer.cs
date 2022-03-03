@@ -19,6 +19,7 @@ using Framework.Persistent;
 using Framework.Security.Cryptography;
 using Framework.SecuritySystem;
 using Framework.Validation;
+using Framework.Workflow.BLL;
 
 using WorkflowSampleSystem.BLL;
 
@@ -28,7 +29,7 @@ using Principal = Framework.Authorization.Domain.Principal;
 
 namespace WorkflowSampleSystem.ServiceEnvironment
 {
-    public class WorkflowSampleSystemBLLContextContainer : WorkflowSampleSystemServiceEnvironment.ServiceEnvironmentBLLContextContainer
+    public class WorkflowSampleSystemBLLContextContainer : WorkflowSampleSystemServiceEnvironment.ServiceEnvironmentBLLContextContainer, IWorkflowBLLContextContainer, IBLLContextContainer<IWorkflowBLLContext>
     {
         private readonly BLLOperationEventListenerContainer<DomainObjectBase> mainOperationListeners = new BLLOperationEventListenerContainer<DomainObjectBase>();
 
@@ -48,6 +49,8 @@ namespace WorkflowSampleSystem.ServiceEnvironment
         private readonly ICryptService<CryptSystem> cryptService;
 
         private readonly ITypeResolver<string> currentTargetSystemTypeResolver;
+
+        private readonly Lazy<WorkflowSamplSystemBLLContextContainerModule> lazyWorkflowModule;
 
         public WorkflowSampleSystemBLLContextContainer(
             WorkflowSampleSystemServiceEnvironment serviceEnvironment,
@@ -70,6 +73,8 @@ namespace WorkflowSampleSystem.ServiceEnvironment
             this.fetchService = fetchService;
             this.cryptService = cryptService;
             this.currentTargetSystemTypeResolver = currentTargetSystemTypeResolver;
+
+            this.lazyWorkflowModule = LazyHelper.Create(() => new WorkflowSamplSystemBLLContextContainerModule())
         }
 
 
@@ -105,7 +110,7 @@ namespace WorkflowSampleSystem.ServiceEnvironment
         {
             return MessageSender<Exception>.Trace;
         }
-        
+
         /// <inheritdoc />
         protected override IEnumerable<IManualEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>> GetAuthorizationEventDALListeners()
         {

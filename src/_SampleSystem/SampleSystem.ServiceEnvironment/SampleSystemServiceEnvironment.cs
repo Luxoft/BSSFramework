@@ -29,7 +29,7 @@ using PersistentDomainObjectBase = SampleSystem.Domain.PersistentDomainObjectBas
 
 namespace SampleSystem.ServiceEnvironment
 {
-    public abstract class SampleSystemServiceEnvironment :
+    public class SampleSystemServiceEnvironment :
         ServiceEnvironmentBase<SampleSystemBllContextContainer, ISampleSystemBLLContext, PersistentDomainObjectBase,
         AuditPersistentDomainObjectBase, SampleSystemSecurityOperationCode, NamedLock, NamedLockOperation>,
         ISystemMetadataTypeBuilderContainer
@@ -49,7 +49,7 @@ namespace SampleSystem.ServiceEnvironment
         protected readonly IRewriteReceiversService rewriteReceiversService;
 
 
-        protected SampleSystemServiceEnvironment(
+        public SampleSystemServiceEnvironment(
             IServiceProvider serviceProvider,
             IDBSessionFactory sessionFactory,
             INotificationContext notificationContext,

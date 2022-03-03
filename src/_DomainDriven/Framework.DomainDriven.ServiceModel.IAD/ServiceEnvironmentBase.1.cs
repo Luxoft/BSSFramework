@@ -10,7 +10,12 @@ using Framework.Core.Services;
 
 namespace Framework.DomainDriven.ServiceModel.IAD
 {
-    public abstract partial class ServiceEnvironmentBase<TBLLContextContainer, TBLLContext> : ServiceEnvironmentBase, IServiceEnvironment<TBLLContext>
+    public interface IBLLContextContainerModule
+    {
+        IEnumerable<IDALListener> GetBeforeTransactionCompletedListeners();
+    }
+
+    public abstract partial class ServiceEnvironmentBase<TBLLContextContainer, TBLLContext> : ServiceEnvironmentBase, IRootServiceEnvironment<TBLLContext, TBLLContextContainer>
         where TBLLContextContainer : ServiceEnvironmentBase<TBLLContextContainer, TBLLContext>.ServiceEnvironmentBLLContextContainer
         where TBLLContext : ITypeResolverContainer<string>
     {
@@ -26,6 +31,11 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         }
 
         public IServiceProvider ServiceProvider { get; }
+
+        protected virtual IEnumerable<IBLLContextContainerModule> GetModules()
+        {
+            yield break;
+        }
 
         protected virtual IEnumerable<IDALListener> GetDALFlushedListeners(TBLLContextContainer container)
         {
@@ -48,6 +58,14 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             }
 
             yield return this.GetFixDomainObjectEventRevisionNumberDALListener(container);
+
+            foreach (var module in this.GetModules())
+            {
+                foreach (var listener in module.GetBeforeTransactionCompletedListeners())
+                {
+                    yield return listener;
+                }
+            }
         }
 
         protected virtual IDALListener GetFixDomainObjectEventRevisionNumberDALListener(TBLLContextContainer container)

@@ -10,6 +10,8 @@
 
     <ProjectReference Include="..\..\Framework.Cap\Framework.Cap.csproj" />
 
+    <ProjectReference Include="..\..\_Workflow\Framework.Workflow.BLL.Core\Framework.Workflow.BLL.Core.csproj" />
+
     <ProjectReference Include="..\WorkflowSampleSystem.Domain\WorkflowSampleSystem.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>

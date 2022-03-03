@@ -2,7 +2,7 @@
 using Framework.Graphviz;
 using Framework.Workflow.BLL;
 
-namespace Framework.DomainDriven.ServiceModel.IAD
+namespace Framework.Workflow.Environment
 {
     public interface IWorkflowServiceEnvironment : IServiceEnvironment<IWorkflowBLLContext>
     {

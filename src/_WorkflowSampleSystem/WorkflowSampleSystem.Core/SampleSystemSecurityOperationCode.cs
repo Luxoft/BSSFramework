@@ -1,8 +1,10 @@
 ﻿using Framework.Security;
+using Framework.Workflow;
 
 namespace WorkflowSampleSystem
 {
     [BaseSecurityOperationType]
+    [BaseSecurityOperationType(typeof(WorkflowSecurityOperationCode))]
     public enum WorkflowSampleSystemSecurityOperationCode
     {
         /// <summary>

@@ -7,5 +7,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.App.Core\Framework.App.Core.csproj" />
+    <ProjectReference Include="..\..\_Workflow\Framework.Workflow.Core\Framework.Workflow.Core.csproj" />
   </ItemGroup>
 </Project>

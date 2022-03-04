@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using WorkflowSampleSystem.Domain;
 using WorkflowSampleSystem.Domain.Inline;
 using WorkflowSampleSystem.Generated.DTO;
+using WorkflowSampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using WorkflowSampleSystem.IntegrationTests.__Support.Utils.Framework;
 using WorkflowSampleSystem.WebApiCore.Controllers.Main;
 
@@ -327,9 +328,21 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData.Helpers
     {
         public static IServiceCollection RegisterControllers(this IServiceCollection services)
         {
-            foreach (var controllerType in typeof(EmployeeController).Assembly.GetTypes().Where(t => typeof(ControllerBase).IsAssignableFrom(t)))
+            var asms = new[]
+                       {
+                               typeof(WorkflowSampleSystem.WebApiCore.Controllers.Main.EmployeeController).Assembly,
+                       };
+
+            var exceptControllers = new Type[]
+                                    {
+                                    };
+
+
+            foreach (var controllerType in asms.SelectMany(a => a.GetTypes()).Except(exceptControllers).Where(t => !t.IsAbstract && typeof(IApiControllerBase).IsAssignableFrom(t) && typeof(ControllerBase).IsAssignableFrom(t)))
             {
                 services.AddScoped(controllerType);
+
+                services.AddSingleton(typeof(ControllerEvaluator<>).MakeGenericType(controllerType));
             }
 
             return services;

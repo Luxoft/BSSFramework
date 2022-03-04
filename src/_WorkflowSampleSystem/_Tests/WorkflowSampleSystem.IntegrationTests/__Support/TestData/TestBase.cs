@@ -9,11 +9,8 @@ using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.ServiceModel.Subscriptions;
-using Framework.DomainDriven.WebApiNetCore;
 using Framework.Notification.DTO;
-using Framework.Workflow.WebApi;
 
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

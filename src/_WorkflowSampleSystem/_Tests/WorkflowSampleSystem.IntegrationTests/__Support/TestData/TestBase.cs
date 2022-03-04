@@ -211,6 +211,12 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData
                                                                 return Ignore.Value;
                                                             });
         }
+
+        protected ControllerEvaluator<AuthSLJsonController> GetAuthControllerEvaluator()
+        {
+            return this.MainWebApi.GetControllerEvaluator<AuthSLJsonController>();
+        }
+
         protected ControllerEvaluator<WorkflowSLJsonController> GetWorkflowControllerEvaluator()
         {
             return this.MainWebApi.GetControllerEvaluator<WorkflowSLJsonController>();

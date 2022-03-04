@@ -140,7 +140,6 @@ namespace WorkflowSampleSystem.Domain
 
         [WorkflowSampleSystemCrypt]
         [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Event | DTORole.Integration)]
-        [WorkflowSampleSystemViewDomainObject(WorkflowSampleSystemSecurityOperationCode.EmployeePersonalCellPhoneView)]
         public virtual string PersonalCellPhone
         {
             get { return this.personalCellPhone.TrimNull(); }

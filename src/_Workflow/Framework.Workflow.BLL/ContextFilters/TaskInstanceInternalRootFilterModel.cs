@@ -65,6 +65,11 @@ namespace Framework.Workflow.BLL
             {
                 yield return taskInstance => taskInstance.State.Workflow == this._baseFilterModel.WorkflowInstance;
             }
+
+            if (!this._baseFilterModel.DomainObjectId.IsDefault())
+            {
+                yield return taskInstance => taskInstance.State.Workflow.DomainObjectId == this._baseFilterModel.DomainObjectId;
+            }
         }
     }
 }

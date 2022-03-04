@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 using Framework.Core;
-using Framework.Core.Services;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
-using Framework.HierarchicalExpand;
 using Framework.Persistent;
-using Framework.Restriction;
 using Framework.SecuritySystem;
-using Framework.Validation;
 
 namespace WorkflowSampleSystem.Domain
 {
     [DomainType("5C326B10-B4B4-402C-BCCE-A311016CB715")]
     [BLLViewRole, BLLSaveRole(AllowCreate = false)]
-    [WorkflowSampleSystemViewDomainObject(WorkflowSampleSystemSecurityOperationCode.BusinessUnitView, WorkflowSampleSystemSecurityOperationCode.BusinessUnitHrDepartmentView, SourceTypes = new[] { typeof(Employee) })]
+    [WorkflowSampleSystemViewDomainObject(WorkflowSampleSystemSecurityOperationCode.BusinessUnitView, SourceTypes = new[] { typeof(Employee) })]
     [WorkflowSampleSystemEditDomainObject(WorkflowSampleSystemSecurityOperationCode.BusinessUnitEdit)]
     public partial class BusinessUnit :
             BaseDirectory,
@@ -28,7 +23,7 @@ namespace WorkflowSampleSystem.Domain
         private readonly ICollection<BusinessUnit> children = new List<BusinessUnit>();
 
         private BusinessUnit parent;
-        
+
         private Period period;
 
         public BusinessUnit()

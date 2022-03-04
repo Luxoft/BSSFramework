@@ -16,59 +16,19 @@ namespace WorkflowSampleSystem.BLL
     public class WorkflowSampleSystemSecurityOperation
     {
         
-        private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _authorizationImpersonate = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.AuthorizationImpersonate);
+        private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _approveWorkflowOperation = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.ApproveWorkflowOperation);
+        
+        private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _approvingWorkflowOperation = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.ApprovingWorkflowOperation);
         
         private static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _businessUnitEdit = new Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.BusinessUnitEdit, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
         
-        private static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _businessUnitHrDepartmentEdit = new Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.BusinessUnitHrDepartmentEdit, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _businessUnitHrDepartmentView = new Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.BusinessUnitHrDepartmentView, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _businessUnitManagerCommissionLinkEdit = new Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.BusinessUnitManagerCommissionLinkEdit, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _businessUnitManagerCommissionLinkView = new Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.BusinessUnitManagerCommissionLinkView, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _businessUnitTypeEdit = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.BusinessUnitTypeEdit);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _businessUnitTypeView = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.BusinessUnitTypeView);
-        
         private static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _businessUnitView = new Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.BusinessUnitView, Framework.HierarchicalExpand.HierarchicalExpandType.All);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _companyLegalEntityEdit = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.CompanyLegalEntityEdit);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _companyLegalEntityView = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.CompanyLegalEntityView);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _countryEdit = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.CountryEdit);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _countryEditAttachment = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.CountryEditAttachment);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _countryView = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.CountryView);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _countryViewAttachment = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.CountryViewAttachment);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _createManagementUnitStart = new Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.CreateManagementUnitStart, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
         
         private static Framework.SecuritySystem.DisabledSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _disabled = new Framework.SecuritySystem.DisabledSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>();
         
         private static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _employeeEdit = new Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.EmployeeEdit, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
         
-        private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _employeePersonalCellPhoneEdit = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.EmployeePersonalCellPhoneEdit);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _employeePersonalCellPhoneView = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.EmployeePersonalCellPhoneView);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _employeePositionEdit = new Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.EmployeePositionEdit, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _employeePositionView = new Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.EmployeePositionView, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _employeeRoleDegreeView = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.EmployeeRoleDegreeView);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _employeeRoleView = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.EmployeeRoleView);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _employeeSpecializationView = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.EmployeeSpecializationView);
-        
         private static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _employeeView = new Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.EmployeeView, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _hRDepartmentAdvancedEdit = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.HRDepartmentAdvancedEdit);
         
         private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _hRDepartmentEdit = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.HRDepartmentEdit);
         
@@ -76,33 +36,23 @@ namespace WorkflowSampleSystem.BLL
         
         private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _locationEdit = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.LocationEdit);
         
-        private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _locationOpenModule = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.LocationOpenModule);
-        
         private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _locationView = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.LocationView);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _managementUnitAndBusinessUnitLinkEdit = new Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.ManagementUnitAndBusinessUnitLinkEdit, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _managementUnitAndBusinessUnitLinkView = new Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.ManagementUnitAndBusinessUnitLinkView, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _managementUnitAndHRDepartmentLinkEdit = new Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.ManagementUnitAndHRDepartmentLinkEdit, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _managementUnitAndHRDepartmentLinkView = new Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.ManagementUnitAndHRDepartmentLinkView, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _managementUnitChangeEdit = new Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.ManagementUnitChangeEdit, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _managementUnitChangeView = new Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.ManagementUnitChangeView, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _managementUnitEdit = new Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.ManagementUnitEdit, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
-        
-        private static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _managementUnitView = new Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.ManagementUnitView, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
         
         private static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> _systemIntegration = new Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.SystemIntegration);
         
-        public static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> AuthorizationImpersonate
+        public static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> ApproveWorkflowOperation
         {
             get
             {
-                return _authorizationImpersonate;
+                return _approveWorkflowOperation;
+            }
+        }
+        
+        public static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> ApprovingWorkflowOperation
+        {
+            get
+            {
+                return _approvingWorkflowOperation;
             }
         }
         
@@ -114,115 +64,11 @@ namespace WorkflowSampleSystem.BLL
             }
         }
         
-        public static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> BusinessUnitHrDepartmentEdit
-        {
-            get
-            {
-                return _businessUnitHrDepartmentEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> BusinessUnitHrDepartmentView
-        {
-            get
-            {
-                return _businessUnitHrDepartmentView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> BusinessUnitManagerCommissionLinkEdit
-        {
-            get
-            {
-                return _businessUnitManagerCommissionLinkEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> BusinessUnitManagerCommissionLinkView
-        {
-            get
-            {
-                return _businessUnitManagerCommissionLinkView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> BusinessUnitTypeEdit
-        {
-            get
-            {
-                return _businessUnitTypeEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> BusinessUnitTypeView
-        {
-            get
-            {
-                return _businessUnitTypeView;
-            }
-        }
-        
         public static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> BusinessUnitView
         {
             get
             {
                 return _businessUnitView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> CompanyLegalEntityEdit
-        {
-            get
-            {
-                return _companyLegalEntityEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> CompanyLegalEntityView
-        {
-            get
-            {
-                return _companyLegalEntityView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> CountryEdit
-        {
-            get
-            {
-                return _countryEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> CountryEditAttachment
-        {
-            get
-            {
-                return _countryEditAttachment;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> CountryView
-        {
-            get
-            {
-                return _countryView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> CountryViewAttachment
-        {
-            get
-            {
-                return _countryViewAttachment;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> CreateManagementUnitStart
-        {
-            get
-            {
-                return _createManagementUnitStart;
             }
         }
         
@@ -242,75 +88,11 @@ namespace WorkflowSampleSystem.BLL
             }
         }
         
-        public static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> EmployeePersonalCellPhoneEdit
-        {
-            get
-            {
-                return _employeePersonalCellPhoneEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> EmployeePersonalCellPhoneView
-        {
-            get
-            {
-                return _employeePersonalCellPhoneView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> EmployeePositionEdit
-        {
-            get
-            {
-                return _employeePositionEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> EmployeePositionView
-        {
-            get
-            {
-                return _employeePositionView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> EmployeeRoleDegreeView
-        {
-            get
-            {
-                return _employeeRoleDegreeView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> EmployeeRoleView
-        {
-            get
-            {
-                return _employeeRoleView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> EmployeeSpecializationView
-        {
-            get
-            {
-                return _employeeSpecializationView;
-            }
-        }
-        
         public static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> EmployeeView
         {
             get
             {
                 return _employeeView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> HRDepartmentAdvancedEdit
-        {
-            get
-            {
-                return _hRDepartmentAdvancedEdit;
             }
         }
         
@@ -338,83 +120,11 @@ namespace WorkflowSampleSystem.BLL
             }
         }
         
-        public static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> LocationOpenModule
-        {
-            get
-            {
-                return _locationOpenModule;
-            }
-        }
-        
         public static Framework.SecuritySystem.NonContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> LocationView
         {
             get
             {
                 return _locationView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> ManagementUnitAndBusinessUnitLinkEdit
-        {
-            get
-            {
-                return _managementUnitAndBusinessUnitLinkEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> ManagementUnitAndBusinessUnitLinkView
-        {
-            get
-            {
-                return _managementUnitAndBusinessUnitLinkView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> ManagementUnitAndHRDepartmentLinkEdit
-        {
-            get
-            {
-                return _managementUnitAndHRDepartmentLinkEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> ManagementUnitAndHRDepartmentLinkView
-        {
-            get
-            {
-                return _managementUnitAndHRDepartmentLinkView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> ManagementUnitChangeEdit
-        {
-            get
-            {
-                return _managementUnitChangeEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> ManagementUnitChangeView
-        {
-            get
-            {
-                return _managementUnitChangeView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> ManagementUnitEdit
-        {
-            get
-            {
-                return _managementUnitEdit;
-            }
-        }
-        
-        public static Framework.SecuritySystem.ContextSecurityOperation<WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode> ManagementUnitView
-        {
-            get
-            {
-                return _managementUnitView;
             }
         }
         
@@ -448,78 +158,6 @@ namespace WorkflowSampleSystem.BLL
             {
                 return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.BusinessUnitEdit;
             }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.BusinessUnitTypeView))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.BusinessUnitTypeView;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.BusinessUnitTypeEdit))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.BusinessUnitTypeEdit;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.BusinessUnitManagerCommissionLinkView))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.BusinessUnitManagerCommissionLinkView;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.BusinessUnitManagerCommissionLinkEdit))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.BusinessUnitManagerCommissionLinkEdit;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.BusinessUnitHrDepartmentView))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.BusinessUnitHrDepartmentView;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.BusinessUnitHrDepartmentEdit))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.BusinessUnitHrDepartmentEdit;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.ManagementUnitView))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.ManagementUnitView;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.ManagementUnitEdit))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.ManagementUnitEdit;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.ManagementUnitChangeEdit))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.ManagementUnitChangeEdit;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.ManagementUnitChangeView))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.ManagementUnitChangeView;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.CreateManagementUnitStart))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.CreateManagementUnitStart;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.ManagementUnitAndBusinessUnitLinkView))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.ManagementUnitAndBusinessUnitLinkView;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.ManagementUnitAndBusinessUnitLinkEdit))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.ManagementUnitAndBusinessUnitLinkEdit;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.ManagementUnitAndHRDepartmentLinkView))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.ManagementUnitAndHRDepartmentLinkView;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.ManagementUnitAndHRDepartmentLinkEdit))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.ManagementUnitAndHRDepartmentLinkEdit;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.EmployeeSpecializationView))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.EmployeeSpecializationView;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.EmployeeRoleView))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.EmployeeRoleView;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.EmployeeRoleDegreeView))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.EmployeeRoleDegreeView;
-            }
             else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.HRDepartmentView))
             {
                 return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.HRDepartmentView;
@@ -527,14 +165,6 @@ namespace WorkflowSampleSystem.BLL
             else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.HRDepartmentEdit))
             {
                 return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.HRDepartmentEdit;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.HRDepartmentAdvancedEdit))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.HRDepartmentAdvancedEdit;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.LocationOpenModule))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.LocationOpenModule;
             }
             else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.LocationView))
             {
@@ -544,53 +174,17 @@ namespace WorkflowSampleSystem.BLL
             {
                 return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.LocationEdit;
             }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.CountryView))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.CountryView;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.CountryEdit))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.CountryEdit;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.CountryViewAttachment))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.CountryViewAttachment;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.CountryEditAttachment))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.CountryEditAttachment;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.CompanyLegalEntityView))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.CompanyLegalEntityView;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.CompanyLegalEntityEdit))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.CompanyLegalEntityEdit;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.EmployeePositionView))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.EmployeePositionView;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.EmployeePositionEdit))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.EmployeePositionEdit;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.AuthorizationImpersonate))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.AuthorizationImpersonate;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.EmployeePersonalCellPhoneView))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.EmployeePersonalCellPhoneView;
-            }
-            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.EmployeePersonalCellPhoneEdit))
-            {
-                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.EmployeePersonalCellPhoneEdit;
-            }
             else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.SystemIntegration))
             {
                 return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.SystemIntegration;
+            }
+            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.ApproveWorkflowOperation))
+            {
+                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.ApproveWorkflowOperation;
+            }
+            else if ((code == WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.ApprovingWorkflowOperation))
+            {
+                return WorkflowSampleSystem.BLL.WorkflowSampleSystemSecurityOperation.ApprovingWorkflowOperation;
             }
             else
             {

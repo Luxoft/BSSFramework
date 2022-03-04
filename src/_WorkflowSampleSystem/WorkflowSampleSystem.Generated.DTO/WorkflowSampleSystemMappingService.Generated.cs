@@ -174,16 +174,7 @@ namespace WorkflowSampleSystem.Generated.DTO
             mappingObject.NameNative = domainObject.NameNative;
             mappingObject.NameRussian = domainObject.NameRussian;
             mappingObject.NonValidateVirtualProp = domainObject.NonValidateVirtualProp;
-            if (this.Context.SecurityService.GetSecurityProvider<WorkflowSampleSystem.Domain.Employee>(WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.EmployeePersonalCellPhoneView).HasAccess(domainObject))
-            {
-                string resultPersonalCellPhone;
-                resultPersonalCellPhone = domainObject.PersonalCellPhone;
-                mappingObject.PersonalCellPhone = new Framework.Core.Just<string>(resultPersonalCellPhone);
-            }
-            else
-            {
-                mappingObject.PersonalCellPhone = Framework.Core.Maybe<string>.Nothing;
-            }
+            mappingObject.PersonalCellPhone = domainObject.PersonalCellPhone;
             mappingObject.Pin = domainObject.Pin;
             mappingObject.PlannedHireDate = domainObject.PlannedHireDate;
             mappingObject.ValidateVirtualProp = domainObject.ValidateVirtualProp;

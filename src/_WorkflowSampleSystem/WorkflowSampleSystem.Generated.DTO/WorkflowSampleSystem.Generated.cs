@@ -17,9 +17,6 @@ namespace WorkflowSampleSystem.Generated.DTO
     {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        BusinessUnitHrDepartmentView = WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.BusinessUnitHrDepartmentView,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
         BusinessUnitView = WorkflowSampleSystem.WorkflowSampleSystemSecurityOperationCode.BusinessUnitView,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
@@ -819,7 +816,7 @@ namespace WorkflowSampleSystem.Generated.DTO
         public System.DateTime NonValidateVirtualProp;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Framework.Core.Maybe<string> PersonalCellPhone;
+        public string PersonalCellPhone;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public int? Pin;

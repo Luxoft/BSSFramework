@@ -13,12 +13,12 @@ namespace WorkflowSampleSystem.Domain
     [BLLViewRole, BLLSaveRole(AllowCreate = false)]
     [WorkflowSampleSystemViewDomainObject(WorkflowSampleSystemSecurityOperationCode.BusinessUnitView, SourceTypes = new[] { typeof(Employee) })]
     [WorkflowSampleSystemEditDomainObject(WorkflowSampleSystemSecurityOperationCode.BusinessUnitEdit)]
-    public partial class BusinessUnit :
-            BaseDirectory,
-        IDenormalizedHierarchicalPersistentSource<BusinessUnitAncestorLink, BusinessUnitToAncestorChildView, BusinessUnit, Guid>,
-        IMaster<BusinessUnit>,
-        IDetail<BusinessUnit>,
-        ISecurityContext
+    public partial class BusinessUnit : BaseDirectory,
+                                        IDenormalizedHierarchicalPersistentSource<BusinessUnitAncestorLink, BusinessUnitToAncestorChildView, BusinessUnit, Guid>,
+                                        IDefaultHierarchicalPersistentDomainObjectBase<BusinessUnit>,
+                                        IMaster<BusinessUnit>,
+                                        IDetail<BusinessUnit>,
+                                        ISecurityContext
     {
         private readonly ICollection<BusinessUnit> children = new List<BusinessUnit>();
 

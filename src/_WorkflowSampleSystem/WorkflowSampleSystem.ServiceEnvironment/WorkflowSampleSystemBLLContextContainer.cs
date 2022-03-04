@@ -20,8 +20,6 @@ using Framework.SecuritySystem;
 using Framework.Validation;
 using Framework.Workflow.BLL;
 
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-
 using WorkflowSampleSystem.BLL;
 
 using DomainObjectBase = WorkflowSampleSystem.Domain.DomainObjectBase;

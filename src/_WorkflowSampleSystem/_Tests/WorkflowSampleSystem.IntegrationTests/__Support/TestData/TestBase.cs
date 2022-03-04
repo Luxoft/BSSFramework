@@ -11,8 +11,10 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.ServiceModel.Subscriptions;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Notification.DTO;
+using Framework.Workflow.WebApi;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using WorkflowSampleSystem.BLL;
@@ -26,7 +28,7 @@ using DataHelper = WorkflowSampleSystem.IntegrationTests.__Support.TestData.Help
 namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData
 {
     [TestClass]
-    public class TestBase
+    public class TestBase : IControllerEvaluatorContainer
     {
         private static readonly Lazy<TestServiceEnvironment> EnvironmentLazy = new Lazy<TestServiceEnvironment>(() => TestServiceEnvironment.IntegrationEnvironment, true);
 
@@ -44,12 +46,13 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData
 
         protected TestServiceEnvironment Environment => EnvironmentLazy.Value;
 
+        public MainWebApi MainWebApi => new(this.Environment.ServiceProvider);
+
         protected DataHelper DataHelper
         {
             get
             {
                 this.dataHelper.AuthHelper = this.AuthHelper;
-                this.dataHelper.PrincipalName = this.AuthHelper.PrincipalName;
                 return this.dataHelper;
             }
 
@@ -61,9 +64,9 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData
 
         protected AuthHelper AuthHelper { get; }
 
-        protected string PrincipalName { get; set; }
+        protected IDateTimeService DateTimeService => this.Environment.ServiceProvider.GetRequiredService<IDateTimeService>();
 
-        protected IDateTimeService DateTimeService => new IntegrationTestDateTimeService();
+        IServiceProvider IControllerEvaluatorContainer.RootServiceProvider => this.Environment.RootServiceProvider;
 
         protected string DatabaseName { get; } = "WorkflowSampleSystem";
 
@@ -192,48 +195,28 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData
 
         protected TResult EvaluateWrite<TResult>(Func<IWorkflowSampleSystemBLLContext, TResult> func)
         {
-            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, this.PrincipalName, func);
+            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, this.GetCurrentUserName(), func);
         }
 
-        protected void EvaluateRead(Action<IWorkflowSampleSystemBLLContext> action)
+        protected TResult EvaluateRead<TResult>(Func<IWorkflowSampleSystemBLLContext, TResult> action)
         {
-            this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, this.PrincipalName, action);
+            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, this.GetCurrentUserName(), ctx => action(ctx));
         }
 
-        protected T EvaluateRead<T>(Func<IWorkflowSampleSystemBLLContext, T> action)
-        {
-            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, this.PrincipalName, action);
-        }
-
-
-        protected void EvaluateWrite(Action<IWorkflowSampleSystemBLLContext> func)
+        protected void EvaluateWrite(Action<IWorkflowSampleSystemBLLContext> action)
         {
             this.Environment.GetContextEvaluator().Evaluate(
-                DBSessionMode.Write,
-                this.PrincipalName,
-                context =>
-                {
-                    func(context);
-                    return Ignore.Value;
-                });
+                                                            DBSessionMode.Write,
+                                                            this.GetCurrentUserName(),
+                                                            context =>
+                                                            {
+                                                                action.Invoke(context);
+                                                                return Ignore.Value;
+                                                            });
         }
-
-
-        protected AuthSLJsonController GetAuthorizationController()
+        protected ControllerEvaluator<WorkflowSLJsonController> GetWorkflowControllerEvaluator()
         {
-            return this.GetController<AuthSLJsonController> ();
-        }
-
-        protected ConfigSLJsonController GetConfigurationController()
-        {
-            return this.GetController<ConfigSLJsonController>();
-        }
-
-
-        protected TController GetController<TController>(string principalName = null)
-            where TController : ControllerBase, IApiControllerBase
-        {
-            return this.DataHelper.GetController<TController>(principalName);
+            return this.MainWebApi.GetControllerEvaluator<WorkflowSLJsonController>();
         }
     }
 }

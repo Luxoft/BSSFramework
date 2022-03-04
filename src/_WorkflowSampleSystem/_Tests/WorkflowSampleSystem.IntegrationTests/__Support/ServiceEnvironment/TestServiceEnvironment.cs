@@ -39,7 +39,7 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.ServiceEnvironment
     /// <summary>
     /// TestServiceEnvironment Extends EDServiceEnvironment for Test Run. Different Test Env settings are initilized.
     /// </summary>
-    public class TestServiceEnvironment : WorkflowSampleSystemServiceEnvironment
+    public class TestServiceEnvironment : WorkflowSampleSystemServiceEnvironment, IControllerEvaluatorContainer
     {
         private static readonly Lazy<TestServiceEnvironment> IntegrationEnvironmentLazy = new Lazy<TestServiceEnvironment>(CreateIntegrationEnvironment);
 
@@ -47,9 +47,10 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.ServiceEnvironment
             IServiceProvider serviceProvider,
             IDBSessionFactory sessionFactory,
             EnvironmentSettings settings,
+            IUserAuthenticationService userAuthenticationService,
             bool? isDebugMode = null)
 
-            : base(serviceProvider, sessionFactory, settings.NotificationContext, IntegrationTestAuthenticationService.Instance, isDebugMode)
+            : base(serviceProvider, sessionFactory, settings.NotificationContext, userAuthenticationService, isDebugMode)
         {
             this.Settings = settings;
         }
@@ -78,7 +79,7 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .AddControllerEnvironment()
                                   .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
                                   .AddSingleton<WorkflowSampleSystemServiceEnvironment>(sp => sp.GetRequiredService<TestServiceEnvironment>())
-                                  .AddSingleton<IUserAuthenticationService>(IntegrationTestAuthenticationService.Instance)
+                                  .AddSingleton<IUserAuthenticationService>(IntegrationTestsUserAuthenticationService.Instance)
                                   .AddSingleton<IDateTimeService>(new IntegrationTestDateTimeService())
                                   .AddDatabaseSettings(InitializeAndCleanup.DatabaseUtil.ConnectionSettings.ConnectionString)
                                   .AddSingleton(EnvironmentSettings.Trace)

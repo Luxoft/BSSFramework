@@ -151,5 +151,10 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData
 
         // My Employee Id
         public static readonly Guid EMPLOYEE_MY_ID = new Guid("1A1A1A1A-0000-0000-0007-000000000001");
+
+
+        public const string NOTIFICATION_ADMIN = "NotificationAdmin";
+
+        public const string INTEGRATION_USER = "IntegrationBus";
     }
 }

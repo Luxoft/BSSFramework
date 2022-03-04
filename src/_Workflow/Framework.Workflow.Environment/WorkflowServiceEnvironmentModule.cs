@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Collections.Generic;
 
-using Framework.Authorization.BLL;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
@@ -52,8 +51,6 @@ public class WorkflowServiceEnvironmentModule<TMainServiceEnvironment, TBLLConte
                 .WithCompressName()
                 .WithCache()
                 .WithLock();
-
-    public TargetSystemServiceCompileCache<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase> WorkflowAuthorizationSystemCompileCache { get; } = new();
 
     public TargetSystemServiceCompileCache<TBLLContext, TPersistentDomainObjectBase> WorkflowMainSystemCompileCache { get; } = new();
 

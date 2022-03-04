@@ -9,6 +9,7 @@ using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.BLL.Security;
 using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.Events;
@@ -18,6 +19,8 @@ using Framework.Security.Cryptography;
 using Framework.SecuritySystem;
 using Framework.Validation;
 using Framework.Workflow.BLL;
+
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 using WorkflowSampleSystem.BLL;
 
@@ -45,6 +48,8 @@ namespace WorkflowSampleSystem.ServiceEnvironment
 
         private readonly Lazy<WorkflowSamplSystemBLLContextContainerModule> lazyWorkflowModule;
 
+        public readonly IWorkflowSampleSystemAuthorizationBLLContext WorkflowSampleSystemAuthorization;
+
         public WorkflowSampleSystemBLLContextContainer(
             WorkflowSampleSystemServiceEnvironment serviceEnvironment,
             IServiceProvider scopedServiceProvider,
@@ -64,6 +69,8 @@ namespace WorkflowSampleSystem.ServiceEnvironment
             this.currentTargetSystemTypeResolver = currentTargetSystemTypeResolver;
 
             this.lazyWorkflowModule = LazyHelper.Create(() => new WorkflowSamplSystemBLLContextContainerModule(serviceEnvironment, this));
+
+            this.WorkflowSampleSystemAuthorization = LazyInterfaceImplementHelper.CreateProxy(this.CreateWorkflowSampleSystemAuthorizationBLLContext);
         }
 
         public IWorkflowBLLContext Workflow => this.lazyWorkflowModule.Value.Workflow;
@@ -105,6 +112,42 @@ namespace WorkflowSampleSystem.ServiceEnvironment
                 this.cryptService,
                 this.Impersonate,
                 this.currentTargetSystemTypeResolver);
+        }
+
+        protected override IAuthorizationBLLContext CreateAuthorizationBLLContext()
+        {
+            return this.WorkflowSampleSystemAuthorization;
+        }
+
+        private IWorkflowSampleSystemAuthorizationBLLContext CreateWorkflowSampleSystemAuthorizationBLLContext()
+        {
+            return new WorkflowSampleSystemAuthorizationBLLContext(
+                this.ScopedServiceProvider,
+                this.Session.GetDALFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>(),
+                this.AuthorizationOperationListeners,
+                this.AuthorizationSourceListeners,
+                this.Session.GetObjectStateService(),
+                this.GetAccessDeniedExceptionService<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>(),
+                this.StandartExpressionBuilder,
+                LazyInterfaceImplementHelper.CreateProxy<IValidator>(this.CreateAuthorizationValidator),
+                this.HierarchicalObjectExpanderFactory,
+                this.ServiceEnvironment.AuthorizationFetchService,
+                this.GetDateTimeService(),
+                this.GetUserAuthenticationService(),
+                LazyInterfaceImplementHelper.CreateProxy(() => this.GetSecurityExpressionBuilderFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>(this.Authorization)),
+                this.Configuration,
+                LazyInterfaceImplementHelper.CreateProxy<IAuthorizationSecurityService>(() => new AuthorizationSecurityService(this.Authorization)),
+                LazyInterfaceImplementHelper.CreateProxy<IAuthorizationBLLFactoryContainer>(() => new AuthorizationBLLFactoryContainer(this.Authorization)),
+                LazyInterfaceImplementHelper.CreateProxy(this.GetAuthorizationExternalSource),
+                LazyInterfaceImplementHelper.CreateProxy<IRunAsManager>(() => new AuthorizationRunAsManger(this.Authorization)),
+                principalName => this.Impersonate(principalName).Authorization,
+                LazyInterfaceImplementHelper.CreateProxy(this.GetSecurityTypeResolver),
+                this.GetWorkflowApproveProcessor());
+        }
+
+        private IWorkflowApproveProcessor GetWorkflowApproveProcessor()
+        {
+            return new WorkflowApproveProcessor(this.Authorization);
         }
 
         protected override IMessageSender<Exception> GetExceptionSender()

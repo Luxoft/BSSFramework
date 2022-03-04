@@ -15,8 +15,6 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.Utils.Framework
 {
     public abstract class Authorization
     {
-        public string PrincipalName { get; set; }
-
         public abstract void EvaluateWrite(Action<IWorkflowSampleSystemBLLContext> action);
 
         public void SetCurrentUserRole([NotNull] params IPermissionDefinition[] permissions)
@@ -31,27 +29,27 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.Utils.Framework
                 IPermissionDefinition currentPermission = permission;
 
                 this.EvaluateWrite(context =>
-                                   {
-                                       var principalBLL = context.Authorization.Logics.Principal;
-                                       var businessRoleBLL = context.Authorization.Logics.BusinessRole;
-                                       var permissionBLL = context.Authorization.Logics.Permission;
+                {
+                    var principalBLL = context.Authorization.Logics.Principal;
+                    var businessRoleBLL = context.Authorization.Logics.BusinessRole;
+                    var permissionBLL = context.Authorization.Logics.Permission;
 
-                                       Principal principalDomainObject = principalName == null
-                                                                             ? principalBLL.GetCurrent(true)
-                                                                             : principalBLL.GetByNameOrCreate(principalName, true);
+                    Principal principalDomainObject = principalName == null
+                                                              ? principalBLL.GetCurrent(true)
+                                                              : principalBLL.GetByNameOrCreate(principalName, true);
 
-                                       var businessRole = businessRoleBLL.GetByName(currentPermission.GetRoleName(), true);
+                    var businessRole = businessRoleBLL.GetByName(currentPermission.GetRoleName(), true);
 
-                                       var permissionDomainObject = new Permission(principalDomainObject)
-                                                                    {
-                                                                        Role = businessRole
-                                                                    };
+                    var permissionDomainObject = new Permission(principalDomainObject)
+                    {
+                        Role = businessRole
+                    };
 
-                                       permissionBLL.Save(permissionDomainObject);
+                    permissionBLL.Save(permissionDomainObject);
 
-                                       this.FindAndSavePermissionFilter(context, currentPermission,
-                                                                        permissionDomainObject);
-                                   });
+                    this.FindAndSavePermissionFilter(context, currentPermission,
+                                                     permissionDomainObject);
+                });
             }
         }
 
@@ -62,8 +60,6 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.Utils.Framework
                 throw new ArgumentNullException(nameof(permissions));
             }
 
-            this.FinishRunAsUser();
-
             this.RemovePermissions(principalName);
 
             this.AddUserRole(principalName, permissions);
@@ -72,28 +68,28 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.Utils.Framework
         public void AddCurrentUserToAdmin()
         {
             this.EvaluateWrite(context =>
-                {
+            {
                 var principalBLL = context.Authorization.Logics.Principal;
                 var businessRoleBLL = context.Authorization.Logics.BusinessRole;
                 var permissionBLL = context.Authorization.Logics.Permission;
-                    var currentPrincipal = principalBLL.GetCurrent(true);
+                var currentPrincipal = principalBLL.GetCurrent(true);
 
-                    var adminRole = businessRoleBLL.GetOrCreateAdminRole();
+                var adminRole = businessRoleBLL.GetOrCreateAdminRole();
 
-                    if (!currentPrincipal.Permissions.Select(permission => permission.Role).Contains(adminRole))
-                    {
-                        new Permission(currentPrincipal) { Role = adminRole }.Pipe(permissionBLL.Save);
-                    }
-                });
+                if (!currentPrincipal.Permissions.Select(permission => permission.Role).Contains(adminRole))
+                {
+                    new Permission(currentPrincipal) { Role = adminRole }.Pipe(permissionBLL.Save);
+                }
+            });
         }
 
         protected void FinishRunAsUser()
         {
             this.EvaluateWrite(
-                context =>
-                {
-                    context.Authorization.RunAsManager.FinishRunAsUser();
-                });
+                               context =>
+                               {
+                                   context.Authorization.RunAsManager.FinishRunAsUser();
+                               });
         }
 
 
@@ -108,8 +104,8 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.Utils.Framework
         private void SavePermissionFilter(IWorkflowSampleSystemBLLContext context, Permission permission, Guid entityId, string entityName)
         {
             var entity =
-                context.Authorization.Logics.PermissionFilterEntity.GetUnsecureQueryable()
-                    .FirstOrDefault(e => e.EntityId == entityId && e.EntityType.Name == entityName);
+                    context.Authorization.Logics.PermissionFilterEntity.GetUnsecureQueryable()
+                           .FirstOrDefault(e => e.EntityId == entityId && e.EntityType.Name == entityName);
 
             if (entity == null)
             {
@@ -133,29 +129,29 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.Utils.Framework
         private void RemovePermissions(string principalName)
         {
             this.EvaluateWrite(
-                context =>
-                {
-                    var permissionBLL = context.Authorization.Logics.Permission;
-                    var principalBLL = context.Authorization.Logics.Principal;
+                               context =>
+                               {
+                                   var permissionBLL = context.Authorization.Logics.Permission;
+                                   var principalBLL = context.Authorization.Logics.Principal;
 
-                    Principal principalDomainObject = principalName == null
-                        ? principalBLL.GetCurrent(true)
-                        : principalBLL.GetByName(principalName);
+                                   Principal principalDomainObject = principalName == null
+                                                                             ? principalBLL.GetCurrent(true)
+                                                                             : principalBLL.GetByName(principalName);
 
 
-                    if (principalDomainObject == null)
-                    {
-                        return;
-                    }
+                                   if (principalDomainObject == null)
+                                   {
+                                       return;
+                                   }
 
-                    var permissions =
-                        permissionBLL.GetObjectsBy(p => p.Principal == principalDomainObject);
+                                   var permissions =
+                                           permissionBLL.GetObjectsBy(p => p.Principal == principalDomainObject);
 
-                    foreach (Permission permission in permissions)
-                    {
-                        permissionBLL.Remove(permission);
-                    }
-                });
+                                   foreach (Permission permission in permissions)
+                                   {
+                                       permissionBLL.Remove(permission);
+                                   }
+                               });
         }
     }
 }

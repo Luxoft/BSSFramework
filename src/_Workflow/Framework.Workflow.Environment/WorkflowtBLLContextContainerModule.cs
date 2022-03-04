@@ -23,14 +23,12 @@ public abstract class WorkflowBLLContextContainerModule<TMainServiceEnvironment,
         where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
         where TBLLContext : class, ITypeResolverContainer<string>, ISecurityServiceContainer<IRootSecurityService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>>, ISecurityBLLContext<IAuthorizationBLLContext, TPersistentDomainObjectBase, Guid>, IAccessDeniedExceptionServiceContainer<TPersistentDomainObjectBase>
         where TSecurityOperationCode : struct, Enum
-
-//IBLLContextContainer<IWorkflowBLLContext>
 {
-    private readonly WorkflowServiceEnvironmentModule<TMainServiceEnvironment, TBLLContextContainer, TBLLContext, TPersistentDomainObjectBase> workflowServiceEnvironment;
+    protected readonly WorkflowServiceEnvironmentModule<TMainServiceEnvironment, TBLLContextContainer, TBLLContext, TPersistentDomainObjectBase> WorkflowServiceEnvironment;
 
-    private readonly TMainServiceEnvironment mainServiceEnvironment;
+    protected readonly TMainServiceEnvironment MainServiceEnvironment;
 
-    private readonly TBLLContextContainer bllContextContainer;
+    protected readonly TBLLContextContainer BllContextContainer;
 
     protected readonly BLLOperationEventListenerContainer<Framework.Workflow.Domain.DomainObjectBase>
             WorkflowOperationListeners =
@@ -47,9 +45,9 @@ public abstract class WorkflowBLLContextContainerModule<TMainServiceEnvironment,
             [NotNull] TMainServiceEnvironment mainServiceEnvironment,
             TBLLContextContainer bllContextContainer)
     {
-        this.workflowServiceEnvironment = workflowServiceEnvironment ?? throw new ArgumentNullException(nameof(workflowServiceEnvironment));
-        this.mainServiceEnvironment = mainServiceEnvironment ?? throw new ArgumentNullException(nameof(mainServiceEnvironment));
-        this.bllContextContainer = bllContextContainer;
+        this.WorkflowServiceEnvironment = workflowServiceEnvironment ?? throw new ArgumentNullException(nameof(workflowServiceEnvironment));
+        this.MainServiceEnvironment = mainServiceEnvironment ?? throw new ArgumentNullException(nameof(mainServiceEnvironment));
+        this.BllContextContainer = bllContextContainer;
         this.lazyWorkflowEventsSubscriptionManager = LazyHelper.Create(this.CreateWorkflowEventsSubscriptionManager);
 
 
@@ -59,27 +57,27 @@ public abstract class WorkflowBLLContextContainerModule<TMainServiceEnvironment,
     protected virtual IWorkflowBLLContext CreateWorkflowBLLContext()
     {
         return new WorkflowBLLContext(
-                                      this.bllContextContainer.ScopedServiceProvider,
-                                      this.bllContextContainer.Session.GetDALFactory<Framework.Workflow.Domain.PersistentDomainObjectBase, Guid>(),
+                                      this.BllContextContainer.ScopedServiceProvider,
+                                      this.BllContextContainer.Session.GetDALFactory<Framework.Workflow.Domain.PersistentDomainObjectBase, Guid>(),
                                       this.WorkflowOperationListeners,
                                       this.WorkflowSourceListeners,
-                                      this.bllContextContainer.Session.GetObjectStateService(),
-                                      this.bllContextContainer.GetAccessDeniedExceptionService<Framework.Workflow.Domain.PersistentDomainObjectBase, Guid>(),
-                                      this.bllContextContainer.StandartExpressionBuilder,
+                                      this.BllContextContainer.Session.GetObjectStateService(),
+                                      this.BllContextContainer.GetAccessDeniedExceptionService<Framework.Workflow.Domain.PersistentDomainObjectBase, Guid>(),
+                                      this.BllContextContainer.StandartExpressionBuilder,
                                       LazyInterfaceImplementHelper.CreateProxy<IValidator>(this.CreateWorkflowValidator),
-                                      this.bllContextContainer.HierarchicalObjectExpanderFactory,
-                                      this.workflowServiceEnvironment.WorkflowFetchService,
-                                      this.bllContextContainer.GetDateTimeService(),
-                                      LazyInterfaceImplementHelper.CreateProxy(() => this.bllContextContainer.GetSecurityExpressionBuilderFactory<Framework.Workflow.BLL.IWorkflowBLLContext, Framework.Workflow.Domain.PersistentDomainObjectBase, Guid>(this.Workflow)),
-                                      this.bllContextContainer.Configuration,
-                                      this.bllContextContainer.Authorization,
+                                      this.BllContextContainer.HierarchicalObjectExpanderFactory,
+                                      this.WorkflowServiceEnvironment.WorkflowFetchService,
+                                      this.BllContextContainer.GetDateTimeService(),
+                                      LazyInterfaceImplementHelper.CreateProxy(() => this.BllContextContainer.GetSecurityExpressionBuilderFactory<Framework.Workflow.BLL.IWorkflowBLLContext, Framework.Workflow.Domain.PersistentDomainObjectBase, Guid>(this.Workflow)),
+                                      this.BllContextContainer.Configuration,
+                                      this.BllContextContainer.Authorization,
                                       () => new WorkflowSecurityService(this.Workflow),
                                       () => new WorkflowBLLFactoryContainer(this.Workflow),
-                                      this.workflowServiceEnvironment.WorkflowLambdaProcessorFactory,
-                                      this.workflowServiceEnvironment.WorkflowAnonymousTypeBuilder,
+                                      this.WorkflowServiceEnvironment.WorkflowLambdaProcessorFactory,
+                                      this.WorkflowServiceEnvironment.WorkflowAnonymousTypeBuilder,
                                       this.GetWorkflowTargetSystemServices(),
-                                      principalName => ((TBLLContextContainer)this.bllContextContainer.Impersonate(principalName)).Workflow,
-                                      this.workflowServiceEnvironment.WorkflowAnonymousObjectValidator);
+                                      principalName => ((TBLLContextContainer)this.BllContextContainer.Impersonate(principalName)).Workflow,
+                                      this.WorkflowServiceEnvironment.WorkflowAnonymousObjectValidator);
     }
 
     protected IEventsSubscriptionManager<IWorkflowBLLContext, Framework.Workflow.Domain.PersistentDomainObjectBase> WorkflowEventsSubscriptionManager => this.lazyWorkflowEventsSubscriptionManager.Value;
@@ -100,7 +98,7 @@ public abstract class WorkflowBLLContextContainerModule<TMainServiceEnvironment,
     /// <returns></returns>
     protected virtual WorkflowValidator CreateWorkflowValidator()
     {
-        return new WorkflowValidator(this.Workflow, this.workflowServiceEnvironment.DefaultWorkflowValidatorCompileCache);
+        return new WorkflowValidator(this.Workflow, this.WorkflowServiceEnvironment.DefaultWorkflowValidatorCompileCache);
     }
 
     protected virtual IEventsSubscriptionManager<IWorkflowBLLContext, Framework.Workflow.Domain.PersistentDomainObjectBase> CreateWorkflowEventsSubscriptionManager()
@@ -114,30 +112,20 @@ public abstract class WorkflowBLLContextContainerModule<TMainServiceEnvironment,
     protected Framework.Configuration.BLL.ITargetSystemService GetWorkflowConfigurationTargetSystemServices()
     {
         return new Framework.Configuration.BLL.TargetSystemService<IWorkflowBLLContext, Framework.Workflow.Domain.PersistentDomainObjectBase>(
-         this.bllContextContainer.Configuration,
+         this.BllContextContainer.Configuration,
          this.Workflow,
-         this.bllContextContainer.Configuration.Logics.TargetSystem.GetByName(WorkflowTargetSystemHelper.WorkflowName, true),
+         this.BllContextContainer.Configuration.Logics.TargetSystem.GetByName(WorkflowTargetSystemHelper.WorkflowName, true),
          this.GetWorkflowEventDALListeners(),
-         this.mainServiceEnvironment.SubscriptionMetadataStore);
-    }
-
-    protected Framework.Workflow.BLL.ITargetSystemService GetAuthorizationWorkflowTargetSystemService()
-    {
-        return new Framework.Workflow.BLL.TargetSystemService<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, AuthorizationSecurityOperationCode>(
-         this.Workflow,
-         this.bllContextContainer.Authorization,
-         this.Workflow.Logics.TargetSystem.GetByName(TargetSystemHelper.AuthorizationName, true),
-         this.workflowServiceEnvironment.WorkflowAuthorizationSystemCompileCache,
-         new[] { typeof(Framework.Authorization.Domain.Permission) });
+         this.MainServiceEnvironment.SubscriptionMetadataStore);
     }
 
     protected Framework.Workflow.BLL.ITargetSystemService GetMainWorkflowTargetSystemService(HashSet<Type> workflowSourceTypes)
     {
         return new TargetSystemService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>(
          this.Workflow,
-         this.bllContextContainer.MainContext,
+         this.BllContextContainer.MainContext,
          this.Workflow.Logics.TargetSystem.GetObjectBy(ts => ts.IsMain, true),
-         this.workflowServiceEnvironment.WorkflowMainSystemCompileCache,
+         this.WorkflowServiceEnvironment.WorkflowMainSystemCompileCache,
          workflowSourceTypes);
     }
 

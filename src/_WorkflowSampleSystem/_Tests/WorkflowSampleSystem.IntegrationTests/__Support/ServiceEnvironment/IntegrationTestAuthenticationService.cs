@@ -2,14 +2,19 @@
 
 namespace WorkflowSampleSystem.IntegrationTests.__Support.ServiceEnvironment
 {
-    public class IntegrationTestAuthenticationService : IUserAuthenticationService
+    public class IntegrationTestsUserAuthenticationService : IUserAuthenticationService
     {
-        private IntegrationTestAuthenticationService()
+        private IntegrationTestsUserAuthenticationService()
         {
         }
 
-        public string GetUserName() => $"{System.Environment.UserDomainName}\\{System.Environment.UserName}";
+        private static readonly string DefaultUserName = $"{System.Environment.UserDomainName}\\{System.Environment.UserName}";
 
-        public static readonly IntegrationTestAuthenticationService Instance = new();
+        public string GetUserName() => this.CustomUserName ?? DefaultUserName;
+
+        public string CustomUserName { get; set; }
+
+        public static IntegrationTestsUserAuthenticationService Instance = new IntegrationTestsUserAuthenticationService();
     }
+
 }

@@ -35,11 +35,11 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         IConfigurationServiceEnvironment,
         IDisposable
     {
-        private readonly IFetchService<Framework.Authorization.Domain.PersistentDomainObjectBase, FetchBuildRule> authorizationFetchService;
+        public readonly IFetchService<Framework.Authorization.Domain.PersistentDomainObjectBase, FetchBuildRule> AuthorizationFetchService;
 
-        private readonly IFetchService<Framework.Configuration.Domain.PersistentDomainObjectBase, FetchBuildRule> configurationFetchService;
+        public readonly IFetchService<Framework.Configuration.Domain.PersistentDomainObjectBase, FetchBuildRule> ConfigurationFetchService;
 
-        private readonly IUserAuthenticationService userAuthenticationService;
+        public readonly IUserAuthenticationService UserAuthenticationService;
 
         protected ServiceEnvironmentBase(
             [NotNull] IServiceProvider serviceProvider,
@@ -74,13 +74,13 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     .Pipe(extendedValidationData => new ConfigurationValidationMap(extendedValidationData))
                     .ToCompileCache();
 
-            this.authorizationFetchService = new AuthorizationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Authorization.Domain.PersistentDomainObjectBase>.OData);
+            this.AuthorizationFetchService = new AuthorizationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Authorization.Domain.PersistentDomainObjectBase>.OData);
 
-            this.configurationFetchService = new ConfigurationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Configuration.Domain.PersistentDomainObjectBase>.OData);
+            this.ConfigurationFetchService = new ConfigurationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Configuration.Domain.PersistentDomainObjectBase>.OData);
 
             this.SubscriptionMetadataStore = new SubscriptionMetadataStore(subscriptionsMetadataFinder ?? new SubscriptionMetadataFinder());
 
-            this.userAuthenticationService = userAuthenticationService ?? throw new ArgumentNullException(nameof(userAuthenticationService));
+            this.UserAuthenticationService = userAuthenticationService ?? throw new ArgumentNullException(nameof(userAuthenticationService));
         }
 
         /// <summary>
@@ -296,7 +296,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     this.StandartExpressionBuilder,
                     LazyInterfaceImplementHelper.CreateProxy<IValidator>(this.CreateAuthorizationValidator),
                     this.HierarchicalObjectExpanderFactory,
-                    this.ServiceEnvironment.authorizationFetchService,
+                    this.ServiceEnvironment.AuthorizationFetchService,
                     this.GetDateTimeService(),
                     this.GetUserAuthenticationService(),
                     LazyInterfaceImplementHelper.CreateProxy(() => this.GetSecurityExpressionBuilderFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>(this.Authorization)),
@@ -321,7 +321,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     this.StandartExpressionBuilder,
                     LazyInterfaceImplementHelper.CreateProxy<IValidator>(this.CreateConfigurationValidator),
                     this.HierarchicalObjectExpanderFactory,
-                    this.ServiceEnvironment.configurationFetchService,
+                    this.ServiceEnvironment.ConfigurationFetchService,
                     this.GetDateTimeService(),
                     LazyInterfaceImplementHelper.CreateProxy(() => this.GetSecurityExpressionBuilderFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>(this.Configuration)),
                     this.NotificationService.ExceptionSender,
@@ -463,10 +463,10 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             {
                 if (string.IsNullOrWhiteSpace(this.currentPrincipalName))
                 {
-                    return this.ServiceEnvironment.userAuthenticationService;
+                    return this.ServiceEnvironment.UserAuthenticationService;
                 }
 
-                return UserAuthenticationService.CreateFor(this.currentPrincipalName);
+                return Core.Services.UserAuthenticationService.CreateFor(this.currentPrincipalName);
             }
 
             protected virtual IMessageSender<NotificationEventDTO> GetMainTemplateSender()

@@ -42,6 +42,8 @@ namespace WorkflowSampleSystem.ServiceEnvironment
         protected readonly IFetchService<PersistentDomainObjectBase, FetchBuildRule> FetchService;
         protected readonly Func<IWorkflowSampleSystemBLLContext, ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>> SecurityExpressionBuilderFactoryFunc;
 
+
+
         public WorkflowSampleSystemServiceEnvironment(
             IServiceProvider serviceProvider,
             IDBSessionFactory sessionFactory,
@@ -70,6 +72,7 @@ namespace WorkflowSampleSystem.ServiceEnvironment
 
             this.InitializeOperation(this.Initialize);
         }
+        public TargetSystemServiceCompileCache<IWorkflowSampleSystemAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase> WorkflowAuthorizationSystemCompileCache { get; } = new();
 
         public ISystemMetadataTypeBuilder SystemMetadataTypeBuilder { get; }
 

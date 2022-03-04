@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using WorkflowSampleSystem.Domain;
-using WorkflowSampleSystem.Domain.Inline;
-using WorkflowSampleSystem.Generated.DTO;
+﻿using WorkflowSampleSystem.Domain.Inline;
+using WorkflowSampleSystem.IntegrationTests.__Support.Utils;
 
 namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData
 {
@@ -13,6 +11,9 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.TestData
             this.AuthHelper.Environment = this.Environment;
 
             this.AuthHelper.AddCurrentUserToAdmin();
+
+            this.AuthHelper.SetUserRole(DefaultConstants.NOTIFICATION_ADMIN, new WorkflowSampleSystemPermission(BusinessRole.SystemIntegration));
+            this.AuthHelper.SetUserRole(DefaultConstants.INTEGRATION_USER, new WorkflowSampleSystemPermission(BusinessRole.SystemIntegration));
 
             this.DataHelper.SaveLocation(id: DefaultConstants.LOCATION_PARENT_ID, name: DefaultConstants.LOCATION_PARENT_NAME);
 

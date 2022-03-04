@@ -17,7 +17,7 @@ namespace Framework.Workflow.BLL
 {
     public partial class TargetSystemService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> : BLLContextContainer<IWorkflowBLLContext>, ITargetSystemService<TBLLContext, TPersistentDomainObjectBase>
 
-        where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>>,
+        where TBLLContext : class, ISecurityServiceContainer<ISecurityProviderSource<TPersistentDomainObjectBase, TSecurityOperationCode>>,
                                    ISecurityBLLContext<IAuthorizationBLLContext, TPersistentDomainObjectBase, Guid>,
                                    IAccessDeniedExceptionServiceContainer<TPersistentDomainObjectBase>,
                                    ITypeResolverContainer<string>

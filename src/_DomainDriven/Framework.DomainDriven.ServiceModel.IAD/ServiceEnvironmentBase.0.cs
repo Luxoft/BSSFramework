@@ -16,9 +16,6 @@ using Framework.DomainDriven.BLL.Security;
 using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.Events;
-using Framework.ExpressionParsers;
-using Framework.Graphviz;
-using Framework.Graphviz.Dot;
 using Framework.HierarchicalExpand;
 using Framework.Notification;
 using Framework.Notification.DTO;
@@ -110,11 +107,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         public INotificationContext NotificationContext { get; }
 
         public IDBSessionFactory SessionFactory { get; }
-
-        public virtual IDotVisualizer<DotGraph> DotVisualizer
-        {
-            get { return NativeDotVisualizer.Configuration.OverrideInput((DotGraph graph) => graph.ToString()); }
-        }
 
         public virtual bool IsDebugMode => Debugger.IsAttached;
 
@@ -287,6 +279,11 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
             protected virtual ISerializerFactory<string> SystemConstantSerializerFactory { get; }
 
+            protected virtual IEnumerable<IBLLContextContainerModule> GetModules()
+            {
+                yield break;
+            }
+
             protected virtual IAuthorizationBLLContext CreateAuthorizationBLLContext()
             {
                 return new AuthorizationBLLContext(
@@ -387,11 +384,23 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                 this.AuthorizationEventsSubscriptionManager.Maybe(eventManager => eventManager.Subscribe());
 
                 this.ConfigurationEventsSubscriptionManager.Maybe(eventManager => eventManager.Subscribe());
+
+                foreach (var module in this.GetModules())
+                {
+                    module.SubscribeEvents();
+                }
             }
 
-
-
-            protected abstract IEnumerable<IDALListener> GetBeforeTransactionCompletedListeners();
+            protected virtual IEnumerable<IDALListener> GetBeforeTransactionCompletedListeners()
+            {
+                foreach (var module in this.GetModules())
+                {
+                    foreach (var listener in module.GetBeforeTransactionCompletedListeners())
+                    {
+                        yield return listener;
+                    }
+                }
+            }
 
             protected abstract IEnumerable<IDALListener> GetAfterTransactionCompletedListeners();
 

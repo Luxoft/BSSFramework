@@ -7,7 +7,6 @@ using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.DomainDriven.ServiceModel.Service;
 using Framework.ExpressionParsers;
 using Framework.Graphviz;
 using Framework.Graphviz.Dot;
@@ -19,31 +18,13 @@ using JetBrains.Annotations;
 
 namespace Framework.Workflow.Environment;
 
-public class WorkflowServiceEnvironmentModule<TMainServiceEnvironment, TBLLContextContainer, TBLLContext, TPersistentDomainObjectBase> : IWorkflowServiceEnvironment
-        where TMainServiceEnvironment: class, IRootServiceEnvironment<TBLLContext, TBLLContextContainer>
+public class WorkflowServiceEnvironmentModule<TMainServiceEnvironment, TBLLContextContainer, TBLLContext, TPersistentDomainObjectBase> : IServiceEnvironmentModule<TBLLContextContainer>, IWorkflowServiceEnvironment
+        where TMainServiceEnvironment : class, IRootServiceEnvironment<TBLLContext, TBLLContextContainer>
         where TBLLContextContainer : ServiceEnvironmentBase.ServiceEnvironmentBLLContextContainer, IBLLContextContainer<IWorkflowBLLContext>, IWorkflowBLLContextContainer
         where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
         where TBLLContext : IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
 {
     private readonly TMainServiceEnvironment mainServiceEnvironment;
-
-    public readonly IValidator WorkflowAnonymousObjectValidator = new Validator(new ValidationMap(ValidationExtendedData.Infinity).ToCompileCache());
-
-    public readonly IAnonymousTypeBuilder<TypeMap<ParameterizedTypeMapMember>> WorkflowAnonymousTypeBuilder =
-
-            new WorkflowAnonymousTypeBuilder(new AnonymousTypeBuilderStorageFactory().Create("Workflow_AnonymousType"))
-                    .WithCompressName()
-                    .WithCache()
-                    .WithLock();
-
-    public readonly TargetSystemServiceCompileCache<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase> WorkflowAuthorizationSystemCompileCache = new();
-
-    public readonly TargetSystemServiceCompileCache<TBLLContext, TPersistentDomainObjectBase> WorkflowMainSystemCompileCache = new();
-
-    public readonly Framework.Workflow.BLL.IExpressionParserFactory WorkflowLambdaProcessorFactory = new Framework.Workflow.BLL.ExpressionParserFactory(CSharpNativeExpressionParser.Composite);
-
-    public readonly IFetchService<Framework.Workflow.Domain.PersistentDomainObjectBase, FetchBuildRule> WorkflowFetchService;
-
 
     public WorkflowServiceEnvironmentModule([NotNull] TMainServiceEnvironment mainServiceEnvironment, [NotNull] IDotVisualizer<DotGraph> dotVisualizer)
     {
@@ -59,11 +40,30 @@ public class WorkflowServiceEnvironmentModule<TMainServiceEnvironment, TBLLConte
                     .ToBLLContextValidationExtendedData<Framework.Workflow.BLL.IWorkflowBLLContext, Framework.Workflow.Domain.PersistentDomainObjectBase, Guid>()
                     .Pipe(extendedValidationData => new WorkflowValidationMap(extendedValidationData))
                     .ToCompileCache();
-
-        this.WorkflowFetchService = new WorkflowMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Workflow.Domain.PersistentDomainObjectBase>.OData);
     }
 
     public ValidatorCompileCache DefaultWorkflowValidatorCompileCache { get; }
+
+    public IValidator WorkflowAnonymousObjectValidator { get; } = new Validator(new ValidationMap(ValidationExtendedData.Infinity).ToCompileCache());
+
+    public IAnonymousTypeBuilder<TypeMap<ParameterizedTypeMapMember>> WorkflowAnonymousTypeBuilder { get; } =
+
+        new WorkflowAnonymousTypeBuilder(new AnonymousTypeBuilderStorageFactory().Create("Workflow_AnonymousType"))
+                .WithCompressName()
+                .WithCache()
+                .WithLock();
+
+    public TargetSystemServiceCompileCache<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase> WorkflowAuthorizationSystemCompileCache { get; } = new();
+
+    public TargetSystemServiceCompileCache<TBLLContext, TPersistentDomainObjectBase> WorkflowMainSystemCompileCache { get; } = new();
+
+    public Framework.Workflow.BLL.IExpressionParserFactory WorkflowLambdaProcessorFactory { get; } = new Framework.Workflow.BLL.ExpressionParserFactory(CSharpNativeExpressionParser.Composite);
+
+    public IFetchService<Framework.Workflow.Domain.PersistentDomainObjectBase, FetchBuildRule> WorkflowFetchService { get; } =
+
+        new WorkflowMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Workflow.Domain.PersistentDomainObjectBase>.OData);
+
+
 
     public IDBSessionFactory SessionFactory => this.mainServiceEnvironment.SessionFactory;
 
@@ -74,7 +74,7 @@ public class WorkflowServiceEnvironmentModule<TMainServiceEnvironment, TBLLConte
     public IDotVisualizer<DotGraph> DotVisualizer { get; }
 
 
-    protected virtual IEnumerable<IDALListener> GetDALFlushedListeners(TBLLContextContainer container)
+    public virtual IEnumerable<IDALListener> GetDALFlushedListeners(TBLLContextContainer container)
     {
         foreach (var listener in this.GetWorkflowDALListeners(container.Workflow))
         {

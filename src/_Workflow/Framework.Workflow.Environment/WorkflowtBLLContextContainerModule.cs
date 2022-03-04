@@ -87,7 +87,7 @@ public abstract class WorkflowBLLContextContainerModule<TMainServiceEnvironment,
     /// <summary>
     /// Подписка на евенты
     /// </summary>
-    protected internal virtual void SubscribeEvents()
+    public virtual void SubscribeEvents()
     {
         this.WorkflowEventsSubscriptionManager.Maybe(eventManager => eventManager.Subscribe());
     }

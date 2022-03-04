@@ -94,7 +94,7 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.ServiceEnvironment
 
         protected override WorkflowSampleSystemBLLContextContainer CreateBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null)
         {
-            return new TestWorkflowSampleSystemBLLContextContainerStandard(
+            return new TestWorkflowSampleSystemBLLContextContainer(
                 this,
                 scopedServiceProvider,
                 this.DefaultAuthorizationValidatorCompileCache,
@@ -104,16 +104,14 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.ServiceEnvironment
                 this.CryptService,
                 CurrentTargetSystemTypeResolver,
                 session,
-                currentPrincipalName,
-                this.smtpSettings,
-                this.rewriteReceiversService);
+                currentPrincipalName);
         }
 
-        private class TestWorkflowSampleSystemBLLContextContainerStandard : WorkflowSampleSystemBLLContextContainer
+        private class TestWorkflowSampleSystemBLLContextContainer : WorkflowSampleSystemBLLContextContainer
         {
 
-            public TestWorkflowSampleSystemBLLContextContainerStandard(WorkflowSampleSystemServiceEnvironment serviceEnvironment, IServiceProvider scopedServiceProvider, ValidatorCompileCache defaultAuthorizationValidatorCompileCache, ValidatorCompileCache validatorCompileCache, Func<IWorkflowSampleSystemBLLContext, ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>> securityExpressionBuilderFactoryFunc, IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService, ICryptService<CryptSystem> cryptService, ITypeResolver<string> currentTargetSystemTypeResolver, IDBSession session, string currentPrincipalName, SmtpSettings smtpSettings, IRewriteReceiversService rewriteReceiversService)
-                : base(serviceEnvironment, scopedServiceProvider, defaultAuthorizationValidatorCompileCache, validatorCompileCache, securityExpressionBuilderFactoryFunc, fetchService, cryptService, currentTargetSystemTypeResolver, session, currentPrincipalName, smtpSettings, rewriteReceiversService)
+            public TestWorkflowSampleSystemBLLContextContainer(WorkflowSampleSystemServiceEnvironment serviceEnvironment, IServiceProvider scopedServiceProvider, ValidatorCompileCache defaultAuthorizationValidatorCompileCache, ValidatorCompileCache validatorCompileCache, Func<IWorkflowSampleSystemBLLContext, ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>> securityExpressionBuilderFactoryFunc, IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService, ICryptService<CryptSystem> cryptService, ITypeResolver<string> currentTargetSystemTypeResolver, IDBSession session, string currentPrincipalName)
+                : base(serviceEnvironment, scopedServiceProvider, defaultAuthorizationValidatorCompileCache, validatorCompileCache, securityExpressionBuilderFactoryFunc, fetchService, cryptService, currentTargetSystemTypeResolver, session, currentPrincipalName)
             {
             }
 

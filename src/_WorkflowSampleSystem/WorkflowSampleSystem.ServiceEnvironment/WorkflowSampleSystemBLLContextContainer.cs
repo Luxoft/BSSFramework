@@ -62,9 +62,7 @@ namespace WorkflowSampleSystem.ServiceEnvironment
             ICryptService<CryptSystem> cryptService,
             ITypeResolver<string> currentTargetSystemTypeResolver,
             IDBSession session,
-            string currentPrincipalName,
-            SmtpSettings smtpSettings,
-            IRewriteReceiversService rewriteReceiversService)
+            string currentPrincipalName)
             : base(serviceEnvironment, scopedServiceProvider, session, currentPrincipalName)
         {
             this.defaultAuthorizationValidatorCompileCache = defaultAuthorizationValidatorCompileCache;
@@ -74,9 +72,20 @@ namespace WorkflowSampleSystem.ServiceEnvironment
             this.cryptService = cryptService;
             this.currentTargetSystemTypeResolver = currentTargetSystemTypeResolver;
 
-            this.lazyWorkflowModule = LazyHelper.Create(() => new WorkflowSamplSystemBLLContextContainerModule())
+            this.lazyWorkflowModule = LazyHelper.Create(() => new WorkflowSamplSystemBLLContextContainerModule(serviceEnvironment, this));
         }
 
+        public IWorkflowBLLContext Workflow => this.lazyWorkflowModule.Value.Workflow;
+
+        protected override IEnumerable<IBLLContextContainerModule> GetModules()
+        {
+            foreach (var baseModule in this.GetModules())
+            {
+                yield return baseModule;
+            }
+
+            yield return this.lazyWorkflowModule.Value;
+        }
 
         protected override IWorkflowSampleSystemBLLContext CreateMainContext()
         {
@@ -101,6 +110,7 @@ namespace WorkflowSampleSystem.ServiceEnvironment
                 LazyInterfaceImplementHelper.CreateProxy<IWorkflowSampleSystemBLLFactoryContainer>(() => new WorkflowSampleSystemBLLFactoryContainer(this.MainContext)),
                 this.Authorization,
                 this.Configuration,
+                this.Workflow,
                 this.cryptService,
                 this.Impersonate,
                 this.currentTargetSystemTypeResolver);
@@ -190,5 +200,7 @@ namespace WorkflowSampleSystem.ServiceEnvironment
 
             this.aribaSubscriptionManager.Subscribe();
         }
+
+        IWorkflowBLLContext IBLLContextContainer<IWorkflowBLLContext>.Context => this.Workflow;
     }
 }

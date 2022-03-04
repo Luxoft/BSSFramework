@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.Graphviz\Framework.Graphviz.csproj" />
     <ProjectReference Include="..\..\Framework.HierarchicalExpand\Framework.HierarchicalExpand.csproj" />
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.BLL\Framework.Configuration.BLL.csproj" />
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.BLL\Framework.Authorization.BLL.csproj" />

@@ -11,11 +11,17 @@ using Framework.DomainDriven.Serialization;
 using Framework.DomainDriven.SerializeMetadata;
 using Framework.DomainDriven.ServiceModel;
 using Framework.DomainDriven.ServiceModel.IAD;
+using Framework.Graphviz;
+using Framework.Graphviz.Dot;
 using Framework.NotificationCore.Services;
 using Framework.NotificationCore.Settings;
 using Framework.Security.Cryptography;
 using Framework.SecuritySystem.Rules.Builders;
 using Framework.Validation;
+using Framework.Workflow.BLL;
+using Framework.Workflow.Environment;
+
+using JetBrains.Annotations;
 
 using Microsoft.Extensions.Options;
 
@@ -28,12 +34,13 @@ using PersistentDomainObjectBase = WorkflowSampleSystem.Domain.PersistentDomainO
 
 namespace WorkflowSampleSystem.ServiceEnvironment
 {
-    public abstract class WorkflowSampleSystemServiceEnvironment :
-        ServiceEnvironmentBase<WorkflowSampleSystemBLLContextContainer, IWorkflowSampleSystemBLLContext, PersistentDomainObjectBase,
+    public class WorkflowSampleSystemServiceEnvironment :
+        ServiceEnvironmentBase
+        <WorkflowSampleSystemBLLContextContainer,
+        IWorkflowSampleSystemBLLContext, PersistentDomainObjectBase,
         AuditPersistentDomainObjectBase, WorkflowSampleSystemSecurityOperationCode, NamedLock, NamedLockOperation>,
         ISystemMetadataTypeBuilderContainer
     {
-
         protected static readonly ITypeResolver<string> CurrentTargetSystemTypeResolver = new[] { TypeSource.FromSample<PersistentDomainObjectBase>().ToDefaultTypeResolver(), TypeSource.FromSample<BusinessUnitSimpleDTO>().ToDefaultTypeResolver() }.ToComposite();
 
         protected ICryptService<CryptSystem> CryptService { get; } = new CryptService<CryptSystem>();
@@ -43,17 +50,11 @@ namespace WorkflowSampleSystem.ServiceEnvironment
         protected readonly IFetchService<PersistentDomainObjectBase, FetchBuildRule> FetchService;
         protected readonly Func<IWorkflowSampleSystemBLLContext, ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>> SecurityExpressionBuilderFactoryFunc;
 
-        protected readonly SmtpSettings smtpSettings;
-
-        protected readonly IRewriteReceiversService rewriteReceiversService;
-
-
         public WorkflowSampleSystemServiceEnvironment(
             IServiceProvider serviceProvider,
             IDBSessionFactory sessionFactory,
             INotificationContext notificationContext,
             IUserAuthenticationService userAuthenticationService,
-
             bool? isDebugMode = null,
             Func<IWorkflowSampleSystemBLLContext, ISecurityExpressionBuilderFactory<WorkflowSampleSystem.Domain.PersistentDomainObjectBase, Guid>> securityExpressionBuilderFactoryFunc = null)
             : base(serviceProvider, sessionFactory, notificationContext, userAuthenticationService)
@@ -71,6 +72,10 @@ namespace WorkflowSampleSystem.ServiceEnvironment
                     .ToCompileCache();
             this.FetchService = new WorkflowSampleSystemMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<PersistentDomainObjectBase>.OData);
 
+            this.WorkflowModule = new WorkflowSampleSystemServiceEnvironmentModule(
+             this,
+             LazyInterfaceImplementHelper.CreateNotImplemented<IDotVisualizer<DotGraph>>());
+
             this.InitializeOperation(this.Initialize);
         }
 
@@ -78,7 +83,17 @@ namespace WorkflowSampleSystem.ServiceEnvironment
 
         public override bool IsDebugMode => this.isDebugMode ?? base.IsDebugMode;
 
+        public WorkflowSampleSystemServiceEnvironmentModule WorkflowModule { get; }
 
+        protected override IEnumerable<IServiceEnvironmentModule<WorkflowSampleSystemBLLContextContainer>> GetModules()
+        {
+            foreach (var baseModule in this.GetModules())
+            {
+                yield return baseModule;
+            }
+
+            yield return this.WorkflowModule;
+        }
 
         protected override WorkflowSampleSystemBLLContextContainer CreateBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null)
         {
@@ -92,9 +107,7 @@ namespace WorkflowSampleSystem.ServiceEnvironment
                                                        this.CryptService,
                                                        CurrentTargetSystemTypeResolver,
                                                        session,
-                                                       currentPrincipalName,
-                                                       this.smtpSettings,
-                                                       this.rewriteReceiversService);
+                                                       currentPrincipalName);
         }
 
 
@@ -117,6 +130,13 @@ namespace WorkflowSampleSystem.ServiceEnvironment
                 });
 
             contextEvaluator.Evaluate(
+                                      DBSessionMode.Write,
+                                      context =>
+                                      {
+                                          context.Workflow.Logics.NamedLock.CheckInit();
+                                      });
+
+            contextEvaluator.Evaluate(
                 DBSessionMode.Write,
                 context =>
                 {
@@ -132,6 +152,10 @@ namespace WorkflowSampleSystem.ServiceEnvironment
 
                     context.Configuration.Logics.TargetSystem.Register<Framework.Configuration.Domain.PersistentDomainObjectBase>(false, true, extTypes: extTypes);
                     context.Configuration.Logics.TargetSystem.Register<Framework.Authorization.Domain.PersistentDomainObjectBase>(false, true);
+
+                    context.Workflow.Logics.TargetSystem.RegisterBase();
+                    context.Workflow.Logics.TargetSystem.Register<WorkflowSampleSystem.Domain.PersistentDomainObjectBase>(true);
+                    context.Workflow.Logics.TargetSystem.Register<Framework.Authorization.Domain.PersistentDomainObjectBase>(false);
                 });
 
             contextEvaluator.Evaluate(

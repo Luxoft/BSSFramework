@@ -30,7 +30,7 @@ namespace WorkflowSampleSystem.IntegrationTests.Workflow
 
             var locationId = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
             {
-                var location = new Location { Name = "location", Code = 1000,  CloseDate = 20 };
+                var location = new Location { Name = "location" };
 
                 context.Logics.Location.Save(location);
 
@@ -66,7 +66,7 @@ namespace WorkflowSampleSystem.IntegrationTests.Workflow
             {
                 var locationId = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
                 {
-                    var location = new Location { Name = $"location{i}", Code = 1000 + i, CloseDate = 20 };
+                    var location = new Location { Name = $"location{i}" };
 
                     context.Logics.Location.Save(location);
 
@@ -100,7 +100,7 @@ namespace WorkflowSampleSystem.IntegrationTests.Workflow
             action.Should().NotThrow();
         }
 
-        private ExecuteCommandRequest GetCommand<TDomain>(ISampleSystemBLLContext context, TDomain workflowParameter, string commandName)
+        private ExecuteCommandRequest GetCommand<TDomain>(IWorkflowSampleSystemBLLContext context, TDomain workflowParameter, string commandName)
             where TDomain : Domain.PersistentDomainObjectBase
         {
             var domainType = context.Workflow.Logics.DomainType.GetByType(typeof(TDomain));

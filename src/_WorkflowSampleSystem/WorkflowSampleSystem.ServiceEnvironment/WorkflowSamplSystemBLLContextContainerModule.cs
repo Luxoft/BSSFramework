@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.Workflow.BLL;
-using Framework.Workflow.Environment;
 
 using JetBrains.Annotations;
 
@@ -14,8 +13,8 @@ namespace WorkflowSampleSystem.ServiceEnvironment;
 
 public class WorkflowSamplSystemBLLContextContainerModule : WorkflowBLLContextContainerModule<WorkflowSampleSystemServiceEnvironment, WorkflowSampleSystemBLLContextContainer, IWorkflowSampleSystemBLLContext, PersistentDomainObjectBase, WorkflowSampleSystemSecurityOperationCode>
 {
-    public WorkflowSamplSystemBLLContextContainerModule([NotNull] WorkflowServiceEnvironmentModule<WorkflowSampleSystemServiceEnvironment, WorkflowSampleSystemBLLContextContainer, IWorkflowSampleSystemBLLContext, PersistentDomainObjectBase> workflowServiceEnvironment, [NotNull] WorkflowSampleSystemServiceEnvironment mainServiceEnvironment, WorkflowSampleSystemBLLContextContainer bllContextContainer)
-            : base(workflowServiceEnvironment, mainServiceEnvironment, bllContextContainer)
+    public WorkflowSamplSystemBLLContextContainerModule([NotNull] WorkflowSampleSystemServiceEnvironment mainServiceEnvironment, WorkflowSampleSystemBLLContextContainer bllContextContainer)
+            : base(mainServiceEnvironment.WorkflowModule, mainServiceEnvironment, bllContextContainer)
     {
     }
 

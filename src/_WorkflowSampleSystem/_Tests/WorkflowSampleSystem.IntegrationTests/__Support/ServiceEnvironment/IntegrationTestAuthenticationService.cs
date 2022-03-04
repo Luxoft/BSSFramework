@@ -9,7 +9,7 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.ServiceEnvironment
         }
 
         public string GetUserName() => $"{System.Environment.UserDomainName}\\{System.Environment.UserName}";
-        
+
         public static readonly IntegrationTestAuthenticationService Instance = new();
     }
 }

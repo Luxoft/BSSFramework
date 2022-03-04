@@ -3,10 +3,10 @@
 -------------------------
 
 INSERT INTO [workflow].[TargetSystem] ([active],[createDate],[createdBy],[description],[id],[isBase],[isMain],[modifiedBy],[modifyDate],[name],[version])
-VALUES (1,getdate(),null,null,'2D362091-7DAC-4BEC-A5AB-351B93B338D7',0,1,null,getdate(),'SampleSystem',1)
+VALUES (1,getdate(),null,null,'2D362091-7DAC-4BEC-A5AB-351B93B338D7',0,1,null,getdate(),'WorkflowSampleSystem',1)
 
 INSERT INTO [workflow].[DomainType] ([active],[createDate],[createdBy],[description],[id],[modifiedBy],[modifyDate],[name],[nameSpace],[role],[targetSystemId],[version])
-VALUES (1,getdate(),null,null,'CACA9DB4-9DA6-48AA-9FD3-A311016CB715',null,getdate(),'Location','SampleSystem.Domain',1,'2D362091-7DAC-4BEC-A5AB-351B93B338D7',1)
+VALUES (1,getdate(),null,null,'CACA9DB4-9DA6-48AA-9FD3-A311016CB715',null,getdate(),'Location','WorkflowSampleSystem.Domain',1,'2D362091-7DAC-4BEC-A5AB-351B93B338D7',1)
 
 INSERT INTO [workflow].[Workflow] ([domainTypeId],[hasAttachments],[id],[activeConditionId],[autoRemoveWithDomainObject],[isValid],[active],[createDate],[createdBy],[description],[modifiedBy],[modifyDate],[name],[ownerId],[validationError],[version])
 VALUES ('CACA9DB4-9DA6-48AA-9FD3-A311016CB715',0,'CACA9DB4-9DA6-48AA-9FD3-A311016CB715',null,0,1,1,getdate(),null,null,null,getdate(),'Location workflow',null,null,1)

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 
 using Framework.Authorization.BLL;
-using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Core.Services;
 using Framework.DomainDriven;
@@ -13,17 +12,10 @@ using Framework.DomainDriven.ServiceModel;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.Graphviz;
 using Framework.Graphviz.Dot;
-using Framework.NotificationCore.Services;
-using Framework.NotificationCore.Settings;
 using Framework.Security.Cryptography;
 using Framework.SecuritySystem.Rules.Builders;
 using Framework.Validation;
 using Framework.Workflow.BLL;
-using Framework.Workflow.Environment;
-
-using JetBrains.Annotations;
-
-using Microsoft.Extensions.Options;
 
 using WorkflowSampleSystem.BLL;
 using WorkflowSampleSystem.Generated.DTO;
@@ -87,7 +79,7 @@ namespace WorkflowSampleSystem.ServiceEnvironment
 
         protected override IEnumerable<IServiceEnvironmentModule<WorkflowSampleSystemBLLContextContainer>> GetModules()
         {
-            foreach (var baseModule in this.GetModules())
+            foreach (var baseModule in base.GetModules())
             {
                 yield return baseModule;
             }
@@ -100,7 +92,6 @@ namespace WorkflowSampleSystem.ServiceEnvironment
             return new WorkflowSampleSystemBLLContextContainer(
                                                        this,
                                                        scopedServiceProvider,
-                                                       this.DefaultAuthorizationValidatorCompileCache,
                                                        this.ValidatorCompileCache,
                                                        this.SecurityExpressionBuilderFactoryFunc,
                                                        this.FetchService,

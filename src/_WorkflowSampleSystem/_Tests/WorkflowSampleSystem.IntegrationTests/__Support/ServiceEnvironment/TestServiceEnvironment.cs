@@ -97,7 +97,6 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.ServiceEnvironment
             return new TestWorkflowSampleSystemBLLContextContainer(
                 this,
                 scopedServiceProvider,
-                this.DefaultAuthorizationValidatorCompileCache,
                 this.ValidatorCompileCache,
                 this.SecurityExpressionBuilderFactoryFunc,
                 this.FetchService,
@@ -110,8 +109,8 @@ namespace WorkflowSampleSystem.IntegrationTests.__Support.ServiceEnvironment
         private class TestWorkflowSampleSystemBLLContextContainer : WorkflowSampleSystemBLLContextContainer
         {
 
-            public TestWorkflowSampleSystemBLLContextContainer(WorkflowSampleSystemServiceEnvironment serviceEnvironment, IServiceProvider scopedServiceProvider, ValidatorCompileCache defaultAuthorizationValidatorCompileCache, ValidatorCompileCache validatorCompileCache, Func<IWorkflowSampleSystemBLLContext, ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>> securityExpressionBuilderFactoryFunc, IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService, ICryptService<CryptSystem> cryptService, ITypeResolver<string> currentTargetSystemTypeResolver, IDBSession session, string currentPrincipalName)
-                : base(serviceEnvironment, scopedServiceProvider, defaultAuthorizationValidatorCompileCache, validatorCompileCache, securityExpressionBuilderFactoryFunc, fetchService, cryptService, currentTargetSystemTypeResolver, session, currentPrincipalName)
+            public TestWorkflowSampleSystemBLLContextContainer(WorkflowSampleSystemServiceEnvironment serviceEnvironment, IServiceProvider scopedServiceProvider, ValidatorCompileCache validatorCompileCache, Func<IWorkflowSampleSystemBLLContext, ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>> securityExpressionBuilderFactoryFunc, IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService, ICryptService<CryptSystem> cryptService, ITypeResolver<string> currentTargetSystemTypeResolver, IDBSession session, string currentPrincipalName)
+                : base(serviceEnvironment, scopedServiceProvider, validatorCompileCache, securityExpressionBuilderFactoryFunc, fetchService, cryptService, currentTargetSystemTypeResolver, session, currentPrincipalName)
             {
             }
 

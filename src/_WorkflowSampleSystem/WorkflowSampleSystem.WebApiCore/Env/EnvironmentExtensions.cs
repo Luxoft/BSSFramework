@@ -11,7 +11,9 @@ using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Exceptions;
-
+using Framework.Workflow.BLL;
+using Framework.Workflow.Environment;
+using Framework.Workflow.Generated.DAL.NHibernate;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -58,6 +60,7 @@ namespace WorkflowSampleSystem.WebApiCore
                         .AddSingleton<NHibConnectionSettings>()
                         .AddSingleton<IMappingSettings>(AuthorizationMappingSettings.CreateDefaultAudit(string.Empty))
                         .AddSingleton<IMappingSettings>(ConfigurationMappingSettings.CreateDefaultAudit(string.Empty))
+                        .AddSingleton<IMappingSettings>(WorkflowMappingSettings.CreateWithoutAudit(string.Empty))
                         .AddSingleton<IMappingSettings>(
                                                         new WorkflowSampleSystemMappingSettings(
                                                                                         new DatabaseName(string.Empty, "app"),
@@ -71,7 +74,10 @@ namespace WorkflowSampleSystem.WebApiCore
             services
                 .AddSingleton<IServiceEnvironment<IWorkflowSampleSystemBLLContext>>(x => x.GetRequiredService<WorkflowSampleSystemServiceEnvironment>())
                 .AddSingleton<IServiceEnvironment<IAuthorizationBLLContext>>(x => x.GetRequiredService<WorkflowSampleSystemServiceEnvironment>())
-                .AddSingleton<IServiceEnvironment<IConfigurationBLLContext>>(x => x.GetRequiredService<WorkflowSampleSystemServiceEnvironment>());
+                .AddSingleton<IServiceEnvironment<IConfigurationBLLContext>>(x => x.GetRequiredService<WorkflowSampleSystemServiceEnvironment>())
+
+                .AddSingleton<IServiceEnvironment<IWorkflowBLLContext>>(x => x.GetRequiredService<IWorkflowServiceEnvironment>())
+                .AddSingleton<IWorkflowServiceEnvironment>(x => x.GetRequiredService<WorkflowSampleSystemServiceEnvironment>().WorkflowModule);
 
             return services;
         }

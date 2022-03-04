@@ -58,9 +58,6 @@ namespace WorkflowSampleSystem.WebApiCore
                     new OpenApiInfo { Title = "WorkflowSampleSystem", Version = "v1" },
                     new List<string> { Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml") });
 
-            //// services.AddAuthentication()
-            ////         .AddCapAuth<IWorkflowSampleSystemBLLContext>();
-
             services.AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)));
 
             services
@@ -121,6 +118,7 @@ namespace WorkflowSampleSystem.WebApiCore
 
             services.RegisterAuthorizationBLL();
             services.RegisterConfigurationBLL();
+            services.RegisterWorkflowBLL();
             services.RegisterMainBLL();
 
             return services;

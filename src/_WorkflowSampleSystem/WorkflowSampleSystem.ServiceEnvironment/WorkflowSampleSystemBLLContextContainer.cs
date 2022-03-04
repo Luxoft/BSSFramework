@@ -13,8 +13,6 @@ using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.Events;
 using Framework.Notification.DTO;
-using Framework.NotificationCore.Services;
-using Framework.NotificationCore.Settings;
 using Framework.Persistent;
 using Framework.Security.Cryptography;
 using Framework.SecuritySystem;
@@ -35,11 +33,6 @@ namespace WorkflowSampleSystem.ServiceEnvironment
 
         private readonly BLLSourceEventListenerContainer<PersistentDomainObjectBase> mainSourceListeners = new BLLSourceEventListenerContainer<PersistentDomainObjectBase>();
 
-        private readonly IEventsSubscriptionManager<IWorkflowSampleSystemBLLContext, PersistentDomainObjectBase> aribaSubscriptionManager;
-
-
-        private readonly ValidatorCompileCache defaultAuthorizationValidatorCompileCache;
-
         private readonly ValidatorCompileCache validatorCompileCache;
 
         private readonly Func<IWorkflowSampleSystemBLLContext, ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>> securityExpressionBuilderFactoryFunc;
@@ -55,7 +48,6 @@ namespace WorkflowSampleSystem.ServiceEnvironment
         public WorkflowSampleSystemBLLContextContainer(
             WorkflowSampleSystemServiceEnvironment serviceEnvironment,
             IServiceProvider scopedServiceProvider,
-            ValidatorCompileCache defaultAuthorizationValidatorCompileCache,
             ValidatorCompileCache validatorCompileCache,
             Func<IWorkflowSampleSystemBLLContext, ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>> securityExpressionBuilderFactoryFunc,
             IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
@@ -65,7 +57,6 @@ namespace WorkflowSampleSystem.ServiceEnvironment
             string currentPrincipalName)
             : base(serviceEnvironment, scopedServiceProvider, session, currentPrincipalName)
         {
-            this.defaultAuthorizationValidatorCompileCache = defaultAuthorizationValidatorCompileCache;
             this.validatorCompileCache = validatorCompileCache;
             this.securityExpressionBuilderFactoryFunc = securityExpressionBuilderFactoryFunc;
             this.fetchService = fetchService;
@@ -79,7 +70,7 @@ namespace WorkflowSampleSystem.ServiceEnvironment
 
         protected override IEnumerable<IBLLContextContainerModule> GetModules()
         {
-            foreach (var baseModule in this.GetModules())
+            foreach (var baseModule in base.GetModules())
             {
                 yield return baseModule;
             }
@@ -190,16 +181,6 @@ namespace WorkflowSampleSystem.ServiceEnvironment
         //}
 
         protected override IMessageSender<NotificationEventDTO> GetMessageTemplateSender() => new LocalDBNotificationEventDTOMessageSender(this.Configuration);
-
-        /// <summary>
-        /// Добавление подписок на евенты для арибы
-        /// </summary>
-        protected override void SubscribeEvents()
-        {
-            base.SubscribeEvents();
-
-            this.aribaSubscriptionManager.Subscribe();
-        }
 
         IWorkflowBLLContext IBLLContextContainer<IWorkflowBLLContext>.Context => this.Workflow;
     }

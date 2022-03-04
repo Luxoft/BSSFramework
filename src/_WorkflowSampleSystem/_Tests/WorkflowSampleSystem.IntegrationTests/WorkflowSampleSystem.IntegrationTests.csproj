@@ -30,4 +30,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="__Support\Scripts\WorkflowSampleSystem\" />
+  </ItemGroup>
 </Project>

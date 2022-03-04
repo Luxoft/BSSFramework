@@ -20,6 +20,7 @@
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.WebApi\Framework.Authorization.WebApi.csproj" />
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.WebApi\Framework.Configuration.WebApi.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModel.IAD.DTO\Framework.DomainDriven.ServiceModel.IAD.DTO.csproj" />
+    <ProjectReference Include="..\..\_Workflow\Framework.Workflow.Generated.DAL.NHibernate\Framework.Workflow.Generated.DAL.NHibernate.csproj" />
 
     <ProjectReference Include="..\..\_Workflow\Framework.Workflow.WebApi\Framework.Workflow.WebApi.csproj" />
 

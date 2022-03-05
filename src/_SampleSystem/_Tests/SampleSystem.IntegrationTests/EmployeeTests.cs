@@ -44,7 +44,7 @@ namespace SampleSystem.IntegrationTests
             this.DataHelper.SaveEmployee(Guid.NewGuid(), age: 10);
             CoreDatabaseUtil.ExecuteSql("INSERT INTO [app].[Employee] ([id], age) VALUES (NewId(), null)");
 
-            // Act
+            // Act, IntegrationNamespace
             var actual = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read,
                 ctx => ctx.Logics.Employee.GetUnsecureQueryable().Where(q => q.Age == 10).ToList());
 

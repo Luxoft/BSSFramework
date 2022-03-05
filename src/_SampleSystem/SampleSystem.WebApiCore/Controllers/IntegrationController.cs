@@ -25,7 +25,7 @@ namespace SampleSystem.WebApiCore.Controllers
         {
         }
 
-        protected override string IntegrationNamespace => "http://sampleSystem.domain.com/integrationEvent";
+        protected override string IntegrationNamespace => "http://sampleSystem.example.com/integrationEvent";
 
         protected override void CheckAccess(EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService> eval) =>
             eval.Context.Authorization.CheckAccess(SampleSystemSecurityOperation.SystemIntegration);

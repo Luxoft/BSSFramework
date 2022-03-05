@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-
-using Framework.DomainDriven.BLL;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Framework.DomainDriven.Metadata
 {
-    public interface IAssemblyMetadata : IPersistentDomainObjectBaseTypeContainer
+    public interface IAssemblyMetadata
     {
+        Type PersistentDomainObjectBaseType { get; }
+
         IEnumerable<DomainTypeMetadata> DomainTypes { get; }
     }
 }

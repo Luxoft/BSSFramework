@@ -44,7 +44,6 @@ namespace SampleSystem.IntegrationTests.Support.Utils
 
             CoreDatabaseUtil.ExecuteSqlFromFolder(@"__Support/Scripts/Authorization", CoreDatabaseUtil.DatabaseName);
             CoreDatabaseUtil.ExecuteSqlFromFolder(@"__Support/Scripts/Configuration", CoreDatabaseUtil.DatabaseName);
-            CoreDatabaseUtil.ExecuteSqlFromFolder(@"__Support/Scripts/Workflow", CoreDatabaseUtil.DatabaseName);
             CoreDatabaseUtil.ExecuteSqlFromFolder(@"__Support/Scripts/SampleSystem", CoreDatabaseUtil.DatabaseName);
 
             new BssFluentMigrator(this.ConnectionSettings.ConnectionString, typeof(InitNumberInDomainObjectEventMigration).Assembly).Migrate();

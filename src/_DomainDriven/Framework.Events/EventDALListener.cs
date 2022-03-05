@@ -8,7 +8,7 @@ using Framework.DomainDriven.BLL;
 namespace Framework.Events
 {
     /// <summary>
-    /// Базовый класс для DAL-евентов 
+    /// Базовый класс для DAL-евентов
     /// </summary>
     /// <typeparam name="TBLLContext"></typeparam>
     /// <typeparam name="TPersistentDomainObjectBase"></typeparam>

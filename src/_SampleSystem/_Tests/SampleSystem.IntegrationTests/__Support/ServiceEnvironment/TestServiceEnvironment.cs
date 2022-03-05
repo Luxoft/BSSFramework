@@ -39,7 +39,7 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
     /// <summary>
     /// TestServiceEnvironment Extends EDServiceEnvironment for Test Run. Different Test Env settings are initilized.
     /// </summary>
-    public class TestServiceEnvironment : CoreSampleSystemServiceEnvironment
+    public class TestServiceEnvironment : SampleSystemServiceEnvironment
     {
         private static readonly Lazy<TestServiceEnvironment> IntegrationEnvironmentLazy = new Lazy<TestServiceEnvironment>(CreateIntegrationEnvironment);
 
@@ -81,7 +81,7 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .RegisterControllers()
                                   .AddControllerEnvironment()
                                   .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
-                                  .AddSingleton<CoreSampleSystemServiceEnvironment>(sp => sp.GetRequiredService<TestServiceEnvironment>())
+                                  .AddSingleton<SampleSystemServiceEnvironment>(sp => sp.GetRequiredService<TestServiceEnvironment>())
                                   .AddSingleton<IUserAuthenticationService>(IntegrationTestAuthenticationService.Instance)
                                   .AddSingleton<IDateTimeService>(new IntegrationTestDateTimeService())
                                   .AddDatabaseSettings(InitializeAndCleanup.DatabaseUtil.ConnectionSettings.ConnectionString)
@@ -96,7 +96,7 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
             return serviceProvider.GetRequiredService<TestServiceEnvironment>();
         }
 
-        protected override SampleSystemBLLContextContainerStandard CreateBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null)
+        protected override SampleSystemBllContextContainer CreateBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null)
         {
             return new TestSampleSystemBLLContextContainerStandard(
                 this,
@@ -113,10 +113,10 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                 this.rewriteReceiversService);
         }
 
-        private class TestSampleSystemBLLContextContainerStandard : CoreSampleSystemBLLContextContainer
+        private class TestSampleSystemBLLContextContainerStandard : SampleSystemBllContextContainer
         {
 
-            public TestSampleSystemBLLContextContainerStandard(SampleSystemServiceEnvironmentStandard serviceEnvironment, IServiceProvider scopedServiceProvider, ValidatorCompileCache defaultAuthorizationValidatorCompileCache, ValidatorCompileCache validatorCompileCache, Func<ISampleSystemBLLContext, ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>> securityExpressionBuilderFactoryFunc, IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService, ICryptService<CryptSystem> cryptService, ITypeResolver<string> currentTargetSystemTypeResolver, IDBSession session, string currentPrincipalName, SmtpSettings smtpSettings, IRewriteReceiversService rewriteReceiversService)
+            public TestSampleSystemBLLContextContainerStandard(SampleSystemServiceEnvironment serviceEnvironment, IServiceProvider scopedServiceProvider, ValidatorCompileCache defaultAuthorizationValidatorCompileCache, ValidatorCompileCache validatorCompileCache, Func<ISampleSystemBLLContext, ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>> securityExpressionBuilderFactoryFunc, IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService, ICryptService<CryptSystem> cryptService, ITypeResolver<string> currentTargetSystemTypeResolver, IDBSession session, string currentPrincipalName, SmtpSettings smtpSettings, IRewriteReceiversService rewriteReceiversService)
                 : base(serviceEnvironment, scopedServiceProvider, defaultAuthorizationValidatorCompileCache, validatorCompileCache, securityExpressionBuilderFactoryFunc, fetchService, cryptService, currentTargetSystemTypeResolver, session, currentPrincipalName, smtpSettings, rewriteReceiversService)
             {
             }

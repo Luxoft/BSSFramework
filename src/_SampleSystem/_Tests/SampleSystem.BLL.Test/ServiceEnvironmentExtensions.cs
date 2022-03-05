@@ -5,13 +5,13 @@ using Framework.Exceptions;
 
 using Microsoft.AspNetCore.Mvc;
 
-using SampleSystem.WebApiCore;
+using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.BLL.Test
 {
     public static class ServiceEnvironmentExtensions
     {
-        public static TController GetController<TController>(this CoreSampleSystemServiceEnvironment serviceEnvironment, string principalName = null)
+        public static TController GetController<TController>(this SampleSystemServiceEnvironment serviceEnvironment, string principalName = null)
             where TController : ControllerBase, IApiControllerBase
         {
             var controller = (TController)Activator.CreateInstance(typeof(TController), serviceEnvironment, serviceEnvironment.CreateExceptionProcessor());
@@ -21,9 +21,9 @@ namespace SampleSystem.BLL.Test
             return controller;
         }
 
-        private static IExceptionProcessor CreateExceptionProcessor(this CoreSampleSystemServiceEnvironment serviceEnvironment)
+        private static IExceptionProcessor CreateExceptionProcessor(this SampleSystemServiceEnvironment serviceEnvironment)
         {
-            return new ApiControllerExceptionService<CoreSampleSystemServiceEnvironment, ISampleSystemBLLContext>(serviceEnvironment);
+            return new ApiControllerExceptionService<SampleSystemServiceEnvironment, ISampleSystemBLLContext>(serviceEnvironment);
         }
     }
 }

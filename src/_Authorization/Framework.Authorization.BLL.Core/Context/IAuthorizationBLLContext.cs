@@ -35,9 +35,6 @@ namespace Framework.Authorization.BLL
         Settings Settings { get; }
 
 
-        IWorkflowApproveProcessor WorkflowApproveProcessor { get; }
-
-
         ISecurityProvider<TDomainObject> GetPrincipalSecurityProvider<TDomainObject>(Expression<Func<TDomainObject, Principal>> principalSecurityPath)
             where TDomainObject : PersistentDomainObjectBase;
 

@@ -7,11 +7,9 @@ using System.Text;
 using FluentAssertions;
 
 using Framework.Authorization.Domain;
-using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.Notification.DTO;
-using Framework.Workflow.Domain;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -223,22 +221,6 @@ namespace SampleSystem.IntegrationTests.Subscriptions_Metadata
 
             var expectedNotifications = this.GetNotifications()
                                             .Where(n => n.From == "PrincipalCreateModelCreateSampleSystem@luxoft.com");
-
-            // Assert
-            expectedNotifications.Should().HaveCount(1);
-        }
-
-        [TestMethod]
-        [Ignore]
-        public void WorkflowCreateModelSubscriptionTest()
-        {
-            // Arrange
-
-            // Act
-            this.DataHelper.ProcessChangedObjectUntyped(typeof(WorkflowCreateModel), null, new WorkflowCreateModel());
-
-            var expectedNotifications = this.GetNotifications()
-                                            .Where(n => n.From == "WorkflowCreateModelCreateSampleSystem@luxoft.com");
 
             // Assert
             expectedNotifications.Should().HaveCount(1);

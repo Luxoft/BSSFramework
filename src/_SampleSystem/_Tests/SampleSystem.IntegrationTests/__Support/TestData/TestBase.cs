@@ -5,32 +5,21 @@ using Automation;
 using Automation.Enums;
 using Automation.Utils;
 
-using Framework.Authorization.BLL;
-using Framework.Configuration.BLL;
-using Framework.Configuration.Generated.DTO;
-
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.ServiceModel.Subscriptions;
 using Framework.DomainDriven.WebApiNetCore;
-using Framework.Exceptions;
-using Framework.Notification;
 using Framework.Notification.DTO;
-using Framework.Workflow.BLL;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.BLL;
 using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.ServiceEnvironment.IntegrationTests;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
-using SampleSystem.IntegrationTests.__Support.Utils.Framework;
-using SampleSystem.WebApiCore.Controllers.Main;
 using SampleSystem.WebApiCore.Controllers;
-using SampleSystem.WebApiCore.CustomReports;
 
 using DataHelper = SampleSystem.IntegrationTests.__Support.TestData.Helpers.DataHelper;
 
@@ -238,11 +227,6 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
         protected ConfigSLJsonController GetConfigurationController()
         {
             return this.GetController<ConfigSLJsonController>();
-        }
-
-        protected WorkflowSLJsonController GetWorkflowController()
-        {
-            return this.GetController<WorkflowSLJsonController>();
         }
 
 

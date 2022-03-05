@@ -4,7 +4,6 @@ using Framework.Core;
 using Framework.DomainDriven;
 using Framework.Validation;
 using Framework.DomainDriven.BLL;
-using Framework.Workflow.BLL;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -56,21 +55,6 @@ namespace SampleSystem.BLL.Test
             var map1 = new ValidationMap(extendedData);
 
             var map2 = map1.WithFixedTypes<Domain.DomainObjectBase>(typeof(Domain.DomainObjectBase).Assembly, typeof(Domain.DomainObjectFilterModel<>).Assembly);
-        }
-
-        [TestMethod]
-        public void TestWorkflowValidationMap01()
-        {
-            var map1 = Framework.DomainDriven.AvailableValues
-                                             .Infinity
-                                             .ToValidation()
-                                             .ToBLLContextValidationExtendedData<Framework.Workflow.BLL.IWorkflowBLLContext, Framework.Workflow.Domain.PersistentDomainObjectBase, Guid>()
-                                             .Pipe(extendedValidationData => new WorkflowValidationMap(extendedValidationData));
-
-            var map2 = map1.WithFixedTypes<Framework.Workflow.Domain.DomainObjectBase>(typeof(Framework.Workflow.Domain.DomainObjectBase).Assembly, typeof(Framework.Workflow.Domain.DomainObjectFilterModel<>).Assembly);
-
-
-            var cache = map2.ToCompileCache();
         }
     }
 }

@@ -6,11 +6,9 @@ using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.Persistent;
-using Framework.Configuration.Domain;
 using Framework.Core.Services;
 using Framework.Events;
 using Framework.HierarchicalExpand;
-using Framework.Workflow.BLL;
 
 using ITargetSystemService = Framework.Configuration.BLL.ITargetSystemService;
 
@@ -30,8 +28,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
         where TSecurityOperationCode : struct, Enum
     {
-        private readonly TargetSystemServiceCompileCache<TBLLContext, TPersistentDomainObjectBase> _workflowMainSystemCompileCache = new TargetSystemServiceCompileCache<TBLLContext, TPersistentDomainObjectBase>();
-
         protected ServiceEnvironmentBase(
             IServiceProvider serviceProvider,
             IDBSessionFactory sessionFactory,
@@ -93,16 +89,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             protected override IEnumerable<ITargetSystemService> GetConfigurationTargetSystemServices(SubscriptionMetadataStore subscriptionMetadataStore)
             {
                 yield return this.GetConfigurationConfigurationTargetSystemService();
-            }
-
-            protected Framework.Workflow.BLL.ITargetSystemService GetMainWorkflowTargetSystemService(HashSet<Type> workflowSourceTypes)
-            {
-                return new TargetSystemService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>(
-                    this.Workflow,
-                    this.MainContext,
-                    this.Workflow.Logics.TargetSystem.GetObjectBy(ts => ts.IsMain, true),
-                    this.serviceEnvironment._workflowMainSystemCompileCache,
-                    workflowSourceTypes);
             }
 
             protected Framework.Configuration.BLL.ITargetSystemService GetMainConfigurationTargetSystemService()

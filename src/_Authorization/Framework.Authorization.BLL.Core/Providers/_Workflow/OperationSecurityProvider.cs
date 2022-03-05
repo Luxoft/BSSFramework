@@ -5,14 +5,12 @@ using System.Linq.Expressions;
 
 using Framework.Authorization.Domain;
 using Framework.Core;
-using Framework.DomainDriven.BLL.Security;
 using Framework.SecuritySystem;
 
 namespace Framework.Authorization.BLL
 {
     public class OperationSecurityProvider : SecurityProvider<Operation>
     {
-
         private readonly Lazy<List<Operation>> lazyOperations;
 
         public OperationSecurityProvider(IAuthorizationBLLContext context)

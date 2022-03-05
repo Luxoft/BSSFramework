@@ -1,15 +1,17 @@
 ﻿using System;
+
 using Framework.Core;
 using Framework.DomainDriven.BLL;
+
 using SampleSystem.BLL;
 using SampleSystem.Generated.DTO;
-using SampleSystem.WebApiCore;
+using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
 {
     public partial class DataHelper
     {
-        public CoreSampleSystemServiceEnvironment Environment { get; set; }
+        public SampleSystemServiceEnvironment Environment { get; set; }
 
         public string PrincipalName { private get; set; }
 

@@ -12,7 +12,6 @@ using Framework.QueryLanguage;
 using Framework.Security.Cryptography;
 using Framework.SecuritySystem;
 using Framework.Validation;
-using Framework.Workflow.BLL;
 
 using JetBrains.Annotations;
 
@@ -42,7 +41,6 @@ namespace SampleSystem.BLL
             [NotNull] ISampleSystemBLLFactoryContainer logics,
             [NotNull] IAuthorizationBLLContext authorization,
             [NotNull] Framework.Configuration.BLL.IConfigurationBLLContext configuration,
-            [NotNull] IWorkflowBLLContext workflow,
             [NotNull] ICryptService<CryptSystem> cryptService,
             [NotNull] Func<string, ISampleSystemBLLContext> impersonateFunc,
             [NotNull] ITypeResolver<string> currentTargetSystemTypeResolver)
@@ -55,7 +53,6 @@ namespace SampleSystem.BLL
 
             this.Authorization = authorization ?? throw new ArgumentNullException(nameof(authorization));
             this.Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-            this.Workflow = workflow ?? throw new ArgumentNullException(nameof(workflow));
 
             this.CryptService = cryptService ?? throw new ArgumentNullException(nameof(cryptService));
 
@@ -72,8 +69,6 @@ namespace SampleSystem.BLL
         public IAuthorizationBLLContext Authorization { get; }
 
         public Framework.Configuration.BLL.IConfigurationBLLContext Configuration { get; }
-
-        public IWorkflowBLLContext Workflow { get; }
 
         public ICryptService<CryptSystem> CryptService { get; }
 

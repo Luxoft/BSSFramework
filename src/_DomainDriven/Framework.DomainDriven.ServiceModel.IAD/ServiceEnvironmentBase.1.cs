@@ -6,14 +6,11 @@ using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
-using Framework.Configuration.Domain;
 using Framework.Core.Services;
-using Framework.Events;
-using Framework.Workflow.BLL;
 
 namespace Framework.DomainDriven.ServiceModel.IAD
 {
-    public abstract partial class ServiceEnvironmentBase<TBLLContextContainer, TBLLContext> : ServiceEnvironmentBase, IServiceEnvironment<TBLLContext>
+    public abstract partial class ServiceEnvironmentBase<TBLLContextContainer, TBLLContext> : ServiceEnvironmentBase, IRootServiceEnvironment<TBLLContext, TBLLContextContainer>
         where TBLLContextContainer : ServiceEnvironmentBase<TBLLContextContainer, TBLLContext>.ServiceEnvironmentBLLContextContainer
         where TBLLContext : ITypeResolverContainer<string>
     {
@@ -30,11 +27,19 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
         public IServiceProvider ServiceProvider { get; }
 
+        protected virtual IEnumerable<IServiceEnvironmentModule<TBLLContextContainer>> GetModules()
+        {
+            yield break;
+        }
+
         protected virtual IEnumerable<IDALListener> GetDALFlushedListeners(TBLLContextContainer container)
         {
-            foreach (var listener in this.GetWorkflowDALListeners(container.Workflow))
+            foreach (var module in this.GetModules())
             {
-                yield return listener;
+                foreach (var listener in module.GetDALFlushedListeners(container))
+                {
+                    yield return listener;
+                }
             }
         }
 
@@ -83,13 +88,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                    where targetSystemService.TargetSystem.SubscriptionEnabled
 
                    select new SubscriptionDALListener(targetSystemService, container.SubscriptionService);
-        }
-
-        private IEnumerable<IDALListener> GetWorkflowDALListeners(IWorkflowBLLContext context)
-        {
-            return from targetSystemService in context.GetTargetSystemServices()
-
-                   select new WorkflowDALListener(targetSystemService);
         }
 
         IBLLContextContainer<TBLLContext> IServiceEnvironment<TBLLContext>.GetBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName)
@@ -178,10 +176,9 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     this.serviceEnvironment.GetBeforeTransactionCompletedListeners((TBLLContextContainer)this),
                     this.GetAuthorizationEventDALListeners(),
                     this.GetConfigurationEventDALListeners(),
-                    this.GetWorkflowEventDALListeners()
                 };
 
-                return dalListeners.SelectMany();
+                return base.GetBeforeTransactionCompletedListeners().Concat(dalListeners.SelectMany());
             }
 
             /// <summary>

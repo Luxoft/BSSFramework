@@ -55,7 +55,6 @@ namespace Framework.Authorization.BLL
             [NotNull] IDateTimeService dateTimeService,
             [NotNull] IUserAuthenticationService userAuthenticationService,
             [NotNull] ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
-            [NotNull] IWorkflowApproveProcessor workflowApproveProcessor,
             [NotNull] IConfigurationBLLContext configuration,
             [NotNull] IAuthorizationSecurityService securityService,
             [NotNull] IAuthorizationBLLFactoryContainer logics,
@@ -77,7 +76,6 @@ namespace Framework.Authorization.BLL
                 dateTimeService)
         {
             this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
-            this.WorkflowApproveProcessor = workflowApproveProcessor ?? throw new ArgumentNullException(nameof(workflowApproveProcessor));
             this.SecurityService = securityService ?? throw new ArgumentNullException(nameof(securityService));
             this.logics = logics ?? throw new ArgumentNullException(nameof(logics));
             this.ExternalSource = externalSource ?? throw new ArgumentNullException(nameof(externalSource));
@@ -119,8 +117,6 @@ namespace Framework.Authorization.BLL
         public IAuthorizationSecurityService SecurityService { get; private set; }
 
         public Settings Settings => this.lazySettings.Value;
-
-        public IWorkflowApproveProcessor WorkflowApproveProcessor { get; private set; }
 
         public override IAuthorizationBLLFactoryContainer Logics => this.logics;
 

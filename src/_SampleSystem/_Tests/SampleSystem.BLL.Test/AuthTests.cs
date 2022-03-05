@@ -10,9 +10,6 @@ using Framework.DomainDriven.ServiceModel.Service;
 using Framework.Security;
 using Framework.SecuritySystem;
 using Framework.Transfering;
-using Framework.Workflow.BLL;
-using Framework.Workflow.Domain.Definition;
-using Framework.Workflow.Domain.Projections;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -86,19 +83,7 @@ namespace SampleSystem.BLL.Test
                 return;
             });
         }
-
-        [TestMethod]
-        public void TestWFLambda()
-        {
-            var prop = typeof(WorkflowSource).GetProperty(nameof(WorkflowSource.Elements));
-
-            var lambda1 = prop.GetValue<WorkflowSource, WorkflowLambda>(new WorkflowSource(new Workflow()));
-
-            var lambda2 = prop.GetValue<WorkflowSource, WorkflowLambda>(new WorkflowSource(new Workflow()));
-
-            return;
-        }
-
+        
         [TestMethod]
         public void TestLoadProjections()
         {

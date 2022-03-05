@@ -16,9 +16,6 @@ using Framework.DomainDriven.BLL.Security;
 using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.Events;
-using Framework.ExpressionParsers;
-using Framework.Graphviz;
-using Framework.Graphviz.Dot;
 using Framework.HierarchicalExpand;
 using Framework.Notification;
 using Framework.Notification.DTO;
@@ -28,7 +25,6 @@ using Framework.QueryLanguage;
 using Framework.Report;
 using Framework.SecuritySystem;
 using Framework.Validation;
-using Framework.Workflow.BLL;
 
 using JetBrains.Annotations;
 
@@ -37,27 +33,13 @@ namespace Framework.DomainDriven.ServiceModel.IAD
     public abstract partial class ServiceEnvironmentBase :
         IAuthorizationServiceEnvironment,
         IConfigurationServiceEnvironment,
-        IWorkflowServiceEnvironment,
         IDisposable
     {
-        private readonly IAnonymousTypeBuilder<TypeMap<ParameterizedTypeMapMember>> workflowAnonymousTypeBuilder =
-            new WorkflowAnonymousTypeBuilder(new AnonymousTypeBuilderStorageFactory().Create("Workflow_AnonymousType")).WithCompressName().WithCache().WithLock();
+        public readonly IFetchService<Framework.Authorization.Domain.PersistentDomainObjectBase, FetchBuildRule> AuthorizationFetchService;
 
-        private readonly TargetSystemServiceCompileCache<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase> workflowAuthorizationSystemCompileCache = new TargetSystemServiceCompileCache<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase>();
+        public readonly IFetchService<Framework.Configuration.Domain.PersistentDomainObjectBase, FetchBuildRule> ConfigurationFetchService;
 
-        private readonly Framework.Workflow.BLL.IExpressionParserFactory _workflowLambdaProcessorFactory =
-
-            new Framework.Workflow.BLL.ExpressionParserFactory(CSharpNativeExpressionParser.Composite);
-
-        private readonly IValidator workflowAnonymousObjectValidator = new Validator(new ValidationMap(ValidationExtendedData.Infinity).ToCompileCache());
-
-        private readonly IFetchService<Framework.Authorization.Domain.PersistentDomainObjectBase, FetchBuildRule> authorizationFetchService;
-
-        private readonly IFetchService<Framework.Workflow.Domain.PersistentDomainObjectBase, FetchBuildRule> workflowFetchService;
-
-        private readonly IFetchService<Framework.Configuration.Domain.PersistentDomainObjectBase, FetchBuildRule> configurationFetchService;
-
-        private readonly IUserAuthenticationService userAuthenticationService;
+        public readonly IUserAuthenticationService UserAuthenticationService;
 
         protected ServiceEnvironmentBase(
             [NotNull] IServiceProvider serviceProvider,
@@ -92,36 +74,19 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     .Pipe(extendedValidationData => new ConfigurationValidationMap(extendedValidationData))
                     .ToCompileCache();
 
+            this.AuthorizationFetchService = new AuthorizationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Authorization.Domain.PersistentDomainObjectBase>.OData);
 
-            this.DefaultWorkflowValidatorCompileCache =
-
-                this.SessionFactory
-                    .AvailableValues
-                    .ToValidation()
-                    .ToBLLContextValidationExtendedData<Framework.Workflow.BLL.IWorkflowBLLContext, Framework.Workflow.Domain.PersistentDomainObjectBase, Guid>()
-                    .Pipe(extendedValidationData => new WorkflowValidationMap(extendedValidationData))
-                    .ToCompileCache();
-
-            this.authorizationFetchService = new AuthorizationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Authorization.Domain.PersistentDomainObjectBase>.OData);
-
-            this.workflowFetchService = new WorkflowMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Workflow.Domain.PersistentDomainObjectBase>.OData);
-
-            this.configurationFetchService = new ConfigurationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Configuration.Domain.PersistentDomainObjectBase>.OData);
+            this.ConfigurationFetchService = new ConfigurationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Configuration.Domain.PersistentDomainObjectBase>.OData);
 
             this.SubscriptionMetadataStore = new SubscriptionMetadataStore(subscriptionsMetadataFinder ?? new SubscriptionMetadataFinder());
 
-            this.userAuthenticationService = userAuthenticationService ?? throw new ArgumentNullException(nameof(userAuthenticationService));
+            this.UserAuthenticationService = userAuthenticationService ?? throw new ArgumentNullException(nameof(userAuthenticationService));
         }
 
         /// <summary>
         /// Кеш валидатора для авторизации
         /// </summary>
         protected ValidatorCompileCache DefaultAuthorizationValidatorCompileCache { get; }
-
-        /// <summary>
-        /// Кеш валидатора для утилит
-        /// </summary>
-        protected ValidatorCompileCache DefaultWorkflowValidatorCompileCache { get; }
 
         /// <summary>
         /// Кеш валидатора для воркфлоу
@@ -142,11 +107,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         public INotificationContext NotificationContext { get; }
 
         public IDBSessionFactory SessionFactory { get; }
-
-        public virtual IDotVisualizer<DotGraph> DotVisualizer
-        {
-            get { return NativeDotVisualizer.Configuration.OverrideInput((DotGraph graph) => graph.ToString()); }
-        }
 
         public virtual bool IsDebugMode => Debugger.IsAttached;
 
@@ -179,15 +139,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         #region IServiceEnvironment<ConfigurationBLLContext> Members
 
         IBLLContextContainer<IConfigurationBLLContext> IServiceEnvironment<IConfigurationBLLContext>.GetBLLContextContainer(IServiceProvider serviceProvider, IDBSession session, string currentPrincipalName)
-        {
-            return this.GetBLLContextContainerBase(serviceProvider, session, currentPrincipalName);
-        }
-
-        #endregion
-
-        #region IServiceEnvironment<WorkflowBLLContext> Members
-
-        IBLLContextContainer<IWorkflowBLLContext> IServiceEnvironment<IWorkflowBLLContext>.GetBLLContextContainer(IServiceProvider serviceProvider, IDBSession session, string currentPrincipalName)
         {
             return this.GetBLLContextContainerBase(serviceProvider, session, currentPrincipalName);
         }
@@ -228,8 +179,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             IServiceEnvironmentBLLContextContainer,
 
             IBLLContextContainer<IAuthorizationBLLContext>,
-            IBLLContextContainer<IConfigurationBLLContext>,
-            IBLLContextContainer<IWorkflowBLLContext>
+            IBLLContextContainer<IConfigurationBLLContext>
         {
             protected readonly ServiceEnvironmentBase ServiceEnvironment;
 
@@ -237,15 +187,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
             private readonly IEnumerable<Framework.Configuration.BLL.ITargetSystemService> targetSystems;
 
-
-
-            protected readonly BLLOperationEventListenerContainer<Framework.Workflow.Domain.DomainObjectBase>
-                    WorkflowOperationListeners =
-                            new BLLOperationEventListenerContainer<Framework.Workflow.Domain.DomainObjectBase>();
-
-            protected readonly BLLSourceEventListenerContainer<Framework.Workflow.Domain.PersistentDomainObjectBase>
-                    WorkflowSourceListeners =
-                            new BLLSourceEventListenerContainer<Framework.Workflow.Domain.PersistentDomainObjectBase>();
 
 
             protected readonly BLLOperationEventListenerContainer<Framework.Authorization.Domain.DomainObjectBase>
@@ -270,7 +211,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
             private readonly Lazy<IEventsSubscriptionManager<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase>> lazyConfigurationEventsSubscriptionManager;
 
-            private readonly Lazy<IEventsSubscriptionManager<IWorkflowBLLContext, Framework.Workflow.Domain.PersistentDomainObjectBase>> lazyWorkflowEventsSubscriptionManager;
 
             protected ServiceEnvironmentBLLContextContainer([NotNull] ServiceEnvironmentBase serviceEnvironment, [NotNull] IServiceProvider scopedServiceProvider, [NotNull] IDBSession session, string currentPrincipalName)
             {
@@ -290,9 +230,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
                 this.Configuration = LazyInterfaceImplementHelper.CreateProxy(this.CreateConfigurationBLLContext);
 
-                this.Workflow = LazyInterfaceImplementHelper.CreateProxy(this.CreateWorkflowBLLContext);
-
-
                 this.HierarchicalObjectExpanderFactory = LazyInterfaceImplementHelper.CreateProxy(this.GetHierarchicalObjectExpanderFactory);
 
                 this.SystemConstantSerializerFactory = SerializerFactory.Default;
@@ -300,8 +237,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                 this.lazyAuthorizationEventsSubscriptionManager = LazyHelper.Create(this.CreateAuthorizationEventsSubscriptionManager);
 
                 this.lazyConfigurationEventsSubscriptionManager = LazyHelper.Create(this.CreateConfigurationEventsSubscriptionManager);
-
-                this.lazyWorkflowEventsSubscriptionManager = LazyHelper.Create(this.CreateWorkflowEventsSubscriptionManager);
             }
 
             public IServiceProvider ScopedServiceProvider { get; }
@@ -311,16 +246,12 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
             public IConfigurationBLLContext Configuration { get; }
 
-            public IWorkflowBLLContext Workflow { get; }
-
             public IDBSession Session { get; }
 
 
             protected IEventsSubscriptionManager<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase> AuthorizationEventsSubscriptionManager => this.lazyAuthorizationEventsSubscriptionManager.Value;
 
             protected IEventsSubscriptionManager<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase> ConfigurationEventsSubscriptionManager => this.lazyConfigurationEventsSubscriptionManager.Value;
-
-            protected IEventsSubscriptionManager<IWorkflowBLLContext, Framework.Workflow.Domain.PersistentDomainObjectBase> WorkflowEventsSubscriptionManager => this.lazyWorkflowEventsSubscriptionManager.Value;
 
             #region IBLLContextContainer<AuthorizationBLLContext> Members
 
@@ -340,22 +271,18 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
             #endregion
 
-            #region IBLLContextContainer<WorkflowBLLContext> Members
-
-            IWorkflowBLLContext IBLLContextContainer<IWorkflowBLLContext>.Context
-            {
-                get { return this.Workflow; }
-            }
-
             protected INotificationService NotificationService { get; }
 
-            protected IStandartExpressionBuilder StandartExpressionBuilder { get; }
+            public IStandartExpressionBuilder StandartExpressionBuilder { get; }
 
-            protected IHierarchicalObjectExpanderFactory<Guid> HierarchicalObjectExpanderFactory { get; }
+            public IHierarchicalObjectExpanderFactory<Guid> HierarchicalObjectExpanderFactory { get; }
 
             protected virtual ISerializerFactory<string> SystemConstantSerializerFactory { get; }
 
-            #endregion
+            protected virtual IEnumerable<IBLLContextContainerModule> GetModules()
+            {
+                yield break;
+            }
 
             protected virtual IAuthorizationBLLContext CreateAuthorizationBLLContext()
             {
@@ -369,11 +296,10 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     this.StandartExpressionBuilder,
                     LazyInterfaceImplementHelper.CreateProxy<IValidator>(this.CreateAuthorizationValidator),
                     this.HierarchicalObjectExpanderFactory,
-                    this.ServiceEnvironment.authorizationFetchService,
+                    this.ServiceEnvironment.AuthorizationFetchService,
                     this.GetDateTimeService(),
                     this.GetUserAuthenticationService(),
                     LazyInterfaceImplementHelper.CreateProxy(() => this.GetSecurityExpressionBuilderFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>(this.Authorization)),
-                    LazyInterfaceImplementHelper.CreateProxy(this.GetWorkflowApproveProcessor),
                     this.Configuration,
                     LazyInterfaceImplementHelper.CreateProxy<IAuthorizationSecurityService>(() => new AuthorizationSecurityService(this.Authorization)),
                     LazyInterfaceImplementHelper.CreateProxy<IAuthorizationBLLFactoryContainer>(() => new AuthorizationBLLFactoryContainer(this.Authorization)),
@@ -395,7 +321,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     this.StandartExpressionBuilder,
                     LazyInterfaceImplementHelper.CreateProxy<IValidator>(this.CreateConfigurationValidator),
                     this.HierarchicalObjectExpanderFactory,
-                    this.ServiceEnvironment.configurationFetchService,
+                    this.ServiceEnvironment.ConfigurationFetchService,
                     this.GetDateTimeService(),
                     LazyInterfaceImplementHelper.CreateProxy(() => this.GetSecurityExpressionBuilderFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>(this.Configuration)),
                     this.NotificationService.ExceptionSender,
@@ -408,32 +334,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     this.SystemConstantSerializerFactory,
                     LazyInterfaceImplementHelper.CreateProxy(this.GetExceptionService),
                     this.Session.GetCurrentRevision);
-            }
-
-            protected virtual IWorkflowBLLContext CreateWorkflowBLLContext()
-            {
-                return new WorkflowBLLContext(
-                    this.ScopedServiceProvider,
-                    this.Session.GetDALFactory<Framework.Workflow.Domain.PersistentDomainObjectBase, Guid>(),
-                    this.WorkflowOperationListeners,
-                    this.WorkflowSourceListeners,
-                    this.Session.GetObjectStateService(),
-                    this.GetAccessDeniedExceptionService<Framework.Workflow.Domain.PersistentDomainObjectBase, Guid>(),
-                    this.StandartExpressionBuilder,
-                    LazyInterfaceImplementHelper.CreateProxy<IValidator>(this.CreateWorkflowValidator),
-                    this.HierarchicalObjectExpanderFactory,
-                    this.ServiceEnvironment.workflowFetchService,
-                    this.GetDateTimeService(),
-                    LazyInterfaceImplementHelper.CreateProxy(() => this.GetSecurityExpressionBuilderFactory<Framework.Workflow.BLL.IWorkflowBLLContext, Framework.Workflow.Domain.PersistentDomainObjectBase, Guid>(this.Workflow)),
-                    this.Configuration,
-                    this.Authorization,
-                    () => new WorkflowSecurityService(this.Workflow),
-                    () => new WorkflowBLLFactoryContainer(this.Workflow),
-                    this.ServiceEnvironment._workflowLambdaProcessorFactory,
-                    this.ServiceEnvironment.workflowAnonymousTypeBuilder,
-                    this.GetWorkflowTargetSystemServices(this.ServiceEnvironment.SubscriptionMetadataStore),
-                    principalName => this.Impersonate(principalName).Workflow,
-                    this.ServiceEnvironment.workflowAnonymousObjectValidator);
             }
 
 
@@ -453,20 +353,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             protected virtual ConfigurationValidator CreateConfigurationValidator()
             {
                 return new ConfigurationValidator(this.Configuration, this.ServiceEnvironment.DefaultConfigurationValidatorCompileCache);
-            }
-
-            /// <summary>
-            /// Создание валидатора для воркфлоу
-            /// </summary>
-            /// <returns></returns>
-            protected virtual WorkflowValidator CreateWorkflowValidator()
-            {
-                return new WorkflowValidator(this.Workflow, this.ServiceEnvironment.DefaultWorkflowValidatorCompileCache);
-            }
-
-            protected virtual IWorkflowApproveProcessor GetWorkflowApproveProcessor()
-            {
-                return new WorkflowApproveProcessor(this.Authorization);
             }
 
             /// <summary>
@@ -499,12 +385,22 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
                 this.ConfigurationEventsSubscriptionManager.Maybe(eventManager => eventManager.Subscribe());
 
-                this.WorkflowEventsSubscriptionManager.Maybe(eventManager => eventManager.Subscribe());
+                foreach (var module in this.GetModules())
+                {
+                    module.SubscribeEvents();
+                }
             }
 
-
-
-            protected abstract IEnumerable<IDALListener> GetBeforeTransactionCompletedListeners();
+            protected virtual IEnumerable<IDALListener> GetBeforeTransactionCompletedListeners()
+            {
+                foreach (var module in this.GetModules())
+                {
+                    foreach (var listener in module.GetBeforeTransactionCompletedListeners())
+                    {
+                        yield return listener;
+                    }
+                }
+            }
 
             protected abstract IEnumerable<IDALListener> GetAfterTransactionCompletedListeners();
 
@@ -527,12 +423,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                 return null;
             }
 
-            protected virtual IEventsSubscriptionManager<IWorkflowBLLContext, Framework.Workflow.Domain.PersistentDomainObjectBase> CreateWorkflowEventsSubscriptionManager()
-            {
-                return null;
-            }
-
-            protected virtual ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> GetSecurityExpressionBuilderFactory<TBLLContext, TPersistentDomainObjectBase, TIdent>(TBLLContext context)
+            public virtual ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> GetSecurityExpressionBuilderFactory<TBLLContext, TPersistentDomainObjectBase, TIdent>(TBLLContext context)
                 where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
                 where TBLLContext : class, ISecurityBLLContext<IAuthorizationBLLContext<TIdent>, TPersistentDomainObjectBase, TIdent>, IHierarchicalObjectExpanderFactoryContainer<TIdent>
             {
@@ -563,7 +454,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     this.ServiceEnvironment.NotificationContext.ExceptionReceivers);
             }
 
-            protected virtual IDateTimeService GetDateTimeService()
+            public virtual IDateTimeService GetDateTimeService()
             {
                 return DateTimeService.Default;
             }
@@ -572,10 +463,10 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             {
                 if (string.IsNullOrWhiteSpace(this.currentPrincipalName))
                 {
-                    return this.ServiceEnvironment.userAuthenticationService;
+                    return this.ServiceEnvironment.UserAuthenticationService;
                 }
 
-                return UserAuthenticationService.CreateFor(this.currentPrincipalName);
+                return Core.Services.UserAuthenticationService.CreateFor(this.currentPrincipalName);
             }
 
             protected virtual IMessageSender<NotificationEventDTO> GetMainTemplateSender()
@@ -614,20 +505,8 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                 yield break;
             }
 
-            protected abstract IEnumerable<Framework.Workflow.BLL.ITargetSystemService> GetWorkflowTargetSystemServices(
-                SubscriptionMetadataStore subscriptionMetadataStore);
-
             protected abstract ITypeResolver<string> GetSecurityTypeResolver();
 
-            protected Framework.Configuration.BLL.ITargetSystemService GetWorkflowConfigurationTargetSystemServices()
-            {
-                return new Framework.Configuration.BLL.TargetSystemService<IWorkflowBLLContext, Framework.Workflow.Domain.PersistentDomainObjectBase>(
-                    this.Configuration,
-                    this.Workflow,
-                    this.Configuration.Logics.TargetSystem.GetByName(TargetSystemHelper.WorkflowName, true),
-                    this.GetWorkflowEventDALListeners(),
-                    this.ServiceEnvironment.SubscriptionMetadataStore);
-            }
 
             protected abstract IAuthorizationExternalSource GetAuthorizationExternalSource();
 
@@ -635,20 +514,10 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
             protected abstract IHierarchicalObjectExpanderFactory<Guid> GetHierarchicalObjectExpanderFactory();
 
-            protected virtual IAccessDeniedExceptionService<TPersistentDomainObjectBase> GetAccessDeniedExceptionService<TPersistentDomainObjectBase, TIdent>()
+            public virtual IAccessDeniedExceptionService<TPersistentDomainObjectBase> GetAccessDeniedExceptionService<TPersistentDomainObjectBase, TIdent>()
                 where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
             {
                 return new AccessDeniedExceptionService<TPersistentDomainObjectBase, TIdent>();
-            }
-
-            protected Framework.Workflow.BLL.ITargetSystemService GetAuthorizationWorkflowTargetSystemService()
-            {
-                return new Framework.Workflow.BLL.TargetSystemService<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, AuthorizationSecurityOperationCode>(
-                     this.Workflow,
-                     this.Authorization,
-                     this.Workflow.Logics.TargetSystem.GetByName(TargetSystemHelper.AuthorizationName, true),
-                     this.ServiceEnvironment.workflowAuthorizationSystemCompileCache,
-                     new[] { typeof(Framework.Authorization.Domain.Permission) });
             }
 
             protected Framework.Configuration.BLL.ITargetSystemService GetConfigurationConfigurationTargetSystemService()
@@ -671,7 +540,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     this.ServiceEnvironment.SubscriptionMetadataStore);
             }
 
-            private ServiceEnvironmentBLLContextContainer Impersonate(string principalName)
+            public ServiceEnvironmentBLLContextContainer Impersonate(string principalName)
             {
                 return this.ServiceEnvironment.GetBLLContextContainerBase(this.ScopedServiceProvider, this.Session, principalName);
             }
@@ -693,16 +562,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             {
                 yield break;
             }
-
-            /// <summary>
-            /// Получение воркфлоу DALListener-ов с возможностью ручных вызовов
-            /// </summary>
-            /// <returns></returns>
-            protected virtual IEnumerable<IManualEventDALListener<Framework.Workflow.Domain.PersistentDomainObjectBase>> GetWorkflowEventDALListeners()
-            {
-                yield break;
-            }
         }
-
     }
 }

@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Framework.Attachments.Abstract;
+using Framework.Configuration.Domain;
 using Framework.DomainDriven.Attributes;
 using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Restriction;
 using Framework.Security;
 
-namespace Framework.Configuration.Domain
+namespace Framework.Attachments.Domain
 {
     /// <summary>
     /// Контейнер аттачментов

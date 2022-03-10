@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using Framework.Configuration.Domain;
+using Framework.Attachments.Domain;
 using Framework.Persistent;
 
 using JetBrains.Annotations;
 
-namespace Framework.Configuration.BLL
+namespace Framework.Attachments.BLL
 {
     public partial interface IAttachmentContainerBLL
     {

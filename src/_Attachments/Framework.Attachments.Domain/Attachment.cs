@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
+using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Core.Serialization;
 using Framework.DomainDriven.Attributes;
@@ -11,7 +12,7 @@ using Framework.Persistent;
 using Framework.Restriction;
 using Framework.Security;
 
-namespace Framework.Configuration.Domain
+namespace Framework.Attachments.Domain
 {
     [DomainObjectAccess, BLLRemoveRole(CustomImplementation = true)]
     [NotAuditedClass]

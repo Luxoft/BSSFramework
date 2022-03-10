@@ -2,16 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using Framework.Configuration.Domain;
+using Framework.Attachments.Domain;
+using Framework.Configuration.BLL;
 using Framework.DomainDriven.BLL;
 using Framework.Persistent;
+using Framework.SecuritySystem;
 
 using JetBrains.Annotations;
 
-namespace Framework.Configuration.BLL
+using nuSpec.Abstraction;
+
+namespace Framework.Attachments.BLL
 {
-    public partial class AttachmentBLL
+    public class AttachmentBLL : SecurityDomainBLLBase<Attachment, BLLBaseOperation>, IAttachmentBLL
     {
+        private readonly IAttachmentBLLContextModule contextModule;
+
+        public AttachmentBLL(IAttachmentBLLContextModule contextModule, ISpecificationEvaluator specificationEvaluator = null) : base(contextModule.Context, specificationEvaluator)
+        {
+            this.contextModule = contextModule;
+        }
+
+        public AttachmentBLL(IAttachmentBLLContextModule contextModule, ISecurityProvider<Attachment> securityOperation, ISpecificationEvaluator specificationEvaluator = null)
+                : base(contextModule.Context, securityOperation, specificationEvaluator)
+        {
+            this.contextModule = contextModule;
+        }
+
         public override void Insert([NotNull] Attachment attachment, Guid id)
         {
             if (attachment == null) throw new ArgumentNullException(nameof(attachment));
@@ -29,7 +46,7 @@ namespace Framework.Configuration.BLL
 
             if (attachment.Container.IsNew)
             {
-                this.Context.Logics.AttachmentContainer.Save(attachment.Container);
+                new AttachmentContainerBLL(this.contextModule).Save(attachment.Container);
             }
 
             base.Save(attachment);
@@ -46,7 +63,7 @@ namespace Framework.Configuration.BLL
 
             container.RemoveDetail(attachment);
 
-            var containerBLL = this.Context.Logics.AttachmentContainer;
+            var containerBLL = new AttachmentContainerBLL(this.contextModule);
 
             if (container.Attachments.Any())
             {
@@ -64,7 +81,7 @@ namespace Framework.Configuration.BLL
 
             var domainType = this.Context.GetDomainType(type, true);
 
-            return this.GetObjectsBy(attachment => attachment.Container.DomainType == domainType && attachment.Container.ObjectId == domainObjectId);
+            return this.GetListBy(attachment => attachment.Container.DomainType == domainType && attachment.Container.ObjectId == domainObjectId);
         }
 
         public IList<Attachment> GetObjectsBy<TDomainObject>(TDomainObject domainObject)

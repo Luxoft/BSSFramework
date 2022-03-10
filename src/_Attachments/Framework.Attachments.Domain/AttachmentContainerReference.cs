@@ -1,9 +1,10 @@
 ﻿using System;
 
-using Framework.Persistent;
+using Framework.Attachments.Abstract;
+using Framework.Configuration.Domain;
 using Framework.Restriction;
 
-namespace Framework.Configuration.Domain
+namespace Framework.Attachments.Domain
 {
     /// <summary>
     /// Ссылка на контейнер аттачмента

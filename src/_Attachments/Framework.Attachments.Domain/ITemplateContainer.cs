@@ -1,4 +1,4 @@
-﻿namespace Framework.Configuration.Domain
+﻿namespace Framework.Attachments.Domain
 {
     /// <summary>
     /// Аттачмент

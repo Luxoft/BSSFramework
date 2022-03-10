@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Framework.Persistent
+namespace Framework.Attachments.Abstract
 {
     public interface IAttachmentContainerReference<out T, out TIdent>
     {

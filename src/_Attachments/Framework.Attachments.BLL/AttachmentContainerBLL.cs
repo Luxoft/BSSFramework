@@ -2,24 +2,41 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Framework.Attachments.Domain;
+using Framework.Configuration.BLL;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.Persistent;
+using Framework.SecuritySystem;
 
 using JetBrains.Annotations;
 
-namespace Framework.Configuration.BLL
+using nuSpec.Abstraction;
+
+namespace Framework.Attachments.BLL
 {
-    public partial class AttachmentContainerBLL
+    public partial class AttachmentContainerBLL : SecurityDomainBLLBase<AttachmentContainer, BLLBaseOperation>, IAttachmentContainerBLL
     {
+        private readonly IAttachmentBLLContextModule contextModule;
+
+        public AttachmentContainerBLL(IAttachmentBLLContextModule contextModule, ISpecificationEvaluator specificationEvaluator = null) : base(contextModule.Context, specificationEvaluator)
+        {
+            this.contextModule = contextModule;
+        }
+
+        public AttachmentContainerBLL(IAttachmentBLLContextModule contextModule, ISecurityProvider<AttachmentContainer> securityOperation, ISpecificationEvaluator specificationEvaluator = null)
+                : base(contextModule.Context, securityOperation, specificationEvaluator)
+        {
+        }
+
         public override void Insert([NotNull] AttachmentContainer attachmentContainer, Guid id)
         {
             if (attachmentContainer == null) throw new ArgumentNullException(nameof(attachmentContainer));
 
             this.InsertWithoutCascade(attachmentContainer, id);
 
-            this.Context.Logics.Attachment.Insert(attachmentContainer.Attachments);
+            new AttachmentBLL(this.contextModule).Insert(attachmentContainer.Attachments);
 
             base.Insert(attachmentContainer, id);
         }
@@ -28,7 +45,7 @@ namespace Framework.Configuration.BLL
         {
             if (attachmentContainer == null) throw new ArgumentNullException(nameof(attachmentContainer));
 
-            this.Context.GetPersistentTargetSystemService(attachmentContainer.DomainType.TargetSystem).TryDenormalizeHasAttachmentFlag(attachmentContainer, true);
+            this.contextModule.GetPersistentTargetSystemService(attachmentContainer.DomainType.TargetSystem).TryDenormalizeHasAttachmentFlag(attachmentContainer, true);
 
             base.Save(attachmentContainer);
         }
@@ -37,7 +54,7 @@ namespace Framework.Configuration.BLL
         {
             if (attachmentContainer == null) throw new ArgumentNullException(nameof(attachmentContainer));
 
-            this.Context.GetPersistentTargetSystemService(attachmentContainer.DomainType.TargetSystem).TryDenormalizeHasAttachmentFlag(attachmentContainer, false);
+            this.contextModule.GetPersistentTargetSystemService(attachmentContainer.DomainType.TargetSystem).TryDenormalizeHasAttachmentFlag(attachmentContainer, false);
 
             base.Remove(attachmentContainer);
         }
@@ -50,7 +67,7 @@ namespace Framework.Configuration.BLL
 
                           let objectIdents = g.ToList(c => c.ObjectId)
 
-                          let targetSystemService = this.Context.GetPersistentTargetSystemService(g.Key.TargetSystem)
+                          let targetSystemService = this.contextModule.GetPersistentTargetSystemService(g.Key.TargetSystem)
 
                           let failIdents = targetSystemService.GetNotExistsObjects(g.Key, objectIdents)
 

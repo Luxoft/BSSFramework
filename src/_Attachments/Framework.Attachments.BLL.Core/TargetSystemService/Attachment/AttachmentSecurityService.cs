@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Linq.Expressions;
 
+using Framework.Attachments.Domain;
+using Framework.Configuration.BLL;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
@@ -9,7 +11,7 @@ using Framework.Persistent;
 using Framework.Configuration.Domain;
 using Framework.SecuritySystem;
 
-namespace Framework.Configuration.BLL
+namespace Framework.Attachments.BLL
 {
     public class AttachmentSecurityService<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<IConfigurationBLLContext>, IAttachmentSecurityProviderSource
 

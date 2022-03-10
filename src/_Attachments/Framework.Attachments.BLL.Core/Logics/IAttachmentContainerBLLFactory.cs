@@ -2,7 +2,7 @@
 
 using Framework.SecuritySystem;
 
-namespace Framework.Configuration.BLL
+namespace Framework.Attachments.BLL
 {
     public partial interface IAttachmentContainerBLLFactory
     {

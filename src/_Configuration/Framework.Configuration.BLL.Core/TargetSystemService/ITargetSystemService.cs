@@ -30,30 +30,13 @@ namespace Framework.Configuration.BLL
         new TBLLContext TargetSystemContext { get; }
     }
 
-    public interface IPersistentTargetSystemService : ITargetSystemService, IPersistentDomainObjectBaseTypeContainer, IAttachmentSecurityProviderSource
+    public interface IPersistentTargetSystemService : ITargetSystemService, IPersistentDomainObjectBaseTypeContainer
     {
         new IRevisionSubscriptionSystemService SubscriptionService { get; }
-
-        bool HasAttachments { get; }
-
-
-        void TryRemoveAttachments(Array domainObjects);
-
-
-        void TryDenormalizeHasAttachmentFlag(AttachmentContainer container, bool value);
-
-        IEnumerable<Guid> GetNotExistsObjects(DomainType domainType, IEnumerable<Guid> idents);
 
 
         IRevisionSubscriptionSystemService GetSubscriptionService(IMessageSender<MessageTemplateNotification> subscriptionSender);
 
         void ForceEvent(DomainTypeEventOperation operation, long? revision, Guid domainObjectId);
-    }
-
-    public interface ITargetSystemService<out TBLLContext, in TPersistentDomainObjectBase> : ITargetSystemService<TBLLContext>, IPersistentTargetSystemService
-        where TPersistentDomainObjectBase : class
-    {
-        void TryRemoveAttachments<TDomainObject>(IEnumerable<TDomainObject> domainObjects)
-            where TDomainObject : class, TPersistentDomainObjectBase;
     }
 }

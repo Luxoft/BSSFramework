@@ -5,15 +5,12 @@ using Framework.Authorization.BLL;
 using Framework.Core;
 using Framework.Core.Serialization;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.BLL.Tracking;
 
 using Framework.Notification;
-using Framework.Report;
 using Framework.Configuration.Domain;
-using Framework.Notification.DTO;
 using Framework.Persistent;
 
 namespace Framework.Configuration.BLL

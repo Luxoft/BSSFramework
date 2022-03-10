@@ -1,6 +1,5 @@
 ﻿using System;
 
-using Framework.Core.Serialization;
 using Framework.Notification;
 using Framework.Persistent;
 
@@ -15,10 +14,6 @@ namespace Framework.DomainDriven.BLL.Configuration
 
         IBLLSimpleQueryBase<IEmployee> GetEmployeeSource();
 
-        bool HasAttachment<TDomainObject>(TDomainObject domainObject)
-            where TDomainObject : IIdentityObject<Guid>;
-
-        
         /// <summary>
         /// Получение текущей ревизии из аудита (пока возвращает 0, если вызван до флаша сессии)
         /// </summary>

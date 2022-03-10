@@ -1,4 +1,4 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Attachments.Abstract
 {
     public interface IAttachmentContainerHeader
     {

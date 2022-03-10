@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Linq.Expressions;
 
+using Framework.Attachments.Domain;
 using Framework.Configuration.Domain;
 using Framework.SecuritySystem;
 
-namespace Framework.Configuration.BLL
+namespace Framework.Attachments.BLL
 {
     public interface IAttachmentSecurityProviderSource
     {

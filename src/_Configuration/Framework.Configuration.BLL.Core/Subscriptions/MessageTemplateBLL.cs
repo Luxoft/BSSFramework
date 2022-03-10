@@ -17,7 +17,6 @@ using Framework.Notification;
 
 using JetBrains.Annotations;
 
-using Attachment = Framework.Configuration.Domain.Attachment;
 using MAttachment = System.Net.Mail.Attachment;
 
 namespace Framework.Configuration.BLL
@@ -180,33 +179,6 @@ namespace Framework.Configuration.BLL
             var builder = new StringBuilder(str);
 
             return builder.Replace(';', ',').ToString();
-        }
-
-        private static MAttachment CreateAttachment(
-            IConfigurationBLLContext context,
-            Attachment attachment,
-            object rootObject,
-            Dictionary<string, object> variables)
-        {
-            if (attachment.HasTag("IsTemplate"))
-            {
-
-                throw null;
-                //var evaluator = context.TemplateEvaluatorFactory.Create<byte[]>(attachment);
-
-                //if (evaluator != null)
-                //{
-                //    var result = evaluator.Evaluate(attachment.Content, rootObject, variables);
-
-                //    var fileName = attachment.Name.Contains("{0}")
-                //        ? string.Format(attachment.Name, context.DateTimeService.Now.ToString("yyyy-MM-dd_hh-mm-ss"))
-                //        : attachment.Name;
-
-                //    return new MAttachment(new MemoryStream(result), fileName);
-                //}
-            }
-
-            return new MAttachment(new MemoryStream(attachment.Content), attachment.Name);
         }
 
         private void InsertTargetAdresses(

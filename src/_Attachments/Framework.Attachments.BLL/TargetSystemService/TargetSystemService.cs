@@ -46,6 +46,7 @@ namespace Framework.Attachments.BLL
 
             this.lazyHasAttachments = LazyHelper.Create(() => new AttachmentBLL(this.contextModule).GetUnsecureQueryable().Any(a => a.Container.DomainType.TargetSystem == this.TargetSystem));
         }
+
         public TargetSystem TargetSystem
         {
             get;

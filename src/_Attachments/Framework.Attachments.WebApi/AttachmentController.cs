@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Framework.Attachments.Domain;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
@@ -9,11 +10,13 @@ using Framework.DomainDriven.BLL.Security;
 using Framework.Configuration.BLL;
 using Framework.Configuration.Domain;
 using Framework.Configuration.Generated.DTO;
+using Framework.DomainDriven.ServiceModel.Service;
+using Framework.DomainDriven.WebApiNetCore;
 using Framework.SecuritySystem;
 
 namespace Framework.Configuration.WebApi
 {
-    public partial class ConfigSLJsonController
+    public class AttachmentController : ApiControllerBase<IServiceEnvironment<IConfigurationBLLContext>, IConfigurationBLLContext, EvaluatedData<IConfigurationBLLContext, IConfigurationDTOMappingService>>
     {
         [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetSimpleAttachmentsByContainerReference))]
         public IEnumerable<AttachmentSimpleDTO> GetSimpleAttachmentsByContainerReference(AttachmentContainerReferenceStrictDTO attachmentContainerReference)

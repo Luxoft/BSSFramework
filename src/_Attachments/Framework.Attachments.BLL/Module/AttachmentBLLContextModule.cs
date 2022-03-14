@@ -29,4 +29,9 @@ public class AttachmentBLLContextModule : BLLContextContainer<IConfigurationBLLC
 
         return this.lazyTargetSystemServiceCache.Value[targetSystem];
     }
+
+    public IEnumerable<ITargetSystemService> GetPersistentTargetSystemServices()
+    {
+        return this.lazyTargetSystemServiceCache.Value.Values;
+    }
 }

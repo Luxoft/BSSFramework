@@ -45,9 +45,12 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
         protected virtual IEnumerable<IDALListener> GetBeforeTransactionCompletedListeners(TBLLContextContainer container)
         {
-            foreach (var listener in this.GetAttachmentCleanerDALListeners(container))
+            foreach (var module in this.GetModules())
             {
-                yield return listener;
+                foreach (var listener in module.GetDALFlushedListeners(container))
+                {
+                    yield return listener;
+                }
             }
 
             if (container.Configuration.SubscriptionEnabled)
@@ -69,16 +72,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         protected virtual IEnumerable<IDALListener> GetAfterTransactionCompletedListeners(TBLLContextContainer container)
         {
             yield break;
-        }
-
-
-        private IEnumerable<IDALListener> GetAttachmentCleanerDALListeners(TBLLContextContainer container)
-        {
-            return from targetSystemService in container.Configuration.GetPersistentTargetSystemServices()
-
-                   where targetSystemService.HasAttachments
-
-                   select new AttachmentCleanerDALListener(targetSystemService);
         }
 
         private IEnumerable<IDALListener> GetSubscriptionDALListeners(TBLLContextContainer container)

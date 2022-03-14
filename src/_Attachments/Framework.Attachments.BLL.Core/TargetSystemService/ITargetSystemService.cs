@@ -8,6 +8,8 @@ namespace Framework.Attachments.BLL
 {
     public interface ITargetSystemService : IAttachmentSecurityProviderSource
     {
+        Framework.Configuration.BLL.ITargetSystemService ConfigTargetSystemService { get; }
+
         TargetSystem TargetSystem
         {
             get;

@@ -96,14 +96,6 @@ namespace Framework.Configuration.ClientGenerate
         private void AddAttachmentMethods()
         {
             this.Add(facade => facade.GetSimpleDomainTypeByPath(default));
-            this.Add(facade => facade.GetSimpleAttachmentsByContainerReference (default));
-
-            this.Add(facade => facade.SaveAttachment(default));
-            this.Add(facade => facade.RemoveAttachment(default));
-
-            this.Add(facade => facade.GetSimpleAttachment(default));
-            this.Add(facade => facade.GetRichAttachmentTagsEx(default));
-            this.Add(facade => facade.SetAttachmentTags(default));
         }
 
         private void AddUnsortedMethods()

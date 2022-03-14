@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
 
-using Framework.Attachments.BLL;
-using Framework.Configuration.BLL;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 
@@ -37,10 +35,5 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                 }
             }
         }
-    }
-
-    public interface IAttachmentServiceEnvironmentModule
-    {
-        IAttachmentBLLContextModule CreateContextModule(IConfigurationBLLContext configurationBllContext);
     }
 }

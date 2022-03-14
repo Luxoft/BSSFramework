@@ -27,12 +27,12 @@ namespace Framework.Configuration.TestGenerate
 
         public readonly AuditServiceGeneratorConfiguration AuditService;
 
+        public readonly ServerDTOGeneratorConfiguration ServerDTO;
+
         public ServerGenerationEnvironment()
             :this(new DatabaseName(typeof(PersistentDomainObjectBase).GetTargetSystemName()))
         {
         }
-
-        public virtual ServerDTOGeneratorConfiguration ServerDTO { get; }
 
         public ServerGenerationEnvironment(DatabaseName databaseName)
         {

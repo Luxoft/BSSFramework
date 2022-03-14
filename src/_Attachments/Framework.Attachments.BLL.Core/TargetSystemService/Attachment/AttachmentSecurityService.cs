@@ -3,17 +3,15 @@ using System.Linq;
 using System.Linq.Expressions;
 
 using Framework.Attachments.Domain;
-using Framework.Configuration.BLL;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.Persistent;
-using Framework.Configuration.Domain;
 using Framework.SecuritySystem;
 
 namespace Framework.Attachments.BLL
 {
-    public class AttachmentSecurityService<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<IConfigurationBLLContext>, IAttachmentSecurityProviderSource
+    public class AttachmentSecurityService<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<IAttachmentsBLLContext>, IAttachmentSecurityProviderSource
 
         where TBLLContext : class,
 
@@ -27,7 +25,7 @@ namespace Framework.Attachments.BLL
         private readonly TBLLContext _targetSystemContext;
 
 
-        public AttachmentSecurityService(IConfigurationBLLContext context, TBLLContext targetSystemContext)
+        public AttachmentSecurityService(IAttachmentsBLLContext context, TBLLContext targetSystemContext)
             : base(context)
         {
             if (targetSystemContext == null) throw new ArgumentNullException(nameof(targetSystemContext));
@@ -49,13 +47,13 @@ namespace Framework.Attachments.BLL
         private class GetAttachmentSecurityProviderProcessor<TDomainObject> : TypeResolverDomainObjectProcessor<TBLLContext, TPersistentDomainObjectBase, ISecurityProvider<TDomainObject>>
             where TDomainObject : PersistentDomainObjectBase
         {
-            private readonly IConfigurationBLLContext _mainContext;
+            private readonly IAttachmentsBLLContext _mainContext;
 
             private readonly Expression<Func<TDomainObject, AttachmentContainer>> _containerPath;
             private readonly BLLSecurityMode _securityMode;
 
 
-            public GetAttachmentSecurityProviderProcessor(TBLLContext context, IConfigurationBLLContext mainContext, Expression<Func<TDomainObject, AttachmentContainer>> containerPath, BLLSecurityMode securityMode)
+            public GetAttachmentSecurityProviderProcessor(TBLLContext context, IAttachmentsBLLContext mainContext, Expression<Func<TDomainObject, AttachmentContainer>> containerPath, BLLSecurityMode securityMode)
                 : base(context)
             {
                 this._mainContext = mainContext;
@@ -84,7 +82,7 @@ namespace Framework.Attachments.BLL
             private static readonly LambdaCompileCache CompileCache = new LambdaCompileCache();
 
 
-            public AttachmentSecurityProvider(IConfigurationBLLContext mainContext, ISecurityProvider<TTargetSystemDomainObject> targetSystemSecurityProvider, TBLLContext context, Expression<Func<TDomainObject, AttachmentContainer>> containerPath)
+            public AttachmentSecurityProvider(IAttachmentsBLLContext mainContext, ISecurityProvider<TTargetSystemDomainObject> targetSystemSecurityProvider, TBLLContext context, Expression<Func<TDomainObject, AttachmentContainer>> containerPath)
                 : base(mainContext.AccessDeniedExceptionService)
             {
                 this.Context = context;

@@ -2,7 +2,6 @@
 using System.Linq.Expressions;
 
 using Framework.Attachments.Domain;
-using Framework.Configuration.Domain;
 using Framework.SecuritySystem;
 
 namespace Framework.Attachments.BLL

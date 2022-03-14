@@ -1,7 +1,6 @@
 ﻿using System;
 
 using Framework.Attachments.Abstract;
-using Framework.Configuration.Domain;
 using Framework.Restriction;
 
 namespace Framework.Attachments.Domain

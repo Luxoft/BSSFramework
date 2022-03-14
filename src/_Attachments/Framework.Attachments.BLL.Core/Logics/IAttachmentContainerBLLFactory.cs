@@ -1,4 +1,4 @@
-﻿using Framework.Configuration.Domain;
+﻿using Framework.Attachments.Domain;
 
 using Framework.SecuritySystem;
 

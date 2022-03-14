@@ -2,20 +2,18 @@
 using System.Collections.Generic;
 
 using Framework.Attachments.Domain;
-using Framework.Configuration.Domain;
 
 namespace Framework.Attachments.BLL
 {
     public interface ITargetSystemService : IAttachmentSecurityProviderSource
     {
-        Framework.Configuration.BLL.ITargetSystemService ConfigTargetSystemService { get; }
-
         TargetSystem TargetSystem
         {
             get;
         }
 
         bool HasAttachments { get; }
+        bool IsAssignable(Type domainType);
 
         void TryRemoveAttachments(Array domainObjects);
 

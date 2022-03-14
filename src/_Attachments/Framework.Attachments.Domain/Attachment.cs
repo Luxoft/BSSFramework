@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 
-using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Core.Serialization;
 using Framework.DomainDriven.Attributes;

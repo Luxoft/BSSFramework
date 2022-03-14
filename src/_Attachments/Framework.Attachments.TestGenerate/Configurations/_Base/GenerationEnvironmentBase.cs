@@ -1,7 +1,6 @@
 ﻿using System;
 
-using Framework.Configuration;
-using Framework.Configuration.Domain;
+using Framework.Attachments.Domain;
 using Framework.DomainDriven.Generation.Domain;
 
 namespace Framework.Attachments.TestGenerate
@@ -16,8 +15,8 @@ namespace Framework.Attachments.TestGenerate
         {
         }
 
-        public override Type SecurityOperationCodeType { get; } = typeof(ConfigurationSecurityOperationCode);
+        public override Type SecurityOperationCodeType { get; } = typeof(AttachmentsSecurityOperationCode);
 
-        public override Type OperationContextType { get; } = typeof(ConfigurationOperationContext);
+        public override Type OperationContextType { get; } = typeof(AttachmentsOperationContext);
     }
 }

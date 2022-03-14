@@ -59,6 +59,10 @@ namespace Framework.Attachments.BLL
 
         public bool HasAttachments => this.lazyHasAttachments.Value;
 
+        public bool IsAssignable(Type domainType)
+        {
+            return typeof(TPersistentDomainObjectBase).IsAssignableFrom(domainType);
+        }
 
         public void TryRemoveAttachments<TDomainObject>([NotNull] IEnumerable<TDomainObject> domainObjects)
             where TDomainObject : class, TPersistentDomainObjectBase

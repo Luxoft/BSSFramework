@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Framework.Attachments.Domain;
-using Framework.Configuration.BLL;
-using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.Persistent;
@@ -16,28 +14,15 @@ using nuSpec.Abstraction;
 
 namespace Framework.Attachments.BLL
 {
-    public partial class AttachmentContainerBLL : SecurityDomainBLLBase<AttachmentContainer, BLLBaseOperation>, IAttachmentContainerBLL
+    public partial class AttachmentContainerBLL
     {
-        private readonly IAttachmentBLLContextModule contextModule;
-
-        public AttachmentContainerBLL(IAttachmentBLLContextModule contextModule, ISpecificationEvaluator specificationEvaluator = null)
-                : base(contextModule.Configuration, specificationEvaluator)
-        {
-            this.contextModule = contextModule;
-        }
-
-        public AttachmentContainerBLL(IAttachmentBLLContextModule contextModule, ISecurityProvider<AttachmentContainer> securityOperation, ISpecificationEvaluator specificationEvaluator = null)
-                : base(contextModule.Configuration, securityOperation, specificationEvaluator)
-        {
-        }
-
         public override void Insert([NotNull] AttachmentContainer attachmentContainer, Guid id)
         {
             if (attachmentContainer == null) throw new ArgumentNullException(nameof(attachmentContainer));
 
             this.InsertWithoutCascade(attachmentContainer, id);
 
-            new AttachmentBLL(this.contextModule).Insert(attachmentContainer.Attachments);
+            this.Context.Logics.Attachment.Insert(attachmentContainer.Attachments);
 
             base.Insert(attachmentContainer, id);
         }
@@ -46,7 +31,7 @@ namespace Framework.Attachments.BLL
         {
             if (attachmentContainer == null) throw new ArgumentNullException(nameof(attachmentContainer));
 
-            this.contextModule.GetPersistentTargetSystemService(attachmentContainer.DomainType.TargetSystem).TryDenormalizeHasAttachmentFlag(attachmentContainer, true);
+            this.Context.GetPersistentTargetSystemService(attachmentContainer.DomainType.TargetSystem).TryDenormalizeHasAttachmentFlag(attachmentContainer, true);
 
             base.Save(attachmentContainer);
         }
@@ -55,7 +40,7 @@ namespace Framework.Attachments.BLL
         {
             if (attachmentContainer == null) throw new ArgumentNullException(nameof(attachmentContainer));
 
-            this.contextModule.GetPersistentTargetSystemService(attachmentContainer.DomainType.TargetSystem).TryDenormalizeHasAttachmentFlag(attachmentContainer, false);
+            this.Context.GetPersistentTargetSystemService(attachmentContainer.DomainType.TargetSystem).TryDenormalizeHasAttachmentFlag(attachmentContainer, false);
 
             base.Remove(attachmentContainer);
         }
@@ -68,7 +53,7 @@ namespace Framework.Attachments.BLL
 
                           let objectIdents = g.ToList(c => c.ObjectId)
 
-                          let targetSystemService = this.contextModule.GetPersistentTargetSystemService(g.Key.TargetSystem)
+                          let targetSystemService = this.Context.GetPersistentTargetSystemService(g.Key.TargetSystem)
 
                           let failIdents = targetSystemService.GetNotExistsObjects(g.Key, objectIdents)
 
@@ -96,7 +81,7 @@ namespace Framework.Attachments.BLL
         {
             if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-            return this.GetObjectBy(typeof (TDomainObject), domainObject.Id);
+            return this.GetObjectBy(typeof(TDomainObject), domainObject.Id);
         }
     }
 }

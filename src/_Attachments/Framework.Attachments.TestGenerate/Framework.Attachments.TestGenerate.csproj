@@ -1,25 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <PackageId>Framework.Attachments.TestGenerate</PackageId>
+    <PackageId>Luxoft.Framework.Attachments.TestGenerate</PackageId>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.8" />
     <PackageReference Include="MSTest.TestFramework" Version="2.2.8" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\..\_Configuration\Framework.Configuration.TestGenerate\Framework.Configuration.TestGenerate.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.DBGenerator\Framework.DomainDriven.DBGenerator.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.DTOGenerator.Client\Framework.DomainDriven.DTOGenerator.Client.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.NHibernate.DALGenerator\Framework.DomainDriven.NHibernate.DALGenerator.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModelGenerator\Framework.DomainDriven.ServiceModelGenerator.csproj" />
+
     <ProjectReference Include="..\Framework.Attachments.Domain\Framework.Attachments.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Configurations\DTO\" />
   </ItemGroup>
 </Project>

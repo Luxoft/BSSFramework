@@ -1,6 +1,5 @@
 ﻿using System;
 
-using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.DomainDriven.Attributes;
 using Framework.Persistent;

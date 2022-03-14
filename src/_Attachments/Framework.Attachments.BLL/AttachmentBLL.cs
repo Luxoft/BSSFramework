@@ -3,33 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Framework.Attachments.Domain;
-using Framework.Configuration.BLL;
 using Framework.DomainDriven.BLL;
 using Framework.Persistent;
-using Framework.SecuritySystem;
 
 using JetBrains.Annotations;
 
-using nuSpec.Abstraction;
-
 namespace Framework.Attachments.BLL
 {
-    public class AttachmentBLL : SecurityDomainBLLBase<Attachment, BLLBaseOperation>, IAttachmentBLL
+    public partial class AttachmentBLL
     {
-        private readonly IAttachmentBLLContextModule contextModule;
-
-        public AttachmentBLL(IAttachmentBLLContextModule contextModule, ISpecificationEvaluator specificationEvaluator = null)
-                : base(contextModule.Configuration, specificationEvaluator)
-        {
-            this.contextModule = contextModule;
-        }
-
-        public AttachmentBLL(IAttachmentBLLContextModule contextModule, ISecurityProvider<Attachment> securityOperation, ISpecificationEvaluator specificationEvaluator = null)
-                : base(contextModule.Configuration, securityOperation, specificationEvaluator)
-        {
-            this.contextModule = contextModule;
-        }
-
         public override void Insert([NotNull] Attachment attachment, Guid id)
         {
             if (attachment == null) throw new ArgumentNullException(nameof(attachment));
@@ -47,7 +29,7 @@ namespace Framework.Attachments.BLL
 
             if (attachment.Container.IsNew)
             {
-                new AttachmentContainerBLL(this.contextModule).Save(attachment.Container);
+                this.Context.Logics.AttachmentContainer.Save(attachment.Container);
             }
 
             base.Save(attachment);
@@ -64,7 +46,7 @@ namespace Framework.Attachments.BLL
 
             container.RemoveDetail(attachment);
 
-            var containerBLL = new AttachmentContainerBLL(this.contextModule);
+            var containerBLL = this.Context.Logics.AttachmentContainer;
 
             if (container.Attachments.Any())
             {
@@ -82,7 +64,7 @@ namespace Framework.Attachments.BLL
 
             var domainType = this.Context.GetDomainType(type, true);
 
-            return this.GetListBy(attachment => attachment.Container.DomainType == domainType && attachment.Container.ObjectId == domainObjectId);
+            return this.GetObjectsBy(attachment => attachment.Container.DomainType == domainType && attachment.Container.ObjectId == domainObjectId);
         }
 
         public IList<Attachment> GetObjectsBy<TDomainObject>(TDomainObject domainObject)
@@ -90,7 +72,7 @@ namespace Framework.Attachments.BLL
         {
             if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-            return this.GetObjectsBy(typeof (TDomainObject), domainObject.Id);
+            return this.GetObjectsBy(typeof(TDomainObject), domainObject.Id);
         }
     }
 }

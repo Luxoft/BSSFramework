@@ -1,23 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
+using Framework.Attachments.BLL;
 using Framework.Attachments.Domain;
-using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
-
 using Framework.Configuration.BLL;
-using Framework.Configuration.Domain;
 using Framework.Configuration.Generated.DTO;
+using Framework.Core;
+using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
+using Framework.Exceptions;
 using Framework.SecuritySystem;
 
 namespace Framework.Configuration.WebApi
 {
-    public class AttachmentController : ApiControllerBase<IServiceEnvironment<IConfigurationBLLContext>, IConfigurationBLLContext, EvaluatedData<IConfigurationBLLContext, IConfigurationDTOMappingService>>
+    public class AttachmentController : ApiControllerBase<IServiceEnvironment<IConfigurationBLLContext>, IConfigurationBLLContext, EvaluatedData<IConfigurationBLLContext, IAttachmentsDTOMappingService>>
     {
+        private readonly IAttachmentServiceEnvironmentModule attachmentServiceEnvironmentModule;
+
+        public AttachmentController(IServiceEnvironment<IConfigurationBLLContext> environment, IExceptionProcessor exceptionProcessor, IAttachmentServiceEnvironmentModule attachmentServiceEnvironmentModule) : base(environment, exceptionProcessor)
+        {
+            this.attachmentServiceEnvironmentModule = attachmentServiceEnvironmentModule;
+        }
+
+
         [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetSimpleAttachmentsByContainerReference))]
         public IEnumerable<AttachmentSimpleDTO> GetSimpleAttachmentsByContainerReference(AttachmentContainerReferenceStrictDTO attachmentContainerReference)
         {
@@ -27,9 +34,11 @@ namespace Framework.Configuration.WebApi
             {
                 var reference = attachmentContainerReference.ToDomainObject(evaluateData.MappingService);
 
-                var bll = evaluateData.Context.Logics.AttachmentFactory.Create(reference.DomainType, BLLSecurityMode.View);
+                var contextModule = this.attachmentServiceEnvironmentModule.CreateContextModule(evaluateData.Context);
 
-                return bll.GetObjectsBy(attachment => attachment.Container.ObjectId == attachmentContainerReference.ObjectId).ToSimpleDTOList(evaluateData.MappingService);
+                var attachmentBLL = new AttachmentBLLFactory(contextModule).Create(reference.DomainType, BLLSecurityMode.View);
+
+                return attachmentBLL.GetObjectsBy(attachment => attachment.Container.ObjectId == attachmentContainerReference.ObjectId).ToSimpleDTOList(evaluateData.MappingService);
             });
         }
 
@@ -38,11 +47,15 @@ namespace Framework.Configuration.WebApi
         {
             return this.Evaluate(DBSessionMode.Read, evaluateData =>
             {
-                var attachment = evaluateData.Context.Logics.Attachment.GetById(attachmentIdentity.Id, true);
+                var contextModule = this.attachmentServiceEnvironmentModule.CreateContextModule(evaluateData.Context);
 
-                evaluateData.Context.GetPersistentTargetSystemService(attachment.Container.DomainType.TargetSystem)
-                            .GetAttachmentSecurityProvider(attachment.Container.DomainType, BLLSecurityMode.View)
-                            .CheckAccess(attachment);
+                var defaultAttachmentBLL = new AttachmentBLL(contextModule);
+
+                var attachment = defaultAttachmentBLL.GetById(attachmentIdentity.Id, true);
+
+                contextModule.GetPersistentTargetSystemService(attachment.Container.DomainType.TargetSystem)
+                             .GetAttachmentSecurityProvider(attachment.Container.DomainType, BLLSecurityMode.View)
+                             .CheckAccess(attachment);
 
                 return attachment.ToRichDTO(evaluateData.MappingService);
             });
@@ -53,11 +66,15 @@ namespace Framework.Configuration.WebApi
         {
             return this.Evaluate(DBSessionMode.Read, evaluateData =>
             {
-                var attachment = evaluateData.Context.Logics.Attachment.GetById(attachmentIdentity.Id, true);
+                var contextModule = this.attachmentServiceEnvironmentModule.CreateContextModule(evaluateData.Context);
 
-                evaluateData.Context.GetPersistentTargetSystemService(attachment.Container.DomainType.TargetSystem)
-                            .GetAttachmentSecurityProvider(attachment.Container.DomainType, BLLSecurityMode.View)
-                            .CheckAccess(attachment);
+                var defaultAttachmentBLL = new AttachmentBLL(contextModule);
+
+                var attachment = defaultAttachmentBLL.GetById(attachmentIdentity.Id, true);
+
+                contextModule.GetPersistentTargetSystemService(attachment.Container.DomainType.TargetSystem)
+                             .GetAttachmentSecurityProvider(attachment.Container.DomainType, BLLSecurityMode.View)
+                             .CheckAccess(attachment);
 
                 return attachment.ToRichDTO(evaluateData.MappingService);
             });
@@ -70,17 +87,23 @@ namespace Framework.Configuration.WebApi
 
             return this.Evaluate(DBSessionMode.Write, evaluateData =>
             {
+                var contextModule = this.attachmentServiceEnvironmentModule.CreateContextModule(evaluateData.Context);
+
                 var reference = request.Reference.ToDomainObject(evaluateData.MappingService);
 
-                var container = evaluateData.Context.Logics.AttachmentContainer.GetObjectBy(attachmentContainer => attachmentContainer.ObjectId == reference.ObjectId)
-                             ?? new AttachmentContainer { DomainType = reference.DomainType, ObjectId = reference.ObjectId };
+                var attachmentContainerBLL = new AttachmentContainerBLL(contextModule);
 
-                var attachment = evaluateData.Context.Logics.Attachment.GetByIdOrCreate(request.Attachment.Id, () => new Attachment(container))
-                                                               .Self(a => request.Attachment.MapToDomainObject(evaluateData.MappingService, a));
+                var defaultAttachmentBLL = new AttachmentBLL(contextModule);
 
-                var bll = evaluateData.Context.Logics.AttachmentFactory.Create(container.DomainType, BLLSecurityMode.Edit);
+                var container = attachmentContainerBLL.GetObjectBy(attachmentContainer => attachmentContainer.ObjectId == reference.ObjectId)
+                                ?? new AttachmentContainer { DomainType = reference.DomainType, ObjectId = reference.ObjectId };
 
-                bll.Save(attachment);
+                var attachment = defaultAttachmentBLL.GetByIdOrCreate(request.Attachment.Id, () => new Attachment(container))
+                                                     .Self(a => request.Attachment.MapToDomainObject(evaluateData.MappingService, a));
+
+                var attachmentBLL = new AttachmentBLLFactory(contextModule).Create(reference.DomainType, BLLSecurityMode.Edit);
+
+                attachmentBLL.Save(attachment);
 
                 return attachment.ToIdentityDTO();
             });
@@ -91,11 +114,13 @@ namespace Framework.Configuration.WebApi
         {
             this.Evaluate(DBSessionMode.Write, evaluateData =>
             {
-                var attachment = evaluateData.Context.Logics.Attachment.GetById(attachmentIdent.Id, true);
+                var contextModule = this.attachmentServiceEnvironmentModule.CreateContextModule(evaluateData.Context);
 
-                var bll = evaluateData.Context.Logics.AttachmentFactory.Create(attachment.Container.DomainType, BLLSecurityMode.Edit);
+                var attachment = evaluateData.MappingService.ToAttachment(attachmentIdent);
 
-                bll.Remove(attachment);
+                var attachmentBLL = new AttachmentBLLFactory(contextModule).Create(attachment.Container.DomainType, BLLSecurityMode.Edit);
+
+                attachmentBLL.Remove(attachment);
             });
         }
 
@@ -104,11 +129,13 @@ namespace Framework.Configuration.WebApi
         {
             return this.Evaluate(DBSessionMode.Read, evaluateData =>
             {
-                var attachment = evaluateData.Context.Logics.Attachment.GetById(attachmentIdentity.Id, true);
+                var contextModule = this.attachmentServiceEnvironmentModule.CreateContextModule(evaluateData.Context);
 
-                evaluateData.Context.GetPersistentTargetSystemService(attachment.Container.DomainType.TargetSystem)
-                            .GetAttachmentSecurityProvider(attachment.Container.DomainType, BLLSecurityMode.View)
-                            .CheckAccess(attachment);
+                var attachment = evaluateData.MappingService.ToAttachment(attachmentIdentity);
+
+                contextModule.GetPersistentTargetSystemService(attachment.Container.DomainType.TargetSystem)
+                             .GetAttachmentSecurityProvider(attachment.Container.DomainType, BLLSecurityMode.View)
+                             .CheckAccess(attachment);
 
                 return attachment.Tags.ToRichDTOList(evaluateData.MappingService);
             });
@@ -119,7 +146,9 @@ namespace Framework.Configuration.WebApi
         {
             this.Evaluate(DBSessionMode.Write, evaluateData =>
             {
-                var attachment = evaluateData.Context.Logics.Attachment.GetById(request.Attachment.Id, true);
+                var contextModule = this.attachmentServiceEnvironmentModule.CreateContextModule(evaluateData.Context);
+
+                var attachment = evaluateData.MappingService.ToAttachment(request.Attachment);
 
                 var mapObj = new AttachmentStrictDTO
                 {
@@ -131,9 +160,9 @@ namespace Framework.Configuration.WebApi
 
                 mapObj.MapToDomainObject(evaluateData.MappingService, attachment);
 
-                var bll = evaluateData.Context.Logics.AttachmentFactory.Create(attachment.Container.DomainType, BLLSecurityMode.Edit);
+                var attachmentBLL = new AttachmentBLLFactory(contextModule).Create(attachment.Container.DomainType, BLLSecurityMode.Edit);
 
-                bll.Save(attachment);
+                attachmentBLL.Save(attachment);
             });
         }
 
@@ -143,10 +172,13 @@ namespace Framework.Configuration.WebApi
             var reference = this.EvaluateC(DBSessionMode.Read, context => new AttachmentContainerReferenceStrictDTO
             {
                 ObjectId = domainObjectId,
-                DomainType = context.Logics.DomainType.GetByName(domainTypeName, true).ToIdentityDTO()
+                DomainType = new() { Id = context.Logics.DomainType.GetByName(domainTypeName, true).Id }
             });
 
             return this.SaveAttachment(new SaveAttachmentRequest { Reference = reference, Attachment = attachment });
         }
+
+        protected override EvaluatedData<IConfigurationBLLContext, IAttachmentsDTOMappingService> GetEvaluatedData(IDBSession session, IConfigurationBLLContext context) =>
+            new EvaluatedData<IConfigurationBLLContext, IAttachmentsDTOMappingService>(session, context, new AttachmentsServerPrimitiveDTOMappingService(context));
     }
 }

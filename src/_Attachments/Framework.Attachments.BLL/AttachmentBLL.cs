@@ -18,13 +18,14 @@ namespace Framework.Attachments.BLL
     {
         private readonly IAttachmentBLLContextModule contextModule;
 
-        public AttachmentBLL(IAttachmentBLLContextModule contextModule, ISpecificationEvaluator specificationEvaluator = null) : base(contextModule.Context, specificationEvaluator)
+        public AttachmentBLL(IAttachmentBLLContextModule contextModule, ISpecificationEvaluator specificationEvaluator = null)
+                : base(contextModule.Configuration, specificationEvaluator)
         {
             this.contextModule = contextModule;
         }
 
         public AttachmentBLL(IAttachmentBLLContextModule contextModule, ISecurityProvider<Attachment> securityOperation, ISpecificationEvaluator specificationEvaluator = null)
-                : base(contextModule.Context, securityOperation, specificationEvaluator)
+                : base(contextModule.Configuration, securityOperation, specificationEvaluator)
         {
             this.contextModule = contextModule;
         }

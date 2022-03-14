@@ -20,13 +20,14 @@ namespace Framework.Attachments.BLL
     {
         private readonly IAttachmentBLLContextModule contextModule;
 
-        public AttachmentContainerBLL(IAttachmentBLLContextModule contextModule, ISpecificationEvaluator specificationEvaluator = null) : base(contextModule.Context, specificationEvaluator)
+        public AttachmentContainerBLL(IAttachmentBLLContextModule contextModule, ISpecificationEvaluator specificationEvaluator = null)
+                : base(contextModule.Configuration, specificationEvaluator)
         {
             this.contextModule = contextModule;
         }
 
         public AttachmentContainerBLL(IAttachmentBLLContextModule contextModule, ISecurityProvider<AttachmentContainer> securityOperation, ISpecificationEvaluator specificationEvaluator = null)
-                : base(contextModule.Context, securityOperation, specificationEvaluator)
+                : base(contextModule.Configuration, securityOperation, specificationEvaluator)
         {
         }
 

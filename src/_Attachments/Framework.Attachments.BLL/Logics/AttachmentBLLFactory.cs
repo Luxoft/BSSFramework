@@ -10,9 +10,9 @@ namespace Framework.Attachments.BLL
     public class AttachmentBLLFactory
     {
         [NotNull]
-        private readonly AttachmentBLLContextModule contextModule;
+        private readonly IAttachmentBLLContextModule contextModule;
 
-        public AttachmentBLLFactory([NotNull] AttachmentBLLContextModule contextModule)
+        public AttachmentBLLFactory([NotNull] IAttachmentBLLContextModule contextModule)
         {
             this.contextModule = contextModule ?? throw new ArgumentNullException(nameof(contextModule));
         }

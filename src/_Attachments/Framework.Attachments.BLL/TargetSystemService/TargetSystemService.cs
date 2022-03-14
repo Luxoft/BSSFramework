@@ -34,7 +34,7 @@ namespace Framework.Attachments.BLL
         /// </summary>
         /// <param name="context">Контекст конфигурации.</param>
         public TargetSystemService(IAttachmentBLLContextModule contextModule, [NotNull] TargetSystem targetSystem)
-            : base(contextModule.Context)
+            : base(contextModule.Configuration)
         {
             if (targetSystem == null) throw new ArgumentNullException(nameof(targetSystem));
 
@@ -46,6 +46,8 @@ namespace Framework.Attachments.BLL
 
             this.lazyHasAttachments = LazyHelper.Create(() => new AttachmentBLL(this.contextModule).GetUnsecureQueryable().Any(a => a.Container.DomainType.TargetSystem == this.TargetSystem));
         }
+
+        public Configuration.BLL.ITargetSystemService ConfigTargetSystemService => this.configTargetSystemService;
 
         public TargetSystem TargetSystem
         {

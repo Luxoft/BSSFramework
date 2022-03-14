@@ -1,5 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <PackageId>Framework.Attachments.BLL</PackageId>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Framework.Attachments.BLL.Core\Framework.Attachments.BLL.Core.csproj" />
   </ItemGroup>

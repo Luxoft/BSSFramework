@@ -1,4 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Framework.Attachments.Domain</PackageId>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.Domain\Framework.Configuration.Domain.csproj" />
     <ProjectReference Include="..\Framework.Attachments.Abstract\Framework.Attachments.Abstract.csproj" />

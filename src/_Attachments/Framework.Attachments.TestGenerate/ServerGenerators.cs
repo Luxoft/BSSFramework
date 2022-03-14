@@ -33,8 +33,8 @@ namespace Framework.Attachments.TestGenerate
             var generator = new ServerFileGenerator(this.Environment.ServerDTO);
 
             yield return generator.GenerateSingle(
-                this.GeneratePath + @"/Framework.Configuration.Generated.DTO",
-                "Configuration.Generated",
+                this.GeneratePath + @"/Framework.Attachments.Generated.DTO",
+                "Attachments.Generated",
                 this.CheckOutService);
         }
     }

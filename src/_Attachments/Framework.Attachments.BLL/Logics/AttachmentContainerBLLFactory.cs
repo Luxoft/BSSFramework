@@ -8,12 +8,12 @@ using Framework.SecuritySystem;
 
 namespace Framework.Attachments.BLL
 {
-    public partial class AttachmentContainerBLLFactory : BLLContextContainer<IConfigurationBLLContext>
+    public class AttachmentContainerBLLFactory : BLLContextContainer<IConfigurationBLLContext>
     {
         private readonly IAttachmentBLLContextModule contextModule;
 
         public AttachmentContainerBLLFactory(IAttachmentBLLContextModule contextModule)
-            : base (contextModule.Context)
+            : base (contextModule.Configuration)
         {
             this.contextModule = contextModule;
         }

@@ -8,7 +8,7 @@ using JetBrains.Annotations;
 
 namespace Framework.Attachments.BLL
 {
-    public partial interface IAttachmentBLL
+    public partial interface IAttachmentBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Attachments.Domain.Attachment, System.Guid>
     {
         IList<Attachment> GetObjectsBy([NotNull] Type type, Guid domainObjectId);
 

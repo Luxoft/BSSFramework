@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 using Framework.DomainDriven.ServiceModel.IAD;
 
-namespace Framework.Configuration.Generated.DTO
+namespace Framework.Attachments.Generated.DTO
 {
     [DataContract(Namespace = "Configuration")]
     [AutoRequest]

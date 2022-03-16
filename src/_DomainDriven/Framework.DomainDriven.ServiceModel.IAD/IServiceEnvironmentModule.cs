@@ -6,7 +6,10 @@ namespace Framework.DomainDriven.ServiceModel.IAD;
 
 public interface IServiceEnvironmentModule<in TBLLContextContainer>
 {
-    IEnumerable<IDALListener> GetDALFlushedListeners(TBLLContextContainer container);
+    IEnumerable<IDALListener> GetDALFlushedListeners(TBLLContextContainer container)
+    {
+        yield break;
+    }
 
     IEnumerable<IDALListener> GetBeforeTransactionCompletedListeners(TBLLContextContainer container)
     {

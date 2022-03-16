@@ -2825,6 +2825,8 @@ namespace Framework.Attachments.Generated.DTO
     public partial class TargetSystemSimpleDTO : Framework.Attachments.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.TargetSystem, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.TargetSystem>, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.TargetSystemIdentityDTO>
     {
         
+        private bool _isMain;
+        
         private string _name;
         
         public TargetSystemSimpleDTO()
@@ -2847,6 +2849,19 @@ namespace Framework.Attachments.Generated.DTO
             get
             {
                 return new Framework.Attachments.Generated.DTO.TargetSystemIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsMain
+        {
+            get
+            {
+                return this._isMain;
+            }
+            set
+            {
+                this._isMain = value;
             }
         }
         
@@ -3866,6 +3881,7 @@ namespace Framework.Attachments.Generated.DTO
         
         public virtual void MapTargetSystem(Framework.Attachments.Domain.TargetSystem domainObject, Framework.Attachments.Generated.DTO.TargetSystemSimpleDTO mappingObject)
         {
+            mappingObject.IsMain = domainObject.IsMain;
             mappingObject.Name = domainObject.Name;
         }
         

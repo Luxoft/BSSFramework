@@ -6,7 +6,10 @@ namespace Framework.DomainDriven.ServiceModel.IAD;
 
 public interface IBLLContextContainerModule
 {
-    IEnumerable<IDALListener> GetBeforeTransactionCompletedListeners();
+    IEnumerable<IDALListener> GetBeforeTransactionCompletedListeners()
+    {
+        yield break;
+    }
 
     void SubscribeEvents();
 }

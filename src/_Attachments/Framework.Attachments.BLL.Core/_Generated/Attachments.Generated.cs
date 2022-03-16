@@ -253,6 +253,16 @@ namespace Framework.Attachments.BLL
         {
             get;
         }
+        
+        Framework.Attachments.BLL.ITargetSystemBLL TargetSystem
+        {
+            get;
+        }
+        
+        Framework.Attachments.BLL.ITargetSystemBLLFactory TargetSystemFactory
+        {
+            get;
+        }
     }
     
     public partial interface IAttachmentBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Attachments.BLL.IAttachmentsBLLContext, Framework.Attachments.Domain.PersistentDomainObjectBase, Framework.Attachments.Domain.Attachment, System.Guid>
@@ -276,6 +286,14 @@ namespace Framework.Attachments.BLL
     }
     
     public partial interface IDomainTypeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Attachments.BLL.IDomainTypeBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Attachments.Domain.DomainType>>
+    {
+    }
+    
+    public partial interface ITargetSystemBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Attachments.BLL.IAttachmentsBLLContext, Framework.Attachments.Domain.PersistentDomainObjectBase, Framework.Attachments.Domain.TargetSystem, System.Guid>
+    {
+    }
+    
+    public partial interface ITargetSystemBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Attachments.BLL.ITargetSystemBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Attachments.Domain.TargetSystem>>
     {
     }
 }

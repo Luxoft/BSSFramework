@@ -95,6 +95,7 @@ namespace Framework.Attachments.BLL
 
             return domainType;
         }
+
         public ITargetSystemService GetTargetSystemService(Type domainType, bool throwOnNotFound)
         {
             if (domainType == null) throw new ArgumentNullException(nameof(domainType));

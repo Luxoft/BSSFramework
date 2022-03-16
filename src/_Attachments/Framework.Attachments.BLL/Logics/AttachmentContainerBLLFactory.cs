@@ -1,32 +1,21 @@
 ﻿using System;
 
 using Framework.Attachments.Domain;
-using Framework.Configuration.BLL;
-using Framework.Configuration.Domain;
-using Framework.DomainDriven.BLL;
 using Framework.SecuritySystem;
 
 namespace Framework.Attachments.BLL
 {
-    public class AttachmentContainerBLLFactory : BLLContextContainer<IConfigurationBLLContext>
+    public partial class AttachmentContainerBLLFactory
     {
-        private readonly IAttachmentBLLContextModule contextModule;
-
-        public AttachmentContainerBLLFactory(IAttachmentBLLContextModule contextModule)
-            : base (contextModule.Configuration)
-        {
-            this.contextModule = contextModule;
-        }
-
         public IAttachmentContainerBLL Create(DomainType domainType, BLLSecurityMode securityMode)
         {
             if (domainType == null) throw new ArgumentNullException(nameof(domainType));
 
-            var targetSystem = this.contextModule.GetPersistentTargetSystemService(domainType.TargetSystem);
+            var targetSystem = this.Context.GetPersistentTargetSystemService(domainType.TargetSystem);
 
             var provider = targetSystem.GetAttachmentSecurityProvider<AttachmentContainer>(c => c, domainType, securityMode);
 
-            return new AttachmentContainerBLL(this.contextModule, provider);
+            return this.Create(provider);
         }
     }
 }

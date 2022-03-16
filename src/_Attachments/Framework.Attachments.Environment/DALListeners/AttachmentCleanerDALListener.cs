@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Linq;
 
+using Framework.Attachments.BLL;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 
 using JetBrains.Annotations;
 
-using ITargetSystemService = Framework.Attachments.BLL.ITargetSystemService;
-
-namespace Framework.DomainDriven.ServiceModel.IAD
+namespace Framework.Attachments.Environment
 {
     public class AttachmentCleanerDALListener : IDALListener
     {
@@ -27,7 +26,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
             if (eventArgs.Changes.RemovedItems.Any())
             {
-                foreach (var pair in eventArgs.Changes.GroupByType().Where(pair => this._targetSystemService.ConfigTargetSystemService.IsAssignable(pair.Key)))
+                foreach (var pair in eventArgs.Changes.GroupByType().Where(pair => this._targetSystemService.IsAssignable(pair.Key)))
                 {
                     var removeObjects = pair.Value.RemovedItems.ToArray(pair.Key);
 

@@ -2,7 +2,6 @@
 
 using Framework.DomainDriven.ServiceModelGenerator;
 
-
 namespace Framework.Attachments.TestGenerate
 {
     public class MainServiceGeneratorConfiguration : MainGeneratorConfigurationBase<ServerGenerationEnvironment>
@@ -13,6 +12,6 @@ namespace Framework.Attachments.TestGenerate
         }
 
 
-        public override string ImplementClassName { get; } = "ConfigurationFacade";
+        public override string ServiceContractNamespace => this.Environment.ServiceContractNamespace;
     }
 }

@@ -10,11 +10,9 @@ namespace Framework.Attachments.TestGenerate
 
         Framework.DomainDriven.DTOGenerator.Server.IServerGenerationEnvironmentBase,
 
-        Framework.DomainDriven.DTOGenerator.Client.IClientGenerationEnvironmentBase,
+        Framework.DomainDriven.ServiceModelGenerator.IGenerationEnvironmentBase,
 
-        Framework.DomainDriven.NHibernate.DALGenerator.IGenerationEnvironmentBase,
-
-        Framework.DomainDriven.ServiceModelGenerator.IGenerationEnvironmentBase
+        Framework.DomainDriven.NHibernate.DALGenerator.IGenerationEnvironmentBase
     {
         Framework.DomainDriven.BLLCoreGenerator.IGeneratorConfigurationBase<Framework.DomainDriven.BLLCoreGenerator.IGenerationEnvironmentBase> Framework.DomainDriven.BLLCoreGenerator.IGeneratorConfigurationContainer.BLLCore => this.BLLCore;
 

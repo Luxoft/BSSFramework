@@ -1,5 +1,4 @@
-﻿using Framework.DomainDriven;
-using Framework.DomainDriven.NHibernate.DALGenerator;
+﻿using Framework.DomainDriven.NHibernate.DALGenerator;
 
 namespace Framework.Attachments.TestGenerate
 {
@@ -9,8 +8,5 @@ namespace Framework.Attachments.TestGenerate
             : base(environment)
         {
         }
-
-
-        public override DatabaseName DatabaseName => this.Environment.DatabaseName;
     }
 }

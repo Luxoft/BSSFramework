@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Framework.Attachments.TestGenerate
 {
@@ -6,9 +7,12 @@ namespace Framework.Attachments.TestGenerate
     {
         protected readonly ServerGenerationEnvironment Environment;
 
+        private readonly bool genParallel = true;
+
         public ServerGenerators()
             : this(ServerGenerationEnvironment.Default)
         {
+            this.Environment.ProjectionEnvironments.SelectMany(pe => pe.Assembly.GetTypes()).ToList();
         }
 
         public ServerGenerators(ServerGenerationEnvironment environment)

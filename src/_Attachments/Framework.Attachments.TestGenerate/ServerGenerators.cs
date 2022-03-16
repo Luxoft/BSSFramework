@@ -44,7 +44,8 @@ namespace Framework.Attachments.TestGenerate
                     : decl.Name.Contains("ValidationMap") ? "Attachments.ValidationMap.Generated"
                     : decl.Name.Contains("Validator") ? "Attachments.Validator.Generated"
                     : "Attachments.Generated",
-                this.CheckOutService);
+                this.CheckOutService,
+                parallel: this.genParallel);
         }
 
         [TestMethod]
@@ -57,10 +58,7 @@ namespace Framework.Attachments.TestGenerate
         {
             var generator = new BLLFileGenerator(this.Environment.BLL);
 
-            yield return generator.GenerateSingle(
-                this.GeneratePath + @"/Framework.Attachments.BLL/_Generated",
-                "Attachments.Generated",
-                this.CheckOutService);
+            yield return generator.GenerateSingle(this.GeneratePath + @"/Framework.Attachments.BLL/_Generated", "Attachments.Generated", this.CheckOutService, parallel: this.genParallel);
         }
 
         [TestMethod]
@@ -71,12 +69,9 @@ namespace Framework.Attachments.TestGenerate
 
         private IEnumerable<FileInfo> GenerateServerDTO()
         {
-            var generator = new ServerFileGenerator(this.Environment.ServerDTO);
+            var clientGenerator = new ServerFileGenerator(this.Environment.ServerDTO);
 
-            yield return generator.GenerateSingle(
-                this.GeneratePath + @"/Framework.Attachments.Generated.DTO",
-                "Attachments.Generated",
-                this.CheckOutService);
+            yield return clientGenerator.GenerateSingle(this.GeneratePath + @"/Framework.Attachments.Generated.DTO", "Attachments.Generated", this.CheckOutService, parallel: this.genParallel);
         }
 
         [TestMethod]

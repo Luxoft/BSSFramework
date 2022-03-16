@@ -227,7 +227,7 @@ namespace Framework.Attachments.Generated.DTO
             }
             else
             {
-                target.DomainType = default(Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO);
+                target.DomainType = Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO.Empty;
             }
         }
         
@@ -247,7 +247,7 @@ namespace Framework.Attachments.Generated.DTO
             }
             else
             {
-                target.DomainType = default(Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO);
+                target.DomainType = Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO.Empty;
             }
         }
         
@@ -469,8 +469,8 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.Attachment), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class AttachmentIdentityDTO : System.IEquatable<Framework.Attachments.Generated.DTO.AttachmentIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
+    public struct AttachmentIdentityDTO : System.IEquatable<Framework.Attachments.Generated.DTO.AttachmentIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
         
         private static Framework.Attachments.Generated.DTO.AttachmentIdentityDTO EmptyField = new Framework.Attachments.Generated.DTO.AttachmentIdentityDTO(System.Guid.Empty);
@@ -498,10 +498,6 @@ namespace Framework.Attachments.Generated.DTO
                 throw new System.ArgumentNullException("domainObject");
             }
             this._id = domainObject.Id;
-        }
-        
-        public AttachmentIdentityDTO()
-        {
         }
         
         public AttachmentIdentityDTO(string id) : 
@@ -545,7 +541,7 @@ namespace Framework.Attachments.Generated.DTO
         
         public static bool operator ==(Framework.Attachments.Generated.DTO.AttachmentIdentityDTO identity1, Framework.Attachments.Generated.DTO.AttachmentIdentityDTO identity2)
         {
-            return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Attachments.Generated.DTO.AttachmentIdentityDTO)) && identity1.Equals(identity2);
+            return identity1.Equals(identity2);
         }
         
         public override bool Equals(object other)
@@ -555,7 +551,7 @@ namespace Framework.Attachments.Generated.DTO
         
         public bool Equals(Framework.Attachments.Generated.DTO.AttachmentIdentityDTO other)
         {
-            return !object.ReferenceEquals(other, null) && (this._id == other.Id);
+            return (this._id == other.Id);
         }
         
         public override int GetHashCode()
@@ -575,8 +571,8 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentContainer), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class AttachmentContainerIdentityDTO : System.IEquatable<Framework.Attachments.Generated.DTO.AttachmentContainerIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
+    public struct AttachmentContainerIdentityDTO : System.IEquatable<Framework.Attachments.Generated.DTO.AttachmentContainerIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
         
         private static Framework.Attachments.Generated.DTO.AttachmentContainerIdentityDTO EmptyField = new Framework.Attachments.Generated.DTO.AttachmentContainerIdentityDTO(System.Guid.Empty);
@@ -604,10 +600,6 @@ namespace Framework.Attachments.Generated.DTO
                 throw new System.ArgumentNullException("domainObject");
             }
             this._id = domainObject.Id;
-        }
-        
-        public AttachmentContainerIdentityDTO()
-        {
         }
         
         public AttachmentContainerIdentityDTO(string id) : 
@@ -651,7 +643,7 @@ namespace Framework.Attachments.Generated.DTO
         
         public static bool operator ==(Framework.Attachments.Generated.DTO.AttachmentContainerIdentityDTO identity1, Framework.Attachments.Generated.DTO.AttachmentContainerIdentityDTO identity2)
         {
-            return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Attachments.Generated.DTO.AttachmentContainerIdentityDTO)) && identity1.Equals(identity2);
+            return identity1.Equals(identity2);
         }
         
         public override bool Equals(object other)
@@ -661,7 +653,7 @@ namespace Framework.Attachments.Generated.DTO
         
         public bool Equals(Framework.Attachments.Generated.DTO.AttachmentContainerIdentityDTO other)
         {
-            return !object.ReferenceEquals(other, null) && (this._id == other.Id);
+            return (this._id == other.Id);
         }
         
         public override int GetHashCode()
@@ -681,8 +673,8 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentTag), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class AttachmentTagIdentityDTO : System.IEquatable<Framework.Attachments.Generated.DTO.AttachmentTagIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
+    public struct AttachmentTagIdentityDTO : System.IEquatable<Framework.Attachments.Generated.DTO.AttachmentTagIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
         
         private static Framework.Attachments.Generated.DTO.AttachmentTagIdentityDTO EmptyField = new Framework.Attachments.Generated.DTO.AttachmentTagIdentityDTO(System.Guid.Empty);
@@ -710,10 +702,6 @@ namespace Framework.Attachments.Generated.DTO
                 throw new System.ArgumentNullException("domainObject");
             }
             this._id = domainObject.Id;
-        }
-        
-        public AttachmentTagIdentityDTO()
-        {
         }
         
         public AttachmentTagIdentityDTO(string id) : 
@@ -757,7 +745,7 @@ namespace Framework.Attachments.Generated.DTO
         
         public static bool operator ==(Framework.Attachments.Generated.DTO.AttachmentTagIdentityDTO identity1, Framework.Attachments.Generated.DTO.AttachmentTagIdentityDTO identity2)
         {
-            return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Attachments.Generated.DTO.AttachmentTagIdentityDTO)) && identity1.Equals(identity2);
+            return identity1.Equals(identity2);
         }
         
         public override bool Equals(object other)
@@ -767,7 +755,7 @@ namespace Framework.Attachments.Generated.DTO
         
         public bool Equals(Framework.Attachments.Generated.DTO.AttachmentTagIdentityDTO other)
         {
-            return !object.ReferenceEquals(other, null) && (this._id == other.Id);
+            return (this._id == other.Id);
         }
         
         public override int GetHashCode()
@@ -787,8 +775,8 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.DomainType), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class DomainTypeIdentityDTO : System.IEquatable<Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
+    public struct DomainTypeIdentityDTO : System.IEquatable<Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
         
         private static Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO EmptyField = new Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO(System.Guid.Empty);
@@ -816,10 +804,6 @@ namespace Framework.Attachments.Generated.DTO
                 throw new System.ArgumentNullException("domainObject");
             }
             this._id = domainObject.Id;
-        }
-        
-        public DomainTypeIdentityDTO()
-        {
         }
         
         public DomainTypeIdentityDTO(string id) : 
@@ -863,7 +847,7 @@ namespace Framework.Attachments.Generated.DTO
         
         public static bool operator ==(Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO identity1, Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO identity2)
         {
-            return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO)) && identity1.Equals(identity2);
+            return identity1.Equals(identity2);
         }
         
         public override bool Equals(object other)
@@ -873,7 +857,7 @@ namespace Framework.Attachments.Generated.DTO
         
         public bool Equals(Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO other)
         {
-            return !object.ReferenceEquals(other, null) && (this._id == other.Id);
+            return (this._id == other.Id);
         }
         
         public override int GetHashCode()
@@ -893,8 +877,8 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.TargetSystem), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public class TargetSystemIdentityDTO : System.IEquatable<Framework.Attachments.Generated.DTO.TargetSystemIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
+    public struct TargetSystemIdentityDTO : System.IEquatable<Framework.Attachments.Generated.DTO.TargetSystemIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
         
         private static Framework.Attachments.Generated.DTO.TargetSystemIdentityDTO EmptyField = new Framework.Attachments.Generated.DTO.TargetSystemIdentityDTO(System.Guid.Empty);
@@ -922,10 +906,6 @@ namespace Framework.Attachments.Generated.DTO
                 throw new System.ArgumentNullException("domainObject");
             }
             this._id = domainObject.Id;
-        }
-        
-        public TargetSystemIdentityDTO()
-        {
         }
         
         public TargetSystemIdentityDTO(string id) : 
@@ -969,7 +949,7 @@ namespace Framework.Attachments.Generated.DTO
         
         public static bool operator ==(Framework.Attachments.Generated.DTO.TargetSystemIdentityDTO identity1, Framework.Attachments.Generated.DTO.TargetSystemIdentityDTO identity2)
         {
-            return object.ReferenceEquals(identity1, identity2) || !object.ReferenceEquals(identity1, default(Framework.Attachments.Generated.DTO.TargetSystemIdentityDTO)) && identity1.Equals(identity2);
+            return identity1.Equals(identity2);
         }
         
         public override bool Equals(object other)
@@ -979,7 +959,7 @@ namespace Framework.Attachments.Generated.DTO
         
         public bool Equals(Framework.Attachments.Generated.DTO.TargetSystemIdentityDTO other)
         {
-            return !object.ReferenceEquals(other, null) && (this._id == other.Id);
+            return (this._id == other.Id);
         }
         
         public override int GetHashCode()
@@ -999,7 +979,7 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.DomainObjectBase), "BaseAbstractDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
     public abstract partial class BaseAbstractDTO
     {
         
@@ -1014,7 +994,7 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.PersistentDomainObjectBase), "BasePersistentDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
     public abstract partial class BasePersistentDTO : Framework.Attachments.Generated.DTO.BaseAbstractDTO, Framework.Persistent.IIdentityObject<System.Guid>
     {
         
@@ -1061,7 +1041,7 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AuditPersistentDomainObjectBase), "BaseAuditPersistentDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
     public abstract partial class BaseAuditPersistentDTO : Framework.Attachments.Generated.DTO.BasePersistentDTO
     {
         
@@ -1151,9 +1131,27 @@ namespace Framework.Attachments.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.PersistentDomainObjectBase), "BaseEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.AttachmentSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.AttachmentRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.AttachmentContainerSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.AttachmentContainerRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.AttachmentTagSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.AttachmentTagRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.DomainTypeSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.DomainTypeRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.TargetSystemSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.TargetSystemRemoveEventDTO))]
+    public abstract partial class EventDTOBase
+    {
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.Attachment), "VisualDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class AttachmentVisualDTO : Framework.Attachments.Generated.DTO.BasePersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.Attachment, System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.AttachmentIdentityDTO>
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
+    public partial class AttachmentVisualDTO : Framework.Attachments.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.AttachmentIdentityDTO>
     {
         
         private string _name;
@@ -1188,18 +1186,13 @@ namespace Framework.Attachments.Generated.DTO
                 this._name = value;
             }
         }
-        
-        public virtual void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.Attachment domainObject)
-        {
-            mappingService.MapAttachment(this, domainObject);
-        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.Attachment), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.AttachmentFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.AttachmentRichDTO))]
-    public partial class AttachmentSimpleDTO : Framework.Attachments.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.Attachment, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.Attachment>, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.AttachmentIdentityDTO>
+    public partial class AttachmentSimpleDTO : Framework.Attachments.Generated.DTO.BaseAuditPersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.AttachmentIdentityDTO>
     {
         
         private string _name;
@@ -1240,16 +1233,6 @@ namespace Framework.Attachments.Generated.DTO
             }
         }
         
-        public virtual void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.Attachment domainObject)
-        {
-            mappingService.MapAttachment(this, domainObject);
-        }
-        
-        public Framework.Attachments.Domain.Attachment ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
-        {
-            return mappingService.ToAttachment(this);
-        }
-        
         public virtual Framework.Attachments.Generated.DTO.AttachmentStrictDTO ToStrict()
         {
             return new Framework.Attachments.Generated.DTO.AttachmentStrictDTO(this);
@@ -1257,9 +1240,9 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.Attachment), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.AttachmentRichDTO))]
-    public partial class AttachmentFullDTO : Framework.Attachments.Generated.DTO.AttachmentSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.Attachment, System.Guid>
+    public partial class AttachmentFullDTO : Framework.Attachments.Generated.DTO.AttachmentSimpleDTO
     {
         
         private Framework.Attachments.Generated.DTO.AttachmentContainerSimpleDTO _container;
@@ -1287,12 +1270,6 @@ namespace Framework.Attachments.Generated.DTO
             }
         }
         
-        public override void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.Attachment domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapAttachment(this, domainObject);
-        }
-        
         public override Framework.Attachments.Generated.DTO.AttachmentStrictDTO ToStrict()
         {
             return new Framework.Attachments.Generated.DTO.AttachmentStrictDTO(this);
@@ -1300,8 +1277,8 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.Attachment), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class AttachmentRichDTO : Framework.Attachments.Generated.DTO.AttachmentFullDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.Attachment, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.Attachment>
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
+    public partial class AttachmentRichDTO : Framework.Attachments.Generated.DTO.AttachmentFullDTO
     {
         
         private byte[] _content;
@@ -1344,17 +1321,6 @@ namespace Framework.Attachments.Generated.DTO
             }
         }
         
-        public override void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.Attachment domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapAttachment(this, domainObject);
-        }
-        
-        public Framework.Attachments.Domain.Attachment ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
-        {
-            return mappingService.ToAttachment(this);
-        }
-        
         public override Framework.Attachments.Generated.DTO.AttachmentStrictDTO ToStrict()
         {
             return new Framework.Attachments.Generated.DTO.AttachmentStrictDTO(this);
@@ -1362,7 +1328,7 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.Attachment), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
     public partial class AttachmentStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.Attachment, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.Attachment>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.AttachmentIdentityDTO>
     {
         
@@ -1531,11 +1497,669 @@ namespace Framework.Attachments.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.Attachment), "RichIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentIntegrationRichDTO : Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.Attachment, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.Attachment>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private bool _active;
+        
+        private Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationSimpleDTO _container;
+        
+        private byte[] _content;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private System.Guid _id;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private string _name;
+        
+        private System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentTagIntegrationRichDTO> _tags;
+        
+        public AttachmentIntegrationRichDTO()
+        {
+        }
+        
+        public AttachmentIntegrationRichDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.Attachment domainObject)
+        {
+            mappingService.MapAttachment(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationSimpleDTO Container
+        {
+            get
+            {
+                return this._container;
+            }
+            set
+            {
+                this._container = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] Content
+        {
+            get
+            {
+                return this._content;
+            }
+            set
+            {
+                this._content = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public Framework.Attachments.Generated.DTO.AttachmentIdentityDTO Identity
+        {
+            get
+            {
+                return new Framework.Attachments.Generated.DTO.AttachmentIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentTagIntegrationRichDTO> Tags
+        {
+            get
+            {
+                return this._tags;
+            }
+            set
+            {
+                this._tags = value;
+            }
+        }
+        
+        public void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.Attachment domainObject)
+        {
+            mappingService.MapAttachment(this, domainObject);
+        }
+        
+        public Framework.Attachments.Domain.Attachment ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return mappingService.ToAttachment(this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.Attachment), "SimpleIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentIntegrationSimpleDTO : Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.Attachment>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private bool _active;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private System.Guid _id;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private string _name;
+        
+        public AttachmentIntegrationSimpleDTO()
+        {
+        }
+        
+        public AttachmentIntegrationSimpleDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.Attachment domainObject)
+        {
+            mappingService.MapAttachment(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public Framework.Attachments.Generated.DTO.AttachmentIdentityDTO Identity
+        {
+            get
+            {
+                return new Framework.Attachments.Generated.DTO.AttachmentIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        public void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.Attachment domainObject)
+        {
+            mappingService.MapAttachment(this, domainObject);
+        }
+        
+        public Framework.Attachments.Domain.Attachment ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return mappingService.ToAttachment(this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.Attachment), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentSaveEventDTO : Framework.Attachments.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.AttachmentEventRichDTO Attachment;
+        
+        public AttachmentSaveEventDTO()
+        {
+        }
+        
+        public AttachmentSaveEventDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.Attachment domainObject)
+        {
+            this.Attachment = Framework.Attachments.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.Attachment), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentRemoveEventDTO : Framework.Attachments.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.AttachmentEventRichDTO Attachment;
+        
+        public AttachmentRemoveEventDTO()
+        {
+        }
+        
+        public AttachmentRemoveEventDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.Attachment domainObject)
+        {
+            this.Attachment = Framework.Attachments.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.Attachment), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentEventRichDTO
+    {
+        
+        private bool _active;
+        
+        private Framework.Attachments.Generated.DTO.AttachmentContainerEventSimpleDTO _container;
+        
+        private byte[] _content;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private System.Guid _id;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private string _name;
+        
+        private System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentTagEventRichDTO> _tags;
+        
+        public AttachmentEventRichDTO()
+        {
+        }
+        
+        public AttachmentEventRichDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.Attachment domainObject)
+        {
+            mappingService.MapAttachment(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.AttachmentContainerEventSimpleDTO Container
+        {
+            get
+            {
+                return this._container;
+            }
+            set
+            {
+                this._container = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] Content
+        {
+            get
+            {
+                return this._content;
+            }
+            set
+            {
+                this._content = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentTagEventRichDTO> Tags
+        {
+            get
+            {
+                return this._tags;
+            }
+            set
+            {
+                this._tags = value;
+            }
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.Attachment), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentEventSimpleDTO
+    {
+        
+        private bool _active;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private System.Guid _id;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private string _name;
+        
+        public AttachmentEventSimpleDTO()
+        {
+        }
+        
+        public AttachmentEventSimpleDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.Attachment domainObject)
+        {
+            mappingService.MapAttachment(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentContainer), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.AttachmentContainerFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.AttachmentContainerRichDTO))]
-    public partial class AttachmentContainerSimpleDTO : Framework.Attachments.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentContainer, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentContainer>, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.AttachmentContainerIdentityDTO>
+    public partial class AttachmentContainerSimpleDTO : Framework.Attachments.Generated.DTO.BaseAuditPersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.AttachmentContainerIdentityDTO>
     {
         
         private System.Guid _objectId;
@@ -1576,16 +2200,6 @@ namespace Framework.Attachments.Generated.DTO
             }
         }
         
-        public virtual void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainer domainObject)
-        {
-            mappingService.MapAttachmentContainer(this, domainObject);
-        }
-        
-        public Framework.Attachments.Domain.AttachmentContainer ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
-        {
-            return mappingService.ToAttachmentContainer(this);
-        }
-        
         public virtual Framework.Attachments.Generated.DTO.AttachmentContainerStrictDTO ToStrict()
         {
             return new Framework.Attachments.Generated.DTO.AttachmentContainerStrictDTO(this);
@@ -1593,9 +2207,9 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentContainer), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.AttachmentContainerRichDTO))]
-    public partial class AttachmentContainerFullDTO : Framework.Attachments.Generated.DTO.AttachmentContainerSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentContainer, System.Guid>
+    public partial class AttachmentContainerFullDTO : Framework.Attachments.Generated.DTO.AttachmentContainerSimpleDTO
     {
         
         private Framework.Attachments.Generated.DTO.DomainTypeSimpleDTO _domainType;
@@ -1623,12 +2237,6 @@ namespace Framework.Attachments.Generated.DTO
             }
         }
         
-        public override void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainer domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapAttachmentContainer(this, domainObject);
-        }
-        
         public override Framework.Attachments.Generated.DTO.AttachmentContainerStrictDTO ToStrict()
         {
             return new Framework.Attachments.Generated.DTO.AttachmentContainerStrictDTO(this);
@@ -1636,8 +2244,8 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentContainer), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class AttachmentContainerRichDTO : Framework.Attachments.Generated.DTO.AttachmentContainerFullDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentContainer, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentContainer>
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
+    public partial class AttachmentContainerRichDTO : Framework.Attachments.Generated.DTO.AttachmentContainerFullDTO
     {
         
         private System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentRichDTO> _attachments = new System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentRichDTO>();
@@ -1665,22 +2273,6 @@ namespace Framework.Attachments.Generated.DTO
             }
         }
         
-        public override void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainer domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapAttachmentContainer(this, domainObject);
-        }
-        
-        public Framework.Attachments.Domain.AttachmentContainer ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
-        {
-            return mappingService.ToAttachmentContainer(this);
-        }
-        
-        public Framework.Attachments.Domain.AttachmentContainer ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, bool allowCreate)
-        {
-            return mappingService.ToAttachmentContainer(this, allowCreate);
-        }
-        
         public override Framework.Attachments.Generated.DTO.AttachmentContainerStrictDTO ToStrict()
         {
             return new Framework.Attachments.Generated.DTO.AttachmentContainerStrictDTO(this);
@@ -1688,7 +2280,7 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentContainer), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
     public partial class AttachmentContainerStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentContainer, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentContainer>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.AttachmentContainerIdentityDTO>
     {
         
@@ -1862,11 +2454,644 @@ namespace Framework.Attachments.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentContainer), "RichIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentContainerIntegrationRichDTO : Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentContainer, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentContainer>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private bool _active;
+        
+        private System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentIntegrationRichDTO> _attachments;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private Framework.Attachments.Generated.DTO.DomainTypeIntegrationSimpleDTO _domainType;
+        
+        private System.Guid _id;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private System.Guid _objectId;
+        
+        public AttachmentContainerIntegrationRichDTO()
+        {
+        }
+        
+        public AttachmentContainerIntegrationRichDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainer domainObject)
+        {
+            mappingService.MapAttachmentContainer(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentIntegrationRichDTO> Attachments
+        {
+            get
+            {
+                return this._attachments;
+            }
+            set
+            {
+                this._attachments = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.DomainTypeIntegrationSimpleDTO DomainType
+        {
+            get
+            {
+                return this._domainType;
+            }
+            set
+            {
+                this._domainType = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public Framework.Attachments.Generated.DTO.AttachmentContainerIdentityDTO Identity
+        {
+            get
+            {
+                return new Framework.Attachments.Generated.DTO.AttachmentContainerIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ObjectId
+        {
+            get
+            {
+                return this._objectId;
+            }
+            set
+            {
+                this._objectId = value;
+            }
+        }
+        
+        public void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainer domainObject)
+        {
+            mappingService.MapAttachmentContainer(this, domainObject);
+        }
+        
+        public Framework.Attachments.Domain.AttachmentContainer ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return mappingService.ToAttachmentContainer(this);
+        }
+        
+        public Framework.Attachments.Domain.AttachmentContainer ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, bool allowCreate)
+        {
+            return mappingService.ToAttachmentContainer(this, allowCreate);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentContainer), "SimpleIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentContainerIntegrationSimpleDTO : Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentContainer>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private bool _active;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private System.Guid _id;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private System.Guid _objectId;
+        
+        public AttachmentContainerIntegrationSimpleDTO()
+        {
+        }
+        
+        public AttachmentContainerIntegrationSimpleDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainer domainObject)
+        {
+            mappingService.MapAttachmentContainer(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public Framework.Attachments.Generated.DTO.AttachmentContainerIdentityDTO Identity
+        {
+            get
+            {
+                return new Framework.Attachments.Generated.DTO.AttachmentContainerIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ObjectId
+        {
+            get
+            {
+                return this._objectId;
+            }
+            set
+            {
+                this._objectId = value;
+            }
+        }
+        
+        public void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainer domainObject)
+        {
+            mappingService.MapAttachmentContainer(this, domainObject);
+        }
+        
+        public Framework.Attachments.Domain.AttachmentContainer ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return mappingService.ToAttachmentContainer(this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentContainer), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentContainerSaveEventDTO : Framework.Attachments.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.AttachmentContainerEventRichDTO AttachmentContainer;
+        
+        public AttachmentContainerSaveEventDTO()
+        {
+        }
+        
+        public AttachmentContainerSaveEventDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainer domainObject)
+        {
+            this.AttachmentContainer = Framework.Attachments.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentContainer), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentContainerRemoveEventDTO : Framework.Attachments.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.AttachmentContainerEventRichDTO AttachmentContainer;
+        
+        public AttachmentContainerRemoveEventDTO()
+        {
+        }
+        
+        public AttachmentContainerRemoveEventDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainer domainObject)
+        {
+            this.AttachmentContainer = Framework.Attachments.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentContainer), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentContainerEventRichDTO
+    {
+        
+        private bool _active;
+        
+        private System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentEventRichDTO> _attachments;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private Framework.Attachments.Generated.DTO.DomainTypeEventSimpleDTO _domainType;
+        
+        private System.Guid _id;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private System.Guid _objectId;
+        
+        public AttachmentContainerEventRichDTO()
+        {
+        }
+        
+        public AttachmentContainerEventRichDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainer domainObject)
+        {
+            mappingService.MapAttachmentContainer(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentEventRichDTO> Attachments
+        {
+            get
+            {
+                return this._attachments;
+            }
+            set
+            {
+                this._attachments = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.DomainTypeEventSimpleDTO DomainType
+        {
+            get
+            {
+                return this._domainType;
+            }
+            set
+            {
+                this._domainType = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ObjectId
+        {
+            get
+            {
+                return this._objectId;
+            }
+            set
+            {
+                this._objectId = value;
+            }
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentContainer), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentContainerEventSimpleDTO
+    {
+        
+        private bool _active;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private System.Guid _id;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private System.Guid _objectId;
+        
+        public AttachmentContainerEventSimpleDTO()
+        {
+        }
+        
+        public AttachmentContainerEventSimpleDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainer domainObject)
+        {
+            mappingService.MapAttachmentContainer(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ObjectId
+        {
+            get
+            {
+                return this._objectId;
+            }
+            set
+            {
+                this._objectId = value;
+            }
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentContainerReference), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceRichDTO))]
-    public partial class AttachmentContainerReferenceSimpleDTO : Framework.Attachments.Generated.DTO.BaseAbstractDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentContainerReference>
+    public partial class AttachmentContainerReferenceSimpleDTO : Framework.Attachments.Generated.DTO.BaseAbstractDTO
     {
         
         private System.Guid _objectId;
@@ -1894,11 +3119,6 @@ namespace Framework.Attachments.Generated.DTO
             }
         }
         
-        public virtual void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainerReference domainObject)
-        {
-            mappingService.MapAttachmentContainerReference(this, domainObject);
-        }
-        
         public virtual Framework.Attachments.Generated.DTO.AttachmentContainerReferenceStrictDTO ToStrict()
         {
             return new Framework.Attachments.Generated.DTO.AttachmentContainerReferenceStrictDTO(this);
@@ -1906,9 +3126,9 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentContainerReference), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceRichDTO))]
-    public partial class AttachmentContainerReferenceFullDTO : Framework.Attachments.Generated.DTO.AttachmentContainerReferenceSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentContainerReference>
+    public partial class AttachmentContainerReferenceFullDTO : Framework.Attachments.Generated.DTO.AttachmentContainerReferenceSimpleDTO
     {
         
         private Framework.Attachments.Generated.DTO.DomainTypeSimpleDTO _domainType;
@@ -1936,12 +3156,6 @@ namespace Framework.Attachments.Generated.DTO
             }
         }
         
-        public override void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainerReference domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapAttachmentContainerReference(this, domainObject);
-        }
-        
         public override Framework.Attachments.Generated.DTO.AttachmentContainerReferenceStrictDTO ToStrict()
         {
             return new Framework.Attachments.Generated.DTO.AttachmentContainerReferenceStrictDTO(this);
@@ -1949,8 +3163,8 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentContainerReference), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class AttachmentContainerReferenceRichDTO : Framework.Attachments.Generated.DTO.AttachmentContainerReferenceFullDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentContainerReference>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentContainerReference>
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
+    public partial class AttachmentContainerReferenceRichDTO : Framework.Attachments.Generated.DTO.AttachmentContainerReferenceFullDTO
     {
         
         public AttachmentContainerReferenceRichDTO()
@@ -1963,17 +3177,6 @@ namespace Framework.Attachments.Generated.DTO
             mappingService.MapAttachmentContainerReference(domainObject, this);
         }
         
-        public override void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainerReference domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapAttachmentContainerReference(this, domainObject);
-        }
-        
-        public Framework.Attachments.Domain.AttachmentContainerReference ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
-        {
-            return mappingService.ToAttachmentContainerReference(this);
-        }
-        
         public override Framework.Attachments.Generated.DTO.AttachmentContainerReferenceStrictDTO ToStrict()
         {
             return new Framework.Attachments.Generated.DTO.AttachmentContainerReferenceStrictDTO(this);
@@ -1981,7 +3184,7 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentContainerReference), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
     public partial class AttachmentContainerReferenceStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentContainerReference>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentContainerReference>
     {
         
@@ -2074,9 +3277,210 @@ namespace Framework.Attachments.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentContainerReference), "RichIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentContainerReferenceIntegrationRichDTO : Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentContainerReference>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentContainerReference>
+    {
+        
+        private Framework.Attachments.Generated.DTO.DomainTypeIntegrationSimpleDTO _domainType;
+        
+        private System.Guid _objectId;
+        
+        public AttachmentContainerReferenceIntegrationRichDTO()
+        {
+        }
+        
+        public AttachmentContainerReferenceIntegrationRichDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainerReference domainObject)
+        {
+            mappingService.MapAttachmentContainerReference(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.DomainTypeIntegrationSimpleDTO DomainType
+        {
+            get
+            {
+                return this._domainType;
+            }
+            set
+            {
+                this._domainType = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ObjectId
+        {
+            get
+            {
+                return this._objectId;
+            }
+            set
+            {
+                this._objectId = value;
+            }
+        }
+        
+        public void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainerReference domainObject)
+        {
+            mappingService.MapAttachmentContainerReference(this, domainObject);
+        }
+        
+        public Framework.Attachments.Domain.AttachmentContainerReference ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return mappingService.ToAttachmentContainerReference(this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentContainerReference), "SimpleIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentContainerReferenceIntegrationSimpleDTO
+    {
+        
+        private System.Guid _objectId;
+        
+        public AttachmentContainerReferenceIntegrationSimpleDTO()
+        {
+        }
+        
+        public AttachmentContainerReferenceIntegrationSimpleDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainerReference domainObject)
+        {
+            mappingService.MapAttachmentContainerReference(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ObjectId
+        {
+            get
+            {
+                return this._objectId;
+            }
+            set
+            {
+                this._objectId = value;
+            }
+        }
+        
+        public void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainerReference domainObject)
+        {
+            mappingService.MapAttachmentContainerReference(this, domainObject);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentContainerReference), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentContainerReferenceSaveEventDTO : Framework.Attachments.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.AttachmentContainerReferenceEventRichDTO AttachmentContainerReference;
+        
+        public AttachmentContainerReferenceSaveEventDTO()
+        {
+        }
+        
+        public AttachmentContainerReferenceSaveEventDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainerReference domainObject)
+        {
+            this.AttachmentContainerReference = Framework.Attachments.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentContainerReference), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentContainerReferenceRemoveEventDTO : Framework.Attachments.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.AttachmentContainerReferenceEventRichDTO AttachmentContainerReference;
+        
+        public AttachmentContainerReferenceRemoveEventDTO()
+        {
+        }
+        
+        public AttachmentContainerReferenceRemoveEventDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainerReference domainObject)
+        {
+            this.AttachmentContainerReference = Framework.Attachments.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentContainerReference), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentContainerReferenceEventRichDTO
+    {
+        
+        private Framework.Attachments.Generated.DTO.DomainTypeEventSimpleDTO _domainType;
+        
+        private System.Guid _objectId;
+        
+        public AttachmentContainerReferenceEventRichDTO()
+        {
+        }
+        
+        public AttachmentContainerReferenceEventRichDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainerReference domainObject)
+        {
+            mappingService.MapAttachmentContainerReference(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.DomainTypeEventSimpleDTO DomainType
+        {
+            get
+            {
+                return this._domainType;
+            }
+            set
+            {
+                this._domainType = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ObjectId
+        {
+            get
+            {
+                return this._objectId;
+            }
+            set
+            {
+                this._objectId = value;
+            }
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentContainerReference), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentContainerReferenceEventSimpleDTO
+    {
+        
+        private System.Guid _objectId;
+        
+        public AttachmentContainerReferenceEventSimpleDTO()
+        {
+        }
+        
+        public AttachmentContainerReferenceEventSimpleDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentContainerReference domainObject)
+        {
+            mappingService.MapAttachmentContainerReference(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ObjectId
+        {
+            get
+            {
+                return this._objectId;
+            }
+            set
+            {
+                this._objectId = value;
+            }
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentTag), "VisualDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class AttachmentTagVisualDTO : Framework.Attachments.Generated.DTO.BasePersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentTag, System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.AttachmentTagIdentityDTO>
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
+    public partial class AttachmentTagVisualDTO : Framework.Attachments.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.AttachmentTagIdentityDTO>
     {
         
         private string _name;
@@ -2111,18 +3515,13 @@ namespace Framework.Attachments.Generated.DTO
                 this._name = value;
             }
         }
-        
-        public virtual void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentTag domainObject)
-        {
-            mappingService.MapAttachmentTag(this, domainObject);
-        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentTag), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.AttachmentTagFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.AttachmentTagRichDTO))]
-    public partial class AttachmentTagSimpleDTO : Framework.Attachments.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentTag, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentTag>, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.AttachmentTagIdentityDTO>
+    public partial class AttachmentTagSimpleDTO : Framework.Attachments.Generated.DTO.BaseAuditPersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.AttachmentTagIdentityDTO>
     {
         
         private string _name;
@@ -2178,16 +3577,6 @@ namespace Framework.Attachments.Generated.DTO
             }
         }
         
-        public virtual void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentTag domainObject)
-        {
-            mappingService.MapAttachmentTag(this, domainObject);
-        }
-        
-        public Framework.Attachments.Domain.AttachmentTag ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
-        {
-            return mappingService.ToAttachmentTag(this);
-        }
-        
         public virtual Framework.Attachments.Generated.DTO.AttachmentTagStrictDTO ToStrict()
         {
             return new Framework.Attachments.Generated.DTO.AttachmentTagStrictDTO(this);
@@ -2195,9 +3584,9 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentTag), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.AttachmentTagRichDTO))]
-    public partial class AttachmentTagFullDTO : Framework.Attachments.Generated.DTO.AttachmentTagSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentTag, System.Guid>
+    public partial class AttachmentTagFullDTO : Framework.Attachments.Generated.DTO.AttachmentTagSimpleDTO
     {
         
         private Framework.Attachments.Generated.DTO.AttachmentSimpleDTO _attachment;
@@ -2225,12 +3614,6 @@ namespace Framework.Attachments.Generated.DTO
             }
         }
         
-        public override void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentTag domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapAttachmentTag(this, domainObject);
-        }
-        
         public override Framework.Attachments.Generated.DTO.AttachmentTagStrictDTO ToStrict()
         {
             return new Framework.Attachments.Generated.DTO.AttachmentTagStrictDTO(this);
@@ -2238,8 +3621,8 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentTag), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class AttachmentTagRichDTO : Framework.Attachments.Generated.DTO.AttachmentTagFullDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentTag, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentTag>
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
+    public partial class AttachmentTagRichDTO : Framework.Attachments.Generated.DTO.AttachmentTagFullDTO
     {
         
         public AttachmentTagRichDTO()
@@ -2252,17 +3635,6 @@ namespace Framework.Attachments.Generated.DTO
             mappingService.MapAttachmentTag(domainObject, this);
         }
         
-        public override void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentTag domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapAttachmentTag(this, domainObject);
-        }
-        
-        public Framework.Attachments.Domain.AttachmentTag ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
-        {
-            return mappingService.ToAttachmentTag(this);
-        }
-        
         public override Framework.Attachments.Generated.DTO.AttachmentTagStrictDTO ToStrict()
         {
             return new Framework.Attachments.Generated.DTO.AttachmentTagStrictDTO(this);
@@ -2270,7 +3642,7 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentTag), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
     public partial class AttachmentTagStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentTag, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentTag>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.AttachmentTagIdentityDTO>
     {
         
@@ -2424,9 +3796,667 @@ namespace Framework.Attachments.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentTag), "RichIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentTagIntegrationRichDTO : Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentTag, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentTag>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private bool _active;
+        
+        private Framework.Attachments.Generated.DTO.AttachmentIntegrationSimpleDTO _attachment;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private System.Guid _id;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private string _name;
+        
+        private string _value;
+        
+        public AttachmentTagIntegrationRichDTO()
+        {
+        }
+        
+        public AttachmentTagIntegrationRichDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentTag domainObject)
+        {
+            mappingService.MapAttachmentTag(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.AttachmentIntegrationSimpleDTO Attachment
+        {
+            get
+            {
+                return this._attachment;
+            }
+            set
+            {
+                this._attachment = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public Framework.Attachments.Generated.DTO.AttachmentTagIdentityDTO Identity
+        {
+            get
+            {
+                return new Framework.Attachments.Generated.DTO.AttachmentTagIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Value
+        {
+            get
+            {
+                return this._value;
+            }
+            set
+            {
+                this._value = value;
+            }
+        }
+        
+        public void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentTag domainObject)
+        {
+            mappingService.MapAttachmentTag(this, domainObject);
+        }
+        
+        public Framework.Attachments.Domain.AttachmentTag ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return mappingService.ToAttachmentTag(this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentTag), "SimpleIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentTagIntegrationSimpleDTO : Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.AttachmentTag>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private bool _active;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private System.Guid _id;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private string _name;
+        
+        private string _value;
+        
+        public AttachmentTagIntegrationSimpleDTO()
+        {
+        }
+        
+        public AttachmentTagIntegrationSimpleDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentTag domainObject)
+        {
+            mappingService.MapAttachmentTag(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public Framework.Attachments.Generated.DTO.AttachmentTagIdentityDTO Identity
+        {
+            get
+            {
+                return new Framework.Attachments.Generated.DTO.AttachmentTagIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Value
+        {
+            get
+            {
+                return this._value;
+            }
+            set
+            {
+                this._value = value;
+            }
+        }
+        
+        public void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentTag domainObject)
+        {
+            mappingService.MapAttachmentTag(this, domainObject);
+        }
+        
+        public Framework.Attachments.Domain.AttachmentTag ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return mappingService.ToAttachmentTag(this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentTag), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentTagSaveEventDTO : Framework.Attachments.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.AttachmentTagEventRichDTO AttachmentTag;
+        
+        public AttachmentTagSaveEventDTO()
+        {
+        }
+        
+        public AttachmentTagSaveEventDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentTag domainObject)
+        {
+            this.AttachmentTag = Framework.Attachments.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentTag), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentTagRemoveEventDTO : Framework.Attachments.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.AttachmentTagEventRichDTO AttachmentTag;
+        
+        public AttachmentTagRemoveEventDTO()
+        {
+        }
+        
+        public AttachmentTagRemoveEventDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentTag domainObject)
+        {
+            this.AttachmentTag = Framework.Attachments.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentTag), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentTagEventRichDTO
+    {
+        
+        private bool _active;
+        
+        private Framework.Attachments.Generated.DTO.AttachmentEventSimpleDTO _attachment;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private System.Guid _id;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private string _name;
+        
+        private string _value;
+        
+        public AttachmentTagEventRichDTO()
+        {
+        }
+        
+        public AttachmentTagEventRichDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentTag domainObject)
+        {
+            mappingService.MapAttachmentTag(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.AttachmentEventSimpleDTO Attachment
+        {
+            get
+            {
+                return this._attachment;
+            }
+            set
+            {
+                this._attachment = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Value
+        {
+            get
+            {
+                return this._value;
+            }
+            set
+            {
+                this._value = value;
+            }
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.AttachmentTag), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AttachmentTagEventSimpleDTO
+    {
+        
+        private bool _active;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private System.Guid _id;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private string _name;
+        
+        private string _value;
+        
+        public AttachmentTagEventSimpleDTO()
+        {
+        }
+        
+        public AttachmentTagEventSimpleDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.AttachmentTag domainObject)
+        {
+            mappingService.MapAttachmentTag(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Value
+        {
+            get
+            {
+                return this._value;
+            }
+            set
+            {
+                this._value = value;
+            }
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.DomainType), "VisualDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class DomainTypeVisualDTO : Framework.Attachments.Generated.DTO.BasePersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.DomainType, System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO>
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
+    public partial class DomainTypeVisualDTO : Framework.Attachments.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO>
     {
         
         private string _name;
@@ -2461,18 +4491,13 @@ namespace Framework.Attachments.Generated.DTO
                 this._name = value;
             }
         }
-        
-        public virtual void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.DomainType domainObject)
-        {
-            mappingService.MapDomainType(this, domainObject);
-        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.DomainType), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.DomainTypeFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.DomainTypeRichDTO))]
-    public partial class DomainTypeSimpleDTO : Framework.Attachments.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.DomainType, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.DomainType>, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO>
+    public partial class DomainTypeSimpleDTO : Framework.Attachments.Generated.DTO.BaseAuditPersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO>
     {
         
         private string _fullTypeName;
@@ -2558,16 +4583,6 @@ namespace Framework.Attachments.Generated.DTO
             }
         }
         
-        public virtual void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.DomainType domainObject)
-        {
-            mappingService.MapDomainType(this, domainObject);
-        }
-        
-        public Framework.Attachments.Domain.DomainType ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
-        {
-            return mappingService.ToDomainType(this);
-        }
-        
         public virtual Framework.Attachments.Generated.DTO.DomainTypeStrictDTO ToStrict()
         {
             return new Framework.Attachments.Generated.DTO.DomainTypeStrictDTO(this);
@@ -2575,9 +4590,9 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.DomainType), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.DomainTypeRichDTO))]
-    public partial class DomainTypeFullDTO : Framework.Attachments.Generated.DTO.DomainTypeSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.DomainType, System.Guid>
+    public partial class DomainTypeFullDTO : Framework.Attachments.Generated.DTO.DomainTypeSimpleDTO
     {
         
         private Framework.Attachments.Generated.DTO.TargetSystemSimpleDTO _targetSystem;
@@ -2605,12 +4620,6 @@ namespace Framework.Attachments.Generated.DTO
             }
         }
         
-        public override void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.DomainType domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapDomainType(this, domainObject);
-        }
-        
         public override Framework.Attachments.Generated.DTO.DomainTypeStrictDTO ToStrict()
         {
             return new Framework.Attachments.Generated.DTO.DomainTypeStrictDTO(this);
@@ -2618,8 +4627,8 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.DomainType), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class DomainTypeRichDTO : Framework.Attachments.Generated.DTO.DomainTypeFullDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.DomainType, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.DomainType>
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
+    public partial class DomainTypeRichDTO : Framework.Attachments.Generated.DTO.DomainTypeFullDTO
     {
         
         public DomainTypeRichDTO()
@@ -2632,17 +4641,6 @@ namespace Framework.Attachments.Generated.DTO
             mappingService.MapDomainType(domainObject, this);
         }
         
-        public override void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.DomainType domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapDomainType(this, domainObject);
-        }
-        
-        public Framework.Attachments.Domain.DomainType ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
-        {
-            return mappingService.ToDomainType(this);
-        }
-        
         public override Framework.Attachments.Generated.DTO.DomainTypeStrictDTO ToStrict()
         {
             return new Framework.Attachments.Generated.DTO.DomainTypeStrictDTO(this);
@@ -2650,7 +4648,7 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.DomainType), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
     public partial class DomainTypeStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.DomainType, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.DomainType>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO>
     {
         
@@ -2774,9 +4772,787 @@ namespace Framework.Attachments.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.DomainType), "RichIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class DomainTypeIntegrationRichDTO : Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.DomainType, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.DomainType>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private bool _active;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private string _fullTypeName;
+        
+        private bool _hasSecurityAttachment;
+        
+        private System.Guid _id;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private string _name;
+        
+        private string _nameSpace;
+        
+        private Framework.Attachments.Generated.DTO.TargetSystemIntegrationSimpleDTO _targetSystem;
+        
+        public DomainTypeIntegrationRichDTO()
+        {
+        }
+        
+        public DomainTypeIntegrationRichDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.DomainType domainObject)
+        {
+            mappingService.MapDomainType(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FullTypeName
+        {
+            get
+            {
+                return this._fullTypeName;
+            }
+            set
+            {
+                this._fullTypeName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool HasSecurityAttachment
+        {
+            get
+            {
+                return this._hasSecurityAttachment;
+            }
+            set
+            {
+                this._hasSecurityAttachment = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO Identity
+        {
+            get
+            {
+                return new Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NameSpace
+        {
+            get
+            {
+                return this._nameSpace;
+            }
+            set
+            {
+                this._nameSpace = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.TargetSystemIntegrationSimpleDTO TargetSystem
+        {
+            get
+            {
+                return this._targetSystem;
+            }
+            set
+            {
+                this._targetSystem = value;
+            }
+        }
+        
+        public void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.DomainType domainObject)
+        {
+            mappingService.MapDomainType(this, domainObject);
+        }
+        
+        public Framework.Attachments.Domain.DomainType ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return mappingService.ToDomainType(this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.DomainType), "SimpleIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class DomainTypeIntegrationSimpleDTO : Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.DomainType>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private bool _active;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private string _fullTypeName;
+        
+        private bool _hasSecurityAttachment;
+        
+        private System.Guid _id;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private string _name;
+        
+        private string _nameSpace;
+        
+        public DomainTypeIntegrationSimpleDTO()
+        {
+        }
+        
+        public DomainTypeIntegrationSimpleDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.DomainType domainObject)
+        {
+            mappingService.MapDomainType(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FullTypeName
+        {
+            get
+            {
+                return this._fullTypeName;
+            }
+            set
+            {
+                this._fullTypeName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool HasSecurityAttachment
+        {
+            get
+            {
+                return this._hasSecurityAttachment;
+            }
+            set
+            {
+                this._hasSecurityAttachment = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO Identity
+        {
+            get
+            {
+                return new Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NameSpace
+        {
+            get
+            {
+                return this._nameSpace;
+            }
+            set
+            {
+                this._nameSpace = value;
+            }
+        }
+        
+        public void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.DomainType domainObject)
+        {
+            mappingService.MapDomainType(this, domainObject);
+        }
+        
+        public Framework.Attachments.Domain.DomainType ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return mappingService.ToDomainType(this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.DomainType), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class DomainTypeSaveEventDTO : Framework.Attachments.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.DomainTypeEventRichDTO DomainType;
+        
+        public DomainTypeSaveEventDTO()
+        {
+        }
+        
+        public DomainTypeSaveEventDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.DomainType domainObject)
+        {
+            this.DomainType = Framework.Attachments.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.DomainType), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class DomainTypeRemoveEventDTO : Framework.Attachments.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.DomainTypeEventRichDTO DomainType;
+        
+        public DomainTypeRemoveEventDTO()
+        {
+        }
+        
+        public DomainTypeRemoveEventDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.DomainType domainObject)
+        {
+            this.DomainType = Framework.Attachments.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.DomainType), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class DomainTypeEventRichDTO
+    {
+        
+        private bool _active;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private string _fullTypeName;
+        
+        private bool _hasSecurityAttachment;
+        
+        private System.Guid _id;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private string _name;
+        
+        private string _nameSpace;
+        
+        private Framework.Attachments.Generated.DTO.TargetSystemEventSimpleDTO _targetSystem;
+        
+        public DomainTypeEventRichDTO()
+        {
+        }
+        
+        public DomainTypeEventRichDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.DomainType domainObject)
+        {
+            mappingService.MapDomainType(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FullTypeName
+        {
+            get
+            {
+                return this._fullTypeName;
+            }
+            set
+            {
+                this._fullTypeName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool HasSecurityAttachment
+        {
+            get
+            {
+                return this._hasSecurityAttachment;
+            }
+            set
+            {
+                this._hasSecurityAttachment = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NameSpace
+        {
+            get
+            {
+                return this._nameSpace;
+            }
+            set
+            {
+                this._nameSpace = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.TargetSystemEventSimpleDTO TargetSystem
+        {
+            get
+            {
+                return this._targetSystem;
+            }
+            set
+            {
+                this._targetSystem = value;
+            }
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.DomainType), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class DomainTypeEventSimpleDTO
+    {
+        
+        private bool _active;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private string _fullTypeName;
+        
+        private bool _hasSecurityAttachment;
+        
+        private System.Guid _id;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private string _name;
+        
+        private string _nameSpace;
+        
+        public DomainTypeEventSimpleDTO()
+        {
+        }
+        
+        public DomainTypeEventSimpleDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.DomainType domainObject)
+        {
+            mappingService.MapDomainType(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FullTypeName
+        {
+            get
+            {
+                return this._fullTypeName;
+            }
+            set
+            {
+                this._fullTypeName = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool HasSecurityAttachment
+        {
+            get
+            {
+                return this._hasSecurityAttachment;
+            }
+            set
+            {
+                this._hasSecurityAttachment = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NameSpace
+        {
+            get
+            {
+                return this._nameSpace;
+            }
+            set
+            {
+                this._nameSpace = value;
+            }
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.TargetSystem), "VisualDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class TargetSystemVisualDTO : Framework.Attachments.Generated.DTO.BasePersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.TargetSystem, System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.TargetSystemIdentityDTO>
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
+    public partial class TargetSystemVisualDTO : Framework.Attachments.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.TargetSystemIdentityDTO>
     {
         
         private string _name;
@@ -2811,18 +5587,13 @@ namespace Framework.Attachments.Generated.DTO
                 this._name = value;
             }
         }
-        
-        public virtual void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.TargetSystem domainObject)
-        {
-            mappingService.MapTargetSystem(this, domainObject);
-        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.TargetSystem), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.TargetSystemFullDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.TargetSystemRichDTO))]
-    public partial class TargetSystemSimpleDTO : Framework.Attachments.Generated.DTO.BaseAuditPersistentDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.TargetSystem, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.TargetSystem>, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.TargetSystemIdentityDTO>
+    public partial class TargetSystemSimpleDTO : Framework.Attachments.Generated.DTO.BaseAuditPersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.TargetSystemIdentityDTO>
     {
         
         private bool _isMain;
@@ -2878,16 +5649,6 @@ namespace Framework.Attachments.Generated.DTO
             }
         }
         
-        public virtual void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.TargetSystem domainObject)
-        {
-            mappingService.MapTargetSystem(this, domainObject);
-        }
-        
-        public Framework.Attachments.Domain.TargetSystem ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
-        {
-            return mappingService.ToTargetSystem(this);
-        }
-        
         public virtual Framework.Attachments.Generated.DTO.TargetSystemStrictDTO ToStrict()
         {
             return new Framework.Attachments.Generated.DTO.TargetSystemStrictDTO(this);
@@ -2895,9 +5656,9 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.TargetSystem), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Framework.Attachments.Generated.DTO.TargetSystemRichDTO))]
-    public partial class TargetSystemFullDTO : Framework.Attachments.Generated.DTO.TargetSystemSimpleDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.TargetSystem, System.Guid>
+    public partial class TargetSystemFullDTO : Framework.Attachments.Generated.DTO.TargetSystemSimpleDTO
     {
         
         public TargetSystemFullDTO()
@@ -2910,12 +5671,6 @@ namespace Framework.Attachments.Generated.DTO
             mappingService.MapTargetSystem(domainObject, this);
         }
         
-        public override void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.TargetSystem domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapTargetSystem(this, domainObject);
-        }
-        
         public override Framework.Attachments.Generated.DTO.TargetSystemStrictDTO ToStrict()
         {
             return new Framework.Attachments.Generated.DTO.TargetSystemStrictDTO(this);
@@ -2923,8 +5678,8 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.TargetSystem), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
-    public partial class TargetSystemRichDTO : Framework.Attachments.Generated.DTO.TargetSystemFullDTO, Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.TargetSystem, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.TargetSystem>
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
+    public partial class TargetSystemRichDTO : Framework.Attachments.Generated.DTO.TargetSystemFullDTO
     {
         
         private System.Collections.Generic.List<Framework.Attachments.Generated.DTO.DomainTypeRichDTO> _domainTypes = new System.Collections.Generic.List<Framework.Attachments.Generated.DTO.DomainTypeRichDTO>();
@@ -2952,22 +5707,6 @@ namespace Framework.Attachments.Generated.DTO
             }
         }
         
-        public override void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.TargetSystem domainObject)
-        {
-            base.MapToDomainObject(mappingService, domainObject);
-            mappingService.MapTargetSystem(this, domainObject);
-        }
-        
-        public Framework.Attachments.Domain.TargetSystem ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
-        {
-            return mappingService.ToTargetSystem(this);
-        }
-        
-        public Framework.Attachments.Domain.TargetSystem ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, bool allowCreate)
-        {
-            return mappingService.ToTargetSystem(this, allowCreate);
-        }
-        
         public override Framework.Attachments.Generated.DTO.TargetSystemStrictDTO ToStrict()
         {
             return new Framework.Attachments.Generated.DTO.TargetSystemStrictDTO(this);
@@ -2975,7 +5714,7 @@ namespace Framework.Attachments.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.TargetSystem), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="Attachments")]
     public partial class TargetSystemStrictDTO : Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.TargetSystem, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.TargetSystem>, Framework.Persistent.IIdentityObject<System.Guid>, Framework.Persistent.IIdentityObjectContainer<Framework.Attachments.Generated.DTO.TargetSystemIdentityDTO>
     {
         
@@ -3116,6 +5855,669 @@ namespace Framework.Attachments.Generated.DTO
         public Framework.Attachments.Domain.TargetSystem ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, bool allowCreate)
         {
             return mappingService.ToTargetSystem(this, allowCreate);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.TargetSystem), "RichIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class TargetSystemIntegrationRichDTO : Framework.DomainDriven.IMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.TargetSystem, System.Guid>, Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.TargetSystem>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private bool _active;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private System.Collections.Generic.List<Framework.Attachments.Generated.DTO.DomainTypeIntegrationRichDTO> _domainTypes;
+        
+        private System.Guid _id;
+        
+        private bool _isMain;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private string _name;
+        
+        public TargetSystemIntegrationRichDTO()
+        {
+        }
+        
+        public TargetSystemIntegrationRichDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.TargetSystem domainObject)
+        {
+            mappingService.MapTargetSystem(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Framework.Attachments.Generated.DTO.DomainTypeIntegrationRichDTO> DomainTypes
+        {
+            get
+            {
+                return this._domainTypes;
+            }
+            set
+            {
+                this._domainTypes = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public Framework.Attachments.Generated.DTO.TargetSystemIdentityDTO Identity
+        {
+            get
+            {
+                return new Framework.Attachments.Generated.DTO.TargetSystemIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsMain
+        {
+            get
+            {
+                return this._isMain;
+            }
+            set
+            {
+                this._isMain = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        public void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.TargetSystem domainObject)
+        {
+            mappingService.MapTargetSystem(this, domainObject);
+        }
+        
+        public Framework.Attachments.Domain.TargetSystem ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return mappingService.ToTargetSystem(this);
+        }
+        
+        public Framework.Attachments.Domain.TargetSystem ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, bool allowCreate)
+        {
+            return mappingService.ToTargetSystem(this, allowCreate);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.TargetSystem), "SimpleIntegrationDTO", Framework.DomainDriven.Serialization.DTORole.Integration)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class TargetSystemIntegrationSimpleDTO : Framework.DomainDriven.IConvertMappingObject<Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService, Framework.Attachments.Domain.TargetSystem>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private bool _active;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private System.Guid _id;
+        
+        private bool _isMain;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private string _name;
+        
+        public TargetSystemIntegrationSimpleDTO()
+        {
+        }
+        
+        public TargetSystemIntegrationSimpleDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.TargetSystem domainObject)
+        {
+            mappingService.MapTargetSystem(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public Framework.Attachments.Generated.DTO.TargetSystemIdentityDTO Identity
+        {
+            get
+            {
+                return new Framework.Attachments.Generated.DTO.TargetSystemIdentityDTO(this.Id);
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsMain
+        {
+            get
+            {
+                return this._isMain;
+            }
+            set
+            {
+                this._isMain = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+        
+        public void MapToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.TargetSystem domainObject)
+        {
+            mappingService.MapTargetSystem(this, domainObject);
+        }
+        
+        public Framework.Attachments.Domain.TargetSystem ToDomainObject(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return mappingService.ToTargetSystem(this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.TargetSystem), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class TargetSystemSaveEventDTO : Framework.Attachments.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.TargetSystemEventRichDTO TargetSystem;
+        
+        public TargetSystemSaveEventDTO()
+        {
+        }
+        
+        public TargetSystemSaveEventDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.TargetSystem domainObject)
+        {
+            this.TargetSystem = Framework.Attachments.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.TargetSystem), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class TargetSystemRemoveEventDTO : Framework.Attachments.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Attachments.Generated.DTO.TargetSystemEventRichDTO TargetSystem;
+        
+        public TargetSystemRemoveEventDTO()
+        {
+        }
+        
+        public TargetSystemRemoveEventDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.TargetSystem domainObject)
+        {
+            this.TargetSystem = Framework.Attachments.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.TargetSystem), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class TargetSystemEventRichDTO
+    {
+        
+        private bool _active;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private System.Collections.Generic.List<Framework.Attachments.Generated.DTO.DomainTypeEventRichDTO> _domainTypes;
+        
+        private System.Guid _id;
+        
+        private bool _isMain;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private string _name;
+        
+        public TargetSystemEventRichDTO()
+        {
+        }
+        
+        public TargetSystemEventRichDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.TargetSystem domainObject)
+        {
+            mappingService.MapTargetSystem(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Framework.Attachments.Generated.DTO.DomainTypeEventRichDTO> DomainTypes
+        {
+            get
+            {
+                return this._domainTypes;
+            }
+            set
+            {
+                this._domainTypes = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsMain
+        {
+            get
+            {
+                return this._isMain;
+            }
+            set
+            {
+                this._isMain = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Attachments.Domain.TargetSystem), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class TargetSystemEventSimpleDTO
+    {
+        
+        private bool _active;
+        
+        private System.DateTime? _createDate;
+        
+        private string _createdBy;
+        
+        private System.Guid _id;
+        
+        private bool _isMain;
+        
+        private string _modifiedBy;
+        
+        private System.DateTime? _modifyDate;
+        
+        private string _name;
+        
+        public TargetSystemEventSimpleDTO()
+        {
+        }
+        
+        public TargetSystemEventSimpleDTO(Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService, Framework.Attachments.Domain.TargetSystem domainObject)
+        {
+            mappingService.MapTargetSystem(domainObject, this);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate
+        {
+            get
+            {
+                return this._createDate;
+            }
+            set
+            {
+                this._createDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy
+        {
+            get
+            {
+                return this._createdBy;
+            }
+            set
+            {
+                this._createdBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsMain
+        {
+            get
+            {
+                return this._isMain;
+            }
+            set
+            {
+                this._isMain = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy
+        {
+            get
+            {
+                return this._modifiedBy;
+            }
+            set
+            {
+                this._modifiedBy = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate
+        {
+            get
+            {
+                return this._modifyDate;
+            }
+            set
+            {
+                this._modifyDate = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+            }
         }
     }
     
@@ -3294,6 +6696,126 @@ namespace Framework.Attachments.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
+        public static Framework.Attachments.Generated.DTO.AttachmentEventRichDTO ToRichEventDTO(this Framework.Attachments.Domain.Attachment domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.AttachmentEventRichDTO(mappingService, domainObject);
+        }
+        
+        public static Framework.Attachments.Generated.DTO.AttachmentContainerEventRichDTO ToRichEventDTO(this Framework.Attachments.Domain.AttachmentContainer domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.AttachmentContainerEventRichDTO(mappingService, domainObject);
+        }
+        
+        public static Framework.Attachments.Generated.DTO.AttachmentContainerReferenceEventRichDTO ToRichEventDTO(this Framework.Attachments.Domain.AttachmentContainerReference domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.AttachmentContainerReferenceEventRichDTO(mappingService, domainObject);
+        }
+        
+        public static Framework.Attachments.Generated.DTO.AttachmentTagEventRichDTO ToRichEventDTO(this Framework.Attachments.Domain.AttachmentTag domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.AttachmentTagEventRichDTO(mappingService, domainObject);
+        }
+        
+        public static Framework.Attachments.Generated.DTO.DomainTypeEventRichDTO ToRichEventDTO(this Framework.Attachments.Domain.DomainType domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.DomainTypeEventRichDTO(mappingService, domainObject);
+        }
+        
+        public static Framework.Attachments.Generated.DTO.TargetSystemEventRichDTO ToRichEventDTO(this Framework.Attachments.Domain.TargetSystem domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.TargetSystemEventRichDTO(mappingService, domainObject);
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.Attachment> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentContainerEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.AttachmentContainer> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentContainerReferenceEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.AttachmentContainerReference> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentTagEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.AttachmentTag> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.DomainTypeEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.DomainType> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.TargetSystemEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.TargetSystem> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
+        }
+        
+        public static Framework.Attachments.Generated.DTO.AttachmentIntegrationRichDTO ToRichIntegrationDTO(this Framework.Attachments.Domain.Attachment domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.AttachmentIntegrationRichDTO(mappingService, domainObject);
+        }
+        
+        public static Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationRichDTO ToRichIntegrationDTO(this Framework.Attachments.Domain.AttachmentContainer domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationRichDTO(mappingService, domainObject);
+        }
+        
+        public static Framework.Attachments.Generated.DTO.AttachmentContainerReferenceIntegrationRichDTO ToRichIntegrationDTO(this Framework.Attachments.Domain.AttachmentContainerReference domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.AttachmentContainerReferenceIntegrationRichDTO(mappingService, domainObject);
+        }
+        
+        public static Framework.Attachments.Generated.DTO.AttachmentTagIntegrationRichDTO ToRichIntegrationDTO(this Framework.Attachments.Domain.AttachmentTag domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.AttachmentTagIntegrationRichDTO(mappingService, domainObject);
+        }
+        
+        public static Framework.Attachments.Generated.DTO.DomainTypeIntegrationRichDTO ToRichIntegrationDTO(this Framework.Attachments.Domain.DomainType domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.DomainTypeIntegrationRichDTO(mappingService, domainObject);
+        }
+        
+        public static Framework.Attachments.Generated.DTO.TargetSystemIntegrationRichDTO ToRichIntegrationDTO(this Framework.Attachments.Domain.TargetSystem domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.TargetSystemIntegrationRichDTO(mappingService, domainObject);
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentIntegrationRichDTO> ToRichIntegrationDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.Attachment> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToRichIntegrationDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationRichDTO> ToRichIntegrationDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.AttachmentContainer> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToRichIntegrationDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentContainerReferenceIntegrationRichDTO> ToRichIntegrationDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.AttachmentContainerReference> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToRichIntegrationDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentTagIntegrationRichDTO> ToRichIntegrationDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.AttachmentTag> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToRichIntegrationDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.DomainTypeIntegrationRichDTO> ToRichIntegrationDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.DomainType> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToRichIntegrationDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.TargetSystemIntegrationRichDTO> ToRichIntegrationDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.TargetSystem> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToRichIntegrationDTO(domainObject, mappingService));
+        }
+        
         public static Framework.Attachments.Generated.DTO.AttachmentSimpleDTO ToSimpleDTO(this Framework.Attachments.Domain.Attachment domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
         {
             return new Framework.Attachments.Generated.DTO.AttachmentSimpleDTO(mappingService, domainObject);
@@ -3354,6 +6876,126 @@ namespace Framework.Attachments.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject, mappingService));
         }
         
+        public static Framework.Attachments.Generated.DTO.AttachmentEventSimpleDTO ToSimpleEventDTO(this Framework.Attachments.Domain.Attachment domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.AttachmentEventSimpleDTO(mappingService, domainObject);
+        }
+        
+        public static Framework.Attachments.Generated.DTO.AttachmentContainerEventSimpleDTO ToSimpleEventDTO(this Framework.Attachments.Domain.AttachmentContainer domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.AttachmentContainerEventSimpleDTO(mappingService, domainObject);
+        }
+        
+        public static Framework.Attachments.Generated.DTO.AttachmentContainerReferenceEventSimpleDTO ToSimpleEventDTO(this Framework.Attachments.Domain.AttachmentContainerReference domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.AttachmentContainerReferenceEventSimpleDTO(mappingService, domainObject);
+        }
+        
+        public static Framework.Attachments.Generated.DTO.AttachmentTagEventSimpleDTO ToSimpleEventDTO(this Framework.Attachments.Domain.AttachmentTag domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.AttachmentTagEventSimpleDTO(mappingService, domainObject);
+        }
+        
+        public static Framework.Attachments.Generated.DTO.DomainTypeEventSimpleDTO ToSimpleEventDTO(this Framework.Attachments.Domain.DomainType domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.DomainTypeEventSimpleDTO(mappingService, domainObject);
+        }
+        
+        public static Framework.Attachments.Generated.DTO.TargetSystemEventSimpleDTO ToSimpleEventDTO(this Framework.Attachments.Domain.TargetSystem domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.TargetSystemEventSimpleDTO(mappingService, domainObject);
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.Attachment> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentContainerEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.AttachmentContainer> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentContainerReferenceEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.AttachmentContainerReference> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentTagEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.AttachmentTag> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.DomainTypeEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.DomainType> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.TargetSystemEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.TargetSystem> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject, mappingService));
+        }
+        
+        public static Framework.Attachments.Generated.DTO.AttachmentIntegrationSimpleDTO ToSimpleIntegrationDTO(this Framework.Attachments.Domain.Attachment domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.AttachmentIntegrationSimpleDTO(mappingService, domainObject);
+        }
+        
+        public static Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationSimpleDTO ToSimpleIntegrationDTO(this Framework.Attachments.Domain.AttachmentContainer domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationSimpleDTO(mappingService, domainObject);
+        }
+        
+        public static Framework.Attachments.Generated.DTO.AttachmentContainerReferenceIntegrationSimpleDTO ToSimpleIntegrationDTO(this Framework.Attachments.Domain.AttachmentContainerReference domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.AttachmentContainerReferenceIntegrationSimpleDTO(mappingService, domainObject);
+        }
+        
+        public static Framework.Attachments.Generated.DTO.AttachmentTagIntegrationSimpleDTO ToSimpleIntegrationDTO(this Framework.Attachments.Domain.AttachmentTag domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.AttachmentTagIntegrationSimpleDTO(mappingService, domainObject);
+        }
+        
+        public static Framework.Attachments.Generated.DTO.DomainTypeIntegrationSimpleDTO ToSimpleIntegrationDTO(this Framework.Attachments.Domain.DomainType domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.DomainTypeIntegrationSimpleDTO(mappingService, domainObject);
+        }
+        
+        public static Framework.Attachments.Generated.DTO.TargetSystemIntegrationSimpleDTO ToSimpleIntegrationDTO(this Framework.Attachments.Domain.TargetSystem domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return new Framework.Attachments.Generated.DTO.TargetSystemIntegrationSimpleDTO(mappingService, domainObject);
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentIntegrationSimpleDTO> ToSimpleIntegrationDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.Attachment> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleIntegrationDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationSimpleDTO> ToSimpleIntegrationDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.AttachmentContainer> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleIntegrationDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentContainerReferenceIntegrationSimpleDTO> ToSimpleIntegrationDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.AttachmentContainerReference> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleIntegrationDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.AttachmentTagIntegrationSimpleDTO> ToSimpleIntegrationDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.AttachmentTag> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleIntegrationDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.DomainTypeIntegrationSimpleDTO> ToSimpleIntegrationDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.DomainType> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleIntegrationDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<Framework.Attachments.Generated.DTO.TargetSystemIntegrationSimpleDTO> ToSimpleIntegrationDTOList(this System.Collections.Generic.IEnumerable<Framework.Attachments.Domain.TargetSystem> domainObjects, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleIntegrationDTO(domainObject, mappingService));
+        }
+        
         public static Framework.Attachments.Generated.DTO.AttachmentVisualDTO ToVisualDTO(this Framework.Attachments.Domain.Attachment domainObject, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService mappingService)
         {
             return new Framework.Attachments.Generated.DTO.AttachmentVisualDTO(mappingService, domainObject);
@@ -3401,67 +7043,87 @@ namespace Framework.Attachments.Generated.DTO
         
         void MapAttachment(Framework.Attachments.Domain.Attachment domainObject, Framework.Attachments.Generated.DTO.AttachmentVisualDTO mappingObject);
         
-        void MapAttachment(Framework.Attachments.Generated.DTO.AttachmentVisualDTO mappingObject, Framework.Attachments.Domain.Attachment domainObject);
-        
         void MapAttachment(Framework.Attachments.Domain.Attachment domainObject, Framework.Attachments.Generated.DTO.AttachmentSimpleDTO mappingObject);
-        
-        void MapAttachment(Framework.Attachments.Generated.DTO.AttachmentSimpleDTO mappingObject, Framework.Attachments.Domain.Attachment domainObject);
         
         void MapAttachment(Framework.Attachments.Domain.Attachment domainObject, Framework.Attachments.Generated.DTO.AttachmentFullDTO mappingObject);
         
-        void MapAttachment(Framework.Attachments.Generated.DTO.AttachmentFullDTO mappingObject, Framework.Attachments.Domain.Attachment domainObject);
-        
         void MapAttachment(Framework.Attachments.Domain.Attachment domainObject, Framework.Attachments.Generated.DTO.AttachmentRichDTO mappingObject);
-        
-        void MapAttachment(Framework.Attachments.Generated.DTO.AttachmentRichDTO mappingObject, Framework.Attachments.Domain.Attachment domainObject);
         
         void MapAttachment(Framework.Attachments.Generated.DTO.AttachmentStrictDTO mappingObject, Framework.Attachments.Domain.Attachment domainObject);
         
-        void MapAttachmentContainer(Framework.Attachments.Domain.AttachmentContainer domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerSimpleDTO mappingObject);
+        void MapAttachment(Framework.Attachments.Domain.Attachment domainObject, Framework.Attachments.Generated.DTO.AttachmentIntegrationRichDTO mappingObject);
         
-        void MapAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerSimpleDTO mappingObject, Framework.Attachments.Domain.AttachmentContainer domainObject);
+        void MapAttachment(Framework.Attachments.Generated.DTO.AttachmentIntegrationRichDTO mappingObject, Framework.Attachments.Domain.Attachment domainObject);
+        
+        void MapAttachment(Framework.Attachments.Domain.Attachment domainObject, Framework.Attachments.Generated.DTO.AttachmentIntegrationSimpleDTO mappingObject);
+        
+        void MapAttachment(Framework.Attachments.Generated.DTO.AttachmentIntegrationSimpleDTO mappingObject, Framework.Attachments.Domain.Attachment domainObject);
+        
+        void MapAttachment(Framework.Attachments.Domain.Attachment domainObject, Framework.Attachments.Generated.DTO.AttachmentEventRichDTO mappingObject);
+        
+        void MapAttachment(Framework.Attachments.Domain.Attachment domainObject, Framework.Attachments.Generated.DTO.AttachmentEventSimpleDTO mappingObject);
+        
+        void MapAttachmentContainer(Framework.Attachments.Domain.AttachmentContainer domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerSimpleDTO mappingObject);
         
         void MapAttachmentContainer(Framework.Attachments.Domain.AttachmentContainer domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerFullDTO mappingObject);
         
-        void MapAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerFullDTO mappingObject, Framework.Attachments.Domain.AttachmentContainer domainObject);
-        
         void MapAttachmentContainer(Framework.Attachments.Domain.AttachmentContainer domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerRichDTO mappingObject);
-        
-        void MapAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerRichDTO mappingObject, Framework.Attachments.Domain.AttachmentContainer domainObject);
         
         void MapAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerStrictDTO mappingObject, Framework.Attachments.Domain.AttachmentContainer domainObject);
         
-        void MapAttachmentContainerReference(Framework.Attachments.Domain.AttachmentContainerReference domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerReferenceSimpleDTO mappingObject);
+        void MapAttachmentContainer(Framework.Attachments.Domain.AttachmentContainer domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationRichDTO mappingObject);
         
-        void MapAttachmentContainerReference(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceSimpleDTO mappingObject, Framework.Attachments.Domain.AttachmentContainerReference domainObject);
+        void MapAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationRichDTO mappingObject, Framework.Attachments.Domain.AttachmentContainer domainObject);
+        
+        void MapAttachmentContainer(Framework.Attachments.Domain.AttachmentContainer domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationSimpleDTO mappingObject);
+        
+        void MapAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationSimpleDTO mappingObject, Framework.Attachments.Domain.AttachmentContainer domainObject);
+        
+        void MapAttachmentContainer(Framework.Attachments.Domain.AttachmentContainer domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerEventRichDTO mappingObject);
+        
+        void MapAttachmentContainer(Framework.Attachments.Domain.AttachmentContainer domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerEventSimpleDTO mappingObject);
+        
+        void MapAttachmentContainerReference(Framework.Attachments.Domain.AttachmentContainerReference domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerReferenceSimpleDTO mappingObject);
         
         void MapAttachmentContainerReference(Framework.Attachments.Domain.AttachmentContainerReference domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerReferenceFullDTO mappingObject);
         
-        void MapAttachmentContainerReference(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceFullDTO mappingObject, Framework.Attachments.Domain.AttachmentContainerReference domainObject);
-        
         void MapAttachmentContainerReference(Framework.Attachments.Domain.AttachmentContainerReference domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerReferenceRichDTO mappingObject);
-        
-        void MapAttachmentContainerReference(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceRichDTO mappingObject, Framework.Attachments.Domain.AttachmentContainerReference domainObject);
         
         void MapAttachmentContainerReference(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceStrictDTO mappingObject, Framework.Attachments.Domain.AttachmentContainerReference domainObject);
         
-        void MapAttachmentTag(Framework.Attachments.Domain.AttachmentTag domainObject, Framework.Attachments.Generated.DTO.AttachmentTagVisualDTO mappingObject);
+        void MapAttachmentContainerReference(Framework.Attachments.Domain.AttachmentContainerReference domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerReferenceIntegrationRichDTO mappingObject);
         
-        void MapAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagVisualDTO mappingObject, Framework.Attachments.Domain.AttachmentTag domainObject);
+        void MapAttachmentContainerReference(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceIntegrationRichDTO mappingObject, Framework.Attachments.Domain.AttachmentContainerReference domainObject);
+        
+        void MapAttachmentContainerReference(Framework.Attachments.Domain.AttachmentContainerReference domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerReferenceIntegrationSimpleDTO mappingObject);
+        
+        void MapAttachmentContainerReference(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceIntegrationSimpleDTO mappingObject, Framework.Attachments.Domain.AttachmentContainerReference domainObject);
+        
+        void MapAttachmentContainerReference(Framework.Attachments.Domain.AttachmentContainerReference domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerReferenceEventRichDTO mappingObject);
+        
+        void MapAttachmentContainerReference(Framework.Attachments.Domain.AttachmentContainerReference domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerReferenceEventSimpleDTO mappingObject);
+        
+        void MapAttachmentTag(Framework.Attachments.Domain.AttachmentTag domainObject, Framework.Attachments.Generated.DTO.AttachmentTagVisualDTO mappingObject);
         
         void MapAttachmentTag(Framework.Attachments.Domain.AttachmentTag domainObject, Framework.Attachments.Generated.DTO.AttachmentTagSimpleDTO mappingObject);
         
-        void MapAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagSimpleDTO mappingObject, Framework.Attachments.Domain.AttachmentTag domainObject);
-        
         void MapAttachmentTag(Framework.Attachments.Domain.AttachmentTag domainObject, Framework.Attachments.Generated.DTO.AttachmentTagFullDTO mappingObject);
-        
-        void MapAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagFullDTO mappingObject, Framework.Attachments.Domain.AttachmentTag domainObject);
         
         void MapAttachmentTag(Framework.Attachments.Domain.AttachmentTag domainObject, Framework.Attachments.Generated.DTO.AttachmentTagRichDTO mappingObject);
         
-        void MapAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagRichDTO mappingObject, Framework.Attachments.Domain.AttachmentTag domainObject);
-        
         void MapAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagStrictDTO mappingObject, Framework.Attachments.Domain.AttachmentTag domainObject);
+        
+        void MapAttachmentTag(Framework.Attachments.Domain.AttachmentTag domainObject, Framework.Attachments.Generated.DTO.AttachmentTagIntegrationRichDTO mappingObject);
+        
+        void MapAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagIntegrationRichDTO mappingObject, Framework.Attachments.Domain.AttachmentTag domainObject);
+        
+        void MapAttachmentTag(Framework.Attachments.Domain.AttachmentTag domainObject, Framework.Attachments.Generated.DTO.AttachmentTagIntegrationSimpleDTO mappingObject);
+        
+        void MapAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagIntegrationSimpleDTO mappingObject, Framework.Attachments.Domain.AttachmentTag domainObject);
+        
+        void MapAttachmentTag(Framework.Attachments.Domain.AttachmentTag domainObject, Framework.Attachments.Generated.DTO.AttachmentTagEventRichDTO mappingObject);
+        
+        void MapAttachmentTag(Framework.Attachments.Domain.AttachmentTag domainObject, Framework.Attachments.Generated.DTO.AttachmentTagEventSimpleDTO mappingObject);
         
         void MapAuditPersistentDomainObjectBase(Framework.Attachments.Domain.AuditPersistentDomainObjectBase domainObject, Framework.Attachments.Generated.DTO.BaseAuditPersistentDTO mappingObject);
         
@@ -3469,100 +7131,108 @@ namespace Framework.Attachments.Generated.DTO
         
         void MapDomainType(Framework.Attachments.Domain.DomainType domainObject, Framework.Attachments.Generated.DTO.DomainTypeVisualDTO mappingObject);
         
-        void MapDomainType(Framework.Attachments.Generated.DTO.DomainTypeVisualDTO mappingObject, Framework.Attachments.Domain.DomainType domainObject);
-        
         void MapDomainType(Framework.Attachments.Domain.DomainType domainObject, Framework.Attachments.Generated.DTO.DomainTypeSimpleDTO mappingObject);
-        
-        void MapDomainType(Framework.Attachments.Generated.DTO.DomainTypeSimpleDTO mappingObject, Framework.Attachments.Domain.DomainType domainObject);
         
         void MapDomainType(Framework.Attachments.Domain.DomainType domainObject, Framework.Attachments.Generated.DTO.DomainTypeFullDTO mappingObject);
         
-        void MapDomainType(Framework.Attachments.Generated.DTO.DomainTypeFullDTO mappingObject, Framework.Attachments.Domain.DomainType domainObject);
-        
         void MapDomainType(Framework.Attachments.Domain.DomainType domainObject, Framework.Attachments.Generated.DTO.DomainTypeRichDTO mappingObject);
         
-        void MapDomainType(Framework.Attachments.Generated.DTO.DomainTypeRichDTO mappingObject, Framework.Attachments.Domain.DomainType domainObject);
-        
         void MapDomainType(Framework.Attachments.Generated.DTO.DomainTypeStrictDTO mappingObject, Framework.Attachments.Domain.DomainType domainObject);
+        
+        void MapDomainType(Framework.Attachments.Domain.DomainType domainObject, Framework.Attachments.Generated.DTO.DomainTypeIntegrationRichDTO mappingObject);
+        
+        void MapDomainType(Framework.Attachments.Generated.DTO.DomainTypeIntegrationRichDTO mappingObject, Framework.Attachments.Domain.DomainType domainObject);
+        
+        void MapDomainType(Framework.Attachments.Domain.DomainType domainObject, Framework.Attachments.Generated.DTO.DomainTypeIntegrationSimpleDTO mappingObject);
+        
+        void MapDomainType(Framework.Attachments.Generated.DTO.DomainTypeIntegrationSimpleDTO mappingObject, Framework.Attachments.Domain.DomainType domainObject);
+        
+        void MapDomainType(Framework.Attachments.Domain.DomainType domainObject, Framework.Attachments.Generated.DTO.DomainTypeEventRichDTO mappingObject);
+        
+        void MapDomainType(Framework.Attachments.Domain.DomainType domainObject, Framework.Attachments.Generated.DTO.DomainTypeEventSimpleDTO mappingObject);
         
         void MapPersistentDomainObjectBase(Framework.Attachments.Domain.PersistentDomainObjectBase domainObject, Framework.Attachments.Generated.DTO.BasePersistentDTO mappingObject);
         
         void MapTargetSystem(Framework.Attachments.Domain.TargetSystem domainObject, Framework.Attachments.Generated.DTO.TargetSystemVisualDTO mappingObject);
         
-        void MapTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemVisualDTO mappingObject, Framework.Attachments.Domain.TargetSystem domainObject);
-        
         void MapTargetSystem(Framework.Attachments.Domain.TargetSystem domainObject, Framework.Attachments.Generated.DTO.TargetSystemSimpleDTO mappingObject);
-        
-        void MapTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemSimpleDTO mappingObject, Framework.Attachments.Domain.TargetSystem domainObject);
         
         void MapTargetSystem(Framework.Attachments.Domain.TargetSystem domainObject, Framework.Attachments.Generated.DTO.TargetSystemFullDTO mappingObject);
         
-        void MapTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemFullDTO mappingObject, Framework.Attachments.Domain.TargetSystem domainObject);
-        
         void MapTargetSystem(Framework.Attachments.Domain.TargetSystem domainObject, Framework.Attachments.Generated.DTO.TargetSystemRichDTO mappingObject);
-        
-        void MapTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemRichDTO mappingObject, Framework.Attachments.Domain.TargetSystem domainObject);
         
         void MapTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemStrictDTO mappingObject, Framework.Attachments.Domain.TargetSystem domainObject);
         
+        void MapTargetSystem(Framework.Attachments.Domain.TargetSystem domainObject, Framework.Attachments.Generated.DTO.TargetSystemIntegrationRichDTO mappingObject);
+        
+        void MapTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemIntegrationRichDTO mappingObject, Framework.Attachments.Domain.TargetSystem domainObject);
+        
+        void MapTargetSystem(Framework.Attachments.Domain.TargetSystem domainObject, Framework.Attachments.Generated.DTO.TargetSystemIntegrationSimpleDTO mappingObject);
+        
+        void MapTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemIntegrationSimpleDTO mappingObject, Framework.Attachments.Domain.TargetSystem domainObject);
+        
+        void MapTargetSystem(Framework.Attachments.Domain.TargetSystem domainObject, Framework.Attachments.Generated.DTO.TargetSystemEventRichDTO mappingObject);
+        
+        void MapTargetSystem(Framework.Attachments.Domain.TargetSystem domainObject, Framework.Attachments.Generated.DTO.TargetSystemEventSimpleDTO mappingObject);
+        
         Framework.Attachments.Domain.Attachment ToAttachment(Framework.Attachments.Generated.DTO.AttachmentIdentityDTO attachmentIdentityDTO);
-        
-        Framework.Attachments.Domain.Attachment ToAttachment(Framework.Attachments.Generated.DTO.AttachmentSimpleDTO attachmentSimpleDTO);
-        
-        Framework.Attachments.Domain.Attachment ToAttachment(Framework.Attachments.Generated.DTO.AttachmentRichDTO attachmentRichDTO);
         
         Framework.Attachments.Domain.Attachment ToAttachment(Framework.Attachments.Generated.DTO.AttachmentStrictDTO attachmentStrictDTO);
         
         Framework.Attachments.Domain.Attachment ToAttachment(Framework.Attachments.Generated.DTO.AttachmentStrictDTO attachmentStrictDTO, Framework.Attachments.Domain.AttachmentContainer master);
         
+        Framework.Attachments.Domain.Attachment ToAttachment(Framework.Attachments.Generated.DTO.AttachmentIntegrationRichDTO attachmentRichIntegrationDTO);
+        
+        Framework.Attachments.Domain.Attachment ToAttachment(Framework.Attachments.Generated.DTO.AttachmentIntegrationSimpleDTO attachmentSimpleIntegrationDTO);
+        
         Framework.Attachments.Domain.AttachmentContainer ToAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerIdentityDTO attachmentContainerIdentityDTO);
-        
-        Framework.Attachments.Domain.AttachmentContainer ToAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerSimpleDTO attachmentContainerSimpleDTO);
-        
-        Framework.Attachments.Domain.AttachmentContainer ToAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerRichDTO attachmentContainerRichDTO);
-        
-        Framework.Attachments.Domain.AttachmentContainer ToAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerRichDTO attachmentContainerRichDTO, bool allowCreate);
         
         Framework.Attachments.Domain.AttachmentContainer ToAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerStrictDTO attachmentContainerStrictDTO);
         
         Framework.Attachments.Domain.AttachmentContainer ToAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerStrictDTO attachmentContainerStrictDTO, bool allowCreate);
         
-        Framework.Attachments.Domain.AttachmentContainerReference ToAttachmentContainerReference(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceRichDTO attachmentContainerReferenceRichDTO);
+        Framework.Attachments.Domain.AttachmentContainer ToAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationRichDTO attachmentContainerRichIntegrationDTO);
+        
+        Framework.Attachments.Domain.AttachmentContainer ToAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationRichDTO attachmentContainerRichIntegrationDTO, bool allowCreate);
+        
+        Framework.Attachments.Domain.AttachmentContainer ToAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationSimpleDTO attachmentContainerSimpleIntegrationDTO);
         
         Framework.Attachments.Domain.AttachmentContainerReference ToAttachmentContainerReference(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceStrictDTO attachmentContainerReferenceStrictDTO);
         
+        Framework.Attachments.Domain.AttachmentContainerReference ToAttachmentContainerReference(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceIntegrationRichDTO attachmentContainerReferenceRichIntegrationDTO);
+        
         Framework.Attachments.Domain.AttachmentTag ToAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagIdentityDTO attachmentTagIdentityDTO);
-        
-        Framework.Attachments.Domain.AttachmentTag ToAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagSimpleDTO attachmentTagSimpleDTO);
-        
-        Framework.Attachments.Domain.AttachmentTag ToAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagRichDTO attachmentTagRichDTO);
         
         Framework.Attachments.Domain.AttachmentTag ToAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagStrictDTO attachmentTagStrictDTO);
         
         Framework.Attachments.Domain.AttachmentTag ToAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagStrictDTO attachmentTagStrictDTO, Framework.Attachments.Domain.Attachment master);
         
+        Framework.Attachments.Domain.AttachmentTag ToAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagIntegrationRichDTO attachmentTagRichIntegrationDTO);
+        
+        Framework.Attachments.Domain.AttachmentTag ToAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagIntegrationSimpleDTO attachmentTagSimpleIntegrationDTO);
+        
         Framework.Attachments.Domain.DomainType ToDomainType(Framework.Attachments.Generated.DTO.DomainTypeIdentityDTO domainTypeIdentityDTO);
-        
-        Framework.Attachments.Domain.DomainType ToDomainType(Framework.Attachments.Generated.DTO.DomainTypeSimpleDTO domainTypeSimpleDTO);
-        
-        Framework.Attachments.Domain.DomainType ToDomainType(Framework.Attachments.Generated.DTO.DomainTypeRichDTO domainTypeRichDTO);
         
         Framework.Attachments.Domain.DomainType ToDomainType(Framework.Attachments.Generated.DTO.DomainTypeStrictDTO domainTypeStrictDTO);
         
+        Framework.Attachments.Domain.DomainType ToDomainType(Framework.Attachments.Generated.DTO.DomainTypeIntegrationRichDTO domainTypeRichIntegrationDTO);
+        
+        Framework.Attachments.Domain.DomainType ToDomainType(Framework.Attachments.Generated.DTO.DomainTypeIntegrationSimpleDTO domainTypeSimpleIntegrationDTO);
+        
         Framework.Attachments.Domain.TargetSystem ToTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemIdentityDTO targetSystemIdentityDTO);
-        
-        Framework.Attachments.Domain.TargetSystem ToTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemSimpleDTO targetSystemSimpleDTO);
-        
-        Framework.Attachments.Domain.TargetSystem ToTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemRichDTO targetSystemRichDTO);
-        
-        Framework.Attachments.Domain.TargetSystem ToTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemRichDTO targetSystemRichDTO, bool allowCreate);
         
         Framework.Attachments.Domain.TargetSystem ToTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemStrictDTO targetSystemStrictDTO);
         
         Framework.Attachments.Domain.TargetSystem ToTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemStrictDTO targetSystemStrictDTO, bool allowCreate);
+        
+        Framework.Attachments.Domain.TargetSystem ToTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemIntegrationRichDTO targetSystemRichIntegrationDTO);
+        
+        Framework.Attachments.Domain.TargetSystem ToTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemIntegrationRichDTO targetSystemRichIntegrationDTO, bool allowCreate);
+        
+        Framework.Attachments.Domain.TargetSystem ToTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemIntegrationSimpleDTO targetSystemSimpleIntegrationDTO);
     }
     
-    public abstract partial class AttachmentsServerPrimitiveDTOMappingServiceBase : Framework.DomainDriven.DTOMappingService<Framework.Attachments.BLL.IAttachmentsBLLContext, Framework.Attachments.Domain.PersistentDomainObjectBase, Framework.Attachments.Domain.AuditPersistentDomainObjectBase, System.Guid, long>, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService
+    public abstract partial class AttachmentsServerPrimitiveDTOMappingServiceBase : Framework.DomainDriven.DTOMappingService<Framework.Attachments.BLL.IAttachmentsBLLContext, Framework.Attachments.Domain.PersistentDomainObjectBase, Framework.Attachments.Domain.AuditPersistentDomainObjectBase, System.Guid, Framework.Core.Ignore>, Framework.Attachments.Generated.DTO.IAttachmentsDTOMappingService
     {
         
         protected AttachmentsServerPrimitiveDTOMappingServiceBase(Framework.Attachments.BLL.IAttachmentsBLLContext context) : 
@@ -3575,19 +7245,9 @@ namespace Framework.Attachments.Generated.DTO
             mappingObject.Name = domainObject.Name;
         }
         
-        public virtual void MapAttachment(Framework.Attachments.Generated.DTO.AttachmentVisualDTO mappingObject, Framework.Attachments.Domain.Attachment domainObject)
-        {
-            domainObject.Name = mappingObject.Name;
-        }
-        
         public virtual void MapAttachment(Framework.Attachments.Domain.Attachment domainObject, Framework.Attachments.Generated.DTO.AttachmentSimpleDTO mappingObject)
         {
             mappingObject.Name = domainObject.Name;
-        }
-        
-        public virtual void MapAttachment(Framework.Attachments.Generated.DTO.AttachmentSimpleDTO mappingObject, Framework.Attachments.Domain.Attachment domainObject)
-        {
-            domainObject.Name = mappingObject.Name;
         }
         
         public virtual void MapAttachment(Framework.Attachments.Domain.Attachment domainObject, Framework.Attachments.Generated.DTO.AttachmentFullDTO mappingObject)
@@ -3602,23 +7262,10 @@ namespace Framework.Attachments.Generated.DTO
             }
         }
         
-        public virtual void MapAttachment(Framework.Attachments.Generated.DTO.AttachmentFullDTO mappingObject, Framework.Attachments.Domain.Attachment domainObject)
-        {
-        }
-        
         public virtual void MapAttachment(Framework.Attachments.Domain.Attachment domainObject, Framework.Attachments.Generated.DTO.AttachmentRichDTO mappingObject)
         {
             mappingObject.Content = domainObject.Content;
             mappingObject.Tags = Framework.Attachments.Generated.DTO.LambdaHelper.ToRichDTOList(domainObject.Tags, this);
-        }
-        
-        public virtual void MapAttachment(Framework.Attachments.Generated.DTO.AttachmentRichDTO mappingObject, Framework.Attachments.Domain.Attachment domainObject)
-        {
-            domainObject.Content = mappingObject.Content;
-            if (!object.ReferenceEquals(mappingObject.Tags, null))
-            {
-                this.GetCollectionMappingService<Framework.Attachments.Generated.DTO.AttachmentTagRichDTO, Framework.Attachments.Domain.AttachmentTag>(detailDTO => this.ToAttachmentTag(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<Framework.Attachments.Domain.Attachment, Framework.Attachments.Domain.AttachmentTag>(domainObject, detail)).Map(mappingObject.Tags, domainObject.Tags);
-            }
         }
         
         public virtual void MapAttachment(Framework.Attachments.Generated.DTO.AttachmentStrictDTO mappingObject, Framework.Attachments.Domain.Attachment domainObject)
@@ -3631,14 +7278,88 @@ namespace Framework.Attachments.Generated.DTO
             }
         }
         
+        public virtual void MapAttachment(Framework.Attachments.Domain.Attachment domainObject, Framework.Attachments.Generated.DTO.AttachmentIntegrationRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            if (!object.ReferenceEquals(domainObject.Container, null))
+            {
+                mappingObject.Container = Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleIntegrationDTO(domainObject.Container, this);
+            }
+            else
+            {
+                mappingObject.Container = null;
+            }
+            mappingObject.Content = domainObject.Content;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
+            mappingObject.Tags = Framework.Attachments.Generated.DTO.LambdaHelper.ToRichIntegrationDTOList(domainObject.Tags, this);
+        }
+        
+        public virtual void MapAttachment(Framework.Attachments.Generated.DTO.AttachmentIntegrationRichDTO mappingObject, Framework.Attachments.Domain.Attachment domainObject)
+        {
+            domainObject.Content = mappingObject.Content;
+            domainObject.Name = mappingObject.Name;
+            if (!object.ReferenceEquals(mappingObject.Tags, null))
+            {
+                this.GetCollectionMappingService<Framework.Attachments.Generated.DTO.AttachmentTagIntegrationRichDTO, Framework.Attachments.Domain.AttachmentTag>(detailDTO => this.ToAttachmentTag(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<Framework.Attachments.Domain.Attachment, Framework.Attachments.Domain.AttachmentTag>(domainObject, detail)).Map(mappingObject.Tags, domainObject.Tags);
+            }
+        }
+        
+        public virtual void MapAttachment(Framework.Attachments.Domain.Attachment domainObject, Framework.Attachments.Generated.DTO.AttachmentIntegrationSimpleDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
+        }
+        
+        public virtual void MapAttachment(Framework.Attachments.Generated.DTO.AttachmentIntegrationSimpleDTO mappingObject, Framework.Attachments.Domain.Attachment domainObject)
+        {
+            domainObject.Name = mappingObject.Name;
+        }
+        
+        public virtual void MapAttachment(Framework.Attachments.Domain.Attachment domainObject, Framework.Attachments.Generated.DTO.AttachmentEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            if (!object.ReferenceEquals(domainObject.Container, null))
+            {
+                mappingObject.Container = Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Container, this);
+            }
+            else
+            {
+                mappingObject.Container = null;
+            }
+            mappingObject.Content = domainObject.Content;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
+            mappingObject.Tags = Framework.Attachments.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.Tags, this);
+        }
+        
+        public virtual void MapAttachment(Framework.Attachments.Domain.Attachment domainObject, Framework.Attachments.Generated.DTO.AttachmentEventSimpleDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
+        }
+        
         public virtual void MapAttachmentContainer(Framework.Attachments.Domain.AttachmentContainer domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerSimpleDTO mappingObject)
         {
             mappingObject.ObjectId = domainObject.ObjectId;
-        }
-        
-        public virtual void MapAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerSimpleDTO mappingObject, Framework.Attachments.Domain.AttachmentContainer domainObject)
-        {
-            domainObject.ObjectId = mappingObject.ObjectId;
         }
         
         public virtual void MapAttachmentContainer(Framework.Attachments.Domain.AttachmentContainer domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerFullDTO mappingObject)
@@ -3653,29 +7374,9 @@ namespace Framework.Attachments.Generated.DTO
             }
         }
         
-        public virtual void MapAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerFullDTO mappingObject, Framework.Attachments.Domain.AttachmentContainer domainObject)
-        {
-            if (!object.Equals(mappingObject.DomainType, default(Framework.Attachments.Generated.DTO.DomainTypeSimpleDTO)))
-            {
-                domainObject.DomainType = this.ToDomainType(mappingObject.DomainType);
-            }
-            else
-            {
-                domainObject.DomainType = null;
-            }
-        }
-        
         public virtual void MapAttachmentContainer(Framework.Attachments.Domain.AttachmentContainer domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerRichDTO mappingObject)
         {
             mappingObject.Attachments = Framework.Attachments.Generated.DTO.LambdaHelper.ToRichDTOList(domainObject.Attachments, this);
-        }
-        
-        public virtual void MapAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerRichDTO mappingObject, Framework.Attachments.Domain.AttachmentContainer domainObject)
-        {
-            if (!object.ReferenceEquals(mappingObject.Attachments, null))
-            {
-                this.GetCollectionMappingService<Framework.Attachments.Generated.DTO.AttachmentRichDTO, Framework.Attachments.Domain.Attachment>(detailDTO => this.ToAttachment(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<Framework.Attachments.Domain.AttachmentContainer, Framework.Attachments.Domain.Attachment>(domainObject, detail)).Map(mappingObject.Attachments, domainObject.Attachments);
-            }
         }
         
         public virtual void MapAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerStrictDTO mappingObject, Framework.Attachments.Domain.AttachmentContainer domainObject)
@@ -3695,14 +7396,93 @@ namespace Framework.Attachments.Generated.DTO
             domainObject.ObjectId = mappingObject.ObjectId;
         }
         
-        public virtual void MapAttachmentContainerReference(Framework.Attachments.Domain.AttachmentContainerReference domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerReferenceSimpleDTO mappingObject)
+        public virtual void MapAttachmentContainer(Framework.Attachments.Domain.AttachmentContainer domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationRichDTO mappingObject)
         {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.Attachments = Framework.Attachments.Generated.DTO.LambdaHelper.ToRichIntegrationDTOList(domainObject.Attachments, this);
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            if (!object.ReferenceEquals(domainObject.DomainType, null))
+            {
+                mappingObject.DomainType = Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleIntegrationDTO(domainObject.DomainType, this);
+            }
+            else
+            {
+                mappingObject.DomainType = null;
+            }
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
             mappingObject.ObjectId = domainObject.ObjectId;
         }
         
-        public virtual void MapAttachmentContainerReference(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceSimpleDTO mappingObject, Framework.Attachments.Domain.AttachmentContainerReference domainObject)
+        public virtual void MapAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationRichDTO mappingObject, Framework.Attachments.Domain.AttachmentContainer domainObject)
+        {
+            if (!object.ReferenceEquals(mappingObject.Attachments, null))
+            {
+                this.GetCollectionMappingService<Framework.Attachments.Generated.DTO.AttachmentIntegrationRichDTO, Framework.Attachments.Domain.Attachment>(detailDTO => this.ToAttachment(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<Framework.Attachments.Domain.AttachmentContainer, Framework.Attachments.Domain.Attachment>(domainObject, detail)).Map(mappingObject.Attachments, domainObject.Attachments);
+            }
+            if (!object.Equals(mappingObject.DomainType, default(Framework.Attachments.Generated.DTO.DomainTypeIntegrationSimpleDTO)))
+            {
+                domainObject.DomainType = this.ToDomainType(mappingObject.DomainType);
+            }
+            else
+            {
+                domainObject.DomainType = null;
+            }
+            domainObject.ObjectId = mappingObject.ObjectId;
+        }
+        
+        public virtual void MapAttachmentContainer(Framework.Attachments.Domain.AttachmentContainer domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationSimpleDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.ObjectId = domainObject.ObjectId;
+        }
+        
+        public virtual void MapAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationSimpleDTO mappingObject, Framework.Attachments.Domain.AttachmentContainer domainObject)
         {
             domainObject.ObjectId = mappingObject.ObjectId;
+        }
+        
+        public virtual void MapAttachmentContainer(Framework.Attachments.Domain.AttachmentContainer domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.Attachments = Framework.Attachments.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.Attachments, this);
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            if (!object.ReferenceEquals(domainObject.DomainType, null))
+            {
+                mappingObject.DomainType = Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.DomainType, this);
+            }
+            else
+            {
+                mappingObject.DomainType = null;
+            }
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.ObjectId = domainObject.ObjectId;
+        }
+        
+        public virtual void MapAttachmentContainer(Framework.Attachments.Domain.AttachmentContainer domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerEventSimpleDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.ObjectId = domainObject.ObjectId;
+        }
+        
+        public virtual void MapAttachmentContainerReference(Framework.Attachments.Domain.AttachmentContainerReference domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerReferenceSimpleDTO mappingObject)
+        {
+            mappingObject.ObjectId = domainObject.ObjectId;
         }
         
         public virtual void MapAttachmentContainerReference(Framework.Attachments.Domain.AttachmentContainerReference domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerReferenceFullDTO mappingObject)
@@ -3717,23 +7497,7 @@ namespace Framework.Attachments.Generated.DTO
             }
         }
         
-        public virtual void MapAttachmentContainerReference(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceFullDTO mappingObject, Framework.Attachments.Domain.AttachmentContainerReference domainObject)
-        {
-            if (!object.Equals(mappingObject.DomainType, default(Framework.Attachments.Generated.DTO.DomainTypeSimpleDTO)))
-            {
-                domainObject.DomainType = this.ToDomainType(mappingObject.DomainType);
-            }
-            else
-            {
-                domainObject.DomainType = null;
-            }
-        }
-        
         public virtual void MapAttachmentContainerReference(Framework.Attachments.Domain.AttachmentContainerReference domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerReferenceRichDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapAttachmentContainerReference(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceRichDTO mappingObject, Framework.Attachments.Domain.AttachmentContainerReference domainObject)
         {
         }
         
@@ -3750,26 +7514,69 @@ namespace Framework.Attachments.Generated.DTO
             domainObject.ObjectId = mappingObject.ObjectId;
         }
         
+        public virtual void MapAttachmentContainerReference(Framework.Attachments.Domain.AttachmentContainerReference domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerReferenceIntegrationRichDTO mappingObject)
+        {
+            if (!object.ReferenceEquals(domainObject.DomainType, null))
+            {
+                mappingObject.DomainType = Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleIntegrationDTO(domainObject.DomainType, this);
+            }
+            else
+            {
+                mappingObject.DomainType = null;
+            }
+            mappingObject.ObjectId = domainObject.ObjectId;
+        }
+        
+        public virtual void MapAttachmentContainerReference(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceIntegrationRichDTO mappingObject, Framework.Attachments.Domain.AttachmentContainerReference domainObject)
+        {
+            if (!object.Equals(mappingObject.DomainType, default(Framework.Attachments.Generated.DTO.DomainTypeIntegrationSimpleDTO)))
+            {
+                domainObject.DomainType = this.ToDomainType(mappingObject.DomainType);
+            }
+            else
+            {
+                domainObject.DomainType = null;
+            }
+            domainObject.ObjectId = mappingObject.ObjectId;
+        }
+        
+        public virtual void MapAttachmentContainerReference(Framework.Attachments.Domain.AttachmentContainerReference domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerReferenceIntegrationSimpleDTO mappingObject)
+        {
+            mappingObject.ObjectId = domainObject.ObjectId;
+        }
+        
+        public virtual void MapAttachmentContainerReference(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceIntegrationSimpleDTO mappingObject, Framework.Attachments.Domain.AttachmentContainerReference domainObject)
+        {
+            domainObject.ObjectId = mappingObject.ObjectId;
+        }
+        
+        public virtual void MapAttachmentContainerReference(Framework.Attachments.Domain.AttachmentContainerReference domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerReferenceEventRichDTO mappingObject)
+        {
+            if (!object.ReferenceEquals(domainObject.DomainType, null))
+            {
+                mappingObject.DomainType = Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.DomainType, this);
+            }
+            else
+            {
+                mappingObject.DomainType = null;
+            }
+            mappingObject.ObjectId = domainObject.ObjectId;
+        }
+        
+        public virtual void MapAttachmentContainerReference(Framework.Attachments.Domain.AttachmentContainerReference domainObject, Framework.Attachments.Generated.DTO.AttachmentContainerReferenceEventSimpleDTO mappingObject)
+        {
+            mappingObject.ObjectId = domainObject.ObjectId;
+        }
+        
         public virtual void MapAttachmentTag(Framework.Attachments.Domain.AttachmentTag domainObject, Framework.Attachments.Generated.DTO.AttachmentTagVisualDTO mappingObject)
         {
             mappingObject.Name = domainObject.Name;
-        }
-        
-        public virtual void MapAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagVisualDTO mappingObject, Framework.Attachments.Domain.AttachmentTag domainObject)
-        {
-            domainObject.Name = mappingObject.Name;
         }
         
         public virtual void MapAttachmentTag(Framework.Attachments.Domain.AttachmentTag domainObject, Framework.Attachments.Generated.DTO.AttachmentTagSimpleDTO mappingObject)
         {
             mappingObject.Name = domainObject.Name;
             mappingObject.Value = domainObject.Value;
-        }
-        
-        public virtual void MapAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagSimpleDTO mappingObject, Framework.Attachments.Domain.AttachmentTag domainObject)
-        {
-            domainObject.Name = mappingObject.Name;
-            domainObject.Value = mappingObject.Value;
         }
         
         public virtual void MapAttachmentTag(Framework.Attachments.Domain.AttachmentTag domainObject, Framework.Attachments.Generated.DTO.AttachmentTagFullDTO mappingObject)
@@ -3784,15 +7591,7 @@ namespace Framework.Attachments.Generated.DTO
             }
         }
         
-        public virtual void MapAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagFullDTO mappingObject, Framework.Attachments.Domain.AttachmentTag domainObject)
-        {
-        }
-        
         public virtual void MapAttachmentTag(Framework.Attachments.Domain.AttachmentTag domainObject, Framework.Attachments.Generated.DTO.AttachmentTagRichDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagRichDTO mappingObject, Framework.Attachments.Domain.AttachmentTag domainObject)
         {
         }
         
@@ -3800,6 +7599,82 @@ namespace Framework.Attachments.Generated.DTO
         {
             domainObject.Name = mappingObject.Name;
             domainObject.Value = mappingObject.Value;
+        }
+        
+        public virtual void MapAttachmentTag(Framework.Attachments.Domain.AttachmentTag domainObject, Framework.Attachments.Generated.DTO.AttachmentTagIntegrationRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            if (!object.ReferenceEquals(domainObject.Attachment, null))
+            {
+                mappingObject.Attachment = Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleIntegrationDTO(domainObject.Attachment, this);
+            }
+            else
+            {
+                mappingObject.Attachment = null;
+            }
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
+            mappingObject.Value = domainObject.Value;
+        }
+        
+        public virtual void MapAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagIntegrationRichDTO mappingObject, Framework.Attachments.Domain.AttachmentTag domainObject)
+        {
+            domainObject.Name = mappingObject.Name;
+            domainObject.Value = mappingObject.Value;
+        }
+        
+        public virtual void MapAttachmentTag(Framework.Attachments.Domain.AttachmentTag domainObject, Framework.Attachments.Generated.DTO.AttachmentTagIntegrationSimpleDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
+            mappingObject.Value = domainObject.Value;
+        }
+        
+        public virtual void MapAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagIntegrationSimpleDTO mappingObject, Framework.Attachments.Domain.AttachmentTag domainObject)
+        {
+            domainObject.Name = mappingObject.Name;
+            domainObject.Value = mappingObject.Value;
+        }
+        
+        public virtual void MapAttachmentTag(Framework.Attachments.Domain.AttachmentTag domainObject, Framework.Attachments.Generated.DTO.AttachmentTagEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            if (!object.ReferenceEquals(domainObject.Attachment, null))
+            {
+                mappingObject.Attachment = Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Attachment, this);
+            }
+            else
+            {
+                mappingObject.Attachment = null;
+            }
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
+            mappingObject.Value = domainObject.Value;
+        }
+        
+        public virtual void MapAttachmentTag(Framework.Attachments.Domain.AttachmentTag domainObject, Framework.Attachments.Generated.DTO.AttachmentTagEventSimpleDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
+            mappingObject.Value = domainObject.Value;
         }
         
         public virtual void MapAuditPersistentDomainObjectBase(Framework.Attachments.Domain.AuditPersistentDomainObjectBase domainObject, Framework.Attachments.Generated.DTO.BaseAuditPersistentDTO mappingObject)
@@ -3820,20 +7695,12 @@ namespace Framework.Attachments.Generated.DTO
             mappingObject.Name = domainObject.Name;
         }
         
-        public virtual void MapDomainType(Framework.Attachments.Generated.DTO.DomainTypeVisualDTO mappingObject, Framework.Attachments.Domain.DomainType domainObject)
-        {
-        }
-        
         public virtual void MapDomainType(Framework.Attachments.Domain.DomainType domainObject, Framework.Attachments.Generated.DTO.DomainTypeSimpleDTO mappingObject)
         {
             mappingObject.FullTypeName = domainObject.FullTypeName;
             mappingObject.HasSecurityAttachment = domainObject.HasSecurityAttachment;
             mappingObject.Name = domainObject.Name;
             mappingObject.NameSpace = domainObject.NameSpace;
-        }
-        
-        public virtual void MapDomainType(Framework.Attachments.Generated.DTO.DomainTypeSimpleDTO mappingObject, Framework.Attachments.Domain.DomainType domainObject)
-        {
         }
         
         public virtual void MapDomainType(Framework.Attachments.Domain.DomainType domainObject, Framework.Attachments.Generated.DTO.DomainTypeFullDTO mappingObject)
@@ -3848,20 +7715,92 @@ namespace Framework.Attachments.Generated.DTO
             }
         }
         
-        public virtual void MapDomainType(Framework.Attachments.Generated.DTO.DomainTypeFullDTO mappingObject, Framework.Attachments.Domain.DomainType domainObject)
-        {
-        }
-        
         public virtual void MapDomainType(Framework.Attachments.Domain.DomainType domainObject, Framework.Attachments.Generated.DTO.DomainTypeRichDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapDomainType(Framework.Attachments.Generated.DTO.DomainTypeRichDTO mappingObject, Framework.Attachments.Domain.DomainType domainObject)
         {
         }
         
         public virtual void MapDomainType(Framework.Attachments.Generated.DTO.DomainTypeStrictDTO mappingObject, Framework.Attachments.Domain.DomainType domainObject)
         {
+        }
+        
+        public virtual void MapDomainType(Framework.Attachments.Domain.DomainType domainObject, Framework.Attachments.Generated.DTO.DomainTypeIntegrationRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.FullTypeName = domainObject.FullTypeName;
+            mappingObject.HasSecurityAttachment = domainObject.HasSecurityAttachment;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
+            mappingObject.NameSpace = domainObject.NameSpace;
+            if (!object.ReferenceEquals(domainObject.TargetSystem, null))
+            {
+                mappingObject.TargetSystem = Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleIntegrationDTO(domainObject.TargetSystem, this);
+            }
+            else
+            {
+                mappingObject.TargetSystem = null;
+            }
+        }
+        
+        public virtual void MapDomainType(Framework.Attachments.Generated.DTO.DomainTypeIntegrationRichDTO mappingObject, Framework.Attachments.Domain.DomainType domainObject)
+        {
+        }
+        
+        public virtual void MapDomainType(Framework.Attachments.Domain.DomainType domainObject, Framework.Attachments.Generated.DTO.DomainTypeIntegrationSimpleDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.FullTypeName = domainObject.FullTypeName;
+            mappingObject.HasSecurityAttachment = domainObject.HasSecurityAttachment;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
+            mappingObject.NameSpace = domainObject.NameSpace;
+        }
+        
+        public virtual void MapDomainType(Framework.Attachments.Generated.DTO.DomainTypeIntegrationSimpleDTO mappingObject, Framework.Attachments.Domain.DomainType domainObject)
+        {
+        }
+        
+        public virtual void MapDomainType(Framework.Attachments.Domain.DomainType domainObject, Framework.Attachments.Generated.DTO.DomainTypeEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.FullTypeName = domainObject.FullTypeName;
+            mappingObject.HasSecurityAttachment = domainObject.HasSecurityAttachment;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
+            mappingObject.NameSpace = domainObject.NameSpace;
+            if (!object.ReferenceEquals(domainObject.TargetSystem, null))
+            {
+                mappingObject.TargetSystem = Framework.Attachments.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.TargetSystem, this);
+            }
+            else
+            {
+                mappingObject.TargetSystem = null;
+            }
+        }
+        
+        public virtual void MapDomainType(Framework.Attachments.Domain.DomainType domainObject, Framework.Attachments.Generated.DTO.DomainTypeEventSimpleDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.FullTypeName = domainObject.FullTypeName;
+            mappingObject.HasSecurityAttachment = domainObject.HasSecurityAttachment;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
+            mappingObject.NameSpace = domainObject.NameSpace;
         }
         
         public virtual void MapPersistentDomainObjectBase(Framework.Attachments.Domain.PersistentDomainObjectBase domainObject, Framework.Attachments.Generated.DTO.BasePersistentDTO mappingObject)
@@ -3874,27 +7813,13 @@ namespace Framework.Attachments.Generated.DTO
             mappingObject.Name = domainObject.Name;
         }
         
-        public virtual void MapTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemVisualDTO mappingObject, Framework.Attachments.Domain.TargetSystem domainObject)
-        {
-            domainObject.Name = mappingObject.Name;
-        }
-        
         public virtual void MapTargetSystem(Framework.Attachments.Domain.TargetSystem domainObject, Framework.Attachments.Generated.DTO.TargetSystemSimpleDTO mappingObject)
         {
             mappingObject.IsMain = domainObject.IsMain;
             mappingObject.Name = domainObject.Name;
         }
         
-        public virtual void MapTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemSimpleDTO mappingObject, Framework.Attachments.Domain.TargetSystem domainObject)
-        {
-            domainObject.Name = mappingObject.Name;
-        }
-        
         public virtual void MapTargetSystem(Framework.Attachments.Domain.TargetSystem domainObject, Framework.Attachments.Generated.DTO.TargetSystemFullDTO mappingObject)
-        {
-        }
-        
-        public virtual void MapTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemFullDTO mappingObject, Framework.Attachments.Domain.TargetSystem domainObject)
         {
         }
         
@@ -3903,13 +7828,69 @@ namespace Framework.Attachments.Generated.DTO
             mappingObject.DomainTypes = Framework.Attachments.Generated.DTO.LambdaHelper.ToRichDTOList(domainObject.DomainTypes, this);
         }
         
-        public virtual void MapTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemRichDTO mappingObject, Framework.Attachments.Domain.TargetSystem domainObject)
-        {
-        }
-        
         public virtual void MapTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemStrictDTO mappingObject, Framework.Attachments.Domain.TargetSystem domainObject)
         {
             domainObject.Name = mappingObject.Name;
+        }
+        
+        public virtual void MapTargetSystem(Framework.Attachments.Domain.TargetSystem domainObject, Framework.Attachments.Generated.DTO.TargetSystemIntegrationRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.DomainTypes = Framework.Attachments.Generated.DTO.LambdaHelper.ToRichIntegrationDTOList(domainObject.DomainTypes, this);
+            mappingObject.Id = domainObject.Id;
+            mappingObject.IsMain = domainObject.IsMain;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
+        }
+        
+        public virtual void MapTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemIntegrationRichDTO mappingObject, Framework.Attachments.Domain.TargetSystem domainObject)
+        {
+            domainObject.Name = mappingObject.Name;
+        }
+        
+        public virtual void MapTargetSystem(Framework.Attachments.Domain.TargetSystem domainObject, Framework.Attachments.Generated.DTO.TargetSystemIntegrationSimpleDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.IsMain = domainObject.IsMain;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
+        }
+        
+        public virtual void MapTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemIntegrationSimpleDTO mappingObject, Framework.Attachments.Domain.TargetSystem domainObject)
+        {
+            domainObject.Name = mappingObject.Name;
+        }
+        
+        public virtual void MapTargetSystem(Framework.Attachments.Domain.TargetSystem domainObject, Framework.Attachments.Generated.DTO.TargetSystemEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.DomainTypes = Framework.Attachments.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.DomainTypes, this);
+            mappingObject.Id = domainObject.Id;
+            mappingObject.IsMain = domainObject.IsMain;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
+        }
+        
+        public virtual void MapTargetSystem(Framework.Attachments.Domain.TargetSystem domainObject, Framework.Attachments.Generated.DTO.TargetSystemEventSimpleDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.IsMain = domainObject.IsMain;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
         }
         
         protected virtual void MapToDomainObject<TMappingObject, TDomainObject>(TMappingObject mappingObject, TDomainObject domainObject)
@@ -3924,21 +7905,6 @@ namespace Framework.Attachments.Generated.DTO
             return this.GetById<Framework.Attachments.Domain.Attachment>(attachmentIdentityDTO.Id);
         }
         
-        public virtual Framework.Attachments.Domain.Attachment ToAttachment(Framework.Attachments.Generated.DTO.AttachmentSimpleDTO attachmentSimpleDTO)
-        {
-            return this.GetById<Framework.Attachments.Domain.Attachment>(attachmentSimpleDTO.Id);
-        }
-        
-        public virtual Framework.Attachments.Domain.Attachment ToAttachment(Framework.Attachments.Generated.DTO.AttachmentRichDTO attachmentRichDTO)
-        {
-            return this.ToDomainObject<Framework.Attachments.Generated.DTO.AttachmentRichDTO, Framework.Attachments.Domain.Attachment>(attachmentRichDTO);
-        }
-        
-        public virtual Framework.Attachments.Domain.Attachment ToAttachment(Framework.Attachments.Generated.DTO.AttachmentRichDTO attachmentRichDTO, Framework.Attachments.Domain.AttachmentContainer attachmentContainer)
-        {
-            return this.ToDomainObject(attachmentRichDTO, () => new Framework.Attachments.Domain.Attachment(attachmentContainer));
-        }
-        
         public virtual Framework.Attachments.Domain.Attachment ToAttachment(Framework.Attachments.Generated.DTO.AttachmentStrictDTO attachmentStrictDTO)
         {
             return this.ToDomainObject<Framework.Attachments.Generated.DTO.AttachmentStrictDTO, Framework.Attachments.Domain.Attachment>(attachmentStrictDTO);
@@ -3949,31 +7915,24 @@ namespace Framework.Attachments.Generated.DTO
             return this.ToDomainObject(attachmentStrictDTO, () => new Framework.Attachments.Domain.Attachment(attachmentContainer));
         }
         
+        public virtual Framework.Attachments.Domain.Attachment ToAttachment(Framework.Attachments.Generated.DTO.AttachmentIntegrationRichDTO attachmentRichIntegrationDTO)
+        {
+            return this.ToDomainObject<Framework.Attachments.Generated.DTO.AttachmentIntegrationRichDTO, Framework.Attachments.Domain.Attachment>(attachmentRichIntegrationDTO);
+        }
+        
+        public virtual Framework.Attachments.Domain.Attachment ToAttachment(Framework.Attachments.Generated.DTO.AttachmentIntegrationRichDTO attachmentRichIntegrationDTO, Framework.Attachments.Domain.AttachmentContainer attachmentContainer)
+        {
+            return this.ToDomainObject(attachmentRichIntegrationDTO, () => new Framework.Attachments.Domain.Attachment(attachmentContainer));
+        }
+        
+        public virtual Framework.Attachments.Domain.Attachment ToAttachment(Framework.Attachments.Generated.DTO.AttachmentIntegrationSimpleDTO attachmentSimpleIntegrationDTO)
+        {
+            return this.GetById<Framework.Attachments.Domain.Attachment>(attachmentSimpleIntegrationDTO.Id);
+        }
+        
         public virtual Framework.Attachments.Domain.AttachmentContainer ToAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerIdentityDTO attachmentContainerIdentityDTO)
         {
             return this.GetById<Framework.Attachments.Domain.AttachmentContainer>(attachmentContainerIdentityDTO.Id);
-        }
-        
-        public virtual Framework.Attachments.Domain.AttachmentContainer ToAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerSimpleDTO attachmentContainerSimpleDTO)
-        {
-            return this.GetById<Framework.Attachments.Domain.AttachmentContainer>(attachmentContainerSimpleDTO.Id);
-        }
-        
-        public virtual Framework.Attachments.Domain.AttachmentContainer ToAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerRichDTO attachmentContainerRichDTO)
-        {
-            return this.ToDomainObject<Framework.Attachments.Generated.DTO.AttachmentContainerRichDTO, Framework.Attachments.Domain.AttachmentContainer>(attachmentContainerRichDTO);
-        }
-        
-        public virtual Framework.Attachments.Domain.AttachmentContainer ToAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerRichDTO attachmentContainerRichDTO, bool allowCreate)
-        {
-            if (allowCreate)
-            {
-                return this.ToDomainObject(attachmentContainerRichDTO, () => new Framework.Attachments.Domain.AttachmentContainer());
-            }
-            else
-            {
-                return this.ToAttachmentContainer(attachmentContainerRichDTO);
-            }
         }
         
         public virtual Framework.Attachments.Domain.AttachmentContainer ToAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerStrictDTO attachmentContainerStrictDTO)
@@ -3993,9 +7952,26 @@ namespace Framework.Attachments.Generated.DTO
             }
         }
         
-        public virtual Framework.Attachments.Domain.AttachmentContainerReference ToAttachmentContainerReference(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceRichDTO attachmentContainerReferenceRichDTO)
+        public virtual Framework.Attachments.Domain.AttachmentContainer ToAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationRichDTO attachmentContainerRichIntegrationDTO)
         {
-            return this.ToDomainObjectBase<Framework.Attachments.Generated.DTO.AttachmentContainerReferenceRichDTO, Framework.Attachments.Domain.AttachmentContainerReference>(attachmentContainerReferenceRichDTO);
+            return this.ToDomainObject<Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationRichDTO, Framework.Attachments.Domain.AttachmentContainer>(attachmentContainerRichIntegrationDTO);
+        }
+        
+        public virtual Framework.Attachments.Domain.AttachmentContainer ToAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationRichDTO attachmentContainerRichIntegrationDTO, bool allowCreate)
+        {
+            if (allowCreate)
+            {
+                return this.ToDomainObject(attachmentContainerRichIntegrationDTO, () => new Framework.Attachments.Domain.AttachmentContainer());
+            }
+            else
+            {
+                return this.ToAttachmentContainer(attachmentContainerRichIntegrationDTO);
+            }
+        }
+        
+        public virtual Framework.Attachments.Domain.AttachmentContainer ToAttachmentContainer(Framework.Attachments.Generated.DTO.AttachmentContainerIntegrationSimpleDTO attachmentContainerSimpleIntegrationDTO)
+        {
+            return this.GetById<Framework.Attachments.Domain.AttachmentContainer>(attachmentContainerSimpleIntegrationDTO.Id);
         }
         
         public virtual Framework.Attachments.Domain.AttachmentContainerReference ToAttachmentContainerReference(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceStrictDTO attachmentContainerReferenceStrictDTO)
@@ -4003,24 +7979,14 @@ namespace Framework.Attachments.Generated.DTO
             return this.ToDomainObjectBase<Framework.Attachments.Generated.DTO.AttachmentContainerReferenceStrictDTO, Framework.Attachments.Domain.AttachmentContainerReference>(attachmentContainerReferenceStrictDTO);
         }
         
+        public virtual Framework.Attachments.Domain.AttachmentContainerReference ToAttachmentContainerReference(Framework.Attachments.Generated.DTO.AttachmentContainerReferenceIntegrationRichDTO attachmentContainerReferenceRichIntegrationDTO)
+        {
+            return this.ToDomainObjectBase<Framework.Attachments.Generated.DTO.AttachmentContainerReferenceIntegrationRichDTO, Framework.Attachments.Domain.AttachmentContainerReference>(attachmentContainerReferenceRichIntegrationDTO);
+        }
+        
         public virtual Framework.Attachments.Domain.AttachmentTag ToAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagIdentityDTO attachmentTagIdentityDTO)
         {
             return this.GetById<Framework.Attachments.Domain.AttachmentTag>(attachmentTagIdentityDTO.Id);
-        }
-        
-        public virtual Framework.Attachments.Domain.AttachmentTag ToAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagSimpleDTO attachmentTagSimpleDTO)
-        {
-            return this.GetById<Framework.Attachments.Domain.AttachmentTag>(attachmentTagSimpleDTO.Id);
-        }
-        
-        public virtual Framework.Attachments.Domain.AttachmentTag ToAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagRichDTO attachmentTagRichDTO)
-        {
-            return this.ToDomainObject<Framework.Attachments.Generated.DTO.AttachmentTagRichDTO, Framework.Attachments.Domain.AttachmentTag>(attachmentTagRichDTO);
-        }
-        
-        public virtual Framework.Attachments.Domain.AttachmentTag ToAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagRichDTO attachmentTagRichDTO, Framework.Attachments.Domain.Attachment attachment)
-        {
-            return this.ToDomainObject(attachmentTagRichDTO, () => new Framework.Attachments.Domain.AttachmentTag(attachment));
         }
         
         public virtual Framework.Attachments.Domain.AttachmentTag ToAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagStrictDTO attachmentTagStrictDTO)
@@ -4031,6 +7997,21 @@ namespace Framework.Attachments.Generated.DTO
         public virtual Framework.Attachments.Domain.AttachmentTag ToAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagStrictDTO attachmentTagStrictDTO, Framework.Attachments.Domain.Attachment attachment)
         {
             return this.ToDomainObject(attachmentTagStrictDTO, () => new Framework.Attachments.Domain.AttachmentTag(attachment));
+        }
+        
+        public virtual Framework.Attachments.Domain.AttachmentTag ToAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagIntegrationRichDTO attachmentTagRichIntegrationDTO)
+        {
+            return this.ToDomainObject<Framework.Attachments.Generated.DTO.AttachmentTagIntegrationRichDTO, Framework.Attachments.Domain.AttachmentTag>(attachmentTagRichIntegrationDTO);
+        }
+        
+        public virtual Framework.Attachments.Domain.AttachmentTag ToAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagIntegrationRichDTO attachmentTagRichIntegrationDTO, Framework.Attachments.Domain.Attachment attachment)
+        {
+            return this.ToDomainObject(attachmentTagRichIntegrationDTO, () => new Framework.Attachments.Domain.AttachmentTag(attachment));
+        }
+        
+        public virtual Framework.Attachments.Domain.AttachmentTag ToAttachmentTag(Framework.Attachments.Generated.DTO.AttachmentTagIntegrationSimpleDTO attachmentTagSimpleIntegrationDTO)
+        {
+            return this.GetById<Framework.Attachments.Domain.AttachmentTag>(attachmentTagSimpleIntegrationDTO.Id);
         }
         
         protected virtual TDomainObject ToDomainObject<TMappingObject, TDomainObject>(TMappingObject mappingObject)
@@ -4065,46 +8046,24 @@ namespace Framework.Attachments.Generated.DTO
             return this.GetById<Framework.Attachments.Domain.DomainType>(domainTypeIdentityDTO.Id);
         }
         
-        public virtual Framework.Attachments.Domain.DomainType ToDomainType(Framework.Attachments.Generated.DTO.DomainTypeSimpleDTO domainTypeSimpleDTO)
-        {
-            return this.GetById<Framework.Attachments.Domain.DomainType>(domainTypeSimpleDTO.Id);
-        }
-        
-        public virtual Framework.Attachments.Domain.DomainType ToDomainType(Framework.Attachments.Generated.DTO.DomainTypeRichDTO domainTypeRichDTO)
-        {
-            return this.ToDomainObject<Framework.Attachments.Generated.DTO.DomainTypeRichDTO, Framework.Attachments.Domain.DomainType>(domainTypeRichDTO);
-        }
-        
         public virtual Framework.Attachments.Domain.DomainType ToDomainType(Framework.Attachments.Generated.DTO.DomainTypeStrictDTO domainTypeStrictDTO)
         {
             return this.ToDomainObject<Framework.Attachments.Generated.DTO.DomainTypeStrictDTO, Framework.Attachments.Domain.DomainType>(domainTypeStrictDTO);
         }
         
+        public virtual Framework.Attachments.Domain.DomainType ToDomainType(Framework.Attachments.Generated.DTO.DomainTypeIntegrationRichDTO domainTypeRichIntegrationDTO)
+        {
+            return this.ToDomainObject<Framework.Attachments.Generated.DTO.DomainTypeIntegrationRichDTO, Framework.Attachments.Domain.DomainType>(domainTypeRichIntegrationDTO);
+        }
+        
+        public virtual Framework.Attachments.Domain.DomainType ToDomainType(Framework.Attachments.Generated.DTO.DomainTypeIntegrationSimpleDTO domainTypeSimpleIntegrationDTO)
+        {
+            return this.GetById<Framework.Attachments.Domain.DomainType>(domainTypeSimpleIntegrationDTO.Id);
+        }
+        
         public virtual Framework.Attachments.Domain.TargetSystem ToTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemIdentityDTO targetSystemIdentityDTO)
         {
             return this.GetById<Framework.Attachments.Domain.TargetSystem>(targetSystemIdentityDTO.Id);
-        }
-        
-        public virtual Framework.Attachments.Domain.TargetSystem ToTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemSimpleDTO targetSystemSimpleDTO)
-        {
-            return this.GetById<Framework.Attachments.Domain.TargetSystem>(targetSystemSimpleDTO.Id);
-        }
-        
-        public virtual Framework.Attachments.Domain.TargetSystem ToTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemRichDTO targetSystemRichDTO)
-        {
-            return this.ToDomainObject<Framework.Attachments.Generated.DTO.TargetSystemRichDTO, Framework.Attachments.Domain.TargetSystem>(targetSystemRichDTO);
-        }
-        
-        public virtual Framework.Attachments.Domain.TargetSystem ToTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemRichDTO targetSystemRichDTO, bool allowCreate)
-        {
-            if (allowCreate)
-            {
-                return this.ToDomainObject(targetSystemRichDTO, () => new Framework.Attachments.Domain.TargetSystem());
-            }
-            else
-            {
-                return this.ToTargetSystem(targetSystemRichDTO);
-            }
         }
         
         public virtual Framework.Attachments.Domain.TargetSystem ToTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemStrictDTO targetSystemStrictDTO)
@@ -4122,6 +8081,28 @@ namespace Framework.Attachments.Generated.DTO
             {
                 return this.ToTargetSystem(targetSystemStrictDTO);
             }
+        }
+        
+        public virtual Framework.Attachments.Domain.TargetSystem ToTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemIntegrationRichDTO targetSystemRichIntegrationDTO)
+        {
+            return this.ToDomainObject<Framework.Attachments.Generated.DTO.TargetSystemIntegrationRichDTO, Framework.Attachments.Domain.TargetSystem>(targetSystemRichIntegrationDTO);
+        }
+        
+        public virtual Framework.Attachments.Domain.TargetSystem ToTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemIntegrationRichDTO targetSystemRichIntegrationDTO, bool allowCreate)
+        {
+            if (allowCreate)
+            {
+                return this.ToDomainObject(targetSystemRichIntegrationDTO, () => new Framework.Attachments.Domain.TargetSystem());
+            }
+            else
+            {
+                return this.ToTargetSystem(targetSystemRichIntegrationDTO);
+            }
+        }
+        
+        public virtual Framework.Attachments.Domain.TargetSystem ToTargetSystem(Framework.Attachments.Generated.DTO.TargetSystemIntegrationSimpleDTO targetSystemSimpleIntegrationDTO)
+        {
+            return this.GetById<Framework.Attachments.Domain.TargetSystem>(targetSystemSimpleIntegrationDTO.Id);
         }
     }
     

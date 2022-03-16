@@ -17,7 +17,7 @@ namespace Framework.Attachments.TestGenerate
             IEnumerable<string> auditMigrationScriptFolderPaths = null,
             UserCredential credentials = null)
         {
-            var generator = new DBGenerator(this.Environment.MappingSettings);
+            var generator = new AttachmentsDBGenerator(this.Environment.MappingSettings);
             var result = generator.Generate(
                 serverName,
                 userAuthenticationService,
@@ -32,18 +32,17 @@ namespace Framework.Attachments.TestGenerate
         }
 
         public string GenerateDB(
-            string serverName,
-            DatabaseName databaseName,
-            AuditDatabaseName auditDatabaseName,
-            IUserAuthenticationService userAuthenticationService,
-            DatabaseScriptGeneratorMode generatorMode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
-            DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnTargetDatabase,
-            IEnumerable<string> migrationScriptFolderPaths = null,
-            IEnumerable<string> auditMigrationScriptFolderPaths = null,
-            bool preserveSchemaDatabase = false,
-            UserCredential credentials = null)
+                string serverName,
+                DatabaseName databaseName,
+                IUserAuthenticationService userAuthenticationService,
+                DatabaseScriptGeneratorMode generatorMode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
+                DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnTargetDatabase,
+                IEnumerable<string> migrationScriptFolderPaths = null,
+                IEnumerable<string> auditMigrationScriptFolderPaths = null,
+                bool preserveSchemaDatabase = false,
+                UserCredential credentials = null)
         {
-            var generator = new DBGenerator(this.Environment.GetMappingSettings(databaseName, auditDatabaseName));
+            var generator = new AttachmentsDBGenerator(this.Environment.GetMappingSettingsWithoutAudit(databaseName));
             var result = generator.Generate(
                 serverName,
                 userAuthenticationService,

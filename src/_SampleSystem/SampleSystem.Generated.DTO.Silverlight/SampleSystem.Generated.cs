@@ -31183,7 +31183,7 @@ namespace SampleSystem.Generated.DTO
     {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        AuthorizationImpersonate = 46,
+        AuthorizationImpersonate = 44,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         BusinessUnitEdit = 4,
@@ -31213,28 +31213,22 @@ namespace SampleSystem.Generated.DTO
         BusinessUnitView = 3,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        CompanyLegalEntityEdit = 42,
+        CompanyLegalEntityEdit = 40,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        CompanyLegalEntityOpenModule = 40,
+        CompanyLegalEntityOpenModule = 38,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        CompanyLegalEntityView = 41,
+        CompanyLegalEntityView = 39,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         CountryEdit = 37,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        CountryEditAttachment = 39,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         CountryOpenModule = 35,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         CountryView = 36,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        CountryViewAttachment = 38,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         CreateManagementUnitStart = 17,
@@ -31246,19 +31240,19 @@ namespace SampleSystem.Generated.DTO
         EmployeeEdit = 2,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        EmployeePersonalCellPhoneEdit = 48,
+        EmployeePersonalCellPhoneEdit = 46,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        EmployeePersonalCellPhoneView = 47,
+        EmployeePersonalCellPhoneView = 45,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        EmployeePositionEdit = 45,
+        EmployeePositionEdit = 43,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        EmployeePositionOpenModule = 43,
+        EmployeePositionOpenModule = 41,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        EmployeePositionView = 44,
+        EmployeePositionView = 42,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         EmployeeRoleDegreeOpenModule = 26,
@@ -31330,7 +31324,7 @@ namespace SampleSystem.Generated.DTO
         ManagementUnitView = 13,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        SystemIntegration = 49,
+        SystemIntegration = 47,
     }
     
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://schemas.datacontract.org/2004/07/SampleSystem.Domain")]

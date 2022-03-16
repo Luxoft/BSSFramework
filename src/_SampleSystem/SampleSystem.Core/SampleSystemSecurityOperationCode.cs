@@ -176,12 +176,6 @@ namespace SampleSystem
         [SecurityOperation("Country", false, "{EE81E81B-DBB6-47E7-8B13-9AC20CA1B730}", DomainType = "Country")]
         CountryEdit,
 
-        [SecurityOperation("Country", false, "{EE105B0E-E0D0-4E48-8EAB-CA1DB0ABBDB7}", DomainType = "Country")]
-        CountryViewAttachment,
-
-        [SecurityOperation("Country", false, "{29D353F0-1729-47EE-9563-26F39366D8E2}", DomainType = "Country")]
-        CountryEditAttachment,
-
         #endregion
 
         #region CompanyLegalEntity

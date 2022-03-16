@@ -15,6 +15,8 @@ namespace Framework.Attachments.BLL
             IConfigurationBLLContextContainer<Framework.Configuration.BLL.IConfigurationBLLContext>,
             ITypeResolverContainer<string>
     {
+        ITargetSystemService GetTargetSystemService(Type domainType, bool throwOnNotFound);
+
         ITargetSystemService GetPersistentTargetSystemService(TargetSystem targetSystem);
 
         IEnumerable<ITargetSystemService> GetPersistentTargetSystemServices();

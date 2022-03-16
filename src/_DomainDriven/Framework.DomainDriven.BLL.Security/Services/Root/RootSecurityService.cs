@@ -36,13 +36,6 @@ namespace Framework.DomainDriven.BLL.Security
             return this.GetDomainSecurityServiceBase<TDomainObject>().GetSecurityProvider(securityMode);
         }
 
-        /// <inheritdoc />
-        public virtual ISecurityProvider<TDomainObject> GetAttachmentSecurityProvider<TDomainObject>(BLLSecurityMode securityMode)
-            where TDomainObject : class, TPersistentDomainObjectBase
-        {
-            return this.GetSecurityProvider<TDomainObject>(securityMode);
-        }
-
         public virtual ISecurityProvider<TDomainObject> GetNotImplementedSecurityProvider<TDomainObject>(object data)
             where TDomainObject : class, TPersistentDomainObjectBase
         {

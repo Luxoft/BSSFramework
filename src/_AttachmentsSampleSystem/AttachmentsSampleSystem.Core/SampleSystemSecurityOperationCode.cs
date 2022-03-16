@@ -50,19 +50,15 @@ namespace AttachmentsSampleSystem
         [SecurityOperation("LocationEdit", false, "034C4E00-9C62-422B-98B8-B119C1991596", DomainType = "Location")]
         LocationEdit,
 
+        [SecurityOperation("Location", false, "{EE105B0E-E0D0-4E48-8EAB-CA1DB0ABBDB7}", DomainType = "Location")]
+        LocationViewAttachment,
+
+        [SecurityOperation("Location", false, "{29D353F0-1729-47EE-9563-26F39366D8E2}", DomainType = "Location")]
+        LocationEditAttachment,
+
         #endregion
 
         [SecurityOperation(SecurityOperationCode.SystemIntegration)]
         SystemIntegration,
-
-
-
-
-        [SecurityOperation("TestAttachments", false, "{939EC98C-131B-4E3E-B97C-9DF95620C758}", "Required operation for approve", adminHasAccess: false)]
-        ApproveAttachmentsOperation,
-
-        [AttachmentsSampleSystemApproveOperation(ApproveAttachmentsOperation)]
-        [SecurityOperation("TestAttachments", false, "{927E4AFC-8CC2-4EDA-B6EE-FE6B2C53D0BA}", "Operation testing Attachments")]
-        ApprovingAttachmentsOperation
     }
 }

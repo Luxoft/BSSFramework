@@ -20,6 +20,6 @@ public class AttachmentsSamplSystemBLLContextContainerModule : AttachmentsBLLCon
 
     protected override IEnumerable<ITargetSystemService> GetAttachmentsTargetSystemServices()
     {
-        yield return this.GetMainAttachmentsTargetSystemService();
+        yield return this.GetMainAttachmentsTargetSystemService(new CustomAttachmentSecurityService(this.BllContextContainer.MainContext));
     }
 }

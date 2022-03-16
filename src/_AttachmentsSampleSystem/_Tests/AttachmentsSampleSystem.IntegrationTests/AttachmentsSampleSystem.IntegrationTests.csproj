@@ -31,11 +31,5 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="NewApprovePermission.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="__Support\Scripts\AttachmentsSampleSystem\" />
   </ItemGroup>
 </Project>

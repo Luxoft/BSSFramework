@@ -9,6 +9,8 @@ using Framework.DomainDriven.BLL.Security;
 using Framework.Persistent;
 using Framework.SecuritySystem;
 
+using JetBrains.Annotations;
+
 namespace Framework.Attachments.BLL
 {
     public class AttachmentSecurityService<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<IAttachmentsBLLContext>, IAttachmentSecurityProviderSource
@@ -16,7 +18,6 @@ namespace Framework.Attachments.BLL
         where TBLLContext : class,
 
                             ITypeResolverContainer<string>,
-                            ISecurityServiceContainer<IRootSecurityService<TBLLContext, TPersistentDomainObjectBase>>,
                             IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
 
 
@@ -24,13 +25,14 @@ namespace Framework.Attachments.BLL
     {
         private readonly TBLLContext _targetSystemContext;
 
+        private readonly IRootSecurityService<TBLLContext, TPersistentDomainObjectBase> attachmentSecurityService;
 
-        public AttachmentSecurityService(IAttachmentsBLLContext context, TBLLContext targetSystemContext)
+        public AttachmentSecurityService(IAttachmentsBLLContext context, TBLLContext targetSystemContext,
+                                         [NotNull] IRootSecurityService<TBLLContext, TPersistentDomainObjectBase> attachmentSecurityService)
             : base(context)
         {
-            if (targetSystemContext == null) throw new ArgumentNullException(nameof(targetSystemContext));
-
-            this._targetSystemContext = targetSystemContext;
+            this._targetSystemContext = targetSystemContext ?? throw new ArgumentNullException(nameof(targetSystemContext));
+            this.attachmentSecurityService = attachmentSecurityService ?? throw new ArgumentNullException(nameof(attachmentSecurityService));
         }
 
 
@@ -40,22 +42,25 @@ namespace Framework.Attachments.BLL
             if (containerPath == null) throw new ArgumentNullException(nameof(containerPath));
             if (mainDomainType == null) throw new ArgumentNullException(nameof(mainDomainType));
 
-            return new GetAttachmentSecurityProviderProcessor<TDomainObject>(this._targetSystemContext, this.Context, containerPath, securityMode).Process(mainDomainType.Name);
+            return new GetAttachmentSecurityProviderProcessor<TDomainObject>(this._targetSystemContext, this.attachmentSecurityService, this.Context, containerPath, securityMode).Process(mainDomainType.Name);
         }
 
 
         private class GetAttachmentSecurityProviderProcessor<TDomainObject> : TypeResolverDomainObjectProcessor<TBLLContext, TPersistentDomainObjectBase, ISecurityProvider<TDomainObject>>
             where TDomainObject : PersistentDomainObjectBase
         {
+            private readonly IRootSecurityService<TBLLContext, TPersistentDomainObjectBase> attachmentSecurityService;
+
             private readonly IAttachmentsBLLContext _mainContext;
 
             private readonly Expression<Func<TDomainObject, AttachmentContainer>> _containerPath;
             private readonly BLLSecurityMode _securityMode;
 
 
-            public GetAttachmentSecurityProviderProcessor(TBLLContext context, IAttachmentsBLLContext mainContext, Expression<Func<TDomainObject, AttachmentContainer>> containerPath, BLLSecurityMode securityMode)
+            public GetAttachmentSecurityProviderProcessor(TBLLContext context, [NotNull] IRootSecurityService<TBLLContext, TPersistentDomainObjectBase> attachmentSecurityService, IAttachmentsBLLContext mainContext, Expression<Func<TDomainObject, AttachmentContainer>> containerPath, BLLSecurityMode securityMode)
                 : base(context)
             {
+                this.attachmentSecurityService = attachmentSecurityService ?? throw new ArgumentNullException(nameof(attachmentSecurityService));
                 this._mainContext = mainContext;
                 this._containerPath = containerPath ?? throw new ArgumentNullException(nameof(containerPath));
                 this._securityMode = securityMode;
@@ -64,7 +69,7 @@ namespace Framework.Attachments.BLL
 
             protected override ISecurityProvider<TDomainObject> Process<TMainDomainObject>()
             {
-                var targetSystemSecurityProvider = this.Context.SecurityService.GetAttachmentSecurityProvider<TMainDomainObject>(this._securityMode);
+                var targetSystemSecurityProvider = this.attachmentSecurityService.GetSecurityProvider<TMainDomainObject>(this._securityMode);
 
                 return new AttachmentSecurityProvider<TDomainObject, TMainDomainObject>(this._mainContext, targetSystemSecurityProvider, this.Context, this._containerPath);
             }

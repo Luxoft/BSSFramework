@@ -72,7 +72,7 @@ namespace AttachmentsSampleSystem.DbGenerate
                                                    credential);
 
                 this.GenerateAttachmentsDatabase(serverName,
-                                              new DatabaseName(mainDatabaseName, "Attachments"),
+                                              new DatabaseName(mainDatabaseName, "configuration"),
                                               this.userAuthenticationService,
                                               mode,
                                               false,

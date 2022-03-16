@@ -18,19 +18,23 @@ namespace Framework.Attachments.BLL
 {
     public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<IAttachmentsBLLContext>, ITargetSystemService<TPersistentDomainObjectBase>
 
-        where TBLLContext : class, ITypeResolverContainer<string>, ISecurityServiceContainer<IRootSecurityService<TBLLContext, TPersistentDomainObjectBase>>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
+        where TBLLContext : class, ITypeResolverContainer<string>, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>
         where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
     {
+        private readonly IRootSecurityService<TBLLContext, TPersistentDomainObjectBase> attachmentSecurityService;
+
         private readonly Lazy<bool> lazyHasAttachments;
 
         /// <summary>
         /// Создаёт экземпляр класса <see cref="TargetSystemService{TBLLContext, TPersistentDomainObjectBase}" />.
         /// </summary>
         /// <param name="context">Контекст конфигурации.</param>
-        public TargetSystemService(IAttachmentsBLLContext context, [NotNull] TBLLContext targetSystemContext, [NotNull] TargetSystem targetSystem)
+        public TargetSystemService(IAttachmentsBLLContext context, [NotNull] TBLLContext targetSystemContext, [NotNull] TargetSystem targetSystem, [NotNull] IRootSecurityService<TBLLContext, TPersistentDomainObjectBase> attachmentSecurityService)
             : base(context)
         {
             if (targetSystem == null) throw new ArgumentNullException(nameof(targetSystem));
+
+            this.attachmentSecurityService = attachmentSecurityService ?? throw new ArgumentNullException(nameof(attachmentSecurityService));
 
             this.TargetSystemContext = targetSystemContext ?? throw new ArgumentNullException(nameof(targetSystemContext));
 
@@ -129,7 +133,7 @@ namespace Framework.Attachments.BLL
             if (containerPath == null) throw new ArgumentNullException(nameof(containerPath));
             if (mainDomainType == null) throw new ArgumentNullException(nameof(mainDomainType));
 
-            return new AttachmentSecurityService<TBLLContext, TPersistentDomainObjectBase>(this.Context, this.TargetSystemContext)
+            return new AttachmentSecurityService<TBLLContext, TPersistentDomainObjectBase>(this.Context, this.TargetSystemContext, this.attachmentSecurityService)
                     .GetAttachmentSecurityProvider(containerPath, mainDomainType, securityMode);
         }
 

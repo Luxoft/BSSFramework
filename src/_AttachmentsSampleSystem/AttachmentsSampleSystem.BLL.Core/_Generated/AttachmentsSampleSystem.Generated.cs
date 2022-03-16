@@ -16,10 +16,6 @@ namespace AttachmentsSampleSystem.BLL
     public class AttachmentsSampleSystemSecurityOperation
     {
         
-        private static Framework.SecuritySystem.NonContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode> _approveAttachmentsOperation = new Framework.SecuritySystem.NonContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode>(AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode.ApproveAttachmentsOperation);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode> _approvingAttachmentsOperation = new Framework.SecuritySystem.NonContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode>(AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode.ApprovingAttachmentsOperation);
-        
         private static Framework.SecuritySystem.ContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode> _businessUnitEdit = new Framework.SecuritySystem.ContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode>(AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode.BusinessUnitEdit, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
         
         private static Framework.SecuritySystem.ContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode> _businessUnitView = new Framework.SecuritySystem.ContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode>(AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode.BusinessUnitView, Framework.HierarchicalExpand.HierarchicalExpandType.All);
@@ -36,25 +32,13 @@ namespace AttachmentsSampleSystem.BLL
         
         private static Framework.SecuritySystem.NonContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode> _locationEdit = new Framework.SecuritySystem.NonContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode>(AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode.LocationEdit);
         
+        private static Framework.SecuritySystem.NonContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode> _locationEditAttachment = new Framework.SecuritySystem.NonContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode>(AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode.LocationEditAttachment);
+        
         private static Framework.SecuritySystem.NonContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode> _locationView = new Framework.SecuritySystem.NonContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode>(AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode.LocationView);
         
+        private static Framework.SecuritySystem.NonContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode> _locationViewAttachment = new Framework.SecuritySystem.NonContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode>(AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode.LocationViewAttachment);
+        
         private static Framework.SecuritySystem.NonContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode> _systemIntegration = new Framework.SecuritySystem.NonContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode>(AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode.SystemIntegration);
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode> ApproveAttachmentsOperation
-        {
-            get
-            {
-                return _approveAttachmentsOperation;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode> ApprovingAttachmentsOperation
-        {
-            get
-            {
-                return _approvingAttachmentsOperation;
-            }
-        }
         
         public static Framework.SecuritySystem.ContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode> BusinessUnitEdit
         {
@@ -120,11 +104,27 @@ namespace AttachmentsSampleSystem.BLL
             }
         }
         
+        public static Framework.SecuritySystem.NonContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode> LocationEditAttachment
+        {
+            get
+            {
+                return _locationEditAttachment;
+            }
+        }
+        
         public static Framework.SecuritySystem.NonContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode> LocationView
         {
             get
             {
                 return _locationView;
+            }
+        }
+        
+        public static Framework.SecuritySystem.NonContextSecurityOperation<AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode> LocationViewAttachment
+        {
+            get
+            {
+                return _locationViewAttachment;
             }
         }
         
@@ -174,17 +174,17 @@ namespace AttachmentsSampleSystem.BLL
             {
                 return AttachmentsSampleSystem.BLL.AttachmentsSampleSystemSecurityOperation.LocationEdit;
             }
+            else if ((code == AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode.LocationViewAttachment))
+            {
+                return AttachmentsSampleSystem.BLL.AttachmentsSampleSystemSecurityOperation.LocationViewAttachment;
+            }
+            else if ((code == AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode.LocationEditAttachment))
+            {
+                return AttachmentsSampleSystem.BLL.AttachmentsSampleSystemSecurityOperation.LocationEditAttachment;
+            }
             else if ((code == AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode.SystemIntegration))
             {
                 return AttachmentsSampleSystem.BLL.AttachmentsSampleSystemSecurityOperation.SystemIntegration;
-            }
-            else if ((code == AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode.ApproveAttachmentsOperation))
-            {
-                return AttachmentsSampleSystem.BLL.AttachmentsSampleSystemSecurityOperation.ApproveAttachmentsOperation;
-            }
-            else if ((code == AttachmentsSampleSystem.AttachmentsSampleSystemSecurityOperationCode.ApprovingAttachmentsOperation))
-            {
-                return AttachmentsSampleSystem.BLL.AttachmentsSampleSystemSecurityOperation.ApprovingAttachmentsOperation;
             }
             else
             {

@@ -107,11 +107,12 @@ public abstract class AttachmentsBLLContextContainerModule<TMainServiceEnvironme
     protected abstract IEnumerable<Framework.Attachments.BLL.ITargetSystemService> GetAttachmentsTargetSystemServices();
 
 
-    protected Framework.Attachments.BLL.ITargetSystemService GetMainAttachmentsTargetSystemService()
+    protected Framework.Attachments.BLL.ITargetSystemService GetMainAttachmentsTargetSystemService(IRootSecurityService<TBLLContext, TPersistentDomainObjectBase> customAttachmentSecurityService = null)
     {
         return new TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
             this.Attachments,
             this.BllContextContainer.MainContext,
-            this.Attachments.Logics.TargetSystem.GetObjectBy(ts => ts.IsMain, true));
+            this.Attachments.Logics.TargetSystem.GetObjectBy(ts => ts.IsMain, true),
+            customAttachmentSecurityService ?? this.BllContextContainer.MainContext.SecurityService);
     }
 }

@@ -1,1 +1,0 @@
-﻿exec sp_msforeachtable @command1="print '?'", @command2="ALTER TABLE ? NOCHECK CONSTRAINT all"

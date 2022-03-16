@@ -73,6 +73,7 @@ public abstract class AttachmentsBLLContextContainerModule<TMainServiceEnvironme
                                       LazyInterfaceImplementHelper.CreateProxy<IAttachmentsSecurityService>(() => new AttachmentsSecurityService(this.Attachments)),
                                       LazyInterfaceImplementHelper.CreateProxy<IAttachmentsBLLFactoryContainer>(() => new AttachmentsBLLFactoryContainer(this.Attachments)),
                                       this.BllContextContainer.Authorization,
+                                      this.BllContextContainer.Configuration,
                                       this.GetAttachmentsTargetSystemServices());
     }
 

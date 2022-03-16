@@ -8347,8 +8347,6 @@ namespace Framework.Configuration.Generated.DTO
         
         private string _fullTypeName;
         
-        private bool _hasSecurityAttachment;
-        
         private string _name;
         
         private string _nameSpace;
@@ -8378,19 +8376,6 @@ namespace Framework.Configuration.Generated.DTO
             set
             {
                 this._fullTypeName = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool HasSecurityAttachment
-        {
-            get
-            {
-                return this._hasSecurityAttachment;
-            }
-            set
-            {
-                this._hasSecurityAttachment = value;
             }
         }
         
@@ -21162,7 +21147,6 @@ namespace Framework.Configuration.Generated.DTO
         public virtual void MapDomainType(Framework.Configuration.Domain.DomainType domainObject, Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO mappingObject)
         {
             mappingObject.FullTypeName = domainObject.FullTypeName;
-            mappingObject.HasSecurityAttachment = domainObject.HasSecurityAttachment;
             mappingObject.Name = domainObject.Name;
             mappingObject.NameSpace = domainObject.NameSpace;
         }

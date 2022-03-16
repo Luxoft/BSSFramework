@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "AttachmentsSampleSystem.DbGenerate": {
+      "commandName": "Project",
+      "commandLineArgs": "-s \".\" -d \"AttachmentsSampleSystem\""
+    }
+  }
+}

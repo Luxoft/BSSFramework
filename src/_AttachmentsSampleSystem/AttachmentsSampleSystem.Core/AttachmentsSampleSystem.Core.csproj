@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework.App.Core\Framework.App.Core.csproj" />
+    <ProjectReference Include="..\..\_Attachments\Framework.Attachments.Core\Framework.Attachments.Core.csproj" />
+  </ItemGroup>
+</Project>

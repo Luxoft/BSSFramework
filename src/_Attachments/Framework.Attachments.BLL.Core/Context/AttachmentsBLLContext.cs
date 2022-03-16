@@ -5,6 +5,7 @@ using System.Linq;
 
 using Framework.Attachments.Domain;
 using Framework.Authorization.BLL;
+using Framework.Configuration.BLL;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
@@ -45,6 +46,7 @@ namespace Framework.Attachments.BLL
             IAttachmentsSecurityService securityService,
             IAttachmentsBLLFactoryContainer logics,
             IAuthorizationBLLContext authorizationBLLContext,
+            [NotNull] Framework.Configuration.BLL.IConfigurationBLLContext configurationBLLContext,
             IEnumerable<ITargetSystemService> targetSystemServices)
             : base(serviceProvider, dalFactory, operationListeners, sourceListeners, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService, dateTimeService)
         {
@@ -54,6 +56,7 @@ namespace Framework.Attachments.BLL
             this.Logics = logics ?? throw new ArgumentNullException(nameof(logics));
 
             this.Authorization = authorizationBLLContext ?? throw new ArgumentNullException(nameof(authorizationBLLContext));
+            this.Configuration = configurationBLLContext ?? throw new ArgumentNullException(nameof(configurationBLLContext));
 
             this.lazyTargetSystemServiceCache = LazyHelper.Create(() => targetSystemServices.ToDictionary(s => s.TargetSystem));
 
@@ -67,6 +70,8 @@ namespace Framework.Attachments.BLL
         public override IAttachmentsBLLFactoryContainer Logics { get; }
 
         public IAuthorizationBLLContext Authorization { get; }
+
+        public Framework.Configuration.BLL.IConfigurationBLLContext Configuration { get; }
 
         public ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory { get; }
 

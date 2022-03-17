@@ -16,11 +16,6 @@ namespace Framework.Configuration.ClientGenerate
                 return new[] { typeof(Domain.Reports.Report) }.Contains(domainType);
             }
 
-            if (identity == FileType.StrictDTO)
-            {
-                return new[] { typeof(Attachment) }.Contains(domainType);
-            }
-
             return false;
         }
     }

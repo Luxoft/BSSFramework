@@ -17,10 +17,6 @@ namespace Framework.Configuration.BLL
         public ConfigurationValidatorBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.Validation.ValidatorCompileCache cache) : 
                 base(context, cache)
         {
-            base.RegisterHandler<Framework.Configuration.Domain.Attachment>(this.GetAttachmentValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.AttachmentContainer>(this.GetAttachmentContainerValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.AttachmentContainerReference>(this.GetAttachmentContainerReferenceValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.AttachmentTag>(this.GetAttachmentTagValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.CodeFirstSubscription>(this.GetCodeFirstSubscriptionValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel>(this.GetCodeFirstSubscriptionRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.ControlSettings>(this.GetControlSettingsValidationResult);
@@ -75,26 +71,6 @@ namespace Framework.Configuration.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetAccessablePrincipalReportRightValidationResult(Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetAttachmentContainerReferenceValidationResult(Framework.Configuration.Domain.AttachmentContainerReference source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetAttachmentContainerValidationResult(Framework.Configuration.Domain.AttachmentContainer source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetAttachmentTagValidationResult(Framework.Configuration.Domain.AttachmentTag source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetAttachmentValidationResult(Framework.Configuration.Domain.Attachment source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

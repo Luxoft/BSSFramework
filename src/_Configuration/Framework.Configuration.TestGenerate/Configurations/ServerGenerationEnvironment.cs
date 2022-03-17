@@ -16,7 +16,6 @@ namespace Framework.Configuration.TestGenerate
 
         public readonly BLLGeneratorConfiguration BLL;
 
-        public readonly ServerDTOGeneratorConfiguration ServerDTO;
 
         public readonly AuditDTOGeneratorConfiguration AuditDTO;
 
@@ -27,6 +26,8 @@ namespace Framework.Configuration.TestGenerate
         public readonly DALGeneratorConfiguration DAL;
 
         public readonly AuditServiceGeneratorConfiguration AuditService;
+
+        public readonly ServerDTOGeneratorConfiguration ServerDTO;
 
         public ServerGenerationEnvironment()
             :this(new DatabaseName(typeof(PersistentDomainObjectBase).GetTargetSystemName()))

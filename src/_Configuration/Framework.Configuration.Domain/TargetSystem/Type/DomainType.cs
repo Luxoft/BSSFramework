@@ -24,8 +24,6 @@ namespace Framework.Configuration.Domain
 
         private readonly TargetSystem targetSystem;
 
-        private bool hasSecurityAttachment;
-
         private string nameSpace;
 
         protected DomainType()
@@ -78,16 +76,6 @@ namespace Framework.Configuration.Domain
         {
             get { return this.nameSpace.TrimNull(); }
             set { this.nameSpace = value.TrimNull(); }
-        }
-
-        /// <summary>
-        /// Признак того, что прикрепляемые аттачменты к типу являются секурными и требуют предварительного формирования ключа POST-запросом при отдаче аттачмента через GET-метод rest-фасада
-        /// </summary>
-        [CustomSerialization(CustomSerializationMode.ReadOnly)]
-        public virtual bool HasSecurityAttachment
-        {
-            get { return this.hasSecurityAttachment; }
-            internal protected set { this.hasSecurityAttachment = value; }
         }
 
         /// <summary>

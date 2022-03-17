@@ -86,82 +86,6 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.Attachment> GetAttachmentContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.Attachment>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.Attachment>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.Attachment>(fetchRootRule => fetchRootRule.SelectNested(attachment => attachment.Container));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.Attachment>(
-                    fetchRootRule => fetchRootRule.SelectNested(attachment => attachment.Container),
-                    fetchRootRule => fetchRootRule.SelectMany(attachment => attachment.Tags));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.AttachmentContainer> GetAttachmentContainerContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.AttachmentContainer>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.AttachmentContainer>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.AttachmentContainer>(fetchRootRule => fetchRootRule.SelectNested(attachmentContainer => attachmentContainer.DomainType));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.AttachmentContainer>(
-                    fetchRootRule => fetchRootRule.SelectMany(attachmentContainer => attachmentContainer.Attachments).SelectMany(attachment => attachment.Tags),
-                    fetchRootRule => fetchRootRule.SelectNested(attachmentContainer => attachmentContainer.DomainType));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.AttachmentTag> GetAttachmentTagContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.AttachmentTag>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.AttachmentTag>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.AttachmentTag>(fetchRootRule => fetchRootRule.SelectNested(attachmentTag => attachmentTag.Attachment));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.AttachmentTag>(fetchRootRule => fetchRootRule.SelectNested(attachmentTag => attachmentTag.Attachment));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
         protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.CodeFirstSubscription> GetCodeFirstSubscriptionContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
@@ -188,19 +112,7 @@ namespace Framework.Configuration.BLL
         
         protected override Framework.DomainDriven.IFetchContainer<TDomainObject> GetContainer<TDomainObject>(Framework.Transfering.ViewDTOType rule)
         {
-            if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Attachment)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetAttachmentContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.AttachmentContainer)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetAttachmentContainerContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.AttachmentTag)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetAttachmentTagContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.CodeFirstSubscription)))
+            if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.CodeFirstSubscription)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetCodeFirstSubscriptionContainer(rule)));
             }

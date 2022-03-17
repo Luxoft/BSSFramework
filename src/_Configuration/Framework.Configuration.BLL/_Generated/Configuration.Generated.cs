@@ -11,48 +11,6 @@ namespace Framework.Configuration.BLL
 {
     
     
-    public partial class AttachmentBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.Attachment, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IAttachmentBLL
-    {
-        
-		partial void Initialize();
-        
-        public AttachmentBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Attachment> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityProvider, specificationEvaluator)
-        {
-            this.Initialize();
-        }
-    }
-    
-    public partial class AttachmentBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.IAttachmentBLL, Framework.Configuration.BLL.AttachmentBLL, Framework.Configuration.Domain.Attachment, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.IAttachmentBLLFactory
-    {
-        
-        public AttachmentBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
-    public partial class AttachmentContainerBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.AttachmentContainer, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IAttachmentContainerBLL
-    {
-        
-		partial void Initialize();
-        
-        public AttachmentContainerBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.AttachmentContainer> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityProvider, specificationEvaluator)
-        {
-            this.Initialize();
-        }
-    }
-    
-    public partial class AttachmentContainerBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.IAttachmentContainerBLL, Framework.Configuration.BLL.AttachmentContainerBLL, Framework.Configuration.Domain.AttachmentContainer, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.IAttachmentContainerBLLFactory
-    {
-        
-        public AttachmentContainerBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
     public partial class CodeFirstSubscriptionBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.CodeFirstSubscription, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.ICodeFirstSubscriptionBLL
     {
         
@@ -392,10 +350,6 @@ namespace Framework.Configuration.BLL
     public partial class ConfigurationBLLFactoryContainer : Framework.DomainDriven.BLL.BLLContextContainer<Framework.Configuration.BLL.IConfigurationBLLContext>, Framework.Configuration.BLL.IConfigurationBLLFactoryContainer
     {
         
-        private Framework.Configuration.BLL.IAttachmentBLL attachmentBLL;
-        
-        private Framework.Configuration.BLL.IAttachmentContainerBLL attachmentContainerBLL;
-        
         private Framework.Configuration.BLL.ICodeFirstSubscriptionBLL codeFirstSubscriptionBLL;
         
         private Framework.Configuration.BLL.ConfigurationDefaultBLLFactory defaultBLLFactory;
@@ -435,46 +389,6 @@ namespace Framework.Configuration.BLL
         public ConfigurationBLLFactoryContainer(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
                 base(context)
         {
-        }
-        
-        public Framework.Configuration.BLL.IAttachmentBLL Attachment
-        {
-            get
-            {
-                if (object.ReferenceEquals(this.attachmentBLL, null))
-                {
-                    this.attachmentBLL = this.AttachmentFactory.Create();
-                }
-                return this.attachmentBLL;
-            }
-        }
-        
-        public Framework.Configuration.BLL.IAttachmentContainerBLL AttachmentContainer
-        {
-            get
-            {
-                if (object.ReferenceEquals(this.attachmentContainerBLL, null))
-                {
-                    this.attachmentContainerBLL = this.AttachmentContainerFactory.Create();
-                }
-                return this.attachmentContainerBLL;
-            }
-        }
-        
-        public Framework.Configuration.BLL.IAttachmentContainerBLLFactory AttachmentContainerFactory
-        {
-            get
-            {
-                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Framework.Configuration.BLL.IAttachmentContainerBLLFactory>(this.Context.ServiceProvider);
-            }
-        }
-        
-        public Framework.Configuration.BLL.IAttachmentBLLFactory AttachmentFactory
-        {
-            get
-            {
-                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Framework.Configuration.BLL.IAttachmentBLLFactory>(this.Context.ServiceProvider);
-            }
         }
         
         public Framework.Configuration.BLL.ICodeFirstSubscriptionBLL CodeFirstSubscription
@@ -823,8 +737,6 @@ namespace Framework.Configuration.BLL
         
         public static void RegisterBLLFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection)
         {
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IAttachmentBLLFactory, Framework.Configuration.BLL.AttachmentBLLFactory>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IAttachmentContainerBLLFactory, Framework.Configuration.BLL.AttachmentContainerBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ICodeFirstSubscriptionBLLFactory, Framework.Configuration.BLL.CodeFirstSubscriptionBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IDomainObjectEventBLLFactory, Framework.Configuration.BLL.DomainObjectEventBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IDomainObjectModificationBLLFactory, Framework.Configuration.BLL.DomainObjectModificationBLLFactory>(serviceCollection);
@@ -868,15 +780,7 @@ namespace Framework.Configuration.BLL
         
         public override Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>()
         {
-            if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Attachment)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.Attachment));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.AttachmentContainer)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.AttachmentContainer));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.CodeFirstSubscription)))
+            if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.CodeFirstSubscription)))
             {
                 return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.CodeFirstSubscription));
             }
@@ -948,15 +852,7 @@ namespace Framework.Configuration.BLL
         
         public override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider)
         {
-            if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Attachment)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.AttachmentFactory.Create(((Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Attachment>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.AttachmentContainer)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.AttachmentContainerFactory.Create(((Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.AttachmentContainer>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.CodeFirstSubscription)))
+            if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.CodeFirstSubscription)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.CodeFirstSubscriptionFactory.Create(((Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.CodeFirstSubscription>)(securityProvider)))));
             }
@@ -1028,15 +924,7 @@ namespace Framework.Configuration.BLL
         
         public override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(Framework.Configuration.ConfigurationSecurityOperationCode securityOperation)
         {
-            if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Attachment)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.AttachmentFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.AttachmentContainer)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.AttachmentContainerFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.CodeFirstSubscription)))
+            if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.CodeFirstSubscription)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.CodeFirstSubscriptionFactory.Create(securityOperation)));
             }
@@ -1108,15 +996,7 @@ namespace Framework.Configuration.BLL
         
         public override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(Framework.SecuritySystem.BLLSecurityMode bllSecurityMode)
         {
-            if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Attachment)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.AttachmentFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.AttachmentContainer)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.AttachmentContainerFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.CodeFirstSubscription)))
+            if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.CodeFirstSubscription)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.CodeFirstSubscriptionFactory.Create(bllSecurityMode)));
             }

@@ -83,8 +83,6 @@ namespace SampleSystem.ServiceEnvironment
 
         public override bool IsDebugMode => this.isDebugMode ?? base.IsDebugMode;
 
-
-
         protected override SampleSystemBllContextContainer CreateBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null)
         {
             return new SampleSystemBllContextContainer(

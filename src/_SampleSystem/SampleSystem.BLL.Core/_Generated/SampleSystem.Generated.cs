@@ -40,11 +40,7 @@ namespace SampleSystem.BLL
         
         private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _countryEdit = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.CountryEdit);
         
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _countryEditAttachment = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.CountryEditAttachment);
-        
         private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _countryView = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.CountryView);
-        
-        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _countryViewAttachment = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.CountryViewAttachment);
         
         private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _createManagementUnitStart = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.CreateManagementUnitStart, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
         
@@ -194,27 +190,11 @@ namespace SampleSystem.BLL
             }
         }
         
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> CountryEditAttachment
-        {
-            get
-            {
-                return _countryEditAttachment;
-            }
-        }
-        
         public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> CountryView
         {
             get
             {
                 return _countryView;
-            }
-        }
-        
-        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> CountryViewAttachment
-        {
-            get
-            {
-                return _countryViewAttachment;
             }
         }
         
@@ -551,14 +531,6 @@ namespace SampleSystem.BLL
             else if ((code == SampleSystem.SampleSystemSecurityOperationCode.CountryEdit))
             {
                 return SampleSystem.BLL.SampleSystemSecurityOperation.CountryEdit;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.CountryViewAttachment))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.CountryViewAttachment;
-            }
-            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.CountryEditAttachment))
-            {
-                return SampleSystem.BLL.SampleSystemSecurityOperation.CountryEditAttachment;
             }
             else if ((code == SampleSystem.SampleSystemSecurityOperationCode.CompanyLegalEntityView))
             {

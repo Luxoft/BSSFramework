@@ -14,16 +14,6 @@ namespace Framework.Configuration.WebApi
     public partial class ConfigSLJsonController
     {
         
-        protected virtual void RemoveAttachmentInternal(Framework.Configuration.Generated.DTO.AttachmentIdentityDTO attachmentIdent, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData, Framework.Configuration.BLL.IAttachmentBLL bll)
-        {
-            Framework.Configuration.Domain.Attachment domainObject = bll.GetById(attachmentIdent.Id, true);
-            bll.Remove(domainObject);
-        }
-    }
-    
-    public partial class ConfigSLJsonController
-    {
-        
         /// <summary>
         /// Check CodeFirstSubscription access
         /// </summary>

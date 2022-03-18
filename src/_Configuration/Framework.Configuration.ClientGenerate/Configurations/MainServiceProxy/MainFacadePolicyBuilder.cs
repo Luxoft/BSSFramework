@@ -15,8 +15,6 @@ namespace Framework.Configuration.ClientGenerate
             this.AddSequenceMethods();
             this.AddTargetSystemMethods();
 
-            this.AddUserActionMethods();
-
             this.AddAttachmentMethods();
             this.AddUnsortedMethods();
         }
@@ -81,18 +79,6 @@ namespace Framework.Configuration.ClientGenerate
             this.Add(facade => facade.SaveTargetSystem(default));
         }
 
-        private void AddUserActionMethods()
-        {
-            this.Add(facade => facade.GetFullUserActionsByIdents(default));
-
-            this.Add(facade => facade.GetFullUserActionObjects());
-
-            this.Add(facade => facade.GetFullUserActionObjectsByRootFilter(default));
-
-            this.Add(facade => facade.CreateUserAction(default));
-        }
-
-
         private void AddAttachmentMethods()
         {
             this.Add(facade => facade.GetSimpleDomainTypeByPath(default));
@@ -115,8 +101,7 @@ namespace Framework.Configuration.ClientGenerate
 
             this.Add(facade => facade.GetFullDomainTypes());
             this.Add(facade => facade.GetRichDomainType(default));
-
-            this.Add(facade => facade.GetFullUserActionObjectsByIdents(default));
+            
             this.Add(facade => facade.GetSimpleDomainTypes());
         }
     }

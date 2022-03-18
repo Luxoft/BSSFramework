@@ -305,48 +305,6 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class UserActionBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.UserAction, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IUserActionBLL
-    {
-        
-		partial void Initialize();
-        
-        public UserActionBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.UserAction> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityProvider, specificationEvaluator)
-        {
-            this.Initialize();
-        }
-    }
-    
-    public partial class UserActionBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.IUserActionBLL, Framework.Configuration.BLL.UserActionBLL, Framework.Configuration.Domain.UserAction, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.IUserActionBLLFactory
-    {
-        
-        public UserActionBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
-    public partial class UserActionObjectBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.UserActionObject, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IUserActionObjectBLL
-    {
-        
-		partial void Initialize();
-        
-        public UserActionObjectBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.UserActionObject> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityProvider, specificationEvaluator)
-        {
-            this.Initialize();
-        }
-    }
-    
-    public partial class UserActionObjectBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.IUserActionObjectBLL, Framework.Configuration.BLL.UserActionObjectBLL, Framework.Configuration.Domain.UserActionObject, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.IUserActionObjectBLLFactory
-    {
-        
-        public UserActionObjectBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
     public partial class ConfigurationBLLFactoryContainer : Framework.DomainDriven.BLL.BLLContextContainer<Framework.Configuration.BLL.IConfigurationBLLContext>, Framework.Configuration.BLL.IConfigurationBLLFactoryContainer
     {
         
@@ -381,10 +339,6 @@ namespace Framework.Configuration.BLL
         private Framework.Configuration.BLL.ISystemConstantBLL systemConstantBLL;
         
         private Framework.Configuration.BLL.ITargetSystemBLL targetSystemBLL;
-        
-        private Framework.Configuration.BLL.IUserActionBLL userActionBLL;
-        
-        private Framework.Configuration.BLL.IUserActionObjectBLL userActionObjectBLL;
         
         public ConfigurationBLLFactoryContainer(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
                 base(context)
@@ -695,46 +649,6 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        public Framework.Configuration.BLL.IUserActionBLL UserAction
-        {
-            get
-            {
-                if (object.ReferenceEquals(this.userActionBLL, null))
-                {
-                    this.userActionBLL = this.UserActionFactory.Create();
-                }
-                return this.userActionBLL;
-            }
-        }
-        
-        public Framework.Configuration.BLL.IUserActionBLLFactory UserActionFactory
-        {
-            get
-            {
-                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Framework.Configuration.BLL.IUserActionBLLFactory>(this.Context.ServiceProvider);
-            }
-        }
-        
-        public Framework.Configuration.BLL.IUserActionObjectBLL UserActionObject
-        {
-            get
-            {
-                if (object.ReferenceEquals(this.userActionObjectBLL, null))
-                {
-                    this.userActionObjectBLL = this.UserActionObjectFactory.Create();
-                }
-                return this.userActionObjectBLL;
-            }
-        }
-        
-        public Framework.Configuration.BLL.IUserActionObjectBLLFactory UserActionObjectFactory
-        {
-            get
-            {
-                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Framework.Configuration.BLL.IUserActionObjectBLLFactory>(this.Context.ServiceProvider);
-            }
-        }
-        
         public static void RegisterBLLFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection)
         {
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ICodeFirstSubscriptionBLLFactory, Framework.Configuration.BLL.CodeFirstSubscriptionBLLFactory>(serviceCollection);
@@ -751,8 +665,6 @@ namespace Framework.Configuration.BLL
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ISequenceBLLFactory, Framework.Configuration.BLL.SequenceBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ISystemConstantBLLFactory, Framework.Configuration.BLL.SystemConstantBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ITargetSystemBLLFactory, Framework.Configuration.BLL.TargetSystemBLLFactory>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IUserActionBLLFactory, Framework.Configuration.BLL.UserActionBLLFactory>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IUserActionObjectBLLFactory, Framework.Configuration.BLL.UserActionObjectBLLFactory>(serviceCollection);
         }
     }
     
@@ -836,14 +748,6 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TargetSystem));
             }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.UserAction)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.UserAction));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.UserActionObject)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.UserActionObject));
-            }
             else
             {
                 return new Framework.Configuration.BLL.DomainBLLBase<TDomainObject>(this.Context);
@@ -907,14 +811,6 @@ namespace Framework.Configuration.BLL
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.TargetSystem)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TargetSystemFactory.Create(((Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.TargetSystem>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.UserAction)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.UserActionFactory.Create(((Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.UserAction>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.UserActionObject)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.UserActionObjectFactory.Create(((Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.UserActionObject>)(securityProvider)))));
             }
             else
             {
@@ -980,14 +876,6 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TargetSystemFactory.Create(securityOperation)));
             }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.UserAction)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.UserActionFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.UserActionObject)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.UserActionObjectFactory.Create(securityOperation)));
-            }
             else
             {
                 return new Framework.Configuration.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context);
@@ -1051,14 +939,6 @@ namespace Framework.Configuration.BLL
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.TargetSystem)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TargetSystemFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.UserAction)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.UserActionFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.UserActionObject)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.UserActionObjectFactory.Create(bllSecurityMode)));
             }
             else
             {

@@ -32,13 +32,10 @@ namespace Framework.Configuration.BLL
             base.RegisterHandler<Framework.Configuration.Domain.ExceptionMessage>(this.GetExceptionMessageValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.ExceptionMessageRootFilterModel>(this.GetExceptionMessageRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.LogMessage>(this.GetLogMessageValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.Models.Create.UserActionCreateModel>(this.GetUserActionCreateModelValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.Models.Create.UserActionObjectModel>(this.GetUserActionObjectModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationModel>(this.GetReportGenerationModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationRequestModel>(this.GetReportGenerationRequestModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationValue>(this.GetReportGenerationValueValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Models.Custom.Reports.ReportParameterValue>(this.GetReportParameterValueValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel>(this.GetUserActionObjectRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.NamedLock>(this.GetNamedLockValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.QueueProcessingState>(this.GetQueueProcessingStateValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight>(this.GetAccessableBusinessRoleReportRightValidationResult);
@@ -56,8 +53,6 @@ namespace Framework.Configuration.BLL
             base.RegisterHandler<Framework.Configuration.Domain.SystemConstantRootFilterModel>(this.GetSystemConstantRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.TargetSystem>(this.GetTargetSystemValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.TargetSystemRootFilterModel>(this.GetTargetSystemRootFilterModelValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.UserAction>(this.GetUserActionValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.UserActionObject>(this.GetUserActionObjectValidationResult);
         }
         
         protected virtual Framework.Validation.ValidationResult GetAccessableBusinessRoleReportRightValidationResult(Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
@@ -236,31 +231,6 @@ namespace Framework.Configuration.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetTargetSystemValidationResult(Framework.Configuration.Domain.TargetSystem source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetUserActionCreateModelValidationResult(Framework.Configuration.Domain.Models.Create.UserActionCreateModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetUserActionObjectModelValidationResult(Framework.Configuration.Domain.Models.Create.UserActionObjectModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetUserActionObjectRootFilterModelValidationResult(Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetUserActionObjectValidationResult(Framework.Configuration.Domain.UserActionObject source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetUserActionValidationResult(Framework.Configuration.Domain.UserAction source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

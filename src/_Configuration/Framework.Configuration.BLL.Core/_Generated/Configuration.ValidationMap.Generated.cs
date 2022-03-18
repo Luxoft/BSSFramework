@@ -761,14 +761,6 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetLogMessageValidationMap()));
             }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.Models.Create.UserActionCreateModel)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetUserActionCreateModelValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.Models.Create.UserActionObjectModel)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetUserActionObjectModelValidationMap()));
-            }
             else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationModel)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetReportGenerationModelValidationMap()));
@@ -784,10 +776,6 @@ namespace Framework.Configuration.BLL
             else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.Models.Custom.Reports.ReportParameterValue)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetReportParameterValueValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetUserActionObjectRootFilterModelValidationMap()));
             }
             else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.NamedLock)))
             {
@@ -856,14 +844,6 @@ namespace Framework.Configuration.BLL
             else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.TargetSystemRootFilterModel)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTargetSystemRootFilterModelValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.UserAction)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetUserActionValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(Framework.Configuration.Domain.UserActionObject)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetUserActionObjectValidationMap()));
             }
             else
             {
@@ -1595,171 +1575,6 @@ namespace Framework.Configuration.BLL
         protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.TargetSystem> GetTargetSystemValidationMap()
         {
             return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.TargetSystem>(this.GetTargetSystemProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.UserAction, System.DateTime?>> GetUserAction_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.UserAction>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.UserAction, string>> GetUserAction_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.UserAction>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.UserAction, string>> GetUserAction_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.UserAction>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.UserAction, System.DateTime?>> GetUserAction_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.UserAction>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.UserAction, string>> GetUserAction_NameValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.UserAction>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.UserAction, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.UserActionObject>>> GetUserAction_ObjectIdentitiesValidators()
-        {
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Configuration.Domain.UserAction, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.UserActionObject>, Framework.Configuration.Domain.UserActionObject>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.UserAction, string>> GetUserAction_UserNameValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.UserAction>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Models.Create.UserActionCreateModel, string>> GetUserActionCreateModel_DomainTypeValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Models.Create.UserActionCreateModel>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Models.Create.UserActionCreateModel, string>> GetUserActionCreateModel_NameValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Models.Create.UserActionCreateModel>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Models.Create.UserActionCreateModel, System.Collections.Generic.IList<Framework.Configuration.Domain.Models.Create.UserActionObjectModel>>> GetUserActionCreateModel_ObjectIdentitiesValidators()
-        {
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Configuration.Domain.Models.Create.UserActionCreateModel, System.Collections.Generic.IList<Framework.Configuration.Domain.Models.Create.UserActionObjectModel>, Framework.Configuration.Domain.Models.Create.UserActionObjectModel>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.Models.Create.UserActionCreateModel>> GetUserActionCreateModelProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Models.Create.UserActionCreateModel> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Models.Create.UserActionCreateModel, string>(source => source.DomainType, currentClass, this.GetUserActionCreateModel_DomainTypeValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Models.Create.UserActionCreateModel, string>(source => source.Name, currentClass, this.GetUserActionCreateModel_NameValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Configuration.Domain.Models.Create.UserActionCreateModel, System.Collections.Generic.IList<Framework.Configuration.Domain.Models.Create.UserActionObjectModel>, Framework.Configuration.Domain.Models.Create.UserActionObjectModel>(source => source.ObjectIdentities, currentClass, this.GetUserActionCreateModel_ObjectIdentitiesValidators(), this.GetClassMap<Framework.Configuration.Domain.Models.Create.UserActionObjectModel>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Models.Create.UserActionCreateModel> GetUserActionCreateModelValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.Models.Create.UserActionCreateModel>(this.GetUserActionCreateModelProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.UserActionObject, System.DateTime?>> GetUserActionObject_CreateDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.UserActionObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.UserActionObject, string>> GetUserActionObject_CreatedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.UserActionObject>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.UserActionObject, string>> GetUserActionObject_ModifiedByValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.UserActionObject>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.UserActionObject, System.DateTime?>> GetUserActionObject_ModifyDateValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Configuration.Domain.UserActionObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.UserActionObject, string>> GetUserActionObject_NameValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.UserActionObject>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.UserActionObject, Framework.Configuration.Domain.UserAction>> GetUserActionObject_UserActionValidators()
-        {
-            yield return new Framework.Validation.RequiredValidator<Framework.Configuration.Domain.UserActionObject, Framework.Configuration.Domain.UserAction>(Framework.Restriction.RequiredMode.Default);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Models.Create.UserActionObjectModel, string>> GetUserActionObjectModel_NameValidators()
-        {
-            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Configuration.Domain.Models.Create.UserActionObjectModel>(this.AvailableValues.GetAvailableSize<string>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.Models.Create.UserActionObjectModel>> GetUserActionObjectModelProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Models.Create.UserActionObjectModel> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Models.Create.UserActionObjectModel, string>(source => source.Name, currentClass, this.GetUserActionObjectModel_NameValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Models.Create.UserActionObjectModel> GetUserActionObjectModelValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.Models.Create.UserActionObjectModel>(this.GetUserActionObjectModelProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.UserActionObject>> GetUserActionObjectProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.UserActionObject> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.UserActionObject, System.DateTime?>(source => source.CreateDate, currentClass, this.GetUserActionObject_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.UserActionObject, string>(source => source.CreatedBy, currentClass, this.GetUserActionObject_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.UserActionObject, string>(source => source.ModifiedBy, currentClass, this.GetUserActionObject_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.UserActionObject, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetUserActionObject_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.UserActionObject, string>(source => source.Name, currentClass, this.GetUserActionObject_NameValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.UserActionObject, Framework.Configuration.Domain.UserAction>(source => source.UserAction, currentClass, this.GetUserActionObject_UserActionValidators(), this.GetClassMap<Framework.Configuration.Domain.UserAction>(true));
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel, System.Collections.Generic.List<string>>> GetUserActionObjectRootFilterModel_ActionNamesValidators()
-        {
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel, System.Collections.Generic.List<string>, string>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel, System.Collections.Generic.List<string>>> GetUserActionObjectRootFilterModel_DomainTypeNamesValidators()
-        {
-            yield return new Framework.Validation.DeepCollectionValidator<Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel, System.Collections.Generic.List<string>, string>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel, Framework.Core.Period>> GetUserActionObjectRootFilterModel_PeriodValidators()
-        {
-            yield return Framework.Validation.RangePropertyValidatorHelper.Period.Create<Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel>(this.AvailableValues.GetAvailableRange<System.DateTime>());
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel>> GetUserActionObjectRootFilterModelProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel> currentClass)
-        {
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel, System.Collections.Generic.List<string>, string>(source => source.ActionNames, currentClass, this.GetUserActionObjectRootFilterModel_ActionNamesValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel, System.Collections.Generic.List<string>, string>(source => source.DomainTypeNames, currentClass, this.GetUserActionObjectRootFilterModel_DomainTypeNamesValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel, Framework.Core.Period>(source => source.Period, currentClass, this.GetUserActionObjectRootFilterModel_PeriodValidators(), this.GetClassMap<Framework.Core.Period>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel> GetUserActionObjectRootFilterModelValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel>(this.GetUserActionObjectRootFilterModelProperties);
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.UserActionObject> GetUserActionObjectValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.UserActionObject>(this.GetUserActionObjectProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Configuration.Domain.UserAction>> GetUserActionProperties(Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.UserAction> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.UserAction, System.DateTime?>(source => source.CreateDate, currentClass, this.GetUserAction_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.UserAction, string>(source => source.CreatedBy, currentClass, this.GetUserAction_CreatedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.UserAction, string>(source => source.ModifiedBy, currentClass, this.GetUserAction_ModifiedByValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.UserAction, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetUserAction_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.UserAction, string>(source => source.Name, currentClass, this.GetUserAction_NameValidators(), this.GetClassMap<string>(true));
-            yield return new Framework.Validation.CollectionPropertyValidationMap<Framework.Configuration.Domain.UserAction, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.UserActionObject>, Framework.Configuration.Domain.UserActionObject>(source => source.ObjectIdentities, currentClass, this.GetUserAction_ObjectIdentitiesValidators(), this.GetClassMap<Framework.Configuration.Domain.UserActionObject>(true));
-            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Configuration.Domain.UserAction, string>(source => source.UserName, currentClass, this.GetUserAction_UserNameValidators(), this.GetClassMap<string>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<Framework.Configuration.Domain.UserAction> GetUserActionValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<Framework.Configuration.Domain.UserAction>(this.GetUserActionProperties);
         }
     }
     

@@ -204,14 +204,6 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetTargetSystemContainer(rule)));
             }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.UserAction)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetUserActionContainer(rule)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.UserActionObject)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetUserActionObjectContainer(rule)));
-            }
             else
             {
                 throw new System.ArgumentOutOfRangeException("TDomainObject");
@@ -680,56 +672,6 @@ namespace Framework.Configuration.BLL
             else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
             {
                 return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.TargetSystem>(fetchRootRule => fetchRootRule.SelectMany(targetSystem => targetSystem.DomainTypes).SelectMany(domainType => domainType.EventOperations));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.UserAction> GetUserActionContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.UserAction>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.UserAction>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.UserAction>(fetchRootRule => fetchRootRule.SelectNested(userAction => userAction.DomainType));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.UserAction>(
-                    fetchRootRule => fetchRootRule.SelectNested(userAction => userAction.DomainType),
-                    fetchRootRule => fetchRootRule.SelectMany(userAction => userAction.ObjectIdentities).SelectNested(userActionObject => userActionObject.UserAction).SelectNested(userAction => userAction.DomainType));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.UserActionObject> GetUserActionObjectContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Configuration.Domain.UserActionObject>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.UserActionObject>(fetchRootRule => fetchRootRule.SelectNested(userActionObject => userActionObject.UserAction).SelectNested(userAction => userAction.DomainType));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.UserActionObject>(fetchRootRule => fetchRootRule.SelectNested(userActionObject => userActionObject.UserAction).SelectNested(userAction => userAction.DomainType));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Configuration.Domain.UserActionObject>(fetchRootRule => fetchRootRule.SelectNested(userActionObject => userActionObject.UserAction).SelectNested(userAction => userAction.DomainType));
             }
             else
             {

@@ -366,18 +366,6 @@ namespace Framework.Configuration.BLL
             {
                 return Framework.Configuration.ConfigurationSecurityOperationCode.TargetSystemEdit;
             }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(Framework.Configuration.Domain.UserAction) == domainType))
-            {
-                return Framework.Configuration.ConfigurationSecurityOperationCode.UserActionView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(Framework.Configuration.Domain.UserAction) == domainType))
-            {
-                return Framework.Configuration.ConfigurationSecurityOperationCode.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(Framework.Configuration.Domain.UserActionObject) == domainType))
-            {
-                return Framework.Configuration.ConfigurationSecurityOperationCode.Disabled;
-            }
             else
             {
                 return Framework.Configuration.ConfigurationSecurityOperationCode.Disabled;
@@ -527,8 +515,6 @@ namespace Framework.Configuration.BLL
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Sequence, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationSequenceSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.SystemConstant, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationSystemConstantSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.TargetSystem, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationTargetSystemSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.UserAction, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationUserActionSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.UserActionObject, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationUserActionObjectSecurityService>(serviceCollection);
         }
     }
     
@@ -625,24 +611,6 @@ namespace Framework.Configuration.BLL
     {
         
         public ConfigurationTargetSystemSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class ConfigurationUserActionSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.UserAction, System.Guid, Framework.Configuration.ConfigurationSecurityOperationCode>
-    {
-        
-        public ConfigurationUserActionSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class ConfigurationUserActionObjectSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.UserActionObject, System.Guid, Framework.Configuration.ConfigurationSecurityOperationCode>
-    {
-        
-        public ConfigurationUserActionObjectSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -790,26 +758,6 @@ namespace Framework.Configuration.BLL
         {
             get;
         }
-        
-        Framework.Configuration.BLL.IUserActionBLL UserAction
-        {
-            get;
-        }
-        
-        Framework.Configuration.BLL.IUserActionBLLFactory UserActionFactory
-        {
-            get;
-        }
-        
-        Framework.Configuration.BLL.IUserActionObjectBLL UserActionObject
-        {
-            get;
-        }
-        
-        Framework.Configuration.BLL.IUserActionObjectBLLFactory UserActionObjectFactory
-        {
-            get;
-        }
     }
     
     public partial interface ICodeFirstSubscriptionBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.CodeFirstSubscription, System.Guid>
@@ -923,26 +871,6 @@ namespace Framework.Configuration.BLL
     }
     
     public partial interface ITargetSystemBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ITargetSystemBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.TargetSystem>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ITargetSystemBLL, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ITargetSystemBLL, Framework.SecuritySystem.SecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ITargetSystemBLL, Framework.SecuritySystem.BLLSecurityMode>
-    {
-    }
-    
-    public partial interface IUserActionBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.UserAction, System.Guid>
-    {
-        
-        Framework.Configuration.Domain.UserAction Create(Framework.Configuration.Domain.Models.Create.UserActionCreateModel createModel);
-    }
-    
-    public partial interface IUserActionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IUserActionBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.UserAction>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IUserActionBLL, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IUserActionBLL, Framework.SecuritySystem.SecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IUserActionBLL, Framework.SecuritySystem.BLLSecurityMode>
-    {
-    }
-    
-    public partial interface IUserActionObjectBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.UserActionObject, System.Guid>
-    {
-        
-        System.Collections.Generic.List<Framework.Configuration.Domain.UserActionObject> GetListBy(Framework.Configuration.Domain.Models.Filters.UserActionObjectRootFilterModel filter, Framework.DomainDriven.IFetchContainer<Framework.Configuration.Domain.UserActionObject> fetchs);
-    }
-    
-    public partial interface IUserActionObjectBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IUserActionObjectBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.UserActionObject>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IUserActionObjectBLL, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IUserActionObjectBLL, Framework.SecuritySystem.SecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IUserActionObjectBLL, Framework.SecuritySystem.BLLSecurityMode>
     {
     }
 }

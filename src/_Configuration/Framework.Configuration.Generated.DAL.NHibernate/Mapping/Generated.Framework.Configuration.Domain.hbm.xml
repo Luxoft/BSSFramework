@@ -384,34 +384,4 @@
       <one-to-many class="Framework.Configuration.Domain.DomainType" />
     </set>
   </class>
-  <class name="Framework.Configuration.Domain.UserAction" table="UserAction">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="Name" column="name" access="field.camelcase" />
-    <property name="UserName" column="userName" access="field.camelcase" />
-    <many-to-one name="DomainType" column="domainTypeId" class="Framework.Configuration.Domain.DomainType" access="field.camelcase" />
-    <set name="ObjectIdentities" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
-      <key column="userActionId" />
-      <one-to-many class="Framework.Configuration.Domain.UserActionObject" />
-    </set>
-  </class>
-  <class name="Framework.Configuration.Domain.UserActionObject" table="UserActionObject">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <property name="Name" column="name" access="field.camelcase" />
-    <property name="ObjectIdentity" column="objectIdentity" access="field.camelcase" />
-    <many-to-one name="UserAction" column="userActionId" class="Framework.Configuration.Domain.UserAction" access="field.camelcase" />
-  </class>
 </hibernate-mapping>

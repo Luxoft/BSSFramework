@@ -52,8 +52,6 @@ namespace Framework.Configuration.BLL
         
         private static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> _targetSystemView = new Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode>(Framework.Configuration.ConfigurationSecurityOperationCode.TargetSystemView);
         
-        private static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> _userActionView = new Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode>(Framework.Configuration.ConfigurationSecurityOperationCode.UserActionView);
-        
         public static Framework.SecuritySystem.DisabledSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> Disabled
         {
             get
@@ -198,14 +196,6 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        public static Framework.SecuritySystem.NonContextSecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> UserActionView
-        {
-            get
-            {
-                return _userActionView;
-            }
-        }
-        
         public static Framework.SecuritySystem.SecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode> GetByCode(Framework.Configuration.ConfigurationSecurityOperationCode code)
         {
             if ((code == Framework.Configuration.ConfigurationSecurityOperationCode.Disabled))
@@ -263,10 +253,6 @@ namespace Framework.Configuration.BLL
             else if ((code == Framework.Configuration.ConfigurationSecurityOperationCode.ReportGeneration))
             {
                 return Framework.Configuration.BLL.ConfigurationSecurityOperation.ReportGeneration;
-            }
-            else if ((code == Framework.Configuration.ConfigurationSecurityOperationCode.UserActionView))
-            {
-                return Framework.Configuration.BLL.ConfigurationSecurityOperation.UserActionView;
             }
             else if ((code == Framework.Configuration.ConfigurationSecurityOperationCode.DisplayInternalError))
             {

@@ -72,16 +72,6 @@ namespace Framework.Configuration
 
         #endregion
 
-        #region UserAction
-
-        [SecurityOperation(SecurityOperationCode.UserActionOpenModule)]
-        UserActionOpenModule,
-
-        [SecurityOperation(SecurityOperationCode.UserActionView)]
-        UserActionView,
-
-        #endregion
-
         /// <summary>
         /// Отображение внутренних серверных ошибок клиенту
         /// </summary>

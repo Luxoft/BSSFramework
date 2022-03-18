@@ -168,15 +168,5 @@
         ForceDomainTypeEvent,
 
         #endregion
-
-        #region UserAction
-
-        [SecurityOperation("Open UserAction Module", false, "{07FB374C-F7DA-4D0A-8A64-97EB5F9DF803}", DomainType = "UserAction", IsClient = true)]
-        UserActionOpenModule,
-
-        [SecurityOperation("UserAction View", false, "{E5EF38FC-F2FF-4F12-A81B-1D4A14B5442A}", "UserAction", DomainType = "UserAction")]
-        UserActionView,
-
-        #endregion
     }
 }

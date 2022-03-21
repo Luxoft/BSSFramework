@@ -8,13 +8,7 @@
 
         Framework.DomainDriven.DTOGenerator.Server.IServerGenerationEnvironmentBase,
 
-        Framework.DomainDriven.DTOGenerator.Client.IClientGenerationEnvironmentBase,
-
-        Framework.DomainDriven.ServiceModelGenerator.IGenerationEnvironmentBase,
-
         Framework.DomainDriven.NHibernate.DALGenerator.IGenerationEnvironmentBase,
-
-        Framework.CustomReports.Generation.BLL.ICustomReportBLLGeneratorConfigurationContainer,
 
         Framework.CustomReports.Generation.Facade.ICustomReportServiceGenerationEnvironmentBase,
 

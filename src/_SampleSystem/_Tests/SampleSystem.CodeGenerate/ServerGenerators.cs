@@ -42,7 +42,6 @@ namespace SampleSystem.CodeGenerate
                        .Concat(this.GenerateBLL())
                        .Concat(this.GenerateServerDTO())
                        .Concat(this.GenerateAuditDTO())
-                       .Concat(this.GenerateClientDTO())
                        .Concat(this.GenerateDAL())
                        .Concat(this.GenerateCustomReportsBLL())
                        .Concat(this.GenerateMainWebApiNetCore())
@@ -274,19 +273,6 @@ namespace SampleSystem.CodeGenerate
             yield return dtoGenerator.GenerateSingle(TargetSystemPath + @"/SampleSystem.Generated.DTO", "SampleSystem.Audit.Generated");
 
             var generator = new ServerDTO.SampleSystemServerFileGenerator<ServerDTO.ServerDTOGeneratorConfiguration>(this.environment.ServerDTO);
-        }
-
-        [TestMethod]
-        public void GenerateClientDTOTest()
-        {
-            this.GenerateClientDTO().ToList();
-        }
-
-        private IEnumerable<FileInfo> GenerateClientDTO()
-        {
-            var generator = new ClientDTO.SampleSystemClientFileGenerator<ClientDTO.ClientDTOGeneratorConfiguration>(this.environment.ClientDTO);
-
-            yield return generator.GenerateSingle(TargetSystemPath + @"/SampleSystem.Generated.DTO.Silverlight", "SampleSystem.Generated", this.CheckOutService);
         }
 
         [TestMethod]

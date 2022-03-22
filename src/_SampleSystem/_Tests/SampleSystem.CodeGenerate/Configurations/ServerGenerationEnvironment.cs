@@ -15,8 +15,6 @@ namespace SampleSystem.CodeGenerate
 
         public readonly ServerDTO.ServerDTOGeneratorConfiguration ServerDTO;
 
-        public readonly ClientDTO.ClientDTOGeneratorConfiguration ClientDTO;
-
         public readonly MainServiceGeneratorConfiguration MainService;
 
         public readonly QueryServiceGeneratorConfiguration QueryService;
@@ -44,8 +42,6 @@ namespace SampleSystem.CodeGenerate
 
             this.ServerDTO = new ServerDTO.ServerDTOGeneratorConfiguration(this);
 
-            this.ClientDTO = new ClientDTO.ClientDTOGeneratorConfiguration(this);
-
             this.MainService = new MainServiceGeneratorConfiguration(this);
 
             this.QueryService = new QueryServiceGeneratorConfiguration(this);
@@ -66,12 +62,6 @@ namespace SampleSystem.CodeGenerate
 
             this.AuditDTO = new AuditDTOGeneratorConfiguration(this);
         }
-        //
-        // public IMappingSettings GetMappingSettings(DatabaseName dbName, AuditDatabaseName dbAuditName)
-        // {
-        //     IEnumerable<XDocument> mappingXmls = this.DAL.GetMappingGenerators().Select(mg => mg.Generate());
-        //     return new MappingSettings<PersistentDomainObjectBase>(mappingXmls, dbName, dbAuditName);
-        // }
 
         public IAuditDTOGeneratorConfigurationBase<IAuditDTOGenerationEnvironmentBase> AuditDTO { get; }
     }

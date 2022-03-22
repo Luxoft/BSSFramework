@@ -10,8 +10,6 @@ namespace Framework.Configuration.TestGenerate
 
         Framework.DomainDriven.DTOGenerator.Server.IServerGenerationEnvironmentBase,
 
-        Framework.DomainDriven.DTOGenerator.Client.IClientGenerationEnvironmentBase,
-
         Framework.DomainDriven.NHibernate.DALGenerator.IGenerationEnvironmentBase,
 
         Framework.DomainDriven.DTOGenerator.Audit.IAuditDTOGenerationEnvironmentBase,

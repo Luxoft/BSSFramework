@@ -27,8 +27,8 @@ namespace SampleSystem.IntegrationTests
         public void GetObjectRevisions_CheckCount_Correct()
         {
             // Act
-            var employeeController = this.GetController<EmployeeController>();
-            var employeeAuditController = this.GetController<SampleSystem.WebApiCore.Controllers.Audit.EmployeeController>();
+            var employeeController = this.MainWebApi.Employee;
+            var employeeAuditController = this.MainAuditWebApi.Employee;
             var testCount = 10;
 
             var employeeStrictDto = new EmployeeStrictDTO
@@ -40,18 +40,18 @@ namespace SampleSystem.IntegrationTests
                 ExternalId = 1
             };
 
-            var employeeIdentity = employeeController.SaveEmployee(employeeStrictDto);
+            var employeeIdentity = employeeController.Evaluate(c => c.SaveEmployee(employeeStrictDto));
 
             for (int q = 0; q < testCount; q++)
             {
-                var employeeFull = employeeController.GetFullEmployee(employeeIdentity);
+                var employeeFull = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
                 var employeeStrict = employeeFull.ToStrict();
                 employeeStrict.NameEng = new FioShort() { FirstName = $"{q}" };
-                employeeController.SaveEmployee(employeeStrict);
+                employeeController.Evaluate(c => c.SaveEmployee(employeeStrict));
             }
 
             // Assert
-            var actualRevesionCount = employeeAuditController.GetEmployeeRevisions(employeeIdentity);
+            var actualRevesionCount = employeeAuditController.Evaluate(c => c.GetEmployeeRevisions(employeeIdentity));
 
             actualRevesionCount.RevisionInfos.Count().Should().Be(testCount + 1);
         }
@@ -60,8 +60,8 @@ namespace SampleSystem.IntegrationTests
         public void GetObjectByRevision_CheckState_Correct()
         {
             // Act
-            var employeeController = this.GetController<EmployeeController>();
-            var employeeAuditController = this.GetController<SampleSystem.WebApiCore.Controllers.Audit.EmployeeController>();
+            var employeeController = this.MainWebApi.Employee;
+            var employeeAuditController = this.MainAuditWebApi.Employee;
             var testCount = 10;
 
             var employeeStrictDto = new EmployeeStrictDTO
@@ -107,8 +107,8 @@ namespace SampleSystem.IntegrationTests
         public void GetObjectPropertyRevisions_CallNotChangeProperty_RevisionsIsOne()
         {
             // Act
-            var employeeController = this.GetController<EmployeeController>();
-            var employeeAuditController = this.GetController<SampleSystem.WebApiCore.Controllers.Audit.EmployeeController>();
+            var employeeController = this.MainWebApi.Employee;
+            var employeeAuditController = this.MainAuditWebApi.Employee;
             var employeeStrictDto = new EmployeeStrictDTO
             {
                 NameEng = new Fio() { FirstName = "firstName", LastName = "lastName" },
@@ -134,7 +134,7 @@ namespace SampleSystem.IntegrationTests
         public void GetObjectPropertyRevisions_ChangePrimitiveProperty_CorrectRevisions()
         {
             // Act
-            var employeeController = this.GetController<EmployeeController>();
+            var employeeController = this.MainWebApi.Employee;
             var employeeAuditController = this.GetController<SampleSystem.WebApiCore.Controllers.Audit.EmployeeController>();
             var testCount = 10;
             var emailTail = "@email.email";
@@ -179,7 +179,7 @@ namespace SampleSystem.IntegrationTests
         public void GetObjectPropertyRevisions_CheckFirstRevisioins_HasAddedState()
         {
             // Act
-            var employeeController = this.GetController<EmployeeController>();
+            var employeeController = this.MainWebApi.Employee;
             var employeeAuditController = this.GetController<SampleSystem.WebApiCore.Controllers.Audit.EmployeeController>();
             var testCount = 10;
             var emailTail = "@email.email";
@@ -224,7 +224,7 @@ namespace SampleSystem.IntegrationTests
         public void GetObjectPropertyRevisions_CheckAfterFirstRevisioins_AllModifiedState()
         {
             // Act
-            var employeeController = this.GetController<EmployeeController>();
+            var employeeController = this.MainWebApi.Employee;
             var employeeAuditController = this.GetController<SampleSystem.WebApiCore.Controllers.Audit.EmployeeController>();
             var testCount = 10;
             var emailTail = "@email.email";

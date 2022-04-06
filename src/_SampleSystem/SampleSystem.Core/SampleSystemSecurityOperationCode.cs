@@ -214,6 +214,17 @@ namespace SampleSystem
         EmployeePersonalCellPhoneEdit,
 
         [SecurityOperation(SecurityOperationCode.SystemIntegration)]
-        SystemIntegration
+        SystemIntegration,
+
+        #region AuthWorkflow
+
+        [SecurityOperation("TestWorkflow", false, "{939EC98C-131B-4E3E-B97C-9DF95620C758}", "Required operation for approve", adminHasAccess: false)]
+        ApproveWorkflowOperation,
+
+        [SampleSystemApproveOperation(ApproveWorkflowOperation)]
+        [SecurityOperation("TestWorkflow", false, "{927E4AFC-8CC2-4EDA-B6EE-FE6B2C53D0BA}", "Operation testing workflow")]
+        ApprovingWorkflowOperation
+
+        #endregion
     }
 }

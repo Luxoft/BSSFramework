@@ -54,7 +54,7 @@ namespace SampleSystem.IntegrationTests
                 bll.Save(country);
             });
 
-            this.GetConfigurationController().ProcessModifications(1000);
+            this.GetConfigurationControllerEvaluator().ProcessModifications(1000);
 
             var notifications = this.GetNotifications();
 

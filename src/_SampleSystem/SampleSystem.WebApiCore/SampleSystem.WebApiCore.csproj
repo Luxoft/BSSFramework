@@ -18,6 +18,7 @@
     <ProjectReference Include="..\..\Framework.Cap\Framework.Cap.csproj" />
     <ProjectReference Include="..\..\Framework.HangfireCore\Framework.HangfireCore.csproj" />
     <ProjectReference Include="..\..\Framework.NotificationCore\Framework.NotificationCore.csproj" />
+    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.ApproveWorkflow\Framework.Authorization.ApproveWorkflow.csproj" />
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.WebApi\Framework.Authorization.WebApi.csproj" />
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.WebApi\Framework.Configuration.WebApi.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModel.IAD.DTO\Framework.DomainDriven.ServiceModel.IAD.DTO.csproj" />

@@ -1,4 +1,5 @@
-﻿using Framework.Authorization.BLL;
+﻿using Framework.Authorization.ApproveWorkflow;
+using Framework.Authorization.BLL;
 using Framework.Authorization.Generated.DAL.NHibernate;
 using Framework.Cap;
 using Framework.Configuration.BLL;
@@ -83,5 +84,24 @@ namespace SampleSystem.WebApiCore
             return services;
         }
 
+        public static IServiceCollection AddWorkflowCore(this IServiceCollection services, IConfiguration configuration)
+        {
+            return services
+                   .AddWorkflow(x => x.UseSqlServer(configuration["WorkflowCoreConnectionString"], true, true))
+                   .AddLogging();
+        }
+
+        public static IServiceCollection AddAuthWorkflow(this IServiceCollection services)
+        {
+            return services
+                   .AddScoped<IWorkflowApproveProcessor, WorkflowApproveProcessor>()
+                   .AddScoped<IDALListener, PermissionWorkflowDALListener>()
+
+                   .AddTransient<StartWorkflow>()
+                   .AddTransient<PublishEvent>()
+                   .AddTransient<SendFinalEvent>()
+
+                   .AddTransient<CanAutoApproveStep>();
+        }
     }
 }

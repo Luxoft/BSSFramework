@@ -17,19 +17,19 @@ namespace SampleSystem.IntegrationTests.Auth
         public void SaveOperation_CheckOperationChanges()
         {
             // Arrange
-            var employeeController = this.GetController<EmployeeController>();
+            var employeeController = this.MainWebApi.Employee;
             var currentUser = employeeController.GetFullEmployee(
                 this.DataHelper.GetEmployeeByLogin(this.AuthHelper.GetCurrentUserLogin()));
 
-            var operationIdentity = this.GetAuthorizationController().GetSimpleOperationByName(Name).Identity;
-            var operationStrict = this.GetAuthorizationController().GetFullOperation(operationIdentity).ToStrict();
+            var operationIdentity = this.GetAuthControllerEvaluator().GetSimpleOperationByName(Name).Identity;
+            var operationStrict = this.GetAuthControllerEvaluator().GetFullOperation(operationIdentity).ToStrict();
             operationStrict.Description = NewDescription;
 
             // Act
-            this.GetAuthorizationController().SaveOperation(operationStrict);
+            this.GetAuthControllerEvaluator().SaveOperation(operationStrict);
 
             // Assert
-            var operationSimple = this.GetAuthorizationController().GetSimpleOperation(operationIdentity);
+            var operationSimple = this.GetAuthControllerEvaluator().GetSimpleOperation(operationIdentity);
 
             operationSimple.Name.Should().Be(Name);
             operationSimple.Description.Should().Be(NewDescription);

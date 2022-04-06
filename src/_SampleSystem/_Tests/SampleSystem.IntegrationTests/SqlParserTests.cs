@@ -81,7 +81,7 @@ namespace SampleSystem.IntegrationTests
         public void RemoveHRDepartment_HasEmployeeWithHRDepartment_CorrectExceptionMessage()
         {
             // Arrange
-            var employeeController = this.GetController<EmployeeController>();
+            var employeeController = this.MainWebApi.Employee;
             var hRDepartmentController = this.GetController<HRDepartmentController>();
 
             var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);

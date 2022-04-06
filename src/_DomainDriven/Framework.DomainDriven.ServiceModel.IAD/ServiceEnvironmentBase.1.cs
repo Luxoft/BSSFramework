@@ -8,6 +8,8 @@ using Framework.DomainDriven.ServiceModel.Service;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Core.Services;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.DomainDriven.ServiceModel.IAD
 {
     public abstract partial class ServiceEnvironmentBase<TBLLContextContainer, TBLLContext> : ServiceEnvironmentBase, IRootServiceEnvironment<TBLLContext, TBLLContextContainer>
@@ -185,7 +187,8 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
             protected override IEnumerable<IDALListener> GetDALFlushedListeners()
             {
-                return this.serviceEnvironment.GetDALFlushedListeners((TBLLContextContainer)this);
+                return this.serviceEnvironment.GetDALFlushedListeners((TBLLContextContainer)this)
+                           .Concat(this.ScopedServiceProvider.GetServices<IDALListener>());
             }
         }
     }

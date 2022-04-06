@@ -9,16 +9,16 @@ using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.ServiceModel.Subscriptions;
-using Framework.DomainDriven.WebApiNetCore;
 using Framework.Notification.DTO;
 
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.BLL;
 using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.ServiceEnvironment.IntegrationTests;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
+using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.Controllers;
 
 using DataHelper = SampleSystem.IntegrationTests.__Support.TestData.Helpers.DataHelper;
@@ -26,9 +26,9 @@ using DataHelper = SampleSystem.IntegrationTests.__Support.TestData.Helpers.Data
 namespace SampleSystem.IntegrationTests.__Support.TestData
 {
     [TestClass]
-    public class TestBase
+    public class TestBase : IControllerEvaluatorContainer
     {
-        private static readonly Lazy<TestServiceEnvironment> EnvironmentLazy = new Lazy<TestServiceEnvironment>(() => TestServiceEnvironment.IntegrationEnvironment, true);
+        private static readonly Lazy<SampleSystemServiceEnvironment> EnvironmentLazy = new(() => TestServiceEnvironment.IntegrationEnvironment, true);
 
         private DataHelper dataHelper;
 
@@ -42,14 +42,17 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
             System.AppContext.SetSwitch("System.Drawing.EnableUnixSupport", true);
         }
 
-        protected TestServiceEnvironment Environment => EnvironmentLazy.Value;
+        protected virtual SampleSystemServiceEnvironment Environment => EnvironmentLazy.Value;
+
+        public MainWebApi MainWebApi => new(this.Environment.ServiceProvider);
+
+        public MainAuditWebApi MainAuditWebApi => new(this.Environment.ServiceProvider);
 
         protected DataHelper DataHelper
         {
             get
             {
                 this.dataHelper.AuthHelper = this.AuthHelper;
-                this.dataHelper.PrincipalName = this.AuthHelper.PrincipalName;
                 return this.dataHelper;
             }
 
@@ -61,9 +64,9 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
 
         protected AuthHelper AuthHelper { get; }
 
-        protected string PrincipalName { get; set; }
+        protected IDateTimeService DateTimeService => this.Environment.ServiceProvider.GetRequiredService<IDateTimeService>();
 
-        protected IDateTimeService DateTimeService => new IntegrationTestDateTimeService();
+        IServiceProvider IControllerEvaluatorContainer.RootServiceProvider => this.Environment.RootServiceProvider;
 
         protected string DatabaseName { get; } = "SampleSystem";
 
@@ -192,17 +195,17 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
 
         protected TResult EvaluateWrite<TResult>(Func<ISampleSystemBLLContext, TResult> func)
         {
-            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, this.PrincipalName, func);
+            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, this.GetCurrentUserName(), func);
         }
 
         protected void EvaluateRead(Action<ISampleSystemBLLContext> action)
         {
-            this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, this.PrincipalName, action);
+            this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, this.GetCurrentUserName(), action);
         }
 
         protected T EvaluateRead<T>(Func<ISampleSystemBLLContext, T> action)
         {
-            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, this.PrincipalName, action);
+            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, this.GetCurrentUserName(), action);
         }
 
 
@@ -210,7 +213,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
         {
             this.Environment.GetContextEvaluator().Evaluate(
                 DBSessionMode.Write,
-                this.PrincipalName,
+                this.GetCurrentUserName(),
                 context =>
                 {
                     func(context);
@@ -218,22 +221,14 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
                 });
         }
 
-
-        protected AuthSLJsonController GetAuthorizationController()
+        protected ControllerEvaluator<AuthSLJsonController> GetAuthControllerEvaluator()
         {
-            return this.GetController<AuthSLJsonController> ();
+            return this.MainWebApi.GetControllerEvaluator<AuthSLJsonController>();
         }
 
-        protected ConfigSLJsonController GetConfigurationController()
+        protected ControllerEvaluator<ConfigSLJsonController> GetConfigurationControllerEvaluator()
         {
-            return this.GetController<ConfigSLJsonController>();
-        }
-
-
-        protected TController GetController<TController>(string principalName = null)
-            where TController : ControllerBase, IApiControllerBase
-        {
-            return this.DataHelper.GetController<TController>(principalName);
+            return this.MainWebApi.GetControllerEvaluator<ConfigSLJsonController>();
         }
     }
 }

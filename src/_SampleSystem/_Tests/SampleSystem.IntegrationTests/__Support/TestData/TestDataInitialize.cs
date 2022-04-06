@@ -2,6 +2,7 @@
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests.__Support.Utils;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData
 {
@@ -13,6 +14,9 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
             this.AuthHelper.Environment = this.Environment;
 
             this.AuthHelper.AddCurrentUserToAdmin();
+
+            this.AuthHelper.SetUserRole(DefaultConstants.NOTIFICATION_ADMIN, new SampleSystemPermission(BusinessRole.SystemIntegration));
+            this.AuthHelper.SetUserRole(DefaultConstants.INTEGRATION_USER, new SampleSystemPermission(BusinessRole.SystemIntegration));
 
             this.DataHelper.SaveCountry(
                 id: DefaultConstants.COUNTRY_RUSSIA_ID,

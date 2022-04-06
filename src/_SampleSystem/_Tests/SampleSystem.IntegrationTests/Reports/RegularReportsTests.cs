@@ -868,13 +868,13 @@ namespace SampleSystem.IntegrationTests.Reports
 
             var principalIdentity = this.AuthHelper.SavePrincipal(Tester, true);
 
-            var businessRole = this.GetAuthorizationController().GetRichBusinessRoleByName("SecretariatNotification");
+            var businessRole = this.GetAuthControllerEvaluator().GetRichBusinessRoleByName("SecretariatNotification");
 
-            var operation = this.GetAuthorizationController().GetSimpleOperationByName(SampleSystemSecurityOperationCode.EmployeeView.ToString());
+            var operation = this.GetAuthControllerEvaluator().GetSimpleOperationByName(SampleSystemSecurityOperationCode.EmployeeView.ToString());
 
             var permission = new PermissionStrictDTO { Role = businessRole.Identity };
 
-            this.GetAuthorizationController().SavePermission(new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, permission));
+            this.GetAuthControllerEvaluator().SavePermission(new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, permission));
 
             var report = this.CreateReport<Employee>("Employees");
             AppendReportProperty(report, "Login", "Login");
@@ -902,7 +902,7 @@ namespace SampleSystem.IntegrationTests.Reports
                 Operation = operation,
             });
 
-            this.GetAuthorizationController().SaveBusinessRole(businessRole.ToStrict());
+            this.GetAuthControllerEvaluator().SaveBusinessRole(businessRole.ToStrict());
 
             reportStream = this.GetController<SampleSystemGenericReportController>(Tester).GetStream(reportGenerationModel);
 
@@ -1276,7 +1276,7 @@ namespace SampleSystem.IntegrationTests.Reports
 
         private ReportRichDTO GetReport(ReportIdentityDTO reportIdentityDTO)
         {
-            return this.GetConfigurationController().GetRichReport(reportIdentityDTO);
+            return this.GetConfigurationControllerEvaluator().GetRichReport(reportIdentityDTO);
         }
 
         private ReportIdentityDTO SaveReport(Report report)

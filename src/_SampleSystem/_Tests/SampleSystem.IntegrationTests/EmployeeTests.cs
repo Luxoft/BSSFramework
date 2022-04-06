@@ -57,7 +57,7 @@ namespace SampleSystem.IntegrationTests
         public void AddNewEmployee_CheckEmployeeSaved()
         {
             // Arrange
-            var employeeController = this.GetController<EmployeeController>();
+            var employeeController = this.MainWebApi.Employee;
             var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
 
             // Act
@@ -71,7 +71,7 @@ namespace SampleSystem.IntegrationTests
         public void GetEmployeeByOData_ContainsForNumberProperty_OnlyRequestedDataInTheResult()
         {
             // Arrange
-            var employeeController = this.GetController<EmployeeController>();
+            var employeeController = this.MainWebApi.Employee;
             var employeeQueryController = this.GetController<SampleSystem.WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
 
             foreach (var pin in new[] { 123, 456 })
@@ -96,7 +96,7 @@ namespace SampleSystem.IntegrationTests
         public void GetEmployeeByOData_TakeTestWithoutSorting_OnlyRequestedDataInTheResult()
         {
             // Arrange
-            var employeeController = this.GetController<EmployeeController>();
+            var employeeController = this.MainWebApi.Employee;
             var employeeQueryController = this.GetController<SampleSystem.WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
 
             var idToPinMap = new Dictionary<Guid, int>
@@ -140,7 +140,7 @@ namespace SampleSystem.IntegrationTests
         public void GetEmployeeByOData_TakeAndSkipTestWithoutSorting_OnlyRequestedDataInTheResult()
         {
             // Arrange
-            var employeeController = this.GetController<EmployeeController>();
+            var employeeController = this.MainWebApi.Employee;
             var employeeQueryController = this.GetController<SampleSystem.WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
 
             var idToPinMap = new Dictionary<Guid, int>
@@ -184,7 +184,7 @@ namespace SampleSystem.IntegrationTests
         public void GetEmployeeByOData_TakeAndSkipTestWithSorting_OnlyRequestedDataInTheResult()
         {
             // Arrange
-            var employeeController = this.GetController<EmployeeController>();
+            var employeeController = this.MainWebApi.Employee;
             var employeeQueryController = this.GetController<SampleSystem.WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
 
             foreach (var pin in new[] { 123, 456 })
@@ -210,7 +210,7 @@ namespace SampleSystem.IntegrationTests
             // Arrange
             var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
 
-            var configFacade = this.GetConfigurationController();
+            var configFacade = this.GetConfigurationControllerEvaluator();
 
             var domainType = configFacade.GetRichDomainTypeByName(nameof(Employee));
 
@@ -235,7 +235,7 @@ namespace SampleSystem.IntegrationTests
         public void ChangeEmployee_ProcessModifications_ContainsNotification()
         {
             // Arrange
-            var employeeController = this.GetController<EmployeeController>();
+            var employeeController = this.MainWebApi.Employee;
 
             var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
             var employeeVersion = employeeController.GetSimpleEmployee(employeeIdentity).Version;
@@ -245,7 +245,7 @@ namespace SampleSystem.IntegrationTests
 
             employeeController.UpdateEmployee(new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234"), Version = employeeVersion });
 
-            var restFacade = this.GetConfigurationController();
+            var restFacade = this.GetConfigurationControllerEvaluator();
 
             // Act
             var processedModCount = restFacade.ProcessModifications(1000);
@@ -264,7 +264,7 @@ namespace SampleSystem.IntegrationTests
         public void ChangeEmployee_ProcessModifications_ChangedUnprocessedCount()
         {
             // Arrange
-            var employeeController = this.GetController<EmployeeController>();
+            var employeeController = this.MainWebApi.Employee;
             var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
             var employeeVersion = employeeController.GetSimpleEmployee(employeeIdentity).Version;
 
@@ -273,7 +273,7 @@ namespace SampleSystem.IntegrationTests
 
             employeeController.UpdateEmployee(new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234"), Version = employeeVersion });
 
-            var restFacade = this.GetConfigurationController();
+            var restFacade = this.GetConfigurationControllerEvaluator();
 
             // Act
             var preProcessedModificationState = restFacade.GetModificationQueueProcessingState();
@@ -296,7 +296,7 @@ namespace SampleSystem.IntegrationTests
         public void ChangeEmployee_ContainsAribaEvent()
         {
             // Arrange
-            var employeeController = this.GetController<EmployeeController>();
+            var employeeController = this.MainWebApi.Employee;
             var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
             var employeeVersion = employeeController.GetSimpleEmployee(employeeIdentity).Version;
 
@@ -333,7 +333,7 @@ namespace SampleSystem.IntegrationTests
         public void ChangeEmployeeWithoutVersionInfo_RaisedStateException()
         {
             // Arrange
-            var employeeController = this.GetController<EmployeeController>();
+            var employeeController = this.MainWebApi.Employee;
             var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
 
             // Act

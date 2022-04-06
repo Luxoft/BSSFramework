@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ using Framework.Validation;
 
 using MediatR;
 
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -34,6 +36,8 @@ using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore;
 
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
+
 namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 {
     /// <summary>
@@ -41,15 +45,18 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
     /// </summary>
     public class TestServiceEnvironment : SampleSystemServiceEnvironment
     {
-        private static readonly Lazy<TestServiceEnvironment> IntegrationEnvironmentLazy = new Lazy<TestServiceEnvironment>(CreateIntegrationEnvironment);
+        private static readonly Lazy<TestServiceEnvironment> IntegrationEnvironmentLazy = new(() => CreateIntegrationEnvironment());
+
+        private static readonly Lazy<TestServiceEnvironment> WorkflowIntegrationEnvironmentLazy = new(() => CreateWorkflowIntegrationEnvironment());
 
         public TestServiceEnvironment(
             IServiceProvider serviceProvider,
             IDBSessionFactory sessionFactory,
             EnvironmentSettings settings,
+            IUserAuthenticationService userAuthenticationService,
             bool? isDebugMode = null)
 
-            : base(serviceProvider, sessionFactory, settings.NotificationContext, IntegrationTestAuthenticationService.Instance,
+            : base(serviceProvider, sessionFactory, settings.NotificationContext, userAuthenticationService,
                    new OptionsWrapper<SmtpSettings>(new SmtpSettings() { OutputFolder = @"C:\SampleSystem\Smtp" }),
                   LazyInterfaceImplementHelper.CreateNotImplemented<IRewriteReceiversService>(),
                    isDebugMode)
@@ -62,6 +69,8 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
         /// </summary>
         public static TestServiceEnvironment IntegrationEnvironment => IntegrationEnvironmentLazy.Value;
 
+        public static TestServiceEnvironment WorkflowIntegrationEnvironment => WorkflowIntegrationEnvironmentLazy.Value;
+
         public bool IsDebugInTest { get; set; } = true;
 
         /// <summary>
@@ -72,9 +81,9 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
         /// <summary>
         /// Environment Settings
         /// </summary>
-        public EnvironmentSettings Settings { get; private set; }
-        
-        private static TestServiceEnvironment CreateIntegrationEnvironment()
+        public EnvironmentSettings Settings { get; }
+
+        private static TestServiceEnvironment CreateIntegrationEnvironment(Action<IServiceCollection> initServices = null)
         {
             var serviceProvider = new ServiceCollection()
                                   .RegisterLegacyBLLContext()
@@ -82,18 +91,32 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .AddControllerEnvironment()
                                   .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
                                   .AddSingleton<SampleSystemServiceEnvironment>(sp => sp.GetRequiredService<TestServiceEnvironment>())
-                                  .AddSingleton<IUserAuthenticationService>(IntegrationTestAuthenticationService.Instance)
-                                  .AddSingleton<IDateTimeService>(new IntegrationTestDateTimeService())
+                                  .AddSingleton<IUserAuthenticationService>(IntegrationTestsUserAuthenticationService.Instance)
+                                  .AddSingleton<IDateTimeService, IntegrationTestDateTimeService>()
                                   .AddDatabaseSettings(InitializeAndCleanup.DatabaseUtil.ConnectionSettings.ConnectionString)
                                   .AddSingleton(EnvironmentSettings.Trace)
                                   .AddSingleton<TestServiceEnvironment>()
-                                  .AddScoped<IExceptionProcessor, ApiControllerExceptionService<TestServiceEnvironment, ISampleSystemBLLContext>> ()
+                                  .AddScoped<IExceptionProcessor, ApiControllerExceptionService<TestServiceEnvironment, ISampleSystemBLLContext>>()
                                   .AddSingleton<ISpecificationEvaluator, NhSpecificationEvaluator>()
                                   .AddSingleton<ICapTransactionManager, TestCapTransactionManager>()
                                   .AddSingleton<IIntegrationEventBus, TestIntegrationEventBus>()
+
+                                  .Self(initServices ?? (_ => {}))
+
                                   .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
 
             return serviceProvider.GetRequiredService<TestServiceEnvironment>();
+        }
+
+        private static TestServiceEnvironment CreateWorkflowIntegrationEnvironment()
+        {
+            var configuration = new ConfigurationBuilder()
+                                .SetBasePath(Directory.GetCurrentDirectory())
+                                .AddJsonFile("appsettings.json", false, true)
+                                .AddEnvironmentVariables()
+                                .Build();
+
+            return CreateIntegrationEnvironment(services => services.AddWorkflowCore(configuration).AddAuthWorkflow());
         }
 
         protected override SampleSystemBllContextContainer CreateBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null)

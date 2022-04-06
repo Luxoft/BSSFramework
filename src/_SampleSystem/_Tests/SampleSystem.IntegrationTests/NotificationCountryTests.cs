@@ -87,7 +87,7 @@ namespace SampleSystem.IntegrationTests
         public void RemoveCountry_RemoveModificationExists()
         {
             // Arrange
-            var countryController = this.GetController<CountryController>();
+            var countryController = this.MainWebApi.Country;
             var countryId = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
             {
                 var bll = context.Logics.Country;
@@ -108,7 +108,7 @@ namespace SampleSystem.IntegrationTests
             // Act
             this.ClearModifications();
 
-            countryController.RemoveCountry(new CountryIdentityDTO { Id = countryId });
+            countryController.Evaluate(c => c.RemoveCountry(new CountryIdentityDTO { Id = countryId }));
 
             // Assert
             this.GetModifications().Count.Should().Be(1);
@@ -138,7 +138,7 @@ namespace SampleSystem.IntegrationTests
             });
 
             // Act
-            var call = new Action(() => this.GetConfigurationController().ProcessModifications(1000));
+            var call = new Action(() => this.GetConfigurationControllerEvaluator().Evaluate(c => c.ProcessModifications(1000)));
 
             // Assert
             call.Should().Throw<Exception>().WithMessage($"For DomainObject ({typeof(Country).Name}) [{domainObjectId}] both states (previous and current) can't be null. Revision: {revision}");

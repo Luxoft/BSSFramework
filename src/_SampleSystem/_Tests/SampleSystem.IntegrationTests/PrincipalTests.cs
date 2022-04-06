@@ -39,7 +39,7 @@ namespace SampleSystem.IntegrationTests
             var name = $@"luxoft\saveprincipaltest_{Guid.NewGuid()}";
             var principalIdentity = this.AuthHelper.SavePrincipal(name, true);
 
-            var configFacade = this.GetConfigurationController();
+            var configFacade = this.GetConfigurationControllerEvaluator();
 
             var domainTypeIdentity = configFacade.GetSimpleDomainTypeByPath("Authorization/Principal").Identity;
 
@@ -68,13 +68,13 @@ namespace SampleSystem.IntegrationTests
             var name = $@"luxoft\saveprincipaltest_{Guid.NewGuid()}";
             var principalIdentity = this.AuthHelper.SavePrincipal(name, true);
 
-            var permissionIdentity = this.GetAuthorizationController().SavePermission(new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, new PermissionStrictDTO
+            var permissionIdentity = this.GetAuthControllerEvaluator().SavePermission(new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, new PermissionStrictDTO
             {
-                Role = this.GetAuthorizationController().GetVisualBusinessRoleByName(Framework.Authorization.Domain.BusinessRole.AdminRoleName).Identity,
+                Role = this.GetAuthControllerEvaluator().GetVisualBusinessRoleByName(Framework.Authorization.Domain.BusinessRole.AdminRoleName).Identity,
                 Period = Period.Eternity
             }));
 
-            var configFacade = this.GetConfigurationController();
+            var configFacade = this.GetConfigurationControllerEvaluator();
 
             var domainTypeIdentity = configFacade.GetSimpleDomainTypeByPath("Authorization/Permission").Identity;
 
@@ -122,7 +122,7 @@ namespace SampleSystem.IntegrationTests
             // Act
             var principalId = this.AuthHelper.SavePrincipal(Name, true, expected);
 
-            var principal = this.GetAuthorizationController().GetSimplePrincipal(principalId);
+            var principal = this.GetAuthControllerEvaluator().GetSimplePrincipal(principalId);
 
             // Assert
             principal.ExternalId.Should().Be(expected);
@@ -145,8 +145,8 @@ namespace SampleSystem.IntegrationTests
         //    };
 
         //    // Act
-        //    var principalId = this.GetAuthorizationController().SavePrincipal(model);
-        //    var principal = this.GetAuthorizationController().GetSimplePrincipal(principalId);
+        //    var principalId = this.GetAuthControllerEvaluator().SavePrincipal(model);
+        //    var principal = this.GetAuthControllerEvaluator().GetSimplePrincipal(principalId);
 
         //    // Assert
         //    principal.ExternalId.Should().Be(expected);

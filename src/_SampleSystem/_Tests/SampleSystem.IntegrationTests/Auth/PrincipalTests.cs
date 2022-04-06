@@ -25,8 +25,8 @@ namespace SampleSystem.IntegrationTests.Auth
         public void AddPermission_CheckAddition()
         {
             // Arrange
-            var employeeController = this.GetController<EmployeeController>();
-            var authorizationController = this.GetAuthorizationController();
+            var employeeController = this.MainWebApi.Employee;
+            var authorizationController = this.GetAuthControllerEvaluator();
             var currentUser = employeeController.GetFullEmployee(
                 this.DataHelper.GetEmployeeByLogin(this.AuthHelper.GetCurrentUserLogin()));
 
@@ -51,8 +51,8 @@ namespace SampleSystem.IntegrationTests.Auth
         public void SavePrincipal_CheckCreateon()
         {
             // Arrange
-            var employeeController = this.GetController<EmployeeController>();
-            var authorizationController = this.GetAuthorizationController();
+            var employeeController = this.MainWebApi.Employee;
+            var authorizationController = this.GetAuthControllerEvaluator();
 
             var currentUser = employeeController.GetFullEmployee(
                 this.DataHelper.GetEmployeeByLogin(this.AuthHelper.GetCurrentUserLogin()));
@@ -69,10 +69,10 @@ namespace SampleSystem.IntegrationTests.Auth
             };
 
             // Act
-            var principalIdentity = this.GetAuthorizationController().SavePrincipal(principalStrict);
+            var principalIdentity = this.GetAuthControllerEvaluator().SavePrincipal(principalStrict);
 
             // Assert
-            var principalRich = this.GetAuthorizationController().GetRichPrincipal(principalIdentity);
+            var principalRich = this.GetAuthControllerEvaluator().GetRichPrincipal(principalIdentity);
 
             principalRich.Name.Should().Be(Name);
             principalRich.Active.Should().BeTrue();
@@ -85,23 +85,23 @@ namespace SampleSystem.IntegrationTests.Auth
         public void SavePrincipal_CheckPrincipalChanges()
         {
             // Arrange
-            var employeeController = this.GetController<EmployeeController>();
+            var employeeController = this.MainWebApi.Employee;
 
             var currentUser = employeeController.GetFullEmployee(
                 this.DataHelper.GetEmployeeByLogin(this.AuthHelper.GetCurrentUserLogin()));
 
             var principalStrict = new PrincipalStrictDTO { Name = Name };
-            this.GetAuthorizationController().SavePrincipal(principalStrict);
-            var principalIdentity = this.GetAuthorizationController().GetSimplePrincipalByName(Name).Identity;
+            this.GetAuthControllerEvaluator().SavePrincipal(principalStrict);
+            var principalIdentity = this.GetAuthControllerEvaluator().GetSimplePrincipalByName(Name).Identity;
 
-            principalStrict = this.GetAuthorizationController().GetFullPrincipal(principalIdentity).ToStrict();
+            principalStrict = this.GetAuthControllerEvaluator().GetFullPrincipal(principalIdentity).ToStrict();
             principalStrict.Name = NewName;
 
             // Act
-            this.GetAuthorizationController().SavePrincipal(principalStrict);
+            this.GetAuthControllerEvaluator().SavePrincipal(principalStrict);
 
             // Assert
-            var principalSiple = this.GetAuthorizationController().GetSimplePrincipal(principalStrict.Identity);
+            var principalSiple = this.GetAuthControllerEvaluator().GetSimplePrincipal(principalStrict.Identity);
 
             principalSiple.Name.Should().Be(NewName);
             principalSiple.Active.Should().BeTrue();
@@ -112,19 +112,19 @@ namespace SampleSystem.IntegrationTests.Auth
         public void PermissionDelegate_CheckChanges()
         {
             // Arrange
-            var employeeController = this.GetController<EmployeeController>();
+            var employeeController = this.MainWebApi.Employee;
             var currentUser = employeeController.GetFullEmployee(
                 this.DataHelper.GetEmployeeByLogin(this.AuthHelper.GetCurrentUserLogin()));
 
-            var businessRoleIdentity = this.GetAuthorizationController().GetSimpleBusinessRoleByName("SecretariatNotification").Identity;
+            var businessRoleIdentity = this.GetAuthControllerEvaluator().GetSimpleBusinessRoleByName("SecretariatNotification").Identity;
 
-            var principalIdentity = this.GetAuthorizationController().GetCurrentPrincipal().Identity;
+            var principalIdentity = this.GetAuthControllerEvaluator().GetCurrentPrincipal().Identity;
 
             var permissionStrict = new PermissionStrictDTO { Role = businessRoleIdentity };
-            var permissionIdentity = this.GetAuthorizationController().SavePermission(new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, permissionStrict));
+            var permissionIdentity = this.GetAuthControllerEvaluator().SavePermission(new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, permissionStrict));
 
             var newprincipalStrict = new PrincipalStrictDTO { Name = Name };
-            var newPrincipalIdentity = this.GetAuthorizationController().SavePrincipal(newprincipalStrict);
+            var newPrincipalIdentity = this.GetAuthControllerEvaluator().SavePrincipal(newprincipalStrict);
 
             var changePermissionDelegate = new ChangePermissionDelegatesModelStrictDTO
             {
@@ -140,20 +140,20 @@ namespace SampleSystem.IntegrationTests.Auth
             };
 
             // Act
-            this.GetAuthorizationController().ChangeDelegatePermissions(changePermissionDelegate);
+            this.GetAuthControllerEvaluator().ChangeDelegatePermissions(changePermissionDelegate);
 
             // Assert
-            var newPermissionIdentity = this.GetAuthorizationController().GetFullPermissions()
+            var newPermissionIdentity = this.GetAuthControllerEvaluator().GetFullPermissions()
                 .Single(x => x.Principal.Identity == newPrincipalIdentity).Identity;
 
-            var newPermissionFull = this.GetAuthorizationController().GetFullPermission(newPermissionIdentity);
+            var newPermissionFull = this.GetAuthControllerEvaluator().GetFullPermission(newPermissionIdentity);
             newPermissionFull.IsDelegatedFrom.Should().BeTrue();
             newPermissionFull.DelegatedFromPrincipal.Identity.Should().Be(principalIdentity);
             newPermissionFull.Active.Should().BeTrue();
             newPermissionFull.CreatedBy.Should().Be(currentUser.Login.ToString());
             newPermissionFull.ModifiedBy.Should().Be(currentUser.Login.ToString());
 
-            var permissionSimple = this.GetAuthorizationController().GetSimplePermission(permissionIdentity);
+            var permissionSimple = this.GetAuthControllerEvaluator().GetSimplePermission(permissionIdentity);
             permissionSimple.IsDelegatedTo.Should().BeTrue();
         }
 
@@ -161,16 +161,16 @@ namespace SampleSystem.IntegrationTests.Auth
         public void RemovePermission_CheckRemoval()
         {
             // Arrange
-            var businessRoleIdentity = this.GetAuthorizationController().GetSimpleBusinessRoleByName("SecretariatNotification").Identity;
+            var businessRoleIdentity = this.GetAuthControllerEvaluator().GetSimpleBusinessRoleByName("SecretariatNotification").Identity;
 
-            var principalIdentity = this.GetAuthorizationController().GetCurrentPrincipal().Identity;
+            var principalIdentity = this.GetAuthControllerEvaluator().GetCurrentPrincipal().Identity;
 
             var permissionStrict = new PermissionStrictDTO { Role = businessRoleIdentity };
-            var permissionIdentity = this.GetAuthorizationController().SavePermission(new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, permissionStrict));
+            var permissionIdentity = this.GetAuthControllerEvaluator().SavePermission(new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, permissionStrict));
 
             // Act
-            this.GetAuthorizationController().RemovePermission(permissionIdentity);
-            Action call = () => this.GetAuthorizationController().GetSimplePermission(permissionIdentity);
+            this.GetAuthControllerEvaluator().RemovePermission(permissionIdentity);
+            Action call = () => this.GetAuthControllerEvaluator().GetSimplePermission(permissionIdentity);
 
             // Assert
             call.Should().Throw<Exception>().WithMessage("Permission with id = \"*\" not found");
@@ -180,10 +180,10 @@ namespace SampleSystem.IntegrationTests.Auth
         public void RemovePrinchipaWithRole_CheckException()
         {
             // Arrange
-            var principalIdentity = this.GetAuthorizationController().GetCurrentPrincipal().Identity;
+            var principalIdentity = this.GetAuthControllerEvaluator().GetCurrentPrincipal().Identity;
 
             // Act
-            Action call = () => this.GetAuthorizationController().RemovePrincipal(principalIdentity);
+            Action call = () => this.GetAuthControllerEvaluator().RemovePrincipal(principalIdentity);
 
             // Assert
             call.Should().Throw<Exception>().WithMessage("Removing principal \"*\" must be empty");
@@ -195,11 +195,11 @@ namespace SampleSystem.IntegrationTests.Auth
             // Arrange
             var principalStrict = new PrincipalStrictDTO { Name = Name };
 
-            var principalIdentity = this.GetAuthorizationController().SavePrincipal(principalStrict);
+            var principalIdentity = this.GetAuthControllerEvaluator().SavePrincipal(principalStrict);
 
             // Act
-            this.GetAuthorizationController().RemovePrincipal(principalIdentity);
-            Action call = () => this.GetAuthorizationController().GetSimplePrincipal(principalIdentity);
+            this.GetAuthControllerEvaluator().RemovePrincipal(principalIdentity);
+            Action call = () => this.GetAuthControllerEvaluator().GetSimplePrincipal(principalIdentity);
 
             // Assert
             call.Should().Throw<Exception>().WithMessage("Principal with id = \"*\" not found");

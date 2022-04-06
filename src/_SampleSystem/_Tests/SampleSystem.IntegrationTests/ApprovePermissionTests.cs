@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.Serialization;
 
 using FluentAssertions;
 
 using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
-using Framework.Core;
-using Framework.DomainDriven.WebApiNetCore;
-using Framework.Exceptions;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -29,64 +25,36 @@ namespace SampleSystem.IntegrationTests.Workflow
 
         private const string SuperUserWithApprove = "ApproveWfUser";
 
-
-        //private WorkflowIdentityDTO wfIdent;
-
-        //private CommandRichDTO approveCommand;
-
-        //private CommandParameterRichDTO approveCommandCommentParameter;
-
-        //private CommandParameterRichDTO approveCommandPotentialApproversParameter;
-
-
         [TestInitialize]
         public void SetUp()
         {
-            var withoutWfAuthFacade = this.WithoutWorkflowEnvironment.ServiceProvider.GetDefaultControllerEvaluator<AuthSLJsonController>();
+            var authFacade = this.GetAuthControllerEvaluator();
 
-            this.approveOperation = withoutWfAuthFacade.Evaluate(c => c.GetSimpleOperationByName(nameof(SampleSystemSecurityOperationCode.ApproveWorkflowOperation)));
+            this.approveOperation = authFacade.Evaluate(c => c.GetSimpleOperationByName(nameof(SampleSystemSecurityOperationCode.ApproveWorkflowOperation)));
 
-            var approveRole = withoutWfAuthFacade.Evaluate(c => c.SaveBusinessRole(new BusinessRoleStrictDTO
-                                                               {
-                                                                       Name = "Approve Role",
-                                                                       BusinessRoleOperationLinks =
-                                                                       {
-                                                                               new BusinessRoleOperationLinkStrictDTO { Operation = this.approveOperation.Identity }
-                                                                       }
-                                                               }));
+            var approveRole = authFacade.Evaluate(c => c.SaveBusinessRole(new BusinessRoleStrictDTO
+                                                                          {
+                                                                                  Name = "Approve Role",
+                                                                                  BusinessRoleOperationLinks =
+                                                                                  {
+                                                                                          new BusinessRoleOperationLinkStrictDTO { Operation = this.approveOperation.Identity }
+                                                                                  }
+                                                                          }));
 
-            var approverPrincipal = withoutWfAuthFacade.Evaluate(c => c.SavePrincipal(new PrincipalStrictDTO
-                                                                     {
-                                                                             Name = SuperUserWithApprove,
-                                                                             Permissions =
+            var approverPrincipal = authFacade.Evaluate(c => c.SavePrincipal(new PrincipalStrictDTO
                                                                              {
-                                                                                     new PermissionStrictDTO
+                                                                                     Name = SuperUserWithApprove,
+                                                                                     Permissions =
                                                                                      {
-                                                                                             Role = approveRole,
+                                                                                             new PermissionStrictDTO
+                                                                                             {
+                                                                                                     Role = approveRole,
+                                                                                             }
                                                                                      }
-                                                                             }
-                                                                     }));
-
-            //this.wfIdent = wfFacade.Evaluate(c => c.SaveWorkflow(wf));
-
-            //var reloadedWf = wfFacade.Evaluate(c => c.GetRichWorkflow(this.wfIdent));
-
-            //var approvingState = reloadedWf.ParallelStates.Single(s => s.Name == "Approving");
-
-            //var subWf = wfFacade.Evaluate(c => c.GetRichWorkflow(approvingState.StartItems.Single().SubWorkflow.Identity));
-
-            //this.approveCommand = subWf.States.Single(s => s.Name == "Approving").Tasks.Single(t => t.Name == "ApprovingTask").Commands.Single(c => c.Name == "Approve");
-
-            //this.approveCommandCommentParameter = this.approveCommand.Parameters.Single(p => p.Name == "Comment");
-
-            //this.approveCommandPotentialApproversParameter = this.approveCommand.Parameters.Single(p => p.Name == "PotentialApprovers");
+                                                                             }));
         }
 
-
-
-        private SampleSystemServiceEnvironment WithoutWorkflowEnvironment { get; } = TestServiceEnvironment.Default;
-
-        protected sealed override SampleSystemServiceEnvironment Environment { get; } = WorkflowTestServiceEnvironment.Default;
+        private SampleSystemServiceEnvironment WorkflowEnvironment { get; } = WorkflowTestServiceEnvironment.Default;
 
         [TestMethod]
         public void CreatePermission_WorkflowPassed()
@@ -94,7 +62,7 @@ namespace SampleSystem.IntegrationTests.Workflow
             // Arrange
             var testUserForApproving = "ApprovingWfUser";
 
-            var authFacade = this.GetAuthControllerEvaluator();
+            var authFacade = this.WorkflowEnvironment.ServiceProvider.GetDefaultControllerEvaluator<AuthSLJsonController>();
 
             //var workflowHost = this.GetWorkflowControllerEvaluator();
 

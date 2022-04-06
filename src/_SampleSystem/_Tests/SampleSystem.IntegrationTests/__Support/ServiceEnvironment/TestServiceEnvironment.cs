@@ -41,7 +41,7 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
     /// </summary>
     public class TestServiceEnvironment : SampleSystemServiceEnvironment
     {
-        private static readonly Lazy<TestServiceEnvironment> DefaultLazy = new(() => CreateDefaultTestServiceEnvironment());
+        private static readonly Lazy<TestServiceEnvironment> DefaultLazy = new(CreateDefaultTestServiceEnvironment);
 
         public TestServiceEnvironment(
             IServiceProvider serviceProvider,
@@ -75,10 +75,12 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
         /// </summary>
         public EnvironmentSettings Settings { get; }
 
-        private static TestServiceEnvironment CreateDefaultTestServiceEnvironment(Action<IServiceCollection> initServices = null)
+        private static TestServiceEnvironment CreateDefaultTestServiceEnvironment()
         {
+            return BuildServiceProvider(services => services.AddSingleton<SampleSystemServiceEnvironment>(sp => sp.GetRequiredService<TestServiceEnvironment>())
+                                                            .AddSingleton<TestServiceEnvironment>())
 
-            return BuildServiceProvider(initServices).GetRequiredService<TestServiceEnvironment>();
+                    .GetRequiredService<TestServiceEnvironment>();
         }
 
 
@@ -89,13 +91,11 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .RegisterControllers()
                                   .AddControllerEnvironment()
                                   .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
-                                  .AddSingleton<SampleSystemServiceEnvironment>(sp => sp.GetRequiredService<TestServiceEnvironment>())
                                   .AddSingleton<IUserAuthenticationService>(IntegrationTestsUserAuthenticationService.Instance)
                                   .AddSingleton<IDateTimeService, IntegrationTestDateTimeService>()
                                   .AddDatabaseSettings(InitializeAndCleanup.DatabaseUtil.ConnectionSettings.ConnectionString)
                                   .AddSingleton(EnvironmentSettings.Trace)
-                                  .AddSingleton<TestServiceEnvironment>()
-                                  .AddScoped<IExceptionProcessor, ApiControllerExceptionService<TestServiceEnvironment, ISampleSystemBLLContext>>()
+                                  .AddScoped<IExceptionProcessor, ApiControllerExceptionService<SampleSystemServiceEnvironment, ISampleSystemBLLContext>>()
                                   .AddSingleton<ISpecificationEvaluator, NhSpecificationEvaluator>()
                                   .AddSingleton<ICapTransactionManager, TestCapTransactionManager>()
                                   .AddSingleton<IIntegrationEventBus, TestIntegrationEventBus>()

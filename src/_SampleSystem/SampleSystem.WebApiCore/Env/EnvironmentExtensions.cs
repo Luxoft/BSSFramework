@@ -98,7 +98,7 @@ namespace SampleSystem.WebApiCore
         public static IServiceCollection AddAuthWorkflow(this IServiceCollection services)
         {
             return services
-                   .AddScoped(sp => sp.GetRequiredService<IServiceEnvironment<IAuthorizationBLLContext>>().GetContextEvaluator())
+                   .AddSingleton(sp => sp.GetRequiredService<IServiceEnvironment<IAuthorizationBLLContext>>().GetContextEvaluator())
                    .AddScoped<IWorkflowApproveProcessor, WorkflowApproveProcessor>()
                    //.AddScoped<IDALListener, PermissionWorkflowDALListener>()
 

@@ -44,11 +44,14 @@ public class WorkflowTestServiceEnvironment : TestServiceEnvironment
                             .AddEnvironmentVariables(nameof(SampleSystem) + "_")
                             .Build();
 
-        var serviceProvider = BuildServiceProvider(services => services.AddWorkflowCore(configuration).AddAuthWorkflow());
+        var serviceProvider = BuildServiceProvider(services => services.AddSingleton<SampleSystemServiceEnvironment>(sp => sp.GetRequiredService<WorkflowTestServiceEnvironment>())
+                                                                       .AddSingleton<WorkflowTestServiceEnvironment>()
+                                                                       .AddWorkflowCore(configuration)
+                                                                       .AddAuthWorkflow());
 
         serviceProvider.StartWorkflow();
 
-        return serviceProvider.GetRequiredService<TestServiceEnvironment>();
+        return serviceProvider.GetRequiredService<WorkflowTestServiceEnvironment>();
     }
 
 
@@ -82,9 +85,19 @@ public class WorkflowTestServiceEnvironment : TestServiceEnvironment
             return new LocalDBNotificationEventDTOMessageSender(this.Configuration);
         }
 
-        protected override IEnumerable<IDALListener> GetDALFlushedListeners()
+        //protected override IEnumerable<IDALListener> GetDALFlushedListeners()
+        //{
+        //    foreach (var dalListener in base.GetDALFlushedListeners())
+        //    {
+        //        yield return dalListener;
+        //    }
+
+        //    yield return new PermissionWorkflowDALListener(this.Authorization, this.ServiceEnvironment.RootServiceProvider.GetRequiredService<IWorkflowHost>(), new WorkflowApproveProcessor(this.Authorization));
+        //}
+
+        protected override IEnumerable<IDALListener> GetBeforeTransactionCompletedListeners()
         {
-            foreach (var dalListener in base.GetDALFlushedListeners())
+            foreach (var dalListener in base.GetBeforeTransactionCompletedListeners())
             {
                 yield return dalListener;
             }

@@ -36,6 +36,8 @@ public class PermissionWorkflowDALListener : IDALListener
 
             permission.Status = PermissionStatus.Approving;
 
+            this.bllContext.Logics.Permission.Save(permission);
+
             var ident = await this.workflowHost.StartWorkflow(nameof(__ApprovePermission_Workflow), startupObj);
         }
 

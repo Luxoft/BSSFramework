@@ -83,7 +83,14 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 
         private static TestServiceEnvironment CreateIntegrationEnvironment(Action<IServiceCollection> initServices = null)
         {
-            var serviceProvider = new ServiceCollection()
+
+            return BuildServiceProvider(initServices).GetRequiredService<TestServiceEnvironment>();
+        }
+
+
+        private static IServiceProvider BuildServiceProvider(Action<IServiceCollection> initServices = null)
+        {
+            return new ServiceCollection()
                                   .RegisterLegacyBLLContext()
                                   .RegisterControllers()
                                   .AddControllerEnvironment()
@@ -99,11 +106,9 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .AddSingleton<ICapTransactionManager, TestCapTransactionManager>()
                                   .AddSingleton<IIntegrationEventBus, TestIntegrationEventBus>()
 
-                                  .Self(initServices ?? (_ => {}))
+                                  .Self(initServices ?? (_ => { }))
 
                                   .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
-
-            return serviceProvider.GetRequiredService<TestServiceEnvironment>();
         }
 
         private static TestServiceEnvironment CreateWorkflowIntegrationEnvironment()
@@ -111,10 +116,14 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
             var configuration = new ConfigurationBuilder()
                                 .SetBasePath(Directory.GetCurrentDirectory())
                                 .AddJsonFile("appsettings.json", false, true)
-                                .AddEnvironmentVariables()
+                                .AddEnvironmentVariables(nameof(SampleSystem) + "_")
                                 .Build();
 
-            return CreateIntegrationEnvironment(services => services.AddWorkflowCore(configuration).AddAuthWorkflow());
+            var serviceProvider = BuildServiceProvider(services => services.AddWorkflowCore(configuration).AddAuthWorkflow());
+
+            serviceProvider.StartWorkflow();
+
+            return serviceProvider.GetRequiredService<TestServiceEnvironment>();
         }
 
         protected override SampleSystemBllContextContainer CreateBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null)

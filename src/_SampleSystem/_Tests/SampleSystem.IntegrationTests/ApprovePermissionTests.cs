@@ -83,38 +83,38 @@ namespace SampleSystem.IntegrationTests.Workflow
         [TestMethod]
         public void CreatePermission_WorkflowPassed()
         {
-            //// Arrange
-            //var testUserForApproving = "ApprovingWfUser";
+            // Arrange
+            var testUserForApproving = "ApprovingWfUser";
 
-            //var authFacade = this.GetAuthControllerEvaluator();
+            var authFacade = this.GetAuthControllerEvaluator();
 
-            //var workflowFacade = this.GetWorkflowControllerEvaluator();
+            //var workflowHost = this.GetWorkflowControllerEvaluator();
 
-            //var approvingOperation = authFacade.Evaluate(c => c.GetSimpleOperationByName(nameof(SampleSystemSecurityOperationCode.ApprovingWorkflowOperation)));
+            var approvingOperation = authFacade.Evaluate(c => c.GetSimpleOperationByName(nameof(SampleSystemSecurityOperationCode.ApprovingWorkflowOperation)));
 
-            //var approvingRole = authFacade.Evaluate(c => c.SaveBusinessRole(new BusinessRoleStrictDTO
-            //                                                              {
-            //                                                                      Name = "Approving Role",
-            //                                                                      BusinessRoleOperationLinks =
-            //                                                                      {
-            //                                                                              new BusinessRoleOperationLinkStrictDTO { Operation = approvingOperation.Identity }
-            //                                                                      }
-            //                                                              }));
+            var approvingRole = authFacade.Evaluate(c => c.SaveBusinessRole(new BusinessRoleStrictDTO
+                                                                          {
+                                                                                  Name = "Approving Role",
+                                                                                  BusinessRoleOperationLinks =
+                                                                                  {
+                                                                                          new BusinessRoleOperationLinkStrictDTO { Operation = approvingOperation.Identity }
+                                                                                  }
+                                                                          }));
 
-            //// Act
-            //var approvingPrincipal = authFacade.Evaluate(c => c.SavePrincipal(new PrincipalStrictDTO
-            //                                                                  {
-            //                                                                          Name = testUserForApproving,
-            //                                                                          Permissions =
-            //                                                                          {
-            //                                                                                  new PermissionStrictDTO
-            //                                                                                  {
-            //                                                                                          Role = approvingRole,
-            //                                                                                  }
-            //                                                                          }
-            //                                                                  }));
+            // Act
+            var approvingPrincipal = authFacade.Evaluate(c => c.SavePrincipal(new PrincipalStrictDTO
+                                                                              {
+                                                                                      Name = testUserForApproving,
+                                                                                      Permissions =
+                                                                                      {
+                                                                                              new PermissionStrictDTO
+                                                                                              {
+                                                                                                      Role = approvingRole,
+                                                                                              }
+                                                                                      }
+                                                                              }));
 
-            //var preApprovePrincipal = authFacade.Evaluate(c => c.GetRichPrincipal(approvingPrincipal));
+            var preApprovePrincipal = authFacade.Evaluate(c => c.GetRichPrincipal(approvingPrincipal));
 
             //var taskInstance = workflowFacade.Evaluate(c => c.GetSimpleTaskInstancesByRootFilter(new TaskInstanceRootFilterModelStrictDTO { DomainObjectId = this.approveOperation.Id })).Single();
 
@@ -129,15 +129,15 @@ namespace SampleSystem.IntegrationTests.Workflow
             //        }
             //}));
 
-            //var postApprovePrincipal = authFacade.Evaluate(c => c.GetRichPrincipal(approvingPrincipal));
+            var postApprovePrincipal = authFacade.Evaluate(c => c.GetRichPrincipal(approvingPrincipal));
 
-            //// Assert
+            // Assert
 
-            //preApprovePrincipal.Permissions.Single().Status.Should().Be(PermissionStatus.Approving);
+            preApprovePrincipal.Permissions.Single().Status.Should().Be(PermissionStatus.Approving);
 
-            //postApprovePrincipal.Permissions.Single().Status.Should().Be(PermissionStatus.Approved);
+            postApprovePrincipal.Permissions.Single().Status.Should().Be(PermissionStatus.Approved);
 
-            //return;
+            return;
         }
     }
 }

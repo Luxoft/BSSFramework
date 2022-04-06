@@ -111,6 +111,7 @@ namespace SampleSystem.WebApiCore
 
             app.UseCapDashboard();
 
+            app.ApplicationServices.StartWorkflow();
         }
 
         private void UseHangfireBss(IApplicationBuilder app)

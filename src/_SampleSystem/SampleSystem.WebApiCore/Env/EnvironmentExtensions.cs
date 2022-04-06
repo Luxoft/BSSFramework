@@ -1,4 +1,6 @@
-﻿using Framework.Authorization.ApproveWorkflow;
+﻿using System;
+
+using Framework.Authorization.ApproveWorkflow;
 using Framework.Authorization.BLL;
 using Framework.Authorization.Generated.DAL.NHibernate;
 using Framework.Cap;
@@ -25,6 +27,8 @@ using SampleSystem.Generated.DAL.NHibernate;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.CustomReports;
 using SampleSystem.WebApiCore.Env.Database;
+
+using WorkflowCore.Interface;
 
 using UserAuthenticationService = SampleSystem.WebApiCore.Env.UserAuthenticationService;
 
@@ -103,6 +107,16 @@ namespace SampleSystem.WebApiCore
                    .AddTransient<SendFinalEvent>()
 
                    .AddTransient<CanAutoApproveStep>();
+        }
+
+        public static void StartWorkflow(this IServiceProvider serviceProvider)
+        {
+            var host = serviceProvider.GetRequiredService<IWorkflowHost>();
+
+            host.RegisterWorkflow<__ApproveOperation_Workflow, ApproveOperationWorkflowObject>();
+            host.RegisterWorkflow<__ApprovePermission_Workflow, ApprovePermissionWorkflowObject>();
+
+            host.Start();
         }
     }
 }

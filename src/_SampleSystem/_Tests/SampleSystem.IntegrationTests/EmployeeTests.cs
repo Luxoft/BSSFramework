@@ -72,7 +72,7 @@ namespace SampleSystem.IntegrationTests
         {
             // Arrange
             var employeeController = this.MainWebApi.Employee;
-            var employeeQueryController = this.GetController<SampleSystem.WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
+            var employeeQueryController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
 
             foreach (var pin in new[] { 123, 456 })
             {
@@ -97,7 +97,7 @@ namespace SampleSystem.IntegrationTests
         {
             // Arrange
             var employeeController = this.MainWebApi.Employee;
-            var employeeQueryController = this.GetController<SampleSystem.WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
+            var employeeQueryController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
 
             var idToPinMap = new Dictionary<Guid, int>
                              {
@@ -141,7 +141,7 @@ namespace SampleSystem.IntegrationTests
         {
             // Arrange
             var employeeController = this.MainWebApi.Employee;
-            var employeeQueryController = this.GetController<SampleSystem.WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
+            var employeeQueryController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
 
             var idToPinMap = new Dictionary<Guid, int>
                              {
@@ -185,7 +185,7 @@ namespace SampleSystem.IntegrationTests
         {
             // Arrange
             var employeeController = this.MainWebApi.Employee;
-            var employeeQueryController = this.GetController<SampleSystem.WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
+            var employeeQueryController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.MainQuery.EmployeeQueryController>();
 
             foreach (var pin in new[] { 123, 456 })
             {

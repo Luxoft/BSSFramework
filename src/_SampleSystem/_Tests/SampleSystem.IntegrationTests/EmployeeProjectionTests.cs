@@ -111,7 +111,7 @@ namespace SampleSystem.IntegrationTests
         {
             // Arrange
             var identity = this.DataHelper.SaveEmployee(Guid.NewGuid());
-            var controller = this.GetController<EmployeeQueryController>();
+            var controller = this.GetControllerEvaluator<EmployeeQueryController>();
 
             // Act
             var result = controller.GetTestEmployeesByODataQueryString($"$filter=id eq GUID'{identity.Id}'");
@@ -126,7 +126,7 @@ namespace SampleSystem.IntegrationTests
         {
             // Arrange
             var expected = new[] { ProjectionPrincipalName, TestEmployee2Login }.ToArray(Maybe.Return);
-            var controller = this.GetController<EmployeeQueryController>(ProjectionPrincipalName);
+            var controller = this.GetControllerEvaluator<EmployeeQueryController>(ProjectionPrincipalName);
 
             // Act
             var actual = controller
@@ -141,7 +141,7 @@ namespace SampleSystem.IntegrationTests
         public void EmployeeProjectionSecurityTestNoAccess()
         {
             // Arrange
-            var controller = this.GetController<EmployeeQueryController>(TestEmployee1Login);
+            var controller = this.GetControllerEvaluator<EmployeeQueryController>(TestEmployee1Login);
 
             // Act
             var result = controller
@@ -159,7 +159,7 @@ namespace SampleSystem.IntegrationTests
         public void EmployeeProjectionSecurityTestHasAccess()
         {
             // Arrange
-            var controller = this.GetController<EmployeeQueryController>(TestEmployee3Login);
+            var controller = this.GetControllerEvaluator<EmployeeQueryController>(TestEmployee3Login);
 
             // Act
             var result = controller
@@ -179,7 +179,7 @@ namespace SampleSystem.IntegrationTests
             logins.Foreach(login => this.DataHelper.SaveEmployee(login: login));
 
             var expected = logins.Reverse().ToArray(Maybe.Return);
-            var controller = this.GetController<EmployeeQueryController>();
+            var controller = this.GetControllerEvaluator<EmployeeQueryController>();
 
             // Act
             var actual = controller

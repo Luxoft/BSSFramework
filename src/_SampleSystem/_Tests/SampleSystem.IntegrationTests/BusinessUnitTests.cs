@@ -101,7 +101,7 @@ namespace SampleSystem.IntegrationTests
         public void CheckBusinessUnitSecondaryAccess_HasAccess()
         {
             // Arrange
-            var businessUnitQueryController = this.GetController<SampleSystem.WebApiCore.Controllers.MainQuery.BusinessUnitQueryController>(EmployeeName);
+            var businessUnitQueryController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.MainQuery.BusinessUnitQueryController>(EmployeeName);
 
             // Act
             var businessUnitTree = businessUnitQueryController.GetTestBusinessUnitTreeByOperation(new GetTestBusinessUnitTreeByOperationAutoRequest
@@ -122,7 +122,7 @@ namespace SampleSystem.IntegrationTests
         public void GetTreeWithFilter()
         {
             // Arrange
-            var businessUnitQueryController = this.GetController<BusinessUnitQueryController>(EmployeeName);
+            var businessUnitQueryController = this.GetControllerEvaluator<BusinessUnitQueryController>(EmployeeName);
 
             // Act
             var businessUnitTree = businessUnitQueryController.GetTestBusinessUnitTreeByOperation(new GetTestBusinessUnitTreeByOperationAutoRequest
@@ -151,7 +151,7 @@ namespace SampleSystem.IntegrationTests
         private void TestGetFullBusinessUnitsTreeByOData()
         {
             // Act
-            var businessUnitQueryController = this.GetController<BusinessUnitController>();
+            var businessUnitQueryController = this.GetControllerEvaluator<BusinessUnitController>();
             var businessUnitTree = businessUnitQueryController.GetFullBusinessUnitsTreeByOData(string.Empty);
 
             // Assert
@@ -162,7 +162,7 @@ namespace SampleSystem.IntegrationTests
         private void TestGetFullBusinessUnitsTree()
         {
             // Act
-            var businessUnitController = this.GetController<BusinessUnitController>();
+            var businessUnitController = this.GetControllerEvaluator<BusinessUnitController>();
             var tree = businessUnitController.GetFullBusinessUnitsTree();
 
             // Assert

@@ -31,7 +31,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportId = new Guid("7DBDCCDF-1F43-43FA-854A-D465F5F4ED53");
 
             // Act
-            var report = this.GetController<SampleSystem.WebApiCore.Controllers.CustomReport.EmployeeReportParameterController>().GetEmployeeReport(new EmployeeReportParameterStrictDTO { ReportId = reportId });
+            var report = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.CustomReport.EmployeeReportParameterController>().GetEmployeeReport(new EmployeeReportParameterStrictDTO { ReportId = reportId });
 
             // Assert
             report.GetSheet("Parameters")
@@ -61,7 +61,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportId = new Guid("7DBDCCDF-1F43-43FA-854A-D465F5F4ED53");
 
             // Act
-            var report = this.GetController<SampleSystem.WebApiCore.Controllers.CustomReport.EmployeeReportParameterController>(Tester).GetEmployeeReport(new EmployeeReportParameterStrictDTO { ReportId = reportId });
+            var report = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.CustomReport.EmployeeReportParameterController>(Tester).GetEmployeeReport(new EmployeeReportParameterStrictDTO { ReportId = reportId });
 
             // Assert
             report.GetSheet("Parameters")
@@ -86,10 +86,10 @@ namespace SampleSystem.IntegrationTests.Reports
             // Arrange
             var reportId = new Guid("7DBDCCDF-1F43-43FA-854A-D465F5F4ED53");
 
-            var parameters = this.GetController<SampleSystemGenericReportController>().GetSimpleReportParameters(reportId);
+            var parameters = this.GetControllerEvaluator<SampleSystemGenericReportController>().GetSimpleReportParameters(reportId);
 
             // Act
-            var values = this.GetController<SampleSystemGenericReportController>().GetSimpleReportParameterValues(new GetSimpleReportParameterValuesRequest
+            var values = this.GetControllerEvaluator<SampleSystemGenericReportController>().GetSimpleReportParameterValues(new GetSimpleReportParameterValuesRequest
             {
                     identity = parameters.First(x => x.Name.Equals("Position", StringComparison.InvariantCultureIgnoreCase)).Identity,
                     odataQueryString = string.Empty
@@ -112,10 +112,10 @@ namespace SampleSystem.IntegrationTests.Reports
 
             var reportId = new Guid("7DBDCCDF-1F43-43FA-854A-D465F5F4ED53");
 
-            var parameters = this.GetController<SampleSystemGenericReportController>().GetSimpleReportParameters(reportId);
+            var parameters = this.GetControllerEvaluator<SampleSystemGenericReportController>().GetSimpleReportParameters(reportId);
 
             // Act
-            var values = this.GetController<SampleSystemGenericReportController>().GetSimpleReportParameterValues(new GetSimpleReportParameterValuesRequest
+            var values = this.GetControllerEvaluator<SampleSystemGenericReportController>().GetSimpleReportParameterValues(new GetSimpleReportParameterValuesRequest
             {
                     identity = parameters.First(x => x.Name.Equals("Position", StringComparison.InvariantCultureIgnoreCase)).Identity,
                     odataQueryString = string.Empty
@@ -131,8 +131,8 @@ namespace SampleSystem.IntegrationTests.Reports
             // Arrange
             var reportId = new Guid("7DBDCCDF-1F43-43FA-854A-D465F5F4ED53");
 
-            var parameters = this.GetController<SampleSystemGenericReportController>().GetSimpleReportParameters(reportId);
-            var values = this.GetController<SampleSystemGenericReportController>().GetSimpleReportParameterValues(new GetSimpleReportParameterValuesRequest
+            var parameters = this.GetControllerEvaluator<SampleSystemGenericReportController>().GetSimpleReportParameters(reportId);
+            var values = this.GetControllerEvaluator<SampleSystemGenericReportController>().GetSimpleReportParameterValues(new GetSimpleReportParameterValuesRequest
             {
                 identity = parameters.First(x => x.Name.Equals("Position", StringComparison.InvariantCultureIgnoreCase)).Identity,
                 odataQueryString = string.Empty
@@ -141,7 +141,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var positionId = new Guid(values.Items.First().Value);
 
             // Act
-            var report = this.GetController<SampleSystem.WebApiCore.Controllers.CustomReport.EmployeeReportParameterController>()
+            var report = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.CustomReport.EmployeeReportParameterController>()
                              .GetEmployeeReport(new EmployeeReportParameterStrictDTO { ReportId = reportId, Position = new EmployeePositionIdentityDTO(positionId) });
 
             // Assert

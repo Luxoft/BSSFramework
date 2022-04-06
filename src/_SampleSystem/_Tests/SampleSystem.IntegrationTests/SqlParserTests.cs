@@ -82,7 +82,7 @@ namespace SampleSystem.IntegrationTests
         {
             // Arrange
             var employeeController = this.MainWebApi.Employee;
-            var hRDepartmentController = this.GetController<HRDepartmentController>();
+            var hRDepartmentController = this.GetControllerEvaluator<HRDepartmentController>();
 
             var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
 
@@ -101,7 +101,7 @@ namespace SampleSystem.IntegrationTests
 
             var employeeIdentity = this.DataHelper.SaveEmployee(login: "value", coreBusinessUnit: costBuId, location: location);
 
-            var fullEmployee = employeeController.GetFullEmployee(employeeIdentity);
+            var fullEmployee = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
 
             // Act
             Action action = () => hRDepartmentController.RemoveHRDepartment(fullEmployee.HRDepartment.Identity);

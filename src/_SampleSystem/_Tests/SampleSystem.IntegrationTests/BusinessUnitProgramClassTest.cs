@@ -18,7 +18,7 @@ namespace SampleSystem.IntegrationTests
         [TestInitialize]
         public void TestData()
         {
-            var businessUnitTypeController = this.GetController<BusinessUnitTypeController>();
+            var businessUnitTypeController = this.GetControllerEvaluator<BusinessUnitTypeController>();
             var lobType = businessUnitTypeController.GetSimpleBusinessUnitTypeByName(DefaultConstants.BUSINESS_UNIT_TYPE_LOB_NAME);
             var programType = businessUnitTypeController.GetSimpleBusinessUnitTypeByName(DefaultConstants.BUSINESS_UNIT_TYPE_PROGRAM_NAME);
 
@@ -35,7 +35,7 @@ namespace SampleSystem.IntegrationTests
         public void Get_SortByVirtualProperty_CheckOrderSuccessed()
         {
             // Arrange
-            var businessUnitQueryController = this.GetController<SampleSystem.WebApiCore.Controllers.MainQuery.BusinessUnitQueryController>();
+            var businessUnitQueryController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.MainQuery.BusinessUnitQueryController>();
 
             var filter = new BusinessUnitProgramClassFilterModelStrictDTO
             {
@@ -63,7 +63,7 @@ namespace SampleSystem.IntegrationTests
         {
             // Arrange
             var namePart = "gramm";
-            var businessUnitQueryController = this.GetController<SampleSystem.WebApiCore.Controllers.MainQuery.BusinessUnitQueryController>();
+            var businessUnitQueryController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.MainQuery.BusinessUnitQueryController>();
             var filter = new BusinessUnitProgramClassFilterModelStrictDTO
             {
                 FilterVirtualName = namePart,

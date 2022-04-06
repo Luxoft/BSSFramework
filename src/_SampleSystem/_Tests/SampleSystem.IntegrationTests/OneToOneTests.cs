@@ -19,7 +19,7 @@ namespace SampleSystem.IntegrationTests
         public void GetRequestProjection_ContainsOneToOneDetail_Initialized()
         {
             // Arrange
-            var iMRequestQueryController = this.GetController<IMRequestQueryController>();
+            var iMRequestQueryController = this.GetControllerEvaluator<IMRequestQueryController>();
 
             var idents = this.DataHelper.Environment.GetContextEvaluator().Evaluate(
                 DBSessionMode.Write,

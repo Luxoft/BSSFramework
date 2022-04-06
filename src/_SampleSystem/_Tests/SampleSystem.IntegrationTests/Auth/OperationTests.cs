@@ -18,18 +18,17 @@ namespace SampleSystem.IntegrationTests.Auth
         {
             // Arrange
             var employeeController = this.MainWebApi.Employee;
-            var currentUser = employeeController.GetFullEmployee(
-                this.DataHelper.GetEmployeeByLogin(this.AuthHelper.GetCurrentUserLogin()));
+            var currentUser = this.DataHelper.GetCurrentEmployee();
 
-            var operationIdentity = this.GetAuthControllerEvaluator().GetSimpleOperationByName(Name).Identity;
-            var operationStrict = this.GetAuthControllerEvaluator().GetFullOperation(operationIdentity).ToStrict();
+            var operationIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleOperationByName(Name)).Identity;
+            var operationStrict = this.GetAuthControllerEvaluator().Evaluate(c => c.GetFullOperation(operationIdentity)).ToStrict();
             operationStrict.Description = NewDescription;
 
             // Act
-            this.GetAuthControllerEvaluator().SaveOperation(operationStrict);
+            this.GetAuthControllerEvaluator().Evaluate(c => c.SaveOperation(operationStrict));
 
             // Assert
-            var operationSimple = this.GetAuthControllerEvaluator().GetSimpleOperation(operationIdentity);
+            var operationSimple = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleOperation(operationIdentity));
 
             operationSimple.Name.Should().Be(Name);
             operationSimple.Description.Should().Be(NewDescription);

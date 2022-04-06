@@ -35,7 +35,7 @@ namespace SampleSystem.IntegrationTests
             var testDate = new DateTime(2000, 5, 5);
             IntegrationTestDateTimeService.CurrentDate = testDate;
 
-            var example1Controller = this.GetController<Example1Controller>();
+            var example1Controller = this.GetControllerEvaluator<Example1Controller>();
 
             // Act
             var objIdentity = example1Controller.SaveExample1(new Example1StrictDTO());

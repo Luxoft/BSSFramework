@@ -21,7 +21,7 @@ namespace SampleSystem.IntegrationTests
         public void GetStream_ErrorThrownInside_ProcessesError()
         {
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var report = this.DataHelper.SaveReport();
             this.DataHelper.SaveReportProperty(report, nameof(Employee.PersonalCellPhone));
 
@@ -57,7 +57,7 @@ namespace SampleSystem.IntegrationTests
         {
             // Arrange
             var report = this.DataHelper.SaveReport();
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
 
             this.DataHelper.SaveReportProperty(report, nameof(Employee.PersonalCellPhone));
 
@@ -82,7 +82,7 @@ namespace SampleSystem.IntegrationTests
         public void GetStream_ReportFieldWithMaybe_ReturnsReportWithoutError()
         {
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var report = this.DataHelper.SaveReport();
             this.DataHelper.SaveReportProperty(report, $"{nameof(Employee.Position)}/{nameof(EmployeePosition.Name)}");
 

@@ -58,7 +58,7 @@ namespace SampleSystem.IntegrationTests
         public void TestManualEmployeeProjection_LoadedByManualDependencySecurity()
         {
             // Arrange
-            var employeeQueryController = this.GetController<EmployeeQueryController>(TestEmployeeLogin);
+            var employeeQueryController = this.GetControllerEvaluator<EmployeeQueryController>(TestEmployeeLogin);
 
             // Act
             var items = employeeQueryController.GetTestManualEmployeeProjectionsByODataQueryString($"$filter={nameof(TestManualEmployeeProjection.CoreBusinessUnitId)} ne null").Items;
@@ -72,7 +72,7 @@ namespace SampleSystem.IntegrationTests
         public void TestLegacyEmployeeProjection_LoadedByLegacyGenericSecurity()
         {
             // Arrange
-            var employeeQueryController = this.GetController<EmployeeQueryController>(TestEmployeeLogin);
+            var employeeQueryController = this.GetControllerEvaluator<EmployeeQueryController>(TestEmployeeLogin);
 
             // Act
             var items = employeeQueryController.GetTestLegacyEmployeesByODataQueryString($"$filter={nameof(TestLegacyEmployee.BusinessUnit_Security)} ne null").Items;

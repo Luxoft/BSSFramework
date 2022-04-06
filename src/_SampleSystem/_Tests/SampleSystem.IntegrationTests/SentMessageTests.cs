@@ -36,7 +36,7 @@ namespace SampleSystem.IntegrationTests
             var expected = string.Join(",", targets.Select(x => x.Name));
 
             // Act
-            this.GetConfigurationControllerEvaluator().SaveSendedNotification(notification);
+            this.GetConfigurationControllerEvaluator().Evaluate(c => c.SaveSendedNotification(notification));
             var sentMessage = this.GetConfigurationControllerEvaluator().EvaluateRead(evaluatedData => new SentMessageBLL(evaluatedData.Context.Configuration).GetFullList().Single());
 
             // Assert

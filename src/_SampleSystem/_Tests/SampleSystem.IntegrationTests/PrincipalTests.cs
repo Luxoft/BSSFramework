@@ -68,11 +68,13 @@ namespace SampleSystem.IntegrationTests
             var name = $@"luxoft\saveprincipaltest_{Guid.NewGuid()}";
             var principalIdentity = this.AuthHelper.SavePrincipal(name, true);
 
-            var permissionIdentity = this.GetAuthControllerEvaluator().SavePermission(new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, new PermissionStrictDTO
+            var role = this.GetAuthControllerEvaluator().Evaluate(c => c.GetVisualBusinessRoleByName(Framework.Authorization.Domain.BusinessRole.AdminRoleName)).Identity;
+
+            var permissionIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePermission(new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, new PermissionStrictDTO
             {
-                Role = this.GetAuthControllerEvaluator().GetVisualBusinessRoleByName(Framework.Authorization.Domain.BusinessRole.AdminRoleName).Identity,
+                Role = role,
                 Period = Period.Eternity
-            }));
+            })));
 
             var configFacade = this.GetConfigurationControllerEvaluator();
 
@@ -122,7 +124,7 @@ namespace SampleSystem.IntegrationTests
             // Act
             var principalId = this.AuthHelper.SavePrincipal(Name, true, expected);
 
-            var principal = this.GetAuthControllerEvaluator().GetSimplePrincipal(principalId);
+            var principal = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalId));
 
             // Assert
             principal.ExternalId.Should().Be(expected);
@@ -145,8 +147,8 @@ namespace SampleSystem.IntegrationTests
         //    };
 
         //    // Act
-        //    var principalId = this.GetAuthControllerEvaluator().SavePrincipal(model);
-        //    var principal = this.GetAuthControllerEvaluator().GetSimplePrincipal(principalId);
+        //    var principalId = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePrincipal(model);
+        //    var principal = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalId);
 
         //    // Assert
         //    principal.ExternalId.Should().Be(expected);

@@ -23,7 +23,7 @@ namespace SampleSystem.IntegrationTests
         public void ExampleContainer_UpdatePropertyChanged1()
         {
             // Arrange
-            var example1Controller = this.GetController<Example1Controller>();
+            var example1Controller = this.GetControllerEvaluator<Example1Controller>();
 
             var strictSource = new Example1StrictDTO
             {
@@ -79,7 +79,7 @@ namespace SampleSystem.IntegrationTests
         public void ExampleContainer_UpdatePropertyChanged3()
         {
             // Arrange
-            var example1Controller = this.GetController<Example1Controller>();
+            var example1Controller = this.GetControllerEvaluator<Example1Controller>();
 
             var ident = example1Controller.UpdateExample1(new Example1UpdateDTO(new Example1StrictDTO
             {

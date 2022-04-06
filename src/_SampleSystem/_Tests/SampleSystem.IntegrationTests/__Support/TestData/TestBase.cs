@@ -9,8 +9,10 @@ using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.ServiceModel.Subscriptions;
+using Framework.DomainDriven.WebApiNetCore;
 using Framework.Notification.DTO;
 
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -219,6 +221,14 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
                     func(context);
                     return Ignore.Value;
                 });
+        }
+
+        public ControllerEvaluator<TController> GetControllerEvaluator<TController>(string principalName = null)
+                where TController : ControllerBase, IApiControllerBase
+        {
+            var controllerEvaluator = this.Environment.ServiceProvider.GetRequiredService<ControllerEvaluator<TController>>();
+
+            return principalName == null ? controllerEvaluator : controllerEvaluator.WithImpersonate(principalName);
         }
 
         protected ControllerEvaluator<AuthSLJsonController> GetAuthControllerEvaluator()

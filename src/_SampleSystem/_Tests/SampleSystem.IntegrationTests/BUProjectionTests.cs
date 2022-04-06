@@ -68,7 +68,7 @@ namespace SampleSystem.IntegrationTests
         public void BusinessUnitProjectionCalcCollectionPropTest()
         {
             // Arrange
-            var businessUnitQueryController = this.GetController<BusinessUnitQueryController>();
+            var businessUnitQueryController = this.GetControllerEvaluator<BusinessUnitQueryController>();
             var expectedEmployee = "AA,BB,CC";
 
             // Act
@@ -83,7 +83,7 @@ namespace SampleSystem.IntegrationTests
         public void BusinessUnitProjectionCalcHerPropTest()
         {
             // Arrange
-            var businessUnitQueryController = this.GetController<BusinessUnitQueryController>();
+            var businessUnitQueryController = this.GetControllerEvaluator<BusinessUnitQueryController>();
             var expectedHer = $"{DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME},{DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_NAME}";
 
             // Act

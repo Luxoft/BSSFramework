@@ -73,11 +73,11 @@ namespace SampleSystem.IntegrationTests
                 ExternalId = 1
             };
 
-            var employeeIdentity = employeeController.SaveEmployee(employeeStrictDto);
+            var employeeIdentity = employeeController.Evaluate(c => c.SaveEmployee(employeeStrictDto));
 
             for (int q = 0; q < testCount; q++)
             {
-                var employeeFull = employeeController.GetFullEmployee(employeeIdentity);
+                var employeeFull = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
                 var employeeStrict = employeeFull.ToStrict();
                 employeeStrict.NameEng = new FioShort() { FirstName = $"{q}" };
                 employeeController.SaveEmployee(employeeStrict);
@@ -93,11 +93,11 @@ namespace SampleSystem.IntegrationTests
                                                       .Skip(skip) ////
                                                       .FirstOrDefault();
 
-            var lastEmployeeState = employeeAuditController.GetFullEmployeeWithRevision( new GetFullEmployeeWithRevisionAutoRequest
+            var lastEmployeeState = employeeAuditController.Evaluate(c => c.GetFullEmployeeWithRevision( new GetFullEmployeeWithRevisionAutoRequest
                 {
                     employeeIdentity = employeeIdentity,
                     revision = lastRevision.RevisionNumber
-            });
+            }));
 
             var expected = Enumerable.Range(-1, testCount).Skip(skip).First();
             lastEmployeeState.NameEng.FirstName.Should().Be($"{expected}");
@@ -135,7 +135,7 @@ namespace SampleSystem.IntegrationTests
         {
             // Act
             var employeeController = this.MainWebApi.Employee;
-            var employeeAuditController = this.GetController<SampleSystem.WebApiCore.Controllers.Audit.EmployeeController>();
+            var employeeAuditController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.Audit.EmployeeController>();
             var testCount = 10;
             var emailTail = "@email.email";
 
@@ -152,7 +152,7 @@ namespace SampleSystem.IntegrationTests
 
             for (int q = 0; q < testCount; q++)
             {
-                var employeeFull = employeeController.GetFullEmployee(employeeIdentity);
+                var employeeFull = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
                 var employeeStrict = employeeFull.ToStrict();
                 employeeStrict.Email = $"{q}{emailTail}";
                 employeeController.SaveEmployee(employeeStrict);
@@ -180,7 +180,7 @@ namespace SampleSystem.IntegrationTests
         {
             // Act
             var employeeController = this.MainWebApi.Employee;
-            var employeeAuditController = this.GetController<SampleSystem.WebApiCore.Controllers.Audit.EmployeeController>();
+            var employeeAuditController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.Audit.EmployeeController>();
             var testCount = 10;
             var emailTail = "@email.email";
 
@@ -197,7 +197,7 @@ namespace SampleSystem.IntegrationTests
 
             for (int q = 0; q < testCount; q++)
             {
-                var employeeFull = employeeController.GetFullEmployee(employeeIdentity);
+                var employeeFull = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
                 var employeeStrict = employeeFull.ToStrict();
                 employeeStrict.Email = $"{q}{emailTail}";
                 employeeController.SaveEmployee(employeeStrict);
@@ -225,7 +225,7 @@ namespace SampleSystem.IntegrationTests
         {
             // Act
             var employeeController = this.MainWebApi.Employee;
-            var employeeAuditController = this.GetController<SampleSystem.WebApiCore.Controllers.Audit.EmployeeController>();
+            var employeeAuditController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.Audit.EmployeeController>();
             var testCount = 10;
             var emailTail = "@email.email";
 
@@ -242,7 +242,7 @@ namespace SampleSystem.IntegrationTests
 
             for (int q = 0; q < testCount; q++)
             {
-                var employeeFull = employeeController.GetFullEmployee(employeeIdentity);
+                var employeeFull = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
                 var employeeStrict = employeeFull.ToStrict();
                 employeeStrict.Email = $"{q}{emailTail}";
                 employeeController.SaveEmployee(employeeStrict);

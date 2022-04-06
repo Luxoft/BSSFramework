@@ -76,7 +76,7 @@ namespace SampleSystem.IntegrationTests
         public void TestSecurityObjItem_LoadedByDependencySecurity()
         {
             // Arrange
-            var testSecurityObjItemController = this.GetController<TestSecurityObjItemController>(TestEmployeeLogin);
+            var testSecurityObjItemController = this.GetControllerEvaluator<TestSecurityObjItemController>(TestEmployeeLogin);
 
             // Act
             var items = testSecurityObjItemController.GetVisualTestSecurityObjItems().ToList();
@@ -90,7 +90,7 @@ namespace SampleSystem.IntegrationTests
         public void TestSecurityObjItemProjection_LoadedByDependencySecurity()
         {
             // Arrange
-            var testSecurityObjItemController = this.GetController<TestSecurityObjItemController>(TestEmployeeLogin);
+            var testSecurityObjItemController = this.GetControllerEvaluator<TestSecurityObjItemController>(TestEmployeeLogin);
 
             // Act
             var items = testSecurityObjItemController.GetTestSecurityObjItemProjections().ToList();
@@ -104,7 +104,7 @@ namespace SampleSystem.IntegrationTests
         public void TestSecurityObjSubItem1_LoadedByDependencySecurity()
         {
             // Arrange
-            var testSecuritySubObjItemController = this.GetController<TestSecuritySubObjItemController>(TestEmployeeLogin);
+            var testSecuritySubObjItemController = this.GetControllerEvaluator<TestSecuritySubObjItemController>(TestEmployeeLogin);
 
             // Act
             var items = testSecuritySubObjItemController.GetVisualTestSecuritySubObjItems().ToList();
@@ -118,7 +118,7 @@ namespace SampleSystem.IntegrationTests
         public void TestSecurityObjSubItem2_LoadedByDependencySecurity()
         {
             // Arrange
-            var testSecuritySubObjItem2Controller = this.GetController<TestSecuritySubObjItem2Controller>(TestEmployeeLogin);
+            var testSecuritySubObjItem2Controller = this.GetControllerEvaluator<TestSecuritySubObjItem2Controller>(TestEmployeeLogin);
 
             // Act
             var items = testSecuritySubObjItem2Controller.GetVisualTestSecuritySubObjItem2s().ToList();
@@ -132,7 +132,7 @@ namespace SampleSystem.IntegrationTests
         public void TestSecurityObjSubItem3_LoadedByDependencySecurity()
         {
             // Arrange
-            var testSecuritySubObjItem3Controller = this.GetController<TestSecuritySubObjItem3Controller>(TestEmployeeLogin);
+            var testSecuritySubObjItem3Controller = this.GetControllerEvaluator<TestSecuritySubObjItem3Controller>(TestEmployeeLogin);
 
             // Act
             var items = testSecuritySubObjItem3Controller.GetVisualTestSecuritySubObjItem3s().ToList();

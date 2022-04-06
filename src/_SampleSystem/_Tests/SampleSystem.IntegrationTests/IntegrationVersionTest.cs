@@ -34,7 +34,7 @@ namespace SampleSystem.IntegrationTests
                                                                         return obj.Id;
                                                                     });
 
-            var integrationVersionContainer1Controller = this.GetController<IntegrationVersionContainer1Controller>();
+            var integrationVersionContainer1Controller = this.GetControllerEvaluator<IntegrationVersionContainer1Controller>();
             this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
 
             // Act
@@ -76,7 +76,7 @@ namespace SampleSystem.IntegrationTests
                 return obj.Id;
             });
 
-            var integrationVersionContainer1Controller = this.GetController<IntegrationVersionContainer1Controller>();
+            var integrationVersionContainer1Controller = this.GetControllerEvaluator<IntegrationVersionContainer1Controller>();
             this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
 
             // Act
@@ -116,7 +116,7 @@ namespace SampleSystem.IntegrationTests
                                                                         return obj.Id;
                                                                     });
 
-            var integrationVersionContainer1Controller = this.GetController<IntegrationVersionContainer1Controller>();
+            var integrationVersionContainer1Controller = this.GetControllerEvaluator<IntegrationVersionContainer1Controller>();
             this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
 
             // Act
@@ -155,7 +155,7 @@ namespace SampleSystem.IntegrationTests
                 return obj.Id;
             });
 
-            var integrationVersionContainer2Controller = this.GetController<IntegrationVersionContainer2Controller>();
+            var integrationVersionContainer2Controller = this.GetControllerEvaluator<IntegrationVersionContainer2Controller>();
             this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
 
             // Act
@@ -197,7 +197,7 @@ namespace SampleSystem.IntegrationTests
                 return obj.Id;
             });
 
-            var integrationVersionContainer2Controller = this.GetController<IntegrationVersionContainer2Controller>();
+            var integrationVersionContainer2Controller = this.GetControllerEvaluator<IntegrationVersionContainer2Controller>();
             this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
 
             // Act
@@ -237,7 +237,7 @@ namespace SampleSystem.IntegrationTests
                 return obj.Id;
             });
 
-            var integrationVersionContainer2Controller = this.GetController<IntegrationVersionContainer2Controller>();
+            var integrationVersionContainer2Controller = this.GetControllerEvaluator<IntegrationVersionContainer2Controller>();
             this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
 
             // Act
@@ -279,7 +279,7 @@ namespace SampleSystem.IntegrationTests
                                                                         return obj.Id;
                                                                     });
 
-            var integrationVersionContainer1Controller = this.GetController<IntegrationVersionContainer1Controller>();
+            var integrationVersionContainer1Controller = this.GetControllerEvaluator<IntegrationVersionContainer1Controller>();
             this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
 
             var modelName = Guid.NewGuid().ToString();
@@ -329,7 +329,7 @@ namespace SampleSystem.IntegrationTests
                 return obj.Id;
             });
 
-            var integrationVersionContainer1Controller = this.GetController<IntegrationVersionContainer1Controller>();
+            var integrationVersionContainer1Controller = this.GetControllerEvaluator<IntegrationVersionContainer1Controller>();
             this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
 
             var modelName = Guid.NewGuid().ToString();

@@ -187,8 +187,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
             protected override IEnumerable<IDALListener> GetDALFlushedListeners()
             {
-                return this.serviceEnvironment.GetDALFlushedListeners((TBLLContextContainer)this)
-                           .Concat(this.ScopedServiceProvider.GetServices<IDALListener>());
+                return this.serviceEnvironment.GetDALFlushedListeners((TBLLContextContainer)this);
             }
         }
     }

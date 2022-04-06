@@ -34,6 +34,8 @@ public class PermissionWorkflowDALListener : IDALListener
         {
             var startupObj = this.workflowApproveProcessor.GetPermissionStartupObject(permission);
 
+            permission.Status = PermissionStatus.Approving;
+
             var ident = await this.workflowHost.StartWorkflow(nameof(__ApprovePermission_Workflow), startupObj);
         }
 

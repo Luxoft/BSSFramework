@@ -194,7 +194,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
                 return type.ToIdentityDTO();
             }
 
-            var businessUnitTypeController = this.GetControllerEvaluator<BusinessUnitTypeController>();
+            var businessUnitTypeController = this.Environment.ServiceProvider.GetDefaultControllerEvaluator<BusinessUnitTypeController>();
             var buTypeStrict = new BusinessUnitTypeStrictDTO(businessUnitTypeController.Evaluate(c => c.GetFullBusinessUnitType(type.ToIdentityDTO())));
 
             possibleParents = possibleParents ?? new List<BusinessUnitTypeIdentityDTO>();
@@ -618,15 +618,6 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             controller.PrincipalName = principalName;
 
             return controller;
-        }
-
-
-        public virtual ControllerEvaluator<TController> GetControllerEvaluator<TController>(string principalName = null)
-                where TController : ControllerBase, IApiControllerBase
-        {
-            var controllerEvaluator = this.Environment.ServiceProvider.GetRequiredService<ControllerEvaluator<TController>>();
-
-            return principalName == null ? controllerEvaluator : controllerEvaluator.WithImpersonate(principalName);
         }
     }
 }

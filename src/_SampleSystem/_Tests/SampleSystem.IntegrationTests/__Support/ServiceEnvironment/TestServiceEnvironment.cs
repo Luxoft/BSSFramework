@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data;
-using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,7 +21,6 @@ using Framework.Validation;
 
 using MediatR;
 
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -43,9 +41,7 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
     /// </summary>
     public class TestServiceEnvironment : SampleSystemServiceEnvironment
     {
-        private static readonly Lazy<TestServiceEnvironment> IntegrationEnvironmentLazy = new(() => CreateIntegrationEnvironment());
-
-        private static readonly Lazy<TestServiceEnvironment> WorkflowIntegrationEnvironmentLazy = new(() => CreateWorkflowIntegrationEnvironment());
+        private static readonly Lazy<TestServiceEnvironment> DefaultLazy = new(() => CreateDefaultTestServiceEnvironment());
 
         public TestServiceEnvironment(
             IServiceProvider serviceProvider,
@@ -65,9 +61,7 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
         /// <summary>
         /// Initilize Integration Environment
         /// </summary>
-        public static TestServiceEnvironment IntegrationEnvironment => IntegrationEnvironmentLazy.Value;
-
-        public static TestServiceEnvironment WorkflowIntegrationEnvironment => WorkflowIntegrationEnvironmentLazy.Value;
+        public static TestServiceEnvironment Default => DefaultLazy.Value;
 
         public bool IsDebugInTest { get; set; } = true;
 
@@ -81,14 +75,14 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
         /// </summary>
         public EnvironmentSettings Settings { get; }
 
-        private static TestServiceEnvironment CreateIntegrationEnvironment(Action<IServiceCollection> initServices = null)
+        private static TestServiceEnvironment CreateDefaultTestServiceEnvironment(Action<IServiceCollection> initServices = null)
         {
 
             return BuildServiceProvider(initServices).GetRequiredService<TestServiceEnvironment>();
         }
 
 
-        private static IServiceProvider BuildServiceProvider(Action<IServiceCollection> initServices = null)
+        protected static IServiceProvider BuildServiceProvider(Action<IServiceCollection> initServices = null)
         {
             return new ServiceCollection()
                                   .RegisterLegacyBLLContext()
@@ -111,24 +105,9 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
         }
 
-        private static TestServiceEnvironment CreateWorkflowIntegrationEnvironment()
-        {
-            var configuration = new ConfigurationBuilder()
-                                .SetBasePath(Directory.GetCurrentDirectory())
-                                .AddJsonFile("appsettings.json", false, true)
-                                .AddEnvironmentVariables(nameof(SampleSystem) + "_")
-                                .Build();
-
-            var serviceProvider = BuildServiceProvider(services => services.AddWorkflowCore(configuration).AddAuthWorkflow());
-
-            serviceProvider.StartWorkflow();
-
-            return serviceProvider.GetRequiredService<TestServiceEnvironment>();
-        }
-
         protected override SampleSystemBllContextContainer CreateBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null)
         {
-            return new TestSampleSystemBLLContextContainerStandard(
+            return new TestSampleSystemBllContextContainer(
                 this,
                 scopedServiceProvider,
                 this.DefaultAuthorizationValidatorCompileCache,
@@ -143,10 +122,10 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                 this.rewriteReceiversService);
         }
 
-        private class TestSampleSystemBLLContextContainerStandard : SampleSystemBllContextContainer
+        protected class TestSampleSystemBllContextContainer : SampleSystemBllContextContainer
         {
 
-            public TestSampleSystemBLLContextContainerStandard(SampleSystemServiceEnvironment serviceEnvironment, IServiceProvider scopedServiceProvider, ValidatorCompileCache defaultAuthorizationValidatorCompileCache, ValidatorCompileCache validatorCompileCache, Func<ISampleSystemBLLContext, ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>> securityExpressionBuilderFactoryFunc, IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService, ICryptService<CryptSystem> cryptService, ITypeResolver<string> currentTargetSystemTypeResolver, IDBSession session, string currentPrincipalName, SmtpSettings smtpSettings, IRewriteReceiversService rewriteReceiversService)
+            public TestSampleSystemBllContextContainer(SampleSystemServiceEnvironment serviceEnvironment, IServiceProvider scopedServiceProvider, ValidatorCompileCache defaultAuthorizationValidatorCompileCache, ValidatorCompileCache validatorCompileCache, Func<ISampleSystemBLLContext, ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>> securityExpressionBuilderFactoryFunc, IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService, ICryptService<CryptSystem> cryptService, ITypeResolver<string> currentTargetSystemTypeResolver, IDBSession session, string currentPrincipalName, SmtpSettings smtpSettings, IRewriteReceiversService rewriteReceiversService)
                 : base(serviceEnvironment, scopedServiceProvider, defaultAuthorizationValidatorCompileCache, validatorCompileCache, securityExpressionBuilderFactoryFunc, fetchService, cryptService, currentTargetSystemTypeResolver, session, currentPrincipalName, smtpSettings, rewriteReceiversService)
             {
             }

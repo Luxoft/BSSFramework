@@ -30,7 +30,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
     [TestClass]
     public class TestBase : IControllerEvaluatorContainer
     {
-        private static readonly Lazy<SampleSystemServiceEnvironment> EnvironmentLazy = new(() => TestServiceEnvironment.IntegrationEnvironment, true);
+        private static readonly Lazy<SampleSystemServiceEnvironment> EnvironmentLazy = new(() => TestServiceEnvironment.Default, true);
 
         private DataHelper dataHelper;
 
@@ -226,9 +226,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
         public ControllerEvaluator<TController> GetControllerEvaluator<TController>(string principalName = null)
                 where TController : ControllerBase, IApiControllerBase
         {
-            var controllerEvaluator = this.Environment.ServiceProvider.GetRequiredService<ControllerEvaluator<TController>>();
-
-            return principalName == null ? controllerEvaluator : controllerEvaluator.WithImpersonate(principalName);
+            return this.Environment.RootServiceProvider.GetDefaultControllerEvaluator<TController>(principalName);
         }
 
         protected ControllerEvaluator<AuthSLJsonController> GetAuthControllerEvaluator(string principalName = null)

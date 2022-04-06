@@ -100,7 +100,7 @@ namespace SampleSystem.WebApiCore
             return services
                    .AddScoped(sp => sp.GetRequiredService<IServiceEnvironment<IAuthorizationBLLContext>>().GetContextEvaluator())
                    .AddScoped<IWorkflowApproveProcessor, WorkflowApproveProcessor>()
-                   .AddScoped<IDALListener, PermissionWorkflowDALListener>()
+                   //.AddScoped<IDALListener, PermissionWorkflowDALListener>()
 
                    .AddTransient<StartWorkflow>()
                    .AddTransient<PublishEvent>()

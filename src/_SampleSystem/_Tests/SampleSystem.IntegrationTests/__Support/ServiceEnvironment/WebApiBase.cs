@@ -19,9 +19,7 @@ public abstract class WebApiBase : IControllerEvaluatorContainer
     public virtual ControllerEvaluator<TController> GetControllerEvaluator<TController>(string principalName = null)
             where TController : ControllerBase, IApiControllerBase
     {
-        var controllerEvaluator = this.serviceProvider.GetRequiredService<ControllerEvaluator<TController>>();
-
-        return principalName == null ? controllerEvaluator : controllerEvaluator.WithImpersonate(principalName);
+        return this.serviceProvider.GetDefaultControllerEvaluator<TController>(principalName);
     }
 
     IServiceProvider IControllerEvaluatorContainer.RootServiceProvider => this.serviceProvider;

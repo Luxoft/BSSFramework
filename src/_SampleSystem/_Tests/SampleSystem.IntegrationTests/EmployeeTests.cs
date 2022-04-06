@@ -248,7 +248,7 @@ namespace SampleSystem.IntegrationTests
             var restFacade = this.GetConfigurationControllerEvaluator();
 
             // Act
-            var processedModCount = restFacade.Evaluate(c => c.ProcessModifications(1000));
+            var processedModCount = restFacade.WithIntegrationImpersonate().Evaluate(c => c.ProcessModifications(1000));
 
             // Assert
             var modifications = this.GetModifications();
@@ -279,7 +279,7 @@ namespace SampleSystem.IntegrationTests
             var preProcessedModificationState = restFacade.Evaluate(c => c.GetModificationQueueProcessingState());
             var preProcessedNotificationState = restFacade.Evaluate(c => c.GetNotificationQueueProcessingState());
 
-            restFacade.Evaluate(c => c.ProcessModifications(1000));
+            restFacade.WithIntegrationImpersonate().Evaluate(c => c.ProcessModifications(1000));
 
             var postProcessedModificationState = restFacade.Evaluate(c => c.GetModificationQueueProcessingState());
             var postProcessedNotificationState = restFacade.Evaluate(c => c.GetNotificationQueueProcessingState());

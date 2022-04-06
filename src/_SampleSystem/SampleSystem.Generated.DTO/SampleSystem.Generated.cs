@@ -2761,8 +2761,8 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Example1), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.SystemIntegration)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.SystemIntegration)]
+    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.LocationEdit)]
+    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.LocationView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct Example1IdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.Example1IdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {

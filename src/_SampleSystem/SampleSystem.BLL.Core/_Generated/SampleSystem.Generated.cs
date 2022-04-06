@@ -16,6 +16,10 @@ namespace SampleSystem.BLL
     public class SampleSystemSecurityOperation
     {
         
+        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _approveWorkflowOperation = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.ApproveWorkflowOperation);
+        
+        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _approvingWorkflowOperation = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.ApprovingWorkflowOperation);
+        
         private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _authorizationImpersonate = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.AuthorizationImpersonate);
         
         private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _businessUnitEdit = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitEdit, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
@@ -93,6 +97,22 @@ namespace SampleSystem.BLL
         private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _managementUnitView = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitView, Framework.HierarchicalExpand.HierarchicalExpandType.All);
         
         private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _systemIntegration = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.SystemIntegration);
+        
+        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> ApproveWorkflowOperation
+        {
+            get
+            {
+                return _approveWorkflowOperation;
+            }
+        }
+        
+        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> ApprovingWorkflowOperation
+        {
+            get
+            {
+                return _approvingWorkflowOperation;
+            }
+        }
         
         public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> AuthorizationImpersonate
         {
@@ -564,6 +584,14 @@ namespace SampleSystem.BLL
             {
                 return SampleSystem.BLL.SampleSystemSecurityOperation.SystemIntegration;
             }
+            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.ApproveWorkflowOperation))
+            {
+                return SampleSystem.BLL.SampleSystemSecurityOperation.ApproveWorkflowOperation;
+            }
+            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.ApprovingWorkflowOperation))
+            {
+                return SampleSystem.BLL.SampleSystemSecurityOperation.ApprovingWorkflowOperation;
+            }
             else
             {
                 throw new System.ArgumentOutOfRangeException("code");
@@ -700,11 +728,11 @@ namespace SampleSystem.BLL
             }
             else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.Example1) == domainType))
             {
-                return SampleSystem.SampleSystemSecurityOperationCode.SystemIntegration;
+                return SampleSystem.SampleSystemSecurityOperationCode.LocationView;
             }
             else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.Example1) == domainType))
             {
-                return SampleSystem.SampleSystemSecurityOperationCode.SystemIntegration;
+                return SampleSystem.SampleSystemSecurityOperationCode.LocationEdit;
             }
             else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.HRDepartment) == domainType))
             {

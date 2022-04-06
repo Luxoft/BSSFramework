@@ -66,7 +66,7 @@ namespace SampleSystem.IntegrationTests
         public void ImmutablePropertyInitializedByIntegration_ShouldNotThrowException()
         {
             // Arrange
-            var integrationController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.Integration.TestImmutableObjController>();
+            var integrationController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.Integration.TestImmutableObjController>().WithIntegrationImpersonate();
 
             // Act
             Action insertAction = () => integrationController.Evaluate(c => c.SaveTestImmutableObj(new TestImmutableObjIntegrationRichDTO { TestImmutablePrimitiveProperty = "AAA", Id = Guid.NewGuid() }));
@@ -79,7 +79,7 @@ namespace SampleSystem.IntegrationTests
         public void ImmutablePropertyChangedByIntegration_RaisedValidationError()
         {
             // Arrange
-            var integrationTestImmutableObjController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.Integration.TestImmutableObjController>();
+            var integrationTestImmutableObjController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.Integration.TestImmutableObjController>().WithIntegrationImpersonate();
 
             var identity = integrationTestImmutableObjController.Evaluate(c => c.SaveTestImmutableObj(new TestImmutableObjIntegrationRichDTO { TestImmutablePrimitiveProperty = "AAA", Id = Guid.NewGuid() }));
 

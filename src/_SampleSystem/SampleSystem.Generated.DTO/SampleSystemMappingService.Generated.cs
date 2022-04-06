@@ -4658,7 +4658,7 @@ namespace SampleSystem.Generated.DTO
         {
             mappingObject.Field1 = domainObject.Field1;
             mappingObject.Field2 = domainObject.Field2;
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(SampleSystem.SampleSystemSecurityOperationCode.SystemIntegration).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(SampleSystem.SampleSystemSecurityOperationCode.LocationView).HasAccess(domainObject))
             {
                 System.Guid resultField3;
                 resultField3 = domainObject.Field3;
@@ -4691,7 +4691,7 @@ namespace SampleSystem.Generated.DTO
             Framework.Core.Just<System.Guid> justField3 = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<System.Guid>>(mappingObject.Field3);
             if (!object.ReferenceEquals(justField3, null))
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(SampleSystem.SampleSystemSecurityOperationCode.SystemIntegration).HasAccess(domainObject))
+                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(SampleSystem.SampleSystemSecurityOperationCode.LocationEdit).HasAccess(domainObject))
                 {
                     domainObject.Field3 = justField3.Value;
                 }
@@ -4722,7 +4722,7 @@ namespace SampleSystem.Generated.DTO
             Framework.Core.Just<System.Guid> justField3 = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<System.Guid>>(mappingObject.Field3);
             if (!object.ReferenceEquals(justField3, null))
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(SampleSystem.SampleSystemSecurityOperationCode.SystemIntegration).HasAccess(domainObject))
+                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(SampleSystem.SampleSystemSecurityOperationCode.LocationEdit).HasAccess(domainObject))
                 {
                     domainObject.Field3 = justField3.Value;
                 }

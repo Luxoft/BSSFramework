@@ -61,7 +61,7 @@ namespace SampleSystem.IntegrationTests
             var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
 
             // Act
-            var employees = employeeController.GetSimpleEmployees();
+            var employees = employeeController.Evaluate(c => c.GetSimpleEmployees());
 
             // Assert
             employees.Should().Contain(e => e.Id == employeeIdentity.Id);
@@ -77,14 +77,14 @@ namespace SampleSystem.IntegrationTests
             foreach (var pin in new[] { 123, 456 })
             {
                 var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
-                var employee = employeeController.GetSimpleEmployee(employeeIdentity);
+                var employee = employeeController.Evaluate(c => c.GetSimpleEmployee(employeeIdentity));
                 employee.Pin = pin;
-                employeeController.SaveEmployee(employee.ToStrict());
+                employeeController.Evaluate(c => c.SaveEmployee(employee.ToStrict()));
             }
 
             // Act
             var query = "$top=30&$filter=substringof('23',Pin)";
-            var result = employeeQueryController.GetSimpleEmployeesByODataQueryString(query);
+            var result = employeeQueryController.Evaluate(c => c.GetSimpleEmployeesByODataQueryString(query));
 
             // Assert
             var pins = result.Items.Select(x => x.Pin).ToArray();
@@ -116,13 +116,13 @@ namespace SampleSystem.IntegrationTests
             foreach (var item in idToPinMap)
             {
                 var employeeIdentity = this.DataHelper.SaveEmployee(item.Key);
-                var employee = employeeController.GetSimpleEmployee(employeeIdentity);
+                var employee = employeeController.Evaluate(c => c.GetSimpleEmployee(employeeIdentity));
                 employee.Pin = item.Value;
-                employeeController.SaveEmployee(employee.ToStrict());
+                employeeController.Evaluate(c => c.SaveEmployee(employee.ToStrict()));
             }
 
             // Act
-            var result = employeeQueryController.GetSimpleEmployeesByODataQueryString("$top=1&$filter=Pin eq 123 or Pin eq 456");
+            var result = employeeQueryController.Evaluate(c => c.GetSimpleEmployeesByODataQueryString("$top=1&$filter=Pin eq 123 or Pin eq 456"));
 
             // Assert
             var minId = sqlGuids[0].Value;
@@ -160,13 +160,13 @@ namespace SampleSystem.IntegrationTests
             foreach (var item in idToPinMap)
             {
                 var employeeIdentity = this.DataHelper.SaveEmployee(item.Key);
-                var employee = employeeController.GetSimpleEmployee(employeeIdentity);
+                var employee = employeeController.Evaluate(c => c.GetSimpleEmployee(employeeIdentity));
                 employee.Pin = item.Value;
-                employeeController.SaveEmployee(employee.ToStrict());
+                employeeController.Evaluate(c => c.SaveEmployee(employee.ToStrict()));
             }
 
             // Act
-            var result = employeeQueryController.GetSimpleEmployeesByODataQueryString("$top=1&$skip=1&$filter=Pin eq 123 or Pin eq 456");
+            var result = employeeQueryController.Evaluate(c => c.GetSimpleEmployeesByODataQueryString("$top=1&$skip=1&$filter=Pin eq 123 or Pin eq 456"));
 
             // Assert
             var minId = sqlGuids[0].Value;
@@ -190,13 +190,13 @@ namespace SampleSystem.IntegrationTests
             foreach (var pin in new[] { 123, 456 })
             {
                 var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
-                var employee = employeeController.GetSimpleEmployee(employeeIdentity);
+                var employee = employeeController.Evaluate(c => c.GetSimpleEmployee(employeeIdentity));
                 employee.Pin = pin;
-                employeeController.SaveEmployee(employee.ToStrict());
+                employeeController.Evaluate(c => c.SaveEmployee(employee.ToStrict()));
             }
 
             // Act
-            var result = employeeQueryController.GetSimpleEmployeesByODataQueryString("$top=1&$skip=1&$filter=Pin eq 123 or Pin eq 456&$orderby=Pin desc");
+            var result = employeeQueryController.Evaluate(c => c.GetSimpleEmployeesByODataQueryString("$top=1&$skip=1&$filter=Pin eq 123 or Pin eq 456&$orderby=Pin desc"));
 
             // Assert
             var pins = result.Items.Select(x => x.Pin).ToArray();
@@ -212,19 +212,19 @@ namespace SampleSystem.IntegrationTests
 
             var configFacade = this.GetConfigurationControllerEvaluator();
 
-            var domainType = configFacade.GetRichDomainTypeByName(nameof(Employee));
+            var domainType = configFacade.Evaluate(c => c.GetRichDomainTypeByName(nameof(Employee)));
 
             var operation = domainType.EventOperations.Single(op => op.Name == nameof(EventOperation.Save));
 
             this.ClearIntegrationEvents();
 
             // Act
-            configFacade.ForceDomainTypeEvent(new DomainTypeEventModelStrictDTO
+            configFacade.Evaluate(c => c.ForceDomainTypeEvent(new DomainTypeEventModelStrictDTO
             {
                 Operation = operation.Identity,
 
                 DomainObjectIdents = new List<Guid> { employeeIdentity.Id }
-            });
+            }));
 
             // Assert
             this.GetIntegrationEvents<EmployeeSaveEventDTO>().Should().ContainSingle(dto => dto.Employee.Id == employeeIdentity.Id);
@@ -238,17 +238,17 @@ namespace SampleSystem.IntegrationTests
             var employeeController = this.MainWebApi.Employee;
 
             var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
-            var employeeVersion = employeeController.GetSimpleEmployee(employeeIdentity).Version;
+            var employeeVersion = employeeController.Evaluate(c => c.GetSimpleEmployee(employeeIdentity)).Version;
 
             this.ClearNotifications();
             this.ClearModifications();
 
-            employeeController.UpdateEmployee(new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234"), Version = employeeVersion });
+            employeeController.Evaluate(c => c.UpdateEmployee(new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234"), Version = employeeVersion }));
 
             var restFacade = this.GetConfigurationControllerEvaluator();
 
             // Act
-            var processedModCount = restFacade.ProcessModifications(1000);
+            var processedModCount = restFacade.Evaluate(c => c.ProcessModifications(1000));
 
             // Assert
             var modifications = this.GetModifications();
@@ -266,23 +266,23 @@ namespace SampleSystem.IntegrationTests
             // Arrange
             var employeeController = this.MainWebApi.Employee;
             var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
-            var employeeVersion = employeeController.GetSimpleEmployee(employeeIdentity).Version;
+            var employeeVersion = employeeController.Evaluate(c => c.GetSimpleEmployee(employeeIdentity)).Version;
 
             this.ClearNotifications();
             this.ClearModifications();
 
-            employeeController.UpdateEmployee(new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234"), Version = employeeVersion });
+            employeeController.Evaluate(c => c.UpdateEmployee(new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234"), Version = employeeVersion }));
 
             var restFacade = this.GetConfigurationControllerEvaluator();
 
             // Act
-            var preProcessedModificationState = restFacade.GetModificationQueueProcessingState();
-            var preProcessedNotificationState = restFacade.GetNotificationQueueProcessingState();
+            var preProcessedModificationState = restFacade.Evaluate(c => c.GetModificationQueueProcessingState());
+            var preProcessedNotificationState = restFacade.Evaluate(c => c.GetNotificationQueueProcessingState());
 
-            restFacade.ProcessModifications(1000);
+            restFacade.Evaluate(c => c.ProcessModifications(1000));
 
-            var postProcessedModificationState = restFacade.GetModificationQueueProcessingState();
-            var postProcessedNotificationState = restFacade.GetNotificationQueueProcessingState();
+            var postProcessedModificationState = restFacade.Evaluate(c => c.GetModificationQueueProcessingState());
+            var postProcessedNotificationState = restFacade.Evaluate(c => c.GetNotificationQueueProcessingState());
 
             // Assert
             preProcessedModificationState.UnprocessedCount.Should().Be(1);
@@ -298,12 +298,12 @@ namespace SampleSystem.IntegrationTests
             // Arrange
             var employeeController = this.MainWebApi.Employee;
             var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
-            var employeeVersion = employeeController.GetSimpleEmployee(employeeIdentity).Version;
+            var employeeVersion = employeeController.Evaluate(c => c.GetSimpleEmployee(employeeIdentity)).Version;
 
             this.ClearIntegrationEvents();
 
             // Act
-            employeeController.UpdateEmployee(new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234"), Version = employeeVersion });
+            employeeController.Evaluate(c => c.UpdateEmployee(new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234"), Version = employeeVersion }));
 
             // Assert
             this.GetIntegrationEvents<EmployeeSaveEventDTO>("ariba").Should().ContainSingle(dto => dto.Employee.Id == employeeIdentity.Id);
@@ -337,7 +337,7 @@ namespace SampleSystem.IntegrationTests
             var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
 
             // Act
-            var call = new Action(() => employeeController.UpdateEmployee(new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234") }));
+            var call = new Action(() => employeeController.Evaluate(c => c.UpdateEmployee(new EmployeeUpdateDTO { Id = employeeIdentity.Id, Interphone = new Just<string>("1234") })));
 
             // Assert
             call.Should().Throw<Exception>().WithMessage($"Object '{nameof(Employee)}' was updated or deleted by another transaction");

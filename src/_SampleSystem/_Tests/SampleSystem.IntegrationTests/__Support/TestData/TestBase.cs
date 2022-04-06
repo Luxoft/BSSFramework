@@ -231,14 +231,14 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
             return principalName == null ? controllerEvaluator : controllerEvaluator.WithImpersonate(principalName);
         }
 
-        protected ControllerEvaluator<AuthSLJsonController> GetAuthControllerEvaluator()
+        protected ControllerEvaluator<AuthSLJsonController> GetAuthControllerEvaluator(string principalName = null)
         {
-            return this.MainWebApi.GetControllerEvaluator<AuthSLJsonController>();
+            return this.GetControllerEvaluator<AuthSLJsonController>(principalName);
         }
 
-        protected ControllerEvaluator<ConfigSLJsonController> GetConfigurationControllerEvaluator()
+        protected ControllerEvaluator<ConfigSLJsonController> GetConfigurationControllerEvaluator(string principalName = null)
         {
-            return this.MainWebApi.GetControllerEvaluator<ConfigSLJsonController>();
+            return this.GetControllerEvaluator<ConfigSLJsonController>(principalName);
         }
     }
 }

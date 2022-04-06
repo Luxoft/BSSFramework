@@ -51,9 +51,9 @@ namespace SampleSystem.IntegrationTests.Reports
             var departmentReportIdentity = this.SaveReport(departmentReportReport);
 
 
-            var locationReportStream = sampleSystemGenericReportController.GetStream(new ReportGenerationModelStrictDTO() { Report = locationReport1Identity });
-            var departmentReportStream = sampleSystemGenericReportController.GetStream(new ReportGenerationModelStrictDTO() { Report = departmentReportIdentity });
-            var location2ReportStream = sampleSystemGenericReportController.GetStream(new ReportGenerationModelStrictDTO() { Report = locationReport2Identity });
+            var locationReportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(new ReportGenerationModelStrictDTO() { Report = locationReport1Identity }));
+            var departmentReportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(new ReportGenerationModelStrictDTO() { Report = departmentReportIdentity }));
+            var location2ReportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(new ReportGenerationModelStrictDTO() { Report = locationReport2Identity }));
 
 
             Assert.IsNotNull(locationReportStream);
@@ -91,7 +91,7 @@ namespace SampleSystem.IntegrationTests.Reports
 
             var reportGenerationModel = CreateReportModel(reportRichDTO, new Dictionary<string, object>());
 
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             Assert.IsNotNull(reportStream);
 
@@ -100,14 +100,14 @@ namespace SampleSystem.IntegrationTests.Reports
 
             hrDepartmentProperty.PropertyPath = "HRDepartment.CodeNative";
 
-            sampleSystemGenericReportController.SaveReport(reportRichDTO.ToStrict());
+            sampleSystemGenericReportController.Evaluate(c => c.SaveReport(reportRichDTO.ToStrict()));
 
-            reportRichDTO = sampleSystemGenericReportController.GetRichReport(reportRichDTO.Identity);
+            reportRichDTO = sampleSystemGenericReportController.Evaluate(c => c.GetRichReport(reportRichDTO.Identity));
 
             reportGenerationModel = CreateReportModel(reportRichDTO, new Dictionary<string, object>());
 
             // Assert
-            reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             Assert.IsNotNull(reportStream);
         }
@@ -134,7 +134,7 @@ namespace SampleSystem.IntegrationTests.Reports
 
             var reportGenerationModel = CreateReportModel(reportRichDTO, new Dictionary<string, object>());
 
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             Assert.IsNotNull(reportStream);
 
@@ -143,21 +143,21 @@ namespace SampleSystem.IntegrationTests.Reports
 
             hrDepartmentProperty.PropertyPath = "HRDepartment.CodeNative";
 
-            sampleSystemGenericReportController.SaveReport(reportRichDTO.ToStrict());
+            sampleSystemGenericReportController.Evaluate(c => c.SaveReport(reportRichDTO.ToStrict()));
 
 
             var reportRichDTO1 = this.GetReport(new ReportIdentityDTO(report.Id));
             var hrDepartmentProperty2 = reportRichDTO1.Properties.Single(z => z.PropertyPath == "HRDepartment.CodeNative");
             hrDepartmentProperty2.PropertyPath = "HRDepartment.Code";
-            sampleSystemGenericReportController.SaveReport(reportRichDTO1.ToStrict());
+            sampleSystemGenericReportController.Evaluate(c => c.SaveReport(reportRichDTO1.ToStrict()));
 
 
-            reportRichDTO = sampleSystemGenericReportController.GetRichReport(reportRichDTO.Identity);
+            reportRichDTO = sampleSystemGenericReportController.Evaluate(c => c.GetRichReport(reportRichDTO.Identity));
 
             reportGenerationModel = CreateReportModel(reportRichDTO, new Dictionary<string, object>());
 
             // Assert
-            reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             Assert.IsNotNull(reportStream);
         }
@@ -179,7 +179,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Assert
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             Assert.IsNotNull(reportStream);
         }
@@ -200,7 +200,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Assert
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             Assert.IsNotNull(reportStream);
         }
@@ -224,7 +224,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Assert
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             Assert.IsNotNull(reportStream);
         }
@@ -248,7 +248,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             var actual = new List<Tuple<string, string>>();
 
@@ -282,7 +282,7 @@ namespace SampleSystem.IntegrationTests.Reports
 
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             Assert.AreEqual(reportStream.GetSheet().Dimension.Columns, 1);
 
@@ -294,7 +294,7 @@ namespace SampleSystem.IntegrationTests.Reports
 
             reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
-            reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             var sheet = reportStream.GetSheet();
 
@@ -315,7 +315,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             reportStream.GetSheet()
@@ -342,7 +342,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             var sheet = reportStream.GetSheet();
@@ -376,7 +376,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             var excelWorksheet = reportStream.GetSheet();
@@ -404,7 +404,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             var excelWorksheet = reportStream.GetSheet();
@@ -429,7 +429,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>() { { "Gender", "0" } });
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             var sheet = reportStream.GetSheet("Parameters");
 
@@ -452,7 +452,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             reportStream.GetSheet()
                         .CreateValidator()
@@ -488,7 +488,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, parameters);
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             reportStream.GetSheet()
@@ -526,7 +526,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, parameters);
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             reportStream.GetSheet()
@@ -566,7 +566,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, parameters);
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             reportStream.GetSheet()
@@ -615,7 +615,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, parameters);
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             reportStream.GetSheet()
@@ -649,7 +649,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var models = dto.Select(z => CreateReportModel(z));
 
             // Act
-            Action buildReports = () => models.Foreach(z => sampleSystemGenericReportController.GetStream(z));
+            Action buildReports = () => models.Foreach(z => sampleSystemGenericReportController.Evaluate(c => c.GetStream(z)));
 
             // Assert
             buildReports.Should().NotThrow();
@@ -669,7 +669,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO);
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             Assert.IsNotNull(reportStream);
@@ -697,7 +697,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var generateModel = CreateReportModel(reportDTO, parameters);
 
             // Act
-            var result = sampleSystemGenericReportController.GetStream(generateModel);
+            var result = sampleSystemGenericReportController.Evaluate(c => c.GetStream(generateModel));
 
             // Assert
             Assert.IsNotNull(result);
@@ -718,7 +718,7 @@ namespace SampleSystem.IntegrationTests.Reports
 
             var reportGenerationModel = CreateReportModel(reportDTO);
 
-            var prevReportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var prevReportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             AppendReportParameter<Location>(report, "loc");
             AppendReportFilter(report, "Location", "eq", "loc");
@@ -731,7 +731,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var nextReportGenerationModel = CreateReportModel(reportDTO, parameters);
 
             // Act
-            var nextReportStream = sampleSystemGenericReportController.GetStream(nextReportGenerationModel);
+            var nextReportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(nextReportGenerationModel));
 
             // Assert
             Assert.IsNotNull(nextReportStream);
@@ -754,7 +754,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             reportStream.GetSheet()
@@ -793,7 +793,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             reportStream.GetSheet()
@@ -811,11 +811,11 @@ namespace SampleSystem.IntegrationTests.Reports
 
             this.DataHelper.SaveLocation(name: expectedLocationName);
 
-            var results = sampleSystemGenericReportController.GetSimpleReportParameterValuesByTypeName(new GetSimpleReportParameterValuesByTypeNameRequest
+            var results = sampleSystemGenericReportController.Evaluate(c => c.GetSimpleReportParameterValuesByTypeName(new GetSimpleReportParameterValuesByTypeNameRequest
             {
                     typeName = "Location",
                     odataQueryString = "$select=Id, DesignValue&$top=80&$orderby=DesignValue"
-            });
+            }));
 
             Assert.IsTrue(results.Items.Any(z => z.DesignValue == expectedLocationName));
         }
@@ -850,7 +850,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, parameters);
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             reportStream.GetSheet()
@@ -874,7 +874,8 @@ namespace SampleSystem.IntegrationTests.Reports
 
             var permission = new PermissionStrictDTO { Role = businessRole.Identity };
 
-            this.GetAuthControllerEvaluator().Evaluate(c => c.SavePermission(new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, permission)));
+            var saveRequest = new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, permission);
+            this.GetAuthControllerEvaluator().Evaluate(c => c.SavePermission(saveRequest));
 
             var report = this.CreateReport<Employee>("Employees");
             AppendReportProperty(report, "Login", "Login");
@@ -883,7 +884,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = this.GetControllerEvaluator<SampleSystemGenericReportController>(Tester).GetStream(reportGenerationModel);
+            var reportStream = this.GetControllerEvaluator<SampleSystemGenericReportController>(Tester).Evaluate(c => c.GetStream(reportGenerationModel));
 
             // проверяем, что отчет пустой,
             // поскольку прав просмотр на сотрудника, а именно на поле Login,
@@ -904,7 +905,7 @@ namespace SampleSystem.IntegrationTests.Reports
 
             this.GetAuthControllerEvaluator().Evaluate(c => c.SaveBusinessRole(businessRole.ToStrict()));
 
-            reportStream = this.GetControllerEvaluator<SampleSystemGenericReportController>(Tester).GetStream(reportGenerationModel);
+            reportStream = this.GetControllerEvaluator<SampleSystemGenericReportController>(Tester).Evaluate(c => c.GetStream(reportGenerationModel));
 
             // проверяем, что отчет содержит ожидаемые данные,
             // поскольку право на просмотр на сотрудника, а именно на поле Login,
@@ -936,7 +937,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             var sheet = reportStream.GetSheet();
@@ -973,7 +974,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             var sheet = reportStream.GetSheet();
@@ -1012,7 +1013,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             var sheet = reportStream.GetSheet();
@@ -1056,7 +1057,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>() { { versionPropertyDate, 1 } });
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             reportStream.GetSheet()
@@ -1097,7 +1098,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>() { { versionPropertyDate, 1 } });
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             reportStream.GetSheet()
@@ -1130,7 +1131,7 @@ namespace SampleSystem.IntegrationTests.Reports
 
             var reportGenerationModel = CreateReportModel(reportRichDTO, new Dictionary<string, object>());
 
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             Assert.IsNotNull(reportStream);
 
@@ -1140,14 +1141,14 @@ namespace SampleSystem.IntegrationTests.Reports
 
             properties.Foreach(z => z.Order = (z.Order + 1) % properties.Count);
 
-            sampleSystemGenericReportController.SaveReport(reportRichDTO.ToStrict());
+            sampleSystemGenericReportController.Evaluate(c => c.SaveReport(reportRichDTO.ToStrict()));
 
-            reportRichDTO = sampleSystemGenericReportController.GetRichReport(reportRichDTO.Identity);
+            reportRichDTO = sampleSystemGenericReportController.Evaluate(c => c.GetRichReport(reportRichDTO.Identity));
 
             reportGenerationModel = CreateReportModel(reportRichDTO, new Dictionary<string, object>());
 
             // Assert
-            reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             Assert.IsNotNull(reportStream);
         }

@@ -29,17 +29,18 @@ namespace SampleSystem.IntegrationTests.Auth
             var authorizationController = this.GetAuthControllerEvaluator();
             var currentUser = this.DataHelper.GetCurrentEmployee();
 
-            var businessRoleIdentity = authorizationController.GetSimpleBusinessRoleByName("SecretariatNotification").Identity;
+            var businessRoleIdentity = authorizationController.Evaluate(c => c.GetSimpleBusinessRoleByName("SecretariatNotification")).Identity;
 
-            var principalIdentity = authorizationController.GetCurrentPrincipal().Identity;
+            var principalIdentity = authorizationController.Evaluate(c => c.GetCurrentPrincipal()).Identity;
 
             var permissionStrict = new PermissionStrictDTO { Role = businessRoleIdentity };
 
             // Act
-            var permission = authorizationController.SavePermission(new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, permissionStrict));
+            var saveRequest = new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, permissionStrict);
+            var permissionIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePermission(saveRequest));
 
             // Assert
-            var permissionSimple = authorizationController.GetSimplePermission(permission);
+            var permissionSimple = authorizationController.Evaluate(c => c.GetSimplePermission(permissionIdentity));
             permissionSimple.Active.Should().BeTrue();
             permissionSimple.CreatedBy.Should().Be(currentUser.Login.ToString());
             permissionSimple.ModifiedBy.Should().Be(currentUser.Login.ToString());
@@ -54,7 +55,7 @@ namespace SampleSystem.IntegrationTests.Auth
             var authorizationController = this.GetAuthControllerEvaluator();
             var currentUser = this.DataHelper.GetCurrentEmployee();
 
-            var businessRoleIdentity = authorizationController.GetSimpleBusinessRoleByName("SecretariatNotification").Identity;
+            var businessRoleIdentity = authorizationController.Evaluate(c => c.GetSimpleBusinessRoleByName("SecretariatNotification")).Identity;
 
             var principalStrict = new PrincipalStrictDTO
             {
@@ -115,7 +116,9 @@ namespace SampleSystem.IntegrationTests.Auth
             var principalIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetCurrentPrincipal()).Identity;
 
             var permissionStrict = new PermissionStrictDTO { Role = businessRoleIdentity };
-            var permissionIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePermission(new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, permissionStrict)));
+
+            var saveRequest = new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, permissionStrict);
+            var permissionIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePermission(saveRequest));
 
             var newprincipalStrict = new PrincipalStrictDTO { Name = Name };
             var newPrincipalIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePrincipal(newprincipalStrict));
@@ -134,7 +137,7 @@ namespace SampleSystem.IntegrationTests.Auth
             };
 
             // Act
-            this.GetAuthControllerEvaluator().ChangeDelegatePermissions(changePermissionDelegate);
+            this.GetAuthControllerEvaluator().Evaluate(c => c.ChangeDelegatePermissions(changePermissionDelegate));
 
             // Assert
             var newPermissionIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetFullPermissions()
@@ -160,7 +163,9 @@ namespace SampleSystem.IntegrationTests.Auth
             var principalIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetCurrentPrincipal()).Identity;
 
             var permissionStrict = new PermissionStrictDTO { Role = businessRoleIdentity };
-            var permissionIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePermission(new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, permissionStrict)));
+
+            var saveRequest = new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, permissionStrict);
+            var permissionIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePermission(saveRequest));
 
             // Act
             this.GetAuthControllerEvaluator().Evaluate(c => c.RemovePermission(permissionIdentity));

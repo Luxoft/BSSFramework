@@ -79,7 +79,7 @@ namespace SampleSystem.IntegrationTests
             var testSecurityObjItemController = this.GetControllerEvaluator<TestSecurityObjItemController>(TestEmployeeLogin);
 
             // Act
-            var items = testSecurityObjItemController.GetVisualTestSecurityObjItems().ToList();
+            var items = testSecurityObjItemController.Evaluate(c => c.GetVisualTestSecurityObjItems()).ToList();
 
             // Assert
             items.Count().Should().Be(1);
@@ -93,7 +93,7 @@ namespace SampleSystem.IntegrationTests
             var testSecurityObjItemController = this.GetControllerEvaluator<TestSecurityObjItemController>(TestEmployeeLogin);
 
             // Act
-            var items = testSecurityObjItemController.GetTestSecurityObjItemProjections().ToList();
+            var items = testSecurityObjItemController.Evaluate(c => c.GetTestSecurityObjItemProjections()).ToList();
 
             // Assert
             items.Count().Should().Be(1);
@@ -107,7 +107,7 @@ namespace SampleSystem.IntegrationTests
             var testSecuritySubObjItemController = this.GetControllerEvaluator<TestSecuritySubObjItemController>(TestEmployeeLogin);
 
             // Act
-            var items = testSecuritySubObjItemController.GetVisualTestSecuritySubObjItems().ToList();
+            var items = testSecuritySubObjItemController.Evaluate(c => c.GetVisualTestSecuritySubObjItems()).ToList();
 
             // Assert
             items.Count().Should().Be(1);
@@ -121,7 +121,7 @@ namespace SampleSystem.IntegrationTests
             var testSecuritySubObjItem2Controller = this.GetControllerEvaluator<TestSecuritySubObjItem2Controller>(TestEmployeeLogin);
 
             // Act
-            var items = testSecuritySubObjItem2Controller.GetVisualTestSecuritySubObjItem2s().ToList();
+            var items = testSecuritySubObjItem2Controller.Evaluate(c => c.GetVisualTestSecuritySubObjItem2s()).ToList();
 
             // Assert
             items.Count().Should().Be(1);
@@ -135,7 +135,7 @@ namespace SampleSystem.IntegrationTests
             var testSecuritySubObjItem3Controller = this.GetControllerEvaluator<TestSecuritySubObjItem3Controller>(TestEmployeeLogin);
 
             // Act
-            var items = testSecuritySubObjItem3Controller.GetVisualTestSecuritySubObjItem3s().ToList();
+            var items = testSecuritySubObjItem3Controller.Evaluate(c => c.GetVisualTestSecuritySubObjItem3s()).ToList();
 
             // Assert
             items.Count().Should().Be(1);

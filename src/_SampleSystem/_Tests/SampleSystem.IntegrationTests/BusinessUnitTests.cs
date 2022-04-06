@@ -104,11 +104,11 @@ namespace SampleSystem.IntegrationTests
             var businessUnitQueryController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.MainQuery.BusinessUnitQueryController>(EmployeeName);
 
             // Act
-            var businessUnitTree = businessUnitQueryController.GetTestBusinessUnitTreeByOperation(new GetTestBusinessUnitTreeByOperationAutoRequest
+            var businessUnitTree = businessUnitQueryController.Evaluate(c => c.GetTestBusinessUnitTreeByOperation(new GetTestBusinessUnitTreeByOperationAutoRequest
                 {
                     odataQueryString = string.Empty,
                     securityOperationCode = SampleSystemBusinessUnitSecurityOperationCode.EmployeeEdit
-                });
+                }));
 
             // Assert
             businessUnitTree.TotalCount.Should().Be(2);
@@ -125,11 +125,11 @@ namespace SampleSystem.IntegrationTests
             var businessUnitQueryController = this.GetControllerEvaluator<BusinessUnitQueryController>(EmployeeName);
 
             // Act
-            var businessUnitTree = businessUnitQueryController.GetTestBusinessUnitTreeByOperation(new GetTestBusinessUnitTreeByOperationAutoRequest
+            var businessUnitTree = businessUnitQueryController.Evaluate(c => c.GetTestBusinessUnitTreeByOperation(new GetTestBusinessUnitTreeByOperationAutoRequest
                 {
                     odataQueryString = "$filter=Name eq 'test'",
                     securityOperationCode = SampleSystemBusinessUnitSecurityOperationCode.EmployeeEdit
-                });
+                }));
 
             // Assert
             businessUnitTree.TotalCount.Should().Be(0);
@@ -152,7 +152,7 @@ namespace SampleSystem.IntegrationTests
         {
             // Act
             var businessUnitQueryController = this.GetControllerEvaluator<BusinessUnitController>();
-            var businessUnitTree = businessUnitQueryController.GetFullBusinessUnitsTreeByOData(string.Empty);
+            var businessUnitTree = businessUnitQueryController.Evaluate(c => c.GetFullBusinessUnitsTreeByOData(string.Empty));
 
             // Assert
             businessUnitTree.TotalCount.Should().Be(ParentsCount + ExistedBusinessUnitsInDatabase);
@@ -163,7 +163,7 @@ namespace SampleSystem.IntegrationTests
         {
             // Act
             var businessUnitController = this.GetControllerEvaluator<BusinessUnitController>();
-            var tree = businessUnitController.GetFullBusinessUnitsTree();
+            var tree = businessUnitController.Evaluate(c => c.GetFullBusinessUnitsTree());
 
             // Assert
             tree.Should().HaveCount(ParentsCount + ExistedBusinessUnitsInDatabase);

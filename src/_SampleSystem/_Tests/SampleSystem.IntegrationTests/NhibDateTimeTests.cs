@@ -38,10 +38,10 @@ namespace SampleSystem.IntegrationTests
             var example1Controller = this.GetControllerEvaluator<Example1Controller>();
 
             // Act
-            var objIdentity = example1Controller.SaveExample1(new Example1StrictDTO());
+            var objIdentity = example1Controller.Evaluate(c => c.SaveExample1(new Example1StrictDTO()));
 
             // Assert
-            var reloadedObj = example1Controller.GetSimpleExample1(objIdentity);
+            var reloadedObj = example1Controller.Evaluate(c => c.GetSimpleExample1(objIdentity));
 
             reloadedObj.CreateDate.Should().Be(testDate);
         }

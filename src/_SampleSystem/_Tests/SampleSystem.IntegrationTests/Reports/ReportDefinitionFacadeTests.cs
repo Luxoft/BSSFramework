@@ -9,6 +9,7 @@ using Framework.Configuration.Generated.DTO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Report;
 
@@ -28,7 +29,7 @@ namespace SampleSystem.IntegrationTests
             var parameter = this.DataHelper.SaveReportParameter(report);
             this.DataHelper.SaveReportFilter(report, parameter);
 
-            this.Environment.IsDebugInTest = false;
+            ((TestServiceEnvironment)this.Environment).IsDebugInTest = false;
 
             var model = new ReportGenerationModelStrictDTO
             {
@@ -45,7 +46,7 @@ namespace SampleSystem.IntegrationTests
             };
 
             // Act
-            var action = new Action(() => sampleSystemGenericReportController.GetStream(model));
+            var action = new Action(() => sampleSystemGenericReportController.Evaluate(c => c.GetStream(model)));
 
             // Assert
             this.Environment.IsDebugMode.Should().BeFalse("not working in debugger mode");
@@ -70,8 +71,8 @@ namespace SampleSystem.IntegrationTests
             };
 
             // Act
-            sampleSystemGenericReportController.GetStream(model);
-            var action = new Action(() => sampleSystemGenericReportController.GetStream(model));
+            sampleSystemGenericReportController.Evaluate(c => c.GetStream(model));
+            var action = new Action(() => sampleSystemGenericReportController.Evaluate(c => c.GetStream(model)));
 
             // Assert
             action.Should().NotThrow();
@@ -107,7 +108,7 @@ namespace SampleSystem.IntegrationTests
             };
 
             // Act
-            var action = new Action(() => sampleSystemGenericReportController.GetStream(model));
+            var action = new Action(() => sampleSystemGenericReportController.Evaluate(c => c.GetStream(model)));
 
             // Assert
             action.Should().NotThrow();

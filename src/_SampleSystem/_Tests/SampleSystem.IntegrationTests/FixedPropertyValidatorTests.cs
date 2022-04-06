@@ -23,15 +23,15 @@ namespace SampleSystem.IntegrationTests
         {
             // Arrange
             var testImmutableObjController = this.GetControllerEvaluator<TestImmutableObjController>();
-            var identity = testImmutableObjController.SaveTestImmutableObj(
-                new TestImmutableObjStrictDTO { TestImmutablePrimitiveProperty = "AAA" });
+            var identity = testImmutableObjController.Evaluate(c => c.SaveTestImmutableObj(
+                new TestImmutableObjStrictDTO { TestImmutablePrimitiveProperty = "AAA" }));
 
             // Act
             Action changePropertyAction = () =>
                                           {
-                                              var dto = testImmutableObjController.GetRichTestImmutableObj(identity);
+                                              var dto = testImmutableObjController.Evaluate(c => c.GetRichTestImmutableObj(identity));
                                               dto.TestImmutablePrimitiveProperty = "BBB";
-                                              testImmutableObjController.SaveTestImmutableObj(dto.ToStrict());
+                                              testImmutableObjController.Evaluate(c => c.SaveTestImmutableObj(dto.ToStrict()));
                                           };
 
             // Assert
@@ -46,16 +46,14 @@ namespace SampleSystem.IntegrationTests
             // Arrange
             var employeeController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.Main.EmployeeController>();
             var testImmutableObjController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.Main.TestImmutableObjController>();
-            var identity = testImmutableObjController.SaveTestImmutableObj(new TestImmutableObjStrictDTO { });
+            var identity = testImmutableObjController.Evaluate(c => c.SaveTestImmutableObj(new TestImmutableObjStrictDTO { }));
 
             // Act
             Action changePropertyAction = () =>
                                           {
-                                              var dto = testImmutableObjController.GetRichTestImmutableObj(identity);
-                                              dto.TestImmutableRefProperty = employeeController.GetSimpleEmployee(
-                                                  this.DataHelper.GetEmployeeByLogin(
-                                                      this.AuthHelper.GetCurrentUserLogin()));
-                                              testImmutableObjController.SaveTestImmutableObj(dto.ToStrict());
+                                              var dto = testImmutableObjController.Evaluate(c => c.GetRichTestImmutableObj(identity));
+                                              dto.TestImmutableRefProperty = this.DataHelper.GetCurrentEmployee();
+                                              testImmutableObjController.Evaluate(c => c.SaveTestImmutableObj(dto.ToStrict()));
                                           };
 
             // Assert
@@ -71,7 +69,7 @@ namespace SampleSystem.IntegrationTests
             var integrationController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.Integration.TestImmutableObjController>();
 
             // Act
-            Action insertAction = () => integrationController.SaveTestImmutableObj(new TestImmutableObjIntegrationRichDTO { TestImmutablePrimitiveProperty = "AAA", Id = Guid.NewGuid() });
+            Action insertAction = () => integrationController.Evaluate(c => c.SaveTestImmutableObj(new TestImmutableObjIntegrationRichDTO { TestImmutablePrimitiveProperty = "AAA", Id = Guid.NewGuid() }));
 
             // Assert
             insertAction.Should().NotThrow();
@@ -83,10 +81,10 @@ namespace SampleSystem.IntegrationTests
             // Arrange
             var integrationTestImmutableObjController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.Integration.TestImmutableObjController>();
 
-            var identity = integrationTestImmutableObjController.SaveTestImmutableObj(new TestImmutableObjIntegrationRichDTO { TestImmutablePrimitiveProperty = "AAA", Id = Guid.NewGuid() });
+            var identity = integrationTestImmutableObjController.Evaluate(c => c.SaveTestImmutableObj(new TestImmutableObjIntegrationRichDTO { TestImmutablePrimitiveProperty = "AAA", Id = Guid.NewGuid() }));
 
             // Act
-            Action changePropertyAction = () => integrationTestImmutableObjController.SaveTestImmutableObj(new TestImmutableObjIntegrationRichDTO { TestImmutablePrimitiveProperty = "BBB", Id = identity.Id });
+            Action changePropertyAction = () => integrationTestImmutableObjController.Evaluate(c => c.SaveTestImmutableObj(new TestImmutableObjIntegrationRichDTO { TestImmutablePrimitiveProperty = "BBB", Id = identity.Id }));
 
             // Assert
             changePropertyAction.Should().Throw<Exception>($"{nameof(TestImmutableObj.TestImmutablePrimitiveProperty)} field in {nameof(TestImmutableObj)} can't be changed");

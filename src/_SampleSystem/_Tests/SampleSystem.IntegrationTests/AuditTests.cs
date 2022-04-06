@@ -80,13 +80,13 @@ namespace SampleSystem.IntegrationTests
                 var employeeFull = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
                 var employeeStrict = employeeFull.ToStrict();
                 employeeStrict.NameEng = new FioShort() { FirstName = $"{q}" };
-                employeeController.SaveEmployee(employeeStrict);
+                employeeController.Evaluate(c => c.SaveEmployee(employeeStrict));
             }
 
             // Assert
             var skip = 3;
 
-            var lastRevision = employeeAuditController.GetEmployeeRevisions(employeeIdentity)
+            var lastRevision = employeeAuditController.Evaluate(c => c.GetEmployeeRevisions(employeeIdentity))
                                                       .RevisionInfos
                                                       .EmptyIfNull()
                                                       .OrderBy(z => z.RevisionNumber)
@@ -118,14 +118,14 @@ namespace SampleSystem.IntegrationTests
                 ExternalId = 1
             };
 
-            var employeeIdentity = employeeController.SaveEmployee(employeeStrictDto);
+            var employeeIdentity = employeeController.Evaluate(c => c.SaveEmployee(employeeStrictDto));
 
             // Assert
-            var propertyRevisions = employeeAuditController.GetEmployeePropertyRevisions(new GetEmployeePropertyRevisionsAutoRequest
+            var propertyRevisions = employeeAuditController.Evaluate(c => c.GetEmployeePropertyRevisions(new GetEmployeePropertyRevisionsAutoRequest
                 {
                     employeeIdentity = employeeIdentity,
                     propertyName = $"{nameof(Employee.CoreBusinessUnit)}"
-                });
+                }));
 
             propertyRevisions.RevisionInfos.Count().Should().Be(1);
         }
@@ -148,23 +148,23 @@ namespace SampleSystem.IntegrationTests
                 ExternalId = 1
             };
 
-            var employeeIdentity = employeeController.SaveEmployee(employeeStrictDto);
+            var employeeIdentity = employeeController.Evaluate(c => c.SaveEmployee(employeeStrictDto));
 
             for (int q = 0; q < testCount; q++)
             {
                 var employeeFull = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
                 var employeeStrict = employeeFull.ToStrict();
                 employeeStrict.Email = $"{q}{emailTail}";
-                employeeController.SaveEmployee(employeeStrict);
+                employeeController.Evaluate(c => c.SaveEmployee(employeeStrict));
             }
 
             // Assert
             var skip = 3;
-            var checkPropertyRevision = employeeAuditController.GetEmployeePropertyRevisions(new GetEmployeePropertyRevisionsAutoRequest
+            var checkPropertyRevision = employeeAuditController.Evaluate(c => c.GetEmployeePropertyRevisions(new GetEmployeePropertyRevisionsAutoRequest
                                                                    {
                                                                        employeeIdentity = employeeIdentity,
                                                                        propertyName = $"{nameof(Employee.Email)}"
-                                                                   })
+                                                                   }))
                                                                .RevisionInfos
                                                                .EmptyIfNull()
                                                                .OrderBy(z => z.RevisionNumber)
@@ -193,24 +193,24 @@ namespace SampleSystem.IntegrationTests
                 ExternalId = 1
             };
 
-            var employeeIdentity = employeeController.SaveEmployee(employeeStrictDto);
+            var employeeIdentity = employeeController.Evaluate(c => c.SaveEmployee(employeeStrictDto));
 
             for (int q = 0; q < testCount; q++)
             {
                 var employeeFull = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
                 var employeeStrict = employeeFull.ToStrict();
                 employeeStrict.Email = $"{q}{emailTail}";
-                employeeController.SaveEmployee(employeeStrict);
+                employeeController.Evaluate(c => c.SaveEmployee(employeeStrict));
             }
 
             // Assert
             var skip = 3;
 
-            var firstRevision = employeeAuditController.GetEmployeePropertyRevisions(new GetEmployeePropertyRevisionsAutoRequest
+            var firstRevision = employeeAuditController.Evaluate(c => c.GetEmployeePropertyRevisions(new GetEmployeePropertyRevisionsAutoRequest
                                                            {
                                                                employeeIdentity = employeeIdentity,
                                                                propertyName = $"{nameof(Employee.Email)}"
-                                                           })
+                                                           }))
                                                        .RevisionInfos
                                                        .EmptyIfNull()
                                                        .OrderBy(z => z.RevisionNumber)
@@ -238,22 +238,22 @@ namespace SampleSystem.IntegrationTests
                 ExternalId = 1
             };
 
-            var employeeIdentity = employeeController.SaveEmployee(employeeStrictDto);
+            var employeeIdentity = employeeController.Evaluate(c => c.SaveEmployee(employeeStrictDto));
 
             for (int q = 0; q < testCount; q++)
             {
                 var employeeFull = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
                 var employeeStrict = employeeFull.ToStrict();
                 employeeStrict.Email = $"{q}{emailTail}";
-                employeeController.SaveEmployee(employeeStrict);
+                employeeController.Evaluate(c => c.SaveEmployee(employeeStrict));
             }
 
             // Assert
-            var afterFirstRevisions = employeeAuditController.GetEmployeePropertyRevisions(new GetEmployeePropertyRevisionsAutoRequest
+            var afterFirstRevisions = employeeAuditController.Evaluate(c => c.GetEmployeePropertyRevisions(new GetEmployeePropertyRevisionsAutoRequest
                                                                  {
                                                                      employeeIdentity = employeeIdentity,
                                                                      propertyName = $"{nameof(Employee.Email)}"
-                                                                 })
+                                                                 }))
                                                              .RevisionInfos
                                                              .EmptyIfNull()
                                                              .OrderBy(z => z.RevisionNumber)

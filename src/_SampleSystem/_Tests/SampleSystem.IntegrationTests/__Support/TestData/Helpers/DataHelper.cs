@@ -15,9 +15,9 @@ using Microsoft.Extensions.DependencyInjection;
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.Utils.Framework;
 using SampleSystem.WebApiCore.Controllers.Main;
-using SampleSystem.WebApiCore.Controllers.Report;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
 {
@@ -195,7 +195,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             }
 
             var businessUnitTypeController = this.GetControllerEvaluator<BusinessUnitTypeController>();
-            var buTypeStrict = new BusinessUnitTypeStrictDTO(businessUnitTypeController.GetFullBusinessUnitType(type.ToIdentityDTO()));
+            var buTypeStrict = new BusinessUnitTypeStrictDTO(businessUnitTypeController.Evaluate(c => c.GetFullBusinessUnitType(type.ToIdentityDTO())));
 
             possibleParents = possibleParents ?? new List<BusinessUnitTypeIdentityDTO>();
             possibleParents.Add(type.ToIdentityDTO());
@@ -265,7 +265,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             }
 
 
-            businessUnitTypeController.SaveBusinessUnitType(buTypeStrict);
+            businessUnitTypeController.Evaluate(c => c.SaveBusinessUnitType(buTypeStrict));
 
             return type.ToIdentityDTO();
         }
@@ -619,18 +619,14 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
 
             return controller;
         }
-    }
 
-    public static class ServiceProviderControllerExtensions
-    {
-        public static IServiceCollection RegisterControllers(this IServiceCollection services)
+
+        public virtual ControllerEvaluator<TController> GetControllerEvaluator<TController>(string principalName = null)
+                where TController : ControllerBase, IApiControllerBase
         {
-            foreach (var controllerType in typeof(SampleSystemGenericReportController).Assembly.GetTypes().Where(t => typeof(ControllerBase).IsAssignableFrom(t)))
-            {
-                services.AddScoped(controllerType);
-            }
+            var controllerEvaluator = this.Environment.ServiceProvider.GetRequiredService<ControllerEvaluator<TController>>();
 
-            return services;
+            return principalName == null ? controllerEvaluator : controllerEvaluator.WithImpersonate(principalName);
         }
     }
 }

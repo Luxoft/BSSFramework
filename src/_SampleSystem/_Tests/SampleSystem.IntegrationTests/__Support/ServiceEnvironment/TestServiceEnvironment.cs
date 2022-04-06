@@ -36,8 +36,6 @@ using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore;
 
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
-
 namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 {
     /// <summary>

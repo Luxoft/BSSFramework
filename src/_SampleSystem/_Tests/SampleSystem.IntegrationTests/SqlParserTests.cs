@@ -104,7 +104,7 @@ namespace SampleSystem.IntegrationTests
             var fullEmployee = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
 
             // Act
-            Action action = () => hRDepartmentController.RemoveHRDepartment(fullEmployee.HRDepartment.Identity);
+            Action action = () => hRDepartmentController.Evaluate(c => c.RemoveHRDepartment(fullEmployee.HRDepartment.Identity));
 
             // Assert
             action.Should().Throw<Exception>().WithMessage($"{nameof(HRDepartment)} cannot be removed because it is used in {nameof(Employee)}");

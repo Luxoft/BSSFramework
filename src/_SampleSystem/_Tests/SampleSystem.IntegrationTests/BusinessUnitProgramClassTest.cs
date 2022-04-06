@@ -19,8 +19,8 @@ namespace SampleSystem.IntegrationTests
         public void TestData()
         {
             var businessUnitTypeController = this.GetControllerEvaluator<BusinessUnitTypeController>();
-            var lobType = businessUnitTypeController.GetSimpleBusinessUnitTypeByName(DefaultConstants.BUSINESS_UNIT_TYPE_LOB_NAME);
-            var programType = businessUnitTypeController.GetSimpleBusinessUnitTypeByName(DefaultConstants.BUSINESS_UNIT_TYPE_PROGRAM_NAME);
+            var lobType = businessUnitTypeController.Evaluate(c => c.GetSimpleBusinessUnitTypeByName(DefaultConstants.BUSINESS_UNIT_TYPE_LOB_NAME));
+            var programType = businessUnitTypeController.Evaluate(c => c.GetSimpleBusinessUnitTypeByName(DefaultConstants.BUSINESS_UNIT_TYPE_PROGRAM_NAME));
 
             var profitCenter = this.DataHelper.SaveBusinessUnit(type: programType.Identity, name: "ProfitCenter"); ;
 
@@ -43,11 +43,11 @@ namespace SampleSystem.IntegrationTests
             };
 
             // Act
-            var actualResult = businessUnitQueryController.GetBusinessUnitProgramClassesByODataQueryStringWithFilter(new GetBusinessUnitProgramClassesByODataQueryStringWithFilterAutoRequest
+            var actualResult = businessUnitQueryController.Evaluate(c => c.GetBusinessUnitProgramClassesByODataQueryStringWithFilter(new GetBusinessUnitProgramClassesByODataQueryStringWithFilterAutoRequest
                 {
                     odataQueryString = "$top=70&$orderby=VirtualValue",
                     filter = filter
-                }).Items;
+                })).Items;
 
             // Assert
 
@@ -70,11 +70,11 @@ namespace SampleSystem.IntegrationTests
             };
 
             // Act
-            var actualResult = businessUnitQueryController.GetBusinessUnitProgramClassesByODataQueryStringWithFilter(new GetBusinessUnitProgramClassesByODataQueryStringWithFilterAutoRequest
+            var actualResult = businessUnitQueryController.Evaluate(c => c.GetBusinessUnitProgramClassesByODataQueryStringWithFilter(new GetBusinessUnitProgramClassesByODataQueryStringWithFilterAutoRequest
                 {
                     odataQueryString = "$top=70&$orderby=VirtualValue",
                     filter = filter
-                }).Items;
+                })).Items;
 
             // Assert
             actualResult.Count.Should().Be(3);

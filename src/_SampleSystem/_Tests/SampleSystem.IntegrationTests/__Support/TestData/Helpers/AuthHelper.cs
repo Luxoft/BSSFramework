@@ -46,11 +46,14 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             this.LoginAs(this.GetEmployeeLogin(employee));
         }
 
-        public void RunCommandAs(EmployeeIdentityDTO employee, Action command)
+        public Framework.Authorization.Generated.DTO.PrincipalIdentityDTO SavePrincipal(string name, bool active, Guid? externalId = null)
         {
-            this.LoginAs(employee);
-            command.Invoke();
-            this.FinishRunAsUser();
+            return this.EvaluateWrite(context =>
+            {
+                var principal = new Framework.Authorization.Domain.Principal { Name = name, Active = active, ExternalId = externalId };
+                context.Authorization.Logics.Principal.Save(principal);
+                return principal.ToIdentityDTO();
+            });
         }
 
         public void LoginAs(string principalName = null)
@@ -73,6 +76,11 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, null, action);
         }
 
+        public TResult EvaluateWrite<TResult>(Func<ISampleSystemBLLContext, TResult> func)
+        {
+            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, null, func);
+        }
+
         public TResult EvaluateRead<TResult>(Func<ISampleSystemBLLContext, TResult> func)
         {
             return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, null, func);
@@ -83,12 +91,10 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, ctx => ctx.Logics.Employee.GetById(employee.Id, true).Login);
         }
 
-        public PrincipalFullDTO GetPrincipalByName(string login)
-        {
-            return this.EvaluateRead(ctx => ctx.Authorization.Logics.Principal.GetListBy(x => x.Name.Equals(login))
-                                               .Select(x => x.ToFullDTO(new AuthorizationServerPrimitiveDTOMappingService(ctx.Authorization)))
-                                               .FirstOrDefault());
-        }
+        //public PrincipalFullDTO GetPrincipalByName(string login)
+        //{
+        //    return this.EvaluateRead(ctx => ctx.Authorization.Logics.Principal.GetByName(login).Maybe(p => p.ToFullDTO(new AuthorizationServerPrimitiveDTOMappingService(ctx.Authorization))));
+        //}
 
 
         IServiceProvider IControllerEvaluatorContainer.RootServiceProvider => this.Environment.RootServiceProvider;

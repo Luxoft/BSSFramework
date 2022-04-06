@@ -72,7 +72,7 @@ namespace SampleSystem.IntegrationTests
             var expectedEmployee = "AA,BB,CC";
 
             // Act
-            var profitBU = businessUnitQueryController.GetTestBusinessUnitsByODataQueryString($"$filter=Id eq GUID'{DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID}'");
+            var profitBU = businessUnitQueryController.Evaluate(c => c.GetTestBusinessUnitsByODataQueryString($"$filter=Id eq GUID'{DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID}'"));
 
             // Assert
             profitBU.Items.Should().ContainSingle();
@@ -87,7 +87,7 @@ namespace SampleSystem.IntegrationTests
             var expectedHer = $"{DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME},{DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_NAME}";
 
             // Act
-            var profitBU = businessUnitQueryController.GetTestBusinessUnitsByODataQueryString($"$filter=Id eq GUID'{DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID}'");
+            var profitBU = businessUnitQueryController.Evaluate(c => c.GetTestBusinessUnitsByODataQueryString($"$filter=Id eq GUID'{DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID}'"));
 
             // Assert
             profitBU.Items.Should().ContainSingle();

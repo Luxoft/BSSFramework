@@ -15,12 +15,12 @@ public class __ApproveOperation_Workflow : IWorkflow<ApproveOperationWorkflowObj
             .Do(@if => @if.Parallel()
                 .Do(approveBuilder => approveBuilder
                     .WaitFor("Approve_Event", (_, ctx) => ctx.Workflow.Id)
-                    .Then((_, wfObj) => wfObj.Status = ApproveOperationWorkflowStatus.Approved)
+                    .Output((_, wfObj) => wfObj.Status = ApproveOperationWorkflowStatus.Approved)
                     .CancelCondition(operation => operation.Status != ApproveOperationWorkflowStatus.Approving))
 
                 .Do(rejectBuilder => rejectBuilder
                     .WaitFor("Reject_Event", (_, ctx) => ctx.Workflow.Id)
-                    .Then((_, operation) => operation.Status = ApproveOperationWorkflowStatus.Rejected)
+                    .Output((_, wfObj) => wfObj.Status = ApproveOperationWorkflowStatus.Rejected)
                     .CancelCondition(operation => operation.Status != ApproveOperationWorkflowStatus.Approving))
 
                 .Join())

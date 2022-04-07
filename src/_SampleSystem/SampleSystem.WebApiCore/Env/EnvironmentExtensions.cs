@@ -12,6 +12,7 @@ using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.NHibernate;
+using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Exceptions;
@@ -98,7 +99,7 @@ namespace SampleSystem.WebApiCore
         public static IServiceCollection AddAuthWorkflow(this IServiceCollection services)
         {
             return services
-                   .AddSingleton(sp => sp.GetRequiredService<IServiceEnvironment<IAuthorizationBLLContext>>().GetContextEvaluator())
+                   .AddScoped<IScopedContextEvaluator<IAuthorizationBLLContext>, ScopeContextEvaluator<IAuthorizationBLLContext>>()
                    .AddScoped<IWorkflowApproveProcessor, WorkflowApproveProcessor>()
                    //.AddScoped<IDALListener, PermissionWorkflowDALListener>()
 
@@ -106,7 +107,8 @@ namespace SampleSystem.WebApiCore
                    .AddTransient<PublishEvent>()
                    .AddTransient<SendFinalEvent>()
 
-                   .AddTransient<CanAutoApproveStep>();
+                   .AddTransient<CanAutoApproveStep>()
+                   .AddTransient<SetPermissionStep>();
         }
 
         public static void RegisterAuthWorkflow(this IServiceProvider serviceProvider)

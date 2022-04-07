@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.ServiceModel.IAD
 {
-    public class ScopeContextEvaluator<TBLLContext> : IContextEvaluator<TBLLContext>
+    public class ScopeContextEvaluator<TBLLContext> : IScopedContextEvaluator<TBLLContext>
     {
         private readonly IServiceEnvironment<TBLLContext> serviceEnvironment;
 

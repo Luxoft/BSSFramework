@@ -111,7 +111,7 @@ namespace SampleSystem.IntegrationTests.Workflow
             var startedWf = wfController.Evaluate(c => c.StartJob());
             var rootInstanceId = startedWf[permissionId];
 
-            await Task.Delay(2000);
+            await Task.Delay(5000);
 
             var operationWfInstances = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, ctx =>
             {
@@ -120,7 +120,7 @@ namespace SampleSystem.IntegrationTests.Workflow
                 var instances = bll.GetUnsecureQueryable().Where(wi =>
                     wi.Data.Contains(permissionIdStr)
                  && wi.WorkflowDefinitionId == nameof(__ApproveOperation_Workflow)
-                    //&& wi.Status == WorkflowStatus.Runnable
+                 && wi.Status == WorkflowStatus.Runnable
                     );
 
                 return instances.ToList(wi => new { wi.Id, wi.WorkflowDefinitionId, wi.Status } );

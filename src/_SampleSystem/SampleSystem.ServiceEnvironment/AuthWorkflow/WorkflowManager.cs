@@ -20,6 +20,7 @@ public class WorkflowManager : IWorkflowManager
 
         this.Enabled = true;
     }
+
     public void Stop()
     {
         this.workflowHost.Stop();

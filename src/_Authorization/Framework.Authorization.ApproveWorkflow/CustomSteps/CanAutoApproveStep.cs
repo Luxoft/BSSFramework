@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 
 using Framework.Authorization.BLL;
-using Framework.Authorization.Domain;
 using Framework.DomainDriven.BLL;
 
 using JetBrains.Annotations;
@@ -14,14 +13,15 @@ namespace Framework.Authorization.ApproveWorkflow;
 
 public class CanAutoApproveStep : IStepBody
 {
-    private readonly IWorkflowApproveProcessor workflowApproveProcessor;
-
     private readonly IContextEvaluator<IAuthorizationBLLContext> contextEvaluator;
 
-    public CanAutoApproveStep([NotNull] IWorkflowApproveProcessor workflowApproveProcessor, [NotNull] IContextEvaluator<IAuthorizationBLLContext> contextEvaluator)
+    private readonly IWorkflowApproveProcessor workflowApproveProcessor;
+
+    public CanAutoApproveStep([NotNull] IScopedContextEvaluator<IAuthorizationBLLContext> contextEvaluator,
+                              [NotNull] IWorkflowApproveProcessor workflowApproveProcessor)
     {
-        this.workflowApproveProcessor = workflowApproveProcessor ?? throw new ArgumentNullException(nameof(workflowApproveProcessor));
         this.contextEvaluator = contextEvaluator ?? throw new ArgumentNullException(nameof(contextEvaluator));
+        this.workflowApproveProcessor = workflowApproveProcessor ?? throw new ArgumentNullException(nameof(workflowApproveProcessor));
     }
 
     public async Task<ExecutionResult> RunAsync(IStepExecutionContext context)
@@ -43,36 +43,5 @@ public class CanAutoApproveStep : IStepBody
 
             return this.workflowApproveProcessor.CanAutoApprove(permission, operation);
         });
-    }
-}
-
-public class SetPermissionStep : IStepBody
-{
-    [NotNull]
-    private readonly IContextEvaluator<IAuthorizationBLLContext> contextEvaluator;
-
-    public SetPermissionStep([NotNull] IContextEvaluator<IAuthorizationBLLContext> contextEvaluator)
-    {
-        this.contextEvaluator = contextEvaluator;
-    }
-
-    public PermissionStatus Status { get; set; }
-
-    public async Task<ExecutionResult> RunAsync(IStepExecutionContext context)
-    {
-        var wfObj = (ApprovePermissionWorkflowObject)context.Workflow.Data;
-
-        this.contextEvaluator.Evaluate(DBSessionMode.Read, ctx =>
-        {
-            var permission = ctx.Logics.Permission.GetById(wfObj.PermissionId, true);
-
-            permission.Status = this.Status;
-
-            ctx.Logics.Permission.Save(permission);
-        });
-
-        wfObj.Status = this.Status;
-
-        return ExecutionResult.Next();
     }
 }

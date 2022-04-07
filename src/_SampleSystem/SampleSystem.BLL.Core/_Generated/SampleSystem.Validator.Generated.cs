@@ -20,6 +20,7 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.CustomReports.Employee.EmployeeReportParameter>(this.GetEmployeeReportParameterValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Address>(this.GetAddressValidationResult);
             base.RegisterHandler<SampleSystem.Domain.AnotherSqlParserTestObj>(this.GetAnotherSqlParserTestObjValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>(this.GetApprovePermissionWorkflowDomainObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.BusinessUnit>(this.GetBusinessUnitValidationResult);
             base.RegisterHandler<SampleSystem.Domain.BusinessUnitAncestorLink>(this.GetBusinessUnitAncestorLinkValidationResult);
             base.RegisterHandler<SampleSystem.Domain.BusinessUnitEmployeeRole>(this.GetBusinessUnitEmployeeRoleValidationResult);
@@ -106,6 +107,7 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.TestUnpersistentObject>(this.GetTestUnpersistentObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.UniqueByMaster.ParentEntity>(this.GetParentEntityValidationResult);
             base.RegisterHandler<SampleSystem.Domain.UniqueByParent.ChildEntity>(this.GetChildEntityValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.WorkflowCoreInstance>(this.GetWorkflowCoreInstanceValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Inline.Fio>(this.GetFioValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Inline.FioShort>(this.GetFioShortValidationResult);
         }
@@ -116,6 +118,11 @@ namespace SampleSystem.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetAnotherSqlParserTestObjValidationResult(SampleSystem.Domain.AnotherSqlParserTestObj source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetApprovePermissionWorkflowDomainObjectValidationResult(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
@@ -556,6 +563,11 @@ namespace SampleSystem.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetTestUnpersistentObjectValidationResult(SampleSystem.Domain.TestUnpersistentObject source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetWorkflowCoreInstanceValidationResult(SampleSystem.Domain.WorkflowCoreInstance source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

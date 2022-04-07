@@ -25,6 +25,8 @@ using SampleSystem.BLL;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.NewtonsoftJson;
 
+using WorkflowCore.Interface;
+
 namespace SampleSystem.WebApiCore
 {
     public class Startup
@@ -111,7 +113,8 @@ namespace SampleSystem.WebApiCore
 
             app.UseCapDashboard();
 
-            app.ApplicationServices.StartWorkflow();
+            app.ApplicationServices.RegisterAuthWorkflow();
+            app.ApplicationServices.GetRequiredService<IWorkflowHost>().Start();
         }
 
         private void UseHangfireBss(IApplicationBuilder app)

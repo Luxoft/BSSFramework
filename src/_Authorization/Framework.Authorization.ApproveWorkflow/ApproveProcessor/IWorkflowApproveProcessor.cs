@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 
 using Framework.Authorization.Domain;
 
 using JetBrains.Annotations;
 
 namespace Framework.Authorization.ApproveWorkflow;
-
 
 public interface IWorkflowApproveProcessor
 {

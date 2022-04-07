@@ -1,0 +1,25 @@
+﻿using Framework.DomainDriven.BLL;
+using Framework.Persistent.Mapping;
+
+namespace SampleSystem.Domain;
+
+[BLLRole]
+[View]
+public class WorkflowCoreInstance : PersistentDomainObjectBase
+{
+    private string data;
+
+    private string workflowDefinitionId;
+
+    public virtual string Data
+    {
+        get { return this.data; }
+        set { this.data = value; }
+    }
+
+    public virtual string WorkflowDefinitionId
+    {
+        get { return this.workflowDefinitionId; }
+        set { this.workflowDefinitionId = value; }
+    }
+}

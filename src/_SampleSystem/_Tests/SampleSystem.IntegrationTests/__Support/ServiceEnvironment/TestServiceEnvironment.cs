@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Framework.Authorization.ApproveWorkflow;
 using Framework.Cap.Abstractions;
 using Framework.Configuration.BLL;
 using Framework.Core;
@@ -21,6 +24,7 @@ using Framework.Validation;
 
 using MediatR;
 
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -33,6 +37,8 @@ using SampleSystem.IntegrationTests.__Support.ServiceEnvironment.IntegrationTest
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore;
+
+using WorkflowCore.Interface;
 
 namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 {
@@ -77,15 +83,23 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 
         private static TestServiceEnvironment CreateDefaultTestServiceEnvironment()
         {
-            return BuildServiceProvider(services => services.AddSingleton<SampleSystemServiceEnvironment>(sp => sp.GetRequiredService<TestServiceEnvironment>())
-                                                            .AddSingleton<TestServiceEnvironment>())
+            var serviceProvider = BuildServiceProvider();
 
-                    .GetRequiredService<TestServiceEnvironment>();
+            serviceProvider.RegisterAuthWorkflow();
+
+            return serviceProvider.GetRequiredService<TestServiceEnvironment>();
         }
 
 
-        protected static IServiceProvider BuildServiceProvider(Action<IServiceCollection> initServices = null)
+        protected static IServiceProvider BuildServiceProvider()
         {
+            var configuration = new ConfigurationBuilder()
+                                .SetBasePath(Directory.GetCurrentDirectory())
+                                .AddJsonFile("appsettings.json", false, true)
+                                .AddEnvironmentVariables(nameof(SampleSystem) + "_")
+                                .Build();
+
+
             return new ServiceCollection()
                                   .RegisterLegacyBLLContext()
                                   .RegisterControllers()
@@ -99,8 +113,18 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .AddSingleton<ISpecificationEvaluator, NhSpecificationEvaluator>()
                                   .AddSingleton<ICapTransactionManager, TestCapTransactionManager>()
                                   .AddSingleton<IIntegrationEventBus, TestIntegrationEventBus>()
+                                  .AddSingleton<SampleSystemServiceEnvironment>(sp => sp.GetRequiredService<TestServiceEnvironment>())
+                                  .AddSingleton<TestServiceEnvironment>().AddSingleton<SampleSystemServiceEnvironment>(sp => sp.GetRequiredService<TestServiceEnvironment>())
 
-                                  .Self(initServices ?? (_ => { }))
+                                  .AddSingleton<IWorkflowManager, WorkflowManager>(sp => sp.GetRequiredService<WorkflowManager>())
+                                  .AddSingleton<WorkflowManager>()
+
+                                  .AddScoped<IWorkflowApproveProcessor, WorkflowApproveProcessor>()
+                                  .AddScoped<StartWorkflowJob>()
+                                  .AddSingleton(sp => sp.GetRequiredService<SampleSystemServiceEnvironment>().GetContextEvaluator())
+                                  .AddSingleton<TestServiceEnvironment>()
+                                  .AddWorkflowCore(configuration)
+                                  .AddAuthWorkflow()
 
                                   .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
         }
@@ -133,6 +157,15 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
             protected override IMessageSender<NotificationEventDTO> GetMessageTemplateSender()
             {
                 return new LocalDBNotificationEventDTOMessageSender(this.Configuration);
+            }
+            protected override IEnumerable<IDALListener> GetBeforeTransactionCompletedListeners()
+            {
+                foreach (var dalListener in base.GetBeforeTransactionCompletedListeners())
+                {
+                    yield return dalListener;
+                }
+
+                yield return new PermissionWorkflowDALListener(this.MainContext);
             }
         }
 

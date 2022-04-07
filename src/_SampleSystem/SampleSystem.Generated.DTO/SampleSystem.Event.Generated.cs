@@ -19,6 +19,8 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AddressRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AnotherSqlParserTestObjSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AnotherSqlParserTestObjRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitAncestorLinkSaveEventDTO))]
@@ -190,6 +192,8 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ParentEntityRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ChildEntitySaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ChildEntityRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.WorkflowCoreInstanceSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.WorkflowCoreInstanceRemoveEventDTO))]
     public abstract partial class EventDTOBase
     {
     }
@@ -419,6 +423,84 @@ namespace SampleSystem.Generated.DTO
         public AnotherSqlParserTestObjEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.AnotherSqlParserTestObj domainObject)
         {
             mappingService.MapAnotherSqlParserTestObj(domainObject, this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class ApprovePermissionWorkflowDomainObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectEventRichDTO ApprovePermissionWorkflowDomainObject;
+        
+        public ApprovePermissionWorkflowDomainObjectSaveEventDTO()
+        {
+        }
+        
+        public ApprovePermissionWorkflowDomainObjectSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ApprovePermissionWorkflowDomainObject domainObject)
+        {
+            this.ApprovePermissionWorkflowDomainObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class ApprovePermissionWorkflowDomainObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectEventRichDTO ApprovePermissionWorkflowDomainObject;
+        
+        public ApprovePermissionWorkflowDomainObjectRemoveEventDTO()
+        {
+        }
+        
+        public ApprovePermissionWorkflowDomainObjectRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ApprovePermissionWorkflowDomainObject domainObject)
+        {
+            this.ApprovePermissionWorkflowDomainObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class ApprovePermissionWorkflowDomainObjectEventRichDTO
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid PermissionId;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid? WorkflowInstanceId;
+        
+        public ApprovePermissionWorkflowDomainObjectEventRichDTO()
+        {
+        }
+        
+        public ApprovePermissionWorkflowDomainObjectEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.ApprovePermissionWorkflowDomainObject domainObject)
+        {
+            mappingService.MapApprovePermissionWorkflowDomainObject(domainObject, this);
         }
     }
     
@@ -8501,6 +8583,66 @@ namespace SampleSystem.Generated.DTO
         public ChildEntityEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.UniqueByParent.ChildEntity domainObject)
         {
             mappingService.MapChildEntity(domainObject, this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.WorkflowCoreInstance), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class WorkflowCoreInstanceSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.WorkflowCoreInstanceEventRichDTO WorkflowCoreInstance;
+        
+        public WorkflowCoreInstanceSaveEventDTO()
+        {
+        }
+        
+        public WorkflowCoreInstanceSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.WorkflowCoreInstance domainObject)
+        {
+            this.WorkflowCoreInstance = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.WorkflowCoreInstance), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class WorkflowCoreInstanceRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.WorkflowCoreInstanceEventRichDTO WorkflowCoreInstance;
+        
+        public WorkflowCoreInstanceRemoveEventDTO()
+        {
+        }
+        
+        public WorkflowCoreInstanceRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.WorkflowCoreInstance domainObject)
+        {
+            this.WorkflowCoreInstance = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.WorkflowCoreInstance), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class WorkflowCoreInstanceEventRichDTO
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Data;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string WorkflowDefinitionId;
+        
+        public WorkflowCoreInstanceEventRichDTO()
+        {
+        }
+        
+        public WorkflowCoreInstanceEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.WorkflowCoreInstance domainObject)
+        {
+            mappingService.MapWorkflowCoreInstance(domainObject, this);
         }
     }
 }

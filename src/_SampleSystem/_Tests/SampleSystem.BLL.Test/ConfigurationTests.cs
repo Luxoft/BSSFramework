@@ -24,7 +24,7 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void TestCreateModification()
         {
-            var environment = TestServiceEnvironment.IntegrationEnvironment;
+            var environment = TestServiceEnvironment.Default;
 
             environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
             {
@@ -41,7 +41,7 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void TestForceSendEvent()
         {
-            var environment = TestServiceEnvironment.IntegrationEnvironment;
+            var environment = TestServiceEnvironment.Default;
 
             var configFacade = environment.GetController<ConfigSLJsonController>();
 

@@ -11,6 +11,27 @@ namespace SampleSystem.BLL
 {
     
     
+    public partial class ApprovePermissionWorkflowDomainObjectBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLL
+    {
+        
+		partial void Initialize();
+        
+        public ApprovePermissionWorkflowDomainObjectBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
+                base(context, securityProvider, specificationEvaluator)
+        {
+            this.Initialize();
+        }
+    }
+    
+    public partial class ApprovePermissionWorkflowDomainObjectBLLFactory : Framework.DomainDriven.BLL.Security.BLLFactoryBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLL, SampleSystem.BLL.ApprovePermissionWorkflowDomainObjectBLL, SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>, SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLLFactory
+    {
+        
+        public ApprovePermissionWorkflowDomainObjectBLLFactory(SampleSystem.BLL.ISampleSystemBLLContext context) : 
+                base(context)
+        {
+        }
+    }
+    
     public partial class BusinessUnitBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.BusinessUnit, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IBusinessUnitBLL
     {
         
@@ -1076,8 +1097,31 @@ namespace SampleSystem.BLL
         }
     }
     
+    public partial class WorkflowCoreInstanceBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.WorkflowCoreInstance, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IWorkflowCoreInstanceBLL
+    {
+        
+		partial void Initialize();
+        
+        public WorkflowCoreInstanceBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.WorkflowCoreInstance> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
+                base(context, securityProvider, specificationEvaluator)
+        {
+            this.Initialize();
+        }
+    }
+    
+    public partial class WorkflowCoreInstanceBLLFactory : Framework.DomainDriven.BLL.Security.BLLFactoryBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.IWorkflowCoreInstanceBLL, SampleSystem.BLL.WorkflowCoreInstanceBLL, SampleSystem.Domain.WorkflowCoreInstance>, SampleSystem.BLL.IWorkflowCoreInstanceBLLFactory
+    {
+        
+        public WorkflowCoreInstanceBLLFactory(SampleSystem.BLL.ISampleSystemBLLContext context) : 
+                base(context)
+        {
+        }
+    }
+    
     public partial class SampleSystemBLLFactoryContainer : Framework.DomainDriven.BLL.BLLContextContainer<SampleSystem.BLL.ISampleSystemBLLContext>, SampleSystem.BLL.ISampleSystemBLLFactoryContainer
     {
+        
+        private SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLL approvePermissionWorkflowDomainObjectBLL;
         
         private SampleSystem.BLL.IBusinessUnitBLL businessUnitBLL;
         
@@ -1183,11 +1227,33 @@ namespace SampleSystem.BLL
         
         private SampleSystem.BLL.ITestSecuritySubObjItemBLL testSecuritySubObjItemBLL;
         
+        private SampleSystem.BLL.IWorkflowCoreInstanceBLL workflowCoreInstanceBLL;
+        
         private SampleSystem.BLL.IWorkingCalendar1676BLL workingCalendar1676BLL;
         
         public SampleSystemBLLFactoryContainer(SampleSystem.BLL.ISampleSystemBLLContext context) : 
                 base(context)
         {
+        }
+        
+        public SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLL ApprovePermissionWorkflowDomainObject
+        {
+            get
+            {
+                if (object.ReferenceEquals(this.approvePermissionWorkflowDomainObjectBLL, null))
+                {
+                    this.approvePermissionWorkflowDomainObjectBLL = this.ApprovePermissionWorkflowDomainObjectFactory.Create();
+                }
+                return this.approvePermissionWorkflowDomainObjectBLL;
+            }
+        }
+        
+        public SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLLFactory ApprovePermissionWorkflowDomainObjectFactory
+        {
+            get
+            {
+                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLLFactory>(this.Context.ServiceProvider);
+            }
         }
         
         public SampleSystem.BLL.IBusinessUnitBLL BusinessUnit
@@ -2214,6 +2280,26 @@ namespace SampleSystem.BLL
             }
         }
         
+        public SampleSystem.BLL.IWorkflowCoreInstanceBLL WorkflowCoreInstance
+        {
+            get
+            {
+                if (object.ReferenceEquals(this.workflowCoreInstanceBLL, null))
+                {
+                    this.workflowCoreInstanceBLL = this.WorkflowCoreInstanceFactory.Create();
+                }
+                return this.workflowCoreInstanceBLL;
+            }
+        }
+        
+        public SampleSystem.BLL.IWorkflowCoreInstanceBLLFactory WorkflowCoreInstanceFactory
+        {
+            get
+            {
+                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<SampleSystem.BLL.IWorkflowCoreInstanceBLLFactory>(this.Context.ServiceProvider);
+            }
+        }
+        
         public SampleSystem.BLL.IWorkingCalendar1676BLL WorkingCalendar1676
         {
             get
@@ -2236,6 +2322,7 @@ namespace SampleSystem.BLL
         
         public static void RegisterBLLFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection)
         {
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLLFactory, SampleSystem.BLL.ApprovePermissionWorkflowDomainObjectBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IBusinessUnitBLLFactory, SampleSystem.BLL.BusinessUnitBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IBusinessUnitHrDepartmentBLLFactory, SampleSystem.BLL.BusinessUnitHrDepartmentBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IBusinessUnitManagerCommissionLinkBLLFactory, SampleSystem.BLL.BusinessUnitManagerCommissionLinkBLLFactory>(serviceCollection);
@@ -2287,6 +2374,7 @@ namespace SampleSystem.BLL
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestSecuritySubObjItemBLLFactory, SampleSystem.BLL.TestSecuritySubObjItemBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestSecuritySubObjItem2BLLFactory, SampleSystem.BLL.TestSecuritySubObjItem2BLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestSecuritySubObjItem3BLLFactory, SampleSystem.BLL.TestSecuritySubObjItem3BLLFactory>(serviceCollection);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IWorkflowCoreInstanceBLLFactory, SampleSystem.BLL.WorkflowCoreInstanceBLLFactory>(serviceCollection);
         }
     }
     
@@ -2314,7 +2402,11 @@ namespace SampleSystem.BLL
         
         public override Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>()
         {
-            if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnit)))
+            if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject)))
+            {
+                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ApprovePermissionWorkflowDomainObject));
+            }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnit)))
             {
                 return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnit));
             }
@@ -2518,6 +2610,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecuritySubObjItem3));
             }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreInstance)))
+            {
+                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkflowCoreInstance));
+            }
             else
             {
                 return new SampleSystem.BLL.DomainBLLBase<TDomainObject>(this.Context);
@@ -2526,7 +2622,11 @@ namespace SampleSystem.BLL
         
         public override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider)
         {
-            if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnit)))
+            if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject)))
+            {
+                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ApprovePermissionWorkflowDomainObjectFactory.Create()));
+            }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnit)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.BusinessUnit>)(securityProvider)))));
             }
@@ -2730,6 +2830,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecuritySubObjItem3Factory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem3>)(securityProvider)))));
             }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreInstance)))
+            {
+                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkflowCoreInstanceFactory.Create()));
+            }
             else
             {
                 return new SampleSystem.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context);
@@ -2738,7 +2842,11 @@ namespace SampleSystem.BLL
         
         public override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(SampleSystem.SampleSystemSecurityOperationCode securityOperation)
         {
-            if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnit)))
+            if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject)))
+            {
+                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ApprovePermissionWorkflowDomainObjectFactory.Create()));
+            }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnit)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitFactory.Create(securityOperation)));
             }
@@ -2942,6 +3050,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecuritySubObjItem3Factory.Create(securityOperation)));
             }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreInstance)))
+            {
+                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkflowCoreInstanceFactory.Create()));
+            }
             else
             {
                 return new SampleSystem.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context);
@@ -2950,7 +3062,11 @@ namespace SampleSystem.BLL
         
         public override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(Framework.SecuritySystem.BLLSecurityMode bllSecurityMode)
         {
-            if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnit)))
+            if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject)))
+            {
+                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ApprovePermissionWorkflowDomainObjectFactory.Create()));
+            }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnit)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessUnitFactory.Create(bllSecurityMode)));
             }
@@ -3153,6 +3269,10 @@ namespace SampleSystem.BLL
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecuritySubObjItem3)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecuritySubObjItem3Factory.Create(bllSecurityMode)));
+            }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreInstance)))
+            {
+                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkflowCoreInstanceFactory.Create()));
             }
             else
             {

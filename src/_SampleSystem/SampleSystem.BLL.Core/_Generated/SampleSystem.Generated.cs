@@ -1697,6 +1697,16 @@ namespace SampleSystem.BLL
     public partial interface ISampleSystemBLLFactoryContainer : Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode, System.Guid>>
     {
         
+        SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLL ApprovePermissionWorkflowDomainObject
+        {
+            get;
+        }
+        
+        SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLLFactory ApprovePermissionWorkflowDomainObjectFactory
+        {
+            get;
+        }
+        
         SampleSystem.BLL.IBusinessUnitBLL BusinessUnit
         {
             get;
@@ -2197,6 +2207,16 @@ namespace SampleSystem.BLL
             get;
         }
         
+        SampleSystem.BLL.IWorkflowCoreInstanceBLL WorkflowCoreInstance
+        {
+            get;
+        }
+        
+        SampleSystem.BLL.IWorkflowCoreInstanceBLLFactory WorkflowCoreInstanceFactory
+        {
+            get;
+        }
+        
         SampleSystem.BLL.IWorkingCalendar1676BLL WorkingCalendar1676
         {
             get;
@@ -2206,6 +2226,14 @@ namespace SampleSystem.BLL
         {
             get;
         }
+    }
+    
+    public partial interface IApprovePermissionWorkflowDomainObjectBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, System.Guid>
+    {
+    }
+    
+    public partial interface IApprovePermissionWorkflowDomainObjectBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>>
+    {
     }
     
     public partial interface IBusinessUnitBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnit, System.Guid>
@@ -2643,6 +2671,14 @@ namespace SampleSystem.BLL
     }
     
     public partial interface ITestSecuritySubObjItem3BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem3>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, Framework.SecuritySystem.BLLSecurityMode>
+    {
+    }
+    
+    public partial interface IWorkflowCoreInstanceBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.WorkflowCoreInstance, System.Guid>
+    {
+    }
+    
+    public partial interface IWorkflowCoreInstanceBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IWorkflowCoreInstanceBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.WorkflowCoreInstance>>
     {
     }
 }

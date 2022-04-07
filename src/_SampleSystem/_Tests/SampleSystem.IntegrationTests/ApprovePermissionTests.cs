@@ -1,18 +1,30 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 using FluentAssertions;
 
+using Framework.Authorization.ApproveWorkflow;
 using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
+using Framework.Core;
+using Framework.DomainDriven.BLL;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using SampleSystem.BLL;
+using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.Controllers;
+
+using WorkflowCore.Interface;
+using WorkflowCore.Models;
+
+using DBSessionMode = Framework.DomainDriven.BLL.DBSessionMode;
 
 namespace SampleSystem.IntegrationTests.Workflow
 {
@@ -54,15 +66,16 @@ namespace SampleSystem.IntegrationTests.Workflow
                                                                              }));
         }
 
-        private SampleSystemServiceEnvironment WorkflowEnvironment { get; } = WorkflowTestServiceEnvironment.Default;
-
         [TestMethod]
-        public void CreatePermission_WorkflowPassed()
+        public async Task CreatePermission_WorkflowPassed()
         {
             // Arrange
             var testUserForApproving = "ApprovingWfUser";
 
-            var authFacade = this.WorkflowEnvironment.ServiceProvider.GetDefaultControllerEvaluator<AuthSLJsonController>();
+            this.Environment.ServiceProvider.GetRequiredService<WorkflowManager>().Start();
+
+            var authFacade = this.GetControllerEvaluator<AuthSLJsonController>();
+            var wfController = this.GetControllerEvaluator<WorkflowController>();
 
             //var workflowHost = this.GetWorkflowControllerEvaluator();
 
@@ -91,19 +104,34 @@ namespace SampleSystem.IntegrationTests.Workflow
                                                                               }));
 
             var preApprovePrincipal = authFacade.Evaluate(c => c.GetRichPrincipal(approvingPrincipal));
+            var permissionId = preApprovePrincipal.Permissions.Single().Id;
+            var permissionIdStr = permissionId.ToString();
 
-            //var taskInstance = workflowFacade.Evaluate(c => c.GetSimpleTaskInstancesByRootFilter(new TaskInstanceRootFilterModelStrictDTO { DomainObjectId = this.approveOperation.Id })).Single();
 
-            //workflowFacade.WithImpersonate(SuperUserWithApprove).Evaluate(c => c.ExecuteCommand(new ExecuteCommandRequestStrictDTO
-            //{
-            //        Command = this.approveCommand.Identity,
-            //        TaskInstance = taskInstance.Identity,
-            //        Parameters =
-            //        {
-            //                new ExecuteCommandRequestParameterStrictDTO { Definition = this.approveCommandCommentParameter.Identity, Value = "Ok!" },
-            //                new ExecuteCommandRequestParameterStrictDTO { Definition = this.approveCommandPotentialApproversParameter.Identity, Value = "Vasia" }
-            //        }
-            //}));
+
+            var startedWf = wfController.Evaluate(c => c.StartJob());
+            var rootInstanceId = startedWf[permissionId];
+
+            await Task.Delay(2000);
+
+
+            var wfInstances = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, ctx =>
+            {
+                var bll = ctx.Logics.Default.Create<WorkflowCoreInstance>();
+
+                var instances = bll.GetUnsecureQueryable().Where(wi => wi.Data.Contains(permissionIdStr));
+
+                return instances.ToList(wi => new { wi.Id, wi.WorkflowDefinitionId } );
+            });
+
+            var host = this.Environment.ServiceProvider.GetRequiredService<IWorkflowHost>();
+
+            foreach (var wi in wfInstances.Where(wi => wi.WorkflowDefinitionId == nameof(__ApproveOperation_Workflow)))
+            {
+                await host.PublishEvent("Approve_Event", wi.Id.ToString(), null);
+            }
+
+            var wiStatus = host.PersistenceStore.WaitForWorkflowToComplete(rootInstanceId.ToString(), TimeSpan.FromSeconds(20));
 
             var postApprovePrincipal = authFacade.Evaluate(c => c.GetRichPrincipal(approvingPrincipal));
 
@@ -111,9 +139,33 @@ namespace SampleSystem.IntegrationTests.Workflow
 
             preApprovePrincipal.Permissions.Single().Status.Should().Be(PermissionStatus.Approving);
 
+            wiStatus.Should().Be(WorkflowStatus.Complete);
+
             postApprovePrincipal.Permissions.Single().Status.Should().Be(PermissionStatus.Approved);
 
             return;
         }
+    }
+}
+public static class PersistenceProviderExtensions
+{
+    public static WorkflowStatus WaitForWorkflowToComplete(this IPersistenceProvider persistenceProvider, string workflowId, TimeSpan timeOut)
+    {
+        var status = persistenceProvider.GetStatus(workflowId);
+        var counter = 0;
+        while ((status == WorkflowStatus.Runnable) && (counter < (timeOut.TotalMilliseconds / 100)))
+        {
+            Thread.Sleep(100);
+            counter++;
+            status = persistenceProvider.GetStatus(workflowId);
+        }
+
+        return status;
+    }
+
+    public static WorkflowStatus GetStatus(this IPersistenceProvider persistenceProvider, string workflowId)
+    {
+        var instance = persistenceProvider.GetWorkflowInstance(workflowId).Result;
+        return instance.Status;
     }
 }

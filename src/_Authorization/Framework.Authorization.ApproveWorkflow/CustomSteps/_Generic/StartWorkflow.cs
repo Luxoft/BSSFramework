@@ -32,7 +32,7 @@ public class StartWorkflow : IStepBody
             this.SubWfId = context.ExecutionPointer.EventKey;
 
             return ExecutionResult.Next();
-        };
+        }
 
         this.SubWfId = await this.host.StartWorkflow(workflowId: this.WorkflowType, data: this.InputData);
 

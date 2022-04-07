@@ -109,14 +109,12 @@ namespace SampleSystem.WebApiCore
                    .AddTransient<CanAutoApproveStep>();
         }
 
-        public static void StartWorkflow(this IServiceProvider serviceProvider)
+        public static void RegisterAuthWorkflow(this IServiceProvider serviceProvider)
         {
             var host = serviceProvider.GetRequiredService<IWorkflowHost>();
 
             host.RegisterWorkflow<__ApproveOperation_Workflow, ApproveOperationWorkflowObject>();
             host.RegisterWorkflow<__ApprovePermission_Workflow, ApprovePermissionWorkflowObject>();
-
-            host.Start();
         }
     }
 }

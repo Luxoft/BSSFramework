@@ -27,7 +27,7 @@ public class WorkflowCoreInstance : PersistentDomainObjectBase
         set { this.workflowDefinitionId = value; }
     }
 
-    public WorkflowStatus Status
+    public virtual WorkflowStatus Status
     {
         get { return this.status; }
         set { this.status = value; }

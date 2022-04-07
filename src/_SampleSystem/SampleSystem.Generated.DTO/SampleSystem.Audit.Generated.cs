@@ -196,6 +196,9 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Framework.Core.Nothing<SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO>>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Framework.Core.Just<SampleSystem.Generated.DTO.TestSecurityObjItemSimpleDTO>>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<WorkflowCore.Models.WorkflowStatus>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Framework.Core.Nothing<WorkflowCore.Models.WorkflowStatus>>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystemPropertyRevisionDTO<Framework.Core.Just<WorkflowCore.Models.WorkflowStatus>>))]
     public class SampleSystemPropertyRevisionDTO : Framework.DomainDriven.ServiceModel.Subscriptions.PropertyRevisionDTOBase
     {
         

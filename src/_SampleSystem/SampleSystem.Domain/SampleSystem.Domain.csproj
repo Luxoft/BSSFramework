@@ -6,6 +6,9 @@
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="WorkflowCore" Version="3.6.3" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\Framework.App.Domain\Framework.App.Domain.csproj" />
     <ProjectReference Include="..\SampleSystem.Core\SampleSystem.Core.csproj" />
   </ItemGroup>

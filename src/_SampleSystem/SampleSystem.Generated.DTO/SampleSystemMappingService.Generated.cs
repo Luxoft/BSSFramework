@@ -7180,6 +7180,7 @@ namespace SampleSystem.Generated.DTO
         {
             mappingObject.Data = domainObject.Data;
             mappingObject.Id = domainObject.Id;
+            mappingObject.Status = domainObject.Status;
             mappingObject.WorkflowDefinitionId = domainObject.WorkflowDefinitionId;
         }
         

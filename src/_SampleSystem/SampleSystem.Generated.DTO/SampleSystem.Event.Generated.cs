@@ -8634,6 +8634,9 @@ namespace SampleSystem.Generated.DTO
         public System.Guid Id;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public WorkflowCore.Models.WorkflowStatus Status;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string WorkflowDefinitionId;
         
         public WorkflowCoreInstanceEventRichDTO()

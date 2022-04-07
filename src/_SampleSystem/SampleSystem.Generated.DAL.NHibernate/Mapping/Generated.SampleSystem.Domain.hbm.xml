@@ -1209,6 +1209,7 @@
       <generator class="guid.comb" />
     </id>
     <property name="Data" column="data" access="field.camelcase" />
+    <property name="Status" column="status" access="field.camelcase" />
     <property name="WorkflowDefinitionId" column="workflowDefinitionId" access="field.camelcase" />
   </class>
 </hibernate-mapping>

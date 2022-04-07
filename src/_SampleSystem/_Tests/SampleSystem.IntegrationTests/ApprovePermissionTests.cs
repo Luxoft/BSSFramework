@@ -108,25 +108,27 @@ namespace SampleSystem.IntegrationTests.Workflow
             var permissionIdStr = permissionId.ToString();
 
 
-
             var startedWf = wfController.Evaluate(c => c.StartJob());
             var rootInstanceId = startedWf[permissionId];
 
             await Task.Delay(2000);
 
-
-            var wfInstances = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, ctx =>
+            var operationWfInstances = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, ctx =>
             {
                 var bll = ctx.Logics.Default.Create<WorkflowCoreInstance>();
 
-                var instances = bll.GetUnsecureQueryable().Where(wi => wi.Data.Contains(permissionIdStr));
+                var instances = bll.GetUnsecureQueryable().Where(wi =>
+                    wi.Data.Contains(permissionIdStr)
+                 && wi.WorkflowDefinitionId == nameof(__ApproveOperation_Workflow)
+                    //&& wi.Status == WorkflowStatus.Runnable
+                    );
 
-                return instances.ToList(wi => new { wi.Id, wi.WorkflowDefinitionId } );
+                return instances.ToList(wi => new { wi.Id, wi.WorkflowDefinitionId, wi.Status } );
             });
 
             var host = this.Environment.ServiceProvider.GetRequiredService<IWorkflowHost>();
 
-            foreach (var wi in wfInstances.Where(wi => wi.WorkflowDefinitionId == nameof(__ApproveOperation_Workflow)))
+            foreach (var wi in operationWfInstances)
             {
                 await host.PublishEvent("Approve_Event", wi.Id.ToString(), null);
             }

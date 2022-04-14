@@ -108,14 +108,12 @@ namespace SampleSystem.IntegrationTests.Reports
 
             this.AuthHelper.SavePrincipal(Tester, true);
 
-            this.AuthHelper.LoginAs(Tester);
-
             var reportId = new Guid("7DBDCCDF-1F43-43FA-854A-D465F5F4ED53");
 
-            var parameters = this.GetControllerEvaluator<SampleSystemGenericReportController>().Evaluate(c => c.GetSimpleReportParameters(reportId));
+            var parameters = this.GetControllerEvaluator<SampleSystemGenericReportController>(Tester).Evaluate(c => c.GetSimpleReportParameters(reportId));
 
             // Act
-            var values = this.GetControllerEvaluator<SampleSystemGenericReportController>().Evaluate(c => c.GetSimpleReportParameterValues(new GetSimpleReportParameterValuesRequest
+            var values = this.GetControllerEvaluator<SampleSystemGenericReportController>(Tester).Evaluate(c => c.GetSimpleReportParameterValues(new GetSimpleReportParameterValuesRequest
             {
                     identity = parameters.First(x => x.Name.Equals("Position", StringComparison.InvariantCultureIgnoreCase)).Identity,
                     odataQueryString = string.Empty

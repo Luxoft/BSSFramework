@@ -88,7 +88,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
 
             this.DataHelper.Environment = this.Environment;
             this.AuthHelper.Environment = this.Environment;
-            this.AuthHelper.LoginAs();
+            //this.AuthHelper.LoginAs();
 
             this.ClearNotifications();
             this.ClearIntegrationEvents();

@@ -107,7 +107,7 @@ public class WorkflowController : ApiControllerBase<
         return result;
     }
 
-    public async Task Approve(ApproveOperationWorkflowObject wfObj)
+    public async Task ApproveOperation(ApproveOperationWorkflowObject wfObj)
     {
         await this.workflowHost.PublishEvent("Approve_Event", wfObj.ApproveEventId, this.userAuthenticationService.GetUserName());
     }

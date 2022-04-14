@@ -111,14 +111,14 @@ namespace SampleSystem.IntegrationTests.Workflow
             var wfObjects = await WaitToCompleteHelper.Retry(
                 () => wfController.EvaluateAsync(c => c.GetMyApproveOperationWorkflowObjects(permissionIdentity)),
                 res => !res.Any(),
-                TimeSpan.FromSeconds(20));
+                TimeSpan.FromSeconds(10));
 
             foreach (var wfObj in wfObjects)
             {
-                await wfController.EvaluateAsync(c => c.Approve(wfObj));
+                await wfController.EvaluateAsync(c => c.ApproveOperation(wfObj));
             }
 
-            var wiStatus = this.Environment.ServiceProvider.GetRequiredService<IPersistenceProvider>().WaitForWorkflowToComplete(rootInstanceId.ToString(), TimeSpan.FromSeconds(40));
+            var wiStatus = this.Environment.ServiceProvider.GetRequiredService<IPersistenceProvider>().WaitForWorkflowToComplete(rootInstanceId.ToString(), TimeSpan.FromSeconds(10));
 
             var postApprovePrincipal = authFacade.Evaluate(c => c.GetRichPrincipal(approvingPrincipal));
 

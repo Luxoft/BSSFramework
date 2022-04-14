@@ -86,7 +86,7 @@ namespace SampleSystem.WebApiCore
                 .AddSingleton<IServiceEnvironment<IAuthorizationBLLContext>>(x => x.GetRequiredService<SampleSystemServiceEnvironment>())
                 .AddSingleton<IServiceEnvironment<IConfigurationBLLContext>>(x => x.GetRequiredService<SampleSystemServiceEnvironment>());
 
-            services.AddScoped<IScopedContextEvaluator<IAuthorizationBLLContext>, ScopeContextEvaluator<IAuthorizationBLLContext>>();
+            services.AddScoped<IScopedContextEvaluator<IAuthorizationBLLContext>, ScopedContextEvaluator<IAuthorizationBLLContext>>();
 
             return services;
         }

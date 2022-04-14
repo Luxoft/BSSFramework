@@ -12,7 +12,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         {
             return currentScopedServiceProvider == null
                        ? new RootContextEvaluator<IConfigurationBLLContext>(this, this.RootServiceProvider)
-                       : new ScopeContextEvaluator<IConfigurationBLLContext>(this, currentScopedServiceProvider);
+                       : new ScopedContextEvaluator<IConfigurationBLLContext>(this, currentScopedServiceProvider);
         }
     }
 }

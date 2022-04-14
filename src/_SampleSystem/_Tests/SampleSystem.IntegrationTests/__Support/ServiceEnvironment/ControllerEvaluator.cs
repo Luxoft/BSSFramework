@@ -32,14 +32,7 @@ public class ControllerEvaluator<TController>
 
     public T Evaluate<T>(Func<TController, T> func)
     {
-        using var scope = this.serviceProvider.CreateScope();
-
-        var controller = scope.ServiceProvider.GetRequiredService<TController>();
-
-        controller.ServiceProvider = scope.ServiceProvider;
-        controller.PrincipalName = this.principalName;
-
-        return func(controller);
+        return this.EvaluateAsync(async c => func(c)).Result;
     }
 
     public async Task<T> EvaluateAsync<T>(Func<TController, Task<T>> func)
@@ -49,21 +42,25 @@ public class ControllerEvaluator<TController>
         var controller = scope.ServiceProvider.GetRequiredService<TController>();
 
         controller.ServiceProvider = scope.ServiceProvider;
-        controller.PrincipalName = this.principalName;
+        //controller.PrincipalName = this.principalName;
 
-        return await func(controller);
+        if (this.principalName == null)
+        {
+            return await func(controller);
+        }
+        else
+        {
+            return await IntegrationTestsUserAuthenticationService.Instance.ImpersonateAsync(this.principalName, async () => await func(controller));
+        }
     }
 
     public async Task EvaluateAsync(Func<TController, Task> action)
     {
-        using var scope = this.serviceProvider.CreateScope();
-
-        var controller = scope.ServiceProvider.GetRequiredService<TController>();
-
-        controller.ServiceProvider = scope.ServiceProvider;
-        controller.PrincipalName = this.principalName;
-
-        await action(controller);
+        await this.EvaluateAsync<object>(async c =>
+        {
+            await action(c);
+            return default;
+        });
     }
 
     public void Evaluate(Action<TController> action)

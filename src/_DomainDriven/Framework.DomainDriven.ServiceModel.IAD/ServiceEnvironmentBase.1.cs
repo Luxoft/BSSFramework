@@ -95,7 +95,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         {
             return currentScopedServiceProvider == null
                        ? new RootContextEvaluator<TBLLContext>(this, this.RootServiceProvider)
-                       : new ScopeContextEvaluator<TBLLContext>(this, currentScopedServiceProvider);
+                       : new ScopedContextEvaluator<TBLLContext>(this, currentScopedServiceProvider);
         }
 
         public TBLLContextContainer GetBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null)

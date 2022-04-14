@@ -89,9 +89,9 @@ namespace SampleSystem.BLL.Test
         {
             var environment = TestServiceEnvironment.Default;
 
-            var facade = environment.GetController<HRDepartmentController>("Tester01");
+            var facade = environment.ServiceProvider.GetDefaultControllerEvaluator<HRDepartmentController>("Tester01");
 
-            var res1 = facade.GetTestDepartmentsByOperation(SampleSystemHRDepartmentSecurityOperationCode.EmployeeEdit);
+            var res1 = facade.Evaluate(c => c.GetTestDepartmentsByOperation(SampleSystemHRDepartmentSecurityOperationCode.EmployeeEdit));
 
             //var res2 = queryFacade.GetProjectionSimpleBusinessUnitsByODataQueryString("$top=10");
 

@@ -1,4 +1,7 @@
-﻿using Framework.Core.Services;
+﻿using System;
+using System.Threading.Tasks;
+
+using Framework.Core.Services;
 
 namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 {
@@ -14,7 +17,22 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 
         public string CustomUserName { get; set; }
 
+        public async Task<T> ImpersonateAsync<T>(string customUserName, Func<Task<T>> func)
+        {
+            var prev = this.CustomUserName;
+
+            this.CustomUserName = customUserName;
+
+            try
+            {
+                return await func();
+            }
+            finally
+            {
+                this.CustomUserName = prev;
+            }
+        }
+
         public static IntegrationTestsUserAuthenticationService Instance = new IntegrationTestsUserAuthenticationService();
     }
-
 }

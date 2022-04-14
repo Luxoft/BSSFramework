@@ -4,16 +4,15 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Framework.Authorization.ApproveWorkflow;
-using Framework.Authorization.BLL;
 using Framework.Authorization.Generated.DTO;
 using Framework.Core.Services;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Exceptions;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
 using SampleSystem.Domain;
@@ -58,11 +57,13 @@ public class WorkflowController : ApiControllerBase<
     [HttpPost(nameof(StartJob))]
     public Dictionary<Guid, Guid> StartJob()
     {
+        this.EvaluateC(DBSessionMode.Read, ctx => ctx.Authorization.CheckAccess(SampleSystemSecurityOperation.SystemIntegration));
+
         return this.startWorkflowJob.Start();
     }
 
-    [HttpPost(nameof(GetMyApproveOperationWorkflowObjects))]
-    public async Task<List<ApproveOperationWorkflowObject>> GetMyApproveOperationWorkflowObjects(PermissionIdentityDTO permissionIdent)
+    [HttpPost(nameof(GetMyPendingApproveOperationWorkflowObjects))]
+    public async Task<List<ApproveOperationWorkflowObject>> GetMyPendingApproveOperationWorkflowObjects(PermissionIdentityDTO permissionIdent)
     {
         var workflowOperationIdents = this.Evaluate(DBSessionMode.Read, evaluateData =>
         {

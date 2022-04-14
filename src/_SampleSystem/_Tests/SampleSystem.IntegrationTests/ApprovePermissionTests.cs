@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
+using Automation.Utils;
 
 using FluentAssertions;
 
@@ -25,11 +28,15 @@ namespace SampleSystem.IntegrationTests.Workflow
     {
         private OperationSimpleDTO approveOperation;
 
-        private BusinessRoleIdentityDTO roleWithApprove;
-
         private BusinessRoleIdentityDTO approvingRole;
 
-        private const string SuperUserWithApprove = "ApproveWfUser";
+        private BusinessRoleIdentityDTO approveRole;
+
+        private BusinessRoleIdentityDTO grandRole;
+
+        private const string GrandUser = "GrandUser";
+
+        private const string UserWithApprove = "ApproveWfUser";
 
         private const string TestUserForApproving = "ApprovingWfUser";
 
@@ -40,11 +47,20 @@ namespace SampleSystem.IntegrationTests.Workflow
         [TestInitialize]
         public void SetUp()
         {
+            CoreDatabaseUtil.ExecuteSql(@"
+DELETE FROM [wfc].Workflow
+DELETE FROM [wfc].Subscription
+DELETE FROM [wfc].ScheduledCommand
+DELETE FROM [wfc].ExtensionAttribute
+DELETE FROM [wfc].ExecutionPointer
+DELETE FROM [wfc].ExecutionError
+DELETE FROM [wfc].Event", "WorkflowCore");
+
             this.authFacade = this.GetAuthControllerEvaluator();
 
             this.approveOperation = this.authFacade.Evaluate(c => c.GetSimpleOperationByName(nameof(SampleSystemSecurityOperationCode.ApproveWorkflowOperation)));
 
-            var approveRole = this.authFacade.Evaluate(c => c.SaveBusinessRole(new BusinessRoleStrictDTO
+            this.approveRole = this.authFacade.Evaluate(c => c.SaveBusinessRole(new BusinessRoleStrictDTO
                                                                                {
                                                                                        Name = "Approve Role",
                                                                                        BusinessRoleOperationLinks =
@@ -55,12 +71,12 @@ namespace SampleSystem.IntegrationTests.Workflow
 
             var approverPrincipal = this.authFacade.Evaluate(c => c.SavePrincipal(new PrincipalStrictDTO
                                                                  {
-                                                                         Name = SuperUserWithApprove,
+                                                                         Name = UserWithApprove,
                                                                          Permissions =
                                                                          {
                                                                                  new PermissionStrictDTO
                                                                                  {
-                                                                                         Role = approveRole,
+                                                                                         Role = this.approveRole,
                                                                                  }
                                                                          }
                                                                  }));
@@ -76,20 +92,44 @@ namespace SampleSystem.IntegrationTests.Workflow
                                                                       }
                                                               }));
 
-            this.Environment.ServiceProvider.GetRequiredService<WorkflowManager>().Start();
+
+            this.grandRole = this.authFacade.Evaluate(c => c.SaveBusinessRole(new BusinessRoleStrictDTO
+                                                                             {
+                                                                                     Name = "Grand Approve Role",
+                                                                                     SubBusinessRoleLinks =
+                                                                                     {
+                                                                                             new SubBusinessRoleLinkStrictDTO { SubBusinessRole = this.approveRole },
+                                                                                             new SubBusinessRoleLinkStrictDTO { SubBusinessRole = this.approvingRole },
+                                                                                     }
+                                                                             }));
+
+            var grandPrincipal = this.authFacade.Evaluate(c => c.SavePrincipal(new PrincipalStrictDTO
+                                                                 {
+                                                                         Name = GrandUser,
+                                                                         Permissions =
+                                                                         {
+                                                                                 new PermissionStrictDTO
+                                                                                 {
+                                                                                         Role = this.grandRole,
+                                                                                 }
+                                                                         }
+                                                                 }));
+
+            this.workflowManager = this.Environment.ServiceProvider.GetRequiredService<WorkflowManager>();
+            this.workflowManager.Start();
         }
 
         [TestCleanup]
         public void Cleanup()
         {
-            this.Environment.ServiceProvider.GetRequiredService<WorkflowManager>().Stop();
+            this.workflowManager.Stop();
         }
 
         [TestMethod]
         public async Task CreatePermissionWithApprove_PermissionApproved()
         {
             // Arrange
-            var wfController = this.GetControllerEvaluator<WorkflowController>(SuperUserWithApprove);
+            var wfController = this.GetControllerEvaluator<WorkflowController>(UserWithApprove);
 
             // Act
             var approvingPrincipal = this.CreateTestPermission();
@@ -100,7 +140,7 @@ namespace SampleSystem.IntegrationTests.Workflow
             var rootInstanceId = startedWf[permissionIdentity.Id];
 
             var wfObjects = await WaitToCompleteHelper.Retry(
-                () => wfController.EvaluateAsync(c => c.GetMyApproveOperationWorkflowObjects(permissionIdentity)),
+                () => wfController.EvaluateAsync(c => c.GetMyPendingApproveOperationWorkflowObjects(permissionIdentity)),
                 res => !res.Any(),
                 TimeSpan.FromSeconds(10));
 
@@ -124,7 +164,7 @@ namespace SampleSystem.IntegrationTests.Workflow
         public async Task CreatePermissionWithApprove_PermissionRejected()
         {
             // Arrange
-            var wfController = this.GetControllerEvaluator<WorkflowController>(SuperUserWithApprove);
+            var wfController = this.GetControllerEvaluator<WorkflowController>(UserWithApprove);
 
             // Act
             var approvingPrincipal = this.CreateTestPermission();
@@ -135,9 +175,9 @@ namespace SampleSystem.IntegrationTests.Workflow
             var rootInstanceId = startedWf[permissionIdentity.Id];
 
             var wfObjects = await WaitToCompleteHelper.Retry(
-                                                             () => wfController.EvaluateAsync(c => c.GetMyApproveOperationWorkflowObjects(permissionIdentity)),
-                                                             res => !res.Any(),
-                                                             TimeSpan.FromSeconds(10));
+                () => wfController.EvaluateAsync(c => c.GetMyPendingApproveOperationWorkflowObjects(permissionIdentity)),
+                res => !res.Any(),
+                TimeSpan.FromSeconds(10));
 
             foreach (var wfObj in wfObjects)
             {
@@ -155,6 +195,29 @@ namespace SampleSystem.IntegrationTests.Workflow
             postApprovePrincipal.Permissions.Single().Status.Should().Be(PermissionStatus.Rejected);
         }
 
+        [TestMethod]
+        public async Task CreatePermissionWithAutoApprove_PermissionApproved()
+        {
+            // Arrange
+
+
+            // Act
+            var approvingPrincipal = this.DelegateTestPermission();
+
+            var permissionIdentity = approvingPrincipal.Permissions.Single().Identity;
+
+            var startedWf = this.GetControllerEvaluator<WorkflowController>().WithIntegrationImpersonate().Evaluate(c => c.StartJob());
+            var rootInstanceId = startedWf[permissionIdentity.Id];
+
+            var wiStatus = this.Environment.ServiceProvider.GetRequiredService<IPersistenceProvider>().WaitForWorkflowToComplete(rootInstanceId.ToString(), TimeSpan.FromSeconds(20));
+
+            var postApprovePrincipal = this.authFacade.Evaluate(c => c.GetRichPrincipal(approvingPrincipal.Identity));
+
+            // Assert
+            wiStatus.Should().Be(WorkflowStatus.Complete);
+            postApprovePrincipal.Permissions.Single().Status.Should().Be(PermissionStatus.Approved);
+        }
+
         private PrincipalRichDTO CreateTestPermission()
         {
             var approvingPrincipal = this.authFacade.Evaluate(c => c.SavePrincipal(new PrincipalStrictDTO
@@ -165,6 +228,34 @@ namespace SampleSystem.IntegrationTests.Workflow
                             new PermissionStrictDTO
                             {
                                     Role = this.approvingRole,
+                            }
+                    }
+            }));
+
+            return this.authFacade.Evaluate(c => c.GetRichPrincipal(approvingPrincipal));
+        }
+
+        private PrincipalRichDTO DelegateTestPermission()
+        {
+            var approvingPrincipal = this.authFacade.Evaluate(c => c.SavePrincipal(new PrincipalStrictDTO
+                {
+                        Name = TestUserForApproving
+                }));
+
+            var myPrincipal = this.authFacade.WithImpersonate(GrandUser).Evaluate(c => c.GetRichPrincipalByName(GrandUser));
+
+            this.authFacade.WithImpersonate(GrandUser).Evaluate(c => c.ChangeDelegatePermissions(new ChangePermissionDelegatesModelStrictDTO
+            {
+                    DelegateFromPermission = myPrincipal.Permissions.Single().Identity,
+                    Items =
+                    {
+                            new DelegateToItemModelStrictDTO
+                            {
+                                    Principal = approvingPrincipal,
+                                    Permission = new PermissionStrictDTO
+                                                 {
+                                                         Role = this.approvingRole,
+                                                 }
                             }
                     }
             }));

@@ -17,17 +17,17 @@ public class ControllerEvaluator<TController>
 {
     private readonly IServiceProvider serviceProvider;
 
-    private readonly string principalName;
+    private readonly string customPrincipalName;
 
     public ControllerEvaluator([NotNull] IServiceProvider serviceProvider)
             : this(serviceProvider, null)
     {
     }
 
-    private ControllerEvaluator([NotNull] IServiceProvider serviceProvider, string principalName)
+    private ControllerEvaluator([NotNull] IServiceProvider serviceProvider, string customPrincipalName)
     {
         this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
-        this.principalName = principalName;
+        this.customPrincipalName = customPrincipalName;
     }
 
     public T Evaluate<T>(Func<TController, T> func)
@@ -43,13 +43,13 @@ public class ControllerEvaluator<TController>
 
         controller.ServiceProvider = scope.ServiceProvider;
 
-        if (this.principalName == null)
+        if (this.customPrincipalName == null)
         {
             return await func(controller);
         }
         else
         {
-            return await IntegrationTestsUserAuthenticationService.Instance.ImpersonateAsync(this.principalName, async () => await func(controller));
+            return await IntegrationTestsUserAuthenticationService.Instance.ImpersonateAsync(this.customPrincipalName, async () => await func(controller));
         }
     }
 
@@ -71,11 +71,9 @@ public class ControllerEvaluator<TController>
                       });
     }
 
-    public ControllerEvaluator<TController> WithImpersonate([NotNull] string principalName)
+    public ControllerEvaluator<TController> WithImpersonate([CanBeNull] string customPrincipalName)
     {
-        if (principalName == null) throw new ArgumentNullException(nameof(principalName));
-
-        return new ControllerEvaluator<TController>(this.serviceProvider, principalName);
+        return new ControllerEvaluator<TController>(this.serviceProvider, customPrincipalName);
     }
 
     public ControllerEvaluator<TController> WithIntegrationImpersonate()

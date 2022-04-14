@@ -21161,6 +21161,8 @@ export enum SampleEnumForStructDependency {
 }
 
 export enum SampleSystemSecurityOperationCode {
+    ApproveWorkflowOperation = 48,
+    ApprovingWorkflowOperation = 49,
     AuthorizationImpersonate = 44,
     BusinessUnitEdit = 4,
     BusinessUnitHrDepartmentEdit = 11,

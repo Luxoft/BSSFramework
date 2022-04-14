@@ -14,4 +14,16 @@ public class ApproveOperationWorkflowObject
     public string Description { get; set; }
 
     public ApproveOperationWorkflowStatus Status { get; set; }
+
+
+
+    public string ApprovedByUser { get; set; }
+
+    public string ApproveEventId { get; set; }
+
+
+
+    public string RejectedByUser { get; set; }
+
+    public string RejectEventId { get; set; }
 }

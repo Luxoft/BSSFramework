@@ -86,6 +86,8 @@ namespace SampleSystem.WebApiCore
                 .AddSingleton<IServiceEnvironment<IAuthorizationBLLContext>>(x => x.GetRequiredService<SampleSystemServiceEnvironment>())
                 .AddSingleton<IServiceEnvironment<IConfigurationBLLContext>>(x => x.GetRequiredService<SampleSystemServiceEnvironment>());
 
+            services.AddScoped<IScopedContextEvaluator<IAuthorizationBLLContext>, ScopeContextEvaluator<IAuthorizationBLLContext>>();
+
             return services;
         }
 
@@ -94,29 +96,6 @@ namespace SampleSystem.WebApiCore
             return services
                    .AddWorkflow(x => x.UseSqlServer(configuration["WorkflowCoreConnectionString"], true, true))
                    .AddLogging();
-        }
-
-        public static IServiceCollection AddAuthWorkflow(this IServiceCollection services)
-        {
-            return services
-                   .AddScoped<IScopedContextEvaluator<IAuthorizationBLLContext>, ScopeContextEvaluator<IAuthorizationBLLContext>>()
-                   .AddScoped<IWorkflowApproveProcessor, WorkflowApproveProcessor>()
-                   //.AddScoped<IDALListener, PermissionWorkflowDALListener>()
-
-                   .AddTransient<StartWorkflow>()
-                   .AddTransient<PublishEvent>()
-                   .AddTransient<SendFinalEvent>()
-
-                   .AddTransient<CanAutoApproveStep>()
-                   .AddTransient<SetPermissionStep>();
-        }
-
-        public static void RegisterAuthWorkflow(this IServiceProvider serviceProvider)
-        {
-            var host = serviceProvider.GetRequiredService<IWorkflowHost>();
-
-            host.RegisterWorkflow<__ApproveOperation_Workflow, ApproveOperationWorkflowObject>();
-            host.RegisterWorkflow<__ApprovePermission_Workflow, ApprovePermissionWorkflowObject>();
         }
     }
 }

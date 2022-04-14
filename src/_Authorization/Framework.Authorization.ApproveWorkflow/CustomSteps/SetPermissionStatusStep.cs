@@ -11,12 +11,12 @@ using WorkflowCore.Models;
 
 namespace Framework.Authorization.ApproveWorkflow;
 
-public class SetPermissionStep : IStepBody
+public class SetPermissionStatusStep : IStepBody
 {
     [NotNull]
     private readonly IContextEvaluator<IAuthorizationBLLContext> contextEvaluator;
 
-    public SetPermissionStep([NotNull] IScopedContextEvaluator<IAuthorizationBLLContext> contextEvaluator)
+    public SetPermissionStatusStep([NotNull] IScopedContextEvaluator<IAuthorizationBLLContext> contextEvaluator)
     {
         this.contextEvaluator = contextEvaluator;
     }

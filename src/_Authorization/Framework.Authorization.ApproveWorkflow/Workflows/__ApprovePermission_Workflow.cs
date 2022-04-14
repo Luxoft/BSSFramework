@@ -17,7 +17,7 @@ public class __ApprovePermission_Workflow : IWorkflow<ApprovePermissionWorkflowO
     {
         builder
             .StartWith(_ => { })
-            .Then<SetPermissionStep>()
+            .Then<SetPermissionStatusStep>()
                 .Input(step => step.Status, _ => PermissionStatus.Approving)
 
             .Parallel()
@@ -27,7 +27,7 @@ public class __ApprovePermission_Workflow : IWorkflow<ApprovePermissionWorkflowO
                         .CancelCondition(permission => permission.SomeOneOperationRejected))
             .Join()
 
-            .Then<SetPermissionStep>()
+            .Then<SetPermissionStatusStep>()
                 .Input(step => step.Status, permission => permission.Operations.All(operation => operation.Status == ApproveOperationWorkflowStatus.Approved)
                                                                   ? PermissionStatus.Approved
                                                                   : PermissionStatus.Rejected)

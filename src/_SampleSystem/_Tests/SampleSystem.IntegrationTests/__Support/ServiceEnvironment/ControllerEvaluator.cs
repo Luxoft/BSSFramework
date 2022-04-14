@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 using Framework.DomainDriven.WebApiNetCore;
 
@@ -39,6 +40,30 @@ public class ControllerEvaluator<TController>
         controller.PrincipalName = this.principalName;
 
         return func(controller);
+    }
+
+    public async Task<T> EvaluateAsync<T>(Func<TController, Task<T>> func)
+    {
+        using var scope = this.serviceProvider.CreateScope();
+
+        var controller = scope.ServiceProvider.GetRequiredService<TController>();
+
+        controller.ServiceProvider = scope.ServiceProvider;
+        controller.PrincipalName = this.principalName;
+
+        return await func(controller);
+    }
+
+    public async Task EvaluateAsync(Func<TController, Task> action)
+    {
+        using var scope = this.serviceProvider.CreateScope();
+
+        var controller = scope.ServiceProvider.GetRequiredService<TController>();
+
+        controller.ServiceProvider = scope.ServiceProvider;
+        controller.PrincipalName = this.principalName;
+
+        await action(controller);
     }
 
     public void Evaluate(Action<TController> action)

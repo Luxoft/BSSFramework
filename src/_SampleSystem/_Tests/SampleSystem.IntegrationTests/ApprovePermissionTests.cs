@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 using FluentAssertions;
@@ -75,7 +74,7 @@ namespace SampleSystem.IntegrationTests.Workflow
             this.Environment.ServiceProvider.GetRequiredService<WorkflowManager>().Start();
 
             var authFacade = this.GetControllerEvaluator<AuthSLJsonController>();
-            var wfController = this.GetControllerEvaluator<WorkflowController>();
+            var wfController = this.GetControllerEvaluator<WorkflowController>(SuperUserWithApprove);
 
             //var workflowHost = this.GetWorkflowControllerEvaluator();
 
@@ -104,72 +103,30 @@ namespace SampleSystem.IntegrationTests.Workflow
                                                                               }));
 
             var preApprovePrincipal = authFacade.Evaluate(c => c.GetRichPrincipal(approvingPrincipal));
-            var permissionId = preApprovePrincipal.Permissions.Single().Id;
-            var permissionIdStr = permissionId.ToString();
+            var permissionIdentity = preApprovePrincipal.Permissions.Single().Identity;
 
+            var startedWf = wfController.WithIntegrationImpersonate().Evaluate(c => c.StartJob());
+            var rootInstanceId = startedWf[permissionIdentity.Id];
 
-            var startedWf = wfController.Evaluate(c => c.StartJob());
-            var rootInstanceId = startedWf[permissionId];
+            var wfObjects = await WaitToCompleteHelper.Retry(
+                () => wfController.EvaluateAsync(c => c.GetMyApproveOperationWorkflowObjects(permissionIdentity)),
+                res => !res.Any(),
+                TimeSpan.FromSeconds(20));
 
-            var operationWfInstances = WaitToCompleteHelper.Retry(() => this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, ctx =>
+            foreach (var wfObj in wfObjects)
             {
-                var bll = ctx.Logics.Default.Create<WorkflowCoreInstance>();
-
-                var instances = bll.GetUnsecureQueryable().Where(wi =>
-                    wi.Data.Contains(permissionIdStr)
-                 && wi.WorkflowDefinitionId == nameof(__ApproveOperation_Workflow)
-                 && wi.Status == WorkflowStatus.Runnable);
-
-                return instances.ToList(wi => new { wi.Id, wi.WorkflowDefinitionId, wi.Status } );
-            }), res => !res.Any(), TimeSpan.FromSeconds(100));
-
-            var host = this.Environment.ServiceProvider.GetRequiredService<IWorkflowHost>();
-
-            foreach (var wi in operationWfInstances)
-            {
-                await host.PublishEvent("Approve_Event", wi.Id.ToString(), new object());
+                await wfController.EvaluateAsync(c => c.Approve(wfObj));
             }
 
-            var wiStatus = host.PersistenceStore.WaitForWorkflowToComplete(rootInstanceId.ToString(), TimeSpan.FromSeconds(200));
+            var wiStatus = this.Environment.ServiceProvider.GetRequiredService<IPersistenceProvider>().WaitForWorkflowToComplete(rootInstanceId.ToString(), TimeSpan.FromSeconds(40));
 
             var postApprovePrincipal = authFacade.Evaluate(c => c.GetRichPrincipal(approvingPrincipal));
 
             // Assert
 
             preApprovePrincipal.Permissions.Single().Status.Should().Be(PermissionStatus.Approving);
-
             wiStatus.Should().Be(WorkflowStatus.Complete);
-
             postApprovePrincipal.Permissions.Single().Status.Should().Be(PermissionStatus.Approved);
-
-            return;
         }
-    }
-}
-public static class WaitToCompleteHelper
-{
-    public static T Retry<T>(Func<T> func, Func<T, bool> continueCondition, TimeSpan timeOut)
-    {
-        var res = func();
-        var counter = 0;
-        while (continueCondition(res) && counter < (timeOut.TotalMilliseconds / 100))
-        {
-            Thread.Sleep(100);
-            counter++;
-            res = func(); ;
-        }
-
-        return res;
-    }
-
-    public static WorkflowStatus WaitForWorkflowToComplete(this IPersistenceProvider persistenceProvider, string workflowId, TimeSpan timeOut)
-    {
-        return Retry (() => persistenceProvider.GetStatus(workflowId), status => status == WorkflowStatus.Runnable, timeOut);
-    }
-
-    public static WorkflowStatus GetStatus(this IPersistenceProvider persistenceProvider, string workflowId)
-    {
-        var instance = persistenceProvider.GetWorkflowInstance(workflowId).Result;
-        return instance.Status;
     }
 }

@@ -5,6 +5,7 @@ using System.Reflection;
 
 using DotNetCore.CAP;
 
+using Framework.Authorization.ApproveWorkflow;
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.WebApi.Utils;
@@ -24,8 +25,6 @@ using Newtonsoft.Json;
 using SampleSystem.BLL;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.NewtonsoftJson;
-
-using WorkflowCore.Interface;
 
 namespace SampleSystem.WebApiCore
 {

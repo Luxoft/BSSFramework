@@ -42,7 +42,6 @@ public class ControllerEvaluator<TController>
         var controller = scope.ServiceProvider.GetRequiredService<TController>();
 
         controller.ServiceProvider = scope.ServiceProvider;
-        //controller.PrincipalName = this.principalName;
 
         if (this.principalName == null)
         {

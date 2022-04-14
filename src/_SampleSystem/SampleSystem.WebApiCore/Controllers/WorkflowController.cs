@@ -107,8 +107,15 @@ public class WorkflowController : ApiControllerBase<
         return result;
     }
 
-    public async Task ApproveOperation(ApproveOperationWorkflowObject wfObj)
+    [HttpPost(nameof(ApproveOperation))]
+    public async Task ApproveOperation(string approveEventId)
     {
-        await this.workflowHost.PublishEvent("Approve_Event", wfObj.ApproveEventId, this.userAuthenticationService.GetUserName());
+        await this.workflowHost.PublishEvent(__ApproveOperation_Workflow.GetEventName(true), approveEventId, this.userAuthenticationService.GetUserName());
+    }
+
+    [HttpPost(nameof(RejectOperation))]
+    public async Task RejectOperation(string rejectEventId)
+    {
+        await this.workflowHost.PublishEvent(__ApproveOperation_Workflow.GetEventName(false), rejectEventId, this.userAuthenticationService.GetUserName());
     }
 }

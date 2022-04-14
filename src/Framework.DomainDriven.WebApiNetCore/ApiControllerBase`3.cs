@@ -86,7 +86,6 @@ namespace Framework.DomainDriven.WebApiNetCore
                 return this.ServiceEnvironment.GetContextEvaluator(this.ServiceProvider)
                            .Evaluate(
                                sessionMode,
-                               this.PrincipalName,
                                (context, session) =>
                                {
                                    try

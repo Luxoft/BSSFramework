@@ -34,7 +34,7 @@ public class __ApproveOperation_Workflow : IWorkflow<ApproveOperationWorkflowObj
         loopBranch
            .Then(isApprove ? (_, wfObj) => wfObj.ApproveEventId = Guid.NewGuid().ToString()
                             : (_, wfObj) => wfObj.RejectEventId = Guid.NewGuid().ToString())
-            .WaitFor($"{actionStr}_Event", isApprove ? wfObj => wfObj.ApproveEventId : wfObj => wfObj.RejectEventId, cancelCondition: operation => operation.Status != ApproveOperationWorkflowStatus.Approving)
+            .WaitFor(GetEventName(isApprove), isApprove ? wfObj => wfObj.ApproveEventId : wfObj => wfObj.RejectEventId, cancelCondition: operation => operation.Status != ApproveOperationWorkflowStatus.Approving)
            .Output(isApprove ? (step, operation) => operation.ApprovedByUser = (string)step.EventData
                              : (step, operation) => operation.RejectedByUser = (string)step.EventData)
             .Then<CalcHasAccessStep>(hasAccessOutput =>
@@ -65,4 +65,11 @@ public class __ApproveOperation_Workflow : IWorkflow<ApproveOperationWorkflowObj
     public string Id { get; } = nameof(__ApproveOperation_Workflow);
 
     public int Version { get; } = 2;
+
+    public static string GetEventName(bool isApprove)
+    {
+        var actionStr = isApprove ? "Approve" : "Reject";
+
+        return $"{actionStr}_Event";
+    }
 }

@@ -107,6 +107,7 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.TestUnpersistentObject>(this.GetTestUnpersistentObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.UniqueByMaster.ParentEntity>(this.GetParentEntityValidationResult);
             base.RegisterHandler<SampleSystem.Domain.UniqueByParent.ChildEntity>(this.GetChildEntityValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.WorkflowCoreExecutionError>(this.GetWorkflowCoreExecutionErrorValidationResult);
             base.RegisterHandler<SampleSystem.Domain.WorkflowCoreInstance>(this.GetWorkflowCoreInstanceValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Inline.Fio>(this.GetFioValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Inline.FioShort>(this.GetFioShortValidationResult);
@@ -563,6 +564,11 @@ namespace SampleSystem.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetTestUnpersistentObjectValidationResult(SampleSystem.Domain.TestUnpersistentObject source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetWorkflowCoreExecutionErrorValidationResult(SampleSystem.Domain.WorkflowCoreExecutionError source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using WorkflowCore.Interface;
 using WorkflowCore.Models;
 
+namespace Framework.Authorization.ApproveWorkflow;
+
 public static class WaitToCompleteHelper
 {
     public static T Retry<T>(Func<T> func, Func<T, bool> continueCondition, TimeSpan timeOut)

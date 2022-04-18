@@ -29,8 +29,8 @@ public class LogAccessErrorStep : IStepBody
                 ErrorTime = DateTime.Now,
                 ExecutionPointerId = context.ExecutionPointer.Id,
                 Message = this.IsApprove
-                    ? $"Access denied with eventId {wfObj.ApproveEventId}"
-                    : $"Access denied with eventId {wfObj.RejectEventId}"
+                    ? $"Permission:{wfObj.PermissionId} | Access denied with eventId {wfObj.ApproveEventId}"
+                    : $"Permission:{wfObj.PermissionId} | Access denied with eventId {wfObj.RejectEventId}"
             }
         });
 

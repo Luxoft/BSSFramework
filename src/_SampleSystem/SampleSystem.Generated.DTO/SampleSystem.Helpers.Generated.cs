@@ -856,6 +856,11 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.ChildEntityIdentityDTO(domainObject);
         }
         
+        public static SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorIdentityDTO ToIdentityDTO(this SampleSystem.Domain.WorkflowCoreExecutionError domainObject)
+        {
+            return new SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorIdentityDTO(domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.WorkflowCoreInstanceIdentityDTO ToIdentityDTO(this SampleSystem.Domain.WorkflowCoreInstance domainObject)
         {
             return new SampleSystem.Generated.DTO.WorkflowCoreInstanceIdentityDTO(domainObject);
@@ -1207,6 +1212,11 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.ChildEntityIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.UniqueByParent.ChildEntity> domainObjects)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.WorkflowCoreExecutionError> domainObjects)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
@@ -2346,6 +2356,11 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.ChildEntityEventRichDTO(mappingService, domainObject);
         }
         
+        public static SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorEventRichDTO ToRichEventDTO(this SampleSystem.Domain.WorkflowCoreExecutionError domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorEventRichDTO(mappingService, domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.WorkflowCoreInstanceEventRichDTO ToRichEventDTO(this SampleSystem.Domain.WorkflowCoreInstance domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.WorkflowCoreInstanceEventRichDTO(mappingService, domainObject);
@@ -2797,6 +2812,11 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.ChildEntityEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.UniqueByParent.ChildEntity> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.WorkflowCoreExecutionError> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
         }
@@ -3556,6 +3576,11 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.ParentEntityEventSimpleDTO(mappingService, domainObject);
         }
         
+        public static SampleSystem.Generated.DTO.WorkflowCoreInstanceEventSimpleDTO ToSimpleEventDTO(this SampleSystem.Domain.WorkflowCoreInstance domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.WorkflowCoreInstanceEventSimpleDTO(mappingService, domainObject);
+        }
+        
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.BusinessUnit> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject, mappingService));
@@ -3682,6 +3707,11 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.ParentEntityEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.UniqueByMaster.ParentEntity> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.WorkflowCoreInstanceEventSimpleDTO> ToSimpleEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.WorkflowCoreInstance> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject, mappingService));
         }

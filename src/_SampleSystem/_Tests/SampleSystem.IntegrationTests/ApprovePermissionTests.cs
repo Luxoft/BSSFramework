@@ -7,8 +7,10 @@ using Automation.Utils;
 
 using FluentAssertions;
 
+using Framework.Authorization.ApproveWorkflow;
 using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
+using Framework.SecuritySystem.Exceptions;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -146,7 +148,7 @@ DELETE FROM [wfc].Event", "WorkflowCore");
 
             foreach (var wfObj in wfObjects)
             {
-                await wfController.EvaluateAsync(c => c.ApproveOperation(wfObj.ApproveEventId));
+                await wfController.EvaluateAsync(c => c.ApproveOperation(permissionIdentity, wfObj.ApproveEventId));
             }
 
             var wiStatus = this.Environment.ServiceProvider.GetRequiredService<IPersistenceProvider>().WaitForWorkflowToComplete(rootInstanceId.ToString(), TimeSpan.FromSeconds(10));
@@ -181,7 +183,7 @@ DELETE FROM [wfc].Event", "WorkflowCore");
 
             foreach (var wfObj in wfObjects)
             {
-                await wfController.EvaluateAsync(c => c.RejectOperation(wfObj.RejectEventId));
+                await wfController.EvaluateAsync(c => c.RejectOperation(permissionIdentity, wfObj.RejectEventId));
             }
 
             var wiStatus = this.Environment.ServiceProvider.GetRequiredService<IPersistenceProvider>().WaitForWorkflowToComplete(rootInstanceId.ToString(), TimeSpan.FromSeconds(10));
@@ -196,7 +198,7 @@ DELETE FROM [wfc].Event", "WorkflowCore");
         }
 
         [TestMethod]
-        public async Task CreatePermissionWithAutoApprove_PermissionApproved()
+        public void CreatePermissionWithAutoApprove_PermissionApproved()
         {
             // Arrange
 
@@ -216,6 +218,38 @@ DELETE FROM [wfc].Event", "WorkflowCore");
             // Assert
             wiStatus.Should().Be(WorkflowStatus.Complete);
             postApprovePrincipal.Permissions.Single().Status.Should().Be(PermissionStatus.Approved);
+        }
+
+        [TestMethod]
+        public async Task CreatePermission_TryApproveWithoutAccess_AccessDeniedExceptionReaised()
+        {
+            // Arrange
+            var wfController = this.GetControllerEvaluator<WorkflowController>(UserWithApprove);
+
+            // Act
+            var approvingPrincipal = this.CreateTestPermission();
+
+            var permissionIdentity = approvingPrincipal.Permissions.Single().Identity;
+
+            var startedWf = wfController.WithIntegrationImpersonate().Evaluate(c => c.StartJob());
+            var rootInstanceId = startedWf[permissionIdentity.Id];
+
+            var wfObjects = await WaitToCompleteHelper.Retry(
+                                                             () => wfController.EvaluateAsync(c => c.GetMyPendingApproveOperationWorkflowObjects(permissionIdentity)),
+                                                             res => !res.Any(),
+                                                             TimeSpan.FromSeconds(10));
+
+            var tryApprove = async () =>
+            {
+                foreach (var wfObj in wfObjects)
+                {
+                    await wfController.WithImpersonate("NoName").EvaluateAsync(c => c.ApproveOperation(permissionIdentity, wfObj.ApproveEventId));
+                }
+            };
+
+            // Assert
+
+            await tryApprove.Should().ThrowAsync<Exception>($"Permission:{permissionIdentity.Id:D} | Access denied with eventId {wfObjects.Single().ApproveEventId}");
         }
 
         private PrincipalRichDTO CreateTestPermission()

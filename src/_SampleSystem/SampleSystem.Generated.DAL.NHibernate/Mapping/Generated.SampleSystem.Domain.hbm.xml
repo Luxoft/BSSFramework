@@ -1204,6 +1204,14 @@
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
     <many-to-one name="Parent" column="parentId" class="SampleSystem.Domain.UniqueByMaster.ParentEntity" unique-key="parent_ChildEntity" access="field.camelcase" />
   </class>
+  <class name="SampleSystem.Domain.WorkflowCoreExecutionError" table="WorkflowCoreExecutionError" mutable="false" schema-action="none">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <property name="ErrorTime" column="errorTime" type="timestamp" access="field.camelcase" />
+    <property name="Message" column="message" access="field.camelcase" />
+    <many-to-one name="WorkflowInstance" column="workflowInstanceId" class="SampleSystem.Domain.WorkflowCoreInstance" access="field.camelcase" />
+  </class>
   <class name="SampleSystem.Domain.WorkflowCoreInstance" table="WorkflowCoreInstance" mutable="false" schema-action="none">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />

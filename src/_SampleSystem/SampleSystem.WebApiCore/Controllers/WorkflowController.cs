@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Framework.Authorization.ApproveWorkflow;
+using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
 using Framework.Core.Services;
 using Framework.DomainDriven.BLL;
@@ -11,6 +12,7 @@ using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Exceptions;
+using Framework.SecuritySystem.Exceptions;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -109,14 +111,39 @@ public class WorkflowController : ApiControllerBase<
     }
 
     [HttpPost(nameof(ApproveOperation))]
-    public async Task ApproveOperation(string approveEventId)
+    public Task ApproveOperation(PermissionIdentityDTO permissionIdentity, string approveEventId)
     {
-        await this.workflowHost.PublishEvent(__ApproveOperation_Workflow.GetEventName(true), approveEventId, this.userAuthenticationService.GetUserName());
+        return this.ApproveRejectOperation(permissionIdentity, approveEventId, true);
     }
 
     [HttpPost(nameof(RejectOperation))]
-    public async Task RejectOperation(string rejectEventId)
+    public Task RejectOperation(PermissionIdentityDTO permissionIdentity, string rejectEventId)
     {
-        await this.workflowHost.PublishEvent(__ApproveOperation_Workflow.GetEventName(false), rejectEventId, this.userAuthenticationService.GetUserName());
+        return this.ApproveRejectOperation(permissionIdentity, rejectEventId, false);
+    }
+
+    public async Task ApproveRejectOperation(PermissionIdentityDTO permissionIdentity, string eventId, bool isApprove)
+    {
+        var permissionIdStr = permissionIdentity.Id.ToString();
+
+        var wiId = this.EvaluateC(
+            DBSessionMode.Read,
+            ctx => ctx.Logics.WorkflowCoreInstance.GetObjectBy(ee => ee.Data.Contains(permissionIdStr) && ee.Data.Contains(eventId), true).Id);
+
+        await this.workflowHost.PublishEvent(__ApproveOperation_Workflow.GetEventName(isApprove), eventId, this.userAuthenticationService.GetUserName());
+
+        await Task.Delay(3000); // need refact
+
+        this.EvaluateC(
+            DBSessionMode.Read,
+            ctx =>
+            {
+                var error = ctx.Logics.WorkflowCoreExecutionError.GetObjectBy(ee => ee.Message.Contains(permissionIdStr) && ee.Message.Contains(eventId) && ee.WorkflowInstance.Id == wiId);
+
+                if (error != null)
+                {
+                    throw new AccessDeniedException<Guid>(nameof(Permission), permissionIdentity.Id, error.Message);
+                }
+            });
     }
 }

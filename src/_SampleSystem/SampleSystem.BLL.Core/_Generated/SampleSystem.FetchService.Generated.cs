@@ -952,6 +952,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetChildEntityContainer(rule)));
             }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreExecutionError)))
+            {
+                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetWorkflowCoreExecutionErrorContainer(rule)));
+            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreInstance)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetWorkflowCoreInstanceContainer(rule)));
@@ -2847,6 +2851,30 @@ namespace SampleSystem.BLL
             else if ((rule == Framework.Transfering.ViewDTOType.ProjectionDTO))
             {
                 return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.Projections.VisualProject>.Empty;
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException("rule");
+            }
+        }
+        
+        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.WorkflowCoreExecutionError> GetWorkflowCoreExecutionErrorContainer(Framework.Transfering.ViewDTOType rule)
+        {
+            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.WorkflowCoreExecutionError>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.WorkflowCoreExecutionError>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
+            {
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.WorkflowCoreExecutionError>(fetchRootRule => fetchRootRule.SelectNested(workflowCoreExecutionError => workflowCoreExecutionError.WorkflowInstance));
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
+            {
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.WorkflowCoreExecutionError>(fetchRootRule => fetchRootRule.SelectNested(workflowCoreExecutionError => workflowCoreExecutionError.WorkflowInstance));
             }
             else
             {

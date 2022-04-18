@@ -808,7 +808,11 @@ namespace SampleSystem.Generated.DTO
         
         void MapVisualProject(SampleSystem.Domain.Projections.VisualProject domainObject, SampleSystem.Generated.DTO.VisualProjectProjectionDTO mappingObject);
         
+        void MapWorkflowCoreExecutionError(SampleSystem.Domain.WorkflowCoreExecutionError domainObject, SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorEventRichDTO mappingObject);
+        
         void MapWorkflowCoreInstance(SampleSystem.Domain.WorkflowCoreInstance domainObject, SampleSystem.Generated.DTO.WorkflowCoreInstanceEventRichDTO mappingObject);
+        
+        void MapWorkflowCoreInstance(SampleSystem.Domain.WorkflowCoreInstance domainObject, SampleSystem.Generated.DTO.WorkflowCoreInstanceEventSimpleDTO mappingObject);
         
         void MapWorkingCalendar1676(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676 domainObject, SampleSystem.Generated.DTO.WorkingCalendar1676VisualDTO mappingObject);
         
@@ -1197,6 +1201,8 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.TestSecuritySubObjItem2 ToTestSecuritySubObjItem2(SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO testSecuritySubObjItem2IdentityDTO);
         
         SampleSystem.Domain.TestSecuritySubObjItem3 ToTestSecuritySubObjItem3(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3IdentityDTO);
+        
+        SampleSystem.Domain.WorkflowCoreExecutionError ToWorkflowCoreExecutionError(SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorIdentityDTO workflowCoreExecutionErrorIdentityDTO);
         
         SampleSystem.Domain.WorkflowCoreInstance ToWorkflowCoreInstance(SampleSystem.Generated.DTO.WorkflowCoreInstanceIdentityDTO workflowCoreInstanceIdentityDTO);
         
@@ -7176,7 +7182,30 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Code = domainObject.Code;
         }
         
+        public virtual void MapWorkflowCoreExecutionError(SampleSystem.Domain.WorkflowCoreExecutionError domainObject, SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorEventRichDTO mappingObject)
+        {
+            mappingObject.ErrorTime = domainObject.ErrorTime;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.Message = domainObject.Message;
+            if (!object.ReferenceEquals(domainObject.WorkflowInstance, null))
+            {
+                mappingObject.WorkflowInstance = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.WorkflowInstance, this);
+            }
+            else
+            {
+                mappingObject.WorkflowInstance = null;
+            }
+        }
+        
         public virtual void MapWorkflowCoreInstance(SampleSystem.Domain.WorkflowCoreInstance domainObject, SampleSystem.Generated.DTO.WorkflowCoreInstanceEventRichDTO mappingObject)
+        {
+            mappingObject.Data = domainObject.Data;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.Status = domainObject.Status;
+            mappingObject.WorkflowDefinitionId = domainObject.WorkflowDefinitionId;
+        }
+        
+        public virtual void MapWorkflowCoreInstance(SampleSystem.Domain.WorkflowCoreInstance domainObject, SampleSystem.Generated.DTO.WorkflowCoreInstanceEventSimpleDTO mappingObject)
         {
             mappingObject.Data = domainObject.Data;
             mappingObject.Id = domainObject.Id;
@@ -8404,6 +8433,11 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.TestSecuritySubObjItem3 ToTestSecuritySubObjItem3(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3IdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.TestSecuritySubObjItem3>(testSecuritySubObjItem3IdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.WorkflowCoreExecutionError ToWorkflowCoreExecutionError(SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorIdentityDTO workflowCoreExecutionErrorIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.WorkflowCoreExecutionError>(workflowCoreExecutionErrorIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.WorkflowCoreInstance ToWorkflowCoreInstance(SampleSystem.Generated.DTO.WorkflowCoreInstanceIdentityDTO workflowCoreInstanceIdentityDTO)

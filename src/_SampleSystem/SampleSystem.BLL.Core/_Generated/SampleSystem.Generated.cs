@@ -2207,6 +2207,16 @@ namespace SampleSystem.BLL
             get;
         }
         
+        SampleSystem.BLL.IWorkflowCoreExecutionErrorBLL WorkflowCoreExecutionError
+        {
+            get;
+        }
+        
+        SampleSystem.BLL.IWorkflowCoreExecutionErrorBLLFactory WorkflowCoreExecutionErrorFactory
+        {
+            get;
+        }
+        
         SampleSystem.BLL.IWorkflowCoreInstanceBLL WorkflowCoreInstance
         {
             get;
@@ -2671,6 +2681,14 @@ namespace SampleSystem.BLL
     }
     
     public partial interface ITestSecuritySubObjItem3BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem3>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, Framework.SecuritySystem.BLLSecurityMode>
+    {
+    }
+    
+    public partial interface IWorkflowCoreExecutionErrorBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.WorkflowCoreExecutionError, System.Guid>
+    {
+    }
+    
+    public partial interface IWorkflowCoreExecutionErrorBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IWorkflowCoreExecutionErrorBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.WorkflowCoreExecutionError>>
     {
     }
     

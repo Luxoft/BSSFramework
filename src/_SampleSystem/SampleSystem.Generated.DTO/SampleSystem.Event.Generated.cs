@@ -192,6 +192,8 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ParentEntityRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ChildEntitySaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ChildEntityRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.WorkflowCoreInstanceSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.WorkflowCoreInstanceRemoveEventDTO))]
     public abstract partial class EventDTOBase
@@ -8586,6 +8588,69 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.WorkflowCoreExecutionError), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class WorkflowCoreExecutionErrorSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorEventRichDTO WorkflowCoreExecutionError;
+        
+        public WorkflowCoreExecutionErrorSaveEventDTO()
+        {
+        }
+        
+        public WorkflowCoreExecutionErrorSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.WorkflowCoreExecutionError domainObject)
+        {
+            this.WorkflowCoreExecutionError = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.WorkflowCoreExecutionError), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class WorkflowCoreExecutionErrorRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorEventRichDTO WorkflowCoreExecutionError;
+        
+        public WorkflowCoreExecutionErrorRemoveEventDTO()
+        {
+        }
+        
+        public WorkflowCoreExecutionErrorRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.WorkflowCoreExecutionError domainObject)
+        {
+            this.WorkflowCoreExecutionError = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.WorkflowCoreExecutionError), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class WorkflowCoreExecutionErrorEventRichDTO
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime ErrorTime;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.WorkflowCoreInstanceEventSimpleDTO WorkflowInstance;
+        
+        public WorkflowCoreExecutionErrorEventRichDTO()
+        {
+        }
+        
+        public WorkflowCoreExecutionErrorEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.WorkflowCoreExecutionError domainObject)
+        {
+            mappingService.MapWorkflowCoreExecutionError(domainObject, this);
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.WorkflowCoreInstance), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class WorkflowCoreInstanceSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
@@ -8644,6 +8709,33 @@ namespace SampleSystem.Generated.DTO
         }
         
         public WorkflowCoreInstanceEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.WorkflowCoreInstance domainObject)
+        {
+            mappingService.MapWorkflowCoreInstance(domainObject, this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.WorkflowCoreInstance), "SimpleEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class WorkflowCoreInstanceEventSimpleDTO
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Data;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WorkflowCore.Models.WorkflowStatus Status;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string WorkflowDefinitionId;
+        
+        public WorkflowCoreInstanceEventSimpleDTO()
+        {
+        }
+        
+        public WorkflowCoreInstanceEventSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.WorkflowCoreInstance domainObject)
         {
             mappingService.MapWorkflowCoreInstance(domainObject, this);
         }

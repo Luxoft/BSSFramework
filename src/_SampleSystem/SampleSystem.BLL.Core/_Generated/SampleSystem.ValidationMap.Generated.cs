@@ -2842,6 +2842,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetChildEntityValidationMap()));
             }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.WorkflowCoreExecutionError)))
+            {
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetWorkflowCoreExecutionErrorValidationMap()));
+            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.WorkflowCoreInstance)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetWorkflowCoreInstanceValidationMap()));
@@ -4017,6 +4021,27 @@ namespace SampleSystem.BLL
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestUnpersistentObject> GetTestUnpersistentObjectValidationMap()
         {
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.TestUnpersistentObject>(this.GetTestUnpersistentObjectProperties);
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.WorkflowCoreExecutionError, System.DateTime>> GetWorkflowCoreExecutionError_ErrorTimeValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.Create<SampleSystem.Domain.WorkflowCoreExecutionError>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.WorkflowCoreExecutionError, string>> GetWorkflowCoreExecutionError_MessageValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.WorkflowCoreExecutionError>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.WorkflowCoreExecutionError>> GetWorkflowCoreExecutionErrorProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.WorkflowCoreExecutionError> currentClass)
+        {
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.WorkflowCoreExecutionError, System.DateTime>(source => source.ErrorTime, currentClass, this.GetWorkflowCoreExecutionError_ErrorTimeValidators(), this.GetClassMap<System.DateTime>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.WorkflowCoreExecutionError, string>(source => source.Message, currentClass, this.GetWorkflowCoreExecutionError_MessageValidators(), this.GetClassMap<string>(true));
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.WorkflowCoreExecutionError> GetWorkflowCoreExecutionErrorValidationMap()
+        {
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.WorkflowCoreExecutionError>(this.GetWorkflowCoreExecutionErrorProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.WorkflowCoreInstance, string>> GetWorkflowCoreInstance_DataValidators()

@@ -1097,6 +1097,27 @@ namespace SampleSystem.BLL
         }
     }
     
+    public partial class WorkflowCoreExecutionErrorBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.WorkflowCoreExecutionError, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IWorkflowCoreExecutionErrorBLL
+    {
+        
+		partial void Initialize();
+        
+        public WorkflowCoreExecutionErrorBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.WorkflowCoreExecutionError> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
+                base(context, securityProvider, specificationEvaluator)
+        {
+            this.Initialize();
+        }
+    }
+    
+    public partial class WorkflowCoreExecutionErrorBLLFactory : Framework.DomainDriven.BLL.Security.BLLFactoryBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.IWorkflowCoreExecutionErrorBLL, SampleSystem.BLL.WorkflowCoreExecutionErrorBLL, SampleSystem.Domain.WorkflowCoreExecutionError>, SampleSystem.BLL.IWorkflowCoreExecutionErrorBLLFactory
+    {
+        
+        public WorkflowCoreExecutionErrorBLLFactory(SampleSystem.BLL.ISampleSystemBLLContext context) : 
+                base(context)
+        {
+        }
+    }
+    
     public partial class WorkflowCoreInstanceBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.WorkflowCoreInstance, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.IWorkflowCoreInstanceBLL
     {
         
@@ -1226,6 +1247,8 @@ namespace SampleSystem.BLL
         private SampleSystem.BLL.ITestSecuritySubObjItem3BLL testSecuritySubObjItem3BLL;
         
         private SampleSystem.BLL.ITestSecuritySubObjItemBLL testSecuritySubObjItemBLL;
+        
+        private SampleSystem.BLL.IWorkflowCoreExecutionErrorBLL workflowCoreExecutionErrorBLL;
         
         private SampleSystem.BLL.IWorkflowCoreInstanceBLL workflowCoreInstanceBLL;
         
@@ -2280,6 +2303,26 @@ namespace SampleSystem.BLL
             }
         }
         
+        public SampleSystem.BLL.IWorkflowCoreExecutionErrorBLL WorkflowCoreExecutionError
+        {
+            get
+            {
+                if (object.ReferenceEquals(this.workflowCoreExecutionErrorBLL, null))
+                {
+                    this.workflowCoreExecutionErrorBLL = this.WorkflowCoreExecutionErrorFactory.Create();
+                }
+                return this.workflowCoreExecutionErrorBLL;
+            }
+        }
+        
+        public SampleSystem.BLL.IWorkflowCoreExecutionErrorBLLFactory WorkflowCoreExecutionErrorFactory
+        {
+            get
+            {
+                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<SampleSystem.BLL.IWorkflowCoreExecutionErrorBLLFactory>(this.Context.ServiceProvider);
+            }
+        }
+        
         public SampleSystem.BLL.IWorkflowCoreInstanceBLL WorkflowCoreInstance
         {
             get
@@ -2374,6 +2417,7 @@ namespace SampleSystem.BLL
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestSecuritySubObjItemBLLFactory, SampleSystem.BLL.TestSecuritySubObjItemBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestSecuritySubObjItem2BLLFactory, SampleSystem.BLL.TestSecuritySubObjItem2BLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestSecuritySubObjItem3BLLFactory, SampleSystem.BLL.TestSecuritySubObjItem3BLLFactory>(serviceCollection);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IWorkflowCoreExecutionErrorBLLFactory, SampleSystem.BLL.WorkflowCoreExecutionErrorBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.IWorkflowCoreInstanceBLLFactory, SampleSystem.BLL.WorkflowCoreInstanceBLLFactory>(serviceCollection);
         }
     }
@@ -2610,6 +2654,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecuritySubObjItem3));
             }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreExecutionError)))
+            {
+                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkflowCoreExecutionError));
+            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreInstance)))
             {
                 return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkflowCoreInstance));
@@ -2829,6 +2877,10 @@ namespace SampleSystem.BLL
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecuritySubObjItem3)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecuritySubObjItem3Factory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem3>)(securityProvider)))));
+            }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreExecutionError)))
+            {
+                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkflowCoreExecutionErrorFactory.Create()));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreInstance)))
             {
@@ -3050,6 +3102,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecuritySubObjItem3Factory.Create(securityOperation)));
             }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreExecutionError)))
+            {
+                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkflowCoreExecutionErrorFactory.Create()));
+            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreInstance)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkflowCoreInstanceFactory.Create()));
@@ -3269,6 +3325,10 @@ namespace SampleSystem.BLL
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestSecuritySubObjItem3)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestSecuritySubObjItem3Factory.Create(bllSecurityMode)));
+            }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreExecutionError)))
+            {
+                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.WorkflowCoreExecutionErrorFactory.Create()));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.WorkflowCoreInstance)))
             {

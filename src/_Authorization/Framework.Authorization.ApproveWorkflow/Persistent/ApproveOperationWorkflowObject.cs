@@ -3,6 +3,8 @@
 namespace Framework.Authorization.ApproveWorkflow;
 public class ApproveOperationWorkflowObject
 {
+    public string WorkflowInstanceId { get; set; }
+
     public bool AutoApprove { get; set; }
 
     public Guid OperationId { get; set; }

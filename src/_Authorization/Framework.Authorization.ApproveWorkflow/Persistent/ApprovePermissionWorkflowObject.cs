@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Framework.Authorization.Domain;
 
@@ -16,4 +17,14 @@ public class ApprovePermissionWorkflowObject
     public List<ApproveOperationWorkflowObject> Operations { get; set; }
 
     public bool SomeOneOperationRejected { get; set; }
+
+    public ApproveOperationWorkflowObject GetActualItem(ApproveOperationWorkflowObject unperObj)
+    {
+        return this.Operations.Single(wfObj => wfObj.OperationId == unperObj.OperationId);
+    }
+
+    public ApproveOperationWorkflowObject GetActualItem(object unperObj)
+    {
+        return this.GetActualItem((ApproveOperationWorkflowObject)unperObj);
+    }
 }

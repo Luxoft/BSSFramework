@@ -17,6 +17,7 @@ public static class ServiceCollectionExtensions
                .AddTransient<StartWorkflow>()
                .AddTransient<PublishEvent>()
                .AddTransient<SendFinalEvent>()
+               .AddTransient<TerminateWorkflowStep>()
 
                .AddTransient<CalcHasAccessStep>()
                .AddTransient<CanAutoApproveStep>()

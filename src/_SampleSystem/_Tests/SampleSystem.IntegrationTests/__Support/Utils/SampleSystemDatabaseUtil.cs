@@ -62,7 +62,7 @@ namespace SampleSystem.IntegrationTests.Support.Utils
         {
             AppSettings.Initialize(nameof(SampleSystem) + "_");
 
-            var serviceProvider = new ServiceCollection().AddWorkflowCore(AppSettings.Default["ConnectionStrings"]).BuildServiceProvider();
+            var serviceProvider = new ServiceCollection().AddWorkflowCore(AppSettings.Default).BuildServiceProvider();
 
             var workflowHost = serviceProvider.GetRequiredService<IWorkflowHost>();
 

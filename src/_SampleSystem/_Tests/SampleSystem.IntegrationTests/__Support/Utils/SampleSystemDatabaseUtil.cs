@@ -4,13 +4,19 @@ using System.Collections.Generic;
 using Automation.Utils;
 using Automation.Utils.Utils.DatabaseUtils;
 
+using Framework.Authorization.ApproveWorkflow;
 using Framework.DomainDriven.DBGenerator;
+
+using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.DbGenerate;
 using SampleSystem.DbMigrator;
 using SampleSystem.IntegrationTests.__Support;
 using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.WebApiCore;
+
+using WorkflowCore.Interface;
 
 namespace SampleSystem.IntegrationTests.Support.Utils
 {
@@ -44,9 +50,22 @@ namespace SampleSystem.IntegrationTests.Support.Utils
 
             CoreDatabaseUtil.ExecuteSqlFromFolder(@"__Support/Scripts/Authorization", CoreDatabaseUtil.DatabaseName);
             CoreDatabaseUtil.ExecuteSqlFromFolder(@"__Support/Scripts/Configuration", CoreDatabaseUtil.DatabaseName);
+
+            this.GenerateWorkflowCoreDataBase();
+
             CoreDatabaseUtil.ExecuteSqlFromFolder(@"__Support/Scripts/SampleSystem", CoreDatabaseUtil.DatabaseName);
 
             new BssFluentMigrator(this.ConnectionSettings.ConnectionString, typeof(InitNumberInDomainObjectEventMigration).Assembly).Migrate();
+        }
+
+        private void GenerateWorkflowCoreDataBase()
+        {
+            var serviceProvider = new ServiceCollection().AddWorkflowCore(AppSettings.Default).BuildServiceProvider();
+
+            var workflowHost = serviceProvider.GetRequiredService<IWorkflowHost>();
+
+            workflowHost.Start();
+            workflowHost.Stop();
         }
     }
 }

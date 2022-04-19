@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;

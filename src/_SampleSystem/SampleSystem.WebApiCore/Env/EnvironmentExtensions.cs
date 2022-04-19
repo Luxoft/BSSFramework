@@ -93,8 +93,12 @@ namespace SampleSystem.WebApiCore
 
         public static IServiceCollection AddWorkflowCore(this IServiceCollection services, IConfiguration configuration)
         {
+            return services.AddWorkflowCore(configuration["WorkflowCoreConnectionString"]);
+        }
+        public static IServiceCollection AddWorkflowCore(this IServiceCollection services, string connectionString)
+        {
             return services
-                   .AddWorkflow(x => x.UseSqlServer(configuration["WorkflowCoreConnectionString"], true, true))
+                   .AddWorkflow(x => x.UseSqlServer(connectionString, true, true))
                    .AddLogging();
         }
     }

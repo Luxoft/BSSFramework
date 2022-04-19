@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -49,15 +50,6 @@ namespace SampleSystem.IntegrationTests.Workflow
         [TestInitialize]
         public void SetUp()
         {
-            CoreDatabaseUtil.ExecuteSql(@"
-DELETE FROM [wfc].Workflow
-DELETE FROM [wfc].Subscription
-DELETE FROM [wfc].ScheduledCommand
-DELETE FROM [wfc].ExtensionAttribute
-DELETE FROM [wfc].ExecutionPointer
-DELETE FROM [wfc].ExecutionError
-DELETE FROM [wfc].Event");
-
             this.authFacade = this.GetAuthControllerEvaluator();
 
             this.approveOperation = this.authFacade.Evaluate(c => c.GetSimpleOperationByName(nameof(SampleSystemSecurityOperationCode.ApproveWorkflowOperation)));

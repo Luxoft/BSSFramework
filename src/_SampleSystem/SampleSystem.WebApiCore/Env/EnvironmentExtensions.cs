@@ -17,6 +17,8 @@ using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Exceptions;
 
+using JetBrains.Annotations;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -91,12 +93,19 @@ namespace SampleSystem.WebApiCore
             return services;
         }
 
-        public static IServiceCollection AddWorkflowCore(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddWorkflowCore([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration)
         {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+
             return services.AddWorkflowCore(configuration["WorkflowCoreConnectionString"]);
         }
-        public static IServiceCollection AddWorkflowCore(this IServiceCollection services, string connectionString)
+
+        public static IServiceCollection AddWorkflowCore([NotNull] this IServiceCollection services, [NotNull] string connectionString)
         {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+            if (connectionString == null) throw new ArgumentNullException(nameof(connectionString));
+
             return services
                    .AddWorkflow(x => x.UseSqlServer(connectionString, true, true))
                    .AddLogging();

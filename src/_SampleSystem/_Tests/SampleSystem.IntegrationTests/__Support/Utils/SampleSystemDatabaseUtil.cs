@@ -60,7 +60,9 @@ namespace SampleSystem.IntegrationTests.Support.Utils
 
         private void GenerateWorkflowCoreDataBase()
         {
-            var serviceProvider = new ServiceCollection().AddWorkflowCore(AppSettings.Default).BuildServiceProvider();
+            AppSettings.Initialize(nameof(SampleSystem) + "_");
+
+            var serviceProvider = new ServiceCollection().AddWorkflowCore(AppSettings.Default["ConnectionStrings"]).BuildServiceProvider();
 
             var workflowHost = serviceProvider.GetRequiredService<IWorkflowHost>();
 

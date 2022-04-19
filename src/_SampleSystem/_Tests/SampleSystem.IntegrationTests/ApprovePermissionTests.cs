@@ -56,7 +56,7 @@ DELETE FROM [wfc].ScheduledCommand
 DELETE FROM [wfc].ExtensionAttribute
 DELETE FROM [wfc].ExecutionPointer
 DELETE FROM [wfc].ExecutionError
-DELETE FROM [wfc].Event", "WorkflowCore");
+DELETE FROM [wfc].Event");
 
             this.authFacade = this.GetAuthControllerEvaluator();
 

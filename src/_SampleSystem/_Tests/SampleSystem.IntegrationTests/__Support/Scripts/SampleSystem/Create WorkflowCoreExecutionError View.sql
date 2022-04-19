@@ -5,4 +5,4 @@ SELECT CONVERT(uniqueidentifier,0xefbeadde00000000 + CONVERT(binary(4), [Persist
       ,[Message]
       ,CAST(WorkflowId AS UNIQUEIDENTIFIER) as WorkflowInstanceId
 
-FROM        WorkflowCore.wfc.ExecutionError
+FROM        wfc.ExecutionError

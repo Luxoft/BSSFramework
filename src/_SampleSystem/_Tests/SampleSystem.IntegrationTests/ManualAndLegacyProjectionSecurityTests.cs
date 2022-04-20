@@ -58,10 +58,10 @@ namespace SampleSystem.IntegrationTests
         public void TestManualEmployeeProjection_LoadedByManualDependencySecurity()
         {
             // Arrange
-            var employeeQueryController = this.GetController<EmployeeQueryController>(TestEmployeeLogin);
+            var employeeQueryController = this.GetControllerEvaluator<EmployeeQueryController>(TestEmployeeLogin);
 
             // Act
-            var items = employeeQueryController.GetTestManualEmployeeProjectionsByODataQueryString($"$filter={nameof(TestManualEmployeeProjection.CoreBusinessUnitId)} ne null").Items;
+            var items = employeeQueryController.Evaluate(c => c.GetTestManualEmployeeProjectionsByODataQueryString($"$filter={nameof(TestManualEmployeeProjection.CoreBusinessUnitId)} ne null")).Items;
 
             // Assert
             items.Count().Should().Be(1);
@@ -72,10 +72,10 @@ namespace SampleSystem.IntegrationTests
         public void TestLegacyEmployeeProjection_LoadedByLegacyGenericSecurity()
         {
             // Arrange
-            var employeeQueryController = this.GetController<EmployeeQueryController>(TestEmployeeLogin);
+            var employeeQueryController = this.GetControllerEvaluator<EmployeeQueryController>(TestEmployeeLogin);
 
             // Act
-            var items = employeeQueryController.GetTestLegacyEmployeesByODataQueryString($"$filter={nameof(TestLegacyEmployee.BusinessUnit_Security)} ne null").Items;
+            var items = employeeQueryController.Evaluate(c => c.GetTestLegacyEmployeesByODataQueryString($"$filter={nameof(TestLegacyEmployee.BusinessUnit_Security)} ne null")).Items;
 
             // Assert
             items.Count().Should().Be(1);

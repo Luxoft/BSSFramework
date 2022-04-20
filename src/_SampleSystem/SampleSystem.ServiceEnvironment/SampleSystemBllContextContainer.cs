@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
@@ -22,8 +21,6 @@ using Framework.Report;
 using Framework.Security.Cryptography;
 using Framework.SecuritySystem;
 using Framework.Validation;
-
-using JetBrains.Annotations;
 
 using SampleSystem.BLL;
 using SampleSystem.Domain;

@@ -8,6 +8,8 @@ using Framework.DomainDriven.ServiceModel.Service;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Core.Services;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.DomainDriven.ServiceModel.IAD
 {
     public abstract partial class ServiceEnvironmentBase<TBLLContextContainer, TBLLContext> : ServiceEnvironmentBase, IRootServiceEnvironment<TBLLContext, TBLLContextContainer>
@@ -93,7 +95,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         {
             return currentScopedServiceProvider == null
                        ? new RootContextEvaluator<TBLLContext>(this, this.RootServiceProvider)
-                       : new ScopeContextEvaluator<TBLLContext>(this, currentScopedServiceProvider);
+                       : new ScopedContextEvaluator<TBLLContext>(this, currentScopedServiceProvider);
         }
 
         public TBLLContextContainer GetBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null)

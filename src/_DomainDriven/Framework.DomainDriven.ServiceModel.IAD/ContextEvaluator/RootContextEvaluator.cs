@@ -28,7 +28,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         {
             using var scope = this.rootServiceProvider.CreateScope();
 
-            return new ScopeContextEvaluator<TBLLContext>(this.serviceEnvironment, scope.ServiceProvider).Evaluate(sessionMode, principalName, getResult);
+            return new ScopedContextEvaluator<TBLLContext>(this.serviceEnvironment, scope.ServiceProvider).Evaluate(sessionMode, principalName, getResult);
         }
     }
 }

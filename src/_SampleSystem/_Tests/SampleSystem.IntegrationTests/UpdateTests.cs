@@ -23,7 +23,7 @@ namespace SampleSystem.IntegrationTests
         public void ExampleContainer_UpdatePropertyChanged1()
         {
             // Arrange
-            var example1Controller = this.GetController<Example1Controller>();
+            var example1Controller = this.GetControllerEvaluator<Example1Controller>();
 
             var strictSource = new Example1StrictDTO
             {
@@ -35,9 +35,9 @@ namespace SampleSystem.IntegrationTests
             var updateDTO = new Example1UpdateDTO(strictSource);
 
             // Act
-            var ident = example1Controller.UpdateExample1(updateDTO);
+            var ident = example1Controller.Evaluate(c => c.UpdateExample1(updateDTO));
 
-            var rich = example1Controller.GetRichExample1(ident);
+            var rich = example1Controller.Evaluate(c => c.GetRichExample1(ident));
 
             // Assert
             var currentStrictDTO = rich.ToStrict();
@@ -79,9 +79,9 @@ namespace SampleSystem.IntegrationTests
         public void ExampleContainer_UpdatePropertyChanged3()
         {
             // Arrange
-            var example1Controller = this.GetController<Example1Controller>();
+            var example1Controller = this.GetControllerEvaluator<Example1Controller>();
 
-            var ident = example1Controller.UpdateExample1(new Example1UpdateDTO(new Example1StrictDTO
+            var ident = example1Controller.Evaluate(c => c.UpdateExample1(new Example1UpdateDTO(new Example1StrictDTO
             {
                 Field1 = Guid.NewGuid(),
                 Field2 = Guid.NewGuid(),
@@ -92,9 +92,9 @@ namespace SampleSystem.IntegrationTests
                     new Example2StrictDTO { Field1 = Guid.NewGuid(), Field2 = Guid.NewGuid() },
                     new Example2StrictDTO { Field1 = Guid.NewGuid(), Field2 = Guid.NewGuid() }
                 }
-            }));
+            })));
 
-            var richObj = example1Controller.GetRichExample1(ident);
+            var richObj = example1Controller.Evaluate(c => c.GetRichExample1(ident));
 
             // Act
             var baseStrictDTO = richObj.ToStrict();

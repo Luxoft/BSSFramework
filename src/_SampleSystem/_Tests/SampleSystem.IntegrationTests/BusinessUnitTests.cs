@@ -101,14 +101,14 @@ namespace SampleSystem.IntegrationTests
         public void CheckBusinessUnitSecondaryAccess_HasAccess()
         {
             // Arrange
-            var businessUnitQueryController = this.GetController<SampleSystem.WebApiCore.Controllers.MainQuery.BusinessUnitQueryController>(EmployeeName);
+            var businessUnitQueryController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.MainQuery.BusinessUnitQueryController>(EmployeeName);
 
             // Act
-            var businessUnitTree = businessUnitQueryController.GetTestBusinessUnitTreeByOperation(new GetTestBusinessUnitTreeByOperationAutoRequest
+            var businessUnitTree = businessUnitQueryController.Evaluate(c => c.GetTestBusinessUnitTreeByOperation(new GetTestBusinessUnitTreeByOperationAutoRequest
                 {
                     odataQueryString = string.Empty,
                     securityOperationCode = SampleSystemBusinessUnitSecurityOperationCode.EmployeeEdit
-                });
+                }));
 
             // Assert
             businessUnitTree.TotalCount.Should().Be(2);
@@ -122,14 +122,14 @@ namespace SampleSystem.IntegrationTests
         public void GetTreeWithFilter()
         {
             // Arrange
-            var businessUnitQueryController = this.GetController<BusinessUnitQueryController>(EmployeeName);
+            var businessUnitQueryController = this.GetControllerEvaluator<BusinessUnitQueryController>(EmployeeName);
 
             // Act
-            var businessUnitTree = businessUnitQueryController.GetTestBusinessUnitTreeByOperation(new GetTestBusinessUnitTreeByOperationAutoRequest
+            var businessUnitTree = businessUnitQueryController.Evaluate(c => c.GetTestBusinessUnitTreeByOperation(new GetTestBusinessUnitTreeByOperationAutoRequest
                 {
                     odataQueryString = "$filter=Name eq 'test'",
                     securityOperationCode = SampleSystemBusinessUnitSecurityOperationCode.EmployeeEdit
-                });
+                }));
 
             // Assert
             businessUnitTree.TotalCount.Should().Be(0);
@@ -151,8 +151,8 @@ namespace SampleSystem.IntegrationTests
         private void TestGetFullBusinessUnitsTreeByOData()
         {
             // Act
-            var businessUnitQueryController = this.GetController<BusinessUnitController>();
-            var businessUnitTree = businessUnitQueryController.GetFullBusinessUnitsTreeByOData(string.Empty);
+            var businessUnitQueryController = this.GetControllerEvaluator<BusinessUnitController>();
+            var businessUnitTree = businessUnitQueryController.Evaluate(c => c.GetFullBusinessUnitsTreeByOData(string.Empty));
 
             // Assert
             businessUnitTree.TotalCount.Should().Be(ParentsCount + ExistedBusinessUnitsInDatabase);
@@ -162,8 +162,8 @@ namespace SampleSystem.IntegrationTests
         private void TestGetFullBusinessUnitsTree()
         {
             // Act
-            var businessUnitController = this.GetController<BusinessUnitController>();
-            var tree = businessUnitController.GetFullBusinessUnitsTree();
+            var businessUnitController = this.GetControllerEvaluator<BusinessUnitController>();
+            var tree = businessUnitController.Evaluate(c => c.GetFullBusinessUnitsTree());
 
             // Assert
             tree.Should().HaveCount(ParentsCount + ExistedBusinessUnitsInDatabase);

@@ -6,7 +6,6 @@ namespace Framework.DomainDriven.ServiceModel.Service
 {
     public interface IServiceEnvironment : IDBSessionFactoryContainer
     {
-
         bool IsDebugMode { get; }
     }
 

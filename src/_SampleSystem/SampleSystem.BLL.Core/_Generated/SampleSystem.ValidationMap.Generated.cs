@@ -130,6 +130,39 @@ namespace SampleSystem.BLL
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.AnotherSqlParserTestObj>(this.GetAnotherSqlParserTestObjProperties);
         }
         
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, System.DateTime?>> GetApprovePermissionWorkflowDomainObject_CreateDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, string>> GetApprovePermissionWorkflowDomainObject_CreatedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, string>> GetApprovePermissionWorkflowDomainObject_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, System.DateTime?>> GetApprovePermissionWorkflowDomainObject_ModifyDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>> GetApprovePermissionWorkflowDomainObjectProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject> currentClass)
+        {
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, System.DateTime?>(source => source.CreateDate, currentClass, this.GetApprovePermissionWorkflowDomainObject_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, string>(source => source.CreatedBy, currentClass, this.GetApprovePermissionWorkflowDomainObject_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, string>(source => source.ModifiedBy, currentClass, this.GetApprovePermissionWorkflowDomainObject_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetApprovePermissionWorkflowDomainObject_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject> GetApprovePermissionWorkflowDomainObjectValidationMap()
+        {
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>(this.GetApprovePermissionWorkflowDomainObjectProperties);
+        }
+        
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.BusinessUnit, System.Collections.Generic.IEnumerable<SampleSystem.Domain.BusinessUnitEmployeeRole>>> GetBusinessUnit_BusinessUnitEmployeeRolesValidators()
         {
             yield return new Framework.Validation.DeepCollectionValidator<SampleSystem.Domain.BusinessUnit, System.Collections.Generic.IEnumerable<SampleSystem.Domain.BusinessUnitEmployeeRole>, SampleSystem.Domain.BusinessUnitEmployeeRole>();
@@ -2461,6 +2494,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetAnotherSqlParserTestObjValidationMap()));
             }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject)))
+            {
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetApprovePermissionWorkflowDomainObjectValidationMap()));
+            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.BusinessUnit)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetBusinessUnitValidationMap()));
@@ -2804,6 +2841,14 @@ namespace SampleSystem.BLL
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.UniqueByParent.ChildEntity)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetChildEntityValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.WorkflowCoreExecutionError)))
+            {
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetWorkflowCoreExecutionErrorValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.WorkflowCoreInstance)))
+            {
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetWorkflowCoreInstanceValidationMap()));
             }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.Inline.Fio)))
             {
@@ -3976,6 +4021,48 @@ namespace SampleSystem.BLL
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestUnpersistentObject> GetTestUnpersistentObjectValidationMap()
         {
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.TestUnpersistentObject>(this.GetTestUnpersistentObjectProperties);
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.WorkflowCoreExecutionError, System.DateTime>> GetWorkflowCoreExecutionError_ErrorTimeValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.Create<SampleSystem.Domain.WorkflowCoreExecutionError>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.WorkflowCoreExecutionError, string>> GetWorkflowCoreExecutionError_MessageValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.WorkflowCoreExecutionError>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.WorkflowCoreExecutionError>> GetWorkflowCoreExecutionErrorProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.WorkflowCoreExecutionError> currentClass)
+        {
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.WorkflowCoreExecutionError, System.DateTime>(source => source.ErrorTime, currentClass, this.GetWorkflowCoreExecutionError_ErrorTimeValidators(), this.GetClassMap<System.DateTime>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.WorkflowCoreExecutionError, string>(source => source.Message, currentClass, this.GetWorkflowCoreExecutionError_MessageValidators(), this.GetClassMap<string>(true));
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.WorkflowCoreExecutionError> GetWorkflowCoreExecutionErrorValidationMap()
+        {
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.WorkflowCoreExecutionError>(this.GetWorkflowCoreExecutionErrorProperties);
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.WorkflowCoreInstance, string>> GetWorkflowCoreInstance_DataValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.WorkflowCoreInstance>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.WorkflowCoreInstance, string>> GetWorkflowCoreInstance_WorkflowDefinitionIdValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.WorkflowCoreInstance>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.WorkflowCoreInstance>> GetWorkflowCoreInstanceProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.WorkflowCoreInstance> currentClass)
+        {
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.WorkflowCoreInstance, string>(source => source.Data, currentClass, this.GetWorkflowCoreInstance_DataValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.WorkflowCoreInstance, string>(source => source.WorkflowDefinitionId, currentClass, this.GetWorkflowCoreInstance_WorkflowDefinitionIdValidators(), this.GetClassMap<string>(true));
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.WorkflowCoreInstance> GetWorkflowCoreInstanceValidationMap()
+        {
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.WorkflowCoreInstance>(this.GetWorkflowCoreInstanceProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676, System.DateTime?>> GetWorkingCalendar1676_CreateDateValidators()

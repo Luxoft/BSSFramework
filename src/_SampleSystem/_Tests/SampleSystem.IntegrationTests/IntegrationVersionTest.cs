@@ -34,20 +34,20 @@ namespace SampleSystem.IntegrationTests
                                                                         return obj.Id;
                                                                     });
 
-            var integrationVersionContainer1Controller = this.GetController<IntegrationVersionContainer1Controller>();
+            var integrationVersionContainer1Controller = this.GetControllerEvaluator<IntegrationVersionContainer1Controller>();
             this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
 
             // Act
             var expectedName = Guid.NewGuid().ToString();
             var expectedIntegrationVersion = integrationVersion + 10;
 
-            integrationVersionContainer1Controller.SaveIntegrationVersionContainer1(
+            integrationVersionContainer1Controller.Evaluate(c => c.SaveIntegrationVersionContainer1(
                 new IntegrationVersionContainer1IntegrationRichDTO()
                 {
                     Id = id,
                     IntegrationVersion = expectedIntegrationVersion,
                     Name = expectedName
-                });
+                }));
 
             // Assert
 
@@ -76,18 +76,18 @@ namespace SampleSystem.IntegrationTests
                 return obj.Id;
             });
 
-            var integrationVersionContainer1Controller = this.GetController<IntegrationVersionContainer1Controller>();
+            var integrationVersionContainer1Controller = this.GetControllerEvaluator<IntegrationVersionContainer1Controller>();
             this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
 
             // Act
 
-            integrationVersionContainer1Controller.SaveIntegrationVersionContainer1(
+            integrationVersionContainer1Controller.Evaluate(c => c.SaveIntegrationVersionContainer1(
                 new IntegrationVersionContainer1IntegrationRichDTO()
                 {
                     Id = id,
                     IntegrationVersion = expectedIntegrationVersion - 10,
                     Name = Guid.NewGuid().ToString()
-                });
+                }));
 
             // Assert
 
@@ -116,18 +116,18 @@ namespace SampleSystem.IntegrationTests
                                                                         return obj.Id;
                                                                     });
 
-            var integrationVersionContainer1Controller = this.GetController<IntegrationVersionContainer1Controller>();
+            var integrationVersionContainer1Controller = this.GetControllerEvaluator<IntegrationVersionContainer1Controller>();
             this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
 
             // Act
 
-            integrationVersionContainer1Controller.SaveIntegrationVersionContainer1(
+            integrationVersionContainer1Controller.Evaluate(c => c.SaveIntegrationVersionContainer1(
                 new IntegrationVersionContainer1IntegrationRichDTO()
                 {
                     Id = id,
                     IntegrationVersion = expectedIntegrationVersion,
                     Name = Guid.NewGuid().ToString()
-                });
+                }));
 
             // Assert
 
@@ -155,20 +155,20 @@ namespace SampleSystem.IntegrationTests
                 return obj.Id;
             });
 
-            var integrationVersionContainer2Controller = this.GetController<IntegrationVersionContainer2Controller>();
+            var integrationVersionContainer2Controller = this.GetControllerEvaluator<IntegrationVersionContainer2Controller>();
             this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
 
             // Act
             var expectedName = Guid.NewGuid().ToString();
             var expectedIntegrationVersion = integrationVersion + 10;
 
-            integrationVersionContainer2Controller.SaveIntegrationVersionContainer2(
+            integrationVersionContainer2Controller.Evaluate(c => c.SaveIntegrationVersionContainer2(
                 new IntegrationVersionContainer2IntegrationRichDTO()
                 {
                     Id = id,
                     IntegrationVersion = expectedIntegrationVersion,
                     Name = expectedName
-                });
+                }));
 
             // Assert
 
@@ -197,18 +197,18 @@ namespace SampleSystem.IntegrationTests
                 return obj.Id;
             });
 
-            var integrationVersionContainer2Controller = this.GetController<IntegrationVersionContainer2Controller>();
+            var integrationVersionContainer2Controller = this.GetControllerEvaluator<IntegrationVersionContainer2Controller>();
             this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
 
             // Act
 
-            integrationVersionContainer2Controller.SaveIntegrationVersionContainer2(
+            integrationVersionContainer2Controller.Evaluate(c => c.SaveIntegrationVersionContainer2(
                 new IntegrationVersionContainer2IntegrationRichDTO()
                 {
                     Id = id,
                     IntegrationVersion = expectedIntegrationVersion - 10,
                     Name = Guid.NewGuid().ToString()
-                });
+                }));
 
             // Assert
 
@@ -237,20 +237,20 @@ namespace SampleSystem.IntegrationTests
                 return obj.Id;
             });
 
-            var integrationVersionContainer2Controller = this.GetController<IntegrationVersionContainer2Controller>();
+            var integrationVersionContainer2Controller = this.GetControllerEvaluator<IntegrationVersionContainer2Controller>();
             this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
 
             // Act
 
             var nextName = Guid.NewGuid().ToString();
 
-            integrationVersionContainer2Controller.SaveIntegrationVersionContainer2(
+            integrationVersionContainer2Controller.Evaluate(c => c.SaveIntegrationVersionContainer2(
                 new IntegrationVersionContainer2IntegrationRichDTO()
                 {
                     Id = id,
                     IntegrationVersion = expectedIntegrationVersion,
                     Name = nextName
-                });
+                }));
 
             // Assert
 
@@ -279,28 +279,28 @@ namespace SampleSystem.IntegrationTests
                                                                         return obj.Id;
                                                                     });
 
-            var integrationVersionContainer1Controller = this.GetController<IntegrationVersionContainer1Controller>();
+            var integrationVersionContainer1Controller = this.GetControllerEvaluator<IntegrationVersionContainer1Controller>();
             this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
 
             var modelName = Guid.NewGuid().ToString();
 
-            integrationVersionContainer1Controller.SaveIntegrationVersionContainer1ByCustom(
+            integrationVersionContainer1Controller.Evaluate(c => c.SaveIntegrationVersionContainer1ByCustom(
                 new IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO()
                 {
                     SavingObject = new IntegrationVersionContainer1IntegrationSimpleDTO() { Id = id, IntegrationVersion = expectedIntegrationVersion - 1 },
                     CustomName = modelName
-                });
+                }));
 
 
 
             // Act
 
-            integrationVersionContainer1Controller.SaveIntegrationVersionContainer1ByCustom(
+            integrationVersionContainer1Controller.Evaluate(c => c.SaveIntegrationVersionContainer1ByCustom(
                 new IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO()
                 {
                     SavingObject = new IntegrationVersionContainer1IntegrationSimpleDTO() { Id = id, IntegrationVersion = expectedIntegrationVersion - 1 },
                     CustomName = Guid.NewGuid().ToString()
-                });
+                }));
 
             // Assert
 
@@ -329,28 +329,28 @@ namespace SampleSystem.IntegrationTests
                 return obj.Id;
             });
 
-            var integrationVersionContainer1Controller = this.GetController<IntegrationVersionContainer1Controller>();
+            var integrationVersionContainer1Controller = this.GetControllerEvaluator<IntegrationVersionContainer1Controller>();
             this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
 
             var modelName = Guid.NewGuid().ToString();
 
-            integrationVersionContainer1Controller.SaveIntegrationVersionContainer1ByCustom(
+            integrationVersionContainer1Controller.Evaluate(c => c.SaveIntegrationVersionContainer1ByCustom(
                 new IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO()
                 {
                     SavingObject = new IntegrationVersionContainer1IntegrationSimpleDTO() { Id = id, IntegrationVersion = expectedIntegrationVersion + 1 },
                     CustomName = modelName
-                });
+                }));
 
 
 
             // Act
 
-            integrationVersionContainer1Controller.SaveIntegrationVersionContainer1ByCustom(
+            integrationVersionContainer1Controller.Evaluate(c => c.SaveIntegrationVersionContainer1ByCustom(
                 new IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO()
                 {
                     SavingObject = new IntegrationVersionContainer1IntegrationSimpleDTO() { Id = id, IntegrationVersion = expectedIntegrationVersion + 1 },
                     CustomName = Guid.NewGuid().ToString()
-                });
+                }));
 
             // Assert
 

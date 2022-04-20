@@ -4,6 +4,7 @@ using System.Linq;
 using FluentAssertions;
 
 using Framework.Authorization.Generated.DTO;
+using Framework.Core;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -22,14 +23,15 @@ namespace SampleSystem.IntegrationTests.Auth
         public void SaveBusinessRole_CheckOperationAddition()
         {
             // Arrange
-            var employeeController = this.GetController<EmployeeController>();
-            var currentUser = employeeController.GetFullEmployee(
-                this.DataHelper.GetEmployeeByLogin(this.AuthHelper.GetCurrentUserLogin()));
+            var authController = this.GetAuthControllerEvaluator();
+            var employeeController = this.MainWebApi.Employee;
+            var currentUser = employeeController.Evaluate(c=> c.GetFullEmployee(
+                this.DataHelper.GetEmployeeByLogin(this.AuthHelper.GetCurrentUserLogin())));
 
-            var operation = this.GetAuthorizationController().GetSimpleOperationByName(
-                SampleSystemSecurityOperationCode.BusinessUnitTypeModuleOpen.ToString());
+            var operation = authController.Evaluate(c => c.GetSimpleOperationByName(
+                SampleSystemSecurityOperationCode.BusinessUnitTypeModuleOpen.ToString()));
 
-            var oprManager = this.GetAuthorizationController().GetRichBusinessRoleByName(RoleName);
+            var oprManager = authController.Evaluate(c => c.GetRichBusinessRoleByName(RoleName));
             oprManager.BusinessRoleOperationLinks.Add(new BusinessRoleOperationLinkRichDTO
             {
                 BusinessRole = oprManager,
@@ -38,11 +40,11 @@ namespace SampleSystem.IntegrationTests.Auth
             });
 
             // Act
-            this.GetAuthorizationController().SaveBusinessRole(oprManager.ToStrict());
+            this.GetAuthControllerEvaluator().Evaluate(c => c.SaveBusinessRole(oprManager.ToStrict()));
 
             // Assert
-            var roleOperationLink = this.GetAuthorizationController().GetRichBusinessRoleByName(RoleName)
-                .BusinessRoleOperationLinks.First(x => x.Operation.Identity == operation.Identity);
+            var roleOperationLink = authController.Evaluate(c => c.GetRichBusinessRoleByName(RoleName))
+                                                  .BusinessRoleOperationLinks.First(x => x.Operation.Identity == operation.Identity);
 
             roleOperationLink.BusinessRole.Identity.Should().Be(oprManager.Identity);
             roleOperationLink.CreatedBy.Should().Be(currentUser.Login.ToString());
@@ -54,13 +56,12 @@ namespace SampleSystem.IntegrationTests.Auth
         public void SaveBusinessRole_CheckSubBusinessRoleAddition()
         {
             // Arrange
-            var employeeController = this.GetController<EmployeeController>();
-            var currentUser = employeeController.GetFullEmployee(
-                this.DataHelper.GetEmployeeByLogin(this.AuthHelper.GetCurrentUserLogin()));
+            var employeeController = this.MainWebApi.Employee;
+            var currentUser = this.DataHelper.GetCurrentEmployee();
 
-            var subRole = this.GetAuthorizationController().GetSimpleBusinessRoleByName("SecretariatNotification");
+            var subRole = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName("SecretariatNotification"));
 
-            var oprManager = this.GetAuthorizationController().GetRichBusinessRoleByName(RoleName);
+            var oprManager = this.GetAuthControllerEvaluator().Evaluate(c => c.GetRichBusinessRoleByName(RoleName));
             oprManager.SubBusinessRoleLinks.Add(new SubBusinessRoleLinkRichDTO
             {
                 BusinessRole = oprManager,
@@ -68,10 +69,10 @@ namespace SampleSystem.IntegrationTests.Auth
             });
 
             // Act
-            this.GetAuthorizationController().SaveBusinessRole(oprManager.ToStrict());
+            this.GetAuthControllerEvaluator().Evaluate(c => c.SaveBusinessRole(oprManager.ToStrict()));
 
             // Assert
-            var subRoleLink = this.GetAuthorizationController().GetRichBusinessRoleByName(RoleName).SubBusinessRoleLinks
+            var subRoleLink = this.GetAuthControllerEvaluator().Evaluate(c => c.GetRichBusinessRoleByName(RoleName)).SubBusinessRoleLinks
                                   .First(x => x.SubBusinessRole.Identity == subRole.Identity);
 
             subRoleLink.BusinessRole.Identity.Should().Be(oprManager.Identity);
@@ -84,9 +85,8 @@ namespace SampleSystem.IntegrationTests.Auth
         public void SaveBusinessRole_CheckCreation()
         {
             // Arrange
-            var employeeController = this.GetController<EmployeeController>();
-            var currentUser = employeeController.GetFullEmployee(
-                this.DataHelper.GetEmployeeByLogin(this.AuthHelper.GetCurrentUserLogin()));
+            var employeeController = this.MainWebApi.Employee;
+            var currentUser = this.DataHelper.GetCurrentEmployee();
 
             var businessRoleStrict = new BusinessRoleStrictDTO
             {
@@ -94,10 +94,10 @@ namespace SampleSystem.IntegrationTests.Auth
             };
 
             // Act
-            var businessRoleIdentity = this.GetAuthorizationController().SaveBusinessRole(businessRoleStrict);
+            var businessRoleIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SaveBusinessRole(businessRoleStrict));
 
             // Assert
-            var businessRoleSimple = this.GetAuthorizationController().GetSimpleBusinessRole(businessRoleIdentity);
+            var businessRoleSimple = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRole(businessRoleIdentity));
 
             businessRoleSimple.Name.Should().Be(RoleName);
             businessRoleSimple.Active.Should().BeTrue();
@@ -109,19 +109,18 @@ namespace SampleSystem.IntegrationTests.Auth
         public void SaveBusinessRole_CheckBusinessRoleChanges()
         {
             // Arrange
-            var employeeController = this.GetController<EmployeeController>();
-            var currentUser = employeeController.GetFullEmployee(
-                this.DataHelper.GetEmployeeByLogin(this.AuthHelper.GetCurrentUserLogin()));
+            var employeeController = this.MainWebApi.Employee;
+            var currentUser = this.DataHelper.GetCurrentEmployee();
 
-            var businessRoleIdentity = this.GetAuthorizationController().GetSimpleBusinessRoleByName(RoleName).Identity;
-            var businessRoleStrict = this.GetAuthorizationController().GetFullBusinessRole(businessRoleIdentity).ToStrict();
+            var businessRoleIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName(RoleName)).Identity;
+            var businessRoleStrict = this.GetAuthControllerEvaluator().Evaluate(c => c.GetFullBusinessRole(businessRoleIdentity)).ToStrict();
             businessRoleStrict.Description = NewDescription;
 
             // Act
-            this.GetAuthorizationController().SaveBusinessRole(businessRoleStrict);
+            this.GetAuthControllerEvaluator().Evaluate(c => c.SaveBusinessRole(businessRoleStrict));
 
             // Assert
-            var businessRoleSiple = this.GetAuthorizationController().GetSimpleBusinessRole(businessRoleIdentity);
+            var businessRoleSiple = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRole(businessRoleIdentity));
 
             businessRoleSiple.Name.Should().Be(RoleName);
             businessRoleSiple.Description.Should().Be(NewDescription);
@@ -133,10 +132,10 @@ namespace SampleSystem.IntegrationTests.Auth
         public void SaveBusinessRole_CheckOperationRemoval()
         {
             // Arrange
-            var operationIdentity = this.GetAuthorizationController().GetSimpleOperationByName(
-                SampleSystemSecurityOperationCode.EmployeeView.ToString()).Identity;
+            var operationIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleOperationByName(
+                SampleSystemSecurityOperationCode.EmployeeView.ToString())).Identity;
 
-            var oprManager = this.GetAuthorizationController().GetRichBusinessRoleByName(RoleName);
+            var oprManager = this.GetAuthControllerEvaluator().Evaluate(c => c.GetRichBusinessRoleByName(RoleName));
 
             var operationLinkIdentity = oprManager.BusinessRoleOperationLinks
                                                   .Single(x => x.Operation.Identity == operationIdentity).Identity;
@@ -145,10 +144,10 @@ namespace SampleSystem.IntegrationTests.Auth
                 x => x.Operation.Identity != operationIdentity).ToList();
 
             // Act
-            this.GetAuthorizationController().SaveBusinessRole(oprManager.ToStrict());
+            this.GetAuthControllerEvaluator().Evaluate(c => c.SaveBusinessRole(oprManager.ToStrict()));
 
             // Assert
-            oprManager = this.GetAuthorizationController().GetRichBusinessRoleByName(RoleName);
+            oprManager = this.GetAuthControllerEvaluator().Evaluate(c => c.GetRichBusinessRoleByName(RoleName));
             oprManager.BusinessRoleOperationLinks.Should().NotContain(x => x.Identity == operationLinkIdentity);
         }
 
@@ -158,11 +157,11 @@ namespace SampleSystem.IntegrationTests.Auth
             // Arrange
             var businessRoleStrict = new BusinessRoleStrictDTO { Name = RoleName };
 
-            var businessRoleIdentity = this.GetAuthorizationController().SaveBusinessRole(businessRoleStrict);
+            var businessRoleIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SaveBusinessRole(businessRoleStrict));
 
             // Act
-            this.GetAuthorizationController().RemoveBusinessRole(businessRoleIdentity);
-            Action call = () => this.GetAuthorizationController().GetSimpleBusinessRole(businessRoleIdentity);
+            this.GetAuthControllerEvaluator().Evaluate(c => c.RemoveBusinessRole(businessRoleIdentity));
+            Action call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRole(businessRoleIdentity));
 
             // Assert
             call.Should().Throw<Exception>().WithMessage("BusinessRole with id = * not found");
@@ -172,17 +171,17 @@ namespace SampleSystem.IntegrationTests.Auth
         public void SaveBusinessRole_CheckSubBusinessRoleRemoval()
         {
             // Arrange
-            var subRole = this.GetAuthorizationController().GetSimpleBusinessRoleByName("SecretariatNotification");
+            var subRole = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName("SecretariatNotification"));
 
-            var oprManager = this.GetAuthorizationController().GetRichBusinessRoleByName(RoleName);
+            var oprManager = this.GetAuthControllerEvaluator().Evaluate(c => c.GetRichBusinessRoleByName(RoleName));
             oprManager.SubBusinessRoleLinks.Add(new SubBusinessRoleLinkRichDTO
             {
                 BusinessRole = oprManager,
                 SubBusinessRole = subRole,
             });
 
-            this.GetAuthorizationController().SaveBusinessRole(oprManager.ToStrict());
-            oprManager = this.GetAuthorizationController().GetRichBusinessRoleByName(RoleName);
+            this.GetAuthControllerEvaluator().Evaluate(c => c.SaveBusinessRole(oprManager.ToStrict()));
+            oprManager = this.GetAuthControllerEvaluator().Evaluate(c => c.GetRichBusinessRoleByName(RoleName));
 
             var subRoleLinkIdentity = oprManager.SubBusinessRoleLinks
                 .Single(x => x.SubBusinessRole.Identity == subRole.Identity).Identity;
@@ -191,10 +190,10 @@ namespace SampleSystem.IntegrationTests.Auth
                 .Where(x => x.SubBusinessRole.Identity != subRole.Identity).ToList();
 
             // Act
-            this.GetAuthorizationController().SaveBusinessRole(oprManager.ToStrict());
+            this.GetAuthControllerEvaluator().Evaluate(c => c.SaveBusinessRole(oprManager.ToStrict()));
 
             // Assert
-            oprManager = this.GetAuthorizationController().GetRichBusinessRoleByName(RoleName);
+            oprManager = this.GetAuthControllerEvaluator().Evaluate(c => c.GetRichBusinessRoleByName(RoleName));
             oprManager.SubBusinessRoleLinks.Should().NotContain(x => x.Identity == subRoleLinkIdentity);
         }
 
@@ -202,10 +201,10 @@ namespace SampleSystem.IntegrationTests.Auth
         public void RemoveBusinessRoleWithOperations_CheckException()
         {
             // Arrange
-            var businessRoleIdentity = this.GetAuthorizationController().GetSimpleBusinessRoleByName("SecretariatNotification").Identity;
+            var businessRoleIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName("SecretariatNotification")).Identity;
 
             // Act
-            Action call = () => this.GetAuthorizationController().RemoveBusinessRole(businessRoleIdentity);
+            Action call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.RemoveBusinessRole(businessRoleIdentity));
 
             // Assert
             call.Should().Throw<Exception>().WithMessage("Removing business role \"SecretariatNotification\" must be empty");

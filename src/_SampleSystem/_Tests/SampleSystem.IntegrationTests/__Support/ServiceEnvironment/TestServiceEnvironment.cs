@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Framework.Authorization.ApproveWorkflow;
 using Framework.Cap.Abstractions;
 using Framework.Configuration.BLL;
 using Framework.Core;
@@ -21,6 +24,7 @@ using Framework.Validation;
 
 using MediatR;
 
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
@@ -34,6 +38,8 @@ using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore;
 
+using WorkflowCore.Interface;
+
 namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 {
     /// <summary>
@@ -41,15 +47,16 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
     /// </summary>
     public class TestServiceEnvironment : SampleSystemServiceEnvironment
     {
-        private static readonly Lazy<TestServiceEnvironment> IntegrationEnvironmentLazy = new Lazy<TestServiceEnvironment>(CreateIntegrationEnvironment);
+        private static readonly Lazy<TestServiceEnvironment> DefaultLazy = new(CreateDefaultTestServiceEnvironment);
 
         public TestServiceEnvironment(
             IServiceProvider serviceProvider,
             IDBSessionFactory sessionFactory,
             EnvironmentSettings settings,
+            IUserAuthenticationService userAuthenticationService,
             bool? isDebugMode = null)
 
-            : base(serviceProvider, sessionFactory, settings.NotificationContext, IntegrationTestAuthenticationService.Instance,
+            : base(serviceProvider, sessionFactory, settings.NotificationContext, userAuthenticationService,
                    new OptionsWrapper<SmtpSettings>(new SmtpSettings() { OutputFolder = @"C:\SampleSystem\Smtp" }),
                   LazyInterfaceImplementHelper.CreateNotImplemented<IRewriteReceiversService>(),
                    isDebugMode)
@@ -60,7 +67,7 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
         /// <summary>
         /// Initilize Integration Environment
         /// </summary>
-        public static TestServiceEnvironment IntegrationEnvironment => IntegrationEnvironmentLazy.Value;
+        public static TestServiceEnvironment Default => DefaultLazy.Value;
 
         public bool IsDebugInTest { get; set; } = true;
 
@@ -72,33 +79,59 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
         /// <summary>
         /// Environment Settings
         /// </summary>
-        public EnvironmentSettings Settings { get; private set; }
-        
-        private static TestServiceEnvironment CreateIntegrationEnvironment()
+        public EnvironmentSettings Settings { get; }
+
+        private static TestServiceEnvironment CreateDefaultTestServiceEnvironment()
         {
-            var serviceProvider = new ServiceCollection()
-                                  .RegisterLegacyBLLContext()
-                                  .RegisterControllers()
-                                  .AddControllerEnvironment()
-                                  .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
-                                  .AddSingleton<SampleSystemServiceEnvironment>(sp => sp.GetRequiredService<TestServiceEnvironment>())
-                                  .AddSingleton<IUserAuthenticationService>(IntegrationTestAuthenticationService.Instance)
-                                  .AddSingleton<IDateTimeService>(new IntegrationTestDateTimeService())
-                                  .AddDatabaseSettings(InitializeAndCleanup.DatabaseUtil.ConnectionSettings.ConnectionString)
-                                  .AddSingleton(EnvironmentSettings.Trace)
-                                  .AddSingleton<TestServiceEnvironment>()
-                                  .AddScoped<IExceptionProcessor, ApiControllerExceptionService<TestServiceEnvironment, ISampleSystemBLLContext>> ()
-                                  .AddSingleton<ISpecificationEvaluator, NhSpecificationEvaluator>()
-                                  .AddSingleton<ICapTransactionManager, TestCapTransactionManager>()
-                                  .AddSingleton<IIntegrationEventBus, TestIntegrationEventBus>()
-                                  .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
+            var serviceProvider = BuildServiceProvider();
+
+            serviceProvider.RegisterAuthWorkflow();
 
             return serviceProvider.GetRequiredService<TestServiceEnvironment>();
         }
 
+
+        protected static IServiceProvider BuildServiceProvider()
+        {
+            var configuration = new ConfigurationBuilder()
+                                .SetBasePath(Directory.GetCurrentDirectory())
+                                .AddJsonFile("appsettings.json", false, true)
+                                .AddEnvironmentVariables(nameof(SampleSystem) + "_")
+                                .Build();
+
+
+            return new ServiceCollection()
+                                  .RegisterLegacyBLLContext()
+                                  .RegisterControllers()
+                                  .AddControllerEnvironment()
+                                  .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
+                                  .AddSingleton<IUserAuthenticationService>(IntegrationTestsUserAuthenticationService.Instance)
+                                  .AddSingleton<IDateTimeService, IntegrationTestDateTimeService>()
+                                  .AddDatabaseSettings(InitializeAndCleanup.DatabaseUtil.ConnectionSettings.ConnectionString)
+                                  .AddSingleton(EnvironmentSettings.Trace)
+                                  .AddScoped<IExceptionProcessor, ApiControllerExceptionService<SampleSystemServiceEnvironment, ISampleSystemBLLContext>>()
+                                  .AddSingleton<ISpecificationEvaluator, NhSpecificationEvaluator>()
+                                  .AddSingleton<ICapTransactionManager, TestCapTransactionManager>()
+                                  .AddSingleton<IIntegrationEventBus, TestIntegrationEventBus>()
+                                  .AddSingleton<SampleSystemServiceEnvironment>(sp => sp.GetRequiredService<TestServiceEnvironment>())
+                                  .AddSingleton<TestServiceEnvironment>().AddSingleton<SampleSystemServiceEnvironment>(sp => sp.GetRequiredService<TestServiceEnvironment>())
+
+                                  .AddSingleton<IWorkflowManager, WorkflowManager>(sp => sp.GetRequiredService<WorkflowManager>())
+                                  .AddSingleton<WorkflowManager>()
+
+                                  .AddScoped<IWorkflowApproveProcessor, WorkflowApproveProcessor>()
+                                  .AddScoped<StartWorkflowJob>()
+                                  .AddSingleton(sp => sp.GetRequiredService<SampleSystemServiceEnvironment>().GetContextEvaluator())
+                                  .AddSingleton<TestServiceEnvironment>()
+                                  .AddWorkflowCore(configuration)
+                                  .AddAuthWorkflow()
+
+                                  .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
+        }
+
         protected override SampleSystemBllContextContainer CreateBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null)
         {
-            return new TestSampleSystemBLLContextContainerStandard(
+            return new TestSampleSystemBllContextContainer(
                 this,
                 scopedServiceProvider,
                 this.DefaultAuthorizationValidatorCompileCache,
@@ -113,10 +146,10 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                 this.rewriteReceiversService);
         }
 
-        private class TestSampleSystemBLLContextContainerStandard : SampleSystemBllContextContainer
+        protected class TestSampleSystemBllContextContainer : SampleSystemBllContextContainer
         {
 
-            public TestSampleSystemBLLContextContainerStandard(SampleSystemServiceEnvironment serviceEnvironment, IServiceProvider scopedServiceProvider, ValidatorCompileCache defaultAuthorizationValidatorCompileCache, ValidatorCompileCache validatorCompileCache, Func<ISampleSystemBLLContext, ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>> securityExpressionBuilderFactoryFunc, IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService, ICryptService<CryptSystem> cryptService, ITypeResolver<string> currentTargetSystemTypeResolver, IDBSession session, string currentPrincipalName, SmtpSettings smtpSettings, IRewriteReceiversService rewriteReceiversService)
+            public TestSampleSystemBllContextContainer(SampleSystemServiceEnvironment serviceEnvironment, IServiceProvider scopedServiceProvider, ValidatorCompileCache defaultAuthorizationValidatorCompileCache, ValidatorCompileCache validatorCompileCache, Func<ISampleSystemBLLContext, ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>> securityExpressionBuilderFactoryFunc, IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService, ICryptService<CryptSystem> cryptService, ITypeResolver<string> currentTargetSystemTypeResolver, IDBSession session, string currentPrincipalName, SmtpSettings smtpSettings, IRewriteReceiversService rewriteReceiversService)
                 : base(serviceEnvironment, scopedServiceProvider, defaultAuthorizationValidatorCompileCache, validatorCompileCache, securityExpressionBuilderFactoryFunc, fetchService, cryptService, currentTargetSystemTypeResolver, session, currentPrincipalName, smtpSettings, rewriteReceiversService)
             {
             }
@@ -124,6 +157,15 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
             protected override IMessageSender<NotificationEventDTO> GetMessageTemplateSender()
             {
                 return new LocalDBNotificationEventDTOMessageSender(this.Configuration);
+            }
+            protected override IEnumerable<IDALListener> GetBeforeTransactionCompletedListeners()
+            {
+                foreach (var dalListener in base.GetBeforeTransactionCompletedListeners())
+                {
+                    yield return dalListener;
+                }
+
+                yield return new PermissionWorkflowDALListener(this.MainContext);
             }
         }
 

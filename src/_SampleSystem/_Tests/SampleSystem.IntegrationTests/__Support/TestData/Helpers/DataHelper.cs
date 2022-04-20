@@ -15,9 +15,9 @@ using Microsoft.Extensions.DependencyInjection;
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.Utils.Framework;
 using SampleSystem.WebApiCore.Controllers.Main;
-using SampleSystem.WebApiCore.Controllers.Report;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
 {
@@ -194,8 +194,8 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
                 return type.ToIdentityDTO();
             }
 
-            var businessUnitTypeController = this.GetController<BusinessUnitTypeController>();
-            var buTypeStrict = new BusinessUnitTypeStrictDTO(businessUnitTypeController.GetFullBusinessUnitType(type.ToIdentityDTO()));
+            var businessUnitTypeController = this.Environment.ServiceProvider.GetDefaultControllerEvaluator<BusinessUnitTypeController>();
+            var buTypeStrict = new BusinessUnitTypeStrictDTO(businessUnitTypeController.Evaluate(c => c.GetFullBusinessUnitType(type.ToIdentityDTO())));
 
             possibleParents = possibleParents ?? new List<BusinessUnitTypeIdentityDTO>();
             possibleParents.Add(type.ToIdentityDTO());
@@ -265,7 +265,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             }
 
 
-            businessUnitTypeController.SaveBusinessUnitType(buTypeStrict);
+            businessUnitTypeController.Evaluate(c => c.SaveBusinessUnitType(buTypeStrict));
 
             return type.ToIdentityDTO();
         }
@@ -605,32 +605,6 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
                     });
                 });
 
-        }
-
-        public TController GetController<TController>(string principalName = null)
-            where TController : ControllerBase, IApiControllerBase
-        {
-            var scope = this.Environment.ServiceProvider.CreateScope();
-
-            var controller = scope.ServiceProvider.GetRequiredService<TController>();
-
-            controller.ServiceProvider = scope.ServiceProvider;
-            controller.PrincipalName = principalName;
-
-            return controller;
-        }
-    }
-
-    public static class ServiceProviderControllerExtensions
-    {
-        public static IServiceCollection RegisterControllers(this IServiceCollection services)
-        {
-            foreach (var controllerType in typeof(SampleSystemGenericReportController).Assembly.GetTypes().Where(t => typeof(ControllerBase).IsAssignableFrom(t)))
-            {
-                services.AddScoped(controllerType);
-            }
-
-            return services;
         }
     }
 }

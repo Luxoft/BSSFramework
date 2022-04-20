@@ -39,23 +39,23 @@ namespace SampleSystem.IntegrationTests
             var name = $@"luxoft\saveprincipaltest_{Guid.NewGuid()}";
             var principalIdentity = this.AuthHelper.SavePrincipal(name, true);
 
-            var configFacade = this.GetConfigurationController();
+            var configFacade = this.GetConfigurationControllerEvaluator();
 
-            var domainTypeIdentity = configFacade.GetSimpleDomainTypeByPath("Authorization/Principal").Identity;
+            var domainTypeIdentity = configFacade.Evaluate(c => c.GetSimpleDomainTypeByPath("Authorization/Principal")).Identity;
 
-            var domainType = configFacade.GetRichDomainType(domainTypeIdentity);
+            var domainType = configFacade.Evaluate(c => c.GetRichDomainType(domainTypeIdentity));
 
             var operation = domainType.EventOperations.Single(op => op.Name == nameof(EventOperation.Save));
 
             this.ClearIntegrationEvents();
 
             // Act
-            configFacade.ForceDomainTypeEvent(new Framework.Configuration.Generated.DTO.DomainTypeEventModelStrictDTO
+            configFacade.Evaluate(c => c.ForceDomainTypeEvent(new Framework.Configuration.Generated.DTO.DomainTypeEventModelStrictDTO
             {
                 Operation = operation.Identity,
 
                 DomainObjectIdents = new List<Guid> { principalIdentity.Id }
-            });
+            }));
 
             // Assert
             this.GetIntegrationEvents<Framework.Authorization.Generated.DTO.PrincipalSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Principal.Id == principalIdentity.Id);
@@ -68,29 +68,32 @@ namespace SampleSystem.IntegrationTests
             var name = $@"luxoft\saveprincipaltest_{Guid.NewGuid()}";
             var principalIdentity = this.AuthHelper.SavePrincipal(name, true);
 
-            var permissionIdentity = this.GetAuthorizationController().SavePermission(new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, new PermissionStrictDTO
-            {
-                Role = this.GetAuthorizationController().GetVisualBusinessRoleByName(Framework.Authorization.Domain.BusinessRole.AdminRoleName).Identity,
-                Period = Period.Eternity
-            }));
+            var role = this.GetAuthControllerEvaluator().Evaluate(c => c.GetVisualBusinessRoleByName(Framework.Authorization.Domain.BusinessRole.AdminRoleName)).Identity;
 
-            var configFacade = this.GetConfigurationController();
+            var saveRequest = new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, new PermissionStrictDTO
+                {
+                        Role = role,
+                        Period = Period.Eternity
+                });
+            var permissionIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePermission(saveRequest));
 
-            var domainTypeIdentity = configFacade.GetSimpleDomainTypeByPath("Authorization/Permission").Identity;
+            var configFacade = this.GetConfigurationControllerEvaluator();
 
-            var domainType = configFacade.GetRichDomainType(domainTypeIdentity);
+            var domainTypeIdentity = configFacade.Evaluate(c => c.GetSimpleDomainTypeByPath("Authorization/Permission")).Identity;
+
+            var domainType = configFacade.Evaluate(c => c.GetRichDomainType(domainTypeIdentity));
 
             var operation = domainType.EventOperations.Single(op => op.Name == nameof(EventOperation.Save));
 
             this.ClearIntegrationEvents();
 
             // Act
-            configFacade.ForceDomainTypeEvent(new Framework.Configuration.Generated.DTO.DomainTypeEventModelStrictDTO
+            configFacade.Evaluate(c => c.ForceDomainTypeEvent(new Framework.Configuration.Generated.DTO.DomainTypeEventModelStrictDTO
             {
                 Operation = operation.Identity,
 
                 DomainObjectIdents = new List<Guid> { permissionIdentity.Id }
-            });
+            }));
 
             // Assert
             this.GetIntegrationEvents<Framework.Authorization.Generated.DTO.PermissionSaveEventDTO>("authDALQuery").Should().Contain(dto => dto.Permission.Id == permissionIdentity.Id);
@@ -122,7 +125,7 @@ namespace SampleSystem.IntegrationTests
             // Act
             var principalId = this.AuthHelper.SavePrincipal(Name, true, expected);
 
-            var principal = this.GetAuthorizationController().GetSimplePrincipal(principalId);
+            var principal = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalId));
 
             // Assert
             principal.ExternalId.Should().Be(expected);
@@ -145,8 +148,8 @@ namespace SampleSystem.IntegrationTests
         //    };
 
         //    // Act
-        //    var principalId = this.GetAuthorizationController().SavePrincipal(model);
-        //    var principal = this.GetAuthorizationController().GetSimplePrincipal(principalId);
+        //    var principalId = this.GetAuthControllerEvaluator().Evaluate(c => c.SavePrincipal(model);
+        //    var principal = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimplePrincipal(principalId);
 
         //    // Assert
         //    principal.ExternalId.Should().Be(expected);

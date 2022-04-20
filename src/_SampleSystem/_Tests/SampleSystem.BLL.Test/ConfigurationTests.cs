@@ -24,7 +24,7 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void TestCreateModification()
         {
-            var environment = TestServiceEnvironment.IntegrationEnvironment;
+            var environment = TestServiceEnvironment.Default;
 
             environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
             {
@@ -41,24 +41,24 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void TestForceSendEvent()
         {
-            var environment = TestServiceEnvironment.IntegrationEnvironment;
+            var environment = TestServiceEnvironment.Default;
 
-            var configFacade = environment.GetController<ConfigSLJsonController>();
+            var configFacade = environment.ServiceProvider.GetDefaultControllerEvaluator<ConfigSLJsonController>();
 
             //var mainFacade = new Facade(environment);
 
-            var domainType = configFacade.GetRichDomainTypeByName(nameof(BusinessUnit));
+            var domainType = configFacade.Evaluate(c => c.GetRichDomainTypeByName(nameof(BusinessUnit)));
 
             var operation = domainType.EventOperations.Single(op => op.Name == "Save");
 
             //var bu = mainFacade.GetVisualBusinessUnitByName("BU1");
 
-            configFacade.ForceDomainTypeEvent(new DomainTypeEventModelStrictDTO
+            configFacade.Evaluate(c => c.ForceDomainTypeEvent(new DomainTypeEventModelStrictDTO
             {
                 Operation = operation.Identity,
 
                 //DomainObjectId = new Guid("AA57E4AF-3BE6-42BD-B6F7-6691E6CCF9AA")// bu.Id
-            });
+            }));
 
             return;
         }

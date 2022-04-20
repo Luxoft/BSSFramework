@@ -38,7 +38,7 @@ namespace SampleSystem.IntegrationTests.Reports
         [TestMethod]
         public void GetReport_GetLocationNameReportGetDepartmentNameReport_CorrectBuild()
         {
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
 
             var location = this.DataHelper.SaveLocation(name: "loc1");
             var department = this.DataHelper.SaveHRDepartment(name: "dep");
@@ -51,9 +51,9 @@ namespace SampleSystem.IntegrationTests.Reports
             var departmentReportIdentity = this.SaveReport(departmentReportReport);
 
 
-            var locationReportStream = sampleSystemGenericReportController.GetStream(new ReportGenerationModelStrictDTO() { Report = locationReport1Identity });
-            var departmentReportStream = sampleSystemGenericReportController.GetStream(new ReportGenerationModelStrictDTO() { Report = departmentReportIdentity });
-            var location2ReportStream = sampleSystemGenericReportController.GetStream(new ReportGenerationModelStrictDTO() { Report = locationReport2Identity });
+            var locationReportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(new ReportGenerationModelStrictDTO() { Report = locationReport1Identity }));
+            var departmentReportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(new ReportGenerationModelStrictDTO() { Report = departmentReportIdentity }));
+            var location2ReportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(new ReportGenerationModelStrictDTO() { Report = locationReport2Identity }));
 
 
             Assert.IsNotNull(locationReportStream);
@@ -71,7 +71,7 @@ namespace SampleSystem.IntegrationTests.Reports
         [TestMethod]
         public void GetEmployeeReport_ReportForPersistentPropertiesWithVirtualFilterNextChangeProperty_CorrectBuild()
         {
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
 
             var location = this.DataHelper.SaveLocation(name: "loc1");
 
@@ -91,7 +91,7 @@ namespace SampleSystem.IntegrationTests.Reports
 
             var reportGenerationModel = CreateReportModel(reportRichDTO, new Dictionary<string, object>());
 
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             Assert.IsNotNull(reportStream);
 
@@ -100,14 +100,14 @@ namespace SampleSystem.IntegrationTests.Reports
 
             hrDepartmentProperty.PropertyPath = "HRDepartment.CodeNative";
 
-            sampleSystemGenericReportController.SaveReport(reportRichDTO.ToStrict());
+            sampleSystemGenericReportController.Evaluate(c => c.SaveReport(reportRichDTO.ToStrict()));
 
-            reportRichDTO = sampleSystemGenericReportController.GetRichReport(reportRichDTO.Identity);
+            reportRichDTO = sampleSystemGenericReportController.Evaluate(c => c.GetRichReport(reportRichDTO.Identity));
 
             reportGenerationModel = CreateReportModel(reportRichDTO, new Dictionary<string, object>());
 
             // Assert
-            reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             Assert.IsNotNull(reportStream);
         }
@@ -115,7 +115,7 @@ namespace SampleSystem.IntegrationTests.Reports
         [TestMethod]
         public void GetEmployeeReport_ReportForPersistentPropertiesWithVirtualFilterNextChangePropertyNextChangeProperty_CorrectBuild()
         {
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var location = this.DataHelper.SaveLocation(name: "loc1");
 
             this.DataHelper.SaveLocation(name: "loc2");
@@ -134,7 +134,7 @@ namespace SampleSystem.IntegrationTests.Reports
 
             var reportGenerationModel = CreateReportModel(reportRichDTO, new Dictionary<string, object>());
 
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             Assert.IsNotNull(reportStream);
 
@@ -143,21 +143,21 @@ namespace SampleSystem.IntegrationTests.Reports
 
             hrDepartmentProperty.PropertyPath = "HRDepartment.CodeNative";
 
-            sampleSystemGenericReportController.SaveReport(reportRichDTO.ToStrict());
+            sampleSystemGenericReportController.Evaluate(c => c.SaveReport(reportRichDTO.ToStrict()));
 
 
             var reportRichDTO1 = this.GetReport(new ReportIdentityDTO(report.Id));
             var hrDepartmentProperty2 = reportRichDTO1.Properties.Single(z => z.PropertyPath == "HRDepartment.CodeNative");
             hrDepartmentProperty2.PropertyPath = "HRDepartment.Code";
-            sampleSystemGenericReportController.SaveReport(reportRichDTO1.ToStrict());
+            sampleSystemGenericReportController.Evaluate(c => c.SaveReport(reportRichDTO1.ToStrict()));
 
 
-            reportRichDTO = sampleSystemGenericReportController.GetRichReport(reportRichDTO.Identity);
+            reportRichDTO = sampleSystemGenericReportController.Evaluate(c => c.GetRichReport(reportRichDTO.Identity));
 
             reportGenerationModel = CreateReportModel(reportRichDTO, new Dictionary<string, object>());
 
             // Assert
-            reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             Assert.IsNotNull(reportStream);
         }
@@ -166,7 +166,7 @@ namespace SampleSystem.IntegrationTests.Reports
         [TestMethod]
         public void GetEmployeeReport_ReportForPersistentPropertiesWithVirtualFilter_CorrectBuild()
         {
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             this.DataHelper.SaveLocation(name: "loc1");
             this.DataHelper.SaveLocation(name: "loc2");
 
@@ -179,7 +179,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Assert
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             Assert.IsNotNull(reportStream);
         }
@@ -187,7 +187,7 @@ namespace SampleSystem.IntegrationTests.Reports
         [TestMethod]
         public void GetLocationReport_ReportForPersistentPropertiesWithStringFilter_CorrectBuild()
         {
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             this.DataHelper.SaveLocation(name: "loc1");
             this.DataHelper.SaveLocation(name: "loc2");
 
@@ -200,7 +200,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Assert
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             Assert.IsNotNull(reportStream);
         }
@@ -208,7 +208,7 @@ namespace SampleSystem.IntegrationTests.Reports
         [TestMethod]
         public void GetHRDepartmentReport_ReportForPersistentPropertiesWithLocaionFilter_CorrectBuild()
         {
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var loc1 = this.DataHelper.SaveLocation(name: "loc1");
             var loc2 = this.DataHelper.SaveLocation(name: "loc2");
 
@@ -224,7 +224,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Assert
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             Assert.IsNotNull(reportStream);
         }
@@ -238,7 +238,7 @@ namespace SampleSystem.IntegrationTests.Reports
             this.DataHelper.SaveEmployee(nameEng: new Fio() { FirstName = "abcf" }, nameNative: new Fio() { FirstName = "b" }, login: new string(Guid.NewGuid().ToString().Take(20).ToArray()));
 
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var report = this.CreateReport<Employee>("EmployeePersistentProperties");
             AppendOrderedReportProperty(report, "NameEng.FirstName", "NameEng", 1, 1, 0);
             AppendOrderedReportProperty(report, "NameNative.FirstName", "NameNative", 2, 1, 1);
@@ -248,7 +248,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             var actual = new List<Tuple<string, string>>();
 
@@ -274,7 +274,7 @@ namespace SampleSystem.IntegrationTests.Reports
             this.DataHelper.SaveEmployee(nameEng: new Fio() { FirstName = "abcf" }, nameNative: new Fio() { FirstName = "b" }, login: new string(Guid.NewGuid().ToString().Take(20).ToArray()));
 
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var report = this.CreateReport<Employee>("EmployeePersistentProperties");
             AppendReportProperty(report, "LogonName", "logonName");
 
@@ -282,7 +282,7 @@ namespace SampleSystem.IntegrationTests.Reports
 
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             Assert.AreEqual(reportStream.GetSheet().Dimension.Columns, 1);
 
@@ -294,7 +294,7 @@ namespace SampleSystem.IntegrationTests.Reports
 
             reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
-            reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             var sheet = reportStream.GetSheet();
 
@@ -305,7 +305,7 @@ namespace SampleSystem.IntegrationTests.Reports
         public void GetEmployeeReport_ReportForPersistentProperties_CorrectReportExcel()
         {
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var report = this.CreateReport<Employee>("EmployeePersistentProperties");
             AppendReportProperty(report, "BirthDate", "Birth Date");
             AppendReportProperty(report, "NameEng", "Name");
@@ -315,7 +315,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             reportStream.GetSheet()
@@ -329,7 +329,7 @@ namespace SampleSystem.IntegrationTests.Reports
         public void GetEmployeeReport_ReprotWithBoolProperty_CorrectReportExcel()
         {
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
 
             this.DataHelper.SaveEmployee(active: true, nameEng: new Fio() { FirstName = "abc" }, nameNative: new Fio() { FirstName = "a" }, login: new string(Guid.NewGuid().ToString().Take(20).ToArray()));
             this.DataHelper.SaveEmployee(active: false, nameEng: new Fio() { FirstName = "ac" }, nameNative: new Fio() { FirstName = "a" }, login: new string(Guid.NewGuid().ToString().Take(20).ToArray()));
@@ -342,7 +342,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             var sheet = reportStream.GetSheet();
@@ -362,7 +362,7 @@ namespace SampleSystem.IntegrationTests.Reports
         public void GetProjectReport_PersistentPropertyWithEndDate_CorrectReportExcel()
         {
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var startDate = new DateTime(2021, 4, 1);
             var endDate = new DateTime(2021, 4, 10);
 
@@ -376,7 +376,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             var excelWorksheet = reportStream.GetSheet();
@@ -389,7 +389,7 @@ namespace SampleSystem.IntegrationTests.Reports
         public void GetProjectReport_VirtualPropertyWithEndDate_CorrectReportExcel()
         {
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var startDate = new DateTime(2021, 4, 1);
             var endDate = new DateTime(2021, 4, 10);
 
@@ -404,7 +404,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             var excelWorksheet = reportStream.GetSheet();
@@ -417,7 +417,7 @@ namespace SampleSystem.IntegrationTests.Reports
         public void GetEmployeeReport_FilterByEnumParameter_CorrectReportExcel()
         {
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var report = this.CreateReport<Employee>("EmployeePersistentProperties");
             AppendReportProperty(report, "BirthDate", "Birth Date");
             AppendReportProperty(report, "NameEng", "Name");
@@ -429,7 +429,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>() { { "Gender", "0" } });
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             var sheet = reportStream.GetSheet("Parameters");
 
@@ -442,7 +442,7 @@ namespace SampleSystem.IntegrationTests.Reports
         public void GetEmployeeReport_ReportForVirtualProperties_CorrectReportExcel()
         {
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
 
             var report = this.CreateReport<Employee>("EmployeeVirtualProperties");
             AppendReportProperty(report, "AccountName", "Account name");
@@ -452,7 +452,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             reportStream.GetSheet()
                         .CreateValidator()
@@ -465,7 +465,7 @@ namespace SampleSystem.IntegrationTests.Reports
         public void GetEmployeeReport_ValueParameter_CorrectReportExcel()
         {
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var birthDate = DateTime.Now.Date;
 
             this.DataHelper.SaveEmployee(
@@ -488,7 +488,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, parameters);
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             reportStream.GetSheet()
@@ -502,7 +502,7 @@ namespace SampleSystem.IntegrationTests.Reports
         public void GetEmployeeReport_PeriodParameter_CorrectReportExcel()
         {
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var workPeriod = new Period(DateTime.Now.Date.AddDays(-1), DateTime.Now.Date);
 
             this.DataHelper.SaveEmployee(
@@ -526,7 +526,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, parameters);
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             reportStream.GetSheet()
@@ -540,7 +540,7 @@ namespace SampleSystem.IntegrationTests.Reports
         public void GetEmployeeReport_ReferenceParameter_CorrectReportExcel()
         {
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var locationId = this.DataHelper.SaveLocation(name: "Moscow");
 
             var hrDepartmentId = this.DataHelper.SaveHRDepartment(name: "Department", location: locationId);
@@ -566,7 +566,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, parameters);
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             reportStream.GetSheet()
@@ -584,7 +584,7 @@ namespace SampleSystem.IntegrationTests.Reports
         public void GetEmployeeReport_ParameterThatContainsPropertyWithTheSameType_CorrectReportExcel()
         {
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var legalEntityId = this.DataHelper.SaveCompanyLegalEntity(name: "Luxoft Professional");
             var locationId = this.DataHelper.SaveLocation(name: "Moscow");
 
@@ -615,7 +615,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, parameters);
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             reportStream.GetSheet()
@@ -630,7 +630,7 @@ namespace SampleSystem.IntegrationTests.Reports
         public void GetStream_TwoReportForDepartmentWithOtherLocationSubset_Correct()
         {
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var report1 = this.CreateReport<HRDepartment>("HRDepartmentReport");
             AppendReportProperty(report1, "Name", "Name");
             AppendReportProperty(report1, "Location/Name", "Location/Name");
@@ -649,7 +649,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var models = dto.Select(z => CreateReportModel(z));
 
             // Act
-            Action buildReports = () => models.Foreach(z => sampleSystemGenericReportController.GetStream(z));
+            Action buildReports = () => models.Foreach(z => sampleSystemGenericReportController.Evaluate(c => c.GetStream(z)));
 
             // Assert
             buildReports.Should().NotThrow();
@@ -659,7 +659,7 @@ namespace SampleSystem.IntegrationTests.Reports
         public void GetDepartmentTest()
         {
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var report = this.CreateReport<HRDepartment>("HRDepartmentReport");
             AppendReportProperty(report, "Name", "Name");
             AppendReportProperty(report, "Location/Name", "Location/Name");
@@ -669,7 +669,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO);
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             Assert.IsNotNull(reportStream);
@@ -679,7 +679,7 @@ namespace SampleSystem.IntegrationTests.Reports
         public void GeneratateReport_FilterPropertyFromParameter_SuccesedGenerate()
         {
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var locationIdentity = this.DataHelper.SaveLocation();
 
             var report = this.CreateReport<HRDepartment>("HRDepartmentReport");
@@ -697,7 +697,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var generateModel = CreateReportModel(reportDTO, parameters);
 
             // Act
-            var result = sampleSystemGenericReportController.GetStream(generateModel);
+            var result = sampleSystemGenericReportController.Evaluate(c => c.GetStream(generateModel));
 
             // Assert
             Assert.IsNotNull(result);
@@ -707,7 +707,7 @@ namespace SampleSystem.IntegrationTests.Reports
         public void GeneratateReport_AddFilterPropertyFromParameter_SuccesedGenerate()
         {
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var locationIdentity = this.DataHelper.SaveLocation();
 
             var report = this.CreateReport<HRDepartment>("HRDepartmentReport");
@@ -718,7 +718,7 @@ namespace SampleSystem.IntegrationTests.Reports
 
             var reportGenerationModel = CreateReportModel(reportDTO);
 
-            var prevReportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var prevReportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             AppendReportParameter<Location>(report, "loc");
             AppendReportFilter(report, "Location", "eq", "loc");
@@ -731,7 +731,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var nextReportGenerationModel = CreateReportModel(reportDTO, parameters);
 
             // Act
-            var nextReportStream = sampleSystemGenericReportController.GetStream(nextReportGenerationModel);
+            var nextReportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(nextReportGenerationModel));
 
             // Assert
             Assert.IsNotNull(nextReportStream);
@@ -742,7 +742,7 @@ namespace SampleSystem.IntegrationTests.Reports
         public void GetEmployeeReport_ReportWithSecurityProperty_CorrectReportExcel()
         {
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             this.DataHelper.SaveEmployee(
                 login: "john@luxoft.com", personalCellPhone: "1234567");
 
@@ -754,7 +754,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             reportStream.GetSheet()
@@ -769,7 +769,7 @@ namespace SampleSystem.IntegrationTests.Reports
         public void GetReportForUnSecuredDomainType_CorrectReportExcel()
         {
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var entityId = this.DataHelper.SaveCompanyLegalEntity(Guid.NewGuid());
 
             this.EvaluateWrite(context =>
@@ -793,7 +793,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             reportStream.GetSheet()
@@ -806,16 +806,16 @@ namespace SampleSystem.IntegrationTests.Reports
         [TestMethod]
         public void GetSimpleReportParameterValuesByTypeName_Correct()
         {
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var expectedLocationName = "Test Location";
 
             this.DataHelper.SaveLocation(name: expectedLocationName);
 
-            var results = sampleSystemGenericReportController.GetSimpleReportParameterValuesByTypeName(new GetSimpleReportParameterValuesByTypeNameRequest
+            var results = sampleSystemGenericReportController.Evaluate(c => c.GetSimpleReportParameterValuesByTypeName(new GetSimpleReportParameterValuesByTypeNameRequest
             {
                     typeName = "Location",
                     odataQueryString = "$select=Id, DesignValue&$top=80&$orderby=DesignValue"
-            });
+            }));
 
             Assert.IsTrue(results.Items.Any(z => z.DesignValue == expectedLocationName));
         }
@@ -824,7 +824,7 @@ namespace SampleSystem.IntegrationTests.Reports
         public void GetEmployeeReport_ContextualParameter_CorrectReportExcel()
         {
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var businessUnitIdentity = this.DataHelper.SaveBusinessUnit(name: "Test BusinessUnit");
 
             this.DataHelper.SaveEmployee(
@@ -850,7 +850,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, parameters);
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             reportStream.GetSheet()
@@ -868,13 +868,14 @@ namespace SampleSystem.IntegrationTests.Reports
 
             var principalIdentity = this.AuthHelper.SavePrincipal(Tester, true);
 
-            var businessRole = this.GetAuthorizationController().GetRichBusinessRoleByName("SecretariatNotification");
+            var businessRole = this.GetAuthControllerEvaluator().Evaluate(c => c.GetRichBusinessRoleByName("SecretariatNotification"));
 
-            var operation = this.GetAuthorizationController().GetSimpleOperationByName(SampleSystemSecurityOperationCode.EmployeeView.ToString());
+            var operation = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleOperationByName(SampleSystemSecurityOperationCode.EmployeeView.ToString()));
 
             var permission = new PermissionStrictDTO { Role = businessRole.Identity };
 
-            this.GetAuthorizationController().SavePermission(new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, permission));
+            var saveRequest = new AuthSLJsonController.SavePermissionAutoRequest(principalIdentity, permission);
+            this.GetAuthControllerEvaluator().Evaluate(c => c.SavePermission(saveRequest));
 
             var report = this.CreateReport<Employee>("Employees");
             AppendReportProperty(report, "Login", "Login");
@@ -883,7 +884,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = this.GetController<SampleSystemGenericReportController>(Tester).GetStream(reportGenerationModel);
+            var reportStream = this.GetControllerEvaluator<SampleSystemGenericReportController>(Tester).Evaluate(c => c.GetStream(reportGenerationModel));
 
             // проверяем, что отчет пустой,
             // поскольку прав просмотр на сотрудника, а именно на поле Login,
@@ -902,9 +903,9 @@ namespace SampleSystem.IntegrationTests.Reports
                 Operation = operation,
             });
 
-            this.GetAuthorizationController().SaveBusinessRole(businessRole.ToStrict());
+            this.GetAuthControllerEvaluator().Evaluate(c => c.SaveBusinessRole(businessRole.ToStrict()));
 
-            reportStream = this.GetController<SampleSystemGenericReportController>(Tester).GetStream(reportGenerationModel);
+            reportStream = this.GetControllerEvaluator<SampleSystemGenericReportController>(Tester).Evaluate(c => c.GetStream(reportGenerationModel));
 
             // проверяем, что отчет содержит ожидаемые данные,
             // поскольку право на просмотр на сотрудника, а именно на поле Login,
@@ -925,7 +926,7 @@ namespace SampleSystem.IntegrationTests.Reports
             this.DataHelper.SaveEmployee(pin: 10, nameEng: new Fio { FirstName = "abc" }, nameNative: new Fio { FirstName = "a" }, login: new string(Guid.NewGuid().ToString().Take(20).ToArray()));
 
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var report = this.CreateReport<Employee>("EmployeePersistentProperties");
             AppendOrderedReportProperty(report, "NameEng.FirstName", "NameEng", 1, 1, 0);
             AppendOrderedReportProperty(report, "NameNative.FirstName", "NameNative", 2, 1, 1);
@@ -936,7 +937,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             var sheet = reportStream.GetSheet();
@@ -961,7 +962,7 @@ namespace SampleSystem.IntegrationTests.Reports
             this.DataHelper.SaveEmployee(pin: 10, nameEng: new Fio { FirstName = "abc" }, nameNative: new Fio { FirstName = "a" }, login: new string(Guid.NewGuid().ToString().Take(20).ToArray()));
 
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var report = this.CreateReport<Employee>("EmployeePersistentProperties");
             AppendOrderedReportProperty(report, "NameEng.FirstName", "NameEng", 1, 1, 0);
             AppendOrderedReportProperty(report, "NameNative.FirstName", "NameNative", 2, 1, 1);
@@ -973,7 +974,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             var sheet = reportStream.GetSheet();
@@ -1000,7 +1001,7 @@ namespace SampleSystem.IntegrationTests.Reports
             this.DataHelper.SaveEmployee(hireDate: hireDate, pin: 10, nameEng: new Fio { FirstName = "abc" }, nameNative: new Fio { FirstName = "a" }, login: new string(Guid.NewGuid().ToString().Take(20).ToArray()));
 
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var report = this.CreateReport<Employee>("EmployeePersistentProperties");
             AppendOrderedReportProperty(report, "NameEng.FirstName", "NameEng", 1, 1, 0);
             AppendOrderedReportProperty(report, "NameNative.FirstName", "NameNative", 2, 1, 1);
@@ -1012,7 +1013,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>());
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             var sheet = reportStream.GetSheet();
@@ -1032,7 +1033,7 @@ namespace SampleSystem.IntegrationTests.Reports
         public void GetEmployeeReport_FilterByNullableDate_ShouldBeCorrectReportExcel()
         {
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var hireDate = DateTime.Now;
             var employeeFirstName = "Employee";
             var employeePin = (int)TimeSpan.FromTicks(DateTime.Now.Ticks).TotalDays;
@@ -1056,7 +1057,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>() { { versionPropertyDate, 1 } });
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             reportStream.GetSheet()
@@ -1071,7 +1072,7 @@ namespace SampleSystem.IntegrationTests.Reports
         public void GetEmployeeReportWithSecurityFields_FilterByNullableDate_ShouldBeCorrectReportExcel()
         {
             // Arrange
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var hireDate = DateTime.Now;
             var employeeFirstName = "Employee";
             var employeePin = (int)TimeSpan.FromTicks(DateTime.Now.Ticks).TotalDays;
@@ -1097,7 +1098,7 @@ namespace SampleSystem.IntegrationTests.Reports
             var reportGenerationModel = CreateReportModel(reportDTO, new Dictionary<string, object>() { { versionPropertyDate, 1 } });
 
             // Act
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             // Assert
             reportStream.GetSheet()
@@ -1111,7 +1112,7 @@ namespace SampleSystem.IntegrationTests.Reports
         [TestMethod]
         public void GetEmployeeReport_ChangeOrderProperties_CorrectBuild()
         {
-            var sampleSystemGenericReportController = this.GetController<SampleSystemGenericReportController>();
+            var sampleSystemGenericReportController = this.GetControllerEvaluator<SampleSystemGenericReportController>();
             var location = this.DataHelper.SaveLocation(name: "loc1");
 
             this.DataHelper.SaveLocation(name: "loc2");
@@ -1130,7 +1131,7 @@ namespace SampleSystem.IntegrationTests.Reports
 
             var reportGenerationModel = CreateReportModel(reportRichDTO, new Dictionary<string, object>());
 
-            var reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            var reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             Assert.IsNotNull(reportStream);
 
@@ -1140,14 +1141,14 @@ namespace SampleSystem.IntegrationTests.Reports
 
             properties.Foreach(z => z.Order = (z.Order + 1) % properties.Count);
 
-            sampleSystemGenericReportController.SaveReport(reportRichDTO.ToStrict());
+            sampleSystemGenericReportController.Evaluate(c => c.SaveReport(reportRichDTO.ToStrict()));
 
-            reportRichDTO = sampleSystemGenericReportController.GetRichReport(reportRichDTO.Identity);
+            reportRichDTO = sampleSystemGenericReportController.Evaluate(c => c.GetRichReport(reportRichDTO.Identity));
 
             reportGenerationModel = CreateReportModel(reportRichDTO, new Dictionary<string, object>());
 
             // Assert
-            reportStream = sampleSystemGenericReportController.GetStream(reportGenerationModel);
+            reportStream = sampleSystemGenericReportController.Evaluate(c => c.GetStream(reportGenerationModel));
 
             Assert.IsNotNull(reportStream);
         }
@@ -1276,7 +1277,7 @@ namespace SampleSystem.IntegrationTests.Reports
 
         private ReportRichDTO GetReport(ReportIdentityDTO reportIdentityDTO)
         {
-            return this.GetConfigurationController().GetRichReport(reportIdentityDTO);
+            return this.GetConfigurationControllerEvaluator().Evaluate(c => c.GetRichReport(reportIdentityDTO));
         }
 
         private ReportIdentityDTO SaveReport(Report report)

@@ -10,7 +10,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="WorkflowCore" Version="3.6.3" />
+    <PackageReference Include="WorkflowCore.Persistence.SqlServer" Version="3.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Framework.App.ServiceEnvironment\Framework.App.ServiceEnvironment.csproj" />
+    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.ApproveWorkflow\Framework.Authorization.ApproveWorkflow.csproj" />
 
     <ProjectReference Include="..\SampleSystem.BLL\SampleSystem.BLL.csproj" />
     <ProjectReference Include="..\SampleSystem.Events\SampleSystem.Events.csproj" />

@@ -29,10 +29,6 @@ namespace Framework.DomainDriven.WebApiNetCore
             this.ExceptionProcessor = exceptionProcessor ?? throw new ArgumentNullException(nameof(exceptionProcessor));
         }
 
-        /// <summary>
-        ///     Current Principal Name
-        /// </summary>
-        public string PrincipalName { get; set; }
 
         public abstract IServiceProvider ServiceProvider { get; set; }
 

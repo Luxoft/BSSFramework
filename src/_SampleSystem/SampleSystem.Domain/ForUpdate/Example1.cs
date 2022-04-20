@@ -7,8 +7,8 @@ using Framework.Persistent;
 namespace SampleSystem.Domain
 {
     [BLLViewRole, BLLSaveRole(SaveType = BLLSaveType.Both)]
-    [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.SystemIntegration)]
-    [SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.SystemIntegration)]
+    [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.LocationView)]
+    [SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.LocationEdit)]
     public class Example1 : AuditPersistentDomainObjectBase, IMaster<Example2>
     {
         private readonly ICollection<Example2> items2 = new HashSet<Example2>();
@@ -33,8 +33,8 @@ namespace SampleSystem.Domain
             set { this.field2 = value; }
         }
 
-        [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.SystemIntegration)]
-        [SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.SystemIntegration)]
+        [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.LocationView)]
+        [SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.LocationEdit)]
         public virtual Guid Field3
         {
             get { return this.field3; }

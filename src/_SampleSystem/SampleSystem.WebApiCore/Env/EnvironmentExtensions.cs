@@ -1,4 +1,7 @@
-﻿using Framework.Authorization.BLL;
+﻿using System;
+
+using Framework.Authorization.ApproveWorkflow;
+using Framework.Authorization.BLL;
 using Framework.Authorization.Generated.DAL.NHibernate;
 using Framework.Cap;
 using Framework.Configuration.BLL;
@@ -9,9 +12,12 @@ using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.NHibernate;
+using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Exceptions;
+
+using JetBrains.Annotations;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +30,8 @@ using SampleSystem.Generated.DAL.NHibernate;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.CustomReports;
 using SampleSystem.WebApiCore.Env.Database;
+
+using WorkflowCore.Interface;
 
 using UserAuthenticationService = SampleSystem.WebApiCore.Env.UserAuthenticationService;
 
@@ -80,8 +88,27 @@ namespace SampleSystem.WebApiCore
                 .AddSingleton<IServiceEnvironment<IAuthorizationBLLContext>>(x => x.GetRequiredService<SampleSystemServiceEnvironment>())
                 .AddSingleton<IServiceEnvironment<IConfigurationBLLContext>>(x => x.GetRequiredService<SampleSystemServiceEnvironment>());
 
+            services.AddScoped<IScopedContextEvaluator<IAuthorizationBLLContext>, ScopedContextEvaluator<IAuthorizationBLLContext>>();
+
             return services;
         }
 
+        public static IServiceCollection AddWorkflowCore([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration)
+        {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+
+            return services.AddWorkflowCore(configuration["WorkflowCoreConnectionString"]);
+        }
+
+        public static IServiceCollection AddWorkflowCore([NotNull] this IServiceCollection services, [NotNull] string connectionString)
+        {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+            if (connectionString == null) throw new ArgumentNullException(nameof(connectionString));
+
+            return services
+                   .AddWorkflow(x => x.UseSqlServer(connectionString, true, true))
+                   .AddLogging();
+        }
     }
 }

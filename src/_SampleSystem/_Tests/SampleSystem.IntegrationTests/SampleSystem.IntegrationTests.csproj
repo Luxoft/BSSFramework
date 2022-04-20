@@ -20,6 +20,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Remove="__Support\Scripts\SampleSystem\Create WorkflowCoreExecutionError View.sql" />
+    <None Remove="__Support\Scripts\SampleSystem\Create WorkflowCoreInstance View.sql" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\..\Framework.AutomationCore\Framework.AutomationCore.csproj" />
     <ProjectReference Include="..\..\SampleSystem.WebApiCore\SampleSystem.WebApiCore.csproj" />
 

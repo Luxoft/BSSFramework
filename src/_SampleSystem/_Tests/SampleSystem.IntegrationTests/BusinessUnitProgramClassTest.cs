@@ -18,9 +18,9 @@ namespace SampleSystem.IntegrationTests
         [TestInitialize]
         public void TestData()
         {
-            var businessUnitTypeController = this.GetController<BusinessUnitTypeController>();
-            var lobType = businessUnitTypeController.GetSimpleBusinessUnitTypeByName(DefaultConstants.BUSINESS_UNIT_TYPE_LOB_NAME);
-            var programType = businessUnitTypeController.GetSimpleBusinessUnitTypeByName(DefaultConstants.BUSINESS_UNIT_TYPE_PROGRAM_NAME);
+            var businessUnitTypeController = this.GetControllerEvaluator<BusinessUnitTypeController>();
+            var lobType = businessUnitTypeController.Evaluate(c => c.GetSimpleBusinessUnitTypeByName(DefaultConstants.BUSINESS_UNIT_TYPE_LOB_NAME));
+            var programType = businessUnitTypeController.Evaluate(c => c.GetSimpleBusinessUnitTypeByName(DefaultConstants.BUSINESS_UNIT_TYPE_PROGRAM_NAME));
 
             var profitCenter = this.DataHelper.SaveBusinessUnit(type: programType.Identity, name: "ProfitCenter"); ;
 
@@ -35,7 +35,7 @@ namespace SampleSystem.IntegrationTests
         public void Get_SortByVirtualProperty_CheckOrderSuccessed()
         {
             // Arrange
-            var businessUnitQueryController = this.GetController<SampleSystem.WebApiCore.Controllers.MainQuery.BusinessUnitQueryController>();
+            var businessUnitQueryController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.MainQuery.BusinessUnitQueryController>();
 
             var filter = new BusinessUnitProgramClassFilterModelStrictDTO
             {
@@ -43,11 +43,11 @@ namespace SampleSystem.IntegrationTests
             };
 
             // Act
-            var actualResult = businessUnitQueryController.GetBusinessUnitProgramClassesByODataQueryStringWithFilter(new GetBusinessUnitProgramClassesByODataQueryStringWithFilterAutoRequest
+            var actualResult = businessUnitQueryController.Evaluate(c => c.GetBusinessUnitProgramClassesByODataQueryStringWithFilter(new GetBusinessUnitProgramClassesByODataQueryStringWithFilterAutoRequest
                 {
                     odataQueryString = "$top=70&$orderby=VirtualValue",
                     filter = filter
-                }).Items;
+                })).Items;
 
             // Assert
 
@@ -63,18 +63,18 @@ namespace SampleSystem.IntegrationTests
         {
             // Arrange
             var namePart = "gramm";
-            var businessUnitQueryController = this.GetController<SampleSystem.WebApiCore.Controllers.MainQuery.BusinessUnitQueryController>();
+            var businessUnitQueryController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.MainQuery.BusinessUnitQueryController>();
             var filter = new BusinessUnitProgramClassFilterModelStrictDTO
             {
                 FilterVirtualName = namePart,
             };
 
             // Act
-            var actualResult = businessUnitQueryController.GetBusinessUnitProgramClassesByODataQueryStringWithFilter(new GetBusinessUnitProgramClassesByODataQueryStringWithFilterAutoRequest
+            var actualResult = businessUnitQueryController.Evaluate(c => c.GetBusinessUnitProgramClassesByODataQueryStringWithFilter(new GetBusinessUnitProgramClassesByODataQueryStringWithFilterAutoRequest
                 {
                     odataQueryString = "$top=70&$orderby=VirtualValue",
                     filter = filter
-                }).Items;
+                })).Items;
 
             // Assert
             actualResult.Count.Should().Be(3);

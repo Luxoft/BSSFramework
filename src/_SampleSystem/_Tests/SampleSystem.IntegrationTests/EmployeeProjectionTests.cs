@@ -111,10 +111,10 @@ namespace SampleSystem.IntegrationTests
         {
             // Arrange
             var identity = this.DataHelper.SaveEmployee(Guid.NewGuid());
-            var controller = this.GetController<EmployeeQueryController>();
+            var controller = this.GetControllerEvaluator<EmployeeQueryController>();
 
             // Act
-            var result = controller.GetTestEmployeesByODataQueryString($"$filter=id eq GUID'{identity.Id}'");
+            var result = controller.Evaluate(c => c.GetTestEmployeesByODataQueryString($"$filter=id eq GUID'{identity.Id}'"));
             var employee = result.Items.SingleOrDefault(e => e.Id == identity.Id);
 
             // Assert
@@ -126,12 +126,11 @@ namespace SampleSystem.IntegrationTests
         {
             // Arrange
             var expected = new[] { ProjectionPrincipalName, TestEmployee2Login }.ToArray(Maybe.Return);
-            var controller = this.GetController<EmployeeQueryController>(ProjectionPrincipalName);
+            var controller = this.GetControllerEvaluator<EmployeeQueryController>(ProjectionPrincipalName);
 
             // Act
-            var actual = controller
-                         .GetTestEmployeesByODataQueryString("$filter=CoreBusinessUnit ne null")
-                         .Items.Select(dto => dto.Login);
+            var actual = controller.Evaluate(c => c.GetTestEmployeesByODataQueryString("$filter=CoreBusinessUnit ne null"))
+                                                   .Items.Select(dto => dto.Login);
 
             // Assert
             actual.Should().BeEquivalentTo(expected);
@@ -141,12 +140,10 @@ namespace SampleSystem.IntegrationTests
         public void EmployeeProjectionSecurityTestNoAccess()
         {
             // Arrange
-            var controller = this.GetController<EmployeeQueryController>(TestEmployee1Login);
+            var controller = this.GetControllerEvaluator<EmployeeQueryController>(TestEmployee1Login);
 
             // Act
-            var result = controller
-                         .GetTestEmployeesByODataQueryString("$filter=CoreBusinessUnit ne null")
-                         .Items;
+            var result = controller.Evaluate(c => c.GetTestEmployeesByODataQueryString("$filter=CoreBusinessUnit ne null")).Items;
 
             // Assert
             var positions = result.Select(dto => dto.PositionName);
@@ -159,12 +156,10 @@ namespace SampleSystem.IntegrationTests
         public void EmployeeProjectionSecurityTestHasAccess()
         {
             // Arrange
-            var controller = this.GetController<EmployeeQueryController>(TestEmployee3Login);
+            var controller = this.GetControllerEvaluator<EmployeeQueryController>(TestEmployee3Login);
 
             // Act
-            var result = controller
-                         .GetTestEmployeesByODataQueryString("$filter=CoreBusinessUnit ne null")
-                         .Items;
+            var result = controller.Evaluate(c => c.GetTestEmployeesByODataQueryString("$filter=CoreBusinessUnit ne null")).Items;
             var positions = result.Select(dto => dto.PositionName);
 
             // Assert
@@ -179,12 +174,11 @@ namespace SampleSystem.IntegrationTests
             logins.Foreach(login => this.DataHelper.SaveEmployee(login: login));
 
             var expected = logins.Reverse().ToArray(Maybe.Return);
-            var controller = this.GetController<EmployeeQueryController>();
+            var controller = this.GetControllerEvaluator<EmployeeQueryController>();
 
             // Act
-            var actual = controller
-                         .GetTestEmployeesByODataQueryString("$orderby=Login desc")
-                         .Items.Where(e => e.Login.ToString().StartsWith("PST_")).Select(e => e.Login);
+            var actual = controller.Evaluate(c => c.GetTestEmployeesByODataQueryString("$orderby=Login desc"))
+                                                   .Items.Where(e => e.Login.ToString().StartsWith("PST_")).Select(e => e.Login);
 
             // Assert
             actual.Should().BeEquivalentTo(expected);

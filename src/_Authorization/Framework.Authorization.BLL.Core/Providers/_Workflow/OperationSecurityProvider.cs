@@ -32,9 +32,9 @@ namespace Framework.Authorization.BLL
         {
             get
             {
-                var opeations = this.lazyOperations.Value;
+                var operations = this.lazyOperations.Value;
 
-                return operation => opeations.Contains(operation);
+                return operation => operations.Contains(operation);
             }
         }
 

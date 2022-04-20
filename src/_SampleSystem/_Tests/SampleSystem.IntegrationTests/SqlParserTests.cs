@@ -81,8 +81,8 @@ namespace SampleSystem.IntegrationTests
         public void RemoveHRDepartment_HasEmployeeWithHRDepartment_CorrectExceptionMessage()
         {
             // Arrange
-            var employeeController = this.GetController<EmployeeController>();
-            var hRDepartmentController = this.GetController<HRDepartmentController>();
+            var employeeController = this.MainWebApi.Employee;
+            var hRDepartmentController = this.GetControllerEvaluator<HRDepartmentController>();
 
             var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
 
@@ -101,10 +101,10 @@ namespace SampleSystem.IntegrationTests
 
             var employeeIdentity = this.DataHelper.SaveEmployee(login: "value", coreBusinessUnit: costBuId, location: location);
 
-            var fullEmployee = employeeController.GetFullEmployee(employeeIdentity);
+            var fullEmployee = employeeController.Evaluate(c => c.GetFullEmployee(employeeIdentity));
 
             // Act
-            Action action = () => hRDepartmentController.RemoveHRDepartment(fullEmployee.HRDepartment.Identity);
+            Action action = () => hRDepartmentController.Evaluate(c => c.RemoveHRDepartment(fullEmployee.HRDepartment.Identity));
 
             // Assert
             action.Should().Throw<Exception>().WithMessage($"{nameof(HRDepartment)} cannot be removed because it is used in {nameof(Employee)}");

@@ -12,7 +12,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         {
             return currentScopedServiceProvider == null
                        ? new RootContextEvaluator<IAuthorizationBLLContext>(this, this.RootServiceProvider)
-                       : new ScopeContextEvaluator<IAuthorizationBLLContext>(this, currentScopedServiceProvider);
+                       : new ScopedContextEvaluator<IAuthorizationBLLContext>(this, currentScopedServiceProvider);
         }
     }
 }

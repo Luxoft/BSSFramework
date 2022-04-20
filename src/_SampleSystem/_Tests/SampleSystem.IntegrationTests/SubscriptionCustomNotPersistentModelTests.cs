@@ -1,4 +1,7 @@
 ﻿using System;
+
+using ASP;
+
 using FluentAssertions;
 using Framework.DomainDriven.BLL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -54,12 +57,12 @@ namespace SampleSystem.IntegrationTests
                 bll.Save(country);
             });
 
-            this.GetConfigurationController().ProcessModifications(1000);
+            this.GetConfigurationControllerEvaluator(DefaultConstants.NOTIFICATION_ADMIN).Evaluate(c => c.ProcessModifications(1000));
 
             var notifications = this.GetNotifications();
 
             // Assert
-            notifications.Should().Contain(x => x.TechnicalInformation.MessageTemplateCode == "ASP._DomainChangedByRecipients_NotPersistentCustomModel_MessageTemplate_cshtml");
+            notifications.Should().Contain(x => x.TechnicalInformation.MessageTemplateCode == typeof(_DomainChangedByRecipients_NotPersistentCustomModel_MessageTemplate_cshtml).FullName);
         }
     }
 }

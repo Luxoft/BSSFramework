@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
+using SampleSystem.ServiceEnvironment;
+
 namespace SampleSystem.WebApiCore.Controllers
 {
     [ApiVersion("1.0")]

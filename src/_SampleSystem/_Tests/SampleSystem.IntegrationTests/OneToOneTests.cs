@@ -19,7 +19,7 @@ namespace SampleSystem.IntegrationTests
         public void GetRequestProjection_ContainsOneToOneDetail_Initialized()
         {
             // Arrange
-            var iMRequestQueryController = this.GetController<IMRequestQueryController>();
+            var iMRequestQueryController = this.GetControllerEvaluator<IMRequestQueryController>();
 
             var idents = this.DataHelper.Environment.GetContextEvaluator().Evaluate(
                 DBSessionMode.Write,
@@ -41,7 +41,7 @@ namespace SampleSystem.IntegrationTests
                 });
 
             // Act
-            var result = iMRequestQueryController.GetTestIMRequestsByODataQueryString($"");
+            var result = iMRequestQueryController.Evaluate(c => c.GetTestIMRequestsByODataQueryString(""));
 
             // Assert
             result.Items.Should().Contain(request => request.Id == idents.RequestId && request.OneToOneDetail.Id == idents.DetailId);

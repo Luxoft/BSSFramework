@@ -16,6 +16,10 @@ namespace SampleSystem.BLL
     public class SampleSystemSecurityOperation
     {
         
+        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _approveWorkflowOperation = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.ApproveWorkflowOperation);
+        
+        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _approvingWorkflowOperation = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.ApprovingWorkflowOperation);
+        
         private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _authorizationImpersonate = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.AuthorizationImpersonate);
         
         private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _businessUnitEdit = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitEdit, Framework.HierarchicalExpand.HierarchicalExpandType.Children);
@@ -93,6 +97,22 @@ namespace SampleSystem.BLL
         private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _managementUnitView = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitView, Framework.HierarchicalExpand.HierarchicalExpandType.All);
         
         private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _systemIntegration = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.SystemIntegration);
+        
+        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> ApproveWorkflowOperation
+        {
+            get
+            {
+                return _approveWorkflowOperation;
+            }
+        }
+        
+        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> ApprovingWorkflowOperation
+        {
+            get
+            {
+                return _approvingWorkflowOperation;
+            }
+        }
         
         public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> AuthorizationImpersonate
         {
@@ -564,6 +584,14 @@ namespace SampleSystem.BLL
             {
                 return SampleSystem.BLL.SampleSystemSecurityOperation.SystemIntegration;
             }
+            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.ApproveWorkflowOperation))
+            {
+                return SampleSystem.BLL.SampleSystemSecurityOperation.ApproveWorkflowOperation;
+            }
+            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.ApprovingWorkflowOperation))
+            {
+                return SampleSystem.BLL.SampleSystemSecurityOperation.ApprovingWorkflowOperation;
+            }
             else
             {
                 throw new System.ArgumentOutOfRangeException("code");
@@ -700,11 +728,11 @@ namespace SampleSystem.BLL
             }
             else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.Example1) == domainType))
             {
-                return SampleSystem.SampleSystemSecurityOperationCode.SystemIntegration;
+                return SampleSystem.SampleSystemSecurityOperationCode.LocationView;
             }
             else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.Example1) == domainType))
             {
-                return SampleSystem.SampleSystemSecurityOperationCode.SystemIntegration;
+                return SampleSystem.SampleSystemSecurityOperationCode.LocationEdit;
             }
             else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.HRDepartment) == domainType))
             {
@@ -1669,6 +1697,16 @@ namespace SampleSystem.BLL
     public partial interface ISampleSystemBLLFactoryContainer : Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode, System.Guid>>
     {
         
+        SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLL ApprovePermissionWorkflowDomainObject
+        {
+            get;
+        }
+        
+        SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLLFactory ApprovePermissionWorkflowDomainObjectFactory
+        {
+            get;
+        }
+        
         SampleSystem.BLL.IBusinessUnitBLL BusinessUnit
         {
             get;
@@ -2169,6 +2207,26 @@ namespace SampleSystem.BLL
             get;
         }
         
+        SampleSystem.BLL.IWorkflowCoreExecutionErrorBLL WorkflowCoreExecutionError
+        {
+            get;
+        }
+        
+        SampleSystem.BLL.IWorkflowCoreExecutionErrorBLLFactory WorkflowCoreExecutionErrorFactory
+        {
+            get;
+        }
+        
+        SampleSystem.BLL.IWorkflowCoreInstanceBLL WorkflowCoreInstance
+        {
+            get;
+        }
+        
+        SampleSystem.BLL.IWorkflowCoreInstanceBLLFactory WorkflowCoreInstanceFactory
+        {
+            get;
+        }
+        
         SampleSystem.BLL.IWorkingCalendar1676BLL WorkingCalendar1676
         {
             get;
@@ -2178,6 +2236,14 @@ namespace SampleSystem.BLL
         {
             get;
         }
+    }
+    
+    public partial interface IApprovePermissionWorkflowDomainObjectBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ApprovePermissionWorkflowDomainObject, System.Guid>
+    {
+    }
+    
+    public partial interface IApprovePermissionWorkflowDomainObjectBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IApprovePermissionWorkflowDomainObjectBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>>
+    {
     }
     
     public partial interface IBusinessUnitBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnit, System.Guid>
@@ -2615,6 +2681,22 @@ namespace SampleSystem.BLL
     }
     
     public partial interface ITestSecuritySubObjItem3BLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestSecuritySubObjItem3>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestSecuritySubObjItem3BLL, Framework.SecuritySystem.BLLSecurityMode>
+    {
+    }
+    
+    public partial interface IWorkflowCoreExecutionErrorBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.WorkflowCoreExecutionError, System.Guid>
+    {
+    }
+    
+    public partial interface IWorkflowCoreExecutionErrorBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IWorkflowCoreExecutionErrorBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.WorkflowCoreExecutionError>>
+    {
+    }
+    
+    public partial interface IWorkflowCoreInstanceBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.WorkflowCoreInstance, System.Guid>
+    {
+    }
+    
+    public partial interface IWorkflowCoreInstanceBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.IWorkflowCoreInstanceBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.WorkflowCoreInstance>>
     {
     }
 }

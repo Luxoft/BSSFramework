@@ -45,10 +45,9 @@ namespace SampleSystem.IntegrationTests.__Support.Utils.Framework
                         Role = businessRole
                     };
 
-                    permissionBLL.Save(permissionDomainObject);
+                    this.FindAndSavePermissionFilter(context, currentPermission, permissionDomainObject);
 
-                    this.FindAndSavePermissionFilter(context, currentPermission,
-                                                     permissionDomainObject);
+                    permissionBLL.Save(permissionDomainObject);
                 });
             }
         }
@@ -122,8 +121,6 @@ namespace SampleSystem.IntegrationTests.__Support.Utils.Framework
             {
                 Entity = entity
             };
-
-            context.Authorization.Logics.PermissionFilterItem.Save(item);
         }
 
         private void RemovePermissions(string principalName)

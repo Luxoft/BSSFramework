@@ -43,8 +43,42 @@ namespace Framework.Authorization.BLL
 
             permission.IsDelegatedTo = permission.DelegatedTo.Any();
 
+            this.RecalculateDenormalizedItems(permission);
+
             base.PreRecalculate(permission);
         }
+
+
+        private void RecalculateDenormalizedItems([NotNull] Permission permission)
+        {
+            if (permission == null) throw new ArgumentNullException(nameof(permission));
+
+            var expectedItems = from entityType in this.Context.Logics.EntityType.GetFullList()
+
+                                join filterItem in permission.FilterItems on entityType equals filterItem.EntityType into filterItemGroup
+
+                                from accessId in GetAccessIdents(filterItemGroup.ToArray(fi => fi.Entity.EntityId))
+
+                                select new { EntityType = entityType, EntityId = accessId };
+
+            permission.DenormalizedItems.Merge(expectedItems, pair => pair, di => new { di.EntityType, di.EntityId }, pair => new DenormalizedPermissionItem(permission, pair.EntityType, pair.EntityId), permission.RemoveDetails);
+        }
+
+        private static IEnumerable<Guid> GetAccessIdents(Guid[] baseIdents)
+        {
+            foreach (var baseIdent in baseIdents)
+            {
+                yield return baseIdent;
+            }
+
+            if (!baseIdents.Any())
+            {
+                yield return DenormalizedPermissionItem.GrandAccessGuid;
+            }
+
+            yield return DenormalizedPermissionItem.LowestAccessGuid;
+        }
+
 
         protected override void PostValidate(Permission permission, AuthorizationOperationContext operationContext)
         {

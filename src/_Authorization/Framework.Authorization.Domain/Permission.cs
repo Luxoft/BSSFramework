@@ -37,6 +37,8 @@ namespace Framework.Authorization.Domain
 
         IMaster<Permission>,
 
+        IMaster<DenormalizedPermissionItem>,
+
         IDetail<Permission>,
 
         IDefaultHierarchicalPersistentDomainObjectBase<Permission>,
@@ -48,6 +50,8 @@ namespace Framework.Authorization.Domain
         IStatusObject<PermissionStatus>
     {
         private readonly ICollection<PermissionFilterItem> filterItems = new List<PermissionFilterItem>();
+
+        private readonly ICollection<DenormalizedPermissionItem> denormalizedItems = new List<DenormalizedPermissionItem>();
 
         private readonly ICollection<Permission> delegatedTo = new List<Permission>();
 
@@ -104,6 +108,10 @@ namespace Framework.Authorization.Domain
         /// </summary>
         [UniqueGroup]
         public virtual IEnumerable<PermissionFilterItem> FilterItems => this.filterItems;
+
+        [UniqueGroup]
+        [CustomSerialization(CustomSerializationMode.Ignore)]
+        public virtual IEnumerable<DenormalizedPermissionItem> DenormalizedItems => this.denormalizedItems;
 
         /// <summary>
         /// Коллекция пермиссий, которым данная пермиссия была делегирована
@@ -189,40 +197,21 @@ namespace Framework.Authorization.Domain
             set { this.comment = value.TrimNull(); }
         }
 
-        ICollection<PermissionFilterItem> IMaster<PermissionFilterItem>.Details
-        {
-            get { return (ICollection<PermissionFilterItem>)this.FilterItems; }
-        }
+        ICollection<PermissionFilterItem> IMaster<PermissionFilterItem>.Details => (ICollection<PermissionFilterItem>)this.FilterItems;
 
-        Principal IDetail<Principal>.Master
-        {
-            get { return this.Principal; }
-        }
+        ICollection<DenormalizedPermissionItem> IMaster<DenormalizedPermissionItem>.Details => (ICollection<DenormalizedPermissionItem>)this.DenormalizedItems;
 
-        ICollection<Permission> IMaster<Permission>.Details
-        {
-            get { return this.delegatedTo; }
-        }
+        Principal IDetail<Principal>.Master => this.Principal;
 
-        Permission IDetail<Permission>.Master
-        {
-            get { return this.DelegatedFrom; }
-        }
+        ICollection<Permission> IMaster<Permission>.Details => (ICollection<Permission>)this.DelegatedTo;
 
-        Permission IParentSource<Permission>.Parent
-        {
-            get { return this.DelegatedFrom; }
-        }
+        Permission IDetail<Permission>.Master => this.DelegatedFrom;
 
-        IEnumerable<Permission> IChildrenSource<Permission>.Children
-        {
-            get { return this.DelegatedTo; }
-        }
+        Permission IParentSource<Permission>.Parent => this.DelegatedFrom;
 
-        IEnumerable<IPermissionFilterItem<Guid>> IPermission<Guid>.FilterItems
-        {
-            get { return this.FilterItems; }
-        }
+        IEnumerable<Permission> IChildrenSource<Permission>.Children => this.DelegatedTo;
+
+        IEnumerable<IPermissionFilterItem<Guid>> IPermission<Guid>.FilterItems => this.FilterItems;
 
         /// <summary>
         /// Проверка на уникальноть

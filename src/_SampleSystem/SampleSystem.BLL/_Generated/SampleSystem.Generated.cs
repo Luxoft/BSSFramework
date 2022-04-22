@@ -992,6 +992,27 @@ namespace SampleSystem.BLL
         }
     }
     
+    public partial class TestPlainAuthObjectBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestPlainAuthObject, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ITestPlainAuthObjectBLL
+    {
+        
+		partial void Initialize();
+        
+        public TestPlainAuthObjectBLL(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestPlainAuthObject> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
+                base(context, securityProvider, specificationEvaluator)
+        {
+            this.Initialize();
+        }
+    }
+    
+    public partial class TestPlainAuthObjectBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.BLL.ITestPlainAuthObjectBLL, SampleSystem.BLL.TestPlainAuthObjectBLL, SampleSystem.Domain.TestPlainAuthObject, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.ITestPlainAuthObjectBLLFactory
+    {
+        
+        public TestPlainAuthObjectBLLFactory(SampleSystem.BLL.ISampleSystemBLLContext context) : 
+                base(context)
+        {
+        }
+    }
+    
     public partial class TestRootSecurityObjBLL : SampleSystem.BLL.SecurityDomainBLLBase<SampleSystem.Domain.TestRootSecurityObj, Framework.DomainDriven.BLL.BLLBaseOperation>, SampleSystem.BLL.ITestRootSecurityObjBLL
     {
         
@@ -1235,6 +1256,8 @@ namespace SampleSystem.BLL
         private SampleSystem.BLL.ITestLocationCollectionPropertiesBLL testLocationCollectionPropertiesBLL;
         
         private SampleSystem.BLL.ITestManualEmployeeProjectionBLL testManualEmployeeProjectionBLL;
+        
+        private SampleSystem.BLL.ITestPlainAuthObjectBLL testPlainAuthObjectBLL;
         
         private SampleSystem.BLL.ITestRootSecurityObjBLL testRootSecurityObjBLL;
         
@@ -2183,6 +2206,26 @@ namespace SampleSystem.BLL
             }
         }
         
+        public SampleSystem.BLL.ITestPlainAuthObjectBLL TestPlainAuthObject
+        {
+            get
+            {
+                if (object.ReferenceEquals(this.testPlainAuthObjectBLL, null))
+                {
+                    this.testPlainAuthObjectBLL = this.TestPlainAuthObjectFactory.Create();
+                }
+                return this.testPlainAuthObjectBLL;
+            }
+        }
+        
+        public SampleSystem.BLL.ITestPlainAuthObjectBLLFactory TestPlainAuthObjectFactory
+        {
+            get
+            {
+                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<SampleSystem.BLL.ITestPlainAuthObjectBLLFactory>(this.Context.ServiceProvider);
+            }
+        }
+        
         public SampleSystem.BLL.ITestRootSecurityObjBLL TestRootSecurityObj
         {
             get
@@ -2412,6 +2455,7 @@ namespace SampleSystem.BLL
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ISqlParserTestObjContainerBLLFactory, SampleSystem.BLL.SqlParserTestObjContainerBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestCustomContextSecurityObjBLLFactory, SampleSystem.BLL.TestCustomContextSecurityObjBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestImmutableObjBLLFactory, SampleSystem.BLL.TestImmutableObjBLLFactory>(serviceCollection);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestPlainAuthObjectBLLFactory, SampleSystem.BLL.TestPlainAuthObjectBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestRootSecurityObjBLLFactory, SampleSystem.BLL.TestRootSecurityObjBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestSecurityObjItemBLLFactory, SampleSystem.BLL.TestSecurityObjItemBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<SampleSystem.BLL.ITestSecuritySubObjItemBLLFactory, SampleSystem.BLL.TestSecuritySubObjItemBLLFactory>(serviceCollection);
@@ -2633,6 +2677,10 @@ namespace SampleSystem.BLL
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestImmutableObj)))
             {
                 return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestImmutableObj));
+            }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestPlainAuthObject)))
+            {
+                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestPlainAuthObject));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestRootSecurityObj)))
             {
@@ -2858,6 +2906,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestImmutableObjFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestImmutableObj>)(securityProvider)))));
             }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestPlainAuthObject)))
+            {
+                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestPlainAuthObjectFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestPlainAuthObject>)(securityProvider)))));
+            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestRootSecurityObj)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestRootSecurityObjFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestRootSecurityObj>)(securityProvider)))));
@@ -3082,6 +3134,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestImmutableObjFactory.Create(securityOperation)));
             }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestPlainAuthObject)))
+            {
+                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestPlainAuthObjectFactory.Create(securityOperation)));
+            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestRootSecurityObj)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestRootSecurityObjFactory.Create(securityOperation)));
@@ -3305,6 +3361,10 @@ namespace SampleSystem.BLL
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestImmutableObj)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestImmutableObjFactory.Create(bllSecurityMode)));
+            }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestPlainAuthObject)))
+            {
+                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestPlainAuthObjectFactory.Create(bllSecurityMode)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestRootSecurityObj)))
             {

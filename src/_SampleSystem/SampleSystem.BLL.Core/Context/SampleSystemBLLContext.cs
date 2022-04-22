@@ -43,7 +43,8 @@ namespace SampleSystem.BLL
             [NotNull] Framework.Configuration.BLL.IConfigurationBLLContext configuration,
             [NotNull] ICryptService<CryptSystem> cryptService,
             [NotNull] Func<string, ISampleSystemBLLContext> impersonateFunc,
-            [NotNull] ITypeResolver<string> currentTargetSystemTypeResolver)
+            [NotNull] ITypeResolver<string> currentTargetSystemTypeResolver,
+            [NotNull] IDBSession session)
             : base(serviceProvider, dalFactory, operationListeners, sourceListeners, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService, dateTimeService)
         {
             this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
@@ -58,6 +59,7 @@ namespace SampleSystem.BLL
 
             this._impersonateFunc = impersonateFunc ?? throw new ArgumentNullException(nameof(impersonateFunc));
             this.TypeResolver = currentTargetSystemTypeResolver ?? throw new ArgumentNullException(nameof(currentTargetSystemTypeResolver));
+            this.Session = session ?? throw new ArgumentNullException(nameof(session));
         }
 
         public ISampleSystemSecurityService SecurityService { get; }
@@ -73,6 +75,9 @@ namespace SampleSystem.BLL
         public ICryptService<CryptSystem> CryptService { get; }
 
         public ITypeResolver<string> TypeResolver { get; }
+
+        [NotNull]
+        public IDBSession Session { get; }
 
         public ISampleSystemBLLContext Impersonate(string principalName)
         {

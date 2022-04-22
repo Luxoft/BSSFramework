@@ -24,6 +24,7 @@ namespace Framework.Authorization.BLL
             base.RegisterHandler<Framework.Authorization.Domain.BusinessRoleRootFilterModel>(this.GetBusinessRoleRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.ChangePermissionDelegatesModel>(this.GetChangePermissionDelegatesModelValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.DelegateToItemModel>(this.GetDelegateToItemModelValidationResult);
+            base.RegisterHandler<Framework.Authorization.Domain.DenormalizedPermissionItem>(this.GetDenormalizedPermissionItemValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.EntityType>(this.GetEntityTypeValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.EntityTypeRootFilterModel>(this.GetEntityTypeRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Authorization.Domain.Operation>(this.GetOperationValidationResult);
@@ -74,6 +75,11 @@ namespace Framework.Authorization.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetDelegateToItemModelValidationResult(Framework.Authorization.Domain.DelegateToItemModel source, Framework.Authorization.Domain.AuthorizationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetDenormalizedPermissionItemValidationResult(Framework.Authorization.Domain.DenormalizedPermissionItem source, Framework.Authorization.Domain.AuthorizationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

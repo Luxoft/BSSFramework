@@ -1,4 +1,8 @@
-﻿using SampleSystem.Domain;
+﻿using System.Linq;
+
+using Framework.SecuritySystem;
+
+using SampleSystem.Domain;
 
 namespace SampleSystem.BLL
 {
@@ -47,6 +51,13 @@ namespace SampleSystem.BLL
         public override SampleSystemSecurityPath<ManagementUnit> GetManagementUnitSecurityPath()
         {
             return SampleSystemSecurityPath<ManagementUnit>.Create(v => v);
+        }
+
+        public override SampleSystemSecurityPath<TestPlainAuthObject> GetTestPlainAuthObjectSecurityPath()
+        {
+            return SampleSystemSecurityPath<TestPlainAuthObject>.Create(v => v.Location)
+                                                                .And(v => v.Items.Select(item => item.BusinessUnit), ManySecurityPathMode.All)
+                                                                .And(v => v.Items.Select(item => item.ManagementUnit), ManySecurityPathMode.All);
         }
 
         public override SampleSystemSecurityPath<TestRootSecurityObj> GetTestRootSecurityObjSecurityPath()

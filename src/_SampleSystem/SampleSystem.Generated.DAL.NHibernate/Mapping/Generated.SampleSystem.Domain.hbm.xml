@@ -1063,6 +1063,22 @@
     <property name="TestImmutablePrimitiveProperty" column="testImmutablePrimitiveProperty" access="field.camelcase" />
     <many-to-one name="TestImmutableRefProperty" column="testImmutableRefPropertyId" class="SampleSystem.Domain.Employee" access="field.camelcase" />
   </class>
+  <class name="SampleSystem.Domain.TestItemAuthObject" table="TestItemAuthObject">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BusinessUnit" access="field.camelcase" />
+    <many-to-one name="ManagementUnit" column="managementUnitId" class="SampleSystem.Domain.ManagementUnit" access="field.camelcase" />
+    <many-to-one name="Master" column="masterId" class="SampleSystem.Domain.TestPlainAuthObject" access="field.camelcase" />
+  </class>
   <class name="SampleSystem.Domain.TestObjForNestedBase" table="TestObjForNestedBase">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
@@ -1083,6 +1099,25 @@
     <joined-subclass name="SampleSystem.Domain.TestObjForNested" table="TestObjForNested">
       <key column="id" />
     </joined-subclass>
+  </class>
+  <class name="SampleSystem.Domain.TestPlainAuthObject" table="TestPlainAuthObject">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <property name="Name" column="name" access="field.camelcase" />
+    <many-to-one name="Location" column="locationId" class="SampleSystem.Domain.Location" access="field.camelcase" />
+    <set name="Items" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="masterId" />
+      <one-to-many class="SampleSystem.Domain.TestItemAuthObject" />
+    </set>
   </class>
   <class name="SampleSystem.Domain.TestRootSecurityObj" table="TestRootSecurityObj">
     <id name="Id" column="id" type="Guid" access="field.camelcase">

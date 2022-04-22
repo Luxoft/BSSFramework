@@ -7,5 +7,8 @@ namespace SampleSystem.Domain
     {
         [Framework.DomainDriven.BLL.Security.Lock.GlobalLockAttribute(typeof(BusinessUnitAncestorLink))]
         BusinessUnitAncestorLock,
+
+        [Framework.DomainDriven.BLL.Security.Lock.GlobalLockAttribute(typeof(ManagementUnitAncestorLink))]
+        ManagementUnitAncestorLock,
     }
 }

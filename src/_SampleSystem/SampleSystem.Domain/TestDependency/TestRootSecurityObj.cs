@@ -25,7 +25,7 @@ namespace SampleSystem.Domain
             get { return this.businessUnit; }
             set { this.businessUnit = value; }
         }
-        
+
         public virtual ManagementUnitFluentMapping ManagementUnitFluentMapping
         {
             get { return this.managementUnitFluentMapping; }

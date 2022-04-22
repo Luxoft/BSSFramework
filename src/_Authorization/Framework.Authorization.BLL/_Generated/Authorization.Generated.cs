@@ -32,6 +32,27 @@ namespace Framework.Authorization.BLL
         }
     }
     
+    public partial class DenormalizedPermissionItemBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.DenormalizedPermissionItem, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Authorization.BLL.IDenormalizedPermissionItemBLL
+    {
+        
+		partial void Initialize();
+        
+        public DenormalizedPermissionItemBLL(Framework.Authorization.BLL.IAuthorizationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.DenormalizedPermissionItem> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
+                base(context, securityProvider, specificationEvaluator)
+        {
+            this.Initialize();
+        }
+    }
+    
+    public partial class DenormalizedPermissionItemBLLFactory : Framework.DomainDriven.BLL.Security.BLLFactoryBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.BLL.IDenormalizedPermissionItemBLL, Framework.Authorization.BLL.DenormalizedPermissionItemBLL, Framework.Authorization.Domain.DenormalizedPermissionItem>, Framework.Authorization.BLL.IDenormalizedPermissionItemBLLFactory
+    {
+        
+        public DenormalizedPermissionItemBLLFactory(Framework.Authorization.BLL.IAuthorizationBLLContext context) : 
+                base(context)
+        {
+        }
+    }
+    
     public partial class EntityTypeBLL : Framework.Authorization.BLL.SecurityDomainBLLBase<Framework.Authorization.Domain.EntityType, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Authorization.BLL.IEntityTypeBLL
     {
         
@@ -165,6 +186,8 @@ namespace Framework.Authorization.BLL
         
         private Framework.Authorization.BLL.AuthorizationDefaultBLLFactory defaultBLLFactory;
         
+        private Framework.Authorization.BLL.IDenormalizedPermissionItemBLL denormalizedPermissionItemBLL;
+        
         private Framework.Authorization.BLL.IEntityTypeBLL entityTypeBLL;
         
         private Framework.Authorization.BLL.AuthorizationImplementedBLLFactory implementedBLLFactory;
@@ -213,6 +236,26 @@ namespace Framework.Authorization.BLL
                     this.defaultBLLFactory = new Framework.Authorization.BLL.AuthorizationDefaultBLLFactory(this.Context);
                 }
                 return this.defaultBLLFactory;
+            }
+        }
+        
+        public Framework.Authorization.BLL.IDenormalizedPermissionItemBLL DenormalizedPermissionItem
+        {
+            get
+            {
+                if (object.ReferenceEquals(this.denormalizedPermissionItemBLL, null))
+                {
+                    this.denormalizedPermissionItemBLL = this.DenormalizedPermissionItemFactory.Create();
+                }
+                return this.denormalizedPermissionItemBLL;
+            }
+        }
+        
+        public Framework.Authorization.BLL.IDenormalizedPermissionItemBLLFactory DenormalizedPermissionItemFactory
+        {
+            get
+            {
+                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Framework.Authorization.BLL.IDenormalizedPermissionItemBLLFactory>(this.Context.ServiceProvider);
             }
         }
         
@@ -351,6 +394,7 @@ namespace Framework.Authorization.BLL
         public static void RegisterBLLFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection)
         {
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Authorization.BLL.IBusinessRoleBLLFactory, Framework.Authorization.BLL.BusinessRoleBLLFactory>(serviceCollection);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Authorization.BLL.IDenormalizedPermissionItemBLLFactory, Framework.Authorization.BLL.DenormalizedPermissionItemBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Authorization.BLL.IEntityTypeBLLFactory, Framework.Authorization.BLL.EntityTypeBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Authorization.BLL.IOperationBLLFactory, Framework.Authorization.BLL.OperationBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Authorization.BLL.IPermissionBLLFactory, Framework.Authorization.BLL.PermissionBLLFactory>(serviceCollection);
@@ -388,6 +432,10 @@ namespace Framework.Authorization.BLL
             {
                 return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessRole));
             }
+            else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.DenormalizedPermissionItem)))
+            {
+                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.DenormalizedPermissionItem));
+            }
             else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.EntityType)))
             {
                 return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EntityType));
@@ -423,6 +471,10 @@ namespace Framework.Authorization.BLL
             if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.BusinessRole)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessRoleFactory.Create(((Framework.SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.BusinessRole>)(securityProvider)))));
+            }
+            else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.DenormalizedPermissionItem)))
+            {
+                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.DenormalizedPermissionItemFactory.Create()));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.EntityType)))
             {
@@ -460,6 +512,10 @@ namespace Framework.Authorization.BLL
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessRoleFactory.Create(securityOperation)));
             }
+            else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.DenormalizedPermissionItem)))
+            {
+                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.DenormalizedPermissionItemFactory.Create()));
+            }
             else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.EntityType)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.EntityTypeFactory.Create(securityOperation)));
@@ -495,6 +551,10 @@ namespace Framework.Authorization.BLL
             if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.BusinessRole)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.BusinessRoleFactory.Create(bllSecurityMode)));
+            }
+            else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.DenormalizedPermissionItem)))
+            {
+                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.DenormalizedPermissionItemFactory.Create()));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.EntityType)))
             {

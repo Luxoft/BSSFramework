@@ -113,7 +113,8 @@ namespace SampleSystem.ServiceEnvironment
                 this.Configuration,
                 this.cryptService,
                 this.Impersonate,
-                this.currentTargetSystemTypeResolver);
+                this.currentTargetSystemTypeResolver,
+                this.Session);
         }
 
         /// <summary>

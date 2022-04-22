@@ -26,11 +26,7 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
 
-            var usedTypes = builder.GetUsedTypes().Distinct();
-
-            var permissions = builder.Factory.AuthorizationSystem.GetPermissions(securityOperation, usedTypes);
-
-            var expression = builder.GetSecurityFilterExpression(permissions);
+            var expression = builder.GetSecurityFilterExpression(securityOperation);
 
             this.InjectFunc = q => q.Where(expression);
 

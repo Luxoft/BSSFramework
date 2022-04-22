@@ -15,6 +15,7 @@ using Framework.DomainDriven.BLL.Tracking;
 using Framework.HierarchicalExpand;
 using Framework.Projection;
 using Framework.QueryLanguage;
+using Framework.Security;
 using Framework.SecuritySystem;
 using Framework.Validation;
 
@@ -212,6 +213,15 @@ namespace Framework.Authorization.BLL
             return permissions.Select(permission => permission.ToDictionary(securityTypesCache))
                 .Optimize()
                 .ToList(permission => this.TryExpandPermission(permission, securityOperation.SecurityExpandType));
+        }
+
+        public IQueryable<IPermission<Guid>> GetPermissionQuery<TSecurityOperationCode>(ContextSecurityOperation<TSecurityOperationCode> securityOperation)
+                where TSecurityOperationCode : struct, Enum
+        {
+            var filter = new AvailablePermissionOperationFilter<TSecurityOperationCode>(
+               this.DateTimeService, this.RunAsManager.PrincipalName, securityOperation.Code);
+
+            return this.Logics.Permission.GetUnsecureQueryable().Where(filter.ToFilterExpression());
         }
 
         private IEnumerable<string> GetAccessors(Expression<Func<Principal, bool>> principalFilter, AvailablePermissionFilter permissionFilter)

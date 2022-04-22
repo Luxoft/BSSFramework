@@ -34,20 +34,20 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
         }
 
 
+        public Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression<TSecurityOperation>(ContextSecurityOperation<TSecurityOperation> securityOperation)
+                where TSecurityOperation : struct, Enum
+        {
+            var permissionQuery = this.Factory.AuthorizationSystem.GetPermissionQuery(securityOperation);
+
+            return from filter in this.GetSecurityFilterExpression(securityOperation.SecurityExpandType)
+
+                   select permissionQuery.Any(filter);
+        }
 
 
-        public abstract Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(Dictionary<Type, IEnumerable<TIdent>> permission);
+        public abstract Expression<Func<TDomainObject, Expression<Func<IPermission<TIdent>, bool>>>> GetSecurityFilterExpression(HierarchicalExpandType expandType);
 
         public abstract Expression<Func<IPermission<TIdent>, bool>> GetAccessorsFilter(TDomainObject domainObject, HierarchicalExpandType expandType);
-
-        public abstract IEnumerable<Type> GetUsedTypes();
-
-        public virtual Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(List<Dictionary<Type, IEnumerable<TIdent>>> permissions)
-        {
-            if (permissions == null) throw new ArgumentNullException(nameof(permissions));
-
-            return permissions.BuildOr(this.GetSecurityFilterExpression);
-        }
 
         public Expression<Func<IEnumerable<IPermission<TIdent>>, bool>> GetAccessorsFilterMany(TDomainObject domainObject, HierarchicalExpandType expandType)
         {
@@ -72,13 +72,6 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
             this.Path = path ?? throw new ArgumentNullException(nameof(path));
         }
 
-
-        public override IEnumerable<Type> GetUsedTypes()
-        {
-            return this.Path.GetUsedTypes();
-        }
-
-
         public abstract class SecurityPathExpressionBuilderBase<TInnerPath> : SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent, TInnerPath>
             where TInnerPath : SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>
         {
@@ -96,23 +89,6 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
                 : base(factory, path)
             {
 
-            }
-
-
-            protected abstract Func<IEnumerable<TIdent>, Expression<Func<TDomainObject, bool>>> SecurityFilter { get; }
-
-
-
-            public sealed override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(Dictionary<Type, IEnumerable<TIdent>> permission)
-            {
-                if (permission.TryGetValue(typeof(TSecurityContext), out var securityIdents))
-                {
-                    return this.SecurityFilter(securityIdents);
-                }
-                else
-                {
-                    return _ => true;
-                }
             }
 
             protected abstract IEnumerable<TSecurityContext> GetSecurityObjects(TDomainObject domainObject);
@@ -155,13 +131,12 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
             }
 
 
-            protected override Func<IEnumerable<TIdent>, Expression<Func<TDomainObject, bool>>> SecurityFilter
+            protected override IEnumerable<TSecurityContext> GetSecurityObjects(TDomainObject domainObject)
             {
-                get { return this.Path.SecurityFilter; }
+                throw new NotImplementedException();
             }
 
-
-            protected override IEnumerable<TSecurityContext> GetSecurityObjects(TDomainObject domainObject)
+            public override Expression<Func<TDomainObject, Expression<Func<IPermission<TIdent>, bool>>>> GetSecurityFilterExpression(HierarchicalExpandType expandType)
             {
                 throw new NotImplementedException();
             }
@@ -175,10 +150,11 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
 
             }
 
-
-            public override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(Dictionary<Type, IEnumerable<TIdent>> _)
+            public override Expression<Func<TDomainObject, Expression<Func<IPermission<TIdent>, bool>>>> GetSecurityFilterExpression(HierarchicalExpandType expandType)
             {
-                return this.Path.SecurityFilter;
+                return from result in this.Path.SecurityFilter
+
+                       select (Expression<Func<IPermission<TIdent>, bool>>)(_ => result);
             }
 
             public override Expression<Func<IPermission<TIdent>, bool>> GetAccessorsFilter(TDomainObject domainObject, HierarchicalExpandType expandType)
@@ -201,26 +177,27 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
             }
 
 
-            protected override Func<IEnumerable<TIdent>, Expression<Func<TDomainObject, bool>>> SecurityFilter
+            public override Expression<Func<TDomainObject, Expression<Func<IPermission<TIdent>, bool>>>> GetSecurityFilterExpression(HierarchicalExpandType expandType)
             {
-                get
+                switch (this.Path.Mode)
                 {
-                    switch (this.Path.Mode)
-                    {
-                        case SingleSecurityMode.AllowNull:
+                    case SingleSecurityMode.AllowNull:
 
-                            return securityIdents => from securityObject in this.Path.SecurityPath
+                        return domainObject => permission =>
 
-                                                     select securityObject == null || securityIdents.Contains(securityObject.Id);
+                                                       ;
 
-                        case SingleSecurityMode.Strictly:
+                                                       from securityObject in this.Path.SecurityPath
 
-                            return securityIdents => from securityObject in this.Path.SecurityPath
+                                                 select securityObject == null || securityIdents.Contains(securityObject.Id);
 
-                                                     select securityIdents.Contains(securityObject.Id);
+                    case SingleSecurityMode.Strictly:
 
-                        default: throw new ArgumentOutOfRangeException(this.Path.Mode.ToString());
-                    }
+                        return securityIdents => from securityObject in this.Path.SecurityPath
+
+                                                 select securityIdents.Contains(securityObject.Id);
+
+                    default: throw new ArgumentOutOfRangeException(this.Path.Mode.ToString());
                 }
             }
 
@@ -250,13 +227,11 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
             }
 
 
-            protected override Func<IEnumerable<TIdent>, Expression<Func<TDomainObject, bool>>> SecurityFilter
+            public override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression()
             {
-                get
+                switch (this.Path.Mode)
                 {
-                    switch (this.Path.Mode)
-                    {
-                        case ManySecurityPathMode.AnyStrictly:
+                    case ManySecurityPathMode.AnyStrictly:
                         {
                             if (this.Path.SecurityPathQ != null)
                             {
@@ -276,7 +251,7 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
                             }
                         }
 
-                        case ManySecurityPathMode.Any:
+                    case ManySecurityPathMode.Any:
                         {
                             if (this.Path.SecurityPathQ != null)
                             {
@@ -296,7 +271,7 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
                             }
                         }
 
-                        case ManySecurityPathMode.All:
+                    case ManySecurityPathMode.All:
                         {
                             if (this.Path.SecurityPathQ != null)
                             {
@@ -316,10 +291,9 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
                             }
                         }
 
-                        default:
+                    default:
 
-                            throw new ArgumentOutOfRangeException("this.Path.Mode");
-                    }
+                        throw new ArgumentOutOfRangeException("this.Path.Mode");
                 }
             }
 
@@ -379,7 +353,7 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
                 this._getAccessableFilterLazy = new Lazy<Expression<Func<TDomainObject, HierarchicalExpandType, Expression<Func<IPermission<TIdent>, bool>>>>>(() => this.CreateAccessorsFilterExpression(), true);
             }
 
-            public override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(List<Dictionary<Type, IEnumerable<TIdent>>> permissions)
+            public override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression()
             {
                 var filterExpression = permissions.BuildOr(this._nestedBuilder.GetSecurityFilterExpression);
 
@@ -417,11 +391,6 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
 
                         throw new ArgumentOutOfRangeException("this.Path.Mode");
                 }
-            }
-
-            public override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(Dictionary<Type, IEnumerable<TIdent>> permission)
-            {
-                throw new NotImplementedException();
             }
 
             public override Expression<Func<IPermission<TIdent>, bool>> GetAccessorsFilter(TDomainObject domainObject, HierarchicalExpandType expandType)
@@ -506,12 +475,10 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
             protected abstract Expression<Func<TArg, bool>> BuildOperation<TArg>(Expression<Func<TArg, bool>> arg1, Expression<Func<TArg, bool>> arg2);
 
 
-            public override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(Dictionary<Type, IEnumerable<TIdent>> permission)
+            public override Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression()
             {
-                if (permission == null) throw new ArgumentNullException(nameof(permission));
-
-                var leftFilter = this.LeftBuilder.GetSecurityFilterExpression(permission);
-                var rightFilter = this.RightBuilder.GetSecurityFilterExpression(permission);
+                var leftFilter = this.LeftBuilder.GetSecurityFilterExpression();
+                var rightFilter = this.RightBuilder.GetSecurityFilterExpression();
 
                 return this.BuildOperation(leftFilter, rightFilter);
             }

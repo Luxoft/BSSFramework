@@ -91,9 +91,9 @@ namespace SampleSystem.IntegrationTests
             objIdents[0].Should().Be(this.testPlainAuthObjectIdent);
         }
 
-        private static Expression<Func<TestPlainAuthObject, bool>> BuildTestPlainAuthObjectSecurityFilter(ISampleSystemBLLContext context, SecurityOperation<SampleSystemSecurityOperationCode> securityOperations)
+        private static Expression<Func<TestPlainAuthObject, bool>> BuildTestPlainAuthObjectSecurityFilter(ISampleSystemBLLContext context, SecurityOperation<SampleSystemSecurityOperationCode> securityOperation)
         {
-            var operationId = securityOperations.Code.GetSecurityOperationAttribute().Guid;
+            var operationId = securityOperation.Code.GetSecurityOperationAttribute().Guid;
 
             var authContext = context.Authorization;
 

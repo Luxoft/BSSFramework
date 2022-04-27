@@ -91,7 +91,7 @@ namespace SampleSystem.IntegrationTests
             objIdents[0].Should().Be(this.testPlainAuthObjectIdent);
         }
 
-        private static Expression<Func<TestPlainAuthObject, bool>> BuildTestPlainAuthObjectSecurityFilter(ISampleSystemBLLContext context, SecurityOperation<SampleSystemSecurityOperationCode> securityOperation)
+        private static Expression<Func<TestPlainAuthObject, bool>> BuildTestPlainAuthObjectSecurityFilter(ISampleSystemBLLContext context, ContextSecurityOperation<SampleSystemSecurityOperationCode> securityOperation)
         {
             var operationId = securityOperation.Code.GetSecurityOperationAttribute().Guid;
 
@@ -109,16 +109,7 @@ namespace SampleSystem.IntegrationTests
 
             return testPlainAuthObject =>
 
-                           (from permission in permissionQuery
-
-                            where permission.Principal == authContext.CurrentPrincipal
-
-                            where permission.Role.BusinessRoleOperationLinks.Any(
-                             link => link.Operation.Id == operationId)
-
-                            where permission.Period.Contains(today)
-
-                            where permission.Status == PermissionStatus.Approved
+                           (from permission in authContext.GetPermissionQuery(securityOperation)
 
                             from permissionBuId in permission.DenormalizedItems.Where(item => item.EntityType.Id == entityTypeDict[nameof(BusinessUnit)]).Select(pfe => pfe.EntityId)
 

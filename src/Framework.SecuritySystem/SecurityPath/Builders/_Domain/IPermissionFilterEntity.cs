@@ -2,7 +2,7 @@
 {
     public interface IPermissionFilterEntity<out TIdent>
     {
-        IEntityType EntityType { get; }
+        IEntityType<TIdent> EntityType { get; }
 
         TIdent EntityId { get; }
     }

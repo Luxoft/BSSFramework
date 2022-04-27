@@ -221,7 +221,9 @@ namespace Framework.Authorization.BLL
             var filter = new AvailablePermissionOperationFilter<TSecurityOperationCode>(
                this.DateTimeService, this.RunAsManager.PrincipalName, securityOperation.Code);
 
-            return this.Logics.Permission.GetUnsecureQueryable().Where(filter.ToFilterExpression());
+            return this.Logics.Permission.GetUnsecureQueryable().Where(filter.ToFilterExpression())
+                       //.Visit(AuthVisitor)
+                       ;
         }
 
         private IEnumerable<string> GetAccessors(Expression<Func<Principal, bool>> principalFilter, AvailablePermissionFilter permissionFilter)
@@ -253,18 +255,10 @@ namespace Framework.Authorization.BLL
         {
             if (principalFilter == null) throw new ArgumentNullException(nameof(principalFilter));
 
-            var mapVisitor = new OverrideParameterTypeVisitor(
-                new Dictionary<Type, Type>
-                {
-                    { typeof(IPrincipal<Guid>), typeof(Principal) },
-                    { typeof(IPermission<Guid>), typeof(Permission) },
-                    { typeof(IPermissionFilterItem<Guid>), typeof(PermissionFilterItem) },
-                    { typeof(IPermissionFilterEntity<Guid>), typeof(PermissionFilterEntity) },
-                    { typeof(IEntityType), typeof(EntityType) }
-                });
+
 
             return this.GetAccessors(
-                (Expression<Func<Principal, bool>>)mapVisitor.Visit(principalFilter),
+                (Expression<Func<Principal, bool>>)AuthVisitor.Visit(principalFilter),
                 new AvailablePermissionOperationFilter<TSecurityOperationCode>(this.DateTimeService, null, securityOperationCode));
         }
 
@@ -325,5 +319,16 @@ namespace Framework.Authorization.BLL
         }
 
         IAuthorizationBLLContext IAuthorizationBLLContextContainer<IAuthorizationBLLContext>.Authorization => this;
+
+        private static readonly ExpressionVisitor AuthVisitor = new OverrideParameterTypeVisitor(
+         new Dictionary<Type, Type>
+         {
+                 { typeof(IPrincipal<Guid>), typeof(Principal) },
+                 { typeof(IPermission<Guid>), typeof(Permission) },
+                 { typeof(IPermissionFilterItem<Guid>), typeof(PermissionFilterItem) },
+                 { typeof(IPermissionFilterEntity<Guid>), typeof(PermissionFilterEntity) },
+                 { typeof(IEntityType<Guid>), typeof(EntityType) },
+                 { typeof(IDenormalizedPermissionItem<Guid>), typeof(DenormalizedPermissionItem) },
+         });
     }
 }

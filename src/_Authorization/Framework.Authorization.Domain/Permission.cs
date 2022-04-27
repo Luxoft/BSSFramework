@@ -213,6 +213,8 @@ namespace Framework.Authorization.Domain
 
         IEnumerable<IPermissionFilterItem<Guid>> IPermission<Guid>.FilterItems => this.FilterItems;
 
+        IEnumerable<IDenormalizedPermissionItem<Guid>> IPermission<Guid>.DenormalizedItems => this.DenormalizedItems;
+
         /// <summary>
         /// Проверка на уникальноть
         /// </summary>

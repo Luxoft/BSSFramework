@@ -4,6 +4,7 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Restriction;
+using Framework.SecuritySystem;
 
 using JetBrains.Annotations;
 
@@ -14,7 +15,7 @@ namespace Framework.Authorization.Domain;
 /// </summary>
 [DomainType("{81CFA0DD-4190-40B7-8D08-3ABCA08BCABE}")]
 [BLLRole]
-public class DenormalizedPermissionItem : AuditPersistentDomainObjectBase, IDetail<Permission>
+public class DenormalizedPermissionItem : AuditPersistentDomainObjectBase, IDetail<Permission>, IDenormalizedPermissionItem<Guid>
 {
     private readonly Permission permission;
 
@@ -23,8 +24,6 @@ public class DenormalizedPermissionItem : AuditPersistentDomainObjectBase, IDeta
     private Guid entityId;
 
     public static readonly Guid GrandAccessGuid = new Guid("{77777777-7777-7777-7777-777777777777}");
-
-    public static readonly Guid LowestAccessGuid = new Guid("{33333333-3333-3333-3333-333333333333}");
 
     protected DenormalizedPermissionItem()
     {
@@ -72,4 +71,6 @@ public class DenormalizedPermissionItem : AuditPersistentDomainObjectBase, IDeta
     {
         get { return this.permission; }
     }
+
+    IEntityType<Guid> IDenormalizedPermissionItem<Guid>.EntityType => this.EntityType;
 }

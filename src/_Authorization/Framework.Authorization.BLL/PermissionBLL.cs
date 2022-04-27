@@ -76,7 +76,7 @@ namespace Framework.Authorization.BLL
                 yield return DenormalizedPermissionItem.GrandAccessGuid;
             }
 
-            yield return DenormalizedPermissionItem.LowestAccessGuid;
+            //yield return DenormalizedPermissionItem.LowestAccessGuid;
         }
 
 

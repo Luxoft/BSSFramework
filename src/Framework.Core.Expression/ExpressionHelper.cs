@@ -13,6 +13,14 @@ namespace Framework.Core
             return x => x;
         }
 
+        public static Expression<Func<T, T, bool>> GetEquality<T>()
+        {
+            var p1 = Expression.Parameter(typeof(T));
+            var p2 = Expression.Parameter(typeof(T));
+
+            return Expression.Lambda<Func<T, T, bool>>(Expression.Equal(p1, p2), p1, p2);
+        }
+
         public static MemberExpression PropertyOrFieldAuto(Expression expr, [NotNull] string memberName)
         {
             if (expr == null) throw new ArgumentNullException(nameof(expr));

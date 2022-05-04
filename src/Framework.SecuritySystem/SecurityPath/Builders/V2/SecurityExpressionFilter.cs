@@ -24,9 +24,10 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
             ContextSecurityOperation<TSecurityOperationCode> securityOperation)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
-            if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
+            if (securityOperation == null) throw new
+                    ArgumentNullException(nameof(securityOperation));
 
-            var expression = builder.GetSecurityFilterExpression(securityOperation).ExpandEval();
+            var expression = builder.GetSecurityFilterExpression(securityOperation).ExpandConst().ExpandEval();
 
             this.InjectFunc = q => q.Where(expression);
 

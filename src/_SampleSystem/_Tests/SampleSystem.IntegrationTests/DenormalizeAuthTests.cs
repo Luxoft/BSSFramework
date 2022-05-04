@@ -135,22 +135,32 @@ namespace SampleSystem.IntegrationTests
 
         private static Expression<Func<TestPlainAuthObject, IPermission<Guid>, bool>> BuildBuFilterExpression(ISampleSystemBLLContext context, IReadOnlyDictionary<string, Guid> entityTypeDict, HierarchicalExpandType expandType)
         {
+            var entityTypeId = context.Authorization.ResolveSecurityTypeId(typeof(BusinessUnit));
+
+            var eqIdentsExpr = ExpressionHelper.GetEquality<Guid>();
+
             var getIdents = ExpressionHelper.Create((IPermission<Guid> permission) =>
-                                                            permission.FilterItems.Select(fi => fi.Entity).Where(item => item.EntityType.Id == entityTypeDict[nameof(BusinessUnit)]).Select(pfe => pfe.EntityId));
+                                                            permission.FilterItems
+                                                                      .Select(fi => fi.Entity)
+                                                                      .Where(item => eqIdentsExpr.Eval(item.EntityType.Id, entityTypeId))
+                                                                      .Select(pfe => pfe.EntityId))
+                                            .ExpandConst()
+                                            .ExpandEval();
 
-            var buExpander = (IHierarchicalObjectQueryableExpander<Guid>)context.HierarchicalObjectExpanderFactory.Create(typeof(BusinessUnit));
+            var expander = (IHierarchicalObjectQueryableExpander<Guid>)context.HierarchicalObjectExpanderFactory.Create(typeof(BusinessUnit));
 
+            var expandExpression = expander.GetExpandExpression(expandType);
 
-            var expandExpression = buExpander.GetExpandExpression(expandType);
+            var expandExpressionQ = from idents in getIdents
+                                    select expandExpression.Eval(idents);
 
-            var expandBuQ = from idents in getIdents
+            return (domainObject, permission) =>
 
-                            select expandExpression.Eval(idents);
+                           !getIdents.Eval(permission).Any()
 
-            return (testPlainAuthObject, permission) =>
+                           || !domainObject.Items.Select(item => item.BusinessUnit).Any()
 
-                           !getIdents.Eval(permission).Any() || testPlainAuthObject.Items.Select(item => item.BusinessUnit.Id)
-                                                                  .All(buId => expandBuQ.Eval(permission).Contains(buId));
+                           || domainObject.Items.Select(item => item.BusinessUnit).Any(item => expandExpressionQ.Eval(permission).Contains(item.Id));
         }
     }
 }

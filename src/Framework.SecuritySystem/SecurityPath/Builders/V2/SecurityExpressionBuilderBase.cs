@@ -183,8 +183,15 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
             {
                 var entityTypeId = this.Factory.AuthorizationSystem.ResolveSecurityTypeId(typeof(TSecurityContext));
 
+                var eqIdentsExpr = ExpressionHelper.GetEquality<TIdent>();
+
                 var getIdents = ExpressionHelper.Create((IPermission<TIdent> permission) =>
-                    permission.FilterItems.Select(fi => fi.Entity).Where(item => item.EntityType.Id.Equals(entityTypeId)).Select(pfe => pfe.EntityId));
+                    permission.FilterItems
+                              .Select(fi => fi.Entity)
+                              .Where(item => eqIdentsExpr.Eval(item.EntityType.Id, entityTypeId))
+                              .Select(pfe => pfe.EntityId))
+                                                .ExpandConst()
+                                                .ExpandEval();
 
                 var expander = this.Factory.HierarchicalObjectExpanderFactory.CreateQuery(typeof(TSecurityContext));
 
@@ -248,8 +255,15 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
             {
                 var entityTypeId = this.Factory.AuthorizationSystem.ResolveSecurityTypeId(typeof(TSecurityContext));
 
+                var eqIdentsExpr = ExpressionHelper.GetEquality<TIdent>();
+
                 var getIdents = ExpressionHelper.Create((IPermission<TIdent> permission) =>
-                                                                permission.FilterItems.Select(fi => fi.Entity).Where(item => item.EntityType.Id.Equals(entityTypeId)).Select(pfe => pfe.EntityId));
+                                                                permission.FilterItems
+                                                                          .Select(fi => fi.Entity)
+                                                                          .Where(item => eqIdentsExpr.Eval(item.EntityType.Id, entityTypeId))
+                                                                          .Select(pfe => pfe.EntityId))
+                                                .ExpandConst()
+                                                .ExpandEval();
 
                 var expander = (IHierarchicalObjectQueryableExpander<TIdent>)this.Factory.HierarchicalObjectExpanderFactory.Create(typeof(TSecurityContext));
 

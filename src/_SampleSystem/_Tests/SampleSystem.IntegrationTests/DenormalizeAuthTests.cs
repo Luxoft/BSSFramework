@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
+using System.Reflection;
 
 using FluentAssertions;
 
@@ -9,6 +11,7 @@ using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.NHibernate;
+using Framework.HierarchicalExpand;
 using Framework.Security;
 using Framework.SecuritySystem;
 
@@ -20,6 +23,8 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 using BusinessRole = SampleSystem.IntegrationTests.__Support.Utils.BusinessRole;
+using Expression = System.Linq.Expressions.Expression;
+using LambdaExpression = System.Linq.Expressions.LambdaExpression;
 
 namespace SampleSystem.IntegrationTests
 {
@@ -34,6 +39,8 @@ namespace SampleSystem.IntegrationTests
 
         private ManagementUnitIdentityDTO mbu1Ident;
 
+        private BusinessUnitIdentityDTO bu2Ident;
+
 
         private TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdent;
 
@@ -45,6 +52,8 @@ namespace SampleSystem.IntegrationTests
             this.loc1Ident = this.DataHelper.SaveLocation();
 
             this.bu1Ident = this.DataHelper.SaveBusinessUnit();
+
+            this.bu2Ident = this.DataHelper.SaveBusinessUnit();
 
             this.mbu1Ident = this.DataHelper.SaveManagementUnit();
 
@@ -73,19 +82,38 @@ namespace SampleSystem.IntegrationTests
 
                                    this.testPlainAuthObjectIdent = sampleObj.ToIdentityDTO();
                                });
+
+            this.EvaluateWrite(
+                               context =>
+                               {
+                                   var sampleObj = new TestPlainAuthObject
+                                                   {
+                                                           Name = "obj2",
+                                                           Location = context.Logics.Location.GetById(this.loc1Ident.Id, true),
+                                                   };
+
+                                   new TestItemAuthObject(sampleObj)
+                                   {
+                                           BusinessUnit = context.Logics.BusinessUnit.GetById(this.bu2Ident.Id, true),
+                                           ManagementUnit = context.Logics.ManagementUnit.GetById(this.mbu1Ident.Id, true)
+                                   };
+
+                                   context.Logics.TestPlainAuthObject.Save(sampleObj);
+                               });
         }
 
         [TestMethod]
         public void Test_AAA()
         {
             var objIdents = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, TestEmployeeLogin, ctx =>
-            {
-                var filter = BuildTestPlainAuthObjectSecurityFilter(ctx, SampleSystemSecurityOperation.EmployeeView);
+                                                                                                                   {
+                                                                                                                       var baseFilter = BuildTestPlainAuthObjectSecurityFilter(ctx, SampleSystemSecurityOperation.EmployeeView);
+                                                                                                                       var filter = baseFilter.ExpandConst().ExpandEval();
 
-                var objs = ctx.Logics.TestPlainAuthObject.GetUnsecureQueryable().Where(filter).ToList();
+                                                                                                                       var objs = ctx.Logics.TestPlainAuthObject.GetUnsecureQueryable().Where(filter).ToList();
 
-                return objs.ToList(obj => obj.ToIdentityDTO());
-            });
+                                                                                                                       return objs.ToList(obj => obj.ToIdentityDTO());
+                                                                                                                   });
 
             objIdents.Count().Should().Be(1);
             objIdents[0].Should().Be(this.testPlainAuthObjectIdent);
@@ -93,110 +121,36 @@ namespace SampleSystem.IntegrationTests
 
         private static Expression<Func<TestPlainAuthObject, bool>> BuildTestPlainAuthObjectSecurityFilter(ISampleSystemBLLContext context, ContextSecurityOperation<SampleSystemSecurityOperationCode> securityOperation)
         {
-            var operationId = securityOperation.Code.GetSecurityOperationAttribute().Guid;
-
             var authContext = context.Authorization;
-
-            var permissionQuery = authContext.Logics.Permission.GetUnsecureQueryable();
-
-            var buQuery = context.Logics.Default.Create<BusinessUnit>().GetUnsecureQueryable();
-
-            var buAncestorQuery = context.Logics.Default.Create<BusinessUnitAncestorLink>().GetUnsecureQueryable();
-
-            var today = context.DateTimeService.Today;
 
             var entityTypeDict = authContext.Logics.EntityType.GetFullList().ToDictionary(et => et.Name, et => et.Id);
 
+            var buFilter = BuildBuFilterExpression(context, entityTypeDict, securityOperation.SecurityExpandType);
+
             return testPlainAuthObject =>
+                           authContext.GetPermissionQuery(securityOperation)
+                                      .Any(permission => buFilter.Eval(testPlainAuthObject, permission));
 
-                           (from permission in authContext.GetPermissionQuery(securityOperation)
-
-                            from permissionBuId in permission.DenormalizedItems.Where(item => item.EntityType.Id == entityTypeDict[nameof(BusinessUnit)]).Select(pfe => pfe.EntityId)
-
-                            let availableBusinessUnitIdents = from permissionBuAncestor in buAncestorQuery
-
-                                                              where permissionBuAncestor.Ancestor.Id == permissionBuId
-
-                                                              select permissionBuAncestor.Child.Id
-
-                            let domainObjectBusinessUnits = testPlainAuthObject.Items.Select(item => item.BusinessUnit.Id)
-
-                            ////Any
-                            //where permissionBuId == DenormalizedPermissionItem.GrandAccessGuid
-                            //      || !domainObjectBusinessUnits.Any()
-                            //      || domainObjectBusinessUnits.Any(bu => availableBusinessUnitIdents.Contains(bu))
-
-                            ////AnyStrictly
-                            //where permissionBuId == DenormalizedPermissionItem.GrandAccessGuid
-                            //      || domainObjectBusinessUnits.Any(buId => availableBusinessUnitIdents.Contains(buId))
-
-                            //All
-                            where permissionBuId == DenormalizedPermissionItem.GrandAccessGuid
-                               || domainObjectBusinessUnits.All(buId => availableBusinessUnitIdents.Contains(buId))
-
-                            select permission).Any();
         }
 
-        //private static Expression<Func<TestPlainAuthObject, bool>> BuildTestPlainAuthObjectSecurityFilter(ISampleSystemBLLContext context, SecurityOperation<SampleSystemSecurityOperationCode> securityOperations)
-        //{
-        //    var operationId = securityOperations.Code.GetSecurityOperationAttribute().Guid;
+        private static Expression<Func<TestPlainAuthObject, IPermission<Guid>, bool>> BuildBuFilterExpression(ISampleSystemBLLContext context, IReadOnlyDictionary<string, Guid> entityTypeDict, HierarchicalExpandType expandType)
+        {
+            var getIdents = ExpressionHelper.Create((IPermission<Guid> permission) =>
+                                                            permission.FilterItems.Select(fi => fi.Entity).Where(item => item.EntityType.Id == entityTypeDict[nameof(BusinessUnit)]).Select(pfe => pfe.EntityId));
 
-        //    var authContext = context.Authorization;
-
-        //    var permissionQuery = authContext.Logics.Permission.GetUnsecureQueryable();
-
-        //    var buQuery = context.Logics.Default.Create<BusinessUnit>().GetUnsecureQueryable();
-
-        //    var buAncestorQuery = context.Logics.Default.Create<BusinessUnitAncestorLink>().GetUnsecureQueryable();
-
-        //    var today = context.DateTimeService.Today;
-
-        //    var entityTypeDict = authContext.Logics.EntityType.GetFullList().ToDictionary(et => et.Name, et => et.Id);
-
-        //    return testPlainAuthObject =>
-
-        //                   (from permission in permissionQuery
-
-        //                    where permission.Principal == authContext.CurrentPrincipal
-
-        //                    where permission.Role.BusinessRoleOperationLinks.Any(
-        //                     link => link.Operation.Id == operationId)
-
-        //                    where permission.Period.Contains(today)
-
-        //                    where permission.Status == PermissionStatus.Approved
-
-        //                    let baseAvailableBusinessUnitIdents = permission.FilterItems.Where(pfe => pfe.EntityType.Id == entityTypeDict[nameof(BusinessUnit)]).Select(pfi => pfi.Entity.EntityId)
-
-        //                    let availableBusinessUnitIdents = from permissionBuId in permission.FilterItems.Where(pfe => pfe.EntityType.Id == entityTypeDict[nameof(BusinessUnit)]).Select(pfi => pfi.Entity.EntityId)
-
-        //                                                      from permissionBuAncestor in buAncestorQuery
-
-        //                                                      where permissionBuAncestor.Ancestor.Id == permissionBuId
-
-        //                                                      select permissionBuAncestor.Child.Id
-
-        //                    //Any
-        //                    let domainObjectBusinessUnits = testPlainAuthObject.Items.Select(item => item.BusinessUnit.Id)
-
-        //                    where !baseAvailableBusinessUnitIdents.Any()
-        //                          || !domainObjectBusinessUnits.Any()
-        //                          || domainObjectBusinessUnits.Any(bu => availableBusinessUnitIdents.Contains(bu))
-
-        //                    //AnyStrictly
-        //                    //let domainObjectBusinessUnits = testPlainAuthObject.Items.Select(item => item.BusinessUnit.Id)
-        //                    //where domainObjectBusinessUnits.Any(buId => !availableBusinessUnitIdents.Any() || availableBusinessUnitIdents.Contains(buId))
-
-        //                    //All
-        //                    //let domainObjectBusinessUnits = testPlainAuthObject.Items.Select(item => item.BusinessUnit.Id)
-        //                    //where domainObjectBusinessUnits.All(buId => !availableBusinessUnitIdents.Any() || availableBusinessUnitIdents2.Contains(buId))
-        //                      //|| !domainObjectBusinessUnits.Any()
+            var buExpander = (IHierarchicalObjectQueryableExpander<Guid>)context.HierarchicalObjectExpanderFactory.Create(typeof(BusinessUnit));
 
 
-        //                    //&& (locations.Contains(testPlainAuthObject.Location.Id))
+            var expandExpression = buExpander.GetExpandExpression(expandType);
 
+            var expandBuQ = from idents in getIdents
 
-        //                    select permission).Any();
-        //}
+                            select expandExpression.Eval(idents);
+
+            return (testPlainAuthObject, permission) =>
+
+                           !getIdents.Eval(permission).Any() || testPlainAuthObject.Items.Select(item => item.BusinessUnit.Id)
+                                                                  .All(buId => expandBuQ.Eval(permission).Contains(buId));
+        }
     }
 }

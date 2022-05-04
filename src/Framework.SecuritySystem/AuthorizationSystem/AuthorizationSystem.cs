@@ -16,11 +16,15 @@ namespace Framework.SecuritySystem
 
         private readonly IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory;
 
+
         protected AuthorizationSystem(IPrincipalPermissionSource<TIdent> principalPermissionSource, IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory)
         {
             this.principalPermissionSource = principalPermissionSource;
             this.hierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
         }
+
+
+        public abstract TIdent ResolveSecurityTypeId(Type type);
 
         public abstract bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation)
             where TSecurityOperationCode : struct, Enum;

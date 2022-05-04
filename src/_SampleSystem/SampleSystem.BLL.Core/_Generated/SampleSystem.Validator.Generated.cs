@@ -71,6 +71,8 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2>(this.GetIntegrationVersionContainer2ValidationResult);
             base.RegisterHandler<SampleSystem.Domain.LegalEntityBase>(this.GetLegalEntityBaseValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Location>(this.GetLocationValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.LocationAncestorLink>(this.GetLocationAncestorLinkValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.LocationToAncestorChildView>(this.GetLocationToAncestorChildViewValidationResult);
             base.RegisterHandler<SampleSystem.Domain.ManagementUnit>(this.GetManagementUnitValidationResult);
             base.RegisterHandler<SampleSystem.Domain.ManagementUnitAncestorLink>(this.GetManagementUnitAncestorLinkValidationResult);
             base.RegisterHandler<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>(this.GetManagementUnitAndBusinessUnitLinkValidationResult);
@@ -426,6 +428,16 @@ namespace SampleSystem.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetLocation1676ValidationResult(SampleSystem.Domain.EnversBug1676.Location1676 source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetLocationAncestorLinkValidationResult(SampleSystem.Domain.LocationAncestorLink source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetLocationToAncestorChildViewValidationResult(SampleSystem.Domain.LocationToAncestorChildView source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

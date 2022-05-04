@@ -61,7 +61,11 @@ namespace Framework.Authorization.BLL
 
                                 select new { EntityType = entityType, EntityId = accessId };
 
-            permission.DenormalizedItems.Merge(expectedItems, pair => pair, di => new { di.EntityType, di.EntityId }, pair => new DenormalizedPermissionItem(permission, pair.EntityType, pair.EntityId), permission.RemoveDetails);
+            var mergeResult = permission.DenormalizedItems.GetMergeResult(expectedItems, di => new { di.EntityType, di.EntityId }, pair => pair);
+
+            permission.RemoveDetails(mergeResult.RemovingItems);
+
+            mergeResult.AddingItems.Foreach(pair => new DenormalizedPermissionItem(permission, pair.EntityType, pair.EntityId));
         }
 
         private static IEnumerable<Guid> GetAccessIdents(Guid[] baseIdents)

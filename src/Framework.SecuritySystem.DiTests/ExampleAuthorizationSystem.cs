@@ -14,6 +14,8 @@ namespace Framework.SecuritySystem.DiTests
         {
         }
 
+        public override Guid ResolveSecurityTypeId(Type type) => throw new NotImplementedException();
+
         public override bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation) => throw new NotImplementedException();
 
         public override IEnumerable<string> GetAccessors<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode, Expression<Func<IPrincipal<Guid>, bool>> principalFilter) => throw new NotImplementedException();

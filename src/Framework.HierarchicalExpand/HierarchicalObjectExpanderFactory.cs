@@ -19,6 +19,8 @@ namespace Framework.HierarchicalExpand
 
         private static readonly MethodInfo GenericCreateMethod = typeof(HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, TIdent>).GetMethod(nameof(Create), BindingFlags.Public | BindingFlags.Instance, true);
 
+        private static readonly MethodInfo GenericQueryCreateMethod = typeof(HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, TIdent>).GetMethod(nameof(CreateQuery), BindingFlags.Public | BindingFlags.Instance, true);
+
         private static readonly MethodInfo GenericCreateHierarchicalMethod = typeof(HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, TIdent>).GetMethod(nameof(CreateHierarchical), BindingFlags.NonPublic | BindingFlags.Instance, true);
 
         private static readonly MethodInfo GenericCreateHierarchicalWithAncestorLinkMethod = typeof(HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, TIdent>).GetMethod(nameof(CreateHierarchicalWithAncestorLink), BindingFlags.NonPublic | BindingFlags.Instance, true);
@@ -60,6 +62,13 @@ namespace Framework.HierarchicalExpand
             }
         }
 
+
+        public virtual IHierarchicalObjectQueryableExpander<TIdent> CreateQuery<TDomainObject>()
+                where TDomainObject : class, TPersistentDomainObjectBase
+        {
+            return (IHierarchicalObjectQueryableExpander<TIdent>)this.Create<TDomainObject>();
+        }
+
         protected virtual IHierarchicalObjectExpander<TIdent> CreatePlain<TDomainObject>()
             where TDomainObject : class, TPersistentDomainObjectBase
         {
@@ -90,6 +99,18 @@ namespace Framework.HierarchicalExpand
             }
 
             return (IHierarchicalObjectExpander<TIdent>)GenericCreateMethod.MakeGenericMethod(domainType).Invoke(this, Array.Empty<object>());
+        }
+
+        IHierarchicalObjectQueryableExpander<TIdent> IHierarchicalObjectExpanderFactory<TIdent>.CreateQuery(Type domainType)
+        {
+            if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+
+            if (!typeof(TPersistentDomainObjectBase).IsAssignableFrom(domainType))
+            {
+                throw new InvalidOperationException($"Domain Type {domainType.Name} must be derived from {typeof(TPersistentDomainObjectBase).Name}");
+            }
+
+            return (IHierarchicalObjectQueryableExpander<TIdent>)GenericQueryCreateMethod.MakeGenericMethod(domainType).Invoke(this, Array.Empty<object>());
         }
     }
 }

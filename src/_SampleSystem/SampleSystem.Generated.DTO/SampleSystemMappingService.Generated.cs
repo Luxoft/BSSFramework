@@ -584,6 +584,10 @@ namespace SampleSystem.Generated.DTO
         
         void MapLocation1676(SampleSystem.Domain.EnversBug1676.Location1676 domainObject, SampleSystem.Generated.DTO.Location1676EventSimpleDTO mappingObject);
         
+        void MapLocationAncestorLink(SampleSystem.Domain.LocationAncestorLink domainObject, SampleSystem.Generated.DTO.LocationAncestorLinkEventRichDTO mappingObject);
+        
+        void MapLocationToAncestorChildView(SampleSystem.Domain.LocationToAncestorChildView domainObject, SampleSystem.Generated.DTO.LocationToAncestorChildViewEventRichDTO mappingObject);
+        
         void MapManagementUnit(SampleSystem.Domain.ManagementUnit domainObject, SampleSystem.Generated.DTO.ManagementUnitVisualDTO mappingObject);
         
         void MapManagementUnit(SampleSystem.Domain.ManagementUnit domainObject, SampleSystem.Generated.DTO.ManagementUnitSimpleDTO mappingObject);
@@ -1129,6 +1133,10 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.Location ToLocation(SampleSystem.Generated.DTO.LocationIntegrationSimpleDTO locationSimpleIntegrationDTO);
         
         SampleSystem.Domain.EnversBug1676.Location1676 ToLocation1676(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676IdentityDTO);
+        
+        SampleSystem.Domain.LocationAncestorLink ToLocationAncestorLink(SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO locationAncestorLinkIdentityDTO);
+        
+        SampleSystem.Domain.LocationToAncestorChildView ToLocationToAncestorChildView(SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO locationToAncestorChildViewIdentityDTO);
         
         SampleSystem.Domain.ManagementUnit ToManagementUnit(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentityDTO);
         
@@ -5883,6 +5891,60 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Version = domainObject.Version;
         }
         
+        public virtual void MapLocationAncestorLink(SampleSystem.Domain.LocationAncestorLink domainObject, SampleSystem.Generated.DTO.LocationAncestorLinkEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            if (!object.ReferenceEquals(domainObject.Ancestor, null))
+            {
+                mappingObject.Ancestor = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Ancestor, this);
+            }
+            else
+            {
+                mappingObject.Ancestor = null;
+            }
+            if (!object.ReferenceEquals(domainObject.Child, null))
+            {
+                mappingObject.Child = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Child, this);
+            }
+            else
+            {
+                mappingObject.Child = null;
+            }
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Version = domainObject.Version;
+        }
+        
+        public virtual void MapLocationToAncestorChildView(SampleSystem.Domain.LocationToAncestorChildView domainObject, SampleSystem.Generated.DTO.LocationToAncestorChildViewEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            if (!object.ReferenceEquals(domainObject.ChildOrAncestor, null))
+            {
+                mappingObject.ChildOrAncestor = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.ChildOrAncestor, this);
+            }
+            else
+            {
+                mappingObject.ChildOrAncestor = null;
+            }
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.Id = domainObject.Id;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            if (!object.ReferenceEquals(domainObject.Source, null))
+            {
+                mappingObject.Source = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Source, this);
+            }
+            else
+            {
+                mappingObject.Source = null;
+            }
+            mappingObject.Version = domainObject.Version;
+        }
+        
         public virtual void MapManagementUnit(SampleSystem.Domain.ManagementUnit domainObject, SampleSystem.Generated.DTO.ManagementUnitVisualDTO mappingObject)
         {
             mappingObject.Name = domainObject.Name;
@@ -8302,6 +8364,16 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.EnversBug1676.Location1676 ToLocation1676(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676IdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.EnversBug1676.Location1676>(location1676IdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.LocationAncestorLink ToLocationAncestorLink(SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO locationAncestorLinkIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.LocationAncestorLink>(locationAncestorLinkIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.LocationToAncestorChildView ToLocationToAncestorChildView(SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO locationToAncestorChildViewIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.LocationToAncestorChildView>(locationToAncestorChildViewIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.ManagementUnit ToManagementUnit(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdentityDTO)

@@ -442,21 +442,42 @@ namespace Framework.Core
             inputExpr.Compile(cache)(arg1);
         }
 
-        public static TResult Eval<TResult>(this Expression<Func<TResult>> inputExpr, ILambdaCompileCache cache = null)
+        public static TResult Eval<TResult>(this Expression<Func<TResult>> inputExpr)
+        {
+            if (inputExpr == null) throw new ArgumentNullException(nameof(inputExpr));
+
+            return inputExpr.Eval(null);
+        }
+
+        public static TResult Eval<TResult>(this Expression<Func<TResult>> inputExpr, ILambdaCompileCache cache)
         {
             if (inputExpr == null) throw new ArgumentNullException(nameof(inputExpr));
 
             return inputExpr.Compile(cache)();
         }
 
-        public static TResult Eval<T1, TResult>(this Expression<Func<T1, TResult>> inputExpr, T1 arg1, ILambdaCompileCache cache = null)
+        public static TResult Eval<T1, TResult>(this Expression<Func<T1, TResult>> inputExpr, T1 arg1)
+        {
+            if (inputExpr == null) throw new ArgumentNullException(nameof(inputExpr));
+
+            return inputExpr.Eval(arg1, null);
+        }
+
+        public static TResult Eval<T1, TResult>(this Expression<Func<T1, TResult>> inputExpr, T1 arg1, ILambdaCompileCache cache)
         {
             if (inputExpr == null) throw new ArgumentNullException(nameof(inputExpr));
 
             return inputExpr.Compile(cache)(arg1);
         }
 
-        public static TResult Eval<T1, T2, TResult>(this Expression<Func<T1, T2, TResult>> inputExpr, T1 arg1, T2 arg2, ILambdaCompileCache cache = null)
+        public static TResult Eval<T1, T2, TResult>(this Expression<Func<T1, T2, TResult>> inputExpr, T1 arg1, T2 arg2)
+        {
+            if (inputExpr == null) throw new ArgumentNullException(nameof(inputExpr));
+
+            return inputExpr.Eval(arg1, arg2, null);
+        }
+
+        public static TResult Eval<T1, T2, TResult>(this Expression<Func<T1, T2, TResult>> inputExpr, T1 arg1, T2 arg2, ILambdaCompileCache cache)
         {
             if (inputExpr == null) throw new ArgumentNullException(nameof(inputExpr));
 

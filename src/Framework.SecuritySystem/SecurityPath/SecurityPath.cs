@@ -160,9 +160,7 @@ namespace Framework.SecuritySystem
 
             internal ConditionPath(Expression<Func<TDomainObject, bool>> securityFilter)
             {
-                if (securityFilter == null) throw new ArgumentNullException(nameof(securityFilter));
-
-                this.SecurityFilter = securityFilter;
+                this.SecurityFilter = securityFilter ?? throw new ArgumentNullException(nameof(securityFilter));
             }
 
 

@@ -746,6 +746,16 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.LocationIdentityDTO(domainObject);
         }
         
+        public static SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO ToIdentityDTO(this SampleSystem.Domain.LocationAncestorLink domainObject)
+        {
+            return new SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO(domainObject);
+        }
+        
+        public static SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO ToIdentityDTO(this SampleSystem.Domain.LocationToAncestorChildView domainObject)
+        {
+            return new SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO(domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.ManagementUnitIdentityDTO ToIdentityDTO(this SampleSystem.Domain.ManagementUnit domainObject)
         {
             return new SampleSystem.Generated.DTO.ManagementUnitIdentityDTO(domainObject);
@@ -1112,6 +1122,16 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.LocationIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Location> domainObjects)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.LocationAncestorLink> domainObjects)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO> ToIdentityDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.LocationToAncestorChildView> domainObjects)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject));
         }
@@ -2236,6 +2256,16 @@ namespace SampleSystem.Generated.DTO
             return new SampleSystem.Generated.DTO.LocationEventRichDTO(mappingService, domainObject);
         }
         
+        public static SampleSystem.Generated.DTO.LocationAncestorLinkEventRichDTO ToRichEventDTO(this SampleSystem.Domain.LocationAncestorLink domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.LocationAncestorLinkEventRichDTO(mappingService, domainObject);
+        }
+        
+        public static SampleSystem.Generated.DTO.LocationToAncestorChildViewEventRichDTO ToRichEventDTO(this SampleSystem.Domain.LocationToAncestorChildView domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return new SampleSystem.Generated.DTO.LocationToAncestorChildViewEventRichDTO(mappingService, domainObject);
+        }
+        
         public static SampleSystem.Generated.DTO.ManagementUnitEventRichDTO ToRichEventDTO(this SampleSystem.Domain.ManagementUnit domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.ManagementUnitEventRichDTO(mappingService, domainObject);
@@ -2702,6 +2732,16 @@ namespace SampleSystem.Generated.DTO
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.LocationEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Location> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.LocationAncestorLinkEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.LocationAncestorLink> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
+        }
+        
+        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.LocationToAncestorChildViewEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.LocationToAncestorChildView> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
         }

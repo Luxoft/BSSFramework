@@ -768,6 +768,14 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetLocationContainer(rule)));
             }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.LocationAncestorLink)))
+            {
+                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetLocationAncestorLinkContainer(rule)));
+            }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.LocationToAncestorChildView)))
+            {
+                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetLocationToAncestorChildViewContainer(rule)));
+            }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ManagementUnit)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetManagementUnitContainer(rule)));
@@ -1814,6 +1822,34 @@ namespace SampleSystem.BLL
             }
         }
         
+        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.LocationAncestorLink> GetLocationAncestorLinkContainer(Framework.Transfering.ViewDTOType rule)
+        {
+            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.LocationAncestorLink>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.LocationAncestorLink>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
+            {
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.LocationAncestorLink>(
+                    fetchRootRule => fetchRootRule.SelectNested(locationAncestorLink => locationAncestorLink.Ancestor).SelectMany(location => location.Children),
+                    fetchRootRule => fetchRootRule.SelectNested(locationAncestorLink => locationAncestorLink.Child).SelectMany(location => location.Children));
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
+            {
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.LocationAncestorLink>(
+                    fetchRootRule => fetchRootRule.SelectNested(locationAncestorLink => locationAncestorLink.Ancestor).SelectMany(location => location.Children),
+                    fetchRootRule => fetchRootRule.SelectNested(locationAncestorLink => locationAncestorLink.Child).SelectMany(location => location.Children));
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException("rule");
+            }
+        }
+        
         protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.Location> GetLocationContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
@@ -1838,6 +1874,34 @@ namespace SampleSystem.BLL
                     fetchRootRule => fetchRootRule.SelectMany(location => location.Children).SelectNested(location => location.Country),
                     fetchRootRule => fetchRootRule.SelectNested(location => location.Country),
                     fetchRootRule => fetchRootRule.SelectNested(location => location.Parent).SelectMany(location => location.Children));
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException("rule");
+            }
+        }
+        
+        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.LocationToAncestorChildView> GetLocationToAncestorChildViewContainer(Framework.Transfering.ViewDTOType rule)
+        {
+            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.LocationToAncestorChildView>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.LocationToAncestorChildView>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
+            {
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.LocationToAncestorChildView>(
+                    fetchRootRule => fetchRootRule.SelectNested(locationToAncestorChildView => locationToAncestorChildView.ChildOrAncestor).SelectMany(location => location.Children),
+                    fetchRootRule => fetchRootRule.SelectNested(locationToAncestorChildView => locationToAncestorChildView.Source).SelectMany(location => location.Children));
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
+            {
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.LocationToAncestorChildView>(
+                    fetchRootRule => fetchRootRule.SelectNested(locationToAncestorChildView => locationToAncestorChildView.ChildOrAncestor).SelectMany(location => location.Children),
+                    fetchRootRule => fetchRootRule.SelectNested(locationToAncestorChildView => locationToAncestorChildView.Source).SelectMany(location => location.Children));
             }
             else
             {

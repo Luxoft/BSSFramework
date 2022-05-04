@@ -53,6 +53,20 @@
       <one-to-many class="SampleSystem.Domain.Projections.SecurityLocation" />
     </set>
   </class>
+  <class name="SampleSystem.Domain.Projections.SecurityLocationAncestorLink" table="LocationAncestorLink">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <many-to-one name="Ancestor_Security" column="ancestorId" class="SampleSystem.Domain.Projections.SecurityLocation" access="field.camelcase" insert="false" update="false" />
+    <many-to-one name="Child_Security" column="childId" class="SampleSystem.Domain.Projections.SecurityLocation" access="field.camelcase" insert="false" update="false" />
+  </class>
+  <class name="SampleSystem.Domain.Projections.SecurityLocationToAncestorChildView" table="LocationToAncestorChildView" mutable="false" schema-action="none">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <many-to-one name="ChildOrAncestor_Security" column="childOrAncestorId" class="SampleSystem.Domain.Projections.SecurityLocation" access="field.camelcase" insert="false" update="false" />
+    <many-to-one name="Source_Security" column="sourceId" class="SampleSystem.Domain.Projections.SecurityLocation" access="field.camelcase" insert="false" update="false" />
+  </class>
   <class name="SampleSystem.Domain.Projections.TestLegacyEmployee" table="Employee">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />

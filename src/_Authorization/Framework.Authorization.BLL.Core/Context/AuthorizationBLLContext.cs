@@ -189,6 +189,12 @@ namespace Framework.Authorization.BLL
             return this.HasAccess(securityOperation, true);
         }
 
+
+        public Guid ResolveSecurityTypeId(Type type)
+        {
+            return this.GetEntityType(type).Id;
+        }
+
         public string ResolveSecurityTypeName(Type type)
         {
             return type.GetProjectionSourceTypeOrSelf().Name;

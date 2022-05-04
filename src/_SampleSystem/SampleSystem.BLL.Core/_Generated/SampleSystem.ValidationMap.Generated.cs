@@ -2698,6 +2698,14 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetLocationValidationMap()));
             }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.LocationAncestorLink)))
+            {
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetLocationAncestorLinkValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.LocationToAncestorChildView)))
+            {
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetLocationToAncestorChildViewValidationMap()));
+            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.ManagementUnit)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetManagementUnitValidationMap()));
@@ -3012,6 +3020,39 @@ namespace SampleSystem.BLL
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.EnversBug1676.Location1676>(this.GetLocation1676Properties);
         }
         
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.LocationAncestorLink, System.DateTime?>> GetLocationAncestorLink_CreateDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.LocationAncestorLink>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.LocationAncestorLink, string>> GetLocationAncestorLink_CreatedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.LocationAncestorLink>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.LocationAncestorLink, string>> GetLocationAncestorLink_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.LocationAncestorLink>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.LocationAncestorLink, System.DateTime?>> GetLocationAncestorLink_ModifyDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.LocationAncestorLink>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.LocationAncestorLink>> GetLocationAncestorLinkProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.LocationAncestorLink> currentClass)
+        {
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.LocationAncestorLink, System.DateTime?>(source => source.CreateDate, currentClass, this.GetLocationAncestorLink_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.LocationAncestorLink, string>(source => source.CreatedBy, currentClass, this.GetLocationAncestorLink_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.LocationAncestorLink, string>(source => source.ModifiedBy, currentClass, this.GetLocationAncestorLink_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.LocationAncestorLink, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetLocationAncestorLink_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.LocationAncestorLink> GetLocationAncestorLinkValidationMap()
+        {
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.LocationAncestorLink>(this.GetLocationAncestorLinkProperties);
+        }
+        
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.Location>> GetLocationProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.Location> currentClass)
         {
             yield return new Framework.Validation.CollectionPropertyValidationMap<SampleSystem.Domain.Location, System.Collections.Generic.IEnumerable<SampleSystem.Domain.Location>, SampleSystem.Domain.Location>(source => source.Children, currentClass, this.GetLocation_ChildrenValidators(), this.GetClassMap<SampleSystem.Domain.Location>(true));
@@ -3022,6 +3063,39 @@ namespace SampleSystem.BLL
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Location, string>(source => source.ModifiedBy, currentClass, this.GetLocation_ModifiedByValidators(), this.GetClassMap<string>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Location, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetLocation_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.Location, string>(source => source.Name, currentClass, this.GetLocation_NameValidators(), this.GetClassMap<string>(true));
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.LocationToAncestorChildView, System.DateTime?>> GetLocationToAncestorChildView_CreateDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.LocationToAncestorChildView>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.LocationToAncestorChildView, string>> GetLocationToAncestorChildView_CreatedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.LocationToAncestorChildView>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.LocationToAncestorChildView, string>> GetLocationToAncestorChildView_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.LocationToAncestorChildView>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.LocationToAncestorChildView, System.DateTime?>> GetLocationToAncestorChildView_ModifyDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.LocationToAncestorChildView>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.LocationToAncestorChildView>> GetLocationToAncestorChildViewProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.LocationToAncestorChildView> currentClass)
+        {
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.LocationToAncestorChildView, System.DateTime?>(source => source.CreateDate, currentClass, this.GetLocationToAncestorChildView_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.LocationToAncestorChildView, string>(source => source.CreatedBy, currentClass, this.GetLocationToAncestorChildView_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.LocationToAncestorChildView, string>(source => source.ModifiedBy, currentClass, this.GetLocationToAncestorChildView_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.LocationToAncestorChildView, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetLocationToAncestorChildView_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.LocationToAncestorChildView> GetLocationToAncestorChildViewValidationMap()
+        {
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.LocationToAncestorChildView>(this.GetLocationToAncestorChildViewProperties);
         }
         
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.Location> GetLocationValidationMap()

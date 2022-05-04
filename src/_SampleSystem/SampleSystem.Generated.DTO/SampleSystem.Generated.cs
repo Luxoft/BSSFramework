@@ -3992,6 +3992,168 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.LocationAncestorLink), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct LocationAncestorLinkIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO EmptyField = new SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO(System.Guid.Empty);
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id;
+        
+        public LocationAncestorLinkIdentityDTO(System.Guid id)
+        {
+            this.Id = id;
+        }
+        
+        public LocationAncestorLinkIdentityDTO(SampleSystem.Domain.LocationAncestorLink domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this.Id = domainObject.Id;
+        }
+        
+        public LocationAncestorLinkIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO.EmptyField;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO identity1, SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO identity1, SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.LocationAncestorLinkIdentityDTO other)
+        {
+            return (this.Id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.LocationAncestorLink ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToLocationAncestorLink(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.LocationToAncestorChildView), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct LocationToAncestorChildViewIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO EmptyField = new SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO(System.Guid.Empty);
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id;
+        
+        public LocationToAncestorChildViewIdentityDTO(System.Guid id)
+        {
+            this.Id = id;
+        }
+        
+        public LocationToAncestorChildViewIdentityDTO(SampleSystem.Domain.LocationToAncestorChildView domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this.Id = domainObject.Id;
+        }
+        
+        public LocationToAncestorChildViewIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO.EmptyField;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO identity1, SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO identity1, SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.LocationToAncestorChildViewIdentityDTO other)
+        {
+            return (this.Id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.LocationToAncestorChildView ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToLocationToAncestorChildView(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnit), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitEdit)]
     [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitView)]

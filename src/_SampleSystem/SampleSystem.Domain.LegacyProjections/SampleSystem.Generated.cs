@@ -360,7 +360,7 @@ namespace SampleSystem.Domain.Projections
     [Framework.Persistent.Mapping.TableAttribute(Name="Location")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Location), Framework.Projection.ProjectionRole.SecurityNode)]
     [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.LocationView, SampleSystem.SampleSystemSecurityOperationCode.HRDepartmentEdit)]
-    public partial class SecurityLocation : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext, Framework.Persistent.IHierarchicalSource<SampleSystem.Domain.Projections.SecurityLocation>, Framework.Persistent.IParentSource<SampleSystem.Domain.Projections.SecurityLocation>, Framework.Persistent.IChildrenSource<SampleSystem.Domain.Projections.SecurityLocation>
+    public partial class SecurityLocation : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext, Framework.Persistent.IDenormalizedHierarchicalPersistentSource<SampleSystem.Domain.Projections.SecurityLocationAncestorLink, SampleSystem.Domain.Projections.SecurityLocationToAncestorChildView, SampleSystem.Domain.Projections.SecurityLocation, System.Guid>, Framework.Persistent.IHierarchicalPersistentDomainObjectBase<SampleSystem.Domain.Projections.SecurityLocation, System.Guid>, Framework.Persistent.IHierarchicalSource<SampleSystem.Domain.Projections.SecurityLocation>, Framework.Persistent.IParentSource<SampleSystem.Domain.Projections.SecurityLocation>, Framework.Persistent.IChildrenSource<SampleSystem.Domain.Projections.SecurityLocation>
     {
         
         private System.Collections.Generic.ICollection<SampleSystem.Domain.Projections.SecurityLocation> children_Security;
@@ -409,6 +409,118 @@ namespace SampleSystem.Domain.Projections
             get
             {
                 return this.parent_Security;
+            }
+        }
+    }
+    
+    [Framework.Persistent.Mapping.TableAttribute(Name="LocationAncestorLink")]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.LocationAncestorLink), Framework.Projection.ProjectionRole.SecurityNode)]
+    public partial class SecurityLocationAncestorLink : SampleSystem.Domain.PersistentDomainObjectBase, Framework.Persistent.IHierarchicalAncestorLink<SampleSystem.Domain.Projections.SecurityLocation, SampleSystem.Domain.Projections.SecurityLocationToAncestorChildView, System.Guid>
+    {
+        
+        private SampleSystem.Domain.Projections.SecurityLocation ancestor_Security;
+        
+        private SampleSystem.Domain.Projections.SecurityLocation child_Security;
+        
+        protected SecurityLocationAncestorLink()
+        {
+        }
+        
+        [Framework.Persistent.ExpandPathAttribute("Ancestor_Security")]
+        SampleSystem.Domain.Projections.SecurityLocation Framework.Persistent.IHierarchicalAncestorLink<SampleSystem.Domain.Projections.SecurityLocation, SampleSystem.Domain.Projections.SecurityLocationToAncestorChildView, System.Guid>.Ancestor
+        {
+            get
+            {
+                return this.Ancestor_Security;
+            }
+        }
+        
+        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Security)]
+        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="ancestorId")]
+        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        public virtual SampleSystem.Domain.Projections.SecurityLocation Ancestor_Security
+        {
+            get
+            {
+                return this.ancestor_Security;
+            }
+        }
+        
+        [Framework.Persistent.ExpandPathAttribute("Child_Security")]
+        SampleSystem.Domain.Projections.SecurityLocation Framework.Persistent.IHierarchicalAncestorLink<SampleSystem.Domain.Projections.SecurityLocation, SampleSystem.Domain.Projections.SecurityLocationToAncestorChildView, System.Guid>.Child
+        {
+            get
+            {
+                return this.Child_Security;
+            }
+        }
+        
+        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Security)]
+        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="childId")]
+        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        public virtual SampleSystem.Domain.Projections.SecurityLocation Child_Security
+        {
+            get
+            {
+                return this.child_Security;
+            }
+        }
+    }
+    
+    [Framework.Persistent.Mapping.TableAttribute(Name="LocationToAncestorChildView")]
+    [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.LocationToAncestorChildView), Framework.Projection.ProjectionRole.SecurityNode)]
+    public partial class SecurityLocationToAncestorChildView : SampleSystem.Domain.PersistentDomainObjectBase, Framework.Persistent.IHierarchicalToAncestorOrChildLink<SampleSystem.Domain.Projections.SecurityLocation, System.Guid>
+    {
+        
+        private SampleSystem.Domain.Projections.SecurityLocation childOrAncestor_Security;
+        
+        private SampleSystem.Domain.Projections.SecurityLocation source_Security;
+        
+        protected SecurityLocationToAncestorChildView()
+        {
+        }
+        
+        [Framework.Persistent.ExpandPathAttribute("ChildOrAncestor_Security")]
+        SampleSystem.Domain.Projections.SecurityLocation Framework.Persistent.IHierarchicalToAncestorOrChildLink<SampleSystem.Domain.Projections.SecurityLocation, System.Guid>.ChildOrAncestor
+        {
+            get
+            {
+                return this.ChildOrAncestor_Security;
+            }
+        }
+        
+        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Security)]
+        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="childOrAncestorId")]
+        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        public virtual SampleSystem.Domain.Projections.SecurityLocation ChildOrAncestor_Security
+        {
+            get
+            {
+                return this.childOrAncestor_Security;
+            }
+        }
+        
+        [Framework.Persistent.ExpandPathAttribute("Source_Security")]
+        SampleSystem.Domain.Projections.SecurityLocation Framework.Persistent.IHierarchicalToAncestorOrChildLink<SampleSystem.Domain.Projections.SecurityLocation, System.Guid>.Source
+        {
+            get
+            {
+                return this.Source_Security;
+            }
+        }
+        
+        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
+        [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Security)]
+        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="sourceId")]
+        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
+        public virtual SampleSystem.Domain.Projections.SecurityLocation Source_Security
+        {
+            get
+            {
+                return this.source_Security;
             }
         }
     }

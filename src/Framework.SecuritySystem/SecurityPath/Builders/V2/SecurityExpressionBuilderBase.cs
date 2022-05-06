@@ -37,13 +37,11 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
         public Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression<TSecurityOperation>(ContextSecurityOperation<TSecurityOperation> securityOperation)
                 where TSecurityOperation : struct, Enum
         {
-            var filterExpression = this.GetSecurityFilterExpression(securityOperation.SecurityExpandType);
+            var filterExpression = this.GetSecurityFilterExpression(securityOperation.SecurityExpandType).ExpandConst().ExpandEval();
 
-            return domainObject =>
+            var baseQuery = this.Factory.AuthorizationSystem.GetPermissionQuery(securityOperation);
 
-                           this.Factory.AuthorizationSystem.GetPermissionQuery(securityOperation)
-
-                               .Any(permission => filterExpression.Eval(domainObject, permission));
+            return domainObject => baseQuery.Any(permission => filterExpression.Eval(domainObject, permission));
         }
 
 
@@ -562,8 +560,8 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
 
             public override Expression<Func<TDomainObject, IPermission<TIdent>, bool>> GetSecurityFilterExpression(HierarchicalExpandType expandType)
             {
-                var leftFilter = this.LeftBuilder.GetSecurityFilterExpression(expandType);
-                var rightFilter = this.RightBuilder.GetSecurityFilterExpression(expandType);
+                var leftFilter = this.LeftBuilder.GetSecurityFilterExpression(expandType).ExpandConst().ExpandEval();
+                var rightFilter = this.RightBuilder.GetSecurityFilterExpression(expandType).ExpandConst().ExpandEval();
 
                 return (domainObject, permission) =>
 
@@ -585,8 +583,8 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
             }
             public override Expression<Func<TDomainObject, IPermission<TIdent>, bool>> GetSecurityFilterExpression(HierarchicalExpandType expandType)
             {
-                var leftFilter = this.LeftBuilder.GetSecurityFilterExpression(expandType);
-                var rightFilter = this.RightBuilder.GetSecurityFilterExpression(expandType);
+                var leftFilter = this.LeftBuilder.GetSecurityFilterExpression(expandType).ExpandConst().ExpandEval();
+                var rightFilter = this.RightBuilder.GetSecurityFilterExpression(expandType).ExpandConst().ExpandEval();
 
                 return (domainObject, permission) =>
 

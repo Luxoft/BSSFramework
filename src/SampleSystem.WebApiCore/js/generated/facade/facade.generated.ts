@@ -47,6 +47,7 @@ export let checkPrincipalAccessAsyncFunc = _checkPrincipalAccess();
 export let checkSqlParserTestObjAccessAsyncFunc = _checkSqlParserTestObjAccess();
 export let checkSqlParserTestObjContainerAccessAsyncFunc = _checkSqlParserTestObjContainerAccess();
 export let checkTestImmutableObjAccessAsyncFunc = _checkTestImmutableObjAccess();
+export let checkTestPlainAuthObjectAccessAsyncFunc = _checkTestPlainAuthObjectAccess();
 export let checkTestRootSecurityObjAccessAsyncFunc = _checkTestRootSecurityObjAccess();
 export let checkWorkingCalendar1676AccessAsyncFunc = _checkWorkingCalendar1676Access();
 export let getBusinessUnitProgramClassAsyncFunc = _getBusinessUnitProgramClass();
@@ -166,6 +167,10 @@ export let getFullTestCustomContextSecurityObjsByIdentsAsyncFunc = _getFullTestC
 export let getFullTestImmutableObjAsyncFunc = _getFullTestImmutableObj();
 export let getFullTestImmutableObjsAsyncFunc = _getFullTestImmutableObjs();
 export let getFullTestImmutableObjsByIdentsAsyncFunc = _getFullTestImmutableObjsByIdents();
+export let getFullTestPlainAuthObjectAsyncFunc = _getFullTestPlainAuthObject();
+export let getFullTestPlainAuthObjectByNameAsyncFunc = _getFullTestPlainAuthObjectByName();
+export let getFullTestPlainAuthObjectsAsyncFunc = _getFullTestPlainAuthObjects();
+export let getFullTestPlainAuthObjectsByIdentsAsyncFunc = _getFullTestPlainAuthObjectsByIdents();
 export let getFullTestRootSecurityObjAsyncFunc = _getFullTestRootSecurityObj();
 export let getFullTestRootSecurityObjByNameAsyncFunc = _getFullTestRootSecurityObjByName();
 export let getFullTestRootSecurityObjsAsyncFunc = _getFullTestRootSecurityObjs();
@@ -236,6 +241,8 @@ export let getRichPrincipalAsyncFunc = _getRichPrincipal();
 export let getRichTestCustomContextSecurityObjAsyncFunc = _getRichTestCustomContextSecurityObj();
 export let getRichTestCustomContextSecurityObjByNameAsyncFunc = _getRichTestCustomContextSecurityObjByName();
 export let getRichTestImmutableObjAsyncFunc = _getRichTestImmutableObj();
+export let getRichTestPlainAuthObjectAsyncFunc = _getRichTestPlainAuthObject();
+export let getRichTestPlainAuthObjectByNameAsyncFunc = _getRichTestPlainAuthObjectByName();
 export let getRichTestRootSecurityObjAsyncFunc = _getRichTestRootSecurityObj();
 export let getRichTestRootSecurityObjByNameAsyncFunc = _getRichTestRootSecurityObjByName();
 export let getRichTestSecurityObjItemAsyncFunc = _getRichTestSecurityObjItem();
@@ -359,6 +366,10 @@ export let getSimpleTestCustomContextSecurityObjsByIdentsAsyncFunc = _getSimpleT
 export let getSimpleTestImmutableObjAsyncFunc = _getSimpleTestImmutableObj();
 export let getSimpleTestImmutableObjsAsyncFunc = _getSimpleTestImmutableObjs();
 export let getSimpleTestImmutableObjsByIdentsAsyncFunc = _getSimpleTestImmutableObjsByIdents();
+export let getSimpleTestPlainAuthObjectAsyncFunc = _getSimpleTestPlainAuthObject();
+export let getSimpleTestPlainAuthObjectByNameAsyncFunc = _getSimpleTestPlainAuthObjectByName();
+export let getSimpleTestPlainAuthObjectsAsyncFunc = _getSimpleTestPlainAuthObjects();
+export let getSimpleTestPlainAuthObjectsByIdentsAsyncFunc = _getSimpleTestPlainAuthObjectsByIdents();
 export let getSimpleTestRootSecurityObjAsyncFunc = _getSimpleTestRootSecurityObj();
 export let getSimpleTestRootSecurityObjByNameAsyncFunc = _getSimpleTestRootSecurityObjByName();
 export let getSimpleTestRootSecurityObjsAsyncFunc = _getSimpleTestRootSecurityObjs();
@@ -478,6 +489,10 @@ export let getVisualTestCustomContextSecurityObjAsyncFunc = _getVisualTestCustom
 export let getVisualTestCustomContextSecurityObjByNameAsyncFunc = _getVisualTestCustomContextSecurityObjByName();
 export let getVisualTestCustomContextSecurityObjsAsyncFunc = _getVisualTestCustomContextSecurityObjs();
 export let getVisualTestCustomContextSecurityObjsByIdentsAsyncFunc = _getVisualTestCustomContextSecurityObjsByIdents();
+export let getVisualTestPlainAuthObjectAsyncFunc = _getVisualTestPlainAuthObject();
+export let getVisualTestPlainAuthObjectByNameAsyncFunc = _getVisualTestPlainAuthObjectByName();
+export let getVisualTestPlainAuthObjectsAsyncFunc = _getVisualTestPlainAuthObjects();
+export let getVisualTestPlainAuthObjectsByIdentsAsyncFunc = _getVisualTestPlainAuthObjectsByIdents();
 export let getVisualTestRootSecurityObjAsyncFunc = _getVisualTestRootSecurityObj();
 export let getVisualTestRootSecurityObjByNameAsyncFunc = _getVisualTestRootSecurityObjByName();
 export let getVisualTestRootSecurityObjsAsyncFunc = _getVisualTestRootSecurityObjs();
@@ -529,6 +544,7 @@ export let hasPrincipalAccessAsyncFunc = _hasPrincipalAccess();
 export let hasSqlParserTestObjAccessAsyncFunc = _hasSqlParserTestObjAccess();
 export let hasSqlParserTestObjContainerAccessAsyncFunc = _hasSqlParserTestObjContainerAccess();
 export let hasTestImmutableObjAccessAsyncFunc = _hasTestImmutableObjAccess();
+export let hasTestPlainAuthObjectAccessAsyncFunc = _hasTestPlainAuthObjectAccess();
 export let hasTestRootSecurityObjAccessAsyncFunc = _hasTestRootSecurityObjAccess();
 export let hasWorkingCalendar1676AccessAsyncFunc = _hasWorkingCalendar1676Access();
 export let massChangeEmployeeByEmailAsyncFunc = _massChangeEmployeeByEmail();
@@ -789,6 +805,14 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
             let baseParameters = {testImmutableObjIdent : testImmutableObjIdent, securityOperationCode : securityOperationCode};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
             return service.getData('TestImmutableObj/CheckTestImmutableObjAccess', baseParameters);
+        });
+    }
+
+    function _checkTestPlainAuthObjectAccess(): async.SimpleAsyncFunc3<dto.TestPlainAuthObjectIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
+        return new async.SimpleAsyncFunc3((testPlainAuthObjectIdent: dto.TestPlainAuthObjectIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
+            let baseParameters = {testPlainAuthObjectIdent : testPlainAuthObjectIdent, securityOperationCode : securityOperationCode};
+            let service = Environment.current.context.facadeFactory.createSimpleService<void>();
+            return service.getData('TestPlainAuthObject/CheckTestPlainAuthObjectAccess', baseParameters);
         });
     }
 
@@ -1747,6 +1771,38 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
         });
     }
 
+    function _getFullTestPlainAuthObject(): async.AsyncFunc3<dto.TestPlainAuthObjectIdentityDTO, dto.TestPlainAuthObjectFullDTO, dto.TestPlainAuthObjectObservableFullDTO, dto.TestPlainAuthObjectFullDTO, dto.TestPlainAuthObjectObservableFullDTO> {
+        return new async.AsyncFunc3((testPlainAuthObjectIdentity: dto.TestPlainAuthObjectIdentityDTO) => {
+            let baseParameters = testPlainAuthObjectIdentity;
+            let service = Environment.current.context.facadeFactory.createService<dto.TestPlainAuthObjectFullDTO, dto.TestPlainAuthObjectObservableFullDTO, dto.TestPlainAuthObjectFullDTO, dto.TestPlainAuthObjectObservableFullDTO>();
+            return service.getData('TestPlainAuthObject/GetFullTestPlainAuthObject', {plain : dto.TestPlainAuthObjectFullDTO, observable : dto.TestPlainAuthObjectObservableFullDTO}, baseParameters);
+        });
+    }
+
+    function _getFullTestPlainAuthObjectByName(): async.AsyncFunc3<string, dto.TestPlainAuthObjectFullDTO, dto.TestPlainAuthObjectObservableFullDTO, dto.TestPlainAuthObjectFullDTO, dto.TestPlainAuthObjectObservableFullDTO> {
+        return new async.AsyncFunc3((testPlainAuthObjectName: string) => {
+            let baseParameters = testPlainAuthObjectName;
+            let service = Environment.current.context.facadeFactory.createService<dto.TestPlainAuthObjectFullDTO, dto.TestPlainAuthObjectObservableFullDTO, dto.TestPlainAuthObjectFullDTO, dto.TestPlainAuthObjectObservableFullDTO>();
+            return service.getData('TestPlainAuthObject/GetFullTestPlainAuthObjectByName', {plain : dto.TestPlainAuthObjectFullDTO, observable : dto.TestPlainAuthObjectObservableFullDTO}, baseParameters);
+        });
+    }
+
+    function _getFullTestPlainAuthObjects(): async.AsyncFunc2<Array<dto.TestPlainAuthObjectFullDTO>, Array<dto.TestPlainAuthObjectObservableFullDTO>, dto.TestPlainAuthObjectFullDTO, dto.TestPlainAuthObjectObservableFullDTO> {
+        return new async.AsyncFunc2(() => {
+            let baseParameters = {};
+            let service = Environment.current.context.facadeFactory.createService<Array<dto.TestPlainAuthObjectFullDTO>, Array<dto.TestPlainAuthObjectObservableFullDTO>, dto.TestPlainAuthObjectFullDTO, dto.TestPlainAuthObjectObservableFullDTO>();
+            return service.getData('TestPlainAuthObject/GetFullTestPlainAuthObjects', {plain : dto.TestPlainAuthObjectFullDTO, observable : dto.TestPlainAuthObjectObservableFullDTO}, baseParameters);
+        });
+    }
+
+    function _getFullTestPlainAuthObjectsByIdents(): async.AsyncFunc3<dto.TestPlainAuthObjectIdentityDTO[], Array<dto.TestPlainAuthObjectFullDTO>, Array<dto.TestPlainAuthObjectObservableFullDTO>, dto.TestPlainAuthObjectFullDTO, dto.TestPlainAuthObjectObservableFullDTO> {
+        return new async.AsyncFunc3((testPlainAuthObjectIdents: dto.TestPlainAuthObjectIdentityDTO[]) => {
+            let baseParameters = testPlainAuthObjectIdents;
+            let service = Environment.current.context.facadeFactory.createService<Array<dto.TestPlainAuthObjectFullDTO>, Array<dto.TestPlainAuthObjectObservableFullDTO>, dto.TestPlainAuthObjectFullDTO, dto.TestPlainAuthObjectObservableFullDTO>();
+            return service.getData('TestPlainAuthObject/GetFullTestPlainAuthObjectsByIdents', {plain : dto.TestPlainAuthObjectFullDTO, observable : dto.TestPlainAuthObjectObservableFullDTO}, baseParameters);
+        });
+    }
+
     function _getFullTestRootSecurityObj(): async.AsyncFunc3<dto.TestRootSecurityObjIdentityDTO, dto.TestRootSecurityObjFullDTO, dto.TestRootSecurityObjObservableFullDTO, dto.TestRootSecurityObjFullDTO, dto.TestRootSecurityObjObservableFullDTO> {
         return new async.AsyncFunc3((testRootSecurityObjIdentity: dto.TestRootSecurityObjIdentityDTO) => {
             let baseParameters = testRootSecurityObjIdentity;
@@ -2304,6 +2360,22 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
             let baseParameters = testImmutableObjIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestImmutableObjRichDTO, dto.TestImmutableObjObservableRichDTO, dto.TestImmutableObjRichDTO, dto.TestImmutableObjObservableRichDTO>();
             return service.getData('TestImmutableObj/GetRichTestImmutableObj', {plain : dto.TestImmutableObjRichDTO, observable : dto.TestImmutableObjObservableRichDTO}, baseParameters);
+        });
+    }
+
+    function _getRichTestPlainAuthObject(): async.AsyncFunc3<dto.TestPlainAuthObjectIdentityDTO, dto.TestPlainAuthObjectRichDTO, dto.TestPlainAuthObjectObservableRichDTO, dto.TestPlainAuthObjectRichDTO, dto.TestPlainAuthObjectObservableRichDTO> {
+        return new async.AsyncFunc3((testPlainAuthObjectIdentity: dto.TestPlainAuthObjectIdentityDTO) => {
+            let baseParameters = testPlainAuthObjectIdentity;
+            let service = Environment.current.context.facadeFactory.createService<dto.TestPlainAuthObjectRichDTO, dto.TestPlainAuthObjectObservableRichDTO, dto.TestPlainAuthObjectRichDTO, dto.TestPlainAuthObjectObservableRichDTO>();
+            return service.getData('TestPlainAuthObject/GetRichTestPlainAuthObject', {plain : dto.TestPlainAuthObjectRichDTO, observable : dto.TestPlainAuthObjectObservableRichDTO}, baseParameters);
+        });
+    }
+
+    function _getRichTestPlainAuthObjectByName(): async.AsyncFunc3<string, dto.TestPlainAuthObjectRichDTO, dto.TestPlainAuthObjectObservableRichDTO, dto.TestPlainAuthObjectRichDTO, dto.TestPlainAuthObjectObservableRichDTO> {
+        return new async.AsyncFunc3((testPlainAuthObjectName: string) => {
+            let baseParameters = testPlainAuthObjectName;
+            let service = Environment.current.context.facadeFactory.createService<dto.TestPlainAuthObjectRichDTO, dto.TestPlainAuthObjectObservableRichDTO, dto.TestPlainAuthObjectRichDTO, dto.TestPlainAuthObjectObservableRichDTO>();
+            return service.getData('TestPlainAuthObject/GetRichTestPlainAuthObjectByName', {plain : dto.TestPlainAuthObjectRichDTO, observable : dto.TestPlainAuthObjectObservableRichDTO}, baseParameters);
         });
     }
 
@@ -3294,6 +3366,38 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
         });
     }
 
+    function _getSimpleTestPlainAuthObject(): async.AsyncFunc3<dto.TestPlainAuthObjectIdentityDTO, dto.TestPlainAuthObjectSimpleDTO, dto.TestPlainAuthObjectObservableSimpleDTO, dto.TestPlainAuthObjectSimpleDTO, dto.TestPlainAuthObjectObservableSimpleDTO> {
+        return new async.AsyncFunc3((testPlainAuthObjectIdentity: dto.TestPlainAuthObjectIdentityDTO) => {
+            let baseParameters = testPlainAuthObjectIdentity;
+            let service = Environment.current.context.facadeFactory.createService<dto.TestPlainAuthObjectSimpleDTO, dto.TestPlainAuthObjectObservableSimpleDTO, dto.TestPlainAuthObjectSimpleDTO, dto.TestPlainAuthObjectObservableSimpleDTO>();
+            return service.getData('TestPlainAuthObject/GetSimpleTestPlainAuthObject', {plain : dto.TestPlainAuthObjectSimpleDTO, observable : dto.TestPlainAuthObjectObservableSimpleDTO}, baseParameters);
+        });
+    }
+
+    function _getSimpleTestPlainAuthObjectByName(): async.AsyncFunc3<string, dto.TestPlainAuthObjectSimpleDTO, dto.TestPlainAuthObjectObservableSimpleDTO, dto.TestPlainAuthObjectSimpleDTO, dto.TestPlainAuthObjectObservableSimpleDTO> {
+        return new async.AsyncFunc3((testPlainAuthObjectName: string) => {
+            let baseParameters = testPlainAuthObjectName;
+            let service = Environment.current.context.facadeFactory.createService<dto.TestPlainAuthObjectSimpleDTO, dto.TestPlainAuthObjectObservableSimpleDTO, dto.TestPlainAuthObjectSimpleDTO, dto.TestPlainAuthObjectObservableSimpleDTO>();
+            return service.getData('TestPlainAuthObject/GetSimpleTestPlainAuthObjectByName', {plain : dto.TestPlainAuthObjectSimpleDTO, observable : dto.TestPlainAuthObjectObservableSimpleDTO}, baseParameters);
+        });
+    }
+
+    function _getSimpleTestPlainAuthObjects(): async.AsyncFunc2<Array<dto.TestPlainAuthObjectSimpleDTO>, Array<dto.TestPlainAuthObjectObservableSimpleDTO>, dto.TestPlainAuthObjectSimpleDTO, dto.TestPlainAuthObjectObservableSimpleDTO> {
+        return new async.AsyncFunc2(() => {
+            let baseParameters = {};
+            let service = Environment.current.context.facadeFactory.createService<Array<dto.TestPlainAuthObjectSimpleDTO>, Array<dto.TestPlainAuthObjectObservableSimpleDTO>, dto.TestPlainAuthObjectSimpleDTO, dto.TestPlainAuthObjectObservableSimpleDTO>();
+            return service.getData('TestPlainAuthObject/GetSimpleTestPlainAuthObjects', {plain : dto.TestPlainAuthObjectSimpleDTO, observable : dto.TestPlainAuthObjectObservableSimpleDTO}, baseParameters);
+        });
+    }
+
+    function _getSimpleTestPlainAuthObjectsByIdents(): async.AsyncFunc3<dto.TestPlainAuthObjectIdentityDTO[], Array<dto.TestPlainAuthObjectSimpleDTO>, Array<dto.TestPlainAuthObjectObservableSimpleDTO>, dto.TestPlainAuthObjectSimpleDTO, dto.TestPlainAuthObjectObservableSimpleDTO> {
+        return new async.AsyncFunc3((testPlainAuthObjectIdents: dto.TestPlainAuthObjectIdentityDTO[]) => {
+            let baseParameters = testPlainAuthObjectIdents;
+            let service = Environment.current.context.facadeFactory.createService<Array<dto.TestPlainAuthObjectSimpleDTO>, Array<dto.TestPlainAuthObjectObservableSimpleDTO>, dto.TestPlainAuthObjectSimpleDTO, dto.TestPlainAuthObjectObservableSimpleDTO>();
+            return service.getData('TestPlainAuthObject/GetSimpleTestPlainAuthObjectsByIdents', {plain : dto.TestPlainAuthObjectSimpleDTO, observable : dto.TestPlainAuthObjectObservableSimpleDTO}, baseParameters);
+        });
+    }
+
     function _getSimpleTestRootSecurityObj(): async.AsyncFunc3<dto.TestRootSecurityObjIdentityDTO, dto.TestRootSecurityObjSimpleDTO, dto.TestRootSecurityObjObservableSimpleDTO, dto.TestRootSecurityObjSimpleDTO, dto.TestRootSecurityObjObservableSimpleDTO> {
         return new async.AsyncFunc3((testRootSecurityObjIdentity: dto.TestRootSecurityObjIdentityDTO) => {
             let baseParameters = testRootSecurityObjIdentity;
@@ -4246,6 +4350,38 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
         });
     }
 
+    function _getVisualTestPlainAuthObject(): async.AsyncFunc3<dto.TestPlainAuthObjectIdentityDTO, dto.TestPlainAuthObjectVisualDTO, dto.TestPlainAuthObjectObservableVisualDTO, dto.TestPlainAuthObjectVisualDTO, dto.TestPlainAuthObjectObservableVisualDTO> {
+        return new async.AsyncFunc3((testPlainAuthObjectIdentity: dto.TestPlainAuthObjectIdentityDTO) => {
+            let baseParameters = testPlainAuthObjectIdentity;
+            let service = Environment.current.context.facadeFactory.createService<dto.TestPlainAuthObjectVisualDTO, dto.TestPlainAuthObjectObservableVisualDTO, dto.TestPlainAuthObjectVisualDTO, dto.TestPlainAuthObjectObservableVisualDTO>();
+            return service.getData('TestPlainAuthObject/GetVisualTestPlainAuthObject', {plain : dto.TestPlainAuthObjectVisualDTO, observable : dto.TestPlainAuthObjectObservableVisualDTO}, baseParameters);
+        });
+    }
+
+    function _getVisualTestPlainAuthObjectByName(): async.AsyncFunc3<string, dto.TestPlainAuthObjectVisualDTO, dto.TestPlainAuthObjectObservableVisualDTO, dto.TestPlainAuthObjectVisualDTO, dto.TestPlainAuthObjectObservableVisualDTO> {
+        return new async.AsyncFunc3((testPlainAuthObjectName: string) => {
+            let baseParameters = testPlainAuthObjectName;
+            let service = Environment.current.context.facadeFactory.createService<dto.TestPlainAuthObjectVisualDTO, dto.TestPlainAuthObjectObservableVisualDTO, dto.TestPlainAuthObjectVisualDTO, dto.TestPlainAuthObjectObservableVisualDTO>();
+            return service.getData('TestPlainAuthObject/GetVisualTestPlainAuthObjectByName', {plain : dto.TestPlainAuthObjectVisualDTO, observable : dto.TestPlainAuthObjectObservableVisualDTO}, baseParameters);
+        });
+    }
+
+    function _getVisualTestPlainAuthObjects(): async.AsyncFunc2<Array<dto.TestPlainAuthObjectVisualDTO>, Array<dto.TestPlainAuthObjectObservableVisualDTO>, dto.TestPlainAuthObjectVisualDTO, dto.TestPlainAuthObjectObservableVisualDTO> {
+        return new async.AsyncFunc2(() => {
+            let baseParameters = {};
+            let service = Environment.current.context.facadeFactory.createService<Array<dto.TestPlainAuthObjectVisualDTO>, Array<dto.TestPlainAuthObjectObservableVisualDTO>, dto.TestPlainAuthObjectVisualDTO, dto.TestPlainAuthObjectObservableVisualDTO>();
+            return service.getData('TestPlainAuthObject/GetVisualTestPlainAuthObjects', {plain : dto.TestPlainAuthObjectVisualDTO, observable : dto.TestPlainAuthObjectObservableVisualDTO}, baseParameters);
+        });
+    }
+
+    function _getVisualTestPlainAuthObjectsByIdents(): async.AsyncFunc3<dto.TestPlainAuthObjectIdentityDTO[], Array<dto.TestPlainAuthObjectVisualDTO>, Array<dto.TestPlainAuthObjectObservableVisualDTO>, dto.TestPlainAuthObjectVisualDTO, dto.TestPlainAuthObjectObservableVisualDTO> {
+        return new async.AsyncFunc3((testPlainAuthObjectIdents: dto.TestPlainAuthObjectIdentityDTO[]) => {
+            let baseParameters = testPlainAuthObjectIdents;
+            let service = Environment.current.context.facadeFactory.createService<Array<dto.TestPlainAuthObjectVisualDTO>, Array<dto.TestPlainAuthObjectObservableVisualDTO>, dto.TestPlainAuthObjectVisualDTO, dto.TestPlainAuthObjectObservableVisualDTO>();
+            return service.getData('TestPlainAuthObject/GetVisualTestPlainAuthObjectsByIdents', {plain : dto.TestPlainAuthObjectVisualDTO, observable : dto.TestPlainAuthObjectObservableVisualDTO}, baseParameters);
+        });
+    }
+
     function _getVisualTestRootSecurityObj(): async.AsyncFunc3<dto.TestRootSecurityObjIdentityDTO, dto.TestRootSecurityObjVisualDTO, dto.TestRootSecurityObjObservableVisualDTO, dto.TestRootSecurityObjVisualDTO, dto.TestRootSecurityObjObservableVisualDTO> {
         return new async.AsyncFunc3((testRootSecurityObjIdentity: dto.TestRootSecurityObjIdentityDTO) => {
             let baseParameters = testRootSecurityObjIdentity;
@@ -4651,6 +4787,14 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
             let baseParameters = {testImmutableObjIdent : testImmutableObjIdent, securityOperationCode : securityOperationCode};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
             return service.getData('TestImmutableObj/HasTestImmutableObjAccess', baseParameters);
+        });
+    }
+
+    function _hasTestPlainAuthObjectAccess(): async.SimpleAsyncFunc3<dto.TestPlainAuthObjectIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
+        return new async.SimpleAsyncFunc3((testPlainAuthObjectIdent: dto.TestPlainAuthObjectIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
+            let baseParameters = {testPlainAuthObjectIdent : testPlainAuthObjectIdent, securityOperationCode : securityOperationCode};
+            let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
+            return service.getData('TestPlainAuthObject/HasTestPlainAuthObjectAccess', baseParameters);
         });
     }
 

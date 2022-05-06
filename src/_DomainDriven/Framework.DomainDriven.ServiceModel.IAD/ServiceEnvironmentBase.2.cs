@@ -58,6 +58,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
             protected virtual ITypeResolver<string> SecurityObjectTypeResolver => this.MainContext.TypeResolver;
 
+
             protected virtual IEventsSubscriptionManager<TBLLContext, TPersistentDomainObjectBase> CreateMainEventsSubscriptionManager()
             {
                 return null;

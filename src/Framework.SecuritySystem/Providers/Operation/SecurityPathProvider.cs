@@ -17,7 +17,7 @@ namespace Framework.SecuritySystem
     /// <typeparam name="TDomainObject"></typeparam>
     /// <typeparam name="TIdent"></typeparam>
     /// <typeparam name="TSecurityOperationCode"></typeparam>
-    public class SecurityPathProvider<TPersistentDomainObjectBase, TDomainObject, TIdent, TSecurityOperationCode> : SecurityProvider<TDomainObject>
+    public class SecurityPathProvider<TPersistentDomainObjectBase, TDomainObject, TIdent, TSecurityOperationCode> : SecurityProviderBase<TDomainObject>
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase
@@ -27,7 +27,7 @@ namespace Framework.SecuritySystem
         private readonly ContextSecurityOperation<TSecurityOperationCode> securityOperation;
 
         private readonly Lazy<Func<IQueryable<TDomainObject>, IQueryable<TDomainObject>>> injectFilterFunc;
-        private readonly Lazy<ISecurityExpressionFilter<TDomainObject>> filterLazy;
+        private readonly Lazy<ISecurityExpressionFilter<TDomainObject>> lazyFilter;
 
         private readonly ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> securityExpressionBuilder;
 
@@ -46,18 +46,8 @@ namespace Framework.SecuritySystem
 
             this.securityExpressionBuilder = securityExpressionBuilderFactory.CreateBuilder(securityPathBase);
 
-            this.filterLazy = LazyHelper.Create(() => this.securityExpressionBuilder.GetFilter(securityOperation));
-            this.injectFilterFunc = LazyHelper.Create(() => this.filterLazy.Value.InjectFunc);
-        }
-
-        protected override LambdaCompileMode SecurityFilterCompileMode
-        {
-            get { return LambdaCompileMode.All; }
-        }
-
-        public override Expression<Func<TDomainObject, bool>> SecurityFilter
-        {
-            get { return this.filterLazy.Value.Expression; }
+            this.lazyFilter = LazyHelper.Create(() => this.securityExpressionBuilder.GetFilter(securityOperation));
+            this.injectFilterFunc = LazyHelper.Create(() => this.lazyFilter.Value.InjectFunc);
         }
 
         public override IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
@@ -67,12 +57,16 @@ namespace Framework.SecuritySystem
             return this.injectFilterFunc.Value(queryable);
         }
 
+        public override bool HasAccess(TDomainObject domainObject)
+        {
+            return this.lazyFilter.Value.HasAccessFunc(domainObject);
+        }
 
         public override UnboundedList<string> GetAccessors(TDomainObject domainObject)
         {
             if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-            return this.filterLazy.Value.GetAccessors(domainObject).ToUnboundedList();
+            return this.lazyFilter.Value.GetAccessors(domainObject).ToUnboundedList();
         }
 
         public override Exception GetAccessDeniedException(TDomainObject domainObject, Func<string, string> formatMessageFunc = null)

@@ -117,6 +117,11 @@ namespace SampleSystem.ServiceEnvironment
                 this.Session);
         }
 
+        public override ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> GetSecurityExpressionBuilderFactory<TBLLContext, TPersistentDomainObjectBase, TIdent>(TBLLContext context)
+        {
+            return new Framework.SecuritySystem.Rules.Builders.Mixed.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>(context.HierarchicalObjectExpanderFactory, context.Authorization);
+        }
+
         /// <summary>
         /// Пример переопределения валидатора для авторизации
         /// </summary>

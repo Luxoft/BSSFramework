@@ -29,7 +29,7 @@ namespace Framework.SecuritySystem.Rules.Builders.Mixed
                 where TSecurityOperationCode : struct, Enum
         {
             var v1Filter = this.v1Builder.GetFilter(securityOperation);
-            var v2Filter = this.v1Builder.GetFilter(securityOperation);
+            var v2Filter = this.v2Builder.GetFilter(securityOperation);
 
             return new SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject, TSecurityOperationCode, TIdent>(v1Filter, v2Filter);
         }

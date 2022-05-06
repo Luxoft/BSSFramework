@@ -192,7 +192,7 @@ namespace Framework.Authorization.BLL
 
         public Guid ResolveSecurityTypeId(Type type)
         {
-            return this.GetEntityType(type).Id;
+            return this.GetEntityType(type.GetProjectionSourceTypeOrSelf()).Id;
         }
 
         public string ResolveSecurityTypeName(Type type)

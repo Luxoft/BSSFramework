@@ -5,6 +5,7 @@ using Framework.SecuritySystem;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.IntegrationTests.__Support.TestData;
@@ -63,6 +64,26 @@ namespace SampleSystem.IntegrationTests
 
                     context.Logics.BusinessUnit.Save(bu);
                 });
+        }
+
+
+        [TestMethod]
+        public void TestNested()
+        {
+            this.EvaluateRead(ctx =>
+            {
+                var baseSecurityPath = SampleSystemSecurityPath<BusinessUnit>.Create(v => v);
+
+                var withNested = SampleSystemSecurityPath<BusinessUnit>.Create(b => b.Children, baseSecurityPath, ManySecurityPathMode.Any);
+
+                var provider = withNested.ToProvider(SampleSystemSecurityOperation.BusinessUnitView, ctx.SecurityExpressionBuilderFactory, ctx.AccessDeniedExceptionService);
+
+                var bll = ctx.Logics.BusinessUnitFactory.Create(provider);
+
+                var result = bll.GetFullList();
+
+                return;
+            });
         }
 
         [TestMethod]

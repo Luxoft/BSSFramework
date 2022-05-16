@@ -184,11 +184,8 @@ namespace Framework.SecuritySystem
 
             protected BinarySecurityPath(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> left, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> right)
             {
-                if (left == null) throw new ArgumentNullException(nameof(left));
-                if (right == null) throw new ArgumentNullException(nameof(right));
-
-                this.Left = left;
-                this.Right = right;
+                this.Left = left ?? throw new ArgumentNullException(nameof(left));
+                this.Right = right ?? throw new ArgumentNullException(nameof(right));
             }
 
             protected internal override IEnumerable<Type> GetInternalUsedTypes()
@@ -202,7 +199,6 @@ namespace Framework.SecuritySystem
             internal OrSecurityPath(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> path, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> otherPath)
                 : base(path, otherPath)
             {
-
             }
 
             public override SecurityPath<TPersistentDomainObjectBase, TNewDomainObject, TIdent> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
@@ -216,7 +212,6 @@ namespace Framework.SecuritySystem
             internal AndSecurityPath(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> path, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> otherPath)
                 : base(path, otherPath)
             {
-
             }
 
             public override SecurityPath<TPersistentDomainObjectBase, TNewDomainObject, TIdent> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
@@ -243,9 +238,7 @@ namespace Framework.SecuritySystem
 
             internal SecurityPathByIdents(Func<IEnumerable<TIdent>, Expression<Func<TDomainObject, bool>>> securityFilter)
             {
-                if (securityFilter == null) throw new ArgumentNullException(nameof(securityFilter));
-
-                this.SecurityFilter = securityFilter;
+                this.SecurityFilter = securityFilter ?? throw new ArgumentNullException(nameof(securityFilter));
             }
 
             public override SecurityPath<TPersistentDomainObjectBase, TNewDomainObject, TIdent> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
@@ -265,9 +258,7 @@ namespace Framework.SecuritySystem
 
             internal SingleSecurityPath(Expression<Func<TDomainObject, TSecurityContext>> securityPath, SingleSecurityMode mode)
             {
-                if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
-
-                this.SecurityPath = securityPath;
+                this.SecurityPath = securityPath ?? throw new ArgumentNullException(nameof(securityPath));
 
                 this.Mode = mode;
             }
@@ -291,9 +282,7 @@ namespace Framework.SecuritySystem
 
             internal ManySecurityPath(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, ManySecurityPathMode mode)
             {
-                if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
-
-                this.SecurityPath = securityPath;
+                this.SecurityPath = securityPath ?? throw new ArgumentNullException(nameof(securityPath));
                 this.Mode = mode;
 
                 this.SecurityPathQ = this.TryExtractSecurityPathQ();
@@ -331,17 +320,8 @@ namespace Framework.SecuritySystem
                     SecurityPath<TPersistentDomainObjectBase, TNestedObject, TIdent> nestedSecurityPath,
                     ManySecurityPathMode mode)
             {
-                if (nestedObjectsPath == null)
-                {
-                    throw new ArgumentNullException(nameof(nestedObjectsPath));
-                }
-                if (nestedSecurityPath == null)
-                {
-                    throw new ArgumentNullException(nameof(nestedSecurityPath));
-                }
-
-                this.NestedObjectsPath = nestedObjectsPath;
-                this.NestedSecurityPath = nestedSecurityPath;
+                this.NestedObjectsPath = nestedObjectsPath ?? throw new ArgumentNullException(nameof(nestedObjectsPath));
+                this.NestedSecurityPath = nestedSecurityPath ?? throw new ArgumentNullException(nameof(nestedSecurityPath));
                 this.Mode = mode;
             }
 

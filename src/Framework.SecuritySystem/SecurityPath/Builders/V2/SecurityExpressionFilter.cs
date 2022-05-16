@@ -29,7 +29,7 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
             if (securityOperation == null) throw new
                     ArgumentNullException(nameof(securityOperation));
 
-            var filterExpression = builder.GetSecurityFilterExpression(securityOperation).ExpandConst().ExpandEval();
+            var filterExpression = builder.GetSecurityFilterExpression(securityOperation).ExpandConst().InlineEval();
 
             this.InjectFunc = q => q.Where(filterExpression);
 

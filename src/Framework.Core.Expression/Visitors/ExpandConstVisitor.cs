@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Linq;
+using System.Linq.Expressions;
 
 namespace Framework.Core
 {
@@ -10,16 +11,16 @@ namespace Framework.Core
 
         public override Expression Visit(Expression baseNode)
         {
-            var visitedBaseNode = base.Visit(baseNode);
+            var baseVisited = base.Visit(baseNode);
 
-            var request = from node in visitedBaseNode.ToMaybe()
+            var request = from node in baseVisited.ToMaybe()
 
                           from res in node.GetMemberConstExpression()
 
                           select res;
 
-
-            return request.GetValueOrDefault(visitedBaseNode);
+            return request
+                   .GetValueOrDefault(baseVisited);
         }
 
 

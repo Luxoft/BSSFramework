@@ -5,14 +5,14 @@ using System.Reflection;
 
 namespace Framework.Core;
 
-public static class EvalExpressionExtensions
+public static class InlineEvalExpressionExtensions
 {
-    public static Expression<T> ExpandEval<T>(this Expression<T> expr)
+    public static Expression<T> InlineEval<T>(this Expression<T> expr)
     {
-        return expr.UpdateBody(new ExpandEvalExpressionVisitor());
+        return expr.UpdateBody(new InlineEvalExpressionVisitor());
     }
 
-    private class ExpandEvalExpressionVisitor : ExpressionVisitor
+    private class InlineEvalExpressionVisitor : ExpressionVisitor
     {
         private static readonly MethodInfo[] EvalMethods =
         {
@@ -25,12 +25,12 @@ public static class EvalExpressionExtensions
         {
             var baseVisited = base.VisitMethodCall(node);
 
-            return this.ExpandEval(baseVisited)
+            return this.InlineEval(baseVisited)
                        .Or(() => this.VisitExpressionArguments(baseVisited))
                        .GetValueOrDefault(baseVisited);
         }
 
-        private Maybe<Expression> ExpandEval(Expression baseNode)
+        private Maybe<Expression> InlineEval(Expression baseNode)
         {
             return from node in (baseNode as MethodCallExpression).ToMaybe()
 

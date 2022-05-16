@@ -103,17 +103,17 @@ namespace SampleSystem.IntegrationTests
         }
 
         [TestMethod]
-        public void Test_AAA()
+        public void TestInlineEval_TestPassed()
         {
             var objIdents = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, TestEmployeeLogin, ctx =>
-                                                                                                                   {
-                                                                                                                       var baseFilter = BuildTestPlainAuthObjectSecurityFilter(ctx, SampleSystemSecurityOperation.EmployeeView);
-                                                                                                                       var filter = baseFilter.ExpandConst().ExpandEval();
+           {
+               var baseFilter = BuildTestPlainAuthObjectSecurityFilter(ctx, SampleSystemSecurityOperation.EmployeeView);
+               var filter = baseFilter.ExpandConst().InlineEval();
 
-                                                                                                                       var objs = ctx.Logics.TestPlainAuthObject.GetUnsecureQueryable().Where(filter).ToList();
+               var objs = ctx.Logics.TestPlainAuthObject.GetUnsecureQueryable().Where(filter).ToList();
 
-                                                                                                                       return objs.ToList(obj => obj.ToIdentityDTO());
-                                                                                                                   });
+               return objs.ToList(obj => obj.ToIdentityDTO());
+           });
 
             objIdents.Count().Should().Be(1);
             objIdents[0].Should().Be(this.testPlainAuthObjectIdent);
@@ -145,7 +145,7 @@ namespace SampleSystem.IntegrationTests
                                                                       .Where(item => eqIdentsExpr.Eval(item.EntityType.Id, entityTypeId))
                                                                       .Select(pfe => pfe.EntityId))
                                             .ExpandConst()
-                                            .ExpandEval();
+                                            .InlineEval();
 
             var expander = (IHierarchicalObjectQueryableExpander<Guid>)context.HierarchicalObjectExpanderFactory.Create(typeof(BusinessUnit));
 

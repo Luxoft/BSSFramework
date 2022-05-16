@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 
 using Framework.DomainDriven.BLL;
+using Framework.SecuritySystem;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

@@ -40,12 +40,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
         {
             this.SetCurrentUserRole(new SampleSystemPermission(businessRole));
         }
-
-        public void LoginAs(EmployeeIdentityDTO employee)
-        {
-            this.LoginAs(this.GetEmployeeLogin(employee));
-        }
-
+        
         public Framework.Authorization.Generated.DTO.PrincipalIdentityDTO SavePrincipal(string name, bool active, Guid? externalId = null)
         {
             return this.EvaluateWrite(context =>
@@ -55,17 +50,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
                 return principal.ToIdentityDTO();
             });
         }
-
-        public void LoginAs(string principalName = null)
-        {
-            IntegrationTestsUserAuthenticationService.Instance.CustomUserName = principalName;
-        }
-
-        public new void FinishRunAsUser()
-        {
-            this.LoginAs();
-        }
-
+        
         public string GetCurrentUserLogin()
         {
             return this.EvaluateRead(context => context.Authorization.CurrentPrincipalName);
@@ -90,13 +75,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
         {
             return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, ctx => ctx.Logics.Employee.GetById(employee.Id, true).Login);
         }
-
-        //public PrincipalFullDTO GetPrincipalByName(string login)
-        //{
-        //    return this.EvaluateRead(ctx => ctx.Authorization.Logics.Principal.GetByName(login).Maybe(p => p.ToFullDTO(new AuthorizationServerPrimitiveDTOMappingService(ctx.Authorization))));
-        //}
-
-
+        
         IServiceProvider IControllerEvaluatorContainer.RootServiceProvider => this.Environment.RootServiceProvider;
     }
 }

@@ -7,10 +7,6 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 {
     public class IntegrationTestsUserAuthenticationService : IUserAuthenticationService
     {
-        private IntegrationTestsUserAuthenticationService()
-        {
-        }
-
         private static readonly string DefaultUserName = $"{System.Environment.UserDomainName}\\{System.Environment.UserName}";
 
         public string GetUserName() => this.CustomUserName ?? DefaultUserName;
@@ -32,7 +28,5 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                 this.CustomUserName = prev;
             }
         }
-
-        public static IntegrationTestsUserAuthenticationService Instance = new IntegrationTestsUserAuthenticationService();
     }
 }

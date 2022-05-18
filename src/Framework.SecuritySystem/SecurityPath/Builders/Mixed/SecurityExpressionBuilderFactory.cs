@@ -11,9 +11,9 @@ namespace Framework.SecuritySystem.Rules.Builders.Mixed
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     {
-        private ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> v1Factory;
+        private readonly ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> v1Factory;
 
-        private ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> v2Factory;
+        private readonly ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> v2Factory;
 
         public SecurityExpressionBuilderFactory([NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory, [NotNull] IAuthorizationSystem<TIdent> authorizationSystem)
         {

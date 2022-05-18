@@ -213,7 +213,7 @@ namespace SampleSystem.IntegrationTests.Workflow
         }
 
         [TestMethod]
-        public async Task CreatePermission_TryApproveWithoutAccess_AccessDeniedExceptionReaised()
+        public async Task CreatePermission_TryApproveWithoutAccess_AccessDeniedExceptionRaised()
         {
             // Arrange
             var wfController = this.GetControllerEvaluator<WorkflowController>(UserWithApprove);
@@ -225,6 +225,8 @@ namespace SampleSystem.IntegrationTests.Workflow
 
             var startedWf = wfController.WithIntegrationImpersonate().Evaluate(c => c.StartJob());
             var rootInstanceId = startedWf[permissionIdentity.Id];
+
+            await Task.Delay(3000);
 
             var wfObjects = await WaitToCompleteHelper.Retry(
                                                              () => wfController.EvaluateAsync(c => c.GetMyPendingApproveOperationWorkflowObjects(permissionIdentity)),
@@ -240,7 +242,6 @@ namespace SampleSystem.IntegrationTests.Workflow
             };
 
             // Assert
-
             await tryApprove.Should().ThrowAsync<Exception>($"Permission:{permissionIdentity.Id:D} | Access denied with eventId {wfObjects.Single().ApproveEventId}");
         }
 

@@ -78,10 +78,6 @@ namespace Framework.Authorization.BLL
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetBusinessRoleOperationLinkContainer(rule)));
             }
-            else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.DenormalizedPermissionItem)))
-            {
-                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetDenormalizedPermissionItemContainer(rule)));
-            }
             else if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.EntityType)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetEntityTypeContainer(rule)));
@@ -117,34 +113,6 @@ namespace Framework.Authorization.BLL
             else
             {
                 throw new System.ArgumentOutOfRangeException("TDomainObject");
-            }
-        }
-        
-        protected virtual Framework.DomainDriven.IFetchContainer<Framework.Authorization.Domain.DenormalizedPermissionItem> GetDenormalizedPermissionItemContainer(Framework.Transfering.ViewDTOType rule)
-        {
-            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Authorization.Domain.DenormalizedPermissionItem>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
-            {
-                return Framework.DomainDriven.FetchContainer<Framework.Authorization.Domain.DenormalizedPermissionItem>.Empty;
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Authorization.Domain.DenormalizedPermissionItem>(
-                    fetchRootRule => fetchRootRule.SelectNested(denormalizedPermissionItem => denormalizedPermissionItem.EntityType),
-                    fetchRootRule => fetchRootRule.SelectNested(denormalizedPermissionItem => denormalizedPermissionItem.Permission));
-            }
-            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
-            {
-                return Framework.DomainDriven.FetchContainer.Create<Framework.Authorization.Domain.DenormalizedPermissionItem>(
-                    fetchRootRule => fetchRootRule.SelectNested(denormalizedPermissionItem => denormalizedPermissionItem.EntityType),
-                    fetchRootRule => fetchRootRule.SelectNested(denormalizedPermissionItem => denormalizedPermissionItem.Permission));
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rule");
             }
         }
         

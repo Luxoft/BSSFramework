@@ -37,19 +37,6 @@
     <many-to-one name="BusinessRole" column="businessRoleId" class="Framework.Authorization.Domain.BusinessRole" unique-key="UIX_businessRole_operationBusinessRoleOperationLink" access="field.camelcase" />
     <many-to-one name="Operation" column="operationId" class="Framework.Authorization.Domain.Operation" unique-key="UIX_businessRole_operationBusinessRoleOperationLink" access="field.camelcase" />
   </class>
-  <class name="Framework.Authorization.Domain.DenormalizedPermissionItem" table="DenormalizedPermissionItem">
-    <id name="Id" column="id" type="Guid" access="field.camelcase">
-      <generator class="guid.comb" />
-    </id>
-    <property name="Active" column="active" access="field.camelcase" />
-    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
-    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
-    <property name="EntityId" column="entityId" unique-key="UIX_entityId_entityType_permissionDenormalizedPermissionItem" access="field.camelcase" />
-    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
-    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
-    <many-to-one name="EntityType" column="entityTypeId" class="Framework.Authorization.Domain.EntityType" unique-key="UIX_entityId_entityType_permissionDenormalizedPermissionItem" access="field.camelcase" />
-    <many-to-one name="Permission" column="permissionId" class="Framework.Authorization.Domain.Permission" unique-key="UIX_entityId_entityType_permissionDenormalizedPermissionItem" access="field.camelcase" />
-  </class>
   <class name="Framework.Authorization.Domain.EntityType" table="EntityType">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
@@ -99,10 +86,6 @@
     <set name="DelegatedTo" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
       <key column="delegatedFromId" />
       <one-to-many class="Framework.Authorization.Domain.Permission" />
-    </set>
-    <set name="DenormalizedItems" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
-      <key column="permissionId" />
-      <one-to-many class="Framework.Authorization.Domain.DenormalizedPermissionItem" />
     </set>
     <set name="FilterItems" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
       <key column="permissionId" />

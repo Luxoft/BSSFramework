@@ -16,7 +16,7 @@ namespace Framework.Core.Tests.Unit;
 public class InlineEvalTests
 {
     [Test]
-    public void NulIncExpr_InlineEval_ExprEquals()
+    public void MulIncExpr_InlineEval_ExprEquals()
     {
         // Arrange
         Expression<Func<int, int>> incExpr = x => x + 1;

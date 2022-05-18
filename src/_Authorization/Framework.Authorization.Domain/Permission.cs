@@ -29,15 +29,13 @@ namespace Framework.Authorization.Domain
     [BLLViewRole(MaxCollection = MainDTOType.RichDTO)]
     [BLLRemoveRole]
     [System.Diagnostics.DebuggerDisplay("Principal={Principal.Name}, Role={Role.Name}")]
-    public class Permission : AuditPersistentDomainObjectBase,
+    public partial class Permission : AuditPersistentDomainObjectBase,
 
         IDetail<Principal>,
 
         IMaster<PermissionFilterItem>,
 
         IMaster<Permission>,
-
-        IMaster<DenormalizedPermissionItem>,
 
         IDetail<Permission>,
 
@@ -50,8 +48,6 @@ namespace Framework.Authorization.Domain
         IStatusObject<PermissionStatus>
     {
         private readonly ICollection<PermissionFilterItem> filterItems = new List<PermissionFilterItem>();
-
-        private readonly ICollection<DenormalizedPermissionItem> denormalizedItems = new List<DenormalizedPermissionItem>();
 
         private readonly ICollection<Permission> delegatedTo = new List<Permission>();
 
@@ -108,11 +104,7 @@ namespace Framework.Authorization.Domain
         /// </summary>
         [UniqueGroup]
         public virtual IEnumerable<PermissionFilterItem> FilterItems => this.filterItems;
-
-        [UniqueGroup]
-        [CustomSerialization(CustomSerializationMode.Ignore)]
-        public virtual IEnumerable<DenormalizedPermissionItem> DenormalizedItems => this.denormalizedItems;
-
+        
         /// <summary>
         /// Коллекция пермиссий, которым данная пермиссия была делегирована
         /// </summary>
@@ -199,8 +191,6 @@ namespace Framework.Authorization.Domain
 
         ICollection<PermissionFilterItem> IMaster<PermissionFilterItem>.Details => (ICollection<PermissionFilterItem>)this.FilterItems;
 
-        ICollection<DenormalizedPermissionItem> IMaster<DenormalizedPermissionItem>.Details => (ICollection<DenormalizedPermissionItem>)this.DenormalizedItems;
-
         Principal IDetail<Principal>.Master => this.Principal;
 
         ICollection<Permission> IMaster<Permission>.Details => (ICollection<Permission>)this.DelegatedTo;
@@ -212,8 +202,6 @@ namespace Framework.Authorization.Domain
         IEnumerable<Permission> IChildrenSource<Permission>.Children => this.DelegatedTo;
 
         IEnumerable<IPermissionFilterItem<Guid>> IPermission<Guid>.FilterItems => this.FilterItems;
-
-        IEnumerable<IDenormalizedPermissionItem<Guid>> IPermission<Guid>.DenormalizedItems => this.DenormalizedItems;
 
         /// <summary>
         /// Проверка на уникальноть

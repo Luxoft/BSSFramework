@@ -6,6 +6,6 @@ namespace Framework.SecuritySystem
     {
         IEnumerable<IPermissionFilterItem<TIdent>> FilterItems { get; }
 
-        IEnumerable<IDenormalizedPermissionItem<TIdent>> DenormalizedItems { get; }
+        //IEnumerable<IDenormalizedPermissionItem<TIdent>> DenormalizedItems { get; }
     }
 }

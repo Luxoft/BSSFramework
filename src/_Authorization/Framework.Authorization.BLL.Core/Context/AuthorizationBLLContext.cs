@@ -334,7 +334,7 @@ namespace Framework.Authorization.BLL
                  { typeof(IPermissionFilterItem<Guid>), typeof(PermissionFilterItem) },
                  { typeof(IPermissionFilterEntity<Guid>), typeof(PermissionFilterEntity) },
                  { typeof(IEntityType<Guid>), typeof(EntityType) },
-                 { typeof(IDenormalizedPermissionItem<Guid>), typeof(DenormalizedPermissionItem) },
+                 //{ typeof(IDenormalizedPermissionItem<Guid>), typeof(DenormalizedPermissionItem) },
          });
     }
 }

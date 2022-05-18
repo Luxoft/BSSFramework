@@ -7,6 +7,12 @@ namespace Framework.Core;
 
 public static class InlineEvalExpressionExtensions
 {
+    /// <summary>
+    /// Встраивает вызовы Eval-методов непосредственно в сам текущий Expression
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="expr"></param>
+    /// <returns></returns>
     public static Expression<T> InlineEval<T>(this Expression<T> expr)
     {
         return expr.UpdateBody(new InlineEvalExpressionVisitor());

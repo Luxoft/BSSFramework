@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -7,8 +8,6 @@ using System.Reflection;
 using Framework.Core;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
-
-using JetBrains.Annotations;
 
 namespace Framework.SecuritySystem.Rules.Builders.V2
 {
@@ -22,7 +21,7 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
         internal readonly SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> Factory;
 
         protected SecurityExpressionBuilderBase(
-            [NotNull] SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory)
+            [JetBrains.Annotations.NotNull] SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory)
         {
             this.Factory = factory ?? throw new ArgumentNullException(nameof(factory));
         }
@@ -66,7 +65,7 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
     {
         protected readonly TPath Path;
 
-        protected SecurityExpressionBuilderBase([NotNull] SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory,
+        protected SecurityExpressionBuilderBase([JetBrains.Annotations.NotNull] SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory,
                                                 TPath path) : base(factory)
         {
             this.Path = path ?? throw new ArgumentNullException(nameof(path));
@@ -162,7 +161,7 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
                 return _ => hasAccess;
             }
 
-
+            [SuppressMessage("SonarQube", "S2743")]
             private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.All);
         }
 
@@ -234,6 +233,7 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
                 }
             }
 
+            [SuppressMessage("SonarQube", "S2743")]
             private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.All);
         }
 
@@ -356,6 +356,7 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
                 return this.Path.SecurityPath.Eval(domainObject, LambdaCompileCache).EmptyIfNull();
             }
 
+            [SuppressMessage("SonarQube", "S2743")]
             private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.All);
         }
 
@@ -369,6 +370,7 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
             private static readonly MethodInfo buildOrMethod;
             private static readonly MethodInfo buildAndMethod;
 
+            [SuppressMessage("SonarQube", "S2743")]
             private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.All);
 
             private readonly Lazy<Expression<Func<TDomainObject, HierarchicalExpandType, Expression<Func<IPermission<TIdent>, bool>>>>> _getAccessableFilterLazy;
@@ -441,7 +443,7 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
                 var getAccessorFilters = Expression.Call(
                     builderParameter,
                     getAccessortFilterMethodInfoName,
-                    new Type[0],
+                    Type.EmptyTypes,
                     nestedObjectParameter,
                     expandTypeParameter);
 
@@ -457,7 +459,7 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
                     this.Path.NestedObjectsPath.Body,
                     getAccessorFiltersExpression);
 
-                MethodInfo buildMethodInfo = null;
+                MethodInfo buildMethodInfo;
 
                 switch (this.Path.Mode)
                 {

@@ -18,7 +18,7 @@ public static class InlineEvalExpressionExtensions
         return expr.UpdateBody(new InlineEvalExpressionVisitor());
     }
 
-    private class InlineEvalExpressionVisitor : ExpressionVisitor
+    private sealed class InlineEvalExpressionVisitor : ExpressionVisitor
     {
         private static readonly MethodInfo[] EvalMethods =
         {
@@ -31,12 +31,12 @@ public static class InlineEvalExpressionExtensions
         {
             var baseVisited = base.VisitMethodCall(node);
 
-            return this.InlineEval(baseVisited)
+            return TryInlineEval(baseVisited)
                        .Or(() => this.VisitExpressionArguments(baseVisited))
                        .GetValueOrDefault(baseVisited);
         }
 
-        private Maybe<Expression> InlineEval(Expression baseNode)
+        private static Maybe<Expression> TryInlineEval(Expression baseNode)
         {
             return from node in (baseNode as MethodCallExpression).ToMaybe()
 

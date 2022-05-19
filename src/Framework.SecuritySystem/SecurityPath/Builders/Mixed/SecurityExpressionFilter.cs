@@ -8,11 +8,10 @@ using JetBrains.Annotations;
 
 namespace Framework.SecuritySystem.Rules.Builders.Mixed
 {
-    public class SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject, TSecurityOperationCode, TIdent> : ISecurityExpressionFilter<TDomainObject>
+    public class SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject, TIdent> : ISecurityExpressionFilter<TDomainObject>
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase
-        where TSecurityOperationCode : struct, Enum
     {
         private readonly ISecurityExpressionFilter<TDomainObject> v1Filter;
 

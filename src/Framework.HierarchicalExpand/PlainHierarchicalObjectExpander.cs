@@ -27,7 +27,7 @@ namespace Framework.HierarchicalExpand
             return idents.ToDictionary(id => id, _ => default(TIdent));
         }
 
-        public Expression<Func<IEnumerable<TIdent>, IEnumerable<TIdent>>> GetExpandExpression(HierarchicalExpandType _)
+        public Expression<Func<IEnumerable<TIdent>, IEnumerable<TIdent>>> GetExpandExpression(HierarchicalExpandType expandType)
         {
             return v => v;
         }

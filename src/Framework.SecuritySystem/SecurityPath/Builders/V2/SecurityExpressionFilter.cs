@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -19,6 +20,8 @@ namespace Framework.SecuritySystem.Rules.Builders.V2
 
         private readonly Lazy<Func<TDomainObject, IEnumerable<string>>> getAccessorsFunc;
 
+        // ReSharper disable once StaticMemberInGenericType
+        [SuppressMessage("SonarQube", "S2743")]
         private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache();
 
         public SecurityExpressionFilter(

@@ -66,26 +66,6 @@ namespace SampleSystem.IntegrationTests
                 });
         }
 
-
-        [TestMethod]
-        public void TestNested()
-        {
-            this.EvaluateRead(ctx =>
-            {
-                var baseSecurityPath = SampleSystemSecurityPath<BusinessUnit>.Create(v => v);
-
-                var withNested = SampleSystemSecurityPath<BusinessUnit>.Create(b => b.Children, baseSecurityPath, ManySecurityPathMode.Any);
-
-                var provider = withNested.ToProvider(SampleSystemSecurityOperation.BusinessUnitView, ctx.SecurityExpressionBuilderFactory, ctx.AccessDeniedExceptionService);
-
-                var bll = ctx.Logics.BusinessUnitFactory.Create(provider);
-
-                var result = bll.GetFullList();
-
-                return;
-            });
-        }
-
         [TestMethod]
         public void BusinessUnitProjectionCalcCollectionPropTest()
         {

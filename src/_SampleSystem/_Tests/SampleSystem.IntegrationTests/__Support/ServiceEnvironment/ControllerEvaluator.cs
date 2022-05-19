@@ -15,18 +15,18 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 public class ControllerEvaluator<TController>
         where TController : ControllerBase, IApiControllerBase
 {
-    private readonly IServiceProvider serviceProvider;
+    private readonly IServiceProvider rootServiceProvider;
 
     private readonly string customPrincipalName;
 
-    public ControllerEvaluator([NotNull] IServiceProvider serviceProvider)
-            : this(serviceProvider, null)
+    public ControllerEvaluator([NotNull] IServiceProvider rootServiceProvider)
+            : this(rootServiceProvider, null)
     {
     }
 
-    private ControllerEvaluator([NotNull] IServiceProvider serviceProvider, string customPrincipalName)
+    private ControllerEvaluator([NotNull] IServiceProvider rootServiceProvider, string customPrincipalName)
     {
-        this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+        this.rootServiceProvider = rootServiceProvider ?? throw new ArgumentNullException(nameof(rootServiceProvider));
         this.customPrincipalName = customPrincipalName;
     }
 
@@ -37,7 +37,7 @@ public class ControllerEvaluator<TController>
 
     public async Task<T> EvaluateAsync<T>(Func<TController, Task<T>> func)
     {
-        using var scope = this.serviceProvider.CreateScope();
+        using var scope = this.rootServiceProvider.CreateScope();
 
         var controller = scope.ServiceProvider.GetRequiredService<TController>();
 
@@ -49,7 +49,7 @@ public class ControllerEvaluator<TController>
         }
         else
         {
-            return await IntegrationTestsUserAuthenticationService.Instance.ImpersonateAsync(this.customPrincipalName, async () => await func(controller));
+            return await scope.ServiceProvider.GetRequiredService<IntegrationTestsUserAuthenticationService>().ImpersonateAsync(this.customPrincipalName, async () => await func(controller));
         }
     }
 
@@ -73,7 +73,7 @@ public class ControllerEvaluator<TController>
 
     public ControllerEvaluator<TController> WithImpersonate([CanBeNull] string customPrincipalName)
     {
-        return new ControllerEvaluator<TController>(this.serviceProvider, customPrincipalName);
+        return new ControllerEvaluator<TController>(this.rootServiceProvider, customPrincipalName);
     }
 
     public ControllerEvaluator<TController> WithIntegrationImpersonate()

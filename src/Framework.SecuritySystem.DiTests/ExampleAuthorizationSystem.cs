@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 using Framework.HierarchicalExpand;
@@ -12,6 +13,8 @@ namespace Framework.SecuritySystem.DiTests
             : base(principalPermissionSource, hierarchicalObjectExpanderFactory)
         {
         }
+
+        public override Guid ResolveSecurityTypeId(Type type) => throw new NotImplementedException();
 
         public override bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation) => throw new NotImplementedException();
 

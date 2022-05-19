@@ -1498,6 +1498,36 @@ export class TestObjForNestedIdentityDTO {
 
 }
 
+export class TestPlainAuthObjectIdentityDTO {
+    public static Empty = new TestPlainAuthObjectIdentityDTO(Guid.Empty);
+
+    public __type = 'TestPlainAuthObjectIdentityDTO';
+
+    private _testplainauthobjectidentitydto: string;
+
+    public Id: Guid;
+
+    constructor (id: Guid) {
+        if (!(id)) {
+            throw new Error('Parameter id should be specified');
+        }
+        this.Id = id;
+
+    }
+
+    public static fromJs(source: any): TestPlainAuthObjectIdentityDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        return new TestPlainAuthObjectIdentityDTO(source.Id);
+    }
+
+    public toNativeJson(): TestPlainAuthObjectIdentityDTO {
+        return this;
+    }
+
+}
+
 export class TestRootSecurityObjIdentityDTO {
     public static Empty = new TestRootSecurityObjIdentityDTO(Guid.Empty);
 
@@ -8275,6 +8305,93 @@ export class TestImmutableObjObservableRichDTO extends TestImmutableObjObservabl
 
 }
 
+export class TestItemAuthObjectObservableSimpleDTO extends BaseObservableAuditPersistentDTO {
+    public __type = 'TestItemAuthObjectObservableSimpleDTO';
+
+    private _testitemauthobjectobservablesimpledto: string;
+
+    public static fromJs(source: ITestItemAuthObjectSimpleDTO): TestItemAuthObjectObservableSimpleDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestItemAuthObjectObservableSimpleDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: ITestItemAuthObjectSimpleDTO): void {
+        super.fromJs(source);
+    }
+
+    public toJs(): TestItemAuthObjectSimpleDTO {
+        let e = new TestItemAuthObjectSimpleDTO();
+        e.fromObservable(this);
+        return e;
+    }
+
+}
+
+export class TestItemAuthObjectObservableFullDTO extends TestItemAuthObjectObservableSimpleDTO {
+    public __type = 'TestItemAuthObjectObservableFullDTO';
+
+    private _testitemauthobjectobservablefulldto: string;
+
+    public BusinessUnit = observable<BusinessUnitObservableSimpleDTO>();
+
+    public ManagementUnit = observable<ManagementUnitObservableSimpleDTO>();
+
+    public Master = observable<TestPlainAuthObjectObservableSimpleDTO>();
+
+    public static fromJs(source: ITestItemAuthObjectFullDTO): TestItemAuthObjectObservableFullDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestItemAuthObjectObservableFullDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: ITestItemAuthObjectFullDTO): void {
+        super.fromJs(source);
+        this.BusinessUnit(BusinessUnitObservableSimpleDTO.fromJs(source.BusinessUnit));
+        this.ManagementUnit(ManagementUnitObservableSimpleDTO.fromJs(source.ManagementUnit));
+        this.Master(TestPlainAuthObjectObservableSimpleDTO.fromJs(source.Master));
+    }
+
+    public toJs(): TestItemAuthObjectFullDTO {
+        let e = new TestItemAuthObjectFullDTO();
+        e.fromObservable(this);
+        return e;
+    }
+
+}
+
+export class TestItemAuthObjectObservableRichDTO extends TestItemAuthObjectObservableFullDTO {
+    public __type = 'TestItemAuthObjectObservableRichDTO';
+
+    private _testitemauthobjectobservablerichdto: string;
+
+    public static fromJs(source: ITestItemAuthObjectRichDTO): TestItemAuthObjectObservableRichDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestItemAuthObjectObservableRichDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: ITestItemAuthObjectRichDTO): void {
+        super.fromJs(source);
+    }
+
+    public toJs(): TestItemAuthObjectRichDTO {
+        let e = new TestItemAuthObjectRichDTO();
+        e.fromObservable(this);
+        return e;
+    }
+
+}
+
 export class TestObjForNestedObservableIdentityDTO {
     public Id: Guid;
 
@@ -8325,6 +8442,159 @@ export class TestObjForNestedObservableSimpleDTO extends BaseObservableAuditPers
 
     public toJs(): TestObjForNestedSimpleDTO {
         let e = new TestObjForNestedSimpleDTO();
+        e.fromObservable(this);
+        return e;
+    }
+
+}
+
+export class TestPlainAuthObjectObservableIdentityDTO {
+    public Id: Guid;
+
+    constructor (id: Guid) {
+        if (!(id)) {
+            throw new Error('Parameter id should be specified');
+        }
+        this.Id = id;
+
+    }
+
+    public static fromJs(source: any): TestPlainAuthObjectObservableIdentityDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        return new TestPlainAuthObjectObservableIdentityDTO(source.Id);
+    }
+
+}
+
+export class TestPlainAuthObjectObservableSimpleDTO extends BaseObservableAuditPersistentDTO {
+    public __type = 'TestPlainAuthObjectObservableSimpleDTO';
+
+    private _testplainauthobjectobservablesimpledto: string;
+
+    public Name = observable<string>();
+
+    public static fromJs(source: ITestPlainAuthObjectSimpleDTO): TestPlainAuthObjectObservableSimpleDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestPlainAuthObjectObservableSimpleDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: ITestPlainAuthObjectSimpleDTO): void {
+        super.fromJs(source);
+        this.Name(source.Name);
+    }
+
+    public identity(): TestPlainAuthObjectIdentityDTO {
+        return new TestPlainAuthObjectIdentityDTO(this.Id());
+    }
+
+    public toJs(): TestPlainAuthObjectSimpleDTO {
+        let e = new TestPlainAuthObjectSimpleDTO();
+        e.fromObservable(this);
+        return e;
+    }
+
+}
+
+export class TestPlainAuthObjectObservableFullDTO extends TestPlainAuthObjectObservableSimpleDTO {
+    public __type = 'TestPlainAuthObjectObservableFullDTO';
+
+    private _testplainauthobjectobservablefulldto: string;
+
+    public Location = observable<LocationObservableSimpleDTO>();
+
+    public static fromJs(source: ITestPlainAuthObjectFullDTO): TestPlainAuthObjectObservableFullDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestPlainAuthObjectObservableFullDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: ITestPlainAuthObjectFullDTO): void {
+        super.fromJs(source);
+        this.Location(LocationObservableSimpleDTO.fromJs(source.Location));
+    }
+
+    public toJs(): TestPlainAuthObjectFullDTO {
+        let e = new TestPlainAuthObjectFullDTO();
+        e.fromObservable(this);
+        return e;
+    }
+
+}
+
+export class TestPlainAuthObjectObservableRichDTO extends TestPlainAuthObjectObservableFullDTO {
+    public __type = 'TestPlainAuthObjectObservableRichDTO';
+
+    private _testplainauthobjectobservablerichdto: string;
+
+    public Items = observableArray<TestItemAuthObjectObservableRichDTO>();
+
+    public static fromJs(source: ITestPlainAuthObjectRichDTO): TestPlainAuthObjectObservableRichDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestPlainAuthObjectObservableRichDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: ITestPlainAuthObjectRichDTO): void {
+        super.fromJs(source);
+        if (source.Items) {
+            this.Items(source.Items.map(e => {
+                    return TestItemAuthObjectObservableRichDTO.fromJs(e);
+                }));
+        }
+    }
+
+    public toJs(): TestPlainAuthObjectRichDTO {
+        let e = new TestPlainAuthObjectRichDTO();
+        e.fromObservable(this);
+        return e;
+    }
+
+}
+
+export class TestPlainAuthObjectObservableVisualDTO extends BaseObservablePersistentDTO {
+    public __type = 'TestPlainAuthObjectObservableVisualDTO';
+
+    private _testplainauthobjectobservablevisualdto: string;
+
+    public Name = observable<string>();
+
+    constructor () {
+        super();
+
+    }
+
+    public static fromJs(source: IBasePersistentDTO): TestPlainAuthObjectObservableVisualDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestPlainAuthObjectObservableVisualDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: any): void {
+        super.fromJs(source);
+        this.Name(source.Name);
+    }
+
+    public identity(): TestPlainAuthObjectIdentityDTO {
+        return new TestPlainAuthObjectIdentityDTO(this.Id());
+    }
+
+    public toJs(): TestPlainAuthObjectVisualDTO {
+        let e = new TestPlainAuthObjectVisualDTO();
         e.fromObservable(this);
         return e;
     }
@@ -14452,6 +14722,114 @@ export class TestImmutableObjRichDTO extends TestImmutableObjFullDTO {
 
 }
 
+export class TestItemAuthObjectSimpleDTO extends BaseAuditPersistentDTO {
+    public __type = 'TestItemAuthObjectSimpleDTO';
+
+    private _testitemauthobjectsimpledto: string;
+
+    public static fromJs(source: ITestItemAuthObjectSimpleDTO): TestItemAuthObjectSimpleDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestItemAuthObjectSimpleDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: ITestItemAuthObjectSimpleDTO): void {
+        super.fromJs(source);
+    }
+
+    public fromObservable(source: TestItemAuthObjectObservableSimpleDTO): void {
+        super.fromObservable(source);
+    }
+
+    public toObservable(): TestItemAuthObjectObservableSimpleDTO {
+        let e = new TestItemAuthObjectObservableSimpleDTO();
+        e.fromJs(this);
+        return e;
+    }
+
+}
+
+export class TestItemAuthObjectFullDTO extends TestItemAuthObjectSimpleDTO {
+    public __type = 'TestItemAuthObjectFullDTO';
+
+    private _testitemauthobjectfulldto: string;
+
+    public BusinessUnit: BusinessUnitSimpleDTO;
+
+    public ManagementUnit: ManagementUnitSimpleDTO;
+
+    public Master: TestPlainAuthObjectSimpleDTO;
+
+    public static fromJs(source: ITestItemAuthObjectFullDTO): TestItemAuthObjectFullDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestItemAuthObjectFullDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: ITestItemAuthObjectFullDTO): void {
+        super.fromJs(source);
+        this.BusinessUnit = BusinessUnitSimpleDTO.fromJs(source.BusinessUnit);
+        this.ManagementUnit = ManagementUnitSimpleDTO.fromJs(source.ManagementUnit);
+        this.Master = TestPlainAuthObjectSimpleDTO.fromJs(source.Master);
+    }
+
+    public fromObservable(source: TestItemAuthObjectObservableFullDTO): void {
+        super.fromObservable(source);
+        if (unwrap(source.BusinessUnit)) {
+            this.BusinessUnit = unwrap(source.BusinessUnit).toJs();
+        }
+        if (unwrap(source.ManagementUnit)) {
+            this.ManagementUnit = unwrap(source.ManagementUnit).toJs();
+        }
+        if (unwrap(source.Master)) {
+            this.Master = unwrap(source.Master).toJs();
+        }
+    }
+
+    public toObservable(): TestItemAuthObjectObservableFullDTO {
+        let e = new TestItemAuthObjectObservableFullDTO();
+        e.fromJs(this);
+        return e;
+    }
+
+}
+
+export class TestItemAuthObjectRichDTO extends TestItemAuthObjectFullDTO {
+    public __type = 'TestItemAuthObjectRichDTO';
+
+    private _testitemauthobjectrichdto: string;
+
+    public static fromJs(source: ITestItemAuthObjectRichDTO): TestItemAuthObjectRichDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestItemAuthObjectRichDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: ITestItemAuthObjectRichDTO): void {
+        super.fromJs(source);
+    }
+
+    public fromObservable(source: TestItemAuthObjectObservableRichDTO): void {
+        super.fromObservable(source);
+    }
+
+    public toObservable(): TestItemAuthObjectObservableRichDTO {
+        let e = new TestItemAuthObjectObservableRichDTO();
+        e.fromJs(this);
+        return e;
+    }
+
+}
+
 export class TestObjForNestedSimpleDTO extends BaseAuditPersistentDTO {
     public __type = 'TestObjForNestedSimpleDTO';
 
@@ -14488,6 +14866,122 @@ export class TestObjForNestedSimpleDTO extends BaseAuditPersistentDTO {
 
     public toObservable(): TestObjForNestedObservableSimpleDTO {
         let e = new TestObjForNestedObservableSimpleDTO();
+        e.fromJs(this);
+        return e;
+    }
+
+}
+
+export class TestPlainAuthObjectSimpleDTO extends BaseAuditPersistentDTO {
+    public __type = 'TestPlainAuthObjectSimpleDTO';
+
+    private _testplainauthobjectsimpledto: string;
+
+    public Name: string;
+
+    public get Identity() : TestPlainAuthObjectIdentityDTO {
+        return new TestPlainAuthObjectIdentityDTO(this.Id);
+    }
+
+    public static fromJs(source: ITestPlainAuthObjectSimpleDTO): TestPlainAuthObjectSimpleDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestPlainAuthObjectSimpleDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: ITestPlainAuthObjectSimpleDTO): void {
+        super.fromJs(source);
+        this.Name = source.Name;
+    }
+
+    public fromObservable(source: TestPlainAuthObjectObservableSimpleDTO): void {
+        super.fromObservable(source);
+        this.Name = unwrap(source.Name);
+    }
+
+    public toObservable(): TestPlainAuthObjectObservableSimpleDTO {
+        let e = new TestPlainAuthObjectObservableSimpleDTO();
+        e.fromJs(this);
+        return e;
+    }
+
+}
+
+export class TestPlainAuthObjectFullDTO extends TestPlainAuthObjectSimpleDTO {
+    public __type = 'TestPlainAuthObjectFullDTO';
+
+    private _testplainauthobjectfulldto: string;
+
+    public Location: LocationSimpleDTO;
+
+    public static fromJs(source: ITestPlainAuthObjectFullDTO): TestPlainAuthObjectFullDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestPlainAuthObjectFullDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: ITestPlainAuthObjectFullDTO): void {
+        super.fromJs(source);
+        this.Location = LocationSimpleDTO.fromJs(source.Location);
+    }
+
+    public fromObservable(source: TestPlainAuthObjectObservableFullDTO): void {
+        super.fromObservable(source);
+        if (unwrap(source.Location)) {
+            this.Location = unwrap(source.Location).toJs();
+        }
+    }
+
+    public toObservable(): TestPlainAuthObjectObservableFullDTO {
+        let e = new TestPlainAuthObjectObservableFullDTO();
+        e.fromJs(this);
+        return e;
+    }
+
+}
+
+export class TestPlainAuthObjectRichDTO extends TestPlainAuthObjectFullDTO {
+    public __type = 'TestPlainAuthObjectRichDTO';
+
+    private _testplainauthobjectrichdto: string;
+
+    public Items: TestItemAuthObjectRichDTO [];
+
+    public static fromJs(source: ITestPlainAuthObjectRichDTO): TestPlainAuthObjectRichDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestPlainAuthObjectRichDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: ITestPlainAuthObjectRichDTO): void {
+        super.fromJs(source);
+        if (source.Items) {
+            this.Items = source.Items.map(e => {
+                return TestItemAuthObjectRichDTO.fromJs(e);
+            });
+        }
+    }
+
+    public fromObservable(source: TestPlainAuthObjectObservableRichDTO): void {
+        super.fromObservable(source);
+        if (unwrap(source.Items)) {
+            this.Items = source.Items().map(e => {
+                return e.toJs();
+            });
+        }
+    }
+
+    public toObservable(): TestPlainAuthObjectObservableRichDTO {
+        let e = new TestPlainAuthObjectObservableRichDTO();
         e.fromJs(this);
         return e;
     }
@@ -16350,9 +16844,72 @@ export interface ITestImmutableObjFullDTO extends ITestImmutableObjSimpleDTO {
 export interface ITestImmutableObjRichDTO extends ITestImmutableObjFullDTO {
 }
 
+export interface ITestItemAuthObjectSimpleDTO extends IBaseAuditPersistentDTO {
+}
+
+export interface ITestItemAuthObjectFullDTO extends ITestItemAuthObjectSimpleDTO {
+    BusinessUnit : BusinessUnitSimpleDTO;
+    ManagementUnit : ManagementUnitSimpleDTO;
+    Master : TestPlainAuthObjectSimpleDTO;
+}
+
+export interface ITestItemAuthObjectRichDTO extends ITestItemAuthObjectFullDTO {
+}
+
 export interface ITestObjForNestedSimpleDTO extends IBaseAuditPersistentDTO {
     Name : string;
     Period : Framework.Core.Period;
+}
+
+export interface ITestPlainAuthObjectSimpleDTO extends IBaseAuditPersistentDTO {
+    Name : string;
+}
+
+export interface ITestPlainAuthObjectFullDTO extends ITestPlainAuthObjectSimpleDTO {
+    Location : LocationSimpleDTO;
+}
+
+export interface ITestPlainAuthObjectRichDTO extends ITestPlainAuthObjectFullDTO {
+    Items : TestItemAuthObjectRichDTO [];
+}
+
+export class TestPlainAuthObjectVisualDTO extends BasePersistentDTO {
+    public __type = 'TestPlainAuthObjectVisualDTO';
+
+    private _testplainauthobjectvisualdto: string;
+
+    public Name: string;
+
+    constructor () {
+        super();
+
+    }
+
+    public static fromJs(source: IBasePersistentDTO): TestPlainAuthObjectVisualDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestPlainAuthObjectVisualDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: any): void {
+        super.fromJs(source);
+        this.Name = source.Name;
+    }
+
+    public fromObservable(source: TestPlainAuthObjectObservableVisualDTO): void {
+        super.fromObservable(source);
+        this.Name = unwrap(source.Name);
+    }
+
+    public toObservable(): TestPlainAuthObjectObservableVisualDTO {
+        let e = new TestPlainAuthObjectObservableVisualDTO();
+        e.fromJs(this);
+        return e;
+    }
+
 }
 
 export interface ITestRootSecurityObjSimpleDTO extends IBaseAuditPersistentDTO {

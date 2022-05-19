@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Framework.DomainDriven;
@@ -6,7 +7,6 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Restriction;
-using Framework.Security;
 using Framework.SecuritySystem;
 
 namespace SampleSystem.Domain
@@ -16,8 +16,9 @@ namespace SampleSystem.Domain
     [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.LocationView, SampleSystemSecurityOperationCode.HRDepartmentEdit)]
     [SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.LocationEdit)]
     [UniqueGroup]
-    public partial class Location :
+    public class Location :
         BaseDirectory,
+        IDenormalizedHierarchicalPersistentSource<LocationAncestorLink, LocationToAncestorChildView, Location, Guid>,
         IDefaultHierarchicalPersistentDomainObjectBase<Location>,
         IMaster<Location>,
         IDetail<Location>,

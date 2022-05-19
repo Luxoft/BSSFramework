@@ -8,7 +8,7 @@ using Framework.HierarchicalExpand;
 using Framework.QueryableSource;
 using Framework.SecuritySystem.Exceptions;
 using Framework.SecuritySystem.Rules.Builders;
-using Framework.SecuritySystem.Rules.Builders.V1;
+using V1 = Framework.SecuritySystem.Rules.Builders.V1;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -98,7 +98,7 @@ namespace Framework.SecuritySystem.DiTests
 
                    .AddScoped<IDisabledSecurityProviderContainer<PersistentDomainObjectBase>, DisabledSecurityProviderContainer<PersistentDomainObjectBase>>()
                    .AddScoped<IAccessDeniedExceptionService<PersistentDomainObjectBase>, AccessDeniedExceptionService<PersistentDomainObjectBase, Guid>>()
-                   .AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, SecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
+                   .AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, V1.SecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
                    .AddScoped<IAuthorizationSystem<Guid>, ExampleAuthorizationSystem>()
                    .AddScoped<IHierarchicalObjectExpanderFactory<Guid>, HierarchicalObjectExpanderFactory<PersistentDomainObjectBase, Guid>>()
                    .AddScoped<IDomainSecurityService<Employee, ExampleSecurityOperation>, EmployeeSecurityService>()

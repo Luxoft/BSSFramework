@@ -17,7 +17,7 @@ public static class WaitToCompleteHelper
         {
             Thread.Sleep(100);
             counter++;
-            res = func(); ;
+            res = func();
         }
 
         return res;

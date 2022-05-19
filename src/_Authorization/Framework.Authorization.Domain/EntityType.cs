@@ -1,4 +1,6 @@
-﻿using Framework.DomainDriven.BLL;
+﻿using System;
+
+using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Serialization;
 using Framework.HierarchicalExpand;
@@ -18,7 +20,7 @@ namespace Framework.Authorization.Domain
     /// </remarks>
     [BLLViewRole]
     [AuthorizationViewDomainObject(AuthorizationSecurityOperationCode.Disabled)]
-    public class EntityType : BaseDirectory, IEntityType
+    public class EntityType : BaseDirectory, IEntityType<Guid>
     {
         private readonly bool isFilter;
 

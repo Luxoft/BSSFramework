@@ -19,6 +19,8 @@ namespace Framework.SecuritySystem.Rules.Builders.V1
 
         private readonly Lazy<Func<TDomainObject, IEnumerable<string>>> getAccessorsFunc;
 
+        private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.All);
+
         public SecurityExpressionFilter(
             SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent> builder,
             ContextSecurityOperation<TSecurityOperationCode> securityOperation)
@@ -30,11 +32,13 @@ namespace Framework.SecuritySystem.Rules.Builders.V1
 
             var permissions = builder.Factory.AuthorizationSystem.GetPermissions(securityOperation, usedTypes);
 
-            var expression = builder.GetSecurityFilterExpression(permissions);
+            var filterExpression = builder.GetSecurityFilterExpression(permissions);
 
-            this.InjectFunc = q => q.Where(expression);
+            this.InjectFunc = q => q.Where(filterExpression);
 
-            this.optimizedLazyExpression = LazyHelper.Create(() => expression.UpdateBody(OptimizeContainsCallVisitor<TIdent>.Value));
+            this.optimizedLazyExpression = LazyHelper.Create(() => filterExpression.UpdateBody(OptimizeContainsCallVisitor<TIdent>.Value));
+
+            this.HasAccessFunc = filterExpression.Compile(LambdaCompileCache);
 
             this.getAccessorsFunc = LazyHelper.Create(() => FuncHelper.Create((TDomainObject domainObject) =>
             {
@@ -47,10 +51,11 @@ namespace Framework.SecuritySystem.Rules.Builders.V1
         }
 
 
-        public Expression<Func<TDomainObject, bool>> Expression { get { return this.optimizedLazyExpression.Value; } }
+        public Expression<Func<TDomainObject, bool>> Expression => this.optimizedLazyExpression.Value;
 
-        public Func<IQueryable<TDomainObject>, IQueryable<TDomainObject>> InjectFunc { get; private set; }
+        public Func<IQueryable<TDomainObject>, IQueryable<TDomainObject>> InjectFunc { get; }
 
+        public Func<TDomainObject, bool> HasAccessFunc { get; }
 
         public IEnumerable<string> GetAccessors(TDomainObject domainObject)
         {

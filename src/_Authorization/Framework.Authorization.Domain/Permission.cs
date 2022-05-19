@@ -29,7 +29,7 @@ namespace Framework.Authorization.Domain
     [BLLViewRole(MaxCollection = MainDTOType.RichDTO)]
     [BLLRemoveRole]
     [System.Diagnostics.DebuggerDisplay("Principal={Principal.Name}, Role={Role.Name}")]
-    public class Permission : AuditPersistentDomainObjectBase,
+    public partial class Permission : AuditPersistentDomainObjectBase,
 
         IDetail<Principal>,
 
@@ -104,7 +104,7 @@ namespace Framework.Authorization.Domain
         /// </summary>
         [UniqueGroup]
         public virtual IEnumerable<PermissionFilterItem> FilterItems => this.filterItems;
-
+        
         /// <summary>
         /// Коллекция пермиссий, которым данная пермиссия была делегирована
         /// </summary>
@@ -189,40 +189,19 @@ namespace Framework.Authorization.Domain
             set { this.comment = value.TrimNull(); }
         }
 
-        ICollection<PermissionFilterItem> IMaster<PermissionFilterItem>.Details
-        {
-            get { return (ICollection<PermissionFilterItem>)this.FilterItems; }
-        }
+        ICollection<PermissionFilterItem> IMaster<PermissionFilterItem>.Details => (ICollection<PermissionFilterItem>)this.FilterItems;
 
-        Principal IDetail<Principal>.Master
-        {
-            get { return this.Principal; }
-        }
+        Principal IDetail<Principal>.Master => this.Principal;
 
-        ICollection<Permission> IMaster<Permission>.Details
-        {
-            get { return this.delegatedTo; }
-        }
+        ICollection<Permission> IMaster<Permission>.Details => (ICollection<Permission>)this.DelegatedTo;
 
-        Permission IDetail<Permission>.Master
-        {
-            get { return this.DelegatedFrom; }
-        }
+        Permission IDetail<Permission>.Master => this.DelegatedFrom;
 
-        Permission IParentSource<Permission>.Parent
-        {
-            get { return this.DelegatedFrom; }
-        }
+        Permission IParentSource<Permission>.Parent => this.DelegatedFrom;
 
-        IEnumerable<Permission> IChildrenSource<Permission>.Children
-        {
-            get { return this.DelegatedTo; }
-        }
+        IEnumerable<Permission> IChildrenSource<Permission>.Children => this.DelegatedTo;
 
-        IEnumerable<IPermissionFilterItem<Guid>> IPermission<Guid>.FilterItems
-        {
-            get { return this.FilterItems; }
-        }
+        IEnumerable<IPermissionFilterItem<Guid>> IPermission<Guid>.FilterItems => this.FilterItems;
 
         /// <summary>
         /// Проверка на уникальноть

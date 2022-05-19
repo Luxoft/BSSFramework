@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace Framework.SecuritySystem
@@ -23,5 +24,10 @@ namespace Framework.SecuritySystem
             ContextSecurityOperation<TSecurityOperationCode> securityOperation,
             IEnumerable<Type> securityTypes)
             where TSecurityOperationCode : struct, Enum;
+
+        IQueryable<IPermission<TIdent>> GetPermissionQuery<TSecurityOperationCode>(ContextSecurityOperation<TSecurityOperationCode> securityOperation)
+                where TSecurityOperationCode : struct, Enum;
+
+        TIdent ResolveSecurityTypeId(Type type);
     }
 }

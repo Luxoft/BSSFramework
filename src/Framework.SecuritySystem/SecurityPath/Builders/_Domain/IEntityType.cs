@@ -2,7 +2,7 @@
 
 namespace Framework.SecuritySystem
 {
-    public interface IEntityType : IVisualIdentityObject
+    public interface IEntityType<out TIdent> : IVisualIdentityObject, IIdentityObject<TIdent>
     {
 
     }

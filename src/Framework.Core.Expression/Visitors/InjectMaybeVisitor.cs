@@ -48,9 +48,9 @@ namespace Framework.Core
 
         protected override Expression VisitMember(MemberExpression node)
         {
-            var baseVisitedExression = this.Visit(node.Expression);
+            var baseVisitedExpression = this.Visit(node.Expression);
 
-            var isWrapped = baseVisitedExression.Type.IsMaybe();
+            var isWrapped = baseVisitedExpression.Type.IsMaybe();
 
             var isValueSource = node.Expression.Type.IsValueType;
 
@@ -65,7 +65,7 @@ namespace Framework.Core
 
                     if (nullableType != null && node.Member.Name == "Value")
                     {
-                        return baseVisitedExression.OverrideSelect(v => v.Return());
+                        return baseVisitedExpression.OverrideSelect(v => v.Return());
                     }
                     else
                     {
@@ -73,18 +73,18 @@ namespace Framework.Core
 
                         var lambda = Expression.Lambda(Expression.MakeMemberAccess(param, node.Member), param);
 
-                        return Expression.Call(method, baseVisitedExression, lambda);
+                        return Expression.Call(method, baseVisitedExpression, lambda);
                     }
                 }
                 else
                 {
-                    var visitedExression = baseVisitedExression.OverrideSelect(ex => ex.Return());
+                    var visitedExpression = baseVisitedExpression.OverrideSelect(ex => ex.Return());
 
                     var method = SelectMethod.MakeGenericMethod(param.Type, node.Type);
 
                     var lambda = Expression.Lambda(Expression.MakeMemberAccess(param, node.Member), param);
 
-                    return Expression.Call(method, visitedExression, lambda);
+                    return Expression.Call(method, visitedExpression, lambda);
                 }
             }
             else
@@ -95,7 +95,7 @@ namespace Framework.Core
 
                     if (nullableType != null && node.Member.Name == "Value")
                     {
-                        return baseVisitedExression.OverrideSelect(v => v.Return());
+                        return baseVisitedExpression.OverrideSelect(v => v.Return());
                     }
                     else
                     {
@@ -104,13 +104,13 @@ namespace Framework.Core
                 }
                 else
                 {
-                    var visitedExression = baseVisitedExression.Return();
+                    var visitedExpression = baseVisitedExpression.Return();
 
                     var method = new Func<Maybe<object>, Func<object, object>, Maybe<object>>(MaybeExtensions.Select).CreateGenericMethod(param.Type, node.Type);
 
                     var lambda = Expression.Lambda(Expression.MakeMemberAccess(param, node.Member), param);
 
-                    return Expression.Call(method, visitedExression, lambda);
+                    return Expression.Call(method, visitedExpression, lambda);
                 }
             }
         }

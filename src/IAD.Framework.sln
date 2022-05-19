@@ -388,7 +388,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleSystem.CheckGenTests"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GeneratedTools", "GeneratedTools", "{6D5DE826-5C07-408B-AFDC-DF5690104EF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Authorization.ApproveWorkflow", "_Authorization\Framework.Authorization.ApproveWorkflow\Framework.Authorization.ApproveWorkflow.csproj", "{24F41E7D-4D0F-4B52-8A35-18C4F6FBD31F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Authorization.ApproveWorkflow", "_Authorization\Framework.Authorization.ApproveWorkflow\Framework.Authorization.ApproveWorkflow.csproj", "{24F41E7D-4D0F-4B52-8A35-18C4F6FBD31F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Core.VisistedQueryable", "Framework.Core.VisistedQueryable\Framework.Core.VisistedQueryable.csproj", "{FC4C1FC4-BCDA-40E6-BC57-F9F804B0028E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -3520,6 +3522,26 @@ Global
 		{24F41E7D-4D0F-4B52-8A35-18C4F6FBD31F}.Release|x64.Build.0 = Release|Any CPU
 		{24F41E7D-4D0F-4B52-8A35-18C4F6FBD31F}.Release|x86.ActiveCfg = Release|Any CPU
 		{24F41E7D-4D0F-4B52-8A35-18C4F6FBD31F}.Release|x86.Build.0 = Release|Any CPU
+		{FC4C1FC4-BCDA-40E6-BC57-F9F804B0028E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC4C1FC4-BCDA-40E6-BC57-F9F804B0028E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC4C1FC4-BCDA-40E6-BC57-F9F804B0028E}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{FC4C1FC4-BCDA-40E6-BC57-F9F804B0028E}.Debug|ARM.Build.0 = Debug|Any CPU
+		{FC4C1FC4-BCDA-40E6-BC57-F9F804B0028E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FC4C1FC4-BCDA-40E6-BC57-F9F804B0028E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FC4C1FC4-BCDA-40E6-BC57-F9F804B0028E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FC4C1FC4-BCDA-40E6-BC57-F9F804B0028E}.Debug|x64.Build.0 = Debug|Any CPU
+		{FC4C1FC4-BCDA-40E6-BC57-F9F804B0028E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FC4C1FC4-BCDA-40E6-BC57-F9F804B0028E}.Debug|x86.Build.0 = Debug|Any CPU
+		{FC4C1FC4-BCDA-40E6-BC57-F9F804B0028E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC4C1FC4-BCDA-40E6-BC57-F9F804B0028E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC4C1FC4-BCDA-40E6-BC57-F9F804B0028E}.Release|ARM.ActiveCfg = Release|Any CPU
+		{FC4C1FC4-BCDA-40E6-BC57-F9F804B0028E}.Release|ARM.Build.0 = Release|Any CPU
+		{FC4C1FC4-BCDA-40E6-BC57-F9F804B0028E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FC4C1FC4-BCDA-40E6-BC57-F9F804B0028E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FC4C1FC4-BCDA-40E6-BC57-F9F804B0028E}.Release|x64.ActiveCfg = Release|Any CPU
+		{FC4C1FC4-BCDA-40E6-BC57-F9F804B0028E}.Release|x64.Build.0 = Release|Any CPU
+		{FC4C1FC4-BCDA-40E6-BC57-F9F804B0028E}.Release|x86.ActiveCfg = Release|Any CPU
+		{FC4C1FC4-BCDA-40E6-BC57-F9F804B0028E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

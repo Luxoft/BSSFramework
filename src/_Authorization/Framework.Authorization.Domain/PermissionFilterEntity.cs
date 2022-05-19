@@ -42,9 +42,6 @@ namespace Framework.Authorization.Domain
             set { this.entityId = value; }
         }
 
-        IEntityType IPermissionFilterEntity<Guid>.EntityType
-        {
-            get { return this.EntityType; }
-        }
+        IEntityType<Guid> IPermissionFilterEntity<Guid>.EntityType => this.EntityType;
     }
 }

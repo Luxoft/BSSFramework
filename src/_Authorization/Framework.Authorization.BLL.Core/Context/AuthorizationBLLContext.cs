@@ -15,6 +15,7 @@ using Framework.DomainDriven.BLL.Tracking;
 using Framework.HierarchicalExpand;
 using Framework.Projection;
 using Framework.QueryLanguage;
+using Framework.Security;
 using Framework.SecuritySystem;
 using Framework.Validation;
 
@@ -188,6 +189,12 @@ namespace Framework.Authorization.BLL
             return this.HasAccess(securityOperation, true);
         }
 
+
+        public Guid ResolveSecurityTypeId(Type type)
+        {
+            return this.GetEntityType(type.GetProjectionSourceTypeOrSelf()).Id;
+        }
+
         public string ResolveSecurityTypeName(Type type)
         {
             return type.GetProjectionSourceTypeOrSelf().Name;
@@ -212,6 +219,17 @@ namespace Framework.Authorization.BLL
             return permissions.Select(permission => permission.ToDictionary(securityTypesCache))
                 .Optimize()
                 .ToList(permission => this.TryExpandPermission(permission, securityOperation.SecurityExpandType));
+        }
+
+        public IQueryable<IPermission<Guid>> GetPermissionQuery<TSecurityOperationCode>(ContextSecurityOperation<TSecurityOperationCode> securityOperation)
+                where TSecurityOperationCode : struct, Enum
+        {
+            var filter = new AvailablePermissionOperationFilter<TSecurityOperationCode>(
+               this.DateTimeService, this.RunAsManager.PrincipalName, securityOperation.Code);
+
+            return this.Logics.Permission.GetUnsecureQueryable().Where(filter.ToFilterExpression())
+                       //.Visit(AuthVisitor)
+                       ;
         }
 
         private IEnumerable<string> GetAccessors(Expression<Func<Principal, bool>> principalFilter, AvailablePermissionFilter permissionFilter)
@@ -243,18 +261,10 @@ namespace Framework.Authorization.BLL
         {
             if (principalFilter == null) throw new ArgumentNullException(nameof(principalFilter));
 
-            var mapVisitor = new OverrideParameterTypeVisitor(
-                new Dictionary<Type, Type>
-                {
-                    { typeof(IPrincipal<Guid>), typeof(Principal) },
-                    { typeof(IPermission<Guid>), typeof(Permission) },
-                    { typeof(IPermissionFilterItem<Guid>), typeof(PermissionFilterItem) },
-                    { typeof(IPermissionFilterEntity<Guid>), typeof(PermissionFilterEntity) },
-                    { typeof(IEntityType), typeof(EntityType) }
-                });
+
 
             return this.GetAccessors(
-                (Expression<Func<Principal, bool>>)mapVisitor.Visit(principalFilter),
+                (Expression<Func<Principal, bool>>)AuthVisitor.Visit(principalFilter),
                 new AvailablePermissionOperationFilter<TSecurityOperationCode>(this.DateTimeService, null, securityOperationCode));
         }
 
@@ -315,5 +325,16 @@ namespace Framework.Authorization.BLL
         }
 
         IAuthorizationBLLContext IAuthorizationBLLContextContainer<IAuthorizationBLLContext>.Authorization => this;
+
+        private static readonly ExpressionVisitor AuthVisitor = new OverrideParameterTypeVisitor(
+         new Dictionary<Type, Type>
+         {
+                 { typeof(IPrincipal<Guid>), typeof(Principal) },
+                 { typeof(IPermission<Guid>), typeof(Permission) },
+                 { typeof(IPermissionFilterItem<Guid>), typeof(PermissionFilterItem) },
+                 { typeof(IPermissionFilterEntity<Guid>), typeof(PermissionFilterEntity) },
+                 { typeof(IEntityType<Guid>), typeof(EntityType) },
+                 //{ typeof(IDenormalizedPermissionItem<Guid>), typeof(DenormalizedPermissionItem) },
+         });
     }
 }

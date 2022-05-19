@@ -71,6 +71,8 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer2>(this.GetIntegrationVersionContainer2ValidationResult);
             base.RegisterHandler<SampleSystem.Domain.LegalEntityBase>(this.GetLegalEntityBaseValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Location>(this.GetLocationValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.LocationAncestorLink>(this.GetLocationAncestorLinkValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.LocationToAncestorChildView>(this.GetLocationToAncestorChildViewValidationResult);
             base.RegisterHandler<SampleSystem.Domain.ManagementUnit>(this.GetManagementUnitValidationResult);
             base.RegisterHandler<SampleSystem.Domain.ManagementUnitAncestorLink>(this.GetManagementUnitAncestorLinkValidationResult);
             base.RegisterHandler<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>(this.GetManagementUnitAndBusinessUnitLinkValidationResult);
@@ -96,9 +98,11 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.TestForceAbstract.ClassAChild>(this.GetClassAChildValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestForceAbstract.ConcreteClassA>(this.GetConcreteClassAValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestImmutableObj>(this.GetTestImmutableObjValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.TestItemAuthObject>(this.GetTestItemAuthObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestObj>(this.GetTestObjValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestObjForNested>(this.GetTestObjForNestedValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestObjForNestedBase>(this.GetTestObjForNestedBaseValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.TestPlainAuthObject>(this.GetTestPlainAuthObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestRootSecurityObj>(this.GetTestRootSecurityObjValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestSecurityObjItem>(this.GetTestSecurityObjItemValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestSecuritySubObjItem>(this.GetTestSecuritySubObjItemValidationResult);
@@ -428,6 +432,16 @@ namespace SampleSystem.BLL
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
+        protected virtual Framework.Validation.ValidationResult GetLocationAncestorLinkValidationResult(SampleSystem.Domain.LocationAncestorLink source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetLocationToAncestorChildViewValidationResult(SampleSystem.Domain.LocationToAncestorChildView source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
         protected virtual Framework.Validation.ValidationResult GetLocationValidationResult(SampleSystem.Domain.Location source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
@@ -523,6 +537,11 @@ namespace SampleSystem.BLL
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
+        protected virtual Framework.Validation.ValidationResult GetTestItemAuthObjectValidationResult(SampleSystem.Domain.TestItemAuthObject source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
         protected virtual Framework.Validation.ValidationResult GetTestObjForNestedBaseValidationResult(SampleSystem.Domain.TestObjForNestedBase source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
@@ -534,6 +553,11 @@ namespace SampleSystem.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetTestObjValidationResult(SampleSystem.Domain.TestObj source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetTestPlainAuthObjectValidationResult(SampleSystem.Domain.TestPlainAuthObject source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

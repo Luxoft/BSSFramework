@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Framework.Authorization.ApproveWorkflow</PackageId>
+    <PackageId>Luxoft.Framework.Authorization.ApproveWorkflow</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

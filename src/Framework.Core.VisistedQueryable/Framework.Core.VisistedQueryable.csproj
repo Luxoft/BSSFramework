@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <PackageId>Framework.Core.VisistedQueryable</PackageId>
+    <PackageId>Luxoft.Framework.Core.VisistedQueryable</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

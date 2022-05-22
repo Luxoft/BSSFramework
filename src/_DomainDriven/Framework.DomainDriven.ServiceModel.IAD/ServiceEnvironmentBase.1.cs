@@ -49,7 +49,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         {
             foreach (var module in this.GetModules())
             {
-                foreach (var listener in module.GetDALFlushedListeners(container))
+                foreach (var listener in module.GetBeforeTransactionCompletedListeners(container))
                 {
                     yield return listener;
                 }

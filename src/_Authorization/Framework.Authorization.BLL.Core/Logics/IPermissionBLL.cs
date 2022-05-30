@@ -9,6 +9,8 @@ namespace Framework.Authorization.BLL
     {
         void Save(Permission permission, bool withValidate);
 
+        void RecalculateDenormalizedItems(Permission permission);
+
         void ValidatePermissionDelegated(Permission permission, ValidatePermissonDelegateMode mode);
 
         void ValidateApprovingPermission(Permission permission);

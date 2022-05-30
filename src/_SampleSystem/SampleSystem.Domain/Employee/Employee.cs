@@ -36,7 +36,8 @@ namespace SampleSystem.Domain
         IMaster<EmployeeAndEmployeeSpecializationLink>,
         IMaster<EmployeePhoto>,
         ISecurityContext,
-        IEmployee
+        IEmployee,
+        ISecurityVisualIdentityObject
     {
         private readonly ICollection<EmployeePhoto> employeePhotos = new List<EmployeePhoto>();
 
@@ -441,6 +442,8 @@ namespace SampleSystem.Domain
         {
             get { return this.employeePhotos; }
         }
+
+        string ISecurityVisualIdentityObject.Name => this.Login;
 
         public virtual int Age
         {

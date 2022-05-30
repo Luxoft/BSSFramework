@@ -13,25 +13,25 @@ namespace Framework.SecuritySystem.Rules.Builders.Mixed
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase
     {
-        private readonly ISecurityExpressionFilter<TDomainObject> v1Filter;
+        private readonly ISecurityExpressionFilter<TDomainObject> firstFilter;
 
-        private readonly ISecurityExpressionFilter<TDomainObject> v2Filter;
+        private readonly ISecurityExpressionFilter<TDomainObject> secondFilter;
 
         public SecurityExpressionFilter(
-                [NotNull] ISecurityExpressionFilter<TDomainObject> v1Filter,
-                [NotNull] ISecurityExpressionFilter<TDomainObject> v2Filter)
+                [NotNull] ISecurityExpressionFilter<TDomainObject> firstFilter,
+                [NotNull] ISecurityExpressionFilter<TDomainObject> secondFilter)
         {
-            this.v1Filter = v1Filter ?? throw new ArgumentNullException(nameof(v1Filter));
-            this.v2Filter = v2Filter ?? throw new ArgumentNullException(nameof(v2Filter));
+            this.firstFilter = firstFilter ?? throw new ArgumentNullException(nameof(firstFilter));
+            this.secondFilter = secondFilter ?? throw new ArgumentNullException(nameof(secondFilter));
         }
 
-        public Func<IQueryable<TDomainObject>, IQueryable<TDomainObject>> InjectFunc => this.v2Filter.InjectFunc;
+        public Func<IQueryable<TDomainObject>, IQueryable<TDomainObject>> InjectFunc => this.secondFilter.InjectFunc;
 
-        public Func<TDomainObject, bool> HasAccessFunc => this.v1Filter.HasAccessFunc;
+        public Func<TDomainObject, bool> HasAccessFunc => this.firstFilter.HasAccessFunc;
 
         public IEnumerable<string> GetAccessors(TDomainObject domainObject)
         {
-            return this.v1Filter.GetAccessors(domainObject);
+            return this.firstFilter.GetAccessors(domainObject);
         }
     }
 }

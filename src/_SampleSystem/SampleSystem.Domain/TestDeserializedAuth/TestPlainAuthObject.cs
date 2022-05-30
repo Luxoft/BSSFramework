@@ -14,10 +14,19 @@ namespace SampleSystem.Domain
 
         private Location location;
 
+        private Employee employee;
+        
+
         public virtual Location Location
         {
             get { return this.location; }
             set { this.location = value; }
+        }
+
+        public virtual Employee Employee
+        {
+            get { return this.employee; }
+            set { this.employee = value; }
         }
 
         public virtual IEnumerable<TestItemAuthObject> Items

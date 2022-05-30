@@ -36,6 +36,8 @@ namespace Framework.SecuritySystem
             return type.Name;
         }
 
+        public abstract TIdent GrandAccessIdent { get; }
+
         public abstract IEnumerable<string> GetAccessors<TSecurityOperationCode>(
             TSecurityOperationCode securityOperationCode,
             Expression<Func<IPrincipal<TIdent>, bool>> principalFilter)

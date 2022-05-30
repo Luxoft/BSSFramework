@@ -182,6 +182,8 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestObjForNestedRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestObjForNestedBaseSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestObjForNestedBaseRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPerformanceObjectSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPerformanceObjectRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPlainAuthObjectSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPlainAuthObjectRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestRootSecurityObjSaveEventDTO))]
@@ -8101,6 +8103,93 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPerformanceObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class TestPerformanceObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestPerformanceObjectEventRichDTO TestPerformanceObject;
+        
+        public TestPerformanceObjectSaveEventDTO()
+        {
+        }
+        
+        public TestPerformanceObjectSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestPerformanceObject domainObject)
+        {
+            this.TestPerformanceObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPerformanceObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class TestPerformanceObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.TestPerformanceObjectEventRichDTO TestPerformanceObject;
+        
+        public TestPerformanceObjectRemoveEventDTO()
+        {
+        }
+        
+        public TestPerformanceObjectRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestPerformanceObject domainObject)
+        {
+            this.TestPerformanceObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPerformanceObject), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class TestPerformanceObjectEventRichDTO
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Location;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO ManagementUnit;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version;
+        
+        public TestPerformanceObjectEventRichDTO()
+        {
+        }
+        
+        public TestPerformanceObjectEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestPerformanceObject domainObject)
+        {
+            mappingService.MapTestPerformanceObject(domainObject, this);
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPlainAuthObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class TestPlainAuthObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
@@ -8150,6 +8239,9 @@ namespace SampleSystem.Generated.DTO
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string CreatedBy;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Guid Id;

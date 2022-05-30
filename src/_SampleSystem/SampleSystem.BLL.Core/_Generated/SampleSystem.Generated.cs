@@ -834,6 +834,10 @@ namespace SampleSystem.BLL
             {
                 return SampleSystem.SampleSystemSecurityOperationCode.Disabled;
             }
+            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.TestPerformanceObject) == domainType))
+            {
+                return SampleSystem.SampleSystemSecurityOperationCode.EmployeeView;
+            }
             else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.TestPlainAuthObject) == domainType))
             {
                 return SampleSystem.SampleSystemSecurityOperationCode.EmployeeView;
@@ -1029,6 +1033,7 @@ namespace SampleSystem.BLL
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SqlParserTestObjContainer, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemSqlParserTestObjContainerSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestCustomContextSecurityObj, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestCustomContextSecurityObjSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestImmutableObj, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestImmutableObjSecurityService>(serviceCollection);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestPerformanceObject, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestPerformanceObjectSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestPlainAuthObject, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestPlainAuthObjectSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestRootSecurityObjSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecurityObjItem, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestSecurityObjItemSecurityService>(serviceCollection);
@@ -1063,6 +1068,8 @@ namespace SampleSystem.BLL
         public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnitFluentMapping> GetManagementUnitFluentMappingSecurityPath();
         
         public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnit> GetManagementUnitSecurityPath();
+        
+        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestPerformanceObject> GetTestPerformanceObjectSecurityPath();
         
         public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestPlainAuthObject> GetTestPlainAuthObjectSecurityPath();
         
@@ -1102,6 +1109,8 @@ namespace SampleSystem.BLL
         SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnitFluentMapping> GetManagementUnitFluentMappingSecurityPath();
         
         SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnit> GetManagementUnitSecurityPath();
+        
+        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestPerformanceObject> GetTestPerformanceObjectSecurityPath();
         
         SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestPlainAuthObject> GetTestPlainAuthObjectSecurityPath();
         
@@ -1615,6 +1624,23 @@ namespace SampleSystem.BLL
         public SampleSystemTestImmutableObjSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
+        }
+    }
+    
+    public partial class SampleSystemTestPerformanceObjectSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPerformanceObject, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
+    {
+        
+        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
+        
+        public SampleSystemTestPerformanceObjectSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+        {
+            this.securityPathContainer = securityPathContainer;
+        }
+        
+        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPerformanceObject, System.Guid> GetSecurityPath()
+        {
+            return this.securityPathContainer.GetTestPerformanceObjectSecurityPath();
         }
     }
     
@@ -2173,6 +2199,16 @@ namespace SampleSystem.BLL
             get;
         }
         
+        SampleSystem.BLL.ITestPerformanceObjectBLL TestPerformanceObject
+        {
+            get;
+        }
+        
+        SampleSystem.BLL.ITestPerformanceObjectBLLFactory TestPerformanceObjectFactory
+        {
+            get;
+        }
+        
         SampleSystem.BLL.ITestPlainAuthObjectBLL TestPlainAuthObject
         {
             get;
@@ -2677,6 +2713,14 @@ namespace SampleSystem.BLL
     }
     
     public partial interface ITestImmutableObjBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestImmutableObjBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestImmutableObj>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestImmutableObjBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestImmutableObjBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestImmutableObjBLL, Framework.SecuritySystem.BLLSecurityMode>
+    {
+    }
+    
+    public partial interface ITestPerformanceObjectBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPerformanceObject, System.Guid>
+    {
+    }
+    
+    public partial interface ITestPerformanceObjectBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPerformanceObjectBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestPerformanceObject>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPerformanceObjectBLL, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPerformanceObjectBLL, Framework.SecuritySystem.SecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestPerformanceObjectBLL, Framework.SecuritySystem.BLLSecurityMode>
     {
     }
     

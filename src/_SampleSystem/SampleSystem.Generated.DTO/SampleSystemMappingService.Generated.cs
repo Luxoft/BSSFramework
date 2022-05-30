@@ -756,6 +756,16 @@ namespace SampleSystem.Generated.DTO
         
         void MapTestObjForNestedBase(SampleSystem.Domain.TestObjForNestedBase domainObject, SampleSystem.Generated.DTO.TestObjForNestedBaseEventRichDTO mappingObject);
         
+        void MapTestPerformanceObject(SampleSystem.Domain.TestPerformanceObject domainObject, SampleSystem.Generated.DTO.TestPerformanceObjectVisualDTO mappingObject);
+        
+        void MapTestPerformanceObject(SampleSystem.Domain.TestPerformanceObject domainObject, SampleSystem.Generated.DTO.TestPerformanceObjectSimpleDTO mappingObject);
+        
+        void MapTestPerformanceObject(SampleSystem.Domain.TestPerformanceObject domainObject, SampleSystem.Generated.DTO.TestPerformanceObjectFullDTO mappingObject);
+        
+        void MapTestPerformanceObject(SampleSystem.Domain.TestPerformanceObject domainObject, SampleSystem.Generated.DTO.TestPerformanceObjectRichDTO mappingObject);
+        
+        void MapTestPerformanceObject(SampleSystem.Domain.TestPerformanceObject domainObject, SampleSystem.Generated.DTO.TestPerformanceObjectEventRichDTO mappingObject);
+        
         void MapTestPlainAuthObject(SampleSystem.Domain.TestPlainAuthObject domainObject, SampleSystem.Generated.DTO.TestPlainAuthObjectVisualDTO mappingObject);
         
         void MapTestPlainAuthObject(SampleSystem.Domain.TestPlainAuthObject domainObject, SampleSystem.Generated.DTO.TestPlainAuthObjectSimpleDTO mappingObject);
@@ -1221,6 +1231,8 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.TestObjForNested ToTestObjForNested(SampleSystem.Generated.DTO.TestObjForNestedIdentityDTO testObjForNestedIdentityDTO);
         
         SampleSystem.Domain.TestObjForNestedBase ToTestObjForNestedBase(SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO testObjForNestedBaseIdentityDTO);
+        
+        SampleSystem.Domain.TestPerformanceObject ToTestPerformanceObject(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentityDTO);
         
         SampleSystem.Domain.TestPlainAuthObject ToTestPlainAuthObject(SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentityDTO);
         
@@ -6978,6 +6990,100 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Version = domainObject.Version;
         }
         
+        public virtual void MapTestPerformanceObject(SampleSystem.Domain.TestPerformanceObject domainObject, SampleSystem.Generated.DTO.TestPerformanceObjectVisualDTO mappingObject)
+        {
+            mappingObject.Name = domainObject.Name;
+        }
+        
+        public virtual void MapTestPerformanceObject(SampleSystem.Domain.TestPerformanceObject domainObject, SampleSystem.Generated.DTO.TestPerformanceObjectSimpleDTO mappingObject)
+        {
+            mappingObject.Name = domainObject.Name;
+        }
+        
+        public virtual void MapTestPerformanceObject(SampleSystem.Domain.TestPerformanceObject domainObject, SampleSystem.Generated.DTO.TestPerformanceObjectFullDTO mappingObject)
+        {
+            if (!object.ReferenceEquals(domainObject.BusinessUnit, null))
+            {
+                mappingObject.BusinessUnit = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.BusinessUnit, this);
+            }
+            else
+            {
+                mappingObject.BusinessUnit = null;
+            }
+            if (!object.ReferenceEquals(domainObject.Employee, null))
+            {
+                mappingObject.Employee = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.Employee, this);
+            }
+            else
+            {
+                mappingObject.Employee = null;
+            }
+            if (!object.ReferenceEquals(domainObject.Location, null))
+            {
+                mappingObject.Location = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.Location, this);
+            }
+            else
+            {
+                mappingObject.Location = null;
+            }
+            if (!object.ReferenceEquals(domainObject.ManagementUnit, null))
+            {
+                mappingObject.ManagementUnit = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.ManagementUnit, this);
+            }
+            else
+            {
+                mappingObject.ManagementUnit = null;
+            }
+        }
+        
+        public virtual void MapTestPerformanceObject(SampleSystem.Domain.TestPerformanceObject domainObject, SampleSystem.Generated.DTO.TestPerformanceObjectRichDTO mappingObject)
+        {
+        }
+        
+        public virtual void MapTestPerformanceObject(SampleSystem.Domain.TestPerformanceObject domainObject, SampleSystem.Generated.DTO.TestPerformanceObjectEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            if (!object.ReferenceEquals(domainObject.BusinessUnit, null))
+            {
+                mappingObject.BusinessUnit = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.BusinessUnit, this);
+            }
+            else
+            {
+                mappingObject.BusinessUnit = null;
+            }
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            if (!object.ReferenceEquals(domainObject.Employee, null))
+            {
+                mappingObject.Employee = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Employee, this);
+            }
+            else
+            {
+                mappingObject.Employee = null;
+            }
+            mappingObject.Id = domainObject.Id;
+            if (!object.ReferenceEquals(domainObject.Location, null))
+            {
+                mappingObject.Location = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Location, this);
+            }
+            else
+            {
+                mappingObject.Location = null;
+            }
+            if (!object.ReferenceEquals(domainObject.ManagementUnit, null))
+            {
+                mappingObject.ManagementUnit = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.ManagementUnit, this);
+            }
+            else
+            {
+                mappingObject.ManagementUnit = null;
+            }
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Name = domainObject.Name;
+            mappingObject.Version = domainObject.Version;
+        }
+        
         public virtual void MapTestPlainAuthObject(SampleSystem.Domain.TestPlainAuthObject domainObject, SampleSystem.Generated.DTO.TestPlainAuthObjectVisualDTO mappingObject)
         {
             mappingObject.Name = domainObject.Name;
@@ -6990,6 +7096,14 @@ namespace SampleSystem.Generated.DTO
         
         public virtual void MapTestPlainAuthObject(SampleSystem.Domain.TestPlainAuthObject domainObject, SampleSystem.Generated.DTO.TestPlainAuthObjectFullDTO mappingObject)
         {
+            if (!object.ReferenceEquals(domainObject.Employee, null))
+            {
+                mappingObject.Employee = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.Employee, this);
+            }
+            else
+            {
+                mappingObject.Employee = null;
+            }
             if (!object.ReferenceEquals(domainObject.Location, null))
             {
                 mappingObject.Location = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTO(domainObject.Location, this);
@@ -7010,6 +7124,14 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Active = domainObject.Active;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
+            if (!object.ReferenceEquals(domainObject.Employee, null))
+            {
+                mappingObject.Employee = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Employee, this);
+            }
+            else
+            {
+                mappingObject.Employee = null;
+            }
             mappingObject.Id = domainObject.Id;
             mappingObject.Items = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.Items, this);
             if (!object.ReferenceEquals(domainObject.Location, null))
@@ -8640,6 +8762,11 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.TestObjForNestedBase ToTestObjForNestedBase(SampleSystem.Generated.DTO.TestObjForNestedBaseIdentityDTO testObjForNestedBaseIdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.TestObjForNestedBase>(testObjForNestedBaseIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.TestPerformanceObject ToTestPerformanceObject(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO testPerformanceObjectIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.TestPerformanceObject>(testPerformanceObjectIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.TestPlainAuthObject ToTestPlainAuthObject(SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO testPlainAuthObjectIdentityDTO)

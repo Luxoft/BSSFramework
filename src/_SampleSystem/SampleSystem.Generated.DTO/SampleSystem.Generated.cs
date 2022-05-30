@@ -5889,6 +5889,97 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPerformanceObject), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.EmployeeView)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TestPerformanceObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO(System.Guid.Empty);
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id;
+        
+        public TestPerformanceObjectIdentityDTO(System.Guid id)
+        {
+            this.Id = id;
+        }
+        
+        public TestPerformanceObjectIdentityDTO(SampleSystem.Generated.DTO.TestPerformanceObjectSimpleDTO source)
+        {
+            if (object.ReferenceEquals(source, null))
+            {
+                throw new System.ArgumentNullException("source");
+            }
+            this.Id = source.Id;
+        }
+        
+        public TestPerformanceObjectIdentityDTO(SampleSystem.Domain.TestPerformanceObject domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this.Id = domainObject.Id;
+        }
+        
+        public TestPerformanceObjectIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO.EmptyField;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO identity1, SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO other)
+        {
+            return (this.Id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.TestPerformanceObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTestPerformanceObject(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPlainAuthObject), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.EmployeeView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
@@ -16795,6 +16886,112 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPerformanceObject), "VisualDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestPerformanceObjectVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO>
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name;
+        
+        public TestPerformanceObjectVisualDTO()
+        {
+        }
+        
+        public TestPerformanceObjectVisualDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestPerformanceObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestPerformanceObject(domainObject, this);
+        }
+        
+        public SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO(this.Id);
+            }
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPerformanceObject), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPerformanceObjectFullDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPerformanceObjectRichDTO))]
+    public partial class TestPerformanceObjectSimpleDTO : SampleSystem.Generated.DTO.BaseAuditPersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO>
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name;
+        
+        public TestPerformanceObjectSimpleDTO()
+        {
+        }
+        
+        public TestPerformanceObjectSimpleDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestPerformanceObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestPerformanceObject(domainObject, this);
+        }
+        
+        public TestPerformanceObjectSimpleDTO(string id)
+        {
+            this.Id = new System.Guid(id);
+        }
+        
+        public SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO Identity
+        {
+            get
+            {
+                return new SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO(this.Id);
+            }
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPerformanceObject), "FullDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPerformanceObjectRichDTO))]
+    public partial class TestPerformanceObjectFullDTO : SampleSystem.Generated.DTO.TestPerformanceObjectSimpleDTO
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitSimpleDTO BusinessUnit;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeSimpleDTO Employee;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationSimpleDTO Location;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitSimpleDTO ManagementUnit;
+        
+        public TestPerformanceObjectFullDTO()
+        {
+        }
+        
+        public TestPerformanceObjectFullDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestPerformanceObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestPerformanceObject(domainObject, this);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPerformanceObject), "RichDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public partial class TestPerformanceObjectRichDTO : SampleSystem.Generated.DTO.TestPerformanceObjectFullDTO
+    {
+        
+        public TestPerformanceObjectRichDTO()
+        {
+        }
+        
+        public TestPerformanceObjectRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.TestPerformanceObject domainObject) : 
+                base(mappingService, domainObject)
+        {
+            mappingService.MapTestPerformanceObject(domainObject, this);
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPlainAuthObject), "VisualDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public partial class TestPlainAuthObjectVisualDTO : SampleSystem.Generated.DTO.BasePersistentDTO, Framework.Persistent.IIdentityObjectContainer<SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO>
@@ -16861,6 +17058,9 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.TestPlainAuthObjectRichDTO))]
     public partial class TestPlainAuthObjectFullDTO : SampleSystem.Generated.DTO.TestPlainAuthObjectSimpleDTO
     {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeSimpleDTO Employee;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public SampleSystem.Generated.DTO.LocationSimpleDTO Location;

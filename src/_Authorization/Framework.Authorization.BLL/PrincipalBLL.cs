@@ -51,8 +51,8 @@ namespace Framework.Authorization.BLL
                 var removedSelfDelegatePermissions =
 
                     permission.DelegatedTo
-                              .Where(toPemission => toPemission.DelegatedFromPrincipal == principal
-                                                 && !principal.Permissions.Contains(toPemission))
+                              .Where(toPermission => toPermission.DelegatedFromPrincipal == principal
+                                                 && !principal.Permissions.Contains(toPermission))
                               .ToList();
 
                 permission.RemoveDetails(removedSelfDelegatePermissions);
@@ -63,6 +63,14 @@ namespace Framework.Authorization.BLL
             base.Save(principal);
 
             this.NotifySaveAndRemove(principal);
+        }
+
+        protected override void PreRecalculate(Principal principal)
+        {
+            foreach (var permission in principal.Permissions)
+            {
+                this.Context.Logics.Permission.RecalculateDenormalizedItems(permission);
+            }
         }
 
         public Principal GetByNameOrCreate(string name, bool autoSave = false)

@@ -13,25 +13,25 @@ namespace Framework.SecuritySystem.Rules.Builders.Mixed
         where TDomainObject : class, TPersistentDomainObjectBase
 
     {
-        private readonly ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> v1Builder;
+        private readonly ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> firstBuilder;
 
-        private readonly ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> v2Builder;
+        private readonly ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> secondBuilder;
 
         public SecurityExpressionBuilder(
                 [NotNull] ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> v1Builder,
                 [NotNull] ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> v2Builder)
         {
-            this.v1Builder = v1Builder ?? throw new ArgumentNullException(nameof(v1Builder));
-            this.v2Builder = v2Builder ?? throw new ArgumentNullException(nameof(v2Builder));
+            this.firstBuilder = v1Builder ?? throw new ArgumentNullException(nameof(v1Builder));
+            this.secondBuilder = v2Builder ?? throw new ArgumentNullException(nameof(v2Builder));
         }
 
         public ISecurityExpressionFilter<TDomainObject> GetFilter<TSecurityOperationCode>(ContextSecurityOperation<TSecurityOperationCode> securityOperation)
                 where TSecurityOperationCode : struct, Enum
         {
-            var v1Filter = this.v1Builder.GetFilter(securityOperation);
-            var v2Filter = this.v2Builder.GetFilter(securityOperation);
+            var firstFilter = this.firstBuilder.GetFilter(securityOperation);
+            var secondFilter = this.secondBuilder.GetFilter(securityOperation);
 
-            return new SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject, TIdent>(v1Filter, v2Filter);
+            return new SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject, TIdent>(firstFilter, secondFilter);
         }
     }
 }

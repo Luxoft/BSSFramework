@@ -53,6 +53,15 @@ namespace SampleSystem.BLL
             return SampleSystemSecurityPath<ManagementUnit>.Create(v => v);
         }
 
+        public override SampleSystemSecurityPath<TestPerformanceObject> GetTestPerformanceObjectSecurityPath()
+        {
+            return SampleSystemSecurityPath<TestPerformanceObject>.Create(v => v.Location, SingleSecurityMode.Strictly)
+                                                                  .And(v => v.Employee, SingleSecurityMode.Strictly)
+                                                                  .And(v => v.BusinessUnit, SingleSecurityMode.Strictly)
+                                                                  .And(v => v.ManagementUnit, SingleSecurityMode.Strictly);
+        }
+
+
         public override SampleSystemSecurityPath<TestPlainAuthObject> GetTestPlainAuthObjectSecurityPath()
         {
             return SampleSystemSecurityPath<TestPlainAuthObject>.Create(v => v.Location)

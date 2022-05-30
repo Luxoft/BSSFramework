@@ -15,6 +15,8 @@ namespace Framework.SecuritySystem
 
     public interface IAuthorizationSystem<TIdent> : IAuthorizationSystem
     {
+        TIdent GrandAccessIdent { get; }
+
         IEnumerable<string> GetAccessors<TSecurityOperationCode>(
             TSecurityOperationCode securityOperationCode,
             Expression<Func<IPrincipal<TIdent>, bool>> principalFilter)

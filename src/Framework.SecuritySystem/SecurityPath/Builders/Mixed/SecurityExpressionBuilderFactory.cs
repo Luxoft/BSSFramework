@@ -11,21 +11,26 @@ namespace Framework.SecuritySystem.Rules.Builders.Mixed
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     {
-        private readonly ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> v1Factory;
+        private readonly ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> firstFactory;
 
-        private readonly ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> v2Factory;
+        private readonly ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> secondFactory;
 
-        public SecurityExpressionBuilderFactory([NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory, [NotNull] IAuthorizationSystem<TIdent> authorizationSystem)
+        public SecurityExpressionBuilderFactory(
+                [NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
+                [NotNull] IAuthorizationSystem<TIdent> authorizationSystem,
+                [NotNull] ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> firstFactory,
+                [NotNull] ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> secondFactory
+                )
         {
-            this.v1Factory = new V1.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>(hierarchicalObjectExpanderFactory, authorizationSystem);
-            this.v2Factory = new V2.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>(hierarchicalObjectExpanderFactory, authorizationSystem);
+            this.firstFactory = firstFactory ?? throw new ArgumentNullException(nameof(firstFactory));
+            this.secondFactory = secondFactory ?? throw new ArgumentNullException(nameof(secondFactory));
         }
 
         public ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPathBase<TPersistentDomainObjectBase, TDomainObject, TIdent> path)
                 where TDomainObject : class, TPersistentDomainObjectBase
         {
-            var b1 = this.v1Factory.CreateBuilder(path);
-            var b2 = this.v2Factory.CreateBuilder(path);
+            var b1 = this.firstFactory.CreateBuilder(path);
+            var b2 = this.secondFactory.CreateBuilder(path);
 
             return new SecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent>(b1, b2);
         }

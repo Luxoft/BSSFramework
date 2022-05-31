@@ -85,7 +85,7 @@ namespace SampleSystem.IntegrationTests.Workflow
         }
 
         [TestMethod]
-        public void CreatePermissionWithApprove_PermissionApproved()
+        public void CreateObjectsWithPermissions_HasAccessToAllObjects()
         {
             // Arrange
             var testController = this.GetControllerEvaluator<TestPerformanceObjectController>(TestUser);

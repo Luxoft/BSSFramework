@@ -195,7 +195,7 @@ namespace SampleSystem.IntegrationTests.Workflow
         }
 
         [TestMethod]
-        public async Task CreatePermissionWithAutoApprove_PermissionApproved()
+        public void CreatePermissionWithAutoApprove_PermissionApproved()
         {
             // Arrange
 
@@ -212,7 +212,7 @@ namespace SampleSystem.IntegrationTests.Workflow
 
             var wiStatus = this.Environment.ServiceProvider.GetRequiredService<IPersistenceProvider>().WaitForWorkflowToComplete(rootInstanceId.ToString(), TimeSpan.FromSeconds(20));
 
-            var postApprovePrincipal = this.authFacade.EvaluateAsync(c => c.GetRichPrincipal(approvingPrincipal.Identity));
+            var postApprovePrincipal = this.authFacade.Evaluate(c => c.GetRichPrincipal(approvingPrincipal.Identity));
 
             // Assert
             wiStatus.Should().Be(WorkflowStatus.Complete);

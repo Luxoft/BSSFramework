@@ -8,7 +8,7 @@ using Framework.HierarchicalExpand;
 using Framework.QueryableSource;
 using Framework.SecuritySystem.Exceptions;
 using Framework.SecuritySystem.Rules.Builders;
-using V1 = Framework.SecuritySystem.Rules.Builders.V1;
+using V1 = Framework.SecuritySystem.Rules.Builders.MaterializedPermissions;
 
 using Microsoft.Extensions.DependencyInjection;
 

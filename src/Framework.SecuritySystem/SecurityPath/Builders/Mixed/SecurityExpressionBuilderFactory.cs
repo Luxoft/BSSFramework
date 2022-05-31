@@ -11,28 +11,25 @@ namespace Framework.SecuritySystem.Rules.Builders.Mixed
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     {
-        private readonly ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> firstFactory;
+        private readonly ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> hasAccessFactory;
 
-        private readonly ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> secondFactory;
+        private readonly ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> queryFactory;
 
         public SecurityExpressionBuilderFactory(
-                [NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
-                [NotNull] IAuthorizationSystem<TIdent> authorizationSystem,
-                [NotNull] ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> firstFactory,
-                [NotNull] ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> secondFactory
-                )
+                [NotNull] ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> hasAccessFactory,
+                [NotNull] ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> queryFactory)
         {
-            this.firstFactory = firstFactory ?? throw new ArgumentNullException(nameof(firstFactory));
-            this.secondFactory = secondFactory ?? throw new ArgumentNullException(nameof(secondFactory));
+            this.hasAccessFactory = hasAccessFactory ?? throw new ArgumentNullException(nameof(hasAccessFactory));
+            this.queryFactory = queryFactory ?? throw new ArgumentNullException(nameof(queryFactory));
         }
 
         public ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPathBase<TPersistentDomainObjectBase, TDomainObject, TIdent> path)
                 where TDomainObject : class, TPersistentDomainObjectBase
         {
-            var b1 = this.firstFactory.CreateBuilder(path);
-            var b2 = this.secondFactory.CreateBuilder(path);
+            var hasAccessBuilder = this.hasAccessFactory.CreateBuilder(path);
+            var queryBuilder = this.queryFactory.CreateBuilder(path);
 
-            return new SecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent>(b1, b2);
+            return new SecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent>(hasAccessBuilder, queryBuilder);
         }
     }
 }

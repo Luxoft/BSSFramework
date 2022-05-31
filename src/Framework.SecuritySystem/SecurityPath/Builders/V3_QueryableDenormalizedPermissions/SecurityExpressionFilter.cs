@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -7,7 +8,7 @@ using Framework.Core;
 using Framework.Persistent;
 
 
-namespace Framework.SecuritySystem.Rules.Builders.V1
+namespace Framework.SecuritySystem.Rules.Builders.QueryableDenormalizedPermissions
 {
     public class SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject, TSecurityOperationCode, TIdent> : ISecurityExpressionFilter<TDomainObject>
 
@@ -19,20 +20,19 @@ namespace Framework.SecuritySystem.Rules.Builders.V1
 
         private readonly Lazy<Func<TDomainObject, IEnumerable<string>>> getAccessorsFunc;
 
-        private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.All);
+        // ReSharper disable once StaticMemberInGenericType
+        [SuppressMessage("SonarQube", "S2743")]
+        private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache();
 
         public SecurityExpressionFilter(
             SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent> builder,
             ContextSecurityOperation<TSecurityOperationCode> securityOperation)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
-            if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
+            if (securityOperation == null) throw new
+                    ArgumentNullException(nameof(securityOperation));
 
-            var usedTypes = builder.GetUsedTypes().Distinct();
-
-            var permissions = builder.Factory.AuthorizationSystem.GetPermissions(securityOperation, usedTypes);
-
-            var filterExpression = builder.GetSecurityFilterExpression(permissions);
+            var filterExpression = builder.GetSecurityFilterExpression(securityOperation).ExpandConst().InlineEval();
 
             this.InjectFunc = q => q.Where(filterExpression);
 
@@ -56,6 +56,7 @@ namespace Framework.SecuritySystem.Rules.Builders.V1
         public Func<IQueryable<TDomainObject>, IQueryable<TDomainObject>> InjectFunc { get; }
 
         public Func<TDomainObject, bool> HasAccessFunc { get; }
+
 
         public IEnumerable<string> GetAccessors(TDomainObject domainObject)
         {

@@ -8,7 +8,7 @@ using Framework.Core;
 using Framework.Persistent;
 
 
-namespace Framework.SecuritySystem.Rules.Builders.V2
+namespace Framework.SecuritySystem.Rules.Builders.QueryablePermissions
 {
     public class SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject, TSecurityOperationCode, TIdent> : ISecurityExpressionFilter<TDomainObject>
 

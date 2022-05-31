@@ -9,7 +9,7 @@ using Framework.Core;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 
-namespace Framework.SecuritySystem.Rules.Builders.V3
+namespace Framework.SecuritySystem.Rules.Builders.QueryableDenormalizedPermissions
 {
     public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent>
         : ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent>

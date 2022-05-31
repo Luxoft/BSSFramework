@@ -119,7 +119,11 @@ namespace SampleSystem.ServiceEnvironment
 
         public override ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> GetSecurityExpressionBuilderFactory<TBLLContext, TPersistentDomainObjectBase, TIdent>(TBLLContext context)
         {
-            return new Framework.SecuritySystem.Rules.Builders.Mixed.V1_V3.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>(context.HierarchicalObjectExpanderFactory, context.Authorization);
+            var v1 = new Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>(context.HierarchicalObjectExpanderFactory, context.Authorization);
+
+            var v3 = new Framework.SecuritySystem.Rules.Builders.QueryableDenormalizedPermissions.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>(context.HierarchicalObjectExpanderFactory, context.Authorization);
+
+            return new Framework.SecuritySystem.Rules.Builders.Mixed.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>(v1, v3);
         }
 
         /// <summary>

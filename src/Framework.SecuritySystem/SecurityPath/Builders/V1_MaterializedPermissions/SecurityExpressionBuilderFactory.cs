@@ -5,7 +5,7 @@ using Framework.Persistent;
 
 using JetBrains.Annotations;
 
-namespace Framework.SecuritySystem.Rules.Builders.V2
+namespace Framework.SecuritySystem.Rules.Builders.MaterializedPermissions
 {
     public class SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> : SecurityExpressionBuilderFactoryBase<TPersistentDomainObjectBase, TIdent>
 

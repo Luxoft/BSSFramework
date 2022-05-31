@@ -1,26 +1,19 @@
 ﻿
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 using FluentAssertions;
 
 using Framework.Authorization.Domain;
 using Framework.Core;
-using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-using Framework.SecuritySystem;
-using Framework.Transfering;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using SampleSystem.BLL;
 using SampleSystem.Domain;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
-using BaseDirectory = SampleSystem.Domain.BaseDirectory;
 using PersistentDomainObjectBase = SampleSystem.Domain.PersistentDomainObjectBase;
 
 namespace SampleSystem.IntegrationTests.Workflow
@@ -35,13 +28,12 @@ namespace SampleSystem.IntegrationTests.Workflow
         [TestInitialize]
         public void SetUp()
         {
-
             var genLoc = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveLocation());
-            
-            var genEmployee = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveEmployee()); 
-            
+
+            var genEmployee = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveEmployee());
+
             var genBu = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveBusinessUnit());
-            
+
             var genMbu = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveManagementUnit());
 
             var genObjects = this.EvaluateWrite(ctx =>
@@ -52,13 +44,13 @@ namespace SampleSystem.IntegrationTests.Workflow
                         from buIdent in genBu
                         from mbuIdent in genMbu
                         select new TestPerformanceObject
-                               {
-                                       Employee = ctx.Logics.Employee.GetById(emplIdent.Id),
-                                       Location = ctx.Logics.Location.GetById(locIdent.Id),
-                                       BusinessUnit = ctx.Logics.BusinessUnit.GetById(buIdent.Id),
-                                       ManagementUnit = ctx.Logics.ManagementUnit.GetById(mbuIdent.Id),
-                                       Name = Guid.NewGuid().ToString()
-                               };
+                        {
+                            Employee = ctx.Logics.Employee.GetById(emplIdent.Id),
+                            Location = ctx.Logics.Location.GetById(locIdent.Id),
+                            BusinessUnit = ctx.Logics.BusinessUnit.GetById(buIdent.Id),
+                            ManagementUnit = ctx.Logics.ManagementUnit.GetById(mbuIdent.Id),
+                            Name = Guid.NewGuid().ToString()
+                        };
 
                 var genObjects = gebObjectsRequest.ToList();
 
@@ -70,7 +62,7 @@ namespace SampleSystem.IntegrationTests.Workflow
                 {
                     var entityType = ctx.Authorization.GetEntityType(domainObj.GetType());
 
-                    return ctx.Authorization.Logics.PermissionFilterEntity.GetOrCreate(entityType, new SecurityEntity { Id  = domainObj.Id });
+                    return ctx.Authorization.Logics.PermissionFilterEntity.GetOrCreate(entityType, new SecurityEntity { Id = domainObj.Id });
                 });
 
 
@@ -101,7 +93,7 @@ namespace SampleSystem.IntegrationTests.Workflow
             // Act
 
             var start = DateTime.Now;
-            
+
             var testPerformanceObjects = testController.Evaluate(c => c.GetSimpleTestPerformanceObjects());
 
             var duration = DateTime.Now - start;

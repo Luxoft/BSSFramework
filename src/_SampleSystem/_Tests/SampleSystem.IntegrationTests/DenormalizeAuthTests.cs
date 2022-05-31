@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
-using System.Reflection;
 
 using FluentAssertions;
 
-using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.NHibernate;
 using Framework.HierarchicalExpand;
-using Framework.Security;
 using Framework.SecuritySystem;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -23,8 +17,6 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 using BusinessRole = SampleSystem.IntegrationTests.__Support.Utils.BusinessRole;
-using Expression = System.Linq.Expressions.Expression;
-using LambdaExpression = System.Linq.Expressions.LambdaExpression;
 
 namespace SampleSystem.IntegrationTests
 {
@@ -105,6 +97,9 @@ namespace SampleSystem.IntegrationTests
         [TestMethod]
         public void TestInlineEval_TestPassed()
         {
+            // Arrange
+
+            // Act
             var objIdents = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, TestEmployeeLogin, ctx =>
             {
                 var baseFilter = BuildTestPlainAuthObjectSecurityFilter(ctx, SampleSystemSecurityOperation.EmployeeView);
@@ -115,6 +110,7 @@ namespace SampleSystem.IntegrationTests
                 return objs.ToList(obj => obj.ToIdentityDTO());
             });
 
+            // Assert
             objIdents.Count().Should().Be(1);
             objIdents[0].Should().Be(this.testPlainAuthObjectIdent);
         }
@@ -122,24 +118,27 @@ namespace SampleSystem.IntegrationTests
         [TestMethod]
         public void AdminTestInlineEval_TestPassed()
         {
+            // Arrange
+
+            // Act
             var objIdents = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, ctx =>
-                                                                            {
-                                                                                var baseFilter = BuildTestPlainAuthObjectSecurityFilter(ctx, SampleSystemSecurityOperation.EmployeeView);
-                                                                                var filter = baseFilter.ExpandConst().InlineEval();
+            {
+                var baseFilter = BuildTestPlainAuthObjectSecurityFilter(ctx, SampleSystemSecurityOperation.EmployeeView);
+                var filter = baseFilter.ExpandConst().InlineEval();
 
-                                                                                var objs = ctx.Logics.TestPlainAuthObject.GetUnsecureQueryable().Where(filter).ToList();
+                var objs = ctx.Logics.TestPlainAuthObject.GetUnsecureQueryable().Where(filter).ToList();
 
-                                                                                return objs.ToList(obj => obj.ToIdentityDTO());
-                                                                            });
+                return objs.ToList(obj => obj.ToIdentityDTO());
+            });
 
+            // Assert
             objIdents.Count().Should().Be(2);
-            objIdents[0].Should().Be(this.testPlainAuthObjectIdent);
         }
 
         private static Expression<Func<TestPlainAuthObject, bool>> BuildTestPlainAuthObjectSecurityFilter(ISampleSystemBLLContext context, ContextSecurityOperation<SampleSystemSecurityOperationCode> securityOperation)
         {
             var authContext = context.Authorization;
-            
+
             var buFilter = BuildBuFilterExpression(context, securityOperation.SecurityExpandType);
 
             var employeeFilter = BuildEmployeeFilterExpression(context, securityOperation.SecurityExpandType);
@@ -163,7 +162,7 @@ namespace SampleSystem.IntegrationTests
                                                                       .Select(pfe => pfe.EntityId))
                                             .ExpandConst()
                                             .InlineEval();
-            
+
             var grandIdent = context.Authorization.GrandAccessIdent;
 
             var hasGrandAccess = ExpressionHelper.Create((IPermission<Guid> permission) => getIdents.Eval(permission).Any(entityId => eqIdentsExpr.Eval(entityId, grandIdent)))

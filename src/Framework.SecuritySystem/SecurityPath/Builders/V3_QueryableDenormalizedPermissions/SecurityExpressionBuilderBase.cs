@@ -188,9 +188,13 @@ namespace Framework.SecuritySystem.Rules.Builders.QueryableDenormalizedPermissio
                                                 .ExpandConst()
                                                 .InlineEval();
 
-                var grandIdent = this.Factory.AuthorizationSystem.GrandAccessIdent;
+                //var grandIdent = this.Factory.AuthorizationSystem.GrandAccessIdent;
 
-                var hasGrandAccess = ExpressionHelper.Create((IPermission<TIdent> permission) => getIdents.Eval(permission).Any(e => eqIdentsExpr.Eval(e, grandIdent)))
+                //var hasGrandAccess = ExpressionHelper.Create((IPermission<TIdent> permission) => getIdents.Eval(permission).Any(e => eqIdentsExpr.Eval(e, grandIdent)))
+                //                                     .ExpandConst()
+                //                                     .InlineEval();
+
+                var hasGrandAccess = ExpressionHelper.Create((IPermission<TIdent> permission) => permission.FilterItems.All(filterItem => !eqIdentsExpr.Eval(filterItem.Entity.EntityType.Id, entityTypeId)))
                                                      .ExpandConst()
                                                      .InlineEval();
 
@@ -265,9 +269,13 @@ namespace Framework.SecuritySystem.Rules.Builders.QueryableDenormalizedPermissio
                                                 .ExpandConst()
                                                 .InlineEval();
 
-                var grandIdent = this.Factory.AuthorizationSystem.GrandAccessIdent;
+                //var grandIdent = this.Factory.AuthorizationSystem.GrandAccessIdent;
 
-                var hasGrandAccess = ExpressionHelper.Create((IPermission<TIdent> permission) => getIdents.Eval(permission).Any(e => eqIdentsExpr.Eval(e, grandIdent)))
+                //var hasGrandAccess = ExpressionHelper.Create((IPermission<TIdent> permission) => getIdents.Eval(permission).Any(e => eqIdentsExpr.Eval(e, grandIdent)))
+                //                                     .ExpandConst()
+                //                                     .InlineEval();
+
+                var hasGrandAccess = ExpressionHelper.Create((IPermission<TIdent> permission) => permission.FilterItems.All(filterItem => !eqIdentsExpr.Eval(filterItem.Entity.EntityType.Id, entityTypeId)))
                                                      .ExpandConst()
                                                      .InlineEval();
 
@@ -376,7 +384,7 @@ namespace Framework.SecuritySystem.Rules.Builders.QueryableDenormalizedPermissio
             where TNestedObject : class, TPersistentDomainObjectBase
         {
             private readonly SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TNestedObject, TIdent> _nestedBuilder;
-            
+
             private static readonly string getAccessortFilterMethodInfoName;
             private static readonly MethodInfo buildOrMethod;
             private static readonly MethodInfo buildAndMethod;
@@ -392,7 +400,7 @@ namespace Framework.SecuritySystem.Rules.Builders.QueryableDenormalizedPermissio
             {
                 buildOrMethod = ((Func<IEnumerable<Expression<Func<IPermission<TIdent>, bool>>>, Expression<Func<IPermission<TIdent>, bool>>>)(Framework.Core.ExpressionExtensions.BuildOr)).Method;
                 buildAndMethod = ((Func<IEnumerable<Expression<Func<IPermission<TIdent>, bool>>>, Expression<Func<IPermission<TIdent>, bool>>>)(Framework.Core.ExpressionExtensions.BuildAnd)).Method;
-                
+
                 getAccessortFilterMethodInfoName = "GetAccessorsFilter";
             }
 
@@ -408,7 +416,7 @@ namespace Framework.SecuritySystem.Rules.Builders.QueryableDenormalizedPermissio
             public override Expression<Func<TDomainObject, IPermission<TIdent>, bool>> GetSecurityFilterExpression(HierarchicalExpandType expandType)
             {
                 var baseFilter = this._nestedBuilder.GetSecurityFilterExpression(expandType).ExpandConst().InlineEval();
-                
+
                 switch (this.Path.Mode)
                 {
                     case ManySecurityPathMode.Any:

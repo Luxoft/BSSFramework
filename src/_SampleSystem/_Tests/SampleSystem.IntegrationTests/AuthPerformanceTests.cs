@@ -7,6 +7,7 @@ using FluentAssertions;
 using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.ServiceModelGenerator.MethodGenerators.FileStore;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -23,7 +24,9 @@ namespace SampleSystem.IntegrationTests.Workflow
     {
         private const string TestUser = "TestUser";
 
-        private const int Limit = 3;
+        private const int Limit = 9;
+
+        private const int SplitBy = 25;
 
         [TestInitialize]
         public void SetUp()
@@ -65,17 +68,34 @@ namespace SampleSystem.IntegrationTests.Workflow
                     return ctx.Authorization.Logics.PermissionFilterEntity.GetOrCreate(entityType, new SecurityEntity { Id = domainObj.Id });
                 });
 
-
                 var adminRole = ctx.Authorization.Logics.BusinessRole.GetAdminRole();
 
-                foreach (var genObject in genObjects)
+                foreach (var genObjectSubEnumerable in genObjects.Split(SplitBy))
                 {
                     var genPermission = new Permission(testPrincipal) { Role = adminRole };
 
-                    new PermissionFilterItem(genPermission, pfeCache[genObject.Employee]);
-                    new PermissionFilterItem(genPermission, pfeCache[genObject.Location]);
-                    new PermissionFilterItem(genPermission, pfeCache[genObject.BusinessUnit]);
-                    new PermissionFilterItem(genPermission, pfeCache[genObject.ManagementUnit]);
+                    foreach (var genObject in genObjectSubEnumerable)
+                    {
+                        if (!genPermission.FilterItems.Select(fi => fi.Entity.EntityId).Contains(genObject.Employee.Id))
+                        {
+                            new PermissionFilterItem(genPermission, pfeCache[genObject.Employee]);
+                        }
+
+                        if (!genPermission.FilterItems.Select(fi => fi.Entity.EntityId).Contains(genObject.Location.Id))
+                        {
+                            new PermissionFilterItem(genPermission, pfeCache[genObject.Location]);
+                        }
+
+                        if (!genPermission.FilterItems.Select(fi => fi.Entity.EntityId).Contains(genObject.BusinessUnit.Id))
+                        {
+                            new PermissionFilterItem(genPermission, pfeCache[genObject.BusinessUnit]);
+                        }
+
+                        if (!genPermission.FilterItems.Select(fi => fi.Entity.EntityId).Contains(genObject.ManagementUnit.Id))
+                        {
+                            new PermissionFilterItem(genPermission, pfeCache[genObject.ManagementUnit]);
+                        }
+                    }
                 }
 
                 ctx.Authorization.Logics.Principal.Save(testPrincipal);
@@ -91,6 +111,8 @@ namespace SampleSystem.IntegrationTests.Workflow
             var testController = this.GetControllerEvaluator<TestPerformanceObjectController>(TestUser);
 
             // Act
+            testController.Evaluate(c => c.GetSimpleTestPerformanceObjects());
+            testController.Evaluate(c => c.GetSimpleTestPerformanceObjects());
 
             var start = DateTime.Now;
 
@@ -98,7 +120,7 @@ namespace SampleSystem.IntegrationTests.Workflow
 
             var duration = DateTime.Now - start;
 
-            Console.WriteLine(duration);
+            Console.WriteLine("WorkTime: " + duration);
 
             // Assert
             testPerformanceObjects.Count().Should().Be(Limit * Limit * Limit * Limit);

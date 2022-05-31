@@ -1498,6 +1498,36 @@ export class TestObjForNestedIdentityDTO {
 
 }
 
+export class TestPerformanceObjectIdentityDTO {
+    public static Empty = new TestPerformanceObjectIdentityDTO(Guid.Empty);
+
+    public __type = 'TestPerformanceObjectIdentityDTO';
+
+    private _testperformanceobjectidentitydto: string;
+
+    public Id: Guid;
+
+    constructor (id: Guid) {
+        if (!(id)) {
+            throw new Error('Parameter id should be specified');
+        }
+        this.Id = id;
+
+    }
+
+    public static fromJs(source: any): TestPerformanceObjectIdentityDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        return new TestPerformanceObjectIdentityDTO(source.Id);
+    }
+
+    public toNativeJson(): TestPerformanceObjectIdentityDTO {
+        return this;
+    }
+
+}
+
 export class TestPlainAuthObjectIdentityDTO {
     public static Empty = new TestPlainAuthObjectIdentityDTO(Guid.Empty);
 
@@ -8448,6 +8478,161 @@ export class TestObjForNestedObservableSimpleDTO extends BaseObservableAuditPers
 
 }
 
+export class TestPerformanceObjectObservableIdentityDTO {
+    public Id: Guid;
+
+    constructor (id: Guid) {
+        if (!(id)) {
+            throw new Error('Parameter id should be specified');
+        }
+        this.Id = id;
+
+    }
+
+    public static fromJs(source: any): TestPerformanceObjectObservableIdentityDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        return new TestPerformanceObjectObservableIdentityDTO(source.Id);
+    }
+
+}
+
+export class TestPerformanceObjectObservableSimpleDTO extends BaseObservableAuditPersistentDTO {
+    public __type = 'TestPerformanceObjectObservableSimpleDTO';
+
+    private _testperformanceobjectobservablesimpledto: string;
+
+    public Name = observable<string>();
+
+    public static fromJs(source: ITestPerformanceObjectSimpleDTO): TestPerformanceObjectObservableSimpleDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestPerformanceObjectObservableSimpleDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: ITestPerformanceObjectSimpleDTO): void {
+        super.fromJs(source);
+        this.Name(source.Name);
+    }
+
+    public identity(): TestPerformanceObjectIdentityDTO {
+        return new TestPerformanceObjectIdentityDTO(this.Id());
+    }
+
+    public toJs(): TestPerformanceObjectSimpleDTO {
+        let e = new TestPerformanceObjectSimpleDTO();
+        e.fromObservable(this);
+        return e;
+    }
+
+}
+
+export class TestPerformanceObjectObservableFullDTO extends TestPerformanceObjectObservableSimpleDTO {
+    public __type = 'TestPerformanceObjectObservableFullDTO';
+
+    private _testperformanceobjectobservablefulldto: string;
+
+    public BusinessUnit = observable<BusinessUnitObservableSimpleDTO>();
+
+    public Employee = observable<EmployeeObservableSimpleDTO>();
+
+    public Location = observable<LocationObservableSimpleDTO>();
+
+    public ManagementUnit = observable<ManagementUnitObservableSimpleDTO>();
+
+    public static fromJs(source: ITestPerformanceObjectFullDTO): TestPerformanceObjectObservableFullDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestPerformanceObjectObservableFullDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: ITestPerformanceObjectFullDTO): void {
+        super.fromJs(source);
+        this.BusinessUnit(BusinessUnitObservableSimpleDTO.fromJs(source.BusinessUnit));
+        this.Employee(EmployeeObservableSimpleDTO.fromJs(source.Employee));
+        this.Location(LocationObservableSimpleDTO.fromJs(source.Location));
+        this.ManagementUnit(ManagementUnitObservableSimpleDTO.fromJs(source.ManagementUnit));
+    }
+
+    public toJs(): TestPerformanceObjectFullDTO {
+        let e = new TestPerformanceObjectFullDTO();
+        e.fromObservable(this);
+        return e;
+    }
+
+}
+
+export class TestPerformanceObjectObservableRichDTO extends TestPerformanceObjectObservableFullDTO {
+    public __type = 'TestPerformanceObjectObservableRichDTO';
+
+    private _testperformanceobjectobservablerichdto: string;
+
+    public static fromJs(source: ITestPerformanceObjectRichDTO): TestPerformanceObjectObservableRichDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestPerformanceObjectObservableRichDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: ITestPerformanceObjectRichDTO): void {
+        super.fromJs(source);
+    }
+
+    public toJs(): TestPerformanceObjectRichDTO {
+        let e = new TestPerformanceObjectRichDTO();
+        e.fromObservable(this);
+        return e;
+    }
+
+}
+
+export class TestPerformanceObjectObservableVisualDTO extends BaseObservablePersistentDTO {
+    public __type = 'TestPerformanceObjectObservableVisualDTO';
+
+    private _testperformanceobjectobservablevisualdto: string;
+
+    public Name = observable<string>();
+
+    constructor () {
+        super();
+
+    }
+
+    public static fromJs(source: IBasePersistentDTO): TestPerformanceObjectObservableVisualDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestPerformanceObjectObservableVisualDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: any): void {
+        super.fromJs(source);
+        this.Name(source.Name);
+    }
+
+    public identity(): TestPerformanceObjectIdentityDTO {
+        return new TestPerformanceObjectIdentityDTO(this.Id());
+    }
+
+    public toJs(): TestPerformanceObjectVisualDTO {
+        let e = new TestPerformanceObjectVisualDTO();
+        e.fromObservable(this);
+        return e;
+    }
+
+}
+
 export class TestPlainAuthObjectObservableIdentityDTO {
     public Id: Guid;
 
@@ -8506,6 +8691,8 @@ export class TestPlainAuthObjectObservableFullDTO extends TestPlainAuthObjectObs
 
     private _testplainauthobjectobservablefulldto: string;
 
+    public Employee = observable<EmployeeObservableSimpleDTO>();
+
     public Location = observable<LocationObservableSimpleDTO>();
 
     public static fromJs(source: ITestPlainAuthObjectFullDTO): TestPlainAuthObjectObservableFullDTO {
@@ -8519,6 +8706,7 @@ export class TestPlainAuthObjectObservableFullDTO extends TestPlainAuthObjectObs
 
     public fromJs(source: ITestPlainAuthObjectFullDTO): void {
         super.fromJs(source);
+        this.Employee(EmployeeObservableSimpleDTO.fromJs(source.Employee));
         this.Location(LocationObservableSimpleDTO.fromJs(source.Location));
     }
 
@@ -14872,6 +15060,128 @@ export class TestObjForNestedSimpleDTO extends BaseAuditPersistentDTO {
 
 }
 
+export class TestPerformanceObjectSimpleDTO extends BaseAuditPersistentDTO {
+    public __type = 'TestPerformanceObjectSimpleDTO';
+
+    private _testperformanceobjectsimpledto: string;
+
+    public Name: string;
+
+    public get Identity() : TestPerformanceObjectIdentityDTO {
+        return new TestPerformanceObjectIdentityDTO(this.Id);
+    }
+
+    public static fromJs(source: ITestPerformanceObjectSimpleDTO): TestPerformanceObjectSimpleDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestPerformanceObjectSimpleDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: ITestPerformanceObjectSimpleDTO): void {
+        super.fromJs(source);
+        this.Name = source.Name;
+    }
+
+    public fromObservable(source: TestPerformanceObjectObservableSimpleDTO): void {
+        super.fromObservable(source);
+        this.Name = unwrap(source.Name);
+    }
+
+    public toObservable(): TestPerformanceObjectObservableSimpleDTO {
+        let e = new TestPerformanceObjectObservableSimpleDTO();
+        e.fromJs(this);
+        return e;
+    }
+
+}
+
+export class TestPerformanceObjectFullDTO extends TestPerformanceObjectSimpleDTO {
+    public __type = 'TestPerformanceObjectFullDTO';
+
+    private _testperformanceobjectfulldto: string;
+
+    public BusinessUnit: BusinessUnitSimpleDTO;
+
+    public Employee: EmployeeSimpleDTO;
+
+    public Location: LocationSimpleDTO;
+
+    public ManagementUnit: ManagementUnitSimpleDTO;
+
+    public static fromJs(source: ITestPerformanceObjectFullDTO): TestPerformanceObjectFullDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestPerformanceObjectFullDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: ITestPerformanceObjectFullDTO): void {
+        super.fromJs(source);
+        this.BusinessUnit = BusinessUnitSimpleDTO.fromJs(source.BusinessUnit);
+        this.Employee = EmployeeSimpleDTO.fromJs(source.Employee);
+        this.Location = LocationSimpleDTO.fromJs(source.Location);
+        this.ManagementUnit = ManagementUnitSimpleDTO.fromJs(source.ManagementUnit);
+    }
+
+    public fromObservable(source: TestPerformanceObjectObservableFullDTO): void {
+        super.fromObservable(source);
+        if (unwrap(source.BusinessUnit)) {
+            this.BusinessUnit = unwrap(source.BusinessUnit).toJs();
+        }
+        if (unwrap(source.Employee)) {
+            this.Employee = unwrap(source.Employee).toJs();
+        }
+        if (unwrap(source.Location)) {
+            this.Location = unwrap(source.Location).toJs();
+        }
+        if (unwrap(source.ManagementUnit)) {
+            this.ManagementUnit = unwrap(source.ManagementUnit).toJs();
+        }
+    }
+
+    public toObservable(): TestPerformanceObjectObservableFullDTO {
+        let e = new TestPerformanceObjectObservableFullDTO();
+        e.fromJs(this);
+        return e;
+    }
+
+}
+
+export class TestPerformanceObjectRichDTO extends TestPerformanceObjectFullDTO {
+    public __type = 'TestPerformanceObjectRichDTO';
+
+    private _testperformanceobjectrichdto: string;
+
+    public static fromJs(source: ITestPerformanceObjectRichDTO): TestPerformanceObjectRichDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestPerformanceObjectRichDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: ITestPerformanceObjectRichDTO): void {
+        super.fromJs(source);
+    }
+
+    public fromObservable(source: TestPerformanceObjectObservableRichDTO): void {
+        super.fromObservable(source);
+    }
+
+    public toObservable(): TestPerformanceObjectObservableRichDTO {
+        let e = new TestPerformanceObjectObservableRichDTO();
+        e.fromJs(this);
+        return e;
+    }
+
+}
+
 export class TestPlainAuthObjectSimpleDTO extends BaseAuditPersistentDTO {
     public __type = 'TestPlainAuthObjectSimpleDTO';
 
@@ -14915,6 +15225,8 @@ export class TestPlainAuthObjectFullDTO extends TestPlainAuthObjectSimpleDTO {
 
     private _testplainauthobjectfulldto: string;
 
+    public Employee: EmployeeSimpleDTO;
+
     public Location: LocationSimpleDTO;
 
     public static fromJs(source: ITestPlainAuthObjectFullDTO): TestPlainAuthObjectFullDTO {
@@ -14928,11 +15240,15 @@ export class TestPlainAuthObjectFullDTO extends TestPlainAuthObjectSimpleDTO {
 
     public fromJs(source: ITestPlainAuthObjectFullDTO): void {
         super.fromJs(source);
+        this.Employee = EmployeeSimpleDTO.fromJs(source.Employee);
         this.Location = LocationSimpleDTO.fromJs(source.Location);
     }
 
     public fromObservable(source: TestPlainAuthObjectObservableFullDTO): void {
         super.fromObservable(source);
+        if (unwrap(source.Employee)) {
+            this.Employee = unwrap(source.Employee).toJs();
+        }
         if (unwrap(source.Location)) {
             this.Location = unwrap(source.Location).toJs();
         }
@@ -16861,11 +17177,65 @@ export interface ITestObjForNestedSimpleDTO extends IBaseAuditPersistentDTO {
     Period : Framework.Core.Period;
 }
 
+export interface ITestPerformanceObjectSimpleDTO extends IBaseAuditPersistentDTO {
+    Name : string;
+}
+
+export interface ITestPerformanceObjectFullDTO extends ITestPerformanceObjectSimpleDTO {
+    BusinessUnit : BusinessUnitSimpleDTO;
+    Employee : EmployeeSimpleDTO;
+    Location : LocationSimpleDTO;
+    ManagementUnit : ManagementUnitSimpleDTO;
+}
+
+export interface ITestPerformanceObjectRichDTO extends ITestPerformanceObjectFullDTO {
+}
+
+export class TestPerformanceObjectVisualDTO extends BasePersistentDTO {
+    public __type = 'TestPerformanceObjectVisualDTO';
+
+    private _testperformanceobjectvisualdto: string;
+
+    public Name: string;
+
+    constructor () {
+        super();
+
+    }
+
+    public static fromJs(source: IBasePersistentDTO): TestPerformanceObjectVisualDTO {
+        if (!(source)) {
+            return undefined;
+        }
+        let e = new TestPerformanceObjectVisualDTO();
+        e.fromJs(source);
+        return e;
+    }
+
+    public fromJs(source: any): void {
+        super.fromJs(source);
+        this.Name = source.Name;
+    }
+
+    public fromObservable(source: TestPerformanceObjectObservableVisualDTO): void {
+        super.fromObservable(source);
+        this.Name = unwrap(source.Name);
+    }
+
+    public toObservable(): TestPerformanceObjectObservableVisualDTO {
+        let e = new TestPerformanceObjectObservableVisualDTO();
+        e.fromJs(this);
+        return e;
+    }
+
+}
+
 export interface ITestPlainAuthObjectSimpleDTO extends IBaseAuditPersistentDTO {
     Name : string;
 }
 
 export interface ITestPlainAuthObjectFullDTO extends ITestPlainAuthObjectSimpleDTO {
+    Employee : EmployeeSimpleDTO;
     Location : LocationSimpleDTO;
 }
 

@@ -47,6 +47,7 @@ export let checkPrincipalAccessAsyncFunc = _checkPrincipalAccess();
 export let checkSqlParserTestObjAccessAsyncFunc = _checkSqlParserTestObjAccess();
 export let checkSqlParserTestObjContainerAccessAsyncFunc = _checkSqlParserTestObjContainerAccess();
 export let checkTestImmutableObjAccessAsyncFunc = _checkTestImmutableObjAccess();
+export let checkTestPerformanceObjectAccessAsyncFunc = _checkTestPerformanceObjectAccess();
 export let checkTestPlainAuthObjectAccessAsyncFunc = _checkTestPlainAuthObjectAccess();
 export let checkTestRootSecurityObjAccessAsyncFunc = _checkTestRootSecurityObjAccess();
 export let checkWorkingCalendar1676AccessAsyncFunc = _checkWorkingCalendar1676Access();
@@ -167,6 +168,10 @@ export let getFullTestCustomContextSecurityObjsByIdentsAsyncFunc = _getFullTestC
 export let getFullTestImmutableObjAsyncFunc = _getFullTestImmutableObj();
 export let getFullTestImmutableObjsAsyncFunc = _getFullTestImmutableObjs();
 export let getFullTestImmutableObjsByIdentsAsyncFunc = _getFullTestImmutableObjsByIdents();
+export let getFullTestPerformanceObjectAsyncFunc = _getFullTestPerformanceObject();
+export let getFullTestPerformanceObjectByNameAsyncFunc = _getFullTestPerformanceObjectByName();
+export let getFullTestPerformanceObjectsAsyncFunc = _getFullTestPerformanceObjects();
+export let getFullTestPerformanceObjectsByIdentsAsyncFunc = _getFullTestPerformanceObjectsByIdents();
 export let getFullTestPlainAuthObjectAsyncFunc = _getFullTestPlainAuthObject();
 export let getFullTestPlainAuthObjectByNameAsyncFunc = _getFullTestPlainAuthObjectByName();
 export let getFullTestPlainAuthObjectsAsyncFunc = _getFullTestPlainAuthObjects();
@@ -241,6 +246,8 @@ export let getRichPrincipalAsyncFunc = _getRichPrincipal();
 export let getRichTestCustomContextSecurityObjAsyncFunc = _getRichTestCustomContextSecurityObj();
 export let getRichTestCustomContextSecurityObjByNameAsyncFunc = _getRichTestCustomContextSecurityObjByName();
 export let getRichTestImmutableObjAsyncFunc = _getRichTestImmutableObj();
+export let getRichTestPerformanceObjectAsyncFunc = _getRichTestPerformanceObject();
+export let getRichTestPerformanceObjectByNameAsyncFunc = _getRichTestPerformanceObjectByName();
 export let getRichTestPlainAuthObjectAsyncFunc = _getRichTestPlainAuthObject();
 export let getRichTestPlainAuthObjectByNameAsyncFunc = _getRichTestPlainAuthObjectByName();
 export let getRichTestRootSecurityObjAsyncFunc = _getRichTestRootSecurityObj();
@@ -366,6 +373,10 @@ export let getSimpleTestCustomContextSecurityObjsByIdentsAsyncFunc = _getSimpleT
 export let getSimpleTestImmutableObjAsyncFunc = _getSimpleTestImmutableObj();
 export let getSimpleTestImmutableObjsAsyncFunc = _getSimpleTestImmutableObjs();
 export let getSimpleTestImmutableObjsByIdentsAsyncFunc = _getSimpleTestImmutableObjsByIdents();
+export let getSimpleTestPerformanceObjectAsyncFunc = _getSimpleTestPerformanceObject();
+export let getSimpleTestPerformanceObjectByNameAsyncFunc = _getSimpleTestPerformanceObjectByName();
+export let getSimpleTestPerformanceObjectsAsyncFunc = _getSimpleTestPerformanceObjects();
+export let getSimpleTestPerformanceObjectsByIdentsAsyncFunc = _getSimpleTestPerformanceObjectsByIdents();
 export let getSimpleTestPlainAuthObjectAsyncFunc = _getSimpleTestPlainAuthObject();
 export let getSimpleTestPlainAuthObjectByNameAsyncFunc = _getSimpleTestPlainAuthObjectByName();
 export let getSimpleTestPlainAuthObjectsAsyncFunc = _getSimpleTestPlainAuthObjects();
@@ -489,6 +500,10 @@ export let getVisualTestCustomContextSecurityObjAsyncFunc = _getVisualTestCustom
 export let getVisualTestCustomContextSecurityObjByNameAsyncFunc = _getVisualTestCustomContextSecurityObjByName();
 export let getVisualTestCustomContextSecurityObjsAsyncFunc = _getVisualTestCustomContextSecurityObjs();
 export let getVisualTestCustomContextSecurityObjsByIdentsAsyncFunc = _getVisualTestCustomContextSecurityObjsByIdents();
+export let getVisualTestPerformanceObjectAsyncFunc = _getVisualTestPerformanceObject();
+export let getVisualTestPerformanceObjectByNameAsyncFunc = _getVisualTestPerformanceObjectByName();
+export let getVisualTestPerformanceObjectsAsyncFunc = _getVisualTestPerformanceObjects();
+export let getVisualTestPerformanceObjectsByIdentsAsyncFunc = _getVisualTestPerformanceObjectsByIdents();
 export let getVisualTestPlainAuthObjectAsyncFunc = _getVisualTestPlainAuthObject();
 export let getVisualTestPlainAuthObjectByNameAsyncFunc = _getVisualTestPlainAuthObjectByName();
 export let getVisualTestPlainAuthObjectsAsyncFunc = _getVisualTestPlainAuthObjects();
@@ -544,6 +559,7 @@ export let hasPrincipalAccessAsyncFunc = _hasPrincipalAccess();
 export let hasSqlParserTestObjAccessAsyncFunc = _hasSqlParserTestObjAccess();
 export let hasSqlParserTestObjContainerAccessAsyncFunc = _hasSqlParserTestObjContainerAccess();
 export let hasTestImmutableObjAccessAsyncFunc = _hasTestImmutableObjAccess();
+export let hasTestPerformanceObjectAccessAsyncFunc = _hasTestPerformanceObjectAccess();
 export let hasTestPlainAuthObjectAccessAsyncFunc = _hasTestPlainAuthObjectAccess();
 export let hasTestRootSecurityObjAccessAsyncFunc = _hasTestRootSecurityObjAccess();
 export let hasWorkingCalendar1676AccessAsyncFunc = _hasWorkingCalendar1676Access();
@@ -805,6 +821,14 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
             let baseParameters = {testImmutableObjIdent : testImmutableObjIdent, securityOperationCode : securityOperationCode};
             let service = Environment.current.context.facadeFactory.createSimpleService<void>();
             return service.getData('TestImmutableObj/CheckTestImmutableObjAccess', baseParameters);
+        });
+    }
+
+    function _checkTestPerformanceObjectAccess(): async.SimpleAsyncFunc3<dto.TestPerformanceObjectIdentityDTO, dto.SampleSystemSecurityOperationCode, void> {
+        return new async.SimpleAsyncFunc3((testPerformanceObjectIdent: dto.TestPerformanceObjectIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
+            let baseParameters = {testPerformanceObjectIdent : testPerformanceObjectIdent, securityOperationCode : securityOperationCode};
+            let service = Environment.current.context.facadeFactory.createSimpleService<void>();
+            return service.getData('TestPerformanceObject/CheckTestPerformanceObjectAccess', baseParameters);
         });
     }
 
@@ -1771,6 +1795,38 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
         });
     }
 
+    function _getFullTestPerformanceObject(): async.AsyncFunc3<dto.TestPerformanceObjectIdentityDTO, dto.TestPerformanceObjectFullDTO, dto.TestPerformanceObjectObservableFullDTO, dto.TestPerformanceObjectFullDTO, dto.TestPerformanceObjectObservableFullDTO> {
+        return new async.AsyncFunc3((testPerformanceObjectIdentity: dto.TestPerformanceObjectIdentityDTO) => {
+            let baseParameters = testPerformanceObjectIdentity;
+            let service = Environment.current.context.facadeFactory.createService<dto.TestPerformanceObjectFullDTO, dto.TestPerformanceObjectObservableFullDTO, dto.TestPerformanceObjectFullDTO, dto.TestPerformanceObjectObservableFullDTO>();
+            return service.getData('TestPerformanceObject/GetFullTestPerformanceObject', {plain : dto.TestPerformanceObjectFullDTO, observable : dto.TestPerformanceObjectObservableFullDTO}, baseParameters);
+        });
+    }
+
+    function _getFullTestPerformanceObjectByName(): async.AsyncFunc3<string, dto.TestPerformanceObjectFullDTO, dto.TestPerformanceObjectObservableFullDTO, dto.TestPerformanceObjectFullDTO, dto.TestPerformanceObjectObservableFullDTO> {
+        return new async.AsyncFunc3((testPerformanceObjectName: string) => {
+            let baseParameters = testPerformanceObjectName;
+            let service = Environment.current.context.facadeFactory.createService<dto.TestPerformanceObjectFullDTO, dto.TestPerformanceObjectObservableFullDTO, dto.TestPerformanceObjectFullDTO, dto.TestPerformanceObjectObservableFullDTO>();
+            return service.getData('TestPerformanceObject/GetFullTestPerformanceObjectByName', {plain : dto.TestPerformanceObjectFullDTO, observable : dto.TestPerformanceObjectObservableFullDTO}, baseParameters);
+        });
+    }
+
+    function _getFullTestPerformanceObjects(): async.AsyncFunc2<Array<dto.TestPerformanceObjectFullDTO>, Array<dto.TestPerformanceObjectObservableFullDTO>, dto.TestPerformanceObjectFullDTO, dto.TestPerformanceObjectObservableFullDTO> {
+        return new async.AsyncFunc2(() => {
+            let baseParameters = {};
+            let service = Environment.current.context.facadeFactory.createService<Array<dto.TestPerformanceObjectFullDTO>, Array<dto.TestPerformanceObjectObservableFullDTO>, dto.TestPerformanceObjectFullDTO, dto.TestPerformanceObjectObservableFullDTO>();
+            return service.getData('TestPerformanceObject/GetFullTestPerformanceObjects', {plain : dto.TestPerformanceObjectFullDTO, observable : dto.TestPerformanceObjectObservableFullDTO}, baseParameters);
+        });
+    }
+
+    function _getFullTestPerformanceObjectsByIdents(): async.AsyncFunc3<dto.TestPerformanceObjectIdentityDTO[], Array<dto.TestPerformanceObjectFullDTO>, Array<dto.TestPerformanceObjectObservableFullDTO>, dto.TestPerformanceObjectFullDTO, dto.TestPerformanceObjectObservableFullDTO> {
+        return new async.AsyncFunc3((testPerformanceObjectIdents: dto.TestPerformanceObjectIdentityDTO[]) => {
+            let baseParameters = testPerformanceObjectIdents;
+            let service = Environment.current.context.facadeFactory.createService<Array<dto.TestPerformanceObjectFullDTO>, Array<dto.TestPerformanceObjectObservableFullDTO>, dto.TestPerformanceObjectFullDTO, dto.TestPerformanceObjectObservableFullDTO>();
+            return service.getData('TestPerformanceObject/GetFullTestPerformanceObjectsByIdents', {plain : dto.TestPerformanceObjectFullDTO, observable : dto.TestPerformanceObjectObservableFullDTO}, baseParameters);
+        });
+    }
+
     function _getFullTestPlainAuthObject(): async.AsyncFunc3<dto.TestPlainAuthObjectIdentityDTO, dto.TestPlainAuthObjectFullDTO, dto.TestPlainAuthObjectObservableFullDTO, dto.TestPlainAuthObjectFullDTO, dto.TestPlainAuthObjectObservableFullDTO> {
         return new async.AsyncFunc3((testPlainAuthObjectIdentity: dto.TestPlainAuthObjectIdentityDTO) => {
             let baseParameters = testPlainAuthObjectIdentity;
@@ -2360,6 +2416,22 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
             let baseParameters = testImmutableObjIdentity;
             let service = Environment.current.context.facadeFactory.createService<dto.TestImmutableObjRichDTO, dto.TestImmutableObjObservableRichDTO, dto.TestImmutableObjRichDTO, dto.TestImmutableObjObservableRichDTO>();
             return service.getData('TestImmutableObj/GetRichTestImmutableObj', {plain : dto.TestImmutableObjRichDTO, observable : dto.TestImmutableObjObservableRichDTO}, baseParameters);
+        });
+    }
+
+    function _getRichTestPerformanceObject(): async.AsyncFunc3<dto.TestPerformanceObjectIdentityDTO, dto.TestPerformanceObjectRichDTO, dto.TestPerformanceObjectObservableRichDTO, dto.TestPerformanceObjectRichDTO, dto.TestPerformanceObjectObservableRichDTO> {
+        return new async.AsyncFunc3((testPerformanceObjectIdentity: dto.TestPerformanceObjectIdentityDTO) => {
+            let baseParameters = testPerformanceObjectIdentity;
+            let service = Environment.current.context.facadeFactory.createService<dto.TestPerformanceObjectRichDTO, dto.TestPerformanceObjectObservableRichDTO, dto.TestPerformanceObjectRichDTO, dto.TestPerformanceObjectObservableRichDTO>();
+            return service.getData('TestPerformanceObject/GetRichTestPerformanceObject', {plain : dto.TestPerformanceObjectRichDTO, observable : dto.TestPerformanceObjectObservableRichDTO}, baseParameters);
+        });
+    }
+
+    function _getRichTestPerformanceObjectByName(): async.AsyncFunc3<string, dto.TestPerformanceObjectRichDTO, dto.TestPerformanceObjectObservableRichDTO, dto.TestPerformanceObjectRichDTO, dto.TestPerformanceObjectObservableRichDTO> {
+        return new async.AsyncFunc3((testPerformanceObjectName: string) => {
+            let baseParameters = testPerformanceObjectName;
+            let service = Environment.current.context.facadeFactory.createService<dto.TestPerformanceObjectRichDTO, dto.TestPerformanceObjectObservableRichDTO, dto.TestPerformanceObjectRichDTO, dto.TestPerformanceObjectObservableRichDTO>();
+            return service.getData('TestPerformanceObject/GetRichTestPerformanceObjectByName', {plain : dto.TestPerformanceObjectRichDTO, observable : dto.TestPerformanceObjectObservableRichDTO}, baseParameters);
         });
     }
 
@@ -3366,6 +3438,38 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
         });
     }
 
+    function _getSimpleTestPerformanceObject(): async.AsyncFunc3<dto.TestPerformanceObjectIdentityDTO, dto.TestPerformanceObjectSimpleDTO, dto.TestPerformanceObjectObservableSimpleDTO, dto.TestPerformanceObjectSimpleDTO, dto.TestPerformanceObjectObservableSimpleDTO> {
+        return new async.AsyncFunc3((testPerformanceObjectIdentity: dto.TestPerformanceObjectIdentityDTO) => {
+            let baseParameters = testPerformanceObjectIdentity;
+            let service = Environment.current.context.facadeFactory.createService<dto.TestPerformanceObjectSimpleDTO, dto.TestPerformanceObjectObservableSimpleDTO, dto.TestPerformanceObjectSimpleDTO, dto.TestPerformanceObjectObservableSimpleDTO>();
+            return service.getData('TestPerformanceObject/GetSimpleTestPerformanceObject', {plain : dto.TestPerformanceObjectSimpleDTO, observable : dto.TestPerformanceObjectObservableSimpleDTO}, baseParameters);
+        });
+    }
+
+    function _getSimpleTestPerformanceObjectByName(): async.AsyncFunc3<string, dto.TestPerformanceObjectSimpleDTO, dto.TestPerformanceObjectObservableSimpleDTO, dto.TestPerformanceObjectSimpleDTO, dto.TestPerformanceObjectObservableSimpleDTO> {
+        return new async.AsyncFunc3((testPerformanceObjectName: string) => {
+            let baseParameters = testPerformanceObjectName;
+            let service = Environment.current.context.facadeFactory.createService<dto.TestPerformanceObjectSimpleDTO, dto.TestPerformanceObjectObservableSimpleDTO, dto.TestPerformanceObjectSimpleDTO, dto.TestPerformanceObjectObservableSimpleDTO>();
+            return service.getData('TestPerformanceObject/GetSimpleTestPerformanceObjectByName', {plain : dto.TestPerformanceObjectSimpleDTO, observable : dto.TestPerformanceObjectObservableSimpleDTO}, baseParameters);
+        });
+    }
+
+    function _getSimpleTestPerformanceObjects(): async.AsyncFunc2<Array<dto.TestPerformanceObjectSimpleDTO>, Array<dto.TestPerformanceObjectObservableSimpleDTO>, dto.TestPerformanceObjectSimpleDTO, dto.TestPerformanceObjectObservableSimpleDTO> {
+        return new async.AsyncFunc2(() => {
+            let baseParameters = {};
+            let service = Environment.current.context.facadeFactory.createService<Array<dto.TestPerformanceObjectSimpleDTO>, Array<dto.TestPerformanceObjectObservableSimpleDTO>, dto.TestPerformanceObjectSimpleDTO, dto.TestPerformanceObjectObservableSimpleDTO>();
+            return service.getData('TestPerformanceObject/GetSimpleTestPerformanceObjects', {plain : dto.TestPerformanceObjectSimpleDTO, observable : dto.TestPerformanceObjectObservableSimpleDTO}, baseParameters);
+        });
+    }
+
+    function _getSimpleTestPerformanceObjectsByIdents(): async.AsyncFunc3<dto.TestPerformanceObjectIdentityDTO[], Array<dto.TestPerformanceObjectSimpleDTO>, Array<dto.TestPerformanceObjectObservableSimpleDTO>, dto.TestPerformanceObjectSimpleDTO, dto.TestPerformanceObjectObservableSimpleDTO> {
+        return new async.AsyncFunc3((testPerformanceObjectIdents: dto.TestPerformanceObjectIdentityDTO[]) => {
+            let baseParameters = testPerformanceObjectIdents;
+            let service = Environment.current.context.facadeFactory.createService<Array<dto.TestPerformanceObjectSimpleDTO>, Array<dto.TestPerformanceObjectObservableSimpleDTO>, dto.TestPerformanceObjectSimpleDTO, dto.TestPerformanceObjectObservableSimpleDTO>();
+            return service.getData('TestPerformanceObject/GetSimpleTestPerformanceObjectsByIdents', {plain : dto.TestPerformanceObjectSimpleDTO, observable : dto.TestPerformanceObjectObservableSimpleDTO}, baseParameters);
+        });
+    }
+
     function _getSimpleTestPlainAuthObject(): async.AsyncFunc3<dto.TestPlainAuthObjectIdentityDTO, dto.TestPlainAuthObjectSimpleDTO, dto.TestPlainAuthObjectObservableSimpleDTO, dto.TestPlainAuthObjectSimpleDTO, dto.TestPlainAuthObjectObservableSimpleDTO> {
         return new async.AsyncFunc3((testPlainAuthObjectIdentity: dto.TestPlainAuthObjectIdentityDTO) => {
             let baseParameters = testPlainAuthObjectIdentity;
@@ -4350,6 +4454,38 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
         });
     }
 
+    function _getVisualTestPerformanceObject(): async.AsyncFunc3<dto.TestPerformanceObjectIdentityDTO, dto.TestPerformanceObjectVisualDTO, dto.TestPerformanceObjectObservableVisualDTO, dto.TestPerformanceObjectVisualDTO, dto.TestPerformanceObjectObservableVisualDTO> {
+        return new async.AsyncFunc3((testPerformanceObjectIdentity: dto.TestPerformanceObjectIdentityDTO) => {
+            let baseParameters = testPerformanceObjectIdentity;
+            let service = Environment.current.context.facadeFactory.createService<dto.TestPerformanceObjectVisualDTO, dto.TestPerformanceObjectObservableVisualDTO, dto.TestPerformanceObjectVisualDTO, dto.TestPerformanceObjectObservableVisualDTO>();
+            return service.getData('TestPerformanceObject/GetVisualTestPerformanceObject', {plain : dto.TestPerformanceObjectVisualDTO, observable : dto.TestPerformanceObjectObservableVisualDTO}, baseParameters);
+        });
+    }
+
+    function _getVisualTestPerformanceObjectByName(): async.AsyncFunc3<string, dto.TestPerformanceObjectVisualDTO, dto.TestPerformanceObjectObservableVisualDTO, dto.TestPerformanceObjectVisualDTO, dto.TestPerformanceObjectObservableVisualDTO> {
+        return new async.AsyncFunc3((testPerformanceObjectName: string) => {
+            let baseParameters = testPerformanceObjectName;
+            let service = Environment.current.context.facadeFactory.createService<dto.TestPerformanceObjectVisualDTO, dto.TestPerformanceObjectObservableVisualDTO, dto.TestPerformanceObjectVisualDTO, dto.TestPerformanceObjectObservableVisualDTO>();
+            return service.getData('TestPerformanceObject/GetVisualTestPerformanceObjectByName', {plain : dto.TestPerformanceObjectVisualDTO, observable : dto.TestPerformanceObjectObservableVisualDTO}, baseParameters);
+        });
+    }
+
+    function _getVisualTestPerformanceObjects(): async.AsyncFunc2<Array<dto.TestPerformanceObjectVisualDTO>, Array<dto.TestPerformanceObjectObservableVisualDTO>, dto.TestPerformanceObjectVisualDTO, dto.TestPerformanceObjectObservableVisualDTO> {
+        return new async.AsyncFunc2(() => {
+            let baseParameters = {};
+            let service = Environment.current.context.facadeFactory.createService<Array<dto.TestPerformanceObjectVisualDTO>, Array<dto.TestPerformanceObjectObservableVisualDTO>, dto.TestPerformanceObjectVisualDTO, dto.TestPerformanceObjectObservableVisualDTO>();
+            return service.getData('TestPerformanceObject/GetVisualTestPerformanceObjects', {plain : dto.TestPerformanceObjectVisualDTO, observable : dto.TestPerformanceObjectObservableVisualDTO}, baseParameters);
+        });
+    }
+
+    function _getVisualTestPerformanceObjectsByIdents(): async.AsyncFunc3<dto.TestPerformanceObjectIdentityDTO[], Array<dto.TestPerformanceObjectVisualDTO>, Array<dto.TestPerformanceObjectObservableVisualDTO>, dto.TestPerformanceObjectVisualDTO, dto.TestPerformanceObjectObservableVisualDTO> {
+        return new async.AsyncFunc3((testPerformanceObjectIdents: dto.TestPerformanceObjectIdentityDTO[]) => {
+            let baseParameters = testPerformanceObjectIdents;
+            let service = Environment.current.context.facadeFactory.createService<Array<dto.TestPerformanceObjectVisualDTO>, Array<dto.TestPerformanceObjectObservableVisualDTO>, dto.TestPerformanceObjectVisualDTO, dto.TestPerformanceObjectObservableVisualDTO>();
+            return service.getData('TestPerformanceObject/GetVisualTestPerformanceObjectsByIdents', {plain : dto.TestPerformanceObjectVisualDTO, observable : dto.TestPerformanceObjectObservableVisualDTO}, baseParameters);
+        });
+    }
+
     function _getVisualTestPlainAuthObject(): async.AsyncFunc3<dto.TestPlainAuthObjectIdentityDTO, dto.TestPlainAuthObjectVisualDTO, dto.TestPlainAuthObjectObservableVisualDTO, dto.TestPlainAuthObjectVisualDTO, dto.TestPlainAuthObjectObservableVisualDTO> {
         return new async.AsyncFunc3((testPlainAuthObjectIdentity: dto.TestPlainAuthObjectIdentityDTO) => {
             let baseParameters = testPlainAuthObjectIdentity;
@@ -4787,6 +4923,14 @@ function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeM
             let baseParameters = {testImmutableObjIdent : testImmutableObjIdent, securityOperationCode : securityOperationCode};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
             return service.getData('TestImmutableObj/HasTestImmutableObjAccess', baseParameters);
+        });
+    }
+
+    function _hasTestPerformanceObjectAccess(): async.SimpleAsyncFunc3<dto.TestPerformanceObjectIdentityDTO, dto.SampleSystemSecurityOperationCode, boolean> {
+        return new async.SimpleAsyncFunc3((testPerformanceObjectIdent: dto.TestPerformanceObjectIdentityDTO, securityOperationCode: dto.SampleSystemSecurityOperationCode) => {
+            let baseParameters = {testPerformanceObjectIdent : testPerformanceObjectIdent, securityOperationCode : securityOperationCode};
+            let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
+            return service.getData('TestPerformanceObject/HasTestPerformanceObjectAccess', baseParameters);
         });
     }
 

@@ -15,7 +15,7 @@ namespace Framework.SecuritySystem
 
     public interface IAuthorizationSystem<TIdent> : IAuthorizationSystem
     {
-        TIdent GrandAccessIdent { get; }
+        //TIdent GrandAccessIdent { get; }
 
         IEnumerable<string> GetAccessors<TSecurityOperationCode>(
             TSecurityOperationCode securityOperationCode,

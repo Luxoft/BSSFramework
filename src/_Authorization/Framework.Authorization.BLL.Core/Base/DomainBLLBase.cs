@@ -15,33 +15,33 @@ namespace Framework.Authorization.BLL
         }
 
 
-        protected internal virtual void Validate(TDomainObject domainobject, AuthorizationOperationContext context)
+        protected internal virtual void Validate(TDomainObject domainObject, AuthorizationOperationContext context)
         {
-            this.Context.Validator.Validate(domainobject, (int)context);
+            this.Context.Validator.Validate(domainObject, (int)context);
         }
 
-        internal void Save(TDomainObject domainobject, bool validate)
+        internal void Save(TDomainObject domainObject, bool validate)
         {
-            if (domainobject == null) throw new ArgumentNullException(nameof(domainobject));
+            if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-            if (validate) { this.Save(domainobject); }
-            else          { base.Save(domainobject); }
+            if (validate) { this.Save(domainObject); }
+            else          { base.Save(domainObject); }
         }
 
-        public override void Insert(TDomainObject domainobject, Guid id)
+        public override void Insert(TDomainObject domainObject, Guid id)
         {
-            if (domainobject == null) throw new ArgumentNullException(nameof(domainobject));
+            if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-            this.ExecuteBasePersist(domainobject);
-            base.Insert(domainobject, id);
+            this.ExecuteBasePersist(domainObject);
+            base.Insert(domainObject, id);
         }
 
-        public override void Save(TDomainObject domainobject)
+        public override void Save(TDomainObject domainObject)
         {
-            if (domainobject == null) throw new ArgumentNullException(nameof(domainobject));
+            if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-            this.ExecuteBasePersist(domainobject);
-            base.Save(domainobject);
+            this.ExecuteBasePersist(domainObject);
+            base.Save(domainObject);
         }
     }
 }

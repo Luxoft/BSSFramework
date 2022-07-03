@@ -32,6 +32,8 @@ namespace Framework.Authorization.BLL
                 throw new BusinessLogicException("RunAs mode must be disabled");
             }
 
+            this.DenormalizePermission(permission);
+
             base.Save(permission);
 
             permission.DelegatedTo.Foreach(delegatedPermission => this.Context.Logics.Permission.Save(delegatedPermission, false));
@@ -43,43 +45,57 @@ namespace Framework.Authorization.BLL
 
             permission.IsDelegatedTo = permission.DelegatedTo.Any();
 
-            this.RecalculateDenormalizedItems(permission);
+            this.DenormalizePermission(permission);
 
             base.PreRecalculate(permission);
         }
 
-
-        public void RecalculateDenormalizedItems([NotNull] Permission permission)
+        public void DenormalizePermission([NotNull] Permission permission)
         {
-            if (permission == null) throw new ArgumentNullException(nameof(permission));
+            this.DenormalizePermissionFilterItems(permission);
 
-            var expectedItems = from entityType in this.Context.Logics.EntityType.GetFullList()
-
-                                join filterItem in permission.FilterItems on entityType equals filterItem.EntityType into filterItemGroup
-
-                                from accessId in this.GetAccessIdents(filterItemGroup.ToArray(fi => fi.Entity.EntityId))
-
-                                select new { EntityType = entityType, EntityId = accessId };
-
-            var mergeResult = permission.DenormalizedItems.GetMergeResult(expectedItems, di => new { di.EntityType, di.EntityId }, pair => pair);
-
-            permission.RemoveDetails(mergeResult.RemovingItems);
-
-            mergeResult.AddingItems.Foreach(pair => new DenormalizedPermissionItem(permission, pair.EntityType, pair.EntityId));
+            //this.RecalculateDenormalizedItems(permission);
+        }
+        protected void DenormalizePermissionFilterItems(Permission permission)
+        {
+            permission.FilterItems.Foreach(item =>
+            {
+                item.ContextEntityId = item.Entity.EntityId;
+                item.EntityType = item.Entity.EntityType;
+            });
         }
 
-        private IEnumerable<Guid> GetAccessIdents(Guid[] baseIdents)
-        {
-            foreach (var baseIdent in baseIdents)
-            {
-                yield return baseIdent;
-            }
+        //public void RecalculateDenormalizedItems([NotNull] Permission permission)
+        //{
+        //    if (permission == null) throw new ArgumentNullException(nameof(permission));
 
-            if (!baseIdents.Any())
-            {
-                yield return this.Context.GrandAccessIdent;
-            }
-        }
+        //    var expectedItems = from entityType in this.Context.Logics.EntityType.GetFullList()
+
+        //                        join filterItem in permission.FilterItems on entityType equals filterItem.EntityType into filterItemGroup
+
+        //                        from accessId in this.GetAccessIdents(filterItemGroup.ToArray(fi => fi.Entity.EntityId))
+
+        //                        select new { EntityType = entityType, EntityId = accessId };
+
+        //    var mergeResult = permission.DenormalizedItems.GetMergeResult(expectedItems, di => new { di.EntityType, di.EntityId }, pair => pair);
+
+        //    permission.RemoveDetails(mergeResult.RemovingItems);
+
+        //    mergeResult.AddingItems.Foreach(pair => new DenormalizedPermissionItem(permission, pair.EntityType, pair.EntityId));
+        //}
+
+        //private IEnumerable<Guid> GetAccessIdents(Guid[] baseIdents)
+        //{
+        //    foreach (var baseIdent in baseIdents)
+        //    {
+        //        yield return baseIdent;
+        //    }
+
+        //    if (!baseIdents.Any())
+        //    {
+        //        yield return this.Context.GrandAccessIdent;
+        //    }
+        //}
 
 
         protected override void PostValidate(Permission permission, AuthorizationOperationContext operationContext)

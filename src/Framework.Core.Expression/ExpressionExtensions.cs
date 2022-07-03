@@ -484,7 +484,15 @@ namespace Framework.Core
             return inputExpr.Compile(cache)(arg1, arg2);
         }
 
-        public static TResult Eval<T1, T2, T3, TResult>(this Expression<Func<T1, T2, T3, TResult>> inputExpr, T1 arg1, T2 arg2, T3 arg3, ILambdaCompileCache cache = null)
+        public static TResult Eval<T1, T2, T3, TResult>(this Expression<Func<T1, T2, T3, TResult>> inputExpr, T1 arg1, T2 arg2, T3 arg3)
+        {
+            if (inputExpr == null) throw new ArgumentNullException(nameof(inputExpr));
+
+            return inputExpr.Eval(arg1, arg2, arg3, null);
+        }
+
+
+        public static TResult Eval<T1, T2, T3, TResult>(this Expression<Func<T1, T2, T3, TResult>> inputExpr, T1 arg1, T2 arg2, T3 arg3, ILambdaCompileCache cache)
         {
             if (inputExpr == null) throw new ArgumentNullException(nameof(inputExpr));
 

@@ -85,10 +85,11 @@ namespace Framework.Authorization.Domain
         /// <summary>
         /// Вычисляемое название бизнес-роли
         /// </summary>
+        [FixedPropertyValidator]
         public override string Name
         {
             get { return base.Name; }
-            set { this.SetValueSafe(v => v.Name, value, () => base.Name = value); }
+            set { base.Name = value; }
         }
 
         /// <summary>

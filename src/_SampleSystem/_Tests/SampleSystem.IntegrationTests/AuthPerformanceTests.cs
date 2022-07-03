@@ -24,7 +24,7 @@ namespace SampleSystem.IntegrationTests.Workflow
     {
         private const string TestUser = "TestUser";
 
-        private const int Limit = 9;
+        private const int Limit = 3;
 
         private const int SplitBy = 25;
 

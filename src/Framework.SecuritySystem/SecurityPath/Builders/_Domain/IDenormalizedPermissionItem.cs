@@ -2,9 +2,9 @@
 
 namespace Framework.SecuritySystem;
 
-public interface IDenormalizedPermissionItem<out TIdent>
-{
-    IEntityType<TIdent> EntityType { get; }
+//public interface IDenormalizedPermissionItem<out TIdent>
+//{
+//    IEntityType<TIdent> EntityType { get; }
 
-    TIdent EntityId { get; }
-}
+//    TIdent EntityId { get; }
+//}

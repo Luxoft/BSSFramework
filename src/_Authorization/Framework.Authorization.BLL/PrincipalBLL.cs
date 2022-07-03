@@ -60,17 +60,14 @@ namespace Framework.Authorization.BLL
 
             this.PermissionFilterItemNotifyProgress(principal);
 
+            foreach (var permission in principal.Permissions)
+            {
+                this.Context.Logics.Permission.DenormalizePermission(permission);
+            }
+
             base.Save(principal);
 
             this.NotifySaveAndRemove(principal);
-        }
-
-        protected override void PreRecalculate(Principal principal)
-        {
-            foreach (var permission in principal.Permissions)
-            {
-                this.Context.Logics.Permission.RecalculateDenormalizedItems(permission);
-            }
         }
 
         public Principal GetByNameOrCreate(string name, bool autoSave = false)

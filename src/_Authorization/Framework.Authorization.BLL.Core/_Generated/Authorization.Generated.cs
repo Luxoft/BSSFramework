@@ -406,16 +406,6 @@ namespace Framework.Authorization.BLL
             get;
         }
         
-        Framework.Authorization.BLL.IDenormalizedPermissionItemBLL DenormalizedPermissionItem
-        {
-            get;
-        }
-        
-        Framework.Authorization.BLL.IDenormalizedPermissionItemBLLFactory DenormalizedPermissionItemFactory
-        {
-            get;
-        }
-        
         Framework.Authorization.BLL.IEntityTypeBLL EntityType
         {
             get;
@@ -484,14 +474,6 @@ namespace Framework.Authorization.BLL
     }
     
     public partial interface IBusinessRoleBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IBusinessRoleBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.BusinessRole>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IBusinessRoleBLL, Framework.Authorization.AuthorizationSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IBusinessRoleBLL, Framework.SecuritySystem.SecurityOperation<Framework.Authorization.AuthorizationSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IBusinessRoleBLL, Framework.SecuritySystem.BLLSecurityMode>
-    {
-    }
-    
-    public partial interface IDenormalizedPermissionItemBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.DenormalizedPermissionItem, System.Guid>
-    {
-    }
-    
-    public partial interface IDenormalizedPermissionItemBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Authorization.BLL.IDenormalizedPermissionItemBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Authorization.Domain.DenormalizedPermissionItem>>
     {
     }
     

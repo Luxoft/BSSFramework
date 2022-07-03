@@ -111,7 +111,7 @@ namespace Framework.SecuritySystem.Rules.Builders.QueryablePermissions
                     return fullAccessFilter.BuildOr(permission =>
 
                                 permission.FilterItems.Any(filterItem => filterItem.Entity.EntityType.Name == securityObjectName
-                                                                      && securityIdents.Contains(filterItem.Entity.EntityId)));
+                                                                      && securityIdents.Contains(filterItem.ContextEntityId)));
                 }
                 else
                 {
@@ -182,11 +182,10 @@ namespace Framework.SecuritySystem.Rules.Builders.QueryablePermissions
 
                 var getIdents = ExpressionHelper.Create((IPermission<TIdent> permission) =>
                     permission.FilterItems
-                              .Select(fi => fi.Entity)
                               .Where(item => eqIdentsExpr.Eval(item.EntityType.Id, entityTypeId))
-                              .Select(pfe => pfe.EntityId))
-                                                .ExpandConst()
-                                                .InlineEval();
+                              .Select(fi => fi.ContextEntityId))
+                                .ExpandConst()
+                                .InlineEval();
 
                 var expander = this.Factory.HierarchicalObjectExpanderFactory.CreateQuery(typeof(TSecurityContext));
 
@@ -254,9 +253,8 @@ namespace Framework.SecuritySystem.Rules.Builders.QueryablePermissions
 
                 var getIdents = ExpressionHelper.Create((IPermission<TIdent> permission) =>
                                                                 permission.FilterItems
-                                                                          .Select(fi => fi.Entity)
                                                                           .Where(item => eqIdentsExpr.Eval(item.EntityType.Id, entityTypeId))
-                                                                          .Select(pfe => pfe.EntityId))
+                                                                          .Select(fi => fi.ContextEntityId))
                                                 .ExpandConst()
                                                 .InlineEval();
 
@@ -365,7 +363,7 @@ namespace Framework.SecuritySystem.Rules.Builders.QueryablePermissions
             where TNestedObject : class, TPersistentDomainObjectBase
         {
             private readonly SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TNestedObject, TIdent> _nestedBuilder;
-            
+
             private static readonly string getAccessortFilterMethodInfoName;
             private static readonly MethodInfo buildOrMethod;
             private static readonly MethodInfo buildAndMethod;
@@ -381,7 +379,7 @@ namespace Framework.SecuritySystem.Rules.Builders.QueryablePermissions
             {
                 buildOrMethod = ((Func<IEnumerable<Expression<Func<IPermission<TIdent>, bool>>>, Expression<Func<IPermission<TIdent>, bool>>>)(Framework.Core.ExpressionExtensions.BuildOr)).Method;
                 buildAndMethod = ((Func<IEnumerable<Expression<Func<IPermission<TIdent>, bool>>>, Expression<Func<IPermission<TIdent>, bool>>>)(Framework.Core.ExpressionExtensions.BuildAnd)).Method;
-                
+
                 getAccessortFilterMethodInfoName = "GetAccessorsFilter";
             }
 
@@ -397,7 +395,7 @@ namespace Framework.SecuritySystem.Rules.Builders.QueryablePermissions
             public override Expression<Func<TDomainObject, IPermission<TIdent>, bool>> GetSecurityFilterExpression(HierarchicalExpandType expandType)
             {
                 var baseFilter = this._nestedBuilder.GetSecurityFilterExpression(expandType).ExpandConst().InlineEval();
-                
+
                 switch (this.Path.Mode)
                 {
                     case ManySecurityPathMode.Any:

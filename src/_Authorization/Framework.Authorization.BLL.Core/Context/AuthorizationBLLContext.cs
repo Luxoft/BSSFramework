@@ -255,7 +255,7 @@ namespace Framework.Authorization.BLL
             return this.GetAccessors(principalFilter, new AvailablePermissionOperationFilter(this.DateTimeService, null, operation));
         }
 
-        public Guid GrandAccessIdent { get; } = DenormalizedPermissionItem.GrandAccessGuid;
+        //public Guid GrandAccessIdent { get; } = DenormalizedPermissionItem.GrandAccessGuid;
 
         public IEnumerable<string> GetAccessors<TSecurityOperationCode>(
             TSecurityOperationCode securityOperationCode, Expression<Func<IPrincipal<Guid>, bool>> principalFilter)
@@ -336,7 +336,7 @@ namespace Framework.Authorization.BLL
                  { typeof(IPermissionFilterItem<Guid>), typeof(PermissionFilterItem) },
                  { typeof(IPermissionFilterEntity<Guid>), typeof(PermissionFilterEntity) },
                  { typeof(IEntityType<Guid>), typeof(EntityType) },
-                 { typeof(IDenormalizedPermissionItem<Guid>), typeof(DenormalizedPermissionItem) },
+                 //{ typeof(IDenormalizedPermissionItem<Guid>), typeof(DenormalizedPermissionItem) },
          });
     }
 }

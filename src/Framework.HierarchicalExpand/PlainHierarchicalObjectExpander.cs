@@ -31,5 +31,10 @@ namespace Framework.HierarchicalExpand
         {
             return v => v;
         }
+
+        public Expression<Func<TIdent, IEnumerable<TIdent>>> TryGetSingleExpandExpression(HierarchicalExpandType expandType)
+        {
+            return null;
+        }
     }
 }

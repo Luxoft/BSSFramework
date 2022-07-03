@@ -22,6 +22,7 @@ public static class InlineEvalExpressionExtensions
     {
         private static readonly MethodInfo[] EvalMethods =
         {
+                new Func<Expression<Func<object, object, object, object>>, object, object, object, object>(ExpressionExtensions.Eval).Method.GetGenericMethodDefinition(),
                 new Func<Expression<Func<object, object, object>>, object, object, object>(ExpressionExtensions.Eval).Method.GetGenericMethodDefinition(),
                 new Func<Expression<Func<object, object>>, object, object>(ExpressionExtensions.Eval).Method.GetGenericMethodDefinition(),
                 new Func<Expression<Func<object>>, object>(ExpressionExtensions.Eval).Method.GetGenericMethodDefinition(),

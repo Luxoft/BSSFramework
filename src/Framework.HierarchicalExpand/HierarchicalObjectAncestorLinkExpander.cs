@@ -184,5 +184,42 @@ namespace Framework.HierarchicalExpand
                     throw new ArgumentOutOfRangeException(nameof(expandType));
             }
         }
+
+        public Expression<Func<TIdent, IEnumerable<TIdent>>> TryGetSingleExpandExpression(HierarchicalExpandType expandType)
+        {
+            return this.TryGetSingleExpandExpressionInternal(expandType).Maybe(expr => expr.ExpandConst().InlineEval());
+        }
+
+        private Expression<Func<TIdent, IEnumerable<TIdent>>> TryGetSingleExpandExpressionInternal(HierarchicalExpandType expandType)
+        {
+            var ancestorLinkQueryable = this.queryableSource.GetQueryable<TDomainObjectAncestorLink>();
+
+            var eqIdentsExpr = ExpressionHelper.GetEquality<TIdent>();
+
+            switch (expandType)
+            {
+                case HierarchicalExpandType.None:
+
+                    return null;
+
+                case HierarchicalExpandType.Children:
+
+                    return ident => ancestorLinkQueryable.Where(link => eqIdentsExpr.Eval(ident, link.Ancestor.Id)).Select(link => link.Child.Id);
+
+                case HierarchicalExpandType.Parents:
+
+                    return ident => ancestorLinkQueryable.Where(link => eqIdentsExpr.Eval(ident, link.Child.Id)).Select(link => link.Ancestor.Id);
+
+                case HierarchicalExpandType.All:
+
+                    return ident => this.queryableSource.GetQueryable<TDomainObjectAncestorChildLink>()
+
+                                        .Where(z => eqIdentsExpr.Eval(ident, z.Source.Id))
+                                        .Select(z => z.ChildOrAncestor.Id);
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(expandType));
+            }
+        }
     }
 }

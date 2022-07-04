@@ -427,7 +427,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                 where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
                 where TBLLContext : class, ISecurityBLLContext<IAuthorizationBLLContext<TIdent>, TPersistentDomainObjectBase, TIdent>, IHierarchicalObjectExpanderFactoryContainer<TIdent>
             {
-                return new Framework.SecuritySystem.Rules.Builders.V1.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>(context.HierarchicalObjectExpanderFactory, context.Authorization);
+                return new Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>(context.HierarchicalObjectExpanderFactory, context.Authorization);
             }
 
             protected virtual INotificationService CreateNotificationService()

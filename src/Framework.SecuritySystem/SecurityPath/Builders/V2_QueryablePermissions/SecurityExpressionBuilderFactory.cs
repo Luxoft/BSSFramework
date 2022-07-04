@@ -5,7 +5,7 @@ using Framework.Persistent;
 
 using JetBrains.Annotations;
 
-namespace Framework.SecuritySystem.Rules.Builders.V1
+namespace Framework.SecuritySystem.Rules.Builders.QueryablePermissions
 {
     public class SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> : SecurityExpressionBuilderFactoryBase<TPersistentDomainObjectBase, TIdent>
 

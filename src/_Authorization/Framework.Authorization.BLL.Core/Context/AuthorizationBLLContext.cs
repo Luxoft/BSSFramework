@@ -255,6 +255,8 @@ namespace Framework.Authorization.BLL
             return this.GetAccessors(principalFilter, new AvailablePermissionOperationFilter(this.DateTimeService, null, operation));
         }
 
+        //public Guid GrandAccessIdent { get; } = DenormalizedPermissionItem.GrandAccessGuid;
+
         public IEnumerable<string> GetAccessors<TSecurityOperationCode>(
             TSecurityOperationCode securityOperationCode, Expression<Func<IPrincipal<Guid>, bool>> principalFilter)
             where TSecurityOperationCode : struct, Enum

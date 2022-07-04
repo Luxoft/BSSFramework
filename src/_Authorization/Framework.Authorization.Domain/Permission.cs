@@ -173,10 +173,11 @@ namespace Framework.Authorization.Domain
         /// Бизнес-роль, которую содержит пермиссия
         /// </summary>
         [Required]
+        [FixedPropertyValidator]
         public virtual BusinessRole Role
         {
             get { return this.role; }
-            set { this.SetValueSafe(v => v.role, value); }
+            set { this.role = value; }
         }
 
         /// <summary>

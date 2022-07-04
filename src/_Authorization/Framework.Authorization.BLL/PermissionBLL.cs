@@ -32,6 +32,8 @@ namespace Framework.Authorization.BLL
                 throw new BusinessLogicException("RunAs mode must be disabled");
             }
 
+            this.DenormalizePermission(permission);
+
             base.Save(permission);
 
             permission.DelegatedTo.Foreach(delegatedPermission => this.Context.Logics.Permission.Save(delegatedPermission, false));
@@ -43,13 +45,27 @@ namespace Framework.Authorization.BLL
 
             permission.IsDelegatedTo = permission.DelegatedTo.Any();
 
-            //this.RecalculateDenormalizedItems(permission);
+            this.DenormalizePermission(permission);
 
             base.PreRecalculate(permission);
         }
 
+        public void DenormalizePermission([NotNull] Permission permission)
+        {
+            this.DenormalizePermissionFilterItems(permission);
 
-        //private void RecalculateDenormalizedItems([NotNull] Permission permission)
+            //this.RecalculateDenormalizedItems(permission);
+        }
+        protected void DenormalizePermissionFilterItems(Permission permission)
+        {
+            permission.FilterItems.Foreach(item =>
+            {
+                item.ContextEntityId = item.Entity.EntityId;
+                item.EntityType = item.Entity.EntityType;
+            });
+        }
+
+        //public void RecalculateDenormalizedItems([NotNull] Permission permission)
         //{
         //    if (permission == null) throw new ArgumentNullException(nameof(permission));
 
@@ -57,7 +73,7 @@ namespace Framework.Authorization.BLL
 
         //                        join filterItem in permission.FilterItems on entityType equals filterItem.EntityType into filterItemGroup
 
-        //                        from accessId in GetAccessIdents(filterItemGroup.ToArray(fi => fi.Entity.EntityId))
+        //                        from accessId in this.GetAccessIdents(filterItemGroup.ToArray(fi => fi.Entity.EntityId))
 
         //                        select new { EntityType = entityType, EntityId = accessId };
 
@@ -68,7 +84,7 @@ namespace Framework.Authorization.BLL
         //    mergeResult.AddingItems.Foreach(pair => new DenormalizedPermissionItem(permission, pair.EntityType, pair.EntityId));
         //}
 
-        //private static IEnumerable<Guid> GetAccessIdents(Guid[] baseIdents)
+        //private IEnumerable<Guid> GetAccessIdents(Guid[] baseIdents)
         //{
         //    foreach (var baseIdent in baseIdents)
         //    {
@@ -77,7 +93,7 @@ namespace Framework.Authorization.BLL
 
         //    if (!baseIdents.Any())
         //    {
-        //        yield return DenormalizedPermissionItem.GrandAccessGuid;
+        //        yield return this.Context.GrandAccessIdent;
         //    }
         //}
 
@@ -190,7 +206,7 @@ namespace Framework.Authorization.BLL
         {
             if (permission == null) throw new ArgumentNullException(nameof(permission));
 
-            var delegatedFromPermission = permission.DelegatedFrom.FromMaybe(() => new ValidationException("Pemission not delegated"));
+            var delegatedFromPermission = permission.DelegatedFrom.FromMaybe(() => new ValidationException("Permission not delegated"));
 
             return this.IsCorrentPeriodSubset(permission, delegatedFromPermission);
         }
@@ -207,7 +223,7 @@ namespace Framework.Authorization.BLL
         {
             if (permission == null) throw new ArgumentNullException(nameof(permission));
 
-            var delegatedFromPermission = permission.DelegatedFrom.FromMaybe(() => new ValidationException("Pemission not delegated"));
+            var delegatedFromPermission = permission.DelegatedFrom.FromMaybe(() => new ValidationException("Permission not delegated"));
 
             return this.GetInvalidDelegatedPermissionSecurities(permission, delegatedFromPermission);
         }

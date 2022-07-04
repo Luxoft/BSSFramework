@@ -36,6 +36,7 @@ namespace Framework.Authorization.Domain
         /// </summary>
         [Required]
         [UniqueElement]
+        [FixedPropertyValidator]
         public virtual Guid EntityId
         {
             get { return this.entityId; }

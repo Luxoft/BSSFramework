@@ -57,6 +57,7 @@ namespace Framework.Authorization.BLL
         {
             yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Authorization.Domain.BusinessRole>(this.AvailableValues.GetAvailableSize<string>());
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.BusinessRole, string>(Framework.Restriction.RequiredMode.Default);
+            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<Framework.Authorization.Domain.BusinessRole, string, System.Guid>(source => source.Name);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.BusinessRole, System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.SubBusinessRoleLink>>> GetBusinessRole_SubBusinessRoleLinksValidators()
@@ -150,6 +151,7 @@ namespace Framework.Authorization.BLL
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.BusinessRoleOperationLink, Framework.Authorization.Domain.Operation>> GetBusinessRoleOperationLink_OperationValidators()
         {
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.BusinessRoleOperationLink, Framework.Authorization.Domain.Operation>(Framework.Restriction.RequiredMode.Default);
+            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<Framework.Authorization.Domain.BusinessRoleOperationLink, Framework.Authorization.Domain.Operation, System.Guid>(source => source.Operation);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Authorization.Domain.BusinessRoleOperationLink>> GetBusinessRoleOperationLinkProperties(Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.BusinessRoleOperationLink> currentClass)
@@ -482,6 +484,7 @@ namespace Framework.Authorization.BLL
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.Permission, Framework.Authorization.Domain.BusinessRole>> GetPermission_RoleValidators()
         {
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.Permission, Framework.Authorization.Domain.BusinessRole>(Framework.Restriction.RequiredMode.Default);
+            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<Framework.Authorization.Domain.Permission, Framework.Authorization.Domain.BusinessRole, System.Guid>(source => source.Role);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionDirectFilterModel, System.Guid>> GetPermissionDirectFilterModel_EntityIdValidators()
@@ -518,6 +521,7 @@ namespace Framework.Authorization.BLL
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionFilterEntity, System.Guid>> GetPermissionFilterEntity_EntityIdValidators()
         {
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.PermissionFilterEntity, System.Guid>(Framework.Restriction.RequiredMode.Default);
+            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<Framework.Authorization.Domain.PermissionFilterEntity, System.Guid, System.Guid>(source => source.EntityId);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionFilterEntity, Framework.Authorization.Domain.EntityType>> GetPermissionFilterEntity_EntityTypeValidators()
@@ -550,6 +554,12 @@ namespace Framework.Authorization.BLL
             return new Framework.Validation.ClassValidationMap<Framework.Authorization.Domain.PermissionFilterEntity>(this.GetPermissionFilterEntityProperties);
         }
         
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionFilterItem, System.Guid>> GetPermissionFilterItem_ContextEntityIdValidators()
+        {
+            yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.PermissionFilterItem, System.Guid>(Framework.Restriction.RequiredMode.Default);
+            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<Framework.Authorization.Domain.PermissionFilterItem, System.Guid, System.Guid>(source => source.ContextEntityId);
+        }
+        
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionFilterItem, System.DateTime?>> GetPermissionFilterItem_CreateDateValidators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<Framework.Authorization.Domain.PermissionFilterItem>(this.AvailableValues.GetAvailableRange<System.DateTime>());
@@ -560,9 +570,16 @@ namespace Framework.Authorization.BLL
             yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Authorization.Domain.PermissionFilterItem>(this.AvailableValues.GetAvailableSize<string>());
         }
         
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionFilterItem, Framework.Authorization.Domain.EntityType>> GetPermissionFilterItem_EntityTypeValidators()
+        {
+            yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.PermissionFilterItem, Framework.Authorization.Domain.EntityType>(Framework.Restriction.RequiredMode.Default);
+            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<Framework.Authorization.Domain.PermissionFilterItem, Framework.Authorization.Domain.EntityType, System.Guid>(source => source.EntityType);
+        }
+        
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionFilterItem, Framework.Authorization.Domain.PermissionFilterEntity>> GetPermissionFilterItem_EntityValidators()
         {
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.PermissionFilterItem, Framework.Authorization.Domain.PermissionFilterEntity>(Framework.Restriction.RequiredMode.Default);
+            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<Framework.Authorization.Domain.PermissionFilterItem, Framework.Authorization.Domain.PermissionFilterEntity, System.Guid>(source => source.Entity);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionFilterItem, string>> GetPermissionFilterItem_ModifiedByValidators()
@@ -577,9 +594,11 @@ namespace Framework.Authorization.BLL
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Authorization.Domain.PermissionFilterItem>> GetPermissionFilterItemProperties(Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.PermissionFilterItem> currentClass)
         {
+            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.PermissionFilterItem, System.Guid>(source => source.ContextEntityId, currentClass, this.GetPermissionFilterItem_ContextEntityIdValidators(), this.GetClassMap<System.Guid>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.PermissionFilterItem, System.DateTime?>(source => source.CreateDate, currentClass, this.GetPermissionFilterItem_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.PermissionFilterItem, string>(source => source.CreatedBy, currentClass, this.GetPermissionFilterItem_CreatedByValidators(), this.GetClassMap<string>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.PermissionFilterItem, Framework.Authorization.Domain.PermissionFilterEntity>(source => source.Entity, currentClass, this.GetPermissionFilterItem_EntityValidators(), this.GetClassMap<Framework.Authorization.Domain.PermissionFilterEntity>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.PermissionFilterItem, Framework.Authorization.Domain.EntityType>(source => source.EntityType, currentClass, this.GetPermissionFilterItem_EntityTypeValidators(), this.GetClassMap<Framework.Authorization.Domain.EntityType>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.PermissionFilterItem, string>(source => source.ModifiedBy, currentClass, this.GetPermissionFilterItem_ModifiedByValidators(), this.GetClassMap<string>(true));
             yield return new Framework.Validation.SinglePropertyValidationMap<Framework.Authorization.Domain.PermissionFilterItem, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetPermissionFilterItem_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
         }
@@ -756,6 +775,7 @@ namespace Framework.Authorization.BLL
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.SubBusinessRoleLink, Framework.Authorization.Domain.BusinessRole>> GetSubBusinessRoleLink_SubBusinessRoleValidators()
         {
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.SubBusinessRoleLink, Framework.Authorization.Domain.BusinessRole>(Framework.Restriction.RequiredMode.Default);
+            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<Framework.Authorization.Domain.SubBusinessRoleLink, Framework.Authorization.Domain.BusinessRole, System.Guid>(source => source.SubBusinessRole);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Authorization.Domain.SubBusinessRoleLink>> GetSubBusinessRoleLinkProperties(Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.SubBusinessRoleLink> currentClass)

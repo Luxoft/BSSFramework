@@ -126,6 +126,7 @@ namespace Framework.SecuritySystem
 
         protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(ContextSecurityOperation<TSecurityOperationCode> securityOperation)
         {
+
             return this.Create(this.GetSecurityPath(), securityOperation);
         }
     }

@@ -19,48 +19,48 @@ namespace Framework.Authorization.BLL
         }
 
 
-        protected internal virtual void PreValidate(TDomainObject domainobject, AuthorizationOperationContext operationContext)
+        protected internal virtual void PreValidate(TDomainObject domainObject, AuthorizationOperationContext operationContext)
         {
-            this.Context.Validator.Validate(domainobject, (int)operationContext);
+            this.Context.Validator.Validate(domainObject, (int)operationContext);
         }
 
-        protected internal virtual void PostValidate(TDomainObject domainobject, AuthorizationOperationContext operationContext)
-        {
-
-        }
-
-        protected internal virtual void PreRecalculate(TDomainObject domainobject)
+        protected internal virtual void PostValidate(TDomainObject domainObject, AuthorizationOperationContext operationContext)
         {
 
         }
 
-        protected internal virtual void PostRecalculate(TDomainObject domainobject)
+        protected internal virtual void PreRecalculate(TDomainObject domainObject)
         {
 
         }
 
-        internal protected void Save(TDomainObject domainobject, bool validate)
+        protected internal virtual void PostRecalculate(TDomainObject domainObject)
         {
-            if (domainobject == null) throw new ArgumentNullException(nameof(domainobject));
 
-            if (validate) { this.Save(domainobject); }
-            else { base.Save(domainobject); }
         }
 
-        public override void Insert(TDomainObject domainobject, Guid id)
+        internal protected void Save(TDomainObject domainObject, bool validate)
         {
-            if (domainobject == null) throw new ArgumentNullException(nameof(domainobject));
+            if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-            this.ExecuteBasePersist(domainobject);
-            base.Insert(domainobject, id);
+            if (validate) { this.Save(domainObject); }
+            else { base.Save(domainObject); }
         }
 
-        public override void Save(TDomainObject domainobject)
+        public override void Insert(TDomainObject domainObject, Guid id)
         {
-            if (domainobject == null) throw new ArgumentNullException(nameof(domainobject));
+            if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-            this.ExecuteBasePersist(domainobject);
-            base.Save(domainobject);
+            this.ExecuteBasePersist(domainObject);
+            base.Insert(domainObject, id);
+        }
+
+        public override void Save(TDomainObject domainObject)
+        {
+            if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+
+            this.ExecuteBasePersist(domainObject);
+            base.Save(domainObject);
         }
     }
 }

@@ -30,14 +30,14 @@ namespace Framework.Authorization.BLL
             return this.GetByName(name) ?? new BusinessRole { Name = name }.Self(autoSave, this.Save);
         }
 
-        public override void Save(BusinessRole domainobject)
+        public override void Save(BusinessRole domainObject)
         {
             if (this.Context.CurrentPrincipal.RunAs != null)
             {
                 throw new BusinessLogicException("RunAs mode must be disabled");
             }
 
-            base.Save(domainobject);
+            base.Save(domainObject);
         }
 
         private void RecalculateOperations(BusinessRole businessRole, bool withParents)

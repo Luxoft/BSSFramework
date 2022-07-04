@@ -7,7 +7,7 @@ using Framework.Core;
 using Framework.Persistent;
 
 
-namespace Framework.SecuritySystem.Rules.Builders.V1
+namespace Framework.SecuritySystem.Rules.Builders.MaterializedPermissions
 {
     public class SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject, TSecurityOperationCode, TIdent> : ISecurityExpressionFilter<TDomainObject>
 

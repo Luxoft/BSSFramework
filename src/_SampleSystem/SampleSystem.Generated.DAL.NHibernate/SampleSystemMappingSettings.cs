@@ -52,7 +52,7 @@ namespace SampleSystem.Generated.DAL.NHibernate
                     .Database(
                               MsSqlConfiguration.MsSql2012
                                                 .Dialect<EnhancedMsSql2012Dialect>()
-                                                .Driver<MicrosoftDataSqlClientDriver>()
+                                                .Driver<Fix2100SqlClientDriver>()
                                                 .ConnectionString(this.connectionString))
                     .Mappings(
                               m =>
@@ -63,12 +63,13 @@ namespace SampleSystem.Generated.DAL.NHibernate
                     .ExposeConfiguration(
                                          c =>
                                          {
-                                             c.Properties.Add(
-                                                              Environment.LinqToHqlGeneratorsRegistry,
-                                                              typeof(EnhancedLinqToHqlGeneratorsRegistry).AssemblyQualifiedName);
-                                             c.Properties.Add(
-                                                              Environment.SqlExceptionConverter,
-                                                              typeof(SQLExceptionConverter).AssemblyQualifiedName);
+                                             c.Properties.Add(Environment.LinqToHqlGeneratorsRegistry, typeof(EnhancedLinqToHqlGeneratorsRegistry).AssemblyQualifiedName);
+
+                                             c.Properties.Add(Environment.SqlExceptionConverter, typeof(SQLExceptionConverter).AssemblyQualifiedName);
+
+                                             c.Properties.Add(Environment.CommandTimeout, "1200");
+
+                                             c.Properties.Add(Environment.SqlTypesKeepDateTime, "true");
                                          })
                     .BuildConfiguration();
         }

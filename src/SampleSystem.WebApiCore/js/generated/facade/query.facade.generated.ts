@@ -51,6 +51,7 @@ export let getFullSqlParserTestObjContainersByODataQueryStringAsyncFunc = _getFu
 export let getFullSqlParserTestObjsByODataQueryStringAsyncFunc = _getFullSqlParserTestObjsByODataQueryString();
 export let getFullTestCustomContextSecurityObjsByODataQueryStringAsyncFunc = _getFullTestCustomContextSecurityObjsByODataQueryString();
 export let getFullTestImmutableObjsByODataQueryStringAsyncFunc = _getFullTestImmutableObjsByODataQueryString();
+export let getFullTestPerformanceObjectsByODataQueryStringAsyncFunc = _getFullTestPerformanceObjectsByODataQueryString();
 export let getFullTestPlainAuthObjectsByODataQueryStringAsyncFunc = _getFullTestPlainAuthObjectsByODataQueryString();
 export let getFullTestRootSecurityObjsByODataQueryStringAsyncFunc = _getFullTestRootSecurityObjsByODataQueryString();
 export let getFullTestSecurityObjItemsByODataQueryStringAsyncFunc = _getFullTestSecurityObjItemsByODataQueryString();
@@ -86,6 +87,7 @@ export let getSimpleSqlParserTestObjContainersByODataQueryStringAsyncFunc = _get
 export let getSimpleSqlParserTestObjsByODataQueryStringAsyncFunc = _getSimpleSqlParserTestObjsByODataQueryString();
 export let getSimpleTestCustomContextSecurityObjsByODataQueryStringAsyncFunc = _getSimpleTestCustomContextSecurityObjsByODataQueryString();
 export let getSimpleTestImmutableObjsByODataQueryStringAsyncFunc = _getSimpleTestImmutableObjsByODataQueryString();
+export let getSimpleTestPerformanceObjectsByODataQueryStringAsyncFunc = _getSimpleTestPerformanceObjectsByODataQueryString();
 export let getSimpleTestPlainAuthObjectsByODataQueryStringAsyncFunc = _getSimpleTestPlainAuthObjectsByODataQueryString();
 export let getSimpleTestRootSecurityObjsByODataQueryStringAsyncFunc = _getSimpleTestRootSecurityObjsByODataQueryString();
 export let getSimpleTestSecurityObjItemsByODataQueryStringAsyncFunc = _getSimpleTestSecurityObjItemsByODataQueryString();
@@ -130,6 +132,7 @@ export let getVisualLocation1676sByODataQueryStringAsyncFunc = _getVisualLocatio
 export let getVisualLocationsByODataQueryStringAsyncFunc = _getVisualLocationsByODataQueryString();
 export let getVisualManagementUnitsByODataQueryStringAsyncFunc = _getVisualManagementUnitsByODataQueryString();
 export let getVisualTestCustomContextSecurityObjsByODataQueryStringAsyncFunc = _getVisualTestCustomContextSecurityObjsByODataQueryString();
+export let getVisualTestPerformanceObjectsByODataQueryStringAsyncFunc = _getVisualTestPerformanceObjectsByODataQueryString();
 export let getVisualTestPlainAuthObjectsByODataQueryStringAsyncFunc = _getVisualTestPlainAuthObjectsByODataQueryString();
 export let getVisualTestRootSecurityObjsByODataQueryStringAsyncFunc = _getVisualTestRootSecurityObjsByODataQueryString();
 export let getVisualTestSecurityObjItemsByODataQueryStringAsyncFunc = _getVisualTestSecurityObjItemsByODataQueryString();
@@ -404,6 +407,14 @@ function _getBusinessUnitProgramClassesByODataQueryString(): async.AsyncFunc3<st
             let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestImmutableObjFullDTO>, OData.SelectOperationResult<dto.TestImmutableObjObservableFullDTO>, dto.TestImmutableObjFullDTO, dto.TestImmutableObjObservableFullDTO>();
             return service.getData('TestImmutableObjQuery/GetFullTestImmutableObjsByODataQueryString', {plain : dto.TestImmutableObjFullDTO, observable : dto.TestImmutableObjObservableFullDTO}, baseParameters);
+        });
+    }
+
+    function _getFullTestPerformanceObjectsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestPerformanceObjectFullDTO>, OData.SelectOperationResult<dto.TestPerformanceObjectObservableFullDTO>, dto.TestPerformanceObjectFullDTO, dto.TestPerformanceObjectObservableFullDTO> {
+        return new async.AsyncFunc3((odataQueryString: string) => {
+            let baseParameters = odataQueryString;
+            let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestPerformanceObjectFullDTO>, OData.SelectOperationResult<dto.TestPerformanceObjectObservableFullDTO>, dto.TestPerformanceObjectFullDTO, dto.TestPerformanceObjectObservableFullDTO>();
+            return service.getData('TestPerformanceObjectQuery/GetFullTestPerformanceObjectsByODataQueryString', {plain : dto.TestPerformanceObjectFullDTO, observable : dto.TestPerformanceObjectObservableFullDTO}, baseParameters);
         });
     }
 
@@ -691,6 +702,14 @@ function _getBusinessUnitProgramClassesByODataQueryString(): async.AsyncFunc3<st
             let baseParameters = odataQueryString;
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestImmutableObjSimpleDTO>, OData.SelectOperationResult<dto.TestImmutableObjObservableSimpleDTO>, dto.TestImmutableObjSimpleDTO, dto.TestImmutableObjObservableSimpleDTO>();
             return service.getData('TestImmutableObjQuery/GetSimpleTestImmutableObjsByODataQueryString', {plain : dto.TestImmutableObjSimpleDTO, observable : dto.TestImmutableObjObservableSimpleDTO}, baseParameters);
+        });
+    }
+
+    function _getSimpleTestPerformanceObjectsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestPerformanceObjectSimpleDTO>, OData.SelectOperationResult<dto.TestPerformanceObjectObservableSimpleDTO>, dto.TestPerformanceObjectSimpleDTO, dto.TestPerformanceObjectObservableSimpleDTO> {
+        return new async.AsyncFunc3((odataQueryString: string) => {
+            let baseParameters = odataQueryString;
+            let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestPerformanceObjectSimpleDTO>, OData.SelectOperationResult<dto.TestPerformanceObjectObservableSimpleDTO>, dto.TestPerformanceObjectSimpleDTO, dto.TestPerformanceObjectObservableSimpleDTO>();
+            return service.getData('TestPerformanceObjectQuery/GetSimpleTestPerformanceObjectsByODataQueryString', {plain : dto.TestPerformanceObjectSimpleDTO, observable : dto.TestPerformanceObjectObservableSimpleDTO}, baseParameters);
         });
     }
 
@@ -1047,6 +1066,14 @@ function _getBusinessUnitProgramClassesByODataQueryString(): async.AsyncFunc3<st
             let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestCustomContextSecurityObjVisualDTO>, OData.SelectOperationResult<dto.TestCustomContextSecurityObjObservableVisualDTO>, dto.TestCustomContextSecurityObjVisualDTO, dto.TestCustomContextSecurityObjObservableVisualDTO>();
             return service.getData('TestCustomContextSecurityObjQuery/GetVisualTestCustomContextSecurityObjsByODataQu' + 
 'eryString', {plain : dto.TestCustomContextSecurityObjVisualDTO, observable : dto.TestCustomContextSecurityObjObservableVisualDTO}, baseParameters);
+        });
+    }
+
+    function _getVisualTestPerformanceObjectsByODataQueryString(): async.AsyncFunc3<string, OData.SelectOperationResult<dto.TestPerformanceObjectVisualDTO>, OData.SelectOperationResult<dto.TestPerformanceObjectObservableVisualDTO>, dto.TestPerformanceObjectVisualDTO, dto.TestPerformanceObjectObservableVisualDTO> {
+        return new async.AsyncFunc3((odataQueryString: string) => {
+            let baseParameters = odataQueryString;
+            let service = Environment.current.context.facadeFactory.createService<OData.SelectOperationResult<dto.TestPerformanceObjectVisualDTO>, OData.SelectOperationResult<dto.TestPerformanceObjectObservableVisualDTO>, dto.TestPerformanceObjectVisualDTO, dto.TestPerformanceObjectObservableVisualDTO>();
+            return service.getData('TestPerformanceObjectQuery/GetVisualTestPerformanceObjectsByODataQueryString', {plain : dto.TestPerformanceObjectVisualDTO, observable : dto.TestPerformanceObjectObservableVisualDTO}, baseParameters);
         });
     }
 

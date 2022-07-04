@@ -8,6 +8,8 @@ using Framework.Restriction;
 using Framework.Security;
 using Framework.SecuritySystem;
 
+using JetBrains.Annotations;
+
 namespace Framework.Authorization.Domain
 {
     /// <summary>
@@ -20,7 +22,11 @@ namespace Framework.Authorization.Domain
     {
         private readonly Permission permission;
 
-        private readonly PermissionFilterEntity entity;
+        private PermissionFilterEntity entity;
+
+        private EntityType entityType;
+
+        private Guid contextEntityId;
 
         protected PermissionFilterItem()
         {
@@ -43,19 +49,20 @@ namespace Framework.Authorization.Domain
         /// </summary>
         /// <param name="permission">Пермиссия</param>
         /// <param name="entity">Контекст</param>
-        public PermissionFilterItem(Permission permission, PermissionFilterEntity entity)
+        public PermissionFilterItem(Permission permission, [NotNull] PermissionFilterEntity entity)
             : this(permission)
         {
-            this.entity = entity;
+            this.entity = entity ?? throw new ArgumentNullException(nameof(entity));
+
+            this.EntityType = this.Entity.EntityType;
+            this.ContextEntityId = this.Entity.EntityId;
+
         }
 
         /// <summary>
         /// Пермиссия по связке контекст+пермиссия
         /// </summary>
-        public virtual Permission Permission
-        {
-            get { return this.permission; }
-        }
+        public virtual Permission Permission => this.permission;
 
         /// <summary>
         /// Доменный объект по связке контекст+пермиссия
@@ -63,10 +70,11 @@ namespace Framework.Authorization.Domain
         [UniqueElement]
         [Required]
         [CustomSerialization(CustomSerializationMode.ReadOnly, DTORole.Client)]
+        [FixedPropertyValidator]
         public virtual PermissionFilterEntity Entity
         {
             get { return this.entity; }
-            set { this.SetValueSafe(v => v.entity, value); }
+            set { this.entity = value; }
         }
 
         /// <summary>
@@ -74,19 +82,26 @@ namespace Framework.Authorization.Domain
         /// </summary>
         [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Integration)]
         [ExpandPath("Entity.EntityType")]
+        [FixedPropertyValidator]
+        [Required]
         public virtual EntityType EntityType
         {
-            get { return this.Entity.EntityType; }
+            get { return this.entityType; }
+            protected internal set { this.entityType = value; }
         }
 
-        Permission IDetail<Permission>.Master
+        [FixedPropertyValidator]
+        [Required]
+        public virtual Guid ContextEntityId
         {
-            get { return this.permission; }
+            get { return this.contextEntityId; }
+            protected internal set { this.contextEntityId = value; }
         }
 
-        IPermissionFilterEntity<Guid> IPermissionFilterItem<Guid>.Entity
-        {
-            get { return this.Entity; }
-        }
+        Permission IDetail<Permission>.Master => this.permission;
+
+        IPermissionFilterEntity<Guid> IPermissionFilterItem<Guid>.Entity => this.Entity;
+
+        IEntityType<Guid> IPermissionFilterItem<Guid>.EntityType => this.EntityType;
     }
 }

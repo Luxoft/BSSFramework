@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
-using System.Reflection;
 
 using FluentAssertions;
 
-using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.NHibernate;
 using Framework.HierarchicalExpand;
-using Framework.Security;
 using Framework.SecuritySystem;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -23,8 +17,6 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 using BusinessRole = SampleSystem.IntegrationTests.__Support.Utils.BusinessRole;
-using Expression = System.Linq.Expressions.Expression;
-using LambdaExpression = System.Linq.Expressions.LambdaExpression;
 
 namespace SampleSystem.IntegrationTests
 {
@@ -102,65 +94,129 @@ namespace SampleSystem.IntegrationTests
                                });
         }
 
-        [TestMethod]
-        public void TestInlineEval_TestPassed()
-        {
-            var objIdents = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, TestEmployeeLogin, ctx =>
-           {
-               var baseFilter = BuildTestPlainAuthObjectSecurityFilter(ctx, SampleSystemSecurityOperation.EmployeeView);
-               var filter = baseFilter.ExpandConst().InlineEval();
+        //[TestMethod]
+        //public void TestInlineEval_TestPassed()
+        //{
+        //    // Arrange
 
-               var objs = ctx.Logics.TestPlainAuthObject.GetUnsecureQueryable().Where(filter).ToList();
+        //    // Act
+        //    var objIdents = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, TestEmployeeLogin, ctx =>
+        //    {
+        //        var baseFilter = BuildTestPlainAuthObjectSecurityFilter(ctx, SampleSystemSecurityOperation.EmployeeView);
+        //        var filter = baseFilter.ExpandConst().InlineEval();
 
-               return objs.ToList(obj => obj.ToIdentityDTO());
-           });
+        //        var objs = ctx.Logics.TestPlainAuthObject.GetUnsecureQueryable().Where(filter).ToList();
 
-            objIdents.Count().Should().Be(1);
-            objIdents[0].Should().Be(this.testPlainAuthObjectIdent);
-        }
+        //        return objs.ToList(obj => obj.ToIdentityDTO());
+        //    });
 
-        private static Expression<Func<TestPlainAuthObject, bool>> BuildTestPlainAuthObjectSecurityFilter(ISampleSystemBLLContext context, ContextSecurityOperation<SampleSystemSecurityOperationCode> securityOperation)
-        {
-            var authContext = context.Authorization;
+        //    // Assert
+        //    objIdents.Count().Should().Be(1);
+        //    objIdents[0].Should().Be(this.testPlainAuthObjectIdent);
+        //}
 
-            var entityTypeDict = authContext.Logics.EntityType.GetFullList().ToDictionary(et => et.Name, et => et.Id);
+        //[TestMethod]
+        //public void AdminTestInlineEval_TestPassed()
+        //{
+        //    // Arrange
 
-            var buFilter = BuildBuFilterExpression(context, entityTypeDict, securityOperation.SecurityExpandType);
+        //    // Act
+        //    var objIdents = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, ctx =>
+        //    {
+        //        var baseFilter = BuildTestPlainAuthObjectSecurityFilter(ctx, SampleSystemSecurityOperation.EmployeeView);
+        //        var filter = baseFilter.ExpandConst().InlineEval();
 
-            return testPlainAuthObject =>
-                           authContext.GetPermissionQuery(securityOperation)
-                                      .Any(permission => buFilter.Eval(testPlainAuthObject, permission));
+        //        var objs = ctx.Logics.TestPlainAuthObject.GetUnsecureQueryable().Where(filter).ToList();
 
-        }
+        //        return objs.ToList(obj => obj.ToIdentityDTO());
+        //    });
 
-        private static Expression<Func<TestPlainAuthObject, IPermission<Guid>, bool>> BuildBuFilterExpression(ISampleSystemBLLContext context, IReadOnlyDictionary<string, Guid> entityTypeDict, HierarchicalExpandType expandType)
-        {
-            var entityTypeId = context.Authorization.ResolveSecurityTypeId(typeof(BusinessUnit));
+        //    // Assert
+        //    objIdents.Count().Should().Be(2);
+        //}
 
-            var eqIdentsExpr = ExpressionHelper.GetEquality<Guid>();
+        //private static Expression<Func<TestPlainAuthObject, bool>> BuildTestPlainAuthObjectSecurityFilter(ISampleSystemBLLContext context, ContextSecurityOperation<SampleSystemSecurityOperationCode> securityOperation)
+        //{
+        //    var authContext = context.Authorization;
 
-            var getIdents = ExpressionHelper.Create((IPermission<Guid> permission) =>
-                                                            permission.FilterItems
-                                                                      .Select(fi => fi.Entity)
-                                                                      .Where(item => eqIdentsExpr.Eval(item.EntityType.Id, entityTypeId))
-                                                                      .Select(pfe => pfe.EntityId))
-                                            .ExpandConst()
-                                            .InlineEval();
+        //    var buFilter = BuildBuFilterExpression(context, securityOperation.SecurityExpandType);
 
-            var expander = (IHierarchicalObjectQueryableExpander<Guid>)context.HierarchicalObjectExpanderFactory.Create(typeof(BusinessUnit));
+        //   // var employeeFilter = BuildEmployeeFilterExpression(context, securityOperation.SecurityExpandType);
 
-            var expandExpression = expander.GetExpandExpression(expandType);
+        //    return testPlainAuthObject =>
+        //                   authContext.GetPermissionQuery(securityOperation)
+        //                              .Any(permission =>
+        //                                        permission.DenormalizedItems.Any(permissionFilterItem =>
+        //                                            buFilter.Eval(testPlainAuthObject, permission, permissionFilterItem)
+        //                                         //&& employeeFilter.Eval(testPlainAuthObject, permission, permissionFilterItem)
+        //                                            ));
 
-            var expandExpressionQ = from idents in getIdents
-                                    select expandExpression.Eval(idents);
+        //}
 
-            return (domainObject, permission) =>
+        //private static Expression<Func<TestPlainAuthObject, IPermission<Guid>, IDenormalizedPermissionItem<Guid>, bool>> BuildBuFilterExpression(ISampleSystemBLLContext context, HierarchicalExpandType expandType)
+        //{
+        //    var entityTypeId = context.Authorization.ResolveSecurityTypeId(typeof(BusinessUnit));
 
-                           !getIdents.Eval(permission).Any()
+        //    var eqIdentsExpr = ExpressionHelper.GetEquality<Guid>();
 
-                           || !domainObject.Items.Select(item => item.BusinessUnit).Any()
+        //    var grandIdent = context.Authorization.GrandAccessIdent;
 
-                           || domainObject.Items.Select(item => item.BusinessUnit).Any(item => expandExpressionQ.Eval(permission).Contains(item.Id));
-        }
+        //    var expander = context.HierarchicalObjectExpanderFactory.CreateQuery(typeof(BusinessUnit));
+
+        //    var expandExpression = expander.TryGetSingleExpandExpression(expandType);
+
+        //    var containsItem = (expandExpression == null
+        //                                ? ExpressionHelper.Create((Guid itemId, Guid permissionEntityId) => eqIdentsExpr.Eval(itemId, permissionEntityId))
+        //                                : ExpressionHelper.Create((Guid itemId, Guid permissionEntityId) => expandExpression.Eval(permissionEntityId).Contains(itemId)))
+        //            .ExpandConst()
+        //            .InlineEval();
+
+        //    Expression<Func<TestPlainAuthObject, IPermission<Guid>, IDenormalizedPermissionItem<Guid>, bool>> baseFilter = (domainObject, _, denormalizedPermissionItem) =>
+
+        //                   eqIdentsExpr.Eval(denormalizedPermissionItem.EntityType.Id, entityTypeId)
+
+        //                   && (eqIdentsExpr.Eval(denormalizedPermissionItem.EntityId, grandIdent)
+
+        //                       || !domainObject.Items.Select(item => item.BusinessUnit).Any()
+
+        //                       || domainObject.Items.Select(item => item.BusinessUnit).Any(item => containsItem.Eval(item.Id, denormalizedPermissionItem.EntityId)));
+
+        //    return baseFilter.ExpandConst().InlineEval();
+        //}
+
+        //private static Expression<Func<TestPlainAuthObject, IPermission<Guid>, IDenormalizedPermissionItem<Guid>, bool>> BuildEmployeeFilterExpression(ISampleSystemBLLContext context, HierarchicalExpandType expandType)
+        //{
+        //    var entityTypeId = context.Authorization.ResolveSecurityTypeId(typeof(Employee));
+
+        //    var eqIdentsExpr = ExpressionHelper.GetEquality<Guid>();
+
+        //    var getIdents = ExpressionHelper.Create((IPermission<Guid> permission) =>
+        //                                                    permission.DenormalizedItems
+        //                                                              .Where(item => eqIdentsExpr.Eval(item.EntityType.Id, entityTypeId))
+        //                                                              .Select(pfe => pfe.EntityId))
+        //                                    .ExpandConst()
+        //                                    .InlineEval();
+
+        //    var grandIdent = context.Authorization.GrandAccessIdent;
+
+        //    var hasGrandAccess = ExpressionHelper.Create((IPermission<Guid> permission) => getIdents.Eval(permission).Any(entityId => eqIdentsExpr.Eval(entityId, grandIdent)))
+        //                                         .ExpandConst()
+        //                                         .InlineEval();
+
+        //    var expander = context.HierarchicalObjectExpanderFactory.CreateQuery(typeof(Employee));
+
+        //    var expandExpression = expander.GetExpandExpression(expandType);
+
+        //    var expandExpressionQ = from idents in getIdents
+        //                            select expandExpression.Eval(idents);
+
+        //    return (domainObject, permission, denormalizedPermissionItem) =>
+
+        //                   hasGrandAccess.Eval(permission)
+
+        //                   || domainObject.Employee == null
+
+        //                   || expandExpressionQ.Eval(permission).Contains(domainObject.Employee.Id);
+        //}
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Automation.Utils;
@@ -133,6 +134,8 @@ namespace SampleSystem.IntegrationTests.Workflow
             var startedWf = wfController.WithIntegrationImpersonate().Evaluate(c => c.StartJob());
             var rootInstanceId = startedWf[permissionIdentity.Id];
 
+            Thread.Sleep(3000);
+
             var wfObjects = await WaitToCompleteHelper.Retry(
                 () => wfController.EvaluateAsync(c => c.GetMyPendingApproveOperationWorkflowObjects(permissionIdentity)),
                 res => !res.Any(),
@@ -168,6 +171,8 @@ namespace SampleSystem.IntegrationTests.Workflow
             var startedWf = wfController.WithIntegrationImpersonate().Evaluate(c => c.StartJob());
             var rootInstanceId = startedWf[permissionIdentity.Id];
 
+            Thread.Sleep(3000);
+
             var wfObjects = await WaitToCompleteHelper.Retry(
                 () => wfController.EvaluateAsync(c => c.GetMyPendingApproveOperationWorkflowObjects(permissionIdentity)),
                 res => !res.Any(),
@@ -202,6 +207,8 @@ namespace SampleSystem.IntegrationTests.Workflow
 
             var startedWf = this.GetControllerEvaluator<WorkflowController>().WithIntegrationImpersonate().Evaluate(c => c.StartJob());
             var rootInstanceId = startedWf[permissionIdentity.Id];
+
+            Thread.Sleep(3000);
 
             var wiStatus = this.Environment.ServiceProvider.GetRequiredService<IPersistenceProvider>().WaitForWorkflowToComplete(rootInstanceId.ToString(), TimeSpan.FromSeconds(20));
 

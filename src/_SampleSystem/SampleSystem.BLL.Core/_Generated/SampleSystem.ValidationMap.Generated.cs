@@ -2822,6 +2822,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTestObjForNestedBaseValidationMap()));
             }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestPerformanceObject)))
+            {
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTestPerformanceObjectValidationMap()));
+            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.TestPlainAuthObject)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTestPlainAuthObjectValidationMap()));
@@ -3897,6 +3901,46 @@ namespace SampleSystem.BLL
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestObj> GetTestObjValidationMap()
         {
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.TestObj>(this.GetTestObjProperties);
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestPerformanceObject, System.DateTime?>> GetTestPerformanceObject_CreateDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestPerformanceObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestPerformanceObject, string>> GetTestPerformanceObject_CreatedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestPerformanceObject>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestPerformanceObject, string>> GetTestPerformanceObject_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestPerformanceObject>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestPerformanceObject, System.DateTime?>> GetTestPerformanceObject_ModifyDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.TestPerformanceObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestPerformanceObject, string>> GetTestPerformanceObject_NameValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestPerformanceObject>(this.AvailableValues.GetAvailableSize<string>());
+            yield return new Framework.Validation.RequiredValidator<SampleSystem.Domain.TestPerformanceObject, string>(Framework.Restriction.RequiredMode.Default);
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.TestPerformanceObject>> GetTestPerformanceObjectProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestPerformanceObject> currentClass)
+        {
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestPerformanceObject, System.DateTime?>(source => source.CreateDate, currentClass, this.GetTestPerformanceObject_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestPerformanceObject, string>(source => source.CreatedBy, currentClass, this.GetTestPerformanceObject_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestPerformanceObject, string>(source => source.ModifiedBy, currentClass, this.GetTestPerformanceObject_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestPerformanceObject, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetTestPerformanceObject_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.TestPerformanceObject, string>(source => source.Name, currentClass, this.GetTestPerformanceObject_NameValidators(), this.GetClassMap<string>(true));
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestPerformanceObject> GetTestPerformanceObjectValidationMap()
+        {
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.TestPerformanceObject>(this.GetTestPerformanceObjectProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestPlainAuthObject, System.DateTime?>> GetTestPlainAuthObject_CreateDateValidators()

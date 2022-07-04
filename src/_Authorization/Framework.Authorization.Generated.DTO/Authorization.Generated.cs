@@ -9554,6 +9554,8 @@ namespace Framework.Authorization.Generated.DTO
     public partial class PermissionFilterItemSimpleDTO : Framework.Authorization.Generated.DTO.BaseAuditPersistentDTO, Framework.Persistent.IIdentityObjectContainer<Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO>
     {
         
+        private System.Guid _contextEntityId;
+        
         public PermissionFilterItemSimpleDTO()
         {
         }
@@ -9567,6 +9569,19 @@ namespace Framework.Authorization.Generated.DTO
         public PermissionFilterItemSimpleDTO(string id)
         {
             this.Id = new System.Guid(id);
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ContextEntityId
+        {
+            get
+            {
+                return this._contextEntityId;
+            }
+            set
+            {
+                this._contextEntityId = value;
+            }
         }
         
         public Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO Identity
@@ -9839,6 +9854,8 @@ namespace Framework.Authorization.Generated.DTO
         
         private bool _active;
         
+        private System.Guid _contextEntityId;
+        
         private System.DateTime? _createDate;
         
         private string _createdBy;
@@ -9878,6 +9895,19 @@ namespace Framework.Authorization.Generated.DTO
             set
             {
                 this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ContextEntityId
+        {
+            get
+            {
+                return this._contextEntityId;
+            }
+            set
+            {
+                this._contextEntityId = value;
             }
         }
         
@@ -10019,6 +10049,8 @@ namespace Framework.Authorization.Generated.DTO
         
         private bool _active;
         
+        private System.Guid _contextEntityId;
+        
         private System.DateTime? _createDate;
         
         private string _createdBy;
@@ -10048,6 +10080,19 @@ namespace Framework.Authorization.Generated.DTO
             set
             {
                 this._active = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ContextEntityId
+        {
+            get
+            {
+                return this._contextEntityId;
+            }
+            set
+            {
+                this._contextEntityId = value;
             }
         }
         
@@ -16423,6 +16468,7 @@ namespace Framework.Authorization.Generated.DTO
         
         public virtual void MapPermissionFilterItem(Framework.Authorization.Domain.PermissionFilterItem domainObject, Framework.Authorization.Generated.DTO.PermissionFilterItemSimpleDTO mappingObject)
         {
+            mappingObject.ContextEntityId = domainObject.ContextEntityId;
         }
         
         public virtual void MapPermissionFilterItem(Framework.Authorization.Domain.PermissionFilterItem domainObject, Framework.Authorization.Generated.DTO.PermissionFilterItemFullDTO mappingObject)
@@ -16464,6 +16510,7 @@ namespace Framework.Authorization.Generated.DTO
         public virtual void MapPermissionFilterItem(Framework.Authorization.Domain.PermissionFilterItem domainObject, Framework.Authorization.Generated.DTO.PermissionFilterItemEventRichDTO mappingObject)
         {
             mappingObject.Active = domainObject.Active;
+            mappingObject.ContextEntityId = domainObject.ContextEntityId;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
             if (!object.ReferenceEquals(domainObject.Entity, null))
@@ -16514,6 +16561,7 @@ namespace Framework.Authorization.Generated.DTO
         public virtual void MapPermissionFilterItem(Framework.Authorization.Domain.PermissionFilterItem domainObject, Framework.Authorization.Generated.DTO.PermissionFilterItemEventSimpleDTO mappingObject)
         {
             mappingObject.Active = domainObject.Active;
+            mappingObject.ContextEntityId = domainObject.ContextEntityId;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
             mappingObject.Id = domainObject.Id;

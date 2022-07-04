@@ -51,14 +51,19 @@ namespace Framework.Authorization.BLL
                 var removedSelfDelegatePermissions =
 
                     permission.DelegatedTo
-                              .Where(toPemission => toPemission.DelegatedFromPrincipal == principal
-                                                 && !principal.Permissions.Contains(toPemission))
+                              .Where(toPermission => toPermission.DelegatedFromPrincipal == principal
+                                                 && !principal.Permissions.Contains(toPermission))
                               .ToList();
 
                 permission.RemoveDetails(removedSelfDelegatePermissions);
             }
 
             this.PermissionFilterItemNotifyProgress(principal);
+
+            foreach (var permission in principal.Permissions)
+            {
+                this.Context.Logics.Permission.DenormalizePermission(permission);
+            }
 
             base.Save(principal);
 

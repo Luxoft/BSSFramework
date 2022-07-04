@@ -1,5 +1,6 @@
 ﻿using System;
 
+using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Restriction;
 
@@ -17,7 +18,7 @@ namespace Framework.Authorization.Domain
     {
         private readonly BusinessRole businessRole;
 
-        private readonly BusinessRole subBusinessRole;
+        private BusinessRole subBusinessRole;
 
         protected SubBusinessRoleLink()
         {
@@ -60,10 +61,11 @@ namespace Framework.Authorization.Domain
         /// </summary>
         [UniqueElement]
         [Required]
+        [FixedPropertyValidator]
         public virtual BusinessRole SubBusinessRole
         {
             get { return this.subBusinessRole; }
-            set { this.SetValueSafe(v => v.subBusinessRole, value); }
+            set { this.subBusinessRole = value; }
         }
 
         BusinessRole Persistent.IDetail<BusinessRole>.Master

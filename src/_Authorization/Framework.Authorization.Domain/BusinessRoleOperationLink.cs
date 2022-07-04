@@ -1,5 +1,6 @@
 ﻿using System;
 
+using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Restriction;
 
@@ -45,10 +46,11 @@ namespace Framework.Authorization.Domain
         /// </summary>
         [UniqueElement]
         [Required]
+        [FixedPropertyValidator]
         public virtual Operation Operation
         {
             get { return this.operation; }
-            set { this.SetValueSafe(v => v.operation, value); }
+            set { this.operation = value; }
         }
 
         /// <summary>

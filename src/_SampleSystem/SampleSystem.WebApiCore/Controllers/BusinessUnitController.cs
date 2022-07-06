@@ -36,19 +36,19 @@ namespace SampleSystem.WebApiCore.Controllers.Main
         public SelectOperationResult<HierarchicalNode<BusinessUnitFullDTO, Guid>> GetFullBusinessUnitsTreeByOData(string odataQueryString)
         {
             return this.Evaluate(
-                DBSessionMode.Read,
-                evaluateData =>
-                {
-                    var bll = evaluateData.Context.Logics.BusinessUnit;
-                    var selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-                    var typedSelectOperation = evaluateData.Context.StandartExpressionBuilder.ToTyped<BusinessUnit>(selectOperation);
+                                 DBSessionMode.Read,
+                                 evaluateData =>
+                                 {
+                                     var bll = evaluateData.Context.Logics.BusinessUnit;
+                                     var selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
+                                     var typedSelectOperation = evaluateData.Context.StandartExpressionBuilder.ToTyped<BusinessUnit>(selectOperation);
 
-                    var odataTree = bll.GetTreeByOData(
-                        typedSelectOperation,
-                        evaluateData.Context.FetchService.GetContainer<BusinessUnit>(ViewDTOType.FullDTO));
+                                     var odataTree = bll.GetTreeByOData(
+                                                                        typedSelectOperation,
+                                                                        evaluateData.Context.FetchService.GetContainer<BusinessUnit>(ViewDTOType.FullDTO));
 
-                    return odataTree.SelectN(x => x.ToFullDTO(evaluateData.MappingService));
-                });
+                                     return odataTree.SelectN(x => x.ToFullDTO(evaluateData.MappingService));
+                                 });
         }
 
         [HttpPost(nameof(TestPeriod))]

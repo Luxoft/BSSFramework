@@ -6,8 +6,11 @@ using Framework.Persistent;
 
 namespace Framework.DomainDriven.BLL
 {
-    public interface IDBSession
+    public interface IDBSession : IDisposable
     {
+        DBSessionMode Mode { get; }
+
+
         event EventHandler Closed;
 
         [Obsolete("Use AfterTransactionCompleted", true)]
@@ -27,8 +30,6 @@ namespace Framework.DomainDriven.BLL
         /// Евент срабатывает только 1 раз перед закрытием сессии, изменения в базу в этот момент запрещены
         /// </summary>
         event EventHandler<DALChangesEventArgs> AfterTransactionCompleted;
-
-        TResult Evaluate<TResult>(Func<IDBSession, TResult> getResult);
 
         IObjectStateService GetObjectStateService();
 

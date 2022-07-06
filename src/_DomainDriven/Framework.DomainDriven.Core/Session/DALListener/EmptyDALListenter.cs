@@ -2,11 +2,11 @@
 
 namespace Framework.DomainDriven.BLL
 {
-    public class EmptyDALListenter : IDALListener
+    public class EmptyDALListener : IDALListener
     {
-        public static readonly EmptyDALListenter Instance = new EmptyDALListenter();
+        public static readonly EmptyDALListener Instance = new EmptyDALListener();
 
-        private EmptyDALListenter()
+        private EmptyDALListener()
         {
         }
 

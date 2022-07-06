@@ -22,15 +22,28 @@ namespace Framework.DomainDriven.NHibernate
 
         private readonly CollectChangesEventListener collectChangedEventListener;
 
+        private readonly TransactionScope transactionScope;
+
+        private readonly ITransaction currentTransaction;
+
         private bool manualFault;
+
+        private bool disposed;
 
         internal WriteNHibSession(NHibSessionFactory sessionFactory)
                 : base(sessionFactory, DBSessionMode.Write)
         {
-            this.SessionFactory = sessionFactory ?? throw new ArgumentNullException(nameof(sessionFactory));
-
             this.collectChangedEventListener = new CollectChangesEventListener();
+
+            this.transactionScope = this.SessionFactory.EnableTransactionScope ? this.CreateTransactionScope() : null;
+
+            this.currentTransaction = this.InnerSession.BeginTransaction();
+
+            this.SessionFactory.ProcessTransaction(GetDbTransaction(this.currentTransaction, this.InnerSession));
+
+            this.InnerSessionConfigure();
         }
+        public override DBSessionMode Mode { get; } = DBSessionMode.Write;
 
         private EventListeners GetOverrideEventListenersFrom(EventListeners source)
         {
@@ -94,30 +107,38 @@ namespace Framework.DomainDriven.NHibernate
             this.manualFault = true;
         }
 
-        public override TResult Evaluate<TResult>(Func<IDBSession, TResult> getResult)
+        public override void Dispose()
         {
+            if (this.disposed)
+            {
+                return;
+            }
+
+            this.disposed = true;
+
+
             try
             {
-                TResult result;
+                using var scope = this.transactionScope;
+                using var transaction = this.currentTransaction;
 
-                if (this.SessionFactory.EnableTransactionScope)
+                if (this.manualFault)
                 {
-                    using (var scope = this.CreateTransactionScope())
+                    if (!this.currentTransaction.WasRolledBack)
                     {
-                        result = this.EvaluateInternal(getResult);
-
-                        if (!this.manualFault)
-                        {
-                            scope.Complete();
-                        }
+                        this.currentTransaction.Rollback();
                     }
                 }
                 else
                 {
-                    result = this.EvaluateInternal(getResult);
-                }
+                    this.Flush(true);
 
-                return result;
+                    this.currentTransaction.Commit();
+
+                    this.OnClosed(EventArgs.Empty);
+
+                    scope?.Complete();
+                }
             }
             finally
             {
@@ -125,41 +146,6 @@ namespace Framework.DomainDriven.NHibernate
                 this.ClearFlushed();
                 this.ClearTransactionCompleted();
             }
-        }
-
-        protected virtual TResult EvaluateInternal<TResult>(Func<IDBSession, TResult> getResult)
-        {
-            TResult result;
-            using (this.InnerSession =
-                           this.SessionFactory.InternalSessionFactory.OpenSession().Self(z => z.FlushMode = FlushMode.Never))
-            {
-                using (var currentTransaction = this.InnerSession.BeginTransaction())
-                {
-                    this.SessionFactory.ProcessTransaction(GetDbTransaction(currentTransaction, this.InnerSession));
-
-                    this.InnerSessionConfigure();
-
-                    result = getResult(this);
-
-                    if (this.manualFault)
-                    {
-                        if (!currentTransaction.WasRolledBack)
-                        {
-                            currentTransaction.Rollback();
-                        }
-                    }
-                    else
-                    {
-                        this.Flush(true);
-
-                        currentTransaction.Commit();
-                    }
-
-                    this.OnClosed(EventArgs.Empty);
-                }
-            }
-
-            return result;
         }
 
         private static IDbTransaction GetDbTransaction(ITransaction transaction, ISession session)
@@ -262,7 +248,7 @@ namespace Framework.DomainDriven.NHibernate
             }
         }
 
-        public override void RegisterModifited<T>(T @object, ModificationType modificationType)
+        public override void RegisterModified<T>(T @object, ModificationType modificationType)
         {
             this.modifiedObjectsFromLogic.Add(new ObjectModification(@object, typeof(T), modificationType));
         }

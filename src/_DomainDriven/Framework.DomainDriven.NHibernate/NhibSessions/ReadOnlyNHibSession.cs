@@ -1,19 +1,22 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DAL.Revisions;
-using NHibernate;
 
 namespace Framework.DomainDriven.NHibernate
 {
     internal class ReadOnlyNHibSession : NHibSession
     {
-        internal ReadOnlyNHibSession(NHibSessionFactory sessionFactory) : base(sessionFactory, DBSessionMode.Read)
-        {
-            if (sessionFactory == null) throw new ArgumentNullException(nameof(sessionFactory));
+        private bool disposed;
 
-            this.SessionFactory = sessionFactory;
+        internal ReadOnlyNHibSession(NHibSessionFactory sessionFactory)
+                : base(sessionFactory, DBSessionMode.Read)
+        {
+            this.InnerSession.DefaultReadOnly = true;
         }
+
+        public override DBSessionMode Mode { get; } = DBSessionMode.Read;
 
         public override IEnumerable<ObjectModification> GetModifiedObjectsFromLogic()
         {
@@ -30,36 +33,33 @@ namespace Framework.DomainDriven.NHibernate
 
         }
 
-        public override TResult Evaluate<TResult>(Func<IDBSession, TResult> getResult)
+        public override void Dispose()
         {
-            using (this.InnerSession = this.SessionFactory.InternalSessionFactory.OpenSession())
+            if (this.disposed)
             {
-                this.InnerSession.FlushMode = FlushMode.Never;
-                this.InnerSession.DefaultReadOnly = true;
+                return;
+            }
 
-                try
-                {
-                    var result = getResult(this);
+            this.disposed = true;
 
-                    this.OnClosed(EventArgs.Empty);
-
-                    return result;
-                }
-                finally
-                {
-                    this.ClearClosed();
-                }
+            try
+            {
+                this.OnClosed(EventArgs.Empty);
+            }
+            finally
+            {
+                this.ClearClosed();
             }
         }
 
         public override void Flush()
         {
-            throw new NotImplementedException();
+            throw new InvalidOperationException();
         }
 
-        public override void RegisterModifited<T>(T @object, ModificationType modificationType)
+        public override void RegisterModified<T>(T @object, ModificationType modificationType)
         {
-            throw new ArgumentException($"Not supported: '{nameof(this.RegisterModifited)}' for {this.GetType()}");
+            throw new ArgumentException($"Not supported: '{nameof(this.RegisterModified)}' for {this.GetType()}");
         }
     }
 }

@@ -57,7 +57,7 @@ namespace Framework.DomainDriven.NHibernate
 
             var provider = GetProvider(auditedAssemblies, tablePostfix, userAuthenticationService);
 
-            configuration.IntegrateWithEnvers(new AuditEventListenterForke(), provider);
+            configuration.IntegrateWithEnvers(new AuditEventListenerForke(), provider);
         }
 
         private static IMetaDataProvider GetProvider<T>(

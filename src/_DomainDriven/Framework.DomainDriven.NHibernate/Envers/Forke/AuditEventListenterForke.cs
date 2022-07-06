@@ -16,9 +16,9 @@ namespace NHibernate.Envers.Patch.Forke
 {
     //TODO: fork only for fork AddModUnit. #IADFRAME-1676
     // https://nhibernate.jira.com/projects/NHE/issues/NHE-166
-    public class AuditEventListenterForke : AuditEventListener
+    public class AuditEventListenerForke : AuditEventListener
     {
-        public AuditEventListenterForke()
+        public AuditEventListenerForke()
         {
         }
 

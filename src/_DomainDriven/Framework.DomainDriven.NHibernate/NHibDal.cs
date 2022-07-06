@@ -45,7 +45,7 @@ namespace Framework.DomainDriven.NHibernate
 
             this.InnerSession.SaveOrUpdate(domainObject);
 
-            this.session.RegisterModifited(domainObject, ModificationType.Save);
+            this.session.RegisterModified(domainObject, ModificationType.Save);
         }
 
         public virtual void Insert(TDomainObject domainObject, TIdent id)
@@ -59,14 +59,14 @@ namespace Framework.DomainDriven.NHibernate
 
             this.InnerSession.Save(domainObject, id);
 
-            this.session.RegisterModifited(domainObject, ModificationType.Save);
+            this.session.RegisterModified(domainObject, ModificationType.Save);
         }
 
         public virtual void Remove(TDomainObject domainObject)
         {
             this.CheckWrite();
 
-            this.session.RegisterModifited(domainObject, ModificationType.Remove);
+            this.session.RegisterModified(domainObject, ModificationType.Remove);
 
             this.InnerSession.Delete(domainObject);
 

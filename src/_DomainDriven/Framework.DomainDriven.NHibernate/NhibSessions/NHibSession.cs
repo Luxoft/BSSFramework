@@ -24,19 +24,25 @@ namespace Framework.DomainDriven.NHibernate
             this.SessionMode = sessionMode;
 
             this.lazyAuditReader = LazyHelper.Create(() => this.InnerSession.GetAuditReader());
+
+
+            this.InnerSession = this.SessionFactory.InternalSessionFactory.OpenSession();
+            this.InnerSession.FlushMode = FlushMode.Manual;
         }
+
+        public abstract DBSessionMode Mode { get; }
 
         public IAuditReaderPatched AuditReader => this.lazyAuditReader.Value;
 
-        public ISession InnerSession { get; protected set; }
+        public ISession InnerSession { get; }
 
-        protected internal NHibSessionFactory SessionFactory { get; protected set; }
+        protected internal NHibSessionFactory SessionFactory { get; }
 
         protected internal DBSessionMode SessionMode { get; }
 
         protected bool HasFlushedListeners => this.Flushed != null;
 
-        public abstract void RegisterModifited<TDomainObject>(TDomainObject domainObject, ModificationType modificationType);
+        public abstract void RegisterModified<TDomainObject>(TDomainObject domainObject, ModificationType modificationType);
 
         /// <inheritdoc />
         public abstract void Flush();
@@ -58,8 +64,6 @@ namespace Framework.DomainDriven.NHibernate
         public abstract IEnumerable<ObjectModification> GetModifiedObjectsFromLogic<TPersistentDomainObjectBase>();
 
         public abstract void ManualFault();
-
-        public abstract TResult Evaluate<TResult>(Func<IDBSession, TResult> getResult);
 
         public IObjectStateService GetObjectStateService()
         {
@@ -132,5 +136,7 @@ namespace Framework.DomainDriven.NHibernate
         public event EventHandler<DALChangesEventArgs> BeforeTransactionCompleted;
 
         public event EventHandler<DALChangesEventArgs> AfterTransactionCompleted;
+
+        public abstract void Dispose();
     }
 }

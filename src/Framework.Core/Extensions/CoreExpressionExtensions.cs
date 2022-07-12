@@ -83,6 +83,19 @@ namespace Framework.Core
             return request.GetValue(() => new System.ArgumentException("not property expression", nameof(expr)));
         }
 
+        public static FieldInfo GetField<TSource, TResult>(this Expression<Func<TSource, TResult>> expr)
+        {
+            if (expr == null) throw new ArgumentNullException(nameof(expr));
+
+            var request = from member in expr.Body.GetMember()
+
+                          from field in (member as FieldInfo).ToMaybe()
+
+                          select field;
+
+            return request.GetValue(() => new System.ArgumentException("not field expression", nameof(expr)));
+        }
+
         /// <summary>
         /// Получение полного пути из Expression
         /// </summary>

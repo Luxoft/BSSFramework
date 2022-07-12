@@ -10,6 +10,8 @@ using Framework.Core.Services;
 using Framework.Events;
 using Framework.HierarchicalExpand;
 
+using JetBrains.Annotations;
+
 using ITargetSystemService = Framework.Configuration.BLL.ITargetSystemService;
 
 namespace Framework.DomainDriven.ServiceModel.IAD
@@ -30,12 +32,11 @@ namespace Framework.DomainDriven.ServiceModel.IAD
     {
         protected ServiceEnvironmentBase(
             IServiceProvider serviceProvider,
-            IDBSessionFactory sessionFactory,
             INotificationContext notificationContext,
-            IUserAuthenticationService userAuthenticationService,
+            [NotNull] AvailableValues availableValues,
             ISubscriptionMetadataFinder subscriptionsMetadataFinder = null)
 
-            : base(serviceProvider, sessionFactory, notificationContext, userAuthenticationService, subscriptionsMetadataFinder)
+            : base(serviceProvider, notificationContext, availableValues, subscriptionsMetadataFinder)
         {
         }
 
@@ -46,8 +47,13 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
             private readonly Lazy<IEventsSubscriptionManager<TBLLContext, TPersistentDomainObjectBase>> lazyMainEventsSubscriptionManager;
 
-            protected ServiceEnvironmentBLLContextContainer(ServiceEnvironmentBase<TBLLContextContainer, TBLLContext, TPersistentDomainObjectBase, TAuditPersistentDomainObjectBase, TSecurityOperationCode> serviceEnvironment, IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName)
-                : base(serviceEnvironment, scopedServiceProvider, session, currentPrincipalName)
+            protected ServiceEnvironmentBLLContextContainer(
+                    ServiceEnvironmentBase<TBLLContextContainer, TBLLContext, TPersistentDomainObjectBase, TAuditPersistentDomainObjectBase, TSecurityOperationCode> serviceEnvironment,
+                    IServiceProvider scopedServiceProvider,
+                    IDBSession session,
+                    [NotNull] IUserAuthenticationService userAuthenticationService,
+                    [NotNull] IDateTimeService dateTimeService)
+                : base(serviceEnvironment, scopedServiceProvider, session, userAuthenticationService, dateTimeService)
             {
                 this.serviceEnvironment = serviceEnvironment;
 

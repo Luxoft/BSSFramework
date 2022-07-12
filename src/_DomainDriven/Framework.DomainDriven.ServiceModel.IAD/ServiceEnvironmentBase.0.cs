@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-using Framework.Authorization;
 using Framework.Authorization.BLL;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
@@ -22,7 +21,6 @@ using Framework.Notification.DTO;
 using Framework.Notification.New;
 using Framework.Persistent;
 using Framework.QueryLanguage;
-using Framework.Report;
 using Framework.SecuritySystem;
 using Framework.Validation;
 
@@ -30,35 +28,26 @@ using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.ServiceModel.IAD
 {
-    public abstract partial class ServiceEnvironmentBase :
-        IAuthorizationServiceEnvironment,
-        IConfigurationServiceEnvironment,
-        IDisposable
+    public abstract class ServiceEnvironmentBase : IServiceEnvironment
     {
         public readonly IFetchService<Framework.Authorization.Domain.PersistentDomainObjectBase, FetchBuildRule> AuthorizationFetchService;
 
         public readonly IFetchService<Framework.Configuration.Domain.PersistentDomainObjectBase, FetchBuildRule> ConfigurationFetchService;
 
-        public readonly IUserAuthenticationService UserAuthenticationService;
-
         protected ServiceEnvironmentBase(
             [NotNull] IServiceProvider serviceProvider,
-            [NotNull] IDBSessionFactory sessionFactory,
             [NotNull] INotificationContext notificationContext,
-            [NotNull] IUserAuthenticationService userAuthenticationService,
+            [NotNull] AvailableValues availableValues,
             ISubscriptionMetadataFinder subscriptionsMetadataFinder = null)
         {
             this.RootServiceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
-            this.SessionFactory = sessionFactory ?? throw new ArgumentNullException(nameof(sessionFactory));
-
             this.NotificationContext = notificationContext ?? throw new ArgumentNullException(nameof(notificationContext));
 
-            this.ObjectStorage = new TimeoutStorage(DateTimeService.Default, new TimeSpan(0, 0, 10, 0));
+            if (availableValues == null) throw new ArgumentNullException(nameof(availableValues));
 
             this.DefaultAuthorizationValidatorCompileCache =
 
-                this.SessionFactory
-                    .AvailableValues
+                    availableValues
                     .ToValidation()
                     .ToBLLContextValidationExtendedData<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>()
                     .Pipe(extendedValidationData => new AuthorizationValidationMap(extendedValidationData))
@@ -67,8 +56,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
             this.DefaultConfigurationValidatorCompileCache =
 
-                this.SessionFactory
-                    .AvailableValues
+                    availableValues
                     .ToValidation()
                     .ToBLLContextValidationExtendedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>()
                     .Pipe(extendedValidationData => new ConfigurationValidationMap(extendedValidationData))
@@ -79,8 +67,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             this.ConfigurationFetchService = new ConfigurationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Configuration.Domain.PersistentDomainObjectBase>.OData);
 
             this.SubscriptionMetadataStore = new SubscriptionMetadataStore(subscriptionsMetadataFinder ?? new SubscriptionMetadataFinder());
-
-            this.UserAuthenticationService = userAuthenticationService ?? throw new ArgumentNullException(nameof(userAuthenticationService));
         }
 
         /// <summary>
@@ -106,16 +92,12 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         /// </value>
         public INotificationContext NotificationContext { get; }
 
-        public IDBSessionFactory SessionFactory { get; }
-
         public virtual bool IsDebugMode => Debugger.IsAttached;
 
         /// <summary>
         /// Флаг, указывающий, что происходит инициализация системы (в этом состояния отключены подписки на все евенты)
         /// </summary>
         public bool IsInitialize { get; private set; }
-
-        public IObjectStorage ObjectStorage { get; private set; }
 
         /// <summary>
         /// Получает хранилище описаний подписок.
@@ -124,26 +106,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         /// Хранилище описаний подписок.
         /// </value>
         public SubscriptionMetadataStore SubscriptionMetadataStore { get; }
-
-        public abstract ServiceEnvironmentBLLContextContainer GetBLLContextContainerBase(IServiceProvider serviceProvider, IDBSession session, string currentPrincipalName = null);
-
-        #region IServiceEnvironment<AuthorizationBLLContext> Members
-
-        IBLLContextContainer<IAuthorizationBLLContext> IServiceEnvironment<IAuthorizationBLLContext>.GetBLLContextContainer(IServiceProvider serviceProvider, IDBSession session, string currentPrincipalName)
-        {
-            return this.GetBLLContextContainerBase(serviceProvider, session, currentPrincipalName);
-        }
-
-        #endregion
-
-        #region IServiceEnvironment<ConfigurationBLLContext> Members
-
-        IBLLContextContainer<IConfigurationBLLContext> IServiceEnvironment<IConfigurationBLLContext>.GetBLLContextContainer(IServiceProvider serviceProvider, IDBSession session, string currentPrincipalName)
-        {
-            return this.GetBLLContextContainerBase(serviceProvider, session, currentPrincipalName);
-        }
-
-        #endregion
 
         protected void InitializeOperation(Action operation)
         {
@@ -168,12 +130,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             }
         }
 
-        /// <inheritdoc />
-        public void Dispose()
-        {
-            this.SessionFactory.Dispose();
-        }
-
         public abstract class ServiceEnvironmentBLLContextContainer :
 
             IServiceEnvironmentBLLContextContainer,
@@ -183,7 +139,9 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         {
             protected readonly ServiceEnvironmentBase ServiceEnvironment;
 
-            private readonly string currentPrincipalName;
+            private readonly IUserAuthenticationService userAuthenticationService;
+
+            private readonly IDateTimeService dateTimeService;
 
             private readonly IEnumerable<Framework.Configuration.BLL.ITargetSystemService> targetSystems;
 
@@ -212,13 +170,20 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             private readonly Lazy<IEventsSubscriptionManager<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase>> lazyConfigurationEventsSubscriptionManager;
 
 
-            protected ServiceEnvironmentBLLContextContainer([NotNull] ServiceEnvironmentBase serviceEnvironment, [NotNull] IServiceProvider scopedServiceProvider, [NotNull] IDBSession session, string currentPrincipalName)
+            protected ServiceEnvironmentBLLContextContainer(
+                    [NotNull] ServiceEnvironmentBase serviceEnvironment,
+                    [NotNull] IServiceProvider scopedServiceProvider,
+                    [NotNull] IDBSession session,
+                    [NotNull] IUserAuthenticationService userAuthenticationService,
+                    [NotNull] IDateTimeService dateTimeService)
             {
                 this.ServiceEnvironment = serviceEnvironment ?? throw new ArgumentNullException(nameof(serviceEnvironment));
                 this.ScopedServiceProvider = scopedServiceProvider ?? throw new ArgumentNullException(nameof(scopedServiceProvider));
                 this.Session = session ?? throw new ArgumentNullException(nameof(session));
 
-                this.currentPrincipalName = currentPrincipalName;
+                this.userAuthenticationService = userAuthenticationService ?? throw new ArgumentNullException(nameof(userAuthenticationService));
+                this.dateTimeService = dateTimeService ?? throw new ArgumentNullException(nameof(dateTimeService));
+
 
                 this.StandartExpressionBuilder = LazyInterfaceImplementHelper.CreateProxy(this.GetStandartExpressionBuilder);
 
@@ -297,15 +262,14 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     LazyInterfaceImplementHelper.CreateProxy<IValidator>(this.CreateAuthorizationValidator),
                     this.HierarchicalObjectExpanderFactory,
                     this.ServiceEnvironment.AuthorizationFetchService,
-                    this.GetDateTimeService(),
-                    this.GetUserAuthenticationService(),
+                    this.dateTimeService,
+                    this.userAuthenticationService,
                     LazyInterfaceImplementHelper.CreateProxy(() => this.GetSecurityExpressionBuilderFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>(this.Authorization)),
                     this.Configuration,
                     LazyInterfaceImplementHelper.CreateProxy<IAuthorizationSecurityService>(() => new AuthorizationSecurityService(this.Authorization)),
                     LazyInterfaceImplementHelper.CreateProxy<IAuthorizationBLLFactoryContainer>(() => new AuthorizationBLLFactoryContainer(this.Authorization)),
                     LazyInterfaceImplementHelper.CreateProxy(this.GetAuthorizationExternalSource),
                     LazyInterfaceImplementHelper.CreateProxy<IRunAsManager>(() => new AuthorizationRunAsManger(this.Authorization)),
-                    principalName => this.Impersonate(principalName).Authorization,
                     LazyInterfaceImplementHelper.CreateProxy(this.GetSecurityTypeResolver));
             }
 
@@ -322,7 +286,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     LazyInterfaceImplementHelper.CreateProxy<IValidator>(this.CreateConfigurationValidator),
                     this.HierarchicalObjectExpanderFactory,
                     this.ServiceEnvironment.ConfigurationFetchService,
-                    this.GetDateTimeService(),
+                    this.dateTimeService,
                     LazyInterfaceImplementHelper.CreateProxy(() => this.GetSecurityExpressionBuilderFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>(this.Configuration)),
                     this.NotificationService.ExceptionSender,
                     this.NotificationService.SubscriptionSender,
@@ -455,21 +419,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     this.ServiceEnvironment.NotificationContext.ExceptionReceivers);
             }
 
-            public virtual IDateTimeService GetDateTimeService()
-            {
-                return DateTimeService.Default;
-            }
-
-            protected virtual IUserAuthenticationService GetUserAuthenticationService()
-            {
-                if (string.IsNullOrWhiteSpace(this.currentPrincipalName))
-                {
-                    return this.ServiceEnvironment.UserAuthenticationService;
-                }
-
-                return Core.Services.UserAuthenticationService.CreateFor(this.currentPrincipalName);
-            }
-
             protected virtual IMessageSender<NotificationEventDTO> GetMainTemplateSender()
             {
                 return this.GetMessageTemplateSender();
@@ -539,11 +488,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     this.Configuration.Logics.TargetSystem.GetByName(TargetSystemHelper.AuthorizationName, true),
                     this.GetAuthorizationEventDALListeners(),
                     this.ServiceEnvironment.SubscriptionMetadataStore);
-            }
-
-            public ServiceEnvironmentBLLContextContainer Impersonate(string principalName)
-            {
-                return this.ServiceEnvironment.GetBLLContextContainerBase(this.ScopedServiceProvider, this.Session, principalName);
             }
 
             /// <summary>

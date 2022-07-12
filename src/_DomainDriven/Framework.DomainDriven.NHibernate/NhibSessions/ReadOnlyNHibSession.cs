@@ -6,17 +6,15 @@ using Framework.DomainDriven.DAL.Revisions;
 
 namespace Framework.DomainDriven.NHibernate
 {
-    internal class ReadOnlyNHibSession : NHibSession
+    internal class ReadOnlyNHibSession : NHibSessionBase
     {
         private bool disposed;
 
-        internal ReadOnlyNHibSession(NHibSessionFactory sessionFactory)
+        internal ReadOnlyNHibSession(NHibSessionConfiguration sessionFactory)
                 : base(sessionFactory, DBSessionMode.Read)
         {
             this.InnerSession.DefaultReadOnly = true;
         }
-
-        public override DBSessionMode Mode { get; } = DBSessionMode.Read;
 
         public override IEnumerable<ObjectModification> GetModifiedObjectsFromLogic()
         {
@@ -30,7 +28,10 @@ namespace Framework.DomainDriven.NHibernate
 
         public override void ManualFault()
         {
+        }
 
+        public override void AsReadOnly()
+        {
         }
 
         public override void Dispose()
@@ -48,7 +49,7 @@ namespace Framework.DomainDriven.NHibernate
             }
             finally
             {
-                this.ClearClosed();
+                this.ClearEvents();
             }
         }
 

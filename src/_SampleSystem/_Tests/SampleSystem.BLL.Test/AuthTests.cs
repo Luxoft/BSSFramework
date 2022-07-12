@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 
+using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
@@ -48,7 +49,7 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void TestPermissionDuplicates()
         {
-            IAuthorizationServiceEnvironment environment = TestServiceEnvironment.Default;
+            IServiceEnvironment<IAuthorizationBLLContext> environment = TestServiceEnvironment.Default;
 
             environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
             {

@@ -10,6 +10,7 @@ using Framework.Exceptions;
 using JetBrains.Annotations;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.WebApiNetCore
 {
@@ -76,42 +77,23 @@ namespace Framework.DomainDriven.WebApiNetCore
         [NonAction]
         public TResult Evaluate<TResult>(DBSessionMode sessionMode, Func<TEvaluatedData, TResult> getResult)
         {
-            if (getResult == null)
+            if (sessionMode == DBSessionMode.Read)
             {
-                throw new ArgumentNullException(nameof(getResult));
+                this.ServiceProvider.GetRequiredService<IDBSession>().AsReadOnly();
             }
 
-            try
+            return getResult(this.ServiceProvider.GetRequiredService<TEvaluatedData>());
+        }
+
+        [NonAction]
+        public TResult EvaluateWithNewScope<TResult>(DBSessionMode sessionMode, Func<TEvaluatedData, TResult> getResult)
+        {
+            if (sessionMode == DBSessionMode.Read)
             {
-                return this.ServiceEnvironment.GetContextEvaluator(this.ServiceProvider)
-                           .Evaluate(
-                               sessionMode,
-                               (context, session) =>
-                               {
-                                   try
-                                   {
-                                       return getResult(this.GetEvaluatedData(session, context));
-                                   }
-                                   catch (Exception baseException)
-                                   {
-                                       var expandedBaseException =
-                                           context.Configuration.ExceptionService.Process(baseException, true);
-
-                                       throw new EvaluateException(baseException, expandedBaseException);
-                                   }
-                               });
+                this.ServiceProvider.GetRequiredService<IDBSession>().AsReadOnly();
             }
-            catch (Exception exception)
-            {
-                var raiseException = this.GetFacadeException(exception);
 
-                if (raiseException == exception)
-                {
-                    throw;
-                }
-
-                throw raiseException;
-            }
+            return getResult(this.ServiceProvider.GetRequiredService<TEvaluatedData>());
         }
 
         /// <summary>

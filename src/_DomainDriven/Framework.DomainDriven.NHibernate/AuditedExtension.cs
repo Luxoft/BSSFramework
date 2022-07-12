@@ -19,7 +19,7 @@ namespace Framework.DomainDriven.NHibernate
 {
     public static class AuditedExtension
     {
-        public static void InitializeAudit([NotNull] this Configuration configuration, [NotNull] IEnumerable<IMappingSettings> preMappingSettings, [NotNull] IUserAuthenticationService userAuthenticationService)
+        public static void InitializeAudit([NotNull] this Configuration configuration, [NotNull] IEnumerable<IMappingSettings> preMappingSettings, [NotNull] IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService)
         {
             if (configuration == null)
             {
@@ -31,9 +31,9 @@ namespace Framework.DomainDriven.NHibernate
                 throw new ArgumentNullException(nameof(preMappingSettings));
             }
 
-            if (userAuthenticationService == null)
+            if (auditRevisionUserAuthenticationService == null)
             {
-                throw new ArgumentNullException(nameof(userAuthenticationService));
+                throw new ArgumentNullException(nameof(auditRevisionUserAuthenticationService));
             }
 
             var mappingSettings = preMappingSettings.Where(z => z.IsAudited()).ToArray();
@@ -55,7 +55,7 @@ namespace Framework.DomainDriven.NHibernate
 
             var auditedAssemblies = mappingSettings.GroupBy(z => z.PersistentDomainObjectBaseType);
 
-            var provider = GetProvider(auditedAssemblies, tablePostfix, userAuthenticationService);
+            var provider = GetProvider(auditedAssemblies, tablePostfix, auditRevisionUserAuthenticationService);
 
             configuration.IntegrateWithEnvers(new AuditEventListenerForke(), provider);
         }
@@ -63,13 +63,13 @@ namespace Framework.DomainDriven.NHibernate
         private static IMetaDataProvider GetProvider<T>(
             IEnumerable<IGrouping<T, IMappingSettings>> auditedAssemblies,
             string tablePostfix,
-            IUserAuthenticationService userAuthenticationService)
+            IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService)
         {
             var assemblies = auditedAssemblies.SelectMany(z => z).ToArray();
 
             var auditesSchemas = assemblies.Select(z => z.AuditDatabase.RevisionEntitySchema).Distinct().SingleOrDefault(() => new ArgumentException("More then one AuditDatabase. There can be only one!"));
 
-            return new AuditMetadataProvider<AuditRevisionEntity>(assemblies, auditesSchemas, tablePostfix, new AuditRevisionEntityListener<AuditRevisionEntity>(userAuthenticationService));
+            return new AuditMetadataProvider<AuditRevisionEntity>(assemblies, auditesSchemas, tablePostfix, new AuditRevisionEntityListener<AuditRevisionEntity>(auditRevisionUserAuthenticationService));
         }
     }
 }

@@ -15,7 +15,7 @@ public class CalcHasAccessStep : WaitFor
 {
     private readonly IContextEvaluator<IAuthorizationBLLContext> contextEvaluator;
 
-    public CalcHasAccessStep([NotNull] IScopedContextEvaluator<IAuthorizationBLLContext> contextEvaluator)
+    public CalcHasAccessStep([NotNull] IContextEvaluator<IAuthorizationBLLContext> contextEvaluator)
     {
         this.contextEvaluator = contextEvaluator ?? throw new ArgumentNullException(nameof(contextEvaluator));
     }

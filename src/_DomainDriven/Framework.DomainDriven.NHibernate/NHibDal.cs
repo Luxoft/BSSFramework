@@ -24,9 +24,9 @@ namespace Framework.DomainDriven.NHibernate
     {
         private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache();
 
-        private readonly NHibSession session;
+        private readonly NHibSessionBase session;
 
-        public NHibDal(NHibSession session) => this.session = session ?? throw new ArgumentNullException(nameof(session));
+        public NHibDal(NHibSessionBase session) => this.session = session ?? throw new ArgumentNullException(nameof(session));
 
         private ISession InnerSession => this.session.InnerSession;
 

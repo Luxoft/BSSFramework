@@ -4,11 +4,10 @@ using System.Linq;
 
 using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.ServiceModel.Service;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Core.Services;
 
-using Microsoft.Extensions.DependencyInjection;
+using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.ServiceModel.IAD
 {
@@ -18,11 +17,11 @@ namespace Framework.DomainDriven.ServiceModel.IAD
     {
         protected ServiceEnvironmentBase(
             IServiceProvider serviceProvider,
-            IDBSessionFactory sessionFactory,
             INotificationContext notificationContext,
-            IUserAuthenticationService userAuthenticationService,
+            [NotNull] AvailableValues availableValues,
+
             ISubscriptionMetadataFinder subscriptionsMetadataFinder = null)
-            : base(serviceProvider, sessionFactory, notificationContext, userAuthenticationService, subscriptionsMetadataFinder)
+            : base(serviceProvider, notificationContext, availableValues, subscriptionsMetadataFinder)
         {
             this.ServiceProvider = serviceProvider;
         }
@@ -85,19 +84,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                    select new SubscriptionDALListener(targetSystemService, container.SubscriptionService);
         }
 
-        IBLLContextContainer<TBLLContext> IServiceEnvironment<TBLLContext>.GetBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName)
-        {
-            return this.GetBLLContextContainer(scopedServiceProvider, session, currentPrincipalName);
-        }
-
-        public IContextEvaluator<TBLLContext> GetContextEvaluator(
-            IServiceProvider currentScopedServiceProvider = null)
-        {
-            return currentScopedServiceProvider == null
-                       ? new RootContextEvaluator<TBLLContext>(this, this.RootServiceProvider)
-                       : new ScopedContextEvaluator<TBLLContext>(this, currentScopedServiceProvider);
-        }
-
         public TBLLContextContainer GetBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null)
         {
             var container = this.CreateBLLContextContainer(scopedServiceProvider, session, currentPrincipalName);
@@ -112,17 +98,18 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
         protected abstract TBLLContextContainer CreateBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null);
 
-        public sealed override ServiceEnvironmentBase.ServiceEnvironmentBLLContextContainer GetBLLContextContainerBase(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null)
-        {
-            return this.GetBLLContextContainer(scopedServiceProvider, session, currentPrincipalName);
-        }
 
         public new abstract class ServiceEnvironmentBLLContextContainer : ServiceEnvironmentBase.ServiceEnvironmentBLLContextContainer, IServiceEnvironmentBLLContextContainer<TBLLContext>, IBLLContextContainer<TBLLContext>
         {
             private readonly ServiceEnvironmentBase<TBLLContextContainer, TBLLContext> serviceEnvironment;
 
-            protected ServiceEnvironmentBLLContextContainer(ServiceEnvironmentBase<TBLLContextContainer, TBLLContext> serviceEnvironment, IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName)
-                : base(serviceEnvironment, scopedServiceProvider, session, currentPrincipalName)
+            protected ServiceEnvironmentBLLContextContainer(
+                    ServiceEnvironmentBase<TBLLContextContainer, TBLLContext> serviceEnvironment,
+                    IServiceProvider scopedServiceProvider,
+                    IDBSession session,
+                    [NotNull] IUserAuthenticationService userAuthenticationService,
+                    [NotNull] IDateTimeService dateTimeService)
+                : base(serviceEnvironment, scopedServiceProvider, session, userAuthenticationService, dateTimeService)
             {
                 this.serviceEnvironment = serviceEnvironment;
                 this.MainContext = LazyInterfaceImplementHelper.CreateProxy(this.CreateMainContext);

@@ -35,22 +35,22 @@ public static class ServiceCollectionExtensions
     {
         return services
 
-               .AddScopedTransientByContainer(c => c.MainContext)
-               .AddScopedTransientByContainer<ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode>>(c => c.MainContext)
-               .AddScopedTransientByContainer<IDisabledSecurityProviderContainer<PersistentDomainObjectBase>>(c => c.MainContext.SecurityService)
-               .AddScopedTransientByContainer<ISampleSystemSecurityPathContainer>(c => c.MainContext.SecurityService)
-               .AddScopedTransientByContainer(c => c.MainContext.GetQueryableSource())
-               .AddScopedTransientByContainer(c => c.MainContext.SecurityExpressionBuilderFactory)
+               .AddScopedByContainer(c => c.MainContext)
+               .AddScopedByContainer<ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode>>(c => c.MainContext)
+               .AddScopedByContainer<IDisabledSecurityProviderContainer<PersistentDomainObjectBase>>(c => c.MainContext.SecurityService)
+               .AddScopedByContainer<ISampleSystemSecurityPathContainer>(c => c.MainContext.SecurityService)
+               .AddScopedByContainer(c => c.MainContext.GetQueryableSource())
+               .AddScopedByContainer(c => c.MainContext.SecurityExpressionBuilderFactory)
 
                .AddScoped<IAccessDeniedExceptionService<PersistentDomainObjectBase>, AccessDeniedExceptionService<PersistentDomainObjectBase, Guid>>()
                .Self(SampleSystemSecurityServiceBase.Register)
                .Self(SampleSystemBLLFactoryContainer.RegisterBLLFactory);
     }
 
-    public static IServiceCollection AddScopedTransientByContainer<T>(this IServiceCollection services, Func<IServiceEnvironmentBLLContextContainer<ISampleSystemBLLContext>, T> func)
+    public static IServiceCollection AddScopedByContainer<T>(this IServiceCollection services, Func<IServiceEnvironmentBLLContextContainer<ISampleSystemBLLContext>, T> func)
             where T : class
     {
-        return services.AddScopedTransientFactory(sp => sp.GetRequiredService<IEvaluateScopeManager<ISampleSystemBLLContext>>()
+        return services.AddScopedFactory(sp => sp.GetRequiredService<IEvaluateScopeManager<ISampleSystemBLLContext>>()
                                                           .Pipe(manager => FuncHelper.Create(() => func(manager.CurrentBLLContextContainer))));
     }
 

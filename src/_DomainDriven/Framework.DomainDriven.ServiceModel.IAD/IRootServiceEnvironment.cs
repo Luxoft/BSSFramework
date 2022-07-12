@@ -6,7 +6,7 @@ using Framework.DomainDriven.ServiceModel.Service;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
-public interface IRootServiceEnvironment<out TBLLContext, out TBLLContextContainer> : IServiceEnvironment<TBLLContext>
+public interface IRootServiceEnvironment<out TBLLContext, out TBLLContextContainer> : IServiceEnvironment
 {
     IServiceProvider RootServiceProvider { get; }
 

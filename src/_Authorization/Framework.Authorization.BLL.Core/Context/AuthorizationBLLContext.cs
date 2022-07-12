@@ -31,8 +31,6 @@ namespace Framework.Authorization.BLL
 
         private readonly Lazy<Settings> lazySettings;
 
-        private readonly Func<string, IAuthorizationBLLContext> impersonateFunc;
-
         private readonly IDictionaryCache<string, EntityType> entityTypeByNameCache;
 
         private readonly IDictionaryCache<Guid, EntityType> entityTypeByIdCache;
@@ -61,7 +59,6 @@ namespace Framework.Authorization.BLL
             [NotNull] IAuthorizationBLLFactoryContainer logics,
             [NotNull] IAuthorizationExternalSource externalSource,
             [NotNull] IRunAsManager runAsManager,
-            [NotNull] Func<string, IAuthorizationBLLContext> impersonateFunc,
             [NotNull] ITypeResolver<string> securityTypeResolver)
             : base(
                 serviceProvider,
@@ -81,8 +78,6 @@ namespace Framework.Authorization.BLL
             this.logics = logics ?? throw new ArgumentNullException(nameof(logics));
             this.ExternalSource = externalSource ?? throw new ArgumentNullException(nameof(externalSource));
             this.RunAsManager = runAsManager ?? throw new ArgumentNullException(nameof(runAsManager));
-
-            this.impersonateFunc = impersonateFunc ?? throw new ArgumentNullException(nameof(impersonateFunc));
             this.Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
             this.lazyCurrentPrincipal = LazyHelper.Create(() => this.Logics.Principal.GetCurrent());
@@ -126,11 +121,6 @@ namespace Framework.Authorization.BLL
         public Principal CurrentPrincipal => this.lazyCurrentPrincipal.Value;
 
         public ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory { get; private set; }
-
-        public IAuthorizationBLLContext Impersonate(string principalName)
-        {
-            return this.impersonateFunc(principalName);
-        }
 
         public EntityType GetEntityType(Type type)
         {

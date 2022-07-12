@@ -20,8 +20,6 @@ namespace Framework.Authorization.BLL
 
         ITrackingServiceContainer<PersistentDomainObjectBase>,
 
-        IImpersonateObject<IAuthorizationBLLContext>,
-
         ITypeResolverContainer<string>,
 
         IConfigurationBLLContextContainer<IConfigurationBLLContext>,

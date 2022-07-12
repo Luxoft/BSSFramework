@@ -2,6 +2,8 @@
 
 using Framework.Core.Services;
 
+using JetBrains.Annotations;
+
 using NHibernate.Envers;
 
 namespace Framework.DomainDriven.NHibernate.Audit
@@ -12,14 +14,12 @@ namespace Framework.DomainDriven.NHibernate.Audit
     /// <typeparam name="T"></typeparam>
     public abstract class RevisionEntityListener<T> : IEntityTrackingRevisionListener
     {
-        private readonly IUserAuthenticationService userAuthenticationService;
-
-        protected RevisionEntityListener(IUserAuthenticationService userAuthenticationService)
+        protected RevisionEntityListener([NotNull] IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService)
         {
-            this.userAuthenticationService = userAuthenticationService;
+            this.AuditRevisionUserAuthenticationService = auditRevisionUserAuthenticationService ?? throw new ArgumentNullException(nameof(auditRevisionUserAuthenticationService));
         }
 
-        protected IUserAuthenticationService UserAuthenticationService => this.userAuthenticationService;
+        protected IAuditRevisionUserAuthenticationService AuditRevisionUserAuthenticationService {get; }
 
         public void NewRevision(object revisionEntity)
         {

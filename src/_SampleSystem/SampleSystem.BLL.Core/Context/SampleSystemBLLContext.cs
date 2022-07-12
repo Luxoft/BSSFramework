@@ -4,7 +4,6 @@ using Framework.Authorization.BLL;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
 using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.BLL.Tracking;
 using Framework.HierarchicalExpand;
@@ -42,7 +41,6 @@ namespace SampleSystem.BLL
             [NotNull] IAuthorizationBLLContext authorization,
             [NotNull] Framework.Configuration.BLL.IConfigurationBLLContext configuration,
             [NotNull] ICryptService<CryptSystem> cryptService,
-            [NotNull] Func<string, ISampleSystemBLLContext> impersonateFunc,
             [NotNull] ITypeResolver<string> currentTargetSystemTypeResolver,
             [NotNull] IDBSession session)
             : base(serviceProvider, dalFactory, operationListeners, sourceListeners, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService, dateTimeService)
@@ -57,7 +55,6 @@ namespace SampleSystem.BLL
 
             this.CryptService = cryptService ?? throw new ArgumentNullException(nameof(cryptService));
 
-            this._impersonateFunc = impersonateFunc ?? throw new ArgumentNullException(nameof(impersonateFunc));
             this.TypeResolver = currentTargetSystemTypeResolver ?? throw new ArgumentNullException(nameof(currentTargetSystemTypeResolver));
             this.Session = session ?? throw new ArgumentNullException(nameof(session));
         }

@@ -105,6 +105,7 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .RegisterControllers()
                                   .AddControllerEnvironment()
                                   .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
+                                  .AddScoped<ISampleSystemBLLContext>(sp => sp.GetRequiredService<SampleSystemBllContextContainer>().MainContext)
                                   .AddSingleton<IntegrationTestsUserAuthenticationService>()
                                   .AddSingleton<IUserAuthenticationService>(sp => sp.GetRequiredService<IntegrationTestsUserAuthenticationService>())
                                   .AddSingleton<IDateTimeService, IntegrationTestDateTimeService>()

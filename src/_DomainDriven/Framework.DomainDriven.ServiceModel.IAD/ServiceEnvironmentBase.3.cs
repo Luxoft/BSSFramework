@@ -12,6 +12,8 @@ using Framework.DomainDriven.BLL.Security.Lock;
 using Framework.DomainDriven.BLL.Tracking;
 using Framework.Persistent;
 
+using JetBrains.Annotations;
+
 namespace Framework.DomainDriven.ServiceModel.IAD
 {
     public abstract class ServiceEnvironmentBase<TBLLContextContainer, TBLLContext, TPersistentDomainObjectBase, TAuditPersistentDomainObjectBase, TSecurityOperationCode, TNamedLockObject, TNamedLockOperation>
@@ -34,11 +36,10 @@ namespace Framework.DomainDriven.ServiceModel.IAD
     {
         protected ServiceEnvironmentBase(
             IServiceProvider serviceProvider,
-            IDBSessionFactory sessionFactory,
             INotificationContext notificationContext,
-            IUserAuthenticationService userAuthenticationService,
+            [NotNull] AvailableValues availableValues,
             ISubscriptionMetadataFinder subscriptionsMetadataFinder = null)
-            : base(serviceProvider, sessionFactory, notificationContext, userAuthenticationService, subscriptionsMetadataFinder)
+            : base(serviceProvider, notificationContext, availableValues, subscriptionsMetadataFinder)
         {
         }
 

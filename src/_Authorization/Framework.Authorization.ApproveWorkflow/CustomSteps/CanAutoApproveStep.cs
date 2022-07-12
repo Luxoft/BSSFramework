@@ -13,14 +13,14 @@ namespace Framework.Authorization.ApproveWorkflow;
 
 public class CanAutoApproveStep : IStepBody
 {
-    private readonly IContextEvaluator<IAuthorizationBLLContext> contextEvaluator;
+    private readonly IAuthorizationBLLContext context;
 
     private readonly IWorkflowApproveProcessor workflowApproveProcessor;
 
-    public CanAutoApproveStep([NotNull] IScopedContextEvaluator<IAuthorizationBLLContext> contextEvaluator,
+    public CanAutoApproveStep([NotNull] IAuthorizationBLLContext context,
                               [NotNull] IWorkflowApproveProcessor workflowApproveProcessor)
     {
-        this.contextEvaluator = contextEvaluator ?? throw new ArgumentNullException(nameof(contextEvaluator));
+        this.context = context ?? throw new ArgumentNullException(nameof(context));
         this.workflowApproveProcessor = workflowApproveProcessor ?? throw new ArgumentNullException(nameof(workflowApproveProcessor));
     }
 
@@ -35,13 +35,12 @@ public class CanAutoApproveStep : IStepBody
 
     private bool CanAutoApprove(ApproveOperationWorkflowObject workflowObject)
     {
-        return this.contextEvaluator.Evaluate(DBSessionMode.Read, ctx =>
-        {
-            var permission = ctx.Logics.Permission.GetById(workflowObject.PermissionId, true);
+        //this.dbSession.AsReadOnly();
 
-            var operation = ctx.Logics.Operation.GetById(workflowObject.OperationId, true);
+        var permission = this.context.Logics.Permission.GetById(workflowObject.PermissionId, true);
 
-            return this.workflowApproveProcessor.CanAutoApprove(permission, operation);
-        });
+        var operation = this.context.Logics.Operation.GetById(workflowObject.OperationId, true);
+
+        return this.workflowApproveProcessor.CanAutoApprove(permission, operation);
     }
 }

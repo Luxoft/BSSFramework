@@ -1,7 +1,5 @@
 ﻿using System;
 
-using Framework.Core;
-using Framework.Core.Services;
 using Framework.DomainDriven.DAL.Revisions;
 
 using NHibernate.Envers;
@@ -14,8 +12,8 @@ namespace Framework.DomainDriven.NHibernate.Audit
     public class AuditRevisionEntityListener<TAuditRevisionEntity> : RevisionEntityListener<TAuditRevisionEntity>
         where TAuditRevisionEntity : AuditRevisionEntity
     {
-        public AuditRevisionEntityListener(IUserAuthenticationService userAuthenticationService)
-            : base(userAuthenticationService)
+        public AuditRevisionEntityListener(IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService)
+            : base(auditRevisionUserAuthenticationService)
         {
         }
 
@@ -31,7 +29,7 @@ namespace Framework.DomainDriven.NHibernate.Audit
 
         private void SetAuthor(TAuditRevisionEntity revisionEntity)
         {
-            revisionEntity.Author = this.UserAuthenticationService.GetUserName();
+            revisionEntity.Author = this.AuditRevisionUserAuthenticationService.GetUserName();
         }
     }
 }

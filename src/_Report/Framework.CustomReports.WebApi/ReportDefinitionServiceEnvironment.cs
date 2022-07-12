@@ -103,7 +103,7 @@ namespace Framework.CustomReports.WebApi
             return this.ServiceEnvironment.GetBLLContextContainer(scopedServiceProvider, session, currentPrincipalName);
         }
 
-        public IDBSessionFactory SessionFactory => this.ServiceEnvironment.SessionFactory;
+        public IDBSessionFactory SessionConfiguration => this.ServiceEnvironment.SessionConfiguration;
 
         public bool IsDebugMode => this.ServiceEnvironment.IsDebugMode;
 

@@ -9,7 +9,7 @@ using Framework.DomainDriven.NHibernate;
 
 namespace SampleSystem.WebApiCore.Env.Database;
 
-public class SampleSystemNHibSessionFactory : NHibSessionFactory
+public class SampleSystemNHibSessionFactory : NHibSessionConfiguration
 {
     private readonly ICapTransactionManager manager;
 

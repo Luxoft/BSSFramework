@@ -11,27 +11,20 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection RegisterEvaluateScopeManager<TBLLContext>(this IServiceCollection services)
-        {
-            return services
-                   .AddScoped<IEvaluateScopeManager<TBLLContext>, EvaluateScopeManager<TBLLContext>>()
-                   .AddScoped<IEvaluateScopeManager>(sp => sp.GetRequiredService<IEvaluateScopeManager<TBLLContext>>());
-        }
-
         public static IServiceCollection RegisterAuthorizationSystem(this IServiceCollection services)
         {
-            return services.AddScopedTransientByContainerBase<IAuthorizationSystem<Guid>>(c => c.Authorization);
+            return services.AddScopedByContainerBase<IAuthorizationSystem<Guid>>(c => c.Authorization);
         }
 
         public static IServiceCollection RegisterAuthorizationBLL(this IServiceCollection services)
         {
             return services
-                .AddScopedTransientByContainerBase(c => c.Authorization)
-                .AddScopedTransientByContainerBase<ISecurityOperationResolver<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode>>(c => c.Authorization)
-                .AddScopedTransientByContainerBase<IDisabledSecurityProviderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>>(c => c.Authorization.SecurityService)
-                .AddScopedTransientByContainerBase<IAuthorizationSecurityPathContainer>(c => c.Authorization.SecurityService)
-                .AddScopedTransientByContainerBase(c => c.Authorization.GetQueryableSource())
-                .AddScopedTransientByContainerBase(c => c.Authorization.SecurityExpressionBuilderFactory)
+                .AddScopedByContainerBase(c => c.Authorization)
+                .AddScopedByContainerBase<ISecurityOperationResolver<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode>>(c => c.Authorization)
+                .AddScopedByContainerBase<IDisabledSecurityProviderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>>(c => c.Authorization.SecurityService)
+                .AddScopedByContainerBase<IAuthorizationSecurityPathContainer>(c => c.Authorization.SecurityService)
+                .AddScopedByContainerBase(c => c.Authorization.GetQueryableSource())
+                .AddScopedByContainerBase(c => c.Authorization.SecurityExpressionBuilderFactory)
 
                 .AddScoped<IAccessDeniedExceptionService<Framework.Authorization.Domain.PersistentDomainObjectBase>, AccessDeniedExceptionService<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
                 .Self(AuthorizationSecurityServiceBase.Register)
@@ -42,12 +35,12 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         {
             return services
 
-                   .AddScopedTransientByContainerBase(c => c.Configuration)
-                   .AddScopedTransientByContainerBase<ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode>>(c => c.Configuration)
-                   .AddScopedTransientByContainerBase<IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>>(c => c.Configuration.SecurityService)
-                   .AddScopedTransientByContainerBase<IConfigurationSecurityPathContainer>(c => c.Configuration.SecurityService)
-                   .AddScopedTransientByContainerBase(c => c.Configuration.GetQueryableSource())
-                   .AddScopedTransientByContainerBase(c => c.Configuration.SecurityExpressionBuilderFactory)
+                   .AddScopedByContainerBase(c => c.Configuration)
+                   .AddScopedByContainerBase<ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode>>(c => c.Configuration)
+                   .AddScopedByContainerBase<IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>>(c => c.Configuration.SecurityService)
+                   .AddScopedByContainerBase<IConfigurationSecurityPathContainer>(c => c.Configuration.SecurityService)
+                   .AddScopedByContainerBase(c => c.Configuration.GetQueryableSource())
+                   .AddScopedByContainerBase(c => c.Configuration.SecurityExpressionBuilderFactory)
 
                    .AddScoped<IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase>, AccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>()
                    .Self(ConfigurationSecurityServiceBase.Register)
@@ -55,30 +48,10 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         }
 
 
-        public static IServiceCollection AddScopedTransientByContainerBase<T>(this IServiceCollection services, Func<IServiceEnvironmentBLLContextContainer, T> func)
+        public static IServiceCollection AddScopedByContainerBase<T>(this IServiceCollection services, Func<IServiceEnvironmentBLLContextContainer, T> func)
             where T : class
         {
-            return services.AddScopedTransientFactory(sp => sp.GetRequiredService<IEvaluateScopeManager>()
-                                                              .Pipe(manager => FuncHelper.Create(() => func(manager.CurrentBLLContextContainer))));
-        }
-
-        public static IServiceCollection AddScopedTransientByContainer<TBLLContext, T>(this IServiceCollection services, Func<IServiceEnvironmentBLLContextContainer<TBLLContext>, T> func)
-            where T : class
-        {
-            return services.AddScopedTransientFactory(sp => sp.GetRequiredService<IEvaluateScopeManager<TBLLContext>>()
-                                                              .Pipe(manager => FuncHelper.Create(() => func(manager.CurrentBLLContextContainer))));
-        }
-
-        public static IServiceCollection AddScopedTransient<T>(this IServiceCollection services, Func<IServiceProvider, T> func)
-            where T : class
-        {
-            return services.AddScopedTransientFactory(sp => FuncHelper.Create(() => func(sp)));
-        }
-
-        public static IServiceCollection AddScopedTransientFactory<T>(this IServiceCollection services, Func<IServiceProvider, Func<T>> getFunc)
-            where T : class
-        {
-            return services.AddScoped(sp => getFunc(sp).Pipe(LazyInterfaceImplementHelper.CreateCallProxy));
+            return services.AddScoped(sp => sp.GetRequiredService<IServiceEnvironmentBLLContextContainer>().Pipe(func));
         }
     }
 }

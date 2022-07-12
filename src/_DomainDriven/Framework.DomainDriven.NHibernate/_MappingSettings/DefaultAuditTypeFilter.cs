@@ -18,8 +18,8 @@ namespace Framework.DomainDriven.NHibernate
         {
             this._filters = new IAuditTypeFilter[]
                            {
-                               new AuditTypeFilterSerivce<ViewAttribute>(),
-                               new AuditTypeFilterSerivce<NotAuditedClassAttribute>(),
+                               new AuditTypeFilterService<ViewAttribute>(),
+                               new AuditTypeFilterService<NotAuditedClassAttribute>(),
                                new AuditPropertyFilterService<NotAuditedPropertyAttribute>(),
                                new AuditPropertyFilterService<DetailRoleAttribute>(z=>z.Role == DetailRole.No),
                            };
@@ -35,7 +35,7 @@ namespace Framework.DomainDriven.NHibernate
             return this._filters.All(z => z.IsAuditedProperty(type, propertyInfo));
         }
 
-        private class AuditTypeFilterSerivce<TAttribute> : IAuditTypeFilter
+        private class AuditTypeFilterService<TAttribute> : IAuditTypeFilter
             where TAttribute : Attribute
         {
             public bool IsAuditedType(Type type)

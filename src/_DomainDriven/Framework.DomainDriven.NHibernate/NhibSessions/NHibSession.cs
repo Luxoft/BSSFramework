@@ -14,31 +14,29 @@ using NHibernate.Envers.Patch;
 
 namespace Framework.DomainDriven.NHibernate
 {
-    public abstract class NHibSession : IDBSession
+    public abstract class NHibSessionBase : IDBSession
     {
         private Lazy<IAuditReaderPatched> lazyAuditReader { get; }
 
-        internal NHibSession(NHibSessionFactory sessionFactory, DBSessionMode sessionMode)
+        internal NHibSessionBase(NHibSessionConfiguration sessionFactory, DBSessionMode sessionMode)
         {
-            this.SessionFactory = sessionFactory ?? throw new ArgumentNullException(nameof(sessionFactory));
+            this.SessionConfiguration = sessionFactory ?? throw new ArgumentNullException(nameof(sessionFactory));
             this.SessionMode = sessionMode;
 
             this.lazyAuditReader = LazyHelper.Create(() => this.InnerSession.GetAuditReader());
 
 
-            this.InnerSession = this.SessionFactory.InternalSessionFactory.OpenSession();
+            this.InnerSession = this.SessionConfiguration.InternalSessionFactory.OpenSession();
             this.InnerSession.FlushMode = FlushMode.Manual;
         }
 
-        public abstract DBSessionMode Mode { get; }
+        public DBSessionMode SessionMode { get; }
 
         public IAuditReaderPatched AuditReader => this.lazyAuditReader.Value;
 
         public ISession InnerSession { get; }
 
-        protected internal NHibSessionFactory SessionFactory { get; }
-
-        protected internal DBSessionMode SessionMode { get; }
+        protected internal NHibSessionConfiguration SessionConfiguration { get; }
 
         protected bool HasFlushedListeners => this.Flushed != null;
 
@@ -65,6 +63,8 @@ namespace Framework.DomainDriven.NHibernate
 
         public abstract void ManualFault();
 
+        public abstract void AsReadOnly();
+
         public IObjectStateService GetObjectStateService()
         {
             return new NHibObjectStatesService(this.InnerSession);
@@ -76,20 +76,11 @@ namespace Framework.DomainDriven.NHibernate
             return new NHibDalFactory<TPersistentDomainObjectBase, TIdent>(this);
         }
 
-        protected virtual void OnClosed([NotNull] EventArgs e)
-        {
-            if (e == null) throw new ArgumentNullException(nameof(e));
-
-            this.Closed?.Invoke(this, e);
-        }
-
         protected virtual void OnFlushed([NotNull] DALChangesEventArgs e)
         {
             if (e == null) throw new ArgumentNullException(nameof(e));
 
             this.Flushed?.Invoke(this, e);
-
-            this.SessionFactory.OnSessionFlushed(new SessionFlushedEventArgs(e.Changes, this));
         }
 
         protected virtual void OnBeforeTransactionCompleted([NotNull] DALChangesEventArgs e)
@@ -97,8 +88,6 @@ namespace Framework.DomainDriven.NHibernate
             if (e == null) throw new ArgumentNullException(nameof(e));
 
             this.BeforeTransactionCompleted?.Invoke(this, e);
-
-            this.SessionFactory.OnSessionBeforeTransactionCompleted(new SessionFlushedEventArgs(e.Changes, this));
         }
 
         protected virtual void OnAfterTransactionCompleted([NotNull] DALChangesEventArgs e)
@@ -106,37 +95,85 @@ namespace Framework.DomainDriven.NHibernate
             if (e == null) throw new ArgumentNullException(nameof(e));
 
             this.AfterTransactionCompleted?.Invoke(this, e);
+        }
+        protected virtual void OnClosed([NotNull] EventArgs e)
+        {
+            if (e == null) throw new ArgumentNullException(nameof(e));
 
-            this.SessionFactory.OnSessionAfterTransactionCompleted(new SessionFlushedEventArgs(e.Changes, this));
+            this.Closed?.Invoke(this, e);
         }
 
-        protected void ClearClosed()
+        protected void ClearEvents()
         {
+            this.Flushed = null;
+            this.BeforeTransactionCompleted = null;
+            this.AfterTransactionCompleted = null;
             this.Closed = null;
         }
 
-        protected void ClearFlushed()
-        {
-            this.Flushed = null;
-        }
-
-        protected void ClearTransactionCompleted()
-        {
-            this.BeforeTransactionCompleted = null;
-            this.AfterTransactionCompleted = null;
-        }
-
-        public event EventHandler Closed;
-
         public event EventHandler<DALChangesEventArgs> Flushed;
-
-        [Obsolete("Since 6.0 Use AfterTransactionCompleted", true)]
-        public event EventHandler<DALChangesEventArgs> TransactionCompleted;
 
         public event EventHandler<DALChangesEventArgs> BeforeTransactionCompleted;
 
         public event EventHandler<DALChangesEventArgs> AfterTransactionCompleted;
 
+        public event EventHandler Closed;
+
         public abstract void Dispose();
     }
+
+
+
+    //public class NHibSession
+    //{
+    //    public NHibSession()
+    //    {
+
+    //    }
+
+    //    private IDBSession Create(DBSessionMode openMode)
+    //    {
+    //        if (DBSessionMode.Read == openMode)
+    //        {
+    //            return new ReadOnlyNHibSession(this);
+    //        }
+
+    //        return new WriteNHibSession(this);
+    //    }
+
+    //    protected internal void OnSessionFlushed([NotNull] SessionFlushedEventArgs e)
+    //    {
+    //        if (e == null) throw new ArgumentNullException(nameof(e));
+
+    //        this.SessionFlushed.Maybe(handler => handler(this, e));
+    //    }
+
+    //    protected internal virtual void OnSessionAfterTransactionCompleted([NotNull] SessionFlushedEventArgs e)
+    //    {
+    //        if (e == null) { throw new ArgumentNullException(nameof(e)); }
+
+    //        this.SessionAfterTransactionCompleted?.Invoke(this, e);
+    //    }
+
+    //    protected internal virtual void OnSessionBeforeTransactionCompleted([NotNull] SessionFlushedEventArgs e)
+    //    {
+    //        if (e == null) { throw new ArgumentNullException(nameof(e)); }
+
+    //        this.SessionBeforeTransactionCompleted?.Invoke(this, e);
+    //    }
+
+
+    //    /// <summary> Session flushed event
+    //    /// </summary>
+    //    public event EventHandler<SessionFlushedEventArgs> SessionFlushed;
+
+    //    /// <summary> Transaction completed event
+    //    /// </summary>
+    //    [Obsolete("Use SessionAfterTransactionCompleted", true)]
+    //    public event EventHandler<SessionFlushedEventArgs> SessionTransactionCompleted;
+
+    //    public event EventHandler<SessionFlushedEventArgs> SessionBeforeTransactionCompleted;
+
+    //    public event EventHandler<SessionFlushedEventArgs> SessionAfterTransactionCompleted;
+    //}
 }

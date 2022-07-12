@@ -8,13 +8,8 @@ namespace Framework.DomainDriven.BLL
 {
     public interface IDBSession : IDisposable
     {
-        DBSessionMode Mode { get; }
+        DBSessionMode SessionMode { get; }
 
-
-        event EventHandler Closed;
-
-        [Obsolete("Use AfterTransactionCompleted", true)]
-        event EventHandler<DALChangesEventArgs> TransactionCompleted;
 
         /// <summary>
         /// Евент срабатывает циклично, пока происходят изменения доменных объектов
@@ -30,6 +25,8 @@ namespace Framework.DomainDriven.BLL
         /// Евент срабатывает только 1 раз перед закрытием сессии, изменения в базу в этот момент запрещены
         /// </summary>
         event EventHandler<DALChangesEventArgs> AfterTransactionCompleted;
+
+        event EventHandler Closed;
 
         IObjectStateService GetObjectStateService();
 
@@ -61,5 +58,7 @@ namespace Framework.DomainDriven.BLL
         /// </summary>
         /// <returns>System.Int64.</returns>
         long GetMaxRevision();
+
+        void AsReadOnly();
     }
 }

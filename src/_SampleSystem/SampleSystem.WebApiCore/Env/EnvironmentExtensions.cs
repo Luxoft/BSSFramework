@@ -67,7 +67,7 @@ namespace SampleSystem.WebApiCore
 
         public static IServiceCollection AddDatabaseSettings(this IServiceCollection services, string connectionString) =>
                 services
-                        .AddSingleton<IDBSessionFactory, SampleSystemNHibSessionFactory>()
+                        .AddSingleton<NHibSessionConfiguration, SampleSystemNHibSessionFactory>()
                         .AddSingleton<NHibConnectionSettings>()
                         .AddSingleton<IMappingSettings>(AuthorizationMappingSettings.CreateDefaultAudit(string.Empty))
                         .AddSingleton<IMappingSettings>(ConfigurationMappingSettings.CreateDefaultAudit(string.Empty))
@@ -78,17 +78,15 @@ namespace SampleSystem.WebApiCore
 
         public static IServiceCollection AddControllerEnvironment(this IServiceCollection services)
         {
-            services.AddSingleton<IExceptionProcessor, ApiControllerExceptionService<IServiceEnvironment<ISampleSystemBLLContext>, ISampleSystemBLLContext>>();
+            services.AddSingleton<IExceptionProcessor, ApiControllerExceptionService<ISampleSystemBLLContext>>();
 
             services.AddSingleton<SampleSystemCustomReportsServiceEnvironment>();
 
             // Environment
-            services
-                .AddSingleton<IServiceEnvironment<ISampleSystemBLLContext>>(x => x.GetRequiredService<SampleSystemServiceEnvironment>())
-                .AddSingleton<IServiceEnvironment<IAuthorizationBLLContext>>(x => x.GetRequiredService<SampleSystemServiceEnvironment>())
-                .AddSingleton<IServiceEnvironment<IConfigurationBLLContext>>(x => x.GetRequiredService<SampleSystemServiceEnvironment>());
+            services.AddSingleton<SampleSystemServiceEnvironment>();
 
-            services.AddScoped<IScopedContextEvaluator<IAuthorizationBLLContext>, ScopedContextEvaluator<IAuthorizationBLLContext>>();
+            services.AddSingleton<IContextEvaluator<IAuthorizationBLLContext>, ContextEvaluator<IAuthorizationBLLContext>>();
+            services.AddSingleton<IContextEvaluator<ISampleSystemBLLContext>, ContextEvaluator<ISampleSystemBLLContext>>();
 
             return services;
         }

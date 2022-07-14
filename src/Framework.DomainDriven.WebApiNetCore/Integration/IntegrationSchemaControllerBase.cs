@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Framework.DomainDriven.WebApiNetCore.Integration
 {
     public abstract class IntegrationSchemaControllerBase<TServiceEnvironment, TBLLContext, TEvaluatedData> : ApiControllerBase<TServiceEnvironment, TBLLContext, TEvaluatedData>
-            where TServiceEnvironment : class, IServiceEnvironment<TBLLContext>
+            where TServiceEnvironment : class, IServiceEnvironment
             where TBLLContext : class, IConfigurationBLLContextContainer<IConfigurationBLLContext>, IAuthorizationBLLContextContainer<IAuthorizationBLLContextBase>, IDateTimeServiceContainer
             where TEvaluatedData : EvaluatedData<TBLLContext>
     {

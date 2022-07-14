@@ -22,7 +22,7 @@ namespace Framework.DomainDriven.WebApiNetCore
     /// <typeparam name="TEvaluatedData">The type of the t evaluated data.</typeparam>
     /// <seealso cref="ApiControllerBase{TServiceEnvironment,TBLLContext}" />
     public abstract class ApiControllerBase<TServiceEnvironment, TBLLContext, TEvaluatedData> : ApiControllerBase<TServiceEnvironment, TBLLContext>
-            where TServiceEnvironment : class, IServiceEnvironment<TBLLContext>
+            where TServiceEnvironment : class, IServiceEnvironment
             where TBLLContext : class, IConfigurationBLLContextContainer<IConfigurationBLLContext>, IAuthorizationBLLContextContainer<IAuthorizationBLLContextBase>
             where TEvaluatedData : EvaluatedData<TBLLContext>
     {

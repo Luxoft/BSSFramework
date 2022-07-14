@@ -258,7 +258,7 @@ namespace Framework.DomainDriven.NHibernate
                 ms.InitMapping(cfg);
             }
 
-            cfg.InitializeAudit(overrideMappingSettings);
+            cfg.InitializeAudit(overrideMappingSettings, LazyInterfaceImplementHelper.CreateNotImplemented<IAuditRevisionUserAuthenticationService>());
 
             SchemaMetadataUpdater.QuoteTableAndColumns(cfg, Dialect.GetDialect(cfg.Properties));
 

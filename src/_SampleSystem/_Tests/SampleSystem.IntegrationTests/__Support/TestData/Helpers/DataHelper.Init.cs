@@ -3,6 +3,8 @@
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using SampleSystem.BLL;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
@@ -10,9 +12,9 @@ using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
 {
-    public partial class DataHelper : IControllerEvaluatorContainer
+    public partial class DataHelper : IRootServiceProviderContainer
     {
-        public SampleSystemServiceEnvironment Environment { get; set; }
+        public SampleSystemTestServiceEnvironment Environment { get; set; }
 
 
         public AuthHelper AuthHelper { private get; set; }
@@ -54,6 +56,6 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             id = id ?? Guid.NewGuid();
             return (Guid)id;
         }
-        IServiceProvider IControllerEvaluatorContainer.RootServiceProvider => this.Environment.RootServiceProvider;
+        IServiceProvider IRootServiceProviderContainer.RootServiceProvider => this.Environment.RootServiceProvider;
     }
 }

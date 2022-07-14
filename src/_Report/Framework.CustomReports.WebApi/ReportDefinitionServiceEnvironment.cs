@@ -20,22 +20,27 @@ namespace Framework.CustomReports.WebApi
 {
     public abstract class ReportDefinitionServiceEnvironment<TServiceEnvironment, TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>
 
-    : IReportServiceContainer<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>,
-        IServiceEnvironment<TBLLContext>,
-        ISystemMetadataTypeBuilderContainer
+        : IReportServiceContainer<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>,
+          IServiceEnvironment,
+          ISystemMetadataTypeBuilderContainer
 
-    where TBLLContext : IConfigurationBLLContextContainer<Framework.Configuration.BLL.IConfigurationBLLContext>, IAuthorizationBLLContextContainer<IAuthorizationBLLContext>,
-    IBLLFactoryContainerContext<IBLLFactoryContainer<IDefaultSecurityBLLFactory<TPersistentDomainObjectBase, TSecurityOperationCode, Guid>>>,
-    ISecurityServiceContainer<IRootSecurityService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>>,
-    IFetchServiceContainer<TPersistentDomainObjectBase, Framework.DomainDriven.FetchBuildRule>, IValidatorContainer, ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> where TServiceEnvironment : class, IServiceEnvironment<TBLLContext>, ISystemMetadataTypeBuilderContainer
-    where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
-    where TSecurityOperationCode : struct, Enum
+        where TBLLContext : IConfigurationBLLContextContainer<Framework.Configuration.BLL.IConfigurationBLLContext>, IAuthorizationBLLContextContainer<IAuthorizationBLLContext>,
+            IBLLFactoryContainerContext<IBLLFactoryContainer<IDefaultSecurityBLLFactory<TPersistentDomainObjectBase, TSecurityOperationCode, Guid>>>,
+            ISecurityServiceContainer<IRootSecurityService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>>,
+            IFetchServiceContainer<TPersistentDomainObjectBase, Framework.DomainDriven.FetchBuildRule>, IValidatorContainer, ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode>
+
+        where TServiceEnvironment : class, IServiceEnvironment, ISystemMetadataTypeBuilderContainer
+        where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
+        where TSecurityOperationCode : struct, Enum
     {
-        private readonly TServiceEnvironment _serviceEnvironment;
+        private readonly TServiceEnvironment serviceEnvironment;
 
-        protected ReportDefinitionServiceEnvironment(TServiceEnvironment serviceEnvironment, CustomReportAssembly customReportAssembly)
+        private readonly IContextEvaluator<TBLLContext> contextEvaluator;
+
+        protected ReportDefinitionServiceEnvironment(TServiceEnvironment serviceEnvironment, IContextEvaluator<TBLLContext> contextEvaluator, CustomReportAssembly customReportAssembly)
         {
-            this._serviceEnvironment = serviceEnvironment;
+            this.serviceEnvironment = serviceEnvironment;
+            this.contextEvaluator = contextEvaluator;
 
             var links = new CustomReportParameterLinkService(customReportAssembly).GetLinks();
 
@@ -70,7 +75,7 @@ namespace Framework.CustomReports.WebApi
                 z => this.GetCreateCustomReportBLL(parameterTypeToCustomReportBLL[z.Reports.First().ParameterType]));
 
 
-            this.GetSyncCustomReportService().Sync(this, customReports);
+            this.GetSyncCustomReportService().Sync(customReports);
 
 
             this.ReportService = new ReportService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>(idToCreateCustomReportDict);
@@ -81,29 +86,14 @@ namespace Framework.CustomReports.WebApi
 
         protected virtual ISyncCustomReportService<TBLLContext, TSecurityOperationCode> GetSyncCustomReportService()
         {
-            return new SyncCustomReportService<TBLLContext, TSecurityOperationCode>(this.SystemMetadataTypeBuilder);
+            return new SyncCustomReportService<TBLLContext, TSecurityOperationCode>(this.SystemMetadataTypeBuilder, this.contextEvaluator);
         }
 
-        public TServiceEnvironment ServiceEnvironment => this._serviceEnvironment;
+        public TServiceEnvironment ServiceEnvironment => this.serviceEnvironment;
 
-        public virtual IReportService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> ReportService
-        {
-            get;
-            private set;
-        }
+        public virtual IReportService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> ReportService { get; }
 
-        public virtual IReportParameterValueService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> ReportParameterValueService
-        { get; private set; }
-
-
-        public IContextEvaluator<TBLLContext> GetContextEvaluator(IServiceProvider currentScopedServiceProvider = null) => this.ServiceEnvironment.GetContextEvaluator(currentScopedServiceProvider);
-
-        public IBLLContextContainer<TBLLContext> GetBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null)
-        {
-            return this.ServiceEnvironment.GetBLLContextContainer(scopedServiceProvider, session, currentPrincipalName);
-        }
-
-        public IDBSessionFactory SessionConfiguration => this.ServiceEnvironment.SessionConfiguration;
+        public virtual IReportParameterValueService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> ReportParameterValueService { get; }
 
         public bool IsDebugMode => this.ServiceEnvironment.IsDebugMode;
 

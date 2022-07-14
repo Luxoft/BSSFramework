@@ -12,6 +12,7 @@ using Framework.Configuration.Generated.DTO;
 using Framework.DomainDriven.BLL;
 
 using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests
 {

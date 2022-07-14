@@ -29,7 +29,7 @@ namespace SampleSystem.IntegrationTests
             var parameter = this.DataHelper.SaveReportParameter(report);
             this.DataHelper.SaveReportFilter(report, parameter);
 
-            ((TestServiceEnvironment)this.Environment).IsDebugInTest = false;
+            ((SampleSystemTestServiceEnvironment)this.Environment).IsDebugInTest = false;
 
             var model = new ReportGenerationModelStrictDTO
             {

@@ -20,8 +20,7 @@ using SampleSystem.Domain.Projections;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Domain.ManualProjections;
-
-
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
 using BusinessRole = SampleSystem.IntegrationTests.__Support.Utils.BusinessRole;
 

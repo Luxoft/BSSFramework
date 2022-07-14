@@ -59,6 +59,14 @@ namespace Framework.DomainDriven.BLL
         /// <returns>System.Int64.</returns>
         long GetMaxRevision();
 
+        /// <summary>
+        /// Перевод сессию в режим "только для чтения" (доступно только перед фактическим использованием сессии)
+        /// </summary>
         void AsReadOnly();
+
+        /// <summary>
+        /// Переводит сессию в режим для записи (доступно только перед фактическим использованием сессии)
+        /// </summary>
+        void AsWritable();
     }
 }

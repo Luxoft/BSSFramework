@@ -28,10 +28,8 @@ using DataHelper = SampleSystem.IntegrationTests.__Support.TestData.Helpers.Data
 namespace SampleSystem.IntegrationTests.__Support.TestData
 {
     [TestClass]
-    public class TestBase : IControllerEvaluatorContainer
+    public class TestBase : IRootServiceProviderContainer
     {
-        private static readonly Lazy<SampleSystemServiceEnvironment> EnvironmentLazy = new(() => TestServiceEnvironment.Default, true);
-
         private DataHelper dataHelper;
 
         protected TestBase()
@@ -44,7 +42,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
             System.AppContext.SetSwitch("System.Drawing.EnableUnixSupport", true);
         }
 
-        protected virtual SampleSystemServiceEnvironment Environment => EnvironmentLazy.Value;
+        protected virtual SampleSystemTestServiceEnvironment Environment => SampleSystemTestServiceEnvironment.Default;
 
         public MainWebApi MainWebApi => new(this.Environment.ServiceProvider);
 
@@ -68,7 +66,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
 
         protected IDateTimeService DateTimeService => this.Environment.ServiceProvider.GetRequiredService<IDateTimeService>();
 
-        IServiceProvider IControllerEvaluatorContainer.RootServiceProvider => this.Environment.RootServiceProvider;
+        IServiceProvider IRootServiceProviderContainer.RootServiceProvider => this.Environment.RootServiceProvider;
 
         protected string DatabaseName { get; } = "SampleSystem";
 

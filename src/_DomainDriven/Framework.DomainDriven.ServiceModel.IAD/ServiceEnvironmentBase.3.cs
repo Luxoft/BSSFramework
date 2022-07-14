@@ -37,9 +37,8 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         protected ServiceEnvironmentBase(
             IServiceProvider serviceProvider,
             INotificationContext notificationContext,
-            [NotNull] AvailableValues availableValues,
-            ISubscriptionMetadataFinder subscriptionsMetadataFinder = null)
-            : base(serviceProvider, notificationContext, availableValues, subscriptionsMetadataFinder)
+            [NotNull] AvailableValues availableValues)
+            : base(serviceProvider, notificationContext, availableValues)
         {
         }
 

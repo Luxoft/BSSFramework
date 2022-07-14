@@ -34,6 +34,11 @@ namespace Framework.DomainDriven.NHibernate
         {
         }
 
+        public override void AsWritable()
+        {
+            throw new InvalidOperationException("Readonly session already created");
+        }
+
         public override void Dispose()
         {
             if (this.disposed)

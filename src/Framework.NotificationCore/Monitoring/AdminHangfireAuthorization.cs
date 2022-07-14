@@ -12,9 +12,9 @@ namespace Framework.NotificationCore.Monitoring;
 public class AdminHangfireAuthorization<TBllContext> : IDashboardAuthorizationFilter
         where TBllContext : IAuthorizationBLLContextContainer<IAuthorizationBLLContext>
 {
-    private readonly Lazy<IServiceEnvironment<TBllContext>> environment;
+    private readonly IContextEvaluator<TBllContext> contextEvaluator;
 
-    public AdminHangfireAuthorization(Lazy<IServiceEnvironment<TBllContext>> environment) => this.environment = environment;
+    public AdminHangfireAuthorization(IContextEvaluator<TBllContext> contextEvaluator) => this.contextEvaluator = contextEvaluator;
 
     public bool Authorize(DashboardContext context)
     {
@@ -25,10 +25,6 @@ public class AdminHangfireAuthorization<TBllContext> : IDashboardAuthorizationFi
             return false;
         }
 
-        return this.environment.Value
-                   .GetContextEvaluator()
-                   .Evaluate(
-                             DBSessionMode.Read,
-                             z => z.Authorization.Logics.BusinessRole.HasAdminRole());
+        return this.contextEvaluator.Evaluate(DBSessionMode.Read, z => z.Authorization.Logics.BusinessRole.HasAdminRole());
     }
 }

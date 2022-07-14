@@ -25,6 +25,7 @@ using NHibernate.Event;
 using NHibernate.Impl;
 
 using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests

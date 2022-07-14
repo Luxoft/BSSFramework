@@ -7,6 +7,7 @@ using Framework.Authorization.Events;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Core;
+using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.SecuritySystem.Rules.Builders;
@@ -21,6 +22,10 @@ using Framework.Report;
 using Framework.Security.Cryptography;
 using Framework.SecuritySystem;
 using Framework.Validation;
+
+using JetBrains.Annotations;
+
+using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
 using SampleSystem.Domain;
@@ -45,8 +50,6 @@ namespace SampleSystem.ServiceEnvironment
 
         private readonly ValidatorCompileCache validatorCompileCache;
 
-        private readonly Func<ISampleSystemBLLContext, ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>> securityExpressionBuilderFactoryFunc;
-
         private readonly IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService;
 
         private readonly ICryptService<CryptSystem> cryptService;
@@ -60,21 +63,21 @@ namespace SampleSystem.ServiceEnvironment
         public SampleSystemBllContextContainer(
             SampleSystemServiceEnvironment serviceEnvironment,
             IServiceProvider scopedServiceProvider,
+            IDBSession dbSession,
+            [NotNull] IUserAuthenticationService userAuthenticationService,
+            [NotNull] IDateTimeService dateTimeService,
+            SubscriptionMetadataStore subscriptionMetadataStore,
             ValidatorCompileCache defaultAuthorizationValidatorCompileCache,
             ValidatorCompileCache validatorCompileCache,
-            Func<ISampleSystemBLLContext, ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>> securityExpressionBuilderFactoryFunc,
             IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
             ICryptService<CryptSystem> cryptService,
             ITypeResolver<string> currentTargetSystemTypeResolver,
-            IDBSession session,
-            string currentPrincipalName,
             SmtpSettings smtpSettings,
             IRewriteReceiversService rewriteReceiversService)
-            : base(serviceEnvironment, scopedServiceProvider, session, currentPrincipalName)
+            : base(serviceEnvironment, scopedServiceProvider, dbSession, userAuthenticationService, dateTimeService, subscriptionMetadataStore)
         {
             this.defaultAuthorizationValidatorCompileCache = defaultAuthorizationValidatorCompileCache;
             this.validatorCompileCache = validatorCompileCache;
-            this.securityExpressionBuilderFactoryFunc = securityExpressionBuilderFactoryFunc;
             this.fetchService = fetchService;
             this.cryptService = cryptService;
             this.currentTargetSystemTypeResolver = currentTargetSystemTypeResolver;
@@ -92,8 +95,6 @@ namespace SampleSystem.ServiceEnvironment
         {
             var validator = LazyInterfaceImplementHelper.CreateProxy<IValidator>(() => new SampleSystemValidator(this.MainContext, this.validatorCompileCache));
 
-            var securityExpressionBuilderFactory = this.securityExpressionBuilderFactoryFunc ?? this.GetSecurityExpressionBuilderFactory<ISampleSystemBLLContext, PersistentDomainObjectBase, Guid>;
-
             return new SampleSystemBLLContext(
                 this.ScopedServiceProvider,
                 this.Session.GetDALFactory<SampleSystem.Domain.PersistentDomainObjectBase, Guid>(),
@@ -105,16 +106,14 @@ namespace SampleSystem.ServiceEnvironment
                 validator,
                 this.HierarchicalObjectExpanderFactory,
                 this.fetchService,
-                this.GetDateTimeService(),
+                this.ScopedServiceProvider.GetRequiredService<IDateTimeService>(),
                 LazyInterfaceImplementHelper.CreateProxy<ISampleSystemSecurityService>(() => new SampleSystemSecurityService(this.MainContext)),
-                LazyInterfaceImplementHelper.CreateProxy(() => securityExpressionBuilderFactory(this.MainContext)),
+                LazyInterfaceImplementHelper.CreateProxy(() => this.GetSecurityExpressionBuilderFactory<ISampleSystemBLLContext, PersistentDomainObjectBase, Guid>(this.MainContext)),
                 LazyInterfaceImplementHelper.CreateProxy<ISampleSystemBLLFactoryContainer>(() => new SampleSystemBLLFactoryContainer(this.MainContext)),
                 this.Authorization,
                 this.Configuration,
                 this.cryptService,
-                this.Impersonate,
-                this.currentTargetSystemTypeResolver,
-                this.Session);
+                this.currentTargetSystemTypeResolver);
         }
 
         public override ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> GetSecurityExpressionBuilderFactory<TBLLContext, TPersistentDomainObjectBase, TIdent>(TBLLContext context)
@@ -196,7 +195,7 @@ namespace SampleSystem.ServiceEnvironment
                                                               new AuthorizationLocalDBEventMessageSender(this.Authorization, this.Configuration)); // Sender для отправки евентов в локальную бд
         }
 
-        protected override IEnumerable<Framework.Configuration.BLL.ITargetSystemService> GetConfigurationTargetSystemServices(SubscriptionMetadataStore subscriptionMetadataStore)
+        protected override IEnumerable<Framework.Configuration.BLL.ITargetSystemService> GetConfigurationTargetSystemServices()
         {
             yield return this.GetMainConfigurationTargetSystemService();
             yield return this.GetAuthorizationConfigurationTargetSystemService();

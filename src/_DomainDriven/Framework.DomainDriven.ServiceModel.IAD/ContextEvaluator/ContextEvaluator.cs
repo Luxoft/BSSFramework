@@ -28,7 +28,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
             if (sessionMode == DBSessionMode.Read)
             {
-                //session.AsReadOnly();
+                session.AsReadOnly();
             }
 
             var defaultPrincipalName = scopeServiceProvider.GetRequiredService<IUserAuthenticationService>().GetUserName();

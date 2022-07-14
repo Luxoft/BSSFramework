@@ -19,7 +19,7 @@ namespace Framework.DependencyInjection
         public static void RegisterMessageSenderDependencies<TEnvironment, TBLLContext>(
             this IServiceCollection services,
             IConfiguration configuration)
-            where TEnvironment : IServiceEnvironment<TBLLContext>
+            where TEnvironment : IServiceEnvironment
             where TBLLContext : IConfigurationBLLContextContainer<IConfigurationBLLContext>
         {
             services.Configure<SmtpSettings>(configuration.GetSection("SmtpSettings"));

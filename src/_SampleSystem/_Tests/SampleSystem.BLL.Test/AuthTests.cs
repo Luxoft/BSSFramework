@@ -12,6 +12,7 @@ using Framework.Security;
 using Framework.SecuritySystem;
 using Framework.Transfering;
 
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
@@ -36,7 +37,7 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void TestExtractQueryableFromSecPath()
         {
-            TestServiceEnvironment.Default.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            SampleSystemTestServiceEnvironment.Default.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
             {
                 var bll = context.Logics.BusinessUnitHrDepartmentFactory.Create(BLLSecurityMode.View);
 
@@ -49,9 +50,9 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void TestPermissionDuplicates()
         {
-            IServiceEnvironment<IAuthorizationBLLContext> environment = TestServiceEnvironment.Default;
+            var contextEvaluator = SampleSystemTestServiceEnvironment.Default.RootServiceProvider.GetRequiredService<IContextEvaluator<IAuthorizationBLLContext>>();
 
-            environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            contextEvaluator.Evaluate(DBSessionMode.Write, context =>
             {
                 var entity = context.Logics.PermissionFilterEntity.GetObjectBy(fe => fe.EntityId == new Guid("38BFD64B-9268-464E-A8AB-0276BBEB1631"));
 
@@ -75,7 +76,7 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void TestLoadBY()
         {
-            var environment = TestServiceEnvironment.Default;
+            var environment = SampleSystemTestServiceEnvironment.Default;
 
             environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, "Tester01", context =>
             {
@@ -88,7 +89,7 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void TestLoadProjections()
         {
-            var environment = TestServiceEnvironment.Default;
+            var environment = SampleSystemTestServiceEnvironment.Default;
 
             var facade = environment.ServiceProvider.GetDefaultControllerEvaluator<HRDepartmentController>("Tester01");
 
@@ -102,7 +103,7 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void TestConvertSecurityPath()
         {
-            var environment = TestServiceEnvironment.Default;
+            var environment = SampleSystemTestServiceEnvironment.Default;
 
             environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, "Tester01", (ISampleSystemBLLContext context) =>
             {
@@ -132,7 +133,7 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void ClearAuthDB()
         {
-            var environment = TestServiceEnvironment.Default;
+            var environment = SampleSystemTestServiceEnvironment.Default;
 
             environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
             {
@@ -149,7 +150,7 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void AddEntityTypes()
         {
-            var environment = TestServiceEnvironment.Default;
+            var environment = SampleSystemTestServiceEnvironment.Default;
 
             environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
             {
@@ -162,7 +163,7 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void AddSelfAdminPermissions()
         {
-            var environment = TestServiceEnvironment.Default;
+            var environment = SampleSystemTestServiceEnvironment.Default;
 
             environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
             {
@@ -182,7 +183,7 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void TestRemoveWithDelegate()
         {
-            var environment = TestServiceEnvironment.Default;
+            var environment = SampleSystemTestServiceEnvironment.Default;
 
             var principalName = "TestDelegateUser";
 

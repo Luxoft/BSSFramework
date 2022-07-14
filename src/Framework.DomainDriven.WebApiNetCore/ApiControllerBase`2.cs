@@ -16,7 +16,7 @@ namespace Framework.DomainDriven.WebApiNetCore
     /// <typeparam name="TServiceEnvironment">The type of the t service environment.</typeparam>
     /// <typeparam name="TBLLContext">The type of the TBLL context.</typeparam>
     public abstract class ApiControllerBase<TServiceEnvironment, TBLLContext> : ControllerBase, IApiControllerBase
-        where TServiceEnvironment : class, IServiceEnvironment<TBLLContext>
+        where TServiceEnvironment : class, IServiceEnvironment
         where TBLLContext : class, IConfigurationBLLContextContainer<IConfigurationBLLContext>,
         IAuthorizationBLLContextContainer<IAuthorizationBLLContextBase>
     {
@@ -25,7 +25,6 @@ namespace Framework.DomainDriven.WebApiNetCore
             IExceptionProcessor exceptionProcessor)
         {
             this.ServiceEnvironment = serviceEnvironment ?? throw new ArgumentNullException(nameof(serviceEnvironment));
-
             this.ExceptionProcessor = exceptionProcessor ?? throw new ArgumentNullException(nameof(exceptionProcessor));
         }
 

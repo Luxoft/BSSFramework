@@ -2,7 +2,7 @@
 
 namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
-public interface IControllerEvaluatorContainer
+public interface IRootServiceProviderContainer
 {
     IServiceProvider RootServiceProvider { get; }
 }

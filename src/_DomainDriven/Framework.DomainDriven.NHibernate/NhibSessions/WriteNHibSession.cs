@@ -128,6 +128,10 @@ namespace Framework.DomainDriven.NHibernate
             throw new InvalidOperationException("Writable session already created");
         }
 
+        public override void AsWritable()
+        {
+        }
+
         public override void Dispose()
         {
             if (this.disposed)

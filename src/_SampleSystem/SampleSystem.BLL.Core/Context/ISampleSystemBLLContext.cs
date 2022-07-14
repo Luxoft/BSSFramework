@@ -28,6 +28,5 @@ namespace SampleSystem.BLL
 
         IDateTimeServiceContainer
     {
-        IDBSession Session { get; }
     }
 }

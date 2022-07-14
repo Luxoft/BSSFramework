@@ -12,22 +12,20 @@ using JetBrains.Annotations;
 namespace Framework.DomainDriven.WebApiNetCore
 {
     /// <inheritdoc />
-    public class ApiControllerExceptionService<TServiceEnvironment, TBLLContext> : IExceptionProcessor
+    public class ApiControllerExceptionService<TBLLContext> : IExceptionProcessor
         where TBLLContext : class, IConfigurationBLLContextContainer<IConfigurationBLLContext>
-        where TServiceEnvironment : IServiceEnvironment<TBLLContext>
     {
-        private readonly TServiceEnvironment serviceEnvironment;
+        private readonly IServiceEnvironment serviceEnvironment;
+
+        private readonly IContextEvaluator<TBLLContext> contextEvaluator;
 
         public ApiControllerExceptionService(
-            [NotNull] TServiceEnvironment serviceEnvironment,
-            bool expandDetailException = true)
+                [NotNull] IServiceEnvironment serviceEnvironment,
+                [NotNull] IContextEvaluator<TBLLContext> contextEvaluator,
+                bool expandDetailException = true)
         {
-            if (serviceEnvironment == null)
-            {
-                throw new ArgumentNullException(nameof(serviceEnvironment));
-            }
-
-            this.serviceEnvironment = serviceEnvironment;
+            this.serviceEnvironment = serviceEnvironment ?? throw new ArgumentNullException(nameof(serviceEnvironment));
+            this.contextEvaluator = contextEvaluator ?? throw new ArgumentNullException(nameof(contextEvaluator));
 
             this.ExpandDetailException = expandDetailException;
         }
@@ -39,7 +37,7 @@ namespace Framework.DomainDriven.WebApiNetCore
 
         /// <inheritdoc />
         public Exception Process(Exception exception) =>
-            this.serviceEnvironment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context => this.Process(exception, context));
+            this.contextEvaluator.Evaluate(DBSessionMode.Write, context => this.Process(exception, context));
 
         /// <summary>
         ///     Safe Send To Mail Exception

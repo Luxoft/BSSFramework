@@ -38,10 +38,7 @@ namespace Framework.DomainDriven.WebApiGenerator.NetCore
 
         protected sealed override IEnumerable<CodeTypeReference> GetBaseTypes()
         {
-            var serviceEnvironmentTypeReference = new CodeTypeReference(typeof(IServiceEnvironment<>))
-            {
-                TypeArguments = { this.Configuration.Environment.BLLCore.BLLContextInterfaceTypeReference }
-            };
+            var serviceEnvironmentTypeReference = new CodeTypeReference(typeof(IServiceEnvironment));
 
             var evaluateDataTypeReference = this.GetEvaluateDataTypeReference();
 

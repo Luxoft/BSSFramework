@@ -30,7 +30,7 @@ namespace SampleSystem.WebApiCore.Controllers;
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
 public class WorkflowController : ApiControllerBase<
-        IServiceEnvironment<ISampleSystemBLLContext>,
+        SampleSystemServiceEnvironment,
         ISampleSystemBLLContext, EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>
 {
     private readonly StartWorkflowJob startWorkflowJob;
@@ -40,7 +40,7 @@ public class WorkflowController : ApiControllerBase<
     private readonly IUserAuthenticationService userAuthenticationService;
 
     public WorkflowController(
-            IServiceEnvironment<ISampleSystemBLLContext> environment,
+            SampleSystemServiceEnvironment environment,
             IExceptionProcessor exceptionProcessor,
             StartWorkflowJob startWorkflowJob,
             IWorkflowHost workflowHost,

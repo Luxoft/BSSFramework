@@ -33,10 +33,9 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         protected ServiceEnvironmentBase(
             IServiceProvider serviceProvider,
             INotificationContext notificationContext,
-            [NotNull] AvailableValues availableValues,
-            ISubscriptionMetadataFinder subscriptionsMetadataFinder = null)
+            [NotNull] AvailableValues availableValues)
 
-            : base(serviceProvider, notificationContext, availableValues, subscriptionsMetadataFinder)
+            : base(serviceProvider, notificationContext, availableValues)
         {
         }
 
@@ -52,8 +51,9 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     IServiceProvider scopedServiceProvider,
                     IDBSession session,
                     [NotNull] IUserAuthenticationService userAuthenticationService,
-                    [NotNull] IDateTimeService dateTimeService)
-                : base(serviceEnvironment, scopedServiceProvider, session, userAuthenticationService, dateTimeService)
+                    [NotNull] IDateTimeService dateTimeService,
+                    SubscriptionMetadataStore subscriptionMetadataStore)
+                : base(serviceEnvironment, scopedServiceProvider, session, userAuthenticationService, dateTimeService, subscriptionMetadataStore)
             {
                 this.serviceEnvironment = serviceEnvironment;
 
@@ -88,12 +88,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                 return new HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, Guid>(this.MainContext.GetQueryableSource(), new ProjectionHierarchicalRealTypeResolver());
             }
 
-            protected TBLLContext Impersonate(string principalName)
-            {
-                return this.serviceEnvironment.GetBLLContextContainer(this.ScopedServiceProvider, this.Session, principalName).MainContext;
-            }
-
-            protected override IEnumerable<ITargetSystemService> GetConfigurationTargetSystemServices(SubscriptionMetadataStore subscriptionMetadataStore)
+            protected override IEnumerable<ITargetSystemService> GetConfigurationTargetSystemServices()
             {
                 yield return this.GetConfigurationConfigurationTargetSystemService();
             }
@@ -105,7 +100,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     this.MainContext,
                     this.Configuration.Logics.TargetSystem.GetObjectBy(ts => ts.IsMain, true),
                     this.GetMainEventDALListeners(),
-                    this.ServiceEnvironment.SubscriptionMetadataStore);
+                    this.SubscriptionMetadataStore);
             }
 
             /// <inheritdoc />

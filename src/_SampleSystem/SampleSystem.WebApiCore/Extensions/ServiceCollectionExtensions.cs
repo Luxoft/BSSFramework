@@ -19,7 +19,6 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterLegacyBLLContext(this IServiceCollection services)
     {
-        services.RegisterEvaluateScopeManager<ISampleSystemBLLContext>();
         services.RegisterAuthorizationSystem();
 
         services.RegisterAuthorizationBLL();
@@ -50,8 +49,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddScopedByContainer<T>(this IServiceCollection services, Func<IServiceEnvironmentBLLContextContainer<ISampleSystemBLLContext>, T> func)
             where T : class
     {
-        return services.AddScopedFactory(sp => sp.GetRequiredService<IEvaluateScopeManager<ISampleSystemBLLContext>>()
-                                                          .Pipe(manager => FuncHelper.Create(() => func(manager.CurrentBLLContextContainer))));
+        return services.AddScoped(sp => sp.GetRequiredService<IServiceEnvironmentBLLContextContainer<ISampleSystemBLLContext>>().Pipe(func));
     }
 
     public static IServiceCollection RegisterDependencyInjections(this IServiceCollection services, IConfiguration configuration)

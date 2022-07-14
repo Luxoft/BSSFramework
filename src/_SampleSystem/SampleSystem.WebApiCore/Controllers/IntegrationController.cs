@@ -11,16 +11,16 @@ using Framework.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using SampleSystem.BLL;
 using SampleSystem.Generated.DTO;
+using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.WebApiCore.Controllers
 {
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    public class IntegrationController : IntegrationSchemaControllerBase<IServiceEnvironment<ISampleSystemBLLContext>,
-        ISampleSystemBLLContext, EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>
+    public class IntegrationController : IntegrationSchemaControllerBase<SampleSystemServiceEnvironment, ISampleSystemBLLContext, EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>
     {
-        public IntegrationController(IServiceEnvironment<ISampleSystemBLLContext> environment, IExceptionProcessor exceptionProcessor)
+        public IntegrationController(SampleSystemServiceEnvironment environment, IExceptionProcessor exceptionProcessor)
             : base(environment, exceptionProcessor)
         {
         }

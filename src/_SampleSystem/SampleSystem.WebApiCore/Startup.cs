@@ -8,6 +8,7 @@ using DotNetCore.CAP;
 using Framework.Authorization.ApproveWorkflow;
 using Framework.Core;
 using Framework.DependencyInjection;
+using Framework.DomainDriven.BLL;
 using Framework.WebApi.Utils;
 
 using MediatR;
@@ -118,14 +119,14 @@ namespace SampleSystem.WebApiCore
 
         private void UseHangfireBss(IApplicationBuilder app)
         {
-            var environment = LazyHelper.Create(
+            var contextEvaluator = LazyInterfaceImplementHelper.CreateProxy(
                             () =>
                             {
                                 var serviceProvider = new ServiceCollection()
                                                             .AddEnvironment(this.Configuration)
                                                             .BuildServiceProvider();
 
-                                return serviceProvider.GetRequiredService<SampleSystemServiceEnvironment>();
+                                return serviceProvider.GetRequiredService<IContextEvaluator<ISampleSystemBLLContext>>();
                             });
 
             app.UseHangfireBss(
@@ -134,7 +135,7 @@ namespace SampleSystem.WebApiCore
                 {
                     JobList.RunAll(z);
                 },
-                authorizationFilter: new SampleSystemHangfireAuthorization(environment));
+                authorizationFilter: new SampleSystemHangfireAuthorization(contextEvaluator));
         }
     }
 }

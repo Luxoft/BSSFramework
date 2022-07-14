@@ -21,8 +21,6 @@ namespace SampleSystem.BLL
 {
     public partial class SampleSystemBLLContext
     {
-        private readonly Func<string, ISampleSystemBLLContext> _impersonateFunc;
-
         public SampleSystemBLLContext(
             IServiceProvider serviceProvider,
             [NotNull] IDALFactory<PersistentDomainObjectBase, Guid> dalFactory,
@@ -41,8 +39,7 @@ namespace SampleSystem.BLL
             [NotNull] IAuthorizationBLLContext authorization,
             [NotNull] Framework.Configuration.BLL.IConfigurationBLLContext configuration,
             [NotNull] ICryptService<CryptSystem> cryptService,
-            [NotNull] ITypeResolver<string> currentTargetSystemTypeResolver,
-            [NotNull] IDBSession session)
+            [NotNull] ITypeResolver<string> currentTargetSystemTypeResolver)
             : base(serviceProvider, dalFactory, operationListeners, sourceListeners, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService, dateTimeService)
         {
             this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
@@ -56,7 +53,6 @@ namespace SampleSystem.BLL
             this.CryptService = cryptService ?? throw new ArgumentNullException(nameof(cryptService));
 
             this.TypeResolver = currentTargetSystemTypeResolver ?? throw new ArgumentNullException(nameof(currentTargetSystemTypeResolver));
-            this.Session = session ?? throw new ArgumentNullException(nameof(session));
         }
 
         public ISampleSystemSecurityService SecurityService { get; }
@@ -72,14 +68,6 @@ namespace SampleSystem.BLL
         public ICryptService<CryptSystem> CryptService { get; }
 
         public ITypeResolver<string> TypeResolver { get; }
-
-        [NotNull]
-        public IDBSession Session { get; }
-
-        public ISampleSystemBLLContext Impersonate(string principalName)
-        {
-            return this._impersonateFunc(principalName);
-        }
 
         public override bool AllowVirtualPropertyInOdata(Type domainType)
         {

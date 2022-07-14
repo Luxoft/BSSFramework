@@ -7,8 +7,6 @@ using Framework.Exceptions;
 
 using JetBrains.Annotations;
 
-using Microsoft.Extensions.DependencyInjection;
-
 using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
 
 namespace Framework.NotificationCore.Jobs
@@ -16,25 +14,21 @@ namespace Framework.NotificationCore.Jobs
     public class SendNotificationsJob<TBLLContext> : ISendNotificationsJob
         where TBLLContext: IConfigurationBLLContextContainer<IConfigurationBLLContext>
     {
-        private readonly IServiceEnvironment<TBLLContext> serviceEnvironment;
+        private readonly IContextEvaluator<TBLLContext> contextEvaluator;
 
         private readonly IExceptionProcessor exceptionProcessor;
 
-        private readonly IServiceProvider serviceProvider;
-
         public SendNotificationsJob(
-            [NotNull] IServiceEnvironment<TBLLContext> serviceEnvironment,
-            [NotNull] IExceptionProcessor exceptionProcessor,
-            [NotNull] IServiceProvider serviceProvider)
+            [NotNull] IContextEvaluator<TBLLContext> contextEvaluator,
+            [NotNull] IExceptionProcessor exceptionProcessor)
         {
-            this.serviceEnvironment = serviceEnvironment ?? throw new ArgumentNullException(nameof(serviceEnvironment));
+            this.contextEvaluator = contextEvaluator ?? throw new ArgumentNullException(nameof(contextEvaluator));
             this.exceptionProcessor = exceptionProcessor ?? throw new ArgumentNullException(nameof(exceptionProcessor));
-            this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
         }
 
         public void Send()
         {
-            var result = this.serviceEnvironment.GetContextEvaluator(this.serviceProvider).Evaluate(
+            var result = this.contextEvaluator.Evaluate(
                 DBSessionMode.Write,
                 // todo: нужен рефакторинг - хотим разделить создание и отправку нотификаций, а то сейчас всё в кучу свалено
                 z =>

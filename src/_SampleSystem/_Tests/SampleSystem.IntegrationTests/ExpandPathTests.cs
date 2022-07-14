@@ -10,6 +10,8 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 
 using Framework.DomainDriven.BLL;
 
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
+
 namespace SampleSystem.IntegrationTests
 {
     [TestClass]

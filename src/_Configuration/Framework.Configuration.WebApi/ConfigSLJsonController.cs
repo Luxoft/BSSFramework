@@ -21,9 +21,9 @@ namespace Framework.Configuration.WebApi
     [Route("ConfigSLJsonFacade.svc")]
     [ApiExplorerSettings(IgnoreApi = true)]
     //[Authorize(nameof(AuthenticationSchemes.NTLM))]
-    public abstract partial class ConfigSLJsonController : ApiControllerBase<IServiceEnvironment<IConfigurationBLLContext>, IConfigurationBLLContext, EvaluatedData<IConfigurationBLLContext, IConfigurationDTOMappingService>>
+    public abstract partial class ConfigSLJsonController : ApiControllerBase<IServiceEnvironment, IConfigurationBLLContext, EvaluatedData<IConfigurationBLLContext, IConfigurationDTOMappingService>>
     {
-        protected ConfigSLJsonController(IServiceEnvironment<IConfigurationBLLContext> environment, IExceptionProcessor exceptionProcessor)
+        protected ConfigSLJsonController(IServiceEnvironment environment, IExceptionProcessor exceptionProcessor)
             : base(environment, exceptionProcessor)
         {
         }

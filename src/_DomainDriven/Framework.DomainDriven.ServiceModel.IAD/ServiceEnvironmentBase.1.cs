@@ -11,17 +11,15 @@ using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.ServiceModel.IAD
 {
-    public abstract partial class ServiceEnvironmentBase<TBLLContextContainer, TBLLContext> : ServiceEnvironmentBase, IRootServiceEnvironment<TBLLContext, TBLLContextContainer>
+    public abstract class ServiceEnvironmentBase<TBLLContextContainer, TBLLContext> : ServiceEnvironmentBase
         where TBLLContextContainer : ServiceEnvironmentBase<TBLLContextContainer, TBLLContext>.ServiceEnvironmentBLLContextContainer
         where TBLLContext : ITypeResolverContainer<string>
     {
         protected ServiceEnvironmentBase(
             IServiceProvider serviceProvider,
             INotificationContext notificationContext,
-            [NotNull] AvailableValues availableValues,
-
-            ISubscriptionMetadataFinder subscriptionsMetadataFinder = null)
-            : base(serviceProvider, notificationContext, availableValues, subscriptionsMetadataFinder)
+            [NotNull] AvailableValues availableValues)
+            : base(serviceProvider, notificationContext, availableValues)
         {
             this.ServiceProvider = serviceProvider;
         }
@@ -84,21 +82,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                    select new SubscriptionDALListener(targetSystemService, container.SubscriptionService);
         }
 
-        public TBLLContextContainer GetBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null)
-        {
-            var container = this.CreateBLLContextContainer(scopedServiceProvider, session, currentPrincipalName);
-
-            if (!this.IsInitialize)
-            {
-                container.SubscribeEvents();
-            }
-
-            return container;
-        }
-
-        protected abstract TBLLContextContainer CreateBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null);
-
-
         public new abstract class ServiceEnvironmentBLLContextContainer : ServiceEnvironmentBase.ServiceEnvironmentBLLContextContainer, IServiceEnvironmentBLLContextContainer<TBLLContext>, IBLLContextContainer<TBLLContext>
         {
             private readonly ServiceEnvironmentBase<TBLLContextContainer, TBLLContext> serviceEnvironment;
@@ -108,8 +91,9 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     IServiceProvider scopedServiceProvider,
                     IDBSession session,
                     [NotNull] IUserAuthenticationService userAuthenticationService,
-                    [NotNull] IDateTimeService dateTimeService)
-                : base(serviceEnvironment, scopedServiceProvider, session, userAuthenticationService, dateTimeService)
+                    [NotNull] IDateTimeService dateTimeService,
+                    SubscriptionMetadataStore subscriptionMetadataStore)
+                : base(serviceEnvironment, scopedServiceProvider, session, userAuthenticationService, dateTimeService, subscriptionMetadataStore)
             {
                 this.serviceEnvironment = serviceEnvironment;
                 this.MainContext = LazyInterfaceImplementHelper.CreateProxy(this.CreateMainContext);

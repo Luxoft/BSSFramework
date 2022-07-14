@@ -33,7 +33,7 @@ using ReportIdentityDTO = Framework.Configuration.Generated.DTO.ReportIdentityDT
 namespace Framework.CustomReports.WebApi
 {
     public abstract class GenericReportControllerBase<TServiceEnvironment, TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode, TIdent, TMappingService> : ApiControllerBase<TServiceEnvironment, TBLLContext, EvaluatedData<TBLLContext, TMappingService>>
-        where TServiceEnvironment : class, IServiceEnvironment<TBLLContext>, ISystemMetadataTypeBuilderContainer, IReportServiceContainer<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>, ISecurityOperationCodeProviderContainer<TSecurityOperationCode>
+        where TServiceEnvironment : class, IServiceEnvironment, ISystemMetadataTypeBuilderContainer, IReportServiceContainer<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>, ISecurityOperationCodeProviderContainer<TSecurityOperationCode>
 
         where TBLLContext : class,
 

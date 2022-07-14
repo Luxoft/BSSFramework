@@ -37,8 +37,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         protected ServiceEnvironmentBase(
             [NotNull] IServiceProvider serviceProvider,
             [NotNull] INotificationContext notificationContext,
-            [NotNull] AvailableValues availableValues,
-            ISubscriptionMetadataFinder subscriptionsMetadataFinder = null)
+            [NotNull] AvailableValues availableValues)
         {
             this.RootServiceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
             this.NotificationContext = notificationContext ?? throw new ArgumentNullException(nameof(notificationContext));
@@ -65,8 +64,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             this.AuthorizationFetchService = new AuthorizationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Authorization.Domain.PersistentDomainObjectBase>.OData);
 
             this.ConfigurationFetchService = new ConfigurationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Configuration.Domain.PersistentDomainObjectBase>.OData);
-
-            this.SubscriptionMetadataStore = new SubscriptionMetadataStore(subscriptionsMetadataFinder ?? new SubscriptionMetadataFinder());
         }
 
         /// <summary>
@@ -99,15 +96,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         /// </summary>
         public bool IsInitialize { get; private set; }
 
-        /// <summary>
-        /// Получает хранилище описаний подписок.
-        /// </summary>
-        /// <value>
-        /// Хранилище описаний подписок.
-        /// </value>
-        public SubscriptionMetadataStore SubscriptionMetadataStore { get; }
-
-        protected void InitializeOperation(Action operation)
+        public void InitializeOperation(Action operation)
         {
             if (operation == null) throw new ArgumentNullException(nameof(operation));
 
@@ -175,11 +164,13 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     [NotNull] IServiceProvider scopedServiceProvider,
                     [NotNull] IDBSession session,
                     [NotNull] IUserAuthenticationService userAuthenticationService,
-                    [NotNull] IDateTimeService dateTimeService)
+                    [NotNull] IDateTimeService dateTimeService,
+                    SubscriptionMetadataStore subscriptionMetadataStore)
             {
                 this.ServiceEnvironment = serviceEnvironment ?? throw new ArgumentNullException(nameof(serviceEnvironment));
                 this.ScopedServiceProvider = scopedServiceProvider ?? throw new ArgumentNullException(nameof(scopedServiceProvider));
                 this.Session = session ?? throw new ArgumentNullException(nameof(session));
+                this.SubscriptionMetadataStore = subscriptionMetadataStore;
 
                 this.userAuthenticationService = userAuthenticationService ?? throw new ArgumentNullException(nameof(userAuthenticationService));
                 this.dateTimeService = dateTimeService ?? throw new ArgumentNullException(nameof(dateTimeService));
@@ -189,7 +180,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
                 this.NotificationService = LazyInterfaceImplementHelper.CreateProxy(this.CreateNotificationService);
 
-                this.targetSystems = LazyHelper.Create(() => this.GetConfigurationTargetSystemServices(serviceEnvironment.SubscriptionMetadataStore)).Unwrap();
+                this.targetSystems = LazyHelper.Create(this.GetConfigurationTargetSystemServices).Unwrap();
 
                 this.Authorization = LazyInterfaceImplementHelper.CreateProxy(this.CreateAuthorizationBLLContext);
 
@@ -243,6 +234,14 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             public IHierarchicalObjectExpanderFactory<Guid> HierarchicalObjectExpanderFactory { get; }
 
             protected virtual ISerializerFactory<string> SystemConstantSerializerFactory { get; }
+
+            /// <summary>
+            /// Получает хранилище описаний подписок.
+            /// </summary>
+            /// <value>
+            /// Хранилище описаний подписок.
+            /// </value>
+            public SubscriptionMetadataStore SubscriptionMetadataStore { get; }
 
             protected virtual IEnumerable<IBLLContextContainerModule> GetModules()
             {
@@ -449,8 +448,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                 return new ExceptionService(this.Configuration);
             }
 
-            protected virtual IEnumerable<Framework.Configuration.BLL.ITargetSystemService> GetConfigurationTargetSystemServices(
-                SubscriptionMetadataStore subscriptionMetadataStore)
+            protected virtual IEnumerable<Framework.Configuration.BLL.ITargetSystemService> GetConfigurationTargetSystemServices()
             {
                 yield break;
             }
@@ -477,7 +475,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     this.Configuration,
                     this.Configuration.Logics.TargetSystem.GetByName(TargetSystemHelper.ConfigurationName, true),
                     this.GetConfigurationEventDALListeners(),
-                    this.ServiceEnvironment.SubscriptionMetadataStore);
+                    this.SubscriptionMetadataStore);
             }
 
             protected Framework.Configuration.BLL.ITargetSystemService GetAuthorizationConfigurationTargetSystemService()
@@ -487,7 +485,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     this.Authorization,
                     this.Configuration.Logics.TargetSystem.GetByName(TargetSystemHelper.AuthorizationName, true),
                     this.GetAuthorizationEventDALListeners(),
-                    this.ServiceEnvironment.SubscriptionMetadataStore);
+                    this.SubscriptionMetadataStore);
             }
 
             /// <summary>

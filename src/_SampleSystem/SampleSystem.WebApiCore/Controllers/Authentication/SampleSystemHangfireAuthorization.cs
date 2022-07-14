@@ -19,20 +19,20 @@ namespace SampleSystem.WebApiCore
     /// </summary>
     public class SampleSystemHangfireAuthorization : IDashboardAuthorizationFilter
     {
-        private readonly Lazy<SampleSystemServiceEnvironment> environment;
+        private readonly IContextEvaluator<ISampleSystemBLLContext> contextEvaluator;
 
         private readonly IDashboardAuthorizationFilter baseFilter;
 
-        public SampleSystemHangfireAuthorization(Lazy<SampleSystemServiceEnvironment> environment)
+        public SampleSystemHangfireAuthorization(IContextEvaluator<ISampleSystemBLLContext> contextEvaluator)
         {
-            this.baseFilter = new AdminHangfireAuthorization<ISampleSystemBLLContext>(LazyHelper.Create(() => (IServiceEnvironment<ISampleSystemBLLContext>)this.environment.Value));
+            this.baseFilter = new AdminHangfireAuthorization<ISampleSystemBLLContext>(contextEvaluator);
 
-            this.environment = environment;
+            this.contextEvaluator = contextEvaluator;
         }
 
         public bool Authorize(DashboardContext context)
         {
-            return this.environment.Value.GetContextEvaluator().Evaluate(
+            return this.contextEvaluator.Evaluate(
                 DBSessionMode.Read,
                 z =>
                 {

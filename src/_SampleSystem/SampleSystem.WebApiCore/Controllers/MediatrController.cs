@@ -22,14 +22,14 @@ namespace SampleSystem.WebApiCore.Controllers
     [ApiVersion("1.0")]
     [Route("authApi/v{version:apiVersion}/[controller]/[action]")]
     public class MediatrController : ApiControllerBase<
-            IServiceEnvironment<ISampleSystemBLLContext>,
+            IServiceEnvironment,
             ISampleSystemBLLContext, EvaluatedData<
             ISampleSystemBLLContext, ISampleSystemDTOMappingService>>
     {
         private readonly IMediator mediator;
 
         public MediatrController(
-                IServiceEnvironment<ISampleSystemBLLContext> serviceEnvironment,
+                IServiceEnvironment serviceEnvironment,
                 IExceptionProcessor exceptionProcessor,
                 IMediator mediator)
                 : base(serviceEnvironment, exceptionProcessor) =>

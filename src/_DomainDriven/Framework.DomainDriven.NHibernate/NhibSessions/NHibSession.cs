@@ -1,179 +1,132 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 using Framework.Core;
+using Framework.DomainDriven.Audit;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Tracking;
-using Framework.DomainDriven.DAL.Revisions;
 using Framework.Persistent;
 
 using JetBrains.Annotations;
 
-using NHibernate;
-using NHibernate.Envers.Patch;
+namespace Framework.DomainDriven.NHibernate;
 
-namespace Framework.DomainDriven.NHibernate
+public class NHibSession : IDBSession
 {
-    public abstract class NHibSessionBase : IDBSession
+    private DBSessionMode? sessionMode;
+
+    private readonly Lazy<IDBSession> lazyInnerSession;
+
+    public NHibSession([NotNull] NHibSessionConfiguration configuration,
+                       [NotNull] IEnumerable<IAuditProperty> modifyAuditProperties,
+                       [NotNull] IEnumerable<IAuditProperty> createAuditProperties,
+                       DBSessionMode defaultSessionMode = DBSessionMode.Write)
     {
-        private Lazy<IAuditReaderPatched> lazyAuditReader { get; }
+        if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-        internal NHibSessionBase(NHibSessionConfiguration sessionFactory, DBSessionMode sessionMode)
+        if (!Enum.IsDefined(typeof(DBSessionMode), defaultSessionMode))
         {
-            this.SessionConfiguration = sessionFactory ?? throw new ArgumentNullException(nameof(sessionFactory));
-            this.SessionMode = sessionMode;
-
-            this.lazyAuditReader = LazyHelper.Create(() => this.InnerSession.GetAuditReader());
-
-
-            this.InnerSession = this.SessionConfiguration.InternalSessionFactory.OpenSession();
-            this.InnerSession.FlushMode = FlushMode.Manual;
+            throw new InvalidEnumArgumentException(nameof(defaultSessionMode), (int)defaultSessionMode, typeof(DBSessionMode));
         }
 
-        public DBSessionMode SessionMode { get; }
-
-        public IAuditReaderPatched AuditReader => this.lazyAuditReader.Value;
-
-        public ISession InnerSession { get; }
-
-        protected internal NHibSessionConfiguration SessionConfiguration { get; }
-
-        protected bool HasFlushedListeners => this.Flushed != null;
-
-        public abstract void RegisterModified<TDomainObject>(TDomainObject domainObject, ModificationType modificationType);
-
-        /// <inheritdoc />
-        public abstract void Flush();
-
-        /// <inheritdoc />
-        public long GetCurrentRevision()
+        this.lazyInnerSession = new Lazy<IDBSession>(() =>
         {
-            return this.AuditReader.GetCurrentRevision<AuditRevisionEntity>(false).Id;
-        }
+            switch (this.sessionMode ?? defaultSessionMode)
+            {
+                case DBSessionMode.Read:
+                    return new ReadOnlyNHibSession(configuration);
 
-        /// <inheritdoc />
-        public long GetMaxRevision()
-        {
-            return this.AuditReader.GetMaxRevision();
-        }
+                case DBSessionMode.Write:
+                    return new WriteNHibSession(configuration, modifyAuditProperties, createAuditProperties);
 
-        public abstract IEnumerable<ObjectModification> GetModifiedObjectsFromLogic();
-
-        public abstract IEnumerable<ObjectModification> GetModifiedObjectsFromLogic<TPersistentDomainObjectBase>();
-
-        public abstract void ManualFault();
-
-        public abstract void AsReadOnly();
-
-        public IObjectStateService GetObjectStateService()
-        {
-            return new NHibObjectStatesService(this.InnerSession);
-        }
-
-        public IDALFactory<TPersistentDomainObjectBase, TIdent> GetDALFactory<TPersistentDomainObjectBase, TIdent>()
-            where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        {
-            return new NHibDalFactory<TPersistentDomainObjectBase, TIdent>(this);
-        }
-
-        protected virtual void OnFlushed([NotNull] DALChangesEventArgs e)
-        {
-            if (e == null) throw new ArgumentNullException(nameof(e));
-
-            this.Flushed?.Invoke(this, e);
-        }
-
-        protected virtual void OnBeforeTransactionCompleted([NotNull] DALChangesEventArgs e)
-        {
-            if (e == null) throw new ArgumentNullException(nameof(e));
-
-            this.BeforeTransactionCompleted?.Invoke(this, e);
-        }
-
-        protected virtual void OnAfterTransactionCompleted([NotNull] DALChangesEventArgs e)
-        {
-            if (e == null) throw new ArgumentNullException(nameof(e));
-
-            this.AfterTransactionCompleted?.Invoke(this, e);
-        }
-        protected virtual void OnClosed([NotNull] EventArgs e)
-        {
-            if (e == null) throw new ArgumentNullException(nameof(e));
-
-            this.Closed?.Invoke(this, e);
-        }
-
-        protected void ClearEvents()
-        {
-            this.Flushed = null;
-            this.BeforeTransactionCompleted = null;
-            this.AfterTransactionCompleted = null;
-            this.Closed = null;
-        }
-
-        public event EventHandler<DALChangesEventArgs> Flushed;
-
-        public event EventHandler<DALChangesEventArgs> BeforeTransactionCompleted;
-
-        public event EventHandler<DALChangesEventArgs> AfterTransactionCompleted;
-
-        public event EventHandler Closed;
-
-        public abstract void Dispose();
+                default:
+                    throw new InvalidOperationException();
+            }
+        });
     }
 
+    public IDBSession InnerSession => this.lazyInnerSession.Value;
 
+    public DBSessionMode SessionMode => this.InnerSession.SessionMode;
 
-    //public class NHibSession
-    //{
-    //    public NHibSession()
-    //    {
+    public IObjectStateService GetObjectStateService()
+    {
+        return this.InnerSession.GetObjectStateService();
+    }
 
-    //    }
+    public IDALFactory<TPersistentDomainObjectBase, TIdent> GetDALFactory<TPersistentDomainObjectBase, TIdent>()
+            where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+    {
+        return this.InnerSession.GetDALFactory<TPersistentDomainObjectBase, TIdent>();
+    }
 
-    //    private IDBSession Create(DBSessionMode openMode)
-    //    {
-    //        if (DBSessionMode.Read == openMode)
-    //        {
-    //            return new ReadOnlyNHibSession(this);
-    //        }
+    public void Flush()
+    {
+        this.InnerSession.Flush();
+    }
 
-    //        return new WriteNHibSession(this);
-    //    }
+    public long GetCurrentRevision() => this.InnerSession.GetCurrentRevision();
 
-    //    protected internal void OnSessionFlushed([NotNull] SessionFlushedEventArgs e)
-    //    {
-    //        if (e == null) throw new ArgumentNullException(nameof(e));
+    public IEnumerable<ObjectModification> GetModifiedObjectsFromLogic() => this.InnerSession.GetModifiedObjectsFromLogic();
 
-    //        this.SessionFlushed.Maybe(handler => handler(this, e));
-    //    }
+    public IEnumerable<ObjectModification> GetModifiedObjectsFromLogic<TPersistentDomainObjectBase>() => this.InnerSession.GetModifiedObjectsFromLogic<TPersistentDomainObjectBase>();
 
-    //    protected internal virtual void OnSessionAfterTransactionCompleted([NotNull] SessionFlushedEventArgs e)
-    //    {
-    //        if (e == null) { throw new ArgumentNullException(nameof(e)); }
+    public void ManualFault() => this.InnerSession.ManualFault();
 
-    //        this.SessionAfterTransactionCompleted?.Invoke(this, e);
-    //    }
+    public long GetMaxRevision() => this.InnerSession.GetMaxRevision();
 
-    //    protected internal virtual void OnSessionBeforeTransactionCompleted([NotNull] SessionFlushedEventArgs e)
-    //    {
-    //        if (e == null) { throw new ArgumentNullException(nameof(e)); }
+    public void AsReadOnly()
+    {
+        this.ApplySessionMode(DBSessionMode.Read);
+    }
 
-    //        this.SessionBeforeTransactionCompleted?.Invoke(this, e);
-    //    }
+    public void AsWritable()
+    {
+        this.ApplySessionMode(DBSessionMode.Write);
+    }
 
+    private void ApplySessionMode(DBSessionMode applySessionMode)
+    {
+        if (!this.lazyInnerSession.IsValueCreated)
+        {
+            this.sessionMode = applySessionMode;
+        }
+        else if (this.SessionMode != applySessionMode)
+        {
+            throw new InvalidOperationException("Session mode can't be changed after create session");
+        }
+    }
 
-    //    /// <summary> Session flushed event
-    //    /// </summary>
-    //    public event EventHandler<SessionFlushedEventArgs> SessionFlushed;
+    public void Dispose()
+    {
+        if (this.lazyInnerSession.IsValueCreated)
+        {
+            this.InnerSession.Dispose();
+        }
+    }
 
-    //    /// <summary> Transaction completed event
-    //    /// </summary>
-    //    [Obsolete("Use SessionAfterTransactionCompleted", true)]
-    //    public event EventHandler<SessionFlushedEventArgs> SessionTransactionCompleted;
+    public event EventHandler<DALChangesEventArgs> Flushed
+    {
+        add => this.InnerSession.Flushed += value;
+        remove => this.InnerSession.Flushed -= value;
+    }
 
-    //    public event EventHandler<SessionFlushedEventArgs> SessionBeforeTransactionCompleted;
+    public event EventHandler<DALChangesEventArgs> BeforeTransactionCompleted
+    {
+        add => this.InnerSession.BeforeTransactionCompleted += value;
+        remove => this.InnerSession.BeforeTransactionCompleted -= value;
+    }
 
-    //    public event EventHandler<SessionFlushedEventArgs> SessionAfterTransactionCompleted;
-    //}
+    public event EventHandler<DALChangesEventArgs> AfterTransactionCompleted
+    {
+        add => this.InnerSession.AfterTransactionCompleted += value;
+        remove => this.InnerSession.AfterTransactionCompleted -= value;
+    }
+
+    public event EventHandler Closed
+    {
+        add => this.InnerSession.Closed += value;
+        remove => this.InnerSession.Closed -= value;
+    }
 }

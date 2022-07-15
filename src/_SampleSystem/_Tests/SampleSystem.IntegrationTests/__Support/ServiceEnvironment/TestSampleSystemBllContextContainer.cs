@@ -20,14 +20,9 @@ public class TestSampleSystemBllContextContainer : SampleSystemBLLContextContain
     public TestSampleSystemBllContextContainer(
             SampleSystemServiceEnvironment serviceEnvironment,
             IServiceProvider scopedServiceProvider,
-            IDBSession dbSession,
-            IUserAuthenticationService userAuthenticationService,
-            SubscriptionMetadataStore subscriptionMetadataStore,
-            IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
-            ICryptService<CryptSystem> cryptService,
-            ITypeResolver<string> currentTargetSystemTypeResolver)
+            IDBSession dbSession)
 
-            : base(serviceEnvironment, scopedServiceProvider, dbSession, userAuthenticationService, subscriptionMetadataStore, fetchService, cryptService, currentTargetSystemTypeResolver)
+            : base(serviceEnvironment, scopedServiceProvider, dbSession)
     {
     }
 

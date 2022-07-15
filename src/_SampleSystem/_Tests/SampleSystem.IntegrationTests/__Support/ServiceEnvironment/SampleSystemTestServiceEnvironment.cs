@@ -105,7 +105,7 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .AddControllerEnvironment()
                                   .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
 
-                                  .AddScoped<SampleSystemBLLContextContainer>(sp => new TestSampleSystemBllContextContainer())
+                                  .AddScoped<SampleSystemBLLContextContainer, TestSampleSystemBllContextContainer>()
 
                                   .AddScoped<IntegrationTestsUserAuthenticationService>()
                                   .AddScoped<IUserAuthenticationService>(sp => sp.GetRequiredService<IntegrationTestsUserAuthenticationService>())

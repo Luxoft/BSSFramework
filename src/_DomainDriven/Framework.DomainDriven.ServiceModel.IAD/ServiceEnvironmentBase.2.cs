@@ -49,10 +49,8 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             protected ServiceEnvironmentBLLContextContainer(
                     ServiceEnvironmentBase<TBLLContextContainer, TBLLContext, TPersistentDomainObjectBase, TAuditPersistentDomainObjectBase, TSecurityOperationCode> serviceEnvironment,
                     IServiceProvider scopedServiceProvider,
-                    IDBSession session,
-                    [NotNull] IUserAuthenticationService userAuthenticationService,
-                    SubscriptionMetadataStore subscriptionMetadataStore)
-                : base(serviceEnvironment, scopedServiceProvider, session, userAuthenticationService, subscriptionMetadataStore)
+                    IDBSession session)
+                : base(serviceEnvironment, scopedServiceProvider, session)
             {
                 this.serviceEnvironment = serviceEnvironment;
 
@@ -60,10 +58,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             }
 
             protected IEventsSubscriptionManager<TBLLContext, TPersistentDomainObjectBase> MainEventsSubscriptionManager => this.lazyMainEventsSubscriptionManager.Value;
-
-            protected virtual ITypeResolver<string> SecurityObjectTypeResolver => this.MainContext.TypeResolver;
-
-
+            
             protected virtual IEventsSubscriptionManager<TBLLContext, TPersistentDomainObjectBase> CreateMainEventsSubscriptionManager()
             {
                 return null;
@@ -75,31 +70,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                 base.SubscribeEvents();
 
                 this.MainEventsSubscriptionManager.Maybe(eventManager => eventManager.Subscribe());
-            }
-
-            protected override IAuthorizationExternalSource GetAuthorizationExternalSource()
-            {
-                return new AuthorizationExternalSource<TBLLContext, TPersistentDomainObjectBase, TAuditPersistentDomainObjectBase, TSecurityOperationCode>(this.MainContext, this.Authorization, this.SecurityObjectTypeResolver);
-            }
-
-            protected override IHierarchicalObjectExpanderFactory<Guid> GetHierarchicalObjectExpanderFactory()
-            {
-                return new HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, Guid>(this.MainContext.GetQueryableSource(), new ProjectionHierarchicalRealTypeResolver());
-            }
-
-            protected override IEnumerable<ITargetSystemService> GetConfigurationTargetSystemServices()
-            {
-                yield return this.GetConfigurationConfigurationTargetSystemService();
-            }
-
-            protected Framework.Configuration.BLL.ITargetSystemService GetMainConfigurationTargetSystemService()
-            {
-                return new Framework.Configuration.BLL.TargetSystemService<TBLLContext, TPersistentDomainObjectBase>(
-                    this.Configuration,
-                    this.MainContext,
-                    this.Configuration.Logics.TargetSystem.GetObjectBy(ts => ts.IsMain, true),
-                    this.GetMainEventDALListeners(),
-                    this.SubscriptionMetadataStore);
             }
 
             /// <inheritdoc />

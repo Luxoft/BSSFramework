@@ -26,6 +26,8 @@ using Framework.Validation;
 
 using JetBrains.Annotations;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.DomainDriven.ServiceModel.IAD
 {
     public abstract class ServiceEnvironmentBase : IServiceEnvironment
@@ -128,11 +130,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         {
             protected readonly ServiceEnvironmentBase ServiceEnvironment;
 
-            private readonly IUserAuthenticationService userAuthenticationService;
-
-            private readonly IEnumerable<Framework.Configuration.BLL.ITargetSystemService> targetSystems;
-
-
 
             protected readonly BLLOperationEventListenerContainer<Framework.Authorization.Domain.DomainObjectBase>
                     AuthorizationOperationListeners =
@@ -160,30 +157,12 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             protected ServiceEnvironmentBLLContextContainer(
                     [NotNull] ServiceEnvironmentBase serviceEnvironment,
                     [NotNull] IServiceProvider scopedServiceProvider,
-                    [NotNull] IDBSession session,
-                    [NotNull] IUserAuthenticationService userAuthenticationService,
-                    SubscriptionMetadataStore subscriptionMetadataStore)
+                    [NotNull] IDBSession session)
             {
                 this.ServiceEnvironment = serviceEnvironment ?? throw new ArgumentNullException(nameof(serviceEnvironment));
                 this.ScopedServiceProvider = scopedServiceProvider ?? throw new ArgumentNullException(nameof(scopedServiceProvider));
                 this.Session = session ?? throw new ArgumentNullException(nameof(session));
-                this.SubscriptionMetadataStore = subscriptionMetadataStore;
-
-                this.userAuthenticationService = userAuthenticationService ?? throw new ArgumentNullException(nameof(userAuthenticationService));
-
-                this.StandartExpressionBuilder = LazyInterfaceImplementHelper.CreateProxy(this.GetStandartExpressionBuilder);
-
                 this.NotificationService = LazyInterfaceImplementHelper.CreateProxy(this.CreateNotificationService);
-
-                this.targetSystems = LazyHelper.Create(this.GetConfigurationTargetSystemServices).Unwrap();
-
-                this.Authorization = LazyInterfaceImplementHelper.CreateProxy(this.CreateAuthorizationBLLContext);
-
-                this.Configuration = LazyInterfaceImplementHelper.CreateProxy(this.CreateConfigurationBLLContext);
-
-                this.HierarchicalObjectExpanderFactory = LazyInterfaceImplementHelper.CreateProxy(this.GetHierarchicalObjectExpanderFactory);
-
-                this.SystemConstantSerializerFactory = SerializerFactory.Default;
 
                 this.lazyAuthorizationEventsSubscriptionManager = LazyHelper.Create(this.CreateAuthorizationEventsSubscriptionManager);
 
@@ -193,9 +172,9 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             public IServiceProvider ScopedServiceProvider { get; }
 
 
-            public IAuthorizationBLLContext Authorization { get; }
+            public IAuthorizationBLLContext Authorization => this.ScopedServiceProvider.GetRequiredService<IAuthorizationBLLContext>();
 
-            public IConfigurationBLLContext Configuration { get; }
+            public IConfigurationBLLContext Configuration => this.ScopedServiceProvider.GetRequiredService<IConfigurationBLLContext>();
 
             public IDBSession Session { get; }
 
@@ -206,37 +185,17 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
             #region IBLLContextContainer<AuthorizationBLLContext> Members
 
-            IAuthorizationBLLContext IBLLContextContainer<IAuthorizationBLLContext>.Context
-            {
-                get { return this.Authorization; }
-            }
+            IAuthorizationBLLContext IBLLContextContainer<IAuthorizationBLLContext>.Context => this.Authorization;
 
             #endregion
 
             #region IBLLContextContainer<ConfigurationBLLContext> Members
 
-            IConfigurationBLLContext IBLLContextContainer<IConfigurationBLLContext>.Context
-            {
-                get { return this.Configuration; }
-            }
+            IConfigurationBLLContext IBLLContextContainer<IConfigurationBLLContext>.Context => this.Configuration;
 
             #endregion
 
             protected INotificationService NotificationService { get; }
-
-            public IStandartExpressionBuilder StandartExpressionBuilder { get; }
-
-            public IHierarchicalObjectExpanderFactory<Guid> HierarchicalObjectExpanderFactory { get; }
-
-            protected virtual ISerializerFactory<string> SystemConstantSerializerFactory { get; }
-
-            /// <summary>
-            /// Получает хранилище описаний подписок.
-            /// </summary>
-            /// <value>
-            /// Хранилище описаний подписок.
-            /// </value>
-            public SubscriptionMetadataStore SubscriptionMetadataStore { get; }
 
             protected virtual IEnumerable<IBLLContextContainerModule> GetModules()
             {
@@ -376,46 +335,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             protected virtual IExceptionService GetExceptionService()
             {
                 return new ExceptionService(this.Configuration);
-            }
-
-            protected virtual IEnumerable<Framework.Configuration.BLL.ITargetSystemService> GetConfigurationTargetSystemServices()
-            {
-                yield break;
-            }
-
-            protected abstract ITypeResolver<string> GetSecurityTypeResolver();
-
-
-            protected abstract IAuthorizationExternalSource GetAuthorizationExternalSource();
-
-            protected abstract IBLLSimpleQueryBase<IEmployee> GetEmployeeSource(BLLSecurityMode securityMode);
-
-            protected abstract IHierarchicalObjectExpanderFactory<Guid> GetHierarchicalObjectExpanderFactory();
-
-            public virtual IAccessDeniedExceptionService<TPersistentDomainObjectBase> GetAccessDeniedExceptionService<TPersistentDomainObjectBase, TIdent>()
-                where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-            {
-                return new AccessDeniedExceptionService<TPersistentDomainObjectBase, TIdent>();
-            }
-
-            protected Framework.Configuration.BLL.ITargetSystemService GetConfigurationConfigurationTargetSystemService()
-            {
-                return new Framework.Configuration.BLL.TargetSystemService<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase>(
-                    this.Configuration,
-                    this.Configuration,
-                    this.Configuration.Logics.TargetSystem.GetByName(TargetSystemHelper.ConfigurationName, true),
-                    this.GetConfigurationEventDALListeners(),
-                    this.SubscriptionMetadataStore);
-            }
-
-            protected Framework.Configuration.BLL.ITargetSystemService GetAuthorizationConfigurationTargetSystemService()
-            {
-                return new Framework.Configuration.BLL.TargetSystemService<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase>(
-                    this.Configuration,
-                    this.Authorization,
-                    this.Configuration.Logics.TargetSystem.GetByName(TargetSystemHelper.AuthorizationName, true),
-                    this.GetAuthorizationEventDALListeners(),
-                    this.SubscriptionMetadataStore);
             }
 
             /// <summary>

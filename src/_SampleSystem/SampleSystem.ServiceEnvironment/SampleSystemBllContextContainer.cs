@@ -42,39 +42,13 @@ namespace SampleSystem.ServiceEnvironment
         public SampleSystemBLLContextContainer(
             SampleSystemServiceEnvironment serviceEnvironment,
             IServiceProvider scopedServiceProvider,
-            IDBSession dbSession,
-            [NotNull] IUserAuthenticationService userAuthenticationService,
-            SubscriptionMetadataStore subscriptionMetadataStore,
-            IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
-            ICryptService<CryptSystem> cryptService)
-            : base(serviceEnvironment, scopedServiceProvider, dbSession, userAuthenticationService, subscriptionMetadataStore)
+            IDBSession dbSession)
+            : base(serviceEnvironment, scopedServiceProvider, dbSession)
         {
             this.serviceEnvironment = serviceEnvironment;
 
             this.aribaSubscriptionManager = LazyInterfaceImplementHelper.CreateProxy<IEventsSubscriptionManager<ISampleSystemBLLContext, PersistentDomainObjectBase>>(
                 () => new SampleSystemAribaEventsSubscriptionManager(this.MainContext, new SampleSystemAribaLocalDBEventMessageSender(this.MainContext, this.Configuration)));
-        }
-
-
-        protected override ISampleSystemBLLContext CreateMainContext()
-        {
-            var validator = LazyInterfaceImplementHelper.CreateProxy<IValidator>(() => new SampleSystemValidator(this.MainContext, this.serviceEnvironment.ValidatorCompileCache));
-
-            return new SampleSystemBLLContext(
-                this.ScopedServiceProvider,
-                this.Session.GetDALFactory<SampleSystem.Domain.PersistentDomainObjectBase, Guid>(),
-                this.mainOperationListeners,
-                this.mainSourceListeners,
-                this.Session.GetObjectStateService(),
-                this.GetAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase, Guid>(),
-                this.StandartExpressionBuilder,
-                validator,
-                this.HierarchicalObjectExpanderFactory,
-                LazyInterfaceImplementHelper.CreateProxy<ISampleSystemSecurityService>(() => new SampleSystemSecurityService(this.MainContext)),
-                LazyInterfaceImplementHelper.CreateProxy(() => this.GetSecurityExpressionBuilderFactory<ISampleSystemBLLContext, PersistentDomainObjectBase, Guid>(this.MainContext)),
-                LazyInterfaceImplementHelper.CreateProxy<ISampleSystemBLLFactoryContainer>(() => new SampleSystemBLLFactoryContainer(this.MainContext)),
-                this.Authorization,
-                this.Configuration);
         }
 
         public override ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> GetSecurityExpressionBuilderFactory<TBLLContext, TPersistentDomainObjectBase, TIdent>(TBLLContext context)
@@ -138,18 +112,6 @@ namespace SampleSystem.ServiceEnvironment
             return new AuthorizationEventsSubscriptionManager(
                                                               this.Authorization,
                                                               new AuthorizationLocalDBEventMessageSender(this.Authorization, this.Configuration)); // Sender для отправки евентов в локальную бд
-        }
-
-        protected override IEnumerable<Framework.Configuration.BLL.ITargetSystemService> GetConfigurationTargetSystemServices()
-        {
-            yield return this.GetMainConfigurationTargetSystemService();
-            yield return this.GetAuthorizationConfigurationTargetSystemService();
-            yield return this.GetConfigurationConfigurationTargetSystemService();
-        }
-
-        protected override IBLLSimpleQueryBase<IEmployee> GetEmployeeSource(BLLSecurityMode securityMode)
-        {
-            return this.MainContext.Logics.EmployeeFactory.Create(securityMode);
         }
 
         /// <summary>

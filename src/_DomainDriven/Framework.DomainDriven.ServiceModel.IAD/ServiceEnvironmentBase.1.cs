@@ -9,6 +9,8 @@ using Framework.Core.Services;
 
 using JetBrains.Annotations;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.DomainDriven.ServiceModel.IAD
 {
     public abstract class ServiceEnvironmentBase<TBLLContextContainer, TBLLContext> : ServiceEnvironmentBase
@@ -89,26 +91,16 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             protected ServiceEnvironmentBLLContextContainer(
                     ServiceEnvironmentBase<TBLLContextContainer, TBLLContext> serviceEnvironment,
                     IServiceProvider scopedServiceProvider,
-                    IDBSession session,
-                    [NotNull] IUserAuthenticationService userAuthenticationService,
-                    SubscriptionMetadataStore subscriptionMetadataStore)
-                : base(serviceEnvironment, scopedServiceProvider, session, userAuthenticationService, subscriptionMetadataStore)
+                    IDBSession session)
+                : base(serviceEnvironment, scopedServiceProvider, session)
             {
                 this.serviceEnvironment = serviceEnvironment;
-                this.MainContext = LazyInterfaceImplementHelper.CreateProxy(this.CreateMainContext);
                 this.SubscriptionService = LazyInterfaceImplementHelper.CreateProxy(this.CreateSubscriptionService);
             }
 
-            public TBLLContext MainContext { get; }
+            public TBLLContext MainContext => this.ScopedServiceProvider.GetRequiredService<TBLLContext>();
 
             protected internal IStandardSubscriptionService SubscriptionService { get; }
-
-            protected abstract TBLLContext CreateMainContext();
-
-            protected override ITypeResolver<string> GetSecurityTypeResolver()
-            {
-                return this.MainContext.TypeResolver;
-            }
 
             /// <summary>
             /// Вервис который будет отправлять подписки в шину или базу

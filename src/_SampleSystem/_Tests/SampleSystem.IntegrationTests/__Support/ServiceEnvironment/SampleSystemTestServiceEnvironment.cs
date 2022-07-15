@@ -6,25 +6,17 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Framework.Authorization.ApproveWorkflow;
-using Framework.Authorization.BLL;
 using Framework.Cap.Abstractions;
-using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Core;
 using Framework.Core.Services;
 using Framework.DomainDriven;
-using Framework.DomainDriven.Audit;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.NHibernate.Audit;
-using Framework.DomainDriven.ServiceModel;
 using Framework.DomainDriven.ServiceModel.Service;
-using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Exceptions;
 using Framework.NotificationCore.Services;
 using Framework.NotificationCore.Settings;
-using Framework.Persistent;
 
 using MediatR;
 
@@ -52,7 +44,6 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 
         public SampleSystemTestServiceEnvironment(
             IServiceProvider serviceProvider,
-            AvailableValues availableValues,
             EnvironmentSettings settings,
             bool? isDebugMode = null)
 

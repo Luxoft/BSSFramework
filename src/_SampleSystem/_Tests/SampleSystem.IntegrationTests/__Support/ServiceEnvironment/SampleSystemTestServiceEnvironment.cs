@@ -6,7 +6,9 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Framework.Authorization.ApproveWorkflow;
+using Framework.Authorization.BLL;
 using Framework.Cap.Abstractions;
+using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Core;
 using Framework.Core.Services;
@@ -22,6 +24,7 @@ using Framework.DomainDriven.WebApiNetCore;
 using Framework.Exceptions;
 using Framework.NotificationCore.Services;
 using Framework.NotificationCore.Settings;
+using Framework.Persistent;
 
 using MediatR;
 
@@ -104,6 +107,7 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .RegisterControllers()
                                   .AddControllerEnvironment()
                                   .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
+
 
                                   .AddScoped<SampleSystemBLLContextContainer, TestSampleSystemBllContextContainer>()
 

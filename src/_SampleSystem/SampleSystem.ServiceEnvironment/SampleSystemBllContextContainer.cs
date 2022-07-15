@@ -4,26 +4,15 @@ using System.Collections.Generic;
 using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
 using Framework.Authorization.Events;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Core;
-using Framework.Core.Services;
-using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.Events;
 using Framework.Notification.DTO;
-using Framework.Persistent;
-using Framework.Security.Cryptography;
-using Framework.SecuritySystem;
-using Framework.Validation;
-
-using JetBrains.Annotations;
 
 using SampleSystem.BLL;
 using SampleSystem.Events;
 
-using DomainObjectBase = SampleSystem.Domain.DomainObjectBase;
 using PersistentDomainObjectBase = SampleSystem.Domain.PersistentDomainObjectBase;
 using Principal = Framework.Authorization.Domain.Principal;
 
@@ -31,10 +20,6 @@ namespace SampleSystem.ServiceEnvironment
 {
     public class SampleSystemBLLContextContainer : SampleSystemServiceEnvironment.ServiceEnvironmentBLLContextContainer
     {
-        private readonly BLLOperationEventListenerContainer<DomainObjectBase> mainOperationListeners = new BLLOperationEventListenerContainer<DomainObjectBase>();
-
-        private readonly BLLSourceEventListenerContainer<PersistentDomainObjectBase> mainSourceListeners = new BLLSourceEventListenerContainer<PersistentDomainObjectBase>();
-
         private readonly IEventsSubscriptionManager<ISampleSystemBLLContext, PersistentDomainObjectBase> aribaSubscriptionManager;
 
         private readonly SampleSystemServiceEnvironment serviceEnvironment;
@@ -49,24 +34,6 @@ namespace SampleSystem.ServiceEnvironment
 
             this.aribaSubscriptionManager = LazyInterfaceImplementHelper.CreateProxy<IEventsSubscriptionManager<ISampleSystemBLLContext, PersistentDomainObjectBase>>(
                 () => new SampleSystemAribaEventsSubscriptionManager(this.MainContext, new SampleSystemAribaLocalDBEventMessageSender(this.MainContext, this.Configuration)));
-        }
-
-        public override ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> GetSecurityExpressionBuilderFactory<TBLLContext, TPersistentDomainObjectBase, TIdent>(TBLLContext context)
-        {
-            var materialized = new Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>(context.HierarchicalObjectExpanderFactory, context.Authorization);
-
-            var queryable = new Framework.SecuritySystem.Rules.Builders.QueryablePermissions.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>(context.HierarchicalObjectExpanderFactory, context.Authorization);
-
-            return new Framework.SecuritySystem.Rules.Builders.Mixed.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>(materialized, queryable);
-        }
-
-        /// <summary>
-        /// Пример переопределения валидатора для авторизации
-        /// </summary>
-        /// <returns></returns>
-        protected override AuthorizationValidator CreateAuthorizationValidator()
-        {
-            return new SampleSystemCustomAuthValidator(this.Authorization, this.serviceEnvironment.CustomAuthorizationValidatorCompileCache);
         }
 
         /// <inheritdoc />

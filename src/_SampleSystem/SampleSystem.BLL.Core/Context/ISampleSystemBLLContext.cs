@@ -24,7 +24,9 @@ namespace SampleSystem.BLL
 
         Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContextContainer<Framework.Configuration.BLL.IConfigurationBLLContext>,
 
-        IDefaultHierarchicalBLLContext<PersistentDomainObjectBase, Guid>
+        IDefaultHierarchicalBLLContext<PersistentDomainObjectBase, Guid>,
+
+        ISecurityTypeResolverContainer
     {
     }
 }

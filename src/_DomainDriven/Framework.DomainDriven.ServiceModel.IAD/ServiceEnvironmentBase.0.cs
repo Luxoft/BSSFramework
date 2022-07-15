@@ -32,51 +32,14 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 {
     public abstract class ServiceEnvironmentBase : IServiceEnvironment
     {
-        public readonly IFetchService<Framework.Authorization.Domain.PersistentDomainObjectBase, FetchBuildRule> AuthorizationFetchService;
-
-        public readonly IFetchService<Framework.Configuration.Domain.PersistentDomainObjectBase, FetchBuildRule> ConfigurationFetchService;
-
         protected ServiceEnvironmentBase(
             [NotNull] IServiceProvider serviceProvider,
-            [NotNull] INotificationContext notificationContext,
-            [NotNull] AvailableValues availableValues)
+            [NotNull] INotificationContext notificationContext)
         {
             this.RootServiceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
             this.NotificationContext = notificationContext ?? throw new ArgumentNullException(nameof(notificationContext));
 
-            if (availableValues == null) throw new ArgumentNullException(nameof(availableValues));
-
-            this.DefaultAuthorizationValidatorCompileCache =
-
-                    availableValues
-                    .ToValidation()
-                    .ToBLLContextValidationExtendedData<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>()
-                    .Pipe(extendedValidationData => new AuthorizationValidationMap(extendedValidationData))
-                    .ToCompileCache();
-
-
-            this.DefaultConfigurationValidatorCompileCache =
-
-                    availableValues
-                    .ToValidation()
-                    .ToBLLContextValidationExtendedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>()
-                    .Pipe(extendedValidationData => new ConfigurationValidationMap(extendedValidationData))
-                    .ToCompileCache();
-
-            this.AuthorizationFetchService = new AuthorizationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Authorization.Domain.PersistentDomainObjectBase>.OData);
-
-            this.ConfigurationFetchService = new ConfigurationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Configuration.Domain.PersistentDomainObjectBase>.OData);
         }
-
-        /// <summary>
-        /// Кеш валидатора для авторизации
-        /// </summary>
-        protected ValidatorCompileCache DefaultAuthorizationValidatorCompileCache { get; }
-
-        /// <summary>
-        /// Кеш валидатора для воркфлоу
-        /// </summary>
-        protected ValidatorCompileCache DefaultConfigurationValidatorCompileCache { get; }
 
         /// <summary>
         /// Провайдер используется для создания scope в интеграционных тестах
@@ -195,30 +158,9 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
             #endregion
 
-            protected INotificationService NotificationService { get; }
-
             protected virtual IEnumerable<IBLLContextContainerModule> GetModules()
             {
                 yield break;
-            }
-
-
-            /// <summary>
-            /// Создание валидатора для авторизации
-            /// </summary>
-            /// <returns></returns>
-            protected virtual AuthorizationValidator CreateAuthorizationValidator()
-            {
-                return new AuthorizationValidator(this.Authorization, this.ServiceEnvironment.DefaultAuthorizationValidatorCompileCache);
-            }
-
-            /// <summary>
-            /// Создание валидатора для утилит
-            /// </summary>
-            /// <returns></returns>
-            protected virtual ConfigurationValidator CreateConfigurationValidator()
-            {
-                return new ConfigurationValidator(this.Configuration, this.ServiceEnvironment.DefaultConfigurationValidatorCompileCache);
             }
 
             /// <summary>
@@ -287,13 +229,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             protected virtual IEventsSubscriptionManager<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase> CreateConfigurationEventsSubscriptionManager()
             {
                 return null;
-            }
-
-            public virtual ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> GetSecurityExpressionBuilderFactory<TBLLContext, TPersistentDomainObjectBase, TIdent>(TBLLContext context)
-                where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-                where TBLLContext : class, ISecurityBLLContext<IAuthorizationBLLContext<TIdent>, TPersistentDomainObjectBase, TIdent>, IHierarchicalObjectExpanderFactoryContainer<TIdent>
-            {
-                return new Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>(context.HierarchicalObjectExpanderFactory, context.Authorization);
             }
 
             protected virtual INotificationService CreateNotificationService()

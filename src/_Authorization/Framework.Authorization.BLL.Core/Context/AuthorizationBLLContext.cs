@@ -54,6 +54,7 @@ namespace Framework.Authorization.BLL
             [NotNull] IAuthorizationBLLFactoryContainer logics,
             [NotNull] IAuthorizationExternalSource externalSource,
             [NotNull] IRunAsManager runAsManager,
+            [NotNull] ISecurityTypeResolverContainer securityTypeResolverContainer,
             [NotNull] IAuthorizationBLLContextSettings settings)
             : base(
                 serviceProvider,
@@ -79,7 +80,7 @@ namespace Framework.Authorization.BLL
 
             this.CurrentPrincipalName = userAuthenticationService.GetUserName();
 
-            this.SecurityTypeResolver = settings.SecurityTypeResolver.OverrideInput((EntityType entityType) => entityType.Name);
+            this.SecurityTypeResolver = securityTypeResolverContainer.SecurityTypeResolver.OverrideInput((EntityType entityType) => entityType.Name);
 
             this.lazySettings = LazyHelper.Create(() => this.Logics.Default.Create<Setting>().GetFullList().ToSettings());
 

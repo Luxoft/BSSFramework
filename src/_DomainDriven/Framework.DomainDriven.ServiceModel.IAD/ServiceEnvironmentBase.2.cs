@@ -58,7 +58,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             }
 
             protected IEventsSubscriptionManager<TBLLContext, TPersistentDomainObjectBase> MainEventsSubscriptionManager => this.lazyMainEventsSubscriptionManager.Value;
-            
+
             protected virtual IEventsSubscriptionManager<TBLLContext, TPersistentDomainObjectBase> CreateMainEventsSubscriptionManager()
             {
                 return null;

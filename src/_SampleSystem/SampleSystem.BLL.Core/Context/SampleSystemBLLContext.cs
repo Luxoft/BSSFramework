@@ -71,5 +71,7 @@ namespace SampleSystem.BLL
         {
             return base.AllowVirtualPropertyInOdata(domainType) || domainType == typeof(BusinessUnitProgramClass);
         }
+
+        ITypeResolver<string> ISecurityTypeResolverContainer.SecurityTypeResolver => this.TypeResolver;
     }
 }

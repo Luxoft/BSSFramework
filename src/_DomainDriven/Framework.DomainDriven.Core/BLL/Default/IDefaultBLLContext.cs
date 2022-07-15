@@ -1,8 +1,6 @@
 ﻿using System;
-using System.ComponentModel;
 
 using Framework.Persistent;
-using Framework.QueryableSource;
 using Framework.Validation;
 
 namespace Framework.DomainDriven.BLL
@@ -13,9 +11,6 @@ namespace Framework.DomainDriven.BLL
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     {
-        [Obsolete("Please don't use!")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        IQueryableSource<TPersistentDomainObjectBase> GetQueryableSource();
     }
 
     public interface IDefaultBLLContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent> :

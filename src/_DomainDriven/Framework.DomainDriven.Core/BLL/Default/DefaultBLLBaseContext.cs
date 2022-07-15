@@ -6,7 +6,6 @@ using Framework.DomainDriven.BLL.Tracking;
 using Framework.HierarchicalExpand;
 using Framework.OData;
 using Framework.Persistent;
-using Framework.QueryableSource;
 using Framework.QueryLanguage;
 using Framework.Validation;
 
@@ -111,12 +110,6 @@ namespace Framework.DomainDriven.BLL
         /// <inheritdoc />
         public abstract bool AllowedExpandTreeParents<TDomainObject>()
             where TDomainObject : TPersistentDomainObjectBase;
-
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public IQueryableSource<TPersistentDomainObjectBase> GetQueryableSource()
-        {
-            return new BLLQueryableSource<IDefaultBLLContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent>, TPersistentDomainObjectBase, TDomainObjectBase, TIdent>(this);
-        }
 
         IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>> IBLLFactoryContainerContext<IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>>.Logics => this.BaseLogics;
     }

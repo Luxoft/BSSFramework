@@ -38,35 +38,10 @@ namespace Framework.Configuration.BLL.Notification
             return new TemplateMessageSender(context, notificationEventSender, defaultSender);
         }
 
-        public static IMessageSender<Exception> ToExceptionSender(this IMessageSender<Framework.Notification.New.Message> messageSender, IConfigurationBLLContext context, MailAddress sender, IEnumerable<string> receivers)
-        {
-            if (messageSender == null)
-            {
-                throw new ArgumentNullException(nameof(messageSender));
-            }
-
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
-            if (sender == null)
-            {
-                throw new ArgumentNullException(nameof(sender));
-            }
-
-            if (receivers == null)
-            {
-                throw new ArgumentNullException(nameof(receivers));
-            }
-
-            return new ExceptionMessageSender(context, messageSender, sender, receivers);
-        }
-
         private class TemplateMessageSender : BLLContextContainer<IConfigurationBLLContext>, IMessageSender<MessageTemplateNotification>
         {
-            private readonly MailAddress _defaultSender;
-            private readonly IMessageSender<NotificationEventDTO> _notificationEventSender;
+            private readonly MailAddress defaultSender;
+            private readonly IMessageSender<NotificationEventDTO> notificationEventSender;
 
             public TemplateMessageSender(IConfigurationBLLContext context, IMessageSender<NotificationEventDTO> notificationEventSender, MailAddress defaultSender)
                 : base(context)
@@ -81,8 +56,8 @@ namespace Framework.Configuration.BLL.Notification
                     throw new ArgumentNullException(nameof(notificationEventSender));
                 }
 
-                this._defaultSender = defaultSender;
-                this._notificationEventSender = notificationEventSender;
+                this.defaultSender = defaultSender;
+                this.notificationEventSender = notificationEventSender;
                 this.Logger = Log.Logger.ForContext(this.GetType());
             }
 
@@ -116,7 +91,7 @@ namespace Framework.Configuration.BLL.Notification
                                         notification.Message.From,
                                         notification.Message.Body);
 
-                this._notificationEventSender.Send(new NotificationEventDTO(notification));
+                this.notificationEventSender.Send(new NotificationEventDTO(notification));
             }
 
             private Framework.Notification.Notification CreateNotification(MessageTemplateNotification message)
@@ -134,7 +109,7 @@ namespace Framework.Configuration.BLL.Notification
 
                 var includeAttachments = message.Subscription.Maybe(s => s.IncludeAttachments, true);
 
-                var sender = message.Subscription.Maybe(s => s.Sender) ?? this._defaultSender;
+                var sender = message.Subscription.Maybe(s => s.Sender) ?? this.defaultSender;
 
                 var messageTemplateBLL = new MessageTemplateBLL(this.Context);
 

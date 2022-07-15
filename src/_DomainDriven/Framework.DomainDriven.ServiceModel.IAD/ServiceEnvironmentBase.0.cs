@@ -18,13 +18,9 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 {
     public abstract class ServiceEnvironmentBase : IServiceEnvironment
     {
-        protected ServiceEnvironmentBase(
-            [NotNull] IServiceProvider serviceProvider,
-            [NotNull] INotificationContext notificationContext)
+        protected ServiceEnvironmentBase([NotNull] IServiceProvider serviceProvider)
         {
             this.RootServiceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
-            this.NotificationContext = notificationContext ?? throw new ArgumentNullException(nameof(notificationContext));
-
         }
 
         /// <summary>

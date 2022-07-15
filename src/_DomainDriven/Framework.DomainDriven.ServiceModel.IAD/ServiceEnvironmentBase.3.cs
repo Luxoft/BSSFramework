@@ -34,11 +34,8 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         where TNamedLockOperation : struct, Enum
         where TAuditPersistentDomainObjectBase : class, TPersistentDomainObjectBase, IDefaultAuditPersistentDomainObjectBase
     {
-        protected ServiceEnvironmentBase(
-            IServiceProvider serviceProvider,
-            INotificationContext notificationContext,
-            [NotNull] AvailableValues availableValues)
-            : base(serviceProvider, notificationContext, availableValues)
+        protected ServiceEnvironmentBase(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
         }
 

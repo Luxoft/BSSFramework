@@ -30,12 +30,9 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
         where TSecurityOperationCode : struct, Enum
     {
-        protected ServiceEnvironmentBase(
-            IServiceProvider serviceProvider,
-            INotificationContext notificationContext,
-            [NotNull] AvailableValues availableValues)
+        protected ServiceEnvironmentBase(IServiceProvider serviceProvider)
 
-            : base(serviceProvider, notificationContext, availableValues)
+            : base(serviceProvider)
         {
         }
 

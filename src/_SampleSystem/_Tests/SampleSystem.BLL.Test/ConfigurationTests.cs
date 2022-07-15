@@ -38,7 +38,7 @@ namespace SampleSystem.BLL.Test
         {
             var environment = SampleSystemTestServiceEnvironment.Default;
 
-            var configFacade = environment.ServiceProvider.GetDefaultControllerEvaluator<ConfigSLJsonController>();
+            var configFacade = environment.RootServiceProvider.GetDefaultControllerEvaluator<ConfigSLJsonController>();
 
             //var mainFacade = new Facade(environment);
 

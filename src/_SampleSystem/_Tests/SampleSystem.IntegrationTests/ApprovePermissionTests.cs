@@ -110,7 +110,7 @@ namespace SampleSystem.IntegrationTests.Workflow
                                                                          }
                                                                  }));
 
-            this.workflowManager = this.Environment.ServiceProvider.GetRequiredService<WorkflowManager>();
+            this.workflowManager = this.Environment.RootServiceProvider.GetRequiredService<WorkflowManager>();
             this.workflowManager.Start();
         }
 
@@ -146,7 +146,7 @@ namespace SampleSystem.IntegrationTests.Workflow
                 await wfController.EvaluateAsync(c => c.ApproveOperation(permissionIdentity, wfObj.ApproveEventId));
             }
 
-            var wiStatus = this.Environment.ServiceProvider.GetRequiredService<IPersistenceProvider>().WaitForWorkflowToComplete(rootInstanceId.ToString(), TimeSpan.FromSeconds(10));
+            var wiStatus = this.Environment.RootServiceProvider.GetRequiredService<IPersistenceProvider>().WaitForWorkflowToComplete(rootInstanceId.ToString(), TimeSpan.FromSeconds(10));
 
             var postApprovePrincipal = this.authFacade.Evaluate(c => c.GetRichPrincipal(approvingPrincipal.Identity));
 
@@ -183,7 +183,7 @@ namespace SampleSystem.IntegrationTests.Workflow
                 await wfController.EvaluateAsync(c => c.RejectOperation(permissionIdentity, wfObj.RejectEventId));
             }
 
-            var wiStatus = this.Environment.ServiceProvider.GetRequiredService<IPersistenceProvider>().WaitForWorkflowToComplete(rootInstanceId.ToString(), TimeSpan.FromSeconds(10));
+            var wiStatus = this.Environment.RootServiceProvider.GetRequiredService<IPersistenceProvider>().WaitForWorkflowToComplete(rootInstanceId.ToString(), TimeSpan.FromSeconds(10));
 
             var postApprovePrincipal = this.authFacade.Evaluate(c => c.GetRichPrincipal(approvingPrincipal.Identity));
 
@@ -210,7 +210,7 @@ namespace SampleSystem.IntegrationTests.Workflow
 
             Thread.Sleep(3000);
 
-            var wiStatus = this.Environment.ServiceProvider.GetRequiredService<IPersistenceProvider>().WaitForWorkflowToComplete(rootInstanceId.ToString(), TimeSpan.FromSeconds(20));
+            var wiStatus = this.Environment.RootServiceProvider.GetRequiredService<IPersistenceProvider>().WaitForWorkflowToComplete(rootInstanceId.ToString(), TimeSpan.FromSeconds(20));
 
             var postApprovePrincipal = this.authFacade.Evaluate(c => c.GetRichPrincipal(approvingPrincipal.Identity));
 

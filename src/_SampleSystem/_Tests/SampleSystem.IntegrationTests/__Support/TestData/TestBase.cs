@@ -44,9 +44,9 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
 
         protected virtual SampleSystemTestServiceEnvironment Environment => SampleSystemTestServiceEnvironment.Default;
 
-        public MainWebApi MainWebApi => new(this.Environment.ServiceProvider);
+        public MainWebApi MainWebApi => new(this.Environment.RootServiceProvider);
 
-        public MainAuditWebApi MainAuditWebApi => new(this.Environment.ServiceProvider);
+        public MainAuditWebApi MainAuditWebApi => new(this.Environment.RootServiceProvider);
 
         protected DataHelper DataHelper
         {
@@ -64,7 +64,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
 
         protected AuthHelper AuthHelper { get; }
 
-        protected IDateTimeService DateTimeService => this.Environment.ServiceProvider.GetRequiredService<IDateTimeService>();
+        protected IDateTimeService DateTimeService => this.Environment.RootServiceProvider.GetRequiredService<IDateTimeService>();
 
         IServiceProvider IRootServiceProviderContainer.RootServiceProvider => this.Environment.RootServiceProvider;
 

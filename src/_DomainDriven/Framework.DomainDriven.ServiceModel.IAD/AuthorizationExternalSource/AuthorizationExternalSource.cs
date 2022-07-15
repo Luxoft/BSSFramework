@@ -25,14 +25,14 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         private readonly IDictionaryCache<EntityType, IAuthorizationTypedExternalSource> _typedCache;
 
 
-        public AuthorizationExternalSource(TBLLContext context, IAuthorizationBLLContext authorizationBLLContext, ITypeResolver<string> securityEntityTypeResolver)
+        public AuthorizationExternalSource(TBLLContext context, IAuthorizationBLLContext authorizationBLLContext, ISecurityTypeResolverContainer securityTypeResolverContainer)
             : base (context)
         {
             if (authorizationBLLContext == null) throw new ArgumentNullException(nameof(authorizationBLLContext));
-            if (securityEntityTypeResolver == null) throw new ArgumentNullException(nameof(securityEntityTypeResolver));
+            if (securityTypeResolverContainer == null) throw new ArgumentNullException(nameof(securityTypeResolverContainer));
 
             this._authorizationBLLContext = authorizationBLLContext;
-            this._securityEntityTypeResolver = securityEntityTypeResolver;
+            this._securityEntityTypeResolver = securityTypeResolverContainer.SecurityTypeResolver;
 
             this._typedCache = new DictionaryCache<EntityType, IAuthorizationTypedExternalSource>(entityType => this.GetTypedInternal(entityType, true));
         }

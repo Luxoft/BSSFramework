@@ -36,20 +36,7 @@ namespace SampleSystem.ServiceEnvironment
         AuditPersistentDomainObjectBase, SampleSystemSecurityOperationCode, NamedLock, NamedLockOperation>,
         ISystemMetadataTypeBuilderContainer
     {
-
-        protected static readonly ITypeResolver<string> CurrentTargetSystemTypeResolver = new[] { TypeSource.FromSample<PersistentDomainObjectBase>().ToDefaultTypeResolver(), TypeSource.FromSample<BusinessUnitSimpleDTO>().ToDefaultTypeResolver() }.ToComposite();
-
-        protected ICryptService<CryptSystem> CryptService { get; } = new CryptService<CryptSystem>();
-
         protected readonly bool? isDebugMode;
-        public readonly ValidatorCompileCache ValidatorCompileCache;
-
-
-        public readonly ValidatorCompileCache CustomAuthorizationValidatorCompileCache;
-
-
-        protected readonly IFetchService<PersistentDomainObjectBase, FetchBuildRule> FetchService;
-        protected readonly Func<ISampleSystemBLLContext, ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>> SecurityExpressionBuilderFactoryFunc;
 
         public readonly SmtpSettings SmtpSettings;
 
@@ -58,27 +45,14 @@ namespace SampleSystem.ServiceEnvironment
 
         public SampleSystemServiceEnvironment(
             IServiceProvider serviceProvider,
-            INotificationContext notificationContext,
-            [NotNull] AvailableValues availableValues,
             IOptions<SmtpSettings> smtpSettings,
             IRewriteReceiversService rewriteReceiversService = null,
-            bool? isDebugMode = null,
-            Func<ISampleSystemBLLContext, ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, Guid>> securityExpressionBuilderFactoryFunc = null)
-            : base(serviceProvider, notificationContext, availableValues)
+            bool? isDebugMode = null)
+            : base(serviceProvider)
         {
             this.SystemMetadataTypeBuilder = new SystemMetadataTypeBuilder<PersistentDomainObjectBase>(DTORole.All, typeof(PersistentDomainObjectBase).Assembly);
-            this.SecurityExpressionBuilderFactoryFunc = securityExpressionBuilderFactoryFunc;
+
             this.isDebugMode = isDebugMode;
-
-            this.ValidatorCompileCache =
-
-                    availableValues
-                    .ToValidation()
-                    .ToBLLContextValidationExtendedData<ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, Guid>()
-                    .Pipe(extendedData => new SampleSystemValidationMap(extendedData))
-                    .ToCompileCache();
-
-            this.FetchService = new SampleSystemMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<PersistentDomainObjectBase>.OData);
 
             this.SmtpSettings = smtpSettings.Value;
             this.RewriteReceiversService = rewriteReceiversService;

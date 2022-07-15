@@ -18,8 +18,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
     {
         public static IServiceCollection RegisterGenericBLLServices(this IServiceCollection services)
         {
-            return services.AddScoped<AvailableValues>()
-                           .AddScoped(sp => sp.GetRequiredService<IDBSession>().GetObjectStateService())
+            return services.AddScoped(sp => sp.GetRequiredService<IDBSession>().GetObjectStateService())
                            .AddSingleton<IStandartExpressionBuilder, StandartExpressionBuilder>();
         }
 
@@ -47,7 +46,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                    .AddScoped<IAuthorizationBLLFactoryContainer, AuthorizationBLLFactoryContainer>()
                    .AddScoped<IRunAsManager, AuthorizationRunAsManger>()
                    .AddScoped<IAuthorizationBLLContextSettings, AuthorizationBLLContextSettings>()
-                   .AddScoped<IAuthorizationBLLContext, AuthorizationBLLContext>()
+                   .AddLazyScoped<IAuthorizationBLLContext, AuthorizationBLLContext>()
 
                    .AddScoped<ISecurityOperationResolver<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode>>(sp => sp.GetRequiredService<IAuthorizationBLLContext>())
                    .AddScoped<IDisabledSecurityProviderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>>(sp => sp.GetRequiredService<IAuthorizationSecurityService>())
@@ -82,7 +81,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                    .AddScoped<ICurrentRevisionService>(sp => sp.GetRequiredService<IDBSession>())
 
                    .AddScoped<IConfigurationBLLContextSettings, ConfigurationBLLContextSettings>()
-                   .AddScoped<IConfigurationBLLContext, ConfigurationBLLContext>()
+                   .AddLazyScoped<IConfigurationBLLContext, ConfigurationBLLContext>()
 
                    .AddScoped<ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode>>(sp => sp.GetRequiredService<IConfigurationBLLContext>())
                    .AddScoped<IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>>(sp => sp.GetRequiredService<IConfigurationSecurityService>())
@@ -93,6 +92,13 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
                    .Self(ConfigurationSecurityServiceBase.Register)
                    .Self(ConfigurationBLLFactoryContainer.RegisterBLLFactory);
+        }
+
+        public static IServiceCollection AddLazyScoped<TInterface, TImplementation>(this IServiceCollection services)
+            where TImplementation: TInterface
+            where TInterface : class
+        {
+            return services.AddScoped(sp => LazyInterfaceImplementHelper.CreateProxy<TInterface>(() => ActivatorUtilities.CreateInstance<TImplementation>(sp)));
         }
     }
 }

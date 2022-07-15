@@ -21,7 +21,7 @@ namespace SampleSystem.IntegrationTests.Reports
         [TestInitialize]
         public void InitDd()
         {
-            ActivatorUtilities.CreateInstance<SampleSystemCustomReportsServiceEnvironment>(this.Environment.ServiceProvider);
+            ActivatorUtilities.CreateInstance<SampleSystemCustomReportsServiceEnvironment>(this.Environment.RootServiceProvider);
         }
 
         [TestMethod]

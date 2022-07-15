@@ -86,7 +86,7 @@ namespace SampleSystem.BLL.Test
         {
             var environment = SampleSystemTestServiceEnvironment.Default;
 
-            var facade = environment.ServiceProvider.GetDefaultControllerEvaluator<HRDepartmentController>("Tester01");
+            var facade = environment.RootServiceProvider.GetDefaultControllerEvaluator<HRDepartmentController>("Tester01");
 
             var res1 = facade.Evaluate(c => c.GetTestDepartmentsByOperation(SampleSystemHRDepartmentSecurityOperationCode.EmployeeEdit));
 

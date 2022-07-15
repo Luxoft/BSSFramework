@@ -57,10 +57,8 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
             bool? isDebugMode = null)
 
             : base(serviceProvider,
-                   settings.NotificationContext,
-                   availableValues,
                    new OptionsWrapper<SmtpSettings>(new SmtpSettings() { OutputFolder = @"C:\SampleSystem\Smtp" }),
-                  LazyInterfaceImplementHelper.CreateNotImplemented<IRewriteReceiversService>(),
+                    LazyInterfaceImplementHelper.CreateNotImplemented<IRewriteReceiversService>(),
                    isDebugMode)
         {
             this.Settings = settings;
@@ -108,16 +106,12 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .AddControllerEnvironment()
                                   .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
 
-
-                                  .AddScoped<SampleSystemBLLContextContainer, TestSampleSystemBllContextContainer>()
-
                                   .AddScoped<IntegrationTestsUserAuthenticationService>()
                                   .AddScoped<IUserAuthenticationService>(sp => sp.GetRequiredService<IntegrationTestsUserAuthenticationService>())
 
                                   .AddSingleton(EnvironmentSettings.Trace)
                                   .AddSingleton(sp => sp.GetRequiredService<EnvironmentSettings>().NotificationContext)
                                   .AddSingleton(new SubscriptionMetadataStore(new SampleSystemSubscriptionsMetadataFinder()))
-                                  .AddSingleton(AvailableValuesHelper.AvailableValues)
 
                                   .AddSingleton<IAuditRevisionUserAuthenticationService, IntegrationTestsAuditRevisionUserAuthenticationService>()
                                   .AddSingleton<IDateTimeService, IntegrationTestDateTimeService>()

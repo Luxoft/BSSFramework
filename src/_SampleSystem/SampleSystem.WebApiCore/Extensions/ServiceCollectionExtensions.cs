@@ -4,6 +4,7 @@ using Framework.Authorization.BLL;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.ServiceModel;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.HierarchicalExpand;
@@ -27,6 +28,8 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterLegacyBLLContext(this IServiceCollection services)
     {
+        services.AddSingleton(AvailableValuesHelper.AvailableValues.ToValidation());
+
         services.RegisterHierarchicalObjectExpander();
 
         services.RegisterAdditonalAuthorizationBLL();
@@ -62,7 +65,7 @@ public static class ServiceCollectionExtensions
         return services
 
                .AddScoped<ISampleSystemBLLContextSettings, SampleSystemBLLContextSettings>()
-               .AddScoped<ISampleSystemBLLContext, SampleSystemBLLContext>()
+               .AddLazyScoped<ISampleSystemBLLContext, SampleSystemBLLContext>()
 
 
                .AddScoped<ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode>>(sp => sp.GetRequiredService<ISampleSystemBLLContext>())

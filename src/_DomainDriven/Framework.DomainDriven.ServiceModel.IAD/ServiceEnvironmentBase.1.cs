@@ -4,10 +4,6 @@ using System.Linq;
 
 using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
-using Framework.Core.Services;
-
-using JetBrains.Annotations;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,16 +13,10 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         where TBLLContextContainer : ServiceEnvironmentBase<TBLLContextContainer, TBLLContext>.ServiceEnvironmentBLLContextContainer
         where TBLLContext : ITypeResolverContainer<string>
     {
-        protected ServiceEnvironmentBase(
-            IServiceProvider serviceProvider,
-            INotificationContext notificationContext,
-            [NotNull] AvailableValues availableValues)
-            : base(serviceProvider, notificationContext)
+        protected ServiceEnvironmentBase(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
-            this.ServiceProvider = serviceProvider;
         }
-
-        public IServiceProvider ServiceProvider { get; }
 
         protected virtual IEnumerable<IServiceEnvironmentModule<TBLLContextContainer>> GetModules()
         {

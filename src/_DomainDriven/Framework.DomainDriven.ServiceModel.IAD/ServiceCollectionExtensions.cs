@@ -25,7 +25,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
         public static IServiceCollection RegisterAuthorizationSystem(this IServiceCollection services)
         {
-            return services.AddScoped<IAuthorizationSystem<Guid>, IAuthorizationBLLContext>();
+            return services.AddScoped<IAuthorizationSystem<Guid>>(sp => sp.GetRequiredService<IAuthorizationBLLContext>());
         }
 
         public static IServiceCollection RegisterAuthorizationBLL(this IServiceCollection services)
@@ -49,9 +49,9 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                    .AddScoped<IAuthorizationBLLContextSettings, AuthorizationBLLContextSettings>()
                    .AddScoped<IAuthorizationBLLContext, AuthorizationBLLContext>()
 
-                   .AddScoped<ISecurityOperationResolver<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode>, IAuthorizationBLLContext>()
-                   .AddScoped<IDisabledSecurityProviderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>, IAuthorizationSecurityService>()
-                   .AddScoped<IAuthorizationSecurityPathContainer, IAuthorizationSecurityService>()
+                   .AddScoped<ISecurityOperationResolver<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode>>(sp => sp.GetRequiredService<IAuthorizationBLLContext>())
+                   .AddScoped<IDisabledSecurityProviderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>>(sp => sp.GetRequiredService<IAuthorizationSecurityService>())
+                   .AddScoped<IAuthorizationSecurityPathContainer>(sp => sp.GetRequiredService<IAuthorizationSecurityService>())
                    .AddScoped<IQueryableSource<Framework.Authorization.Domain.PersistentDomainObjectBase>, BLLQueryableSource<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.DomainObjectBase, Guid>>()
                    .AddScoped<ISecurityExpressionBuilderFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
                    .AddScoped<IAccessDeniedExceptionService<Framework.Authorization.Domain.PersistentDomainObjectBase>, AccessDeniedExceptionService<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
@@ -79,14 +79,14 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                    .AddScoped<IConfigurationSecurityService, ConfigurationSecurityService>()
                    .AddScoped<IConfigurationBLLFactoryContainer, ConfigurationBLLFactoryContainer>()
 
-                   .AddScoped<ICurrentRevisionService, IDBSession>()
+                   .AddScoped<ICurrentRevisionService>(sp => sp.GetRequiredService<IDBSession>())
 
                    .AddScoped<IConfigurationBLLContextSettings, ConfigurationBLLContextSettings>()
                    .AddScoped<IConfigurationBLLContext, ConfigurationBLLContext>()
 
-                   .AddScoped<ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode>, IConfigurationBLLContext>()
-                   .AddScoped<IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>, IConfigurationSecurityService>()
-                   .AddScoped<IConfigurationSecurityPathContainer, IConfigurationSecurityService>()
+                   .AddScoped<ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode>>(sp => sp.GetRequiredService<IConfigurationBLLContext>())
+                   .AddScoped<IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>>(sp => sp.GetRequiredService<IConfigurationSecurityService>())
+                   .AddScoped<IConfigurationSecurityPathContainer>(sp => sp.GetRequiredService<IConfigurationSecurityService>())
                    .AddScoped<IQueryableSource<Framework.Configuration.Domain.PersistentDomainObjectBase>, BLLQueryableSource<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectBase, Guid>>()
                    .AddScoped<ISecurityExpressionBuilderFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>()
                    .AddScoped<IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase>, AccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>()

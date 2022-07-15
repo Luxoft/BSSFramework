@@ -95,23 +95,11 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                 : base(serviceEnvironment, scopedServiceProvider, session)
             {
                 this.serviceEnvironment = serviceEnvironment;
-                this.SubscriptionService = LazyInterfaceImplementHelper.CreateProxy(this.CreateSubscriptionService);
             }
 
             public TBLLContext MainContext => this.ScopedServiceProvider.GetRequiredService<TBLLContext>();
 
-            protected internal IStandardSubscriptionService SubscriptionService { get; }
-
-            /// <summary>
-            /// Вервис который будет отправлять подписки в шину или базу
-            /// На текущий момент возможны две реализации:
-            /// return new LocalDBSubscriptionService(this.Configuration); // Сохранение модификаций в локальную бд
-            /// или
-            /// return new DefaultActiveSubscriptionServiceClient(); // Отсылка модификаций в MSMQ
-            /// Так же можно использовать либо TraceActiveSubscriptionService, либо EmptyActiveSubscriptionService
-            /// </summary>
-            /// <returns></returns>
-            protected abstract IStandardSubscriptionService CreateSubscriptionService();
+            protected internal IStandardSubscriptionService SubscriptionService => this.ScopedServiceProvider.GetRequiredService<IStandardSubscriptionService>();
 
             #region IBLLContextContainer<TBLLContext> Members
 

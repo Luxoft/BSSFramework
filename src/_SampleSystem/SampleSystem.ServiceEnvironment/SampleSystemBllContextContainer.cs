@@ -78,15 +78,6 @@ namespace SampleSystem.ServiceEnvironment
         }
 
         /// <summary>
-        /// Сохранение модификаций в локальную бд
-        /// </summary>
-        /// <returns></returns>
-        protected override IStandardSubscriptionService CreateSubscriptionService()
-        {
-            return new LocalDBSubscriptionService(this.Configuration);
-        }
-
-        /// <summary>
         /// Добавление подписок на евенты для арибы
         /// </summary>
         protected override void SubscribeEvents()

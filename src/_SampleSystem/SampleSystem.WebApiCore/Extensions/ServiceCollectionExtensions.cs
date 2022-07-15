@@ -53,7 +53,7 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection RegisterAdditonalAuthorizationBLL(this IServiceCollection services)
     {
-        return services.AddScoped<ISecurityTypeResolverContainer, ISampleSystemBLLContext>()
+        return services.AddScoped<ISecurityTypeResolverContainer>(sp => sp.GetRequiredService<ISampleSystemBLLContext>())
                        .AddScoped<IAuthorizationExternalSource, AuthorizationExternalSource<ISampleSystemBLLContext, PersistentDomainObjectBase, AuditPersistentDomainObjectBase, SampleSystemSecurityOperationCode>>();
     }
 
@@ -65,9 +65,9 @@ public static class ServiceCollectionExtensions
                .AddScoped<ISampleSystemBLLContext, SampleSystemBLLContext>()
 
 
-               .AddScoped<ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode>, ISampleSystemBLLContext>()
-               .AddScoped<IDisabledSecurityProviderContainer<PersistentDomainObjectBase>, ISampleSystemSecurityService>()
-               .AddScoped<ISampleSystemSecurityPathContainer, ISampleSystemSecurityService>()
+               .AddScoped<ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode>>(sp => sp.GetRequiredService<ISampleSystemBLLContext>())
+               .AddScoped<IDisabledSecurityProviderContainer<PersistentDomainObjectBase>>(sp => sp.GetRequiredService<ISampleSystemSecurityService>())
+               .AddScoped<ISampleSystemSecurityPathContainer>(sp => sp.GetRequiredService<ISampleSystemSecurityService>())
                .AddScoped<IQueryableSource<PersistentDomainObjectBase>, BLLQueryableSource<ISampleSystemBLLContext, PersistentDomainObjectBase, DomainObjectBase, Guid>>()
                .AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, SampleSystemSecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
                .AddScoped<IAccessDeniedExceptionService<PersistentDomainObjectBase>, AccessDeniedExceptionService<PersistentDomainObjectBase, Guid>>()

@@ -22,7 +22,7 @@ namespace Framework.Events
         {
         }
 
-        public abstract void Send<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs, TransactionMessageMode sendMessageMode)
+        public abstract void Send<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs)
             where TDomainObject : class, TPersistentDomainObjectBase
             where TOperation : struct, Enum;
 
@@ -33,21 +33,20 @@ namespace Framework.Events
         private void InternalSend<TDomainObject, TOperation>(
             TDomainObject domainObject,
             TOperation operation,
-            object customSendObject,
-            TransactionMessageMode sendMessageMode)
+            object customSendObject)
             where TDomainObject : class, TPersistentDomainObjectBase
             where TOperation : struct, Enum
         {
-            this.Send(new DomainOperationSerializeData<TDomainObject, TOperation> { DomainObject = domainObject, Operation = operation, CustomSendObject = customSendObject}, sendMessageMode);
+            this.Send(new DomainOperationSerializeData<TDomainObject, TOperation> { DomainObject = domainObject, Operation = operation, CustomSendObject = customSendObject});
         }
 
-        void IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>>.Send([NotNull] IDomainOperationSerializeData<TPersistentDomainObjectBase> domainObjectEventArgs, TransactionMessageMode sendMessageMode)
+        void IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>>.Send([NotNull] IDomainOperationSerializeData<TPersistentDomainObjectBase> domainObjectEventArgs)
         {
             if (domainObjectEventArgs == null) throw new ArgumentNullException(nameof(domainObjectEventArgs));
 
-            var func = new Action<TPersistentDomainObjectBase, TypeCode, object, TransactionMessageMode>(this.InternalSend).CreateGenericMethod(domainObjectEventArgs.DomainObjectType, domainObjectEventArgs.Operation.GetType());
+            var func = new Action<TPersistentDomainObjectBase, TypeCode, object>(this.InternalSend).CreateGenericMethod(domainObjectEventArgs.DomainObjectType, domainObjectEventArgs.Operation.GetType());
 
-            func.Invoke(this, new object[] { domainObjectEventArgs.DomainObject, domainObjectEventArgs.Operation, domainObjectEventArgs.CustomSendObject, sendMessageMode });
+            func.Invoke(this, new object[] { domainObjectEventArgs.DomainObject, domainObjectEventArgs.Operation, domainObjectEventArgs.CustomSendObject });
         }
     }
 }

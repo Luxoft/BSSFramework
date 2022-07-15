@@ -5,12 +5,7 @@ using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.DomainDriven.ServiceModel.Service;
-using Framework.Security;
 using Framework.SecuritySystem;
-using Framework.Transfering;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

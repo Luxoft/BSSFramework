@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Framework.Authorization.Generated.DTO;
 using Framework.Core;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.ServiceModel.Service;
@@ -20,8 +21,8 @@ namespace SampleSystem.WebApiCore.Controllers
     [ApiController]
     public class IntegrationController : IntegrationSchemaControllerBase<SampleSystemServiceEnvironment, ISampleSystemBLLContext, EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>
     {
-        public IntegrationController(SampleSystemServiceEnvironment environment, IExceptionProcessor exceptionProcessor)
-            : base(environment, exceptionProcessor)
+        public IntegrationController(SampleSystemServiceEnvironment environment, IExceptionProcessor exceptionProcessor, IDateTimeService dateTimeService)
+            : base(environment, exceptionProcessor, dateTimeService)
         {
         }
 

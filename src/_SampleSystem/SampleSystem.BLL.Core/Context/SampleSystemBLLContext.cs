@@ -14,6 +14,8 @@ using Framework.Validation;
 
 using JetBrains.Annotations;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using SampleSystem.Domain;
 using SampleSystem.Domain.Projections;
 
@@ -32,7 +34,6 @@ namespace SampleSystem.BLL
             [NotNull] IValidator validator,
             [NotNull] IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
             [NotNull] IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
-            [NotNull] IDateTimeService dateTimeService,
             [NotNull] ISampleSystemSecurityService securityService,
             [NotNull] ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
             [NotNull] ISampleSystemBLLFactoryContainer logics,
@@ -40,7 +41,7 @@ namespace SampleSystem.BLL
             [NotNull] Framework.Configuration.BLL.IConfigurationBLLContext configuration,
             [NotNull] ICryptService<CryptSystem> cryptService,
             [NotNull] ITypeResolver<string> currentTargetSystemTypeResolver)
-            : base(serviceProvider, dalFactory, operationListeners, sourceListeners, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService, dateTimeService)
+            : base(serviceProvider, dalFactory, operationListeners, sourceListeners, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
         {
             this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
 

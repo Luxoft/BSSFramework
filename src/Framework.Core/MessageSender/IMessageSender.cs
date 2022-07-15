@@ -10,7 +10,6 @@
         /// Sends message
         /// </summary>
         /// <param name="message">Message to send</param>
-        /// <param name="sendMessageMode">Message send mode</param>
-        void Send(TMessage message, TransactionMessageMode sendMessageMode = TransactionMessageMode.Auto);
+        void Send(TMessage message);
     }
 }

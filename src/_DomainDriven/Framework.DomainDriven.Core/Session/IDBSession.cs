@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Framework.DomainDriven.Audit;
 using Framework.DomainDriven.BLL.Tracking;
 using Framework.Persistent;
 

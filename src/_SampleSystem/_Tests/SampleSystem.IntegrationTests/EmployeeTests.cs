@@ -21,6 +21,8 @@ using Framework.DomainDriven.NHibernate;
 using Framework.Events;
 using Framework.OData;
 
+using Microsoft.AspNetCore.Mvc;
+
 using NHibernate.Event;
 using NHibernate.Impl;
 

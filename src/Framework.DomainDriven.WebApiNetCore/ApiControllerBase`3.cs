@@ -88,12 +88,7 @@ namespace Framework.DomainDriven.WebApiNetCore
         [NonAction]
         public TResult EvaluateWithNewScope<TResult>(DBSessionMode sessionMode, Func<TEvaluatedData, TResult> getResult)
         {
-            if (sessionMode == DBSessionMode.Read)
-            {
-                this.ServiceProvider.GetRequiredService<IDBSession>().AsReadOnly();
-            }
-
-            return getResult(this.ServiceProvider.GetRequiredService<TEvaluatedData>());
+            throw new NotImplementedException();
         }
 
         /// <summary>

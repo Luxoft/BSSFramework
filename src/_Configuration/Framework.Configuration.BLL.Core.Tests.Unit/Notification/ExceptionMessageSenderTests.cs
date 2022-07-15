@@ -98,12 +98,10 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.Notification
 
             Message sendedMessage = null;
 
-            this.messageSender.Send(Arg.Do<Message>(m => sendedMessage = m), TransactionMessageMode.Auto);
+            this.messageSender.Send(Arg.Do<Message>(m => sendedMessage = m));
 
             // Act
-            sender.Send(
-                exception,
-                this.Fixture.Create<TransactionMessageMode>());
+            sender.Send(exception);
 
             // Assert
             sendedMessage.Sender.Should().Be(FromAddress);
@@ -121,11 +119,10 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.Notification
 
             // Act
             sender.Send(
-                this.Fixture.Create<InvalidOperationException>(),
-                this.Fixture.Create<TransactionMessageMode>());
+                this.Fixture.Create<InvalidOperationException>());
 
             // Assert
-            this.messageSender.DidNotReceive().Send(Arg.Any<Message>(), TransactionMessageMode.Auto);
+            this.messageSender.DidNotReceive().Send(Arg.Any<Message>());
         }
 
         [Test]
@@ -156,10 +153,10 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.Notification
             var sender = this.Fixture.Create<ExceptionMessageSender>();
 
             // Act
-            sender.Send(exception, this.Fixture.Create<TransactionMessageMode>());
+            sender.Send(exception);
 
             // Assert
-            this.messageSender.DidNotReceive().Send(Arg.Any<Message>(), TransactionMessageMode.Auto);
+            this.messageSender.DidNotReceive().Send(Arg.Any<Message>());
         }
 
         private void TestMessageWasSent(string login)
@@ -173,11 +170,10 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.Notification
 
             // Act
             sender.Send(
-                this.Fixture.Create<ArgumentOutOfRangeException>(),
-                this.Fixture.Create<TransactionMessageMode>());
+                this.Fixture.Create<ArgumentOutOfRangeException>());
 
             // Assert
-            this.messageSender.DidNotReceive().Send(Arg.Any<Message>(), TransactionMessageMode.Auto);
+            this.messageSender.DidNotReceive().Send(Arg.Any<Message>());
         }
 
         public class TestingExceptionMessageSender : ExceptionMessageSender

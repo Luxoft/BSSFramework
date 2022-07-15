@@ -3,7 +3,7 @@ using Framework.Core;
 
 namespace Framework.Notification
 {
-    public interface INotificationService : IExceptionSenderContainer
+    public interface INotificationService
     {
         IMessageSender<MessageTemplateNotification> MainSender { get; }
 

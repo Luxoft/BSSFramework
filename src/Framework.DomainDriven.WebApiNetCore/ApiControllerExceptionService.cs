@@ -40,18 +40,6 @@ namespace Framework.DomainDriven.WebApiNetCore
             this.contextEvaluator.Evaluate(DBSessionMode.Write, context => this.Process(exception, context));
 
         /// <summary>
-        ///     Safe Send To Mail Exception
-        /// </summary>
-        protected virtual void SafeSendToMailException(Exception baseException, TBLLContext context)
-        {
-            var tryMethod = new TryMethod<Exception, TBLLContext, Exception>(this.TrySendToMailException);
-
-            Maybe.OfTryMethod(tryMethod)(baseException, context)
-                 .ToReference()
-                 .Maybe(z => this.TrySaveExceptionMessage(z, context));
-        }
-
-        /// <summary>
         ///     Is Handled Exception
         /// </summary>
         protected virtual bool IsHandledException(Exception exception)
@@ -121,8 +109,6 @@ namespace Framework.DomainDriven.WebApiNetCore
             }
 
             this.TrySaveExceptionMessage(exception, context);
-
-            this.SafeSendToMailException(exception, context);
         }
 
         private Exception GetFacadeException(Exception exception, TBLLContext context)
@@ -137,27 +123,6 @@ namespace Framework.DomainDriven.WebApiNetCore
                        : this.GetInternalServerException();
         }
 
-        private bool TrySendToMailException(
-            Exception baseException,
-            TBLLContext context,
-            out Exception faultSendException)
-        {
-            try
-            {
-                context.Configuration.ExceptionSender.Send(baseException, TransactionMessageMode.InternalTransaction);
-
-                faultSendException = null;
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                faultSendException = ex;
-
-                return false;
-            }
-        }
-
         private void TrySaveExceptionMessage(Exception exception, TBLLContext context)
         {
             if (exception == null)
@@ -169,9 +134,8 @@ namespace Framework.DomainDriven.WebApiNetCore
             {
                 context.Configuration.ExceptionService.Save(exception);
             }
-            catch (Exception ex)
+            catch
             {
-                this.SafeSendToMailException(ex, context);
             }
         }
     }

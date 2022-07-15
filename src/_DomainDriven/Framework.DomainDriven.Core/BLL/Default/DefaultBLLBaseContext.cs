@@ -20,9 +20,7 @@ namespace Framework.DomainDriven.BLL
 
             ITrackingServiceContainer<TPersistentDomainObjectBase>,
 
-            IFetchServiceContainer<TPersistentDomainObjectBase, FetchBuildRule>,
-
-            IDateTimeServiceContainer
+            IFetchServiceContainer<TPersistentDomainObjectBase, FetchBuildRule>
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
         where TDomainObjectBase : class
@@ -39,7 +37,6 @@ namespace Framework.DomainDriven.BLL
         /// <param name="validator">The validator.</param>
         /// <param name="hierarchicalObjectExpanderFactory">The hierarchical object expander factory.</param>
         /// <param name="fetchService">The fetch service.</param>
-        /// <param name="dateTimeService">The date time service.</param>
         /// <exception cref="ArgumentNullException">dalFactory
         /// or
         /// operationListeners
@@ -64,8 +61,7 @@ namespace Framework.DomainDriven.BLL
                 [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
                 [NotNull] IValidator validator,
                 [NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
-                [NotNull] IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService,
-                [NotNull] IDateTimeService dateTimeService)
+                [NotNull] IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
         {
             if (objectStateService == null) throw new ArgumentNullException(nameof(objectStateService));
 
@@ -82,8 +78,6 @@ namespace Framework.DomainDriven.BLL
             this.SelectOperationParser = BusinessLogicSelectOperationParser.CachedDefault;
 
             this.FetchService = fetchService ?? throw new ArgumentNullException(nameof(fetchService));
-
-            this.DateTimeService = dateTimeService ?? throw new ArgumentNullException(nameof(dateTimeService));
         }
 
         public IValidator Validator { get; }
@@ -103,8 +97,6 @@ namespace Framework.DomainDriven.BLL
         public IStandartExpressionBuilder StandartExpressionBuilder { get; }
 
         public IParser<string, SelectOperation> SelectOperationParser { get; }
-
-        public virtual IDateTimeService DateTimeService { get; }
 
         public IHierarchicalObjectExpanderFactory<TIdent> HierarchicalObjectExpanderFactory { get; }
 
@@ -147,9 +139,8 @@ namespace Framework.DomainDriven.BLL
             [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
             [NotNull] IValidator validator,
             [NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
-            [NotNull] IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService,
-            [NotNull] IDateTimeService dateTimeService)
-            : base(serviceProvider, dalFactory, operationListeners, sourceListeners, objectStateService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService, dateTimeService)
+            [NotNull] IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
+            : base(serviceProvider, dalFactory, operationListeners, sourceListeners, objectStateService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
         {
         }
 

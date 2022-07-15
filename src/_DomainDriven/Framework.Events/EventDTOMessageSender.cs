@@ -24,9 +24,9 @@ namespace Framework.Events
             this.messageSender = messageSender ?? throw new ArgumentNullException(nameof(messageSender));
         }
 
-        public override void Send<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs, TransactionMessageMode sendMessageMode)
+        public override void Send<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs)
         {
-            this.messageSender.Send(this.ToEventDTOBase(domainObjectEventArgs), sendMessageMode);
+            this.messageSender.Send(this.ToEventDTOBase(domainObjectEventArgs));
         }
     }
 }

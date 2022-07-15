@@ -5,7 +5,7 @@ namespace Framework.Core
 {
     public abstract class MessageSender<TMessage> : IMessageSender<TMessage>
     {
-        public abstract void Send(TMessage message, TransactionMessageMode transactionMessageMode);
+        public abstract void Send(TMessage message);
 
 
         public static readonly IMessageSender<TMessage> Empty = new EmptyMessageSender();
@@ -19,7 +19,7 @@ namespace Framework.Core
         {
             if (writer == null) throw new ArgumentNullException(nameof(writer));
 
-            return Empty.WithWrite((obj, transactionMessageMode) => writer.WriteLine(obj));
+            return Empty.WithWrite((obj) => writer.WriteLine(obj));
         }
 
         private class EmptyMessageSender : MessageSender<TMessage>
@@ -29,7 +29,7 @@ namespace Framework.Core
 
             }
 
-            public override void Send(TMessage message, TransactionMessageMode transactionMessageMode)
+            public override void Send(TMessage message)
             {
 
             }
@@ -42,7 +42,7 @@ namespace Framework.Core
 
             }
 
-            public override void Send(TMessage message, TransactionMessageMode transactionMessageMode)
+            public override void Send(TMessage message)
             {
                 throw new NotImplementedException();
             }

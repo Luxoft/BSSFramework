@@ -8,16 +8,14 @@ namespace Framework.Notification
     /// </summary>
     public class NotificationService : INotificationService
     {
-        public NotificationService(IMessageSender<MessageTemplateNotification> mainSender, IMessageSender<Notification> notificationSender, IMessageSender<MessageTemplateNotification> subscriptionSender, IMessageSender<Exception> exceptionSender)
+        public NotificationService(IMessageSender<MessageTemplateNotification> mainSender, IMessageSender<Notification> notificationSender, IMessageSender<MessageTemplateNotification> subscriptionSender)
         {
             if (mainSender == null) throw new ArgumentNullException(nameof(mainSender));
             if (subscriptionSender == null) throw new ArgumentNullException(nameof(subscriptionSender));
-            if (exceptionSender == null) throw new ArgumentNullException(nameof(exceptionSender));
 
             this.MainSender = mainSender;
             this.NotificationSender = notificationSender;
             this.SubscriptionSender = subscriptionSender;
-            this.ExceptionSender = exceptionSender;
         }
 
         /// <summary>
@@ -34,10 +32,5 @@ namespace Framework.Notification
         /// Notification message sender
         /// </summary>
         public IMessageSender<Notification> NotificationSender { get; private set; }
-
-        /// <summary>
-        /// Exception message sender
-        /// </summary>
-        public IMessageSender<Exception> ExceptionSender { get; private set; }
     }
 }

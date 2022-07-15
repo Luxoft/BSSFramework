@@ -32,7 +32,7 @@ using PersistentDomainObjectBase = SampleSystem.Domain.PersistentDomainObjectBas
 namespace SampleSystem.ServiceEnvironment
 {
     public class SampleSystemServiceEnvironment :
-        ServiceEnvironmentBase<SampleSystemBllContextContainer, ISampleSystemBLLContext, PersistentDomainObjectBase,
+        ServiceEnvironmentBase<SampleSystemBLLContextContainer, ISampleSystemBLLContext, PersistentDomainObjectBase,
         AuditPersistentDomainObjectBase, SampleSystemSecurityOperationCode, NamedLock, NamedLockOperation>,
         ISystemMetadataTypeBuilderContainer
     {
@@ -42,13 +42,18 @@ namespace SampleSystem.ServiceEnvironment
         protected ICryptService<CryptSystem> CryptService { get; } = new CryptService<CryptSystem>();
 
         protected readonly bool? isDebugMode;
-        protected readonly ValidatorCompileCache ValidatorCompileCache;
+        public readonly ValidatorCompileCache ValidatorCompileCache;
+
+
+        public readonly ValidatorCompileCache CustomAuthorizationValidatorCompileCache;
+
+
         protected readonly IFetchService<PersistentDomainObjectBase, FetchBuildRule> FetchService;
         protected readonly Func<ISampleSystemBLLContext, ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>> SecurityExpressionBuilderFactoryFunc;
 
-        protected readonly SmtpSettings smtpSettings;
+        public readonly SmtpSettings SmtpSettings;
 
-        protected readonly IRewriteReceiversService rewriteReceiversService;
+        public readonly IRewriteReceiversService RewriteReceiversService;
 
 
         public SampleSystemServiceEnvironment(
@@ -75,8 +80,8 @@ namespace SampleSystem.ServiceEnvironment
 
             this.FetchService = new SampleSystemMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<PersistentDomainObjectBase>.OData);
 
-            this.smtpSettings = smtpSettings.Value;
-            this.rewriteReceiversService = rewriteReceiversService;
+            this.SmtpSettings = smtpSettings.Value;
+            this.RewriteReceiversService = rewriteReceiversService;
         }
 
         public ISystemMetadataTypeBuilder SystemMetadataTypeBuilder { get; }

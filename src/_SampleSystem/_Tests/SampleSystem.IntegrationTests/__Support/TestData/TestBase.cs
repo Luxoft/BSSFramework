@@ -195,30 +195,22 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
 
         protected TResult EvaluateWrite<TResult>(Func<ISampleSystemBLLContext, TResult> func)
         {
-            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, this.GetCurrentUserName(), func);
+            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, func);
         }
 
         protected void EvaluateRead(Action<ISampleSystemBLLContext> action)
         {
-            this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, this.GetCurrentUserName(), action);
+            this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, action);
         }
 
         protected T EvaluateRead<T>(Func<ISampleSystemBLLContext, T> action)
         {
-            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, this.GetCurrentUserName(), action);
+            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, action);
         }
-
 
         protected void EvaluateWrite(Action<ISampleSystemBLLContext> func)
         {
-            this.Environment.GetContextEvaluator().Evaluate(
-                DBSessionMode.Write,
-                this.GetCurrentUserName(),
-                context =>
-                {
-                    func(context);
-                    return Ignore.Value;
-                });
+            this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context => { func(context); return Ignore.Value; });
         }
 
         public ControllerEvaluator<TController> GetControllerEvaluator<TController>(string principalName = null)

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 
 using Framework.Core;
-using Framework.DomainDriven.Audit;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Tracking;
 using Framework.Persistent;
@@ -18,27 +17,19 @@ public class NHibSession : IDBSession
 
     private readonly Lazy<IDBSession> lazyInnerSession;
 
-    public NHibSession([NotNull] NHibSessionConfiguration configuration,
-                       [NotNull] IEnumerable<IAuditProperty> modifyAuditProperties,
-                       [NotNull] IEnumerable<IAuditProperty> createAuditProperties,
-                       DBSessionMode defaultSessionMode = DBSessionMode.Write)
+    public NHibSession([NotNull] NHibSessionConfiguration configuration, INHibSessionSettings settings)
     {
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-        if (!Enum.IsDefined(typeof(DBSessionMode), defaultSessionMode))
-        {
-            throw new InvalidEnumArgumentException(nameof(defaultSessionMode), (int)defaultSessionMode, typeof(DBSessionMode));
-        }
-
         this.lazyInnerSession = new Lazy<IDBSession>(() =>
         {
-            switch (this.sessionMode ?? defaultSessionMode)
+            switch (this.sessionMode ?? settings.DefaultSessionMode)
             {
                 case DBSessionMode.Read:
                     return new ReadOnlyNHibSession(configuration);
 
                 case DBSessionMode.Write:
-                    return new WriteNHibSession(configuration, modifyAuditProperties, createAuditProperties);
+                    return new WriteNHibSession(configuration, settings);
 
                 default:
                     throw new InvalidOperationException();

@@ -239,7 +239,7 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Services
 
         private MessageTemplateNotification SendTemplate(MessageTemplateNotification template)
         {
-            this.templateSender.Send(template, TransactionMessageMode.Auto);
+            this.templateSender.Send(template);
             return template;
         }
 

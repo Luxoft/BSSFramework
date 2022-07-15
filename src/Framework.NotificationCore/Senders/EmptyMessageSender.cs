@@ -5,7 +5,7 @@ namespace Framework.NotificationCore.Senders
 {
     public class EmptyMessageSender : IMessageSender<NotificationEventDTO>
     {
-        public void Send(NotificationEventDTO message, TransactionMessageMode sendMessageMode = TransactionMessageMode.Auto)
+        public void Send(NotificationEventDTO message)
         {
         }
     }

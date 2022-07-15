@@ -18,8 +18,6 @@ namespace Framework.DomainDriven.NHibernate.Audit
 
         }
 
-        public static ModifyAuditEventListener Create(IUserAuthenticationService userAuthenticationService, IDateTimeService dateTimeService) => new ModifyAuditEventListener(AuditPropertyPair.GetCreateAuditProperty(userAuthenticationService, dateTimeService));
-
         public Task<bool> OnPreInsertAsync(PreInsertEvent @event, CancellationToken cancellationToken)
         {
             return Task.FromResult(this.OnPreInsert(@event));

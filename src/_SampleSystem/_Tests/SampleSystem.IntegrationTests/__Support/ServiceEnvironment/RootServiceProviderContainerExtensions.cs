@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Framework.Core.Services;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.WebApiNetCore;
 
@@ -30,8 +31,8 @@ public static class RootServiceProviderContainerExtensions
         return controllerEvaluatorContainer.RootServiceProvider.GetRequiredService<IContextEvaluator<ISampleSystemBLLContext>>();
     }
 
-    public static string GetCurrentUserName(this IRootServiceProviderContainer controllerEvaluatorContainer)
+    public static IDateTimeService GetDateTimeService(this IRootServiceProviderContainer controllerEvaluatorContainer)
     {
-        return controllerEvaluatorContainer.RootServiceProvider.GetRequiredService<IUserAuthenticationService>().GetUserName();
+        return controllerEvaluatorContainer.RootServiceProvider.GetRequiredService<IDateTimeService>();
     }
 }

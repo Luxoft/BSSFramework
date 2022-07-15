@@ -24,9 +24,7 @@ namespace SampleSystem.BLL
 
         Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContextContainer<Framework.Configuration.BLL.IConfigurationBLLContext>,
 
-        IDefaultHierarchicalBLLContext<PersistentDomainObjectBase, Guid>,
-
-        IDateTimeServiceContainer
+        IDefaultHierarchicalBLLContext<PersistentDomainObjectBase, Guid>
     {
     }
 }

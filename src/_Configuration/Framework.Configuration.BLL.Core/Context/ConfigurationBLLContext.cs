@@ -57,31 +57,28 @@ namespace Framework.Configuration.BLL
             [NotNull] IValidator validator,
             [NotNull] IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
             [NotNull] IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
-            [NotNull] IDateTimeService dateTimeService,
             [NotNull] ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
-            IMessageSender<Exception> exceptionSender,
             IMessageSender<MessageTemplateNotification> subscriptionSender,
             Func<IConfigurationSecurityService> getSecurityService,
             Func<IConfigurationBLLFactoryContainer> getLogics,
-            IAuthorizationBLLContext authorizationBLLContext,
+            IAuthorizationBLLContext authorization,
             Func<BLLSecurityMode, IBLLSimpleQueryBase<IEmployee>> getEmployeeSourceFunc,
             IEnumerable<ITargetSystemService> targetSystemServices,
             [NotNull] ISerializerFactory<string> systemConstantSerializerFactory,
             [NotNull] IExceptionService exceptionService,
             [NotNull] Func<long> getCurrentRevision)
-            : base(serviceProvider, dalFactory, operationListeners, sourceListeners, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService, dateTimeService)
+            : base(serviceProvider, dalFactory, operationListeners, sourceListeners, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
         {
             if (getSecurityService == null) throw new ArgumentNullException(nameof(getSecurityService));
             if (getLogics == null) throw new ArgumentNullException(nameof(getLogics));
 
             this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
-            this.ExceptionSender = exceptionSender ?? throw new ArgumentNullException(nameof(exceptionSender));
             this.SubscriptionSender = subscriptionSender ?? throw new ArgumentNullException(nameof(subscriptionSender));
 
             this.lazySecurityService = getSecurityService.ToLazy();
             this.lazyLogics = getLogics.ToLazy();
 
-            this.Authorization = authorizationBLLContext ?? throw new ArgumentNullException(nameof(authorizationBLLContext));
+            this.Authorization = authorization ?? throw new ArgumentNullException(nameof(authorization));
             this.getEmployeeSourceFunc = getEmployeeSourceFunc ?? throw new ArgumentNullException(nameof(getEmployeeSourceFunc));
             this.getCurrentRevision = getCurrentRevision ?? throw new ArgumentNullException(nameof(getCurrentRevision));
 
@@ -118,8 +115,6 @@ namespace Framework.Configuration.BLL
         public IMessageSender<MessageTemplateNotification> SubscriptionSender { get; }
 
         public IConfigurationSecurityService SecurityService => this.lazySecurityService.Value;
-
-        public IMessageSender<Exception> ExceptionSender { get; }
 
         public ITypeResolver<string> TypeResolver => CurrentTargetSystemTypeResolver;
 

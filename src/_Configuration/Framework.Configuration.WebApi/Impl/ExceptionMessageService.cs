@@ -43,7 +43,7 @@ namespace Framework.Configuration.WebApi
         {
             try
             {
-                evaluateData.Context.ExceptionSender.Send(mappedMessage.ToException(), TransactionMessageMode.Auto);
+                evaluateData.Context.ExceptionService.Save(mappedMessage.ToException());
             }
             catch (Exception e)
             {

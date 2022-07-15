@@ -42,12 +42,11 @@ namespace Framework.DomainDriven.NHibernate
         private bool disposed;
 
         internal WriteNHibSession(NHibSessionConfiguration sessionFactory,
-                                  [NotNull] IEnumerable<IAuditProperty> modifyAuditProperties,
-                                  [NotNull] IEnumerable<IAuditProperty> createAuditProperties)
+                                  INHibSessionSettings settings)
                 : base(sessionFactory, DBSessionMode.Write)
         {
-            this.modifyAuditProperties = modifyAuditProperties;
-            this.createAuditProperties = createAuditProperties;
+            this.modifyAuditProperties = settings.GetModifyAuditProperty();
+            this.createAuditProperties = settings.GetCreateAuditProperty();
             this.collectChangedEventListener = new CollectChangesEventListener();
 
             this.transactionScope = this.SessionConfiguration.EnableTransactionScope ? this.CreateTransactionScope() : null;

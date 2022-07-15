@@ -30,9 +30,8 @@ namespace Framework.DomainDriven.BLL.Security
             [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
             [NotNull] IValidator validator,
             [NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
-            [NotNull] IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService,
-            [NotNull] IDateTimeService dateTimeService)
-            : base(serviceProvider, dalFactory, operationListeners, sourceListeners, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService, dateTimeService)
+            [NotNull] IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
+            : base(serviceProvider, dalFactory, operationListeners, sourceListeners, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
         {
         }
 

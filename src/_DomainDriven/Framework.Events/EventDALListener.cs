@@ -76,7 +76,7 @@ namespace Framework.Events
                     CustomDomainObjectType = domainObjectType
                 };
 
-                this.messageSender.Send(message, TransactionMessageMode.DTSTransaction);
+                this.messageSender.Send(message);
             }
         }
 

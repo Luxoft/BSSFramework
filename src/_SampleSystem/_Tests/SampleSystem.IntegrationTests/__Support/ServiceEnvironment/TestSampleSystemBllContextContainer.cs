@@ -18,24 +18,19 @@ using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
-public class TestSampleSystemBllContextContainer : SampleSystemBllContextContainer
+public class TestSampleSystemBllContextContainer : SampleSystemBLLContextContainer
 {
     public TestSampleSystemBllContextContainer(
             SampleSystemServiceEnvironment serviceEnvironment,
             IServiceProvider scopedServiceProvider,
             IDBSession dbSession,
             IUserAuthenticationService userAuthenticationService,
-            IDateTimeService dateTimeService,
             SubscriptionMetadataStore subscriptionMetadataStore,
-            ValidatorCompileCache defaultAuthorizationValidatorCompileCache,
-            ValidatorCompileCache validatorCompileCache,
             IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
             ICryptService<CryptSystem> cryptService,
-            ITypeResolver<string> currentTargetSystemTypeResolver,
-            string currentPrincipalName, SmtpSettings smtpSettings,
-            IRewriteReceiversService rewriteReceiversService)
+            ITypeResolver<string> currentTargetSystemTypeResolver)
 
-            : base(serviceEnvironment, scopedServiceProvider, dbSession, userAuthenticationService, dateTimeService, subscriptionMetadataStore, defaultAuthorizationValidatorCompileCache, validatorCompileCache, fetchService, cryptService, currentTargetSystemTypeResolver, smtpSettings, rewriteReceiversService)
+            : base(serviceEnvironment, scopedServiceProvider, dbSession, userAuthenticationService, subscriptionMetadataStore, fetchService, cryptService, currentTargetSystemTypeResolver)
     {
     }
 
@@ -43,6 +38,7 @@ public class TestSampleSystemBllContextContainer : SampleSystemBllContextContain
     {
         return new LocalDBNotificationEventDTOMessageSender(this.Configuration);
     }
+
     protected override IEnumerable<IDALListener> GetBeforeTransactionCompletedListeners()
     {
         foreach (var dalListener in base.GetBeforeTransactionCompletedListeners())

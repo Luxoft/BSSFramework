@@ -49,7 +49,7 @@ namespace Framework.NotificationCore.Senders
         protected virtual bool IsProduction()
             => Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == Environments.Production;
 
-        public void Send(NotificationEventDTO message, TransactionMessageMode sendMessageMode = TransactionMessageMode.Auto)
+        public void Send(NotificationEventDTO message)
         {
             using (var client = this.GetSmtpClient())
             {

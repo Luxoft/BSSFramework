@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Linq;
 
-using Configuration.WebApi.Controllers;
-
-using Framework.Authorization.Domain;
 using Framework.Configuration.Generated.DTO;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.DomainDriven.ServiceModel.Service;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

@@ -30,21 +30,6 @@ namespace Framework.Configuration.Core.Tests.Unit
             typedValue.ToString().Should().Be(GuidString);
         }
 
-        [Test]
-        public void ConvertToTypedValue_EnumString_TypedResult()
-        {
-            // Arrange
-            const string EnumString = "InternalTransaction";
-            var bll = new TestingCustomReportBll(null);
-
-            // Act
-            var typedValue = bll.ConvertToTypedValue(EnumString, typeof(TransactionMessageMode));
-
-            // Assert
-            typedValue.Should().BeOfType<TransactionMessageMode>();
-            typedValue.ToString().Should().Be(EnumString);
-        }
-
         private class TestingCustomReportBll : CustomReportBLLBase<IConfigurationBLLContext, ConfigurationSecurityOperationCode, PersistentDomainObjectBase, object, object>
         {
             public TestingCustomReportBll(IConfigurationBLLContext context)

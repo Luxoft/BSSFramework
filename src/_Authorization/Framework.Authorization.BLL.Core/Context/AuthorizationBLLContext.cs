@@ -70,9 +70,9 @@ namespace Framework.Authorization.BLL
                 standartExpressionBuilder,
                 validator,
                 hierarchicalObjectExpanderFactory,
-                fetchService,
-                dateTimeService)
+                fetchService)
         {
+            this.DateTimeService = dateTimeService;
             this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
             this.SecurityService = securityService ?? throw new ArgumentNullException(nameof(securityService));
             this.logics = logics ?? throw new ArgumentNullException(nameof(logics));
@@ -100,27 +100,30 @@ namespace Framework.Authorization.BLL
             this.operationSecurityProvider = new OperationSecurityProvider(this);
         }
 
-        public IConfigurationBLLContext Configuration { get; private set; }
+        public IConfigurationBLLContext Configuration { get; }
 
         public ITypeResolver<string> TypeResolver => CurrentTargetSystemTypeResolver;
 
-        public ITypeResolver<EntityType> SecurityTypeResolver { get; private set; }
+        public ITypeResolver<EntityType> SecurityTypeResolver { get; }
 
-        public IRunAsManager RunAsManager { get; private set; }
+        public IRunAsManager RunAsManager { get; }
 
-        public string CurrentPrincipalName { get; private set; }
+        public string CurrentPrincipalName { get; }
 
-        public IAuthorizationSecurityService SecurityService { get; private set; }
+        public IAuthorizationSecurityService SecurityService { get; }
 
         public Settings Settings => this.lazySettings.Value;
 
         public override IAuthorizationBLLFactoryContainer Logics => this.logics;
 
-        public IAuthorizationExternalSource ExternalSource { get; private set; }
+        public IAuthorizationExternalSource ExternalSource { get; }
 
         public Principal CurrentPrincipal => this.lazyCurrentPrincipal.Value;
 
-        public ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory { get; private set; }
+        [NotNull]
+        public IDateTimeService DateTimeService { get; }
+
+        public ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory { get; }
 
         public EntityType GetEntityType(Type type)
         {

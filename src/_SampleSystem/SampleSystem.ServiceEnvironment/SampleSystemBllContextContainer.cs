@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
 using Framework.Authorization.Events;
-using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Core;
 using Framework.Core.Services;
@@ -14,21 +13,14 @@ using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.Events;
 using Framework.Notification.DTO;
-using Framework.Notification.New;
-using Framework.NotificationCore.Services;
-using Framework.NotificationCore.Settings;
 using Framework.Persistent;
-using Framework.Report;
 using Framework.Security.Cryptography;
 using Framework.SecuritySystem;
 using Framework.Validation;
 
 using JetBrains.Annotations;
 
-using Microsoft.Extensions.DependencyInjection;
-
 using SampleSystem.BLL;
-using SampleSystem.Domain;
 using SampleSystem.Events;
 
 using DomainObjectBase = SampleSystem.Domain.DomainObjectBase;
@@ -37,7 +29,7 @@ using Principal = Framework.Authorization.Domain.Principal;
 
 namespace SampleSystem.ServiceEnvironment
 {
-    public class SampleSystemBllContextContainer : SampleSystemServiceEnvironment.ServiceEnvironmentBLLContextContainer
+    public class SampleSystemBLLContextContainer : SampleSystemServiceEnvironment.ServiceEnvironmentBLLContextContainer
     {
         private readonly BLLOperationEventListenerContainer<DomainObjectBase> mainOperationListeners = new BLLOperationEventListenerContainer<DomainObjectBase>();
 
@@ -45,10 +37,7 @@ namespace SampleSystem.ServiceEnvironment
 
         private readonly IEventsSubscriptionManager<ISampleSystemBLLContext, PersistentDomainObjectBase> aribaSubscriptionManager;
 
-
-        private readonly ValidatorCompileCache defaultAuthorizationValidatorCompileCache;
-
-        private readonly ValidatorCompileCache validatorCompileCache;
+        private readonly SampleSystemServiceEnvironment serviceEnvironment;
 
         private readonly IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService;
 
@@ -56,44 +45,30 @@ namespace SampleSystem.ServiceEnvironment
 
         private readonly ITypeResolver<string> currentTargetSystemTypeResolver;
 
-        private readonly SmtpSettings smtpSettings;
-
-        private readonly IRewriteReceiversService rewriteReceiversService;
-
-        public SampleSystemBllContextContainer(
+        public SampleSystemBLLContextContainer(
             SampleSystemServiceEnvironment serviceEnvironment,
             IServiceProvider scopedServiceProvider,
             IDBSession dbSession,
             [NotNull] IUserAuthenticationService userAuthenticationService,
-            [NotNull] IDateTimeService dateTimeService,
             SubscriptionMetadataStore subscriptionMetadataStore,
-            ValidatorCompileCache defaultAuthorizationValidatorCompileCache,
-            ValidatorCompileCache validatorCompileCache,
             IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
             ICryptService<CryptSystem> cryptService,
-            ITypeResolver<string> currentTargetSystemTypeResolver,
-            SmtpSettings smtpSettings,
-            IRewriteReceiversService rewriteReceiversService)
-            : base(serviceEnvironment, scopedServiceProvider, dbSession, userAuthenticationService, dateTimeService, subscriptionMetadataStore)
+            ITypeResolver<string> currentTargetSystemTypeResolver)
+            : base(serviceEnvironment, scopedServiceProvider, dbSession, userAuthenticationService, subscriptionMetadataStore)
         {
-            this.defaultAuthorizationValidatorCompileCache = defaultAuthorizationValidatorCompileCache;
-            this.validatorCompileCache = validatorCompileCache;
+            this.serviceEnvironment = serviceEnvironment;
             this.fetchService = fetchService;
             this.cryptService = cryptService;
             this.currentTargetSystemTypeResolver = currentTargetSystemTypeResolver;
 
             this.aribaSubscriptionManager = LazyInterfaceImplementHelper.CreateProxy<IEventsSubscriptionManager<ISampleSystemBLLContext, PersistentDomainObjectBase>>(
                 () => new SampleSystemAribaEventsSubscriptionManager(this.MainContext, new SampleSystemAribaLocalDBEventMessageSender(this.MainContext, this.Configuration)));
-
-
-            this.smtpSettings = smtpSettings;
-            this.rewriteReceiversService = rewriteReceiversService;
         }
 
 
         protected override ISampleSystemBLLContext CreateMainContext()
         {
-            var validator = LazyInterfaceImplementHelper.CreateProxy<IValidator>(() => new SampleSystemValidator(this.MainContext, this.validatorCompileCache));
+            var validator = LazyInterfaceImplementHelper.CreateProxy<IValidator>(() => new SampleSystemValidator(this.MainContext, this.serviceEnvironment.ValidatorCompileCache));
 
             return new SampleSystemBLLContext(
                 this.ScopedServiceProvider,
@@ -106,7 +81,6 @@ namespace SampleSystem.ServiceEnvironment
                 validator,
                 this.HierarchicalObjectExpanderFactory,
                 this.fetchService,
-                this.ScopedServiceProvider.GetRequiredService<IDateTimeService>(),
                 LazyInterfaceImplementHelper.CreateProxy<ISampleSystemSecurityService>(() => new SampleSystemSecurityService(this.MainContext)),
                 LazyInterfaceImplementHelper.CreateProxy(() => this.GetSecurityExpressionBuilderFactory<ISampleSystemBLLContext, PersistentDomainObjectBase, Guid>(this.MainContext)),
                 LazyInterfaceImplementHelper.CreateProxy<ISampleSystemBLLFactoryContainer>(() => new SampleSystemBLLFactoryContainer(this.MainContext)),
@@ -131,24 +105,8 @@ namespace SampleSystem.ServiceEnvironment
         /// <returns></returns>
         protected override AuthorizationValidator CreateAuthorizationValidator()
         {
-            return new SampleSystemCustomAuthValidator(this.Authorization, this.defaultAuthorizationValidatorCompileCache);
+            return new SampleSystemCustomAuthValidator(this.Authorization, this.serviceEnvironment.CustomAuthorizationValidatorCompileCache);
         }
-        protected override IMessageSender<Exception> GetExceptionSender()
-        {
-            return MessageSender<Exception>.Trace;
-        }
-
-        ///// <inheritdoc />
-        //protected override IMessageSender<Exception> GetExceptionSender()
-        //{
-        //    return MessageSender<Exception>.Trace;
-
-        //    return new SampleSystemExceptionMessageSender(
-        //                                                  this.Configuration,
-        //                                                  SmtpMessageSender.Configuration,
-        //                                                  this.ServiceEnvironment.NotificationContext.Sender,
-        //                                                  this.ServiceEnvironment.NotificationContext.ExceptionReceivers);
-        //}
 
         /// <inheritdoc />
         protected override IEnumerable<IManualEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>> GetAuthorizationEventDALListeners()
@@ -226,7 +184,7 @@ namespace SampleSystem.ServiceEnvironment
         //}
 
         protected override IMessageSender<NotificationEventDTO> GetMessageTemplateSender() =>
-                new Framework.NotificationCore.Senders.SmtpMessageSender(LazyHelper.Create(() => this.smtpSettings), LazyHelper.Create(() => this.rewriteReceiversService), this.Configuration);
+                new Framework.NotificationCore.Senders.SmtpMessageSender(LazyHelper.Create(() => this.serviceEnvironment.SmtpSettings), LazyHelper.Create(() => this.serviceEnvironment.RewriteReceiversService), this.Configuration);
 
         /// <summary>
         /// Добавление подписок на евенты для арибы

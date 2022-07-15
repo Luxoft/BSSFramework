@@ -40,10 +40,10 @@ namespace Framework.Configuration.BLL.Notification
                 this._notificationEventSender = notificationEventSender;
             }
 
-            public void Send(Framework.Notification.Notification notification, TransactionMessageMode transactionMessageMode)
+            public void Send(Framework.Notification.Notification notification)
             {
                 notification.Message.Sender = notification.Message.Sender ?? this._defaultSender;
-                this._notificationEventSender.Send(new NotificationEventDTO(notification), transactionMessageMode);
+                this._notificationEventSender.Send(new NotificationEventDTO(notification));
             }
         }
     }

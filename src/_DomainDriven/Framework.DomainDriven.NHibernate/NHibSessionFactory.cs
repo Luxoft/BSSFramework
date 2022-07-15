@@ -18,7 +18,7 @@ using NHibernate.Tool.hbm2ddl;
 
 namespace Framework.DomainDriven.NHibernate
 {
-    public class NHibSessionConfiguration
+    public class NHibSessionConfiguration : IDisposable
     {
         private static readonly TimeSpan DefaultTransactionTimeout = new TimeSpan(0, 20, 0);
 

@@ -88,7 +88,7 @@ namespace Framework.Configuration.BLL.Notification
 
             private ILogger Logger { get; }
 
-            public void Send(MessageTemplateNotification message, TransactionMessageMode transactionMessageMode)
+            public void Send(MessageTemplateNotification message)
             {
                 if (message == null)
                 {
@@ -116,7 +116,7 @@ namespace Framework.Configuration.BLL.Notification
                                         notification.Message.From,
                                         notification.Message.Body);
 
-                this._notificationEventSender.Send(new NotificationEventDTO(notification), transactionMessageMode);
+                this._notificationEventSender.Send(new NotificationEventDTO(notification));
             }
 
             private Framework.Notification.Notification CreateNotification(MessageTemplateNotification message)

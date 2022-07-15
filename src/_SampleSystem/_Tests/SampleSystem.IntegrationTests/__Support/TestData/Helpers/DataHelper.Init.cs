@@ -3,12 +3,9 @@
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 
-using Microsoft.Extensions.DependencyInjection;
-
 using SampleSystem.BLL;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
-using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
 {
@@ -21,29 +18,22 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
 
         public TResult EvaluateWrite<TResult>(Func<ISampleSystemBLLContext, TResult> func)
         {
-            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, this.GetCurrentUserName(), func);
+            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, func);
         }
 
         public void EvaluateRead(Action<ISampleSystemBLLContext> action)
         {
-            this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, this.GetCurrentUserName(), action);
+            this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, action);
         }
 
         public TResult EvaluateRead<TResult>(Func<ISampleSystemBLLContext, TResult> func)
         {
-            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, this.GetCurrentUserName(), func);
+            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, func);
         }
 
         public void EvaluateWrite(Action<ISampleSystemBLLContext> func)
         {
-            this.Environment.GetContextEvaluator().Evaluate(
-                DBSessionMode.Write,
-                this.GetCurrentUserName(),
-                context =>
-                {
-                    func(context);
-                    return Ignore.Value;
-                });
+            this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context => { func(context); return Ignore.Value; });
         }
 
         public SampleSystemServerPrimitiveDTOMappingService GetMappingService(ISampleSystemBLLContext context)

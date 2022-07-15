@@ -178,8 +178,7 @@ namespace SampleSystem.IntegrationTests
                 .EvaluateWrite(
                                context =>
                                {
-                                   var period = new Period(
-                                                           context.DateTimeService.CurrentFinancialYear.StartDate
+                                   var period = new Period(this.GetDateTimeService().CurrentFinancialYear.StartDate
                                                                   .AddYears(-1));
                                    var accountType = context.Logics.BusinessUnitType.GetById(buAccountId.Id);
 

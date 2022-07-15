@@ -91,9 +91,8 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     IServiceProvider scopedServiceProvider,
                     IDBSession session,
                     [NotNull] IUserAuthenticationService userAuthenticationService,
-                    [NotNull] IDateTimeService dateTimeService,
                     SubscriptionMetadataStore subscriptionMetadataStore)
-                : base(serviceEnvironment, scopedServiceProvider, session, userAuthenticationService, dateTimeService, subscriptionMetadataStore)
+                : base(serviceEnvironment, scopedServiceProvider, session, userAuthenticationService, subscriptionMetadataStore)
             {
                 this.serviceEnvironment = serviceEnvironment;
                 this.MainContext = LazyInterfaceImplementHelper.CreateProxy(this.CreateMainContext);

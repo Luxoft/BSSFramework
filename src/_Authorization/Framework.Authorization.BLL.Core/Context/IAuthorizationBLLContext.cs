@@ -22,10 +22,10 @@ namespace Framework.Authorization.BLL
 
         ITypeResolverContainer<string>,
 
-        IConfigurationBLLContextContainer<IConfigurationBLLContext>,
-
-        IDateTimeServiceContainer
+        IConfigurationBLLContextContainer<IConfigurationBLLContext>
     {
+        IDateTimeService DateTimeService { get; }
+
         IAuthorizationExternalSource ExternalSource { get; }
 
         Principal CurrentPrincipal { get; }

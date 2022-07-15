@@ -38,7 +38,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             this.queueTag = queueTag;
         }
 
-        public override void Send<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs, TransactionMessageMode sendMessageMode)
+        public override void Send<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs)
         {
             var dto = domainObjectEventArgs.CustomSendObject ?? this.ToEventDTOBase(domainObjectEventArgs);
 

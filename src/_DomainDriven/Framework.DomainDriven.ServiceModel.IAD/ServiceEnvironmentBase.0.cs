@@ -164,7 +164,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     [NotNull] IServiceProvider scopedServiceProvider,
                     [NotNull] IDBSession session,
                     [NotNull] IUserAuthenticationService userAuthenticationService,
-                    [NotNull] IDateTimeService dateTimeService,
                     SubscriptionMetadataStore subscriptionMetadataStore)
             {
                 this.ServiceEnvironment = serviceEnvironment ?? throw new ArgumentNullException(nameof(serviceEnvironment));
@@ -173,8 +172,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                 this.SubscriptionMetadataStore = subscriptionMetadataStore;
 
                 this.userAuthenticationService = userAuthenticationService ?? throw new ArgumentNullException(nameof(userAuthenticationService));
-                this.dateTimeService = dateTimeService ?? throw new ArgumentNullException(nameof(dateTimeService));
-
 
                 this.StandartExpressionBuilder = LazyInterfaceImplementHelper.CreateProxy(this.GetStandartExpressionBuilder);
 
@@ -285,9 +282,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                     LazyInterfaceImplementHelper.CreateProxy<IValidator>(this.CreateConfigurationValidator),
                     this.HierarchicalObjectExpanderFactory,
                     this.ServiceEnvironment.ConfigurationFetchService,
-                    this.dateTimeService,
                     LazyInterfaceImplementHelper.CreateProxy(() => this.GetSecurityExpressionBuilderFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>(this.Configuration)),
-                    this.NotificationService.ExceptionSender,
                     this.NotificationService.SubscriptionSender,
                     () => new ConfigurationSecurityService(this.Configuration),
                     () => new ConfigurationBLLFactoryContainer(this.Configuration),
@@ -401,21 +396,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
                 var subscriptionMessageSender = this.GetSubscriptionTemplateSender().ToMessageTemplateSender(this.Configuration, this.ServiceEnvironment.NotificationContext.Sender);
 
-                var exceptionSender = this.GetExceptionSender();
-
-                return new NotificationService(templateSender, notificationSender, subscriptionMessageSender, exceptionSender);
-            }
-
-            /// <summary>
-            /// Создаёт экземпляр класса, который рассылает уведомления об исключениях.
-            /// </summary>
-            /// <returns>Экземпляр класса, который рассылает уведомления об исключениях.</returns>
-            protected virtual IMessageSender<Exception> GetExceptionSender()
-            {
-                return SmtpMessageSender.Configuration.ToExceptionSender(
-                    this.Configuration,
-                    this.ServiceEnvironment.NotificationContext.Sender,
-                    this.ServiceEnvironment.NotificationContext.ExceptionReceivers);
+                return new NotificationService(templateSender, notificationSender, subscriptionMessageSender);
             }
 
             protected virtual IMessageSender<NotificationEventDTO> GetMainTemplateSender()

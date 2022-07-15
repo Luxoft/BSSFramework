@@ -83,7 +83,7 @@ namespace Framework.Configuration.BLL.Notification
         /// <param name="exception">Исключение.</param>
         /// <param name="sendMessageMode">Тип транзакции, используемый при отправке.</param>
         /// <exception cref="ArgumentNullException">Аргумент <paramref name="exception"/> равен null.</exception>
-        public void Send(Exception exception, TransactionMessageMode sendMessageMode)
+        public void Send(Exception exception)
         {
             if (exception == null)
             {
@@ -111,7 +111,7 @@ namespace Framework.Configuration.BLL.Notification
                 false,
                 new Attachment[0]);
 
-            this.messageSender.Send(message, sendMessageMode);
+            this.messageSender.Send(message);
         }
 
         /// <summary>

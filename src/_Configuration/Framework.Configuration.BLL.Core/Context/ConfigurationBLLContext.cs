@@ -15,28 +15,18 @@ using Framework.DomainDriven.BLL.Tracking;
 using Framework.Exceptions;
 using Framework.HierarchicalExpand;
 using Framework.Notification;
-using Framework.Notification.DTO;
 using Framework.Persistent;
 using Framework.QueryLanguage;
-using Framework.Report;
 using Framework.SecuritySystem;
-using Framework.Validation;
 
 using JetBrains.Annotations;
 
 namespace Framework.Configuration.BLL
 {
+
     public partial class ConfigurationBLLContext
     {
-        internal const string SubscriptionLoggerName = "Subscription";
-
-        private static readonly ITypeResolver<string> CurrentTargetSystemTypeResolver = TypeSource.FromSample<PersistentDomainObjectBase>().ToDefaultTypeResolver();
-
-        private readonly Lazy<IConfigurationSecurityService> lazySecurityService;
-
-        private readonly Lazy<IConfigurationBLLFactoryContainer> lazyLogics;
-
-        private readonly Func<BLLSecurityMode, IBLLSimpleQueryBase<IEmployee>> getEmployeeSourceFunc;
+        private readonly IBLLSimpleQueryBase<IEmployee> employeeSource;
 
         private readonly Lazy<Dictionary<TargetSystem, ITargetSystemService>> lazyTargetSystemServiceCache;
 
@@ -44,7 +34,7 @@ namespace Framework.Configuration.BLL
 
         private readonly IDictionaryCache<IDomainType, DomainType> domainTypeNameCache;
 
-        private readonly Func<long> getCurrentRevision;
+        private readonly ICurrentRevisionService currentRevisionService;
 
         public ConfigurationBLLContext(
             IServiceProvider serviceProvider,
@@ -54,33 +44,30 @@ namespace Framework.Configuration.BLL
             [NotNull] IObjectStateService objectStateService,
             [NotNull] IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
             [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
-            [NotNull] IValidator validator,
+            [NotNull] IConfigurationValidator validator,
             [NotNull] IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
             [NotNull] IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
             [NotNull] ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
-            IMessageSender<MessageTemplateNotification> subscriptionSender,
-            Func<IConfigurationSecurityService> getSecurityService,
-            Func<IConfigurationBLLFactoryContainer> getLogics,
-            IAuthorizationBLLContext authorization,
-            Func<BLLSecurityMode, IBLLSimpleQueryBase<IEmployee>> getEmployeeSourceFunc,
-            IEnumerable<ITargetSystemService> targetSystemServices,
-            [NotNull] ISerializerFactory<string> systemConstantSerializerFactory,
+            [NotNull] IMessageSender<MessageTemplateNotification> subscriptionSender,
+            [NotNull] IConfigurationSecurityService securityService,
+            [NotNull] IConfigurationBLLFactoryContainer logics,
+            [NotNull] IAuthorizationBLLContext authorization,
+            [NotNull] IBLLSimpleQueryBase<IEmployee> employeeSource,
+            [NotNull] IEnumerable<ITargetSystemService> targetSystemServices,
+            [NotNull] IConfigurationBLLContextSettings settings,
             [NotNull] IExceptionService exceptionService,
-            [NotNull] Func<long> getCurrentRevision)
+            [NotNull] ICurrentRevisionService currentRevisionService)
             : base(serviceProvider, dalFactory, operationListeners, sourceListeners, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
         {
-            if (getSecurityService == null) throw new ArgumentNullException(nameof(getSecurityService));
-            if (getLogics == null) throw new ArgumentNullException(nameof(getLogics));
-
             this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
             this.SubscriptionSender = subscriptionSender ?? throw new ArgumentNullException(nameof(subscriptionSender));
 
-            this.lazySecurityService = getSecurityService.ToLazy();
-            this.lazyLogics = getLogics.ToLazy();
+            this.SecurityService = securityService;
+            this.Logics = logics;
 
             this.Authorization = authorization ?? throw new ArgumentNullException(nameof(authorization));
-            this.getEmployeeSourceFunc = getEmployeeSourceFunc ?? throw new ArgumentNullException(nameof(getEmployeeSourceFunc));
-            this.getCurrentRevision = getCurrentRevision ?? throw new ArgumentNullException(nameof(getCurrentRevision));
+            this.employeeSource = employeeSource ?? throw new ArgumentNullException(nameof(employeeSource));
+            this.currentRevisionService = currentRevisionService ?? throw new ArgumentNullException(nameof(currentRevisionService));
 
             this.ExceptionService = exceptionService ?? throw new ArgumentNullException(nameof(exceptionService));
 
@@ -94,7 +81,7 @@ namespace Framework.Configuration.BLL
                 domainType => this.Logics.DomainType.GetByDomainType(domainType),
                 new EqualityComparerImpl<IDomainType>((dt1, dt2) => dt1.Name == dt2.Name && dt1.NameSpace == dt2.NameSpace, dt => dt.Name.GetHashCode() ^ dt.NameSpace.GetHashCode())).WithLock();
 
-            this.SystemConstantSerializerFactory = systemConstantSerializerFactory ?? throw new ArgumentNullException(nameof(systemConstantSerializerFactory));
+            this.SystemConstantSerializerFactory = settings.SystemConstantSerializerFactory;
 
             this.ComplexDomainTypeResolver = TypeResolverHelper.Create(
                 (DomainType domainType) =>
@@ -107,20 +94,21 @@ namespace Framework.Configuration.BLL
                     {
                         return this.GetTargetSystemService(domainType.TargetSystem).TypeResolver.Resolve(domainType);
                     }
-
                 },
                 () => this.GetTargetSystemServices().SelectMany(tss => tss.TypeResolver.GetTypes()).Concat(TypeResolverHelper.Base.GetTypes())).WithCache().WithLock();
+
+            this.TypeResolver = settings.TypeResolver;
         }
 
         public IMessageSender<MessageTemplateNotification> SubscriptionSender { get; }
 
-        public IConfigurationSecurityService SecurityService => this.lazySecurityService.Value;
+        public IConfigurationSecurityService SecurityService { get; }
 
-        public ITypeResolver<string> TypeResolver => CurrentTargetSystemTypeResolver;
+        public ITypeResolver<string> TypeResolver { get; }
 
         public ITypeResolver<DomainType> ComplexDomainTypeResolver { get; }
 
-        public override IConfigurationBLLFactoryContainer Logics => this.lazyLogics.Value;
+        public override IConfigurationBLLFactoryContainer Logics { get; }
 
         public IAuthorizationBLLContext Authorization { get; }
 
@@ -139,12 +127,12 @@ namespace Framework.Configuration.BLL
         /// <inheritdoc />
         public long GetCurrentRevision()
         {
-            return this.getCurrentRevision();
+            return this.currentRevisionService.GetCurrentRevision();
         }
 
         public IBLLSimpleQueryBase<IEmployee> GetEmployeeSource()
         {
-            return this.getEmployeeSourceFunc(BLLSecurityMode.Disabled);
+            return this.GetEmployeeSource();
         }
 
         public IPersistentTargetSystemService GetPersistentTargetSystemService(TargetSystem targetSystem)

@@ -3,7 +3,7 @@ using Framework.DomainDriven.BLL;
 
 namespace Framework.DomainDriven.NHibernate;
 
-public interface INHibSessionSettings
+public interface INHibSessionSetup
 {
     DBSessionMode DefaultSessionMode { get; }
 

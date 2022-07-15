@@ -39,12 +39,6 @@ namespace SampleSystem.ServiceEnvironment
 
         private readonly SampleSystemServiceEnvironment serviceEnvironment;
 
-        private readonly IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService;
-
-        private readonly ICryptService<CryptSystem> cryptService;
-
-        private readonly ITypeResolver<string> currentTargetSystemTypeResolver;
-
         public SampleSystemBLLContextContainer(
             SampleSystemServiceEnvironment serviceEnvironment,
             IServiceProvider scopedServiceProvider,
@@ -52,14 +46,10 @@ namespace SampleSystem.ServiceEnvironment
             [NotNull] IUserAuthenticationService userAuthenticationService,
             SubscriptionMetadataStore subscriptionMetadataStore,
             IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
-            ICryptService<CryptSystem> cryptService,
-            ITypeResolver<string> currentTargetSystemTypeResolver)
+            ICryptService<CryptSystem> cryptService)
             : base(serviceEnvironment, scopedServiceProvider, dbSession, userAuthenticationService, subscriptionMetadataStore)
         {
             this.serviceEnvironment = serviceEnvironment;
-            this.fetchService = fetchService;
-            this.cryptService = cryptService;
-            this.currentTargetSystemTypeResolver = currentTargetSystemTypeResolver;
 
             this.aribaSubscriptionManager = LazyInterfaceImplementHelper.CreateProxy<IEventsSubscriptionManager<ISampleSystemBLLContext, PersistentDomainObjectBase>>(
                 () => new SampleSystemAribaEventsSubscriptionManager(this.MainContext, new SampleSystemAribaLocalDBEventMessageSender(this.MainContext, this.Configuration)));
@@ -80,14 +70,11 @@ namespace SampleSystem.ServiceEnvironment
                 this.StandartExpressionBuilder,
                 validator,
                 this.HierarchicalObjectExpanderFactory,
-                this.fetchService,
                 LazyInterfaceImplementHelper.CreateProxy<ISampleSystemSecurityService>(() => new SampleSystemSecurityService(this.MainContext)),
                 LazyInterfaceImplementHelper.CreateProxy(() => this.GetSecurityExpressionBuilderFactory<ISampleSystemBLLContext, PersistentDomainObjectBase, Guid>(this.MainContext)),
                 LazyInterfaceImplementHelper.CreateProxy<ISampleSystemBLLFactoryContainer>(() => new SampleSystemBLLFactoryContainer(this.MainContext)),
                 this.Authorization,
-                this.Configuration,
-                this.cryptService,
-                this.currentTargetSystemTypeResolver);
+                this.Configuration);
         }
 
         public override ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> GetSecurityExpressionBuilderFactory<TBLLContext, TPersistentDomainObjectBase, TIdent>(TBLLContext context)

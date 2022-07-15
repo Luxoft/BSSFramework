@@ -41,19 +41,19 @@ namespace Framework.DomainDriven.NHibernate
 
         private bool disposed;
 
-        internal WriteNHibSession(NHibSessionConfiguration sessionFactory,
-                                  INHibSessionSettings settings)
-                : base(sessionFactory, DBSessionMode.Write)
+        internal WriteNHibSession(NHibSessionEnvironment environment,
+                                  INHibSessionSetup settings)
+                : base(environment, DBSessionMode.Write)
         {
             this.modifyAuditProperties = settings.GetModifyAuditProperty();
             this.createAuditProperties = settings.GetCreateAuditProperty();
             this.collectChangedEventListener = new CollectChangesEventListener();
 
-            this.transactionScope = this.SessionConfiguration.EnableTransactionScope ? this.CreateTransactionScope() : null;
+            this.transactionScope = this.Environment.EnableTransactionScope ? this.CreateTransactionScope() : null;
 
             this.transaction = this.InnerSession.BeginTransaction();
 
-            this.SessionConfiguration.ProcessTransaction(GetDbTransaction(this.transaction, this.InnerSession));
+            this.Environment.ProcessTransaction(GetDbTransaction(this.transaction, this.InnerSession));
 
             this.ConfigureEventListeners();
         }
@@ -78,7 +78,7 @@ namespace Framework.DomainDriven.NHibernate
             result.PostUpdateEventListeners = new[] { this.collectChangedEventListener };
             result.PostInsertEventListeners = new[] { this.collectChangedEventListener };
 
-            if (this.SessionConfiguration.ConnectionSettings.UseEventListenerInsteadOfInterceptorForAudit)
+            if (this.Environment.ConnectionSettings.UseEventListenerInsteadOfInterceptorForAudit)
             {
                 var modifyAuditEventListener = new ModifyAuditEventListener(this.modifyAuditProperties);
                 var createAuditEventListener = new CreateAuditEventListener(this.createAuditProperties);
@@ -96,7 +96,7 @@ namespace Framework.DomainDriven.NHibernate
 
         private IInterceptor CreateInterceptor()
         {
-            if (this.SessionConfiguration.ConnectionSettings.UseEventListenerInsteadOfInterceptorForAudit)
+            if (this.Environment.ConnectionSettings.UseEventListenerInsteadOfInterceptorForAudit)
             {
                 return new EmptyInterceptor();
             }
@@ -186,7 +186,7 @@ namespace Framework.DomainDriven.NHibernate
                     TransactionScopeOption.Required,
                     new TransactionOptions
                     {
-                            Timeout = this.SessionConfiguration.TransactionTimeout,
+                            Timeout = this.Environment.TransactionTimeout,
                             IsolationLevel = IsolationLevel.Serializable
                     });
 
@@ -249,7 +249,7 @@ namespace Framework.DomainDriven.NHibernate
             }
             catch (Exception e)
             {
-                var result = this.SessionConfiguration.ExceptionProcessor.Process(e);
+                var result = this.Environment.ExceptionProcessor.Process(e);
 
                 if (result == e)
                 {

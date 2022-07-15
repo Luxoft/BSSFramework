@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using Framework.DomainDriven.Audit;
 using Framework.DomainDriven.BLL.Tracking;
 using Framework.Persistent;
 
 namespace Framework.DomainDriven.BLL
 {
-    public interface IDBSession : IDisposable
+    public interface IDBSession : ICurrentRevisionService, IDisposable
     {
         DBSessionMode SessionMode { get; }
 
@@ -38,12 +37,6 @@ namespace Framework.DomainDriven.BLL
         /// Мануальный флаш сессии, при его вызове срабатывают только Flushed-евенты, TransactionCompleted-евенты вызываются только при закрытие сессии
         /// </summary>
         void Flush();
-
-        /// <summary>
-        /// Получение текущей ревизии из аудита (пока возвращает 0, если вызван до флаша сессии)
-        /// </summary>
-        /// <returns></returns>
-        long GetCurrentRevision();
 
         IEnumerable<ObjectModification> GetModifiedObjectsFromLogic();
 

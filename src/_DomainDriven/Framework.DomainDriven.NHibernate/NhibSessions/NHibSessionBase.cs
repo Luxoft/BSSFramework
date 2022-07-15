@@ -18,15 +18,15 @@ namespace Framework.DomainDriven.NHibernate
     {
         private Lazy<IAuditReaderPatched> lazyAuditReader { get; }
 
-        internal NHibSessionBase(NHibSessionConfiguration sessionFactory, DBSessionMode sessionMode)
+        internal NHibSessionBase(NHibSessionEnvironment environment, DBSessionMode sessionMode)
         {
-            this.SessionConfiguration = sessionFactory ?? throw new ArgumentNullException(nameof(sessionFactory));
+            this.Environment = environment ?? throw new ArgumentNullException(nameof(environment));
             this.SessionMode = sessionMode;
 
             this.lazyAuditReader = LazyHelper.Create(() => this.InnerSession.GetAuditReader());
 
 
-            this.InnerSession = this.SessionConfiguration.InternalSessionFactory.OpenSession();
+            this.InnerSession = this.Environment.InternalSessionFactory.OpenSession();
             this.InnerSession.FlushMode = FlushMode.Manual;
         }
 
@@ -36,7 +36,7 @@ namespace Framework.DomainDriven.NHibernate
 
         public ISession InnerSession { get; }
 
-        protected internal NHibSessionConfiguration SessionConfiguration { get; }
+        protected internal NHibSessionEnvironment Environment { get; }
 
         protected bool HasFlushedListeners => this.Flushed != null;
 

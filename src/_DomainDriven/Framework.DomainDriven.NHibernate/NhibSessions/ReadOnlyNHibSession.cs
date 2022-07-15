@@ -10,8 +10,8 @@ namespace Framework.DomainDriven.NHibernate
     {
         private bool disposed;
 
-        internal ReadOnlyNHibSession(NHibSessionConfiguration sessionFactory)
-                : base(sessionFactory, DBSessionMode.Read)
+        internal ReadOnlyNHibSession(NHibSessionEnvironment environment)
+                : base(environment, DBSessionMode.Read)
         {
             this.InnerSession.DefaultReadOnly = true;
         }

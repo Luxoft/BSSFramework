@@ -8,10 +8,7 @@ using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.Notification.DTO;
-using Framework.NotificationCore.Services;
-using Framework.NotificationCore.Settings;
 using Framework.Security.Cryptography;
-using Framework.Validation;
 
 using SampleSystem.Domain;
 using SampleSystem.ServiceEnvironment;

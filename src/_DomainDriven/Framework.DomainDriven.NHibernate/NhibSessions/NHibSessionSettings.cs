@@ -8,7 +8,7 @@ using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.NHibernate;
 
-public class NHibSessionSettings : INHibSessionSettings
+public class NHibSessionSettings : INHibSessionSetup
 {
     [NotNull]
     private readonly IUserAuthenticationService userAuthenticationService;

@@ -15,9 +15,7 @@ using Framework.DomainDriven.BLL.Tracking;
 using Framework.HierarchicalExpand;
 using Framework.Projection;
 using Framework.QueryLanguage;
-using Framework.Security;
 using Framework.SecuritySystem;
-using Framework.Validation;
 
 using JetBrains.Annotations;
 
@@ -37,9 +35,6 @@ namespace Framework.Authorization.BLL
 
         private readonly ISecurityProvider<Operation> operationSecurityProvider;
 
-        private static readonly ITypeResolver<string> CurrentTargetSystemTypeResolver =
-            TypeSource.FromSample<PersistentDomainObjectBase>().ToDefaultTypeResolver();
-
         public AuthorizationBLLContext(
             [NotNull] IServiceProvider serviceProvider,
             [NotNull] IDALFactory<PersistentDomainObjectBase, Guid> dalFactory,
@@ -48,7 +43,7 @@ namespace Framework.Authorization.BLL
             [NotNull] IObjectStateService objectStateService,
             [NotNull] IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
             [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
-            [NotNull] IValidator validator,
+            [NotNull] IAuthorizationValidator validator,
             [NotNull] IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
             [NotNull] IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
             [NotNull] IDateTimeService dateTimeService,
@@ -59,7 +54,7 @@ namespace Framework.Authorization.BLL
             [NotNull] IAuthorizationBLLFactoryContainer logics,
             [NotNull] IAuthorizationExternalSource externalSource,
             [NotNull] IRunAsManager runAsManager,
-            [NotNull] ITypeResolver<string> securityTypeResolver)
+            [NotNull] IAuthorizationBLLContextSettings settings)
             : base(
                 serviceProvider,
                 dalFactory,
@@ -84,7 +79,7 @@ namespace Framework.Authorization.BLL
 
             this.CurrentPrincipalName = userAuthenticationService.GetUserName();
 
-            this.SecurityTypeResolver = securityTypeResolver.OverrideInput((EntityType entityType) => entityType.Name);
+            this.SecurityTypeResolver = settings.SecurityTypeResolver.OverrideInput((EntityType entityType) => entityType.Name);
 
             this.lazySettings = LazyHelper.Create(() => this.Logics.Default.Create<Setting>().GetFullList().ToSettings());
 
@@ -98,11 +93,13 @@ namespace Framework.Authorization.BLL
                 .WithLock();
 
             this.operationSecurityProvider = new OperationSecurityProvider(this);
+
+            this.TypeResolver = settings.TypeResolver;
         }
 
         public IConfigurationBLLContext Configuration { get; }
 
-        public ITypeResolver<string> TypeResolver => CurrentTargetSystemTypeResolver;
+        public ITypeResolver<string> TypeResolver { get; }
 
         public ITypeResolver<EntityType> SecurityTypeResolver { get; }
 

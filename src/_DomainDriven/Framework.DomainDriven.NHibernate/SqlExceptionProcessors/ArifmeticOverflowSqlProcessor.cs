@@ -6,7 +6,7 @@ namespace Framework.DomainDriven.NHibernate.SqlExceptionProcessors
     {
         public int ErrorNumber => 8115;
 
-        public Exception Process(HandledGenericADOException genericAdoException, ExceptionProcessingContext sessionFactory)
+        public Exception Process(HandledGenericADOException genericAdoException, ExceptionProcessingContext _)
         {
             var sqlException = genericAdoException.SqlException;
             return new ArifmeticOverflowDALException(sqlException.Message, sqlException.Message);

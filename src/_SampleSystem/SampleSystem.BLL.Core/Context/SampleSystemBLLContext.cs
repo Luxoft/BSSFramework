@@ -10,11 +10,8 @@ using Framework.HierarchicalExpand;
 using Framework.QueryLanguage;
 using Framework.Security.Cryptography;
 using Framework.SecuritySystem;
-using Framework.Validation;
 
 using JetBrains.Annotations;
-
-using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Projections;
@@ -31,7 +28,7 @@ namespace SampleSystem.BLL
             [NotNull] IObjectStateService objectStateService,
             [NotNull] IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
             [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
-            [NotNull] IValidator validator,
+            [NotNull] ISampleSystemValidator validator,
             [NotNull] IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
             [NotNull] IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
             [NotNull] ISampleSystemSecurityService securityService,
@@ -40,7 +37,7 @@ namespace SampleSystem.BLL
             [NotNull] IAuthorizationBLLContext authorization,
             [NotNull] Framework.Configuration.BLL.IConfigurationBLLContext configuration,
             [NotNull] ICryptService<CryptSystem> cryptService,
-            [NotNull] ITypeResolver<string> currentTargetSystemTypeResolver)
+            [NotNull] ISampleSystemBLLContextSettings settings)
             : base(serviceProvider, dalFactory, operationListeners, sourceListeners, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
         {
             this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
@@ -53,7 +50,7 @@ namespace SampleSystem.BLL
 
             this.CryptService = cryptService ?? throw new ArgumentNullException(nameof(cryptService));
 
-            this.TypeResolver = currentTargetSystemTypeResolver ?? throw new ArgumentNullException(nameof(currentTargetSystemTypeResolver));
+            this.TypeResolver = settings.TypeResolver;
         }
 
         public ISampleSystemSecurityService SecurityService { get; }

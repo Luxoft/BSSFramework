@@ -58,7 +58,7 @@ namespace SampleSystem.DbGenerate
             services.AddSingleton<ICapTransactionManager, FakeCapTransactionManager>();
             var provider = services.BuildServiceProvider(false);
 
-            var dbSessionFactory = provider.GetService<NHibSessionConfiguration>();
+            var dbSessionFactory = provider.GetService<NHibSessionEnvironment>();
             var cfg = dbSessionFactory?.Configuration;
 
             var migrate = new SchemaUpdate(cfg);

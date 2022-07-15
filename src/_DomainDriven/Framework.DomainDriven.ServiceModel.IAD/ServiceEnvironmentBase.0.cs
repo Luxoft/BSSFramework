@@ -130,8 +130,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
             private readonly IUserAuthenticationService userAuthenticationService;
 
-            private readonly IDateTimeService dateTimeService;
-
             private readonly IEnumerable<Framework.Configuration.BLL.ITargetSystemService> targetSystems;
 
 
@@ -243,55 +241,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             protected virtual IEnumerable<IBLLContextContainerModule> GetModules()
             {
                 yield break;
-            }
-
-            protected virtual IAuthorizationBLLContext CreateAuthorizationBLLContext()
-            {
-                return new AuthorizationBLLContext(
-                    this.ScopedServiceProvider,
-                    this.Session.GetDALFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>(),
-                    this.AuthorizationOperationListeners,
-                    this.AuthorizationSourceListeners,
-                    this.Session.GetObjectStateService(),
-                    this.GetAccessDeniedExceptionService<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>(),
-                    this.StandartExpressionBuilder,
-                    LazyInterfaceImplementHelper.CreateProxy<IValidator>(this.CreateAuthorizationValidator),
-                    this.HierarchicalObjectExpanderFactory,
-                    this.ServiceEnvironment.AuthorizationFetchService,
-                    this.dateTimeService,
-                    this.userAuthenticationService,
-                    LazyInterfaceImplementHelper.CreateProxy(() => this.GetSecurityExpressionBuilderFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>(this.Authorization)),
-                    this.Configuration,
-                    LazyInterfaceImplementHelper.CreateProxy<IAuthorizationSecurityService>(() => new AuthorizationSecurityService(this.Authorization)),
-                    LazyInterfaceImplementHelper.CreateProxy<IAuthorizationBLLFactoryContainer>(() => new AuthorizationBLLFactoryContainer(this.Authorization)),
-                    LazyInterfaceImplementHelper.CreateProxy(this.GetAuthorizationExternalSource),
-                    LazyInterfaceImplementHelper.CreateProxy<IRunAsManager>(() => new AuthorizationRunAsManger(this.Authorization)),
-                    LazyInterfaceImplementHelper.CreateProxy(this.GetSecurityTypeResolver));
-            }
-
-            protected virtual IConfigurationBLLContext CreateConfigurationBLLContext()
-            {
-                return new ConfigurationBLLContext(
-                    this.ScopedServiceProvider,
-                    this.Session.GetDALFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>(),
-                    this.ConfigurationOperationListeners,
-                    this.ConfigurationSourceListeners,
-                    this.Session.GetObjectStateService(),
-                    this.GetAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>(),
-                    this.StandartExpressionBuilder,
-                    LazyInterfaceImplementHelper.CreateProxy<IValidator>(this.CreateConfigurationValidator),
-                    this.HierarchicalObjectExpanderFactory,
-                    this.ServiceEnvironment.ConfigurationFetchService,
-                    LazyInterfaceImplementHelper.CreateProxy(() => this.GetSecurityExpressionBuilderFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>(this.Configuration)),
-                    this.NotificationService.SubscriptionSender,
-                    () => new ConfigurationSecurityService(this.Configuration),
-                    () => new ConfigurationBLLFactoryContainer(this.Configuration),
-                    this.Authorization,
-                    this.GetEmployeeSource,
-                    this.targetSystems,
-                    this.SystemConstantSerializerFactory,
-                    LazyInterfaceImplementHelper.CreateProxy(this.GetExceptionService),
-                    this.Session.GetCurrentRevision);
             }
 
 

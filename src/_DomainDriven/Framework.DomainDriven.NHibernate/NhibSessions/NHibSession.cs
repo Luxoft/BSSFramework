@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 
-using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Tracking;
 using Framework.Persistent;
@@ -17,7 +15,7 @@ public class NHibSession : IDBSession
 
     private readonly Lazy<IDBSession> lazyInnerSession;
 
-    public NHibSession([NotNull] NHibSessionConfiguration configuration, INHibSessionSettings settings)
+    public NHibSession([NotNull] NHibSessionEnvironment configuration, INHibSessionSetup settings)
     {
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 

@@ -18,51 +18,33 @@ using NHibernate.Tool.hbm2ddl;
 
 namespace Framework.DomainDriven.NHibernate
 {
-    public class NHibSessionConfiguration : IDisposable
+    public class NHibSessionEnvironment : IDisposable
     {
-        private static readonly TimeSpan DefaultTransactionTimeout = new TimeSpan(0, 20, 0);
-
         private readonly Configuration cfg;
-
-        /// <summary> Creates new NH Session Factory
-        /// </summary>
-        /// <param name="connectionSettings">connection settings</param>
-        /// <param name="mappingSettings">mapping settings</param>
-        public NHibSessionConfiguration([NotNull] NHibConnectionSettings connectionSettings, [NotNull] IEnumerable<IMappingSettings> mappingSettings, IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService)
-            : this(connectionSettings, mappingSettings, auditRevisionUserAuthenticationService, DefaultTransactionTimeout)
-        {
-        }
 
         /// <summary>
         /// Creates new NH Session Factory
         /// </summary>
         /// <param name="connectionSettings">connection settings</param>
         /// <param name="mappingSettings">mapping settings</param>
-        /// <param name="transactionTimeout">transaction timeout</param>
         /// <exception cref="ArgumentNullException">
         /// connectionSettings
         /// or
         /// mappingSettings
-        /// or
-        /// availableValues
-        /// or
-        /// modifyAuditProperties
-        /// or
-        /// createAuditProperties
         /// </exception>
         /// <exception cref="System.ArgumentException">All mapping settings has equal database with schema. Utilities, Workflow has domain object with same names</exception>
         /// <exception cref="ApplicationException">Could not initialize ServiceFactory.</exception>
-        public NHibSessionConfiguration(
+        public NHibSessionEnvironment(
             [NotNull] NHibConnectionSettings connectionSettings,
             [NotNull] IEnumerable<IMappingSettings> mappingSettings,
             IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService,
-            TimeSpan transactionTimeout)
+            INHibSessionEnvironmentSettings settings)
         {
             this.ConnectionSettings = connectionSettings ?? throw new ArgumentNullException(nameof(connectionSettings));
 
             var cachedMappingSettings = (mappingSettings ?? throw new ArgumentNullException(nameof(mappingSettings))).ToList();
 
-            this.TransactionTimeout = transactionTimeout;
+            this.TransactionTimeout = settings.TransactionTimeout;
 
             if (cachedMappingSettings.SelectMany(z => new[] { z.Database, z.AuditDatabase }).Where(z => null != z).Distinct().Count() == 1)
             {

@@ -1,10 +1,8 @@
 ﻿using System;
 
-using Framework.Authorization.ApproveWorkflow;
 using Framework.Authorization.BLL;
 using Framework.Authorization.Generated.DAL.NHibernate;
 using Framework.Cap;
-using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Generated.DAL.NHibernate;
 using Framework.Core.Services;
@@ -13,7 +11,6 @@ using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Exceptions;
 
@@ -30,8 +27,6 @@ using SampleSystem.Generated.DAL.NHibernate;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.CustomReports;
 using SampleSystem.WebApiCore.Env.Database;
-
-using WorkflowCore.Interface;
 
 using UserAuthenticationService = SampleSystem.WebApiCore.Env.UserAuthenticationService;
 
@@ -67,8 +62,13 @@ namespace SampleSystem.WebApiCore
 
         public static IServiceCollection AddDatabaseSettings(this IServiceCollection services, string connectionString) =>
                 services
-                        .AddSingleton<NHibSessionConfiguration, SampleSystemNHibSessionFactory>()
+                        .AddScoped<INHibSessionSetup, NHibSessionSettings>()
+                        .AddScoped<IDBSession, NHibSession>()
+
+                        .AddSingleton<INHibSessionEnvironmentSettings, NHibSessionEnvironmentSettings>()
                         .AddSingleton<NHibConnectionSettings>()
+                        .AddSingleton<NHibSessionEnvironment, SampleSystemNHibSessionEnvironment>()
+
                         .AddSingleton<IMappingSettings>(AuthorizationMappingSettings.CreateDefaultAudit(string.Empty))
                         .AddSingleton<IMappingSettings>(ConfigurationMappingSettings.CreateDefaultAudit(string.Empty))
                         .AddSingleton<IMappingSettings>(

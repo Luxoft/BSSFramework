@@ -21,7 +21,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             IServiceProvider serviceProvider,
             INotificationContext notificationContext,
             [NotNull] AvailableValues availableValues)
-            : base(serviceProvider, notificationContext, availableValues)
+            : base(serviceProvider, notificationContext)
         {
             this.ServiceProvider = serviceProvider;
         }

@@ -1,53 +1,23 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Net.Mail;
-
-using Framework.Core;
-using Framework.Notification;
-using Framework.Notification.DTO;
 
 namespace Framework.DomainDriven.ServiceModel
 {
-    /// <summary>
-    /// Контект для уведомления/нотификаций
-    /// </summary>
-    public interface INotificationContext : IMailAddressContainer
-    {
-        /// <summary>
-        /// Sender для отправки нотификаций в biztalk через MSMQ
-        /// </summary>
-        IMessageSender<NotificationEventDTO> MSMQNotificationMessageSender { get; }
-
-        /// <summary>
-        /// Список получателей серверных ошибок
-        /// </summary>
-        ReadOnlyCollection<string> ExceptionReceivers { get; }
-    }
-
     public class NotificationContext : INotificationContext
     {
-        public NotificationContext(IMessageSender<NotificationEventDTO> notificationMessageSender, string sender, params string[] receivers)
-            : this(notificationMessageSender, new MailAddress(sender, sender), receivers)
+        public NotificationContext(string systemSender)
+            : this(new MailAddress(systemSender, systemSender))
         {
         }
 
-        public NotificationContext(IMessageSender<NotificationEventDTO> msmqNotificationMessageSender, MailAddress sender, params string[] receivers)
+        public NotificationContext(MailAddress systemSender)
         {
-            if (sender == null) throw new ArgumentNullException(nameof(sender));
-            if (receivers == null) throw new ArgumentNullException(nameof(receivers));
-            if (string.IsNullOrWhiteSpace(sender.DisplayName)) throw new System.ArgumentException("Not initialize sender name in NotificationContext");
+            if (systemSender == null) throw new ArgumentNullException(nameof(systemSender));
+            if (string.IsNullOrWhiteSpace(systemSender.DisplayName)) throw new System.ArgumentException("Not initialize sender name in NotificationContext", nameof(systemSender));
 
-            this.MSMQNotificationMessageSender = msmqNotificationMessageSender ?? throw new ArgumentNullException(nameof(msmqNotificationMessageSender));
-            this.Sender = sender;
-            this.ExceptionReceivers = receivers.ToReadOnlyCollection();
+            this.SystemSender = systemSender;
         }
 
-        /// <inheritdoc />
-        public IMessageSender<NotificationEventDTO> MSMQNotificationMessageSender { get; }
-
-        public MailAddress Sender { get; }
-
-        /// <inheritdoc />
-        public ReadOnlyCollection<string> ExceptionReceivers { get; }
+        public MailAddress SystemSender { get; }
     }
 }

@@ -47,7 +47,7 @@ namespace SampleSystem.WebApiCore
             // Notifications
             services
                 .AddSingleton<ISubscriptionMetadataFinder, SampleSystemSubscriptionsMetadataFinder>();
-            services.RegisterMessageSenderDependencies<SampleSystemServiceEnvironment, ISampleSystemBLLContext>(configuration);
+            services.RegisterMessageSenderDependencies<ISampleSystemBLLContext>(configuration);
             services.RegisterRewriteReceiversDependencies(configuration);
 
             // Others

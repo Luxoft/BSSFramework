@@ -26,11 +26,6 @@ public class TestSampleSystemBllContextContainer : SampleSystemBLLContextContain
     {
     }
 
-    protected override IMessageSender<NotificationEventDTO> GetMessageTemplateSender()
-    {
-        return new LocalDBNotificationEventDTOMessageSender(this.Configuration);
-    }
-
     protected override IEnumerable<IDALListener> GetBeforeTransactionCompletedListeners()
     {
         foreach (var dalListener in base.GetBeforeTransactionCompletedListeners())

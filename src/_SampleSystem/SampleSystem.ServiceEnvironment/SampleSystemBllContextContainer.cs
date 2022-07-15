@@ -22,16 +22,12 @@ namespace SampleSystem.ServiceEnvironment
     {
         private readonly IEventsSubscriptionManager<ISampleSystemBLLContext, PersistentDomainObjectBase> aribaSubscriptionManager;
 
-        private readonly SampleSystemServiceEnvironment serviceEnvironment;
-
         public SampleSystemBLLContextContainer(
             SampleSystemServiceEnvironment serviceEnvironment,
             IServiceProvider scopedServiceProvider,
             IDBSession dbSession)
             : base(serviceEnvironment, scopedServiceProvider, dbSession)
         {
-            this.serviceEnvironment = serviceEnvironment;
-
             this.aribaSubscriptionManager = LazyInterfaceImplementHelper.CreateProxy<IEventsSubscriptionManager<ISampleSystemBLLContext, PersistentDomainObjectBase>>(
                 () => new SampleSystemAribaEventsSubscriptionManager(this.MainContext, new SampleSystemAribaLocalDBEventMessageSender(this.MainContext, this.Configuration)));
         }
@@ -89,18 +85,6 @@ namespace SampleSystem.ServiceEnvironment
         {
             return new LocalDBSubscriptionService(this.Configuration);
         }
-
-        ///// <summary>
-        ///// Сохранение нотификаций в локальной бд, откуда их будет забирать Biztalk
-        ///// </summary>
-        ///// <returns></returns>
-        //protected override IMessageSender<NotificationEventDTO> GetMessageTemplateSender()
-        //{
-        //    return new LocalDBNotificationEventDTOMessageSender(this.Configuration);
-        //}
-
-        protected override IMessageSender<NotificationEventDTO> GetMessageTemplateSender() =>
-                new Framework.NotificationCore.Senders.SmtpMessageSender(LazyHelper.Create(() => this.serviceEnvironment.SmtpSettings), LazyHelper.Create(() => this.serviceEnvironment.RewriteReceiversService), this.Configuration);
 
         /// <summary>
         /// Добавление подписок на евенты для арибы

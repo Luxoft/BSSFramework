@@ -5,24 +5,10 @@ using System.Linq;
 
 using Framework.Authorization.BLL;
 using Framework.Configuration.BLL;
-using Framework.Configuration.BLL.Notification;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Core;
-using Framework.Core.Serialization;
-using Framework.Core.Services;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
-using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.Events;
-using Framework.HierarchicalExpand;
-using Framework.Notification;
-using Framework.Notification.DTO;
-using Framework.Notification.New;
-using Framework.Persistent;
-using Framework.QueryLanguage;
-using Framework.SecuritySystem;
-using Framework.Validation;
 
 using JetBrains.Annotations;
 
@@ -94,24 +80,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             protected readonly ServiceEnvironmentBase ServiceEnvironment;
 
 
-            protected readonly BLLOperationEventListenerContainer<Framework.Authorization.Domain.DomainObjectBase>
-                    AuthorizationOperationListeners =
-                            new BLLOperationEventListenerContainer<Framework.Authorization.Domain.DomainObjectBase>();
-
-            protected readonly BLLSourceEventListenerContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>
-                    AuthorizationSourceListeners =
-                            new BLLSourceEventListenerContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>();
-
-
-            protected readonly BLLOperationEventListenerContainer<Framework.Configuration.Domain.DomainObjectBase>
-                    ConfigurationOperationListeners =
-                            new BLLOperationEventListenerContainer<Framework.Configuration.Domain.DomainObjectBase>();
-
-            protected readonly BLLSourceEventListenerContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>
-                    ConfigurationSourceListeners =
-                            new BLLSourceEventListenerContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>();
-
-
             private readonly Lazy<IEventsSubscriptionManager<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase>> lazyAuthorizationEventsSubscriptionManager;
 
             private readonly Lazy<IEventsSubscriptionManager<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase>> lazyConfigurationEventsSubscriptionManager;
@@ -125,7 +93,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                 this.ServiceEnvironment = serviceEnvironment ?? throw new ArgumentNullException(nameof(serviceEnvironment));
                 this.ScopedServiceProvider = scopedServiceProvider ?? throw new ArgumentNullException(nameof(scopedServiceProvider));
                 this.Session = session ?? throw new ArgumentNullException(nameof(session));
-                this.NotificationService = LazyInterfaceImplementHelper.CreateProxy(this.CreateNotificationService);
 
                 this.lazyAuthorizationEventsSubscriptionManager = LazyHelper.Create(this.CreateAuthorizationEventsSubscriptionManager);
 
@@ -231,46 +198,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                 return null;
             }
 
-            protected virtual INotificationService CreateNotificationService()
-            {
-                var templateSender = this.GetMainTemplateSender().ToMessageTemplateSender(this.Configuration, this.ServiceEnvironment.NotificationContext.Sender);
-
-                var notificationSender = this.GetMainTemplateSender().ToNotificationSender(this.Configuration, this.ServiceEnvironment.NotificationContext.Sender);
-
-                var subscriptionMessageSender = this.GetSubscriptionTemplateSender().ToMessageTemplateSender(this.Configuration, this.ServiceEnvironment.NotificationContext.Sender);
-
-                return new NotificationService(templateSender, notificationSender, subscriptionMessageSender);
-            }
-
-            protected virtual IMessageSender<NotificationEventDTO> GetMainTemplateSender()
-            {
-                return this.GetMessageTemplateSender();
-            }
-
-            protected virtual IMessageSender<NotificationEventDTO> GetSubscriptionTemplateSender()
-            {
-                return this.GetMessageTemplateSender();
-            }
-
-            protected virtual IMessageSender<NotificationEventDTO> GetMessageTemplateSender()
-            {
-                ////return new LocalDBNotificationEventDTOMessageSender(this.Configuration); // Сохранение нотификаций в локальной бд, откуда их будет забирать Biztalk
-                return this.ServiceEnvironment.NotificationContext.MSMQNotificationMessageSender; // Отсылка нотификаций в Biztalk через MSMQ
-            }
-
-            protected virtual IStandartExpressionBuilder GetStandartExpressionBuilder()
-            {
-                return Framework.QueryLanguage.StandartExpressionBuilder.Default;
-            }
-
-            /// <summary>
-            /// Получение сервиса обрабоки исключений
-            /// </summary>
-            /// <returns></returns>
-            protected virtual IExceptionService GetExceptionService()
-            {
-                return new ExceptionService(this.Configuration);
-            }
 
             /// <summary>
             /// Получение авторизацонных DALListener-ов с возможностью ручных вызовов

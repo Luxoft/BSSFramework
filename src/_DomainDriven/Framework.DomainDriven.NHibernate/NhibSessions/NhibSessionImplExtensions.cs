@@ -11,7 +11,7 @@ namespace Framework.DomainDriven.NHibernate
 {
     internal static class NhibSessionImplExtensions
     {
-        private static readonly Action<SessionImpl, EventListeners> SetListenersAction = ExpressionHelper.Create((SessionImpl s) => s.Listeners).GetProperty().GetPrivateField().GetSetValueAction<SessionImpl, EventListeners>();
+        private static readonly FieldInfo ListenersField = typeof(SessionImpl).GetField("listeners", BindingFlags.Instance | BindingFlags.NonPublic);
 
         private static readonly Action<SessionImpl, IInterceptor> SetInterceptorAction = ExpressionHelper.Create((SessionImpl s) => s.Interceptor).GetProperty().GetSetValueAction<SessionImpl, IInterceptor>();
 
@@ -24,12 +24,12 @@ namespace Framework.DomainDriven.NHibernate
         /// <param name="listeners"></param>
         internal static void OverrideListeners(this SessionImpl source, EventListeners listeners)
         {
-            SetListenersAction(source, listeners);
+            ListenersField.SetValue(source, listeners);
         }
 
-        internal static void OverrideInterceptor(this SessionImpl source, IInterceptor listeners)
+        internal static void OverrideInterceptor(this SessionImpl source, IInterceptor interceptor)
         {
-            SetInterceptorAction(source, listeners);
+            SetInterceptorAction(source, interceptor);
         }
     }
 }

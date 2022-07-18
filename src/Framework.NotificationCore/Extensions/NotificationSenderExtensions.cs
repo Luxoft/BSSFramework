@@ -23,7 +23,6 @@ namespace Framework.DependencyInjection
             services.Configure<SmtpSettings>(configuration.GetSection("SmtpSettings"));
             services.AddScoped<ISendNotificationsJob, SendNotificationsJob<TBLLContext>>();
             services.AddSingleton<IMessageSender<NotificationEventDTO>, EmptyMessageSender>();
-            services.AddSingleton(LazyInterfaceImplementHelper.CreateNotImplemented<INotificationContext>());
         }
 
         /// <summary>

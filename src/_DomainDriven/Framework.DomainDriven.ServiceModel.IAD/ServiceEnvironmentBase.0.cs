@@ -28,14 +28,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         /// </summary>
         public IServiceProvider RootServiceProvider { get; }
 
-        /// <summary>
-        /// Gets the notification context.
-        /// </summary>
-        /// <value>
-        /// The notification context.
-        /// </value>
-        public INotificationContext NotificationContext { get; }
-
         public virtual bool IsDebugMode => Debugger.IsAttached;
 
         /// <summary>

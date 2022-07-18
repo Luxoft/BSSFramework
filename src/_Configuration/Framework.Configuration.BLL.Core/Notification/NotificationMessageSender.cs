@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net.Mail;
 
 using Framework.Core;
 using Framework.DomainDriven.BLL;
@@ -9,21 +8,22 @@ namespace Framework.Configuration.BLL.Notification
 {
     public class NotificationMessageSender : BLLContextContainer<IConfigurationBLLContext>, IMessageSender<Framework.Notification.Notification>
     {
-        private readonly MailAddress defaultSender;
+        private readonly IDefaultMailSenderContainer defaultMailSenderContainer;
 
         private readonly IMessageSender<NotificationEventDTO> notificationEventSender;
 
 
-        public NotificationMessageSender(IConfigurationBLLContext context, IMessageSender<NotificationEventDTO> notificationEventSender, MailAddress defaultSender)
+        public NotificationMessageSender(IConfigurationBLLContext context, IMessageSender<NotificationEventDTO> notificationEventSender, IDefaultMailSenderContainer defaultMailSenderContainer)
                 : base(context)
         {
-            this.defaultSender = defaultSender ?? throw new ArgumentNullException(nameof(defaultSender));
+            this.defaultMailSenderContainer = defaultMailSenderContainer ?? throw new ArgumentNullException(nameof(defaultMailSenderContainer));
             this.notificationEventSender = notificationEventSender ?? throw new ArgumentNullException(nameof(notificationEventSender));
         }
 
         public void Send(Framework.Notification.Notification notification)
         {
-            notification.Message.Sender = notification.Message.Sender ?? this.defaultSender;
+            notification.Message.Sender = notification.Message.Sender ?? this.defaultMailSenderContainer.DefaultSender;
+
             this.notificationEventSender.Send(new NotificationEventDTO(notification));
         }
     }

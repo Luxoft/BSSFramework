@@ -24,7 +24,6 @@ namespace Framework.Notification
         /// Creates and sends e-mail message according to input params
         /// </summary>
         /// <param name="sender">Notification message sender</param>
-        /// <param name="sendMessageMode"></param>
         /// <param name="subject">E-mail subject</param>
         /// <param name="body">E-mail body</param>
         /// <param name="recipients">A list of recipients</param>

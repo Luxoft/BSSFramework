@@ -2,9 +2,11 @@
 
 using Framework.Authorization.BLL;
 using Framework.Configuration.BLL;
+using Framework.Configuration.BLL.Notification;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
+using Framework.Notification;
 using Framework.QueryableSource;
 using Framework.QueryLanguage;
 using Framework.SecuritySystem;
@@ -34,7 +36,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                    .AddScoped(sp => sp.GetRequiredService<IDBSession>().GetDALFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>())
 
                    .AddScoped<BLLOperationEventListenerContainer<Framework.Authorization.Domain.DomainObjectBase>>()
-                   .AddScoped<BLLSourceEventListenerContainer<Framework.Authorization.Domain.DomainObjectBase>>()
+                   .AddScoped<BLLSourceEventListenerContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>>()
 
                    .AddSingleton<AuthorizationValidatorCompileCache>()
 
@@ -66,7 +68,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                    .AddScoped(sp => sp.GetRequiredService<IDBSession>().GetDALFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>())
 
                    .AddScoped<BLLOperationEventListenerContainer<Framework.Configuration.Domain.DomainObjectBase>>()
-                   .AddScoped<BLLSourceEventListenerContainer<Framework.Configuration.Domain.DomainObjectBase>>()
+                   .AddScoped<BLLSourceEventListenerContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>>()
 
                    .AddSingleton<ConfigurationValidatorCompileCache>()
 
@@ -79,6 +81,11 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                    .AddScoped<IConfigurationBLLFactoryContainer, ConfigurationBLLFactoryContainer>()
 
                    .AddScoped<ICurrentRevisionService>(sp => sp.GetRequiredService<IDBSession>())
+
+                   .AddScoped<IMessageSender<Framework.Notification.MessageTemplateNotification>, TemplateMessageSender>()
+                   .AddScoped<IMessageSender<Framework.Notification.DTO.NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
+                   .AddScoped<IExceptionService, ExceptionService>()
+
 
                    .AddScoped<IConfigurationBLLContextSettings, ConfigurationBLLContextSettings>()
                    .AddLazyScoped<IConfigurationBLLContext, ConfigurationBLLContext>()

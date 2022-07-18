@@ -44,7 +44,6 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 
         public SampleSystemTestServiceEnvironment(
             IServiceProvider serviceProvider,
-            EnvironmentSettings settings,
             bool? isDebugMode = null)
 
             : base(serviceProvider,
@@ -52,7 +51,6 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                     LazyInterfaceImplementHelper.CreateNotImplemented<IRewriteReceiversService>(),
                    isDebugMode)
         {
-            this.Settings = settings;
         }
 
         /// <summary>
@@ -66,11 +64,6 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
         /// Set IsDebugMode always true for Test run
         /// </summary>
         public override bool IsDebugMode => this.IsDebugInTest;
-
-        /// <summary>
-        /// Environment Settings
-        /// </summary>
-        public EnvironmentSettings Settings { get; }
 
         public static SampleSystemTestServiceEnvironment CreateDefault()
         {
@@ -100,8 +93,6 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .AddScoped<IntegrationTestsUserAuthenticationService>()
                                   .AddScoped<IUserAuthenticationService>(sp => sp.GetRequiredService<IntegrationTestsUserAuthenticationService>())
 
-                                  .AddSingleton(EnvironmentSettings.Trace)
-                                  .AddSingleton(sp => sp.GetRequiredService<EnvironmentSettings>().NotificationContext)
                                   .AddSingleton(new SubscriptionMetadataStore(new SampleSystemSubscriptionsMetadataFinder()))
 
                                   .AddSingleton<IAuditRevisionUserAuthenticationService, IntegrationTestsAuditRevisionUserAuthenticationService>()

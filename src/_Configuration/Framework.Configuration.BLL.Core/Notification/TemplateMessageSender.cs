@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Net.Mail;
 
 using Framework.Configuration.Core;
 
@@ -17,13 +16,13 @@ namespace Framework.Configuration.BLL.Notification
 {
     public class TemplateMessageSender : BLLContextContainer<IConfigurationBLLContext>, IMessageSender<MessageTemplateNotification>
     {
-        private readonly MailAddress defaultSender;
+        private readonly IDefaultMailSenderContainer defaultMailSenderContainer;
         private readonly IMessageSender<NotificationEventDTO> notificationEventSender;
 
-        public TemplateMessageSender(IConfigurationBLLContext context, IMessageSender<NotificationEventDTO> notificationEventSender, MailAddress defaultSender)
+        public TemplateMessageSender(IConfigurationBLLContext context, IMessageSender<NotificationEventDTO> notificationEventSender, IDefaultMailSenderContainer defaultMailSenderContainer)
             : base(context)
         {
-            this.defaultSender = defaultSender ?? throw new ArgumentNullException(nameof(defaultSender));
+            this.defaultMailSenderContainer = defaultMailSenderContainer ?? throw new ArgumentNullException(nameof(defaultMailSenderContainer));
             this.notificationEventSender = notificationEventSender ?? throw new ArgumentNullException(nameof(notificationEventSender));
             this.Logger = Log.Logger.ForContext(this.GetType());
         }
@@ -76,7 +75,7 @@ namespace Framework.Configuration.BLL.Notification
 
             var includeAttachments = message.Subscription.Maybe(s => s.IncludeAttachments, true);
 
-            var sender = message.Subscription.Maybe(s => s.Sender) ?? this.defaultSender;
+            var sender = message.Subscription.Maybe(s => s.Sender) ?? this.defaultMailSenderContainer.DefaultSender;
 
             var messageTemplateBLL = new MessageTemplateBLL(this.Context);
 

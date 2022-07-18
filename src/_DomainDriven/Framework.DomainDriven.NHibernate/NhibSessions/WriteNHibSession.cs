@@ -65,7 +65,7 @@ namespace Framework.DomainDriven.NHibernate
 
             var sessionImpl = (SessionImpl)sessionImplementation;
 
-            sessionImpl.OverrideListeners(this.CreateEventListeners());
+            sessionImpl.OverrideListeners(sessionImpl.Listeners.Concat(this.CreateEventListeners()));
 
             sessionImpl.OverrideInterceptor(this.CreateInterceptor());
         }

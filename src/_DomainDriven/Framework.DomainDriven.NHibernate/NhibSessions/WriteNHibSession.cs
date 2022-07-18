@@ -4,8 +4,6 @@ using System.Data;
 using System.Linq;
 using System.Transactions;
 
-using Framework.Core;
-using Framework.Core.Services;
 using Framework.DomainDriven.Audit;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DAL.Revisions;
@@ -24,10 +22,10 @@ namespace Framework.DomainDriven.NHibernate
     public class WriteNHibSession : NHibSessionBase
     {
         [NotNull]
-        private readonly IEnumerable<IAuditProperty> modifyAuditProperties;
+        private readonly AuditPropertyPair modifyAuditProperties;
 
         [NotNull]
-        private readonly IEnumerable<IAuditProperty> createAuditProperties;
+        private readonly AuditPropertyPair createAuditProperties;
 
         private readonly ISet<ObjectModification> modifiedObjectsFromLogic = new HashSet<ObjectModification>();
 

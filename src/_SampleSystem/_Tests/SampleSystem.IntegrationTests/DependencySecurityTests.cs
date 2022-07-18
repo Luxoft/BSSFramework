@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 
 using FluentAssertions;
 

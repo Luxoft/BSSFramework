@@ -15,19 +15,19 @@ public class NHibSession : IDBSession
 
     private readonly Lazy<IDBSession> lazyInnerSession;
 
-    public NHibSession([NotNull] NHibSessionEnvironment configuration, INHibSessionSetup settings)
+    public NHibSession([NotNull] NHibSessionEnvironment environment, INHibSessionSetup settings)
     {
-        if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+        if (environment == null) throw new ArgumentNullException(nameof(environment));
 
         this.lazyInnerSession = new Lazy<IDBSession>(() =>
         {
             switch (this.sessionMode ?? settings.DefaultSessionMode)
             {
                 case DBSessionMode.Read:
-                    return new ReadOnlyNHibSession(configuration);
+                    return new ReadOnlyNHibSession(environment);
 
                 case DBSessionMode.Write:
-                    return new WriteNHibSession(configuration, settings);
+                    return new WriteNHibSession(environment, settings);
 
                 default:
                     throw new InvalidOperationException();

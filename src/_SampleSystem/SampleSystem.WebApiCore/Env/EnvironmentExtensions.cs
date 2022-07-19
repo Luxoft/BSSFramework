@@ -6,10 +6,13 @@ using Framework.Cap;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Generated.DAL.NHibernate;
 using Framework.Core.Services;
+using Framework.CustomReports.Domain;
+using Framework.CustomReports.Services;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.NHibernate;
+using Framework.DomainDriven.Serialization;
 using Framework.DomainDriven.SerializeMetadata;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.WebApiNetCore;
@@ -24,6 +27,7 @@ using nuSpec.Abstraction;
 using nuSpec.NHibernate;
 
 using SampleSystem.BLL;
+using SampleSystem.Domain;
 using SampleSystem.Generated.DAL.NHibernate;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.CustomReports;
@@ -39,8 +43,7 @@ namespace SampleSystem.WebApiCore
         {
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-            services
-                .AddHttpContextAccessor();
+            services.AddHttpContextAccessor();
 
             services.AddDatabaseSettings(connectionString);
             services.AddCapBss(connectionString);
@@ -56,13 +59,11 @@ namespace SampleSystem.WebApiCore
             services.AddSingleton<IUserAuthenticationService, UserAuthenticationService>();
             services.AddSingleton<ISpecificationEvaluator, NhSpecificationEvaluator>();
 
-
             return services.AddControllerEnvironment();
         }
 
         public static IServiceCollection AddDatabaseSettings(this IServiceCollection services, string connectionString) =>
-                services
-                        .AddScoped<INHibSessionSetup, NHibSessionSettings>()
+                services.AddScoped<INHibSessionSetup, NHibSessionSettings>()
                         .AddScoped<IDBSession, NHibSession>()
 
                         .AddSingleton<INHibSessionEnvironmentSettings, NHibSessionEnvironmentSettings>()
@@ -78,10 +79,15 @@ namespace SampleSystem.WebApiCore
 
         public static IServiceCollection AddControllerEnvironment(this IServiceCollection services)
         {
+            services.AddScoped<IEventSubscriber, EventSubscriber>();
+
             services.AddSingleton<IExceptionProcessor, ApiControllerExceptionService<ISampleSystemBLLContext>>();
 
-            services.AddSingleton<ISystemMetadataTypeBuilder, SystemMetadataTypeBuilder<SampleSystem.Domain.PersistentDomainObjectBase>>();
+            services.AddSingleton<IReportParameterValueService<ISampleSystemBLLContext, PersistentDomainObjectBase, SampleSystemSecurityOperationCode>, ReportParameterValueService<ISampleSystemBLLContext, PersistentDomainObjectBase, SampleSystemSecurityOperationCode>>();
+            services.AddSingleton<ISystemMetadataTypeBuilder>(new SystemMetadataTypeBuilder<PersistentDomainObjectBase>(DTORole.All, typeof(PersistentDomainObjectBase).Assembly));
             services.AddSingleton<SampleSystemCustomReportsServiceEnvironment>();
+            services.AddSingleton(sp => sp.GetRequiredService<SampleSystemCustomReportsServiceEnvironment>().ReportService);
+            services.AddSingleton<ISecurityOperationCodeProvider<SampleSystemSecurityOperationCode>, SecurityOperationCodeProvider>();
 
             services.AddSingleton<IContextEvaluator<IAuthorizationBLLContext>, ContextEvaluator<IAuthorizationBLLContext>>();
             services.AddSingleton<IContextEvaluator<ISampleSystemBLLContext>, ContextEvaluator<ISampleSystemBLLContext>>();

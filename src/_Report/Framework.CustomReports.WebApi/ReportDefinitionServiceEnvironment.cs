@@ -75,8 +75,6 @@ namespace Framework.CustomReports.WebApi
 
             this.ReportService = new ReportService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>(idToCreateCustomReportDict);
 
-            this.ReportParameterValueService = new ReportParameterValueService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>();
-
         }
 
         protected virtual ISyncCustomReportService<TBLLContext, TSecurityOperationCode> GetSyncCustomReportService()
@@ -85,8 +83,6 @@ namespace Framework.CustomReports.WebApi
         }
 
         public virtual IReportService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> ReportService { get; }
-
-        public virtual IReportParameterValueService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> ReportParameterValueService { get; }
 
         protected virtual Func<TBLLContext, ICustomReportEvaluator> GetCreateCustomReportBLL(Type customReportType)
         {

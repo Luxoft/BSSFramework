@@ -62,6 +62,7 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .RegisterLegacyBLLContext()
                                   .RegisterControllers()
                                   .AddControllerEnvironment()
+
                                   .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
 
                                   .AddScoped<IntegrationTestsUserAuthenticationService>()

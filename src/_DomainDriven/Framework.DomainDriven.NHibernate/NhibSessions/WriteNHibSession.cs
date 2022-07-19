@@ -71,9 +71,9 @@ namespace Framework.DomainDriven.NHibernate
 
         private void InjectListeners(EventListeners eventListeners)
         {
-            eventListeners.PostDeleteEventListeners = new[] { this.collectChangedEventListener };
-            eventListeners.PostUpdateEventListeners = new[] { this.collectChangedEventListener };
-            eventListeners.PostInsertEventListeners = new[] { this.collectChangedEventListener };
+            eventListeners.PostDeleteEventListeners = eventListeners.PostDeleteEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
+            eventListeners.PostUpdateEventListeners = eventListeners.PostUpdateEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
+            eventListeners.PostInsertEventListeners = eventListeners.PostInsertEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
 
             if (this.Environment.ConnectionSettings.UseEventListenerInsteadOfInterceptorForAudit)
             {
@@ -81,8 +81,8 @@ namespace Framework.DomainDriven.NHibernate
                 var createAuditEventListener = new CreateAuditEventListener(this.createAuditProperties);
 #pragma warning restore 0618
 
-                eventListeners.PreUpdateEventListeners = new IPreUpdateEventListener[] { modifyAuditEventListener };
-                eventListeners.PreInsertEventListeners = new IPreInsertEventListener[] { modifyAuditEventListener, createAuditEventListener };
+                eventListeners.PreUpdateEventListeners = eventListeners.PreUpdateEventListeners.Concat(new IPreUpdateEventListener[] { modifyAuditEventListener }).ToArray();
+                eventListeners.PreInsertEventListeners = eventListeners.PreInsertEventListeners.Concat(new IPreInsertEventListener[] { modifyAuditEventListener, createAuditEventListener }).ToArray();
 
 #pragma warning disable 0618 // Obsolete
             }

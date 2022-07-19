@@ -12,7 +12,7 @@ namespace Framework.Events
     /// </summary>
     /// <typeparam name="TBLLContext"></typeparam>
     /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
-    public abstract class EventsSubscriptionManagerBase<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<TBLLContext>, IEventsSubscriptionManager<TBLLContext, TPersistentDomainObjectBase>
+    public abstract class EventsSubscriptionManagerBase<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<TBLLContext>, IEventsSubscriptionManager
         where TPersistentDomainObjectBase : class
         where TBLLContext : class, IBLLOperationEventContext<TPersistentDomainObjectBase>
     {

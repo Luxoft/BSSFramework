@@ -11,12 +11,12 @@ namespace Framework.Events
         where TBLLContext : class
         where TPersistentDomainObjectBase : class
     {
-        private readonly IList<TypeEventDependency> dependencies;
+        private readonly TypeEventDependency[] dependencies;
 
-        protected DependencyDetailEventDALListener(TBLLContext context, IList<TypeEvent> typeEvents, IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender, IList<TypeEventDependency> dependencies)
-            : base(context, typeEvents, messageSender)
+        protected DependencyDetailEventDALListener(TBLLContext context, IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender, IEnumerable<TypeEvent> typeEvents, IEnumerable<TypeEventDependency> dependencies)
+            : base(context, messageSender, typeEvents)
         {
-            this.dependencies = dependencies ?? throw new ArgumentNullException(nameof(dependencies));
+            this.dependencies = (dependencies ?? throw new ArgumentNullException(nameof(dependencies))).ToArray();
         }
 
         protected override IEnumerable<TupleStruct<IDALObject, EventOperation>> ProcessFinalAllFilteredOrderedValues(

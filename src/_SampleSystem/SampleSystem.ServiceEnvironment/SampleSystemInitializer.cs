@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 using Framework.Authorization.BLL;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
-using Framework.Configuration.SubscriptionModeling;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.ServiceModel.IAD;
 
@@ -76,5 +75,4 @@ public class SampleSystemInitializer
                                        DBSessionMode.Write,
                                        context => this.subscriptionMetadataStore.RegisterCodeFirstSubscriptions(context.Configuration.Logics.CodeFirstSubscription, context.Configuration));
     }
-
 }

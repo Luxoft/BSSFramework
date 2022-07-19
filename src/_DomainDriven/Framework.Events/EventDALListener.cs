@@ -12,20 +12,20 @@ namespace Framework.Events
     /// </summary>
     /// <typeparam name="TBLLContext"></typeparam>
     /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
-    public abstract class EventDALListener<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<TBLLContext>, IManualEventDALListener<TPersistentDomainObjectBase>
+    public abstract class EventDALListener<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<TBLLContext>, IManualEventDALListener<TPersistentDomainObjectBase>, IBeforeTransactionCompletedDALListener
         where TBLLContext : class
         where TPersistentDomainObjectBase : class
     {
-        private readonly IList<TypeEvent> typeEvents;
+        private readonly TypeEvent[] typeEvents;
 
         private readonly IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender;
 
-        protected EventDALListener(TBLLContext context, IList<TypeEvent> typeEvents, IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender)
+        protected EventDALListener(TBLLContext context, IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender, IEnumerable<TypeEvent> typeEvents)
             : base(context)
         {
-            this.typeEvents = typeEvents;
-
             this.messageSender = messageSender;
+
+            this.typeEvents = (typeEvents ?? throw new ArgumentNullException(nameof(typeEvents))).ToArray();
         }
 
         Type IPersistentDomainObjectBaseTypeContainer.PersistentDomainObjectBaseType => typeof(TPersistentDomainObjectBase);

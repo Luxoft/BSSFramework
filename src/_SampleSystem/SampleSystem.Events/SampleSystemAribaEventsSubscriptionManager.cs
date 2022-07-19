@@ -10,7 +10,7 @@ namespace SampleSystem.Events
 {
     public class SampleSystemAribaEventsSubscriptionManager : EventsSubscriptionManagerBase<ISampleSystemBLLContext, PersistentDomainObjectBase>
     {
-        public SampleSystemAribaEventsSubscriptionManager(ISampleSystemBLLContext context, [NotNull] IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>> messageSender)
+        public SampleSystemAribaEventsSubscriptionManager(ISampleSystemBLLContext context, [NotNull] SampleSystemAribaLocalDBEventMessageSender messageSender)
             : base(context, messageSender)
         {
         }

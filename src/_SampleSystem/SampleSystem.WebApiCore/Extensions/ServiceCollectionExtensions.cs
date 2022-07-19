@@ -1,12 +1,14 @@
 ﻿using System;
 
 using Framework.Authorization.BLL;
+using Framework.Authorization.Events;
 using Framework.Configuration.BLL.Notification;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.ServiceModel.IAD;
+using Framework.Events;
 using Framework.HierarchicalExpand;
 using Framework.QueryableSource;
 using Framework.Security.Cryptography;
@@ -20,6 +22,7 @@ using SampleSystem.BLL;
 using SampleSystem.BLL.Core.Jobs;
 using SampleSystem.BLL.Jobs;
 using SampleSystem.Domain;
+using SampleSystem.Events;
 using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.WebApiCore;
@@ -28,6 +31,30 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterLegacyBLLContext(this IServiceCollection services)
     {
+        services.AddSingleton<IInitializeManager, InitializeManager>();
+
+        services.AddScoped<IBeforeTransactionCompletedDALListener, DenormalizeHierarchicalDALListener<ISampleSystemBLLContext, PersistentDomainObjectBase, NamedLock, NamedLockOperation>>();
+        services.AddScoped<IBeforeTransactionCompletedDALListener, FixDomainObjectEventRevisionNumberDALListener>();
+
+        services.AddScoped<DefaultAuthDALListener>();
+
+        services.AddScoped<IBeforeTransactionCompletedDALListener>(sp => sp.GetRequiredService<DefaultAuthDALListener>());
+        services.AddScoped<IManualEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>>(sp => sp.GetRequiredService<DefaultAuthDALListener>());
+
+
+        services.AddScoped<IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>>, SampleSystemLocalDBEventMessageSender>();
+        services.AddScoped<IEventsSubscriptionManager, SampleSystemEventsSubscriptionManager>();
+
+        services.AddScoped<IMessageSender<IDomainOperationSerializeData<Framework.Authorization.Domain.PersistentDomainObjectBase>>, AuthorizationLocalDBEventMessageSender>();
+        services.AddScoped<IEventsSubscriptionManager, AuthorizationEventsSubscriptionManager>();
+
+
+        services.AddScoped<SampleSystemAribaLocalDBEventMessageSender>();
+        services.AddScoped<IEventsSubscriptionManager, SampleSystemAribaEventsSubscriptionManager>();
+
+        services.AddScoped<IStandardSubscriptionService, LocalDBSubscriptionService>();
+
+
         services.AddSingleton(AvailableValuesHelper.AvailableValues.ToValidation());
 
         services.AddSingleton<IDefaultMailSenderContainer>(new DefaultMailSenderContainer("SampleSystem_Sender@luxoft.com"));
@@ -50,9 +77,6 @@ public static class ServiceCollectionExtensions
 
         return services;
     }
-
-
-
 
     public static IServiceCollection RegisterHierarchicalObjectExpander(this IServiceCollection services)
     {

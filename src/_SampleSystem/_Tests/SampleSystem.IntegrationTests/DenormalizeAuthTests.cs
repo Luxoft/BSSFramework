@@ -14,6 +14,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 using BusinessRole = SampleSystem.IntegrationTests.__Support.Utils.BusinessRole;
@@ -100,7 +101,7 @@ namespace SampleSystem.IntegrationTests
         //    // Arrange
 
         //    // Act
-        //    var objIdents = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, TestEmployeeLogin, ctx =>
+        //    var objIdents = this.GetContextEvaluator().Evaluate(DBSessionMode.Read, TestEmployeeLogin, ctx =>
         //    {
         //        var baseFilter = BuildTestPlainAuthObjectSecurityFilter(ctx, SampleSystemSecurityOperation.EmployeeView);
         //        var filter = baseFilter.ExpandConst().InlineEval();
@@ -121,7 +122,7 @@ namespace SampleSystem.IntegrationTests
         //    // Arrange
 
         //    // Act
-        //    var objIdents = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, ctx =>
+        //    var objIdents = this.GetContextEvaluator().Evaluate(DBSessionMode.Read, ctx =>
         //    {
         //        var baseFilter = BuildTestPlainAuthObjectSecurityFilter(ctx, SampleSystemSecurityOperation.EmployeeView);
         //        var filter = baseFilter.ExpandConst().InlineEval();

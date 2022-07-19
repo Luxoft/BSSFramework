@@ -38,60 +38,19 @@ namespace Framework.DomainDriven.WebApiGenerator.NetCore
 
         protected sealed override IEnumerable<CodeTypeReference> GetBaseTypes()
         {
-            var serviceEnvironmentTypeReference = new CodeTypeReference(typeof(IServiceEnvironment));
 
             var evaluateDataTypeReference = this.GetEvaluateDataTypeReference();
 
-            var result = new CodeTypeReference(typeof(ApiControllerBase<,,>))
+            var result = new CodeTypeReference(typeof(ApiControllerBase<,>))
             {
                 TypeArguments =
                                  {
-                                         serviceEnvironmentTypeReference,
                                          this.Configuration.Environment.BLLCore.BLLContextInterfaceTypeReference,
                                          evaluateDataTypeReference
                                  }
             };
 
             yield return result;
-        }
-
-        protected sealed override IEnumerable<CodeConstructor> GetConstructors()
-        {
-            var baseTypeReference = this.GetBaseTypes().First();
-
-            var minParameters = new[]
-                                {
-                                        new CodeParameterDeclarationExpression(baseTypeReference.TypeArguments[0], "serviceEnvironment"),
-                                        new CodeParameterDeclarationExpression(typeof(Framework.Exceptions.IExceptionProcessor), "exceptionProcessor")
-                                };
-
-            var parametersCollection = new[]
-                                       {
-                                           minParameters,
-                                           ////minParameters
-                                           ////    .Concat(
-                                           ////            new[]
-                                           ////            {
-                                           ////                new CodeParameterDeclarationExpression(
-                                           ////                                                       typeof(string),
-                                           ////                                                       "principalName")
-                                           ////            })
-                                           ////    .ToArray()
-                                       };
-
-            foreach (var parameters in parametersCollection)
-            {
-                var result = new CodeConstructor
-                {
-                    Attributes = MemberAttributes.Public
-                };
-
-                result.Parameters.AddRange(parameters);
-
-                result.BaseConstructorArgs.AddRange(parameters.Select(z => z.ToVariableReferenceExpression()).ToArray());
-
-                yield return result;
-            }
         }
 
         protected override IEnumerable<CodeTypeMember> GetMembers() => base.GetMembers().Concat(new[] { this.GetOverrideMethod() });

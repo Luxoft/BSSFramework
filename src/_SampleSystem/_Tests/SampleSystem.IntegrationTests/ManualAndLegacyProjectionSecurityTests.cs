@@ -90,7 +90,7 @@ namespace SampleSystem.IntegrationTests
             // Arrange
 
             // Act
-            var items = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, TestEmployeeLogin, ctx =>
+            var items = this.GetContextEvaluator().Evaluate(DBSessionMode.Read, TestEmployeeLogin, ctx =>
             {
                 var bll = ctx.Logics.TestLegacyEmployeeFactory.Create(BLLSecurityMode.View);
 

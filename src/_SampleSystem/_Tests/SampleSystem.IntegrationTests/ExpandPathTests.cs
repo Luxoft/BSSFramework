@@ -26,7 +26,7 @@ namespace SampleSystem.IntegrationTests
             // Act
             var action = new Action(() =>
             {
-                var res = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnit.Period.ContainsExt(period.EndDate ?? period.StartDate)));
+                var res = this.GetContextEvaluator().Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnit.Period.ContainsExt(period.EndDate ?? period.StartDate)));
 
                 return;
             });
@@ -43,7 +43,7 @@ namespace SampleSystem.IntegrationTests
             // Act
             var action = new Action(() =>
             {
-                var res = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.LocationCode == null));
+                var res = this.GetContextEvaluator().Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.LocationCode == null));
 
                 return;
             });
@@ -60,7 +60,7 @@ namespace SampleSystem.IntegrationTests
             // Act
             var action = new Action(() =>
             {
-                var res = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnitPeriod.IsIntersected(this.DateTimeService.CurrentMonth)));
+                var res = this.GetContextEvaluator().Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnitPeriod.IsIntersected(this.DateTimeService.CurrentMonth)));
 
                 return;
             });
@@ -78,7 +78,7 @@ namespace SampleSystem.IntegrationTests
             // Act
             var action = new Action(() =>
             {
-                var res = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnitPeriod.Contains((DateTime?)this.DateTimeService.Today)));
+                var res = this.GetContextEvaluator().Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnitPeriod.Contains((DateTime?)this.DateTimeService.Today)));
 
                 return;
             });

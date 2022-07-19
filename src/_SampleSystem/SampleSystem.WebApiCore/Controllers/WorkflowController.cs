@@ -29,9 +29,7 @@ namespace SampleSystem.WebApiCore.Controllers;
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
-public class WorkflowController : ApiControllerBase<
-        SampleSystemServiceEnvironment,
-        ISampleSystemBLLContext, EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>
+public class WorkflowController : ApiControllerBase<ISampleSystemBLLContext, EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>
 {
     private readonly StartWorkflowJob startWorkflowJob;
 
@@ -40,12 +38,10 @@ public class WorkflowController : ApiControllerBase<
     private readonly IUserAuthenticationService userAuthenticationService;
 
     public WorkflowController(
-            SampleSystemServiceEnvironment environment,
-            IExceptionProcessor exceptionProcessor,
             StartWorkflowJob startWorkflowJob,
             IWorkflowHost workflowHost,
             IUserAuthenticationService userAuthenticationService)
-            : base(environment, exceptionProcessor)
+
     {
         this.startWorkflowJob = startWorkflowJob;
         this.workflowHost = workflowHost;

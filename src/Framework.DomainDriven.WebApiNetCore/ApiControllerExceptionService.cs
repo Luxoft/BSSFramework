@@ -15,17 +15,17 @@ namespace Framework.DomainDriven.WebApiNetCore
     public class ApiControllerExceptionService<TBLLContext> : IExceptionProcessor
         where TBLLContext : class, IConfigurationBLLContextContainer<IConfigurationBLLContext>
     {
-        private readonly IServiceEnvironment serviceEnvironment;
-
         private readonly IContextEvaluator<TBLLContext> contextEvaluator;
 
+        private readonly IDebugModeManager debugModeManager;
+
         public ApiControllerExceptionService(
-                [NotNull] IServiceEnvironment serviceEnvironment,
                 [NotNull] IContextEvaluator<TBLLContext> contextEvaluator,
+                IDebugModeManager debugModeManager = null,
                 bool expandDetailException = true)
         {
-            this.serviceEnvironment = serviceEnvironment ?? throw new ArgumentNullException(nameof(serviceEnvironment));
             this.contextEvaluator = contextEvaluator ?? throw new ArgumentNullException(nameof(contextEvaluator));
+            this.debugModeManager = debugModeManager;
 
             this.ExpandDetailException = expandDetailException;
         }
@@ -77,7 +77,7 @@ namespace Framework.DomainDriven.WebApiNetCore
 
             this.Save(expandedBaseException, context);
 
-            if (!this.serviceEnvironment.IsDebugMode)
+            if (!this.debugModeManager.Maybe(v => v.IsDebugMode))
             {
                 return this.GetFacadeException(expandedBaseException, context);
             }

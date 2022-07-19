@@ -15,7 +15,10 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
 {
     public class AuthHelper : Utils.Framework.Authorization, IRootServiceProviderContainer
     {
-        public SampleSystemTestServiceEnvironment Environment { get; set; }
+        public AuthHelper(IServiceProvider rootServiceProvider)
+            : base(rootServiceProvider)
+        {
+        }
 
         public void SetUserRole(EmployeeIdentityDTO employee, params IPermissionDefinition[] permissions)
         {
@@ -43,26 +46,9 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             return this.EvaluateRead(context => context.Authorization.CurrentPrincipalName);
         }
 
-        public override void EvaluateWrite(Action<ISampleSystemBLLContext> action)
-        {
-            this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, null, action);
-        }
-
-        public TResult EvaluateWrite<TResult>(Func<ISampleSystemBLLContext, TResult> func)
-        {
-            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, null, func);
-        }
-
-        public TResult EvaluateRead<TResult>(Func<ISampleSystemBLLContext, TResult> func)
-        {
-            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, null, func);
-        }
-
         public string GetEmployeeLogin(EmployeeIdentityDTO employee)
         {
-            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, ctx => ctx.Logics.Employee.GetById(employee.Id, true).Login);
+            return this.GetContextEvaluator().Evaluate(DBSessionMode.Read, ctx => ctx.Logics.Employee.GetById(employee.Id, true).Login);
         }
-
-        IServiceProvider IRootServiceProviderContainer.RootServiceProvider => this.Environment.RootServiceProvider;
     }
 }

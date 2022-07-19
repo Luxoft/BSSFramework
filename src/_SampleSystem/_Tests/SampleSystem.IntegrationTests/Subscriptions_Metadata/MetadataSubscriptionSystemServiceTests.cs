@@ -103,7 +103,7 @@ namespace SampleSystem.IntegrationTests.Subscriptions_Metadata
         public void OnlyActiveCodeFirstSubscriptionShouldBeSent()
         {
             // Arrange
-            this.DataHelper.EvaluateWrite(context =>
+            this.EvaluateWrite(context =>
             {
                 var bll = context.Configuration.Logics.CodeFirstSubscription;
                 var cfs = bll.GetByCode(new EmployeeUpdateSubscription().Code);

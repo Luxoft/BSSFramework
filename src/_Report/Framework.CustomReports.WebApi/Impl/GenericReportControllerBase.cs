@@ -32,8 +32,7 @@ using ReportIdentityDTO = Framework.Configuration.Generated.DTO.ReportIdentityDT
 
 namespace Framework.CustomReports.WebApi
 {
-    public abstract class GenericReportControllerBase<TServiceEnvironment, TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode, TIdent, TMappingService> : ApiControllerBase<TServiceEnvironment, TBLLContext, EvaluatedData<TBLLContext, TMappingService>>
-        where TServiceEnvironment : class, IServiceEnvironment, ISystemMetadataTypeBuilderContainer, IReportServiceContainer<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>, ISecurityOperationCodeProviderContainer<TSecurityOperationCode>
+    public abstract class GenericReportControllerBase<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode, TIdent, TMappingService> : ApiControllerBase<TBLLContext, EvaluatedData<TBLLContext, TMappingService>>
 
         where TBLLContext : class,
 
@@ -55,12 +54,28 @@ namespace Framework.CustomReports.WebApi
 
         where TSecurityOperationCode : struct, Enum where TMappingService : class
     {
+        private readonly ISystemMetadataTypeBuilder systemMetadataTypeBuilder;
+
+        private readonly IReportParameterValueService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> reportParameterValueService;
+
+        private readonly IReportService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> reportService;
+
+        private readonly ISecurityOperationCodeProvider<TSecurityOperationCode> securityOperationCodeProvider;
+
         private Lazy<Dictionary<string, TypeMetadata>> typeMetadataDictLazy;
 
 
-        protected GenericReportControllerBase(TServiceEnvironment environment, IExceptionProcessor exceptionProcessor)
-            : base(environment, exceptionProcessor)
+        protected GenericReportControllerBase(
+                ISystemMetadataTypeBuilder systemMetadataTypeBuilder,
+                IReportParameterValueService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> reportParameterValueService,
+                IReportService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> reportService,
+                ISecurityOperationCodeProvider<TSecurityOperationCode> securityOperationCodeProvider)
         {
+            this.systemMetadataTypeBuilder = systemMetadataTypeBuilder;
+            this.reportParameterValueService = reportParameterValueService;
+            this.reportService = reportService;
+            this.securityOperationCodeProvider = securityOperationCodeProvider;
+
             this.InitDict();
         }
 
@@ -150,7 +165,7 @@ namespace Framework.CustomReports.WebApi
                 return new ReportGenerationRequestModelRichDTO() { Parameters = parameters, TypeMetadatas = typeMetadatas };
             });
         }
-        
+
         [HttpPost(nameof(GetSimpleReportParameterValues))]
         public SelectOperationResult<ReportParameterValueSimpleDTO> GetSimpleReportParameterValues(GetSimpleReportParameterValuesRequest request)
         {
@@ -166,7 +181,7 @@ namespace Framework.CustomReports.WebApi
 
                 var reportServiceContext = this.GetReportServiceContext(evaludatedData.Context);
 
-                var result = this.ServiceEnvironment.ReportParameterValueService.GetParameterValuesBy(reportServiceContext, parameter, selectOperation);
+                var result = this.reportParameterValueService.GetParameterValuesBy(reportServiceContext, parameter, selectOperation);
 
                 return new SelectOperationResult<ReportParameterValueSimpleDTO>(result.Items.ToSimpleDTOList(this.GetConfigurationMappingService(evaludatedData)), result.TotalCount);
             });
@@ -183,7 +198,7 @@ namespace Framework.CustomReports.WebApi
 
                 var reportServiceContext = this.GetReportServiceContext(evaludatedData.Context);
 
-                var result = this.ServiceEnvironment.ReportParameterValueService.GetParameterValuesBy(reportServiceContext, request.typeName, selectOperation);
+                var result = this.reportParameterValueService.GetParameterValuesBy(reportServiceContext, request.typeName, selectOperation);
 
                 return new SelectOperationResult<ReportParameterValueSimpleDTO>(result.Items.ToSimpleDTOList(this.GetConfigurationMappingService(evaludatedData)), result.TotalCount);
             });
@@ -214,12 +229,12 @@ namespace Framework.CustomReports.WebApi
 
                 var reportServiceContext = this.GetReportServiceContext(evaludatedData.Context);
 
-                var result = this.ServiceEnvironment.ReportParameterValueService.GetParameterValuePositions(reportServiceContext, parameterValues);
+                var result = this.reportParameterValueService.GetParameterValuePositions(reportServiceContext, parameterValues);
 
                 return result;
             });
         }
-        
+
         [HttpPost(nameof(GetReportParameterValuePosition))]
         public int GetReportParameterValuePosition(ReportParameterValueStrictDTO parameterValueStrictDTO)
         {
@@ -263,7 +278,7 @@ namespace Framework.CustomReports.WebApi
 
                 var reportServiceContext = this.GetReportServiceContext(evaludatedData.Context);
 
-                var parameterValues = this.ServiceEnvironment.ReportParameterValueService.GetParameterValuesBy(reportServiceContext, request.typeName, selectOperation);
+                var parameterValues = this.reportParameterValueService.GetParameterValuesBy(reportServiceContext, request.typeName, selectOperation);
 
                 var values = parameterValues.Items.Select((item, index) => new { Id = Guid.Parse(item.Value), Index = index });
 
@@ -332,7 +347,7 @@ namespace Framework.CustomReports.WebApi
 
                 model.PredefineGenerationValues = this.GetPredefineFilterParameters(model, reportServiceContext);
 
-                var reportStream = this.ServiceEnvironment.ReportService.GetReportStream(model, reportServiceContext);
+                var reportStream = this.reportService.GetReportStream(model, reportServiceContext);
 
                 return this.GetReportResult(reportStream);
             });
@@ -341,7 +356,7 @@ namespace Framework.CustomReports.WebApi
         [HttpPost(nameof(GetTypeMetadatas))]
         public IEnumerable<TypeMetadata> GetTypeMetadatas()
         {
-            return this.ServiceEnvironment.SystemMetadataTypeBuilder.SystemMetadata.Types;
+            return this.systemMetadataTypeBuilder.SystemMetadata.Types;
         }
 
 
@@ -349,7 +364,7 @@ namespace Framework.CustomReports.WebApi
         {
             if (model.Report.Filters.Any(z => !z.IsValueFromParameters))
             {
-                var reportDomainType = this.ServiceEnvironment.SystemMetadataTypeBuilder.TypeResolver.Resolve(new TypeHeader(model.Report.DomainTypeName));
+                var reportDomainType = this.systemMetadataTypeBuilder.TypeResolver.Resolve(new TypeHeader(model.Report.DomainTypeName));
 
                 foreach (var item in model.Report.Filters.Where(z => !z.IsValueFromParameters))
                 {
@@ -366,7 +381,7 @@ namespace Framework.CustomReports.WebApi
                             throw new BusinessLogicException($"Expected Guid in filter:{item.Property}");
                         }
 
-                        yield return new ReportGenerationPredefineValue(propertyDomainType.Type.Name, this.ServiceEnvironment.ReportParameterValueService.GetDesignValue(reportServiceContext, expectedId, propertyTypeHeader));
+                        yield return new ReportGenerationPredefineValue(propertyDomainType.Type.Name, this.reportParameterValueService.GetDesignValue(reportServiceContext, expectedId, propertyTypeHeader));
                     }
                     else
                     {
@@ -410,15 +425,15 @@ namespace Framework.CustomReports.WebApi
         {
             this.typeMetadataDictLazy = new Lazy<Dictionary<string, TypeMetadata>>(() => this.GetTypeMetadataDict(), true);
         }
-        
+
         private ReportServiceContext<TBLLContext, TSecurityOperationCode> GetReportServiceContext(TBLLContext context)
         {
-            return new ReportServiceContext<TBLLContext, TSecurityOperationCode>(context, this.ServiceEnvironment.SystemMetadataTypeBuilder, this.ServiceEnvironment.SecurityOperationCodeProvider);
+            return new ReportServiceContext<TBLLContext, TSecurityOperationCode>(context, this.systemMetadataTypeBuilder, this.securityOperationCodeProvider);
         }
 
         private Dictionary<string, TypeMetadata> GetTypeMetadataDict()
         {
-            return this.ServiceEnvironment.SystemMetadataTypeBuilder.SystemMetadata.Types.ToDictionary(z => z.Type.Name, z => z);
+            return this.systemMetadataTypeBuilder.SystemMetadata.Types.ToDictionary(z => z.Type.Name, z => z);
         }
     }
 }

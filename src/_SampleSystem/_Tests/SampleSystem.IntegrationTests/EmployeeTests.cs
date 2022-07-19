@@ -48,7 +48,7 @@ namespace SampleSystem.IntegrationTests
             CoreDatabaseUtil.ExecuteSql("INSERT INTO [app].[Employee] ([id], age) VALUES (NewId(), null)");
 
             // Act, IntegrationNamespace
-            var actual = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read,
+            var actual = this.GetContextEvaluator().Evaluate(DBSessionMode.Read,
                 ctx => ctx.Logics.Employee.GetUnsecureQueryable().Where(q => q.Age == 10).ToList());
 
             // Assert
@@ -316,7 +316,7 @@ namespace SampleSystem.IntegrationTests
         [Ignore]
         public void EventListenerTest()
         {
-            this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write,
+            this.GetContextEvaluator().Evaluate(DBSessionMode.Write,
                                              (_, dbContext) =>
                                              {
                                                  var writeNhibSession = dbContext as WriteNHibSession;
@@ -353,7 +353,7 @@ namespace SampleSystem.IntegrationTests
             var buIdentity = this.DataHelper.SaveBusinessUnit();
 
             // Act
-            var isVirtualResult = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, ctx =>
+            var isVirtualResult = this.GetContextEvaluator().Evaluate(DBSessionMode.Read, ctx =>
             {
                 var filter = new TestEmployeeFilter
                 {

@@ -9,7 +9,7 @@ namespace SampleSystem.ServiceEnvironment
     /// </summary>
     public class SampleSystemCustomAuthValidator : AuthorizationValidator
     {
-        public SampleSystemCustomAuthValidator(IAuthorizationBLLContext context, ValidatorCompileCache cache)
+        public SampleSystemCustomAuthValidator(IAuthorizationBLLContext context, AuthorizationValidatorCompileCache cache)
                 : base(context, cache)
         {
         }

@@ -25,7 +25,7 @@ namespace SampleSystem.IntegrationTests
 
             // Act
 
-            var c = this.DataHelper.EvaluateWrite(context => context.Logics.Country.Single(new Test1NameSpecification()));
+            var c = this.EvaluateWrite(context => context.Logics.Country.Single(new Test1NameSpecification()));
 
             // Assert
             c.Name.Should().Be("test1");
@@ -40,7 +40,7 @@ namespace SampleSystem.IntegrationTests
 
             // Act
             var employee =
-                    this.DataHelper.EvaluateWrite(context => context.Logics.Employee.Single(new EmployeeWithFetchSpecification()));
+                    this.EvaluateWrite(context => context.Logics.Employee.Single(new EmployeeWithFetchSpecification()));
 
             // Assert
             employee.Login.Should().Be("emp1");

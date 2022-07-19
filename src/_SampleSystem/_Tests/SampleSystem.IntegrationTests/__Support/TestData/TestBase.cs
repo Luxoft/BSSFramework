@@ -16,11 +16,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using SampleSystem.BLL;
 using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.ServiceEnvironment.IntegrationTests;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
-using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.Controllers;
 
 using DataHelper = SampleSystem.IntegrationTests.__Support.TestData.Helpers.DataHelper;
@@ -35,18 +33,18 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
         protected TestBase()
         {
             this.SetCurrentDateTime(DateTime.Now);
-            this.DataHelper = new DataHelper();
-            this.AuthHelper = new AuthHelper();
+            this.DataHelper = new DataHelper(this.RootServiceProvider);
+            this.AuthHelper = new AuthHelper(this.RootServiceProvider);
 
             // Workaround for System.Drawing.Common problem https://chowdera.com/2021/12/202112240234238356.html
             System.AppContext.SetSwitch("System.Drawing.EnableUnixSupport", true);
         }
 
-        protected virtual SampleSystemTestServiceEnvironment Environment => SampleSystemTestServiceEnvironment.Default;
+        public IServiceProvider RootServiceProvider { get; } = SampleSystemTestRootServiceProvider.Default;
 
-        public MainWebApi MainWebApi => new(this.Environment.RootServiceProvider);
+        public MainWebApi MainWebApi => new(this.RootServiceProvider);
 
-        public MainAuditWebApi MainAuditWebApi => new(this.Environment.RootServiceProvider);
+        public MainAuditWebApi MainAuditWebApi => new(this.RootServiceProvider);
 
         protected DataHelper DataHelper
         {
@@ -64,9 +62,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
 
         protected AuthHelper AuthHelper { get; }
 
-        protected IDateTimeService DateTimeService => this.Environment.RootServiceProvider.GetRequiredService<IDateTimeService>();
-
-        IServiceProvider IRootServiceProviderContainer.RootServiceProvider => this.Environment.RootServiceProvider;
+        protected IDateTimeService DateTimeService => this.RootServiceProvider.GetRequiredService<IDateTimeService>();
 
         protected string DatabaseName { get; } = "SampleSystem";
 
@@ -84,8 +80,6 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
                     break;
             }
 
-            this.DataHelper.Environment = this.Environment;
-            this.AuthHelper.Environment = this.Environment;
             //this.AuthHelper.LoginAs();
 
             this.ClearNotifications();
@@ -193,30 +187,10 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
             this.EvaluateWrite(context => context.Configuration.Logics.DomainObjectModification.Pipe(bll => bll.Remove(bll.GetFullList())));
         }
 
-        protected TResult EvaluateWrite<TResult>(Func<ISampleSystemBLLContext, TResult> func)
-        {
-            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, func);
-        }
-
-        protected void EvaluateRead(Action<ISampleSystemBLLContext> action)
-        {
-            this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, action);
-        }
-
-        protected T EvaluateRead<T>(Func<ISampleSystemBLLContext, T> action)
-        {
-            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, action);
-        }
-
-        protected void EvaluateWrite(Action<ISampleSystemBLLContext> func)
-        {
-            this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context => { func(context); return Ignore.Value; });
-        }
-
         public ControllerEvaluator<TController> GetControllerEvaluator<TController>(string principalName = null)
                 where TController : ControllerBase, IApiControllerBase
         {
-            return this.Environment.RootServiceProvider.GetDefaultControllerEvaluator<TController>(principalName);
+            return this.RootServiceProvider.GetDefaultControllerEvaluator<TController>(principalName);
         }
 
         protected ControllerEvaluator<AuthSLJsonController> GetAuthControllerEvaluator(string principalName = null)

@@ -13,8 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Framework.DomainDriven.WebApiNetCore.Integration
 {
-    public abstract class IntegrationSchemaControllerBase<TServiceEnvironment, TBLLContext, TEvaluatedData> : ApiControllerBase<TServiceEnvironment, TBLLContext, TEvaluatedData>
-            where TServiceEnvironment : class, IServiceEnvironment
+    public abstract class IntegrationSchemaControllerBase<TBLLContext, TEvaluatedData> : ApiControllerBase<TBLLContext, TEvaluatedData>
             where TBLLContext : class, IConfigurationBLLContextContainer<IConfigurationBLLContext>, IAuthorizationBLLContextContainer<IAuthorizationBLLContextBase>
             where TEvaluatedData : EvaluatedData<TBLLContext>
     {
@@ -22,8 +21,7 @@ namespace Framework.DomainDriven.WebApiNetCore.Integration
 
         private const string AuthIntegrationNamespace = "http://authorization.luxoft.com/IntegrationEvent";
 
-        protected IntegrationSchemaControllerBase(TServiceEnvironment environment, IExceptionProcessor exceptionProcessor, [NotNull] IDateTimeService dateTimeService)
-            : base(environment, exceptionProcessor)
+        protected IntegrationSchemaControllerBase([NotNull] IDateTimeService dateTimeService)
         {
             this.dateTimeService = dateTimeService ?? throw new ArgumentNullException(nameof(dateTimeService));
         }

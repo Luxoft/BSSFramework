@@ -14,8 +14,8 @@ namespace SampleSystem.WebApiCore.Controllers
 {
     public class AuthSLJsonController : Framework.Authorization.WebApi.AuthSLJsonController
     {
-        public AuthSLJsonController(IServiceEnvironment environment, IExceptionProcessor exceptionProcessor)
-            : base(environment, exceptionProcessor)
+        public AuthSLJsonController()
+            
         {
         }
 

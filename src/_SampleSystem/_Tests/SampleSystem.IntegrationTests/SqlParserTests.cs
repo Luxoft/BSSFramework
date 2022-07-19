@@ -7,6 +7,7 @@ using Framework.DomainDriven;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
@@ -22,8 +23,7 @@ namespace SampleSystem.IntegrationTests
             var testObject = new SqlParserTestObj();
 
             // Act
-            Action action = () => this.DataHelper.EvaluateWrite(
-                                                                context => { context.Logics.SqlParserTestObj.Save(testObject); });
+            Action action = () => this.EvaluateWrite(context => { context.Logics.SqlParserTestObj.Save(testObject); });
 
             // Assert
             action.Should().Throw<RequiredConstraintDALException>()
@@ -39,7 +39,7 @@ namespace SampleSystem.IntegrationTests
             var testObject2 = new SqlParserTestObj { UniqueColumn = "1", NotNullColumn = "2" };
 
             // Act
-            Action action = () => this.DataHelper.EvaluateWrite(
+            Action action = () => this.EvaluateWrite(
                                                                 context =>
                                                                     {
                                                                         context.Logics.SqlParserTestObj.Save(testObject1);
@@ -59,7 +59,7 @@ namespace SampleSystem.IntegrationTests
             var testObject = new SqlParserTestObj { UniqueColumn = "1", NotNullColumn = "2" };
             var testObjectContainer = new SqlParserTestObjContainer { IncludedObject = testObject };
 
-            this.DataHelper.EvaluateWrite(
+            this.EvaluateWrite(
                                           context =>
                                           {
                                               context.Logics.SqlParserTestObj.Save(testObject);
@@ -67,7 +67,7 @@ namespace SampleSystem.IntegrationTests
                                           });
 
             // Act
-            Action action = () => this.DataHelper.EvaluateWrite(
+            Action action = () => this.EvaluateWrite(
                                                                 context =>
                                                                 {
                                                                     context.Logics.SqlParserTestObj.Remove(testObject);

@@ -13,7 +13,7 @@ public class TestTestTestTests : TestBase
     [TestMethod]
     public void TestSecurityObjItem_LoadedByDependencySecurity()
     {
-        this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, (ctx, session) =>
+        this.GetContextEvaluator().Evaluate(DBSessionMode.Write, (ctx, session) =>
         {
             session.Flush();
 

@@ -32,7 +32,7 @@ namespace SampleSystem.IntegrationTests
             var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
 
             // Act
-            var result = this.Environment.GetContextEvaluator().Evaluate(
+            var result = this.GetContextEvaluator().Evaluate(
                 DBSessionMode.Read,
                 context =>
                 {

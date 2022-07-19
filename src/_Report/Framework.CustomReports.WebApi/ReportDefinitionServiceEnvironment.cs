@@ -18,28 +18,23 @@ using Framework.Validation;
 
 namespace Framework.CustomReports.WebApi
 {
-    public abstract class ReportDefinitionServiceEnvironment<TServiceEnvironment, TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>
-
-        : IReportServiceContainer<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>,
-          IServiceEnvironment,
-          ISystemMetadataTypeBuilderContainer
+    public abstract class ReportDefinitionServiceEnvironment<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>
 
         where TBLLContext : IConfigurationBLLContextContainer<Framework.Configuration.BLL.IConfigurationBLLContext>, IAuthorizationBLLContextContainer<IAuthorizationBLLContext>,
             IBLLFactoryContainerContext<IBLLFactoryContainer<IDefaultSecurityBLLFactory<TPersistentDomainObjectBase, TSecurityOperationCode, Guid>>>,
             ISecurityServiceContainer<IRootSecurityService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>>,
             IFetchServiceContainer<TPersistentDomainObjectBase, Framework.DomainDriven.FetchBuildRule>, IValidatorContainer, ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode>
 
-        where TServiceEnvironment : class, IServiceEnvironment, ISystemMetadataTypeBuilderContainer
         where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
         where TSecurityOperationCode : struct, Enum
     {
-        private readonly TServiceEnvironment serviceEnvironment;
+        private readonly ISystemMetadataTypeBuilder systemMetadataTypeBuilder;
 
         private readonly IContextEvaluator<TBLLContext> contextEvaluator;
 
-        protected ReportDefinitionServiceEnvironment(TServiceEnvironment serviceEnvironment, IContextEvaluator<TBLLContext> contextEvaluator, CustomReportAssembly customReportAssembly)
+        protected ReportDefinitionServiceEnvironment(ISystemMetadataTypeBuilder systemMetadataTypeBuilder, IContextEvaluator<TBLLContext> contextEvaluator, CustomReportAssembly customReportAssembly)
         {
-            this.serviceEnvironment = serviceEnvironment;
+            this.systemMetadataTypeBuilder = systemMetadataTypeBuilder;
             this.contextEvaluator = contextEvaluator;
 
             var links = new CustomReportParameterLinkService(customReportAssembly).GetLinks();
@@ -86,18 +81,12 @@ namespace Framework.CustomReports.WebApi
 
         protected virtual ISyncCustomReportService<TBLLContext, TSecurityOperationCode> GetSyncCustomReportService()
         {
-            return new SyncCustomReportService<TBLLContext, TSecurityOperationCode>(this.SystemMetadataTypeBuilder, this.contextEvaluator);
+            return new SyncCustomReportService<TBLLContext, TSecurityOperationCode>(this.systemMetadataTypeBuilder, this.contextEvaluator);
         }
-
-        public TServiceEnvironment ServiceEnvironment => this.serviceEnvironment;
 
         public virtual IReportService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> ReportService { get; }
 
         public virtual IReportParameterValueService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> ReportParameterValueService { get; }
-
-        public bool IsDebugMode => this.ServiceEnvironment.IsDebugMode;
-
-        public ISystemMetadataTypeBuilder SystemMetadataTypeBuilder => this.ServiceEnvironment.SystemMetadataTypeBuilder;
 
         protected virtual Func<TBLLContext, ICustomReportEvaluator> GetCreateCustomReportBLL(Type customReportType)
         {
@@ -113,9 +102,9 @@ namespace Framework.CustomReports.WebApi
             var newExpression = Expression.New(targetConstructor, parameter);
 
 
-            var resultExpresssion = Expression.Lambda<Func<TBLLContext, ICustomReportEvaluator>>(newExpression, parameter);
+            var resultExpression = Expression.Lambda<Func<TBLLContext, ICustomReportEvaluator>>(newExpression, parameter);
 
-            var resultFunc = resultExpresssion.Compile();
+            var resultFunc = resultExpression.Compile();
 
             return resultFunc;
         }

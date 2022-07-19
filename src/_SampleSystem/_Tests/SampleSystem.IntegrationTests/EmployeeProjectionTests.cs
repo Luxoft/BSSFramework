@@ -52,7 +52,7 @@ namespace SampleSystem.IntegrationTests
             this.DataHelper.SaveEmployee(login: TestEmployee2Login, coreBusinessUnit: profitBuId);
             this.DataHelper.SaveEmployee(login: TestEmployee3Login, coreBusinessUnit: costBuId);
 
-            this.DataHelper.Environment.GetContextEvaluator().Evaluate(
+            this.GetContextEvaluator().Evaluate(
                 DBSessionMode.Write,
                 context =>
                 {

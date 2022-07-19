@@ -11,9 +11,6 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
     {
         public void TestData()
         {
-            this.DataHelper.Environment = this.Environment;
-            this.AuthHelper.Environment = this.Environment;
-
             this.AuthHelper.AddCurrentUserToAdmin();
 
             this.AuthHelper.SetUserRole(DefaultConstants.NOTIFICATION_ADMIN, new SampleSystemPermission(BusinessRole.SystemIntegration));

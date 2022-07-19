@@ -85,7 +85,7 @@ namespace SampleSystem.IntegrationTests
             });
 
             // Act
-            var items = this.Environment.GetContextEvaluator().Evaluate (DBSessionMode.Read, TestEmployeeLogin, context =>
+            var items = this.GetContextEvaluator().Evaluate (DBSessionMode.Read, TestEmployeeLogin, context =>
             {
                 var employees = context.Logics.EmployeeFactory.Create(createProviderFunc(context)).GetSecureQueryable().ToList();
 

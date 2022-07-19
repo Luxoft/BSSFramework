@@ -20,6 +20,7 @@ using SampleSystem.BLL;
 using SampleSystem.BLL.Core.Jobs;
 using SampleSystem.BLL.Jobs;
 using SampleSystem.Domain;
+using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.WebApiCore;
 
@@ -44,6 +45,8 @@ public static class ServiceCollectionExtensions
         services.RegisterAuthorizationBLL();
         services.RegisterConfigurationBLL();
         services.RegisterMainBLL();
+
+        services.AddScoped<IAuthorizationValidator, SampleSystemCustomAuthValidator>();
 
         return services;
     }
@@ -82,7 +85,7 @@ public static class ServiceCollectionExtensions
                    .AddScoped<ISampleSystemBLLFactoryContainer, SampleSystemBLLFactoryContainer>()
                     .AddSingleton<ICryptService<CryptSystem>, CryptService<CryptSystem>>()
                    .AddScoped<ISampleSystemBLLContextSettings, SampleSystemBLLContextSettings>()
-                   .AddLazyScoped<ISampleSystemBLLContext, SampleSystemBLLContext>()
+                   .AddLazyContextWithSubscribeEvents<ISampleSystemBLLContext, SampleSystemBLLContext>()
 
                    .AddScoped<ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode>>(sp => sp.GetRequiredService<ISampleSystemBLLContext>())
                    .AddScoped<IDisabledSecurityProviderContainer<PersistentDomainObjectBase>>(sp => sp.GetRequiredService<ISampleSystemSecurityService>())

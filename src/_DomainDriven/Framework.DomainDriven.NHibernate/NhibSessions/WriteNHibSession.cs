@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Transactions;
 
+using Framework.Core;
 using Framework.DomainDriven.Audit;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DAL.Revisions;
@@ -63,18 +64,16 @@ namespace Framework.DomainDriven.NHibernate
 
             var sessionImpl = (SessionImpl)sessionImplementation;
 
-            sessionImpl.OverrideListeners(sessionImpl.Listeners.Concat(this.CreateEventListeners()));
+            sessionImpl.OverrideListeners(sessionImpl.Listeners.Clone().Self(this.InjectListeners));
 
             sessionImpl.OverrideInterceptor(this.CreateInterceptor());
         }
 
-        private EventListeners CreateEventListeners()
+        private void InjectListeners(EventListeners eventListeners)
         {
-            var result = new EventListeners();
-
-            result.PostDeleteEventListeners = new[] { this.collectChangedEventListener };
-            result.PostUpdateEventListeners = new[] { this.collectChangedEventListener };
-            result.PostInsertEventListeners = new[] { this.collectChangedEventListener };
+            eventListeners.PostDeleteEventListeners = new[] { this.collectChangedEventListener };
+            eventListeners.PostUpdateEventListeners = new[] { this.collectChangedEventListener };
+            eventListeners.PostInsertEventListeners = new[] { this.collectChangedEventListener };
 
             if (this.Environment.ConnectionSettings.UseEventListenerInsteadOfInterceptorForAudit)
             {
@@ -82,14 +81,11 @@ namespace Framework.DomainDriven.NHibernate
                 var createAuditEventListener = new CreateAuditEventListener(this.createAuditProperties);
 #pragma warning restore 0618
 
-                result.PreUpdateEventListeners = new IPreUpdateEventListener[] { modifyAuditEventListener };
-                result.PreInsertEventListeners = new IPreInsertEventListener[] { modifyAuditEventListener, createAuditEventListener };
+                eventListeners.PreUpdateEventListeners = new IPreUpdateEventListener[] { modifyAuditEventListener };
+                eventListeners.PreInsertEventListeners = new IPreInsertEventListener[] { modifyAuditEventListener, createAuditEventListener };
 
 #pragma warning disable 0618 // Obsolete
             }
-
-
-            return result;
         }
 
         private IInterceptor CreateInterceptor()

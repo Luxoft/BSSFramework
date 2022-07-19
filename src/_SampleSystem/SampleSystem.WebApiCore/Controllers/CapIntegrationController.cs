@@ -6,7 +6,6 @@ using DotNetCore.CAP;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
-using Framework.Exceptions;
 
 using MediatR;
 
@@ -15,7 +14,6 @@ using Microsoft.AspNetCore.Mvc;
 using SampleSystem.BLL;
 using SampleSystem.BLL.Core.IntegrationEvens;
 using SampleSystem.Generated.DTO;
-using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.WebApiCore
 {
@@ -23,18 +21,14 @@ namespace SampleSystem.WebApiCore
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]/[action]")]
     public class CapIntegrationController : ApiControllerBase<
-            SampleSystemServiceEnvironment,
             ISampleSystemBLLContext, EvaluatedData<
             ISampleSystemBLLContext, ISampleSystemDTOMappingService>>
     {
         private readonly IMediator mediator;
 
         public CapIntegrationController(
-                SampleSystemServiceEnvironment serviceEnvironment,
-                IExceptionProcessor exceptionProcessor,
                 IMediator mediator,
                 IServiceProvider serviceProvider)
-                : base(serviceEnvironment, exceptionProcessor)
         {
             this.mediator = mediator;
 

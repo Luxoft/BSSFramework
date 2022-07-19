@@ -2,7 +2,7 @@
 
 namespace Framework.DomainDriven.ServiceModel.Service
 {
-    public interface IServiceEnvironment
+    public interface IDebugModeManager
     {
         bool IsDebugMode { get; }
     }

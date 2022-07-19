@@ -14,8 +14,8 @@ namespace SampleSystem.WebApiCore.Controllers
 {
     public class ConfigSLJsonController : Framework.Configuration.WebApi.ConfigSLJsonController
     {
-        public ConfigSLJsonController(IServiceEnvironment environment, IExceptionProcessor exceptionProcessor)
-            : base(environment, exceptionProcessor)
+        public ConfigSLJsonController()
+            
         {
         }
 

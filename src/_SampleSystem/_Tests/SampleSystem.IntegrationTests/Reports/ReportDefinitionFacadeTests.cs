@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using FluentAssertions;
 
 using Framework.Configuration.Generated.DTO;
+using Framework.DomainDriven.ServiceModel.Service;
 
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
@@ -29,7 +31,9 @@ namespace SampleSystem.IntegrationTests
             var parameter = this.DataHelper.SaveReportParameter(report);
             this.DataHelper.SaveReportFilter(report, parameter);
 
-            ((SampleSystemTestServiceEnvironment)this.Environment).IsDebugInTest = false;
+            var debugModeManager = this.RootServiceProvider.GetRequiredService<TestDebugModeManager>();
+
+            debugModeManager.IsDebugMode = false;
 
             var model = new ReportGenerationModelStrictDTO
             {
@@ -49,7 +53,7 @@ namespace SampleSystem.IntegrationTests
             var action = new Action(() => sampleSystemGenericReportController.Evaluate(c => c.GetStream(model)));
 
             // Assert
-            this.Environment.IsDebugMode.Should().BeFalse("not working in debugger mode");
+            debugModeManager.IsDebugMode.Should().BeFalse("not working in debugger mode");
             action.Should().Throw<Exception>();
         }
 

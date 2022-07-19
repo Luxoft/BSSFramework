@@ -8,20 +8,19 @@ using Framework.DomainDriven.BLL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
+using SampleSystem.IntegrationTests;
 using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.WebApiCore.Controllers;
 
 namespace SampleSystem.BLL.Test
 {
     [TestClass]
-    public class ConfigurationTests
+    public class ConfigurationTests : TestBase
     {
         [TestMethod]
         public void TestCreateModification()
         {
-            var environment = SampleSystemTestServiceEnvironment.Default;
-
-            environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
             {
                 var empl = context.Logics.Employee.GetUnsecureQueryable().FirstOrDefault();
 
@@ -36,9 +35,7 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void TestForceSendEvent()
         {
-            var environment = SampleSystemTestServiceEnvironment.Default;
-
-            var configFacade = environment.RootServiceProvider.GetDefaultControllerEvaluator<ConfigSLJsonController>();
+            var configFacade = this.RootServiceProvider.GetDefaultControllerEvaluator<ConfigSLJsonController>();
 
             //var mainFacade = new Facade(environment);
 

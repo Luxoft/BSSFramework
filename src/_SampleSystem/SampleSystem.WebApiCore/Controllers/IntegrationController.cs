@@ -19,10 +19,10 @@ namespace SampleSystem.WebApiCore.Controllers
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    public class IntegrationController : IntegrationSchemaControllerBase<SampleSystemServiceEnvironment, ISampleSystemBLLContext, EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>
+    public class IntegrationController : IntegrationSchemaControllerBase<ISampleSystemBLLContext, EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>
     {
-        public IntegrationController(SampleSystemServiceEnvironment environment, IExceptionProcessor exceptionProcessor, IDateTimeService dateTimeService)
-            : base(environment, exceptionProcessor, dateTimeService)
+        public IntegrationController(IDateTimeService dateTimeService)
+            : base(dateTimeService)
         {
         }
 
@@ -32,7 +32,7 @@ namespace SampleSystem.WebApiCore.Controllers
             eval.Context.Authorization.CheckAccess(SampleSystemSecurityOperation.SystemIntegration);
 
         protected override EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService> GetEvaluatedData(IDBSession session, ISampleSystemBLLContext context) =>
-            new EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>(session, context, new SampleSystemServerPrimitiveDTOMappingService(context));
+            new(session, context, new SampleSystemServerPrimitiveDTOMappingService(context));
 
         protected override IEnumerable<Type> GetEventDTOTypes()
         {

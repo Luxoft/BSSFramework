@@ -35,47 +35,21 @@ using SampleSystem.WebApiCore;
 
 namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 {
-    /// <summary>
-    /// SampleSystemTestServiceEnvironment Extends SampleSystemServiceEnvironment for Test Run. Different Test Env settings are initilized.
-    /// </summary>
-    public class SampleSystemTestServiceEnvironment : SampleSystemServiceEnvironment, IRootServiceProviderContainer
+    public static class SampleSystemTestRootServiceProvider
     {
-        private static readonly Lazy<SampleSystemTestServiceEnvironment> DefaultLazy = new(CreateDefault);
+        public static readonly IServiceProvider Default = CreateDefault();
 
-        public SampleSystemTestServiceEnvironment(
-            IServiceProvider serviceProvider,
-            bool? isDebugMode = null)
-
-            : base(serviceProvider,
-                   new OptionsWrapper<SmtpSettings>(new SmtpSettings() { OutputFolder = @"C:\SampleSystem\Smtp" }),
-                    LazyInterfaceImplementHelper.CreateNotImplemented<IRewriteReceiversService>(),
-                   isDebugMode)
-        {
-        }
-
-        /// <summary>
-        /// Initilize Integration Environment
-        /// </summary>
-        public static SampleSystemTestServiceEnvironment Default => DefaultLazy.Value;
-
-        public bool IsDebugInTest { get; set; } = true;
-
-        /// <summary>
-        /// Set IsDebugMode always true for Test run
-        /// </summary>
-        public override bool IsDebugMode => this.IsDebugInTest;
-
-        public static SampleSystemTestServiceEnvironment CreateDefault()
+        private static IServiceProvider CreateDefault()
         {
             var serviceProvider = BuildServiceProvider();
 
             serviceProvider.RegisterAuthWorkflow();
 
-            return serviceProvider.GetRequiredService<SampleSystemTestServiceEnvironment>();
+            return serviceProvider;
         }
 
 
-        protected static IServiceProvider BuildServiceProvider()
+        private static IServiceProvider BuildServiceProvider()
         {
             var configuration = new ConfigurationBuilder()
                                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -103,16 +77,11 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .AddSingleton<ICapTransactionManager, TestCapTransactionManager>()
                                   .AddSingleton<IIntegrationEventBus, TestIntegrationEventBus>()
 
-                                  .AddSingleton<IServiceEnvironment>(sp => sp.GetRequiredService<SampleSystemServiceEnvironment>())
-                                  .AddSingleton<SampleSystemServiceEnvironment>(sp => sp.GetRequiredService<SampleSystemTestServiceEnvironment>())
-                                  .AddSingleton<SampleSystemTestServiceEnvironment>()
-
                                   .AddSingleton<IWorkflowManager, WorkflowManager>(sp => sp.GetRequiredService<WorkflowManager>())
                                   .AddSingleton<WorkflowManager>()
 
                                   .AddScoped<IWorkflowApproveProcessor, WorkflowApproveProcessor>()
                                   .AddScoped<StartWorkflowJob>()
-                                  .AddSingleton<SampleSystemTestServiceEnvironment>()
                                   .AddWorkflowCore(configuration)
                                   .AddAuthWorkflow()
 

@@ -2,12 +2,12 @@
 
 namespace Framework.CustomReports.Domain
 {
-    public class ReportServiceContext<TBLLContext, TSecurityOperationCode> : IServiceMetadataContainer, ISystemMetadataTypeBuilderContainer
+    public class ReportServiceContext<TBLLContext, TSecurityOperationCode> : IServiceMetadataContainer
     {
         public readonly TBLLContext Context;
         public SystemMetadata SystemMetadata => this.SystemMetadataTypeBuilder.SystemMetadata;
 
-        public ISystemMetadataTypeBuilder SystemMetadataTypeBuilder { get; private set; }
+        public ISystemMetadataTypeBuilder SystemMetadataTypeBuilder { get; }
 
         public readonly ISecurityOperationCodeProvider<TSecurityOperationCode> SecurityOperationCodeProvider;
 

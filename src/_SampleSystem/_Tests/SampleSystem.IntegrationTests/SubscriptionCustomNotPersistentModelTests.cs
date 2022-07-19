@@ -18,7 +18,7 @@ namespace SampleSystem.IntegrationTests
         public void CustomNotPersistentNotificationModel_Always_ShouldNotThrowException()
         {
             // Arrange
-            var countryId = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            var countryId = this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
             {
                 var country = new Country
                 {
@@ -47,7 +47,7 @@ namespace SampleSystem.IntegrationTests
             this.ClearModifications();
 
             // Act
-            this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
             {
                 var bll = context.Logics.Country;
 

@@ -5,6 +5,7 @@ using Framework.Authorization.BLL;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.SubscriptionModeling;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.ServiceModel.IAD;
 
 using SampleSystem.BLL;
 
@@ -16,12 +17,21 @@ public class SampleSystemInitializer
 
     private readonly SubscriptionMetadataStore subscriptionMetadataStore;
 
-    public SampleSystemInitializer(IContextEvaluator<ISampleSystemBLLContext> contextEvaluator, SubscriptionMetadataStore subscriptionMetadataStore)
+    private readonly IInitializeManager initializeManager;
+
+    public SampleSystemInitializer(IContextEvaluator<ISampleSystemBLLContext> contextEvaluator, SubscriptionMetadataStore subscriptionMetadataStore, IInitializeManager initializeManager)
     {
         this.contextEvaluator = contextEvaluator;
         this.subscriptionMetadataStore = subscriptionMetadataStore;
+        this.initializeManager = initializeManager;
     }
+
     public void Initialize()
+    {
+        this.initializeManager.InitializeOperation(this.InternalInitialize);
+    }
+
+    private void InternalInitialize()
     {
         this.contextEvaluator.Evaluate(
                                        DBSessionMode.Write,
@@ -66,4 +76,5 @@ public class SampleSystemInitializer
                                        DBSessionMode.Write,
                                        context => this.subscriptionMetadataStore.RegisterCodeFirstSubscriptions(context.Configuration.Logics.CodeFirstSubscription, context.Configuration));
     }
+
 }

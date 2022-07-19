@@ -10,6 +10,7 @@ using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.NHibernate;
+using Framework.DomainDriven.SerializeMetadata;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Exceptions;
@@ -56,8 +57,7 @@ namespace SampleSystem.WebApiCore
             services.AddSingleton<ISpecificationEvaluator, NhSpecificationEvaluator>();
 
 
-            return services.AddSingleton<SampleSystemServiceEnvironment>()
-                           .AddControllerEnvironment();
+            return services.AddControllerEnvironment();
         }
 
         public static IServiceCollection AddDatabaseSettings(this IServiceCollection services, string connectionString) =>
@@ -80,10 +80,8 @@ namespace SampleSystem.WebApiCore
         {
             services.AddSingleton<IExceptionProcessor, ApiControllerExceptionService<ISampleSystemBLLContext>>();
 
+            services.AddSingleton<ISystemMetadataTypeBuilder, SystemMetadataTypeBuilder<SampleSystem.Domain.PersistentDomainObjectBase>>();
             services.AddSingleton<SampleSystemCustomReportsServiceEnvironment>();
-
-            // Environment
-            services.AddSingleton<SampleSystemServiceEnvironment>();
 
             services.AddSingleton<IContextEvaluator<IAuthorizationBLLContext>, ContextEvaluator<IAuthorizationBLLContext>>();
             services.AddSingleton<IContextEvaluator<ISampleSystemBLLContext>, ContextEvaluator<ISampleSystemBLLContext>>();

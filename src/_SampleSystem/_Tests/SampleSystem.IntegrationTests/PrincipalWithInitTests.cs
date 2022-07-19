@@ -46,7 +46,7 @@ namespace SampleSystem.IntegrationTests
                 type: buTypeId,
                 parent: luxoftBuId);
 
-            this.DataHelper.Environment.GetContextEvaluator().Evaluate(
+            this.GetContextEvaluator().Evaluate(
                 DBSessionMode.Write,
                 context =>
                 {
@@ -87,7 +87,7 @@ namespace SampleSystem.IntegrationTests
             // Act
             Action call = () =>
             {
-                this.DataHelper.Environment.GetContextEvaluator().Evaluate(
+                this.GetContextEvaluator().Evaluate(
                     DBSessionMode.Write,
                     context =>
                     {

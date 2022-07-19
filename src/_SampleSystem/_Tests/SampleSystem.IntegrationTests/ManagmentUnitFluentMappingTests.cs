@@ -34,8 +34,7 @@ namespace SampleSystem.IntegrationTests
             // Arrange
             var employeeId = this.DataHelper.SaveEmployee();
 
-            this.Environment
-                .GetContextEvaluator()
+            this.GetContextEvaluator()
                 .Evaluate(
                           DBSessionMode.Write,
                           (c) =>
@@ -54,8 +53,7 @@ namespace SampleSystem.IntegrationTests
                           });
 
             // Act
-            var r = this.Environment
-                        .GetContextEvaluator()
+            var r = this.GetContextEvaluator()
                         .Evaluate(
                                   DBSessionMode.Read,
                                   (c) =>

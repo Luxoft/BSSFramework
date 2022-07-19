@@ -194,7 +194,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
                 return type.ToIdentityDTO();
             }
 
-            var businessUnitTypeController = this.Environment.RootServiceProvider.GetDefaultControllerEvaluator<BusinessUnitTypeController>();
+            var businessUnitTypeController = this.RootServiceProvider.GetDefaultControllerEvaluator<BusinessUnitTypeController>();
             var buTypeStrict = new BusinessUnitTypeStrictDTO(businessUnitTypeController.Evaluate(c => c.GetFullBusinessUnitType(type.ToIdentityDTO())));
 
             possibleParents = possibleParents ?? new List<BusinessUnitTypeIdentityDTO>();

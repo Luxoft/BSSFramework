@@ -1,7 +1,10 @@
 ﻿using System;
 
+using Framework.CustomReports.Domain;
+using Framework.CustomReports.Services;
 using Framework.CustomReports.WebApi;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.SerializeMetadata;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.Exceptions;
 
@@ -18,12 +21,12 @@ namespace SampleSystem.WebApiCore.Controllers.Report
     [ApiController]
     [ApiVersion("1.0")]
     [Route("reportApi/v{version:apiVersion}/[controller]")]
-    public class SampleSystemGenericReportController : GenericReportControllerBase<SampleSystemCustomReportsServiceEnvironment, ISampleSystemBLLContext,
+    public class SampleSystemGenericReportController : GenericReportControllerBase<ISampleSystemBLLContext,
         PersistentDomainObjectBase,
         SampleSystemSecurityOperationCode, Guid, ISampleSystemDTOMappingService>
     {
-        public SampleSystemGenericReportController(SampleSystemCustomReportsServiceEnvironment environment, IExceptionProcessor exceptionProcessor)
-            : base(environment, exceptionProcessor)
+        public SampleSystemGenericReportController(ISystemMetadataTypeBuilder systemMetadataTypeBuilder, IReportParameterValueService<ISampleSystemBLLContext, PersistentDomainObjectBase, SampleSystemSecurityOperationCode> reportParameterValueService, IReportService<ISampleSystemBLLContext, PersistentDomainObjectBase, SampleSystemSecurityOperationCode> reportService, ISecurityOperationCodeProvider<SampleSystemSecurityOperationCode> securityOperationCodeProvider)
+                : base(systemMetadataTypeBuilder, reportParameterValueService, reportService, securityOperationCodeProvider)
         {
         }
 

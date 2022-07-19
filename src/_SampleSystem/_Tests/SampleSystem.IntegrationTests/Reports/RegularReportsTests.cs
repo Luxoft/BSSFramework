@@ -1283,7 +1283,7 @@ namespace SampleSystem.IntegrationTests.Reports
 
         private ReportIdentityDTO SaveReport(Report report)
         {
-            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            return this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
             {
                 var bll = context.Configuration.Logics.Report;
                 bll.Save(report);

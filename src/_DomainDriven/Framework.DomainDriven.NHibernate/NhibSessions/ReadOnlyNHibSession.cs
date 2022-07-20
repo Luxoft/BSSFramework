@@ -50,7 +50,10 @@ namespace Framework.DomainDriven.NHibernate
 
             try
             {
-                this.OnClosed(EventArgs.Empty);
+                using (this.InnerSession)
+                {
+                    this.OnClosed(EventArgs.Empty);
+                }
             }
             finally
             {

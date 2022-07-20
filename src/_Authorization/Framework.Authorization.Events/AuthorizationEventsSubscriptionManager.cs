@@ -1,6 +1,5 @@
 ﻿using System;
 
-using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
@@ -8,10 +7,10 @@ using Framework.Events;
 
 namespace Framework.Authorization.Events
 {
-    public class AuthorizationEventsSubscriptionManager : EventsSubscriptionManagerBase<IAuthorizationBLLContext, PersistentDomainObjectBase>
+    public class AuthorizationEventsSubscriptionManager : EventsSubscriptionManagerBase<PersistentDomainObjectBase>
     {
-        public AuthorizationEventsSubscriptionManager(IAuthorizationBLLContext context, IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>> messageSender)
-            : base(context, messageSender)
+        public AuthorizationEventsSubscriptionManager(IBLLOperationEventListenerContainer<PersistentDomainObjectBase> operationListeners, IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>> messageSender)
+            : base(operationListeners, messageSender)
         {
         }
 

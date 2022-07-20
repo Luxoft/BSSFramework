@@ -6,20 +6,25 @@ using Framework.Events;
 
 using JetBrains.Annotations;
 
-using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.Events
 {
-    public class SampleSystemEventsSubscriptionManager : EventsSubscriptionManagerBase<ISampleSystemBLLContext, PersistentDomainObjectBase>
+    public class SampleSystemEventsSubscriptionManager : EventsSubscriptionManagerBase<PersistentDomainObjectBase>
     {
+        private readonly IBLLOperationEventListenerContainer<PersistentDomainObjectBase> operationListeners;
+
         private readonly ISampleSystemDTOMappingService mappingService;
 
-        public SampleSystemEventsSubscriptionManager(ISampleSystemBLLContext context, [NotNull] IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>> messageSender)
-            : base(context, messageSender)
+        public SampleSystemEventsSubscriptionManager(
+                IBLLOperationEventListenerContainer<PersistentDomainObjectBase> operationListeners,
+                [NotNull] IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>> messageSender,
+                [NotNull] ISampleSystemDTOMappingService mappingService)
+            : base(operationListeners, messageSender)
         {
-            this.mappingService = new SampleSystemServerPrimitiveDTOMappingService(this.Context);
+            this.operationListeners = operationListeners;
+            this.mappingService = mappingService ?? throw new ArgumentNullException(nameof(mappingService));
         }
 
         public override void Subscribe()
@@ -41,7 +46,7 @@ namespace SampleSystem.Events
             where TDomainObject : PersistentDomainObjectBase
             where TOperation : struct, Enum
         {
-            this.Context.OperationListeners.GetEventListener<TDomainObject, TOperation>().OperationProcessed += (_, eventArgs) =>
+            this.operationListeners.GetEventListener<TDomainObject, TOperation>().OperationProcessed += (_, eventArgs) =>
              {
                  if (filter(eventArgs.DomainObject) && operationsFilter(eventArgs.Operation))
                  {

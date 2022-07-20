@@ -35,6 +35,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
                    .AddScoped(sp => sp.GetRequiredService<IDBSession>().GetDALFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>())
 
+                   .AddScoped<IBLLOperationEventListenerContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>>(sp => sp.GetRequiredService<BLLOperationEventListenerContainer<Framework.Authorization.Domain.DomainObjectBase>>())
                    .AddScoped<BLLOperationEventListenerContainer<Framework.Authorization.Domain.DomainObjectBase>>()
                    .AddScoped<BLLSourceEventListenerContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>>()
 
@@ -68,6 +69,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
                    .AddScoped(sp => sp.GetRequiredService<IDBSession>().GetDALFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>())
 
+                   .AddScoped<IBLLOperationEventListenerContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>>(sp => sp.GetRequiredService<BLLOperationEventListenerContainer<Framework.Configuration.Domain.DomainObjectBase>>())
                    .AddScoped<BLLOperationEventListenerContainer<Framework.Configuration.Domain.DomainObjectBase>>()
                    .AddScoped<BLLSourceEventListenerContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>>()
 
@@ -113,14 +115,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                 where TImplementation : TInterface
                 where TInterface : class
         {
-            return services.AddScoped(sp => LazyInterfaceImplementHelper.CreateProxy<TInterface>(() =>
-                                      {
-                                          var context = ActivatorUtilities.CreateInstance<TImplementation>(sp);
-
-                                          sp.GetRequiredService<IEventSubscriber>().Subscribe();
-
-                                          return context;
-                                      }));
+            return services.AddScoped(sp => LazyInterfaceImplementHelper.CreateProxy<TInterface>(() => ActivatorUtilities.CreateInstance<TImplementation>(sp)));
         }
     }
 }

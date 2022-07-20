@@ -2,7 +2,9 @@
 
 using Framework.Authorization.BLL;
 using Framework.Authorization.Events;
+using Framework.Authorization.Generated.DTO;
 using Framework.Configuration.BLL.Notification;
+using Framework.Configuration.Generated.DTO;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
@@ -23,6 +25,7 @@ using SampleSystem.BLL.Core.Jobs;
 using SampleSystem.BLL.Jobs;
 using SampleSystem.Domain;
 using SampleSystem.Events;
+using SampleSystem.Generated.DTO;
 using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.WebApiCore;
@@ -41,6 +44,13 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IBeforeTransactionCompletedDALListener>(sp => sp.GetRequiredService<DefaultAuthDALListener>());
         services.AddScoped<IManualEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>>(sp => sp.GetRequiredService<DefaultAuthDALListener>());
 
+
+        services.AddScoped<IAuthorizationDTOMappingService, AuthorizationServerPrimitiveDTOMappingService>();
+        services.AddScoped<IConfigurationDTOMappingService, ConfigurationServerPrimitiveDTOMappingService>();
+
+        services.AddScoped<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService>();
+
+        services.AddScoped<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService>();
 
         services.AddScoped<IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>>, SampleSystemLocalDBEventMessageSender>();
         services.AddScoped<IEventsSubscriptionManager, SampleSystemEventsSubscriptionManager>();
@@ -96,6 +106,7 @@ public static class ServiceCollectionExtensions
 
                 .AddScoped(sp => sp.GetRequiredService<IDBSession>().GetDALFactory<PersistentDomainObjectBase, Guid>())
 
+                   .AddScoped<IBLLOperationEventListenerContainer<PersistentDomainObjectBase>>(sp => sp.GetRequiredService<BLLOperationEventListenerContainer<DomainObjectBase>>())
                    .AddScoped<BLLOperationEventListenerContainer<DomainObjectBase>>()
                    .AddScoped<BLLSourceEventListenerContainer<PersistentDomainObjectBase>>()
 

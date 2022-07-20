@@ -137,6 +137,7 @@ namespace Framework.DomainDriven.NHibernate
 
             try
             {
+                using (this.InnerSession)
                 using (this.transactionScope)
                 using (this.transaction)
                 {

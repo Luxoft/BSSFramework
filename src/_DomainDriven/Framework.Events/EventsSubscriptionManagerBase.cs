@@ -10,15 +10,15 @@ namespace Framework.Events
     /// <summary>
     /// Класс для описания правил подписок на доменные евенты
     /// </summary>
-    /// <typeparam name="TBLLContext"></typeparam>
     /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
-    public abstract class EventsSubscriptionManagerBase<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<TBLLContext>, IEventsSubscriptionManager
+    public abstract class EventsSubscriptionManagerBase<TPersistentDomainObjectBase> : IEventsSubscriptionManager
         where TPersistentDomainObjectBase : class
-        where TBLLContext : class, IBLLOperationEventContext<TPersistentDomainObjectBase>
     {
-        protected EventsSubscriptionManagerBase(TBLLContext context, [NotNull] IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender)
-            : base(context)
+        private readonly IBLLOperationEventListenerContainer<TPersistentDomainObjectBase> operationListeners;
+
+        protected EventsSubscriptionManagerBase(IBLLOperationEventListenerContainer<TPersistentDomainObjectBase> operationListeners, [NotNull] IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender)
         {
+            this.operationListeners = operationListeners;
             this.MessageSender = messageSender ?? throw new ArgumentNullException(nameof(messageSender));
         }
 
@@ -49,7 +49,7 @@ namespace Framework.Events
             where TDomainObject : class, TPersistentDomainObjectBase
             where TOperation : struct, Enum
         {
-            this.Context.OperationListeners.GetEventListener<TDomainObject, TOperation>().OperationProcessed += (_, eventArgs) =>
+            this.operationListeners.GetEventListener<TDomainObject, TOperation>().OperationProcessed += (_, eventArgs) =>
             {
                 if (filter(eventArgs.DomainObject) && operationsFilter(eventArgs.Operation))
                 {

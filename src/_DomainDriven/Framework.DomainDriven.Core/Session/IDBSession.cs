@@ -10,24 +10,6 @@ namespace Framework.DomainDriven.BLL
     {
         DBSessionMode SessionMode { get; }
 
-
-        /// <summary>
-        /// Евент срабатывает циклично, пока происходят изменения доменных объектов
-        /// </summary>
-        event EventHandler<DALChangesEventArgs> Flushed;
-
-        /// <summary>
-        /// Евент срабатывает только 1 раз перед закрытием сессии, изменения в базу в этот момент разрешены
-        /// </summary>
-        event EventHandler<DALChangesEventArgs> BeforeTransactionCompleted;
-
-        /// <summary>
-        /// Евент срабатывает только 1 раз перед закрытием сессии, изменения в базу в этот момент запрещены
-        /// </summary>
-        event EventHandler<DALChangesEventArgs> AfterTransactionCompleted;
-
-        event EventHandler Closed;
-
         IObjectStateService GetObjectStateService();
 
         IDALFactory<TPersistentDomainObjectBase, TIdent> GetDALFactory<TPersistentDomainObjectBase, TIdent>()
@@ -62,5 +44,7 @@ namespace Framework.DomainDriven.BLL
         /// Переводит сессию в режим для записи (доступно только перед фактическим использованием сессии)
         /// </summary>
         void AsWritable();
+
+        void Close();
     }
 }

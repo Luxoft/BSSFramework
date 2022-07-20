@@ -64,6 +64,7 @@ namespace SampleSystem.WebApiCore
 
         public static IServiceCollection AddDatabaseSettings(this IServiceCollection services, string connectionString) =>
                 services.AddScoped<INHibSessionSetup, NHibSessionSettings>()
+                        .AddScoped(sp => sp.GetRequiredService<EventSubscriberManager>().DBSessionEventListener)
                         .AddScoped<IDBSession, NHibSession>()
 
                         .AddSingleton<INHibSessionEnvironmentSettings, NHibSessionEnvironmentSettings>()

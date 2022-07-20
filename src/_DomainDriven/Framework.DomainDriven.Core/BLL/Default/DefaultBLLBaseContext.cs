@@ -54,7 +54,7 @@ namespace Framework.DomainDriven.BLL
         protected DefaultBLLBaseContext(
                 [NotNull] IServiceProvider serviceProvider,
                 [NotNull] IDALFactory<TPersistentDomainObjectBase, TIdent> dalFactory,
-                [NotNull] BLLOperationEventListenerContainer<TDomainObjectBase> operationListeners,
+                [NotNull] IOperationEventListenerContainer<TDomainObjectBase> operationListeners,
                 [NotNull] BLLSourceEventListenerContainer<TPersistentDomainObjectBase> sourceListeners,
                 [NotNull] IObjectStateService objectStateService,
                 [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
@@ -89,7 +89,7 @@ namespace Framework.DomainDriven.BLL
 
         public ITrackingService<TPersistentDomainObjectBase> TrackingService { get; }
 
-        public IBLLOperationEventListenerContainer<TDomainObjectBase> OperationListeners { get; }
+        public IOperationEventListenerContainer<TDomainObjectBase> OperationListeners { get; }
 
         public BLLSourceEventListenerContainer<TPersistentDomainObjectBase> SourceListeners { get; }
 
@@ -126,7 +126,7 @@ namespace Framework.DomainDriven.BLL
         protected DefaultBLLBaseContext(
             [NotNull] IServiceProvider serviceProvider,
             [NotNull] IDALFactory<TPersistentDomainObjectBase, TIdent> dalFactory,
-            [NotNull] BLLOperationEventListenerContainer<TDomainObjectBase> operationListeners,
+            [NotNull] IOperationEventListenerContainer<TDomainObjectBase> operationListeners,
             [NotNull] BLLSourceEventListenerContainer<TPersistentDomainObjectBase> sourceListeners,
             [NotNull] IObjectStateService objectStateService,
             [NotNull] IStandartExpressionBuilder standartExpressionBuilder,

@@ -13,12 +13,12 @@ namespace SampleSystem.Events
 {
     public class SampleSystemEventsSubscriptionManager : EventsSubscriptionManagerBase<PersistentDomainObjectBase>
     {
-        private readonly IBLLOperationEventListenerContainer<PersistentDomainObjectBase> operationListeners;
+        private readonly IOperationEventListenerContainer<PersistentDomainObjectBase> operationListeners;
 
         private readonly ISampleSystemDTOMappingService mappingService;
 
         public SampleSystemEventsSubscriptionManager(
-                IBLLOperationEventListenerContainer<PersistentDomainObjectBase> operationListeners,
+                IOperationEventListenerContainer<PersistentDomainObjectBase> operationListeners,
                 [NotNull] IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>> messageSender,
                 [NotNull] ISampleSystemDTOMappingService mappingService)
             : base(operationListeners, messageSender)

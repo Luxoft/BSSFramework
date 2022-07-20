@@ -39,26 +39,9 @@ namespace Framework.DomainDriven.NHibernate
             throw new InvalidOperationException("Readonly session already created");
         }
 
-        public override void Dispose()
+        public override void Close()
         {
-            if (this.disposed)
-            {
-                return;
-            }
-
-            this.disposed = true;
-
-            try
-            {
-                using (this.InnerSession)
-                {
-                    this.OnClosed(EventArgs.Empty);
-                }
-            }
-            finally
-            {
-                this.ClearEvents();
-            }
+            this.InnerSession.Close();
         }
 
         public override void Flush()

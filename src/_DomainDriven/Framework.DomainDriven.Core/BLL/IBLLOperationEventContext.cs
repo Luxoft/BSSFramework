@@ -10,6 +10,6 @@
         /// <summary>
         /// Возвращается контейнер слушателей BLL-ных событий
         /// </summary>
-        IBLLOperationEventListenerContainer<TDomainObjectBase> OperationListeners { get; }
+        IOperationEventListenerContainer<TDomainObjectBase> OperationListeners { get; }
     }
 }

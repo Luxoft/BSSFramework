@@ -34,6 +34,8 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterLegacyBLLContext(this IServiceCollection services)
     {
+        services.AddScoped<EventSubscriberManager>();
+
         services.AddSingleton<IInitializeManager, InitializeManager>();
 
         services.AddScoped<IBeforeTransactionCompletedDALListener, DenormalizeHierarchicalDALListener<ISampleSystemBLLContext, PersistentDomainObjectBase, NamedLock, NamedLockOperation>>();
@@ -106,31 +108,31 @@ public static class ServiceCollectionExtensions
 
                 .AddScoped(sp => sp.GetRequiredService<IDBSession>().GetDALFactory<PersistentDomainObjectBase, Guid>())
 
-                   .AddScoped<IBLLOperationEventListenerContainer<PersistentDomainObjectBase>>(sp => sp.GetRequiredService<BLLOperationEventListenerContainer<DomainObjectBase>>())
-                   .AddScoped<BLLOperationEventListenerContainer<DomainObjectBase>>()
-                   .AddScoped<BLLSourceEventListenerContainer<PersistentDomainObjectBase>>()
+                .AddScoped(sp => sp.GetRequiredService<EventSubscriberManager>().GetOperationEventListenerContainer<PersistentDomainObjectBase>())
+                .AddScoped<OperationEventListenerContainer<PersistentDomainObjectBase>>()
+                .AddScoped<BLLSourceEventListenerContainer<PersistentDomainObjectBase>>()
 
-                   .AddSingleton<SampleSystemValidatorCompileCache>()
+                .AddSingleton<SampleSystemValidatorCompileCache>()
 
-                   .AddScoped<ISampleSystemValidator>(sp =>
-                        new SampleSystemValidator(sp.GetRequiredService<ISampleSystemBLLContext>(), sp.GetRequiredService<SampleSystemValidatorCompileCache>()))
+                .AddScoped<ISampleSystemValidator>(sp =>
+                     new SampleSystemValidator(sp.GetRequiredService<ISampleSystemBLLContext>(), sp.GetRequiredService<SampleSystemValidatorCompileCache>()))
 
-                   .AddSingleton(new SampleSystemMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<PersistentDomainObjectBase>.OData))
-                   .AddScoped<ISampleSystemSecurityService, SampleSystemSecurityService>()
-                   .AddScoped<ISampleSystemBLLFactoryContainer, SampleSystemBLLFactoryContainer>()
-                    .AddSingleton<ICryptService<CryptSystem>, CryptService<CryptSystem>>()
-                   .AddScoped<ISampleSystemBLLContextSettings, SampleSystemBLLContextSettings>()
-                   .AddLazyContextWithSubscribeEvents<ISampleSystemBLLContext, SampleSystemBLLContext>()
+                .AddSingleton(new SampleSystemMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<PersistentDomainObjectBase>.OData))
+                .AddScoped<ISampleSystemSecurityService, SampleSystemSecurityService>()
+                .AddScoped<ISampleSystemBLLFactoryContainer, SampleSystemBLLFactoryContainer>()
+                 .AddSingleton<ICryptService<CryptSystem>, CryptService<CryptSystem>>()
+                .AddScoped<ISampleSystemBLLContextSettings, SampleSystemBLLContextSettings>()
+                .AddLazyScoped<ISampleSystemBLLContext, SampleSystemBLLContext>()
 
-                   .AddScoped<ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode>>(sp => sp.GetRequiredService<ISampleSystemBLLContext>())
-                   .AddScoped<IDisabledSecurityProviderContainer<PersistentDomainObjectBase>>(sp => sp.GetRequiredService<ISampleSystemSecurityService>())
-                   .AddScoped<ISampleSystemSecurityPathContainer>(sp => sp.GetRequiredService<ISampleSystemSecurityService>())
-                   .AddScoped<IQueryableSource<PersistentDomainObjectBase>, BLLQueryableSource<ISampleSystemBLLContext, PersistentDomainObjectBase, DomainObjectBase, Guid>>()
-                   .AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
-                   .AddScoped<IAccessDeniedExceptionService<PersistentDomainObjectBase>, AccessDeniedExceptionService<PersistentDomainObjectBase, Guid>>()
+                .AddScoped<ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode>>(sp => sp.GetRequiredService<ISampleSystemBLLContext>())
+                .AddScoped<IDisabledSecurityProviderContainer<PersistentDomainObjectBase>>(sp => sp.GetRequiredService<ISampleSystemSecurityService>())
+                .AddScoped<ISampleSystemSecurityPathContainer>(sp => sp.GetRequiredService<ISampleSystemSecurityService>())
+                .AddScoped<IQueryableSource<PersistentDomainObjectBase>, BLLQueryableSource<ISampleSystemBLLContext, PersistentDomainObjectBase, DomainObjectBase, Guid>>()
+                .AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
+                .AddScoped<IAccessDeniedExceptionService<PersistentDomainObjectBase>, AccessDeniedExceptionService<PersistentDomainObjectBase, Guid>>()
 
-                   .Self(SampleSystemSecurityServiceBase.Register)
-                   .Self(SampleSystemBLLFactoryContainer.RegisterBLLFactory);
+                .Self(SampleSystemSecurityServiceBase.Register)
+                .Self(SampleSystemBLLFactoryContainer.RegisterBLLFactory);
     }
 
     public static IServiceCollection RegisterDependencyInjections(this IServiceCollection services, IConfiguration configuration)

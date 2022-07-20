@@ -87,12 +87,12 @@ namespace Framework.Events
             return allFilteredOrderedValues;
         }
 
-        IForceEventContainer<TDomainObject, EventOperation> IManualEventDALListener<TPersistentDomainObjectBase>.GetForceEventContainer<TDomainObject>()
+        IOperationEventSender<TDomainObject, EventOperation> IManualEventDALListener<TPersistentDomainObjectBase>.GetForceEventContainer<TDomainObject>()
         {
             return new ForceEventContainer<TDomainObject>(this);
         }
 
-        private class ForceEventContainer<TDomainObject> : IForceEventContainer<TDomainObject, EventOperation>
+        private class ForceEventContainer<TDomainObject> : IOperationEventSender<TDomainObject, EventOperation>
             where TDomainObject : class, TPersistentDomainObjectBase
         {
             private readonly EventDALListener<TBLLContext, TPersistentDomainObjectBase> dalListener;
@@ -102,11 +102,11 @@ namespace Framework.Events
                 this.dalListener = dalListener ?? throw new ArgumentNullException(nameof(dalListener));
             }
 
-            public void ForceEvent(TDomainObject domainObject, EventOperation operation)
+            public void SendEvent(IDomainOperationEventArgs<TDomainObject, EventOperation> eventArgs)
             {
-                if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+                if (eventArgs == null) throw new ArgumentNullException(nameof(eventArgs));
 
-                this.dalListener.Process(new DALChangesEventArgs(GetDALChanges(domainObject, operation)));
+                this.dalListener.Process(new DALChangesEventArgs(GetDALChanges(eventArgs.DomainObject, eventArgs.Operation)));
             }
 
             private static DALChanges GetDALChanges(TDomainObject domainObject, EventOperation operation)

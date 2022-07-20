@@ -23,7 +23,7 @@ namespace Framework.DomainDriven.BLL.Security
         protected SecurityBLLBaseContext(
             [NotNull] IServiceProvider serviceProvider,
             [NotNull] IDALFactory<TPersistentDomainObjectBase, TIdent> dalFactory,
-            [NotNull] BLLOperationEventListenerContainer<TDomainObjectBase> operationListeners,
+            [NotNull] IOperationEventListenerContainer<TDomainObjectBase> operationListeners,
             [NotNull] BLLSourceEventListenerContainer<TPersistentDomainObjectBase> sourceListeners,
             [NotNull] IObjectStateService objectStateService,
             [NotNull] IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,

@@ -43,7 +43,11 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             {
                 var context = scopeServiceProvider.GetRequiredService<TBLLContext>();
 
-                return await getResult(context, session);
+                var result = await getResult(context, session);
+
+                scopeServiceProvider.GetRequiredService<EventSubscriberManager>().TryCloseDbSession();
+
+                return result;
             }
             finally
             {

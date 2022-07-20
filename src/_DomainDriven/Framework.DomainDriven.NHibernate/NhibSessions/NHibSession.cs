@@ -15,7 +15,7 @@ public class NHibSession : IDBSession
 
     private readonly Lazy<IDBSession> lazyInnerSession;
 
-    public NHibSession([NotNull] NHibSessionEnvironment environment, INHibSessionSetup settings)
+    public NHibSession([NotNull] NHibSessionEnvironment environment, INHibSessionSetup settings, IDBSessionEventListener eventListener)
     {
         if (environment == null) throw new ArgumentNullException(nameof(environment));
 
@@ -27,7 +27,7 @@ public class NHibSession : IDBSession
                     return new ReadOnlyNHibSession(environment);
 
                 case DBSessionMode.Write:
-                    return new WriteNHibSession(environment, settings);
+                    return new WriteNHibSession(environment, settings, eventListener);
 
                 default:
                     throw new InvalidOperationException();
@@ -87,35 +87,19 @@ public class NHibSession : IDBSession
         }
     }
 
+    public void Close()
+    {
+        if (this.lazyInnerSession.IsValueCreated)
+        {
+            this.InnerSession.Close();
+        }
+    }
+
     public void Dispose()
     {
         if (this.lazyInnerSession.IsValueCreated)
         {
             this.InnerSession.Dispose();
         }
-    }
-
-    public event EventHandler<DALChangesEventArgs> Flushed
-    {
-        add => this.InnerSession.Flushed += value;
-        remove => this.InnerSession.Flushed -= value;
-    }
-
-    public event EventHandler<DALChangesEventArgs> BeforeTransactionCompleted
-    {
-        add => this.InnerSession.BeforeTransactionCompleted += value;
-        remove => this.InnerSession.BeforeTransactionCompleted -= value;
-    }
-
-    public event EventHandler<DALChangesEventArgs> AfterTransactionCompleted
-    {
-        add => this.InnerSession.AfterTransactionCompleted += value;
-        remove => this.InnerSession.AfterTransactionCompleted -= value;
-    }
-
-    public event EventHandler Closed
-    {
-        add => this.InnerSession.Closed += value;
-        remove => this.InnerSession.Closed -= value;
     }
 }

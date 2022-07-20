@@ -14,9 +14,9 @@ namespace Framework.Events
     public abstract class EventsSubscriptionManagerBase<TPersistentDomainObjectBase> : IEventsSubscriptionManager
         where TPersistentDomainObjectBase : class
     {
-        private readonly IBLLOperationEventListenerContainer<TPersistentDomainObjectBase> operationListeners;
+        private readonly IOperationEventListenerContainer<TPersistentDomainObjectBase> operationListeners;
 
-        protected EventsSubscriptionManagerBase(IBLLOperationEventListenerContainer<TPersistentDomainObjectBase> operationListeners, [NotNull] IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender)
+        protected EventsSubscriptionManagerBase(IOperationEventListenerContainer<TPersistentDomainObjectBase> operationListeners, [NotNull] IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender)
         {
             this.operationListeners = operationListeners;
             this.MessageSender = messageSender ?? throw new ArgumentNullException(nameof(messageSender));

@@ -23,12 +23,11 @@ namespace Framework.DomainDriven.BLL
         where TDomainObject : class
         where TOperation : struct, Enum
     {
-        public DomainOperationEventArgs(TDomainObject domainObject, Type domainObjectType, TOperation operation, IOperationBLLBase<TDomainObject> bll)
+        public DomainOperationEventArgs(TDomainObject domainObject, Type domainObjectType, TOperation operation)
         {
             this.DomainObject = domainObject ?? throw new ArgumentNullException(nameof(domainObject));
             this.DomainObjectType = domainObjectType ?? throw new ArgumentNullException(nameof(domainObjectType));
             this.Operation = operation;
-            this.BLL = bll;
         }
 
         public TDomainObject DomainObject { get; }
@@ -37,9 +36,6 @@ namespace Framework.DomainDriven.BLL
 
         public TOperation Operation { get; }
 
-        [Obsolete("Свойство больше не требуется, так как Listener-ы теперь хранятся рядом с контектом и там всегда есть возможность получить BLL из 'живого' контекста. В 7.0 свойство будет убрано.")]
-        public IOperationBLLBase<TDomainObject> BLL { get; }
-
-        Enum IDomainOperationEventArgs<TDomainObject>.Operation => (Enum)(object)this.Operation;
+        Enum IDomainOperationEventArgs<TDomainObject>.Operation => this.Operation;
     }
 }

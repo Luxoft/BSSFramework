@@ -7,8 +7,6 @@ using Framework.DomainDriven.BLL.Tracking;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.Persistent;
 
-using JetBrains.Annotations;
-
 using NHibernate;
 using NHibernate.Envers.Patch;
 
@@ -37,8 +35,6 @@ namespace Framework.DomainDriven.NHibernate
         public ISession InnerSession { get; }
 
         protected internal NHibSessionEnvironment Environment { get; }
-
-        protected bool HasFlushedListeners => this.Flushed != null;
 
         public abstract void RegisterModified<TDomainObject>(TDomainObject domainObject, ModificationType modificationType);
 
@@ -80,50 +76,12 @@ namespace Framework.DomainDriven.NHibernate
             return new NHibDalFactory<TPersistentDomainObjectBase, TIdent>(this);
         }
 
-        protected virtual void OnFlushed([NotNull] DALChangesEventArgs e)
+        public abstract void Close();
+
+        public void Dispose()
         {
-            if (e == null) throw new ArgumentNullException(nameof(e));
-
-            this.Flushed?.Invoke(this, e);
+            this.Close();
         }
-
-        protected virtual void OnBeforeTransactionCompleted([NotNull] DALChangesEventArgs e)
-        {
-            if (e == null) throw new ArgumentNullException(nameof(e));
-
-            this.BeforeTransactionCompleted?.Invoke(this, e);
-        }
-
-        protected virtual void OnAfterTransactionCompleted([NotNull] DALChangesEventArgs e)
-        {
-            if (e == null) throw new ArgumentNullException(nameof(e));
-
-            this.AfterTransactionCompleted?.Invoke(this, e);
-        }
-        protected virtual void OnClosed([NotNull] EventArgs e)
-        {
-            if (e == null) throw new ArgumentNullException(nameof(e));
-
-            this.Closed?.Invoke(this, e);
-        }
-
-        protected void ClearEvents()
-        {
-            this.Flushed = null;
-            this.BeforeTransactionCompleted = null;
-            this.AfterTransactionCompleted = null;
-            this.Closed = null;
-        }
-
-        public event EventHandler<DALChangesEventArgs> Flushed;
-
-        public event EventHandler<DALChangesEventArgs> BeforeTransactionCompleted;
-
-        public event EventHandler<DALChangesEventArgs> AfterTransactionCompleted;
-
-        public event EventHandler Closed;
-
-        public abstract void Dispose();
     }
 
 

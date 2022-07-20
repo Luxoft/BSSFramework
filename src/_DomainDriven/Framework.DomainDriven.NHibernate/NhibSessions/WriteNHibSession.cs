@@ -22,6 +22,8 @@ namespace Framework.DomainDriven.NHibernate
 {
     public class WriteNHibSession : NHibSessionBase
     {
+        private readonly IDBSessionEventListener eventListener;
+
         [NotNull]
         private readonly AuditPropertyPair modifyAuditProperties;
 
@@ -38,12 +40,14 @@ namespace Framework.DomainDriven.NHibernate
 
         private bool manualFault;
 
-        private bool disposed;
+        private bool closed;
 
         internal WriteNHibSession(NHibSessionEnvironment environment,
-                                  INHibSessionSetup settings)
+                                  INHibSessionSetup settings,
+                                  IDBSessionEventListener eventListener)
                 : base(environment, DBSessionMode.Write)
         {
+            this.eventListener = eventListener;
             this.modifyAuditProperties = settings.GetModifyAuditProperty();
             this.createAuditProperties = settings.GetCreateAuditProperty();
             this.collectChangedEventListener = new CollectChangesEventListener();
@@ -125,44 +129,33 @@ namespace Framework.DomainDriven.NHibernate
         {
         }
 
-        public override void Dispose()
+        public override void Close()
         {
-            if (this.disposed)
+            if (this.closed)
             {
                 return;
             }
 
-            this.disposed = true;
+            this.closed = true;
 
-
-            try
+            using (this.InnerSession)
+            using (this.transactionScope)
+            using (this.transaction)
             {
-                using (this.InnerSession)
-                using (this.transactionScope)
-                using (this.transaction)
+                if (this.manualFault)
                 {
-                    if (this.manualFault)
+                    if (!this.transaction.WasRolledBack)
                     {
-                        if (!this.transaction.WasRolledBack)
-                        {
-                            this.transaction.Rollback();
-                        }
-                    }
-                    else
-                    {
-                        this.Flush(true);
-
-                        this.transaction.Commit();
-
-                        this.OnClosed(EventArgs.Empty);
-
-                        this.transactionScope?.Complete();
+                        this.transaction.Rollback();
                     }
                 }
-            }
-            finally
-            {
-                this.ClearEvents();
+                else
+                {
+                    this.Flush(true);
+
+                    this.transaction.Commit();
+                    this.transactionScope?.Complete();
+                }
             }
         }
 
@@ -191,7 +184,7 @@ namespace Framework.DomainDriven.NHibernate
             this.Flush(false);
         }
 
-        private void Flush(bool withTransactionCompleted)
+        private void Flush(bool withCompleteTransaction)
         {
             try
             {
@@ -215,15 +208,15 @@ namespace Framework.DomainDriven.NHibernate
 
                         var changedEventArgs = new DALChangesEventArgs(changes);
 
-                        this.OnFlushed(changedEventArgs);
+                        this.eventListener.OnFlushed(changedEventArgs);
                     }
-                } while (this.HasFlushedListeners);
+                } while (true);
 
-                if (withTransactionCompleted)
+                if (withCompleteTransaction)
                 {
                     var beforeTransactionCompletedChangeState = dalHistory.Composite();
 
-                    this.OnBeforeTransactionCompleted(new DALChangesEventArgs(beforeTransactionCompletedChangeState));
+                    this.eventListener.OnBeforeTransactionCompleted(new DALChangesEventArgs(beforeTransactionCompletedChangeState));
 
                     this.InnerSession.Flush();
 
@@ -231,7 +224,7 @@ namespace Framework.DomainDriven.NHibernate
                             new[] { beforeTransactionCompletedChangeState, this.collectChangedEventListener.EvictChanges() }
                                     .Composite();
 
-                    this.OnAfterTransactionCompleted(new DALChangesEventArgs(afterTransactionCompletedChangeState));
+                    this.eventListener.OnAfterTransactionCompleted(new DALChangesEventArgs(afterTransactionCompletedChangeState));
 
                     this.InnerSession
                         .Flush(); // Флашим для того, чтобы проверить, что никто ничего не менял в объектах после AfterTransactionCompleted-евента

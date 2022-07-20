@@ -91,11 +91,11 @@ namespace Framework.Configuration.BLL
 
             var listener = this.TargetSystemContext.OperationListeners.GetEventListener<TDomainObject, TOperation>();
 
-            listener.ForceEvent(domainObject, operation);
+            listener.SendEvent(domainObject, operation);
 
             operation.ToOperationMaybe<TOperation, EventOperation>().Match(
                 eventOperation =>
-                    this.eventDalListeners.Foreach(dalListener => dalListener.GetForceEventContainer<TDomainObject>().ForceEvent(domainObject, eventOperation)));
+                    this.eventDalListeners.Foreach(dalListener => dalListener.GetForceEventContainer<TDomainObject>().SendEvent(domainObject, eventOperation)));
         }
 
         public override bool IsAssignable(Type domainType)

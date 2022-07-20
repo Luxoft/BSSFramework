@@ -39,17 +39,26 @@ public class ControllerEvaluator<TController>
     {
         using var scope = this.rootServiceProvider.CreateScope();
 
-        var controller = scope.ServiceProvider.GetRequiredService<TController>();
+        var scopeServiceProvider = scope.ServiceProvider;
 
-        controller.ServiceProvider = scope.ServiceProvider;
+        var controller = scopeServiceProvider.GetRequiredService<TController>();
 
-        if (this.customPrincipalName == null)
+        controller.ServiceProvider = scopeServiceProvider;
+
+        try
         {
-            return await func(controller);
+            if (this.customPrincipalName == null)
+            {
+                return await func(controller);
+            }
+            else
+            {
+                return await scopeServiceProvider.GetRequiredService<IntegrationTestsUserAuthenticationService>().ImpersonateAsync(this.customPrincipalName, async () => await func(controller));
+            }
         }
-        else
+        finally
         {
-            return await scope.ServiceProvider.GetRequiredService<IntegrationTestsUserAuthenticationService>().ImpersonateAsync(this.customPrincipalName, async () => await func(controller));
+            scopeServiceProvider.GetRequiredService<EventSubscriberManager>().TryCloseDbSession();
         }
     }
 

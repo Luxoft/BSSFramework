@@ -39,7 +39,7 @@ namespace Framework.Configuration.BLL
         public ConfigurationBLLContext(
             IServiceProvider serviceProvider,
             [NotNull] IDALFactory<PersistentDomainObjectBase, Guid> dalFactory,
-            [NotNull] BLLOperationEventListenerContainer<DomainObjectBase> operationListeners,
+            [NotNull] IOperationEventListenerContainer<DomainObjectBase> operationListeners,
             [NotNull] BLLSourceEventListenerContainer<PersistentDomainObjectBase> sourceListeners,
             [NotNull] IObjectStateService objectStateService,
             [NotNull] IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,

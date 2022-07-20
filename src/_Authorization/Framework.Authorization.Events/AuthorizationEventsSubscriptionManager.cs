@@ -9,7 +9,7 @@ namespace Framework.Authorization.Events
 {
     public class AuthorizationEventsSubscriptionManager : EventsSubscriptionManagerBase<PersistentDomainObjectBase>
     {
-        public AuthorizationEventsSubscriptionManager(IBLLOperationEventListenerContainer<PersistentDomainObjectBase> operationListeners, IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>> messageSender)
+        public AuthorizationEventsSubscriptionManager(IOperationEventListenerContainer<PersistentDomainObjectBase> operationListeners, IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>> messageSender)
             : base(operationListeners, messageSender)
         {
         }

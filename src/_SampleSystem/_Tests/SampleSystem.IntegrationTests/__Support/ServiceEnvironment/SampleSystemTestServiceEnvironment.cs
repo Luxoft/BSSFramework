@@ -88,6 +88,8 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .AddWorkflowCore(configuration)
                                   .AddAuthWorkflow()
 
+                                  .AddSingleton<TestDebugModeManager>()
+
                                   .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
         }
 

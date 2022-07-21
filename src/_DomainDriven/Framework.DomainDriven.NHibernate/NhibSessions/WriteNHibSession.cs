@@ -52,7 +52,10 @@ namespace Framework.DomainDriven.NHibernate
             this.createAuditProperties = settings.GetCreateAuditProperty();
             this.collectChangedEventListener = new CollectChangesEventListener();
 
-            this.transactionScope = this.Environment.EnableTransactionScope ? this.CreateTransactionScope() : null;
+            //this.transactionScope = this.Environment.EnableTransactionScope ? this.CreateTransactionScope() : null;
+
+            this.InnerSession = this.Environment.InternalSessionFactory.OpenSession();
+            this.InnerSession.FlushMode = FlushMode.Manual;
 
             this.transaction = this.InnerSession.BeginTransaction();
 
@@ -61,6 +64,7 @@ namespace Framework.DomainDriven.NHibernate
             this.ConfigureEventListeners();
         }
 
+        public sealed override ISession InnerSession { get; }
 
         private void ConfigureEventListeners()
         {
@@ -138,23 +142,27 @@ namespace Framework.DomainDriven.NHibernate
 
             this.closed = true;
 
-            using (this.InnerSession)
             using (this.transactionScope)
-            using (this.transaction)
             {
-                if (this.manualFault)
+                using (this.InnerSession)
                 {
-                    if (!this.transaction.WasRolledBack)
+                    using (this.transaction)
                     {
-                        this.transaction.Rollback();
-                    }
-                }
-                else
-                {
-                    this.Flush(true);
+                        if (this.manualFault)
+                        {
+                            if (!this.transaction.WasRolledBack)
+                            {
+                                this.transaction.Rollback();
+                            }
+                        }
+                        else
+                        {
+                            this.Flush(true);
 
-                    this.transaction.Commit();
-                    this.transactionScope?.Complete();
+                            this.transaction.Commit();
+                            this.transactionScope?.Complete();
+                        }
+                    }
                 }
             }
         }

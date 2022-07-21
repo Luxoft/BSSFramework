@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DAL.Revisions;
 
+using NHibernate;
+
 namespace Framework.DomainDriven.NHibernate
 {
     internal class ReadOnlyNHibSession : NHibSessionBase
@@ -13,8 +15,12 @@ namespace Framework.DomainDriven.NHibernate
         internal ReadOnlyNHibSession(NHibSessionEnvironment environment)
                 : base(environment, DBSessionMode.Read)
         {
+            this.InnerSession = this.Environment.InternalSessionFactory.OpenSession();
+            this.InnerSession.FlushMode = FlushMode.Manual;
             this.InnerSession.DefaultReadOnly = true;
         }
+
+        public sealed override ISession InnerSession { get; }
 
         public override IEnumerable<ObjectModification> GetModifiedObjectsFromLogic()
         {

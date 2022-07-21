@@ -22,17 +22,13 @@ namespace Framework.DomainDriven.NHibernate
             this.SessionMode = sessionMode;
 
             this.lazyAuditReader = LazyHelper.Create(() => this.InnerSession.GetAuditReader());
-
-
-            this.InnerSession = this.Environment.InternalSessionFactory.OpenSession();
-            this.InnerSession.FlushMode = FlushMode.Manual;
         }
 
         public DBSessionMode SessionMode { get; }
 
         public IAuditReaderPatched AuditReader => this.lazyAuditReader.Value;
 
-        public ISession InnerSession { get; }
+        public abstract ISession InnerSession { get; }
 
         protected internal NHibSessionEnvironment Environment { get; }
 

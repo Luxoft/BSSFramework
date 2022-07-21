@@ -37,7 +37,7 @@ namespace SampleSystem.WebApiCore
                 z =>
                 {
                     return this.baseFilter.Authorize(context)
-                        || string.Compare(z.Authorization.CurrentPrincipalName, UserAuthenticationService.CurrentUser, StringComparison.InvariantCultureIgnoreCase) == 0;
+                        || string.Compare(z.Authorization.CurrentPrincipalName, new DomainDefaultUserAuthenticationService().GetUserName(), StringComparison.InvariantCultureIgnoreCase) == 0;
                 });
         }
     }

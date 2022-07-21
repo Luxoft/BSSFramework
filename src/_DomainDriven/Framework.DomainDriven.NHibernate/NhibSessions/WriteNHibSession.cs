@@ -52,7 +52,7 @@ namespace Framework.DomainDriven.NHibernate
             this.createAuditProperties = settings.GetCreateAuditProperty();
             this.collectChangedEventListener = new CollectChangesEventListener();
 
-            //this.transactionScope = this.Environment.EnableTransactionScope ? this.CreateTransactionScope() : null;
+            this.transactionScope = this.Environment.EnableTransactionScope ? this.CreateTransactionScope() : null;
 
             this.InnerSession = this.Environment.InternalSessionFactory.OpenSession();
             this.InnerSession.FlushMode = FlushMode.Manual;

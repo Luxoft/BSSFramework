@@ -33,6 +33,7 @@ using SampleSystem.IntegrationTests.__Support.ServiceEnvironment.IntegrationTest
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore;
+using SampleSystem.WebApiCore.Env;
 
 namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 {
@@ -66,9 +67,13 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 
                                   .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
 
-                                  .AddScoped<IntegrationTestsUserAuthenticationService>()
-                                  .AddScoped<IUserAuthenticationService>(sp => sp.GetRequiredService<IntegrationTestsUserAuthenticationService>())
-                                  .AddScoped<IImpersonateService>(sp => sp.GetRequiredService<IntegrationTestsUserAuthenticationService>())
+                                  .AddSingleton<IntegrationTestDefaultUserAuthenticationService>()
+                                  .AddSingleton<IDefaultUserAuthenticationService>(sp => sp.GetRequiredService<IntegrationTestDefaultUserAuthenticationService>())
+
+                                  .AddScoped<SampleSystemUserAuthenticationService, SampleSystemUserAuthenticationService>()
+                                  .AddScoped<IUserAuthenticationService>(sp => sp.GetRequiredService<SampleSystemUserAuthenticationService>())
+                                  .AddScoped<IUserAuthenticationService>(sp => sp.GetRequiredService<SampleSystemUserAuthenticationService>())
+
 
                                   .AddSingleton(new SubscriptionMetadataStore(new SampleSystemSubscriptionsMetadataFinder()))
 

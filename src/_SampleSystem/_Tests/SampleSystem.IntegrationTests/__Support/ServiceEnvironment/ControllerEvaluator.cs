@@ -42,9 +42,7 @@ public class ControllerEvaluator<TController>
         using var scope = this.rootServiceProvider.CreateScope();
 
         var scopeServiceProvider = scope.ServiceProvider;
-
         var controller = scopeServiceProvider.GetRequiredService<TController>();
-
         controller.ServiceProvider = scopeServiceProvider;
 
         try
@@ -57,7 +55,7 @@ public class ControllerEvaluator<TController>
                 }
                 else
                 {
-                    return await scopeServiceProvider.GetRequiredService<IImpersonateService>().WithImpersonateAsync(this.customPrincipalName, async () => await func(controller));
+                    return await scopeServiceProvider.GetRequiredService<IntegrationTestDefaultUserAuthenticationService>().WithImpersonateAsync(this.customPrincipalName, async () => await func(controller));
                 }
             }
             catch

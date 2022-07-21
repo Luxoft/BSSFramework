@@ -4,8 +4,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="4.1.0" />
-    <PackageReference Include="NHibernate" Version="5.3.11" />
-    <PackageReference Include="NHibernate.Envers" Version="5.3.2" />
+    <PackageReference Include="NHibernate" Version="5.3.12" />
+    <PackageReference Include="NHibernate.Envers" Version="5.3.3" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />

@@ -31,9 +31,8 @@ using SampleSystem.Domain;
 using SampleSystem.Generated.DAL.NHibernate;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.CustomReports;
+using SampleSystem.WebApiCore.Env;
 using SampleSystem.WebApiCore.Env.Database;
-
-using UserAuthenticationService = SampleSystem.WebApiCore.Env.UserAuthenticationService;
 
 namespace SampleSystem.WebApiCore
 {
@@ -56,7 +55,13 @@ namespace SampleSystem.WebApiCore
 
             // Others
             services.AddSingleton<IDateTimeService>(DateTimeService.Default);
-            services.AddSingleton<IUserAuthenticationService, UserAuthenticationService>();
+
+            services.AddSingleton<IDefaultUserAuthenticationService, SampleSystemDefaultUserAuthenticationService>();
+
+            services.AddScoped<SampleSystemUserAuthenticationService, SampleSystemUserAuthenticationService>();
+            services.AddScoped<IUserAuthenticationService>(sp => sp.GetRequiredService<SampleSystemUserAuthenticationService>());
+            services.AddScoped<IUserAuthenticationService>(sp => sp.GetRequiredService<SampleSystemUserAuthenticationService>());
+
             services.AddSingleton<ISpecificationEvaluator, NhSpecificationEvaluator>();
 
             return services.AddControllerEnvironment();

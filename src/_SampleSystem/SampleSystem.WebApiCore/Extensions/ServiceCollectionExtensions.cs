@@ -46,6 +46,7 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<IBeforeTransactionCompletedDALListener, DenormalizeHierarchicalDALListener<ISampleSystemBLLContext, PersistentDomainObjectBase, NamedLock, NamedLockOperation>>();
         services.AddScoped<IBeforeTransactionCompletedDALListener, FixDomainObjectEventRevisionNumberDALListener>();
+        services.AddScoped<IBeforeTransactionCompletedDALListener, PermissionWorkflowDALListener>();
 
         services.AddScoped<DefaultAuthDALListener>();
 

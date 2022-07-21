@@ -26,7 +26,7 @@ namespace Framework.DomainDriven.NHibernate
             yield break;
         }
 
-        public override void ManualFault()
+        public override void AsFault()
         {
         }
 

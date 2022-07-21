@@ -115,7 +115,7 @@ namespace Framework.DomainDriven.NHibernate
                        .Where(obj => typeof(TPersistentDomainObjectBase).IsAssignableFrom(obj.ObjectType));
         }
 
-        public override void ManualFault()
+        public override void AsFault()
         {
             this.manualFault = true;
         }

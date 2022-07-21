@@ -50,6 +50,11 @@ namespace Framework.DomainDriven.BLL
             return context.EvaluateAsync(sessionMode, customPrincipalName, (c, s) => Task.FromResult(getResult (c, s))).Result;
         }
 
+        public static Task<TResult> EvaluateAsync<TBLLContext, TResult>(this IContextEvaluator<TBLLContext> context, DBSessionMode sessionMode, [NotNull] Func<TBLLContext, IDBSession, Task<TResult>> getResult)
+        {
+            return context.EvaluateAsync(sessionMode, null, getResult);
+        }
+
         private static Func<T, object> ToDefaultFunc<T>(this Action<T> action)
         {
             return a => { action(a); return null; };

@@ -12,7 +12,7 @@ using SampleSystem.Domain;
 
 namespace SampleSystem.ServiceEnvironment;
 
-public class PermissionWorkflowDALListener : BLLContextContainer<ISampleSystemBLLContext>, IDALListener
+public class PermissionWorkflowDALListener : BLLContextContainer<ISampleSystemBLLContext>, IBeforeTransactionCompletedDALListener
 {
     public PermissionWorkflowDALListener([NotNull] ISampleSystemBLLContext context)
         : base(context)

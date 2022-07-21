@@ -19,4 +19,16 @@ public static class ServiceProviderExtensions
             lazyDbSession.Value.Close();
         }
     }
+
+    public static void TryFaultDbSession([NotNull] this IServiceProvider serviceProvider)
+    {
+        if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
+
+        var lazyDbSession = serviceProvider.GetRequiredService<Lazy<IDBSession>>();
+
+        if (lazyDbSession.IsValueCreated)
+        {
+            lazyDbSession.Value.AsFault();
+        }
+    }
 }

@@ -37,15 +37,19 @@ public class WorkflowController : ApiControllerBase<ISampleSystemBLLContext, Eva
 
     private readonly IUserAuthenticationService userAuthenticationService;
 
+    private readonly IContextEvaluator<ISampleSystemBLLContext> contextEvaluator;
+
     public WorkflowController(
             StartWorkflowJob startWorkflowJob,
             IWorkflowHost workflowHost,
-            IUserAuthenticationService userAuthenticationService)
+            IUserAuthenticationService userAuthenticationService,
+            IContextEvaluator<ISampleSystemBLLContext> contextEvaluator)
 
     {
         this.startWorkflowJob = startWorkflowJob;
         this.workflowHost = workflowHost;
         this.userAuthenticationService = userAuthenticationService;
+        this.contextEvaluator = contextEvaluator;
     }
 
     protected override EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService> GetEvaluatedData(IDBSession session, ISampleSystemBLLContext context) =>
@@ -63,11 +67,11 @@ public class WorkflowController : ApiControllerBase<ISampleSystemBLLContext, Eva
     [HttpPost(nameof(GetMyPendingApproveOperationWorkflowObjects))]
     public async Task<List<ApproveOperationWorkflowObject>> GetMyPendingApproveOperationWorkflowObjects(PermissionIdentityDTO permissionIdent)
     {
-        var workflowOperationIdents = this.Evaluate(DBSessionMode.Read, evaluateData =>
+        var workflowOperationIdents = this.contextEvaluator.Evaluate(DBSessionMode.Read, ctx =>
         {
             var permissionIdStr = permissionIdent.Id.ToString();
 
-            var bll = evaluateData.Context.Logics.Default.Create<WorkflowCoreInstance>();
+            var bll = ctx.Logics.Default.Create<WorkflowCoreInstance>();
 
             var instances = bll.GetListBy(wi =>
                     wi.Data.Contains(permissionIdStr)
@@ -91,9 +95,9 @@ public class WorkflowController : ApiControllerBase<ISampleSystemBLLContext, Eva
             }
         }
 
-        this.Evaluate(DBSessionMode.Read, evaluateData =>
+        this.contextEvaluator.Evaluate(DBSessionMode.Read, ctx =>
         {
-            var authContext = evaluateData.Context.Authorization;
+            var authContext = ctx.Authorization;
 
             result.RemoveAll(wfObj =>
             {

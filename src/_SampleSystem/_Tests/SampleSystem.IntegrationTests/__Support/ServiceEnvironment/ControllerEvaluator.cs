@@ -48,13 +48,22 @@ public class ControllerEvaluator<TController>
 
         try
         {
-            if (this.customPrincipalName == null)
+            try
             {
-                return await func(controller);
+                if (this.customPrincipalName == null)
+                {
+                    return await func(controller);
+                }
+                else
+                {
+                    return await scopeServiceProvider.GetRequiredService<IntegrationTestsUserAuthenticationService>().ImpersonateAsync(this.customPrincipalName, async () => await func(controller));
+                }
             }
-            else
+            catch
             {
-                return await scopeServiceProvider.GetRequiredService<IntegrationTestsUserAuthenticationService>().ImpersonateAsync(this.customPrincipalName, async () => await func(controller));
+                scopeServiceProvider.TryFaultDbSession();
+
+                throw;
             }
         }
         finally

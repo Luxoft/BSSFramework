@@ -27,7 +27,7 @@ namespace Framework.DomainDriven.BLL
         /// <summary>
         /// Закрывает текущую транзакцию без применения изменений.
         /// </summary>
-        void ManualFault();
+        void AsFault();
 
         /// <summary>
         /// Gets the maximum audit revision.

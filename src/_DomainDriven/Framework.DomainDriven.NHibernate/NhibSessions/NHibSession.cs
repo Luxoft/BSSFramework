@@ -61,7 +61,7 @@ public class NHibSession : IDBSession
 
     public IEnumerable<ObjectModification> GetModifiedObjectsFromLogic<TPersistentDomainObjectBase>() => this.InnerSession.GetModifiedObjectsFromLogic<TPersistentDomainObjectBase>();
 
-    public void ManualFault() => this.InnerSession.ManualFault();
+    public void AsFault() => this.InnerSession.AsFault();
 
     public long GetMaxRevision() => this.InnerSession.GetMaxRevision();
 

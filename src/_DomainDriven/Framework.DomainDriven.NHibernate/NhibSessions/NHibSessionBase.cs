@@ -57,7 +57,7 @@ namespace Framework.DomainDriven.NHibernate
 
         public abstract IEnumerable<ObjectModification> GetModifiedObjectsFromLogic<TPersistentDomainObjectBase>();
 
-        public abstract void ManualFault();
+        public abstract void AsFault();
 
         /// <inheritdoc />
         public abstract void AsReadOnly();

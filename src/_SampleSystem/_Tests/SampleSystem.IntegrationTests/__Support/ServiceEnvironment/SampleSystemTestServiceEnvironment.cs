@@ -69,15 +69,14 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 
                                   .AddSingleton<IntegrationTestDefaultUserAuthenticationService>()
                                   .AddSingleton<IDefaultUserAuthenticationService>(sp => sp.GetRequiredService<IntegrationTestDefaultUserAuthenticationService>())
+                                  .AddSingleton<IAuditRevisionUserAuthenticationService>(sp => sp.GetRequiredService<IntegrationTestDefaultUserAuthenticationService>())
 
-                                  .AddScoped<SampleSystemUserAuthenticationService, SampleSystemUserAuthenticationService>()
+                                  .AddScoped<SampleSystemUserAuthenticationService>()
                                   .AddScoped<IUserAuthenticationService>(sp => sp.GetRequiredService<SampleSystemUserAuthenticationService>())
-                                  .AddScoped<IUserAuthenticationService>(sp => sp.GetRequiredService<SampleSystemUserAuthenticationService>())
-
+                                  .AddScoped<IImpersonateService>(sp => sp.GetRequiredService<SampleSystemUserAuthenticationService>())
 
                                   .AddSingleton(new SubscriptionMetadataStore(new SampleSystemSubscriptionsMetadataFinder()))
 
-                                  .AddSingleton<IAuditRevisionUserAuthenticationService, IntegrationTestsAuditRevisionUserAuthenticationService>()
                                   .AddSingleton<IDateTimeService, IntegrationTestDateTimeService>()
                                   .AddDatabaseSettings(InitializeAndCleanup.DatabaseUtil.ConnectionSettings.ConnectionString)
                                   .AddScoped<IExceptionProcessor, ApiControllerExceptionService<ISampleSystemBLLContext>>()

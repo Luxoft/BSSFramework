@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
 
+using Framework.DomainDriven.NHibernate.Audit;
+
 using SampleSystem.WebApiCore.Env;
 
 namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
-public class IntegrationTestDefaultUserAuthenticationService : DomainDefaultUserAuthenticationService
+public class IntegrationTestDefaultUserAuthenticationService : DomainDefaultUserAuthenticationService, IAuditRevisionUserAuthenticationService
 {
     public string CustomUserName { get; private set; }
 

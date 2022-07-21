@@ -1,14 +1,11 @@
 ﻿using System;
 
-using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.ServiceModel.Service;
 using Framework.NotificationCore.Monitoring;
 
 using Hangfire.Dashboard;
 
 using SampleSystem.BLL;
-using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.Env;
 
 namespace SampleSystem.WebApiCore

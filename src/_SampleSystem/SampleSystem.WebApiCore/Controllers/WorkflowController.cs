@@ -122,7 +122,7 @@ public class WorkflowController : ApiControllerBase<ISampleSystemBLLContext, Eva
         return this.ApproveRejectOperation(permissionIdentity, rejectEventId, false);
     }
 
-    public async Task ApproveRejectOperation(PermissionIdentityDTO permissionIdentity, string eventId, bool isApprove)
+    private async Task ApproveRejectOperation(PermissionIdentityDTO permissionIdentity, string eventId, bool isApprove)
     {
         var permissionIdStr = permissionIdentity.Id.ToString();
 

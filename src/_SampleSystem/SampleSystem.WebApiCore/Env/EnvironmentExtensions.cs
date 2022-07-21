@@ -12,6 +12,7 @@ using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.NHibernate;
+using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.Serialization;
 using Framework.DomainDriven.SerializeMetadata;
 using Framework.DomainDriven.ServiceModel.IAD;
@@ -56,13 +57,19 @@ namespace SampleSystem.WebApiCore
             // Others
             services.AddSingleton<IDateTimeService>(DateTimeService.Default);
 
-            services.AddSingleton<IDefaultUserAuthenticationService, SampleSystemDefaultUserAuthenticationService>();
+            services.AddSingleton<SampleSystemDefaultUserAuthenticationService>();
+            services.AddSingleton<IDefaultUserAuthenticationService>(sp => sp.GetRequiredService<SampleSystemDefaultUserAuthenticationService>());
 
             services.AddScoped<SampleSystemUserAuthenticationService, SampleSystemUserAuthenticationService>();
             services.AddScoped<IUserAuthenticationService>(sp => sp.GetRequiredService<SampleSystemUserAuthenticationService>());
             services.AddScoped<IUserAuthenticationService>(sp => sp.GetRequiredService<SampleSystemUserAuthenticationService>());
 
+            services.AddSingleton<IAuditRevisionUserAuthenticationService>(sp => sp.GetRequiredService<SampleSystemDefaultUserAuthenticationService>());
+
             services.AddSingleton<ISpecificationEvaluator, NhSpecificationEvaluator>();
+
+            services.AddSingleton<IWorkflowManager, WorkflowManager>(sp => sp.GetRequiredService<WorkflowManager>());
+            services.AddSingleton<WorkflowManager>();
 
             return services.AddControllerEnvironment();
         }

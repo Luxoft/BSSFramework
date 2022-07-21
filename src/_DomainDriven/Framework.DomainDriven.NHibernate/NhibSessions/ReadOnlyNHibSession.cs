@@ -41,7 +41,10 @@ namespace Framework.DomainDriven.NHibernate
 
         public override void Close()
         {
-            this.InnerSession.Close();
+            if (this.InnerSession.IsOpen)
+            {
+                this.InnerSession.Close();
+            }
         }
 
         public override void Flush()

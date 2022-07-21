@@ -93,6 +93,7 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .AddAuthWorkflow()
 
                                   .AddSingleton<TestDebugModeManager>()
+                                  .AddSingleton<SampleSystemInitializer>()
 
                                   .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
         }

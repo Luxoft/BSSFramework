@@ -1,9 +1,14 @@
 ﻿using System.Collections.Generic;
 
+using Framework.DomainDriven.ServiceModel.IAD;
+
+using Microsoft.Extensions.DependencyInjection;
+
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.Utils;
+using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData
 {
@@ -11,6 +16,8 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
     {
         public void TestData()
         {
+            this.RootServiceProvider.GetRequiredService<SampleSystemInitializer>().Initialize();
+
             this.AuthHelper.AddCurrentUserToAdmin();
 
             this.AuthHelper.SetUserRole(DefaultConstants.NOTIFICATION_ADMIN, new SampleSystemPermission(BusinessRole.SystemIntegration));

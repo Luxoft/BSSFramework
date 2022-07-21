@@ -6,8 +6,6 @@ using Framework.DomainDriven.BLL;
 
 using JetBrains.Annotations;
 
-using Microsoft.Extensions.DependencyInjection;
-
 using WorkflowCore.Interface;
 using WorkflowCore.Models;
 
@@ -15,11 +13,21 @@ namespace Framework.Authorization.ApproveWorkflow;
 
 public class CanAutoApproveStep : IStepBody
 {
-    private readonly IContextEvaluator<IAuthorizationBLLContext> contextEvaluator;
+    private readonly IAuthorizationBLLContext context;
 
-    public CanAutoApproveStep([NotNull] IContextEvaluator<IAuthorizationBLLContext> contextEvaluator)
+    private readonly IWorkflowApproveProcessor workflowApproveProcessor;
+
+    private readonly IDBSession dbSession;
+
+    public CanAutoApproveStep([NotNull] IAuthorizationBLLContext context,
+                              [NotNull] IWorkflowApproveProcessor workflowApproveProcessor,
+                              IDBSession dbSession)
     {
-        this.contextEvaluator = contextEvaluator ?? throw new ArgumentNullException(nameof(contextEvaluator));
+        this.context = context ?? throw new ArgumentNullException(nameof(context));
+        this.workflowApproveProcessor = workflowApproveProcessor ?? throw new ArgumentNullException(nameof(workflowApproveProcessor));
+
+        this.dbSession = dbSession;
+        this.dbSession.AsReadOnly();
     }
 
     public async Task<ExecutionResult> RunAsync(IStepExecutionContext context)
@@ -33,13 +41,10 @@ public class CanAutoApproveStep : IStepBody
 
     private bool CanAutoApprove(ApproveOperationWorkflowObject workflowObject)
     {
-        return this.contextEvaluator.Evaluate(DBSessionMode.Read, ctx =>
-        {
-            var permission = ctx.Logics.Permission.GetById(workflowObject.PermissionId, true);
+        var permission = this.context.Logics.Permission.GetById(workflowObject.PermissionId, true);
 
-            var operation = ctx.Logics.Operation.GetById(workflowObject.OperationId, true);
+        var operation = this.context.Logics.Operation.GetById(workflowObject.OperationId, true);
 
-            return ctx.ServiceProvider.GetRequiredService<IWorkflowApproveProcessor>().CanAutoApprove(permission, operation);
-        });
+        return this.workflowApproveProcessor.CanAutoApprove(permission, operation);
     }
 }

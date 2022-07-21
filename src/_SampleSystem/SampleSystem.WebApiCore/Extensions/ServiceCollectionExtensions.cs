@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Framework.Authorization.BLL;
 using Framework.Authorization.Events;
@@ -36,6 +37,11 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterLegacyBLLContext(this IServiceCollection services)
     {
+        services.AddScoped<TargetSystemServiceFactory>();
+        services.AddScoped(sp => sp.GetRequiredService<TargetSystemServiceFactory>().Create<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase>(TargetSystemHelper.AuthorizationName));
+        services.AddScoped(sp => sp.GetRequiredService<TargetSystemServiceFactory>().Create<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase>(TargetSystemHelper.ConfigurationName));
+        services.AddScoped(sp => sp.GetRequiredService<TargetSystemServiceFactory>().Create<ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase>(tss => tss.IsMain));
+
         services.AddSingleton<IInitializeManager, InitializeManager>();
 
         services.AddScoped<IBeforeTransactionCompletedDALListener, DenormalizeHierarchicalDALListener<ISampleSystemBLLContext, PersistentDomainObjectBase, NamedLock, NamedLockOperation>>();
@@ -124,7 +130,7 @@ public static class ServiceCollectionExtensions
                 .AddScoped<ISampleSystemSecurityService, SampleSystemSecurityService>()
                 .AddScoped<ISampleSystemBLLFactoryContainer, SampleSystemBLLFactoryContainer>()
                  .AddSingleton<ICryptService<CryptSystem>, CryptService<CryptSystem>>()
-                .AddScoped<ISampleSystemBLLContextSettings, SampleSystemBLLContextSettings>()
+                .AddScoped<ISampleSystemBLLContextSettings>(_ => new SampleSystemBLLContextSettings { TypeResolver  = new[] { new SampleSystemBLLContextSettings().TypeResolver, TypeSource.FromSample<BusinessUnitSimpleDTO>().ToDefaultTypeResolver() }.ToComposite() })
                 .AddLazyInterfaceImplementScoped<ISampleSystemBLLContext, SampleSystemBLLContext>()
 
                 .AddScoped<ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode>>(sp => sp.GetRequiredService<ISampleSystemBLLContext>())

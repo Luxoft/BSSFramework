@@ -8,5 +8,5 @@ namespace SampleSystem.BLL;
 
 public class SampleSystemBLLContextSettings : ISampleSystemBLLContextSettings
 {
-    public ITypeResolver<string> TypeResolver { get; } = TypeSource.FromSample<PersistentDomainObjectBase>().ToDefaultTypeResolver();
+    public ITypeResolver<string> TypeResolver { get; init; } = TypeSource.FromSample<PersistentDomainObjectBase>().ToDefaultTypeResolver();
 }

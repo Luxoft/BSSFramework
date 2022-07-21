@@ -15,9 +15,9 @@ namespace Framework.DomainDriven.BLL
             context.Evaluate(sessionMode, action.ToDefaultFunc());
         }
 
-        public static void Evaluate<TBLLContext>(this IContextEvaluator<TBLLContext> context, DBSessionMode sessionMode, string principalName, [NotNull] Action<TBLLContext, IDBSession> action)
+        public static void Evaluate<TBLLContext>(this IContextEvaluator<TBLLContext> context, DBSessionMode sessionMode, string customPrincipalName, [NotNull] Action<TBLLContext, IDBSession> action)
         {
-            context.Evaluate(sessionMode, principalName, action.ToDefaultFunc());
+            context.Evaluate(sessionMode, customPrincipalName, action.ToDefaultFunc());
         }
 
         public static TResult Evaluate<TBLLContext, TResult>(this IContextEvaluator<TBLLContext> context, DBSessionMode sessionMode, [NotNull] Func<TBLLContext, IDBSession, TResult> getResult)
@@ -30,9 +30,9 @@ namespace Framework.DomainDriven.BLL
             context.Evaluate(sessionMode, null, action);
         }
 
-        public static void Evaluate<TBLLContext>(this IContextEvaluator<TBLLContext> context, DBSessionMode sessionMode, string principalName, [NotNull] Action<TBLLContext> action)
+        public static void Evaluate<TBLLContext>(this IContextEvaluator<TBLLContext> context, DBSessionMode sessionMode, string customPrincipalName, [NotNull] Action<TBLLContext> action)
         {
-            context.Evaluate(sessionMode, principalName, action.ToDefaultFunc());
+            context.Evaluate(sessionMode, customPrincipalName, action.ToDefaultFunc());
         }
 
         public static TResult Evaluate<TBLLContext, TResult>(this IContextEvaluator<TBLLContext> context, DBSessionMode sessionMode, [NotNull] Func<TBLLContext, TResult> getResult)
@@ -40,14 +40,14 @@ namespace Framework.DomainDriven.BLL
             return context.Evaluate(sessionMode, null, getResult);
         }
 
-        public static TResult Evaluate<TBLLContext, TResult>(this IContextEvaluator<TBLLContext> context, DBSessionMode sessionMode, string principalName, [NotNull] Func<TBLLContext, TResult> getResult)
+        public static TResult Evaluate<TBLLContext, TResult>(this IContextEvaluator<TBLLContext> context, DBSessionMode sessionMode, string customPrincipalName, [NotNull] Func<TBLLContext, TResult> getResult)
         {
-            return context.Evaluate(sessionMode, principalName, (c, _) => getResult(c));
+            return context.Evaluate(sessionMode, customPrincipalName, (c, _) => getResult(c));
         }
 
-        public static TResult Evaluate<TBLLContext, TResult>(this IContextEvaluator<TBLLContext> context, DBSessionMode sessionMode, string principalName, [NotNull] Func<TBLLContext, IDBSession, TResult> getResult)
+        public static TResult Evaluate<TBLLContext, TResult>(this IContextEvaluator<TBLLContext> context, DBSessionMode sessionMode, string customPrincipalName, [NotNull] Func<TBLLContext, IDBSession, TResult> getResult)
         {
-            return context.EvaluateAsync(sessionMode, principalName, (c, s) => Task.FromResult(getResult (c, s))).Result;
+            return context.EvaluateAsync(sessionMode, customPrincipalName, (c, s) => Task.FromResult(getResult (c, s))).Result;
         }
 
         private static Func<T, object> ToDefaultFunc<T>(this Action<T> action)

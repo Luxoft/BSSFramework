@@ -9,10 +9,8 @@ using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.Events;
-using Framework.Exceptions;
 using Framework.Notification;
 using Framework.Persistent;
-using Framework.SecuritySystem;
 
 using JetBrains.Annotations;
 

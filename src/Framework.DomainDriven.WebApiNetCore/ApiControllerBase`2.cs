@@ -80,7 +80,6 @@ namespace Framework.DomainDriven.WebApiNetCore
 
             this.evaliateInvoked = true;
 
-
             if (sessionMode == DBSessionMode.Read)
             {
                 this.ServiceProvider.GetRequiredService<IDBSession>().AsReadOnly();

@@ -19,7 +19,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             this.rootServiceProvider = rootServiceProvider ?? throw new ArgumentNullException(nameof(rootServiceProvider));
         }
 
-        public async Task<TResult> EvaluateAsync<TResult>(DBSessionMode sessionMode, string principalName, Func<TBLLContext, IDBSession, Task<TResult>> getResult)
+        public async Task<TResult> EvaluateAsync<TResult>(DBSessionMode sessionMode, string customPrincipalName, Func<TBLLContext, IDBSession, Task<TResult>> getResult)
         {
             await using var scope = this.rootServiceProvider.CreateAsyncScope();
 
@@ -33,11 +33,16 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
             var defaultPrincipalName = scopeServiceProvider.GetRequiredService<IUserAuthenticationService>().GetUserName();
 
-            var impersonateService = !string.IsNullOrWhiteSpace(principalName) && principalName != defaultPrincipalName
+            var impersonateService = !string.IsNullOrWhiteSpace(customPrincipalName) && customPrincipalName != defaultPrincipalName
                                              ? scopeServiceProvider.GetRequiredService<IImpersonateService>()
                                              : null;
 
-            impersonateService?.RunAs(principalName);
+            var prevCustomUserName = impersonateService?.CustomUserName;
+
+            if (impersonateService != null)
+            {
+                impersonateService.CustomUserName = customPrincipalName;
+            }
 
             try
             {
@@ -51,15 +56,11 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             }
             finally
             {
-                impersonateService?.FinishRunAs();
+                if (impersonateService != null)
+                {
+                    impersonateService.CustomUserName = prevCustomUserName;
+                }
             }
         }
-    }
-
-    public interface IImpersonateService
-    {
-        void RunAs(string principalName);
-
-        void FinishRunAs();
     }
 }

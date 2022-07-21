@@ -9,7 +9,7 @@ namespace Framework.Configuration.BLL;
 
 public class ConfigurationBLLContextSettings : IConfigurationBLLContextSettings
 {
-    public ITypeResolver<string> TypeResolver { get; } = TypeSource.FromSample<PersistentDomainObjectBase>().ToDefaultTypeResolver();
+    public ITypeResolver<string> TypeResolver { get; init; } = TypeSource.FromSample<PersistentDomainObjectBase>().ToDefaultTypeResolver();
 
-    public ISerializerFactory<string> SystemConstantSerializerFactory { get; } = SerializerFactory.Default;
+    public ISerializerFactory<string> SystemConstantSerializerFactory { get; init; } = SerializerFactory.Default;
 }

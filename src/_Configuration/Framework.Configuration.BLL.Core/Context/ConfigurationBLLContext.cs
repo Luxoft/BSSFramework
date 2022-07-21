@@ -132,7 +132,7 @@ namespace Framework.Configuration.BLL
 
         public IBLLSimpleQueryBase<IEmployee> GetEmployeeSource()
         {
-            return this.GetEmployeeSource();
+            return this.employeeSource;
         }
 
         public IPersistentTargetSystemService GetPersistentTargetSystemService(TargetSystem targetSystem)

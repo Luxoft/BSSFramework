@@ -12,6 +12,7 @@ using Framework.Core;
 using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate.Audit;
+using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Exceptions;
@@ -67,6 +68,7 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 
                                   .AddScoped<IntegrationTestsUserAuthenticationService>()
                                   .AddScoped<IUserAuthenticationService>(sp => sp.GetRequiredService<IntegrationTestsUserAuthenticationService>())
+                                  .AddScoped<IImpersonateService>(sp => sp.GetRequiredService<IntegrationTestsUserAuthenticationService>())
 
                                   .AddSingleton(new SubscriptionMetadataStore(new SampleSystemSubscriptionsMetadataFinder()))
 

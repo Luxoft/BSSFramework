@@ -2,10 +2,11 @@
 using System.Threading.Tasks;
 
 using Framework.Core.Services;
+using Framework.DomainDriven.ServiceModel.IAD;
 
 namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 {
-    public class IntegrationTestsUserAuthenticationService : IUserAuthenticationService
+    public class IntegrationTestsUserAuthenticationService : IUserAuthenticationService, IImpersonateService
     {
         private static readonly string DefaultUserName = $"{System.Environment.UserDomainName}\\{System.Environment.UserName}";
 

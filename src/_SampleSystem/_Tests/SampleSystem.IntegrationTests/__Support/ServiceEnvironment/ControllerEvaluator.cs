@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
+using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.WebApiNetCore;
 
 using JetBrains.Annotations;
@@ -58,7 +59,7 @@ public class ControllerEvaluator<TController>
         }
         finally
         {
-            scopeServiceProvider.GetRequiredService<EventSubscriberManager>().TryCloseDbSession();
+            scopeServiceProvider.TryCloseDbSession();
         }
     }
 

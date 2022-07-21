@@ -6,7 +6,7 @@ namespace Framework.DomainDriven.BLL;
 
 public static class DomainOperationEventArgsExtensions
 {
-    public static void ProcessOtherEventListener<TDomainObject, TOperation, TOtherDomainObject, TOtherOperation>(this IDomainOperationEventArgs<TDomainObject, TOperation> eventArgs,  OperationEventListener<TOtherDomainObject, TOtherOperation> otherListener)
+    public static void ProcessOtherEventListener<TDomainObject, TOperation, TOtherDomainObject, TOtherOperation>(this IDomainOperationEventArgs<TDomainObject, TOperation> eventArgs,  OperationEventSender<TOtherDomainObject, TOtherOperation> otherListener)
             where TOtherOperation : struct, Enum
             where TOtherDomainObject : class
             where TDomainObject : class, TOtherDomainObject

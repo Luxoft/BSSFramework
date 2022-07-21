@@ -11,7 +11,7 @@ namespace Framework.DomainDriven.BLL
     }
 
 
-    public interface IBLLBaseContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent> : IBLLBaseContextBase<TPersistentDomainObjectBase, TIdent>, IBLLOperationEventContext<TDomainObjectBase>, IBLLSourceEventContext<TPersistentDomainObjectBase>, IODataBLLContext
+    public interface IBLLBaseContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent> : IBLLBaseContextBase<TPersistentDomainObjectBase, TIdent>, IBLLOperationEventContext<TPersistentDomainObjectBase>, IBLLSourceEventContext<TPersistentDomainObjectBase>, IODataBLLContext
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
         where TDomainObjectBase : class

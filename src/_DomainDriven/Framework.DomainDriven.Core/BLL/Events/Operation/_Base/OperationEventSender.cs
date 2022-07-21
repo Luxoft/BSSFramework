@@ -6,29 +6,32 @@ using Framework.Core;
 
 namespace Framework.DomainDriven.BLL
 {
-    public abstract class OperationEventListener
+    public abstract class OperationEventSender
     {
-        internal abstract IEnumerable<KeyValuePair<Type, KeyValuePair<Type, OperationEventListener>>> GetOtherEventListeners();
+        internal abstract IEnumerable<KeyValuePair<Type, KeyValuePair<Type, OperationEventSender>>> GetOtherEventListeners();
 
-        internal abstract IEnumerable<KeyValuePair<Type, KeyValuePair<Type, OperationEventListener>>> GetDefaultOtherEventListeners();
+        internal abstract IEnumerable<KeyValuePair<Type, KeyValuePair<Type, OperationEventSender>>> GetDefaultOtherEventListeners();
     }
 
-    public abstract class OperationEventListener<TDomainObject, TOperation> : OperationEventListener, IOperationEventListener<TDomainObject, TOperation>
+    public abstract class OperationEventSender<TDomainObject, TOperation> : OperationEventSender, IOperationEventSender<TDomainObject, TOperation>
         where TDomainObject : class
         where TOperation : struct, Enum
     {
-        protected readonly IDictionary<Type, IDictionary<Type, OperationEventListener>> Cache;
+        private readonly IEnumerable<IOperationEventListener<TDomainObject>> eventListeners;
+
+        protected readonly IDictionary<Type, IDictionary<Type, OperationEventSender>> Cache;
 
 
-        internal OperationEventListener(IDictionary<Type, IDictionary<Type, OperationEventListener>> cache)
+        internal OperationEventSender(IEnumerable<IOperationEventListener<TDomainObject>> eventListeners, IDictionary<Type, IDictionary<Type, OperationEventSender>> cache)
         {
+            this.eventListeners = eventListeners;
             this.Cache = cache ?? throw new ArgumentNullException(nameof(cache));
         }
 
 
         protected void ProcessOtherEventListeners(IDomainOperationEventArgs<TDomainObject, TOperation> eventArgs)
         {
-            var processOtherEventListenerMethod = new Action<OperationEventListener<TDomainObject, TOperation>> (eventArgs.ProcessOtherEventListener).Method.GetGenericMethodDefinition();
+            var processOtherEventListenerMethod = new Action<OperationEventSender<TDomainObject, TOperation>> (eventArgs.ProcessOtherEventListener).Method.GetGenericMethodDefinition();
 
             foreach (var otherListener in this.GetOtherEventListeners())
             {
@@ -37,7 +40,7 @@ namespace Framework.DomainDriven.BLL
             }
         }
 
-        internal sealed override IEnumerable<KeyValuePair<Type, KeyValuePair<Type, OperationEventListener>>> GetDefaultOtherEventListeners()
+        internal sealed override IEnumerable<KeyValuePair<Type, KeyValuePair<Type, OperationEventSender>>> GetDefaultOtherEventListeners()
         {
             return from processedDomainTypePair in this.Cache
 
@@ -63,16 +66,13 @@ namespace Framework.DomainDriven.BLL
         {
             if (eventArgs == null) throw new ArgumentNullException(nameof(eventArgs));
 
-            this.OperationProcessed.Maybe(handler => handler(this, eventArgs));
+            this.eventListeners.Foreach(eventListener => eventListener.OnFired(eventArgs));
 
             if (isStart)
             {
                 this.ProcessOtherEventListeners(eventArgs);
             }
         }
-
-
-        public event EventHandler<IDomainOperationEventArgs<TDomainObject, TOperation>> OperationProcessed;
 
 
         protected static readonly bool IsImplemented = !typeof (TDomainObject).IsAbstract;

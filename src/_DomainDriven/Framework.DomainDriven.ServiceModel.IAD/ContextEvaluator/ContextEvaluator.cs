@@ -45,7 +45,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
                 var result = await getResult(context, session);
 
-                scopeServiceProvider.GetRequiredService<EventSubscriberManager>().TryCloseDbSession();
+                scopeServiceProvider.TryCloseDbSession();
 
                 return result;
             }

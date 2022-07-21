@@ -29,7 +29,7 @@ namespace Framework.DomainDriven.BLL
         /// </summary>
         /// <param name="serviceProvider">DI interface.</param>
         /// <param name="dalFactory">The dal factory.</param>
-        /// <param name="operationListeners">The operation listeners.</param>
+        /// <param name="operationSenders">The operation senders.</param>
         /// <param name="sourceListeners">The source listeners.</param>
         /// <param name="objectStateService">The object state service.</param>
         /// <param name="standartExpressionBuilder">The standart expression builder.</param>
@@ -54,7 +54,7 @@ namespace Framework.DomainDriven.BLL
         protected DefaultBLLBaseContext(
                 [NotNull] IServiceProvider serviceProvider,
                 [NotNull] IDALFactory<TPersistentDomainObjectBase, TIdent> dalFactory,
-                [NotNull] IOperationEventListenerContainer<TDomainObjectBase> operationListeners,
+                [NotNull] IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
                 [NotNull] BLLSourceEventListenerContainer<TPersistentDomainObjectBase> sourceListeners,
                 [NotNull] IObjectStateService objectStateService,
                 [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
@@ -66,7 +66,7 @@ namespace Framework.DomainDriven.BLL
 
             this.ServiceProvider = serviceProvider;
             this.DalFactory = dalFactory ?? throw new ArgumentNullException(nameof(dalFactory));
-            this.OperationListeners = operationListeners ?? throw new ArgumentNullException(nameof(operationListeners));
+            this.OperationSenders = operationSenders ?? throw new ArgumentNullException(nameof(operationSenders));
             this.SourceListeners = sourceListeners ?? throw new ArgumentNullException(nameof(sourceListeners));
             this.TrackingService = new TrackingService<TPersistentDomainObjectBase>(objectStateService);
 
@@ -89,7 +89,7 @@ namespace Framework.DomainDriven.BLL
 
         public ITrackingService<TPersistentDomainObjectBase> TrackingService { get; }
 
-        public IOperationEventListenerContainer<TDomainObjectBase> OperationListeners { get; }
+        public IOperationEventSenderContainer<TPersistentDomainObjectBase> OperationSenders { get; }
 
         public BLLSourceEventListenerContainer<TPersistentDomainObjectBase> SourceListeners { get; }
 
@@ -126,14 +126,14 @@ namespace Framework.DomainDriven.BLL
         protected DefaultBLLBaseContext(
             [NotNull] IServiceProvider serviceProvider,
             [NotNull] IDALFactory<TPersistentDomainObjectBase, TIdent> dalFactory,
-            [NotNull] IOperationEventListenerContainer<TDomainObjectBase> operationListeners,
+            [NotNull] IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
             [NotNull] BLLSourceEventListenerContainer<TPersistentDomainObjectBase> sourceListeners,
             [NotNull] IObjectStateService objectStateService,
             [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
             [NotNull] IValidator validator,
             [NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
             [NotNull] IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
-            : base(serviceProvider, dalFactory, operationListeners, sourceListeners, objectStateService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
+            : base(serviceProvider, dalFactory, operationSenders, sourceListeners, objectStateService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
         {
         }
 

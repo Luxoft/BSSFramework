@@ -35,8 +35,8 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
                    .AddScoped(sp => sp.GetRequiredService<IDBSession>().GetDALFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>())
 
-                   .AddScoped(sp => sp.GetRequiredService<EventSubscriberManager>().GetOperationEventListenerContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>())
-                   .AddScoped<OperationEventListenerContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>>()
+                   .AddScoped<IOperationEventSenderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>, OperationEventSenderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>>()
+
                    .AddScoped<BLLSourceEventListenerContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>>()
 
                    .AddSingleton<AuthorizationValidatorCompileCache>()
@@ -49,7 +49,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                    .AddScoped<IAuthorizationBLLFactoryContainer, AuthorizationBLLFactoryContainer>()
                    .AddScoped<IRunAsManager, AuthorizationRunAsManger>()
                    .AddScoped<IAuthorizationBLLContextSettings, AuthorizationBLLContextSettings>()
-                   .AddLazyScoped<IAuthorizationBLLContext, AuthorizationBLLContext>()
+                   .AddLazyInterfaceImplementScoped<IAuthorizationBLLContext, AuthorizationBLLContext>()
                    .AddScoped<Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContext>(sp => sp.GetRequiredService<IConfigurationBLLContext>())
 
                    .AddScoped<ISecurityOperationResolver<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode>>(sp => sp.GetRequiredService<IAuthorizationBLLContext>())
@@ -69,8 +69,8 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
                    .AddScoped(sp => sp.GetRequiredService<IDBSession>().GetDALFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>())
 
-                   .AddScoped(sp => sp.GetRequiredService<EventSubscriberManager>().GetOperationEventListenerContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>())
-                   .AddScoped<OperationEventListenerContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>>()
+                   .AddScoped<IOperationEventSenderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>, OperationEventSenderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>>()
+
                    .AddScoped<BLLSourceEventListenerContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>>()
 
                    .AddSingleton<ConfigurationValidatorCompileCache>()
@@ -91,7 +91,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
 
                    .AddScoped<IConfigurationBLLContextSettings, ConfigurationBLLContextSettings>()
-                   .AddLazyScoped<IConfigurationBLLContext, ConfigurationBLLContext>()
+                   .AddLazyInterfaceImplementScoped<IConfigurationBLLContext, ConfigurationBLLContext>()
 
                    .AddScoped<ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode>>(sp => sp.GetRequiredService<IConfigurationBLLContext>())
                    .AddScoped<IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>>(sp => sp.GetRequiredService<IConfigurationSecurityService>())
@@ -104,11 +104,21 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                    .Self(ConfigurationBLLFactoryContainer.RegisterBLLFactory);
         }
 
-        public static IServiceCollection AddLazyScoped<TInterface, TImplementation>(this IServiceCollection services)
-            where TImplementation: TInterface
+        public static IServiceCollection AddLazyInterfaceImplementScoped<TInterface, TImplementation>(this IServiceCollection services)
+            where TImplementation: class, TInterface
             where TInterface : class
         {
-            return services.AddScoped(sp => LazyInterfaceImplementHelper.CreateProxy<TInterface>(() => ActivatorUtilities.CreateInstance<TImplementation>(sp)));
+            return services.AddScoped<TImplementation>()
+                           .AddScoped(sp => LazyInterfaceImplementHelper.CreateProxy<TInterface>(() => sp.GetRequiredService<TImplementation>()));
+        }
+
+        public static IServiceCollection AddLazyScoped<TInterface, TImplementation>(this IServiceCollection services)
+                where TImplementation : class, TInterface
+                where TInterface : class
+        {
+            return services.AddScoped<TImplementation>()
+                           .AddScoped(sp => new Lazy<TInterface>(sp.GetRequiredService<TImplementation>))
+                           .AddScoped(sp => sp.GetRequiredService<Lazy<TInterface>>().Value);
         }
     }
 }

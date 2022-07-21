@@ -1,6 +1,4 @@
-﻿using Framework.Core;
-using Framework.DomainDriven.BLL;
-using Framework.Events;
+﻿using Framework.Events;
 
 using JetBrains.Annotations;
 
@@ -10,8 +8,8 @@ namespace SampleSystem.Events
 {
     public class SampleSystemAribaEventsSubscriptionManager : EventsSubscriptionManagerBase<PersistentDomainObjectBase>
     {
-        public SampleSystemAribaEventsSubscriptionManager(IOperationEventListenerContainer<PersistentDomainObjectBase> operationListeners, [NotNull] SampleSystemAribaLocalDBEventMessageSender messageSender)
-            : base(operationListeners, messageSender)
+        public SampleSystemAribaEventsSubscriptionManager([NotNull] SampleSystemAribaLocalDBEventMessageSender messageSender)
+            : base(messageSender)
         {
         }
 

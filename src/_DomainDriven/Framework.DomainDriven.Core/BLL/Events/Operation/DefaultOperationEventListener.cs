@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 namespace Framework.DomainDriven.BLL
 {
-    internal sealed class DefaultOperationEventListener<TDomainObject> : OperationEventListener<TDomainObject, BLLBaseOperation>
+    internal sealed class DefaultOperationEventSender<TDomainObject> : OperationEventSender<TDomainObject, BLLBaseOperation>
 
         where TDomainObject : class
     {
-        public DefaultOperationEventListener(IDictionary<Type, IDictionary<Type, OperationEventListener>> cache)
-            : base(cache)
+        public DefaultOperationEventSender(IEnumerable<IOperationEventListener<TDomainObject>> eventListeners, IDictionary<Type, IDictionary<Type, OperationEventSender>> cache)
+            : base(eventListeners, cache)
         {
         }
 
-        internal override IEnumerable<KeyValuePair<Type, KeyValuePair<Type, OperationEventListener>>> GetOtherEventListeners()
+        internal override IEnumerable<KeyValuePair<Type, KeyValuePair<Type, OperationEventSender>>> GetOtherEventListeners()
         {
             return this.GetDefaultOtherEventListeners();
         }

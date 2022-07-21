@@ -1,5 +1,6 @@
 ﻿using Framework.DomainDriven.BLL;
 
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
@@ -20,8 +21,6 @@ public class TestTestTestTests : TestBase
             var emp = ctx.Logics.Employee.GetFullList();
 
             session.Flush();
-
-            //var x = ctx.Logics.TestImmutableObj;
 
             return;
         });

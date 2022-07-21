@@ -34,8 +34,6 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterLegacyBLLContext(this IServiceCollection services)
     {
-        services.AddScoped<EventSubscriberManager>();
-
         services.AddSingleton<IInitializeManager, InitializeManager>();
 
         services.AddScoped<IBeforeTransactionCompletedDALListener, DenormalizeHierarchicalDALListener<ISampleSystemBLLContext, PersistentDomainObjectBase, NamedLock, NamedLockOperation>>();
@@ -54,15 +52,19 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService>();
 
-        services.AddScoped<IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>>, SampleSystemLocalDBEventMessageSender>();
-        services.AddScoped<IEventsSubscriptionManager, SampleSystemEventsSubscriptionManager>();
 
+
+        services.AddScoped<IOperationEventSenderContainer<PersistentDomainObjectBase>, OperationEventSenderContainer<PersistentDomainObjectBase>>();
+
+        services.AddScoped<IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>>, SampleSystemLocalDBEventMessageSender>();
+        services.AddScoped<IOperationEventListener<PersistentDomainObjectBase>, SampleSystemEventsSubscriptionManager>();
+
+        services.AddScoped<IOperationEventListener<Framework.Authorization.Domain.PersistentDomainObjectBase>, AuthorizationEventsSubscriptionManager>();
         services.AddScoped<IMessageSender<IDomainOperationSerializeData<Framework.Authorization.Domain.PersistentDomainObjectBase>>, AuthorizationLocalDBEventMessageSender>();
-        services.AddScoped<IEventsSubscriptionManager, AuthorizationEventsSubscriptionManager>();
 
 
         services.AddScoped<SampleSystemAribaLocalDBEventMessageSender>();
-        services.AddScoped<IEventsSubscriptionManager, SampleSystemAribaEventsSubscriptionManager>();
+        services.AddScoped<IOperationEventListener<PersistentDomainObjectBase>, SampleSystemAribaEventsSubscriptionManager>();
 
         services.AddScoped<IStandardSubscriptionService, LocalDBSubscriptionService>();
 
@@ -108,8 +110,6 @@ public static class ServiceCollectionExtensions
 
                 .AddScoped(sp => sp.GetRequiredService<IDBSession>().GetDALFactory<PersistentDomainObjectBase, Guid>())
 
-                .AddScoped(sp => sp.GetRequiredService<EventSubscriberManager>().GetOperationEventListenerContainer<PersistentDomainObjectBase>())
-                .AddScoped<OperationEventListenerContainer<PersistentDomainObjectBase>>()
                 .AddScoped<BLLSourceEventListenerContainer<PersistentDomainObjectBase>>()
 
                 .AddSingleton<SampleSystemValidatorCompileCache>()
@@ -122,7 +122,7 @@ public static class ServiceCollectionExtensions
                 .AddScoped<ISampleSystemBLLFactoryContainer, SampleSystemBLLFactoryContainer>()
                  .AddSingleton<ICryptService<CryptSystem>, CryptService<CryptSystem>>()
                 .AddScoped<ISampleSystemBLLContextSettings, SampleSystemBLLContextSettings>()
-                .AddLazyScoped<ISampleSystemBLLContext, SampleSystemBLLContext>()
+                .AddLazyInterfaceImplementScoped<ISampleSystemBLLContext, SampleSystemBLLContext>()
 
                 .AddScoped<ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode>>(sp => sp.GetRequiredService<ISampleSystemBLLContext>())
                 .AddScoped<IDisabledSecurityProviderContainer<PersistentDomainObjectBase>>(sp => sp.GetRequiredService<ISampleSystemSecurityService>())

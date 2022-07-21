@@ -89,7 +89,7 @@ namespace Framework.Configuration.BLL
 
             var operation = EnumHelper.Parse<TOperation>(operationName);
 
-            var listener = this.TargetSystemContext.OperationListeners.GetEventListener<TDomainObject, TOperation>();
+            var listener = this.TargetSystemContext.OperationSenders.GetEventSender<TDomainObject, TOperation>();
 
             listener.SendEvent(domainObject, operation);
 

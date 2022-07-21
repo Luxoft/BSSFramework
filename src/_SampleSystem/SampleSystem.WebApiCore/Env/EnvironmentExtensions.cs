@@ -64,8 +64,9 @@ namespace SampleSystem.WebApiCore
 
         public static IServiceCollection AddDatabaseSettings(this IServiceCollection services, string connectionString) =>
                 services.AddScoped<INHibSessionSetup, NHibSessionSettings>()
-                        .AddScoped(sp => sp.GetRequiredService<EventSubscriberManager>().DBSessionEventListener)
-                        .AddScoped<IDBSession, NHibSession>()
+
+                        .AddScoped<IDBSessionEventListener, DBSessionEventListener>()
+                        .AddLazyScoped<IDBSession, NHibSession>()
 
                         .AddSingleton<INHibSessionEnvironmentSettings, NHibSessionEnvironmentSettings>()
                         .AddSingleton<NHibConnectionSettings>()
@@ -80,8 +81,6 @@ namespace SampleSystem.WebApiCore
 
         public static IServiceCollection AddControllerEnvironment(this IServiceCollection services)
         {
-            services.AddScoped<IEventSubscriber, EventSubscriber>();
-
             services.AddSingleton<IExceptionProcessor, ApiControllerExceptionService<ISampleSystemBLLContext>>();
 
             services.AddSingleton<IReportParameterValueService<ISampleSystemBLLContext, PersistentDomainObjectBase, SampleSystemSecurityOperationCode>, ReportParameterValueService<ISampleSystemBLLContext, PersistentDomainObjectBase, SampleSystemSecurityOperationCode>>();

@@ -38,7 +38,7 @@ namespace Framework.Authorization.BLL
         public AuthorizationBLLContext(
             [NotNull] IServiceProvider serviceProvider,
             [NotNull] IDALFactory<PersistentDomainObjectBase, Guid> dalFactory,
-            [NotNull] IOperationEventListenerContainer<DomainObjectBase> operationListeners,
+            [NotNull] IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
             [NotNull] BLLSourceEventListenerContainer<PersistentDomainObjectBase> sourceListeners,
             [NotNull] IObjectStateService objectStateService,
             [NotNull] IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
@@ -59,7 +59,7 @@ namespace Framework.Authorization.BLL
             : base(
                 serviceProvider,
                 dalFactory,
-                operationListeners,
+                operationSenders,
                 sourceListeners,
                 objectStateService,
                 accessDeniedExceptionService,

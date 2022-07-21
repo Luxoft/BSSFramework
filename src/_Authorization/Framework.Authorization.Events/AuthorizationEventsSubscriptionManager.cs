@@ -2,15 +2,14 @@
 
 using Framework.Authorization.Domain;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.Events;
 
 namespace Framework.Authorization.Events
 {
     public class AuthorizationEventsSubscriptionManager : EventsSubscriptionManagerBase<PersistentDomainObjectBase>
     {
-        public AuthorizationEventsSubscriptionManager(IOperationEventListenerContainer<PersistentDomainObjectBase> operationListeners, IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>> messageSender)
-            : base(operationListeners, messageSender)
+        public AuthorizationEventsSubscriptionManager(IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>> messageSender)
+            : base(messageSender)
         {
         }
 

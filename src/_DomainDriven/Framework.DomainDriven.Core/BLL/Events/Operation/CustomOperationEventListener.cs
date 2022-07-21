@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace Framework.DomainDriven.BLL
 {
-    internal sealed class CustomOperationEventListener<TDomainObject, TOperation> : OperationEventListener<TDomainObject, TOperation>
+    internal sealed class CustomOperationEventSender<TDomainObject, TOperation> : OperationEventSender<TDomainObject, TOperation>
 
         where TDomainObject : class
         where TOperation : struct, Enum
     {
-        public CustomOperationEventListener(IDictionary<Type, IDictionary<Type, OperationEventListener>> cache)
-            : base(cache)
+        public CustomOperationEventSender(IEnumerable<IOperationEventListener<TDomainObject>> eventListeners, IDictionary<Type, IDictionary<Type, OperationEventSender>> cache)
+            : base(eventListeners, cache)
         {
         }
 
-        internal override IEnumerable<KeyValuePair<Type, KeyValuePair<Type, OperationEventListener>>> GetOtherEventListeners()
+        internal override IEnumerable<KeyValuePair<Type, KeyValuePair<Type, OperationEventSender>>> GetOtherEventListeners()
         {
             return this.GetDefaultOtherEventListeners();
         }

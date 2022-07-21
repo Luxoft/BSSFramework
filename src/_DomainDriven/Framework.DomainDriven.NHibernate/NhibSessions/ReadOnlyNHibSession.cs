@@ -10,7 +10,7 @@ namespace Framework.DomainDriven.NHibernate
 {
     internal class ReadOnlyNHibSession : NHibSessionBase
     {
-        private bool disposed;
+        private bool closed;
 
         internal ReadOnlyNHibSession(NHibSessionEnvironment environment)
                 : base(environment, DBSessionMode.Read)
@@ -19,6 +19,8 @@ namespace Framework.DomainDriven.NHibernate
             this.InnerSession.FlushMode = FlushMode.Manual;
             this.InnerSession.DefaultReadOnly = true;
         }
+
+        public override bool Closed => this.closed;
 
         public sealed override ISession InnerSession { get; }
 
@@ -47,10 +49,14 @@ namespace Framework.DomainDriven.NHibernate
 
         public override void Close()
         {
-            if (this.InnerSession.IsOpen)
+            if (this.closed)
             {
-                this.InnerSession.Close();
+                return;
             }
+
+            this.closed = true;
+
+            using (this.InnerSession) ;
         }
 
         public override void Flush()

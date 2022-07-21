@@ -64,6 +64,8 @@ namespace Framework.DomainDriven.NHibernate
             this.ConfigureEventListeners();
         }
 
+        public override bool Closed => this.closed;
+
         public sealed override ISession InnerSession { get; }
 
         private void ConfigureEventListeners()

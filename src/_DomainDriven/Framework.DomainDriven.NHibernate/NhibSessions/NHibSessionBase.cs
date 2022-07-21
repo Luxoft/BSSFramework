@@ -24,6 +24,8 @@ namespace Framework.DomainDriven.NHibernate
             this.lazyAuditReader = LazyHelper.Create(() => this.InnerSession.GetAuditReader());
         }
 
+        public abstract bool Closed { get; }
+
         public DBSessionMode SessionMode { get; }
 
         public IAuditReaderPatched AuditReader => this.lazyAuditReader.Value;
@@ -76,6 +78,11 @@ namespace Framework.DomainDriven.NHibernate
 
         public void Dispose()
         {
+            if (!this.Closed)
+            {
+
+            }
+
             this.Close();
         }
     }

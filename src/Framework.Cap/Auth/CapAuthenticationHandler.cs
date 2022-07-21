@@ -43,7 +43,7 @@ public class CapAuthenticationHandler<TBllContext> : AuthenticationHandler<Authe
             return Task.FromResult(AuthenticateResult.NoResult());
         }
 
-        //this.dbSession.AsReadOnly();
+        this.dbSession.AsReadOnly();
 
         var isAdmin = this.context.Authorization.Logics.BusinessRole.HasAdminRole();
 

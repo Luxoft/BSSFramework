@@ -129,6 +129,7 @@ namespace SampleSystem.IntegrationTests.Workflow
             // Act
             var approvingPrincipal = this.CreateTestPermission();
 
+
             var permissionIdentity = approvingPrincipal.Permissions.Single().Identity;
 
             var startedWf = wfController.WithIntegrationImpersonate().Evaluate(c => c.StartJob());

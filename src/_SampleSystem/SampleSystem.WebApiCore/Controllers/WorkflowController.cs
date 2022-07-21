@@ -126,7 +126,7 @@ public class WorkflowController : ApiControllerBase<ISampleSystemBLLContext, Eva
     {
         var permissionIdStr = permissionIdentity.Id.ToString();
 
-        var wiId = this.EvaluateC(
+        var wiId = this.contextEvaluator.Evaluate(
             DBSessionMode.Read,
             ctx => ctx.Logics.WorkflowCoreInstance.GetObjectBy(ee => ee.Data.Contains(permissionIdStr) && ee.Data.Contains(eventId), true).Id);
 
@@ -134,7 +134,7 @@ public class WorkflowController : ApiControllerBase<ISampleSystemBLLContext, Eva
 
         await Task.Delay(3000); // need refact
 
-        this.EvaluateC(
+        this.contextEvaluator.Evaluate(
             DBSessionMode.Read,
             ctx =>
             {

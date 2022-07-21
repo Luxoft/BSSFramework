@@ -1,6 +1,9 @@
-﻿namespace Framework.DomainDriven.ServiceModel.IAD;
+﻿using System;
+using System.Threading.Tasks;
+
+namespace Framework.DomainDriven.ServiceModel.IAD;
 
 public interface IImpersonateService
 {
-    string CustomUserName { get; set; }
+    Task<T> WithImpersonateAsync<T>(string customUserName, Func<Task<T>> func);
 }

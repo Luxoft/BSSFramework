@@ -10,15 +10,15 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
     {
         private static readonly string DefaultUserName = $"{System.Environment.UserDomainName}\\{System.Environment.UserName}";
 
-        public string GetUserName() => this.CustomUserName ?? DefaultUserName;
+        public string GetUserName() => CustomUserName ?? DefaultUserName;
 
-        public string CustomUserName { get; set; }
+        public static string CustomUserName { get; private set; }
 
-        public async Task<T> ImpersonateAsync<T>(string customUserName, Func<Task<T>> func)
+        public async Task<T> WithImpersonateAsync<T>(string customUserName, Func<Task<T>> func)
         {
-            var prev = this.CustomUserName;
+            var prev = CustomUserName;
 
-            this.CustomUserName = customUserName;
+            CustomUserName = customUserName;
 
             try
             {
@@ -26,7 +26,7 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
             }
             finally
             {
-                this.CustomUserName = prev;
+                CustomUserName = prev;
             }
         }
     }

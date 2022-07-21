@@ -37,41 +37,31 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                                              ? scopeServiceProvider.GetRequiredService<IImpersonateService>()
                                              : null;
 
-            var prevCustomUserName = impersonateService?.CustomUserName;
+            var context = scopeServiceProvider.GetRequiredService<TBLLContext>();
 
-            if (impersonateService != null)
-            {
-                impersonateService.CustomUserName = customPrincipalName;
-            }
+            TResult result;
 
             try
             {
-                var context = scopeServiceProvider.GetRequiredService<TBLLContext>();
-
-                TResult result;
-
-                try
+                if (impersonateService == null)
                 {
                     result = await getResult(context, session);
                 }
-                catch
+                else
                 {
-                    session.AsFault();
-
-                    throw;
+                    result = await impersonateService.WithImpersonateAsync(customPrincipalName, () => getResult(context, session));
                 }
-
-                scopeServiceProvider.TryCloseDbSession();
-
-                return result;
             }
-            finally
+            catch
             {
-                if (impersonateService != null)
-                {
-                    impersonateService.CustomUserName = prevCustomUserName;
-                }
+                session.AsFault();
+
+                throw;
             }
+
+            scopeServiceProvider.TryCloseDbSession();
+
+            return result;
         }
     }
 }

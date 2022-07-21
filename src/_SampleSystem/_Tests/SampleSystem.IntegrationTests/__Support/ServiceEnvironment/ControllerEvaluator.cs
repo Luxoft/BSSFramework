@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.WebApiNetCore;
 
 using JetBrains.Annotations;
@@ -56,7 +57,7 @@ public class ControllerEvaluator<TController>
                 }
                 else
                 {
-                    return await scopeServiceProvider.GetRequiredService<IntegrationTestsUserAuthenticationService>().ImpersonateAsync(this.customPrincipalName, async () => await func(controller));
+                    return await scopeServiceProvider.GetRequiredService<IImpersonateService>().WithImpersonateAsync(this.customPrincipalName, async () => await func(controller));
                 }
             }
             catch

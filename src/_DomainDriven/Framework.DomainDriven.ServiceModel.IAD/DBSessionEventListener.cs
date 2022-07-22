@@ -5,7 +5,8 @@ using System.Linq;
 using Framework.Configuration.BLL;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.ServiceModel.IAD;
+
+namespace Framework.DomainDriven.ServiceModel.IAD;
 
 public class DBSessionEventListener : IDBSessionEventListener
 {

@@ -5,7 +5,7 @@ using Framework.Persistent;
 
 namespace Framework.DomainDriven.BLL.Configuration
 {
-    public interface IConfigurationBLLContext : IExceptionSenderContainer
+    public interface IConfigurationBLLContext
     {
         bool DisplayInternalError { get; }
 

@@ -12,22 +12,20 @@ using JetBrains.Annotations;
 namespace Framework.DomainDriven.WebApiNetCore
 {
     /// <inheritdoc />
-    public class ApiControllerExceptionService<TServiceEnvironment, TBLLContext> : IExceptionProcessor
+    public class ApiControllerExceptionService<TBLLContext> : IExceptionProcessor
         where TBLLContext : class, IConfigurationBLLContextContainer<IConfigurationBLLContext>
-        where TServiceEnvironment : IServiceEnvironment<TBLLContext>
     {
-        private readonly TServiceEnvironment serviceEnvironment;
+        private readonly IContextEvaluator<TBLLContext> contextEvaluator;
+
+        private readonly IDebugModeManager debugModeManager;
 
         public ApiControllerExceptionService(
-            [NotNull] TServiceEnvironment serviceEnvironment,
-            bool expandDetailException = true)
+                [NotNull] IContextEvaluator<TBLLContext> contextEvaluator,
+                IDebugModeManager debugModeManager = null,
+                bool expandDetailException = true)
         {
-            if (serviceEnvironment == null)
-            {
-                throw new ArgumentNullException(nameof(serviceEnvironment));
-            }
-
-            this.serviceEnvironment = serviceEnvironment;
+            this.contextEvaluator = contextEvaluator ?? throw new ArgumentNullException(nameof(contextEvaluator));
+            this.debugModeManager = debugModeManager;
 
             this.ExpandDetailException = expandDetailException;
         }
@@ -39,19 +37,7 @@ namespace Framework.DomainDriven.WebApiNetCore
 
         /// <inheritdoc />
         public Exception Process(Exception exception) =>
-            this.serviceEnvironment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context => this.Process(exception, context));
-
-        /// <summary>
-        ///     Safe Send To Mail Exception
-        /// </summary>
-        protected virtual void SafeSendToMailException(Exception baseException, TBLLContext context)
-        {
-            var tryMethod = new TryMethod<Exception, TBLLContext, Exception>(this.TrySendToMailException);
-
-            Maybe.OfTryMethod(tryMethod)(baseException, context)
-                 .ToReference()
-                 .Maybe(z => this.TrySaveExceptionMessage(z, context));
-        }
+            this.contextEvaluator.Evaluate(DBSessionMode.Write, context => this.Process(exception, context));
 
         /// <summary>
         ///     Is Handled Exception
@@ -91,7 +77,7 @@ namespace Framework.DomainDriven.WebApiNetCore
 
             this.Save(expandedBaseException, context);
 
-            if (!this.serviceEnvironment.IsDebugMode)
+            if (!this.debugModeManager.Maybe(v => v.IsDebugMode))
             {
                 return this.GetFacadeException(expandedBaseException, context);
             }
@@ -123,8 +109,6 @@ namespace Framework.DomainDriven.WebApiNetCore
             }
 
             this.TrySaveExceptionMessage(exception, context);
-
-            this.SafeSendToMailException(exception, context);
         }
 
         private Exception GetFacadeException(Exception exception, TBLLContext context)
@@ -139,27 +123,6 @@ namespace Framework.DomainDriven.WebApiNetCore
                        : this.GetInternalServerException();
         }
 
-        private bool TrySendToMailException(
-            Exception baseException,
-            TBLLContext context,
-            out Exception faultSendException)
-        {
-            try
-            {
-                context.Configuration.ExceptionSender.Send(baseException, TransactionMessageMode.InternalTransaction);
-
-                faultSendException = null;
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                faultSendException = ex;
-
-                return false;
-            }
-        }
-
         private void TrySaveExceptionMessage(Exception exception, TBLLContext context)
         {
             if (exception == null)
@@ -171,9 +134,8 @@ namespace Framework.DomainDriven.WebApiNetCore
             {
                 context.Configuration.ExceptionService.Save(exception);
             }
-            catch (Exception ex)
+            catch
             {
-                this.SafeSendToMailException(ex, context);
             }
         }
     }

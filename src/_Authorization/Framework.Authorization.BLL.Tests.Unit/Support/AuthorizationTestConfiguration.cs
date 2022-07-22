@@ -136,7 +136,7 @@ namespace Framework.Authorization.BLL.Tests.Unit.Support
 
             result.SecurityService.Returns(new AuthorizationSecurityService(result));
             result.SourceListeners.Returns(new BLLSourceEventListenerContainer<PersistentDomainObjectBase>());
-            result.OperationListeners.Returns(new BLLOperationEventListenerContainer<DomainObjectBase>());
+            result.OperationSenders.Returns(new OperationEventSenderContainer<DomainObjectBase>(new List<IOperationEventListener<DomainObjectBase>>()));
 
             var authContext = this.AuthorizationBLLContext;
 

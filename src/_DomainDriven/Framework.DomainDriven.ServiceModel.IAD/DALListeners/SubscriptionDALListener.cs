@@ -9,7 +9,7 @@ using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.ServiceModel.IAD
 {
-    public class SubscriptionDALListener : IDALListener
+    public class SubscriptionDALListener : IBeforeTransactionCompletedDALListener
     {
         private readonly IPersistentTargetSystemService targetSystemService;
 
@@ -24,6 +24,11 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         public void Process(DALChangesEventArgs eventArgs)
         {
             if (eventArgs == null) throw new ArgumentNullException(nameof(eventArgs));
+
+            if (!this.targetSystemService.TargetSystem.SubscriptionEnabled)
+            {
+                return;
+            }
 
             this.targetSystemService.SubscriptionService.GetObjectModifications(eventArgs.Changes).Foreach(info => this.subscriptionService.ProcessChanged(new ObjectModificationInfoDTO<Guid>(info)));
         }

@@ -12,6 +12,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.IntegrationTests.__Support.Utils.Framework;
 using SampleSystem.WebApiCore.Controllers.Main;
@@ -33,8 +34,7 @@ namespace SampleSystem.IntegrationTests
             // Arrange
             var employeeId = this.DataHelper.SaveEmployee();
 
-            this.Environment
-                .GetContextEvaluator()
+            this.GetContextEvaluator()
                 .Evaluate(
                           DBSessionMode.Write,
                           (c) =>
@@ -53,8 +53,7 @@ namespace SampleSystem.IntegrationTests
                           });
 
             // Act
-            var r = this.Environment
-                        .GetContextEvaluator()
+            var r = this.GetContextEvaluator()
                         .Evaluate(
                                   DBSessionMode.Read,
                                   (c) =>

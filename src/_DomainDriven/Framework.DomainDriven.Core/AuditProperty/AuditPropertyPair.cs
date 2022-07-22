@@ -12,9 +12,9 @@ namespace Framework.DomainDriven.Audit
 {
     public class AuditPropertyPair<TDomainObject> : IEnumerable<IAuditProperty>
     {
-        private readonly IAuditProperty<TDomainObject, string> _authorAudit;
+        private readonly IAuditProperty<TDomainObject, string> authorAudit;
 
-        private readonly IAuditProperty<TDomainObject, DateTime?> _dateAudit;
+        private readonly IAuditProperty<TDomainObject, DateTime?> dateAudit;
 
 
         public AuditPropertyPair([NotNull] Expression<Func<TDomainObject, string>> authorPropertyExpr, [NotNull] Expression<Func<TDomainObject, DateTime?>> datePropertyExpr, IUserAuthenticationService userAuthenticationService, IDateTimeService dateTimeService)
@@ -26,18 +26,15 @@ namespace Framework.DomainDriven.Audit
 
         public AuditPropertyPair([NotNull] IAuditProperty<TDomainObject, string> authorAudit, [NotNull] IAuditProperty<TDomainObject, DateTime?> dateAudit)
         {
-            if (authorAudit == null) throw new ArgumentNullException(nameof(authorAudit));
-            if (dateAudit == null) throw new ArgumentNullException(nameof(dateAudit));
-
-            this._authorAudit = authorAudit;
-            this._dateAudit = dateAudit;
+            this.authorAudit = authorAudit ?? throw new ArgumentNullException(nameof(authorAudit));
+            this.dateAudit = dateAudit ?? throw new ArgumentNullException(nameof(dateAudit));
         }
 
 
         public IEnumerator<IAuditProperty> GetEnumerator()
         {
-            yield return this._authorAudit;
-            yield return this._dateAudit;
+            yield return this.authorAudit;
+            yield return this.dateAudit;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -48,9 +45,10 @@ namespace Framework.DomainDriven.Audit
 
     public class AuditPropertyPair : AuditPropertyPair<IAuditObject>
     {
-        public AuditPropertyPair(Expression<Func<IAuditObject, string>> authorPropertyExpr, Expression<Func<IAuditObject, DateTime?>> datePropertyExpr,
-                                 [NotNull] IUserAuthenticationService userAuthenticationService,
-                                 [NotNull] IDateTimeService dateTimeService)
+        public AuditPropertyPair([NotNull] IUserAuthenticationService userAuthenticationService,
+                                 [NotNull] IDateTimeService dateTimeService,
+                                 Expression<Func<IAuditObject, string>> authorPropertyExpr,
+                                 Expression<Func<IAuditObject, DateTime?>> datePropertyExpr)
             : base(authorPropertyExpr, datePropertyExpr, userAuthenticationService, dateTimeService)
         {
         }
@@ -62,8 +60,8 @@ namespace Framework.DomainDriven.Audit
         }
 
 
-        public static AuditPropertyPair GetCreateAuditProperty(IUserAuthenticationService userAuthenticationService, IDateTimeService dateTimeService) => new AuditPropertyPair(obj => obj.CreatedBy, obj => obj.CreateDate, userAuthenticationService, dateTimeService);
+        public static AuditPropertyPair GetCreateAuditProperty(IUserAuthenticationService userAuthenticationService, IDateTimeService dateTimeService) => new AuditPropertyPair(userAuthenticationService, dateTimeService, obj => obj.CreatedBy, obj => obj.CreateDate);
 
-        public static AuditPropertyPair GetModifyAuditProperty(IUserAuthenticationService userAuthenticationService, IDateTimeService dateTimeService) => new AuditPropertyPair(obj => obj.ModifiedBy, obj => obj.ModifyDate, userAuthenticationService, dateTimeService);
+        public static AuditPropertyPair GetModifyAuditProperty(IUserAuthenticationService userAuthenticationService, IDateTimeService dateTimeService) => new AuditPropertyPair(userAuthenticationService, dateTimeService, obj => obj.ModifiedBy, obj => obj.ModifyDate);
     }
 }

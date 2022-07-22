@@ -24,7 +24,7 @@ public static class ServiceProviderControllerExtensions
                                 };
 
 
-        foreach (var controllerType in asms.SelectMany(a => a.GetTypes()).Except(exceptControllers).Where(t => !t.IsAbstract && typeof(IApiControllerBase).IsAssignableFrom(t) && typeof(ControllerBase).IsAssignableFrom(t)))
+        foreach (var controllerType in asms.SelectMany(a => a.GetTypes()).Except(exceptControllers).Where(t => !t.IsAbstract && typeof(ControllerBase).IsAssignableFrom(t)))
         {
             services.AddScoped(controllerType);
 

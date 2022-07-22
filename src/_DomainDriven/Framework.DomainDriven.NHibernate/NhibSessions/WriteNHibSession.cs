@@ -5,8 +5,12 @@ using System.Linq;
 using System.Transactions;
 
 using Framework.Core;
+using Framework.DomainDriven.Audit;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DAL.Revisions;
+using Framework.DomainDriven.NHibernate.Audit;
+
+using JetBrains.Annotations;
 
 using NHibernate;
 using NHibernate.Event;
@@ -16,66 +20,94 @@ using IsolationLevel = System.Transactions.IsolationLevel;
 
 namespace Framework.DomainDriven.NHibernate
 {
-    public class WriteNHibSession : NHibSession
+    public class WriteNHibSession : NHibSessionBase
     {
+        private readonly IDBSessionEventListener eventListener;
+
+        [NotNull]
+        private readonly AuditPropertyPair modifyAuditProperties;
+
+        [NotNull]
+        private readonly AuditPropertyPair createAuditProperties;
+
         private readonly ISet<ObjectModification> modifiedObjectsFromLogic = new HashSet<ObjectModification>();
 
         private readonly CollectChangesEventListener collectChangedEventListener;
 
+        private readonly TransactionScope transactionScope;
+
+        private readonly ITransaction transaction;
+
         private bool manualFault;
 
-        internal WriteNHibSession(NHibSessionFactory sessionFactory)
-                : base(sessionFactory, DBSessionMode.Write)
-        {
-            this.SessionFactory = sessionFactory ?? throw new ArgumentNullException(nameof(sessionFactory));
+        private bool closed;
 
+        internal WriteNHibSession(NHibSessionEnvironment environment,
+                                  INHibSessionSetup settings,
+                                  IDBSessionEventListener eventListener)
+                : base(environment, DBSessionMode.Write)
+        {
+            this.eventListener = eventListener;
+            this.modifyAuditProperties = settings.GetModifyAuditProperty();
+            this.createAuditProperties = settings.GetCreateAuditProperty();
             this.collectChangedEventListener = new CollectChangesEventListener();
+
+            this.transactionScope = this.Environment.EnableTransactionScope ? this.CreateTransactionScope() : null;
+
+            this.InnerSession = this.Environment.InternalSessionFactory.OpenSession();
+            this.InnerSession.FlushMode = FlushMode.Manual;
+
+            this.transaction = this.InnerSession.BeginTransaction();
+
+            this.Environment.ProcessTransaction(GetDbTransaction(this.transaction, this.InnerSession));
+
+            this.ConfigureEventListeners();
         }
 
-        private EventListeners GetOverrideEventListenersFrom(EventListeners source)
+        public override bool Closed => this.closed;
+
+        public sealed override ISession InnerSession { get; }
+
+        private void ConfigureEventListeners()
         {
-            var result = new EventListeners();
+            var sessionImplementation = this.InnerSession.GetSessionImplementation();
 
-            result.PostDeleteEventListeners =
-                    source.PostDeleteEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
-            result.PostUpdateEventListeners =
-                    source.PostUpdateEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
-            result.PostInsertEventListeners =
-                    source.PostInsertEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
+            var sessionImpl = (SessionImpl)sessionImplementation;
 
-            result.LoadEventListeners = source.LoadEventListeners;
-            result.SaveOrUpdateEventListeners = source.SaveOrUpdateEventListeners;
-            result.MergeEventListeners = source.MergeEventListeners;
-            result.PersistEventListeners = source.PersistEventListeners;
-            result.PersistOnFlushEventListeners = source.PersistOnFlushEventListeners;
-            result.ReplicateEventListeners = source.ReplicateEventListeners;
-            result.DeleteEventListeners = source.DeleteEventListeners;
-            result.AutoFlushEventListeners = source.AutoFlushEventListeners;
-            result.DirtyCheckEventListeners = source.DirtyCheckEventListeners;
-            result.FlushEventListeners = source.FlushEventListeners;
-            result.EvictEventListeners = source.EvictEventListeners;
-            result.LockEventListeners = source.LockEventListeners;
-            result.RefreshEventListeners = source.RefreshEventListeners;
-            result.FlushEntityEventListeners = source.FlushEntityEventListeners;
-            result.InitializeCollectionEventListeners = source.InitializeCollectionEventListeners;
-            result.PostLoadEventListeners = source.PostLoadEventListeners;
-            result.PreLoadEventListeners = source.PreLoadEventListeners;
-            result.PreDeleteEventListeners = source.PreDeleteEventListeners;
-            result.PreUpdateEventListeners = source.PreUpdateEventListeners;
-            result.PreInsertEventListeners = source.PreInsertEventListeners;
-            result.PostCommitDeleteEventListeners = source.PostCommitDeleteEventListeners;
-            result.PostCommitUpdateEventListeners = source.PostCommitUpdateEventListeners;
-            result.PostCommitInsertEventListeners = source.PostCommitInsertEventListeners;
-            result.PreCollectionRecreateEventListeners = source.PreCollectionRecreateEventListeners;
-            result.PostCollectionRecreateEventListeners = source.PostCollectionRecreateEventListeners;
-            result.PreCollectionRemoveEventListeners = source.PreCollectionRemoveEventListeners;
-            result.PostCollectionRemoveEventListeners = source.PostCollectionRemoveEventListeners;
-            result.PreCollectionUpdateEventListeners = source.PreCollectionUpdateEventListeners;
-            result.PostCollectionUpdateEventListeners = source.PostCollectionUpdateEventListeners;
-            result.SaveEventListeners = source.SaveEventListeners;
-            result.UpdateEventListeners = source.UpdateEventListeners;
+            sessionImpl.OverrideListeners(sessionImpl.Listeners.Clone().Self(this.InjectListeners));
 
-            return result;
+            sessionImpl.OverrideInterceptor(this.CreateInterceptor());
+        }
+
+        private void InjectListeners(EventListeners eventListeners)
+        {
+            eventListeners.PostDeleteEventListeners = eventListeners.PostDeleteEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
+            eventListeners.PostUpdateEventListeners = eventListeners.PostUpdateEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
+            eventListeners.PostInsertEventListeners = eventListeners.PostInsertEventListeners.Concat(new[] { this.collectChangedEventListener }).ToArray();
+
+            if (this.Environment.ConnectionSettings.UseEventListenerInsteadOfInterceptorForAudit)
+            {
+                var modifyAuditEventListener = new ModifyAuditEventListener(this.modifyAuditProperties);
+                var createAuditEventListener = new CreateAuditEventListener(this.createAuditProperties);
+#pragma warning restore 0618
+
+                eventListeners.PreUpdateEventListeners = eventListeners.PreUpdateEventListeners.Concat(new IPreUpdateEventListener[] { modifyAuditEventListener }).ToArray();
+                eventListeners.PreInsertEventListeners = eventListeners.PreInsertEventListeners.Concat(new IPreInsertEventListener[] { modifyAuditEventListener, createAuditEventListener }).ToArray();
+
+#pragma warning disable 0618 // Obsolete
+            }
+        }
+
+        private IInterceptor CreateInterceptor()
+        {
+            if (this.Environment.ConnectionSettings.UseEventListenerInsteadOfInterceptorForAudit)
+            {
+                return new EmptyInterceptor();
+            }
+            else
+            {
+                return new AuditInterceptor(this.createAuditProperties, this.modifyAuditProperties);
+            }
         }
 
         public override IEnumerable<ObjectModification> GetModifiedObjectsFromLogic()
@@ -89,77 +121,52 @@ namespace Framework.DomainDriven.NHibernate
                        .Where(obj => typeof(TPersistentDomainObjectBase).IsAssignableFrom(obj.ObjectType));
         }
 
-        public override void ManualFault()
+        public override void AsFault()
         {
             this.manualFault = true;
         }
 
-        public override TResult Evaluate<TResult>(Func<IDBSession, TResult> getResult)
+        public override void AsReadOnly()
         {
-            try
-            {
-                TResult result;
-
-                if (this.SessionFactory.EnableTransactionScope)
-                {
-                    using (var scope = this.CreateTransactionScope())
-                    {
-                        result = this.EvaluateInternal(getResult);
-
-                        if (!this.manualFault)
-                        {
-                            scope.Complete();
-                        }
-                    }
-                }
-                else
-                {
-                    result = this.EvaluateInternal(getResult);
-                }
-
-                return result;
-            }
-            finally
-            {
-                this.ClearClosed();
-                this.ClearFlushed();
-                this.ClearTransactionCompleted();
-            }
+            throw new InvalidOperationException("Writable session already created");
         }
 
-        protected virtual TResult EvaluateInternal<TResult>(Func<IDBSession, TResult> getResult)
+        public override void AsWritable()
         {
-            TResult result;
-            using (this.InnerSession =
-                           this.SessionFactory.InternalSessionFactory.OpenSession().Self(z => z.FlushMode = FlushMode.Never))
+        }
+
+        public override void Close()
+        {
+            if (this.closed)
             {
-                using (var currentTransaction = this.InnerSession.BeginTransaction())
-                {
-                    this.SessionFactory.ProcessTransaction(GetDbTransaction(currentTransaction, this.InnerSession));
-
-                    this.InnerSessionConfigure();
-
-                    result = getResult(this);
-
-                    if (this.manualFault)
-                    {
-                        if (!currentTransaction.WasRolledBack)
-                        {
-                            currentTransaction.Rollback();
-                        }
-                    }
-                    else
-                    {
-                        this.Flush(true);
-
-                        currentTransaction.Commit();
-                    }
-
-                    this.OnClosed(EventArgs.Empty);
-                }
+                return;
             }
 
-            return result;
+            this.closed = true;
+
+            using (this.transactionScope)
+            {
+                using (this.InnerSession)
+                {
+                    using (this.transaction)
+                    {
+                        if (this.manualFault)
+                        {
+                            if (!this.transaction.WasRolledBack)
+                            {
+                                this.transaction.Rollback();
+                            }
+                        }
+                        else
+                        {
+                            this.Flush(true);
+
+                            this.transaction.Commit();
+                            this.transactionScope?.Complete();
+                        }
+                    }
+                }
+            }
         }
 
         private static IDbTransaction GetDbTransaction(ITransaction transaction, ISession session)
@@ -172,21 +179,12 @@ namespace Framework.DomainDriven.NHibernate
             return dbCommand.Transaction;
         }
 
-        private void InnerSessionConfigure()
-        {
-            var sessionImplementation = this.InnerSession.GetSessionImplementation();
-
-            var sessionImpl = (SessionImpl)sessionImplementation;
-
-            sessionImpl.OverrideListeners(this.GetOverrideEventListenersFrom(sessionImplementation.Listeners));
-        }
-
         private TransactionScope CreateTransactionScope() =>
                 new(
                     TransactionScopeOption.Required,
                     new TransactionOptions
                     {
-                            Timeout = this.SessionFactory.TransactionTimeout,
+                            Timeout = this.Environment.TransactionTimeout,
                             IsolationLevel = IsolationLevel.Serializable
                     });
 
@@ -196,7 +194,7 @@ namespace Framework.DomainDriven.NHibernate
             this.Flush(false);
         }
 
-        private void Flush(bool withTransactionCompleted)
+        private void Flush(bool withCompleteTransaction)
         {
             try
             {
@@ -220,15 +218,17 @@ namespace Framework.DomainDriven.NHibernate
 
                         var changedEventArgs = new DALChangesEventArgs(changes);
 
-                        this.OnFlushed(changedEventArgs);
+                        // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!! Use UseTryCloseDbSession middleware
+                        this.eventListener.OnFlushed(changedEventArgs);
                     }
-                } while (this.HasFlushedListeners);
+                } while (true);
 
-                if (withTransactionCompleted)
+                if (withCompleteTransaction)
                 {
                     var beforeTransactionCompletedChangeState = dalHistory.Composite();
 
-                    this.OnBeforeTransactionCompleted(new DALChangesEventArgs(beforeTransactionCompletedChangeState));
+                    // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!!!!! Use UseTryCloseDbSession middleware
+                    this.eventListener.OnBeforeTransactionCompleted(new DALChangesEventArgs(beforeTransactionCompletedChangeState));
 
                     this.InnerSession.Flush();
 
@@ -236,7 +236,8 @@ namespace Framework.DomainDriven.NHibernate
                             new[] { beforeTransactionCompletedChangeState, this.collectChangedEventListener.EvictChanges() }
                                     .Composite();
 
-                    this.OnAfterTransactionCompleted(new DALChangesEventArgs(afterTransactionCompletedChangeState));
+                    // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!!!!! Use UseTryCloseDbSession middleware
+                    this.eventListener.OnAfterTransactionCompleted(new DALChangesEventArgs(afterTransactionCompletedChangeState));
 
                     this.InnerSession
                         .Flush(); // Флашим для того, чтобы проверить, что никто ничего не менял в объектах после AfterTransactionCompleted-евента
@@ -249,7 +250,7 @@ namespace Framework.DomainDriven.NHibernate
             }
             catch (Exception e)
             {
-                var result = this.SessionFactory.ExceptionProcessor.Process(e);
+                var result = this.Environment.ExceptionProcessor.Process(e);
 
                 if (result == e)
                 {
@@ -262,7 +263,7 @@ namespace Framework.DomainDriven.NHibernate
             }
         }
 
-        public override void RegisterModifited<T>(T @object, ModificationType modificationType)
+        public override void RegisterModified<T>(T @object, ModificationType modificationType)
         {
             this.modifiedObjectsFromLogic.Add(new ObjectModification(@object, typeof(T), modificationType));
         }

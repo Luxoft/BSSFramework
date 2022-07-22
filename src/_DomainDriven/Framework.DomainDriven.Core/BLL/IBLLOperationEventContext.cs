@@ -3,13 +3,13 @@
     /// <summary>
     /// Интерфейс объекта содержащего контейнер слушателей BLL-ных событий
     /// </summary>
-    /// <typeparam name="TDomainObjectBase">Тип доменного объекта</typeparam>
-    public interface IBLLOperationEventContext<in TDomainObjectBase>
-        where TDomainObjectBase : class
+    /// <typeparam name="TPersistentDomainObjectBase">Тип доменного объекта</typeparam>
+    public interface IBLLOperationEventContext<in TPersistentDomainObjectBase>
+        where TPersistentDomainObjectBase : class
     {
         /// <summary>
-        /// Возвращается контейнер слушателей BLL-ных событий
+        /// Возвращается контейнер отправителя BLL-ных событий
         /// </summary>
-        IBLLOperationEventListenerContainer<TDomainObjectBase> OperationListeners { get; }
+        IOperationEventSenderContainer<TPersistentDomainObjectBase> OperationSenders { get; }
     }
 }

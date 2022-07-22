@@ -13,7 +13,7 @@ using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.ServiceModel.IAD
 {
-    public class DenormalizeHierarchicalDALListener<TBLLContext, TPersistentDomainObjectBase, TNamedLockObject, TNamedLockOperation> : BLLContextContainer<TBLLContext>, IDALListener
+    public class DenormalizeHierarchicalDALListener<TBLLContext, TPersistentDomainObjectBase, TNamedLockObject, TNamedLockOperation> : BLLContextContainer<TBLLContext>, IBeforeTransactionCompletedDALListener
 
         where TBLLContext : class, IBLLBaseContextBase<TPersistentDomainObjectBase, Guid>, ITrackingServiceContainer<TPersistentDomainObjectBase>
         where TPersistentDomainObjectBase : class, IIdentityObject<Guid>

@@ -2,7 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-using Framework.Core.Services;
 using Framework.DomainDriven.Audit;
 
 using NHibernate.Event;
@@ -15,10 +14,7 @@ namespace Framework.DomainDriven.NHibernate.Audit
         public ModifyAuditEventListener(IEnumerable<IAuditProperty> auditProperties)
             : base(auditProperties)
         {
-
         }
-
-        public static ModifyAuditEventListener Create(IUserAuthenticationService userAuthenticationService, IDateTimeService dateTimeService) => new ModifyAuditEventListener(AuditPropertyPair.GetCreateAuditProperty(userAuthenticationService, dateTimeService));
 
         public Task<bool> OnPreInsertAsync(PreInsertEvent @event, CancellationToken cancellationToken)
         {

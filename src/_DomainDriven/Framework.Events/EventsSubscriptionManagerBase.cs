@@ -1,25 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Framework.Core;
 using Framework.DomainDriven.BLL;
+using Framework.Events;
 
 using JetBrains.Annotations;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Events
 {
     /// <summary>
     /// Класс для описания правил подписок на доменные евенты
     /// </summary>
-    /// <typeparam name="TBLLContext"></typeparam>
     /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
-    public abstract class EventsSubscriptionManagerBase<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<TBLLContext>, IEventsSubscriptionManager<TBLLContext, TPersistentDomainObjectBase>
+    public abstract class EventsSubscriptionManagerBase<TPersistentDomainObjectBase> : IOperationEventListener<TPersistentDomainObjectBase>
         where TPersistentDomainObjectBase : class
-        where TBLLContext : class, IBLLOperationEventContext<TPersistentDomainObjectBase>
     {
-        protected EventsSubscriptionManagerBase(TBLLContext context, [NotNull] IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender)
-            : base(context)
+        private readonly IServiceCollection sc = new ServiceCollection();
+
+        private readonly Lazy<IServiceProvider> cache;
+
+        protected EventsSubscriptionManagerBase([NotNull] IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender)
         {
             this.MessageSender = messageSender ?? throw new ArgumentNullException(nameof(messageSender));
+
+            this.cache = new Lazy<IServiceProvider>(this.BuildCache);
         }
 
         protected IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> MessageSender { get; }
@@ -39,29 +46,81 @@ namespace Framework.Events
             this.Subscribe<TDomainObject>(z => true, z => z == BLLBaseOperation.Save || z == BLLBaseOperation.Remove);
         }
 
-        protected void Subscribe<TDomainObject>(Func<TDomainObject, bool> filter, Func<BLLBaseOperation, bool> operationsFilter)
+        protected void Subscribe<TDomainObject>(Func<TDomainObject, bool> domainObjectFilter, Func<BLLBaseOperation, bool> operationFilter)
             where TDomainObject : class, TPersistentDomainObjectBase
         {
-            this.Subscribe<TDomainObject, BLLBaseOperation>(filter, operationsFilter);
+            this.Subscribe<TDomainObject, BLLBaseOperation>(domainObjectFilter, operationFilter);
         }
 
-        protected void Subscribe<TDomainObject, TOperation>(Func<TDomainObject, bool> filter, Func<TOperation, bool> operationsFilter)
+        protected void Subscribe<TDomainObject, TOperation>(
+                Func<TDomainObject, bool> domainObjectFilter,
+                Func<TOperation, bool> operationFilter)
             where TDomainObject : class, TPersistentDomainObjectBase
             where TOperation : struct, Enum
         {
-            this.Context.OperationListeners.GetEventListener<TDomainObject, TOperation>().OperationProcessed += (_, eventArgs) =>
+            var listener = new Listener<TDomainObject, TOperation>()
+                           {
+                                   Filter = (domainObject, operation) => domainObjectFilter(domainObject) && operationFilter(operation),
+                                   CreateMessage = (domainObject, operation) => new DomainOperationSerializeData<TDomainObject, TOperation>
+                                                                             {
+                                                                                     DomainObject = domainObject,
+                                                                                     Operation = operation
+                                                                             }
+                           };
+
+            this.sc.AddSingleton(listener);
+        }
+
+        protected void SubscribeCustom<TDomainObject, TOperation>(
+                Func<TDomainObject, bool> domainObjectFilter,
+                Func<TOperation, bool> operationFilter,
+                Func<TDomainObject, object> convertFunc)
+                where TDomainObject : class, TPersistentDomainObjectBase
+                where TOperation : struct, Enum
+        {
+            var listener = new Listener<TDomainObject, TOperation>()
+                           {
+                                   Filter = (domainObject, operation) => domainObjectFilter(domainObject) && operationFilter(operation),
+                                   CreateMessage = (domainObject, operation) => new DomainOperationSerializeData<TDomainObject, TOperation>
+                                                                             {
+                                                                                     DomainObject = domainObject,
+                                                                                     Operation = operation,
+                                                                                     CustomSendObject = convertFunc(domainObject)
+                                   }
+                           };
+
+            this.sc.AddSingleton(listener);
+        }
+
+        private IServiceProvider BuildCache()
+        {
+            this.Subscribe();
+
+            return this.sc.BuildServiceProvider();
+        }
+
+        public virtual void OnFired<TDomainObject, TOperation>(IDomainOperationEventArgs<TDomainObject, TOperation> eventArgs)
+                where TDomainObject : class, TPersistentDomainObjectBase
+                where TOperation : struct, Enum
+        {
+            this.cache.Value.GetRequiredService<IEnumerable<Listener<TDomainObject, TOperation>>>().Foreach(listener =>
             {
-                if (filter(eventArgs.DomainObject) && operationsFilter(eventArgs.Operation))
+                if (listener.Filter(eventArgs.DomainObject, eventArgs.Operation))
                 {
-                    var message = new DomainOperationSerializeData<TDomainObject, TOperation>
-                    {
-                        DomainObject = eventArgs.DomainObject,
-                        Operation = eventArgs.Operation
-                    };
+                    var message = listener.CreateMessage(eventArgs.DomainObject, eventArgs.Operation);
 
                     this.MessageSender.Send(message);
                 }
-            };
+            });
+        }
+
+        private class Listener<TDomainObject, TOperation>
+                where TDomainObject : class
+                where TOperation : struct, Enum
+        {
+            public Func<TDomainObject, TOperation, bool> Filter { get; set; }
+
+            public Func<TDomainObject, TOperation, DomainOperationSerializeData<TDomainObject, TOperation>> CreateMessage { get; set; }
         }
     }
 }

@@ -18,6 +18,8 @@ import { Core } from 'luxite/framework/framework';
 import * as dto from '../dto/entities.generated';
 import * as persistent from '../../app/common/HierarchicalNode';
 
+export let asyncGetLocationsAsyncFunc = _asyncGetLocations();
+export let asyncSaveLocationAsyncFunc = _asyncSaveLocation();
 export let changeEmployeeByComplexAsyncFunc = _changeEmployeeByComplex();
 export let changeEmployeeByEmailAsyncFunc = _changeEmployeeByEmail();
 export let checkBusinessUnitAccessAsyncFunc = _checkBusinessUnitAccess();
@@ -592,13 +594,29 @@ export let testPeriodAsyncFunc = _testPeriod();
 export let updateEmployeeAsyncFunc = _updateEmployee();
 export let updateExample1AsyncFunc = _updateExample1();
 
-function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeModelStrictDTO, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO> {
-    return new async.AsyncFunc3((employeeChangeModel: dto.EmployeeComplexChangeModelStrictDTO) => {
-        let baseParameters = employeeChangeModel.toNativeJson();
-        let service = Environment.current.context.facadeFactory.createService<dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO>();
-        return service.getData('Employee/ChangeEmployeeByComplex', {plain : dto.EmployeeIdentityDTO, observable : dto.EmployeeObservableIdentityDTO}, baseParameters);
+function _asyncGetLocations(): async.AsyncFunc3<CancellationToken, Task<Array<dto.LocationSimpleDTO>>, Task<Array<dto.LocationObservableSimpleDTO>>, dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO> {
+    return new async.AsyncFunc3((cancellationToken: CancellationToken) => {
+        let baseParameters = cancellationToken;
+        let service = Environment.current.context.facadeFactory.createService<Task<Array<dto.LocationSimpleDTO>>, Task<Array<dto.LocationObservableSimpleDTO>>, dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO>();
+        return service.getData('TestAsync/AsyncGetLocations', {plain : dto.LocationSimpleDTO, observable : dto.LocationObservableSimpleDTO}, baseParameters);
     });
 }
+
+    function _asyncSaveLocation(): async.AsyncFunc4<dto.LocationStrictDTO, CancellationToken, Task<dto.LocationIdentityDTO>, Task<dto.LocationObservableIdentityDTO>, dto.LocationIdentityDTO, dto.LocationObservableIdentityDTO> {
+        return new async.AsyncFunc4((businessUnitStrictDTO: dto.LocationStrictDTO, cancellationToken: CancellationToken) => {
+            let baseParameters = {businessUnitStrictDTO : businessUnitStrictDTO.toNativeJson(), cancellationToken : cancellationToken};
+            let service = Environment.current.context.facadeFactory.createService<Task<dto.LocationIdentityDTO>, Task<dto.LocationObservableIdentityDTO>, dto.LocationIdentityDTO, dto.LocationObservableIdentityDTO>();
+            return service.getData('TestAsync/AsyncSaveLocation', {plain : dto.LocationIdentityDTO, observable : dto.LocationObservableIdentityDTO}, baseParameters);
+        });
+    }
+
+    function _changeEmployeeByComplex(): async.AsyncFunc3<dto.EmployeeComplexChangeModelStrictDTO, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO> {
+        return new async.AsyncFunc3((employeeChangeModel: dto.EmployeeComplexChangeModelStrictDTO) => {
+            let baseParameters = employeeChangeModel.toNativeJson();
+            let service = Environment.current.context.facadeFactory.createService<dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO>();
+            return service.getData('Employee/ChangeEmployeeByComplex', {plain : dto.EmployeeIdentityDTO, observable : dto.EmployeeObservableIdentityDTO}, baseParameters);
+        });
+    }
 
     function _changeEmployeeByEmail(): async.AsyncFunc3<dto.EmployeeEmailChangeModelStrictDTO, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO> {
         return new async.AsyncFunc3((employeeChangeModel: dto.EmployeeEmailChangeModelStrictDTO) => {

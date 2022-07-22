@@ -3,10 +3,12 @@ using System.Data;
 using System.Linq;
 
 using Framework.Cap.Abstractions;
+using Framework.Core;
 using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.NHibernate;
+using Framework.DomainDriven.NHibernate.Audit;
 
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
@@ -52,12 +54,11 @@ namespace SampleSystem.DbGenerate
 
             services.AddDatabaseSettings(connectionString);
 
-            services.AddSingleton<IDateTimeService>(DateTimeService.Default);
-            services.AddSingleton(UserAuthenticationService.CreateFor("neg"));
+            services.AddSingleton(_ => LazyInterfaceImplementHelper.CreateNotImplemented<IAuditRevisionUserAuthenticationService>());
             services.AddSingleton<ICapTransactionManager, FakeCapTransactionManager>();
             var provider = services.BuildServiceProvider(false);
 
-            var dbSessionFactory = (NHibSessionFactory) provider.GetService<IDBSessionFactory>();
+            var dbSessionFactory = provider.GetService<NHibSessionEnvironment>();
             var cfg = dbSessionFactory?.Configuration;
 
             var migrate = new SchemaUpdate(cfg);

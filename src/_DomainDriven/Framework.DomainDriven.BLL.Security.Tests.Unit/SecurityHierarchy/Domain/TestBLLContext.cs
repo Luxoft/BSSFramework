@@ -69,7 +69,7 @@ namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain
 
         public HierarchyDomainAncestorLogic HierarchyDomainAncestorLogic => this._hierarchyDomainAncestorLogic;
 
-        public IBLLOperationEventListenerContainer<DomainObjectBase> OperationListeners => new BLLOperationEventListenerContainer<DomainObjectBase>();
+        public IOperationEventSenderContainer<PersistentDomainObjectBase> OperationSenders => new OperationEventSenderContainer<DomainObjectBase>(new List<IOperationEventListener<DomainObjectBase>>());
 
         public BLLSourceEventListenerContainer<PersistentDomainObjectBase> SourceListeners => new BLLSourceEventListenerContainer<PersistentDomainObjectBase>();
 

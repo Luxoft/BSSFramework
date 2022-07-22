@@ -10,7 +10,7 @@ namespace Framework.Core
             if (messageSender == null) throw new ArgumentNullException(nameof(messageSender));
             if (selector == null) throw new ArgumentNullException(nameof(selector));
 
-            return new ActionMessageSender<TNewSource>((newSource, transactionMode)=> messageSender.Send(selector(newSource), transactionMode));
+            return new ActionMessageSender<TNewSource>((newSource) => messageSender.Send(selector(newSource)));
         }
 
 
@@ -19,13 +19,13 @@ namespace Framework.Core
         {
             if (messageSender == null) throw new ArgumentNullException(nameof(messageSender));
 
-            return new ActionMessageSender<TMessage>((message, transactionMessageMode) =>
+            return new ActionMessageSender<TMessage>((message) =>
             {
                 if (message == null) throw new ArgumentNullException(nameof(message));
 
                 try
                 {
-                    messageSender.Send(message, transactionMessageMode);
+                    messageSender.Send(message);
                 }
                 catch
                 {
@@ -34,18 +34,18 @@ namespace Framework.Core
             });
         }
 
-        public static IMessageSender<TMessage> WithWrite<TMessage>(this IMessageSender<TMessage> messageSender, Action<TMessage, TransactionMessageMode> write)
+        public static IMessageSender<TMessage> WithWrite<TMessage>(this IMessageSender<TMessage> messageSender, Action<TMessage> write)
         {
             if (messageSender == null) throw new ArgumentNullException(nameof(messageSender));
             if (write == null) throw new ArgumentNullException(nameof(write));
 
-            return new ActionMessageSender<TMessage>((message, transactionMessageMode) =>
+            return new ActionMessageSender<TMessage>((message) =>
             {
                 if (message == null) throw new ArgumentNullException(nameof(message));
 
-                write(message, transactionMessageMode);
+                write(message);
 
-                messageSender.Send(message, transactionMessageMode);
+                messageSender.Send(message);
             });
         }
 
@@ -53,18 +53,18 @@ namespace Framework.Core
         {
             if (messageSender == null) throw new ArgumentNullException(nameof(messageSender));
 
-            return messageSender.WithWrite((message, transactionMessageMode) => System.Diagnostics.Trace.Write(
-                $"Sending: mode:{transactionMessageMode} message: {message}"));
+            return messageSender.WithWrite((message) => System.Diagnostics.Trace.Write(
+                $"Sending: message: {message}"));
         }
 
 
 
         private class ActionMessageSender<TMessage> : IMessageSender<TMessage>
         {
-            private readonly Action<TMessage, TransactionMessageMode> _sendAction;
+            private readonly Action<TMessage> _sendAction;
 
 
-            public ActionMessageSender(Action<TMessage, TransactionMessageMode> sendAction)
+            public ActionMessageSender(Action<TMessage> sendAction)
             {
                 if (sendAction == null) throw new ArgumentNullException(nameof(sendAction));
 
@@ -72,9 +72,9 @@ namespace Framework.Core
             }
 
 
-            public void Send(TMessage message, TransactionMessageMode transactionMessageMode)
+            public void Send(TMessage message)
             {
-                this._sendAction(message, transactionMessageMode);
+                this._sendAction(message);
             }
         }
     }

@@ -1,8 +1,6 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.ServiceModel;
-using Framework.DomainDriven.ServiceModel.Service;
 using Framework.Notification.DTO;
 using Framework.NotificationCore.Jobs;
 using Framework.NotificationCore.Senders;
@@ -10,22 +8,21 @@ using Framework.NotificationCore.Services;
 using Framework.NotificationCore.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
 
 namespace Framework.DependencyInjection
 {
     public static class NotificationSenderExtensions
     {
-        public static void RegisterMessageSenderDependencies<TEnvironment, TBLLContext>(
+        public static void RegisterMessageSenderDependencies<TBLLContext>(
             this IServiceCollection services,
             IConfiguration configuration)
-            where TEnvironment : IServiceEnvironment<TBLLContext>
             where TBLLContext : IConfigurationBLLContextContainer<IConfigurationBLLContext>
         {
             services.Configure<SmtpSettings>(configuration.GetSection("SmtpSettings"));
             services.AddScoped<ISendNotificationsJob, SendNotificationsJob<TBLLContext>>();
             services.AddSingleton<IMessageSender<NotificationEventDTO>, EmptyMessageSender>();
-            services.AddSingleton<INotificationContext, NotificationCore.Senders.NotificationContext>();
         }
 
         /// <summary>

@@ -9,10 +9,8 @@ using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.Events;
-using Framework.Exceptions;
 using Framework.Notification;
 using Framework.Persistent;
-using Framework.SecuritySystem;
 
 using JetBrains.Annotations;
 
@@ -89,13 +87,13 @@ namespace Framework.Configuration.BLL
 
             var operation = EnumHelper.Parse<TOperation>(operationName);
 
-            var listener = this.TargetSystemContext.OperationListeners.GetEventListener<TDomainObject, TOperation>();
+            var listener = this.TargetSystemContext.OperationSenders.GetEventSender<TDomainObject, TOperation>();
 
-            listener.ForceEvent(domainObject, operation);
+            listener.SendEvent(domainObject, operation);
 
             operation.ToOperationMaybe<TOperation, EventOperation>().Match(
                 eventOperation =>
-                    this.eventDalListeners.Foreach(dalListener => dalListener.GetForceEventContainer<TDomainObject>().ForceEvent(domainObject, eventOperation)));
+                    this.eventDalListeners.Foreach(dalListener => dalListener.GetForceEventContainer<TDomainObject>().SendEvent(domainObject, eventOperation)));
         }
 
         public override bool IsAssignable(Type domainType)

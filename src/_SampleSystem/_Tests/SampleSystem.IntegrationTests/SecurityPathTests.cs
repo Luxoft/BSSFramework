@@ -17,6 +17,7 @@ using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests
@@ -31,7 +32,7 @@ namespace SampleSystem.IntegrationTests
             var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
 
             // Act
-            var result = this.Environment.GetContextEvaluator().Evaluate(
+            var result = this.GetContextEvaluator().Evaluate(
                 DBSessionMode.Read,
                 context =>
                 {

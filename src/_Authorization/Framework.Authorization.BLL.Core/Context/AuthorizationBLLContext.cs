@@ -15,9 +15,7 @@ using Framework.DomainDriven.BLL.Tracking;
 using Framework.HierarchicalExpand;
 using Framework.Projection;
 using Framework.QueryLanguage;
-using Framework.Security;
 using Framework.SecuritySystem;
-using Framework.Validation;
 
 using JetBrains.Annotations;
 
@@ -31,26 +29,21 @@ namespace Framework.Authorization.BLL
 
         private readonly Lazy<Settings> lazySettings;
 
-        private readonly Func<string, IAuthorizationBLLContext> impersonateFunc;
-
         private readonly IDictionaryCache<string, EntityType> entityTypeByNameCache;
 
         private readonly IDictionaryCache<Guid, EntityType> entityTypeByIdCache;
 
         private readonly ISecurityProvider<Operation> operationSecurityProvider;
 
-        private static readonly ITypeResolver<string> CurrentTargetSystemTypeResolver =
-            TypeSource.FromSample<PersistentDomainObjectBase>().ToDefaultTypeResolver();
-
         public AuthorizationBLLContext(
             [NotNull] IServiceProvider serviceProvider,
             [NotNull] IDALFactory<PersistentDomainObjectBase, Guid> dalFactory,
-            [NotNull] BLLOperationEventListenerContainer<DomainObjectBase> operationListeners,
+            [NotNull] IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
             [NotNull] BLLSourceEventListenerContainer<PersistentDomainObjectBase> sourceListeners,
             [NotNull] IObjectStateService objectStateService,
             [NotNull] IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
             [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
-            [NotNull] IValidator validator,
+            [NotNull] IAuthorizationValidator validator,
             [NotNull] IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
             [NotNull] IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
             [NotNull] IDateTimeService dateTimeService,
@@ -61,35 +54,33 @@ namespace Framework.Authorization.BLL
             [NotNull] IAuthorizationBLLFactoryContainer logics,
             [NotNull] IAuthorizationExternalSource externalSource,
             [NotNull] IRunAsManager runAsManager,
-            [NotNull] Func<string, IAuthorizationBLLContext> impersonateFunc,
-            [NotNull] ITypeResolver<string> securityTypeResolver)
+            [NotNull] ISecurityTypeResolverContainer securityTypeResolverContainer,
+            [NotNull] IAuthorizationBLLContextSettings settings)
             : base(
                 serviceProvider,
                 dalFactory,
-                operationListeners,
+                operationSenders,
                 sourceListeners,
                 objectStateService,
                 accessDeniedExceptionService,
                 standartExpressionBuilder,
                 validator,
                 hierarchicalObjectExpanderFactory,
-                fetchService,
-                dateTimeService)
+                fetchService)
         {
+            this.DateTimeService = dateTimeService;
             this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
             this.SecurityService = securityService ?? throw new ArgumentNullException(nameof(securityService));
             this.logics = logics ?? throw new ArgumentNullException(nameof(logics));
             this.ExternalSource = externalSource ?? throw new ArgumentNullException(nameof(externalSource));
             this.RunAsManager = runAsManager ?? throw new ArgumentNullException(nameof(runAsManager));
-
-            this.impersonateFunc = impersonateFunc ?? throw new ArgumentNullException(nameof(impersonateFunc));
             this.Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
             this.lazyCurrentPrincipal = LazyHelper.Create(() => this.Logics.Principal.GetCurrent());
 
             this.CurrentPrincipalName = userAuthenticationService.GetUserName();
 
-            this.SecurityTypeResolver = securityTypeResolver.OverrideInput((EntityType entityType) => entityType.Name);
+            this.SecurityTypeResolver = securityTypeResolverContainer.SecurityTypeResolver.OverrideInput((EntityType entityType) => entityType.Name);
 
             this.lazySettings = LazyHelper.Create(() => this.Logics.Default.Create<Setting>().GetFullList().ToSettings());
 
@@ -103,34 +94,34 @@ namespace Framework.Authorization.BLL
                 .WithLock();
 
             this.operationSecurityProvider = new OperationSecurityProvider(this);
+
+            this.TypeResolver = settings.TypeResolver;
         }
 
-        public IConfigurationBLLContext Configuration { get; private set; }
+        public IConfigurationBLLContext Configuration { get; }
 
-        public ITypeResolver<string> TypeResolver => CurrentTargetSystemTypeResolver;
+        public ITypeResolver<string> TypeResolver { get; }
 
-        public ITypeResolver<EntityType> SecurityTypeResolver { get; private set; }
+        public ITypeResolver<EntityType> SecurityTypeResolver { get; }
 
-        public IRunAsManager RunAsManager { get; private set; }
+        public IRunAsManager RunAsManager { get; }
 
-        public string CurrentPrincipalName { get; private set; }
+        public string CurrentPrincipalName { get; }
 
-        public IAuthorizationSecurityService SecurityService { get; private set; }
+        public IAuthorizationSecurityService SecurityService { get; }
 
         public Settings Settings => this.lazySettings.Value;
 
         public override IAuthorizationBLLFactoryContainer Logics => this.logics;
 
-        public IAuthorizationExternalSource ExternalSource { get; private set; }
+        public IAuthorizationExternalSource ExternalSource { get; }
 
         public Principal CurrentPrincipal => this.lazyCurrentPrincipal.Value;
 
-        public ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory { get; private set; }
+        [NotNull]
+        public IDateTimeService DateTimeService { get; }
 
-        public IAuthorizationBLLContext Impersonate(string principalName)
-        {
-            return this.impersonateFunc(principalName);
-        }
+        public ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory { get; }
 
         public EntityType GetEntityType(Type type)
         {

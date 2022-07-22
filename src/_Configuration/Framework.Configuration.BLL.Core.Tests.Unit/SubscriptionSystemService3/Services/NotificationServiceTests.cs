@@ -60,7 +60,7 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
 
             var template = new MessageTemplateNotification("test", this, this.GetType(), new string[0], new string[0], new string[0], null);
 
-            this.templateSender.Send(template, TransactionMessageMode.Auto);
+            this.templateSender.Send(template);
 
             this.subscriptionsResolver.Resolve(versions).Returns(subscriptions);
 
@@ -84,7 +84,7 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
 
             var subscriptions = this.Fixture.CreateMany<Subscription>(1).ToList();
             var subscription = subscriptions.Single();
-            
+
             var template = new MessageTemplateNotification("test", this, this.GetType(), new string[0], new string[0], new string[0], null, subscription);
 
             this.templateFactory.Create(Arg.Is<List<Subscription>>(v => v.SequenceEqual(subscriptions)), versions).Returns(new List<MessageTemplateNotification> { template });
@@ -97,7 +97,7 @@ namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
 
             this.templateFactory.Received().Create(Arg.Is<List<Subscription>>(v => v.SequenceEqual(subscriptions)), versions);
 
-            this.templateSender.Received().Send(template, TransactionMessageMode.Auto);
+            this.templateSender.Received().Send(template);
         }
 
         [Test]

@@ -12,6 +12,7 @@ using Framework.Validation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests
@@ -45,7 +46,7 @@ namespace SampleSystem.IntegrationTests
                 type: buTypeId,
                 parent: luxoftBuId);
 
-            this.DataHelper.Environment.GetContextEvaluator().Evaluate(
+            this.GetContextEvaluator().Evaluate(
                 DBSessionMode.Write,
                 context =>
                 {
@@ -86,7 +87,7 @@ namespace SampleSystem.IntegrationTests
             // Act
             Action call = () =>
             {
-                this.DataHelper.Environment.GetContextEvaluator().Evaluate(
+                this.GetContextEvaluator().Evaluate(
                     DBSessionMode.Write,
                     context =>
                     {

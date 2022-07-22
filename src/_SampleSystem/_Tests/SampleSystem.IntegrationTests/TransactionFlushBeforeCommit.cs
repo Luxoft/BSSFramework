@@ -4,6 +4,7 @@ using FluentAssertions;
 using Framework.DomainDriven.BLL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SampleSystem.Domain;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests.IADFRAME_1694
@@ -16,14 +17,14 @@ namespace SampleSystem.IntegrationTests.IADFRAME_1694
         {
             // Arrange
             var object1 = new Information { Name = "object1", Email = "email@luxoft.fake" };
-            this.Environment.GetContextEvaluator().Evaluate(
+            this.GetContextEvaluator().Evaluate(
                 DBSessionMode.Write,
                 context => context.Logics.Information.Insert(object1, Guid.NewGuid()));
 
             var object2 = new Information { Name = "object2", Email = object1.Email };
 
             // Act
-            this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
                                                            {
                                                                context.Logics.Information.Insert(object2, Guid.NewGuid());
 
@@ -33,7 +34,7 @@ namespace SampleSystem.IntegrationTests.IADFRAME_1694
                                                            });
 
             // Assert
-            this.Environment.GetContextEvaluator().Evaluate(
+            this.GetContextEvaluator().Evaluate(
                     DBSessionMode.Read,
                     context => context.Logics.Information.GetUnsecureQueryable().Single(x => x.Email == object1.Email))
                 .Name

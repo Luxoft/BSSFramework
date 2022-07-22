@@ -6,29 +6,9 @@ using Framework.Persistent;
 
 namespace Framework.DomainDriven.BLL
 {
-    public interface IDBSession
+    public interface IDBSession : ICurrentRevisionService, IDisposable
     {
-        event EventHandler Closed;
-
-        [Obsolete("Use AfterTransactionCompleted", true)]
-        event EventHandler<DALChangesEventArgs> TransactionCompleted;
-
-        /// <summary>
-        /// Евент срабатывает циклично, пока происходят изменения доменных объектов
-        /// </summary>
-        event EventHandler<DALChangesEventArgs> Flushed;
-
-        /// <summary>
-        /// Евент срабатывает только 1 раз перед закрытием сессии, изменения в базу в этот момент разрешены
-        /// </summary>
-        event EventHandler<DALChangesEventArgs> BeforeTransactionCompleted;
-
-        /// <summary>
-        /// Евент срабатывает только 1 раз перед закрытием сессии, изменения в базу в этот момент запрещены
-        /// </summary>
-        event EventHandler<DALChangesEventArgs> AfterTransactionCompleted;
-
-        TResult Evaluate<TResult>(Func<IDBSession, TResult> getResult);
+        DBSessionMode SessionMode { get; }
 
         IObjectStateService GetObjectStateService();
 
@@ -40,12 +20,6 @@ namespace Framework.DomainDriven.BLL
         /// </summary>
         void Flush();
 
-        /// <summary>
-        /// Получение текущей ревизии из аудита (пока возвращает 0, если вызван до флаша сессии)
-        /// </summary>
-        /// <returns></returns>
-        long GetCurrentRevision();
-
         IEnumerable<ObjectModification> GetModifiedObjectsFromLogic();
 
         IEnumerable<ObjectModification> GetModifiedObjectsFromLogic<TPersistentDomainObjectBase>();
@@ -53,12 +27,24 @@ namespace Framework.DomainDriven.BLL
         /// <summary>
         /// Закрывает текущую транзакцию без применения изменений.
         /// </summary>
-        void ManualFault();
+        void AsFault();
 
         /// <summary>
         /// Gets the maximum audit revision.
         /// </summary>
         /// <returns>System.Int64.</returns>
         long GetMaxRevision();
+
+        /// <summary>
+        /// Перевод сессию в режим "только для чтения" (доступно только перед фактическим использованием сессии)
+        /// </summary>
+        void AsReadOnly();
+
+        /// <summary>
+        /// Переводит сессию в режим для записи (доступно только перед фактическим использованием сессии)
+        /// </summary>
+        void AsWritable();
+
+        void Close();
     }
 }

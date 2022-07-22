@@ -18,24 +18,24 @@ using Framework.Validation;
 
 namespace Framework.CustomReports.WebApi
 {
-    public abstract class ReportDefinitionServiceEnvironment<TServiceEnvironment, TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>
+    public abstract class ReportDefinitionServiceEnvironment<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>
 
-    : IReportServiceContainer<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>,
-        IServiceEnvironment<TBLLContext>,
-        ISystemMetadataTypeBuilderContainer
+        where TBLLContext : IConfigurationBLLContextContainer<Framework.Configuration.BLL.IConfigurationBLLContext>, IAuthorizationBLLContextContainer<IAuthorizationBLLContext>,
+            IBLLFactoryContainerContext<IBLLFactoryContainer<IDefaultSecurityBLLFactory<TPersistentDomainObjectBase, TSecurityOperationCode, Guid>>>,
+            ISecurityServiceContainer<IRootSecurityService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>>,
+            IFetchServiceContainer<TPersistentDomainObjectBase, Framework.DomainDriven.FetchBuildRule>, IValidatorContainer, ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode>
 
-    where TBLLContext : IConfigurationBLLContextContainer<Framework.Configuration.BLL.IConfigurationBLLContext>, IAuthorizationBLLContextContainer<IAuthorizationBLLContext>,
-    IBLLFactoryContainerContext<IBLLFactoryContainer<IDefaultSecurityBLLFactory<TPersistentDomainObjectBase, TSecurityOperationCode, Guid>>>,
-    ISecurityServiceContainer<IRootSecurityService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>>,
-    IFetchServiceContainer<TPersistentDomainObjectBase, Framework.DomainDriven.FetchBuildRule>, IValidatorContainer, ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> where TServiceEnvironment : class, IServiceEnvironment<TBLLContext>, ISystemMetadataTypeBuilderContainer
-    where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
-    where TSecurityOperationCode : struct, Enum
+        where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
+        where TSecurityOperationCode : struct, Enum
     {
-        private readonly TServiceEnvironment _serviceEnvironment;
+        private readonly ISystemMetadataTypeBuilder systemMetadataTypeBuilder;
 
-        protected ReportDefinitionServiceEnvironment(TServiceEnvironment serviceEnvironment, CustomReportAssembly customReportAssembly)
+        private readonly IContextEvaluator<TBLLContext> contextEvaluator;
+
+        protected ReportDefinitionServiceEnvironment(ISystemMetadataTypeBuilder systemMetadataTypeBuilder, IContextEvaluator<TBLLContext> contextEvaluator, CustomReportAssembly customReportAssembly)
         {
-            this._serviceEnvironment = serviceEnvironment;
+            this.systemMetadataTypeBuilder = systemMetadataTypeBuilder;
+            this.contextEvaluator = contextEvaluator;
 
             var links = new CustomReportParameterLinkService(customReportAssembly).GetLinks();
 
@@ -70,44 +70,19 @@ namespace Framework.CustomReports.WebApi
                 z => this.GetCreateCustomReportBLL(parameterTypeToCustomReportBLL[z.Reports.First().ParameterType]));
 
 
-            this.GetSyncCustomReportService().Sync(this, customReports);
+            this.GetSyncCustomReportService().Sync(customReports);
 
 
             this.ReportService = new ReportService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>(idToCreateCustomReportDict);
-
-            this.ReportParameterValueService = new ReportParameterValueService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>();
 
         }
 
         protected virtual ISyncCustomReportService<TBLLContext, TSecurityOperationCode> GetSyncCustomReportService()
         {
-            return new SyncCustomReportService<TBLLContext, TSecurityOperationCode>(this.SystemMetadataTypeBuilder);
+            return new SyncCustomReportService<TBLLContext, TSecurityOperationCode>(this.systemMetadataTypeBuilder, this.contextEvaluator);
         }
 
-        public TServiceEnvironment ServiceEnvironment => this._serviceEnvironment;
-
-        public virtual IReportService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> ReportService
-        {
-            get;
-            private set;
-        }
-
-        public virtual IReportParameterValueService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> ReportParameterValueService
-        { get; private set; }
-
-
-        public IContextEvaluator<TBLLContext> GetContextEvaluator(IServiceProvider currentScopedServiceProvider = null) => this.ServiceEnvironment.GetContextEvaluator(currentScopedServiceProvider);
-
-        public IBLLContextContainer<TBLLContext> GetBLLContextContainer(IServiceProvider scopedServiceProvider, IDBSession session, string currentPrincipalName = null)
-        {
-            return this.ServiceEnvironment.GetBLLContextContainer(scopedServiceProvider, session, currentPrincipalName);
-        }
-
-        public IDBSessionFactory SessionFactory => this.ServiceEnvironment.SessionFactory;
-
-        public bool IsDebugMode => this.ServiceEnvironment.IsDebugMode;
-
-        public ISystemMetadataTypeBuilder SystemMetadataTypeBuilder => this.ServiceEnvironment.SystemMetadataTypeBuilder;
+        public virtual IReportService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> ReportService { get; }
 
         protected virtual Func<TBLLContext, ICustomReportEvaluator> GetCreateCustomReportBLL(Type customReportType)
         {
@@ -123,9 +98,9 @@ namespace Framework.CustomReports.WebApi
             var newExpression = Expression.New(targetConstructor, parameter);
 
 
-            var resultExpresssion = Expression.Lambda<Func<TBLLContext, ICustomReportEvaluator>>(newExpression, parameter);
+            var resultExpression = Expression.Lambda<Func<TBLLContext, ICustomReportEvaluator>>(newExpression, parameter);
 
-            var resultFunc = resultExpresssion.Compile();
+            var resultFunc = resultExpression.Compile();
 
             return resultFunc;
         }

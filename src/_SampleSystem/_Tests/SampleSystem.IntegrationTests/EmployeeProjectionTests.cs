@@ -11,6 +11,7 @@ using Framework.DomainDriven.BLL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 
@@ -51,7 +52,7 @@ namespace SampleSystem.IntegrationTests
             this.DataHelper.SaveEmployee(login: TestEmployee2Login, coreBusinessUnit: profitBuId);
             this.DataHelper.SaveEmployee(login: TestEmployee3Login, coreBusinessUnit: costBuId);
 
-            this.DataHelper.Environment.GetContextEvaluator().Evaluate(
+            this.GetContextEvaluator().Evaluate(
                 DBSessionMode.Write,
                 context =>
                 {

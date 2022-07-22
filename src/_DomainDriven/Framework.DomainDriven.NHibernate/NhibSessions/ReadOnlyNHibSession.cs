@@ -1,19 +1,28 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DAL.Revisions;
+
 using NHibernate;
 
 namespace Framework.DomainDriven.NHibernate
 {
-    internal class ReadOnlyNHibSession : NHibSession
+    internal class ReadOnlyNHibSession : NHibSessionBase
     {
-        internal ReadOnlyNHibSession(NHibSessionFactory sessionFactory) : base(sessionFactory, DBSessionMode.Read)
-        {
-            if (sessionFactory == null) throw new ArgumentNullException(nameof(sessionFactory));
+        private bool closed;
 
-            this.SessionFactory = sessionFactory;
+        internal ReadOnlyNHibSession(NHibSessionEnvironment environment)
+                : base(environment, DBSessionMode.Read)
+        {
+            this.InnerSession = this.Environment.InternalSessionFactory.OpenSession();
+            this.InnerSession.FlushMode = FlushMode.Manual;
+            this.InnerSession.DefaultReadOnly = true;
         }
+
+        public override bool Closed => this.closed;
+
+        public sealed override ISession InnerSession { get; }
 
         public override IEnumerable<ObjectModification> GetModifiedObjectsFromLogic()
         {
@@ -25,41 +34,39 @@ namespace Framework.DomainDriven.NHibernate
             yield break;
         }
 
-        public override void ManualFault()
+        public override void AsFault()
         {
-
         }
 
-        public override TResult Evaluate<TResult>(Func<IDBSession, TResult> getResult)
+        public override void AsReadOnly()
         {
-            using (this.InnerSession = this.SessionFactory.InternalSessionFactory.OpenSession())
+        }
+
+        public override void AsWritable()
+        {
+            throw new InvalidOperationException("Readonly session already created");
+        }
+
+        public override void Close()
+        {
+            if (this.closed)
             {
-                this.InnerSession.FlushMode = FlushMode.Never;
-                this.InnerSession.DefaultReadOnly = true;
-
-                try
-                {
-                    var result = getResult(this);
-
-                    this.OnClosed(EventArgs.Empty);
-
-                    return result;
-                }
-                finally
-                {
-                    this.ClearClosed();
-                }
+                return;
             }
+
+            this.closed = true;
+
+            using (this.InnerSession) ;
         }
 
         public override void Flush()
         {
-            throw new NotImplementedException();
+            throw new InvalidOperationException();
         }
 
-        public override void RegisterModifited<T>(T @object, ModificationType modificationType)
+        public override void RegisterModified<T>(T @object, ModificationType modificationType)
         {
-            throw new ArgumentException($"Not supported: '{nameof(this.RegisterModifited)}' for {this.GetType()}");
+            throw new ArgumentException($"Not supported: '{nameof(this.RegisterModified)}' for {this.GetType()}");
         }
     }
 }

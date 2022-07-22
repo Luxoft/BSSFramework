@@ -20,16 +20,13 @@ namespace SampleSystem.BLL
 
         ICryptServiceContainer<CryptSystem>,
 
-        IImpersonateObject<ISampleSystemBLLContext>,
-
         ITypeResolverContainer<string>,
 
         Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContextContainer<Framework.Configuration.BLL.IConfigurationBLLContext>,
 
         IDefaultHierarchicalBLLContext<PersistentDomainObjectBase, Guid>,
 
-        IDateTimeServiceContainer
+        ISecurityTypeResolverContainer
     {
-        IDBSession Session { get; }
     }
 }

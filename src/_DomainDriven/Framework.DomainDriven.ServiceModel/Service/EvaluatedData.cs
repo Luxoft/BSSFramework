@@ -11,17 +11,14 @@ namespace Framework.DomainDriven.ServiceModel.Service
     {
         public EvaluatedData([NotNull] IDBSession session, [NotNull] TBLLContext context)
         {
-            if (session == null) throw new ArgumentNullException(nameof(session));
-            if (context == null) throw new ArgumentNullException(nameof(context));
-
-            this.Session = session;
-            this.Context = context;
+            this.Session = session ?? throw new ArgumentNullException(nameof(session));
+            this.Context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
 
-        public IDBSession Session { get; private set; }
+        public IDBSession Session { get; }
 
-        public TBLLContext Context { get; private set; }
+        public TBLLContext Context { get; }
     }
 
     public class EvaluatedData<TBLLContext, TDTOMappingService> : EvaluatedData<TBLLContext>
@@ -31,12 +28,10 @@ namespace Framework.DomainDriven.ServiceModel.Service
         public EvaluatedData([NotNull] IDBSession session, [NotNull] TBLLContext context, [NotNull] TDTOMappingService mappingService)
             : base(session, context)
         {
-            if (mappingService == null) throw new ArgumentNullException(nameof(mappingService));
-
-            this.MappingService = mappingService;
+            this.MappingService = mappingService ?? throw new ArgumentNullException(nameof(mappingService));
         }
 
 
-        public TDTOMappingService MappingService { get; private set; }
+        public TDTOMappingService MappingService { get; }
     }
 }

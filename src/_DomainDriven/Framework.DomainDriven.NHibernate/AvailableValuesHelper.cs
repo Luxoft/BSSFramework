@@ -5,7 +5,7 @@ using Framework.Core;
 
 namespace Framework.DomainDriven.NHibernate
 {
-    internal static class AvailableValuesHelper
+    public static class AvailableValuesHelper
     {
         private static readonly decimal DecimalLimit = (decimal)Math.Pow(10, 15) - 1M;
 

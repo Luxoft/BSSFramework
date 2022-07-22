@@ -52,23 +52,13 @@ namespace Framework.Configuration.BLL.Notification
             [NotNull] IEnumerable<string> toAddresses)
             : base(context)
         {
-            if (messageSender == null)
-            {
-                throw new ArgumentNullException(nameof(messageSender));
-            }
-
-            if (fromAddress == null)
-            {
-                throw new ArgumentNullException(nameof(fromAddress));
-            }
-
             if (toAddresses == null)
             {
                 throw new ArgumentNullException(nameof(toAddresses));
             }
 
-            this.fromAddress = fromAddress;
-            this.messageSender = messageSender;
+            this.fromAddress = fromAddress ?? throw new ArgumentNullException(nameof(fromAddress));
+            this.messageSender = messageSender ?? throw new ArgumentNullException(nameof(messageSender));
             this.receivers = toAddresses.ToArray();
 
             if (!this.receivers.Any())
@@ -81,9 +71,8 @@ namespace Framework.Configuration.BLL.Notification
         /// Осуществляет отправку уведомления об исключении.
         /// </summary>
         /// <param name="exception">Исключение.</param>
-        /// <param name="sendMessageMode">Тип транзакции, используемый при отправке.</param>
         /// <exception cref="ArgumentNullException">Аргумент <paramref name="exception"/> равен null.</exception>
-        public void Send(Exception exception, TransactionMessageMode sendMessageMode)
+        public void Send(Exception exception)
         {
             if (exception == null)
             {
@@ -111,7 +100,7 @@ namespace Framework.Configuration.BLL.Notification
                 false,
                 new Attachment[0]);
 
-            this.messageSender.Send(message, sendMessageMode);
+            this.messageSender.Send(message);
         }
 
         /// <summary>

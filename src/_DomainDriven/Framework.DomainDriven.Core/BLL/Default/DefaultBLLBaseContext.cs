@@ -6,7 +6,6 @@ using Framework.DomainDriven.BLL.Tracking;
 using Framework.HierarchicalExpand;
 using Framework.OData;
 using Framework.Persistent;
-using Framework.QueryableSource;
 using Framework.QueryLanguage;
 using Framework.Validation;
 
@@ -20,9 +19,7 @@ namespace Framework.DomainDriven.BLL
 
             ITrackingServiceContainer<TPersistentDomainObjectBase>,
 
-            IFetchServiceContainer<TPersistentDomainObjectBase, FetchBuildRule>,
-
-            IDateTimeServiceContainer
+            IFetchServiceContainer<TPersistentDomainObjectBase, FetchBuildRule>
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
         where TDomainObjectBase : class
@@ -32,14 +29,13 @@ namespace Framework.DomainDriven.BLL
         /// </summary>
         /// <param name="serviceProvider">DI interface.</param>
         /// <param name="dalFactory">The dal factory.</param>
-        /// <param name="operationListeners">The operation listeners.</param>
+        /// <param name="operationSenders">The operation senders.</param>
         /// <param name="sourceListeners">The source listeners.</param>
         /// <param name="objectStateService">The object state service.</param>
         /// <param name="standartExpressionBuilder">The standart expression builder.</param>
         /// <param name="validator">The validator.</param>
         /// <param name="hierarchicalObjectExpanderFactory">The hierarchical object expander factory.</param>
         /// <param name="fetchService">The fetch service.</param>
-        /// <param name="dateTimeService">The date time service.</param>
         /// <exception cref="ArgumentNullException">dalFactory
         /// or
         /// operationListeners
@@ -58,20 +54,19 @@ namespace Framework.DomainDriven.BLL
         protected DefaultBLLBaseContext(
                 [NotNull] IServiceProvider serviceProvider,
                 [NotNull] IDALFactory<TPersistentDomainObjectBase, TIdent> dalFactory,
-                [NotNull] BLLOperationEventListenerContainer<TDomainObjectBase> operationListeners,
+                [NotNull] IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
                 [NotNull] BLLSourceEventListenerContainer<TPersistentDomainObjectBase> sourceListeners,
                 [NotNull] IObjectStateService objectStateService,
                 [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
                 [NotNull] IValidator validator,
                 [NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
-                [NotNull] IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService,
-                [NotNull] IDateTimeService dateTimeService)
+                [NotNull] IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
         {
             if (objectStateService == null) throw new ArgumentNullException(nameof(objectStateService));
 
             this.ServiceProvider = serviceProvider;
             this.DalFactory = dalFactory ?? throw new ArgumentNullException(nameof(dalFactory));
-            this.OperationListeners = operationListeners ?? throw new ArgumentNullException(nameof(operationListeners));
+            this.OperationSenders = operationSenders ?? throw new ArgumentNullException(nameof(operationSenders));
             this.SourceListeners = sourceListeners ?? throw new ArgumentNullException(nameof(sourceListeners));
             this.TrackingService = new TrackingService<TPersistentDomainObjectBase>(objectStateService);
 
@@ -82,8 +77,6 @@ namespace Framework.DomainDriven.BLL
             this.SelectOperationParser = BusinessLogicSelectOperationParser.CachedDefault;
 
             this.FetchService = fetchService ?? throw new ArgumentNullException(nameof(fetchService));
-
-            this.DateTimeService = dateTimeService ?? throw new ArgumentNullException(nameof(dateTimeService));
         }
 
         public IValidator Validator { get; }
@@ -96,15 +89,13 @@ namespace Framework.DomainDriven.BLL
 
         public ITrackingService<TPersistentDomainObjectBase> TrackingService { get; }
 
-        public IBLLOperationEventListenerContainer<TDomainObjectBase> OperationListeners { get; }
+        public IOperationEventSenderContainer<TPersistentDomainObjectBase> OperationSenders { get; }
 
         public BLLSourceEventListenerContainer<TPersistentDomainObjectBase> SourceListeners { get; }
 
         public IStandartExpressionBuilder StandartExpressionBuilder { get; }
 
         public IParser<string, SelectOperation> SelectOperationParser { get; }
-
-        public virtual IDateTimeService DateTimeService { get; }
 
         public IHierarchicalObjectExpanderFactory<TIdent> HierarchicalObjectExpanderFactory { get; }
 
@@ -119,12 +110,6 @@ namespace Framework.DomainDriven.BLL
         /// <inheritdoc />
         public abstract bool AllowedExpandTreeParents<TDomainObject>()
             where TDomainObject : TPersistentDomainObjectBase;
-
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public IQueryableSource<TPersistentDomainObjectBase> GetQueryableSource()
-        {
-            return new BLLQueryableSource<IDefaultBLLContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent>, TPersistentDomainObjectBase, TDomainObjectBase, TIdent>(this);
-        }
 
         IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>> IBLLFactoryContainerContext<IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>>.Logics => this.BaseLogics;
     }
@@ -141,15 +126,14 @@ namespace Framework.DomainDriven.BLL
         protected DefaultBLLBaseContext(
             [NotNull] IServiceProvider serviceProvider,
             [NotNull] IDALFactory<TPersistentDomainObjectBase, TIdent> dalFactory,
-            [NotNull] BLLOperationEventListenerContainer<TDomainObjectBase> operationListeners,
+            [NotNull] IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
             [NotNull] BLLSourceEventListenerContainer<TPersistentDomainObjectBase> sourceListeners,
             [NotNull] IObjectStateService objectStateService,
             [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
             [NotNull] IValidator validator,
             [NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
-            [NotNull] IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService,
-            [NotNull] IDateTimeService dateTimeService)
-            : base(serviceProvider, dalFactory, operationListeners, sourceListeners, objectStateService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService, dateTimeService)
+            [NotNull] IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
+            : base(serviceProvider, dalFactory, operationSenders, sourceListeners, objectStateService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
         {
         }
 

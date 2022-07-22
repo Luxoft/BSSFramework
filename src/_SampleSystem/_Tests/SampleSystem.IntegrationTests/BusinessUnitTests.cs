@@ -12,6 +12,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.IntegrationTests.__Support.Utils.Framework;
 using SampleSystem.WebApiCore.Controllers.Main;
@@ -52,7 +53,7 @@ namespace SampleSystem.IntegrationTests
                                              type: buTypeId,
                                              parent: luxoftBuId);
 
-            this.DataHelper.Environment.GetContextEvaluator().Evaluate(
+            this.GetContextEvaluator().Evaluate(
                                                  DBSessionMode.Write,
                                                  context =>
                                                  {
@@ -177,8 +178,7 @@ namespace SampleSystem.IntegrationTests
                 .EvaluateWrite(
                                context =>
                                {
-                                   var period = new Period(
-                                                           context.DateTimeService.CurrentFinancialYear.StartDate
+                                   var period = new Period(this.GetDateTimeService().CurrentFinancialYear.StartDate
                                                                   .AddYears(-1));
                                    var accountType = context.Logics.BusinessUnitType.GetById(buAccountId.Id);
 

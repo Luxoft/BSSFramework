@@ -68,7 +68,7 @@ namespace Framework.DomainDriven.BLL.Security
         private static IDictionary<Enum, SecurityOperationAttribute> GetUntypeDictionary<TSecurityOperationCode>()
             where TSecurityOperationCode : struct, Enum
         {
-            return GetDictionary<TSecurityOperationCode>().ToDictionary(pair => (Enum)(object)pair.Key, pair => pair.Value);
+            return GetDictionary<TSecurityOperationCode>().ToDictionary(pair => (Enum)pair.Key, pair => pair.Value);
         }
 
         private static class Helper<TSecurityOperationCode>

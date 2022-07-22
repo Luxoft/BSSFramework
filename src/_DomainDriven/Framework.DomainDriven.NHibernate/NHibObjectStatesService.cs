@@ -16,14 +16,12 @@ namespace Framework.DomainDriven.NHibernate
 {
     internal class NHibObjectStatesService : IObjectStateService
     {
-        private readonly ISession _session;
+        private readonly ISession session;
 
 
         public NHibObjectStatesService([NotNull] ISession session)
         {
-            if (session == null) throw new ArgumentNullException(nameof(session));
-
-            this._session = session;
+            this.session = session ?? throw new ArgumentNullException(nameof(session));
         }
 
 
@@ -34,23 +32,23 @@ namespace Framework.DomainDriven.NHibernate
                 return new ObjectState[0];
             }
 
-            if (this._session.DefaultReadOnly)
+            if (this.session.DefaultReadOnly)
             {
                 return new ObjectState[0];
             }
 
-            var sessionImpl = this._session.GetSessionImplementation();
+            var sessionImpl = this.session.GetSessionImplementation();
 
             var unProxy = sessionImpl.TryUnProxy(entity);
 
-            var oldEntry = this._session.GetEntityEntry(unProxy);
+            var oldEntry = this.session.GetEntityEntry(unProxy);
 
             if (null == oldEntry)
             {
                 return new ObjectState[0];
             }
 
-            var persister = this._session.GetPersister(oldEntry);
+            var persister = this.session.GetPersister(oldEntry);
 
             var oldState = oldEntry.LoadedState;
 
@@ -107,7 +105,7 @@ namespace Framework.DomainDriven.NHibernate
                     }
 
                     return currentCollection
-                        .SelectMany(z => this._session.GetEntityEntry(z) != null ? this.GetModifiedObjectStates(z) : new[] { new ObjectState(), })
+                        .SelectMany(z => this.session.GetEntityEntry(z) != null ? this.GetModifiedObjectStates(z) : new[] { new ObjectState(), })
                         .Any();
                 }
 
@@ -139,7 +137,7 @@ namespace Framework.DomainDriven.NHibernate
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
 
-            var oldEntry = this._session.GetEntityEntry(entity);
+            var oldEntry = this.session.GetEntityEntry(entity);
 
             if (null == oldEntry)
             {
@@ -153,7 +151,7 @@ namespace Framework.DomainDriven.NHibernate
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
 
-            var entityEntry = this._session.GetEntityEntry(entity);
+            var entityEntry = this.session.GetEntityEntry(entity);
 
             return entityEntry.Status == Status.Deleted;
         }

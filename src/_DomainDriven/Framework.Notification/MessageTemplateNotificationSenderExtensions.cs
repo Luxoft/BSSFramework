@@ -10,28 +10,27 @@ namespace Framework.Notification
 {
     public static class MessageTemplateNotificationSenderExtensions
     {
-        public static void Send<T>(this IMessageSender<MessageTemplateNotification> sender, TransactionMessageMode sendMessageMode, string messageTemplateCode, T contextObject, IEnumerable<string> receivers, ISubscription subscription = null)
+        public static void Send<T>(this IMessageSender<MessageTemplateNotification> sender, string messageTemplateCode, T contextObject, IEnumerable<string> receivers, ISubscription subscription = null)
         {
             if (sender == null) throw new ArgumentNullException(nameof(sender));
             if (messageTemplateCode == null) throw new ArgumentNullException(nameof(messageTemplateCode));
             if (contextObject == null) throw new ArgumentNullException(nameof(contextObject));
             if (receivers == null) throw new ArgumentNullException(nameof(receivers));
 
-            sender.Send(new MessageTemplateNotification(messageTemplateCode, contextObject, typeof(T), receivers,  Enumerable.Empty<System.Net.Mail.Attachment>(), subscription), sendMessageMode);
+            sender.Send(new MessageTemplateNotification(messageTemplateCode, contextObject, typeof(T), receivers,  Enumerable.Empty<System.Net.Mail.Attachment>(), subscription));
         }
 
         /// <summary>
         /// Creates and sends e-mail message according to input params
         /// </summary>
         /// <param name="sender">Notification message sender</param>
-        /// <param name="sendMessageMode"></param>
         /// <param name="subject">E-mail subject</param>
         /// <param name="body">E-mail body</param>
         /// <param name="recipients">A list of recipients</param>
         /// <param name="attachments">A list of attachments</param>
         /// <param name="from">E-mail sender</param>
         /// <param name="messageTemplateCode">Message Template Code (if not specified default value is 'auto-generated')</param>
-        public static void Send(this IMessageSender<Notification> sender, TransactionMessageMode sendMessageMode, string subject, string body, IEnumerable<string> recipients, IEnumerable<Attachment> attachments, string from = null, string messageTemplateCode = "auto-generated")
+        public static void Send(this IMessageSender<Notification> sender, string subject, string body, IEnumerable<string> recipients, IEnumerable<Attachment> attachments, string from = null, string messageTemplateCode = "auto-generated")
         {
             if (sender == null) throw new ArgumentNullException(nameof(sender));
             if (subject == null) throw new ArgumentNullException(nameof(subject));
@@ -39,7 +38,7 @@ namespace Framework.Notification
 
             var notification = GetNotification(subject, body, recipients, attachments, from, messageTemplateCode);
 
-            sender.Send(notification, sendMessageMode);
+            sender.Send(notification);
         }
 
         private static Notification GetNotification(string subject, string body, IEnumerable<string> recipients, IEnumerable<Attachment> attachments, string sender, string messageTemplateCode)

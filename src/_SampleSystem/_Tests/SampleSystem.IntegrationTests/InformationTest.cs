@@ -12,6 +12,7 @@ using Framework.Configuration.Generated.DTO;
 using Framework.DomainDriven.BLL;
 
 using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests
 {
@@ -25,7 +26,7 @@ namespace SampleSystem.IntegrationTests
             this.ClearIntegrationEvents();
 
             // Act
-            var id = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            var id = this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
             {
                 var newObj = new Information() { Name = "ololo" };
 
@@ -34,7 +35,7 @@ namespace SampleSystem.IntegrationTests
                 return newObj.Id;
             });
 
-            this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
             {
                 var obj = context.Logics.Information.GetById(id, true);
 

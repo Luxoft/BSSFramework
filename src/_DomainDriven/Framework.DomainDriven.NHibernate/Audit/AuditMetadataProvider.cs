@@ -73,7 +73,7 @@ namespace Framework.DomainDriven.NHibernate.Audit
 
             nhConfiguration.AddMapping(this.CreateRevisionInfoMappingDocument());
 
-            var auditAttributeSerivce = this.mappingSettings.GetAuditAttributeService(nhConfiguration.ClassMappings);
+            var auditAttributeService = this.mappingSettings.GetAuditAttributeService(nhConfiguration.ClassMappings);
 
             var auditedTypes = this.mappingSettings
                 .SelectMany(
@@ -95,10 +95,10 @@ namespace Framework.DomainDriven.NHibernate.Audit
             {
                 var persistentClass = pair.PersistentClass;
 
-                var propertyInterator = persistentClass.PropertyIterator;
+                var propertyIterator = persistentClass.PropertyIterator;
 
-                this.AddForEntity(persistentClass, ret, auditAttributeSerivce);
-                this.AddForComponent(propertyInterator, ret, auditAttributeSerivce);
+                this.AddForEntity(persistentClass, ret, auditAttributeService);
+                this.AddForComponent(propertyIterator, ret, auditAttributeService);
             }
 
             var auditRevisionType = typeof(TAuditRevisionEntity);

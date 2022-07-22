@@ -14,7 +14,7 @@ namespace SampleSystem.WebApiCore.Controllers.CustomReport
     public static class ApiControllerExtensions
     {
         public static FileStreamResult GetReportResult(
-                this ApiControllerBase<IServiceEnvironment<ISampleSystemBLLContext>, ISampleSystemBLLContext, EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>
+                this ApiControllerBase<ISampleSystemBLLContext, EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>
                         controller,
                 IReportStream result)
         {

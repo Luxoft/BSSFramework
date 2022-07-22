@@ -1,36 +1,38 @@
 ﻿using System;
-using Framework.Core;
 
 namespace Framework.DomainDriven.BLL
 {
-    public abstract class OperationBLLBase<TBLLContext, TDomainObjectBase, TDomainObject, TOperation> : BLLContextContainer<TBLLContext>, IOperationBLLBase<TDomainObject>
-        where TDomainObjectBase : class
-        where TDomainObject : class, TDomainObjectBase
-        where TOperation : struct, Enum
-        where TBLLContext : class, IBLLOperationEventContext<TDomainObjectBase>
-    {
-        private readonly Lazy<BLLOperationEventListener<TDomainObject, TOperation>> _lazyOperationListener;
+    public abstract class OperationBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObjectBase, TDomainObject, TOperation> : BLLContextContainer<TBLLContext>, IOperationBLLBase<TDomainObject>
 
-        private readonly Lazy<BLLOperationEventListener<TDomainObject, BLLBaseOperation>> _lazyDefaultOperationListener;
+        where TPersistentDomainObjectBase : class, TDomainObjectBase
+        where TDomainObjectBase : class
+
+        where TDomainObject : class, TPersistentDomainObjectBase
+        where TOperation : struct, Enum
+        where TBLLContext : class, IBLLOperationEventContext<TPersistentDomainObjectBase>
+    {
+        private readonly Lazy<IOperationEventSender<TDomainObject, TOperation>> _lazyOperationSender;
+
+        private readonly Lazy<IOperationEventSender<TDomainObject, BLLBaseOperation>> _lazyDefaultOperationSender;
 
 
         protected OperationBLLBase(TBLLContext context)
             : base(context)
         {
-            this._lazyOperationListener = LazyHelper.Create(() => this.Context.OperationListeners.GetEventListener<TDomainObject, TOperation>());
-            this._lazyDefaultOperationListener = LazyHelper.Create(() => this.Context.OperationListeners.GetEventListener<TDomainObject, BLLBaseOperation>());
+            this._lazyOperationSender = new Lazy<IOperationEventSender<TDomainObject, TOperation>>(() => this.Context.OperationSenders.GetEventSender<TDomainObject, TOperation>());
+            this._lazyDefaultOperationSender = new Lazy<IOperationEventSender<TDomainObject, BLLBaseOperation>>(() => this.Context.OperationSenders.GetEventSender<TDomainObject, BLLBaseOperation>());
         }
 
 
-        private BLLOperationEventListener<TDomainObject, TOperation> OperationListener
+        private IOperationEventSender<TDomainObject, TOperation> OperationSender
         {
-            get { return this._lazyOperationListener.Value; }
+            get { return this._lazyOperationSender.Value; }
         }
 
 
-        private BLLOperationEventListener<TDomainObject, BLLBaseOperation> DefaultOperationListener
+        private IOperationEventSender<TDomainObject, BLLBaseOperation> DefaultOperationSender
         {
-            get { return this._lazyDefaultOperationListener.Value; }
+            get { return this._lazyDefaultOperationSender.Value; }
         }
 
 
@@ -38,28 +40,28 @@ namespace Framework.DomainDriven.BLL
         {
             if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-            this.DefaultOperationListener.RaiseOperationProcessed(domainObject, BLLBaseOperation.Save, this);
+            this.DefaultOperationSender.SendEvent(domainObject, BLLBaseOperation.Save);
         }
 
         public virtual void Remove(TDomainObject domainObject)
         {
             if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-            this.DefaultOperationListener.RaiseOperationProcessed(domainObject, BLLBaseOperation.Remove, this);
+            this.DefaultOperationSender.SendEvent(domainObject, BLLBaseOperation.Remove);
         }
 
         protected void RaiseOperationProcessed(TDomainObject domainObject, TOperation operation)
         {
             if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-            this.OperationListener.RaiseOperationProcessed(domainObject, operation, this);
+            this.OperationSender.SendEvent(domainObject, operation);
         }
 
-        protected void RaiseOperationProcessed(DomainOperationEventArgs<TDomainObject, TOperation> eventArgs)
+        protected void RaiseOperationProcessed(IDomainOperationEventArgs<TDomainObject, TOperation> eventArgs)
         {
             if (eventArgs == null) throw new ArgumentNullException(nameof(eventArgs));
 
-            this.OperationListener.RaiseOperationProcessed(eventArgs);
+            this.OperationSender.SendEvent(eventArgs);
         }
     }
 }

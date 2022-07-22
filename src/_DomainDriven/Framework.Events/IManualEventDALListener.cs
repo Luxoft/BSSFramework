@@ -12,7 +12,7 @@ namespace Framework.Events
         /// </summary>
         /// <typeparam name="TDomainObject"></typeparam>
         /// <returns></returns>
-        IForceEventContainer<TDomainObject, EventOperation> GetForceEventContainer<TDomainObject>()
+        IOperationEventSender<TDomainObject, EventOperation> GetForceEventContainer<TDomainObject>()
             where TDomainObject : class, TPersistentDomainObjectBase;
     }
 }

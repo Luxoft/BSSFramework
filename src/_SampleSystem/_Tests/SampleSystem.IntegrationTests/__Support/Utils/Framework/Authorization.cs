@@ -10,12 +10,18 @@ using Framework.DomainDriven.BLL;
 using JetBrains.Annotations;
 
 using SampleSystem.BLL;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests.__Support.Utils.Framework
 {
-    public abstract class Authorization
+    public abstract class Authorization : IRootServiceProviderContainer
     {
-        public abstract void EvaluateWrite(Action<ISampleSystemBLLContext> action);
+        public Authorization(IServiceProvider rootServiceProvider)
+        {
+            this.RootServiceProvider = rootServiceProvider;
+        }
+
+        public IServiceProvider RootServiceProvider { get; }
 
         public void SetCurrentUserRole([NotNull] params IPermissionDefinition[] permissions)
         {

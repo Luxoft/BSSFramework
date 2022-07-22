@@ -6,6 +6,7 @@ using FluentAssertions;
 using Framework.DomainDriven.BLL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SampleSystem.Domain;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests
@@ -17,7 +18,7 @@ namespace SampleSystem.IntegrationTests
         public void CustomNotPersistentNotificationModel_Always_ShouldNotThrowException()
         {
             // Arrange
-            var countryId = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            var countryId = this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
             {
                 var country = new Country
                 {
@@ -46,7 +47,7 @@ namespace SampleSystem.IntegrationTests
             this.ClearModifications();
 
             // Act
-            this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
             {
                 var bll = context.Logics.Country;
 

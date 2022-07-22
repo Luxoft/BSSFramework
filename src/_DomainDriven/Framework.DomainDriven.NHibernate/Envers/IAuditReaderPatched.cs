@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using NHibernate.Envers.Query.Criteria;
 
 namespace NHibernate.Envers.Patch
 {
     public interface IAuditReaderPatched : IAuditReader
     {
-        bool IsEmpty { get; }
-
         IEnumerable<TIdentity> GetIdentiesBy<TDomainObject, TIdentity>(IAuditCriterion criterion);
 
         IList<T> FindObjects<T>(IEnumerable<object> primaryKeys, long revision);

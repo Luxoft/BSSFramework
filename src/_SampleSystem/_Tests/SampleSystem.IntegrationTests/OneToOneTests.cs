@@ -7,6 +7,7 @@ using Framework.DomainDriven.BLL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 
@@ -21,7 +22,7 @@ namespace SampleSystem.IntegrationTests
             // Arrange
             var iMRequestQueryController = this.GetControllerEvaluator<IMRequestQueryController>();
 
-            var idents = this.DataHelper.Environment.GetContextEvaluator().Evaluate(
+            var idents = this.GetContextEvaluator().Evaluate(
                 DBSessionMode.Write,
                 context =>
                 {

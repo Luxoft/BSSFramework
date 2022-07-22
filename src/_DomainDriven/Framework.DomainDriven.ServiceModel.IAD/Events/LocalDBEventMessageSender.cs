@@ -29,7 +29,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         /// <param name="context">Контекст системы</param>
         /// <param name="configurationContext">Контекст утилит</param>
         /// <param name="queueTag">Таг, маркирующий очередь евентов</param>
-        protected LocalDBEventMessageSender([NotNull] TBLLContext context, [NotNull] Framework.Configuration.BLL.IConfigurationBLLContext configurationContext, [NotNull] string queueTag = "default")
+        protected LocalDBEventMessageSender([NotNull] TBLLContext context, [NotNull] IConfigurationBLLContext configurationContext, [NotNull] string queueTag = "default")
             : base(context)
         {
             if (string.IsNullOrWhiteSpace(queueTag)) { throw new ArgumentException("Value cannot be null or whitespace.", nameof(queueTag)); }
@@ -38,7 +38,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             this.queueTag = queueTag;
         }
 
-        public override void Send<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs, TransactionMessageMode sendMessageMode)
+        public override void Send<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs)
         {
             var dto = domainObjectEventArgs.CustomSendObject ?? this.ToEventDTOBase(domainObjectEventArgs);
 

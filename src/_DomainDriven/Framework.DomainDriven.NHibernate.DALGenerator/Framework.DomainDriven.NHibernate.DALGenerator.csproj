@@ -3,7 +3,7 @@
     <PackageId>Luxoft.Framework.DomainDriven.NHibernate.DALGenerator</PackageId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="161.46521.71" />
+    <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="161.47021.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />

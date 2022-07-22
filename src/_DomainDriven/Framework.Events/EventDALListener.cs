@@ -12,20 +12,20 @@ namespace Framework.Events
     /// </summary>
     /// <typeparam name="TBLLContext"></typeparam>
     /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
-    public abstract class EventDALListener<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<TBLLContext>, IManualEventDALListener<TPersistentDomainObjectBase>
+    public abstract class EventDALListener<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<TBLLContext>, IManualEventDALListener<TPersistentDomainObjectBase>, IBeforeTransactionCompletedDALListener
         where TBLLContext : class
         where TPersistentDomainObjectBase : class
     {
-        private readonly IList<TypeEvent> typeEvents;
+        private readonly TypeEvent[] typeEvents;
 
         private readonly IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender;
 
-        protected EventDALListener(TBLLContext context, IList<TypeEvent> typeEvents, IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender)
+        protected EventDALListener(TBLLContext context, IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender, IEnumerable<TypeEvent> typeEvents)
             : base(context)
         {
-            this.typeEvents = typeEvents;
-
             this.messageSender = messageSender;
+
+            this.typeEvents = (typeEvents ?? throw new ArgumentNullException(nameof(typeEvents))).ToArray();
         }
 
         Type IPersistentDomainObjectBaseTypeContainer.PersistentDomainObjectBaseType => typeof(TPersistentDomainObjectBase);
@@ -76,7 +76,7 @@ namespace Framework.Events
                     CustomDomainObjectType = domainObjectType
                 };
 
-                this.messageSender.Send(message, TransactionMessageMode.DTSTransaction);
+                this.messageSender.Send(message);
             }
         }
 
@@ -87,12 +87,12 @@ namespace Framework.Events
             return allFilteredOrderedValues;
         }
 
-        IForceEventContainer<TDomainObject, EventOperation> IManualEventDALListener<TPersistentDomainObjectBase>.GetForceEventContainer<TDomainObject>()
+        IOperationEventSender<TDomainObject, EventOperation> IManualEventDALListener<TPersistentDomainObjectBase>.GetForceEventContainer<TDomainObject>()
         {
             return new ForceEventContainer<TDomainObject>(this);
         }
 
-        private class ForceEventContainer<TDomainObject> : IForceEventContainer<TDomainObject, EventOperation>
+        private class ForceEventContainer<TDomainObject> : IOperationEventSender<TDomainObject, EventOperation>
             where TDomainObject : class, TPersistentDomainObjectBase
         {
             private readonly EventDALListener<TBLLContext, TPersistentDomainObjectBase> dalListener;
@@ -102,11 +102,11 @@ namespace Framework.Events
                 this.dalListener = dalListener ?? throw new ArgumentNullException(nameof(dalListener));
             }
 
-            public void ForceEvent(TDomainObject domainObject, EventOperation operation)
+            public void SendEvent(IDomainOperationEventArgs<TDomainObject, EventOperation> eventArgs)
             {
-                if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+                if (eventArgs == null) throw new ArgumentNullException(nameof(eventArgs));
 
-                this.dalListener.Process(new DALChangesEventArgs(GetDALChanges(domainObject, operation)));
+                this.dalListener.Process(new DALChangesEventArgs(GetDALChanges(eventArgs.DomainObject, eventArgs.Operation)));
             }
 
             private static DALChanges GetDALChanges(TDomainObject domainObject, EventOperation operation)

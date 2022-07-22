@@ -45,7 +45,7 @@ namespace Framework.Notification.New
         }
 
         /// <inheritdoc />
-        public void Send(Message message, TransactionMessageMode transactionMessageMode)
+        public void Send(Message message)
         {
             if (message == null)
             {

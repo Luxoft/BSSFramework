@@ -1,14 +1,11 @@
 ﻿using System;
 
-using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.ServiceModel.Service;
 using Framework.NotificationCore.Monitoring;
 
 using Hangfire.Dashboard;
 
 using SampleSystem.BLL;
-using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.Env;
 
 namespace SampleSystem.WebApiCore
@@ -19,25 +16,25 @@ namespace SampleSystem.WebApiCore
     /// </summary>
     public class SampleSystemHangfireAuthorization : IDashboardAuthorizationFilter
     {
-        private readonly Lazy<SampleSystemServiceEnvironment> environment;
+        private readonly IContextEvaluator<ISampleSystemBLLContext> contextEvaluator;
 
         private readonly IDashboardAuthorizationFilter baseFilter;
 
-        public SampleSystemHangfireAuthorization(Lazy<SampleSystemServiceEnvironment> environment)
+        public SampleSystemHangfireAuthorization(IContextEvaluator<ISampleSystemBLLContext> contextEvaluator)
         {
-            this.baseFilter = new AdminHangfireAuthorization<ISampleSystemBLLContext>(LazyHelper.Create(() => (IServiceEnvironment<ISampleSystemBLLContext>)this.environment.Value));
+            this.baseFilter = new AdminHangfireAuthorization<ISampleSystemBLLContext>(contextEvaluator);
 
-            this.environment = environment;
+            this.contextEvaluator = contextEvaluator;
         }
 
         public bool Authorize(DashboardContext context)
         {
-            return this.environment.Value.GetContextEvaluator().Evaluate(
+            return this.contextEvaluator.Evaluate(
                 DBSessionMode.Read,
                 z =>
                 {
                     return this.baseFilter.Authorize(context)
-                        || string.Compare(z.Authorization.CurrentPrincipalName, UserAuthenticationService.CurrentUser, StringComparison.InvariantCultureIgnoreCase) == 0;
+                        || string.Compare(z.Authorization.CurrentPrincipalName, new DomainDefaultUserAuthenticationService().GetUserName(), StringComparison.InvariantCultureIgnoreCase) == 0;
                 });
         }
     }

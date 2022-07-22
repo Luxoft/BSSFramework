@@ -12,7 +12,6 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.BLL.Tracking;
 using Framework.DomainDriven.SerializeMetadata;
-using Framework.DomainDriven.ServiceModel.Service;
 using Framework.Persistent;
 using Framework.Transfering;
 
@@ -21,15 +20,19 @@ namespace Framework.CustomReports.WebApi
     public class SyncCustomReportService<TBLLContext, TSecurityOperationCode> : ISyncCustomReportService<TBLLContext, TSecurityOperationCode>
         where TBLLContext : IConfigurationBLLContextContainer<Framework.Configuration.BLL.IConfigurationBLLContext>
     {
-        public SyncCustomReportService(ISystemMetadataTypeBuilder systemMetadataBuilder)
+        private readonly IContextEvaluator<TBLLContext> contextEvaluator;
+
+        public SyncCustomReportService(ISystemMetadataTypeBuilder systemMetadataBuilder, IContextEvaluator<TBLLContext> contextEvaluator)
         {
+            this.contextEvaluator = contextEvaluator;
             this.SystemMetadataBuilder = systemMetadataBuilder;
         }
 
-        public ISystemMetadataTypeBuilder SystemMetadataBuilder { get; private set; }
-        public void Sync(IServiceEnvironment<TBLLContext> serviceEnvironment, IList<ICustomReport<TSecurityOperationCode>> runtimeReports)
+        public ISystemMetadataTypeBuilder SystemMetadataBuilder { get; }
+
+        public void Sync(IList<ICustomReport<TSecurityOperationCode>> runtimeReports)
         {
-            serviceEnvironment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            this.contextEvaluator.Evaluate(DBSessionMode.Write, context =>
             {
                 var expectedReports = runtimeReports;
 

@@ -7,6 +7,7 @@ using Framework.Core;
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.Utils.Framework;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
@@ -100,7 +101,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
                 {
                     if (!saveEmployeeWithNullHireDate)
                     {
-                        hireDate = hireDate ?? context.DateTimeService.CurrentMonth.StartDate;
+                        hireDate = hireDate ?? this.GetDateTimeService().CurrentMonth.StartDate;
                     }
 
                     employee = new Employee

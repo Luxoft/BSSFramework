@@ -7,7 +7,7 @@ using Framework.DomainDriven.BLL;
 
 namespace Framework.DomainDriven.ServiceModel.IAD
 {
-    public class FixDomainObjectEventRevisionNumberDALListener : BLLContextContainer<IConfigurationBLLContext>, IDALListener
+    public class FixDomainObjectEventRevisionNumberDALListener : BLLContextContainer<IConfigurationBLLContext>, IBeforeTransactionCompletedDALListener
     {
         public FixDomainObjectEventRevisionNumberDALListener(IConfigurationBLLContext context)
             : base(context)

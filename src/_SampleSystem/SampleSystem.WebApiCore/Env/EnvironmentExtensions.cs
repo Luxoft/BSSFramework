@@ -1,19 +1,21 @@
 ﻿using System;
 
-using Framework.Authorization.ApproveWorkflow;
 using Framework.Authorization.BLL;
 using Framework.Authorization.Generated.DAL.NHibernate;
 using Framework.Cap;
-using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Generated.DAL.NHibernate;
 using Framework.Core.Services;
+using Framework.CustomReports.Domain;
+using Framework.CustomReports.Services;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.NHibernate;
+using Framework.DomainDriven.NHibernate.Audit;
+using Framework.DomainDriven.Serialization;
+using Framework.DomainDriven.SerializeMetadata;
 using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Exceptions;
 
@@ -26,14 +28,12 @@ using nuSpec.Abstraction;
 using nuSpec.NHibernate;
 
 using SampleSystem.BLL;
+using SampleSystem.Domain;
 using SampleSystem.Generated.DAL.NHibernate;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.CustomReports;
+using SampleSystem.WebApiCore.Env;
 using SampleSystem.WebApiCore.Env.Database;
-
-using WorkflowCore.Interface;
-
-using UserAuthenticationService = SampleSystem.WebApiCore.Env.UserAuthenticationService;
 
 namespace SampleSystem.WebApiCore
 {
@@ -43,32 +43,48 @@ namespace SampleSystem.WebApiCore
         {
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-            services
-                .AddHttpContextAccessor();
+            services.AddHttpContextAccessor();
 
             services.AddDatabaseSettings(connectionString);
             services.AddCapBss(connectionString);
 
             // Notifications
-            services
-                .AddSingleton<ISubscriptionMetadataFinder, SampleSystemSubscriptionsMetadataFinder>();
-            services.RegisterMessageSenderDependencies<SampleSystemServiceEnvironment, ISampleSystemBLLContext>(configuration);
+            services.AddSingleton<ISubscriptionMetadataFinder, SampleSystemSubscriptionsMetadataFinder>();
+            services.RegisterMessageSenderDependencies<ISampleSystemBLLContext>(configuration);
             services.RegisterRewriteReceiversDependencies(configuration);
 
             // Others
             services.AddSingleton<IDateTimeService>(DateTimeService.Default);
-            services.AddSingleton<IUserAuthenticationService, UserAuthenticationService>();
+
+            services.AddSingleton<SampleSystemDefaultUserAuthenticationService>();
+            services.AddSingletonFrom<IDefaultUserAuthenticationService, SampleSystemDefaultUserAuthenticationService>();
+            services.AddSingletonFrom<IAuditRevisionUserAuthenticationService, SampleSystemDefaultUserAuthenticationService>();
+
+            services.AddScoped<SampleSystemUserAuthenticationService>();
+            services.AddScopedFrom<IUserAuthenticationService, SampleSystemUserAuthenticationService>();
+            services.AddScopedFrom<IUserAuthenticationService, SampleSystemUserAuthenticationService>();
+
             services.AddSingleton<ISpecificationEvaluator, NhSpecificationEvaluator>();
 
+            services.AddSingleton<WorkflowManager>();
+            services.AddSingletonFrom<IWorkflowManager, WorkflowManager>();
 
-            return services.AddSingleton<SampleSystemServiceEnvironment>()
-                           .AddControllerEnvironment();
+
+            services.AddSingleton(new SubscriptionMetadataStore(new SampleSystemSubscriptionsMetadataFinder()));
+
+            return services.AddControllerEnvironment();
         }
 
         public static IServiceCollection AddDatabaseSettings(this IServiceCollection services, string connectionString) =>
-                services
-                        .AddSingleton<IDBSessionFactory, SampleSystemNHibSessionFactory>()
+                services.AddScoped<INHibSessionSetup, NHibSessionSettings>()
+
+                        .AddScoped<IDBSessionEventListener, DBSessionEventListener>()
+                        .AddScopedFromLazy<IDBSession, NHibSession>()
+
+                        .AddSingleton<INHibSessionEnvironmentSettings, NHibSessionEnvironmentSettings>()
                         .AddSingleton<NHibConnectionSettings>()
+                        .AddSingleton<NHibSessionEnvironment, SampleSystemNHibSessionEnvironment>()
+
                         .AddSingleton<IMappingSettings>(AuthorizationMappingSettings.CreateDefaultAudit(string.Empty))
                         .AddSingleton<IMappingSettings>(ConfigurationMappingSettings.CreateDefaultAudit(string.Empty))
                         .AddSingleton<IMappingSettings>(
@@ -78,17 +94,16 @@ namespace SampleSystem.WebApiCore
 
         public static IServiceCollection AddControllerEnvironment(this IServiceCollection services)
         {
-            services.AddSingleton<IExceptionProcessor, ApiControllerExceptionService<IServiceEnvironment<ISampleSystemBLLContext>, ISampleSystemBLLContext>>();
+            services.AddSingleton<IExceptionProcessor, ApiControllerExceptionService<ISampleSystemBLLContext>>();
 
+            services.AddSingleton<IReportParameterValueService<ISampleSystemBLLContext, PersistentDomainObjectBase, SampleSystemSecurityOperationCode>, ReportParameterValueService<ISampleSystemBLLContext, PersistentDomainObjectBase, SampleSystemSecurityOperationCode>>();
+            services.AddSingleton<ISystemMetadataTypeBuilder>(new SystemMetadataTypeBuilder<PersistentDomainObjectBase>(DTORole.All, typeof(PersistentDomainObjectBase).Assembly));
             services.AddSingleton<SampleSystemCustomReportsServiceEnvironment>();
+            services.AddSingleton(sp => sp.GetRequiredService<SampleSystemCustomReportsServiceEnvironment>().ReportService);
+            services.AddSingleton<ISecurityOperationCodeProvider<SampleSystemSecurityOperationCode>, SecurityOperationCodeProvider>();
 
-            // Environment
-            services
-                .AddSingleton<IServiceEnvironment<ISampleSystemBLLContext>>(x => x.GetRequiredService<SampleSystemServiceEnvironment>())
-                .AddSingleton<IServiceEnvironment<IAuthorizationBLLContext>>(x => x.GetRequiredService<SampleSystemServiceEnvironment>())
-                .AddSingleton<IServiceEnvironment<IConfigurationBLLContext>>(x => x.GetRequiredService<SampleSystemServiceEnvironment>());
-
-            services.AddScoped<IScopedContextEvaluator<IAuthorizationBLLContext>, ScopedContextEvaluator<IAuthorizationBLLContext>>();
+            services.AddSingleton<IContextEvaluator<IAuthorizationBLLContext>, ContextEvaluator<IAuthorizationBLLContext>>();
+            services.AddSingleton<IContextEvaluator<ISampleSystemBLLContext>, ContextEvaluator<ISampleSystemBLLContext>>();
 
             return services;
         }

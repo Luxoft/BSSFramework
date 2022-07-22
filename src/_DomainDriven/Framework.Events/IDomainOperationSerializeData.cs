@@ -16,12 +16,14 @@ namespace Framework.Events
 
     public interface IDomainOperationSerializeData<out TDomainObject, out TOperation> : IDomainOperationSerializeData<TDomainObject>
         where TDomainObject : class
+        where TOperation : struct, Enum
     {
         new TOperation Operation { get; }
     }
 
     public struct DomainOperationSerializeData<TDomainObject, TOperation> : IDomainOperationSerializeData<TDomainObject, TOperation>
         where TDomainObject : class
+        where TOperation: struct, Enum
     {
         public TDomainObject DomainObject { get; set; }
 
@@ -33,6 +35,6 @@ namespace Framework.Events
 
         Type IDomainOperationSerializeData<TDomainObject>.DomainObjectType => this.CustomDomainObjectType ?? typeof(TDomainObject);
 
-        Enum IDomainOperationSerializeData<TDomainObject>.Operation => (Enum)(object)this.Operation;
+        Enum IDomainOperationSerializeData<TDomainObject>.Operation => this.Operation;
     }
 }

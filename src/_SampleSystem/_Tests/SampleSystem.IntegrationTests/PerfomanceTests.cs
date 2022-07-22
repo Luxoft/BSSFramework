@@ -8,6 +8,7 @@ using Framework.DomainDriven.BLL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests
@@ -18,10 +19,10 @@ namespace SampleSystem.IntegrationTests
         [TestMethod]
         public void GetEmployee_ToManyFilterParameters_CheckTimeTest()
         {
-            var preEvaluate = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context => context.Logics.Employee.GetUnsecureQueryable().First());
+            var preEvaluate = this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context => context.Logics.Employee.GetUnsecureQueryable().First());
 
             var task = System.Threading.Tasks.Task.Run(() =>
-                                                           this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+                                                           this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
                                                            {
                                                                Expression<Func<Employee, bool>> filter = z => false;
 

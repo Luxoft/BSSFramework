@@ -25,9 +25,7 @@ namespace Framework.Configuration.BLL
 
         ITrackingServiceContainer<PersistentDomainObjectBase>,
 
-        IConfigurationBLLContextContainer<IConfigurationBLLContext>,
-
-        IDateTimeServiceContainer
+        IConfigurationBLLContextContainer<IConfigurationBLLContext>
     {
         IMessageSender<MessageTemplateNotification> SubscriptionSender { get; }
 

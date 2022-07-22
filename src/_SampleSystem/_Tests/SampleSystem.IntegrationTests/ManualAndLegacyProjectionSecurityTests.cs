@@ -18,6 +18,7 @@ using SampleSystem.Domain.Projections;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Domain.ManualProjections;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 
 using BusinessRole = SampleSystem.IntegrationTests.__Support.Utils.BusinessRole;
@@ -89,7 +90,7 @@ namespace SampleSystem.IntegrationTests
             // Arrange
 
             // Act
-            var items = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, TestEmployeeLogin, ctx =>
+            var items = this.GetContextEvaluator().Evaluate(DBSessionMode.Read, TestEmployeeLogin, ctx =>
             {
                 var bll = ctx.Logics.TestLegacyEmployeeFactory.Create(BLLSecurityMode.View);
 

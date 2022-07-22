@@ -17,7 +17,7 @@ namespace Framework.DomainDriven.BLL
 {
     public abstract partial class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObjectBase, TDomainObject, TIdent, TOperation> :
 
-        OperationBLLBase<TBLLContext, TDomainObjectBase, TDomainObject, TOperation>,
+        OperationBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObjectBase, TDomainObject, TOperation>,
 
         IBLLBase<TBLLContext, TDomainObject>
 

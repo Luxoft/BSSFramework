@@ -24,7 +24,7 @@ namespace Framework.Configuration.BLL
         }
 
         /// <inheritdoc />
-        public void Send([NotNull] NotificationEventDTO dto, TransactionMessageMode sendMessageMode = TransactionMessageMode.Auto)
+        public void Send([NotNull] NotificationEventDTO dto)
         {
             if (dto == null)
             {

@@ -2,16 +2,12 @@
 using System.Collections.Generic;
 
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.ServiceModel.Service;
-using Framework.DomainDriven.WebApiNetCore;
-using Framework.Exceptions;
 using Framework.OData;
 using Framework.Persistent;
 using Framework.Transfering;
 
 using Microsoft.AspNetCore.Mvc;
 
-using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 
@@ -36,19 +32,19 @@ namespace SampleSystem.WebApiCore.Controllers.Main
         public SelectOperationResult<HierarchicalNode<BusinessUnitFullDTO, Guid>> GetFullBusinessUnitsTreeByOData(string odataQueryString)
         {
             return this.Evaluate(
-                DBSessionMode.Read,
-                evaluateData =>
-                {
-                    var bll = evaluateData.Context.Logics.BusinessUnit;
-                    var selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
-                    var typedSelectOperation = evaluateData.Context.StandartExpressionBuilder.ToTyped<BusinessUnit>(selectOperation);
+                                 DBSessionMode.Read,
+                                 evaluateData =>
+                                 {
+                                     var bll = evaluateData.Context.Logics.BusinessUnit;
+                                     var selectOperation = evaluateData.Context.SelectOperationParser.Parse(odataQueryString);
+                                     var typedSelectOperation = evaluateData.Context.StandartExpressionBuilder.ToTyped<BusinessUnit>(selectOperation);
 
-                    var odataTree = bll.GetTreeByOData(
-                        typedSelectOperation,
-                        evaluateData.Context.FetchService.GetContainer<BusinessUnit>(ViewDTOType.FullDTO));
+                                     var odataTree = bll.GetTreeByOData(
+                                                                        typedSelectOperation,
+                                                                        evaluateData.Context.FetchService.GetContainer<BusinessUnit>(ViewDTOType.FullDTO));
 
-                    return odataTree.SelectN(x => x.ToFullDTO(evaluateData.MappingService));
-                });
+                                     return odataTree.SelectN(x => x.ToFullDTO(evaluateData.MappingService));
+                                 });
         }
 
         [HttpPost(nameof(TestPeriod))]

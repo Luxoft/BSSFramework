@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain.IntergrationVersions;
 using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.IntegrationTests.__Support.Utils;
 using SampleSystem.WebApiCore.Controllers.Integration;
@@ -21,7 +22,7 @@ namespace SampleSystem.IntegrationTests
             //Arrange
             var integrationVersion = 10;
 
-            var id = this.DataHelper.EvaluateWrite(context =>
+            var id = this.EvaluateWrite(context =>
                                                                     {
                                                                         var obj = new IntegrationVersionContainer1()
                                                                         {
@@ -51,7 +52,7 @@ namespace SampleSystem.IntegrationTests
 
             // Assert
 
-            var actual = this.DataHelper.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer1>().GetById(id));
+            var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer1>().GetById(id));
             actual.Name.Should().Be(expectedName);
             actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
         }
@@ -63,7 +64,7 @@ namespace SampleSystem.IntegrationTests
             var expectedIntegrationVersion = 10;
             var expectedName = Guid.NewGuid().ToString();
 
-            var id = this.DataHelper.EvaluateWrite(context =>
+            var id = this.EvaluateWrite(context =>
             {
                 var obj = new IntegrationVersionContainer1()
                 {
@@ -91,7 +92,7 @@ namespace SampleSystem.IntegrationTests
 
             // Assert
 
-            var actual = this.DataHelper.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer1>().GetById(id));
+            var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer1>().GetById(id));
             actual.Name.Should().Be(expectedName);
             actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
         }
@@ -103,7 +104,7 @@ namespace SampleSystem.IntegrationTests
             var expectedIntegrationVersion = 10;
             var expectedName = Guid.NewGuid().ToString();
 
-            var id = this.DataHelper.EvaluateWrite(context =>
+            var id = this.EvaluateWrite(context =>
                                                                     {
                                                                         var obj = new IntegrationVersionContainer1()
                                                                         {
@@ -131,7 +132,7 @@ namespace SampleSystem.IntegrationTests
 
             // Assert
 
-            var actual = this.DataHelper.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer1>().GetById(id));
+            var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer1>().GetById(id));
             actual.Name.Should().Be(expectedName);
             actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
         }
@@ -142,7 +143,7 @@ namespace SampleSystem.IntegrationTests
             //Arrange
             var integrationVersion = 10;
 
-            var id = this.DataHelper.EvaluateWrite(context =>
+            var id = this.EvaluateWrite(context =>
             {
                 var obj = new IntegrationVersionContainer2()
                 {
@@ -172,7 +173,7 @@ namespace SampleSystem.IntegrationTests
 
             // Assert
 
-            var actual = this.DataHelper.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer2>().GetById(id));
+            var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer2>().GetById(id));
             actual.Name.Should().Be(expectedName);
             actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
         }
@@ -184,7 +185,7 @@ namespace SampleSystem.IntegrationTests
             var expectedIntegrationVersion = 10;
             var expectedName = Guid.NewGuid().ToString();
 
-            var id = this.DataHelper.EvaluateWrite(context =>
+            var id = this.EvaluateWrite(context =>
             {
                 var obj = new IntegrationVersionContainer2()
                 {
@@ -212,7 +213,7 @@ namespace SampleSystem.IntegrationTests
 
             // Assert
 
-            var actual = this.DataHelper.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer2>().GetById(id));
+            var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer2>().GetById(id));
             actual.Name.Should().Be(expectedName);
             actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
         }
@@ -224,7 +225,7 @@ namespace SampleSystem.IntegrationTests
             var expectedIntegrationVersion = 10;
             var expectedName = Guid.NewGuid().ToString();
 
-            var id = this.DataHelper.EvaluateWrite(context =>
+            var id = this.EvaluateWrite(context =>
             {
                 var obj = new IntegrationVersionContainer2()
                 {
@@ -254,7 +255,7 @@ namespace SampleSystem.IntegrationTests
 
             // Assert
 
-            var actual = this.DataHelper.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer2>().GetById(id));
+            var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer2>().GetById(id));
             actual.Name.Should().Be(nextName);
             actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
         }
@@ -266,7 +267,7 @@ namespace SampleSystem.IntegrationTests
             var expectedIntegrationVersion = 10;
             var expectedName = Guid.NewGuid().ToString();
 
-            var id = this.DataHelper.EvaluateWrite(context =>
+            var id = this.EvaluateWrite(context =>
                                                                     {
                                                                         var obj = new IntegrationVersionContainer1()
                                                                         {
@@ -304,7 +305,7 @@ namespace SampleSystem.IntegrationTests
 
             // Assert
 
-            var actual = this.DataHelper.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer1>().GetById(id));
+            var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer1>().GetById(id));
             actual.Name.Should().Be(expectedName);
             actual.IntegrationVersion.Should().Be(expectedIntegrationVersion);
         }
@@ -316,7 +317,7 @@ namespace SampleSystem.IntegrationTests
             var expectedIntegrationVersion = 10;
             var expectedName = Guid.NewGuid().ToString();
 
-            var id = this.DataHelper.EvaluateWrite(context =>
+            var id = this.EvaluateWrite(context =>
             {
                 var obj = new IntegrationVersionContainer1()
                 {
@@ -354,7 +355,7 @@ namespace SampleSystem.IntegrationTests
 
             // Assert
 
-            var actual = this.DataHelper.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer1>().GetById(id));
+            var actual = this.EvaluateRead(context => context.Logics.Default.Create<IntegrationVersionContainer1>().GetById(id));
             actual.Name.Should().Be(modelName);
             actual.IntegrationVersion.Should().Be(expectedIntegrationVersion + 1);
         }

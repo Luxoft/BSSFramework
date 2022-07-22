@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 
+using Framework.Core;
+using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.WebApiNetCore;
 
 using JetBrains.Annotations;
@@ -13,7 +15,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
 public class ControllerEvaluator<TController>
-        where TController : ControllerBase, IApiControllerBase
+        where TController : ControllerBase
 {
     private readonly IServiceProvider rootServiceProvider;
 
@@ -39,17 +41,31 @@ public class ControllerEvaluator<TController>
     {
         using var scope = this.rootServiceProvider.CreateScope();
 
-        var controller = scope.ServiceProvider.GetRequiredService<TController>();
+        var scopeServiceProvider = scope.ServiceProvider;
+        var controller = scopeServiceProvider.GetRequiredService<TController>();
 
-        controller.ServiceProvider = scope.ServiceProvider;
+        (controller as IApiControllerBase).Maybe(c => c.ServiceProvider = scopeServiceProvider);
 
-        if (this.customPrincipalName == null)
+        try
         {
-            return await func(controller);
+            if (this.customPrincipalName == null)
+            {
+                return await func(controller);
+            }
+            else
+            {
+                return await scopeServiceProvider.GetRequiredService<IntegrationTestDefaultUserAuthenticationService>().WithImpersonateAsync(this.customPrincipalName, async () => await func(controller));
+            }
         }
-        else
+        catch
         {
-            return await scope.ServiceProvider.GetRequiredService<IntegrationTestsUserAuthenticationService>().ImpersonateAsync(this.customPrincipalName, async () => await func(controller));
+            scopeServiceProvider.TryFaultDbSession();
+
+            throw;
+        }
+        finally
+        {
+            scopeServiceProvider.TryCloseDbSession();
         }
     }
 

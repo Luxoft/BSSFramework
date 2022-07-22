@@ -1,4 +1,7 @@
 ﻿using System.Linq;
+
+using Framework.Core;
+
 using NHibernate.Engine;
 using NHibernate.Envers.Event;
 
@@ -20,7 +23,7 @@ namespace NHibernate.Envers.Patch
                 return new AuditReaderPatched(auditEventListener.VerCfg, session, sessionImpl);
             }
 
-            return EmptyAuditReaderPatched.Value;
+            return LazyInterfaceImplementHelper.CreateNotImplemented<IAuditReaderPatched>();
         }
     }
 }

@@ -4,12 +4,12 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="FluentMigrator" Version="3.3.2" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
 
-    <PackageReference Include="FluentAssertions" Version="6.5.1" />
-    <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="161.46521.71" />
-    <PackageReference Include="MSTest.TestAdapter" Version="2.2.8" />
-    <PackageReference Include="MSTest.TestFramework" Version="2.2.8" />
+    <PackageReference Include="FluentAssertions" Version="6.7.0" />
+    <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="161.47021.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.10" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.10" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />

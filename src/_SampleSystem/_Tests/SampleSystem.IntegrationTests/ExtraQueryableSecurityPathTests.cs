@@ -20,8 +20,7 @@ using SampleSystem.Domain.Projections;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Domain.ManualProjections;
-
-
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
 using BusinessRole = SampleSystem.IntegrationTests.__Support.Utils.BusinessRole;
 
@@ -86,7 +85,7 @@ namespace SampleSystem.IntegrationTests
             });
 
             // Act
-            var items = this.Environment.GetContextEvaluator().Evaluate (DBSessionMode.Read, TestEmployeeLogin, context =>
+            var items = this.GetContextEvaluator().Evaluate (DBSessionMode.Read, TestEmployeeLogin, context =>
             {
                 var employees = context.Logics.EmployeeFactory.Create(createProviderFunc(context)).GetSecureQueryable().ToList();
 

@@ -16,7 +16,7 @@ public class SetPermissionStatusStep : IStepBody
     [NotNull]
     private readonly IContextEvaluator<IAuthorizationBLLContext> contextEvaluator;
 
-    public SetPermissionStatusStep([NotNull] IScopedContextEvaluator<IAuthorizationBLLContext> contextEvaluator)
+    public SetPermissionStatusStep([NotNull] IContextEvaluator<IAuthorizationBLLContext> contextEvaluator)
     {
         this.contextEvaluator = contextEvaluator;
     }
@@ -27,7 +27,7 @@ public class SetPermissionStatusStep : IStepBody
     {
         var wfObj = (ApprovePermissionWorkflowObject)context.Workflow.Data;
 
-        this.contextEvaluator.Evaluate(DBSessionMode.Write, ctx =>
+        this.contextEvaluator.Evaluate (DBSessionMode.Write, ctx =>
         {
             var permission = ctx.Logics.Permission.GetById(wfObj.PermissionId, true);
 

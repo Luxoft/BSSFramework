@@ -29,9 +29,7 @@ namespace SampleSystem.WebApiCore.Controllers;
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
-public class WorkflowController : ApiControllerBase<
-        IServiceEnvironment<ISampleSystemBLLContext>,
-        ISampleSystemBLLContext, EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>
+public class WorkflowController : ApiControllerBase<ISampleSystemBLLContext, EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>
 {
     private readonly StartWorkflowJob startWorkflowJob;
 
@@ -39,17 +37,19 @@ public class WorkflowController : ApiControllerBase<
 
     private readonly IUserAuthenticationService userAuthenticationService;
 
+    private readonly IContextEvaluator<ISampleSystemBLLContext> contextEvaluator;
+
     public WorkflowController(
-            IServiceEnvironment<ISampleSystemBLLContext> environment,
-            IExceptionProcessor exceptionProcessor,
             StartWorkflowJob startWorkflowJob,
             IWorkflowHost workflowHost,
-            IUserAuthenticationService userAuthenticationService)
-            : base(environment, exceptionProcessor)
+            IUserAuthenticationService userAuthenticationService,
+            IContextEvaluator<ISampleSystemBLLContext> contextEvaluator)
+
     {
         this.startWorkflowJob = startWorkflowJob;
         this.workflowHost = workflowHost;
         this.userAuthenticationService = userAuthenticationService;
+        this.contextEvaluator = contextEvaluator;
     }
 
     protected override EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService> GetEvaluatedData(IDBSession session, ISampleSystemBLLContext context) =>
@@ -67,11 +67,11 @@ public class WorkflowController : ApiControllerBase<
     [HttpPost(nameof(GetMyPendingApproveOperationWorkflowObjects))]
     public async Task<List<ApproveOperationWorkflowObject>> GetMyPendingApproveOperationWorkflowObjects(PermissionIdentityDTO permissionIdent)
     {
-        var workflowOperationIdents = this.Evaluate(DBSessionMode.Read, evaluateData =>
+        var workflowOperationIdents = this.contextEvaluator.Evaluate(DBSessionMode.Read, ctx =>
         {
             var permissionIdStr = permissionIdent.Id.ToString();
 
-            var bll = evaluateData.Context.Logics.Default.Create<WorkflowCoreInstance>();
+            var bll = ctx.Logics.Default.Create<WorkflowCoreInstance>();
 
             var instances = bll.GetListBy(wi =>
                     wi.Data.Contains(permissionIdStr)
@@ -95,9 +95,9 @@ public class WorkflowController : ApiControllerBase<
             }
         }
 
-        this.Evaluate(DBSessionMode.Read, evaluateData =>
+        this.contextEvaluator.Evaluate(DBSessionMode.Read, ctx =>
         {
-            var authContext = evaluateData.Context.Authorization;
+            var authContext = ctx.Authorization;
 
             result.RemoveAll(wfObj =>
             {
@@ -122,11 +122,11 @@ public class WorkflowController : ApiControllerBase<
         return this.ApproveRejectOperation(permissionIdentity, rejectEventId, false);
     }
 
-    public async Task ApproveRejectOperation(PermissionIdentityDTO permissionIdentity, string eventId, bool isApprove)
+    private async Task ApproveRejectOperation(PermissionIdentityDTO permissionIdentity, string eventId, bool isApprove)
     {
         var permissionIdStr = permissionIdentity.Id.ToString();
 
-        var wiId = this.EvaluateC(
+        var wiId = this.contextEvaluator.Evaluate(
             DBSessionMode.Read,
             ctx => ctx.Logics.WorkflowCoreInstance.GetObjectBy(ee => ee.Data.Contains(permissionIdStr) && ee.Data.Contains(eventId), true).Id);
 
@@ -134,7 +134,7 @@ public class WorkflowController : ApiControllerBase<
 
         await Task.Delay(3000); // need refact
 
-        this.EvaluateC(
+        this.contextEvaluator.Evaluate(
             DBSessionMode.Read,
             ctx =>
             {

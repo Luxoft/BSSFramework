@@ -2,33 +2,23 @@
 
 using Automation.Utils;
 
-using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
-using Framework.Core;
 using Framework.DomainDriven.BLL;
+
 using SampleSystem.BLL;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
-using SampleSystem.IntegrationTests.__Support.Utils.Framework;
-using SampleSystem.ServiceEnvironment;
-using SampleSystem.WebApiCore;
+
 using BusinessRole = SampleSystem.IntegrationTests.__Support.Utils.BusinessRole;
-using PrincipalFullDTO = Framework.Authorization.Generated.DTO.PrincipalFullDTO;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
 {
-    public class AuthHelper : Utils.Framework.Authorization, IControllerEvaluatorContainer
+    public class AuthHelper : Utils.Framework.Authorization, IRootServiceProviderContainer
     {
-        public AuthHelper()
+        public AuthHelper(IServiceProvider rootServiceProvider)
+            : base(rootServiceProvider)
         {
         }
-
-        public AuthHelper(SampleSystemServiceEnvironment environment)
-        {
-            this.Environment = environment;
-        }
-
-        public SampleSystemServiceEnvironment Environment { get; set; }
 
         public void SetUserRole(EmployeeIdentityDTO employee, params IPermissionDefinition[] permissions)
         {
@@ -40,7 +30,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
         {
             this.SetCurrentUserRole(new SampleSystemPermission(businessRole));
         }
-        
+
         public Framework.Authorization.Generated.DTO.PrincipalIdentityDTO SavePrincipal(string name, bool active, Guid? externalId = null)
         {
             return this.EvaluateWrite(context =>
@@ -50,32 +40,15 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
                 return principal.ToIdentityDTO();
             });
         }
-        
+
         public string GetCurrentUserLogin()
         {
             return this.EvaluateRead(context => context.Authorization.CurrentPrincipalName);
         }
 
-        public override void EvaluateWrite(Action<ISampleSystemBLLContext> action)
-        {
-            this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, null, action);
-        }
-
-        public TResult EvaluateWrite<TResult>(Func<ISampleSystemBLLContext, TResult> func)
-        {
-            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, null, func);
-        }
-
-        public TResult EvaluateRead<TResult>(Func<ISampleSystemBLLContext, TResult> func)
-        {
-            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, null, func);
-        }
-
         public string GetEmployeeLogin(EmployeeIdentityDTO employee)
         {
-            return this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Read, ctx => ctx.Logics.Employee.GetById(employee.Id, true).Login);
+            return this.GetContextEvaluator().Evaluate(DBSessionMode.Read, ctx => ctx.Logics.Employee.GetById(employee.Id, true).Login);
         }
-        
-        IServiceProvider IControllerEvaluatorContainer.RootServiceProvider => this.Environment.RootServiceProvider;
     }
 }

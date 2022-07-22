@@ -11,6 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
@@ -27,7 +28,7 @@ namespace SampleSystem.IntegrationTests
             // Act
             this.ClearModifications();
 
-            var countryId = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            var countryId = this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
             {
                 var bll = context.Logics.Country;
 
@@ -62,7 +63,7 @@ namespace SampleSystem.IntegrationTests
             // Act
             this.ClearModifications();
 
-            this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, (context, session) =>
+            this.GetContextEvaluator().Evaluate(DBSessionMode.Write, (context, session) =>
             {
                 var bll = context.Logics.Country;
 
@@ -88,7 +89,7 @@ namespace SampleSystem.IntegrationTests
         {
             // Arrange
             var countryController = this.MainWebApi.Country;
-            var countryId = this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            var countryId = this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
             {
                 var bll = context.Logics.Country;
 
@@ -124,7 +125,7 @@ namespace SampleSystem.IntegrationTests
             var revision = 123;
 
             this.ClearModifications();
-            this.Environment.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
             {
                 var fakeModification = new DomainObjectModification()
                 {

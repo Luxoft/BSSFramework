@@ -17,13 +17,13 @@ namespace SampleSystem.IntegrationTests;
 public static class RootServiceProviderContainerExtensions
 {
     public static TResult EvaluateController<TController, TResult>(this IRootServiceProviderContainer controllerEvaluator, Func<TController, TResult> func)
-            where TController : ControllerBase, IApiControllerBase
+            where TController : ControllerBase
     {
         return controllerEvaluator.RootServiceProvider.GetRequiredService<ControllerEvaluator<TController>>().Evaluate(func);
     }
 
     public static void EvaluateController<TController>(this IRootServiceProviderContainer controllerEvaluator, Action<TController> action)
-            where TController : ControllerBase, IApiControllerBase
+            where TController : ControllerBase
     {
         controllerEvaluator.RootServiceProvider.GetRequiredService<ControllerEvaluator<TController>>().Evaluate(action);
     }

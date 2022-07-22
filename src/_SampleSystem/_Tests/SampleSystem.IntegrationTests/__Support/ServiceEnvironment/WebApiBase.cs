@@ -1,9 +1,6 @@
 ﻿using System;
 
-using Framework.DomainDriven.WebApiNetCore;
-
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
@@ -17,7 +14,7 @@ public abstract class WebApiBase : IRootServiceProviderContainer
     }
 
     public virtual ControllerEvaluator<TController> GetControllerEvaluator<TController>(string principalName = null)
-            where TController : ControllerBase, IApiControllerBase
+            where TController : ControllerBase
     {
         return this.serviceProvider.GetDefaultControllerEvaluator<TController>(principalName);
     }

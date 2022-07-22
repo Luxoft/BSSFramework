@@ -3,8 +3,6 @@
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.ServiceModel.Service;
-using Framework.Exceptions;
 
 using Microsoft.AspNetCore.Mvc;
 

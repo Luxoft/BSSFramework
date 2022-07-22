@@ -9,6 +9,7 @@ using Framework.Authorization.ApproveWorkflow;
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.WebApiNetCore;
 using Framework.WebApi.Utils;
 
 using MediatR;
@@ -98,6 +99,7 @@ namespace SampleSystem.WebApiCore
             app
                 .UseDefaultExceptionsHandling()
                 .UseCorrelationId("SampleSystem_{0}")
+                .UseTryProcessDbSession()
 
                 .UseHttpsRedirection()
                 .UseRouting()

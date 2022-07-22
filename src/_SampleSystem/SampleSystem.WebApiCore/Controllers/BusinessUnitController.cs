@@ -2,16 +2,12 @@
 using System.Collections.Generic;
 
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.ServiceModel.Service;
-using Framework.DomainDriven.WebApiNetCore;
-using Framework.Exceptions;
 using Framework.OData;
 using Framework.Persistent;
 using Framework.Transfering;
 
 using Microsoft.AspNetCore.Mvc;
 
-using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 

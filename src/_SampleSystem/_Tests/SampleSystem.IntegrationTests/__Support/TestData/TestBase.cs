@@ -188,7 +188,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
         }
 
         public ControllerEvaluator<TController> GetControllerEvaluator<TController>(string principalName = null)
-                where TController : ControllerBase, IApiControllerBase
+                where TController : ControllerBase
         {
             return this.RootServiceProvider.GetDefaultControllerEvaluator<TController>(principalName);
         }

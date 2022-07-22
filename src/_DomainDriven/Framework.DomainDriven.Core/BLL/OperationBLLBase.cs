@@ -1,5 +1,4 @@
 ﻿using System;
-using Framework.Core;
 
 namespace Framework.DomainDriven.BLL
 {

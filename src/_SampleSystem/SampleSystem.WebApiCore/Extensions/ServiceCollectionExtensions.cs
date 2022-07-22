@@ -50,9 +50,8 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<DefaultAuthDALListener>();
 
-        services.AddScoped<IBeforeTransactionCompletedDALListener>(sp => sp.GetRequiredService<DefaultAuthDALListener>());
-        services.AddScoped<IManualEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>>(sp => sp.GetRequiredService<DefaultAuthDALListener>());
-
+        services.AddScopedFrom<IBeforeTransactionCompletedDALListener, DefaultAuthDALListener>();
+        services.AddScopedFrom<IManualEventDALListener<Framework.Authorization.Domain.PersistentDomainObjectBase>, DefaultAuthDALListener>();
 
         services.AddScoped<EvaluatedData<IAuthorizationBLLContext, IAuthorizationDTOMappingService>>();
         services.AddScoped<IAuthorizationDTOMappingService, AuthorizationServerPrimitiveDTOMappingService>();
@@ -63,7 +62,6 @@ public static class ServiceCollectionExtensions
         services.AddScoped<EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>();
         services.AddScoped<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService>();
 
-
         services.AddScoped<IOperationEventSenderContainer<PersistentDomainObjectBase>, OperationEventSenderContainer<PersistentDomainObjectBase>>();
 
         services.AddScoped<IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>>, SampleSystemLocalDBEventMessageSender>();
@@ -72,11 +70,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IOperationEventListener<Framework.Authorization.Domain.PersistentDomainObjectBase>, AuthorizationEventsSubscriptionManager>();
         services.AddScoped<IMessageSender<IDomainOperationSerializeData<Framework.Authorization.Domain.PersistentDomainObjectBase>>, AuthorizationLocalDBEventMessageSender>();
 
-
         services.AddScoped<SampleSystemAribaLocalDBEventMessageSender>();
         services.AddScoped<IOperationEventListener<PersistentDomainObjectBase>, SampleSystemAribaEventsSubscriptionManager>();
-
-        services.AddScoped<IStandardSubscriptionService, LocalDBSubscriptionService>();
 
 
         services.AddSingleton(AvailableValuesHelper.AvailableValues.ToValidation());
@@ -90,7 +85,7 @@ public static class ServiceCollectionExtensions
         services.RegisterAdditonalAuthorizationBLL();
 
 
-        services.RegisterGenericBLLServices();
+        services.RegisterGenericServices();
         services.RegisterAuthorizationSystem();
 
         services.RegisterAuthorizationBLL();
@@ -110,7 +105,7 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection RegisterAdditonalAuthorizationBLL(this IServiceCollection services)
     {
-        return services.AddScoped<ISecurityTypeResolverContainer>(sp => sp.GetRequiredService<ISampleSystemBLLContext>())
+        return services.AddScopedFrom<ISecurityTypeResolverContainer, ISampleSystemBLLContext>()
                        .AddScoped<IAuthorizationExternalSource, AuthorizationExternalSource<ISampleSystemBLLContext, PersistentDomainObjectBase, AuditPersistentDomainObjectBase, SampleSystemSecurityOperationCode>>();
     }
 
@@ -130,13 +125,13 @@ public static class ServiceCollectionExtensions
                 .AddSingleton(new SampleSystemMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<PersistentDomainObjectBase>.OData))
                 .AddScoped<ISampleSystemSecurityService, SampleSystemSecurityService>()
                 .AddScoped<ISampleSystemBLLFactoryContainer, SampleSystemBLLFactoryContainer>()
-                 .AddSingleton<ICryptService<CryptSystem>, CryptService<CryptSystem>>()
+                .AddSingleton<ICryptService<CryptSystem>, CryptService<CryptSystem>>()
                 .AddScoped<ISampleSystemBLLContextSettings>(_ => new SampleSystemBLLContextSettings { TypeResolver  = new[] { new SampleSystemBLLContextSettings().TypeResolver, TypeSource.FromSample<BusinessUnitSimpleDTO>().ToDefaultTypeResolver() }.ToComposite() })
-                .AddLazyInterfaceImplementScoped<ISampleSystemBLLContext, SampleSystemBLLContext>()
+                .AddScopedFromLazyInterfaceImplement<ISampleSystemBLLContext, SampleSystemBLLContext>()
 
-                .AddScoped<ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode>>(sp => sp.GetRequiredService<ISampleSystemBLLContext>())
-                .AddScoped<IDisabledSecurityProviderContainer<PersistentDomainObjectBase>>(sp => sp.GetRequiredService<ISampleSystemSecurityService>())
-                .AddScoped<ISampleSystemSecurityPathContainer>(sp => sp.GetRequiredService<ISampleSystemSecurityService>())
+                .AddScopedFrom<ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode>, ISampleSystemBLLContext>()
+                .AddScopedFrom<IDisabledSecurityProviderContainer<PersistentDomainObjectBase>, ISampleSystemSecurityService>()
+                .AddScopedFrom<ISampleSystemSecurityPathContainer, ISampleSystemSecurityService>()
                 .AddScoped<IQueryableSource<PersistentDomainObjectBase>, BLLQueryableSource<ISampleSystemBLLContext, PersistentDomainObjectBase, DomainObjectBase, Guid>>()
                 .AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
                 .AddScoped<IAccessDeniedExceptionService<PersistentDomainObjectBase>, AccessDeniedExceptionService<PersistentDomainObjectBase, Guid>>()

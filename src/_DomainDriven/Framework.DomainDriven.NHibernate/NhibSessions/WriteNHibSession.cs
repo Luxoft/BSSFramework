@@ -218,6 +218,7 @@ namespace Framework.DomainDriven.NHibernate
 
                         var changedEventArgs = new DALChangesEventArgs(changes);
 
+                        // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!! Use UseTryCloseDbSession middleware
                         this.eventListener.OnFlushed(changedEventArgs);
                     }
                 } while (true);
@@ -226,6 +227,7 @@ namespace Framework.DomainDriven.NHibernate
                 {
                     var beforeTransactionCompletedChangeState = dalHistory.Composite();
 
+                    // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!!!!! Use UseTryCloseDbSession middleware
                     this.eventListener.OnBeforeTransactionCompleted(new DALChangesEventArgs(beforeTransactionCompletedChangeState));
 
                     this.InnerSession.Flush();
@@ -234,6 +236,7 @@ namespace Framework.DomainDriven.NHibernate
                             new[] { beforeTransactionCompletedChangeState, this.collectChangedEventListener.EvictChanges() }
                                     .Composite();
 
+                    // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!!!!! Use UseTryCloseDbSession middleware
                     this.eventListener.OnAfterTransactionCompleted(new DALChangesEventArgs(afterTransactionCompletedChangeState));
 
                     this.InnerSession

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 
+using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.WebApiNetCore;
 
 using JetBrains.Annotations;
@@ -15,7 +15,7 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
 public class ControllerEvaluator<TController>
-        where TController : ControllerBase, IApiControllerBase
+        where TController : ControllerBase
 {
     private readonly IServiceProvider rootServiceProvider;
 
@@ -43,27 +43,25 @@ public class ControllerEvaluator<TController>
 
         var scopeServiceProvider = scope.ServiceProvider;
         var controller = scopeServiceProvider.GetRequiredService<TController>();
-        controller.ServiceProvider = scopeServiceProvider;
+
+        (controller as IApiControllerBase).Maybe(c => c.ServiceProvider = scopeServiceProvider);
 
         try
         {
-            try
+            if (this.customPrincipalName == null)
             {
-                if (this.customPrincipalName == null)
-                {
-                    return await func(controller);
-                }
-                else
-                {
-                    return await scopeServiceProvider.GetRequiredService<IntegrationTestDefaultUserAuthenticationService>().WithImpersonateAsync(this.customPrincipalName, async () => await func(controller));
-                }
+                return await func(controller);
             }
-            catch
+            else
             {
-                scopeServiceProvider.TryFaultDbSession();
+                return await scopeServiceProvider.GetRequiredService<IntegrationTestDefaultUserAuthenticationService>().WithImpersonateAsync(this.customPrincipalName, async () => await func(controller));
+            }
+        }
+        catch
+        {
+            scopeServiceProvider.TryFaultDbSession();
 
-                throw;
-            }
+            throw;
         }
         finally
         {

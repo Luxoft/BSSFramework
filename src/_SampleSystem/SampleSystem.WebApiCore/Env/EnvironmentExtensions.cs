@@ -49,8 +49,7 @@ namespace SampleSystem.WebApiCore
             services.AddCapBss(connectionString);
 
             // Notifications
-            services
-                .AddSingleton<ISubscriptionMetadataFinder, SampleSystemSubscriptionsMetadataFinder>();
+            services.AddSingleton<ISubscriptionMetadataFinder, SampleSystemSubscriptionsMetadataFinder>();
             services.RegisterMessageSenderDependencies<ISampleSystemBLLContext>(configuration);
             services.RegisterRewriteReceiversDependencies(configuration);
 
@@ -58,18 +57,17 @@ namespace SampleSystem.WebApiCore
             services.AddSingleton<IDateTimeService>(DateTimeService.Default);
 
             services.AddSingleton<SampleSystemDefaultUserAuthenticationService>();
-            services.AddSingleton<IDefaultUserAuthenticationService>(sp => sp.GetRequiredService<SampleSystemDefaultUserAuthenticationService>());
+            services.AddSingletonFrom<IDefaultUserAuthenticationService, SampleSystemDefaultUserAuthenticationService>();
+            services.AddSingletonFrom<IAuditRevisionUserAuthenticationService, SampleSystemDefaultUserAuthenticationService>();
 
-            services.AddScoped<SampleSystemUserAuthenticationService, SampleSystemUserAuthenticationService>();
-            services.AddScoped<IUserAuthenticationService>(sp => sp.GetRequiredService<SampleSystemUserAuthenticationService>());
-            services.AddScoped<IUserAuthenticationService>(sp => sp.GetRequiredService<SampleSystemUserAuthenticationService>());
-
-            services.AddSingleton<IAuditRevisionUserAuthenticationService>(sp => sp.GetRequiredService<SampleSystemDefaultUserAuthenticationService>());
+            services.AddScoped<SampleSystemUserAuthenticationService>();
+            services.AddScopedFrom<IUserAuthenticationService, SampleSystemUserAuthenticationService>();
+            services.AddScopedFrom<IUserAuthenticationService, SampleSystemUserAuthenticationService>();
 
             services.AddSingleton<ISpecificationEvaluator, NhSpecificationEvaluator>();
 
-            services.AddSingleton<IWorkflowManager, WorkflowManager>(sp => sp.GetRequiredService<WorkflowManager>());
             services.AddSingleton<WorkflowManager>();
+            services.AddSingletonFrom<IWorkflowManager, WorkflowManager>();
 
             return services.AddControllerEnvironment();
         }
@@ -78,7 +76,7 @@ namespace SampleSystem.WebApiCore
                 services.AddScoped<INHibSessionSetup, NHibSessionSettings>()
 
                         .AddScoped<IDBSessionEventListener, DBSessionEventListener>()
-                        .AddLazyScoped<IDBSession, NHibSession>()
+                        .AddScopedFromLazy<IDBSession, NHibSession>()
 
                         .AddSingleton<INHibSessionEnvironmentSettings, NHibSessionEnvironmentSettings>()
                         .AddSingleton<NHibConnectionSettings>()

@@ -68,12 +68,12 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
 
                                   .AddSingleton<IntegrationTestDefaultUserAuthenticationService>()
-                                  .AddSingleton<IDefaultUserAuthenticationService>(sp => sp.GetRequiredService<IntegrationTestDefaultUserAuthenticationService>())
-                                  .AddSingleton<IAuditRevisionUserAuthenticationService>(sp => sp.GetRequiredService<IntegrationTestDefaultUserAuthenticationService>())
+                                  .AddSingletonFrom<IDefaultUserAuthenticationService, IntegrationTestDefaultUserAuthenticationService>()
+                                  .AddSingletonFrom<IAuditRevisionUserAuthenticationService, IntegrationTestDefaultUserAuthenticationService>()
 
                                   .AddScoped<SampleSystemUserAuthenticationService>()
-                                  .AddScoped<IUserAuthenticationService>(sp => sp.GetRequiredService<SampleSystemUserAuthenticationService>())
-                                  .AddScoped<IImpersonateService>(sp => sp.GetRequiredService<SampleSystemUserAuthenticationService>())
+                                  .AddScopedFrom<IUserAuthenticationService, SampleSystemUserAuthenticationService>()
+                                  .AddScopedFrom<IImpersonateService, SampleSystemUserAuthenticationService>()
 
                                   .AddSingleton(new SubscriptionMetadataStore(new SampleSystemSubscriptionsMetadataFinder()))
 
@@ -84,8 +84,8 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .AddSingleton<ICapTransactionManager, TestCapTransactionManager>()
                                   .AddSingleton<IIntegrationEventBus, TestIntegrationEventBus>()
 
-                                  .AddSingleton<IWorkflowManager, WorkflowManager>(sp => sp.GetRequiredService<WorkflowManager>())
                                   .AddSingleton<WorkflowManager>()
+                                  .AddSingletonFrom<IWorkflowManager, WorkflowManager>()
 
                                   .AddScoped<IWorkflowApproveProcessor, WorkflowApproveProcessor>()
                                   .AddScoped<StartWorkflowJob>()

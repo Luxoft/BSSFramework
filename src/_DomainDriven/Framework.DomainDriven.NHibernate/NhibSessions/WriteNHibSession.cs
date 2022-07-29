@@ -22,7 +22,7 @@ namespace Framework.DomainDriven.NHibernate
 {
     public class WriteNHibSession : NHibSessionBase
     {
-        private readonly IDBSessionEventListener eventListener;
+        private readonly IDBSessionEventListener[] eventListeners;
 
         [NotNull]
         private readonly AuditPropertyPair modifyAuditProperties;
@@ -44,10 +44,10 @@ namespace Framework.DomainDriven.NHibernate
 
         internal WriteNHibSession(NHibSessionEnvironment environment,
                                   INHibSessionSetup settings,
-                                  IDBSessionEventListener eventListener)
+                                  IEnumerable<IDBSessionEventListener> eventListeners)
                 : base(environment, DBSessionMode.Write)
         {
-            this.eventListener = eventListener;
+            this.eventListeners = eventListeners.ToArray();
             this.modifyAuditProperties = settings.GetModifyAuditProperty();
             this.createAuditProperties = settings.GetCreateAuditProperty();
             this.collectChangedEventListener = new CollectChangesEventListener();
@@ -219,7 +219,7 @@ namespace Framework.DomainDriven.NHibernate
                         var changedEventArgs = new DALChangesEventArgs(changes);
 
                         // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!! Use UseTryCloseDbSession middleware
-                        this.eventListener.OnFlushed(changedEventArgs);
+                        this.eventListeners.Foreach(eventListener => eventListener.OnFlushed(changedEventArgs));
                     }
                 } while (true);
 
@@ -228,7 +228,7 @@ namespace Framework.DomainDriven.NHibernate
                     var beforeTransactionCompletedChangeState = dalHistory.Composite();
 
                     // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!!!!! Use UseTryCloseDbSession middleware
-                    this.eventListener.OnBeforeTransactionCompleted(new DALChangesEventArgs(beforeTransactionCompletedChangeState));
+                    this.eventListeners.Foreach(eventListener => eventListener.OnBeforeTransactionCompleted(new DALChangesEventArgs(beforeTransactionCompletedChangeState)));
 
                     this.InnerSession.Flush();
 
@@ -237,7 +237,7 @@ namespace Framework.DomainDriven.NHibernate
                                     .Composite();
 
                     // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!!!!! Use UseTryCloseDbSession middleware
-                    this.eventListener.OnAfterTransactionCompleted(new DALChangesEventArgs(afterTransactionCompletedChangeState));
+                    this.eventListeners.Foreach(eventListener => eventListener.OnAfterTransactionCompleted(new DALChangesEventArgs(afterTransactionCompletedChangeState)));
 
                     this.InnerSession
                         .Flush(); // Флашим для того, чтобы проверить, что никто ничего не менял в объектах после AfterTransactionCompleted-евента

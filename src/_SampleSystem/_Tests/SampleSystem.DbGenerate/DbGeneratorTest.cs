@@ -17,8 +17,6 @@ namespace SampleSystem.DbGenerate
     [TestClass]
     public class DbGeneratorTest
     {
-        private readonly IUserAuthenticationService userAuthenticationService = UserAuthenticationService.CreateFor("DbGenerator");
-
         private readonly ServerGenerationEnvironment environment = new();
 
         [TestMethod]
@@ -57,7 +55,6 @@ namespace SampleSystem.DbGenerate
                                                    serverName,
                                                    new DatabaseName(mainDatabaseName, "auth"),
                                                    new DatabaseName(mainDatabaseName, "auth").ToDefaultAudit(),
-                                                   this.userAuthenticationService,
                                                    mode,
                                                    true,
                                                    credential);
@@ -66,7 +63,6 @@ namespace SampleSystem.DbGenerate
                                                    serverName,
                                                    new DatabaseName(mainDatabaseName, "configuration"),
                                                    new DatabaseName(mainDatabaseName, "configuration").ToDefaultAudit(),
-                                                   this.userAuthenticationService,
                                                    mode,
                                                    true,
                                                    credential);
@@ -76,7 +72,6 @@ namespace SampleSystem.DbGenerate
                                                      serverName,
                                                      new DatabaseName(mainDatabaseName, "app"),
                                                      new DatabaseName(mainDatabaseName, "app").ToDefaultAudit(),
-                                                     this.userAuthenticationService,
                                                      mode: mode,
                                                      generatorMode: generatorMode,
                                                      migrationScriptFolderPaths: migrationScriptFolderPaths,
@@ -91,7 +86,6 @@ namespace SampleSystem.DbGenerate
                 string serverName,
                 DatabaseName databaseName,
                 AuditDatabaseName auditDatabaseName,
-                IUserAuthenticationService userAuthenticationService,
                 DatabaseScriptGeneratorMode generatorMode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
                 DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnTargetDatabase,
                 IEnumerable<string> migrationScriptFolderPaths = null,
@@ -104,7 +98,6 @@ namespace SampleSystem.DbGenerate
 
             var result = generator.Generate(
                                             serverName,
-                                            userAuthenticationService,
                                             mode: mode,
                                             generatorMode: generatorMode,
                                             migrationScriptFolderPaths: migrationScriptFolderPaths,
@@ -121,7 +114,6 @@ namespace SampleSystem.DbGenerate
                 string serverName,
                 DatabaseName mainDatabaseName,
                 AuditDatabaseName auditDatabaseName,
-                IUserAuthenticationService userAuthenticationService,
                 DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnCopySchemeDatabase,
                 bool preserveSchemaDatabase = false,
                 UserCredential credential = null)
@@ -135,7 +127,6 @@ namespace SampleSystem.DbGenerate
                                 serverName,
                                 mainDatabaseName,
                                 auditDatabaseName,
-                                userAuthenticationService,
                                 migrationScriptFolderPaths: migrationScriptFolderPaths,
                                 mode: mode,
                                 preserveSchemaDatabase: preserveSchemaDatabase,
@@ -151,7 +142,6 @@ namespace SampleSystem.DbGenerate
                 string serverName,
                 DatabaseName mainDatabaseName,
                 AuditDatabaseName auditDatabaseName,
-                IUserAuthenticationService userAuthenticationService,
                 DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnCopySchemeDatabase,
                 bool preserveSchemaDatabase = false,
                 UserCredential credential = null)
@@ -161,7 +151,6 @@ namespace SampleSystem.DbGenerate
              serverName,
              mainDatabaseName,
              auditDatabaseName,
-             userAuthenticationService,
              migrationScriptFolderPaths: migrationScriptFolderPaths,
              mode: mode,
              preserveSchemaDatabase: preserveSchemaDatabase,

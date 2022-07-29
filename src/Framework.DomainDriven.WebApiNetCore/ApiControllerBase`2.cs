@@ -27,8 +27,6 @@ namespace Framework.DomainDriven.WebApiNetCore
     {
         private IServiceProvider serviceProvider;
 
-        private bool evaluateInvoked;
-
         public override IServiceProvider ServiceProvider
         {
             get { return this.serviceProvider ?? this.HttpContext?.RequestServices; }
@@ -73,19 +71,7 @@ namespace Framework.DomainDriven.WebApiNetCore
         [NonAction]
         public TResult Evaluate<TResult>(DBSessionMode sessionMode, Func<TEvaluatedData, TResult> getResult)
         {
-            if (this.evaluateInvoked)
-            {
-                throw new Exception("Allowed single evaluate. For multiply session DON'T use this method. Use IContextEvaluator<,>");
-            }
-
-            this.evaluateInvoked = true;
-
-            if (sessionMode == DBSessionMode.Read)
-            {
-                this.ServiceProvider.GetRequiredService<IDBSession>().AsReadOnly();
-            }
-
-            return getResult(this.ServiceProvider.GetRequiredService<TEvaluatedData>());
+            return this.serviceProvider.GetRequiredService<IApiControllerBaseEvaluator<TEvaluatedData>>().Evaluate(sessionMode, getResult);
         }
 
         /// <summary>

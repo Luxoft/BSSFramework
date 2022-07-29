@@ -307,8 +307,6 @@ namespace Framework.DomainDriven.DBGenerator.ScriptGenerators
             public ISqlDatabaseFactory SqlDatabaseFactory => this._source.SqlDatabaseFactory;
 
             public AssemblyMetadata AssemblyMetadata => this._source.AssemblyMetadata;
-
-            public IUserAuthenticationService UserAuthenticationService => this._source.UserAuthenticationService;
         }
     }
 }

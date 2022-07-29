@@ -4,6 +4,8 @@ using Framework.DomainDriven.BLL;
 
 using Microsoft.Extensions.DependencyInjection;
 
+namespace Framework.DomainDriven.WebApiNetCore;
+
 public class ApiControllerBaseSingleCallEvaluator<TEvaluatedData> : IApiControllerBaseEvaluator<TEvaluatedData>
 {
     private readonly IServiceProvider serviceProvider;

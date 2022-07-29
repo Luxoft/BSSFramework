@@ -1,6 +1,4 @@
-﻿using Framework.Core.Services;
-using Framework.DomainDriven.Metadata;
-using Framework.DomainDriven.NHibernate;
+﻿using Framework.DomainDriven.Metadata;
 
 namespace Framework.DomainDriven.DBGenerator.Contracts
 {
@@ -23,7 +21,5 @@ namespace Framework.DomainDriven.DBGenerator.Contracts
         /// Метаданные доменной модели по которой будут строиться скрипты
         /// </summary>
         AssemblyMetadata AssemblyMetadata { get; }
-
-        IUserAuthenticationService UserAuthenticationService { get; }
     }
 }

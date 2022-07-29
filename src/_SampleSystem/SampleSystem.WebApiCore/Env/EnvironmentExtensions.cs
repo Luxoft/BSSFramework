@@ -2,9 +2,12 @@
 
 using Framework.Authorization.BLL;
 using Framework.Authorization.Generated.DAL.NHibernate;
+using Framework.Authorization.Generated.DTO;
 using Framework.Cap;
+using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Generated.DAL.NHibernate;
+using Framework.Configuration.Generated.DTO;
 using Framework.Core.Services;
 using Framework.CustomReports.Domain;
 using Framework.CustomReports.Services;
@@ -16,6 +19,7 @@ using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.Serialization;
 using Framework.DomainDriven.SerializeMetadata;
 using Framework.DomainDriven.ServiceModel.IAD;
+using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Exceptions;
 
@@ -23,6 +27,7 @@ using JetBrains.Annotations;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 using nuSpec.Abstraction;
 using nuSpec.NHibernate;
@@ -30,6 +35,7 @@ using nuSpec.NHibernate;
 using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DAL.NHibernate;
+using SampleSystem.Generated.DTO;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.CustomReports;
 using SampleSystem.WebApiCore.Env;
@@ -104,6 +110,10 @@ namespace SampleSystem.WebApiCore
 
             services.AddSingleton<IContextEvaluator<IAuthorizationBLLContext>, ContextEvaluator<IAuthorizationBLLContext>>();
             services.AddSingleton<IContextEvaluator<ISampleSystemBLLContext>, ContextEvaluator<ISampleSystemBLLContext>>();
+
+            services.AddScoped<IApiControllerBaseEvaluator<EvaluatedData<IAuthorizationBLLContext, IAuthorizationDTOMappingService>>, ApiControllerBaseSingleCallEvaluator<EvaluatedData<IAuthorizationBLLContext, IAuthorizationDTOMappingService>>>();
+            services.AddScoped<IApiControllerBaseEvaluator<EvaluatedData<IConfigurationBLLContext, IConfigurationDTOMappingService>>, ApiControllerBaseSingleCallEvaluator<EvaluatedData<IConfigurationBLLContext, IConfigurationDTOMappingService>>>();
+            services.AddScoped<IApiControllerBaseEvaluator<EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>, ApiControllerBaseSingleCallEvaluator<EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>>();
 
             return services;
         }

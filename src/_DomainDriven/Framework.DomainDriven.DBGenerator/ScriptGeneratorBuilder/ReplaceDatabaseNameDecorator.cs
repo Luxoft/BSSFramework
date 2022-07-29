@@ -35,7 +35,7 @@ namespace Framework.DomainDriven.DBGenerator
         /// <returns>Скрипт модификации</returns>
         public IDatabaseScriptResult GenerateScript(IDatabaseScriptGeneratorContext context)
         {
-            return this._source.GenerateScript(new DatabaseScriptGeneratorContext(this._nextDatabaseNameFunc(context), context.SqlDatabaseFactory, context.AssemblyMetadata, context.UserAuthenticationService));
+            return this._source.GenerateScript(new DatabaseScriptGeneratorContext(this._nextDatabaseNameFunc(context), context.SqlDatabaseFactory, context.AssemblyMetadata));
         }
     }
 }

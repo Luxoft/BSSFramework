@@ -1,19 +1,14 @@
 ﻿using System;
 
-using Framework.Core.Services;
 using Framework.DomainDriven.DBGenerator.Contracts;
 using Framework.DomainDriven.DBGenerator.Team;
 using Framework.DomainDriven.Metadata;
-
-using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.DBGenerator
 {
     public class DatascriptGeneratorBuilder
     {
         private readonly DBGenerateScriptMode scriptMode;
-
-        private readonly IUserAuthenticationService userAuthenticationService;
 
         private readonly MainDBScriptGeneratorBuilder mainDbScriptGeneratorBuilder;
         private readonly AuditDBScriptGeneratorBuilder auditDbScriptGeneratorBuilder;
@@ -23,10 +18,9 @@ namespace Framework.DomainDriven.DBGenerator
         private AssemblyMetadata assemblyMetadata;
 
 
-        public DatascriptGeneratorBuilder(DBGenerateScriptMode scriptMode, [NotNull] IUserAuthenticationService userAuthenticationService)
+        public DatascriptGeneratorBuilder(DBGenerateScriptMode scriptMode)
         {
             this.scriptMode = scriptMode;
-            this.userAuthenticationService = userAuthenticationService ?? throw new ArgumentNullException(nameof(userAuthenticationService));
 
             this.mainDbScriptGeneratorBuilder = new MainDBScriptGeneratorBuilder();
             this.auditDbScriptGeneratorBuilder = new AuditDBScriptGeneratorBuilder();
@@ -91,7 +85,7 @@ namespace Framework.DomainDriven.DBGenerator
         {
             this.ValidateConfiguration();
 
-            var context = new DatabaseScriptGeneratorContext(this.databaseName, this.sqlDatabaseFactory, this.assemblyMetadata, this.userAuthenticationService);
+            var context = new DatabaseScriptGeneratorContext(this.databaseName, this.sqlDatabaseFactory, this.assemblyMetadata);
 
             return this.Build().GenerateScript(context);
         }

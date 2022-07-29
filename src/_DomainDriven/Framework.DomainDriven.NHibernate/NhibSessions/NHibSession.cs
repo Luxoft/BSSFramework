@@ -15,7 +15,7 @@ public class NHibSession : IDBSession
 
     private readonly Lazy<IDBSession> lazyInnerSession;
 
-    public NHibSession([NotNull] NHibSessionEnvironment environment, INHibSessionSetup settings, IDBSessionEventListener eventListener)
+    public NHibSession([NotNull] NHibSessionEnvironment environment, INHibSessionSetup settings, IEnumerable<IDBSessionEventListener> eventListeners)
     {
         if (environment == null) throw new ArgumentNullException(nameof(environment));
 
@@ -27,7 +27,7 @@ public class NHibSession : IDBSession
                     return new ReadOnlyNHibSession(environment);
 
                 case DBSessionMode.Write:
-                    return new WriteNHibSession(environment, settings, eventListener);
+                    return new WriteNHibSession(environment, settings, eventListeners);
 
                 default:
                     throw new InvalidOperationException();

@@ -38,7 +38,6 @@ namespace Framework.DomainDriven.DBGenerator
         /// Generates the specified server name.
         /// </summary>
         /// <param name="serverName">Name of the server.</param>
-        /// <param name="userAuthenticationService">The user authentication service.</param>
         /// <param name="generatorMode">The generator mode.</param>
         /// <param name="mode">The mode.</param>
         /// <param name="databaseName">Name of the database.</param>
@@ -53,7 +52,6 @@ namespace Framework.DomainDriven.DBGenerator
         /// <returns>IDatabaseScriptResult.</returns>
         public IDatabaseScriptResult Generate(
             string serverName,
-            IUserAuthenticationService userAuthenticationService,
             DatabaseScriptGeneratorMode generatorMode = DatabaseScriptGeneratorMode.AutoGenerateUpdateChangeTypeScript,
             DBGenerateScriptMode mode = DBGenerateScriptMode.AppliedOnTargetDatabase,
             string databaseName = null,
@@ -82,7 +80,7 @@ namespace Framework.DomainDriven.DBGenerator
 
             this.FilterMetadata(metadata);
 
-            var builder = new DatascriptGeneratorBuilder(mode, userAuthenticationService);
+            var builder = new DatascriptGeneratorBuilder(mode);
 
             this.Init(builder, generatorMode, ignoredIndexes);
 

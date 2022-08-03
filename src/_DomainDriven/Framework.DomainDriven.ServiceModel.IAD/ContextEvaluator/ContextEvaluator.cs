@@ -24,7 +24,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             await using var scope = this.rootServiceProvider.CreateAsyncScope();
 
             var scopeServiceProvider = scope.ServiceProvider;
-            var session = scopeServiceProvider.GetRequiredService<IDBSession>();
+            using var session = scopeServiceProvider.GetRequiredService<IDBSession>();
 
             if (sessionMode == DBSessionMode.Read)
             {
@@ -58,8 +58,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
                 throw;
             }
-
-            scopeServiceProvider.TryCloseDbSession();
 
             return result;
         }

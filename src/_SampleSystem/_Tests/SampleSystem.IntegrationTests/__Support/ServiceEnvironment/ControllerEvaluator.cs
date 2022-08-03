@@ -3,7 +3,10 @@ using System.Threading.Tasks;
 
 using Framework.Core;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.BLL.Configuration;
+using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
+using Framework.Exceptions;
 
 using JetBrains.Annotations;
 
@@ -34,38 +37,64 @@ public class ControllerEvaluator<TController>
 
     public T Evaluate<T>(Func<TController, T> func)
     {
-        return this.EvaluateAsync(async c => func(c)).Result;
+        return this.EvaluateAsync(c => Task.FromResult(func(c))).Result;
     }
 
     public async Task<T> EvaluateAsync<T>(Func<TController, Task<T>> func)
     {
-        using var scope = this.rootServiceProvider.CreateScope();
+        try
+        {
+            using var scope = this.rootServiceProvider.CreateScope();
 
-        var scopeServiceProvider = scope.ServiceProvider;
+            var scopeServiceProvider = scope.ServiceProvider;
+
+            try
+            {
+                return await this.InternalEvaluateAsync(scopeServiceProvider, func);
+            }
+            catch (Exception baseException)
+            {
+                scopeServiceProvider.TryFaultDbSession();
+
+                var expandedBaseException = scopeServiceProvider.GetRequiredService<IConfigurationBLLContext>().ExceptionService.Process(baseException, true);
+
+                throw new EvaluateException(baseException, expandedBaseException);
+            }
+            finally
+            {
+                scopeServiceProvider.TryCloseDbSession();
+            }
+        }
+        catch (Exception ex)
+        {
+            var ep = this.rootServiceProvider.GetRequiredService<IRootExceptionService>();
+
+            var processEx = ep.Process(ex);
+
+            if (processEx != ex)
+            {
+                throw processEx;
+            }
+            else
+            {
+                throw;
+            }
+        }
+    }
+
+    private async Task<T> InternalEvaluateAsync<T>(IServiceProvider scopeServiceProvider, Func<TController, Task<T>> func)
+    {
         var controller = scopeServiceProvider.GetRequiredService<TController>();
 
         (controller as IApiControllerBase).Maybe(c => c.ServiceProvider = scopeServiceProvider);
 
-        try
+        if (this.customPrincipalName == null)
         {
-            if (this.customPrincipalName == null)
-            {
-                return await func(controller);
-            }
-            else
-            {
-                return await scopeServiceProvider.GetRequiredService<IntegrationTestDefaultUserAuthenticationService>().WithImpersonateAsync(this.customPrincipalName, async () => await func(controller));
-            }
+            return await func(controller);
         }
-        catch
+        else
         {
-            scopeServiceProvider.TryFaultDbSession();
-
-            throw;
-        }
-        finally
-        {
-            scopeServiceProvider.TryCloseDbSession();
+            return await scopeServiceProvider.GetRequiredService<IntegrationTestDefaultUserAuthenticationService>().WithImpersonateAsync(this.customPrincipalName, async () => await func(controller));
         }
     }
 
@@ -87,9 +116,9 @@ public class ControllerEvaluator<TController>
                       });
     }
 
-    public ControllerEvaluator<TController> WithImpersonate([CanBeNull] string customPrincipalName)
+    public ControllerEvaluator<TController> WithImpersonate([CanBeNull] string newCustomPrincipalName)
     {
-        return new ControllerEvaluator<TController>(this.rootServiceProvider, customPrincipalName);
+        return new ControllerEvaluator<TController>(this.rootServiceProvider, newCustomPrincipalName);
     }
 
     public ControllerEvaluator<TController> WithIntegrationImpersonate()

@@ -5,9 +5,9 @@ using Framework.Exceptions;
 namespace Framework.Notification
 {
     /// <summary>
-    /// Сервис обработки исключений
+    /// Сервис обработки исключений в рамках скоупа
     /// </summary>
-    public interface IExceptionService : IExceptionProcessor
+    public interface IScopedExceptionService : IExceptionProcessor
     {
         /// <summary>
         /// Логирование в системе исключения

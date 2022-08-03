@@ -12,7 +12,7 @@ using JetBrains.Annotations;
 namespace Framework.DomainDriven.WebApiNetCore
 {
     /// <inheritdoc />
-    public class ApiControllerExceptionService<TBLLContext> : IExceptionProcessor
+    public class ApiControllerExceptionService<TBLLContext> : IRootExceptionService
         where TBLLContext : class, IConfigurationBLLContextContainer<IConfigurationBLLContext>
     {
         private readonly IContextEvaluator<TBLLContext> contextEvaluator;

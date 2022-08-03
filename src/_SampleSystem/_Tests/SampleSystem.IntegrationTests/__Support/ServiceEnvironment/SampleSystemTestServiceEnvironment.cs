@@ -79,7 +79,6 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 
                                   .AddSingleton<IDateTimeService, IntegrationTestDateTimeService>()
                                   .AddDatabaseSettings(InitializeAndCleanup.DatabaseUtil.ConnectionSettings.ConnectionString)
-                                  .AddScoped<IExceptionProcessor, ApiControllerExceptionService<ISampleSystemBLLContext>>()
                                   .AddSingleton<ISpecificationEvaluator, NhSpecificationEvaluator>()
                                   .AddSingleton<ICapTransactionManager, TestCapTransactionManager>()
                                   .AddSingleton<IIntegrationEventBus, TestIntegrationEventBus>()

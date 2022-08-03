@@ -9,7 +9,7 @@ namespace Framework.DomainDriven.BLL.Configuration
     {
         bool DisplayInternalError { get; }
 
-        IExceptionService ExceptionService { get; }
+        IScopedExceptionService ExceptionService { get; }
 
 
         IBLLSimpleQueryBase<IEmployee> GetEmployeeSource();

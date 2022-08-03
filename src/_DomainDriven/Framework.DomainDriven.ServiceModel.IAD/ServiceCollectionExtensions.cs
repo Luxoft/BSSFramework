@@ -92,7 +92,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
                    .AddScoped<IMessageSender<Framework.Notification.MessageTemplateNotification>, TemplateMessageSender>()
                    .AddScoped<IMessageSender<Framework.Notification.DTO.NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
-                   .AddScoped<IExceptionService, ExceptionService>()
+                   .AddScoped<IScopedExceptionService, ScopedExceptionService>()
 
 
                    .AddScoped<IConfigurationBLLContextSettings, ConfigurationBLLContextSettings>()

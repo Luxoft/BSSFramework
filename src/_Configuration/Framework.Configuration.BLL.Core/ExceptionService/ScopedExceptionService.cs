@@ -11,23 +11,30 @@ using Framework.Validation;
 
 namespace Framework.Configuration.BLL.Notification
 {
-    public class ExceptionService : BLLContextContainer<IConfigurationBLLContext>, IExceptionService
+    public class ScopedExceptionService : BLLContextContainer<IConfigurationBLLContext>, IScopedExceptionService
     {
         private readonly MethodInfo processAggregateExceptionMethod;
 
-        public ExceptionService(IConfigurationBLLContext context)
+        public ScopedExceptionService(IConfigurationBLLContext context)
             : base (context)
         {
-            this.processAggregateExceptionMethod = new Func<AggregateValidationException, WrappedAggregateException>(this.ProcessAggregateException<AggregateValidationException, ValidationExceptionBase>).Method.GetGenericMethodDefinition();
+            this.processAggregateExceptionMethod = new Func<AggregateValidationException, Exception>(this.ProcessAggregateException<AggregateValidationException, ValidationExceptionBase>).Method.GetGenericMethodDefinition();
         }
 
-        protected virtual WrappedAggregateException ProcessAggregateException<TCurrentException, TInnerException>(TCurrentException currentException)
+        protected virtual Exception ProcessAggregateException<TCurrentException, TInnerException>(TCurrentException currentException)
             where TCurrentException : Exception, IAggregateException<TInnerException>
             where TInnerException : Exception
         {
-            var innerExceptions = currentException.InnerExceptions.Select(this.Process);
+            var innerExceptions = currentException.InnerExceptions.Select(this.Process).ToList();
 
-            return new WrappedAggregateException(currentException, innerExceptions);
+            if (innerExceptions.Count == 1)
+            {
+                return innerExceptions[0];
+            }
+            else
+            {
+                return new WrappedAggregateException(currentException, innerExceptions);
+            }
         }
 
         public virtual Exception Process(Exception exception)
@@ -45,7 +52,7 @@ namespace Framework.Configuration.BLL.Notification
                 .Or(
                     () => from innerExceptionType in exception.GetType().GetAggregateExceptionInnerExceptionType().ToMaybe()
                                                    select (Exception)this.processAggregateExceptionMethod.MakeGenericMethod(exception.GetType(), innerExceptionType).Invoke(this, new[] { exception }))
-                                         .GetValueOrDefault(exception);
+                .GetValueOrDefault(exception);
         }
 
         public void Save(Exception exception)

@@ -55,7 +55,7 @@ namespace Framework.Configuration.BLL
             [NotNull] IBLLSimpleQueryBase<IEmployee> employeeSource,
             [NotNull] IEnumerable<ITargetSystemService> targetSystemServices,
             [NotNull] IConfigurationBLLContextSettings settings,
-            [NotNull] IExceptionService exceptionService,
+            [NotNull] IScopedExceptionService exceptionService,
             [NotNull] ICurrentRevisionService currentRevisionService)
             : base(serviceProvider, dalFactory, operationSenders, sourceListeners, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
         {
@@ -116,7 +116,7 @@ namespace Framework.Configuration.BLL
 
         public bool DisplayInternalError => this.Authorization.HasAccess(ConfigurationSecurityOperation.DisplayInternalError);
 
-        public IExceptionService ExceptionService { get; }
+        public IScopedExceptionService ExceptionService { get; }
 
         public ISerializerFactory<string> SystemConstantSerializerFactory { get; }
 

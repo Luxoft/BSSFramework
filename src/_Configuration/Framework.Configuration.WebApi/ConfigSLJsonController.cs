@@ -16,13 +16,5 @@ namespace Framework.Configuration.WebApi
     [ApiExplorerSettings(IgnoreApi = true)]
     public abstract partial class ConfigSLJsonController : ApiControllerBase<IConfigurationBLLContext, EvaluatedData<IConfigurationBLLContext, IConfigurationDTOMappingService>>
     {
-        protected ConfigSLJsonController()
-        {
-        }
-
-        protected override EvaluatedData<IConfigurationBLLContext, IConfigurationDTOMappingService> GetEvaluatedData(IDBSession session, IConfigurationBLLContext context)
-        {
-            return new EvaluatedData<IConfigurationBLLContext, IConfigurationDTOMappingService>(session, context, new ConfigurationServerPrimitiveDTOMappingService(context));
-        }
     }
 }

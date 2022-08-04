@@ -9,16 +9,12 @@ using Framework.Authorization.Generated.DTO;
 using Framework.Core.Services;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.ServiceModel.Service;
-using Framework.DomainDriven.WebApiNetCore;
-using Framework.Exceptions;
 using Framework.SecuritySystem.Exceptions;
 
 using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.BLL;
 using SampleSystem.Domain;
-using SampleSystem.Generated.DTO;
 using SampleSystem.ServiceEnvironment;
 
 using WorkflowCore.Interface;
@@ -29,7 +25,7 @@ namespace SampleSystem.WebApiCore.Controllers;
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
-public class WorkflowController : ApiControllerBase<ISampleSystemBLLContext, EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>
+public class WorkflowController : ControllerBase
 {
     private readonly StartWorkflowJob startWorkflowJob;
 
@@ -52,22 +48,18 @@ public class WorkflowController : ApiControllerBase<ISampleSystemBLLContext, Eva
         this.contextEvaluator = contextEvaluator;
     }
 
-    protected override EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService> GetEvaluatedData(IDBSession session, ISampleSystemBLLContext context) =>
-            new(session, context, new SampleSystemServerPrimitiveDTOMappingService(context));
-
-
     [HttpPost(nameof(StartJob))]
-    public Dictionary<Guid, Guid> StartJob()
+    public async Task<Dictionary<Guid, Guid>> StartJob()
     {
-        this.EvaluateC(DBSessionMode.Read, ctx => ctx.Authorization.CheckAccess(SampleSystemSecurityOperation.SystemIntegration));
+        this.contextEvaluator.Evaluate(DBSessionMode.Read, ctx => ctx.Authorization.CheckAccess(SampleSystemSecurityOperation.SystemIntegration));
 
-        return this.startWorkflowJob.Start();
+        return await this.startWorkflowJob.Start();
     }
 
     [HttpPost(nameof(GetMyPendingApproveOperationWorkflowObjects))]
     public async Task<List<ApproveOperationWorkflowObject>> GetMyPendingApproveOperationWorkflowObjects(PermissionIdentityDTO permissionIdent)
     {
-        var workflowOperationIdents = this.contextEvaluator.Evaluate(DBSessionMode.Read, ctx =>
+        var workflowOperationIdents = await this.contextEvaluator.EvaluateAsync(DBSessionMode.Read, (ctx, _) =>
         {
             var permissionIdStr = permissionIdent.Id.ToString();
 
@@ -78,7 +70,7 @@ public class WorkflowController : ApiControllerBase<ISampleSystemBLLContext, Eva
                     && wi.WorkflowDefinitionId == nameof(__ApproveOperation_Workflow)
                     && wi.Status == WorkflowStatus.Runnable);
 
-            return instances.ToList().Select(wi => wi.Id);
+            return Task.FromResult(instances.ToList().Select(wi => wi.Id));
         });
 
         var result = new List<ApproveOperationWorkflowObject>();
@@ -95,7 +87,7 @@ public class WorkflowController : ApiControllerBase<ISampleSystemBLLContext, Eva
             }
         }
 
-        this.contextEvaluator.Evaluate(DBSessionMode.Read, ctx =>
+        await this.contextEvaluator.EvaluateAsync(DBSessionMode.Read, default, (ctx, _) =>
         {
             var authContext = ctx.Authorization;
 
@@ -105,6 +97,8 @@ public class WorkflowController : ApiControllerBase<ISampleSystemBLLContext, Eva
 
                 return !authContext.GetOperationSecurityProvider().HasAccess(operation);
             });
+
+            return Task.CompletedTask;
         });
 
         return result;

@@ -88,7 +88,6 @@ namespace Framework.DomainDriven.WebApiNetCore
             }
 
             return expandedBaseException;
-
         }
 
         private EvaluateException ToEvaluateException(Exception exception, TBLLContext context)

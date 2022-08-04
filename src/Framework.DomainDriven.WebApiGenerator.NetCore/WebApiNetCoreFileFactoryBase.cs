@@ -2,11 +2,7 @@
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
-using Framework.CodeDom;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.DTOGenerator.Server;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.ServiceModelGenerator;
 using Framework.DomainDriven.WebApiNetCore;
@@ -53,54 +49,15 @@ namespace Framework.DomainDriven.WebApiGenerator.NetCore
             yield return result;
         }
 
-        protected override IEnumerable<CodeTypeMember> GetMembers() => base.GetMembers().Concat(new[] { this.GetOverrideMethod() });
-
-        /// <summary>
-        /// Gets the override methods.
-        /// </summary>
-        /// <returns>System.CodeDom.CodeTypeMember.</returns>
-        private CodeTypeMember GetOverrideMethod()
-        {
-            var implMappingServiceTypeName = this.Configuration.Environment.TargetSystemName + ServerFileType.ServerPrimitiveDTOMappingService;
-
-            var sessionMethodParameter = new CodeParameterDeclarationExpression(typeof(IDBSession), "session");
-            var contextMethodParameter = new CodeParameterDeclarationExpression(this.Configuration.Environment.BLLCore.BLLContextInterfaceTypeReference, "context");
-
-            var result = new CodeMemberMethod()
-            {
-                Name = "GetEvaluatedData",
-#pragma warning disable S3265 // Remove this bitwise operation; the enum 'MemberAttributes' is not marked with 'Flags' attribute.
-                Attributes = MemberAttributes.Override | MemberAttributes.Family,
-#pragma warning restore S3265
-                Parameters =
-                {
-                    sessionMethodParameter,
-                    contextMethodParameter
-                },
-                ReturnType = this.GetEvaluateDataTypeReference(),
-                Statements =
-                {
-                    new CodeObjectCreateExpression(
-                            this.GetEvaluateDataTypeReference(),
-                            sessionMethodParameter.ToVariableReferenceExpression(),
-                            contextMethodParameter.ToVariableReferenceExpression(),
-                            new CodeObjectCreateExpression(new CodeTypeReference(implMappingServiceTypeName), contextMethodParameter.ToVariableReferenceExpression()))
-                        .ToMethodReturnStatement()
-                }
-            };
-
-            return result;
-        }
-
         private CodeTypeReference GetEvaluateDataTypeReference() => new CodeTypeReference(typeof(EvaluatedData<,>))
-                                                                    {
-                                                                        TypeArguments =
+        {
+            TypeArguments =
                                                                         {
                                                                             this.Configuration.Environment.BLLCore
                                                                                 .BLLContextInterfaceTypeReference,
                                                                             this.Configuration.Environment.ServerDTO
                                                                                 .DTOMappingServiceInterfaceTypeReference
                                                                         }
-                                                                    };
+        };
     }
 }

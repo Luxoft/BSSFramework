@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Framework.DomainDriven.ServiceModel.Service
+namespace Framework.DomainDriven.WebApiNetCore
 {
     public class EvaluateException : Exception
     {

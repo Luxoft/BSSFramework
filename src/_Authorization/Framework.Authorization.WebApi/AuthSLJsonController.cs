@@ -17,13 +17,5 @@ namespace Framework.Authorization.WebApi
     //[Authorize(nameof(AuthenticationSchemes.NTLM))]
     public abstract partial class AuthSLJsonController : ApiControllerBase<IAuthorizationBLLContext, EvaluatedData<IAuthorizationBLLContext, IAuthorizationDTOMappingService>>
     {
-        protected AuthSLJsonController()
-        {
-        }
-
-        protected override EvaluatedData<IAuthorizationBLLContext, IAuthorizationDTOMappingService> GetEvaluatedData(IDBSession session, IAuthorizationBLLContext context)
-        {
-            return new EvaluatedData<IAuthorizationBLLContext, IAuthorizationDTOMappingService>(session, context, new AuthorizationServerPrimitiveDTOMappingService(context));
-        }
     }
 }

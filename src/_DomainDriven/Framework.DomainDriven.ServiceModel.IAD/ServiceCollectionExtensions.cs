@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Framework.Authorization.BLL;
+using Framework.Authorization.Domain;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
 using Framework.Core;
@@ -53,6 +54,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                    .AddScoped<IAuthorizationSecurityService, AuthorizationSecurityService>()
                    .AddScoped<IAuthorizationBLLFactoryContainer, AuthorizationBLLFactoryContainer>()
                    .AddScoped<IRunAsManager, AuthorizationRunAsManger>()
+                   .AddScoped<IOptimizeRuntimePermissionService, OptimizeRuntimePermissionService>()
                    .AddScoped<IAuthorizationBLLContextSettings, AuthorizationBLLContextSettings>()
                    .AddScopedFromLazyInterfaceImplement<IAuthorizationBLLContext, AuthorizationBLLContext>()
                    .AddScopedFrom<Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContext, IConfigurationBLLContext>()

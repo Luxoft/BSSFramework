@@ -37,7 +37,14 @@ public class ControllerEvaluator<TController>
 
     public T Evaluate<T>(Func<TController, T> func)
     {
-        return this.EvaluateAsync(c => Task.FromResult(func(c))).Result;
+        try
+        {
+            return this.EvaluateAsync(c => Task.FromResult(func(c))).Result;
+        }
+        catch (AggregateException ex) when (ex.InnerExceptions.Count == 1)
+        {
+            throw ex.InnerExceptions[0];
+        }
     }
 
     public async Task<T> EvaluateAsync<T>(Func<TController, Task<T>> func)

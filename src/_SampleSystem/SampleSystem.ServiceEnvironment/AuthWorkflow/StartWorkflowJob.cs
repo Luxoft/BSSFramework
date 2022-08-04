@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 using Framework.Authorization.ApproveWorkflow;
 using Framework.Authorization.Domain;
+using Framework.Core;
 using Framework.DomainDriven.BLL;
 
 using SampleSystem.BLL;
@@ -29,9 +30,9 @@ public class StartWorkflowJob
         this.workflowApproveProcessor = workflowApproveProcessor;
     }
 
-    public Dictionary<Guid, Guid> Start()
+    public Task<Dictionary<Guid, Guid>> Start()
     {
-        return this.contextEvaluator.Evaluate(DBSessionMode.Write, ctx =>
+        return this.contextEvaluator.EvaluateAsync(DBSessionMode.Write, (ctx, _) =>
         {
             var permQ = ctx.Authorization.Logics.Permission.GetUnsecureQueryable();
 
@@ -50,12 +51,13 @@ public class StartWorkflowJob
             var wfObjList = wfObjRequest.ToList();
 
 
-            return wfObjList.ToDictionary(pair => pair.wfObj.PermissionId,
-                pair =>
+            return wfObjList.ToDictionaryAsync(pair => pair.wfObj.PermissionId,
+                async pair =>
                 {
                     var startupObj = this.workflowApproveProcessor.GetPermissionStartupObject(pair.permission);
 
-                    var wfInstanceId = new Guid(Task.Run(() => this.workflowHost.StartWorkflow(nameof(__ApprovePermission_Workflow), startupObj)).Result);
+                    var wfInstanceIdStr = Task.Run(() => this.workflowHost.StartWorkflow(nameof(__ApprovePermission_Workflow), startupObj)).Result;
+                    var wfInstanceId = new Guid(wfInstanceIdStr);
                     pair.wfObj.WorkflowInstanceId = wfInstanceId;
 
                     ctx.Logics.ApprovePermissionWorkflowDomainObject.Save(pair.wfObj);

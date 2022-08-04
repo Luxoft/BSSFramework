@@ -31,9 +31,6 @@ namespace SampleSystem.WebApiCore.Controllers
         protected override void CheckAccess(EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService> eval) =>
             eval.Context.Authorization.CheckAccess(SampleSystemSecurityOperation.SystemIntegration);
 
-        protected override EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService> GetEvaluatedData(IDBSession session, ISampleSystemBLLContext context) =>
-            new(session, context, new SampleSystemServerPrimitiveDTOMappingService(context));
-
         protected override IEnumerable<Type> GetEventDTOTypes()
         {
             foreach (var type in TypeSource.FromSample(typeof(EmployeeSaveEventDTO)).GetTypes().Where(z => typeof(Generated.DTO.EventDTOBase).IsAssignableFrom(z)))

@@ -38,14 +38,15 @@ public static class WaitToCompleteHelper
         return res;
     }
 
-    public static WorkflowStatus WaitForWorkflowToComplete(this IPersistenceProvider persistenceProvider, string workflowId, TimeSpan timeOut)
+    public static async Task<WorkflowStatus> WaitForWorkflowToComplete(this IPersistenceProvider persistenceProvider, string workflowId, TimeSpan timeOut)
     {
-        return Retry (() => persistenceProvider.GetStatus(workflowId), status => status == WorkflowStatus.Runnable, timeOut);
+        return await Retry (() => persistenceProvider.GetStatus(workflowId), status => status == WorkflowStatus.Runnable, timeOut);
     }
 
-    public static WorkflowStatus GetStatus(this IPersistenceProvider persistenceProvider, string workflowId)
+    public static async Task<WorkflowStatus> GetStatus(this IPersistenceProvider persistenceProvider, string workflowId)
     {
-        var instance = persistenceProvider.GetWorkflowInstance(workflowId).Result;
+        var instance = await persistenceProvider.GetWorkflowInstance(workflowId);
+
         return instance.Status;
     }
 }

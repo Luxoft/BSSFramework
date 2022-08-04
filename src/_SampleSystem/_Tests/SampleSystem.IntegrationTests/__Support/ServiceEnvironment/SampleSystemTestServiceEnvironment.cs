@@ -61,9 +61,13 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 
 
             return new ServiceCollection()
+
+
                                   .RegisterLegacyBLLContext()
                                   .RegisterControllers()
                                   .AddControllerEnvironment()
+
+                                  .AddSingleton<IApiControllerPostProcessExceptionService, ApiControllerDebugPostProcessExceptionService>()
 
                                   .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
 
@@ -91,7 +95,6 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .AddWorkflowCore(configuration)
                                   .AddAuthWorkflow()
 
-                                  .AddSingleton<TestDebugModeManager>()
                                   .AddSingleton<SampleSystemInitializer>()
 
                                   .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });

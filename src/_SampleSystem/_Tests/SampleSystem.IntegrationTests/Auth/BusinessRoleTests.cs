@@ -162,18 +162,8 @@ namespace SampleSystem.IntegrationTests.Auth
 
             // Act
             this.GetAuthControllerEvaluator().Evaluate(c => c.RemoveBusinessRole(businessRoleIdentity));
-            Action call = () =>
-                          {
-                              try
-                              {
-                                  this.GetAuthControllerEvaluator()
-                                      .Evaluate(c => c.GetSimpleBusinessRole(businessRoleIdentity));
-                              }
-                              catch (Exception e)
-                              {
-                                  throw;
-                              }
-                          };
+
+            Action call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRole(businessRoleIdentity));
 
             // Assert
             call.Should().Throw<ObjectByIdNotFoundException<Guid>>().WithMessage("BusinessRole with id = * not found");

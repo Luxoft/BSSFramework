@@ -4,6 +4,7 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.Exceptions;
+using Framework.Notification;
 
 using JetBrains.Annotations;
 
@@ -16,15 +17,15 @@ namespace Framework.NotificationCore.Jobs
     {
         private readonly IContextEvaluator<TBLLContext> contextEvaluator;
 
-        private readonly IRootExceptionService exceptionProcessor;
+        private readonly IExceptionStorage exceptionStorage;
 
         public SendNotificationsJob(
             [NotNull] IContextEvaluator<TBLLContext> contextEvaluator,
-            [NotNull] IRootExceptionService exceptionProcessor)
+            [NotNull] IExceptionStorage exceptionStorage = null)
         {
             this.contextEvaluator = contextEvaluator ?? throw new ArgumentNullException(nameof(contextEvaluator));
-            this.exceptionProcessor = exceptionProcessor ?? throw new ArgumentNullException(nameof(exceptionProcessor));
-        }
+            this.exceptionStorage = exceptionStorage;
+            }
 
         public void Send()
         {
@@ -36,7 +37,10 @@ namespace Framework.NotificationCore.Jobs
                     return z.Configuration.Logics.DomainObjectModification.Process();
                 });
 
-            result.Match(_ => { }, x => this.exceptionProcessor.Process(x));
+            if (this.exceptionStorage != null)
+            {
+                result.Match(_ => { }, x => this.exceptionStorage.Save(x));
+            }
         }
     }
 }

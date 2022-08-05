@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Exceptions;
+﻿using Framework.Exceptions;
 
 namespace Framework.Notification
 {
@@ -9,10 +7,5 @@ namespace Framework.Notification
     /// </summary>
     public interface IExceptionExpander : IExceptionProcessor
     {
-    }
-
-    public interface IExceptionStorage
-    {
-        void Save(Exception exception);
     }
 }

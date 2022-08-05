@@ -6,24 +6,20 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Framework.Authorization.ApproveWorkflow;
+
 using Framework.Cap.Abstractions;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
-using Framework.Core;
 using Framework.Core.Services;
+
 using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
-using Framework.Exceptions;
-using Framework.NotificationCore.Services;
-using Framework.NotificationCore.Settings;
 
 using MediatR;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 
 using nuSpec.Abstraction;
 using nuSpec.NHibernate;
@@ -67,7 +63,7 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .RegisterControllers()
                                   .AddControllerEnvironment()
 
-                                  .AddSingleton<IApiControllerPostProcessExceptionService, ApiControllerDebugPostProcessExceptionService>()
+                                  .AddSingleton<IWebApiExceptionExpander, WebApiDebugExceptionExpander>()
 
                                   .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
 

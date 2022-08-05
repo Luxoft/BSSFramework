@@ -100,6 +100,7 @@ namespace SampleSystem.WebApiCore
                 .UseDefaultExceptionsHandling()
                 .UseCorrelationId("SampleSystem_{0}")
                 .UseTryProcessDbSession()
+                .UseWebApiExceptionExpander()
 
                 .UseHttpsRedirection()
                 .UseRouting()

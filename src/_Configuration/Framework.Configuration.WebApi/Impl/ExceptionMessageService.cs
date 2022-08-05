@@ -1,22 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 
-using Framework.Configuration.BLL;
 using Framework.Configuration.Domain;
 using Framework.Configuration.Generated.DTO;
-using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.ServiceModel.Service;
-
-using Serilog;
 
 namespace Framework.Configuration.WebApi
 {
     public partial class ConfigSLJsonController
     {
         [Microsoft.AspNetCore.Mvc.HttpPost(nameof(SaveExceptionMessage))]
-        public ExceptionMessageIdentityDTO SaveExceptionMessage(ExceptionMessageStrictDTO exceptionMessageStrict)
+        public virtual ExceptionMessageIdentityDTO SaveExceptionMessage(ExceptionMessageStrictDTO exceptionMessageStrict)
         {
             if (exceptionMessageStrict == null)
             {
@@ -33,22 +27,8 @@ namespace Framework.Configuration.WebApi
 
                     evaluateData.Context.Logics.ExceptionMessage.Save(mappedMessage);
 
-                    SendMessage(evaluateData, mappedMessage);
-
                     return mappedMessage.ToIdentityDTO();
                 });
-        }
-
-        private static void SendMessage(EvaluatedData<IConfigurationBLLContext> evaluateData, ExceptionMessage mappedMessage)
-        {
-            try
-            {
-                evaluateData.Context.ExceptionService.Save(mappedMessage.ToException());
-            }
-            catch (Exception e)
-            {
-                Log.Error(e, "ExceptionMessageService");
-            }
         }
     }
 }

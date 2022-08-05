@@ -100,8 +100,7 @@ namespace SampleSystem.WebApiCore
 
         public static IServiceCollection AddControllerEnvironment(this IServiceCollection services)
         {
-            services.AddSingleton<IApiControllerPostProcessExceptionService, ApiControllerPostProcessExceptionService>();
-            services.AddSingleton<IRootExceptionService, ApiControllerExceptionService>();
+            services.AddSingleton<IWebApiExceptionExpander, WebApiExceptionExpander>();
 
             services.AddSingleton<IReportParameterValueService<ISampleSystemBLLContext, PersistentDomainObjectBase, SampleSystemSecurityOperationCode>, ReportParameterValueService<ISampleSystemBLLContext, PersistentDomainObjectBase, SampleSystemSecurityOperationCode>>();
             services.AddSingleton<ISystemMetadataTypeBuilder>(new SystemMetadataTypeBuilder<PersistentDomainObjectBase>(DTORole.All, typeof(PersistentDomainObjectBase).Assembly));

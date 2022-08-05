@@ -144,7 +144,7 @@ namespace SampleSystem.IntegrationTests
             var call = new Action(() => configController.Evaluate(c => c.ProcessModifications(1000)));
 
             // Assert
-            call.Should().Throw<Exception>().WithMessage($"One or more errors occurred. (For DomainObject ({typeof(Country).Name}) [{domainObjectId}] both states (previous and current) can't be null. Revision: {revision})");
+            call.Should().Throw<Exception>().WithMessage($"For DomainObject ({typeof(Country).Name}) [{domainObjectId}] both states (previous and current) can't be null. Revision: {revision}");
         }
     }
 }

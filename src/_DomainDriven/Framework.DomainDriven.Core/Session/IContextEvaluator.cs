@@ -11,14 +11,7 @@ namespace Framework.DomainDriven.BLL
 
         TResult Evaluate<TResult>(DBSessionMode sessionMode, string customPrincipalName, [NotNull] Func<TBLLContext, IDBSession, TResult> getResult)
         {
-            try
-            {
-                return this.EvaluateAsync(sessionMode, customPrincipalName, (c, s) => Task.FromResult(getResult(c, s))).Result;
-            }
-            catch (AggregateException ex) when (ex.InnerExceptions.Count == 1)
-            {
-                throw ex.InnerExceptions[0];
-            }
+            return this.EvaluateAsync(sessionMode, customPrincipalName, (c, s) => Task.FromResult(getResult(c, s))).GetAwaiter().GetResult();
         }
     }
 }

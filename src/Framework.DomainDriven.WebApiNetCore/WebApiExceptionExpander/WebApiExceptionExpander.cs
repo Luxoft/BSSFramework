@@ -1,38 +1,39 @@
 ﻿using System;
 
 using Framework.Core;
+using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Configuration;
 using Framework.Exceptions;
+using Framework.Notification;
 using Framework.Validation;
 
 namespace Framework.DomainDriven.WebApiNetCore;
 
-public class ApiControllerPostProcessExceptionService : IApiControllerPostProcessExceptionService
+public class WebApiExceptionExpander : IWebApiExceptionExpander
 {
-    public Exception Process(EvaluateException evaluateException, IConfigurationBLLContext context)
+    private readonly IContextEvaluator<IConfigurationBLLContext> contextEvaluator;
+
+    private readonly IExceptionExpander exceptionExpander;
+
+    public WebApiExceptionExpander(IContextEvaluator<IConfigurationBLLContext> contextEvaluator, IExceptionExpander exceptionExpander)
     {
-        return this.GetFacadeException(evaluateException.ExpandedBaseException, context);
+        this.contextEvaluator = contextEvaluator ?? throw new ArgumentNullException(nameof(contextEvaluator));
+        this.exceptionExpander = exceptionExpander ?? throw new ArgumentNullException(nameof(exceptionExpander));
     }
 
-
-    /// <summary>
-    ///     Get Internal Server Exception
-    /// </summary>
-    protected virtual Exception GetInternalServerException() =>
-            new Exception(InternalServerException.DefaultMessage);
-
-    private Exception GetFacadeException(Exception exception, IConfigurationBLLContext context)
+    public Exception Process(Exception baseException)
     {
-        if (exception == null)
-        {
-            throw new ArgumentNullException(nameof(exception));
-        }
+        var exception = this.exceptionExpander.Process(baseException);
 
-        return this.IsHandledException(exception) || context.DisplayInternalError
+        return this.IsHandledException(exception) || this.contextEvaluator.Evaluate(DBSessionMode.Read, context => context.DisplayInternalError)
                        ? exception
                        : this.GetInternalServerException();
     }
 
+    /// <summary>
+    ///     Get Internal Server Exception
+    /// </summary>
+    protected virtual Exception GetInternalServerException() => new(InternalServerException.DefaultMessage);
 
     /// <summary>
     ///     Is Handled Exception

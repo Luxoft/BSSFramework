@@ -7,12 +7,12 @@ namespace Framework.Notification
     /// <summary>
     /// Сервис обработки исключений в рамках скоупа
     /// </summary>
-    public interface IScopedExceptionService : IExceptionProcessor
+    public interface IExceptionExpander : IExceptionProcessor
     {
-        /// <summary>
-        /// Логирование в системе исключения
-        /// </summary>
-        /// <param name="exception">Исключение</param>
+    }
+
+    public interface IExceptionStorage
+    {
         void Save(Exception exception);
     }
 }

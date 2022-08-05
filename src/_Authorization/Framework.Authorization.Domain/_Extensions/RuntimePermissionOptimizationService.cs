@@ -6,7 +6,7 @@ using Framework.Core;
 
 namespace Framework.Authorization.Domain;
 
-public class OptimizeRuntimePermissionService : IOptimizeRuntimePermissionService
+public class RuntimePermissionOptimizationService : IRuntimePermissionOptimizationService
 {
     public IEnumerable<Dictionary<Type, List<Guid>>> Optimize(IEnumerable<Dictionary<Type, List<Guid>>> permissions)
     {

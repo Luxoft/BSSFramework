@@ -25,7 +25,7 @@ namespace Framework.Authorization.BLL
     {
         private readonly IAuthorizationBLLFactoryContainer logics;
 
-        private readonly IOptimizeRuntimePermissionService optimizeRuntimePermissionService;
+        private readonly IRuntimePermissionOptimizationService optimizeRuntimePermissionService;
 
         private readonly Lazy<Principal> lazyCurrentPrincipal;
 
@@ -57,7 +57,7 @@ namespace Framework.Authorization.BLL
             [NotNull] IAuthorizationExternalSource externalSource,
             [NotNull] IRunAsManager runAsManager,
             [NotNull] ISecurityTypeResolverContainer securityTypeResolverContainer,
-            [NotNull] IOptimizeRuntimePermissionService optimizeRuntimePermissionService,
+            [NotNull] IRuntimePermissionOptimizationService optimizeRuntimePermissionService,
             [NotNull] IAuthorizationBLLContextSettings settings)
             : base(
                 serviceProvider,

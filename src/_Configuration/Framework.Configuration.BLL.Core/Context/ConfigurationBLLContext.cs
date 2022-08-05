@@ -55,7 +55,6 @@ namespace Framework.Configuration.BLL
             [NotNull] IBLLSimpleQueryBase<IEmployee> employeeSource,
             [NotNull] IEnumerable<ITargetSystemService> targetSystemServices,
             [NotNull] IConfigurationBLLContextSettings settings,
-            [NotNull] IScopedExceptionService exceptionService,
             [NotNull] ICurrentRevisionService currentRevisionService)
             : base(serviceProvider, dalFactory, operationSenders, sourceListeners, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
         {
@@ -68,8 +67,6 @@ namespace Framework.Configuration.BLL
             this.Authorization = authorization ?? throw new ArgumentNullException(nameof(authorization));
             this.employeeSource = employeeSource ?? throw new ArgumentNullException(nameof(employeeSource));
             this.currentRevisionService = currentRevisionService ?? throw new ArgumentNullException(nameof(currentRevisionService));
-
-            this.ExceptionService = exceptionService ?? throw new ArgumentNullException(nameof(exceptionService));
 
             this.lazyTargetSystemServiceCache = LazyHelper.Create(() => targetSystemServices.ToDictionary(s => s.TargetSystem));
 
@@ -115,8 +112,6 @@ namespace Framework.Configuration.BLL
         public ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory { get; }
 
         public bool DisplayInternalError => this.Authorization.HasAccess(ConfigurationSecurityOperation.DisplayInternalError);
-
-        public IScopedExceptionService ExceptionService { get; }
 
         public ISerializerFactory<string> SystemConstantSerializerFactory { get; }
 

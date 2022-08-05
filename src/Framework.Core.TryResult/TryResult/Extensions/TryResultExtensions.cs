@@ -207,7 +207,7 @@ namespace Framework.Core
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
 
-            source.TryFault(expceitons => new AggregateException(expceitons));
+            source.TryFault(exceptions => new AggregateException(exceptions));
         }
 
         public static void TryFault<T>(this IEnumerable<ITryResult<T>> source, Func<Exception[], Exception> getAggregateException)

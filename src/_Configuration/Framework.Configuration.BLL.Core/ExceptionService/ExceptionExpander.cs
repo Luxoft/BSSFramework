@@ -4,19 +4,17 @@ using System.Linq;
 using System.Reflection;
 
 using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.Exceptions;
 using Framework.Notification;
 using Framework.Validation;
 
-namespace Framework.Configuration.BLL.Notification
+namespace Framework.Configuration.BLL
 {
-    public class ScopedExceptionService : BLLContextContainer<IConfigurationBLLContext>, IScopedExceptionService
+    public class ExceptionExpander : IExceptionExpander
     {
         private readonly MethodInfo processAggregateExceptionMethod;
 
-        public ScopedExceptionService(IConfigurationBLLContext context)
-            : base (context)
+        public ExceptionExpander()
         {
             this.processAggregateExceptionMethod = new Func<AggregateValidationException, Exception>(this.ProcessAggregateException<AggregateValidationException, ValidationExceptionBase>).Method.GetGenericMethodDefinition();
         }
@@ -53,11 +51,6 @@ namespace Framework.Configuration.BLL.Notification
                     () => from innerExceptionType in exception.GetType().GetAggregateExceptionInnerExceptionType().ToMaybe()
                                                    select (Exception)this.processAggregateExceptionMethod.MakeGenericMethod(exception.GetType(), innerExceptionType).Invoke(this, new[] { exception }))
                 .GetValueOrDefault(exception);
-        }
-
-        public void Save(Exception exception)
-        {
-            this.Context.Logics.ExceptionMessage.Save(exception);
         }
 
         protected class WrappedAggregateException : BusinessLogicException

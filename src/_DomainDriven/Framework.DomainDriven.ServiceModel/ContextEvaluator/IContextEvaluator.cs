@@ -14,13 +14,6 @@ public interface IContextEvaluator<TBLLContext, TDTOMappingService>
 
     TResult Evaluate<TResult>(DBSessionMode sessionMode, string customPrincipalName, Func<EvaluatedData<TBLLContext, TDTOMappingService>, TResult> getResult)
     {
-        try
-        {
-            return this.EvaluateAsync(sessionMode, customPrincipalName, c => Task.FromResult(getResult(c))).Result;
-        }
-        catch (AggregateException ex) when (ex.InnerExceptions.Count == 1)
-        {
-            throw ex.InnerExceptions[0];
-        }
+        return this.EvaluateAsync(sessionMode, customPrincipalName, c => Task.FromResult(getResult(c))).GetAwaiter().GetResult();
     }
 }

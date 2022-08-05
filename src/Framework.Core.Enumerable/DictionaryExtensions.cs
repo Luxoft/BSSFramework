@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 using JetBrains.Annotations;
 
@@ -65,6 +66,22 @@ namespace Framework.Core
             if (valueSelector == null) throw new ArgumentNullException(nameof(valueSelector));
 
             return source.Select((value, index) => new { Value = value, Index = index }).ToDictionary(pair => keySelector(pair.Value, pair.Index), pair => valueSelector(pair.Value, pair.Index));
+        }
+
+        public static async Task<Dictionary<TKey, TValue>> ToDictionaryAsync<TSource, TKey, TValue>([NotNull] this IEnumerable<TSource> source, [NotNull] Func<TSource, TKey> keySelector, [NotNull] Func<TSource, Task<TValue>> valueSelector)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
+            if (valueSelector == null) throw new ArgumentNullException(nameof(valueSelector));
+
+            var result = new Dictionary<TKey, TValue>();
+
+            foreach (var item in source)
+            {
+                result.Add(keySelector(item), await valueSelector(item));
+            }
+
+            return result;
         }
     }
 }

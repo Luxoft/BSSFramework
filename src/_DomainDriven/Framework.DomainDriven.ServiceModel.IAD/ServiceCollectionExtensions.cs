@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Framework.Authorization.BLL;
+using Framework.Authorization.Domain;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
 using Framework.Core;
@@ -20,6 +21,8 @@ namespace Framework.DomainDriven.ServiceModel.IAD
     {
         public static IServiceCollection RegisterGenericServices(this IServiceCollection services)
         {
+            services.AddSingleton<IExceptionExpander, ExceptionExpander>();
+
             services.AddScoped(sp => sp.GetRequiredService<IDBSession>().GetObjectStateService());
 
             services.AddSingleton<IStandartExpressionBuilder, StandartExpressionBuilder>();
@@ -53,6 +56,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                    .AddScoped<IAuthorizationSecurityService, AuthorizationSecurityService>()
                    .AddScoped<IAuthorizationBLLFactoryContainer, AuthorizationBLLFactoryContainer>()
                    .AddScoped<IRunAsManager, AuthorizationRunAsManger>()
+                   .AddScoped<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>()
                    .AddScoped<IAuthorizationBLLContextSettings, AuthorizationBLLContextSettings>()
                    .AddScopedFromLazyInterfaceImplement<IAuthorizationBLLContext, AuthorizationBLLContext>()
                    .AddScopedFrom<Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContext, IConfigurationBLLContext>()
@@ -92,7 +96,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
                    .AddScoped<IMessageSender<Framework.Notification.MessageTemplateNotification>, TemplateMessageSender>()
                    .AddScoped<IMessageSender<Framework.Notification.DTO.NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
-                   .AddScoped<IExceptionService, ExceptionService>()
 
 
                    .AddScoped<IConfigurationBLLContextSettings, ConfigurationBLLContextSettings>()

@@ -11,4 +11,9 @@ public interface IContextEvaluator<TBLLContext, TDTOMappingService>
     where TDTOMappingService : class
 {
     Task<TResult> EvaluateAsync<TResult>(DBSessionMode sessionMode, string customPrincipalName, Func<EvaluatedData<TBLLContext, TDTOMappingService>, Task<TResult>> getResult);
+
+    TResult Evaluate<TResult>(DBSessionMode sessionMode, string customPrincipalName, Func<EvaluatedData<TBLLContext, TDTOMappingService>, TResult> getResult)
+    {
+        return this.EvaluateAsync(sessionMode, customPrincipalName, c => Task.FromResult(getResult(c))).GetAwaiter().GetResult();
+    }
 }

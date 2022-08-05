@@ -29,13 +29,5 @@ namespace SampleSystem.WebApiCore.Controllers.Report
                 : base(systemMetadataTypeBuilder, reportParameterValueService, reportService, securityOperationCodeProvider)
         {
         }
-
-        protected override EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService> GetEvaluatedData(IDBSession session, ISampleSystemBLLContext context)
-        {
-            return new EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>(
-                session,
-                context,
-                new SampleSystemServerPrimitiveDTOMappingService(context));
-        }
     }
 }

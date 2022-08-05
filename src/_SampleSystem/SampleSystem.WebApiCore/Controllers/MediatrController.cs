@@ -53,15 +53,5 @@ namespace SampleSystem.WebApiCore.Controllers
                 this.Evaluate(
                               DBSessionMode.Write,
                               _ => this.mediator.Send(new CreateIntegrationEventCommand()).Result);
-
-        protected override
-                EvaluatedData<ISampleSystemBLLContext,
-                ISampleSystemDTOMappingService> GetEvaluatedData(
-                IDBSession session,
-                ISampleSystemBLLContext context) =>
-                new(
-                    session,
-                    context,
-                    new SampleSystemServerPrimitiveDTOMappingService(context));
     }
 }

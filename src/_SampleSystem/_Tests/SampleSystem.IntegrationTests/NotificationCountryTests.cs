@@ -138,8 +138,10 @@ namespace SampleSystem.IntegrationTests
                 context.Configuration.Logics.DomainObjectModification.Save(fakeModification);
             });
 
+            var configController = this.GetConfigurationControllerEvaluator(DefaultConstants.NOTIFICATION_ADMIN);
+
             // Act
-            var call = new Action(() => this.GetConfigurationControllerEvaluator(DefaultConstants.NOTIFICATION_ADMIN).Evaluate(c => c.ProcessModifications(1000)));
+            var call = new Action(() => configController.Evaluate(c => c.ProcessModifications(1000)));
 
             // Assert
             call.Should().Throw<Exception>().WithMessage($"For DomainObject ({typeof(Country).Name}) [{domainObjectId}] both states (previous and current) can't be null. Revision: {revision}");

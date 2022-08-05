@@ -16,11 +16,11 @@ namespace Framework.NotificationCore.Jobs
     {
         private readonly IContextEvaluator<TBLLContext> contextEvaluator;
 
-        private readonly IExceptionProcessor exceptionProcessor;
+        private readonly IRootExceptionService exceptionProcessor;
 
         public SendNotificationsJob(
             [NotNull] IContextEvaluator<TBLLContext> contextEvaluator,
-            [NotNull] IExceptionProcessor exceptionProcessor)
+            [NotNull] IRootExceptionService exceptionProcessor)
         {
             this.contextEvaluator = contextEvaluator ?? throw new ArgumentNullException(nameof(contextEvaluator));
             this.exceptionProcessor = exceptionProcessor ?? throw new ArgumentNullException(nameof(exceptionProcessor));

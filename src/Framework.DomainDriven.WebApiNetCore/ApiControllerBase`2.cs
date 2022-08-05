@@ -129,10 +129,5 @@ namespace Framework.DomainDriven.WebApiNetCore
 
             return this.Evaluate(DBSessionMode.Write, getResult);
         }
-
-        /// <summary>
-        /// Get Data for Evaluate
-        /// </summary>
-        protected abstract TEvaluatedData GetEvaluatedData(IDBSession session, TBLLContext context);
     }
 }

@@ -6,24 +6,20 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Framework.Authorization.ApproveWorkflow;
+
 using Framework.Cap.Abstractions;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
-using Framework.Core;
 using Framework.Core.Services;
+
 using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
-using Framework.Exceptions;
-using Framework.NotificationCore.Services;
-using Framework.NotificationCore.Settings;
 
 using MediatR;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 
 using nuSpec.Abstraction;
 using nuSpec.NHibernate;
@@ -61,9 +57,13 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 
 
             return new ServiceCollection()
+
+
                                   .RegisterLegacyBLLContext()
                                   .RegisterControllers()
                                   .AddControllerEnvironment()
+
+                                  .AddSingleton<IWebApiExceptionExpander, WebApiDebugExceptionExpander>()
 
                                   .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
 
@@ -79,7 +79,6 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 
                                   .AddSingleton<IDateTimeService, IntegrationTestDateTimeService>()
                                   .AddDatabaseSettings(InitializeAndCleanup.DatabaseUtil.ConnectionSettings.ConnectionString)
-                                  .AddScoped<IExceptionProcessor, ApiControllerExceptionService<ISampleSystemBLLContext>>()
                                   .AddSingleton<ISpecificationEvaluator, NhSpecificationEvaluator>()
                                   .AddSingleton<ICapTransactionManager, TestCapTransactionManager>()
                                   .AddSingleton<IIntegrationEventBus, TestIntegrationEventBus>()
@@ -92,7 +91,6 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                   .AddWorkflowCore(configuration)
                                   .AddAuthWorkflow()
 
-                                  .AddSingleton<TestDebugModeManager>()
                                   .AddSingleton<SampleSystemInitializer>()
 
                                   .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });

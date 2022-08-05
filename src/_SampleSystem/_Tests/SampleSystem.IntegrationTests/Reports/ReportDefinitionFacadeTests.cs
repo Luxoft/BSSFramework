@@ -31,10 +31,6 @@ namespace SampleSystem.IntegrationTests
             var parameter = this.DataHelper.SaveReportParameter(report);
             this.DataHelper.SaveReportFilter(report, parameter);
 
-            var debugModeManager = this.RootServiceProvider.GetRequiredService<TestDebugModeManager>();
-
-            debugModeManager.IsDebugMode = false;
-
             var model = new ReportGenerationModelStrictDTO
             {
                 Report = report,
@@ -53,7 +49,6 @@ namespace SampleSystem.IntegrationTests
             var action = new Action(() => sampleSystemGenericReportController.Evaluate(c => c.GetStream(model)));
 
             // Assert
-            debugModeManager.IsDebugMode.Should().BeFalse("not working in debugger mode");
             action.Should().Throw<Exception>();
         }
 

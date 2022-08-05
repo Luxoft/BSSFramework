@@ -5,6 +5,7 @@ using FluentAssertions;
 
 using Framework.Authorization.Generated.DTO;
 using Framework.Core;
+using Framework.Exceptions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -161,10 +162,11 @@ namespace SampleSystem.IntegrationTests.Auth
 
             // Act
             this.GetAuthControllerEvaluator().Evaluate(c => c.RemoveBusinessRole(businessRoleIdentity));
+
             Action call = () => this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRole(businessRoleIdentity));
 
             // Assert
-            call.Should().Throw<Exception>().WithMessage("BusinessRole with id = * not found");
+            call.Should().Throw<ObjectByIdNotFoundException<Guid>>().WithMessage("BusinessRole with id = * not found");
         }
 
         [TestMethod]

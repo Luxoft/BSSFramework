@@ -1,7 +1,5 @@
 ﻿using System;
 
-using Framework.DomainDriven.ServiceModel.Service;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,9 +14,4 @@ public static class ServiceProviderExtensions
 
         return principalName == null ? controllerEvaluator : controllerEvaluator.WithImpersonate(principalName);
     }
-}
-
-public class TestDebugModeManager : IDebugModeManager
-{
-    public bool IsDebugMode { get; set; } = true;
 }

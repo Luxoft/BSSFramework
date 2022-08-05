@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Framework.Authorization.BLL;
 using Framework.Core;
 using Framework.Core.Serialization;
-using Framework.DomainDriven;
 using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.BLL.Tracking;

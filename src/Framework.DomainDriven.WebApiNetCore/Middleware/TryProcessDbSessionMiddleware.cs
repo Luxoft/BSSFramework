@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.DomainDriven.WebApiNetCore;
 
-public sealed class TryProcessDbSessionMiddleware
+public class TryProcessDbSessionMiddleware
 {
     private readonly RequestDelegate next;
 
@@ -16,21 +16,20 @@ public sealed class TryProcessDbSessionMiddleware
         this.next = next;
     }
 
-    public Task Invoke(HttpContext context, IServiceProvider serviceProvider)
+    public Task Invoke(HttpContext context)
     {
-
         try
         {
             return this.next(context);
         }
         catch
         {
-            serviceProvider.TryFaultDbSession();
+            context.RequestServices.TryFaultDbSession();
             throw;
         }
         finally
         {
-            serviceProvider.TryCloseDbSession();
+            context.RequestServices.TryCloseDbSession();
         }
     }
 }

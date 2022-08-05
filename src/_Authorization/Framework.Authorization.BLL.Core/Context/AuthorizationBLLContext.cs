@@ -25,6 +25,8 @@ namespace Framework.Authorization.BLL
     {
         private readonly IAuthorizationBLLFactoryContainer logics;
 
+        private readonly IRuntimePermissionOptimizationService optimizeRuntimePermissionService;
+
         private readonly Lazy<Principal> lazyCurrentPrincipal;
 
         private readonly Lazy<Settings> lazySettings;
@@ -55,6 +57,7 @@ namespace Framework.Authorization.BLL
             [NotNull] IAuthorizationExternalSource externalSource,
             [NotNull] IRunAsManager runAsManager,
             [NotNull] ISecurityTypeResolverContainer securityTypeResolverContainer,
+            [NotNull] IRuntimePermissionOptimizationService optimizeRuntimePermissionService,
             [NotNull] IAuthorizationBLLContextSettings settings)
             : base(
                 serviceProvider,
@@ -72,6 +75,7 @@ namespace Framework.Authorization.BLL
             this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
             this.SecurityService = securityService ?? throw new ArgumentNullException(nameof(securityService));
             this.logics = logics ?? throw new ArgumentNullException(nameof(logics));
+            this.optimizeRuntimePermissionService = optimizeRuntimePermissionService ?? throw new ArgumentNullException(nameof(optimizeRuntimePermissionService));
             this.ExternalSource = externalSource ?? throw new ArgumentNullException(nameof(externalSource));
             this.RunAsManager = runAsManager ?? throw new ArgumentNullException(nameof(runAsManager));
             this.Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
@@ -207,9 +211,10 @@ namespace Framework.Authorization.BLL
 
             var securityTypesCache = securityTypes.ToReadOnlyCollection();
 
-            return permissions.Select(permission => permission.ToDictionary(securityTypesCache))
-                .Optimize()
-                .ToList(permission => this.TryExpandPermission(permission, securityOperation.SecurityExpandType));
+            return permissions
+                   .Select(permission => permission.ToDictionary(securityTypesCache))
+                   .Pipe(this.optimizeRuntimePermissionService.Optimize)
+                   .ToList(permission => this.TryExpandPermission(permission, securityOperation.SecurityExpandType));
         }
 
         public IQueryable<IPermission<Guid>> GetPermissionQuery<TSecurityOperationCode>(ContextSecurityOperation<TSecurityOperationCode> securityOperation)

@@ -71,7 +71,7 @@ namespace Framework.DomainDriven.WebApiNetCore
         [NonAction]
         public TResult Evaluate<TResult>(DBSessionMode sessionMode, Func<TEvaluatedData, TResult> getResult)
         {
-            return this.serviceProvider.GetRequiredService<IApiControllerBaseEvaluator<TEvaluatedData>>().Evaluate(sessionMode, getResult);
+            return this.ServiceProvider.GetRequiredService<IApiControllerBaseEvaluator<TEvaluatedData>>().Evaluate(sessionMode, getResult);
         }
 
         /// <summary>

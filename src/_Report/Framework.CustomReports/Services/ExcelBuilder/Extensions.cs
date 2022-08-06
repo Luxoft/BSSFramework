@@ -22,7 +22,7 @@ namespace Framework.CustomReports.Services.ExcelBuilder
             return new HeaderDesign<TAnon>(groupHeader, source.ToHeaders());
         }
 
-        public static TResult GetValueOrDefault<TKey, TResult>(this IDictionary<TKey, TResult> source, TKey key)
+        public static TResult GetValueOrDefault<TKey, TResult>(this IReadOnlyDictionary<TKey, TResult> source, TKey key)
         {
             TResult result;
             source.TryGetValue(key, out result);
@@ -30,7 +30,7 @@ namespace Framework.CustomReports.Services.ExcelBuilder
         }
 
         [Obsolete("Please use GetValueOrDefault")]
-        public static TResult TryGetValue<TKey, TResult>(this IDictionary<TKey, TResult> source, TKey key)
+        public static TResult TryGetValue<TKey, TResult>(this IReadOnlyDictionary<TKey, TResult> source, TKey key)
         {
             return source.GetValueOrDefault(key);
         }

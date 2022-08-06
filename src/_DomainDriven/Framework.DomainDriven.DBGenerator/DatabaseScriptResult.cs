@@ -10,14 +10,14 @@ namespace Framework.DomainDriven.DBGenerator
 {
     public static class DatabaseScriptResultFactory
     {
-        public static IDatabaseScriptResult Create(IDictionary<ApplyMigrationDbScriptMode, Lazy<IEnumerable<string>>> dictionary)
+        public static IDatabaseScriptResult Create(Dictionary<ApplyMigrationDbScriptMode, Lazy<IEnumerable<string>>> dictionary)
         {
             return new LazyDatabaseScriptResult(dictionary);
         }
 
         struct EvaluatedDatabaseScriptResult : IDatabaseScriptResult
         {
-            private readonly IDictionary<ApplyMigrationDbScriptMode, IEnumerable<string>> dictionary;
+            private readonly Dictionary<ApplyMigrationDbScriptMode, IEnumerable<string>> dictionary;
 
             public EvaluatedDatabaseScriptResult(IDatabaseScriptResult source)
                 : this()
@@ -61,9 +61,9 @@ namespace Framework.DomainDriven.DBGenerator
 
         struct LazyDatabaseScriptResult : IDatabaseScriptResult
         {
-            private readonly IDictionary<ApplyMigrationDbScriptMode, Lazy<IEnumerable<string>>> dictionary;
+            private readonly Dictionary<ApplyMigrationDbScriptMode, Lazy<IEnumerable<string>>> dictionary;
 
-            public LazyDatabaseScriptResult(IDictionary<ApplyMigrationDbScriptMode, Lazy<IEnumerable<string>>> dictionary)
+            public LazyDatabaseScriptResult(Dictionary<ApplyMigrationDbScriptMode, Lazy<IEnumerable<string>>> dictionary)
                 : this()
             {
                 if (dictionary == null)

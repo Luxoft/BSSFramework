@@ -36,7 +36,7 @@ namespace Framework.Authorization.Domain
         /// <param name="settings">The settings.</param>
         /// <param name="key">The key.</param>
         /// <returns>Maybe&lt;TEnum&gt;.</returns>
-        private static Maybe<TEnum> ReadEnum<TEnum>(this Dictionary<string, string> settings, string key)
+        private static Maybe<TEnum> ReadEnum<TEnum>(this IReadOnlyDictionary<string, string> settings, string key)
             where TEnum : struct, Enum
         {
             return from strValue in settings.GetMaybeValue(key)

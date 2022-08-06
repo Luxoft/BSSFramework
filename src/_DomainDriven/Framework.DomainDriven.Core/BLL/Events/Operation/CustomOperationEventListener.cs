@@ -8,7 +8,7 @@ namespace Framework.DomainDriven.BLL
         where TDomainObject : class
         where TOperation : struct, Enum
     {
-        public CustomOperationEventSender(IEnumerable<IOperationEventListener<TDomainObject>> eventListeners, IDictionary<Type, IDictionary<Type, OperationEventSender>> cache)
+        public CustomOperationEventSender(IEnumerable<IOperationEventListener<TDomainObject>> eventListeners, Dictionary<Type, Dictionary<Type, OperationEventSender>> cache)
             : base(eventListeners, cache)
         {
         }

@@ -91,7 +91,7 @@ namespace Framework.Report
             get { return this.collectionVars; }
         }
 
-        private IDictionary<Tuple<ReportSectionInstance, TemplateSection>, Size> parallelsShiftMap;
+        private Dictionary<Tuple<ReportSectionInstance, TemplateSection>, Size> parallelsShiftMap;
 
 
         public IList<ReportInstance> Evaluate(ReportTemplate template, bool evaluateExceptionRaise)

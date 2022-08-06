@@ -15,7 +15,7 @@ namespace Framework.DomainDriven.BLL
 
         private readonly object _locker = new object();
 
-        private readonly IDictionary<Type, IDictionary<Type, OperationEventSender>> _cache = new Dictionary<Type, IDictionary<Type, OperationEventSender>>();
+        private readonly Dictionary<Type, Dictionary<Type, OperationEventSender>> _cache = new Dictionary<Type, Dictionary<Type, OperationEventSender>>();
 
 
         public OperationEventSenderContainer([NotNull] IEnumerable<IOperationEventListener<TPersistentDomainObjectBase>> eventListeners)

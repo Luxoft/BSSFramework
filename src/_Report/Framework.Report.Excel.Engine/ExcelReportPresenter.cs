@@ -16,7 +16,7 @@ namespace Framework.Report.Excel.Engine
     {
         private readonly IExcelFileWrapper excel;
 
-        private IDictionary<ReportSectionInstance, bool> parallelSectionsMap =
+        private Dictionary<ReportSectionInstance, bool> parallelSectionsMap =
             new Dictionary<ReportSectionInstance, bool>();
 
         public ExcelReportPresenter(IExcelFileWrapper excel, IShiftEventSource shiftSource)

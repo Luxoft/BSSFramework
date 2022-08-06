@@ -19,10 +19,10 @@ namespace Framework.DomainDriven.BLL
     {
         private readonly IEnumerable<IOperationEventListener<TDomainObject>> eventListeners;
 
-        protected readonly IDictionary<Type, IDictionary<Type, OperationEventSender>> Cache;
+        protected readonly Dictionary<Type, Dictionary<Type, OperationEventSender>> Cache;
 
 
-        internal OperationEventSender(IEnumerable<IOperationEventListener<TDomainObject>> eventListeners, IDictionary<Type, IDictionary<Type, OperationEventSender>> cache)
+        internal OperationEventSender(IEnumerable<IOperationEventListener<TDomainObject>> eventListeners, Dictionary<Type, Dictionary<Type, OperationEventSender>> cache)
         {
             this.eventListeners = eventListeners;
             this.Cache = cache ?? throw new ArgumentNullException(nameof(cache));

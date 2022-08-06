@@ -150,7 +150,7 @@ namespace Framework.DomainDriven.NHibernate.Audit
             return result;
         }
 
-        private void AddForComponent(IEnumerable<Property> propertyIterator, IDictionary<Type, IEntityMeta> dicToFill, IAuditAttributeService auditService)
+        private void AddForComponent(IEnumerable<Property> propertyIterator, Dictionary<Type, IEntityMeta> dicToFill, IAuditAttributeService auditService)
         {
             foreach (var property in propertyIterator)
             {
@@ -165,7 +165,7 @@ namespace Framework.DomainDriven.NHibernate.Audit
             }
         }
 
-        private void AddForEntity(PersistentClass persistentClass, IDictionary<Type, IEntityMeta> dicToFill, IAuditAttributeService auditService)
+        private void AddForEntity(PersistentClass persistentClass, Dictionary<Type, IEntityMeta> dicToFill, IAuditAttributeService auditService)
         {
             var typ = persistentClass.MappedClass;
 
@@ -183,7 +183,7 @@ namespace Framework.DomainDriven.NHibernate.Audit
             this.FillMembers(typ, props, dicToFill, auditService);
         }
 
-        private void FillMembers(System.Type type, IEnumerable<Property> properties, IDictionary<System.Type, IEntityMeta> dicToFill, IAuditAttributeService auditService)
+        private void FillMembers(System.Type type, IEnumerable<Property> properties, Dictionary<System.Type, IEntityMeta> dicToFill, IAuditAttributeService auditService)
         {
             foreach (var propInfo in PropertyAndMemberInfo.PersistentInfo(type, properties))
             {
@@ -206,7 +206,7 @@ namespace Framework.DomainDriven.NHibernate.Audit
             }
         }
 
-        private void FillClass(Type type, IDictionary<Type, IEntityMeta> dicToFill, IAuditAttributeService auditService)
+        private void FillClass(Type type, Dictionary<Type, IEntityMeta> dicToFill, IAuditAttributeService auditService)
         {
             if (!this._filledTypes.Contains(type) && !type.IsAbstract)
             {

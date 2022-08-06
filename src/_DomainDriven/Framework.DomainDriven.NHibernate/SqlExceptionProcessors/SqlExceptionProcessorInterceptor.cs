@@ -18,7 +18,7 @@ namespace Framework.DomainDriven.NHibernate.SqlExceptionProcessors
     {
         private readonly Configuration _cfg;
 
-        private readonly IDictionary<int, ISqlExceptionProcessor> _processors;
+        private readonly Dictionary<int, ISqlExceptionProcessor> _processors;
         private readonly ExceptionProcessingContext _context;
 
 

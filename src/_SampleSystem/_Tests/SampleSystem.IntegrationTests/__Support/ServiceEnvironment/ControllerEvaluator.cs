@@ -32,6 +32,15 @@ public class ControllerEvaluator<TController>
         this.customPrincipalName = customPrincipalName;
     }
 
+    public void Evaluate(Action<TController> action)
+    {
+        this.Evaluate(c =>
+                      {
+                          action(c);
+                          return default(object);
+                      });
+    }
+
     public T Evaluate<T>(Func<TController, T> func)
     {
         return this.EvaluateAsync(c => Task.FromResult(func(c))).GetAwaiter().GetResult();
@@ -64,15 +73,6 @@ public class ControllerEvaluator<TController>
         controller.ControllerContext.HttpContext = context;
 
         return func(controller);
-    }
-
-    public void Evaluate(Action<TController> action)
-    {
-        this.Evaluate(c =>
-                      {
-                          action(c);
-                          return default(object);
-                      });
     }
 
     public ControllerEvaluator<TController> WithImpersonate([CanBeNull] string newCustomPrincipalName)

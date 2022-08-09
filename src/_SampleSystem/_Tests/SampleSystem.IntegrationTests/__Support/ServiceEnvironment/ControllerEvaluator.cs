@@ -32,6 +32,20 @@ public class ControllerEvaluator<TController>
         this.customPrincipalName = customPrincipalName;
     }
 
+    public T Evaluate<T>(Func<TController, T> func)
+    {
+        return this.EvaluateAsync(c => Task.FromResult(func(c))).GetAwaiter().GetResult();
+    }
+
+    public async Task EvaluateAsync(Func<TController, Task> action)
+    {
+        await this.EvaluateAsync<object>(async c =>
+        {
+            await action(c);
+            return default;
+        });
+    }
+
     public async Task<T> EvaluateAsync<T>(Func<TController, Task<T>> func)
     {
         await using var scope = this.rootServiceProvider.CreateAsyncScope();
@@ -47,41 +61,9 @@ public class ControllerEvaluator<TController>
     {
         var controller = context.RequestServices.GetRequiredService<TController>();
 
-        (controller as IApiControllerBase).Maybe(c => c.ServiceProvider = context.RequestServices);
+        controller.ControllerContext.HttpContext = context;
 
         return func(controller);
-    }
-
-    private async Task<T> InternalEvaluateAsync<T>(IServiceProvider scopeServiceProvider, Func<TController, Task<T>> func)
-    {
-        var controller = scopeServiceProvider.GetRequiredService<TController>();
-
-        (controller as IApiControllerBase).Maybe(c => c.ServiceProvider = scopeServiceProvider);
-
-        if (this.customPrincipalName == null)
-        {
-            return await func(controller);
-        }
-        else
-        {
-            return await scopeServiceProvider.GetRequiredService<IntegrationTestDefaultUserAuthenticationService>().WithImpersonateAsync(this.customPrincipalName, async () => await func(controller));
-        }
-    }
-
-
-
-    public T Evaluate<T>(Func<TController, T> func)
-    {
-        return this.EvaluateAsync(c => Task.FromResult(func(c))).GetAwaiter().GetResult();
-    }
-
-    public async Task EvaluateAsync(Func<TController, Task> action)
-    {
-        await this.EvaluateAsync<object>(async c =>
-        {
-            await action(c);
-            return default;
-        });
     }
 
     public void Evaluate(Action<TController> action)

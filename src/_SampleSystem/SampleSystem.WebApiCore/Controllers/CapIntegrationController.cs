@@ -9,6 +9,7 @@ using Framework.DomainDriven.WebApiNetCore;
 
 using MediatR;
 
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.BLL;
@@ -34,7 +35,7 @@ namespace SampleSystem.WebApiCore
 
             // Very important line! Passing Scoped ServiceProvider to BSS Framework.
             // CAP calling TestIntegrationEvent method without HttpContext
-            this.ServiceProvider = serviceProvider;
+            this.ControllerContext.HttpContext = new DefaultHttpContext { RequestServices = serviceProvider };
         }
 
         [CapSubscribe(nameof(TestIntegrationEvent))]

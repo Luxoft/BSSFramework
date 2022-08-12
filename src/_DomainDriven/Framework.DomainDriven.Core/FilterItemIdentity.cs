@@ -3,7 +3,7 @@
 using Framework.Persistent;
 using Framework.SecuritySystem;
 
-namespace Framework.DomainDriven.BLL.Security
+namespace Framework.DomainDriven
 {
     public struct FilterItemIdentity : IDefaultIdentityObject, IEquatable<FilterItemIdentity>
     {

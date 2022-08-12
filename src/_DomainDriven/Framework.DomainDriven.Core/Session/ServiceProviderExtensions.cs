@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.DomainDriven.BLL;
+namespace Framework.DomainDriven;
 
 public static class ServiceProviderExtensions
 {

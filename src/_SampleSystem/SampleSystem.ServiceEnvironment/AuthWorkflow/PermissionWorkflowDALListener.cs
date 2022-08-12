@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 
 using Framework.Authorization.Domain;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 
 using JetBrains.Annotations;

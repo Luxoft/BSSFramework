@@ -3,6 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 
 using Framework.Core;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;

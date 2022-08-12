@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Framework.DomainDriven.BLL
+namespace Framework.DomainDriven
 {
     /// <summary>
     /// For proxy types

@@ -18,7 +18,7 @@
         {
             long revision = getFullInformationWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity = getFullInformationWithRevisionAutoRequest.informationIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullInformationWithRevisionInternal(informationIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullInformationWithRevisionInternal(informationIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.InformationFullDTO GetFullInformationWithRevisionInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -38,7 +38,7 @@
             Framework.Core.Period? period = getInformationPropertyRevisionByDateRangeAutoRequest.period;
             string propertyName = getInformationPropertyRevisionByDateRangeAutoRequest.propertyName;
             SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity = getInformationPropertyRevisionByDateRangeAutoRequest.informationIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetInformationPropertyRevisionByDateRangeInternal(informationIdentity, propertyName, period, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetInformationPropertyRevisionByDateRangeInternal(informationIdentity, propertyName, period, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetInformationPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity, string propertyName, Framework.Core.Period? period, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -56,7 +56,7 @@
         {
             string propertyName = getInformationPropertyRevisionsAutoRequest.propertyName;
             SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity = getInformationPropertyRevisionsAutoRequest.informationIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetInformationPropertyRevisionsInternal(informationIdentity, propertyName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetInformationPropertyRevisionsInternal(informationIdentity, propertyName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetInformationPropertyRevisionsInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity, string propertyName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -72,7 +72,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetInformationRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetInformationRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetInformationRevisionsInternal(informationIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetInformationRevisionsInternal(informationIdentity, evaluateData));
         }
         
         protected virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetInformationRevisionsInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -90,7 +90,7 @@
         {
             long revision = getRichInformationWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity = getRichInformationWithRevisionAutoRequest.informationIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichInformationWithRevisionInternal(informationIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichInformationWithRevisionInternal(informationIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.InformationRichDTO GetRichInformationWithRevisionInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -109,7 +109,7 @@
         {
             long revision = getSimpleInformationWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity = getSimpleInformationWithRevisionAutoRequest.informationIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleInformationWithRevisionInternal(informationIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleInformationWithRevisionInternal(informationIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.InformationSimpleDTO GetSimpleInformationWithRevisionInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -128,7 +128,7 @@
         {
             long revision = getVisualInformationWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity = getVisualInformationWithRevisionAutoRequest.informationIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualInformationWithRevisionInternal(informationIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualInformationWithRevisionInternal(informationIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.InformationVisualDTO GetVisualInformationWithRevisionInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)

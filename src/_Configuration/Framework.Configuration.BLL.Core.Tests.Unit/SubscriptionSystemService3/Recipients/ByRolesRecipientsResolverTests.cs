@@ -14,6 +14,7 @@ using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL.Security;
 using Framework.ExpressionParsers;
 using Framework.Persistent;

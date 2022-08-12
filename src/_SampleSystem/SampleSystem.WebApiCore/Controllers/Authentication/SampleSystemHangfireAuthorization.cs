@@ -1,5 +1,6 @@
 ﻿using System;
 
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.NotificationCore.Monitoring;
 

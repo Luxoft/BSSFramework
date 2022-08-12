@@ -16,7 +16,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeReport")]
         public virtual Microsoft.AspNetCore.Mvc.FileStreamResult GetEmployeeReport([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeReportParameterStrictDTO modelDTO)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => {
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => {
             SampleSystem.CustomReports.Employee.EmployeeReportParameter customReportParameter = new SampleSystem.CustomReports.Employee.EmployeeReportParameter();
 
             modelDTO.MapToDomainObject(evaluateData.MappingService, customReportParameter);

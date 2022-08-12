@@ -4,7 +4,7 @@ using Framework.DomainDriven.DAL.Revisions;
 
 using JetBrains.Annotations;
 
-namespace Framework.DomainDriven.BLL
+namespace Framework.DomainDriven
 {
     public class ObjectModification : IEquatable<ObjectModification>
     {

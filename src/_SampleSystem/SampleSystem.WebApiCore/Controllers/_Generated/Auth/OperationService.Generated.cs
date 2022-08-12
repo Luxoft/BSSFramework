@@ -18,7 +18,7 @@
         {
             Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode = checkOperationAccessAutoRequest.securityOperationCode;
             Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent = checkOperationAccessAutoRequest.operationIdent;
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CheckOperationAccessInternal(operationIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckOperationAccessInternal(operationIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual void CheckOperationAccessInternal(Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -36,7 +36,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullOperation")]
         public virtual Framework.Authorization.Generated.DTO.OperationFullDTO GetFullOperation([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullOperationInternal(operationIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullOperationInternal(operationIdentity, evaluateData));
         }
         
         /// <summary>
@@ -46,7 +46,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullOperationByName")]
         public virtual Framework.Authorization.Generated.DTO.OperationFullDTO GetFullOperationByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string operationName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullOperationByNameInternal(operationName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullOperationByNameInternal(operationName, evaluateData));
         }
         
         protected virtual Framework.Authorization.Generated.DTO.OperationFullDTO GetFullOperationByNameInternal(string operationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -70,7 +70,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullOperations")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.OperationFullDTO> GetFullOperations()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullOperationsInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullOperationsInternal(evaluateData));
         }
         
         /// <summary>
@@ -80,7 +80,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullOperationsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.OperationFullDTO> GetFullOperationsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.OperationIdentityDTO[] operationIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullOperationsByIdentsInternal(operationIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullOperationsByIdentsInternal(operationIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.OperationFullDTO> GetFullOperationsByIdentsInternal(Framework.Authorization.Generated.DTO.OperationIdentityDTO[] operationIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -96,7 +96,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullOperationsByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.OperationFullDTO> GetFullOperationsByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.OperationRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullOperationsByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullOperationsByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.OperationFullDTO> GetFullOperationsByRootFilterInternal(Framework.Authorization.Generated.DTO.OperationRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -119,7 +119,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichOperation")]
         public virtual Framework.Authorization.Generated.DTO.OperationRichDTO GetRichOperation([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichOperationInternal(operationIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichOperationInternal(operationIdentity, evaluateData));
         }
         
         /// <summary>
@@ -129,7 +129,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichOperationByName")]
         public virtual Framework.Authorization.Generated.DTO.OperationRichDTO GetRichOperationByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string operationName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichOperationByNameInternal(operationName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichOperationByNameInternal(operationName, evaluateData));
         }
         
         protected virtual Framework.Authorization.Generated.DTO.OperationRichDTO GetRichOperationByNameInternal(string operationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -153,7 +153,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleOperation")]
         public virtual Framework.Authorization.Generated.DTO.OperationSimpleDTO GetSimpleOperation([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleOperationInternal(operationIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleOperationInternal(operationIdentity, evaluateData));
         }
         
         /// <summary>
@@ -163,7 +163,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleOperationByName")]
         public virtual Framework.Authorization.Generated.DTO.OperationSimpleDTO GetSimpleOperationByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string operationName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleOperationByNameInternal(operationName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleOperationByNameInternal(operationName, evaluateData));
         }
         
         protected virtual Framework.Authorization.Generated.DTO.OperationSimpleDTO GetSimpleOperationByNameInternal(string operationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -187,7 +187,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleOperations")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.OperationSimpleDTO> GetSimpleOperations()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleOperationsInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleOperationsInternal(evaluateData));
         }
         
         /// <summary>
@@ -197,7 +197,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleOperationsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.OperationSimpleDTO> GetSimpleOperationsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.OperationIdentityDTO[] operationIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleOperationsByIdentsInternal(operationIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleOperationsByIdentsInternal(operationIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.OperationSimpleDTO> GetSimpleOperationsByIdentsInternal(Framework.Authorization.Generated.DTO.OperationIdentityDTO[] operationIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -213,7 +213,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleOperationsByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.OperationSimpleDTO> GetSimpleOperationsByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.OperationRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleOperationsByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleOperationsByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.OperationSimpleDTO> GetSimpleOperationsByRootFilterInternal(Framework.Authorization.Generated.DTO.OperationRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -236,7 +236,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualOperation")]
         public virtual Framework.Authorization.Generated.DTO.OperationVisualDTO GetVisualOperation([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualOperationInternal(operationIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualOperationInternal(operationIdentity, evaluateData));
         }
         
         /// <summary>
@@ -246,7 +246,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualOperationByName")]
         public virtual Framework.Authorization.Generated.DTO.OperationVisualDTO GetVisualOperationByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string operationName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualOperationByNameInternal(operationName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualOperationByNameInternal(operationName, evaluateData));
         }
         
         protected virtual Framework.Authorization.Generated.DTO.OperationVisualDTO GetVisualOperationByNameInternal(string operationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -270,7 +270,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualOperations")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.OperationVisualDTO> GetVisualOperations()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualOperationsInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualOperationsInternal(evaluateData));
         }
         
         /// <summary>
@@ -280,7 +280,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualOperationsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.OperationVisualDTO> GetVisualOperationsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.OperationIdentityDTO[] operationIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualOperationsByIdentsInternal(operationIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualOperationsByIdentsInternal(operationIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.OperationVisualDTO> GetVisualOperationsByIdentsInternal(Framework.Authorization.Generated.DTO.OperationIdentityDTO[] operationIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -296,7 +296,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualOperationsByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.OperationVisualDTO> GetVisualOperationsByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.OperationRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualOperationsByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualOperationsByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.OperationVisualDTO> GetVisualOperationsByRootFilterInternal(Framework.Authorization.Generated.DTO.OperationRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -321,7 +321,7 @@
         {
             Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode = hasOperationAccessAutoRequest.securityOperationCode;
             Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent = hasOperationAccessAutoRequest.operationIdent;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.HasOperationAccessInternal(operationIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasOperationAccessInternal(operationIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual bool HasOperationAccessInternal(Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -339,7 +339,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("SaveOperation")]
         public virtual Framework.Authorization.Generated.DTO.OperationIdentityDTO SaveOperation([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.OperationStrictDTO operationStrict)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Write, evaluateData => this.SaveOperationInternal(operationStrict, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.SaveOperationInternal(operationStrict, evaluateData));
         }
         
         protected virtual Framework.Authorization.Generated.DTO.OperationIdentityDTO SaveOperationInternal(Framework.Authorization.Generated.DTO.OperationStrictDTO operationStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)

@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace Framework.DomainDriven.BLL
+namespace Framework.DomainDriven
 {
     /// <summary>
     /// Потребитель DAL-евентов

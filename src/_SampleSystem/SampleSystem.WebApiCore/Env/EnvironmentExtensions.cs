@@ -13,7 +13,6 @@ using Framework.CustomReports.Domain;
 using Framework.CustomReports.Services;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.Serialization;
@@ -110,6 +109,8 @@ namespace SampleSystem.WebApiCore
             services.AddSingleton<SampleSystemCustomReportsServiceEnvironment>();
             services.AddSingleton(sp => sp.GetRequiredService<SampleSystemCustomReportsServiceEnvironment>().ReportService);
             services.AddSingleton<ISecurityOperationCodeProvider<SampleSystemSecurityOperationCode>, SecurityOperationCodeProvider>();
+
+            services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();
 
             services.AddSingleton<IContextEvaluator<IAuthorizationBLLContext>, ContextEvaluator<IAuthorizationBLLContext>>();
             services.AddSingleton<IContextEvaluator<IConfigurationBLLContext>, ContextEvaluator<IConfigurationBLLContext>>();

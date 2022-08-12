@@ -8,7 +8,7 @@ using DotNetCore.CAP;
 using Framework.Authorization.ApproveWorkflow;
 using Framework.Core;
 using Framework.DependencyInjection;
-using Framework.DomainDriven.BLL;
+using Framework.DomainDriven;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.WebApi.Utils;
 

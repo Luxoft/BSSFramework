@@ -1,4 +1,5 @@
-﻿using Framework.DomainDriven.BLL;
+﻿using Framework.DomainDriven;
+using Framework.DomainDriven.BLL;
 
 namespace Framework.Events
 {

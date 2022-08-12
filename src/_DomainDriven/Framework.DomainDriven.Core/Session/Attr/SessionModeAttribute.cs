@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Framework.DomainDriven.BLL
+namespace Framework.DomainDriven
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class DBSessionModeAttribute : Attribute

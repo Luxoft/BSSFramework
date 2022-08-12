@@ -1,4 +1,4 @@
-﻿namespace Framework.DomainDriven.BLL
+﻿namespace Framework.DomainDriven
 {
     public enum DALObjectChangeType
     {

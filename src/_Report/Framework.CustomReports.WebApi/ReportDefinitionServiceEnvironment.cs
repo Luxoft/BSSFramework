@@ -11,7 +11,6 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.SerializeMetadata;
-using Framework.DomainDriven.ServiceModel.Service;
 using Framework.Persistent;
 using Framework.SecuritySystem;
 using Framework.Validation;

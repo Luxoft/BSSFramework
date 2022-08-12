@@ -1,9 +1,8 @@
 ﻿using System;
 using Framework.Core;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Configuration;
-using Framework.DomainDriven.ServiceModel.Service;
-using Framework.Exceptions;
 using Framework.Notification;
 
 using JetBrains.Annotations;

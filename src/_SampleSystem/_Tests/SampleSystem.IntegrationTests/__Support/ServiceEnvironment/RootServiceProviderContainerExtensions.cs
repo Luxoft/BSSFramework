@@ -2,10 +2,8 @@
 using System.Linq.Expressions;
 
 using Framework.Core;
-using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.WebApiNetCore;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;

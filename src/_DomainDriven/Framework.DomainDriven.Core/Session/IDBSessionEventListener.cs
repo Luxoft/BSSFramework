@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Framework.DomainDriven.BLL;
+namespace Framework.DomainDriven;
 
 public interface IDBSessionEventListener
 {

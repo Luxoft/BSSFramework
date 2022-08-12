@@ -21,7 +21,7 @@ namespace Framework.DomainDriven.ServiceModelGenerator.MethodGenerators.FileStor
         public override MethodIdentity Identity { get; } = MethodIdentityType.AddAttachment;
 
 
-        protected override BLL.DBSessionMode DefaultSessionMode { get; } = DBSessionMode.Write;
+        protected override DBSessionMode DefaultSessionMode { get; } = DBSessionMode.Write;
 
         protected override string Name => $"Add{this.DomainType.Name}Attachment";
 

@@ -11,6 +11,7 @@ using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Core;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.UnitTesting;

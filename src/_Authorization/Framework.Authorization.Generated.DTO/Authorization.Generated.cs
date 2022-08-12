@@ -17161,7 +17161,7 @@ namespace Framework.Authorization.Generated.DTO
             where TMappingObject : Framework.DomainDriven.IMappingObject<Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService, TDomainObject, System.Guid>
             where TDomainObject : Framework.Authorization.Domain.PersistentDomainObjectBase
         {
-            TDomainObject domainObject = this.GetById<TDomainObject>(mappingObject.Id, Framework.DomainDriven.BLL.IdCheckMode.CheckAll);
+            TDomainObject domainObject = this.GetById<TDomainObject>(mappingObject.Id, Framework.DomainDriven.IdCheckMode.CheckAll);
             this.MapToDomainObject(mappingObject, domainObject);
             return domainObject;
         }

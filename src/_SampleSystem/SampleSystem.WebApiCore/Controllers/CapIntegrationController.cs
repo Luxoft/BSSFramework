@@ -3,6 +3,7 @@ using System.Threading;
 
 using DotNetCore.CAP;
 
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
@@ -45,6 +46,6 @@ namespace SampleSystem.WebApiCore
                 CancellationToken token) =>
                 this.Evaluate(
                               DBSessionMode.Write,
-                              _ => this.mediator.Send(@event, token).Result);
+                              _ => this.mediator.Send(@event, token).GetAwaiter().GetResult());
     }
 }

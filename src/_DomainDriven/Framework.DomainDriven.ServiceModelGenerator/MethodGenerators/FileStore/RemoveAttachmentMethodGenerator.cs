@@ -30,7 +30,7 @@ namespace Framework.DomainDriven.ServiceModelGenerator.MethodGenerators.FileStor
 
             new CodeParameterDeclarationExpression(this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.Configuration.FileItemType, Transfering.DTOType.IdentityDTO), "fileItemDTO");
 
-        protected override BLL.DBSessionMode DefaultSessionMode { get; } = DBSessionMode.Write;
+        protected override DBSessionMode DefaultSessionMode { get; } = DBSessionMode.Write;
 
         protected override bool IsEdit { get; } = true;
 

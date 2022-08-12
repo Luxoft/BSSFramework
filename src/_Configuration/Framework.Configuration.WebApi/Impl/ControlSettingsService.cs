@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Framework.Core;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
 
 using Framework.Configuration.BLL;
 using Framework.Configuration.Domain;
 using Framework.Configuration.Generated.DTO;
+using Framework.DomainDriven;
 using Framework.Persistent;
 
 namespace Framework.Configuration.WebApi

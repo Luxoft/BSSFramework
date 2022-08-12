@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
+using Framework.DomainDriven;
 using Framework.DomainDriven.DAL.Revisions;
 
 using JetBrains.Annotations;

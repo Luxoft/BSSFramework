@@ -18,7 +18,7 @@
         {
             Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode = checkReportPropertyAccessAutoRequest.securityOperationCode;
             Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent = checkReportPropertyAccessAutoRequest.reportPropertyIdent;
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CheckReportPropertyAccessInternal(reportPropertyIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckReportPropertyAccessInternal(reportPropertyIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual void CheckReportPropertyAccessInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -36,7 +36,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullReportProperties")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportPropertyFullDTO> GetFullReportProperties()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullReportPropertiesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportPropertiesInternal(evaluateData));
         }
         
         /// <summary>
@@ -46,7 +46,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullReportPropertiesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportPropertyFullDTO> GetFullReportPropertiesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO[] reportPropertyIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullReportPropertiesByIdentsInternal(reportPropertyIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportPropertiesByIdentsInternal(reportPropertyIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportPropertyFullDTO> GetFullReportPropertiesByIdentsInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO[] reportPropertyIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -68,7 +68,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullReportProperty")]
         public virtual Framework.Configuration.Generated.DTO.ReportPropertyFullDTO GetFullReportProperty([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullReportPropertyInternal(reportPropertyIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportPropertyInternal(reportPropertyIdentity, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.ReportPropertyFullDTO GetFullReportPropertyInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -85,7 +85,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichReportProperty")]
         public virtual Framework.Configuration.Generated.DTO.ReportPropertyRichDTO GetRichReportProperty([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichReportPropertyInternal(reportPropertyIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichReportPropertyInternal(reportPropertyIdentity, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.ReportPropertyRichDTO GetRichReportPropertyInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -102,7 +102,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleReportProperties")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportPropertySimpleDTO> GetSimpleReportProperties()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleReportPropertiesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportPropertiesInternal(evaluateData));
         }
         
         /// <summary>
@@ -112,7 +112,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleReportPropertiesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportPropertySimpleDTO> GetSimpleReportPropertiesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO[] reportPropertyIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleReportPropertiesByIdentsInternal(reportPropertyIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportPropertiesByIdentsInternal(reportPropertyIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportPropertySimpleDTO> GetSimpleReportPropertiesByIdentsInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO[] reportPropertyIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -134,7 +134,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleReportProperty")]
         public virtual Framework.Configuration.Generated.DTO.ReportPropertySimpleDTO GetSimpleReportProperty([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleReportPropertyInternal(reportPropertyIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportPropertyInternal(reportPropertyIdentity, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.ReportPropertySimpleDTO GetSimpleReportPropertyInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -153,7 +153,7 @@
         {
             Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode = hasReportPropertyAccessAutoRequest.securityOperationCode;
             Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent = hasReportPropertyAccessAutoRequest.reportPropertyIdent;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.HasReportPropertyAccessInternal(reportPropertyIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasReportPropertyAccessInternal(reportPropertyIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual bool HasReportPropertyAccessInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)

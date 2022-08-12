@@ -4,7 +4,7 @@ using SampleSystem.Domain;
 
 using Framework.CustomReports.Domain;
 using Framework.CustomReports.WebApi;
-using Framework.DomainDriven.BLL;
+using Framework.DomainDriven;
 using Framework.DomainDriven.SerializeMetadata;
 
 using SampleSystem.CustomReports.Employee;

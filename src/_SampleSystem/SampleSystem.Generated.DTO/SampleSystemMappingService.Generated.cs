@@ -7925,7 +7925,7 @@ namespace SampleSystem.Generated.DTO
             where TMappingObject : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, TDomainObject, System.Guid>
             where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
         {
-            TDomainObject domainObject = this.GetById<TDomainObject>(mappingObject.Id, Framework.DomainDriven.BLL.IdCheckMode.CheckAll);
+            TDomainObject domainObject = this.GetById<TDomainObject>(mappingObject.Id, Framework.DomainDriven.IdCheckMode.CheckAll);
             this.MapToDomainObject(mappingObject, domainObject);
             return domainObject;
         }
@@ -8421,7 +8421,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1 ToIntegrationVersionContainer1(SampleSystem.Generated.DTO.IntegrationVersionContainer1IntegrationSimpleDTO integrationVersionContainer1SimpleIntegrationDTO)
         {
-            return this.GetById<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>(integrationVersionContainer1SimpleIntegrationDTO.Id, Framework.DomainDriven.BLL.IdCheckMode.SkipEmpty, Framework.DomainDriven.LockRole.Update);
+            return this.GetById<SampleSystem.Domain.IntergrationVersions.IntegrationVersionContainer1>(integrationVersionContainer1SimpleIntegrationDTO.Id, Framework.DomainDriven.IdCheckMode.SkipEmpty, Framework.DomainDriven.LockRole.Update);
         }
         
         public virtual SampleSystem.Domain.IntegrationVersionContainer1CustomIntegrationSaveModel ToIntegrationVersionContainer1CustomIntegrationSaveModel(SampleSystem.Generated.DTO.IntegrationVersionContainer1CustomIntegrationSaveModelIntegrationRichDTO integrationVersionContainer1CustomIntegrationSaveModelRichIntegrationDTO)

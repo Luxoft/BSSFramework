@@ -2,7 +2,7 @@
 using System.Linq;
 
 using Framework.Authorization.Generated.DTO;
-using Framework.DomainDriven.BLL;
+using Framework.DomainDriven;
 
 using Microsoft.AspNetCore.Mvc;
 

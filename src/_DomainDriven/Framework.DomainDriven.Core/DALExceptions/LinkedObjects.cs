@@ -1,5 +1,4 @@
 ﻿using System;
-using Framework.Exceptions;
 using Framework.Validation;
 
 namespace Framework.DomainDriven

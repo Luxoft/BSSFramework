@@ -3,6 +3,7 @@ using System.Linq;
 
 using Framework.Configuration.Generated.DTO;
 using Framework.Core;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;

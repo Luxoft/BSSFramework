@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 
 using Framework.Core.Services;
-using Framework.DomainDriven.ServiceModel.IAD;
+using Framework.DomainDriven;
 
 using SampleSystem.WebApiCore.Env;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Framework.DomainDriven.ServiceModel.IAD;
+namespace Framework.DomainDriven;
 
 public interface IImpersonateService
 {

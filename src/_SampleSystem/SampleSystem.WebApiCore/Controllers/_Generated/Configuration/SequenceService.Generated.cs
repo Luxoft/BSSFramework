@@ -18,7 +18,7 @@
         {
             Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode = checkSequenceAccessAutoRequest.securityOperationCode;
             Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent = checkSequenceAccessAutoRequest.sequenceIdent;
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CheckSequenceAccessInternal(sequenceIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckSequenceAccessInternal(sequenceIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual void CheckSequenceAccessInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -36,7 +36,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("CreateSequence")]
         public virtual Framework.Configuration.Generated.DTO.SequenceRichDTO CreateSequence([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SequenceCreateModelStrictDTO sequenceCreateModel)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CreateSequenceInternal(sequenceCreateModel, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CreateSequenceInternal(sequenceCreateModel, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceRichDTO CreateSequenceInternal(Framework.Configuration.Generated.DTO.SequenceCreateModelStrictDTO sequenceCreateModel, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -55,7 +55,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullSequence")]
         public virtual Framework.Configuration.Generated.DTO.SequenceFullDTO GetFullSequence([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullSequenceInternal(sequenceIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSequenceInternal(sequenceIdentity, evaluateData));
         }
         
         /// <summary>
@@ -65,7 +65,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullSequenceByName")]
         public virtual Framework.Configuration.Generated.DTO.SequenceFullDTO GetFullSequenceByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string sequenceName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullSequenceByNameInternal(sequenceName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSequenceByNameInternal(sequenceName, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceFullDTO GetFullSequenceByNameInternal(string sequenceName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -89,7 +89,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullSequences")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceFullDTO> GetFullSequences()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullSequencesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSequencesInternal(evaluateData));
         }
         
         /// <summary>
@@ -99,7 +99,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullSequencesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceFullDTO> GetFullSequencesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SequenceIdentityDTO[] sequenceIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullSequencesByIdentsInternal(sequenceIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSequencesByIdentsInternal(sequenceIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceFullDTO> GetFullSequencesByIdentsInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO[] sequenceIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -115,7 +115,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullSequencesByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceFullDTO> GetFullSequencesByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullSequencesByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSequencesByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceFullDTO> GetFullSequencesByRootFilterInternal(Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -138,7 +138,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichSequence")]
         public virtual Framework.Configuration.Generated.DTO.SequenceRichDTO GetRichSequence([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichSequenceInternal(sequenceIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichSequenceInternal(sequenceIdentity, evaluateData));
         }
         
         /// <summary>
@@ -148,7 +148,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichSequenceByName")]
         public virtual Framework.Configuration.Generated.DTO.SequenceRichDTO GetRichSequenceByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string sequenceName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichSequenceByNameInternal(sequenceName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichSequenceByNameInternal(sequenceName, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceRichDTO GetRichSequenceByNameInternal(string sequenceName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -172,7 +172,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleSequence")]
         public virtual Framework.Configuration.Generated.DTO.SequenceSimpleDTO GetSimpleSequence([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleSequenceInternal(sequenceIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSequenceInternal(sequenceIdentity, evaluateData));
         }
         
         /// <summary>
@@ -182,7 +182,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleSequenceByName")]
         public virtual Framework.Configuration.Generated.DTO.SequenceSimpleDTO GetSimpleSequenceByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string sequenceName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleSequenceByNameInternal(sequenceName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSequenceByNameInternal(sequenceName, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceSimpleDTO GetSimpleSequenceByNameInternal(string sequenceName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -206,7 +206,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleSequences")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> GetSimpleSequences()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleSequencesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSequencesInternal(evaluateData));
         }
         
         /// <summary>
@@ -216,7 +216,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleSequencesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> GetSimpleSequencesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SequenceIdentityDTO[] sequenceIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleSequencesByIdentsInternal(sequenceIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSequencesByIdentsInternal(sequenceIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> GetSimpleSequencesByIdentsInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO[] sequenceIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -232,7 +232,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleSequencesByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> GetSimpleSequencesByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleSequencesByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSequencesByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> GetSimpleSequencesByRootFilterInternal(Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -255,7 +255,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualSequence")]
         public virtual Framework.Configuration.Generated.DTO.SequenceVisualDTO GetVisualSequence([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualSequenceInternal(sequenceIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSequenceInternal(sequenceIdentity, evaluateData));
         }
         
         /// <summary>
@@ -265,7 +265,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualSequenceByName")]
         public virtual Framework.Configuration.Generated.DTO.SequenceVisualDTO GetVisualSequenceByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string sequenceName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualSequenceByNameInternal(sequenceName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSequenceByNameInternal(sequenceName, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceVisualDTO GetVisualSequenceByNameInternal(string sequenceName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -289,7 +289,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualSequences")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceVisualDTO> GetVisualSequences()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualSequencesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSequencesInternal(evaluateData));
         }
         
         /// <summary>
@@ -299,7 +299,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualSequencesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceVisualDTO> GetVisualSequencesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SequenceIdentityDTO[] sequenceIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualSequencesByIdentsInternal(sequenceIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSequencesByIdentsInternal(sequenceIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceVisualDTO> GetVisualSequencesByIdentsInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO[] sequenceIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -315,7 +315,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualSequencesByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceVisualDTO> GetVisualSequencesByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualSequencesByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSequencesByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceVisualDTO> GetVisualSequencesByRootFilterInternal(Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -340,7 +340,7 @@
         {
             Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode = hasSequenceAccessAutoRequest.securityOperationCode;
             Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent = hasSequenceAccessAutoRequest.sequenceIdent;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.HasSequenceAccessInternal(sequenceIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasSequenceAccessInternal(sequenceIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual bool HasSequenceAccessInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -358,7 +358,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("RemoveSequence")]
         public virtual void RemoveSequence([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent)
         {
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Write, evaluateData => this.RemoveSequenceInternal(sequenceIdent, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.RemoveSequenceInternal(sequenceIdent, evaluateData));
         }
         
         protected virtual void RemoveSequenceInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -380,7 +380,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("SaveSequence")]
         public virtual Framework.Configuration.Generated.DTO.SequenceIdentityDTO SaveSequence([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.SequenceStrictDTO sequenceStrict)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Write, evaluateData => this.SaveSequenceInternal(sequenceStrict, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.SaveSequenceInternal(sequenceStrict, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceIdentityDTO SaveSequenceInternal(Framework.Configuration.Generated.DTO.SequenceStrictDTO sequenceStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)

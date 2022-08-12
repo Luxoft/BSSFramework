@@ -20,7 +20,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckCodeFirstSubscriptionAccess))]
         public virtual void CheckCodeFirstSubscriptionAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
         {
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CheckCodeFirstSubscriptionAccessInternal(codeFirstSubscriptionIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckCodeFirstSubscriptionAccessInternal(codeFirstSubscriptionIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual void CheckCodeFirstSubscriptionAccessInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -37,7 +37,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullCodeFirstSubscription))]
         public virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO GetFullCodeFirstSubscription([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullCodeFirstSubscriptionInternal(codeFirstSubscriptionIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCodeFirstSubscriptionInternal(codeFirstSubscriptionIdentity, evaluateData));
         }
         
         /// <summary>
@@ -46,7 +46,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullCodeFirstSubscriptionByCode))]
         public virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO GetFullCodeFirstSubscriptionByCode([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string codeFirstSubscriptionCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullCodeFirstSubscriptionByCodeInternal(codeFirstSubscriptionCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCodeFirstSubscriptionByCodeInternal(codeFirstSubscriptionCode, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO GetFullCodeFirstSubscriptionByCodeInternal(string codeFirstSubscriptionCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -69,7 +69,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullCodeFirstSubscriptions))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO> GetFullCodeFirstSubscriptions()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullCodeFirstSubscriptionsInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCodeFirstSubscriptionsInternal(evaluateData));
         }
         
         /// <summary>
@@ -78,7 +78,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullCodeFirstSubscriptionsByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO> GetFullCodeFirstSubscriptionsByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO[] codeFirstSubscriptionIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullCodeFirstSubscriptionsByIdentsInternal(codeFirstSubscriptionIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCodeFirstSubscriptionsByIdentsInternal(codeFirstSubscriptionIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO> GetFullCodeFirstSubscriptionsByIdentsInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO[] codeFirstSubscriptionIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -93,7 +93,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullCodeFirstSubscriptionsByRootFilter))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO> GetFullCodeFirstSubscriptionsByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullCodeFirstSubscriptionsByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCodeFirstSubscriptionsByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO> GetFullCodeFirstSubscriptionsByRootFilterInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -115,7 +115,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichCodeFirstSubscription))]
         public virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO GetRichCodeFirstSubscription([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichCodeFirstSubscriptionInternal(codeFirstSubscriptionIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichCodeFirstSubscriptionInternal(codeFirstSubscriptionIdentity, evaluateData));
         }
         
         /// <summary>
@@ -124,7 +124,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichCodeFirstSubscriptionByCode))]
         public virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO GetRichCodeFirstSubscriptionByCode([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string codeFirstSubscriptionCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichCodeFirstSubscriptionByCodeInternal(codeFirstSubscriptionCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichCodeFirstSubscriptionByCodeInternal(codeFirstSubscriptionCode, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO GetRichCodeFirstSubscriptionByCodeInternal(string codeFirstSubscriptionCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -147,7 +147,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleCodeFirstSubscription))]
         public virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO GetSimpleCodeFirstSubscription([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleCodeFirstSubscriptionInternal(codeFirstSubscriptionIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCodeFirstSubscriptionInternal(codeFirstSubscriptionIdentity, evaluateData));
         }
         
         /// <summary>
@@ -156,7 +156,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleCodeFirstSubscriptionByCode))]
         public virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO GetSimpleCodeFirstSubscriptionByCode([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string codeFirstSubscriptionCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleCodeFirstSubscriptionByCodeInternal(codeFirstSubscriptionCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCodeFirstSubscriptionByCodeInternal(codeFirstSubscriptionCode, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO GetSimpleCodeFirstSubscriptionByCodeInternal(string codeFirstSubscriptionCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -179,7 +179,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleCodeFirstSubscriptions))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO> GetSimpleCodeFirstSubscriptions()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleCodeFirstSubscriptionsInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCodeFirstSubscriptionsInternal(evaluateData));
         }
         
         /// <summary>
@@ -188,7 +188,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleCodeFirstSubscriptionsByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO> GetSimpleCodeFirstSubscriptionsByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO[] codeFirstSubscriptionIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleCodeFirstSubscriptionsByIdentsInternal(codeFirstSubscriptionIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCodeFirstSubscriptionsByIdentsInternal(codeFirstSubscriptionIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO> GetSimpleCodeFirstSubscriptionsByIdentsInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO[] codeFirstSubscriptionIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -203,7 +203,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleCodeFirstSubscriptionsByRootFilter))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO> GetSimpleCodeFirstSubscriptionsByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleCodeFirstSubscriptionsByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCodeFirstSubscriptionsByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO> GetSimpleCodeFirstSubscriptionsByRootFilterInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -225,7 +225,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasCodeFirstSubscriptionAccess))]
         public virtual bool HasCodeFirstSubscriptionAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.HasCodeFirstSubscriptionAccessInternal(codeFirstSubscriptionIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasCodeFirstSubscriptionAccessInternal(codeFirstSubscriptionIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual bool HasCodeFirstSubscriptionAccessInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -242,7 +242,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(SaveCodeFirstSubscription))]
         public virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO SaveCodeFirstSubscription([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO codeFirstSubscriptionStrict)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Write, evaluateData => this.SaveCodeFirstSubscriptionInternal(codeFirstSubscriptionStrict, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.SaveCodeFirstSubscriptionInternal(codeFirstSubscriptionStrict, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO SaveCodeFirstSubscriptionInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO codeFirstSubscriptionStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -269,7 +269,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckDomainTypeAccess))]
         public virtual void CheckDomainTypeAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
         {
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CheckDomainTypeAccessInternal(domainTypeIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckDomainTypeAccessInternal(domainTypeIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual void CheckDomainTypeAccessInternal(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -286,7 +286,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullDomainType))]
         public virtual Framework.Configuration.Generated.DTO.DomainTypeFullDTO GetFullDomainType([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullDomainTypeInternal(domainTypeIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullDomainTypeInternal(domainTypeIdentity, evaluateData));
         }
         
         /// <summary>
@@ -295,7 +295,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullDomainTypeByName))]
         public virtual Framework.Configuration.Generated.DTO.DomainTypeFullDTO GetFullDomainTypeByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string domainTypeName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullDomainTypeByNameInternal(domainTypeName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullDomainTypeByNameInternal(domainTypeName, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.DomainTypeFullDTO GetFullDomainTypeByNameInternal(string domainTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -318,7 +318,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullDomainTypes))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeFullDTO> GetFullDomainTypes()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullDomainTypesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullDomainTypesInternal(evaluateData));
         }
         
         /// <summary>
@@ -327,7 +327,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullDomainTypesByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeFullDTO> GetFullDomainTypesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO[] domainTypeIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullDomainTypesByIdentsInternal(domainTypeIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullDomainTypesByIdentsInternal(domainTypeIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeFullDTO> GetFullDomainTypesByIdentsInternal(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO[] domainTypeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -342,7 +342,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullDomainTypesByRootFilter))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeFullDTO> GetFullDomainTypesByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullDomainTypesByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullDomainTypesByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeFullDTO> GetFullDomainTypesByRootFilterInternal(Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -364,7 +364,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichDomainType))]
         public virtual Framework.Configuration.Generated.DTO.DomainTypeRichDTO GetRichDomainType([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichDomainTypeInternal(domainTypeIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichDomainTypeInternal(domainTypeIdentity, evaluateData));
         }
         
         /// <summary>
@@ -373,7 +373,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichDomainTypeByName))]
         public virtual Framework.Configuration.Generated.DTO.DomainTypeRichDTO GetRichDomainTypeByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string domainTypeName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichDomainTypeByNameInternal(domainTypeName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichDomainTypeByNameInternal(domainTypeName, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.DomainTypeRichDTO GetRichDomainTypeByNameInternal(string domainTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -396,7 +396,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleDomainType))]
         public virtual Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO GetSimpleDomainType([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleDomainTypeInternal(domainTypeIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleDomainTypeInternal(domainTypeIdentity, evaluateData));
         }
         
         /// <summary>
@@ -405,7 +405,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleDomainTypeByName))]
         public virtual Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO GetSimpleDomainTypeByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string domainTypeName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleDomainTypeByNameInternal(domainTypeName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleDomainTypeByNameInternal(domainTypeName, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO GetSimpleDomainTypeByNameInternal(string domainTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -428,7 +428,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleDomainTypes))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO> GetSimpleDomainTypes()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleDomainTypesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleDomainTypesInternal(evaluateData));
         }
         
         /// <summary>
@@ -437,7 +437,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleDomainTypesByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO> GetSimpleDomainTypesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO[] domainTypeIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleDomainTypesByIdentsInternal(domainTypeIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleDomainTypesByIdentsInternal(domainTypeIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO> GetSimpleDomainTypesByIdentsInternal(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO[] domainTypeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -452,7 +452,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleDomainTypesByRootFilter))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO> GetSimpleDomainTypesByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleDomainTypesByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleDomainTypesByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeSimpleDTO> GetSimpleDomainTypesByRootFilterInternal(Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -474,7 +474,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualDomainType))]
         public virtual Framework.Configuration.Generated.DTO.DomainTypeVisualDTO GetVisualDomainType([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualDomainTypeInternal(domainTypeIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualDomainTypeInternal(domainTypeIdentity, evaluateData));
         }
         
         /// <summary>
@@ -483,7 +483,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualDomainTypeByName))]
         public virtual Framework.Configuration.Generated.DTO.DomainTypeVisualDTO GetVisualDomainTypeByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string domainTypeName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualDomainTypeByNameInternal(domainTypeName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualDomainTypeByNameInternal(domainTypeName, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.DomainTypeVisualDTO GetVisualDomainTypeByNameInternal(string domainTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -506,7 +506,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualDomainTypes))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeVisualDTO> GetVisualDomainTypes()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualDomainTypesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualDomainTypesInternal(evaluateData));
         }
         
         /// <summary>
@@ -515,7 +515,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualDomainTypesByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeVisualDTO> GetVisualDomainTypesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO[] domainTypeIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualDomainTypesByIdentsInternal(domainTypeIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualDomainTypesByIdentsInternal(domainTypeIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeVisualDTO> GetVisualDomainTypesByIdentsInternal(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO[] domainTypeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -530,7 +530,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualDomainTypesByRootFilter))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeVisualDTO> GetVisualDomainTypesByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualDomainTypesByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualDomainTypesByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.DomainTypeVisualDTO> GetVisualDomainTypesByRootFilterInternal(Framework.Configuration.Generated.DTO.DomainTypeRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -552,7 +552,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasDomainTypeAccess))]
         public virtual bool HasDomainTypeAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.HasDomainTypeAccessInternal(domainTypeIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasDomainTypeAccessInternal(domainTypeIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual bool HasDomainTypeAccessInternal(Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO domainTypeIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -573,7 +573,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckExceptionMessageAccess))]
         public virtual void CheckExceptionMessageAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
         {
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CheckExceptionMessageAccessInternal(exceptionMessageIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckExceptionMessageAccessInternal(exceptionMessageIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual void CheckExceptionMessageAccessInternal(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -590,7 +590,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullExceptionMessage))]
         public virtual Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO GetFullExceptionMessage([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullExceptionMessageInternal(exceptionMessageIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullExceptionMessageInternal(exceptionMessageIdentity, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO GetFullExceptionMessageInternal(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -606,7 +606,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullExceptionMessages))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO> GetFullExceptionMessages()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullExceptionMessagesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullExceptionMessagesInternal(evaluateData));
         }
         
         /// <summary>
@@ -615,7 +615,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullExceptionMessagesByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO> GetFullExceptionMessagesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO[] exceptionMessageIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullExceptionMessagesByIdentsInternal(exceptionMessageIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullExceptionMessagesByIdentsInternal(exceptionMessageIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO> GetFullExceptionMessagesByIdentsInternal(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO[] exceptionMessageIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -630,7 +630,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullExceptionMessagesByRootFilter))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO> GetFullExceptionMessagesByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullExceptionMessagesByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullExceptionMessagesByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageFullDTO> GetFullExceptionMessagesByRootFilterInternal(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -652,7 +652,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichExceptionMessage))]
         public virtual Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO GetRichExceptionMessage([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichExceptionMessageInternal(exceptionMessageIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichExceptionMessageInternal(exceptionMessageIdentity, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.ExceptionMessageRichDTO GetRichExceptionMessageInternal(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -668,7 +668,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleExceptionMessage))]
         public virtual Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO GetSimpleExceptionMessage([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleExceptionMessageInternal(exceptionMessageIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleExceptionMessageInternal(exceptionMessageIdentity, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO GetSimpleExceptionMessageInternal(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -684,7 +684,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleExceptionMessages))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO> GetSimpleExceptionMessages()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleExceptionMessagesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleExceptionMessagesInternal(evaluateData));
         }
         
         /// <summary>
@@ -693,7 +693,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleExceptionMessagesByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO> GetSimpleExceptionMessagesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO[] exceptionMessageIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleExceptionMessagesByIdentsInternal(exceptionMessageIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleExceptionMessagesByIdentsInternal(exceptionMessageIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO> GetSimpleExceptionMessagesByIdentsInternal(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO[] exceptionMessageIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -708,7 +708,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleExceptionMessagesByRootFilter))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO> GetSimpleExceptionMessagesByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleExceptionMessagesByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleExceptionMessagesByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ExceptionMessageSimpleDTO> GetSimpleExceptionMessagesByRootFilterInternal(Framework.Configuration.Generated.DTO.ExceptionMessageRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -730,7 +730,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasExceptionMessageAccess))]
         public virtual bool HasExceptionMessageAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.HasExceptionMessageAccessInternal(exceptionMessageIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasExceptionMessageAccessInternal(exceptionMessageIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual bool HasExceptionMessageAccessInternal(Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO exceptionMessageIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -759,7 +759,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckReportAccess))]
         public virtual void CheckReportAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
         {
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CheckReportAccessInternal(reportIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckReportAccessInternal(reportIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual void CheckReportAccessInternal(Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -776,7 +776,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReport))]
         public virtual Framework.Configuration.Generated.DTO.ReportFullDTO GetFullReport([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullReportInternal(reportIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportInternal(reportIdentity, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.ReportFullDTO GetFullReportInternal(Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -792,7 +792,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReports))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportFullDTO> GetFullReports()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullReportsInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportsInternal(evaluateData));
         }
         
         /// <summary>
@@ -801,7 +801,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReportsByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportFullDTO> GetFullReportsByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportIdentityDTO[] reportIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullReportsByIdentsInternal(reportIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportsByIdentsInternal(reportIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportFullDTO> GetFullReportsByIdentsInternal(Framework.Configuration.Generated.DTO.ReportIdentityDTO[] reportIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -822,7 +822,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichReport))]
         public virtual Framework.Configuration.Generated.DTO.ReportRichDTO GetRichReport([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichReportInternal(reportIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichReportInternal(reportIdentity, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.ReportRichDTO GetRichReportInternal(Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -838,7 +838,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReport))]
         public virtual Framework.Configuration.Generated.DTO.ReportSimpleDTO GetSimpleReport([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleReportInternal(reportIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportInternal(reportIdentity, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.ReportSimpleDTO GetSimpleReportInternal(Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -854,7 +854,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReports))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportSimpleDTO> GetSimpleReports()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleReportsInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportsInternal(evaluateData));
         }
         
         /// <summary>
@@ -863,7 +863,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReportsByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportSimpleDTO> GetSimpleReportsByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportIdentityDTO[] reportIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleReportsByIdentsInternal(reportIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportsByIdentsInternal(reportIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportSimpleDTO> GetSimpleReportsByIdentsInternal(Framework.Configuration.Generated.DTO.ReportIdentityDTO[] reportIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -884,7 +884,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasReportAccess))]
         public virtual bool HasReportAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.HasReportAccessInternal(reportIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasReportAccessInternal(reportIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual bool HasReportAccessInternal(Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -901,7 +901,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(RemoveReport))]
         public virtual void RemoveReport([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdent)
         {
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Write, evaluateData => this.RemoveReportInternal(reportIdent, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.RemoveReportInternal(reportIdent, evaluateData));
         }
         
         protected virtual void RemoveReportInternal(Framework.Configuration.Generated.DTO.ReportIdentityDTO reportIdent, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -922,7 +922,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(SaveReport))]
         public virtual Framework.Configuration.Generated.DTO.ReportIdentityDTO SaveReport([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportStrictDTO reportStrict)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Write, evaluateData => this.SaveReportInternal(reportStrict, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.SaveReportInternal(reportStrict, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.ReportIdentityDTO SaveReportInternal(Framework.Configuration.Generated.DTO.ReportStrictDTO reportStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -949,7 +949,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckReportFilterAccess))]
         public virtual void CheckReportFilterAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
         {
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CheckReportFilterAccessInternal(reportFilterIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckReportFilterAccessInternal(reportFilterIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual void CheckReportFilterAccessInternal(Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -966,7 +966,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReportFilter))]
         public virtual Framework.Configuration.Generated.DTO.ReportFilterFullDTO GetFullReportFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullReportFilterInternal(reportFilterIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportFilterInternal(reportFilterIdentity, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.ReportFilterFullDTO GetFullReportFilterInternal(Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -982,7 +982,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReportFilters))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportFilterFullDTO> GetFullReportFilters()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullReportFiltersInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportFiltersInternal(evaluateData));
         }
         
         /// <summary>
@@ -991,7 +991,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReportFiltersByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportFilterFullDTO> GetFullReportFiltersByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO[] reportFilterIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullReportFiltersByIdentsInternal(reportFilterIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportFiltersByIdentsInternal(reportFilterIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportFilterFullDTO> GetFullReportFiltersByIdentsInternal(Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO[] reportFilterIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1012,7 +1012,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichReportFilter))]
         public virtual Framework.Configuration.Generated.DTO.ReportFilterRichDTO GetRichReportFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichReportFilterInternal(reportFilterIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichReportFilterInternal(reportFilterIdentity, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.ReportFilterRichDTO GetRichReportFilterInternal(Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1028,7 +1028,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReportFilter))]
         public virtual Framework.Configuration.Generated.DTO.ReportFilterSimpleDTO GetSimpleReportFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleReportFilterInternal(reportFilterIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportFilterInternal(reportFilterIdentity, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.ReportFilterSimpleDTO GetSimpleReportFilterInternal(Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1044,7 +1044,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReportFilters))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportFilterSimpleDTO> GetSimpleReportFilters()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleReportFiltersInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportFiltersInternal(evaluateData));
         }
         
         /// <summary>
@@ -1053,7 +1053,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReportFiltersByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportFilterSimpleDTO> GetSimpleReportFiltersByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO[] reportFilterIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleReportFiltersByIdentsInternal(reportFilterIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportFiltersByIdentsInternal(reportFilterIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportFilterSimpleDTO> GetSimpleReportFiltersByIdentsInternal(Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO[] reportFilterIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1074,7 +1074,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasReportFilterAccess))]
         public virtual bool HasReportFilterAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.HasReportFilterAccessInternal(reportFilterIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasReportFilterAccessInternal(reportFilterIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual bool HasReportFilterAccessInternal(Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1095,7 +1095,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckReportParameterAccess))]
         public virtual void CheckReportParameterAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO reportParameterIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
         {
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CheckReportParameterAccessInternal(reportParameterIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckReportParameterAccessInternal(reportParameterIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual void CheckReportParameterAccessInternal(Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO reportParameterIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1112,7 +1112,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReportParameter))]
         public virtual Framework.Configuration.Generated.DTO.ReportParameterFullDTO GetFullReportParameter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO reportParameterIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullReportParameterInternal(reportParameterIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportParameterInternal(reportParameterIdentity, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.ReportParameterFullDTO GetFullReportParameterInternal(Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO reportParameterIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1128,7 +1128,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReportParameters))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportParameterFullDTO> GetFullReportParameters()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullReportParametersInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportParametersInternal(evaluateData));
         }
         
         /// <summary>
@@ -1137,7 +1137,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReportParametersByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportParameterFullDTO> GetFullReportParametersByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO[] reportParameterIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullReportParametersByIdentsInternal(reportParameterIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportParametersByIdentsInternal(reportParameterIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportParameterFullDTO> GetFullReportParametersByIdentsInternal(Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO[] reportParameterIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1158,7 +1158,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichReportParameter))]
         public virtual Framework.Configuration.Generated.DTO.ReportParameterRichDTO GetRichReportParameter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO reportParameterIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichReportParameterInternal(reportParameterIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichReportParameterInternal(reportParameterIdentity, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.ReportParameterRichDTO GetRichReportParameterInternal(Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO reportParameterIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1174,7 +1174,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReportParameter))]
         public virtual Framework.Configuration.Generated.DTO.ReportParameterSimpleDTO GetSimpleReportParameter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO reportParameterIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleReportParameterInternal(reportParameterIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportParameterInternal(reportParameterIdentity, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.ReportParameterSimpleDTO GetSimpleReportParameterInternal(Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO reportParameterIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1190,7 +1190,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReportParameters))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportParameterSimpleDTO> GetSimpleReportParameters()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleReportParametersInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportParametersInternal(evaluateData));
         }
         
         /// <summary>
@@ -1199,7 +1199,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReportParametersByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportParameterSimpleDTO> GetSimpleReportParametersByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO[] reportParameterIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleReportParametersByIdentsInternal(reportParameterIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportParametersByIdentsInternal(reportParameterIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportParameterSimpleDTO> GetSimpleReportParametersByIdentsInternal(Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO[] reportParameterIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1220,7 +1220,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasReportParameterAccess))]
         public virtual bool HasReportParameterAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO reportParameterIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.HasReportParameterAccessInternal(reportParameterIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasReportParameterAccessInternal(reportParameterIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual bool HasReportParameterAccessInternal(Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO reportParameterIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1241,7 +1241,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckReportPropertyAccess))]
         public virtual void CheckReportPropertyAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
         {
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CheckReportPropertyAccessInternal(reportPropertyIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckReportPropertyAccessInternal(reportPropertyIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual void CheckReportPropertyAccessInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1258,7 +1258,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReportProperties))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportPropertyFullDTO> GetFullReportProperties()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullReportPropertiesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportPropertiesInternal(evaluateData));
         }
         
         /// <summary>
@@ -1267,7 +1267,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReportPropertiesByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportPropertyFullDTO> GetFullReportPropertiesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO[] reportPropertyIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullReportPropertiesByIdentsInternal(reportPropertyIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportPropertiesByIdentsInternal(reportPropertyIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportPropertyFullDTO> GetFullReportPropertiesByIdentsInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO[] reportPropertyIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1288,7 +1288,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullReportProperty))]
         public virtual Framework.Configuration.Generated.DTO.ReportPropertyFullDTO GetFullReportProperty([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullReportPropertyInternal(reportPropertyIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullReportPropertyInternal(reportPropertyIdentity, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.ReportPropertyFullDTO GetFullReportPropertyInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1304,7 +1304,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichReportProperty))]
         public virtual Framework.Configuration.Generated.DTO.ReportPropertyRichDTO GetRichReportProperty([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichReportPropertyInternal(reportPropertyIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichReportPropertyInternal(reportPropertyIdentity, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.ReportPropertyRichDTO GetRichReportPropertyInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1320,7 +1320,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReportProperties))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportPropertySimpleDTO> GetSimpleReportProperties()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleReportPropertiesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportPropertiesInternal(evaluateData));
         }
         
         /// <summary>
@@ -1329,7 +1329,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReportPropertiesByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportPropertySimpleDTO> GetSimpleReportPropertiesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO[] reportPropertyIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleReportPropertiesByIdentsInternal(reportPropertyIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportPropertiesByIdentsInternal(reportPropertyIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.ReportPropertySimpleDTO> GetSimpleReportPropertiesByIdentsInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO[] reportPropertyIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1350,7 +1350,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleReportProperty))]
         public virtual Framework.Configuration.Generated.DTO.ReportPropertySimpleDTO GetSimpleReportProperty([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleReportPropertyInternal(reportPropertyIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleReportPropertyInternal(reportPropertyIdentity, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.ReportPropertySimpleDTO GetSimpleReportPropertyInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1366,7 +1366,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasReportPropertyAccess))]
         public virtual bool HasReportPropertyAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.HasReportPropertyAccessInternal(reportPropertyIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasReportPropertyAccessInternal(reportPropertyIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual bool HasReportPropertyAccessInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1387,7 +1387,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckSequenceAccess))]
         public virtual void CheckSequenceAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
         {
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CheckSequenceAccessInternal(sequenceIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckSequenceAccessInternal(sequenceIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual void CheckSequenceAccessInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1404,7 +1404,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CreateSequence))]
         public virtual Framework.Configuration.Generated.DTO.SequenceRichDTO CreateSequence([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SequenceCreateModelStrictDTO sequenceCreateModel)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CreateSequenceInternal(sequenceCreateModel, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CreateSequenceInternal(sequenceCreateModel, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceRichDTO CreateSequenceInternal(Framework.Configuration.Generated.DTO.SequenceCreateModelStrictDTO sequenceCreateModel, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1422,7 +1422,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullSequence))]
         public virtual Framework.Configuration.Generated.DTO.SequenceFullDTO GetFullSequence([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullSequenceInternal(sequenceIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSequenceInternal(sequenceIdentity, evaluateData));
         }
         
         /// <summary>
@@ -1431,7 +1431,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullSequenceByName))]
         public virtual Framework.Configuration.Generated.DTO.SequenceFullDTO GetFullSequenceByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string sequenceName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullSequenceByNameInternal(sequenceName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSequenceByNameInternal(sequenceName, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceFullDTO GetFullSequenceByNameInternal(string sequenceName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1454,7 +1454,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullSequences))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceFullDTO> GetFullSequences()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullSequencesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSequencesInternal(evaluateData));
         }
         
         /// <summary>
@@ -1463,7 +1463,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullSequencesByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceFullDTO> GetFullSequencesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SequenceIdentityDTO[] sequenceIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullSequencesByIdentsInternal(sequenceIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSequencesByIdentsInternal(sequenceIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceFullDTO> GetFullSequencesByIdentsInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO[] sequenceIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1478,7 +1478,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullSequencesByRootFilter))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceFullDTO> GetFullSequencesByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullSequencesByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSequencesByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceFullDTO> GetFullSequencesByRootFilterInternal(Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1500,7 +1500,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichSequence))]
         public virtual Framework.Configuration.Generated.DTO.SequenceRichDTO GetRichSequence([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichSequenceInternal(sequenceIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichSequenceInternal(sequenceIdentity, evaluateData));
         }
         
         /// <summary>
@@ -1509,7 +1509,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichSequenceByName))]
         public virtual Framework.Configuration.Generated.DTO.SequenceRichDTO GetRichSequenceByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string sequenceName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichSequenceByNameInternal(sequenceName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichSequenceByNameInternal(sequenceName, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceRichDTO GetRichSequenceByNameInternal(string sequenceName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1532,7 +1532,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleSequence))]
         public virtual Framework.Configuration.Generated.DTO.SequenceSimpleDTO GetSimpleSequence([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleSequenceInternal(sequenceIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSequenceInternal(sequenceIdentity, evaluateData));
         }
         
         /// <summary>
@@ -1541,7 +1541,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleSequenceByName))]
         public virtual Framework.Configuration.Generated.DTO.SequenceSimpleDTO GetSimpleSequenceByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string sequenceName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleSequenceByNameInternal(sequenceName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSequenceByNameInternal(sequenceName, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceSimpleDTO GetSimpleSequenceByNameInternal(string sequenceName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1564,7 +1564,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleSequences))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> GetSimpleSequences()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleSequencesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSequencesInternal(evaluateData));
         }
         
         /// <summary>
@@ -1573,7 +1573,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleSequencesByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> GetSimpleSequencesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SequenceIdentityDTO[] sequenceIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleSequencesByIdentsInternal(sequenceIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSequencesByIdentsInternal(sequenceIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> GetSimpleSequencesByIdentsInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO[] sequenceIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1588,7 +1588,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleSequencesByRootFilter))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> GetSimpleSequencesByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleSequencesByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSequencesByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceSimpleDTO> GetSimpleSequencesByRootFilterInternal(Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1610,7 +1610,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualSequence))]
         public virtual Framework.Configuration.Generated.DTO.SequenceVisualDTO GetVisualSequence([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualSequenceInternal(sequenceIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSequenceInternal(sequenceIdentity, evaluateData));
         }
         
         /// <summary>
@@ -1619,7 +1619,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualSequenceByName))]
         public virtual Framework.Configuration.Generated.DTO.SequenceVisualDTO GetVisualSequenceByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string sequenceName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualSequenceByNameInternal(sequenceName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSequenceByNameInternal(sequenceName, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceVisualDTO GetVisualSequenceByNameInternal(string sequenceName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1642,7 +1642,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualSequences))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceVisualDTO> GetVisualSequences()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualSequencesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSequencesInternal(evaluateData));
         }
         
         /// <summary>
@@ -1651,7 +1651,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualSequencesByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceVisualDTO> GetVisualSequencesByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SequenceIdentityDTO[] sequenceIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualSequencesByIdentsInternal(sequenceIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSequencesByIdentsInternal(sequenceIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceVisualDTO> GetVisualSequencesByIdentsInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO[] sequenceIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1666,7 +1666,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualSequencesByRootFilter))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceVisualDTO> GetVisualSequencesByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualSequencesByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSequencesByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SequenceVisualDTO> GetVisualSequencesByRootFilterInternal(Framework.Configuration.Generated.DTO.SequenceRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1688,7 +1688,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasSequenceAccess))]
         public virtual bool HasSequenceAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.HasSequenceAccessInternal(sequenceIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasSequenceAccessInternal(sequenceIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual bool HasSequenceAccessInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1705,7 +1705,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(RemoveSequence))]
         public virtual void RemoveSequence([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent)
         {
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Write, evaluateData => this.RemoveSequenceInternal(sequenceIdent, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.RemoveSequenceInternal(sequenceIdent, evaluateData));
         }
         
         protected virtual void RemoveSequenceInternal(Framework.Configuration.Generated.DTO.SequenceIdentityDTO sequenceIdent, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1726,7 +1726,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(SaveSequence))]
         public virtual Framework.Configuration.Generated.DTO.SequenceIdentityDTO SaveSequence([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SequenceStrictDTO sequenceStrict)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Write, evaluateData => this.SaveSequenceInternal(sequenceStrict, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.SaveSequenceInternal(sequenceStrict, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SequenceIdentityDTO SaveSequenceInternal(Framework.Configuration.Generated.DTO.SequenceStrictDTO sequenceStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1753,7 +1753,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckSystemConstantAccess))]
         public virtual void CheckSystemConstantAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
         {
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CheckSystemConstantAccessInternal(systemConstantIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckSystemConstantAccessInternal(systemConstantIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual void CheckSystemConstantAccessInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1770,7 +1770,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullSystemConstant))]
         public virtual Framework.Configuration.Generated.DTO.SystemConstantFullDTO GetFullSystemConstant([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullSystemConstantInternal(systemConstantIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSystemConstantInternal(systemConstantIdentity, evaluateData));
         }
         
         /// <summary>
@@ -1779,7 +1779,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullSystemConstantByCode))]
         public virtual Framework.Configuration.Generated.DTO.SystemConstantFullDTO GetFullSystemConstantByCode([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string systemConstantCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullSystemConstantByCodeInternal(systemConstantCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSystemConstantByCodeInternal(systemConstantCode, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SystemConstantFullDTO GetFullSystemConstantByCodeInternal(string systemConstantCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1802,7 +1802,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullSystemConstants))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantFullDTO> GetFullSystemConstants()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullSystemConstantsInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSystemConstantsInternal(evaluateData));
         }
         
         /// <summary>
@@ -1811,7 +1811,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullSystemConstantsByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantFullDTO> GetFullSystemConstantsByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO[] systemConstantIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullSystemConstantsByIdentsInternal(systemConstantIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSystemConstantsByIdentsInternal(systemConstantIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantFullDTO> GetFullSystemConstantsByIdentsInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO[] systemConstantIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1826,7 +1826,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullSystemConstantsByRootFilter))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantFullDTO> GetFullSystemConstantsByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullSystemConstantsByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullSystemConstantsByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantFullDTO> GetFullSystemConstantsByRootFilterInternal(Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1848,7 +1848,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichSystemConstant))]
         public virtual Framework.Configuration.Generated.DTO.SystemConstantRichDTO GetRichSystemConstant([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichSystemConstantInternal(systemConstantIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichSystemConstantInternal(systemConstantIdentity, evaluateData));
         }
         
         /// <summary>
@@ -1857,7 +1857,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichSystemConstantByCode))]
         public virtual Framework.Configuration.Generated.DTO.SystemConstantRichDTO GetRichSystemConstantByCode([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string systemConstantCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichSystemConstantByCodeInternal(systemConstantCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichSystemConstantByCodeInternal(systemConstantCode, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SystemConstantRichDTO GetRichSystemConstantByCodeInternal(string systemConstantCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1880,7 +1880,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleSystemConstant))]
         public virtual Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO GetSimpleSystemConstant([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleSystemConstantInternal(systemConstantIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSystemConstantInternal(systemConstantIdentity, evaluateData));
         }
         
         /// <summary>
@@ -1889,7 +1889,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleSystemConstantByCode))]
         public virtual Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO GetSimpleSystemConstantByCode([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string systemConstantCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleSystemConstantByCodeInternal(systemConstantCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSystemConstantByCodeInternal(systemConstantCode, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO GetSimpleSystemConstantByCodeInternal(string systemConstantCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1912,7 +1912,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleSystemConstants))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO> GetSimpleSystemConstants()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleSystemConstantsInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSystemConstantsInternal(evaluateData));
         }
         
         /// <summary>
@@ -1921,7 +1921,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleSystemConstantsByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO> GetSimpleSystemConstantsByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO[] systemConstantIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleSystemConstantsByIdentsInternal(systemConstantIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSystemConstantsByIdentsInternal(systemConstantIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO> GetSimpleSystemConstantsByIdentsInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO[] systemConstantIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1936,7 +1936,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleSystemConstantsByRootFilter))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO> GetSimpleSystemConstantsByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleSystemConstantsByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleSystemConstantsByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantSimpleDTO> GetSimpleSystemConstantsByRootFilterInternal(Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1958,7 +1958,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualSystemConstant))]
         public virtual Framework.Configuration.Generated.DTO.SystemConstantVisualDTO GetVisualSystemConstant([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualSystemConstantInternal(systemConstantIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSystemConstantInternal(systemConstantIdentity, evaluateData));
         }
         
         /// <summary>
@@ -1967,7 +1967,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualSystemConstantByCode))]
         public virtual Framework.Configuration.Generated.DTO.SystemConstantVisualDTO GetVisualSystemConstantByCode([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string systemConstantCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualSystemConstantByCodeInternal(systemConstantCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSystemConstantByCodeInternal(systemConstantCode, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SystemConstantVisualDTO GetVisualSystemConstantByCodeInternal(string systemConstantCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -1990,7 +1990,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualSystemConstants))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantVisualDTO> GetVisualSystemConstants()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualSystemConstantsInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSystemConstantsInternal(evaluateData));
         }
         
         /// <summary>
@@ -1999,7 +1999,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualSystemConstantsByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantVisualDTO> GetVisualSystemConstantsByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO[] systemConstantIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualSystemConstantsByIdentsInternal(systemConstantIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSystemConstantsByIdentsInternal(systemConstantIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantVisualDTO> GetVisualSystemConstantsByIdentsInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO[] systemConstantIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -2014,7 +2014,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualSystemConstantsByRootFilter))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantVisualDTO> GetVisualSystemConstantsByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualSystemConstantsByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualSystemConstantsByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.SystemConstantVisualDTO> GetVisualSystemConstantsByRootFilterInternal(Framework.Configuration.Generated.DTO.SystemConstantRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -2036,7 +2036,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasSystemConstantAccess))]
         public virtual bool HasSystemConstantAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.HasSystemConstantAccessInternal(systemConstantIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasSystemConstantAccessInternal(systemConstantIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual bool HasSystemConstantAccessInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -2053,7 +2053,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(SaveSystemConstant))]
         public virtual Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO SaveSystemConstant([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.SystemConstantStrictDTO systemConstantStrict)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Write, evaluateData => this.SaveSystemConstantInternal(systemConstantStrict, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.SaveSystemConstantInternal(systemConstantStrict, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO SaveSystemConstantInternal(Framework.Configuration.Generated.DTO.SystemConstantStrictDTO systemConstantStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -2080,7 +2080,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckTargetSystemAccess))]
         public virtual void CheckTargetSystemAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO targetSystemIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
         {
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CheckTargetSystemAccessInternal(targetSystemIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckTargetSystemAccessInternal(targetSystemIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual void CheckTargetSystemAccessInternal(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO targetSystemIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -2097,7 +2097,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullTargetSystem))]
         public virtual Framework.Configuration.Generated.DTO.TargetSystemFullDTO GetFullTargetSystem([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO targetSystemIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullTargetSystemInternal(targetSystemIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTargetSystemInternal(targetSystemIdentity, evaluateData));
         }
         
         /// <summary>
@@ -2106,7 +2106,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullTargetSystemByName))]
         public virtual Framework.Configuration.Generated.DTO.TargetSystemFullDTO GetFullTargetSystemByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string targetSystemName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullTargetSystemByNameInternal(targetSystemName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTargetSystemByNameInternal(targetSystemName, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.TargetSystemFullDTO GetFullTargetSystemByNameInternal(string targetSystemName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -2129,7 +2129,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullTargetSystems))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemFullDTO> GetFullTargetSystems()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullTargetSystemsInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTargetSystemsInternal(evaluateData));
         }
         
         /// <summary>
@@ -2138,7 +2138,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullTargetSystemsByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemFullDTO> GetFullTargetSystemsByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO[] targetSystemIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullTargetSystemsByIdentsInternal(targetSystemIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTargetSystemsByIdentsInternal(targetSystemIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemFullDTO> GetFullTargetSystemsByIdentsInternal(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO[] targetSystemIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -2153,7 +2153,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetFullTargetSystemsByRootFilter))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemFullDTO> GetFullTargetSystemsByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullTargetSystemsByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTargetSystemsByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemFullDTO> GetFullTargetSystemsByRootFilterInternal(Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -2175,7 +2175,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichTargetSystem))]
         public virtual Framework.Configuration.Generated.DTO.TargetSystemRichDTO GetRichTargetSystem([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO targetSystemIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichTargetSystemInternal(targetSystemIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichTargetSystemInternal(targetSystemIdentity, evaluateData));
         }
         
         /// <summary>
@@ -2184,7 +2184,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetRichTargetSystemByName))]
         public virtual Framework.Configuration.Generated.DTO.TargetSystemRichDTO GetRichTargetSystemByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string targetSystemName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichTargetSystemByNameInternal(targetSystemName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichTargetSystemByNameInternal(targetSystemName, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.TargetSystemRichDTO GetRichTargetSystemByNameInternal(string targetSystemName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -2207,7 +2207,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleTargetSystem))]
         public virtual Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO GetSimpleTargetSystem([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO targetSystemIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleTargetSystemInternal(targetSystemIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTargetSystemInternal(targetSystemIdentity, evaluateData));
         }
         
         /// <summary>
@@ -2216,7 +2216,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleTargetSystemByName))]
         public virtual Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO GetSimpleTargetSystemByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string targetSystemName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleTargetSystemByNameInternal(targetSystemName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTargetSystemByNameInternal(targetSystemName, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO GetSimpleTargetSystemByNameInternal(string targetSystemName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -2239,7 +2239,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleTargetSystems))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO> GetSimpleTargetSystems()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleTargetSystemsInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTargetSystemsInternal(evaluateData));
         }
         
         /// <summary>
@@ -2248,7 +2248,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleTargetSystemsByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO> GetSimpleTargetSystemsByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO[] targetSystemIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleTargetSystemsByIdentsInternal(targetSystemIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTargetSystemsByIdentsInternal(targetSystemIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO> GetSimpleTargetSystemsByIdentsInternal(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO[] targetSystemIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -2263,7 +2263,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetSimpleTargetSystemsByRootFilter))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO> GetSimpleTargetSystemsByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleTargetSystemsByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTargetSystemsByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemSimpleDTO> GetSimpleTargetSystemsByRootFilterInternal(Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -2285,7 +2285,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualTargetSystem))]
         public virtual Framework.Configuration.Generated.DTO.TargetSystemVisualDTO GetVisualTargetSystem([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO targetSystemIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualTargetSystemInternal(targetSystemIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualTargetSystemInternal(targetSystemIdentity, evaluateData));
         }
         
         /// <summary>
@@ -2294,7 +2294,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualTargetSystemByName))]
         public virtual Framework.Configuration.Generated.DTO.TargetSystemVisualDTO GetVisualTargetSystemByName([Microsoft.AspNetCore.Mvc.FromFormAttribute()] string targetSystemName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualTargetSystemByNameInternal(targetSystemName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualTargetSystemByNameInternal(targetSystemName, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.TargetSystemVisualDTO GetVisualTargetSystemByNameInternal(string targetSystemName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -2317,7 +2317,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualTargetSystems))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemVisualDTO> GetVisualTargetSystems()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualTargetSystemsInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualTargetSystemsInternal(evaluateData));
         }
         
         /// <summary>
@@ -2326,7 +2326,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualTargetSystemsByIdents))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemVisualDTO> GetVisualTargetSystemsByIdents([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO[] targetSystemIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualTargetSystemsByIdentsInternal(targetSystemIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualTargetSystemsByIdentsInternal(targetSystemIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemVisualDTO> GetVisualTargetSystemsByIdentsInternal(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO[] targetSystemIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -2341,7 +2341,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(GetVisualTargetSystemsByRootFilter))]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemVisualDTO> GetVisualTargetSystemsByRootFilter([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualTargetSystemsByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualTargetSystemsByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.TargetSystemVisualDTO> GetVisualTargetSystemsByRootFilterInternal(Framework.Configuration.Generated.DTO.TargetSystemRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -2363,7 +2363,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasTargetSystemAccess))]
         public virtual bool HasTargetSystemAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO targetSystemIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.HasTargetSystemAccessInternal(targetSystemIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasTargetSystemAccessInternal(targetSystemIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual bool HasTargetSystemAccessInternal(Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO targetSystemIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -2380,7 +2380,7 @@ namespace Framework.Configuration.WebApi
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(SaveTargetSystem))]
         public virtual Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO SaveTargetSystem([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Configuration.Generated.DTO.TargetSystemStrictDTO targetSystemStrict)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Write, evaluateData => this.SaveTargetSystemInternal(targetSystemStrict, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.SaveTargetSystemInternal(targetSystemStrict, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO SaveTargetSystemInternal(Framework.Configuration.Generated.DTO.TargetSystemStrictDTO targetSystemStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)

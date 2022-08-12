@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 
-using Framework.DomainDriven.BLL;
-
 using NHibernate.Cfg;
 
 namespace Framework.DomainDriven.NHibernate

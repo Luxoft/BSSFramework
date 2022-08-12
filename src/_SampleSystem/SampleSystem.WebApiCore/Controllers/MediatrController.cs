@@ -1,5 +1,6 @@
 ﻿using System;
 
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
@@ -34,24 +35,24 @@ namespace SampleSystem.WebApiCore.Controllers
         public GetEmployeesResponse[] GetEmployees() =>
                 this.Evaluate(
                               DBSessionMode.Read,
-                              _ => this.mediator.Send(new GetEmployeesQuery()).Result);
+                              _ => this.mediator.Send(new GetEmployeesQuery()).GetAwaiter().GetResult());
 
         [HttpGet]
         public GetManagementUnitFluentMappingsResponse[] GetManagementUnitFluentMappings() =>
                 this.Evaluate(
                               DBSessionMode.Read,
-                              _ => this.mediator.Send(new GetManagementUnitFluentMappingsQuery()).Result);
+                              _ => this.mediator.Send(new GetManagementUnitFluentMappingsQuery()).GetAwaiter().GetResult());
 
         [HttpPost]
         public Guid CreateManagementUnitFluentMappings([FromBody] CreateManagementUnitFluentMappingCommand command) =>
                 this.Evaluate(
                               DBSessionMode.Write,
-                              _ => this.mediator.Send(command).Result);
+                              _ => this.mediator.Send(command).GetAwaiter().GetResult());
 
         [HttpPost]
         public void CreateIntegrationEvent() =>
                 this.Evaluate(
                               DBSessionMode.Write,
-                              _ => this.mediator.Send(new CreateIntegrationEventCommand()).Result);
+                              _ => this.mediator.Send(new CreateIntegrationEventCommand()).GetAwaiter().GetResult());
     }
 }

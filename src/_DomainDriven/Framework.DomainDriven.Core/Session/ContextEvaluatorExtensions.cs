@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 
 using Framework.Core;
-
 using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.BLL
@@ -70,6 +69,11 @@ namespace Framework.DomainDriven.BLL
         public static TResult Evaluate<TBLLContext, TResult>(this IContextEvaluator<TBLLContext> contextEvaluator, DBSessionMode sessionMode, string customPrincipalName, [NotNull] Func<TBLLContext, TResult> getResult)
         {
             return contextEvaluator.Evaluate(sessionMode, customPrincipalName, (c, _) => getResult(c));
+        }
+
+        public static TResult Evaluate<TBLLContext, TResult>(this IContextEvaluator<TBLLContext> contextEvaluator, DBSessionMode sessionMode, string customPrincipalName, [NotNull] Func<TBLLContext, IDBSession, TResult> getResult)
+        {
+            return contextEvaluator.EvaluateAsync(sessionMode, customPrincipalName, (c, s) => Task.FromResult(getResult(c, s))).GetAwaiter().GetResult();
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Framework.DomainDriven.BLL
 {
-    [AttributeUsage(AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class DBSessionModeAttribute : Attribute
     {
         public DBSessionModeAttribute(DBSessionMode sessionMode)
@@ -11,6 +11,6 @@ namespace Framework.DomainDriven.BLL
         }
 
 
-        public DBSessionMode SessionMode { get; private set; }
+        public DBSessionMode SessionMode { get; }
     }
 }

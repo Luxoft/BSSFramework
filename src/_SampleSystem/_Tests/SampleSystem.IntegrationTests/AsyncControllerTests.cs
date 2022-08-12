@@ -24,9 +24,9 @@ public class AsyncControllerTests : TestBase
         var saveDto = new LocationStrictDTO { Name = Guid.NewGuid().ToString(), CloseDate = 30, Code = 12345 };
 
         // Act
-        var ident = await asyncControllerEvaluator.EvaluateAsync(c => c.AsyncSaveLocation(saveDto));
+        var ident = await asyncControllerEvaluator.EvaluateAsync(c => c.AsyncSaveLocation(saveDto, default));
 
-        var loadedLocationList = await asyncControllerEvaluator.EvaluateAsync(c => c.AsyncGetLocations());
+        var loadedLocationList = await asyncControllerEvaluator.EvaluateAsync(c => c.AsyncGetLocations(default));
 
         // Assert
         var location = loadedLocationList.SingleOrDefault(bu => bu.Name == saveDto.Name && bu.Identity == ident);

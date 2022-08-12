@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 
+using Framework.Core;
+
 using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.BLL
@@ -68,17 +70,6 @@ namespace Framework.DomainDriven.BLL
         public static TResult Evaluate<TBLLContext, TResult>(this IContextEvaluator<TBLLContext> contextEvaluator, DBSessionMode sessionMode, string customPrincipalName, [NotNull] Func<TBLLContext, TResult> getResult)
         {
             return contextEvaluator.Evaluate(sessionMode, customPrincipalName, (c, _) => getResult(c));
-        }
-
-        private static Func<T, object> ToDefaultFunc<T>(this Action<T> action)
-        {
-            return a => { action(a); return null; };
-        }
-
-
-        private static Func<T1, T2, object> ToDefaultFunc<T1, T2>(this Action<T1, T2> action)
-        {
-            return (a1, a2) => { action(a1, a2); return null; };
         }
     }
 }

@@ -12,6 +12,8 @@ using FluentNHibernate.Conventions.Instances;
 using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate;
 
+using JetBrains.Annotations;
+
 using NHibernate.Cfg;
 using NHibernate.Driver;
 
@@ -27,7 +29,7 @@ namespace SampleSystem.Generated.DAL.NHibernate
 
         public SampleSystemMappingSettings(DatabaseName databaseName, string connectionString)
                 : base(typeof(SampleSystemMappingSettings).Assembly, databaseName, databaseName.ToDefaultAudit()) =>
-                this.connectionString = connectionString;
+                this.connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
 
         /// <summary>
         /// For DBGenerator
@@ -36,11 +38,11 @@ namespace SampleSystem.Generated.DAL.NHibernate
                 IEnumerable<XDocument> mappingXmls,
                 DatabaseName databaseName,
                 AuditDatabaseName auditDatabaseName,
-                string connectionString,
+                [NotNull] string connectionString,
                 IEnumerable<Type> types = null)
                 : base(mappingXmls, databaseName, auditDatabaseName, types)
         {
-            this.connectionString = connectionString;
+            this.connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
         }
 
         public override void InitMapping(Configuration cfg)

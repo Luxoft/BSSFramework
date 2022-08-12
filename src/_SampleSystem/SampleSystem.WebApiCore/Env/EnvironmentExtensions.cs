@@ -50,6 +50,8 @@ namespace SampleSystem.WebApiCore
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
             services.AddHttpContextAccessor();
+            services.AddScoped<IWebApiDBSessionModeResolver, WebApiDBSessionModeResolver>();
+            services.AddScoped<IWebApiCurrentMethodResolver, WebApiCurrentMethodResolver>();
 
             services.AddDatabaseSettings(connectionString);
             services.AddCapBss(connectionString);

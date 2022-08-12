@@ -20,27 +20,23 @@ public class TestAsyncController : ControllerBase
 {
     private readonly ILocationBLLFactory buFactory;
 
-    private readonly IDBSession session;
 
     private readonly ISampleSystemDTOMappingService mappingService;
 
-    public TestAsyncController(ILocationBLLFactory buFactory, IDBSession session, ISampleSystemDTOMappingService mappingService)
+    public TestAsyncController(ILocationBLLFactory buFactory, ISampleSystemDTOMappingService mappingService)
     {
         this.buFactory = buFactory;
-        this.session = session;
         this.mappingService = mappingService;
     }
 
+    [DBSessionMode(DBSessionMode.Read)]
     [HttpPost(nameof(AsyncGetLocations))]
     public async Task<List<LocationSimpleDTO>> AsyncGetLocations(CancellationToken cancellationToken = default)
     {
-        this.session.AsReadOnly();
-
         var bll = this.buFactory.Create(BLLSecurityMode.View);
 
         return bll.GetFullList().ToSimpleDTOList(this.mappingService);
     }
-
 
     [HttpPost(nameof(AsyncSaveLocation))]
     public async Task<LocationIdentityDTO> AsyncSaveLocation(LocationStrictDTO businessUnitStrictDTO, CancellationToken cancellationToken = default)

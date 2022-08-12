@@ -46,10 +46,7 @@ namespace Framework.Configuration.BLL
         {
             this.eventDalListeners = (eventDalListeners ?? throw new ArgumentNullException(nameof(eventDalListeners)));
 
-            this.subscriptionService = this.GetSubscriptionService(
-                Log.ForContext(this.GetType()),
-                context.SubscriptionSender,
-                subscriptionMetadataStore);
+            this.subscriptionService = this.GetSubscriptionService(subscriptionMetadataStore ?? new SubscriptionMetadataStore(new SubscriptionMetadataFinder()));
         }
 
 
@@ -102,8 +99,6 @@ namespace Framework.Configuration.BLL
         }
 
         private IRevisionSubscriptionSystemService GetSubscriptionService(
-            ILogger logger,
-            IMessageSender<MessageTemplateNotification> subscriptionSender,
             SubscriptionMetadataStore subscriptionMetadataStore)
         {
             if (subscriptionMetadataStore == null)

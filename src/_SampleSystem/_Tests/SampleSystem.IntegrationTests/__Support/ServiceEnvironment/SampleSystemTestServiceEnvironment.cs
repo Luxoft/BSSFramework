@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Reflection;
@@ -8,9 +9,6 @@ using System.Threading.Tasks;
 using Framework.Authorization.ApproveWorkflow;
 
 using Framework.Cap.Abstractions;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
-using Framework.Core.Services;
-
 using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.ServiceModel.IAD;
@@ -20,9 +18,6 @@ using MediatR;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
-using nuSpec.Abstraction;
-using nuSpec.NHibernate;
 
 using SampleSystem.BLL;
 using SampleSystem.IntegrationTests.__Support.ServiceEnvironment.IntegrationTests;
@@ -53,43 +48,45 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                 .SetBasePath(Directory.GetCurrentDirectory())
                                 .AddJsonFile("appsettings.json", false, true)
                                 .AddEnvironmentVariables(nameof(SampleSystem) + "_")
+                                .AddInMemoryCollection(new Dictionary<string, string>
+                                 {
+                                         {
+                                                 "ConnectionStrings:DefaultConnection",
+                                                 InitializeAndCleanup.DatabaseUtil.ConnectionSettings.ConnectionString
+                                         },
+                                 })
+
                                 .Build();
 
 
             return new ServiceCollection()
 
-
                                   .RegisterLegacyBLLContext()
-                                  .RegisterControllers()
+                                  .AddEnvironment(configuration)
                                   .AddControllerEnvironment()
-
-                                  .AddSingleton<IWebApiExceptionExpander, WebApiDebugExceptionExpander>()
 
                                   .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
 
-                                  .AddSingleton<IntegrationTestDefaultUserAuthenticationService>()
-                                  .AddSingletonFrom<IDefaultUserAuthenticationService, IntegrationTestDefaultUserAuthenticationService>()
-                                  .AddSingletonFrom<IAuditRevisionUserAuthenticationService, IntegrationTestDefaultUserAuthenticationService>()
-
-                                  .AddScoped<SampleSystemUserAuthenticationService>()
-                                  .AddScopedFrom<IUserAuthenticationService, SampleSystemUserAuthenticationService>()
-                                  .AddScopedFrom<IImpersonateService, SampleSystemUserAuthenticationService>()
-
-                                  .AddSingleton(new SubscriptionMetadataStore(new SampleSystemSubscriptionsMetadataFinder()))
-
-                                  .AddSingleton<IDateTimeService, IntegrationTestDateTimeService>()
-                                  .AddDatabaseSettings(InitializeAndCleanup.DatabaseUtil.ConnectionSettings.ConnectionString)
-                                  .AddSingleton<ISpecificationEvaluator, NhSpecificationEvaluator>()
-                                  .AddSingleton<ICapTransactionManager, TestCapTransactionManager>()
-                                  .AddSingleton<IIntegrationEventBus, TestIntegrationEventBus>()
-
-                                  .AddSingleton<WorkflowManager>()
-                                  .AddSingletonFrom<IWorkflowManager, WorkflowManager>()
-
-                                  .AddScoped<IWorkflowApproveProcessor, WorkflowApproveProcessor>()
                                   .AddScoped<StartWorkflowJob>()
                                   .AddWorkflowCore(configuration)
                                   .AddAuthWorkflow()
+
+                                  .RegisterControllers()
+
+                                  .AddScoped<IntegrationTestsWebApiCurrentMethodResolver>()
+                                  .ReplaceScopedFrom<IWebApiCurrentMethodResolver, IntegrationTestsWebApiCurrentMethodResolver>()
+
+                                  .ReplaceSingleton<IWebApiExceptionExpander, WebApiDebugExceptionExpander>()
+
+                                  .AddSingleton<IntegrationTestDefaultUserAuthenticationService>()
+                                  .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IntegrationTestDefaultUserAuthenticationService>()
+                                  .ReplaceSingletonFrom<IAuditRevisionUserAuthenticationService, IntegrationTestDefaultUserAuthenticationService>()
+
+                                  .ReplaceSingleton<IDateTimeService, IntegrationTestDateTimeService>()
+
+                                  //.AddSingleton<ICapTransactionManager, TestCapTransactionManager>()
+                                  //.AddSingleton<IIntegrationEventBus, TestIntegrationEventBus>()
+
 
                                   .AddSingleton<SampleSystemInitializer>()
 

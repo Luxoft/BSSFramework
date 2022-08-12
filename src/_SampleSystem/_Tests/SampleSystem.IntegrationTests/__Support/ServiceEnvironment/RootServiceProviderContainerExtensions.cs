@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 
 using Framework.Core;
 using Framework.Core.Services;
@@ -16,13 +17,13 @@ namespace SampleSystem.IntegrationTests;
 
 public static class RootServiceProviderContainerExtensions
 {
-    public static TResult EvaluateController<TController, TResult>(this IRootServiceProviderContainer controllerEvaluator, Func<TController, TResult> func)
+    public static TResult EvaluateController<TController, TResult>(this IRootServiceProviderContainer controllerEvaluator, Expression<Func<TController, TResult>> func)
             where TController : ControllerBase
     {
         return controllerEvaluator.RootServiceProvider.GetRequiredService<ControllerEvaluator<TController>>().Evaluate(func);
     }
 
-    public static void EvaluateController<TController>(this IRootServiceProviderContainer controllerEvaluator, Action<TController> action)
+    public static void EvaluateController<TController>(this IRootServiceProviderContainer controllerEvaluator, Expression<Action<TController>> action)
             where TController : ControllerBase
     {
         controllerEvaluator.RootServiceProvider.GetRequiredService<ControllerEvaluator<TController>>().Evaluate(action);

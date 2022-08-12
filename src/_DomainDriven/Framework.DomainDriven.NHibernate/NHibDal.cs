@@ -75,9 +75,9 @@ namespace Framework.DomainDriven.NHibernate
 
         public IQueryable<TDomainObject> GetQueryable(LockRole lockRole, IFetchContainer<TDomainObject> fetchContainer)
         {
-            var querable = this.InnerSession.Query<TDomainObject>();
+            var queryable = this.InnerSession.Query<TDomainObject>();
 
-            var fetchsResult = querable.WithFetchs(fetchContainer);
+            var fetchsResult = queryable.WithFetchs(fetchContainer);
 
             if (lockRole == LockRole.None)
             {

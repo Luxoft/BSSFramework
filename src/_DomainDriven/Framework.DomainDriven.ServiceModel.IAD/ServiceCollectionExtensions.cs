@@ -14,6 +14,7 @@ using Framework.SecuritySystem;
 using Framework.SecuritySystem.Rules.Builders;
 
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Framework.DomainDriven.ServiceModel.IAD
 {
@@ -142,6 +143,32 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                 where TSource : class
         {
             return services.AddSingleton<TSource>(sp => sp.GetRequiredService<TImplementation>());
+        }
+
+        public static IServiceCollection ReplaceScoped<TSource, TImplementation>(this IServiceCollection services)
+                where TImplementation : class, TSource
+                where TSource : class
+        {
+            return services.Replace(ServiceDescriptor.Scoped<TSource, TImplementation>());
+        }
+        public static IServiceCollection ReplaceScopedFrom<TSource, TImplementation>(this IServiceCollection services)
+                where TImplementation : class, TSource
+                where TSource : class
+        {
+            return services.Replace(ServiceDescriptor.Scoped<TSource>(sp => sp.GetRequiredService<TImplementation>()));
+        }
+
+        public static IServiceCollection ReplaceSingleton<TSource, TImplementation>(this IServiceCollection services)
+                where TImplementation : class, TSource
+                where TSource : class
+        {
+            return services.Replace(ServiceDescriptor.Singleton<TSource, TImplementation>());
+        }
+        public static IServiceCollection ReplaceSingletonFrom<TSource, TImplementation>(this IServiceCollection services)
+                where TImplementation : class, TSource
+                where TSource : class
+        {
+            return services.Replace(ServiceDescriptor.Singleton<TSource>(sp => sp.GetRequiredService<TImplementation>()));
         }
     }
 }

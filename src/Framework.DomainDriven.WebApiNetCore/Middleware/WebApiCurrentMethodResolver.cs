@@ -1,24 +1,32 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 
+using Framework.Core;
+
+using JetBrains.Annotations;
+
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.WebApiNetCore;
 
 public class WebApiCurrentMethodResolver : IWebApiCurrentMethodResolver
 {
-    private readonly Lazy<MethodInfo> lazyCurrentMethod;
+    private readonly IHttpContextAccessor httpContextAccessor;
 
-    public WebApiCurrentMethodResolver(HttpContext httpContext)
+    public WebApiCurrentMethodResolver([NotNull] IHttpContextAccessor httpContextAccessor)
     {
-        this.lazyCurrentMethod = new Lazy<MethodInfo>(() =>
-             httpContext
-                .GetEndpoint()
-                .Metadata
-                .GetMetadata<ControllerActionDescriptor>()
-                .MethodInfo);
+        this.httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
     }
 
-    public MethodInfo CurrentMethod => this.lazyCurrentMethod.Value;
+    public MethodInfo GetCurrentMethod()
+    {
+        var endPoint = this.httpContextAccessor?.HttpContext?.GetEndpoint();
+
+        return endPoint?.Metadata.GetMetadata<ControllerActionDescriptor>()?.MethodInfo;
+    }
 }

@@ -65,12 +65,11 @@ public class ControllerEvaluator<TController>
     {
         await using var scope = this.rootServiceProvider.CreateAsyncScope();
 
+        var currentMethod = invokeExpr.UpdateBodyBase(ExpandConstVisitor.Value)
+                                      .TryGetStartMethodInfo()
+                                      .FromMaybe("Current controller method can't be extracted");
 
-        scope.ServiceProvider
-             .GetRequiredService<IntegrationTestsWebApiCurrentMethodResolver>()
-             .CurrentMethod = invokeExpr.UpdateBodyBase(ExpandConstVisitor.Value)
-                                        .TryGetStartMethodInfo()
-                                        .FromMaybe("method can't be extracted");
+        scope.ServiceProvider.GetRequiredService<IntegrationTestsWebApiCurrentMethodResolver>().SetCurrentMethod(currentMethod);
 
         return await new WebApiInvoker<T>(new DefaultHttpContext { RequestServices = scope.ServiceProvider }, context => InvokeController(context, func))
                 .WithMiddleware(next => new ImpersonateMiddleware<T>(next), (middleware, httpContext) => middleware.Invoke(httpContext, this.customPrincipalName))

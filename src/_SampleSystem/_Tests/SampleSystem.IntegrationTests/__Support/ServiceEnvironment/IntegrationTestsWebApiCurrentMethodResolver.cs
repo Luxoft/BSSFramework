@@ -6,5 +6,15 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
 public class IntegrationTestsWebApiCurrentMethodResolver : IWebApiCurrentMethodResolver
 {
-    public MethodInfo CurrentMethod { get; set; }
+    private MethodInfo currentMethod;
+
+    public MethodInfo GetCurrentMethod()
+    {
+        return this.currentMethod;
+    }
+
+    public void SetCurrentMethod(MethodInfo methodInfo)
+    {
+        this.currentMethod = methodInfo;
+    }
 }

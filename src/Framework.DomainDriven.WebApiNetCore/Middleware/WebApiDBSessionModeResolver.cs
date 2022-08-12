@@ -8,19 +8,21 @@ namespace Framework.DomainDriven.WebApiNetCore;
 
 public class WebApiDBSessionModeResolver: IWebApiDBSessionModeResolver
 {
-    private readonly IWebApiCurrentMethodResolver _methodResolver;
+    private readonly IWebApiCurrentMethodResolver methodResolver;
 
     public WebApiDBSessionModeResolver(IWebApiCurrentMethodResolver methodResolver)
     {
-        this._methodResolver = methodResolver;
+        this.methodResolver = methodResolver;
     }
 
     public DBSessionMode? GetSessionMode()
     {
+        var currentMethod = this.methodResolver.GetCurrentMethod();
+
         var attrs = new[]
         {
-            this._methodResolver.CurrentMethod.GetCustomAttribute<DBSessionModeAttribute>(),
-            this._methodResolver.CurrentMethod.ReflectedType.GetCustomAttribute<DBSessionModeAttribute>()
+            currentMethod.Maybe(m => m.GetCustomAttribute<DBSessionModeAttribute>()),
+            currentMethod.Maybe(m => m.ReflectedType.GetCustomAttribute<DBSessionModeAttribute>())
         };
 
         return attrs.FirstOrDefault(attr => attr != null)

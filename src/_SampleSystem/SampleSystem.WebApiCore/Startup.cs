@@ -96,14 +96,14 @@ namespace SampleSystem.WebApiCore
                 app.UseHsts();
             }
 
-            app
+            app.UseHttpsRedirection()
+               .UseRouting()
+
                 .UseDefaultExceptionsHandling()
                 .UseCorrelationId("SampleSystem_{0}")
                 .UseTryProcessDbSession()
                 .UseWebApiExceptionExpander()
 
-                .UseHttpsRedirection()
-                .UseRouting()
                 //// .UseAuthentication()
                 //// .UseAuthorization()
                 .UseEndpoints(z => z.MapControllers());

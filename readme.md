@@ -15,7 +15,7 @@ Features:
 - **Notification**
 - **Reporting**
 - **Intergation**
-- **Regular Jobs**
+- ~~**Regular Jobs**~~ Hangfire
 - **Data Audit**
 - **Logging**
 - **Validation**

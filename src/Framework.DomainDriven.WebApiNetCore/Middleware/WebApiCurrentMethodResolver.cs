@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -7,20 +8,17 @@ namespace Framework.DomainDriven.WebApiNetCore;
 
 public class WebApiCurrentMethodResolver : IWebApiCurrentMethodResolver
 {
-    private readonly HttpContext httpContext;
+    private readonly Lazy<MethodInfo> lazyCurrentMethod;
 
     public WebApiCurrentMethodResolver(HttpContext httpContext)
     {
-        this.httpContext = httpContext;
-    }
-
-    public MethodInfo CurrentMethod  =>
-
-            this.httpContext
+        this.lazyCurrentMethod = new Lazy<MethodInfo>(() =>
+             httpContext
                 .GetEndpoint()
                 .Metadata
                 .GetMetadata<ControllerActionDescriptor>()
-                .MethodInfo;
+                .MethodInfo);
+    }
 
-
+    public MethodInfo CurrentMethod => this.lazyCurrentMethod.Value;
 }

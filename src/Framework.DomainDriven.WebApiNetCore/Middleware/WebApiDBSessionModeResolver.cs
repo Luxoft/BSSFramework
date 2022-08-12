@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 
 using Framework.Core;
 using Framework.DomainDriven.BLL;
@@ -16,11 +17,15 @@ public class WebApiDBSessionModeResolver: IWebApiDBSessionModeResolver
 
     public DBSessionMode? GetSessionMode()
     {
-        return this._methodResolver
-                   .CurrentMethod
-                   .GetCustomAttribute<DBSessionModeAttribute>()
-                   .ToMaybe()
-                   .Select(attr => attr.SessionMode)
-                   .ToNullable();
+        var attrs = new[]
+        {
+            this._methodResolver.CurrentMethod.GetCustomAttribute<DBSessionModeAttribute>(),
+            this._methodResolver.CurrentMethod.ReflectedType.GetCustomAttribute<DBSessionModeAttribute>()
+        };
+
+        return attrs.FirstOrDefault(attr => attr != null)
+                    .ToMaybe()
+                    .Select(attr => attr.SessionMode)
+                    .ToNullable();
     }
 }

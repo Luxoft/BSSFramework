@@ -10,7 +10,6 @@ namespace Framework.DomainDriven.BLL
             this.SessionMode = sessionMode;
         }
 
-
         public DBSessionMode SessionMode { get; }
     }
 }

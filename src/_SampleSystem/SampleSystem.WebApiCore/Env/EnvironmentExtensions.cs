@@ -69,7 +69,7 @@ namespace SampleSystem.WebApiCore
 
             services.AddScoped<SampleSystemUserAuthenticationService>();
             services.AddScopedFrom<IUserAuthenticationService, SampleSystemUserAuthenticationService>();
-            services.AddScopedFrom<IUserAuthenticationService, SampleSystemUserAuthenticationService>();
+            services.AddScopedFrom<IImpersonateService, SampleSystemUserAuthenticationService>();
 
             services.AddSingleton<ISpecificationEvaluator, NhSpecificationEvaluator>();
 

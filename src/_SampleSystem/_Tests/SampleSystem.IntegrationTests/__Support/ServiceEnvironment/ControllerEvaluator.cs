@@ -65,15 +65,10 @@ public class ControllerEvaluator<TController>
     {
         await using var scope = this.rootServiceProvider.CreateAsyncScope();
 
-        var currentMethod = invokeExpr.UpdateBodyBase(ExpandConstVisitor.Value)
-                                      .TryGetStartMethodInfo()
-                                      .FromMaybe("Current controller method can't be extracted");
-
-        scope.ServiceProvider.GetRequiredService<IntegrationTestsWebApiCurrentMethodResolver>().SetCurrentMethod(currentMethod);
-
         return await new WebApiInvoker<T>(new DefaultHttpContext { RequestServices = scope.ServiceProvider }, context => InvokeController(context, func))
                 .WithMiddleware(next => new ImpersonateMiddleware<T>(next), (middleware, httpContext) => middleware.Invoke(httpContext, this.customPrincipalName))
                 .WithMiddleware(next => new TryProcessDbSessionMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, httpContext.RequestServices.GetRequiredService<IWebApiDBSessionModeResolver>()))
+                .WithMiddleware(next => new InitCurrentMethodMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, invokeExpr))
                 .WithMiddleware(next => new WebApiExceptionExpanderMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, httpContext.RequestServices.GetRequiredService<IWebApiExceptionExpander>()))
                 .Invoke();
     }
@@ -116,6 +111,26 @@ public class ControllerEvaluator<TController>
             {
                 return context.RequestServices.GetRequiredService<IntegrationTestDefaultUserAuthenticationService>().WithImpersonateAsync(customPrincipalName, () => (Task<T>)this.next(context));
             }
+        }
+    }
+    private class InitCurrentMethodMiddleware
+    {
+        private readonly RequestDelegate next;
+
+        public InitCurrentMethodMiddleware(RequestDelegate next)
+        {
+            this.next = next;
+        }
+
+        public Task Invoke(HttpContext context, LambdaExpression invokeExpr)
+        {
+            var currentMethod = invokeExpr.UpdateBodyBase(ExpandConstVisitor.Value)
+                                          .TryGetStartMethodInfo()
+                                          .FromMaybe("Current controller method can't be extracted");
+
+            context.RequestServices.GetRequiredService<IntegrationTestsWebApiCurrentMethodResolver>().SetCurrentMethod(currentMethod);
+
+            return this.next(context);
         }
     }
 

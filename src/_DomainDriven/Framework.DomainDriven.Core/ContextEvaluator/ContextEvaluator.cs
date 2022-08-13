@@ -20,23 +20,23 @@ public class ContextEvaluator<TBLLContext> : IContextEvaluator<TBLLContext>
     public Task<TResult> EvaluateAsync<TResult>(DBSessionMode sessionMode, string customPrincipalName, Func<TBLLContext, IDBSession, Task<TResult>> getResult)
     {
         return this.dbSessionEvaluator.EvaluateAsync(sessionMode, async (scopeServiceProvider, session) =>
-                                                                  {
-                                                                      var defaultPrincipalName = scopeServiceProvider.GetRequiredService<IUserAuthenticationService>().GetUserName();
+        {
+            var defaultPrincipalName = scopeServiceProvider.GetRequiredService<IUserAuthenticationService>().GetUserName();
 
-                                                                      var impersonateService = !string.IsNullOrWhiteSpace(customPrincipalName) && customPrincipalName != defaultPrincipalName
-                                                                              ? scopeServiceProvider.GetRequiredService<IImpersonateService>()
-                                                                              : null;
+            var impersonateService = !string.IsNullOrWhiteSpace(customPrincipalName) && customPrincipalName != defaultPrincipalName
+                    ? scopeServiceProvider.GetRequiredService<IImpersonateService>()
+                    : null;
 
-                                                                      var context = scopeServiceProvider.GetRequiredService<TBLLContext>();
+            var context = scopeServiceProvider.GetRequiredService<TBLLContext>();
 
-                                                                      if (impersonateService == null)
-                                                                      {
-                                                                          return await getResult(context, session);
-                                                                      }
-                                                                      else
-                                                                      {
-                                                                          return await impersonateService.WithImpersonateAsync(customPrincipalName, () => getResult(context, session));
-                                                                      }
-                                                                  });
+            if (impersonateService == null)
+            {
+                return await getResult(context, session);
+            }
+            else
+            {
+                return await impersonateService.WithImpersonateAsync(customPrincipalName, () => getResult(context, session));
+            }
+        });
     }
 }

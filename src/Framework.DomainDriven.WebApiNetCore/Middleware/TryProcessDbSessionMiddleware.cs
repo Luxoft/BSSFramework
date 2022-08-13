@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-using Framework.DomainDriven.BLL;
-
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 

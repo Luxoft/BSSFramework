@@ -2,15 +2,10 @@
 using System.Linq;
 using System.Reflection;
 
-using Framework.Core;
-
 using JetBrains.Annotations;
 
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.WebApiNetCore;
 

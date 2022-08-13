@@ -42,9 +42,9 @@ namespace Framework.DomainDriven.NHibernate
 
         private bool closed;
 
-        internal WriteNHibSession(NHibSessionEnvironment environment,
-                                  INHibSessionSetup settings,
-                                  IEnumerable<IDBSessionEventListener> eventListeners)
+        public WriteNHibSession(NHibSessionEnvironment environment,
+                                INHibSessionSetup settings,
+                                IEnumerable<IDBSessionEventListener> eventListeners)
                 : base(environment, DBSessionMode.Write)
         {
             this.eventListeners = eventListeners.ToArray();

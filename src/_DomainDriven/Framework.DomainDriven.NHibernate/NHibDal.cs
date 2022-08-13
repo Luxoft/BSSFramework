@@ -308,7 +308,7 @@ namespace Framework.DomainDriven.NHibernate
         {
             if (this.session.SessionMode != DBSessionMode.Write)
             {
-                throw new Exception("Invalid session mode. Expected ReadWrite.");
+                throw new InvalidOperationException("Invalid session mode. Expected Write.");
             }
         }
     }

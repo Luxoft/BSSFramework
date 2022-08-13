@@ -99,14 +99,14 @@ namespace SampleSystem.WebApiCore
             app.UseHttpsRedirection()
                .UseRouting()
 
-                .UseDefaultExceptionsHandling()
-                .UseCorrelationId("SampleSystem_{0}")
-                .UseTryProcessDbSession()
-                .UseWebApiExceptionExpander()
+               .UseDefaultExceptionsHandling()
+               .UseCorrelationId("SampleSystem_{0}")
+               .UseTryProcessDbSession()
+               .UseWebApiExceptionExpander()
 
-                //// .UseAuthentication()
-                //// .UseAuthorization()
-                .UseEndpoints(z => z.MapControllers());
+               //// .UseAuthentication()
+               //// .UseAuthorization()
+               .UseEndpoints(z => z.MapControllers());
 
             if (env.IsProduction())
             {

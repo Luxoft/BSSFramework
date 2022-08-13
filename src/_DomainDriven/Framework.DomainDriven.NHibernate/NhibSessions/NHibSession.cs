@@ -35,7 +35,7 @@ public class NHibSession : IDBSession
         });
     }
 
-    public IDBSession InnerSession => this.lazyInnerSession.Value;
+    public virtual IDBSession InnerSession => this.lazyInnerSession.Value;
 
     public DBSessionMode SessionMode => this.InnerSession.SessionMode;
 

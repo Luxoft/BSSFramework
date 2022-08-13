@@ -61,8 +61,9 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 
             return new ServiceCollection()
 
-                                  .RegisterLegacyBLLContext()
                                   .AddEnvironment(configuration)
+
+                                  .RegisterLegacyBLLContext()
                                   .AddControllerEnvironment()
 
                                   .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
@@ -84,8 +85,8 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 
                                   .ReplaceSingleton<IDateTimeService, IntegrationTestDateTimeService>()
 
-                                  //.AddSingleton<ICapTransactionManager, TestCapTransactionManager>()
-                                  //.AddSingleton<IIntegrationEventBus, TestIntegrationEventBus>()
+                                  .AddSingleton<ICapTransactionManager, TestCapTransactionManager>()
+                                  .AddSingleton<IIntegrationEventBus, TestIntegrationEventBus>()
 
 
                                   .AddSingleton<SampleSystemInitializer>()

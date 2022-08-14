@@ -43,7 +43,7 @@ namespace Framework.DomainDriven.NHibernate
         {
             this.CheckWrite();
 
-            this.InnerSession.SaveOrUpdate(domainObject);
+            this.InnerSession.SaveOrUpdateAsync(domainObject);
 
             this.session.RegisterModified(domainObject, ModificationType.Save);
         }

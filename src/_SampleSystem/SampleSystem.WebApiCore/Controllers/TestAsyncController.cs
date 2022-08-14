@@ -36,7 +36,9 @@ public class TestAsyncController : ControllerBase
     {
         var bll = this.buFactory.Create(BLLSecurityMode.View);
 
-        return bll.GetFullList().ToSimpleDTOList(this.mappingService);
+        var list = await bll.GetFullListAsync(default, cancellationToken);
+
+        return list.ToSimpleDTOList(this.mappingService);
     }
 
     [HttpPost(nameof(AsyncSaveLocation))]

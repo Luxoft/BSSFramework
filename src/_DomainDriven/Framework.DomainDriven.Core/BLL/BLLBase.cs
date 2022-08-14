@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
+using System.Threading.Tasks;
 
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
@@ -10,6 +12,8 @@ using Framework.Exceptions;
 using Framework.Persistent;
 
 using JetBrains.Annotations;
+
+using NHibernate.Linq;
 
 using nuSpec.Abstraction;
 
@@ -265,7 +269,7 @@ namespace Framework.DomainDriven.BLL
         /// <returns></returns>
         public IQueryable<TDomainObject> GetUnsecureQueryable(IFetchContainer<TDomainObject> fetchContainer, LockRole lockRole = LockRole.None)
         {
-            return this._dal.GetQueryable(lockRole, fetchContainer).Visit(this.GetQueryableExpressionVisitor());
+            return this._dal.GetQueryable(lockRole, fetchContainer, this.GetQueryableExpressionVisitor());
         }
 
         public IQueryable<TDomainObject> GetUnsecureQueryable(
@@ -444,9 +448,14 @@ namespace Framework.DomainDriven.BLL
             return this.GetObjectBy(filter, throwOnNotFound, fetchs.ToFetchContainer());
         }
 
-        public virtual List<TDomainObject> GetFullList(IFetchContainer<TDomainObject> fetchContainer = null)
+        public List<TDomainObject> GetFullList(IFetchContainer<TDomainObject> fetchContainer = null)
         {
-            return this.GetSecureQueryable(fetchContainer).ToList();
+            return this.GetFullListAsync(fetchContainer).GetAwaiter().GetResult();
+        }
+
+        public virtual Task<List<TDomainObject>> GetFullListAsync(IFetchContainer<TDomainObject> fetchContainer = null, CancellationToken cancellationToken = default)
+        {
+            return this.GetSecureQueryable(fetchContainer).ToListAsync(cancellationToken);
         }
 
         public List<TDomainObject> GetFullList(Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch, params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs)

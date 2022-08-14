@@ -72,6 +72,8 @@ namespace SampleSystem.Generated.DAL.NHibernate
                                              c.Properties.Add(Environment.CommandTimeout, "1200");
 
                                              c.Properties.Add(Environment.SqlTypesKeepDateTime, "true");
+
+                                             c.SessionFactory().ParsingLinqThrough<VisitedQueryProvider>();
                                          })
                     .BuildConfiguration();
         }

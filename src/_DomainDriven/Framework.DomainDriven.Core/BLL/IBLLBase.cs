@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
+using System.Threading.Tasks;
 
 using Framework.Core;
 using Framework.Exceptions;
@@ -79,6 +81,8 @@ namespace Framework.DomainDriven.BLL
         SelectOperationResult<TDomainObject> GetObjectsByOData(SelectOperation<TDomainObject> selectOperation, IDomainObjectFilterModel<TDomainObject> filter, IFetchContainer<TDomainObject> fetchContainer = null);
 
         List<TDomainObject> GetFullList(IFetchContainer<TDomainObject> fetchContainer = null);
+
+        Task<List<TDomainObject>> GetFullListAsync(IFetchContainer<TDomainObject> fetchContainer = null, CancellationToken cancellationToken = default);
 
         List<TDomainObject> GetFullList(Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch, params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs);
 

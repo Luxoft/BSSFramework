@@ -43,7 +43,7 @@ namespace Framework.DomainDriven.NHibernate
         {
             this.CheckWrite();
 
-            this.InnerSession.SaveOrUpdateAsync(domainObject);
+            this.InnerSession.SaveOrUpdate(domainObject);
 
             this.session.RegisterModified(domainObject, ModificationType.Save);
         }
@@ -69,15 +69,15 @@ namespace Framework.DomainDriven.NHibernate
             this.session.RegisterModified(domainObject, ModificationType.Remove);
 
             this.InnerSession.Delete(domainObject);
-
-            // this.InnerSession.Delete(this.InnerSession.Get<TDomainObject>(domainObject.Id));
         }
 
-        public IQueryable<TDomainObject> GetQueryable(LockRole lockRole, IFetchContainer<TDomainObject> fetchContainer)
+        public IQueryable<TDomainObject> GetQueryable(LockRole lockRole, IFetchContainer<TDomainObject> fetchContainer, ExpressionVisitor visitor = null)
         {
             var queryable = this.InnerSession.Query<TDomainObject>();
 
-            (queryable.Provider as VisitedQueryProvider).Visitor = this.expressionVisitorContainer.Visitor;
+            (queryable.Provider as VisitedQueryProvider)
+                    .FromMaybe("Register VisitedQueryProvider in Nhib configuration")
+                    .Visitor = visitor;
 
             var fetchsResult = queryable.WithFetchs(fetchContainer);
 

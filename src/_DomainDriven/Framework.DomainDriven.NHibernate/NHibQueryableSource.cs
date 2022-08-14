@@ -27,8 +27,6 @@ public class VisitedQueryProvider : DefaultQueryProvider
 
     protected override NhLinqExpression PrepareQuery(Expression expression, out IQuery query)
     {
-        var newExpr = this.Visitor.Visit(expression);
-
-        return base.PrepareQuery(newExpr, out query);
+        return base.PrepareQuery(this.Visitor == null ? expression : this.Visitor.Visit(expression), out query);
     }
 }

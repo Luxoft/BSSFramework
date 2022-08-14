@@ -52,7 +52,7 @@ public class TestAsyncController : ControllerBase
     }
 
     [DBSessionMode(DBSessionMode.Read)]
-    [HttpPost(nameof(AsyncSaveLocation))]
+    [HttpPost(nameof(AsyncSaveLocationWithWriteException))]
     public Task<LocationIdentityDTO> AsyncSaveLocationWithWriteException(LocationStrictDTO businessUnitStrictDTO, CancellationToken cancellationToken = default)
     {
         return this.AsyncSaveLocation(businessUnitStrictDTO, cancellationToken);

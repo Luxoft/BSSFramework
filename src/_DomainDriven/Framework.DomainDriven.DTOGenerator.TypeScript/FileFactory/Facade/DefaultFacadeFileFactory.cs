@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 using Framework.CodeDom;
 using Framework.CodeDom.TypeScript;
@@ -60,7 +61,7 @@ namespace Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory.Facade
 
                 typeDeclarationExpressionCollection.Add(methodInfoCodeTypeReference);
 
-                var baseDtoTypeName = this.GetParameterExpression(methodInfo.ReturnType).Type.BaseType;
+                var baseDtoTypeName = this.GetParameterExpression(methodInfo.GetReturnTypeWithUnpackTask()).Type.BaseType;
                 if (!returnTypeIsPrimitive)
                 {
                     typeDeclarationExpressionCollection.Add(this.GetCodeObservableTypeReference(methodInfo));
@@ -131,8 +132,8 @@ namespace Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory.Facade
 
         private CodeExpression GetMethodParametersCollection(MethodInfo method)
         {
-            var parameters  = method.GetParametersWithExpandAutoRequest().Select(parameter => new { parameter.Name, parameter.ParameterType }).ToList();
-            
+            var parameters = method.GetParametersWithExpandAutoRequest().ToList();
+
             if (parameters.Count() == 1)
             {
                 var p = parameters.Single();
@@ -142,7 +143,7 @@ namespace Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory.Facade
             else
             {
                 var parametersCollection = new JsObjectCreateExpression();
-                
+
                 parameters.Foreach(pair => parametersCollection.AddParameter(pair.Name, GetParameterAction(pair.ParameterType, pair.Name)));
 
                 return parametersCollection;
@@ -314,7 +315,7 @@ namespace Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory.Facade
 
         private CodeTypeReference GetCodeTypeReference(MethodInfo methodInfo)
         {
-            var returnType = methodInfo.ReturnType;
+            var returnType = methodInfo.GetReturnTypeWithUnpackTask();
             if (returnType.IsGenericType)
             {
                 return new CodeTypeReference(this.GetGenericTypeName(returnType));
@@ -325,7 +326,7 @@ namespace Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory.Facade
 
         private CodeTypeReference GetCodeObservableTypeReference(MethodInfo methodInfo)
         {
-            var returnType = methodInfo.ReturnType;
+            var returnType = methodInfo.GetReturnTypeWithUnpackTask();
 
 
             if (!this.Configuration.UseObservable)
@@ -350,7 +351,7 @@ namespace Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory.Facade
 
         private bool ReturnTypeIsPrimitive(MethodInfo methodInfo)
         {
-            return methodInfo.ReturnType.IsPrimitiveType() || methodInfo.ReturnType == typeof(void);
+            return methodInfo.GetReturnTypeWithUnpackTask().IsPrimitiveType() || methodInfo.GetReturnTypeWithUnpackTask() == typeof(void);
         }
 
         private string ToObservable(string input)

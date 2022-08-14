@@ -33,6 +33,7 @@ public class AsyncControllerTests : TestBase
 
         location.Should().NotBeNull();
     }
+
     [TestMethod]
     public async Task TestSaveLocationWithWriteException_ExceptionRaised()
     {

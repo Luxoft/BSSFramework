@@ -23,7 +23,7 @@ namespace Framework.DomainDriven.DTOGenerator.TypeScript.Facade
         {
             var methodArgTypes = from method in this.Configuration.GetFacadeMethods()
 
-                                 from type in method.GetParametersWithExpandAutoRequest().Select(param => param.ParameterType).Concat(method.ReturnType == typeof(void) ? Type.EmptyTypes : new[] { method.ReturnType })
+                                 from type in method.GetParametersWithExpandAutoRequest().Select(param => param.ParameterType).Concat(method.GetReturnTypeWithUnpackTask() == typeof(void) ? Type.EmptyTypes : new[] { method.GetReturnTypeWithUnpackTask() })
 
                                  select type;
 

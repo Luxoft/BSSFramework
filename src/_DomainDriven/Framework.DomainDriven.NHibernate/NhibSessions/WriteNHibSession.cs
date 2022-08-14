@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Transactions;
 
 using Framework.Core;
@@ -110,6 +111,7 @@ namespace Framework.DomainDriven.NHibernate
             }
         }
 
+
         public override IEnumerable<ObjectModification> GetModifiedObjectsFromLogic()
         {
             return this.modifiedObjectsFromLogic;
@@ -135,7 +137,7 @@ namespace Framework.DomainDriven.NHibernate
         {
         }
 
-        public override void Close()
+        public override async Task CloseAsync()
         {
             if (this.closed)
             {
@@ -154,20 +156,21 @@ namespace Framework.DomainDriven.NHibernate
                         {
                             if (!this.transaction.WasRolledBack)
                             {
-                                this.transaction.Rollback();
+                                await this.transaction.RollbackAsync();
                             }
                         }
                         else
                         {
-                            this.Flush(true);
+                            await this.FlushAsync(true);
 
-                            this.transaction.Commit();
+                            await this.transaction.CommitAsync();
                             this.transactionScope?.Complete();
                         }
                     }
                 }
             }
         }
+
 
         private static IDbTransaction GetDbTransaction(ITransaction transaction, ISession session)
         {
@@ -188,13 +191,12 @@ namespace Framework.DomainDriven.NHibernate
                             IsolationLevel = IsolationLevel.Serializable
                     });
 
-        /// <inheritdoc />
-        public override void Flush()
+        public override async Task FlushAsync()
         {
-            this.Flush(false);
+            await this.FlushAsync(false);
         }
 
-        private void Flush(bool withCompleteTransaction)
+        private async Task FlushAsync(bool withCompleteTransaction)
         {
             try
             {
@@ -202,7 +204,7 @@ namespace Framework.DomainDriven.NHibernate
 
                 do
                 {
-                    this.InnerSession.Flush();
+                    await this.InnerSession.FlushAsync();
 
                     var changes = this.collectChangedEventListener.EvictChanges();
 
@@ -230,7 +232,7 @@ namespace Framework.DomainDriven.NHibernate
                     // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!!!!! Use UseTryCloseDbSession middleware
                     this.eventListeners.Foreach(eventListener => eventListener.OnBeforeTransactionCompleted(new DALChangesEventArgs(beforeTransactionCompletedChangeState)));
 
-                    this.InnerSession.Flush();
+                    await this.InnerSession.FlushAsync();
 
                     var afterTransactionCompletedChangeState =
                             new[] { beforeTransactionCompletedChangeState, this.collectChangedEventListener.EvictChanges() }
@@ -239,8 +241,7 @@ namespace Framework.DomainDriven.NHibernate
                     // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!!!!! Use UseTryCloseDbSession middleware
                     this.eventListeners.Foreach(eventListener => eventListener.OnAfterTransactionCompleted(new DALChangesEventArgs(afterTransactionCompletedChangeState)));
 
-                    this.InnerSession
-                        .Flush(); // Флашим для того, чтобы проверить, что никто ничего не менял в объектах после AfterTransactionCompleted-евента
+                    await this.InnerSession.FlushAsync(); // Флашим для того, чтобы проверить, что никто ничего не менял в объектах после AfterTransactionCompleted-евента
 
                     if (this.collectChangedEventListener.HasAny())
                     {

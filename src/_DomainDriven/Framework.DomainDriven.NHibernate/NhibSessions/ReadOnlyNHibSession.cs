@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DAL.Revisions;
 
 using NHibernate;
@@ -23,6 +23,7 @@ namespace Framework.DomainDriven.NHibernate
         public override bool Closed => this.closed;
 
         public sealed override ISession InnerSession { get; }
+
 
         public override IEnumerable<ObjectModification> GetModifiedObjectsFromLogic()
         {
@@ -47,7 +48,7 @@ namespace Framework.DomainDriven.NHibernate
             throw new InvalidOperationException("Readonly session already created");
         }
 
-        public override void Close()
+        public override async Task CloseAsync()
         {
             if (this.closed)
             {
@@ -56,10 +57,11 @@ namespace Framework.DomainDriven.NHibernate
 
             this.closed = true;
 
-            using (this.InnerSession) ;
+
+            using (this.InnerSession);
         }
 
-        public override void Flush()
+        public override Task FlushAsync()
         {
             throw new InvalidOperationException();
         }

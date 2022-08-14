@@ -16,7 +16,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullIMRequestsByODataQueryString")]
         public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.IMRequestFullDTO> GetFullIMRequestsByODataQueryString([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string odataQueryString)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullIMRequestsByODataQueryStringInternal(odataQueryString, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullIMRequestsByODataQueryStringInternal(odataQueryString, evaluateData));
         }
         
         protected virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.IMRequestFullDTO> GetFullIMRequestsByODataQueryStringInternal(string odataQueryString, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -35,7 +35,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleIMRequestsByODataQueryString")]
         public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.IMRequestSimpleDTO> GetSimpleIMRequestsByODataQueryString([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string odataQueryString)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleIMRequestsByODataQueryStringInternal(odataQueryString, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleIMRequestsByODataQueryStringInternal(odataQueryString, evaluateData));
         }
         
         protected virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.IMRequestSimpleDTO> GetSimpleIMRequestsByODataQueryStringInternal(string odataQueryString, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -54,7 +54,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualIMRequestsByODataQueryString")]
         public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.IMRequestVisualDTO> GetVisualIMRequestsByODataQueryString([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string odataQueryString)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualIMRequestsByODataQueryStringInternal(odataQueryString, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualIMRequestsByODataQueryStringInternal(odataQueryString, evaluateData));
         }
         
         protected virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.IMRequestVisualDTO> GetVisualIMRequestsByODataQueryStringInternal(string odataQueryString, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -73,7 +73,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestIMRequestsByODataQueryString")]
         public virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestIMRequestProjectionDTO> GetTestIMRequestsByODataQueryString([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string odataQueryString)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetTestIMRequestsByODataQueryStringInternal(odataQueryString, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestIMRequestsByODataQueryStringInternal(odataQueryString, evaluateData));
         }
         
         protected virtual Framework.OData.SelectOperationResult<SampleSystem.Generated.DTO.TestIMRequestProjectionDTO> GetTestIMRequestsByODataQueryStringInternal(string odataQueryString, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)

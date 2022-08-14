@@ -4,7 +4,7 @@ using System.Linq;
 
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
-using Framework.DomainDriven.BLL.Security;
+using Framework.DomainDriven;
 
 using JetBrains.Annotations;
 

@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 
 using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.Notification;
 using Framework.Persistent;
 using Framework.Configuration.Domain;
+using Framework.DomainDriven;
 
 namespace Framework.Configuration.BLL
 {

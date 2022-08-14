@@ -4,6 +4,7 @@ using System.Linq;
 using FluentAssertions;
 
 using Framework.Configuration.Domain;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DAL.Revisions;
 

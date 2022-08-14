@@ -19,7 +19,7 @@
             Framework.Core.Period? period = getEmployeeSpecializationPropertyRevisionByDateRangeAutoRequest.period;
             string propertyName = getEmployeeSpecializationPropertyRevisionByDateRangeAutoRequest.propertyName;
             SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity = getEmployeeSpecializationPropertyRevisionByDateRangeAutoRequest.employeeSpecializationIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetEmployeeSpecializationPropertyRevisionByDateRangeInternal(employeeSpecializationIdentity, propertyName, period, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeeSpecializationPropertyRevisionByDateRangeInternal(employeeSpecializationIdentity, propertyName, period, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeeSpecializationPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity, string propertyName, Framework.Core.Period? period, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -37,7 +37,7 @@
         {
             string propertyName = getEmployeeSpecializationPropertyRevisionsAutoRequest.propertyName;
             SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity = getEmployeeSpecializationPropertyRevisionsAutoRequest.employeeSpecializationIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetEmployeeSpecializationPropertyRevisionsInternal(employeeSpecializationIdentity, propertyName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeeSpecializationPropertyRevisionsInternal(employeeSpecializationIdentity, propertyName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeeSpecializationPropertyRevisionsInternal(SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity, string propertyName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -53,7 +53,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeSpecializationRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetEmployeeSpecializationRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetEmployeeSpecializationRevisionsInternal(employeeSpecializationIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeeSpecializationRevisionsInternal(employeeSpecializationIdentity, evaluateData));
         }
         
         protected virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetEmployeeSpecializationRevisionsInternal(SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -71,7 +71,7 @@
         {
             long revision = getFullEmployeeSpecializationWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity = getFullEmployeeSpecializationWithRevisionAutoRequest.employeeSpecializationIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullEmployeeSpecializationWithRevisionInternal(employeeSpecializationIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeeSpecializationWithRevisionInternal(employeeSpecializationIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.EmployeeSpecializationFullDTO GetFullEmployeeSpecializationWithRevisionInternal(SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -90,7 +90,7 @@
         {
             long revision = getRichEmployeeSpecializationWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity = getRichEmployeeSpecializationWithRevisionAutoRequest.employeeSpecializationIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichEmployeeSpecializationWithRevisionInternal(employeeSpecializationIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichEmployeeSpecializationWithRevisionInternal(employeeSpecializationIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.EmployeeSpecializationRichDTO GetRichEmployeeSpecializationWithRevisionInternal(SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -109,7 +109,7 @@
         {
             long revision = getSimpleEmployeeSpecializationWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity = getSimpleEmployeeSpecializationWithRevisionAutoRequest.employeeSpecializationIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeSpecializationWithRevisionInternal(employeeSpecializationIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeSpecializationWithRevisionInternal(employeeSpecializationIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.EmployeeSpecializationSimpleDTO GetSimpleEmployeeSpecializationWithRevisionInternal(SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -128,7 +128,7 @@
         {
             long revision = getVisualEmployeeSpecializationWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity = getVisualEmployeeSpecializationWithRevisionAutoRequest.employeeSpecializationIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeSpecializationWithRevisionInternal(employeeSpecializationIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeSpecializationWithRevisionInternal(employeeSpecializationIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.EmployeeSpecializationVisualDTO GetVisualEmployeeSpecializationWithRevisionInternal(SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO employeeSpecializationIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)

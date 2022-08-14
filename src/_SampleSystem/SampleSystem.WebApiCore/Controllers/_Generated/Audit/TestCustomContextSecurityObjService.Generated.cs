@@ -18,7 +18,7 @@
         {
             long revision = getFullTestCustomContextSecurityObjWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity = getFullTestCustomContextSecurityObjWithRevisionAutoRequest.testCustomContextSecurityObjIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullTestCustomContextSecurityObjWithRevisionInternal(testCustomContextSecurityObjIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullTestCustomContextSecurityObjWithRevisionInternal(testCustomContextSecurityObjIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.TestCustomContextSecurityObjFullDTO GetFullTestCustomContextSecurityObjWithRevisionInternal(SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -37,7 +37,7 @@
         {
             long revision = getRichTestCustomContextSecurityObjWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity = getRichTestCustomContextSecurityObjWithRevisionAutoRequest.testCustomContextSecurityObjIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichTestCustomContextSecurityObjWithRevisionInternal(testCustomContextSecurityObjIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichTestCustomContextSecurityObjWithRevisionInternal(testCustomContextSecurityObjIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.TestCustomContextSecurityObjRichDTO GetRichTestCustomContextSecurityObjWithRevisionInternal(SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -56,7 +56,7 @@
         {
             long revision = getSimpleTestCustomContextSecurityObjWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity = getSimpleTestCustomContextSecurityObjWithRevisionAutoRequest.testCustomContextSecurityObjIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleTestCustomContextSecurityObjWithRevisionInternal(testCustomContextSecurityObjIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleTestCustomContextSecurityObjWithRevisionInternal(testCustomContextSecurityObjIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.TestCustomContextSecurityObjSimpleDTO GetSimpleTestCustomContextSecurityObjWithRevisionInternal(SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -76,7 +76,7 @@
             Framework.Core.Period? period = getTestCustomContextSecurityObjPropertyRevisionByDateRangeAutoRequest.period;
             string propertyName = getTestCustomContextSecurityObjPropertyRevisionByDateRangeAutoRequest.propertyName;
             SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity = getTestCustomContextSecurityObjPropertyRevisionByDateRangeAutoRequest.testCustomContextSecurityObjIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetTestCustomContextSecurityObjPropertyRevisionByDateRangeInternal(testCustomContextSecurityObjIdentity, propertyName, period, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestCustomContextSecurityObjPropertyRevisionByDateRangeInternal(testCustomContextSecurityObjIdentity, propertyName, period, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestCustomContextSecurityObjPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity, string propertyName, Framework.Core.Period? period, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -94,7 +94,7 @@
         {
             string propertyName = getTestCustomContextSecurityObjPropertyRevisionsAutoRequest.propertyName;
             SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity = getTestCustomContextSecurityObjPropertyRevisionsAutoRequest.testCustomContextSecurityObjIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetTestCustomContextSecurityObjPropertyRevisionsInternal(testCustomContextSecurityObjIdentity, propertyName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestCustomContextSecurityObjPropertyRevisionsInternal(testCustomContextSecurityObjIdentity, propertyName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetTestCustomContextSecurityObjPropertyRevisionsInternal(SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity, string propertyName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -110,7 +110,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetTestCustomContextSecurityObjRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetTestCustomContextSecurityObjRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetTestCustomContextSecurityObjRevisionsInternal(testCustomContextSecurityObjIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetTestCustomContextSecurityObjRevisionsInternal(testCustomContextSecurityObjIdentity, evaluateData));
         }
         
         protected virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetTestCustomContextSecurityObjRevisionsInternal(SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -128,7 +128,7 @@
         {
             long revision = getVisualTestCustomContextSecurityObjWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity = getVisualTestCustomContextSecurityObjWithRevisionAutoRequest.testCustomContextSecurityObjIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualTestCustomContextSecurityObjWithRevisionInternal(testCustomContextSecurityObjIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualTestCustomContextSecurityObjWithRevisionInternal(testCustomContextSecurityObjIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.TestCustomContextSecurityObjVisualDTO GetVisualTestCustomContextSecurityObjWithRevisionInternal(SampleSystem.Generated.DTO.TestCustomContextSecurityObjIdentityDTO testCustomContextSecurityObjIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)

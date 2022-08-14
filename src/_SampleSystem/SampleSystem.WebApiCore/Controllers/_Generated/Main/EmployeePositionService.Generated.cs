@@ -18,7 +18,7 @@
         {
             SampleSystem.SampleSystemSecurityOperationCode securityOperationCode = checkEmployeePositionAccessAutoRequest.securityOperationCode;
             SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdent = checkEmployeePositionAccessAutoRequest.employeePositionIdent;
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CheckEmployeePositionAccessInternal(employeePositionIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckEmployeePositionAccessInternal(employeePositionIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual void CheckEmployeePositionAccessInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdent, SampleSystem.SampleSystemSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -36,7 +36,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeePosition")]
         public virtual SampleSystem.Generated.DTO.EmployeePositionFullDTO GetFullEmployeePosition([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullEmployeePositionInternal(employeePositionIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeePositionInternal(employeePositionIdentity, evaluateData));
         }
         
         /// <summary>
@@ -46,7 +46,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeePositionByName")]
         public virtual SampleSystem.Generated.DTO.EmployeePositionFullDTO GetFullEmployeePositionByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string employeePositionName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullEmployeePositionByNameInternal(employeePositionName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeePositionByNameInternal(employeePositionName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.EmployeePositionFullDTO GetFullEmployeePositionByNameInternal(string employeePositionName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -70,7 +70,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeePositions")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionFullDTO> GetFullEmployeePositions()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullEmployeePositionsInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeePositionsInternal(evaluateData));
         }
         
         /// <summary>
@@ -80,7 +80,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEmployeePositionsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionFullDTO> GetFullEmployeePositionsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeePositionIdentityDTO[] employeePositionIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullEmployeePositionsByIdentsInternal(employeePositionIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeePositionsByIdentsInternal(employeePositionIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionFullDTO> GetFullEmployeePositionsByIdentsInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO[] employeePositionIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -102,7 +102,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichEmployeePosition")]
         public virtual SampleSystem.Generated.DTO.EmployeePositionRichDTO GetRichEmployeePosition([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichEmployeePositionInternal(employeePositionIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichEmployeePositionInternal(employeePositionIdentity, evaluateData));
         }
         
         /// <summary>
@@ -112,7 +112,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichEmployeePositionByName")]
         public virtual SampleSystem.Generated.DTO.EmployeePositionRichDTO GetRichEmployeePositionByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string employeePositionName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichEmployeePositionByNameInternal(employeePositionName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichEmployeePositionByNameInternal(employeePositionName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.EmployeePositionRichDTO GetRichEmployeePositionByNameInternal(string employeePositionName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -136,7 +136,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeePosition")]
         public virtual SampleSystem.Generated.DTO.EmployeePositionSimpleDTO GetSimpleEmployeePosition([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeePositionInternal(employeePositionIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeePositionInternal(employeePositionIdentity, evaluateData));
         }
         
         /// <summary>
@@ -146,7 +146,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeePositionByName")]
         public virtual SampleSystem.Generated.DTO.EmployeePositionSimpleDTO GetSimpleEmployeePositionByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string employeePositionName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeePositionByNameInternal(employeePositionName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeePositionByNameInternal(employeePositionName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.EmployeePositionSimpleDTO GetSimpleEmployeePositionByNameInternal(string employeePositionName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -170,7 +170,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeePositions")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO> GetSimpleEmployeePositions()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeePositionsInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeePositionsInternal(evaluateData));
         }
         
         /// <summary>
@@ -180,7 +180,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEmployeePositionsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO> GetSimpleEmployeePositionsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeePositionIdentityDTO[] employeePositionIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeePositionsByIdentsInternal(employeePositionIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeePositionsByIdentsInternal(employeePositionIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionSimpleDTO> GetSimpleEmployeePositionsByIdentsInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO[] employeePositionIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -202,7 +202,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeePosition")]
         public virtual SampleSystem.Generated.DTO.EmployeePositionVisualDTO GetVisualEmployeePosition([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualEmployeePositionInternal(employeePositionIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeePositionInternal(employeePositionIdentity, evaluateData));
         }
         
         /// <summary>
@@ -212,7 +212,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeePositionByName")]
         public virtual SampleSystem.Generated.DTO.EmployeePositionVisualDTO GetVisualEmployeePositionByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string employeePositionName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualEmployeePositionByNameInternal(employeePositionName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeePositionByNameInternal(employeePositionName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.EmployeePositionVisualDTO GetVisualEmployeePositionByNameInternal(string employeePositionName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -236,7 +236,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeePositions")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionVisualDTO> GetVisualEmployeePositions()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualEmployeePositionsInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeePositionsInternal(evaluateData));
         }
         
         /// <summary>
@@ -246,7 +246,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEmployeePositionsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionVisualDTO> GetVisualEmployeePositionsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeePositionIdentityDTO[] employeePositionIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualEmployeePositionsByIdentsInternal(employeePositionIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeePositionsByIdentsInternal(employeePositionIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.EmployeePositionVisualDTO> GetVisualEmployeePositionsByIdentsInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO[] employeePositionIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -270,7 +270,7 @@
         {
             SampleSystem.SampleSystemSecurityOperationCode securityOperationCode = hasEmployeePositionAccessAutoRequest.securityOperationCode;
             SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdent = hasEmployeePositionAccessAutoRequest.employeePositionIdent;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.HasEmployeePositionAccessInternal(employeePositionIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasEmployeePositionAccessInternal(employeePositionIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual bool HasEmployeePositionAccessInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdent, SampleSystem.SampleSystemSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)

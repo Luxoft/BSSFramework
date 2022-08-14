@@ -563,6 +563,16 @@ namespace Framework.Core
 
         #endregion
 
+        public static MethodInfo TryGetStartMethodInfo(this LambdaExpression expression)
+        {
+            return expression.Body
+                             .GetAllElements(v => (v as MemberExpression).Expression)
+                             .TakeWhile(p => p != expression.Parameters.Single())
+                             .First()
+                             .Pipe(expr => expr as MethodCallExpression)
+                             .Pipe(expr => expr.Method);
+        }
+
         public static Expression WithSelect(this Expression sourceExpression, Func<ParameterExpression, Expression> getBody)
         {
             if (sourceExpression == null) throw new ArgumentNullException(nameof(sourceExpression));

@@ -13,7 +13,6 @@ using Framework.CustomReports.Domain;
 using Framework.CustomReports.Services;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.Serialization;
@@ -50,6 +49,8 @@ namespace SampleSystem.WebApiCore
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
             services.AddHttpContextAccessor();
+            services.AddScoped<IWebApiDBSessionModeResolver, WebApiDBSessionModeResolver>();
+            services.AddScoped<IWebApiCurrentMethodResolver, WebApiCurrentMethodResolver>();
 
             services.AddDatabaseSettings(connectionString);
             services.AddCapBss(connectionString);
@@ -68,7 +69,7 @@ namespace SampleSystem.WebApiCore
 
             services.AddScoped<SampleSystemUserAuthenticationService>();
             services.AddScopedFrom<IUserAuthenticationService, SampleSystemUserAuthenticationService>();
-            services.AddScopedFrom<IUserAuthenticationService, SampleSystemUserAuthenticationService>();
+            services.AddScopedFrom<IImpersonateService, SampleSystemUserAuthenticationService>();
 
             services.AddSingleton<ISpecificationEvaluator, NhSpecificationEvaluator>();
 
@@ -84,7 +85,8 @@ namespace SampleSystem.WebApiCore
         public static IServiceCollection AddDatabaseSettings(this IServiceCollection services, string connectionString) =>
                 services.AddScoped<INHibSessionSetup, NHibSessionSettings>()
 
-                        .AddScoped<IDBSessionEventListener, DBSessionEventListener>()
+                        .AddScoped<IDBSessionEventListener, DefaultDBSessionEventListener>()
+                        .AddScoped<IDBSessionEventListener, SubscriptionDBSessionEventListener>()
                         .AddScopedFromLazy<IDBSession, NHibSession>()
 
                         .AddSingleton<INHibSessionEnvironmentSettings, NHibSessionEnvironmentSettings>()
@@ -107,6 +109,8 @@ namespace SampleSystem.WebApiCore
             services.AddSingleton<SampleSystemCustomReportsServiceEnvironment>();
             services.AddSingleton(sp => sp.GetRequiredService<SampleSystemCustomReportsServiceEnvironment>().ReportService);
             services.AddSingleton<ISecurityOperationCodeProvider<SampleSystemSecurityOperationCode>, SecurityOperationCodeProvider>();
+
+            services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();
 
             services.AddSingleton<IContextEvaluator<IAuthorizationBLLContext>, ContextEvaluator<IAuthorizationBLLContext>>();
             services.AddSingleton<IContextEvaluator<IConfigurationBLLContext>, ContextEvaluator<IConfigurationBLLContext>>();

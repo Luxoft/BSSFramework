@@ -19,7 +19,7 @@
             Framework.Core.Period? period = getEmployeeInformationPropertyRevisionByDateRangeAutoRequest.period;
             string propertyName = getEmployeeInformationPropertyRevisionByDateRangeAutoRequest.propertyName;
             SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO employeeInformationIdentity = getEmployeeInformationPropertyRevisionByDateRangeAutoRequest.employeeInformationIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetEmployeeInformationPropertyRevisionByDateRangeInternal(employeeInformationIdentity, propertyName, period, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeeInformationPropertyRevisionByDateRangeInternal(employeeInformationIdentity, propertyName, period, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeeInformationPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO employeeInformationIdentity, string propertyName, Framework.Core.Period? period, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -37,7 +37,7 @@
         {
             string propertyName = getEmployeeInformationPropertyRevisionsAutoRequest.propertyName;
             SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO employeeInformationIdentity = getEmployeeInformationPropertyRevisionsAutoRequest.employeeInformationIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetEmployeeInformationPropertyRevisionsInternal(employeeInformationIdentity, propertyName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeeInformationPropertyRevisionsInternal(employeeInformationIdentity, propertyName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeeInformationPropertyRevisionsInternal(SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO employeeInformationIdentity, string propertyName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -53,7 +53,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeeInformationRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetEmployeeInformationRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO employeeInformationIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetEmployeeInformationRevisionsInternal(employeeInformationIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeeInformationRevisionsInternal(employeeInformationIdentity, evaluateData));
         }
         
         protected virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetEmployeeInformationRevisionsInternal(SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO employeeInformationIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -71,7 +71,7 @@
         {
             long revision = getFullEmployeeInformationWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO employeeInformationIdentity = getFullEmployeeInformationWithRevisionAutoRequest.employeeInformationIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullEmployeeInformationWithRevisionInternal(employeeInformationIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeeInformationWithRevisionInternal(employeeInformationIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.EmployeeInformationFullDTO GetFullEmployeeInformationWithRevisionInternal(SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO employeeInformationIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -90,7 +90,7 @@
         {
             long revision = getRichEmployeeInformationWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO employeeInformationIdentity = getRichEmployeeInformationWithRevisionAutoRequest.employeeInformationIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichEmployeeInformationWithRevisionInternal(employeeInformationIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichEmployeeInformationWithRevisionInternal(employeeInformationIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.EmployeeInformationRichDTO GetRichEmployeeInformationWithRevisionInternal(SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO employeeInformationIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -109,7 +109,7 @@
         {
             long revision = getSimpleEmployeeInformationWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO employeeInformationIdentity = getSimpleEmployeeInformationWithRevisionAutoRequest.employeeInformationIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeInformationWithRevisionInternal(employeeInformationIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeeInformationWithRevisionInternal(employeeInformationIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.EmployeeInformationSimpleDTO GetSimpleEmployeeInformationWithRevisionInternal(SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO employeeInformationIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -128,7 +128,7 @@
         {
             long revision = getVisualEmployeeInformationWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO employeeInformationIdentity = getVisualEmployeeInformationWithRevisionAutoRequest.employeeInformationIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeInformationWithRevisionInternal(employeeInformationIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeeInformationWithRevisionInternal(employeeInformationIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.EmployeeInformationVisualDTO GetVisualEmployeeInformationWithRevisionInternal(SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO employeeInformationIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)

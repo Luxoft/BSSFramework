@@ -7,7 +7,7 @@ using Framework.Core;
 
 using JetBrains.Annotations;
 
-namespace Framework.DomainDriven.BLL
+namespace Framework.DomainDriven
 {
     public class DALChanges<T>
     {
@@ -103,12 +103,12 @@ namespace Framework.DomainDriven.BLL
         }
 
 
-        public IDictionary<Type, DALChanges<IDALObject>> GroupDALObjectByType()
+        public Dictionary<Type, DALChanges<IDALObject>> GroupDALObjectByType()
         {
             return this._lazyGroupDALObjectByType.Value;
         }
 
-        public IDictionary<Type, DALChanges<object>> GroupByType()
+        public Dictionary<Type, DALChanges<object>> GroupByType()
         {
             return this._lazyGroupByType.Value;
         }

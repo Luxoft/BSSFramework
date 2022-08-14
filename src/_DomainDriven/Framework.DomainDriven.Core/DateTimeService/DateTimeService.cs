@@ -35,23 +35,14 @@ namespace Framework.DomainDriven
             [NotNull] Func<Period> getNextMonth,
             [NotNull] Func<Period> getPrevMonth)
         {
-            if (getNow == null) throw new ArgumentNullException(nameof(getNow));
-            if (getToday == null) throw new ArgumentNullException(nameof(getToday));
-            if (getUtcNow == null) throw new ArgumentNullException(nameof(getUtcNow));
-            if (getCurrentFinancialYear == null) throw new ArgumentNullException(nameof(getCurrentFinancialYear));
-            if (getCurrentMonth == null) throw new ArgumentNullException(nameof(getCurrentMonth));
-            if (getCurrentYear == null) throw new ArgumentNullException(nameof(getCurrentYear));
-            if (getNextMonth == null) throw new ArgumentNullException(nameof(getNextMonth));
-            if (getPrevMonth == null) throw new ArgumentNullException(nameof(getPrevMonth));
-
-            this._getNow = getNow;
-            this._getToday = getToday;
-            this._getUtcNow = getUtcNow;
-            this._getCurrentFinancialYear = getCurrentFinancialYear;
-            this._getCurrentMonth = getCurrentMonth;
-            this._getCurrentYear = getCurrentYear;
-            this._getNextMonth = getNextMonth;
-            this._getPrevMonth = getPrevMonth;
+            this._getNow = getNow ?? throw new ArgumentNullException(nameof(getNow));
+            this._getToday = getToday ?? throw new ArgumentNullException(nameof(getToday));
+            this._getUtcNow = getUtcNow ?? throw new ArgumentNullException(nameof(getUtcNow));
+            this._getCurrentFinancialYear = getCurrentFinancialYear ?? throw new ArgumentNullException(nameof(getCurrentFinancialYear));
+            this._getCurrentMonth = getCurrentMonth ?? throw new ArgumentNullException(nameof(getCurrentMonth));
+            this._getCurrentYear = getCurrentYear ?? throw new ArgumentNullException(nameof(getCurrentYear));
+            this._getNextMonth = getNextMonth ?? throw new ArgumentNullException(nameof(getNextMonth));
+            this._getPrevMonth = getPrevMonth ?? throw new ArgumentNullException(nameof(getPrevMonth));
         }
 
 

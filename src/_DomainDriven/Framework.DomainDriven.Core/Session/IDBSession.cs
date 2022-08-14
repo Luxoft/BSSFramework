@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Framework.DomainDriven.BLL.Tracking;
 using Framework.Persistent;
 
-namespace Framework.DomainDriven.BLL
+namespace Framework.DomainDriven
 {
     public interface IDBSession : ICurrentRevisionService, IDisposable
     {

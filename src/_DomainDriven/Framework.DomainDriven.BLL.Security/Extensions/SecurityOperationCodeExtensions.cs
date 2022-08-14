@@ -42,7 +42,7 @@ namespace Framework.DomainDriven.BLL.Security
 
         public static IReadOnlyDictionary<Enum, SecurityOperationAttribute> GetDictionary(Type type, bool withBase, bool removeDuplicate)
         {
-            var getUntypeDictionaryMethod = new Func<IDictionary<Enum, SecurityOperationAttribute>>(GetUntypeDictionary<SecurityOperationCode>)
+            var getUntypeDictionaryMethod = new Func<Dictionary<Enum, SecurityOperationAttribute>>(GetUntypeDictionary<SecurityOperationCode>)
                                            .Method
                                            .GetGenericMethodDefinition();
 
@@ -50,7 +50,7 @@ namespace Framework.DomainDriven.BLL.Security
 
             var dict = types.Aggregate(new Dictionary<Enum, SecurityOperationAttribute>(), (d, t) =>
             {
-                var operations = getUntypeDictionaryMethod.MakeGenericMethod(t).Invoke<IDictionary<Enum, SecurityOperationAttribute>>(null);
+                var operations = getUntypeDictionaryMethod.MakeGenericMethod(t).Invoke<Dictionary<Enum, SecurityOperationAttribute>>(null);
 
                 return d.Union(operations).ToDictionary();
             });
@@ -65,7 +65,7 @@ namespace Framework.DomainDriven.BLL.Security
             }
         }
 
-        private static IDictionary<Enum, SecurityOperationAttribute> GetUntypeDictionary<TSecurityOperationCode>()
+        private static Dictionary<Enum, SecurityOperationAttribute> GetUntypeDictionary<TSecurityOperationCode>()
             where TSecurityOperationCode : struct, Enum
         {
             return GetDictionary<TSecurityOperationCode>().ToDictionary(pair => (Enum)pair.Key, pair => pair.Value);

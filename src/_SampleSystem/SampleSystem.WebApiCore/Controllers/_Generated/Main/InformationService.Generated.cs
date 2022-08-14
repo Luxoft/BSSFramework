@@ -18,7 +18,7 @@
         {
             SampleSystem.SampleSystemSecurityOperationCode securityOperationCode = checkInformationAccessAutoRequest.securityOperationCode;
             SampleSystem.Generated.DTO.InformationIdentityDTO informationIdent = checkInformationAccessAutoRequest.informationIdent;
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CheckInformationAccessInternal(informationIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckInformationAccessInternal(informationIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual void CheckInformationAccessInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdent, SampleSystem.SampleSystemSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -36,7 +36,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullInformation")]
         public virtual SampleSystem.Generated.DTO.InformationFullDTO GetFullInformation([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullInformationInternal(informationIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullInformationInternal(informationIdentity, evaluateData));
         }
         
         /// <summary>
@@ -46,7 +46,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullInformationByName")]
         public virtual SampleSystem.Generated.DTO.InformationFullDTO GetFullInformationByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string informationName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullInformationByNameInternal(informationName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullInformationByNameInternal(informationName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.InformationFullDTO GetFullInformationByNameInternal(string informationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -70,7 +70,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullInformations")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.InformationFullDTO> GetFullInformations()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullInformationsInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullInformationsInternal(evaluateData));
         }
         
         /// <summary>
@@ -80,7 +80,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullInformationsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.InformationFullDTO> GetFullInformationsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.InformationIdentityDTO[] informationIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullInformationsByIdentsInternal(informationIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullInformationsByIdentsInternal(informationIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.InformationFullDTO> GetFullInformationsByIdentsInternal(SampleSystem.Generated.DTO.InformationIdentityDTO[] informationIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -102,7 +102,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichInformation")]
         public virtual SampleSystem.Generated.DTO.InformationRichDTO GetRichInformation([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichInformationInternal(informationIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichInformationInternal(informationIdentity, evaluateData));
         }
         
         /// <summary>
@@ -112,7 +112,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichInformationByName")]
         public virtual SampleSystem.Generated.DTO.InformationRichDTO GetRichInformationByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string informationName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichInformationByNameInternal(informationName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichInformationByNameInternal(informationName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.InformationRichDTO GetRichInformationByNameInternal(string informationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -136,7 +136,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleInformation")]
         public virtual SampleSystem.Generated.DTO.InformationSimpleDTO GetSimpleInformation([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleInformationInternal(informationIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleInformationInternal(informationIdentity, evaluateData));
         }
         
         /// <summary>
@@ -146,7 +146,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleInformationByName")]
         public virtual SampleSystem.Generated.DTO.InformationSimpleDTO GetSimpleInformationByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string informationName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleInformationByNameInternal(informationName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleInformationByNameInternal(informationName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.InformationSimpleDTO GetSimpleInformationByNameInternal(string informationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -170,7 +170,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleInformations")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.InformationSimpleDTO> GetSimpleInformations()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleInformationsInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleInformationsInternal(evaluateData));
         }
         
         /// <summary>
@@ -180,7 +180,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleInformationsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.InformationSimpleDTO> GetSimpleInformationsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.InformationIdentityDTO[] informationIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleInformationsByIdentsInternal(informationIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleInformationsByIdentsInternal(informationIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.InformationSimpleDTO> GetSimpleInformationsByIdentsInternal(SampleSystem.Generated.DTO.InformationIdentityDTO[] informationIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -202,7 +202,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualInformation")]
         public virtual SampleSystem.Generated.DTO.InformationVisualDTO GetVisualInformation([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.InformationIdentityDTO informationIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualInformationInternal(informationIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualInformationInternal(informationIdentity, evaluateData));
         }
         
         /// <summary>
@@ -212,7 +212,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualInformationByName")]
         public virtual SampleSystem.Generated.DTO.InformationVisualDTO GetVisualInformationByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string informationName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualInformationByNameInternal(informationName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualInformationByNameInternal(informationName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.InformationVisualDTO GetVisualInformationByNameInternal(string informationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -236,7 +236,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualInformations")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.InformationVisualDTO> GetVisualInformations()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualInformationsInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualInformationsInternal(evaluateData));
         }
         
         /// <summary>
@@ -246,7 +246,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualInformationsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.InformationVisualDTO> GetVisualInformationsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.InformationIdentityDTO[] informationIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualInformationsByIdentsInternal(informationIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualInformationsByIdentsInternal(informationIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.InformationVisualDTO> GetVisualInformationsByIdentsInternal(SampleSystem.Generated.DTO.InformationIdentityDTO[] informationIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -270,7 +270,7 @@
         {
             SampleSystem.SampleSystemSecurityOperationCode securityOperationCode = hasInformationAccessAutoRequest.securityOperationCode;
             SampleSystem.Generated.DTO.InformationIdentityDTO informationIdent = hasInformationAccessAutoRequest.informationIdent;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.HasInformationAccessInternal(informationIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasInformationAccessInternal(informationIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual bool HasInformationAccessInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdent, SampleSystem.SampleSystemSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)

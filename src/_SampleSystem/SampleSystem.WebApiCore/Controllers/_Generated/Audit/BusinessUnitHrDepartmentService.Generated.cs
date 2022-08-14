@@ -19,7 +19,7 @@
             Framework.Core.Period? period = getBusinessUnitHrDepartmentPropertyRevisionByDateRangeAutoRequest.period;
             string propertyName = getBusinessUnitHrDepartmentPropertyRevisionByDateRangeAutoRequest.propertyName;
             SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity = getBusinessUnitHrDepartmentPropertyRevisionByDateRangeAutoRequest.businessUnitHrDepartmentIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetBusinessUnitHrDepartmentPropertyRevisionByDateRangeInternal(businessUnitHrDepartmentIdentity, propertyName, period, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetBusinessUnitHrDepartmentPropertyRevisionByDateRangeInternal(businessUnitHrDepartmentIdentity, propertyName, period, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetBusinessUnitHrDepartmentPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity, string propertyName, Framework.Core.Period? period, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -37,7 +37,7 @@
         {
             string propertyName = getBusinessUnitHrDepartmentPropertyRevisionsAutoRequest.propertyName;
             SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity = getBusinessUnitHrDepartmentPropertyRevisionsAutoRequest.businessUnitHrDepartmentIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetBusinessUnitHrDepartmentPropertyRevisionsInternal(businessUnitHrDepartmentIdentity, propertyName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetBusinessUnitHrDepartmentPropertyRevisionsInternal(businessUnitHrDepartmentIdentity, propertyName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetBusinessUnitHrDepartmentPropertyRevisionsInternal(SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity, string propertyName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -53,7 +53,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetBusinessUnitHrDepartmentRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetBusinessUnitHrDepartmentRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetBusinessUnitHrDepartmentRevisionsInternal(businessUnitHrDepartmentIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetBusinessUnitHrDepartmentRevisionsInternal(businessUnitHrDepartmentIdentity, evaluateData));
         }
         
         protected virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetBusinessUnitHrDepartmentRevisionsInternal(SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -71,7 +71,7 @@
         {
             long revision = getFullBusinessUnitHrDepartmentWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity = getFullBusinessUnitHrDepartmentWithRevisionAutoRequest.businessUnitHrDepartmentIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullBusinessUnitHrDepartmentWithRevisionInternal(businessUnitHrDepartmentIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullBusinessUnitHrDepartmentWithRevisionInternal(businessUnitHrDepartmentIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.BusinessUnitHrDepartmentFullDTO GetFullBusinessUnitHrDepartmentWithRevisionInternal(SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -90,7 +90,7 @@
         {
             long revision = getRichBusinessUnitHrDepartmentWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity = getRichBusinessUnitHrDepartmentWithRevisionAutoRequest.businessUnitHrDepartmentIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichBusinessUnitHrDepartmentWithRevisionInternal(businessUnitHrDepartmentIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichBusinessUnitHrDepartmentWithRevisionInternal(businessUnitHrDepartmentIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.BusinessUnitHrDepartmentRichDTO GetRichBusinessUnitHrDepartmentWithRevisionInternal(SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -109,7 +109,7 @@
         {
             long revision = getSimpleBusinessUnitHrDepartmentWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity = getSimpleBusinessUnitHrDepartmentWithRevisionAutoRequest.businessUnitHrDepartmentIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessUnitHrDepartmentWithRevisionInternal(businessUnitHrDepartmentIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessUnitHrDepartmentWithRevisionInternal(businessUnitHrDepartmentIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.BusinessUnitHrDepartmentSimpleDTO GetSimpleBusinessUnitHrDepartmentWithRevisionInternal(SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO businessUnitHrDepartmentIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)

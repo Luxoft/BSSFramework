@@ -6,9 +6,7 @@ using Framework.CodeDom;
 using Framework.Core;
 using Framework.Core.Serialization;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Generation.Domain;
 using Framework.OData;
-using Framework.Persistent;
 using Framework.Projection;
 using Framework.Transfering;
 

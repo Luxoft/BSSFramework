@@ -7,7 +7,7 @@ using Framework.DomainDriven.DAL.Revisions;
 
 using JetBrains.Annotations;
 
-namespace Framework.DomainDriven.BLL
+namespace Framework.DomainDriven
 {
     public static class DALChangesExtensions
     {

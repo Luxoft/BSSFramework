@@ -18,7 +18,7 @@
         {
             long revision = getFullWorkingCalendar1676WithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Identity = getFullWorkingCalendar1676WithRevisionAutoRequest.workingCalendar1676Identity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullWorkingCalendar1676WithRevisionInternal(workingCalendar1676Identity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullWorkingCalendar1676WithRevisionInternal(workingCalendar1676Identity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.WorkingCalendar1676FullDTO GetFullWorkingCalendar1676WithRevisionInternal(SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Identity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -37,7 +37,7 @@
         {
             long revision = getRichWorkingCalendar1676WithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Identity = getRichWorkingCalendar1676WithRevisionAutoRequest.workingCalendar1676Identity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichWorkingCalendar1676WithRevisionInternal(workingCalendar1676Identity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichWorkingCalendar1676WithRevisionInternal(workingCalendar1676Identity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.WorkingCalendar1676RichDTO GetRichWorkingCalendar1676WithRevisionInternal(SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Identity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -56,7 +56,7 @@
         {
             long revision = getSimpleWorkingCalendar1676WithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Identity = getSimpleWorkingCalendar1676WithRevisionAutoRequest.workingCalendar1676Identity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleWorkingCalendar1676WithRevisionInternal(workingCalendar1676Identity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleWorkingCalendar1676WithRevisionInternal(workingCalendar1676Identity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.WorkingCalendar1676SimpleDTO GetSimpleWorkingCalendar1676WithRevisionInternal(SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Identity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -75,7 +75,7 @@
         {
             long revision = getVisualWorkingCalendar1676WithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Identity = getVisualWorkingCalendar1676WithRevisionAutoRequest.workingCalendar1676Identity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualWorkingCalendar1676WithRevisionInternal(workingCalendar1676Identity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualWorkingCalendar1676WithRevisionInternal(workingCalendar1676Identity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.WorkingCalendar1676VisualDTO GetVisualWorkingCalendar1676WithRevisionInternal(SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Identity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -95,7 +95,7 @@
             Framework.Core.Period? period = getWorkingCalendar1676PropertyRevisionByDateRangeAutoRequest.period;
             string propertyName = getWorkingCalendar1676PropertyRevisionByDateRangeAutoRequest.propertyName;
             SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Identity = getWorkingCalendar1676PropertyRevisionByDateRangeAutoRequest.workingCalendar1676Identity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetWorkingCalendar1676PropertyRevisionByDateRangeInternal(workingCalendar1676Identity, propertyName, period, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetWorkingCalendar1676PropertyRevisionByDateRangeInternal(workingCalendar1676Identity, propertyName, period, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetWorkingCalendar1676PropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Identity, string propertyName, Framework.Core.Period? period, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -113,7 +113,7 @@
         {
             string propertyName = getWorkingCalendar1676PropertyRevisionsAutoRequest.propertyName;
             SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Identity = getWorkingCalendar1676PropertyRevisionsAutoRequest.workingCalendar1676Identity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetWorkingCalendar1676PropertyRevisionsInternal(workingCalendar1676Identity, propertyName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetWorkingCalendar1676PropertyRevisionsInternal(workingCalendar1676Identity, propertyName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetWorkingCalendar1676PropertyRevisionsInternal(SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Identity, string propertyName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -129,7 +129,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetWorkingCalendar1676Revisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetWorkingCalendar1676Revisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Identity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetWorkingCalendar1676RevisionsInternal(workingCalendar1676Identity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetWorkingCalendar1676RevisionsInternal(workingCalendar1676Identity, evaluateData));
         }
         
         protected virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetWorkingCalendar1676RevisionsInternal(SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO workingCalendar1676Identity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)

@@ -12,7 +12,7 @@ namespace Framework.DomainDriven.UnitTest.Mock
 {
     public class MockDalFactoryProvider<TPersistentDomainObjectBase, TIdent> where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     {
-        private readonly IDictionary<Type, IMockDAL> _mockDals;
+        private readonly Dictionary<Type, IMockDAL> _mockDals;
         private readonly IDALFactory<TPersistentDomainObjectBase, TIdent> _dalFactory;
 
         public MockDalFactoryProvider(IEnumerable<Assembly> domainAssemblies)

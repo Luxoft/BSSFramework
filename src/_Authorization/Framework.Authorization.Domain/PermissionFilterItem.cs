@@ -81,7 +81,6 @@ namespace Framework.Authorization.Domain
         /// Вычисляемый доменный тип по связке контекст+пермиссия
         /// </summary>
         [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Integration)]
-        [ExpandPath("Entity.EntityType")]
         [FixedPropertyValidator]
         [Required]
         public virtual EntityType EntityType

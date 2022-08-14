@@ -36,7 +36,7 @@ namespace Framework.DomainDriven.NHibernate
             {
                 var selected = this._providers.Select(z => z.CreateMetaData(nhibConfiguration));
                 return selected.Aggregate(
-                                          (IDictionary<Type, IEntityMeta>)(new Dictionary<Type, IEntityMeta>()),
+                                          (Dictionary<Type, IEntityMeta>)(new Dictionary<Type, IEntityMeta>()),
                     (left, right) =>
                     {
                         right.Foreach(pair =>

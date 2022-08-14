@@ -6,6 +6,7 @@ using FluentAssertions;
 
 using Framework.Authorization.Domain;
 using Framework.Core;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.OData;

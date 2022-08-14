@@ -7,7 +7,7 @@ namespace Framework.DomainDriven.BLL
 
         where TDomainObject : class
     {
-        public DefaultOperationEventSender(IEnumerable<IOperationEventListener<TDomainObject>> eventListeners, IDictionary<Type, IDictionary<Type, OperationEventSender>> cache)
+        public DefaultOperationEventSender(IEnumerable<IOperationEventListener<TDomainObject>> eventListeners, Dictionary<Type, Dictionary<Type, OperationEventSender>> cache)
             : base(eventListeners, cache)
         {
         }

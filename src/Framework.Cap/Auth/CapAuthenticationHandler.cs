@@ -3,9 +3,8 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 using Framework.Authorization.BLL;
-using Framework.DomainDriven.BLL;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.ServiceModel.Service;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;

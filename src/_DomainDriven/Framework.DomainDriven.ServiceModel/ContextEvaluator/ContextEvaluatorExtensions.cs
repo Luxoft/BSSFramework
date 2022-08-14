@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
+using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.ServiceModel.Service;
 
@@ -51,16 +52,11 @@ namespace Framework.DomainDriven.ServiceModel
         {
             return contextEvaluator.Evaluate(sessionMode, null, getResult);
         }
-
-        private static Func<T, object> ToDefaultFunc<T>(this Action<T> action)
+        public static TResult Evaluate<TBLLContext, TDTOMappingService, TResult>(this IContextEvaluator<TBLLContext, TDTOMappingService> contextEvaluator, DBSessionMode sessionMode, string customPrincipalName, Func<EvaluatedData<TBLLContext, TDTOMappingService>, TResult> getResult)
+            where TBLLContext : class
+            where TDTOMappingService : class
         {
-            return a => { action(a); return null; };
-        }
-
-
-        private static Func<T1, T2, object> ToDefaultFunc<T1, T2>(this Action<T1, T2> action)
-        {
-            return (a1, a2) => { action(a1, a2); return null; };
+            return contextEvaluator.EvaluateAsync(sessionMode, customPrincipalName, c => Task.FromResult(getResult(c))).GetAwaiter().GetResult();
         }
     }
 }

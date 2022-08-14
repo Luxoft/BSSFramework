@@ -9,6 +9,7 @@ using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 using Framework.Configuration.Generated.DTO;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 
 using SampleSystem.Generated.DTO;

@@ -13,7 +13,7 @@ namespace Framework.Report.Razor.Text
 {
     public class TextTemplateEvaluator :
         ITemplateEvaluator<string>//,
-        //ITemplateEvaluator<IDictionary<string, string>>
+        //ITemplateEvaluator<Dictionary<string, string>>
     {
         private readonly IRazorEngineService _razorEngine;
 
@@ -42,7 +42,7 @@ namespace Framework.Report.Razor.Text
             return message;
         }
 
-        //public IDictionary<string, string> Evaluate(IDictionary<string, string> template, object rootObject = null, IDictionary<string, object> variables = null, bool throwEvaluateException = false)
+        //public Dictionary<string, string> Evaluate(Dictionary<string, string> template, object rootObject = null, Dictionary<string, object> variables = null, bool throwEvaluateException = false)
         //{
         //    throw new NotImplementedException();
         //}

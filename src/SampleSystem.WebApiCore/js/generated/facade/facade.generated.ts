@@ -20,6 +20,7 @@ import * as persistent from '../../app/common/HierarchicalNode';
 
 export let asyncGetLocationsAsyncFunc = _asyncGetLocations();
 export let asyncSaveLocationAsyncFunc = _asyncSaveLocation();
+export let asyncSaveLocationWithWriteExceptionAsyncFunc = _asyncSaveLocationWithWriteException();
 export let changeEmployeeByComplexAsyncFunc = _changeEmployeeByComplex();
 export let changeEmployeeByEmailAsyncFunc = _changeEmployeeByEmail();
 export let checkBusinessUnitAccessAsyncFunc = _checkBusinessUnitAccess();
@@ -594,19 +595,27 @@ export let testPeriodAsyncFunc = _testPeriod();
 export let updateEmployeeAsyncFunc = _updateEmployee();
 export let updateExample1AsyncFunc = _updateExample1();
 
-function _asyncGetLocations(): async.AsyncFunc3<CancellationToken, Task<Array<dto.LocationSimpleDTO>>, Task<Array<dto.LocationObservableSimpleDTO>>, dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO> {
-    return new async.AsyncFunc3((cancellationToken: CancellationToken) => {
-        let baseParameters = cancellationToken;
-        let service = Environment.current.context.facadeFactory.createService<Task<Array<dto.LocationSimpleDTO>>, Task<Array<dto.LocationObservableSimpleDTO>>, dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO>();
+function _asyncGetLocations(): async.AsyncFunc2<Array<dto.LocationSimpleDTO>, Array<dto.LocationObservableSimpleDTO>, dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO> {
+    return new async.AsyncFunc2(() => {
+        let baseParameters = {};
+        let service = Environment.current.context.facadeFactory.createService<Array<dto.LocationSimpleDTO>, Array<dto.LocationObservableSimpleDTO>, dto.LocationSimpleDTO, dto.LocationObservableSimpleDTO>();
         return service.getData('TestAsync/AsyncGetLocations', {plain : dto.LocationSimpleDTO, observable : dto.LocationObservableSimpleDTO}, baseParameters);
     });
 }
 
-    function _asyncSaveLocation(): async.AsyncFunc4<dto.LocationStrictDTO, CancellationToken, Task<dto.LocationIdentityDTO>, Task<dto.LocationObservableIdentityDTO>, dto.LocationIdentityDTO, dto.LocationObservableIdentityDTO> {
-        return new async.AsyncFunc4((businessUnitStrictDTO: dto.LocationStrictDTO, cancellationToken: CancellationToken) => {
-            let baseParameters = {businessUnitStrictDTO : businessUnitStrictDTO.toNativeJson(), cancellationToken : cancellationToken};
-            let service = Environment.current.context.facadeFactory.createService<Task<dto.LocationIdentityDTO>, Task<dto.LocationObservableIdentityDTO>, dto.LocationIdentityDTO, dto.LocationObservableIdentityDTO>();
+    function _asyncSaveLocation(): async.AsyncFunc3<dto.LocationStrictDTO, dto.LocationIdentityDTO, dto.LocationObservableIdentityDTO, dto.LocationIdentityDTO, dto.LocationObservableIdentityDTO> {
+        return new async.AsyncFunc3((businessUnitStrictDTO: dto.LocationStrictDTO) => {
+            let baseParameters = businessUnitStrictDTO.toNativeJson();
+            let service = Environment.current.context.facadeFactory.createService<dto.LocationIdentityDTO, dto.LocationObservableIdentityDTO, dto.LocationIdentityDTO, dto.LocationObservableIdentityDTO>();
             return service.getData('TestAsync/AsyncSaveLocation', {plain : dto.LocationIdentityDTO, observable : dto.LocationObservableIdentityDTO}, baseParameters);
+        });
+    }
+
+    function _asyncSaveLocationWithWriteException(): async.AsyncFunc3<dto.LocationStrictDTO, dto.LocationIdentityDTO, dto.LocationObservableIdentityDTO, dto.LocationIdentityDTO, dto.LocationObservableIdentityDTO> {
+        return new async.AsyncFunc3((businessUnitStrictDTO: dto.LocationStrictDTO) => {
+            let baseParameters = businessUnitStrictDTO.toNativeJson();
+            let service = Environment.current.context.facadeFactory.createService<dto.LocationIdentityDTO, dto.LocationObservableIdentityDTO, dto.LocationIdentityDTO, dto.LocationObservableIdentityDTO>();
+            return service.getData('TestAsync/AsyncSaveLocationWithWriteException', {plain : dto.LocationIdentityDTO, observable : dto.LocationObservableIdentityDTO}, baseParameters);
         });
     }
 

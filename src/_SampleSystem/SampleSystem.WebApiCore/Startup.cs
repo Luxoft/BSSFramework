@@ -8,7 +8,7 @@ using DotNetCore.CAP;
 using Framework.Authorization.ApproveWorkflow;
 using Framework.Core;
 using Framework.DependencyInjection;
-using Framework.DomainDriven.BLL;
+using Framework.DomainDriven;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.WebApi.Utils;
 
@@ -96,17 +96,17 @@ namespace SampleSystem.WebApiCore
                 app.UseHsts();
             }
 
-            app
-                .UseDefaultExceptionsHandling()
-                .UseCorrelationId("SampleSystem_{0}")
-                .UseTryProcessDbSession()
-                .UseWebApiExceptionExpander()
+            app.UseHttpsRedirection()
+               .UseRouting()
 
-                .UseHttpsRedirection()
-                .UseRouting()
-                //// .UseAuthentication()
-                //// .UseAuthorization()
-                .UseEndpoints(z => z.MapControllers());
+               .UseDefaultExceptionsHandling()
+               .UseCorrelationId("SampleSystem_{0}")
+               .UseTryProcessDbSession()
+               .UseWebApiExceptionExpander()
+
+               //// .UseAuthentication()
+               //// .UseAuthorization()
+               .UseEndpoints(z => z.MapControllers());
 
             if (env.IsProduction())
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Framework.Configuration.BLL;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.Exceptions;

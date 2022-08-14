@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Framework.Authorization.Generated.DTO;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 
 namespace Authorization.WebApi.Controllers

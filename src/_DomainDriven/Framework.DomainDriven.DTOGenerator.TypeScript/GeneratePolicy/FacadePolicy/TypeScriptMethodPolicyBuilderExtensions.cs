@@ -15,7 +15,7 @@ namespace Framework.DomainDriven.DTOGenerator.TypeScript.Facade
 
                    let parameters = method.GetParametersWithExpandAutoRequest().Select(p => $"{p.ParameterType.ToCSharpFullName()} {p.Name}").Join(", ")
 
-                   select $"{method.ReturnType.ToCSharpFullName()} {method.Name} ({parameters})";
+                   select $"{method.GetReturnTypeWithUnpackTask().ToCSharpFullName()} {method.Name} ({parameters})";
         }
     }
 }

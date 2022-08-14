@@ -18,7 +18,7 @@
         {
             Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode = checkCodeFirstSubscriptionAccessAutoRequest.securityOperationCode;
             Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdent = checkCodeFirstSubscriptionAccessAutoRequest.codeFirstSubscriptionIdent;
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CheckCodeFirstSubscriptionAccessInternal(codeFirstSubscriptionIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckCodeFirstSubscriptionAccessInternal(codeFirstSubscriptionIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual void CheckCodeFirstSubscriptionAccessInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -36,7 +36,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullCodeFirstSubscription")]
         public virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO GetFullCodeFirstSubscription([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullCodeFirstSubscriptionInternal(codeFirstSubscriptionIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCodeFirstSubscriptionInternal(codeFirstSubscriptionIdentity, evaluateData));
         }
         
         /// <summary>
@@ -46,7 +46,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullCodeFirstSubscriptionByCode")]
         public virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO GetFullCodeFirstSubscriptionByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string codeFirstSubscriptionCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullCodeFirstSubscriptionByCodeInternal(codeFirstSubscriptionCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCodeFirstSubscriptionByCodeInternal(codeFirstSubscriptionCode, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO GetFullCodeFirstSubscriptionByCodeInternal(string codeFirstSubscriptionCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -70,7 +70,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullCodeFirstSubscriptions")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO> GetFullCodeFirstSubscriptions()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullCodeFirstSubscriptionsInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCodeFirstSubscriptionsInternal(evaluateData));
         }
         
         /// <summary>
@@ -80,7 +80,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullCodeFirstSubscriptionsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO> GetFullCodeFirstSubscriptionsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO[] codeFirstSubscriptionIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullCodeFirstSubscriptionsByIdentsInternal(codeFirstSubscriptionIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCodeFirstSubscriptionsByIdentsInternal(codeFirstSubscriptionIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO> GetFullCodeFirstSubscriptionsByIdentsInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO[] codeFirstSubscriptionIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -96,7 +96,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullCodeFirstSubscriptionsByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO> GetFullCodeFirstSubscriptionsByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullCodeFirstSubscriptionsByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCodeFirstSubscriptionsByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionFullDTO> GetFullCodeFirstSubscriptionsByRootFilterInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -119,7 +119,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichCodeFirstSubscription")]
         public virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO GetRichCodeFirstSubscription([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichCodeFirstSubscriptionInternal(codeFirstSubscriptionIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichCodeFirstSubscriptionInternal(codeFirstSubscriptionIdentity, evaluateData));
         }
         
         /// <summary>
@@ -129,7 +129,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichCodeFirstSubscriptionByCode")]
         public virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO GetRichCodeFirstSubscriptionByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string codeFirstSubscriptionCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichCodeFirstSubscriptionByCodeInternal(codeFirstSubscriptionCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichCodeFirstSubscriptionByCodeInternal(codeFirstSubscriptionCode, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRichDTO GetRichCodeFirstSubscriptionByCodeInternal(string codeFirstSubscriptionCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -153,7 +153,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleCodeFirstSubscription")]
         public virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO GetSimpleCodeFirstSubscription([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleCodeFirstSubscriptionInternal(codeFirstSubscriptionIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCodeFirstSubscriptionInternal(codeFirstSubscriptionIdentity, evaluateData));
         }
         
         /// <summary>
@@ -163,7 +163,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleCodeFirstSubscriptionByCode")]
         public virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO GetSimpleCodeFirstSubscriptionByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string codeFirstSubscriptionCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleCodeFirstSubscriptionByCodeInternal(codeFirstSubscriptionCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCodeFirstSubscriptionByCodeInternal(codeFirstSubscriptionCode, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO GetSimpleCodeFirstSubscriptionByCodeInternal(string codeFirstSubscriptionCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -187,7 +187,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleCodeFirstSubscriptions")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO> GetSimpleCodeFirstSubscriptions()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleCodeFirstSubscriptionsInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCodeFirstSubscriptionsInternal(evaluateData));
         }
         
         /// <summary>
@@ -197,7 +197,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleCodeFirstSubscriptionsByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO> GetSimpleCodeFirstSubscriptionsByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO[] codeFirstSubscriptionIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleCodeFirstSubscriptionsByIdentsInternal(codeFirstSubscriptionIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCodeFirstSubscriptionsByIdentsInternal(codeFirstSubscriptionIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO> GetSimpleCodeFirstSubscriptionsByIdentsInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO[] codeFirstSubscriptionIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -213,7 +213,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleCodeFirstSubscriptionsByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO> GetSimpleCodeFirstSubscriptionsByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleCodeFirstSubscriptionsByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCodeFirstSubscriptionsByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionSimpleDTO> GetSimpleCodeFirstSubscriptionsByRootFilterInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -238,7 +238,7 @@
         {
             Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode = hasCodeFirstSubscriptionAccessAutoRequest.securityOperationCode;
             Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdent = hasCodeFirstSubscriptionAccessAutoRequest.codeFirstSubscriptionIdent;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.HasCodeFirstSubscriptionAccessInternal(codeFirstSubscriptionIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasCodeFirstSubscriptionAccessInternal(codeFirstSubscriptionIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual bool HasCodeFirstSubscriptionAccessInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO codeFirstSubscriptionIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
@@ -256,7 +256,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("SaveCodeFirstSubscription")]
         public virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO SaveCodeFirstSubscription([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO codeFirstSubscriptionStrict)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Write, evaluateData => this.SaveCodeFirstSubscriptionInternal(codeFirstSubscriptionStrict, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.SaveCodeFirstSubscriptionInternal(codeFirstSubscriptionStrict, evaluateData));
         }
         
         protected virtual Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO SaveCodeFirstSubscriptionInternal(Framework.Configuration.Generated.DTO.CodeFirstSubscriptionStrictDTO codeFirstSubscriptionStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)

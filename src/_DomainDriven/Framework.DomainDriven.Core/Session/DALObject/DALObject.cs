@@ -2,7 +2,7 @@
 
 using JetBrains.Annotations;
 
-namespace Framework.DomainDriven.BLL
+namespace Framework.DomainDriven
 {
     public class DALObject<T> : IDALObject
         where T : class

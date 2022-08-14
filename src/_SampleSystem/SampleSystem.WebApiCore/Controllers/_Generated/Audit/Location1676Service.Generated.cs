@@ -18,7 +18,7 @@
         {
             long revision = getFullLocation1676WithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity = getFullLocation1676WithRevisionAutoRequest.location1676Identity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullLocation1676WithRevisionInternal(location1676Identity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullLocation1676WithRevisionInternal(location1676Identity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.Location1676FullDTO GetFullLocation1676WithRevisionInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -38,7 +38,7 @@
             Framework.Core.Period? period = getLocation1676PropertyRevisionByDateRangeAutoRequest.period;
             string propertyName = getLocation1676PropertyRevisionByDateRangeAutoRequest.propertyName;
             SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity = getLocation1676PropertyRevisionByDateRangeAutoRequest.location1676Identity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetLocation1676PropertyRevisionByDateRangeInternal(location1676Identity, propertyName, period, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetLocation1676PropertyRevisionByDateRangeInternal(location1676Identity, propertyName, period, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetLocation1676PropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, string propertyName, Framework.Core.Period? period, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -56,7 +56,7 @@
         {
             string propertyName = getLocation1676PropertyRevisionsAutoRequest.propertyName;
             SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity = getLocation1676PropertyRevisionsAutoRequest.location1676Identity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetLocation1676PropertyRevisionsInternal(location1676Identity, propertyName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetLocation1676PropertyRevisionsInternal(location1676Identity, propertyName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetLocation1676PropertyRevisionsInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, string propertyName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -72,7 +72,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetLocation1676Revisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetLocation1676Revisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetLocation1676RevisionsInternal(location1676Identity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetLocation1676RevisionsInternal(location1676Identity, evaluateData));
         }
         
         protected virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetLocation1676RevisionsInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -90,7 +90,7 @@
         {
             long revision = getRichLocation1676WithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity = getRichLocation1676WithRevisionAutoRequest.location1676Identity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichLocation1676WithRevisionInternal(location1676Identity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichLocation1676WithRevisionInternal(location1676Identity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.Location1676RichDTO GetRichLocation1676WithRevisionInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -109,7 +109,7 @@
         {
             long revision = getSimpleLocation1676WithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity = getSimpleLocation1676WithRevisionAutoRequest.location1676Identity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleLocation1676WithRevisionInternal(location1676Identity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleLocation1676WithRevisionInternal(location1676Identity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.Location1676SimpleDTO GetSimpleLocation1676WithRevisionInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -128,7 +128,7 @@
         {
             long revision = getVisualLocation1676WithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity = getVisualLocation1676WithRevisionAutoRequest.location1676Identity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualLocation1676WithRevisionInternal(location1676Identity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualLocation1676WithRevisionInternal(location1676Identity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.Location1676VisualDTO GetVisualLocation1676WithRevisionInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Identity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)

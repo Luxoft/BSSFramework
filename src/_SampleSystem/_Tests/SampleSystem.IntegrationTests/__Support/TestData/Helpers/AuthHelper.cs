@@ -3,6 +3,7 @@
 using Automation.Utils;
 
 using Framework.Authorization.Generated.DTO;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 
 using SampleSystem.BLL;

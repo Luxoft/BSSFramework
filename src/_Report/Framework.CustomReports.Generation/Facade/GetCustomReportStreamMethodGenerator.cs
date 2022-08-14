@@ -1,17 +1,13 @@
 ﻿using System;
 using System.CodeDom;
 using System.Collections.Generic;
-using System.IO;
-using System.ServiceModel;
 using System.Linq;
-using System.Linq.Expressions;
 
 using Framework.CodeDom;
-using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.ServiceModelGenerator;
 using Framework.CustomReports.Domain;
+using Framework.DomainDriven;
 
 using FileType = Framework.CustomReports.Generation.BLL.FileType;
 

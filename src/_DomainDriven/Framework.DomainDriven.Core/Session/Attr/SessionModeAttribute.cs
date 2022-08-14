@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Framework.DomainDriven.BLL
+namespace Framework.DomainDriven
 {
-    [AttributeUsage(AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class DBSessionModeAttribute : Attribute
     {
         public DBSessionModeAttribute(DBSessionMode sessionMode)
@@ -10,7 +10,6 @@ namespace Framework.DomainDriven.BLL
             this.SessionMode = sessionMode;
         }
 
-
-        public DBSessionMode SessionMode { get; private set; }
+        public DBSessionMode SessionMode { get; }
     }
 }

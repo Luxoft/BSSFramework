@@ -18,7 +18,7 @@
         {
             Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode = checkBusinessRoleAccessAutoRequest.securityOperationCode;
             Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent = checkBusinessRoleAccessAutoRequest.businessRoleIdent;
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CheckBusinessRoleAccessInternal(businessRoleIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckBusinessRoleAccessInternal(businessRoleIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual void CheckBusinessRoleAccessInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -36,7 +36,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("CreateBusinessRole")]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleRichDTO CreateBusinessRole([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleCreateModelStrictDTO businessRoleCreateModel)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CreateBusinessRoleInternal(businessRoleCreateModel, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CreateBusinessRoleInternal(businessRoleCreateModel, evaluateData));
         }
         
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleRichDTO CreateBusinessRoleInternal(Framework.Authorization.Generated.DTO.BusinessRoleCreateModelStrictDTO businessRoleCreateModel, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -55,7 +55,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullBusinessRole")]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleFullDTO GetFullBusinessRole([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullBusinessRoleInternal(businessRoleIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullBusinessRoleInternal(businessRoleIdentity, evaluateData));
         }
         
         /// <summary>
@@ -65,7 +65,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullBusinessRoleByName")]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleFullDTO GetFullBusinessRoleByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string businessRoleName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullBusinessRoleByNameInternal(businessRoleName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullBusinessRoleByNameInternal(businessRoleName, evaluateData));
         }
         
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleFullDTO GetFullBusinessRoleByNameInternal(string businessRoleName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -89,7 +89,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullBusinessRoles")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleFullDTO> GetFullBusinessRoles()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullBusinessRolesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullBusinessRolesInternal(evaluateData));
         }
         
         /// <summary>
@@ -99,7 +99,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullBusinessRolesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleFullDTO> GetFullBusinessRolesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO[] businessRoleIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullBusinessRolesByIdentsInternal(businessRoleIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullBusinessRolesByIdentsInternal(businessRoleIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleFullDTO> GetFullBusinessRolesByIdentsInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO[] businessRoleIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -115,7 +115,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullBusinessRolesByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleFullDTO> GetFullBusinessRolesByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullBusinessRolesByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullBusinessRolesByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleFullDTO> GetFullBusinessRolesByRootFilterInternal(Framework.Authorization.Generated.DTO.BusinessRoleRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -138,7 +138,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichBusinessRole")]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleRichDTO GetRichBusinessRole([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichBusinessRoleInternal(businessRoleIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichBusinessRoleInternal(businessRoleIdentity, evaluateData));
         }
         
         /// <summary>
@@ -148,7 +148,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichBusinessRoleByName")]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleRichDTO GetRichBusinessRoleByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string businessRoleName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichBusinessRoleByNameInternal(businessRoleName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichBusinessRoleByNameInternal(businessRoleName, evaluateData));
         }
         
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleRichDTO GetRichBusinessRoleByNameInternal(string businessRoleName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -172,7 +172,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleBusinessRole")]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO GetSimpleBusinessRole([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessRoleInternal(businessRoleIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessRoleInternal(businessRoleIdentity, evaluateData));
         }
         
         /// <summary>
@@ -182,7 +182,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleBusinessRoleByName")]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO GetSimpleBusinessRoleByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string businessRoleName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessRoleByNameInternal(businessRoleName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessRoleByNameInternal(businessRoleName, evaluateData));
         }
         
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO GetSimpleBusinessRoleByNameInternal(string businessRoleName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -206,7 +206,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleBusinessRoles")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO> GetSimpleBusinessRoles()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessRolesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessRolesInternal(evaluateData));
         }
         
         /// <summary>
@@ -216,7 +216,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleBusinessRolesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO> GetSimpleBusinessRolesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO[] businessRoleIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessRolesByIdentsInternal(businessRoleIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessRolesByIdentsInternal(businessRoleIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO> GetSimpleBusinessRolesByIdentsInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO[] businessRoleIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -232,7 +232,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleBusinessRolesByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO> GetSimpleBusinessRolesByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessRolesByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleBusinessRolesByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleSimpleDTO> GetSimpleBusinessRolesByRootFilterInternal(Framework.Authorization.Generated.DTO.BusinessRoleRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -255,7 +255,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualBusinessRole")]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO GetVisualBusinessRole([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualBusinessRoleInternal(businessRoleIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualBusinessRoleInternal(businessRoleIdentity, evaluateData));
         }
         
         /// <summary>
@@ -265,7 +265,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualBusinessRoleByName")]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO GetVisualBusinessRoleByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string businessRoleName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualBusinessRoleByNameInternal(businessRoleName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualBusinessRoleByNameInternal(businessRoleName, evaluateData));
         }
         
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO GetVisualBusinessRoleByNameInternal(string businessRoleName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -289,7 +289,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualBusinessRoles")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO> GetVisualBusinessRoles()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualBusinessRolesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualBusinessRolesInternal(evaluateData));
         }
         
         /// <summary>
@@ -299,7 +299,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualBusinessRolesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO> GetVisualBusinessRolesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO[] businessRoleIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualBusinessRolesByIdentsInternal(businessRoleIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualBusinessRolesByIdentsInternal(businessRoleIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO> GetVisualBusinessRolesByIdentsInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO[] businessRoleIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -315,7 +315,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualBusinessRolesByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO> GetVisualBusinessRolesByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualBusinessRolesByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualBusinessRolesByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.BusinessRoleVisualDTO> GetVisualBusinessRolesByRootFilterInternal(Framework.Authorization.Generated.DTO.BusinessRoleRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -340,7 +340,7 @@
         {
             Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode = hasBusinessRoleAccessAutoRequest.securityOperationCode;
             Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent = hasBusinessRoleAccessAutoRequest.businessRoleIdent;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.HasBusinessRoleAccessInternal(businessRoleIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasBusinessRoleAccessInternal(businessRoleIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual bool HasBusinessRoleAccessInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -358,7 +358,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("RemoveBusinessRole")]
         public virtual void RemoveBusinessRole([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent)
         {
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Write, evaluateData => this.RemoveBusinessRoleInternal(businessRoleIdent, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.RemoveBusinessRoleInternal(businessRoleIdent, evaluateData));
         }
         
         protected virtual void RemoveBusinessRoleInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -380,7 +380,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("SaveBusinessRole")]
         public virtual Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO SaveBusinessRole([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleStrictDTO businessRoleStrict)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Write, evaluateData => this.SaveBusinessRoleInternal(businessRoleStrict, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.SaveBusinessRoleInternal(businessRoleStrict, evaluateData));
         }
         
         protected virtual Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO SaveBusinessRoleInternal(Framework.Authorization.Generated.DTO.BusinessRoleStrictDTO businessRoleStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)

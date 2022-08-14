@@ -15,20 +15,16 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 using Framework.Configuration.Generated.DTO;
 
 using Framework.Core;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.NHibernate;
 using Framework.Events;
 using Framework.OData;
 
-using Microsoft.AspNetCore.Mvc;
-
-using NHibernate.Event;
 using NHibernate.Impl;
 
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
-using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests
 {

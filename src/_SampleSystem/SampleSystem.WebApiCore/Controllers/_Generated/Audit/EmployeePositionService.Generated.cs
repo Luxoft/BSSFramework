@@ -19,7 +19,7 @@
             Framework.Core.Period? period = getEmployeePositionPropertyRevisionByDateRangeAutoRequest.period;
             string propertyName = getEmployeePositionPropertyRevisionByDateRangeAutoRequest.propertyName;
             SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity = getEmployeePositionPropertyRevisionByDateRangeAutoRequest.employeePositionIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetEmployeePositionPropertyRevisionByDateRangeInternal(employeePositionIdentity, propertyName, period, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeePositionPropertyRevisionByDateRangeInternal(employeePositionIdentity, propertyName, period, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeePositionPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity, string propertyName, Framework.Core.Period? period, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -37,7 +37,7 @@
         {
             string propertyName = getEmployeePositionPropertyRevisionsAutoRequest.propertyName;
             SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity = getEmployeePositionPropertyRevisionsAutoRequest.employeePositionIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetEmployeePositionPropertyRevisionsInternal(employeePositionIdentity, propertyName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeePositionPropertyRevisionsInternal(employeePositionIdentity, propertyName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetEmployeePositionPropertyRevisionsInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity, string propertyName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -53,7 +53,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetEmployeePositionRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetEmployeePositionRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetEmployeePositionRevisionsInternal(employeePositionIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetEmployeePositionRevisionsInternal(employeePositionIdentity, evaluateData));
         }
         
         protected virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetEmployeePositionRevisionsInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -71,7 +71,7 @@
         {
             long revision = getFullEmployeePositionWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity = getFullEmployeePositionWithRevisionAutoRequest.employeePositionIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullEmployeePositionWithRevisionInternal(employeePositionIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEmployeePositionWithRevisionInternal(employeePositionIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.EmployeePositionFullDTO GetFullEmployeePositionWithRevisionInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -90,7 +90,7 @@
         {
             long revision = getRichEmployeePositionWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity = getRichEmployeePositionWithRevisionAutoRequest.employeePositionIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichEmployeePositionWithRevisionInternal(employeePositionIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichEmployeePositionWithRevisionInternal(employeePositionIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.EmployeePositionRichDTO GetRichEmployeePositionWithRevisionInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -109,7 +109,7 @@
         {
             long revision = getSimpleEmployeePositionWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity = getSimpleEmployeePositionWithRevisionAutoRequest.employeePositionIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeePositionWithRevisionInternal(employeePositionIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEmployeePositionWithRevisionInternal(employeePositionIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.EmployeePositionSimpleDTO GetSimpleEmployeePositionWithRevisionInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -128,7 +128,7 @@
         {
             long revision = getVisualEmployeePositionWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity = getVisualEmployeePositionWithRevisionAutoRequest.employeePositionIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualEmployeePositionWithRevisionInternal(employeePositionIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEmployeePositionWithRevisionInternal(employeePositionIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.EmployeePositionVisualDTO GetVisualEmployeePositionWithRevisionInternal(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO employeePositionIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)

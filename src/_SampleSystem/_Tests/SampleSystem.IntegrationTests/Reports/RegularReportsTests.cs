@@ -12,6 +12,7 @@ using Framework.Configuration.Generated.DTO;
 using Framework.Core;
 using Framework.CustomReports.Services.ExcelBuilder;
 using Framework.CustomReports.WebApi;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;

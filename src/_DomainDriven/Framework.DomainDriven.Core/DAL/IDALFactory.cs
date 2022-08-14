@@ -1,6 +1,6 @@
 ﻿using Framework.Persistent;
 
-namespace Framework.DomainDriven.BLL
+namespace Framework.DomainDriven
 {
     public interface IDALFactory
     {

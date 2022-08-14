@@ -8,6 +8,7 @@ using Framework.Core;
 using Framework.CustomReports.Attributes;
 using Framework.CustomReports.Domain;
 using Framework.CustomReports.Services;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.BLL.Tracking;

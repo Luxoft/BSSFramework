@@ -20375,7 +20375,7 @@ namespace Framework.Configuration.Generated.DTO
             where TMappingObject : Framework.DomainDriven.IMappingObject<Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService, TDomainObject, System.Guid>
             where TDomainObject : Framework.Configuration.Domain.PersistentDomainObjectBase
         {
-            TDomainObject domainObject = this.GetById<TDomainObject>(mappingObject.Id, Framework.DomainDriven.BLL.IdCheckMode.CheckAll);
+            TDomainObject domainObject = this.GetById<TDomainObject>(mappingObject.Id, Framework.DomainDriven.IdCheckMode.CheckAll);
             this.MapToDomainObject(mappingObject, domainObject);
             return domainObject;
         }

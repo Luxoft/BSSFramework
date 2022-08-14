@@ -19,7 +19,7 @@
             Framework.Core.Period? period = getCountryPropertyRevisionByDateRangeAutoRequest.period;
             string propertyName = getCountryPropertyRevisionByDateRangeAutoRequest.propertyName;
             SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity = getCountryPropertyRevisionByDateRangeAutoRequest.countryIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetCountryPropertyRevisionByDateRangeInternal(countryIdentity, propertyName, period, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetCountryPropertyRevisionByDateRangeInternal(countryIdentity, propertyName, period, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetCountryPropertyRevisionByDateRangeInternal(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity, string propertyName, Framework.Core.Period? period, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -37,7 +37,7 @@
         {
             string propertyName = getCountryPropertyRevisionsAutoRequest.propertyName;
             SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity = getCountryPropertyRevisionsAutoRequest.countryIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetCountryPropertyRevisionsInternal(countryIdentity, propertyName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetCountryPropertyRevisionsInternal(countryIdentity, propertyName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.SampleSystemDomainObjectPropertiesRevisionDTO GetCountryPropertyRevisionsInternal(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity, string propertyName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -53,7 +53,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetCountryRevisions")]
         public virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetCountryRevisions([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetCountryRevisionsInternal(countryIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetCountryRevisionsInternal(countryIdentity, evaluateData));
         }
         
         protected virtual Framework.DomainDriven.ServiceModel.IAD.DefaultDomainObjectRevisionDTO GetCountryRevisionsInternal(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -71,7 +71,7 @@
         {
             long revision = getFullCountryWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity = getFullCountryWithRevisionAutoRequest.countryIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullCountryWithRevisionInternal(countryIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCountryWithRevisionInternal(countryIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.CountryFullDTO GetFullCountryWithRevisionInternal(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -90,7 +90,7 @@
         {
             long revision = getRichCountryWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity = getRichCountryWithRevisionAutoRequest.countryIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichCountryWithRevisionInternal(countryIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichCountryWithRevisionInternal(countryIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.CountryRichDTO GetRichCountryWithRevisionInternal(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -109,7 +109,7 @@
         {
             long revision = getSimpleCountryWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity = getSimpleCountryWithRevisionAutoRequest.countryIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleCountryWithRevisionInternal(countryIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCountryWithRevisionInternal(countryIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.CountrySimpleDTO GetSimpleCountryWithRevisionInternal(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -128,7 +128,7 @@
         {
             long revision = getVisualCountryWithRevisionAutoRequest.revision;
             SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity = getVisualCountryWithRevisionAutoRequest.countryIdentity;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualCountryWithRevisionInternal(countryIdentity, revision, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualCountryWithRevisionInternal(countryIdentity, revision, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.CountryVisualDTO GetVisualCountryWithRevisionInternal(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity, long revision, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)

@@ -3,8 +3,7 @@ using System.Collections.Generic;
 
 using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
-
-using Framework.DomainDriven.BLL;
+using Framework.DomainDriven;
 using Framework.HierarchicalExpand;
 using Framework.SecuritySystem;
 

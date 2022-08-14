@@ -8,11 +8,11 @@ using NHibernate;
 
 namespace Framework.DomainDriven.NHibernate
 {
-    internal class ReadOnlyNHibSession : NHibSessionBase
+    public class ReadOnlyNHibSession : NHibSessionBase
     {
         private bool closed;
 
-        internal ReadOnlyNHibSession(NHibSessionEnvironment environment)
+        public ReadOnlyNHibSession(NHibSessionEnvironment environment)
                 : base(environment, DBSessionMode.Read)
         {
             this.InnerSession = this.Environment.InternalSessionFactory.OpenSession();

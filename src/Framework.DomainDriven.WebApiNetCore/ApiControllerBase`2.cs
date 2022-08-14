@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Security.Cryptography;
 
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.ServiceModel.Service;
-using Framework.Exceptions;
 
 using JetBrains.Annotations;
 
@@ -25,14 +23,6 @@ namespace Framework.DomainDriven.WebApiNetCore
             where TBLLContext : class, IConfigurationBLLContextContainer<IConfigurationBLLContext>, IAuthorizationBLLContextContainer<IAuthorizationBLLContextBase>
             where TEvaluatedData : EvaluatedData<TBLLContext>
     {
-        private IServiceProvider serviceProvider;
-
-        public override IServiceProvider ServiceProvider
-        {
-            get { return this.serviceProvider ?? this.HttpContext?.RequestServices; }
-            set { this.serviceProvider = value; }
-        }
-
         /// <inheritdoc />
         [NonAction]
         public sealed override void EvaluateC(DBSessionMode sessionMode, Action<TBLLContext> action)
@@ -71,7 +61,7 @@ namespace Framework.DomainDriven.WebApiNetCore
         [NonAction]
         public TResult Evaluate<TResult>(DBSessionMode sessionMode, Func<TEvaluatedData, TResult> getResult)
         {
-            return this.ServiceProvider.GetRequiredService<IApiControllerBaseEvaluator<TEvaluatedData>>().Evaluate(sessionMode, getResult);
+            return this.HttpContext.RequestServices.GetRequiredService<IApiControllerBaseEvaluator<TEvaluatedData>>().Evaluate(sessionMode, getResult);
         }
 
         /// <summary>

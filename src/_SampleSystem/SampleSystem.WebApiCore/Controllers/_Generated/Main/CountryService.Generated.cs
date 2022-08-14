@@ -18,7 +18,7 @@
         {
             SampleSystem.SampleSystemSecurityOperationCode securityOperationCode = checkCountryAccessAutoRequest.securityOperationCode;
             SampleSystem.Generated.DTO.CountryIdentityDTO countryIdent = checkCountryAccessAutoRequest.countryIdent;
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CheckCountryAccessInternal(countryIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckCountryAccessInternal(countryIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual void CheckCountryAccessInternal(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdent, SampleSystem.SampleSystemSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -36,7 +36,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullCountries")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CountryFullDTO> GetFullCountries()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullCountriesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCountriesInternal(evaluateData));
         }
         
         /// <summary>
@@ -46,7 +46,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullCountriesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CountryFullDTO> GetFullCountriesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CountryIdentityDTO[] countryIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullCountriesByIdentsInternal(countryIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCountriesByIdentsInternal(countryIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CountryFullDTO> GetFullCountriesByIdentsInternal(SampleSystem.Generated.DTO.CountryIdentityDTO[] countryIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -68,7 +68,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullCountry")]
         public virtual SampleSystem.Generated.DTO.CountryFullDTO GetFullCountry([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullCountryInternal(countryIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCountryInternal(countryIdentity, evaluateData));
         }
         
         /// <summary>
@@ -78,7 +78,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullCountryByCode")]
         public virtual SampleSystem.Generated.DTO.CountryFullDTO GetFullCountryByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string countryCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullCountryByCodeInternal(countryCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCountryByCodeInternal(countryCode, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.CountryFullDTO GetFullCountryByCodeInternal(string countryCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -95,7 +95,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullCountryByName")]
         public virtual SampleSystem.Generated.DTO.CountryFullDTO GetFullCountryByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string countryName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullCountryByNameInternal(countryName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullCountryByNameInternal(countryName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.CountryFullDTO GetFullCountryByNameInternal(string countryName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -119,7 +119,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichCountry")]
         public virtual SampleSystem.Generated.DTO.CountryRichDTO GetRichCountry([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichCountryInternal(countryIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichCountryInternal(countryIdentity, evaluateData));
         }
         
         /// <summary>
@@ -129,7 +129,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichCountryByCode")]
         public virtual SampleSystem.Generated.DTO.CountryRichDTO GetRichCountryByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string countryCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichCountryByCodeInternal(countryCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichCountryByCodeInternal(countryCode, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.CountryRichDTO GetRichCountryByCodeInternal(string countryCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -146,7 +146,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichCountryByName")]
         public virtual SampleSystem.Generated.DTO.CountryRichDTO GetRichCountryByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string countryName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichCountryByNameInternal(countryName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichCountryByNameInternal(countryName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.CountryRichDTO GetRichCountryByNameInternal(string countryName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -170,7 +170,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleCountries")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CountrySimpleDTO> GetSimpleCountries()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleCountriesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCountriesInternal(evaluateData));
         }
         
         /// <summary>
@@ -180,7 +180,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleCountriesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CountrySimpleDTO> GetSimpleCountriesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CountryIdentityDTO[] countryIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleCountriesByIdentsInternal(countryIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCountriesByIdentsInternal(countryIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CountrySimpleDTO> GetSimpleCountriesByIdentsInternal(SampleSystem.Generated.DTO.CountryIdentityDTO[] countryIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -202,7 +202,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleCountry")]
         public virtual SampleSystem.Generated.DTO.CountrySimpleDTO GetSimpleCountry([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleCountryInternal(countryIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCountryInternal(countryIdentity, evaluateData));
         }
         
         /// <summary>
@@ -212,7 +212,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleCountryByCode")]
         public virtual SampleSystem.Generated.DTO.CountrySimpleDTO GetSimpleCountryByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string countryCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleCountryByCodeInternal(countryCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCountryByCodeInternal(countryCode, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.CountrySimpleDTO GetSimpleCountryByCodeInternal(string countryCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -229,7 +229,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleCountryByName")]
         public virtual SampleSystem.Generated.DTO.CountrySimpleDTO GetSimpleCountryByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string countryName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleCountryByNameInternal(countryName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleCountryByNameInternal(countryName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.CountrySimpleDTO GetSimpleCountryByNameInternal(string countryName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -253,7 +253,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualCountries")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CountryVisualDTO> GetVisualCountries()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualCountriesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualCountriesInternal(evaluateData));
         }
         
         /// <summary>
@@ -263,7 +263,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualCountriesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CountryVisualDTO> GetVisualCountriesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CountryIdentityDTO[] countryIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualCountriesByIdentsInternal(countryIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualCountriesByIdentsInternal(countryIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.CountryVisualDTO> GetVisualCountriesByIdentsInternal(SampleSystem.Generated.DTO.CountryIdentityDTO[] countryIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -285,7 +285,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualCountry")]
         public virtual SampleSystem.Generated.DTO.CountryVisualDTO GetVisualCountry([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CountryIdentityDTO countryIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualCountryInternal(countryIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualCountryInternal(countryIdentity, evaluateData));
         }
         
         /// <summary>
@@ -295,7 +295,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualCountryByCode")]
         public virtual SampleSystem.Generated.DTO.CountryVisualDTO GetVisualCountryByCode([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string countryCode)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualCountryByCodeInternal(countryCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualCountryByCodeInternal(countryCode, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.CountryVisualDTO GetVisualCountryByCodeInternal(string countryCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -312,7 +312,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualCountryByName")]
         public virtual SampleSystem.Generated.DTO.CountryVisualDTO GetVisualCountryByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string countryName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualCountryByNameInternal(countryName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualCountryByNameInternal(countryName, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.CountryVisualDTO GetVisualCountryByNameInternal(string countryName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -338,7 +338,7 @@
         {
             SampleSystem.SampleSystemSecurityOperationCode securityOperationCode = hasCountryAccessAutoRequest.securityOperationCode;
             SampleSystem.Generated.DTO.CountryIdentityDTO countryIdent = hasCountryAccessAutoRequest.countryIdent;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.HasCountryAccessInternal(countryIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasCountryAccessInternal(countryIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual bool HasCountryAccessInternal(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdent, SampleSystem.SampleSystemSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -356,7 +356,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("RemoveCountry")]
         public virtual void RemoveCountry([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CountryIdentityDTO countryIdent)
         {
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Write, evaluateData => this.RemoveCountryInternal(countryIdent, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.RemoveCountryInternal(countryIdent, evaluateData));
         }
         
         protected virtual void RemoveCountryInternal(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdent, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
@@ -378,7 +378,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("SaveCountry")]
         public virtual SampleSystem.Generated.DTO.CountryIdentityDTO SaveCountry([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] SampleSystem.Generated.DTO.CountryStrictDTO countryStrict)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Write, evaluateData => this.SaveCountryInternal(countryStrict, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Write, evaluateData => this.SaveCountryInternal(countryStrict, evaluateData));
         }
         
         protected virtual SampleSystem.Generated.DTO.CountryIdentityDTO SaveCountryInternal(SampleSystem.Generated.DTO.CountryStrictDTO countryStrict, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)

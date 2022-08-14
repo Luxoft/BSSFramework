@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 
 using Framework.Core;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-using Framework.Events;
 
 using JetBrains.Annotations;
 

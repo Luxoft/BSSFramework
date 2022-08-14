@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Framework.Authorization.ApproveWorkflow;
 using Framework.Authorization.Domain;
 using Framework.Core;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 
 using SampleSystem.BLL;
@@ -56,7 +57,7 @@ public class StartWorkflowJob
                 {
                     var startupObj = this.workflowApproveProcessor.GetPermissionStartupObject(pair.permission);
 
-                    var wfInstanceIdStr = Task.Run(() => this.workflowHost.StartWorkflow(nameof(__ApprovePermission_Workflow), startupObj)).Result;
+                    var wfInstanceIdStr = Task.Run(() => this.workflowHost.StartWorkflow(nameof(__ApprovePermission_Workflow), startupObj)).GetAwaiter().GetResult();
                     var wfInstanceId = new Guid(wfInstanceIdStr);
                     pair.wfObj.WorkflowInstanceId = wfInstanceId;
 

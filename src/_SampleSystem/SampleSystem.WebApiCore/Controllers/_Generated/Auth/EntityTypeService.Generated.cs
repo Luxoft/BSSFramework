@@ -18,7 +18,7 @@
         {
             Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode = checkEntityTypeAccessAutoRequest.securityOperationCode;
             Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdent = checkEntityTypeAccessAutoRequest.entityTypeIdent;
-            this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.CheckEntityTypeAccessInternal(entityTypeIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckEntityTypeAccessInternal(entityTypeIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual void CheckEntityTypeAccessInternal(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -36,7 +36,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEntityType")]
         public virtual Framework.Authorization.Generated.DTO.EntityTypeFullDTO GetFullEntityType([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullEntityTypeInternal(entityTypeIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEntityTypeInternal(entityTypeIdentity, evaluateData));
         }
         
         /// <summary>
@@ -46,7 +46,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEntityTypeByName")]
         public virtual Framework.Authorization.Generated.DTO.EntityTypeFullDTO GetFullEntityTypeByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string entityTypeName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullEntityTypeByNameInternal(entityTypeName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEntityTypeByNameInternal(entityTypeName, evaluateData));
         }
         
         protected virtual Framework.Authorization.Generated.DTO.EntityTypeFullDTO GetFullEntityTypeByNameInternal(string entityTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -70,7 +70,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEntityTypes")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeFullDTO> GetFullEntityTypes()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullEntityTypesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEntityTypesInternal(evaluateData));
         }
         
         /// <summary>
@@ -80,7 +80,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEntityTypesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeFullDTO> GetFullEntityTypesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO[] entityTypeIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullEntityTypesByIdentsInternal(entityTypeIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEntityTypesByIdentsInternal(entityTypeIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeFullDTO> GetFullEntityTypesByIdentsInternal(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO[] entityTypeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -96,7 +96,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetFullEntityTypesByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeFullDTO> GetFullEntityTypesByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.EntityTypeRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetFullEntityTypesByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetFullEntityTypesByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeFullDTO> GetFullEntityTypesByRootFilterInternal(Framework.Authorization.Generated.DTO.EntityTypeRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -119,7 +119,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichEntityType")]
         public virtual Framework.Authorization.Generated.DTO.EntityTypeRichDTO GetRichEntityType([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichEntityTypeInternal(entityTypeIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichEntityTypeInternal(entityTypeIdentity, evaluateData));
         }
         
         /// <summary>
@@ -129,7 +129,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetRichEntityTypeByName")]
         public virtual Framework.Authorization.Generated.DTO.EntityTypeRichDTO GetRichEntityTypeByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string entityTypeName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetRichEntityTypeByNameInternal(entityTypeName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetRichEntityTypeByNameInternal(entityTypeName, evaluateData));
         }
         
         protected virtual Framework.Authorization.Generated.DTO.EntityTypeRichDTO GetRichEntityTypeByNameInternal(string entityTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -153,7 +153,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEntityType")]
         public virtual Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO GetSimpleEntityType([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleEntityTypeInternal(entityTypeIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEntityTypeInternal(entityTypeIdentity, evaluateData));
         }
         
         /// <summary>
@@ -163,7 +163,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEntityTypeByName")]
         public virtual Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO GetSimpleEntityTypeByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string entityTypeName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleEntityTypeByNameInternal(entityTypeName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEntityTypeByNameInternal(entityTypeName, evaluateData));
         }
         
         protected virtual Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO GetSimpleEntityTypeByNameInternal(string entityTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -187,7 +187,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEntityTypes")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO> GetSimpleEntityTypes()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleEntityTypesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEntityTypesInternal(evaluateData));
         }
         
         /// <summary>
@@ -197,7 +197,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEntityTypesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO> GetSimpleEntityTypesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO[] entityTypeIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleEntityTypesByIdentsInternal(entityTypeIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEntityTypesByIdentsInternal(entityTypeIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO> GetSimpleEntityTypesByIdentsInternal(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO[] entityTypeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -213,7 +213,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetSimpleEntityTypesByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO> GetSimpleEntityTypesByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.EntityTypeRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetSimpleEntityTypesByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetSimpleEntityTypesByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeSimpleDTO> GetSimpleEntityTypesByRootFilterInternal(Framework.Authorization.Generated.DTO.EntityTypeRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -236,7 +236,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEntityType")]
         public virtual Framework.Authorization.Generated.DTO.EntityTypeVisualDTO GetVisualEntityType([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdentity)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualEntityTypeInternal(entityTypeIdentity, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEntityTypeInternal(entityTypeIdentity, evaluateData));
         }
         
         /// <summary>
@@ -246,7 +246,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEntityTypeByName")]
         public virtual Framework.Authorization.Generated.DTO.EntityTypeVisualDTO GetVisualEntityTypeByName([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] string entityTypeName)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualEntityTypeByNameInternal(entityTypeName, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEntityTypeByNameInternal(entityTypeName, evaluateData));
         }
         
         protected virtual Framework.Authorization.Generated.DTO.EntityTypeVisualDTO GetVisualEntityTypeByNameInternal(string entityTypeName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -270,7 +270,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEntityTypes")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeVisualDTO> GetVisualEntityTypes()
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualEntityTypesInternal(evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEntityTypesInternal(evaluateData));
         }
         
         /// <summary>
@@ -280,7 +280,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEntityTypesByIdents")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeVisualDTO> GetVisualEntityTypesByIdents([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO[] entityTypeIdents)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualEntityTypesByIdentsInternal(entityTypeIdents, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEntityTypesByIdentsInternal(entityTypeIdents, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeVisualDTO> GetVisualEntityTypesByIdentsInternal(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO[] entityTypeIdents, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -296,7 +296,7 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("GetVisualEntityTypesByRootFilter")]
         public virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeVisualDTO> GetVisualEntityTypesByRootFilter([Microsoft.AspNetCore.Mvc.FromBodyAttribute()] Framework.Authorization.Generated.DTO.EntityTypeRootFilterModelStrictDTO filter)
         {
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.GetVisualEntityTypesByRootFilterInternal(filter, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.GetVisualEntityTypesByRootFilterInternal(filter, evaluateData));
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Authorization.Generated.DTO.EntityTypeVisualDTO> GetVisualEntityTypesByRootFilterInternal(Framework.Authorization.Generated.DTO.EntityTypeRootFilterModelStrictDTO filter, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
@@ -321,7 +321,7 @@
         {
             Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode = hasEntityTypeAccessAutoRequest.securityOperationCode;
             Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdent = hasEntityTypeAccessAutoRequest.entityTypeIdent;
-            return this.Evaluate(Framework.DomainDriven.BLL.DBSessionMode.Read, evaluateData => this.HasEntityTypeAccessInternal(entityTypeIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasEntityTypeAccessInternal(entityTypeIdent, securityOperationCode, evaluateData));
         }
         
         protected virtual bool HasEntityTypeAccessInternal(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)

@@ -75,9 +75,9 @@ namespace Framework.DomainDriven.NHibernate
 
         public IQueryable<TDomainObject> GetQueryable(LockRole lockRole, IFetchContainer<TDomainObject> fetchContainer)
         {
-            var querable = this.InnerSession.Query<TDomainObject>();
+            var queryable = this.InnerSession.Query<TDomainObject>();
 
-            var fetchsResult = querable.WithFetchs(fetchContainer);
+            var fetchsResult = queryable.WithFetchs(fetchContainer);
 
             if (lockRole == LockRole.None)
             {
@@ -308,7 +308,7 @@ namespace Framework.DomainDriven.NHibernate
         {
             if (this.session.SessionMode != DBSessionMode.Write)
             {
-                throw new Exception("Invalid session mode. Expected ReadWrite.");
+                throw new InvalidOperationException("Invalid session mode. Expected Write.");
             }
         }
     }

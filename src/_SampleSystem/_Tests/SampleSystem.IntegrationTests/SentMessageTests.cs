@@ -37,7 +37,8 @@ namespace SampleSystem.IntegrationTests
 
             // Act
             this.GetConfigurationControllerEvaluator().Evaluate(c => c.SaveSendedNotification(notification));
-            var sentMessage = this.GetConfigurationControllerEvaluator().Evaluate(c => c.EvaluateRead(evaluatedData => new SentMessageBLL(evaluatedData.Context.Configuration).GetFullList().Single()));
+
+            var sentMessage = this.EvaluateRead(c => new SentMessageBLL(c.Configuration).GetFullList().Single());
 
             // Assert
             sentMessage.Copy.Should().Be(expected);

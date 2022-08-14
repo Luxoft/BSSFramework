@@ -1,9 +1,9 @@
 ﻿using System;
 
 using Framework.Authorization.BLL;
+using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.ServiceModel.Service;
 
 using Hangfire.Dashboard;
 

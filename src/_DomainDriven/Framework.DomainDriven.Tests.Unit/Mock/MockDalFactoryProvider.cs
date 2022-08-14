@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
 using System.Linq;
 using System.Reflection;
+
 using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.Persistent;
+
 using NSubstitute;
 
 namespace Framework.DomainDriven.UnitTest.Mock
@@ -19,18 +19,9 @@ namespace Framework.DomainDriven.UnitTest.Mock
         {
             this._mockDals = new Dictionary<Type, IMockDAL>();
 
-            var fff = Substitute.For<IDALFactory>();
             this._dalFactory = Substitute.For<IDALFactory<TPersistentDomainObjectBase, TIdent>>();
-            //_dalFactory.AvailableValues.Returns(
-            //    new AvailableValues(
-            //        new Range<decimal>(decimal.MinValue, decimal.MaxValue),
-            //        new Range<DateTime>(SqlDateTime.MinValue.Value, SqlDateTime.MaxValue.Value)))
-            //    .Repeat
-            //    .Any();
 
             this.DefaultInitDals(domainAssemblies);
-
-
         }
 
         public IDALFactory<TPersistentDomainObjectBase, TIdent> DALFactory

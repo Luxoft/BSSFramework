@@ -12,9 +12,6 @@ namespace Framework.DomainDriven
 
         IObjectStateService GetObjectStateService();
 
-        IDALFactory<TPersistentDomainObjectBase, TIdent> GetDALFactory<TPersistentDomainObjectBase, TIdent>()
-            where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>;
-
         /// <summary>
         /// Мануальный флаш сессии, при его вызове срабатывают только Flushed-евенты, TransactionCompleted-евенты вызываются только при закрытие сессии
         /// </summary>

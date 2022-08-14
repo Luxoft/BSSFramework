@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 
 using Framework.Core;
-using Framework.DomainDriven.BLL;
+using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.Exceptions;
@@ -19,14 +19,20 @@ using NHibernate.Linq.Visitors;
 
 namespace Framework.DomainDriven.NHibernate
 {
-    internal class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
+    public class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
         where TDomainObject : class, IIdentityObject<TIdent>
     {
         private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache();
 
         private readonly NHibSessionBase session;
 
-        public NHibDal(NHibSessionBase session) => this.session = session ?? throw new ArgumentNullException(nameof(session));
+        private readonly IExpressionVisitorContainer expressionVisitorContainer;
+
+        public NHibDal(NHibSessionBase session, IExpressionVisitorContainer expressionVisitorContainer)
+        {
+            this.session = session ?? throw new ArgumentNullException(nameof(session));
+            this.expressionVisitorContainer = expressionVisitorContainer;
+        }
 
         private ISession InnerSession => this.session.InnerSession;
 
@@ -76,6 +82,8 @@ namespace Framework.DomainDriven.NHibernate
         public IQueryable<TDomainObject> GetQueryable(LockRole lockRole, IFetchContainer<TDomainObject> fetchContainer)
         {
             var queryable = this.InnerSession.Query<TDomainObject>();
+
+            (queryable.Provider as VisitedQueryProvider).Visitor = this.expressionVisitorContainer.Visitor;
 
             var fetchsResult = queryable.WithFetchs(fetchContainer);
 

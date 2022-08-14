@@ -2,11 +2,7 @@
 
 namespace Framework.DomainDriven
 {
-    public interface IDALFactory
-    {
-    }
-
-    public interface IDALFactory<in TPersistentDomainObjectBase, TIdent> : IDALFactory
+    public interface IDALFactory<in TPersistentDomainObjectBase, TIdent>
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     {
         IDAL<TDomainObject, TIdent> CreateDAL<TDomainObject>()

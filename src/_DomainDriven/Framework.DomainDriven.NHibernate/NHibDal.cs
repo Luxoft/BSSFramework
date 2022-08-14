@@ -77,6 +77,8 @@ namespace Framework.DomainDriven.NHibernate
         {
             var queryable = this.InnerSession.Query<TDomainObject>();
 
+            (queryable.Provider as VisitedQueryProvider).Visitor = this.expressionVisitorContainer.Visitor;
+
             var fetchsResult = queryable.WithFetchs(fetchContainer);
 
             if (lockRole == LockRole.None)

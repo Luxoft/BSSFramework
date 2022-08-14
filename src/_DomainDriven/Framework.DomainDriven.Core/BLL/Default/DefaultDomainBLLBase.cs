@@ -28,11 +28,15 @@ namespace Framework.DomainDriven.BLL
     {
         private const int MaxItemsInSql = 2000;
 
+        private static readonly Lazy<PropertyInfo> DefaultIdProperty =
+            LazyHelper.Create(() => typeof(TPersistentDomainObjectBase).GetProperty("Id", () => new Exception("Id property not found")));
+
         protected DefaultDomainBLLBase(TBLLContext context, ISpecificationEvaluator? specificationEvaluator = null)
             : base(context, specificationEvaluator)
         {
         }
 
+        protected virtual PropertyInfo IdProperty => DefaultIdProperty.Value;
 
         public TDomainObject? GetById(TIdent id, IdCheckMode idCheckMode, IFetchContainer<TDomainObject>? fetchContainer = null, LockRole lockRole = LockRole.None) =>
                 idCheckMode switch
@@ -488,6 +492,46 @@ namespace Framework.DomainDriven.BLL
         protected virtual Exception GetMissingObjectException(TIdent id)
         {
             return new ObjectByIdNotFoundException<TIdent>(typeof(TDomainObject), id);
+        }
+
+        // TODO gtsaplin: подумать над выносом из текущего generic-класса, т.к. коллекция будет создаваться под каждую комбинаию типов данных, переданную в качестве generic (warning S2743)
+        private static readonly IReadOnlyCollection<ExpressionVisitor> DefaultVisitors = new[]
+            {
+                typeof(IVisualIdentityObject),
+                typeof(ICodeObject<>),
+                typeof(IDomainType),
+                typeof(IIdentityObject<>),
+                typeof(IParentSource<>),
+                typeof(IChildrenSource<>),
+                typeof(IEmployee)
+            }.ToReadOnlyCollection(type => new OverrideCallInterfacePropertiesVisitor(type));
+
+        /// <summary> Returns Expression Visitors for NHibernate Linq extensibility
+        /// </summary>
+        /// <returns>Expression Visitors collection</returns>
+        protected override IEnumerable<ExpressionVisitor> GetVisitors()
+        {
+            foreach (var visitor in DefaultVisitors)
+            {
+                yield return visitor;
+            }
+
+            yield return RestoreQueryableCallsVisitor.Value;
+
+            yield return OverrideInstanceContainsIdentMethodVisitor<TIdent>.HashSet;
+            yield return OverrideInstanceContainsIdentMethodVisitor<TIdent>.CollectionInterface;
+
+            // TODO gtsaplin: remove OverrideHashSetVisitor, NH4.0 and above support HashSet
+            yield return OverrideHashSetVisitor<TIdent>.Value;
+
+            yield return OverrideListContainsVisitor<TIdent>.GetOrCreate(this.IdProperty);
+            yield return OverrideEqualsDomainObjectVisitor<TIdent>.GetOrCreate(this.IdProperty);
+            yield return OverrideIdEqualsMethodVisitor<TIdent>.GetOrCreate(this.IdProperty);
+            yield return OverrideHasFlagVisitor.Value;
+            yield return ExpandPathVisitor.Value;
+            yield return EscapeUnderscoreVisitor.Value;
+
+            yield return new OverrideExpandContainsVisitor<TBLLContext, TIdent>(this.Context, this.IdProperty);
         }
 
         private TDomainObject? GetNested<TNestedDomainObject>(TDomainObject domainObject)

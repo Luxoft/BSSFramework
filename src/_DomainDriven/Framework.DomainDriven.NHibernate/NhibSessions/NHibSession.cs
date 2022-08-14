@@ -44,6 +44,12 @@ public class NHibSession : IDBSession
         return this.InnerSession.GetObjectStateService();
     }
 
+    public IDALFactory<TPersistentDomainObjectBase, TIdent> GetDALFactory<TPersistentDomainObjectBase, TIdent>()
+            where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+    {
+        return this.InnerSession.GetDALFactory<TPersistentDomainObjectBase, TIdent>();
+    }
+
     public void Flush()
     {
         this.InnerSession.Flush();

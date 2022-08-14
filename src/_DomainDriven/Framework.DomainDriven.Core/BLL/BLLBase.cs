@@ -51,6 +51,19 @@ namespace Framework.DomainDriven.BLL
 
         #region Private.Method
 
+        protected virtual IEnumerable<ExpressionVisitor> GetVisitors()
+        {
+            yield break;
+        }
+
+        private ExpressionVisitor GetQueryableExpressionVisitor()
+        {
+            return DefaultVisitorsHelper.Visitors
+                                        .Concat(this.GetVisitors())
+                                        .Concat(new[] { OptimizeWhereAndConcatVisitor.Value })
+                                        .ToComposite();
+        }
+
         protected virtual IQueryable<TDomainObject> ProcessSecurity(IQueryable<TDomainObject> queryable)
         {
             return queryable;
@@ -252,7 +265,7 @@ namespace Framework.DomainDriven.BLL
         /// <returns></returns>
         public IQueryable<TDomainObject> GetUnsecureQueryable(IFetchContainer<TDomainObject> fetchContainer, LockRole lockRole = LockRole.None)
         {
-            return this._dal.GetQueryable(lockRole, fetchContainer);
+            return this._dal.GetQueryable(lockRole, fetchContainer).Visit(this.GetQueryableExpressionVisitor());
         }
 
         public IQueryable<TDomainObject> GetUnsecureQueryable(

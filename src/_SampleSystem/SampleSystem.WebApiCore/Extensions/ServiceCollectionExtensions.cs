@@ -112,6 +112,8 @@ public static class ServiceCollectionExtensions
     {
         return services
 
+                .AddScoped(sp => sp.GetRequiredService<IDBSession>().GetDALFactory<PersistentDomainObjectBase, Guid>())
+
                 .AddScoped<BLLSourceEventListenerContainer<PersistentDomainObjectBase>>()
 
                 .AddSingleton<SampleSystemValidatorCompileCache>()

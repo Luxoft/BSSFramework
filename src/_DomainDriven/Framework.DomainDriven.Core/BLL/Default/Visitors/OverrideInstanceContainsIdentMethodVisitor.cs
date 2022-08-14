@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Framework.Core;
+using Framework.Persistent;
 
 namespace Framework.DomainDriven.BLL
 {
@@ -12,14 +14,14 @@ namespace Framework.DomainDriven.BLL
         private static readonly MethodInfo EnumerableContainsMethod = new Func<IEnumerable<TIdent>, TIdent, bool>(Enumerable.Contains).Method;
 
 
-        private readonly MethodInfo containsMethod;
+        private readonly MethodInfo _containsMethod;
 
 
         public OverrideInstanceContainsIdentMethodVisitor(MethodInfo containsMethod)
         {
             if (containsMethod == null) throw new ArgumentNullException(nameof(containsMethod));
 
-            this.containsMethod = containsMethod;
+            this._containsMethod = containsMethod;
         }
 
 
@@ -27,7 +29,7 @@ namespace Framework.DomainDriven.BLL
         {
             var request = from obj in node.Object.ToMaybe()
 
-                          where node.Method == this.containsMethod
+                          where node.Method == this._containsMethod
 
                           from hashSet in obj.GetDeepMemberConstValue<HashSet<TIdent>>()
 

@@ -223,7 +223,9 @@ namespace Framework.Authorization.BLL
             var filter = new AvailablePermissionOperationFilter<TSecurityOperationCode>(
                this.DateTimeService, this.RunAsManager.PrincipalName, securityOperation.Code);
 
-            return this.Logics.Permission.GetUnsecureQueryable().Where(filter.ToFilterExpression());
+            return this.Logics.Permission.GetUnsecureQueryable().Where(filter.ToFilterExpression())
+                       //.Visit(AuthVisitor)
+                       ;
         }
 
         private IEnumerable<string> GetAccessors(Expression<Func<Principal, bool>> principalFilter, AvailablePermissionFilter permissionFilter)
@@ -330,6 +332,7 @@ namespace Framework.Authorization.BLL
                  { typeof(IPermissionFilterItem<Guid>), typeof(PermissionFilterItem) },
                  { typeof(IPermissionFilterEntity<Guid>), typeof(PermissionFilterEntity) },
                  { typeof(IEntityType<Guid>), typeof(EntityType) },
+                 //{ typeof(IDenormalizedPermissionItem<Guid>), typeof(DenormalizedPermissionItem) },
          });
     }
 }

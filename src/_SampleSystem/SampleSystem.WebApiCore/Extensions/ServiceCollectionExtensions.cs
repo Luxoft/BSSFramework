@@ -16,7 +16,6 @@ using Framework.DomainDriven.ServiceModel.Service;
 using Framework.Events;
 using Framework.HierarchicalExpand;
 using Framework.QueryableSource;
-using Framework.Security.Cryptography;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Rules.Builders;
 
@@ -124,7 +123,6 @@ public static class ServiceCollectionExtensions
                 .AddSingleton(new SampleSystemMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<PersistentDomainObjectBase>.OData))
                 .AddScoped<ISampleSystemSecurityService, SampleSystemSecurityService>()
                 .AddScoped<ISampleSystemBLLFactoryContainer, SampleSystemBLLFactoryContainer>()
-                .AddSingleton<ICryptService<CryptSystem>, CryptService<CryptSystem>>()
                 .AddScoped<ISampleSystemBLLContextSettings>(_ => new SampleSystemBLLContextSettings { TypeResolver  = new[] { new SampleSystemBLLContextSettings().TypeResolver, TypeSource.FromSample<BusinessUnitSimpleDTO>().ToDefaultTypeResolver() }.ToComposite() })
                 .AddScopedFromLazyInterfaceImplement<ISampleSystemBLLContext, SampleSystemBLLContext>()
 

@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization;
-
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
@@ -13,7 +11,6 @@ using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Projection;
-using Framework.Security.Cryptography;
 
 namespace Framework.DomainDriven.DTOGenerator.Server
 {
@@ -189,15 +186,6 @@ namespace Framework.DomainDriven.DTOGenerator.Server
             if (fileType == null) throw new ArgumentNullException(nameof(fileType));
 
             return new CodeMethodReferenceExpression(this.GetCodeTypeReference(null, ServerFileType.LambdaHelper).ToTypeReferenceExpression(), "To" + fileType.Name + "List");
-        }
-
-        public virtual CodeExpression GetCryptServiceProvider(CodeExpression codeExpression, Enum systemName)
-        {
-            if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
-            if (systemName == null) throw new ArgumentNullException(nameof(systemName));
-
-            return codeExpression.ToPropertyReference((ICryptServiceContainer<Enum> service) => service.CryptService)
-                                 .ToMethodInvokeExpression((ICryptService<object> service) => service.GetCryptProvider(null), systemName.ToPrimitiveExpression());
         }
 
         public bool CanCreateDomainObject(PropertyInfo property, Type elementType, DTOFileType fileType)

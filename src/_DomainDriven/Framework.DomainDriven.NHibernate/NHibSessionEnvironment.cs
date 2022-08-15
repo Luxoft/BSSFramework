@@ -62,6 +62,8 @@ namespace Framework.DomainDriven.NHibernate
                     ms.InitMapping(this.cfg);
                 }
 
+                this.Configuration.SessionFactory().ParsingLinqThrough<VisitedQueryProvider>();
+                
                 this.cfg.InitializeAudit(cachedMappingSettings, auditRevisionUserAuthenticationService);
 
                 connectionSettings.Init(this.cfg);

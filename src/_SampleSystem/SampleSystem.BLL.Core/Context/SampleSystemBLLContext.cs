@@ -8,7 +8,6 @@ using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.BLL.Tracking;
 using Framework.HierarchicalExpand;
 using Framework.QueryLanguage;
-using Framework.Security.Cryptography;
 using Framework.SecuritySystem;
 
 using JetBrains.Annotations;
@@ -36,7 +35,6 @@ namespace SampleSystem.BLL
             [NotNull] ISampleSystemBLLFactoryContainer logics,
             [NotNull] IAuthorizationBLLContext authorization,
             [NotNull] Framework.Configuration.BLL.IConfigurationBLLContext configuration,
-            [NotNull] ICryptService<CryptSystem> cryptService,
             [NotNull] ISampleSystemBLLContextSettings settings)
             : base(serviceProvider, dalFactory, operationSenders, sourceListeners, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
         {
@@ -47,8 +45,6 @@ namespace SampleSystem.BLL
 
             this.Authorization = authorization ?? throw new ArgumentNullException(nameof(authorization));
             this.Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-
-            this.CryptService = cryptService ?? throw new ArgumentNullException(nameof(cryptService));
 
             this.TypeResolver = settings.TypeResolver;
         }
@@ -62,8 +58,6 @@ namespace SampleSystem.BLL
         public IAuthorizationBLLContext Authorization { get; }
 
         public Framework.Configuration.BLL.IConfigurationBLLContext Configuration { get; }
-
-        public ICryptService<CryptSystem> CryptService { get; }
 
         public ITypeResolver<string> TypeResolver { get; }
 

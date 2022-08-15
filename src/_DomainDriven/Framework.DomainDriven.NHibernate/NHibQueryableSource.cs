@@ -8,7 +8,10 @@ using NHibernate.Linq;
 
 namespace Framework.DomainDriven.NHibernate;
 
-public class VisitedQueryProvider : DefaultQueryProvider, IQueryProvider
+/// <summary>
+/// NHibnate-провайдер доступа, который применяет Visitor-ы для Expression-ов
+/// </summary>
+public class VisitedQueryProvider : DefaultQueryProvider
 {
     public VisitedQueryProvider(ISessionImplementor session)
             : base(session)

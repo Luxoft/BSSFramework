@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Framework.DomainDriven.BLL.Tracking;
@@ -50,9 +51,9 @@ public class NHibSession : IDBSession
         return this.InnerSession.GetDALFactory<TPersistentDomainObjectBase, TIdent>();
     }
 
-    public async Task FlushAsync()
+    public async Task FlushAsync(CancellationToken cancellationToken = default)
     {
-        await this.InnerSession.FlushAsync();
+        await this.InnerSession.FlushAsync(cancellationToken);
     }
 
     public long GetCurrentRevision() => this.InnerSession.GetCurrentRevision();
@@ -87,11 +88,11 @@ public class NHibSession : IDBSession
         }
     }
 
-    public async Task CloseAsync()
+    public async Task CloseAsync(CancellationToken cancellationToken = default)
     {
         if (this.lazyInnerSession.IsValueCreated)
         {
-            await this.InnerSession.CloseAsync();
+            await this.InnerSession.CloseAsync(cancellationToken);
         }
     }
 

@@ -82,8 +82,6 @@ namespace Framework.DomainDriven.BLL
 
         List<TDomainObject> GetFullList(IFetchContainer<TDomainObject> fetchContainer = null);
 
-        Task<List<TDomainObject>> GetFullListAsync(IFetchContainer<TDomainObject> fetchContainer = null, CancellationToken cancellationToken = default);
-
         List<TDomainObject> GetFullList(Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch, params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs);
 
         List<TDomainObject> GetFullList(IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> fetchs);

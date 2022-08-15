@@ -9,6 +9,8 @@ using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 
+using NHibernate.Linq;
+
 using SampleSystem.BLL;
 using SampleSystem.Generated.DTO;
 
@@ -36,7 +38,7 @@ public class TestAsyncController : ControllerBase
     {
         var bll = this.buFactory.Create(BLLSecurityMode.View);
 
-        var list = await bll.GetFullListAsync(default, cancellationToken);
+        var list = await bll.GetSecureQueryable().ToListAsync(cancellationToken);
 
         return list.ToSimpleDTOList(this.mappingService);
     }

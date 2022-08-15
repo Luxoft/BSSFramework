@@ -47,7 +47,7 @@ public class TryProcessDbSessionMiddleware
         }
         finally
         {
-            context.RequestServices.TryCloseDbSession();
+            await context.RequestServices.TryCloseDbSessionAsync(context.RequestAborted);
         }
     }
 }

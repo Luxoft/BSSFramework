@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Framework.DomainDriven.BLL.Tracking;
@@ -24,7 +25,7 @@ namespace Framework.DomainDriven
             this.FlushAsync().GetAwaiter().GetResult();
         }
 
-        Task FlushAsync();
+        Task FlushAsync(CancellationToken cancellationToken = default);
 
         IEnumerable<ObjectModification> GetModifiedObjectsFromLogic();
 
@@ -56,7 +57,7 @@ namespace Framework.DomainDriven
             this.CloseAsync().GetAwaiter().GetResult();
         }
 
-        Task CloseAsync();
+        Task CloseAsync(CancellationToken cancellationToken = default);
 
         void IDisposable.Dispose()
         {

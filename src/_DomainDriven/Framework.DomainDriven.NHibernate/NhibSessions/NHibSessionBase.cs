@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Framework.Core;
@@ -36,7 +37,7 @@ namespace Framework.DomainDriven.NHibernate
 
         public abstract void RegisterModified<TDomainObject>(TDomainObject domainObject, ModificationType modificationType);
 
-        public abstract Task FlushAsync();
+        public abstract Task FlushAsync(CancellationToken cancellationToken = default);
 
         /// <inheritdoc />
         public long GetCurrentRevision()
@@ -73,7 +74,7 @@ namespace Framework.DomainDriven.NHibernate
             return new NHibDalFactory<TPersistentDomainObjectBase, TIdent>(this);
         }
 
-        public abstract Task CloseAsync();
+        public abstract Task CloseAsync(CancellationToken cancellationToken = default);
 
         public async ValueTask DisposeAsync()
         {

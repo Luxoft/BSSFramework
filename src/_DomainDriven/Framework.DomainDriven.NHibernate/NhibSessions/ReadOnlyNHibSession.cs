@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Framework.DomainDriven.DAL.Revisions;
@@ -48,7 +49,7 @@ namespace Framework.DomainDriven.NHibernate
             throw new InvalidOperationException("Readonly session already created");
         }
 
-        public override async Task CloseAsync()
+        public override async Task CloseAsync(CancellationToken cancellationToken = default)
         {
             if (this.closed)
             {
@@ -61,7 +62,7 @@ namespace Framework.DomainDriven.NHibernate
             using (this.InnerSession);
         }
 
-        public override Task FlushAsync()
+        public override Task FlushAsync(CancellationToken cancellationToken = default)
         {
             throw new InvalidOperationException();
         }

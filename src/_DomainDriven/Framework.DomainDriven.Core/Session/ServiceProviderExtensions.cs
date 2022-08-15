@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 using JetBrains.Annotations;
 
@@ -13,7 +15,7 @@ public static class ServiceProviderExtensions
     /// </summary>
     /// <param name="serviceProvider"></param>
     /// <exception cref="ArgumentNullException"></exception>
-    public static void TryCloseDbSession([NotNull] this IServiceProvider serviceProvider)
+    public static async Task TryCloseDbSessionAsync([NotNull] this IServiceProvider serviceProvider, CancellationToken cancellationToken = default)
     {
         if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
 
@@ -21,7 +23,7 @@ public static class ServiceProviderExtensions
 
         if (lazyDbSession.IsValueCreated)
         {
-            lazyDbSession.Value.Close();
+            await lazyDbSession.Value.CloseAsync(cancellationToken);
         }
     }
 

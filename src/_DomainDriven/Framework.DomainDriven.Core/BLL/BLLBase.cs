@@ -13,8 +13,6 @@ using Framework.Persistent;
 
 using JetBrains.Annotations;
 
-using NHibernate.Linq;
-
 using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.BLL
@@ -450,12 +448,7 @@ namespace Framework.DomainDriven.BLL
 
         public List<TDomainObject> GetFullList(IFetchContainer<TDomainObject> fetchContainer = null)
         {
-            return this.GetFullListAsync(fetchContainer).GetAwaiter().GetResult();
-        }
-
-        public virtual Task<List<TDomainObject>> GetFullListAsync(IFetchContainer<TDomainObject> fetchContainer = null, CancellationToken cancellationToken = default)
-        {
-            return this.GetSecureQueryable(fetchContainer).ToListAsync(cancellationToken);
+            return this.GetSecureQueryable(fetchContainer).ToList();
         }
 
         public List<TDomainObject> GetFullList(Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch, params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs)

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Transactions;
 
 using Framework.Core;
@@ -34,8 +36,6 @@ namespace Framework.DomainDriven.NHibernate
 
         private readonly CollectChangesEventListener collectChangedEventListener;
 
-        private readonly TransactionScope transactionScope;
-
         private readonly ITransaction transaction;
 
         private bool manualFault;
@@ -51,8 +51,6 @@ namespace Framework.DomainDriven.NHibernate
             this.modifyAuditProperties = settings.GetModifyAuditProperty();
             this.createAuditProperties = settings.GetCreateAuditProperty();
             this.collectChangedEventListener = new CollectChangesEventListener();
-
-            this.transactionScope = this.Environment.EnableTransactionScope ? this.CreateTransactionScope() : null;
 
             this.InnerSession = this.Environment.InternalSessionFactory.OpenSession();
             this.InnerSession.FlushMode = FlushMode.Manual;
@@ -110,6 +108,7 @@ namespace Framework.DomainDriven.NHibernate
             }
         }
 
+
         public override IEnumerable<ObjectModification> GetModifiedObjectsFromLogic()
         {
             return this.modifiedObjectsFromLogic;
@@ -135,7 +134,7 @@ namespace Framework.DomainDriven.NHibernate
         {
         }
 
-        public override void Close()
+        public override async Task CloseAsync(CancellationToken cancellationToken = default)
         {
             if (this.closed)
             {
@@ -144,30 +143,27 @@ namespace Framework.DomainDriven.NHibernate
 
             this.closed = true;
 
-            using (this.transactionScope)
+            using (this.InnerSession)
             {
-                using (this.InnerSession)
+                using (this.transaction)
                 {
-                    using (this.transaction)
+                    if (this.manualFault)
                     {
-                        if (this.manualFault)
+                        if (!this.transaction.WasRolledBack)
                         {
-                            if (!this.transaction.WasRolledBack)
-                            {
-                                this.transaction.Rollback();
-                            }
+                            await this.transaction.RollbackAsync(cancellationToken);
                         }
-                        else
-                        {
-                            this.Flush(true);
+                    }
+                    else
+                    {
+                        await this.FlushAsync(true, cancellationToken);
 
-                            this.transaction.Commit();
-                            this.transactionScope?.Complete();
-                        }
+                        await this.transaction.CommitAsync(cancellationToken);
                     }
                 }
             }
         }
+
 
         private static IDbTransaction GetDbTransaction(ITransaction transaction, ISession session)
         {
@@ -188,13 +184,12 @@ namespace Framework.DomainDriven.NHibernate
                             IsolationLevel = IsolationLevel.Serializable
                     });
 
-        /// <inheritdoc />
-        public override void Flush()
+        public override async Task FlushAsync(CancellationToken cancellationToken = default)
         {
-            this.Flush(false);
+            await this.FlushAsync(false, cancellationToken);
         }
 
-        private void Flush(bool withCompleteTransaction)
+        private async Task FlushAsync(bool withCompleteTransaction, CancellationToken cancellationToken)
         {
             try
             {
@@ -202,7 +197,7 @@ namespace Framework.DomainDriven.NHibernate
 
                 do
                 {
-                    this.InnerSession.Flush();
+                    await this.InnerSession.FlushAsync(cancellationToken);
 
                     var changes = this.collectChangedEventListener.EvictChanges();
 
@@ -219,7 +214,12 @@ namespace Framework.DomainDriven.NHibernate
                         var changedEventArgs = new DALChangesEventArgs(changes);
 
                         // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!! Use UseTryCloseDbSession middleware
-                        this.eventListeners.Foreach(eventListener => eventListener.OnFlushed(changedEventArgs));
+                        this.eventListeners.Foreach(eventListener =>
+                        {
+                                                        cancellationToken.ThrowIfCancellationRequested();
+
+                                                        eventListener.OnFlushed(changedEventArgs);
+                                                    });
                     }
                 } while (true);
 
@@ -230,7 +230,7 @@ namespace Framework.DomainDriven.NHibernate
                     // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!!!!! Use UseTryCloseDbSession middleware
                     this.eventListeners.Foreach(eventListener => eventListener.OnBeforeTransactionCompleted(new DALChangesEventArgs(beforeTransactionCompletedChangeState)));
 
-                    this.InnerSession.Flush();
+                    await this.InnerSession.FlushAsync(cancellationToken);
 
                     var afterTransactionCompletedChangeState =
                             new[] { beforeTransactionCompletedChangeState, this.collectChangedEventListener.EvictChanges() }
@@ -239,8 +239,7 @@ namespace Framework.DomainDriven.NHibernate
                     // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!!!!! Use UseTryCloseDbSession middleware
                     this.eventListeners.Foreach(eventListener => eventListener.OnAfterTransactionCompleted(new DALChangesEventArgs(afterTransactionCompletedChangeState)));
 
-                    this.InnerSession
-                        .Flush(); // Флашим для того, чтобы проверить, что никто ничего не менял в объектах после AfterTransactionCompleted-евента
+                    await this.InnerSession.FlushAsync(cancellationToken); // Флашим для того, чтобы проверить, что никто ничего не менял в объектах после AfterTransactionCompleted-евента
 
                     if (this.collectChangedEventListener.HasAny())
                     {

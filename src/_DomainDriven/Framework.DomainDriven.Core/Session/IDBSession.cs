@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 using Framework.DomainDriven.BLL.Tracking;
 using Framework.Persistent;
 
 namespace Framework.DomainDriven
 {
-    public interface IDBSession : ICurrentRevisionService, IDisposable
+    public interface IDBSession : ICurrentRevisionService, IAsyncDisposable, IDisposable
     {
         DBSessionMode SessionMode { get; }
 
@@ -18,7 +20,12 @@ namespace Framework.DomainDriven
         /// <summary>
         /// Мануальный флаш сессии, при его вызове срабатывают только Flushed-евенты, TransactionCompleted-евенты вызываются только при закрытие сессии
         /// </summary>
-        void Flush();
+        void Flush()
+        {
+            this.FlushAsync().GetAwaiter().GetResult();
+        }
+
+        Task FlushAsync(CancellationToken cancellationToken = default);
 
         IEnumerable<ObjectModification> GetModifiedObjectsFromLogic();
 
@@ -45,6 +52,16 @@ namespace Framework.DomainDriven
         /// </summary>
         void AsWritable();
 
-        void Close();
+        public void Close()
+        {
+            this.CloseAsync().GetAwaiter().GetResult();
+        }
+
+        Task CloseAsync(CancellationToken cancellationToken = default);
+
+        void IDisposable.Dispose()
+        {
+            this.DisposeAsync().GetAwaiter().GetResult();
+        }
     }
 }

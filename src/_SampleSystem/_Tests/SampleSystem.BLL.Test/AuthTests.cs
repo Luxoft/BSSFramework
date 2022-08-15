@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
@@ -166,13 +167,13 @@ namespace SampleSystem.BLL.Test
         }
 
         [TestMethod]
-        public void TestRemoveWithDelegate()
+        public async Task TestRemoveWithDelegate()
         {
             var principalName = "TestDelegateUser";
 
             var roleName = "TestDelegateRole";
 
-            this.GetContextEvaluator().Evaluate(DBSessionMode.Write, (context, session) =>
+            await this.GetContextEvaluator().EvaluateAsync(DBSessionMode.Write, async (context, session) =>
             {
                 var testRole = context.Authorization.Logics.BusinessRole.GetByNameOrCreate(roleName, true);
 
@@ -181,7 +182,7 @@ namespace SampleSystem.BLL.Test
                 var permissionForDelegate = testPrincipal.Permissions.SingleOrDefault(p => p.Role == testRole) ??
                                             new Permission(testPrincipal) { Role = testRole }.Self(context.Authorization.Logics.Permission.Save);
 
-                session.Flush();
+                await session.FlushAsync();
 
                 var currentPrincipal = context.Authorization.Logics.Principal.GetCurrent(true);
 
@@ -191,7 +192,7 @@ namespace SampleSystem.BLL.Test
                 }
             });
 
-            this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            await this.GetContextEvaluator().EvaluateAsync(DBSessionMode.Write, async context =>
             {
                 var testPrincipal = context.Authorization.Logics.Principal.GetByName(principalName, true);
 

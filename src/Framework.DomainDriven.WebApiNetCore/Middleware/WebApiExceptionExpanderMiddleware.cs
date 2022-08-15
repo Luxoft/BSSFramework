@@ -14,11 +14,11 @@ public class WebApiExceptionExpanderMiddleware
         this.next = next;
     }
 
-    public Task Invoke(HttpContext context, IWebApiExceptionExpander exceptionExpander)
+    public async Task Invoke(HttpContext context, IWebApiExceptionExpander exceptionExpander)
     {
         try
         {
-            return this.next(context);
+            await this.next(context);
         }
         catch (Exception ex)
         {

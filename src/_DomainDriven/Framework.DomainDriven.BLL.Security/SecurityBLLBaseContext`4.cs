@@ -23,14 +23,13 @@ namespace Framework.DomainDriven.BLL.Security
             [NotNull] IServiceProvider serviceProvider,
             [NotNull] IDALFactory<TPersistentDomainObjectBase, TIdent> dalFactory,
             [NotNull] IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
-            [NotNull] BLLSourceEventListenerContainer<TPersistentDomainObjectBase> sourceListeners,
             [NotNull] IObjectStateService objectStateService,
             [NotNull] IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
             [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
             [NotNull] IValidator validator,
             [NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
             [NotNull] IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
-            : base(serviceProvider, dalFactory, operationSenders, sourceListeners, objectStateService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService) =>
+            : base(serviceProvider, dalFactory, operationSenders, objectStateService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService) =>
 
             this.AccessDeniedExceptionService = accessDeniedExceptionService ?? throw new ArgumentNullException(nameof(accessDeniedExceptionService));
 

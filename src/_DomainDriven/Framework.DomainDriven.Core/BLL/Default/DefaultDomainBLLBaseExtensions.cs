@@ -50,7 +50,7 @@ namespace Framework.DomainDriven.BLL
 
             Expression<Func<TDomainObject, bool>> filter = v => v.Name == name;
 
-            var result = bll.GetObjectsBy(filter, fetchs).FirstOrDefault();
+            var result = bll.GetListBy(filter, fetchs).FirstOrDefault();
 
             if (null == result && throwOnNotFound)
             {
@@ -75,7 +75,7 @@ namespace Framework.DomainDriven.BLL
 
             var filter = EqualsHelper<TCode>.GetEqualsExpression(code).OverrideInput((TDomainObject domainObject) => domainObject.Code);
 
-            var result = bll.GetObjectsBy(filter, fetchs).FirstOrDefault();
+            var result = bll.GetListBy(filter, fetchs).FirstOrDefault();
 
             if (null == result && throwOnNotFound)
             {

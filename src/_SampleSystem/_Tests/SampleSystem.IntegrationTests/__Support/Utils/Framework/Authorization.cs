@@ -148,7 +148,7 @@ namespace SampleSystem.IntegrationTests.__Support.Utils.Framework
                                    }
 
                                    var permissions =
-                                           permissionBLL.GetObjectsBy(p => p.Principal == principalDomainObject);
+                                           permissionBLL.GetListBy(p => p.Principal == principalDomainObject);
 
                                    foreach (Permission permission in permissions)
                                    {

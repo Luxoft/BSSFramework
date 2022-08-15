@@ -46,8 +46,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
                    .AddScoped<IOperationEventSenderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>, OperationEventSenderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>>()
 
-                   .AddScoped<BLLSourceEventListenerContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>>()
-
                    .AddSingleton<AuthorizationValidatorCompileCache>()
 
                    .AddScoped<IAuthorizationValidator>(sp =>
@@ -80,8 +78,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                    .AddScoped(sp => sp.GetRequiredService<IDBSession>().GetDALFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>())
 
                    .AddScoped<IOperationEventSenderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>, OperationEventSenderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>>()
-
-                   .AddScoped<BLLSourceEventListenerContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>>()
 
                    .AddSingleton<ConfigurationValidatorCompileCache>()
 

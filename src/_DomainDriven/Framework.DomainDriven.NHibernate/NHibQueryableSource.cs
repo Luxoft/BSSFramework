@@ -8,7 +8,7 @@ using NHibernate.Linq;
 
 namespace Framework.DomainDriven.NHibernate;
 
-public class VisitedQueryProvider : DefaultQueryProvider
+public class VisitedQueryProvider : DefaultQueryProvider, IQueryProvider
 {
     public VisitedQueryProvider(ISessionImplementor session)
             : base(session)
@@ -27,8 +27,23 @@ public class VisitedQueryProvider : DefaultQueryProvider
         return new VisitedQueryProvider(this.Session, this.Collection, options) { Visitor = this.Visitor };
     }
 
+    private Expression TryApplyVisitor(Expression expression)
+    {
+        return this.Visitor == null ? expression : this.Visitor.Visit(expression);
+    }
+
     protected override NhLinqExpression PrepareQuery(Expression expression, out IQuery query)
     {
-        return base.PrepareQuery(this.Visitor == null ? expression : this.Visitor.Visit(expression), out query);
+        return base.PrepareQuery(this.TryApplyVisitor(expression), out query);
+    }
+
+    public override IQueryable CreateQuery(Expression expression)
+    {
+        return base.CreateQuery(this.TryApplyVisitor(expression));
+    }
+
+    public override IQueryable<T> CreateQuery<T>(Expression expression)
+    {
+        return base.CreateQuery<T>(this.TryApplyVisitor(expression));
     }
 }

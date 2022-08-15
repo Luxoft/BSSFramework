@@ -9,7 +9,6 @@ using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.ServiceModel.Subscriptions;
-using Framework.DomainDriven.WebApiNetCore;
 using Framework.Notification.DTO;
 
 using Microsoft.AspNetCore.Mvc;
@@ -144,7 +143,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
 
             return this.EvaluateRead(
                 context => context.Configuration.Logics.DomainObjectEvent
-                                  .GetObjectsBy(v => v.SerializeType == serializeType && v.QueueTag == queueTag)
+                                  .GetListBy(v => v.SerializeType == serializeType && v.QueueTag == queueTag)
                                   .ToList(obj => DataContractSerializerHelper.Deserialize<T>(obj.SerializeData)));
         }
 

@@ -71,8 +71,6 @@ namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain
 
         public IOperationEventSenderContainer<PersistentDomainObjectBase> OperationSenders => new OperationEventSenderContainer<DomainObjectBase>(new List<IOperationEventListener<DomainObjectBase>>());
 
-        public BLLSourceEventListenerContainer<PersistentDomainObjectBase> SourceListeners => new BLLSourceEventListenerContainer<PersistentDomainObjectBase>();
-
         public IBLLFactoryContainer<IDefaultBLLFactory<PersistentDomainObjectBase, Guid>> Logics => this._defaultFactoryContainer;
 
         public IAuthorizationBLLContext<Guid> Authorization { get; private set; }

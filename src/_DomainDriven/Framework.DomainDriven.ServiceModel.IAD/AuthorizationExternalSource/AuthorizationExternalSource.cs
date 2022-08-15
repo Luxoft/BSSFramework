@@ -149,7 +149,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             {
                 var securityEntityIdents = preSecurityEntityIdents.ToList();
 
-                return this.Context.Logics.Default.Create<TDomainObject>().GetObjectsByIdents(securityEntityIdents.ToArray()).Select(this.CreateSecurityEntity);
+                return this.Context.Logics.Default.Create<TDomainObject>().GetListByIdents(securityEntityIdents.ToArray()).Select(this.CreateSecurityEntity);
             }
 
 

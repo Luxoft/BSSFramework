@@ -147,7 +147,7 @@ namespace Framework.CustomReports.BLL
         protected virtual IEnumerable<TDomainObject> GetDomainObjects<TDomainObject>(IList<Guid> ident, Type targetType)
             where TDomainObject : class, TPersistentDomainObjectBase
         {
-            var preResult = this.Context.Logics.Implemented.Create<TDomainObject>().GetObjectsByIdents(ident);
+            var preResult = this.Context.Logics.Implemented.Create<TDomainObject>().GetListByIdents(ident);
 
             if (targetType.IsArray)
             {

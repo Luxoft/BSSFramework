@@ -132,7 +132,7 @@ namespace Framework.Authorization.BLL
 
             var filterItemBLL = this.Context.Logics.PermissionFilterItem;
 
-            var prevFilterItems = filterItemBLL.GetObjectsBy(filterItem => filterItem.Permission.Principal == principal);
+            var prevFilterItems = filterItemBLL.GetListBy(filterItem => filterItem.Permission.Principal == principal);
 
             var currentFilterItems = principal.Permissions.SelectMany(permission => permission.FilterItems).ToList();
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 
 using Framework.Core.Serialization;
 using Framework.DomainDriven.BLL.Tracking;
@@ -32,7 +31,7 @@ namespace Framework.DomainDriven.BLL
         /// <param name="operationSenders">The operation senders.</param>
         /// <param name="sourceListeners">The source listeners.</param>
         /// <param name="objectStateService">The object state service.</param>
-        /// <param name="standartExpressionBuilder">The standart expression builder.</param>
+        /// <param name="standardExpressionBuilder">The standart expression builder.</param>
         /// <param name="validator">The validator.</param>
         /// <param name="hierarchicalObjectExpanderFactory">The hierarchical object expander factory.</param>
         /// <param name="fetchService">The fetch service.</param>
@@ -55,9 +54,8 @@ namespace Framework.DomainDriven.BLL
                 [NotNull] IServiceProvider serviceProvider,
                 [NotNull] IDALFactory<TPersistentDomainObjectBase, TIdent> dalFactory,
                 [NotNull] IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
-                [NotNull] BLLSourceEventListenerContainer<TPersistentDomainObjectBase> sourceListeners,
                 [NotNull] IObjectStateService objectStateService,
-                [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
+                [NotNull] IStandartExpressionBuilder standardExpressionBuilder,
                 [NotNull] IValidator validator,
                 [NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
                 [NotNull] IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
@@ -67,10 +65,9 @@ namespace Framework.DomainDriven.BLL
             this.ServiceProvider = serviceProvider;
             this.DalFactory = dalFactory ?? throw new ArgumentNullException(nameof(dalFactory));
             this.OperationSenders = operationSenders ?? throw new ArgumentNullException(nameof(operationSenders));
-            this.SourceListeners = sourceListeners ?? throw new ArgumentNullException(nameof(sourceListeners));
             this.TrackingService = new TrackingService<TPersistentDomainObjectBase>(objectStateService);
 
-            this.StandartExpressionBuilder = standartExpressionBuilder ?? throw new ArgumentNullException(nameof(standartExpressionBuilder));
+            this.StandartExpressionBuilder = standardExpressionBuilder ?? throw new ArgumentNullException(nameof(standardExpressionBuilder));
             this.Validator = validator;
             this.HierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory ?? throw new ArgumentNullException(nameof(hierarchicalObjectExpanderFactory));
 
@@ -90,8 +87,6 @@ namespace Framework.DomainDriven.BLL
         public ITrackingService<TPersistentDomainObjectBase> TrackingService { get; }
 
         public IOperationEventSenderContainer<TPersistentDomainObjectBase> OperationSenders { get; }
-
-        public BLLSourceEventListenerContainer<TPersistentDomainObjectBase> SourceListeners { get; }
 
         public IStandartExpressionBuilder StandartExpressionBuilder { get; }
 
@@ -127,13 +122,12 @@ namespace Framework.DomainDriven.BLL
             [NotNull] IServiceProvider serviceProvider,
             [NotNull] IDALFactory<TPersistentDomainObjectBase, TIdent> dalFactory,
             [NotNull] IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
-            [NotNull] BLLSourceEventListenerContainer<TPersistentDomainObjectBase> sourceListeners,
             [NotNull] IObjectStateService objectStateService,
-            [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
+            [NotNull] IStandartExpressionBuilder standardExpressionBuilder,
             [NotNull] IValidator validator,
             [NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
             [NotNull] IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
-            : base(serviceProvider, dalFactory, operationSenders, sourceListeners, objectStateService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
+            : base(serviceProvider, dalFactory, operationSenders, objectStateService, standardExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
         {
         }
 

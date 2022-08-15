@@ -36,8 +36,6 @@ namespace Framework.DomainDriven.NHibernate
 
         private readonly CollectChangesEventListener collectChangedEventListener;
 
-        private readonly TransactionScope transactionScope;
-
         private readonly ITransaction transaction;
 
         private bool manualFault;
@@ -53,8 +51,6 @@ namespace Framework.DomainDriven.NHibernate
             this.modifyAuditProperties = settings.GetModifyAuditProperty();
             this.createAuditProperties = settings.GetCreateAuditProperty();
             this.collectChangedEventListener = new CollectChangesEventListener();
-
-            this.transactionScope = this.Environment.EnableTransactionScope ? this.CreateTransactionScope() : null;
 
             this.InnerSession = this.Environment.InternalSessionFactory.OpenSession();
             this.InnerSession.FlushMode = FlushMode.Manual;
@@ -147,26 +143,22 @@ namespace Framework.DomainDriven.NHibernate
 
             this.closed = true;
 
-            using (this.transactionScope)
+            using (this.InnerSession)
             {
-                using (this.InnerSession)
+                using (this.transaction)
                 {
-                    using (this.transaction)
+                    if (this.manualFault)
                     {
-                        if (this.manualFault)
+                        if (!this.transaction.WasRolledBack)
                         {
-                            if (!this.transaction.WasRolledBack)
-                            {
-                                await this.transaction.RollbackAsync(cancellationToken);
-                            }
+                            await this.transaction.RollbackAsync(cancellationToken);
                         }
-                        else
-                        {
-                            await this.FlushAsync(true, cancellationToken);
+                    }
+                    else
+                    {
+                        await this.FlushAsync(true, cancellationToken);
 
-                            await this.transaction.CommitAsync(cancellationToken);
-                            this.transactionScope?.Complete();
-                        }
+                        await this.transaction.CommitAsync(cancellationToken);
                     }
                 }
             }

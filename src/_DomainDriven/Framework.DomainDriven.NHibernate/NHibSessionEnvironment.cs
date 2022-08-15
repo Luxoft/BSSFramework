@@ -99,11 +99,6 @@ namespace Framework.DomainDriven.NHibernate
             // Do nothing
         }
 
-        /// <summary>
-        /// Backward compatibility for TransactionScope
-        /// </summary>
-        public bool EnableTransactionScope { get; set; } = true;
-
         /// <inheritdoc />
         public void Dispose()
         {

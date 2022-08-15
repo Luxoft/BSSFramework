@@ -16,7 +16,7 @@ namespace Framework.DomainDriven.DTOGenerator.Server
         protected abstract string DataContractNamespace { get; }
 
 
-        protected override IPropertyAssigner MapDomainObjectToMappingObjectPropertyAssigner => new CryptDomainObjectToDTOPropertyAssigner<TConfiguration>(this);
+        protected override IPropertyAssigner MapDomainObjectToMappingObjectPropertyAssigner => new DomainObjectToDTOPropertyAssigner<TConfiguration>(this);
 
 
         protected override CodeTypeDeclaration GetCodeTypeDeclaration()

@@ -15,7 +15,7 @@ namespace Framework.DomainDriven.DTOGenerator.Server
         {
             this.CodeTypeReferenceService = new CryptCodeTypeReferenceService<TConfiguration>(this.Configuration, ServerFileType.SimpleIntegrationDTO, ServerFileType.RichIntegrationDTO);
 
-            this.MapMappingObjectToDomainObjectPropertyAssigner = new CryptDTOToDomainObjectPropertyAssigner<TConfiguration>(this);
+            this.MapMappingObjectToDomainObjectPropertyAssigner = new DTOToDomainObjectPropertyAssigner<TConfiguration>(this);
         }
 
 

@@ -51,9 +51,6 @@ namespace Framework.DomainDriven.DTOGenerator.Server
         IEnumerable<Type> GetDomainTypeMasters(Type domainType, DTOFileType fileType, bool isWritable);
 
 
-        CodeExpression GetCryptServiceProvider(CodeExpression codeExpression, Enum systemName);
-
-
         bool CanCreateDomainObject(PropertyInfo property, Type elementType, DTOFileType fileType);
 
         Type GetAllowCreateAttributeType(DTOFileType fileType);

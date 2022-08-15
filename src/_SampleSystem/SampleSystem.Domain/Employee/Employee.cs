@@ -235,7 +235,6 @@ namespace SampleSystem.Domain
             set { this.landlinephone = value.TrimNull(); }
         }
 
-        [SampleSystemCrypt]
         [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Event | DTORole.Integration)]
         [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneView)]
         public virtual string PersonalCellPhone

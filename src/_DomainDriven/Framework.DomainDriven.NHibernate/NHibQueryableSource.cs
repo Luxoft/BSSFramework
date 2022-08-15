@@ -6,6 +6,8 @@ using NHibernate;
 using NHibernate.Engine;
 using NHibernate.Linq;
 
+namespace Framework.DomainDriven.NHibernate;
+
 public class VisitedQueryProvider : DefaultQueryProvider
 {
     public VisitedQueryProvider(ISessionImplementor session)

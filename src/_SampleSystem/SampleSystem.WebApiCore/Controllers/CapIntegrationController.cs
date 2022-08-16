@@ -1,51 +1,39 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 using DotNetCore.CAP;
 
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.ServiceModel.Service;
-using Framework.DomainDriven.WebApiNetCore;
+
+using JetBrains.Annotations;
 
 using MediatR;
 
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.BLL;
 using SampleSystem.BLL.Core.IntegrationEvens;
-using SampleSystem.Generated.DTO;
 
-namespace SampleSystem.WebApiCore
+namespace SampleSystem.WebApiCore;
+
+[PublicAPI]
+public class CapIntegrationController
 {
-    [ApiController]
-    [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/[controller]/[action]")]
-    public class CapIntegrationController : ApiControllerBase<
-            ISampleSystemBLLContext, EvaluatedData<
-            ISampleSystemBLLContext, ISampleSystemDTOMappingService>>
+    private readonly IMediator mediator;
+
+    private readonly IContextEvaluator<ISampleSystemBLLContext> contextEvaluator;
+
+    public CapIntegrationController(
+            IMediator mediator,
+            IContextEvaluator<ISampleSystemBLLContext> contextEvaluator)
     {
-        private readonly IMediator mediator;
-
-        public CapIntegrationController(
-                IMediator mediator,
-                IServiceProvider serviceProvider)
-        {
-            this.mediator = mediator;
-
-            // Very important line! Passing Scoped ServiceProvider to BSS Framework.
-            // CAP calling TestIntegrationEvent method without HttpContext
-            this.ControllerContext.HttpContext = new DefaultHttpContext { RequestServices = serviceProvider };
-        }
-
-        [CapSubscribe(nameof(TestIntegrationEvent))]
-        [NonAction]
-        public void TestIntegrationEvent(
-                TestIntegrationEvent @event,
-                CancellationToken token) =>
-                this.Evaluate(
-                              DBSessionMode.Write,
-                              _ => this.mediator.Send(@event, token).GetAwaiter().GetResult());
+        this.mediator = mediator;
+        this.contextEvaluator = contextEvaluator;
     }
+
+    [CapSubscribe(nameof(TestIntegrationEvent))]
+    [NonAction]
+    public async Task TestIntegrationEvent(TestIntegrationEvent @event, CancellationToken token) =>
+            await this.contextEvaluator.EvaluateAsync(DBSessionMode.Write, async _ => await this.mediator.Send(@event, token));
 }

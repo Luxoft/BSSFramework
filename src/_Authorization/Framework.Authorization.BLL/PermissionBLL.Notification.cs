@@ -17,7 +17,7 @@ namespace Framework.Authorization.BLL
         {
             if (roleIdents == null) throw new ArgumentNullException(nameof(roleIdents));
 
-            var roles = this.Context.Logics.BusinessRole.GetObjectsByIdents(roleIdents);
+            var roles = this.Context.Logics.BusinessRole.GetListByIdents(roleIdents);
             var expandedRoles = this.Context.Logics.BusinessRole.GetParents(roles).ToArray();
 
             return new AvailablePermissionFilter(this.Context.DateTimeService, null).ToFilterExpression()
@@ -138,9 +138,9 @@ namespace Framework.Authorization.BLL
             if (principalNames == null) throw new ArgumentNullException(nameof(principalNames));
             if (relatedRoleId.IsDefault()) throw new System.ArgumentException("relatedRoleId");
 
-            var roles = this.Context.Logics.BusinessRole.GetObjectsByIdents(roleIdents).ToArray();
+            var roles = this.Context.Logics.BusinessRole.GetListByIdents(roleIdents).ToArray();
             var relatedRole = this.Context.Logics.BusinessRole.GetById(relatedRoleId, true);
-            var principals = this.Context.Logics.Principal.GetObjectsBy(z => principalNames.Contains(z.Name)).ToArray();
+            var principals = this.Context.Logics.Principal.GetListBy(z => principalNames.Contains(z.Name)).ToArray();
 
             return this.GetNotificationPrincipalsByRelatedRole(roles, principals, relatedRole);
         }
@@ -171,7 +171,7 @@ namespace Framework.Authorization.BLL
 
             var query = filterExpression.BuildAnd(filterByPermFilters).BuildAnd(p => p.Status == PermissionStatus.Approved && p.Period.Contains(today));
 
-            return this.GetObjectsBy(query, f => f.Select(l => l.Principal)).Select(z => z.Principal).Distinct();
+            return this.GetListBy(query, f => f.Select(l => l.Principal)).Select(z => z.Principal).Distinct();
         }
 
         private IEnumerable<Permission> GetPermissionsForRoles([NotNull] ICollection<BusinessRole> roles, [NotNull] IEnumerable<Principal> principals)
@@ -187,7 +187,7 @@ namespace Framework.Authorization.BLL
 
             var today = this.Context.DateTimeService.Today;
 
-            var result = this.GetObjectsBy(z => z.Status == PermissionStatus.Approved && allRoles.Contains(z.Role) && principalIds.Contains(z.Principal.Id) && z.Period.Contains(today));
+            var result = this.GetListBy(z => z.Status == PermissionStatus.Approved && allRoles.Contains(z.Role) && principalIds.Contains(z.Principal.Id) && z.Period.Contains(today));
 
             return result;
         }
@@ -197,9 +197,9 @@ namespace Framework.Authorization.BLL
             if (operationsIds == null) throw new ArgumentNullException(nameof(operationsIds));
             if (notificationFilterGroups == null) throw new ArgumentNullException(nameof(notificationFilterGroups));
 
-            var operations = this.Context.Logics.Operation.GetObjectsByIdents(operationsIds).ToArray();
+            var operations = this.Context.Logics.Operation.GetListByIdents(operationsIds).ToArray();
 
-            var roleIdents = this.Context.Logics.BusinessRole.GetObjectsBy(role => role.BusinessRoleOperationLinks.Any(link => operations.Contains(link.Operation))).ToArray(role => role.Id);
+            var roleIdents = this.Context.Logics.BusinessRole.GetListBy(role => role.BusinessRoleOperationLinks.Any(link => operations.Contains(link.Operation))).ToArray(role => role.Id);
 
             return this.GetNotificationPrincipalsByRoles(roleIdents, notificationFilterGroups);
         }

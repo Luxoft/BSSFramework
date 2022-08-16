@@ -41,7 +41,6 @@ namespace Framework.Authorization.BLL
             [NotNull] IServiceProvider serviceProvider,
             [NotNull] IDALFactory<PersistentDomainObjectBase, Guid> dalFactory,
             [NotNull] IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
-            [NotNull] BLLSourceEventListenerContainer<PersistentDomainObjectBase> sourceListeners,
             [NotNull] IObjectStateService objectStateService,
             [NotNull] IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
             [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
@@ -63,7 +62,6 @@ namespace Framework.Authorization.BLL
                 serviceProvider,
                 dalFactory,
                 operationSenders,
-                sourceListeners,
                 objectStateService,
                 accessDeniedExceptionService,
                 standartExpressionBuilder,
@@ -206,7 +204,7 @@ namespace Framework.Authorization.BLL
             var filter = new AvailablePermissionOperationFilter<TSecurityOperationCode>(
                 this.DateTimeService, this.RunAsManager.PrincipalName, securityOperation.Code);
 
-            var permissions = this.Logics.Permission.GetObjectsBy(
+            var permissions = this.Logics.Permission.GetListBy(
                 filter, z => z.SelectMany(q => q.FilterItems).SelectNested(q => q.Entity).Select(q => q.EntityType));
 
             var securityTypesCache = securityTypes.ToReadOnlyCollection();
@@ -238,7 +236,7 @@ namespace Framework.Authorization.BLL
                     new OverridePropertyInfoVisitor<Principal, IEnumerable<Permission>>(
                         principal => principal.Permissions, permissionFilter.ToFilterExpression().ToCollectionFilter()));
 
-            var principals = this.Logics.Principal.GetObjectsBy(extraPrincipalFilter);
+            var principals = this.Logics.Principal.GetListBy(extraPrincipalFilter);
 
             return principals.Select(principal => principal.Name);
         }

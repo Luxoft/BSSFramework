@@ -57,26 +57,5 @@ namespace SampleSystem.IntegrationTests.__Support.Utils.Framework
         {
             return Regex.Replace(message, "\n|\t|\r", string.Empty);
         }
-
-        public static string ComputeMd5CheckSum(string path)
-        {
-            using (FileStream fs = System.IO.File.OpenRead(path))
-            {
-                MD5 md5 = new MD5CryptoServiceProvider();
-                byte[] fileData = new byte[fs.Length];
-                fs.Read(fileData, 0, (int)fs.Length);
-                byte[] checkSum = md5.ComputeHash(fileData);
-                string result = BitConverter.ToString(checkSum).Replace("-", string.Empty);
-                return result;
-            }
-        }
-
-        public static string ComputeMd5CheckSum(byte[] content)
-        {
-                MD5 md5 = new MD5CryptoServiceProvider();
-                byte[] checkSum = md5.ComputeHash(content);
-                string result = BitConverter.ToString(checkSum).Replace("-", string.Empty);
-                return result;
-        }
     }
 }

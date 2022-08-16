@@ -15,7 +15,6 @@ using Framework.DomainDriven.NHibernate;
 using JetBrains.Annotations;
 
 using NHibernate.Cfg;
-using NHibernate.Driver;
 
 using SampleSystem.Domain;
 

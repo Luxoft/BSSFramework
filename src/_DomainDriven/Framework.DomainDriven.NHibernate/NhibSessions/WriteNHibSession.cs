@@ -228,7 +228,12 @@ namespace Framework.DomainDriven.NHibernate
                     var beforeTransactionCompletedChangeState = dalHistory.Composite();
 
                     // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!!!!! Use UseTryCloseDbSession middleware
-                    this.eventListeners.Foreach(eventListener => eventListener.OnBeforeTransactionCompleted(new DALChangesEventArgs(beforeTransactionCompletedChangeState)));
+                    this.eventListeners.Foreach(eventListener =>
+                                                {
+                                                    cancellationToken.ThrowIfCancellationRequested();
+
+                                                    eventListener.OnBeforeTransactionCompleted(new DALChangesEventArgs(beforeTransactionCompletedChangeState));
+                                                });
 
                     await this.InnerSession.FlushAsync(cancellationToken);
 

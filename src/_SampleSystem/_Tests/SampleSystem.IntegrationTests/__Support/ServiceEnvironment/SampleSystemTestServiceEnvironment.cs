@@ -55,7 +55,6 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                                                  InitializeAndCleanup.DatabaseUtil.ConnectionSettings.ConnectionString
                                          },
                                  })
-
                                 .Build();
 
 

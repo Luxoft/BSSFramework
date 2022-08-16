@@ -76,7 +76,6 @@ namespace SampleSystem.WebApiCore
             services.AddSingleton<WorkflowManager>();
             services.AddSingletonFrom<IWorkflowManager, WorkflowManager>();
 
-
             services.AddSingleton(new SubscriptionMetadataStore(new SampleSystemSubscriptionsMetadataFinder()));
 
             return services.AddControllerEnvironment();

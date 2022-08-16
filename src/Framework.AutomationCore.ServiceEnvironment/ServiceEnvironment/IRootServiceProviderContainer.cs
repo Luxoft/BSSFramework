@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SampleSystem.IntegrationTests;
+namespace Automation.ServiceEnvironment;
 
 public interface IRootServiceProviderContainer
 {

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <PackageId>Luxoft.Framework.AutomationCore.ServiceEnvironment</PackageId>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
+      <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.NHibernate\Framework.DomainDriven.NHibernate.csproj" />
+      <ProjectReference Include="..\_SampleSystem\SampleSystem.WebApiCore\SampleSystem.WebApiCore.csproj" />
+    </ItemGroup>
+</Project>

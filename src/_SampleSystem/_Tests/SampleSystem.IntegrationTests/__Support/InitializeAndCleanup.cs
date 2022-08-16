@@ -7,7 +7,8 @@ using SampleSystem.IntegrationTests.__Support.Utils.Framework;
 
 using Automation;
 using Automation.Utils;
-
+using Automation.Utils.DatabaseUtils;
+using Automation.Utils.DatabaseUtils.Interfaces;
 using Microsoft.Extensions.Configuration;
 
 using SampleSystem.IntegrationTests.Support.Utils;
@@ -23,8 +24,8 @@ namespace SampleSystem.IntegrationTests.__Support
         public static void EnvironmentInitialize(TestContext testContext)
         {
             AppSettings.Initialize(nameof(SampleSystem) + "_");
-
-            DatabaseUtil = new SampleSystemDatabaseUtil();
+            var databaseContext = new DatabaseContext(AppSettings.Default["ConnectionStrings"]);
+            DatabaseUtil = new SampleSystemDatabaseUtil(databaseContext);
 
             AssemblyInitializeAndCleanup.EnvironmentInitialize(DatabaseUtil);
         }

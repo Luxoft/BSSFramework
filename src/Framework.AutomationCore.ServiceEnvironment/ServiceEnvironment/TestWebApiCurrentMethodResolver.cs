@@ -2,9 +2,9 @@
 
 using Framework.DomainDriven.WebApiNetCore;
 
-namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
+namespace Automation.ServiceEnvironment;
 
-public class IntegrationTestsWebApiCurrentMethodResolver : IWebApiCurrentMethodResolver
+public class TestWebApiCurrentMethodResolver : IWebApiCurrentMethodResolver
 {
     private MethodInfo currentMethod;
 

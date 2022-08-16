@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
-
 using Automation.Enums;
 using Automation.Utils;
+using Automation.Utils.DatabaseUtils.Interfaces;
 
 namespace Automation
 {
@@ -23,44 +23,47 @@ namespace Automation
             Console.WriteLine();
         }
 
-        public static void EnvironmentInitialize(BaseDatabaseUtil baseDatabaseUtil)
+        public static void EnvironmentInitialize(IDatabaseUtil databaseUtil)
         {
-            RunAction("Create new localdb instance if UseLocalDb = true", CoreDatabaseUtil.CreateLocalDb);
-
-            //RunAction("Check Server Name in allowed list", baseDatabaseUtil.CheckServerAllowed);
+            // if (!databaseUtil.DatabaseContext.MainDatabase.IsLocalDb)
+            // {
+            //     RunAction("Check Server Name in allowed list", databaseUtil.CheckServerAllowed);
+            // }
 
             switch (ConfigUtil.TestRunMode)
             {
                 case TestRunMode.RestoreDatabaseUsingAttach:
-                    RunAction("Check Test Database", baseDatabaseUtil.CheckTestDatabase);
-                    baseDatabaseUtil.CheckAndCreateDetachedFiles();
+                    RunAction("Check Test Database", databaseUtil.CheckTestDatabase);
+                    databaseUtil.CheckAndCreateDetachedFiles();
+                    databaseUtil.DropDatabase();
                     break;
                 case TestRunMode.GenerateTestDataOnExistingDatabase:
                     break;
                 default:
-                    RunAction("Check Test Database", baseDatabaseUtil.CheckTestDatabase);
-                    RunAction("Delete detached files", baseDatabaseUtil.DeleteDetachedFiles);
-                    RunAction("Drop and Create Databases", baseDatabaseUtil.CreateDatabase);
-                    RunAction("Generate All Databases", baseDatabaseUtil.GenerateDatabases);
-                    RunAction("Insert Statements", baseDatabaseUtil.ExecuteInsertsForDatabases);
-                    RunAction("Test Data Initialize", baseDatabaseUtil.GenerateTestData);
-                    RunAction("Backup Databases", baseDatabaseUtil.CopyDetachedFiles);
+                    RunAction("Check Test Database", databaseUtil.CheckTestDatabase);
+                    RunAction("Delete detached files", databaseUtil.DeleteDetachedFiles);
+                    RunAction("Drop and Create Databases", databaseUtil.CreateDatabase);
+                    RunAction("Generate All Databases", databaseUtil.GenerateDatabases);
+                    RunAction("Insert Statements", databaseUtil.ExecuteInsertsForDatabases);
+                    RunAction("Test Data Initialize", databaseUtil.GenerateTestData);
+                    RunAction("Backup Databases", databaseUtil.CopyDetachedFiles);
+                    RunAction("Drop Database", databaseUtil.DropDatabase);
                     break;
             }
         }
 
-        public static void EnvironmentCleanup(BaseDatabaseUtil baseDatabaseUtil)
+        public static void EnvironmentCleanup(IDatabaseUtil databaseUtil)
         {
             switch (ConfigUtil.TestRunMode)
             {
                 case TestRunMode.DefaultRunModeOnEmptyDatabase:
-                    RunAction("Check Test Database", baseDatabaseUtil.CheckTestDatabase);
-                    RunAction("Drop All Databases", baseDatabaseUtil.DropAllDatabases);
-                    baseDatabaseUtil.DeleteDetachedFiles();
+                    RunAction("Check Test Database", databaseUtil.CheckTestDatabase);
+                    RunAction("Drop Databases",databaseUtil.DropDatabase);
+                    RunAction("Delete detached files", databaseUtil.DeleteDetachedFiles);
                     break;
 
                 default:
-                    if (ConfigUtil.UseLocalDb) RunAction("Drop localdb", baseDatabaseUtil.DropAllDatabases);
+                    RunAction("Delete LocalDB Instances", () => databaseUtil.DatabaseContext.Dispose());
                     break;
             }
         }

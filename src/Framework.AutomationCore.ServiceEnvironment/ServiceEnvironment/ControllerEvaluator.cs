@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-
+using Automation.ServiceEnvironment.Services;
 using Framework.Core;
 using Framework.DomainDriven.WebApiNetCore;
-
 using JetBrains.Annotations;
-
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-using SampleSystem.IntegrationTests.__Support.TestData;
-
-namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
+namespace Automation.ServiceEnvironment;
 
 public class ControllerEvaluator<TController>
         where TController : ControllerBase
@@ -93,11 +89,6 @@ public class ControllerEvaluator<TController>
         return new ControllerEvaluator<TController>(this.rootServiceProvider, newCustomPrincipalName);
     }
 
-    public ControllerEvaluator<TController> WithIntegrationImpersonate()
-    {
-        return this.WithImpersonate(DefaultConstants.INTEGRATION_USER);
-    }
-
     private class ImpersonateMiddleware
     {
         private readonly RequestDelegate next;
@@ -115,7 +106,7 @@ public class ControllerEvaluator<TController>
             }
             else
             {
-                await context.RequestServices.GetRequiredService<IntegrationTestDefaultUserAuthenticationService>().WithImpersonateAsync(customPrincipalName, async () =>
+                await context.RequestServices.GetRequiredService<TestUserAuthenticationService>().WithImpersonateAsync(customPrincipalName, async () =>
                 {
                     await this.next(context);
                     return default(object);
@@ -123,6 +114,7 @@ public class ControllerEvaluator<TController>
             }
         }
     }
+
     private class InitCurrentMethodMiddleware
     {
         private readonly RequestDelegate next;
@@ -138,7 +130,7 @@ public class ControllerEvaluator<TController>
                                           .TryGetStartMethodInfo()
                                           .FromMaybe("Current controller method can't be extracted");
 
-            context.RequestServices.GetRequiredService<IntegrationTestsWebApiCurrentMethodResolver>().SetCurrentMethod(currentMethod);
+            context.RequestServices.GetRequiredService<TestWebApiCurrentMethodResolver>().SetCurrentMethod(currentMethod);
 
             await this.next(context);
         }

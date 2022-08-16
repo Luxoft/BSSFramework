@@ -13,12 +13,12 @@ namespace Automation.Helpers
 {
     public static class DatabaseHelper
     {
-        public static List<T> GetAll<T>()
+        public static List<T> GetAll<T>(string connectionString)
             where T : class
         {
             var tableName = GetTableName(typeof(T));
 
-            using (var connection = new SqlConnection(ConfigUtil.ConnectionString))
+            using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 return connection.Query<T>($"SELECT * FROM {tableName}").ToList();

@@ -1,12 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Text.RegularExpressions;
 
 using Automation.Enums;
-using Microsoft.Data.SqlClient;
-using Microsoft.SqlServer.Management.Common;
-using Microsoft.SqlServer.Management.Smo;
-
 namespace Automation.Utils
 {
     public static class ConfigUtil
@@ -37,10 +32,9 @@ namespace Automation.Utils
                 return path;
             });
 
-        private static readonly Lazy<Server> ServerLazy =
-            new Lazy<Server>(() => new Server(new ServerConnection(new SqlConnection(CutInitialCatalog(ConnectionString)))));
-
         private static readonly Lazy<bool> UseLocalDbLazy = new Lazy<bool>(() => bool.Parse(AppSettings.Default["UseLocalDb"]));
+
+        private static readonly Lazy<bool> RandomizeDatabaseNameLazy = new Lazy<bool>(() => bool.Parse(AppSettings.Default["RandomizeDatabaseName"]));
 
         private static readonly Lazy<string> SystemNameLazy = new Lazy<string>(() => AppSettings.Default["SystemName"]);
 
@@ -55,22 +49,6 @@ namespace Automation.Utils
                 return runMode;
             });
 
-        public static string ConnectionString;
-
-        public static string InstanceName;
-
-        public static Server Server
-        {
-            get
-            {
-                var srv = ServerLazy.Value;
-
-                srv.Refresh();
-
-                return srv;
-            }
-        }
-
         public static string ComputerName => Environment.MachineName;
 
         public static string UserName => Environment.UserName;
@@ -81,14 +59,10 @@ namespace Automation.Utils
 
         public static string TempFolder => TempFolderLazy.Value;
 
-        public static bool LocalServer => Server.NetName.Equals(ComputerName, StringComparison.InvariantCultureIgnoreCase);
-
         public static bool UseLocalDb => UseLocalDbLazy.Value;
 
-        public static string SystemName => SystemNameLazy.Value;
-        public static Server Lazy => ServerLazy.Value;
+        public static bool RandomizeDatabaseName => RandomizeDatabaseNameLazy.Value;
 
-        private static string CutInitialCatalog(string inputConnectionString) =>
-            Regex.Replace(inputConnectionString, "Initial Catalog=(\\w+);", "");
+        public static string SystemName => SystemNameLazy.Value;
     }
 }

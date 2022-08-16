@@ -1,52 +1,48 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BaseDatabaseUtil.cs" company="">
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
-using Automation.Utils.Utils.DatabaseUtils;
-
+using Automation.Utils.DatabaseUtils.Interfaces;
 using Microsoft.SqlServer.Management.Smo;
 
-namespace Automation.Utils
+namespace Automation.Utils.DatabaseUtils
 {
-    public abstract class BaseDatabaseUtil
+    public abstract class BaseDatabaseUtil : IDatabaseUtil
     {
         protected abstract IEnumerable<string> TestServers { get; }
 
-        protected ConnectionSettings ConnectionSettings { get; }
+        public IDatabaseContext DatabaseContext { get; }
 
-        protected BaseDatabaseUtil()
+        protected BaseDatabaseUtil(IDatabaseContext databaseContext)
         {
-            this.ConnectionSettings = new ConnectionSettings();
-            CoreDatabaseUtil.DatabaseName = this.ConnectionSettings.InitialCatalog;
+            this.DatabaseContext = databaseContext;
+        }
+        public void CreateDatabase() => this.DatabaseContext.ReCreate();
+
+        public virtual void DropDatabase()
+        {
+            this.DatabaseContext.Drop();
         }
 
-        public void CreateDatabase() => CoreDatabaseUtil.ReCreate();
-
-        public virtual void DropDatabase() => CoreDatabaseUtil.Drop();
-
-        public virtual void ExecuteInsertsForDatabases() =>
-            CoreDatabaseUtil.ExecuteSqlFromFolder(@"__Support/Scripts", CoreDatabaseUtil.DatabaseName);
-
-        public void DropAllDatabases()
+        public virtual void DropAllDatabases()
         {
-            ConfigUtil.Server
-                .Databases.Cast<Database>()
-                .Where(x => x.Name.StartsWith(CoreDatabaseUtil.DatabaseName))
+            this.DatabaseContext.Server.Databases.Cast<Database>()
+                .Where(x => x.Name.Equals(this.DatabaseContext.MainDatabase.InitialCatalog))
                 .ToList()
-                .ForEach(CoreDatabaseUtil.Drop);
-
-            CoreDatabaseUtil.DeleteLocalDb();
+                .ForEach(x => x.Drop());
         }
 
-        public void CopyDetachedFiles() => CoreDatabaseUtil.CopyDetachedFiles();
+        public virtual void ExecuteInsertsForDatabases()
+        {
+            DatabaseUtils.CoreDatabaseUtil.ExecuteSqlFromFolder(
+                this.DatabaseContext.MainDatabase.ConnectionString,
+                @"__Support\Scripts",
+                this.DatabaseContext.MainDatabase.DatabaseName);
+        }
 
-        public void AttachDatabase() => CoreDatabaseUtil.AttachDatabase();
+        public void CopyDetachedFiles() => this.DatabaseContext.CopyDetachedFiles();
+
+        public void AttachDatabase() => this.DatabaseContext.AttachDatabase();
 
         public abstract void GenerateDatabases();
 
@@ -58,7 +54,7 @@ namespace Automation.Utils
 
         public void CheckAndCreateDetachedFiles()
         {
-            if (!new FileInfo(CoreDatabaseUtil.CopyDataPath).Exists)
+            if (!new FileInfo(this.DatabaseContext.MainDatabase.CopyDataPath).Exists)
             {
                 this.CreateDatabase();
                 this.GenerateDatabases();
@@ -72,14 +68,14 @@ namespace Automation.Utils
 
         public void CheckServerAllowed()
         {
-            if (!ConfigUtil.LocalServer)
+            if (!this.DatabaseContext.Server.NetName.Equals(ConfigUtil.ComputerName, StringComparison.InvariantCultureIgnoreCase))
             {
                 if (!this.TestServers.Select(s => s.ToUpper())
                     .ToList()
-                    .Contains(ConfigUtil.Server.NetName.ToUpper()))
+                    .Contains(this.DatabaseContext.Server.NetName.ToUpper()))
                 {
                     throw new Exception(
-                        $"Server name {ConfigUtil.Server.NetName} is not specified in allowed list of test servers: {string.Join(", ", this.TestServers.Select(s => s.ToUpper()).ToList())}");
+                        $"Server name {this.DatabaseContext.Server.NetName} is not specified in allowed list of test servers: {string.Join(", ", this.TestServers.Select(s => s.ToUpper()).ToList())}");
                 }
             }
         }

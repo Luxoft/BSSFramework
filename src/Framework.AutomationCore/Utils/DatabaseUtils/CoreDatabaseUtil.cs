@@ -1,18 +1,20 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
-
+using Automation.Utils.DatabaseUtils.Interfaces;
 using MartinCostello.SqlLocalDb;
-
 using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Management.Smo;
+using MoreLinq;
 
-namespace Automation.Utils
+namespace Automation.Utils.DatabaseUtils
 {
     public static partial class CoreDatabaseUtil
     {
-        public static void ExecuteSqlFromFolder(string folder, string initialCatalog = null)
+        public static void ExecuteSqlFromFolder(string connectionString, string folder, string initialCatalog = null)
         {
             string[] filePaths;
 
@@ -31,7 +33,7 @@ namespace Automation.Utils
                 return;
             }
 
-            var builder = new SqlConnectionStringBuilder(ConfigUtil.ConnectionString);
+            var builder = new SqlConnectionStringBuilder(connectionString);
 
             if (initialCatalog != null)
             {
@@ -91,7 +93,7 @@ namespace Automation.Utils
             }
 
             var regex = new Regex("^GO(\r\n|\n|\r)", RegexOptions.Multiline | RegexOptions.IgnoreCase);
-            var lines = regex.Split(sql);
+            string[] lines = regex.Split(sql).Select(z => z.Replace("$Database", connection.Database)).ToArray();
 
             using (var cmd = connection.CreateCommand())
             {
@@ -103,25 +105,17 @@ namespace Automation.Utils
                     {
                         cmd.CommandText = line;
                         cmd.CommandType = CommandType.Text;
-
                         cmd.CommandTimeout = 30;
 
-                        try
-                        {
-                            cmd.ExecuteNonQuery();
-                        }
-                        catch (Exception ex)
-                        {
-                            throw ex;
-                        }
+                        cmd.ExecuteNonQuery();
                     }
                 }
             }
         }
 
-        public static void ExecuteSql(string sqlFileOrText, string initialCatalog = null)
+        public static void ExecuteSql(string connectionString, string sqlFileOrText, string initialCatalog = null)
         {
-            var builder = new SqlConnectionStringBuilder(ConfigUtil.ConnectionString);
+            var builder = new SqlConnectionStringBuilder(connectionString);
 
             if (initialCatalog != null)
             {
@@ -137,30 +131,37 @@ namespace Automation.Utils
             }
         }
 
-        public static void Drop()
+        public static void Drop(this IDatabaseContext databaseContext)
         {
-            var database = GetDatabase(DatabaseName);
+            Drop(databaseContext.Server, databaseContext.MainDatabase.DatabaseName);
+            databaseContext.SecondaryDatabases?.ForEach(x => Drop(databaseContext.Server, x.Value.DatabaseName));
+        }
+
+        private static void Drop(Server server, string databaseName)
+        {
+            var database = server.GetDatabase(databaseName);
 
             if (database == null)
             {
                 return;
             }
 
-            Drop(database);
+            server.Drop(database);
         }
 
-        public static void Drop(Database database)
+
+        public static void Drop(this Server server, Database database)
         {
             try
             {
-                SetModeRestrictedUser(database.Name);
+                server.SetModeRestrictedUser(database.Name);
                 database.Drop();
             }
             catch (FailedOperationException)
             {
                 try
                 {
-                    ConfigUtil.Server.KillDatabase(database.Name);
+                    server.KillDatabase(database.Name);
                 }
                 catch (Exception ex)
                 {
@@ -169,119 +170,140 @@ namespace Automation.Utils
             }
             catch (Exception ex)
             {
-                SetModeMultiUser(database);
+                SetModeMultiUser(server, database);
                 Console.WriteLine(ex.Message);
             }
         }
 
-        public static void ReCreate()
+        public static void ReCreate(this IDatabaseContext databaseContext)
         {
-            Drop();
-            Create();
+            databaseContext.Drop();
+            databaseContext.Create();
         }
 
-        public static void Create()
+        public static void Create(this IDatabaseContext databaseContext)
         {
-            var srv = ConfigUtil.Server;
+            Create(databaseContext.Server, databaseContext.MainDatabase);
+            databaseContext.SecondaryDatabases?.ForEach(x => Create(databaseContext.Server, x.Value));
+        }
 
-            var db = new Database(srv, DatabaseName);
+        private static void Create(Server server, IDatabaseItem database)
+        {
+            var db = new Database(server, database.DatabaseName);
             var fileGroup = new FileGroup(db, "PRIMARY");
 
             var dataFile = new DataFile(
-                               fileGroup,
-                               DatabaseName,
-                               Path.Combine(ConfigUtil.DbDataDirectory, FileName + ".mdf"))
-                           {
-                               Size = 5.5 * 1024.0, GrowthType = FileGrowthType.KB, Growth = 1.0 * 1024.0
-                           };
+                fileGroup,
+                database.DatabaseName,
+                database.SourceDataPath)
+            {
+                Size = 5.5 * 1024.0, GrowthType = FileGrowthType.KB, Growth = 1.0 * 1024.0
+            };
 
             fileGroup.Files.Add(dataFile);
 
             db.FileGroups.Add(fileGroup);
 
             var logFile = new LogFile(
-                              db,
-                              DatabaseName + "_log",
-                              Path.Combine(ConfigUtil.DbDataDirectory, FileName + "_log.ldf"))
-                          {
-                              Size = 1.0 * 1024.0, GrowthType = FileGrowthType.Percent, Growth = 10.0
-                          };
+                db,
+                database.DatabaseName + "_log",
+                database.SourceLogPath)
+            {
+                Size = 1.0 * 1024.0, GrowthType = FileGrowthType.Percent, Growth = 10.0
+            };
 
             db.LogFiles.Add(logFile);
 
             db.Create();
 
-            srv.Refresh();
+            server.Refresh();
         }
 
-        public static void CopyDetachedFiles()
+        public static void CopyDetachedFiles(this IDatabaseContext databaseContext)
         {
-            DetachDatabase();
-
-            new FileInfo(SourceDataPath).CopyTo(CopyDataPath, true);
-            new FileInfo(SourceLogPath).CopyTo(CopyLogPath, true);
+            CopyDetachedFiles(databaseContext.Server, databaseContext.MainDatabase);
+            databaseContext.SecondaryDatabases?.ForEach(x => CopyDetachedFiles(databaseContext.Server, x.Value));
         }
 
-        public static void AttachDatabase()
+        private static void CopyDetachedFiles(Server server, DatabaseItem database)
         {
-            new FileInfo(CopyDataPath).CopyTo(SourceDataPath, true);
-            new FileInfo(CopyLogPath).CopyTo(SourceLogPath, true);
+            server.DetachDatabase(database.DatabaseName);
 
-            ConfigUtil.Server.AttachDatabase(DatabaseName, SourceFiles);
-            if (!ConfigUtil.UseLocalDb)
+            new FileInfo(database.SourceDataPath).MoveTo(database.CopyDataPath, true);
+            new FileInfo(database.SourceLogPath).MoveTo(database.CopyLogPath, true);
+        }
+
+        public static void AttachDatabase(this IDatabaseContext databaseContext)
+        {
+            AttachDatabase(databaseContext.Server, databaseContext.MainDatabase);
+            databaseContext.SecondaryDatabases?.ForEach(x => AttachDatabase(databaseContext.Server, x.Value));
+        }
+
+        private static void AttachDatabase(Server server, IDatabaseItem database)
+        {
+            new FileInfo(database.CopyDataPath).CopyTo(database.SourceDataPath, true);
+            new FileInfo(database.CopyLogPath).CopyTo(database.SourceLogPath, true);
+
+            server.AttachDatabase(database.DatabaseName, new StringCollection { database.SourceDataPath, database.SourceLogPath });
+        }
+
+        public static void DetachDatabase(this Server server, string databaseName)
+        {
+            server.SetModeRestrictedUser(databaseName);
+
+            server.DetachDatabase(databaseName, false);
+        }
+
+        public static void CreateLocalDb(string instanceName)
+        {
+            using (var localDb = new SqlLocalDbApi())
             {
-                SqlConnection.ClearAllPools();
-            }
-        }
-
-        public static void DetachDatabase()
-        {
-            SetModeRestrictedUser(DatabaseName);
-
-            ConfigUtil.Server.DetachDatabase(DatabaseName, false);
-        }
-
-        public static void CreateLocalDb()
-        {
-            if (!ConfigUtil.UseLocalDb)
-            {
-                return;
-            }
-
-            using (var localDB = new SqlLocalDbApi())
-            {
-                var instanceInfo = localDB.GetInstanceInfo(ConfigUtil.InstanceName);
-                localDB.AutomaticallyDeleteInstanceFiles = true;
+                var instanceInfo = localDb.GetInstanceInfo(instanceName);
+                localDb.AutomaticallyDeleteInstanceFiles = true;
 
                 if (!instanceInfo.Exists)
                 {
-                    localDB.CreateInstance(instanceInfo.Name);
+                    localDb.CreateInstance(instanceInfo.Name);
                 }
 
                 if (!instanceInfo.IsRunning)
                 {
-                    localDB.StartInstance(instanceInfo.Name);
+                    localDb.StartInstance(instanceInfo.Name);
                 }
             }
         }
 
-        public static void DeleteLocalDb()
+        public static void CreateUser(
+            string connectionString,
+            string user,
+            string password)
         {
-            if (!ConfigUtil.UseLocalDb)
-            {
-                return;
-            }
+            ExecuteSql(connectionString, $"CREATE LOGIN {user} WITH PASSWORD = '{password}'");
+           //ExecuteSql(connectionString, $"CREATE USER {user}");
+        }
 
-            using (var localDB = new SqlLocalDbApi())
+        public static void DeleteLocalDb(string instanceName)
+        {
+            using (var localDb = new SqlLocalDbApi())
             {
-                var instanceInfo = localDB.GetInstanceInfo(ConfigUtil.InstanceName);
+                var instanceInfo = localDb.GetInstanceInfo(instanceName);
 
                 if (instanceInfo.IsRunning)
                 {
-                    localDB.StopInstance(instanceInfo.Name);
+                    localDb.StopInstance(instanceInfo.Name);
                 }
 
-                localDB.DeleteInstance(ConfigUtil.InstanceName);
+                localDb.DeleteInstance(instanceName);
+            }
+        }
+
+        public static bool LocalDbInstanceExists(string instanceName)
+        {
+            using (var localDbApi = new SqlLocalDbApi())
+            {
+                var instanceInfo = localDbApi.GetInstanceInfo(instanceName);
+
+                return instanceInfo.Exists;
             }
         }
     }

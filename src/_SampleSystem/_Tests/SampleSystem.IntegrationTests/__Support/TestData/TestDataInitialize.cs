@@ -1,19 +1,30 @@
-﻿using System.Collections.Generic;
-
-using Framework.DomainDriven.ServiceModel.IAD;
-
+﻿using System;
+using System.Collections.Generic;
+using Automation.Utils.DatabaseUtils.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
+using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.IntegrationTests.__Support.Utils;
 using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData
 {
-    public class TestDataInitialize : TestBase
+    public class TestDataInitialize
     {
+        private readonly AuthHelper AuthHelper;
+        private readonly DataHelper DataHelper;
+        private readonly IServiceProvider RootServiceProvider;
+        public TestDataInitialize(IDatabaseContext databaseContext)
+        {
+            this.RootServiceProvider = SampleSystemTestRootServiceProvider.Create(databaseContext);
+            this.AuthHelper = this.RootServiceProvider.GetRequiredService<AuthHelper>();
+            this.DataHelper = this.RootServiceProvider.GetRequiredService<DataHelper>();
+        }
+
         public void TestData()
         {
             this.RootServiceProvider.GetRequiredService<SampleSystemInitializer>().Initialize();

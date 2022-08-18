@@ -6,7 +6,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.DbGenerate;
 using Framework.DomainDriven.DBGenerator;
-using SampleSystem.IntegrationTests.__Support;
 
 namespace SampleSystem.IntegrationTests.DBGeneration
 {
@@ -21,8 +20,10 @@ namespace SampleSystem.IntegrationTests.DBGeneration
 
             // Act
             var action = new Action(() => generator.GenerateAllDB(
-                                                InitializeAndCleanup.DatabaseUtil.ConnectionSettings.DataSource,
-                                                credential: UserCredential.Create(InitializeAndCleanup.DatabaseUtil.ConnectionSettings.UserId, InitializeAndCleanup.DatabaseUtil.ConnectionSettings.Password)));
+                this.DatabaseUtil.DatabaseContext.MainDatabase.DataSource,
+                credential: UserCredential.Create(
+                    this.DatabaseUtil.DatabaseContext.MainDatabase.UserId,
+                    this.DatabaseUtil.DatabaseContext.MainDatabase.Password)));
 
             // Assert
             action.Should().NotThrow();

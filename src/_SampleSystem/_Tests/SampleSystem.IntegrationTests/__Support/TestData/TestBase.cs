@@ -3,11 +3,13 @@ using System.Collections.Generic;
 
 using Automation;
 using Automation.Enums;
+using Automation.ServiceEnvironment;
+using Automation.ServiceEnvironment.Services;
 using Automation.Utils;
-
+using Automation.Utils.DatabaseUtils.Interfaces;
 using Framework.Core;
-using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.ServiceModel.Subscriptions;
 using Framework.Notification.DTO;
 
@@ -16,7 +18,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment.IntegrationTests;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.WebApiCore.Controllers;
 
@@ -27,95 +28,62 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
     [TestClass]
     public class TestBase : IRootServiceProviderContainer
     {
-        private DataHelper dataHelper;
-
         protected TestBase()
         {
-            this.SetCurrentDateTime(DateTime.Now);
-            this.DataHelper = new DataHelper(this.RootServiceProvider);
-            this.AuthHelper = new AuthHelper(this.RootServiceProvider);
-
             // Workaround for System.Drawing.Common problem https://chowdera.com/2021/12/202112240234238356.html
             System.AppContext.SetSwitch("System.Drawing.EnableUnixSupport", true);
         }
 
-        public IServiceProvider RootServiceProvider { get; } = SampleSystemTestRootServiceProvider.Default;
+        public IServiceProvider RootServiceProvider { get; private set; }
 
         public MainWebApi MainWebApi => new(this.RootServiceProvider);
 
         public MainAuditWebApi MainAuditWebApi => new(this.RootServiceProvider);
 
-        protected DataHelper DataHelper
-        {
-            get
-            {
-                this.dataHelper.AuthHelper = this.AuthHelper;
-                return this.dataHelper;
-            }
+        protected DataHelper DataHelper => this.RootServiceProvider.GetService<DataHelper>();
 
-            set
-            {
-                this.dataHelper = value;
-            }
-        }
+        protected AuthHelper AuthHelper => this.RootServiceProvider.GetService<AuthHelper>();
 
-        protected AuthHelper AuthHelper { get; }
+        protected IDatabaseUtil DatabaseUtil => this.RootServiceProvider.GetService<IDatabaseUtil>();
 
-        protected IDateTimeService DateTimeService => this.RootServiceProvider.GetRequiredService<IDateTimeService>();
-
-        protected string DatabaseName { get; } = "SampleSystem";
-
-        protected string DefaultDatabaseServer { get; } = InitializeAndCleanup.DatabaseUtil.ConnectionSettings.DataSource;
+        protected TestDateTimeService DateTimeService => this.RootServiceProvider.GetRequiredService<TestDateTimeService>();
 
         [TestInitialize]
         public void TestBaseInitialize()
         {
+            this.RootServiceProvider = SampleSystemTestRootServiceProvider.Create();
+
             switch (ConfigUtil.TestRunMode)
             {
                 case TestRunMode.DefaultRunModeOnEmptyDatabase:
                 case TestRunMode.RestoreDatabaseUsingAttach:
-                    AssemblyInitializeAndCleanup.RunAction("Drop Database", CoreDatabaseUtil.Drop);
-                    AssemblyInitializeAndCleanup.RunAction("Restore Databases", CoreDatabaseUtil.AttachDatabase);
+                    AssemblyInitializeAndCleanup.RunAction("Drop Database", this.DatabaseUtil.DropDatabase);
+                    AssemblyInitializeAndCleanup.RunAction("Restore Databases", this.DatabaseUtil.AttachDatabase);
                     break;
             }
 
-            //this.AuthHelper.LoginAs();
-
             this.ClearNotifications();
             this.ClearIntegrationEvents();
-
-            this.SetCurrentDateTime(DateTime.Now);
         }
 
         [TestCleanup]
         public void BaseTestCleanup()
         {
-            this.ClearNotifications();
-            this.ClearIntegrationEvents();
+            if (ConfigUtil.UseLocalDb || ConfigUtil.TestRunMode == TestRunMode.DefaultRunModeOnEmptyDatabase)
+            {
+                AssemblyInitializeAndCleanup.RunAction("Drop Database", this.DatabaseUtil.DropDatabase);
+            }
 
-            this.SetCurrentDateTime(DateTime.Now);
+            this.RootServiceProvider.GetRequiredService<NHibSessionEnvironment>().Dispose();
         }
 
         /// <summary>
         /// Set Date for DateTimeService <c>this.Context.DateTimeService.Today</c>
         /// </summary>
         /// <param name="dateTime"></param>
-        protected void SetCurrentDateTime(DateTime? dateTime)
+        protected void SetCurrentDateTime(DateTime dateTime)
         {
-            IntegrationTestDateTimeService.CurrentDate = dateTime;
-        }
-
-        /// <summary>
-        /// Set Date for DateTimeService <c>this.Context.DateTimeService.Today</c>
-        /// </summary>
-        /// <remarks>Day in Month is used to calculate needed DateTime</remarks>
-        /// <param name="day">Set day in Month</param>
-        /// <param name="month">Current Month is used by default</param>
-        protected void SetCurrentDay(int day, DateTime? month = null)
-        {
-            var date = month ?? DateTime.Today.ToMonth().StartDate;
-
-            IntegrationTestDateTimeService.CurrentDate = new DateTime(date.Year, date.Month, 1).SubtractDay();
+            this.DateTimeService.SetCurrentDateTime(dateTime);
         }
 
         /// <summary>

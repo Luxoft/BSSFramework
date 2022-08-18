@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-
+using Automation.ServiceEnvironment;
 using Automation.Utils;
 
 using Framework.Authorization.Domain;
@@ -10,7 +10,6 @@ using Framework.DomainDriven.BLL;
 using JetBrains.Annotations;
 
 using SampleSystem.BLL;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests.__Support.Utils.Framework
 {

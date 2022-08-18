@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Linq.Expressions;
-
+using Automation.ServiceEnvironment;
 using Framework.Core;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -36,9 +34,6 @@ public static class RootServiceProviderContainerExtensions
     {
         return rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IDateTimeService>();
     }
-
-
-
 
     public static TResult EvaluateWrite<TResult>(this IRootServiceProviderContainer rootServiceProviderContainer, Func<ISampleSystemBLLContext, TResult> func)
     {

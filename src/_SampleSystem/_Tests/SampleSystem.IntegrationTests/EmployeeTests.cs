@@ -4,7 +4,7 @@ using System.Data.SqlTypes;
 using System.Linq;
 
 using Automation.Utils;
-
+using Automation.Utils.DatabaseUtils;
 using FluentAssertions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -41,7 +41,9 @@ namespace SampleSystem.IntegrationTests
 
             // Arrange
             this.DataHelper.SaveEmployee(Guid.NewGuid(), age: 10);
-            CoreDatabaseUtil.ExecuteSql("INSERT INTO [app].[Employee] ([id], age) VALUES (NewId(), null)");
+            CoreDatabaseUtil.ExecuteSql(
+                this.DatabaseUtil.DatabaseContext.MainDatabase.ConnectionString,
+                "INSERT INTO [app].[Employee] ([id], age) VALUES (NewId(), null)");
 
             // Act, IntegrationNamespace
             var actual = this.GetContextEvaluator().Evaluate(DBSessionMode.Read,
@@ -247,7 +249,9 @@ namespace SampleSystem.IntegrationTests
             var restFacade = this.GetConfigurationControllerEvaluator();
 
             // Act
-            var processedModCount = restFacade.WithIntegrationImpersonate().Evaluate(c => c.ProcessModifications(1000));
+            var processedModCount = restFacade
+                .WithImpersonate(DefaultConstants.INTEGRATION_USER)
+                .Evaluate(c => c.ProcessModifications(1000));
 
             // Assert
             var modifications = this.GetModifications();
@@ -278,7 +282,7 @@ namespace SampleSystem.IntegrationTests
             var preProcessedModificationState = restFacade.Evaluate(c => c.GetModificationQueueProcessingState());
             var preProcessedNotificationState = restFacade.Evaluate(c => c.GetNotificationQueueProcessingState());
 
-            restFacade.WithIntegrationImpersonate().Evaluate(c => c.ProcessModifications(1000));
+            restFacade.WithImpersonate(DefaultConstants.INTEGRATION_USER).Evaluate(c => c.ProcessModifications(1000));
 
             var postProcessedModificationState = restFacade.Evaluate(c => c.GetModificationQueueProcessingState());
             var postProcessedNotificationState = restFacade.Evaluate(c => c.GetNotificationQueueProcessingState());

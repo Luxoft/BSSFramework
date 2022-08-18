@@ -1,14 +1,11 @@
 ﻿using System;
-
+using Automation.ServiceEnvironment;
 using Automation.Utils;
 
 using Framework.Authorization.Generated.DTO;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
 
-using SampleSystem.BLL;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
 using BusinessRole = SampleSystem.IntegrationTests.__Support.Utils.BusinessRole;
 

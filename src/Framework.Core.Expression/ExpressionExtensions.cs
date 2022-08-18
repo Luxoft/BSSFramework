@@ -582,7 +582,7 @@ namespace Framework.Core
                     }
                     else
                     {
-                        currentExpr = methodCallExpression.Object;
+                        currentExpr = methodCallExpression.Object ?? methodCallExpression.Arguments.First();
                     }
                 }
                 else

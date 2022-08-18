@@ -1,16 +1,15 @@
 using System.Collections.Generic;
 using Microsoft.SqlServer.Management.Smo;
 
-namespace Automation.Utils.DatabaseUtils.Interfaces
+namespace Automation.Utils.DatabaseUtils.Interfaces;
+
+public interface IDatabaseContext
 {
-    public interface IDatabaseContext
-    {
-        public DatabaseItem MainDatabase { get; }
+    public DatabaseItem MainDatabase { get; }
 
-        public Dictionary<string, DatabaseItem> SecondaryDatabases { get; }
+    public Dictionary<string, DatabaseItem> SecondaryDatabases { get; }
 
-        public Server Server { get; }
+    public Server Server { get; }
 
-        public void Dispose();
-    }
+    public void Dispose();
 }

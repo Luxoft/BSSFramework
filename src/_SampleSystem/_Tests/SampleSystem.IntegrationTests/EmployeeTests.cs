@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
-
+using Automation.ServiceEnvironment;
 using Automation.Utils;
 using Automation.Utils.DatabaseUtils;
 using FluentAssertions;
@@ -25,6 +25,7 @@ using Framework.OData;
 using NHibernate.Impl;
 
 using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests
 {
@@ -42,11 +43,11 @@ namespace SampleSystem.IntegrationTests
             // Arrange
             this.DataHelper.SaveEmployee(Guid.NewGuid(), age: 10);
             CoreDatabaseUtil.ExecuteSql(
-                this.DatabaseUtil.DatabaseContext.MainDatabase.ConnectionString,
+                this.DatabaseContext.Main.ConnectionString,
                 "INSERT INTO [app].[Employee] ([id], age) VALUES (NewId(), null)");
 
             // Act, IntegrationNamespace
-            var actual = this.GetContextEvaluator().Evaluate(DBSessionMode.Read,
+            var actual = this.Evaluate(DBSessionMode.Read,
                 ctx => ctx.Logics.Employee.GetUnsecureQueryable().Where(q => q.Age == 10).ToList());
 
             // Assert
@@ -316,18 +317,13 @@ namespace SampleSystem.IntegrationTests
         [Ignore]
         public void EventListenerTest()
         {
-            this.GetContextEvaluator().Evaluate(DBSessionMode.Write,
-                                             (_, dbContext) =>
-                                             {
-                                                 var writeNhibSession = dbContext as WriteNHibSession;
-
-
-                                                 var impl = writeNhibSession.InnerSession as SessionImpl;
-
-
-
-                                                 return;
-                                             });
+            this.Evaluate(DBSessionMode.Write,
+                (_, dbContext) =>
+                {
+                    var writeNhibSession = dbContext as WriteNHibSession;
+                    var impl = writeNhibSession.InnerSession as SessionImpl;
+                    return;
+                });
         }
 
 
@@ -353,7 +349,7 @@ namespace SampleSystem.IntegrationTests
             var buIdentity = this.DataHelper.SaveBusinessUnit();
 
             // Act
-            var isVirtualResult = this.GetContextEvaluator().Evaluate(DBSessionMode.Read, ctx =>
+            var isVirtualResult = this.Evaluate(DBSessionMode.Read, ctx =>
             {
                 var filter = new TestEmployeeFilter
                 {

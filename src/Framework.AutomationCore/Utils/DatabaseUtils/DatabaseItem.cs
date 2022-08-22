@@ -9,22 +9,18 @@ namespace Automation.Utils.DatabaseUtils;
 public class DatabaseItem : IDatabaseItem
 {
     private SqlConnectionStringBuilder builder;
+    private ConfigUtil configUtil;
 
-    public DatabaseItem(string connectionString, string initialCatalog = null)
+    public DatabaseItem(
+        ConfigUtil configUtil,
+        string connectionString, string initialCatalog = null)
     {
+        this.configUtil = configUtil;
         this.builder = new SqlConnectionStringBuilder(connectionString);
         initialCatalog ??= this.builder.InitialCatalog;
-        this.DatabaseName = ConfigUtil.RandomizeDatabaseName
-            ? TextRandomizer.RandomString(initialCatalog, 14)
+        this.DatabaseName = this.configUtil.RandomizeDatabaseName
+            ? $"{initialCatalog}{TextRandomizer.RandomString(5)}"
             : initialCatalog;
-
-        if (ConfigUtil.UseLocalDb)
-        {
-            this.SetLocalDbInstance(
-                ConfigUtil.RandomizeDatabaseName
-                    ? TextRandomizer.RandomString(ConfigUtil.SystemName, 14)
-                    : initialCatalog);
-        }
 
         var fileName = $"{this.InstanceName}_{this.DatabaseName}_{TextRandomizer.RandomString(5)}";
 
@@ -55,25 +51,21 @@ public class DatabaseItem : IDatabaseItem
     public string SourceDataPath { get; }
     public string SourceLogPath { get; }
 
-    private static string ToSourceDataPath(string fileName) => ToWorkPath(SourceDataFile(fileName));
+    private string ToSourceDataPath(string fileName) => ToWorkPath(SourceDataFile(fileName));
 
-    private static string ToSourceLogPath(string fileName) => ToWorkPath(SourceLogFile(fileName));
+    private string ToSourceLogPath(string fileName) => ToWorkPath(SourceLogFile(fileName));
 
-    private static string ToCopyDataPath(string initialCatalog) => ToWorkPath(CopyDataFile(initialCatalog));
+    private string ToCopyDataPath(string initialCatalog) => ToWorkPath(CopyDataFile(initialCatalog));
 
-    private static string ToCopyLogPath(string initialCatalog) => ToWorkPath(CopyLogFile(initialCatalog));
+    private string ToCopyLogPath(string initialCatalog) => ToWorkPath(CopyLogFile(initialCatalog));
 
-    private static string CopyDataFile(string initialCatalog) => CoreDatabaseUtil.BackupNamePrefix + $"{initialCatalog}.mdf";
+    private string CopyDataFile(string initialCatalog) =>$"{this.configUtil.SystemName}_{Environment.UserName}_{initialCatalog}.mdf";
 
-    private static string CopyLogFile(string initialCatalog) => CoreDatabaseUtil.BackupNamePrefix + $"{initialCatalog}_log.ldf";
+    private string CopyLogFile(string initialCatalog) => $"{this.configUtil.SystemName}_{Environment.UserName}_{initialCatalog}_log.ldf";
 
     private static string SourceDataFile(string fileName) => $"{fileName}.mdf";
 
     private static string SourceLogFile(string fileName) => $"{fileName}_log.ldf";
 
-    private static string ToWorkPath(string fileName) => Path.Combine(ConfigUtil.DbDataDirectory, fileName);
-
-    private void SetLocalDbInstance(string instanceName) => this.builder.DataSource = $"(localdb)\\{instanceName}";
-
-    public bool IsLocalDb => this.builder.DataSource.StartsWith("(localdb)", StringComparison.InvariantCultureIgnoreCase);
+    private string ToWorkPath(string fileName) => Path.Combine(this.configUtil.DbDataDirectory, fileName);
 }

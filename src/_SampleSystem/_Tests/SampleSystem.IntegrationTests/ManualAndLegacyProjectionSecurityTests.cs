@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-
+using Automation.ServiceEnvironment;
 using FluentAssertions;
 
 using Framework.Authorization.Domain;
@@ -91,7 +91,7 @@ namespace SampleSystem.IntegrationTests
             // Arrange
 
             // Act
-            var items = this.GetContextEvaluator().Evaluate(DBSessionMode.Read, TestEmployeeLogin, ctx =>
+            var items = this.Evaluate(DBSessionMode.Read, TestEmployeeLogin, ctx =>
             {
                 var bll = ctx.Logics.TestLegacyEmployeeFactory.Create(BLLSecurityMode.View);
 

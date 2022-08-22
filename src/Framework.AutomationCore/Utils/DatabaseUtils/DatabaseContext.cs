@@ -9,39 +9,37 @@ namespace Automation.Utils.DatabaseUtils;
 public class DatabaseContext : IDatabaseContext
 {
     public DatabaseContext(
-        string connectionString,
-        string[] secondaryDatabases = null)
+        ConfigUtil configUtil,
+        DatabaseContextSettings settings)
     {
-        this.MainDatabase = new DatabaseItem(connectionString);
+        this.Main = new DatabaseItem(configUtil, settings.ConnectionString);
 
-        if (secondaryDatabases != null)
+        if (settings.SecondaryDatabases != null)
         {
-            this.SecondaryDatabases = new Dictionary<string, DatabaseItem>();
-            foreach (var database in secondaryDatabases)
+            this.Secondary = new Dictionary<string, DatabaseItem>();
+            foreach (var database in settings.SecondaryDatabases)
             {
-                this.SecondaryDatabases.Add(database, new DatabaseItem(connectionString, database));
+                this.Secondary.Add(database, new DatabaseItem(configUtil, settings.ConnectionString, database));
             }
         }
 
         this.Server = new Server(new ServerConnection(new SqlConnection(
-            CoreDatabaseUtil.CutInitialCatalog(this.MainDatabase.ConnectionString))));
-
-        if (ConfigUtil.UseLocalDb && !CoreDatabaseUtil.LocalDbInstanceExists(this.MainDatabase.InstanceName))
-        {
-            CoreDatabaseUtil.CreateLocalDb(this.MainDatabase.InstanceName);
-        }
+            CoreDatabaseUtil.CutInitialCatalog(this.Main.ConnectionString))));
     }
 
-    public Dictionary<string, DatabaseItem> SecondaryDatabases { get; }
-
+    public Dictionary<string, DatabaseItem> Secondary { get; }
     public Server Server { get; }
-    public DatabaseItem MainDatabase { get; }
+    public DatabaseItem Main { get; }
+}
 
-    public void Dispose()
+public class DatabaseContextSettings
+{
+    public string ConnectionString { get; set; }
+    public string[] SecondaryDatabases { get; set; }
+
+    public DatabaseContextSettings(string connectionString, string[] secondaryDatabases)
     {
-        if (ConfigUtil.UseLocalDb)
-        {
-            CoreDatabaseUtil.DeleteLocalDb(this.MainDatabase.InstanceName);
-        }
+        this.ConnectionString = connectionString;
+        this.SecondaryDatabases = secondaryDatabases;
     }
 }

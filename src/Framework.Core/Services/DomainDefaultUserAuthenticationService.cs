@@ -1,4 +1,4 @@
-﻿namespace SampleSystem.WebApiCore.Env;
+﻿namespace Framework.Core.Services;
 
 public class DomainDefaultUserAuthenticationService : IDefaultUserAuthenticationService
 {

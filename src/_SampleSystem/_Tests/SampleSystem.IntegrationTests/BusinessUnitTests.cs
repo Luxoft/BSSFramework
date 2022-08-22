@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
-
+using Automation.Utils;
 using FluentAssertions;
 
 using Framework.Authorization.BLL;
@@ -13,9 +13,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
-using SampleSystem.IntegrationTests.__Support.Utils.Framework;
 using SampleSystem.WebApiCore.Controllers.Main;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 
@@ -38,52 +36,54 @@ namespace SampleSystem.IntegrationTests
             var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
 
             var luxoftBuId = this.DataHelper.SaveBusinessUnit(
-                                                              id: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_ID,
-                                                              name: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_NAME,
-                                                              type: buTypeId);
+                id: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_ID,
+                name: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_NAME,
+                type: buTypeId);
 
             this.DataHelper.SaveBusinessUnit(
-                                             id: DefaultConstants.BUSINESS_UNIT_PARENT_CC_ID,
-                                             name: DefaultConstants.BUSINESS_UNIT_PARENT_CC_NAME,
-                                             type: buTypeId,
-                                             parent: luxoftBuId);
+                id: DefaultConstants.BUSINESS_UNIT_PARENT_CC_ID,
+                name: DefaultConstants.BUSINESS_UNIT_PARENT_CC_NAME,
+                type: buTypeId,
+                parent: luxoftBuId);
 
             this.DataHelper.SaveBusinessUnit(
-                                             id: DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID,
-                                             name: DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME,
-                                             type: buTypeId,
-                                             parent: luxoftBuId);
+                id: DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID,
+                name: DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME,
+                type: buTypeId,
+                parent: luxoftBuId);
 
-            this.GetContextEvaluator().Evaluate(
-                                                 DBSessionMode.Write,
-                                                 context =>
-                                                 {
-                                                     var authContext = context.Authorization;
+            this.Evaluate(
+                DBSessionMode.Write,
+                context =>
+                {
+                    var authContext = context.Authorization;
 
-                                                     var principalBll = authContext.Logics.Principal;
-                                                     var principal = principalBll.GetByNameOrCreate(EmployeeName, true);
+                    var principalBll = authContext.Logics.Principal;
+                    var principal = principalBll.GetByNameOrCreate(EmployeeName, true);
 
-                                                     var entityType = authContext.Logics.EntityType.GetByName(nameof(BusinessUnit));
+                    var entityType = authContext.Logics.EntityType.GetByName(nameof(BusinessUnit));
 
-                                                     Expression<Func<PermissionFilterEntity, bool>> entitySearchFilter =
-                                                             entity =>
-                                                                 entity.EntityType == entityType
-                                                                 && entity.EntityId == DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID;
+                    Expression<Func<PermissionFilterEntity, bool>> entitySearchFilter =
+                        entity =>
+                            entity.EntityType == entityType
+                            && entity.EntityId == DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID;
 
-                                                     var filterEntity = authContext.Logics.PermissionFilterEntity.GetObjectBy(entitySearchFilter) ?? new PermissionFilterEntity
-                                                     {
-                                                         EntityType = entityType,
-                                                         EntityId = DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID
-                                                     }.Self(bu => authContext.Logics.PermissionFilterEntity.Save(bu));
+                    var filterEntity = authContext.Logics.PermissionFilterEntity.GetObjectBy(entitySearchFilter) ??
+                                       new PermissionFilterEntity
+                                       {
+                                           EntityType = entityType,
+                                           EntityId = DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID
+                                       }.Self(bu => authContext.Logics.PermissionFilterEntity.Save(bu));
 
-                                                     var permission = new Permission(principal);
+                    var permission = new Permission(principal);
 
-                                                     permission.Role = authContext.Logics.BusinessRole.GetByName(EditEmployeeRoleName) ?? this.CreateEditEmployeeRole(authContext);
+                    permission.Role = authContext.Logics.BusinessRole.GetByName(EditEmployeeRoleName) ??
+                                      this.CreateEditEmployeeRole(authContext);
 
-                                                     new PermissionFilterItem(permission) { Entity = filterEntity };
+                    new PermissionFilterItem(permission) { Entity = filterEntity };
 
-                                                     principalBll.Save(principal);
-                                                 });
+                    principalBll.Save(principal);
+                });
         }
 
         private BusinessRole CreateEditEmployeeRole(IAuthorizationBLLContext authContext)
@@ -179,7 +179,7 @@ namespace SampleSystem.IntegrationTests
                 .EvaluateWrite(
                                context =>
                                {
-                                   var period = new Period(this.GetDateTimeService().CurrentFinancialYear.StartDate
+                                   var period = new Period(this.DateTimeService.CurrentFinancialYear.StartDate
                                                                   .AddYears(-1));
                                    var accountType = context.Logics.BusinessUnitType.GetById(buAccountId.Id);
 
@@ -190,7 +190,7 @@ namespace SampleSystem.IntegrationTests
                                            {
                                                Id = Guid.NewGuid(),
                                                Active = true,
-                                               Name = StringUtil.UniqueString("Account"),
+                                               Name = TextRandomizer.UniqueString("Account"),
                                                IsPool = true,
                                                BusinessUnitStatus = BusinessUnitStatus.Current,
                                                IsProduction = true,

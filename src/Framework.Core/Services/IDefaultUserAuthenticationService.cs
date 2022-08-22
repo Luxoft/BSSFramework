@@ -1,6 +1,4 @@
-﻿using Framework.Core.Services;
-
-namespace SampleSystem.WebApiCore.Env;
+﻿namespace Framework.Core.Services;
 
 public interface IDefaultUserAuthenticationService : IUserAuthenticationService
 {

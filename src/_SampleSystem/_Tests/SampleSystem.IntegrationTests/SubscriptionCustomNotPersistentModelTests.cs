@@ -1,7 +1,7 @@
 ﻿using System;
 
 using ASP;
-
+using Automation.ServiceEnvironment;
 using FluentAssertions;
 
 using Framework.DomainDriven;
@@ -20,7 +20,7 @@ namespace SampleSystem.IntegrationTests
         public void CustomNotPersistentNotificationModel_Always_ShouldNotThrowException()
         {
             // Arrange
-            var countryId = this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            var countryId = this.Evaluate(DBSessionMode.Write, context =>
             {
                 var country = new Country
                 {
@@ -49,7 +49,7 @@ namespace SampleSystem.IntegrationTests
             this.ClearModifications();
 
             // Act
-            this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            this.Evaluate(DBSessionMode.Write, context =>
             {
                 var bll = context.Logics.Country;
 

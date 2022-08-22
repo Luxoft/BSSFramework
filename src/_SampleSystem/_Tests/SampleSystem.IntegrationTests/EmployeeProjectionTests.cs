@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-
+using Automation.ServiceEnvironment;
 using FluentAssertions;
 
 using Framework.Authorization.Domain;
@@ -53,7 +53,7 @@ namespace SampleSystem.IntegrationTests
             this.DataHelper.SaveEmployee(login: TestEmployee2Login, coreBusinessUnit: profitBuId);
             this.DataHelper.SaveEmployee(login: TestEmployee3Login, coreBusinessUnit: costBuId);
 
-            this.GetContextEvaluator().Evaluate(
+            this.Evaluate(
                 DBSessionMode.Write,
                 context =>
                 {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Automation.Utils;
+using Automation.Extensions;
 
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.Utils;

@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using Automation.ServiceEnvironment;
+using FluentAssertions;
 
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
@@ -48,7 +49,7 @@ namespace SampleSystem.IntegrationTests
             var empId2 = this.DataHelper.SaveEmployee(login: TestEmployee1Login, coreBusinessUnit: costBuId, nameEng: new Fio { FirstName = "BB" });
             var empId3 = this.DataHelper.SaveEmployee(login: TestEmployee2Login, coreBusinessUnit: profitBuId, nameEng: new Fio { FirstName = "CC" });
 
-            this.GetContextEvaluator().Evaluate(
+            this.Evaluate(
                 DBSessionMode.Write,
                 context =>
                 {

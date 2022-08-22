@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-
+using Automation.ServiceEnvironment;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
@@ -20,10 +20,10 @@ namespace SampleSystem.IntegrationTests
         [TestMethod]
         public void GetEmployee_ToManyFilterParameters_CheckTimeTest()
         {
-            var preEvaluate = this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context => context.Logics.Employee.GetUnsecureQueryable().First());
+            var preEvaluate = this.Evaluate(DBSessionMode.Write, context => context.Logics.Employee.GetUnsecureQueryable().First());
 
             var task = System.Threading.Tasks.Task.Run(() =>
-                                                           this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+                                                           this.Evaluate(DBSessionMode.Write, context =>
                                                            {
                                                                Expression<Func<Employee, bool>> filter = z => false;
 

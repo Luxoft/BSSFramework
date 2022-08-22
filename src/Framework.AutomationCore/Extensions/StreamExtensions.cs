@@ -20,9 +20,8 @@ public static class StreamExtensions
         throw new Exception($"Worksheet with name '{sheetName}' not found. Check worksheet name.");
     }
 
-    public static void Save(this Stream stream, string folder = null, string fileName = null, string extension = "xlsx")
+    public static void Save(this Stream stream, string folder, string fileName = null, string extension = "xlsx")
     {
-        folder ??= ConfigUtil.TempFolder;
         fileName = fileName != null ? $"{fileName}.{extension}" : $"report_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.{extension}";
         var filePath = Path.Combine(folder, fileName);
 

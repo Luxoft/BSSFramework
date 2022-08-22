@@ -106,7 +106,7 @@ public class ControllerEvaluator<TController>
             }
             else
             {
-                await context.RequestServices.GetRequiredService<TestUserAuthenticationService>().WithImpersonateAsync(customPrincipalName, async () =>
+                await context.RequestServices.GetRequiredService<IntegrationTestUserAuthenticationService>().WithImpersonateAsync(customPrincipalName, async () =>
                 {
                     await this.next(context);
                     return default(object);

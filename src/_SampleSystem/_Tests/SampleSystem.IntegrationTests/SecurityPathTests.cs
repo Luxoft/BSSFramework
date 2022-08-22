@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-
+using Automation.ServiceEnvironment;
 using FluentAssertions;
 
 using Framework.Authorization.Domain;
@@ -33,7 +33,7 @@ namespace SampleSystem.IntegrationTests
             var employeeIdentity = this.DataHelper.SaveEmployee(Guid.NewGuid());
 
             // Act
-            var result = this.GetContextEvaluator().Evaluate(
+            var result = this.Evaluate(
                 DBSessionMode.Read,
                 context =>
                 {

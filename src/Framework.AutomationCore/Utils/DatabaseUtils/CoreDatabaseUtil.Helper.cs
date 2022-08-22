@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.SqlServer.Management.Smo;
 
@@ -8,15 +9,11 @@ public static partial class CoreDatabaseUtil
 {
     private static readonly Regex InitialCatalogRegex = new Regex("Initial Catalog=(\\w+);", RegexOptions.Compiled);
 
-    private static readonly Regex LocalDbInstanceName = new Regex("\\(localdb\\)\\\\(\\w+)", RegexOptions.Compiled);
-
     public static string CutInitialCatalog(string inputConnectionString) =>
         InitialCatalogRegex.Replace(inputConnectionString,"");
 
-    public static string GetLocalDbInstanceName(string connectionString) =>
-        LocalDbInstanceName.Replace(connectionString,"");
-
-    public static string BackupNamePrefix => $"{ConfigUtil.SystemName}_{ConfigUtil.UserName}_";
+    private static string GetInitialCatalog(string connectionString) =>
+        InitialCatalogRegex.Matches(connectionString).First().Value;
 
     private static Table GetTable(this Server server, string databaseName, string tableName)
     {
@@ -26,8 +23,6 @@ public static partial class CoreDatabaseUtil
     }
 
     public static long TableRowCount(this Server server, string databaseName, string tableName) => server.GetTable(databaseName, tableName)?.RowCount ?? 0;
-
-    private static string ToWorkPath(string fileName) => Path.Combine(ConfigUtil.DbDataDirectory, fileName);
 
     private static void SetModeRestrictedUser(this Server server, string databaseName)
     {

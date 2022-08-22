@@ -7,11 +7,11 @@ namespace Automation.ServiceEnvironment.Services;
 /// <summary>
 /// Реализация интерфейса <see cref="IDateTimeService"/> для интеграционных тестов
 /// </summary>
-public class TestDateTimeService : IDateTimeService
+public class IntegrationTestDateTimeService : IDateTimeService
 {
     private Func<DateTime> GetNow;
 
-    public TestDateTimeService() => this.GetNow = () => DateTime.Now;
+    public IntegrationTestDateTimeService() => this.GetNow = () => DateTime.Now;
 
     public DateTime Now => this.GetNow();
 

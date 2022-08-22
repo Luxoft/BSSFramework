@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
-
+using Automation.ServiceEnvironment;
 using FluentAssertions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;

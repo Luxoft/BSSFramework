@@ -26,9 +26,8 @@ namespace SampleSystem.IntegrationTests.Reports
             return sheet;
         }
 
-        public static void Save(this Stream stream, string folder = null, string fileName = null, string extension = ".xlsm")
+        public static void Save(this Stream stream, string folder, string fileName = null, string extension = ".xlsm")
         {
-            folder = folder ?? ConfigUtil.TempFolder;
             fileName = fileName ?? $"report_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.{extension}";
             var filePath = Path.Combine(folder, fileName);
 

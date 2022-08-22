@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-
+using Automation.ServiceEnvironment;
 using FluentAssertions;
 
 using Framework.Core;
@@ -13,6 +13,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 using BusinessRole = SampleSystem.IntegrationTests.__Support.Utils.BusinessRole;
@@ -29,7 +30,6 @@ namespace SampleSystem.IntegrationTests
         private EmployeeIdentityDTO TestEmp2;
 
         private EmployeeIdentityDTO TestEmp3;
-
 
         private BusinessUnitIdentityDTO bu1Ident;
 
@@ -78,7 +78,7 @@ namespace SampleSystem.IntegrationTests
             });
 
             // Act
-            var items = this.GetContextEvaluator().Evaluate (DBSessionMode.Read, TestEmployeeLogin, context =>
+            var items = this.Evaluate (DBSessionMode.Read, TestEmployeeLogin, context =>
             {
                 var employees = context.Logics.EmployeeFactory.Create(createProviderFunc(context)).GetSecureQueryable().ToList();
 

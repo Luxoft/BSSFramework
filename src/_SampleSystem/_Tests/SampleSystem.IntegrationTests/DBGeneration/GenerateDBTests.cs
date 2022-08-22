@@ -20,10 +20,11 @@ namespace SampleSystem.IntegrationTests.DBGeneration
 
             // Act
             var action = new Action(() => generator.GenerateAllDB(
-                this.DatabaseUtil.DatabaseContext.MainDatabase.DataSource,
+                this.DatabaseContext.Main.DataSource,
+                this.DatabaseContext.Main.DatabaseName,
                 credential: UserCredential.Create(
-                    this.DatabaseUtil.DatabaseContext.MainDatabase.UserId,
-                    this.DatabaseUtil.DatabaseContext.MainDatabase.Password)));
+                    this.DatabaseContext.Main.UserId,
+                    this.DatabaseContext.Main.Password)));
 
             // Assert
             action.Should().NotThrow();

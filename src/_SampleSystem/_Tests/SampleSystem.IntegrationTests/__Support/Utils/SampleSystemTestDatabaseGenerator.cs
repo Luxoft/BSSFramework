@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Automation.Utils;
 using Automation.Utils.DatabaseUtils;
 using Automation.Utils.DatabaseUtils.Interfaces;
@@ -16,55 +15,57 @@ using WorkflowCore.Interface;
 
 namespace SampleSystem.IntegrationTests.Support.Utils
 {
-    public class SampleSystemDatabaseUtil : BaseDatabaseUtil
+    public class SampleSystemTestDatabaseGenerator : TestDatabaseGenerator
     {
         protected override IEnumerable<string> TestServers => new List<string> { "." };
 
-        public SampleSystemDatabaseUtil(IDatabaseContext databaseContext) : base(databaseContext)
+        private readonly IServiceProvider ServiceProvider;
+
+        public SampleSystemTestDatabaseGenerator(IDatabaseContext databaseContext, ConfigUtil configUtil, IServiceProvider serviceProvider)
+            : base(databaseContext, configUtil)
         {
+            this.ServiceProvider = serviceProvider;
         }
 
         public override void GenerateDatabases()
         {
             new DbGeneratorTest().GenerateAllDB(
-                this.DatabaseContext.MainDatabase.DataSource,
-                mainDatabaseName: this.DatabaseContext.MainDatabase.DatabaseName,
+                this.DatabaseContext.Main.DataSource,
+                mainDatabaseName: this.DatabaseContext.Main.DatabaseName,
                 credential: UserCredential.Create(
-                    this.DatabaseContext.MainDatabase.UserId,
-                    this.DatabaseContext.MainDatabase.Password));
+                    this.DatabaseContext.Main.UserId,
+                    this.DatabaseContext.Main.Password));
         }
 
         public override void CheckTestDatabase()
         {
-            if (this.DatabaseContext.Server.TableRowCount(this.DatabaseContext.MainDatabase.DatabaseName, "Location") > 100)
+            if (this.DatabaseContext.Server.TableRowCount(this.DatabaseContext.Main.DatabaseName, "Location") > 100)
             {
                 throw new Exception(
                     "Location row count more than 100. Please ensure that you run tests in Test Environment. If you want to run tests in the environment, please delete all Location rows (Location table) manually and rerun tests.");
             }
         }
 
-        public override void GenerateTestData() => new TestDataInitialize(this.DatabaseContext).TestData();
+        public override void GenerateTestData() => new TestDataInitialize(this.ServiceProvider).TestData();
 
         public override void ExecuteInsertsForDatabases()
         {
             base.ExecuteInsertsForDatabases();
 
-            CoreDatabaseUtil.ExecuteSqlFromFolder(this.DatabaseContext.MainDatabase.ConnectionString, @"__Support/Scripts/Authorization", this.DatabaseContext.MainDatabase.DatabaseName);
-            CoreDatabaseUtil.ExecuteSqlFromFolder(this.DatabaseContext.MainDatabase.ConnectionString,@"__Support/Scripts/Configuration", this.DatabaseContext.MainDatabase.DatabaseName);
+            CoreDatabaseUtil.ExecuteSqlFromFolder(this.DatabaseContext.Main.ConnectionString, @"__Support/Scripts/Authorization", this.DatabaseContext.Main.DatabaseName);
+            CoreDatabaseUtil.ExecuteSqlFromFolder(this.DatabaseContext.Main.ConnectionString,@"__Support/Scripts/Configuration", this.DatabaseContext.Main.DatabaseName);
 
             this.GenerateWorkflowCoreDataBase();
 
-            CoreDatabaseUtil.ExecuteSqlFromFolder(this.DatabaseContext.MainDatabase.ConnectionString,@"__Support/Scripts/SampleSystem", this.DatabaseContext.MainDatabase.DatabaseName);
+            CoreDatabaseUtil.ExecuteSqlFromFolder(this.DatabaseContext.Main.ConnectionString,@"__Support/Scripts/SampleSystem", this.DatabaseContext.Main.DatabaseName);
 
-            new BssFluentMigrator(this.DatabaseContext.MainDatabase.ConnectionString, typeof(InitNumberInDomainObjectEventMigration).Assembly).Migrate();
+            new BssFluentMigrator(this.DatabaseContext.Main.ConnectionString, typeof(InitNumberInDomainObjectEventMigration).Assembly).Migrate();
         }
 
         private void GenerateWorkflowCoreDataBase()
         {
-            AppSettings.Initialize(nameof(SampleSystem) + "_");
-
             var serviceProvider = new ServiceCollection()
-                .AddWorkflowCore(this.DatabaseContext.MainDatabase.ConnectionString)
+                .AddWorkflowCore(this.DatabaseContext.Main.ConnectionString)
                 .BuildServiceProvider();
 
             var workflowHost = serviceProvider.GetRequiredService<IWorkflowHost>();

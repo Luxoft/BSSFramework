@@ -133,8 +133,8 @@ public static partial class CoreDatabaseUtil
 
     public static void Drop(this IDatabaseContext databaseContext)
     {
-        Drop(databaseContext.Server, databaseContext.MainDatabase.DatabaseName);
-        databaseContext.SecondaryDatabases?.ForEach(x => Drop(databaseContext.Server, x.Value.DatabaseName));
+        Drop(databaseContext.Server, databaseContext.Main.DatabaseName);
+        databaseContext.Secondary?.ForEach(x => Drop(databaseContext.Server, x.Value.DatabaseName));
     }
 
     private static void Drop(Server server, string databaseName)
@@ -183,8 +183,8 @@ public static partial class CoreDatabaseUtil
 
     public static void Create(this IDatabaseContext databaseContext)
     {
-        Create(databaseContext.Server, databaseContext.MainDatabase);
-        databaseContext.SecondaryDatabases?.ForEach(x => Create(databaseContext.Server, x.Value));
+        Create(databaseContext.Server, databaseContext.Main);
+        databaseContext.Secondary?.ForEach(x => Create(databaseContext.Server, x.Value));
     }
 
     private static void Create(Server server, IDatabaseItem database)
@@ -221,8 +221,8 @@ public static partial class CoreDatabaseUtil
 
     public static void CopyDetachedFiles(this IDatabaseContext databaseContext)
     {
-        CopyDetachedFiles(databaseContext.Server, databaseContext.MainDatabase);
-        databaseContext.SecondaryDatabases?.ForEach(x => CopyDetachedFiles(databaseContext.Server, x.Value));
+        CopyDetachedFiles(databaseContext.Server, databaseContext.Main);
+        databaseContext.Secondary?.ForEach(x => CopyDetachedFiles(databaseContext.Server, x.Value));
     }
 
     private static void CopyDetachedFiles(Server server, DatabaseItem database)
@@ -235,8 +235,8 @@ public static partial class CoreDatabaseUtil
 
     public static void AttachDatabase(this IDatabaseContext databaseContext)
     {
-        AttachDatabase(databaseContext.Server, databaseContext.MainDatabase);
-        databaseContext.SecondaryDatabases?.ForEach(x => AttachDatabase(databaseContext.Server, x.Value));
+        AttachDatabase(databaseContext.Server, databaseContext.Main);
+        databaseContext.Secondary?.ForEach(x => AttachDatabase(databaseContext.Server, x.Value));
     }
 
     private static void AttachDatabase(Server server, IDatabaseItem database)
@@ -271,15 +271,6 @@ public static partial class CoreDatabaseUtil
                 localDb.StartInstance(instanceInfo.Name);
             }
         }
-    }
-
-    public static void CreateUser(
-        string connectionString,
-        string user,
-        string password)
-    {
-        ExecuteSql(connectionString, $"CREATE LOGIN {user} WITH PASSWORD = '{password}'");
-        //ExecuteSql(connectionString, $"CREATE USER {user}");
     }
 
     public static void DeleteLocalDb(string instanceName)

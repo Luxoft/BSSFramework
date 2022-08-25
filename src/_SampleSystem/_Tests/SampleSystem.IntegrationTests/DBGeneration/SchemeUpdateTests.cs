@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.DbGenerate;
 using Automation.Utils;
+using Microsoft.Extensions.Configuration;
 
 namespace SampleSystem.IntegrationTests.DBGeneration
 {
@@ -20,7 +21,7 @@ namespace SampleSystem.IntegrationTests.DBGeneration
             var generator = new UseSchemeUpdateTest();
 
             // Act
-            var action = new Action(() => UseSchemeUpdateTest.UseSchemeUpdate(AppSettings.Default["ConnectionStrings"]));
+            var action = new Action(() => UseSchemeUpdateTest.UseSchemeUpdate(this.DatabaseContext.Main.ConnectionString));
 
             // Assert
             action.Should().NotThrow();

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-
+using Automation.ServiceEnvironment;
 using FluentAssertions;
 
 using Framework.Authorization.Domain;
@@ -47,7 +47,7 @@ namespace SampleSystem.IntegrationTests
                 type: buTypeId,
                 parent: luxoftBuId);
 
-            this.GetContextEvaluator().Evaluate(
+            this.Evaluate(
                 DBSessionMode.Write,
                 context =>
                 {
@@ -88,7 +88,7 @@ namespace SampleSystem.IntegrationTests
             // Act
             Action call = () =>
             {
-                this.GetContextEvaluator().Evaluate(
+                this.Evaluate(
                     DBSessionMode.Write,
                     context =>
                     {

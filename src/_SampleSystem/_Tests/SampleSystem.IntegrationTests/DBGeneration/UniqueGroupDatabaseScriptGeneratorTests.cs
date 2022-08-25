@@ -23,7 +23,7 @@ namespace SampleSystem.IntegrationTests.DBGeneration
 
             var tableName = "RoleRoleDegreeLink";
 
-            var table = this.DataHelper.GetTable(this.DatabaseUtil.DatabaseContext.MainDatabase.DatabaseName, tableName);
+            var table = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
             var indexName = "unilink_RoleRoleDegreeLink";
 
@@ -41,13 +41,15 @@ namespace SampleSystem.IntegrationTests.DBGeneration
 
             // Act
             generator.GenerateAllDB(
-                this.DatabaseUtil.DatabaseContext.MainDatabase.DataSource,
+                this.DatabaseContext.Main.DataSource,
+                this.DatabaseContext.Main.DatabaseName,
                 credential: UserCredential.Create(
-                    this.DatabaseUtil.DatabaseContext.MainDatabase.UserId,
-                    this.DatabaseUtil.DatabaseContext.MainDatabase.Password),
+                    this.DatabaseContext.Main.UserId,
+                    this.DatabaseContext.Main.Password),
                 skipFrameworkDatabases: true);
 
-            var changedTable = this.DataHelper.GetTable(this.DatabaseUtil.DatabaseContext.MainDatabase.DatabaseName, tableName);
+            var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+          //  changedTable.Indexes.Refresh();
             var indexes = changedTable.Indexes.Cast<Index>().ToList();
 
             // Assert

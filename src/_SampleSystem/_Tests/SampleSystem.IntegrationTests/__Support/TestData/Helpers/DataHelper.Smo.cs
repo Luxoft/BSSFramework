@@ -10,7 +10,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             {
                 ConnectionContext =
                 {
-                    ConnectionString = this.DatabaseContext.MainDatabase.ConnectionString
+                    ConnectionString = this.DatabaseContext.Main.ConnectionString
                 }
             };
 

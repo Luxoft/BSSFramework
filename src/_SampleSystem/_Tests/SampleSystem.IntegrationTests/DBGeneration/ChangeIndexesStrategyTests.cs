@@ -22,7 +22,7 @@ namespace SampleSystem.IntegrationTests.DBGeneration
             var generator = new DbGeneratorTest();
 
             var tableName = "Employee";
-            var table = this.DataHelper.GetTable(this.DatabaseUtil.DatabaseContext.MainDatabase.DatabaseName, tableName);
+            var table = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
             var baseIndexName = "IX_Employee_coreBusinessUnitId";
             var newIndexName = "IX_Employee_coreBusinessUnitId_inc";
@@ -43,13 +43,14 @@ namespace SampleSystem.IntegrationTests.DBGeneration
 
             // Act
             generator.GenerateAllDB(
-                this.DatabaseUtil.DatabaseContext.MainDatabase.DataSource,
+                this.DatabaseContext.Main.DataSource,
+                this.DatabaseContext.Main.DatabaseName,
                 credential: UserCredential.Create(
-                    this.DatabaseUtil.DatabaseContext.MainDatabase.UserId,
-                    this.DatabaseUtil.DatabaseContext.MainDatabase.Password),
+                    this.DatabaseContext.Main.UserId,
+                    this.DatabaseContext.Main.Password),
                 skipFrameworkDatabases: true);
 
-            var changedTable = this.DataHelper.GetTable(this.DatabaseUtil.DatabaseContext.MainDatabase.DatabaseName, tableName);
+            var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
             // Assert
             changedTable.Indexes.Cast<Index>()
@@ -65,7 +66,7 @@ namespace SampleSystem.IntegrationTests.DBGeneration
             var generator = new DbGeneratorTest();
 
             var tableName = "Employee";
-            var table = this.DataHelper.GetTable(this.DatabaseUtil.DatabaseContext.MainDatabase.DatabaseName, tableName);
+            var table = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
             var ignoredIndexName = "IX_Employee_hRDepartmentId";
 
@@ -74,13 +75,14 @@ namespace SampleSystem.IntegrationTests.DBGeneration
 
             // Act
             generator.GenerateAllDB(
-                this.DatabaseUtil.DatabaseContext.MainDatabase.DataSource,
+                this.DatabaseContext.Main.DataSource,
+                this.DatabaseContext.Main.DatabaseName,
                 credential: UserCredential.Create(
-                    this.DatabaseUtil.DatabaseContext.MainDatabase.UserId,
-                    this.DatabaseUtil.DatabaseContext.MainDatabase.Password),
+                    this.DatabaseContext.Main.UserId,
+                    this.DatabaseContext.Main.Password),
                 ignoredIndexes: new[] { ignoredIndexName },
                 skipFrameworkDatabases: true);
-            var changedTable = this.DataHelper.GetTable(this.DatabaseUtil.DatabaseContext.MainDatabase.DatabaseName, tableName);
+            var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
             // Assert
             changedTable.Indexes.Cast<Index>()
@@ -96,13 +98,14 @@ namespace SampleSystem.IntegrationTests.DBGeneration
 
             // Act
             generator.GenerateAllDB(
-                this.DatabaseUtil.DatabaseContext.MainDatabase.DataSource,
+                this.DatabaseContext.Main.DataSource,
+                this.DatabaseContext.Main.DatabaseName,
                 credential: UserCredential.Create(
-                    this.DatabaseUtil.DatabaseContext.MainDatabase.UserId,
-                    this.DatabaseUtil.DatabaseContext.MainDatabase.Password),
+                    this.DatabaseContext.Main.UserId,
+                    this.DatabaseContext.Main.Password),
                 skipFrameworkDatabases: true);
 
-            var changedTable = this.DataHelper.GetTable(this.DatabaseUtil.DatabaseContext.MainDatabase.DatabaseName, "Employee");
+            var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, "Employee");
 
             // Assert
             changedTable.Indexes.Cast<Index>()

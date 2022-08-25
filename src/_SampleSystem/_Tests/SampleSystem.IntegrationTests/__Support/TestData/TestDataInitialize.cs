@@ -1,29 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using Automation;
 using Automation.Utils.DatabaseUtils.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-
+using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.IntegrationTests.__Support.Utils;
 using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData
 {
-    public class TestDataInitialize
+    public class TestDataInitialize : IntegrationTestContextEvaluator<ISampleSystemBLLContext>
     {
-        private readonly AuthHelper AuthHelper;
-        private readonly DataHelper DataHelper;
-        private readonly IServiceProvider RootServiceProvider;
-        public TestDataInitialize(IDatabaseContext databaseContext)
+        public TestDataInitialize(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
-            this.RootServiceProvider = SampleSystemTestRootServiceProvider.Create(databaseContext);
-            this.AuthHelper = this.RootServiceProvider.GetRequiredService<AuthHelper>();
-            this.DataHelper = this.RootServiceProvider.GetRequiredService<DataHelper>();
         }
+
+        private AuthHelper AuthHelper => this.RootServiceProvider.GetRequiredService<AuthHelper>();
+        private DataHelper DataHelper =>  this.RootServiceProvider.GetRequiredService<DataHelper>();
 
         public void TestData()
         {

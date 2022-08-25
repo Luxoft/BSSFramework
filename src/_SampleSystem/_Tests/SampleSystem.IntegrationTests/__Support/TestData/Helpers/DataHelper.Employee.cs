@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Automation.Utils;
 
 using Framework.Core;
@@ -7,8 +6,6 @@ using Framework.Core;
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
-using SampleSystem.IntegrationTests.__Support.Utils.Framework;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
 {
@@ -49,11 +46,11 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
 
             nameEng = nameEng ?? new Fio
             {
-                FirstName = StringUtil.RandomString("FirstName", 15),
-                LastName = StringUtil.RandomString("LastName", 15)
+                FirstName = TextRandomizer.RandomString("FirstName", 15),
+                LastName = TextRandomizer.RandomString("LastName", 15)
             };
             var nameTemp = nameEng;
-            nameTemp.MiddleName = StringUtil.RandomString("MiddleName", 15);
+            nameTemp.MiddleName = TextRandomizer.RandomString("MiddleName", 15);
 
             nameNative = nameNative ?? nameTemp;
             nameRussian = nameRussian ?? nameTemp;
@@ -62,7 +59,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
 
             if (login == null)
             {
-                login = $"{ConfigUtil.ComputerName}\\{nameEng.FirstName}";
+                login = $"{Environment.MachineName}\\{nameEng.FirstName}";
             }
             else if (login.Equals(DefaultConstants.EMPLOYEE_MY_LOGIN))
             {
@@ -101,7 +98,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
                 {
                     if (!saveEmployeeWithNullHireDate)
                     {
-                        hireDate = hireDate ?? this.GetDateTimeService().CurrentMonth.StartDate;
+                        hireDate = hireDate ?? this.DateTimeService.CurrentMonth.StartDate;
                     }
 
                     employee = new Employee
@@ -156,7 +153,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             bool active = true)
         {
             EmployeePosition position;
-            name = name ?? StringUtil.UniqueString("Position");
+            name = name ?? TextRandomizer.UniqueString("Position");
             englishName = englishName ?? name;
 
             var locationId = location != null ? ((LocationIdentityDTO)location).Id : DefaultConstants.LOCATION_PARENT_ID;
@@ -191,7 +188,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             bool active = true)
         {
             EmployeeRegistrationType type;
-            name = name ?? StringUtil.UniqueString("Type");
+            name = name ?? TextRandomizer.UniqueString("Type");
 
             return this.EvaluateWrite(
                 context =>
@@ -220,7 +217,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             bool active = true)
         {
             EmployeeRole role;
-            name = name ?? StringUtil.UniqueString("Role");
+            name = name ?? TextRandomizer.UniqueString("Role");
 
             return this.EvaluateWrite(
                 context =>
@@ -244,7 +241,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             bool active = true)
         {
             EmployeeRoleDegree roleDegree;
-            name = name ?? StringUtil.UniqueString("RoleDegree");
+            name = name ?? TextRandomizer.UniqueString("RoleDegree");
 
             return this.EvaluateWrite(
                 context =>
@@ -284,7 +281,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
                     var specialization = new EmployeeSpecialization
                     {
                         Id = id ?? Guid.NewGuid(),
-                        Name = name ?? StringUtil.UniqueString("EmployeeSpecialization")
+                        Name = name ?? TextRandomizer.UniqueString("EmployeeSpecialization")
                     };
 
                     context.Logics.EmployeeSpecialization.Insert(specialization, specialization.Id);

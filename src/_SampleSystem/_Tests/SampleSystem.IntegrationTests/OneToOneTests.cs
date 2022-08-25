@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Automation.ServiceEnvironment;
 using FluentAssertions;
 
 using Framework.DomainDriven;
@@ -23,7 +23,7 @@ namespace SampleSystem.IntegrationTests
             // Arrange
             var iMRequestQueryController = this.GetControllerEvaluator<IMRequestQueryController>();
 
-            var idents = this.GetContextEvaluator().Evaluate(
+            var idents = this.Evaluate(
                 DBSessionMode.Write,
                 context =>
                 {

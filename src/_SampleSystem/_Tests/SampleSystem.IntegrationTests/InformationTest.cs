@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-
+using Automation.ServiceEnvironment;
 using FluentAssertions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -27,7 +27,7 @@ namespace SampleSystem.IntegrationTests
             this.ClearIntegrationEvents();
 
             // Act
-            var id = this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            var id = this.Evaluate(DBSessionMode.Write, context =>
             {
                 var newObj = new Information() { Name = "ololo" };
 
@@ -36,7 +36,7 @@ namespace SampleSystem.IntegrationTests
                 return newObj.Id;
             });
 
-            this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            this.Evaluate(DBSessionMode.Write, context =>
             {
                 var obj = context.Logics.Information.GetById(id, true);
 

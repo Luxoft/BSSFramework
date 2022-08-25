@@ -9,7 +9,7 @@ public class IntegrationTestUserAuthenticationService : DomainDefaultUserAuthent
 {
     public string CustomUserName { get; private set; }
 
-    public string GetUserName()
+    public override string GetUserName()
     {
         return this.CustomUserName ?? base.GetUserName();
     }

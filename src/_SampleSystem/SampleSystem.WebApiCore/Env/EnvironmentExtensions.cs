@@ -128,7 +128,7 @@ namespace SampleSystem.WebApiCore
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            return services.AddWorkflowCore(configuration.GetConnectionString("WorkflowCoreConnectionString"));
+            return services.AddWorkflowCore(configuration.GetConnectionString("WorkflowCoreConnection"));
         }
 
         public static IServiceCollection AddWorkflowCore([NotNull] this IServiceCollection services, [NotNull] string connectionString)

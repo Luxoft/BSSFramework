@@ -1,14 +1,14 @@
 ﻿using Automation;
 using Automation.ServiceEnvironment;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using SampleSystem.BLL;
 using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.WebApiCore.Controllers;
-using DataHelper = SampleSystem.IntegrationTests.__Support.TestData.Helpers.DataHelper;
 
-[assembly: Parallelize(Scope = ExecutionScope.ClassLevel)]
 namespace SampleSystem.IntegrationTests.__Support.TestData
 {
     [TestClass]

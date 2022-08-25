@@ -31,7 +31,7 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                 .AddInMemoryCollection(new Dictionary<string, string>
                     {
                         { "ConnectionStrings:DefaultConnection", databaseContext.Main.ConnectionString },
-                        { "ConnectionStrings:WorkflowCoreConnectionString", databaseContext.Main.ConnectionString },
+                        { "ConnectionStrings:WorkflowCoreConnection", databaseContext.Main.ConnectionString },
                     }).Build();
 
             var provider = TestServiceProvider.Build(

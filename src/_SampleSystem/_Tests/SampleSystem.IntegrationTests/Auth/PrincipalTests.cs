@@ -108,7 +108,6 @@ namespace SampleSystem.IntegrationTests.Auth
         public void PermissionDelegate_CheckChanges()
         {
             // Arrange
-            var employeeController = this.MainWebApi.Employee;
             var currentUser = this.DataHelper.GetCurrentEmployee();
 
             var businessRoleIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName("SecretariatNotification")).Identity;

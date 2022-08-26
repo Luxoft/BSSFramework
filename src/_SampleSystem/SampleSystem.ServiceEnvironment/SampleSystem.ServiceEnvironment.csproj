@@ -10,8 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="WorkflowCore" Version="3.6.4" />
-    <PackageReference Include="WorkflowCore.Persistence.SqlServer" Version="3.6.4" />
+    <PackageReference Include="WorkflowCore" Version="3.6.5" />
+    <PackageReference Include="WorkflowCore.Persistence.SqlServer" Version="3.6.5" />
   </ItemGroup>
 
   <ItemGroup>

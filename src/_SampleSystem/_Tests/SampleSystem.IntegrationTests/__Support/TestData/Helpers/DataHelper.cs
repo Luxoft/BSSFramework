@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using Automation;
 using Automation.ServiceEnvironment;
 using Automation.Utils;
+
 using Framework.Configuration.Domain;
 using Framework.Configuration.Domain.Reports;
 using Framework.Configuration.Generated.DTO;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
+
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;

@@ -5,6 +5,7 @@ using Framework.Authorization.Domain;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
 using Framework.Core;
+using Framework.DependencyInjection;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.Notification;
@@ -14,7 +15,6 @@ using Framework.SecuritySystem;
 using Framework.SecuritySystem.Rules.Builders;
 
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Framework.DomainDriven.ServiceModel.IAD
 {
@@ -24,7 +24,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         {
             services.AddSingleton<IExceptionExpander, ExceptionExpander>();
 
-            services.AddScoped(sp => sp.GetRequiredService<IDBSession>().GetObjectStateService());
+            services.AddScopedFrom((IDBSession session) => session.GetObjectStateService());
 
             services.AddSingleton<IStandartExpressionBuilder, StandartExpressionBuilder>();
 
@@ -42,7 +42,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         {
             return services
 
-                   .AddScoped(sp => sp.GetRequiredService<IDBSession>().GetDALFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>())
+                   .AddScopedFrom((IDBSession session) => session.GetDALFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>())
 
                    .AddScoped<IOperationEventSenderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>, OperationEventSenderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>>()
 
@@ -75,7 +75,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         {
             return services
 
-                   .AddScoped(sp => sp.GetRequiredService<IDBSession>().GetDALFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>())
+                   .AddScopedFrom((IDBSession session) => session.GetDALFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>())
 
                    .AddScoped<IOperationEventSenderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>, OperationEventSenderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>>()
 
@@ -107,64 +107,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
 
                    .Self(ConfigurationSecurityServiceBase.Register)
                    .Self(ConfigurationBLLFactoryContainer.RegisterBLLFactory);
-        }
-
-        public static IServiceCollection AddScopedFromLazyInterfaceImplement<TInterface, TImplementation>(this IServiceCollection services)
-            where TImplementation: class, TInterface
-            where TInterface : class
-        {
-            return services.AddScoped<TImplementation>()
-                           .AddScoped(sp => LazyInterfaceImplementHelper.CreateProxy<TInterface>(() => sp.GetRequiredService<TImplementation>()));
-        }
-
-        public static IServiceCollection AddScopedFromLazy<TInterface, TImplementation>(this IServiceCollection services)
-                where TImplementation : class, TInterface
-                where TInterface : class
-        {
-            return services.AddScoped<TImplementation>()
-                           .AddScoped(sp => new Lazy<TInterface>(sp.GetRequiredService<TImplementation>))
-                           .AddScoped(sp => sp.GetRequiredService<Lazy<TInterface>>().Value);
-        }
-
-        public static IServiceCollection AddScopedFrom<TSource, TImplementation>(this IServiceCollection services)
-                where TImplementation : class, TSource
-                where TSource : class
-        {
-            return services.AddScoped<TSource>(sp => sp.GetRequiredService<TImplementation>());
-        }
-
-
-        public static IServiceCollection AddSingletonFrom<TSource, TImplementation>(this IServiceCollection services)
-                where TImplementation : class, TSource
-                where TSource : class
-        {
-            return services.AddSingleton<TSource>(sp => sp.GetRequiredService<TImplementation>());
-        }
-
-        public static IServiceCollection ReplaceScoped<TSource, TImplementation>(this IServiceCollection services)
-                where TImplementation : class, TSource
-                where TSource : class
-        {
-            return services.Replace(ServiceDescriptor.Scoped<TSource, TImplementation>());
-        }
-        public static IServiceCollection ReplaceScopedFrom<TSource, TImplementation>(this IServiceCollection services)
-                where TImplementation : class, TSource
-                where TSource : class
-        {
-            return services.Replace(ServiceDescriptor.Scoped<TSource>(sp => sp.GetRequiredService<TImplementation>()));
-        }
-
-        public static IServiceCollection ReplaceSingleton<TSource, TImplementation>(this IServiceCollection services)
-                where TImplementation : class, TSource
-                where TSource : class
-        {
-            return services.Replace(ServiceDescriptor.Singleton<TSource, TImplementation>());
-        }
-        public static IServiceCollection ReplaceSingletonFrom<TSource, TImplementation>(this IServiceCollection services)
-                where TImplementation : class, TSource
-                where TSource : class
-        {
-            return services.Replace(ServiceDescriptor.Singleton<TSource>(sp => sp.GetRequiredService<TImplementation>()));
         }
     }
 }

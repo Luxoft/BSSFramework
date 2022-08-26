@@ -388,7 +388,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GeneratedTools", "Generated
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Authorization.ApproveWorkflow", "_Authorization\Framework.Authorization.ApproveWorkflow\Framework.Authorization.ApproveWorkflow.csproj", "{24F41E7D-4D0F-4B52-8A35-18C4F6FBD31F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.AutomationCore.ServiceEnvironment", "Framework.AutomationCore.ServiceEnvironment\Framework.AutomationCore.ServiceEnvironment.csproj", "{FA5B444F-6C1C-4188-BEAC-408259D865FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.AutomationCore.ServiceEnvironment", "Framework.AutomationCore.ServiceEnvironment\Framework.AutomationCore.ServiceEnvironment.csproj", "{FA5B444F-6C1C-4188-BEAC-408259D865FC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DependencyInjection", "Framework.DependencyInjection\Framework.DependencyInjection.csproj", "{747D2AA2-1999-4EB6-8612-E49525993389}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -3522,6 +3524,26 @@ Global
 		{FA5B444F-6C1C-4188-BEAC-408259D865FC}.Release|x64.Build.0 = Release|Any CPU
 		{FA5B444F-6C1C-4188-BEAC-408259D865FC}.Release|x86.ActiveCfg = Release|Any CPU
 		{FA5B444F-6C1C-4188-BEAC-408259D865FC}.Release|x86.Build.0 = Release|Any CPU
+		{747D2AA2-1999-4EB6-8612-E49525993389}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{747D2AA2-1999-4EB6-8612-E49525993389}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{747D2AA2-1999-4EB6-8612-E49525993389}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{747D2AA2-1999-4EB6-8612-E49525993389}.Debug|ARM.Build.0 = Debug|Any CPU
+		{747D2AA2-1999-4EB6-8612-E49525993389}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{747D2AA2-1999-4EB6-8612-E49525993389}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{747D2AA2-1999-4EB6-8612-E49525993389}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{747D2AA2-1999-4EB6-8612-E49525993389}.Debug|x64.Build.0 = Debug|Any CPU
+		{747D2AA2-1999-4EB6-8612-E49525993389}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{747D2AA2-1999-4EB6-8612-E49525993389}.Debug|x86.Build.0 = Debug|Any CPU
+		{747D2AA2-1999-4EB6-8612-E49525993389}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{747D2AA2-1999-4EB6-8612-E49525993389}.Release|Any CPU.Build.0 = Release|Any CPU
+		{747D2AA2-1999-4EB6-8612-E49525993389}.Release|ARM.ActiveCfg = Release|Any CPU
+		{747D2AA2-1999-4EB6-8612-E49525993389}.Release|ARM.Build.0 = Release|Any CPU
+		{747D2AA2-1999-4EB6-8612-E49525993389}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{747D2AA2-1999-4EB6-8612-E49525993389}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{747D2AA2-1999-4EB6-8612-E49525993389}.Release|x64.ActiveCfg = Release|Any CPU
+		{747D2AA2-1999-4EB6-8612-E49525993389}.Release|x64.Build.0 = Release|Any CPU
+		{747D2AA2-1999-4EB6-8612-E49525993389}.Release|x86.ActiveCfg = Release|Any CPU
+		{747D2AA2-1999-4EB6-8612-E49525993389}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

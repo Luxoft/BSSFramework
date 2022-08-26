@@ -1,17 +1,16 @@
 ﻿using System;
-using Automation;
+
 using Automation.ServiceEnvironment;
-using Automation.Utils.DatabaseUtils.Interfaces;
+
 using Framework.DomainDriven;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+
 using Microsoft.Extensions.DependencyInjection;
 using SampleSystem.BLL;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
 {
-    public partial class DataHelper : IntegrationTestContextEvaluator<ISampleSystemBLLContext>
+    public partial class DataHelper : RootServiceProviderContainer<ISampleSystemBLLContext>
     {
         public DataHelper(IServiceProvider rootServiceProvider)
             : base(rootServiceProvider)
@@ -19,8 +18,6 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
         }
 
         public AuthHelper AuthHelper => this.RootServiceProvider.GetRequiredService<AuthHelper>();
-
-        public IDateTimeService DateTimeService => this.RootServiceProvider.GetRequiredService<IDateTimeService>();
 
         public SampleSystemServerPrimitiveDTOMappingService GetMappingService(ISampleSystemBLLContext context)
         {

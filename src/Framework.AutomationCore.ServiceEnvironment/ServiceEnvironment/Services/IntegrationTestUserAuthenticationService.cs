@@ -5,13 +5,20 @@ using Framework.DomainDriven.NHibernate.Audit;
 
 namespace Automation.ServiceEnvironment.Services;
 
-public class IntegrationTestUserAuthenticationService : DomainDefaultUserAuthenticationService, IAuditRevisionUserAuthenticationService
+public class IntegrationTestUserAuthenticationService : IDefaultUserAuthenticationService, IAuditRevisionUserAuthenticationService
 {
-    public string CustomUserName { get; private set; }
+    private readonly string integrationTestUserName;
 
-    public override string GetUserName()
+    public IntegrationTestUserAuthenticationService(string integrationTestUserName = "IntegrationTestRootUser")
     {
-        return this.CustomUserName ?? base.GetUserName();
+        this.integrationTestUserName = integrationTestUserName;
+    }
+
+    public string CustomUserName { get; internal set; }
+
+    public string GetUserName()
+    {
+        return this.CustomUserName ?? this.integrationTestUserName;
     }
 
     public async Task<T> WithImpersonateAsync<T>(string customUserName, Func<Task<T>> func)

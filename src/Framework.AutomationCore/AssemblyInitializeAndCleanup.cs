@@ -9,6 +9,7 @@ namespace Automation;
 public class AssemblyInitializeAndCleanup
 {
     private readonly ConfigUtil configUtil;
+
     private readonly TestDatabaseGenerator databaseGenerator;
 
     public AssemblyInitializeAndCleanup(ConfigUtil configUtil, TestDatabaseGenerator databaseGenerator)

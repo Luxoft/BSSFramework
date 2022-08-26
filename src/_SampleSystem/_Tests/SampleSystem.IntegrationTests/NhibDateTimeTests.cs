@@ -1,5 +1,7 @@
 ﻿using System;
 
+using Automation.ServiceEnvironment;
+
 using FluentAssertions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;

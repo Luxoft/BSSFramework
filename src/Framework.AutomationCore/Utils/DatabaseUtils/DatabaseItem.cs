@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using Automation.Utils.DatabaseUtils.Interfaces;
@@ -18,7 +18,7 @@ public class DatabaseItem : IDatabaseItem
         this.configUtil = configUtil;
         this.builder = new SqlConnectionStringBuilder(connectionString);
         initialCatalog ??= this.builder.InitialCatalog;
-        this.DatabaseName = this.configUtil.RandomizeDatabaseName
+        this.DatabaseName = this.configUtil.TestsParallelize
             ? $"{initialCatalog}{TextRandomizer.RandomString(5)}"
             : initialCatalog;
 

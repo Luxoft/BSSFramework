@@ -13,7 +13,7 @@ public class ConfigUtil
     private readonly Lazy<string> TempFolderLazy;
     private readonly Lazy<string> DataDirectory;
     private readonly Lazy<bool> UseLocalDbLazy;
-    private readonly Lazy<bool> RandomizeDatabaseNameLazy;
+    private readonly Lazy<bool> TestsParallelizeLazy;
     private readonly Lazy<string> SystemNameLazy;
     private readonly Lazy<TestRunMode> TestRunModeLazy;
 
@@ -45,7 +45,7 @@ public class ConfigUtil
             });
         UseLocalDbLazy = new Lazy<bool>(() => bool.Parse(Configuration["UseLocalDb"]));
 
-        RandomizeDatabaseNameLazy = new Lazy<bool>(() => bool.Parse(Configuration["RandomizeDatabaseName"]));
+        this.TestsParallelizeLazy = new Lazy<bool>(() => bool.Parse(Configuration["TestsParallelize"]));
         SystemNameLazy = new Lazy<string>(() => Configuration["SystemName"]);
         TestRunModeLazy = new Lazy<TestRunMode>(
             () =>
@@ -71,7 +71,7 @@ public class ConfigUtil
 
     public bool UseLocalDb => UseLocalDbLazy.Value;
 
-    public bool RandomizeDatabaseName => RandomizeDatabaseNameLazy.Value;
+    public bool TestsParallelize => this.TestsParallelizeLazy.Value;
 
     public string SystemName => SystemNameLazy.Value;
 

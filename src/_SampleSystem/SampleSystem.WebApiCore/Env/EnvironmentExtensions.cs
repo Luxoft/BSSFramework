@@ -106,7 +106,7 @@ namespace SampleSystem.WebApiCore
             services.AddSingleton<IReportParameterValueService<ISampleSystemBLLContext, PersistentDomainObjectBase, SampleSystemSecurityOperationCode>, ReportParameterValueService<ISampleSystemBLLContext, PersistentDomainObjectBase, SampleSystemSecurityOperationCode>>();
             services.AddSingleton<ISystemMetadataTypeBuilder>(new SystemMetadataTypeBuilder<PersistentDomainObjectBase>(DTORole.All, typeof(PersistentDomainObjectBase).Assembly));
             services.AddSingleton<SampleSystemCustomReportsServiceEnvironment>();
-            services.AddSingleton(sp => sp.GetRequiredService<SampleSystemCustomReportsServiceEnvironment>().ReportService);
+            services.AddSingletonFrom((SampleSystemCustomReportsServiceEnvironment env) => env.ReportService);
             services.AddSingleton<ISecurityOperationCodeProvider<SampleSystemSecurityOperationCode>, SecurityOperationCodeProvider>();
 
             services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();

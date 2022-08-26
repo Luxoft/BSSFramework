@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
+
+using Automation.ServiceEnvironment;
 using Automation.Utils;
+
 using FluentAssertions;
 
 using Framework.Authorization.BLL;

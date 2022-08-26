@@ -1,14 +1,13 @@
 ﻿using System;
-using Automation;
-using Automation.ServiceEnvironment;
+
 using Microsoft.AspNetCore.Mvc;
-using SampleSystem.BLL;
 
-namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
+namespace Automation.ServiceEnvironment;
 
-public abstract class WebApiBase : IntegrationTestContextEvaluator<ISampleSystemBLLContext>
+public abstract class WebApiBase : RootServiceProviderContainer
 {
-    protected WebApiBase(IServiceProvider serviceProvider) : base(serviceProvider)
+    protected WebApiBase(IServiceProvider rootServiceProvider)
+            : base(rootServiceProvider)
     {
     }
 

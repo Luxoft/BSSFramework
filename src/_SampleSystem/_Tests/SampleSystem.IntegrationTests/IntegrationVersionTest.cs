@@ -1,14 +1,14 @@
 ﻿using System;
+
 using Automation.ServiceEnvironment;
+
 using FluentAssertions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain.IntergrationVersions;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
-using SampleSystem.IntegrationTests.__Support.Utils;
 using SampleSystem.WebApiCore.Controllers.Integration;
 
 namespace SampleSystem.IntegrationTests
@@ -36,7 +36,7 @@ namespace SampleSystem.IntegrationTests
             });
 
             var integrationVersionContainer1Controller = this.GetControllerEvaluator<IntegrationVersionContainer1Controller>();
-            this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
+            this.AuthHelper.SetCurrentUserRole(IntegrationBusinessRole.SystemIntegration);
 
             // Act
             var expectedName = Guid.NewGuid().ToString();
@@ -78,7 +78,7 @@ namespace SampleSystem.IntegrationTests
             });
 
             var integrationVersionContainer1Controller = this.GetControllerEvaluator<IntegrationVersionContainer1Controller>();
-            this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
+            this.AuthHelper.SetCurrentUserRole(IntegrationBusinessRole.SystemIntegration);
 
             // Act
 
@@ -118,7 +118,7 @@ namespace SampleSystem.IntegrationTests
             });
 
             var integrationVersionContainer1Controller = this.GetControllerEvaluator<IntegrationVersionContainer1Controller>();
-            this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
+            this.AuthHelper.SetCurrentUserRole(IntegrationBusinessRole.SystemIntegration);
 
             // Act
 
@@ -157,7 +157,7 @@ namespace SampleSystem.IntegrationTests
             });
 
             var integrationVersionContainer2Controller = this.GetControllerEvaluator<IntegrationVersionContainer2Controller>();
-            this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
+            this.AuthHelper.SetCurrentUserRole(IntegrationBusinessRole.SystemIntegration);
 
             // Act
             var expectedName = Guid.NewGuid().ToString();
@@ -199,7 +199,7 @@ namespace SampleSystem.IntegrationTests
             });
 
             var integrationVersionContainer2Controller = this.GetControllerEvaluator<IntegrationVersionContainer2Controller>();
-            this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
+            this.AuthHelper.SetCurrentUserRole(IntegrationBusinessRole.SystemIntegration);
 
             // Act
 
@@ -239,7 +239,7 @@ namespace SampleSystem.IntegrationTests
             });
 
             var integrationVersionContainer2Controller = this.GetControllerEvaluator<IntegrationVersionContainer2Controller>();
-            this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
+            this.AuthHelper.SetCurrentUserRole(IntegrationBusinessRole.SystemIntegration);
 
             // Act
 
@@ -281,7 +281,7 @@ namespace SampleSystem.IntegrationTests
             });
 
             var integrationVersionContainer1Controller = this.GetControllerEvaluator<IntegrationVersionContainer1Controller>();
-            this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
+            this.AuthHelper.SetCurrentUserRole(IntegrationBusinessRole.SystemIntegration);
 
             var modelName = Guid.NewGuid().ToString();
 
@@ -331,7 +331,7 @@ namespace SampleSystem.IntegrationTests
             });
 
             var integrationVersionContainer1Controller = this.GetControllerEvaluator<IntegrationVersionContainer1Controller>();
-            this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
+            this.AuthHelper.SetCurrentUserRole(IntegrationBusinessRole.SystemIntegration);
 
             var modelName = Guid.NewGuid().ToString();
 

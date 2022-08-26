@@ -1,5 +1,6 @@
-using System;
-using Framework.DomainDriven.ServiceModel.IAD;
+﻿using System;
+
+using Framework.DependencyInjection;
 using Framework.DomainDriven.WebApiNetCore;
 using Microsoft.Extensions.DependencyInjection;
 

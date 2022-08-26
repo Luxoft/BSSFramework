@@ -31,8 +31,8 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
 
             this.AuthHelper.AddCurrentUserToAdmin();
 
-            this.AuthHelper.SetUserRole(DefaultConstants.NOTIFICATION_ADMIN, new SampleSystemPermission(IntegrationBusinessRole.SystemIntegration));
-            this.AuthHelper.SetUserRole(DefaultConstants.INTEGRATION_USER, new SampleSystemPermission(IntegrationBusinessRole.SystemIntegration));
+            this.AuthHelper.SetUserRole(DefaultConstants.NOTIFICATION_ADMIN, IntegrationBusinessRole.SystemIntegration);
+            this.AuthHelper.SetUserRole(DefaultConstants.INTEGRATION_USER, IntegrationBusinessRole.SystemIntegration);
 
             this.DataHelper.SaveCountry(
                 id: DefaultConstants.COUNTRY_RUSSIA_ID,

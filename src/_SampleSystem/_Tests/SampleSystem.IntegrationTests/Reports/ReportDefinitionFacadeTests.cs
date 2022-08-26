@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Automation.ServiceEnvironment;
 
 using FluentAssertions;
 

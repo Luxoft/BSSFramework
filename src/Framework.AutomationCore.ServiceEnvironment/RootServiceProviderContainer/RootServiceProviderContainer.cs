@@ -4,6 +4,7 @@ using Automation.Utils;
 using Automation.Utils.DatabaseUtils.Interfaces;
 
 using Framework.DomainDriven;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Automation.ServiceEnvironment;
 
@@ -21,6 +22,12 @@ public abstract class RootServiceProviderContainer : IRootServiceProviderContain
     public IDateTimeService DateTimeService => this.GetDateTimeService();
 
     public IDatabaseContext DatabaseContext => this.GetDatabaseContext();
+
+    public virtual ControllerEvaluator<TController> GetControllerEvaluator<TController>(string principalName = null)
+            where TController : ControllerBase
+    {
+        return this.RootServiceProvider.GetDefaultControllerEvaluator<TController>(principalName);
+    }
 }
 
 public abstract class RootServiceProviderContainer<TBLLContext> : RootServiceProviderContainer, IRootServiceProviderContainer<TBLLContext>

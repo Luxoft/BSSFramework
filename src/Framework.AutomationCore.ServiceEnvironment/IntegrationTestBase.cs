@@ -14,8 +14,6 @@ using Framework.Notification.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-using SampleSystem.IntegrationTests.__Support;
-
 using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
 
 namespace Automation.ServiceEnvironment;
@@ -124,11 +122,5 @@ public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderCont
         return this.EvaluateRead(
             context => context.Configuration.Logics.DomainObjectNotification.GetFullList()
                 .ToList(obj => DataContractSerializerHelper.Deserialize<NotificationEventDTO>(obj.SerializeData)));
-    }
-
-    public ControllerEvaluator<TController> GetControllerEvaluator<TController>(string principalName = null)
-        where TController : ControllerBase
-    {
-        return this.RootServiceProvider.GetDefaultControllerEvaluator<TController>(principalName);
     }
 }

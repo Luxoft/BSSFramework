@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-using Automation.ServiceEnvironment;
 using Automation.ServiceEnvironment.Services;
 using Automation.Utils;
 using Automation.Utils.DatabaseUtils.Interfaces;
@@ -36,18 +35,18 @@ public static class RootServiceProviderContainerExtensions
     }
 
     public static TResult EvaluateController<TController, TResult>(
-            this IRootServiceProviderContainer controllerEvaluator,
+            this IRootServiceProviderContainer rootServiceProviderContainer,
             Expression<Func<TController, TResult>> func)
             where TController : ControllerBase
     {
-        return controllerEvaluator.RootServiceProvider.GetRequiredService<ControllerEvaluator<TController>>().Evaluate(func);
+        return rootServiceProviderContainer.RootServiceProvider.GetDefaultControllerEvaluator<TController>().Evaluate(func);
     }
 
     public static void EvaluateController<TController>(
-            this IRootServiceProviderContainer controllerEvaluator,
+            this IRootServiceProviderContainer rootServiceProviderContainer,
             Expression<Action<TController>> action)
             where TController : ControllerBase
     {
-        controllerEvaluator.RootServiceProvider.GetRequiredService<ControllerEvaluator<TController>>().Evaluate(action);
+        rootServiceProviderContainer.RootServiceProvider.GetDefaultControllerEvaluator<TController>().Evaluate(action);
     }
 }

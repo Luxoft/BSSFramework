@@ -9,62 +9,74 @@ namespace Framework.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddScopedFromLazyInterfaceImplement<TInterface, TImplementation>(this IServiceCollection services)
-        where TImplementation : class, TInterface
-        where TInterface : class
+    public static IServiceCollection AddScopedFromLazyInterfaceImplement<TServiceInterface, TServiceImplementation>(this IServiceCollection services)
+        where TServiceImplementation : class, TServiceInterface
+        where TServiceInterface : class
     {
-        return services.AddScoped<TImplementation>()
-                       .AddScoped(sp => LazyInterfaceImplementHelper.CreateProxy<TInterface>(() => sp.GetRequiredService<TImplementation>()));
+        return services.AddScoped<TServiceImplementation>()
+                       .AddScoped(sp => LazyInterfaceImplementHelper.CreateProxy<TServiceInterface>(() => sp.GetRequiredService<TServiceImplementation>()));
     }
 
-    public static IServiceCollection AddScopedFromLazy<TInterface, TImplementation>(this IServiceCollection services)
-            where TImplementation : class, TInterface
-            where TInterface : class
+    public static IServiceCollection AddScopedFromLazy<TService, TServiceImplementation>(this IServiceCollection services)
+            where TServiceImplementation : class, TService
+            where TService : class
     {
-        return services.AddScoped<TImplementation>()
-                       .AddScoped(sp => new Lazy<TInterface>(sp.GetRequiredService<TImplementation>))
-                       .AddScoped(sp => sp.GetRequiredService<Lazy<TInterface>>().Value);
+        return services.AddScoped<TServiceImplementation>()
+                       .AddScoped(sp => new Lazy<TService>(sp.GetRequiredService<TServiceImplementation>))
+                       .AddScoped(sp => sp.GetRequiredService<Lazy<TService>>().Value);
     }
 
-    public static IServiceCollection AddScopedFrom<TSource, TImplementation>(this IServiceCollection services)
-            where TImplementation : class, TSource
-            where TSource : class
+    public static IServiceCollection AddScopedFrom<TService, TServiceImplementation>(this IServiceCollection services)
+            where TServiceImplementation : class, TService
+            where TService : class
     {
-        return services.AddScoped<TSource>(sp => sp.GetRequiredService<TImplementation>());
+        return services.AddScopedFrom<TService, TServiceImplementation>(v => v);
     }
 
-    public static IServiceCollection AddSingletonFrom<TSource, TImplementation>(this IServiceCollection services)
-            where TImplementation : class, TSource
-            where TSource : class
+    public static IServiceCollection AddScopedFrom<TService, TSource>(this IServiceCollection services, Func<TSource, TService> selector)
+            where TService : class
     {
-        return services.AddSingleton<TSource>(sp => sp.GetRequiredService<TImplementation>());
+        return services.AddScoped(sp => selector(sp.GetRequiredService<TSource>()));
     }
 
-    public static IServiceCollection ReplaceScoped<TSource, TImplementation>(this IServiceCollection services)
-            where TImplementation : class, TSource
-            where TSource : class
+    public static IServiceCollection AddSingletonFrom<TService, TServiceImplementation>(this IServiceCollection services)
+            where TServiceImplementation : class, TService
+            where TService : class
     {
-        return services.Replace(ServiceDescriptor.Scoped<TSource, TImplementation>());
+        return services.AddSingletonFrom<TService, TServiceImplementation>(v => v);
     }
 
-    public static IServiceCollection ReplaceScopedFrom<TSource, TImplementation>(this IServiceCollection services)
-            where TImplementation : class, TSource
-            where TSource : class
+    public static IServiceCollection AddSingletonFrom<TService, TSource>(this IServiceCollection services, Func<TSource, TService> selector)
+            where TService : class
     {
-        return services.Replace(ServiceDescriptor.Scoped<TSource>(sp => sp.GetRequiredService<TImplementation>()));
+        return services.AddSingleton(sp => selector(sp.GetRequiredService<TSource>()));
     }
 
-    public static IServiceCollection ReplaceSingleton<TSource, TImplementation>(this IServiceCollection services)
-            where TImplementation : class, TSource
-            where TSource : class
+    public static IServiceCollection ReplaceScoped<TService, TServiceImplementation>(this IServiceCollection services)
+            where TServiceImplementation : class, TService
+            where TService : class
     {
-        return services.Replace(ServiceDescriptor.Singleton<TSource, TImplementation>());
+        return services.Replace(ServiceDescriptor.Scoped<TService, TServiceImplementation>());
     }
 
-    public static IServiceCollection ReplaceSingletonFrom<TSource, TImplementation>(this IServiceCollection services)
-            where TImplementation : class, TSource
-            where TSource : class
+    public static IServiceCollection ReplaceScopedFrom<TService, TServiceImplementation>(this IServiceCollection services)
+            where TServiceImplementation : class, TService
+            where TService : class
     {
-        return services.Replace(ServiceDescriptor.Singleton<TSource>(sp => sp.GetRequiredService<TImplementation>()));
+        return services.Replace(ServiceDescriptor.Scoped<TService>(sp => sp.GetRequiredService<TServiceImplementation>()));
+    }
+
+    public static IServiceCollection ReplaceSingleton<TService, TServiceImplementation>(this IServiceCollection services)
+            where TServiceImplementation : class, TService
+            where TService : class
+    {
+        return services.Replace(ServiceDescriptor.Singleton<TService, TServiceImplementation>());
+    }
+
+    public static IServiceCollection ReplaceSingletonFrom<TService, TServiceImplementation>(this IServiceCollection services)
+            where TServiceImplementation : class, TService
+            where TService : class
+    {
+        return services.Replace(ServiceDescriptor.Singleton<TService>(sp => sp.GetRequiredService<TServiceImplementation>()));
     }
 }

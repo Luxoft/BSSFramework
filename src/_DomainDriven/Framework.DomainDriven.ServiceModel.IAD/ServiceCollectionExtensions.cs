@@ -24,7 +24,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         {
             services.AddSingleton<IExceptionExpander, ExceptionExpander>();
 
-            services.AddScoped(sp => sp.GetRequiredService<IDBSession>().GetObjectStateService());
+            services.AddScopedFrom((IDBSession session) => session.GetObjectStateService());
 
             services.AddSingleton<IStandartExpressionBuilder, StandartExpressionBuilder>();
 
@@ -42,7 +42,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         {
             return services
 
-                   .AddScoped(sp => sp.GetRequiredService<IDBSession>().GetDALFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>())
+                   .AddScopedFrom((IDBSession session) => session.GetDALFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>())
 
                    .AddScoped<IOperationEventSenderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>, OperationEventSenderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>>()
 
@@ -75,7 +75,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         {
             return services
 
-                   .AddScoped(sp => sp.GetRequiredService<IDBSession>().GetDALFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>())
+                   .AddScopedFrom((IDBSession session) => session.GetDALFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>())
 
                    .AddScoped<IOperationEventSenderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>, OperationEventSenderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>>()
 

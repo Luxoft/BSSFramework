@@ -123,10 +123,4 @@ public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderCont
             context => context.Configuration.Logics.DomainObjectNotification.GetFullList()
                 .ToList(obj => DataContractSerializerHelper.Deserialize<NotificationEventDTO>(obj.SerializeData)));
     }
-
-    public ControllerEvaluator<TController> GetControllerEvaluator<TController>(string principalName = null)
-        where TController : ControllerBase
-    {
-        return this.RootServiceProvider.GetDefaultControllerEvaluator<TController>(principalName);
-    }
 }

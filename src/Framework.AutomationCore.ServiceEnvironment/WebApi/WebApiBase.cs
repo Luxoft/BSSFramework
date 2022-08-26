@@ -10,10 +10,4 @@ public abstract class WebApiBase : RootServiceProviderContainer
             : base(rootServiceProvider)
     {
     }
-
-    public virtual ControllerEvaluator<TController> GetControllerEvaluator<TController>(string principalName = null)
-            where TController : ControllerBase
-    {
-        return this.RootServiceProvider.GetDefaultControllerEvaluator<TController>(principalName);
-    }
 }

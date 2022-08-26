@@ -7,6 +7,7 @@ using Framework.DomainDriven.ServiceModel.Service;
 
 using JetBrains.Annotations;
 
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation.ServiceEnvironment;

@@ -16,10 +16,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation.ServiceEnvironment;
 
-public class AuthHelper<TBLLContext> : RootServiceProviderContainer<TBLLContext>
+public abstract class AuthHelperBase<TBLLContext> : RootServiceProviderContainer<TBLLContext>
         where TBLLContext : IAuthorizationBLLContextContainer<IAuthorizationBLLContext>
 {
-    public AuthHelper(IServiceProvider rootServiceProvider)
+    protected AuthHelperBase(IServiceProvider rootServiceProvider)
             : base(rootServiceProvider)
     {
     }

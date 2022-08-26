@@ -1,15 +1,16 @@
 ﻿using System;
+
 using Automation.ServiceEnvironment;
+
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests;
 
-public class IntegrationWebApi : WebApiBase
+public class IntegrationWebApi : IntegrationWebApiBase
 {
     public IntegrationWebApi(IServiceProvider serviceProvider) : base(serviceProvider)
     {
     }
 
-    public override ControllerEvaluator<TController> GetControllerEvaluator<TController>(string principalName = null) =>
-            base.GetControllerEvaluator<TController>(principalName).WithImpersonate(DefaultConstants.INTEGRATION_USER);
+    protected override string IntegrationUserName { get; } = DefaultConstants.INTEGRATION_USER;
 }

@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 
 using Automation.ServiceEnvironment;
+using Automation.ServiceEnvironment.Services;
 using Automation.Utils;
 using Automation.Utils.DatabaseUtils.Interfaces;
 
@@ -27,6 +28,11 @@ public static class RootServiceProviderContainerExtensions
     public static IDateTimeService GetDateTimeService(this IRootServiceProviderContainer rootServiceProviderContainer)
     {
         return rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IDateTimeService>();
+    }
+
+    public static void SetCurrentDateTime(this IRootServiceProviderContainer rootServiceProviderContainer, DateTime newDateTime)
+    {
+        rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IntegrationTestDateTimeService>().SetCurrentDateTime(newDateTime);
     }
 
     public static TResult EvaluateController<TController, TResult>(

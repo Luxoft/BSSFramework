@@ -22,6 +22,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
         }
 
         private AuthHelper AuthHelper => this.RootServiceProvider.GetRequiredService<AuthHelper>();
+
         private DataHelper DataHelper =>  this.RootServiceProvider.GetRequiredService<DataHelper>();
 
         public void TestData()

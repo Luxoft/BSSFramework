@@ -31,8 +31,6 @@ public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderCont
         this.rootServiceProviderPool = rootServiceProviderPool;
     }
 
-    protected IntegrationTestDateTimeService DateTimeService => this.RootServiceProvider.GetRequiredService<IntegrationTestDateTimeService>();
-
     public virtual void Initialize()
     {
         switch (this.ConfigUtil.TestRunMode)
@@ -58,15 +56,6 @@ public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderCont
         this.RootServiceProvider.GetRequiredService<NHibSessionEnvironment>().Dispose();
         this.rootServiceProviderPool.Release(this.RootServiceProvider);
 
-    }
-
-    /// <summary>
-    /// Set Date for DateTimeService <c>this.Context.DateTimeService.Today</c>
-    /// </summary>
-    /// <param name="dateTime"></param>
-    protected virtual void SetCurrentDateTime(DateTime dateTime)
-    {
-        this.DateTimeService.SetCurrentDateTime(dateTime);
     }
 
     /// <summary>

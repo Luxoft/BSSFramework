@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Framework.Core;
 using Framework.DomainDriven;
 
@@ -32,6 +32,7 @@ public class IntegrationTestDateTimeService : IDateTimeService
     public void SetCurrentDateTime(DateTime dateTime)
     {
         var dateTimeDelta = dateTime - DateTime.Now;
+
         this.GetNow = () => DateTime.Now + dateTimeDelta;
     }
 }

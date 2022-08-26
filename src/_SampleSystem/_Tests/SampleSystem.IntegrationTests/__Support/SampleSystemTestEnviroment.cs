@@ -1,7 +1,9 @@
-using System;
+﻿using System;
+
 using Automation;
 using Automation.Utils.DatabaseUtils;
 using Automation.Utils.DatabaseUtils.Interfaces;
+
 using SampleSystem.IntegrationTests.__Support;
 using SampleSystem.IntegrationTests.Support.Utils;
 
@@ -13,9 +15,8 @@ public class SampleSystemTestEnvironment : TestEnvironment
     {
     }
 
-    public static readonly SampleSystemTestEnvironment Current = new SampleSystemTestEnvironment();
-
     protected override string EnvironmentPrefix => $"{nameof(SampleSystem)}_";
+
     protected override ServiceProviderPool BuildServiceProvidePool()
     {
         return new SampleSystemServiceProviderPool(this.RootConfiguration, this.ConfigUtil);
@@ -25,4 +26,6 @@ public class SampleSystemTestEnvironment : TestEnvironment
     {
         return new SampleSystemTestDatabaseGenerator(databaseContext, this.ConfigUtil ,serviceProvider);
     }
+
+    public static readonly SampleSystemTestEnvironment Current = new SampleSystemTestEnvironment();
 }

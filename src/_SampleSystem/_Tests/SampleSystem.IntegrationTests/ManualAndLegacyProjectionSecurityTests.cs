@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+
+using Automation;
 using Automation.ServiceEnvironment;
 using FluentAssertions;
 
@@ -22,7 +24,7 @@ using SampleSystem.Domain.ManualProjections;
 using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 
-using BusinessRole = SampleSystem.IntegrationTests.__Support.Utils.BusinessRole;
+
 
 namespace SampleSystem.IntegrationTests
 {
@@ -49,7 +51,7 @@ namespace SampleSystem.IntegrationTests
 
             this.DataHelper.SaveEmployee(login: TestEmployeeLogin);
 
-            this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemPermission(BusinessRole.Administrator, this.bu2Ident, null, null));
+            this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemPermission(IntegrationBusinessRole.Administrator, this.bu2Ident, null, null));
 
             this.TestEmp1 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu1Ident);
 

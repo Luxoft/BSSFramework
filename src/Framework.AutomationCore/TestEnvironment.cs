@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.IO;
-using System.Runtime.CompilerServices;
+
 using Automation.Utils;
 using Automation.Utils.DatabaseUtils;
 using Automation.Utils.DatabaseUtils.Interfaces;
-using DocumentFormat.OpenXml.Math;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SampleSystem.IntegrationTests.__Support;
@@ -52,7 +52,7 @@ public abstract class TestEnvironment
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile($@"appsettings.json", false)
             .AddJsonFile($@"{Environment.MachineName}.appsettings.json", true)
-            .AddEnvironmentVariables(EnvironmentPrefix)
+            .AddEnvironmentVariables(this.EnvironmentPrefix)
             .Build();
     }
 

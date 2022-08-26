@@ -4,9 +4,9 @@ using Automation.ServiceEnvironment;
 using Microsoft.AspNetCore.Mvc;
 using SampleSystem.BLL;
 
-namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
+namespace SampleSystem.IntegrationTests;
 
-public abstract class WebApiBase : IntegrationTestContextEvaluator<ISampleSystemBLLContext>
+public abstract class WebApiBase : RootServiceProviderContainer<ISampleSystemBLLContext>
 {
     protected WebApiBase(IServiceProvider serviceProvider) : base(serviceProvider)
     {

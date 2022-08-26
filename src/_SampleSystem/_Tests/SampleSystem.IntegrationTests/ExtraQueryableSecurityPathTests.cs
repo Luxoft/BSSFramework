@@ -1,10 +1,11 @@
 ﻿using System.Linq;
+
 using Automation.ServiceEnvironment;
+
 using FluentAssertions;
 
 using Framework.Core;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
 
 using Framework.SecuritySystem;
 
@@ -13,10 +14,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
-
-using BusinessRole = SampleSystem.IntegrationTests.__Support.Utils.BusinessRole;
 
 namespace SampleSystem.IntegrationTests
 {
@@ -52,8 +50,8 @@ namespace SampleSystem.IntegrationTests
 
             this.DataHelper.SaveEmployee(login: TestEmployeeLogin);
 
-            this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemPermission(BusinessRole.Administrator, this.bu2Ident, null, this.loc1Ident));
-            this.AuthHelper.AddUserRole(TestEmployeeLogin, new SampleSystemPermission(BusinessRole.Administrator, this.bu2Ident, null, this.loc2Ident));
+            this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemPermission(IntegrationBusinessRole.Administrator, this.bu2Ident, null, this.loc1Ident));
+            this.AuthHelper.AddUserRole(TestEmployeeLogin, new SampleSystemPermission(IntegrationBusinessRole.Administrator, this.bu2Ident, null, this.loc2Ident));
 
             this.TestEmp1 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu1Ident, location: this.loc1Ident);
 

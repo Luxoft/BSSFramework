@@ -2,7 +2,7 @@
 using Automation.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
+namespace SampleSystem.IntegrationTests;
 
 public class IntegrationWebApi : WebApiBase
 {

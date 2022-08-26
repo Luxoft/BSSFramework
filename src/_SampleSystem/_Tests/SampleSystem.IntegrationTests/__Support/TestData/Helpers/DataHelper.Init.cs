@@ -11,7 +11,7 @@ using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
 {
-    public partial class DataHelper : IntegrationTestContextEvaluator<ISampleSystemBLLContext>
+    public partial class DataHelper : RootServiceProviderContainer<ISampleSystemBLLContext>
     {
         public DataHelper(IServiceProvider rootServiceProvider)
             : base(rootServiceProvider)

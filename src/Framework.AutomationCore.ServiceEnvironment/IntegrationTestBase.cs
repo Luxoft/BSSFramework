@@ -4,27 +4,31 @@ using Automation.Enums;
 using Automation.ServiceEnvironment;
 using Automation.ServiceEnvironment.Services;
 using Automation.Utils.DatabaseUtils;
+
 using Framework.Core;
 using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.ServiceModel.Subscriptions;
 using Framework.Notification.DTO;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+
 using SampleSystem.IntegrationTests.__Support;
+
 using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
 
-namespace Automation;
+namespace Automation.ServiceEnvironment;
 
-public abstract class IntegrationTestBase<TBLLContext> : IntegrationTestContextEvaluator<TBLLContext>
+public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderContainer<TBLLContext>
     where TBLLContext : IConfigurationBLLContextContainer<IConfigurationBLLContext>
 {
-    private readonly ServiceProviderPool serviceProviderPool;
+    private readonly ServiceProviderPool rootServiceProviderPool;
 
     protected IntegrationTestBase(ServiceProviderPool rootServiceProviderPool)
         : base(rootServiceProviderPool.Get())
     {
-        this.serviceProviderPool = rootServiceProviderPool;
+        this.rootServiceProviderPool = rootServiceProviderPool;
     }
 
     protected IntegrationTestDateTimeService DateTimeService => this.RootServiceProvider.GetRequiredService<IntegrationTestDateTimeService>();
@@ -52,7 +56,7 @@ public abstract class IntegrationTestBase<TBLLContext> : IntegrationTestContextE
         }
 
         this.RootServiceProvider.GetRequiredService<NHibSessionEnvironment>().Dispose();
-        this.serviceProviderPool.Release(this.RootServiceProvider);
+        this.rootServiceProviderPool.Release(this.RootServiceProvider);
 
     }
 

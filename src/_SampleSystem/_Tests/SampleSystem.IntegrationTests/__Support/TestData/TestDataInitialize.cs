@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using Automation;
-using Automation.Utils.DatabaseUtils.Interfaces;
+
+using Automation.ServiceEnvironment;
+
 using Microsoft.Extensions.DependencyInjection;
+
 using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
-using SampleSystem.IntegrationTests.__Support.Utils;
 using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData
 {
-    public class TestDataInitialize : IntegrationTestContextEvaluator<ISampleSystemBLLContext>
+    public class TestDataInitialize : RootServiceProviderContainer<ISampleSystemBLLContext>
     {
         public TestDataInitialize(IServiceProvider serviceProvider)
             : base(serviceProvider)
@@ -29,8 +30,8 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
 
             this.AuthHelper.AddCurrentUserToAdmin();
 
-            this.AuthHelper.SetUserRole(DefaultConstants.NOTIFICATION_ADMIN, new SampleSystemPermission(BusinessRole.SystemIntegration));
-            this.AuthHelper.SetUserRole(DefaultConstants.INTEGRATION_USER, new SampleSystemPermission(BusinessRole.SystemIntegration));
+            this.AuthHelper.SetUserRole(DefaultConstants.NOTIFICATION_ADMIN, new SampleSystemPermission(IntegrationBusinessRole.SystemIntegration));
+            this.AuthHelper.SetUserRole(DefaultConstants.INTEGRATION_USER, new SampleSystemPermission(IntegrationBusinessRole.SystemIntegration));
 
             this.DataHelper.SaveCountry(
                 id: DefaultConstants.COUNTRY_RUSSIA_ID,

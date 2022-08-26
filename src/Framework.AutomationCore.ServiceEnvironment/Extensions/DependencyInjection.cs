@@ -1,8 +1,8 @@
 ﻿using Automation.ServiceEnvironment.Services;
 using Framework.Core.Services;
+using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate.Audit;
-using Framework.DomainDriven.ServiceModel.IAD;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation.ServiceEnvironment;

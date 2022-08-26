@@ -7,7 +7,7 @@ namespace Automation.ServiceEnvironment.Services;
 
 public class IntegrationTestUserAuthenticationService : DomainDefaultUserAuthenticationService, IAuditRevisionUserAuthenticationService
 {
-    public string CustomUserName { get; private set; }
+    public string CustomUserName { get; internal set; }
 
     public override string GetUserName()
     {

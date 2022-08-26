@@ -1,11 +1,12 @@
 ﻿using System;
-using Automation;
+
+using Automation.ServiceEnvironment;
+
 using Framework.Core;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
 namespace SampleSystem.BLL.Test;
 
-public abstract class TestBase : IntegrationTestContextEvaluator<ISampleSystemBLLContext>
+public abstract class TestBase : RootServiceProviderContainer<ISampleSystemBLLContext>
 {
     protected TestBase() : base(LazyInterfaceImplementHelper.CreateNotImplemented<IServiceProvider>())
     {

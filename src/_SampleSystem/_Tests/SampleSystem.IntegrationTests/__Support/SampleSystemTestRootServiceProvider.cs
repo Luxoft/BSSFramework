@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+
 using Automation.ServiceEnvironment;
 using Automation.ServiceEnvironment.Services;
 using Automation.Utils;
 using Automation.Utils.DatabaseUtils.Interfaces;
+
 using Framework.Authorization.ApproveWorkflow;
 using Framework.Cap.Abstractions;
-using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.DomainDriven.WebApiNetCore;
+
 using MediatR;
 
 using Microsoft.Extensions.Configuration;
@@ -50,7 +51,7 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                         .AddAuthWorkflow()
                         .AddScoped<StartWorkflowJob>()
 
-                        .RegisterControllers(new[] { Assembly.GetAssembly(typeof(EmployeeController)) })
+                        .RegisterControllers(new[] { typeof(EmployeeController).Assembly })
 
                         .AddSingleton(databaseContext)
                         .AddSingleton<DataHelper>()

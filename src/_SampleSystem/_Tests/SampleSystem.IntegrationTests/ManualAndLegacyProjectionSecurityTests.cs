@@ -1,30 +1,19 @@
 ﻿using System;
 using System.Linq;
-using System.Linq.Expressions;
 
-using Automation;
 using Automation.ServiceEnvironment;
 using FluentAssertions;
 
-using Framework.Authorization.Domain;
-using Framework.Core;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
-using Framework.OData;
 using Framework.SecuritySystem;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using SampleSystem.Domain;
-using SampleSystem.Domain.Inline;
 using SampleSystem.Domain.Projections;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Domain.ManualProjections;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
-
-
 
 namespace SampleSystem.IntegrationTests
 {

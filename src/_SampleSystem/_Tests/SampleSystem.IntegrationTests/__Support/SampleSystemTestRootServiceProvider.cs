@@ -23,7 +23,7 @@ using SampleSystem.WebApiCore.Controllers.Integration;
 
 namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 {
-    public class SampleSystemTestRootServiceProvider
+    public static class SampleSystemTestRootServiceProvider
     {
         public static IServiceProvider Create(IConfiguration configurationBase, IDatabaseContext databaseContext, ConfigUtil configUtil)
         {

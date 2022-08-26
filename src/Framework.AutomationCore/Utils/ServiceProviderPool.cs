@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Collections.Generic;
 using Automation.Utils;
@@ -6,7 +6,7 @@ using Automation.Utils.DatabaseUtils;
 using Automation.Utils.DatabaseUtils.Interfaces;
 using Microsoft.Extensions.Configuration;
 
-namespace SampleSystem.IntegrationTests.__Support;
+namespace Automation;
 
 public abstract class ServiceProviderPool
 {

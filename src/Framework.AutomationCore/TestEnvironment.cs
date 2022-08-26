@@ -7,7 +7,6 @@ using Automation.Utils.DatabaseUtils.Interfaces;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SampleSystem.IntegrationTests.__Support;
 
 namespace Automation;
 

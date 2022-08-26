@@ -1,5 +1,6 @@
 ﻿using System;
 
+using Automation;
 using Automation.Utils;
 using Automation.Utils.DatabaseUtils.Interfaces;
 
@@ -11,7 +12,8 @@ namespace SampleSystem.IntegrationTests.__Support;
 
 public class SampleSystemServiceProviderPool : ServiceProviderPool
 {
-    public SampleSystemServiceProviderPool(IConfiguration rootRootConfiguration, ConfigUtil configUtil) : base(rootRootConfiguration, configUtil)
+    public SampleSystemServiceProviderPool(IConfiguration rootRootConfiguration, ConfigUtil configUtil)
+            : base(rootRootConfiguration, configUtil)
     {
     }
 

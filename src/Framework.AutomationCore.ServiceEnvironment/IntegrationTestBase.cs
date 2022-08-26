@@ -14,8 +14,6 @@ using Framework.Notification.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-using SampleSystem.IntegrationTests.__Support;
-
 using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
 
 namespace Automation.ServiceEnvironment;

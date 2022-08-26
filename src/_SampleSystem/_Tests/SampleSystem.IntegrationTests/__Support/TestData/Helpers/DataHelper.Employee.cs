@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 using Automation.ServiceEnvironment;
 using Automation.Utils;
@@ -92,8 +93,11 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
 
             birthDate = birthDate ?? new DateTime(1990, 2, 15);
 
-            var rnd = new Random();
-            pin = pin ?? rnd.Next(100000);
+            var rnd = new Random(Guid.NewGuid().GetHashCode());
+
+            pin ??= 0.RangeInfinity()
+                     .Select(_ => rnd.Next(10000))
+                     .First(rndPin => !this.EvaluateRead(c => c.Logics.Employee.GetUnsecureQueryable().Any(e => e.Pin == rndPin)));
 
             return this.EvaluateWrite(
                 context =>

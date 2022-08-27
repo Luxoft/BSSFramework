@@ -94,7 +94,7 @@ public abstract class AuthHelperBase<TBLLContext> : RootServiceProviderContainer
 
     public void AddCurrentUserToAdmin()
     {
-        this.SetCurrentUserRole(IntegrationBusinessRole.Administrator, IntegrationBusinessRole.SystemIntegration);
+        this.SetCurrentUserRole(TestBusinessRole.Administrator, TestBusinessRole.SystemIntegration);
     }
 
     private void FindAndSavePermissionFilter(TBLLContext context, IPermissionDefinition permission, Permission permissionObject)

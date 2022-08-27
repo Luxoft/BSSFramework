@@ -8,7 +8,8 @@ namespace SampleSystem.IntegrationTests;
 
 public class IntegrationWebApi : IntegrationWebApiBase
 {
-    public IntegrationWebApi(IServiceProvider serviceProvider) : base(serviceProvider)
+    public IntegrationWebApi(IServiceProvider serviceProvider)
+            : base(serviceProvider)
     {
     }
 

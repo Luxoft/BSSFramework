@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
 
-using Automation.Utils;
-
 using OfficeOpenXml;
 
 namespace SampleSystem.IntegrationTests.Reports

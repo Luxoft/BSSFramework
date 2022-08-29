@@ -15,13 +15,13 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
         {
         }
 
-        public SampleSystemPermission(IntegrationBusinessRole role)
+        public SampleSystemPermission(TestBusinessRole role)
         {
             this.Role = role;
         }
 
         public SampleSystemPermission(
-            IntegrationBusinessRole role,
+            TestBusinessRole role,
             BusinessUnitIdentityDTO? businessUnit,
             ManagementUnitIdentityDTO? managementUnit,
             LocationIdentityDTO? location)
@@ -32,7 +32,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
             this.Location = location;
         }
 
-        public IntegrationBusinessRole Role { get; set; }
+        public TestBusinessRole Role { get; set; }
 
         public ManagementUnitIdentityDTO? ManagementUnit { get; set; }
 

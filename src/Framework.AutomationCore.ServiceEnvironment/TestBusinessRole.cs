@@ -5,11 +5,11 @@ using Automation.Utils;
 
 namespace Automation.ServiceEnvironment;
 
-public class IntegrationBusinessRole : IPermissionDefinition
+public class TestBusinessRole : IPermissionDefinition
 {
     private readonly string name;
 
-    public IntegrationBusinessRole(string name)
+    public TestBusinessRole(string name)
     {
         this.name = name;
     }
@@ -29,7 +29,7 @@ public class IntegrationBusinessRole : IPermissionDefinition
         return this.name;
     }
 
-    public static readonly IntegrationBusinessRole Administrator = new(nameof(Administrator));
+    public static readonly TestBusinessRole Administrator = new(nameof(Administrator));
 
-    public static readonly IntegrationBusinessRole SystemIntegration = new(nameof(SystemIntegration));
+    public static readonly TestBusinessRole SystemIntegration = new(nameof(SystemIntegration));
 }

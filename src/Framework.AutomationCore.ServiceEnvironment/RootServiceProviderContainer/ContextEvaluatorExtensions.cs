@@ -21,8 +21,8 @@ public static class ContextEvaluatorExtensions
         contextEvaluator.Evaluate(DBSessionMode.Read, action);
     }
 
-    public static TResult EvaluateRead<TBLLContext, TResult>(this IContextEvaluator<TBLLContext> contextEvaluator, Func<TBLLContext, TResult> action)
+    public static TResult EvaluateRead<TBLLContext, TResult>(this IContextEvaluator<TBLLContext> contextEvaluator, Func<TBLLContext, TResult> func)
     {
-        return contextEvaluator.Evaluate(DBSessionMode.Read, action);
+        return contextEvaluator.Evaluate(DBSessionMode.Read, func);
     }
 }

@@ -90,9 +90,9 @@ public class ConfigUtil
     }
 
     private string GetLocalDbConnectionString(string connectionString, string instanceName)
-        => DataSourceRegex.Replace(connectionString, $"(localdb)\\{instanceName}");
+        => DataSourceRegex.Replace(connectionString, $"Data Source=(localdb)\\{instanceName}");
 
-    private static readonly Regex DataSourceRegex = new Regex("Data Source=([.\\\\w].*);", RegexOptions.Compiled);
+    private static readonly Regex DataSourceRegex = new Regex("Data Source=([^;]*)", RegexOptions.Compiled);
 
     public string GetDataSource(string connectionString) =>
         DataSourceRegex.Matches(connectionString).First().Value;

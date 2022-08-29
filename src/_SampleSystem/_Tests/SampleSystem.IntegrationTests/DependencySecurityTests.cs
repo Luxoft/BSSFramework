@@ -45,7 +45,7 @@ namespace SampleSystem.IntegrationTests
 
             this.DataHelper.SaveEmployee(login: TestEmployeeLogin);
 
-            this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemPermission(IntegrationBusinessRole.Administrator, this.bu2Ident, null, null));
+            this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemPermission(TestBusinessRole.Administrator, this.bu2Ident, null, null));
 
             this.EvaluateWrite(
                 context =>

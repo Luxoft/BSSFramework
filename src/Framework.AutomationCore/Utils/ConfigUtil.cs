@@ -17,14 +17,14 @@ public class ConfigUtil
     private readonly Lazy<string> SystemNameLazy;
     private readonly Lazy<TestRunMode> TestRunModeLazy;
 
-    public ConfigUtil(IConfiguration appsettings)
+    public ConfigUtil(IConfiguration configuration)
     {
-        this.Configuration = appsettings;
-        ServerRootFolderLazy = new Lazy<string>(() => this.Configuration["TestRunServerRootFolder"]);
-        TempFolderLazy = new Lazy<string>(
+        this.Configuration = configuration;
+        this.ServerRootFolderLazy = new Lazy<string>(() => this.Configuration["TestRunServerRootFolder"]);
+        this.TempFolderLazy = new Lazy<string>(
             () =>
             {
-                var path = Configuration["TempFolder"];
+                var path = this.Configuration["TempFolder"];
 
                 if (!Directory.Exists(path))
                 {
@@ -33,24 +33,24 @@ public class ConfigUtil
 
                 return path;
             });
-        DataDirectory = new Lazy<string>(
+        this.DataDirectory = new Lazy<string>(
             () =>
             {
-                if (!Directory.Exists(Path.Combine(ServerRootFolderLazy.Value, "data")))
+                if (!Directory.Exists(Path.Combine(this.ServerRootFolderLazy.Value, "data")))
                 {
-                    Directory.CreateDirectory(Path.Combine(ServerRootFolderLazy.Value, "data"));
+                    Directory.CreateDirectory(Path.Combine(this.ServerRootFolderLazy.Value, "data"));
                 }
 
-                return Path.Combine(ServerRootFolderLazy.Value, "data");
+                return Path.Combine(this.ServerRootFolderLazy.Value, "data");
             });
-        UseLocalDbLazy = new Lazy<bool>(() => bool.Parse(Configuration["UseLocalDb"]));
+        this.UseLocalDbLazy = new Lazy<bool>(() => bool.Parse(this.Configuration["UseLocalDb"]));
 
-        this.TestsParallelizeLazy = new Lazy<bool>(() => bool.Parse(Configuration["TestsParallelize"]));
-        SystemNameLazy = new Lazy<string>(() => Configuration["SystemName"]);
-        TestRunModeLazy = new Lazy<TestRunMode>(
+        this.TestsParallelizeLazy = new Lazy<bool>(() => bool.Parse(this.Configuration["TestsParallelize"]));
+        this.SystemNameLazy = new Lazy<string>(() => this.Configuration["SystemName"]);
+        this.TestRunModeLazy = new Lazy<TestRunMode>(
             () =>
             {
-                if (!Enum.TryParse(Configuration["TestRunMode"], out TestRunMode runMode))
+                if (!Enum.TryParse(this.Configuration["TestRunMode"], out TestRunMode runMode))
                 {
                     runMode = TestRunMode.DefaultRunModeOnEmptyDatabase;
                 }
@@ -63,21 +63,21 @@ public class ConfigUtil
 
     public string ComputerName => Environment.MachineName;
 
-    public string DbDataDirectory => DataDirectory.Value;
+    public string DbDataDirectory => this.DataDirectory.Value;
 
-    public TestRunMode TestRunMode => TestRunModeLazy.Value;
+    public TestRunMode TestRunMode => this.TestRunModeLazy.Value;
 
-    public string TempFolder => TempFolderLazy.Value;
+    public string TempFolder => this.TempFolderLazy.Value;
 
-    public bool UseLocalDb => UseLocalDbLazy.Value;
+    public bool UseLocalDb => this.UseLocalDbLazy.Value;
 
     public bool TestsParallelize => this.TestsParallelizeLazy.Value;
 
-    public string SystemName => SystemNameLazy.Value;
+    public string SystemName => this.SystemNameLazy.Value;
 
     public string GetConnectionString(string connectionStringName)
     {
-        var connectionString = Configuration.GetConnectionString(connectionStringName);
+        var connectionString = this.Configuration.GetConnectionString(connectionStringName);
 
         if (this.UseLocalDb)
         {

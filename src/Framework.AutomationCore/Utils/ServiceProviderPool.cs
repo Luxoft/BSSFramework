@@ -17,10 +17,14 @@ public abstract class ServiceProviderPool
 
     private readonly Dictionary<IServiceProvider, bool> providersCache = new Dictionary<IServiceProvider, bool>();
 
+    private readonly Lazy<string> lazyDefaultConnectionString;
+
     protected ServiceProviderPool(IConfiguration rootRootConfiguration, ConfigUtil configUtil)
     {
         this.RootConfiguration = rootRootConfiguration;
         this.ConfigUtil = configUtil;
+
+        this.lazyDefaultConnectionString = new Lazy<string>(this.BuildDefaultConnectionString);
     }
 
     protected abstract IServiceProvider Build(IDatabaseContext databaseContext);
@@ -55,18 +59,20 @@ public abstract class ServiceProviderPool
 
         if (firstFree == null)
         {
-            return this.Build(this.CreateDatabaseContext());
+            return this.Build(this.BuildDatabaseContext());
         }
 
         return firstFree;
     }
 
-    protected virtual DatabaseContext CreateDatabaseContext()
+    protected virtual DatabaseContext BuildDatabaseContext()
     {
-        return new DatabaseContext(this.ConfigUtil, new DatabaseContextSettings(this.GetDefaultConnectionString(), this.GetSecondaryDatabases()));
+        return new DatabaseContext(
+            this.ConfigUtil,
+            new DatabaseContextSettings(this.lazyDefaultConnectionString.Value, this.GetSecondaryDatabases()));
     }
 
-    protected virtual string GetDefaultConnectionString()
+    protected virtual string BuildDefaultConnectionString()
     {
         return this.ConfigUtil.GetConnectionString("DefaultConnection");
     }

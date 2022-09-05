@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using Automation.Utils;
 using Automation.Utils.DatabaseUtils;
 using Automation.Utils.DatabaseUtils.Interfaces;
@@ -13,9 +12,7 @@ public abstract class ServiceProviderPool
     protected IConfiguration RootConfiguration { get; }
     protected ConfigUtil ConfigUtil { get; }
 
-    private readonly object locker = new object();
-
-    private readonly Dictionary<IServiceProvider, bool> providersCache = new Dictionary<IServiceProvider, bool>();
+    private readonly ConcurrentBag<IServiceProvider> providersCache = new ConcurrentBag<IServiceProvider>();
 
     private readonly Lazy<string> lazyDefaultConnectionString;
 
@@ -29,41 +26,9 @@ public abstract class ServiceProviderPool
 
     protected abstract IServiceProvider Build(IDatabaseContext databaseContext);
 
-    public IServiceProvider Get()
-    {
-        lock (this.locker)
-        {
-            var provider = this.GetOrCreateInternal();
-            this.providersCache[provider] = true;
-            return provider;
-        }
-    }
+    public IServiceProvider Get() => this.providersCache.TryTake(out IServiceProvider provider) ? provider : this.Build(this.BuildDatabaseContext());
 
-    public void Release(IServiceProvider serviceProvider)
-    {
-        lock (this.locker)
-        {
-            this.providersCache[serviceProvider] = false;
-        }
-    }
-
-    private IServiceProvider GetOrCreateInternal()
-    {
-        var freeRequest =
-
-            from pair in this.providersCache
-            where !pair.Value
-            select pair.Key;
-
-        var firstFree = freeRequest.FirstOrDefault();
-
-        if (firstFree == null)
-        {
-            return this.Build(this.BuildDatabaseContext());
-        }
-
-        return firstFree;
-    }
+    public void Release(IServiceProvider serviceProvider) => this.providersCache.Add(serviceProvider);
 
     protected virtual DatabaseContext BuildDatabaseContext()
     {

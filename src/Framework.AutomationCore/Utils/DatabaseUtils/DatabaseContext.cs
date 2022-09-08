@@ -8,6 +8,12 @@ namespace Automation.Utils.DatabaseUtils;
 
 public class DatabaseContext : IDatabaseContext
 {
+    public DatabaseItem Main { get; }
+
+    private readonly Server server;
+
+    public Dictionary<string, DatabaseItem> Secondary { get; }
+
     public DatabaseContext(
         ConfigUtil configUtil,
         DatabaseContextSettings settings)
@@ -23,13 +29,18 @@ public class DatabaseContext : IDatabaseContext
             }
         }
 
-        this.Server = new Server(new ServerConnection(new SqlConnection(
+        this.server = new Server(new ServerConnection(new SqlConnection(
             CoreDatabaseUtil.CutInitialCatalog(this.Main.ConnectionString))));
     }
 
-    public Dictionary<string, DatabaseItem> Secondary { get; }
-    public Server Server { get; }
-    public DatabaseItem Main { get; }
+    public Server Server
+    {
+        get
+        {
+            this.server.Refresh();
+            return this.server;
+        }
+    }
 }
 
 public class DatabaseContextSettings

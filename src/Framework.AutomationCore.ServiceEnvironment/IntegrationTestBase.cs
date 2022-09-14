@@ -51,9 +51,13 @@ public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderCont
             AssemblyInitializeAndCleanup.RunAction("Drop Database", this.DatabaseContext.Drop);
         }
 
-        this.RootServiceProvider.GetRequiredService<NHibSessionEnvironment>().Dispose();
+        this.CleanupTestEnvironment();
         this.rootServiceProviderPool.Release(this.RootServiceProvider);
+    }
 
+    public virtual void CleanupTestEnvironment()
+    {
+        this.RootServiceProvider.GetRequiredService<NHibSessionEnvironment>().Dispose();
     }
 
     /// <summary>

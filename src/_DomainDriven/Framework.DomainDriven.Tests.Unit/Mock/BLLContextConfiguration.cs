@@ -23,11 +23,8 @@ namespace Framework.DomainDriven.UnitTest.Mock
     {
         private readonly Lazy<TBLLContext> _bllContextLazy;
 
-        private readonly MockDalFactoryProvider<TPersistentDomainObjectBase, TIdent> _mockDalFactory;
-
         protected BLLContextConfiguration(IEnumerable<Assembly> domainAssemblies)
         {
-            this._mockDalFactory = new MockDalFactoryProvider<TPersistentDomainObjectBase, TIdent>(domainAssemblies);
             this._bllContextLazy = new Lazy<TBLLContext>(this.CreateContext);
         }
 
@@ -36,16 +33,9 @@ namespace Framework.DomainDriven.UnitTest.Mock
             get { return this._bllContextLazy.Value; }
         }
 
-        public MockDalFactoryProvider<TPersistentDomainObjectBase, TIdent> MockDalFactory
-        {
-            get { return this._mockDalFactory; }
-        }
-
         private TBLLContext CreateContext()
         {
             var result = Substitute.For<TBLLContext>();
-
-            result.DalFactory.Returns(this._mockDalFactory.DALFactory);
 
             this.Initialize(result);
 

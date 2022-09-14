@@ -86,7 +86,9 @@ namespace SampleSystem.WebApiCore
 
                         .AddScoped<IDBSessionEventListener, DefaultDBSessionEventListener>()
                         .AddScoped<IDBSessionEventListener, SubscriptionDBSessionEventListener>()
-                        .AddScopedFromLazy<IDBSession, NHibSession>()
+
+                        .AddScoped<INHibSession, NHibSession>()
+                        .AddScopedFromLazy<IDBSession, INHibSession>(false)
 
                         .AddSingleton<INHibSessionEnvironmentSettings, NHibSessionEnvironmentSettings>()
                         .AddSingleton<NHibConnectionSettings>()

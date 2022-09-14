@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 using Framework.Core;
@@ -9,9 +10,9 @@ public class ExpressionVisitorAggregator : IExpressionVisitorContainer
 {
     private readonly IExpressionVisitorContainerItem[] items;
 
-    protected ExpressionVisitorAggregator(IExpressionVisitorContainerItem[] items)
+    public ExpressionVisitorAggregator(IEnumerable<IExpressionVisitorContainerItem> items)
     {
-        this.items = items;
+        this.items = items.ToArray();
     }
 
     public ExpressionVisitor Visitor => this.items.SelectMany(item => item.GetVisitors()).ToComposite();

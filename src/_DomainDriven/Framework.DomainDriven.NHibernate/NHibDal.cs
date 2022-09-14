@@ -23,32 +23,32 @@ namespace Framework.DomainDriven.NHibernate
     {
         private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache();
 
-        private readonly NHibSessionBase session;
+        private readonly INHibSession session;
 
         private readonly IExpressionVisitorContainer expressionVisitorContainer;
 
-        public NHibDal(NHibSessionBase session, IExpressionVisitorContainer expressionVisitorContainer)
+        public NHibDal(INHibSession session, IExpressionVisitorContainer expressionVisitorContainer)
         {
             this.session = session ?? throw new ArgumentNullException(nameof(session));
             this.expressionVisitorContainer = expressionVisitorContainer;
         }
 
-        private ISession InnerSession => this.session.InnerSession;
+        private ISession NativeSession => this.session.NativeSession;
 
-        public TDomainObject GetById(TIdent id, LockRole lockRole) => this.InnerSession.Get<TDomainObject>(id, lockRole.ToLockMode());
+        public TDomainObject GetById(TIdent id, LockRole lockRole) => this.NativeSession.Get<TDomainObject>(id, lockRole.ToLockMode());
 
         public void Lock(TDomainObject domainObject, LockRole lockRole)
         {
             this.CheckWrite();
 
-            this.InnerSession.Lock(domainObject, lockRole.ToLockMode());
+            this.NativeSession.Lock(domainObject, lockRole.ToLockMode());
         }
 
         public virtual void Save(TDomainObject domainObject)
         {
             this.CheckWrite();
 
-            this.InnerSession.SaveOrUpdate(domainObject);
+            this.NativeSession.SaveOrUpdate(domainObject);
 
             this.session.RegisterModified(domainObject, ModificationType.Save);
         }
@@ -62,7 +62,7 @@ namespace Framework.DomainDriven.NHibernate
 
             this.CheckWrite();
 
-            this.InnerSession.Save(domainObject, id);
+            this.NativeSession.Save(domainObject, id);
 
             this.session.RegisterModified(domainObject, ModificationType.Save);
         }
@@ -73,12 +73,12 @@ namespace Framework.DomainDriven.NHibernate
 
             this.session.RegisterModified(domainObject, ModificationType.Remove);
 
-            this.InnerSession.Delete(domainObject);
+            this.NativeSession.Delete(domainObject);
         }
 
         public IQueryable<TDomainObject> GetQueryable(LockRole lockRole, IFetchContainer<TDomainObject> fetchContainer, ExpressionVisitor visitor = null)
         {
-            var queryable = this.InnerSession.Query<TDomainObject>();
+            var queryable = this.NativeSession.Query<TDomainObject>();
 
             (queryable.Provider as VisitedQueryProvider)
                     .FromMaybe("Register VisitedQueryProvider in Nhib configuration")
@@ -241,9 +241,9 @@ namespace Framework.DomainDriven.NHibernate
         public IEnumerable<TIdent> GetIdentiesWithHistory(Expression<Func<TDomainObject, bool>> query) =>
             this.GetAuditReader().GetIdentiesBy<TDomainObject, TIdent>(query.ToCriterion());
 
-        public TDomainObject GetById(TIdent id) => this.InnerSession.Get<TDomainObject>(id);
+        public TDomainObject GetById(TIdent id) => this.NativeSession.Get<TDomainObject>(id);
 
-        public TDomainObject Load(TIdent id) => this.InnerSession.Load<TDomainObject>(id);
+        public TDomainObject Load(TIdent id) => this.NativeSession.Load<TDomainObject>(id);
 
         public DomainObjectPropertyRevisions<TIdent, TProperty> GetPrimitivePropertiesRevision<TProperty>(
             TIdent id,

@@ -11,11 +11,13 @@ using Framework.Persistent;
 
 using JetBrains.Annotations;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.BLL
 {
-    public abstract partial class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObjectBase, TDomainObject, TIdent, TOperation> :
+    public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObjectBase, TDomainObject, TIdent, TOperation> :
 
         OperationBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObjectBase, TDomainObject, TOperation>,
 
@@ -27,17 +29,18 @@ namespace Framework.DomainDriven.BLL
         where TDomainObject : class, TPersistentDomainObjectBase
         where TOperation : struct, Enum
     {
-        protected ISpecificationEvaluator SpecificationEvaluator { get; }
 
-        private readonly IDAL<TDomainObject, TIdent> _dal;
+        private readonly IDAL<TDomainObject, TIdent> dal;
 
 
         protected BLLBase(TBLLContext context, ISpecificationEvaluator specificationEvaluator = null)
             : base(context)
         {
             this.SpecificationEvaluator = specificationEvaluator;
-            this._dal = this.Context.DalFactory.CreateDAL<TDomainObject>();
+            this.dal = this.Context.ServiceProvider.GetRequiredService<IDAL<TDomainObject, TIdent>>();
         }
+
+        protected ISpecificationEvaluator SpecificationEvaluator { get; }
 
         #region Private.Method
 
@@ -58,11 +61,11 @@ namespace Framework.DomainDriven.BLL
             {
                 if (id.IsDefault())
                 {
-                    this._dal.Save(domainObject);
+                    this.dal.Save(domainObject);
                 }
                 else
                 {
-                    this._dal.Insert(domainObject, id);
+                    this.dal.Insert(domainObject, id);
                 }
 
                 base.Save(domainObject);
@@ -93,7 +96,7 @@ namespace Framework.DomainDriven.BLL
 
             if (!removingEventArgs.Cancel)
             {
-                this._dal.Remove(domainObject);
+                this.dal.Remove(domainObject);
                 base.Remove(domainObject);
             }
         }
@@ -149,7 +152,7 @@ namespace Framework.DomainDriven.BLL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public TDomainObject Load(TIdent id) =>  this._dal.Load(id);
+        public TDomainObject Load(TIdent id) =>  this.dal.Load(id);
 
         public List<TDomainObject> GetListBy(Expression<Func<TDomainObject, bool>> filter, Expression<Action<IPropertyPathNode<TDomainObject>>> firstFetch, params Expression<Action<IPropertyPathNode<TDomainObject>>>[] otherFetchs)
         {
@@ -234,7 +237,7 @@ namespace Framework.DomainDriven.BLL
         /// <returns></returns>
         public IQueryable<TDomainObject> GetUnsecureQueryable(IFetchContainer<TDomainObject> fetchContainer, LockRole lockRole = LockRole.None)
         {
-            return this._dal.GetQueryable(lockRole, fetchContainer);
+            return this.dal.GetQueryable(lockRole, fetchContainer);
         }
 
         public IQueryable<TDomainObject> GetUnsecureQueryable(
@@ -435,19 +438,19 @@ namespace Framework.DomainDriven.BLL
 
         public void Lock(TDomainObject domainObject, LockRole lockRole)
         {
-            this._dal.Lock(domainObject, lockRole);
+            this.dal.Lock(domainObject, lockRole);
         }
 
         #region Revision
 
         public virtual TDomainObject GetObjectByRevision(TIdent id, long revision)
         {
-            return this._dal.GetObjectByRevision(id, revision);
+            return this.dal.GetObjectByRevision(id, revision);
         }
 
         public virtual long? GetPreviousRevision(TIdent id, long maxRevision)
         {
-            return this._dal.GetPreviousRevision(id, maxRevision);
+            return this.dal.GetPreviousRevision(id, maxRevision);
         }
 
         public virtual TDomainObject GetObjectsByPrevRevision(TIdent id)
@@ -461,49 +464,49 @@ namespace Framework.DomainDriven.BLL
 
         public virtual IEnumerable<TDomainObject> GetObjectsByRevision(IEnumerable<TIdent> idCollection, long revision)
         {
-            return this._dal.GetObjectsByRevision(idCollection, revision);
+            return this.dal.GetObjectsByRevision(idCollection, revision);
         }
 
         public virtual DomainObjectRevision<TIdent> GetObjectRevisions(TIdent identity, Period? period = null)
         {
-            return this._dal.GetObjectRevisions(identity, period);
+            return this.dal.GetObjectRevisions(identity, period);
         }
 
         public virtual long? GetPreviusVersion(TIdent id, long maxRevisionNumber)
         {
-            return this._dal.GetPreviousRevision(id, maxRevisionNumber);
+            return this.dal.GetPreviousRevision(id, maxRevisionNumber);
         }
 
         public virtual IEnumerable<long> GetRevisions(TIdent id)
         {
-            return this._dal.GetRevisions(id);
+            return this.dal.GetRevisions(id);
         }
 
         public virtual IList<Tuple<TDomainObject, long>> GetDomainObjectRevisions(TIdent id, int takeCount)
         {
-            return this._dal.GetDomainObjectRevisions<TDomainObject>(id, takeCount);
+            return this.dal.GetDomainObjectRevisions<TDomainObject>(id, takeCount);
         }
 
         public virtual DomainObjectPropertyRevisions<TIdent, TProperty> GetPropertyChanges<TProperty>(TIdent id,
             Expression<Func<TDomainObject, TProperty>> propertyExpression, Period? period = null)
         {
-            return this._dal.GetPropertyRevisions(id, propertyExpression, period);
+            return this.dal.GetPropertyRevisions(id, propertyExpression, period);
         }
 
         public virtual DomainObjectPropertyRevisions<TIdent, TProperty> GetPropertyChanges<TProperty>(TIdent id, string propertyName, Period? period = null)
         {
-            return this._dal.GetPropertyRevisions<TProperty>(id, propertyName, period);
+            return this.dal.GetPropertyRevisions<TProperty>(id, propertyName, period);
         }
 
         public virtual IDomainObjectPropertyRevisionBase<TIdent, RevisionInfoBase> GetUnTypedPropertyChanges(TIdent id, string propertyName, Period? period = null)
         {
-            return this._dal.GetUntypedPropertyRevisions(id, propertyName, period);
+            return this.dal.GetUntypedPropertyRevisions(id, propertyName, period);
         }
 
 
         public IEnumerable<TIdent> GetIdentiesWithHistory(Expression<Func<TDomainObject, bool>> expression)
         {
-            return this._dal.GetIdentiesWithHistory(expression);
+            return this.dal.GetIdentiesWithHistory(expression);
         }
 
         /// <summary>
@@ -512,7 +515,7 @@ namespace Framework.DomainDriven.BLL
         /// <returns></returns>
         public long GetCurrentRevision()
         {
-            return this._dal.GetCurrentRevision();
+            return this.dal.GetCurrentRevision();
         }
 
         #endregion

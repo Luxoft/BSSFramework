@@ -31,7 +31,6 @@ namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain
         private readonly MockDAL<HierarchyObjectAncestorLink, Guid> _domainAncestorLinkDal;
         private readonly MockDAL<NamedLockObject, Guid> _namedLockDAL;
 
-        private readonly IDALFactory<PersistentDomainObjectBase, Guid> _dalFactory;
         private readonly IBLLFactoryContainer<IDefaultBLLFactory<PersistentDomainObjectBase, Guid>> _defaultFactoryContainer;
 
         public TestBLLContext(List<HierarchyObject> hierarchicalObjects)
@@ -42,15 +41,14 @@ namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain
 
             this._namedLockDAL = new MockDAL<NamedLockObject, Guid>(new NamedLockObject() { LockOperation = NamedLockOperation.HierarchyObjectAncestorLinkLock });
 
-            this._dalFactory = Substitute.For<IDALFactory<PersistentDomainObjectBase, Guid>>();
-
-            this._dalFactory.CreateDAL<HierarchyObjectAncestorLink>().Returns(this._domainAncestorLinkDal);
-            this._dalFactory.CreateDAL<HierarchyObject>().Returns(this.hierarchyDomainDal);
-            this._dalFactory.CreateDAL<NamedLockObject>().Returns(this._namedLockDAL);
             this._defaultFactoryContainer = Substitute.For<IBLLFactoryContainer<IDefaultBLLFactory<PersistentDomainObjectBase, Guid>>>();
 
             this._syncHierarchyService = new Lazy<SyncDenormolizedValuesService<ITestBLLContext, PersistentDomainObjectBase, HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid, NamedLockObject, NamedLockOperation>>(() =>
-                new SyncDenormolizedValuesService<ITestBLLContext, PersistentDomainObjectBase, HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid, NamedLockObject, NamedLockOperation>(this));
+                new SyncDenormolizedValuesService<ITestBLLContext, PersistentDomainObjectBase, HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid, NamedLockObject, NamedLockOperation>(
+                 NSubstitute.s
+                 this.hierarchyDomainDal,
+                 this._domainAncestorLinkDal
+                 this._namedLockDAL));
 
             var defaultFactory = Substitute.For<IDefaultBLLFactory<PersistentDomainObjectBase, Guid>>();
 
@@ -64,8 +62,6 @@ namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain
         }
 
         public IParser<string, SelectOperation> SelectOperationParser { get; private set; }
-
-        public IDALFactory<PersistentDomainObjectBase, Guid> DalFactory => this._dalFactory;
 
         public HierarchyDomainAncestorLogic HierarchyDomainAncestorLogic => this._hierarchyDomainAncestorLogic;
 

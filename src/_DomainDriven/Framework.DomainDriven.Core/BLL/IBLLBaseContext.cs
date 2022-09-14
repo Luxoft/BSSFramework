@@ -6,7 +6,6 @@ namespace Framework.DomainDriven.BLL
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     {
-        IDALFactory<TPersistentDomainObjectBase, TIdent> DalFactory { get; }
     }
 
 

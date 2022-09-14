@@ -35,14 +35,28 @@ namespace SampleSystem.WebApiCore;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection RegisterLegacyBLLContext(this IServiceCollection services)
+    public static IServiceCollection RegisterLegacyVisitors(this IServiceCollection services)
     {
-        services.AddScoped<IExpressionVisitorContainerItem, ExpressionVisitorContainerPersistentItem>();
-        services.AddScoped<IExpressionVisitorContainerItem, ExpressionVisitorContainerPeriodItem>();
+        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPersistentItem>();
+        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPeriodItem>();
+        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDefaultItem>();
 
-        services.AddScoped<IExpressionVisitorContainerItem, ExpressionVisitorContainerDefaultItem>();
+        services.AddSingleton<IIdPropertyResolver, IdPropertyResolver>();
+
+        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>();
+        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>();
+        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<PersistentDomainObjectBase, Guid>>();
+
+        services.AddScoped<IExpressionVisitorContainerItem, ExpressionVisitorContainerODataItem<ISampleSystemBLLContext, PersistentDomainObjectBase, Guid>>();
 
         services.AddScoped<IExpressionVisitorContainer, ExpressionVisitorAggregator>();
+
+        return services;
+    }
+
+    public static IServiceCollection RegisterLegacyBLLContext(this IServiceCollection services)
+    {
+        services.RegisterLegacyVisitors();
 
         services.AddScoped<TargetSystemServiceFactory>();
         services.AddScopedFrom((TargetSystemServiceFactory factory) => factory.Create<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase>(TargetSystemHelper.AuthorizationName));
@@ -68,8 +82,6 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>();
         services.AddScoped<ISampleSystemDTOMappingService, SampleSystemServerPrimitiveDTOMappingService>();
-
-        services.AddScoped<IOperationEventSenderContainer<PersistentDomainObjectBase>, OperationEventSenderContainer<PersistentDomainObjectBase>>();
 
         services.AddScoped<IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>>, SampleSystemLocalDBEventMessageSender>();
         services.AddScoped<IOperationEventListener<PersistentDomainObjectBase>, SampleSystemEventsSubscriptionManager>();
@@ -118,8 +130,6 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection RegisterMainBLL(this IServiceCollection services)
     {
         return services
-
-                .AddScoped<IDALFactory<PersistentDomainObjectBase, Guid>, NHibDalFactory<PersistentDomainObjectBase, Guid>>()
 
                 .AddSingleton<SampleSystemValidatorCompileCache>()
 

@@ -22,14 +22,23 @@ namespace Framework.DomainDriven.BLL.Security
         where TNamedLockOperation : struct, Enum
         where TSourceToAncestorOrChildLink : IHierarchicalToAncestorOrChildLink<TDomainObject, TIdent>
     {
-        private readonly TBLLContext _context;
+        private readonly IDAL<TDomainObject, Guid> domainObjectDal;
 
-        private MemberExpression _identityPropertyExpression;
+        private readonly IDAL<TDomainObjectAncestorLink, Guid> domainObjectAncestorLinkDal;
+
+        private readonly IDAL<TNamedLockObject, Guid> namedLockObjectDal;
+
+        private MemberExpression identityPropertyExpression;
 
 
-        public SyncDenormolizedValuesService(TBLLContext context)
+        public SyncDenormolizedValuesService(
+                IDAL<TDomainObject, Guid> domainObjectDal,
+                IDAL<TDomainObjectAncestorLink, Guid> domainObjectAncestorLinkDal,
+                IDAL<TNamedLockObject, Guid> namedLockObjectDal)
         {
-            this._context = context;
+            this.domainObjectDal = domainObjectDal;
+            this.domainObjectAncestorLinkDal = domainObjectAncestorLinkDal;
+            this.namedLockObjectDal = namedLockObjectDal;
             this.Init();
         }
 
@@ -64,7 +73,7 @@ namespace Framework.DomainDriven.BLL.Security
         {
             this.LockChanges();
 
-            foreach (var domainObject in this._context.DalFactory.CreateDAL<TDomainObject>().GetQueryable(LockRole.None).ToList())
+            foreach (var domainObject in this.domainObjectDal.GetQueryable(LockRole.None).ToList())
             {
                 this.SyncUp(domainObject);
             }
@@ -90,7 +99,7 @@ namespace Framework.DomainDriven.BLL.Security
         private void Init()
         {
             Expression<Func<TDomainObject, TIdent>> idExpression = z => z.Id;
-            this._identityPropertyExpression = (MemberExpression)idExpression.Body;
+            this.identityPropertyExpression = (MemberExpression)idExpression.Body;
         }
 
         private SyncResult GetUnSyncResult(IEnumerable<TDomainObject> domainObjects)
@@ -102,11 +111,9 @@ namespace Framework.DomainDriven.BLL.Security
 
             this.LockChanges();
 
-            var ancestorLinkLogic = this._context.DalFactory.CreateDAL<TDomainObjectAncestorLink>();
-
             var domainObjectIdents = domainObjects.Select(z => z.Id).ToList();
 
-            var removingAncestors = ancestorLinkLogic
+            var removingAncestors = this.domainObjectAncestorLinkDal
                 .GetQueryable(LockRole.None)
                 .Where(z => domainObjectIdents.Contains(z.Ancestor.Id) || domainObjectIdents.Contains(z.Child.Id)).ToList();
 
@@ -153,9 +160,7 @@ namespace Framework.DomainDriven.BLL.Security
                                         typeof(TDomainObjectAncestorLink))
                                 };
 
-            var namedLocBLL = this._context.DalFactory.CreateDAL<TNamedLockObject>();
-
-            var queryable = namedLocBLL.GetQueryable(LockRole.None);
+            var queryable = this.namedLockObjectDal.GetQueryable(LockRole.None);
 
             var allNamed = queryable.Where(z => collectin.Contains(z.LockOperation)).ToList();
 
@@ -163,7 +168,7 @@ namespace Framework.DomainDriven.BLL.Security
                 () => new System.ArgumentException($"System must have namedLock for {typeof(TDomainObjectAncestorLink).Name} global lock "),
                 () => new System.ArgumentException($"System have more then one namedLock for {typeof(TDomainObjectAncestorLink).Name} global lock "));
 
-            namedLocBLL.Lock(namedLock, LockRole.Update);
+            this.namedLockObjectDal.Lock(namedLock, LockRole.Update);
         }
 
         /// <summary>
@@ -182,7 +187,7 @@ namespace Framework.DomainDriven.BLL.Security
                 throw new ArgumentNullException(nameof(domainObject));
             }
 
-            var ancestorLogic = this._context.DalFactory.CreateDAL<TDomainObjectAncestorLink>().GetQueryable(LockRole.None);
+            var ancestorLogic = this.domainObjectAncestorLinkDal.GetQueryable(LockRole.None);
 
             var actualAncestors = domainObject.GetAllParents().Select(z => new AncestorLink(child: domainObject, ancestor: z)).ToList();
 
@@ -195,12 +200,12 @@ namespace Framework.DomainDriven.BLL.Security
 
         private void RemoveAncestor(TDomainObjectAncestorLink domainObjectAncestorLink)
         {
-            this._context.DalFactory.CreateDAL<TDomainObjectAncestorLink>().Remove(domainObjectAncestorLink);
+            this.domainObjectAncestorLinkDal.Remove(domainObjectAncestorLink);
         }
 
         private void SaveAncestor(TDomainObjectAncestorLink domainObjectAncestorLink)
         {
-            this._context.DalFactory.CreateDAL<TDomainObjectAncestorLink>().Save(domainObjectAncestorLink);
+            this.domainObjectAncestorLinkDal.Save(domainObjectAncestorLink);
         }
 
         private Expression<Func<TDomainObject, bool>> GetEqualsIdentityExpression(TDomainObject domainObject)
@@ -209,9 +214,9 @@ namespace Framework.DomainDriven.BLL.Security
             var variable = Expression.Constant(domainObject);
 
 
-            var domainObjectIdPropertyExpression = Expression.Property(variable, this._identityPropertyExpression.Member.Name);
+            var domainObjectIdPropertyExpression = Expression.Property(variable, this.identityPropertyExpression.Member.Name);
 
-            var currentParameterIdPropertyExpression = Expression.Property(parameter, this._identityPropertyExpression.Member.Name);
+            var currentParameterIdPropertyExpression = Expression.Property(parameter, this.identityPropertyExpression.Member.Name);
 
             var equalExpression = Expression.Equal(domainObjectIdPropertyExpression, currentParameterIdPropertyExpression);
 

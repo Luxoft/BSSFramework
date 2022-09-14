@@ -23,6 +23,10 @@ namespace Framework.DomainDriven.ServiceModel.IAD
     {
         public static IServiceCollection RegisterGenericServices(this IServiceCollection services)
         {
+            services.AddScoped(typeof(IOperationEventSenderContainer<>), typeof(OperationEventSenderContainer<>));
+
+            services.AddScoped(typeof(IDAL<,>), typeof(NHibDal<,>));
+
             services.AddSingleton<IExceptionExpander, ExceptionExpander>();
 
             services.AddScopedFrom((IDBSession session) => session.GetObjectStateService());
@@ -42,10 +46,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         public static IServiceCollection RegisterAuthorizationBLL(this IServiceCollection services)
         {
             return services
-
-                   .AddScoped<IDALFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>, NHibDalFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
-
-                   .AddScoped<IOperationEventSenderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>, OperationEventSenderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>>()
 
                    .AddSingleton<AuthorizationValidatorCompileCache>()
 
@@ -75,10 +75,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         public static IServiceCollection RegisterConfigurationBLL(this IServiceCollection services)
         {
             return services
-
-                   .AddScoped<IDALFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>, NHibDalFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>()
-
-                   .AddScoped<IOperationEventSenderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>, OperationEventSenderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>>()
 
                    .AddSingleton<ConfigurationValidatorCompileCache>()
 

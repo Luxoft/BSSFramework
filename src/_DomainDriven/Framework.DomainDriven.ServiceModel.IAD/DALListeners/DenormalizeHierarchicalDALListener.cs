@@ -11,6 +11,8 @@ using Framework.Persistent;
 
 using JetBrains.Annotations;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.DomainDriven.ServiceModel.IAD
 {
     public class DenormalizeHierarchicalDALListener<TBLLContext, TPersistentDomainObjectBase, TNamedLockObject, TNamedLockOperation> : BLLContextContainer<TBLLContext>, IBeforeTransactionCompletedDALListener
@@ -46,7 +48,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             where TAncestorChildLink : class, TPersistentDomainObjectBase, IModifiedHierarchicalAncestorLink<TDomainObject, TSourceToAncestorOrChildLink, Guid>, new()
             where TSourceToAncestorOrChildLink : IHierarchicalToAncestorOrChildLink<TDomainObject, Guid>
         {
-            var service = new SyncDenormolizedValuesService<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TAncestorChildLink, TSourceToAncestorOrChildLink, Guid, TNamedLockObject, TNamedLockOperation>(this.Context);
+            var service = ActivatorUtilities.CreateInstance<SyncDenormolizedValuesService<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TAncestorChildLink, TSourceToAncestorOrChildLink, Guid, TNamedLockObject, TNamedLockOperation>>(this.Context.ServiceProvider);
 
             service.Sync(modified, removing);
         }

@@ -39,7 +39,6 @@ namespace Framework.Authorization.BLL
 
         public AuthorizationBLLContext(
             [NotNull] IServiceProvider serviceProvider,
-            [NotNull] IDALFactory<PersistentDomainObjectBase, Guid> dalFactory,
             [NotNull] IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
             [NotNull] IObjectStateService objectStateService,
             [NotNull] IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
@@ -60,7 +59,6 @@ namespace Framework.Authorization.BLL
             [NotNull] IAuthorizationBLLContextSettings settings)
             : base(
                 serviceProvider,
-                dalFactory,
                 operationSenders,
                 objectStateService,
                 accessDeniedExceptionService,

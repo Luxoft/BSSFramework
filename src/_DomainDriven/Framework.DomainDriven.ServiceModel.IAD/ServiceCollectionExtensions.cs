@@ -8,6 +8,7 @@ using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
+using Framework.DomainDriven.NHibernate;
 using Framework.Notification;
 using Framework.QueryableSource;
 using Framework.QueryLanguage;
@@ -42,7 +43,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         {
             return services
 
-                   .AddScopedFrom((IDBSession session) => session.GetDALFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>())
+                   .AddScoped<IDALFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>, NHibDalFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
 
                    .AddScoped<IOperationEventSenderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>, OperationEventSenderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>>()
 
@@ -75,7 +76,7 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         {
             return services
 
-                   .AddScopedFrom((IDBSession session) => session.GetDALFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>())
+                   .AddScoped<IDALFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>, NHibDalFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>()
 
                    .AddScoped<IOperationEventSenderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>, OperationEventSenderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>>()
 

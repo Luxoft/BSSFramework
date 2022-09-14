@@ -68,12 +68,6 @@ namespace Framework.DomainDriven.NHibernate
             return new NHibObjectStatesService(this.InnerSession);
         }
 
-        public IDALFactory<TPersistentDomainObjectBase, TIdent> GetDALFactory<TPersistentDomainObjectBase, TIdent>()
-            where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        {
-            return new NHibDalFactory<TPersistentDomainObjectBase, TIdent>(this);
-        }
-
         public abstract Task CloseAsync(CancellationToken cancellationToken = default);
 
         public async ValueTask DisposeAsync()

@@ -1,64 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Reflection;
 
 using Framework.Core;
-using Framework.DomainDriven.BLL;
-using Framework.Persistent;
-
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven;
 
-public static class ExpressionVisitorRegistrationExtensions
+public class ExpressionVisitorContainerPeriodItem : IExpressionVisitorContainerItem
 {
-    public static IServiceCollection RegisterVisitors<TPersistentDomainObjectBase, TIdent>(this IServiceCollection serviceCollection)
-    {
-        foreach (var visitor in GetAllVisitors<TPersistentDomainObjectBase, TIdent>())
-        {
-            serviceCollection.AddSingleton(visitor);
-        }
-
-        return serviceCollection;
-    }
-
-    private static IEnumerable<ExpressionVisitor> GetAllVisitors<TPersistentDomainObjectBase, TIdent>()
-    {
-        // var idProperty = typeof(TPersistentDomainObjectBase).GetProperty("Id", () => new Exception("Id property not found"));
-
-        foreach (var visitor in GetPeriodVisitors())
-        {
-            yield return visitor;
-        }
-
-        yield return OptimizeBooleanLogicVisitor.Value;
-        yield return OptimizeWhereAndConcatVisitor.Value;
-
-        foreach (var visitor in GetInterfaceVisitors())
-        {
-            yield return visitor;
-        }
-
-        yield return RestoreQueryableCallsVisitor.Value;
-
-        yield return OverrideInstanceContainsIdentMethodVisitor<TIdent>.HashSet;
-        yield return OverrideInstanceContainsIdentMethodVisitor<TIdent>.CollectionInterface;
-
-        // TODO gtsaplin: remove OverrideHashSetVisitor, NH4.0 and above support HashSet
-        yield return OverrideHashSetVisitor<TIdent>.Value;
-
-        yield return OverrideListContainsVisitor<TIdent>.GetOrCreate(idProperty);
-        yield return OverrideEqualsDomainObjectVisitor<TIdent>.GetOrCreate(idProperty);
-        yield return OverrideIdEqualsMethodVisitor<TIdent>.GetOrCreate(idProperty);
-        yield return OverrideHasFlagVisitor.Value;
-        yield return ExpandPathVisitor.Value;
-        yield return EscapeUnderscoreVisitor.Value;
-
-        yield return new OverrideExpandContainsVisitor<TBLLContext, TIdent>(this.Context, idProperty);
-    }
-
-    private static IEnumerable<ExpressionVisitor> GetPeriodVisitors()
+    public IEnumerable<ExpressionVisitor> GetVisitors()
     {
         yield return new OverrideMethodInfoVisitor<Func<Period, DateTime, bool>>(
          CommonPeriodExtensions.Contains,
@@ -118,19 +68,5 @@ public static class ExpressionVisitorRegistrationExtensions
             typeof(Period).GetInequalityMethod(),
             ExpressionHelper.Create((Period period, Period otherPeriod) =>
                 period.StartDate != otherPeriod.StartDate || period.EndDate != otherPeriod.EndDate));
-    }
-
-    private static IEnumerable<ExpressionVisitor> GetInterfaceVisitors()
-    {
-        return new[]
-        {
-                typeof(IVisualIdentityObject),
-                typeof(ICodeObject<>),
-                typeof(IDomainType),
-                typeof(IIdentityObject<>),
-                typeof(IParentSource<>),
-                typeof(IChildrenSource<>),
-                typeof(IEmployee)
-        }.ToReadOnlyCollection(type => new OverrideCallInterfacePropertiesVisitor(type));
     }
 }

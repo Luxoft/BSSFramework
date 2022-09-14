@@ -45,12 +45,6 @@ public class NHibSession : IDBSession
         return this.InnerSession.GetObjectStateService();
     }
 
-    public IDALFactory<TPersistentDomainObjectBase, TIdent> GetDALFactory<TPersistentDomainObjectBase, TIdent>()
-            where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-    {
-        return this.InnerSession.GetDALFactory<TPersistentDomainObjectBase, TIdent>();
-    }
-
     public async Task FlushAsync(CancellationToken cancellationToken = default)
     {
         await this.InnerSession.FlushAsync(cancellationToken);

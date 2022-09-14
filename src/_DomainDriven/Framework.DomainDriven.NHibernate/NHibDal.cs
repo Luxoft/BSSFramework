@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 
 using Framework.Core;
-using Framework.DomainDriven._Visitors;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.Exceptions;

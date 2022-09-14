@@ -37,6 +37,13 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterLegacyBLLContext(this IServiceCollection services)
     {
+        services.AddScoped<IExpressionVisitorContainerItem, ExpressionVisitorContainerPersistentItem>();
+        services.AddScoped<IExpressionVisitorContainerItem, ExpressionVisitorContainerPeriodItem>();
+
+        services.AddScoped<IExpressionVisitorContainerItem, ExpressionVisitorContainerDefaultItem>();
+
+        services.AddScoped<IExpressionVisitorContainer, ExpressionVisitorAggregator>();
+
         services.AddScoped<TargetSystemServiceFactory>();
         services.AddScopedFrom((TargetSystemServiceFactory factory) => factory.Create<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase>(TargetSystemHelper.AuthorizationName));
         services.AddScopedFrom((TargetSystemServiceFactory factory) => factory.Create<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase>(TargetSystemHelper.ConfigurationName));
@@ -112,7 +119,7 @@ public static class ServiceCollectionExtensions
     {
         return services
 
-                .AddScopedFrom((IDBSession session) => session.GetDALFactory<PersistentDomainObjectBase, Guid>())
+                .AddScoped<IDALFactory<PersistentDomainObjectBase, Guid>, NHibDalFactory<PersistentDomainObjectBase, Guid>>()
 
                 .AddSingleton<SampleSystemValidatorCompileCache>()
 

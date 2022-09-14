@@ -18,19 +18,27 @@ namespace Framework.DomainDriven.UnitTest.Mock
 
     public abstract class BLLContextConfiguration<TBLLContext, TPersistentDomainObjectBase, TIdent>
 
-        where TBLLContext : class,  IBLLBaseContextBase<TPersistentDomainObjectBase, TIdent>
+        where TBLLContext : class, IBLLBaseContextBase<TPersistentDomainObjectBase, TIdent>
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     {
         private readonly Lazy<TBLLContext> _bllContextLazy;
 
+        private readonly MockDalFactoryProvider<TPersistentDomainObjectBase, TIdent> _mockDalFactory;
+
         protected BLLContextConfiguration(IEnumerable<Assembly> domainAssemblies)
         {
+            this._mockDalFactory = new MockDalFactoryProvider<TPersistentDomainObjectBase, TIdent>(domainAssemblies);
             this._bllContextLazy = new Lazy<TBLLContext>(this.CreateContext);
         }
 
         public TBLLContext Context
         {
             get { return this._bllContextLazy.Value; }
+        }
+
+        public MockDalFactoryProvider<TPersistentDomainObjectBase, TIdent> MockDalFactory
+        {
+            get { return this._mockDalFactory; }
         }
 
         private TBLLContext CreateContext()

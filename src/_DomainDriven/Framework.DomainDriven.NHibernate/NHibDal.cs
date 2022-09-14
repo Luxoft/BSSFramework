@@ -76,7 +76,7 @@ namespace Framework.DomainDriven.NHibernate
             this.NativeSession.Delete(domainObject);
         }
 
-        public IQueryable<TDomainObject> GetQueryable(LockRole lockRole, IFetchContainer<TDomainObject> fetchContainer, ExpressionVisitor visitor = null)
+        public IQueryable<TDomainObject> GetQueryable(LockRole lockRole, IFetchContainer<TDomainObject> fetchContainer)
         {
             var queryable = this.NativeSession.Query<TDomainObject>();
 

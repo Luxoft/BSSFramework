@@ -1,27 +1,38 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-using Framework.DomainDriven.ServiceModel.IAD;
+using Automation.ServiceEnvironment;
 
 using Microsoft.Extensions.DependencyInjection;
 
+using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.Utils;
+using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData
 {
-    public class TestDataInitialize : TestBase
+    public class TestDataInitialize : RootServiceProviderContainer<ISampleSystemBLLContext>
     {
+        public TestDataInitialize(IServiceProvider serviceProvider)
+            : base(serviceProvider)
+        {
+        }
+
+        private AuthHelper AuthHelper => this.RootServiceProvider.GetRequiredService<AuthHelper>();
+
+        private DataHelper DataHelper =>  this.RootServiceProvider.GetRequiredService<DataHelper>();
+
         public void TestData()
         {
             this.RootServiceProvider.GetRequiredService<SampleSystemInitializer>().Initialize();
 
             this.AuthHelper.AddCurrentUserToAdmin();
 
-            this.AuthHelper.SetUserRole(DefaultConstants.NOTIFICATION_ADMIN, new SampleSystemPermission(BusinessRole.SystemIntegration));
-            this.AuthHelper.SetUserRole(DefaultConstants.INTEGRATION_USER, new SampleSystemPermission(BusinessRole.SystemIntegration));
+            this.AuthHelper.SetUserRole(DefaultConstants.NOTIFICATION_ADMIN, TestBusinessRole.SystemIntegration);
+            this.AuthHelper.SetUserRole(DefaultConstants.INTEGRATION_USER, TestBusinessRole.SystemIntegration);
 
             this.DataHelper.SaveCountry(
                 id: DefaultConstants.COUNTRY_RUSSIA_ID,

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
-
+using System.Threading.Tasks;
+using Automation.ServiceEnvironment;
 using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
 using Framework.Core;
@@ -34,7 +35,7 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void TestExtractQueryableFromSecPath()
         {
-            this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            this.Evaluate(DBSessionMode.Write, context =>
             {
                 var bll = context.Logics.BusinessUnitHrDepartmentFactory.Create(BLLSecurityMode.View);
 
@@ -73,7 +74,7 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void TestLoadBY()
         {
-            this.GetContextEvaluator().Evaluate(DBSessionMode.Read, "Tester01", context =>
+            this.Evaluate(DBSessionMode.Read, "Tester01", context =>
             {
                 var tree = context.Logics.TestBusinessUnitFactory.Create(BLLSecurityMode.View).GetTree();
 
@@ -96,7 +97,7 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void TestConvertSecurityPath()
         {
-            this.GetContextEvaluator().Evaluate(DBSessionMode.Read, "Tester01", (ISampleSystemBLLContext context) =>
+            this.Evaluate(DBSessionMode.Read, "Tester01", (ISampleSystemBLLContext context) =>
             {
                 var employees = context.Logics.TestEmployee.GetFullList();
 
@@ -124,7 +125,7 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void ClearAuthDB()
         {
-            this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            this.Evaluate(DBSessionMode.Write, context =>
             {
                 context.Authorization.Logics.Default.Create<Framework.Authorization.Domain.Principal>().Remove(context.Authorization.Logics.Principal.GetFullList());
 
@@ -139,7 +140,7 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void AddEntityTypes()
         {
-            this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            this.Evaluate(DBSessionMode.Write, context =>
             {
                 context.Authorization.Logics.EntityType.Register(new[] { typeof(BusinessUnit).Assembly });
 
@@ -150,7 +151,7 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void AddSelfAdminPermissions()
         {
-            this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            this.Evaluate(DBSessionMode.Write, context =>
             {
                 var adminRole = context.Authorization.Logics.BusinessRole.GetOrCreateAdminRole();
 
@@ -166,13 +167,13 @@ namespace SampleSystem.BLL.Test
         }
 
         [TestMethod]
-        public void TestRemoveWithDelegate()
+        public async Task TestRemoveWithDelegate()
         {
             var principalName = "TestDelegateUser";
 
             var roleName = "TestDelegateRole";
 
-            this.GetContextEvaluator().Evaluate(DBSessionMode.Write, (context, session) =>
+            await this.EvaluateAsync(DBSessionMode.Write, async (context, session) =>
             {
                 var testRole = context.Authorization.Logics.BusinessRole.GetByNameOrCreate(roleName, true);
 
@@ -181,7 +182,7 @@ namespace SampleSystem.BLL.Test
                 var permissionForDelegate = testPrincipal.Permissions.SingleOrDefault(p => p.Role == testRole) ??
                                             new Permission(testPrincipal) { Role = testRole }.Self(context.Authorization.Logics.Permission.Save);
 
-                session.Flush();
+                await session.FlushAsync();
 
                 var currentPrincipal = context.Authorization.Logics.Principal.GetCurrent(true);
 
@@ -191,7 +192,7 @@ namespace SampleSystem.BLL.Test
                 }
             });
 
-            this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            await this.EvaluateAsync(DBSessionMode.Write, async context =>
             {
                 var testPrincipal = context.Authorization.Logics.Principal.GetByName(principalName, true);
 

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Tracking;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.Persistent;
@@ -36,8 +37,7 @@ namespace Framework.DomainDriven.NHibernate
 
         public abstract void RegisterModified<TDomainObject>(TDomainObject domainObject, ModificationType modificationType);
 
-        /// <inheritdoc />
-        public abstract void Flush();
+        public abstract Task FlushAsync(CancellationToken cancellationToken = default);
 
         /// <inheritdoc />
         public long GetCurrentRevision()
@@ -68,16 +68,17 @@ namespace Framework.DomainDriven.NHibernate
             return new NHibObjectStatesService(this.InnerSession);
         }
 
-        public abstract void Close();
-
-        public void Dispose()
+        public IDALFactory<TPersistentDomainObjectBase, TIdent> GetDALFactory<TPersistentDomainObjectBase, TIdent>()
+            where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         {
-            if (!this.Closed)
-            {
+            return new NHibDalFactory<TPersistentDomainObjectBase, TIdent>(this);
+        }
 
-            }
+        public abstract Task CloseAsync(CancellationToken cancellationToken = default);
 
-            this.Close();
+        public async ValueTask DisposeAsync()
+        {
+            await this.CloseAsync();
         }
     }
 }

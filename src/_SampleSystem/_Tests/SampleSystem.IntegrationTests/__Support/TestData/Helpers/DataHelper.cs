@@ -2,21 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Automation.ServiceEnvironment;
+using Automation.Utils;
+
 using Framework.Configuration.Domain;
 using Framework.Configuration.Domain.Reports;
 using Framework.Configuration.Generated.DTO;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.WebApiNetCore;
-
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
-using SampleSystem.IntegrationTests.__Support.Utils.Framework;
 using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
@@ -55,10 +52,10 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             string culture = null,
             bool active = true)
         {
-            name = name ?? StringUtil.UniqueString("Country");
-            nativeName = nativeName ?? StringUtil.UniqueString("Country");
-            code = code ?? StringUtil.UniqueString("Code");
-            culture = culture ?? StringUtil.UniqueString("Culture");
+            name = name ?? TextRandomizer.UniqueString("Country");
+            nativeName = nativeName ?? TextRandomizer.UniqueString("Country");
+            code = code ?? TextRandomizer.UniqueString("Code");
+            culture = culture ?? TextRandomizer.UniqueString("Culture");
 
             return this.EvaluateWrite(
                 context =>
@@ -95,7 +92,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             bool active = true,
             int closeDate = 20)
         {
-            name = name ?? StringUtil.UniqueString("Location");
+            name = name ?? TextRandomizer.UniqueString("Location");
             var parentId = parent != null ? ((LocationIdentityDTO)parent).Id : DefaultConstants.LOCATION_PARENT_ID;
             var countryId = country != null ? ((CountryIdentityDTO)country).Id : DefaultConstants.COUNTRY_RUSSIA_ID;
 
@@ -150,7 +147,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             bool active = true,
             bool canBeLinkedToClient = false)
         {
-            name = name ?? StringUtil.UniqueString("Type");
+            name = name ?? TextRandomizer.UniqueString("Type");
 
             BusinessUnitType type = null;
 
@@ -287,7 +284,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             int rank = 1,
             bool active = true)
         {
-            name = name ?? StringUtil.UniqueString("BusinessUnit");
+            name = name ?? TextRandomizer.UniqueString("BusinessUnit");
 
             var parentId = parent != null
                 ? ((BusinessUnitIdentityDTO)parent).Id
@@ -302,7 +299,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             return this.EvaluateWrite(
                 context =>
                 {
-                    period = period ?? new Period(this.GetDateTimeService().CurrentFinancialYear.StartDate.AddYears(-1));
+                    period = period ?? new Period(this.DateTimeService.CurrentFinancialYear.StartDate.AddYears(-1));
                     businessUnit = context.Logics.BusinessUnit.GetById(this.GetGuid(id));
 
                     if (businessUnit == null)
@@ -344,7 +341,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             bool active = true)
         {
             ManagementUnit unit;
-            name = name ?? StringUtil.UniqueString("ManagementUnit");
+            name = name ?? TextRandomizer.UniqueString("ManagementUnit");
 
             var parentId = parent != null
                 ? ((ManagementUnitIdentityDTO)parent).Id
@@ -354,7 +351,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
                 context =>
                 {
                     unit = context.Logics.ManagementUnit.GetById(this.GetGuid(id));
-                    period = period ?? new Period(this.GetDateTimeService().CurrentFinancialYear.StartDate);
+                    period = period ?? new Period(this.DateTimeService.CurrentFinancialYear.StartDate);
                     if (unit == null)
                     {
                         unit = new ManagementUnit
@@ -389,7 +386,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             long externalId = 1,
             bool active = true)
         {
-            name = name ?? StringUtil.UniqueString("Department");
+            name = name ?? TextRandomizer.UniqueString("Department");
             nameNative = nameNative ?? name;
             code = code ?? name;
             codeNative = codeNative ?? name;
@@ -449,7 +446,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
             CompanyLegalEntityType? type = null,
             bool active = true)
         {
-            name = name ?? StringUtil.UniqueString("Legal");
+            name = name ?? TextRandomizer.UniqueString("Legal");
             nameEnglish = nameEnglish ?? name;
             code = code ?? name;
             type = type ?? CompanyLegalEntityType.LegalEntity;
@@ -518,7 +515,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
                 {
                     var report = new Report()
                     {
-                        Name = name ?? StringUtil.UniqueString(nameof(Report)),
+                        Name = name ?? TextRandomizer.UniqueString(nameof(Report)),
                         Description = description,
                         DomainTypeName = domainTypeName,
                         Owner = owner
@@ -543,7 +540,7 @@ namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
 
                     var parameter = new ReportParameter(report)
                     {
-                        Name = name ?? StringUtil.UniqueString(nameof(ReportParameter)),
+                        Name = name ?? TextRandomizer.UniqueString(nameof(ReportParameter)),
                         TypeName = typeName,
                         DisplayValueProperty = displayValueProperty
                     };

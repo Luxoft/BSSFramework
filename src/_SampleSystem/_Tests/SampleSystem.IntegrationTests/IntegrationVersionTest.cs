@@ -1,14 +1,14 @@
 ﻿using System;
 
+using Automation.ServiceEnvironment;
+
 using FluentAssertions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain.IntergrationVersions;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
-using SampleSystem.IntegrationTests.__Support.Utils;
 using SampleSystem.WebApiCore.Controllers.Integration;
 
 namespace SampleSystem.IntegrationTests
@@ -23,20 +23,20 @@ namespace SampleSystem.IntegrationTests
             var integrationVersion = 10;
 
             var id = this.EvaluateWrite(context =>
-                                                                    {
-                                                                        var obj = new IntegrationVersionContainer1()
-                                                                        {
-                                                                            Name = Guid.NewGuid().ToString(),
-                                                                            IntegrationVersion = integrationVersion
-                                                                        };
+            {
+                var obj = new IntegrationVersionContainer1()
+                {
+                    Name = Guid.NewGuid().ToString(),
+                    IntegrationVersion = integrationVersion
+                };
 
-                                                                        context.Logics.Default.Create<IntegrationVersionContainer1>().Save(obj);
+                context.Logics.Default.Create<IntegrationVersionContainer1>().Save(obj);
 
-                                                                        return obj.Id;
-                                                                    });
+                return obj.Id;
+            });
 
             var integrationVersionContainer1Controller = this.GetControllerEvaluator<IntegrationVersionContainer1Controller>();
-            this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
+            this.AuthHelper.SetCurrentUserRole(TestBusinessRole.SystemIntegration);
 
             // Act
             var expectedName = Guid.NewGuid().ToString();
@@ -78,7 +78,7 @@ namespace SampleSystem.IntegrationTests
             });
 
             var integrationVersionContainer1Controller = this.GetControllerEvaluator<IntegrationVersionContainer1Controller>();
-            this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
+            this.AuthHelper.SetCurrentUserRole(TestBusinessRole.SystemIntegration);
 
             // Act
 
@@ -105,20 +105,20 @@ namespace SampleSystem.IntegrationTests
             var expectedName = Guid.NewGuid().ToString();
 
             var id = this.EvaluateWrite(context =>
-                                                                    {
-                                                                        var obj = new IntegrationVersionContainer1()
-                                                                        {
-                                                                            Name = expectedName,
-                                                                            IntegrationVersion = expectedIntegrationVersion
-                                                                        };
+            {
+                var obj = new IntegrationVersionContainer1()
+                {
+                    Name = expectedName,
+                    IntegrationVersion = expectedIntegrationVersion
+                };
 
-                                                                        context.Logics.Default.Create<IntegrationVersionContainer1>().Save(obj);
+                context.Logics.Default.Create<IntegrationVersionContainer1>().Save(obj);
 
-                                                                        return obj.Id;
-                                                                    });
+                return obj.Id;
+            });
 
             var integrationVersionContainer1Controller = this.GetControllerEvaluator<IntegrationVersionContainer1Controller>();
-            this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
+            this.AuthHelper.SetCurrentUserRole(TestBusinessRole.SystemIntegration);
 
             // Act
 
@@ -157,7 +157,7 @@ namespace SampleSystem.IntegrationTests
             });
 
             var integrationVersionContainer2Controller = this.GetControllerEvaluator<IntegrationVersionContainer2Controller>();
-            this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
+            this.AuthHelper.SetCurrentUserRole(TestBusinessRole.SystemIntegration);
 
             // Act
             var expectedName = Guid.NewGuid().ToString();
@@ -199,7 +199,7 @@ namespace SampleSystem.IntegrationTests
             });
 
             var integrationVersionContainer2Controller = this.GetControllerEvaluator<IntegrationVersionContainer2Controller>();
-            this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
+            this.AuthHelper.SetCurrentUserRole(TestBusinessRole.SystemIntegration);
 
             // Act
 
@@ -239,7 +239,7 @@ namespace SampleSystem.IntegrationTests
             });
 
             var integrationVersionContainer2Controller = this.GetControllerEvaluator<IntegrationVersionContainer2Controller>();
-            this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
+            this.AuthHelper.SetCurrentUserRole(TestBusinessRole.SystemIntegration);
 
             // Act
 
@@ -268,20 +268,20 @@ namespace SampleSystem.IntegrationTests
             var expectedName = Guid.NewGuid().ToString();
 
             var id = this.EvaluateWrite(context =>
-                                                                    {
-                                                                        var obj = new IntegrationVersionContainer1()
-                                                                        {
-                                                                            Name = expectedName,
-                                                                            IntegrationVersion = expectedIntegrationVersion
-                                                                        };
+            {
+                var obj = new IntegrationVersionContainer1()
+                {
+                    Name = expectedName,
+                    IntegrationVersion = expectedIntegrationVersion
+                };
 
-                                                                        context.Logics.Default.Create<IntegrationVersionContainer1>().Save(obj);
+                context.Logics.Default.Create<IntegrationVersionContainer1>().Save(obj);
 
-                                                                        return obj.Id;
-                                                                    });
+                return obj.Id;
+            });
 
             var integrationVersionContainer1Controller = this.GetControllerEvaluator<IntegrationVersionContainer1Controller>();
-            this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
+            this.AuthHelper.SetCurrentUserRole(TestBusinessRole.SystemIntegration);
 
             var modelName = Guid.NewGuid().ToString();
 
@@ -331,7 +331,7 @@ namespace SampleSystem.IntegrationTests
             });
 
             var integrationVersionContainer1Controller = this.GetControllerEvaluator<IntegrationVersionContainer1Controller>();
-            this.AuthHelper.SetCurrentUserRole(BusinessRole.SystemIntegration);
+            this.AuthHelper.SetCurrentUserRole(TestBusinessRole.SystemIntegration);
 
             var modelName = Guid.NewGuid().ToString();
 

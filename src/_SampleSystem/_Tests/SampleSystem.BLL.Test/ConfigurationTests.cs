@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-
+using Automation.ServiceEnvironment;
 using Framework.Configuration.Generated.DTO;
 using Framework.Core;
 using Framework.DomainDriven;
@@ -21,7 +21,7 @@ namespace SampleSystem.BLL.Test
         [TestMethod]
         public void TestCreateModification()
         {
-            this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            this.Evaluate(DBSessionMode.Write, context =>
             {
                 var empl = context.Logics.Employee.GetUnsecureQueryable().FirstOrDefault();
 

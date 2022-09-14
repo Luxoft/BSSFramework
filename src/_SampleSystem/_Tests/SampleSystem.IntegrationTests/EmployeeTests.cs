@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
-
+using Automation.ServiceEnvironment;
 using Automation.Utils;
-
+using Automation.Utils.DatabaseUtils;
 using FluentAssertions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -25,6 +25,7 @@ using Framework.OData;
 using NHibernate.Impl;
 
 using SampleSystem.Generated.DTO;
+using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests
 {
@@ -41,10 +42,12 @@ namespace SampleSystem.IntegrationTests
 
             // Arrange
             this.DataHelper.SaveEmployee(Guid.NewGuid(), age: 10);
-            CoreDatabaseUtil.ExecuteSql("INSERT INTO [app].[Employee] ([id], age) VALUES (NewId(), null)");
+            CoreDatabaseUtil.ExecuteSql(
+                this.DatabaseContext.Main.ConnectionString,
+                "INSERT INTO [app].[Employee] ([id], age) VALUES (NewId(), null)");
 
             // Act, IntegrationNamespace
-            var actual = this.GetContextEvaluator().Evaluate(DBSessionMode.Read,
+            var actual = this.Evaluate(DBSessionMode.Read,
                 ctx => ctx.Logics.Employee.GetUnsecureQueryable().Where(q => q.Age == 10).ToList());
 
             // Assert
@@ -247,7 +250,9 @@ namespace SampleSystem.IntegrationTests
             var restFacade = this.GetConfigurationControllerEvaluator();
 
             // Act
-            var processedModCount = restFacade.WithIntegrationImpersonate().Evaluate(c => c.ProcessModifications(1000));
+            var processedModCount = restFacade
+                .WithImpersonate(DefaultConstants.INTEGRATION_USER)
+                .Evaluate(c => c.ProcessModifications(1000));
 
             // Assert
             var modifications = this.GetModifications();
@@ -278,7 +283,7 @@ namespace SampleSystem.IntegrationTests
             var preProcessedModificationState = restFacade.Evaluate(c => c.GetModificationQueueProcessingState());
             var preProcessedNotificationState = restFacade.Evaluate(c => c.GetNotificationQueueProcessingState());
 
-            restFacade.WithIntegrationImpersonate().Evaluate(c => c.ProcessModifications(1000));
+            restFacade.WithImpersonate(DefaultConstants.INTEGRATION_USER).Evaluate(c => c.ProcessModifications(1000));
 
             var postProcessedModificationState = restFacade.Evaluate(c => c.GetModificationQueueProcessingState());
             var postProcessedNotificationState = restFacade.Evaluate(c => c.GetNotificationQueueProcessingState());
@@ -312,18 +317,13 @@ namespace SampleSystem.IntegrationTests
         [Ignore]
         public void EventListenerTest()
         {
-            this.GetContextEvaluator().Evaluate(DBSessionMode.Write,
-                                             (_, dbContext) =>
-                                             {
-                                                 var writeNhibSession = dbContext as WriteNHibSession;
-
-
-                                                 var impl = writeNhibSession.InnerSession as SessionImpl;
-
-
-
-                                                 return;
-                                             });
+            this.Evaluate(DBSessionMode.Write,
+                (_, dbContext) =>
+                {
+                    var writeNhibSession = dbContext as WriteNHibSession;
+                    var impl = writeNhibSession.InnerSession as SessionImpl;
+                    return;
+                });
         }
 
 
@@ -349,7 +349,7 @@ namespace SampleSystem.IntegrationTests
             var buIdentity = this.DataHelper.SaveBusinessUnit();
 
             // Act
-            var isVirtualResult = this.GetContextEvaluator().Evaluate(DBSessionMode.Read, ctx =>
+            var isVirtualResult = this.Evaluate(DBSessionMode.Read, ctx =>
             {
                 var filter = new TestEmployeeFilter
                 {

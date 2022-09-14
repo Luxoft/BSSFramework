@@ -5,60 +5,59 @@ using System.Reflection;
 
 using ClosedXML.Excel;
 
-namespace Automation.Extensions.Excel
+namespace Automation.Extensions.Excel;
+
+public static class ExcelSheetExtensions
 {
-    public static class ExcelSheetExtensions
+    public static List<T> ConvertToList<T>(this IXLWorksheet worksheet, int headerRow = 2)
+        where T : new()
     {
-        public static List<T> ConvertToList<T>(this IXLWorksheet worksheet, int headerRow = 2)
-            where T : new()
-        {
-            var properties = typeof(T)
-                .GetProperties()
-                .Select(p => new { PropertyInfo = p, Column = p.GetCustomAttributes<Column>().FirstOrDefault()?.Name ?? p.Name })
-                .ToList();
+        var properties = typeof(T)
+            .GetProperties()
+            .Select(p => new { PropertyInfo = p, Column = p.GetCustomAttributes<Column>().FirstOrDefault()?.Name ?? p.Name })
+            .ToList();
 
-            var collection = worksheet
-                .RowsUsed()
-                .Skip(headerRow)
-                .Select(
-                    row =>
-                    {
-                        var instance = new T();
-                        properties.ForEach(
-                            property =>
+        var collection = worksheet
+            .RowsUsed()
+            .Skip(headerRow)
+            .Select(
+                row =>
+                {
+                    var instance = new T();
+                    properties.ForEach(
+                        property =>
+                        {
+                            var colIndex = worksheet.GetColumnByName(property.Column, headerRow);
+
+                            var cell = worksheet.Cell(row.RowNumber(), colIndex);
+
+                            if (property.PropertyInfo.PropertyType == typeof(IEnumerable<string>))
                             {
-                                var colIndex = worksheet.GetColumnByName(property.Column, headerRow);
+                                property.PropertyInfo.SetValue(instance, cell.GetValue<string>().Split(',').Select(i => i.Trim()));
+                            }
+                            else
+                            {
+                                property.PropertyInfo.SetValue(instance, cell.GetValue<string>());
+                            }
+                        });
 
-                                var cell = worksheet.Cell(row.RowNumber(), colIndex);
+                    return instance;
+                });
 
-                                if (property.PropertyInfo.PropertyType == typeof(IEnumerable<string>))
-                                {
-                                    property.PropertyInfo.SetValue(instance, cell.GetValue<string>().Split(',').Select(i => i.Trim()));
-                                }
-                                else
-                                {
-                                    property.PropertyInfo.SetValue(instance, cell.GetValue<string>());
-                                }
-                            });
+        return collection.ToList();
+    }
 
-                        return instance;
-                    });
+    private static int GetColumnByName(this IXLWorksheet ws, string name, int headerRow)
+    {
+        if (ws == null) throw new ArgumentNullException(nameof(ws));
 
-            return collection.ToList();
-        }
-
-        private static int GetColumnByName(this IXLWorksheet ws, string name, int headerRow)
+        try
         {
-            if (ws == null) throw new ArgumentNullException(nameof(ws));
-
-            try
-            {
-                return ws.Row(headerRow).Cells().First(c => c.Value.ToString() == name).WorksheetColumn().ColumnNumber();
-            }
-            catch (Exception)
-            {
-                throw new Exception($"No specified column with name '{name}'");
-            }
+            return ws.Row(headerRow).Cells().First(c => c.Value.ToString() == name).WorksheetColumn().ColumnNumber();
+        }
+        catch (Exception)
+        {
+            throw new Exception($"No specified column with name '{name}'");
         }
     }
 }

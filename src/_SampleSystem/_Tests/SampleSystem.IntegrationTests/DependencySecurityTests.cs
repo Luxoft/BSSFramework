@@ -1,5 +1,6 @@
 ﻿using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
+
+using Automation.ServiceEnvironment;
 
 using FluentAssertions;
 
@@ -7,11 +8,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
-
-using BusinessRole = SampleSystem.IntegrationTests.__Support.Utils.BusinessRole;
 
 namespace SampleSystem.IntegrationTests
 {
@@ -47,7 +45,7 @@ namespace SampleSystem.IntegrationTests
 
             this.DataHelper.SaveEmployee(login: TestEmployeeLogin);
 
-            this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemPermission(BusinessRole.Administrator, this.bu2Ident, null, null));
+            this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemPermission(TestBusinessRole.Administrator, this.bu2Ident, null, null));
 
             this.EvaluateWrite(
                 context =>

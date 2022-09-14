@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 
+using Automation.ServiceEnvironment;
+
 using FluentAssertions;
 
 using Framework.CustomReports.WebApi;

@@ -3,7 +3,7 @@
     <PackageId>Luxoft.Framework.DomainDriven.DBGenerator</PackageId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="161.47021.0" />
+    <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="161.47027.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />

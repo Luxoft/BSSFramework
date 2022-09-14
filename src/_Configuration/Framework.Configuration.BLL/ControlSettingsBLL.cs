@@ -4,8 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 
 using Framework.Core;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Configuration.Domain;
 
@@ -28,7 +26,7 @@ namespace Framework.Configuration.BLL
 
         public ControlSettings GetRootControlSettings(string name, string accountName)
         {
-            var results = this.GetObjectsBy(z => z.Name == name && z.AccountName == accountName && z.Parent == null, this.GetFullPropertyLoadParamActions().ToArray());
+            var results = this.GetListBy(z => z.Name == name && z.AccountName == accountName && z.Parent == null, this.GetFullPropertyLoadParamActions().ToArray());
 
             if (results.Count > 1)
             {

@@ -1,33 +1,30 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
-
 using Automation.Enums;
-using Microsoft.Data.SqlClient;
-using Microsoft.SqlServer.Management.Common;
-using Microsoft.SqlServer.Management.Smo;
+using Microsoft.Extensions.Configuration;
 
-namespace Automation.Utils
+namespace Automation.Utils;
+
+public class ConfigUtil
 {
-    public static class ConfigUtil
+    private readonly Lazy<string> ServerRootFolderLazy;
+    private readonly Lazy<string> TempFolderLazy;
+    private readonly Lazy<string> DataDirectory;
+    private readonly Lazy<bool> UseLocalDbLazy;
+    private readonly Lazy<bool> TestsParallelizeLazy;
+    private readonly Lazy<string> SystemNameLazy;
+    private readonly Lazy<TestRunMode> TestRunModeLazy;
+
+    public ConfigUtil(IConfiguration appsettings)
     {
-        private static readonly Lazy<string> DataDirectory = new Lazy<string>(
+        this.Configuration = appsettings;
+        ServerRootFolderLazy = new Lazy<string>(() => this.Configuration["TestRunServerRootFolder"]);
+        TempFolderLazy = new Lazy<string>(
             () =>
             {
-                if (!Directory.Exists(Path.Combine(ServerRootFolder.Value, "data")))
-                {
-                    Directory.CreateDirectory(Path.Combine(ServerRootFolder.Value, "data"));
-                }
-
-                return Path.Combine(ServerRootFolder.Value, "data");
-            });
-
-        private static readonly Lazy<string> ServerRootFolder = new Lazy<string>(() => AppSettings.Default["TestRunServerRootFolder"]);
-
-        private static readonly Lazy<string> TempFolderLazy = new Lazy<string>(
-            () =>
-            {
-                var path = AppSettings.Default["TempFolder"];
+                var path = Configuration["TempFolder"];
 
                 if (!Directory.Exists(path))
                 {
@@ -36,59 +33,67 @@ namespace Automation.Utils
 
                 return path;
             });
-
-        private static readonly Lazy<Server> ServerLazy =
-            new Lazy<Server>(() => new Server(new ServerConnection(new SqlConnection(CutInitialCatalog(ConnectionString)))));
-
-        private static readonly Lazy<bool> UseLocalDbLazy = new Lazy<bool>(() => bool.Parse(AppSettings.Default["UseLocalDb"]));
-
-        private static readonly Lazy<string> SystemNameLazy = new Lazy<string>(() => AppSettings.Default["SystemName"]);
-
-        private static readonly Lazy<TestRunMode> TestRunModeLazy = new Lazy<TestRunMode>(
+        DataDirectory = new Lazy<string>(
             () =>
             {
-                if (!Enum.TryParse(AppSettings.Default["TestRunMode"], out TestRunMode runMode))
+                if (!Directory.Exists(Path.Combine(ServerRootFolderLazy.Value, "data")))
+                {
+                    Directory.CreateDirectory(Path.Combine(ServerRootFolderLazy.Value, "data"));
+                }
+
+                return Path.Combine(ServerRootFolderLazy.Value, "data");
+            });
+        UseLocalDbLazy = new Lazy<bool>(() => bool.Parse(Configuration["UseLocalDb"]));
+
+        this.TestsParallelizeLazy = new Lazy<bool>(() => bool.Parse(Configuration["TestsParallelize"]));
+        SystemNameLazy = new Lazy<string>(() => Configuration["SystemName"]);
+        TestRunModeLazy = new Lazy<TestRunMode>(
+            () =>
+            {
+                if (!Enum.TryParse(Configuration["TestRunMode"], out TestRunMode runMode))
                 {
                     runMode = TestRunMode.DefaultRunModeOnEmptyDatabase;
                 }
 
                 return runMode;
             });
+    }
 
-        public static string ConnectionString;
+    private IConfiguration Configuration;
 
-        public static string InstanceName;
+    public string ComputerName => Environment.MachineName;
 
-        public static Server Server
+    public string DbDataDirectory => DataDirectory.Value;
+
+    public TestRunMode TestRunMode => TestRunModeLazy.Value;
+
+    public string TempFolder => TempFolderLazy.Value;
+
+    public bool UseLocalDb => UseLocalDbLazy.Value;
+
+    public bool TestsParallelize => this.TestsParallelizeLazy.Value;
+
+    public string SystemName => SystemNameLazy.Value;
+
+    public string GetConnectionString(string connectionStringName)
+    {
+        var connectionString = Configuration.GetConnectionString(connectionStringName);
+
+        if (this.UseLocalDb)
         {
-            get
-            {
-                var srv = ServerLazy.Value;
+            var instanceName = $"{this.SystemName}{TextRandomizer.RandomString(5)}";
 
-                srv.Refresh();
-
-                return srv;
-            }
+            connectionString = this.GetLocalDbConnectionString(connectionString, instanceName);
         }
 
-        public static string ComputerName => Environment.MachineName;
-
-        public static string UserName => Environment.UserName;
-
-        public static string DbDataDirectory => DataDirectory.Value;
-
-        public static TestRunMode TestRunMode => TestRunModeLazy.Value;
-
-        public static string TempFolder => TempFolderLazy.Value;
-
-        public static bool LocalServer => Server.NetName.Equals(ComputerName, StringComparison.InvariantCultureIgnoreCase);
-
-        public static bool UseLocalDb => UseLocalDbLazy.Value;
-
-        public static string SystemName => SystemNameLazy.Value;
-        public static Server Lazy => ServerLazy.Value;
-
-        private static string CutInitialCatalog(string inputConnectionString) =>
-            Regex.Replace(inputConnectionString, "Initial Catalog=(\\w+);", "");
+        return connectionString;
     }
+
+    private string GetLocalDbConnectionString(string connectionString, string instanceName)
+        => DataSourceRegex.Replace(connectionString, $"Data Source=(localdb)\\{instanceName}");
+
+    private static readonly Regex DataSourceRegex = new Regex("Data Source=([^;]*)", RegexOptions.Compiled);
+
+    public string GetDataSource(string connectionString) =>
+        DataSourceRegex.Matches(connectionString).First().Value;
 }

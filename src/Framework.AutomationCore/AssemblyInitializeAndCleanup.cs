@@ -1,68 +1,84 @@
 ﻿using System;
 using System.Diagnostics;
-
 using Automation.Enums;
 using Automation.Utils;
+using Automation.Utils.DatabaseUtils;
 
-namespace Automation
+namespace Automation;
+
+public class AssemblyInitializeAndCleanup
 {
-    public static class AssemblyInitializeAndCleanup
+    private readonly ConfigUtil configUtil;
+
+    private readonly TestDatabaseGenerator databaseGenerator;
+
+    public AssemblyInitializeAndCleanup(ConfigUtil configUtil, TestDatabaseGenerator databaseGenerator)
     {
-        public static void RunAction(string name, Action action)
+        this.configUtil = configUtil;
+        this.databaseGenerator = databaseGenerator;
+    }
+
+    public static void RunAction(string name, Action action)
+    {
+        var watch = new Stopwatch();
+
+        Console.WriteLine(name);
+
+        watch.Start();
+        action();
+        watch.Stop();
+
+        Console.WriteLine("Elapsed time - {0}", watch.Elapsed);
+        Console.WriteLine();
+        Console.WriteLine();
+    }
+
+    public void EnvironmentInitialize()
+    {
+        // if (!databaseUtil.DatabaseContext.MainDatabase.IsLocalDb)
+        // {
+        //     RunAction("Check Server Name in allowed list", databaseUtil.CheckServerAllowed);
+        // }
+        //Initialize(action);
+
+        switch (this.configUtil.TestRunMode)
         {
-            var watch = new Stopwatch();
-
-            Console.WriteLine(name);
-
-            watch.Start();
-            action();
-            watch.Stop();
-
-            Console.WriteLine("Elapsed time - {0}", watch.Elapsed);
-            Console.WriteLine();
-            Console.WriteLine();
+            case TestRunMode.RestoreDatabaseUsingAttach:
+                RunAction("Create LocalDB instance", this.databaseGenerator.CreateLocalDb);
+                RunAction("Check Test Database", this.databaseGenerator.CheckTestDatabase);
+                this.databaseGenerator.CheckAndCreateDetachedFiles();
+                this.databaseGenerator.DatabaseContext.Drop();
+                break;
+            case TestRunMode.GenerateTestDataOnExistingDatabase:
+                break;
+            default:
+                RunAction("Create LocalDB instance", this.databaseGenerator.CreateLocalDb);
+                RunAction("Check Test Database", this.databaseGenerator.CheckTestDatabase);
+                RunAction("Delete detached files", this.databaseGenerator.DeleteDetachedFiles);
+                RunAction("Drop and Create Databases", this.databaseGenerator.DatabaseContext.ReCreate);
+                RunAction("Generate All Databases", this.databaseGenerator.GenerateDatabases);
+                RunAction("Insert Statements", this.databaseGenerator.ExecuteInsertsForDatabases);
+                RunAction("Test Data Initialize", this.databaseGenerator.GenerateTestData);
+                RunAction("Backup Databases", this.databaseGenerator.DatabaseContext.CopyDetachedFiles);
+                RunAction("Drop Database", this.databaseGenerator.DatabaseContext.Drop);
+                break;
         }
+    }
 
-        public static void EnvironmentInitialize(BaseDatabaseUtil baseDatabaseUtil)
+    public void EnvironmentCleanup()
+    {
+        switch (this.configUtil.TestRunMode)
         {
-            RunAction("Create new localdb instance if UseLocalDb = true", CoreDatabaseUtil.CreateLocalDb);
+            case TestRunMode.DefaultRunModeOnEmptyDatabase:
+                RunAction("Check Test Database", this.databaseGenerator.CheckTestDatabase);
+                RunAction("Drop Databases",this.databaseGenerator.DatabaseContext.Drop);
+                RunAction("Delete detached files", this.databaseGenerator.DeleteDetachedFiles);
+                RunAction("Delete LocalDB Instance", this.databaseGenerator.DeleteLocalDb);
+                break;
 
-            //RunAction("Check Server Name in allowed list", baseDatabaseUtil.CheckServerAllowed);
-
-            switch (ConfigUtil.TestRunMode)
-            {
-                case TestRunMode.RestoreDatabaseUsingAttach:
-                    RunAction("Check Test Database", baseDatabaseUtil.CheckTestDatabase);
-                    baseDatabaseUtil.CheckAndCreateDetachedFiles();
-                    break;
-                case TestRunMode.GenerateTestDataOnExistingDatabase:
-                    break;
-                default:
-                    RunAction("Check Test Database", baseDatabaseUtil.CheckTestDatabase);
-                    RunAction("Delete detached files", baseDatabaseUtil.DeleteDetachedFiles);
-                    RunAction("Drop and Create Databases", baseDatabaseUtil.CreateDatabase);
-                    RunAction("Generate All Databases", baseDatabaseUtil.GenerateDatabases);
-                    RunAction("Insert Statements", baseDatabaseUtil.ExecuteInsertsForDatabases);
-                    RunAction("Test Data Initialize", baseDatabaseUtil.GenerateTestData);
-                    RunAction("Backup Databases", baseDatabaseUtil.CopyDetachedFiles);
-                    break;
-            }
-        }
-
-        public static void EnvironmentCleanup(BaseDatabaseUtil baseDatabaseUtil)
-        {
-            switch (ConfigUtil.TestRunMode)
-            {
-                case TestRunMode.DefaultRunModeOnEmptyDatabase:
-                    RunAction("Check Test Database", baseDatabaseUtil.CheckTestDatabase);
-                    RunAction("Drop All Databases", baseDatabaseUtil.DropAllDatabases);
-                    baseDatabaseUtil.DeleteDetachedFiles();
-                    break;
-
-                default:
-                    if (ConfigUtil.UseLocalDb) RunAction("Drop localdb", baseDatabaseUtil.DropAllDatabases);
-                    break;
-            }
+            default:
+                RunAction("Delete LocalDB Instance", this.databaseGenerator.DeleteLocalDb);
+                break;
         }
     }
 }

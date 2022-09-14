@@ -22,7 +22,7 @@ namespace SampleSystem.IntegrationTests.DBGeneration
             var generator = new DbGeneratorTest();
 
             var tableName = "Employee";
-            var table = this.DataHelper.GetTable(this.DefaultDatabaseServer, this.DatabaseName, tableName);
+            var table = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
             var baseIndexName = "IX_Employee_coreBusinessUnitId";
             var newIndexName = "IX_Employee_coreBusinessUnitId_inc";
@@ -42,8 +42,15 @@ namespace SampleSystem.IntegrationTests.DBGeneration
             newIndex.Create();
 
             // Act
-            generator.GenerateAllDB(InitializeAndCleanup.DatabaseUtil.ConnectionSettings.DataSource, credential: UserCredential.Create(InitializeAndCleanup.DatabaseUtil.ConnectionSettings.UserId, InitializeAndCleanup.DatabaseUtil.ConnectionSettings.Password), skipFrameworkDatabases: true);
-            var changedTable = this.DataHelper.GetTable(this.DefaultDatabaseServer, this.DatabaseName, tableName);
+            generator.GenerateAllDB(
+                this.DatabaseContext.Main.DataSource,
+                this.DatabaseContext.Main.DatabaseName,
+                credential: UserCredential.Create(
+                    this.DatabaseContext.Main.UserId,
+                    this.DatabaseContext.Main.Password),
+                skipFrameworkDatabases: true);
+
+            var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
             // Assert
             changedTable.Indexes.Cast<Index>()
@@ -59,7 +66,7 @@ namespace SampleSystem.IntegrationTests.DBGeneration
             var generator = new DbGeneratorTest();
 
             var tableName = "Employee";
-            var table = this.DataHelper.GetTable(this.DefaultDatabaseServer, this.DatabaseName, tableName);
+            var table = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
             var ignoredIndexName = "IX_Employee_hRDepartmentId";
 
@@ -67,8 +74,15 @@ namespace SampleSystem.IntegrationTests.DBGeneration
             index.Drop();
 
             // Act
-            generator.GenerateAllDB(InitializeAndCleanup.DatabaseUtil.ConnectionSettings.DataSource, credential: UserCredential.Create(InitializeAndCleanup.DatabaseUtil.ConnectionSettings.UserId, InitializeAndCleanup.DatabaseUtil.ConnectionSettings.Password), ignoredIndexes: new[] { ignoredIndexName }, skipFrameworkDatabases: true);
-            var changedTable = this.DataHelper.GetTable(this.DefaultDatabaseServer, this.DatabaseName, tableName);
+            generator.GenerateAllDB(
+                this.DatabaseContext.Main.DataSource,
+                this.DatabaseContext.Main.DatabaseName,
+                credential: UserCredential.Create(
+                    this.DatabaseContext.Main.UserId,
+                    this.DatabaseContext.Main.Password),
+                ignoredIndexes: new[] { ignoredIndexName },
+                skipFrameworkDatabases: true);
+            var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
             // Assert
             changedTable.Indexes.Cast<Index>()
@@ -83,15 +97,20 @@ namespace SampleSystem.IntegrationTests.DBGeneration
             var generator = new DbGeneratorTest();
 
             // Act
-            generator.GenerateAllDB(InitializeAndCleanup.DatabaseUtil.ConnectionSettings.DataSource, credential: UserCredential.Create(InitializeAndCleanup.DatabaseUtil.ConnectionSettings.UserId, InitializeAndCleanup.DatabaseUtil.ConnectionSettings.Password), skipFrameworkDatabases: true);
+            generator.GenerateAllDB(
+                this.DatabaseContext.Main.DataSource,
+                this.DatabaseContext.Main.DatabaseName,
+                credential: UserCredential.Create(
+                    this.DatabaseContext.Main.UserId,
+                    this.DatabaseContext.Main.Password),
+                skipFrameworkDatabases: true);
 
-            var changedTable = this.DataHelper.GetTable(this.DefaultDatabaseServer, this.DatabaseName, "Employee");
+            var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, "Employee");
 
             // Assert
             changedTable.Indexes.Cast<Index>()
                  .Should()
                  .NotContain(x => x.Name == "IX_ChildEntity_parentId");
         }
-
     }
 }

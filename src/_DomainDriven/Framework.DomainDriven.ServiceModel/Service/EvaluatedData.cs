@@ -7,7 +7,6 @@ using JetBrains.Annotations;
 namespace Framework.DomainDriven.ServiceModel.Service
 {
     public class EvaluatedData<TBLLContext>
-        where TBLLContext : class
     {
         public EvaluatedData([NotNull] IDBSession session, [NotNull] TBLLContext context)
         {
@@ -22,8 +21,6 @@ namespace Framework.DomainDriven.ServiceModel.Service
     }
 
     public class EvaluatedData<TBLLContext, TDTOMappingService> : EvaluatedData<TBLLContext>
-        where TBLLContext : class
-        where TDTOMappingService : class
     {
         public EvaluatedData([NotNull] IDBSession session, [NotNull] TBLLContext context, [NotNull] TDTOMappingService mappingService)
             : base(session, context)

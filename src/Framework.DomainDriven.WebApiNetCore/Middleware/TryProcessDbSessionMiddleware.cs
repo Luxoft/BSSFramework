@@ -15,7 +15,7 @@ public class TryProcessDbSessionMiddleware
         this.next = next;
     }
 
-    public Task Invoke(HttpContext context, IWebApiDBSessionModeResolver sessionModeResolver)
+    public async Task Invoke(HttpContext context, IWebApiDBSessionModeResolver sessionModeResolver)
     {
         try
         {
@@ -38,7 +38,7 @@ public class TryProcessDbSessionMiddleware
                 }
             }
 
-            return this.next(context);
+            await this.next(context);
         }
         catch
         {
@@ -47,7 +47,7 @@ public class TryProcessDbSessionMiddleware
         }
         finally
         {
-            context.RequestServices.TryCloseDbSession();
+            await context.RequestServices.TryCloseDbSessionAsync(context.RequestAborted);
         }
     }
 }

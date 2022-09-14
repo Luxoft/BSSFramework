@@ -76,7 +76,6 @@ namespace SampleSystem.WebApiCore
             services.AddSingleton<WorkflowManager>();
             services.AddSingletonFrom<IWorkflowManager, WorkflowManager>();
 
-
             services.AddSingleton(new SubscriptionMetadataStore(new SampleSystemSubscriptionsMetadataFinder()));
 
             return services.AddControllerEnvironment();
@@ -107,7 +106,7 @@ namespace SampleSystem.WebApiCore
             services.AddSingleton<IReportParameterValueService<ISampleSystemBLLContext, PersistentDomainObjectBase, SampleSystemSecurityOperationCode>, ReportParameterValueService<ISampleSystemBLLContext, PersistentDomainObjectBase, SampleSystemSecurityOperationCode>>();
             services.AddSingleton<ISystemMetadataTypeBuilder>(new SystemMetadataTypeBuilder<PersistentDomainObjectBase>(DTORole.All, typeof(PersistentDomainObjectBase).Assembly));
             services.AddSingleton<SampleSystemCustomReportsServiceEnvironment>();
-            services.AddSingleton(sp => sp.GetRequiredService<SampleSystemCustomReportsServiceEnvironment>().ReportService);
+            services.AddSingletonFrom((SampleSystemCustomReportsServiceEnvironment env) => env.ReportService);
             services.AddSingleton<ISecurityOperationCodeProvider<SampleSystemSecurityOperationCode>, SecurityOperationCodeProvider>();
 
             services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();
@@ -129,7 +128,7 @@ namespace SampleSystem.WebApiCore
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            return services.AddWorkflowCore(configuration["WorkflowCoreConnectionString"]);
+            return services.AddWorkflowCore(configuration.GetConnectionString("WorkflowCoreConnection"));
         }
 
         public static IServiceCollection AddWorkflowCore([NotNull] this IServiceCollection services, [NotNull] string connectionString)

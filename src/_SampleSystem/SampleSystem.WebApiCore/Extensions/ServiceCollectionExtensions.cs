@@ -8,6 +8,7 @@ using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
 using Framework.Configuration.Generated.DTO;
 using Framework.Core;
+using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.NHibernate;
@@ -16,7 +17,6 @@ using Framework.DomainDriven.ServiceModel.Service;
 using Framework.Events;
 using Framework.HierarchicalExpand;
 using Framework.QueryableSource;
-using Framework.Security.Cryptography;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Rules.Builders;
 
@@ -38,9 +38,9 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection RegisterLegacyBLLContext(this IServiceCollection services)
     {
         services.AddScoped<TargetSystemServiceFactory>();
-        services.AddScoped(sp => sp.GetRequiredService<TargetSystemServiceFactory>().Create<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase>(TargetSystemHelper.AuthorizationName));
-        services.AddScoped(sp => sp.GetRequiredService<TargetSystemServiceFactory>().Create<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase>(TargetSystemHelper.ConfigurationName));
-        services.AddScoped(sp => sp.GetRequiredService<TargetSystemServiceFactory>().Create<ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase>(tss => tss.IsMain));
+        services.AddScopedFrom((TargetSystemServiceFactory factory) => factory.Create<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase>(TargetSystemHelper.AuthorizationName));
+        services.AddScopedFrom((TargetSystemServiceFactory factory) => factory.Create<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase>(TargetSystemHelper.ConfigurationName));
+        services.AddScopedFrom((TargetSystemServiceFactory factory) => factory.Create<ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase>(tss => tss.IsMain));
 
         services.AddSingleton<IInitializeManager, InitializeManager>();
 
@@ -77,7 +77,7 @@ public static class ServiceCollectionExtensions
 
         services.AddSingleton<IDefaultMailSenderContainer>(new DefaultMailSenderContainer("SampleSystem_Sender@luxoft.com"));
 
-        services.AddScoped<IBLLSimpleQueryBase<Framework.Persistent.IEmployee>>(sp => sp.GetRequiredService<IEmployeeBLLFactory>().Create());
+        services.AddScopedFrom<IBLLSimpleQueryBase<Framework.Persistent.IEmployee>, IEmployeeBLLFactory>(factory => factory.Create());
 
         services.RegisterHierarchicalObjectExpander();
 
@@ -112,7 +112,7 @@ public static class ServiceCollectionExtensions
     {
         return services
 
-                .AddScoped<BLLSourceEventListenerContainer<PersistentDomainObjectBase>>()
+                .AddScopedFrom((IDBSession session) => session.GetDALFactory<PersistentDomainObjectBase, Guid>())
 
                 .AddSingleton<SampleSystemValidatorCompileCache>()
 
@@ -122,7 +122,6 @@ public static class ServiceCollectionExtensions
                 .AddSingleton(new SampleSystemMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<PersistentDomainObjectBase>.OData))
                 .AddScoped<ISampleSystemSecurityService, SampleSystemSecurityService>()
                 .AddScoped<ISampleSystemBLLFactoryContainer, SampleSystemBLLFactoryContainer>()
-                .AddSingleton<ICryptService<CryptSystem>, CryptService<CryptSystem>>()
                 .AddScoped<ISampleSystemBLLContextSettings>(_ => new SampleSystemBLLContextSettings { TypeResolver  = new[] { new SampleSystemBLLContextSettings().TypeResolver, TypeSource.FromSample<BusinessUnitSimpleDTO>().ToDefaultTypeResolver() }.ToComposite() })
                 .AddScopedFromLazyInterfaceImplement<ISampleSystemBLLContext, SampleSystemBLLContext>()
 

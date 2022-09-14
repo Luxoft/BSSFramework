@@ -1,7 +1,5 @@
 ﻿using System;
 
-using Framework.DomainDriven.BLL;
-
 namespace Framework.DomainDriven.WebApiNetCore;
 
 public interface IApiControllerBaseEvaluator<out TEvaluatedData>

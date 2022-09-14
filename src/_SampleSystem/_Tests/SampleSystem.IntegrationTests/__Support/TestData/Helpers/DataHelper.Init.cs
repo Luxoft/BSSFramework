@@ -1,27 +1,21 @@
 ﻿using System;
 
+using Automation.ServiceEnvironment;
+
+using Microsoft.Extensions.DependencyInjection;
+
 using SampleSystem.BLL;
-using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
 {
-    public partial class DataHelper : IRootServiceProviderContainer
+    public partial class DataHelper : RootServiceProviderContainer<ISampleSystemBLLContext>
     {
         public DataHelper(IServiceProvider rootServiceProvider)
+            : base(rootServiceProvider)
         {
-            this.RootServiceProvider = rootServiceProvider;
         }
 
-        public IServiceProvider RootServiceProvider { get; }
-
-
-        public AuthHelper AuthHelper { private get; set; }
-
-        public SampleSystemServerPrimitiveDTOMappingService GetMappingService(ISampleSystemBLLContext context)
-        {
-            return new SampleSystemServerPrimitiveDTOMappingService(context);
-        }
+        public AuthHelper AuthHelper => this.RootServiceProvider.GetRequiredService<AuthHelper>();
 
         private Guid GetGuid(Guid? id)
         {

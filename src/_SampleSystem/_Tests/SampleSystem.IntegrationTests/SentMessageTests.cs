@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
+
+using Automation.ServiceEnvironment;
 
 using FluentAssertions;
 
 using Framework.Configuration.BLL;
-using Framework.Configuration.Domain;
 using Framework.Notification.DTO;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests

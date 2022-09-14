@@ -2,10 +2,6 @@
 
 using FluentAssertions;
 
-using Framework.Core;
-using Framework.DomainDriven.BLL;
-using Framework.Validation;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
@@ -66,7 +62,7 @@ namespace SampleSystem.IntegrationTests
         public void ImmutablePropertyInitializedByIntegration_ShouldNotThrowException()
         {
             // Arrange
-            var integrationController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.Integration.TestImmutableObjController>().WithIntegrationImpersonate();
+            var integrationController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.Integration.TestImmutableObjController>().WithImpersonate(DefaultConstants.INTEGRATION_USER);
 
             // Act
             Action insertAction = () => integrationController.Evaluate(c => c.SaveTestImmutableObj(new TestImmutableObjIntegrationRichDTO { TestImmutablePrimitiveProperty = "AAA", Id = Guid.NewGuid() }));
@@ -79,7 +75,7 @@ namespace SampleSystem.IntegrationTests
         public void ImmutablePropertyChangedByIntegration_RaisedValidationError()
         {
             // Arrange
-            var integrationTestImmutableObjController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.Integration.TestImmutableObjController>().WithIntegrationImpersonate();
+            var integrationTestImmutableObjController = this.GetControllerEvaluator<SampleSystem.WebApiCore.Controllers.Integration.TestImmutableObjController>().WithImpersonate(DefaultConstants.INTEGRATION_USER);
 
             var identity = integrationTestImmutableObjController.Evaluate(c => c.SaveTestImmutableObj(new TestImmutableObjIntegrationRichDTO { TestImmutablePrimitiveProperty = "AAA", Id = Guid.NewGuid() }));
 

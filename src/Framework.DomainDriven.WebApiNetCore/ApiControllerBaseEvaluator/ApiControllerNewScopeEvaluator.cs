@@ -1,14 +1,11 @@
 ﻿using System;
 
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.ServiceModel;
 using Framework.DomainDriven.ServiceModel.Service;
 
 namespace Framework.DomainDriven.WebApiNetCore;
 
 public class ApiControllerNewScopeEvaluator<TBLLContext, TDTOMappingService> : IApiControllerBaseEvaluator<EvaluatedData<TBLLContext, TDTOMappingService>>
-        where TBLLContext : class
-        where TDTOMappingService : class
 {
     private readonly IContextEvaluator<TBLLContext, TDTOMappingService> contextEvaluator;
 

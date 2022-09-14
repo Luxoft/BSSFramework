@@ -9,8 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Framework.DomainDriven.ServiceModel;
 
 public class ContextEvaluator<TBLLContext, TDTOMappingService> : IContextEvaluator<TBLLContext, TDTOMappingService>
-    where TBLLContext : class, IServiceProviderContainer
-    where TDTOMappingService : class
+    where TBLLContext : IServiceProviderContainer
 {
     private readonly IContextEvaluator<TBLLContext> baseContextEvaluator;
 

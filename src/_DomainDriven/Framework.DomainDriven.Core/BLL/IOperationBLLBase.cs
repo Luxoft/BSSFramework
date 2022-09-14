@@ -11,6 +11,7 @@ namespace Framework.DomainDriven.BLL
     {
         void Save([NotNull] TDomainObject domainObject);
 
+
         void Remove([NotNull] TDomainObject domainObject);
     }
 

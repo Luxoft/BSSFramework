@@ -13,7 +13,7 @@ namespace Framework.Authorization.BLL
             if (entityType == null) throw new ArgumentNullException(nameof(entityType));
             if (securityEntity == null) throw new ArgumentNullException(nameof(securityEntity));
 
-            var existsEntity = this.GetObjectsBy(filterEntity => filterEntity.EntityType == entityType && filterEntity.EntityId == securityEntity.Id)
+            var existsEntity = this.GetListBy(filterEntity => filterEntity.EntityType == entityType && filterEntity.EntityId == securityEntity.Id)
                                    .SingleOrDefault();
 
             if (existsEntity != null)

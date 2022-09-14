@@ -29,8 +29,6 @@ namespace Framework.DomainDriven.BLL
     {
         protected ISpecificationEvaluator SpecificationEvaluator { get; }
 
-        private readonly Lazy<BLLSourceEventListener<TDomainObject>> _lazySourceListener;
-
         private readonly IDAL<TDomainObject, TIdent> _dal;
 
 
@@ -39,14 +37,6 @@ namespace Framework.DomainDriven.BLL
         {
             this.SpecificationEvaluator = specificationEvaluator;
             this._dal = this.Context.DalFactory.CreateDAL<TDomainObject>();
-
-            this._lazySourceListener = LazyHelper.Create(() => this.Context.SourceListeners.GetEventListener<TDomainObject>());
-        }
-
-
-        private BLLSourceEventListener<TDomainObject> SourceListener
-        {
-            get { return this._lazySourceListener.Value; }
         }
 
         #region Private.Method
@@ -64,8 +54,6 @@ namespace Framework.DomainDriven.BLL
 
             var savingEventArgs = new EventArgsWithCancel<TDomainObject>(domainObject);
 
-            this.SourceListener.InvokeObjectSaving(savingEventArgs);
-
             if (!savingEventArgs.Cancel)
             {
                 if (id.IsDefault())
@@ -77,7 +65,6 @@ namespace Framework.DomainDriven.BLL
                     this._dal.Insert(domainObject, id);
                 }
 
-                this.SourceListener.InvokeObjectSaved(new EventArgs<TDomainObject>(domainObject));
                 base.Save(domainObject);
             }
         }
@@ -104,13 +91,10 @@ namespace Framework.DomainDriven.BLL
 
             var removingEventArgs = new EventArgsWithCancel<TDomainObject>(domainObject);
 
-            this.SourceListener.InvokeObjectRemoving(removingEventArgs);
-
             if (!removingEventArgs.Cancel)
             {
                 this._dal.Remove(domainObject);
                 base.Remove(domainObject);
-                this.SourceListener.InvokeObjectRemoved(removingEventArgs);
             }
         }
 
@@ -189,8 +173,6 @@ namespace Framework.DomainDriven.BLL
             var result = ((IEnumerable<TDomainObject>)this.GetSecureQueryable(fetchContainer, lockRole).Where(filter)).Distinct().ToList();
 
             var queriedEventArgs = new ObjectsQueriedEventArgs<TDomainObject>(result, filter);
-
-            this.SourceListener.InvokeObjectsQueried(queriedEventArgs);
 
             return queriedEventArgs.Result;
         }
@@ -431,7 +413,7 @@ namespace Framework.DomainDriven.BLL
             return this.GetObjectBy(filter, throwOnNotFound, fetchs.ToFetchContainer());
         }
 
-        public virtual List<TDomainObject> GetFullList(IFetchContainer<TDomainObject> fetchContainer = null)
+        public List<TDomainObject> GetFullList(IFetchContainer<TDomainObject> fetchContainer = null)
         {
             return this.GetSecureQueryable(fetchContainer).ToList();
         }

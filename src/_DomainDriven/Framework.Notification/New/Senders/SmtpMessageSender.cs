@@ -11,23 +11,6 @@ namespace Framework.Notification.New
     /// </summary>
     public class SmtpMessageSender : IMessageSender<Message>
     {
-        /// <summary>
-        /// Gets SmtpMessageSender instance using SmtpServer option from configuration file.
-        /// </summary>
-        public static readonly SmtpMessageSender Configuration = ConfigurationManager.AppSettings["SmtpServer"].Pipe(
-            host => new SmtpMessageSender(
-                () =>
-                    {
-                        var smtpClient = new SmtpClient();
-
-                        if (!string.IsNullOrWhiteSpace(host))
-                        {
-                            smtpClient.Host = host;
-                        }
-
-                        return smtpClient;
-                    }));
-
         private readonly Func<SmtpClient> getSmtpClient;
 
         /// <summary>

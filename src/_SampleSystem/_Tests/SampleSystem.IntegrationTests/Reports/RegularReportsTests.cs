@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using Automation.ServiceEnvironment;
+
 using FluentAssertions;
 
 using Framework.Authorization.Generated.DTO;
@@ -13,7 +15,6 @@ using Framework.Core;
 using Framework.CustomReports.Services.ExcelBuilder;
 using Framework.CustomReports.WebApi;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -1284,7 +1285,7 @@ namespace SampleSystem.IntegrationTests.Reports
 
         private ReportIdentityDTO SaveReport(Report report)
         {
-            return this.GetContextEvaluator().Evaluate(DBSessionMode.Write, context =>
+            return this.Evaluate(DBSessionMode.Write, context =>
             {
                 var bll = context.Configuration.Logics.Report;
                 bll.Save(report);

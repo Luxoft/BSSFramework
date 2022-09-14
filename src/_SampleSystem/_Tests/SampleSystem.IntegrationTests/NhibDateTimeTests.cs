@@ -1,11 +1,12 @@
 ﻿using System;
 
+using Automation.ServiceEnvironment;
+
 using FluentAssertions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment.IntegrationTests;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
@@ -14,18 +15,18 @@ namespace SampleSystem.IntegrationTests
     [TestClass]
     public class NhibDateTimeTests : TestBase
     {
-        private DateTime? prevDateTime;
+        private DateTime prevDateTime;
 
         [TestInitialize]
         public void SetUp()
         {
-            this.prevDateTime = IntegrationTestDateTimeService.CurrentDate;
+            this.prevDateTime = this.DateTimeService.Now;
         }
 
         [TestCleanup]
         public void TestCleanup()
         {
-            IntegrationTestDateTimeService.CurrentDate = this.prevDateTime;
+            this.SetCurrentDateTime(this.prevDateTime);
         }
 
         [TestMethod]
@@ -33,7 +34,7 @@ namespace SampleSystem.IntegrationTests
         {
             // Arrange
             var testDate = new DateTime(2000, 5, 5);
-            IntegrationTestDateTimeService.CurrentDate = testDate;
+            this.SetCurrentDateTime(testDate);
 
             var example1Controller = this.GetControllerEvaluator<Example1Controller>();
 
@@ -43,7 +44,7 @@ namespace SampleSystem.IntegrationTests
             // Assert
             var reloadedObj = example1Controller.Evaluate(c => c.GetSimpleExample1(objIdentity));
 
-            reloadedObj.CreateDate.Should().Be(testDate);
+            reloadedObj.CreateDate.Should().BeCloseTo(testDate, TimeSpan.FromSeconds(1));
         }
     }
 }

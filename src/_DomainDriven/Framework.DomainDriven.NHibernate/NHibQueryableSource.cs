@@ -6,6 +6,11 @@ using NHibernate;
 using NHibernate.Engine;
 using NHibernate.Linq;
 
+namespace Framework.DomainDriven.NHibernate;
+
+/// <summary>
+/// NHibnate-провайдер доступа, который применяет Visitor-ы для Expression-ов
+/// </summary>
 public class VisitedQueryProvider : DefaultQueryProvider
 {
     public VisitedQueryProvider(ISessionImplementor session)
@@ -25,10 +30,23 @@ public class VisitedQueryProvider : DefaultQueryProvider
         return new VisitedQueryProvider(this.Session, this.Collection, options) { Visitor = this.Visitor };
     }
 
+    private Expression TryApplyVisitor(Expression expression)
+    {
+        return this.Visitor == null ? expression : this.Visitor.Visit(expression);
+    }
+
     protected override NhLinqExpression PrepareQuery(Expression expression, out IQuery query)
     {
-        var newExpr = this.Visitor.Visit(expression);
+        return base.PrepareQuery(this.TryApplyVisitor(expression), out query);
+    }
 
-        return base.PrepareQuery(newExpr, out query);
+    public override IQueryable CreateQuery(Expression expression)
+    {
+        return base.CreateQuery(this.TryApplyVisitor(expression));
+    }
+
+    public override IQueryable<T> CreateQuery<T>(Expression expression)
+    {
+        return base.CreateQuery<T>(this.TryApplyVisitor(expression));
     }
 }

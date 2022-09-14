@@ -565,12 +565,31 @@ namespace Framework.Core
 
         public static MethodInfo TryGetStartMethodInfo(this LambdaExpression expression)
         {
-            return expression.Body
-                             .GetAllElements(v => (v as MemberExpression).Expression)
-                             .TakeWhile(p => p != expression.Parameters.Single())
-                             .First()
-                             .Pipe(expr => expr as MethodCallExpression)
-                             .Pipe(expr => expr.Method);
+            var currentExpr = expression.Body;
+            var startParam = expression.Parameters.Single();
+
+            do
+            {
+                if (currentExpr is MemberExpression memberExpression)
+                {
+                    currentExpr = memberExpression.Expression;
+                }
+                else if (currentExpr is MethodCallExpression methodCallExpression)
+                {
+                    if (methodCallExpression.Object == startParam)
+                    {
+                        return methodCallExpression.Method;
+                    }
+                    else
+                    {
+                        currentExpr = methodCallExpression.Object ?? methodCallExpression.Arguments.First();
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            } while (true);
         }
 
         public static Expression WithSelect(this Expression sourceExpression, Func<ParameterExpression, Expression> getBody)

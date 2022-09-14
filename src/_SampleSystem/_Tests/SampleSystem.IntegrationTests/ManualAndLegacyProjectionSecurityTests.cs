@@ -1,28 +1,19 @@
 ﻿using System;
 using System.Linq;
-using System.Linq.Expressions;
 
+using Automation.ServiceEnvironment;
 using FluentAssertions;
 
-using Framework.Authorization.Domain;
-using Framework.Core;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
-using Framework.OData;
 using Framework.SecuritySystem;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using SampleSystem.Domain;
-using SampleSystem.Domain.Inline;
 using SampleSystem.Domain.Projections;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Domain.ManualProjections;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
-
-using BusinessRole = SampleSystem.IntegrationTests.__Support.Utils.BusinessRole;
 
 namespace SampleSystem.IntegrationTests
 {
@@ -49,7 +40,7 @@ namespace SampleSystem.IntegrationTests
 
             this.DataHelper.SaveEmployee(login: TestEmployeeLogin);
 
-            this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemPermission(BusinessRole.Administrator, this.bu2Ident, null, null));
+            this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemPermission(TestBusinessRole.Administrator, this.bu2Ident, null, null));
 
             this.TestEmp1 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu1Ident);
 
@@ -91,7 +82,7 @@ namespace SampleSystem.IntegrationTests
             // Arrange
 
             // Act
-            var items = this.GetContextEvaluator().Evaluate(DBSessionMode.Read, TestEmployeeLogin, ctx =>
+            var items = this.Evaluate(DBSessionMode.Read, TestEmployeeLogin, ctx =>
             {
                 var bll = ctx.Logics.TestLegacyEmployeeFactory.Create(BLLSecurityMode.View);
 

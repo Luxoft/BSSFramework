@@ -18,7 +18,7 @@ namespace Framework.DomainDriven.BLL
             if (bll == null) throw new ArgumentNullException(nameof(bll));
             if (filter == null) throw new ArgumentNullException(nameof(filter));
 
-            return bll.GetObjectsBy(filter, bll.Context.FetchService.GetContainer<TDomainObject>(rule));
+            return bll.GetListBy(filter, bll.Context.FetchService.GetContainer<TDomainObject>(rule));
 
         }
 
@@ -27,7 +27,7 @@ namespace Framework.DomainDriven.BLL
             if (bll == null) throw new ArgumentNullException(nameof(bll));
             if (filter == null) throw new ArgumentNullException(nameof(filter));
 
-            return bll.GetObjectsBy(filter, bll.Context.FetchService.GetContainer<TDomainObject>(rule));
+            return bll.GetListBy(filter, bll.Context.FetchService.GetContainer<TDomainObject>(rule));
         }
     }
 }

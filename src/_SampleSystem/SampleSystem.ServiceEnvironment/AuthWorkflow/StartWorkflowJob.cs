@@ -57,7 +57,7 @@ public class StartWorkflowJob
                 {
                     var startupObj = this.workflowApproveProcessor.GetPermissionStartupObject(pair.permission);
 
-                    var wfInstanceIdStr = Task.Run(() => this.workflowHost.StartWorkflow(nameof(__ApprovePermission_Workflow), startupObj)).GetAwaiter().GetResult();
+                    var wfInstanceIdStr = await this.workflowHost.StartWorkflow(nameof(__ApprovePermission_Workflow), startupObj);
                     var wfInstanceId = new Guid(wfInstanceIdStr);
                     pair.wfObj.WorkflowInstanceId = wfInstanceId;
 

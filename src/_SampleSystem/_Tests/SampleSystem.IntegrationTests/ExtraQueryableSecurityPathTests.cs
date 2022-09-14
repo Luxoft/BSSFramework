@@ -1,10 +1,11 @@
 ﻿using System.Linq;
 
+using Automation.ServiceEnvironment;
+
 using FluentAssertions;
 
 using Framework.Core;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
 
 using Framework.SecuritySystem;
 
@@ -14,8 +15,6 @@ using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
-
-using BusinessRole = SampleSystem.IntegrationTests.__Support.Utils.BusinessRole;
 
 namespace SampleSystem.IntegrationTests
 {
@@ -29,7 +28,6 @@ namespace SampleSystem.IntegrationTests
         private EmployeeIdentityDTO TestEmp2;
 
         private EmployeeIdentityDTO TestEmp3;
-
 
         private BusinessUnitIdentityDTO bu1Ident;
 
@@ -52,8 +50,8 @@ namespace SampleSystem.IntegrationTests
 
             this.DataHelper.SaveEmployee(login: TestEmployeeLogin);
 
-            this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemPermission(BusinessRole.Administrator, this.bu2Ident, null, this.loc1Ident));
-            this.AuthHelper.AddUserRole(TestEmployeeLogin, new SampleSystemPermission(BusinessRole.Administrator, this.bu2Ident, null, this.loc2Ident));
+            this.AuthHelper.SetUserRole(TestEmployeeLogin, new SampleSystemPermission(TestBusinessRole.Administrator, this.bu2Ident, null, this.loc1Ident));
+            this.AuthHelper.AddUserRole(TestEmployeeLogin, new SampleSystemPermission(TestBusinessRole.Administrator, this.bu2Ident, null, this.loc2Ident));
 
             this.TestEmp1 = this.DataHelper.SaveEmployee(coreBusinessUnit: this.bu1Ident, location: this.loc1Ident);
 
@@ -78,7 +76,7 @@ namespace SampleSystem.IntegrationTests
             });
 
             // Act
-            var items = this.GetContextEvaluator().Evaluate (DBSessionMode.Read, TestEmployeeLogin, context =>
+            var items = this.Evaluate (DBSessionMode.Read, TestEmployeeLogin, context =>
             {
                 var employees = context.Logics.EmployeeFactory.Create(createProviderFunc(context)).GetSecureQueryable().ToList();
 

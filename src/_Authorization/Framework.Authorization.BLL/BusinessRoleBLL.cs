@@ -7,7 +7,6 @@ using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.Exceptions;
-using Framework.HierarchicalExpand;
 using Framework.Persistent;
 
 namespace Framework.Authorization.BLL
@@ -151,7 +150,7 @@ namespace Framework.Authorization.BLL
         {
             var permissionBLL = this.Context.Logics.Permission;
 
-            permissionBLL.GetObjectsBy(permission => permission.Role == businessRole).Foreach(p => permissionBLL.ValidatePermissionDelegated(p, ValidatePermissonDelegateMode.Role));
+            permissionBLL.GetListBy(permission => permission.Role == businessRole).Foreach(p => permissionBLL.ValidatePermissionDelegated(p, ValidatePermissonDelegateMode.Role));
 
             if (withParents)
             {
@@ -172,7 +171,7 @@ namespace Framework.Authorization.BLL
 
             var linksBLL = this.Context.Logics.Default.Create<SubBusinessRoleLink>();
 
-            var removingLinks = linksBLL.GetObjectsBy(link => link.SubBusinessRole == businessRole);
+            var removingLinks = linksBLL.GetListBy(link => link.SubBusinessRole == businessRole);
 
             removingLinks.Foreach(linksBLL.Remove);
 

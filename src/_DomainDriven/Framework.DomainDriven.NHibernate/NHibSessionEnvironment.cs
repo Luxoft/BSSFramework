@@ -62,6 +62,8 @@ namespace Framework.DomainDriven.NHibernate
                     ms.InitMapping(this.cfg);
                 }
 
+                this.Configuration.SessionFactory().ParsingLinqThrough<VisitedQueryProvider>();
+
                 this.cfg.InitializeAudit(cachedMappingSettings, auditRevisionUserAuthenticationService);
 
                 connectionSettings.Init(this.cfg);
@@ -98,11 +100,6 @@ namespace Framework.DomainDriven.NHibernate
         {
             // Do nothing
         }
-
-        /// <summary>
-        /// Backward compatibility for TransactionScope
-        /// </summary>
-        public bool EnableTransactionScope { get; set; } = true;
 
         /// <inheritdoc />
         public void Dispose()

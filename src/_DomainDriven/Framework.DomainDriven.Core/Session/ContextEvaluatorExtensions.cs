@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Framework.Core;
 using JetBrains.Annotations;
 
-namespace Framework.DomainDriven.BLL
+namespace Framework.DomainDriven
 {
     public static class ContextEvaluatorExtensions
     {

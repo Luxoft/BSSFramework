@@ -21,13 +21,9 @@ namespace Framework.DomainDriven.Generation.Domain
 
         public CodeFileFactoryHeader(TFileType type, string relativePath, Func<Type, string> getNameFunc)
         {
-            if (type == null) throw new ArgumentNullException(nameof(type));
-            if (relativePath == null) throw new ArgumentNullException(nameof(relativePath));
-            if (getNameFunc == null) throw new ArgumentNullException(nameof(getNameFunc));
-
-            this._getNameFunc = getNameFunc;
-            this.Type = type;
-            this.RelativePath = relativePath;
+            this._getNameFunc = getNameFunc ?? throw new ArgumentNullException(nameof(getNameFunc));
+            this.Type = type ?? throw new ArgumentNullException(nameof(type));
+            this.RelativePath = relativePath ?? throw new ArgumentNullException(nameof(relativePath));
         }
 
 

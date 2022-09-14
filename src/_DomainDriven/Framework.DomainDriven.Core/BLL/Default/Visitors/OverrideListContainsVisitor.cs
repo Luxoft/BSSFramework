@@ -44,14 +44,23 @@ namespace Framework.DomainDriven.BLL
 
             // TODO gtsaplin: it's too complicated code, refactor
             var request = from obj in node.Object.ToMaybe()
+
                           from value in obj.GetDeepMemberConstValue()
+
                           let valueType = value.GetType()
+
                           where valueType.IsGenericType
+
                           let genericValueType = valueType.GetGenericTypeDefinition()
+
                           where genericValueType == typeof(List<>)
+
                           let genericArgType = valueType.GetGenericArguments().Single()
+
                           where idPropertyDeclaringType != null && idPropertyDeclaringType.IsAssignableFrom(genericArgType)
+
                           from result in (Maybe<Expression>)VisitListCallMethod.MakeGenericMethod(genericArgType).Invoke(null, new[] { node, value })
+
                           select result;
 
             return request.GetValueOrDefault(() => base.VisitMethodCall(node));

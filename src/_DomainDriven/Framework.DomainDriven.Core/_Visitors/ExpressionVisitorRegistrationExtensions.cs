@@ -55,7 +55,7 @@ public static class ExpressionVisitorRegistrationExtensions
         yield return ExpandPathVisitor.Value;
         yield return EscapeUnderscoreVisitor.Value;
 
-        //yield return new OverrideExpandContainsVisitor<TBLLContext, TIdent>(this.Context, idProperty);
+        yield return new OverrideExpandContainsVisitor<TBLLContext, TIdent>(this.Context, idProperty);
     }
 
     private static IEnumerable<ExpressionVisitor> GetPeriodVisitors()

@@ -22,7 +22,6 @@ namespace Framework.DomainDriven.BLL.Security
     {
         protected SecurityBLLBaseContext(
             [NotNull] IServiceProvider serviceProvider,
-            [NotNull] IDALFactory<TPersistentDomainObjectBase, TIdent> dalFactory,
             [NotNull] IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
             [NotNull] IObjectStateService objectStateService,
             [NotNull] IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
@@ -30,7 +29,7 @@ namespace Framework.DomainDriven.BLL.Security
             [NotNull] IValidator validator,
             [NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
             [NotNull] IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
-            : base(serviceProvider, dalFactory, operationSenders, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
+            : base(serviceProvider, operationSenders, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
         {
         }
 

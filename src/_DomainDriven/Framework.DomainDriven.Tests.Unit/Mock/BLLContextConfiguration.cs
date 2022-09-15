@@ -18,7 +18,7 @@ namespace Framework.DomainDriven.UnitTest.Mock
 
     public abstract class BLLContextConfiguration<TBLLContext, TPersistentDomainObjectBase, TIdent>
 
-        where TBLLContext : class,  IBLLBaseContextBase<TPersistentDomainObjectBase, TIdent>
+        where TBLLContext : class, IBLLBaseContextBase<TPersistentDomainObjectBase, TIdent>
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     {
         private readonly Lazy<TBLLContext> _bllContextLazy;
@@ -44,8 +44,6 @@ namespace Framework.DomainDriven.UnitTest.Mock
         private TBLLContext CreateContext()
         {
             var result = Substitute.For<TBLLContext>();
-
-            result.DalFactory.Returns(this._mockDalFactory.DALFactory);
 
             this.Initialize(result);
 

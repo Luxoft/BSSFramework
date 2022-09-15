@@ -18,10 +18,10 @@ namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy
         [TestMethod]
         public void InitMockTest()
         {
-            var context = new TestBLLContext(new HierarchicalObjectBuilder().Build(0, 3, 2).GetAllElements(z => z.Children).ToList());
+            var context = new TestBllContext(new HierarchicalObjectBuilder().Build(0, 3, 2).GetAllElements(z => z.Children).ToList());
 
 
-            var hierarchyObjects = context.DalFactory.CreateDAL<HierarchyObject>().GetQueryable(LockRole.None).ToList();
+            var hierarchyObjects = context.HierarchyDomainDal.GetQueryable(LockRole.None).ToList();
 
             Assert.AreEqual(15, hierarchyObjects.Count);
 
@@ -33,9 +33,9 @@ namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy
         public void RemoveTest()
         {
             var values = new HierarchicalObjectBuilder().Build(0, 5, 3).GetAllElements(z => z.Children).ToList();
-            var context = new TestBLLContext(values);
+            var context = new TestBllContext(values);
 
-            var dal = context.DalFactory.CreateDAL<HierarchyObject>();
+            var dal = context.HierarchyDomainDal;
             var removing = dal.GetQueryable(LockRole.None).Take(2);
 
             foreach (var hierarchyObject in removing)
@@ -64,7 +64,7 @@ namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy
                                root, child1, child2, child3, child4, child5
                                };
 
-            var context = new TestBLLContext(values);
+            var context = new TestBllContext(values);
 
             child3.Parent = child1;
             child1.AddChild(child3);
@@ -82,12 +82,12 @@ namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy
         {
             var values = new HierarchicalObjectBuilder().Build(0, 5, 3).GetAllElements(z => z.Children).ToList();
 
-            var context = new TestBLLContext(values);
+            var context = new TestBllContext(values);
 
             var parent = values.Skip(3).Take(1).First();
             var newObject = new HierarchyObject(parent);
 
-            context.DalFactory.CreateDAL<HierarchyObject>().Save(newObject);
+            context.HierarchyDomainDal.Save(newObject);
 
             context.SyncHierarchyService.Sync(new[] { newObject }, new HierarchyObject[0]);
 
@@ -96,10 +96,10 @@ namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy
             this.TestCorrectState(context);
         }
 
-        private void TestCorrectState(TestBLLContext context)
+        private void TestCorrectState(TestBllContext context)
         {
-            var hierarchyObjects = context.DalFactory.CreateDAL<HierarchyObject>().GetQueryable(LockRole.None).ToList();
-            var allLinks = context.DalFactory.CreateDAL<HierarchyObjectAncestorLink>().GetQueryable(LockRole.None).ToList();
+            var hierarchyObjects = context.HierarchyDomainDal.GetQueryable(LockRole.None).ToList();
+            var allLinks = context.DomainAncestorLinkDal.GetQueryable(LockRole.None).ToList();
 
             var dictionary = hierarchyObjects.ToDictionary(z => z.Id);
 

@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 using Framework.Core;
 using Framework.DomainDriven.BLL.Tracking;
 using Framework.DomainDriven.DAL.Revisions;
-using Framework.Persistent;
 
 using NHibernate;
 using NHibernate.Envers.Patch;
 
 namespace Framework.DomainDriven.NHibernate
 {
-    public abstract class NHibSessionBase : IDBSession
+    public abstract class NHibSessionBase : INHibSession
     {
         private Lazy<IAuditReaderPatched> lazyAuditReader { get; }
 
@@ -22,7 +21,7 @@ namespace Framework.DomainDriven.NHibernate
             this.Environment = environment ?? throw new ArgumentNullException(nameof(environment));
             this.SessionMode = sessionMode;
 
-            this.lazyAuditReader = LazyHelper.Create(() => this.InnerSession.GetAuditReader());
+            this.lazyAuditReader = LazyHelper.Create(() => this.NativeSession.GetAuditReader());
         }
 
         public abstract bool Closed { get; }
@@ -31,7 +30,7 @@ namespace Framework.DomainDriven.NHibernate
 
         public IAuditReaderPatched AuditReader => this.lazyAuditReader.Value;
 
-        public abstract ISession InnerSession { get; }
+        public abstract ISession NativeSession { get; }
 
         protected internal NHibSessionEnvironment Environment { get; }
 
@@ -65,13 +64,7 @@ namespace Framework.DomainDriven.NHibernate
 
         public IObjectStateService GetObjectStateService()
         {
-            return new NHibObjectStatesService(this.InnerSession);
-        }
-
-        public IDALFactory<TPersistentDomainObjectBase, TIdent> GetDALFactory<TPersistentDomainObjectBase, TIdent>()
-            where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        {
-            return new NHibDalFactory<TPersistentDomainObjectBase, TIdent>(this);
+            return new NHibObjectStatesService(this.NativeSession);
         }
 
         public abstract Task CloseAsync(CancellationToken cancellationToken = default);

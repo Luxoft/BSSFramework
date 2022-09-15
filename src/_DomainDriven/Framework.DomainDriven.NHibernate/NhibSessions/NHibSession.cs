@@ -4,23 +4,26 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Framework.DomainDriven.BLL.Tracking;
-using Framework.Persistent;
+using Framework.DomainDriven.DAL.Revisions;
 
 using JetBrains.Annotations;
 
+using NHibernate;
+using NHibernate.Envers.Patch;
+
 namespace Framework.DomainDriven.NHibernate;
 
-public class NHibSession : IDBSession
+public class NHibSession : INHibSession
 {
     private DBSessionMode? sessionMode;
 
-    private readonly Lazy<IDBSession> lazyInnerSession;
+    private readonly Lazy<INHibSession> lazyInnerSession;
 
     public NHibSession([NotNull] NHibSessionEnvironment environment, INHibSessionSetup settings, IEnumerable<IDBSessionEventListener> eventListeners)
     {
         if (environment == null) throw new ArgumentNullException(nameof(environment));
 
-        this.lazyInnerSession = new Lazy<IDBSession>(() =>
+        this.lazyInnerSession = new Lazy<INHibSession>(() =>
         {
             switch (this.sessionMode ?? settings.DefaultSessionMode)
             {
@@ -38,17 +41,20 @@ public class NHibSession : IDBSession
 
     public virtual IDBSession InnerSession => this.lazyInnerSession.Value;
 
+    public IAuditReaderPatched AuditReader => this.lazyInnerSession.Value.AuditReader;
+
+    public ISession NativeSession => this.lazyInnerSession.Value.NativeSession;
+
     public DBSessionMode SessionMode => this.InnerSession.SessionMode;
+
+    public void RegisterModified<TDomainObject>(TDomainObject domainObject, ModificationType modificationType)
+    {
+        this.lazyInnerSession.Value.RegisterModified(domainObject, modificationType);
+    }
 
     public IObjectStateService GetObjectStateService()
     {
         return this.InnerSession.GetObjectStateService();
-    }
-
-    public IDALFactory<TPersistentDomainObjectBase, TIdent> GetDALFactory<TPersistentDomainObjectBase, TIdent>()
-            where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-    {
-        return this.InnerSession.GetDALFactory<TPersistentDomainObjectBase, TIdent>();
     }
 
     public async Task FlushAsync(CancellationToken cancellationToken = default)

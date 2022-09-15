@@ -7,20 +7,18 @@ using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using NSubstitute;
+using NSubstitute.Core;
 
 namespace Framework.DomainDriven.UnitTest.Mock
 {
     public class MockDalFactoryProvider<TPersistentDomainObjectBase, TIdent> where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     {
         private readonly Dictionary<Type, IMockDAL> _mockDals;
-        private readonly IDALFactory<TPersistentDomainObjectBase, TIdent> _dalFactory;
 
         public MockDalFactoryProvider(IEnumerable<Assembly> domainAssemblies)
         {
             this._mockDals = new Dictionary<Type, IMockDAL>();
 
-            var fff = Substitute.For<IDALFactory>();
-            this._dalFactory = Substitute.For<IDALFactory<TPersistentDomainObjectBase, TIdent>>();
             //_dalFactory.AvailableValues.Returns(
             //    new AvailableValues(
             //        new Range<decimal>(decimal.MinValue, decimal.MaxValue),
@@ -31,11 +29,6 @@ namespace Framework.DomainDriven.UnitTest.Mock
             this.DefaultInitDals(domainAssemblies);
 
 
-        }
-
-        public IDALFactory<TPersistentDomainObjectBase, TIdent> DALFactory
-        {
-            get { return this._dalFactory; }
         }
 
         private void DefaultInitDals(IEnumerable<Assembly> domainAssemblies)
@@ -54,7 +47,7 @@ namespace Framework.DomainDriven.UnitTest.Mock
         }
         public MockDalFactoryProvider<TPersistentDomainObjectBase, TIdent> Register<T>(params T[] values) where T : IIdentityObject<TIdent>
         {
-            var mockDal = this._mockDals[typeof (T)];
+            var mockDal = this._mockDals[typeof(T)];
             values.Foreach(z => mockDal.Register(z));
             return this;
         }
@@ -63,8 +56,6 @@ namespace Framework.DomainDriven.UnitTest.Mock
         {
             var mockDal = new MockDAL<T, TIdent>();
 
-            this._dalFactory.CreateDAL<T>().Returns(mockDal);
-
             this._mockDals.Add(typeof(T), mockDal);
 
             return this;
@@ -72,7 +63,7 @@ namespace Framework.DomainDriven.UnitTest.Mock
 
         public void Flush()
         {
-            this._mockDals.Select(z=>z.Value).Foreach(z=>z.Flush());
+            this._mockDals.Select(z => z.Value).Foreach(z => z.Flush());
         }
     }
 }

@@ -31,6 +31,7 @@ namespace Framework.Authorization.BLL.Tests.Unit
                 return this.Configuration.MockDalFactory;
             }
         }
+
         public void RegisterDomainObject<T>(params T[] values) where T : IIdentityObject<Guid>
         {
             this.Configuration.MockDalFactory.Register(values);

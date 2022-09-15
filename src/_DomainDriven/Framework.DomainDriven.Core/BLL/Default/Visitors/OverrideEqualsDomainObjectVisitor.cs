@@ -36,16 +36,27 @@ namespace Framework.DomainDriven.BLL
 
             // TODO gtsaplin: it's too complicated code, refactor
             var request = from _ in Maybe.Return()
+
                           where node.NodeType == ExpressionType.Equal || node.NodeType == ExpressionType.NotEqual
+
                           where idPropertyDeclaringType != null && (idPropertyDeclaringType.IsAssignableFrom(node.Left.Type) || idPropertyDeclaringType.IsAssignableFrom(node.Right.Type))
+
                           let left = this.Visit(node.Left)
+
                           let right = this.Visit(node.Right)
+
                           from res in (from leftVal in left.GetMemberConstValue<IIdentityObject<TIdent>>()
+
                                        where !right.GetMemberConstValue().HasValue
+
                                        select Expression.MakeBinary(node.NodeType, Expression.Constant(leftVal.Id), applyId(right)))
+
                              .Or(() => from rightVal in right.GetMemberConstValue<IIdentityObject<TIdent>>()
+
                                        where !left.GetMemberConstValue().HasValue
+
                                        select Expression.MakeBinary(node.NodeType, applyId(left), Expression.Constant(rightVal.Id)))
+
                           select res;
 
             return request.GetValueOrDefault(() => base.VisitBinary(node));

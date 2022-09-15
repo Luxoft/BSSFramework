@@ -52,23 +52,23 @@ namespace Framework.DomainDriven.NHibernate
             this.createAuditProperties = settings.GetCreateAuditProperty();
             this.collectChangedEventListener = new CollectChangesEventListener();
 
-            this.InnerSession = this.Environment.InternalSessionFactory.OpenSession();
-            this.InnerSession.FlushMode = FlushMode.Manual;
+            this.NativeSession = this.Environment.InternalSessionFactory.OpenSession();
+            this.NativeSession.FlushMode = FlushMode.Manual;
 
-            this.transaction = this.InnerSession.BeginTransaction();
+            this.transaction = this.NativeSession.BeginTransaction();
 
-            this.Environment.ProcessTransaction(GetDbTransaction(this.transaction, this.InnerSession));
+            this.Environment.ProcessTransaction(GetDbTransaction(this.transaction, this.NativeSession));
 
             this.ConfigureEventListeners();
         }
 
         public override bool Closed => this.closed;
 
-        public sealed override ISession InnerSession { get; }
+        public sealed override ISession NativeSession { get; }
 
         private void ConfigureEventListeners()
         {
-            var sessionImplementation = this.InnerSession.GetSessionImplementation();
+            var sessionImplementation = this.NativeSession.GetSessionImplementation();
 
             var sessionImpl = (SessionImpl)sessionImplementation;
 
@@ -143,7 +143,7 @@ namespace Framework.DomainDriven.NHibernate
 
             this.closed = true;
 
-            using (this.InnerSession)
+            using (this.NativeSession)
             {
                 using (this.transaction)
                 {
@@ -197,7 +197,7 @@ namespace Framework.DomainDriven.NHibernate
 
                 do
                 {
-                    await this.InnerSession.FlushAsync(cancellationToken);
+                    await this.NativeSession.FlushAsync(cancellationToken);
 
                     var changes = this.collectChangedEventListener.EvictChanges();
 
@@ -235,7 +235,7 @@ namespace Framework.DomainDriven.NHibernate
                                                     eventListener.OnBeforeTransactionCompleted(new DALChangesEventArgs(beforeTransactionCompletedChangeState));
                                                 });
 
-                    await this.InnerSession.FlushAsync(cancellationToken);
+                    await this.NativeSession.FlushAsync(cancellationToken);
 
                     var afterTransactionCompletedChangeState =
                             new[] { beforeTransactionCompletedChangeState, this.collectChangedEventListener.EvictChanges() }
@@ -244,7 +244,7 @@ namespace Framework.DomainDriven.NHibernate
                     // WARNING: You can't invoke the listeners if ServiceProvider is in dispose state!!!!!! Use UseTryCloseDbSession middleware
                     this.eventListeners.Foreach(eventListener => eventListener.OnAfterTransactionCompleted(new DALChangesEventArgs(afterTransactionCompletedChangeState)));
 
-                    await this.InnerSession.FlushAsync(cancellationToken); // Флашим для того, чтобы проверить, что никто ничего не менял в объектах после AfterTransactionCompleted-евента
+                    await this.NativeSession.FlushAsync(cancellationToken); // Флашим для того, чтобы проверить, что никто ничего не менял в объектах после AfterTransactionCompleted-евента
 
                     if (this.collectChangedEventListener.HasAny())
                     {

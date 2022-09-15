@@ -2,6 +2,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 
+using Framework.Core;
+
 using JetBrains.Annotations;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +21,7 @@ public static class ServiceProviderExtensions
     {
         if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
 
-        var lazyDbSession = serviceProvider.GetRequiredService<Lazy<IDBSession>>();
+        var lazyDbSession = serviceProvider.GetRequiredService<ILazyObject<IDBSession>>();
 
         if (lazyDbSession.IsValueCreated)
         {
@@ -36,7 +38,7 @@ public static class ServiceProviderExtensions
     {
         if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
 
-        var lazyDbSession = serviceProvider.GetRequiredService<Lazy<IDBSession>>();
+        var lazyDbSession = serviceProvider.GetRequiredService<ILazyObject<IDBSession>>();
 
         if (lazyDbSession.IsValueCreated)
         {

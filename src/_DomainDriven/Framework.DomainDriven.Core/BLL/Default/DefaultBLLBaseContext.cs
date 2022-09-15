@@ -52,7 +52,6 @@ namespace Framework.DomainDriven.BLL
         /// dateTimeService</exception>
         protected DefaultBLLBaseContext(
                 [NotNull] IServiceProvider serviceProvider,
-                [NotNull] IDALFactory<TPersistentDomainObjectBase, TIdent> dalFactory,
                 [NotNull] IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
                 [NotNull] IObjectStateService objectStateService,
                 [NotNull] IStandartExpressionBuilder standardExpressionBuilder,
@@ -63,7 +62,6 @@ namespace Framework.DomainDriven.BLL
             if (objectStateService == null) throw new ArgumentNullException(nameof(objectStateService));
 
             this.ServiceProvider = serviceProvider;
-            this.DalFactory = dalFactory ?? throw new ArgumentNullException(nameof(dalFactory));
             this.OperationSenders = operationSenders ?? throw new ArgumentNullException(nameof(operationSenders));
             this.TrackingService = new TrackingService<TPersistentDomainObjectBase>(objectStateService);
 
@@ -81,8 +79,6 @@ namespace Framework.DomainDriven.BLL
         public IFetchService<TPersistentDomainObjectBase, FetchBuildRule> FetchService { get; }
 
         public IServiceProvider ServiceProvider { get; }
-
-        public IDALFactory<TPersistentDomainObjectBase, TIdent> DalFactory { get; }
 
         public ITrackingService<TPersistentDomainObjectBase> TrackingService { get; }
 
@@ -120,14 +116,13 @@ namespace Framework.DomainDriven.BLL
         /// <inheritdoc />
         protected DefaultBLLBaseContext(
             [NotNull] IServiceProvider serviceProvider,
-            [NotNull] IDALFactory<TPersistentDomainObjectBase, TIdent> dalFactory,
             [NotNull] IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
             [NotNull] IObjectStateService objectStateService,
             [NotNull] IStandartExpressionBuilder standardExpressionBuilder,
             [NotNull] IValidator validator,
             [NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
             [NotNull] IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
-            : base(serviceProvider, dalFactory, operationSenders, objectStateService, standardExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
+            : base(serviceProvider, operationSenders, objectStateService, standardExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
         {
         }
 

@@ -62,7 +62,9 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                    .AddScoped<IRunAsManager, AuthorizationRunAsManger>()
                    .AddScoped<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>()
                    .AddScoped<IAuthorizationBLLContextSettings, AuthorizationBLLContextSettings>()
+
                    .AddScopedFromLazyInterfaceImplement<IAuthorizationBLLContext, AuthorizationBLLContext>()
+
                    .AddScopedFrom<Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContext, IConfigurationBLLContext>()
 
                    .AddScopedFrom<ISecurityOperationResolver<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode>, IAuthorizationBLLContext>()

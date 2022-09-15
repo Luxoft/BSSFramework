@@ -12,11 +12,14 @@ public class AssemblyInitializeAndCleanup
 
     private readonly TestDatabaseGenerator databaseGenerator;
 
-    public AssemblyInitializeAndCleanup(ConfigUtil configUtil, TestDatabaseGenerator databaseGenerator)
+    public AssemblyInitializeAndCleanup(ConfigUtil configUtil, TestDatabaseGenerator databaseGenerator, IServiceProvider serviceProvider)
     {
         this.configUtil = configUtil;
         this.databaseGenerator = databaseGenerator;
+        this.ServiceProvider = serviceProvider;
     }
+
+    public IServiceProvider ServiceProvider { get; }
 
     public static void RunAction(string name, Action action)
     {

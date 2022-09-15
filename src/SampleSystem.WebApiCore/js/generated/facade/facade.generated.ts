@@ -56,6 +56,7 @@ export let checkTestRootSecurityObjAccessAsyncFunc = _checkTestRootSecurityObjAc
 export let checkWorkingCalendar1676AccessAsyncFunc = _checkWorkingCalendar1676Access();
 export let getBusinessUnitProgramClassAsyncFunc = _getBusinessUnitProgramClass();
 export let getBusinessUnitProgramClassesByOperationAsyncFunc = _getBusinessUnitProgramClassesByOperation();
+export let getCurrentEmployeeAsyncFunc = _getCurrentEmployee();
 export let getCustomCompanyLegalEntityAsyncFunc = _getCustomCompanyLegalEntity();
 export let getFullBusinessUnitAsyncFunc = _getFullBusinessUnit();
 export let getFullBusinessUnitByNameAsyncFunc = _getFullBusinessUnitByName();
@@ -566,6 +567,7 @@ export let hasTestPerformanceObjectAccessAsyncFunc = _hasTestPerformanceObjectAc
 export let hasTestPlainAuthObjectAccessAsyncFunc = _hasTestPlainAuthObjectAccess();
 export let hasTestRootSecurityObjAccessAsyncFunc = _hasTestRootSecurityObjAccess();
 export let hasWorkingCalendar1676AccessAsyncFunc = _hasWorkingCalendar1676Access();
+export let loadPairAsyncFunc = _loadPair();
 export let massChangeEmployeeByEmailAsyncFunc = _massChangeEmployeeByEmail();
 export let removeBusinessUnitHrDepartmentAsyncFunc = _removeBusinessUnitHrDepartment();
 export let removeCompanyLegalEntityAsyncFunc = _removeCompanyLegalEntity();
@@ -896,6 +898,14 @@ function _asyncGetLocations(): async.AsyncFunc2<Array<dto.LocationSimpleDTO>, Ar
             let baseParameters = securityOperationCode;
             let service = Environment.current.context.facadeFactory.createService<Array<dto.BusinessUnitProgramClassProjectionDTO>, Array<dto.BusinessUnitProgramClassObservableProjectionDTO>, dto.BusinessUnitProgramClassProjectionDTO, dto.BusinessUnitProgramClassObservableProjectionDTO>();
             return service.getData('BusinessUnit/GetBusinessUnitProgramClassesByOperation', {plain : dto.BusinessUnitProgramClassProjectionDTO, observable : dto.BusinessUnitProgramClassObservableProjectionDTO}, baseParameters);
+        });
+    }
+
+    function _getCurrentEmployee(): async.AsyncFunc2<dto.EmployeeSimpleDTO, dto.EmployeeObservableSimpleDTO, dto.EmployeeSimpleDTO, dto.EmployeeObservableSimpleDTO> {
+        return new async.AsyncFunc2(() => {
+            let baseParameters = {};
+            let service = Environment.current.context.facadeFactory.createService<dto.EmployeeSimpleDTO, dto.EmployeeObservableSimpleDTO, dto.EmployeeSimpleDTO, dto.EmployeeObservableSimpleDTO>();
+            return service.getData('EmployeeAsync/GetCurrentEmployee', {plain : dto.EmployeeSimpleDTO, observable : dto.EmployeeObservableSimpleDTO}, baseParameters);
         });
     }
 
@@ -4982,6 +4992,14 @@ function _asyncGetLocations(): async.AsyncFunc2<Array<dto.LocationSimpleDTO>, Ar
             let baseParameters = {workingCalendar1676Ident : workingCalendar1676Ident, securityOperationCode : securityOperationCode};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
             return service.getData('WorkingCalendar1676/HasWorkingCalendar1676Access', baseParameters);
+        });
+    }
+
+    function _loadPair(): async.AsyncFunc2<ValueTuple<Array<dto.EmployeeIdentityDTO>,Array<dto.BusinessUnitIdentityDTO>>, ValueTuple<Array<dto.EmployeeObservableIdentityDTO>,Array<dto.BusinessUnitObservableIdentityDTO>>, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO> {
+        return new async.AsyncFunc2(() => {
+            let baseParameters = {};
+            let service = Environment.current.context.facadeFactory.createService<ValueTuple<Array<dto.EmployeeIdentityDTO>,Array<dto.BusinessUnitIdentityDTO>>, ValueTuple<Array<dto.EmployeeObservableIdentityDTO>,Array<dto.BusinessUnitObservableIdentityDTO>>, dto.EmployeeIdentityDTO, dto.EmployeeObservableIdentityDTO>();
+            return service.getData('TestRepository/LoadPair', {plain : dto.EmployeeIdentityDTO, observable : dto.EmployeeObservableIdentityDTO}, baseParameters);
         });
     }
 

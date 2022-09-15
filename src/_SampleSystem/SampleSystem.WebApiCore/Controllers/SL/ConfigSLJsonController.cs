@@ -15,11 +15,6 @@ namespace SampleSystem.WebApiCore.Controllers
 {
     public class ConfigSLJsonController : Framework.Configuration.WebApi.ConfigSLJsonController
     {
-        public ConfigSLJsonController()
-            
-        {
-        }
-
         [HttpPost(nameof(SaveSendedNotification))]
         public void SaveSendedNotification(NotificationEventDTO notification)
         {

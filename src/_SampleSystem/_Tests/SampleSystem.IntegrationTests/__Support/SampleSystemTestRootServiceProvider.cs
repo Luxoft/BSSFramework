@@ -38,26 +38,24 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
             var provider = TestServiceProvider.Build(
                 z =>
                     z.AddEnvironment(configuration)
-                        .RegisterLegacyBLLContext()
-                        .AddControllerEnvironment()
-                        .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
+                     .RegisterLegacyBLLContext()
+                     .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
 
-                        .AddSingleton<SampleSystemInitializer>()
+                     .AddSingleton<SampleSystemInitializer>()
 
-                        .AddSingleton<ICapTransactionManager, IntegrationTestCapTransactionManager>()
-                        .AddSingleton<IIntegrationEventBus, IntegrationTestIntegrationEventBus>()
+                     .AddSingleton<ICapTransactionManager, IntegrationTestCapTransactionManager>()
+                     .AddSingleton<IIntegrationEventBus, IntegrationTestIntegrationEventBus>()
 
-                        .AddWorkflowCore(configuration)
-                        .AddAuthWorkflow()
-                        .AddScoped<StartWorkflowJob>()
+                     .AddWorkflowCore(configuration)
+                     .AddAuthWorkflow()
+                     .AddScoped<StartWorkflowJob>()
 
-                        .RegisterControllers(new[] { typeof(EmployeeController).Assembly })
+                     .RegisterControllers(new[] { typeof(EmployeeController).Assembly })
 
-                        .AddSingleton(databaseContext)
-                        .AddSingleton<DataHelper>()
-                        .AddSingleton<AuthHelper>()
-                        .AddSingleton(configUtil)
-                    );
+                     .AddSingleton(databaseContext)
+                     .AddSingleton<DataHelper>()
+                     .AddSingleton<AuthHelper>()
+                     .AddSingleton(configUtil));
 
             provider.RegisterAuthWorkflow();
 

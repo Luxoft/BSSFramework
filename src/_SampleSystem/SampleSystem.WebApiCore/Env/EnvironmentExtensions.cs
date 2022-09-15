@@ -76,6 +76,8 @@ namespace SampleSystem.WebApiCore
 
             services.AddSingleton(new SubscriptionMetadataStore(new SampleSystemSubscriptionsMetadataFinder()));
 
+            services.AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>();
+
             return services.AddControllerEnvironment();
         }
 

@@ -37,8 +37,8 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 
             var provider = TestServiceProvider.Build(
                 z =>
-                    z.RegisterLegacyBLLContext()
-                     .AddEnvironment(configuration)
+                    z.AddEnvironment(configuration)
+                     .RegisterLegacyBLLContext()
                      .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
 
                      .AddSingleton<SampleSystemInitializer>()

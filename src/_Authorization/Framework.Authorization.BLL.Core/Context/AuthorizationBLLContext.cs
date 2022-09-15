@@ -39,7 +39,6 @@ namespace Framework.Authorization.BLL
 
         public AuthorizationBLLContext(
             [NotNull] IServiceProvider serviceProvider,
-            [NotNull] IDALFactory<PersistentDomainObjectBase, Guid> dalFactory,
             [NotNull] IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
             [NotNull] IObjectStateService objectStateService,
             [NotNull] IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
@@ -60,7 +59,6 @@ namespace Framework.Authorization.BLL
             [NotNull] IAuthorizationBLLContextSettings settings)
             : base(
                 serviceProvider,
-                dalFactory,
                 operationSenders,
                 objectStateService,
                 accessDeniedExceptionService,
@@ -221,9 +219,7 @@ namespace Framework.Authorization.BLL
             var filter = new AvailablePermissionOperationFilter<TSecurityOperationCode>(
                this.DateTimeService, this.RunAsManager.PrincipalName, securityOperation.Code);
 
-            return this.Logics.Permission.GetUnsecureQueryable().Where(filter.ToFilterExpression())
-                       //.Visit(AuthVisitor)
-                       ;
+            return this.Logics.Permission.GetUnsecureQueryable().Where(filter.ToFilterExpression());
         }
 
         private IEnumerable<string> GetAccessors(Expression<Func<Principal, bool>> principalFilter, AvailablePermissionFilter permissionFilter)
@@ -330,7 +326,6 @@ namespace Framework.Authorization.BLL
                  { typeof(IPermissionFilterItem<Guid>), typeof(PermissionFilterItem) },
                  { typeof(IPermissionFilterEntity<Guid>), typeof(PermissionFilterEntity) },
                  { typeof(IEntityType<Guid>), typeof(EntityType) },
-                 //{ typeof(IDenormalizedPermissionItem<Guid>), typeof(DenormalizedPermissionItem) },
          });
     }
 }

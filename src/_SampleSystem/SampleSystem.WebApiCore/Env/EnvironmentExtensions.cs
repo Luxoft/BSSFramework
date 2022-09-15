@@ -20,13 +20,11 @@ using Framework.DomainDriven.SerializeMetadata;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
-using Framework.Exceptions;
 
 using JetBrains.Annotations;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 using nuSpec.Abstraction;
 using nuSpec.NHibernate;
@@ -82,22 +80,17 @@ namespace SampleSystem.WebApiCore
         }
 
         public static IServiceCollection AddDatabaseSettings(this IServiceCollection services, string connectionString) =>
-                services.AddScoped<INHibSessionSetup, NHibSessionSettings>()
 
-                        .AddScoped<IDBSessionEventListener, DefaultDBSessionEventListener>()
-                        .AddScoped<IDBSessionEventListener, SubscriptionDBSessionEventListener>()
-                        .AddScopedFromLazy<IDBSession, NHibSession>()
+                services.AddDatabaseSettings(setupObj =>
 
-                        .AddSingleton<INHibSessionEnvironmentSettings, NHibSessionEnvironmentSettings>()
-                        .AddSingleton<NHibConnectionSettings>()
-                        .AddSingleton<NHibSessionEnvironment, SampleSystemNHibSessionEnvironment>()
+                    setupObj.AddEventListener<DefaultDBSessionEventListener>()
+                            .AddEventListener<SubscriptionDBSessionEventListener>()
 
-                        .AddSingleton<IMappingSettings>(AuthorizationMappingSettings.CreateDefaultAudit(string.Empty))
-                        .AddSingleton<IMappingSettings>(ConfigurationMappingSettings.CreateDefaultAudit(string.Empty))
-                        .AddSingleton<IMappingSettings>(
-                                                        new SampleSystemMappingSettings(
-                                                                                        new DatabaseName(string.Empty, "app"),
-                                                                                        connectionString));
+                            .SetEnvironment<SampleSystemNHibSessionEnvironment>()
+
+                            .AddMapping(AuthorizationMappingSettings.CreateDefaultAudit(string.Empty))
+                            .AddMapping(ConfigurationMappingSettings.CreateDefaultAudit(string.Empty))
+                            .AddMapping(new SampleSystemMappingSettings(new DatabaseName(string.Empty, "app"), connectionString)));
 
         public static IServiceCollection AddControllerEnvironment(this IServiceCollection services)
         {

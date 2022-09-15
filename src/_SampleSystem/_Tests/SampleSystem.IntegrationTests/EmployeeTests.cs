@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
-using Automation.ServiceEnvironment;
-using Automation.Utils;
+
 using Automation.Utils.DatabaseUtils;
 using FluentAssertions;
 
@@ -16,7 +15,6 @@ using Framework.Configuration.Generated.DTO;
 
 using Framework.Core;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.NHibernate;
 using Framework.Events;
@@ -25,7 +23,6 @@ using Framework.OData;
 using NHibernate.Impl;
 
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests
 {
@@ -321,7 +318,7 @@ namespace SampleSystem.IntegrationTests
                 (_, dbContext) =>
                 {
                     var writeNhibSession = dbContext as WriteNHibSession;
-                    var impl = writeNhibSession.InnerSession as SessionImpl;
+                    var impl = writeNhibSession.NativeSession as SessionImpl;
                     return;
                 });
         }

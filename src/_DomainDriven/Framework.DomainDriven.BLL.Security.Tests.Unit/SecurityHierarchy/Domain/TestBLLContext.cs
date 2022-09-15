@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 
 using Framework.Core;
@@ -14,64 +15,66 @@ using Framework.QueryLanguage;
 using Framework.SecuritySystem;
 using Framework.Validation;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using NSubstitute;
 
 namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain
 {
     using Framework.Core.Serialization;
 
-    public class TestBLLContext : ITestBLLContext, ISecurityBLLContext<IAuthorizationBLLContext<Guid>, PersistentDomainObjectBase, DomainObjectBase, Guid>, IAccessDeniedExceptionServiceContainer<PersistentDomainObjectBase>
+    public class TestBllContext : ITestBLLContext, ISecurityBLLContext<IAuthorizationBLLContext<Guid>, PersistentDomainObjectBase, DomainObjectBase, Guid>, IAccessDeniedExceptionServiceContainer<PersistentDomainObjectBase>
     {
-        private readonly HierarchyDomainDAL hierarchyDomainDal;
+        private readonly Lazy<SyncDenormolizedValuesService<ITestBLLContext, PersistentDomainObjectBase, HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid, NamedLockObject, NamedLockOperation>> syncHierarchyService;
 
-        private readonly Lazy<SyncDenormolizedValuesService<ITestBLLContext, PersistentDomainObjectBase, HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid, NamedLockObject, NamedLockOperation>> _syncHierarchyService;
+        private readonly IBLLFactoryContainer<IDefaultBLLFactory<PersistentDomainObjectBase, Guid>> defaultFactoryContainer;
 
-        private readonly HierarchyDomainAncestorLogic _hierarchyDomainAncestorLogic;
-
-        private readonly MockDAL<HierarchyObjectAncestorLink, Guid> _domainAncestorLinkDal;
-        private readonly MockDAL<NamedLockObject, Guid> _namedLockDAL;
-
-        private readonly IDALFactory<PersistentDomainObjectBase, Guid> _dalFactory;
-        private readonly IBLLFactoryContainer<IDefaultBLLFactory<PersistentDomainObjectBase, Guid>> _defaultFactoryContainer;
-
-        public TestBLLContext(List<HierarchyObject> hierarchicalObjects)
+        public TestBllContext(List<HierarchyObject> hierarchicalObjects)
         {
-            this.hierarchyDomainDal = new HierarchyDomainDAL(hierarchicalObjects);
+            this.HierarchyDomainDal = new HierarchyDomainDAL(hierarchicalObjects);
 
-            this._domainAncestorLinkDal = new MockDAL<HierarchyObjectAncestorLink, Guid>(hierarchicalObjects.ToAncestorLinks<HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink>().ToList());
+            this.DomainAncestorLinkDal = new MockDAL<HierarchyObjectAncestorLink, Guid>(hierarchicalObjects.ToAncestorLinks<HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink>().ToList());
 
-            this._namedLockDAL = new MockDAL<NamedLockObject, Guid>(new NamedLockObject() { LockOperation = NamedLockOperation.HierarchyObjectAncestorLinkLock });
+            this.NamedLockDal = new MockDAL<NamedLockObject, Guid>(new NamedLockObject() { LockOperation = NamedLockOperation.HierarchyObjectAncestorLinkLock });
 
-            this._dalFactory = Substitute.For<IDALFactory<PersistentDomainObjectBase, Guid>>();
+            this.defaultFactoryContainer = Substitute.For<IBLLFactoryContainer<IDefaultBLLFactory<PersistentDomainObjectBase, Guid>>>();
 
-            this._dalFactory.CreateDAL<HierarchyObjectAncestorLink>().Returns(this._domainAncestorLinkDal);
-            this._dalFactory.CreateDAL<HierarchyObject>().Returns(this.hierarchyDomainDal);
-            this._dalFactory.CreateDAL<NamedLockObject>().Returns(this._namedLockDAL);
-            this._defaultFactoryContainer = Substitute.For<IBLLFactoryContainer<IDefaultBLLFactory<PersistentDomainObjectBase, Guid>>>();
-
-            this._syncHierarchyService = new Lazy<SyncDenormolizedValuesService<ITestBLLContext, PersistentDomainObjectBase, HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid, NamedLockObject, NamedLockOperation>>(() =>
-                new SyncDenormolizedValuesService<ITestBLLContext, PersistentDomainObjectBase, HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid, NamedLockObject, NamedLockOperation>(this));
+            this.syncHierarchyService =
+                    new Lazy<SyncDenormolizedValuesService<ITestBLLContext, PersistentDomainObjectBase, HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid, NamedLockObject, NamedLockOperation>>(() =>
+                new SyncDenormolizedValuesService<ITestBLLContext, PersistentDomainObjectBase, HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid, NamedLockObject, NamedLockOperation>(
+                 this.HierarchyDomainDal,
+                 this.DomainAncestorLinkDal,
+                 this.NamedLockDal));
 
             var defaultFactory = Substitute.For<IDefaultBLLFactory<PersistentDomainObjectBase, Guid>>();
 
-            this._defaultFactoryContainer.Default.Returns(defaultFactory);
+            this.defaultFactoryContainer.Default.Returns(defaultFactory);
+
+            this.ServiceProvider = new ServiceCollection()
+                                   .AddSingleton<IDAL<HierarchyObject, Guid>>(this.HierarchyDomainDal)
+                                   .AddSingleton<IDAL<HierarchyObjectAncestorLink, Guid>>(this.DomainAncestorLinkDal)
+                                   .AddSingleton<IDAL<NamedLockObject, Guid>>(this.NamedLockDal)
+                                   .BuildServiceProvider();
 
             var namedLockLogic = new NamedLockLogic(this); // MAGIC
 
             defaultFactory.Create<NamedLockObject>().Returns(namedLockLogic);
-            defaultFactory.Create<HierarchyObjectAncestorLink>().Returns(this._hierarchyDomainAncestorLogic);
-
+            defaultFactory.Create<HierarchyObjectAncestorLink>().Returns(this.HierarchyDomainAncestorLogic);
         }
 
-        public IParser<string, SelectOperation> SelectOperationParser { get; private set; }
+        public IParser<string, SelectOperation> SelectOperationParser { get; }
 
-        public IDALFactory<PersistentDomainObjectBase, Guid> DalFactory => this._dalFactory;
+        public HierarchyDomainDAL HierarchyDomainDal { get; }
 
-        public HierarchyDomainAncestorLogic HierarchyDomainAncestorLogic => this._hierarchyDomainAncestorLogic;
+        public HierarchyDomainAncestorLogic HierarchyDomainAncestorLogic { get; }
+
+        public MockDAL<HierarchyObjectAncestorLink, Guid> DomainAncestorLinkDal { get; }
+
+        public MockDAL<NamedLockObject, Guid> NamedLockDal { get; }
 
         public IOperationEventSenderContainer<PersistentDomainObjectBase> OperationSenders => new OperationEventSenderContainer<DomainObjectBase>(new List<IOperationEventListener<DomainObjectBase>>());
 
-        public IBLLFactoryContainer<IDefaultBLLFactory<PersistentDomainObjectBase, Guid>> Logics => this._defaultFactoryContainer;
+        public IBLLFactoryContainer<IDefaultBLLFactory<PersistentDomainObjectBase, Guid>> Logics => this.defaultFactoryContainer;
 
         public IAuthorizationBLLContext<Guid> Authorization { get; private set; }
 
@@ -90,19 +93,19 @@ namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain
 
         public IUserAuthenticationService UserAuthenticationService => Framework.Core.Services.UserAuthenticationService.CreateFor("testUser");
 
-        public IQueryableSource<PersistentDomainObjectBase> GetQueryableSource() => new BLLQueryableSource<TestBLLContext, PersistentDomainObjectBase, DomainObjectBase, Guid>(this);
+        public IQueryableSource<PersistentDomainObjectBase> GetQueryableSource() => new BLLQueryableSource<TestBllContext, PersistentDomainObjectBase, DomainObjectBase, Guid>(this);
 
         public IValidator Validator => ValidatorBase.Success;
 
-        public SyncDenormolizedValuesService<ITestBLLContext, PersistentDomainObjectBase, HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid, NamedLockObject, NamedLockOperation> SyncHierarchyService => this._syncHierarchyService.Value;
+        public SyncDenormolizedValuesService<ITestBLLContext, PersistentDomainObjectBase, HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid, NamedLockObject, NamedLockOperation> SyncHierarchyService => this.syncHierarchyService.Value;
 
         public bool AllowVirtualPropertyInOdata(Type domainType) => false;
 
         public void Flush()
         {
-            this._domainAncestorLinkDal.Flush();
-            this._namedLockDAL.Flush();
-            this.hierarchyDomainDal.Flush();
+            this.DomainAncestorLinkDal.Flush();
+            this.NamedLockDal.Flush();
+            this.HierarchyDomainDal.Flush();
         }
 
         public ITrackingService<PersistentDomainObjectBase> TrackingService { get; private set; }
@@ -111,6 +114,6 @@ namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain
 
         IAccessDeniedExceptionService IAccessDeniedExceptionServiceContainer.AccessDeniedExceptionService => this.AccessDeniedExceptionService;
 
-        public IServiceProvider ServiceProvider => throw new NotImplementedException();
+        public IServiceProvider ServiceProvider { get; }
     }
 }

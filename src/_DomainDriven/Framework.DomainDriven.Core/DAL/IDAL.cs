@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Linq.Expressions;
 
 using Framework.DomainDriven.DAL.Revisions;
 
@@ -11,7 +10,7 @@ namespace Framework.DomainDriven
         /// Предоставляет Queryable в контексте Read
         /// </summary>
         /// <returns></returns>
-        IQueryable<TDomainObject> GetQueryable(LockRole lockRole, IFetchContainer<TDomainObject> fetchContainer = null, ExpressionVisitor visitor = null);
+        IQueryable<TDomainObject> GetQueryable(LockRole lockRole, IFetchContainer<TDomainObject> fetchContainer = null);
 
         TDomainObject GetById(TIdent id, LockRole lockRole);
 

@@ -2,15 +2,14 @@
 
 namespace Framework.DomainDriven.BLL
 {
-    public interface IBLLBaseContextBase<in TPersistentDomainObjectBase, TIdent>
+    public interface IBLLBaseContextBase<in TPersistentDomainObjectBase, TIdent> : IServiceProviderContainer
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     {
-        IDALFactory<TPersistentDomainObjectBase, TIdent> DalFactory { get; }
     }
 
 
-    public interface IBLLBaseContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent> : IBLLBaseContextBase<TPersistentDomainObjectBase, TIdent>, IBLLOperationEventContext<TPersistentDomainObjectBase>, IODataBLLContext
+    public interface IBLLBaseContext<in TPersistentDomainObjectBase, TDomainObjectBase, TIdent> : IBLLBaseContextBase<TPersistentDomainObjectBase, TIdent>, IBLLOperationEventContext<TPersistentDomainObjectBase>, IODataBLLContext
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
         where TDomainObjectBase : class

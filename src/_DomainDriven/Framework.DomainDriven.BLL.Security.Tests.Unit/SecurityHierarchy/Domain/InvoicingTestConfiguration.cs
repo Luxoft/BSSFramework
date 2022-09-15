@@ -2,7 +2,7 @@
 {
     using Framework.DomainDriven.UnitTest.Mock;
 
-    public class InvoicingTestConfiguration : BLLContextConfiguration<TestBLLContext, PersistentDomainObjectBase>
+    public class InvoicingTestConfiguration : BLLContextConfiguration<TestBllContext, PersistentDomainObjectBase>
     {
         public InvoicingTestConfiguration() : base(new[]{typeof(HierarchyObject).Assembly})
         {

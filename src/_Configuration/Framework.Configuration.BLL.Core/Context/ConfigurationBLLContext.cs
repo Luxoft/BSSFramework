@@ -38,7 +38,6 @@ namespace Framework.Configuration.BLL
 
         public ConfigurationBLLContext(
             IServiceProvider serviceProvider,
-            [NotNull] IDALFactory<PersistentDomainObjectBase, Guid> dalFactory,
             [NotNull] IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
             [NotNull] IObjectStateService objectStateService,
             [NotNull] IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
@@ -55,7 +54,7 @@ namespace Framework.Configuration.BLL
             [NotNull] IEnumerable<ITargetSystemService> targetSystemServices,
             [NotNull] IConfigurationBLLContextSettings settings,
             [NotNull] ICurrentRevisionService currentRevisionService)
-            : base(serviceProvider, dalFactory, operationSenders, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
+            : base(serviceProvider, operationSenders, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
         {
             this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
             this.SubscriptionSender = subscriptionSender ?? throw new ArgumentNullException(nameof(subscriptionSender));

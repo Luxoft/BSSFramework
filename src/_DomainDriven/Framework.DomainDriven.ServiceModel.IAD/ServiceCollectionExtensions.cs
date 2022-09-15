@@ -8,6 +8,7 @@ using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
+using Framework.DomainDriven.NHibernate;
 using Framework.Notification;
 using Framework.QueryableSource;
 using Framework.QueryLanguage;
@@ -22,6 +23,10 @@ namespace Framework.DomainDriven.ServiceModel.IAD
     {
         public static IServiceCollection RegisterGenericServices(this IServiceCollection services)
         {
+            services.AddScoped(typeof(IOperationEventSenderContainer<>), typeof(OperationEventSenderContainer<>));
+
+            services.AddScoped(typeof(IDAL<,>), typeof(NHibDal<,>));
+
             services.AddSingleton<IExceptionExpander, ExceptionExpander>();
 
             services.AddScopedFrom((IDBSession session) => session.GetObjectStateService());
@@ -41,10 +46,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         public static IServiceCollection RegisterAuthorizationBLL(this IServiceCollection services)
         {
             return services
-
-                   .AddScopedFrom((IDBSession session) => session.GetDALFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>())
-
-                   .AddScoped<IOperationEventSenderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>, OperationEventSenderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>>()
 
                    .AddSingleton<AuthorizationValidatorCompileCache>()
 
@@ -74,10 +75,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
         public static IServiceCollection RegisterConfigurationBLL(this IServiceCollection services)
         {
             return services
-
-                   .AddScopedFrom((IDBSession session) => session.GetDALFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>())
-
-                   .AddScoped<IOperationEventSenderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>, OperationEventSenderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>>()
 
                    .AddSingleton<ConfigurationValidatorCompileCache>()
 

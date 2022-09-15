@@ -107,7 +107,7 @@ namespace Framework.DomainDriven.UnitTest.Mock
         {
         }
 
-        public IQueryable<TDomain> GetQueryable(LockRole lockRole, IFetchContainer<TDomain> fetchContainer, ExpressionVisitor visitor)
+        public IQueryable<TDomain> GetQueryable(LockRole lockRole, IFetchContainer<TDomain> fetchContainer = null)
         {
             var list = new List<TDomain>(this.Collection.Count);
             list.AddRange(this.Collection);

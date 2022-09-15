@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 
 using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.Exceptions;
@@ -19,31 +18,37 @@ using NHibernate.Linq.Visitors;
 
 namespace Framework.DomainDriven.NHibernate
 {
-    internal class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
+    public class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
         where TDomainObject : class, IIdentityObject<TIdent>
     {
         private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache();
 
-        private readonly NHibSessionBase session;
+        private readonly INHibSession session;
 
-        public NHibDal(NHibSessionBase session) => this.session = session ?? throw new ArgumentNullException(nameof(session));
+        private readonly IExpressionVisitorContainer expressionVisitorContainer;
 
-        private ISession InnerSession => this.session.InnerSession;
+        public NHibDal(INHibSession session, IExpressionVisitorContainer expressionVisitorContainer)
+        {
+            this.session = session;
+            this.expressionVisitorContainer = expressionVisitorContainer;
+        }
 
-        public TDomainObject GetById(TIdent id, LockRole lockRole) => this.InnerSession.Get<TDomainObject>(id, lockRole.ToLockMode());
+        private ISession NativeSession => this.session.NativeSession;
+
+        public TDomainObject GetById(TIdent id, LockRole lockRole) => this.NativeSession.Get<TDomainObject>(id, lockRole.ToLockMode());
 
         public void Lock(TDomainObject domainObject, LockRole lockRole)
         {
             this.CheckWrite();
 
-            this.InnerSession.Lock(domainObject, lockRole.ToLockMode());
+            this.NativeSession.Lock(domainObject, lockRole.ToLockMode());
         }
 
         public virtual void Save(TDomainObject domainObject)
         {
             this.CheckWrite();
 
-            this.InnerSession.SaveOrUpdate(domainObject);
+            this.NativeSession.SaveOrUpdate(domainObject);
 
             this.session.RegisterModified(domainObject, ModificationType.Save);
         }
@@ -57,7 +62,7 @@ namespace Framework.DomainDriven.NHibernate
 
             this.CheckWrite();
 
-            this.InnerSession.Save(domainObject, id);
+            this.NativeSession.Save(domainObject, id);
 
             this.session.RegisterModified(domainObject, ModificationType.Save);
         }
@@ -68,16 +73,16 @@ namespace Framework.DomainDriven.NHibernate
 
             this.session.RegisterModified(domainObject, ModificationType.Remove);
 
-            this.InnerSession.Delete(domainObject);
+            this.NativeSession.Delete(domainObject);
         }
 
-        public IQueryable<TDomainObject> GetQueryable(LockRole lockRole, IFetchContainer<TDomainObject> fetchContainer, ExpressionVisitor visitor = null)
+        public IQueryable<TDomainObject> GetQueryable(LockRole lockRole, IFetchContainer<TDomainObject> fetchContainer)
         {
-            var queryable = this.InnerSession.Query<TDomainObject>();
+            var queryable = this.NativeSession.Query<TDomainObject>();
 
             (queryable.Provider as VisitedQueryProvider)
                     .FromMaybe("Register VisitedQueryProvider in Nhib configuration")
-                    .Visitor = visitor;
+                    .Visitor = this.expressionVisitorContainer.Visitor;
 
             var fetchsResult = queryable.WithFetchs(fetchContainer);
 
@@ -236,9 +241,9 @@ namespace Framework.DomainDriven.NHibernate
         public IEnumerable<TIdent> GetIdentiesWithHistory(Expression<Func<TDomainObject, bool>> query) =>
             this.GetAuditReader().GetIdentiesBy<TDomainObject, TIdent>(query.ToCriterion());
 
-        public TDomainObject GetById(TIdent id) => this.InnerSession.Get<TDomainObject>(id);
+        public TDomainObject GetById(TIdent id) => this.NativeSession.Get<TDomainObject>(id);
 
-        public TDomainObject Load(TIdent id) => this.InnerSession.Load<TDomainObject>(id);
+        public TDomainObject Load(TIdent id) => this.NativeSession.Load<TDomainObject>(id);
 
         public DomainObjectPropertyRevisions<TIdent, TProperty> GetPrimitivePropertiesRevision<TProperty>(
             TIdent id,

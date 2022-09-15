@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Framework.DomainDriven.BLL.Tracking;
-using Framework.Persistent;
 
 namespace Framework.DomainDriven
 {
@@ -13,9 +12,6 @@ namespace Framework.DomainDriven
         DBSessionMode SessionMode { get; }
 
         IObjectStateService GetObjectStateService();
-
-        IDALFactory<TPersistentDomainObjectBase, TIdent> GetDALFactory<TPersistentDomainObjectBase, TIdent>()
-            where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>;
 
         /// <summary>
         /// Мануальный флаш сессии, при его вызове срабатывают только Flushed-евенты, TransactionCompleted-евенты вызываются только при закрытие сессии

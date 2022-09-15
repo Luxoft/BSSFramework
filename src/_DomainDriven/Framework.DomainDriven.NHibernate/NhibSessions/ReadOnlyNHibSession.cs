@@ -16,14 +16,14 @@ namespace Framework.DomainDriven.NHibernate
         public ReadOnlyNHibSession(NHibSessionEnvironment environment)
                 : base(environment, DBSessionMode.Read)
         {
-            this.InnerSession = this.Environment.InternalSessionFactory.OpenSession();
-            this.InnerSession.FlushMode = FlushMode.Manual;
-            this.InnerSession.DefaultReadOnly = true;
+            this.NativeSession = this.Environment.InternalSessionFactory.OpenSession();
+            this.NativeSession.FlushMode = FlushMode.Manual;
+            this.NativeSession.DefaultReadOnly = true;
         }
 
         public override bool Closed => this.closed;
 
-        public sealed override ISession InnerSession { get; }
+        public sealed override ISession NativeSession { get; }
 
 
         public override IEnumerable<ObjectModification> GetModifiedObjectsFromLogic()
@@ -59,7 +59,7 @@ namespace Framework.DomainDriven.NHibernate
             this.closed = true;
 
 
-            using (this.InnerSession);
+            using (this.NativeSession);
         }
 
         public override Task FlushAsync(CancellationToken cancellationToken = default)

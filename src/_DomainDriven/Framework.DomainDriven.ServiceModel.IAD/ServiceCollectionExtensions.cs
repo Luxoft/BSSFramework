@@ -9,6 +9,7 @@ using Framework.DependencyInjection;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.NHibernate;
+using Framework.DomainDriven.Repository;
 using Framework.Notification;
 using Framework.QueryableSource;
 using Framework.QueryLanguage;
@@ -26,6 +27,9 @@ namespace Framework.DomainDriven.ServiceModel.IAD
             services.AddScoped(typeof(IOperationEventSenderContainer<>), typeof(OperationEventSenderContainer<>));
 
             services.AddScoped(typeof(IDAL<,>), typeof(NHibDal<,>));
+            services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
+
+            services.AddScoped(typeof(IRepositoryFactory<,,>), typeof(RepositoryFactory<,,>));
 
             services.AddSingleton<IExceptionExpander, ExceptionExpander>();
 

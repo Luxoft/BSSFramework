@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
+using System.Threading.Tasks;
 
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
@@ -27,10 +29,13 @@ namespace Framework.DomainDriven.NHibernate
 
         private readonly IExpressionVisitorContainer expressionVisitorContainer;
 
-        public NHibDal(INHibSession session, IExpressionVisitorContainer expressionVisitorContainer)
+        private readonly IAsyncDal<TDomainObject, TIdent> asyncDal;
+
+        public NHibDal(INHibSession session, IExpressionVisitorContainer expressionVisitorContainer, IAsyncDal<TDomainObject, TIdent> asyncDal)
         {
             this.session = session;
             this.expressionVisitorContainer = expressionVisitorContainer;
+            this.asyncDal = asyncDal;
         }
 
         private ISession NativeSession => this.session.NativeSession;
@@ -46,43 +51,22 @@ namespace Framework.DomainDriven.NHibernate
 
         public virtual void Save(TDomainObject domainObject)
         {
-            this.CheckWrite();
-
-            this.NativeSession.SaveOrUpdate(domainObject);
-
-            this.session.RegisterModified(domainObject, ModificationType.Save);
+            this.asyncDal.SaveAsync(domainObject).GetAwaiter().GetResult();
         }
 
         public virtual void Insert(TDomainObject domainObject, TIdent id)
         {
-            if (id.IsDefault())
-            {
-                throw new ArgumentOutOfRangeException(nameof(id), "The given identifier is not initialized");
-            }
-
-            this.CheckWrite();
-
-            this.NativeSession.Save(domainObject, id);
-
-            this.session.RegisterModified(domainObject, ModificationType.Save);
+            this.asyncDal.InsertAsync(domainObject, id).GetAwaiter().GetResult();
         }
 
         public virtual void Remove(TDomainObject domainObject)
         {
-            this.CheckWrite();
-
-            this.session.RegisterModified(domainObject, ModificationType.Remove);
-
-            this.NativeSession.Delete(domainObject);
+            this.asyncDal.RemoveAsync(domainObject).GetAwaiter().GetResult();
         }
 
         public IQueryable<TDomainObject> GetQueryable(LockRole lockRole, IFetchContainer<TDomainObject> fetchContainer)
         {
-            var queryable = this.NativeSession.Query<TDomainObject>();
-
-            (queryable.Provider as VisitedQueryProvider)
-                    .FromMaybe("Register VisitedQueryProvider in Nhib configuration")
-                    .Visitor = this.expressionVisitorContainer.Visitor;
+            var queryable = this.asyncDal.GetQueryable();
 
             var fetchsResult = queryable.WithFetchs(fetchContainer);
 

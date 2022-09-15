@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
+
 using Framework.Core;
 using Framework.Notification.DTO;
 using Framework.NotificationCore.Extensions;
 using Framework.NotificationCore.Settings;
+
 using Microsoft.Extensions.Options;
 
 namespace Framework.NotificationCore.Services

@@ -2,17 +2,14 @@
 using System.Threading.Tasks;
 
 using Framework.Core.Services;
-using Framework.DomainDriven;
 
-using SampleSystem.WebApiCore.Env;
+namespace Framework.DomainDriven.WebApiNetCore;
 
-namespace SampleSystem.WebApiCore;
-
-public class SampleSystemUserAuthenticationService : IUserAuthenticationService, IImpersonateService
+public class ApplicationUserAuthenticationService : IUserAuthenticationService, IImpersonateService
 {
     private readonly IDefaultUserAuthenticationService defaultAuthenticationService;
 
-    public SampleSystemUserAuthenticationService(IDefaultUserAuthenticationService defaultAuthenticationService)
+    public ApplicationUserAuthenticationService(IDefaultUserAuthenticationService defaultAuthenticationService)
     {
         this.defaultAuthenticationService = defaultAuthenticationService;
     }

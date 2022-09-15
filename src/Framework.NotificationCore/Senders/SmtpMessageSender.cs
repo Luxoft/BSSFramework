@@ -68,7 +68,7 @@ namespace Framework.NotificationCore.Senders
             }
         }
 
-        // todo: перевести создание SmtpClient в DI 
+        // todo: перевести создание SmtpClient в DI
         protected virtual SmtpClient GetSmtpClient()
         {
             if (!this.settings.Value.SmtpEnabled && string.IsNullOrWhiteSpace(this.settings.Value.OutputFolder))

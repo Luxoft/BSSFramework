@@ -27,14 +27,11 @@ namespace Framework.DomainDriven.NHibernate
 
         private readonly INHibSession session;
 
-        private readonly IExpressionVisitorContainer expressionVisitorContainer;
-
         private readonly IAsyncDal<TDomainObject, TIdent> asyncDal;
 
-        public NHibDal(INHibSession session, IExpressionVisitorContainer expressionVisitorContainer, IAsyncDal<TDomainObject, TIdent> asyncDal)
+        public NHibDal(INHibSession session, IAsyncDal<TDomainObject, TIdent> asyncDal)
         {
             this.session = session;
-            this.expressionVisitorContainer = expressionVisitorContainer;
             this.asyncDal = asyncDal;
         }
 

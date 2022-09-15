@@ -1,6 +1,11 @@
 ﻿using System;
 
+using Automation.ServiceEnvironment.Services;
+
+using Framework.Core.Services;
 using Framework.DependencyInjection;
+using Framework.DomainDriven;
+using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.WebApiNetCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,14 +16,22 @@ public static class TestServiceProvider
     public static IServiceProvider Build(Action<IServiceCollection> options)
     {
         var serviceCollection = new ServiceCollection();
+
         options(serviceCollection);
 
         serviceCollection
-            .AddTestDateTimeService()
-            .ReplaceScopedFrom<IWebApiCurrentMethodResolver, TestWebApiCurrentMethodResolver>()
-            .ReplaceSingleton<IWebApiExceptionExpander, WebApiDebugExceptionExpander>()
+
+            .AddSingleton<IntegrationTestUserAuthenticationService>()
+            .ReplaceSingletonFrom<IAuditRevisionUserAuthenticationService, IntegrationTestUserAuthenticationService>()
+            .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IntegrationTestUserAuthenticationService>()
+
+            .AddSingleton<IntegrationTestDateTimeService>()
+            .ReplaceSingletonFrom<IDateTimeService, IntegrationTestDateTimeService>()
+
             .AddScoped<TestWebApiCurrentMethodResolver>()
-            .AddTestAuthentication();
+            .ReplaceScopedFrom<IWebApiCurrentMethodResolver, TestWebApiCurrentMethodResolver>()
+
+            .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>();
 
         return serviceCollection
             .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });

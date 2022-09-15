@@ -7,7 +7,7 @@ using Framework.Cap.Abstractions;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.NHibernate.Audit;
 
-namespace SampleSystem.WebApiCore.Env.Database;
+namespace SampleSystem.ServiceEnvironment.Database;
 
 public class SampleSystemNHibSessionEnvironment : NHibSessionEnvironment
 {

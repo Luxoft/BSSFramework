@@ -46,12 +46,14 @@ namespace SampleSystem.WebApiCore
         {
             if(this.HostingEnvironment.IsProduction())
             {
-                services
-                    .AddMetricsBss(this.Configuration, 0.5);
+                services.AddMetricsBss(this.Configuration, 0.5);
             }
 
             services
-                .RegisterDependencyInjections(this.Configuration)
+                .RegisterBssFramework(this.Configuration)
+                .AddGeneralDatabaseSettings(this.Configuration)
+                .RegisterApplication(this.Configuration)
+
                 .AddApiVersion()
                 .AddSwaggerBss(
                     new OpenApiInfo { Title = "SampleSystem", Version = "v1" },
@@ -75,13 +77,7 @@ namespace SampleSystem.WebApiCore
             {
                 services.AddMetrics();
                 services.AddHangfireBss(this.Configuration);
-
             }
-
-            services.RegisterLegacyBLLContext();
-
-            services.AddWorkflowCore(this.Configuration);
-            services.AddAuthWorkflow();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider versionProvider)

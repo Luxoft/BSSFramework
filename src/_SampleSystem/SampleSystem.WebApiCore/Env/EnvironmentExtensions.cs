@@ -83,14 +83,14 @@ namespace SampleSystem.WebApiCore
 
                 services.AddDatabaseSettings(setupObj =>
 
-                                                     setupObj.AddEventListener<DefaultDBSessionEventListener>()
-                                                             .AddEventListener<SubscriptionDBSessionEventListener>()
+                    setupObj.AddEventListener<DefaultDBSessionEventListener>()
+                            .AddEventListener<SubscriptionDBSessionEventListener>()
 
-                                                             .SetEnvironment<SampleSystemNHibSessionEnvironment>()
+                            .SetEnvironment<SampleSystemNHibSessionEnvironment>()
 
-                                                             .AddMapping(AuthorizationMappingSettings.CreateDefaultAudit(string.Empty))
-                                                             .AddMapping(ConfigurationMappingSettings.CreateDefaultAudit(string.Empty))
-                                                             .AddMapping(new SampleSystemMappingSettings(new DatabaseName(string.Empty, "app"), connectionString)));
+                            .AddMapping(AuthorizationMappingSettings.CreateDefaultAudit(string.Empty))
+                            .AddMapping(ConfigurationMappingSettings.CreateDefaultAudit(string.Empty))
+                            .AddMapping(new SampleSystemMappingSettings(new DatabaseName(string.Empty, "app"), connectionString)));
 
         public static IServiceCollection AddControllerEnvironment(this IServiceCollection services)
         {

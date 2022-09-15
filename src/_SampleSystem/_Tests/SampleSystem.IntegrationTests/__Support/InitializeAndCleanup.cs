@@ -18,7 +18,6 @@ namespace SampleSystem.IntegrationTests.__Support
         public static void EnvironmentCleanup()
         {
             TestEnvironment.AssemblyInitializeAndCleanup.EnvironmentCleanup();
-            TestEnvironment.ServiceProviderPool.Release(TestEnvironment.AssemblyInitializeAndCleanup.ServiceProvider);
         }
     }
 }

@@ -29,7 +29,10 @@ public abstract class TestEnvironment
             {
                 var serviceProvider = this.ServiceProviderPool.Get();
                 var databaseContext = serviceProvider.GetRequiredService<IDatabaseContext>();
-                return new AssemblyInitializeAndCleanup(this.ConfigUtil, this.GetDatabaseGenerator(serviceProvider, databaseContext), serviceProvider);
+                return new AssemblyInitializeAndCleanup(
+                    this.ConfigUtil,
+                    this.GetDatabaseGenerator(serviceProvider, databaseContext),
+                    () => this.ServiceProviderPool.Release(serviceProvider));
             });
 
         this.lazyServiceProviderPool = new Lazy<ServiceProviderPool>(this.BuildServiceProvidePool);

@@ -24,8 +24,8 @@ public class SampleSystemTestEnvironment : TestEnvironment
 
     protected override TestDatabaseGenerator GetDatabaseGenerator(IServiceProvider serviceProvider, IDatabaseContext databaseContext)
     {
-        return new SampleSystemTestDatabaseGenerator(databaseContext, this.ConfigUtil ,serviceProvider);
+        return new SampleSystemTestDatabaseGenerator(databaseContext, this.ConfigUtil, serviceProvider);
     }
 
-    public static readonly SampleSystemTestEnvironment Current = new SampleSystemTestEnvironment();
+    public static readonly SampleSystemTestEnvironment Current = new ();
 }

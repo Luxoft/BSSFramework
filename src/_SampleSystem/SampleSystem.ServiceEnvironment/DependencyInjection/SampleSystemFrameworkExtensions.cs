@@ -95,7 +95,6 @@ public static class SampleSystemFrameworkExtensions
 
         services.RegisterAdditonalAuthorizationBLL();
 
-
         services.RegisterGenericServices();
         services.RegisterAuthorizationSystem();
 

@@ -20,12 +20,12 @@ namespace SampleSystem.IntegrationTests.Support.Utils
     {
         protected override IEnumerable<string> TestServers => new List<string> { "." };
 
-        private readonly IServiceProvider ServiceProvider;
+        private readonly IServiceProvider serviceProvider;
 
         public SampleSystemTestDatabaseGenerator(IDatabaseContext databaseContext, ConfigUtil configUtil, IServiceProvider serviceProvider)
             : base(databaseContext, configUtil)
         {
-            this.ServiceProvider = serviceProvider;
+            this.serviceProvider = serviceProvider;
         }
 
         public override void GenerateDatabases()
@@ -47,7 +47,7 @@ namespace SampleSystem.IntegrationTests.Support.Utils
             }
         }
 
-        public override void GenerateTestData() => new TestDataInitialize(this.ServiceProvider).TestData();
+        public override void GenerateTestData() => new TestDataInitialize(this.serviceProvider).TestData();
 
         public override void ExecuteInsertsForDatabases()
         {

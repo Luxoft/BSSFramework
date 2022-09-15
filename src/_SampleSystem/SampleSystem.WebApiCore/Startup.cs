@@ -49,15 +49,12 @@ namespace SampleSystem.WebApiCore
                 services.AddMetricsBss(this.Configuration, 0.5);
             }
 
-            services
-                .RegisterBssFramework(this.Configuration)
-                .AddGeneralDatabaseSettings(this.Configuration)
-                .RegisterApplication(this.Configuration)
+            services.RegisterGeneralDependencyInjection(this.Configuration)
 
-                .AddApiVersion()
-                .AddSwaggerBss(
-                    new OpenApiInfo { Title = "SampleSystem", Version = "v1" },
-                    new List<string> { Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml") });
+                    .AddApiVersion()
+                    .AddSwaggerBss(
+                                   new OpenApiInfo { Title = "SampleSystem", Version = "v1" },
+                                   new List<string> { Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml") });
 
             //// services.AddAuthentication()
             ////         .AddCapAuth<ISampleSystemBLLContext>();
@@ -122,8 +119,8 @@ namespace SampleSystem.WebApiCore
                             () =>
                             {
                                 var serviceProvider = new ServiceCollection()
-                                                            .AddEnvironment(this.Configuration)
-                                                            .BuildServiceProvider();
+                                                      .RegisterGeneralDependencyInjection(this.Configuration)
+                                                      .BuildServiceProvider();
 
                                 return serviceProvider.GetRequiredService<IContextEvaluator<ISampleSystemBLLContext>>();
                             });

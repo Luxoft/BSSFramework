@@ -16,7 +16,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Custom;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.Subscriptions.Metadata.Employee.Update;
 using SampleSystem.Subscriptions.Metadata.Examples.Attachment;

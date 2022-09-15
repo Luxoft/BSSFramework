@@ -95,7 +95,6 @@ namespace Framework.DomainDriven.ServiceModel.IAD
                    .AddScoped<IMessageSender<Framework.Notification.MessageTemplateNotification>, TemplateMessageSender>()
                    .AddScoped<IMessageSender<Framework.Notification.DTO.NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
 
-
                    .AddScoped<IConfigurationBLLContextSettings, ConfigurationBLLContextSettings>()
                    .AddScopedFromLazyInterfaceImplement<IConfigurationBLLContext, ConfigurationBLLContext>()
 

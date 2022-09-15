@@ -9,6 +9,10 @@ using Automation.Utils.DatabaseUtils.Interfaces;
 
 using Framework.Authorization.ApproveWorkflow;
 using Framework.Cap.Abstractions;
+using Framework.Configuration.BLL;
+using Framework.Core;
+using Framework.DependencyInjection;
+using Framework.Notification.DTO;
 
 using MediatR;
 
@@ -37,8 +41,10 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 
             var provider = TestServiceProvider.Build(
                 z =>
-                    z.RegisterLegacyBLLContext()
-                     .AddEnvironment(configuration)
+                    z.RegisterGeneralDependencyInjection(configuration)
+
+                     .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
+
                      .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
 
                      .AddSingleton<SampleSystemInitializer>()
@@ -46,9 +52,6 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                      .AddSingleton<ICapTransactionManager, IntegrationTestCapTransactionManager>()
                      .AddSingleton<IIntegrationEventBus, IntegrationTestIntegrationEventBus>()
 
-                     .AddWorkflowCore(configuration)
-                     .AddAuthWorkflow()
-                     .AddScoped<StartWorkflowJob>()
 
                      .RegisterControllers(new[] { typeof(EmployeeController).Assembly })
 

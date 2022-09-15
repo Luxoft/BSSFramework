@@ -3,45 +3,49 @@
 using Framework.Authorization.BLL;
 using Framework.Authorization.Events;
 using Framework.Authorization.Generated.DTO;
-using Framework.Cap;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Generated.DTO;
 using Framework.Core;
-using Framework.Core.Services;
 using Framework.CustomReports.Domain;
 using Framework.CustomReports.Services;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.NHibernate;
-using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.Serialization;
 using Framework.DomainDriven.SerializeMetadata;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Events;
+using Framework.HierarchicalExpand;
+using Framework.Persistent;
+using Framework.QueryableSource;
+using Framework.SecuritySystem;
+using Framework.SecuritySystem.Rules.Builders;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using nuSpec.Abstraction;
-using nuSpec.NHibernate;
+
 using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Events;
 using SampleSystem.Generated.DTO;
-using SampleSystem.WebApiCore;
 using SampleSystem.WebApiCore.CustomReports;
 
 namespace SampleSystem.ServiceEnvironment;
 
 public static class SampleSystemFrameworkExtensions
 {
-    public static IServiceCollection RegisterBssFramework(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection RegisterGeneralBssFramework(this IServiceCollection services, IConfiguration configuration)
     {
-        return services.RegisterLegacyBLLContext();
+        return services.RegisterLegacyBLLContext()
+                       .AddEnvironment(configuration)
+                       .AddControllerEnvironment()
+                       .RegisterHierarchicalObjectExpander()
+                       .RegisterAdditonalAuthorizationBLL();
     }
 
 
@@ -50,7 +54,7 @@ public static class SampleSystemFrameworkExtensions
         services.AddScoped<TargetSystemServiceFactory>();
         services.AddScopedFrom((TargetSystemServiceFactory factory) => factory.Create<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase>(TargetSystemHelper.AuthorizationName));
         services.AddScopedFrom((TargetSystemServiceFactory factory) => factory.Create<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase>(TargetSystemHelper.ConfigurationName));
-        services.AddScopedFrom((TargetSystemServiceFactory factory) => factory.Create<ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase>(tss => tss.IsMain));
+        services.AddScopedFrom((TargetSystemServiceFactory factory) => factory.Create<ISampleSystemBLLContext, PersistentDomainObjectBase>(tss => tss.IsMain));
 
         services.AddSingleton<IInitializeManager, InitializeManager>();
 
@@ -85,7 +89,7 @@ public static class SampleSystemFrameworkExtensions
 
         services.AddSingleton<IDefaultMailSenderContainer>(new DefaultMailSenderContainer("SampleSystem_Sender@luxoft.com"));
 
-        services.AddScopedFrom<IBLLSimpleQueryBase<Framework.Persistent.IEmployee>, IEmployeeBLLFactory>(factory => factory.Create());
+        services.AddScopedFrom<IBLLSimpleQueryBase<IEmployee>, IEmployeeBLLFactory>(factory => factory.Create());
 
         services.RegisterHierarchicalObjectExpander();
 
@@ -104,7 +108,34 @@ public static class SampleSystemFrameworkExtensions
         return services;
     }
 
-    public static IServiceCollection AddEnvironment(this IServiceCollection services, IConfiguration configuration)
+    private static IServiceCollection RegisterMainBLL(this IServiceCollection services)
+    {
+        return services
+
+               .AddSingleton<SampleSystemValidatorCompileCache>()
+
+               .AddScoped<ISampleSystemValidator>(sp =>
+                                                          new SampleSystemValidator(sp.GetRequiredService<ISampleSystemBLLContext>(), sp.GetRequiredService<SampleSystemValidatorCompileCache>()))
+
+               .AddSingleton(new SampleSystemMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<PersistentDomainObjectBase>.OData))
+               .AddScoped<ISampleSystemSecurityService, SampleSystemSecurityService>()
+               .AddScoped<ISampleSystemBLLFactoryContainer, SampleSystemBLLFactoryContainer>()
+               .AddScoped<ISampleSystemBLLContextSettings>(_ => new SampleSystemBLLContextSettings { TypeResolver = new[] { new SampleSystemBLLContextSettings().TypeResolver, TypeSource.FromSample<BusinessUnitSimpleDTO>().ToDefaultTypeResolver() }.ToComposite() })
+               .AddScopedFromLazyInterfaceImplement<ISampleSystemBLLContext, SampleSystemBLLContext>()
+
+               .AddScopedFrom<ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode>, ISampleSystemBLLContext>()
+               .AddScopedFrom<IDisabledSecurityProviderContainer<PersistentDomainObjectBase>, ISampleSystemSecurityService>()
+               .AddScopedFrom<ISampleSystemSecurityPathContainer, ISampleSystemSecurityService>()
+               .AddScoped<IQueryableSource<PersistentDomainObjectBase>, BLLQueryableSource<ISampleSystemBLLContext, PersistentDomainObjectBase, DomainObjectBase, Guid>>()
+               .AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
+               .AddScoped<IAccessDeniedExceptionService<PersistentDomainObjectBase>, AccessDeniedExceptionService<PersistentDomainObjectBase, Guid>>()
+
+               .Self(SampleSystemSecurityServiceBase.Register)
+               .Self(SampleSystemBLLFactoryContainer.RegisterBLLFactory);
+    }
+
+
+    private static IServiceCollection AddEnvironment(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddHttpContextAccessor();
 
@@ -113,7 +144,6 @@ public static class SampleSystemFrameworkExtensions
         services.AddScoped<IWebApiCurrentMethodResolver, WebApiCurrentMethodResolver>();
 
         // Notifications
-        services.AddSingleton<ISubscriptionMetadataFinder, SampleSystemSubscriptionsMetadataFinder>();
         services.RegisterNotificationJob<ISampleSystemBLLContext>();
         services.RegisterNotificationSmtp(configuration);
         services.RegisterRewriteReceiversDependencies(configuration);
@@ -125,11 +155,10 @@ public static class SampleSystemFrameworkExtensions
 
         services.AddSingleton(new SubscriptionMetadataStore(new SampleSystemSubscriptionsMetadataFinder()));
 
-
-        return services.AddControllerEnvironment();
+        return services;
     }
 
-    public static IServiceCollection AddControllerEnvironment(this IServiceCollection services)
+    private static IServiceCollection AddControllerEnvironment(this IServiceCollection services)
     {
         services.AddSingleton<IWebApiExceptionExpander, WebApiExceptionExpander>();
 
@@ -152,4 +181,18 @@ public static class SampleSystemFrameworkExtensions
 
         return services;
     }
+
+
+    private static IServiceCollection RegisterHierarchicalObjectExpander(this IServiceCollection services)
+    {
+        return services.AddSingleton<IHierarchicalRealTypeResolver, ProjectionHierarchicalRealTypeResolver>()
+                       .AddScoped<IHierarchicalObjectExpanderFactory<Guid>, HierarchicalObjectExpanderFactory<PersistentDomainObjectBase, Guid>>();
+    }
+
+    private static IServiceCollection RegisterAdditonalAuthorizationBLL(this IServiceCollection services)
+    {
+        return services.AddScopedFrom<ISecurityTypeResolverContainer, ISampleSystemBLLContext>()
+                       .AddScoped<IAuthorizationExternalSource, AuthorizationExternalSource<ISampleSystemBLLContext, PersistentDomainObjectBase, AuditPersistentDomainObjectBase, SampleSystemSecurityOperationCode>>();
+    }
+
 }

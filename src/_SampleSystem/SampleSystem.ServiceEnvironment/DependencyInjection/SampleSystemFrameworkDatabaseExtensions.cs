@@ -20,7 +20,7 @@ namespace SampleSystem.ServiceEnvironment;
 
 public static class SampleSystemFrameworkDatabaseExtensions
 {
-    public static IServiceCollection AddGeneralDatabaseSettings(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection RegisterGeneralDatabaseSettings(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
@@ -34,7 +34,7 @@ public static class SampleSystemFrameworkDatabaseExtensions
         return services.AddSingleton<ISpecificationEvaluator, NhSpecificationEvaluator>();
     }
 
-    private static IServiceCollection AddDatabaseSettings(this IServiceCollection services, string connectionString)
+    public static IServiceCollection AddDatabaseSettings(this IServiceCollection services, string connectionString)
     {
         return services.AddDatabaseSettings(setupObj => setupObj.AddEventListener<DefaultDBSessionEventListener>()
                                                                 .AddEventListener<SubscriptionDBSessionEventListener>()
@@ -45,6 +45,7 @@ public static class SampleSystemFrameworkDatabaseExtensions
                                                                 .AddMapping(ConfigurationMappingSettings.CreateDefaultAudit(string.Empty))
                                                                 .AddMapping(new SampleSystemMappingSettings(new DatabaseName(string.Empty, "app"), connectionString)));
     }
+
     private static IServiceCollection AddDatabaseVisitors(this IServiceCollection services)
     {
         services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPersistentItem>();

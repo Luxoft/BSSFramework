@@ -1,6 +1,8 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.BLL.Configuration;
+using Framework.Notification.New;
 using Framework.NotificationCore.Jobs;
+using Framework.NotificationCore.Senders;
 using Framework.NotificationCore.Services;
 using Framework.NotificationCore.Settings;
 
@@ -22,6 +24,7 @@ namespace Framework.DependencyInjection
         public static void RegisterNotificationSmtp(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<SmtpSettings>(configuration.GetSection("SmtpSettings"));
+            services.ReplaceScoped<IMessageSender<Framework.Notification.DTO.NotificationEventDTO>, SmtpNotificationMessageSender>();
         }
 
         /// <summary>

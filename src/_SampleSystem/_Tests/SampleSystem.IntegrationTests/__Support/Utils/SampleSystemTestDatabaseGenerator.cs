@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SampleSystem.DbGenerate;
 using SampleSystem.IntegrationTests.__Support;
 using SampleSystem.IntegrationTests.__Support.TestData;
+using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore;
 
 using WorkflowCore.Interface;
@@ -65,7 +66,7 @@ namespace SampleSystem.IntegrationTests.Support.Utils
         private void GenerateWorkflowCoreDataBase()
         {
             var serviceProvider = new ServiceCollection()
-                .AddWorkflowCore(this.DatabaseContext.Main.ConnectionString)
+                .RegisterPureWorkflowCore(this.DatabaseContext.Main.ConnectionString)
                 .BuildServiceProvider();
 
             var workflowHost = serviceProvider.GetRequiredService<IWorkflowHost>();

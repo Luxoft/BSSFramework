@@ -1,29 +1,33 @@
 ﻿using System;
 using System.Configuration;
 using System.Net.Mail;
+
 using Framework.Configuration.BLL;
 using Framework.Core;
 using Framework.Notification.DTO;
 using Framework.NotificationCore.Services;
 using Framework.NotificationCore.Settings;
+
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+
 using Serilog;
 
 namespace Framework.NotificationCore.Senders
 {
-    public class SmtpMessageSender : IMessageSender<NotificationEventDTO>
+    public class SmtpNotificationMessageSender : IMessageSender<NotificationEventDTO>
     {
         private readonly IConfigurationBLLContext context;
 
-        private readonly Lazy<SmtpSettings> settings;
+        private readonly IOptions<SmtpSettings> settings;
 
-        private readonly Lazy<IRewriteReceiversService> rewriteReceiversService;
+        private readonly IRewriteReceiversService rewriteReceiversService;
 
-        private readonly Lazy<ISmtpMessageSender> sender;
+        private readonly ISmtpMessageSender sender;
 
-        public SmtpMessageSender(
-            Lazy<SmtpSettings> settings,
-            Lazy<IRewriteReceiversService> rewriteReceiversService,
+        public SmtpNotificationMessageSender(
+            IOptions<SmtpSettings> settings,
+            IRewriteReceiversService rewriteReceiversService,
             IConfigurationBLLContext context)
         {
             this.context = context;
@@ -32,14 +36,14 @@ namespace Framework.NotificationCore.Senders
 
             this.rewriteReceiversService = rewriteReceiversService;
 
-            this.sender = LazyHelper.Create(() => this.GetSender());
+            this.sender = this.GetSender();
         }
 
         private ISmtpMessageSender GetSender()
         {
             return this.IsProduction()
-                    ? new ProdSmtpMessageSender(this.settings.Value, this.rewriteReceiversService.Value)
-                    : new TestSmtpMessageSender(this.settings.Value, this.rewriteReceiversService.Value);
+                    ? new ProdSmtpMessageSender(this.settings.Value, this.rewriteReceiversService)
+                    : new TestSmtpMessageSender(this.settings.Value, this.rewriteReceiversService);
         }
 
         /// <summary>
@@ -55,7 +59,7 @@ namespace Framework.NotificationCore.Senders
             {
                 try
                 {
-                    this.sender.Value.Send(client, message);
+                    this.sender.Send(client, message);
 
                     new SentMessageBLL(this.context).Save(message.ToSentMessage());
                 }

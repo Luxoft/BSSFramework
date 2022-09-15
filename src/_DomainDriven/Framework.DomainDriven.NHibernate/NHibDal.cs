@@ -29,7 +29,7 @@ namespace Framework.DomainDriven.NHibernate
 
         public NHibDal(INHibSession session, IExpressionVisitorContainer expressionVisitorContainer)
         {
-            this.session = session ?? throw new ArgumentNullException(nameof(session));
+            this.session = session;
             this.expressionVisitorContainer = expressionVisitorContainer;
         }
 

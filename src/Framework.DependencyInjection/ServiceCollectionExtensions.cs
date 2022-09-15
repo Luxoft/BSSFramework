@@ -17,13 +17,13 @@ public static class ServiceCollectionExtensions
                        .AddScoped(sp => LazyInterfaceImplementHelper.CreateProxy<TServiceInterface>(sp.GetRequiredService<TServiceImplementation>));
     }
 
-    public static IServiceCollection AddScopedFromLazy<TService, TServiceImplementation>(this IServiceCollection services, bool registerImpl = true)
+    public static IServiceCollection AddScopedFromLazyObject<TService, TServiceImplementation>(this IServiceCollection services, bool registerImpl = true)
             where TServiceImplementation : class, TService
             where TService : class
     {
         return services.Pipe(registerImpl, s => s.AddScoped<TServiceImplementation>())
-                       .AddScoped(sp => new Lazy<TService>(sp.GetRequiredService<TServiceImplementation>))
-                       .AddScoped(sp => sp.GetRequiredService<Lazy<TService>>().Value);
+                       .AddScoped<ILazyObject<TService>>(sp => new LazyObject<TService>(sp.GetRequiredService<TServiceImplementation>))
+                       .AddScoped(sp => sp.GetRequiredService<ILazyObject<TService>>().Value);
     }
 
     public static IServiceCollection AddScopedFrom<TService, TServiceImplementation>(this IServiceCollection services)

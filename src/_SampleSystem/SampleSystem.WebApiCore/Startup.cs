@@ -118,7 +118,8 @@ namespace SampleSystem.WebApiCore
                             {
                                 var serviceProvider = new ServiceCollection()
                                                       .RegisterGeneralDependencyInjection(this.Configuration)
-                                                      .BuildServiceProvider();
+                                                      .ValidateDuplicateDeclaration()
+                                                      .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
 
                                 return serviceProvider.GetRequiredService<IContextEvaluator<ISampleSystemBLLContext>>();
                             });

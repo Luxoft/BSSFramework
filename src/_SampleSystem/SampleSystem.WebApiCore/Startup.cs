@@ -57,11 +57,6 @@ namespace SampleSystem.WebApiCore
                                    new OpenApiInfo { Title = "SampleSystem", Version = "v1" },
                                    new List<string> { Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml") });
 
-            //// services.AddAuthentication()
-            ////         .AddCapAuth<ISampleSystemBLLContext>();
-
-            services.AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)));
-
             services
                 .AddMvcBss()
                 .AddNewtonsoftJson(

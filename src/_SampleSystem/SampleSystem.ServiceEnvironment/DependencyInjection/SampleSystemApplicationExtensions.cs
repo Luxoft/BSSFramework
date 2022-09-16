@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Reflection;
 
 using Framework.Authorization.ApproveWorkflow;
 using Framework.Authorization.BLL;
 using Framework.Cap;
 using Framework.DependencyInjection;
+
+using MediatR;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,7 +21,8 @@ public static class SampleSystemApplicationExtensions
 {
     public static IServiceCollection RegisterGeneralApplicationServices(this IServiceCollection services, IConfiguration configuration)
     {
-        return services.RegisterSmtpNotification(configuration)
+        return services.AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
+                       .RegisterSmtpNotification(configuration)
                        .RegisterWorkflowCore(configuration)
                        .RegisterApplicationServices()
                        .AddCapBss(configuration.GetConnectionString("DefaultConnection"))

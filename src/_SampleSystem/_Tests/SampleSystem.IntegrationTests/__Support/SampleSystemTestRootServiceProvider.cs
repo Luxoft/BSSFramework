@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 using Automation.ServiceEnvironment;
 using Automation.ServiceEnvironment.Services;
@@ -14,12 +13,9 @@ using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.Notification.DTO;
 
-using MediatR;
-
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-using SampleSystem.BLL;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.Controllers.Integration;
@@ -38,25 +34,27 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                         { "ConnectionStrings:WorkflowCoreConnection", databaseContext.Main.ConnectionString },
                     }).Build();
 
-            var provider = TestServiceProvider.Build(
-                z =>
-                    z.RegisterGeneralDependencyInjection(configuration)
+            var provider = new ServiceCollection()
 
-                     .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
+                           .RegisterGeneralDependencyInjection(configuration)
 
-                     .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
+                           .ApplyIntegrationTestServices()
 
-                     .AddSingleton<SampleSystemInitializer>()
+                           .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
 
-                     .ReplaceSingleton<IIntegrationEventBus, IntegrationTestIntegrationEventBus>()
-                     .ReplaceScoped<ICapTransactionManager, IntegrationTestCapTransactionManager>()
+                           .ReplaceSingleton<IIntegrationEventBus, IntegrationTestIntegrationEventBus>()
+                           .ReplaceScoped<ICapTransactionManager, IntegrationTestCapTransactionManager>()
 
-                     .RegisterControllers(new[] { typeof(EmployeeController).Assembly })
+                           .AddSingleton<SampleSystemInitializer>()
 
-                     .AddSingleton(databaseContext)
-                     .AddSingleton<DataHelper>()
-                     .AddSingleton<AuthHelper>()
-                     .AddSingleton(configUtil));
+                           .RegisterControllers(new[] { typeof(EmployeeController).Assembly })
+
+                           .AddSingleton(databaseContext)
+                           .AddSingleton<DataHelper>()
+                           .AddSingleton<AuthHelper>()
+                           .AddSingleton(configUtil)
+                           .ValidateDuplicateDeclaration()
+                           .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
 
             provider.RegisterAuthWorkflow();
 

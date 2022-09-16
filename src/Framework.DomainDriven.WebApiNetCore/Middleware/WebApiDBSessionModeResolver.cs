@@ -5,7 +5,7 @@ using Framework.Core;
 
 namespace Framework.DomainDriven.WebApiNetCore;
 
-public class WebApiDBSessionModeResolver: IWebApiDBSessionModeResolver
+public class WebApiDBSessionModeResolver : IWebApiDBSessionModeResolver
 {
     private readonly IWebApiCurrentMethodResolver methodResolver;
 

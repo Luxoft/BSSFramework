@@ -3,8 +3,6 @@ using System.Linq;
 
 using ASP;
 
-using SampleSystem.Subscriptions.Metadata.Examples.AttachmentInline;
-
 namespace SampleSystem.Subscriptions.Metadata.Employee.Update
 {
     /// <inheritdoc />

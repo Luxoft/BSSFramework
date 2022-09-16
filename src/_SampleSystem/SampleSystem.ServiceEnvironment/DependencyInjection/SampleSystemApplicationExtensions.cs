@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Framework.Authorization.ApproveWorkflow;
+using Framework.Authorization.BLL;
 using Framework.Cap;
 using Framework.DependencyInjection;
 
@@ -17,7 +18,8 @@ public static class SampleSystemApplicationExtensions
 {
     public static IServiceCollection RegisterGeneralApplicationServices(this IServiceCollection services, IConfiguration configuration)
     {
-        return services.RegisterWorkflowCore(configuration)
+        return services.RegisterSmtpNotification(configuration)
+                       .RegisterWorkflowCore(configuration)
                        .RegisterApplicationServices()
                        .AddCapBss(configuration.GetConnectionString("DefaultConnection"))
                        .RegisterJobs();
@@ -26,6 +28,17 @@ public static class SampleSystemApplicationExtensions
     private static IServiceCollection RegisterApplicationServices(this IServiceCollection services)
     {
         services.AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>();
+
+        services.ReplaceScoped<IAuthorizationValidator, SampleSystemCustomAuthValidator>();
+
+        return services;
+    }
+
+    private static IServiceCollection RegisterSmtpNotification(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.RegisterNotificationJob<ISampleSystemBLLContext>();
+        services.RegisterNotificationSmtp(configuration);
+        services.RegisterRewriteReceiversDependencies(configuration);
 
         return services;
     }

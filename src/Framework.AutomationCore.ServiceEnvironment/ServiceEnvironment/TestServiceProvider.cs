@@ -34,6 +34,7 @@ public static class TestServiceProvider
             .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>();
 
         return serviceCollection
-            .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
+               .ValidateDuplicateDeclaration()
+               .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
     }
 }

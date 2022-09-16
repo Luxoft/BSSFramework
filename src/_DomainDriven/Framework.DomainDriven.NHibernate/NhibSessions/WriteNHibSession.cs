@@ -8,7 +8,6 @@ using System.Transactions;
 
 using Framework.Core;
 using Framework.DomainDriven.Audit;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.NHibernate.Audit;
 

@@ -22,7 +22,6 @@ using Microsoft.Extensions.DependencyInjection;
 using SampleSystem.BLL;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.ServiceEnvironment;
-using SampleSystem.WebApiCore;
 using SampleSystem.WebApiCore.Controllers.Integration;
 
 namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
@@ -49,9 +48,8 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
 
                      .AddSingleton<SampleSystemInitializer>()
 
-                     .AddSingleton<ICapTransactionManager, IntegrationTestCapTransactionManager>()
-                     .AddSingleton<IIntegrationEventBus, IntegrationTestIntegrationEventBus>()
-
+                     .ReplaceSingleton<IIntegrationEventBus, IntegrationTestIntegrationEventBus>()
+                     .ReplaceScoped<ICapTransactionManager, IntegrationTestCapTransactionManager>()
 
                      .RegisterControllers(new[] { typeof(EmployeeController).Assembly })
 

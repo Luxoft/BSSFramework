@@ -23,12 +23,16 @@ public abstract class TestEnvironment
     protected TestEnvironment()
     {
         this.lazyRootConfiguration = new Lazy<IConfiguration>(this.BuildConfiguration);
+
         this.lazyConfigUtil = new Lazy<ConfigUtil>(new ConfigUtil(this.RootConfiguration));
+
         this.lazyAssemblyInitializeAndCleanup = new Lazy<AssemblyInitializeAndCleanup>(
             () =>
             {
                 var serviceProvider = this.ServiceProviderPool.Get();
+
                 var databaseContext = serviceProvider.GetRequiredService<IDatabaseContext>();
+
                 return new AssemblyInitializeAndCleanup(
                     this.ConfigUtil,
                     this.GetDatabaseGenerator(serviceProvider, databaseContext),

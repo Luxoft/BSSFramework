@@ -75,6 +75,8 @@ namespace SampleSystem.WebApiCore
                 services.AddMetrics();
                 services.AddHangfireBss(this.Configuration);
             }
+
+            services.ValidateDuplicateDeclaration();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider versionProvider)

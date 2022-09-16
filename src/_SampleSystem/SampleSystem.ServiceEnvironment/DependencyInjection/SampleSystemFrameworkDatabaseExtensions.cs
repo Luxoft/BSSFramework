@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+
 using Framework.Authorization.Generated.DAL.NHibernate;
 using Framework.Configuration.Generated.DAL.NHibernate;
 using Framework.DomainDriven;
@@ -25,7 +27,8 @@ public static class SampleSystemFrameworkDatabaseExtensions
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
         return services.AddDatabaseSettings(connectionString)
-                       .AddDatabaseVisitors()
+                       .RegistryGenericDatabaseVisitors()
+                       .RegistryDatabaseVisitors()
                        .RegisterSpecificationEvaluator();
     }
 
@@ -46,21 +49,12 @@ public static class SampleSystemFrameworkDatabaseExtensions
                                                                 .AddMapping(new SampleSystemMappingSettings(new DatabaseName(string.Empty, "app"), connectionString)));
     }
 
-    private static IServiceCollection AddDatabaseVisitors(this IServiceCollection services)
+    private static IServiceCollection RegistryDatabaseVisitors(this IServiceCollection services)
     {
-        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPersistentItem>();
-        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPeriodItem>();
-        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDefaultItem>();
-
-        services.AddSingleton<IIdPropertyResolver, IdPropertyResolver>();
-
-        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>();
-        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>();
         services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<PersistentDomainObjectBase, Guid>>();
 
+        // For reports
         services.AddScoped<IExpressionVisitorContainerItem, ExpressionVisitorContainerODataItem<ISampleSystemBLLContext, PersistentDomainObjectBase, Guid>>();
-
-        services.AddScoped<IExpressionVisitorContainer, ExpressionVisitorAggregator>();
 
         return services;
     }

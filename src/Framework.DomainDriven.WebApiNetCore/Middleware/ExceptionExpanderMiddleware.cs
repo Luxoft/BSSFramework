@@ -22,7 +22,7 @@ public class ExceptionExpanderMiddleware
         {
             return this.next(context);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             var processedEx = exceptionExpander.Process(ex);
 

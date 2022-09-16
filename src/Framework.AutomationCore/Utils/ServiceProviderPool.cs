@@ -9,9 +9,6 @@ namespace Automation;
 
 public abstract class ServiceProviderPool
 {
-    protected IConfiguration RootConfiguration { get; }
-    protected ConfigUtil ConfigUtil { get; }
-
     private readonly ConcurrentBag<IServiceProvider> providersCache = new ConcurrentBag<IServiceProvider>();
 
     private readonly Lazy<string> lazyDefaultConnectionString;
@@ -24,9 +21,13 @@ public abstract class ServiceProviderPool
         this.lazyDefaultConnectionString = new Lazy<string>(this.BuildDefaultConnectionString);
     }
 
+    protected IConfiguration RootConfiguration { get; }
+
+    protected ConfigUtil ConfigUtil { get; }
+
     protected abstract IServiceProvider Build(IDatabaseContext databaseContext);
 
-    public IServiceProvider Get() => this.providersCache.TryTake(out IServiceProvider provider) ? provider : this.Build(this.BuildDatabaseContext());
+    public IServiceProvider Get() => this.providersCache.TryTake(out var provider) ? provider : this.Build(this.BuildDatabaseContext());
 
     public void Release(IServiceProvider serviceProvider) => this.providersCache.Add(serviceProvider);
 

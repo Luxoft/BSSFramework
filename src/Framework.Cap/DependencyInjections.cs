@@ -25,34 +25,38 @@ public static class DependencyInjections
     ///     services.AddAuthentication().AddCapAuth&lt;ISampleSystemBLLContext&gt;();
     /// </code>
     /// </summary>
-    public static void AddCapBss(
+    public static IServiceCollection AddCapBss(
             this IServiceCollection services,
             string connectionString,
-            Action<CapOptions> setupAction = null) =>
-            services
-                    .AddSingleton<ICapTransactionManager, CapTransactionManager>()
-                    .AddScoped<IIntegrationEventBus, IntegrationEventBus>()
-                    .AddCap(
-                            z =>
-                            {
-                                z.FailedRetryCount = 2;
-                                z.UseSqlServer(
-                                               x =>
-                                               {
-                                                   x.ConnectionString = connectionString;
-                                                   x.Schema = "bus";
-                                               });
-                                z.UseInMemoryMessageQueue();
+            Action<CapOptions> setupAction = null)
+    {
+        services
+                .AddSingleton<ICapTransactionManager, CapTransactionManager>()
+                .AddScoped<IIntegrationEventBus, IntegrationEventBus>()
+                .AddCap(
+                        z =>
+                        {
+                            z.FailedRetryCount = 2;
+                            z.UseSqlServer(
+                                           x =>
+                                           {
+                                               x.ConnectionString = connectionString;
+                                               x.Schema = "bus";
+                                           });
+                            z.UseInMemoryMessageQueue();
 
-                                z.UseDashboard(
-                                               x =>
-                                               {
-                                                   x.UseAuth = true;
-                                                   x.DefaultAuthenticationScheme = CapAuthenticationScheme;
-                                               });
+                            z.UseDashboard(
+                                           x =>
+                                           {
+                                               x.UseAuth = true;
+                                               x.DefaultAuthenticationScheme = CapAuthenticationScheme;
+                                           });
 
-                                setupAction?.Invoke(z);
-                            });
+                            setupAction?.Invoke(z);
+                        });
+
+        return services;
+    }
 
     /// <summary>
     /// Add CAP authentication (User with role Administrator has access only)

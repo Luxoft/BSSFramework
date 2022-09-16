@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Framework.Authorization.BLL;
 using Framework.Authorization.Generated.DTO;
 using Framework.Core;
 using Framework.DomainDriven;
@@ -19,17 +20,14 @@ namespace SampleSystem.WebApiCore.Controllers
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    public class IntegrationController : IntegrationSchemaControllerBase<ISampleSystemBLLContext, EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService>>
+    public class IntegrationController : IntegrationSchemaControllerBase
     {
-        public IntegrationController(IDateTimeService dateTimeService)
-            : base(dateTimeService)
+        public IntegrationController(IAuthorizationBLLContext context, IDateTimeService dateTimeService)
+                : base(context, dateTimeService)
         {
         }
 
         protected override string IntegrationNamespace => "http://sampleSystem.example.com/integrationEvent";
-
-        protected override void CheckAccess(EvaluatedData<ISampleSystemBLLContext, ISampleSystemDTOMappingService> eval) =>
-            eval.Context.Authorization.CheckAccess(SampleSystemSecurityOperation.SystemIntegration);
 
         protected override IEnumerable<Type> GetEventDTOTypes()
         {

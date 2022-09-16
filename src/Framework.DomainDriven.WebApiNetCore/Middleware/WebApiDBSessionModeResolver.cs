@@ -2,11 +2,10 @@
 using System.Reflection;
 
 using Framework.Core;
-using Framework.DomainDriven.BLL;
 
 namespace Framework.DomainDriven.WebApiNetCore;
 
-public class WebApiDBSessionModeResolver: IWebApiDBSessionModeResolver
+public class WebApiDBSessionModeResolver : IWebApiDBSessionModeResolver
 {
     private readonly IWebApiCurrentMethodResolver methodResolver;
 

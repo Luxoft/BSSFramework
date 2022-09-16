@@ -12,10 +12,13 @@ public class AssemblyInitializeAndCleanup
 
     private readonly TestDatabaseGenerator databaseGenerator;
 
-    public AssemblyInitializeAndCleanup(ConfigUtil configUtil, TestDatabaseGenerator databaseGenerator)
+    private readonly Action releaseServiceProviderAction;
+
+    public AssemblyInitializeAndCleanup(ConfigUtil configUtil, TestDatabaseGenerator databaseGenerator, Action releaseServiceProviderAction)
     {
         this.configUtil = configUtil;
         this.databaseGenerator = databaseGenerator;
+        this.releaseServiceProviderAction = releaseServiceProviderAction;
     }
 
     public static void RunAction(string name, Action action)
@@ -80,5 +83,7 @@ public class AssemblyInitializeAndCleanup
                 RunAction("Delete LocalDB Instance", this.databaseGenerator.DeleteLocalDb);
                 break;
         }
+
+        this.releaseServiceProviderAction();
     }
 }

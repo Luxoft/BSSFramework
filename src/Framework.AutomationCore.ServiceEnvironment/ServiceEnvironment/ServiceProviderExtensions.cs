@@ -2,6 +2,14 @@
 using System.Linq;
 using System.Reflection;
 
+using Automation.ServiceEnvironment.Services;
+
+using Framework.Core.Services;
+using Framework.DependencyInjection;
+using Framework.DomainDriven;
+using Framework.DomainDriven.NHibernate.Audit;
+using Framework.DomainDriven.WebApiNetCore;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -32,5 +40,20 @@ public static class ServiceProviderExtensions
         }
 
         return services;
+    }
+
+    public static IServiceCollection ApplyIntegrationTestServices(this IServiceCollection services)
+    {
+        return services.AddSingleton<IntegrationTestUserAuthenticationService>()
+                       .ReplaceSingletonFrom<IAuditRevisionUserAuthenticationService, IntegrationTestUserAuthenticationService>()
+                       .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IntegrationTestUserAuthenticationService>()
+
+                       .AddSingleton<IntegrationTestDateTimeService>()
+                       .ReplaceSingletonFrom<IDateTimeService, IntegrationTestDateTimeService>()
+
+                       .AddScoped<TestWebApiCurrentMethodResolver>()
+                       .ReplaceScopedFrom<IWebApiCurrentMethodResolver, TestWebApiCurrentMethodResolver>()
+
+                       .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>();;
     }
 }

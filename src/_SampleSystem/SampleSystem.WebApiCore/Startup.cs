@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 using Newtonsoft.Json;
@@ -46,21 +47,15 @@ namespace SampleSystem.WebApiCore
         {
             if(this.HostingEnvironment.IsProduction())
             {
-                services
-                    .AddMetricsBss(this.Configuration, 0.5);
+                services.AddMetricsBss(this.Configuration, 0.5);
             }
 
-            services
-                .RegisterDependencyInjections(this.Configuration)
-                .AddApiVersion()
-                .AddSwaggerBss(
-                    new OpenApiInfo { Title = "SampleSystem", Version = "v1" },
-                    new List<string> { Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml") });
+            services.RegisterGeneralDependencyInjection(this.Configuration)
 
-            //// services.AddAuthentication()
-            ////         .AddCapAuth<ISampleSystemBLLContext>();
-
-            services.AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)));
+                    .AddApiVersion()
+                    .AddSwaggerBss(
+                                   new OpenApiInfo { Title = "SampleSystem", Version = "v1" },
+                                   new List<string> { Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml") });
 
             services
                 .AddMvcBss()
@@ -75,13 +70,9 @@ namespace SampleSystem.WebApiCore
             {
                 services.AddMetrics();
                 services.AddHangfireBss(this.Configuration);
-
             }
 
-            services.RegisterLegacyBLLContext();
-
-            services.AddWorkflowCore(this.Configuration);
-            services.AddAuthWorkflow();
+            services.ValidateDuplicateDeclaration(typeof(ILoggerFactory));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider versionProvider)
@@ -126,8 +117,8 @@ namespace SampleSystem.WebApiCore
                             () =>
                             {
                                 var serviceProvider = new ServiceCollection()
-                                                            .AddEnvironment(this.Configuration)
-                                                            .BuildServiceProvider();
+                                                      .RegisterGeneralDependencyInjection(this.Configuration)
+                                                      .BuildServiceProvider();
 
                                 return serviceProvider.GetRequiredService<IContextEvaluator<ISampleSystemBLLContext>>();
                             });

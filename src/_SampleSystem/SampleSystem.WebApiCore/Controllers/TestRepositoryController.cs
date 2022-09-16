@@ -24,6 +24,7 @@ public class TestRepositoryController : ControllerBase
     }
 
     [DBSessionMode(DBSessionMode.Read)]
+    [HttpPost(nameof(LoadPair))]
     public async Task<(List<EmployeeIdentityDTO> Employees, List<BusinessUnitIdentityDTO> BusinessUnits)> LoadPair(CancellationToken cancellationToken = default)
     {
         var pair = await this.exampleService.LoadPair(cancellationToken);

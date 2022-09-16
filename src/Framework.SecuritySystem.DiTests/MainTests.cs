@@ -51,7 +51,7 @@ namespace Framework.SecuritySystem.DiTests
             this.employee2 = new Employee() { Id = Guid.NewGuid(), BusinessUnit = this.bu2 };
             this.employee3 = new Employee() { Id = Guid.NewGuid(), BusinessUnit = this.bu3 };
 
-            this.serviceProvider = this.BuildServiceProvider();
+            this.serviceProvider = this.BuildServiceProvider().CreateScope().ServiceProvider;
         }
 
         [Fact]
@@ -83,7 +83,7 @@ namespace Framework.SecuritySystem.DiTests
             var provider = employeeDomainSecurityService.GetSecurityProvider(BLLSecurityMode.View);
 
             // Assert
-            Action checkAccessAction = () => provider.CheckAccess(this.employee3);
+            var checkAccessAction = () => provider.CheckAccess(this.employee3);
 
             checkAccessAction.Should().Throw<AccessDeniedException<Guid>>();
         }
@@ -104,8 +104,7 @@ namespace Framework.SecuritySystem.DiTests
                    .AddScoped<IDomainSecurityService<Employee, ExampleSecurityOperation>, EmployeeSecurityService>()
                    .AddScoped<ISecurityOperationResolver<PersistentDomainObjectBase, ExampleSecurityOperation>, ExampleSecurityOperationResolver>()
                    .AddScoped<IHierarchicalRealTypeResolver, IdentityHierarchicalRealTypeResolver>()
-
-                   .BuildServiceProvider();
+                   .BuildServiceProvider(new ServiceProviderOptions{ ValidateOnBuild = true, ValidateScopes = true });
         }
 
         private IQueryableSource<PersistentDomainObjectBase> BuildQueryableSource()

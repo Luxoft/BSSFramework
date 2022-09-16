@@ -5,11 +5,11 @@ using Framework.Notification;
 namespace Framework.DomainDriven.WebApiNetCore
 {
     /// <inheritdoc />
-    public class WebApiDebugExceptionExpander : IWebApiExceptionExpander
+    public class TestWebApiExceptionExpander : IWebApiExceptionExpander
     {
         private readonly IExceptionExpander exceptionExpander;
 
-        public WebApiDebugExceptionExpander(IExceptionExpander exceptionExpander)
+        public TestWebApiExceptionExpander(IExceptionExpander exceptionExpander)
         {
             this.exceptionExpander = exceptionExpander ?? throw new ArgumentNullException(nameof(exceptionExpander));
         }

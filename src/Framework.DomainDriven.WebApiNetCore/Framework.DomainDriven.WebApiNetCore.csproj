@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\_Authorization\Framework.Authorization.Generated.DTO\Framework.Authorization.Generated.DTO.csproj" />
+    <ProjectReference Include="..\_Configuration\Framework.Configuration.Generated.DTO\Framework.Configuration.Generated.DTO.csproj" />
+
+    <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.NHibernate\Framework.DomainDriven.NHibernate.csproj" />
     <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.ServiceModel\Framework.DomainDriven.ServiceModel.csproj" />
   </ItemGroup>
 

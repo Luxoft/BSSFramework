@@ -16,7 +16,6 @@ public static class DependencyInjectionExtensions
         services.AddScoped<INHibSessionSetup, NHibSessionSettings>();
 
         //For close db session by middleware
-        services.AddScoped<INHibSessionSetup, NHibSessionSettings>();
         services.AddScopedFromLazyObject<INHibSession, NHibSession>();
         services.AddScopedFrom<ILazyObject<IDBSession>, ILazyObject<INHibSession>>();
         services.AddScopedFrom((ILazyObject<IDBSession> lazyDbSession) => lazyDbSession.Value);

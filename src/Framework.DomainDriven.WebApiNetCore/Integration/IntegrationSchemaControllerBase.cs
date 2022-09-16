@@ -2,27 +2,27 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Mime;
-using Framework.DomainDriven.BLL.Configuration;
-using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.ServiceModel.Service;
-using Framework.Exceptions;
 
-using JetBrains.Annotations;
+using Framework.Authorization.BLL;
+using Framework.DomainDriven.BLL.Security;
+using Framework.Security;
+using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 
 namespace Framework.DomainDriven.WebApiNetCore.Integration
 {
-    public abstract class IntegrationSchemaControllerBase<TBLLContext, TEvaluatedData> : ApiControllerBase<TBLLContext, TEvaluatedData>
-            where TBLLContext : class, IConfigurationBLLContextContainer<IConfigurationBLLContext>, IAuthorizationBLLContextContainer<IAuthorizationBLLContextBase>
-            where TEvaluatedData : EvaluatedData<TBLLContext>
+    public abstract class IntegrationSchemaControllerBase : ControllerBase
     {
         private readonly IDateTimeService dateTimeService;
 
+        private readonly IAuthorizationBLLContext context;
+
         private const string AuthIntegrationNamespace = "http://authorization.luxoft.com/IntegrationEvent";
 
-        protected IntegrationSchemaControllerBase([NotNull] IDateTimeService dateTimeService)
+        protected IntegrationSchemaControllerBase(IAuthorizationBLLContext context, IDateTimeService dateTimeService)
         {
+            this.context = context;
             this.dateTimeService = dateTimeService ?? throw new ArgumentNullException(nameof(dateTimeService));
         }
 
@@ -35,18 +35,15 @@ namespace Framework.DomainDriven.WebApiNetCore.Integration
 
         private IActionResult DownloadKnownTypesWsdl(string xsdNamespace, IEnumerable<Type> eventTypes)
         {
-            return this.EvaluateRead(evaluateData =>
-            {
-                this.CheckAccess(evaluateData);
+            this.context.CheckAccess(new NonContextSecurityOperation<SecurityOperationCode>(SecurityOperationCode.SystemIntegration));
 
-                var content = new EventXsdExporter(xsdNamespace, eventTypes).Export();
+            var content = new EventXsdExporter(xsdNamespace, eventTypes).Export();
 
-                var contentType = MediaTypeNames.Application.Octet;
+            var contentType = MediaTypeNames.Application.Octet;
 
-                var fileName = $"KnowTypes {xsdNamespace} ({this.dateTimeService.Today.ToString("dd MMM yyyy", CultureInfo.InvariantCulture)}).zip";
+            var fileName = $"KnowTypes {xsdNamespace} ({this.dateTimeService.Today.ToString("dd MMM yyyy", CultureInfo.InvariantCulture)}).zip";
 
-                return this.File(content, contentType, fileName);
-            });
+            return this.File(content, contentType, fileName);
         }
 
         [HttpGet]
@@ -55,8 +52,6 @@ namespace Framework.DomainDriven.WebApiNetCore.Integration
         {
             return this.DownloadKnownTypesWsdl(AuthIntegrationNamespace, this.GetAuthEventDTOTypes());
         }
-
-        protected abstract void CheckAccess(TEvaluatedData eval);
 
         protected abstract string IntegrationNamespace { get; }
 

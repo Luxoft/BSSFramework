@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 using Automation.ServiceEnvironment;
 using Automation.ServiceEnvironment.Services;
@@ -9,16 +8,16 @@ using Automation.Utils.DatabaseUtils.Interfaces;
 
 using Framework.Authorization.ApproveWorkflow;
 using Framework.Cap.Abstractions;
-
-using MediatR;
+using Framework.Configuration.BLL;
+using Framework.Core;
+using Framework.DependencyInjection;
+using Framework.Notification.DTO;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-using SampleSystem.BLL;
 using SampleSystem.IntegrationTests.__Support.TestData.Helpers;
 using SampleSystem.ServiceEnvironment;
-using SampleSystem.WebApiCore;
 using SampleSystem.WebApiCore.Controllers.Integration;
 
 namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
@@ -35,27 +34,27 @@ namespace SampleSystem.IntegrationTests.__Support.ServiceEnvironment
                         { "ConnectionStrings:WorkflowCoreConnection", databaseContext.Main.ConnectionString },
                     }).Build();
 
-            var provider = TestServiceProvider.Build(
-                z =>
-                    z.AddEnvironment(configuration)
-                     .RegisterLegacyBLLContext()
-                     .AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
+            var provider = new ServiceCollection()
 
-                     .AddSingleton<SampleSystemInitializer>()
+                           .RegisterGeneralDependencyInjection(configuration)
 
-                     .AddSingleton<ICapTransactionManager, IntegrationTestCapTransactionManager>()
-                     .AddSingleton<IIntegrationEventBus, IntegrationTestIntegrationEventBus>()
+                           .ApplyIntegrationTestServices()
 
-                     .AddWorkflowCore(configuration)
-                     .AddAuthWorkflow()
-                     .AddScoped<StartWorkflowJob>()
+                           .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
 
-                     .RegisterControllers(new[] { typeof(EmployeeController).Assembly })
+                           .ReplaceSingleton<IIntegrationEventBus, IntegrationTestIntegrationEventBus>()
+                           .ReplaceScoped<ICapTransactionManager, IntegrationTestCapTransactionManager>()
 
-                     .AddSingleton(databaseContext)
-                     .AddSingleton<DataHelper>()
-                     .AddSingleton<AuthHelper>()
-                     .AddSingleton(configUtil));
+                           .AddSingleton<SampleSystemInitializer>()
+
+                           .RegisterControllers(new[] { typeof(EmployeeController).Assembly })
+
+                           .AddSingleton(databaseContext)
+                           .AddSingleton<DataHelper>()
+                           .AddSingleton<AuthHelper>()
+                           .AddSingleton(configUtil)
+                           .ValidateDuplicateDeclaration()
+                           .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
 
             provider.RegisterAuthWorkflow();
 

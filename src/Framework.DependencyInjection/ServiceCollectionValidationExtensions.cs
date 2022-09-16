@@ -10,13 +10,15 @@ namespace Framework.DependencyInjection;
 
 public static class ServiceCollectionValidationExtensions
 {
-    public static IServiceCollection ValidateDuplicateDeclaration(this IServiceCollection serviceCollection)
+    public static IServiceCollection ValidateDuplicateDeclaration(this IServiceCollection serviceCollection, params Type[] exceptServices)
     {
         var wrongMultiUsage = serviceCollection.GetWrongMultiUsage();
 
-        if (wrongMultiUsage.Any())
+        var filteredWrongMultiUsage = wrongMultiUsage.Where(pair => !exceptServices.Contains(pair.ServiceType)).ToList();
+
+        if (filteredWrongMultiUsage.Any())
         {
-            var message = wrongMultiUsage.Join(
+            var message = filteredWrongMultiUsage.Join(
                 Environment.NewLine,
                 pair => $"The service {pair.ServiceType} has been registered many times. There are services that use it in the constructor in a single instance: "
                         + pair.UsedFor.Join(", ", usedService => usedService.ImplementationType));

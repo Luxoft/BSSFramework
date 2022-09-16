@@ -6,7 +6,6 @@ using System.Reflection;
 using DotNetCore.CAP;
 
 using Framework.Authorization.ApproveWorkflow;
-using Framework.Authorization.BLL;
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
@@ -115,15 +114,14 @@ namespace SampleSystem.WebApiCore
         private void UseHangfireBss(IApplicationBuilder app)
         {
             var contextEvaluator = LazyInterfaceImplementHelper.CreateProxy(
-                () =>
-                {
-                    var serviceProvider = new ServiceCollection()
-                                          .RegisterGeneralDependencyInjection(this.Configuration)
-                                          .ValidateDuplicateDeclaration()
-                                          .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
+                            () =>
+                            {
+                                var serviceProvider = new ServiceCollection()
+                                                      .RegisterGeneralDependencyInjection(this.Configuration)
+                                                      .BuildServiceProvider();
 
-                    return serviceProvider.GetRequiredService<IContextEvaluator<IAuthorizationBLLContext>>();
-                });
+                                return serviceProvider.GetRequiredService<IContextEvaluator<ISampleSystemBLLContext>>();
+                            });
 
             app.UseHangfireBss(
                 this.Configuration,

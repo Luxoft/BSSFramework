@@ -1,6 +1,4 @@
 ﻿using System;
-
-using Framework.Authorization.BLL;
 using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.NotificationCore.Monitoring;
@@ -17,13 +15,13 @@ namespace SampleSystem.WebApiCore
     /// </summary>
     public class SampleSystemHangfireAuthorization : IDashboardAuthorizationFilter
     {
-        private readonly IContextEvaluator<IAuthorizationBLLContext> contextEvaluator;
+        private readonly IContextEvaluator<ISampleSystemBLLContext> contextEvaluator;
 
         private readonly IDashboardAuthorizationFilter baseFilter;
 
-        public SampleSystemHangfireAuthorization(IContextEvaluator<IAuthorizationBLLContext> contextEvaluator)
+        public SampleSystemHangfireAuthorization(IContextEvaluator<ISampleSystemBLLContext> contextEvaluator)
         {
-            this.baseFilter = new AdminHangfireAuthorization<IAuthorizationBLLContext>(contextEvaluator);
+            this.baseFilter = new AdminHangfireAuthorization<ISampleSystemBLLContext>(contextEvaluator);
 
             this.contextEvaluator = contextEvaluator;
         }
@@ -35,7 +33,7 @@ namespace SampleSystem.WebApiCore
                 z =>
                 {
                     return this.baseFilter.Authorize(context)
-                        || string.Compare(z.CurrentPrincipalName, new DomainDefaultUserAuthenticationService().GetUserName(), StringComparison.InvariantCultureIgnoreCase) == 0;
+                        || string.Compare(z.Authorization.CurrentPrincipalName, new DomainDefaultUserAuthenticationService().GetUserName(), StringComparison.InvariantCultureIgnoreCase) == 0;
                 });
         }
     }

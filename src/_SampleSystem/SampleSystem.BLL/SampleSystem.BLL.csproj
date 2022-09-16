@@ -6,7 +6,7 @@
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="NHibernate" Version="5.3.12" />
+    <PackageReference Include="NHibernate" Version="5.3.13" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.App.BLL\Framework.App.BLL.csproj" />

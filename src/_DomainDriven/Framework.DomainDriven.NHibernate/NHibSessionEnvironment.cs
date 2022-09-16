@@ -104,8 +104,10 @@ namespace Framework.DomainDriven.NHibernate
         /// <inheritdoc />
         public void Dispose()
         {
-            AuditConfiguration.Remove(this.cfg);
-            this.InternalSessionFactory.Close();
+            using (this.InternalSessionFactory)
+            {
+                AuditConfiguration.Remove(this.cfg);
+            }
         }
     }
 }

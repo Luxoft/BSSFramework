@@ -57,7 +57,6 @@ public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderCont
 
     public virtual void CleanupTestEnvironment()
     {
-        this.RootServiceProvider.GetRequiredService<NHibSessionEnvironment>().Dispose();
     }
 
     /// <summary>

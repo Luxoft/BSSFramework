@@ -12,6 +12,7 @@ namespace Framework.DomainDriven.NHibernate
     public class ReadOnlyNHibSession : NHibSessionBase
     {
         private bool closed;
+        private readonly ITransaction transaction;
 
         public ReadOnlyNHibSession(NHibSessionEnvironment environment)
                 : base(environment, DBSessionMode.Read)
@@ -19,6 +20,9 @@ namespace Framework.DomainDriven.NHibernate
             this.NativeSession = this.Environment.InternalSessionFactory.OpenSession();
             this.NativeSession.FlushMode = FlushMode.Manual;
             this.NativeSession.DefaultReadOnly = true;
+
+            // need for support different isolation level (aka Snapshot)
+            this.transaction = this.NativeSession.BeginTransaction();
         }
 
         public override bool Closed => this.closed;
@@ -59,7 +63,12 @@ namespace Framework.DomainDriven.NHibernate
             this.closed = true;
 
 
-            using (this.NativeSession);
+            using (this.NativeSession)
+            {
+                using (this.transaction)
+                {
+                }
+            }
         }
 
         public override Task FlushAsync(CancellationToken cancellationToken = default)

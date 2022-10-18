@@ -54,6 +54,7 @@ namespace SampleSystem.Generated.DAL.NHibernate
                               MsSqlConfiguration.MsSql2012
                                                 .Dialect<EnhancedMsSql2012Dialect>()
                                                 .Driver<Fix2100SqlClientDriver>()
+                                                //.IsolationLevel(System.Data.IsolationLevel.Snapshot)
                                                 .ConnectionString(this.connectionString))
                     .Mappings(
                               m =>

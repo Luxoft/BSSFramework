@@ -216,7 +216,7 @@ namespace Framework.SecuritySystem
 
             public override SecurityPath<TPersistentDomainObjectBase, TNewDomainObject, TIdent> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
             {
-                return new SecurityPath<TPersistentDomainObjectBase, TNewDomainObject, TIdent>.OrSecurityPath(this.Left.OverrideInput(selector), this.Right.OverrideInput(selector));
+                return new SecurityPath<TPersistentDomainObjectBase, TNewDomainObject, TIdent>.AndSecurityPath(this.Left.OverrideInput(selector), this.Right.OverrideInput(selector));
             }
         }
 

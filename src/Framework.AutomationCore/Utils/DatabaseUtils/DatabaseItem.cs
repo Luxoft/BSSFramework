@@ -24,10 +24,10 @@ public class DatabaseItem : IDatabaseItem
 
         var fileName = $"{this.InstanceName}_{this.DatabaseName}_{TextRandomizer.RandomString(5)}";
 
-        this.CopyDataPath = ToCopyDataPath(initialCatalog);
-        this.CopyLogPath = ToCopyLogPath(initialCatalog);
-        this.SourceDataPath = ToSourceDataPath(fileName);
-        this.SourceLogPath = ToSourceLogPath(fileName);
+        this.CopyDataPath = this.ToCopyDataPath(initialCatalog);
+        this.CopyLogPath = this.ToCopyLogPath(initialCatalog);
+        this.SourceDataPath = this.ToSourceDataPath(fileName);
+        this.SourceLogPath = this.ToSourceLogPath(fileName);
         this.builder.InitialCatalog = this.DatabaseName;
     }
 
@@ -51,13 +51,13 @@ public class DatabaseItem : IDatabaseItem
     public string SourceDataPath { get; }
     public string SourceLogPath { get; }
 
-    private string ToSourceDataPath(string fileName) => ToWorkPath(SourceDataFile(fileName));
+    private string ToSourceDataPath(string fileName) => this.ToWorkPath(SourceDataFile(fileName));
 
-    private string ToSourceLogPath(string fileName) => ToWorkPath(SourceLogFile(fileName));
+    private string ToSourceLogPath(string fileName) => this.ToWorkPath(SourceLogFile(fileName));
 
-    private string ToCopyDataPath(string initialCatalog) => ToWorkPath(CopyDataFile(initialCatalog));
+    private string ToCopyDataPath(string initialCatalog) => this.ToWorkPath(this.CopyDataFile(initialCatalog));
 
-    private string ToCopyLogPath(string initialCatalog) => ToWorkPath(CopyLogFile(initialCatalog));
+    private string ToCopyLogPath(string initialCatalog) => this.ToWorkPath(this.CopyLogFile(initialCatalog));
 
     private string CopyDataFile(string initialCatalog) =>$"{this.configUtil.SystemName}_{Environment.UserName}_{initialCatalog}.mdf";
 

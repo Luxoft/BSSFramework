@@ -6,30 +6,29 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 6.0.x
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 7.0.x
 
-    - name: Restore dependencies
-      working-directory: ./src
-      run: |
-        dotnet restore
+      - name: Restore dependencies
+        working-directory: ./src
+        run: |
+          dotnet restore
 
-    - name: Build and Pack
-      working-directory: ./src
-      run: |
-        dotnet pack IAD.Framework.sln --no-restore /p:PackageVersion=${{ github.event.release.tag_name }} /p:InformationalVersion=${{ github.sha }} -c Release -o out
+      - name: Build and Pack
+        working-directory: ./src
+        run: |
+          dotnet pack IAD.Framework.sln --no-restore /p:PackageVersion=${{ github.event.release.tag_name }} /p:InformationalVersion=${{ github.sha }} -c Release -o out
 
-    - name: Publish
-      working-directory: ./src/out
-      run: |
-        dotnet nuget push *.nupkg -s https://api.nuget.org/v3/index.json --api-key ${NUGET_TOKEN}
-      env:
-        NUGET_TOKEN: ${{ secrets.NUGET_BSSFRAMEWORK }}
+      - name: Publish
+        working-directory: ./src/out
+        run: |
+          dotnet nuget push *.nupkg -s https://api.nuget.org/v3/index.json --api-key ${NUGET_TOKEN}
+        env:
+          NUGET_TOKEN: ${{ secrets.NUGET_BSSFRAMEWORK }}

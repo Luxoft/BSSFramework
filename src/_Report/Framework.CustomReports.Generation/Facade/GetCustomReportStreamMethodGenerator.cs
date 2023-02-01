@@ -9,6 +9,8 @@ using Framework.DomainDriven.ServiceModelGenerator;
 using Framework.CustomReports.Domain;
 using Framework.DomainDriven;
 
+using Microsoft.AspNetCore.Mvc;
+
 using FileType = Framework.CustomReports.Generation.BLL.FileType;
 
 namespace Framework.CustomReports.Generation.Facade
@@ -117,7 +119,7 @@ namespace Framework.CustomReports.Generation.Facade
             yield return new CodeThisReferenceExpression().ToMethodInvokeExpression("GetReportResult", customReportStreamResult.ToVariableReferenceExpression()).ToMethodReturnStatement();
         }
 
-        public CodeTypeReference ResultType => typeof(Microsoft.AspNetCore.Mvc.FileStreamResult).ToTypeReference();
+        public CodeTypeReference ResultType => typeof(FileStreamResult).ToTypeReference();
 
         public Type CustomReportParameterType { get; }
 

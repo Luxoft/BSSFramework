@@ -6,7 +6,7 @@
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.CustomReports.BLL\Framework.CustomReports.BLL.csproj" />

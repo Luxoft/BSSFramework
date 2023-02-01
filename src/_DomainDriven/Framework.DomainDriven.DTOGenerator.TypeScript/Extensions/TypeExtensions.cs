@@ -19,9 +19,12 @@ namespace Framework.DomainDriven.DTOGenerator.TypeScript.Facade
             if (contractType == null) throw new ArgumentNullException(nameof(contractType));
 
             return contractType.IsInterface
-                       ? contractType.GetAllInterfaceMethods()
-                       : contractType.GetMethods(BindingFlags.Instance | BindingFlags.Public)
-                                     .Where(m => !m.HasAttribute<NonActionAttribute>() && !m.IsSpecialName && m.DeclaringType != typeof(object));
+                           ? contractType.GetAllInterfaceMethods()
+                           : contractType.GetMethods(BindingFlags.Instance | BindingFlags.Public)
+                                         .Where(
+                                                m => !m.HasAttribute<NonActionAttribute>()
+                                                     && !m.IsSpecialName
+                                                     && m.DeclaringType != typeof(object));
         }
 
         internal static IEnumerable<Type> GetFacadeMethodDTOTypes(this IEnumerable<Type> types)
@@ -46,9 +49,9 @@ namespace Framework.DomainDriven.DTOGenerator.TypeScript.Facade
             if (graph == null) throw new ArgumentNullException(nameof(graph));
 
             var genericElementType = type.GetCollectionOrArrayElementType()
-                                  ?? type.GetNullableElementType()
-                                  ?? type.GetMaybeElementType()
-                                  ?? type.GetGenericTypeImplementationArgument(typeof(SelectOperationResult<>));
+                                     ?? type.GetNullableElementType()
+                                     ?? type.GetMaybeElementType()
+                                     ?? type.GetGenericTypeImplementationArgument(typeof(SelectOperationResult<>));
 
             if (genericElementType != null)
             {
@@ -60,6 +63,7 @@ namespace Framework.DomainDriven.DTOGenerator.TypeScript.Facade
                 {
                     Enum.GetUnderlyingType(type).FillFacadeMethodDTOTypes(graph);
                 }
+
                 //else
                 //{
                 //    type.GetProperties().Select(property => property.PropertyType).FillFacadeMethodDTOTypes(graph);

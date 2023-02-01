@@ -344,10 +344,6 @@ namespace SampleSystem.Generated.DTO
         
         void MapEmployeeRegistrationType(SampleSystem.Domain.EmployeeRegistrationType domainObject, SampleSystem.Generated.DTO.EmployeeRegistrationTypeEventSimpleDTO mappingObject);
         
-        void MapEmployeeReportParameter(SampleSystem.Generated.DTO.EmployeeReportParameterStrictDTO mappingObject, SampleSystem.CustomReports.Employee.EmployeeReportParameter domainObject);
-        
-        void MapEmployeeReportParameter(SampleSystem.CustomReports.Employee.EmployeeReportParameter domainObject, SampleSystem.Generated.DTO.EmployeeReportParameterEventRichDTO mappingObject);
-        
         void MapEmployeeRole(SampleSystem.Domain.EmployeeRole domainObject, SampleSystem.Generated.DTO.EmployeeRoleVisualDTO mappingObject);
         
         void MapEmployeeRole(SampleSystem.Domain.EmployeeRole domainObject, SampleSystem.Generated.DTO.EmployeeRoleSimpleDTO mappingObject);
@@ -1035,8 +1031,6 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.EmployeeRegistrationType ToEmployeeRegistrationType(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO employeeRegistrationTypeIdentityDTO);
         
         SampleSystem.Domain.EmployeeRegistrationType ToEmployeeRegistrationType(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIntegrationSimpleDTO employeeRegistrationTypeSimpleIntegrationDTO);
-        
-        SampleSystem.CustomReports.Employee.EmployeeReportParameter ToEmployeeReportParameter(SampleSystem.Generated.DTO.EmployeeReportParameterStrictDTO employeeReportParameterStrictDTO);
         
         SampleSystem.Domain.EmployeeRole ToEmployeeRole(SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO employeeRoleIdentityDTO);
         
@@ -4382,32 +4376,6 @@ namespace SampleSystem.Generated.DTO
             mappingObject.ModifyDate = domainObject.ModifyDate;
             mappingObject.Name = domainObject.Name;
             mappingObject.Version = domainObject.Version;
-        }
-        
-        public virtual void MapEmployeeReportParameter(SampleSystem.Generated.DTO.EmployeeReportParameterStrictDTO mappingObject, SampleSystem.CustomReports.Employee.EmployeeReportParameter domainObject)
-        {
-            if (!object.Equals(mappingObject.Position, default(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO)))
-            {
-                domainObject.Position = this.ToEmployeePosition(mappingObject.Position);
-            }
-            else
-            {
-                domainObject.Position = null;
-            }
-            domainObject.ReportId = mappingObject.ReportId;
-        }
-        
-        public virtual void MapEmployeeReportParameter(SampleSystem.CustomReports.Employee.EmployeeReportParameter domainObject, SampleSystem.Generated.DTO.EmployeeReportParameterEventRichDTO mappingObject)
-        {
-            if (!object.ReferenceEquals(domainObject.Position, null))
-            {
-                mappingObject.Position = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Position, this);
-            }
-            else
-            {
-                mappingObject.Position = null;
-            }
-            mappingObject.ReportId = domainObject.ReportId;
         }
         
         public virtual void MapEmployeeRole(SampleSystem.Domain.EmployeeRole domainObject, SampleSystem.Generated.DTO.EmployeeRoleVisualDTO mappingObject)
@@ -8162,11 +8130,6 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.EmployeeRegistrationType ToEmployeeRegistrationType(SampleSystem.Generated.DTO.EmployeeRegistrationTypeIntegrationSimpleDTO employeeRegistrationTypeSimpleIntegrationDTO)
         {
             return this.GetById<SampleSystem.Domain.EmployeeRegistrationType>(employeeRegistrationTypeSimpleIntegrationDTO.Id);
-        }
-        
-        public virtual SampleSystem.CustomReports.Employee.EmployeeReportParameter ToEmployeeReportParameter(SampleSystem.Generated.DTO.EmployeeReportParameterStrictDTO employeeReportParameterStrictDTO)
-        {
-            return this.ToDomainObjectBase<SampleSystem.Generated.DTO.EmployeeReportParameterStrictDTO, SampleSystem.CustomReports.Employee.EmployeeReportParameter>(employeeReportParameterStrictDTO);
         }
         
         public virtual SampleSystem.Domain.EmployeeRole ToEmployeeRole(SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO employeeRoleIdentityDTO)

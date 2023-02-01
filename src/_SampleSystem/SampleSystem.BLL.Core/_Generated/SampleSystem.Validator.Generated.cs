@@ -17,7 +17,6 @@ namespace SampleSystem.BLL
         public SampleSystemValidatorBase(SampleSystem.BLL.ISampleSystemBLLContext context, Framework.Validation.ValidatorCompileCache cache) : 
                 base(context, cache)
         {
-            base.RegisterHandler<SampleSystem.CustomReports.Employee.EmployeeReportParameter>(this.GetEmployeeReportParameterValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Address>(this.GetAddressValidationResult);
             base.RegisterHandler<SampleSystem.Domain.AnotherSqlParserTestObj>(this.GetAnotherSqlParserTestObjValidationResult);
             base.RegisterHandler<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>(this.GetApprovePermissionWorkflowDomainObjectValidationResult);
@@ -299,11 +298,6 @@ namespace SampleSystem.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetEmployeeRegistrationTypeValidationResult(SampleSystem.Domain.EmployeeRegistrationType source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetEmployeeReportParameterValidationResult(SampleSystem.CustomReports.Employee.EmployeeReportParameter source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

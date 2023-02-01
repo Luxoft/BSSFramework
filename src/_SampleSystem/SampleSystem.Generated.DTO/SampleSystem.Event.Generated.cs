@@ -13,8 +13,6 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.PersistentDomainObjectBase), "BaseEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeReportParameterSaveEventDTO))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.EmployeeReportParameterRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AddressSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AddressRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AnotherSqlParserTestObjSaveEventDTO))]
@@ -208,63 +206,6 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.WorkflowCoreInstanceRemoveEventDTO))]
     public abstract partial class EventDTOBase
     {
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.CustomReports.Employee.EmployeeReportParameter), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeReportParameterSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeReportParameterEventRichDTO EmployeeReportParameter;
-        
-        public EmployeeReportParameterSaveEventDTO()
-        {
-        }
-        
-        public EmployeeReportParameterSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.CustomReports.Employee.EmployeeReportParameter domainObject)
-        {
-            this.EmployeeReportParameter = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.CustomReports.Employee.EmployeeReportParameter), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeReportParameterRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeeReportParameterEventRichDTO EmployeeReportParameter;
-        
-        public EmployeeReportParameterRemoveEventDTO()
-        {
-        }
-        
-        public EmployeeReportParameterRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.CustomReports.Employee.EmployeeReportParameter domainObject)
-        {
-            this.EmployeeReportParameter = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
-        }
-    }
-    
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.CustomReports.Employee.EmployeeReportParameter), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
-    public partial class EmployeeReportParameterEventRichDTO
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeePositionEventSimpleDTO Position;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid ReportId;
-        
-        public EmployeeReportParameterEventRichDTO()
-        {
-        }
-        
-        public EmployeeReportParameterEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.CustomReports.Employee.EmployeeReportParameter domainObject)
-        {
-            mappingService.MapEmployeeReportParameter(domainObject, this);
-        }
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Address), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]

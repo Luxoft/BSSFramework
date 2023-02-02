@@ -7,14 +7,6 @@ namespace Framework.Core
         Range<T> Range { get; }
     }
 
-    public static class Range
-    {
-        public static Range<T> Create<T>(T min, T max)
-        {
-            return new Range<T>(min, max);
-        }
-    }
-
     public interface ISizeContainer<T>
     {
         int Size { get; }

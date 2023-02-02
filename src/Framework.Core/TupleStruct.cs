@@ -12,22 +12,6 @@ namespace Framework.Core
         }
 
         [Obsolete("v10 Use ValueTuple")]
-        public static TupleStruct<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6> Create<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6>(TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4, TArg5 arg5, TArg6 arg6)
-        {
-            return new TupleStruct<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6>(arg1, arg2, arg3, arg4, arg5, arg6);
-        }
-        [Obsolete("v10 Use ValueTuple")]
-        public static TupleStruct<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8> Create<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8>(TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4, TArg5 arg5, TArg6 arg6, TArg7 arg7, TArg8 arg8)
-        {
-            return new TupleStruct<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8>(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
-        }
-        [Obsolete("v10 Use ValueTuple")]
-        public static TupleStruct<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9> Create<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9>(TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4, TArg5 arg5, TArg6 arg6, TArg7 arg7, TArg8 arg8, TArg9 arg9)
-        {
-            return new TupleStruct<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9>(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
-        }
-
-        [Obsolete("v10 Use ValueTuple")]
         public static TupleStruct<TArg1, TArg2> Create<TArg1, TArg2>(TArg1 arg1, TArg2 arg2)
         {
             return new TupleStruct<TArg1, TArg2>(arg1, arg2);

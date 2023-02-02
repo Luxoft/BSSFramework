@@ -140,40 +140,6 @@ namespace Framework.Core
             }
         }
 
-        public static void MatchE<TSource>(this IEnumerable<TSource> source, Action emptyAction, Action<TSource> singleAction, Action<IEnumerable<TSource>> manyAction)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (emptyAction == null) throw new ArgumentNullException(nameof(emptyAction));
-            if (singleAction == null) throw new ArgumentNullException(nameof(singleAction));
-            if (manyAction == null) throw new ArgumentNullException(nameof(manyAction));
-
-            using (var enumerator = source.GetEnumerator())
-            {
-                if (enumerator.MoveNext())
-                {
-                    var value = enumerator.Current;
-
-                    if (enumerator.MoveNext())
-                    {
-                        manyAction(new[] { value }.Concat(enumerator.ReadToEnd()));
-                    }
-                    else
-                    {
-                        singleAction(value);
-                    }
-                }
-                else
-                {
-                    emptyAction();
-                }
-            }
-        }
-
-        public static IEnumerable<IEnumerable<T>> While<T>(this IEnumerable<T> source, Func<T, bool> splitFunc)
-        {
-            return source.While(splitFunc, z => z);
-        }
-
         public static IEnumerable<IEnumerable<T>> While<T>(this IEnumerable<T> source, Func<T, bool> splitFunc, Func<T, T> processElement)
         {
             var result = new List<T>();
@@ -287,18 +253,6 @@ namespace Framework.Core
             }
         }
 
-        public static void Windowed2<TSource>(this IEnumerable<TSource> source, Action<TSource, TSource> selector)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-
-            source.Windowed2((v1, v2) =>
-            {
-                selector(v1, v2);
-                return default(object);
-            }).ToList();
-        }
-
         public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> source)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
@@ -314,27 +268,12 @@ namespace Framework.Core
             return source.Select(selector).ToObservableCollection();
         }
 
-        public static ObservableCollection<TResult> ToObservableCollection<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, int, TResult> selector)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-
-            return source.Select(selector).ToObservableCollection();
-        }
 
         public static Stack<T> ToStack<T>(this IEnumerable<T> source)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
 
             return new Stack<T>(source);
-        }
-
-        public static Stack<TResult> ToStack<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-
-            return source.Select(selector).ToStack();
         }
 
         public static HashSet<TResult> ToHashSet<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
@@ -346,14 +285,6 @@ namespace Framework.Core
         }
 
         public static TResult[] ToArray<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-
-            return source.Select(selector).ToArray();
-        }
-
-        public static TResult[] ToArray<TSource, TResult>([NotNull] this IEnumerable<TSource> source, [NotNull] Func<TSource, int, TResult> selector)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
             if (selector == null) throw new ArgumentNullException(nameof(selector));
@@ -383,7 +314,6 @@ namespace Framework.Core
 
             return source.Select(selector).ToReadOnlyCollection();
         }
-
 
         public static IEnumerable<TResult> EmptyIfNull<TResult>([CanBeNull] this IEnumerable<TResult> source)
         {

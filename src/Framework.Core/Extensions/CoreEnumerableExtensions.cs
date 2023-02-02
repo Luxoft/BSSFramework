@@ -37,74 +37,6 @@ namespace Framework.Core
             }
         }
 
-        /// <summary>
-        /// Перехват исключения при проходе коллекции
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="source"></param>
-        /// <param name="selector"></param>
-        /// <returns></returns>
-        public static IEnumerable<T> WithCatch<T>(this IEnumerable<T> source, Func<Exception, T> selector)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-
-            return TryResult.Catch(source.GetEnumerator)
-                .Match(enumerator => enumerator.WithCatch(selector),
-                    ex => new[] { selector(ex) });
-        }
-
-        private static IEnumerable<T> WithCatch<T>(this IEnumerator<T> source, Func<Exception, T> selector)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-
-            using (source)
-            {
-                while (true)
-                {
-                    var tryValue = TryResult.Catch(source.MoveNext);
-
-                    var fault = tryValue as IFaultResult<bool>;
-
-                    if (fault != null)
-                    {
-                        yield return selector(fault.Error);
-                        yield break;
-                    }
-                    else
-                    {
-                        if ((tryValue as ISuccessResult<bool>).Result)
-                        {
-                            yield return source.Current;
-                        }
-                        else
-                        {
-                            yield break;
-                        }
-                    }
-                }
-            }
-        }
-
-        public static IEnumerable<T> Where<T>(this IEnumerable<T> source, bool constFilter, Func<T, bool> filter)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (filter == null) throw new ArgumentNullException(nameof(filter));
-
-            return constFilter ? source.Where(filter) : source;
-        }
-
-        public static int IndexOf<T>(this IEnumerable<T> source, Func<T, bool> filter)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (filter == null) throw new ArgumentNullException(nameof(filter));
-
-            return source.Select((value, index) => new { Value = value, Index = index })
-                .FirstOrDefault(pair => filter(pair.Value))
-                .Maybe(pair => pair.Index, -1);
-        }
-
         public static bool SequenceEqual<TSource, TOther>(this IEnumerable<TSource> first, IEnumerable<TOther> second, Func<TSource, TOther, bool> compareFunc)
         {
             using (var enumerator1 = first.GetEnumerator())
@@ -123,16 +55,6 @@ namespace Framework.Core
             return true;
         }
 
-        public static T PeekOrDefault<T>(this Queue<T> source)
-        {
-            if (!source.Any())
-            {
-                return default(T);
-            }
-
-            return source.Peek();
-        }
-
         public static T Aggregate<T>(this IEnumerable<Func<T, T>> source, T startElement)
         {
             return source.Aggregate(startElement, (v, f) => f(v));
@@ -144,14 +66,7 @@ namespace Framework.Core
             return source.OfType<T>().Any();
         }
 
-        public static bool HasDuplicates<T>(this IEnumerable<T> source, IEqualityComparer<T> comparer = null)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-
-            return source.GetDuplicates(comparer).Any();
-        }
-
-        public static bool IsEmpty<T>(this IEnumerable<T> source)
+     public static bool IsEmpty<T>(this IEnumerable<T> source)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
 
@@ -165,30 +80,6 @@ namespace Framework.Core
             var hashSet = new HashSet<T>(comparer ?? EqualityComparer<T>.Default);
 
             return source.Where(item => !hashSet.Add(item));
-        }
-
-        public static T MinSlim<T>(this IEnumerable<T> source, T defaultMin = default(T))
-            where T : IComparable
-        {
-            return source.MatchE(() => defaultMin, v => v, v => v.Min());
-        }
-
-        public static string DisplayMaxSlim<T>(this IEnumerable<T> source, Func<T, string> displayFunc)
-            where T : IComparable
-        {
-            return source.MatchE(() => string.Empty, displayFunc, v => displayFunc(v.Max()));
-        }
-
-        public static string DisplayMinSlim<T>(this IEnumerable<T> source, Func<T, string> displayFunc)
-            where T : IComparable
-        {
-            return source.MatchE(() => string.Empty, displayFunc, v => displayFunc(v.Min()));
-        }
-
-        public static T MaxSlim<T>(this IEnumerable<T> source, T defaultMax = default(T))
-                where T : IComparable
-        {
-            return source.MatchE(() => defaultMax, v => v, v => v.Max());
         }
 
         public static int GetIndex<T>(this IEnumerable<T> source, T value)
@@ -208,51 +99,6 @@ namespace Framework.Core
             return -1;
         }
 
-        public static void TryRemove<T>(this IList<T> source, Func<T, bool> removePredicate)
-        {
-            var removedValues = source.Where(removePredicate).ToList();
-
-            removedValues.Foreach(z => source.Remove(z));
-        }
-
-        public static void ForeachJoin<T>(this IEnumerable<T> source, Action<T> action, Action joinAction)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (action == null) throw new ArgumentNullException(nameof(action));
-
-            using (var enumerator = source.GetEnumerator())
-            {
-                if (enumerator.MoveNext())
-                {
-                    action(enumerator.Current);
-
-                    while (enumerator.MoveNext())
-                    {
-                        joinAction();
-                        action(enumerator.Current);
-                    }
-                }
-            }
-        }
-
-        public static decimal AverageExt<T>(this IEnumerable<T> source, Func<T, decimal> selector)
-        {
-            if (!source.Any())
-            {
-                return 0;
-            }
-            return source.Average(selector);
-        }
-
-        public static decimal? AverageExt<T>(this IEnumerable<T> source, Func<T, decimal?> selector)
-        {
-            if (!source.Any())
-            {
-                return 0;
-            }
-            return source.Average(selector);
-        }
-
         public static IEnumerable<T> GetGraphElements<T>(this T source, Func<T, IEnumerable<T>> getChildFunc, bool skipFirstElement = false, IEqualityComparer<T> comparer = null)
         {
             if (null == getChildFunc) throw new ArgumentNullException(nameof(getChildFunc));
@@ -270,11 +116,6 @@ namespace Framework.Core
             source.Clear();
 
             newItems.Foreach(source.Add);
-        }
-
-        public static IEnumerable<T> With<T>(this IEnumerable<T> source, T element)
-        {
-            return source.Concat(new[] { element });
         }
 
         public static IEnumerable<T> GetAllElements<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> getChildFunc)
@@ -326,13 +167,6 @@ namespace Framework.Core
                     }
                 }
             }
-        }
-
-        public static IEnumerable<T> SkipLast<T>(this IEnumerable<T> source, T expectedElement, bool raiseIfNotEquals = false)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-
-            return source.SkipLast(expectedElement, EqualityComparer<T>.Default, raiseIfNotEquals);
         }
 
         public static IEnumerable<T> SkipLast<T>(this IEnumerable<T> source, T expectedElement, IEqualityComparer<T> equalityComparer, bool raiseIfNotEquals = false)

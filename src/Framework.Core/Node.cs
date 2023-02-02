@@ -74,34 +74,4 @@ namespace Framework.Core
             return new Node<T>(selector(source.Value, children.Select(v => v.Value)), children);
         }
     }
-
-    public static class Node
-    {
-        public static IEnumerable<NodeP<TSource>> Create<TSource, TKey>(IEnumerable<TSource> source, Func<TSource, TKey> getCurrentKey, Func<TSource, TKey> getParentKey)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (getCurrentKey == null) throw new ArgumentNullException(nameof(getCurrentKey));
-            if (getParentKey == null) throw new ArgumentNullException(nameof(getParentKey));
-
-            var groupedByParentNodes = source.GroupBy(getParentKey).ToArray();
-
-            return groupedByParentNodes.Partial(g => g.Key.IsDefault(), (rootObjects, otherObject) =>
-
-                otherObject.ToDictionary(g => g.Key, g => g.ToArray())
-                           .Pipe(childrenDict => rootObjects.SelectMany().Select(rootObj => Create(rootObj, getCurrentKey, childrenDict, null))));
-        }
-
-        private static NodeP<TSource> Create<TSource, TKey>(TSource source, Func<TSource, TKey> getCurrentKey, Dictionary<TKey, TSource[]> childrenDict, NodeP<TSource> parent)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (getCurrentKey == null) throw new ArgumentNullException(nameof(getCurrentKey));
-            if (childrenDict == null) throw new ArgumentNullException(nameof(childrenDict));
-
-            var currentNode = new NodeP<TSource>(source) { Parent = parent };
-
-            currentNode.Children = childrenDict.GetValueOrDefault(getCurrentKey(source), () => new TSource[0]).ToReadOnlyCollection(subObj => Create(subObj, getCurrentKey, childrenDict, currentNode));
-
-            return currentNode;
-        }
-    }
 }

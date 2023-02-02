@@ -105,8 +105,6 @@ namespace SampleSystem.WebApiCore
                 this.UseHangfireBss(app);
             }
 
-            app.UseCapDashboard();
-
             app.ApplicationServices.RegisterAuthWorkflow();
             app.ApplicationServices.GetRequiredService<WorkflowManager>().Start();
         }

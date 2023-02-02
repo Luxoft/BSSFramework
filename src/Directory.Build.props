@@ -1,13 +1,13 @@
 <Project>
   <!-- Package settings -->
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Copyright>Luxoft 2009-2021</Copyright>
+    <Copyright>Luxoft 2009-2023</Copyright>
     <Authors>Luxoft BSS</Authors>
     <RepositoryUrl>https://github.com/Luxoft/BSSFramework</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageProjectUrl>https://tfs/tfs/DefaultCollection/IAD_Framework/</PackageProjectUrl>
+    <PackageProjectUrl>https://www.nuget.org/profiles/Luxoft</PackageProjectUrl>
     <IsPackable>true</IsPackable>
     <MinClientVersion>3.6</MinClientVersion>
   </PropertyGroup>

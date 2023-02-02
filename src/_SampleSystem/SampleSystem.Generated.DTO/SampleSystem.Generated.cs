@@ -6930,32 +6930,6 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
-    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.CustomReports.Employee.EmployeeReportParameter), "StrictDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public partial class EmployeeReportParameterStrictDTO : Framework.DomainDriven.IMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.CustomReports.Employee.EmployeeReportParameter>, Framework.DomainDriven.IConvertMappingObject<SampleSystem.Generated.DTO.ISampleSystemDTOMappingService, SampleSystem.CustomReports.Employee.EmployeeReportParameter>
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.Generated.DTO.EmployeePositionIdentityDTO Position;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid ReportId;
-        
-        public EmployeeReportParameterStrictDTO()
-        {
-        }
-        
-        public void MapToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.CustomReports.Employee.EmployeeReportParameter domainObject)
-        {
-            mappingService.MapEmployeeReportParameter(this, domainObject);
-        }
-        
-        public SampleSystem.CustomReports.Employee.EmployeeReportParameter ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return mappingService.ToEmployeeReportParameter(this);
-        }
-    }
-    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Address), "SimpleDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AddressFullDTO))]

@@ -41,8 +41,7 @@ namespace SampleSystem.TypeScriptGenerate
                        .Concat(this.GenerateServiceFacade())
                        .Concat(this.GenerateQueryFacade())
                        .Concat(this.GenerateConfigurationServiceFacade())
-                       .Concat(this.GenerateAuthorizationServiceFacade())
-                       .Concat(this.GenerateReportServiceFacade());
+                       .Concat(this.GenerateAuthorizationServiceFacade());
         }
 
         [TestMethod]
@@ -154,22 +153,6 @@ namespace SampleSystem.TypeScriptGenerate
             yield return generator.GenerateSingle(
                 this.TargetSystemPath + @"/SampleSystem.WebApiCore/js/generated/facade",
                 "authorization.facade.generated",
-                this.CheckOutService);
-        }
-
-        [TestMethod]
-        public void GenerateReportServiceFacadeTest()
-        {
-            this.GenerateReportServiceFacade().ToList();
-        }
-
-        private IEnumerable<FileInfo> GenerateReportServiceFacade()
-        {
-            var generator = new TypeScriptFacadeFileGenerator(this.configurationEnvironment.ReportFacade);
-
-            yield return generator.GenerateSingle(
-                this.TargetSystemPath + @"/SampleSystem.WebApiCore/js/generated/facade",
-                "report.facade.generated",
                 this.CheckOutService);
         }
     }

@@ -8,12 +8,9 @@ using Framework.Configuration.BLL.Notification;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Generated.DTO;
 using Framework.Core;
-using Framework.CustomReports.Domain;
-using Framework.CustomReports.Services;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Serialization;
 using Framework.DomainDriven.SerializeMetadata;
 using Framework.DomainDriven.ServiceModel.IAD;
@@ -31,7 +28,6 @@ using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Events;
 using SampleSystem.Generated.DTO;
-using SampleSystem.WebApiCore.CustomReports;
 
 namespace SampleSystem.ServiceEnvironment;
 
@@ -131,11 +127,7 @@ public static class SampleSystemFrameworkExtensions
 
     private static IServiceCollection RegisterCustomReports(this IServiceCollection services)
     {
-        services.AddSingleton<IReportParameterValueService<ISampleSystemBLLContext, PersistentDomainObjectBase, SampleSystemSecurityOperationCode>, ReportParameterValueService<ISampleSystemBLLContext, PersistentDomainObjectBase, SampleSystemSecurityOperationCode>>();
         services.AddSingleton<ISystemMetadataTypeBuilder>(new SystemMetadataTypeBuilder<PersistentDomainObjectBase>(DTORole.All, typeof(PersistentDomainObjectBase).Assembly));
-        services.AddSingleton<SampleSystemCustomReportsServiceEnvironment>();
-        services.AddSingletonFrom((SampleSystemCustomReportsServiceEnvironment env) => env.ReportService);
-        services.AddSingleton<ISecurityOperationCodeProvider<SampleSystemSecurityOperationCode>, SecurityOperationCodeProvider>();
 
         return services;
     }

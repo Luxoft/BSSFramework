@@ -1617,21 +1617,6 @@ namespace SampleSystem.BLL
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.EmployeeRegistrationType>(this.GetEmployeeRegistrationTypeProperties);
         }
         
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.CustomReports.Employee.EmployeeReportParameter, System.Guid>> GetEmployeeReportParameter_ReportIdValidators()
-        {
-            yield return new Framework.Validation.RequiredValidator<SampleSystem.CustomReports.Employee.EmployeeReportParameter, System.Guid>(Framework.Restriction.RequiredMode.Default);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.CustomReports.Employee.EmployeeReportParameter>> GetEmployeeReportParameterProperties(Framework.Validation.IClassValidationMap<SampleSystem.CustomReports.Employee.EmployeeReportParameter> currentClass)
-        {
-            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.CustomReports.Employee.EmployeeReportParameter, System.Guid>(source => source.ReportId, currentClass, this.GetEmployeeReportParameter_ReportIdValidators(), this.GetClassMap<System.Guid>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.CustomReports.Employee.EmployeeReportParameter> GetEmployeeReportParameterValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<SampleSystem.CustomReports.Employee.EmployeeReportParameter>(this.GetEmployeeReportParameterProperties);
-        }
-        
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.EmployeeRole, System.DateTime?>> GetEmployeeRole_CreateDateValidators()
         {
             yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.EmployeeRole>(this.AvailableValues.GetAvailableRange<System.DateTime>());
@@ -2482,11 +2467,7 @@ namespace SampleSystem.BLL
         
         protected override Framework.Validation.IClassValidationMap<TSource> GetInternalClassMap<TSource>()
         {
-            if ((typeof(TSource) == typeof(SampleSystem.CustomReports.Employee.EmployeeReportParameter)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetEmployeeReportParameterValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.Address)))
+            if ((typeof(TSource) == typeof(SampleSystem.Domain.Address)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetAddressValidationMap()));
             }

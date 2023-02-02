@@ -23,10 +23,6 @@ namespace SampleSystem.CodeGenerate
 
         public readonly DALGeneratorConfiguration DAL;
 
-        public readonly ReportBLLGeneratorConfiguration ReportBLL;
-
-        public readonly CustomReportServiceGeneratorConfiguration CustomReportService;
-
         public readonly MainProjectionGeneratorConfiguration MainProjection;
 
         public readonly LegacyProjectionGeneratorConfiguration LegacyProjection;
@@ -49,10 +45,6 @@ namespace SampleSystem.CodeGenerate
             this.IntegrationService = new IntegrationGeneratorConfiguration(this);
 
             this.DAL = new DALGeneratorConfiguration(this);
-
-            this.ReportBLL = new ReportBLLGeneratorConfiguration(this);
-
-            this.CustomReportService = new CustomReportServiceGeneratorConfiguration(this);
 
             this.MainProjection = new MainProjectionGeneratorConfiguration(this);
 

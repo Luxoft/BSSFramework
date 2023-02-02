@@ -20,10 +20,6 @@
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.WebApi\Framework.Authorization.WebApi.csproj" />
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.WebApi\Framework.Configuration.WebApi.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModel.IAD.DTO\Framework.DomainDriven.ServiceModel.IAD.DTO.csproj" />
-
-    <ProjectReference Include="..\..\_Report\Framework.CustomReports.WebApi\Framework.CustomReports.WebApi.csproj" />
-
-    <ProjectReference Include="..\SampleSystem.CustomReports.BLL\SampleSystem.CustomReports.BLL.csproj" />
     <ProjectReference Include="..\SampleSystem.ServiceEnvironment\SampleSystem.ServiceEnvironment.csproj" />
   </ItemGroup>
 </Project>

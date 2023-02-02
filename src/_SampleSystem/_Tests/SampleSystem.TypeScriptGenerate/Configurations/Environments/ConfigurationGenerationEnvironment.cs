@@ -27,15 +27,11 @@ namespace SampleSystem.TypeScriptGenerate.Configurations.Environments
             this.ClientDTO = new ConfigurationDTOGeneratorConfiguration(this);
 
             this.ConfigurationFacade = new ConfigurationServiceFacadeConfiguration(this);
-
-            this.ReportFacade = new ReportFacadeGenerationConfiguration(this);
         }
 
         public ConfigurationDTOGeneratorConfiguration ClientDTO { get; }
 
         public ConfigurationServiceFacadeConfiguration ConfigurationFacade { get; }
-
-        public ReportFacadeGenerationConfiguration ReportFacade { get; }
 
 
         public override Type SecurityOperationCodeType { get; } = typeof(ConfigurationSecurityOperationCode);

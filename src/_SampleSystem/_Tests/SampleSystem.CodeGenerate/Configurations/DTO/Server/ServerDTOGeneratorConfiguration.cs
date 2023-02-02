@@ -64,8 +64,7 @@ namespace SampleSystem.CodeGenerate.ServerDTO
                     .Or(new DTORoleGeneratePolicy(DTORole.Event))
                     .Or(new DTORoleGeneratePolicy(DTORole.Client, ClientDTORole.Projection// | ClientDTORole.Update
                                                                   ))
-                    .Or(new SampleSystemEventDTORoleGeneratePolicy())
-                    .Or(new ServiceModelGenerator.DTOServiceGeneratePolicy<CustomReportServiceGeneratorConfiguration>(this.Environment.CustomReportService));
+                    .Or(new SampleSystemEventDTORoleGeneratePolicy());
 
             return new SampleSystemServerDependencyGeneratePolicy(primitivePolicy, this.GetTypeMaps());
         }

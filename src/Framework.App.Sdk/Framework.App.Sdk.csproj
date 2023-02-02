@@ -12,8 +12,6 @@
     <ProjectReference Include="..\_Configuration\Framework.Configuration.TestGenerate\Framework.Configuration.TestGenerate.csproj" />
     <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.ProjectionGenerator\Framework.DomainDriven.ProjectionGenerator.csproj" />
 
-    <ProjectReference Include="..\_Report\Framework.CustomReports.Generation\Framework.CustomReports.Generation.csproj" />
-
 
   </ItemGroup>
 </Project>

@@ -2016,11 +2016,6 @@ namespace SampleSystem.Generated.DTO
             return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichDTO(domainObject, mappingService));
         }
         
-        public static SampleSystem.Generated.DTO.EmployeeReportParameterEventRichDTO ToRichEventDTO(this SampleSystem.CustomReports.Employee.EmployeeReportParameter domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return new SampleSystem.Generated.DTO.EmployeeReportParameterEventRichDTO(mappingService, domainObject);
-        }
-        
         public static SampleSystem.Generated.DTO.AddressEventRichDTO ToRichEventDTO(this SampleSystem.Domain.Address domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.AddressEventRichDTO(mappingService, domainObject);
@@ -2499,11 +2494,6 @@ namespace SampleSystem.Generated.DTO
         public static SampleSystem.Generated.DTO.WorkflowCoreInstanceEventRichDTO ToRichEventDTO(this SampleSystem.Domain.WorkflowCoreInstance domainObject, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
         {
             return new SampleSystem.Generated.DTO.WorkflowCoreInstanceEventRichDTO(mappingService, domainObject);
-        }
-        
-        public static System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeeReportParameterEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.CustomReports.Employee.EmployeeReportParameter> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
-        {
-            return Framework.Core.EnumerableExtensions.ToList(domainObjects, domainObject => SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService));
         }
         
         public static System.Collections.Generic.List<SampleSystem.Generated.DTO.AddressEventRichDTO> ToRichEventDTOList(this System.Collections.Generic.IEnumerable<SampleSystem.Domain.Address> domainObjects, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)

@@ -15,5 +15,8 @@ public interface IRepositoryFactory<TDomainObject, in TIdent, TSecurityOperation
 
     IRepository<TDomainObject, TIdent> Create(BLLSecurityMode securityMode);
 
+    /// <summary>
+    /// Create new Repository without security filters
+    /// </summary>
     IRepository<TDomainObject, TIdent> Create();
 }

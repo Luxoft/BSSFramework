@@ -66,9 +66,11 @@ namespace Framework.DomainDriven.BLLCoreGenerator
 
         public virtual IBLLFactoryContainerInterfaceGeneratorConfiguration Logics { get; }
 
-        public virtual bool GenerateValidationMap { get; } = true;
+        public virtual bool GenerateValidationMap => true;
 
-        public virtual bool GenerateValidator { get; } = true;
+        public virtual bool GenerateValidator => true;
+
+        public virtual bool GenerateFetchService => true;
 
         public virtual bool UseRemoveMappingExtension => true;
 

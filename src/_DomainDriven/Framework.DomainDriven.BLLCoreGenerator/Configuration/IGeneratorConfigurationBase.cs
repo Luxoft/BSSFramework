@@ -44,6 +44,8 @@ namespace Framework.DomainDriven.BLLCoreGenerator
         bool GenerateValidationMap { get; }
 
         bool GenerateValidator { get; }
+        
+        bool GenerateFetchService { get; }
 
         ReadOnlyCollection<Type> BLLDomainTypes { get; }
 

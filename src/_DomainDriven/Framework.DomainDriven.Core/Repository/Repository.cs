@@ -100,10 +100,8 @@ public class Repository<TDomainObject, TIdent> : IRepository<TDomainObject, TIde
     public INuFutureValue<int> GetFutureCount<TProjection>(Specification<TDomainObject, TProjection> specification) =>
             this.specificationEvaluator.GetFutureValue(this.GetQueryable(), specification, x => x.Count());
 
-    public async Task<IList<TProjection>>
-            GetListAsync<TProjection>(
+    public async Task<IList<TProjection>> GetListAsync<TProjection>(
             Specification<TDomainObject, TProjection> specification,
             CancellationToken cancellationToken) =>
-            await this.specificationEvaluator.GetQuery(this.GetQueryable(), specification)
-                      .ToListAsync(cancellationToken);
+            await this.specificationEvaluator.GetQuery(this.GetQueryable(), specification).ToListAsync(cancellationToken);
 }

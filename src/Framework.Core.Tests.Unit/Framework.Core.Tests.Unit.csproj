@@ -9,7 +9,7 @@
     <PackageReference Include="NUnit.ConsoleRunner" Version="3.16.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.3.1" />
     <PackageReference Include="OpenCover" Version="4.7.1221" />
-    <PackageReference Include="ReportGenerator" Version="5.1.15" />
+    <PackageReference Include="ReportGenerator" Version="5.1.16" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />

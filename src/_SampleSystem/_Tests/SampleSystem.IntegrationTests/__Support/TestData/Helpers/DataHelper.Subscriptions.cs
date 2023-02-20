@@ -6,7 +6,6 @@ using Framework.Configuration.BLL;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
 {

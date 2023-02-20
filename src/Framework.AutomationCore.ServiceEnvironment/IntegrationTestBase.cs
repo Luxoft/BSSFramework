@@ -46,13 +46,19 @@ public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderCont
 
     public virtual void Cleanup()
     {
-        if (this.ConfigUtil.UseLocalDb || this.ConfigUtil.TestRunMode == TestRunMode.DefaultRunModeOnEmptyDatabase)
+        try
         {
-            AssemblyInitializeAndCleanup.RunAction("Drop Database", this.DatabaseContext.Drop);
-        }
+            if (this.ConfigUtil.UseLocalDb || this.ConfigUtil.TestRunMode == TestRunMode.DefaultRunModeOnEmptyDatabase)
+            {
+                AssemblyInitializeAndCleanup.RunAction("Drop Database", this.DatabaseContext.Drop);
+            }
 
-        this.CleanupTestEnvironment();
-        this.rootServiceProviderPool.Release(this.RootServiceProvider);
+            this.CleanupTestEnvironment();
+        }
+        finally
+        {
+            this.rootServiceProviderPool.Release(this.RootServiceProvider);
+        }
     }
 
     public virtual void CleanupTestEnvironment()

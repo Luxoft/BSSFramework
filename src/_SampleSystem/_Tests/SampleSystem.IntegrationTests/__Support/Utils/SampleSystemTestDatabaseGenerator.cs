@@ -21,7 +21,10 @@ namespace SampleSystem.IntegrationTests.Support.Utils
 
         private readonly IServiceProvider serviceProvider;
 
-        public SampleSystemTestDatabaseGenerator(IDatabaseContext databaseContext, ConfigUtil configUtil, IServiceProvider serviceProvider)
+        public SampleSystemTestDatabaseGenerator(
+            IDatabaseContext databaseContext,
+            ConfigUtil configUtil,
+            IServiceProvider serviceProvider)
             : base(databaseContext, configUtil)
         {
             this.serviceProvider = serviceProvider;

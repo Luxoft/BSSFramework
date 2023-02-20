@@ -77,7 +77,7 @@ public interface IRepository<TDomainObject, in TIdent>
     /// <summary>
     /// Get list by Specification https://github.com/NikitaEgorov/nuSpec
     /// </summary>
-    Task<IList<TProjection>> GetListAsync<TProjection>(
+    Task<List<TProjection>> GetListAsync<TProjection>(
             Specification<TDomainObject, TProjection> specification,
             CancellationToken cancellationToken);
 }

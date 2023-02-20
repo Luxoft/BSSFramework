@@ -959,6 +959,11 @@
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
   </class>
+  <class name="SampleSystem.Domain.NoSecurityObject" table="NoSecurityObject">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+  </class>
   <class name="SampleSystem.Domain.Principal" table="Principal">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />

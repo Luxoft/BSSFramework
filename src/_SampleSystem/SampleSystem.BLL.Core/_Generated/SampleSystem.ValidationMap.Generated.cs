@@ -2739,6 +2739,10 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetNamedLockValidationMap()));
             }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.NoSecurityObject)))
+            {
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetNoSecurityObjectValidationMap()));
+            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.Principal)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetPrincipalValidationMap()));
@@ -3381,6 +3385,11 @@ namespace SampleSystem.BLL
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.NamedLock> GetNamedLockValidationMap()
         {
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.NamedLock>(this.GetNamedLockProperties);
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.NoSecurityObject> GetNoSecurityObjectValidationMap()
+        {
+            return Framework.Validation.ClassValidationMap<SampleSystem.Domain.NoSecurityObject>.Empty;
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.UniqueByMaster.ParentEntity, System.DateTime?>> GetParentEntity_CreateDateValidators()

@@ -4,21 +4,20 @@ using System.Diagnostics;
 using Automation.Enums;
 using Automation.Utils;
 using Automation.Utils.DatabaseUtils;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation;
 
 public class AssemblyInitializeAndCleanup
 {
-    private readonly ConfigUtil configUtil;
+    private readonly Action<IServiceProvider> releaseServiceProviderAction;
+    private readonly Func<IServiceProvider> getServiceProviderAction;
 
-    private readonly TestDatabaseGenerator databaseGenerator;
-
-    private readonly Action releaseServiceProviderAction;
-
-    public AssemblyInitializeAndCleanup(ConfigUtil configUtil, TestDatabaseGenerator databaseGenerator, Action releaseServiceProviderAction)
+    public AssemblyInitializeAndCleanup(
+        Func<IServiceProvider> getServiceProviderAction,
+        Action<IServiceProvider> releaseServiceProviderAction)
     {
-        this.configUtil = configUtil;
-        this.databaseGenerator = databaseGenerator;
+        this.getServiceProviderAction = getServiceProviderAction;
         this.releaseServiceProviderAction = releaseServiceProviderAction;
     }
 
@@ -39,52 +38,61 @@ public class AssemblyInitializeAndCleanup
 
     public void EnvironmentInitialize()
     {
-        // if (!databaseUtil.DatabaseContext.MainDatabase.IsLocalDb)
-        // {
-        //     RunAction("Check Server Name in allowed list", databaseUtil.CheckServerAllowed);
-        // }
-        //Initialize(action);
+        var serviceProvider = getServiceProviderAction.Invoke();
+        var configUtil = serviceProvider.GetRequiredService<ConfigUtil>();
+        var databaseGenerator = serviceProvider.GetRequiredService<TestDatabaseGenerator>();
 
-        switch (this.configUtil.TestRunMode)
+        // if (!configUtil.UseLocalDb)
+        // {
+        //     RunAction("Check Server Name in allowed list", databaseGenerator.CheckServerAllowed);
+        // }
+
+        switch (configUtil.TestRunMode)
         {
             case TestRunMode.RestoreDatabaseUsingAttach:
-                RunAction("Create LocalDB instance", this.databaseGenerator.CreateLocalDb);
-                RunAction("Check Test Database", this.databaseGenerator.CheckTestDatabase);
-                this.databaseGenerator.CheckAndCreateDetachedFiles();
-                this.databaseGenerator.DatabaseContext.Drop();
+                RunAction("Create LocalDB instance", databaseGenerator.CreateLocalDb);
+                RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
+                databaseGenerator.CheckAndCreateDetachedFiles();
+                databaseGenerator.DatabaseContext.Drop();
                 break;
             case TestRunMode.GenerateTestDataOnExistingDatabase:
                 break;
             default:
-                RunAction("Create LocalDB instance", this.databaseGenerator.CreateLocalDb);
-                RunAction("Check Test Database", this.databaseGenerator.CheckTestDatabase);
-                RunAction("Delete detached files", this.databaseGenerator.DeleteDetachedFiles);
-                RunAction("Drop and Create Databases", this.databaseGenerator.DatabaseContext.ReCreate);
-                RunAction("Generate All Databases", this.databaseGenerator.GenerateDatabases);
-                RunAction("Insert Statements", this.databaseGenerator.ExecuteInsertsForDatabases);
-                RunAction("Test Data Initialize", this.databaseGenerator.GenerateTestData);
-                RunAction("Backup Databases", this.databaseGenerator.DatabaseContext.CopyDetachedFiles);
-                RunAction("Drop Database", this.databaseGenerator.DatabaseContext.Drop);
+                RunAction("Create LocalDB instance", databaseGenerator.CreateLocalDb);
+                RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
+                RunAction("Delete detached files", databaseGenerator.DeleteDetachedFiles);
+                RunAction("Drop and Create Databases", databaseGenerator.DatabaseContext.ReCreate);
+                RunAction("Generate All Databases", databaseGenerator.GenerateDatabases);
+                RunAction("Insert Statements", databaseGenerator.ExecuteInsertsForDatabases);
+                RunAction("Test Data Initialize", databaseGenerator.GenerateTestData);
+                RunAction("Backup Databases", databaseGenerator.DatabaseContext.CopyDetachedFiles);
+                RunAction("Drop Database", databaseGenerator.DatabaseContext.Drop);
                 break;
         }
+
+        this.releaseServiceProviderAction(serviceProvider);
     }
 
     public void EnvironmentCleanup()
     {
-        switch (this.configUtil.TestRunMode)
+        var serviceProvider = getServiceProviderAction.Invoke();
+        var configUtil = serviceProvider.GetRequiredService<ConfigUtil>();
+        var databaseGenerator = serviceProvider.GetRequiredService<TestDatabaseGenerator>();
+
+        switch (configUtil.TestRunMode)
         {
             case TestRunMode.DefaultRunModeOnEmptyDatabase:
-                RunAction("Check Test Database", this.databaseGenerator.CheckTestDatabase);
-                RunAction("Drop Databases",this.databaseGenerator.DatabaseContext.Drop);
-                RunAction("Delete detached files", this.databaseGenerator.DeleteDetachedFiles);
-                RunAction("Delete LocalDB Instance", this.databaseGenerator.DeleteLocalDb);
+                RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
+                RunAction("Drop Databases",databaseGenerator.DatabaseContext.Drop);
+                RunAction("Delete detached files", databaseGenerator.DeleteDetachedFiles);
+                RunAction("Delete LocalDB Instance", databaseGenerator.DeleteLocalDb);
                 break;
 
             default:
-                RunAction("Delete LocalDB Instance", this.databaseGenerator.DeleteLocalDb);
+                RunAction("Delete LocalDB Instance", databaseGenerator.DeleteLocalDb);
                 break;
         }
 
-        this.releaseServiceProviderAction();
+        this.releaseServiceProviderAction(serviceProvider);
     }
 }

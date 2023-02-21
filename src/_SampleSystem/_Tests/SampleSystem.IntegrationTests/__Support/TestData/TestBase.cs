@@ -1,5 +1,4 @@
 ﻿using Automation.ServiceEnvironment;
-
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,11 +11,8 @@ namespace SampleSystem.IntegrationTests.__Support.TestData
     [TestClass]
     public class TestBase : IntegrationTestBase<ISampleSystemBLLContext>
     {
-        protected TestBase()
-                : base(SampleSystemTestEnvironment.Current.ServiceProviderPool)
+        protected TestBase() : base(InitializeAndCleanup.TestEnvironment.ServiceProviderPool)
         {
-            // Workaround for System.Drawing.Common problem https://chowdera.com/2021/12/202112240234238356.html
-            System.AppContext.SetSwitch("System.Drawing.EnableUnixSupport", true);
         }
 
         public MainWebApi MainWebApi => new(this.RootServiceProvider);

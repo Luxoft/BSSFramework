@@ -1,19 +1,13 @@
-﻿using System;
-using System.Linq;
-using Automation.ServiceEnvironment;
-using FluentAssertions;
+﻿using FluentAssertions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-using Framework.Configuration.Generated.DTO;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
 
 using SampleSystem.Generated.DTO;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 
 namespace SampleSystem.IntegrationTests
 {

@@ -8,12 +8,13 @@ namespace Automation.Utils.DatabaseUtils;
 
 public class DatabaseItem : IDatabaseItem
 {
-    private SqlConnectionStringBuilder builder;
-    private ConfigUtil configUtil;
+    private readonly SqlConnectionStringBuilder builder;
+    private readonly ConfigUtil configUtil;
 
     public DatabaseItem(
         ConfigUtil configUtil,
-        string connectionString, string initialCatalog = null)
+        string connectionString,
+        string initialCatalog = null)
     {
         this.configUtil = configUtil;
         this.builder = new SqlConnectionStringBuilder(connectionString);

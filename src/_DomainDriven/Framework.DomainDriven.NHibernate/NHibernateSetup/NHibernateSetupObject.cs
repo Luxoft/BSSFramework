@@ -16,7 +16,7 @@ public class NHibernateSetupObject : INHibernateSetupObject
     public INHibernateSetupObject SetEnvironment<TNHibSessionEnvironment>()
         where TNHibSessionEnvironment : NHibSessionEnvironment
     {
-        this.SetEnvironmentAction = sc => sc.AddSingleton<NHibSessionEnvironment, NHibSessionEnvironment>();
+        this.SetEnvironmentAction = sc => sc.AddSingleton<NHibSessionEnvironment, TNHibSessionEnvironment>();
 
         return this;
     }

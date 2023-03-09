@@ -1,0 +1,57 @@
+@use '@angular/material' as mat;
+
+@import './styles/mixins.scss';
+@import './styles/fonts.scss';
+@import './styles/utils.scss';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* ======== tailwind ======== */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ======== Angular Material Theme ======== */
+@include mat.core();
+@include mat.all-component-themes(
+  mat.define-light-theme(
+    (
+      color: (
+        primary: mat.define-palette($primary-palette, 500),
+        accent: mat.define-palette($accent-palette, A200, A100, A400),
+      ),
+      typography: $typography,
+    )
+  )
+);
+
+/* ======== global styles ======== */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #e4e7ed;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+
+.error-message {
+  .mdc-snackbar__surface {
+    background-color: get-accent-color() !important;
+  }
+}

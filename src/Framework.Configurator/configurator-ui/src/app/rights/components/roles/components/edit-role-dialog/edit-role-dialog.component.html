@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>{{ isEditMode ? 'Edit Role' : 'Add Role' }}</h1>
+
+<div mat-dialog-content class="tw-flex tw-flex-col">
+  <div class="mat-caption">Role</div>
+  <mat-form-field *ngIf="!isEditMode" appearance="fill" class="tw-w-full">
+    <input matInput type="text" [(ngModel)]="name" />
+  </mat-form-field>
+  <div *ngIf="isEditMode" class="mat-subtitle-1 tw-text-black">{{ name }}</div>
+
+  <div class="tw-mt-5">
+    <span [matBadge]="list.selectedOptions.selected.length" matBadgeOverlap="false" class="mat-caption">Operations</span>
+  </div>
+  <mat-form-field class="tw-w-full">
+    <mat-label>Filter</mat-label>
+    <input matInput [formControl]="control" />
+  </mat-form-field>
+  <mat-selection-list #list class="tw-overflow-auto">
+    <mat-list-option
+      *ngFor="let operation of operations"
+      class="row tw-h-[60px]"
+      (click)="operation.Selected = !operation.Selected"
+      [selected]="operation.Selected"
+      [value]="operation.Id">
+      <div class="mat-subtitle-1">{{ operation.Name }}</div>
+      <div class="mat-caption">{{ operation.Description }}</div>
+    </mat-list-option>
+  </mat-selection-list>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="getResult()" cdkFocusInitial>Save</button>
+</div>

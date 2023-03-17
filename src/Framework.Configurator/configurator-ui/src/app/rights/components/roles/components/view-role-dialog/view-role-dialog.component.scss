@@ -1,0 +1,9 @@
+@import 'mixins.scss';
+
+:host {
+  @apply tw-flex tw-flex-col tw-h-full;
+}
+
+.row {
+  @include table-row;
+}

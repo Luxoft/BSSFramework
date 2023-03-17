@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>{{ data.Name }}</h1>
+
+<div mat-dialog-content class="tw-flex tw-flex-col tw-gap-3 tw-max-h-full">
+  <div class="tw-flex tw-justify-end">
+    <button mat-raised-button color="primary" (click)="add()">Add role</button>
+  </div>
+
+  <div class="tw-flex tw-flex-col tw-gap-4 tw-px-1 tw-py-2 tw-overflow-auto">
+    <mat-card *ngFor="let permission of rights.Permissions">
+      <mat-card-header class="tw-py-4 tw-flex-col">
+        <mat-card-title class="tw-text-black">
+          <div class="tw-flex tw-items-center tw-justify-between">
+            {{ permission.Role }}
+            <button mat-raised-button color="accent" (click)="remove(permission)">Delete</button>
+          </div>
+        </mat-card-title>
+
+        <div class="mat-caption">Comment</div>
+        <mat-form-field appearance="fill" class="tw-w-full">
+          <input matInput type="text" [(ngModel)]="permission.Comment" />
+        </mat-form-field>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="tw-flex tw-flex-col tw-gap-2">
+          <div *ngFor="let context of allContexts">
+            <div class="mat-caption">{{ context.Name }}</div>
+            <mat-chip-set>
+              <mat-chip *ngFor="let entity of getEntities(permission, context)">
+                <div class="tw-flex tw-items-center tw-gap-2">
+                  <div class="mat-caption">{{ entity.Name }}</div>
+                  <button (click)="removeContext(permission, context, entity)">
+                    <img
+                      alt=""
+                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTEiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxMSAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQgMUM0IDAuNDQ3NzE1IDQuNDQ3NzIgMCA1IDBINkM2LjU1MjI4IDAgNyAwLjQ0NzcxNSA3IDFIMTBDMTAuNTUyMyAxIDExIDEuNDQ3NzIgMTEgMlYzSDBWMkMwIDEuNDQ3NzIgMC40NDc3MTUgMSAxIDFINFoiIGZpbGw9IiM2NjY2NjYiLz4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xLjA1NTAyIDQuNTQ5NzVDMS4wMjU1OSA0LjI1NTQxIDEuMjU2NzMgNCAxLjU1MjU0IDRIOS40NDc1NUM5Ljc0MzM2IDQgOS45NzQ1IDQuMjU1NDEgOS45NDUwNyA0LjU0OTc1TDkuMDQ1MDcgMTMuNTQ5OEM5LjAxOTUxIDEzLjgwNTQgOC44MDQ0MyAxNCA4LjU0NzU1IDE0SDIuNDUyNTRDMi4xOTU2NiAxNCAxLjk4MDU4IDEzLjgwNTQgMS45NTUwMiAxMy41NDk4TDEuMDU1MDIgNC41NDk3NVpNMy4wMDAwNSA2LjVDMy4wMDAwNSA2LjIyMzg2IDMuMjIzOSA2IDMuNTAwMDUgNkMzLjc3NjE5IDYgNC4wMDAwNSA2LjIyMzg2IDQuMDAwMDUgNi41VjEwLjVDNC4wMDAwNSAxMC43NzYxIDMuNzc2MTkgMTEgMy41MDAwNSAxMUMzLjIyMzkgMTEgMy4wMDAwNSAxMC43NzYxIDMuMDAwMDUgMTAuNVY2LjVaTTUuMDAwMDUgNi41QzUuMDAwMDUgNi4yMjM4NiA1LjIyMzkgNiA1LjUwMDA0IDZDNS43NzYxOSA2IDYuMDAwMDQgNi4yMjM4NiA2LjAwMDA0IDYuNVYxMC41QzYuMDAwMDQgMTAuNzc2MSA1Ljc3NjE5IDExIDUuNTAwMDQgMTFDNS4yMjM5IDExIDUuMDAwMDUgMTAuNzc2MSA1LjAwMDA1IDEwLjVWNi41Wk03LjUwMDA0IDZDNy4yMjM5IDYgNy4wMDAwNCA2LjIyMzg2IDcuMDAwMDQgNi41VjEwLjVDNy4wMDAwNCAxMC43NzYxIDcuMjIzOSAxMSA3LjUwMDA0IDExQzcuNzc2MTkgMTEgOC4wMDAwNCAxMC43NzYxIDguMDAwMDQgMTAuNVY2LjVDOC4wMDAwNCA2LjIyMzg2IDcuNzc2MTkgNiA3LjUwMDA0IDZaIiBmaWxsPSIjNjY2NjY2Ii8+Cjwvc3ZnPgo=" />
+                  </button>
+                </div>
+              </mat-chip>
+            </mat-chip-set>
+
+            <app-select-context [contextId]="context.Id" (selected)="addContext(permission, context, $event)"></app-select-context>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="getResult()" cdkFocusInitial>Save</button>
+</div>

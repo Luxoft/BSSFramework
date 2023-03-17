@@ -6,6 +6,7 @@ using System.Reflection;
 using DotNetCore.CAP;
 
 using Framework.Authorization.ApproveWorkflow;
+using Framework.Configurator;
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
@@ -56,6 +57,8 @@ namespace SampleSystem.WebApiCore
                     .AddSwaggerBss(
                                    new OpenApiInfo { Title = "SampleSystem", Version = "v1" },
                                    new List<string> { Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml") });
+            
+            services.AddConfigurator();
 
             services
                 .AddMvcBss()
@@ -97,6 +100,7 @@ namespace SampleSystem.WebApiCore
 
                //// .UseAuthentication()
                //// .UseAuthorization()
+               //// .UseConfigurator()
                .UseEndpoints(z => z.MapControllers());
 
             if (env.IsProduction())

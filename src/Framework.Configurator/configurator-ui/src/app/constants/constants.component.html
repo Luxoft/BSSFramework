@@ -1,0 +1,26 @@
+<div class="mat-elevation-z8 tw-overflow-auto" tabindex="0">
+  <table mat-table [dataSource]="dataSource">
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <ng-container matColumnDef="Name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element" class="tw-w-2/5">
+        <div class="mat-subtitle-1 text-break">{{ element.Name }}</div>
+        <div class="mat-caption">{{ element.Description }}</div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Value">
+      <th mat-header-cell *matHeaderCellDef> Value </th>
+      <td mat-cell *matCellDef="let element" class="tw-w-2/5 text-break"> {{ element.Value }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element" class="tw-w-1/5">
+        <button mat-raised-button color="primary" class="tw-ml-auto" (click)="openDialog(element)">Edit</button>
+      </td>
+    </ng-container>
+  </table>
+</div>

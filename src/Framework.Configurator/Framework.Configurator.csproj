@@ -1,5 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+<PropertyGroup>
+  <PackageId>Luxoft.Framework.Configurator</PackageId>
+</PropertyGroup>
+  
 <ItemGroup>
     <EmbeddedResource Include="configurator-ui/dist/**/*" Exclude="**/*/*.txt;" />
 </ItemGroup>

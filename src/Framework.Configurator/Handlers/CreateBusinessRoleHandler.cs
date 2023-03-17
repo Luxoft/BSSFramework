@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 using Framework.Authorization.BLL;
@@ -27,6 +28,7 @@ namespace Framework.Configurator.Handlers
             this.Create(newRole);
         }
 
+        [SuppressMessage("SonarQube", "S2436", Justification = "It's ok. BusinessRoleOperationLink automatically link to BusinessRole")]
         private void Create(RequestBodyDto newRole)
         {
             var domainObject = new BusinessRole { Name = newRole.Name };

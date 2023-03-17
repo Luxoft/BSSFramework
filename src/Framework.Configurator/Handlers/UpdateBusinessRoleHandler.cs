@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 using Framework.Authorization.BLL;
@@ -30,6 +31,7 @@ namespace Framework.Configurator.Handlers
             this.Update(new Guid(roleId), role);
         }
 
+        [SuppressMessage("SonarQube", "S2436", Justification = "It's ok. BusinessRoleOperationLink automatically link to BusinessRole")]
         private void Update(Guid id, RequestBodyDto role)
         {
             var businessRoleBll = this.authorizationBllContext.Authorization.Logics

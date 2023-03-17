@@ -12,12 +12,10 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers
 {
-    public class DeletePrincipalHandler<TBllContext> : BaseWriteHandler, IDeletePrincipalHandler
-        where TBllContext : IAuthorizationBLLContextContainer<IAuthorizationBLLContext>
+    public class DeletePrincipalHandler: BaseWriteHandler, IDeletePrincipalHandler
     {
-        private readonly IContextEvaluator<TBllContext> _contextEvaluator;
-
-        public DeletePrincipalHandler(IContextEvaluator<TBllContext> contextEvaluator) => this._contextEvaluator = contextEvaluator;
+        private readonly IAuthorizationBLLContext authorizationBllContext;
+        public DeletePrincipalHandler(IAuthorizationBLLContext authorizationBllContext) => this.authorizationBllContext = authorizationBllContext;
 
         public Task Execute(HttpContext context)
         {
@@ -27,13 +25,11 @@ namespace Framework.Configurator.Handlers
             return Task.CompletedTask;
         }
 
-        private void Delete(Guid id) =>
-            this._contextEvaluator.Evaluate(
-                DBSessionMode.Write,
-                x =>
-                {
-                    var domainObject = x.Authorization.Logics.PrincipalFactory.Create(BLLSecurityMode.Edit).GetById(id, true);
-                    x.Authorization.Logics.Principal.Remove(domainObject);
-                });
+        private void Delete(Guid id)
+        {
+            var principalBll = this.authorizationBllContext.Authorization.Logics.PrincipalFactory.Create(BLLSecurityMode.Edit);
+            var domainObject = principalBll.GetById(id, true);
+            principalBll.Remove(domainObject);
+        }
     }
 }

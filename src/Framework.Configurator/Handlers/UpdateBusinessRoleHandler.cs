@@ -16,12 +16,11 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers
 {
-    public class UpdateBusinessRoleHandler<TBllContext> : BaseWriteHandler, IUpdateBusinessRoleHandler
-        where TBllContext : IAuthorizationBLLContextContainer<IAuthorizationBLLContext>
+    public class UpdateBusinessRoleHandler: BaseWriteHandler, IUpdateBusinessRoleHandler
     {
-        private readonly IContextEvaluator<TBllContext> _contextEvaluator;
+        private readonly IAuthorizationBLLContext authorizationBllContext;
 
-        public UpdateBusinessRoleHandler(IContextEvaluator<TBllContext> contextEvaluator) => this._contextEvaluator = contextEvaluator;
+        public UpdateBusinessRoleHandler(IAuthorizationBLLContext authorizationBllContext) => this.authorizationBllContext = authorizationBllContext;
 
         public async Task Execute(HttpContext context)
         {
@@ -31,25 +30,28 @@ namespace Framework.Configurator.Handlers
             this.Update(new Guid(roleId), role);
         }
 
-        private void Update(Guid id, RequestBodyDto role) =>
-            this._contextEvaluator.Evaluate(
-                DBSessionMode.Write,
-                x =>
-                {
-                    var domainObject = x.Authorization.Logics.BusinessRoleFactory.Create(BLLSecurityMode.Edit).GetById(id, true);
-                    var mergeResult = domainObject.BusinessRoleOperationLinks.GetMergeResult(
-                        role.OperationIds,
-                        s => s.Operation.Id,
-                        s => s);
+        private void Update(Guid id, RequestBodyDto role)
+        {
+            var businessRoleBll = this.authorizationBllContext.Authorization.Logics
+                                      .BusinessRoleFactory.Create(BLLSecurityMode.Edit);
+            
+            var domainObject = businessRoleBll.GetById(id, true);
+            var mergeResult =
+                    domainObject.BusinessRoleOperationLinks.GetMergeResult(
+                     role.OperationIds,
+                     s => s.Operation.Id,
+                     s => s);
 
-                    foreach (var operation in x.Authorization.Logics.Operation.GetListByIdents(mergeResult.AddingItems))
-                    {
-                        new BusinessRoleOperationLink(domainObject) { Operation = operation };
-                    }
+            var operations = this.authorizationBllContext.Authorization.Logics.Operation.GetListByIdents(mergeResult.AddingItems);
+            
+            foreach (var operation in operations)
+            {
+                new BusinessRoleOperationLink(domainObject) { Operation = operation };
+            }
 
-                    domainObject.RemoveDetails(mergeResult.RemovingItems);
-                    x.Authorization.Logics.BusinessRole.Save(domainObject);
-                });
+            domainObject.RemoveDetails(mergeResult.RemovingItems);
+            businessRoleBll.Save(domainObject);
+        }
 
         private class RequestBodyDto
         {

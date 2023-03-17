@@ -12,20 +12,18 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers
 {
-    public class GetOperationsHandler<TBllContext> : BaseReadHandler, IGetOperationsHandler
-        where TBllContext : IAuthorizationBLLContextContainer<IAuthorizationBLLContext>
+    public class GetOperationsHandler: BaseReadHandler, IGetOperationsHandler
+       
     {
-        private readonly IContextEvaluator<TBllContext> _contextEvaluator;
+        private readonly IAuthorizationBLLContext authorizationBllContext;
 
-        public GetOperationsHandler(IContextEvaluator<TBllContext> contextEvaluator) => this._contextEvaluator = contextEvaluator;
-
-        protected override object GetData(HttpContext context) =>
-            this._contextEvaluator.Evaluate(
-                DBSessionMode.Read,
-                x => x.Authorization.Logics.OperationFactory.Create(BLLSecurityMode.View)
-                      .GetSecureQueryable()
-                      .Select(o => new OperationDto { Id = o.Id, Name = o.Name, Description = o.Description })
-                      .OrderBy(o => o.Name)
-                      .ToList());
+        public GetOperationsHandler(IAuthorizationBLLContext authorizationBllContext) => this.authorizationBllContext = authorizationBllContext;
+        
+        protected override object GetData(HttpContext context)
+            => this.authorizationBllContext.Authorization.Logics.OperationFactory.Create(BLLSecurityMode.View)
+                   .GetSecureQueryable()
+                   .Select(o => new OperationDto { Id = o.Id, Name = o.Name, Description = o.Description })
+                   .OrderBy(o => o.Name)
+                   .ToList();
     }
 }

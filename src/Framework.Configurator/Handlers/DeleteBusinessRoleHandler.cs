@@ -12,12 +12,12 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers
 {
-    public class DeleteBusinessRoleHandler<TBllContext> : BaseWriteHandler, IDeleteBusinessRoleHandler
-        where TBllContext : IAuthorizationBLLContextContainer<IAuthorizationBLLContext>
+    public class DeleteBusinessRoleHandler: BaseWriteHandler, IDeleteBusinessRoleHandler
     {
-        private readonly IContextEvaluator<TBllContext> _contextEvaluator;
+        private readonly IAuthorizationBLLContext authorizationBllContext;
 
-        public DeleteBusinessRoleHandler(IContextEvaluator<TBllContext> contextEvaluator) => this._contextEvaluator = contextEvaluator;
+        public DeleteBusinessRoleHandler(IAuthorizationBLLContext authorizationBllContext) => this.authorizationBllContext = authorizationBllContext;
+        
 
         public Task Execute(HttpContext context)
         {
@@ -27,13 +27,12 @@ namespace Framework.Configurator.Handlers
             return Task.CompletedTask;
         }
 
-        private void Delete(Guid id) =>
-            this._contextEvaluator.Evaluate(
-                DBSessionMode.Write,
-                x =>
-                {
-                    var domainObject = x.Authorization.Logics.BusinessRoleFactory.Create(BLLSecurityMode.Edit).GetById(id, true);
-                    x.Authorization.Logics.BusinessRole.Remove(domainObject);
-                });
+        private void Delete(Guid id)
+        {
+            var businessRoleBll = this.authorizationBllContext.Authorization.Logics
+                                      .BusinessRoleFactory.Create(BLLSecurityMode.Edit);
+            var domainObject = businessRoleBll.GetById(id, true);
+            businessRoleBll.Remove(domainObject);
+        }
     }
 }

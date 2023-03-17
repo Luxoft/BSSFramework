@@ -11,12 +11,11 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers
 {
-    public class UpdateSystemConstantHandler<TBllContext> : BaseWriteHandler, IUpdateSystemConstantHandler
-        where TBllContext : DomainDriven.BLL.Configuration.IConfigurationBLLContextContainer<IConfigurationBLLContext>
+    public class UpdateSystemConstantHandler : BaseWriteHandler, IUpdateSystemConstantHandler
     {
-        private readonly IContextEvaluator<TBllContext> _contextEvaluator;
+        private readonly ISystemConstantBLLFactory systemConstantBllFactory;
 
-        public UpdateSystemConstantHandler(IContextEvaluator<TBllContext> contextEvaluator) => this._contextEvaluator = contextEvaluator;
+        public UpdateSystemConstantHandler(ISystemConstantBLLFactory systemConstantBllFactory) => this.systemConstantBllFactory = systemConstantBllFactory;
 
         public async Task Execute(HttpContext context)
         {
@@ -26,14 +25,12 @@ namespace Framework.Configurator.Handlers
             this.Update(new Guid(constantId), newValue);
         }
 
-        private void Update(Guid id, string newValue) =>
-            this._contextEvaluator.Evaluate(
-                DBSessionMode.Write,
-                x =>
-                {
-                    var systemConstant = x.Configuration.Logics.SystemConstantFactory.Create(BLLSecurityMode.Edit).GetById(id, true);
-                    systemConstant.Value = newValue;
-                    x.Configuration.Logics.SystemConstant.Save(systemConstant);
-                });
+        private void Update(Guid id, string newValue)
+        {
+            var systemConstantBll = this.systemConstantBllFactory.Create(BLLSecurityMode.Edit);
+            var systemConstant =  systemConstantBll.GetById(id, true);
+            systemConstant.Value = newValue;
+            systemConstantBll.Save(systemConstant);
+        }
     }
 }

@@ -2,23 +2,33 @@
 using System.Linq;
 using System.Threading.Tasks;
 
+using Framework.Authorization.BLL;
 using Framework.Configuration;
 using Framework.Configuration.BLL;
 using Framework.Configuration.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.BLL.Security;
 
 using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers
 {
-    public class ForcePushEventHandler<TBllContext> : BaseWriteHandler, IForcePushEventHandler
-        where TBllContext : DomainDriven.BLL.Configuration.IConfigurationBLLContextContainer<IConfigurationBLLContext>
+    public class ForcePushEventHandler: BaseWriteHandler, IForcePushEventHandler
     {
-        private readonly IContextEvaluator<TBllContext> _contextEvaluator;
+        private readonly IDomainTypeBLLFactory domainTypeBllFactory;
 
-        public ForcePushEventHandler(IContextEvaluator<TBllContext> contextEvaluator) => this._contextEvaluator = contextEvaluator;
+        private readonly IConfigurationBLLFactoryContainer configurationBllFactoryContainer;
+        
+
+        public ForcePushEventHandler(IDomainTypeBLLFactory domainTypeBllFactory,
+                                     IConfigurationBLLFactoryContainer configurationBllFactoryContainer)
+        {
+            this.domainTypeBllFactory = domainTypeBllFactory;
+            this.configurationBllFactoryContainer = configurationBllFactoryContainer;
+
+        }
 
         public async Task Execute(HttpContext context)
         {
@@ -28,20 +38,19 @@ namespace Framework.Configurator.Handlers
             this.ForcePush(new Guid(operationId), body);
         }
 
-        private void ForcePush(Guid operationId, RequestBodyDto body) =>
-            this._contextEvaluator.Evaluate(
-                DBSessionMode.Write,
-                x =>
-                {
-                    x.Configuration.Logics.DomainTypeFactory.Create(ConfigurationSecurityOperationCode.ForceDomainTypeEvent)
-                     .ForceEvent(
-                         new DomainTypeEventModel
-                         {
-                             Operation = x.Configuration.Logics.Default.Create<DomainTypeEventOperation>().GetById(operationId, true),
-                             Revision = body.Revision,
-                             DomainObjectIdents = body.Ids.Split(',').Select(i => new Guid(i)).ToList()
-                         });
-                });
+        private void ForcePush(Guid operationId, RequestBodyDto body)
+        {
+            var domainTypeEventOperation = this.configurationBllFactoryContainer.Default.Create<DomainTypeEventOperation>().GetById(operationId, true);
+
+            this.domainTypeBllFactory.Create(ConfigurationSecurityOperationCode.ForceDomainTypeEvent)
+                .ForceEvent(
+                            new DomainTypeEventModel
+                            {
+                                    Operation = domainTypeEventOperation,
+                                    Revision = body.Revision,
+                                    DomainObjectIdents = body.Ids.Split(',').Select(i => new Guid(i)).ToList()
+                            });
+        }
 
         private class RequestBodyDto
         {
@@ -59,3 +68,10 @@ namespace Framework.Configurator.Handlers
         }
     }
 }
+
+
+
+
+
+    
+

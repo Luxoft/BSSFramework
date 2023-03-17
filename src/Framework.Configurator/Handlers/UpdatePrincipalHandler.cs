@@ -12,12 +12,11 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers
 {
-    public class UpdatePrincipalHandler<TBllContext> : BaseWriteHandler, IUpdatePrincipalHandler
-        where TBllContext : IAuthorizationBLLContextContainer<IAuthorizationBLLContext>
+    public class UpdatePrincipalHandler: BaseWriteHandler, IUpdatePrincipalHandler
     {
-        private readonly IContextEvaluator<TBllContext> _contextEvaluator;
+        private readonly IAuthorizationBLLContext authorizationBllContext;
 
-        public UpdatePrincipalHandler(IContextEvaluator<TBllContext> contextEvaluator) => this._contextEvaluator = contextEvaluator;
+        public UpdatePrincipalHandler(IAuthorizationBLLContext authorizationBllContext) => this.authorizationBllContext = authorizationBllContext;
 
         public async Task Execute(HttpContext context)
         {
@@ -27,14 +26,12 @@ namespace Framework.Configurator.Handlers
             this.Update(new Guid(principalId), name);
         }
 
-        private void Update(Guid id, string newName) =>
-            this._contextEvaluator.Evaluate(
-                DBSessionMode.Write,
-                x =>
-                {
-                    var domainObject = x.Authorization.Logics.PrincipalFactory.Create(BLLSecurityMode.Edit).GetById(id, true);
-                    domainObject.Name = newName;
-                    x.Authorization.Logics.Principal.Save(domainObject);
-                });
+        private void Update(Guid id, string newName)
+        {
+            var principalBll = this.authorizationBllContext.Authorization.Logics.PrincipalFactory.Create(BLLSecurityMode.Edit);
+            var domainObject = principalBll.GetById(id, true);
+            domainObject.Name = newName;
+            principalBll.Save(domainObject);
+        }
     }
 }

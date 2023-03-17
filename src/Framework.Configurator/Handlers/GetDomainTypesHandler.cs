@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 
+using Framework.Authorization.BLL;
 using Framework.Configuration.BLL;
 using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
@@ -11,31 +12,28 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers
 {
-    public class GetDomainTypesHandler<TBllContext> : BaseReadHandler, IGetDomainTypesHandler
-        where TBllContext : DomainDriven.BLL.Configuration.IConfigurationBLLContextContainer<IConfigurationBLLContext>
+    public class GetDomainTypesHandler: BaseReadHandler, IGetDomainTypesHandler
     {
-        private readonly IContextEvaluator<TBllContext> _contextEvaluator;
+        private readonly IDomainTypeBLLFactory domainTypeBllFactory;
 
-        public GetDomainTypesHandler(IContextEvaluator<TBllContext> contextEvaluator) => this._contextEvaluator = contextEvaluator;
+        public GetDomainTypesHandler(IDomainTypeBLLFactory domainTypeBllFactory) => this.domainTypeBllFactory = domainTypeBllFactory;
 
         protected override object GetData(HttpContext context) =>
-            this._contextEvaluator.Evaluate(
-                DBSessionMode.Read,
-                x => x.Configuration.Logics.DomainTypeFactory.Create(BLLSecurityMode.View)
-                      .GetSecureQueryable()
-                      .Where(d => d.TargetSystem.IsRevision)
-                      .OrderBy(d => d.Name)
-                      .Select(
-                          d => new DomainTypeDto
-                               {
-                                   Id = d.Id,
-                                   Name = d.Name,
-                                   Namespace = d.NameSpace,
-                                   Operations = d.EventOperations
-                                                 .OrderBy(o => o.Name)
-                                                 .Select(o => new EntityDto { Id = o.Id, Name = o.Name })
-                                                 .ToList()
-                               })
-                      .ToList());
+                this.domainTypeBllFactory.Create(BLLSecurityMode.View)
+                    .GetSecureQueryable()
+                    .Where(d => d.TargetSystem.IsRevision)
+                    .OrderBy(d => d.Name)
+                    .Select(
+                            d => new DomainTypeDto
+                                 {
+                                         Id = d.Id,
+                                         Name = d.Name,
+                                         Namespace = d.NameSpace,
+                                         Operations = d.EventOperations
+                                                       .OrderBy(o => o.Name)
+                                                       .Select(o => new EntityDto { Id = o.Id, Name = o.Name })
+                                                       .ToList()
+                                 })
+                    .ToList();
     }
 }

@@ -13,38 +13,32 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers
 {
-    public class GetOperationHandler<TBllContext> : BaseReadHandler, IGetOperationHandler
-        where TBllContext : IAuthorizationBLLContextContainer<IAuthorizationBLLContext>
+    public class GetOperationHandler: BaseReadHandler, IGetOperationHandler
     {
-        private readonly IContextEvaluator<TBllContext> _contextEvaluator;
+        private readonly IAuthorizationBLLContext authorizationBllContext;
 
-        public GetOperationHandler(IContextEvaluator<TBllContext> contextEvaluator) => this._contextEvaluator = contextEvaluator;
+        public GetOperationHandler(IAuthorizationBLLContext authorizationBllContext) => this.authorizationBllContext = authorizationBllContext;
 
         protected override object GetData(HttpContext context)
         {
             var operationId = new Guid((string)context.Request.RouteValues["id"]);
-
-            return this._contextEvaluator.Evaluate(
-                DBSessionMode.Read,
-                x => new OperationDetailsDto
-                     {
-                         BusinessRoles = x.Authorization.Logics.BusinessRoleFactory.Create(BLLSecurityMode.View)
-                                          .GetSecureQueryable()
-                                          .Where(z => z.BusinessRoleOperationLinks.Any(link => link.Operation.Id == operationId))
-                                          .Select(r => r.Name)
-                                          .OrderBy(z => z)
-                                          .Distinct()
-                                          .ToList(),
-                         Principals = x.Authorization.Logics.PrincipalFactory.Create(BLLSecurityMode.View)
-                                       .GetSecureQueryable()
-                                       .Where(
-                                           p => p.Permissions.Any(
-                                               z => z.Role.BusinessRoleOperationLinks.Any(link => link.Operation.Id == operationId)))
-                                       .Select(p => p.Name)
-                                       .OrderBy(p => p)
-                                       .Distinct()
-                                       .ToList()
-                     });
+            var businessRoles = this.authorizationBllContext.Authorization.Logics.BusinessRoleFactory.Create(BLLSecurityMode.View)
+                                    .GetSecureQueryable()
+                                    .Where(z => z.BusinessRoleOperationLinks.Any(link => link.Operation.Id == operationId))
+                                    .Select(r => r.Name)
+                                    .OrderBy(z => z)
+                                    .Distinct()
+                                    .ToList();
+            
+            var principals = this.authorizationBllContext.Authorization.Logics.PrincipalFactory.Create(BLLSecurityMode.View)
+                                 .GetSecureQueryable()
+                                 .Where(p => p.Permissions.Any(z => z.Role.BusinessRoleOperationLinks.Any(link => link.Operation.Id == operationId)))
+                                 .Select(p => p.Name)
+                                 .OrderBy(p => p)
+                                 .Distinct()
+                                 .ToList();
+            
+            return new OperationDetailsDto { BusinessRoles = businessRoles, Principals = principals };
         }
     }
 }

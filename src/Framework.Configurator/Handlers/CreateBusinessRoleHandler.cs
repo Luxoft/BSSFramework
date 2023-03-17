@@ -14,12 +14,12 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers
 {
-    public class CreateBusinessRoleHandler<TBllContext> : BaseWriteHandler, ICreateBusinessRoleHandler
-        where TBllContext : IAuthorizationBLLContextContainer<IAuthorizationBLLContext>
+    public class CreateBusinessRoleHandler: BaseWriteHandler, ICreateBusinessRoleHandler
     {
-        private readonly IContextEvaluator<TBllContext> _contextEvaluator;
+        private readonly IAuthorizationBLLContext authorizationBllContext;
 
-        public CreateBusinessRoleHandler(IContextEvaluator<TBllContext> contextEvaluator) => this._contextEvaluator = contextEvaluator;
+        public CreateBusinessRoleHandler(IAuthorizationBLLContext authorizationBllContext) => this.authorizationBllContext = authorizationBllContext;
+        
 
         public async Task Execute(HttpContext context)
         {
@@ -27,19 +27,18 @@ namespace Framework.Configurator.Handlers
             this.Create(newRole);
         }
 
-        private void Create(RequestBodyDto newRole) =>
-            this._contextEvaluator.Evaluate(
-                DBSessionMode.Write,
-                x =>
-                {
-                    var domainObject = new BusinessRole { Name = newRole.Name };
-                    foreach (var operation in x.Authorization.Logics.Operation.GetListByIdents(newRole.OperationIds))
-                    {
-                        new BusinessRoleOperationLink(domainObject) { Operation = operation };
-                    }
+        private void Create(RequestBodyDto newRole)
+        {
+            var domainObject = new BusinessRole { Name = newRole.Name };
+            var operationIds = this.authorizationBllContext.Authorization.Logics.Operation.GetListByIdents(newRole.OperationIds);
+            foreach (var operation in operationIds)
+            {
+                new BusinessRoleOperationLink(domainObject) { Operation = operation };
+            }
 
-                    x.Authorization.Logics.BusinessRoleFactory.Create(BLLSecurityMode.Edit).Save(domainObject);
-                });
+            this.authorizationBllContext.Authorization.Logics.BusinessRoleFactory.Create(BLLSecurityMode.Edit).Save(domainObject);
+        }
+                
 
         private class RequestBodyDto
         {

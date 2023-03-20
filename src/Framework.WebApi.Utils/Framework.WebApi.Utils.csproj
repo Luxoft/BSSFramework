@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="App.Metrics.AspNetCore.Mvc" Version="4.3.0" />
     <PackageReference Include="App.Metrics.Reporting.InfluxDB" Version="4.3.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />

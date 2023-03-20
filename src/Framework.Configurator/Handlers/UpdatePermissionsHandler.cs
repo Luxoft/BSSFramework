@@ -189,25 +189,25 @@ public record UpdatePermissionsHandler(
         {
             get;
             set;
-        } = null!;
+        } = default!;
 
         public string RoleId
         {
             get;
             set;
-        } = null!;
+        } = default!;
 
         public string Comment
         {
             get;
             set;
-        } = null!;
+        } = default!;
 
         public List<ContextDto> Contexts
         {
             get;
             set;
-        } = null!;
+        } = default!;
 
         public class ContextDto
         {
@@ -215,13 +215,13 @@ public record UpdatePermissionsHandler(
             {
                 get;
                 set;
-            } = null!;
+            } = default!;
 
             public List<string> Entities
             {
                 get;
                 set;
-            } = null!;
+            } = default!;
         }
     }
 }

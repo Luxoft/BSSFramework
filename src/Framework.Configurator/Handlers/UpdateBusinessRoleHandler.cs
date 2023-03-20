@@ -71,6 +71,6 @@ public record UpdateBusinessRoleHandler(
         {
             get;
             set;
-        } = null!;
+        } = default!;
     }
 }

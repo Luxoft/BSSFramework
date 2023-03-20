@@ -61,6 +61,6 @@ public record ForcePushEventHandler(
         {
             get;
             set;
-        } = null!;
+        } = default!;
     }
 }

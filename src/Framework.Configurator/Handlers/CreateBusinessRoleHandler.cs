@@ -59,12 +59,12 @@ public record CreateBusinessRoleHandler(
         {
             get;
             set;
-        } = null!;
+        } = default!;
 
         public string Name
         {
             get;
             set;
-        } = null!;
+        } = default!;
     }
 }

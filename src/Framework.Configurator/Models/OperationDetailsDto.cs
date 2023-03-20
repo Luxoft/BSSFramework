@@ -2,20 +2,19 @@
 
 using Framework.Authorization.Domain;
 
-namespace Framework.Configurator.Models
-{
-    public class OperationDetailsDto
-    {
-        public List<string> BusinessRoles
-        {
-            get;
-            set;
-        }
+namespace Framework.Configurator.Models;
 
-        public List<string> Principals
-        {
-            get;
-            set;
-        }
+public class OperationDetailsDto
+{
+    public List<string> BusinessRoles
+    {
+        get;
+        set;
+    }
+
+    public List<string> Principals
+    {
+        get;
+        set;
     }
 }

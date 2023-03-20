@@ -10,28 +10,27 @@ using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
-namespace Framework.Configurator.Handlers
+namespace Framework.Configurator.Handlers;
+
+public class UpdatePrincipalHandler: BaseWriteHandler, IUpdatePrincipalHandler
 {
-    public class UpdatePrincipalHandler: BaseWriteHandler, IUpdatePrincipalHandler
+    private readonly IAuthorizationBLLContext authorizationBllContext;
+
+    public UpdatePrincipalHandler(IAuthorizationBLLContext authorizationBllContext) => this.authorizationBllContext = authorizationBllContext;
+
+    public async Task Execute(HttpContext context)
     {
-        private readonly IAuthorizationBLLContext authorizationBllContext;
+        var principalId = (string)context.Request.RouteValues["id"] ?? throw new InvalidOperationException();
+        var name = await this.ParseRequestBodyAsync<string>(context);
 
-        public UpdatePrincipalHandler(IAuthorizationBLLContext authorizationBllContext) => this.authorizationBllContext = authorizationBllContext;
+        this.Update(new Guid(principalId), name);
+    }
 
-        public async Task Execute(HttpContext context)
-        {
-            var principalId = (string)context.Request.RouteValues["id"];
-            var name = await this.ParseRequestBodyAsync<string>(context);
-
-            this.Update(new Guid(principalId), name);
-        }
-
-        private void Update(Guid id, string newName)
-        {
-            var principalBll = this.authorizationBllContext.Authorization.Logics.PrincipalFactory.Create(BLLSecurityMode.Edit);
-            var domainObject = principalBll.GetById(id, true);
-            domainObject.Name = newName;
-            principalBll.Save(domainObject);
-        }
+    private void Update(Guid id, string newName)
+    {
+        var principalBll = this.authorizationBllContext.Authorization.Logics.PrincipalFactory.Create(BLLSecurityMode.Edit);
+        var domainObject = principalBll.GetById(id, true);
+        domainObject.Name = newName;
+        principalBll.Save(domainObject);
     }
 }

@@ -10,29 +10,28 @@ using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
-namespace Framework.Configurator.Handlers
+namespace Framework.Configurator.Handlers;
+
+public class DeleteBusinessRoleHandler : BaseWriteHandler, IDeleteBusinessRoleHandler
 {
-    public class DeleteBusinessRoleHandler: BaseWriteHandler, IDeleteBusinessRoleHandler
+    private readonly IAuthorizationBLLContext authorizationBllContext;
+
+    public DeleteBusinessRoleHandler(IAuthorizationBLLContext authorizationBllContext) =>
+            this.authorizationBllContext = authorizationBllContext;
+
+    public Task Execute(HttpContext context)
     {
-        private readonly IAuthorizationBLLContext authorizationBllContext;
+        var roleId = new Guid((string)context.Request.RouteValues["id"] ?? throw new InvalidOperationException());
+        this.Delete(roleId);
 
-        public DeleteBusinessRoleHandler(IAuthorizationBLLContext authorizationBllContext) => this.authorizationBllContext = authorizationBllContext;
-        
+        return Task.CompletedTask;
+    }
 
-        public Task Execute(HttpContext context)
-        {
-            var roleId = new Guid((string)context.Request.RouteValues["id"]);
-            this.Delete(roleId);
-
-            return Task.CompletedTask;
-        }
-
-        private void Delete(Guid id)
-        {
-            var businessRoleBll = this.authorizationBllContext.Authorization.Logics
-                                      .BusinessRoleFactory.Create(BLLSecurityMode.Edit);
-            var domainObject = businessRoleBll.GetById(id, true);
-            businessRoleBll.Remove(domainObject);
-        }
+    private void Delete(Guid id)
+    {
+        var businessRoleBll = this.authorizationBllContext.Authorization.Logics
+                                  .BusinessRoleFactory.Create(BLLSecurityMode.Edit);
+        var domainObject = businessRoleBll.GetById(id, true);
+        businessRoleBll.Remove(domainObject);
     }
 }

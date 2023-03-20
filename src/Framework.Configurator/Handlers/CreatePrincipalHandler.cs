@@ -9,19 +9,20 @@ using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
-namespace Framework.Configurator.Handlers
+namespace Framework.Configurator.Handlers;
+
+public class CreatePrincipalHandler : BaseWriteHandler, ICreatePrincipalHandler
+
 {
-    public class CreatePrincipalHandler: BaseWriteHandler, ICreatePrincipalHandler
-    
+    private readonly IAuthorizationBLLContext authorizationBllContext;
+
+    public CreatePrincipalHandler(IAuthorizationBLLContext authorizationBllContext) =>
+            this.authorizationBllContext = authorizationBllContext;
+
+    public async Task Execute(HttpContext context)
     {
-        private readonly IAuthorizationBLLContext authorizationBllContext;
-
-        public CreatePrincipalHandler(IAuthorizationBLLContext authorizationBllContext) => this.authorizationBllContext = authorizationBllContext;
-
-        public async Task Execute(HttpContext context)
-        {
-            var name = await this.ParseRequestBodyAsync<string>(context);
-            this.authorizationBllContext.Authorization.Logics.PrincipalFactory.Create(BLLSecurityMode.Edit).Save(new Principal { Name = name });
-        }
+        var name = await this.ParseRequestBodyAsync<string>(context);
+        this.authorizationBllContext.Authorization.Logics.PrincipalFactory.Create(BLLSecurityMode.Edit)
+            .Save(new Principal { Name = name });
     }
 }

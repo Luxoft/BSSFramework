@@ -20,10 +20,7 @@ public class GetSystemConstantsHandler : BaseReadHandler, IGetSystemConstantsHan
             this.systemConstantBllFactory.Create(BLLSecurityMode.View)
                 .GetSecureQueryable()
                 .Select(
-                        s => new SystemConstantDto
-                             {
-                                     Id = s.Id, Name = s.Code, Description = s.Description, Value = s.Value
-                             })
+                        s => new SystemConstantDto { Id = s.Id, Name = s.Code, Description = s.Description, Value = s.Value })
                 .OrderBy(s => s.Name)
                 .ToList();
 }

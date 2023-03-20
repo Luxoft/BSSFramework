@@ -48,17 +48,18 @@ public static class ConfiguratorDependencyInjection
             string route = "/admin/configurator") =>
             app
                     .UseMiddleware<ConfiguratorMiddleware>(route)
-                    // TODO: replace to another usage like Swashbuckle swagger  https://github.com/domaindrivendev/Swashbuckle.AspNetCore/blob/d3277cbb10cb2b649f8cd676aca8cefca458153b/src/Swashbuckle.AspNetCore.SwaggerUI/SwaggerUIMiddleware.cs#L75
-                    .UseFileServer(
-                                   new FileServerOptions
-                                   {
-                                           RequestPath = route,
-                                           FileProvider = new EmbeddedFileProvider(
-                                            typeof(ConfiguratorDependencyInjection).GetTypeInfo().Assembly,
-                                            EmbeddedFileNamespace)
-                                   })
+                    .UseStaticFiles(
+                                    new StaticFileOptions
+                                    {
+                                            RequestPath = route,
+                                            FileProvider = new EmbeddedFileProvider(
+                                                                                    typeof(ConfiguratorDependencyInjection)
+                                                                                            .GetTypeInfo()
+                                                                                            .Assembly,
+                                                                                    EmbeddedFileNamespace)
+                                    })
                     .UseEndpoints(x => x.MapApi(route));
-    
+
     private static void MapApi(this IEndpointRouteBuilder endpointsBuilder, string route) =>
             endpointsBuilder
                     .Get<IGetSystemConstantsHandler>($"{route}/api/constants")

@@ -1,6 +1,5 @@
-﻿namespace Framework.Configurator.Interfaces
+﻿namespace Framework.Configurator.Interfaces;
+
+public interface IGetOperationsHandler : IHandler
 {
-    public interface IGetOperationsHandler : IHandler
-    {
-    }
 }

@@ -1,11 +1,10 @@
-﻿namespace Framework.Configurator.Models
+﻿namespace Framework.Configurator.Models;
+
+public class OperationDto : EntityDto
 {
-    public class OperationDto : EntityDto
+    public string Description
     {
-        public string Description
-        {
-            get;
-            set;
-        }
+        get;
+        set;
     }
 }

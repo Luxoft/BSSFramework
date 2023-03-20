@@ -1,17 +1,16 @@
-﻿namespace Framework.Configurator.Models
-{
-    public class SystemConstantDto : EntityDto
-    {
-        public string Description
-        {
-            get;
-            set;
-        }
+﻿namespace Framework.Configurator.Models;
 
-        public string Value
-        {
-            get;
-            set;
-        }
+public class SystemConstantDto : EntityDto
+{
+    public string Description
+    {
+        get;
+        set;
+    }
+
+    public string Value
+    {
+        get;
+        set;
     }
 }

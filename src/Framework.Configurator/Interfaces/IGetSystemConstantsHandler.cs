@@ -1,6 +1,5 @@
-﻿namespace Framework.Configurator.Interfaces
+﻿namespace Framework.Configurator.Interfaces;
+
+public interface IGetSystemConstantsHandler : IHandler
 {
-    public interface IGetSystemConstantsHandler : IHandler
-    {
-    }
 }

@@ -19,7 +19,7 @@ public class GetBusinessRoleContextEntitiesHandler : BaseReadHandler, IGetBusine
 
     protected override object GetData(HttpContext context)
     {
-        var entityTypeId = new Guid((string)context.Request.RouteValues["id"]);
+        var entityTypeId = new Guid((string)context.Request.RouteValues["id"] ?? throw new InvalidOperationException());
         var searchToken = context.Request.Query["searchToken"];
 
         var entityType = this.authorizationBllContext.Authorization.Logics.EntityTypeFactory

@@ -13,65 +13,57 @@ using Framework.DomainDriven.BLL.Security;
 
 using Microsoft.AspNetCore.Http;
 
-namespace Framework.Configurator.Handlers
+namespace Framework.Configurator.Handlers;
+
+public class ForcePushEventHandler : BaseWriteHandler, IForcePushEventHandler
 {
-    public class ForcePushEventHandler: BaseWriteHandler, IForcePushEventHandler
+    private readonly IDomainTypeBLLFactory domainTypeBllFactory;
+
+    private readonly IConfigurationBLLFactoryContainer configurationBllFactoryContainer;
+
+    public ForcePushEventHandler(
+            IDomainTypeBLLFactory domainTypeBllFactory,
+            IConfigurationBLLFactoryContainer configurationBllFactoryContainer)
     {
-        private readonly IDomainTypeBLLFactory domainTypeBllFactory;
+        this.domainTypeBllFactory = domainTypeBllFactory;
+        this.configurationBllFactoryContainer = configurationBllFactoryContainer;
+    }
 
-        private readonly IConfigurationBLLFactoryContainer configurationBllFactoryContainer;
-        
+    public async Task Execute(HttpContext context)
+    {
+        var operationId = (string)context.Request.RouteValues["operationId"] ?? throw new InvalidOperationException();
+        var body = await this.ParseRequestBodyAsync<RequestBodyDto>(context);
 
-        public ForcePushEventHandler(IDomainTypeBLLFactory domainTypeBllFactory,
-                                     IConfigurationBLLFactoryContainer configurationBllFactoryContainer)
+        this.ForcePush(new Guid(operationId), body);
+    }
+
+    private void ForcePush(Guid operationId, RequestBodyDto body)
+    {
+        var domainTypeEventOperation = this.configurationBllFactoryContainer.Default.Create<DomainTypeEventOperation>()
+                                           .GetById(operationId, true);
+
+        this.domainTypeBllFactory.Create(ConfigurationSecurityOperationCode.ForceDomainTypeEvent)
+            .ForceEvent(
+                        new DomainTypeEventModel
+                        {
+                                Operation = domainTypeEventOperation,
+                                Revision = body.Revision,
+                                DomainObjectIdents = body.Ids.Split(',').Select(i => new Guid(i)).ToList()
+                        });
+    }
+
+    private class RequestBodyDto
+    {
+        public long? Revision
         {
-            this.domainTypeBllFactory = domainTypeBllFactory;
-            this.configurationBllFactoryContainer = configurationBllFactoryContainer;
-
+            get;
+            set;
         }
 
-        public async Task Execute(HttpContext context)
+        public string Ids
         {
-            var operationId = (string)context.Request.RouteValues["operationId"];
-            var body = await this.ParseRequestBodyAsync<RequestBodyDto>(context);
-
-            this.ForcePush(new Guid(operationId), body);
-        }
-
-        private void ForcePush(Guid operationId, RequestBodyDto body)
-        {
-            var domainTypeEventOperation = this.configurationBllFactoryContainer.Default.Create<DomainTypeEventOperation>().GetById(operationId, true);
-
-            this.domainTypeBllFactory.Create(ConfigurationSecurityOperationCode.ForceDomainTypeEvent)
-                .ForceEvent(
-                            new DomainTypeEventModel
-                            {
-                                    Operation = domainTypeEventOperation,
-                                    Revision = body.Revision,
-                                    DomainObjectIdents = body.Ids.Split(',').Select(i => new Guid(i)).ToList()
-                            });
-        }
-
-        private class RequestBodyDto
-        {
-            public long? Revision
-            {
-                get;
-                set;
-            }
-
-            public string Ids
-            {
-                get;
-                set;
-            }
+            get;
+            set;
         }
     }
 }
-
-
-
-
-
-    
-

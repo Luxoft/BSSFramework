@@ -5,16 +5,15 @@ using Framework.Configurator.Interfaces;
 
 using Microsoft.AspNetCore.Http;
 
-namespace Framework.Configurator.Handlers
-{
-    public abstract class BaseReadHandler : IHandler
-    {
-        public async Task Execute(HttpContext context)
-        {
-            var data = this.GetData(context);
-            await context.Response.WriteAsync(JsonSerializer.Serialize(data));
-        }
+namespace Framework.Configurator.Handlers;
 
-        protected abstract object GetData(HttpContext context);
+public abstract class BaseReadHandler : IHandler
+{
+    public async Task Execute(HttpContext context)
+    {
+        var data = this.GetData(context);
+        await context.Response.WriteAsync(JsonSerializer.Serialize(data));
     }
+
+    protected abstract object GetData(HttpContext context);
 }

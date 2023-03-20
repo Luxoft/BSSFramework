@@ -15,53 +15,54 @@ using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
-namespace Framework.Configurator.Handlers
+namespace Framework.Configurator.Handlers;
+
+public class UpdateBusinessRoleHandler : BaseWriteHandler, IUpdateBusinessRoleHandler
 {
-    public class UpdateBusinessRoleHandler: BaseWriteHandler, IUpdateBusinessRoleHandler
+    private readonly IAuthorizationBLLContext authorizationBllContext;
+
+    public UpdateBusinessRoleHandler(IAuthorizationBLLContext authorizationBllContext) =>
+            this.authorizationBllContext = authorizationBllContext;
+
+    public async Task Execute(HttpContext context)
     {
-        private readonly IAuthorizationBLLContext authorizationBllContext;
+        var roleId = (string)context.Request.RouteValues["id"] ?? throw new InvalidOperationException();
+        var role = await this.ParseRequestBodyAsync<RequestBodyDto>(context);
 
-        public UpdateBusinessRoleHandler(IAuthorizationBLLContext authorizationBllContext) => this.authorizationBllContext = authorizationBllContext;
+        this.Update(new Guid(roleId), role);
+    }
 
-        public async Task Execute(HttpContext context)
+    [SuppressMessage("SonarQube", "S2436", Justification = "It's ok. BusinessRoleOperationLink automatically link to BusinessRole")]
+    private void Update(Guid id, RequestBodyDto role)
+    {
+        var businessRoleBll = this.authorizationBllContext.Authorization.Logics
+                                  .BusinessRoleFactory.Create(BLLSecurityMode.Edit);
+
+        var domainObject = businessRoleBll.GetById(id, true);
+        
+        var mergeResult =
+                domainObject.BusinessRoleOperationLinks.GetMergeResult(
+                                                                       role.OperationIds,
+                                                                       s => s.Operation.Id,
+                                                                       s => s);
+
+        var operations = this.authorizationBllContext.Authorization.Logics.Operation.GetListByIdents(mergeResult.AddingItems);
+
+        foreach (var operation in operations)
         {
-            var roleId = (string)context.Request.RouteValues["id"];
-            var role = await this.ParseRequestBodyAsync<RequestBodyDto>(context);
-
-            this.Update(new Guid(roleId), role);
+            var _ = new BusinessRoleOperationLink(domainObject) { Operation = operation };
         }
 
-        [SuppressMessage("SonarQube", "S2436", Justification = "It's ok. BusinessRoleOperationLink automatically link to BusinessRole")]
-        private void Update(Guid id, RequestBodyDto role)
+        domainObject.RemoveDetails(mergeResult.RemovingItems);
+        businessRoleBll.Save(domainObject);
+    }
+
+    private class RequestBodyDto
+    {
+        public List<Guid> OperationIds
         {
-            var businessRoleBll = this.authorizationBllContext.Authorization.Logics
-                                      .BusinessRoleFactory.Create(BLLSecurityMode.Edit);
-            
-            var domainObject = businessRoleBll.GetById(id, true);
-            var mergeResult =
-                    domainObject.BusinessRoleOperationLinks.GetMergeResult(
-                     role.OperationIds,
-                     s => s.Operation.Id,
-                     s => s);
-
-            var operations = this.authorizationBllContext.Authorization.Logics.Operation.GetListByIdents(mergeResult.AddingItems);
-            
-            foreach (var operation in operations)
-            {
-                new BusinessRoleOperationLink(domainObject) { Operation = operation };
-            }
-
-            domainObject.RemoveDetails(mergeResult.RemovingItems);
-            businessRoleBll.Save(domainObject);
-        }
-
-        private class RequestBodyDto
-        {
-            public List<Guid> OperationIds
-            {
-                get;
-                set;
-            }
+            get;
+            set;
         }
     }
 }

@@ -1,6 +1,5 @@
-﻿namespace Framework.Configurator.Interfaces
+﻿namespace Framework.Configurator.Interfaces;
+
+public interface IGetBusinessRoleContextEntitiesHandler : IHandler
 {
-    public interface IGetBusinessRoleContextEntitiesHandler : IHandler
-    {
-    }
 }

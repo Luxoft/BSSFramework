@@ -20,7 +20,7 @@ public class GetPrincipalHandler : BaseReadHandler, IGetPrincipalHandler
 
     protected override object GetData(HttpContext context)
     {
-        var principalId = new Guid((string)context.Request.RouteValues["id"]);
+        var principalId = new Guid((string)context.Request.RouteValues["id"] ?? throw new InvalidOperationException());
 
         var permissions = this.GetPermissions(principalId);
         var contexts = this.GetContexts(permissions);
@@ -52,7 +52,7 @@ public class GetPrincipalHandler : BaseReadHandler, IGetPrincipalHandler
         var result = new Dictionary<Guid, (string Context, Dictionary<Guid, string> Entities)>();
         foreach (var group in permissions.SelectMany(x => x.Contexts).GroupBy(x => x.Key, x => x.Value))
         {
-            var entityType = this.authorizationBllContext.Authorization.Logics.EntityType.GetById(group.Key);
+            var entityType = this.authorizationBllContext.Authorization.Logics.EntityType.GetById(group.Key, true);
             var entities = this.authorizationBllContext.Authorization.ExternalSource.GetTyped(entityType)
                                .GetSecurityEntitiesByIdents(group.Distinct().ToList())
                                .ToDictionary(e => e.Id, e => e.Name);
@@ -81,19 +81,15 @@ public class GetPrincipalHandler : BaseReadHandler, IGetPrincipalHandler
                                                                           Id = g.Key,
                                                                           Name = contexts[g.Key].Context,
                                                                           Entities = g
-                                                                                  .Select(
-                                                                                   e => new EntityDto
-                                                                                       {
-                                                                                               Id = e,
-                                                                                               Name =
-                                                                                                       contexts
-                                                                                                                       [g
-                                                                                                                               .Key]
-                                                                                                               .Entities
-                                                                                                                       [e]
-                                                                                       })
-                                                                                  .OrderBy(e => e.Name)
-                                                                                  .ToList()
+                                                                                     .Select(
+                                                                                      e => new EntityDto
+                                                                                          {
+                                                                                                  Id = e,
+                                                                                                  Name = contexts[g.Key]
+                                                                                                          .Entities[e]
+                                                                                          })
+                                                                                     .OrderBy(e => e.Name)
+                                                                                     .ToList()
                                                                   })
                                                      .OrderBy(c => c.Name)
                                                      .ToList()

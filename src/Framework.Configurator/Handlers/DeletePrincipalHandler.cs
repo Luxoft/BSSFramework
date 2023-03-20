@@ -10,26 +10,27 @@ using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
-namespace Framework.Configurator.Handlers
+namespace Framework.Configurator.Handlers;
+
+public class DeletePrincipalHandler : BaseWriteHandler, IDeletePrincipalHandler
 {
-    public class DeletePrincipalHandler: BaseWriteHandler, IDeletePrincipalHandler
+    private readonly IAuthorizationBLLContext authorizationBllContext;
+
+    public DeletePrincipalHandler(IAuthorizationBLLContext authorizationBllContext) =>
+            this.authorizationBllContext = authorizationBllContext;
+
+    public Task Execute(HttpContext context)
     {
-        private readonly IAuthorizationBLLContext authorizationBllContext;
-        public DeletePrincipalHandler(IAuthorizationBLLContext authorizationBllContext) => this.authorizationBllContext = authorizationBllContext;
+        var principalId = new Guid((string)context.Request.RouteValues["id"] ?? throw new InvalidOperationException());
+        this.Delete(principalId);
 
-        public Task Execute(HttpContext context)
-        {
-            var principalId = new Guid((string)context.Request.RouteValues["id"]);
-            this.Delete(principalId);
+        return Task.CompletedTask;
+    }
 
-            return Task.CompletedTask;
-        }
-
-        private void Delete(Guid id)
-        {
-            var principalBll = this.authorizationBllContext.Authorization.Logics.PrincipalFactory.Create(BLLSecurityMode.Edit);
-            var domainObject = principalBll.GetById(id, true);
-            principalBll.Remove(domainObject);
-        }
+    private void Delete(Guid id)
+    {
+        var principalBll = this.authorizationBllContext.Authorization.Logics.PrincipalFactory.Create(BLLSecurityMode.Edit);
+        var domainObject = principalBll.GetById(id, true);
+        principalBll.Remove(domainObject);
     }
 }

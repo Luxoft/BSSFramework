@@ -1,19 +1,18 @@
 ﻿using System;
 
-namespace Framework.Configurator.Models
-{
-    public class EntityDto
-    {
-        public Guid Id
-        {
-            get;
-            set;
-        }
+namespace Framework.Configurator.Models;
 
-        public string Name
-        {
-            get;
-            set;
-        }
+public class EntityDto
+{
+    public Guid Id
+    {
+        get;
+        set;
+    }
+
+    public string Name
+    {
+        get;
+        set;
     }
 }

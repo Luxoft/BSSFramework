@@ -1,6 +1,5 @@
-﻿namespace Framework.Configurator.Interfaces
+﻿namespace Framework.Configurator.Interfaces;
+
+public interface IStopRunAsHandler : IHandler
 {
-    public interface IStopRunAsHandler : IHandler
-    {
-    }
 }

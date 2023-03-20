@@ -2,10 +2,9 @@
 
 using Microsoft.AspNetCore.Http;
 
-namespace Framework.Configurator.Interfaces
+namespace Framework.Configurator.Interfaces;
+
+public interface IHandler
 {
-    public interface IHandler
-    {
-        Task Execute(HttpContext context);
-    }
+    Task Execute(HttpContext context);
 }

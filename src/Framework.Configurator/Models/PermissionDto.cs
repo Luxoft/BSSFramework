@@ -1,32 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Framework.Configurator.Models
+namespace Framework.Configurator.Models;
+
+public class PermissionDto
 {
-    public class PermissionDto
+    public Guid Id
     {
-        public Guid Id
-        {
-            get;
-            set;
-        }
+        get;
+        set;
+    }
 
-        public string Role
-        {
-            get;
-            set;
-        }
+    public string Role
+    {
+        get;
+        set;
+    }
 
-        public string Comment
-        {
-            get;
-            set;
-        }
+    public string Comment
+    {
+        get;
+        set;
+    }
 
-        public List<ContextDto> Contexts
-        {
-            get;
-            set;
-        }
+    public List<ContextDto> Contexts
+    {
+        get;
+        set;
     }
 }

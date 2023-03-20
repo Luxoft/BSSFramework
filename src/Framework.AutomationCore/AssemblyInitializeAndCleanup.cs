@@ -4,6 +4,7 @@ using System.Diagnostics;
 using Automation.Enums;
 using Automation.Utils;
 using Automation.Utils.DatabaseUtils;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation;
@@ -11,11 +12,12 @@ namespace Automation;
 public class AssemblyInitializeAndCleanup
 {
     private readonly Action<IServiceProvider> releaseServiceProviderAction;
+
     private readonly Func<IServiceProvider> getServiceProviderAction;
 
     public AssemblyInitializeAndCleanup(
-        Func<IServiceProvider> getServiceProviderAction,
-        Action<IServiceProvider> releaseServiceProviderAction)
+            Func<IServiceProvider> getServiceProviderAction,
+            Action<IServiceProvider> releaseServiceProviderAction)
     {
         this.getServiceProviderAction = getServiceProviderAction;
         this.releaseServiceProviderAction = releaseServiceProviderAction;
@@ -38,7 +40,7 @@ public class AssemblyInitializeAndCleanup
 
     public void EnvironmentInitialize()
     {
-        var serviceProvider = getServiceProviderAction.Invoke();
+        var serviceProvider = this.getServiceProviderAction.Invoke();
         var configUtil = serviceProvider.GetRequiredService<ConfigUtil>();
         var databaseGenerator = serviceProvider.GetRequiredService<TestDatabaseGenerator>();
 
@@ -75,7 +77,7 @@ public class AssemblyInitializeAndCleanup
 
     public void EnvironmentCleanup()
     {
-        var serviceProvider = getServiceProviderAction.Invoke();
+        var serviceProvider = this.getServiceProviderAction.Invoke();
         var configUtil = serviceProvider.GetRequiredService<ConfigUtil>();
         var databaseGenerator = serviceProvider.GetRequiredService<TestDatabaseGenerator>();
 
@@ -83,7 +85,7 @@ public class AssemblyInitializeAndCleanup
         {
             case TestRunMode.DefaultRunModeOnEmptyDatabase:
                 RunAction("Check Test Database", databaseGenerator.CheckTestDatabase);
-                RunAction("Drop Databases",databaseGenerator.DatabaseContext.Drop);
+                RunAction("Drop Databases", databaseGenerator.DatabaseContext.Drop);
                 RunAction("Delete detached files", databaseGenerator.DeleteDetachedFiles);
                 RunAction("Delete LocalDB Instance", databaseGenerator.DeleteLocalDb);
                 break;

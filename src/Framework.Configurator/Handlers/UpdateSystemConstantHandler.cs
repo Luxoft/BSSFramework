@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Framework.Configuration.BLL;
@@ -11,16 +12,12 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public class UpdateSystemConstantHandler : BaseWriteHandler, IUpdateSystemConstantHandler
+public record UpdateSystemConstantHandler(ISystemConstantBLLFactory SystemConstantBllFactory) : BaseWriteHandler,
+    IUpdateSystemConstantHandler
 {
-    private readonly ISystemConstantBLLFactory systemConstantBllFactory;
-
-    public UpdateSystemConstantHandler(ISystemConstantBLLFactory systemConstantBllFactory) =>
-            this.systemConstantBllFactory = systemConstantBllFactory;
-
-    public async Task Execute(HttpContext context)
+    public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        var constantId = (string)context.Request.RouteValues["id"] ?? throw new InvalidOperationException();
+        var constantId = (string?)context.Request.RouteValues["id"] ?? throw new InvalidOperationException();
         var newValue = await this.ParseRequestBodyAsync<string>(context);
 
         this.Update(new Guid(constantId), newValue);
@@ -28,7 +25,7 @@ public class UpdateSystemConstantHandler : BaseWriteHandler, IUpdateSystemConsta
 
     private void Update(Guid id, string newValue)
     {
-        var systemConstantBll = this.systemConstantBllFactory.Create(BLLSecurityMode.Edit);
+        var systemConstantBll = this.SystemConstantBllFactory.Create(BLLSecurityMode.Edit);
         var systemConstant = systemConstantBll.GetById(id, true);
         systemConstant.Value = newValue;
         systemConstantBll.Save(systemConstant);

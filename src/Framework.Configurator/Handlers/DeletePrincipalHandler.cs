@@ -1,36 +1,40 @@
 ﻿using System;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
-using Framework.Authorization.BLL;
+using Framework.Authorization.BLL.Core.Context;
+using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
+using NHibernate.Linq;
+
 namespace Framework.Configurator.Handlers;
 
-public class DeletePrincipalHandler : BaseWriteHandler, IDeletePrincipalHandler
+public record DeletePrincipalHandler(
+        IAuthorizationRepositoryFactory<Principal> PrincipalRepositoryFactory,
+        IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IDeletePrincipalHandler
 {
-    private readonly IAuthorizationBLLContext authorizationBllContext;
-
-    public DeletePrincipalHandler(IAuthorizationBLLContext authorizationBllContext) =>
-            this.authorizationBllContext = authorizationBllContext;
-
-    public Task Execute(HttpContext context)
+    public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        var principalId = new Guid((string)context.Request.RouteValues["id"] ?? throw new InvalidOperationException());
-        this.Delete(principalId);
-
-        return Task.CompletedTask;
+        var principalId = new Guid((string?)context.Request.RouteValues["id"] ?? throw new InvalidOperationException());
+        await this.Delete(principalId, cancellationToken);
     }
 
-    private void Delete(Guid id)
+    private async Task Delete(Guid id, CancellationToken cancellationToken)
     {
-        var principalBll = this.authorizationBllContext.Authorization.Logics.PrincipalFactory.Create(BLLSecurityMode.Edit);
-        var domainObject = principalBll.GetById(id, true);
-        principalBll.Remove(domainObject);
+        var principalBll = this.PrincipalRepositoryFactory.Create(BLLSecurityMode.Edit);
+        var domainObject = await principalBll.GetQueryable()
+                                             .Where(x => x.Id == id)
+                                             .SingleAsync(cancellationToken);
+        await principalBll.RemoveAsync(domainObject, cancellationToken);
+
+        if (this.ConfiguratorIntegrationEvents != null)
+        {
+            await this.ConfiguratorIntegrationEvents.PrincipalRemovedAsync(domainObject, cancellationToken);
+        }
     }
 }

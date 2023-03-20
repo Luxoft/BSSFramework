@@ -1,19 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-<PropertyGroup>
-  <PackageId>Luxoft.Framework.Configurator</PackageId>
-</PropertyGroup>
-  
-<ItemGroup>
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.Configurator</PackageId>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="configurator-ui/dist/**/*" Exclude="**/*/*.txt;" />
-</ItemGroup>
+  </ItemGroup>
 
-<ItemGroup>
+  <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
- </ItemGroup>
+  </ItemGroup>
 
-<ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\_Configuration\Framework.Configuration.BLL.Core\Framework.Configuration.BLL.Core.csproj" />
-</ItemGroup>
+  </ItemGroup>
 
 </Project>

@@ -1,126 +1,183 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
-using Framework.Authorization.BLL;
+using Framework.Authorization.BLL.Core.Context;
 using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.Core;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
 using Framework.Persistent;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
+using NHibernate.Linq;
+
 namespace Framework.Configurator.Handlers;
 
-public class UpdatePermissionsHandler : BaseWriteHandler, IUpdatePermissionsHandler
+public record UpdatePermissionsHandler(
+        IAuthorizationRepositoryFactory<Principal> PrincipalRepositoryFactory,
+        IAuthorizationRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
+        IAuthorizationRepositoryFactory<Permission> PermissionRepositoryFactory,
+        IAuthorizationRepositoryFactory<PermissionFilterItem> PermissionFilterItemRepositoryFactory,
+        IAuthorizationRepositoryFactory<PermissionFilterEntity> PermissionFilterEntityRepositoryFactory,
+        IAuthorizationRepositoryFactory<EntityType> EntityTypeRepositoryFactory,
+        IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IUpdatePermissionsHandler
 {
-    private readonly IAuthorizationBLLContext authorizationBllContext;
-
-    public UpdatePermissionsHandler(IAuthorizationBLLContext authorizationBllContext) => this.authorizationBllContext = authorizationBllContext;
-
-    public async Task Execute(HttpContext context)
+    public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        var principalId = (string)context.Request.RouteValues["id"] ?? throw new InvalidOperationException();
+        var principalId = (string?)context.Request.RouteValues["id"] ?? throw new InvalidOperationException();
         var permissions = await this.ParseRequestBodyAsync<List<RequestBodyDto>>(context);
 
-        this.Update(new Guid(principalId), permissions);
+        await this.Update(new Guid(principalId), permissions, cancellationToken);
     }
 
-    private void Update(Guid id, IReadOnlyCollection<RequestBodyDto> permissions)
+    private async Task Update(Guid id, IEnumerable<RequestBodyDto> permissions, CancellationToken cancellationToken)
     {
-            
         var cache = new HashSet<PermissionFilterEntity>();
-        var principal =  this.authorizationBllContext.Authorization.Logics.PrincipalFactory.Create(BLLSecurityMode.Edit).GetById(id, true);
-                    
+        var principalRepository = this.PrincipalRepositoryFactory.Create(BLLSecurityMode.Edit);
+        var principal = await principalRepository
+                              .GetQueryable()
+                              .Where(x => x.Id == id)
+                              .SingleAsync(cancellationToken);
+
         var mergeResult = principal.Permissions.GetMergeResult(
                                                                permissions,
                                                                p => p.Id,
-                                                               p => string.IsNullOrWhiteSpace(p.PermissionId) ? Guid.NewGuid() : new Guid(p.PermissionId));
+                                                               p => string.IsNullOrWhiteSpace(p.PermissionId)
+                                                                            ? Guid.NewGuid()
+                                                                            : new Guid(p.PermissionId));
 
-        this.CreatePermissions(principal, mergeResult.AddingItems, cache);
-        this.UpdatePermissions( mergeResult.CombineItems, cache);
+        await this.CreatePermissions(principal, mergeResult.AddingItems, cache, cancellationToken);
+        await this.UpdatePermissions(mergeResult.CombineItems, cache, cancellationToken);
         principal.RemoveDetails(mergeResult.RemovingItems);
 
-        this.authorizationBllContext.Authorization.Logics.Principal.Save(principal);
-
+        await principalRepository.SaveAsync(principal, cancellationToken);
+        if (this.ConfiguratorIntegrationEvents != null)
+        {
+            foreach (var removingItem in mergeResult.RemovingItems)
+            {
+                await this.ConfiguratorIntegrationEvents.PermissionRemovedAsync(removingItem, cancellationToken);
+            }
+        }
     }
 
-    private void CreatePermissions(
+    private async Task CreatePermissions(
             Principal principal,
             IEnumerable<RequestBodyDto> dtoModels,
-            ISet<PermissionFilterEntity> cache)
+            ISet<PermissionFilterEntity> cache,
+            CancellationToken cancellationToken)
     {
         foreach (var dto in dtoModels)
         {
             var permission = new Permission(principal)
                              {
-                                     Role = this.authorizationBllContext.Authorization.Logics.BusinessRole.GetById(new Guid(dto.RoleId), true),
+                                     Role =
+                                             await this.BusinessRoleRepositoryFactory.Create()
+                                                       .GetQueryable()
+                                                       .Where(x => x.Id == new Guid(dto.RoleId))
+                                                       .SingleAsync(cancellationToken),
                                      Comment = dto.Comment,
                                      Status = PermissionStatus.Approved,
                                      Active = true
                              };
-                
-            this.authorizationBllContext.Authorization.Logics.PermissionFactory.Create(BLLSecurityMode.Edit).Save(permission);
 
-            var filterEntities = dto.Contexts.SelectMany(
-                                                         c => c.Entities.Select(
-                                                                                e => this.GetOrCreatePermissionFilterEntity((TypeId: new Guid(c.Id), ObjectId: new Guid(e)), cache)));
+            await this.PermissionRepositoryFactory.Create(BLLSecurityMode.Edit).SaveAsync(permission, cancellationToken);
 
-            foreach (var filterEntity in filterEntities)
+            foreach (var context in dto.Contexts)
             {
-                this.authorizationBllContext.Authorization.Logics.PermissionFilterItem.Save(new PermissionFilterItem(permission, filterEntity));
+                foreach (var contextEntity in context.Entities)
+                {
+                    var filterEntity = await this.GetOrCreatePermissionFilterEntity(
+                                                                                    (TypeId: new Guid(context.Id),
+                                                                                        ObjectId: new Guid(contextEntity)),
+                                                                                    cache,
+                                                                                    cancellationToken);
+
+                    await this.PermissionFilterItemRepositoryFactory
+                              .Create()
+                              .SaveAsync(new PermissionFilterItem(permission, filterEntity), cancellationToken);
+                }
+            }
+
+            if (this.ConfiguratorIntegrationEvents != null)
+            {
+                await this.ConfiguratorIntegrationEvents.PermissionCreatedAsync(permission, cancellationToken);
             }
         }
     }
 
-    private void UpdatePermissions(
+    private async Task UpdatePermissions(
             IList<TupleStruct<Permission, RequestBodyDto>> updatedItems,
-            ISet<PermissionFilterEntity> cache)
+            ISet<PermissionFilterEntity> cache,
+            CancellationToken cancellationToken)
     {
         foreach (var item in updatedItems)
         {
             item.Item1.Comment = item.Item2.Comment;
 
-            var mergeResult = item.Item1.FilterItems.GetMergeResult(
-                                                                    item.Item2.Contexts.SelectMany(x => x.Entities.Select(e => new { TypeId = new Guid(x.Id), ObjectId = new Guid(e) })),
-                                                                    x => new { TypeId = x.EntityType.Id, ObjectId = x.Entity.EntityId },
-                                                                    x => new { x.TypeId, x.ObjectId });
+            var mergeResult = item.Item1.FilterItems
+                                  .GetMergeResult(
+                                                  item.Item2.Contexts.SelectMany(
+                                                                                 x => x.Entities.Select(
+                                                                                  e => new
+                                                                                       {
+                                                                                               TypeId = new Guid(x.Id),
+                                                                                               ObjectId = new Guid(e)
+                                                                                       })),
+                                                  x => new { TypeId = x.EntityType.Id, ObjectId = x.Entity.EntityId },
+                                                  x => new { x.TypeId, x.ObjectId });
 
-            var filterEntities = mergeResult.AddingItems.Select(
-                                                                x => this.GetOrCreatePermissionFilterEntity((x.TypeId, x.ObjectId), cache));
-
-            foreach (var filterEntity in filterEntities)
+            foreach (var filterEntityItem in mergeResult.AddingItems)
             {
-                this.authorizationBllContext.Authorization.Logics.PermissionFilterItem.Save(new PermissionFilterItem(item.Item1, filterEntity));
+                var filterEntity = await this.GetOrCreatePermissionFilterEntity(
+                                                                                (filterEntityItem.TypeId,
+                                                                                    filterEntityItem.ObjectId),
+                                                                                cache,
+                                                                                cancellationToken);
+                await this.PermissionFilterItemRepositoryFactory.Create()
+                          .SaveAsync(
+                                     new PermissionFilterItem(item.Item1, filterEntity),
+                                     cancellationToken);
             }
 
             item.Item1.RemoveDetails(mergeResult.RemovingItems);
 
-            this.authorizationBllContext.Authorization.Logics.PermissionFactory.Create(BLLSecurityMode.Edit).Save(item.Item1);
+            await this.PermissionRepositoryFactory.Create(BLLSecurityMode.Edit).SaveAsync(item.Item1, cancellationToken);
+
+            if (this.ConfiguratorIntegrationEvents != null)
+            {
+                await this.ConfiguratorIntegrationEvents.PermissionChangedAsync(item.Item1, cancellationToken);
+            }
         }
     }
 
-    private  PermissionFilterEntity GetOrCreatePermissionFilterEntity(
+    private async Task<PermissionFilterEntity> GetOrCreatePermissionFilterEntity(
             (Guid TypeId, Guid ObjectId) key,
-            ISet<PermissionFilterEntity> cache)
+            ISet<PermissionFilterEntity> cache,
+            CancellationToken cancellationToken)
     {
         var result = cache.SingleOrDefault(x => x.EntityType.Id == key.TypeId && x.EntityId == key.ObjectId)
-                     ?? this.authorizationBllContext.Authorization.Logics.PermissionFilterEntity.GetUnsecureQueryable()
-                            .SingleOrDefault(x => x.EntityType.Id == key.TypeId && x.EntityId == key.ObjectId);
+                     ?? await this.PermissionFilterEntityRepositoryFactory.Create()
+                                  .GetQueryable()
+                                  .SingleOrDefaultAsync(
+                                                        x => x.EntityType.Id == key.TypeId && x.EntityId == key.ObjectId,
+                                                        cancellationToken);
         if (result != null)
         {
             return result;
         }
 
-        var entityType = this.authorizationBllContext.Authorization.Logics.EntityType.GetById(key.TypeId, true);
+        var entityType = await this.EntityTypeRepositoryFactory
+                                   .Create()
+                                   .GetQueryable()
+                                   .Where(x => x.Id == key.TypeId)
+                                   .SingleAsync(cancellationToken);
         var filterEntity = new PermissionFilterEntity { EntityType = entityType, EntityId = key.ObjectId, Active = true };
 
-        this.authorizationBllContext.Authorization.Logics.PermissionFilterEntity.Save(filterEntity);
+        await this.PermissionFilterEntityRepositoryFactory.Create().SaveAsync(filterEntity, cancellationToken);
         cache.Add(filterEntity);
 
         return filterEntity;
@@ -132,25 +189,25 @@ public class UpdatePermissionsHandler : BaseWriteHandler, IUpdatePermissionsHand
         {
             get;
             set;
-        }
+        } = default!;
 
         public string RoleId
         {
             get;
             set;
-        }
+        } = default!;
 
         public string Comment
         {
             get;
             set;
-        }
+        } = default!;
 
         public List<ContextDto> Contexts
         {
             get;
             set;
-        }
+        } = default!;
 
         public class ContextDto
         {
@@ -158,13 +215,13 @@ public class UpdatePermissionsHandler : BaseWriteHandler, IUpdatePermissionsHand
             {
                 get;
                 set;
-            }
+            } = default!;
 
             public List<string> Entities
             {
                 get;
                 set;
-            }
+            } = default!;
         }
     }
 }

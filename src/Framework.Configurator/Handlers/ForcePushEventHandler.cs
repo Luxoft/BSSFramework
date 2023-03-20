@@ -1,37 +1,34 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Framework.Authorization.BLL;
-using Framework.Configuration;
 using Framework.Configuration.BLL;
 using Framework.Configuration.Domain;
 using Framework.Configurator.Interfaces;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
+using Framework.SecuritySystem.Exceptions;
 
 using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public class ForcePushEventHandler : BaseWriteHandler, IForcePushEventHandler
+public record ForcePushEventHandler(
+        IDomainTypeBLLFactory DomainTypeBllFactory,
+        IConfigurationBLLFactoryContainer ConfigurationBllFactoryContainer,
+        IAuthorizationBLLContext AuthorizationSystem) : BaseWriteHandler, IForcePushEventHandler
 {
-    private readonly IDomainTypeBLLFactory domainTypeBllFactory;
-
-    private readonly IConfigurationBLLFactoryContainer configurationBllFactoryContainer;
-
-    public ForcePushEventHandler(
-            IDomainTypeBLLFactory domainTypeBllFactory,
-            IConfigurationBLLFactoryContainer configurationBllFactoryContainer)
+    public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        this.domainTypeBllFactory = domainTypeBllFactory;
-        this.configurationBllFactoryContainer = configurationBllFactoryContainer;
-    }
+        if (!this.AuthorizationSystem.HasAccess(ConfigurationSecurityOperation.ForceDomainTypeEvent))
+        {
+            throw new AccessDeniedException<Guid>(
+                                                  string.Empty,
+                                                  Guid.Empty,
+                                                  $"You are not authorized to perform {ConfigurationSecurityOperation.ForceDomainTypeEvent} operation");
+        }
 
-    public async Task Execute(HttpContext context)
-    {
-        var operationId = (string)context.Request.RouteValues["operationId"] ?? throw new InvalidOperationException();
+        var operationId = (string?)context.Request.RouteValues["operationId"] ?? throw new InvalidOperationException();
         var body = await this.ParseRequestBodyAsync<RequestBodyDto>(context);
 
         this.ForcePush(new Guid(operationId), body);
@@ -39,10 +36,10 @@ public class ForcePushEventHandler : BaseWriteHandler, IForcePushEventHandler
 
     private void ForcePush(Guid operationId, RequestBodyDto body)
     {
-        var domainTypeEventOperation = this.configurationBllFactoryContainer.Default.Create<DomainTypeEventOperation>()
+        var domainTypeEventOperation = this.ConfigurationBllFactoryContainer.Default.Create<DomainTypeEventOperation>()
                                            .GetById(operationId, true);
 
-        this.domainTypeBllFactory.Create(ConfigurationSecurityOperationCode.ForceDomainTypeEvent)
+        this.DomainTypeBllFactory.Create()
             .ForceEvent(
                         new DomainTypeEventModel
                         {
@@ -64,6 +61,6 @@ public class ForcePushEventHandler : BaseWriteHandler, IForcePushEventHandler
         {
             get;
             set;
-        }
+        } = default!;
     }
 }

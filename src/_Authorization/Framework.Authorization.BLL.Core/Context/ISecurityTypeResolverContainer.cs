@@ -4,5 +4,8 @@ namespace Framework.Authorization.BLL;
 
 public interface ISecurityTypeResolverContainer
 {
-    ITypeResolver<string> SecurityTypeResolver { get; }
+    ITypeResolver<string> SecurityTypeResolver
+    {
+        get;
+    }
 }

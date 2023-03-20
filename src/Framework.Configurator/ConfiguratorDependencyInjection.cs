@@ -88,7 +88,12 @@ public static class ConfiguratorDependencyInjection
     private static IEndpointRouteBuilder Get<THandler>(this IEndpointRouteBuilder endpointsBuilder, string pattern)
             where THandler : IHandler
     {
-        endpointsBuilder.MapGet(pattern, async x => await x.RequestServices.GetRequiredService<THandler>().Execute(x))
+        endpointsBuilder.MapGet(
+                                pattern,
+                                async x => await x.RequestServices.GetRequiredService<THandler>()
+                                                  .Execute(
+                                                           x,
+                                                           x.RequestAborted))
                         .RequireAuthorization();
         return endpointsBuilder;
     }
@@ -96,7 +101,9 @@ public static class ConfiguratorDependencyInjection
     private static IEndpointRouteBuilder Post<THandler>(this IEndpointRouteBuilder endpointsBuilder, string pattern)
             where THandler : IHandler
     {
-        endpointsBuilder.MapPost(pattern, async x => await x.RequestServices.GetRequiredService<THandler>().Execute(x))
+        endpointsBuilder.MapPost(
+                                 pattern,
+                                 async x => await x.RequestServices.GetRequiredService<THandler>().Execute(x, x.RequestAborted))
                         .RequireAuthorization();
         return endpointsBuilder;
     }
@@ -106,7 +113,7 @@ public static class ConfiguratorDependencyInjection
     {
         endpointsBuilder.MapDelete(
                                    pattern,
-                                   async x => await x.RequestServices.GetRequiredService<THandler>().Execute(x))
+                                   async x => await x.RequestServices.GetRequiredService<THandler>().Execute(x, x.RequestAborted))
                         .RequireAuthorization();
         return endpointsBuilder;
     }

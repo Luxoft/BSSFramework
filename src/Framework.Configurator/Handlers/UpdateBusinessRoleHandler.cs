@@ -1,52 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
-using Framework.Authorization.BLL;
+using Framework.Authorization.BLL.Core.Context;
 using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.Core;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
 using Framework.Persistent;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
+using NHibernate.Linq;
+
 namespace Framework.Configurator.Handlers;
 
-public class UpdateBusinessRoleHandler : BaseWriteHandler, IUpdateBusinessRoleHandler
+public record UpdateBusinessRoleHandler(
+        IAuthorizationRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
+        IAuthorizationRepositoryFactory<Operation> OperationRepositoryFactory,
+        IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IUpdateBusinessRoleHandler
 {
-    private readonly IAuthorizationBLLContext authorizationBllContext;
-
-    public UpdateBusinessRoleHandler(IAuthorizationBLLContext authorizationBllContext) =>
-            this.authorizationBllContext = authorizationBllContext;
-
-    public async Task Execute(HttpContext context)
+    public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        var roleId = (string)context.Request.RouteValues["id"] ?? throw new InvalidOperationException();
+        var roleId = (string?)context.Request.RouteValues["id"] ?? throw new InvalidOperationException();
         var role = await this.ParseRequestBodyAsync<RequestBodyDto>(context);
 
-        this.Update(new Guid(roleId), role);
+        await this.Update(new Guid(roleId), role, cancellationToken);
     }
 
     [SuppressMessage("SonarQube", "S2436", Justification = "It's ok. BusinessRoleOperationLink automatically link to BusinessRole")]
-    private void Update(Guid id, RequestBodyDto role)
+    private async Task Update(Guid id, RequestBodyDto role, CancellationToken cancellationToken)
     {
-        var businessRoleBll = this.authorizationBllContext.Authorization.Logics
-                                  .BusinessRoleFactory.Create(BLLSecurityMode.Edit);
+        var businessRoleBll = this.BusinessRoleRepositoryFactory.Create(BLLSecurityMode.Edit);
 
-        var domainObject = businessRoleBll.GetById(id, true);
-        
+        var domainObject = await businessRoleBll.GetQueryable()
+                                                .Where(x => x.Id == id)
+                                                .SingleAsync(cancellationToken);
+
         var mergeResult =
                 domainObject.BusinessRoleOperationLinks.GetMergeResult(
                                                                        role.OperationIds,
                                                                        s => s.Operation.Id,
                                                                        s => s);
 
-        var operations = this.authorizationBllContext.Authorization.Logics.Operation.GetListByIdents(mergeResult.AddingItems);
+        var operations = await this.OperationRepositoryFactory.Create()
+                                   .GetQueryable()
+                                   .Where(x => mergeResult.AddingItems.Contains(x.Id))
+                                   .ToListAsync(cancellationToken);
 
         foreach (var operation in operations)
         {
@@ -54,7 +57,12 @@ public class UpdateBusinessRoleHandler : BaseWriteHandler, IUpdateBusinessRoleHa
         }
 
         domainObject.RemoveDetails(mergeResult.RemovingItems);
-        businessRoleBll.Save(domainObject);
+        await businessRoleBll.SaveAsync(domainObject, cancellationToken);
+
+        if (this.ConfiguratorIntegrationEvents != null)
+        {
+            await this.ConfiguratorIntegrationEvents.BusinessRoleChangedAsync(domainObject, cancellationToken);
+        }
     }
 
     private class RequestBodyDto
@@ -63,6 +71,6 @@ public class UpdateBusinessRoleHandler : BaseWriteHandler, IUpdateBusinessRoleHa
         {
             get;
             set;
-        }
+        } = default!;
     }
 }

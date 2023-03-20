@@ -7,6 +7,7 @@ using DotNetCore.CAP;
 
 using Framework.Authorization.ApproveWorkflow;
 using Framework.Configurator;
+using Framework.Configurator.Interfaces;
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
@@ -15,6 +16,7 @@ using Framework.WebApi.Utils;
 
 using MediatR;
 
+using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -29,6 +31,7 @@ using Newtonsoft.Json;
 using SampleSystem.BLL;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.NewtonsoftJson;
+using SampleSystem.WebApiCore.Services;
 
 namespace SampleSystem.WebApiCore
 {
@@ -40,34 +43,48 @@ namespace SampleSystem.WebApiCore
             this.HostingEnvironment = env;
         }
 
-        public IWebHostEnvironment HostingEnvironment { get; }
+        public IWebHostEnvironment HostingEnvironment
+        {
+            get;
+        }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration
+        {
+            get;
+        }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            if(this.HostingEnvironment.IsProduction())
+            if (this.HostingEnvironment.IsProduction())
             {
                 services.AddMetricsBss(this.Configuration, 0.5);
             }
 
             services.RegisterGeneralDependencyInjection(this.Configuration)
-
                     .AddApiVersion()
                     .AddSwaggerBss(
                                    new OpenApiInfo { Title = "SampleSystem", Version = "v1" },
-                                   new List<string> { Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml") });
-            
-            services.AddConfigurator();
+                                   new List<string>
+                                   {
+                                           Path.Combine(
+                                                        AppContext.BaseDirectory,
+                                                        $"{Assembly.GetExecutingAssembly().GetName().Name}.xml")
+                                   });
 
+            services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+                    .AddNegotiate();
+
+            services.AddConfigurator();
+            services.AddScoped<IConfiguratorIntegrationEvents, SampleConfiguratorIntegrationEvents>();
+                    
             services
-                .AddMvcBss()
-                .AddNewtonsoftJson(
-                    z =>
-                    {
-                        z.SerializerSettings.Converters.Add(new UtcDateTimeJsonConverter());
-                        z.SerializerSettings.TypeNameHandling = TypeNameHandling.Auto;
-                    });
+                    .AddMvcBss()
+                    .AddNewtonsoftJson(
+                                       z =>
+                                       {
+                                           z.SerializerSettings.Converters.Add(new UtcDateTimeJsonConverter());
+                                           z.SerializerSettings.TypeNameHandling = TypeNameHandling.Auto;
+                                       });
 
             if (this.HostingEnvironment.IsProduction())
             {
@@ -92,15 +109,13 @@ namespace SampleSystem.WebApiCore
 
             app.UseHttpsRedirection()
                .UseRouting()
-
                .UseDefaultExceptionsHandling()
                .UseCorrelationId("SampleSystem_{0}")
                .UseTryProcessDbSession()
                .UseWebApiExceptionExpander()
-
-               //// .UseAuthentication()
-               //// .UseAuthorization()
-               //// .UseConfigurator()
+               .UseAuthentication()
+               .UseAuthorization()
+               .UseConfigurator()
                .UseEndpoints(z => z.MapControllers());
 
             if (env.IsProduction())
@@ -116,23 +131,32 @@ namespace SampleSystem.WebApiCore
         private void UseHangfireBss(IApplicationBuilder app)
         {
             var contextEvaluator = LazyInterfaceImplementHelper.CreateProxy(
-                            () =>
-                            {
-                                var serviceProvider = new ServiceCollection()
-                                                      .RegisterGeneralDependencyInjection(this.Configuration)
-                                                      .ValidateDuplicateDeclaration()
-                                                      .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
+                                                                            () =>
+                                                                            {
+                                                                                var serviceProvider = new ServiceCollection()
+                                                                                        .RegisterGeneralDependencyInjection(
+                                                                                         this.Configuration)
+                                                                                        .ValidateDuplicateDeclaration()
+                                                                                        .BuildServiceProvider(
+                                                                                         new ServiceProviderOptions
+                                                                                         {
+                                                                                                 ValidateOnBuild = true,
+                                                                                                 ValidateScopes = true
+                                                                                         });
 
-                                return serviceProvider.GetRequiredService<IContextEvaluator<ISampleSystemBLLContext>>();
-                            });
+                                                                                return serviceProvider
+                                                                                        .GetRequiredService<
+                                                                                                IContextEvaluator<
+                                                                                                ISampleSystemBLLContext>>();
+                                                                            });
 
             app.UseHangfireBss(
-                this.Configuration,
-                z =>
-                {
-                    JobList.RunAll(z);
-                },
-                authorizationFilter: new SampleSystemHangfireAuthorization(contextEvaluator));
+                               this.Configuration,
+                               z =>
+                               {
+                                   JobList.RunAll(z);
+                               },
+                               authorizationFilter: new SampleSystemHangfireAuthorization(contextEvaluator));
         }
     }
 }

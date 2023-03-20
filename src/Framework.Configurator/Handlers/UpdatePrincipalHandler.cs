@@ -1,36 +1,43 @@
 ﻿using System;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
-using Framework.Authorization.BLL;
+using Framework.Authorization.BLL.Core.Context;
+using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
+using NHibernate.Linq;
+
 namespace Framework.Configurator.Handlers;
 
-public class UpdatePrincipalHandler: BaseWriteHandler, IUpdatePrincipalHandler
+public record UpdatePrincipalHandler(
+        IAuthorizationRepositoryFactory<Principal> PrincipalRepositoryFactory,
+        IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IUpdatePrincipalHandler
 {
-    private readonly IAuthorizationBLLContext authorizationBllContext;
-
-    public UpdatePrincipalHandler(IAuthorizationBLLContext authorizationBllContext) => this.authorizationBllContext = authorizationBllContext;
-
-    public async Task Execute(HttpContext context)
+    public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        var principalId = (string)context.Request.RouteValues["id"] ?? throw new InvalidOperationException();
+        var principalId = (string?)context.Request.RouteValues["id"] ?? throw new InvalidOperationException();
         var name = await this.ParseRequestBodyAsync<string>(context);
 
-        this.Update(new Guid(principalId), name);
+        await this.Update(new Guid(principalId), name, cancellationToken);
     }
 
-    private void Update(Guid id, string newName)
+    private async Task Update(Guid id, string newName, CancellationToken cancellationToken)
     {
-        var principalBll = this.authorizationBllContext.Authorization.Logics.PrincipalFactory.Create(BLLSecurityMode.Edit);
-        var domainObject = principalBll.GetById(id, true);
+        var principalBll = this.PrincipalRepositoryFactory.Create(BLLSecurityMode.Edit);
+        var domainObject = await principalBll.GetQueryable()
+                                             .Where(x => x.Id == id)
+                                             .SingleAsync(cancellationToken);
         domainObject.Name = newName;
-        principalBll.Save(domainObject);
+        await principalBll.SaveAsync(domainObject, cancellationToken);
+
+        if (this.ConfiguratorIntegrationEvents != null)
+        {
+            await this.ConfiguratorIntegrationEvents.PrincipalChangedAsync(domainObject, cancellationToken);
+        }
     }
 }

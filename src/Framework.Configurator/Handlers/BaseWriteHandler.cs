@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Framework.Configurator.Handlers;
 
-public abstract class BaseWriteHandler
+public abstract record BaseWriteHandler
 {
     // TODO: this can be replaced with built serialization/deserialization
     protected async Task<TModel> ParseRequestBodyAsync<TModel>(HttpContext context)
@@ -14,6 +14,6 @@ public abstract class BaseWriteHandler
         using var streamReader = new StreamReader(context.Request.Body);
         var requestBody = await streamReader.ReadToEndAsync();
 
-        return JsonSerializer.Deserialize<TModel>(requestBody);
+        return JsonSerializer.Deserialize<TModel>(requestBody)!;
     }
 }

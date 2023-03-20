@@ -1,37 +1,42 @@
 ﻿using System;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
-using Framework.Authorization.BLL;
+using Framework.Authorization.BLL.Core.Context;
+using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
+using NHibernate.Linq;
+
 namespace Framework.Configurator.Handlers;
 
-public class DeleteBusinessRoleHandler : BaseWriteHandler, IDeleteBusinessRoleHandler
+public record DeleteBusinessRoleHandler
+        (
+        IAuthorizationRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
+        IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IDeleteBusinessRoleHandler
 {
-    private readonly IAuthorizationBLLContext authorizationBllContext;
-
-    public DeleteBusinessRoleHandler(IAuthorizationBLLContext authorizationBllContext) =>
-            this.authorizationBllContext = authorizationBllContext;
-
-    public Task Execute(HttpContext context)
+    public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        var roleId = new Guid((string)context.Request.RouteValues["id"] ?? throw new InvalidOperationException());
-        this.Delete(roleId);
-
-        return Task.CompletedTask;
+        var roleId = new Guid((string?)context.Request.RouteValues["id"] ?? throw new InvalidOperationException());
+        await this.Delete(roleId, cancellationToken);
     }
 
-    private void Delete(Guid id)
+    private async Task Delete(Guid id, CancellationToken cancellationToken)
     {
-        var businessRoleBll = this.authorizationBllContext.Authorization.Logics
-                                  .BusinessRoleFactory.Create(BLLSecurityMode.Edit);
-        var domainObject = businessRoleBll.GetById(id, true);
-        businessRoleBll.Remove(domainObject);
+        var businessRoleBll = this.BusinessRoleRepositoryFactory.Create(BLLSecurityMode.Edit);
+        var domainObject = await businessRoleBll.GetQueryable()
+                                                .Where(x => x.Id == id)
+                                                .SingleAsync(cancellationToken);
+
+        await businessRoleBll.RemoveAsync(domainObject, cancellationToken);
+        
+        if (this.ConfiguratorIntegrationEvents != null)
+        {
+            await this.ConfiguratorIntegrationEvents.BusinessRoleRemovedAsync(domainObject, cancellationToken);
+        }
     }
 }

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Framework.Authorization.BLL;
+using Framework.Authorization.BLL.Core.Context;
 using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.DomainDriven;
@@ -13,32 +16,41 @@ using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
+using NHibernate.Linq;
+
 namespace Framework.Configurator.Handlers;
 
-public class CreateBusinessRoleHandler : BaseWriteHandler, ICreateBusinessRoleHandler
+public record CreateBusinessRoleHandler(
+        IAuthorizationRepositoryFactory<Operation> OperationRepositoryFactory,
+        IAuthorizationRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
+        IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, ICreateBusinessRoleHandler
 {
-    private readonly IAuthorizationBLLContext authorizationBllContext;
-
-    public CreateBusinessRoleHandler(IAuthorizationBLLContext authorizationBllContext) =>
-            this.authorizationBllContext = authorizationBllContext;
-
-    public async Task Execute(HttpContext context)
+    public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
         var newRole = await this.ParseRequestBodyAsync<RequestBodyDto>(context);
-        this.Create(newRole);
+        await this.Create(newRole, cancellationToken);
     }
 
     [SuppressMessage("SonarQube", "S2436", Justification = "It's ok. BusinessRoleOperationLink automatically link to BusinessRole")]
-    private void Create(RequestBodyDto newRole)
+    private async Task Create(RequestBodyDto newRole, CancellationToken cancellationToken)
     {
         var domainObject = new BusinessRole { Name = newRole.Name };
-        var operationIds = this.authorizationBllContext.Authorization.Logics.Operation.GetListByIdents(newRole.OperationIds);
+        var operationIds = await this.OperationRepositoryFactory.Create()
+                                     .GetQueryable()
+                                     .Where(x => newRole.OperationIds.Contains(x.Id))
+                                     .ToListAsync(cancellationToken);
+
         foreach (var operation in operationIds)
         {
-            new BusinessRoleOperationLink(domainObject) { Operation = operation };
+            var _ = new BusinessRoleOperationLink(domainObject) { Operation = operation };
         }
 
-        this.authorizationBllContext.Authorization.Logics.BusinessRoleFactory.Create(BLLSecurityMode.Edit).Save(domainObject);
+        await this.BusinessRoleRepositoryFactory.Create(BLLSecurityMode.Edit).SaveAsync(domainObject, cancellationToken);
+
+        if (this.ConfiguratorIntegrationEvents != null)
+        {
+            await this.ConfiguratorIntegrationEvents.BusinessRoleCreatedAsync(domainObject, cancellationToken);
+        }
     }
 
     private class RequestBodyDto
@@ -47,12 +59,12 @@ public class CreateBusinessRoleHandler : BaseWriteHandler, ICreateBusinessRoleHa
         {
             get;
             set;
-        }
+        } = default!;
 
         public string Name
         {
             get;
             set;
-        }
+        } = default!;
     }
 }

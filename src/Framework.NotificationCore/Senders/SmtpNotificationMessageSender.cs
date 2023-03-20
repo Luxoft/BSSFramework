@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Net.Mail;
 
 using Framework.Configuration.BLL;
+using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Notification.DTO;
 using Framework.NotificationCore.Services;
@@ -26,9 +27,9 @@ namespace Framework.NotificationCore.Senders
         private readonly ISmtpMessageSender sender;
 
         public SmtpNotificationMessageSender(
-            IOptions<SmtpSettings> settings,
-            IRewriteReceiversService rewriteReceiversService,
-            IConfigurationBLLContext context)
+                IOptions<SmtpSettings> settings,
+                IRewriteReceiversService rewriteReceiversService,
+                IConfigurationBLLContext context)
         {
             this.context = context;
 
@@ -39,12 +40,10 @@ namespace Framework.NotificationCore.Senders
             this.sender = this.GetSender();
         }
 
-        private ISmtpMessageSender GetSender()
-        {
-            return this.IsProduction()
-                    ? new ProdSmtpMessageSender(this.settings.Value, this.rewriteReceiversService)
-                    : new TestSmtpMessageSender(this.settings.Value, this.rewriteReceiversService);
-        }
+        private ISmtpMessageSender GetSender() =>
+                this.IsProduction()
+                        ? new ProdSmtpMessageSender(this.settings.Value, this.rewriteReceiversService)
+                        : new TestSmtpMessageSender(this.settings.Value, this.rewriteReceiversService);
 
         /// <summary>
         /// Переопределять только если на проде ASPNETCORE_ENVIRONMENT не Production и нужен workaround.
@@ -55,24 +54,26 @@ namespace Framework.NotificationCore.Senders
 
         public void Send(NotificationEventDTO message)
         {
-            using (var client = this.GetSmtpClient())
+            using var client = this.GetSmtpClient();
+
+            try
             {
-                try
-                {
-                    this.sender.Send(client, message);
+                this.sender.Send(client, message);
 
-                    new SentMessageBLL(this.context).Save(message.ToSentMessage());
-                }
-                catch (Exception e)
-                {
-                    Log.Error(e, "Failed to send notification to smtp server");
+                this.SaveSentMessage(message.ToSentMessage());
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, "Failed to send notification to smtp server");
 
-                    throw e;
-                }
+                throw;
             }
         }
 
-        // todo: перевести создание SmtpClient в DI
+        protected virtual void SaveSentMessage(SentMessage message) =>
+                new SentMessageBLL(this.context).Save(message);
+
+        // TODO: Move creation of SmtpClient to DI
         protected virtual SmtpClient GetSmtpClient()
         {
             if (!this.settings.Value.SmtpEnabled && string.IsNullOrWhiteSpace(this.settings.Value.OutputFolder))
@@ -81,13 +82,13 @@ namespace Framework.NotificationCore.Senders
             }
 
             return this.settings.Value.SmtpEnabled
-                ? new SmtpClient(this.settings.Value.Server, this.settings.Value.Port) { UseDefaultCredentials = true }
-                : new SmtpClient
-                {
-                    UseDefaultCredentials = true,
-                    DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory,
-                    PickupDirectoryLocation = this.settings.Value.OutputFolder
-                };
+                           ? new SmtpClient(this.settings.Value.Server, this.settings.Value.Port) { UseDefaultCredentials = true }
+                           : new SmtpClient
+                             {
+                                     UseDefaultCredentials = true,
+                                     DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory,
+                                     PickupDirectoryLocation = this.settings.Value.OutputFolder
+                             };
         }
     }
 }

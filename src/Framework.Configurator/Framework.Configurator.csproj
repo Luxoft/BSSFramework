@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="configurator-ui/dist/**/*" Exclude="**/*/*.txt;" />
   </ItemGroup>
 

@@ -1,9 +1,8 @@
 ﻿using Framework.Core;
 
-namespace Framework.OData.Tests.Unit
+namespace Framework.OData.Tests.Unit;
+
+public class TestPeriodObj
 {
-    public class TestPeriodObj
-    {
-        public Period Period { get; set; }
-    }
+    public Period Period { get; set; }
 }

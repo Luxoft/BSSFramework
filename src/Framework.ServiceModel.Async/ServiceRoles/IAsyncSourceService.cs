@@ -3,10 +3,9 @@
 using Framework.Async;
 using Framework.Core;
 
-namespace Framework.ServiceModel.Async
+namespace Framework.ServiceModel.Async;
+
+public interface IAsyncSourceService<TViewObject>
 {
-    public interface IAsyncSourceService<TViewObject>
-    {
-        IAsyncProcessFunc<Ignore, ObservableCollection<TViewObject>> SourceFunc { get; }
-    }
+    IAsyncProcessFunc<Ignore, ObservableCollection<TViewObject>> SourceFunc { get; }
 }

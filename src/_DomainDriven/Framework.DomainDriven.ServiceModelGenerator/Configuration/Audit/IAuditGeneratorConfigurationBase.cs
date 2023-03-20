@@ -1,13 +1,12 @@
-namespace Framework.DomainDriven.ServiceModelGenerator
+namespace Framework.DomainDriven.ServiceModelGenerator;
+
+public interface IAuditGeneratorConfigurationBase : IGeneratorConfigurationBase
 {
-    public interface IAuditGeneratorConfigurationBase : IGeneratorConfigurationBase
-    {
 
-    }
+}
 
-    public interface IAuditGeneratorConfigurationBase<out TEnvironment> : IAuditGeneratorConfigurationBase, IGeneratorConfigurationBase<TEnvironment>
+public interface IAuditGeneratorConfigurationBase<out TEnvironment> : IAuditGeneratorConfigurationBase, IGeneratorConfigurationBase<TEnvironment>
         where TEnvironment : IAuditGenerationEnvironmentBase
-    {
+{
 
-    }
 }

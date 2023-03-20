@@ -2,16 +2,15 @@
 
 using Framework.DomainDriven.Generation.Domain;
 
-namespace Framework.DomainDriven.DTOGenerator
-{
-    public static class DTOSouceExtensions
-    {
-        public static bool IsPersistent<TConfiguration>(this IDTOSource<TConfiguration> source)
-            where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+namespace Framework.DomainDriven.DTOGenerator;
 
-            return source.Configuration.IsPersistentObject(source.DomainType);
-        }
+public static class DTOSouceExtensions
+{
+    public static bool IsPersistent<TConfiguration>(this IDTOSource<TConfiguration> source)
+            where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
+
+        return source.Configuration.IsPersistentObject(source.DomainType);
     }
 }

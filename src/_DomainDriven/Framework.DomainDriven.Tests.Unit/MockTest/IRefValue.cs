@@ -1,7 +1,6 @@
-﻿namespace Framework.DomainDriven.UnitTest.MockTest
+﻿namespace Framework.DomainDriven.UnitTest.MockTest;
+
+public interface IRefValue
 {
-    public interface IRefValue
-    {
-        string Name { get; }        
-    }
+    string Name { get; }        
 }

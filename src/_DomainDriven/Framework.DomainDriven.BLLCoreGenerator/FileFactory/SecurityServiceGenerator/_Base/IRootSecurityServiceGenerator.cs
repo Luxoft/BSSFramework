@@ -2,28 +2,27 @@
 using System.CodeDom;
 using System.Collections.Generic;
 
-namespace Framework.DomainDriven.BLLCoreGenerator
+namespace Framework.DomainDriven.BLLCoreGenerator;
+
+public interface IRootSecurityServiceGenerator
 {
-    public interface IRootSecurityServiceGenerator
-    {
-        IDomainSecurityServiceGenerator GetDomainSecurityServiceGenerator(Type domainType);
+    IDomainSecurityServiceGenerator GetDomainSecurityServiceGenerator(Type domainType);
 
-        IEnumerable<CodeTypeMember> GetBaseMembers();
+    IEnumerable<CodeTypeMember> GetBaseMembers();
 
-        IEnumerable<Type> GetSecurityServiceDomainTypes();
+    IEnumerable<Type> GetSecurityServiceDomainTypes();
 
 
 
-        IEnumerable<CodeTypeReference> GetBLLContextBaseTypes();
+    IEnumerable<CodeTypeReference> GetBLLContextBaseTypes();
 
-        IEnumerable<CodeTypeMember> GetBLLContextMembers();
-
-
-        CodeTypeReference GetGenericRootSecurityServiceType();
-
-        CodeTypeReference GetGenericRootSecurityServiceInterfaceType();
+    IEnumerable<CodeTypeMember> GetBLLContextMembers();
 
 
-        CodeTypeReference GetDomainInterfaceBaseServiceType();
-    }
+    CodeTypeReference GetGenericRootSecurityServiceType();
+
+    CodeTypeReference GetGenericRootSecurityServiceInterfaceType();
+
+
+    CodeTypeReference GetDomainInterfaceBaseServiceType();
 }

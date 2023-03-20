@@ -5,9 +5,8 @@ using Framework.Configuration.Domain;
 namespace Framework.Configuration.BLL
 {
     public partial interface ICodeFirstSubscriptionBLL
-    {
-        IEnumerable<string> GetActiveCodeFirstSubscriptionCodes();
+{
+    IEnumerable<string> GetActiveCodeFirstSubscriptionCodes();
 
-        void Save(IEnumerable<CodeFirstSubscription> subscriptions);
-    }
+    void Save(IEnumerable<CodeFirstSubscription> subscriptions);
 }

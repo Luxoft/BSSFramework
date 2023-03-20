@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace Framework.DomainDriven.BLL.Tracking
+namespace Framework.DomainDriven.BLL.Tracking;
+
+public interface IObjectStateService
 {
-    public interface IObjectStateService
-    {
-        IEnumerable<ObjectState> GetModifiedObjectStates(object value);
+    IEnumerable<ObjectState> GetModifiedObjectStates(object value);
 
-        bool IsNew(object entity);
+    bool IsNew(object entity);
 
-        bool IsRemoving(object entity);
-    }
+    bool IsRemoving(object entity);
 }

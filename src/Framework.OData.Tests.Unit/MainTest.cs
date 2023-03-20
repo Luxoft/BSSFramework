@@ -2,20 +2,19 @@
 
 using NUnit.Framework;
 
-namespace Framework.OData.Tests.Unit
+namespace Framework.OData.Tests.Unit;
+
+[TestFixture]
+public class MainTest
 {
-    [TestFixture]
-    public class MainTest
+    [Test]
+    [Ignore("Used for local hand running")]
+    public void TestODataParse()
     {
-        [Test]
-        [Ignore("Used for local hand running")]
-        public void TestODataParse()
-        {
-            var request = File.ReadAllText("request.odata");
+        var request = File.ReadAllText("request.odata");
 
-            var zzz = SelectOperation.Parse(request);
+        var zzz = SelectOperation.Parse(request);
 
-            var r = zzz.Filter.ToString();
-        }
+        var r = zzz.Filter.ToString();
     }
 }

@@ -1,13 +1,12 @@
 ﻿using System.Linq.Expressions;
 
-namespace Framework.Core
-{
-    public class EmptyExpressionVisitor : ExpressionVisitor
-    {
-        private EmptyExpressionVisitor()
-        {
-        }
+namespace Framework.Core;
 
-        public static readonly EmptyExpressionVisitor Value = new EmptyExpressionVisitor();
+public class EmptyExpressionVisitor : ExpressionVisitor
+{
+    private EmptyExpressionVisitor()
+    {
     }
+
+    public static readonly EmptyExpressionVisitor Value = new EmptyExpressionVisitor();
 }

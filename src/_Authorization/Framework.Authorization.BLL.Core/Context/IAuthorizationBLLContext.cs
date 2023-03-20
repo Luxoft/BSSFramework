@@ -10,9 +10,9 @@ using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.BLL.Tracking;
 using Framework.SecuritySystem;
 
-namespace Framework.Authorization.BLL
-{
-    public partial interface IAuthorizationBLLContext :
+namespace Framework.Authorization.BLL;
+
+public partial interface IAuthorizationBLLContext :
 
         IAuthorizationBLLContext<Guid>,
 
@@ -23,46 +23,45 @@ namespace Framework.Authorization.BLL
         ITypeResolverContainer<string>,
 
         IConfigurationBLLContextContainer<IConfigurationBLLContext>
-    {
-        IDateTimeService DateTimeService { get; }
+{
+    IDateTimeService DateTimeService { get; }
 
-        IAuthorizationExternalSource ExternalSource { get; }
+    IAuthorizationExternalSource ExternalSource { get; }
 
-        Principal CurrentPrincipal { get; }
+    Principal CurrentPrincipal { get; }
 
-        Settings Settings { get; }
+    Settings Settings { get; }
 
 
-        ISecurityProvider<TDomainObject> GetPrincipalSecurityProvider<TDomainObject>(Expression<Func<TDomainObject, Principal>> principalSecurityPath)
+    ISecurityProvider<TDomainObject> GetPrincipalSecurityProvider<TDomainObject>(Expression<Func<TDomainObject, Principal>> principalSecurityPath)
             where TDomainObject : PersistentDomainObjectBase;
 
-        ISecurityProvider<TDomainObject> GetBusinessRoleSecurityProvider<TDomainObject>(Expression<Func<TDomainObject, BusinessRole>> businessRoleSecurityPath)
+    ISecurityProvider<TDomainObject> GetBusinessRoleSecurityProvider<TDomainObject>(Expression<Func<TDomainObject, BusinessRole>> businessRoleSecurityPath)
             where TDomainObject : PersistentDomainObjectBase;
 
-        ISecurityProvider<Operation> GetOperationSecurityProvider();
+    ISecurityProvider<Operation> GetOperationSecurityProvider();
 
 
-        bool HasAccess(Operation operation);
+    bool HasAccess(Operation operation);
 
-        IEnumerable<string> GetAccessors(Operation operation, Expression<Func<Principal, bool>> principalFilter);
-
-
-        ITypeResolver<EntityType> SecurityTypeResolver { get; }
+    IEnumerable<string> GetAccessors(Operation operation, Expression<Func<Principal, bool>> principalFilter);
 
 
-        EntityType GetEntityType(Type type);
-
-        EntityType GetEntityType(string domainTypeName);
-
-        EntityType GetEntityType(Guid domainTypeId);
+    ITypeResolver<EntityType> SecurityTypeResolver { get; }
 
 
-        /// <summary>
-        /// Получение форматированного вида пермиссии
-        /// </summary>
-        /// <param name="permission">Пермиссия</param>
-        /// <param name="separator">Разделитель</param>
-        /// <returns></returns>
-        string GetFormattedPermission(Permission permission, string separator = " | ");
-    }
+    EntityType GetEntityType(Type type);
+
+    EntityType GetEntityType(string domainTypeName);
+
+    EntityType GetEntityType(Guid domainTypeId);
+
+
+    /// <summary>
+    /// Получение форматированного вида пермиссии
+    /// </summary>
+    /// <param name="permission">Пермиссия</param>
+    /// <param name="separator">Разделитель</param>
+    /// <returns></returns>
+    string GetFormattedPermission(Permission permission, string separator = " | ");
 }

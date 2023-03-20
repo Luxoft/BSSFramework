@@ -1,7 +1,6 @@
-namespace Framework.DomainDriven.DTOGenerator
-{
-    //public interface ITypeMapSource
-    //{
-    //    GenerateTypeMap GetMap();
-    //}
-}
+namespace Framework.DomainDriven.DTOGenerator;
+
+//public interface ITypeMapSource
+//{
+//    GenerateTypeMap GetMap();
+//}

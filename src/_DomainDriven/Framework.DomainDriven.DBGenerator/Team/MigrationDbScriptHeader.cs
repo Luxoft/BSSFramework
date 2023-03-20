@@ -1,41 +1,40 @@
-﻿namespace Framework.DomainDriven.DBGenerator.Team
+﻿namespace Framework.DomainDriven.DBGenerator.Team;
+
+public struct MigrationDbScriptHeader
 {
-    public struct MigrationDbScriptHeader
-    {
-        private readonly string _name;
-        private readonly string _scheme;
-        private readonly string _version;
+    private readonly string _name;
+    private readonly string _scheme;
+    private readonly string _version;
 
-        public MigrationDbScriptHeader(string name, string scheme, string _version)
+    public MigrationDbScriptHeader(string name, string scheme, string _version)
             : this()
-        {
-            this._name = name;
-            this._scheme = scheme;
-            this._version = _version;
-        }
+    {
+        this._name = name;
+        this._scheme = scheme;
+        this._version = _version;
+    }
 
-        public string Name
+    public string Name
+    {
+        get
         {
-            get
-            {
-                return this._name;
-            }
+            return this._name;
         }
+    }
 
-        public string Scheme
+    public string Scheme
+    {
+        get
         {
-            get
-            {
-                return this._scheme;
-            }
+            return this._scheme;
         }
+    }
 
-        public string Version
+    public string Version
+    {
+        get
         {
-            get
-            {
-                return this._version;
-            }
+            return this._version;
         }
     }
 }

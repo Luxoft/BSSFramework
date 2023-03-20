@@ -6,75 +6,74 @@ using Framework.Core;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 
-namespace Framework.DomainDriven.Metadata
+namespace Framework.DomainDriven.Metadata;
+
+public class ListTypeFieldMetadata : FieldMetadata
 {
-    public class ListTypeFieldMetadata : FieldMetadata
+    private readonly Type _domainType;
+
+    private readonly bool _isCompilerGenerated;
+    readonly Type elementType;
+    public Type ElementType
     {
-        private readonly Type _domainType;
+        get { return this.elementType; }
+    }
 
-        private readonly bool _isCompilerGenerated;
-        readonly Type elementType;
-        public Type ElementType
+    public ListTypeFieldMetadata(Type domainType,
+                                 string name,
+                                 bool isAutoGenerateField,
+                                 Type type,
+                                 IEnumerable<Attribute> attributes,
+                                 DomainTypeMetadata domainTypeMetadata)
+            : base(name, type, attributes, domainTypeMetadata)
+    {
+        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+
+        this._domainType = domainType;
+        this._isCompilerGenerated = isAutoGenerateField;
+        this.elementType = type.GetGenericArguments()[0];
+    }
+
+
+    public bool IsVirtual
+    {
+        get
         {
-            get { return this.elementType; }
+            return !this._domainType.GetProperty(this.Name.ToStartUpperCase()).Maybe(prop => prop.PropertyType == this.Type);
         }
+    }
 
-        public ListTypeFieldMetadata(Type domainType,
-            string name,
-            bool isAutoGenerateField,
-            Type type,
-            IEnumerable<Attribute> attributes,
-            DomainTypeMetadata domainTypeMetadata)
-                : base(name, type, attributes, domainTypeMetadata)
+    public CascadeMode CascadeMode
+    {
+        get
         {
-            if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+            var attributes = this.Attributes.OfType<MappingAttribute>().Where(attribute => attribute.CascadeMode != CascadeMode.Auto).ToList();
 
-            this._domainType = domainType;
-            this._isCompilerGenerated = isAutoGenerateField;
-            this.elementType = type.GetGenericArguments()[0];
+            return attributes.Any() ? (attributes.First().GetActualCascadeMode() ?? CascadeMode.Auto) : CascadeMode.Auto;
         }
+    }
 
-
-        public bool IsVirtual
+    public bool Immutable
+    {
+        get
         {
-            get
+            var attributes = this.Attributes.OfType<DetailRoleAttribute>().ToList();
+
+            if (attributes.Count > 1)
             {
-                return !this._domainType.GetProperty(this.Name.ToStartUpperCase()).Maybe(prop => prop.PropertyType == this.Type);
+                throw new ArgumentException("Declare more then one set immuble indentifier");
             }
-        }
 
-        public CascadeMode CascadeMode
-        {
-            get
+            if (!attributes.Any())
             {
-                var attributes = this.Attributes.OfType<MappingAttribute>().Where(attribute => attribute.CascadeMode != CascadeMode.Auto).ToList();
-
-                return attributes.Any() ? (attributes.First().GetActualCascadeMode() ?? CascadeMode.Auto) : CascadeMode.Auto;
+                return false;
             }
+            return attributes.First().HasValue(false);
         }
+    }
 
-        public bool Immutable
-        {
-            get
-            {
-                var attributes = this.Attributes.OfType<DetailRoleAttribute>().ToList();
-
-                if (attributes.Count > 1)
-                {
-                    throw new ArgumentException("Declare more then one set immuble indentifier");
-                }
-
-                if (!attributes.Any())
-                {
-                    return false;
-                }
-                return attributes.First().HasValue(false);
-            }
-        }
-
-        public bool IsCompilerGenerated
-        {
-            get { return this._isCompilerGenerated; }
-        }
+    public bool IsCompilerGenerated
+    {
+        get { return this._isCompilerGenerated; }
     }
 }

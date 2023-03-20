@@ -1,7 +1,6 @@
-﻿namespace Framework.SecuritySystem.DiTests
+﻿namespace Framework.SecuritySystem.DiTests;
+
+public class Employee : PersistentDomainObjectBase
 {
-    public class Employee : PersistentDomainObjectBase
-    {
-        public BusinessUnit BusinessUnit { get; set; }
-    }
+    public BusinessUnit BusinessUnit { get; set; }
 }

@@ -1,10 +1,9 @@
 ﻿using Framework.Async;
 using Framework.Core;
 
-namespace Framework.ServiceModel.Async
+namespace Framework.ServiceModel.Async;
+
+public interface IAsyncRemoveService<in TIdentityObject>
 {
-    public interface IAsyncRemoveService<in TIdentityObject>
-    {
-        IAsyncProcessFunc<TIdentityObject, Ignore> RemoveAction { get; }
-    }
+    IAsyncProcessFunc<TIdentityObject, Ignore> RemoveAction { get; }
 }

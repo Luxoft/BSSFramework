@@ -1,9 +1,8 @@
 ﻿using Framework.HierarchicalExpand;
 
-namespace Framework.DomainDriven
+namespace Framework.DomainDriven;
+
+public interface IHierarchicalObjectExpanderFactoryContainer<TIdent>
 {
-    public interface IHierarchicalObjectExpanderFactoryContainer<TIdent>
-    {
-        IHierarchicalObjectExpanderFactory<TIdent> HierarchicalObjectExpanderFactory { get; }
-    }
+    IHierarchicalObjectExpanderFactory<TIdent> HierarchicalObjectExpanderFactory { get; }
 }

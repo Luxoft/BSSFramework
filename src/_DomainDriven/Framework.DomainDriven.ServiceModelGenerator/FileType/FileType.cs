@@ -1,7 +1,6 @@
-﻿namespace Framework.DomainDriven.ServiceModelGenerator
+﻿namespace Framework.DomainDriven.ServiceModelGenerator;
+
+public enum FileType
 {
-    public enum FileType
-    {
-        Implement
-    }
+    Implement
 }

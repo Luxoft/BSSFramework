@@ -9,217 +9,216 @@ using Framework.QueryableSource;
 
 using JetBrains.Annotations;
 
-namespace Framework.HierarchicalExpand
-{
-    public class HierarchicalObjectAncestorLinkExpander<TPersistentDomainObjectBase, TDomainObject, TDomainObjectAncestorLink, TDomainObjectAncestorChildLink, TIdent> : IHierarchicalObjectExpander<TIdent>, IHierarchicalObjectQueryableExpander<TIdent>
+namespace Framework.HierarchicalExpand;
+
+public class HierarchicalObjectAncestorLinkExpander<TPersistentDomainObjectBase, TDomainObject, TDomainObjectAncestorLink, TDomainObjectAncestorChildLink, TIdent> : IHierarchicalObjectExpander<TIdent>, IHierarchicalObjectQueryableExpander<TIdent>
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase, IHierarchicalPersistentDomainObjectBase<TDomainObject, TIdent>
         where TDomainObjectAncestorLink : class, TPersistentDomainObjectBase, IHierarchicalAncestorLink<TDomainObject, TDomainObjectAncestorChildLink, TIdent>
         where TDomainObjectAncestorChildLink : class, TPersistentDomainObjectBase, IHierarchicalToAncestorOrChildLink<TDomainObject, TIdent>
         where TIdent : struct
+{
+    private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
+
+    public HierarchicalObjectAncestorLinkExpander([NotNull] IQueryableSource<TPersistentDomainObjectBase> queryableSource)
     {
-        private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
+        this.queryableSource = queryableSource ?? throw new ArgumentNullException(nameof(queryableSource));
+    }
 
-        public HierarchicalObjectAncestorLinkExpander([NotNull] IQueryableSource<TPersistentDomainObjectBase> queryableSource)
+    public IEnumerable<TIdent> Expand(IEnumerable<TIdent> idents, HierarchicalExpandType expandType)
+    {
+        if (idents == null) throw new ArgumentNullException(nameof(idents));
+
+        if (idents is IQueryable<TIdent>)
         {
-            this.queryableSource = queryableSource ?? throw new ArgumentNullException(nameof(queryableSource));
+            return this.ExpandQueryable(idents as IQueryable<TIdent>, expandType);
         }
-
-        public IEnumerable<TIdent> Expand(IEnumerable<TIdent> idents, HierarchicalExpandType expandType)
+        else
         {
-            if (idents == null) throw new ArgumentNullException(nameof(idents));
-
-            if (idents is IQueryable<TIdent>)
-            {
-                return this.ExpandQueryable(idents as IQueryable<TIdent>, expandType);
-            }
-            else
-            {
-                return this.ExpandEnumerable(idents, expandType);
-            }
+            return this.ExpandEnumerable(idents, expandType);
         }
+    }
 
-        public Dictionary<TIdent, TIdent> ExpandWithParents(IEnumerable<TIdent> idents, HierarchicalExpandType expandType)
-        {
-            return this.ExpandWithParentsImplementation(idents.ToHashSet(), expandType);
-        }
+    public Dictionary<TIdent, TIdent> ExpandWithParents(IEnumerable<TIdent> idents, HierarchicalExpandType expandType)
+    {
+        return this.ExpandWithParentsImplementation(idents.ToHashSet(), expandType);
+    }
 
-        public Dictionary<TIdent, TIdent> ExpandWithParents(IQueryable<TIdent> idents, HierarchicalExpandType expandType)
-        {
-            return this.ExpandWithParentsImplementation(idents, expandType);
-        }
+    public Dictionary<TIdent, TIdent> ExpandWithParents(IQueryable<TIdent> idents, HierarchicalExpandType expandType)
+    {
+        return this.ExpandWithParentsImplementation(idents, expandType);
+    }
 
-        private Dictionary<TIdent, TIdent> ExpandWithParentsImplementation(IEnumerable<TIdent> idents, HierarchicalExpandType expandType)
-        {
-            return this.ExpandDomainObject(idents, expandType)
-                       .Select(domainObject => new { Id = domainObject.Id, ParentId = (TIdent?)domainObject.Parent.Id })
-                       .Distinct()
-                       .ToDictionary(pair => pair.Id, pair => pair.ParentId.GetValueOrDefault());
-        }
+    private Dictionary<TIdent, TIdent> ExpandWithParentsImplementation(IEnumerable<TIdent> idents, HierarchicalExpandType expandType)
+    {
+        return this.ExpandDomainObject(idents, expandType)
+                   .Select(domainObject => new { Id = domainObject.Id, ParentId = (TIdent?)domainObject.Parent.Id })
+                   .Distinct()
+                   .ToDictionary(pair => pair.Id, pair => pair.ParentId.GetValueOrDefault());
+    }
 
-        private IQueryable<TDomainObject> ExpandDomainObject(
+    private IQueryable<TDomainObject> ExpandDomainObject(
             IEnumerable<TIdent> idents,
             HierarchicalExpandType expandType)
+    {
+        switch (expandType)
         {
-            switch (expandType)
-            {
-                case HierarchicalExpandType.None:
+            case HierarchicalExpandType.None:
 
-                    return from domainObject in this.queryableSource.GetQueryable<TDomainObject>()
-                           where idents.Contains(domainObject.Id)
-                           select domainObject;
+                return from domainObject in this.queryableSource.GetQueryable<TDomainObject>()
+                       where idents.Contains(domainObject.Id)
+                       select domainObject;
 
-                case HierarchicalExpandType.Children:
+            case HierarchicalExpandType.Children:
 
-                    return from link in this.queryableSource.GetQueryable<TDomainObjectAncestorLink>()
-                           where idents.Contains(link.Ancestor.Id)
-                           select link.Child;
+                return from link in this.queryableSource.GetQueryable<TDomainObjectAncestorLink>()
+                       where idents.Contains(link.Ancestor.Id)
+                       select link.Child;
 
-                case HierarchicalExpandType.Parents:
+            case HierarchicalExpandType.Parents:
 
-                    return from link in this.queryableSource.GetQueryable<TDomainObjectAncestorLink>()
-                           where idents.Contains(link.Child.Id)
-                           select link.Ancestor;
+                return from link in this.queryableSource.GetQueryable<TDomainObjectAncestorLink>()
+                       where idents.Contains(link.Child.Id)
+                       select link.Ancestor;
 
-                case HierarchicalExpandType.All:
+            case HierarchicalExpandType.All:
 
-                    return from link in this.queryableSource.GetQueryable<TDomainObjectAncestorChildLink>()
-                           where idents.Contains(link.Source.Id)
-                           select link.ChildOrAncestor;
+                return from link in this.queryableSource.GetQueryable<TDomainObjectAncestorChildLink>()
+                       where idents.Contains(link.Source.Id)
+                       select link.ChildOrAncestor;
 
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(expandType));
-            }
+            default:
+                throw new ArgumentOutOfRangeException(nameof(expandType));
         }
+    }
 
-        public IEnumerable<TIdent> ExpandEnumerable(IEnumerable<TIdent> baseIdents, HierarchicalExpandType expandType)
+    public IEnumerable<TIdent> ExpandEnumerable(IEnumerable<TIdent> baseIdents, HierarchicalExpandType expandType)
+    {
+        if (baseIdents == null) throw new ArgumentNullException(nameof(baseIdents));
+
+        var ancestorLinkQueryable = this.queryableSource.GetQueryable<TDomainObjectAncestorLink>();
+
+        var idents = baseIdents.ToHashSet();
+
+        switch (expandType)
         {
-            if (baseIdents == null) throw new ArgumentNullException(nameof(baseIdents));
+            case HierarchicalExpandType.None:
 
-            var ancestorLinkQueryable = this.queryableSource.GetQueryable<TDomainObjectAncestorLink>();
+                return idents;
 
-            var idents = baseIdents.ToHashSet();
+            case HierarchicalExpandType.Children:
 
-            switch (expandType)
-            {
-                case HierarchicalExpandType.None:
+                return ancestorLinkQueryable.Where(link => idents.Contains(link.Ancestor.Id)).Select(link => link.Child.Id);
 
-                    return idents;
+            case HierarchicalExpandType.Parents:
 
-                case HierarchicalExpandType.Children:
+                return ancestorLinkQueryable.Where(link => idents.Contains(link.Child.Id)).Select(link => link.Ancestor.Id);
 
-                    return ancestorLinkQueryable.Where(link => idents.Contains(link.Ancestor.Id)).Select(link => link.Child.Id);
+            case HierarchicalExpandType.All:
 
-                case HierarchicalExpandType.Parents:
+                return this.queryableSource.GetQueryable<TDomainObjectAncestorChildLink>()
+                           .Where(z => idents.Contains(z.Source.Id))
+                           .Select(z => z.ChildOrAncestor.Id);
 
-                    return ancestorLinkQueryable.Where(link => idents.Contains(link.Child.Id)).Select(link => link.Ancestor.Id);
-
-                case HierarchicalExpandType.All:
-
-                    return this.queryableSource.GetQueryable<TDomainObjectAncestorChildLink>()
-                               .Where(z => idents.Contains(z.Source.Id))
-                               .Select(z => z.ChildOrAncestor.Id);
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(expandType));
-            }
+            default:
+                throw new ArgumentOutOfRangeException(nameof(expandType));
         }
+    }
 
-        public IQueryable<TIdent> ExpandQueryable(IQueryable<TIdent> idents, HierarchicalExpandType expandType)
+    public IQueryable<TIdent> ExpandQueryable(IQueryable<TIdent> idents, HierarchicalExpandType expandType)
+    {
+        if (idents == null) throw new ArgumentNullException(nameof(idents));
+
+        var ancestorLinkQueryable = this.queryableSource.GetQueryable<TDomainObjectAncestorLink>();
+
+        switch (expandType)
         {
-            if (idents == null) throw new ArgumentNullException(nameof(idents));
+            case HierarchicalExpandType.None:
 
-            var ancestorLinkQueryable = this.queryableSource.GetQueryable<TDomainObjectAncestorLink>();
+                return idents;
 
-            switch (expandType)
-            {
-                case HierarchicalExpandType.None:
+            case HierarchicalExpandType.Children:
 
-                    return idents;
+                return ancestorLinkQueryable.Where(link => idents.Contains(link.Ancestor.Id)).Select(link => link.Child.Id);
 
-                case HierarchicalExpandType.Children:
+            case HierarchicalExpandType.Parents:
 
-                    return ancestorLinkQueryable.Where(link => idents.Contains(link.Ancestor.Id)).Select(link => link.Child.Id);
+                return ancestorLinkQueryable.Where(link => idents.Contains(link.Child.Id)).Select(link => link.Ancestor.Id);
 
-                case HierarchicalExpandType.Parents:
+            case HierarchicalExpandType.All:
 
-                    return ancestorLinkQueryable.Where(link => idents.Contains(link.Child.Id)).Select(link => link.Ancestor.Id);
+                return this.queryableSource.GetQueryable<TDomainObjectAncestorChildLink>()
+                           .Where(z => idents.Contains(z.Source.Id))
+                           .Select(z => z.ChildOrAncestor.Id);
 
-                case HierarchicalExpandType.All:
-
-                    return this.queryableSource.GetQueryable<TDomainObjectAncestorChildLink>()
-                               .Where(z => idents.Contains(z.Source.Id))
-                               .Select(z => z.ChildOrAncestor.Id);
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(expandType));
-            }
+            default:
+                throw new ArgumentOutOfRangeException(nameof(expandType));
         }
+    }
 
-        public Expression<Func<IEnumerable<TIdent>, IEnumerable<TIdent>>> GetExpandExpression(HierarchicalExpandType expandType)
+    public Expression<Func<IEnumerable<TIdent>, IEnumerable<TIdent>>> GetExpandExpression(HierarchicalExpandType expandType)
+    {
+        var ancestorLinkQueryable = this.queryableSource.GetQueryable<TDomainObjectAncestorLink>();
+
+        switch (expandType)
         {
-            var ancestorLinkQueryable = this.queryableSource.GetQueryable<TDomainObjectAncestorLink>();
+            case HierarchicalExpandType.None:
 
-            switch (expandType)
-            {
-                case HierarchicalExpandType.None:
+                return idents => idents;
 
-                    return idents => idents;
+            case HierarchicalExpandType.Children:
 
-                case HierarchicalExpandType.Children:
+                return idents => ancestorLinkQueryable.Where(link => idents.Contains(link.Ancestor.Id)).Select(link => link.Child.Id);
 
-                    return idents => ancestorLinkQueryable.Where(link => idents.Contains(link.Ancestor.Id)).Select(link => link.Child.Id);
+            case HierarchicalExpandType.Parents:
 
-                case HierarchicalExpandType.Parents:
+                return idents => ancestorLinkQueryable.Where(link => idents.Contains(link.Child.Id)).Select(link => link.Ancestor.Id);
 
-                    return idents => ancestorLinkQueryable.Where(link => idents.Contains(link.Child.Id)).Select(link => link.Ancestor.Id);
+            case HierarchicalExpandType.All:
 
-                case HierarchicalExpandType.All:
-
-                    return idents => this.queryableSource.GetQueryable<TDomainObjectAncestorChildLink>()
+                return idents => this.queryableSource.GetQueryable<TDomainObjectAncestorChildLink>()
                                      .Where(z => idents.Contains(z.Source.Id))
                                      .Select(z => z.ChildOrAncestor.Id);
 
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(expandType));
-            }
+            default:
+                throw new ArgumentOutOfRangeException(nameof(expandType));
         }
+    }
 
-        public Expression<Func<TIdent, IEnumerable<TIdent>>> TryGetSingleExpandExpression(HierarchicalExpandType expandType)
+    public Expression<Func<TIdent, IEnumerable<TIdent>>> TryGetSingleExpandExpression(HierarchicalExpandType expandType)
+    {
+        return this.TryGetSingleExpandExpressionInternal(expandType).Maybe(expr => expr.ExpandConst().InlineEval());
+    }
+
+    private Expression<Func<TIdent, IEnumerable<TIdent>>> TryGetSingleExpandExpressionInternal(HierarchicalExpandType expandType)
+    {
+        var ancestorLinkQueryable = this.queryableSource.GetQueryable<TDomainObjectAncestorLink>();
+
+        var eqIdentsExpr = ExpressionHelper.GetEquality<TIdent>();
+
+        switch (expandType)
         {
-            return this.TryGetSingleExpandExpressionInternal(expandType).Maybe(expr => expr.ExpandConst().InlineEval());
-        }
+            case HierarchicalExpandType.None:
 
-        private Expression<Func<TIdent, IEnumerable<TIdent>>> TryGetSingleExpandExpressionInternal(HierarchicalExpandType expandType)
-        {
-            var ancestorLinkQueryable = this.queryableSource.GetQueryable<TDomainObjectAncestorLink>();
+                return null;
 
-            var eqIdentsExpr = ExpressionHelper.GetEquality<TIdent>();
+            case HierarchicalExpandType.Children:
 
-            switch (expandType)
-            {
-                case HierarchicalExpandType.None:
+                return ident => ancestorLinkQueryable.Where(link => eqIdentsExpr.Eval(ident, link.Ancestor.Id)).Select(link => link.Child.Id);
 
-                    return null;
+            case HierarchicalExpandType.Parents:
 
-                case HierarchicalExpandType.Children:
+                return ident => ancestorLinkQueryable.Where(link => eqIdentsExpr.Eval(ident, link.Child.Id)).Select(link => link.Ancestor.Id);
 
-                    return ident => ancestorLinkQueryable.Where(link => eqIdentsExpr.Eval(ident, link.Ancestor.Id)).Select(link => link.Child.Id);
+            case HierarchicalExpandType.All:
 
-                case HierarchicalExpandType.Parents:
+                return ident => this.queryableSource.GetQueryable<TDomainObjectAncestorChildLink>()
 
-                    return ident => ancestorLinkQueryable.Where(link => eqIdentsExpr.Eval(ident, link.Child.Id)).Select(link => link.Ancestor.Id);
+                                    .Where(z => eqIdentsExpr.Eval(ident, z.Source.Id))
+                                    .Select(z => z.ChildOrAncestor.Id);
 
-                case HierarchicalExpandType.All:
-
-                    return ident => this.queryableSource.GetQueryable<TDomainObjectAncestorChildLink>()
-
-                                        .Where(z => eqIdentsExpr.Eval(ident, z.Source.Id))
-                                        .Select(z => z.ChildOrAncestor.Id);
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(expandType));
-            }
+            default:
+                throw new ArgumentOutOfRangeException(nameof(expandType));
         }
     }
 }

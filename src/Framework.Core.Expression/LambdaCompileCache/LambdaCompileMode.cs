@@ -1,18 +1,17 @@
 ﻿using System;
 
-namespace Framework.Core
+namespace Framework.Core;
+
+[Flags]
+public enum LambdaCompileMode
 {
-    [Flags]
-    public enum LambdaCompileMode
-    {
-        None = 0,
+    None = 0,
 
-        InjectMaybe = 1,
+    InjectMaybe = 1,
 
-        IgnoreStringCase = 2,
+    IgnoreStringCase = 2,
 
-        OptimizeBooleanLogic = 4,
+    OptimizeBooleanLogic = 4,
 
-        All = InjectMaybe + IgnoreStringCase + OptimizeBooleanLogic
-    }
+    All = InjectMaybe + IgnoreStringCase + OptimizeBooleanLogic
 }

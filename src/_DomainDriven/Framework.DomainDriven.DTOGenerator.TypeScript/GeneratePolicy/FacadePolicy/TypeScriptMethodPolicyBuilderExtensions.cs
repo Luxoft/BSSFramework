@@ -3,19 +3,18 @@ using System.Linq;
 
 using Framework.Core;
 
-namespace Framework.DomainDriven.DTOGenerator.TypeScript.Facade
+namespace Framework.DomainDriven.DTOGenerator.TypeScript.Facade;
+
+public static class TypeScriptMethodPolicyBuilderExtensions
 {
-    public static class TypeScriptMethodPolicyBuilderExtensions
+    public static IEnumerable<string> GetFormattedMethods<T>(this TypeScriptMethodPolicyBuilder<T> builder)
     {
-        public static IEnumerable<string> GetFormattedMethods<T>(this TypeScriptMethodPolicyBuilder<T> builder)
-        {
-            return from method in builder.UsedMethods
+        return from method in builder.UsedMethods
 
-                   orderby method.Name
+               orderby method.Name
 
-                   let parameters = method.GetParametersWithExpandAutoRequest().Select(p => $"{p.ParameterType.ToCSharpFullName()} {p.Name}").Join(", ")
+               let parameters = method.GetParametersWithExpandAutoRequest().Select(p => $"{p.ParameterType.ToCSharpFullName()} {p.Name}").Join(", ")
 
-                   select $"{method.GetReturnTypeWithUnpackTask().ToCSharpFullName()} {method.Name} ({parameters})";
-        }
+               select $"{method.GetReturnTypeWithUnpackTask().ToCSharpFullName()} {method.Name} ({parameters})";
     }
 }

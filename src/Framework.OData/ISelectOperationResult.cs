@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Framework.OData
+namespace Framework.OData;
+
+public interface ISelectOperationResult
 {
-    public interface ISelectOperationResult
-    {
-        int TotalCount { get; }
+    int TotalCount { get; }
 
-        Type ElementType { get; }
-    }
+    Type ElementType { get; }
+}
 
-    public interface ISelectOperationResult<out T> : ISelectOperationResult
-    {
-        IEnumerable<T> Items { get; }
-    }
+public interface ISelectOperationResult<out T> : ISelectOperationResult
+{
+    IEnumerable<T> Items { get; }
 }

@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Framework.DomainDriven.Audit
+namespace Framework.DomainDriven.Audit;
+
+public interface IAuditProperty
 {
-    public interface IAuditProperty
-    {
-        LambdaExpression PropertyExpr { get; }
+    LambdaExpression PropertyExpr { get; }
 
-        Delegate GetCurrentValue { get; }
-    }
+    Delegate GetCurrentValue { get; }
+}
 
-    public interface IAuditProperty<TDomainObject, TProperty> : IAuditProperty
-    {
-        new Expression<Func<TDomainObject, TProperty>> PropertyExpr { get; }
+public interface IAuditProperty<TDomainObject, TProperty> : IAuditProperty
+{
+    new Expression<Func<TDomainObject, TProperty>> PropertyExpr { get; }
 
-        new Func<TProperty> GetCurrentValue { get; }
-    }
+    new Func<TProperty> GetCurrentValue { get; }
 }

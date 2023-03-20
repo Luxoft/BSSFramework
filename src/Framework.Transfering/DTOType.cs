@@ -1,21 +1,20 @@
-﻿namespace Framework.Transfering
+﻿namespace Framework.Transfering;
+
+public enum DTOType
 {
-    public enum DTOType
-    {
-        IdentityDTO = 1,
+    IdentityDTO = 1,
 
-        VisualDTO,
+    VisualDTO,
 
-        SimpleDTO,
+    SimpleDTO,
 
-        FullDTO,
+    FullDTO,
 
-        RichDTO,
+    RichDTO,
 
-        StrictDTO,
+    StrictDTO,
 
-        UpdateDTO,
+    UpdateDTO,
 
-        ProjectionDTO
-    }
+    ProjectionDTO
 }

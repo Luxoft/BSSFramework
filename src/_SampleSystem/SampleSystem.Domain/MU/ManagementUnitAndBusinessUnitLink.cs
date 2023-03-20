@@ -6,99 +6,98 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 
-namespace SampleSystem.Domain
-{
-    [BLLViewRole, BLLRemoveRole, BLLSaveRole]
-    [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.ManagementUnitAndBusinessUnitLinkView)]
-    [SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.ManagementUnitAndBusinessUnitLinkEdit)]
-    public class ManagementUnitAndBusinessUnitLink :
+namespace SampleSystem.Domain;
+
+[BLLViewRole, BLLRemoveRole, BLLSaveRole]
+[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.ManagementUnitAndBusinessUnitLinkView)]
+[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.ManagementUnitAndBusinessUnitLinkEdit)]
+public class ManagementUnitAndBusinessUnitLink :
         AuditPersistentDomainObjectBase,
         IDetail<ManagementUnit>,
         IDetail<BusinessUnit>,
         IVisualIdentityObject
+{
+    private BusinessUnit businessUnit;
+    private ManagementUnit managementUnit;
+    private bool equalBU;
+
+    public ManagementUnitAndBusinessUnitLink(ManagementUnit managementUnit)
     {
-        private BusinessUnit businessUnit;
-        private ManagementUnit managementUnit;
-        private bool equalBU;
+        this.managementUnit = managementUnit;
+        this.managementUnit.Maybe(z => z.AddDetail(this));
+    }
 
-        public ManagementUnitAndBusinessUnitLink(ManagementUnit managementUnit)
-        {
-            this.managementUnit = managementUnit;
-            this.managementUnit.Maybe(z => z.AddDetail(this));
-        }
-
-        public ManagementUnitAndBusinessUnitLink(ManagementUnit managementUnit, BusinessUnit businessUnit)
+    public ManagementUnitAndBusinessUnitLink(ManagementUnit managementUnit, BusinessUnit businessUnit)
             : this(managementUnit)
-        {
-            this.businessUnit = businessUnit;
-        }
+    {
+        this.businessUnit = businessUnit;
+    }
 
-        public ManagementUnitAndBusinessUnitLink(BusinessUnit businessUnit)
-        {
-            this.businessUnit = businessUnit;
-            this.businessUnit.Maybe(z => z.AddDetail(this));
-        }
+    public ManagementUnitAndBusinessUnitLink(BusinessUnit businessUnit)
+    {
+        this.businessUnit = businessUnit;
+        this.businessUnit.Maybe(z => z.AddDetail(this));
+    }
 
-        public ManagementUnitAndBusinessUnitLink(BusinessUnit businessUnit, ManagementUnit managementUnit)
+    public ManagementUnitAndBusinessUnitLink(BusinessUnit businessUnit, ManagementUnit managementUnit)
             : this(businessUnit)
-        {
-            this.managementUnit = managementUnit;
-        }
+    {
+        this.managementUnit = managementUnit;
+    }
 
-        public ManagementUnitAndBusinessUnitLink()
-        {
-        }
+    public ManagementUnitAndBusinessUnitLink()
+    {
+    }
 
-        public virtual bool EqualBU
-        {
-            get { return this.equalBU; }
-            set { this.equalBU = value; }
-        }
+    public virtual bool EqualBU
+    {
+        get { return this.equalBU; }
+        set { this.equalBU = value; }
+    }
 
-        [Framework.Restriction.Required]
-        [Framework.Restriction.UniqueElement]
-        public virtual ManagementUnit ManagementUnit
-        {
-            get { return this.managementUnit; }
-            set { this.managementUnit = value; }
-        }
+    [Framework.Restriction.Required]
+    [Framework.Restriction.UniqueElement]
+    public virtual ManagementUnit ManagementUnit
+    {
+        get { return this.managementUnit; }
+        set { this.managementUnit = value; }
+    }
 
-        [Framework.Restriction.Required]
-        [Framework.Restriction.UniqueElement]
-        public virtual BusinessUnit BusinessUnit
-        {
-            get { return this.businessUnit; }
-            set { this.businessUnit = value; }
-        }
+    [Framework.Restriction.Required]
+    [Framework.Restriction.UniqueElement]
+    public virtual BusinessUnit BusinessUnit
+    {
+        get { return this.businessUnit; }
+        set { this.businessUnit = value; }
+    }
 
-        [CustomSerialization(CustomSerializationMode.ReadOnly, DTORole.Event | DTORole.Integration)]
-        [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client)]
-        [ExpandPath("ManagementUnit.HRDepartments")]
-        [DetailRole(false)]
-        public virtual IEnumerable<HRDepartment> LinkedHRDepartments
-        {
-            get { return this.ManagementUnit.HRDepartments.ToList(link => link.HRDepartment); }
-        }
+    [CustomSerialization(CustomSerializationMode.ReadOnly, DTORole.Event | DTORole.Integration)]
+    [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client)]
+    [ExpandPath("ManagementUnit.HRDepartments")]
+    [DetailRole(false)]
+    public virtual IEnumerable<HRDepartment> LinkedHRDepartments
+    {
+        get { return this.ManagementUnit.HRDepartments.ToList(link => link.HRDepartment); }
+    }
 
-        ManagementUnit IDetail<ManagementUnit>.Master
+    ManagementUnit IDetail<ManagementUnit>.Master
+    {
+        get
         {
-            get
-            {
-                return this.managementUnit;
-            }
+            return this.managementUnit;
         }
+    }
 
-        BusinessUnit IDetail<BusinessUnit>.Master
+    BusinessUnit IDetail<BusinessUnit>.Master
+    {
+        get
         {
-            get
-            {
-                return this.businessUnit;
-            }
+            return this.businessUnit;
         }
+    }
 
-        string IVisualIdentityObject.Name
-        {
-            get { return this.BusinessUnit.Maybe(x => x.Name) + "-" + this.ManagementUnit.Maybe(x => x.Name); }
-        }
+    string IVisualIdentityObject.Name
+    {
+        get { return this.BusinessUnit.Maybe(x => x.Name) + "-" + this.ManagementUnit.Maybe(x => x.Name); }
     }
 }

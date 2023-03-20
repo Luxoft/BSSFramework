@@ -1,9 +1,8 @@
 ﻿using System.Net.Mail;
 
-namespace Framework.Notification
+namespace Framework.Notification;
+
+public interface IMailAddressContainer
 {
-    public interface IMailAddressContainer
-    {
-        MailAddress Sender { get; }
-    }
+    MailAddress Sender { get; }
 }

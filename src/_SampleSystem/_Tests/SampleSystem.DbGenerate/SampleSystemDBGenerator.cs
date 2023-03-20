@@ -5,28 +5,27 @@ using Framework.DomainDriven.Metadata;
 using Framework.DomainDriven.NHibernate;
 using Framework.Persistent.Mapping;
 
-namespace SampleSystem.DbGenerate
+namespace SampleSystem.DbGenerate;
+
+public class SampleSystemDBGenerator : DBGenerator
 {
-    public class SampleSystemDBGenerator : DBGenerator
+    public SampleSystemDBGenerator(IMappingSettings settings) : base(settings)
     {
-        public SampleSystemDBGenerator(IMappingSettings settings) : base(settings)
-        {
-        }
+    }
 
-        protected override void FilterMetadata(AssemblyMetadata metadata)
-        {
-            base.FilterMetadata(metadata);
+    protected override void FilterMetadata(AssemblyMetadata metadata)
+    {
+        base.FilterMetadata(metadata);
 
-            var nextDomainTypes = metadata.DomainTypes.Where(this.Used).ToList();
+        var nextDomainTypes = metadata.DomainTypes.Where(this.Used).ToList();
 
-            metadata.DomainTypes = nextDomainTypes;
-        }
+        metadata.DomainTypes = nextDomainTypes;
+    }
 
-        private bool Used(DomainTypeMetadata domainTypeMetadata)
-        {
-            var tableAttribute = domainTypeMetadata.DomainType.GetTableAttribute();
+    private bool Used(DomainTypeMetadata domainTypeMetadata)
+    {
+        var tableAttribute = domainTypeMetadata.DomainType.GetTableAttribute();
 
-            return tableAttribute == null || tableAttribute.Schema == "app";
-        }
+        return tableAttribute == null || tableAttribute.Schema == "app";
     }
 }

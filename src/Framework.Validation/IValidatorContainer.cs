@@ -1,13 +1,12 @@
-﻿namespace Framework.Validation
-{
-    public interface IValidatorContainer<out TValidator>
+﻿namespace Framework.Validation;
+
+public interface IValidatorContainer<out TValidator>
         where TValidator : IValidator
-    {
-        TValidator Validator { get; }
-    }
+{
+    TValidator Validator { get; }
+}
 
-    public interface IValidatorContainer : IValidatorContainer<IValidator>
-    {
+public interface IValidatorContainer : IValidatorContainer<IValidator>
+{
 
-    }
 }

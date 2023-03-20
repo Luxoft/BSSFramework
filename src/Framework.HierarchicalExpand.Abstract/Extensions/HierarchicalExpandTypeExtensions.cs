@@ -1,20 +1,19 @@
-﻿namespace Framework.HierarchicalExpand
+﻿namespace Framework.HierarchicalExpand;
+
+public static class HierarchicalExpandTypeExtensions
 {
-    public static class HierarchicalExpandTypeExtensions
+    public static HierarchicalExpandType Reverse(this HierarchicalExpandType hierarchicalExpandType)
     {
-        public static HierarchicalExpandType Reverse(this HierarchicalExpandType hierarchicalExpandType)
+        switch (hierarchicalExpandType)
         {
-            switch (hierarchicalExpandType)
-            {
-                case HierarchicalExpandType.Parents:
-                    return HierarchicalExpandType.Children;
+            case HierarchicalExpandType.Parents:
+                return HierarchicalExpandType.Children;
 
-                case HierarchicalExpandType.Children:
-                    return HierarchicalExpandType.Parents;
+            case HierarchicalExpandType.Children:
+                return HierarchicalExpandType.Parents;
 
-                default:
-                    return hierarchicalExpandType;
-            }
+            default:
+                return hierarchicalExpandType;
         }
     }
 }

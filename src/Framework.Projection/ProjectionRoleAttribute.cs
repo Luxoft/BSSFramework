@@ -1,25 +1,24 @@
 ﻿using System;
 
-namespace Framework.Projection
+namespace Framework.Projection;
+
+/// <summary>
+/// Роль проекции
+/// </summary>
+public enum ProjectionRole
 {
     /// <summary>
-    /// Роль проекции
+    /// Обычная проекция
     /// </summary>
-    public enum ProjectionRole
-    {
-        /// <summary>
-        /// Обычная проекция
-        /// </summary>
-        Default,
+    Default,
 
-        /// <summary>
-        /// Автоматически достраиваемая проекция (для переходов через ExpandPath)
-        /// </summary>
-        AutoNode,
+    /// <summary>
+    /// Автоматически достраиваемая проекция (для переходов через ExpandPath)
+    /// </summary>
+    AutoNode,
         
-        /// <summary>
-        /// Проекция для безопасности
-        /// </summary>
-        SecurityNode
-    }
+    /// <summary>
+    /// Проекция для безопасности
+    /// </summary>
+    SecurityNode
 }

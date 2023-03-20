@@ -1,7 +1,6 @@
-﻿namespace Framework.Validation
+﻿namespace Framework.Validation;
+
+public interface IOperationContextData
 {
-    public interface IOperationContextData
-    {
-        int OperationContext { get; }
-    }
+    int OperationContext { get; }
 }

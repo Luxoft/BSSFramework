@@ -1,29 +1,28 @@
 ﻿using System;
 using System.Linq;
 
-namespace Framework.Core
+namespace Framework.Core;
+
+public static class TypeExtensions
 {
-    public static class TypeExtensions
+    public static Type GetNullableElementType(this Type type)
     {
-        public static Type GetNullableElementType(this Type type)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
+        if (type == null) throw new ArgumentNullException(nameof(type));
 
-            return type.IsGenericTypeImplementation(typeof(Nullable<>)) ? type.GetGenericArguments().Single() : null;
-        }
+        return type.IsGenericTypeImplementation(typeof(Nullable<>)) ? type.GetGenericArguments().Single() : null;
+    }
 
-        public static Type GetNullableElementTypeOrSelf(this Type type)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
+    public static Type GetNullableElementTypeOrSelf(this Type type)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
 
-            return type.GetNullableElementType() ?? type;
-        }
+        return type.GetNullableElementType() ?? type;
+    }
 
-        public static bool IsNullable(this Type type)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
+    public static bool IsNullable(this Type type)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
 
-            return type.GetNullableElementType() != null;
-        }
+        return type.GetNullableElementType() != null;
     }
 }

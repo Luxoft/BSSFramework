@@ -1,7 +1,6 @@
-﻿namespace Framework.Validation
+﻿namespace Framework.Validation;
+
+public interface ICustomErrorData
 {
-    public interface ICustomErrorData
-    {
-        object CustomError { get; }
-    }
+    object CustomError { get; }
 }

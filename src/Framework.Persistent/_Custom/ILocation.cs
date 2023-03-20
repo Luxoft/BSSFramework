@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
-{
-    public interface ILocation
-    {
+﻿namespace Framework.Persistent;
 
-    }
+public interface ILocation
+{
+
 }

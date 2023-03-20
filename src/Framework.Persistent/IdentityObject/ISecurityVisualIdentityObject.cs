@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface ISecurityVisualIdentityObject
 {
-    public interface ISecurityVisualIdentityObject
-    {
-        string Name { get; }
-    }
+    string Name { get; }
 }

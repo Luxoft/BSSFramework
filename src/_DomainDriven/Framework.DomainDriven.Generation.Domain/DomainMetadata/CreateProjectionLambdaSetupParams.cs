@@ -1,14 +1,13 @@
-﻿namespace Framework.DomainDriven.Generation.Domain
+﻿namespace Framework.DomainDriven.Generation.Domain;
+
+public class CreateProjectionLambdaSetupParams
 {
-    public class CreateProjectionLambdaSetupParams
-    {
-        public string AssemblyName { get; set; }
+    public string AssemblyName { get; set; }
 
-        public string FullAssemblyName { get; set; }
+    public string FullAssemblyName { get; set; }
 
-        /// <summary>
-        /// Использование безопасности через атрибут `DependencySecurityAttribute`
-        /// </summary>
-        public bool UseDependencySecurity { get; set; }
-    }
+    /// <summary>
+    /// Использование безопасности через атрибут `DependencySecurityAttribute`
+    /// </summary>
+    public bool UseDependencySecurity { get; set; }
 }

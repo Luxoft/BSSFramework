@@ -9,4 +9,3 @@ namespace Framework.HierarchicalExpand
     {
         Type Resolve(Type identity);
     }
-}

@@ -5,74 +5,73 @@ using Framework.Persistent;
 
 using SampleSystem.Domain.Inline;
 
-namespace SampleSystem.Domain
+namespace SampleSystem.Domain;
+
+public class InsuranceDetail : AuditPersistentDomainObjectBase
 {
-    public class InsuranceDetail : AuditPersistentDomainObjectBase
+    private decimal cost;
+
+    private Fio fio;
+
+    private DateTime? birthDate;
+
+    private int age;
+
+    private string landlinePhone;
+
+    private string cellPhone;
+
+    private string registrationAddress;
+
+    private string residentalAddress;
+
+    [Money]
+    public virtual decimal Cost
     {
-        private decimal cost;
+        get { return this.cost.RoundMoney(); }
+        set { this.cost = value.RoundMoney(); }
+    }
 
-        private Fio fio;
+    public virtual Fio Fio
+    {
+        get { return this.fio; }
+        set { this.fio = value; }
+    }
 
-        private DateTime? birthDate;
+    public virtual DateTime? BirthDate
+    {
+        get { return this.birthDate; }
+        set { this.birthDate = value; }
+    }
 
-        private int age;
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
+    public virtual int Age
+    {
+        get { return this.age; }
+        set { this.age = value; }
+    }
 
-        private string landlinePhone;
+    public virtual string LandlinePhone
+    {
+        get { return this.landlinePhone; }
+        set { this.landlinePhone = value; }
+    }
 
-        private string cellPhone;
+    public virtual string CellPhone
+    {
+        get { return this.cellPhone; }
+        set { this.cellPhone = value; }
+    }
 
-        private string registrationAddress;
+    public virtual string RegistrationAddress
+    {
+        get { return this.registrationAddress; }
+        set { this.registrationAddress = value; }
+    }
 
-        private string residentalAddress;
-
-        [Money]
-        public virtual decimal Cost
-        {
-            get { return this.cost.RoundMoney(); }
-            set { this.cost = value.RoundMoney(); }
-        }
-
-        public virtual Fio Fio
-        {
-            get { return this.fio; }
-            set { this.fio = value; }
-        }
-
-        public virtual DateTime? BirthDate
-        {
-            get { return this.birthDate; }
-            set { this.birthDate = value; }
-        }
-
-        [CustomSerialization(CustomSerializationMode.ReadOnly)]
-        public virtual int Age
-        {
-            get { return this.age; }
-            set { this.age = value; }
-        }
-
-        public virtual string LandlinePhone
-        {
-            get { return this.landlinePhone; }
-            set { this.landlinePhone = value; }
-        }
-
-        public virtual string CellPhone
-        {
-            get { return this.cellPhone; }
-            set { this.cellPhone = value; }
-        }
-
-        public virtual string RegistrationAddress
-        {
-            get { return this.registrationAddress; }
-            set { this.registrationAddress = value; }
-        }
-
-        public virtual string ResidentalAddress
-        {
-            get { return this.residentalAddress; }
-            set { this.residentalAddress = value; }
-        }
+    public virtual string ResidentalAddress
+    {
+        get { return this.residentalAddress; }
+        set { this.residentalAddress = value; }
     }
 }

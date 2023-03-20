@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace Framework.Authorization.BLL
-{
-    [Flags]
-    public enum InitSecurityOperationMode
-    {
-        Add = 1,
+namespace Framework.Authorization.BLL;
 
-        Remove = 2
-    }
+[Flags]
+public enum InitSecurityOperationMode
+{
+    Add = 1,
+
+    Remove = 2
 }

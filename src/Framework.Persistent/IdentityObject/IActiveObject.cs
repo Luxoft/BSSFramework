@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface IActiveObject
 {
-    public interface IActiveObject
-    {
-        bool Active { get; }
-    }
+    bool Active { get; }
 }

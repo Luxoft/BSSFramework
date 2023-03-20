@@ -10,41 +10,40 @@ using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 
-namespace SampleSystem.IntegrationTests
+namespace SampleSystem.IntegrationTests;
+
+[TestClass]
+public class NhibDateTimeTests : TestBase
 {
-    [TestClass]
-    public class NhibDateTimeTests : TestBase
+    private DateTime prevDateTime;
+
+    [TestInitialize]
+    public void SetUp()
     {
-        private DateTime prevDateTime;
+        this.prevDateTime = this.DateTimeService.Now;
+    }
 
-        [TestInitialize]
-        public void SetUp()
-        {
-            this.prevDateTime = this.DateTimeService.Now;
-        }
+    [TestCleanup]
+    public void TestCleanup()
+    {
+        this.SetCurrentDateTime(this.prevDateTime);
+    }
 
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            this.SetCurrentDateTime(this.prevDateTime);
-        }
+    [TestMethod]
+    public void CreateObject_CreatedDateOverride()
+    {
+        // Arrange
+        var testDate = new DateTime(2000, 5, 5);
+        this.SetCurrentDateTime(testDate);
 
-        [TestMethod]
-        public void CreateObject_CreatedDateOverride()
-        {
-            // Arrange
-            var testDate = new DateTime(2000, 5, 5);
-            this.SetCurrentDateTime(testDate);
+        var example1Controller = this.GetControllerEvaluator<Example1Controller>();
 
-            var example1Controller = this.GetControllerEvaluator<Example1Controller>();
+        // Act
+        var objIdentity = example1Controller.Evaluate(c => c.SaveExample1(new Example1StrictDTO()));
 
-            // Act
-            var objIdentity = example1Controller.Evaluate(c => c.SaveExample1(new Example1StrictDTO()));
+        // Assert
+        var reloadedObj = example1Controller.Evaluate(c => c.GetSimpleExample1(objIdentity));
 
-            // Assert
-            var reloadedObj = example1Controller.Evaluate(c => c.GetSimpleExample1(objIdentity));
-
-            reloadedObj.CreateDate.Should().BeCloseTo(testDate, TimeSpan.FromSeconds(1));
-        }
+        reloadedObj.CreateDate.Should().BeCloseTo(testDate, TimeSpan.FromSeconds(1));
     }
 }

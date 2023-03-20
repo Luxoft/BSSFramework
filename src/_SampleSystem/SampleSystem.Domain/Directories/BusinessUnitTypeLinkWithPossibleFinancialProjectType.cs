@@ -2,64 +2,63 @@
 
 using Framework.Persistent;
 
-namespace SampleSystem.Domain
-{
-    public class BusinessUnitTypeLinkWithPossibleFinancialProjectType :
+namespace SampleSystem.Domain;
+
+public class BusinessUnitTypeLinkWithPossibleFinancialProjectType :
         AuditPersistentDomainObjectBase,
         IDetail<BusinessUnitType>
+{
+    private BusinessUnitType businessUnitType;
+
+    private FinancialProjectType financialProjectType;
+
+    public BusinessUnitTypeLinkWithPossibleFinancialProjectType()
     {
-        private BusinessUnitType businessUnitType;
+    }
 
-        private FinancialProjectType financialProjectType;
-
-        public BusinessUnitTypeLinkWithPossibleFinancialProjectType()
+    public BusinessUnitTypeLinkWithPossibleFinancialProjectType(BusinessUnitType businessUnitType)
+    {
+        if (businessUnitType == null)
         {
+            throw new ArgumentNullException(nameof(businessUnitType));
         }
 
-        public BusinessUnitTypeLinkWithPossibleFinancialProjectType(BusinessUnitType businessUnitType)
-        {
-            if (businessUnitType == null)
-            {
-                throw new ArgumentNullException(nameof(businessUnitType));
-            }
+        this.businessUnitType = businessUnitType;
+        this.businessUnitType.AddDetail(this);
+    }
 
-            this.businessUnitType = businessUnitType;
-            this.businessUnitType.AddDetail(this);
+    [IsMaster]
+    public virtual BusinessUnitType BusinessUnitType
+    {
+        get
+        {
+            return this.businessUnitType;
         }
 
-        [IsMaster]
-        public virtual BusinessUnitType BusinessUnitType
+        set
         {
-            get
-            {
-                return this.businessUnitType;
-            }
+            this.businessUnitType = value;
+        }
+    }
 
-            set
-            {
-                this.businessUnitType = value;
-            }
+    public virtual FinancialProjectType FinancialProjectType
+    {
+        get
+        {
+            return this.financialProjectType;
         }
 
-        public virtual FinancialProjectType FinancialProjectType
+        set
         {
-            get
-            {
-                return this.financialProjectType;
-            }
-
-            set
-            {
-                this.financialProjectType = value;
-            }
+            this.financialProjectType = value;
         }
+    }
 
-        BusinessUnitType IDetail<BusinessUnitType>.Master
+    BusinessUnitType IDetail<BusinessUnitType>.Master
+    {
+        get
         {
-            get
-            {
-                return this.businessUnitType;
-            }
+            return this.businessUnitType;
         }
     }
 }

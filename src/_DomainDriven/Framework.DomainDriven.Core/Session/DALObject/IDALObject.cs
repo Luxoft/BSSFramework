@@ -1,19 +1,18 @@
 ﻿using System;
 
-namespace Framework.DomainDriven
+namespace Framework.DomainDriven;
+
+/// <summary>
+/// For proxy types
+/// </summary>
+public interface IDALObject
 {
+    object Object { get; }
+
+    Type Type { get; }
+
     /// <summary>
-    /// For proxy types
+    /// Числовой идентификатор, определающий порядок применения/изменения/получения данной сущности
     /// </summary>
-    public interface IDALObject
-    {
-        object Object { get; }
-
-        Type Type { get; }
-
-        /// <summary>
-        /// Числовой идентификатор, определающий порядок применения/изменения/получения данной сущности
-        /// </summary>
-        long ApplyIndex { get; }
-    }
+    long ApplyIndex { get; }
 }

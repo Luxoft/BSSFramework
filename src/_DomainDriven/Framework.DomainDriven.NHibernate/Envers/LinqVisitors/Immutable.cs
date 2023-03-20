@@ -1,27 +1,26 @@
 ﻿using System;
 
-namespace NHibernate.Linq.Visitors
-{
-    internal class Immutable<T>
+namespace NHibernate.Linq.Visitors;
+
+internal class Immutable<T>
         where T : class
+{
+    private T source;
+
+    public T Value
     {
-        private T source;
+        get => this.source;
 
-        public T Value
+        set
         {
-            get => this.source;
-
-            set
+            if (this.source != null && value != this.source)
             {
-                if (this.source != null && value != this.source)
-                {
-                    throw new ArgumentException("Value also initialized");
-                }
-
-                this.source = value;
+                throw new ArgumentException("Value also initialized");
             }
-        }
 
-        public bool IsInit => this.source != null;
+            this.source = value;
+        }
     }
+
+    public bool IsInit => this.source != null;
 }

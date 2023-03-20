@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface IDomainType : IVisualIdentityObject
 {
-    public interface IDomainType : IVisualIdentityObject
-    {
-        string NameSpace { get; }
-    }
+    string NameSpace { get; }
 }

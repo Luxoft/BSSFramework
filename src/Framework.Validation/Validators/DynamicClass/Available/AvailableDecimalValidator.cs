@@ -2,18 +2,17 @@
 
 using Framework.Core;
 
-namespace Framework.Validation
+namespace Framework.Validation;
+
+public class AvailableDecimalValidator : RangeClassValidator<decimal, decimal>
 {
-    public class AvailableDecimalValidator : RangeClassValidator<decimal, decimal>
+    private AvailableDecimalValidator ()
     {
-        private AvailableDecimalValidator ()
-        {
-        }
-
-
-        protected override Func<Range<decimal>, decimal, bool> IsValidValueFunc { get; } = RangePropertyValidatorHelper.Decimal.AvailableFunc;
-
-
-        public static AvailableDecimalValidator Value { get; } = new AvailableDecimalValidator();
     }
+
+
+    protected override Func<Range<decimal>, decimal, bool> IsValidValueFunc { get; } = RangePropertyValidatorHelper.Decimal.AvailableFunc;
+
+
+    public static AvailableDecimalValidator Value { get; } = new AvailableDecimalValidator();
 }

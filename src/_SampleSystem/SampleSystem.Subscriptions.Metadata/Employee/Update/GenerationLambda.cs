@@ -18,10 +18,9 @@ namespace SampleSystem.Subscriptions.Metadata.Employee.Update
         }
 
         private NotificationMessageGenerationInfo[] GetRecipients(
-                ISampleSystemBLLContext context,
-                DomainObjectVersions<Domain.Employee> versions)
-        {
-            return new[] { new NotificationMessageGenerationInfo("tester@luxoft.com", versions.Previous, versions.Current) };
-        }
+            ISampleSystemBLLContext context,
+            DomainObjectVersions<Domain.Employee> versions)
+    {
+        return new[] { new NotificationMessageGenerationInfo("tester@luxoft.com", versions.Previous, versions.Current) };
     }
 }

@@ -1,8 +1,7 @@
-﻿namespace Framework.DomainDriven
+﻿namespace Framework.DomainDriven;
+
+public enum MergeColumnMode
 {
-    public enum MergeColumnMode
-    {
-        UpdateType,
-        ViaRemove
-    }
+    UpdateType,
+    ViaRemove
 }

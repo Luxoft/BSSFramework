@@ -3,26 +3,26 @@ using System;
 namespace Framework.Validation
 {
     /// <summary>
-    /// Атрибут для выборочной валидации свойства
+    /// ГЂГІГ°ГЁГЎГіГІ Г¤Г«Гї ГўГ»ГЎГ®Г°Г®Г·Г­Г®Г© ГўГ Г«ГЁГ¤Г Г¶ГЁГЁ Г±ГўГ®Г©Г±ГІГўГ 
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
     public class PropertyValidationModeAttribute : Attribute
     {
         /// <summary>
-        /// Режим валидации свойства (по умолчанию выключена для простых виртуальных свойств)
+        /// ГђГҐГ¦ГЁГ¬ ГўГ Г«ГЁГ¤Г Г¶ГЁГЁ Г±ГўГ®Г©Г±ГІГўГ  (ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ ГўГ»ГЄГ«ГѕГ·ГҐГ­Г  Г¤Г«Гї ГЇГ°Г®Г±ГІГ»Гµ ГўГЁГ°ГІГіГ Г«ГјГ­Г»Гµ Г±ГўГ®Г©Г±ГІГў)
         /// </summary>
         public readonly PropertyValidationMode Mode;
 
         /// <summary>
-        /// Режим валидации внутренних объектов (по умолчанию включена только для Detail-свойств)
+        /// ГђГҐГ¦ГЁГ¬ ГўГ Г«ГЁГ¤Г Г¶ГЁГЁ ГўГ­ГіГІГ°ГҐГ­Г­ГЁГµ Г®ГЎГєГҐГЄГІГ®Гў (ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ ГўГЄГ«ГѕГ·ГҐГ­Г  ГІГ®Г«ГјГЄГ® Г¤Г«Гї Detail-Г±ГўГ®Г©Г±ГІГў)
         /// </summary>
         public readonly PropertyValidationMode DeepMode;
 
         /// <summary>
-        /// Конструктор
+        /// ГЉГ®Г­Г±ГІГ°ГіГЄГІГ®Г°
         /// </summary>
-        /// <param name="mode">Режим валидации свойства</param>
-        /// <param name="deepMode">Режим валидации внутренних объектов</param>
+        /// <param name="mode">ГђГҐГ¦ГЁГ¬ ГўГ Г«ГЁГ¤Г Г¶ГЁГЁ Г±ГўГ®Г©Г±ГІГўГ </param>
+        /// <param name="deepMode">ГђГҐГ¦ГЁГ¬ ГўГ Г«ГЁГ¤Г Г¶ГЁГЁ ГўГ­ГіГІГ°ГҐГ­Г­ГЁГµ Г®ГЎГєГҐГЄГІГ®Гў</param>
         public PropertyValidationModeAttribute(PropertyValidationMode mode, PropertyValidationMode deepMode = PropertyValidationMode.Auto)
         {
             this.Mode = mode;
@@ -30,18 +30,18 @@ namespace Framework.Validation
         }
 
         /// <summary>
-        /// Конструктор
+        /// ГЉГ®Г­Г±ГІГ°ГіГЄГІГ®Г°
         /// </summary>
-        /// <param name="enabled">Режим валидации свойства</param>
+        /// <param name="enabled">ГђГҐГ¦ГЁГ¬ ГўГ Г«ГЁГ¤Г Г¶ГЁГЁ Г±ГўГ®Г©Г±ГІГўГ </param>
         public PropertyValidationModeAttribute(bool enabled)
             : this(enabled.ToPropertyValidationMode())
         {
         }
 
         /// <summary>
-        /// Проверка на указание явной валидации
+        /// ГЏГ°Г®ГўГҐГ°ГЄГ  Г­Г  ГіГЄГ Г§Г Г­ГЁГҐ ГїГўГ­Г®Г© ГўГ Г«ГЁГ¤Г Г¶ГЁГЁ
         /// </summary>
-        /// <param name="value">Значение</param>
+        /// <param name="value">Г‡Г­Г Г·ГҐГ­ГЁГҐ</param>
         /// <returns></returns>
         public bool HasValue(bool value)
         {
@@ -49,9 +49,9 @@ namespace Framework.Validation
         }
 
         /// <summary>
-        /// Проверка на указание явной валидации внутренного объекта
+        /// ГЏГ°Г®ГўГҐГ°ГЄГ  Г­Г  ГіГЄГ Г§Г Г­ГЁГҐ ГїГўГ­Г®Г© ГўГ Г«ГЁГ¤Г Г¶ГЁГЁ ГўГ­ГіГІГ°ГҐГ­Г­Г®ГЈГ® Г®ГЎГєГҐГЄГІГ 
         /// </summary>
-        /// <param name="value">Значение</param>
+        /// <param name="value">Г‡Г­Г Г·ГҐГ­ГЁГҐ</param>
         /// <returns></returns>
         public bool HasDeepValue(bool value)
         {

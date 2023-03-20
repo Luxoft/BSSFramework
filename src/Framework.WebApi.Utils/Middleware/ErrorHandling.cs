@@ -7,48 +7,47 @@ using Microsoft.AspNetCore.Http;
 
 using Newtonsoft.Json;
 
-namespace Framework.WebApi.Utils
+namespace Framework.WebApi.Utils;
+
+internal sealed class ErrorHandling
 {
-    internal sealed class ErrorHandling
+    private readonly RequestDelegate next;
+
+    public ErrorHandling(RequestDelegate next)
     {
-        private readonly RequestDelegate next;
+        this.next = next;
+    }
 
-        public ErrorHandling(RequestDelegate next)
+    public async Task Invoke(HttpContext context)
+    {
+        try
         {
-            this.next = next;
+            await this.next(context);
+        }
+        catch (Exception ex)
+        {
+            await HandleExceptionAsync(context, ex);
+        }
+    }
+
+    private static Task HandleExceptionAsync(HttpContext context, Exception exception)
+    {
+        var code = (int)HttpStatusCode.InternalServerError;
+        var exceptionMessage = exception.Message;
+
+        switch (exception)
+        {
+            case WebException e:
+                code = (int)e.Status;
+                break;
+            default:
+                exceptionMessage = exception.InnerException?.Message ?? exceptionMessage;
+                break;
         }
 
-        public async Task Invoke(HttpContext context)
-        {
-            try
-            {
-                await this.next(context);
-            }
-            catch (Exception ex)
-            {
-                await HandleExceptionAsync(context, ex);
-            }
-        }
+        context.Response.ContentType = MediaTypeNames.Application.Json;
+        context.Response.StatusCode = code;
 
-        private static Task HandleExceptionAsync(HttpContext context, Exception exception)
-        {
-            var code = (int)HttpStatusCode.InternalServerError;
-            var exceptionMessage = exception.Message;
-
-            switch (exception)
-            {
-                case WebException e:
-                    code = (int)e.Status;
-                    break;
-                default:
-                    exceptionMessage = exception.InnerException?.Message ?? exceptionMessage;
-                    break;
-            }
-
-            context.Response.ContentType = MediaTypeNames.Application.Json;
-            context.Response.StatusCode = code;
-
-            return context.Response.WriteAsync(JsonConvert.SerializeObject(exceptionMessage));
-        }
+        return context.Response.WriteAsync(JsonConvert.SerializeObject(exceptionMessage));
     }
 }

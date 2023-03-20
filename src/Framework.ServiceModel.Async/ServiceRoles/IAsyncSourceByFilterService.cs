@@ -2,10 +2,9 @@
 
 using Framework.Async;
 
-namespace Framework.ServiceModel.Async
+namespace Framework.ServiceModel.Async;
+
+public interface IAsyncSourceByFilterService<in TFilter, TViewItem>
 {
-    public interface IAsyncSourceByFilterService<in TFilter, TViewItem>
-    {
-        IAsyncProcessFunc<TFilter, ObservableCollection<TViewItem>> SourceFunc { get; }
-    }
+    IAsyncProcessFunc<TFilter, ObservableCollection<TViewItem>> SourceFunc { get; }
 }

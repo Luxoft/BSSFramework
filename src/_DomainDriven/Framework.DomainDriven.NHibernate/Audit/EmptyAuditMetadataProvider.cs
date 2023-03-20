@@ -12,63 +12,62 @@ using NHibernate.Envers.Configuration.Fluent;
 using NHibernate.Envers.Configuration.Store;
 using NHibernate.Mapping.ByCode;
 
-namespace Framework.DomainDriven.NHibernate.Audit
+namespace Framework.DomainDriven.NHibernate.Audit;
+
+/// <summary>
+/// Empty implement
+/// </summary>
+internal class EmptyAuditMetadataProvider : IMetaDataProvider
 {
-    /// <summary>
-    /// Empty implement
-    /// </summary>
-    internal class EmptyAuditMetadataProvider : IMetaDataProvider
+    private readonly IRevisionListener _entityTrackingRevisionListener;
+
+
+    public EmptyAuditMetadataProvider(IRevisionListener entityTrackingRevisionListener)
     {
-        private readonly IRevisionListener _entityTrackingRevisionListener;
+        this._entityTrackingRevisionListener = entityTrackingRevisionListener;
+    }
 
 
-        public EmptyAuditMetadataProvider(IRevisionListener entityTrackingRevisionListener)
-        {
-            this._entityTrackingRevisionListener = entityTrackingRevisionListener;
-        }
+    public IDictionary<Type, IEntityMeta> CreateMetaData(Configuration nhConfiguration)
+    {
+        nhConfiguration.AddMapping(this.CreateRevisionInfoMappingDocument());
+
+        var ret = new Dictionary<Type, IEntityMeta>();
+        var auditRevisionType = typeof(AuditRevisionEntity);
+
+        ret[auditRevisionType] = new EntityMeta();
 
 
-        public IDictionary<Type, IEntityMeta> CreateMetaData(Configuration nhConfiguration)
-        {
-            nhConfiguration.AddMapping(this.CreateRevisionInfoMappingDocument());
+        var entityMeta = ((EntityMeta)ret[auditRevisionType]);
 
-            var ret = new Dictionary<Type, IEntityMeta>();
-            var auditRevisionType = typeof(AuditRevisionEntity);
-
-            ret[auditRevisionType] = new EntityMeta();
+        entityMeta.AddClassMeta(new RevisionEntityAttribute { Listener = this._entityTrackingRevisionListener });
 
 
-            var entityMeta = ((EntityMeta)ret[auditRevisionType]);
-
-            entityMeta.AddClassMeta(new RevisionEntityAttribute { Listener = this._entityTrackingRevisionListener });
-
-
-            Expression<Func<AuditRevisionEntity, long>> revisionNumber = z => z.Id;
-            Expression<Func<AuditRevisionEntity, DateTime>> revisionTimestamp = z => z.RevisionDate;
+        Expression<Func<AuditRevisionEntity, long>> revisionNumber = z => z.Id;
+        Expression<Func<AuditRevisionEntity, DateTime>> revisionTimestamp = z => z.RevisionDate;
 
 
-            entityMeta.AddMemberMeta(revisionNumber.MethodInfo(), new RevisionNumberAttribute());
-            entityMeta.AddMemberMeta(revisionTimestamp.MethodInfo(), new RevisionTimestampAttribute());
+        entityMeta.AddMemberMeta(revisionNumber.MethodInfo(), new RevisionNumberAttribute());
+        entityMeta.AddMemberMeta(revisionTimestamp.MethodInfo(), new RevisionTimestampAttribute());
 
-            return ret;
-        }
+        return ret;
+    }
 
 
-        private HbmMapping CreateRevisionInfoMappingDocument()
-        {
-            var mapper = new ModelMapper();
+    private HbmMapping CreateRevisionInfoMappingDocument()
+    {
+        var mapper = new ModelMapper();
 
-            mapper.Class<AuditRevisionEntity>(mapping =>
-            {
-                mapping.Id(z => z.Id, idMapper => idMapper.Generator(Generators.Native, z => z.Params(new KeyValuePair<string, string>("sequence", "generateidsequence"))));
+        mapper.Class<AuditRevisionEntity>(mapping =>
+                                          {
+                                              mapping.Id(z => z.Id, idMapper => idMapper.Generator(Generators.Native, z => z.Params(new KeyValuePair<string, string>("sequence", "generateidsequence"))));
 
-                mapping.Property(z => z.RevisionDate, z => { z.Insert(true); z.Update(false); });
-                mapping.Property(z => z.Author, z => { z.Insert(true); z.Update(false); });
-            });
+                                              mapping.Property(z => z.RevisionDate, z => { z.Insert(true); z.Update(false); });
+                                              mapping.Property(z => z.Author, z => { z.Insert(true); z.Update(false); });
+                                          });
 
-            var result = mapper.CompileMappingForAllExplicitlyAddedEntities();
+        var result = mapper.CompileMappingForAllExplicitlyAddedEntities();
 
-            return result;
-        }
+        return result;
     }
 }

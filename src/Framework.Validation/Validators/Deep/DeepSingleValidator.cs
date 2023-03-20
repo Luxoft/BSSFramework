@@ -3,10 +3,10 @@ using Framework.Core;
 namespace Framework.Validation
 {
     /// <summary>
-    /// Внутренняя валидация
+    /// Г‚Г­ГіГІГ°ГҐГ­Г­ГїГї ГўГ Г«ГЁГ¤Г Г¶ГЁГї
     /// </summary>
-    /// <typeparam name="TSource">Тип текущего объекта</typeparam>
-    /// <typeparam name="TProperty">Тип свойства</typeparam>
+    /// <typeparam name="TSource">Г’ГЁГЇ ГІГҐГЄГіГ№ГҐГЈГ® Г®ГЎГєГҐГЄГІГ </typeparam>
+    /// <typeparam name="TProperty">Г’ГЁГЇ Г±ГўГ®Г©Г±ГІГўГ </typeparam>
     public class DeepSingleValidator<TSource, TProperty> : IPropertyValidator<TSource, TProperty>
     {
         /// <inheritdoc />

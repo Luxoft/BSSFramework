@@ -1,43 +1,42 @@
 ﻿using System;
 
-namespace Framework.Core
+namespace Framework.Core;
+
+public static class CondionalExtension
 {
-    public static class CondionalExtension
+    public static Condition<T> If<T>(this T source, Func<T, bool> conditionalFunc)
     {
-        public static Condition<T> If<T>(this T source, Func<T, bool> conditionalFunc)
+        return new Condition<T>(source, conditionalFunc(source));
+    }
+    public static Condition<T> If<T>(this Condition<T> source, Func<T, bool> conditionalFunc)
+    {
+        if (!source.ConditionResult)
         {
-            return new Condition<T>(source, conditionalFunc(source));
+            return source;
         }
-        public static Condition<T> If<T>(this Condition<T> source, Func<T, bool> conditionalFunc)
-        {
-            if (!source.ConditionResult)
-            {
-                return source;
-            }
-            return new Condition<T>(source.Source, conditionalFunc(source.Source));
-        }
+        return new Condition<T>(source.Source, conditionalFunc(source.Source));
+    }
 
-        public static TResult Return<TSource, TResult>(this Condition<TSource> source, Func<TResult> truReturnFunc)
-        {
-            return source.Return(truReturnFunc());
-        }
+    public static TResult Return<TSource, TResult>(this Condition<TSource> source, Func<TResult> truReturnFunc)
+    {
+        return source.Return(truReturnFunc());
+    }
 
-        public static TResult Return<TSource, TResult>(this Condition<TSource> source, TResult truReturnFunc)
-        {
-            return source.ConditionResult ? truReturnFunc : default(TResult);
-        }
+    public static TResult Return<TSource, TResult>(this Condition<TSource> source, TResult truReturnFunc)
+    {
+        return source.ConditionResult ? truReturnFunc : default(TResult);
+    }
 
-        public static void Do<TSource>(this Condition<TSource> source, Action doAction)
+    public static void Do<TSource>(this Condition<TSource> source, Action doAction)
+    {
+        if (source.ConditionResult)
         {
-            if (source.ConditionResult)
-            {
-                doAction();
-            }
+            doAction();
         }
+    }
 
-        public static TResult Return<TSource, TResult>(this Condition<TSource> source, Func<TSource, TResult> truReturnFunc)
-        {
-            return source.Return(truReturnFunc(source.Source));
-        }
+    public static TResult Return<TSource, TResult>(this Condition<TSource> source, Func<TSource, TResult> truReturnFunc)
+    {
+        return source.Return(truReturnFunc(source.Source));
     }
 }

@@ -1,15 +1,14 @@
 ﻿using Framework.DomainDriven.ServiceModelGenerator;
 
-namespace SampleSystem.CodeGenerate
+namespace SampleSystem.CodeGenerate;
+
+/// <summary>
+/// Кастомные идентификаторы генерируемых фасадных методов
+/// </summary>
+public static class SampleSystemMethodIdentityType
 {
     /// <summary>
-    /// Кастомные идентификаторы генерируемых фасадных методов
+    /// Идентификатор генерации фасадных методов по ComplexChange-модели
     /// </summary>
-    public static class SampleSystemMethodIdentityType
-    {
-        /// <summary>
-        /// Идентификатор генерации фасадных методов по ComplexChange-модели
-        /// </summary>
-        public static readonly MethodIdentityType ComplexChange = new MethodIdentityType(() => ComplexChange);
-    }
+    public static readonly MethodIdentityType ComplexChange = new MethodIdentityType(() => ComplexChange);
 }

@@ -2,60 +2,58 @@
 
 using SampleSystem.Domain;
 
-namespace SampleSystem.CodeGenerate
+namespace SampleSystem.CodeGenerate;
+
+public class CustomSampleSystemProjectionSource : ProjectionSource
 {
-    public class CustomSampleSystemProjectionSource : ProjectionSource
+    public CustomSampleSystemProjectionSource()
     {
-        public CustomSampleSystemProjectionSource()
-        {
-            this.TestEmployee = new Projection<Employee>(() => this.TestEmployee, true)
-                .Property(employee => employee.ExternalId)
-                .Property(employee => employee.CoreBusinessUnit.Name)
+        this.TestEmployee = new Projection<Employee>(() => this.TestEmployee, true)
+                            .Property(employee => employee.ExternalId)
+                            .Property(employee => employee.CoreBusinessUnit.Name)
                 //.Property(employee => employee.CoreBusinessUnit.Id)
                 //.Property(employee => employee.CoreBusinessUnit.Period.EndDate, "BuEndDate")
                 ;
 
-            //this.TestEmployeeCellPhone = new Projection<EmployeeCellPhone>(() => this.TestEmployeeCellPhone)
-            //    .Property(cellPhone => cellPhone.Number);
+        //this.TestEmployeeCellPhone = new Projection<EmployeeCellPhone>(() => this.TestEmployeeCellPhone)
+        //    .Property(cellPhone => cellPhone.Number);
 
-            //this.TestHRDepartmenty =
-            //    new Projection<HRDepartment>(() => this.TestHRDepartmenty, true)
-            //        .Property(dep => dep.Location.Children, () => this.TestSubLocation)
-            //        .Property(dep => dep.CompanyLegalEntity.CurrentObj, () => this.TestObjForNestedIdentity1, "M1")
-            //        .Property(dep => dep.CompanyLegalEntity.CurrentObj, () => this.TestObjForNestedIdentity2, "M2")
-            //        .Property(dep => dep.CompanyLegalEntity.CurrentObj.Name)
-            //    ;
+        //this.TestHRDepartmenty =
+        //    new Projection<HRDepartment>(() => this.TestHRDepartmenty, true)
+        //        .Property(dep => dep.Location.Children, () => this.TestSubLocation)
+        //        .Property(dep => dep.CompanyLegalEntity.CurrentObj, () => this.TestObjForNestedIdentity1, "M1")
+        //        .Property(dep => dep.CompanyLegalEntity.CurrentObj, () => this.TestObjForNestedIdentity2, "M2")
+        //        .Property(dep => dep.CompanyLegalEntity.CurrentObj.Name)
+        //    ;
 
-            //this.TestObjForNestedIdentity1 = new Projection<TestObjForNested>(() => this.TestObjForNestedIdentity1)
-            //    .Property(obj => obj.Active);
+        //this.TestObjForNestedIdentity1 = new Projection<TestObjForNested>(() => this.TestObjForNestedIdentity1)
+        //    .Property(obj => obj.Active);
 
-            //this.TestObjForNestedIdentity2 = new Projection<TestObjForNested>(() => this.TestObjForNestedIdentity2)
-            //    .Property(obj => obj.ModifiedBy);
+        //this.TestObjForNestedIdentity2 = new Projection<TestObjForNested>(() => this.TestObjForNestedIdentity2)
+        //    .Property(obj => obj.ModifiedBy);
 
-            //this.TestSubLocation = new Projection<Location>(() => this.TestSubLocation)
-            //    .Property(prop => prop.Name);
+        //this.TestSubLocation = new Projection<Location>(() => this.TestSubLocation)
+        //    .Property(prop => prop.Name);
 
-            this.BusinessUnitIdentity = new Projection<BusinessUnit>(() => this.BusinessUnitIdentity);
-        }
+        this.BusinessUnitIdentity = new Projection<BusinessUnit>(() => this.BusinessUnitIdentity);
+    }
 
         
 
-        public Projection<Employee> TestEmployee { get; }
+    public Projection<Employee> TestEmployee { get; }
 
-        public Projection<BusinessUnit> BusinessUnitIdentity { get; }
+    public Projection<BusinessUnit> BusinessUnitIdentity { get; }
 
-        //public Projection<EmployeeCellPhone> TestEmployeeCellPhone { get; }
+    //public Projection<EmployeeCellPhone> TestEmployeeCellPhone { get; }
 
-        //public Projection<HRDepartment> TestHRDepartmenty { get; }
+    //public Projection<HRDepartment> TestHRDepartmenty { get; }
 
-        //public Projection<TestObjForNested> TestObjForNestedIdentity1 { get; }
+    //public Projection<TestObjForNested> TestObjForNestedIdentity1 { get; }
 
-        //public Projection<TestObjForNested> TestObjForNestedIdentity2 { get; }
+    //public Projection<TestObjForNested> TestObjForNestedIdentity2 { get; }
 
-        //public Projection<Location> TestSubLocation { get; }
-    }
+    //public Projection<Location> TestSubLocation { get; }
 }
-
 
 //using Framework.Projection.Lambda;
 

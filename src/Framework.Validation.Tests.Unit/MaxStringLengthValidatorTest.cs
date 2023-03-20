@@ -7,78 +7,77 @@ using NSubstitute;
 
 using NUnit.Framework;
 
-namespace Framework.Validation.Test
+namespace Framework.Validation.Test;
+
+[TestFixture]
+public class MaxStringLengthValidatorTest
 {
-    [TestFixture]
-    public class MaxStringLengthValidatorTest
+    private const string PropertyName = "p";
+
+    private const string TypeName = "t";
+
+    private const int MaxLength = 5;
+
+    private IPropertyValidationContext<DomainObject, string> context;
+    private IPropertyValidationMap map;
+    private IClassValidationMap validationMap;
+
+    [SetUp]
+    public void Init()
     {
-        private const string PropertyName = "p";
+        this.context = Substitute.For<IPropertyValidationContext<DomainObject, string>>();
+        this.map = Substitute.For<IPropertyValidationMap>();
+        this.validationMap = Substitute.For<IClassValidationMap>();
+        this.context.Map.Returns(this.map);
+        this.map.ReflectedTypeMap.Returns(this.validationMap);
+        this.map.PropertyName.Returns(PropertyName);
+        this.validationMap.TypeName.Returns(TypeName);
+    }
 
-        private const string TypeName = "t";
+    [TestCase(null)]
+    [TestCase("")]
+    [TestCase("a")]
+    [TestCase("abcde")]
+    public void GetValidationResult_StringValidator_ValueNullOrShorterThanMax_NoErrors(string value)
+    {
+        // Arrange
+        var validator = new MaxLengthValidator.StringMaxLengthValidator<DomainObject>(MaxLength);
+        this.context.Source.Returns(new DomainObject());
+        this.context.Value.Returns(value);
 
-        private const int MaxLength = 5;
+        // Act
+        var result = validator.GetValidationResult(this.context);
 
-        private IPropertyValidationContext<DomainObject, string> context;
-        private IPropertyValidationMap map;
-        private IClassValidationMap validationMap;
+        // Assert
+        result.Errors.Should().BeEmpty();
+    }
 
-        [SetUp]
-        public void Init()
-        {
-            this.context = Substitute.For<IPropertyValidationContext<DomainObject, string>>();
-            this.map = Substitute.For<IPropertyValidationMap>();
-            this.validationMap = Substitute.For<IClassValidationMap>();
-            this.context.Map.Returns(this.map);
-            this.map.ReflectedTypeMap.Returns(this.validationMap);
-            this.map.PropertyName.Returns(PropertyName);
-            this.validationMap.TypeName.Returns(TypeName);
-        }
+    [Test]
+    public void GetValidationResult_ValueLongerThanMax_ErrorMessageInExpectedFormat()
+    {
+        // Arrange
+        var value = new string('a', MaxLength + 1);
+        var validator = new MaxLengthValidator.StringMaxLengthValidator<DomainObject>(MaxLength);
+        this.context.Source.Returns(new DomainObject());
+        this.context.Value.Returns(value);
 
-        [TestCase(null)]
-        [TestCase("")]
-        [TestCase("a")]
-        [TestCase("abcde")]
-        public void GetValidationResult_StringValidator_ValueNullOrShorterThanMax_NoErrors(string value)
-        {
-            // Arrange
-            var validator = new MaxLengthValidator.StringMaxLengthValidator<DomainObject>(MaxLength);
-            this.context.Source.Returns(new DomainObject());
-            this.context.Value.Returns(value);
+        // Act
+        var result = validator.GetValidationResult(this.context);
 
-            // Act
-            var result = validator.GetValidationResult(this.context);
+        // Assert
+        result.Errors[0].Message.Should().Be($"The length of {PropertyName} property of {TypeName} should not be more than {MaxLength}");
+    }
 
-            // Assert
-            result.Errors.Should().BeEmpty();
-        }
+    [Test]
+    public void GetValidationResult_NullContext_ThrowArgumentNullException()
+    {
+        // Arrange
+        var validator = new MaxLengthValidator.StringMaxLengthValidator<DomainObject>(MaxLength);
 
-        [Test]
-        public void GetValidationResult_ValueLongerThanMax_ErrorMessageInExpectedFormat()
-        {
-            // Arrange
-            var value = new string('a', MaxLength + 1);
-            var validator = new MaxLengthValidator.StringMaxLengthValidator<DomainObject>(MaxLength);
-            this.context.Source.Returns(new DomainObject());
-            this.context.Value.Returns(value);
+        // Act
+        object TestDelegate() => validator.GetValidationResult(null);
 
-            // Act
-            var result = validator.GetValidationResult(this.context);
-
-            // Assert
-            result.Errors[0].Message.Should().Be($"The length of {PropertyName} property of {TypeName} should not be more than {MaxLength}");
-        }
-
-        [Test]
-        public void GetValidationResult_NullContext_ThrowArgumentNullException()
-        {
-            // Arrange
-            var validator = new MaxLengthValidator.StringMaxLengthValidator<DomainObject>(MaxLength);
-
-            // Act
-            object TestDelegate() => validator.GetValidationResult(null);
-
-            // Assert
-            Assert.That(TestDelegate, Throws.TypeOf<ArgumentNullException>());
-        }
+        // Assert
+        Assert.That(TestDelegate, Throws.TypeOf<ArgumentNullException>());
     }
 }

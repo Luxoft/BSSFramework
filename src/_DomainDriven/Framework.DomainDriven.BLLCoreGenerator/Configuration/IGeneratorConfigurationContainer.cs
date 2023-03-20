@@ -1,7 +1,6 @@
-﻿namespace Framework.DomainDriven.BLLCoreGenerator
+﻿namespace Framework.DomainDriven.BLLCoreGenerator;
+
+public interface IGeneratorConfigurationContainer
 {
-    public interface IGeneratorConfigurationContainer
-    {
-        IGeneratorConfigurationBase<IGenerationEnvironmentBase> BLLCore { get; }
-    }
+    IGeneratorConfigurationBase<IGenerationEnvironmentBase> BLLCore { get; }
 }

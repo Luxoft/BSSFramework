@@ -1,7 +1,6 @@
-﻿namespace Framework.Core.Services
+﻿namespace Framework.Core.Services;
+
+public interface IUserAuthenticationService
 {
-    public interface IUserAuthenticationService
-    {
-        string GetUserName();
-    }
+    string GetUserName();
 }

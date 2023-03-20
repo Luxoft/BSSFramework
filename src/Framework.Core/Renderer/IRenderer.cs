@@ -1,7 +1,6 @@
-﻿namespace Framework.Core
+﻿namespace Framework.Core;
+
+public interface IRenderer<in TSource, out TResult>
 {
-    public interface IRenderer<in TSource, out TResult>
-    {
-        TResult Render(TSource source);
-    }
+    TResult Render(TSource source);
 }

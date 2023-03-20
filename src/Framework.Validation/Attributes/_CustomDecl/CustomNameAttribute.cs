@@ -1,16 +1,15 @@
 ﻿using System;
 
-namespace Framework.Validation
+namespace Framework.Validation;
+
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Property)]
+public class CustomNameAttribute : Attribute
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property)]
-    public class CustomNameAttribute : Attribute
+    public CustomNameAttribute(string name)
     {
-        public CustomNameAttribute(string name)
-        {
-            this.Name = name;
-        }
-
-
-        public string Name { get; private set; }
+        this.Name = name;
     }
+
+
+    public string Name { get; private set; }
 }

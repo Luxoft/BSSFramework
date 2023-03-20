@@ -3,42 +3,41 @@ using System.Linq;
 
 using Framework.Authorization.Domain;
 
-namespace Framework.Authorization.BLL
+namespace Framework.Authorization.BLL;
+
+public partial interface IPermissionBLL
 {
-    public partial interface IPermissionBLL
-    {
-        void Save(Permission permission, bool withValidate);
+    void Save(Permission permission, bool withValidate);
 
-        void DenormalizePermission(Permission permission);
+    void DenormalizePermission(Permission permission);
 
-        void ValidatePermissionDelegated(Permission permission, ValidatePermissonDelegateMode mode);
+    void ValidatePermissionDelegated(Permission permission, ValidatePermissonDelegateMode mode);
 
-        void ValidateApprovingPermission(Permission permission);
+    void ValidateApprovingPermission(Permission permission);
 
-        void ChangeDelegatePermissions(ChangePermissionDelegatesModel changePermissionDelegatesModel);
+    void ChangeDelegatePermissions(ChangePermissionDelegatesModel changePermissionDelegatesModel);
 
-        void UpdateDelegatePermissions(UpdatePermissionDelegatesModel updatePermissionDelegatesModel);
+    void UpdateDelegatePermissions(UpdatePermissionDelegatesModel updatePermissionDelegatesModel);
 
-        void WithdrawDelegation(Permission permission);
+    void WithdrawDelegation(Permission permission);
 
 
-        IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true);
+    IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true);
 
-        IQueryable<Permission> GetAvailablePermissionsQueryable(AvailablePermissionFilter filter);
-    }
+    IQueryable<Permission> GetAvailablePermissionsQueryable(AvailablePermissionFilter filter);
+}
 
 
-    [Flags]
-    public enum ValidatePermissonDelegateMode
-    {
-        Role = 1,
+[Flags]
+public enum ValidatePermissonDelegateMode
+{
+    Role = 1,
 
-        Period = 2,
+    Period = 2,
 
-        SecurityObjects = 4,
+    SecurityObjects = 4,
 
-        ApproveState = 8,
+    ApproveState = 8,
 
-        All = Role + Period + SecurityObjects + ApproveState
-    }
+    All = Role + Period + SecurityObjects + ApproveState
 }

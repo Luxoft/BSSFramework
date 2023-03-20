@@ -8,25 +8,24 @@ using Framework.Notification;
 
 using Attachment = System.Net.Mail.Attachment;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Templates
+namespace Framework.Configuration.BLL.SubscriptionSystemService3.Templates;
+
+internal sealed class MessageTemplateFactoryCc : MessageTemplateFactoryBase
 {
-    internal sealed class MessageTemplateFactoryCc : MessageTemplateFactoryBase
-    {
-        internal override IEnumerable<MessageTemplateNotification> Create<TSourceDomainObjectType, TModelObjectType>(
+    internal override IEnumerable<MessageTemplateNotification> Create<TSourceDomainObjectType, TModelObjectType>(
             DomainObjectVersions<TModelObjectType> versions,
             Subscription subscription,
             RecipientsBag recipientsBag,
             IEnumerable<Attachment> attachments)
-        {
-            var template = this.CreateTemplate<TSourceDomainObjectType, TModelObjectType>(
-                versions,
-                subscription,
-                recipientsBag.To.Select(r => r.Email),
-                recipientsBag.Cc.Select(r => r.Email),
-                recipientsBag.ReplyTo.Select(r => r.Email),
-                attachments);
+    {
+        var template = this.CreateTemplate<TSourceDomainObjectType, TModelObjectType>(
+                                                                                      versions,
+                                                                                      subscription,
+                                                                                      recipientsBag.To.Select(r => r.Email),
+                                                                                      recipientsBag.Cc.Select(r => r.Email),
+                                                                                      recipientsBag.ReplyTo.Select(r => r.Email),
+                                                                                      attachments);
 
-            yield return template;
-        }
+        yield return template;
     }
 }

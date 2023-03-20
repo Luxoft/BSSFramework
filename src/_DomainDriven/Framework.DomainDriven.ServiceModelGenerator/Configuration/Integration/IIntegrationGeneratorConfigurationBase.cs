@@ -1,19 +1,18 @@
 using System.CodeDom;
 
-namespace Framework.DomainDriven.ServiceModelGenerator
+namespace Framework.DomainDriven.ServiceModelGenerator;
+
+public interface IIntegrationGeneratorConfigurationBase : IGeneratorConfigurationBase
 {
-    public interface IIntegrationGeneratorConfigurationBase : IGeneratorConfigurationBase
-    {
-        string InsertMethodName { get; }
+    string InsertMethodName { get; }
 
-        string SaveMethodName { get; }
+    string SaveMethodName { get; }
 
-        CodeExpression IntegrationSecurityOperation { get; }
-    }
+    CodeExpression IntegrationSecurityOperation { get; }
+}
 
-    public interface IIntegrationGeneratorConfigurationBase<out TEnvironment> : IIntegrationGeneratorConfigurationBase, IGeneratorConfigurationBase<TEnvironment>
+public interface IIntegrationGeneratorConfigurationBase<out TEnvironment> : IIntegrationGeneratorConfigurationBase, IGeneratorConfigurationBase<TEnvironment>
         where TEnvironment : IGenerationEnvironmentBase
-    {
+{
 
-    }
 }

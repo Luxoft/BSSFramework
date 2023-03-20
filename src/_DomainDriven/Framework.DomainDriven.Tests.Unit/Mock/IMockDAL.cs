@@ -1,15 +1,13 @@
 ﻿using System;
 
-namespace Framework.DomainDriven.UnitTest.Mock
+namespace Framework.DomainDriven.UnitTest.Mock;
+
+public interface IMockDAL
 {
-    public interface IMockDAL
-    {
-        void Register(object value);
-        void Flush();
-    }
+    void Register(object value);
+    void Flush();
+}
 
-    public interface IMockDAL<TDomainObject, TIdent> : IMockDAL, IDAL<TDomainObject, TIdent>
-    {
-    }
-
+public interface IMockDAL<TDomainObject, TIdent> : IMockDAL, IDAL<TDomainObject, TIdent>
+{
 }

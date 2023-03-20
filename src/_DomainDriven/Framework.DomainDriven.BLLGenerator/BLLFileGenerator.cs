@@ -5,36 +5,35 @@ using Framework.CodeDom;
 using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.Generation.Domain;
 
-namespace Framework.DomainDriven.BLLGenerator
+namespace Framework.DomainDriven.BLLGenerator;
+
+public class BLLFileGenerator : BLLFileGenerator<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>
 {
-    public class BLLFileGenerator : BLLFileGenerator<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>
-    {
-        public BLLFileGenerator(IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
+    public BLLFileGenerator(IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
             : base(configuration)
-        {
-        }
+    {
+    }
+}
+
+public class BLLFileGenerator<TConfiguration> : CodeFileGenerator<TConfiguration>
+        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+{
+    public BLLFileGenerator(TConfiguration configuration)
+            : base(configuration)
+    {
+
     }
 
-    public class BLLFileGenerator<TConfiguration> : CodeFileGenerator<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+
+    protected override IEnumerable<ICodeFile> GetInternalFileGenerators()
     {
-        public BLLFileGenerator(TConfiguration configuration)
-            : base(configuration)
+        foreach (var fileFactory in this.Configuration.Logics.GetFileFactories())
         {
-
+            yield return fileFactory;
         }
 
+        yield return new DefaultBLLFactoryFileFactory<TConfiguration>(this.Configuration);
 
-        protected override IEnumerable<ICodeFile> GetInternalFileGenerators()
-        {
-            foreach (var fileFactory in this.Configuration.Logics.GetFileFactories())
-            {
-                yield return fileFactory;
-            }
-
-            yield return new DefaultBLLFactoryFileFactory<TConfiguration>(this.Configuration);
-
-            yield return new ImplementedBLLFactoryFileFactory<TConfiguration>(this.Configuration);
-        }
+        yield return new ImplementedBLLFactoryFileFactory<TConfiguration>(this.Configuration);
     }
 }

@@ -1,8 +1,7 @@
-﻿namespace Framework.DomainDriven.Attributes
+﻿namespace Framework.DomainDriven.Attributes;
+
+public enum OptimisticLockType
 {
-    public enum OptimisticLockType
-    {
-        Dirty,
-        All
-    }
+    Dirty,
+    All
 }

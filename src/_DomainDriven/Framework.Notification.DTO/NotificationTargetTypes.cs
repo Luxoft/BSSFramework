@@ -1,9 +1,8 @@
-﻿namespace Framework.Notification.DTO
+﻿namespace Framework.Notification.DTO;
+
+public enum NotificationTargetTypes
 {
-    public enum NotificationTargetTypes
-    {
-        To = 0,
-        Copy = 1,
-        ReplyTo = 2
-    }
+    To = 0,
+    Copy = 1,
+    ReplyTo = 2
 }

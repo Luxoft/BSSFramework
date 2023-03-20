@@ -2,45 +2,44 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Framework.ExpressionParsers
+namespace Framework.ExpressionParsers;
+
+public static class MissingParsingMethodExceptionExtensions
 {
-    public static class MissingParsingMethodExceptionExtensions
+    internal static Exception ToMissingParsingMethodException(this Type obj, string message, int position, string methodName, IEnumerable<Type> tryArgs)
     {
-        internal static Exception ToMissingParsingMethodException(this Type obj, string message, int position, string methodName, IEnumerable<Type> tryArgs)
+        return new MissingParsingMethodException(message, position, obj, methodName, tryArgs);
+    }
+
+
+    public static Type GetArgumentType<TDelegate, TArg>(this INativeExpressionParser nativeExpression, string expression)
+    {
+        if (nativeExpression == null) throw new ArgumentNullException(nameof(nativeExpression));
+
+        var parser = CSharpNativeExpressionParser.Default;
+
+        try
         {
-            return new MissingParsingMethodException(message, position, obj, methodName, tryArgs);
+            parser.Parse<TDelegate>(expression);
+            return null;
         }
-
-
-        public static Type GetArgumentType<TDelegate, TArg>(this INativeExpressionParser nativeExpression, string expression)
+        catch (MissingParsingMethodException ex)
         {
-            if (nativeExpression == null) throw new ArgumentNullException(nameof(nativeExpression));
+            var methods = ex.ObjType.GetMethods().Where(m => m.Name == ex.MethodName).ToList();
 
-            var parser = CSharpNativeExpressionParser.Default;
+            var request = from method in methods
 
-            try
-            {
-                parser.Parse<TDelegate>(expression);
-                return null;
-            }
-            catch (MissingParsingMethodException ex)
-            {
-                var methods = ex.ObjType.GetMethods().Where(m => m.Name == ex.MethodName).ToList();
+                          let parameters = method.GetParameters()
 
-                var request = from method in methods
+                          where parameters.Length == ex.TryArgs.Count
 
-                              let parameters = method.GetParameters()
+                          let argIndex = ex.TryArgs.IndexOf(typeof (TArg))
 
-                              where parameters.Length == ex.TryArgs.Count
+                          where argIndex != -1
 
-                              let argIndex = ex.TryArgs.IndexOf(typeof (TArg))
+                          select parameters[argIndex].ParameterType;
 
-                              where argIndex != -1
-
-                              select parameters[argIndex].ParameterType;
-
-                return request.SingleOrDefault();
-            }
+            return request.SingleOrDefault();
         }
     }
 }

@@ -4,13 +4,12 @@ using Framework.Validation;
 
 using SampleSystem.Domain;
 
-namespace SampleSystem.BLL
+namespace SampleSystem.BLL;
+
+public partial class SampleSystemValidationMap
 {
-    public partial class SampleSystemValidationMap
+    protected override IEnumerable<IPropertyValidator<Employee, long>> GetEmployee_ExternalIdValidators()
     {
-        protected override IEnumerable<IPropertyValidator<Employee, long>> GetEmployee_ExternalIdValidators()
-        {
-            yield return new EmployeeExternalIdValidator();
-        }
+        yield return new EmployeeExternalIdValidator();
     }
 }

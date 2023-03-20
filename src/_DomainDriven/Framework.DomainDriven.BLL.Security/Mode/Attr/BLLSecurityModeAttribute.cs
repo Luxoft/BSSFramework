@@ -2,16 +2,15 @@
 
 using Framework.SecuritySystem;
 
-namespace Framework.DomainDriven.BLL.Security
+namespace Framework.DomainDriven.BLL.Security;
+
+public class BLLSecurityModeAttribute : Attribute
 {
-    public class BLLSecurityModeAttribute : Attribute
+    public BLLSecurityModeAttribute(BLLSecurityMode securityMode)
     {
-        public BLLSecurityModeAttribute(BLLSecurityMode securityMode)
-        {
-            this.SecurityMode = securityMode;
-        }
-
-
-        public BLLSecurityMode SecurityMode { get; private set; }
+        this.SecurityMode = securityMode;
     }
+
+
+    public BLLSecurityMode SecurityMode { get; private set; }
 }

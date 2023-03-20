@@ -1,27 +1,26 @@
 ﻿using System;
 using System.Linq;
 
-namespace Framework.Authorization.Domain
+namespace Framework.Authorization.Domain;
+
+public class PermissionRootFilterModel : DomainObjectRootFilterModel<Permission>
 {
-    public class PermissionRootFilterModel : DomainObjectRootFilterModel<Permission>
+    public Permission DelagetedFrom { get; set; }
+
+    public Principal Principal { get; set; }
+
+    public PermissionFilterEntity FilterEntity { get; set; }
+
+    public override System.Linq.Expressions.Expression<Func<Permission, bool>> ToFilterExpression()
     {
-        public Permission DelagetedFrom { get; set; }
+        var principal = this.Principal;
 
-        public Principal Principal { get; set; }
+        var filterEntity = this.FilterEntity;
 
-        public PermissionFilterEntity FilterEntity { get; set; }
+        var delagetedFrom = this.DelagetedFrom;
 
-        public override System.Linq.Expressions.Expression<Func<Permission, bool>> ToFilterExpression()
-        {
-            var principal = this.Principal;
-
-            var filterEntity = this.FilterEntity;
-
-            var delagetedFrom = this.DelagetedFrom;
-
-            return permission => (principal == null || permission.Principal == principal)
-                              && (delagetedFrom == null || delagetedFrom == permission.DelegatedFrom)
-                              && (filterEntity == null || permission.FilterItems.Any(item => item.Entity == filterEntity));
-        }
+        return permission => (principal == null || permission.Principal == principal)
+                             && (delagetedFrom == null || delagetedFrom == permission.DelegatedFrom)
+                             && (filterEntity == null || permission.FilterItems.Any(item => item.Entity == filterEntity));
     }
 }

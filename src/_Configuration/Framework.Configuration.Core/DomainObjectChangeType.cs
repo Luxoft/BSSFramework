@@ -1,28 +1,27 @@
-﻿namespace Framework.Configuration.Core
+﻿namespace Framework.Configuration.Core;
+
+/// <summary>
+/// Тип изменения, произошедшего с доменным объектом.
+/// </summary>
+public enum DomainObjectChangeType
 {
     /// <summary>
-    /// Тип изменения, произошедшего с доменным объектом.
+    /// Тип изменения не определён.
     /// </summary>
-    public enum DomainObjectChangeType
-    {
-        /// <summary>
-        /// Тип изменения не определён.
-        /// </summary>
-        Unknown,
+    Unknown,
 
-        /// <summary>
-        /// Доменный объект создан.
-        /// </summary>
-        Create,
+    /// <summary>
+    /// Доменный объект создан.
+    /// </summary>
+    Create,
 
-        /// <summary>
-        /// Доменный объект изменён.
-        /// </summary>
-        Update,
+    /// <summary>
+    /// Доменный объект изменён.
+    /// </summary>
+    Update,
 
-        /// <summary>
-        /// Доменный объект удалён.
-        /// </summary>
-        Delete
-    }
+    /// <summary>
+    /// Доменный объект удалён.
+    /// </summary>
+    Delete
 }

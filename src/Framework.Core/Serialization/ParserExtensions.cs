@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Framework.Core.Serialization
+namespace Framework.Core.Serialization;
+
+public static class ParserExtensions
 {
-    public static class ParserExtensions
+    public static IParser<TValue, TResult> WithCache<TValue, TResult>(this IParser<TValue, TResult> parser, IEqualityComparer<TValue> equalityComparer = null)
     {
-        public static IParser<TValue, TResult> WithCache<TValue, TResult>(this IParser<TValue, TResult> parser, IEqualityComparer<TValue> equalityComparer = null)
-        {
-            if (parser == null) throw new ArgumentNullException(nameof(parser));
+        if (parser == null) throw new ArgumentNullException(nameof(parser));
 
-            return new Parser<TValue, TResult>(FuncHelper.Create((TValue value) => parser.Parse(value)).WithCache(equalityComparer));
-        }
+        return new Parser<TValue, TResult>(FuncHelper.Create((TValue value) => parser.Parse(value)).WithCache(equalityComparer));
+    }
 
-        public static IParser<TValue, TResult> WithLock<TValue, TResult>(this IParser<TValue, TResult> parser)
-        {
-            if (parser == null) throw new ArgumentNullException(nameof(parser));
+    public static IParser<TValue, TResult> WithLock<TValue, TResult>(this IParser<TValue, TResult> parser)
+    {
+        if (parser == null) throw new ArgumentNullException(nameof(parser));
 
-            return new Parser<TValue, TResult>(FuncHelper.Create((TValue value) => parser.Parse(value)).WithLock());
-        }
+        return new Parser<TValue, TResult>(FuncHelper.Create((TValue value) => parser.Parse(value)).WithLock());
     }
 }

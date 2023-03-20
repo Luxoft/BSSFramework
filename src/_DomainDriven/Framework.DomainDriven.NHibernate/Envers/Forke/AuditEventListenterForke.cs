@@ -12,115 +12,114 @@ using NHibernate.Event;
 using NHibernate.Persister.Entity;
 using NHibernate.Proxy;
 
-namespace NHibernate.Envers.Patch.Forke
+namespace NHibernate.Envers.Patch.Forke;
+
+//TODO: fork only for fork AddModUnit. #IADFRAME-1676
+// https://nhibernate.jira.com/projects/NHE/issues/NHE-166
+public class AuditEventListenerForke : AuditEventListener
 {
-    //TODO: fork only for fork AddModUnit. #IADFRAME-1676
-    // https://nhibernate.jira.com/projects/NHE/issues/NHE-166
-    public class AuditEventListenerForke : AuditEventListener
+    public AuditEventListenerForke()
     {
-        public AuditEventListenerForke()
+    }
+
+    public override void OnPostInsert(PostInsertEvent evt)
+    {
+        var entityName = evt.Persister.EntityName;
+        if (!this.VerCfg.EntCfg.IsVersioned(entityName)) return;
+        checkIfTransactionInProgress(evt.Session);
+
+        var auditProcess = this.VerCfg.AuditProcessManager.Get(evt.Session);
+
+        var workUnit = new AddWorkUnitForke(evt.Session, evt.Persister.EntityName, this.VerCfg,
+                                            evt.Id, evt.Persister, evt.State);
+        auditProcess.AddWorkUnit(workUnit);
+        if (workUnit.ContainsWork())
         {
+            this.generateBidirectionalCollectionChangeWorkUnits(auditProcess, evt.Persister, entityName, evt.State,
+                                                                null, evt.Session);
         }
+    }
 
-        public override void OnPostInsert(PostInsertEvent evt)
+    private void generateBidirectionalCollectionChangeWorkUnits(AuditProcess auditProcess,
+                                                                IEntityPersister entityPersister,
+                                                                string entityName,
+                                                                IList<object> newState,
+                                                                IList<object> oldState,
+                                                                ISessionImplementor session)
+    {
+        // Checking if this is enabled in configuration ...
+        if (!this.VerCfg.GlobalCfg.GenerateRevisionsForCollections)
+            return;
+
+        // Checks every property of the entity, if it is an "owned" to-one relation to another entity.
+        // If the value of that property changed, and the relation is bi-directional, a new revision
+        // for the related entity is generated.
+        var propertyNames = entityPersister.PropertyNames;
+
+        for (var i = 0; i < propertyNames.GetLength(0); i++)
         {
-            var entityName = evt.Persister.EntityName;
-            if (!this.VerCfg.EntCfg.IsVersioned(entityName)) return;
-            checkIfTransactionInProgress(evt.Session);
-
-            var auditProcess = this.VerCfg.AuditProcessManager.Get(evt.Session);
-
-            var workUnit = new AddWorkUnitForke(evt.Session, evt.Persister.EntityName, this.VerCfg,
-                                                evt.Id, evt.Persister, evt.State);
-            auditProcess.AddWorkUnit(workUnit);
-            if (workUnit.ContainsWork())
+            var propertyName = propertyNames[i];
+            var relDesc = this.VerCfg.EntCfg.GetRelationDescription(entityName, propertyName);
+            if (relDesc != null &&
+                relDesc.Bidirectional &&
+                relDesc.RelationType == RelationType.ToOne &&
+                relDesc.Insertable)
             {
-                this.generateBidirectionalCollectionChangeWorkUnits(auditProcess, evt.Persister, entityName, evt.State,
-                                                                    null, evt.Session);
-            }
-        }
+                // Checking for changes
+                var oldValue = oldState?[i];
+                var newValue = newState?[i];
 
-        private void generateBidirectionalCollectionChangeWorkUnits(AuditProcess auditProcess,
-                                                                    IEntityPersister entityPersister,
-                                                                    string entityName,
-                                                                    IList<object> newState,
-                                                                    IList<object> oldState,
-                                                                    ISessionImplementor session)
-        {
-            // Checking if this is enabled in configuration ...
-            if (!this.VerCfg.GlobalCfg.GenerateRevisionsForCollections)
-                return;
-
-            // Checks every property of the entity, if it is an "owned" to-one relation to another entity.
-            // If the value of that property changed, and the relation is bi-directional, a new revision
-            // for the related entity is generated.
-            var propertyNames = entityPersister.PropertyNames;
-
-            for (var i = 0; i < propertyNames.GetLength(0); i++)
-            {
-                var propertyName = propertyNames[i];
-                var relDesc = this.VerCfg.EntCfg.GetRelationDescription(entityName, propertyName);
-                if (relDesc != null &&
-                    relDesc.Bidirectional &&
-                    relDesc.RelationType == RelationType.ToOne &&
-                    relDesc.Insertable)
+                if (!Toolz.EntitiesEqual(session, oldValue, newValue))
                 {
-                    // Checking for changes
-                    var oldValue = oldState?[i];
-                    var newValue = newState?[i];
-
-                    if (!Toolz.EntitiesEqual(session, oldValue, newValue))
+                    // We have to generate changes both in the old collection (size decreses) and new collection
+                    // (size increases).
+                    if (newValue != null)
                     {
-                        // We have to generate changes both in the old collection (size decreses) and new collection
-                        // (size increases).
-                        if (newValue != null)
-                        {
-                            this.addCollectionChangeWorkUnit(auditProcess, session, entityName, relDesc, newValue);
-                        }
-                        if (oldValue != null)
-                        {
-                            this.addCollectionChangeWorkUnit(auditProcess, session, entityName, relDesc, oldValue);
-                        }
+                        this.addCollectionChangeWorkUnit(auditProcess, session, entityName, relDesc, newValue);
+                    }
+                    if (oldValue != null)
+                    {
+                        this.addCollectionChangeWorkUnit(auditProcess, session, entityName, relDesc, oldValue);
                     }
                 }
             }
         }
+    }
 
-        private void addCollectionChangeWorkUnit(AuditProcess auditProcess, ISessionImplementor session, string fromEntityName, RelationDescription relDesc, object value)
+    private void addCollectionChangeWorkUnit(AuditProcess auditProcess, ISessionImplementor session, string fromEntityName, RelationDescription relDesc, object value)
+    {
+        // relDesc.getToEntityName() doesn't always return the entity name of the value - in case
+        // of subclasses, this will be root class, no the actual class. So it can't be used here.
+        string toEntityName;
+        object id;
+
+        if (value is INHibernateProxy newValueAsProxy)
         {
-            // relDesc.getToEntityName() doesn't always return the entity name of the value - in case
-            // of subclasses, this will be root class, no the actual class. So it can't be used here.
-            string toEntityName;
-            object id;
+            toEntityName = session.BestGuessEntityName(value);
+            id = newValueAsProxy.HibernateLazyInitializer.Identifier;
+            // We've got to initialize the object from the proxy to later read its state.
+            value = Toolz.GetTargetFromProxy(session, newValueAsProxy);
+        }
+        else
+        {
+            toEntityName = session.GuessEntityName(value);
 
-            if (value is INHibernateProxy newValueAsProxy)
-            {
-                toEntityName = session.BestGuessEntityName(value);
-                id = newValueAsProxy.HibernateLazyInitializer.Identifier;
-                // We've got to initialize the object from the proxy to later read its state.
-                value = Toolz.GetTargetFromProxy(session, newValueAsProxy);
-            }
-            else
-            {
-                toEntityName = session.GuessEntityName(value);
-
-                var idMapper = this.VerCfg.EntCfg[toEntityName].IdMapper;
-                id = idMapper.MapToIdFromEntity(value);
-            }
-
-            var toPropertyNames = this.VerCfg.EntCfg.ToPropertyNames(fromEntityName, relDesc.FromPropertyName, toEntityName);
-            var toPropertyName = (string)toPropertyNames.First();
-            auditProcess.AddWorkUnit(new CollectionChangeWorkUnit(session, toEntityName, toPropertyName, this.VerCfg, id, value));
+            var idMapper = this.VerCfg.EntCfg[toEntityName].IdMapper;
+            id = idMapper.MapToIdFromEntity(value);
         }
 
-        private static void checkIfTransactionInProgress(ISessionImplementor session)
+        var toPropertyNames = this.VerCfg.EntCfg.ToPropertyNames(fromEntityName, relDesc.FromPropertyName, toEntityName);
+        var toPropertyName = (string)toPropertyNames.First();
+        auditProcess.AddWorkUnit(new CollectionChangeWorkUnit(session, toEntityName, toPropertyName, this.VerCfg, id, value));
+    }
+
+    private static void checkIfTransactionInProgress(ISessionImplementor session)
+    {
+        if (!session.TransactionInProgress && session.TransactionContext == null)
         {
-            if (!session.TransactionInProgress && session.TransactionContext == null)
-            {
-                // Historical data would not be flushed to audit tables if outside of active transaction
-                // (AuditProcess#doBeforeTransactionCompletion(SessionImplementor) not executed).
-                throw new AuditException("Unable to create revision because of non-active transaction");
-            }
+            // Historical data would not be flushed to audit tables if outside of active transaction
+            // (AuditProcess#doBeforeTransactionCompletion(SessionImplementor) not executed).
+            throw new AuditException("Unable to create revision because of non-active transaction");
         }
     }
 }

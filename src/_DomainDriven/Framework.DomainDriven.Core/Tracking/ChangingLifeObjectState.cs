@@ -1,8 +1,7 @@
-﻿namespace Framework.DomainDriven.BLL.Tracking
+﻿namespace Framework.DomainDriven.BLL.Tracking;
+
+public enum ChangingLifeObjectState
 {
-    public enum ChangingLifeObjectState
-    {
-        Original,
-        Changing
-    }
+    Original,
+    Changing
 }

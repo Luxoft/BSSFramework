@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface ITargetSystemElement<out TTargetSystem>
 {
-    public interface ITargetSystemElement<out TTargetSystem>
-    {
-        TTargetSystem TargetSystem { get; }
-    }
+    TTargetSystem TargetSystem { get; }
 }

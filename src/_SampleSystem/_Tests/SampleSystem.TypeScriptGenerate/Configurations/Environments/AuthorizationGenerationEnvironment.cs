@@ -14,31 +14,30 @@ using AuditPersistentDomainObjectBase = Framework.Authorization.Domain.AuditPers
 using DomainObjectBase = Framework.Authorization.Domain.DomainObjectBase;
 using PersistentDomainObjectBase = Framework.Authorization.Domain.PersistentDomainObjectBase;
 
-namespace SampleSystem.TypeScriptGenerate.Configurations.Environments
+namespace SampleSystem.TypeScriptGenerate.Configurations.Environments;
+
+public class AuthorizationGenerationEnvironment : GenerationEnvironment<DomainObjectBase, PersistentDomainObjectBase, AuditPersistentDomainObjectBase, Guid>,
+                                                  Framework.DomainDriven.BLLCoreGenerator.IGenerationEnvironmentBase,
+                                                  Framework.DomainDriven.DTOGenerator.TypeScript.ITypeScriptGenerationEnvironmentBase
 {
-    public class AuthorizationGenerationEnvironment : GenerationEnvironment<DomainObjectBase, PersistentDomainObjectBase, AuditPersistentDomainObjectBase, Guid>,
-                                                      Framework.DomainDriven.BLLCoreGenerator.IGenerationEnvironmentBase,
-                                                      Framework.DomainDriven.DTOGenerator.TypeScript.ITypeScriptGenerationEnvironmentBase
-    {
-        public AuthorizationGenerationEnvironment()
+    public AuthorizationGenerationEnvironment()
             : base(v => v.Id, typeof(DomainObjectFilterModel<>).Assembly)
-        {
-            this.ClientDTO = new AuthorizationDTOGeneratorConfiguration(this);
+    {
+        this.ClientDTO = new AuthorizationDTOGeneratorConfiguration(this);
 
-            this.AuthFacade = new AuthorizationServiceFacadeConfiguration(this);
-        }
+        this.AuthFacade = new AuthorizationServiceFacadeConfiguration(this);
+    }
 
-        public AuthorizationDTOGeneratorConfiguration ClientDTO { get; }
+    public AuthorizationDTOGeneratorConfiguration ClientDTO { get; }
 
-        public AuthorizationServiceFacadeConfiguration AuthFacade { get; }
+    public AuthorizationServiceFacadeConfiguration AuthFacade { get; }
 
-        public override Type SecurityOperationCodeType { get; } = typeof(AuthorizationSecurityOperationCode);
+    public override Type SecurityOperationCodeType { get; } = typeof(AuthorizationSecurityOperationCode);
 
-        public override Type OperationContextType { get; } = typeof(AuthorizationOperationContext);
+    public override Type OperationContextType { get; } = typeof(AuthorizationOperationContext);
 
-        protected override IEnumerable<Assembly> GetDomainObjectAssemblies()
-        {
-            return base.GetDomainObjectAssemblies().Concat(new[] { typeof(AuthorizationSecurityOperationCode).Assembly });
-        }
+    protected override IEnumerable<Assembly> GetDomainObjectAssemblies()
+    {
+        return base.GetDomainObjectAssemblies().Concat(new[] { typeof(AuthorizationSecurityOperationCode).Assembly });
     }
 }

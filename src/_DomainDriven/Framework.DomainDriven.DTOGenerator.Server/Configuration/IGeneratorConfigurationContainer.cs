@@ -1,7 +1,6 @@
-﻿namespace Framework.DomainDriven.DTOGenerator.Server
+﻿namespace Framework.DomainDriven.DTOGenerator.Server;
+
+public interface IGeneratorConfigurationContainer
 {
-    public interface IGeneratorConfigurationContainer
-    {
-        IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase> ServerDTO { get; }
-    }
+    IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase> ServerDTO { get; }
 }

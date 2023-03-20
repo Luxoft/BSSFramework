@@ -1,21 +1,20 @@
 ﻿using System;
 
-namespace Framework.Validation
+namespace Framework.Validation;
+
+[AttributeUsage(AttributeTargets.Property)]
+public class SignValidatorAttribute : PropertyValidatorAttribute
 {
-    [AttributeUsage(AttributeTargets.Property)]
-    public class SignValidatorAttribute : PropertyValidatorAttribute
+    public SignValidatorAttribute(SignType expectedPropertyValueSignType)
     {
-        public SignValidatorAttribute(SignType expectedPropertyValueSignType)
-        {
-            this.ExpectedPropertyValueSignType = expectedPropertyValueSignType;
-        }
+        this.ExpectedPropertyValueSignType = expectedPropertyValueSignType;
+    }
 
 
-        public SignType ExpectedPropertyValueSignType { get; }
+    public SignType ExpectedPropertyValueSignType { get; }
 
-        public override IPropertyValidator CreateValidator()
-        {
-            return new SignValidator(this.ExpectedPropertyValueSignType);
-        }
+    public override IPropertyValidator CreateValidator()
+    {
+        return new SignValidator(this.ExpectedPropertyValueSignType);
     }
 }

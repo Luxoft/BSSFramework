@@ -1,8 +1,7 @@
-﻿namespace SampleSystem.Domain
+﻿namespace SampleSystem.Domain;
+
+public enum ProjectStatus
 {
-    public enum ProjectStatus
-    {
-        Active = 0,
-        Closed = 1
-    }
+    Active = 0,
+    Closed = 1
 }

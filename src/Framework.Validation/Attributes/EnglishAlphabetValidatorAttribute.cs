@@ -1,16 +1,15 @@
 ﻿using System;
 
-namespace Framework.Validation
+namespace Framework.Validation;
+
+[AttributeUsage(AttributeTargets.Property)]
+public class EnglishAlphabetValidatorAttribute : PropertyValidatorAttribute
 {
-    [AttributeUsage(AttributeTargets.Property)]
-    public class EnglishAlphabetValidatorAttribute : PropertyValidatorAttribute
+    public string ExternalChars { get; set; }
+
+
+    public override IPropertyValidator CreateValidator()
     {
-        public string ExternalChars { get; set; }
-
-
-        public override IPropertyValidator CreateValidator()
-        {
-            return new EnglishAlphabetValidator(this.ExternalChars);
-        }
+        return new EnglishAlphabetValidator(this.ExternalChars);
     }
 }

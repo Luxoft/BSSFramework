@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace Framework.DomainDriven
+namespace Framework.DomainDriven;
+
+[Flags]
+public enum ModifyMode
 {
-    [Flags]
-    public enum ModifyMode
-    {
-        None = 1,
-        RemoveNotExistsTable = 2,
-        RemoveNotExistsColumns = 4,
-    }
+    None = 1,
+    RemoveNotExistsTable = 2,
+    RemoveNotExistsColumns = 4,
 }

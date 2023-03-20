@@ -1,24 +1,23 @@
 ﻿using Framework.DomainDriven.Serialization;
 
-namespace SampleSystem.Domain
+namespace SampleSystem.Domain;
+
+public class MuComponent
 {
-    public class MuComponent
+    private bool? luxoftSignsFirst;
+
+    private Employee authorizedLuxoftSignatory;
+
+    public virtual bool? LuxoftSignsFirst
     {
-        private bool? luxoftSignsFirst;
+        get => this.luxoftSignsFirst;
+        set => this.luxoftSignsFirst = value;
+    }
 
-        private Employee authorizedLuxoftSignatory;
-
-        public virtual bool? LuxoftSignsFirst
-        {
-            get => this.luxoftSignsFirst;
-            set => this.luxoftSignsFirst = value;
-        }
-
-        [CustomSerialization(CustomSerializationMode.Ignore)]
-        public virtual Employee AuthorizedLuxoftSignatory
-        {
-            get => this.authorizedLuxoftSignatory;
-            set => this.authorizedLuxoftSignatory = value;
-        }
+    [CustomSerialization(CustomSerializationMode.Ignore)]
+    public virtual Employee AuthorizedLuxoftSignatory
+    {
+        get => this.authorizedLuxoftSignatory;
+        set => this.authorizedLuxoftSignatory = value;
     }
 }

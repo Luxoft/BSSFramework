@@ -1,9 +1,8 @@
-﻿namespace Framework.Notification
-{
-    public interface ISubscription : IMailAddressContainer
-    {
-        bool IncludeAttachments { get; set; }
+﻿namespace Framework.Notification;
 
-        bool SendIndividualLetters { get; set; }
-    }
+public interface ISubscription : IMailAddressContainer
+{
+    bool IncludeAttachments { get; set; }
+
+    bool SendIndividualLetters { get; set; }
 }

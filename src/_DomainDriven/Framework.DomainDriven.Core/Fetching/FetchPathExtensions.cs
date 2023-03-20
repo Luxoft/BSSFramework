@@ -4,13 +4,12 @@ using System.Reflection;
 using Framework.Core;
 using Framework.Persistent;
 
-namespace Framework.DomainDriven
+namespace Framework.DomainDriven;
+
+internal static class PropertyPathExtensions
 {
-    internal static class PropertyPathExtensions
+    public static ReadOnlyCollection<PropertyPath> GetFetchPaths(this PropertyInfo property)
     {
-        public static ReadOnlyCollection<PropertyPath> GetFetchPaths(this PropertyInfo property)
-        {
-            return property.GetPropertyPaths<FetchPathAttribute>();
-        }
+        return property.GetPropertyPaths<FetchPathAttribute>();
     }
 }

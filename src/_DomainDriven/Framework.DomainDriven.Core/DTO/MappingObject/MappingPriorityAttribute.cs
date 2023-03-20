@@ -1,15 +1,14 @@
 ﻿using System;
 
-namespace Framework.DomainDriven
+namespace Framework.DomainDriven;
+
+public class MappingPriorityAttribute : Attribute
 {
-    public class MappingPriorityAttribute : Attribute
+    public MappingPriorityAttribute(int value)
     {
-        public MappingPriorityAttribute(int value)
-        {
-            this.Value = value;
-        }
-
-
-        public int Value { get; private set; }
+        this.Value = value;
     }
+
+
+    public int Value { get; private set; }
 }

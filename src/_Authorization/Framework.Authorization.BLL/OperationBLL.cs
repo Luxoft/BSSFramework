@@ -5,33 +5,32 @@ using System.Linq;
 using Framework.Authorization.Domain;
 using Framework.Persistent;
 
-namespace Framework.Authorization.BLL
+namespace Framework.Authorization.BLL;
+
+public partial class OperationBLL
 {
-    public partial class OperationBLL
+    public IEnumerable<Operation> GetAvailableOperations()
     {
-        public IEnumerable<Operation> GetAvailableOperations()
+        return this.Context.Logics.Permission.GetAvailablePermissionsQueryable()
+                   .Select(permission => permission.Role)
+                   .SelectMany(businessRole => businessRole.BusinessRoleOperationLinks)
+                   .Select(link => link.Operation)
+                   .Distinct()
+                   .ToList();
+    }
+
+    public override void Remove(Operation operation)
+    {
+        if (operation == null)
         {
-            return this.Context.Logics.Permission.GetAvailablePermissionsQueryable()
-                                                 .Select(permission => permission.Role)
-                                                 .SelectMany(businessRole => businessRole.BusinessRoleOperationLinks)
-                                                 .Select(link => link.Operation)
-                                                 .Distinct()
-                                                 .ToList();
+            throw new ArgumentNullException(nameof(operation));
         }
 
-        public override void Remove(Operation operation)
+        foreach (var link in operation.Links)
         {
-            if (operation == null)
-            {
-                throw new ArgumentNullException(nameof(operation));
-            }
-
-            foreach (var link in operation.Links)
-            {
-                link.BusinessRole.RemoveDetail(link);
-            }
-
-            base.Remove(operation);
+            link.BusinessRole.RemoveDetail(link);
         }
+
+        base.Remove(operation);
     }
 }

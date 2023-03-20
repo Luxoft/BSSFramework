@@ -1,7 +1,6 @@
-﻿namespace Framework.DomainDriven.Generation
+﻿namespace Framework.DomainDriven.Generation;
+
+public interface IFileHeader
 {
-    public interface IFileHeader
-    {
-        string Filename { get; }
-    }
+    string Filename { get; }
 }

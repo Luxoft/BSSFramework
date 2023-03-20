@@ -1,13 +1,12 @@
-﻿namespace Framework.DomainDriven.BLL
+﻿namespace Framework.DomainDriven.BLL;
+
+/// <summary>
+/// Атрибут разрешающий создание объекта
+/// </summary>
+public interface IAllowCreateAttribute
 {
     /// <summary>
-    /// Атрибут разрешающий создание объекта
+    /// Разрешение создавать объект
     /// </summary>
-    public interface IAllowCreateAttribute
-    {
-        /// <summary>
-        /// Разрешение создавать объект
-        /// </summary>
-        bool AllowCreate { get; }
-    }
+    bool AllowCreate { get; }
 }

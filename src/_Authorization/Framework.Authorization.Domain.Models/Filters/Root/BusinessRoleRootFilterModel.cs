@@ -2,22 +2,21 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Framework.Authorization.Domain
+namespace Framework.Authorization.Domain;
+
+public class BusinessRoleRootFilterModel : DomainObjectRootFilterModel<BusinessRole>
 {
-    public class BusinessRoleRootFilterModel : DomainObjectRootFilterModel<BusinessRole>
+    public Operation Operation { get; set; }
+
+    public Principal Principal { get; set; }
+
+    public override Expression<Func<BusinessRole, bool>> ToFilterExpression()
     {
-        public Operation Operation { get; set; }
+        var operation = this.Operation;
 
-        public Principal Principal { get; set; }
+        var principal = this.Principal;
 
-        public override Expression<Func<BusinessRole, bool>> ToFilterExpression()
-        {
-            var operation = this.Operation;
-
-            var principal = this.Principal;
-
-            return businessRole => (operation == null || businessRole.BusinessRoleOperationLinks.Any(link => link.Operation == operation))
-                                && (principal == null || businessRole.Permissions.Any(permission => permission.Principal == principal));
-        }
+        return businessRole => (operation == null || businessRole.BusinessRoleOperationLinks.Any(link => link.Operation == operation))
+                               && (principal == null || businessRole.Permissions.Any(permission => permission.Principal == principal));
     }
 }

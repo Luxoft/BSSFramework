@@ -1,18 +1,17 @@
-﻿namespace Framework.Core
+﻿namespace Framework.Core;
+
+/// <summary>
+/// Данные о сборке
+/// </summary>
+public interface IAssemblyInfo : ITypeSource
 {
     /// <summary>
-    /// Данные о сборке
+    /// Имя сборки
     /// </summary>
-    public interface IAssemblyInfo : ITypeSource
-    {
-        /// <summary>
-        /// Имя сборки
-        /// </summary>
-        string Name { get; }
+    string Name { get; }
 
-        /// <summary>
-        /// Полное имя сборки
-        /// </summary>
-        string FullName { get; }
-    }
+    /// <summary>
+    /// Полное имя сборки
+    /// </summary>
+    string FullName { get; }
 }

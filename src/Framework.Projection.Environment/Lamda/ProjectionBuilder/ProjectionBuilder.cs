@@ -4,59 +4,58 @@ using System.Linq;
 
 using JetBrains.Annotations;
 
-namespace Framework.Projection.Lambda
+namespace Framework.Projection.Lambda;
+
+internal class ProjectionBuilder : IProjection
 {
-    internal class ProjectionBuilder : IProjection
+    public ProjectionBuilder([NotNull] IProjection sourceProjection)
     {
-        public ProjectionBuilder([NotNull] IProjection sourceProjection)
-        {
-            if (sourceProjection == null) throw new ArgumentNullException(nameof(sourceProjection));
+        if (sourceProjection == null) throw new ArgumentNullException(nameof(sourceProjection));
 
-            this.SourceType = sourceProjection.SourceType;
-            this.Name = sourceProjection.Name;
-            this.BLLView = sourceProjection.BLLView;
-            this.Role = sourceProjection.Role;
-            this.Attributes = sourceProjection.Attributes.ToList();
-            this.FilterAttributes = sourceProjection.FilterAttributes.ToList();
-        }
+        this.SourceType = sourceProjection.SourceType;
+        this.Name = sourceProjection.Name;
+        this.BLLView = sourceProjection.BLLView;
+        this.Role = sourceProjection.Role;
+        this.Attributes = sourceProjection.Attributes.ToList();
+        this.FilterAttributes = sourceProjection.FilterAttributes.ToList();
+    }
 
-        public ProjectionBuilder([NotNull] Type sourceType)
-        {
-            this.SourceType = sourceType ?? throw new ArgumentNullException(nameof(sourceType));
-        }
+    public ProjectionBuilder([NotNull] Type sourceType)
+    {
+        this.SourceType = sourceType ?? throw new ArgumentNullException(nameof(sourceType));
+    }
 
 
-        public Type SourceType { get; }
+    public Type SourceType { get; }
 
 
-        public string Name { get; set; }
+    public string Name { get; set; }
 
-        public bool BLLView { get; set; }
+    public bool BLLView { get; set; }
 
-        public ProjectionRole Role { get; set; }
+    public ProjectionRole Role { get; set; }
 
 
-        public List<ProjectionPropertyBuilder> Properties { get; set; } = new List<ProjectionPropertyBuilder>();
+    public List<ProjectionPropertyBuilder> Properties { get; set; } = new List<ProjectionPropertyBuilder>();
 
-        public List<ProjectionCustomPropertyBuilder> CustomProperties { get; } = new List<ProjectionCustomPropertyBuilder>();
+    public List<ProjectionCustomPropertyBuilder> CustomProperties { get; } = new List<ProjectionCustomPropertyBuilder>();
 
-        public List<Attribute> Attributes { get; set; } = new List<Attribute>();
+    public List<Attribute> Attributes { get; set; } = new List<Attribute>();
 
-        public List<ProjectionFilterAttribute> FilterAttributes { get; set; } = new List<ProjectionFilterAttribute>();
+    public List<ProjectionFilterAttribute> FilterAttributes { get; set; } = new List<ProjectionFilterAttribute>();
 
-        public bool IgnoreIdSerialization { get; set; }
+    public bool IgnoreIdSerialization { get; set; }
 
-        IReadOnlyList<IProjectionProperty> IProjection.Properties => this.Properties;
+    IReadOnlyList<IProjectionProperty> IProjection.Properties => this.Properties;
 
-        IReadOnlyList<Attribute> IProjectionAttributeProvider.Attributes => this.Attributes;
+    IReadOnlyList<Attribute> IProjectionAttributeProvider.Attributes => this.Attributes;
 
-        IReadOnlyList<ProjectionFilterAttribute> IProjection.FilterAttributes => this.FilterAttributes;
+    IReadOnlyList<ProjectionFilterAttribute> IProjection.FilterAttributes => this.FilterAttributes;
 
-        IReadOnlyList<IProjectionCustomProperty> IProjection.CustomProperties => this.CustomProperties;
+    IReadOnlyList<IProjectionCustomProperty> IProjection.CustomProperties => this.CustomProperties;
 
-        public override string ToString()
-        {
-            return this.Name;
-        }
+    public override string ToString()
+    {
+        return this.Name;
     }
 }

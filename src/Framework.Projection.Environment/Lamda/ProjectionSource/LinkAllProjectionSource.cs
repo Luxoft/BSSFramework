@@ -3,43 +3,42 @@ using System.Collections.Generic;
 
 using JetBrains.Annotations;
 
-namespace Framework.Projection.Lambda
+namespace Framework.Projection.Lambda;
+
+internal class LinkAllProjectionSource : IProjectionSource
 {
-    internal class LinkAllProjectionSource : IProjectionSource
+    private readonly IProjectionSource baseSource;
+
+    public LinkAllProjectionSource([NotNull] IProjectionSource baseSource)
     {
-        private readonly IProjectionSource baseSource;
+        this.baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
+    }
 
-        public LinkAllProjectionSource([NotNull] IProjectionSource baseSource)
+    public IEnumerable<IProjection> GetProjections()
+    {
+        var graph = new HashSet<IProjection>();
+
+        foreach (var projection in this.baseSource.GetProjections())
         {
-            this.baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
+            this.FillProjectionsGraph(projection, graph);
         }
 
-        public IEnumerable<IProjection> GetProjections()
+        return graph;
+    }
+
+    public void FillProjectionsGraph([NotNull] IProjection projection, [NotNull] HashSet<IProjection> graph)
+    {
+        if (projection == null) { throw new ArgumentNullException(nameof(projection)); }
+
+        if (graph == null) { throw new ArgumentNullException(nameof(graph)); }
+
+        if (graph.Add(projection))
         {
-            var graph = new HashSet<IProjection>();
-
-            foreach (var projection in this.baseSource.GetProjections())
+            foreach (var projectionProperty in projection.Properties)
             {
-                this.FillProjectionsGraph(projection, graph);
-            }
-
-            return graph;
-        }
-
-        public void FillProjectionsGraph([NotNull] IProjection projection, [NotNull] HashSet<IProjection> graph)
-        {
-            if (projection == null) { throw new ArgumentNullException(nameof(projection)); }
-
-            if (graph == null) { throw new ArgumentNullException(nameof(graph)); }
-
-            if (graph.Add(projection))
-            {
-                foreach (var projectionProperty in projection.Properties)
+                if (projectionProperty.Type.ElementProjection != null)
                 {
-                    if (projectionProperty.Type.ElementProjection != null)
-                    {
-                        this.FillProjectionsGraph(projectionProperty.Type.ElementProjection, graph);
-                    }
+                    this.FillProjectionsGraph(projectionProperty.Type.ElementProjection, graph);
                 }
             }
         }

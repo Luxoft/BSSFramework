@@ -8,79 +8,78 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-namespace SampleSystem.IntegrationTests
+namespace SampleSystem.IntegrationTests;
+
+[TestClass]
+public class ExpandPathTests : TestBase
 {
-    [TestClass]
-    public class ExpandPathTests : TestBase
+    [TestMethod]
+    public void LiftToNullableContainsExt_ShouldNotThrowException()
     {
-        [TestMethod]
-        public void LiftToNullableContainsExt_ShouldNotThrowException()
-        {
-            // Arrange
-            var period = this.DateTimeService.CurrentMonth;
+        // Arrange
+        var period = this.DateTimeService.CurrentMonth;
 
-            // Act
-            var action = new Action(() =>
-            {
-                var res = this.Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnit.Period.ContainsExt(period.EndDate ?? period.StartDate)));
+        // Act
+        var action = new Action(() =>
+                                {
+                                    var res = this.Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnit.Period.ContainsExt(period.EndDate ?? period.StartDate)));
 
-                return;
-            });
+                                    return;
+                                });
 
-            // Assert
-            action.Should().NotThrow();
-        }
+        // Assert
+        action.Should().NotThrow();
+    }
 
-        [TestMethod]
-        public void LiftToNullableBinaryExpression_ShouldNotThrowException()
-        {
-            // Arrange
+    [TestMethod]
+    public void LiftToNullableBinaryExpression_ShouldNotThrowException()
+    {
+        // Arrange
 
-            // Act
-            var action = new Action(() =>
-            {
-                var res = this.Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.LocationCode == null));
+        // Act
+        var action = new Action(() =>
+                                {
+                                    var res = this.Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.LocationCode == null));
 
-                return;
-            });
+                                    return;
+                                });
 
-            // Assert
-            action.Should().NotThrow();
-        }
+        // Assert
+        action.Should().NotThrow();
+    }
 
-        [TestMethod]
-        public void LiftToNullablePeriodIntersect_ShouldNotThrowException()
-        {
-            // Arrange
+    [TestMethod]
+    public void LiftToNullablePeriodIntersect_ShouldNotThrowException()
+    {
+        // Arrange
 
-            // Act
-            var action = new Action(() =>
-            {
-                var res = this.Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnitPeriod.IsIntersected(this.DateTimeService.CurrentMonth)));
+        // Act
+        var action = new Action(() =>
+                                {
+                                    var res = this.Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnitPeriod.IsIntersected(this.DateTimeService.CurrentMonth)));
 
-                return;
-            });
+                                    return;
+                                });
 
-            // Assert
-            action.Should().NotThrow();
-        }
+        // Assert
+        action.Should().NotThrow();
+    }
 
 
-        [TestMethod]
-        public void LiftToNullablePeriodContains_ShouldNotThrowException()
-        {
-            // Arrange
+    [TestMethod]
+    public void LiftToNullablePeriodContains_ShouldNotThrowException()
+    {
+        // Arrange
 
-            // Act
-            var action = new Action(() =>
-            {
-                var res = this.Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnitPeriod.Contains((DateTime?)this.DateTimeService.Today)));
+        // Act
+        var action = new Action(() =>
+                                {
+                                    var res = this.Evaluate(DBSessionMode.Read, context => context.Logics.Employee.GetListBy(employee => employee.CoreBusinessUnitPeriod.Contains((DateTime?)this.DateTimeService.Today)));
 
-                return;
-            });
+                                    return;
+                                });
 
-            // Assert
-            action.Should().NotThrow();
-        }
+        // Assert
+        action.Should().NotThrow();
     }
 }

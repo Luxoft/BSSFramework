@@ -9,87 +9,86 @@ using Framework.DomainDriven.NHibernate.DALGenerator;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Framework.Authorization.TestGenerate
+namespace Framework.Authorization.TestGenerate;
+
+[TestClass]
+public partial class ServerGenerators
 {
-    [TestClass]
-    public partial class ServerGenerators
+    [TestMethod]
+    public void GenerateMainTest()
     {
-        [TestMethod]
-        public void GenerateMainTest()
-        {
-            this.GenerateMain().ToList();
-        }
+        this.GenerateMain().ToList();
+    }
 
-        public IEnumerable<FileInfo> GenerateMain()
-        {
-            return this.GenerateBLLCore()
-                       .Concat(this.GenerateBLL())
-                       .Concat(this.GenerateServerDTO())
-                       .Concat(this.GenerateDAL());
-        }
+    public IEnumerable<FileInfo> GenerateMain()
+    {
+        return this.GenerateBLLCore()
+                   .Concat(this.GenerateBLL())
+                   .Concat(this.GenerateServerDTO())
+                   .Concat(this.GenerateDAL());
+    }
 
-        [TestMethod]
-        public void GenerateBLLCoreTest()
-        {
-            this.GenerateBLLCore().ToList();
-        }
+    [TestMethod]
+    public void GenerateBLLCoreTest()
+    {
+        this.GenerateBLLCore().ToList();
+    }
 
-        private IEnumerable<FileInfo> GenerateBLLCore()
-        {
-            var generator = new BLLCoreFileGenerator(this.Environment.BLLCore);
+    private IEnumerable<FileInfo> GenerateBLLCore()
+    {
+        var generator = new BLLCoreFileGenerator(this.Environment.BLLCore);
 
-            return generator.GenerateGroup(
-                this.GeneratePath + @"/Framework.Authorization.BLL.Core/_Generated",
-                decl => decl.Name.Contains("FetchService") ? "Authorization.FetchService.Generated"
-                    : decl.Name.Contains("ValidationMap") ? "Authorization.ValidationMap.Generated"
-                    : decl.Name.Contains("Validator") ? "Authorization.Validator.Generated"
-                    : "Authorization.Generated",
-                this.CheckOutService);
-        }
+        return generator.GenerateGroup(
+                                       this.GeneratePath + @"/Framework.Authorization.BLL.Core/_Generated",
+                                       decl => decl.Name.Contains("FetchService") ? "Authorization.FetchService.Generated"
+                                               : decl.Name.Contains("ValidationMap") ? "Authorization.ValidationMap.Generated"
+                                               : decl.Name.Contains("Validator") ? "Authorization.Validator.Generated"
+                                               : "Authorization.Generated",
+                                       this.CheckOutService);
+    }
 
-        [TestMethod]
-        public void GenerateBLLTest()
-        {
-            this.GenerateBLL().ToList();
-        }
+    [TestMethod]
+    public void GenerateBLLTest()
+    {
+        this.GenerateBLL().ToList();
+    }
 
-        private IEnumerable<FileInfo> GenerateBLL()
-        {
-            var generator = new BLLFileGenerator(this.Environment.BLL);
+    private IEnumerable<FileInfo> GenerateBLL()
+    {
+        var generator = new BLLFileGenerator(this.Environment.BLL);
 
-            yield return generator.GenerateSingle(
-                this.GeneratePath + @"/Framework.Authorization.BLL/_Generated",
-                "Authorization.Generated",
-                this.CheckOutService);
-        }
+        yield return generator.GenerateSingle(
+                                              this.GeneratePath + @"/Framework.Authorization.BLL/_Generated",
+                                              "Authorization.Generated",
+                                              this.CheckOutService);
+    }
 
-        [TestMethod]
-        public void GenerateServerDTOTest()
-        {
-            this.GenerateServerDTO().ToList();
-        }
+    [TestMethod]
+    public void GenerateServerDTOTest()
+    {
+        this.GenerateServerDTO().ToList();
+    }
 
-        private IEnumerable<FileInfo> GenerateServerDTO()
-        {
-            var generator = new ServerFileGenerator(this.Environment.ServerDTO);
+    private IEnumerable<FileInfo> GenerateServerDTO()
+    {
+        var generator = new ServerFileGenerator(this.Environment.ServerDTO);
 
-            yield return generator.GenerateSingle(
-                this.GeneratePath + @"/Framework.Authorization.Generated.DTO",
-                "Authorization.Generated",
-                this.CheckOutService);
-        }
+        yield return generator.GenerateSingle(
+                                              this.GeneratePath + @"/Framework.Authorization.Generated.DTO",
+                                              "Authorization.Generated",
+                                              this.CheckOutService);
+    }
 
-        [TestMethod]
-        public void GenerateDALTest()
-        {
-            this.GenerateDAL().ToList();
-        }
+    [TestMethod]
+    public void GenerateDALTest()
+    {
+        this.GenerateDAL().ToList();
+    }
 
-        private IEnumerable<FileInfo> GenerateDAL()
-        {
-            var generator = new DALFileGenerator(this.Environment.DAL);
+    private IEnumerable<FileInfo> GenerateDAL()
+    {
+        var generator = new DALFileGenerator(this.Environment.DAL);
 
-            return generator.Generate(this.GeneratePath + @"/Framework.Authorization.Generated.DAL.NHibernate/Mapping", this.CheckOutService);
-        }
+        return generator.Generate(this.GeneratePath + @"/Framework.Authorization.Generated.DAL.NHibernate/Mapping", this.CheckOutService);
     }
 }

@@ -1,7 +1,6 @@
-﻿namespace Framework.Core.Serialization
+﻿namespace Framework.Core.Serialization;
+
+public interface IParser<in TInput, out TResult>
 {
-    public interface IParser<in TInput, out TResult>
-    {
-        TResult Parse(TInput input);
-    }
+    TResult Parse(TInput input);
 }

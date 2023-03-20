@@ -1,12 +1,11 @@
 using System;
 using System.Reflection;
 
-namespace Framework.DomainDriven.NHibernate
-{
-    public interface IAuditTypeFilter
-    {
-        bool IsAuditedType(Type type);
+namespace Framework.DomainDriven.NHibernate;
 
-        bool IsAuditedProperty(Type type, PropertyInfo propertyInfo);
-    }
+public interface IAuditTypeFilter
+{
+    bool IsAuditedType(Type type);
+
+    bool IsAuditedProperty(Type type, PropertyInfo propertyInfo);
 }

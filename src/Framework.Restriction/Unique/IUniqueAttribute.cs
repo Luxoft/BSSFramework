@@ -1,7 +1,6 @@
-﻿namespace Framework.Restriction
+﻿namespace Framework.Restriction;
+
+public interface IUniqueAttribute : IRestrictionAttribute
 {
-    public interface IUniqueAttribute : IRestrictionAttribute
-    {
-        string Key { get; }
-    }
+    string Key { get; }
 }

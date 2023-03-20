@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace Framework.DomainDriven.Attributes
+namespace Framework.DomainDriven.Attributes;
+
+[AttributeUsage(AttributeTargets.Class)]
+public class NotAuditedClassAttribute : Attribute
 {
-    [AttributeUsage(AttributeTargets.Class)]
-    public class NotAuditedClassAttribute : Attribute
-    {
-    }
 }

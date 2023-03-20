@@ -1,19 +1,17 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+/// <summary>
+/// Константы, описывающие политику приема интеграционных сообщений
+/// </summary>
+public enum ApplyIntegrationPolicy
 {
+    /// <summary>
+    /// The ignore integration message if message has less or equal version
+    /// </summary>
+    IgnoreLessOrEqualVersion = 0,
 
     /// <summary>
-    /// Константы, описывающие политику приема интеграционных сообщений
+    /// The ignore integration message if message has less version
     /// </summary>
-    public enum ApplyIntegrationPolicy
-    {
-        /// <summary>
-        /// The ignore integration message if message has less or equal version
-        /// </summary>
-        IgnoreLessOrEqualVersion = 0,
-
-        /// <summary>
-        /// The ignore integration message if message has less version
-        /// </summary>
-        IgnoreLessVersion = 1,
-    }
+    IgnoreLessVersion = 1,
 }

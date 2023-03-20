@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Framework.Core
+namespace Framework.Core;
+
+public static class HashSetExtensions
 {
-    public static class HashSetExtensions
+    public static List<T> ToList<T>(this HashSet<T> hashSet)
     {
-        public static List<T> ToList<T>(this HashSet<T> hashSet)
-        {
-            if (hashSet == null) throw new ArgumentNullException(nameof(hashSet));
+        if (hashSet == null) throw new ArgumentNullException(nameof(hashSet));
 
-            var list = new List<T>(hashSet.Count);
+        var list = new List<T>(hashSet.Count);
 
-            list.AddRange(hashSet);
+        list.AddRange(hashSet);
 
-            return list;
-        }
+        return list;
     }
 }

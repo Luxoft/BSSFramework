@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface IVisualIdentityObject
 {
-    public interface IVisualIdentityObject
-    {
-        string Name { get; }
-    }
+    string Name { get; }
 }

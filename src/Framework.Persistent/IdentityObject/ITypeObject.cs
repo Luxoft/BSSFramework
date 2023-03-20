@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface ITypeObject<out TType>
 {
-    public interface ITypeObject<out TType>
-    {
-        TType Type { get; }
-    }
+    TType Type { get; }
 }

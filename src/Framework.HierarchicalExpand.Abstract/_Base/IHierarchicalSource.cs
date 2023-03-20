@@ -1,6 +1,5 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface IHierarchicalSource<out T> : IParentSource<T>, IChildrenSource<T>
 {
-    public interface IHierarchicalSource<out T> : IParentSource<T>, IChildrenSource<T>
-    {
-    }
 }

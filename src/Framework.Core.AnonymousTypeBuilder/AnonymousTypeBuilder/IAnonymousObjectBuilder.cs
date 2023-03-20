@@ -1,7 +1,6 @@
-﻿namespace Framework.Core
+﻿namespace Framework.Core;
+
+public interface IAnonymousObjectBuilder<in TSource>
 {
-    public interface IAnonymousObjectBuilder<in TSource>
-    {
-        object GetAnonymousObject(TSource source);
-    }
+    object GetAnonymousObject(TSource source);
 }

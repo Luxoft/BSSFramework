@@ -5,59 +5,58 @@ using System.Threading.Tasks;
 
 using Framework.DomainDriven.BLL.Tracking;
 
-namespace Framework.DomainDriven
+namespace Framework.DomainDriven;
+
+public interface IDBSession : ICurrentRevisionService, IAsyncDisposable, IDisposable
 {
-    public interface IDBSession : ICurrentRevisionService, IAsyncDisposable, IDisposable
+    DBSessionMode SessionMode { get; }
+
+    IObjectStateService GetObjectStateService();
+
+    /// <summary>
+    /// Мануальный флаш сессии, при его вызове срабатывают только Flushed-евенты, TransactionCompleted-евенты вызываются только при закрытие сессии
+    /// </summary>
+    void Flush()
     {
-        DBSessionMode SessionMode { get; }
+        this.FlushAsync().GetAwaiter().GetResult();
+    }
 
-        IObjectStateService GetObjectStateService();
+    Task FlushAsync(CancellationToken cancellationToken = default);
 
-        /// <summary>
-        /// Мануальный флаш сессии, при его вызове срабатывают только Flushed-евенты, TransactionCompleted-евенты вызываются только при закрытие сессии
-        /// </summary>
-        void Flush()
-        {
-            this.FlushAsync().GetAwaiter().GetResult();
-        }
+    IEnumerable<ObjectModification> GetModifiedObjectsFromLogic();
 
-        Task FlushAsync(CancellationToken cancellationToken = default);
+    IEnumerable<ObjectModification> GetModifiedObjectsFromLogic<TPersistentDomainObjectBase>();
 
-        IEnumerable<ObjectModification> GetModifiedObjectsFromLogic();
+    /// <summary>
+    /// Закрывает текущую транзакцию без применения изменений.
+    /// </summary>
+    void AsFault();
 
-        IEnumerable<ObjectModification> GetModifiedObjectsFromLogic<TPersistentDomainObjectBase>();
+    /// <summary>
+    /// Gets the maximum audit revision.
+    /// </summary>
+    /// <returns>System.Int64.</returns>
+    long GetMaxRevision();
 
-        /// <summary>
-        /// Закрывает текущую транзакцию без применения изменений.
-        /// </summary>
-        void AsFault();
+    /// <summary>
+    /// Перевод сессию в режим "только для чтения" (доступно только перед фактическим использованием сессии)
+    /// </summary>
+    void AsReadOnly();
 
-        /// <summary>
-        /// Gets the maximum audit revision.
-        /// </summary>
-        /// <returns>System.Int64.</returns>
-        long GetMaxRevision();
+    /// <summary>
+    /// Переводит сессию в режим для записи (доступно только перед фактическим использованием сессии)
+    /// </summary>
+    void AsWritable();
 
-        /// <summary>
-        /// Перевод сессию в режим "только для чтения" (доступно только перед фактическим использованием сессии)
-        /// </summary>
-        void AsReadOnly();
+    public void Close()
+    {
+        this.CloseAsync().GetAwaiter().GetResult();
+    }
 
-        /// <summary>
-        /// Переводит сессию в режим для записи (доступно только перед фактическим использованием сессии)
-        /// </summary>
-        void AsWritable();
+    Task CloseAsync(CancellationToken cancellationToken = default);
 
-        public void Close()
-        {
-            this.CloseAsync().GetAwaiter().GetResult();
-        }
-
-        Task CloseAsync(CancellationToken cancellationToken = default);
-
-        void IDisposable.Dispose()
-        {
-            this.DisposeAsync().GetAwaiter().GetResult();
-        }
+    void IDisposable.Dispose()
+    {
+        this.DisposeAsync().GetAwaiter().GetResult();
     }
 }

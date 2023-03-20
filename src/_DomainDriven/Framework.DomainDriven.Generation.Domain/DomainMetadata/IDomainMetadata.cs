@@ -1,10 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Reflection;
 
-namespace Framework.DomainDriven.Generation.Domain
+namespace Framework.DomainDriven.Generation.Domain;
+
+public interface IDomainMetadata : IDomainMetadataBase
 {
-    public interface IDomainMetadata : IDomainMetadataBase
-    {
-        ReadOnlyCollection<Assembly> DomainObjectAssemblies { get; }
-    }
+    ReadOnlyCollection<Assembly> DomainObjectAssemblies { get; }
 }

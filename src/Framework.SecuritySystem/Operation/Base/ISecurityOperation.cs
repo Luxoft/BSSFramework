@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace Framework.SecuritySystem
+namespace Framework.SecuritySystem;
+
+public interface ISecurityOperation
 {
-    public interface ISecurityOperation
-    {
-        Enum Code { get; }
-    }
+    Enum Code { get; }
 }

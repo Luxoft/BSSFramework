@@ -1,20 +1,19 @@
 ﻿using Framework.DomainDriven.Attributes;
 using Framework.Persistent.Mapping;
 
-namespace SampleSystem.Domain.TestForceAbstract
+namespace SampleSystem.Domain.TestForceAbstract;
+
+[Table(Name = nameof(ClassA))]
+[InlineBaseTypeMapping]
+[NotAuditedClass]
+public class ConcreteClassA : ClassA
 {
-    [Table(Name = nameof(ClassA))]
-    [InlineBaseTypeMapping]
-    [NotAuditedClass]
-    public class ConcreteClassA : ClassA
+    private int age;
+
+    public virtual int Age
     {
-        private int age;
-
-        public virtual int Age
-        {
-            get { return this.age; }
-            set { this.age = value; }
-        }
-
+        get { return this.age; }
+        set { this.age = value; }
     }
+
 }

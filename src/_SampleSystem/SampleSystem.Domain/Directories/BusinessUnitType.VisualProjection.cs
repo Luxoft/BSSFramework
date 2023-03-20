@@ -1,8 +1,7 @@
 ﻿using System;
 
-namespace SampleSystem.Domain
+namespace SampleSystem.Domain;
+
+public partial class BusinessUnitType : IBusinessUnitTypeVisualProjection
 {
-    public partial class BusinessUnitType : IBusinessUnitTypeVisualProjection
-    {
-    }
 }

@@ -1,21 +1,20 @@
 ﻿using Framework.SecuritySystem;
 
-namespace Framework.DomainDriven.BLL.Security
-{
-    public interface IAccessDeniedExceptionServiceContainer<in TPersistentDomainObjectBase> : IAccessDeniedExceptionServiceContainer
-        where TPersistentDomainObjectBase : class
-    {
-        new IAccessDeniedExceptionService<TPersistentDomainObjectBase> AccessDeniedExceptionService
-        {
-            get;
-        }
-    }
+namespace Framework.DomainDriven.BLL.Security;
 
-    public interface IAccessDeniedExceptionServiceContainer
+public interface IAccessDeniedExceptionServiceContainer<in TPersistentDomainObjectBase> : IAccessDeniedExceptionServiceContainer
+        where TPersistentDomainObjectBase : class
+{
+    new IAccessDeniedExceptionService<TPersistentDomainObjectBase> AccessDeniedExceptionService
     {
-        IAccessDeniedExceptionService AccessDeniedExceptionService
-        {
-            get;
-        }
+        get;
+    }
+}
+
+public interface IAccessDeniedExceptionServiceContainer
+{
+    IAccessDeniedExceptionService AccessDeniedExceptionService
+    {
+        get;
     }
 }

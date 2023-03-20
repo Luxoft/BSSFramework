@@ -5,22 +5,21 @@ using Framework.CodeDom;
 
 using JetBrains.Annotations;
 
-namespace Framework.DomainDriven.ServiceModelGenerator
+namespace Framework.DomainDriven.ServiceModelGenerator;
+
+public static class CodeExpressionExtensions
 {
-    public static class CodeExpressionExtensions
+    public static CodeExpression GetContext([NotNull] this CodeExpression evaluateDataExpr)
     {
-        public static CodeExpression GetContext([NotNull] this CodeExpression evaluateDataExpr)
-        {
-            if (evaluateDataExpr == null) throw new ArgumentNullException(nameof(evaluateDataExpr));
+        if (evaluateDataExpr == null) throw new ArgumentNullException(nameof(evaluateDataExpr));
 
-            return evaluateDataExpr.ToPropertyReference("Context");
-        }
+        return evaluateDataExpr.ToPropertyReference("Context");
+    }
 
-        public static CodeExpression GetMappingService([NotNull] this CodeExpression evaluateDataExpr)
-        {
-            if (evaluateDataExpr == null) throw new ArgumentNullException(nameof(evaluateDataExpr));
+    public static CodeExpression GetMappingService([NotNull] this CodeExpression evaluateDataExpr)
+    {
+        if (evaluateDataExpr == null) throw new ArgumentNullException(nameof(evaluateDataExpr));
 
-            return evaluateDataExpr.ToPropertyReference("MappingService");
-        }
+        return evaluateDataExpr.ToPropertyReference("MappingService");
     }
 }

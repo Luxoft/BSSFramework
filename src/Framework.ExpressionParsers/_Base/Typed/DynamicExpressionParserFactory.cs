@@ -2,18 +2,17 @@
 
 using Framework.Core;
 
-namespace Framework.ExpressionParsers
+namespace Framework.ExpressionParsers;
+
+public abstract class DynamicExpressionParserFactory : TypeCache, INativeExpressionParserContainer
 {
-    public abstract class DynamicExpressionParserFactory : TypeCache, INativeExpressionParserContainer
+    protected DynamicExpressionParserFactory(INativeExpressionParser parser)
     {
-        protected DynamicExpressionParserFactory(INativeExpressionParser parser)
-        {
-            if (parser == null) throw new ArgumentNullException(nameof(parser));
+        if (parser == null) throw new ArgumentNullException(nameof(parser));
 
-            this.Parser = parser;
-        }
-
-
-        public INativeExpressionParser Parser { get; private set; }
+        this.Parser = parser;
     }
+
+
+    public INativeExpressionParser Parser { get; private set; }
 }

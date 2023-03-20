@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface IIntegrationEmployee : IEmployee
 {
-    public interface IIntegrationEmployee : IEmployee
-    {
-        int? GetPin();
-    }
+    int? GetPin();
 }

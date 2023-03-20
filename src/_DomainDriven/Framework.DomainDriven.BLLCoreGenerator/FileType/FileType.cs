@@ -1,71 +1,70 @@
 ﻿using System;
 
-namespace Framework.DomainDriven.BLLCoreGenerator
+namespace Framework.DomainDriven.BLLCoreGenerator;
+
+public enum FileType
 {
-    public enum FileType
-    {
-        BLLContext,
+    BLLContext,
 
-        BLLContextInterface,
+    BLLContextInterface,
 
-        SecurityOperation,
+    SecurityOperation,
 
-        RootSecurityServicePathContainerInterface,
+    RootSecurityServicePathContainerInterface,
 
-        RootSecurityServiceInterface,
+    RootSecurityServiceInterface,
 
-        RootSecurityService,
+    RootSecurityService,
 
-        RootSecurityServiceBase,
+    RootSecurityServiceBase,
 
 
 
-        DomainSecurityService,
+    DomainSecurityService,
 
 
 
 
-        SecurityPath,
+    SecurityPath,
 
 
-        DomainBLLBase,
+    DomainBLLBase,
 
-        SecurityDomainBLLBase,
-
-
-
-        DefaultOperationDomainBLLBase,
-
-        DefaultOperationSecurityDomainBLLBase,
+    SecurityDomainBLLBase,
 
 
 
+    DefaultOperationDomainBLLBase,
 
-        BLLInterface,
-
-        BLLFactoryInterface,
-
-        BLLFactoryContainerInterface,
-
-
-        DomainObjectMappingService,
-
-        SecurityHierarchyDomainBLLBase,
-
-
-        ValidationMapBase,
-
-        ValidationMap,
-
-
-        ValidatorBase,
-
-        Validator,
+    DefaultOperationSecurityDomainBLLBase,
 
 
 
-        MainFetchServiceBase,
 
-        MainFetchService
-    }
+    BLLInterface,
+
+    BLLFactoryInterface,
+
+    BLLFactoryContainerInterface,
+
+
+    DomainObjectMappingService,
+
+    SecurityHierarchyDomainBLLBase,
+
+
+    ValidationMapBase,
+
+    ValidationMap,
+
+
+    ValidatorBase,
+
+    Validator,
+
+
+
+    MainFetchServiceBase,
+
+    MainFetchService
 }

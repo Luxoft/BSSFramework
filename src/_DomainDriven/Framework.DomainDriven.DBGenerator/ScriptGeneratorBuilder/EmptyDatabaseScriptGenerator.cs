@@ -4,18 +4,17 @@ using System.Collections.Generic;
 using Framework.DomainDriven.DBGenerator.Contracts;
 using Framework.DomainDriven.DBGenerator.Team;
 
-namespace Framework.DomainDriven.DBGenerator
-{
-    class EmptyDatabaseScriptGenerator : IDatabaseScriptGenerator
-    {
-        internal static EmptyDatabaseScriptGenerator Value = new EmptyDatabaseScriptGenerator();
-        private EmptyDatabaseScriptGenerator()
-        {
+namespace Framework.DomainDriven.DBGenerator;
 
-        }
-        public IDatabaseScriptResult GenerateScript(IDatabaseScriptGeneratorContext context)
-        {
-            return DatabaseScriptResultFactory.Create(new Dictionary<ApplyMigrationDbScriptMode, Lazy<IEnumerable<string>>>());
-        }
+class EmptyDatabaseScriptGenerator : IDatabaseScriptGenerator
+{
+    internal static EmptyDatabaseScriptGenerator Value = new EmptyDatabaseScriptGenerator();
+    private EmptyDatabaseScriptGenerator()
+    {
+
+    }
+    public IDatabaseScriptResult GenerateScript(IDatabaseScriptGeneratorContext context)
+    {
+        return DatabaseScriptResultFactory.Create(new Dictionary<ApplyMigrationDbScriptMode, Lazy<IEnumerable<string>>>());
     }
 }

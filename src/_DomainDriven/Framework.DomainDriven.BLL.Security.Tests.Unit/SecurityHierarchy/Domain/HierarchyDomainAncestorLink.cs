@@ -11,17 +11,16 @@ using System;
 
 using Framework.Persistent;
 
-namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain
+namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
+
+public class HierarchyObjectAncestorLink : PersistentDomainObjectBase, IModifiedHierarchicalAncestorLink<HierarchyObject, HierarchyObjectToAncestorOrChildLink, Guid>
 {
-    public class HierarchyObjectAncestorLink : PersistentDomainObjectBase, IModifiedHierarchicalAncestorLink<HierarchyObject, HierarchyObjectToAncestorOrChildLink, Guid>
+    public HierarchyObject Ancestor { get; set; }
+
+    public HierarchyObject Child { get; set; }
+
+    public override string ToString()
     {
-        public HierarchyObject Ancestor { get; set; }
-
-        public HierarchyObject Child { get; set; }
-
-        public override string ToString()
-        {
-            return $"{this.Ancestor} {this.Child}";
-        }
+        return $"{this.Ancestor} {this.Child}";
     }
 }

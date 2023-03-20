@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using Framework.DomainDriven.Generation;
 
-namespace Framework.DomainDriven.BLLGenerator
+namespace Framework.DomainDriven.BLLGenerator;
+
+public interface IBLLFactoryContainerGeneratorConfiguration
 {
-    public interface IBLLFactoryContainerGeneratorConfiguration
-    {
-        IEnumerable<ICodeFile> GetFileFactories();
-    }
+    IEnumerable<ICodeFile> GetFileFactories();
 }

@@ -1,6 +1,5 @@
-﻿namespace Framework.StateMachine
+﻿namespace Framework.StateMachine;
+
+public class State
 {
-    public class State
-    {
-    }
 }

@@ -1,11 +1,10 @@
-﻿namespace NHibernate.Envers.Patch
+﻿namespace NHibernate.Envers.Patch;
+
+public interface IIdentityRevisionEntityInfo<out TRevisionEntity, out TIdentity>
 {
-    public interface IIdentityRevisionEntityInfo<out TRevisionEntity, out TIdentity>
-    {
-        TIdentity Identity { get; }
+    TIdentity Identity { get; }
 
-        TRevisionEntity RevisionEntity { get; }
+    TRevisionEntity RevisionEntity { get; }
 
-        RevisionType Operation { get; }
-    }
+    RevisionType Operation { get; }
 }

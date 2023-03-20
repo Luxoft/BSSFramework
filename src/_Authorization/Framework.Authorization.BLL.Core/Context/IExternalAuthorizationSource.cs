@@ -6,84 +6,83 @@ using System.Linq;
 using Framework.Authorization.Domain;
 using Framework.Core;
 
-namespace Framework.Authorization.BLL
+namespace Framework.Authorization.BLL;
+
+public interface IAuthorizationExternalSource
 {
-    public interface IAuthorizationExternalSource
-    {
-        Type SecurityOperationCodeType { get; }
+    Type SecurityOperationCodeType { get; }
 
-        IAuthorizationTypedExternalSource GetTyped(EntityType entityType, bool withCache = true);
+    IAuthorizationTypedExternalSource GetTyped(EntityType entityType, bool withCache = true);
+}
+
+
+public interface IAuthorizationTypedExternalSourceBase
+{
+    IEnumerable<SecurityEntity> GetSecurityEntities();
+
+    IEnumerable<SecurityEntity> GetSecurityEntitiesByIdents(IEnumerable<Guid> securityEntityIdents);
+
+    IEnumerable<SecurityEntity> GetSecurityEntitiesWithMasterExpand(Guid startSecurityEntityId);
+}
+
+public interface IAuthorizationTypedExternalSource : IAuthorizationTypedExternalSourceBase
+{
+    PermissionFilterEntity AddSecurityEntity(SecurityEntity securityEntity, bool disableExistsCheck = false);
+}
+
+
+public static class AuthorizationTypedExternalSourceExtensions
+{
+    public static IAuthorizationTypedExternalSource WithCache(this IAuthorizationTypedExternalSource source)
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
+
+        return new AuthorizationTypedExternalSource(source);
     }
 
 
-    public interface IAuthorizationTypedExternalSourceBase
+    private class AuthorizationTypedExternalSource : IAuthorizationTypedExternalSource
     {
-        IEnumerable<SecurityEntity> GetSecurityEntities();
+        private readonly IAuthorizationTypedExternalSource _baseSource;
 
-        IEnumerable<SecurityEntity> GetSecurityEntitiesByIdents(IEnumerable<Guid> securityEntityIdents);
+        private readonly Lazy<ReadOnlyCollection<SecurityEntity>> _lazySecurityEntities;
 
-        IEnumerable<SecurityEntity> GetSecurityEntitiesWithMasterExpand(Guid startSecurityEntityId);
-    }
+        private readonly IDictionaryCache<Guid[], SecurityEntity[]> _securityEntitiesByIdentsCache;
 
-    public interface IAuthorizationTypedExternalSource : IAuthorizationTypedExternalSourceBase
-    {
-        PermissionFilterEntity AddSecurityEntity(SecurityEntity securityEntity, bool disableExistsCheck = false);
-    }
+        private readonly IDictionaryCache<Guid, SecurityEntity[]> _securityEntitiesWithMasterExpandCache;
 
 
-    public static class AuthorizationTypedExternalSourceExtensions
-    {
-        public static IAuthorizationTypedExternalSource WithCache(this IAuthorizationTypedExternalSource source)
+        public AuthorizationTypedExternalSource(IAuthorizationTypedExternalSource baseSource)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (baseSource == null) throw new ArgumentNullException(nameof(baseSource));
 
-            return new AuthorizationTypedExternalSource(source);
+            this._baseSource = baseSource;
+
+            this._lazySecurityEntities = LazyHelper.Create(() => this._baseSource.GetSecurityEntities().ToReadOnlyCollection());
+
+            this._securityEntitiesByIdentsCache = new DictionaryCache<Guid[], SecurityEntity[]>(securityEntityIdents => this._baseSource.GetSecurityEntitiesByIdents(securityEntityIdents).ToArray(), ArrayComparer<Guid>.Value);
+
+            this._securityEntitiesWithMasterExpandCache = new DictionaryCache<Guid, SecurityEntity[]>(startSecurityEntityId => this._baseSource.GetSecurityEntitiesWithMasterExpand(startSecurityEntityId).ToArray());
         }
 
-
-        private class AuthorizationTypedExternalSource : IAuthorizationTypedExternalSource
+        public IEnumerable<SecurityEntity> GetSecurityEntities()
         {
-            private readonly IAuthorizationTypedExternalSource _baseSource;
+            return this._lazySecurityEntities.Value;
+        }
 
-            private readonly Lazy<ReadOnlyCollection<SecurityEntity>> _lazySecurityEntities;
+        public IEnumerable<SecurityEntity> GetSecurityEntitiesByIdents(IEnumerable<Guid> securityEntityIdents)
+        {
+            return this._securityEntitiesByIdentsCache[securityEntityIdents.ToArray()];
+        }
 
-            private readonly IDictionaryCache<Guid[], SecurityEntity[]> _securityEntitiesByIdentsCache;
+        public IEnumerable<SecurityEntity> GetSecurityEntitiesWithMasterExpand(Guid startSecurityEntityId)
+        {
+            return this._securityEntitiesWithMasterExpandCache[startSecurityEntityId];
+        }
 
-            private readonly IDictionaryCache<Guid, SecurityEntity[]> _securityEntitiesWithMasterExpandCache;
-
-
-            public AuthorizationTypedExternalSource(IAuthorizationTypedExternalSource baseSource)
-            {
-                if (baseSource == null) throw new ArgumentNullException(nameof(baseSource));
-
-                this._baseSource = baseSource;
-
-                this._lazySecurityEntities = LazyHelper.Create(() => this._baseSource.GetSecurityEntities().ToReadOnlyCollection());
-
-                this._securityEntitiesByIdentsCache = new DictionaryCache<Guid[], SecurityEntity[]>(securityEntityIdents => this._baseSource.GetSecurityEntitiesByIdents(securityEntityIdents).ToArray(), ArrayComparer<Guid>.Value);
-
-                this._securityEntitiesWithMasterExpandCache = new DictionaryCache<Guid, SecurityEntity[]>(startSecurityEntityId => this._baseSource.GetSecurityEntitiesWithMasterExpand(startSecurityEntityId).ToArray());
-            }
-
-            public IEnumerable<SecurityEntity> GetSecurityEntities()
-            {
-                return this._lazySecurityEntities.Value;
-            }
-
-            public IEnumerable<SecurityEntity> GetSecurityEntitiesByIdents(IEnumerable<Guid> securityEntityIdents)
-            {
-                return this._securityEntitiesByIdentsCache[securityEntityIdents.ToArray()];
-            }
-
-            public IEnumerable<SecurityEntity> GetSecurityEntitiesWithMasterExpand(Guid startSecurityEntityId)
-            {
-                return this._securityEntitiesWithMasterExpandCache[startSecurityEntityId];
-            }
-
-            public PermissionFilterEntity AddSecurityEntity(SecurityEntity securityEntity, bool disableExistsCheck = false)
-            {
-                return this._baseSource.AddSecurityEntity(securityEntity, disableExistsCheck);
-            }
+        public PermissionFilterEntity AddSecurityEntity(SecurityEntity securityEntity, bool disableExistsCheck = false)
+        {
+            return this._baseSource.AddSecurityEntity(securityEntity, disableExistsCheck);
         }
     }
 }

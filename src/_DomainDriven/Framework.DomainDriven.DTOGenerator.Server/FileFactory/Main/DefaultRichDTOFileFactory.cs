@@ -7,53 +7,52 @@ using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
 
-namespace Framework.DomainDriven.DTOGenerator.Server
-{
-    public class DefaultRichDTOFileFactory<TConfiguration> : MainDTOFileFactory<TConfiguration>
+namespace Framework.DomainDriven.DTOGenerator.Server;
+
+public class DefaultRichDTOFileFactory<TConfiguration> : MainDTOFileFactory<TConfiguration>
         where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
-    {
-        public DefaultRichDTOFileFactory(TConfiguration configuration, Type domainType)
+{
+    public DefaultRichDTOFileFactory(TConfiguration configuration, Type domainType)
             : base(configuration, domainType)
+    {
+    }
+
+
+    public override MainDTOFileType FileType { get; } = DTOGenerator.FileType.RichDTO;
+
+
+    protected override bool HasToDomainObjectMethod => this.HasMapToDomainObjectMethod;
+
+
+    public override IEnumerable<CodeMemberMethod> GetServerMappingServiceMethods()
+    {
+        foreach (var method in base.GetServerMappingServiceMethods())
         {
+            yield return method;
         }
 
-
-        public override MainDTOFileType FileType { get; } = DTOGenerator.FileType.RichDTO;
-
-
-        protected override bool HasToDomainObjectMethod => this.HasMapToDomainObjectMethod;
-
-
-        public override IEnumerable<CodeMemberMethod> GetServerMappingServiceMethods()
+        if (this.HasMapToDomainObjectMethod)
         {
-            foreach (var method in base.GetServerMappingServiceMethods())
+            foreach (var masterType in this.Configuration.GetDomainTypeMasters(this.DomainType, this.FileType, true))
             {
-                yield return method;
-            }
-
-            if (this.HasMapToDomainObjectMethod)
-            {
-                foreach (var masterType in this.Configuration.GetDomainTypeMasters(this.DomainType, this.FileType, true))
+                if (this.Configuration.IsPersistentObject(masterType))
                 {
-                    if (this.Configuration.IsPersistentObject(masterType))
-                    {
-                        yield return this.GetMappingServiceToDomainObjectMethod(masterType);
-                    }
+                    yield return this.GetMappingServiceToDomainObjectMethod(masterType);
                 }
             }
         }
+    }
 
-        protected override CodeExpression GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property)
+    protected override CodeExpression GetFieldInitExpression(CodeTypeReference codeTypeReference, PropertyInfo property)
+    {
+        if (!this.CodeTypeReferenceService.IsOptional(property))
         {
-            if (!this.CodeTypeReferenceService.IsOptional(property))
+            if (property.PropertyType.IsCollection())
             {
-                if (property.PropertyType.IsCollection())
-                {
-                    return this.CodeTypeReferenceService.GetCodeTypeReference(property, true).ToObjectCreateExpression();
-                }
+                return this.CodeTypeReferenceService.GetCodeTypeReference(property, true).ToObjectCreateExpression();
             }
-
-            return base.GetFieldInitExpression(codeTypeReference, property);
         }
+
+        return base.GetFieldInitExpression(codeTypeReference, property);
     }
 }

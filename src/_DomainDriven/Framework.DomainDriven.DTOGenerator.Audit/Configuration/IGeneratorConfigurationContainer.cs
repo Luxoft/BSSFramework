@@ -1,7 +1,6 @@
-﻿namespace Framework.DomainDriven.DTOGenerator.Audit
+﻿namespace Framework.DomainDriven.DTOGenerator.Audit;
+
+public interface IGeneratorConfigurationContainer
 {
-    public interface IGeneratorConfigurationContainer
-    {
-        IAuditDTOGeneratorConfigurationBase<IAuditDTOGenerationEnvironmentBase> AuditDTO { get; }
-    }
+    IAuditDTOGeneratorConfigurationBase<IAuditDTOGenerationEnvironmentBase> AuditDTO { get; }
 }

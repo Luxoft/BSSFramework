@@ -1,7 +1,6 @@
-﻿namespace Framework.CodeDom
+﻿namespace Framework.CodeDom;
+
+internal static class ExtendRenderConst
 {
-    internal static class ExtendRenderConst
-    {
-        public static readonly string NewLineParameters = nameof(NewLineParameters);
-    }
+    public static readonly string NewLineParameters = nameof(NewLineParameters);
 }

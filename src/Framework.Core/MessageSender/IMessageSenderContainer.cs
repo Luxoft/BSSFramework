@@ -1,7 +1,6 @@
-﻿namespace Framework.Core
+﻿namespace Framework.Core;
+
+public interface IMessageSenderContainer<in TMessage>
 {
-    public interface IMessageSenderContainer<in TMessage>
-    {
-        IMessageSender<TMessage> MessageSender { get; }
-    }
+    IMessageSender<TMessage> MessageSender { get; }
 }

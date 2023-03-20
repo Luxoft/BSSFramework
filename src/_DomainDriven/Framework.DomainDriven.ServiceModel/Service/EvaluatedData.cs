@@ -22,13 +22,12 @@ namespace Framework.DomainDriven.ServiceModel.Service
 
     public class EvaluatedData<TBLLContext, TDTOMappingService> : EvaluatedData<TBLLContext>
     {
-        public EvaluatedData([NotNull] IDBSession session, [NotNull] TBLLContext context, [NotNull] TDTOMappingService mappingService)
+    public EvaluatedData([NotNull] IDBSession session, [NotNull] TBLLContext context, [NotNull] TDTOMappingService mappingService)
             : base(session, context)
-        {
-            this.MappingService = mappingService ?? throw new ArgumentNullException(nameof(mappingService));
-        }
-
-
-        public TDTOMappingService MappingService { get; }
+    {
+        this.MappingService = mappingService ?? throw new ArgumentNullException(nameof(mappingService));
     }
+
+
+    public TDTOMappingService MappingService { get; }
 }

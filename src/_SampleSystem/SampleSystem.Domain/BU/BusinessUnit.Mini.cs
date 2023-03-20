@@ -1,8 +1,7 @@
 ﻿using System;
 
-namespace SampleSystem.Domain
+namespace SampleSystem.Domain;
+
+public partial class BusinessUnit : IMiniBusinessUnit
 {
-    public partial class BusinessUnit : IMiniBusinessUnit
-    {
-    }
 }

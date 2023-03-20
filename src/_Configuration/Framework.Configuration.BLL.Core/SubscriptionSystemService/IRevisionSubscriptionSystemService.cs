@@ -8,12 +8,11 @@ using Framework.DomainDriven.DAL.Revisions;
 
 using JetBrains.Annotations;
 
-namespace Framework.Configuration.BLL
-{
-    public interface IRevisionSubscriptionSystemService : ISubscriptionSystemService
-    {
-        IList<ITryResult<Subscription>> Process(ObjectModificationInfo<Guid> changedObjectInfo);
+namespace Framework.Configuration.BLL;
 
-        IEnumerable<ObjectModificationInfo<Guid>> GetObjectModifications([NotNull] DALChanges changes);
-    }
+public interface IRevisionSubscriptionSystemService : ISubscriptionSystemService
+{
+    IList<ITryResult<Subscription>> Process(ObjectModificationInfo<Guid> changedObjectInfo);
+
+    IEnumerable<ObjectModificationInfo<Guid>> GetObjectModifications([NotNull] DALChanges changes);
 }

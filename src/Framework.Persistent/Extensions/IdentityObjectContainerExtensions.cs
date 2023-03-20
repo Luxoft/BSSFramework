@@ -4,13 +4,12 @@ using System.Collections.ObjectModel;
 
 using Framework.Core;
 
-namespace Framework.Persistent
+namespace Framework.Persistent;
+
+public static class IdentityObjectContainerExtensions
 {
-    public static class IdentityObjectContainerExtensions
+    public static TIdentityObject TryGetIdentity<TIdentityObject>(this IIdentityObjectContainer<TIdentityObject> source)
     {
-        public static TIdentityObject TryGetIdentity<TIdentityObject>(this IIdentityObjectContainer<TIdentityObject> source)
-        {
-            return source.Maybe(v => v.Identity);
-        }
+        return source.Maybe(v => v.Identity);
     }
 }

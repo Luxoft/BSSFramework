@@ -10,64 +10,63 @@ using Framework.Security;
 
 using JetBrains.Annotations;
 
-namespace Framework.DomainDriven.DTOGenerator
+namespace Framework.DomainDriven.DTOGenerator;
+
+public interface IPropertyCodeTypeReferenceService : ICodeTypeReferenceService
 {
-    public interface IPropertyCodeTypeReferenceService : ICodeTypeReferenceService
+    bool IsOptional(PropertyInfo property);
+
+    bool IsCollection(PropertyInfo property);
+
+    CodeTypeReference GetCodeTypeReference(PropertyInfo property, bool withOptional = false);
+}
+
+public class PropertyCodeTypeReferenceService<TConfiguration> : CodeTypeReferenceService<TConfiguration>, IPropertyCodeTypeReferenceService
+        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+{
+    public PropertyCodeTypeReferenceService(TConfiguration configuration)
+            : base(configuration)
     {
-        bool IsOptional(PropertyInfo property);
-
-        bool IsCollection(PropertyInfo property);
-
-        CodeTypeReference GetCodeTypeReference(PropertyInfo property, bool withOptional = false);
     }
 
-    public class PropertyCodeTypeReferenceService<TConfiguration> : CodeTypeReferenceService<TConfiguration>, IPropertyCodeTypeReferenceService
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+
+    public virtual bool IsOptional(PropertyInfo property)
     {
-        public PropertyCodeTypeReferenceService(TConfiguration configuration)
-            : base(configuration)
-        {
-        }
+        if (property == null) throw new ArgumentNullException(nameof(property));
 
+        return property.IsSecurity();
+    }
 
-        public virtual bool IsOptional(PropertyInfo property)
-        {
-            if (property == null) throw new ArgumentNullException(nameof(property));
+    public virtual bool IsCollection(PropertyInfo property)
+    {
+        return property.PropertyType.GetCollectionElementType().Maybe(this.IsDomainType);
+    }
 
-            return property.IsSecurity();
-        }
+    public CodeTypeReference GetCodeTypeReference(PropertyInfo property, bool withOptional = false)
+    {
+        if (property == null) throw new ArgumentNullException(nameof(property));
 
-        public virtual bool IsCollection(PropertyInfo property)
-        {
-            return property.PropertyType.GetCollectionElementType().Maybe(this.IsDomainType);
-        }
+        var typeRef = this.GetCodeTypeReferenceByProperty(property);
 
-        public CodeTypeReference GetCodeTypeReference(PropertyInfo property, bool withOptional = false)
-        {
-            if (property == null) throw new ArgumentNullException(nameof(property));
+        return withOptional && this.IsOptional(property) ? typeRef.ToMaybeReference() : typeRef;
+    }
 
-            var typeRef = this.GetCodeTypeReferenceByProperty(property);
+    protected virtual bool IsDomainType([NotNull] Type type)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
 
-            return withOptional && this.IsOptional(property) ? typeRef.ToMaybeReference() : typeRef;
-        }
+        return this.Configuration.DomainTypes.Contains(type);
+    }
 
-        protected virtual bool IsDomainType([NotNull] Type type)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
+    protected bool DomainTypeIsPersistent(PropertyInfo propertyInfo)
+    {
+        return this.Configuration.IsPersistentObject(propertyInfo.ReflectedType);
+    }
 
-            return this.Configuration.DomainTypes.Contains(type);
-        }
+    protected virtual CodeTypeReference GetCodeTypeReferenceByProperty(PropertyInfo property)
+    {
+        if (property == null) throw new ArgumentNullException(nameof(property));
 
-        protected bool DomainTypeIsPersistent(PropertyInfo propertyInfo)
-        {
-            return this.Configuration.IsPersistentObject(propertyInfo.ReflectedType);
-        }
-
-        protected virtual CodeTypeReference GetCodeTypeReferenceByProperty(PropertyInfo property)
-        {
-            if (property == null) throw new ArgumentNullException(nameof(property));
-
-            return this.GetCodeTypeReferenceByType(property.PropertyType);
-        }
+        return this.GetCodeTypeReferenceByType(property.PropertyType);
     }
 }

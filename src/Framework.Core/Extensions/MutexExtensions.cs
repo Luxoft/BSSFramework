@@ -1,36 +1,35 @@
 ﻿using System;
 using System.Threading;
 
-namespace Framework.Core
+namespace Framework.Core;
+
+public static class MutexHelper
 {
-    public static class MutexHelper
+    public static TResult GlobalLock<TResult> (string name, Func<TResult> func)
     {
-        public static TResult GlobalLock<TResult> (string name, Func<TResult> func)
+        if (name == null) throw new ArgumentNullException(nameof(name));
+        if (func == null) throw new ArgumentNullException(nameof(func));
+
+        using (var mutex = new Mutex(true, name))
         {
-            if (name == null) throw new ArgumentNullException(nameof(name));
-            if (func == null) throw new ArgumentNullException(nameof(func));
+            mutex.WaitOne();
 
-            using (var mutex = new Mutex(true, name))
+            try
             {
-                mutex.WaitOne();
-
-                try
-                {
-                    return func();
-                }
-                finally
-                {
-                    mutex.ReleaseMutex();
-                }
+                return func();
+            }
+            finally
+            {
+                mutex.ReleaseMutex();
             }
         }
+    }
 
-        public static void GlobalLock(string name, Action action)
-        {
-            if (name == null) throw new ArgumentNullException(nameof(name));
-            if (action == null) throw new ArgumentNullException(nameof(action));
+    public static void GlobalLock(string name, Action action)
+    {
+        if (name == null) throw new ArgumentNullException(nameof(name));
+        if (action == null) throw new ArgumentNullException(nameof(action));
 
-            GlobalLock(name, () => { action(); return Ignore.Value; });
-        }
+        GlobalLock(name, () => { action(); return Ignore.Value; });
     }
 }

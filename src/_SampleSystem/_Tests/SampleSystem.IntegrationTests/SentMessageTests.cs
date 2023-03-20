@@ -10,34 +10,33 @@ using Framework.Notification.DTO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-namespace SampleSystem.IntegrationTests
+namespace SampleSystem.IntegrationTests;
+
+[TestClass]
+public class SentMessageTests : TestBase
 {
-    [TestClass]
-    public class SentMessageTests : TestBase
+    [TestMethod]
+    public void Save_LongTextInCopy_SavesWithoutErrorOrTruncate()
     {
-        [TestMethod]
-        public void Save_LongTextInCopy_SavesWithoutErrorOrTruncate()
-        {
-            // Arrange
-            var copy = "copyText10";
-            var targets = Enumerable.Range(1, 30).Select(x => new NotificationTargetDTO { Name = copy, Type = NotificationTargetTypes.Copy }).ToList();
+        // Arrange
+        var copy = "copyText10";
+        var targets = Enumerable.Range(1, 30).Select(x => new NotificationTargetDTO { Name = copy, Type = NotificationTargetTypes.Copy }).ToList();
 
-            var notification = new NotificationEventDTO
-            {
-                Message = new NotificationMessage(),
-                TechnicalInformation = new NotificationTechnicalInformationDTO(),
-                Targets = targets
-            };
+        var notification = new NotificationEventDTO
+                           {
+                                   Message = new NotificationMessage(),
+                                   TechnicalInformation = new NotificationTechnicalInformationDTO(),
+                                   Targets = targets
+                           };
 
-            var expected = string.Join(",", targets.Select(x => x.Name));
+        var expected = string.Join(",", targets.Select(x => x.Name));
 
-            // Act
-            this.GetConfigurationControllerEvaluator().Evaluate(c => c.SaveSendedNotification(notification));
+        // Act
+        this.GetConfigurationControllerEvaluator().Evaluate(c => c.SaveSendedNotification(notification));
 
-            var sentMessage = this.EvaluateRead(c => new SentMessageBLL(c.Configuration).GetFullList().Single());
+        var sentMessage = this.EvaluateRead(c => new SentMessageBLL(c.Configuration).GetFullList().Single());
 
-            // Assert
-            sentMessage.Copy.Should().Be(expected);
-        }
+        // Assert
+        sentMessage.Copy.Should().Be(expected);
     }
 }

@@ -2,16 +2,15 @@
 using System.CodeDom;
 using System.Collections.Generic;
 
-namespace Framework.DomainDriven.BLLCoreGenerator
+namespace Framework.DomainDriven.BLLCoreGenerator;
+
+public interface IDomainSecurityServiceGenerator
 {
-    public interface IDomainSecurityServiceGenerator
-    {
-        CodeTypeReference BaseServiceType { get; }
+    CodeTypeReference BaseServiceType { get; }
 
-        IEnumerable<CodeTypeMember> GetMembers();
+    IEnumerable<CodeTypeMember> GetMembers();
 
-        IEnumerable<CodeTypeReference> GetBaseTypes();
+    IEnumerable<CodeTypeReference> GetBaseTypes();
 
-        CodeConstructor GetConstructor();
-    }
+    CodeConstructor GetConstructor();
 }

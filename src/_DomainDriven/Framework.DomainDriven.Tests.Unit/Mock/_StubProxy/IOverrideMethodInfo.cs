@@ -1,10 +1,9 @@
 ﻿using System.Reflection;
 
-namespace Framework.DomainDriven.UnitTest.Mock.StubProxy
+namespace Framework.DomainDriven.UnitTest.Mock.StubProxy;
+
+public interface IOverrideMethodInfo
 {
-    public interface IOverrideMethodInfo
-    {
-        MethodInfo MethodBase { get; }
-        object ReturnValue { get; }
-    }
+    MethodInfo MethodBase { get; }
+    object ReturnValue { get; }
 }

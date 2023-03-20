@@ -1,9 +1,8 @@
-﻿namespace Framework.NotificationCore.Settings
-{
-    public class RewriteRules
-    {
-        public string From { get; set; }
+﻿namespace Framework.NotificationCore.Settings;
 
-        public string[] To { get; set; }
-    }
+public class RewriteRules
+{
+    public string From { get; set; }
+
+    public string[] To { get; set; }
 }

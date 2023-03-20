@@ -1,6 +1,5 @@
-﻿namespace Framework.Authorization.Domain
+﻿namespace Framework.Authorization.Domain;
+
+public class PrincipalCreateModel : DomainObjectCreateModel<Principal>
 {
-    public class PrincipalCreateModel : DomainObjectCreateModel<Principal>
-    {
-    }
 }

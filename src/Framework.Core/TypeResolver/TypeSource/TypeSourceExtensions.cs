@@ -2,15 +2,14 @@
 
 using JetBrains.Annotations;
 
-namespace Framework.Core
-{
-    public static class TypeSourceExtensions
-    {
-        public static ITypeResolver<string> ToDefaultTypeResolver([NotNull] this ITypeSource typeSource)
-        {
-            if (typeSource == null) throw new ArgumentNullException(nameof(typeSource));
+namespace Framework.Core;
 
-            return TypeResolverHelper.CreateDefault(typeSource);
-        }
+public static class TypeSourceExtensions
+{
+    public static ITypeResolver<string> ToDefaultTypeResolver([NotNull] this ITypeSource typeSource)
+    {
+        if (typeSource == null) throw new ArgumentNullException(nameof(typeSource));
+
+        return TypeResolverHelper.CreateDefault(typeSource);
     }
 }

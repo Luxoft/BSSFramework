@@ -3,20 +3,19 @@ using System.Linq;
 
 using Framework.Core;
 
-namespace Framework.SecuritySystem
+namespace Framework.SecuritySystem;
+
+/// <summary>
+/// Провайдер доступа к элементам
+/// </summary>
+/// <typeparam name="TDomainObject"></typeparam>
+public interface ISecurityProvider<TDomainObject>
 {
-    /// <summary>
-    /// Провайдер доступа к элементам
-    /// </summary>
-    /// <typeparam name="TDomainObject"></typeparam>
-    public interface ISecurityProvider<TDomainObject>
-    {
-        IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable);
+    IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable);
 
-        bool HasAccess(TDomainObject domainObject);
+    bool HasAccess(TDomainObject domainObject);
 
-        Exception GetAccessDeniedException(TDomainObject domainObject, Func<string, string> formatMessageFunc = null);
+    Exception GetAccessDeniedException(TDomainObject domainObject, Func<string, string> formatMessageFunc = null);
 
-        UnboundedList<string> GetAccessors(TDomainObject domainObject);
-    }
+    UnboundedList<string> GetAccessors(TDomainObject domainObject);
 }

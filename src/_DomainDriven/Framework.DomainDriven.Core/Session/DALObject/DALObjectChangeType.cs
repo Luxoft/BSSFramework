@@ -1,11 +1,10 @@
-﻿namespace Framework.DomainDriven
+﻿namespace Framework.DomainDriven;
+
+public enum DALObjectChangeType
 {
-    public enum DALObjectChangeType
-    {
-        Created,
+    Created,
 
-        Updated,
+    Updated,
 
-        Removed
-    }
+    Removed
 }

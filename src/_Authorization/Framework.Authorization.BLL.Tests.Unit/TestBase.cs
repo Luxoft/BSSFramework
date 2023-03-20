@@ -6,43 +6,42 @@ using Framework.Persistent;
 
 using NUnit.Framework;
 
-namespace Framework.Authorization.BLL.Tests.Unit
+namespace Framework.Authorization.BLL.Tests.Unit;
+
+public abstract class TestBase
 {
-    public abstract class TestBase
+    protected AuthorizationTestConfiguration Configuration;
+
+    [SetUp]
+    public virtual void BaseInitialize()
     {
-        protected AuthorizationTestConfiguration Configuration;
+        this.Configuration = new AuthorizationTestConfiguration();
+    }
 
-        [SetUp]
-        public virtual void BaseInitialize()
+    [TearDown]
+    public virtual void BaseCleanup()
+    {
+        this.Configuration = null;
+    }
+
+    public MockDalFactoryProvider<PersistentDomainObjectBase, Guid> MockDalFactory
+    {
+        get
         {
-            this.Configuration = new AuthorizationTestConfiguration();
+            return this.Configuration.MockDalFactory;
         }
+    }
 
-        [TearDown]
-        public virtual void BaseCleanup()
-        {
-            this.Configuration = null;
-        }
+    public void RegisterDomainObject<T>(params T[] values) where T : IIdentityObject<Guid>
+    {
+        this.Configuration.MockDalFactory.Register(values);
+    }
 
-        public MockDalFactoryProvider<PersistentDomainObjectBase, Guid> MockDalFactory
+    public IAuthorizationBLLContext Context
+    {
+        get
         {
-            get
-            {
-                return this.Configuration.MockDalFactory;
-            }
-        }
-
-        public void RegisterDomainObject<T>(params T[] values) where T : IIdentityObject<Guid>
-        {
-            this.Configuration.MockDalFactory.Register(values);
-        }
-
-        public IAuthorizationBLLContext Context
-        {
-            get
-            {
-                return this.Configuration.Context;
-            }
+            return this.Configuration.Context;
         }
     }
 }

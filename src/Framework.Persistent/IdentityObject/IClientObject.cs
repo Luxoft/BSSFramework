@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface IClientObject
 {
-    public interface IClientObject
-    {
-        bool IsClientObject { get; }
-    }
+    bool IsClientObject { get; }
 }

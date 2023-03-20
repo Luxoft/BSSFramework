@@ -1,66 +1,65 @@
 ﻿using System;
 
-namespace Framework.DomainDriven.DBGenerator.Team
+namespace Framework.DomainDriven.DBGenerator.Team;
+
+public struct MigrationDbScript
 {
-    public struct MigrationDbScript
-    {
-        private readonly ApplyMigrationDbScriptMode _applyMigrationDbScriptMode;
-        private readonly MigrationDbScriptHeader _header;
+    private readonly ApplyMigrationDbScriptMode _applyMigrationDbScriptMode;
+    private readonly MigrationDbScriptHeader _header;
 
-        private readonly bool _runAlways;
-        private readonly Lazy<string> _scriptLazy;
+    private readonly bool _runAlways;
+    private readonly Lazy<string> _scriptLazy;
 
-        public MigrationDbScript(
+    public MigrationDbScript(
             string name,
             bool runAlways,
             ApplyMigrationDbScriptMode applyCustomScriptMode,
             string scheme,
             string fileVersion,
             Lazy<string> scriptLazy) : this()
-        {
-            this._header = new MigrationDbScriptHeader(name, scheme, fileVersion);
+    {
+        this._header = new MigrationDbScriptHeader(name, scheme, fileVersion);
 
-            this._runAlways = runAlways;
-            this._applyMigrationDbScriptMode = applyCustomScriptMode;
-            this._scriptLazy = scriptLazy;
+        this._runAlways = runAlways;
+        this._applyMigrationDbScriptMode = applyCustomScriptMode;
+        this._scriptLazy = scriptLazy;
 
-        }
+    }
 
-        public MigrationDbScript(string name, bool runAlways, ApplyMigrationDbScriptMode applyCustomScriptMode, string scheme, string version, string script)
+    public MigrationDbScript(string name, bool runAlways, ApplyMigrationDbScriptMode applyCustomScriptMode, string scheme, string version, string script)
             : this(name, runAlways, applyCustomScriptMode, scheme, version, new Lazy<string>(() => script))
-        {
-        }
+    {
+    }
 
-        public ApplyMigrationDbScriptMode ApplyCustomScriptMode
+    public ApplyMigrationDbScriptMode ApplyCustomScriptMode
+    {
+        get
         {
-            get
-            {
-                return this._applyMigrationDbScriptMode;
-            }
+            return this._applyMigrationDbScriptMode;
         }
+    }
 
-        public MigrationDbScriptHeader Header
+    public MigrationDbScriptHeader Header
+    {
+        get
         {
-            get
-            {
-                return this._header;
-            }
+            return this._header;
         }
+    }
 
-        public bool RunAlways
+    public bool RunAlways
+    {
+        get
         {
-            get
-            {
-                return this._runAlways;
-            }
+            return this._runAlways;
         }
+    }
 
-        public string Script
+    public string Script
+    {
+        get
         {
-            get
-            {
-                return this._scriptLazy.Value;
-            }
+            return this._scriptLazy.Value;
         }
     }
 }

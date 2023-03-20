@@ -4,85 +4,84 @@ using FluentAssertions;
 using Framework.UnitTesting;
 using NUnit.Framework;
 
-namespace Framework.Configuration.Core.Tests.Unit
+namespace Framework.Configuration.Core.Tests.Unit;
+
+[TestFixture]
+public sealed class DomainObjectVersionsTests : TestFixtureBase
 {
-    [TestFixture]
-    public sealed class DomainObjectVersionsTests : TestFixtureBase
+    [Test]
+    public void Ctor_NotNullArguments_PropertiesInitialized()
     {
-        [Test]
-        public void Ctor_NotNullArguments_PropertiesInitialized()
-        {
-            // Arrange
-            var assertion = new ConstructorInitializedMemberAssertion(this.Fixture);
+        // Arrange
+        var assertion = new ConstructorInitializedMemberAssertion(this.Fixture);
 
-            // Act
+        // Act
 
-            // Assert
-            assertion.Verify(typeof(DomainObjectVersions<string>).GetConstructors());
-        }
+        // Assert
+        assertion.Verify(typeof(DomainObjectVersions<string>).GetConstructors());
+    }
 
-        [Test]
-        public void DomainObjectType_PreviousNotNull_PreviousType()
-        {
-            // Arrange
-            var versions = new DomainObjectVersions<object>("1", null);
+    [Test]
+    public void DomainObjectType_PreviousNotNull_PreviousType()
+    {
+        // Arrange
+        var versions = new DomainObjectVersions<object>("1", null);
 
-            // Act
+        // Act
 
-            // Assert
-            versions.DomainObjectType.Should().Be<string>();
-        }
+        // Assert
+        versions.DomainObjectType.Should().Be<string>();
+    }
 
-        [Test]
-        public void DomainObjectType_CurrentNotNull_CurrentType()
-        {
-            // Arrange
-            var versions = new DomainObjectVersions<object>(null, "1");
+    [Test]
+    public void DomainObjectType_CurrentNotNull_CurrentType()
+    {
+        // Arrange
+        var versions = new DomainObjectVersions<object>(null, "1");
 
-            // Act
+        // Act
 
-            // Assert
-            versions.DomainObjectType.Should().Be<string>();
-        }
+        // Assert
+        versions.DomainObjectType.Should().Be<string>();
+    }
 
-        [Test]
-        public void DomainObjectType_BothNull_GenericParameterType()
-        {
-            // Arrange
-            var versions = new DomainObjectVersions<string>("Test", null);
+    [Test]
+    public void DomainObjectType_BothNull_GenericParameterType()
+    {
+        // Arrange
+        var versions = new DomainObjectVersions<string>("Test", null);
 
-            // Act
+        // Act
 
-            // Assert
-            versions.DomainObjectType.Should().Be<string>();
-        }
+        // Assert
+        versions.DomainObjectType.Should().Be<string>();
+    }
 
-        [Test]
-        public void DomainObjectType_PreviousAndCurrentHasDifferentTypes_Object()
-        {
-            // Arrange
-            var versions = new DomainObjectVersions<object>("1", this.GetType());
+    [Test]
+    public void DomainObjectType_PreviousAndCurrentHasDifferentTypes_Object()
+    {
+        // Arrange
+        var versions = new DomainObjectVersions<object>("1", this.GetType());
 
-            // Act
+        // Act
 
-            // Assert
-            versions.DomainObjectType.Should().Be<object>();
-        }
+        // Assert
+        versions.DomainObjectType.Should().Be<object>();
+    }
 
-        [Test]
-        [TestCase(null, "B", DomainObjectChangeType.Create)]
-        [TestCase("A", "B", DomainObjectChangeType.Update)]
-        [TestCase("A", null, DomainObjectChangeType.Delete)]
-        public void ChangeType_Get_CorrectComputedChangeType(
+    [Test]
+    [TestCase(null, "B", DomainObjectChangeType.Create)]
+    [TestCase("A", "B", DomainObjectChangeType.Update)]
+    [TestCase("A", null, DomainObjectChangeType.Delete)]
+    public void ChangeType_Get_CorrectComputedChangeType(
             object previous,
             object current,
             DomainObjectChangeType expectedChangeType)
-        {
-            // Arrange
-            var versions = new DomainObjectVersions<object>(previous, current);
+    {
+        // Arrange
+        var versions = new DomainObjectVersions<object>(previous, current);
 
-            // Act, Assert
-            versions.ChangeType.Should().Be(expectedChangeType);
-        }
+        // Act, Assert
+        versions.ChangeType.Should().Be(expectedChangeType);
     }
 }

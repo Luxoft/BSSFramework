@@ -7,156 +7,155 @@ using Framework.Projection.Contract;
 
 using JetBrains.Annotations;
 
-namespace Framework.Projection
+namespace Framework.Projection;
+
+public static class TypeExtensions
 {
-    public static class TypeExtensions
+    /// <summary>
+    /// Получние списка фильтров проекции
+    /// </summary>
+    /// <param name="projectionType">Тип проекции</param>
+    /// <param name="target">Применимость фильтра</param>
+    /// <returns></returns>
+    public static IEnumerable<Type> GetProjectionFilters([NotNull] this Type projectionType, ProjectionFilterTargets target = ProjectionFilterTargets.All)
     {
-        /// <summary>
-        /// Получние списка фильтров проекции
-        /// </summary>
-        /// <param name="projectionType">Тип проекции</param>
-        /// <param name="target">Применимость фильтра</param>
-        /// <returns></returns>
-        public static IEnumerable<Type> GetProjectionFilters([NotNull] this Type projectionType, ProjectionFilterTargets target = ProjectionFilterTargets.All)
+        if (projectionType == null) throw new ArgumentNullException(nameof(projectionType));
+
+        return projectionType.GetCustomAttributes<ProjectionFilterAttribute>()
+                             .Where(attr => EnumHelper.GetValues<ProjectionFilterTargets>().Any(v => target.HasFlag(v) && attr.Target.HasFlag(v)))
+                             .Select(attr => attr.FilterType);
+    }
+
+    /// <summary>
+    /// Получение исходного типа проекции по её контракту
+    /// </summary>
+    /// <param name="contractType">Тип контракта проекции</param>
+    /// <param name="raiseIfNull">Проверка на существоание</param>
+    /// <returns></returns>
+    public static Type GetProjectionContractSourceType([NotNull] this Type contractType, bool raiseIfNull = true)
+    {
+        if (contractType == null) throw new ArgumentNullException(nameof(contractType));
+
+        var attr = contractType.GetCustomAttribute<ProjectionContractAttribute>();
+
+        if (attr == null)
         {
-            if (projectionType == null) throw new ArgumentNullException(nameof(projectionType));
-
-            return projectionType.GetCustomAttributes<ProjectionFilterAttribute>()
-                                 .Where(attr => EnumHelper.GetValues<ProjectionFilterTargets>().Any(v => target.HasFlag(v) && attr.Target.HasFlag(v)))
-                                 .Select(attr => attr.FilterType);
-        }
-
-        /// <summary>
-        /// Получение исходного типа проекции по её контракту
-        /// </summary>
-        /// <param name="contractType">Тип контракта проекции</param>
-        /// <param name="raiseIfNull">Проверка на существоание</param>
-        /// <returns></returns>
-        public static Type GetProjectionContractSourceType([NotNull] this Type contractType, bool raiseIfNull = true)
-        {
-            if (contractType == null) throw new ArgumentNullException(nameof(contractType));
-
-            var attr = contractType.GetCustomAttribute<ProjectionContractAttribute>();
-
-            if (attr == null)
+            if (raiseIfNull)
             {
-                if (raiseIfNull)
-                {
-                    throw new Exception($"Type {contractType.Name} is not ProjectionContract");
-                }
-                else
-                {
-                    return null;
-                }
+                throw new Exception($"Type {contractType.Name} is not ProjectionContract");
             }
             else
             {
-                var sourceType = attr.SourceType;
-
-                if (!contractType.IsAssignableFrom(sourceType))
-                {
-                    throw new Exception($"Type {sourceType.Name} not implemented contract {contractType.Name}");
-                }
-                else
-                {
-                    return sourceType;
-                }
+                return null;
             }
         }
-
-        /// <summary>
-        /// Получение исходного типа проекции
-        /// </summary>
-        /// <param name="type">Тип проекции</param>
-        /// <param name="raiseIfNull">Проверка на существоание</param>
-        /// <returns></returns>
-        public static Type GetProjectionSourceType([NotNull] this Type type, bool raiseIfNull = true)
+        else
         {
-            if (type == null) throw new ArgumentNullException(nameof(type));
+            var sourceType = attr.SourceType;
 
-            var attr = type.GetCustomAttribute<ProjectionAttribute>();
-
-            if (attr == null)
+            if (!contractType.IsAssignableFrom(sourceType))
             {
-                if (raiseIfNull)
-                {
-                    throw new Exception($"Type {type.Name} is not Projection");
-                }
-                else
-                {
-                    return null;
-                }
+                throw new Exception($"Type {sourceType.Name} not implemented contract {contractType.Name}");
             }
             else
             {
-                return attr.SourceType;
+                return sourceType;
             }
         }
+    }
 
-        /// <summary>
-        /// Получение исходного типа проекции или самого себя
-        /// </summary>
-        /// <param name="type">Тип проекции</param>
-        /// <returns></returns>
-        public static Type GetProjectionSourceTypeOrSelf([NotNull] this Type type)
+    /// <summary>
+    /// Получение исходного типа проекции
+    /// </summary>
+    /// <param name="type">Тип проекции</param>
+    /// <param name="raiseIfNull">Проверка на существоание</param>
+    /// <returns></returns>
+    public static Type GetProjectionSourceType([NotNull] this Type type, bool raiseIfNull = true)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+
+        var attr = type.GetCustomAttribute<ProjectionAttribute>();
+
+        if (attr == null)
         {
-            if (type == null) throw new ArgumentNullException(nameof(type));
-
-            return type.GetProjectionSourceType(false) ?? type;
-        }
-
-        /// <summary>
-        /// Получение контрактка из проекции
-        /// </summary>
-        /// <param name="type">Тип проекции</param>
-        /// <param name="raiseIfNull">Проверка на существоание</param>
-        /// <returns></returns>
-        public static Type GetProjectionContractType([NotNull] this Type type, bool raiseIfNull = true)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
-
-            var attr = type.GetCustomAttribute<ProjectionAttribute>();
-
-            if (attr == null)
+            if (raiseIfNull)
             {
-                if (raiseIfNull)
-                {
-                    throw new Exception($"Type {type.Name} is not Projection");
-                }
-                else
-                {
-                    return null;
-                }
+                throw new Exception($"Type {type.Name} is not Projection");
             }
             else
             {
-                return attr.ContractType;
+                return null;
             }
         }
-
-        /// <summary>
-        /// Проверка типа на то, что он является проекцией
-        /// </summary>
-        /// <param name="type">Тип проекции</param>
-        /// <returns></returns>
-        public static bool IsProjection([NotNull] this Type type)
+        else
         {
-            if (type == null) throw new ArgumentNullException(nameof(type));
-
-            return type.GetProjectionSourceType(false) != null;
+            return attr.SourceType;
         }
+    }
 
-        /// <summary>
-        /// Проверка типа на то, что он является проекцией с условием на базовый тип
-        /// </summary>
-        /// <param name="type">Тип проекции</param>
-        /// <param name="condition">Условие на базовый тип</param>
-        /// <returns></returns>
-        public static bool IsProjection([NotNull] this Type type, Func<Type, bool> condition)
+    /// <summary>
+    /// Получение исходного типа проекции или самого себя
+    /// </summary>
+    /// <param name="type">Тип проекции</param>
+    /// <returns></returns>
+    public static Type GetProjectionSourceTypeOrSelf([NotNull] this Type type)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+
+        return type.GetProjectionSourceType(false) ?? type;
+    }
+
+    /// <summary>
+    /// Получение контрактка из проекции
+    /// </summary>
+    /// <param name="type">Тип проекции</param>
+    /// <param name="raiseIfNull">Проверка на существоание</param>
+    /// <returns></returns>
+    public static Type GetProjectionContractType([NotNull] this Type type, bool raiseIfNull = true)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+
+        var attr = type.GetCustomAttribute<ProjectionAttribute>();
+
+        if (attr == null)
         {
-            if (type == null) throw new ArgumentNullException(nameof(type));
-
-            return type.GetProjectionSourceType(false).Maybe(condition);
+            if (raiseIfNull)
+            {
+                throw new Exception($"Type {type.Name} is not Projection");
+            }
+            else
+            {
+                return null;
+            }
         }
+        else
+        {
+            return attr.ContractType;
+        }
+    }
+
+    /// <summary>
+    /// Проверка типа на то, что он является проекцией
+    /// </summary>
+    /// <param name="type">Тип проекции</param>
+    /// <returns></returns>
+    public static bool IsProjection([NotNull] this Type type)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+
+        return type.GetProjectionSourceType(false) != null;
+    }
+
+    /// <summary>
+    /// Проверка типа на то, что он является проекцией с условием на базовый тип
+    /// </summary>
+    /// <param name="type">Тип проекции</param>
+    /// <param name="condition">Условие на базовый тип</param>
+    /// <returns></returns>
+    public static bool IsProjection([NotNull] this Type type, Func<Type, bool> condition)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+
+        return type.GetProjectionSourceType(false).Maybe(condition);
     }
 }

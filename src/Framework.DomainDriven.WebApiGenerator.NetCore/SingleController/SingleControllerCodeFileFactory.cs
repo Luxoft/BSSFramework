@@ -9,42 +9,41 @@ using Framework.DomainDriven.ServiceModelGenerator;
 
 using Microsoft.AspNetCore.Mvc;
 
-namespace Framework.DomainDriven.WebApiGenerator.NetCore.SingleController
-{
-    public class SingleControllerCodeFileFactory<TConfiguration> : ImplementFileFactory<TConfiguration>
+namespace Framework.DomainDriven.WebApiGenerator.NetCore.SingleController;
+
+public class SingleControllerCodeFileFactory<TConfiguration> : ImplementFileFactory<TConfiguration>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
-    {
-        public SingleControllerCodeFileFactory(TConfiguration configuration, Type domainType)
+{
+    public SingleControllerCodeFileFactory(TConfiguration configuration, Type domainType)
             : base(configuration, domainType)
+    {
+    }
+
+
+    public override FileType FileType { get; } = FileType.Implement;
+
+    protected override IEnumerable<CodeTypeReference> GetBaseTypes()
+    {
+        yield break;
+    }
+
+    protected override IEnumerable<CodeTypeMember> GetMembers()
+    {
+        foreach (var baseMember in base.GetMembers().Select(CodeDomVisitor.Identity.VisitTypeMember))
         {
-        }
-
-
-        public override FileType FileType { get; } = FileType.Implement;
-
-        protected override IEnumerable<CodeTypeReference> GetBaseTypes()
-        {
-            yield break;
-        }
-
-        protected override IEnumerable<CodeTypeMember> GetMembers()
-        {
-            foreach (var baseMember in base.GetMembers().Select(CodeDomVisitor.Identity.VisitTypeMember))
+            if (baseMember is CodeMemberMethod method)
             {
-                if (baseMember is CodeMemberMethod method)
+                if (method.Attributes.HasFlag(MemberAttributes.Public))
                 {
-                    if (method.Attributes.HasFlag(MemberAttributes.Public))
+                    method.CustomAttributes.Add(typeof(HttpPostAttribute).ToTypeReference().ToAttributeDeclaration(new CodeNameofExpression(method.Name).ToAttributeArgument()));
+
+                    foreach (CodeParameterDeclarationExpression parameter in method.Parameters)
                     {
-                        method.CustomAttributes.Add(typeof(HttpPostAttribute).ToTypeReference().ToAttributeDeclaration(new CodeNameofExpression(method.Name).ToAttributeArgument()));
-
-                        foreach (CodeParameterDeclarationExpression parameter in method.Parameters)
-                        {
-                            parameter.CustomAttributes.Add(typeof(FromFormAttribute).ToTypeReference().ToAttributeDeclaration());
-                        }
+                        parameter.CustomAttributes.Add(typeof(FromFormAttribute).ToTypeReference().ToAttributeDeclaration());
                     }
-
-                    yield return baseMember;
                 }
+
+                yield return baseMember;
             }
         }
     }

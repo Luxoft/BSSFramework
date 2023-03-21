@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface IPathAttribute
 {
-    public interface IPathAttribute
-    {
-        string Path { get; }
-    }
+    string Path { get; }
 }

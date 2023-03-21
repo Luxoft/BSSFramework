@@ -1,13 +1,12 @@
 ﻿using System;
 
-namespace Framework.Persistent.Mapping
+namespace Framework.Persistent.Mapping;
+
+public class NamedAttribute : Attribute
 {
-    public class NamedAttribute : Attribute
+    public string Name
     {
-        public string Name
-        {
-            get;
-            set;
-        }
+        get;
+        set;
     }
 }

@@ -1,14 +1,13 @@
 ﻿using System.CodeDom;
 using System.Collections.Generic;
 
-namespace Framework.DomainDriven.ServiceModelGenerator
+namespace Framework.DomainDriven.ServiceModelGenerator;
+
+public interface IServiceMethodGenerator
 {
-    public interface IServiceMethodGenerator
-    {
-        MethodIdentity Identity { get; }
+    MethodIdentity Identity { get; }
 
-        CodeMemberMethod GetContractMethod();
+    CodeMemberMethod GetContractMethod();
 
-        IEnumerable<CodeMemberMethod> GetFacadeMethods();
-    }
+    IEnumerable<CodeMemberMethod> GetFacadeMethods();
 }

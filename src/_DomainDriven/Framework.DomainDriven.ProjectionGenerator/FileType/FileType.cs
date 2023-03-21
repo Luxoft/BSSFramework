@@ -1,20 +1,19 @@
 ﻿using System;
 
-namespace Framework.DomainDriven.ProjectionGenerator
+namespace Framework.DomainDriven.ProjectionGenerator;
+
+/// <summary>
+/// Тип проекции
+/// </summary>
+public enum FileType
 {
     /// <summary>
-    /// Тип проекции
+    /// Обычная проекция
     /// </summary>
-    public enum FileType
-    {
-        /// <summary>
-        /// Обычная проекция
-        /// </summary>
-        Projection,
+    Projection,
 
-        /// <summary>
-        /// Базовая проекция с набором абстрактных кастомных свойств
-        /// </summary>
-        CustomProjectionBase
-    }
+    /// <summary>
+    /// Базовая проекция с набором абстрактных кастомных свойств
+    /// </summary>
+    CustomProjectionBase
 }

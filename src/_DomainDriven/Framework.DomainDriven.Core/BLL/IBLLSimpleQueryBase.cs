@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Linq;
 
-namespace Framework.DomainDriven.BLL
+namespace Framework.DomainDriven.BLL;
+
+public interface IBLLSimpleQueryBase<out TDomainObject>
 {
-    public interface IBLLSimpleQueryBase<out TDomainObject>
-    {
-        /// <summary>
-        /// Получение IQueryable без учёта безопасности
-        /// </summary>
-        /// <returns></returns>
-        IQueryable<TDomainObject> GetUnsecureQueryable();
-    }
+    /// <summary>
+    /// Получение IQueryable без учёта безопасности
+    /// </summary>
+    /// <returns></returns>
+    IQueryable<TDomainObject> GetUnsecureQueryable();
 }

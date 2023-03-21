@@ -7,11 +7,11 @@ using Framework.Notification;
 
 using Attachment = System.Net.Mail.Attachment;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Templates
+namespace Framework.Configuration.BLL.SubscriptionSystemService3.Templates;
+
+internal abstract class MessageTemplateFactoryBase
 {
-    internal abstract class MessageTemplateFactoryBase
-    {
-        internal abstract IEnumerable<MessageTemplateNotification> Create<TSourceDomainObjectType, TModelObjectType>(
+    internal abstract IEnumerable<MessageTemplateNotification> Create<TSourceDomainObjectType, TModelObjectType>(
             DomainObjectVersions<TModelObjectType> versions,
             Subscription subscription,
             RecipientsBag recipientsBag,
@@ -19,7 +19,7 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Templates
             where TModelObjectType : class
             where TSourceDomainObjectType: class;
 
-        protected MessageTemplateNotification CreateTemplate<TSourceDomainObjectType, TModelObjectType>(
+    protected MessageTemplateNotification CreateTemplate<TSourceDomainObjectType, TModelObjectType>(
             DomainObjectVersions<TModelObjectType> versions,
             Subscription subscription,
             IEnumerable<string> to,
@@ -27,22 +27,21 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Templates
             IEnumerable<string> replyTo,
             IEnumerable<Attachment> attachments)
             where TModelObjectType : class
-        {
-            var template = new MessageTemplateNotification(
-                subscription.MessageTemplate.Code,
-                versions,
-                versions.DomainObjectType,
-                to,
-                cc,
-                replyTo,
-                attachments,
-                subscription,
-                subscription.AllowEmptyListOfRecipients,
-                typeof(TSourceDomainObjectType));
+    {
+        var template = new MessageTemplateNotification(
+                                                       subscription.MessageTemplate.Code,
+                                                       versions,
+                                                       versions.DomainObjectType,
+                                                       to,
+                                                       cc,
+                                                       replyTo,
+                                                       attachments,
+                                                       subscription,
+                                                       subscription.AllowEmptyListOfRecipients,
+                                                       typeof(TSourceDomainObjectType));
 
-            template.RazorMessageTemplateType = subscription.RazorMessageTemplateType;
+        template.RazorMessageTemplateType = subscription.RazorMessageTemplateType;
 
-            return template;
-        }
+        return template;
     }
 }

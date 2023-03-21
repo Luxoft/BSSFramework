@@ -1,16 +1,15 @@
 ﻿using System.CodeDom;
 
-namespace Framework.CodeDom
-{
-    public class CodeMaybePropertyReferenceExpression : CodePropertyReferenceExpression
-    {
-        public CodeMaybePropertyReferenceExpression()
-        {
-        }
+namespace Framework.CodeDom;
 
-        public CodeMaybePropertyReferenceExpression(CodeExpression targetObject, string propertyName)
+public class CodeMaybePropertyReferenceExpression : CodePropertyReferenceExpression
+{
+    public CodeMaybePropertyReferenceExpression()
+    {
+    }
+
+    public CodeMaybePropertyReferenceExpression(CodeExpression targetObject, string propertyName)
             : base(targetObject, propertyName)
-        {
-        }
+    {
     }
 }

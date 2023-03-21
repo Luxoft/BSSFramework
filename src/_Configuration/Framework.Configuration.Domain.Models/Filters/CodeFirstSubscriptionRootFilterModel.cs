@@ -1,6 +1,5 @@
-﻿namespace Framework.Configuration.Domain
+﻿namespace Framework.Configuration.Domain;
+
+public class CodeFirstSubscriptionRootFilterModel : DomainObjectFilterModel<CodeFirstSubscription>
 {
-    public class CodeFirstSubscriptionRootFilterModel : DomainObjectFilterModel<CodeFirstSubscription>
-    {
-    }
 }

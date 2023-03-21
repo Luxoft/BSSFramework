@@ -1,24 +1,23 @@
 ﻿using System;
 
-namespace Framework.DomainDriven
+namespace Framework.DomainDriven;
+
+/// <summary>
+/// Атрибут управления генерацией по модели
+/// </summary>
+public class DirectModeAttribute : Attribute
 {
     /// <summary>
-    /// Атрибут управления генерацией по модели
+    /// Конструктор
     /// </summary>
-    public class DirectModeAttribute : Attribute
+    /// <param name="directMode">Параметры управления генерацией по модели</param>
+    public DirectModeAttribute(DirectMode directMode)
     {
-        /// <summary>
-        /// Конструктор
-        /// </summary>
-        /// <param name="directMode">Параметры управления генерацией по модели</param>
-        public DirectModeAttribute(DirectMode directMode)
-        {
-            this.DirectMode = directMode;
-        }
-
-        /// <summary>
-        /// Параметры управления генерацией по модели
-        /// </summary>
-        public DirectMode DirectMode { get; }
+        this.DirectMode = directMode;
     }
+
+    /// <summary>
+    /// Параметры управления генерацией по модели
+    /// </summary>
+    public DirectMode DirectMode { get; }
 }

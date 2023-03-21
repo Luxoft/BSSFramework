@@ -8,79 +8,78 @@ using System.Reflection;
 using Framework.Core;
 using Framework.Persistent;
 
-namespace Framework.DomainDriven.BLL
+namespace Framework.DomainDriven.BLL;
+
+public class OverrideListContainsVisitor<TIdent> : ExpressionVisitor
 {
-    public class OverrideListContainsVisitor<TIdent> : ExpressionVisitor
-    {
-        private static readonly MethodInfo VisitListCallMethod =
+    private static readonly MethodInfo VisitListCallMethod =
             new Func<MethodCallExpression, List<IIdentityObject<TIdent>>, Maybe<Expression>>(VisitListCall).Method.GetGenericMethodDefinition();
 
-        private static readonly ConcurrentDictionary<PropertyInfo, OverrideListContainsVisitor<TIdent>> Cache = new ConcurrentDictionary<PropertyInfo, OverrideListContainsVisitor<TIdent>>();
+    private static readonly ConcurrentDictionary<PropertyInfo, OverrideListContainsVisitor<TIdent>> Cache = new ConcurrentDictionary<PropertyInfo, OverrideListContainsVisitor<TIdent>>();
 
-        private readonly PropertyInfo idProperty;
+    private readonly PropertyInfo idProperty;
 
-        private OverrideListContainsVisitor(PropertyInfo idProperty)
+    private OverrideListContainsVisitor(PropertyInfo idProperty)
+    {
+        if (idProperty == null)
         {
-            if (idProperty == null)
-            {
-                throw new ArgumentNullException(nameof(idProperty));
-            }
-
-            this.idProperty = idProperty;
+            throw new ArgumentNullException(nameof(idProperty));
         }
 
-        /// <summary> Returns <see cref="OverrideListContainsVisitor{TIdent}"/> for specified <paramref name="property"/>
-        /// </summary>
-        /// <param name="property">Property to get ExpressionVisitor for</param>
-        /// <returns>Expression Visitor</returns>
-        public static OverrideListContainsVisitor<TIdent> GetOrCreate(PropertyInfo property)
-        {
-            return Cache.GetOrAdd(property, pInfo => new OverrideListContainsVisitor<TIdent>(pInfo));
-        }
+        this.idProperty = idProperty;
+    }
 
-        protected override Expression VisitMethodCall(MethodCallExpression node)
-        {
-            var idPropertyDeclaringType = this.idProperty.DeclaringType;
+    /// <summary> Returns <see cref="OverrideListContainsVisitor{TIdent}"/> for specified <paramref name="property"/>
+    /// </summary>
+    /// <param name="property">Property to get ExpressionVisitor for</param>
+    /// <returns>Expression Visitor</returns>
+    public static OverrideListContainsVisitor<TIdent> GetOrCreate(PropertyInfo property)
+    {
+        return Cache.GetOrAdd(property, pInfo => new OverrideListContainsVisitor<TIdent>(pInfo));
+    }
 
-            // TODO gtsaplin: it's too complicated code, refactor
-            var request = from obj in node.Object.ToMaybe()
+    protected override Expression VisitMethodCall(MethodCallExpression node)
+    {
+        var idPropertyDeclaringType = this.idProperty.DeclaringType;
 
-                          from value in obj.GetDeepMemberConstValue()
+        // TODO gtsaplin: it's too complicated code, refactor
+        var request = from obj in node.Object.ToMaybe()
 
-                          let valueType = value.GetType()
+                      from value in obj.GetDeepMemberConstValue()
 
-                          where valueType.IsGenericType
+                      let valueType = value.GetType()
 
-                          let genericValueType = valueType.GetGenericTypeDefinition()
+                      where valueType.IsGenericType
 
-                          where genericValueType == typeof(List<>)
+                      let genericValueType = valueType.GetGenericTypeDefinition()
 
-                          let genericArgType = valueType.GetGenericArguments().Single()
+                      where genericValueType == typeof(List<>)
 
-                          where idPropertyDeclaringType != null && idPropertyDeclaringType.IsAssignableFrom(genericArgType)
+                      let genericArgType = valueType.GetGenericArguments().Single()
 
-                          from result in (Maybe<Expression>)VisitListCallMethod.MakeGenericMethod(genericArgType).Invoke(null, new[] { node, value })
+                      where idPropertyDeclaringType != null && idPropertyDeclaringType.IsAssignableFrom(genericArgType)
 
-                          select result;
+                      from result in (Maybe<Expression>)VisitListCallMethod.MakeGenericMethod(genericArgType).Invoke(null, new[] { node, value })
 
-            return request.GetValueOrDefault(() => base.VisitMethodCall(node));
-        }
+                      select result;
 
-        private static Maybe<Expression> VisitListCall<TDomainObject>(MethodCallExpression node, List<TDomainObject> preList)
+        return request.GetValueOrDefault(() => base.VisitMethodCall(node));
+    }
+
+    private static Maybe<Expression> VisitListCall<TDomainObject>(MethodCallExpression node, List<TDomainObject> preList)
             where TDomainObject : class, IIdentityObject<TIdent>
-        {
-            // TODO gtsaplin: it's too complicated code, refactor
-            return from list in Maybe.Return(preList)
-                   where new Func<TDomainObject, bool>(list.Contains).Method == node.Method
-                   let arg = node.Arguments.Single()
-                   let argIdExpr = ExpressionHelper.Create((TDomainObject domainObject) => domainObject.Id)
-                   let prop = (PropertyInfo)((MemberExpression)argIdExpr.Body).Member
-                   let idents = list.Where(v => v != null).ToList(v => v.Id)
-                   let identListContainsMethod = new Func<TIdent, bool>(idents.Contains).Method
-                   select (Expression)Expression.Call(Expression.Constant(idents), identListContainsMethod, new Expression[]
-                   {
-                       Expression.Property(arg, prop)
-                   });
-        }
+    {
+        // TODO gtsaplin: it's too complicated code, refactor
+        return from list in Maybe.Return(preList)
+               where new Func<TDomainObject, bool>(list.Contains).Method == node.Method
+               let arg = node.Arguments.Single()
+               let argIdExpr = ExpressionHelper.Create((TDomainObject domainObject) => domainObject.Id)
+               let prop = (PropertyInfo)((MemberExpression)argIdExpr.Body).Member
+               let idents = list.Where(v => v != null).ToList(v => v.Id)
+               let identListContainsMethod = new Func<TIdent, bool>(idents.Contains).Method
+               select (Expression)Expression.Call(Expression.Constant(idents), identListContainsMethod, new Expression[]
+                                                      {
+                                                              Expression.Property(arg, prop)
+                                                      });
     }
 }

@@ -1,14 +1,13 @@
-﻿namespace Framework.Authorization.Domain
+﻿namespace Framework.Authorization.Domain;
+
+public class EntityTypeRootFilterModel : DomainObjectRootFilterModel<EntityType>
 {
-    public class EntityTypeRootFilterModel : DomainObjectRootFilterModel<EntityType>
+    public bool IsFilter { get; set; }
+
+    public override System.Linq.Expressions.Expression<System.Func<EntityType, bool>> ToFilterExpression()
     {
-        public bool IsFilter { get; set; }
+        var filtrable = this.IsFilter;
 
-        public override System.Linq.Expressions.Expression<System.Func<EntityType, bool>> ToFilterExpression()
-        {
-            var filtrable = this.IsFilter;
-
-            return entityType => entityType.IsFilter == filtrable;
-        }
+        return entityType => entityType.IsFilter == filtrable;
     }
 }

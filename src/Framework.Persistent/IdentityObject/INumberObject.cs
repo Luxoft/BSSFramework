@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface INumberObject<out TNumber>
 {
-    public interface INumberObject<out TNumber>
-    {
-        TNumber Number { get; }
-    }
+    TNumber Number { get; }
 }

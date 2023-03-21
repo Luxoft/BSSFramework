@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface IValueObject<out TValue>
 {
-    public interface IValueObject<out TValue>
-    {
-        TValue Value { get; }
-    }
+    TValue Value { get; }
 }

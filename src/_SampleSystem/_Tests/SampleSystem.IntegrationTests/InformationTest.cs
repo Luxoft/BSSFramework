@@ -9,37 +9,36 @@ using Framework.DomainDriven;
 
 using SampleSystem.Generated.DTO;
 
-namespace SampleSystem.IntegrationTests
+namespace SampleSystem.IntegrationTests;
+
+[TestClass]
+public class InformationTest : TestBase
 {
-    [TestClass]
-    public class InformationTest : TestBase
+    [TestMethod]
+    public void CreateAndRemoveInformation_ContainsIntegrationEvents()
     {
-        [TestMethod]
-        public void CreateAndRemoveInformation_ContainsIntegrationEvents()
-        {
-            // Arrange
-            this.ClearIntegrationEvents();
+        // Arrange
+        this.ClearIntegrationEvents();
 
-            // Act
-            var id = this.Evaluate(DBSessionMode.Write, context =>
-            {
-                var newObj = new Information() { Name = "ololo" };
+        // Act
+        var id = this.Evaluate(DBSessionMode.Write, context =>
+                                                    {
+                                                        var newObj = new Information() { Name = "ololo" };
 
-                context.Logics.Information.Save(newObj);
+                                                        context.Logics.Information.Save(newObj);
 
-                return newObj.Id;
-            });
+                                                        return newObj.Id;
+                                                    });
 
-            this.Evaluate(DBSessionMode.Write, context =>
-            {
-                var obj = context.Logics.Information.GetById(id, true);
+        this.Evaluate(DBSessionMode.Write, context =>
+                                           {
+                                               var obj = context.Logics.Information.GetById(id, true);
 
-                context.Logics.Information.Remove(obj);
-            });
+                                               context.Logics.Information.Remove(obj);
+                                           });
 
-            // Assert
-            this.GetIntegrationEvents<InformationSaveEventDTO>().Should().ContainSingle(dto => dto.Information.Id == id);
-            this.GetIntegrationEvents<InformationRemoveEventDTO>().Should().ContainSingle(dto => dto.Information.Id == id);
-        }
+        // Assert
+        this.GetIntegrationEvents<InformationSaveEventDTO>().Should().ContainSingle(dto => dto.Information.Id == id);
+        this.GetIntegrationEvents<InformationRemoveEventDTO>().Should().ContainSingle(dto => dto.Information.Id == id);
     }
 }

@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 
-namespace Framework.Persistent
+namespace Framework.Persistent;
+
+/// <summary>
+/// Описывает мастер-объект в связке мастер-деталь
+/// </summary>
+/// <typeparam name="TDetail">Тип детали</typeparam>
+public interface IMaster<TDetail>
 {
     /// <summary>
-    /// Описывает мастер-объект в связке мастер-деталь
+    /// Ссылка на коллекцию деталей
     /// </summary>
-    /// <typeparam name="TDetail">Тип детали</typeparam>
-    public interface IMaster<TDetail>
-    {
-        /// <summary>
-        /// Ссылка на коллекцию деталей
-        /// </summary>
-        ICollection<TDetail> Details { get; }
-    }
+    ICollection<TDetail> Details { get; }
 }

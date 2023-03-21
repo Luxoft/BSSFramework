@@ -1,11 +1,10 @@
-﻿namespace Framework.Configuration
+﻿namespace Framework.Configuration;
+
+public enum SheduleValueType
 {
-    public enum SheduleValueType
-    {
-        Minutes,
-        Day,
-        Week,
-        Month,
-        Year
-    }
+    Minutes,
+    Day,
+    Week,
+    Month,
+    Year
 }

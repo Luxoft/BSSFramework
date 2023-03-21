@@ -6,68 +6,67 @@ using Framework.Core;
 
 using JetBrains.Annotations;
 
-namespace Framework.Projection.Lambda
+namespace Framework.Projection.Lambda;
+
+internal class GeneratedCustomProperty : BasePropertyInfoImpl
 {
-    internal class GeneratedCustomProperty : BasePropertyInfoImpl
+    private readonly ProjectionLambdaEnvironment environment;
+
+    private readonly Lazy<Type> lazyPropertyType;
+
+    private readonly IProjectionCustomProperty customProjectionProperty;
+
+    private readonly PropertyMethodInfoImpl getMethod = new PropertyMethodInfoImpl();
+
+    private readonly PropertyMethodInfoImpl setMethod;
+
+
+    public GeneratedCustomProperty([NotNull] ProjectionLambdaEnvironment environment, [NotNull] IProjectionCustomProperty customProperty, [NotNull] GeneratedType reflectedType)
     {
-        private readonly ProjectionLambdaEnvironment environment;
+        this.environment = environment ?? throw new ArgumentNullException(nameof(environment));
+        this.customProjectionProperty = customProperty ?? throw new ArgumentNullException(nameof(customProperty));
 
-        private readonly Lazy<Type> lazyPropertyType;
+        this.ReflectedType = reflectedType ?? throw new ArgumentNullException(nameof(reflectedType));
 
-        private readonly IProjectionCustomProperty customProjectionProperty;
+        this.lazyPropertyType = LazyHelper.Create(() => this.environment.BuildPropertyType(this.customProjectionProperty.Type, reflectedType, this.Name));
 
-        private readonly PropertyMethodInfoImpl getMethod = new PropertyMethodInfoImpl();
-
-        private readonly PropertyMethodInfoImpl setMethod;
-
-
-        public GeneratedCustomProperty([NotNull] ProjectionLambdaEnvironment environment, [NotNull] IProjectionCustomProperty customProperty, [NotNull] GeneratedType reflectedType)
+        if (customProperty.Writable)
         {
-            this.environment = environment ?? throw new ArgumentNullException(nameof(environment));
-            this.customProjectionProperty = customProperty ?? throw new ArgumentNullException(nameof(customProperty));
-
-            this.ReflectedType = reflectedType ?? throw new ArgumentNullException(nameof(reflectedType));
-
-            this.lazyPropertyType = LazyHelper.Create(() => this.environment.BuildPropertyType(this.customProjectionProperty.Type, reflectedType, this.Name));
-
-            if (customProperty.Writable)
-            {
-                this.setMethod = new PropertyMethodInfoImpl();
-            }
+            this.setMethod = new PropertyMethodInfoImpl();
         }
+    }
 
-        public override Type PropertyType => this.lazyPropertyType.Value;
+    public override Type PropertyType => this.lazyPropertyType.Value;
 
-        public override Type ReflectedType { get; }
+    public override Type ReflectedType { get; }
 
-        public override Type DeclaringType => this.ReflectedType;
+    public override Type DeclaringType => this.ReflectedType;
 
-        public override string Name => this.customProjectionProperty.Name;
+    public override string Name => this.customProjectionProperty.Name;
 
 
-        public override object[] GetCustomAttributes(Type attributeType, bool inherit)
-        {
-            return (object[])this.customProjectionProperty.Attributes.Where(attributeType.IsInstanceOfType).ToArray(attributeType);
-        }
+    public override object[] GetCustomAttributes(Type attributeType, bool inherit)
+    {
+        return (object[])this.customProjectionProperty.Attributes.Where(attributeType.IsInstanceOfType).ToArray(attributeType);
+    }
 
-        public override object[] GetCustomAttributes(bool inherit)
-        {
-            return this.customProjectionProperty.Attributes.ToArray();
-        }
+    public override object[] GetCustomAttributes(bool inherit)
+    {
+        return this.customProjectionProperty.Attributes.ToArray();
+    }
 
-        public override ParameterInfo[] GetIndexParameters()
-        {
-            return new ParameterInfo[0];
-        }
+    public override ParameterInfo[] GetIndexParameters()
+    {
+        return new ParameterInfo[0];
+    }
 
-        public override MethodInfo GetGetMethod(bool nonPublic)
-        {
-            return this.getMethod;
-        }
+    public override MethodInfo GetGetMethod(bool nonPublic)
+    {
+        return this.getMethod;
+    }
 
-        public override MethodInfo GetSetMethod(bool nonPublic)
-        {
-            return this.setMethod;
-        }
+    public override MethodInfo GetSetMethod(bool nonPublic)
+    {
+        return this.setMethod;
     }
 }

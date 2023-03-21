@@ -4,53 +4,52 @@ using System.Linq;
 
 using Framework.DomainDriven.DBGenerator.Team;
 
-namespace Framework.DomainDriven.DBGenerator.Contracts
+namespace Framework.DomainDriven.DBGenerator.Contracts;
+
+public class DatabaseScriptResultDecorator : IDatabaseScriptResult
 {
-    public class DatabaseScriptResultDecorator : IDatabaseScriptResult
+    private readonly IDatabaseScriptResult _source;
+
+    private readonly Func<string, string> _resultSelector;
+
+    public DatabaseScriptResultDecorator(IDatabaseScriptResult source, Func<string, string> resultSelector)
     {
-        private readonly IDatabaseScriptResult _source;
-
-        private readonly Func<string, string> _resultSelector;
-
-        public DatabaseScriptResultDecorator(IDatabaseScriptResult source, Func<string, string> resultSelector)
+        if (source == null)
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-            if (resultSelector == null)
-            {
-                throw new ArgumentNullException(nameof(resultSelector));
-            }
-
-            this._source = source;
-            this._resultSelector = resultSelector;
+            throw new ArgumentNullException(nameof(source));
+        }
+        if (resultSelector == null)
+        {
+            throw new ArgumentNullException(nameof(resultSelector));
         }
 
-        public IEnumerable<string> this[ApplyMigrationDbScriptMode mode]
-        {
-            get
-            {
-                return this._source[mode].Select(z => this._resultSelector(z));
-            }
-        }
+        this._source = source;
+        this._resultSelector = resultSelector;
+    }
 
-        public IEnumerable<IEnumerable<string>> GetResults()
+    public IEnumerable<string> this[ApplyMigrationDbScriptMode mode]
+    {
+        get
         {
-            foreach (var result in this._source.GetResults())
-            {
-                yield return result.Select(this._resultSelector);
-            }
+            return this._source[mode].Select(z => this._resultSelector(z));
         }
+    }
 
-        public string ToNewLinesCombined()
+    public IEnumerable<IEnumerable<string>> GetResults()
+    {
+        foreach (var result in this._source.GetResults())
         {
-            return this._resultSelector(this._source.ToNewLinesCombined());
+            yield return result.Select(this._resultSelector);
         }
+    }
 
-        public IDatabaseScriptResult Evaluate()
-        {
-            return this._source.Evaluate();
-        }
+    public string ToNewLinesCombined()
+    {
+        return this._resultSelector(this._source.ToNewLinesCombined());
+    }
+
+    public IDatabaseScriptResult Evaluate()
+    {
+        return this._source.Evaluate();
     }
 }

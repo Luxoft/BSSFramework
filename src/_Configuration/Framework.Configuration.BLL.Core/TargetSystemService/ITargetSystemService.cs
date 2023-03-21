@@ -6,36 +6,35 @@ using Framework.Persistent;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven;
 
-namespace Framework.Configuration.BLL
-{
-    public interface ITargetSystemService :
+namespace Framework.Configuration.BLL;
+
+public interface ITargetSystemService :
         ITypeResolverContainer<DomainType>,
         ITargetSystemElement<TargetSystem>,
         IVisualIdentityObject
-    {
-        ISubscriptionSystemService SubscriptionService { get; }
+{
+    ISubscriptionSystemService SubscriptionService { get; }
 
-        object TargetSystemContext { get; }
+    object TargetSystemContext { get; }
 
-        Type TargetSystemContextType { get; }
+    Type TargetSystemContextType { get; }
 
-        ITypeResolver<string> TypeResolverS { get; }
+    ITypeResolver<string> TypeResolverS { get; }
 
-        bool IsAssignable(Type domainType);
-    }
+    bool IsAssignable(Type domainType);
+}
 
-    public interface ITargetSystemService<out TBLLContext> : ITargetSystemService
-    {
-        new TBLLContext TargetSystemContext { get; }
-    }
+public interface ITargetSystemService<out TBLLContext> : ITargetSystemService
+{
+    new TBLLContext TargetSystemContext { get; }
+}
 
-    public interface IPersistentTargetSystemService : ITargetSystemService, IPersistentDomainObjectBaseTypeContainer
-    {
-        new IRevisionSubscriptionSystemService SubscriptionService { get; }
+public interface IPersistentTargetSystemService : ITargetSystemService, IPersistentDomainObjectBaseTypeContainer
+{
+    new IRevisionSubscriptionSystemService SubscriptionService { get; }
 
 
-        IRevisionSubscriptionSystemService GetSubscriptionService(IMessageSender<MessageTemplateNotification> subscriptionSender);
+    IRevisionSubscriptionSystemService GetSubscriptionService(IMessageSender<MessageTemplateNotification> subscriptionSender);
 
-        void ForceEvent(DomainTypeEventOperation operation, long? revision, Guid domainObjectId);
-    }
+    void ForceEvent(DomainTypeEventOperation operation, long? revision, Guid domainObjectId);
 }

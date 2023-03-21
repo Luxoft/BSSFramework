@@ -1,26 +1,25 @@
 ﻿using System;
 
-namespace Framework.Core
+namespace Framework.Core;
+
+/// <summary>
+/// Флаг размерностей "1 или больше"
+/// </summary>
+[Flags]
+public enum CountType
 {
     /// <summary>
-    /// Флаг размерностей "1 или больше"
+    /// Единица
     /// </summary>
-    [Flags]
-    public enum CountType
-    {
-        /// <summary>
-        /// Единица
-        /// </summary>
-        Single = 1,
+    Single = 1,
 
-        /// <summary>
-        /// Коллеция
-        /// </summary>
-        Many = 2,
+    /// <summary>
+    /// Коллеция
+    /// </summary>
+    Many = 2,
 
-        /// <summary>
-        /// Всё вместе
-        /// </summary>
-        Both = Single + Many
-    }
+    /// <summary>
+    /// Всё вместе
+    /// </summary>
+    Both = Single + Many
 }

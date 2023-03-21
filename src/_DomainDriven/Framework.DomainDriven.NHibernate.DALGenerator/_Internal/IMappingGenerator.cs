@@ -3,12 +3,11 @@ using System.Xml.Linq;
 
 using Framework.Core;
 
-namespace Framework.DomainDriven.NHibernate.DALGenerator
-{
-    public interface IMappingGenerator
-    {
-        IAssemblyInfo Assembly { get; }
+namespace Framework.DomainDriven.NHibernate.DALGenerator;
 
-        XDocument Generate();
-    }
+public interface IMappingGenerator
+{
+    IAssemblyInfo Assembly { get; }
+
+    XDocument Generate();
 }

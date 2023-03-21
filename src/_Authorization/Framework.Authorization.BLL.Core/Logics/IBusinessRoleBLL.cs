@@ -4,24 +4,23 @@ using Framework.Authorization.Domain;
 
 using JetBrains.Annotations;
 
-namespace Framework.Authorization.BLL
+namespace Framework.Authorization.BLL;
+
+public partial interface IBusinessRoleBLL
 {
-    public partial interface IBusinessRoleBLL
-    {
-        BusinessRole GetByNameOrCreate(string name, bool autoSave = false);
+    BusinessRole GetByNameOrCreate(string name, bool autoSave = false);
 
-        BusinessRole GetAdminRole();
+    BusinessRole GetAdminRole();
 
-        BusinessRole GetOrCreateAdminRole();
+    BusinessRole GetOrCreateAdminRole();
 
-        bool HasAdminRole();
+    bool HasAdminRole();
 
-        bool HasBusinessRole(string roleName, bool withRunAs = true);
+    bool HasBusinessRole(string roleName, bool withRunAs = true);
 
-        IEnumerable<BusinessRoleNode> GetNodes();
+    IEnumerable<BusinessRoleNode> GetNodes();
 
-        BusinessRole Save(BusinessRoleNode businessRoleNode);
+    BusinessRole Save(BusinessRoleNode businessRoleNode);
 
-        IEnumerable<BusinessRole> GetParents([NotNull] ICollection<BusinessRole> businessRoles);
-    }
+    IEnumerable<BusinessRole> GetParents([NotNull] ICollection<BusinessRole> businessRoles);
 }

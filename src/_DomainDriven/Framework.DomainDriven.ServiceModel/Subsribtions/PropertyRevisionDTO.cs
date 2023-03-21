@@ -2,71 +2,69 @@
 using System.Runtime.Serialization;
 using Framework.DomainDriven.DAL.Revisions;
 
-namespace Framework.DomainDriven.ServiceModel.Subscriptions
+namespace Framework.DomainDriven.ServiceModel.Subscriptions;
+
+[DataContract]
+public class PropertyRevisionDTOBase
 {
-    [DataContract]
-    public class PropertyRevisionDTOBase
+    [DataMember] public AuditRevisionType RevisionType;
+    [DataMember] public string Author;
+    [DataMember] public DateTime Date;
+    [DataMember] public long RevisionNumber;
+
+    public PropertyRevisionDTOBase(RevisionInfoBase source)
     {
-        [DataMember] public AuditRevisionType RevisionType;
-        [DataMember] public string Author;
-        [DataMember] public DateTime Date;
-        [DataMember] public long RevisionNumber;
-
-        public PropertyRevisionDTOBase(RevisionInfoBase source)
-        {
-            this.RevisionType = source.RevisionType;
-            this.Author = source.Author;
-            this.Date = source.Date;
-            this.RevisionNumber = source.RevisionNumber;
-        }
-
-        public PropertyRevisionDTOBase()
-        {
-
-        }
+        this.RevisionType = source.RevisionType;
+        this.Author = source.Author;
+        this.Date = source.Date;
+        this.RevisionNumber = source.RevisionNumber;
     }
 
-    [DataContract(Name = "PropertyRevisionDTO{0}")]
-    public class PropertyRevisionDTO<TIdent> : PropertyRevisionDTOBase
+    public PropertyRevisionDTOBase()
     {
-        [DataMember]
-        public string Value;
 
-        public PropertyRevisionDTO() : base()
-        {
+    }
+}
 
-        }
+[DataContract(Name = "PropertyRevisionDTO{0}")]
+public class PropertyRevisionDTO<TIdent> : PropertyRevisionDTOBase
+{
+    [DataMember]
+    public string Value;
 
-        public PropertyRevisionDTO(PropertyRevision<TIdent, string> source) : base(source)
-        {
-            this.Value = source.Value;
+    public PropertyRevisionDTO() : base()
+    {
 
-        }
     }
 
-    [DataContract(Name = "PropertyRevisionDTO{0}{1}")]
-    public class PropertyRevisionDTO<TValue, TIdent> : PropertyRevisionDTOBase
+    public PropertyRevisionDTO(PropertyRevision<TIdent, string> source) : base(source)
     {
-        [DataMember]
-        public TValue Value;
+        this.Value = source.Value;
 
-        public PropertyRevisionDTO()
+    }
+}
+
+[DataContract(Name = "PropertyRevisionDTO{0}{1}")]
+public class PropertyRevisionDTO<TValue, TIdent> : PropertyRevisionDTOBase
+{
+    [DataMember]
+    public TValue Value;
+
+    public PropertyRevisionDTO()
             : base()
-        {
+    {
 
-        }
-
-        public PropertyRevisionDTO(RevisionInfoBase source) : base(source)
-        {
-
-        }
-
-        public PropertyRevisionDTO(PropertyRevision<TIdent, TValue> source)
-            : base(source)
-        {
-            this.Value = source.Value;
-
-        }
     }
 
+    public PropertyRevisionDTO(RevisionInfoBase source) : base(source)
+    {
+
+    }
+
+    public PropertyRevisionDTO(PropertyRevision<TIdent, TValue> source)
+            : base(source)
+    {
+        this.Value = source.Value;
+
+    }
 }

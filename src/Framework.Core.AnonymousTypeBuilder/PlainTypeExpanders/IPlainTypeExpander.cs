@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace Framework.Core
+namespace Framework.Core;
+
+public interface IPlainTypeExpander
 {
-    public interface IPlainTypeExpander
-    {
-        IExpressionConverter GetExpressionConverter(Type type);
-    }
+    IExpressionConverter GetExpressionConverter(Type type);
 }

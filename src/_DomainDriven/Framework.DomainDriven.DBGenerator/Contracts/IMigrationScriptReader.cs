@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using Framework.DomainDriven.DBGenerator.Team;
 
-namespace Framework.DomainDriven.DBGenerator.Contracts
+namespace Framework.DomainDriven.DBGenerator.Contracts;
+
+public interface IMigrationScriptReader
 {
-    public interface IMigrationScriptReader
-    {
-        IEnumerable<MigrationDbScript> Read();
-    }
+    IEnumerable<MigrationDbScript> Read();
 }

@@ -6,29 +6,28 @@ using Framework.DomainDriven;
 
 using JetBrains.Annotations;
 
-namespace Framework.Authorization.Domain
+namespace Framework.Authorization.Domain;
+
+public class AvailablePermissionFilter : IDomainObjectFilterModel<Permission>
 {
-    public class AvailablePermissionFilter : IDomainObjectFilterModel<Permission>
+    private readonly IDateTimeService dateTimeService;
+
+    private readonly string principalName;
+
+    public AvailablePermissionFilter([NotNull] IDateTimeService dateTimeService, string principalName)
     {
-        private readonly IDateTimeService dateTimeService;
+        if (dateTimeService == null) throw new ArgumentNullException(nameof(dateTimeService));
 
-        private readonly string principalName;
+        this.dateTimeService = dateTimeService;
+        this.principalName = principalName;
+    }
 
-        public AvailablePermissionFilter([NotNull] IDateTimeService dateTimeService, string principalName)
-        {
-            if (dateTimeService == null) throw new ArgumentNullException(nameof(dateTimeService));
+    public virtual Expression<Func<Permission, bool>> ToFilterExpression()
+    {
+        var dateTime = this.dateTimeService.Today;
 
-            this.dateTimeService = dateTimeService;
-            this.principalName = principalName;
-        }
-
-        public virtual Expression<Func<Permission, bool>> ToFilterExpression()
-        {
-            var dateTime = this.dateTimeService.Today;
-
-            return permission => (this.principalName == null || this.principalName == permission.Principal.Name)
-                              && permission.Status == PermissionStatus.Approved
-                              && permission.Period.Contains(dateTime);
-        }
+        return permission => (this.principalName == null || this.principalName == permission.Principal.Name)
+                             && permission.Status == PermissionStatus.Approved
+                             && permission.Period.Contains(dateTime);
     }
 }

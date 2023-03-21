@@ -2,18 +2,17 @@
 
 using Framework.Core;
 
-namespace Framework.Validation
+namespace Framework.Validation;
+
+public class AvailableDateTimeValidator : RangeClassValidator<DateTime, DateTime>
 {
-    public class AvailableDateTimeValidator : RangeClassValidator<DateTime, DateTime>
+    private AvailableDateTimeValidator()
     {
-        private AvailableDateTimeValidator()
-        {
-        }
-
-
-        protected override Func<Range<DateTime>, DateTime, bool> IsValidValueFunc { get; } = RangePropertyValidatorHelper.DateTime.AvailableFunc;
-
-
-        public static AvailableDateTimeValidator Value { get; } = new AvailableDateTimeValidator();
     }
+
+
+    protected override Func<Range<DateTime>, DateTime, bool> IsValidValueFunc { get; } = RangePropertyValidatorHelper.DateTime.AvailableFunc;
+
+
+    public static AvailableDateTimeValidator Value { get; } = new AvailableDateTimeValidator();
 }

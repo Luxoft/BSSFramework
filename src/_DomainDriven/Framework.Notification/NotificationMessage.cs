@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace Framework.Notification
+namespace Framework.Notification;
+
+public class NotificationMessage
 {
-    public class NotificationMessage
-    {
-        public string Subject;
+    public string Subject;
 
-        public string Body;
+    public string Body;
 
-        public IList<string> Receivers;
-    }
+    public IList<string> Receivers;
 }

@@ -1,19 +1,18 @@
 ﻿using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 
-namespace Framework.Events
+namespace Framework.Events;
+
+/// <summary>
+/// Потребитель DAL-евентов с возможностью их ручной эмуляции
+/// </summary>
+public interface IManualEventDALListener<in TPersistentDomainObjectBase> : IDALListener, IPersistentDomainObjectBaseTypeContainer
 {
     /// <summary>
-    /// Потребитель DAL-евентов с возможностью их ручной эмуляции
+    /// Получение контейнера для ручного вызова евента
     /// </summary>
-    public interface IManualEventDALListener<in TPersistentDomainObjectBase> : IDALListener, IPersistentDomainObjectBaseTypeContainer
-    {
-        /// <summary>
-        /// Получение контейнера для ручного вызова евента
-        /// </summary>
-        /// <typeparam name="TDomainObject"></typeparam>
-        /// <returns></returns>
-        IOperationEventSender<TDomainObject, EventOperation> GetForceEventContainer<TDomainObject>()
+    /// <typeparam name="TDomainObject"></typeparam>
+    /// <returns></returns>
+    IOperationEventSender<TDomainObject, EventOperation> GetForceEventContainer<TDomainObject>()
             where TDomainObject : class, TPersistentDomainObjectBase;
-    }
 }

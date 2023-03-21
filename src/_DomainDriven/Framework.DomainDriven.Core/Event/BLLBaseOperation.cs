@@ -1,9 +1,8 @@
-﻿namespace Framework.DomainDriven.BLL
-{
-    public enum BLLBaseOperation
-    {
-        Save = 0,
+﻿namespace Framework.DomainDriven.BLL;
 
-        Remove = 1
-    }
+public enum BLLBaseOperation
+{
+    Save = 0,
+
+    Remove = 1
 }

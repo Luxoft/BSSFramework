@@ -1,6 +1,5 @@
-﻿namespace SampleSystem.Domain
+﻿namespace SampleSystem.Domain;
+
+public abstract class ContextBaseDirectory : BaseDirectory
 {
-    public abstract class ContextBaseDirectory : BaseDirectory
-    {
-    }
 }

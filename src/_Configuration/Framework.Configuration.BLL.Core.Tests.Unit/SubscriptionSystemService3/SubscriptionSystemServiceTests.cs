@@ -15,177 +15,176 @@ using NUnit.Framework;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 
-namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
+namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3;
+
+public sealed class SubscriptionSystemServiceTests : TestFixtureBase
 {
-    public sealed class SubscriptionSystemServiceTests : TestFixtureBase
+    private SubscriptionNotificationService<ITestBLLContext> notificationService;
+    private RecipientService<ITestBLLContext> recipientService;
+
+    [SetUp]
+    public void SetUp()
     {
-        private SubscriptionNotificationService<ITestBLLContext> notificationService;
-        private RecipientService<ITestBLLContext> recipientService;
+        this.notificationService = this.Fixture.RegisterStub<SubscriptionNotificationService<ITestBLLContext>>();
+        this.recipientService = this.Fixture.RegisterStub<RecipientService<ITestBLLContext>>();
 
-        [SetUp]
-        public void SetUp()
-        {
-            this.notificationService = this.Fixture.RegisterStub<SubscriptionNotificationService<ITestBLLContext>>();
-            this.recipientService = this.Fixture.RegisterStub<RecipientService<ITestBLLContext>>();
+        var servicesFactory = this.Fixture.RegisterStub<SubscriptionServicesFactory<ITestBLLContext>>();
+        servicesFactory.CreateNotificationService().Returns(this.notificationService);
+        servicesFactory.CreateRecipientService().Returns(this.recipientService);
+    }
 
-            var servicesFactory = this.Fixture.RegisterStub<SubscriptionServicesFactory<ITestBLLContext>>();
-            servicesFactory.CreateNotificationService().Returns(this.notificationService);
-            servicesFactory.CreateRecipientService().Returns(this.recipientService);
-        }
+    [Test]
+    public void PublicSurface_NullArguments_ArgumentNullException()
+    {
+        // Arrange
+        var assertion = new GuardClauseAssertion(this.Fixture);
+        var targetType = typeof(RevisionSubscriptionSystemService<ITestBLLContext, IdentityObject >);
 
-        [Test]
-        public void PublicSurface_NullArguments_ArgumentNullException()
-        {
-            // Arrange
-            var assertion = new GuardClauseAssertion(this.Fixture);
-            var targetType = typeof(RevisionSubscriptionSystemService<ITestBLLContext, IdentityObject >);
+        // Act
 
-            // Act
+        // Assert
+        assertion.Verify(targetType.GetConstructors());
+        assertion.Verify(
+                         targetType.GetMethods()
+                                   .Where(mi => mi.Name != "GetRecipientsUntyped" && mi.Name != "ProcessChangedObjectUntyped"));
+    }
 
-            // Assert
-            assertion.Verify(targetType.GetConstructors());
-            assertion.Verify(
-                             targetType.GetMethods()
-                                       .Where(mi => mi.Name != "GetRecipientsUntyped" && mi.Name != "ProcessChangedObjectUntyped"));
-        }
+    [Test]
+    public void GetRecipientsUntyped_NullType_ArgumentNullException()
+    {
+        // Arrange
+        var sut = this.Fixture.Create<SubscriptionSystemService<ITestBLLContext>>();
+        Action call = () => sut.GetRecipientsUntyped(null, string.Empty, string.Empty, string.Empty);
 
-        [Test]
-        public void GetRecipientsUntyped_NullType_ArgumentNullException()
-        {
-            // Arrange
-            var sut = this.Fixture.Create<SubscriptionSystemService<ITestBLLContext>>();
-            Action call = () => sut.GetRecipientsUntyped(null, string.Empty, string.Empty, string.Empty);
+        // Act
 
-            // Act
+        // Assert
+        call.Should().Throw<ArgumentNullException>();
+    }
 
-            // Assert
-            call.Should().Throw<ArgumentNullException>();
-        }
+    [Test]
+    public void GetRecipientsUntyped_NullSubscriptionCode_ArgumentNullException()
+    {
+        // Arrange
+        var sut = this.Fixture.Create<SubscriptionSystemService<ITestBLLContext>>();
+        Action call = () => sut.GetRecipientsUntyped(typeof(string), string.Empty, string.Empty, null);
 
-        [Test]
-        public void GetRecipientsUntyped_NullSubscriptionCode_ArgumentNullException()
-        {
-            // Arrange
-            var sut = this.Fixture.Create<SubscriptionSystemService<ITestBLLContext>>();
-            Action call = () => sut.GetRecipientsUntyped(typeof(string), string.Empty, string.Empty, null);
+        // Act
 
-            // Act
+        // Assert
+        call.Should().Throw<ArgumentNullException>();
+    }
 
-            // Assert
-            call.Should().Throw<ArgumentNullException>();
-        }
+    [Test]
+    public void GetRecipientsUntyped_NullPrev_NoArgumentNullException()
+    {
+        // Arrange
+        var sut = this.Fixture.Create<SubscriptionSystemService<ITestBLLContext>>();
+        Action call = () => sut.GetRecipientsUntyped(typeof(string), null, string.Empty, string.Empty);
 
-        [Test]
-        public void GetRecipientsUntyped_NullPrev_NoArgumentNullException()
-        {
-            // Arrange
-            var sut = this.Fixture.Create<SubscriptionSystemService<ITestBLLContext>>();
-            Action call = () => sut.GetRecipientsUntyped(typeof(string), null, string.Empty, string.Empty);
+        // Act
 
-            // Act
+        // Assert
+        call.Should().NotThrow<ArgumentNullException>();
+    }
 
-            // Assert
-            call.Should().NotThrow<ArgumentNullException>();
-        }
+    [Test]
+    public void GetRecipientsUntyped_NullNext_NoArgumentNullException()
+    {
+        // Arrange
+        var sut = this.Fixture.Create<SubscriptionSystemService<ITestBLLContext>>();
+        Action call = () => sut.GetRecipientsUntyped(typeof(string), string.Empty, null, string.Empty);
 
-        [Test]
-        public void GetRecipientsUntyped_NullNext_NoArgumentNullException()
-        {
-            // Arrange
-            var sut = this.Fixture.Create<SubscriptionSystemService<ITestBLLContext>>();
-            Action call = () => sut.GetRecipientsUntyped(typeof(string), string.Empty, null, string.Empty);
+        // Act
 
-            // Act
+        // Assert
+        call.Should().NotThrow<ArgumentNullException>();
+    }
 
-            // Assert
-            call.Should().NotThrow<ArgumentNullException>();
-        }
+    [Test]
+    public void ProcessChangedObjectUntyped_NullType_ArgumentNullException()
+    {
+        // Arrange
+        var sut = this.Fixture.Create<SubscriptionSystemService<ITestBLLContext>>();
+        Action call = () => sut.ProcessChangedObjectUntyped(string.Empty, string.Empty, null);
 
-        [Test]
-        public void ProcessChangedObjectUntyped_NullType_ArgumentNullException()
-        {
-            // Arrange
-            var sut = this.Fixture.Create<SubscriptionSystemService<ITestBLLContext>>();
-            Action call = () => sut.ProcessChangedObjectUntyped(string.Empty, string.Empty, null);
+        // Act
 
-            // Act
+        // Assert
+        call.Should().Throw<ArgumentNullException>();
+    }
 
-            // Assert
-            call.Should().Throw<ArgumentNullException>();
-        }
+    [Test]
+    public void ProcessChangedObjectUntyped_NullPrev_NoArgumentNullException()
+    {
+        // Arrange
+        var sut = this.Fixture.Create<SubscriptionSystemService<ITestBLLContext>>();
+        Action call = () => sut.ProcessChangedObjectUntyped(null, string.Empty, typeof(string));
 
-        [Test]
-        public void ProcessChangedObjectUntyped_NullPrev_NoArgumentNullException()
-        {
-            // Arrange
-            var sut = this.Fixture.Create<SubscriptionSystemService<ITestBLLContext>>();
-            Action call = () => sut.ProcessChangedObjectUntyped(null, string.Empty, typeof(string));
+        // Act
 
-            // Act
+        // Assert
+        call.Should().NotThrow<ArgumentNullException>();
+    }
 
-            // Assert
-            call.Should().NotThrow<ArgumentNullException>();
-        }
+    [Test]
+    public void ProcessChangedObjectUntyped_NullNext_NoArgumentNullException()
+    {
+        // Arrange
+        var sut = this.Fixture.Create<SubscriptionSystemService<ITestBLLContext>>();
+        Action call = () => sut.ProcessChangedObjectUntyped(string.Empty, null, typeof(string));
 
-        [Test]
-        public void ProcessChangedObjectUntyped_NullNext_NoArgumentNullException()
-        {
-            // Arrange
-            var sut = this.Fixture.Create<SubscriptionSystemService<ITestBLLContext>>();
-            Action call = () => sut.ProcessChangedObjectUntyped(string.Empty, null, typeof(string));
+        // Act
 
-            // Act
+        // Assert
+        call.Should().NotThrow<ArgumentNullException>();
+    }
 
-            // Assert
-            call.Should().NotThrow<ArgumentNullException>();
-        }
+    [Test]
+    public void ProcessChangedObjectUntyped_Call_NonEmptyTryResultCollection()
+    {
+        // Arrange
+        var versions = this.Fixture.Create<DomainObjectVersions<string>>();
+        var expectedResult = Substitute.For<IList<ITryResult<Subscription>>>();
 
-        [Test]
-        public void ProcessChangedObjectUntyped_Call_NonEmptyTryResultCollection()
-        {
-            // Arrange
-            var versions = this.Fixture.Create<DomainObjectVersions<string>>();
-            var expectedResult = Substitute.For<IList<ITryResult<Subscription>>>();
+        this.notificationService
+            .NotifyDomainObjectChanged(versions)
+            .Returns(expectedResult);
 
-            this.notificationService
-                .NotifyDomainObjectChanged(versions)
-                .Returns(expectedResult);
+        // Act
+        var sut = this.Fixture.Create<SubscriptionSystemService<ITestBLLContext>>();
 
-            // Act
-            var sut = this.Fixture.Create<SubscriptionSystemService<ITestBLLContext>>();
+        var actualResult = sut.ProcessChangedObjectUntyped(
+                                                           versions.Previous,
+                                                           versions.Current,
+                                                           versions.DomainObjectType);
 
-            var actualResult = sut.ProcessChangedObjectUntyped(
-                versions.Previous,
-                versions.Current,
-                versions.DomainObjectType);
+        // Assert
+        actualResult.Should().BeSameAs(expectedResult);
+    }
 
-            // Assert
-            actualResult.Should().BeSameAs(expectedResult);
-        }
+    [Test]
+    public void GetRecipientsUntyped_Call_SubscriptionRecipientInfo()
+    {
+        // Arrange
+        var subscriptionCode = this.Fixture.Create<string>();
+        var versions = this.Fixture.Create<DomainObjectVersions<string>>();
+        var expectedResult = this.Fixture.Create<SubscriptionRecipientInfo>();
 
-        [Test]
-        public void GetRecipientsUntyped_Call_SubscriptionRecipientInfo()
-        {
-            // Arrange
-            var subscriptionCode = this.Fixture.Create<string>();
-            var versions = this.Fixture.Create<DomainObjectVersions<string>>();
-            var expectedResult = this.Fixture.Create<SubscriptionRecipientInfo>();
+        this.recipientService
+            .GetSubscriptionRecipientInfo(subscriptionCode, versions)
+            .Returns(expectedResult);
 
-            this.recipientService
-                .GetSubscriptionRecipientInfo(subscriptionCode, versions)
-                .Returns(expectedResult);
+        // Act
+        var sut = this.Fixture.Create<SubscriptionSystemService<ITestBLLContext>>();
 
-            // Act
-            var sut = this.Fixture.Create<SubscriptionSystemService<ITestBLLContext>>();
+        var actualResult = sut.GetRecipientsUntyped(
+                                                    versions.DomainObjectType,
+                                                    versions.Previous,
+                                                    versions.Current,
+                                                    subscriptionCode);
 
-            var actualResult = sut.GetRecipientsUntyped(
-                versions.DomainObjectType,
-                versions.Previous,
-                versions.Current,
-                subscriptionCode);
-
-            // Assert
-            actualResult.Should().BeSameAs(expectedResult);
-        }
+        // Assert
+        actualResult.Should().BeSameAs(expectedResult);
     }
 }

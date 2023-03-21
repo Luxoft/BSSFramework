@@ -1,6 +1,5 @@
-﻿namespace SampleSystem.Domain.Models.Filters
+﻿namespace SampleSystem.Domain.Models.Filters;
+
+public class EmployeeFilterModel : DomainObjectContextFilterModel<Employee>
 {
-    public class EmployeeFilterModel : DomainObjectContextFilterModel<Employee>
-    {
-    }
 }

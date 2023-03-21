@@ -2,10 +2,9 @@
 
 using Framework.Async;
 
-namespace Framework.ServiceModel.Async
+namespace Framework.ServiceModel.Async;
+
+public interface IAsyncSourceByIdentsService<TIdentityObject, TViewItem>
 {
-    public interface IAsyncSourceByIdentsService<TIdentityObject, TViewItem>
-    {
-        IAsyncProcessFunc<ObservableCollection<TIdentityObject>, ObservableCollection<TViewItem>> SourceFunc { get; }
-    }
+    IAsyncProcessFunc<ObservableCollection<TIdentityObject>, ObservableCollection<TViewItem>> SourceFunc { get; }
 }

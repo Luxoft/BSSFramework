@@ -4,81 +4,80 @@ using System.Collections.Generic;
 using NHibernate.Envers.Configuration.Attributes;
 using NHibernate.Mapping;
 
-namespace Framework.DomainDriven.NHibernate.Audit
+namespace Framework.DomainDriven.NHibernate.Audit;
+
+public class AuditEntityService : IAuditAttributeService
 {
-    public class AuditEntityService : IAuditAttributeService
+    private readonly Dictionary<Type, bool> isAuditedDict;
+
+    private readonly Dictionary<Type, Dictionary<Property, bool>> isAuditedPropertyDict;
+
+    private readonly Dictionary<Type, string> typeToAuditTableSchemaDictionary;
+
+    public AuditEntityService()
     {
-        private readonly Dictionary<Type, bool> isAuditedDict;
+        this.isAuditedDict = new Dictionary<Type, bool>();
+        this.isAuditedPropertyDict = new Dictionary<Type, Dictionary<Property, bool>>();
 
-        private readonly Dictionary<Type, Dictionary<Property, bool>> isAuditedPropertyDict;
+        this.typeToAuditTableSchemaDictionary = new Dictionary<Type, string>();
+    }
 
-        private readonly Dictionary<Type, string> typeToAuditTableSchemaDictionary;
+    public void Register(Type type, bool isAudited)
+    {
+        this.isAuditedDict.Add(type, isAudited);
+    }
 
-        public AuditEntityService()
+    public void Register(Type type, string auditTableSchema)
+    {
+        this.typeToAuditTableSchemaDictionary.Add(type, auditTableSchema);
+    }
+
+    public void Register(Property property, bool isAudited)
+    {
+        var mappedClass = property.PersistentClass.MappedClass;
+
+        Dictionary<Property, bool> propertyDict;
+
+        if (!this.isAuditedPropertyDict.TryGetValue(mappedClass, out propertyDict))
         {
-            this.isAuditedDict = new Dictionary<Type, bool>();
-            this.isAuditedPropertyDict = new Dictionary<Type, Dictionary<Property, bool>>();
-
-            this.typeToAuditTableSchemaDictionary = new Dictionary<Type, string>();
+            propertyDict = new Dictionary<Property, bool>();
+            this.isAuditedPropertyDict.Add(mappedClass, propertyDict);
         }
 
-        public void Register(Type type, bool isAudited)
+        propertyDict.Add(property, isAudited);
+    }
+
+    public RelationTargetAuditMode GetAttributeFor(Type type)
+    {
+        bool result;
+        if (!this.isAuditedDict.TryGetValue(type, out result))
         {
-            this.isAuditedDict.Add(type, isAudited);
+            result = true;
         }
 
-        public void Register(Type type, string auditTableSchema)
+        return result ? RelationTargetAuditMode.Audited : RelationTargetAuditMode.NotAudited;
+    }
+
+    public RelationTargetAuditMode GetAttributeFor(Type type, Property property)
+    {
+        Dictionary<Property, bool> propertyDict;
+        var result = true;
+
+        if (this.isAuditedPropertyDict.TryGetValue(type, out propertyDict))
         {
-            this.typeToAuditTableSchemaDictionary.Add(type, auditTableSchema);
-        }
-
-        public void Register(Property property, bool isAudited)
-        {
-            var mappedClass = property.PersistentClass.MappedClass;
-
-            Dictionary<Property, bool> propertyDict;
-
-            if (!this.isAuditedPropertyDict.TryGetValue(mappedClass, out propertyDict))
+            if (!propertyDict.TryGetValue(property, out result))
             {
-                propertyDict = new Dictionary<Property, bool>();
-                this.isAuditedPropertyDict.Add(mappedClass, propertyDict);
+                result = true; // ident property
             }
-
-            propertyDict.Add(property, isAudited);
         }
 
-        public RelationTargetAuditMode GetAttributeFor(Type type)
-        {
-            bool result;
-            if (!this.isAuditedDict.TryGetValue(type, out result))
-            {
-                result = true;
-            }
+        return result ? RelationTargetAuditMode.Audited : RelationTargetAuditMode.NotAudited;
+    }
 
-            return result ? RelationTargetAuditMode.Audited : RelationTargetAuditMode.NotAudited;
-        }
-
-        public RelationTargetAuditMode GetAttributeFor(Type type, Property property)
-        {
-            Dictionary<Property, bool> propertyDict;
-            var result = true;
-
-            if (this.isAuditedPropertyDict.TryGetValue(type, out propertyDict))
-            {
-                if (!propertyDict.TryGetValue(property, out result))
-                {
-                    result = true; // ident property
-                }
-            }
-
-            return result ? RelationTargetAuditMode.Audited : RelationTargetAuditMode.NotAudited;
-        }
-
-        public string GetAuditTableSchemaOrDefault(Type type)
-        {
-            string result;
-            this.typeToAuditTableSchemaDictionary.TryGetValue(type, out result);
-            return result;
-        }
+    public string GetAuditTableSchemaOrDefault(Type type)
+    {
+        string result;
+        this.typeToAuditTableSchemaDictionary.TryGetValue(type, out result);
+        return result;
     }
 }

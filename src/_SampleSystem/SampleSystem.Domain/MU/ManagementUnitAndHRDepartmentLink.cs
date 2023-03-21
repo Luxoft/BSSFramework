@@ -7,104 +7,103 @@ using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain
-{
-    [BLLViewRole, BLLSaveRole, BLLRemoveRole]
-    [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.ManagementUnitAndHRDepartmentLinkView)]
-    [SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.ManagementUnitAndHRDepartmentLinkEdit)]
-    public class ManagementUnitAndHRDepartmentLink :
+namespace SampleSystem.Domain;
+
+[BLLViewRole, BLLSaveRole, BLLRemoveRole]
+[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.ManagementUnitAndHRDepartmentLinkView)]
+[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.ManagementUnitAndHRDepartmentLinkEdit)]
+public class ManagementUnitAndHRDepartmentLink :
         AuditPersistentDomainObjectBase,
         IDetail<ManagementUnit>,
         IDetail<HRDepartment>,
         IVisualIdentityObject
+{
+    private HRDepartment hRDepartment;
+    private ManagementUnit managementUnit;
+
+    public ManagementUnitAndHRDepartmentLink(ManagementUnit managementUnit)
     {
-        private HRDepartment hRDepartment;
-        private ManagementUnit managementUnit;
+        this.managementUnit = managementUnit;
+        this.managementUnit.Maybe(z => z.AddDetail(this));
+    }
 
-        public ManagementUnitAndHRDepartmentLink(ManagementUnit managementUnit)
-        {
-            this.managementUnit = managementUnit;
-            this.managementUnit.Maybe(z => z.AddDetail(this));
-        }
+    public ManagementUnitAndHRDepartmentLink(HRDepartment hRDepartment)
+    {
+        this.hRDepartment = hRDepartment;
+        this.hRDepartment.Maybe(z => z.AddDetail(this));
+    }
 
-        public ManagementUnitAndHRDepartmentLink(HRDepartment hRDepartment)
-        {
-            this.hRDepartment = hRDepartment;
-            this.hRDepartment.Maybe(z => z.AddDetail(this));
-        }
-
-        public ManagementUnitAndHRDepartmentLink(ManagementUnit managementUnit, HRDepartment hRDepartment)
+    public ManagementUnitAndHRDepartmentLink(ManagementUnit managementUnit, HRDepartment hRDepartment)
             : this(managementUnit)
+    {
+        this.hRDepartment = hRDepartment;
+    }
+
+    public ManagementUnitAndHRDepartmentLink()
+    {
+    }
+
+    [UniqueElement]
+    public virtual HRDepartment HRDepartment
+    {
+        get
         {
-            this.hRDepartment = hRDepartment;
+            return this.hRDepartment;
         }
 
-        public ManagementUnitAndHRDepartmentLink()
+        set
         {
+            this.hRDepartment = value;
+        }
+    }
+
+    [CustomSerialization(CustomSerializationMode.ReadOnly, DTORole.Event | DTORole.Integration)]
+    [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client)]
+    [ExpandPath("ManagementUnit.BusinessUnits")]
+    [DetailRole(false)]
+    public virtual IEnumerable<BusinessUnit> LinkedBusinessUnits
+    {
+        get
+        {
+            return this.ManagementUnit.BusinessUnits.ToList(link => link.BusinessUnit);
+        }
+    }
+
+    [UniqueElement]
+    public virtual ManagementUnit ManagementUnit
+    {
+        get
+        {
+            return this.managementUnit;
         }
 
-        [UniqueElement]
-        public virtual HRDepartment HRDepartment
+        set
         {
-            get
-            {
-                return this.hRDepartment;
-            }
-
-            set
-            {
-                this.hRDepartment = value;
-            }
+            this.managementUnit = value;
         }
+    }
 
-        [CustomSerialization(CustomSerializationMode.ReadOnly, DTORole.Event | DTORole.Integration)]
-        [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Client)]
-        [ExpandPath("ManagementUnit.BusinessUnits")]
-        [DetailRole(false)]
-        public virtual IEnumerable<BusinessUnit> LinkedBusinessUnits
+    ManagementUnit IDetail<ManagementUnit>.Master
+    {
+        get
         {
-            get
-            {
-                return this.ManagementUnit.BusinessUnits.ToList(link => link.BusinessUnit);
-            }
+            return this.managementUnit;
         }
+    }
 
-        [UniqueElement]
-        public virtual ManagementUnit ManagementUnit
+    HRDepartment IDetail<HRDepartment>.Master
+    {
+        get
         {
-            get
-            {
-                return this.managementUnit;
-            }
-
-            set
-            {
-                this.managementUnit = value;
-            }
+            return this.hRDepartment;
         }
+    }
 
-        ManagementUnit IDetail<ManagementUnit>.Master
+    string IVisualIdentityObject.Name
+    {
+        get
         {
-            get
-            {
-                return this.managementUnit;
-            }
-        }
-
-        HRDepartment IDetail<HRDepartment>.Master
-        {
-            get
-            {
-                return this.hRDepartment;
-            }
-        }
-
-        string IVisualIdentityObject.Name
-        {
-            get
-            {
-                return this.HRDepartment.Maybe(x => x.Name) + "-" + this.ManagementUnit.Maybe(x => x.Name);
-            }
+            return this.HRDepartment.Maybe(x => x.Name) + "-" + this.ManagementUnit.Maybe(x => x.Name);
         }
     }
 }

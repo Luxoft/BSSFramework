@@ -1,16 +1,15 @@
 ﻿using System;
 
-namespace Framework.Persistent.Mapping
+namespace Framework.Persistent.Mapping;
+
+[AttributeUsage (AttributeTargets.Field)]
+public class NotPersistentFieldAttribute : Attribute
 {
-    [AttributeUsage (AttributeTargets.Field)]
-    public class NotPersistentFieldAttribute : Attribute
-    {
 
-    }
+}
 
-    [AttributeUsage(AttributeTargets.Class)]
-    public class NotPersistentClassAttribute : Attribute
-    {
+[AttributeUsage(AttributeTargets.Class)]
+public class NotPersistentClassAttribute : Attribute
+{
 
-    }
 }

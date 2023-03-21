@@ -3,13 +3,12 @@ using Framework.SecuritySystem;
 
 using SampleSystem.Domain;
 
-namespace SampleSystem.BLL
+namespace SampleSystem.BLL;
+
+public partial class SampleSystemTestCustomContextSecurityObjSecurityService
 {
-    public partial class SampleSystemTestCustomContextSecurityObjSecurityService
+    protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(ContextSecurityOperation<SampleSystemSecurityOperationCode> securityOperation)
     {
-        protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(ContextSecurityOperation<SampleSystemSecurityOperationCode> securityOperation)
-        {
-            return new ConstSecurityProvider<TestCustomContextSecurityObj>(this.AccessDeniedExceptionService, false);
-        }
+        return new ConstSecurityProvider<TestCustomContextSecurityObj>(this.AccessDeniedExceptionService, false);
     }
 }

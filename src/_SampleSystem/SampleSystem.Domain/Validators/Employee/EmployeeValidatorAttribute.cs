@@ -1,12 +1,11 @@
 ﻿using Framework.Validation;
 
-namespace SampleSystem.Domain.Validators.Employee
+namespace SampleSystem.Domain.Validators.Employee;
+
+public sealed class EmployeeValidatorAttribute : ClassValidatorAttribute
 {
-    public sealed class EmployeeValidatorAttribute : ClassValidatorAttribute
+    public override IClassValidator CreateValidator()
     {
-        public override IClassValidator CreateValidator()
-        {
-            return new EmployeeValidator();
-        }
+        return new EmployeeValidator();
     }
 }

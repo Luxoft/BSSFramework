@@ -16,113 +16,112 @@ using SampleSystem.WebApiCore.Controllers.Main;
 
 using PersistentDomainObjectBase = SampleSystem.Domain.PersistentDomainObjectBase;
 
-namespace SampleSystem.IntegrationTests.Workflow
+namespace SampleSystem.IntegrationTests.Workflow;
+
+[TestClass]
+public class AuthPerformanceTests : TestBase
 {
-    [TestClass]
-    public class AuthPerformanceTests : TestBase
+    private const string TestUser = "TestUser";
+
+    private const int Limit = 3;
+
+    private const int SplitBy = 25;
+
+    [TestInitialize]
+    public void SetUp()
     {
-        private const string TestUser = "TestUser";
+        var genLoc = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveLocation());
 
-        private const int Limit = 3;
+        var genEmployee = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveEmployee());
 
-        private const int SplitBy = 25;
+        var genBu = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveBusinessUnit());
 
-        [TestInitialize]
-        public void SetUp()
-        {
-            var genLoc = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveLocation());
+        var genMbu = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveManagementUnit());
 
-            var genEmployee = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveEmployee());
+        var genObjects = this.EvaluateWrite(ctx =>
+                                            {
+                                                var gebObjectsRequest =
+                                                        from emplIdent in genEmployee
+                                                        from locIdent in genLoc
+                                                        from buIdent in genBu
+                                                        from mbuIdent in genMbu
+                                                        select new TestPerformanceObject
+                                                               {
+                                                                       Employee = ctx.Logics.Employee.GetById(emplIdent.Id),
+                                                                       Location = ctx.Logics.Location.GetById(locIdent.Id),
+                                                                       BusinessUnit = ctx.Logics.BusinessUnit.GetById(buIdent.Id),
+                                                                       ManagementUnit = ctx.Logics.ManagementUnit.GetById(mbuIdent.Id),
+                                                                       Name = Guid.NewGuid().ToString()
+                                                               };
 
-            var genBu = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveBusinessUnit());
+                                                var genObjects = gebObjectsRequest.ToList();
 
-            var genMbu = Enumerable.Range(0, Limit).ToList(i => this.DataHelper.SaveManagementUnit());
+                                                ctx.Logics.TestPerformanceObject.Save(genObjects);
 
-            var genObjects = this.EvaluateWrite(ctx =>
-            {
-                var gebObjectsRequest =
-                        from emplIdent in genEmployee
-                        from locIdent in genLoc
-                        from buIdent in genBu
-                        from mbuIdent in genMbu
-                        select new TestPerformanceObject
-                        {
-                            Employee = ctx.Logics.Employee.GetById(emplIdent.Id),
-                            Location = ctx.Logics.Location.GetById(locIdent.Id),
-                            BusinessUnit = ctx.Logics.BusinessUnit.GetById(buIdent.Id),
-                            ManagementUnit = ctx.Logics.ManagementUnit.GetById(mbuIdent.Id),
-                            Name = Guid.NewGuid().ToString()
-                        };
+                                                var testPrincipal = ctx.Authorization.Logics.Principal.GetByNameOrCreate(TestUser);
 
-                var genObjects = gebObjectsRequest.ToList();
+                                                var pfeCache = new DictionaryCache<PersistentDomainObjectBase, PermissionFilterEntity>(domainObj =>
+                                                {
+                                                    var entityType = ctx.Authorization.GetEntityType(domainObj.GetType());
 
-                ctx.Logics.TestPerformanceObject.Save(genObjects);
+                                                    return ctx.Authorization.Logics.PermissionFilterEntity.GetOrCreate(entityType, new SecurityEntity { Id = domainObj.Id });
+                                                });
 
-                var testPrincipal = ctx.Authorization.Logics.Principal.GetByNameOrCreate(TestUser);
+                                                var adminRole = ctx.Authorization.Logics.BusinessRole.GetAdminRole();
 
-                var pfeCache = new DictionaryCache<PersistentDomainObjectBase, PermissionFilterEntity>(domainObj =>
-                {
-                    var entityType = ctx.Authorization.GetEntityType(domainObj.GetType());
+                                                foreach (var genObjectSubEnumerable in genObjects.Split(SplitBy))
+                                                {
+                                                    var genPermission = new Permission(testPrincipal) { Role = adminRole };
 
-                    return ctx.Authorization.Logics.PermissionFilterEntity.GetOrCreate(entityType, new SecurityEntity { Id = domainObj.Id });
-                });
+                                                    foreach (var genObject in genObjectSubEnumerable)
+                                                    {
+                                                        if (!genPermission.FilterItems.Select(fi => fi.Entity.EntityId).Contains(genObject.Employee.Id))
+                                                        {
+                                                            new PermissionFilterItem(genPermission, pfeCache[genObject.Employee]);
+                                                        }
 
-                var adminRole = ctx.Authorization.Logics.BusinessRole.GetAdminRole();
+                                                        if (!genPermission.FilterItems.Select(fi => fi.Entity.EntityId).Contains(genObject.Location.Id))
+                                                        {
+                                                            new PermissionFilterItem(genPermission, pfeCache[genObject.Location]);
+                                                        }
 
-                foreach (var genObjectSubEnumerable in genObjects.Split(SplitBy))
-                {
-                    var genPermission = new Permission(testPrincipal) { Role = adminRole };
+                                                        if (!genPermission.FilterItems.Select(fi => fi.Entity.EntityId).Contains(genObject.BusinessUnit.Id))
+                                                        {
+                                                            new PermissionFilterItem(genPermission, pfeCache[genObject.BusinessUnit]);
+                                                        }
 
-                    foreach (var genObject in genObjectSubEnumerable)
-                    {
-                        if (!genPermission.FilterItems.Select(fi => fi.Entity.EntityId).Contains(genObject.Employee.Id))
-                        {
-                            new PermissionFilterItem(genPermission, pfeCache[genObject.Employee]);
-                        }
+                                                        if (!genPermission.FilterItems.Select(fi => fi.Entity.EntityId).Contains(genObject.ManagementUnit.Id))
+                                                        {
+                                                            new PermissionFilterItem(genPermission, pfeCache[genObject.ManagementUnit]);
+                                                        }
+                                                    }
+                                                }
 
-                        if (!genPermission.FilterItems.Select(fi => fi.Entity.EntityId).Contains(genObject.Location.Id))
-                        {
-                            new PermissionFilterItem(genPermission, pfeCache[genObject.Location]);
-                        }
+                                                ctx.Authorization.Logics.Principal.Save(testPrincipal);
 
-                        if (!genPermission.FilterItems.Select(fi => fi.Entity.EntityId).Contains(genObject.BusinessUnit.Id))
-                        {
-                            new PermissionFilterItem(genPermission, pfeCache[genObject.BusinessUnit]);
-                        }
+                                                return genObjects.Select(obj => obj.Id);
+                                            });
+    }
 
-                        if (!genPermission.FilterItems.Select(fi => fi.Entity.EntityId).Contains(genObject.ManagementUnit.Id))
-                        {
-                            new PermissionFilterItem(genPermission, pfeCache[genObject.ManagementUnit]);
-                        }
-                    }
-                }
+    [TestMethod]
+    public void CreateObjectsWithPermissions_HasAccessToAllObjects()
+    {
+        // Arrange
+        var testController = this.GetControllerEvaluator<TestPerformanceObjectController>(TestUser);
 
-                ctx.Authorization.Logics.Principal.Save(testPrincipal);
+        // Act
+        testController.Evaluate(c => c.GetSimpleTestPerformanceObjects());
+        testController.Evaluate(c => c.GetSimpleTestPerformanceObjects());
 
-                return genObjects.Select(obj => obj.Id);
-            });
-        }
+        var start = DateTime.Now;
 
-        [TestMethod]
-        public void CreateObjectsWithPermissions_HasAccessToAllObjects()
-        {
-            // Arrange
-            var testController = this.GetControllerEvaluator<TestPerformanceObjectController>(TestUser);
+        var testPerformanceObjects = testController.Evaluate(c => c.GetSimpleTestPerformanceObjects());
 
-            // Act
-            testController.Evaluate(c => c.GetSimpleTestPerformanceObjects());
-            testController.Evaluate(c => c.GetSimpleTestPerformanceObjects());
+        var duration = DateTime.Now - start;
 
-            var start = DateTime.Now;
+        Console.WriteLine("WorkTime: " + duration);
 
-            var testPerformanceObjects = testController.Evaluate(c => c.GetSimpleTestPerformanceObjects());
-
-            var duration = DateTime.Now - start;
-
-            Console.WriteLine("WorkTime: " + duration);
-
-            // Assert
-            testPerformanceObjects.Count().Should().Be(Limit * Limit * Limit * Limit);
-        }
+        // Assert
+        testPerformanceObjects.Count().Should().Be(Limit * Limit * Limit * Limit);
     }
 }

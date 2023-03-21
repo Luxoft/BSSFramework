@@ -14,33 +14,31 @@ using AuditPersistentDomainObjectBase = Framework.Configuration.Domain.AuditPers
 using DomainObjectBase = Framework.Configuration.Domain.DomainObjectBase;
 using PersistentDomainObjectBase = Framework.Configuration.Domain.PersistentDomainObjectBase;
 
-namespace SampleSystem.TypeScriptGenerate.Configurations.Environments
+namespace SampleSystem.TypeScriptGenerate.Configurations.Environments;
+
+public class ConfigurationGenerationEnvironment : GenerationEnvironment<DomainObjectBase, PersistentDomainObjectBase, AuditPersistentDomainObjectBase, Guid>,
+                                                  Framework.DomainDriven.BLLCoreGenerator.IGenerationEnvironmentBase,
+                                                  Framework.DomainDriven.DTOGenerator.TypeScript.ITypeScriptGenerationEnvironmentBase
 {
-
-    public class ConfigurationGenerationEnvironment : GenerationEnvironment<DomainObjectBase, PersistentDomainObjectBase, AuditPersistentDomainObjectBase, Guid>,
-                                                      Framework.DomainDriven.BLLCoreGenerator.IGenerationEnvironmentBase,
-                                                      Framework.DomainDriven.DTOGenerator.TypeScript.ITypeScriptGenerationEnvironmentBase
-    {
-        public ConfigurationGenerationEnvironment()
+    public ConfigurationGenerationEnvironment()
             : base(v => v.Id, typeof(DomainObjectFilterModel<>).Assembly)
-        {
-            this.ClientDTO = new ConfigurationDTOGeneratorConfiguration(this);
+    {
+        this.ClientDTO = new ConfigurationDTOGeneratorConfiguration(this);
 
-            this.ConfigurationFacade = new ConfigurationServiceFacadeConfiguration(this);
-        }
+        this.ConfigurationFacade = new ConfigurationServiceFacadeConfiguration(this);
+    }
 
-        public ConfigurationDTOGeneratorConfiguration ClientDTO { get; }
+    public ConfigurationDTOGeneratorConfiguration ClientDTO { get; }
 
-        public ConfigurationServiceFacadeConfiguration ConfigurationFacade { get; }
+    public ConfigurationServiceFacadeConfiguration ConfigurationFacade { get; }
 
 
-        public override Type SecurityOperationCodeType { get; } = typeof(ConfigurationSecurityOperationCode);
+    public override Type SecurityOperationCodeType { get; } = typeof(ConfigurationSecurityOperationCode);
 
-        public override Type OperationContextType { get; } = typeof(ConfigurationOperationContext);
+    public override Type OperationContextType { get; } = typeof(ConfigurationOperationContext);
 
-        protected override IEnumerable<Assembly> GetDomainObjectAssemblies()
-        {
-            return base.GetDomainObjectAssemblies().Concat(new[] { typeof(ConfigurationSecurityOperationCode).Assembly });
-        }
+    protected override IEnumerable<Assembly> GetDomainObjectAssemblies()
+    {
+        return base.GetDomainObjectAssemblies().Concat(new[] { typeof(ConfigurationSecurityOperationCode).Assembly });
     }
 }

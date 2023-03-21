@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
-{
-    public interface ILambdaObject : IVisualIdentityObject, IValueObject<string>
-    {
+﻿namespace Framework.Persistent;
 
-    }
+public interface ILambdaObject : IVisualIdentityObject, IValueObject<string>
+{
+
 }

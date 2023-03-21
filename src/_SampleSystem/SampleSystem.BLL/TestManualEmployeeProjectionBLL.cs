@@ -5,10 +5,9 @@ using Framework.DomainDriven;
 using SampleSystem.Domain.Models.Filters;
 using SampleSystem.Domain.Projections;
 
-namespace SampleSystem.BLL
+namespace SampleSystem.BLL;
+
+public partial class TestLegacyEmployeeBLL
 {
-    public partial class TestLegacyEmployeeBLL
-    {
-        public List<TestLegacyEmployee> GetListBy(EmployeeFilterModel filter, IFetchContainer<TestLegacyEmployee> fetchs) => throw new System.NotImplementedException();
-    }
+    public List<TestLegacyEmployee> GetListBy(EmployeeFilterModel filter, IFetchContainer<TestLegacyEmployee> fetchs) => throw new System.NotImplementedException();
 }

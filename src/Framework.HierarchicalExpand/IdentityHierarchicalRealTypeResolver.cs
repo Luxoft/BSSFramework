@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace Framework.HierarchicalExpand
+namespace Framework.HierarchicalExpand;
+
+public class IdentityHierarchicalRealTypeResolver : IHierarchicalRealTypeResolver
 {
-    public class IdentityHierarchicalRealTypeResolver : IHierarchicalRealTypeResolver
+    public Type Resolve(Type identity)
     {
-        public Type Resolve(Type identity)
-        {
-            return identity;
-        }
+        return identity;
     }
 }

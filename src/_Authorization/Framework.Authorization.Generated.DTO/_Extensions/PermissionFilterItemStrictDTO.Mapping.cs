@@ -3,18 +3,17 @@ using System.Runtime.Serialization;
 using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
 
-namespace Framework.Authorization.Generated.DTO
-{
-    public partial class AuthorizationServerPrimitiveDTOMappingService
-    {
-        public override void MapPermissionFilterItem(PermissionFilterItemStrictDTO mappingObject, PermissionFilterItem domainObject)
-        {
-            base.MapPermissionFilterItem(mappingObject, domainObject);
+namespace Framework.Authorization.Generated.DTO;
 
-            if (domainObject.Entity == null)
-            {
-                domainObject.Entity = this.GetEntityFunc(mappingObject.EntityType, mappingObject.SecurityEntity);
-            }
+public partial class AuthorizationServerPrimitiveDTOMappingService
+{
+    public override void MapPermissionFilterItem(PermissionFilterItemStrictDTO mappingObject, PermissionFilterItem domainObject)
+    {
+        base.MapPermissionFilterItem(mappingObject, domainObject);
+
+        if (domainObject.Entity == null)
+        {
+            domainObject.Entity = this.GetEntityFunc(mappingObject.EntityType, mappingObject.SecurityEntity);
         }
     }
 }

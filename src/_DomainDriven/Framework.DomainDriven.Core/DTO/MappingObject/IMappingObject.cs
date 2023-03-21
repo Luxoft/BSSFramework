@@ -1,19 +1,18 @@
 ﻿using Framework.Persistent;
 
-namespace Framework.DomainDriven
+namespace Framework.DomainDriven;
+
+public interface IMappingObject<in TMappingService, in TDomainObject>
 {
-    public interface IMappingObject<in TMappingService, in TDomainObject>
-    {
-        void MapToDomainObject(TMappingService mappingService, TDomainObject domainObject);
-    }
+    void MapToDomainObject(TMappingService mappingService, TDomainObject domainObject);
+}
 
-    public interface IMappingObject<in TMappingService, in TDomainObject, out TIdent> : IMappingObject<TMappingService, TDomainObject>, IIdentityObject<TIdent>
-    {
+public interface IMappingObject<in TMappingService, in TDomainObject, out TIdent> : IMappingObject<TMappingService, TDomainObject>, IIdentityObject<TIdent>
+{
 
-    }
+}
 
-    public interface IConvertMappingObject<in TMappingService, out TDomainObject>
-    {
-        TDomainObject ToDomainObject(TMappingService mappingService);
-    }
+public interface IConvertMappingObject<in TMappingService, out TDomainObject>
+{
+    TDomainObject ToDomainObject(TMappingService mappingService);
 }

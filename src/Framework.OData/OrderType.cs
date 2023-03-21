@@ -1,14 +1,13 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Framework.OData
-{
-    [DataContract]
-    public enum OrderType
-    {
-        [EnumMember]
-        Asc,
+namespace Framework.OData;
 
-        [EnumMember]
-        Desc
-    }
+[DataContract]
+public enum OrderType
+{
+    [EnumMember]
+    Asc,
+
+    [EnumMember]
+    Desc
 }

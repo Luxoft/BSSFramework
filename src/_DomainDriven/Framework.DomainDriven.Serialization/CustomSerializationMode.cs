@@ -1,13 +1,12 @@
-﻿namespace Framework.DomainDriven.Serialization
+﻿namespace Framework.DomainDriven.Serialization;
+
+public enum CustomSerializationMode
 {
-    public enum CustomSerializationMode
-    {
-        Normal,
+    Normal,
 
-        ReadOnly,
+    ReadOnly,
 
-        Ignore,
+    Ignore,
 
-        FixReference
-    }
+    FixReference
 }

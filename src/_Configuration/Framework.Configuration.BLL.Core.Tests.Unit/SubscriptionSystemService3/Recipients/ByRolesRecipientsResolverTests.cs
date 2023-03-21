@@ -22,280 +22,279 @@ using Framework.UnitTesting;
 using NUnit.Framework;
 using NSubstitute;
 
-namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Recipients
+namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Recipients;
+
+[TestFixture]
+public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
 {
-    [TestFixture]
-    public sealed class ByRolesRecipientsResolverTests : TestFixtureBase
+    private SecurityItemSourceLambdaProcessor<ITestBLLContext> securityItemSourceLambdaProcessor;
+    private DynamicSourceLambdaProcessor<ITestBLLContext> dynamicSourceLambdaProcessor;
+    private ConfigurationContextFacade configurationContextFacade;
+
+    [SetUp]
+    public void SetUp()
     {
-        private SecurityItemSourceLambdaProcessor<ITestBLLContext> securityItemSourceLambdaProcessor;
-        private DynamicSourceLambdaProcessor<ITestBLLContext> dynamicSourceLambdaProcessor;
-        private ConfigurationContextFacade configurationContextFacade;
+        //var subscriptionDynamicSourceLegacyLambdaProcessorMock = this.Fixture.RegisterStub<>()
 
-        [SetUp]
-        public void SetUp()
-        {
-            //var subscriptionDynamicSourceLegacyLambdaProcessorMock = this.Fixture.RegisterStub<>()
+        //this.parserFactory.GetBySubscriptionDynamicSourceLegacy<string>().Returns(new SubscriptionDynamicSourceLegacyLambdaProcessor<string>())
 
-            //this.parserFactory.GetBySubscriptionDynamicSourceLegacy<string>().Returns(new SubscriptionDynamicSourceLegacyLambdaProcessor<string>())
+        this.securityItemSourceLambdaProcessor = this.Fixture.RegisterStub<SecurityItemSourceLambdaProcessor<ITestBLLContext>>();
+        this.dynamicSourceLambdaProcessor = this.Fixture.RegisterStub<DynamicSourceLambdaProcessor<ITestBLLContext>>();
+        this.configurationContextFacade = this.Fixture.RegisterStub<ConfigurationContextFacade>();
 
-            this.securityItemSourceLambdaProcessor = this.Fixture.RegisterStub<SecurityItemSourceLambdaProcessor<ITestBLLContext>>();
-            this.dynamicSourceLambdaProcessor = this.Fixture.RegisterStub<DynamicSourceLambdaProcessor<ITestBLLContext>>();
-            this.configurationContextFacade = this.Fixture.RegisterStub<ConfigurationContextFacade>();
+        var lambdaProcessorFactory = this.Fixture.RegisterStub<LambdaProcessorFactory<ITestBLLContext>>();
 
-            var lambdaProcessorFactory = this.Fixture.RegisterStub<LambdaProcessorFactory<ITestBLLContext>>();
-
-            lambdaProcessorFactory
+        lambdaProcessorFactory
                 .Create<SecurityItemSourceLambdaProcessor<ITestBLLContext>>()
                 .Returns(this.securityItemSourceLambdaProcessor);
 
-            lambdaProcessorFactory
+        lambdaProcessorFactory
                 .Create<DynamicSourceLambdaProcessor<ITestBLLContext>>()
                 .Returns(this.dynamicSourceLambdaProcessor);
-        }
+    }
 
-        [Test]
-        public void PublicSurface_NullArguments_ArgumentNullException()
-        {
-            // Arrange
-            var assertion = new GuardClauseAssertion(this.Fixture);
+    [Test]
+    public void PublicSurface_NullArguments_ArgumentNullException()
+    {
+        // Arrange
+        var assertion = new GuardClauseAssertion(this.Fixture);
 
-            // Act
+        // Act
 
-            // Assert
-            assertion.Verify(typeof(ByRolesRecipientsResolver<ITestBLLContext>));
-        }
+        // Assert
+        assertion.Verify(typeof(ByRolesRecipientsResolver<ITestBLLContext>));
+    }
 
-        [Test]
-        public void Resolve_InvalidSourceMode_EmptyResult()
-        {
-            // Arrange
-            var versions = this.Fixture.Create<DomainObjectVersions<string>>();
+    [Test]
+    public void Resolve_InvalidSourceMode_EmptyResult()
+    {
+        // Arrange
+        var versions = this.Fixture.Create<DomainObjectVersions<string>>();
 
-            var subscription = this.Fixture
-                .Build<Subscription>()
-                .With(s => s.DynamicSource, new SubscriptionLambda())
-                .With(s => s.DynamicSourceExpandType, NotificationExpandType.All)
-                .With(s => s.SecurityItems, new List<SubscriptionSecurityItem>())
-                .With(s => s.SubBusinessRoles, new List<SubBusinessRole>())
-                .Create();
+        var subscription = this.Fixture
+                               .Build<Subscription>()
+                               .With(s => s.DynamicSource, new SubscriptionLambda())
+                               .With(s => s.DynamicSourceExpandType, NotificationExpandType.All)
+                               .With(s => s.SecurityItems, new List<SubscriptionSecurityItem>())
+                               .With(s => s.SubBusinessRoles, new List<SubBusinessRole>())
+                               .Create();
 
-            ((List<SubscriptionSecurityItem>)subscription.SecurityItems).Add(new SubscriptionSecurityItem(subscription));
+        ((List<SubscriptionSecurityItem>)subscription.SecurityItems).Add(new SubscriptionSecurityItem(subscription));
 
-            // Act
-            var resolver = this.Fixture.Create<ByRolesRecipientsResolver<ITestBLLContext>>();
-            var result = resolver.Resolve(subscription, versions);
+        // Act
+        var resolver = this.Fixture.Create<ByRolesRecipientsResolver<ITestBLLContext>>();
+        var result = resolver.Resolve(subscription, versions);
 
-            // Assert
-            result.Should().HaveCount(0);
-        }
+        // Assert
+        result.Should().HaveCount(0);
+    }
 
-        [Test]
-        public void Resolve_DynamicSourceMode_Recipient()
-        {
-            // Arrange
-            var businessRole = this.Fixture.Create<SubBusinessRole>();
-            var buisnessRoleIds = new[] { businessRole.BusinessRoleId };
+    [Test]
+    public void Resolve_DynamicSourceMode_Recipient()
+    {
+        // Arrange
+        var businessRole = this.Fixture.Create<SubBusinessRole>();
+        var buisnessRoleIds = new[] { businessRole.BusinessRoleId };
 
-            var versions = this.Fixture.Create<DomainObjectVersions<string>>();
-            var fid = new FilterItemIdentity("name", Guid.NewGuid());
-            var entityType = this.Fixture.Create<EntityType>();
-            var securityType = typeof(object);
+        var versions = this.Fixture.Create<DomainObjectVersions<string>>();
+        var fid = new FilterItemIdentity("name", Guid.NewGuid());
+        var entityType = this.Fixture.Create<EntityType>();
+        var securityType = typeof(object);
 
-            var principals = new[] { this.Fixture.Create<Principal>() };
-            var employees = new RecipientCollection(new[] { this.Fixture.Create<Recipient>() });
+        var principals = new[] { this.Fixture.Create<Principal>() };
+        var employees = new RecipientCollection(new[] { this.Fixture.Create<Recipient>() });
 
-            var subscription = this.Fixture
-                .Build<Subscription>()
-                .With(s => s.DynamicSource, new SubscriptionLambda())
-                .With(s => s.DynamicSourceExpandType, NotificationExpandType.All)
-                .With(s => s.SecurityItems, new List<SubscriptionSecurityItem>())
-                .With(s => s.SubBusinessRoles, new List<SubBusinessRole>())
-                .Create();
+        var subscription = this.Fixture
+                               .Build<Subscription>()
+                               .With(s => s.DynamicSource, new SubscriptionLambda())
+                               .With(s => s.DynamicSourceExpandType, NotificationExpandType.All)
+                               .With(s => s.SecurityItems, new List<SubscriptionSecurityItem>())
+                               .With(s => s.SubBusinessRoles, new List<SubBusinessRole>())
+                               .Create();
 
-            ((List<SubBusinessRole>)subscription.SubBusinessRoles).Add(businessRole);
+        ((List<SubBusinessRole>)subscription.SubBusinessRoles).Add(businessRole);
 
-            this.configurationContextFacade
-                .GetNotificationPrincipals(
-                    Arg.Is<Guid[]>(v => v.SequenceEqual(buisnessRoleIds)),
-                    Arg.Is<IEnumerable<NotificationFilterGroup>>(v => v != null))
-                .Returns(principals);
+        this.configurationContextFacade
+            .GetNotificationPrincipals(
+                                       Arg.Is<Guid[]>(v => v.SequenceEqual(buisnessRoleIds)),
+                                       Arg.Is<IEnumerable<NotificationFilterGroup>>(v => v != null))
+            .Returns(principals);
 
-            this.dynamicSourceLambdaProcessor
-                .Invoke(subscription, versions)
-                .Returns(new[] { fid });
+        this.dynamicSourceLambdaProcessor
+            .Invoke(subscription, versions)
+            .Returns(new[] { fid });
 
-            this.configurationContextFacade
-                .GetEntityType(fid.EntityName.ToLowerInvariant())
-                .Returns(entityType);
+        this.configurationContextFacade
+            .GetEntityType(fid.EntityName.ToLowerInvariant())
+            .Returns(entityType);
 
-            this.configurationContextFacade
-                .GetSecurityType(entityType)
-                .Returns(securityType);
+        this.configurationContextFacade
+            .GetSecurityType(entityType)
+            .Returns(securityType);
 
-            this.configurationContextFacade
-                .ConvertPrincipals(principals)
-                .Returns(employees);
+        this.configurationContextFacade
+            .ConvertPrincipals(principals)
+            .Returns(employees);
 
-            // Act
-            var resolver = this.Fixture.Create<ByRolesRecipientsResolver<ITestBLLContext>>();
-            var recipient = resolver.Resolve(subscription, versions).Single();
+        // Act
+        var resolver = this.Fixture.Create<ByRolesRecipientsResolver<ITestBLLContext>>();
+        var recipient = resolver.Resolve(subscription, versions).Single();
 
-            // Assert
-            recipient.Login.Should().Be(employees.Single().Login);
-            recipient.Email.Should().Be(employees.Single().Email);
-        }
+        // Assert
+        recipient.Login.Should().Be(employees.Single().Login);
+        recipient.Email.Should().Be(employees.Single().Email);
+    }
 
-        [Test]
-        public void Resolve_NonContextSourceMode_Recipient()
-        {
-            // Arrange
-            var versions = this.Fixture.Create<DomainObjectVersions<string>>();
+    [Test]
+    public void Resolve_NonContextSourceMode_Recipient()
+    {
+        // Arrange
+        var versions = this.Fixture.Create<DomainObjectVersions<string>>();
 
-            var businessRole = this.Fixture.Create<SubBusinessRole>();
-            var buisnessRoleIds = new[] { businessRole.BusinessRoleId };
+        var businessRole = this.Fixture.Create<SubBusinessRole>();
+        var buisnessRoleIds = new[] { businessRole.BusinessRoleId };
 
-            var principals = new[] { this.Fixture.Create<Principal>() };
-            var employees = new RecipientCollection(new[] { this.Fixture.Create<Recipient>() });
+        var principals = new[] { this.Fixture.Create<Principal>() };
+        var employees = new RecipientCollection(new[] { this.Fixture.Create<Recipient>() });
 
-            var subscription = this.Fixture
-                .Build<Subscription>()
-                .With(s => s.DynamicSource, default(SubscriptionLambda))
-                .With(s => s.DynamicSourceExpandType)
-                .With(s => s.SecurityItems, new List<SubscriptionSecurityItem>())
-                .With(s => s.SubBusinessRoles, new List<SubBusinessRole>())
-                .Create();
+        var subscription = this.Fixture
+                               .Build<Subscription>()
+                               .With(s => s.DynamicSource, default(SubscriptionLambda))
+                               .With(s => s.DynamicSourceExpandType)
+                               .With(s => s.SecurityItems, new List<SubscriptionSecurityItem>())
+                               .With(s => s.SubBusinessRoles, new List<SubBusinessRole>())
+                               .Create();
 
-            ((List<SubBusinessRole>)subscription.SubBusinessRoles).Add(businessRole);
+        ((List<SubBusinessRole>)subscription.SubBusinessRoles).Add(businessRole);
 
-            this.configurationContextFacade
-                .GetNotificationPrincipals(Arg.Is<Guid[]>(v => v.SequenceEqual(buisnessRoleIds)))
-                .Returns(principals);
+        this.configurationContextFacade
+            .GetNotificationPrincipals(Arg.Is<Guid[]>(v => v.SequenceEqual(buisnessRoleIds)))
+            .Returns(principals);
 
-            this.configurationContextFacade
-                .ConvertPrincipals(principals)
-                .Returns(employees);
+        this.configurationContextFacade
+            .ConvertPrincipals(principals)
+            .Returns(employees);
 
-            // Act
-            var resolver = this.Fixture.Create<ByRolesRecipientsResolver<ITestBLLContext>>();
-            var recipient = resolver.Resolve(subscription, versions).Single();
+        // Act
+        var resolver = this.Fixture.Create<ByRolesRecipientsResolver<ITestBLLContext>>();
+        var recipient = resolver.Resolve(subscription, versions).Single();
 
-            // Assert
-            recipient.Login.Should().Be(employees.Single().Login);
-            recipient.Email.Should().Be(employees.Single().Email);
-        }
+        // Assert
+        recipient.Login.Should().Be(employees.Single().Login);
+        recipient.Email.Should().Be(employees.Single().Email);
+    }
 
-        [Test]
-        public void Resolve_TypedSourceMode_Recipient()
-        {
-            // Arrange
-            var versions = this.Fixture.Create<DomainObjectVersions<string>>();
+    [Test]
+    public void Resolve_TypedSourceMode_Recipient()
+    {
+        // Arrange
+        var versions = this.Fixture.Create<DomainObjectVersions<string>>();
 
-            var subscription = this.Fixture
-                                   .Build<Subscription>()
-                                   .With(s => s.DynamicSource, default(SubscriptionLambda))
-                                   .With(s => s.DynamicSourceExpandType)
-                                   .With(s => s.SecurityItems, new List<SubscriptionSecurityItem>())
-                                   .With(s => s.SubBusinessRoles, new List<SubBusinessRole>())
-                                   .Create();
+        var subscription = this.Fixture
+                               .Build<Subscription>()
+                               .With(s => s.DynamicSource, default(SubscriptionLambda))
+                               .With(s => s.DynamicSourceExpandType)
+                               .With(s => s.SecurityItems, new List<SubscriptionSecurityItem>())
+                               .With(s => s.SubBusinessRoles, new List<SubBusinessRole>())
+                               .Create();
 
-            var securityItem = this.Fixture
-                .Build<SubscriptionSecurityItem>()
-                .With(item => item.Source, new SubscriptionLambda() { AuthDomainType = typeof(IdentityObject) })
-                .With(item => item.Subscription, subscription)
-                .Create();
+        var securityItem = this.Fixture
+                               .Build<SubscriptionSecurityItem>()
+                               .With(item => item.Source, new SubscriptionLambda() { AuthDomainType = typeof(IdentityObject) })
+                               .With(item => item.Subscription, subscription)
+                               .Create();
 
-            var businessRole = this.Fixture.Build<SubBusinessRole>().With(item => item.Subscription, subscription).Create();
-            var buisnessRoleIds = new[] { businessRole.BusinessRoleId };
+        var businessRole = this.Fixture.Build<SubBusinessRole>().With(item => item.Subscription, subscription).Create();
+        var buisnessRoleIds = new[] { businessRole.BusinessRoleId };
 
-            var identityObject = this.Fixture.Create<IdentityObject>();
+        var identityObject = this.Fixture.Create<IdentityObject>();
 
-            var principals = new[] { this.Fixture.Create<Principal>() };
-            var employees = new RecipientCollection(new[] { this.Fixture.Create<Recipient>() });
+        var principals = new[] { this.Fixture.Create<Principal>() };
+        var employees = new RecipientCollection(new[] { this.Fixture.Create<Recipient>() });
 
 
-            ((List<SubBusinessRole>)subscription.SubBusinessRoles).Add(businessRole);
-            ((List<SubscriptionSecurityItem>)subscription.SecurityItems).Add(securityItem);
+        ((List<SubBusinessRole>)subscription.SubBusinessRoles).Add(businessRole);
+        ((List<SubscriptionSecurityItem>)subscription.SecurityItems).Add(securityItem);
 
-            this.configurationContextFacade
-                .GetNotificationPrincipals(
-                    Arg.Is<Guid[]>(v => v.SequenceEqual(buisnessRoleIds)),
-                    Arg.Is<IEnumerable<NotificationFilterGroup>>(v => v != null))
-                .Returns(principals);
+        this.configurationContextFacade
+            .GetNotificationPrincipals(
+                                       Arg.Is<Guid[]>(v => v.SequenceEqual(buisnessRoleIds)),
+                                       Arg.Is<IEnumerable<NotificationFilterGroup>>(v => v != null))
+            .Returns(principals);
 
-            this.securityItemSourceLambdaProcessor
-                .Invoke<string, IdentityObject>(securityItem, versions)
-                .Returns(new[] { identityObject });
+        this.securityItemSourceLambdaProcessor
+            .Invoke<string, IdentityObject>(securityItem, versions)
+            .Returns(new[] { identityObject });
 
-            this.configurationContextFacade
-                .ConvertPrincipals(principals)
-                .Returns(employees);
+        this.configurationContextFacade
+            .ConvertPrincipals(principals)
+            .Returns(employees);
 
-            // Act
-            var resolver = this.Fixture.Create<ByRolesRecipientsResolver<ITestBLLContext>>();
-            var recipient = resolver.Resolve(subscription, versions).Single();
+        // Act
+        var resolver = this.Fixture.Create<ByRolesRecipientsResolver<ITestBLLContext>>();
+        var recipient = resolver.Resolve(subscription, versions).Single();
 
-            // Assert
-            recipient.Login.Should().Be(employees.Single().Login);
-            recipient.Email.Should().Be(employees.Single().Email);
-        }
+        // Assert
+        recipient.Login.Should().Be(employees.Single().Login);
+        recipient.Email.Should().Be(employees.Single().Email);
+    }
 
-        [Test]
-        public void Resolve_TypedSourceMode_AuthDomainTypeSpecified_Recipient()
-        {
-            // Arrange
-            var versions = this.Fixture.Create<DomainObjectVersions<string>>();
-            var sourceLambda = new SubscriptionLambda { AuthDomainType = typeof(IdentityObject) };
+    [Test]
+    public void Resolve_TypedSourceMode_AuthDomainTypeSpecified_Recipient()
+    {
+        // Arrange
+        var versions = this.Fixture.Create<DomainObjectVersions<string>>();
+        var sourceLambda = new SubscriptionLambda { AuthDomainType = typeof(IdentityObject) };
 
-            var securityItem = this.Fixture
-                .Build<SubscriptionSecurityItem>().With(item => item.Source, sourceLambda)
-                .Create();
+        var securityItem = this.Fixture
+                               .Build<SubscriptionSecurityItem>().With(item => item.Source, sourceLambda)
+                               .Create();
 
-            var businessRole = this.Fixture.Create<SubBusinessRole>();
-            var buisnessRoleIds = new[] { businessRole.BusinessRoleId };
+        var businessRole = this.Fixture.Create<SubBusinessRole>();
+        var buisnessRoleIds = new[] { businessRole.BusinessRoleId };
 
-            var identityObject = this.Fixture.Create<IdentityObject>();
+        var identityObject = this.Fixture.Create<IdentityObject>();
 
-            var principals = new[] { this.Fixture.Create<Principal>() };
-            var employees = new RecipientCollection(new[] { this.Fixture.Create<Recipient>() });
+        var principals = new[] { this.Fixture.Create<Principal>() };
+        var employees = new RecipientCollection(new[] { this.Fixture.Create<Recipient>() });
 
-            var subscription = this.Fixture
-                .Build<Subscription>()
-                .With(s => s.DynamicSource, default(SubscriptionLambda))
-                .With(s => s.DynamicSourceExpandType)
-                .With(s => s.SecurityItems, new List<SubscriptionSecurityItem>())
-                .With(s => s.SubBusinessRoles, new List<SubBusinessRole>())
-                .Create();
+        var subscription = this.Fixture
+                               .Build<Subscription>()
+                               .With(s => s.DynamicSource, default(SubscriptionLambda))
+                               .With(s => s.DynamicSourceExpandType)
+                               .With(s => s.SecurityItems, new List<SubscriptionSecurityItem>())
+                               .With(s => s.SubBusinessRoles, new List<SubBusinessRole>())
+                               .Create();
 
-            ((List<SubBusinessRole>)subscription.SubBusinessRoles).Add(businessRole);
-            ((List<SubscriptionSecurityItem>)subscription.SecurityItems).Add(securityItem);
+        ((List<SubBusinessRole>)subscription.SubBusinessRoles).Add(businessRole);
+        ((List<SubscriptionSecurityItem>)subscription.SecurityItems).Add(securityItem);
 
-            //this.configurationContextFacade
-            //    .GetSecurityType(securityItem.Id)
-            //    .Returns(default(Type))
-                //.Repeat.Never()
-                ;
+        //this.configurationContextFacade
+        //    .GetSecurityType(securityItem.Id)
+        //    .Returns(default(Type))
+        //.Repeat.Never()
+        ;
 
-            this.configurationContextFacade
-                .GetNotificationPrincipals(
-                    Arg.Is<Guid[]>(v => v.SequenceEqual(buisnessRoleIds)),
-                    Arg.Is<IEnumerable<NotificationFilterGroup>>(z => z != null))
-                .Returns(principals);
+        this.configurationContextFacade
+            .GetNotificationPrincipals(
+                                       Arg.Is<Guid[]>(v => v.SequenceEqual(buisnessRoleIds)),
+                                       Arg.Is<IEnumerable<NotificationFilterGroup>>(z => z != null))
+            .Returns(principals);
 
-            this.securityItemSourceLambdaProcessor
-                .Invoke<string, IdentityObject>(securityItem, versions)
-                .Returns(new[] { identityObject });
+        this.securityItemSourceLambdaProcessor
+            .Invoke<string, IdentityObject>(securityItem, versions)
+            .Returns(new[] { identityObject });
 
-            this.configurationContextFacade
-                .ConvertPrincipals(principals)
-                .Returns(employees);
+        this.configurationContextFacade
+            .ConvertPrincipals(principals)
+            .Returns(employees);
 
-            // Act
-            var resolver = this.Fixture.Create<ByRolesRecipientsResolver<ITestBLLContext>>();
-            var recipient = resolver.Resolve(subscription, versions).Single();
+        // Act
+        var resolver = this.Fixture.Create<ByRolesRecipientsResolver<ITestBLLContext>>();
+        var recipient = resolver.Resolve(subscription, versions).Single();
 
-            // Assert
-            recipient.Login.Should().Be(employees.Single().Login);
-            recipient.Email.Should().Be(employees.Single().Email);
-        }
+        // Assert
+        recipient.Login.Should().Be(employees.Single().Login);
+        recipient.Email.Should().Be(employees.Single().Email);
     }
 }

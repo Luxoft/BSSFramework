@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface ICountryObject<out TCountry>
 {
-    public interface ICountryObject<out TCountry>
-    {
-        TCountry Country { get; }
-    }
+    TCountry Country { get; }
 }

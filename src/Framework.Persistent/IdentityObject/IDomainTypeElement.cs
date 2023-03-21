@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface IDomainTypeElement<out TDomainType>
 {
-    public interface IDomainTypeElement<out TDomainType>
-    {
-        TDomainType DomainType { get; }
-    }
+    TDomainType DomainType { get; }
 }

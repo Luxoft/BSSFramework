@@ -2,17 +2,16 @@
 
 using Framework.Validation;
 
-namespace Framework.DomainDriven.BLL
+namespace Framework.DomainDriven.BLL;
+
+/// <summary>
+/// Атрибут для проверки неизменяемости свойства
+/// </summary>
+[AttributeUsage(AttributeTargets.Property)]
+public class FixedPropertyValidatorAttribute : PropertyValidatorAttribute
 {
-    /// <summary>
-    /// Атрибут для проверки неизменяемости свойства
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Property)]
-    public class FixedPropertyValidatorAttribute : PropertyValidatorAttribute
+    public override IPropertyValidator CreateValidator()
     {
-        public override IPropertyValidator CreateValidator()
-        {
-            return new FixedPropertyValidator();
-        }
+        return new FixedPropertyValidator();
     }
 }

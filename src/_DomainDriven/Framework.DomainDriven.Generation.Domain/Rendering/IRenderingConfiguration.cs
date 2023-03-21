@@ -1,7 +1,6 @@
-﻿namespace Framework.DomainDriven.Generation.Domain
+﻿namespace Framework.DomainDriven.Generation.Domain;
+
+public interface IRenderingConfiguration
 {
-    public interface IRenderingConfiguration
-    {
-        string Namespace { get; }
-    }
+    string Namespace { get; }
 }

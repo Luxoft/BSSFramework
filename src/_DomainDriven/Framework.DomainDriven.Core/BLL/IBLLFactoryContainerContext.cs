@@ -1,7 +1,6 @@
-﻿namespace Framework.DomainDriven.BLL
+﻿namespace Framework.DomainDriven.BLL;
+
+public interface IBLLFactoryContainerContext<out TBLLFactoryContainer>
 {
-    public interface IBLLFactoryContainerContext<out TBLLFactoryContainer>
-    {
-        TBLLFactoryContainer Logics { get; }
-    }
+    TBLLFactoryContainer Logics { get; }
 }

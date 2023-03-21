@@ -1,25 +1,24 @@
-﻿namespace Framework.Core.Services
+﻿namespace Framework.Core.Services;
+
+public static class UserAuthenticationService
 {
-    public static class UserAuthenticationService
+    public static IUserAuthenticationService CreateFor(string userName)
     {
-        public static IUserAuthenticationService CreateFor(string userName)
+        return new UserNameAuthenticationService(userName);
+    }
+
+    private class UserNameAuthenticationService : IUserAuthenticationService
+    {
+        private readonly string userName;
+
+        public UserNameAuthenticationService(string userName)
         {
-            return new UserNameAuthenticationService(userName);
+            this.userName = userName;
         }
 
-        private class UserNameAuthenticationService : IUserAuthenticationService
+        public string GetUserName()
         {
-            private readonly string userName;
-
-            public UserNameAuthenticationService(string userName)
-            {
-                this.userName = userName;
-            }
-
-            public string GetUserName()
-            {
-                return this.userName;
-            }
+            return this.userName;
         }
     }
 }

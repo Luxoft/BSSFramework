@@ -1,17 +1,16 @@
 ﻿using System;
 
-namespace Framework.Projection.Lambda
+namespace Framework.Projection.Lambda;
+
+internal class LastProjectionProperty
 {
-    internal class LastProjectionProperty
+    public LastProjectionProperty(string propertyName, ProjectionBuilder elementProjection)
     {
-        public LastProjectionProperty(string propertyName, ProjectionBuilder elementProjection)
-        {
-            this.PropertyName = propertyName ?? throw new ArgumentNullException(nameof(propertyName));
-            this.ElementProjection = elementProjection;
-        }
-
-        public string PropertyName { get; }
-
-        public ProjectionBuilder ElementProjection { get; }
+        this.PropertyName = propertyName ?? throw new ArgumentNullException(nameof(propertyName));
+        this.ElementProjection = elementProjection;
     }
+
+    public string PropertyName { get; }
+
+    public ProjectionBuilder ElementProjection { get; }
 }

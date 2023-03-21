@@ -1,14 +1,13 @@
 ﻿using System;
 
-namespace Framework.DomainDriven.ServiceModel.IAD
+namespace Framework.DomainDriven.ServiceModel.IAD;
+
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
+public class AutoRequestPropertyAttribute : Attribute
 {
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
-    public class AutoRequestPropertyAttribute : Attribute
+    public int OrderIndex
     {
-        public int OrderIndex
-        {
-            get;
-            set;
-        }
+        get;
+        set;
     }
 }

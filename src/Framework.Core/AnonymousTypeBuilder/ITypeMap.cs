@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 
-namespace Framework.Core
-{
-    public interface ITypeMap
-    {
-        string Name { get; }
-    }
+namespace Framework.Core;
 
-    public interface ITypeMap<out TMember> : ITypeMap
+public interface ITypeMap
+{
+    string Name { get; }
+}
+
+public interface ITypeMap<out TMember> : ITypeMap
         where TMember : ITypeMapMember
-    {
-        IEnumerable<TMember> Members { get; }
-    }
+{
+    IEnumerable<TMember> Members { get; }
 }

@@ -1,9 +1,8 @@
-﻿namespace Framework.Persistent.Mapping
+﻿namespace Framework.Persistent.Mapping;
+
+public enum CascadeMode
 {
-    public enum CascadeMode
-    {
-        Enabled,
-        Auto,
-        Disabled
-    }
+    Enabled,
+    Auto,
+    Disabled
 }

@@ -1,15 +1,14 @@
 ﻿using System;
 
-namespace Framework.Persistent
-{
-    [AttributeUsage(AttributeTargets.Property)]
-    public class RoundDecimalAttribute : NormalizeAttribute
-    {
-        public RoundDecimalAttribute(int decimals)
-        {
-            this.Decimals = decimals;
-        }
+namespace Framework.Persistent;
 
-        public int Decimals { get; private set; }
+[AttributeUsage(AttributeTargets.Property)]
+public class RoundDecimalAttribute : NormalizeAttribute
+{
+    public RoundDecimalAttribute(int decimals)
+    {
+        this.Decimals = decimals;
     }
+
+    public int Decimals { get; private set; }
 }

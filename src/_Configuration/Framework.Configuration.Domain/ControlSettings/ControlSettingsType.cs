@@ -1,15 +1,13 @@
-﻿namespace Framework.Configuration.Domain
-{
+﻿namespace Framework.Configuration.Domain;
 
-    public enum ControlSettingsType
-    {
-        Column,
-        Composite,
-        PropertyUnion,
-        Connector,
-        Filter,
-        MultiValueFilter,
-        StringValueFilter,
-        RangeValueFilter
-    }
+public enum ControlSettingsType
+{
+    Column,
+    Composite,
+    PropertyUnion,
+    Connector,
+    Filter,
+    MultiValueFilter,
+    StringValueFilter,
+    RangeValueFilter
 }

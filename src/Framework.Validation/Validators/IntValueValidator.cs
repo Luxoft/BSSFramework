@@ -1,38 +1,37 @@
-﻿namespace Framework.Validation
+﻿namespace Framework.Validation;
+
+public class IntValueValidator : IPropertyValidator<object, int>
 {
-    public class IntValueValidator : IPropertyValidator<object, int>
+    private readonly int _min;
+    private readonly int _max;
+
+    public IntValueValidator(int min, int max)
     {
-        private readonly int _min;
-        private readonly int _max;
+        this._min = min;
+        this._max = max;
+    }
 
-        public IntValueValidator(int min, int max)
+
+    public ValidationResult GetValidationResult(IPropertyValidationContext<object, int> context)
+    {
+        return ValidationResult.FromCondition(
+                                              this._min <= context.Value && context.Value <= this._max,
+                                              () => $"The value of {context.GetPropertyName()} property of {context.GetSourceTypeName()} should between {this.GetDesignRange()}");
+    }
+
+
+    private string GetDesignRange()
+    {
+        if (this._max == int.MaxValue)
         {
-            this._min = min;
-            this._max = max;
+            return this._min.ToString();
         }
 
-
-        public ValidationResult GetValidationResult(IPropertyValidationContext<object, int> context)
+        if (this._min == int.MinValue)
         {
-            return ValidationResult.FromCondition(
-                this._min <= context.Value && context.Value <= this._max,
-                () => $"The value of {context.GetPropertyName()} property of {context.GetSourceTypeName()} should between {this.GetDesignRange()}");
+            return this._max.ToString();
         }
 
-
-        private string GetDesignRange()
-        {
-            if (this._max == int.MaxValue)
-            {
-                return this._min.ToString();
-            }
-
-            if (this._min == int.MinValue)
-            {
-                return this._max.ToString();
-            }
-
-            return $"{this._min}-{this._max}";
-        }
+        return $"{this._min}-{this._max}";
     }
 }

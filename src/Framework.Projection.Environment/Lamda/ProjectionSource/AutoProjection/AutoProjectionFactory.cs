@@ -7,90 +7,89 @@ using Framework.Persistent;
 
 using JetBrains.Annotations;
 
-namespace Framework.Projection.Lambda
+namespace Framework.Projection.Lambda;
+
+internal class AutoProjectionFactory : IFactory<ProjectionBuilder>
 {
-    internal class AutoProjectionFactory : IFactory<ProjectionBuilder>
+    private readonly ProjectionLambdaEnvironment environment;
+
+    private readonly ProjectionBuilder baseProjection;
+
+    public AutoProjectionFactory(ProjectionLambdaEnvironment environment, ProjectionBuilder baseProjection)
     {
-        private readonly ProjectionLambdaEnvironment environment;
+        this.environment = environment ?? throw new ArgumentNullException(nameof(environment));
+        this.baseProjection = baseProjection ?? throw new ArgumentNullException(nameof(baseProjection));
+    }
 
-        private readonly ProjectionBuilder baseProjection;
+    public ProjectionBuilder Create()
+    {
+        var defaultProperties = this.baseProjection.Properties.Where(prop => prop.ElementProjection == null || prop.ElementProjection.Role == ProjectionRole.Default).ToList();
 
-        public AutoProjectionFactory(ProjectionLambdaEnvironment environment, ProjectionBuilder baseProjection)
-        {
-            this.environment = environment ?? throw new ArgumentNullException(nameof(environment));
-            this.baseProjection = baseProjection ?? throw new ArgumentNullException(nameof(baseProjection));
-        }
+        var externalNodes = defaultProperties.Select(prop => new ProjectionPath(prop.Path.WithExpand(), new LastProjectionProperty(prop.Name, prop.ElementProjection))).ToNodes();
 
-        public ProjectionBuilder Create()
-        {
-            var defaultProperties = this.baseProjection.Properties.Where(prop => prop.ElementProjection == null || prop.ElementProjection.Role == ProjectionRole.Default).ToList();
+        return this.InternalCreate(this.baseProjection.SourceType, this.baseProjection.Name, externalNodes);
+    }
 
-            var externalNodes = defaultProperties.Select(prop => new ProjectionPath(prop.Path.WithExpand(), new LastProjectionProperty(prop.Name, prop.ElementProjection))).ToNodes();
+    private ProjectionBuilder InternalCreate(Type domainType, string projectionName, IEnumerable<Node<ProjectionNodeValue>> nodes)
+    {
+        if (projectionName == null) throw new ArgumentNullException(nameof(projectionName));
+        if (nodes == null) throw new ArgumentNullException(nameof(nodes));
 
-            return this.InternalCreate(this.baseProjection.SourceType, this.baseProjection.Name, externalNodes);
-        }
+        var properties = from node in nodes
 
-        private ProjectionBuilder InternalCreate(Type domainType, string projectionName, IEnumerable<Node<ProjectionNodeValue>> nodes)
-        {
-            if (projectionName == null) throw new ArgumentNullException(nameof(projectionName));
-            if (nodes == null) throw new ArgumentNullException(nameof(nodes));
+                         let propertyPair = node.Value
 
-            var properties = from node in nodes
+                         let property = propertyPair.Property
 
-                             let propertyPair = node.Value
+                         where !this.environment.IsIdentityProperty(property)
 
-                             let property = propertyPair.Property
+                         from projectionProperty in this.InternalCreateProperties(domainType, projectionName, node)
 
-                             where !this.environment.IsIdentityProperty(property)
+                         select projectionProperty;
 
-                             from projectionProperty in this.InternalCreateProperties(domainType, projectionName, node)
-
-                             select projectionProperty;
-
-            return new ProjectionBuilder(domainType)
-                   {
+        return new ProjectionBuilder(domainType)
+               {
                        Name = projectionName,
                        Role = ProjectionRole.AutoNode,
                        Properties = properties.ToList()
-                   };
-        }
+               };
+    }
 
-        private IEnumerable<ProjectionPropertyBuilder> InternalCreateProperties([NotNull] Type domainType, [NotNull] string projectionName, [NotNull] Node<ProjectionNodeValue> node)
+    private IEnumerable<ProjectionPropertyBuilder> InternalCreateProperties([NotNull] Type domainType, [NotNull] string projectionName, [NotNull] Node<ProjectionNodeValue> node)
+    {
+        if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+        if (projectionName == null) throw new ArgumentNullException(nameof(projectionName));
+        if (node == null) throw new ArgumentNullException(nameof(node));
+
+        var property = node.Value.Property;
+
+
+        if (this.environment.IsPersistent(property.PropertyType) && node.Children.Any())
         {
-            if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-            if (projectionName == null) throw new ArgumentNullException(nameof(projectionName));
-            if (node == null) throw new ArgumentNullException(nameof(node));
+            var elementProjection = this.InternalCreate(
+                                                        property.PropertyType.GetCollectionElementTypeOrSelf(),
+                                                        $"{projectionName}_AutoProp_{property.Name}",
+                                                        node.Children);
 
-            var property = node.Value.Property;
-
-
-            if (this.environment.IsPersistent(property.PropertyType) && node.Children.Any())
-            {
-                var elementProjection = this.InternalCreate(
-                    property.PropertyType.GetCollectionElementTypeOrSelf(),
-                    $"{projectionName}_AutoProp_{property.Name}",
-                    node.Children);
-
-                yield return new ProjectionPropertyBuilder(property.ToLambdaExpression(domainType), "_Auto")
-                             {
+            yield return new ProjectionPropertyBuilder(property.ToLambdaExpression(domainType), "_Auto")
+                         {
                                  ElementProjection = elementProjection,
                                  Role = ProjectionPropertyRole.AutoNode,
                                  IgnoreSerialization = true
-                             };
-            }
-            else
+                         };
+        }
+        else
+        {
+            foreach (var projectionPath in node.ToPaths())
             {
-                foreach (var projectionPath in node.ToPaths())
-                {
-                    var lastPropertyValue = projectionPath.LastProperty;
+                var lastPropertyValue = projectionPath.LastProperty;
 
-                    yield return new ProjectionPropertyBuilder(projectionPath.PropertyPath.ToLambdaExpression(domainType), $"_Last_{lastPropertyValue.PropertyName}")
-                    {
-                        Role = ProjectionPropertyRole.LastAutoNode,
-                        IgnoreSerialization = true,
-                        ElementProjection = lastPropertyValue.ElementProjection
-                    };
-                }
+                yield return new ProjectionPropertyBuilder(projectionPath.PropertyPath.ToLambdaExpression(domainType), $"_Last_{lastPropertyValue.PropertyName}")
+                             {
+                                     Role = ProjectionPropertyRole.LastAutoNode,
+                                     IgnoreSerialization = true,
+                                     ElementProjection = lastPropertyValue.ElementProjection
+                             };
             }
         }
     }

@@ -5,32 +5,31 @@ using Framework.Core;
 
 using JetBrains.Annotations;
 
-namespace Framework.DomainDriven.BLL
+namespace Framework.DomainDriven.BLL;
+
+public interface IOperationBLLBase<in TDomainObject>
 {
-    public interface IOperationBLLBase<in TDomainObject>
+    void Save([NotNull] TDomainObject domainObject);
+
+
+    void Remove([NotNull] TDomainObject domainObject);
+}
+
+public static class OperationBLLBaseExtensions
+{
+    public static void Save<TDomainObject>([NotNull] this IOperationBLLBase<TDomainObject> bll, [NotNull] IEnumerable<TDomainObject> domainObjects)
     {
-        void Save([NotNull] TDomainObject domainObject);
+        if (bll == null) throw new ArgumentNullException(nameof(bll));
+        if (domainObjects == null) throw new ArgumentNullException(nameof(domainObjects));
 
-
-        void Remove([NotNull] TDomainObject domainObject);
+        domainObjects.Foreach(bll.Save);
     }
 
-    public static class OperationBLLBaseExtensions
+    public static void Remove<TDomainObject>([NotNull] this IOperationBLLBase<TDomainObject> bll, [NotNull] IEnumerable<TDomainObject> domainObjects)
     {
-        public static void Save<TDomainObject>([NotNull] this IOperationBLLBase<TDomainObject> bll, [NotNull] IEnumerable<TDomainObject> domainObjects)
-        {
-            if (bll == null) throw new ArgumentNullException(nameof(bll));
-            if (domainObjects == null) throw new ArgumentNullException(nameof(domainObjects));
+        if (bll == null) throw new ArgumentNullException(nameof(bll));
+        if (domainObjects == null) throw new ArgumentNullException(nameof(domainObjects));
 
-            domainObjects.Foreach(bll.Save);
-        }
-
-        public static void Remove<TDomainObject>([NotNull] this IOperationBLLBase<TDomainObject> bll, [NotNull] IEnumerable<TDomainObject> domainObjects)
-        {
-            if (bll == null) throw new ArgumentNullException(nameof(bll));
-            if (domainObjects == null) throw new ArgumentNullException(nameof(domainObjects));
-
-            domainObjects.Foreach(bll.Remove);
-        }
+        domainObjects.Foreach(bll.Remove);
     }
 }

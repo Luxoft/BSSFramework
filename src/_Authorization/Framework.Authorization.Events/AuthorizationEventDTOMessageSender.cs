@@ -6,21 +6,20 @@ using Framework.Events;
 
 using JetBrains.Annotations;
 
-namespace Framework.Authorization.Events
-{
-    public class AuthorizationEventDTOMessageSender : EventDTOMessageSender<IAuthorizationBLLContext, PersistentDomainObjectBase, EventDTOBase>
-    {
-        public AuthorizationEventDTOMessageSender(IAuthorizationBLLContext context, [NotNull] IMessageSender<EventDTOBase> messageSender)
-            : base(context, messageSender)
-        {
-        }
+namespace Framework.Authorization.Events;
 
-        protected override EventDTOBase ToEventDTOBase<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs)
-        {
-            return AuthorizationDomainEventDTOMapper<TDomainObject, TOperation>.MapToEventDTO(
-                new AuthorizationServerPrimitiveDTOMappingService(this.Context),
-                domainObjectEventArgs.DomainObject,
-                domainObjectEventArgs.Operation);
-        }
+public class AuthorizationEventDTOMessageSender : EventDTOMessageSender<IAuthorizationBLLContext, PersistentDomainObjectBase, EventDTOBase>
+{
+    public AuthorizationEventDTOMessageSender(IAuthorizationBLLContext context, [NotNull] IMessageSender<EventDTOBase> messageSender)
+            : base(context, messageSender)
+    {
+    }
+
+    protected override EventDTOBase ToEventDTOBase<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs)
+    {
+        return AuthorizationDomainEventDTOMapper<TDomainObject, TOperation>.MapToEventDTO(
+         new AuthorizationServerPrimitiveDTOMappingService(this.Context),
+         domainObjectEventArgs.DomainObject,
+         domainObjectEventArgs.Operation);
     }
 }

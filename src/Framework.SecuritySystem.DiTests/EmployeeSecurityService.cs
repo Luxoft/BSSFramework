@@ -4,11 +4,11 @@ using Framework.SecuritySystem.Rules.Builders;
 
 using JetBrains.Annotations;
 
-namespace Framework.SecuritySystem.DiTests
+namespace Framework.SecuritySystem.DiTests;
+
+public class EmployeeSecurityService : ContextDomainSecurityService<PersistentDomainObjectBase, Employee, Guid, ExampleSecurityOperation>
 {
-    public class EmployeeSecurityService : ContextDomainSecurityService<PersistentDomainObjectBase, Employee, Guid, ExampleSecurityOperation>
-    {
-        public EmployeeSecurityService(
+    public EmployeeSecurityService(
             [NotNull] IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
             [NotNull] IDisabledSecurityProviderContainer<PersistentDomainObjectBase> disabledSecurityProviderContainer,
             [NotNull] ISecurityOperationResolver<PersistentDomainObjectBase, ExampleSecurityOperation> securityOperationResolver,
@@ -16,12 +16,11 @@ namespace Framework.SecuritySystem.DiTests
             [NotNull] ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory)
 
             : base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
-        {
-        }
+    {
+    }
 
-        protected override SecurityPathBase<PersistentDomainObjectBase, Employee, Guid> GetSecurityPath()
-        {
-            return SecurityPath<PersistentDomainObjectBase, Employee, Guid>.Create(v => v.BusinessUnit);
-        }
+    protected override SecurityPathBase<PersistentDomainObjectBase, Employee, Guid> GetSecurityPath()
+    {
+        return SecurityPath<PersistentDomainObjectBase, Employee, Guid>.Create(v => v.BusinessUnit);
     }
 }

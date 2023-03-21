@@ -1,22 +1,21 @@
 ﻿using Framework.Core;
 
-namespace Framework.Configuration.Domain
+namespace Framework.Configuration.Domain;
+
+public class MessageTemplate
 {
-    public class MessageTemplate
+    private string code;
+        
+    public MessageTemplate()
     {
-        private string code;
+    }
         
-        public MessageTemplate()
-        {
-        }
-        
-        /// <summary>
-        /// Уникальный код шаблона
-        /// </summary>
-        public virtual string Code
-        {
-            get { return this.code.TrimNull(); }
-            set { this.code = value.TrimNull(); }
-        }
+    /// <summary>
+    /// Уникальный код шаблона
+    /// </summary>
+    public virtual string Code
+    {
+        get { return this.code.TrimNull(); }
+        set { this.code = value.TrimNull(); }
     }
 }

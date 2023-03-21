@@ -4,30 +4,29 @@ using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain
+namespace SampleSystem.Domain;
+
+[BLLViewRole]
+[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.Disabled)]
+public class IMRequest : Information
 {
-    [BLLViewRole]
-    [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.Disabled)]
-    public class IMRequest : Information
+    private string message;
+
+    private IMRequestDetail oneToOneDetail;
+
+    [MaxLength(50)]
+    public virtual string Message
     {
-        private string message;
+        get { return this.message.TrimNull(); }
+        set { this.message = value.TrimNull(); }
+    }
 
-        private IMRequestDetail oneToOneDetail;
-
-        [MaxLength(50)]
-        public virtual string Message
-        {
-            get { return this.message.TrimNull(); }
-            set { this.message = value.TrimNull(); }
-        }
-
-        [DetailRole(true)]
-        [Mapping(IsOneToOne = true, CascadeMode = CascadeMode.Enabled)]
-        [Required]
-        public virtual IMRequestDetail OneToOneDetail
-        {
-            get => this.oneToOneDetail;
-            set => this.oneToOneDetail = value;
-        }
+    [DetailRole(true)]
+    [Mapping(IsOneToOne = true, CascadeMode = CascadeMode.Enabled)]
+    [Required]
+    public virtual IMRequestDetail OneToOneDetail
+    {
+        get => this.oneToOneDetail;
+        set => this.oneToOneDetail = value;
     }
 }

@@ -1,8 +1,7 @@
-﻿namespace Framework.SecuritySystem
+﻿namespace Framework.SecuritySystem;
+
+public interface IDisabledSecurityProviderContainer<in TPersistentDomainObjectBase>
 {
-    public interface IDisabledSecurityProviderContainer<in TPersistentDomainObjectBase>
-    {
-        ISecurityProvider<TDomainObject> GetDisabledSecurityProvider<TDomainObject>()
+    ISecurityProvider<TDomainObject> GetDisabledSecurityProvider<TDomainObject>()
             where TDomainObject : class, TPersistentDomainObjectBase;
-    }
 }

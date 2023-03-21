@@ -8,32 +8,31 @@ using NHibernate.Linq;
 using NHibernate.Linq.Functions;
 using NHibernate.Linq.Visitors;
 
-namespace Framework.DomainDriven.NHibernate
+namespace Framework.DomainDriven.NHibernate;
+
+/// <summary>
+/// Represents DateTime.AddDays method to SQL nHibernate mapping
+/// </summary>
+public class AddDaysGenerator : BaseHqlGeneratorForMethod
 {
     /// <summary>
-    /// Represents DateTime.AddDays method to SQL nHibernate mapping
+    /// Creates new generator instance
     /// </summary>
-    public class AddDaysGenerator : BaseHqlGeneratorForMethod
+    public AddDaysGenerator()
     {
-        /// <summary>
-        /// Creates new generator instance
-        /// </summary>
-        public AddDaysGenerator()
-        {
-            this.SupportedMethods = new[] { ReflectionHelper.GetMethodDefinition<DateTime?>(d => d.Value.AddDays(0)) };
-        }
+        this.SupportedMethods = new[] { ReflectionHelper.GetMethodDefinition<DateTime?>(d => d.Value.AddDays(0)) };
+    }
 
-        /// <summary>
-        /// Creates new <see cref="HqlTreeNode"/> node that represents AddDays method call
-        /// </summary>
-        public override HqlTreeNode BuildHql(
+    /// <summary>
+    /// Creates new <see cref="HqlTreeNode"/> node that represents AddDays method call
+    /// </summary>
+    public override HqlTreeNode BuildHql(
             MethodInfo method,
             Expression targetObject,
             ReadOnlyCollection<Expression> arguments,
             HqlTreeBuilder treeBuilder,
             IHqlExpressionVisitor visitor)
-        {
-            return treeBuilder.MethodCall("AddDays", visitor.Visit(targetObject).AsExpression(), visitor.Visit(arguments[0]).AsExpression());
-        }
+    {
+        return treeBuilder.MethodCall("AddDays", visitor.Visit(targetObject).AsExpression(), visitor.Visit(arguments[0]).AsExpression());
     }
 }

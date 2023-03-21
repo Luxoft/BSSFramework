@@ -1,65 +1,64 @@
 ﻿using System;
 
-namespace Framework.Persistent
+namespace Framework.Persistent;
+
+public static class NumberExtensions
 {
-    public static class NumberExtensions
+    public const int MoneyRoundDecimals = 2;
+
+    public const int CoeffRoundDecimals = 4;
+
+    public const int PercentRoundDecimals = 2;
+
+    public static bool IsEqualsMoney(this decimal value1, decimal value2)
     {
-        public const int MoneyRoundDecimals = 2;
+        return (value1 - value2).IsNullMoney();
+    }
 
-        public const int CoeffRoundDecimals = 4;
+    public static bool IsNullMoney(this decimal value)
+    {
+        return Math.Abs(value).RoundMoney() == 0;
+    }
 
-        public const int PercentRoundDecimals = 2;
-
-        public static bool IsEqualsMoney(this decimal value1, decimal value2)
+    public static decimal RoundMoney(this decimal value)
+    {
+        return decimal.Round(value, MoneyRoundDecimals);
+    }
+    public static decimal? RoundMoney(this decimal? value)
+    {
+        if (value == null)
         {
-            return (value1 - value2).IsNullMoney();
+            return null;
         }
+        return decimal.Round(value.Value, MoneyRoundDecimals);
+    }
 
-        public static bool IsNullMoney(this decimal value)
-        {
-            return Math.Abs(value).RoundMoney() == 0;
-        }
+    public static decimal RoundCoeff(this decimal value)
+    {
+        return decimal.Round(value, CoeffRoundDecimals);
+    }
 
-        public static decimal RoundMoney(this decimal value)
-        {
-            return decimal.Round(value, MoneyRoundDecimals);
-        }
-        public static decimal? RoundMoney(this decimal? value)
-        {
-            if (value == null)
-            {
-                return null;
-            }
-            return decimal.Round(value.Value, MoneyRoundDecimals);
-        }
+    //public static double RoundCoeff(this double value)
+    //{
+    //    return Math.Round(value, CoeffRoundDecimals);
+    //}
 
-        public static decimal RoundCoeff(this decimal value)
+    public static decimal RoundPercent(this decimal value)
+    {
+        return decimal.Round(value, PercentRoundDecimals);
+    }
+    public static decimal? RoundPercent(this decimal? value)
+    {
+        if (value == null)
         {
-            return decimal.Round(value, CoeffRoundDecimals);
+            return null;
         }
-
-        //public static double RoundCoeff(this double value)
-        //{
-        //    return Math.Round(value, CoeffRoundDecimals);
-        //}
-
-        public static decimal RoundPercent(this decimal value)
-        {
-            return decimal.Round(value, PercentRoundDecimals);
-        }
-        public static decimal? RoundPercent(this decimal? value)
-        {
-            if (value == null)
-            {
-                return null;
-            }
-            return decimal.Round(value.Value, PercentRoundDecimals);
-        }
+        return decimal.Round(value.Value, PercentRoundDecimals);
+    }
 
 
-        public static decimal AwayFromZeroRound (this decimal value, int rank)
-        {
-            return decimal.Round(value, rank, MidpointRounding.AwayFromZero);
-        }
+    public static decimal AwayFromZeroRound (this decimal value, int rank)
+    {
+        return decimal.Round(value, rank, MidpointRounding.AwayFromZero);
     }
 }

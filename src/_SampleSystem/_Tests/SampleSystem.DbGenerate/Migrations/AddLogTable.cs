@@ -1,37 +1,36 @@
 ﻿using FluentMigrator;
 
-namespace SampleSystem.DbMigrator
-{
-    [Migration(2)]
-    public class AddLogTable : Migration
-    {
-        public override void Up()
-        {
-            this.Create.Table("Log")
-                .WithColumn("Id").AsInt64().PrimaryKey().Identity()
-                .WithColumn("Text").AsString();
-        }
+namespace SampleSystem.DbMigrator;
 
-        public override void Down()
-        {
-            this.Delete.Table("Log");
-        }
+[Migration(2)]
+public class AddLogTable : Migration
+{
+    public override void Up()
+    {
+        this.Create.Table("Log")
+            .WithColumn("Id").AsInt64().PrimaryKey().Identity()
+            .WithColumn("Text").AsString();
     }
 
-
-    [Migration(3)]
-    public class AddLogTable2 : Migration
+    public override void Down()
     {
-        public override void Up()
-        {
-            this.Create.Table("Log2")
-                .WithColumn("Id").AsInt64().PrimaryKey().Identity()
-                .WithColumn("Text").AsString();
-        }
+        this.Delete.Table("Log");
+    }
+}
 
-        public override void Down()
-        {
-            this.Delete.Table("Log2");
-        }
+
+[Migration(3)]
+public class AddLogTable2 : Migration
+{
+    public override void Up()
+    {
+        this.Create.Table("Log2")
+            .WithColumn("Id").AsInt64().PrimaryKey().Identity()
+            .WithColumn("Text").AsString();
+    }
+
+    public override void Down()
+    {
+        this.Delete.Table("Log2");
     }
 }

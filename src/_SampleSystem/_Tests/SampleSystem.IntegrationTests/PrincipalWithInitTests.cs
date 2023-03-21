@@ -14,101 +14,100 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SampleSystem.Domain;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-namespace SampleSystem.IntegrationTests
+namespace SampleSystem.IntegrationTests;
+
+[TestClass]
+public class PrincipalWithInitTests : TestBase
 {
-    [TestClass]
-    public class PrincipalWithInitTests : TestBase
+    private const string TestPrincipalName = "Duplicate Permission Tester";
+
+    private static readonly Period TestPeriod = Framework.DomainDriven.DateTimeService.Default.CurrentMonth;
+
+    [TestInitialize]
+    public void SetUp()
     {
-        private const string TestPrincipalName = "Duplicate Permission Tester";
+        var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
 
-        private static readonly Period TestPeriod = Framework.DomainDriven.DateTimeService.Default.CurrentMonth;
+        var luxoftBuId = this.DataHelper.SaveBusinessUnit(
+                                                          id: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_ID,
+                                                          name: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_NAME,
+                                                          type: buTypeId);
 
-        [TestInitialize]
-        public void SetUp()
-        {
-            var buTypeId = this.DataHelper.SaveBusinessUnitType(DefaultConstants.BUSINESS_UNIT_TYPE_COMPANY_ID);
+        var costBuId = this.DataHelper.SaveBusinessUnit(
+                                                        id: DefaultConstants.BUSINESS_UNIT_PARENT_CC_ID,
+                                                        name: DefaultConstants.BUSINESS_UNIT_PARENT_CC_NAME,
+                                                        type: buTypeId,
+                                                        parent: luxoftBuId);
 
-            var luxoftBuId = this.DataHelper.SaveBusinessUnit(
-                id: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_ID,
-                name: DefaultConstants.BUSINESS_UNIT_PARENT_COMPANY_NAME,
-                type: buTypeId);
+        var profitBuId = this.DataHelper.SaveBusinessUnit(
+                                                          id: DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID,
+                                                          name: DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME,
+                                                          type: buTypeId,
+                                                          parent: luxoftBuId);
 
-            var costBuId = this.DataHelper.SaveBusinessUnit(
-                id: DefaultConstants.BUSINESS_UNIT_PARENT_CC_ID,
-                name: DefaultConstants.BUSINESS_UNIT_PARENT_CC_NAME,
-                type: buTypeId,
-                parent: luxoftBuId);
+        this.Evaluate(
+                      DBSessionMode.Write,
+                      context =>
+                      {
+                          var authContext = context.Authorization;
 
-            var profitBuId = this.DataHelper.SaveBusinessUnit(
-                id: DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID,
-                name: DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME,
-                type: buTypeId,
-                parent: luxoftBuId);
+                          var principalBll = authContext.Logics.Principal;
+                          var principal = principalBll.GetByNameOrCreate(TestPrincipalName, true);
 
-            this.Evaluate(
-                DBSessionMode.Write,
-                context =>
-                {
-                    var authContext = context.Authorization;
+                          var entityType = authContext.Logics.EntityType.GetByName(nameof(BusinessUnit));
 
-                    var principalBll = authContext.Logics.Principal;
-                    var principal = principalBll.GetByNameOrCreate(TestPrincipalName, true);
+                          Expression<Func<PermissionFilterEntity, bool>> entitySearchFilter =
+                                  entity =>
+                                          entity.EntityType == entityType
+                                          && entity.EntityId == DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID;
 
-                    var entityType = authContext.Logics.EntityType.GetByName(nameof(BusinessUnit));
+                          var filterEntity = authContext.Logics.PermissionFilterEntity.GetObjectBy(entitySearchFilter) ?? new PermissionFilterEntity
+                                                 {
+                                                         EntityType = entityType,
+                                                         EntityId = DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID
+                                                 }.Self(bu => authContext.Logics.PermissionFilterEntity.Save(bu));
 
-                    Expression<Func<PermissionFilterEntity, bool>> entitySearchFilter =
-                        entity =>
-                            entity.EntityType == entityType
-                            && entity.EntityId == DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID;
+                          var permission = new Permission(principal);
+                          permission.Role = authContext.Logics.BusinessRole.GetOrCreateAdminRole();
+                          permission.Period = TestPeriod;
 
-                    var filterEntity = authContext.Logics.PermissionFilterEntity.GetObjectBy(entitySearchFilter) ?? new PermissionFilterEntity
-                    {
-                        EntityType = entityType,
-                        EntityId = DefaultConstants.BUSINESS_UNIT_PARENT_PC_ID
-                    }.Self(bu => authContext.Logics.PermissionFilterEntity.Save(bu));
+                          new PermissionFilterItem(permission) { Entity = filterEntity };
 
-                    var permission = new Permission(principal);
-                    permission.Role = authContext.Logics.BusinessRole.GetOrCreateAdminRole();
-                    permission.Period = TestPeriod;
+                          principalBll.Save(principal);
+                      });
+    }
 
-                    new PermissionFilterItem(permission) { Entity = filterEntity };
+    [TestMethod]
+    public void CreateDuplicatePermission_ValidationError()
+    {
+        // Arrange
+        var expectedErrorMessage = $"Principal \"{TestPrincipalName}\" has duplicate permissions (Role: {BusinessRole.AdminRoleName} | Period: {TestPeriod} | BusinessUnits: {DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME})";
 
-                    principalBll.Save(principal);
-                });
-        }
+        // Act
+        Action call = () =>
+                      {
+                          this.Evaluate(
+                                        DBSessionMode.Write,
+                                        context =>
+                                        {
+                                            var authContext = context.Authorization;
 
-        [TestMethod]
-        public void CreateDuplicatePermission_ValidationError()
-        {
-            // Arrange
-            var expectedErrorMessage = $"Principal \"{TestPrincipalName}\" has duplicate permissions (Role: {BusinessRole.AdminRoleName} | Period: {TestPeriod} | BusinessUnits: {DefaultConstants.BUSINESS_UNIT_PARENT_PC_NAME})";
+                                            var principalBll = authContext.Logics.Principal;
+                                            var principal = principalBll.GetByName(TestPrincipalName, true);
 
-            // Act
-            Action call = () =>
-            {
-                this.Evaluate(
-                    DBSessionMode.Write,
-                    context =>
-                    {
-                        var authContext = context.Authorization;
+                                            var existsPermission = principal.Permissions.Single();
 
-                        var principalBll = authContext.Logics.Principal;
-                        var principal = principalBll.GetByName(TestPrincipalName, true);
+                                            var newPermission = new Permission(principal);
+                                            newPermission.Role = existsPermission.Role;
+                                            newPermission.Period = TestPeriod;
 
-                        var existsPermission = principal.Permissions.Single();
+                                            new PermissionFilterItem(newPermission) { Entity = existsPermission.FilterItems.Single().Entity };
 
-                        var newPermission = new Permission(principal);
-                        newPermission.Role = existsPermission.Role;
-                        newPermission.Period = TestPeriod;
+                                            principalBll.Save(principal);
+                                        });
+                      };
 
-                        new PermissionFilterItem(newPermission) { Entity = existsPermission.FilterItems.Single().Entity };
-
-                        principalBll.Save(principal);
-                    });
-            };
-
-            // Assert
-            call.Should().Throw<ValidationException>().WithMessage(expectedErrorMessage);
-        }
+        // Assert
+        call.Should().Throw<ValidationException>().WithMessage(expectedErrorMessage);
     }
 }

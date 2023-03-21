@@ -1,6 +1,5 @@
-﻿namespace Framework.Authorization.Domain
+﻿namespace Framework.Authorization.Domain;
+
+public class BusinessRoleCreateModel : DomainObjectCreateModel<BusinessRole>
 {
-    public class BusinessRoleCreateModel : DomainObjectCreateModel<BusinessRole>
-    {
-    }
 }

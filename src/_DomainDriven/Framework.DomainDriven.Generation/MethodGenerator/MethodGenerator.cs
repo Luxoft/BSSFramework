@@ -7,60 +7,59 @@ using System.Linq;
 using Framework.CodeDom;
 using Framework.Core;
 
-namespace Framework.DomainDriven.Generation
+namespace Framework.DomainDriven.Generation;
+
+public abstract class MethodGenerator : IMethodGenerator, IMethodGeneratorInfo
 {
-    public abstract class MethodGenerator : IMethodGenerator, IMethodGeneratorInfo
+    private static readonly CodeMemberMethod DefaultMethod = new CodeMemberMethod();
+
+
+    private readonly Lazy<ReadOnlyCollection<CodeParameterDeclarationExpression>> _lazyParameters;
+
+
+    protected MethodGenerator()
     {
-        private static readonly CodeMemberMethod DefaultMethod = new CodeMemberMethod();
+        this._lazyParameters = LazyHelper.Create(() => this.GetParameters().ToReadOnlyCollection());
+    }
 
 
-        private readonly Lazy<ReadOnlyCollection<CodeParameterDeclarationExpression>> _lazyParameters;
+    protected virtual MemberAttributes Attributes
+    {
+        get { return DefaultMethod.Attributes; }
+    }
+
+    public abstract string Name { get; }
+
+    public abstract CodeTypeReference ReturnType { get; }
+
+    public ReadOnlyCollection<CodeParameterDeclarationExpression> Parameters
+    {
+        get { return this._lazyParameters.Value; }
+    }
 
 
-        protected MethodGenerator()
-        {
-            this._lazyParameters = LazyHelper.Create(() => this.GetParameters().ToReadOnlyCollection());
-        }
+    protected abstract IEnumerable<CodeParameterDeclarationExpression> GetParameters();
+
+    protected abstract IEnumerable<CodeStatement> GetStatements();
 
 
-        protected virtual MemberAttributes Attributes
-        {
-            get { return DefaultMethod.Attributes; }
-        }
+    public CodeMemberMethod GetMethod()
+    {
+        return new CodeMemberMethod
+               {
+                       Attributes = this.Attributes,
 
-        public abstract string Name { get; }
+                       Name = this.Name,
 
-        public abstract CodeTypeReference ReturnType { get; }
-
-        public ReadOnlyCollection<CodeParameterDeclarationExpression> Parameters
-        {
-            get { return this._lazyParameters.Value; }
-        }
-
-
-        protected abstract IEnumerable<CodeParameterDeclarationExpression> GetParameters();
-
-        protected abstract IEnumerable<CodeStatement> GetStatements();
-
-
-        public CodeMemberMethod GetMethod()
-        {
-            return new CodeMemberMethod
-            {
-                Attributes = this.Attributes,
-
-                Name = this.Name,
-
-                ReturnType = this.ReturnType,
-            }.WithParameters(this.Parameters)
-             .WithStatements(this.GetStatements());
-        }
+                       ReturnType = this.ReturnType,
+               }.WithParameters(this.Parameters)
+                .WithStatements(this.GetStatements());
+    }
 
 
 
-        IEnumerable<CodeParameterDeclarationExpression> IMethodGeneratorInfo.Parameters
-        {
-            get { return this.Parameters; }
-        }
+    IEnumerable<CodeParameterDeclarationExpression> IMethodGeneratorInfo.Parameters
+    {
+        get { return this.Parameters; }
     }
 }

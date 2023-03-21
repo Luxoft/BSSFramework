@@ -1,7 +1,6 @@
-﻿namespace Framework.OData.Tests.Unit.DomainModel
+﻿namespace Framework.OData.Tests.Unit.DomainModel;
+
+public class FilterModel
 {
-    public class FilterModel
-    {
-        public Location Location { get; set; }
-    }
+    public Location Location { get; set; }
 }

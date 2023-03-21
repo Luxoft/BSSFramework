@@ -1,15 +1,14 @@
-﻿namespace Framework.DomainDriven.BLL.Security
+﻿namespace Framework.DomainDriven.BLL.Security;
+
+public interface IRunAsManager
 {
-    public interface IRunAsManager
-    {
-        string PrincipalName { get; }
+    string PrincipalName { get; }
 
 
-        bool IsRunningAs { get; }
+    bool IsRunningAs { get; }
 
 
-        void StartRunAsUser(string principalName);
+    void StartRunAsUser(string principalName);
 
-        void FinishRunAsUser();
-    }
+    void FinishRunAsUser();
 }

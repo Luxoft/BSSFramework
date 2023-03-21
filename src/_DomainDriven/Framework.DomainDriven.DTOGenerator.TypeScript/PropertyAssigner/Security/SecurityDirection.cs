@@ -1,10 +1,9 @@
-﻿namespace Framework.DomainDriven.DTOGenerator.TypeScript.PropertyAssigner.Security
+﻿namespace Framework.DomainDriven.DTOGenerator.TypeScript.PropertyAssigner.Security;
+
+public enum SecurityDirection
 {
-    public enum SecurityDirection
-    {
-        FromPlainJs = 0,
-        FromObservable,
-        ToObservable,
-        ToStrict
-    }
+    FromPlainJs = 0,
+    FromObservable,
+    ToObservable,
+    ToStrict
 }

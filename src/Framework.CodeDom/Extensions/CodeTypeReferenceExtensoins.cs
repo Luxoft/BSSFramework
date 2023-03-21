@@ -10,596 +10,595 @@ using Framework.Core;
 
 using JetBrains.Annotations;
 
-namespace Framework.CodeDom
+namespace Framework.CodeDom;
+
+public static class CodeTypeReferenceExtensions
 {
-    public static class CodeTypeReferenceExtensions
+    public static IEnumerable<CodeTypeReference> GetReferenced(this CodeTypeReference baseTypeReference)
     {
-        public static IEnumerable<CodeTypeReference> GetReferenced(this CodeTypeReference baseTypeReference)
-        {
-            if (baseTypeReference == null) throw new ArgumentNullException(nameof(baseTypeReference));
+        if (baseTypeReference == null) throw new ArgumentNullException(nameof(baseTypeReference));
 
-            return baseTypeReference.GetAllElements(typeRef => typeRef.ArrayElementType.MaybeYield().Concat(typeRef.TypeArguments.OfType<CodeTypeReference>()));
-        }
+        return baseTypeReference.GetAllElements(typeRef => typeRef.ArrayElementType.MaybeYield().Concat(typeRef.TypeArguments.OfType<CodeTypeReference>()));
+    }
 
-        public static CodeTypeReference ToCollectionReference(this CodeTypeReference typeArgument, Type collectionType)
-        {
-            if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
+    public static CodeTypeReference ToCollectionReference(this CodeTypeReference typeArgument, Type collectionType)
+    {
+        if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
 
-            return new CodeTypeReference(collectionType) { TypeArguments = { typeArgument } };
-        }
+        return new CodeTypeReference(collectionType) { TypeArguments = { typeArgument } };
+    }
 
-        public static CodeTypeReference ToObservableCollectionReference(this CodeTypeReference typeArgument)
-        {
-            if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
+    public static CodeTypeReference ToObservableCollectionReference(this CodeTypeReference typeArgument)
+    {
+        if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
 
-            return typeArgument.ToCollectionReference(typeof(ObservableCollection<>));
-        }
+        return typeArgument.ToCollectionReference(typeof(ObservableCollection<>));
+    }
 
-        public static CodeTypeReference ToArrayReference(this CodeTypeReference typeArgument, int rank = 1)
-        {
-            if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
+    public static CodeTypeReference ToArrayReference(this CodeTypeReference typeArgument, int rank = 1)
+    {
+        if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
 
-            return new CodeTypeReference(typeArgument, rank);
-        }
+        return new CodeTypeReference(typeArgument, rank);
+    }
 
-        public static CodeTypeReference ToMaybeReference(this CodeTypeReference typeArgument)
-        {
-            if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
+    public static CodeTypeReference ToMaybeReference(this CodeTypeReference typeArgument)
+    {
+        if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
 
-            return new CodeTypeReference(typeof(Maybe<>)) { TypeArguments = { typeArgument } };
-        }
+        return new CodeTypeReference(typeof(Maybe<>)) { TypeArguments = { typeArgument } };
+    }
 
-        public static CodeTypeReference ToJustReference(this CodeTypeReference typeArgument)
-        {
-            if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
+    public static CodeTypeReference ToJustReference(this CodeTypeReference typeArgument)
+    {
+        if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
 
-            return new CodeTypeReference(typeof(Just<>)) { TypeArguments = { typeArgument } };
-        }
+        return new CodeTypeReference(typeof(Just<>)) { TypeArguments = { typeArgument } };
+    }
 
-        public static CodeExpression ToJustCodeExpression([NotNull] this CodeExpression sourceExpression, CodeTypeReference typeArgument)
-        {
-            if (sourceExpression == null) { throw new ArgumentNullException(nameof(sourceExpression)); }
-            if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
+    public static CodeExpression ToJustCodeExpression([NotNull] this CodeExpression sourceExpression, CodeTypeReference typeArgument)
+    {
+        if (sourceExpression == null) { throw new ArgumentNullException(nameof(sourceExpression)); }
+        if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
 
-            return typeArgument.ToJustReference().ToObjectCreateExpression(sourceExpression);
-        }
+        return typeArgument.ToJustReference().ToObjectCreateExpression(sourceExpression);
+    }
 
-        public static CodeTypeReference ToNothingReference(this CodeTypeReference typeArgument)
-        {
-            if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
+    public static CodeTypeReference ToNothingReference(this CodeTypeReference typeArgument)
+    {
+        if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
 
-            return new CodeTypeReference(typeof(Nothing<>)) { TypeArguments = { typeArgument } };
-        }
+        return new CodeTypeReference(typeof(Nothing<>)) { TypeArguments = { typeArgument } };
+    }
 
-        public static CodeExpression ToNothingValueExpression(this CodeTypeReference typeArgumentT)
-        {
-            if (typeArgumentT == null) throw new ArgumentNullException(nameof(typeArgumentT));
-
-            return typeArgumentT.ToMaybeReference()
-                                .ToTypeReferenceExpression()
-                                .ToPropertyReference(nameof(Maybe<Ignore>.Nothing));
-        }
+    public static CodeExpression ToNothingValueExpression(this CodeTypeReference typeArgumentT)
+    {
+        if (typeArgumentT == null) throw new ArgumentNullException(nameof(typeArgumentT));
 
-        public static CodeExpression ToValueFieldReference(this CodeExpression codeExpression)
-        {
-            if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
+        return typeArgumentT.ToMaybeReference()
+                            .ToTypeReferenceExpression()
+                            .ToPropertyReference(nameof(Maybe<Ignore>.Nothing));
+    }
 
-            return codeExpression.ToFieldReference("Value");
-        }
+    public static CodeExpression ToValueFieldReference(this CodeExpression codeExpression)
+    {
+        if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
 
-        public static CodeTypeReference ToComparableReference(this CodeTypeReference typeArgument)
-        {
-            if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
+        return codeExpression.ToFieldReference("Value");
+    }
 
-            return new CodeTypeReference(typeof(IComparable<>)) { TypeArguments = { typeArgument } };
-        }
+    public static CodeTypeReference ToComparableReference(this CodeTypeReference typeArgument)
+    {
+        if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
 
-        public static CodeTypeReference ToEquatableReference(this CodeTypeReference typeArgument)
-        {
-            if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
+        return new CodeTypeReference(typeof(IComparable<>)) { TypeArguments = { typeArgument } };
+    }
 
-            return new CodeTypeReference(typeof(IEquatable<>)) { TypeArguments = { typeArgument } };
-        }
+    public static CodeTypeReference ToEquatableReference(this CodeTypeReference typeArgument)
+    {
+        if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
 
-        public static CodeTypeReference ToNullableReference(this CodeTypeReference typeArgument)
-        {
-            if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
+        return new CodeTypeReference(typeof(IEquatable<>)) { TypeArguments = { typeArgument } };
+    }
 
-            return new CodeTypeReference(typeof(Nullable<>)) { TypeArguments = { typeArgument } };
-        }
+    public static CodeTypeReference ToNullableReference(this CodeTypeReference typeArgument)
+    {
+        if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
 
-        public static CodeTypeReference ToListReference(this CodeTypeReference typeArgument)
-        {
-            if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
+        return new CodeTypeReference(typeof(Nullable<>)) { TypeArguments = { typeArgument } };
+    }
 
-            return new CodeTypeReference(typeof(List<>)) { TypeArguments = { typeArgument } };
-        }
+    public static CodeTypeReference ToListReference(this CodeTypeReference typeArgument)
+    {
+        if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
 
-        public static CodeTypeReference ToEnumerableReference(this CodeTypeReference typeArgument)
-        {
-            if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
+        return new CodeTypeReference(typeof(List<>)) { TypeArguments = { typeArgument } };
+    }
 
-            return new CodeTypeReference(typeof(IEnumerable<>)) { TypeArguments = { typeArgument } };
-        }
+    public static CodeTypeReference ToEnumerableReference(this CodeTypeReference typeArgument)
+    {
+        if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
 
+        return new CodeTypeReference(typeof(IEnumerable<>)) { TypeArguments = { typeArgument } };
+    }
 
 
-        //    public static CodeTypeReference ToArrayReference(this CodeTypeReference typeArgument)
-        //    {
-        //        if (typeArgument == null) throw new ArgumentNullException("typeArgument");
 
-        //        return new CodeTypeReference(typeof(Array)) { TypeArguments = { typeArgument } };
-        //    }
+    //    public static CodeTypeReference ToArrayReference(this CodeTypeReference typeArgument)
+    //    {
+    //        if (typeArgument == null) throw new ArgumentNullException("typeArgument");
 
+    //        return new CodeTypeReference(typeof(Array)) { TypeArguments = { typeArgument } };
+    //    }
 
-        public static CodeAttributeDeclaration ToAttributeDeclaration(this CodeTypeReference codeTypeReference, params CodeAttributeArgument[] arguments)
-        {
-            if (codeTypeReference == null) throw new ArgumentNullException(nameof(codeTypeReference));
-            if (arguments == null) throw new ArgumentNullException(nameof(arguments));
 
+    public static CodeAttributeDeclaration ToAttributeDeclaration(this CodeTypeReference codeTypeReference, params CodeAttributeArgument[] arguments)
+    {
+        if (codeTypeReference == null) throw new ArgumentNullException(nameof(codeTypeReference));
+        if (arguments == null) throw new ArgumentNullException(nameof(arguments));
 
-            return new CodeAttributeDeclaration(codeTypeReference, arguments);
-        }
 
-        public static CodeAttributeArgument ToAttributeArgument(this CodeExpression codeExpression)
-        {
-            if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
+        return new CodeAttributeDeclaration(codeTypeReference, arguments);
+    }
 
-            return new CodeAttributeArgument(codeExpression);
-        }
+    public static CodeAttributeArgument ToAttributeArgument(this CodeExpression codeExpression)
+    {
+        if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
 
+        return new CodeAttributeArgument(codeExpression);
+    }
 
 
 
-        public static CodeTypeReference ToTypeReference(this Type type, [NotNull] params CodeTypeReference[] typeArguments)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
-            if (typeArguments == null) throw new ArgumentNullException(nameof(typeArguments));
 
-            return new CodeTypeReference(type).Self(v => v.TypeArguments.AddRange(typeArguments));
-        }
+    public static CodeTypeReference ToTypeReference(this Type type, [NotNull] params CodeTypeReference[] typeArguments)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (typeArguments == null) throw new ArgumentNullException(nameof(typeArguments));
 
-        public static CodeTypeReference ToTypeReference(this Type type, [NotNull] Type typeArgument)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
+        return new CodeTypeReference(type).Self(v => v.TypeArguments.AddRange(typeArguments));
+    }
 
-            return type.ToTypeReference(typeArgument.ToTypeReference());
-        }
+    public static CodeTypeReference ToTypeReference(this Type type, [NotNull] Type typeArgument)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
 
-        public static CodeTypeReference ToTypeReference(this Type type, [NotNull] Type typeArgument1, [NotNull] Type typeArgument2)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
-            if (typeArgument2 == null) throw new ArgumentNullException(nameof(typeArgument2));
+        return type.ToTypeReference(typeArgument.ToTypeReference());
+    }
 
-            return type.ToTypeReference(typeArgument1.ToTypeReference(), typeArgument2.ToTypeReference());
-        }
+    public static CodeTypeReference ToTypeReference(this Type type, [NotNull] Type typeArgument1, [NotNull] Type typeArgument2)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (typeArgument2 == null) throw new ArgumentNullException(nameof(typeArgument2));
 
+        return type.ToTypeReference(typeArgument1.ToTypeReference(), typeArgument2.ToTypeReference());
+    }
 
-        public static CodeTypeReference ToTypeReference(this Type type, [NotNull] Type[] typeArguments)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
 
-            var newArgs = typeArguments.ToArray(t => t.ToTypeReference());
+    public static CodeTypeReference ToTypeReference(this Type type, [NotNull] Type[] typeArguments)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
 
-            return type.ToTypeReference(newArgs);
-        }
+        var newArgs = typeArguments.ToArray(t => t.ToTypeReference());
 
-        public static CodeTypeReference ToTypeReference(this CodeTypeReference type, params CodeTypeReference[] typeArguments)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
+        return type.ToTypeReference(newArgs);
+    }
 
-            return new CodeTypeReference(type.BaseType).Self(v => v.TypeArguments.AddRange(typeArguments));
-        }
+    public static CodeTypeReference ToTypeReference(this CodeTypeReference type, params CodeTypeReference[] typeArguments)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
 
-        public static CodeTypeReference ToTypeReference(this CodeTypeParameter parameter)
-        {
-            if (parameter == null) throw new ArgumentNullException(nameof(parameter));
+        return new CodeTypeReference(type.BaseType).Self(v => v.TypeArguments.AddRange(typeArguments));
+    }
 
-            return new CodeTypeReference(parameter);
-        }
+    public static CodeTypeReference ToTypeReference(this CodeTypeParameter parameter)
+    {
+        if (parameter == null) throw new ArgumentNullException(nameof(parameter));
 
-        public static CodeTypeReferenceExpression ToTypeReferenceExpression(this CodeTypeParameter parameter)
-        {
-            if (parameter == null) throw new ArgumentNullException(nameof(parameter));
+        return new CodeTypeReference(parameter);
+    }
 
-            return parameter.ToTypeReference().ToTypeReferenceExpression();
-        }
+    public static CodeTypeReferenceExpression ToTypeReferenceExpression(this CodeTypeParameter parameter)
+    {
+        if (parameter == null) throw new ArgumentNullException(nameof(parameter));
 
-        public static CodeTypeOfExpression ToTypeOfExpression(this CodeTypeParameter parameter)
-        {
-            if (parameter == null) throw new ArgumentNullException(nameof(parameter));
+        return parameter.ToTypeReference().ToTypeReferenceExpression();
+    }
 
-            return parameter.ToTypeReference().ToTypeOfExpression();
-        }
+    public static CodeTypeOfExpression ToTypeOfExpression(this CodeTypeParameter parameter)
+    {
+        if (parameter == null) throw new ArgumentNullException(nameof(parameter));
 
-        public static CodeTypeOfExpression ToTypeOfExpression(this CodeTypeReference codeTypeReference)
-        {
-            if (codeTypeReference == null) throw new ArgumentNullException(nameof(codeTypeReference));
+        return parameter.ToTypeReference().ToTypeOfExpression();
+    }
 
-            return new CodeTypeOfExpression(codeTypeReference);
-        }
+    public static CodeTypeOfExpression ToTypeOfExpression(this CodeTypeReference codeTypeReference)
+    {
+        if (codeTypeReference == null) throw new ArgumentNullException(nameof(codeTypeReference));
 
-        public static CodeTypeOfExpression ToTypeOfExpression(this Type type)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
+        return new CodeTypeOfExpression(codeTypeReference);
+    }
 
-            return type.ToTypeReference().ToTypeOfExpression();
-        }
+    public static CodeTypeOfExpression ToTypeOfExpression(this Type type)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
 
-        public static CodeParameterDeclarationExpression ToParameterDeclarationExpression(this CodeTypeReference codeTypeReference, string name)
-        {
-            if (codeTypeReference == null) throw new ArgumentNullException(nameof(codeTypeReference));
-            if (name == null) throw new ArgumentNullException(nameof(name));
+        return type.ToTypeReference().ToTypeOfExpression();
+    }
 
-            return new CodeParameterDeclarationExpression(codeTypeReference, name);
-        }
+    public static CodeParameterDeclarationExpression ToParameterDeclarationExpression(this CodeTypeReference codeTypeReference, string name)
+    {
+        if (codeTypeReference == null) throw new ArgumentNullException(nameof(codeTypeReference));
+        if (name == null) throw new ArgumentNullException(nameof(name));
 
-        public static CodeParameterDeclarationExpression ToParameterDeclarationExpression(this CodeVariableDeclarationStatement codeVariableDeclarationStatement)
-        {
-            if (codeVariableDeclarationStatement == null) throw new ArgumentNullException(nameof(codeVariableDeclarationStatement));
+        return new CodeParameterDeclarationExpression(codeTypeReference, name);
+    }
 
-            return codeVariableDeclarationStatement.Type.ToParameterDeclarationExpression(codeVariableDeclarationStatement.Name);
-        }
+    public static CodeParameterDeclarationExpression ToParameterDeclarationExpression(this CodeVariableDeclarationStatement codeVariableDeclarationStatement)
+    {
+        if (codeVariableDeclarationStatement == null) throw new ArgumentNullException(nameof(codeVariableDeclarationStatement));
 
+        return codeVariableDeclarationStatement.Type.ToParameterDeclarationExpression(codeVariableDeclarationStatement.Name);
+    }
 
 
-        public static CodeTypeReferenceExpression ToTypeReferenceExpression(this Type type, params CodeTypeReference[] typeArguments)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
 
-            return type.ToTypeReference(typeArguments).ToTypeReferenceExpression();
-        }
+    public static CodeTypeReferenceExpression ToTypeReferenceExpression(this Type type, params CodeTypeReference[] typeArguments)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
 
-        public static CodeMethodReferenceExpression ToMethodReferenceExpression(this CodeExpression codeExpression, string name, params CodeTypeReference[] typeArguments)
-        {
-            if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
+        return type.ToTypeReference(typeArguments).ToTypeReferenceExpression();
+    }
 
-            return new CodeMethodReferenceExpression(codeExpression, name, typeArguments);
-        }
+    public static CodeMethodReferenceExpression ToMethodReferenceExpression(this CodeExpression codeExpression, string name, params CodeTypeReference[] typeArguments)
+    {
+        if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
 
+        return new CodeMethodReferenceExpression(codeExpression, name, typeArguments);
+    }
 
-        public static CodeMethodReferenceExpression ToMethodReferenceExpression(this CodeExpression codeExpression, string name, Type[] typeArguments)
-        {
-            if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
 
-            return codeExpression.ToMethodReferenceExpression(name, typeArguments.ToArray(a => a.ToTypeReference()));
-        }
+    public static CodeMethodReferenceExpression ToMethodReferenceExpression(this CodeExpression codeExpression, string name, Type[] typeArguments)
+    {
+        if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
 
-        public static CodeExpression ToMaybeReturnExpression(this CodeExpression codeExpression)
-        {
-            if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
+        return codeExpression.ToMethodReferenceExpression(name, typeArguments.ToArray(a => a.ToTypeReference()));
+    }
 
-            var maybeReturnMethod = typeof(Maybe).ToTypeReferenceExpression().ToMethodReferenceExpression(nameof(Maybe.Return));
+    public static CodeExpression ToMaybeReturnExpression(this CodeExpression codeExpression)
+    {
+        if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
 
-            return maybeReturnMethod.ToMethodInvokeExpression(codeExpression);
-        }
+        var maybeReturnMethod = typeof(Maybe).ToTypeReferenceExpression().ToMethodReferenceExpression(nameof(Maybe.Return));
 
-        public static CodeMethodInvokeExpression ToMethodInvokeExpression(this CodeMethodReferenceExpression methodReferenceExpression, params CodeExpression[] parameters)
-        {
-            if (methodReferenceExpression == null) throw new ArgumentNullException(nameof(methodReferenceExpression));
+        return maybeReturnMethod.ToMethodInvokeExpression(codeExpression);
+    }
 
-            return new CodeMethodInvokeExpression(methodReferenceExpression, parameters);
-        }
+    public static CodeMethodInvokeExpression ToMethodInvokeExpression(this CodeMethodReferenceExpression methodReferenceExpression, params CodeExpression[] parameters)
+    {
+        if (methodReferenceExpression == null) throw new ArgumentNullException(nameof(methodReferenceExpression));
 
-        public static CodeMethodInvokeExpression WithNewLineParameters(this CodeMethodInvokeExpression codeMethodInvokeExpression)
-        {
-            if (codeMethodInvokeExpression == null) throw new ArgumentNullException(nameof(codeMethodInvokeExpression));
+        return new CodeMethodInvokeExpression(methodReferenceExpression, parameters);
+    }
 
-            codeMethodInvokeExpression.UserData[ExtendRenderConst.NewLineParameters] = true;
+    public static CodeMethodInvokeExpression WithNewLineParameters(this CodeMethodInvokeExpression codeMethodInvokeExpression)
+    {
+        if (codeMethodInvokeExpression == null) throw new ArgumentNullException(nameof(codeMethodInvokeExpression));
 
-            return codeMethodInvokeExpression;
-        }
+        codeMethodInvokeExpression.UserData[ExtendRenderConst.NewLineParameters] = true;
 
+        return codeMethodInvokeExpression;
+    }
 
-        public static CodeTypeReferenceExpression ToTypeReferenceExpression(this CodeTypeReference codeTypeReference)
-        {
-            if (codeTypeReference == null) throw new ArgumentNullException(nameof(codeTypeReference));
 
-            return new CodeTypeReferenceExpression(codeTypeReference);
-        }
+    public static CodeTypeReferenceExpression ToTypeReferenceExpression(this CodeTypeReference codeTypeReference)
+    {
+        if (codeTypeReference == null) throw new ArgumentNullException(nameof(codeTypeReference));
 
-        public static CodeFieldReferenceExpression ToFieldReference(this CodeExpression codeExpression, CodeMemberField field)
-        {
-            if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
-            if (field == null) throw new ArgumentNullException(nameof(field));
+        return new CodeTypeReferenceExpression(codeTypeReference);
+    }
 
-            return codeExpression.ToFieldReference(field.Name);
-        }
+    public static CodeFieldReferenceExpression ToFieldReference(this CodeExpression codeExpression, CodeMemberField field)
+    {
+        if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
+        if (field == null) throw new ArgumentNullException(nameof(field));
 
-        public static CodeMemberField ToMemberField(this CodeTypeReference codeTypeReference, string fieldName, CodeExpression initExpression = null)
-        {
-            if (codeTypeReference == null) throw new ArgumentNullException(nameof(codeTypeReference));
-            if (fieldName == null) throw new ArgumentNullException(nameof(fieldName));
+        return codeExpression.ToFieldReference(field.Name);
+    }
 
-            return new CodeMemberField(codeTypeReference, fieldName) { InitExpression = initExpression };
-        }
+    public static CodeMemberField ToMemberField(this CodeTypeReference codeTypeReference, string fieldName, CodeExpression initExpression = null)
+    {
+        if (codeTypeReference == null) throw new ArgumentNullException(nameof(codeTypeReference));
+        if (fieldName == null) throw new ArgumentNullException(nameof(fieldName));
 
-        public static CodeFieldReferenceExpression ToFieldReference(this CodeExpression codeExpression, string fieldName)
-        {
-            if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
-            if (fieldName == null) throw new ArgumentNullException(nameof(fieldName));
+        return new CodeMemberField(codeTypeReference, fieldName) { InitExpression = initExpression };
+    }
 
-            return new CodeFieldReferenceExpression(codeExpression, fieldName);
-        }
+    public static CodeFieldReferenceExpression ToFieldReference(this CodeExpression codeExpression, string fieldName)
+    {
+        if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
+        if (fieldName == null) throw new ArgumentNullException(nameof(fieldName));
 
-        public static CodePropertyReferenceExpression ToPropertyReference(this CodeExpression codeExpression, CodeMemberProperty property)
-        {
-            if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
-            if (property == null) throw new ArgumentNullException(nameof(property));
+        return new CodeFieldReferenceExpression(codeExpression, fieldName);
+    }
 
-            return codeExpression.ToPropertyReference(property.Name);
-        }
+    public static CodePropertyReferenceExpression ToPropertyReference(this CodeExpression codeExpression, CodeMemberProperty property)
+    {
+        if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
+        if (property == null) throw new ArgumentNullException(nameof(property));
 
-        public static CodePropertyReferenceExpression ToPropertyReference<TSource, TResult>(this CodeExpression codeExpression, Expression<Func<TSource, TResult>> expr)
-        {
-            if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
+        return codeExpression.ToPropertyReference(property.Name);
+    }
 
-            return codeExpression.ToPropertyReference(expr.GetMemberName());
-        }
+    public static CodePropertyReferenceExpression ToPropertyReference<TSource, TResult>(this CodeExpression codeExpression, Expression<Func<TSource, TResult>> expr)
+    {
+        if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
 
-        public static CodePropertyReferenceExpression ToPropertyReference(this CodeExpression codeExpression, string propertyName)
-        {
-            if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
-            if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
+        return codeExpression.ToPropertyReference(expr.GetMemberName());
+    }
 
-            return new CodePropertyReferenceExpression(codeExpression, propertyName);
-        }
+    public static CodePropertyReferenceExpression ToPropertyReference(this CodeExpression codeExpression, string propertyName)
+    {
+        if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
+        if (propertyName == null) throw new ArgumentNullException(nameof(propertyName));
 
-        public static CodePropertyReferenceExpression ToPropertyReference(this CodeExpression codeExpression, PropertyInfo propertyInfo)
-        {
-            if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
-            if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
+        return new CodePropertyReferenceExpression(codeExpression, propertyName);
+    }
 
-            return new CodePropertyReferenceExpression(codeExpression, propertyInfo.Name);
-        }
+    public static CodePropertyReferenceExpression ToPropertyReference(this CodeExpression codeExpression, PropertyInfo propertyInfo)
+    {
+        if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
+        if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
 
-        public static CodeMaybePropertyReferenceExpression ToMaybePropertyReference(this CodeExpression codeExpression, PropertyInfo propertyInfo)
-        {
-            if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
-            if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
+        return new CodePropertyReferenceExpression(codeExpression, propertyInfo.Name);
+    }
 
-            return new CodeMaybePropertyReferenceExpression(codeExpression, propertyInfo.Name);
-        }
+    public static CodeMaybePropertyReferenceExpression ToMaybePropertyReference(this CodeExpression codeExpression, PropertyInfo propertyInfo)
+    {
+        if (codeExpression == null) throw new ArgumentNullException(nameof(codeExpression));
+        if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
 
-        public static CodeMethodInvokeExpression ToMethodInvokeExpression(this CodeExpression targetObject, string methodName, IEnumerable<CodeExpression> parameters)
-        {
-            if (targetObject == null) throw new ArgumentNullException(nameof(targetObject));
-            if (methodName == null) throw new ArgumentNullException(nameof(methodName));
-            if (parameters == null) throw new ArgumentNullException(nameof(parameters));
-
-            return targetObject.ToMethodInvokeExpression(methodName, parameters.ToArray());
-        }
+        return new CodeMaybePropertyReferenceExpression(codeExpression, propertyInfo.Name);
+    }
 
-        public static CodeMethodInvokeExpression ToMethodInvokeExpression(this CodeExpression targetObject, string methodName, params CodeExpression[] parameters)
-        {
-            if (targetObject == null) throw new ArgumentNullException(nameof(targetObject));
-            if (methodName == null) throw new ArgumentNullException(nameof(methodName));
-            if (parameters == null) throw new ArgumentNullException(nameof(parameters));
-
-            return new CodeMethodInvokeExpression(targetObject, methodName, parameters);
-        }
+    public static CodeMethodInvokeExpression ToMethodInvokeExpression(this CodeExpression targetObject, string methodName, IEnumerable<CodeExpression> parameters)
+    {
+        if (targetObject == null) throw new ArgumentNullException(nameof(targetObject));
+        if (methodName == null) throw new ArgumentNullException(nameof(methodName));
+        if (parameters == null) throw new ArgumentNullException(nameof(parameters));
 
+        return targetObject.ToMethodInvokeExpression(methodName, parameters.ToArray());
+    }
 
-        public static CodeMethodInvokeExpression ToMethodInvokeExpression(this CodeExpression targetObject, CodeMemberMethod method, params CodeExpression[] parameters)
-        {
-            if (targetObject == null) throw new ArgumentNullException(nameof(targetObject));
-            if (method == null) throw new ArgumentNullException(nameof(method));
-            if (parameters == null) throw new ArgumentNullException(nameof(parameters));
-
-            return new CodeMethodInvokeExpression(targetObject, method.Name, parameters);
-        }
+    public static CodeMethodInvokeExpression ToMethodInvokeExpression(this CodeExpression targetObject, string methodName, params CodeExpression[] parameters)
+    {
+        if (targetObject == null) throw new ArgumentNullException(nameof(targetObject));
+        if (methodName == null) throw new ArgumentNullException(nameof(methodName));
+        if (parameters == null) throw new ArgumentNullException(nameof(parameters));
 
-        public static CodeMethodInvokeExpression ToMethodInvokeExpression<TSource, TResult>(this CodeExpression targetObject, Expression<Func<TSource, TResult>> expr, params CodeExpression[] parameters)
-        {
-            if (targetObject == null) throw new ArgumentNullException(nameof(targetObject));
-            if (expr == null) throw new ArgumentNullException(nameof(expr));
+        return new CodeMethodInvokeExpression(targetObject, methodName, parameters);
+    }
 
-            return new CodeMethodInvokeExpression(targetObject, expr.GetMemberName(), parameters);
-        }
 
-        public static CodeMethodInvokeExpression ToStaticMethodInvokeExpression(this CodeExpression targetObject, CodeMethodReferenceExpression methodReference, params CodeExpression[] parameters)
-        {
-            if (targetObject == null) throw new ArgumentNullException(nameof(targetObject));
+    public static CodeMethodInvokeExpression ToMethodInvokeExpression(this CodeExpression targetObject, CodeMemberMethod method, params CodeExpression[] parameters)
+    {
+        if (targetObject == null) throw new ArgumentNullException(nameof(targetObject));
+        if (method == null) throw new ArgumentNullException(nameof(method));
+        if (parameters == null) throw new ArgumentNullException(nameof(parameters));
 
-            return new CodeMethodInvokeExpression(methodReference, new[] { targetObject }.Concat(parameters).ToArray());
-        }
+        return new CodeMethodInvokeExpression(targetObject, method.Name, parameters);
+    }
 
-        public static CodeVariableDeclarationStatement ToVariableDeclarationStatement(this CodeTypeReference typeReference, string name, CodeExpression initialize = null)
-        {
-            if (typeReference == null) throw new ArgumentNullException(nameof(typeReference));
-            if (name == null) throw new ArgumentNullException(nameof(name));
+    public static CodeMethodInvokeExpression ToMethodInvokeExpression<TSource, TResult>(this CodeExpression targetObject, Expression<Func<TSource, TResult>> expr, params CodeExpression[] parameters)
+    {
+        if (targetObject == null) throw new ArgumentNullException(nameof(targetObject));
+        if (expr == null) throw new ArgumentNullException(nameof(expr));
 
-            return new CodeVariableDeclarationStatement(typeReference, name, initialize);
-        }
+        return new CodeMethodInvokeExpression(targetObject, expr.GetMemberName(), parameters);
+    }
 
-        public static CodeDefaultValueExpression ToDefaultValueExpression(this CodeTypeReference typeReference)
-        {
-            if (typeReference == null) throw new ArgumentNullException(nameof(typeReference));
+    public static CodeMethodInvokeExpression ToStaticMethodInvokeExpression(this CodeExpression targetObject, CodeMethodReferenceExpression methodReference, params CodeExpression[] parameters)
+    {
+        if (targetObject == null) throw new ArgumentNullException(nameof(targetObject));
 
-            return new CodeDefaultValueExpression(typeReference);
-        }
+        return new CodeMethodInvokeExpression(methodReference, new[] { targetObject }.Concat(parameters).ToArray());
+    }
 
+    public static CodeVariableDeclarationStatement ToVariableDeclarationStatement(this CodeTypeReference typeReference, string name, CodeExpression initialize = null)
+    {
+        if (typeReference == null) throw new ArgumentNullException(nameof(typeReference));
+        if (name == null) throw new ArgumentNullException(nameof(name));
 
+        return new CodeVariableDeclarationStatement(typeReference, name, initialize);
+    }
 
-        public static CodeStatement ToResultStatement(this CodeExpression expression, [NotNull] CodeTypeReference returnType)
-        {
-            if (expression == null) throw new ArgumentNullException(nameof(expression));
-            if (returnType == null) throw new ArgumentNullException(nameof(returnType));
+    public static CodeDefaultValueExpression ToDefaultValueExpression(this CodeTypeReference typeReference)
+    {
+        if (typeReference == null) throw new ArgumentNullException(nameof(typeReference));
 
-            return returnType.BaseType == typeof(void).ToTypeReference().BaseType ? (CodeStatement)expression.ToExpressionStatement() : expression.ToMethodReturnStatement();
-        }
+        return new CodeDefaultValueExpression(typeReference);
+    }
 
-        public static CodeExpressionStatement ToExpressionStatement(this CodeExpression expression)
-        {
-            if (expression == null) throw new ArgumentNullException(nameof(expression));
 
-            return new CodeExpressionStatement(expression);
-        }
 
-        public static CodeIsNullExpression ToIsNullExpression(this CodeExpression expression)
-        {
-            if (expression == null) throw new ArgumentNullException(nameof(expression));
+    public static CodeStatement ToResultStatement(this CodeExpression expression, [NotNull] CodeTypeReference returnType)
+    {
+        if (expression == null) throw new ArgumentNullException(nameof(expression));
+        if (returnType == null) throw new ArgumentNullException(nameof(returnType));
 
-            return new CodeIsNullExpression(expression);
-        }
+        return returnType.BaseType == typeof(void).ToTypeReference().BaseType ? (CodeStatement)expression.ToExpressionStatement() : expression.ToMethodReturnStatement();
+    }
 
+    public static CodeExpressionStatement ToExpressionStatement(this CodeExpression expression)
+    {
+        if (expression == null) throw new ArgumentNullException(nameof(expression));
 
+        return new CodeExpressionStatement(expression);
+    }
 
-        public static CodeMethodReturnStatement ToMethodReturnStatement(this CodeExpression targetObject)
-        {
-            if (targetObject == null) throw new ArgumentNullException(nameof(targetObject));
+    public static CodeIsNullExpression ToIsNullExpression(this CodeExpression expression)
+    {
+        if (expression == null) throw new ArgumentNullException(nameof(expression));
 
-            return new CodeMethodReturnStatement(targetObject);
-        }
+        return new CodeIsNullExpression(expression);
+    }
 
-        public static CodeMethodYieldReturnStatement ToMethodYieldReturnStatement(this CodeExpression targetObject)
-        {
-            if (targetObject == null) throw new ArgumentNullException(nameof(targetObject));
 
-            return new CodeMethodYieldReturnStatement { Expression = targetObject };
-        }
 
-        public static CodeStatement ToMethodReturnStatementWithLazyInitialize(this CodeExpression targetObject, CodeExpression initializeExpr)
-        {
-            if (targetObject == null) throw new ArgumentNullException(nameof(targetObject));
-
-            return new CodeStatement[]
-            {
-                new CodeConditionStatement
-                {
-                    Condition = targetObject.ToIsNullExpression(),
-                    TrueStatements =
-                    {
-                        initializeExpr.ToAssignStatement(targetObject)
-                    }
-                },
-                targetObject.ToMethodReturnStatement()
-            }.Composite();
-        }
+    public static CodeMethodReturnStatement ToMethodReturnStatement(this CodeExpression targetObject)
+    {
+        if (targetObject == null) throw new ArgumentNullException(nameof(targetObject));
 
-        public static CodeObjectCreateExpression ToObjectCreateExpression(this CodeTypeReference codeTypeReference, params CodeExpression[] parameters)
-        {
-            if (codeTypeReference == null) throw new ArgumentNullException(nameof(codeTypeReference));
+        return new CodeMethodReturnStatement(targetObject);
+    }
 
-            return new CodeObjectCreateExpression(codeTypeReference, parameters);
-        }
+    public static CodeMethodYieldReturnStatement ToMethodYieldReturnStatement(this CodeExpression targetObject)
+    {
+        if (targetObject == null) throw new ArgumentNullException(nameof(targetObject));
 
-        public static CodeAssignStatement ToAssignStatement(this CodeExpression source, CodeExpression target)
-        {
-            if (target == null) throw new ArgumentNullException(nameof(target));
-            if (source == null) throw new ArgumentNullException(nameof(source));
+        return new CodeMethodYieldReturnStatement { Expression = targetObject };
+    }
 
-            return new CodeAssignStatement(target, source);
-        }
+    public static CodeStatement ToMethodReturnStatementWithLazyInitialize(this CodeExpression targetObject, CodeExpression initializeExpr)
+    {
+        if (targetObject == null) throw new ArgumentNullException(nameof(targetObject));
 
-        public static CodeNegateExpression ToNegateExpression(this CodeExpression source)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+        return new CodeStatement[]
+               {
+                       new CodeConditionStatement
+                       {
+                               Condition = targetObject.ToIsNullExpression(),
+                               TrueStatements =
+                               {
+                                       initializeExpr.ToAssignStatement(targetObject)
+                               }
+                       },
+                       targetObject.ToMethodReturnStatement()
+               }.Composite();
+    }
 
-            return new CodeNegateExpression(source);
-        }
+    public static CodeObjectCreateExpression ToObjectCreateExpression(this CodeTypeReference codeTypeReference, params CodeExpression[] parameters)
+    {
+        if (codeTypeReference == null) throw new ArgumentNullException(nameof(codeTypeReference));
 
+        return new CodeObjectCreateExpression(codeTypeReference, parameters);
+    }
 
-        public static CodeVariableReferenceExpression ToVariableReferenceExpression(this CodeVariableDeclarationStatement source)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+    public static CodeAssignStatement ToAssignStatement(this CodeExpression source, CodeExpression target)
+    {
+        if (target == null) throw new ArgumentNullException(nameof(target));
+        if (source == null) throw new ArgumentNullException(nameof(source));
 
-            return new CodeVariableReferenceExpression(source.Name);
-        }
+        return new CodeAssignStatement(target, source);
+    }
 
-        public static CodeVariableReferenceExpression ToVariableReferenceExpression(this CodeParameterDeclarationExpression source)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+    public static CodeNegateExpression ToNegateExpression(this CodeExpression source)
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
 
-            return new CodeVariableReferenceExpression(source.Name);
-        }
+        return new CodeNegateExpression(source);
+    }
 
 
-        public static CodeTypeDeclaration MarkAsStatic(this CodeTypeDeclaration decl)
-        {
-            if (decl == null) throw new ArgumentNullException(nameof(decl));
+    public static CodeVariableReferenceExpression ToVariableReferenceExpression(this CodeVariableDeclarationStatement source)
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
 
-            decl.UserData[UserDataMarker.IsStatic] = true;
+        return new CodeVariableReferenceExpression(source.Name);
+    }
 
-            return decl;
-        }
+    public static CodeVariableReferenceExpression ToVariableReferenceExpression(this CodeParameterDeclarationExpression source)
+    {
+        if (source == null) throw new ArgumentNullException(nameof(source));
 
-        public static CodeTypeDeclaration UnmarkAsStatic(this CodeTypeDeclaration decl)
-        {
-            if (decl == null) throw new ArgumentNullException(nameof(decl));
+        return new CodeVariableReferenceExpression(source.Name);
+    }
 
-            decl.UserData[UserDataMarker.IsStatic] = false;
 
-            return decl;
-        }
+    public static CodeTypeDeclaration MarkAsStatic(this CodeTypeDeclaration decl)
+    {
+        if (decl == null) throw new ArgumentNullException(nameof(decl));
 
-        public static bool IsStatic(this CodeTypeDeclaration method)
-        {
-            var value = method.UserData[UserDataMarker.IsStatic];
+        decl.UserData[UserDataMarker.IsStatic] = true;
 
-            return value is bool b && b;
-        }
+        return decl;
+    }
 
-        public static CodeMemberMethod MarkAsExtension([NotNull] this CodeMemberMethod method)
-        {
-            if (method == null) throw new ArgumentNullException(nameof(method));
+    public static CodeTypeDeclaration UnmarkAsStatic(this CodeTypeDeclaration decl)
+    {
+        if (decl == null) throw new ArgumentNullException(nameof(decl));
 
-            method.UserData[UserDataMarker.IsExtension] = true;
+        decl.UserData[UserDataMarker.IsStatic] = false;
 
-            return method;
-        }
+        return decl;
+    }
 
-        public static CodeMemberMethod UnmarkAsExtension([NotNull] this CodeMemberMethod method)
-        {
-            if (method == null) throw new ArgumentNullException(nameof(method));
+    public static bool IsStatic(this CodeTypeDeclaration method)
+    {
+        var value = method.UserData[UserDataMarker.IsStatic];
 
-            method.UserData[UserDataMarker.IsExtension] = false;
+        return value is bool b && b;
+    }
 
-            return method;
-        }
+    public static CodeMemberMethod MarkAsExtension([NotNull] this CodeMemberMethod method)
+    {
+        if (method == null) throw new ArgumentNullException(nameof(method));
 
-        public static bool IsExtension(this CodeMemberMethod method)
-        {
-            var value = method.UserData[UserDataMarker.IsExtension];
+        method.UserData[UserDataMarker.IsExtension] = true;
 
-            return value is bool b && b;
-        }
+        return method;
+    }
 
+    public static CodeMemberMethod UnmarkAsExtension([NotNull] this CodeMemberMethod method)
+    {
+        if (method == null) throw new ArgumentNullException(nameof(method));
 
-        public static CodeStatement ToSwitchExpressionStatement(this IEnumerable<Tuple<CodeExpression, CodeStatement>> branches, CodeStatement lastElseStatement)
-        {
-            if (branches == null) throw new ArgumentNullException(nameof(branches));
-
-            return branches.Reverse().Aggregate(lastElseStatement, (state, pair) => new CodeConditionStatement
-            {
-                Condition = pair.Item1,
-                TrueStatements = { pair.Item2 },
-                FalseStatements = { state }
-            });
-        }
+        method.UserData[UserDataMarker.IsExtension] = false;
 
+        return method;
+    }
 
-        public static CodeStatement ToThrowArgumentOutOfRangeExceptionStatement(this CodeParameterDeclarationExpression parameter)
-        {
-            if (parameter == null) throw new ArgumentNullException(nameof(parameter));
+    public static bool IsExtension(this CodeMemberMethod method)
+    {
+        var value = method.UserData[UserDataMarker.IsExtension];
 
-            return new CodeThrowArgumentOutOfRangeExceptionStatement(parameter);
-        }
+        return value is bool b && b;
+    }
 
-        public static CodeStatement Composite(this IEnumerable<CodeStatement> statements)
+
+    public static CodeStatement ToSwitchExpressionStatement(this IEnumerable<Tuple<CodeExpression, CodeStatement>> branches, CodeStatement lastElseStatement)
+    {
+        if (branches == null) throw new ArgumentNullException(nameof(branches));
+
+        return branches.Reverse().Aggregate(lastElseStatement, (state, pair) => new CodeConditionStatement
+                                                                                {
+                                                                                        Condition = pair.Item1,
+                                                                                        TrueStatements = { pair.Item2 },
+                                                                                        FalseStatements = { state }
+                                                                                });
+    }
+
+
+    public static CodeStatement ToThrowArgumentOutOfRangeExceptionStatement(this CodeParameterDeclarationExpression parameter)
+    {
+        if (parameter == null) throw new ArgumentNullException(nameof(parameter));
+
+        return new CodeThrowArgumentOutOfRangeExceptionStatement(parameter);
+    }
+
+    public static CodeStatement Composite(this IEnumerable<CodeStatement> statements)
+    {
+        if (statements == null) throw new ArgumentNullException(nameof(statements));
+
+        var cachedStatements = statements.ToArray();
+
+        if (cachedStatements.Length == 1)
+        {
+            return cachedStatements.Single();
+        }
+        else
         {
-            if (statements == null) throw new ArgumentNullException(nameof(statements));
-
-            var cachedStatements = statements.ToArray();
-
-            if (cachedStatements.Length == 1)
-            {
-                return cachedStatements.Single();
-            }
-            else
-            {
-                return new CodeConditionStatement(true.ToPrimitiveExpression(), cachedStatements);
-            }
+            return new CodeConditionStatement(true.ToPrimitiveExpression(), cachedStatements);
         }
     }
 }

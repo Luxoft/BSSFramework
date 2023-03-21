@@ -1,9 +1,8 @@
 ﻿using Framework.Core;
 
-namespace Framework.Validation
+namespace Framework.Validation;
+
+public interface IExtendedValidationDataContainer
 {
-    public interface IExtendedValidationDataContainer
-    {
-        IDynamicSource ExtendedValidationData { get; }
-    }
+    IDynamicSource ExtendedValidationData { get; }
 }

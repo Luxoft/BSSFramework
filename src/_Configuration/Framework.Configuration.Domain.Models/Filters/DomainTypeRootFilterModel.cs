@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Framework.Configuration.Domain
+namespace Framework.Configuration.Domain;
+
+public class DomainTypeRootFilterModel : DomainObjectFilterModel<DomainType>
 {
-    public class DomainTypeRootFilterModel : DomainObjectFilterModel<DomainType>
+    public TargetSystem TargetSystem { get; set; }
+
+
+    public override Expression<Func<DomainType, bool>> ToFilterExpression()
     {
-        public TargetSystem TargetSystem { get; set; }
+        var targetSystem = this.TargetSystem;
 
-
-        public override Expression<Func<DomainType, bool>> ToFilterExpression()
-        {
-            var targetSystem = this.TargetSystem;
-
-            return domainType => targetSystem == null || targetSystem == domainType.TargetSystem;
-        }
+        return domainType => targetSystem == null || targetSystem == domainType.TargetSystem;
     }
 }

@@ -4,37 +4,36 @@ using System.Linq;
 
 using JetBrains.Annotations;
 
-namespace Framework.Projection.Lambda
+namespace Framework.Projection.Lambda;
+
+internal class CreateAutoNodesProjectionSource : IProjectionSource
 {
-    internal class CreateAutoNodesProjectionSource : IProjectionSource
+    private readonly IProjectionSource baseSource;
+
+    private readonly ProjectionLambdaEnvironment environment;
+
+    public CreateAutoNodesProjectionSource([NotNull] IProjectionSource baseSource, [NotNull] ProjectionLambdaEnvironment environment)
     {
-        private readonly IProjectionSource baseSource;
+        this.baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
+        this.environment = environment ?? throw new ArgumentNullException(nameof(environment));
+    }
 
-        private readonly ProjectionLambdaEnvironment environment;
+    public IEnumerable<IProjection> GetProjections()
+    {
+        var builders = this.baseSource.GetProjections().ToBuilders();
 
-        public CreateAutoNodesProjectionSource([NotNull] IProjectionSource baseSource, [NotNull] ProjectionLambdaEnvironment environment)
+        foreach (var projectionBuilder in builders)
         {
-            this.baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
-            this.environment = environment ?? throw new ArgumentNullException(nameof(environment));
-        }
-
-        public IEnumerable<IProjection> GetProjections()
-        {
-            var builders = this.baseSource.GetProjections().ToBuilders();
-
-            foreach (var projectionBuilder in builders)
+            if (projectionBuilder.Role == ProjectionRole.Default)
             {
-                if (projectionBuilder.Role == ProjectionRole.Default)
-                {
-                    var rootAutoProjection = new AutoProjectionFactory(this.environment, projectionBuilder).Create();
+                var rootAutoProjection = new AutoProjectionFactory(this.environment, projectionBuilder).Create();
 
-                    var addProperties = rootAutoProjection.Properties.Where(prop => prop.Role == ProjectionPropertyRole.AutoNode).ToList();
+                var addProperties = rootAutoProjection.Properties.Where(prop => prop.Role == ProjectionPropertyRole.AutoNode).ToList();
 
-                    projectionBuilder.Properties.AddRange(addProperties);
-                }
+                projectionBuilder.Properties.AddRange(addProperties);
             }
-
-            return builders.GetAllProjections();
         }
+
+        return builders.GetAllProjections();
     }
 }

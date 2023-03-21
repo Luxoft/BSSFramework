@@ -1,18 +1,17 @@
 ﻿using System;
 
-namespace Framework.DomainDriven.Serialization
+namespace Framework.DomainDriven.Serialization;
+
+[Flags]
+public enum DTORole
 {
-    [Flags]
-    public enum DTORole
-    {
-        Client = 1,
+    Client = 1,
 
-        Integration = 2,
+    Integration = 2,
 
-        Event = 4,
+    Event = 4,
 
-        Report = 8,
+    Report = 8,
 
-        All = Client + Integration + Event + Report
-    }
+    All = Client + Integration + Event + Report
 }

@@ -1,20 +1,19 @@
 ﻿using System;
 using Framework.Persistent;
 
-namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
+namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3;
+
+public class IdentityObject : IIdentityObject<Guid>
 {
-    public class IdentityObject : IIdentityObject<Guid>
+    public IdentityObject(Guid id)
     {
-        public IdentityObject(Guid id)
-        {
-            this.Id = id;
-        }
+        this.Id = id;
+    }
 
-        public Guid Id { get; }
+    public Guid Id { get; }
 
-        public override string ToString()
-        {
-            return this.Id.ToString();
-        }
+    public override string ToString()
+    {
+        return this.Id.ToString();
     }
 }

@@ -1,7 +1,6 @@
-﻿namespace Framework.Exceptions
+﻿namespace Framework.Exceptions;
+
+public interface IDetailException<out TDetail>
 {
-    public interface IDetailException<out TDetail>
-    {
-        TDetail Detail { get; }
-    }
+    TDetail Detail { get; }
 }

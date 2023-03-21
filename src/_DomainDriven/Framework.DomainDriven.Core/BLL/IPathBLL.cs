@@ -1,9 +1,8 @@
 ﻿using JetBrains.Annotations;
 
-namespace Framework.DomainDriven.BLL
+namespace Framework.DomainDriven.BLL;
+
+public interface IPathBLL<out TDomainObject>
 {
-    public interface IPathBLL<out TDomainObject>
-    {
-        TDomainObject GetByPath([NotNull]string path);
-    }
+    TDomainObject GetByPath([NotNull]string path);
 }

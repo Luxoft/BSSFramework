@@ -1,7 +1,6 @@
-﻿namespace Framework.Core
+﻿namespace Framework.Core;
+
+public interface IConverter<in TSource, out TTarget>
 {
-    public interface IConverter<in TSource, out TTarget>
-    {
-        TTarget Convert(TSource source);
-    }
+    TTarget Convert(TSource source);
 }

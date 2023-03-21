@@ -8,28 +8,28 @@ using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.TypeScriptGenerate.Configurations.Environments;
 
-namespace SampleSystem.TypeScriptGenerate.Configurations.Services
+namespace SampleSystem.TypeScriptGenerate.Configurations.Services;
+
+public class ConfigurationServiceFacadeConfiguration : BaseFacadeGenerationConfiguration<ConfigurationGenerationEnvironment>
 {
-    public class ConfigurationServiceFacadeConfiguration : BaseFacadeGenerationConfiguration<ConfigurationGenerationEnvironment>
-    {
-        internal ConfigurationServiceFacadeConfiguration(ConfigurationGenerationEnvironment environment)
+    internal ConfigurationServiceFacadeConfiguration(ConfigurationGenerationEnvironment environment)
             : base(environment)
-        {
-        }
+    {
+    }
 
-        public override IEnumerable<Type> GetFacadeTypes()
-        {
-            var t = typeof(Configuration.WebApi.Controllers.SystemConstantController);
+    public override IEnumerable<Type> GetFacadeTypes()
+    {
+        var t = typeof(Configuration.WebApi.Controllers.SystemConstantController);
 
-            return t.Assembly.GetTypes().Where(v => typeof(ControllerBase).IsAssignableFrom(v) && v.Namespace == t.Namespace);
-        }
+        return t.Assembly.GetTypes().Where(v => typeof(ControllerBase).IsAssignableFrom(v) && v.Namespace == t.Namespace);
+    }
 
-        public override IEnumerable<RequireJsModule> GetModules()
-        {
-            return base.GetModules()
-                       .Concat(
-                               new List<RequireJsModule>
-                               {
+    public override IEnumerable<RequireJsModule> GetModules()
+    {
+        return base.GetModules()
+                   .Concat(
+                           new List<RequireJsModule>
+                           {
                                    new RequireJsModule(
                                                        "* as dto",
                                                        "../dto/configuration.generated",
@@ -41,7 +41,6 @@ namespace SampleSystem.TypeScriptGenerate.Configurations.Services
                                                        "* as mockdto",
                                                        "../../mocked-dto",
                                                        "Framework.Notification.DTO"),
-                               });
-        }
+                           });
     }
 }

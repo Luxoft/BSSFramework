@@ -5,45 +5,44 @@ using Framework.Core;
 
 using JetBrains.Annotations;
 
-namespace Framework.Projection.Contract
+namespace Framework.Projection.Contract;
+
+internal class GeneratedField : BaseFieldInfoImpl
 {
-    internal class GeneratedField : BaseFieldInfoImpl
+    private readonly ProjectionContractEnvironment environment;
+
+    private readonly GeneratedProperty property;
+
+    public GeneratedField([NotNull] ProjectionContractEnvironment environment, [NotNull] GeneratedProperty property, GeneratedType reflectedType)
     {
-        private readonly ProjectionContractEnvironment environment;
+        if (environment == null) throw new ArgumentNullException(nameof(environment));
+        if (property == null) throw new ArgumentNullException(nameof(property));
 
-        private readonly GeneratedProperty property;
+        this.environment = environment;
+        this.property = property;
 
-        public GeneratedField([NotNull] ProjectionContractEnvironment environment, [NotNull] GeneratedProperty property, GeneratedType reflectedType)
-        {
-            if (environment == null) throw new ArgumentNullException(nameof(environment));
-            if (property == null) throw new ArgumentNullException(nameof(property));
+        this.ReflectedType = reflectedType;
+        this.Name = this.property.Name.ToStartLowerCase();
 
-            this.environment = environment;
-            this.property = property;
+        this.FieldType = this.property.PropertyType.IsCollection() ? typeof(ICollection<>).CachedMakeGenericType(this.property.PropertyType.GetCollectionElementType()) : this.property.PropertyType;
+    }
 
-            this.ReflectedType = reflectedType;
-            this.Name = this.property.Name.ToStartLowerCase();
+    public override Type FieldType { get; }
 
-            this.FieldType = this.property.PropertyType.IsCollection() ? typeof(ICollection<>).CachedMakeGenericType(this.property.PropertyType.GetCollectionElementType()) : this.property.PropertyType;
-        }
+    public override Type ReflectedType { get; }
 
-        public override Type FieldType { get; }
+    public override Type DeclaringType => this.ReflectedType;
 
-        public override Type ReflectedType { get; }
-
-        public override Type DeclaringType => this.ReflectedType;
-
-        public override string Name { get; }
+    public override string Name { get; }
 
 
-        public override object[] GetCustomAttributes(Type attributeType, bool inherit)
-        {
-            return (object[])new object[0].ToArray(attributeType);
-        }
+    public override object[] GetCustomAttributes(Type attributeType, bool inherit)
+    {
+        return (object[])new object[0].ToArray(attributeType);
+    }
 
-        public override bool IsDefined(Type attributeType, bool inherit)
-        {
-            return this.GetCustomAttributes(attributeType, inherit).AnyA();
-        }
+    public override bool IsDefined(Type attributeType, bool inherit)
+    {
+        return this.GetCustomAttributes(attributeType, inherit).AnyA();
     }
 }

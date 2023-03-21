@@ -1,11 +1,10 @@
 ﻿using System;
 
-namespace Framework.DomainDriven.DAL.Revisions
+namespace Framework.DomainDriven.DAL.Revisions;
+
+public enum AuditRevisionType
 {
-    public enum AuditRevisionType
-    {
-        Added = 0,
-        Modified = 1,
-        Deleted = 2
-    }
+    Added = 0,
+    Modified = 1,
+    Deleted = 2
 }

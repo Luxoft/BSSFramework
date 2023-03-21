@@ -1,10 +1,9 @@
-﻿namespace Framework.Configuration.Domain
+﻿namespace Framework.Configuration.Domain;
+
+/// <summary>
+/// Интерфейс контейнера для электронных адресов пользователей
+/// </summary>
+public interface ICurrentUserEmailContainer
 {
-    /// <summary>
-    /// Интерфейс контейнера для электронных адресов пользователей
-    /// </summary>
-    public interface ICurrentUserEmailContainer
-    {
-        string CurrentUserEmail { get; }
-    }
+    string CurrentUserEmail { get; }
 }

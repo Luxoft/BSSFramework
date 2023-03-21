@@ -1,9 +1,8 @@
-﻿namespace SampleSystem.Domain
+﻿namespace SampleSystem.Domain;
+
+public enum LocationType
 {
-    public enum LocationType
-    {
-        City = 1,
-        Country = 2,
-        Company = 3
-    }
+    City = 1,
+    Country = 2,
+    Company = 3
 }

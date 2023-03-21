@@ -3,17 +3,17 @@ using Framework.Transfering;
 namespace Framework.DomainDriven.BLL
 {
     /// <summary>
-    /// Атрибут указания генерации фасадного и BLL слоёв для проекций
+    /// ГЂГІГ°ГЁГЎГіГІ ГіГЄГ Г§Г Г­ГЁГї ГЈГҐГ­ГҐГ°Г Г¶ГЁГЁ ГґГ Г±Г Г¤Г­Г®ГЈГ® ГЁ BLL Г±Г«Г®ВёГў Г¤Г«Гї ГЇГ°Г®ГҐГЄГ¶ГЁГ©
     /// </summary>
     public class BLLProjectionViewRoleAttribute : BLLViewRoleBaseAttribute
     {
         /// <summary>
-        /// Максимальный уровень выгрузки из базы
+        /// ГЊГ ГЄГ±ГЁГ¬Г Г«ГјГ­Г»Г© ГіГ°Г®ГўГҐГ­Гј ГўГ»ГЈГ°ГіГ§ГЄГЁ ГЁГ§ ГЎГ Г§Г»
         /// </summary>
         public ViewDTOType MaxFetch { get; set; } = ViewDTOType.ProjectionDTO;
 
         /// <summary>
-        /// Максимальный уровень выгрузки из базы
+        /// ГЊГ ГЄГ±ГЁГ¬Г Г«ГјГ­Г»Г© ГіГ°Г®ГўГҐГ­Гј ГўГ»ГЈГ°ГіГ§ГЄГЁ ГЁГ§ ГЎГ Г§Г»
         /// </summary>
         protected override ViewDTOType BaseMaxFetch => this.MaxFetch;
     }

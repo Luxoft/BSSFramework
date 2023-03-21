@@ -1,47 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Framework.Core
+namespace Framework.Core;
+
+public interface IPeriod
 {
-    public interface IPeriod
-    {
-        DateTime StartDate { get; set; }
+    DateTime StartDate { get; set; }
 
-        DateTime? EndDate { get; set; }
+    DateTime? EndDate { get; set; }
 
-        DateTime EndDateValue { get; }
+    DateTime EndDateValue { get; }
 
-        DateTime NativeStartDate { get; }
+    DateTime NativeStartDate { get; }
 
-        DateTime? NativeEndDate { get; }
+    DateTime? NativeEndDate { get; }
 
-        DateTime NativeEndDateValue { get; }
+    DateTime NativeEndDateValue { get; }
 
-        bool IsWithinOneMonth { get; }
+    bool IsWithinOneMonth { get; }
 
-        bool IsEmpty { get; }
+    bool IsEmpty { get; }
 
-        TimeSpan Duration { get; }
-    }
+    TimeSpan Duration { get; }
+}
 
-    public interface IPeriod<out T> : IPeriod
-    {
-        T RoundByMouths();
+public interface IPeriod<out T> : IPeriod
+{
+    T RoundByMouths();
 
-        T Round();
+    T Round();
 
-        IEnumerable<T> SplitToDays();
+    IEnumerable<T> SplitToDays();
 
-        IEnumerable<T> SplitToWeeks(DayOfWeek firstDay);
+    IEnumerable<T> SplitToWeeks(DayOfWeek firstDay);
 
-        IEnumerable<T> SplitToMonths();
+    IEnumerable<T> SplitToMonths();
 
-        T NativeIntersect(IPeriod target);
+    T NativeIntersect(IPeriod target);
 
-        T Intersect(IPeriod otherPeriod);
+    T Intersect(IPeriod otherPeriod);
 
-        bool IsIntersectedExcludeZeroDuration(IPeriod target);
+    bool IsIntersectedExcludeZeroDuration(IPeriod target);
 
-        bool IsNativeIntersected(IPeriod target);
-    }
+    bool IsNativeIntersected(IPeriod target);
 }

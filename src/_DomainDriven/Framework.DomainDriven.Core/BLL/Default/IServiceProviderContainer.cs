@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace Framework.DomainDriven.BLL
+namespace Framework.DomainDriven.BLL;
+
+public interface IServiceProviderContainer
 {
-    public interface IServiceProviderContainer
-    {
-        IServiceProvider ServiceProvider { get; }
-    }
+    IServiceProvider ServiceProvider { get; }
 }

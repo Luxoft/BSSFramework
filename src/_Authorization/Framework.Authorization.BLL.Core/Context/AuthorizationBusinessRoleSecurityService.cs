@@ -7,11 +7,11 @@ using JetBrains.Annotations;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.Authorization.BLL
+namespace Framework.Authorization.BLL;
+
+public partial class AuthorizationBusinessRoleSecurityService
 {
-    public partial class AuthorizationBusinessRoleSecurityService
-    {
-        public AuthorizationBusinessRoleSecurityService(
+    public AuthorizationBusinessRoleSecurityService(
             IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
             IDisabledSecurityProviderContainer<PersistentDomainObjectBase> disabledSecurityProviderContainer,
             ISecurityOperationResolver<PersistentDomainObjectBase, AuthorizationSecurityOperationCode> securityOperationResolver,
@@ -19,24 +19,23 @@ namespace Framework.Authorization.BLL
             [NotNull] IAuthorizationBLLContext context)
 
             : base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
+    {
+        this.Context = context ?? throw new ArgumentNullException(nameof(context));
+    }
+
+    public IAuthorizationBLLContext Context { get; }
+
+    protected override ISecurityProvider<BusinessRole> CreateSecurityProvider(BLLSecurityMode securityMode)
+    {
+        var baseProvider = base.CreateSecurityProvider(securityMode);
+
+        switch (securityMode)
         {
-            this.Context = context ?? throw new ArgumentNullException(nameof(context));
-        }
+            case BLLSecurityMode.View:
+                return this.Context.GetBusinessRoleSecurityProvider().Or(baseProvider, this.AccessDeniedExceptionService);
 
-        public IAuthorizationBLLContext Context { get; }
-
-        protected override ISecurityProvider<BusinessRole> CreateSecurityProvider(BLLSecurityMode securityMode)
-        {
-            var baseProvider = base.CreateSecurityProvider(securityMode);
-
-            switch (securityMode)
-            {
-                case BLLSecurityMode.View:
-                    return this.Context.GetBusinessRoleSecurityProvider().Or(baseProvider, this.AccessDeniedExceptionService);
-
-                default:
-                    return baseProvider;
-            }
+            default:
+                return baseProvider;
         }
     }
 }

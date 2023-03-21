@@ -6,46 +6,45 @@ using Framework.Core;
 
 using JetBrains.Annotations;
 
-namespace Framework.Projection.Lambda
+namespace Framework.Projection.Lambda;
+
+internal class InjectAttributesProjectionSource : IProjectionSource
 {
-    internal class InjectAttributesProjectionSource : IProjectionSource
+    private readonly IProjectionSource baseSource;
+
+    private readonly ProjectionLambdaEnvironment environment;
+
+    public InjectAttributesProjectionSource([NotNull] IProjectionSource baseSource, ProjectionLambdaEnvironment environment)
     {
-        private readonly IProjectionSource baseSource;
+        this.baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
+        this.environment = environment ?? throw new ArgumentNullException(nameof(environment));
+    }
 
-        private readonly ProjectionLambdaEnvironment environment;
+    public IEnumerable<IProjection> GetProjections()
+    {
+        var projections = this.baseSource.GetProjections().ToBuilders();
 
-        public InjectAttributesProjectionSource([NotNull] IProjectionSource baseSource, ProjectionLambdaEnvironment environment)
+        foreach (var projectionBuilder in projections)
         {
-            this.baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
-            this.environment = environment ?? throw new ArgumentNullException(nameof(environment));
-        }
+            var initTypeAttributes = this.environment.GetProjectionTypeAttributeSource(projectionBuilder).GetAttributes().ToList();
 
-        public IEnumerable<IProjection> GetProjections()
-        {
-            var projections = this.baseSource.GetProjections().ToBuilders();
+            projectionBuilder.Attributes.Override(initTypeAttributes);
 
-            foreach (var projectionBuilder in projections)
+            foreach (var propertyBuilder in projectionBuilder.Properties)
             {
-                var initTypeAttributes = this.environment.GetProjectionTypeAttributeSource(projectionBuilder).GetAttributes().ToList();
+                var initPropAttributes = this.environment.GetProjectionPropertyAttributeSource(propertyBuilder).GetAttributes().ToList();
 
-                projectionBuilder.Attributes.Override(initTypeAttributes);
-
-                foreach (var propertyBuilder in projectionBuilder.Properties)
-                {
-                    var initPropAttributes = this.environment.GetProjectionPropertyAttributeSource(propertyBuilder).GetAttributes().ToList();
-
-                    propertyBuilder.Attributes.Override(initPropAttributes);
-                }
-
-                foreach (var customPropertyBuilder in projectionBuilder.CustomProperties)
-                {
-                    var initCustomPropAttributes = this.environment.GetProjectionCustomPropertyAttributeSource(customPropertyBuilder).GetAttributes().ToList();
-
-                    customPropertyBuilder.Attributes.Override(initCustomPropAttributes);
-                }
+                propertyBuilder.Attributes.Override(initPropAttributes);
             }
 
-            return projections;
+            foreach (var customPropertyBuilder in projectionBuilder.CustomProperties)
+            {
+                var initCustomPropAttributes = this.environment.GetProjectionCustomPropertyAttributeSource(customPropertyBuilder).GetAttributes().ToList();
+
+                customPropertyBuilder.Attributes.Override(initCustomPropAttributes);
+            }
         }
+
+        return projections;
     }
 }

@@ -1,15 +1,14 @@
 ﻿using Framework.DomainDriven.Generation.Domain;
 
-namespace Framework.DomainDriven.DTOGenerator
+namespace Framework.DomainDriven.DTOGenerator;
+
+public interface IDTOSource : IDomainTypeContainer//, IFileTypeSource<DTOFileType>
 {
-    public interface IDTOSource : IDomainTypeContainer//, IFileTypeSource<DTOFileType>
-    {
-        DTOFileType FileType { get; }
-    }
+    DTOFileType FileType { get; }
+}
 
-    public interface IDTOSource<out TConfiguration> : IDTOSource, IGeneratorConfigurationContainer<TConfiguration>
+public interface IDTOSource<out TConfiguration> : IDTOSource, IGeneratorConfigurationContainer<TConfiguration>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
-    {
+{
 
-    }
 }

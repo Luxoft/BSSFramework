@@ -1,21 +1,20 @@
 ﻿using System;
 
-namespace Framework.Authorization.Domain
+namespace Framework.Authorization.Domain;
+
+/// <summary>
+/// Перечень действий, который можно делать c объектом
+/// </summary>
+[Flags]
+public enum AuthorizationOperationContext
 {
-    /// <summary>
-    /// Перечень действий, который можно делать c объектом
-    /// </summary>
-    [Flags]
-    public enum AuthorizationOperationContext
-    {
-        Create = 1,
+    Create = 1,
 
-        Edit = 2,
+    Edit = 2,
 
-        Save = 4,
+    Save = 4,
 
-        SavePrincipal = 8,
+    SavePrincipal = 8,
 
-        All = Create | Edit | Save | SavePrincipal
-    }
+    All = Create | Edit | Save | SavePrincipal
 }

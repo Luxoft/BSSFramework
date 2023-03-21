@@ -2,45 +2,44 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Framework.Core
+namespace Framework.Core;
+
+public class OverrideCallInterfacePropertyVisitor : ExpressionVisitor
 {
-    public class OverrideCallInterfacePropertyVisitor : ExpressionVisitor
+    private readonly PropertyInfo _property;
+
+    private readonly bool _isGeneric;
+
+
+    public OverrideCallInterfacePropertyVisitor(PropertyInfo property)
     {
-        private readonly PropertyInfo _property;
+        if (property == null) throw new ArgumentNullException(nameof(property));
 
-        private readonly bool _isGeneric;
+        this._property = property;
+        this._isGeneric = property.ReflectedType.IsGenericTypeDefinition;
+    }
 
 
-        public OverrideCallInterfacePropertyVisitor(PropertyInfo property)
+    protected override Expression VisitMember(MemberExpression node)
+    {
+        if (node.Member is PropertyInfo && node.Member.Name == this._property.Name)
         {
-            if (property == null) throw new ArgumentNullException(nameof(property));
+            var property = node.Member as PropertyInfo;
 
-            this._property = property;
-            this._isGeneric = property.ReflectedType.IsGenericTypeDefinition;
-        }
+            var overriding = this._isGeneric ? node.Expression.Type.IsGenericType
+                                               && node.Expression.Type.GetGenericTypeDefinition() == this._property.ReflectedType
+                                     : property == this._property;
 
-
-        protected override Expression VisitMember(MemberExpression node)
-        {
-            if (node.Member is PropertyInfo && node.Member.Name == this._property.Name)
+            if (overriding)
             {
-                var property = node.Member as PropertyInfo;
+                var expr = node.Expression is UnaryExpression // Convert Interface -> DomainObject?
+                                   ? (node.Expression as UnaryExpression).Operand
+                                   : node.Expression;
 
-                var overriding = this._isGeneric ? node.Expression.Type.IsGenericType
-                                                   && node.Expression.Type.GetGenericTypeDefinition() == this._property.ReflectedType
-                    : property == this._property;
-
-                if (overriding)
-                {
-                    var expr = node.Expression is UnaryExpression // Convert Interface -> DomainObject?
-                        ? (node.Expression as UnaryExpression).Operand
-                        : node.Expression;
-
-                    return Expression.Property(expr, expr.Type.GetImplementedProperty(this._property));
-                }
+                return Expression.Property(expr, expr.Type.GetImplementedProperty(this._property));
             }
-
-            return base.VisitMember(node);
         }
+
+        return base.VisitMember(node);
     }
 }

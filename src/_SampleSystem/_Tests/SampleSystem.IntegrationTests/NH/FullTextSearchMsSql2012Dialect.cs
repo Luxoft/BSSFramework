@@ -2,14 +2,13 @@
 
 using NHibernate.Dialect.Function;
 
-namespace SampleSystem.IntegrationTests.NH
+namespace SampleSystem.IntegrationTests.NH;
+
+public class FullTextSearchMsSql2012Dialect : EnhancedMsSql2012Dialect
 {
-    public class FullTextSearchMsSql2012Dialect : EnhancedMsSql2012Dialect
+    protected override void RegisterFunctions()
     {
-        protected override void RegisterFunctions()
-        {
-            base.RegisterFunctions();
-            this.RegisterFunction("contains", new StandardSQLFunction("contains", null));
-        }
+        base.RegisterFunctions();
+        this.RegisterFunction("contains", new StandardSQLFunction("contains", null));
     }
 }

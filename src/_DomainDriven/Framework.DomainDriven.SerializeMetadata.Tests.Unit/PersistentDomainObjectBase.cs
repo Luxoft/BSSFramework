@@ -1,7 +1,6 @@
-﻿namespace Framework.DomainDriven.SerializeMetadata.Tests.Unit
-{
-    public class PersistentDomainObjectBase
-    {
+﻿namespace Framework.DomainDriven.SerializeMetadata.Tests.Unit;
 
-    }
+public class PersistentDomainObjectBase
+{
+
 }

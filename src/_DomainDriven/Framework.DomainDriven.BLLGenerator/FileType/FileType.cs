@@ -1,15 +1,14 @@
-﻿namespace Framework.DomainDriven.BLLGenerator
+﻿namespace Framework.DomainDriven.BLLGenerator;
+
+public enum FileType
 {
-    public enum FileType
-    {
-        BLL,
+    BLL,
 
-        BLLFactory,
+    BLLFactory,
 
-        DefaultBLLFactory,
+    DefaultBLLFactory,
 
-        ImplementedBLLFactory,
+    ImplementedBLLFactory,
 
-        BLLFactoryContainer
-    }
+    BLLFactoryContainer
 }

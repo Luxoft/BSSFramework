@@ -1,13 +1,12 @@
-﻿namespace Framework.Validation
+﻿namespace Framework.Validation;
+
+public enum RequiredGroupValidatorMode
 {
-    public enum RequiredGroupValidatorMode
-    {
-        One,
+    One,
 
-        OneOrMore,
+    OneOrMore,
 
-        OneOrNothing,
+    OneOrNothing,
 
-        AllOrNothing
-    }
+    AllOrNothing
 }

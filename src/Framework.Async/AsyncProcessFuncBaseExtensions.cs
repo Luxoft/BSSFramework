@@ -1,6 +1,5 @@
-﻿namespace Framework.Async
+﻿namespace Framework.Async;
+
+public static class AsyncProcessFuncBaseExtensions
 {
-    public static class AsyncProcessFuncBaseExtensions
-    {
-    }
 }

@@ -5,88 +5,87 @@ using System.IO.Compression;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace Framework.DomainDriven.WebApiNetCore.Integration
+namespace Framework.DomainDriven.WebApiNetCore.Integration;
+
+public class EventXsdExporter
 {
-    public class EventXsdExporter
+    private readonly string xsdNamespace;
+
+    private readonly IEnumerable<Type> types;
+
+    public EventXsdExporter(string xsdNamespace, IEnumerable<Type> types)
     {
-        private readonly string xsdNamespace;
+        this.xsdNamespace = xsdNamespace;
+        this.types = types;
+    }
 
-        private readonly IEnumerable<Type> types;
+    public Stream Export()
+    {
+        var schemas = this.ExportTypes();
 
-        public EventXsdExporter(string xsdNamespace, IEnumerable<Type> types)
+        return this.WriteXsd(schemas);
+    }
+
+    private XmlSchemaSet ExportTypes()
+    {
+        var schemas = new XmlSchemas();
+
+        var exporter = new XmlSchemaExporter(schemas);
+
+        var importer = new XmlReflectionImporter(this.xsdNamespace);
+
+        foreach (var type in this.types)
         {
-            this.xsdNamespace = xsdNamespace;
-            this.types = types;
+            var mapping = importer.ImportTypeMapping(type, this.xsdNamespace);
+
+            exporter.ExportTypeMapping(mapping);
         }
 
-        public Stream Export()
-        {
-            var schemas = this.ExportTypes();
+        schemas.Compile(null, false);
 
-            return this.WriteXsd(schemas);
+        return this.ToSet(schemas);
+    }
+
+    private XmlSchemaSet ToSet(XmlSchemas schemas)
+    {
+        var set = new XmlSchemaSet();
+
+        foreach (XmlSchema schema in schemas)
+        {
+            set.Add(schema);
         }
 
-        private XmlSchemaSet ExportTypes()
-        {
-            var schemas = new XmlSchemas();
+        set.Compile();
 
-            var exporter = new XmlSchemaExporter(schemas);
+        return set;
+    }
 
-            var importer = new XmlReflectionImporter(this.xsdNamespace);
-
-            foreach (var type in this.types)
-            {
-                var mapping = importer.ImportTypeMapping(type, this.xsdNamespace);
-
-                exporter.ExportTypeMapping(mapping);
-            }
-
-            schemas.Compile(null, false);
-
-            return this.ToSet(schemas);
-        }
-
-        private XmlSchemaSet ToSet(XmlSchemas schemas)
-        {
-            var set = new XmlSchemaSet();
-
-            foreach (XmlSchema schema in schemas)
-            {
-                set.Add(schema);
-            }
-
-            set.Compile();
-
-            return set;
-        }
-
-        private string ToFileName(string targetNamespace, int index) =>
+    private string ToFileName(string targetNamespace, int index) =>
             $"{targetNamespace.Replace("http://", "").Replace("/", "_").Replace(".", "_")}_{index}.xsd";
 
-        private Stream WriteXsd(XmlSchemaSet schemasSet)
+    private Stream WriteXsd(XmlSchemaSet schemasSet)
+    {
+        var zipStream = new MemoryStream();
+
+        using (var zip = new ZipArchive(zipStream, ZipArchiveMode.Create, true))
         {
-            var zipStream = new MemoryStream();
+            var index = 0;
 
-            using (var zip = new ZipArchive(zipStream, ZipArchiveMode.Create, true))
+            foreach (XmlSchema schema in schemasSet.Schemas())
             {
-                var index = 0;
+                var entry = zip.CreateEntry(this.ToFileName(schema.TargetNamespace, index));
 
-                foreach (XmlSchema schema in schemasSet.Schemas())
+                using (var entryStream = entry.Open())
                 {
-                    var entry = zip.CreateEntry(this.ToFileName(schema.TargetNamespace, index));
-
-                    using (var entryStream = entry.Open())
-                    {
-                        schema.Write(entryStream);
-                    }
-
-                    index++;
+                    schema.Write(entryStream);
                 }
+
+                index++;
             }
-
-            zipStream.Position = 0;
-
-            return zipStream;
         }
+
+        zipStream.Position = 0;
+
+        return zipStream;
     }
 }

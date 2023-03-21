@@ -1,9 +1,8 @@
-﻿namespace Framework.DomainDriven
-{
-    public enum DBSessionMode
-    {
-        Read = 0,
+﻿namespace Framework.DomainDriven;
 
-        Write = 1
-    }
+public enum DBSessionMode
+{
+    Read = 0,
+
+    Write = 1
 }

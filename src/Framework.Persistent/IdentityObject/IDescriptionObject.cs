@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface IDescriptionObject
 {
-    public interface IDescriptionObject
-    {
-        string Description { get; }
-    }
+    string Description { get; }
 }

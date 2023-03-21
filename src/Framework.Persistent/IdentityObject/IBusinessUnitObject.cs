@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface IBusinessUnitObject<out TBusinessUnit>
 {
-    public interface IBusinessUnitObject<out TBusinessUnit>
-    {
-        TBusinessUnit BusinessUnit { get; }
-    }
+    TBusinessUnit BusinessUnit { get; }
 }

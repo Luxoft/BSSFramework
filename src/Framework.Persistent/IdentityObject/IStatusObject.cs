@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface IStatusObject<out TStatus>
 {
-    public interface IStatusObject<out TStatus>
-    {
-        TStatus Status { get; }
-    }
+    TStatus Status { get; }
 }

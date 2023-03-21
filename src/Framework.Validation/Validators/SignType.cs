@@ -1,46 +1,45 @@
 ﻿using System;
 using System.Linq;
 
-namespace Framework.Validation
+namespace Framework.Validation;
+
+[Flags]
+public enum SignType
 {
-    [Flags]
-    public enum SignType
+    Positive = 1,
+
+    Zero = 2,
+
+    Negative = 4,
+
+    ZeroAndPositive = Positive + Zero
+}
+
+public static class SignTypeExtensions
+{
+    public static SignType Inverse(this SignType source)
     {
-        Positive = 1,
+        var result = new[]
+                     {
+                             new {Source = SignType.Negative, Target = SignType.Positive},
+                             new {Source = SignType.Positive, Target = SignType.Negative},
+                             new {Source = SignType.Zero, Target = SignType.Zero},
+                     }
+                     .Where(z => source.HasFlag(z.Source))
+                     .Select(z => z.Target)
+                     .Aggregate((prev, current) => prev | current);
 
-        Zero = 2,
-
-        Negative = 4,
-
-        ZeroAndPositive = Positive + Zero
+        return result;
     }
 
-    public static class SignTypeExtensions
+    public static decimal ToValue(this SignType source)
     {
-        public static SignType Inverse(this SignType source)
+        switch (source)
         {
-            var result = new[]
-                {
-                    new {Source = SignType.Negative, Target = SignType.Positive},
-                    new {Source = SignType.Positive, Target = SignType.Negative},
-                    new {Source = SignType.Zero, Target = SignType.Zero},
-                }
-                .Where(z => source.HasFlag(z.Source))
-                .Select(z => z.Target)
-                .Aggregate((prev, current) => prev | current);
-
-            return result;
-        }
-
-        public static decimal ToValue(this SignType source)
-        {
-            switch (source)
-            {
-                case SignType.Negative: return -1;
-                case SignType.Positive: return 1;
-                case SignType.Zero: return 0;
-                default: throw new ArgumentException(source.ToString());
-            }
+            case SignType.Negative: return -1;
+            case SignType.Positive: return 1;
+            case SignType.Zero: return 0;
+            default: throw new ArgumentException(source.ToString());
         }
     }
 }

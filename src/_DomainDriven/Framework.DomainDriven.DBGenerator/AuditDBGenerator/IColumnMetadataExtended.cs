@@ -1,9 +1,8 @@
 ﻿using NHibernate.Dialect.Schema;
 
-namespace Framework.DomainDriven.NHibernate
+namespace Framework.DomainDriven.NHibernate;
+
+internal interface IColumnMetadataExtended : IColumnMetadata
 {
-    internal interface IColumnMetadataExtended : IColumnMetadata
-    {
-        int NumericalScale { get; }
-    }
+    int NumericalScale { get; }
 }

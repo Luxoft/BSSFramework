@@ -1,16 +1,15 @@
 ﻿using System;
 
-namespace Framework.Persistent
+namespace Framework.Persistent;
+
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Class)]
+public class CreateRoleAttribute : Attribute
 {
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Class)]
-    public class CreateRoleAttribute : Attribute
+    public CreateRoleAttribute(bool value)
     {
-        public CreateRoleAttribute(bool value)
-        {
-            this.Value = value;
-        }
-
-
-        public bool Value { get; private set; }
+        this.Value = value;
     }
+
+
+    public bool Value { get; private set; }
 }

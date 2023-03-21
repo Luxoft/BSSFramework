@@ -1,25 +1,24 @@
 ﻿using System;
 
-namespace Framework.DomainDriven.ServiceModelGenerator
-{
-    public interface IFileStoreAttachmentGeneratorConfigurationBase<out TEnvironment> : IFileStoreAttachmentGeneratorConfigurationBase, IGeneratorConfigurationBase<TEnvironment>
+namespace Framework.DomainDriven.ServiceModelGenerator;
+
+public interface IFileStoreAttachmentGeneratorConfigurationBase<out TEnvironment> : IFileStoreAttachmentGeneratorConfigurationBase, IGeneratorConfigurationBase<TEnvironment>
         where TEnvironment : IFileStoreAttachmentGenerationEnvironmentBase
-    {
+{
 
-    }
+}
 
-    public interface IFileStoreAttachmentGeneratorConfigurationBase : IGeneratorConfigurationBase
-    {
-        string FileItemToMemoryStreamContextServiceName { get; }
+public interface IFileStoreAttachmentGeneratorConfigurationBase : IGeneratorConfigurationBase
+{
+    string FileItemToMemoryStreamContextServiceName { get; }
 
-        Type FileItemType { get; }
+    Type FileItemType { get; }
 
-        Type FileItemContainerLinkType { get; }
+    Type FileItemContainerLinkType { get; }
 
-        Type ObjectFileContainerType { get; }
+    Type ObjectFileContainerType { get; }
 
-        string WebGetPath { get; }
+    string WebGetPath { get; }
 
-        Enum TryGetSecurityAttribute(Type type, bool forEdit);
-    }
+    Enum TryGetSecurityAttribute(Type type, bool forEdit);
 }

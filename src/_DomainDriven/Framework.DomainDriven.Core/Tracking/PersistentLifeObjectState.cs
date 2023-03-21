@@ -1,9 +1,8 @@
-﻿namespace Framework.DomainDriven.BLL.Tracking
+﻿namespace Framework.DomainDriven.BLL.Tracking;
+
+public enum PersistentLifeObjectState
 {
-    public enum PersistentLifeObjectState
-    {
-        Persistent,
-        NotPersistent,
-        MarkAsRemoved
-    }
+    Persistent,
+    NotPersistent,
+    MarkAsRemoved
 }

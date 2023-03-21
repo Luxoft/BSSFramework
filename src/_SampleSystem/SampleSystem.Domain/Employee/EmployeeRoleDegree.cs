@@ -1,12 +1,11 @@
 ﻿using Framework.DomainDriven.BLL;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain
+namespace SampleSystem.Domain;
+
+[BLLViewRole]
+[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeeRoleDegreeView)]
+[UniqueGroup]
+public class EmployeeRoleDegree : BaseDirectory
 {
-    [BLLViewRole]
-    [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeeRoleDegreeView)]
-    [UniqueGroup]
-    public class EmployeeRoleDegree : BaseDirectory
-    {
-    }
 }

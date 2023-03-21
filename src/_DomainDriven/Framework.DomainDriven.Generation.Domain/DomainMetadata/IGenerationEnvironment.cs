@@ -3,16 +3,15 @@ using System.Collections.Generic;
 
 using Framework.Projection;
 
-namespace Framework.DomainDriven.Generation.Domain
+namespace Framework.DomainDriven.Generation.Domain;
+
+public interface IGenerationEnvironment : IDomainMetadata
 {
-    public interface IGenerationEnvironment : IDomainMetadata
-    {
-        string TargetSystemName { get; }
+    string TargetSystemName { get; }
 
-        Type SecurityOperationCodeType { get; }
+    Type SecurityOperationCodeType { get; }
 
-        Type OperationContextType { get; }
+    Type OperationContextType { get; }
 
-        IReadOnlyCollection<IProjectionEnvironment> ProjectionEnvironments { get; }
-    }
+    IReadOnlyCollection<IProjectionEnvironment> ProjectionEnvironments { get; }
 }

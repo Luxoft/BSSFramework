@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Framework.QueryLanguage
+namespace Framework.QueryLanguage;
+
+[DataContract]
+public class GuidConstantExpression : ConstantExpression<System.Guid>
 {
-    [DataContract]
-    public class GuidConstantExpression : ConstantExpression<System.Guid>
-    {
-        public GuidConstantExpression(Guid value)
+    public GuidConstantExpression(Guid value)
             : base(value)
-        {
+    {
 
-        }
+    }
 
-        public override string ToString()
-        {
-            return $"'{this.Value}'";
-        }
+    public override string ToString()
+    {
+        return $"'{this.Value}'";
     }
 }

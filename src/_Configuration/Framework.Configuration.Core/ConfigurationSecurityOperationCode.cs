@@ -1,99 +1,98 @@
 ﻿using Framework.Security;
 
-namespace Framework.Configuration
+namespace Framework.Configuration;
+
+public enum ConfigurationSecurityOperationCode
 {
-    public enum ConfigurationSecurityOperationCode
-    {
-        Disabled = 0,
+    Disabled = 0,
 
-        #region ExceptionMessage
+    #region ExceptionMessage
 
-        [SecurityOperation(SecurityOperationCode.ExceptionMessageView)]
-        ExceptionMessageView,
+    [SecurityOperation(SecurityOperationCode.ExceptionMessageView)]
+    ExceptionMessageView,
 
-        #endregion
+    #endregion
 
-        #region Subscription
+    #region Subscription
 
-        [SecurityOperation(SecurityOperationCode.SubscriptionView)]
-        SubscriptionView,
+    [SecurityOperation(SecurityOperationCode.SubscriptionView)]
+    SubscriptionView,
 
-        [SecurityOperation(SecurityOperationCode.SubscriptionEdit)]
-        SubscriptionEdit,
+    [SecurityOperation(SecurityOperationCode.SubscriptionEdit)]
+    SubscriptionEdit,
 
-        #endregion
+    #endregion
 
-        #region SystemConstant
+    #region SystemConstant
 
-        [SecurityOperation(SecurityOperationCode.SystemConstantView)]
-        SystemConstantView,
+    [SecurityOperation(SecurityOperationCode.SystemConstantView)]
+    SystemConstantView,
 
-        [SecurityOperation(SecurityOperationCode.SystemConstantEdit)]
-        SystemConstantEdit,
+    [SecurityOperation(SecurityOperationCode.SystemConstantEdit)]
+    SystemConstantEdit,
 
-        #endregion
+    #endregion
 
-        #region TargetSystem
+    #region TargetSystem
 
-        [SecurityOperation(SecurityOperationCode.TargetSystemView)]
-        TargetSystemView,
+    [SecurityOperation(SecurityOperationCode.TargetSystemView)]
+    TargetSystemView,
 
-        [SecurityOperation(SecurityOperationCode.TargetSystemEdit)]
-        TargetSystemEdit,
+    [SecurityOperation(SecurityOperationCode.TargetSystemEdit)]
+    TargetSystemEdit,
 
-        /// <summary>
-        /// Операция для ручного инициирования событый
-        /// </summary>
-        [SecurityOperation(SecurityOperationCode.ForceDomainTypeEvent)]
-        ForceDomainTypeEvent,
+    /// <summary>
+    /// Операция для ручного инициирования событый
+    /// </summary>
+    [SecurityOperation(SecurityOperationCode.ForceDomainTypeEvent)]
+    ForceDomainTypeEvent,
 
-        #endregion
+    #endregion
 
-        #region Sequence
+    #region Sequence
 
-        [SecurityOperation(SecurityOperationCode.SequenceView)]
-        SequenceView,
+    [SecurityOperation(SecurityOperationCode.SequenceView)]
+    SequenceView,
 
-        [SecurityOperation(SecurityOperationCode.SequenceEdit)]
-        SequenceEdit,
+    [SecurityOperation(SecurityOperationCode.SequenceEdit)]
+    SequenceEdit,
 
-        #endregion
+    #endregion
 
-        #region Report
+    #region Report
 
-        [SecurityOperation(SecurityOperationCode.ReportView)]
-        ReportView,
+    [SecurityOperation(SecurityOperationCode.ReportView)]
+    ReportView,
 
-        [SecurityOperation(SecurityOperationCode.ReportEdit)]
-        ReportEdit,
+    [SecurityOperation(SecurityOperationCode.ReportEdit)]
+    ReportEdit,
 
-        [SecurityOperation(SecurityOperationCode.ReportGeneration)]
-        ReportGeneration,
+    [SecurityOperation(SecurityOperationCode.ReportGeneration)]
+    ReportGeneration,
 
-        #endregion
+    #endregion
 
-        /// <summary>
-        /// Отображение внутренних серверных ошибок клиенту
-        /// </summary>
-        [SecurityOperation(SecurityOperationCode.DisplayInternalError)]
-        DisplayInternalError,
+    /// <summary>
+    /// Отображение внутренних серверных ошибок клиенту
+    /// </summary>
+    [SecurityOperation(SecurityOperationCode.DisplayInternalError)]
+    DisplayInternalError,
 
-        /// <summary>
-        /// Операция для форсирования создания нотификаций из модификаций хранящихся в локальной бд
-        /// </summary>
-        [SecurityOperation(SecurityOperationCode.ProcessModifications)]
-        ProcessModifications,
+    /// <summary>
+    /// Операция для форсирования создания нотификаций из модификаций хранящихся в локальной бд
+    /// </summary>
+    [SecurityOperation(SecurityOperationCode.ProcessModifications)]
+    ProcessModifications,
 
-        /// <summary>
-        /// Операция для мониторинга состояния обработки очередей в утилитах (евентов, модификаций, нотификаций)
-        /// </summary>
-        [SecurityOperation(SecurityOperationCode.QueueMonitoring)]
-        QueueMonitoring,
+    /// <summary>
+    /// Операция для мониторинга состояния обработки очередей в утилитах (евентов, модификаций, нотификаций)
+    /// </summary>
+    [SecurityOperation(SecurityOperationCode.QueueMonitoring)]
+    QueueMonitoring,
 
-        /// <summary>
-        /// Операции производимые системами для интеграции (Biztalk и т.д.)
-        /// </summary>
-        [SecurityOperation(SecurityOperationCode.SystemIntegration)]
-        SystemIntegration
-    }
+    /// <summary>
+    /// Операции производимые системами для интеграции (Biztalk и т.д.)
+    /// </summary>
+    [SecurityOperation(SecurityOperationCode.SystemIntegration)]
+    SystemIntegration
 }

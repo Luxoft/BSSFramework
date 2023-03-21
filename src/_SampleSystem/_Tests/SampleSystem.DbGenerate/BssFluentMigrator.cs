@@ -5,30 +5,29 @@ using FluentMigrator.Runner;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace SampleSystem.DbGenerate
+namespace SampleSystem.DbGenerate;
+
+public class BssFluentMigrator
 {
-    public class BssFluentMigrator
+    private readonly IServiceProvider serviceProvider;
+
+    public BssFluentMigrator(string connectionString, params Assembly[] migrationAssemblies) =>
+            this.serviceProvider = new ServiceCollection()
+                                   .AddFluentMigratorCore()
+                                   .ConfigureRunner(
+                                                    rb => rb
+                                                          .AddSqlServer()
+                                                          .WithGlobalConnectionString(connectionString)
+                                                          .ScanIn(migrationAssemblies)
+                                                          .For.Migrations())
+                                   .AddLogging(lb => lb.AddFluentMigratorConsole())
+                                   .BuildServiceProvider(false);
+
+    public void Migrate()
     {
-        private readonly IServiceProvider serviceProvider;
+        using var scope = this.serviceProvider.CreateScope();
+        var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
 
-        public BssFluentMigrator(string connectionString, params Assembly[] migrationAssemblies) =>
-                this.serviceProvider = new ServiceCollection()
-                                       .AddFluentMigratorCore()
-                                       .ConfigureRunner(
-                                                        rb => rb
-                                                              .AddSqlServer()
-                                                              .WithGlobalConnectionString(connectionString)
-                                                              .ScanIn(migrationAssemblies)
-                                                              .For.Migrations())
-                                       .AddLogging(lb => lb.AddFluentMigratorConsole())
-                                       .BuildServiceProvider(false);
-
-        public void Migrate()
-        {
-            using var scope = this.serviceProvider.CreateScope();
-            var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
-
-            runner.MigrateUp();
-        }
+        runner.MigrateUp();
     }
 }

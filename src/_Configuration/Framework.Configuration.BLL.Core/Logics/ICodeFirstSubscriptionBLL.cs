@@ -2,12 +2,11 @@
 
 using Framework.Configuration.Domain;
 
-namespace Framework.Configuration.BLL
-{
-    public partial interface ICodeFirstSubscriptionBLL
-    {
-        IEnumerable<string> GetActiveCodeFirstSubscriptionCodes();
+namespace Framework.Configuration.BLL;
 
-        void Save(IEnumerable<CodeFirstSubscription> subscriptions);
-    }
+public partial interface ICodeFirstSubscriptionBLL
+{
+    IEnumerable<string> GetActiveCodeFirstSubscriptionCodes();
+
+    void Save(IEnumerable<CodeFirstSubscription> subscriptions);
 }

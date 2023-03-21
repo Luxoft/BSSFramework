@@ -1,7 +1,6 @@
-﻿namespace Framework.QueryLanguage
+﻿namespace Framework.QueryLanguage;
+
+public interface IStandartExpressionBuilderContainer
 {
-    public interface IStandartExpressionBuilderContainer
-    {
-        IStandartExpressionBuilder StandartExpressionBuilder { get; }
-    }
+    IStandartExpressionBuilder StandartExpressionBuilder { get; }
 }

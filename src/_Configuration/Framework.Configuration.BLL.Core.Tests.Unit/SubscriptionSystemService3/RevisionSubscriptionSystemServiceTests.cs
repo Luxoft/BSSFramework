@@ -18,110 +18,109 @@ using Framework.UnitTesting;
 using NUnit.Framework;
 using NSubstitute;
 
-namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
+namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3;
+
+public sealed class RevisionSubscriptionSystemServiceTests : TestFixtureBase
 {
-    public sealed class RevisionSubscriptionSystemServiceTests : TestFixtureBase
+    private SubscriptionNotificationService<ITestBLLContext> notificationService;
+    private RevisionService<IdentityObject> revisionService;
+    private ConfigurationContextFacade configurationContextFacade;
+
+    [SetUp]
+    public void SetUp()
     {
-        private SubscriptionNotificationService<ITestBLLContext> notificationService;
-        private RevisionService<IdentityObject> revisionService;
-        private ConfigurationContextFacade configurationContextFacade;
+        this.notificationService = this.Fixture.RegisterStub<SubscriptionNotificationService<ITestBLLContext>>();
+        this.revisionService = this.Fixture.RegisterStub<RevisionService<IdentityObject>>();
+        this.configurationContextFacade = this.Fixture.RegisterDynamicMock<ConfigurationContextFacade>();
 
-        [SetUp]
-        public void SetUp()
-        {
-            this.notificationService = this.Fixture.RegisterStub<SubscriptionNotificationService<ITestBLLContext>>();
-            this.revisionService = this.Fixture.RegisterStub<RevisionService<IdentityObject>>();
-            this.configurationContextFacade = this.Fixture.RegisterDynamicMock<ConfigurationContextFacade>();
+        var servicesFactory = this.Fixture.RegisterStub<SubscriptionServicesFactory<ITestBLLContext, IdentityObject>>();
+        servicesFactory.CreateNotificationService().Returns(this.notificationService);
+        servicesFactory.CreateRevisionService<IdentityObject >().Returns(this.revisionService);
+        servicesFactory.CreateConfigurationContextFacade().Returns(this.configurationContextFacade);
+    }
 
-            var servicesFactory = this.Fixture.RegisterStub<SubscriptionServicesFactory<ITestBLLContext, IdentityObject>>();
-            servicesFactory.CreateNotificationService().Returns(this.notificationService);
-            servicesFactory.CreateRevisionService<IdentityObject >().Returns(this.revisionService);
-            servicesFactory.CreateConfigurationContextFacade().Returns(this.configurationContextFacade);
-        }
+    [Test]
+    public void PublicSurface_NullArguments_ArgumentNullException()
+    {
+        // Arrange
+        var assertion = new GuardClauseAssertion(this.Fixture, new NullReferenceBehaviorExpectation());
+        var targetType = typeof(RevisionSubscriptionSystemService<ITestBLLContext, IdentityObject >);
 
-        [Test]
-        public void PublicSurface_NullArguments_ArgumentNullException()
-        {
-            // Arrange
-            var assertion = new GuardClauseAssertion(this.Fixture, new NullReferenceBehaviorExpectation());
-            var targetType = typeof(RevisionSubscriptionSystemService<ITestBLLContext, IdentityObject >);
+        // Act
 
-            // Act
+        // Assert
+        assertion.Verify(targetType.GetConstructors());
+        assertion.Verify(
+                         targetType.GetMethods()
+                                   .Where(mi => mi.Name != "GetRecipientsUntyped" && mi.Name != "ProcessChangedObjectUntyped"));
+    }
 
-            // Assert
-            assertion.Verify(targetType.GetConstructors());
-            assertion.Verify(
-                targetType.GetMethods()
-                .Where(mi => mi.Name != "GetRecipientsUntyped" && mi.Name != "ProcessChangedObjectUntyped"));
-        }
+    [Test]
+    public void ProcessByObjectModifications_Call_NonEmptyTryResultCollection()
+    {
+        // Arrange
+        var modifications = this.Fixture.Create<ObjectModificationInfo<Guid>>();
+        var versions = this.Fixture.Create<DomainObjectVersions<IdentityObject>>();
+        var expectedResult = this.CreateStub<IList<ITryResult<Subscription>>>();
 
-        [Test]
-        public void ProcessByObjectModifications_Call_NonEmptyTryResultCollection()
-        {
-            // Arrange
-            var modifications = this.Fixture.Create<ObjectModificationInfo<Guid>>();
-            var versions = this.Fixture.Create<DomainObjectVersions<IdentityObject>>();
-            var expectedResult = this.CreateStub<IList<ITryResult<Subscription>>>();
+        this.configurationContextFacade
+            .GetDomainObjectType(modifications.TypeInfo)
+            .Returns(typeof(IdentityObject));
 
-            this.configurationContextFacade
-                .GetDomainObjectType(modifications.TypeInfo)
-                .Returns(typeof(IdentityObject));
+        this.revisionService
+            .GetDomainObjectVersions(modifications.Identity, modifications.Revision)
+            .Returns(versions);
 
-            this.revisionService
-                .GetDomainObjectVersions(modifications.Identity, modifications.Revision)
-                .Returns(versions);
+        this.notificationService
+            .NotifyDomainObjectChanged(versions)
+            .Returns(expectedResult);
 
-            this.notificationService
-                .NotifyDomainObjectChanged(versions)
-                .Returns(expectedResult);
+        // Act
+        var sut = this.Fixture.Create<RevisionSubscriptionSystemService<ITestBLLContext, IdentityObject >>();
+        var actualResult = sut.Process(modifications);
 
-            // Act
-            var sut = this.Fixture.Create<RevisionSubscriptionSystemService<ITestBLLContext, IdentityObject >>();
-            var actualResult = sut.Process(modifications);
+        // Assert
+        actualResult.Should().BeSameAs(expectedResult);
+    }
 
-            // Assert
-            actualResult.Should().BeSameAs(expectedResult);
-        }
+    [Test]
+    public void ProcessByObjectModifications_NoActiveSubscribtions_EmptyTryResultCollection()
+    {
+        // Arrange
+        var modifications = this.Fixture.Create<ObjectModificationInfo<Guid>>();
 
-        [Test]
-        public void ProcessByObjectModifications_NoActiveSubscribtions_EmptyTryResultCollection()
-        {
-            // Arrange
-            var modifications = this.Fixture.Create<ObjectModificationInfo<Guid>>();
+        this.configurationContextFacade
+            .GetDomainObjectType(modifications.TypeInfo)
+            .Returns(typeof(IdentityObject));
 
-            this.configurationContextFacade
-                .GetDomainObjectType(modifications.TypeInfo)
-                .Returns(typeof(IdentityObject));
+        this.revisionService
+            .GetDomainObjectVersions(modifications.Identity, modifications.Revision)
+            .Returns(default(DomainObjectVersions<IdentityObject>));
 
-            this.revisionService
-                .GetDomainObjectVersions(modifications.Identity, modifications.Revision)
-                .Returns(default(DomainObjectVersions<IdentityObject>));
+        // Act
+        var sut = this.Fixture.Create<RevisionSubscriptionSystemService<ITestBLLContext, IdentityObject >>();
+        var result = sut.Process(modifications);
 
-            // Act
-            var sut = this.Fixture.Create<RevisionSubscriptionSystemService<ITestBLLContext, IdentityObject >>();
-            var result = sut.Process(modifications);
+        // Assert
+        result.Should().HaveCount(0);
+    }
 
-            // Assert
-            result.Should().HaveCount(0);
-        }
+    [Test]
+    public void GetObjectModifications_Call_NonEmptyObjectModificationCollection()
+    {
+        // Arrange
+        var changes = this.Fixture.Create<DALChanges>();
+        var expectedResult = this.Fixture.CreateMany<ObjectModificationInfo<Guid>>();
 
-        [Test]
-        public void GetObjectModifications_Call_NonEmptyObjectModificationCollection()
-        {
-            // Arrange
-            var changes = this.Fixture.Create<DALChanges>();
-            var expectedResult = this.Fixture.CreateMany<ObjectModificationInfo<Guid>>();
+        this.revisionService
+            .GetObjectModifications(changes)
+            .Returns(expectedResult);
 
-            this.revisionService
-                .GetObjectModifications(changes)
-                .Returns(expectedResult);
+        // Act
+        var sut = this.Fixture.Create<RevisionSubscriptionSystemService<ITestBLLContext, IdentityObject>>();
+        var actualResult = sut.GetObjectModifications(changes);
 
-            // Act
-            var sut = this.Fixture.Create<RevisionSubscriptionSystemService<ITestBLLContext, IdentityObject>>();
-            var actualResult = sut.GetObjectModifications(changes);
-
-            // Assert
-            actualResult.Should().BeSameAs(expectedResult);
-        }
+        // Assert
+        actualResult.Should().BeSameAs(expectedResult);
     }
 }

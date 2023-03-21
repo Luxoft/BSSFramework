@@ -4,22 +4,21 @@ using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 
-namespace SampleSystem.Domain
+namespace SampleSystem.Domain;
+
+[View]
+public class ManagementUnitToAncestorChildView : AuditPersistentDomainObjectBase, IHierarchicalToAncestorOrChildLink<ManagementUnit, Guid>
 {
-    [View]
-    public class ManagementUnitToAncestorChildView : AuditPersistentDomainObjectBase, IHierarchicalToAncestorOrChildLink<ManagementUnit, Guid>
+    private ManagementUnit childOrAncestor;
+    private ManagementUnit source;
+
+    public virtual ManagementUnit ChildOrAncestor
     {
-        private ManagementUnit childOrAncestor;
-        private ManagementUnit source;
+        get { return this.childOrAncestor; }
+    }
 
-        public virtual ManagementUnit ChildOrAncestor
-        {
-            get { return this.childOrAncestor; }
-        }
-
-        public virtual ManagementUnit Source
-        {
-            get { return this.source; }
-        }
+    public virtual ManagementUnit Source
+    {
+        get { return this.source; }
     }
 }

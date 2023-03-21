@@ -1,9 +1,8 @@
 ﻿using Framework.Core;
 
-namespace Framework.DomainDriven.SerializeMetadata
+namespace Framework.DomainDriven.SerializeMetadata;
+
+public interface ISystemMetadataTypeBuilder : ITypeResolverContainer<TypeHeader>, IIAnonymousTypeBuilderContainer<DomainTypeSubsetMetadata>
 {
-    public interface ISystemMetadataTypeBuilder : ITypeResolverContainer<TypeHeader>, IIAnonymousTypeBuilderContainer<DomainTypeSubsetMetadata>
-    {
-        SystemMetadata SystemMetadata { get; }
-    }
+    SystemMetadata SystemMetadata { get; }
 }

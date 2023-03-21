@@ -1,8 +1,7 @@
 ﻿using System.CodeDom;
 
-namespace Framework.CodeDom
+namespace Framework.CodeDom;
+
+public class CodeMethodYieldBreakStatement : CodeStatement
 {
-    public class CodeMethodYieldBreakStatement : CodeStatement
-    {
-    }
 }

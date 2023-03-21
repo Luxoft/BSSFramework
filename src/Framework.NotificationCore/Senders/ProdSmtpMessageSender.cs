@@ -10,51 +10,50 @@ using Framework.NotificationCore.Services;
 using Framework.NotificationCore.Settings;
 using Serilog;
 
-namespace Framework.NotificationCore.Senders
+namespace Framework.NotificationCore.Senders;
+
+internal class ProdSmtpMessageSender : ISmtpMessageSender
 {
-    internal class ProdSmtpMessageSender : ISmtpMessageSender
+    protected readonly SmtpSettings settings;
+
+    private IRewriteReceiversService rewriteReceiversService;
+
+    public ProdSmtpMessageSender(SmtpSettings settings, IRewriteReceiversService rewriteReceiversService)
     {
-        protected readonly SmtpSettings settings;
+        this.settings = settings;
+        this.rewriteReceiversService = rewriteReceiversService;
+    }
 
-        private IRewriteReceiversService rewriteReceiversService;
+    public void Send(SmtpClient client, NotificationEventDTO message)
+    {
+        client.Send(this.ToMailMessage(message));
+    }
 
-        public ProdSmtpMessageSender(SmtpSettings settings, IRewriteReceiversService rewriteReceiversService)
+    protected virtual MailMessage ToMailMessage(NotificationEventDTO dto)
+    {
+        if (dto == null)
         {
-            this.settings = settings;
-            this.rewriteReceiversService = rewriteReceiversService;
+            throw new ArgumentNullException(nameof(dto));
         }
 
-        public void Send(SmtpClient client, NotificationEventDTO message)
+        var mailMessage = dto.ToMessage().ToMailMessage();
+
+        if (this.rewriteReceiversService != null)
         {
-            client.Send(this.ToMailMessage(message));
+            this.rewriteReceiversService.RewriteToRecipients(mailMessage, dto);
+            this.rewriteReceiversService.RewriteCopyRecipients(mailMessage, dto);
+            this.rewriteReceiversService.RewriteReplyTo(mailMessage, dto);
         }
 
-        protected virtual MailMessage ToMailMessage(NotificationEventDTO dto)
+        if (!mailMessage.To.Any())
         {
-            if (dto == null)
-            {
-                throw new ArgumentNullException(nameof(dto));
-            }
+            Log.Warning(
+                        "Recipients for notification {code} were not found - notification was redirected to support",
+                        dto.TechnicalInformation.MessageTemplateCode);
 
-            var mailMessage = dto.ToMessage().ToMailMessage();
-
-            if (this.rewriteReceiversService != null)
-            {
-                this.rewriteReceiversService.RewriteToRecipients(mailMessage, dto);
-                this.rewriteReceiversService.RewriteCopyRecipients(mailMessage, dto);
-                this.rewriteReceiversService.RewriteReplyTo(mailMessage, dto);
-            }
-
-            if (!mailMessage.To.Any())
-            {
-                Log.Warning(
-                    "Recipients for notification {code} were not found - notification was redirected to support",
-                    dto.TechnicalInformation.MessageTemplateCode);
-
-                mailMessage.To.AddRange(RecipientsHelper.ToRecipients(this.settings.DefaultReceiverEmails));
-            }
-
-            return mailMessage;
+            mailMessage.To.AddRange(RecipientsHelper.ToRecipients(this.settings.DefaultReceiverEmails));
         }
+
+        return mailMessage;
     }
 }

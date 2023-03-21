@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface IVersionObject<out TVersion>
 {
-    public interface IVersionObject<out TVersion>
-    {
-        TVersion Version { get; }
-    }
+    TVersion Version { get; }
 }

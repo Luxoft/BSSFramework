@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface IIdentityObjectContainer<out TIdentityObject>
 {
-    public interface IIdentityObjectContainer<out TIdentityObject>
-    {
-        TIdentityObject Identity { get; }
-    }
+    TIdentityObject Identity { get; }
 }

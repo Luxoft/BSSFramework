@@ -1,8 +1,7 @@
 ﻿using System;
 
-namespace Framework.ServiceModel.Async
+namespace Framework.ServiceModel.Async;
+
+public partial class ServiceProxy<TService>
 {
-    public partial class ServiceProxy<TService>
-    {
-    }
 }

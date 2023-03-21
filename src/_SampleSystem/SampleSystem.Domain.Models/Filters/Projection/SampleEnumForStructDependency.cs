@@ -1,9 +1,8 @@
-﻿namespace SampleSystem.Domain
+﻿namespace SampleSystem.Domain;
+
+public enum SampleEnumForStructDependency
 {
-    public enum SampleEnumForStructDependency
-    {
-        A,
-        B,
-        C
-    }
+    A,
+    B,
+    C
 }

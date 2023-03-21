@@ -1,10 +1,9 @@
 ﻿using Framework.DomainDriven.BLL;
 
-namespace SampleSystem.Domain
+namespace SampleSystem.Domain;
+
+[BLLViewRole(CustomImplementation = true)]
+public class EmployeeEmailChangeModel : DomainObjectChangeModel<Employee>
 {
-    [BLLViewRole(CustomImplementation = true)]
-    public class EmployeeEmailChangeModel : DomainObjectChangeModel<Employee>
-    {
-        public string Email { get; set; }
-    }
+    public string Email { get; set; }
 }

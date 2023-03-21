@@ -1,18 +1,17 @@
 ﻿using System;
 using Framework.Transfering;
 
-namespace Framework.DomainDriven.BLL
+namespace Framework.DomainDriven.BLL;
+
+/// <summary>
+/// Базовый атрибут отображения объектов через фасадный слой (Visual, Simple, Full, Rich, Projection)
+/// </summary>
+public abstract class BLLViewRoleBaseAttribute : BLLServiceRoleAttribute, IMaxFetchContainer
 {
     /// <summary>
-    /// Базовый атрибут отображения объектов через фасадный слой (Visual, Simple, Full, Rich, Projection)
+    /// Максимальный уровень выгрузки из базы
     /// </summary>
-    public abstract class BLLViewRoleBaseAttribute : BLLServiceRoleAttribute, IMaxFetchContainer
-    {
-        /// <summary>
-        /// Максимальный уровень выгрузки из базы
-        /// </summary>
-        protected abstract ViewDTOType BaseMaxFetch { get; }
+    protected abstract ViewDTOType BaseMaxFetch { get; }
 
-        ViewDTOType IMaxFetchContainer.MaxFetch => this.BaseMaxFetch;
-    }
+    ViewDTOType IMaxFetchContainer.MaxFetch => this.BaseMaxFetch;
 }

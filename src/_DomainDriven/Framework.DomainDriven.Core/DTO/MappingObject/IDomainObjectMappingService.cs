@@ -1,8 +1,7 @@
-﻿namespace Framework.DomainDriven
+﻿namespace Framework.DomainDriven;
+
+public interface IDomainObjectMappingService<in TPesistentDomainObjectBase>
 {
-    public interface IDomainObjectMappingService<in TPesistentDomainObjectBase>
-    {
-        void MapToDomainObject<TDomainObject>(TDomainObject source, TDomainObject target)
+    void MapToDomainObject<TDomainObject>(TDomainObject source, TDomainObject target)
             where TDomainObject : TPesistentDomainObjectBase;
-    }
 }

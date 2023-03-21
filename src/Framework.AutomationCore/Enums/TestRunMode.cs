@@ -1,13 +1,12 @@
-﻿namespace Automation.Enums
+﻿namespace Automation.Enums;
+
+public enum TestRunMode
 {
-    public enum TestRunMode
-    {
-        DefaultRunModeOnEmptyDatabase = 0,
+    DefaultRunModeOnEmptyDatabase = 0,
 
-        RestoreDatabaseUsingAttach = 1,
+    RestoreDatabaseUsingAttach = 1,
 
-        GenerateTestDataOnExistingDatabase = 2,
+    GenerateTestDataOnExistingDatabase = 2,
 
-        RestoreDatabaseFromBackupAndUsingAttach = 3,
-    }
+    RestoreDatabaseFromBackupAndUsingAttach = 3,
 }

@@ -1,9 +1,8 @@
-﻿namespace SampleSystem.Domain.Projections
-{
-    public partial class BusinessUnitProgramClass
-    {
-        public override string VirtualValue => this.Id.ToString();
+﻿namespace SampleSystem.Domain.Projections;
 
-        public override string VirtualName => this.Name;
-    }
+public partial class BusinessUnitProgramClass
+{
+    public override string VirtualValue => this.Id.ToString();
+
+    public override string VirtualName => this.Name;
 }

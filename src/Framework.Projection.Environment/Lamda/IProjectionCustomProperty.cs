@@ -1,30 +1,29 @@
 ﻿using System.Collections.Generic;
 
-namespace Framework.Projection.Lambda
+namespace Framework.Projection.Lambda;
+
+/// <summary>
+/// Кастомное проекционное свойство
+/// </summary>
+public interface IProjectionCustomProperty : IProjectionAttributeProvider
 {
     /// <summary>
-    /// Кастомное проекционное свойство
+    /// Имя свойства
     /// </summary>
-    public interface IProjectionCustomProperty : IProjectionAttributeProvider
-    {
-        /// <summary>
-        /// Имя свойства
-        /// </summary>
-        string Name { get; }
+    string Name { get; }
 
-        /// <summary>
-        /// Доступна запись
-        /// </summary>
-        bool Writable { get; }
+    /// <summary>
+    /// Доступна запись
+    /// </summary>
+    bool Writable { get; }
 
-        /// <summary>
-        /// Тип свойства
-        /// </summary>
-        TypeReferenceBase Type { get; }
+    /// <summary>
+    /// Тип свойства
+    /// </summary>
+    TypeReferenceBase Type { get; }
 
-        /// <summary>
-        /// Дополнительная подгрузка свойств
-        /// </summary>
-        IReadOnlyList<string> Fetchs { get; }
-    }
+    /// <summary>
+    /// Дополнительная подгрузка свойств
+    /// </summary>
+    IReadOnlyList<string> Fetchs { get; }
 }

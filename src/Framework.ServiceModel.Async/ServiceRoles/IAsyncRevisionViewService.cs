@@ -1,9 +1,8 @@
 ﻿using Framework.Async;
 
-namespace Framework.ServiceModel.Async
+namespace Framework.ServiceModel.Async;
+
+public interface IAsyncRevisionViewService<in TIdentityObject, in TRevisionIdentity, out TViewObject>
 {
-    public interface IAsyncRevisionViewService<in TIdentityObject, in TRevisionIdentity, out TViewObject>
-    {
-        IAsyncProcessFunc<TIdentityObject, TRevisionIdentity, TViewObject> ViewRevisionFunc { get; }
-    }
+    IAsyncProcessFunc<TIdentityObject, TRevisionIdentity, TViewObject> ViewRevisionFunc { get; }
 }

@@ -1,26 +1,25 @@
 ﻿using System;
 
-namespace Framework.DomainDriven.DBGenerator
+namespace Framework.DomainDriven.DBGenerator;
+
+internal class GeneratorContext
 {
-    internal class GeneratorContext
+    private readonly ModifyMode _modifyMode;
+    private readonly MergeColumnMode _mergeColumnMode;
+
+    public GeneratorContext(ModifyMode modifyMode, MergeColumnMode mergeColumnMode)
     {
-        private readonly ModifyMode _modifyMode;
-        private readonly MergeColumnMode _mergeColumnMode;
+        this._modifyMode = modifyMode;
+        this._mergeColumnMode = mergeColumnMode;
+    }
 
-        public GeneratorContext(ModifyMode modifyMode, MergeColumnMode mergeColumnMode)
-        {
-            this._modifyMode = modifyMode;
-            this._mergeColumnMode = mergeColumnMode;
-        }
+    public ModifyMode ModifyMode
+    {
+        get { return this._modifyMode; }
+    }
 
-        public ModifyMode ModifyMode
-        {
-            get { return this._modifyMode; }
-        }
-
-        public MergeColumnMode MergeColumnMode
-        {
-            get { return this._mergeColumnMode; }
-        }
+    public MergeColumnMode MergeColumnMode
+    {
+        get { return this._mergeColumnMode; }
     }
 }

@@ -2,65 +2,64 @@
 using System.Linq;
 using Framework.Notification;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Templates
+namespace Framework.Configuration.BLL.SubscriptionSystemService3.Templates;
+
+internal sealed class ExcessTemplatesFilterTo : ExcessTemplatesFilterBase
 {
-    internal sealed class ExcessTemplatesFilterTo : ExcessTemplatesFilterBase
+    internal IEnumerable<MessageTemplateNotification> ProcessTemplates(
+            IEnumerable<MessageTemplateNotification> templates)
     {
-        internal IEnumerable<MessageTemplateNotification> ProcessTemplates(
-            IEnumerable<MessageTemplateNotification> templates)
-        {
-            var groups = CollapseTemplates(GetTemplatesTo(templates));
-            var result = groups.SelectMany(ProcessTemplatesGroup);
+        var groups = CollapseTemplates(GetTemplatesTo(templates));
+        var result = groups.SelectMany(ProcessTemplatesGroup);
 
-            return result;
-        }
+        return result;
+    }
 
-        private static IEnumerable<MessageTemplateNotification> ProcessTemplatesGroup(
+    private static IEnumerable<MessageTemplateNotification> ProcessTemplatesGroup(
             IGrouping<MessageTemplateNotification, MessageTemplateNotification> group)
-        {
-            return CreateTemplates(group.ToList());
-        }
+    {
+        return CreateTemplates(group.ToList());
+    }
 
-        private static IEnumerable<MessageTemplateNotification> CreateTemplates(
+    private static IEnumerable<MessageTemplateNotification> CreateTemplates(
             IReadOnlyCollection<MessageTemplateNotification> templates)
-        {
-            var commonTemplate = FindCommonTemplate(templates);
-            var recipients = templates.SelectMany(t => t.Receivers).Distinct();
+    {
+        var commonTemplate = FindCommonTemplate(templates);
+        var recipients = templates.SelectMany(t => t.Receivers).Distinct();
 
-            var result = commonTemplate.Subscription.SendIndividualLetters
-                ? CreateTemplatesForEach(commonTemplate, recipients)
-                : CreateTemplatesForAll(commonTemplate, recipients);
+        var result = commonTemplate.Subscription.SendIndividualLetters
+                             ? CreateTemplatesForEach(commonTemplate, recipients)
+                             : CreateTemplatesForAll(commonTemplate, recipients);
 
-            return result;
-        }
+        return result;
+    }
 
-        private static IEnumerable<MessageTemplateNotification> CreateTemplatesForEach(
+    private static IEnumerable<MessageTemplateNotification> CreateTemplatesForEach(
             MessageTemplateNotification commonTemplate, IEnumerable<string> recipients)
-        {
+    {
 
-            var result = recipients.Select(r => CopyTemplate(
-                commonTemplate,
-                new[] { r },
-                Enumerable.Empty<string>(),
-                commonTemplate.ReplyTo));
+        var result = recipients.Select(r => CopyTemplate(
+                                                         commonTemplate,
+                                                         new[] { r },
+                                                         Enumerable.Empty<string>(),
+                                                         commonTemplate.ReplyTo));
 
-            return result;
-        }
+        return result;
+    }
 
-        private static IEnumerable<MessageTemplateNotification> CreateTemplatesForAll(
+    private static IEnumerable<MessageTemplateNotification> CreateTemplatesForAll(
             MessageTemplateNotification commonTemplate, IEnumerable<string> recipients)
-        {
-            var result = CopyTemplate(commonTemplate, recipients, Enumerable.Empty<string>(), commonTemplate.ReplyTo);
-            yield return result;
-        }
+    {
+        var result = CopyTemplate(commonTemplate, recipients, Enumerable.Empty<string>(), commonTemplate.ReplyTo);
+        yield return result;
+    }
 
-        private static MessageTemplateNotification FindCommonTemplate(
+    private static MessageTemplateNotification FindCommonTemplate(
             IEnumerable<MessageTemplateNotification> templates)
-        {
-            return templates
-                .OrderByDescending(t => t.Subscription.SendIndividualLetters)
-                .ThenByDescending(t => t.Subscription.IncludeAttachments)
-                .First();
-        }
+    {
+        return templates
+               .OrderByDescending(t => t.Subscription.SendIndividualLetters)
+               .ThenByDescending(t => t.Subscription.IncludeAttachments)
+               .First();
     }
 }

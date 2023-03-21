@@ -2,15 +2,14 @@
 
 using SampleSystem.Domain.IntergrationVersions;
 
-namespace SampleSystem.Domain
+namespace SampleSystem.Domain;
+
+[BLLIntegrationSaveRole(AllowCreate = true)]
+public class IntegrationVersionContainer1CustomIntegrationSaveModel : DomainObjectIntegrationSaveModel<IntegrationVersionContainer1>
 {
-    [BLLIntegrationSaveRole(AllowCreate = true)]
-    public class IntegrationVersionContainer1CustomIntegrationSaveModel : DomainObjectIntegrationSaveModel<IntegrationVersionContainer1>
+    public string CustomName
     {
-        public string CustomName
-        {
-            get;
-            set;
-        }
+        get;
+        set;
     }
 }

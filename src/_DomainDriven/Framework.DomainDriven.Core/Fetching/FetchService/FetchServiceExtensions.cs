@@ -4,124 +4,123 @@ using System.Collections.Generic;
 using Framework.Core;
 using Framework.OData;
 
-namespace Framework.DomainDriven
+namespace Framework.DomainDriven;
+
+public static class FetchServiceExtensions
 {
-    public static class FetchServiceExtensions
-    {
-        public static IFetchService<TPersistentDomainObjectBase, FetchBuildRule> Add<TPersistentDomainObjectBase>(
+    public static IFetchService<TPersistentDomainObjectBase, FetchBuildRule> Add<TPersistentDomainObjectBase>(
             this IFetchService<TPersistentDomainObjectBase, FetchBuildRule.DTOFetchBuildRule> mainService,
             IFetchService<TPersistentDomainObjectBase, SelectOperation> odataSerice)
-        {
-            if (mainService == null) throw new ArgumentNullException(nameof(mainService));
-            if (odataSerice == null) throw new ArgumentNullException(nameof(odataSerice));
+    {
+        if (mainService == null) throw new ArgumentNullException(nameof(mainService));
+        if (odataSerice == null) throw new ArgumentNullException(nameof(odataSerice));
 
-            return new MixedFetchService<TPersistentDomainObjectBase>(mainService, odataSerice);
-        }
+        return new MixedFetchService<TPersistentDomainObjectBase>(mainService, odataSerice);
+    }
 
-        public static IFetchService<TPersistentDomainObjectBase, TBuildRule> WithCompress<TPersistentDomainObjectBase, TBuildRule>(
+    public static IFetchService<TPersistentDomainObjectBase, TBuildRule> WithCompress<TPersistentDomainObjectBase, TBuildRule>(
             this IFetchService<TPersistentDomainObjectBase, TBuildRule> service)
-        {
-            if (service == null) throw new ArgumentNullException(nameof(service));
+    {
+        if (service == null) throw new ArgumentNullException(nameof(service));
 
-            return new CompressFetchService<TPersistentDomainObjectBase, TBuildRule>(service);
-        }
+        return new CompressFetchService<TPersistentDomainObjectBase, TBuildRule>(service);
+    }
 
 
-        public static IFetchService<TPersistentDomainObjectBase, TBuildRule> WithLock<TPersistentDomainObjectBase, TBuildRule>(
+    public static IFetchService<TPersistentDomainObjectBase, TBuildRule> WithLock<TPersistentDomainObjectBase, TBuildRule>(
             this IFetchService<TPersistentDomainObjectBase, TBuildRule> service, object locker = null)
-        {
-            if (service == null) throw new ArgumentNullException(nameof(service));
+    {
+        if (service == null) throw new ArgumentNullException(nameof(service));
 
-            return new LockFetchService<TPersistentDomainObjectBase, TBuildRule>(service, locker);
-        }
+        return new LockFetchService<TPersistentDomainObjectBase, TBuildRule>(service, locker);
+    }
 
 
-        public static IFetchService<TPersistentDomainObjectBase, TBuildRule> WithCache<TPersistentDomainObjectBase, TBuildRule>(
+    public static IFetchService<TPersistentDomainObjectBase, TBuildRule> WithCache<TPersistentDomainObjectBase, TBuildRule>(
             this IFetchService<TPersistentDomainObjectBase, TBuildRule> service)
-        {
-            if (service == null) throw new ArgumentNullException(nameof(service));
+    {
+        if (service == null) throw new ArgumentNullException(nameof(service));
 
-            return new CacheFetchService<TPersistentDomainObjectBase, TBuildRule>(service);
+        return new CacheFetchService<TPersistentDomainObjectBase, TBuildRule>(service);
+    }
+
+
+
+
+    private class CompressFetchService<TPersistentDomainObjectBase, TBuildRule> :
+            IFetchService<TPersistentDomainObjectBase, TBuildRule>
+    {
+        private readonly IFetchService<TPersistentDomainObjectBase, TBuildRule> _baseService;
+
+        public CompressFetchService(IFetchService<TPersistentDomainObjectBase, TBuildRule> baseService)
+        {
+            if (baseService == null) throw new ArgumentNullException(nameof(baseService));
+
+            this._baseService = baseService;
         }
 
-
-
-
-        private class CompressFetchService<TPersistentDomainObjectBase, TBuildRule> :
-            IFetchService<TPersistentDomainObjectBase, TBuildRule>
-        {
-            private readonly IFetchService<TPersistentDomainObjectBase, TBuildRule> _baseService;
-
-            public CompressFetchService(IFetchService<TPersistentDomainObjectBase, TBuildRule> baseService)
-            {
-                if (baseService == null) throw new ArgumentNullException(nameof(baseService));
-
-                this._baseService = baseService;
-            }
-
-            public IFetchContainer<TDomainObject> GetContainer<TDomainObject>(TBuildRule rule)
+        public IFetchContainer<TDomainObject> GetContainer<TDomainObject>(TBuildRule rule)
                 where TDomainObject : TPersistentDomainObjectBase
-            {
-                if (rule == null) throw new ArgumentNullException(nameof(rule));
+        {
+            if (rule == null) throw new ArgumentNullException(nameof(rule));
 
-                return this._baseService.GetContainer<TDomainObject>(rule).Compress();
-            }
+            return this._baseService.GetContainer<TDomainObject>(rule).Compress();
+        }
+    }
+
+    private class LockFetchService<TPersistentDomainObjectBase, TBuildRule> :
+            IFetchService<TPersistentDomainObjectBase, TBuildRule>
+    {
+        private readonly IFetchService<TPersistentDomainObjectBase, TBuildRule> _baseService;
+
+        private readonly object _locker;
+
+        public LockFetchService(IFetchService<TPersistentDomainObjectBase, TBuildRule> baseService, object locker)
+        {
+            if (baseService == null) throw new ArgumentNullException(nameof(baseService));
+
+            this._baseService = baseService;
+            this._locker = locker ?? new object();
         }
 
-        private class LockFetchService<TPersistentDomainObjectBase, TBuildRule> :
-            IFetchService<TPersistentDomainObjectBase, TBuildRule>
-        {
-            private readonly IFetchService<TPersistentDomainObjectBase, TBuildRule> _baseService;
-
-            private readonly object _locker;
-
-            public LockFetchService(IFetchService<TPersistentDomainObjectBase, TBuildRule> baseService, object locker)
-            {
-                if (baseService == null) throw new ArgumentNullException(nameof(baseService));
-
-                this._baseService = baseService;
-                this._locker = locker ?? new object();
-            }
-
-            public IFetchContainer<TDomainObject> GetContainer<TDomainObject>(TBuildRule rule)
+        public IFetchContainer<TDomainObject> GetContainer<TDomainObject>(TBuildRule rule)
                 where TDomainObject : TPersistentDomainObjectBase
-            {
-                if (rule == null) throw new ArgumentNullException(nameof(rule));
+        {
+            if (rule == null) throw new ArgumentNullException(nameof(rule));
 
-                lock (this._locker)
-                {
-                    return this._baseService.GetContainer<TDomainObject>(rule);
-                }
+            lock (this._locker)
+            {
+                return this._baseService.GetContainer<TDomainObject>(rule);
             }
         }
+    }
 
-        private class CacheFetchService<TPersistentDomainObjectBase, TBuildRule> :
+    private class CacheFetchService<TPersistentDomainObjectBase, TBuildRule> :
             IFetchService<TPersistentDomainObjectBase, TBuildRule>
+    {
+        private readonly IFetchService<TPersistentDomainObjectBase, TBuildRule> _baseService;
+
+        private readonly Dictionary<Tuple<Type, TBuildRule>, object> _cache;
+
+
+        public CacheFetchService(IFetchService<TPersistentDomainObjectBase, TBuildRule> baseService)
         {
-            private readonly IFetchService<TPersistentDomainObjectBase, TBuildRule> _baseService;
+            if (baseService == null) throw new ArgumentNullException(nameof(baseService));
 
-            private readonly Dictionary<Tuple<Type, TBuildRule>, object> _cache;
+            this._baseService = baseService;
 
+            this._cache = new Dictionary<Tuple<Type, TBuildRule>, object>();
 
-            public CacheFetchService(IFetchService<TPersistentDomainObjectBase, TBuildRule> baseService)
-            {
-                if (baseService == null) throw new ArgumentNullException(nameof(baseService));
+        }
 
-                this._baseService = baseService;
-
-                this._cache = new Dictionary<Tuple<Type, TBuildRule>, object>();
-
-            }
-
-            public IFetchContainer<TDomainObject> GetContainer<TDomainObject>(TBuildRule rule)
+        public IFetchContainer<TDomainObject> GetContainer<TDomainObject>(TBuildRule rule)
                 where TDomainObject : TPersistentDomainObjectBase
-            {
-                if (rule == null) throw new ArgumentNullException(nameof(rule));
+        {
+            if (rule == null) throw new ArgumentNullException(nameof(rule));
 
-                return
+            return
                     (IFetchContainer<TDomainObject>)
-                        this._cache.GetValueOrCreate(Tuple.Create(typeof(TDomainObject), rule), () => this._baseService.GetContainer<TDomainObject>(rule));
-            }
+                    this._cache.GetValueOrCreate(Tuple.Create(typeof(TDomainObject), rule), () => this._baseService.GetContainer<TDomainObject>(rule));
         }
     }
 }

@@ -1,21 +1,20 @@
 ﻿using Framework.Persistent;
 
-namespace Framework.Configuration.Domain.Reports
-{
-    /// <summary>
-    /// Выдача прав на отчет конкретным логинам
-    /// </summary>
-    public class AccessablePrincipalReportRight : AccessableReportRightsBase<string>
-    {
-        protected AccessablePrincipalReportRight()
-        {
-            // For NHibernate
-        }
+namespace Framework.Configuration.Domain.Reports;
 
-        public AccessablePrincipalReportRight(Report report)
+/// <summary>
+/// Выдача прав на отчет конкретным логинам
+/// </summary>
+public class AccessablePrincipalReportRight : AccessableReportRightsBase<string>
+{
+    protected AccessablePrincipalReportRight()
+    {
+        // For NHibernate
+    }
+
+    public AccessablePrincipalReportRight(Report report)
             : base(report)
-        {
-            this.Report.AddDetail(this);
-        }
+    {
+        this.Report.AddDetail(this);
     }
 }

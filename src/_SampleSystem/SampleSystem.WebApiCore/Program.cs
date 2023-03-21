@@ -9,44 +9,43 @@ using Microsoft.Extensions.Configuration;
 
 using Serilog;
 
-namespace SampleSystem.WebApiCore
+namespace SampleSystem.WebApiCore;
+
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
+        Log.Logger = Configuration.CreateLoggerBss();
+
+        try
         {
-            Log.Logger = Configuration.CreateLoggerBss();
-
-            try
-            {
-                CreateWebHostBuilder(args).Build().Run();
-            }
-            catch (Exception ex)
-            {
-                Log.Fatal(ex, "Host terminated unexpectedly");
-            }
-            finally
-            {
-                Log.CloseAndFlush();
-            }
+            CreateWebHostBuilder(args).Build().Run();
         }
+        catch (Exception ex)
+        {
+            Log.Fatal(ex, "Host terminated unexpectedly");
+        }
+        finally
+        {
+            Log.CloseAndFlush();
+        }
+    }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+    public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                    .UseDefaultServiceProvider(o =>
                                               {
                                                   o.ValidateScopes = true;
                                                   o.ValidateOnBuild = true;
                                               })
-                .UseConfiguration(Configuration)
-                .UseSerilogBss()
-                .UseStartup<Startup>();
+                   .UseConfiguration(Configuration)
+                   .UseSerilogBss()
+                   .UseStartup<Startup>();
 
-        private static IConfiguration Configuration =>
+    private static IConfiguration Configuration =>
             new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", false, true)
-                .AddEnvironmentVariables()
-            .Build();
-    }
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", false, true)
+                    .AddEnvironmentVariables()
+                    .Build();
 }

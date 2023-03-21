@@ -1,16 +1,15 @@
 ﻿using System;
 
-namespace Framework.Persistent
+namespace Framework.Persistent;
+
+public interface IAuditObject
 {
-    public interface IAuditObject
-    {
-        DateTime? CreateDate { get; }
+    DateTime? CreateDate { get; }
 
-        string CreatedBy { get; }
+    string CreatedBy { get; }
 
 
-        DateTime? ModifyDate { get; }
+    DateTime? ModifyDate { get; }
 
-        string ModifiedBy { get; }
-    }
+    string ModifiedBy { get; }
 }

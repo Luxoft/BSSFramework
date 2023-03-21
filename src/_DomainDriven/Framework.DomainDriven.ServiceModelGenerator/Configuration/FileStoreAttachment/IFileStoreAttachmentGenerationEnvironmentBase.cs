@@ -1,7 +1,6 @@
-﻿namespace Framework.DomainDriven.ServiceModelGenerator
+﻿namespace Framework.DomainDriven.ServiceModelGenerator;
+
+public interface IFileStoreAttachmentGenerationEnvironmentBase : IGenerationEnvironmentBase
 {
-    public interface IFileStoreAttachmentGenerationEnvironmentBase : IGenerationEnvironmentBase
-    {
-        IFileStoreGeneratorConfigurationBase FileStore { get; }
-    }
+    IFileStoreGeneratorConfigurationBase FileStore { get; }
 }

@@ -6,141 +6,140 @@ using System.Reflection;
 
 using JetBrains.Annotations;
 
-namespace Framework.Core
+namespace Framework.Core;
+
+public static class CoreExpressionExtensions
 {
-    public static class CoreExpressionExtensions
+    public static PropertyPath ToPropertyPath([NotNull] this LambdaExpression source)
     {
-        public static PropertyPath ToPropertyPath([NotNull] this LambdaExpression source)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+        if (source == null) throw new ArgumentNullException(nameof(source));
 
-            return source.GetReverseProperties().Reverse().ToPropertyPath();
+        return source.GetReverseProperties().Reverse().ToPropertyPath();
+    }
+
+    public static Node<Expression> ToNode(this Expression expression)
+    {
+        if (expression == null) throw new ArgumentNullException(nameof(expression));
+
+        var visitor = new NodeExpressionVisitor(expression);
+
+        visitor.Visit(expression);
+
+        return visitor.ToNode();
+    }
+
+    private class NodeExpressionVisitor : ExpressionVisitor
+    {
+        private readonly Expression _startNode;
+
+        private readonly List<NodeExpressionVisitor> ChildVisitors = new List<NodeExpressionVisitor>();
+
+        public NodeExpressionVisitor(Expression startNode)
+        {
+            if (startNode == null) throw new ArgumentNullException(nameof(startNode));
+
+            this._startNode = startNode;
         }
 
-        public static Node<Expression> ToNode(this Expression expression)
+        public override Expression Visit(Expression node)
         {
-            if (expression == null) throw new ArgumentNullException(nameof(expression));
-
-            var visitor = new NodeExpressionVisitor(expression);
-
-            visitor.Visit(expression);
-
-            return visitor.ToNode();
-        }
-
-        private class NodeExpressionVisitor : ExpressionVisitor
-        {
-            private readonly Expression _startNode;
-
-            private readonly List<NodeExpressionVisitor> ChildVisitors = new List<NodeExpressionVisitor>();
-
-            public NodeExpressionVisitor(Expression startNode)
+            if (node == null || node == this._startNode)
             {
-                if (startNode == null) throw new ArgumentNullException(nameof(startNode));
-
-                this._startNode = startNode;
+                return base.Visit(node);
             }
-
-            public override Expression Visit(Expression node)
+            else
             {
-                if (node == null || node == this._startNode)
-                {
-                    return base.Visit(node);
-                }
-                else
-                {
-                    var childVisitor = new NodeExpressionVisitor(node);
-                    this.ChildVisitors.Add(childVisitor);
-                    return childVisitor.Visit(node);
-                }
-            }
-
-            public Node<Expression> ToNode()
-            {
-                return new Node<Expression>(this._startNode, this.ChildVisitors.Select(child => child.ToNode()));
+                var childVisitor = new NodeExpressionVisitor(node);
+                this.ChildVisitors.Add(childVisitor);
+                return childVisitor.Visit(node);
             }
         }
 
-
-        public static string GetMemberName<TSource, TResult>(this Expression<Func<TSource, TResult>> expr)
+        public Node<Expression> ToNode()
         {
-            if (expr == null) throw new ArgumentNullException(nameof(expr));
-
-            return expr.Body.GetMember().Select(member => member.Name)
-                                        .GetValue(() => new System.ArgumentException("not member expression", nameof(expr)));
+            return new Node<Expression>(this._startNode, this.ChildVisitors.Select(child => child.ToNode()));
         }
+    }
 
-        public static PropertyInfo GetProperty<TSource, TResult>(this Expression<Func<TSource, TResult>> expr)
+
+    public static string GetMemberName<TSource, TResult>(this Expression<Func<TSource, TResult>> expr)
+    {
+        if (expr == null) throw new ArgumentNullException(nameof(expr));
+
+        return expr.Body.GetMember().Select(member => member.Name)
+                   .GetValue(() => new System.ArgumentException("not member expression", nameof(expr)));
+    }
+
+    public static PropertyInfo GetProperty<TSource, TResult>(this Expression<Func<TSource, TResult>> expr)
+    {
+        if (expr == null) throw new ArgumentNullException(nameof(expr));
+
+        var request = from member in expr.Body.GetMember()
+
+                      from property in (member as PropertyInfo).ToMaybe()
+
+                      select property;
+
+        return request.GetValue(() => new System.ArgumentException("not property expression", nameof(expr)));
+    }
+
+    public static FieldInfo GetField<TSource, TResult>(this Expression<Func<TSource, TResult>> expr)
+    {
+        if (expr == null) throw new ArgumentNullException(nameof(expr));
+
+        var request = from member in expr.Body.GetMember()
+
+                      from field in (member as FieldInfo).ToMaybe()
+
+                      select field;
+
+        return request.GetValue(() => new System.ArgumentException("not field expression", nameof(expr)));
+    }
+
+    /// <summary>
+    /// Получение полного пути из Expression
+    /// </summary>
+    /// <typeparam name="TSource"></typeparam>
+    /// <typeparam name="TResult"></typeparam>
+    /// <param name="expr"></param>
+    /// <returns></returns>
+    public static PropertyPath GetPropertyPath<TSource, TResult>(this Expression<Func<TSource, TResult>> expr)
+    {
+        if (expr == null) throw new ArgumentNullException(nameof(expr));
+
+        return expr.GetReverseProperties().Reverse().ToPropertyPath();
+    }
+
+
+    private static IEnumerable<PropertyInfo> GetReverseProperties<TSource, TProperty>(this Expression<Func<TSource, TProperty>> expression)
+    {
+        if (expression == null) throw new ArgumentNullException(nameof(expression));
+
+        var parameter = expression.Parameters[0];
+
+        var current = expression.Body;
+
+        while (current != parameter)
         {
-            if (expr == null) throw new ArgumentNullException(nameof(expr));
+            var memberExpr = (MemberExpression)current;
 
-            var request = from member in expr.Body.GetMember()
+            var property = (PropertyInfo)memberExpr.Member;
 
-                          from property in (member as PropertyInfo).ToMaybe()
+            yield return property;
 
-                          select property;
-
-            return request.GetValue(() => new System.ArgumentException("not property expression", nameof(expr)));
+            current = memberExpr.Expression;
         }
+    }
 
-        public static FieldInfo GetField<TSource, TResult>(this Expression<Func<TSource, TResult>> expr)
-        {
-            if (expr == null) throw new ArgumentNullException(nameof(expr));
+    private static Maybe<MemberInfo> GetMember(this Expression expr)
+    {
+        if (expr == null) throw new ArgumentNullException(nameof(expr));
 
-            var request = from member in expr.Body.GetMember()
+        return (expr as UnaryExpression).ToMaybe().Where(unaryExpr => unaryExpr.NodeType == ExpressionType.Convert)
+                                        .SelectMany(unaryExpr => unaryExpr.Operand.GetMember())
 
-                          from field in (member as FieldInfo).ToMaybe()
+                                        .Or(() => (expr as MethodCallExpression).ToMaybe().Select(callExpr => (MemberInfo)callExpr.Method))
 
-                          select field;
-
-            return request.GetValue(() => new System.ArgumentException("not field expression", nameof(expr)));
-        }
-
-        /// <summary>
-        /// Получение полного пути из Expression
-        /// </summary>
-        /// <typeparam name="TSource"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="expr"></param>
-        /// <returns></returns>
-        public static PropertyPath GetPropertyPath<TSource, TResult>(this Expression<Func<TSource, TResult>> expr)
-        {
-            if (expr == null) throw new ArgumentNullException(nameof(expr));
-
-            return expr.GetReverseProperties().Reverse().ToPropertyPath();
-        }
-
-
-        private static IEnumerable<PropertyInfo> GetReverseProperties<TSource, TProperty>(this Expression<Func<TSource, TProperty>> expression)
-        {
-            if (expression == null) throw new ArgumentNullException(nameof(expression));
-
-            var parameter = expression.Parameters[0];
-
-            var current = expression.Body;
-
-            while (current != parameter)
-            {
-                var memberExpr = (MemberExpression)current;
-
-                var property = (PropertyInfo)memberExpr.Member;
-
-                yield return property;
-
-                current = memberExpr.Expression;
-            }
-        }
-
-        private static Maybe<MemberInfo> GetMember(this Expression expr)
-        {
-            if (expr == null) throw new ArgumentNullException(nameof(expr));
-
-            return (expr as UnaryExpression).ToMaybe().Where(unaryExpr => unaryExpr.NodeType == ExpressionType.Convert)
-                                                            .SelectMany(unaryExpr => unaryExpr.Operand.GetMember())
-
-         .Or(() => (expr as MethodCallExpression).ToMaybe().Select(callExpr => (MemberInfo)callExpr.Method))
-
-         .Or(() => (expr as MemberExpression).ToMaybe().Select(memberExpr => memberExpr.Member));
-        }
+                                        .Or(() => (expr as MemberExpression).ToMaybe().Select(memberExpr => memberExpr.Member));
     }
 }

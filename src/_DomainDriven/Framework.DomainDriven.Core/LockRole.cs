@@ -1,13 +1,12 @@
-﻿namespace Framework.DomainDriven
+﻿namespace Framework.DomainDriven;
+
+public enum LockRole
 {
-    public enum LockRole
-    {
-        None,
+    None,
 
-        Update,
+    Update,
 
-        Read,
+    Read,
 
-        NoWait
-    }
+    NoWait
 }

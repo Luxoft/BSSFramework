@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
 
-namespace Framework.QueryableSource
+namespace Framework.QueryableSource;
+
+public interface IQueryableSource<in TPersistentDomainObjectBase>
 {
-    public interface IQueryableSource<in TPersistentDomainObjectBase>
-    {
-        IQueryable<TDomainObject> GetQueryable<TDomainObject>()
+    IQueryable<TDomainObject> GetQueryable<TDomainObject>()
             where TDomainObject : class, TPersistentDomainObjectBase;
-    }
 }

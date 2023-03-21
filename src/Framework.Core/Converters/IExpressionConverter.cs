@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Framework.Core
-{
-    public interface IExpressionConverter
-    {
-        LambdaExpression GetConvertExpressionBase();
-    }
+namespace Framework.Core;
 
-    public interface IExpressionConverter<TSource, TTarget> : IExpressionConverter
-    {
-        Expression<Func<TSource, TTarget>> GetConvertExpression();
-    }
+public interface IExpressionConverter
+{
+    LambdaExpression GetConvertExpressionBase();
+}
+
+public interface IExpressionConverter<TSource, TTarget> : IExpressionConverter
+{
+    Expression<Func<TSource, TTarget>> GetConvertExpression();
 }

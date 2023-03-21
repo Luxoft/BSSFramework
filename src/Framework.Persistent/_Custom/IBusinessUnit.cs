@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
-{
-    public interface IBusinessUnit
-    {
+﻿namespace Framework.Persistent;
 
-    }
+public interface IBusinessUnit
+{
+
 }

@@ -1,11 +1,10 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public enum DetailRole
 {
-    public enum DetailRole
-    {
-        No,
+    No,
 
-        Auto,
+    Auto,
 
-        Yes
-    }
+    Yes
 }

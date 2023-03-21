@@ -8,9 +8,9 @@ using Framework.DomainDriven.BLL.Tracking;
 
 using SampleSystem.Domain;
 
-namespace SampleSystem.BLL
-{
-    public partial interface ISampleSystemBLLContext :
+namespace SampleSystem.BLL;
+
+public partial interface ISampleSystemBLLContext :
 
         ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, DomainObjectBase, Guid>,
 
@@ -23,6 +23,5 @@ namespace SampleSystem.BLL
         IDefaultHierarchicalBLLContext<PersistentDomainObjectBase, Guid>,
 
         ISecurityTypeResolverContainer
-    {
-    }
+{
 }

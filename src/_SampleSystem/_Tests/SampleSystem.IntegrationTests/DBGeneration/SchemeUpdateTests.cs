@@ -9,22 +9,21 @@ using SampleSystem.DbGenerate;
 using Automation.Utils;
 using Microsoft.Extensions.Configuration;
 
-namespace SampleSystem.IntegrationTests.DBGeneration
+namespace SampleSystem.IntegrationTests.DBGeneration;
+
+[TestClass]
+public class SchemeUpdateTests : TestBase
 {
-    [TestClass]
-    public class SchemeUpdateTests : TestBase
+    [TestMethod]
+    public void SchemeUpdate_ExistsDatabase_ShouldNotFail()
     {
-        [TestMethod]
-        public void SchemeUpdate_ExistsDatabase_ShouldNotFail()
-        {
-            // Arrange
-            var generator = new UseSchemeUpdateTest();
+        // Arrange
+        var generator = new UseSchemeUpdateTest();
 
-            // Act
-            var action = new Action(() => UseSchemeUpdateTest.UseSchemeUpdate(this.DatabaseContext.Main.ConnectionString));
+        // Act
+        var action = new Action(() => UseSchemeUpdateTest.UseSchemeUpdate(this.DatabaseContext.Main.ConnectionString));
 
-            // Assert
-            action.Should().NotThrow();
-        }
+        // Assert
+        action.Should().NotThrow();
     }
 }

@@ -1,7 +1,6 @@
-﻿namespace Framework.DomainDriven.Generation.Domain
+﻿namespace Framework.DomainDriven.Generation.Domain;
+
+public interface IGeneratorConfigurationContainer<out TConfiguration>
 {
-    public interface IGeneratorConfigurationContainer<out TConfiguration>
-    {
-        TConfiguration Configuration { get; }
-    }
+    TConfiguration Configuration { get; }
 }

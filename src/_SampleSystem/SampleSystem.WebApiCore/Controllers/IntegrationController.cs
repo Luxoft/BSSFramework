@@ -22,26 +22,25 @@ namespace SampleSystem.WebApiCore.Controllers;
 [ApiController]
 public class IntegrationController : IntegrationSchemaControllerBase
 {
-    public IntegrationController(IAuthorizationBLLContext context, IDateTimeService dateTimeService)
-            : base(context, dateTimeService)
+    public IntegrationController(
+            IAuthorizationBLLContext context,
+            IDateTimeService dateTimeService,
+            IEventXsdExporter2 eventXsdExporter)
+            : base(context, dateTimeService, eventXsdExporter)
     {
     }
 
     protected override string IntegrationNamespace => "http://sampleSystem.example.com/integrationEvent";
 
-    protected override IEnumerable<Type> GetEventDTOTypes()
-    {
-        foreach (var type in TypeSource.FromSample(typeof(EmployeeSaveEventDTO)).GetTypes().Where(z => typeof(Generated.DTO.EventDTOBase).IsAssignableFrom(z)))
-        {
-            yield return type;
-        }
-    }
+    protected override IReadOnlyCollection<Type> GetEventDTOTypes() =>
+            TypeSource.FromSample(typeof(EmployeeSaveEventDTO))
+                      .GetTypes()
+                      .Where(z => typeof(Generated.DTO.EventDTOBase).IsAssignableFrom(z))
+                      .ToList();
 
-    protected override IEnumerable<Type> GetAuthEventDTOTypes()
-    {
-        foreach (var type in TypeSource.FromSample(typeof(PermissionSaveEventDTO)).GetTypes().Where(z => typeof(Framework.Authorization.Generated.DTO.EventDTOBase).IsAssignableFrom(z)))
-        {
-            yield return type;
-        }
-    }
+    protected override IReadOnlyCollection<Type> GetAuthEventDTOTypes() =>
+            TypeSource.FromSample(typeof(PermissionSaveEventDTO))
+                      .GetTypes()
+                      .Where(z => typeof(Framework.Authorization.Generated.DTO.EventDTOBase).IsAssignableFrom(z))
+                      .ToList();
 }

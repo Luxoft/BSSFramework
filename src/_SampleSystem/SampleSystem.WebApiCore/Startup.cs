@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
-using DotNetCore.CAP;
-
 using Framework.Authorization.ApproveWorkflow;
 using Framework.Configurator;
 using Framework.Configurator.Interfaces;
@@ -13,8 +11,6 @@ using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.WebApi.Utils;
-
-using MediatR;
 
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Builder;
@@ -43,15 +39,9 @@ public class Startup
         this.HostingEnvironment = env;
     }
 
-    public IWebHostEnvironment HostingEnvironment
-    {
-        get;
-    }
+    private IWebHostEnvironment HostingEnvironment { get; }
 
-    public IConfiguration Configuration
-    {
-        get;
-    }
+    private IConfiguration Configuration { get; }
 
     public void ConfigureServices(IServiceCollection services)
     {
@@ -63,33 +53,33 @@ public class Startup
         services.RegisterGeneralDependencyInjection(this.Configuration)
                 .AddApiVersion()
                 .AddSwaggerBss(
-                               new OpenApiInfo { Title = "SampleSystem", Version = "v1" },
-                               new List<string>
-                               {
-                                       Path.Combine(
-                                                    AppContext.BaseDirectory,
-                                                    $"{Assembly.GetExecutingAssembly().GetName().Name}.xml")
-                               });
+                    new OpenApiInfo { Title = "SampleSystem", Version = "v1" },
+                    new List<string>
+                    {
+                        Path.Combine(
+                            AppContext.BaseDirectory,
+                            $"{Assembly.GetExecutingAssembly().GetName().Name}.xml")
+                    });
 
         services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
                 .AddNegotiate();
 
         services.AddConfigurator();
         services.AddScoped<IConfiguratorIntegrationEvents, SampleConfiguratorIntegrationEvents>();
-                    
+
         services
-                .AddMvcBss()
-                .AddNewtonsoftJson(
-                                   z =>
-                                   {
-                                       z.SerializerSettings.Converters.Add(new UtcDateTimeJsonConverter());
-                                       z.SerializerSettings.TypeNameHandling = TypeNameHandling.Auto;
-                                   });
+            .AddMvcBss()
+            .AddNewtonsoftJson(
+                z =>
+                {
+                    z.SerializerSettings.Converters.Add(new UtcDateTimeJsonConverter());
+                    z.SerializerSettings.TypeNameHandling = TypeNameHandling.Auto;
+                });
 
         if (this.HostingEnvironment.IsProduction())
         {
             services.AddMetrics();
-            services.AddHangfireBss(this.Configuration);
+            services.AddHangfireBss(this.Configuration.GetConnectionString("DefaultConnection"));
         }
 
         services.ValidateDuplicateDeclaration(typeof(ILoggerFactory));
@@ -131,31 +121,24 @@ public class Startup
     private void UseHangfireBss(IApplicationBuilder app)
     {
         var contextEvaluator = LazyInterfaceImplementHelper.CreateProxy(
-                                                                        () =>
-                                                                        {
-                                                                            var serviceProvider = new ServiceCollection()
-                                                                                    .RegisterGeneralDependencyInjection(
-                                                                                     this.Configuration)
-                                                                                    .ValidateDuplicateDeclaration()
-                                                                                    .BuildServiceProvider(
-                                                                                     new ServiceProviderOptions
-                                                                                     {
-                                                                                             ValidateOnBuild = true,
-                                                                                             ValidateScopes = true
-                                                                                     });
+            () =>
+            {
+                var serviceProvider = new ServiceCollection()
+                                      .RegisterGeneralDependencyInjection(
+                                          this.Configuration)
+                                      .ValidateDuplicateDeclaration()
+                                      .BuildServiceProvider(
+                                          new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
 
-                                                                            return serviceProvider
-                                                                                    .GetRequiredService<
-                                                                                            IContextEvaluator<
-                                                                                            ISampleSystemBLLContext>>();
-                                                                        });
+                return serviceProvider
+                    .GetRequiredService<
+                        IContextEvaluator<
+                        ISampleSystemBLLContext>>();
+            });
 
         app.UseHangfireBss(
-                           this.Configuration,
-                           z =>
-                           {
-                               JobList.RunAll(z);
-                           },
-                           authorizationFilter: new SampleSystemHangfireAuthorization(contextEvaluator));
+            this.Configuration,
+            JobList.RunAll,
+            authorizationFilter: new SampleSystemHangfireAuthorization(contextEvaluator));
     }
 }

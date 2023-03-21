@@ -32,82 +32,44 @@ public class BusinessRole : BaseDirectory,
 
     private string description;
 
-    /// <summary>
-    /// Название администраторской роли
-    /// </summary>
     public const string AdminRoleName = "Administrator";
 
-    /// <summary>
-    /// Конструктор
-    /// </summary>
-    public BusinessRole()
-    {
-    }
-
-    /// <summary>
-    /// Коллекция связей бизнес-роли с операциями
-    /// </summary>
     [UniqueGroup]
-    public virtual IEnumerable<BusinessRoleOperationLink> BusinessRoleOperationLinks
-    {
-        get { return this.businessRoleOperationLinks; }
-    }
+    public virtual IEnumerable<BusinessRoleOperationLink> BusinessRoleOperationLinks => this.businessRoleOperationLinks;
 
     /// <summary>
     /// Коллекция связей бизнес-роли с дочерними ролями
     /// </summary>
     [UniqueGroup]
-    public virtual IEnumerable<SubBusinessRoleLink> SubBusinessRoleLinks
-    {
-        get { return this.subBusinessRoleLinks; }
-    }
+    public virtual IEnumerable<SubBusinessRoleLink> SubBusinessRoleLinks => this.subBusinessRoleLinks;
 
     /// <summary>
     /// Коллекция пермиссий принципалов, выданных по одной бизнес-роль
     /// </summary>
     [DetailRole(false)]
     [CustomSerialization(CustomSerializationMode.Ignore)]
-    public virtual IEnumerable<Permission> Permissions
-    {
-        get { return this.permissions; }
-    }
+    public virtual IEnumerable<Permission> Permissions => this.permissions;
 
     /// <summary>
     /// Вычисляемая коллекция дочерних ролей, выданных на одну бизнес-роль
     /// </summary>
     [DetailRole(false)]
     [CustomSerialization(CustomSerializationMode.Ignore)]
-    public virtual IEnumerable<BusinessRole> SubBusinessRoles
-    {
-        get { return this.SubBusinessRoleLinks.Select(link => link.SubBusinessRole); }
-    }
-
-    /// <summary>
-    /// Вычисляемое название бизнес-роли
-    /// </summary>
-    [FixedPropertyValidator]
-    public override string Name
-    {
-        get { return base.Name; }
-        set { base.Name = value; }
-    }
+    public virtual IEnumerable<BusinessRole> SubBusinessRoles => this.SubBusinessRoleLinks.Select(link => link.SubBusinessRole);
 
     /// <summary>
     /// Описание бизнес-роли
     /// </summary>
     public virtual string Description
     {
-        get { return this.description.TrimNull(); }
-        set { this.description = value.TrimNull(); }
+        get => this.description.TrimNull();
+        set => this.description = value.TrimNull();
     }
 
     /// <summary>
     /// Вычисляемый признак того, что текущая бизнес-роль является админской
     /// </summary>
-    public virtual bool IsAdmin
-    {
-        get { return this.Name == AdminRoleName; }
-    }
+    public virtual bool IsAdmin => this.Name == AdminRoleName;
 
     /// <summary>
     /// Вычисляемый признак необходимости подтверждения выдачи бизнес-роли
@@ -115,29 +77,13 @@ public class BusinessRole : BaseDirectory,
     /// <remarks>
     /// Если в роль входит хотя бы одна операция "ApproveOperation", то она должна быть утверждена уполномоченными лицами
     /// </remarks>
-    public virtual bool RequiredApprove
-    {
-        get { return this.BusinessRoleOperationLinks.Any(link => link.Operation.ApproveOperation != null); }
-    }
+    public virtual bool RequiredApprove => this.BusinessRoleOperationLinks.Any(link => link.Operation.ApproveOperation != null);
 
-    /// <summary>
-    /// Коллекция связей операции с бизнес-ролью
-    /// </summary>
-    ICollection<BusinessRoleOperationLink> IMaster<BusinessRoleOperationLink>.Details
-    {
-        get { return (ICollection<BusinessRoleOperationLink>)this.BusinessRoleOperationLinks; }
-    }
+    ICollection<BusinessRoleOperationLink> IMaster<BusinessRoleOperationLink>.Details =>
+            (ICollection<BusinessRoleOperationLink>)this.BusinessRoleOperationLinks;
 
-    /// <summary>
-    /// Коллекция связей дочерней роли с бизнес-ролью
-    /// </summary>
-    ICollection<SubBusinessRoleLink> IMaster<SubBusinessRoleLink>.Details
-    {
-        get { return (ICollection<SubBusinessRoleLink>)this.SubBusinessRoleLinks; }
-    }
+    ICollection<SubBusinessRoleLink> IMaster<SubBusinessRoleLink>.Details =>
+            (ICollection<SubBusinessRoleLink>)this.SubBusinessRoleLinks;
 
-    IEnumerable<BusinessRole> IChildrenSource<BusinessRole>.Children
-    {
-        get { return this.SubBusinessRoles; }
-    }
+    IEnumerable<BusinessRole> IChildrenSource<BusinessRole>.Children => this.SubBusinessRoles;
 }

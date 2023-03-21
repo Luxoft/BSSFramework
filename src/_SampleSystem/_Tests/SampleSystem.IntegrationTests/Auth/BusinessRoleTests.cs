@@ -57,7 +57,6 @@ public class BusinessRoleTests : TestBase
     public void SaveBusinessRole_CheckSubBusinessRoleAddition()
     {
         // Arrange
-        var employeeController = this.MainWebApi.Employee;
         var currentUser = this.DataHelper.GetCurrentEmployee();
 
         var subRole = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName("SecretariatNotification"));
@@ -86,12 +85,12 @@ public class BusinessRoleTests : TestBase
     public void SaveBusinessRole_CheckCreation()
     {
         // Arrange
-        var employeeController = this.MainWebApi.Employee;
+        const string businessRoleName = "MyBusinessRole111";
         var currentUser = this.DataHelper.GetCurrentEmployee();
 
         var businessRoleStrict = new BusinessRoleStrictDTO
                                  {
-                                         Name = RoleName
+                                         Name = businessRoleName
                                  };
 
         // Act
@@ -100,7 +99,7 @@ public class BusinessRoleTests : TestBase
         // Assert
         var businessRoleSimple = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRole(businessRoleIdentity));
 
-        businessRoleSimple.Name.Should().Be(RoleName);
+        businessRoleSimple.Name.Should().Be(businessRoleName);
         businessRoleSimple.Active.Should().BeTrue();
         businessRoleSimple.CreatedBy.Should().Be(currentUser.Login.ToString());
         businessRoleSimple.ModifiedBy.Should().Be(currentUser.Login.ToString());
@@ -110,7 +109,6 @@ public class BusinessRoleTests : TestBase
     public void SaveBusinessRole_CheckBusinessRoleChanges()
     {
         // Arrange
-        var employeeController = this.MainWebApi.Employee;
         var currentUser = this.DataHelper.GetCurrentEmployee();
 
         var businessRoleIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleBusinessRoleByName(RoleName)).Identity;
@@ -156,7 +154,8 @@ public class BusinessRoleTests : TestBase
     public void RemoveBusinessRole_CheckRemoval()
     {
         // Arrange
-        var businessRoleStrict = new BusinessRoleStrictDTO { Name = RoleName };
+        const string businessRoleName = "MyBusinessRole111";
+        var businessRoleStrict = new BusinessRoleStrictDTO { Name = businessRoleName };
 
         var businessRoleIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.SaveBusinessRole(businessRoleStrict));
 

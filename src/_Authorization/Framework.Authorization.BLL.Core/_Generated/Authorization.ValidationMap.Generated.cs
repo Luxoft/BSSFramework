@@ -57,7 +57,6 @@ namespace Framework.Authorization.BLL
         {
             yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<Framework.Authorization.Domain.BusinessRole>(this.AvailableValues.GetAvailableSize<string>());
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.BusinessRole, string>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<Framework.Authorization.Domain.BusinessRole, string, System.Guid>(source => source.Name);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.BusinessRole, System.Collections.Generic.IEnumerable<Framework.Authorization.Domain.SubBusinessRoleLink>>> GetBusinessRole_SubBusinessRoleLinksValidators()

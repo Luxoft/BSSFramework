@@ -8,6 +8,6 @@ public class BaseHangfireAuthorization : IDashboardAuthorizationFilter
     {
         var httpContext = context.GetHttpContext();
 
-        return httpContext.User?.Identity?.IsAuthenticated == true;
+        return httpContext.User.Identity?.IsAuthenticated == true;
     }
 }

@@ -52,7 +52,13 @@ public class WorkflowController : ControllerBase
     [HttpPost(nameof(StartJob))]
     public async Task<Dictionary<Guid, Guid>> StartJob()
     {
-        await this.contextEvaluator.EvaluateAsync(DBSessionMode.Read, async ctx => ctx.Authorization.CheckAccess(SampleSystemSecurityOperation.SystemIntegration));
+        await this.contextEvaluator.EvaluateAsync(DBSessionMode.Read,
+                                                  ctx =>
+                                                                      {
+                                                                          ctx.Authorization.CheckAccess(
+                                                                           SampleSystemSecurityOperation.SystemIntegration);
+                                                                          return Task.CompletedTask;
+                                                                      });
 
         return await this.startWorkflowJob.Start();
     }

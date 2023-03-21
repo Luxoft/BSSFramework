@@ -108,7 +108,7 @@ public class ApprovePermissionTests : TestBase
     }
 
     [TestCleanup]
-    public void Cleanup()
+    public override void Cleanup()
     {
         this.workflowManager.Stop();
     }

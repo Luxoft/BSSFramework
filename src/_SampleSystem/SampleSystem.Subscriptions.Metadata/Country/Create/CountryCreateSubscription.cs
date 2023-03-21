@@ -10,7 +10,7 @@ public sealed class CountryCreateSubscription
         : SubscriptionMetadataBase<Domain.Country, _Country_Create_MessageTemplate_cshtml>
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="CountryUpdateSubscription"/> class.
+    /// Initializes a new instance of the <see cref="CountryCreateSubscription"/> class.
     /// </summary>
     public CountryCreateSubscription()
     {

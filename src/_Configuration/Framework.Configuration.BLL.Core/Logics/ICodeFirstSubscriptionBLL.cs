@@ -2,9 +2,9 @@
 
 using Framework.Configuration.Domain;
 
-namespace Framework.Configuration.BLL
-{
-    public partial interface ICodeFirstSubscriptionBLL
+namespace Framework.Configuration.BLL;
+
+public partial interface ICodeFirstSubscriptionBLL
 {
     IEnumerable<string> GetActiveCodeFirstSubscriptionCodes();
 

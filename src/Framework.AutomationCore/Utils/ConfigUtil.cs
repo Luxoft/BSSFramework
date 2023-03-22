@@ -16,13 +16,14 @@ public class ConfigUtil
     private readonly Lazy<string> systemNameLazy;
     private readonly Lazy<TestRunMode> testRunModeLazy;
     private readonly IConfiguration configuration;
-
+    private readonly Lazy<string> databaseCollation;
     public ConfigUtil(IConfiguration configuration)
     {
         this.configuration = configuration;
         this.useLocalDbLazy = new Lazy<bool>(() => this.configuration.GetValue<bool>("UseLocalDb"));
         this.testsParallelizeLazy = new Lazy<bool>(() => this.configuration.GetValue<bool>("TestsParallelize"));
         this.systemNameLazy = new Lazy<string>(() => this.configuration.GetValue<string>("SystemName"));
+        this.databaseCollation = new Lazy<string>(() => this.configuration.GetValue<string>("DatabaseCollation"));
         this.testRunModeLazy = new Lazy<TestRunMode>(
             () => this.configuration.GetValue<TestRunMode>("TestRunMode", TestRunMode.DefaultRunModeOnEmptyDatabase));
 
@@ -46,6 +47,8 @@ public class ConfigUtil
     public bool TestsParallelize => this.testsParallelizeLazy.Value;
 
     public string SystemName => this.systemNameLazy.Value;
+
+    public string DatabaseCollation => this.databaseCollation.Value;
 
     public string GetConnectionString(string connectionStringName)
     {

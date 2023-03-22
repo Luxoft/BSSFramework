@@ -49,7 +49,7 @@ public class InitializeAndCleanup
                .ReplaceScoped<IMessageSender<NotificationEventDTO>, LocalDBNotificationEventDTOMessageSender>()
 
                .ReplaceSingleton<IIntegrationEventBus, IntegrationTestIntegrationEventBus>()
-               .ReplaceScoped<ICapTransactionManager, IntegrationTestCapTransactionManager>()
+               .ReplaceSingleton<ICapTransactionManager, IntegrationTestCapTransactionManager>()
 
                .AddSingleton<SampleSystemInitializer>()
 

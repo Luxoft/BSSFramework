@@ -72,7 +72,12 @@ public class TestEnvironment
                            .AddSingleton<ConfigUtil>()
                            .AddSingleton(typeof(TestDatabaseGenerator), databaseGenerator);
 
-        var environmentServiceProvider = environmentServices.BuildServiceProvider();
+        var environmentServiceProvider = environmentServices.BuildServiceProvider(
+            new ServiceProviderOptions
+            {
+                ValidateOnBuild = true,
+                ValidateScopes = true
+            });
 
         serviceProviderAfterBuildAction?.Invoke(environmentServiceProvider);
 

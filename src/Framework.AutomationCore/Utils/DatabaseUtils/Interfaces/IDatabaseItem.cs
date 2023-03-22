@@ -7,4 +7,5 @@ public interface IDatabaseItem
     public string CopyLogPath { get; }
     public string SourceDataPath { get; }
     public string SourceLogPath { get; }
+    public string DatabaseCollation { get; }
 }

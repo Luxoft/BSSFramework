@@ -1,18 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Automation.Enums;
-using Automation.ServiceEnvironment;
-using Automation.ServiceEnvironment.Services;
 using Automation.Utils.DatabaseUtils;
 
 using Framework.Core;
 using Framework.DomainDriven.BLL.Configuration;
-using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.ServiceModel.Subscriptions;
 using Framework.Notification.DTO;
-
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 
 using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
 
@@ -31,15 +25,7 @@ public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderCont
 
     public virtual void Initialize()
     {
-        switch (this.ConfigUtil.TestRunMode)
-        {
-            case TestRunMode.DefaultRunModeOnEmptyDatabase:
-            case TestRunMode.RestoreDatabaseUsingAttach:
-                AssemblyInitializeAndCleanup.RunAction("Drop Database", this.DatabaseContext.Drop);
-                AssemblyInitializeAndCleanup.RunAction("Restore Databases", this.DatabaseContext.AttachDatabase);
-                break;
-        }
-
+        this.ReattachDatabase();
         this.ClearNotifications();
         this.ClearIntegrationEvents();
     }
@@ -61,7 +47,19 @@ public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderCont
         }
     }
 
-    public virtual void CleanupTestEnvironment()
+    protected virtual void ReattachDatabase()
+    {
+        switch (this.ConfigUtil.TestRunMode)
+        {
+            case TestRunMode.DefaultRunModeOnEmptyDatabase:
+            case TestRunMode.RestoreDatabaseUsingAttach:
+                AssemblyInitializeAndCleanup.RunAction("Drop Database", this.DatabaseContext.Drop);
+                AssemblyInitializeAndCleanup.RunAction("Restore Databases", this.DatabaseContext.AttachDatabase);
+                break;
+        }
+    }
+
+    protected virtual void CleanupTestEnvironment()
     {
     }
 

@@ -190,6 +190,11 @@ public static partial class CoreDatabaseUtil
     private static void Create(Server server, IDatabaseItem database)
     {
         var db = new Database(server, database.DatabaseName);
+        if (!string.IsNullOrEmpty(database.DatabaseCollation))
+        {
+            db.Collation = database.DatabaseCollation;
+        }
+
         var fileGroup = new FileGroup(db, "PRIMARY");
 
         var dataFile = new DataFile(

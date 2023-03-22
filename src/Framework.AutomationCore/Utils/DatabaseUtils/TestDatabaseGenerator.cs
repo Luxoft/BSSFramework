@@ -9,7 +9,7 @@ namespace Automation.Utils.DatabaseUtils;
 
 public abstract class TestDatabaseGenerator
 {
-    protected virtual IEnumerable<string> TestServers { get; }
+    protected virtual IEnumerable<string> TestServers => Enumerable.Empty<string>();
 
     public IDatabaseContext DatabaseContext { get; }
 

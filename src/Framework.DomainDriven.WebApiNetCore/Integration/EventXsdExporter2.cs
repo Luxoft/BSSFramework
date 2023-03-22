@@ -20,15 +20,15 @@ public class EventXsdExporter2 : IEventXsdExporter2
     public Stream Export(string xsdNamespace, string localName, IReadOnlyCollection<Type> types)
     {
         var exportTypes = this.GetSchemaSet(
-                                            xsdNamespace,
-                                            localName,
-                                            types);
+            xsdNamespace,
+            localName,
+            types);
 
         return WriteXsd(exportTypes);
     }
 
     public Stream Export<TBaseEventDto>()
-            where TBaseEventDto : class
+        where TBaseEventDto : class
     {
         var baseEventDto = typeof(TBaseEventDto);
         var attribute = baseEventDto.GetCustomAttribute<DataContractAttribute>();
@@ -38,11 +38,11 @@ public class EventXsdExporter2 : IEventXsdExporter2
         }
 
         var exportTypes = this.GetSchemaSet(
-                                            attribute.Namespace,
-                                            baseEventDto.Name,
-                                            Assembly.GetAssembly(baseEventDto)!.GetTypes()
-                                                    .Where(x => x.IsClass && !x.IsAbstract && baseEventDto.IsAssignableFrom(x))
-                                                    .ToList());
+            attribute.Namespace,
+            baseEventDto.Name,
+            Assembly.GetAssembly(baseEventDto)!.GetTypes()
+                    .Where(x => x.IsClass && !x.IsAbstract && baseEventDto.IsAssignableFrom(x))
+                    .ToList());
 
         return WriteXsd(exportTypes);
     }
@@ -83,9 +83,9 @@ public class EventXsdExporter2 : IEventXsdExporter2
     }
 
     private static string ToFileName(string targetNamespace) =>
-            targetNamespace == null
-                    ? FileNameWithoutNamespace
-                    : $"{targetNamespace.Replace("http://", string.Empty).Replace("/", "_").Replace(".", "_")}.xsd";
+        targetNamespace == null
+            ? FileNameWithoutNamespace
+            : $"{targetNamespace.Replace("http://", string.Empty).Replace("/", "_").Replace(".", "_")}.xsd";
 
     private static Stream WriteXsd(XmlSchemaSet schemasSet)
     {
@@ -113,18 +113,24 @@ public class EventXsdExporter2 : IEventXsdExporter2
         {
             var xmlSchemaImport = new XmlSchemaImport
                                   {
-                                          Namespace = schemaReference.TargetNamespace,
-                                          SchemaLocation = $".\\{ToFileName(schemaReference.TargetNamespace)}"
+                                      Namespace = schemaReference.TargetNamespace,
+                                      SchemaLocation = $".\\{ToFileName(schemaReference.TargetNamespace)}"
                                   };
 
             schema.Includes.Add(xmlSchemaImport);
         }
     }
 
-    protected virtual XmlAttributeOverrides GetOverrideAttributes(IEnumerable<Type> types)
+    protected virtual void AddOverrideAttributes(XmlAttributeOverrides attributeOverrides)
+    {
+    }
+
+    private XmlAttributeOverrides GetOverrideAttributes(IEnumerable<Type> types)
     {
         var attributeOverrides = new XmlAttributeOverrides();
         ChangeNamespacePeriod(attributeOverrides);
+
+        this.AddOverrideAttributes(attributeOverrides);
 
         foreach (var type in types)
         {
@@ -168,19 +174,13 @@ public class EventXsdExporter2 : IEventXsdExporter2
                          ?? string.Empty;
 
         attributeOverrides.Add(
-                               typeof(Period),
-                               nameof(Period.StartDate),
-                               new XmlAttributes
-                               {
-                                       XmlElements = { new XmlElementAttribute { Order = 2, Namespace = @namespace } }
-                               });
+            typeof(Period),
+            nameof(Period.StartDate),
+            new XmlAttributes { XmlElements = { new XmlElementAttribute { Order = 2, Namespace = @namespace } } });
         attributeOverrides.Add(
-                               typeof(Period),
-                               nameof(Period.EndDate),
-                               new XmlAttributes
-                               {
-                                       XmlElements = { new XmlElementAttribute { Order = 1, Namespace = @namespace } }
-                               });
+            typeof(Period),
+            nameof(Period.EndDate),
+            new XmlAttributes { XmlElements = { new XmlElementAttribute { Order = 1, Namespace = @namespace } } });
     }
 
     private static void MakeNullableProps(XmlAttributeOverrides attributeOverrides, Type type)
@@ -219,5 +219,7 @@ public class EventXsdExporter2 : IEventXsdExporter2
     }
 
     private static bool IsNotNullable(Type type) =>
-            type.IsValueType || (type.IsGenericType && type.GetGenericTypeDefinition() != typeof(Nullable<>));
+        type.IsValueType
+        || (type.IsGenericType && type.GetGenericTypeDefinition() != typeof(Nullable<>))
+        || type.IsArray;
 }

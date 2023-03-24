@@ -111,7 +111,7 @@ public static class ServiceCollectionExtensions
                .AddScoped<IAccessDeniedExceptionService<Framework.Authorization.Domain.PersistentDomainObjectBase>, AccessDeniedExceptionService<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
 
                .AddScoped(typeof(IAuthorizationRepositoryFactory<>), typeof(AuthorizationRepositoryFactory<>))
-               
+
                .Self(AuthorizationSecurityServiceBase.Register)
                .Self(AuthorizationBLLFactoryContainer.RegisterBLLFactory);
     }

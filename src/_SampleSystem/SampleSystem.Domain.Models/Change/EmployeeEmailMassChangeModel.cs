@@ -1,7 +1,6 @@
-﻿namespace SampleSystem.Domain
+﻿namespace SampleSystem.Domain;
+
+public class EmployeeEmailMassChangeModel : DomainObjectMassChangeModel<Employee>
 {
-    public class EmployeeEmailMassChangeModel : DomainObjectMassChangeModel<Employee>
-    {
-        public string Email { get; set; }
-    }
+    public string Email { get; set; }
 }

@@ -17,42 +17,41 @@ using SampleSystem.BLL._Query.GetEmployees;
 using SampleSystem.BLL._Query.GetManagementUnitFluentMappings;
 using SampleSystem.Generated.DTO;
 
-namespace SampleSystem.WebApiCore.Controllers
+namespace SampleSystem.WebApiCore.Controllers;
+
+[ApiController]
+[ApiVersion("1.0")]
+[Route("authApi/v{version:apiVersion}/[controller]/[action]")]
+public class MediatrController : ApiControllerBase<
+        ISampleSystemBLLContext, EvaluatedData<
+        ISampleSystemBLLContext, ISampleSystemDTOMappingService>>
 {
-    [ApiController]
-    [ApiVersion("1.0")]
-    [Route("authApi/v{version:apiVersion}/[controller]/[action]")]
-    public class MediatrController : ApiControllerBase<
-            ISampleSystemBLLContext, EvaluatedData<
-            ISampleSystemBLLContext, ISampleSystemDTOMappingService>>
-    {
-        private readonly IMediator mediator;
+    private readonly IMediator mediator;
 
-        public MediatrController(IMediator mediator) =>
-                this.mediator = mediator;
+    public MediatrController(IMediator mediator) =>
+            this.mediator = mediator;
 
-        [HttpGet]
-        public GetEmployeesResponse[] GetEmployees() =>
-                this.Evaluate(
-                              DBSessionMode.Read,
-                              _ => this.mediator.Send(new GetEmployeesQuery()).GetAwaiter().GetResult());
+    [HttpGet]
+    public GetEmployeesResponse[] GetEmployees() =>
+            this.Evaluate(
+                          DBSessionMode.Read,
+                          _ => this.mediator.Send(new GetEmployeesQuery()).GetAwaiter().GetResult());
 
-        [HttpGet]
-        public GetManagementUnitFluentMappingsResponse[] GetManagementUnitFluentMappings() =>
-                this.Evaluate(
-                              DBSessionMode.Read,
-                              _ => this.mediator.Send(new GetManagementUnitFluentMappingsQuery()).GetAwaiter().GetResult());
+    [HttpGet]
+    public GetManagementUnitFluentMappingsResponse[] GetManagementUnitFluentMappings() =>
+            this.Evaluate(
+                          DBSessionMode.Read,
+                          _ => this.mediator.Send(new GetManagementUnitFluentMappingsQuery()).GetAwaiter().GetResult());
 
-        [HttpPost]
-        public Guid CreateManagementUnitFluentMappings([FromBody] CreateManagementUnitFluentMappingCommand command) =>
-                this.Evaluate(
-                              DBSessionMode.Write,
-                              _ => this.mediator.Send(command).GetAwaiter().GetResult());
+    [HttpPost]
+    public Guid CreateManagementUnitFluentMappings([FromBody] CreateManagementUnitFluentMappingCommand command) =>
+            this.Evaluate(
+                          DBSessionMode.Write,
+                          _ => this.mediator.Send(command).GetAwaiter().GetResult());
 
-        [HttpPost]
-        public void CreateIntegrationEvent() =>
-                this.Evaluate(
-                              DBSessionMode.Write,
-                              _ => this.mediator.Send(new CreateIntegrationEventCommand()).GetAwaiter().GetResult());
-    }
+    [HttpPost]
+    public void CreateIntegrationEvent() =>
+            this.Evaluate(
+                          DBSessionMode.Write,
+                          _ => this.mediator.Send(new CreateIntegrationEventCommand()).GetAwaiter().GetResult());
 }

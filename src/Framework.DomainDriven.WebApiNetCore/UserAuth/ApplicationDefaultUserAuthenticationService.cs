@@ -3,16 +3,15 @@ using Framework.DomainDriven.NHibernate.Audit;
 
 using Microsoft.AspNetCore.Http;
 
-namespace Framework.DomainDriven.WebApiNetCore
+namespace Framework.DomainDriven.WebApiNetCore;
+
+public class ApplicationDefaultUserAuthenticationService : DomainDefaultUserAuthenticationService, IAuditRevisionUserAuthenticationService
 {
-    public class ApplicationDefaultUserAuthenticationService : DomainDefaultUserAuthenticationService, IAuditRevisionUserAuthenticationService
-    {
-        private readonly IHttpContextAccessor httpContextAccessor;
+    private readonly IHttpContextAccessor httpContextAccessor;
 
 
-        public ApplicationDefaultUserAuthenticationService(IHttpContextAccessor httpContextAccessor) => this.httpContextAccessor = httpContextAccessor;
+    public ApplicationDefaultUserAuthenticationService(IHttpContextAccessor httpContextAccessor) => this.httpContextAccessor = httpContextAccessor;
 
 
-        public override string GetUserName() => this.httpContextAccessor.HttpContext?.User?.Identity?.Name ?? base.GetUserName();
-    }
+    public override string GetUserName() => this.httpContextAccessor.HttpContext?.User?.Identity?.Name ?? base.GetUserName();
 }

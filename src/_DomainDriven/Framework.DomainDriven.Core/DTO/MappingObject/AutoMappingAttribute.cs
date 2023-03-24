@@ -1,15 +1,14 @@
 ﻿using System;
 
-namespace Framework.DomainDriven
+namespace Framework.DomainDriven;
+
+public class AutoMappingAttribute : Attribute
 {
-    public class AutoMappingAttribute : Attribute
+    public AutoMappingAttribute(bool enabled)
     {
-        public AutoMappingAttribute(bool enabled)
-        {
-            this.Enabled = enabled;
-        }
-
-
-        public bool Enabled { get; }
+        this.Enabled = enabled;
     }
+
+
+    public bool Enabled { get; }
 }

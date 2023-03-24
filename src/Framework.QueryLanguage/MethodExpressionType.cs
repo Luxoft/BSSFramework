@@ -1,35 +1,34 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Framework.QueryLanguage
+namespace Framework.QueryLanguage;
+
+[DataContract]
+public enum MethodExpressionType
 {
-    [DataContract]
-    public enum MethodExpressionType
-    {
-        [EnumMember]
-        StringContains,
+    [EnumMember]
+    StringContains,
 
-        [EnumMember]
-        StringStartsWith,
+    [EnumMember]
+    StringStartsWith,
 
-        [EnumMember]
-        StringEndsWith,
+    [EnumMember]
+    StringEndsWith,
 
-        [EnumMember]
-        PeriodContains,
+    [EnumMember]
+    PeriodContains,
 
-        [EnumMember]
-        PeriodIsIntersected,
+    [EnumMember]
+    PeriodIsIntersected,
 
-        [EnumMember]
-        CollectionAny,
+    [EnumMember]
+    CollectionAny,
 
-        [EnumMember]
-        CollectionAll,
+    [EnumMember]
+    CollectionAll,
 
-        [EnumMember]
-        CalendarPeriodContains,
+    [EnumMember]
+    CalendarPeriodContains,
 
-        [EnumMember]
-        CalendarPeriodIsIntersected
-    }
+    [EnumMember]
+    CalendarPeriodIsIntersected
 }

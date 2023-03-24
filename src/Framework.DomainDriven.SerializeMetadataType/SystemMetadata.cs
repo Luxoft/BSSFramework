@@ -5,20 +5,19 @@ using System.Runtime.Serialization;
 
 using Framework.Core;
 
-namespace Framework.DomainDriven.SerializeMetadata
+namespace Framework.DomainDriven.SerializeMetadata;
+
+[DataContract]
+public class SystemMetadata
 {
-    [DataContract]
-    public class SystemMetadata
+    public SystemMetadata(IEnumerable<TypeMetadata> types)
     {
-        public SystemMetadata(IEnumerable<TypeMetadata> types)
-        {
-            if (types == null) throw new ArgumentNullException(nameof(types));
+        if (types == null) throw new ArgumentNullException(nameof(types));
 
-            this.Types = types.ToReadOnlyCollection();
-        }
-
-
-        [DataMember]
-        public ReadOnlyCollection<TypeMetadata> Types { get; private set; }
+        this.Types = types.ToReadOnlyCollection();
     }
+
+
+    [DataMember]
+    public ReadOnlyCollection<TypeMetadata> Types { get; private set; }
 }

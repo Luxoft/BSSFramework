@@ -1,7 +1,6 @@
-﻿namespace Framework.DomainDriven.DBGenerator.Contracts
+﻿namespace Framework.DomainDriven.DBGenerator.Contracts;
+
+public interface IDatabaseScriptGenerator
 {
-    public interface IDatabaseScriptGenerator
-    {
-        IDatabaseScriptResult GenerateScript(IDatabaseScriptGeneratorContext context);
-    }
+    IDatabaseScriptResult GenerateScript(IDatabaseScriptGeneratorContext context);
 }

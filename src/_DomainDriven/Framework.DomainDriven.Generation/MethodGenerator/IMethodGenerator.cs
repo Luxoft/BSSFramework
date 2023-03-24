@@ -1,9 +1,8 @@
 ﻿using System.CodeDom;
 
-namespace Framework.DomainDriven.Generation
+namespace Framework.DomainDriven.Generation;
+
+public interface IMethodGenerator
 {
-    public interface IMethodGenerator
-    {
-        CodeMemberMethod GetMethod();
-    }
+    CodeMemberMethod GetMethod();
 }

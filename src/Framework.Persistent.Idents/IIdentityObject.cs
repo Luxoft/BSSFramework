@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface IIdentityObject<out TIdent>
 {
-    public interface IIdentityObject<out TIdent>
-    {
-        TIdent Id { get; }
-    }
+    TIdent Id { get; }
 }

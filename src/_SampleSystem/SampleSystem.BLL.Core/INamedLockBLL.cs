@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace SampleSystem.BLL
+namespace SampleSystem.BLL;
+
+public partial interface INamedLockBLL
 {
-    public partial interface INamedLockBLL
-    {
-        void CheckInit();
-    }
+    void CheckInit();
 }

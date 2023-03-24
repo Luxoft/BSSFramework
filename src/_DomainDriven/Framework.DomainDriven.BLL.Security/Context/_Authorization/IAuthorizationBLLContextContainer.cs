@@ -1,7 +1,6 @@
-﻿namespace Framework.DomainDriven.BLL.Security
+﻿namespace Framework.DomainDriven.BLL.Security;
+
+public interface IAuthorizationBLLContextContainer<out TAuthorizationBLLContext>
 {
-    public interface IAuthorizationBLLContextContainer<out TAuthorizationBLLContext>
-    {
-        TAuthorizationBLLContext Authorization { get; }
-    }
+    TAuthorizationBLLContext Authorization { get; }
 }

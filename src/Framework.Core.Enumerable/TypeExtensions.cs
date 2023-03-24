@@ -3,97 +3,96 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace Framework.Core
+namespace Framework.Core;
+
+public static class TypeExtensions
 {
-    public static class TypeExtensions
+    private static readonly HashSet<Type> CollectionTypes = new[]
+                                                            {
+                                                                    typeof(IEnumerable<>),
+                                                                    typeof(List<>),
+                                                                    typeof(Collection<>),
+                                                                    typeof(IList<>),
+                                                                    typeof(ICollection<>),
+                                                                    typeof(ObservableCollection<>),
+                                                                    typeof(IReadOnlyList<>),
+                                                                    typeof(IReadOnlyCollection<>)
+                                                            }.ToHashSet();
+
+    public static Type GetCollectionElementTypeOrSelf(this Type type)
     {
-        private static readonly HashSet<Type> CollectionTypes = new[]
+        if (type == null) throw new ArgumentNullException(nameof(type));
+
+        return type.GetCollectionElementType() ?? type;
+    }
+
+    public static Type GetCollectionElementType(this Type type)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+
+        return type.GetCollectionType() != null ? type.GetGenericArguments().Single() : null;
+    }
+
+    public static Type GetCollectionType(this Type type)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+
+        if (type.IsGenericType)
         {
-            typeof(IEnumerable<>),
-            typeof(List<>),
-            typeof(Collection<>),
-            typeof(IList<>),
-            typeof(ICollection<>),
-            typeof(ObservableCollection<>),
-            typeof(IReadOnlyList<>),
-            typeof(IReadOnlyCollection<>)
-        }.ToHashSet();
+            var genericType = type.GetGenericTypeDefinition();
 
-        public static Type GetCollectionElementTypeOrSelf(this Type type)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
-
-            return type.GetCollectionElementType() ?? type;
-        }
-
-        public static Type GetCollectionElementType(this Type type)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
-
-            return type.GetCollectionType() != null ? type.GetGenericArguments().Single() : null;
-        }
-
-        public static Type GetCollectionType(this Type type)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
-
-            if (type.IsGenericType)
+            if (CollectionTypes.Contains(genericType))
             {
-                var genericType = type.GetGenericTypeDefinition();
-
-                if (CollectionTypes.Contains(genericType))
-                {
-                    return genericType;
-                }
+                return genericType;
             }
-
-            return null;
         }
 
-        public static Type GetArrayGenericType(this Type type)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
+        return null;
+    }
 
-            return type.IsArray ? type.GetElementType() : null;
-        }
+    public static Type GetArrayGenericType(this Type type)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
 
-        public static Type GetCollectionOrArrayElementType(this Type type)
-        {
-            return type.GetCollectionElementType() ?? type.GetArrayGenericType();
-        }
+        return type.IsArray ? type.GetElementType() : null;
+    }
 
-        public static Type GetCollectionOrArrayElementTypeOrSelf(this Type type)
-        {
-            return type.GetCollectionOrArrayElementType() ?? type;
-        }
+    public static Type GetCollectionOrArrayElementType(this Type type)
+    {
+        return type.GetCollectionElementType() ?? type.GetArrayGenericType();
+    }
 
-        public static bool IsCollection(this Type type)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
+    public static Type GetCollectionOrArrayElementTypeOrSelf(this Type type)
+    {
+        return type.GetCollectionOrArrayElementType() ?? type;
+    }
 
-            return type.GetCollectionElementType() != null;
-        }
+    public static bool IsCollection(this Type type)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
 
-        public static bool IsCollectionOrArray(this Type type)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
+        return type.GetCollectionElementType() != null;
+    }
 
-            return type.GetCollectionOrArrayElementType() != null;
-        }
+    public static bool IsCollectionOrArray(this Type type)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
 
-        public static bool IsCollection(this Type type, Func<Type, bool> elementTypeFilter)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
-            if (elementTypeFilter == null) throw new ArgumentNullException(nameof(elementTypeFilter));
+        return type.GetCollectionOrArrayElementType() != null;
+    }
 
-            return type.IsCollection() && elementTypeFilter(type.GetCollectionElementType());
-        }
+    public static bool IsCollection(this Type type, Func<Type, bool> elementTypeFilter)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+        if (elementTypeFilter == null) throw new ArgumentNullException(nameof(elementTypeFilter));
 
-        public static Type GetEnumerableElementType(this Type type)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
+        return type.IsCollection() && elementTypeFilter(type.GetCollectionElementType());
+    }
 
-            return type.GetInterfaceImplementationArguments(typeof(IEnumerable<>), args => args.Single());
-        }
+    public static Type GetEnumerableElementType(this Type type)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+
+        return type.GetInterfaceImplementationArguments(typeof(IEnumerable<>), args => args.Single());
     }
 }

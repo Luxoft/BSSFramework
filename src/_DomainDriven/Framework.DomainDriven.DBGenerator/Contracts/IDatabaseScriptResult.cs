@@ -2,16 +2,15 @@
 
 using Framework.DomainDriven.DBGenerator.Team;
 
-namespace Framework.DomainDriven.DBGenerator.Contracts
+namespace Framework.DomainDriven.DBGenerator.Contracts;
+
+public interface IDatabaseScriptResult
 {
-    public interface IDatabaseScriptResult
-    {
-        IEnumerable<string> this[ApplyMigrationDbScriptMode mode] { get; }
+    IEnumerable<string> this[ApplyMigrationDbScriptMode mode] { get; }
 
-        IEnumerable<IEnumerable<string>> GetResults();
+    IEnumerable<IEnumerable<string>> GetResults();
 
-        string ToNewLinesCombined();
+    string ToNewLinesCombined();
 
-        IDatabaseScriptResult Evaluate();
-    }
+    IDatabaseScriptResult Evaluate();
 }

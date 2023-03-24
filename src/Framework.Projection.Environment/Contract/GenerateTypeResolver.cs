@@ -6,40 +6,39 @@ using Framework.Core;
 
 using JetBrains.Annotations;
 
-namespace Framework.Projection.Contract
+namespace Framework.Projection.Contract;
+
+internal class GenerateTypeResolver : ITypeResolver<Type>
 {
-    internal class GenerateTypeResolver : ITypeResolver<Type>
+    private readonly ProjectionContractEnvironment environment;
+
+    internal readonly HashSet<Type> projectionContracts;
+
+    private readonly Dictionary<Type, GeneratedType> generateTypes = new Dictionary<Type, GeneratedType>();
+
+
+    public GenerateTypeResolver([NotNull] ProjectionContractEnvironment environment, [NotNull] ITypeSource typeSource)
     {
-        private readonly ProjectionContractEnvironment environment;
+        if (environment == null) throw new ArgumentNullException(nameof(environment));
+        if (typeSource == null) throw new ArgumentNullException(nameof(typeSource));
 
-        internal readonly HashSet<Type> projectionContracts;
+        this.environment = environment;
 
-        private readonly Dictionary<Type, GeneratedType> generateTypes = new Dictionary<Type, GeneratedType>();
+        this.projectionContracts = typeSource.GetTypes().Where(type => type.HasAttribute<ProjectionContractAttribute>()).ToHashSet();
+    }
 
+    public Type Resolve([NotNull] Type contractType)
+    {
+        if (contractType == null) throw new ArgumentNullException(nameof(contractType));
 
-        public GenerateTypeResolver([NotNull] ProjectionContractEnvironment environment, [NotNull] ITypeSource typeSource)
-        {
-            if (environment == null) throw new ArgumentNullException(nameof(environment));
-            if (typeSource == null) throw new ArgumentNullException(nameof(typeSource));
+        return this.generateTypes.GetValueOrDefault(contractType)
 
-            this.environment = environment;
-
-            this.projectionContracts = typeSource.GetTypes().Where(type => type.HasAttribute<ProjectionContractAttribute>()).ToHashSet();
-        }
-
-        public Type Resolve([NotNull] Type contractType)
-        {
-            if (contractType == null) throw new ArgumentNullException(nameof(contractType));
-
-            return this.generateTypes.GetValueOrDefault(contractType)
-
-                   ?? (this.projectionContracts.Contains(contractType) ? new GeneratedType(this.environment, contractType, this.generateTypes) : null);
-        }
+               ?? (this.projectionContracts.Contains(contractType) ? new GeneratedType(this.environment, contractType, this.generateTypes) : null);
+    }
 
 
-        public IEnumerable<Type> GetTypes()
-        {
-            return this.generateTypes.Values;
-        }
+    public IEnumerable<Type> GetTypes()
+    {
+        return this.generateTypes.Values;
     }
 }

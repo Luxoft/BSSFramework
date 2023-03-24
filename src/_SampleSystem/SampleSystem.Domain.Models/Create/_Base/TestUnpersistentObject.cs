@@ -1,11 +1,10 @@
-namespace SampleSystem.Domain
+namespace SampleSystem.Domain;
+
+public class TestUnpersistentObject : DomainObjectBase
 {
-    public class TestUnpersistentObject : DomainObjectBase
-    {
-        public BusinessUnit BusinessUnit { get; set; }
+    public BusinessUnit BusinessUnit { get; set; }
 
-        public string Value1 { get; set; }
+    public string Value1 { get; set; }
 
-        public int Value2 { get; set; }
-    }
+    public int Value2 { get; set; }
 }

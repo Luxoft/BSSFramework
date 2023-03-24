@@ -1,24 +1,23 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Framework.Core
+namespace Framework.Core;
+
+public interface INothing : IMaybe
 {
-    public interface INothing : IMaybe
+
+}
+
+[DataContract(Name = "NothingOf{0}", Namespace = "Framework.Core")]
+public class Nothing<T> : Maybe<T>, INothing
+{
+    public Nothing()
     {
 
     }
 
-    [DataContract(Name = "NothingOf{0}", Namespace = "Framework.Core")]
-    public class Nothing<T> : Maybe<T>, INothing
+
+    public override string ToString()
     {
-        public Nothing()
-        {
-
-        }
-
-
-        public override string ToString()
-        {
-            return "";
-        }
+        return "";
     }
 }

@@ -1,9 +1,6 @@
-﻿namespace Framework.HangfireCore
-{
-    public class HangfireSettings
-    {
-        public string ConnectionString { get; set; }
+﻿namespace Framework.HangfireCore;
 
-        public JobTiming[] JobTimings { get; set; }
-    }
+public class HangfireSettings
+{
+    public JobTiming[] JobTimings { get; set; }
 }

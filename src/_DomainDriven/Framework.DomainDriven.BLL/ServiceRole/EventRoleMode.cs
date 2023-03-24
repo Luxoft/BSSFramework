@@ -1,31 +1,30 @@
 ﻿using System;
 
-namespace Framework.DomainDriven.BLL
+namespace Framework.DomainDriven.BLL;
+
+/// <summary>
+/// Тип евентов объекта
+/// </summary>
+[Flags]
+public enum EventRoleMode
 {
     /// <summary>
-    /// Тип евентов объекта
+    /// Сохранение
     /// </summary>
-    [Flags]
-    public enum EventRoleMode
-    {
-        /// <summary>
-        /// Сохранение
-        /// </summary>
-        Save = 1,
+    Save = 1,
 
-        /// <summary>
-        /// Удаление
-        /// </summary>
-        Remove = 2,
+    /// <summary>
+    /// Удаление
+    /// </summary>
+    Remove = 2,
 
-        /// <summary>
-        /// Прочие евенты
-        /// </summary>
-        Other = 4,
+    /// <summary>
+    /// Прочие евенты
+    /// </summary>
+    Other = 4,
 
-        /// <summary>
-        /// Все возможные евенты
-        /// </summary>
-        ALL = Save + Remove + Other
-    }
+    /// <summary>
+    /// Все возможные евенты
+    /// </summary>
+    ALL = Save + Remove + Other
 }

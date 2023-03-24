@@ -2,29 +2,28 @@
 
 using Framework.Notification;
 
-namespace Framework.DomainDriven.WebApiNetCore
+namespace Framework.DomainDriven.WebApiNetCore;
+
+/// <inheritdoc />
+public class TestWebApiExceptionExpander : IWebApiExceptionExpander
 {
-    /// <inheritdoc />
-    public class TestWebApiExceptionExpander : IWebApiExceptionExpander
+    private readonly IExceptionExpander exceptionExpander;
+
+    public TestWebApiExceptionExpander(IExceptionExpander exceptionExpander)
     {
-        private readonly IExceptionExpander exceptionExpander;
+        this.exceptionExpander = exceptionExpander ?? throw new ArgumentNullException(nameof(exceptionExpander));
+    }
 
-        public TestWebApiExceptionExpander(IExceptionExpander exceptionExpander)
+    /// <inheritdoc />
+    public Exception Process(Exception baseException)
+    {
+        var expandedException = this.exceptionExpander.Process(baseException);
+
+        if (expandedException == baseException)
         {
-            this.exceptionExpander = exceptionExpander ?? throw new ArgumentNullException(nameof(exceptionExpander));
+            return baseException;
         }
 
-        /// <inheritdoc />
-        public Exception Process(Exception baseException)
-        {
-            var expandedException = this.exceptionExpander.Process(baseException);
-
-            if (expandedException == baseException)
-            {
-                return baseException;
-            }
-
-            return expandedException;
-        }
+        return expandedException;
     }
 }

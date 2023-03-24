@@ -3,70 +3,69 @@ using System.Reflection;
 using Framework.CodeDom;
 using Framework.DomainDriven.BLL;
 
-namespace Framework.DomainDriven.BLLCoreGenerator
-{
-    public class DefaultOperationSecurityDomainBLLBaseFileFactory<TConfiguration> : FileFactory<TConfiguration>
+namespace Framework.DomainDriven.BLLCoreGenerator;
+
+public class DefaultOperationSecurityDomainBLLBaseFileFactory<TConfiguration> : FileFactory<TConfiguration>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
-    {
-        public DefaultOperationSecurityDomainBLLBaseFileFactory(TConfiguration configuration)
+{
+    public DefaultOperationSecurityDomainBLLBaseFileFactory(TConfiguration configuration)
             : base(configuration, null)
-        {
+    {
 
-        }
-
-
-        public override FileType FileType => FileType.DefaultOperationSecurityDomainBLLBase;
+    }
 
 
-        protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-        {
-            var genericDomainObjectParameter = this.GetDomainObjectCodeTypeParameter();
-            var genericDomainObjectParameterTypeRef = genericDomainObjectParameter.ToTypeReference();
+    public override FileType FileType => FileType.DefaultOperationSecurityDomainBLLBase;
 
-            var contextParameter = this.GetContextParameter();
-            var contextParameterRefExpr = contextParameter.ToVariableReferenceExpression();
 
-            var securityProviderParameter = this.GetSecurityProviderParameter(genericDomainObjectParameter);
-            var securityProviderParameterRefExpr = securityProviderParameter.ToVariableReferenceExpression();
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
+    {
+        var genericDomainObjectParameter = this.GetDomainObjectCodeTypeParameter();
+        var genericDomainObjectParameterTypeRef = genericDomainObjectParameter.ToTypeReference();
 
-            return new CodeTypeDeclaration
-            {
-                TypeParameters =
-                {
-                    genericDomainObjectParameter
-                },
+        var contextParameter = this.GetContextParameter();
+        var contextParameterRefExpr = contextParameter.ToVariableReferenceExpression();
 
-                Name = this.Name,
+        var securityProviderParameter = this.GetSecurityProviderParameter(genericDomainObjectParameter);
+        var securityProviderParameterRefExpr = securityProviderParameter.ToVariableReferenceExpression();
 
-                IsClass = true,
+        return new CodeTypeDeclaration
+               {
+                       TypeParameters =
+                       {
+                               genericDomainObjectParameter
+                       },
 
-                IsPartial = true,
+                       Name = this.Name,
 
-                BaseTypes =
-                {
-                    new CodeTypeReference()
-                    {
-                        BaseType = this.Configuration.GetCodeTypeReference(null, FileType.SecurityDomainBLLBase).BaseType,
-                        TypeArguments = { genericDomainObjectParameterTypeRef, typeof(BLLBaseOperation) }
-                    }
-                },
-                Members =
-                {
-                    new CodeConstructor
-                    {
-                        Attributes = MemberAttributes.Public,
-                        Parameters = { contextParameter },
-                        BaseConstructorArgs = { contextParameterRefExpr }
-                    },
+                       IsClass = true,
 
-                    new CodeConstructor
-                    {
-                        Attributes = MemberAttributes.Public,
-                        Parameters = { contextParameter, securityProviderParameter },
-                        BaseConstructorArgs = { contextParameterRefExpr, securityProviderParameterRefExpr }
-                    }
-                }
-            };
-        }
+                       IsPartial = true,
+
+                       BaseTypes =
+                       {
+                               new CodeTypeReference()
+                               {
+                                       BaseType = this.Configuration.GetCodeTypeReference(null, FileType.SecurityDomainBLLBase).BaseType,
+                                       TypeArguments = { genericDomainObjectParameterTypeRef, typeof(BLLBaseOperation) }
+                               }
+                       },
+                       Members =
+                       {
+                               new CodeConstructor
+                               {
+                                       Attributes = MemberAttributes.Public,
+                                       Parameters = { contextParameter },
+                                       BaseConstructorArgs = { contextParameterRefExpr }
+                               },
+
+                               new CodeConstructor
+                               {
+                                       Attributes = MemberAttributes.Public,
+                                       Parameters = { contextParameter, securityProviderParameter },
+                                       BaseConstructorArgs = { contextParameterRefExpr, securityProviderParameterRefExpr }
+                               }
+                       }
+               };
     }
 }

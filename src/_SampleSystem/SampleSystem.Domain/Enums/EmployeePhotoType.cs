@@ -1,8 +1,7 @@
-﻿namespace SampleSystem.Domain
+﻿namespace SampleSystem.Domain;
+
+public enum EmployeePhotoType
 {
-    public enum EmployeePhotoType
-    {
-        Default,
-        AD
-    }
+    Default,
+    AD
 }

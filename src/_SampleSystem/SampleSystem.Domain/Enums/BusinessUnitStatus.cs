@@ -1,8 +1,7 @@
-﻿namespace SampleSystem.Domain
+﻿namespace SampleSystem.Domain;
+
+public enum BusinessUnitStatus
 {
-    public enum BusinessUnitStatus
-    {
-        Current = 0,
-        Planned = 1
-    }
+    Current = 0,
+    Planned = 1
 }

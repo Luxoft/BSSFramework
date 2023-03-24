@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace Framework.Persistent.Mapping
-{
-    public class NullableAttribute : Attribute
-    {
+namespace Framework.Persistent.Mapping;
 
-    }
+public class NullableAttribute : Attribute
+{
+
 }

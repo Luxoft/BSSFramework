@@ -8,12 +8,13 @@ namespace Automation.Utils.DatabaseUtils;
 
 public class DatabaseItem : IDatabaseItem
 {
-    private SqlConnectionStringBuilder builder;
-    private ConfigUtil configUtil;
+    private readonly SqlConnectionStringBuilder builder;
+    private readonly ConfigUtil configUtil;
 
     public DatabaseItem(
         ConfigUtil configUtil,
-        string connectionString, string initialCatalog = null)
+        string connectionString,
+        string initialCatalog = null)
     {
         this.configUtil = configUtil;
         this.builder = new SqlConnectionStringBuilder(connectionString);
@@ -28,6 +29,7 @@ public class DatabaseItem : IDatabaseItem
         this.CopyLogPath = this.ToCopyLogPath(initialCatalog);
         this.SourceDataPath = this.ToSourceDataPath(fileName);
         this.SourceLogPath = this.ToSourceLogPath(fileName);
+        this.DatabaseCollation = this.configUtil.DatabaseCollation;
         this.builder.InitialCatalog = this.DatabaseName;
     }
 
@@ -50,6 +52,7 @@ public class DatabaseItem : IDatabaseItem
     public string CopyLogPath { get; }
     public string SourceDataPath { get; }
     public string SourceLogPath { get; }
+    public string DatabaseCollation { get; }
 
     private string ToSourceDataPath(string fileName) => this.ToWorkPath(SourceDataFile(fileName));
 

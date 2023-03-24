@@ -3,33 +3,32 @@ using System.Linq;
 
 using Framework.Core;
 
-namespace Framework.Validation
+namespace Framework.Validation;
+
+public class AlphabetValidator : IPropertyValidator<object, string>
 {
-    public class AlphabetValidator : IPropertyValidator<object, string>
+    private readonly string _alphabet;
+    private readonly char[] _externalChars;
+
+
+    public AlphabetValidator(string alphabet, string externalChars = null)
     {
-        private readonly string _alphabet;
-        private readonly char[] _externalChars;
+        if (alphabet == null) throw new ArgumentNullException(nameof(alphabet));
+
+        this._alphabet = alphabet;
+
+        this._externalChars = externalChars.EmptyIfNull().ToArray();
+    }
 
 
-        public AlphabetValidator(string alphabet, string externalChars = null)
-        {
-            if (alphabet == null) throw new ArgumentNullException(nameof(alphabet));
+    public ValidationResult GetValidationResult(IPropertyValidationContext<object, string> context)
+    {
+        if (context == null) throw new ArgumentNullException(nameof(context));
 
-            this._alphabet = alphabet;
+        var invalidChars = context.Value.Except(this._alphabet).Except(this._externalChars).Concat();
 
-            this._externalChars = externalChars.EmptyIfNull().ToArray();
-        }
+        return ValidationResult.FromCondition(!invalidChars.Any(),
 
-
-        public ValidationResult GetValidationResult(IPropertyValidationContext<object, string> context)
-        {
-            if (context == null) throw new ArgumentNullException(nameof(context));
-
-            var invalidChars = context.Value.Except(this._alphabet).Except(this._externalChars).Concat();
-
-            return ValidationResult.FromCondition(!invalidChars.Any(),
-
-                () => $"The value of {context.GetPropertyName()} property of {context.GetSourceTypeName()} contains invalid chars: {invalidChars}");
-        }
+                                              () => $"The value of {context.GetPropertyName()} property of {context.GetSourceTypeName()} contains invalid chars: {invalidChars}");
     }
 }

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Framework.ReferencesManager
+namespace Framework.ReferencesManager;
+
+interface IReferenceDetector
 {
-    interface IReferenceDetector
-    {
-        IList<Reference> Find(Type type, string assemblyName);
-    }
+    IList<Reference> Find(Type type, string assemblyName);
 }

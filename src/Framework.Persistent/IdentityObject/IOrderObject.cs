@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface IOrderObject<out T>
 {
-    public interface IOrderObject<out T>
-    {
-        T OrderIndex { get; }
-    }
+    T OrderIndex { get; }
 }

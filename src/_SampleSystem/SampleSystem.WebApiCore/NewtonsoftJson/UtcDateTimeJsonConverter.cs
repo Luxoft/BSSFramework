@@ -2,27 +2,26 @@
 
 using Newtonsoft.Json;
 
-namespace SampleSystem.WebApiCore.NewtonsoftJson
+namespace SampleSystem.WebApiCore.NewtonsoftJson;
+
+public class UtcDateTimeJsonConverter : JsonConverter
 {
-    public class UtcDateTimeJsonConverter : JsonConverter
+    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
     {
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        if (!(value is DateTime dateTime))
         {
-            if (!(value is DateTime dateTime))
-            {
-                return;
-            }
-
-            if (dateTime.Kind != DateTimeKind.Utc)
-            {
-                dateTime = DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
-            }
-
-            writer.WriteValue(dateTime);
+            return;
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) => reader.Value;
+        if (dateTime.Kind != DateTimeKind.Utc)
+        {
+            dateTime = DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
+        }
 
-        public override bool CanConvert(Type objectType) => objectType == typeof(DateTime) || objectType == typeof(DateTime?);
+        writer.WriteValue(dateTime);
     }
+
+    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) => reader.Value;
+
+    public override bool CanConvert(Type objectType) => objectType == typeof(DateTime) || objectType == typeof(DateTime?);
 }

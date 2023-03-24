@@ -3,20 +3,19 @@ using System.Collections.Generic;
 
 using JetBrains.Annotations;
 
-namespace Framework.DomainDriven.Metadata
+namespace Framework.DomainDriven.Metadata;
+
+public class AssemblyMetadata : IAssemblyMetadata
 {
-    public class AssemblyMetadata : IAssemblyMetadata
+    public AssemblyMetadata([NotNull] Type persistentDomainObjectBaseType)
     {
-        public AssemblyMetadata([NotNull] Type persistentDomainObjectBaseType)
-        {
-            if (persistentDomainObjectBaseType == null) throw new ArgumentNullException(nameof(persistentDomainObjectBaseType));
+        if (persistentDomainObjectBaseType == null) throw new ArgumentNullException(nameof(persistentDomainObjectBaseType));
 
-            this.PersistentDomainObjectBaseType = persistentDomainObjectBaseType;
-        }
-
-
-        public Type PersistentDomainObjectBaseType { get; }
-
-        public IEnumerable<DomainTypeMetadata> DomainTypes { get; set; }
+        this.PersistentDomainObjectBaseType = persistentDomainObjectBaseType;
     }
+
+
+    public Type PersistentDomainObjectBaseType { get; }
+
+    public IEnumerable<DomainTypeMetadata> DomainTypes { get; set; }
 }

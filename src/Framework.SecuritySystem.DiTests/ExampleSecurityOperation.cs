@@ -1,11 +1,10 @@
-﻿namespace Framework.SecuritySystem.DiTests
+﻿namespace Framework.SecuritySystem.DiTests;
+
+public enum ExampleSecurityOperation
 {
-    public enum ExampleSecurityOperation
-    {
-        Disabled,
+    Disabled,
 
-        EmployeeView,
+    EmployeeView,
 
-        EmployeeEdit,
-    }
+    EmployeeEdit,
 }

@@ -15,11 +15,11 @@ using JetBrains.Annotations;
 using SampleSystem.Domain;
 using SampleSystem.Domain.Projections;
 
-namespace SampleSystem.BLL
+namespace SampleSystem.BLL;
+
+public partial class SampleSystemBLLContext
 {
-    public partial class SampleSystemBLLContext
-    {
-        public SampleSystemBLLContext(
+    public SampleSystemBLLContext(
             IServiceProvider serviceProvider,
             [NotNull] IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
             [NotNull] IObjectStateService objectStateService,
@@ -35,35 +35,34 @@ namespace SampleSystem.BLL
             [NotNull] Framework.Configuration.BLL.IConfigurationBLLContext configuration,
             [NotNull] ISampleSystemBLLContextSettings settings)
             : base(serviceProvider, operationSenders, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
-        {
-            this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
+    {
+        this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
 
-            this.SecurityService = securityService ?? throw new ArgumentNullException(nameof(securityService));
-            this.Logics = logics ?? throw new ArgumentNullException(nameof(logics));
+        this.SecurityService = securityService ?? throw new ArgumentNullException(nameof(securityService));
+        this.Logics = logics ?? throw new ArgumentNullException(nameof(logics));
 
-            this.Authorization = authorization ?? throw new ArgumentNullException(nameof(authorization));
-            this.Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+        this.Authorization = authorization ?? throw new ArgumentNullException(nameof(authorization));
+        this.Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
-            this.TypeResolver = settings.TypeResolver;
-        }
-
-        public ISampleSystemSecurityService SecurityService { get; }
-
-        public ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory { get; }
-
-        public override ISampleSystemBLLFactoryContainer Logics { get; }
-
-        public IAuthorizationBLLContext Authorization { get; }
-
-        public Framework.Configuration.BLL.IConfigurationBLLContext Configuration { get; }
-
-        public ITypeResolver<string> TypeResolver { get; }
-
-        public override bool AllowVirtualPropertyInOdata(Type domainType)
-        {
-            return base.AllowVirtualPropertyInOdata(domainType) || domainType == typeof(BusinessUnitProgramClass);
-        }
-
-        ITypeResolver<string> ISecurityTypeResolverContainer.SecurityTypeResolver => this.TypeResolver;
+        this.TypeResolver = settings.TypeResolver;
     }
+
+    public ISampleSystemSecurityService SecurityService { get; }
+
+    public ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory { get; }
+
+    public override ISampleSystemBLLFactoryContainer Logics { get; }
+
+    public IAuthorizationBLLContext Authorization { get; }
+
+    public Framework.Configuration.BLL.IConfigurationBLLContext Configuration { get; }
+
+    public ITypeResolver<string> TypeResolver { get; }
+
+    public override bool AllowVirtualPropertyInOdata(Type domainType)
+    {
+        return base.AllowVirtualPropertyInOdata(domainType) || domainType == typeof(BusinessUnitProgramClass);
+    }
+
+    ITypeResolver<string> ISecurityTypeResolverContainer.SecurityTypeResolver => this.TypeResolver;
 }

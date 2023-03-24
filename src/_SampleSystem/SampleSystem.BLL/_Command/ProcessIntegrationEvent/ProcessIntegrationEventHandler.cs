@@ -13,7 +13,7 @@ public class ProcessIntegrationEventHandler : IRequestHandler<TestIntegrationEve
 
     public ProcessIntegrationEventHandler(ICountryBLLFactory countryBllFactory) => this.countryBllFactory = countryBllFactory;
 
-    public Task<Unit> Handle(TestIntegrationEvent request, CancellationToken cancellationToken)
+    public Task Handle(TestIntegrationEvent request, CancellationToken cancellationToken)
     {
         var countryBll = this.countryBllFactory.Create();
         var c = countryBll.GetById(request.CountryId);

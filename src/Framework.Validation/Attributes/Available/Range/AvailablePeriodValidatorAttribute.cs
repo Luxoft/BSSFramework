@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace Framework.Validation
+namespace Framework.Validation;
+
+public class AvailablePeriodValidatorAttribute : ClassValidatorAttribute
 {
-    public class AvailablePeriodValidatorAttribute : ClassValidatorAttribute
+    public override IClassValidator CreateValidator()
     {
-        public override IClassValidator CreateValidator()
-        {
-            return AvailablePeriodValidator.Value;
-        }
+        return AvailablePeriodValidator.Value;
     }
 }

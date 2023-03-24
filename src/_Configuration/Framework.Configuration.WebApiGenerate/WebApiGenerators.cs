@@ -9,35 +9,34 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using FileInfo = Framework.DomainDriven.Generation.FileInfo;
 
-namespace Framework.Configuration.WebApiGenerate
+namespace Framework.Configuration.WebApiGenerate;
+
+[TestClass]
+public partial class WebApiGenerators
 {
-    [TestClass]
-    public partial class WebApiGenerators
+    [TestMethod]
+    public void GenerateMainTest()
     {
-        [TestMethod]
-        public void GenerateMainTest()
-        {
-            this.GenerateMain().ToList();
-        }
+        this.GenerateMain().ToList();
+    }
 
-        public IEnumerable<FileInfo> GenerateMain()
-        {
-            return this.GenerateMainController();
-        }
+    public IEnumerable<FileInfo> GenerateMain()
+    {
+        return this.GenerateMainController();
+    }
 
-        [TestMethod]
-        public void GenerateMainControllerTest()
-        {
-            this.GenerateMainController().ToList();
-        }
+    [TestMethod]
+    public void GenerateMainControllerTest()
+    {
+        this.GenerateMainController().ToList();
+    }
 
-        private IEnumerable<FileInfo> GenerateMainController()
-        {
-            var generator = new SingleControllerCodeFileGenerator(this.Environment.MainSLController);
+    private IEnumerable<FileInfo> GenerateMainController()
+    {
+        var generator = new SingleControllerCodeFileGenerator(this.Environment.MainSLController);
 
-            var outputPath = Path.Combine(this.GeneratePath, "Framework.Configuration.WebApi");
+        var outputPath = Path.Combine(this.GeneratePath, "Framework.Configuration.WebApi");
 
-            yield return generator.GenerateSingle(outputPath, "Configuration.Generated", this.CheckOutService);
-        }
+        yield return generator.GenerateSingle(outputPath, "Configuration.Generated", this.CheckOutService);
     }
 }

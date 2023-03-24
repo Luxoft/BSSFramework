@@ -1,0 +1,9 @@
+<mat-toolbar color="primary">
+  <div class="tw-w-2/5">Configurator</div>
+
+  <div class="tw-flex tw-gap-5">
+    <ng-container *ngFor="let item of menuItems">
+      <a mat-button [routerLink]="item.route" [class.active]="item.active" class="tw-px-3 tw-py-1 tw-rounded-lg">{{ item.title }}</a>
+    </ng-container>
+  </div>
+</mat-toolbar>

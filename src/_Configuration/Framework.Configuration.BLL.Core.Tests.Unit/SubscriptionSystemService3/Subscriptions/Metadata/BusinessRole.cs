@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Subscriptions.Metadata
+namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Subscriptions.Metadata;
+
+internal static class BusinessRole
 {
-    internal static class BusinessRole
-    {
-        public static Guid Administrator { get; } = Guid.Parse("{137C3ADD-64F4-40E9-BF33-D42159267DA6}");
-    }
+    public static Guid Administrator { get; } = Guid.Parse("{137C3ADD-64F4-40E9-BF33-D42159267DA6}");
 }

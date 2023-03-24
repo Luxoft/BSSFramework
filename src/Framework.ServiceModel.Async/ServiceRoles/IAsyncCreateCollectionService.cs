@@ -2,10 +2,9 @@
 
 using Framework.Async;
 
-namespace Framework.ServiceModel.Async
+namespace Framework.ServiceModel.Async;
+
+public interface IAsyncCreateCollectionService<in TInputData, TChangingObject>
 {
-    public interface IAsyncCreateCollectionService<in TInputData, TChangingObject>
-    {
-        IAsyncProcessFunc<TInputData, ObservableCollection<TChangingObject>> CreateFunc { get; }
-    }
+    IAsyncProcessFunc<TInputData, ObservableCollection<TChangingObject>> CreateFunc { get; }
 }

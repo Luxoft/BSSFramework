@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Framework.SecuritySystem
-{
-    public interface IAccessDeniedExceptionService
-    {
-        Exception GetAccessDeniedException(string message);
-    }
+namespace Framework.SecuritySystem;
 
-    public interface IAccessDeniedExceptionService<in TPersistentDomainObjectBase> : IAccessDeniedExceptionService
-    {
-        Exception GetAccessDeniedException<TDomainObject>(
+public interface IAccessDeniedExceptionService
+{
+    Exception GetAccessDeniedException(string message);
+}
+
+public interface IAccessDeniedExceptionService<in TPersistentDomainObjectBase> : IAccessDeniedExceptionService
+{
+    Exception GetAccessDeniedException<TDomainObject>(
             TDomainObject domainObject,
             IReadOnlyDictionary<string, object> extensions = null,
             Func<string, string> formatMessageFunc = null)
             where TDomainObject : class, TPersistentDomainObjectBase;
-    }
 }

@@ -1,10 +1,9 @@
-﻿namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Subscriptions.Metadata
+﻿namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Subscriptions.Metadata;
+
+internal sealed class ConditionLambda : LambdaMetadataBase<object, bool>
 {
-    internal sealed class ConditionLambda : LambdaMetadataBase<object, bool>
+    public ConditionLambda()
     {
-        public ConditionLambda()
-        {
-            this.Lambda = (context, versions) => true;
-        }
+        this.Lambda = (context, versions) => true;
     }
 }

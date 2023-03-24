@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace Framework.Validation
+namespace Framework.Validation;
+
+public class AvailableDecimalValidatorAttribute : ClassValidatorAttribute
 {
-    public class AvailableDecimalValidatorAttribute : ClassValidatorAttribute
+    public override IClassValidator CreateValidator()
     {
-        public override IClassValidator CreateValidator()
-        {
-            return AvailableDecimalValidator.Value;
-        }
+        return AvailableDecimalValidator.Value;
     }
 }

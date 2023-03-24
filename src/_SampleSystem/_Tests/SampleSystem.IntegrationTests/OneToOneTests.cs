@@ -1,52 +1,48 @@
 ﻿using System;
-using Automation.ServiceEnvironment;
 using FluentAssertions;
 
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.MainQuery;
 
-namespace SampleSystem.IntegrationTests
+namespace SampleSystem.IntegrationTests;
+
+[TestClass]
+public class OneToOneTests : TestBase
 {
-    [TestClass]
-    public class OneToOneTests : TestBase
+    [TestMethod]
+    public void GetRequestProjection_ContainsOneToOneDetail_Initialized()
     {
-        [TestMethod]
-        public void GetRequestProjection_ContainsOneToOneDetail_Initialized()
-        {
-            // Arrange
-            var iMRequestQueryController = this.GetControllerEvaluator<IMRequestQueryController>();
+        // Arrange
+        var iMRequestQueryController = this.GetControllerEvaluator<IMRequestQueryController>();
 
-            var idents = this.Evaluate(
-                DBSessionMode.Write,
-                context =>
-                {
-                    var bll = context.Logics.Default.Create<IMRequest>();
+        var idents = this.Evaluate(
+                                   DBSessionMode.Write,
+                                   context =>
+                                   {
+                                       var bll = context.Logics.Default.Create<IMRequest>();
 
-                    var request = new IMRequest { Name = $"TestRequestName_{Guid.NewGuid()}" };
-                    request.OneToOneDetail = new IMRequestDetail(request);
+                                       var request = new IMRequest { Name = $"TestRequestName_{Guid.NewGuid()}" };
+                                       request.OneToOneDetail = new IMRequestDetail(request);
 
-                    bll.Save(request);
+                                       bll.Save(request);
 
-                    return new
-                    {
-                        RequestId = request.Id,
+                                       return new
+                                              {
+                                                      RequestId = request.Id,
 
-                        DetailId = request.OneToOneDetail.Id
-                    };
-                });
+                                                      DetailId = request.OneToOneDetail.Id
+                                              };
+                                   });
 
-            // Act
-            var result = iMRequestQueryController.Evaluate(c => c.GetTestIMRequestsByODataQueryString(""));
+        // Act
+        var result = iMRequestQueryController.Evaluate(c => c.GetTestIMRequestsByODataQueryString(""));
 
-            // Assert
-            result.Items.Should().Contain(request => request.Id == idents.RequestId && request.OneToOneDetail.Id == idents.DetailId);
-        }
+        // Assert
+        result.Items.Should().Contain(request => request.Id == idents.RequestId && request.OneToOneDetail.Id == idents.DetailId);
     }
 }

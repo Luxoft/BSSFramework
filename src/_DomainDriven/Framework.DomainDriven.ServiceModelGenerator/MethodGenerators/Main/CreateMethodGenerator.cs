@@ -10,69 +10,68 @@ using Framework.DomainDriven.DTOGenerator;
 using Framework.Security;
 using Framework.Transfering;
 
-namespace Framework.DomainDriven.ServiceModelGenerator
-{
-    public class CreateMethodGenerator<TConfiguration> : ModelMethodGenerator<TConfiguration, BLLSaveRoleAttribute>
+namespace Framework.DomainDriven.ServiceModelGenerator;
+
+public class CreateMethodGenerator<TConfiguration> : ModelMethodGenerator<TConfiguration, BLLSaveRoleAttribute>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
-    {
-        public CreateMethodGenerator(TConfiguration configuration, Type domainType, Type createModel)
+{
+    public CreateMethodGenerator(TConfiguration configuration, Type domainType, Type createModel)
             : base(configuration, domainType, createModel)
-        {
-            this.Identity = new MethodIdentity(MethodIdentityType.Create, createModel);
-        }
+    {
+        this.Identity = new MethodIdentity(MethodIdentityType.Create, createModel);
+    }
 
 
-        public override MethodIdentity Identity { get; }
+    public override MethodIdentity Identity { get; }
 
 
-        protected override string Name => this.DomainType.GetModelMethodName(this.ModelType, ModelRole.Create, true);
+    protected override string Name => this.DomainType.GetModelMethodName(this.ModelType, ModelRole.Create, true);
 
-        protected override CodeTypeReference ReturnType => this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.DomainType, DTOType.RichDTO);
+    protected override CodeTypeReference ReturnType => this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.DomainType, DTOType.RichDTO);
 
-        protected override bool IsEdit { get; } = true;
+    protected override bool IsEdit { get; } = true;
 
-        protected override DBSessionMode DefaultSessionMode { get; } = DBSessionMode.Read;
-
-
-        protected override string GetComment()
-        {
-            return $"Create {this.DomainType.Name} by model ({this.ModelType.Name})";
-        }
-
-        protected override IEnumerable<CodeParameterDeclarationExpression> GetParameters()
-        {
-            yield return this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.ModelType, DTOType.StrictDTO)
-                                           .ToParameterDeclarationExpression (this.DomainType.Name.ToStartLowerCase() + "CreateModel");
-        }
+    protected override DBSessionMode DefaultSessionMode { get; } = DBSessionMode.Read;
 
 
-        protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
-        {
-            var createModelDecl = this.ModelType.ToTypeReference().ToVariableDeclarationStatement("createModel", this.Parameter.ToVariableReferenceExpression().ToMethodInvokeExpression(this.Configuration.Environment.ServerDTO.ToDomainObjectMethodName, evaluateDataExpr.GetMappingService()));
+    protected override string GetComment()
+    {
+        return $"Create {this.DomainType.Name} by model ({this.ModelType.Name})";
+    }
 
-            var createObjectDecl = this.ToDomainObjectVarDecl(bllRefExpr.ToMethodInvokeExpression(
+    protected override IEnumerable<CodeParameterDeclarationExpression> GetParameters()
+    {
+        yield return this.Configuration.Environment.ServerDTO.GetCodeTypeReference(this.ModelType, DTOType.StrictDTO)
+                         .ToParameterDeclarationExpression (this.DomainType.Name.ToStartLowerCase() + "CreateModel");
+    }
 
-                this.DomainType.GetModelMethodName(this.ModelType, ModelRole.Create, false),
-                createModelDecl.ToVariableReferenceExpression()));
 
-            yield return createModelDecl;
+    protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
+    {
+        var createModelDecl = this.ModelType.ToTypeReference().ToVariableDeclarationStatement("createModel", this.Parameter.ToVariableReferenceExpression().ToMethodInvokeExpression(this.Configuration.Environment.ServerDTO.ToDomainObjectMethodName, evaluateDataExpr.GetMappingService()));
 
-            yield return createObjectDecl;
+        var createObjectDecl = this.ToDomainObjectVarDecl(bllRefExpr.ToMethodInvokeExpression(
 
-            yield return bllRefExpr.ToMethodInvokeExpression("CheckAccess", createObjectDecl.ToVariableReferenceExpression()).ToExpressionStatement();
+                                                           this.DomainType.GetModelMethodName(this.ModelType, ModelRole.Create, false),
+                                                           createModelDecl.ToVariableReferenceExpression()));
 
-            yield return createObjectDecl.ToVariableReferenceExpression()
-                                         .ToStaticMethodInvokeExpression(this.GetConvertToDTOMethod(DTOType.RichDTO), evaluateDataExpr.GetMappingService())
-                                         .ToMethodReturnStatement();
-        }
+        yield return createModelDecl;
 
-        protected override object GetBLLSecurityParameter()
-        {
-            var modelSecurityAttribute = this.ModelType.GetEditDomainObjectAttribute();
+        yield return createObjectDecl;
 
-            return null == modelSecurityAttribute
+        yield return bllRefExpr.ToMethodInvokeExpression("CheckAccess", createObjectDecl.ToVariableReferenceExpression()).ToExpressionStatement();
+
+        yield return createObjectDecl.ToVariableReferenceExpression()
+                                     .ToStaticMethodInvokeExpression(this.GetConvertToDTOMethod(DTOType.RichDTO), evaluateDataExpr.GetMappingService())
+                                     .ToMethodReturnStatement();
+    }
+
+    protected override object GetBLLSecurityParameter()
+    {
+        var modelSecurityAttribute = this.ModelType.GetEditDomainObjectAttribute();
+
+        return null == modelSecurityAttribute
                        ? base.GetBLLSecurityParameter()
                        : modelSecurityAttribute.SecurityOperationCode;
-        }
     }
 }

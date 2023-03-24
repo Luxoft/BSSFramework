@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Framework.Core
+namespace Framework.Core;
+
+/// <summary>
+/// Источник типов
+/// </summary>
+public interface ITypeSource
 {
     /// <summary>
-    /// Источник типов
+    /// Получение типов
     /// </summary>
-    public interface ITypeSource
-    {
-        /// <summary>
-        /// Получение типов
-        /// </summary>
-        /// <returns></returns>
-        IEnumerable<Type> GetTypes();
-    }
+    /// <returns></returns>
+    IEnumerable<Type> GetTypes();
 }

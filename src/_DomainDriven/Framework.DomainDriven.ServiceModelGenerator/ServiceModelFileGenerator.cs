@@ -3,33 +3,32 @@
 using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.Generation.Domain;
 
-namespace Framework.DomainDriven.ServiceModelGenerator
+namespace Framework.DomainDriven.ServiceModelGenerator;
+
+public class ServiceModelFileGenerator : ServiceModelFileGenerator<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>
 {
-    public class ServiceModelFileGenerator : ServiceModelFileGenerator<IGeneratorConfigurationBase<IGenerationEnvironmentBase>>
-    {
-        public ServiceModelFileGenerator(IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
+    public ServiceModelFileGenerator(IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
             : base(configuration)
-        {
-        }
+    {
+    }
+}
+
+public class ServiceModelFileGenerator<TConfiguration> : CodeFileGenerator<TConfiguration>
+        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+{
+    public ServiceModelFileGenerator(TConfiguration configuration)
+            : base(configuration)
+    {
     }
 
-    public class ServiceModelFileGenerator<TConfiguration> : CodeFileGenerator<TConfiguration>
-        where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
+
+    protected override IEnumerable<ICodeFile> GetInternalFileGenerators()
     {
-        public ServiceModelFileGenerator(TConfiguration configuration)
-            : base(configuration)
+        yield return new AccumImplementFileFactory<TConfiguration>(this.Configuration);
+
+        foreach (var domainType in this.Configuration.GetActualDomainTypes())
         {
-        }
-
-
-        protected override IEnumerable<ICodeFile> GetInternalFileGenerators()
-        {
-            yield return new AccumImplementFileFactory<TConfiguration>(this.Configuration);
-
-            foreach (var domainType in this.Configuration.GetActualDomainTypes())
-            {
-                yield return new ImplementFileFactory<TConfiguration>(this.Configuration, domainType);
-            }
+            yield return new ImplementFileFactory<TConfiguration>(this.Configuration, domainType);
         }
     }
 }

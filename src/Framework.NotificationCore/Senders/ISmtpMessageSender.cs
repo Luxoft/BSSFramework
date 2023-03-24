@@ -2,10 +2,9 @@
 
 using Framework.Notification.DTO;
 
-namespace Framework.NotificationCore.Senders
+namespace Framework.NotificationCore.Senders;
+
+internal interface ISmtpMessageSender
 {
-    internal interface ISmtpMessageSender
-    {
-        void Send(SmtpClient client, NotificationEventDTO message);
-    }
+    void Send(SmtpClient client, NotificationEventDTO message);
 }

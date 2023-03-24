@@ -1,51 +1,50 @@
 ﻿using System;
 using System.IO;
 
-namespace Framework.Core
+namespace Framework.Core;
+
+public abstract class MessageSender<TMessage> : IMessageSender<TMessage>
 {
-    public abstract class MessageSender<TMessage> : IMessageSender<TMessage>
+    public abstract void Send(TMessage message);
+
+
+    public static readonly IMessageSender<TMessage> Empty = new EmptyMessageSender();
+
+    public static readonly IMessageSender<TMessage> Trace = Empty.WithTrace();
+
+    public static readonly IMessageSender<TMessage> NotImplemented = new NotImplementedMessageSender();
+
+
+    public static IMessageSender<TMessage> Create(TextWriter writer)
     {
-        public abstract void Send(TMessage message);
+        if (writer == null) throw new ArgumentNullException(nameof(writer));
 
+        return Empty.WithWrite((obj) => writer.WriteLine(obj));
+    }
 
-        public static readonly IMessageSender<TMessage> Empty = new EmptyMessageSender();
-
-        public static readonly IMessageSender<TMessage> Trace = Empty.WithTrace();
-
-        public static readonly IMessageSender<TMessage> NotImplemented = new NotImplementedMessageSender();
-
-
-        public static IMessageSender<TMessage> Create(TextWriter writer)
+    private class EmptyMessageSender : MessageSender<TMessage>
+    {
+        public EmptyMessageSender()
         {
-            if (writer == null) throw new ArgumentNullException(nameof(writer));
 
-            return Empty.WithWrite((obj) => writer.WriteLine(obj));
         }
 
-        private class EmptyMessageSender : MessageSender<TMessage>
+        public override void Send(TMessage message)
         {
-            public EmptyMessageSender()
-            {
 
-            }
+        }
+    }
 
-            public override void Send(TMessage message)
-            {
+    private class NotImplementedMessageSender : MessageSender<TMessage>
+    {
+        public NotImplementedMessageSender()
+        {
 
-            }
         }
 
-        private class NotImplementedMessageSender : MessageSender<TMessage>
+        public override void Send(TMessage message)
         {
-            public NotImplementedMessageSender()
-            {
-
-            }
-
-            public override void Send(TMessage message)
-            {
-                throw new NotImplementedException();
-            }
+            throw new NotImplementedException();
         }
     }
 }

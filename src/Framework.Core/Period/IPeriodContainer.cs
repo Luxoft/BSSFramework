@@ -1,19 +1,18 @@
-﻿namespace Framework.Core
-{
-    public interface IPeriodObject
-    {
-        Period Period
-        {
-            get;
-        }
-    }
+﻿namespace Framework.Core;
 
-    public interface IMutablePeriodObject : IPeriodObject
+public interface IPeriodObject
+{
+    Period Period
     {
-        new Period Period
-        {
-            get;
-            set;
-        }
+        get;
+    }
+}
+
+public interface IMutablePeriodObject : IPeriodObject
+{
+    new Period Period
+    {
+        get;
+        set;
     }
 }

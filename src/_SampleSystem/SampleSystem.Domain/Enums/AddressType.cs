@@ -1,11 +1,10 @@
-﻿namespace SampleSystem.Domain
+﻿namespace SampleSystem.Domain;
+
+public enum AddressType
 {
-    public enum AddressType
-    {
-        Undefired = 0,
+    Undefired = 0,
 
-        Legal = 1,
+    Legal = 1,
 
-        Postal = 2,
-    }
+    Postal = 2,
 }

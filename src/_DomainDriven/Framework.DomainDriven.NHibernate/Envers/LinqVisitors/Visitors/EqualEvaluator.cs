@@ -1,49 +1,48 @@
 ﻿using System.Linq.Expressions;
 using NHibernate.Envers.Query.Criteria;
 
-namespace NHibernate.Linq.Visitors
+namespace NHibernate.Linq.Visitors;
+
+internal class EqualEvaluator : ExpressionVisitor
 {
-    internal class EqualEvaluator : ExpressionVisitor
+    private readonly Immutable<string> value;
+    private readonly Immutable<AuditProperty> property;
+
+    public EqualEvaluator()
     {
-        private readonly Immutable<string> value;
-        private readonly Immutable<AuditProperty> property;
+        this.value = new Immutable<string>();
+        this.property = new Immutable<AuditProperty>();
+    }
 
-        public EqualEvaluator()
-        {
-            this.value = new Immutable<string>();
-            this.property = new Immutable<AuditProperty>();
-        }
+    public string Value
+    {
+        get { return this.value.Value; }
+    }
 
-        public string Value
-        {
-            get { return this.value.Value; }
-        }
+    public AuditProperty Property
+    {
+        get { return this.property.Value; }
+    }
 
-        public AuditProperty Property
+    protected override Expression VisitConstant(ConstantExpression node)
+    {
+        if (!this.value.IsInit)
         {
-            get { return this.property.Value; }
+            this.value.Value = node.Value.ToString();
         }
+        return base.VisitConstant(node);
+    }
 
-        protected override Expression VisitConstant(ConstantExpression node)
+    protected override Expression VisitMember(MemberExpression node)
+    {
+        if (node.Expression.GetType() == typeof(ConstantExpression))
         {
-            if (!this.value.IsInit)
-            {
-                this.value.Value = node.Value.ToString();
-            }
-            return base.VisitConstant(node);
+            this.value.Value = node.ToValue();
         }
-
-        protected override Expression VisitMember(MemberExpression node)
+        else
         {
-            if (node.Expression.GetType() == typeof(ConstantExpression))
-            {
-                this.value.Value = node.ToValue();
-            }
-            else
-            {
-                this.property.Value = node.ToAuditProperty();
-            }
-            return base.VisitMember(node);
+            this.property.Value = node.ToAuditProperty();
         }
+        return base.VisitMember(node);
     }
 }

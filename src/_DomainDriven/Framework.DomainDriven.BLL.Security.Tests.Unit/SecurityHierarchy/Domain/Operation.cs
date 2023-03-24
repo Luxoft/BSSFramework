@@ -1,6 +1,5 @@
-﻿namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain
+﻿namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
+
+public enum Operation
 {
-    public enum Operation
-    {
-    }
 }

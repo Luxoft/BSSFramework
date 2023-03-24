@@ -11,24 +11,23 @@ using Microsoft.AspNetCore.Mvc;
 
 using Serilog.Context;
 
-namespace SampleSystem.WebApiCore.Controllers
+namespace SampleSystem.WebApiCore.Controllers;
+
+public class ConfigSLJsonController : Framework.Configuration.WebApi.ConfigSLJsonController
 {
-    public class ConfigSLJsonController : Framework.Configuration.WebApi.ConfigSLJsonController
+    [HttpPost(nameof(SaveSendedNotification))]
+    public void SaveSendedNotification(NotificationEventDTO notification)
     {
-        [HttpPost(nameof(SaveSendedNotification))]
-        public void SaveSendedNotification(NotificationEventDTO notification)
+        if (notification == null)
         {
-            if (notification == null)
-            {
-                throw new ArgumentNullException(nameof(notification));
-            }
-
-            this.EvaluateC(DBSessionMode.Write, context =>
-            {
-                var bll = new SentMessageBLL(context);
-
-                bll.Save(notification.ToSentMessage());
-            });
+            throw new ArgumentNullException(nameof(notification));
         }
+
+        this.EvaluateC(DBSessionMode.Write, context =>
+                                            {
+                                                var bll = new SentMessageBLL(context);
+
+                                                bll.Save(notification.ToSentMessage());
+                                            });
     }
 }

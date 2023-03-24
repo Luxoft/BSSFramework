@@ -2,64 +2,63 @@
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
 
-namespace Framework.QueryLanguage
+namespace Framework.QueryLanguage;
+
+[DataContract]
+public static class UnaryOperationExtensions
 {
-    [DataContract]
-    public static class UnaryOperationExtensions
+    public static string ToFormatString(this UnaryOperation operation)
     {
-        public static string ToFormatString(this UnaryOperation operation)
+        switch (operation)
         {
-            switch (operation)
-            {
-                case UnaryOperation.Not:
-                    return "!";
+            case UnaryOperation.Not:
+                return "!";
 
-                case UnaryOperation.Plus:
-                    return "+";
+            case UnaryOperation.Plus:
+                return "+";
 
-                case UnaryOperation.Negate:
-                    return "-";
+            case UnaryOperation.Negate:
+                return "-";
 
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(operation));
-            }
+            default:
+                throw new ArgumentOutOfRangeException(nameof(operation));
         }
+    }
 
-        public static ExpressionType ToExpressionType(this UnaryOperation operation)
+    public static ExpressionType ToExpressionType(this UnaryOperation operation)
+    {
+        switch (operation)
         {
-            switch (operation)
-            {
-                case UnaryOperation.Not:
-                    return ExpressionType.Not;
+            case UnaryOperation.Not:
+                return ExpressionType.Not;
 
-                case UnaryOperation.Plus:
-                    return ExpressionType.UnaryPlus;
+            case UnaryOperation.Plus:
+                return ExpressionType.UnaryPlus;
 
-                case UnaryOperation.Negate:
-                    return ExpressionType.Negate;
+            case UnaryOperation.Negate:
+                return ExpressionType.Negate;
 
 
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(operation));
-            }
+            default:
+                throw new ArgumentOutOfRangeException(nameof(operation));
         }
+    }
 
-        public static int GetPriority(this UnaryOperation operation)
+    public static int GetPriority(this UnaryOperation operation)
+    {
+        switch (operation)
         {
-            switch (operation)
-            {
-                case UnaryOperation.Not:
-                    return 10;
+            case UnaryOperation.Not:
+                return 10;
 
-                case UnaryOperation.Negate:
-                    return 20;
+            case UnaryOperation.Negate:
+                return 20;
 
-                case UnaryOperation.Plus:
-                    return 20;
+            case UnaryOperation.Plus:
+                return 20;
 
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(operation));
-            }
+            default:
+                throw new ArgumentOutOfRangeException(nameof(operation));
         }
     }
 }

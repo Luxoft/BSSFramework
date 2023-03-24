@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using Framework.Configuration.Core;
 using Framework.Persistent;
 
-namespace Framework.Configuration.SubscriptionModeling.Tests.Unit.Metadata
+namespace Framework.Configuration.SubscriptionModeling.Tests.Unit.Metadata;
+
+internal sealed class SecurityItemSourceSourceLambda : SecurityItemSourceLambdaMetadata<object, object, ManagementUnit>
 {
-    internal sealed class SecurityItemSourceSourceLambda : SecurityItemSourceLambdaMetadata<object, object, ManagementUnit>
+    public SecurityItemSourceSourceLambda()
     {
-        public SecurityItemSourceSourceLambda()
-        {
-            this.Lambda = (context, versions) => new List<ManagementUnit>();
-            this.DomainObjectChangeType = DomainObjectChangeType.Update;
-        }
+        this.Lambda = (context, versions) => new List<ManagementUnit>();
+        this.DomainObjectChangeType = DomainObjectChangeType.Update;
+    }
 
-        public override NotificationExpandType ExpandType { get; protected set; } = NotificationExpandType.Direct;
+    public override NotificationExpandType ExpandType { get; protected set; } = NotificationExpandType.Direct;
 
-        internal void SetFunc(Func<object, DomainObjectVersions<object>, IEnumerable<ManagementUnit>> lambda)
-        {
-            this.Lambda = lambda;
-        }
+    internal void SetFunc(Func<object, DomainObjectVersions<object>, IEnumerable<ManagementUnit>> lambda)
+    {
+        this.Lambda = lambda;
     }
 }

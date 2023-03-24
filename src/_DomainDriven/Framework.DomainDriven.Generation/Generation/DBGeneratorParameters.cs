@@ -1,16 +1,15 @@
-﻿namespace Framework.DomainDriven
+﻿namespace Framework.DomainDriven;
+
+public struct DBGeneratorParameters
 {
-    public struct DBGeneratorParameters
-    {
-        public DBGeneratorParameters(string serverName, string databaseName)
+    public DBGeneratorParameters(string serverName, string databaseName)
             : this()
-        {
-            this.ServerName = serverName;
-            this.DatabaseName = databaseName;
-        }
-
-        public string DatabaseName { get; private set; }
-
-        public string ServerName { get; private set; }
+    {
+        this.ServerName = serverName;
+        this.DatabaseName = databaseName;
     }
+
+    public string DatabaseName { get; private set; }
+
+    public string ServerName { get; private set; }
 }

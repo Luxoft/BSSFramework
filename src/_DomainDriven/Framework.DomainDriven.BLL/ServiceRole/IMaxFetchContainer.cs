@@ -1,15 +1,14 @@
 ﻿using Framework.Transfering;
 
-namespace Framework.DomainDriven.BLL
+namespace Framework.DomainDriven.BLL;
+
+/// <summary>
+/// Контейнер для маркировки размера выгрузки данных их базы
+/// </summary>
+public interface IMaxFetchContainer
 {
     /// <summary>
-    /// Контейнер для маркировки размера выгрузки данных их базы
+    /// Максимальный уровень выгрузки из базы
     /// </summary>
-    public interface IMaxFetchContainer
-    {
-        /// <summary>
-        /// Максимальный уровень выгрузки из базы
-        /// </summary>
-        ViewDTOType MaxFetch { get; }
-    }
+    ViewDTOType MaxFetch { get; }
 }

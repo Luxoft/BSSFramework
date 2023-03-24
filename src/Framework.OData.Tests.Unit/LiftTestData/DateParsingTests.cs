@@ -1,7 +1,6 @@
-﻿namespace Framework.OData.Tests.Unit
+﻿namespace Framework.OData.Tests.Unit;
+
+public class TestIntObj
 {
-    public class TestIntObj
-    {
-        public int Int { get; set; }
-    }
+    public int Int { get; set; }
 }

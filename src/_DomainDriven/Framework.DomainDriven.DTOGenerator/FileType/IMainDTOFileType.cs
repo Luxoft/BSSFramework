@@ -1,7 +1,6 @@
-﻿namespace Framework.DomainDriven.DTOGenerator
-{
-    public interface IMainDTOFileType
-    {
+﻿namespace Framework.DomainDriven.DTOGenerator;
 
-    }
+public interface IMainDTOFileType
+{
+
 }

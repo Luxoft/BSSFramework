@@ -1,13 +1,12 @@
-namespace Framework.DomainDriven.ServiceModelGenerator
+namespace Framework.DomainDriven.ServiceModelGenerator;
+
+public interface IMainGeneratorConfigurationBase : IGeneratorConfigurationBase
 {
-    public interface IMainGeneratorConfigurationBase : IGeneratorConfigurationBase
-    {
-        bool GenerateQueryMethods { get; }
-    }
+    bool GenerateQueryMethods { get; }
+}
 
-    public interface IMainGeneratorConfigurationBase<out TEnvironment> : IMainGeneratorConfigurationBase, IGeneratorConfigurationBase<TEnvironment>
+public interface IMainGeneratorConfigurationBase<out TEnvironment> : IMainGeneratorConfigurationBase, IGeneratorConfigurationBase<TEnvironment>
         where TEnvironment : IGenerationEnvironmentBase
-    {
+{
 
-    }
 }

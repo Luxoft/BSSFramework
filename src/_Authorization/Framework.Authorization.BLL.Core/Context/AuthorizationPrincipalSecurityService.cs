@@ -5,35 +5,34 @@ using Framework.SecuritySystem;
 
 using JetBrains.Annotations;
 
-namespace Framework.Authorization.BLL
+namespace Framework.Authorization.BLL;
+
+public partial class AuthorizationPrincipalSecurityService
 {
-    public partial class AuthorizationPrincipalSecurityService
-    {
-        public AuthorizationPrincipalSecurityService(
+    public AuthorizationPrincipalSecurityService(
             IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
             IDisabledSecurityProviderContainer<PersistentDomainObjectBase> disabledSecurityProviderContainer,
             ISecurityOperationResolver<PersistentDomainObjectBase, AuthorizationSecurityOperationCode> securityOperationResolver,
             IAuthorizationSystem<Guid> authorizationSystem,
             [NotNull] IAuthorizationBLLContext context)
             : base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
+    {
+        this.Context = context ?? throw new ArgumentNullException(nameof(context));
+    }
+
+    public IAuthorizationBLLContext Context { get; }
+
+    protected override ISecurityProvider<Principal> CreateSecurityProvider(BLLSecurityMode securityMode)
+    {
+        var baseProvider = base.CreateSecurityProvider(securityMode);
+
+        switch (securityMode)
         {
-            this.Context = context ?? throw new ArgumentNullException(nameof(context));
-        }
+            case BLLSecurityMode.View:
+                return this.Context.GetPrincipalSecurityProvider().Or(baseProvider, this.AccessDeniedExceptionService);
 
-        public IAuthorizationBLLContext Context { get; }
-
-        protected override ISecurityProvider<Principal> CreateSecurityProvider(BLLSecurityMode securityMode)
-        {
-            var baseProvider = base.CreateSecurityProvider(securityMode);
-
-            switch (securityMode)
-            {
-                case BLLSecurityMode.View:
-                    return this.Context.GetPrincipalSecurityProvider().Or(baseProvider, this.AccessDeniedExceptionService);
-
-                default:
-                    return baseProvider;
-            }
+            default:
+                return baseProvider;
         }
     }
 }

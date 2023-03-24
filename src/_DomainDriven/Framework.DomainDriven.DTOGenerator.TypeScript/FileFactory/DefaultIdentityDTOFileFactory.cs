@@ -9,119 +9,118 @@ using Framework.CodeDom.TypeScript;
 using Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory.Base;
 using Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory.Helpers;
 
-namespace Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory
+namespace Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory;
+
+/// <summary>
+/// ITypeScriptIdentityDTOFileFactory
+/// </summary>
+public interface ITypeScriptIdentityDTOFileFactory
 {
-    /// <summary>
-    /// ITypeScriptIdentityDTOFileFactory
-    /// </summary>
-    public interface ITypeScriptIdentityDTOFileFactory
+}
+
+/// <summary>
+/// TypeScript IdentityDTO file factory
+/// </summary>
+/// <typeparam name="TConfiguration"></typeparam>
+public class DefaultIdentityDTOFileFactory<TConfiguration> : ClientFileFactory<TConfiguration, DTOFileType>, ITypeScriptIdentityDTOFileFactory
+        where TConfiguration : class, ITypeScriptDTOGeneratorConfiguration<ITypeScriptGenerationEnvironmentBase>
+{
+    public DefaultIdentityDTOFileFactory(TConfiguration configuration, Type domainType)
+            : base(configuration, domainType)
     {
     }
 
-    /// <summary>
-    /// TypeScript IdentityDTO file factory
-    /// </summary>
-    /// <typeparam name="TConfiguration"></typeparam>
-    public class DefaultIdentityDTOFileFactory<TConfiguration> : ClientFileFactory<TConfiguration, DTOFileType>, ITypeScriptIdentityDTOFileFactory
-        where TConfiguration : class, ITypeScriptDTOGeneratorConfiguration<ITypeScriptGenerationEnvironmentBase>
+    public override DTOFileType FileType => DTOGenerator.FileType.IdentityDTO;
+
+    public override CodeTypeReference BaseReference => null;
+
+    public string IdPropertyName => this.Configuration.Environment.IdentityProperty.Name;
+
+    public CodeConstructor GenerateIdentityConstructor()
     {
-        public DefaultIdentityDTOFileFactory(TConfiguration configuration, Type domainType)
-            : base(configuration, domainType)
-        {
-        }
+        var sourceParameter = new CodeParameterDeclarationExpression(Constants.IdentityTypeName, "id");
 
-        public override DTOFileType FileType => DTOGenerator.FileType.IdentityDTO;
+        var sourceParameterRef = sourceParameter.ToVariableReferenceExpression();
 
-        public override CodeTypeReference BaseReference => null;
+        return new CodeConstructor
+               {
+                       Parameters = { sourceParameter },
+                       Attributes = MemberAttributes.Public | MemberAttributes.Override,
+                       Statements =
+                       {
+                               new CodeThrowArgumentIsNullOrUndefinedExceptionConditionStatement(sourceParameter),
+                               sourceParameterRef.ToAssignStatement(new CodeThisReferenceExpression().ToPropertyReference(this.IdPropertyName))
+                       }
+               };
+    }
 
-        public string IdPropertyName => this.Configuration.Environment.IdentityProperty.Name;
+    protected CodeMemberField GetIdCodeMemberField()
+    {
+        return new CodeMemberField(Constants.IdentityTypeName, this.IdPropertyName)
+               {
+                       Attributes = MemberAttributes.Public,
+                       CustomAttributes = { new CodeAttributeDeclaration(new CodeTypeReference(typeof(DataMemberAttribute))) }
+               };
+    }
 
-        public CodeConstructor GenerateIdentityConstructor()
-        {
-            var sourceParameter = new CodeParameterDeclarationExpression(Constants.IdentityTypeName, "id");
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
+    {
+        return new CodeTypeDeclaration(this.Name)
+               {
+                       IsClass = this.Configuration.IdentityIsReference,
+                       IsStruct = !this.Configuration.IdentityIsReference,
 
-            var sourceParameterRef = sourceParameter.ToVariableReferenceExpression();
+                       Attributes = MemberAttributes.Public,
+               };
+    }
 
-            return new CodeConstructor
-            {
-                Parameters = { sourceParameter },
-                Attributes = MemberAttributes.Public | MemberAttributes.Override,
-                Statements =
-                {
-                    new CodeThrowArgumentIsNullOrUndefinedExceptionConditionStatement(sourceParameter),
-                    sourceParameterRef.ToAssignStatement(new CodeThisReferenceExpression().ToPropertyReference(this.IdPropertyName))
-                }
-            };
-        }
+    protected virtual CodeMemberField CreateTypeFieldMember()
+    {
+        return new CodeMemberField
+               {
+                       Name = "__type",
+                       Type = this.CodeTypeReferenceService.GetCodeTypeReferenceByType(typeof(string)),
+                       Attributes = MemberAttributes.Public,
+                       InitExpression = new CodePrimitiveExpression(this.Name)
+               };
+    }
 
-        protected CodeMemberField GetIdCodeMemberField()
-        {
-            return new CodeMemberField(Constants.IdentityTypeName, this.IdPropertyName)
-            {
-                Attributes = MemberAttributes.Public,
-                CustomAttributes = { new CodeAttributeDeclaration(new CodeTypeReference(typeof(DataMemberAttribute))) }
-            };
-        }
+    protected virtual CodeMemberField CreateOwnTypeFieldMember()
+    {
+        return new CodeMemberField
+               {
+                       Name = Constants.GenerateTypeIdenity(this.Name),
+                       Type = this.CodeTypeReferenceService.GetCodeTypeReferenceByType(typeof(string)),
+                       Attributes = MemberAttributes.Private
+               };
+    }
 
-        protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-        {
-            return new CodeTypeDeclaration(this.Name)
-            {
-                IsClass = this.Configuration.IdentityIsReference,
-                IsStruct = !this.Configuration.IdentityIsReference,
+    protected override IEnumerable<CodeTypeMember> GetMembers()
+    {
+        var emptyInstanceFieldName = "Empty";
 
-                Attributes = MemberAttributes.Public,
-            };
-        }
+        yield return this.CreateTypeFieldMember();
+        yield return this.CreateOwnTypeFieldMember();
+        yield return this.GetIdCodeMemberField();
 
-        protected virtual CodeMemberField CreateTypeFieldMember()
-        {
-            return new CodeMemberField
-            {
-                Name = "__type",
-                Type = this.CodeTypeReferenceService.GetCodeTypeReferenceByType(typeof(string)),
-                Attributes = MemberAttributes.Public,
-                InitExpression = new CodePrimitiveExpression(this.Name)
-            };
-        }
+        yield return this.GenerateIdentityConstructor();
 
-        protected virtual CodeMemberField CreateOwnTypeFieldMember()
-        {
-            return new CodeMemberField
-            {
-                Name = Constants.GenerateTypeIdenity(this.Name),
-                Type = this.CodeTypeReferenceService.GetCodeTypeReferenceByType(typeof(string)),
-                Attributes = MemberAttributes.Private
-            };
-        }
+        yield return new CodeMemberField(this.CurrentReference, emptyInstanceFieldName)
+                     {
+                             Attributes = MemberAttributes.Static | MemberAttributes.Public,
+                             InitExpression = new CodeObjectCreateExpression(
+                                                                             this.CurrentReference.BaseType.Split('.').Last(),
+                                                                             new CodeTypeReferenceExpression(Constants.IdentityTypeName)
+                                                                                     .ToFieldReference(this.Configuration.DTOEmptyPropertyName))
+                     };
 
-        protected override IEnumerable<CodeTypeMember> GetMembers()
-        {
-            var emptyInstanceFieldName = "Empty";
+        yield return this.GenerateIdentityFromStaticInitializeMethodJs();
 
-            yield return this.CreateTypeFieldMember();
-            yield return this.CreateOwnTypeFieldMember();
-            yield return this.GetIdCodeMemberField();
+        yield return this.GenerateToNativeJsonMethod();
+    }
 
-            yield return this.GenerateIdentityConstructor();
-
-            yield return new CodeMemberField(this.CurrentReference, emptyInstanceFieldName)
-            {
-                Attributes = MemberAttributes.Static | MemberAttributes.Public,
-                InitExpression = new CodeObjectCreateExpression(
-                    this.CurrentReference.BaseType.Split('.').Last(),
-                    new CodeTypeReferenceExpression(Constants.IdentityTypeName)
-                    .ToFieldReference(this.Configuration.DTOEmptyPropertyName))
-            };
-
-            yield return this.GenerateIdentityFromStaticInitializeMethodJs();
-
-            yield return this.GenerateToNativeJsonMethod();
-        }
-
-        protected override IEnumerable<CodeAttributeDeclaration> GetCustomAttributes()
-        {
-            yield return this.GetDataContractCodeAttributeDeclaration();
-        }
+    protected override IEnumerable<CodeAttributeDeclaration> GetCustomAttributes()
+    {
+        yield return this.GetDataContractCodeAttributeDeclaration();
     }
 }

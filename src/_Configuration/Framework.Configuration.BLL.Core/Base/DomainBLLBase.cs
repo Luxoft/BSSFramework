@@ -3,47 +3,46 @@
 using Framework.Configuration.Domain;
 using Framework.Validation;
 
-namespace Framework.Configuration.BLL
+namespace Framework.Configuration.BLL;
+
+public partial class DomainBLLBase<TDomainObject, TOperation>
 {
-    public partial class DomainBLLBase<TDomainObject, TOperation>
+    private void ExecuteBasePersist(TDomainObject domainObject)
     {
-        private void ExecuteBasePersist(TDomainObject domainObject)
-        {
-            if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-            this.Validate(domainObject, ConfigurationOperationContext.Save);
-        }
+        this.Validate(domainObject, ConfigurationOperationContext.Save);
+    }
 
 
-        protected virtual void Validate(TDomainObject domainObject, ConfigurationOperationContext context)
-        {
-            if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
+    protected virtual void Validate(TDomainObject domainObject, ConfigurationOperationContext context)
+    {
+        if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-            this.Context.Validator.Validate(domainObject, (int)context);
-        }
+        this.Context.Validator.Validate(domainObject, (int)context);
+    }
 
-        internal protected void Save(TDomainObject value, bool validate)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
+    internal protected void Save(TDomainObject value, bool validate)
+    {
+        if (value == null) throw new ArgumentNullException(nameof(value));
 
-            if (validate) { this.Save(value); }
-            else { base.Save(value); }
-        }
+        if (validate) { this.Save(value); }
+        else { base.Save(value); }
+    }
 
-        public override void Insert(TDomainObject value, Guid id)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
+    public override void Insert(TDomainObject value, Guid id)
+    {
+        if (value == null) throw new ArgumentNullException(nameof(value));
 
-            this.ExecuteBasePersist(value);
-            base.Insert(value, id);
-        }
+        this.ExecuteBasePersist(value);
+        base.Insert(value, id);
+    }
 
-        public override void Save(TDomainObject value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
+    public override void Save(TDomainObject value)
+    {
+        if (value == null) throw new ArgumentNullException(nameof(value));
 
-            this.ExecuteBasePersist(value);
-            base.Save(value);
-        }
+        this.ExecuteBasePersist(value);
+        base.Save(value);
     }
 }

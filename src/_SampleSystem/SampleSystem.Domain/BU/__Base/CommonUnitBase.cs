@@ -1,15 +1,14 @@
 ﻿using Framework.Security;
 
-namespace SampleSystem.Domain
-{
-    public abstract class CommonUnitBase : ContextBaseDirectory
-    {
-        private BusinessUnitStatus businessUnitStatus;
+namespace SampleSystem.Domain;
 
-        public virtual BusinessUnitStatus BusinessUnitStatus
-        {
-            get { return this.businessUnitStatus; }
-            set { this.businessUnitStatus = value; }
-        }
+public abstract class CommonUnitBase : ContextBaseDirectory
+{
+    private BusinessUnitStatus businessUnitStatus;
+
+    public virtual BusinessUnitStatus BusinessUnitStatus
+    {
+        get { return this.businessUnitStatus; }
+        set { this.businessUnitStatus = value; }
     }
 }

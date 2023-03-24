@@ -2,20 +2,19 @@
 
 using NHibernate;
 
-namespace Framework.DomainDriven.NHibernate
+namespace Framework.DomainDriven.NHibernate;
+
+internal static class LockRoleExtensions
 {
-    internal static class LockRoleExtensions
+    public static LockMode ToLockMode(this LockRole source)
     {
-        public static LockMode ToLockMode(this LockRole source)
+        switch (source)
         {
-            switch (source)
-            {
-                case LockRole.None: return LockMode.None;
-                case LockRole.Update: return LockMode.Upgrade;
-                case LockRole.Read: return LockMode.Read;
-                case LockRole.NoWait: return LockMode.UpgradeNoWait;
-                default: throw new ArgumentException($"LockRole:{source} can't be converted to LockMode");
-            }
+            case LockRole.None: return LockMode.None;
+            case LockRole.Update: return LockMode.Upgrade;
+            case LockRole.Read: return LockMode.Read;
+            case LockRole.NoWait: return LockMode.UpgradeNoWait;
+            default: throw new ArgumentException($"LockRole:{source} can't be converted to LockMode");
         }
     }
 }

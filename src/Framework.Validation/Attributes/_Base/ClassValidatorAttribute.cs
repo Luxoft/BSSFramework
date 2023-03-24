@@ -1,16 +1,15 @@
 ﻿using System;
 
-namespace Framework.Validation
+namespace Framework.Validation;
+
+[AttributeUsage(AttributeTargets.Class)]
+public abstract class ClassValidatorAttribute : ValidatorAttribute
 {
-    [AttributeUsage(AttributeTargets.Class)]
-    public abstract class ClassValidatorAttribute : ValidatorAttribute
+    protected ClassValidatorAttribute()
     {
-        protected ClassValidatorAttribute()
-        {
 
-        }
-
-
-        public abstract IClassValidator CreateValidator();
     }
+
+
+    public abstract IClassValidator CreateValidator();
 }

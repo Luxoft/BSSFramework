@@ -1,7 +1,6 @@
-﻿namespace Framework.Core.Serialization
+﻿namespace Framework.Core.Serialization;
+
+public interface IFormatter<in TValue, out TResult>
 {
-    public interface IFormatter<in TValue, out TResult>
-    {
-        TResult Format(TValue value);
-    }
+    TResult Format(TValue value);
 }

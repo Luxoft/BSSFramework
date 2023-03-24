@@ -8,51 +8,50 @@ using Framework.Projection;
 
 using SampleSystem.Domain;
 
-namespace SampleSystem.CodeGenerate
+namespace SampleSystem.CodeGenerate;
+
+public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainObjectBase, PersistentDomainObjectBase,
+        AuditPersistentDomainObjectBase, Guid>
 {
-    public abstract class GenerationEnvironmentBase : GenerationEnvironment<DomainObjectBase, PersistentDomainObjectBase,
-            AuditPersistentDomainObjectBase, Guid>
+    public readonly IProjectionEnvironment MainProjectionEnvironment;
+
+    public readonly IProjectionEnvironment LegacyProjectionEnvironment;
+
+    protected GenerationEnvironmentBase()
+            : base(v => v.Id, typeof(DomainObjectFilterModel<>).Assembly)
     {
-        public readonly IProjectionEnvironment MainProjectionEnvironment;
+        this.MainProjectionEnvironment = this.CreateDefaultProjectionLambdaEnvironment(new SampleSystemProjectionSource());
 
-        public readonly IProjectionEnvironment LegacyProjectionEnvironment;
+        this.LegacyProjectionEnvironment = this.CreateDefaultProjectionLambdaEnvironment(
+         new LegacySampleSystemProjectionSource(),
+         this.GetCreateProjectionLambdaSetupParams(
+                                                   projectionSubNamespace: "LegacyProjections",
+                                                   useDependencySecurity: false));
+    }
 
-        protected GenerationEnvironmentBase()
-                : base(v => v.Id, typeof(DomainObjectFilterModel<>).Assembly)
-        {
-            this.MainProjectionEnvironment = this.CreateDefaultProjectionLambdaEnvironment(new SampleSystemProjectionSource());
+    public override Type SecurityOperationCodeType
+    {
+        get;
+    } = typeof(SampleSystemSecurityOperationCode);
 
-            this.LegacyProjectionEnvironment = this.CreateDefaultProjectionLambdaEnvironment(
-             new LegacySampleSystemProjectionSource(),
-             this.GetCreateProjectionLambdaSetupParams(
-                                                       projectionSubNamespace: "LegacyProjections",
-                                                       useDependencySecurity: false));
-        }
+    public override Type OperationContextType
+    {
+        get;
+    } = typeof(SampleSystemOperationContext);
 
-        public override Type SecurityOperationCodeType
-        {
-            get;
-        } = typeof(SampleSystemSecurityOperationCode);
+    protected override IEnumerable<Assembly> GetDomainObjectAssemblies()
+    {
+        return base.GetDomainObjectAssemblies().Concat(new[] { typeof(Employee).Assembly });
+    }
 
-        public override Type OperationContextType
-        {
-            get;
-        } = typeof(SampleSystemOperationContext);
+    protected override IEnumerable<IProjectionEnvironment> GetProjectionEnvironments()
+    {
+        yield return this.MainProjectionEnvironment;
 
-        protected override IEnumerable<Assembly> GetDomainObjectAssemblies()
-        {
-            return base.GetDomainObjectAssemblies().Concat(new[] { typeof(Employee).Assembly });
-        }
+        yield return this.LegacyProjectionEnvironment;
 
-        protected override IEnumerable<IProjectionEnvironment> GetProjectionEnvironments()
-        {
-            yield return this.MainProjectionEnvironment;
-
-            yield return this.LegacyProjectionEnvironment;
-
-            yield return this.CreateManualProjectionLambdaEnvironment(
-                                                                      typeof(SampleSystem.Domain.ManualProjections.
-                                                                              TestManualEmployeeProjection).Assembly);
-        }
+        yield return this.CreateManualProjectionLambdaEnvironment(
+                                                                  typeof(SampleSystem.Domain.ManualProjections.
+                                                                          TestManualEmployeeProjection).Assembly);
     }
 }

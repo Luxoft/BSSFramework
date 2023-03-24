@@ -1,10 +1,9 @@
-﻿namespace Framework.NotificationCore.Settings
+﻿namespace Framework.NotificationCore.Settings;
+
+public class RewriteReceiversSettings
 {
-    public class RewriteReceiversSettings
-    {
-        /// <summary>
-        /// Way to rewrite receivers.
-        /// </summary>
-        public RewriteRules[] RewriteRules { get; set; }
-    }
+    /// <summary>
+    /// Way to rewrite receivers.
+    /// </summary>
+    public RewriteRules[] RewriteRules { get; set; }
 }

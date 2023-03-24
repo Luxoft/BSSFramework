@@ -2,12 +2,11 @@
 
 using Framework.QueryLanguage;
 
-namespace Framework.OData
-{
-    public interface IDynamicSelectOperation
-    {
-        IEnumerable<LambdaExpression> Expands { get; }
+namespace Framework.OData;
 
-        IEnumerable<LambdaExpression> Selects { get; }
-    }
+public interface IDynamicSelectOperation
+{
+    IEnumerable<LambdaExpression> Expands { get; }
+
+    IEnumerable<LambdaExpression> Selects { get; }
 }

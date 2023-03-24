@@ -1,0 +1,13 @@
+@import 'mixins.scss';
+
+:host {
+  @apply tw-flex tw-flex-col tw-h-full tw-px-3 tw-pt-3 tw-pb-4;
+}
+
+tr {
+  @include table-row-buttons;
+}
+
+td {
+  @include table-row;
+}

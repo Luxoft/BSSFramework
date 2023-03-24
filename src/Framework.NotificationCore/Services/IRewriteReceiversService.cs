@@ -1,14 +1,13 @@
 ﻿using System.Net.Mail;
 using Framework.Notification.DTO;
 
-namespace Framework.NotificationCore.Services
+namespace Framework.NotificationCore.Services;
+
+public interface IRewriteReceiversService
 {
-    public interface IRewriteReceiversService
-    {
-        void RewriteToRecipients(MailMessage message, NotificationEventDTO dto);
+    void RewriteToRecipients(MailMessage message, NotificationEventDTO dto);
 
-        void RewriteCopyRecipients(MailMessage message, NotificationEventDTO dto);
+    void RewriteCopyRecipients(MailMessage message, NotificationEventDTO dto);
 
-        void RewriteReplyTo(MailMessage message, NotificationEventDTO dto);
-    }
+    void RewriteReplyTo(MailMessage message, NotificationEventDTO dto);
 }

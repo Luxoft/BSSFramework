@@ -7,26 +7,25 @@ using Framework.DomainDriven.Serialization;
 using Framework.Projection;
 using Framework.Transfering;
 
-namespace Framework.DomainDriven.ServiceModelGenerator
+namespace Framework.DomainDriven.ServiceModelGenerator;
+
+public static class TypeExtensions
 {
-    public static class TypeExtensions
+    public static IEnumerable<ViewDTOType> GetViewDTOTypes(this Type type)
     {
-        public static IEnumerable<ViewDTOType> GetViewDTOTypes(this Type type)
+        if (type == null) throw new ArgumentNullException(nameof(type));
+
+        if (type.IsProjection())
         {
-            if (type == null) throw new ArgumentNullException(nameof(type));
+            return new[] { ViewDTOType.ProjectionDTO };
+        }
+        else
+        {
+            return from dtoType in EnumHelper.GetValues<ViewDTOType>()
 
-            if (type.IsProjection())
-            {
-                return new[] { ViewDTOType.ProjectionDTO };
-            }
-            else
-            {
-                return from dtoType in EnumHelper.GetValues<ViewDTOType>()
+                   where dtoType != ViewDTOType.VisualDTO || type.HasVisualIdentityProperties()
 
-                       where dtoType != ViewDTOType.VisualDTO || type.HasVisualIdentityProperties()
-
-                       select dtoType;
-            }
+                   select dtoType;
         }
     }
 }

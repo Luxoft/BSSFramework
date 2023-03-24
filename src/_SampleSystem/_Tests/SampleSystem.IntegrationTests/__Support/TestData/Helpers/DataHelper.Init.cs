@@ -6,21 +6,20 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
 
-namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers
+namespace SampleSystem.IntegrationTests.__Support.TestData.Helpers;
+
+public partial class DataHelper : RootServiceProviderContainer<ISampleSystemBLLContext>
 {
-    public partial class DataHelper : RootServiceProviderContainer<ISampleSystemBLLContext>
-    {
-        public DataHelper(IServiceProvider rootServiceProvider)
+    public DataHelper(IServiceProvider rootServiceProvider)
             : base(rootServiceProvider)
-        {
-        }
+    {
+    }
 
-        public AuthHelper AuthHelper => this.RootServiceProvider.GetRequiredService<AuthHelper>();
+    public AuthHelper AuthHelper => this.RootServiceProvider.GetRequiredService<AuthHelper>();
 
-        private Guid GetGuid(Guid? id)
-        {
-            id = id ?? Guid.NewGuid();
-            return (Guid)id;
-        }
+    private Guid GetGuid(Guid? id)
+    {
+        id = id ?? Guid.NewGuid();
+        return (Guid)id;
     }
 }

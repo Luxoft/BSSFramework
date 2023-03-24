@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Framework.Authorization.Generated.DTO
-{
-    public partial class PermissionFilterItemStrictDTO
-    {
-        [DataMember]
-        public SecurityEntityIdentityDTO SecurityEntity
-        {
-            get;
-            set;
-        }
+namespace Framework.Authorization.Generated.DTO;
 
-        [DataMember]
-        public EntityTypeIdentityDTO EntityType
-        {
-            get;
-            set;
-        }
+public partial class PermissionFilterItemStrictDTO
+{
+    [DataMember]
+    public SecurityEntityIdentityDTO SecurityEntity
+    {
+        get;
+        set;
+    }
+
+    [DataMember]
+    public EntityTypeIdentityDTO EntityType
+    {
+        get;
+        set;
     }
 }

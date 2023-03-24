@@ -1,13 +1,12 @@
 ﻿using Framework.Configuration.Domain;
 
-namespace Framework.Configuration.BLL
+namespace Framework.Configuration.BLL;
+
+public partial interface IDomainObjectNotificationBLL
 {
-    public partial interface IDomainObjectNotificationBLL
-    {
-        /// <summary>
-        /// Получение состояния обработки очереди
-        /// </summary>
-        /// <returns></returns>
-        QueueProcessingState GetProcessingState();
-    }
+    /// <summary>
+    /// Получение состояния обработки очереди
+    /// </summary>
+    /// <returns></returns>
+    QueueProcessingState GetProcessingState();
 }

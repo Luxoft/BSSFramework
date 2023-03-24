@@ -9,84 +9,83 @@ using FluentAssertions;
 
 using Framework.Persistent;
 
-namespace Framework.OData.Tests.Unit
+namespace Framework.OData.Tests.Unit;
+
+[TestFixture]
+public class ODataLiftTests
 {
-    [TestFixture]
-    public class ODataLiftTests
+    [Test]
+    public void NullableIntWithIntersect_Executed()
     {
-        [Test]
-        public void NullableIntWithIntersect_Executed()
-        {
-            // Arrange
+        // Arrange
 
-            var value = 100;
+        var value = 100;
 
-            var testQuery = $"$filter={value} ge {nameof(TestIntObjContainer.Int)}";
+        var testQuery = $"$filter={value} ge {nameof(TestIntObjContainer.Int)}";
 
-            var testData = new[] { new TestIntObjContainer { InnerObj = new TestIntObj { Int = value - 1 } }, new TestIntObjContainer { InnerObj = null } }.AsQueryable();
+        var testData = new[] { new TestIntObjContainer { InnerObj = new TestIntObj { Int = value - 1 } }, new TestIntObjContainer { InnerObj = null } }.AsQueryable();
 
-            // Act
-            var parsedExpr = SelectOperation.Parse(testQuery);
+        // Act
+        var parsedExpr = SelectOperation.Parse(testQuery);
 
-            var parsedTypedExpr = StandartExpressionBuilder.Default.ToTyped<TestIntObjContainer>(parsedExpr);
+        var parsedTypedExpr = StandartExpressionBuilder.Default.ToTyped<TestIntObjContainer>(parsedExpr);
 
-            var typesSelectOperation = parsedTypedExpr.Visit(ExpandPathVisitor.Value);
+        var typesSelectOperation = parsedTypedExpr.Visit(ExpandPathVisitor.Value);
 
-            // Assert
+        // Assert
 
-            var testResult = typesSelectOperation.Process(testData).ToList();
+        var testResult = typesSelectOperation.Process(testData).ToList();
 
-            return;
-        }
+        return;
+    }
 
-        [Test]
-        public void NullablePeriodWithIntersect_Executed()
-        {
-            // Arrange
+    [Test]
+    public void NullablePeriodWithIntersect_Executed()
+    {
+        // Arrange
 
-            var today = DateTime.Today;
+        var today = DateTime.Today;
 
-            var testQuery = $"$filter=isIntersectedP({nameof(TestPeriodObjContainer.Period)}, period(datetime'{today}'))";
+        var testQuery = $"$filter=isIntersectedP({nameof(TestPeriodObjContainer.Period)}, period(datetime'{today}'))";
 
-            var testData = new[] { new TestPeriodObjContainer { InnerObj = new TestPeriodObj { Period = new Period(today.SubtractDay(), today.AddDay()) } }, new TestPeriodObjContainer { InnerObj = null } }.AsQueryable();
+        var testData = new[] { new TestPeriodObjContainer { InnerObj = new TestPeriodObj { Period = new Period(today.SubtractDay(), today.AddDay()) } }, new TestPeriodObjContainer { InnerObj = null } }.AsQueryable();
 
-            // Act
-            var parsedExpr = SelectOperation.Parse(testQuery);
+        // Act
+        var parsedExpr = SelectOperation.Parse(testQuery);
 
-            var parsedTypedExpr = StandartExpressionBuilder.Default.ToTyped<TestPeriodObjContainer>(parsedExpr);
+        var parsedTypedExpr = StandartExpressionBuilder.Default.ToTyped<TestPeriodObjContainer>(parsedExpr);
 
-            var typesSelectOperation = parsedTypedExpr.Visit(ExpandPathVisitor.Value);
+        var typesSelectOperation = parsedTypedExpr.Visit(ExpandPathVisitor.Value);
 
-            // Assert
+        // Assert
 
-            var testResult = typesSelectOperation.Process(testData).ToList();
+        var testResult = typesSelectOperation.Process(testData).ToList();
 
-            return;
-        }
+        return;
+    }
 
-        [Test]
-        public void NullablePeriodWithContains_Executed()
-        {
-            // Arrange
+    [Test]
+    public void NullablePeriodWithContains_Executed()
+    {
+        // Arrange
 
-            var today = DateTime.Today;
+        var today = DateTime.Today;
 
-            var testQuery = $"$filter=containsP({nameof(TestPeriodObjContainer.Period)}, datetime'{today}')";
+        var testQuery = $"$filter=containsP({nameof(TestPeriodObjContainer.Period)}, datetime'{today}')";
 
-            var testData = new[] { new TestPeriodObjContainer { InnerObj = new TestPeriodObj { Period = new Period(today.SubtractDay(), today.AddDay()) } }, new TestPeriodObjContainer { InnerObj = null } }.AsQueryable();
+        var testData = new[] { new TestPeriodObjContainer { InnerObj = new TestPeriodObj { Period = new Period(today.SubtractDay(), today.AddDay()) } }, new TestPeriodObjContainer { InnerObj = null } }.AsQueryable();
 
-            // Act
-            var parsedExpr = SelectOperation.Parse(testQuery);
+        // Act
+        var parsedExpr = SelectOperation.Parse(testQuery);
 
-            var parsedTypedExpr = StandartExpressionBuilder.Default.ToTyped<TestPeriodObjContainer>(parsedExpr);
+        var parsedTypedExpr = StandartExpressionBuilder.Default.ToTyped<TestPeriodObjContainer>(parsedExpr);
 
-            var typesSelectOperation = parsedTypedExpr.Visit(ExpandPathVisitor.Value);
+        var typesSelectOperation = parsedTypedExpr.Visit(ExpandPathVisitor.Value);
 
-            // Assert
+        // Assert
 
-            var testResult = typesSelectOperation.Process(testData).ToList();
+        var testResult = typesSelectOperation.Process(testData).ToList();
 
-            return;
-        }
+        return;
     }
 }

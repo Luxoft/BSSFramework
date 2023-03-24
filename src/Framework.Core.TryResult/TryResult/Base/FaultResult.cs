@@ -1,18 +1,17 @@
 ﻿using System;
 
-namespace Framework.Core
+namespace Framework.Core;
+
+public interface IFaultResult
 {
-    public interface IFaultResult
-    {
-        Exception Error { get; }
-    }
+    Exception Error { get; }
+}
 
-    public interface IFaultResult<out T> : ITryResult<T>, IFaultResult
-    {
-    }
+public interface IFaultResult<out T> : ITryResult<T>, IFaultResult
+{
+}
 
-    public interface IFaultResult<TArgs, TResult> : ITryResult<TArgs, TResult>, IFaultResult
-    {
-        TArgs Args { get; }
-    }
+public interface IFaultResult<TArgs, TResult> : ITryResult<TArgs, TResult>, IFaultResult
+{
+    TArgs Args { get; }
 }

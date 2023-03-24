@@ -1,9 +1,8 @@
 ﻿using System.Reflection.Emit;
 
-namespace Framework.Core
+namespace Framework.Core;
+
+public interface IAnonymousTypeBuilderStorage
 {
-    public interface IAnonymousTypeBuilderStorage
-    {
-        ModuleBuilder ModuleBuilder { get; }
-    }
+    ModuleBuilder ModuleBuilder { get; }
 }

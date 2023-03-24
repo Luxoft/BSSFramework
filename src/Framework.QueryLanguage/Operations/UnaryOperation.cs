@@ -1,23 +1,22 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Framework.QueryLanguage
+namespace Framework.QueryLanguage;
+
+[DataContract]
+public enum UnaryOperation
 {
-    [DataContract]
-    public enum UnaryOperation
-    {
-        /// <summary>
-        /// (! a)
-        /// </summary>
-        [EnumMember] Not,
+    /// <summary>
+    /// (! a)
+    /// </summary>
+    [EnumMember] Not,
 
-        /// <summary>
-        /// (+ a)
-        /// </summary>
-        [EnumMember] Plus,
+    /// <summary>
+    /// (+ a)
+    /// </summary>
+    [EnumMember] Plus,
 
-        /// <summary>
-        /// (- a)
-        /// </summary>
-        [EnumMember] Negate,
-    }
+    /// <summary>
+    /// (- a)
+    /// </summary>
+    [EnumMember] Negate,
 }

@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Edit System Constant</h1>
+
+<div mat-dialog-content>
+  <div class="mat-caption">System constant</div>
+  <div class="mat-subtitle-1 tw-text-black">{{ data.Name }}</div>
+
+  <div class="mat-caption tw-mt-5">Value</div>
+  <mat-form-field appearance="fill" class="tw-w-full">
+    <input matInput type="text" [(ngModel)]="value" />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="undefined">Cancel</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="value" cdkFocusInitial>Save</button>
+</div>

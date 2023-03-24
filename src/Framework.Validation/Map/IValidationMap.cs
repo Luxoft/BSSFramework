@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace Framework.Validation
+namespace Framework.Validation;
+
+public interface IValidationMap : IExtendedValidationDataContainer
 {
-    public interface IValidationMap : IExtendedValidationDataContainer
-    {
-        IClassValidationMap GetClassMap(Type type);
-    }
+    IClassValidationMap GetClassMap(Type type);
 }

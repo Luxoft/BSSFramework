@@ -4,72 +4,71 @@ using Framework.Core;
 using Framework.Restriction;
 using Framework.Validation;
 
-namespace Framework.Configuration.Domain
+namespace Framework.Configuration.Domain;
+
+[NotAuditedClass]
+
+/// <summary>
+/// Сообщение об обращении пользователя через фасад
+/// </summary>
+/// <remarks>
+/// Логируется каждое обращение пользователя
+/// </remarks>
+public class LogMessage : AuditPersistentDomainObjectBase
 {
-    [NotAuditedClass]
+    private Period period;
+
+    private string action;
+    private string userName;
+    private string inputMessage;
+    private string outputMessage;
 
     /// <summary>
-    /// Сообщение об обращении пользователя через фасад
+    /// Период обработки запроса
     /// </summary>
-    /// <remarks>
-    /// Логируется каждое обращение пользователя
-    /// </remarks>
-    public class LogMessage : AuditPersistentDomainObjectBase
+    public virtual Period Period
     {
-        private Period period;
+        get { return this.period; }
+        set { this.period = value; }
+    }
 
-        private string action;
-        private string userName;
-        private string inputMessage;
-        private string outputMessage;
+    /// <summary>
+    /// Фасадный метод
+    /// </summary>
+    [MaxLength(512)]
+    public virtual string Action
+    {
+        get { return this.action.TrimNull(); }
+        set { this.action = value.TrimNull(); }
+    }
 
-        /// <summary>
-        /// Период обработки запроса
-        /// </summary>
-        public virtual Period Period
-        {
-            get { return this.period; }
-            set { this.period = value; }
-        }
+    /// <summary>
+    /// Имя пользователя, который вызвал фасадный метод
+    /// </summary>
+    [MaxLength(512)]
+    public virtual string UserName
+    {
+        get { return this.userName.TrimNull(); }
+        set { this.userName = value.TrimNull(); }
+    }
 
-        /// <summary>
-        /// Фасадный метод
-        /// </summary>
-        [MaxLength(512)]
-        public virtual string Action
-        {
-            get { return this.action.TrimNull(); }
-            set { this.action = value.TrimNull(); }
-        }
+    /// <summary>
+    /// Входные параметры метода
+    /// </summary>
+    [MaxLength]
+    public virtual string InputMessage
+    {
+        get { return this.inputMessage.TrimNull(); }
+        set { this.inputMessage = value.TrimNull(); }
+    }
 
-        /// <summary>
-        /// Имя пользователя, который вызвал фасадный метод
-        /// </summary>
-        [MaxLength(512)]
-        public virtual string UserName
-        {
-            get { return this.userName.TrimNull(); }
-            set { this.userName = value.TrimNull(); }
-        }
-
-        /// <summary>
-        /// Входные параметры метода
-        /// </summary>
-        [MaxLength]
-        public virtual string InputMessage
-        {
-            get { return this.inputMessage.TrimNull(); }
-            set { this.inputMessage = value.TrimNull(); }
-        }
-
-        /// <summary>
-        /// Выходные параметры метода
-        /// </summary>
-        [MaxLength]
-        public virtual string OutputMessage
-        {
-            get { return this.outputMessage.TrimNull(); }
-            set { this.outputMessage = value.TrimNull(); }
-        }
+    /// <summary>
+    /// Выходные параметры метода
+    /// </summary>
+    [MaxLength]
+    public virtual string OutputMessage
+    {
+        get { return this.outputMessage.TrimNull(); }
+        set { this.outputMessage = value.TrimNull(); }
     }
 }

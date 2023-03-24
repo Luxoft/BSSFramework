@@ -12,9 +12,9 @@ using Framework.Notification;
 using Framework.Configuration.Domain;
 using Framework.Persistent;
 
-namespace Framework.Configuration.BLL
-{
-    public partial interface IConfigurationBLLContext :
+namespace Framework.Configuration.BLL;
+
+public partial interface IConfigurationBLLContext :
 
         Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContext,
 
@@ -25,33 +25,32 @@ namespace Framework.Configuration.BLL
         ITrackingServiceContainer<PersistentDomainObjectBase>,
 
         IConfigurationBLLContextContainer<IConfigurationBLLContext>
-    {
-        IMessageSender<MessageTemplateNotification> SubscriptionSender { get; }
+{
+    IMessageSender<MessageTemplateNotification> SubscriptionSender { get; }
 
-        bool SubscriptionEnabled { get; }
+    bool SubscriptionEnabled { get; }
 
-        ISerializerFactory<string> SystemConstantSerializerFactory { get; }
+    ISerializerFactory<string> SystemConstantSerializerFactory { get; }
 
-        ITypeResolver<DomainType> ComplexDomainTypeResolver { get; }
+    ITypeResolver<DomainType> ComplexDomainTypeResolver { get; }
 
-        DomainType GetDomainType(Type type, bool throwOnNotFound);
+    DomainType GetDomainType(Type type, bool throwOnNotFound);
 
-        DomainType GetDomainType(IDomainType type, bool throwOnNotFound = true);
+    DomainType GetDomainType(IDomainType type, bool throwOnNotFound = true);
 
-        ISubscriptionSystemService GetSubscriptionSystemService(Type domainType);
+    ISubscriptionSystemService GetSubscriptionSystemService(Type domainType);
 
-        IPersistentTargetSystemService GetPersistentTargetSystemService(TargetSystem targetSystem);
+    IPersistentTargetSystemService GetPersistentTargetSystemService(TargetSystem targetSystem);
 
-        IEnumerable<IPersistentTargetSystemService> GetPersistentTargetSystemServices();
+    IEnumerable<IPersistentTargetSystemService> GetPersistentTargetSystemServices();
 
-        ITargetSystemService GetTargetSystemService(TargetSystem targetSystem);
+    ITargetSystemService GetTargetSystemService(TargetSystem targetSystem);
 
-        ITargetSystemService GetTargetSystemService(Type domainType, bool throwOnNotFound);
+    ITargetSystemService GetTargetSystemService(Type domainType, bool throwOnNotFound);
 
-        ITargetSystemService GetTargetSystemService(string name);
+    ITargetSystemService GetTargetSystemService(string name);
 
-        ITargetSystemService GetMainTargetSystemService();
+    ITargetSystemService GetMainTargetSystemService();
 
-        IEnumerable<ITargetSystemService> GetTargetSystemServices();
-    }
+    IEnumerable<ITargetSystemService> GetTargetSystemServices();
 }

@@ -1,13 +1,12 @@
 ﻿using NHibernate.Envers.Configuration;
 using NHibernate.Envers.Query.Property;
 
-namespace NHibernate.Envers.Patch
+namespace NHibernate.Envers.Patch;
+
+public class RevisionNumberFieldPropertyName : IPropertyNameGetter
 {
-    public class RevisionNumberFieldPropertyName : IPropertyNameGetter
+    public string Get(AuditConfiguration auditCfg)
     {
-        public string Get(AuditConfiguration auditCfg)
-        {
-            return "id";
-        }
+        return "id";
     }
 }

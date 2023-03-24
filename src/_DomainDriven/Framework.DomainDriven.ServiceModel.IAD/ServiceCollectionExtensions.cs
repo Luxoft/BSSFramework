@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Framework.Authorization.BLL;
+using Framework.Authorization.BLL.Core.Context;
 using Framework.Authorization.Domain;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
@@ -109,6 +110,8 @@ public static class ServiceCollectionExtensions
                .AddScoped<ISecurityExpressionBuilderFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
                .AddScoped<IAccessDeniedExceptionService<Framework.Authorization.Domain.PersistentDomainObjectBase>, AccessDeniedExceptionService<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
 
+               .AddScoped(typeof(IAuthorizationRepositoryFactory<>), typeof(AuthorizationRepositoryFactory<>))
+               
                .Self(AuthorizationSecurityServiceBase.Register)
                .Self(AuthorizationBLLFactoryContainer.RegisterBLLFactory);
     }

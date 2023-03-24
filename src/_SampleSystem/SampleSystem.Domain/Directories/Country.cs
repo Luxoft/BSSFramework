@@ -3,59 +3,58 @@ using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain
+namespace SampleSystem.Domain;
+
+[BLLViewRole, BLLSaveRole, BLLRemoveRole]
+[UniqueGroup]
+[DomainType("{C6030B2D-16F1-4854-9FAB-8A69B7FFAC6C}")]
+[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.CountryView)]
+[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.CountryEdit)]
+public class Country : BaseDirectory, ICodeObject
 {
-    [BLLViewRole, BLLSaveRole, BLLRemoveRole]
-    [UniqueGroup]
-    [DomainType("{C6030B2D-16F1-4854-9FAB-8A69B7FFAC6C}")]
-    [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.CountryView)]
-    [SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.CountryEdit)]
-    public class Country : BaseDirectory, ICodeObject
+    private string code;
+    private string nameNative;
+    private string culture;
+
+    [Required]
+    public virtual string Code
     {
-        private string code;
-        private string nameNative;
-        private string culture;
-
-        [Required]
-        public virtual string Code
+        get
         {
-            get
-            {
-                return this.code.TrimNull();
-            }
-
-            set
-            {
-                this.code = value.TrimNull();
-            }
+            return this.code.TrimNull();
         }
 
-        [Required]
-        public virtual string NameNative
+        set
         {
-            get
-            {
-                return this.nameNative.TrimNull();
-            }
+            this.code = value.TrimNull();
+        }
+    }
 
-            set
-            {
-                this.nameNative = value.TrimNull();
-            }
+    [Required]
+    public virtual string NameNative
+    {
+        get
+        {
+            return this.nameNative.TrimNull();
         }
 
-        [Required]
-        public virtual string Culture
+        set
         {
-            get
-            {
-                return this.culture.TrimNull();
-            }
+            this.nameNative = value.TrimNull();
+        }
+    }
 
-            set
-            {
-                this.culture = value.TrimNull();
-            }
+    [Required]
+    public virtual string Culture
+    {
+        get
+        {
+            return this.culture.TrimNull();
+        }
+
+        set
+        {
+            this.culture = value.TrimNull();
         }
     }
 }

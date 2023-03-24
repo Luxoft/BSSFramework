@@ -1,23 +1,22 @@
 ﻿using Framework.Persistent;
 
-namespace SampleSystem.Domain.EnversBug1676
+namespace SampleSystem.Domain.EnversBug1676;
+
+public class Coefficient1676 : AuditPersistentDomainObjectBase
 {
-    public class Coefficient1676 : AuditPersistentDomainObjectBase
+    private Location1676 location;
+
+    private decimal normCoefficient;
+
+    public virtual Location1676 Location
     {
-        private Location1676 location;
+        get { return this.location; }
+        set { this.location = value; }
+    }
 
-        private decimal normCoefficient;
-
-        public virtual Location1676 Location
-        {
-            get { return this.location; }
-            set { this.location = value; }
-        }
-
-        public virtual decimal NormCoefficient
-        {
-            get { return this.normCoefficient; }
-            set { this.normCoefficient = value; }
-        }
+    public virtual decimal NormCoefficient
+    {
+        get { return this.normCoefficient; }
+        set { this.normCoefficient = value; }
     }
 }

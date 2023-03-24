@@ -1,9 +1,8 @@
 ﻿using SampleSystem.Domain.Inline;
 
-namespace SampleSystem.Domain
+namespace SampleSystem.Domain;
+
+public interface IExternalSynchronizable
 {
-    public interface IExternalSynchronizable
-    {
-        long ExternalId { get; }
-    }
+    long ExternalId { get; }
 }

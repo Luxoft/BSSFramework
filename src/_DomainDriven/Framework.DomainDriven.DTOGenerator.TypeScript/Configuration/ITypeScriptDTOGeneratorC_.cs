@@ -9,47 +9,46 @@ using Framework.DomainDriven.Generation.Domain;
 
 using JetBrains.Annotations;
 
-namespace Framework.DomainDriven.DTOGenerator.TypeScript
+namespace Framework.DomainDriven.DTOGenerator.TypeScript;
+
+/// <summary>
+/// IClient base generator configuration
+/// </summary>
+/// <typeparam name="TEnvironmentBase">The type of the environment base.</typeparam>
+public interface ITypeScriptDTOGeneratorConfiguration<out TEnvironmentBase> : ITypeScriptDTOGeneratorConfiguration, IGeneratorConfigurationBase<TEnvironmentBase>
+        where TEnvironmentBase : ITypeScriptGenerationEnvironmentBase
+{
+}
+
+/// <summary>
+/// IClient base generator configuration
+/// </summary>
+public interface ITypeScriptDTOGeneratorConfiguration : IGeneratorConfigurationBase
 {
     /// <summary>
-    /// IClient base generator configuration
+    /// Флаг генерации клиентского маппинг-сервиса (необходим для работы UpdateDTO). Можно включать после завершения задачи: #IADFRAME-1624
     /// </summary>
-    /// <typeparam name="TEnvironmentBase">The type of the environment base.</typeparam>
-    public interface ITypeScriptDTOGeneratorConfiguration<out TEnvironmentBase> : ITypeScriptDTOGeneratorConfiguration, IGeneratorConfigurationBase<TEnvironmentBase>
-        where TEnvironmentBase : ITypeScriptGenerationEnvironmentBase
-    {
-    }
+    bool GenerateClientMappingService { get; }
 
-    /// <summary>
-    /// IClient base generator configuration
-    /// </summary>
-    public interface ITypeScriptDTOGeneratorConfiguration : IGeneratorConfigurationBase
-    {
-        /// <summary>
-        /// Флаг генерации клиентского маппинг-сервиса (необходим для работы UpdateDTO). Можно включать после завершения задачи: #IADFRAME-1624
-        /// </summary>
-        bool GenerateClientMappingService { get; }
+    bool ContainsPropertyChange { get; }
 
-        bool ContainsPropertyChange { get; }
+    ReadOnlyCollection<Assembly> ReuseTypesAssemblies { get; }
 
-        ReadOnlyCollection<Assembly> ReuseTypesAssemblies { get; }
+    ReadOnlyCollection<Type> ReferencedTypes { get; }
 
-        ReadOnlyCollection<Type> ReferencedTypes { get; }
+    ReadOnlyCollection<Type> EnumTypes { get; }
 
-        ReadOnlyCollection<Type> EnumTypes { get; }
+    ReadOnlyCollection<Type> ClassTypes { get; }
 
-        ReadOnlyCollection<Type> ClassTypes { get; }
+    ReadOnlyCollection<Type> StructTypes { get; }
 
-        ReadOnlyCollection<Type> StructTypes { get; }
+    MainDTOInterfaceFileType GetBaseInterfaceType(MainDTOFileType fileType);
 
-        MainDTOInterfaceFileType GetBaseInterfaceType(MainDTOFileType fileType);
+    MainDTOFileType GetImplementType([NotNull] MainDTOInterfaceFileType fileType);
 
-        MainDTOFileType GetImplementType([NotNull] MainDTOInterfaceFileType fileType);
+    IEnumerable<CodeTypeMember> GetFileFactoryExtendedMembers([NotNull] ICodeFileFactory<FileType> fileFactory);
 
-        IEnumerable<CodeTypeMember> GetFileFactoryExtendedMembers([NotNull] ICodeFileFactory<FileType> fileFactory);
+    IEnumerable<string> GetNamespaces();
 
-        IEnumerable<string> GetNamespaces();
-
-        IEnumerable<RequireJsModule> GetModules();
-    }
+    IEnumerable<RequireJsModule> GetModules();
 }

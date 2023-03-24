@@ -1,7 +1,6 @@
-﻿namespace SampleSystem.BLL.Core.Jobs
+﻿namespace SampleSystem.BLL.Core.Jobs;
+
+public interface ISampleJob
 {
-    public interface ISampleJob
-    {
-        void LogExecution();
-    }
+    void LogExecution();
 }

@@ -1,25 +1,24 @@
-﻿namespace SampleSystem.Domain
+﻿namespace SampleSystem.Domain;
+
+/// <summary>
+/// Специальная деталь для проверки OneToOne-связи
+/// </summary>
+public class IMRequestDetail : AuditPersistentDomainObjectBase
 {
-    /// <summary>
-    /// Специальная деталь для проверки OneToOne-связи
-    /// </summary>
-    public class IMRequestDetail : AuditPersistentDomainObjectBase
+    private IMRequest request;
+
+    protected IMRequestDetail()
     {
-        private IMRequest request;
+    }
 
-        protected IMRequestDetail()
-        {
-        }
+    public IMRequestDetail(IMRequest request)
+    {
+        this.request = request;
+    }
 
-        public IMRequestDetail(IMRequest request)
-        {
-            this.request = request;
-        }
-
-        public virtual IMRequest Request
-        {
-            get => this.request;
-            protected internal set => this.request = value;
-        }
+    public virtual IMRequest Request
+    {
+        get => this.request;
+        protected internal set => this.request = value;
     }
 }

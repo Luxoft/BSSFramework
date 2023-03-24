@@ -1,9 +1,8 @@
-﻿namespace Framework.DomainDriven.DBGenerator
+﻿namespace Framework.DomainDriven.DBGenerator;
+
+public enum SmoObjectActionType
 {
-    public enum SmoObjectActionType
-    {
-        Drop,
-        Create,
-        Update
-    }
+    Drop,
+    Create,
+    Update
 }

@@ -1,11 +1,10 @@
-﻿namespace Framework.SecuritySystem
+﻿namespace Framework.SecuritySystem;
+
+public enum BLLSecurityMode
 {
-    public enum BLLSecurityMode
-    {
-        Disabled = 0,
+    Disabled = 0,
 
-        View = 1,
+    View = 1,
 
-        Edit = 2
-    }
+    Edit = 2
 }

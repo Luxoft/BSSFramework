@@ -1,10 +1,9 @@
-﻿namespace Framework.DomainDriven.DAL.Revisions
+﻿namespace Framework.DomainDriven.DAL.Revisions;
+
+public class DomainObjectRevision<TIdent> : DomainObjectRevisionBase<TIdent, DomainObjectRevisionInfo<TIdent>>
 {
-    public class DomainObjectRevision<TIdent> : DomainObjectRevisionBase<TIdent, DomainObjectRevisionInfo<TIdent>>
-    {
-        public DomainObjectRevision(TIdent identity)
+    public DomainObjectRevision(TIdent identity)
             : base(identity)
-        {
-        }
+    {
     }
 }

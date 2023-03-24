@@ -19,9 +19,11 @@ namespace SampleSystem.ServiceEnvironment;
 
 public static class SampleSystemApplicationExtensions
 {
-    public static IServiceCollection RegisterGeneralApplicationServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection RegisterGeneralApplicationServices(
+            this IServiceCollection services,
+            IConfiguration configuration)
     {
-        return services.AddMediatR(Assembly.GetAssembly(typeof(EmployeeBLL)))
+        return services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<EmployeeBLL>())
                        .RegisterSmtpNotification(configuration)
                        .RegisterWorkflowCore(configuration)
                        .RegisterApplicationServices()

@@ -1,12 +1,11 @@
-﻿namespace Framework.Core
+﻿namespace Framework.Core;
+
+public interface IFileRenderer
 {
-    public interface IFileRenderer
-    {
-        string FileExtension { get; }
-    }
+    string FileExtension { get; }
+}
 
-    public interface IFileRenderer<in TSource, out TResult> : IRenderer<TSource, TResult>, IFileRenderer
-    {
+public interface IFileRenderer<in TSource, out TResult> : IRenderer<TSource, TResult>, IFileRenderer
+{
 
-    }
 }

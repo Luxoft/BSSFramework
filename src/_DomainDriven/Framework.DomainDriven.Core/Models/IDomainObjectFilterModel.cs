@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Framework.DomainDriven
+namespace Framework.DomainDriven;
+
+public interface IDomainObjectFilterModel<TDomainObject>
 {
-    public interface IDomainObjectFilterModel<TDomainObject>
-    {
-        Expression<Func<TDomainObject, bool>> ToFilterExpression();
-    }
+    Expression<Func<TDomainObject, bool>> ToFilterExpression();
 }

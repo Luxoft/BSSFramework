@@ -8,39 +8,38 @@ using Framework.Core;
 
 using SampleSystem.Domain;
 
-namespace SampleSystem.CodeGenerate
+namespace SampleSystem.CodeGenerate;
+
+public class MainProjectionGeneratorConfiguration : Framework.DomainDriven.ProjectionGenerator.GeneratorConfigurationBase<ServerGenerationEnvironment>
 {
-    public class MainProjectionGeneratorConfiguration : Framework.DomainDriven.ProjectionGenerator.GeneratorConfigurationBase<ServerGenerationEnvironment>
-    {
-        public MainProjectionGeneratorConfiguration(ServerGenerationEnvironment environment)
+    public MainProjectionGeneratorConfiguration(ServerGenerationEnvironment environment)
             : base(environment, environment.MainProjectionEnvironment)
+    {
+    }
+
+    public override IEnumerable<CodeAttributeDeclaration> GetDomainTypeAttributeDeclarations(Type domainType)
+    {
+        foreach (var baseAttr in base.GetDomainTypeAttributeDeclarations(domainType))
         {
+            yield return baseAttr;
         }
 
-        public override IEnumerable<CodeAttributeDeclaration> GetDomainTypeAttributeDeclarations(Type domainType)
+        if (domainType.HasAttribute<ExampleCustomProjectionAttribute>())
         {
-            foreach (var baseAttr in base.GetDomainTypeAttributeDeclarations(domainType))
-            {
-                yield return baseAttr;
-            }
+            yield return typeof(ExampleCustomProjectionAttribute).ToTypeReference().ToAttributeDeclaration();
+        }
+    }
 
-            if (domainType.HasAttribute<ExampleCustomProjectionAttribute>())
-            {
-                yield return typeof(ExampleCustomProjectionAttribute).ToTypeReference().ToAttributeDeclaration();
-            }
+    public override IEnumerable<CodeAttributeDeclaration> GetPropertyAttributeDeclarations(PropertyInfo property)
+    {
+        foreach (var baseAttr in base.GetPropertyAttributeDeclarations(property))
+        {
+            yield return baseAttr;
         }
 
-        public override IEnumerable<CodeAttributeDeclaration> GetPropertyAttributeDeclarations(PropertyInfo property)
+        if (property.HasAttribute<ExampleCustomProjectionPropertyAttribute>())
         {
-            foreach (var baseAttr in base.GetPropertyAttributeDeclarations(property))
-            {
-                yield return baseAttr;
-            }
-
-            if (property.HasAttribute<ExampleCustomProjectionPropertyAttribute>())
-            {
-                yield return typeof(ExampleCustomProjectionPropertyAttribute).ToTypeReference().ToAttributeDeclaration();
-            }
+            yield return typeof(ExampleCustomProjectionPropertyAttribute).ToTypeReference().ToAttributeDeclaration();
         }
     }
 }

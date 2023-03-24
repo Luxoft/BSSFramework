@@ -13,250 +13,249 @@ using Framework.Transfering;
 
 using JetBrains.Annotations;
 
-namespace Framework.DomainDriven
+namespace Framework.DomainDriven;
+
+public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
 {
-    public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
+    private readonly int maxRecurseLevel;
+
+    private readonly Type persistentDomainObjectBaseType;
+
+
+    public DTOFetchPathFactory(Type persistentDomainObjectBase, int maxRecurseLevel = 1)
     {
-        private readonly int maxRecurseLevel;
+        if (persistentDomainObjectBase == null) throw new ArgumentNullException(nameof(persistentDomainObjectBase));
+        if (maxRecurseLevel < 0) { throw new ArgumentOutOfRangeException(nameof(maxRecurseLevel)); }
 
-        private readonly Type persistentDomainObjectBaseType;
+        this.persistentDomainObjectBaseType = persistentDomainObjectBase;
+        this.maxRecurseLevel = maxRecurseLevel;
+    }
 
 
-        public DTOFetchPathFactory(Type persistentDomainObjectBase, int maxRecurseLevel = 1)
+    public IEnumerable<PropertyPath> Create(Type startDomainType, ViewDTOType dtoType)
+    {
+        if (startDomainType == null) throw new ArgumentNullException(nameof(startDomainType));
+        if (!Enum.IsDefined(typeof(ViewDTOType), dtoType)) throw new InvalidEnumArgumentException(nameof(dtoType), (int) dtoType, typeof(ViewDTOType));
+
+        return this.GetLoadNode(startDomainType, dtoType)
+                   .Pipe(node => this.ExpandNode(node))
+                   .Pipe(node => this.GetPaths(node));
+    }
+
+
+    protected virtual PropertyLoadNode ExpandNode(PropertyLoadNode node)
+    {
+        return node;
+    }
+
+
+    protected virtual bool IsTransferType([NotNull] Type type)
+    {
+        if (type == null) throw new ArgumentNullException(nameof(type));
+
+        return this.persistentDomainObjectBaseType.IsAssignableFrom(type);
+    }
+
+    protected IEnumerable<PropertyInfo> GetProperties(Type domainType, ViewDTOType dtoType)
+    {
+        var serializationProperties = domainType.GetSerializationProperties();
+
+        switch (dtoType)
         {
-            if (persistentDomainObjectBase == null) throw new ArgumentNullException(nameof(persistentDomainObjectBase));
-            if (maxRecurseLevel < 0) { throw new ArgumentOutOfRangeException(nameof(maxRecurseLevel)); }
+            case ViewDTOType.VisualDTO:
 
-            this.persistentDomainObjectBaseType = persistentDomainObjectBase;
-            this.maxRecurseLevel = maxRecurseLevel;
+                return from property in this.GetProperties(domainType, ViewDTOType.SimpleDTO)
+
+                       where property.IsVisualIdentity()
+
+                       select property;
+
+            case ViewDTOType.SimpleDTO:
+
+                return from property in serializationProperties
+
+                       let type = property.PropertyType
+
+                       where !type.IsCollection()
+                             && !type.IsArray
+                             && !type.IsAbstract
+                             && !this.IsTransferType(property.PropertyType)
+
+                       select property;
+
+            case ViewDTOType.FullDTO:
+
+                return from property in serializationProperties
+
+                       where !property.IsDetail() && this.IsTransferType(property.PropertyType)
+
+                       select property;
+
+            case ViewDTOType.RichDTO:
+
+                return from property in serializationProperties
+
+                       let elementType = property.PropertyType.GetCollectionOrArrayElementType()
+
+                       where (property.IsDetail() && this.IsTransferType(property.PropertyType))
+
+                             || (elementType != null && this.IsTransferType(elementType))
+
+                       select property;
+
+            case ViewDTOType.ProjectionDTO:
+
+                return from property in serializationProperties
+
+                       let elementType = property.PropertyType.GetCollectionOrArrayElementType()
+
+                       where this.IsTransferType(property.PropertyType)
+
+                       select property;
+
+            default:
+                throw new ArgumentOutOfRangeException(nameof(dtoType));
         }
+    }
 
 
-        public IEnumerable<PropertyPath> Create(Type startDomainType, ViewDTOType dtoType)
+    protected virtual PropertyLoadNode GetLoadNode(Type domainType, ViewDTOType maxDTOType, int recurseLevel = 0, Func<PropertyInfo, bool> subPropertyFilter = null)
+    {
+        var subNodesRequest = from property in domainType.GetSerializationProperties()
+
+                              where !property.GetPrivateField().Maybe(field => field.HasAttribute<NotPersistentFieldAttribute>())
+
+                              where subPropertyFilter == null || subPropertyFilter(property)
+
+                              orderby property.Name
+
+                              let subNode = this.GetLoadNode(domainType, property, maxDTOType, recurseLevel)
+
+                              where subNode != null
+
+                              select new { Property = property, SubNode = subNode };
+
+        return new PropertyLoadNode(
+                                    domainType,
+                                    subNodesRequest.ToDictionary(pair => pair.Property, pair => pair.SubNode),
+                                    this.GetProperties(domainType, ViewDTOType.SimpleDTO.Min(maxDTOType)).OrderBy(property => property.Name));
+    }
+
+    private PropertyLoadNode GetLoadNode(Type domainType, PropertyInfo property, ViewDTOType maxDTOType, int recurseLevel)
+    {
+        var isRecurse = domainType == property.GetNestedType();
+
+        if (!isRecurse || recurseLevel != this.maxRecurseLevel)
         {
-            if (startDomainType == null) throw new ArgumentNullException(nameof(startDomainType));
-            if (!Enum.IsDefined(typeof(ViewDTOType), dtoType)) throw new InvalidEnumArgumentException(nameof(dtoType), (int) dtoType, typeof(ViewDTOType));
+            var nextRecurseLevel = recurseLevel + (isRecurse ? 1 : 0);
 
-            return this.GetLoadNode(startDomainType, dtoType)
-                           .Pipe(node => this.ExpandNode(node))
-                           .Pipe(node => this.GetPaths(node));
-        }
+            var nextMaxDTOType = maxDTOType == ViewDTOType.ProjectionDTO ? ViewDTOType.ProjectionDTO : (ViewDTOType)property.GetMainDTOType((MainDTOType)maxDTOType);
 
-
-        protected virtual PropertyLoadNode ExpandNode(PropertyLoadNode node)
-        {
-            return node;
-        }
-
-
-        protected virtual bool IsTransferType([NotNull] Type type)
-        {
-            if (type == null) throw new ArgumentNullException(nameof(type));
-
-            return this.persistentDomainObjectBaseType.IsAssignableFrom(type);
-        }
-
-        protected IEnumerable<PropertyInfo> GetProperties(Type domainType, ViewDTOType dtoType)
-        {
-            var serializationProperties = domainType.GetSerializationProperties();
-
-            switch (dtoType)
+            if (maxDTOType >= ViewDTOType.FullDTO && this.IsTransferType(property.PropertyType))
             {
-                case ViewDTOType.VisualDTO:
+                if (!property.IsDetail() || maxDTOType >= ViewDTOType.RichDTO)
+                {
+                    return this.GetLoadNode(property.PropertyType, nextMaxDTOType, nextRecurseLevel, null);
+                }
+            }
 
-                    return from property in this.GetProperties(domainType, ViewDTOType.SimpleDTO)
+            if (maxDTOType >= ViewDTOType.RichDTO && property.PropertyType.IsCollection(this.IsTransferType))
+            {
+                return this.GetLoadNode(property.GetNestedType(), nextMaxDTOType, nextRecurseLevel, subProperty =>
 
-                           where property.IsVisualIdentity()
-
-                           select property;
-
-                case ViewDTOType.SimpleDTO:
-
-                    return from property in serializationProperties
-
-                           let type = property.PropertyType
-
-                           where !type.IsCollection()
-                              && !type.IsArray
-                              && !type.IsAbstract
-                              && !this.IsTransferType(property.PropertyType)
-
-                           select property;
-
-                case ViewDTOType.FullDTO:
-
-                    return from property in serializationProperties
-
-                           where !property.IsDetail() && this.IsTransferType(property.PropertyType)
-
-                           select property;
-
-                case ViewDTOType.RichDTO:
-
-                    return from property in serializationProperties
-
-                           let elementType = property.PropertyType.GetCollectionOrArrayElementType()
-
-                           where (property.IsDetail() && this.IsTransferType(property.PropertyType))
-
-                              || (elementType != null && this.IsTransferType(elementType))
-
-                           select property;
-
-                case ViewDTOType.ProjectionDTO:
-
-                    return from property in serializationProperties
-
-                           let elementType = property.PropertyType.GetCollectionOrArrayElementType()
-
-                           where this.IsTransferType(property.PropertyType)
-
-                           select property;
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(dtoType));
+                                                subProperty.PropertyType.IsCollection()
+                                                || subProperty.PropertyType != domainType
+                                                || subProperty.IsNotMaster());
             }
         }
 
+        return null;
+    }
 
-        protected virtual PropertyLoadNode GetLoadNode(Type domainType, ViewDTOType maxDTOType, int recurseLevel = 0, Func<PropertyInfo, bool> subPropertyFilter = null)
+
+    protected virtual IEnumerable<PropertyPath> GetPaths(PropertyLoadNode node)
+    {
+        foreach (var pair in node.Properties.OrderBy(pair => pair.Key.Name))
         {
-            var subNodesRequest = from property in domainType.GetSerializationProperties()
+            yield return new PropertyPath(new[] { pair.Key });
 
-                                  where !property.GetPrivateField().Maybe(field => field.HasAttribute<NotPersistentFieldAttribute>())
+            foreach (var subPath in this.GetPaths(pair.Value))
+            {
+                yield return pair.Key + subPath;
+            }
+        }
+    }
 
-                                  where subPropertyFilter == null || subPropertyFilter(property)
+    protected class PropertyLoadNode
+    {
+        public PropertyLoadNode([NotNull] Type domainType, [NotNull] IReadOnlyDictionary<PropertyInfo, PropertyLoadNode> properties, [NotNull] IEnumerable<PropertyInfo> primitiveProperties)
+        {
+            if (domainType == null) throw new ArgumentNullException(nameof(domainType));
+            if (properties == null) throw new ArgumentNullException(nameof(properties));
 
-                                  orderby property.Name
+            this.DomainType = domainType;
+            this.Properties = properties;
+            this.PrimitiveProperties = primitiveProperties.ToReadOnlyCollection();
+        }
 
-                                  let subNode = this.GetLoadNode(domainType, property, maxDTOType, recurseLevel)
 
-                                  where subNode != null
+        public Type DomainType { get; private set; }
 
-                                  select new { Property = property, SubNode = subNode };
+        public IReadOnlyDictionary<PropertyInfo, PropertyLoadNode> Properties { get; private set; }
+
+        public ReadOnlyCollection<PropertyInfo> PrimitiveProperties { get; private set; }
+
+
+        public PropertyLoadNode WhereP([NotNull] Func<PropertyInfo, bool> propertyFilter, bool recurse)
+        {
+            if (propertyFilter == null) throw new ArgumentNullException(nameof(propertyFilter));
 
             return new PropertyLoadNode(
-                domainType,
-                subNodesRequest.ToDictionary(pair => pair.Property, pair => pair.SubNode),
-                this.GetProperties(domainType, ViewDTOType.SimpleDTO.Min(maxDTOType)).OrderBy(property => property.Name));
+
+                                        this.DomainType,
+
+                                        this.Properties.Where(pair => propertyFilter(pair.Key)).ToDictionary(pair => pair.Key, pair => recurse ? pair.Value.WhereP(propertyFilter, true) : pair.Value),
+
+                                        this.PrimitiveProperties.Where(propertyFilter));
         }
 
-        private PropertyLoadNode GetLoadNode(Type domainType, PropertyInfo property, ViewDTOType maxDTOType, int recurseLevel)
+        public PropertyLoadNode SelectN([NotNull] Func<PropertyLoadNode, PropertyLoadNode> nodeSelector, bool recurse)
         {
-            var isRecurse = domainType == property.GetNestedType();
+            if (nodeSelector == null) throw new ArgumentNullException(nameof(nodeSelector));
 
-            if (!isRecurse || recurseLevel != this.maxRecurseLevel)
-            {
-                var nextRecurseLevel = recurseLevel + (isRecurse ? 1 : 0);
+            return new PropertyLoadNode(
 
-                var nextMaxDTOType = maxDTOType == ViewDTOType.ProjectionDTO ? ViewDTOType.ProjectionDTO : (ViewDTOType)property.GetMainDTOType((MainDTOType)maxDTOType);
+                                        this.DomainType,
 
-                if (maxDTOType >= ViewDTOType.FullDTO && this.IsTransferType(property.PropertyType))
-                {
-                    if (!property.IsDetail() || maxDTOType >= ViewDTOType.RichDTO)
-                    {
-                        return this.GetLoadNode(property.PropertyType, nextMaxDTOType, nextRecurseLevel, null);
-                    }
-                }
+                                        this.Properties.ChangeValue(node => nodeSelector(node).Pipe(recurse, nextNode => recurse ? nextNode.SelectN(nodeSelector, true) : nextNode)),
 
-                if (maxDTOType >= ViewDTOType.RichDTO && property.PropertyType.IsCollection(this.IsTransferType))
-                {
-                    return this.GetLoadNode(property.GetNestedType(), nextMaxDTOType, nextRecurseLevel, subProperty =>
-
-                        subProperty.PropertyType.IsCollection()
-                     || subProperty.PropertyType != domainType
-                     || subProperty.IsNotMaster());
-                }
-            }
-
-            return null;
+                                        this.PrimitiveProperties);
         }
 
 
-        protected virtual IEnumerable<PropertyPath> GetPaths(PropertyLoadNode node)
+        public static PropertyLoadNode operator +([NotNull] PropertyLoadNode node1, [NotNull] PropertyLoadNode node2)
         {
-            foreach (var pair in node.Properties.OrderBy(pair => pair.Key.Name))
+            if (node1 == null) throw new ArgumentNullException(nameof(node1));
+            if (node2 == null) throw new ArgumentNullException(nameof(node2));
+
+            if (node1.DomainType != node2.DomainType)
             {
-                yield return new PropertyPath(new[] { pair.Key });
-
-                foreach (var subPath in this.GetPaths(pair.Value))
-                {
-                    yield return pair.Key + subPath;
-                }
-            }
-        }
-
-        protected class PropertyLoadNode
-        {
-            public PropertyLoadNode([NotNull] Type domainType, [NotNull] IReadOnlyDictionary<PropertyInfo, PropertyLoadNode> properties, [NotNull] IEnumerable<PropertyInfo> primitiveProperties)
-            {
-                if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-                if (properties == null) throw new ArgumentNullException(nameof(properties));
-
-                this.DomainType = domainType;
-                this.Properties = properties;
-                this.PrimitiveProperties = primitiveProperties.ToReadOnlyCollection();
+                throw new Exception("Diff domainTypes");
             }
 
+            var subNodesRequest = from pair in Enumerable.Concat(node1.Properties, node2.Properties)
 
-            public Type DomainType { get; private set; }
+                                  group pair.Value by pair.Key into propGroup
 
-            public IReadOnlyDictionary<PropertyInfo, PropertyLoadNode> Properties { get; private set; }
+                                  let subNode = propGroup.Aggregate((state, subNode) => state + subNode)
 
-            public ReadOnlyCollection<PropertyInfo> PrimitiveProperties { get; private set; }
-
-
-            public PropertyLoadNode WhereP([NotNull] Func<PropertyInfo, bool> propertyFilter, bool recurse)
-            {
-                if (propertyFilter == null) throw new ArgumentNullException(nameof(propertyFilter));
-
-                return new PropertyLoadNode(
-
-                    this.DomainType,
-
-                    this.Properties.Where(pair => propertyFilter(pair.Key)).ToDictionary(pair => pair.Key, pair => recurse ? pair.Value.WhereP(propertyFilter, true) : pair.Value),
-
-                    this.PrimitiveProperties.Where(propertyFilter));
-            }
-
-            public PropertyLoadNode SelectN([NotNull] Func<PropertyLoadNode, PropertyLoadNode> nodeSelector, bool recurse)
-            {
-                if (nodeSelector == null) throw new ArgumentNullException(nameof(nodeSelector));
-
-                return new PropertyLoadNode(
-
-                    this.DomainType,
-
-                    this.Properties.ChangeValue(node => nodeSelector(node).Pipe(recurse, nextNode => recurse ? nextNode.SelectN(nodeSelector, true) : nextNode)),
-
-                    this.PrimitiveProperties);
-            }
+                                  select new { Property = propGroup.Key, SubNode = subNode };
 
 
-            public static PropertyLoadNode operator +([NotNull] PropertyLoadNode node1, [NotNull] PropertyLoadNode node2)
-            {
-                if (node1 == null) throw new ArgumentNullException(nameof(node1));
-                if (node2 == null) throw new ArgumentNullException(nameof(node2));
-
-                if (node1.DomainType != node2.DomainType)
-                {
-                    throw new Exception("Diff domainTypes");
-                }
-
-                var subNodesRequest = from pair in Enumerable.Concat(node1.Properties, node2.Properties)
-
-                                      group pair.Value by pair.Key into propGroup
-
-                                      let subNode = propGroup.Aggregate((state, subNode) => state + subNode)
-
-                                      select new { Property = propGroup.Key, SubNode = subNode };
-
-
-                return new PropertyLoadNode(
-                    node1.DomainType,
-                    subNodesRequest.ToDictionary(pair => pair.Property, pair => pair.SubNode),
-                    node1.PrimitiveProperties.Concat(node2.PrimitiveProperties).Distinct());
-            }
+            return new PropertyLoadNode(
+                                        node1.DomainType,
+                                        subNodesRequest.ToDictionary(pair => pair.Property, pair => pair.SubNode),
+                                        node1.PrimitiveProperties.Concat(node2.PrimitiveProperties).Distinct());
         }
     }
 }

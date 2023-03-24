@@ -1,16 +1,15 @@
 ﻿using System;
 
-namespace Framework.Validation
+namespace Framework.Validation;
+
+[AttributeUsage(AttributeTargets.Property)]
+public class MaxLengthValidatorAttribute : PropertyValidatorAttribute
 {
-    [AttributeUsage(AttributeTargets.Property)]
-    public class MaxLengthValidatorAttribute : PropertyValidatorAttribute
+    public int MaxLength { get; set; } = int.MaxValue;
+
+
+    public override IPropertyValidator CreateValidator()
     {
-        public int MaxLength { get; set; } = int.MaxValue;
-
-
-        public override IPropertyValidator CreateValidator()
-        {
-            return new MaxLengthValidator(this.MaxLength);
-        }
+        return new MaxLengthValidator(this.MaxLength);
     }
 }

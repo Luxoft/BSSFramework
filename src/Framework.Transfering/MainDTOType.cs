@@ -1,13 +1,12 @@
-﻿namespace Framework.Transfering
+﻿namespace Framework.Transfering;
+
+public enum MainDTOType
 {
-    public enum MainDTOType
-    {
-        VisualDTO = DTOType.VisualDTO,
+    VisualDTO = DTOType.VisualDTO,
 
-        SimpleDTO = DTOType.SimpleDTO,
+    SimpleDTO = DTOType.SimpleDTO,
 
-        FullDTO = DTOType.FullDTO,
+    FullDTO = DTOType.FullDTO,
 
-        RichDTO = DTOType.RichDTO
-    }
+    RichDTO = DTOType.RichDTO
 }

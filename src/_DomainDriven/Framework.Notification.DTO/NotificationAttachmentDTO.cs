@@ -1,23 +1,22 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Framework.Notification.DTO
+namespace Framework.Notification.DTO;
+
+[DataContract]
+public class NotificationAttachmentDTO
 {
-    [DataContract]
-    public class NotificationAttachmentDTO
-    {
-        [DataMember]
-        public byte[] Content;
+    [DataMember]
+    public byte[] Content;
 
-        [DataMember]
-        public string Name;
+    [DataMember]
+    public string Name;
 
-        [DataMember]
-        public string Extension;
+    [DataMember]
+    public string Extension;
 
-        [DataMember]
-        public string ContentId;
+    [DataMember]
+    public string ContentId;
 
-        [DataMember]
-        public bool IsInline;
-    }
+    [DataMember]
+    public bool IsInline;
 }

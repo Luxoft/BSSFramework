@@ -1,13 +1,12 @@
-﻿namespace Framework.Validation
+﻿namespace Framework.Validation;
+
+public class NumberAlphabetValidator : AlphabetValidator
 {
-    public class NumberAlphabetValidator : AlphabetValidator
-    {
-        private const string NumberAlphabet = "0123456789";
+    private const string NumberAlphabet = "0123456789";
 
-        public NumberAlphabetValidator(string externalChars)
+    public NumberAlphabetValidator(string externalChars)
             : base(NumberAlphabet, externalChars)
-        {
+    {
 
-        }
     }
 }

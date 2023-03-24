@@ -2,27 +2,26 @@
 
 using Framework.SecuritySystem;
 
-namespace Framework.DomainDriven.BLL.Security
+namespace Framework.DomainDriven.BLL.Security;
+
+/// <summary>
+/// Авторизационный контекст
+/// </summary>
+public interface IAuthorizationBLLContextBase : IAuthorizationSystem
 {
-    /// <summary>
-    /// Авторизационный контекст
-    /// </summary>
-    public interface IAuthorizationBLLContextBase : IAuthorizationSystem
+    IRunAsManager RunAsManager
     {
-        IRunAsManager RunAsManager
-        {
-            get;
-        }
+        get;
+    }
 
-        string CurrentPrincipalName
-        {
-            get;
-        }
-        bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation, bool withRunAs)
+    string CurrentPrincipalName
+    {
+        get;
+    }
+    bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation, bool withRunAs)
             where TSecurityOperationCode : struct, Enum;
-    }
+}
 
-    public interface IAuthorizationBLLContext<TIdent> : IAuthorizationBLLContextBase, IAuthorizationSystem<TIdent>, IHierarchicalObjectExpanderFactoryContainer<TIdent>
-    {
-    }
+public interface IAuthorizationBLLContext<TIdent> : IAuthorizationBLLContextBase, IAuthorizationSystem<TIdent>, IHierarchicalObjectExpanderFactoryContainer<TIdent>
+{
 }

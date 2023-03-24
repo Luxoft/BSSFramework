@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using Framework.Authorization.Domain;
 
-namespace Framework.Authorization.BLL
+namespace Framework.Authorization.BLL;
+
+public partial interface IOperationBLL
 {
-    public partial interface IOperationBLL
-    {
-        IEnumerable<Operation> GetAvailableOperations();
-    }
+    IEnumerable<Operation> GetAvailableOperations();
 }

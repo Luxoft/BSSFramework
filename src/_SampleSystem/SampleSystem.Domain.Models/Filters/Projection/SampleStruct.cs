@@ -1,7 +1,6 @@
-﻿namespace SampleSystem.Domain
+﻿namespace SampleSystem.Domain;
+
+public struct SampleStruct
 {
-    public struct SampleStruct
-    {
-        public SampleEnumForStructDependency SampleEnum { get; set; }
-    }
+    public SampleEnumForStructDependency SampleEnum { get; set; }
 }

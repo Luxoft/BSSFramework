@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Framework.DomainDriven.Generation.Domain
+namespace Framework.DomainDriven.Generation.Domain;
+
+public interface IGeneratorConfiguration : IRenderingConfiguration
 {
-    public interface IGeneratorConfiguration : IRenderingConfiguration
-    {
-        IReadOnlyCollection<Type> DomainTypes { get; }
-    }
+    IReadOnlyCollection<Type> DomainTypes { get; }
+}
 
-    public interface IGeneratorConfiguration<out TEnvironment> : IGeneratorConfiguration
+public interface IGeneratorConfiguration<out TEnvironment> : IGeneratorConfiguration
         where TEnvironment : IGenerationEnvironment
-    {
-        TEnvironment Environment { get; }
-    }
+{
+    TEnvironment Environment { get; }
+}
 
-    public interface IGeneratorConfiguration<out TEnvironment, in TFileType> : IGeneratorConfiguration<TEnvironment>, ICodeTypeReferenceService<TFileType>
+public interface IGeneratorConfiguration<out TEnvironment, in TFileType> : IGeneratorConfiguration<TEnvironment>, ICodeTypeReferenceService<TFileType>
         where TEnvironment : IGenerationEnvironment
-    {
-    }
+{
 }

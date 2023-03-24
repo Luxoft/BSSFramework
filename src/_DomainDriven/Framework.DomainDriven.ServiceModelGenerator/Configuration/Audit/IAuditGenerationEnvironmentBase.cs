@@ -1,9 +1,8 @@
-namespace Framework.DomainDriven.ServiceModelGenerator
+namespace Framework.DomainDriven.ServiceModelGenerator;
+
+public interface IAuditGenerationEnvironmentBase : IGenerationEnvironmentBase,
+
+                                                   Framework.DomainDriven.DTOGenerator.Audit.IGeneratorConfigurationContainer
 {
-    public interface IAuditGenerationEnvironmentBase : IGenerationEnvironmentBase,
 
-        Framework.DomainDriven.DTOGenerator.Audit.IGeneratorConfigurationContainer
-    {
-
-    }
 }

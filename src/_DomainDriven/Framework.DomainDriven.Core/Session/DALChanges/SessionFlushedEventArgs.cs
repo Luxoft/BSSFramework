@@ -2,19 +2,18 @@
 
 using JetBrains.Annotations;
 
-namespace Framework.DomainDriven
+namespace Framework.DomainDriven;
+
+public class SessionFlushedEventArgs : DALChangesEventArgs
 {
-    public class SessionFlushedEventArgs : DALChangesEventArgs
-    {
-        public SessionFlushedEventArgs([NotNull] DALChanges changes, [NotNull] IDBSession session)
+    public SessionFlushedEventArgs([NotNull] DALChanges changes, [NotNull] IDBSession session)
             : base(changes)
-        {
-            if (session == null) throw new ArgumentNullException(nameof(session));
+    {
+        if (session == null) throw new ArgumentNullException(nameof(session));
 
-            this.Session = session;
-        }
-
-
-        public IDBSession Session { get; private set; }
+        this.Session = session;
     }
+
+
+    public IDBSession Session { get; private set; }
 }

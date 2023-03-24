@@ -5,110 +5,109 @@ using Framework.Core;
 
 using Framework.Exceptions;
 
-namespace Framework.ExpressionParsers
+namespace Framework.ExpressionParsers;
+
+public abstract class ExpressionParser : ExpressionParser<Delegate, LambdaExpression>
 {
-    public abstract class ExpressionParser : ExpressionParser<Delegate, LambdaExpression>
-    {
-        protected ExpressionParser(INativeExpressionParser parser)
+    protected ExpressionParser(INativeExpressionParser parser)
             : base(parser, expr => expr.Compile(LambdaCompileCache))
-        {
+    {
 
-        }
-
-        private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache();
     }
 
-    public abstract class ExpressionParser<TDelegate> : ExpressionParser<TDelegate, Expression<TDelegate>>
+    private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache();
+}
+
+public abstract class ExpressionParser<TDelegate> : ExpressionParser<TDelegate, Expression<TDelegate>>
         where TDelegate : class
-    {
-        protected ExpressionParser(INativeExpressionParser parser)
+{
+    protected ExpressionParser(INativeExpressionParser parser)
             : base(parser, expr => expr.Compile(LambdaCompileCache))
-        {
+    {
 
-        }
-
-        protected override Expression<TDelegate> GetInternalExpression(string value)
-        {
-            return this.Parser.Parse<TDelegate>(value);
-        }
-
-
-        private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache();
     }
 
-    public abstract class ExpressionParser<TDelegate, TExpression> : NativeExpressionParserContainer,
+    protected override Expression<TDelegate> GetInternalExpression(string value)
+    {
+        return this.Parser.Parse<TDelegate>(value);
+    }
 
-        IExpressionParser<string, TDelegate, TExpression>
+
+    private static readonly ILambdaCompileCache LambdaCompileCache = new LambdaCompileCache();
+}
+
+public abstract class ExpressionParser<TDelegate, TExpression> : NativeExpressionParserContainer,
+
+                                                                 IExpressionParser<string, TDelegate, TExpression>
 
         where TDelegate : class
         where TExpression : LambdaExpression
-    {
-        private readonly IDictionaryCache<string, TExpression> _expressionCache;
+{
+    private readonly IDictionaryCache<string, TExpression> _expressionCache;
 
-        private readonly IDictionaryCache<string, TDelegate> _delegateCache;
+    private readonly IDictionaryCache<string, TDelegate> _delegateCache;
 
 
-        protected ExpressionParser(INativeExpressionParser parser, Func<TExpression, TDelegate> compileFunc)
+    protected ExpressionParser(INativeExpressionParser parser, Func<TExpression, TDelegate> compileFunc)
             : base (parser)
-        {
-            if (parser == null) throw new ArgumentNullException(nameof(parser));
-            if (compileFunc == null) throw new ArgumentNullException(nameof(compileFunc));
+    {
+        if (parser == null) throw new ArgumentNullException(nameof(parser));
+        if (compileFunc == null) throw new ArgumentNullException(nameof(compileFunc));
 
-            this._expressionCache = new DictionaryCache<string, TExpression>(this.GetInternalExpression).WithLock();
-            this._delegateCache = new DictionaryCache<string, TDelegate>(str => compileFunc(this._expressionCache[str])).WithLock();
+        this._expressionCache = new DictionaryCache<string, TExpression>(this.GetInternalExpression).WithLock();
+        this._delegateCache = new DictionaryCache<string, TDelegate>(str => compileFunc(this._expressionCache[str])).WithLock();
+    }
+
+
+    public Type ExpressionType
+    {
+        get { return typeof(TDelegate); }
+    }
+
+    public virtual string ExpectedFormat
+    {
+        get { return $"\"{this.ExpressionType.ToCSharpShortName()}\""; }
+    }
+
+
+    protected abstract TExpression GetInternalExpression(string value);
+
+
+    protected TResult TryWrapOperation<TResult>(string value, bool wrapError, Func<TResult> getResult)
+    {
+        if (value == null) throw new ArgumentNullException(nameof(value));
+        if (getResult == null) throw new ArgumentNullException(nameof(getResult));
+
+        try
+        {
+            return getResult();
         }
-
-
-        public Type ExpressionType
+        catch (Exception ex)
         {
-            get { return typeof(TDelegate); }
-        }
-
-        public virtual string ExpectedFormat
-        {
-            get { return $"\"{this.ExpressionType.ToCSharpShortName()}\""; }
-        }
-
-
-        protected abstract TExpression GetInternalExpression(string value);
-
-
-        protected TResult TryWrapOperation<TResult>(string value, bool wrapError, Func<TResult> getResult)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            if (getResult == null) throw new ArgumentNullException(nameof(getResult));
-
-            try
+            if (wrapError)
             {
-                return getResult();
+                throw new BusinessLogicException(ex, $"Can't parse value: \"{value}\". Expected format: {this.ExpectedFormat}");
             }
-            catch (Exception ex)
+            else
             {
-                if (wrapError)
-                {
-                    throw new BusinessLogicException(ex, $"Can't parse value: \"{value}\". Expected format: {this.ExpectedFormat}");
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
         }
+    }
 
 
-        public TExpression GetExpression(string value, bool wrapError = true)
-        {
-            return this.TryWrapOperation(value, wrapError, () => this._expressionCache[value]);
-        }
+    public TExpression GetExpression(string value, bool wrapError = true)
+    {
+        return this.TryWrapOperation(value, wrapError, () => this._expressionCache[value]);
+    }
 
-        public TDelegate GetDelegate(string value, bool wrapError = true)
-        {
-            return this.TryWrapOperation(value, wrapError, () => this._delegateCache[value]);
-        }
+    public TDelegate GetDelegate(string value, bool wrapError = true)
+    {
+        return this.TryWrapOperation(value, wrapError, () => this._delegateCache[value]);
+    }
 
-        public virtual void Validate(string source)
-        {
-            this.GetExpression(source);
-        }
+    public virtual void Validate(string source)
+    {
+        this.GetExpression(source);
     }
 }

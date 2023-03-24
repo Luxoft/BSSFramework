@@ -14,27 +14,26 @@ using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-namespace SampleSystem.IntegrationTests
+namespace SampleSystem.IntegrationTests;
+
+[TestClass]
+public class DefaultFieldsTests
 {
-    [TestClass]
-    public class DefaultFieldsTests
+    [TestMethod]
+    public void GetDefaultValueFromAttr_CompareWithDTO_DefaultValuesEquals()
     {
-        [TestMethod]
-        public void GetDefaultValueFromAttr_CompareWithDTO_DefaultValuesEquals()
-        {
-            // Arrange
-            var dto = new TestDefaultFieldsMappingObjStrictDTO();
+        // Arrange
+        var dto = new TestDefaultFieldsMappingObjStrictDTO();
 
-            // Act
+        // Act
 
-            // Assert
-            dto.IntVal.Should().NotBe(default(int));
-            dto.StrVal.Should().NotBe(default(string));
-            dto.EnumVal.Should().NotBe(default(DayOfWeek));
+        // Assert
+        dto.IntVal.Should().NotBe(default(int));
+        dto.StrVal.Should().NotBe(default(string));
+        dto.EnumVal.Should().NotBe(default(DayOfWeek));
 
-            dto.IntVal.Should().Be(TestDefaultFieldsMappingObj.IntDefaultVal);
-            dto.StrVal.Should().Be(TestDefaultFieldsMappingObj.StringDefaultVal);
-            dto.EnumVal.Should().Be(TestDefaultFieldsMappingObj.EnumDefaultVal);
-        }
+        dto.IntVal.Should().Be(TestDefaultFieldsMappingObj.IntDefaultVal);
+        dto.StrVal.Should().Be(TestDefaultFieldsMappingObj.StringDefaultVal);
+        dto.EnumVal.Should().Be(TestDefaultFieldsMappingObj.EnumDefaultVal);
     }
 }

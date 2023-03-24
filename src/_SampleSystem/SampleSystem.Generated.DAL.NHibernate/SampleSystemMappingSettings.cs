@@ -20,72 +20,71 @@ using SampleSystem.Domain;
 
 using Environment = NHibernate.Cfg.Environment;
 
-namespace SampleSystem.Generated.DAL.NHibernate
+namespace SampleSystem.Generated.DAL.NHibernate;
+
+public class SampleSystemMappingSettings : MappingSettings<PersistentDomainObjectBase>
 {
-    public class SampleSystemMappingSettings : MappingSettings<PersistentDomainObjectBase>
-    {
-        private readonly string connectionString;
+    private readonly string connectionString;
 
-        public SampleSystemMappingSettings(DatabaseName databaseName, string connectionString)
-                : base(typeof(SampleSystemMappingSettings).Assembly, databaseName, databaseName.ToDefaultAudit()) =>
-                this.connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
-
-        /// <summary>
-        /// For DBGenerator
-        /// </summary>
-        public SampleSystemMappingSettings(
-                IEnumerable<XDocument> mappingXmls,
-                DatabaseName databaseName,
-                AuditDatabaseName auditDatabaseName,
-                [NotNull] string connectionString,
-                IEnumerable<Type> types = null)
-                : base(mappingXmls, databaseName, auditDatabaseName, types)
-        {
+    public SampleSystemMappingSettings(DatabaseName databaseName, string connectionString)
+            : base(typeof(SampleSystemMappingSettings).Assembly, databaseName, databaseName.ToDefaultAudit()) =>
             this.connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
-        }
 
-        public override void InitMapping(Configuration cfg)
-        {
-            base.InitMapping(cfg);
+    /// <summary>
+    /// For DBGenerator
+    /// </summary>
+    public SampleSystemMappingSettings(
+            IEnumerable<XDocument> mappingXmls,
+            DatabaseName databaseName,
+            AuditDatabaseName auditDatabaseName,
+            [NotNull] string connectionString,
+            IEnumerable<Type> types = null)
+            : base(mappingXmls, databaseName, auditDatabaseName, types)
+    {
+        this.connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
+    }
 
-            Fluently
-                    .Configure(cfg)
-                    .Database(
-                              MsSqlConfiguration.MsSql2012
-                                                .Dialect<EnhancedMsSql2012Dialect>()
-                                                .Driver<Fix2100SqlClientDriver>()
-                                                //.IsolationLevel(System.Data.IsolationLevel.Snapshot)
-                                                .ConnectionString(this.connectionString))
-                    .Mappings(
-                              m =>
-                              {
-                                  m.FluentMappings.AddFromAssemblyOf<SampleSystemMappingSettings>()
-                                   .Conventions.AddFromAssemblyOf<EnumConvention>();
-                              })
-                    .ExposeConfiguration(
-                                         c =>
-                                         {
-                                             c.Properties.Add(Environment.LinqToHqlGeneratorsRegistry, typeof(EnhancedLinqToHqlGeneratorsRegistry).AssemblyQualifiedName);
+    public override void InitMapping(Configuration cfg)
+    {
+        base.InitMapping(cfg);
 
-                                             c.Properties.Add(Environment.SqlExceptionConverter, typeof(SQLExceptionConverter).AssemblyQualifiedName);
+        Fluently
+                .Configure(cfg)
+                .Database(
+                          MsSqlConfiguration.MsSql2012
+                                            .Dialect<EnhancedMsSql2012Dialect>()
+                                            .Driver<Fix2100SqlClientDriver>()
+                                            //.IsolationLevel(System.Data.IsolationLevel.Snapshot)
+                                            .ConnectionString(this.connectionString))
+                .Mappings(
+                          m =>
+                          {
+                              m.FluentMappings.AddFromAssemblyOf<SampleSystemMappingSettings>()
+                               .Conventions.AddFromAssemblyOf<EnumConvention>();
+                          })
+                .ExposeConfiguration(
+                                     c =>
+                                     {
+                                         c.Properties.Add(Environment.LinqToHqlGeneratorsRegistry, typeof(EnhancedLinqToHqlGeneratorsRegistry).AssemblyQualifiedName);
 
-                                             c.Properties.Add(Environment.CommandTimeout, "1200");
+                                         c.Properties.Add(Environment.SqlExceptionConverter, typeof(SQLExceptionConverter).AssemblyQualifiedName);
 
-                                             c.Properties.Add(Environment.SqlTypesKeepDateTime, "true");
-                                         })
-                    .BuildConfiguration();
-        }
+                                         c.Properties.Add(Environment.CommandTimeout, "1200");
 
-        private class EnumConvention : IUserTypeConvention
-        {
-            public void Accept(IAcceptanceCriteria<IPropertyInspector> criteria) =>
-                    criteria.Expect(
-                                    x => x.Property.PropertyType.IsEnum
-                                         || (x.Property.PropertyType.IsGenericType
-                                             && x.Property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>)
-                                             && x.Property.PropertyType.GetGenericArguments()[0].IsEnum));
+                                         c.Properties.Add(Environment.SqlTypesKeepDateTime, "true");
+                                     })
+                .BuildConfiguration();
+    }
 
-            public void Apply(IPropertyInstance instance) => instance.CustomType(instance.Property.PropertyType);
-        }
+    private class EnumConvention : IUserTypeConvention
+    {
+        public void Accept(IAcceptanceCriteria<IPropertyInspector> criteria) =>
+                criteria.Expect(
+                                x => x.Property.PropertyType.IsEnum
+                                     || (x.Property.PropertyType.IsGenericType
+                                         && x.Property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>)
+                                         && x.Property.PropertyType.GetGenericArguments()[0].IsEnum));
+
+        public void Apply(IPropertyInstance instance) => instance.CustomType(instance.Property.PropertyType);
     }
 }

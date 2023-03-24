@@ -1,9 +1,8 @@
-﻿namespace Framework.DomainDriven.DAL.Revisions
-{
-    public enum ModificationType
-    {
-        Save,
+﻿namespace Framework.DomainDriven.DAL.Revisions;
 
-        Remove
-    }
+public enum ModificationType
+{
+    Save,
+
+    Remove
 }

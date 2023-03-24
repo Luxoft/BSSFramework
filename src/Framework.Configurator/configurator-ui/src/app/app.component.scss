@@ -1,0 +1,9 @@
+@import 'variables.scss';
+
+:host {
+  @apply tw-flex tw-flex-col;
+}
+
+.container {
+  height: calc(100vh - $header-height);
+}

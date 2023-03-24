@@ -7,11 +7,11 @@ using JetBrains.Annotations;
 
 using SampleSystem.Domain;
 
-namespace SampleSystem.BLL
+namespace SampleSystem.BLL;
+
+public partial class SampleSystemEmployeeSecurityService<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>
 {
-    public partial class SampleSystemEmployeeSecurityService<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>
-    {
-        public SampleSystemEmployeeSecurityService(
+    public SampleSystemEmployeeSecurityService(
             [NotNull] IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
             [NotNull] IDisabledSecurityProviderContainer<PersistentDomainObjectBase> disabledSecurityProviderContainer,
             [NotNull] ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode> securityOperationResolver,
@@ -21,26 +21,25 @@ namespace SampleSystem.BLL
             [NotNull] ISampleSystemBLLContext context)
 
             : base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+    {
+        this.securityPathContainer = securityPathContainer ?? throw new ArgumentNullException(nameof(securityPathContainer));
+        this.Context = context ?? throw new ArgumentNullException(nameof(context));
+    }
+
+    public ISampleSystemBLLContext Context { get; }
+
+
+    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(ContextSecurityOperation<SampleSystemSecurityOperationCode> securityOperation)
+    {
+        var baseProvider = base.CreateSecurityProvider(securityOperation);
+
+        if (securityOperation == SampleSystemSecurityOperation.EmployeeView)
         {
-            this.securityPathContainer = securityPathContainer ?? throw new ArgumentNullException(nameof(securityPathContainer));
-            this.Context = context ?? throw new ArgumentNullException(nameof(context));
+            return baseProvider.Or(employee => employee.Login == this.Context.Authorization.RunAsManager.PrincipalName, this.AccessDeniedExceptionService);
         }
-
-        public ISampleSystemBLLContext Context { get; }
-
-
-        protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(ContextSecurityOperation<SampleSystemSecurityOperationCode> securityOperation)
+        else
         {
-            var baseProvider = base.CreateSecurityProvider(securityOperation);
-
-            if (securityOperation == SampleSystemSecurityOperation.EmployeeView)
-            {
-                return baseProvider.Or(employee => employee.Login == this.Context.Authorization.RunAsManager.PrincipalName, this.AccessDeniedExceptionService);
-            }
-            else
-            {
-                return baseProvider;
-            }
+            return baseProvider;
         }
     }
 }

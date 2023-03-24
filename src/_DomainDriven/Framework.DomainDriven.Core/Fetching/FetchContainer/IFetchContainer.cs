@@ -2,10 +2,9 @@
 
 using Framework.Core;
 
-namespace Framework.DomainDriven
+namespace Framework.DomainDriven;
+
+public interface IFetchContainer<TDomainObject>
 {
-    public interface IFetchContainer<TDomainObject>
-    {
-        IPropertyPathTree<TDomainObject> Fetchs { get; }
-    }
+    IPropertyPathTree<TDomainObject> Fetchs { get; }
 }

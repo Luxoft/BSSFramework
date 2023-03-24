@@ -1,10 +1,9 @@
-﻿namespace SampleSystem.Domain
+﻿namespace SampleSystem.Domain;
+
+public enum FinancialProjectType
 {
-    public enum FinancialProjectType
-    {
-        Commercial = 0,
-        Administrative = 1,
-        Investment = 2,
-        RnD = 4
-    }
+    Commercial = 0,
+    Administrative = 1,
+    Investment = 2,
+    RnD = 4
 }

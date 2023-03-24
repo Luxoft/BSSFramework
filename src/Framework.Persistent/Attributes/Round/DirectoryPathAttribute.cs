@@ -1,13 +1,12 @@
 ﻿using System;
 
-namespace Framework.Persistent
-{
-    [AttributeUsage(AttributeTargets.Property)]
-    public class DirectoryPathAttribute : NormalizeAttribute
-    {
-        public DirectoryPathAttribute()
-        {
+namespace Framework.Persistent;
 
-        }
+[AttributeUsage(AttributeTargets.Property)]
+public class DirectoryPathAttribute : NormalizeAttribute
+{
+    public DirectoryPathAttribute()
+    {
+
     }
 }

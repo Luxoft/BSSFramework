@@ -6,14 +6,13 @@ using Framework.Authorization.BLL;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 
-namespace Authorization.WebApi.Controllers
+namespace Authorization.WebApi.Controllers;
+
+public partial class OperationController
 {
-    public partial class OperationController
+    [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetSecurityOperations))]
+    public IEnumerable<string> GetSecurityOperations()
     {
-        [Microsoft.AspNetCore.Mvc.HttpPost(nameof(GetSecurityOperations))]
-        public IEnumerable<string> GetSecurityOperations()
-        {
-            return this.EvaluateC(DBSessionMode.Read, context => context.Logics.Operation.GetAvailableOperationCodes().ToList());
-        }
+        return this.EvaluateC(DBSessionMode.Read, context => context.Logics.Operation.GetAvailableOperationCodes().ToList());
     }
 }

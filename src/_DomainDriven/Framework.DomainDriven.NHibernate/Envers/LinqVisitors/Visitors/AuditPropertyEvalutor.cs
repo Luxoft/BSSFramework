@@ -3,26 +3,25 @@
 using NHibernate.Envers.Query;
 using NHibernate.Envers.Query.Criteria;
 
-namespace NHibernate.Linq.Visitors
+namespace NHibernate.Linq.Visitors;
+
+internal class AuditPropertyEvalutor : ExpressionVisitor
 {
-    internal class AuditPropertyEvalutor : ExpressionVisitor
+    private readonly Immutable<AuditProperty> result;
+
+    public AuditPropertyEvalutor()
     {
-        private readonly Immutable<AuditProperty> result;
+        this.result = new Immutable<AuditProperty>();
+    }
 
-        public AuditPropertyEvalutor()
-        {
-            this.result = new Immutable<AuditProperty>();
-        }
+    public AuditProperty AuditProperty
+    {
+        get { return this.result.Value; }
+    }
 
-        public AuditProperty AuditProperty
-        {
-            get { return this.result.Value; }
-        }
-
-        protected override Expression VisitMember(MemberExpression node)
-        {
-            this.result.Value =  AuditEntity.Property(node.Member.Name);
-            return base.VisitMember(node);
-        }
+    protected override Expression VisitMember(MemberExpression node)
+    {
+        this.result.Value =  AuditEntity.Property(node.Member.Name);
+        return base.VisitMember(node);
     }
 }

@@ -1,13 +1,12 @@
 ﻿using System;
 using Framework.Persistent;
 
-namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3
-{
-    public interface ITestBLLContext
-    {
-    }
+namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3;
 
-    public class TestBLLContext : ITestBLLContext
-    {
-    }
+public interface ITestBLLContext
+{
+}
+
+public class TestBLLContext : ITestBLLContext
+{
 }

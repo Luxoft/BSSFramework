@@ -17,340 +17,339 @@ using NHibernate.Util;
 
 using Index = Microsoft.SqlServer.Management.Smo.Index;
 
-namespace Framework.DomainDriven.DBGenerator
+namespace Framework.DomainDriven.DBGenerator;
+
+public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBase
 {
-    public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBase
+    private readonly HashSet<IgnoreLink> _ignoreDomainTypeLinksHash;
+
+    public RequiredRefDatabaseScriptGenerator([NotNull] IEnumerable<IgnoreLink> ignoreDomainTypeLinks)
     {
-        private readonly HashSet<IgnoreLink> _ignoreDomainTypeLinksHash;
+        if (ignoreDomainTypeLinks == null) throw new ArgumentNullException(nameof(ignoreDomainTypeLinks));
 
-        public RequiredRefDatabaseScriptGenerator([NotNull] IEnumerable<IgnoreLink> ignoreDomainTypeLinks)
+        this._ignoreDomainTypeLinksHash = ignoreDomainTypeLinks.ToHashSet();
+    }
+
+    protected override void Apply(IDatabaseScriptGeneratorContext context)
+    {
+        context.SqlDatabaseFactory.Server.ConnectionContext.CapturedSql.Add("------------------------------Generate RequiredRef-----------------------");
+
+        var requiredRefContext = new RequiredRefContext(context);
+
+        this.ProcessRequeredAttribute(requiredRefContext);
+        this.ProcessMasterRef(requiredRefContext);
+        this.ProcessViews(requiredRefContext);
+
+        var createIndexActions = requiredRefContext.RecreateIndexies.Select(z =>
+                                                                            {
+                                                                                var index = new Index(z.Parent, z.Name);
+                                                                                index.IndexKeyType = z.IndexKeyType;
+                                                                                index.IsUnique = z.IsUnique;
+                                                                                index.IsClustered = z.IsClustered;
+
+                                                                                z.IndexedColumns
+                                                                                 .Cast<IndexedColumn>()
+                                                                                 .Foreach(q => index.IndexedColumns.Add(new IndexedColumn(index, q.Name, q.Descending)));
+
+                                                                                z.Drop();
+
+                                                                                return index;
+                                                                            }).ToList();
+
+        var removableViews = this.GetRemovableViews(requiredRefContext);
+
+        var recreateViewInfos = removableViews
+                                .Select(z => new { Database = z.Parent, Name = z.Name, TextHeader = z.TextHeader, TextBody = z.TextBody, TextMode = z.TextMode, Schema = z.Schema })
+                                .ToList();
+
+        removableViews.Foreach(z => z.Drop());
+
+        requiredRefContext.RequeredColumns.Foreach(z => z.Nullable = false);
+
+        requiredRefContext.RequeredColumns.Foreach(z => z.Alter());
+
+        createIndexActions.Foreach(z => z.Create());
+
+        recreateViewInfos.Reverse();
+
+        recreateViewInfos.Foreach(
+                                  z =>
+                                  {
+                                      var newView = new View(z.Database, z.Name, z.Schema)
+                                                    {
+                                                            TextHeader = z.TextHeader,
+                                                            TextBody = z.TextBody,
+                                                            TextMode = z.TextMode
+                                                    };
+
+                                      newView.Create();
+                                  });
+
+        context.SqlDatabaseFactory.Server.ConnectionContext.CapturedSql.Add("------------------------------End RequiredRef-----------------------");
+    }
+
+    private IList<View> GetRemovableViews(RequiredRefContext refContext)
+    {
+        var viewToDeepDictionary = new Dictionary<View, Lazy<int>>();
+
+        var walker = new DependencyWalker(refContext.Context.SqlDatabaseFactory.Server);
+
+        foreach (var view in refContext.RecreateViews)
         {
-            if (ignoreDomainTypeLinks == null) throw new ArgumentNullException(nameof(ignoreDomainTypeLinks));
-
-            this._ignoreDomainTypeLinksHash = ignoreDomainTypeLinks.ToHashSet();
+            this.InitViewDeeps(view, viewToDeepDictionary, walker);
         }
 
-        protected override void Apply(IDatabaseScriptGeneratorContext context)
+        return viewToDeepDictionary.OrderBy(z => z.Value.Value).Select(z => z.Key).ToList();
+    }
+
+    private void InitViewDeeps(View view, Dictionary<View, Lazy<int>> viewDictionary, DependencyWalker walker)
+    {
+        Lazy<int> storageRemoveOrder;
+
+        if (viewDictionary.TryGetValue(view, out storageRemoveOrder))
         {
-            context.SqlDatabaseFactory.Server.ConnectionContext.CapturedSql.Add("------------------------------Generate RequiredRef-----------------------");
+            return;
+        }
 
-            var requiredRefContext = new RequiredRefContext(context);
+        var tree = walker.DiscoverDependencies(new[] { view }, false);
+        var result = walker.WalkDependencies(tree);
+        var filteredResult = result.Where(z => z.Urn.Type == "View").ToList();
+        var nextViews = filteredResult.Select(z => walker.Server.GetSmoObject(z.Urn)).Cast<View>().Where(z => z != view).ToList();
 
-            this.ProcessRequeredAttribute(requiredRefContext);
-            this.ProcessMasterRef(requiredRefContext);
-            this.ProcessViews(requiredRefContext);
+        if (nextViews.Any())
+        {
+            viewDictionary.Add(view, new Lazy<int>(() => nextViews.Select(z => viewDictionary[z]).Max(z => z.Value) + 1));
+        }
+        else
+        {
+            viewDictionary.Add(view, new Lazy<int>(() => 0));
+        }
 
-            var createIndexActions = requiredRefContext.RecreateIndexies.Select(z =>
+        foreach (var nextView in nextViews)
+        {
+            this.InitViewDeeps(nextView, viewDictionary, walker);
+        }
+    }
+
+    private void ProcessViews(RequiredRefContext refContext)
+    {
+        foreach (var databaseGrouped in refContext.RequeredColumns.GroupBy(z => ((Database)((Table)z.Parent).Parent)))
+        {
+            var database = (Database)databaseGrouped.Key;
+
+            if (!database.Views.Any())
             {
-                var index = new Index(z.Parent, z.Name);
-                index.IndexKeyType = z.IndexKeyType;
-                index.IsUnique = z.IsUnique;
-                index.IsClustered = z.IsClustered;
+                continue;
+            }
 
-                z.IndexedColumns
-                        .Cast<IndexedColumn>()
-                        .Foreach(q => index.IndexedColumns.Add(new IndexedColumn(index, q.Name, q.Descending)));
-
-                z.Drop();
-
-                return index;
-            }).ToList();
-
-            var removableViews = this.GetRemovableViews(requiredRefContext);
-
-            var recreateViewInfos = removableViews
-                .Select(z => new { Database = z.Parent, Name = z.Name, TextHeader = z.TextHeader, TextBody = z.TextBody, TextMode = z.TextMode, Schema = z.Schema })
-                .ToList();
-
-            removableViews.Foreach(z => z.Drop());
-
-            requiredRefContext.RequeredColumns.Foreach(z => z.Nullable = false);
-
-            requiredRefContext.RequeredColumns.Foreach(z => z.Alter());
-
-            createIndexActions.Foreach(z => z.Create());
-
-            recreateViewInfos.Reverse();
-
-            recreateViewInfos.Foreach(
-                z =>
-                    {
-                        var newView = new View(z.Database, z.Name, z.Schema)
-                        {
-                            TextHeader = z.TextHeader,
-                            TextBody = z.TextBody,
-                            TextMode = z.TextMode
-                        };
-
-                        newView.Create();
-                    });
-
-            context.SqlDatabaseFactory.Server.ConnectionContext.CapturedSql.Add("------------------------------End RequiredRef-----------------------");
-        }
-
-        private IList<View> GetRemovableViews(RequiredRefContext refContext)
-        {
-            var viewToDeepDictionary = new Dictionary<View, Lazy<int>>();
+            var affectedTables = databaseGrouped.Select(z => z.Parent).Cast<Table>().ToHashSet();
 
             var walker = new DependencyWalker(refContext.Context.SqlDatabaseFactory.Server);
 
-            foreach (var view in refContext.RecreateViews)
+            foreach (var view in database.Views.Cast<View>().Where(z => !z.IsSystemObject))
             {
-                this.InitViewDeeps(view, viewToDeepDictionary, walker);
-            }
+                var tree = walker.DiscoverDependencies(new[] { view }, true);
 
-            return viewToDeepDictionary.OrderBy(z => z.Value.Value).Select(z => z.Key).ToList();
-        }
+                var result = walker.WalkDependencies(tree);
 
-        private void InitViewDeeps(View view, Dictionary<View, Lazy<int>> viewDictionary, DependencyWalker walker)
-        {
-            Lazy<int> storageRemoveOrder;
+                var filteredResult = result.Where(z => z.Urn.Type != "View").ToList();
 
-            if (viewDictionary.TryGetValue(view, out storageRemoveOrder))
-            {
-                return;
-            }
+                var dependendiesTables = filteredResult.Select(z =>
+                                                               {
+                                                                   try
+                                                                   {
+                                                                       return database.Parent.GetSmoObject(z.Urn);
+                                                                   }
+                                                                   catch (Exception e)
+                                                                   {
+                                                                       return null;
+                                                                   }
+                                                               })
+                                                       .Where(z => null != z)
+                                                       .ToHashSet();
 
-            var tree = walker.DiscoverDependencies(new[] { view }, false);
-            var result = walker.WalkDependencies(tree);
-            var filteredResult = result.Where(z => z.Urn.Type == "View").ToList();
-            var nextViews = filteredResult.Select(z => walker.Server.GetSmoObject(z.Urn)).Cast<View>().Where(z => z != view).ToList();
-
-            if (nextViews.Any())
-            {
-                viewDictionary.Add(view, new Lazy<int>(() => nextViews.Select(z => viewDictionary[z]).Max(z => z.Value) + 1));
-            }
-            else
-            {
-                viewDictionary.Add(view, new Lazy<int>(() => 0));
-            }
-
-            foreach (var nextView in nextViews)
-            {
-                this.InitViewDeeps(nextView, viewDictionary, walker);
-            }
-        }
-
-        private void ProcessViews(RequiredRefContext refContext)
-        {
-            foreach (var databaseGrouped in refContext.RequeredColumns.GroupBy(z => ((Database)((Table)z.Parent).Parent)))
-            {
-                var database = (Database)databaseGrouped.Key;
-
-                if (!database.Views.Any())
+                if (dependendiesTables.Any(z => affectedTables.Contains(z)))
                 {
-                    continue;
-                }
-
-                var affectedTables = databaseGrouped.Select(z => z.Parent).Cast<Table>().ToHashSet();
-
-                var walker = new DependencyWalker(refContext.Context.SqlDatabaseFactory.Server);
-
-                foreach (var view in database.Views.Cast<View>().Where(z => !z.IsSystemObject))
-                {
-                    var tree = walker.DiscoverDependencies(new[] { view }, true);
-
-                    var result = walker.WalkDependencies(tree);
-
-                    var filteredResult = result.Where(z => z.Urn.Type != "View").ToList();
-
-                    var dependendiesTables = filteredResult.Select(z =>
-                    {
-                        try
-                        {
-                            return database.Parent.GetSmoObject(z.Urn);
-                        }
-                        catch (Exception e)
-                        {
-                            return null;
-                        }
-                    })
-                    .Where(z => null != z)
-                    .ToHashSet();
-
-                    if (dependendiesTables.Any(z => affectedTables.Contains(z)))
-                    {
-                        refContext.Add(view);
-                    }
+                    refContext.Add(view);
                 }
             }
         }
+    }
 
-        private void ProcessRequeredAttribute(RequiredRefContext refContext)
+    private void ProcessRequeredAttribute(RequiredRefContext refContext)
+    {
+        var context = refContext.Context;
+
+        var metadata = context.AssemblyMetadata;
+
+        var domainTypeWithRequiredFields = metadata
+                                           .DomainTypes.GetAllElements(z => z.NotAbstractChildrenDomainTypes)
+                                           .Select(z =>
+                                                           new
+                                                           {
+                                                                   DomainTypeMetadata = z,
+                                                                   RequeredFields = z.Fields.Where(q => !(q is ListTypeFieldMetadata))
+                                                                                     .Where(q => q.Attributes.HasAttribute<RequiredAttribute>()).ToList()
+                                                           })
+                                           .SelectMany(z => z.RequeredFields.Select(q => new { DomainTypeMetadata = z.DomainTypeMetadata, RequeredField = q }))
+                                           .Where(z => !this._ignoreDomainTypeLinksHash
+                                                            .Any(link => link.FromType.IsAssignableFrom(z.DomainTypeMetadata.DomainType)
+                                                                         && link.MemberInfo.PropertyType == z.RequeredField.Type))
+                                           .ToList();
+
+        foreach (var domainTypeWithRequiredField in domainTypeWithRequiredFields.Where(z => !z.DomainTypeMetadata.IsView))
         {
-            var context = refContext.Context;
+            var table = context.GetTable(domainTypeWithRequiredField.DomainTypeMetadata.DomainType);
 
-            var metadata = context.AssemblyMetadata;
+            var columnNames = MapperFactory.GetMapping(domainTypeWithRequiredField.RequeredField).Select(z => z.Name).ToHashSet();
 
-            var domainTypeWithRequiredFields = metadata
-                .DomainTypes.GetAllElements(z => z.NotAbstractChildrenDomainTypes)
-                .Select(z =>
-                    new
-                    {
-                        DomainTypeMetadata = z,
-                        RequeredFields = z.Fields.Where(q => !(q is ListTypeFieldMetadata))
-                            .Where(q => q.Attributes.HasAttribute<RequiredAttribute>()).ToList()
-                    })
-            .SelectMany(z => z.RequeredFields.Select(q => new { DomainTypeMetadata = z.DomainTypeMetadata, RequeredField = q }))
-                        .Where(z => !this._ignoreDomainTypeLinksHash
-                            .Any(link => link.FromType.IsAssignableFrom(z.DomainTypeMetadata.DomainType)
-                                && link.MemberInfo.PropertyType == z.RequeredField.Type))
-                        .ToList();
+            this.ApplyRequered(refContext, table, columnNames);
+        }
+    }
 
-            foreach (var domainTypeWithRequiredField in domainTypeWithRequiredFields.Where(z => !z.DomainTypeMetadata.IsView))
-            {
-                var table = context.GetTable(domainTypeWithRequiredField.DomainTypeMetadata.DomainType);
+    private void ProcessMasterRef(RequiredRefContext refContext)
+    {
+        var context = refContext.Context;
 
-                var columnNames = MapperFactory.GetMapping(domainTypeWithRequiredField.RequeredField).Select(z => z.Name).ToHashSet();
+        var metadata = context.AssemblyMetadata;
 
-                this.ApplyRequered(refContext, table, columnNames);
-            }
+        var typeWithDetails = metadata
+                              .DomainTypes
+                              .Where(z => z.ListFields.Any(q => metadata.PersistentDomainObjectBaseType.IsAssignableFrom(q.ElementType)))
+                              .SelectMany(
+                                          z => z.ListFields
+                                                .Where(q => metadata.PersistentDomainObjectBaseType.IsAssignableFrom(q.ElementType))
+                                                .Where(q => q.ElementType != z.DomainType) //ignore hierarh
+                                                .Select(q => new { DomainType = z, ListField = q }))
+                              .Where(z => !this._ignoreDomainTypeLinksHash.Any(q => q.FromType.IsAssignableFrom(z.ListField.ElementType) && q.MemberInfo.PropertyType == z.DomainType.DomainType))
+                              .ToList();
+
+        if (!typeWithDetails.Any())
+        {
+            return;
         }
 
-        private void ProcessMasterRef(RequiredRefContext refContext)
+        var dictionary = metadata.DomainTypes.GetAllElements(z => z.NotAbstractChildrenDomainTypes).ToDictionary(z => z.DomainType);
+
+        foreach (var typeWithDetail in typeWithDetails)
         {
-            var context = refContext.Context;
+            var masterMetadata = typeWithDetail.DomainType;
 
-            var metadata = context.AssemblyMetadata;
+            var detailMetadata = this.GetDomainTypeMetadataBy(typeWithDetail.ListField.ElementType, dictionary);
 
-            var typeWithDetails = metadata
-                .DomainTypes
-                .Where(z => z.ListFields.Any(q => metadata.PersistentDomainObjectBaseType.IsAssignableFrom(q.ElementType)))
-                .SelectMany(
-                    z => z.ListFields
-                             .Where(q => metadata.PersistentDomainObjectBaseType.IsAssignableFrom(q.ElementType))
-                             .Where(q => q.ElementType != z.DomainType) //ignore hierarh
-                             .Select(q => new { DomainType = z, ListField = q }))
-                .Where(z => !this._ignoreDomainTypeLinksHash.Any(q => q.FromType.IsAssignableFrom(z.ListField.ElementType) && q.MemberInfo.PropertyType == z.DomainType.DomainType))
-                .ToList();
-
-            if (!typeWithDetails.Any())
+            if (detailMetadata.IsView)
             {
-                return;
+                continue;
             }
 
-            var dictionary = metadata.DomainTypes.GetAllElements(z => z.NotAbstractChildrenDomainTypes).ToDictionary(z => z.DomainType);
+            var table = context.GetTable(detailMetadata.DomainType);
 
-            foreach (var typeWithDetail in typeWithDetails)
-            {
-                var masterMetadata = typeWithDetail.DomainType;
+            var masterRef = GetMasterRefMetadata(detailMetadata, masterMetadata);
 
-                var detailMetadata = this.GetDomainTypeMetadataBy(typeWithDetail.ListField.ElementType, dictionary);
+            var masterRefColumnName = MapperFactory.GetMapping(masterRef).First().Name;
 
-                if (detailMetadata.IsView)
-                {
-                    continue;
-                }
+            this.ApplyRequered(refContext, table, masterRefColumnName);
+        }
+    }
 
-                var table = context.GetTable(detailMetadata.DomainType);
+    private void ApplyRequered(RequiredRefContext context, Table table, string columnName)
+    {
+        this.ApplyRequered(context, table, new string[] { columnName });
+    }
 
-                var masterRef = GetMasterRefMetadata(detailMetadata, masterMetadata);
+    private void ApplyRequered(RequiredRefContext refContext, Table table, IEnumerable<string> columnNames)
+    {
+        var columnNamesHashSet = columnNames.Select(z => z.ToLower()).ToHashSet();
 
-                var masterRefColumnName = MapperFactory.GetMapping(masterRef).First().Name;
+        var columns = table.Columns.Cast<Column>().Where(z => columnNamesHashSet.Contains(z.Name.ToLower())).ToList();
 
-                this.ApplyRequered(refContext, table, masterRefColumnName);
-            }
+        if (columns.All(z => !z.Nullable))
+        {
+            return;
         }
 
-        private void ApplyRequered(RequiredRefContext context, Table table, string columnName)
+        var indexed = table.Indexes.Cast<Index>()
+                           .Where(z => z.IndexedColumns.Cast<IndexedColumn>().Any(q => columnNamesHashSet.Contains(q.Name.ToLower()))).ToList();
+
+        refContext.Add(indexed);
+        refContext.Add(columns);
+    }
+
+    private DomainTypeMetadata GetDomainTypeMetadataBy(Type type, Dictionary<Type, DomainTypeMetadata> dictionary)
+    {
+        DomainTypeMetadata result = null;
+        var currentType = type;
+        while (currentType != typeof(object))
         {
-            this.ApplyRequered(context, table, new string[] { columnName });
+            if (dictionary.TryGetValue(currentType, out result))
+            {
+                break;
+            }
+
+            currentType = currentType.BaseType;
         }
 
-        private void ApplyRequered(RequiredRefContext refContext, Table table, IEnumerable<string> columnNames)
+        if (null == result)
         {
-            var columnNamesHashSet = columnNames.Select(z => z.ToLower()).ToHashSet();
-
-            var columns = table.Columns.Cast<Column>().Where(z => columnNamesHashSet.Contains(z.Name.ToLower())).ToList();
-
-            if (columns.All(z => !z.Nullable))
-            {
-                return;
-            }
-
-            var indexed = table.Indexes.Cast<Index>()
-                .Where(z => z.IndexedColumns.Cast<IndexedColumn>().Any(q => columnNamesHashSet.Contains(q.Name.ToLower()))).ToList();
-
-            refContext.Add(indexed);
-            refContext.Add(columns);
+            throw new System.ArgumentException("No domainTypeMetadata for {0} type", type.Name);
         }
 
-        private DomainTypeMetadata GetDomainTypeMetadataBy(Type type, Dictionary<Type, DomainTypeMetadata> dictionary)
+        return result;
+    }
+
+    private class RequiredRefContext
+    {
+        private readonly HashSet<Index> recreateIndexies;
+        private readonly List<Column> requeredColumns;
+        private readonly IDatabaseScriptGeneratorContext context;
+        private readonly HashSet<View> expectedRemovableViews;
+
+        public RequiredRefContext(IDatabaseScriptGeneratorContext contex)
         {
-            DomainTypeMetadata result = null;
-            var currentType = type;
-            while (currentType != typeof(object))
-            {
-                if (dictionary.TryGetValue(currentType, out result))
-                {
-                    break;
-                }
-
-                currentType = currentType.BaseType;
-            }
-
-            if (null == result)
-            {
-                throw new System.ArgumentException("No domainTypeMetadata for {0} type", type.Name);
-            }
-
-            return result;
+            this.context = contex;
+            this.recreateIndexies = new HashSet<Index>();
+            this.requeredColumns = new List<Column>();
+            this.expectedRemovableViews = new HashSet<View>();
         }
 
-        private class RequiredRefContext
+        public IDatabaseScriptGeneratorContext Context
         {
-            private readonly HashSet<Index> recreateIndexies;
-            private readonly List<Column> requeredColumns;
-            private readonly IDatabaseScriptGeneratorContext context;
-            private readonly HashSet<View> expectedRemovableViews;
+            get { return this.context; }
+        }
 
-            public RequiredRefContext(IDatabaseScriptGeneratorContext contex)
-            {
-                this.context = contex;
-                this.recreateIndexies = new HashSet<Index>();
-                this.requeredColumns = new List<Column>();
-                this.expectedRemovableViews = new HashSet<View>();
-            }
+        public IEnumerable<Index> RecreateIndexies
+        {
+            get { return this.recreateIndexies; }
+        }
 
-            public IDatabaseScriptGeneratorContext Context
-            {
-                get { return this.context; }
-            }
+        public IEnumerable<Column> RequeredColumns
+        {
+            get { return this.requeredColumns; }
+        }
 
-            public IEnumerable<Index> RecreateIndexies
-            {
-                get { return this.recreateIndexies; }
-            }
+        public IEnumerable<View> RecreateViews
+        {
+            get { return this.expectedRemovableViews; }
+        }
 
-            public IEnumerable<Column> RequeredColumns
-            {
-                get { return this.requeredColumns; }
-            }
+        public void Add(IEnumerable<Index> indexed)
+        {
+            this.recreateIndexies.AddRange(indexed);
+        }
 
-            public IEnumerable<View> RecreateViews
-            {
-                get { return this.expectedRemovableViews; }
-            }
+        public void Add(IEnumerable<Column> columns)
+        {
+            this.requeredColumns.AddRange(columns);
+        }
 
-            public void Add(IEnumerable<Index> indexed)
-            {
-                this.recreateIndexies.AddRange(indexed);
-            }
+        public void Add(IEnumerable<View> views)
+        {
+            this.expectedRemovableViews.AddRange(views);
+        }
 
-            public void Add(IEnumerable<Column> columns)
-            {
-                this.requeredColumns.AddRange(columns);
-            }
-
-            public void Add(IEnumerable<View> views)
-            {
-                this.expectedRemovableViews.AddRange(views);
-            }
-
-            public void Add(View view)
-            {
-                this.Add(new[] { view });
-            }
+        public void Add(View view)
+        {
+            this.Add(new[] { view });
         }
     }
 }

@@ -6,19 +6,18 @@ using Framework.DomainDriven;
 using Framework.OData;
 using Framework.Validation;
 
-namespace Framework.Authorization.BLL
+namespace Framework.Authorization.BLL;
+
+public partial class PermissionBLL
 {
-    public partial class PermissionBLL
+    public List<Permission> GetListBy(PermissionDirectFilterModel filter, IFetchContainer<Permission> fetchs)
     {
-        public List<Permission> GetListBy(PermissionDirectFilterModel filter, IFetchContainer<Permission> fetchs)
-        {
-            if (filter == null) throw new ArgumentNullException(nameof(filter));
+        if (filter == null) throw new ArgumentNullException(nameof(filter));
 
-            this.Context.Validator.Validate(filter);
+        this.Context.Validator.Validate(filter);
 
-            var innerFilter = new PermissionDirectInternalFilterModel(this.Context, filter);
+        var innerFilter = new PermissionDirectInternalFilterModel(this.Context, filter);
 
-            return this.GetListBy(innerFilter, fetchs);
-        }
+        return this.GetListBy(innerFilter, fetchs);
     }
 }

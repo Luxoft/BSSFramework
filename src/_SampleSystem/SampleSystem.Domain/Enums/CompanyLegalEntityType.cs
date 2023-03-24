@@ -1,9 +1,8 @@
-﻿namespace SampleSystem.Domain
+﻿namespace SampleSystem.Domain;
+
+public enum CompanyLegalEntityType
 {
-    public enum CompanyLegalEntityType
-    {
-        LegalEntity = 0,
-        Affiliate = 1,
-        Holding = 2
-    }
+    LegalEntity = 0,
+    Affiliate = 1,
+    Holding = 2
 }

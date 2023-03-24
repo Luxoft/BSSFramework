@@ -11,59 +11,58 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace Framework.WebApi.Utils.SL
+namespace Framework.WebApi.Utils.SL;
+
+public class SLJsonCompatibilityActionFilterAttribute : ActionFilterAttribute
 {
-    public class SLJsonCompatibilityActionFilterAttribute : ActionFilterAttribute
+    public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
-        public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+        if (context.ActionDescriptor.Parameters.Any())
         {
-            if (context.ActionDescriptor.Parameters.Any())
+            var jsonDoc = (JsonDocument)context.HttpContext.Items[nameof(JsonDocument)];
+
+            foreach (var parameter in context.ActionDescriptor.Parameters)
             {
-                var jsonDoc = (JsonDocument)context.HttpContext.Items[nameof(JsonDocument)];
+                var jsonPropValue = jsonDoc.RootElement.GetProperty(parameter.Name);
 
-                foreach (var parameter in context.ActionDescriptor.Parameters)
-                {
-                    var jsonPropValue = jsonDoc.RootElement.GetProperty(parameter.Name);
-
-                    context.ActionArguments[parameter.Name] = JsonSerializer.Deserialize(jsonPropValue.GetRawText(), parameter.ParameterType);
-                }
+                context.ActionArguments[parameter.Name] = JsonSerializer.Deserialize(jsonPropValue.GetRawText(), parameter.ParameterType);
             }
-
-            await base.OnActionExecutionAsync(context, next);
         }
 
-        public override void OnActionExecuted(ActionExecutedContext context)
+        await base.OnActionExecutionAsync(context, next);
+    }
+
+    public override void OnActionExecuted(ActionExecutedContext context)
+    {
+        if (context.Exception != null)
         {
-            if (context.Exception != null)
-            {
-                context.Result = new JsonResult(new { FaultData = context.Exception.Message });
+            context.Result = new JsonResult(new { FaultData = context.Exception.Message });
 
-                context.Exception = null;
-            }
-            else if (context.Result is ObjectResult objectResult)
-            {
-                context.Result = CreateJsonResult(context, objectResult.Value);
-            }
-            else if (context.Result is EmptyResult)
-            {
-                context.Result = CreateJsonResult(context, new object());
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
-
-            base.OnActionExecuted(context);
+            context.Exception = null;
+        }
+        else if (context.Result is ObjectResult objectResult)
+        {
+            context.Result = CreateJsonResult(context, objectResult.Value);
+        }
+        else if (context.Result is EmptyResult)
+        {
+            context.Result = CreateJsonResult(context, new object());
+        }
+        else
+        {
+            throw new NotImplementedException();
         }
 
-        private static JsonResult CreateJsonResult(ActionExecutedContext context, object value)
-        {
-            var actionDescriptor = (ControllerActionDescriptor)context.ActionDescriptor;
+        base.OnActionExecuted(context);
+    }
 
-            IDictionary<string, object> e = new ExpandoObject();
-            e.Add(actionDescriptor.ActionName + "Result", value);
+    private static JsonResult CreateJsonResult(ActionExecutedContext context, object value)
+    {
+        var actionDescriptor = (ControllerActionDescriptor)context.ActionDescriptor;
 
-            return new JsonResult(e);
-        }
+        IDictionary<string, object> e = new ExpandoObject();
+        e.Add(actionDescriptor.ActionName + "Result", value);
+
+        return new JsonResult(e);
     }
 }

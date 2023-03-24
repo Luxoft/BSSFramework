@@ -1,7 +1,6 @@
-﻿namespace System
+﻿namespace System;
+
+public interface ICloneable<out T> : ICloneable
 {
-    public interface ICloneable<out T> : ICloneable
-    {
-        new T Clone();
-    }
+    new T Clone();
 }

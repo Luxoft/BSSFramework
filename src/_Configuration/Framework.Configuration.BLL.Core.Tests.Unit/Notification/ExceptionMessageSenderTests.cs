@@ -21,183 +21,182 @@ using NSubstitute;
 
 using NUnit.Framework;
 
-namespace Framework.Configuration.BLL.Core.Tests.Unit.Notification
+namespace Framework.Configuration.BLL.Core.Tests.Unit.Notification;
+
+[TestFixture]
+public sealed class ExceptionMessageSenderTests : TestFixtureBase
 {
-    [TestFixture]
-    public sealed class ExceptionMessageSenderTests : TestFixtureBase
+    private static readonly MailAddress FromAddress = new MailAddress("support@luxoft.com");
+
+    private static readonly string[] ToAddresses = { "user@luxoft.com" };
+
+    private IAuthorizationBLLContext authorizationBLLContext;
+
+    private IMessageSender<Message> messageSender;
+
+    [SetUp]
+    public void SetUp()
     {
-        private static readonly MailAddress FromAddress = new MailAddress("support@luxoft.com");
+        this.authorizationBLLContext = this.Fixture.RegisterStub<IAuthorizationBLLContext>();
 
-        private static readonly string[] ToAddresses = { "user@luxoft.com" };
+        var configurationBLLContext = this.Fixture.RegisterStub<IConfigurationBLLContext>();
+        configurationBLLContext.Authorization.Returns(this.authorizationBLLContext);
 
-        private IAuthorizationBLLContext authorizationBLLContext;
+        this.messageSender = this.Fixture.RegisterStub<IMessageSender<Message>>();
 
-        private IMessageSender<Message> messageSender;
+        // register from address for class ctor
+        this.Fixture.Register(() => FromAddress);
 
-        [SetUp]
-        public void SetUp()
-        {
-            this.authorizationBLLContext = this.Fixture.RegisterStub<IAuthorizationBLLContext>();
+        // register recievers list for class ctor
+        this.Fixture.Register<IEnumerable<string>>(() => ToAddresses);
+    }
 
-            var configurationBLLContext = this.Fixture.RegisterStub<IConfigurationBLLContext>();
-            configurationBLLContext.Authorization.Returns(this.authorizationBLLContext);
+    [Test]
+    public void PublicInterface_NullArguments_ArgumentNullException()
+    {
+        // Arrange
+        var assertion = new GuardClauseAssertion(this.Fixture);
 
-            this.messageSender = this.Fixture.RegisterStub<IMessageSender<Message>>();
+        // Act
 
-            // register from address for class ctor
-            this.Fixture.Register(() => FromAddress);
+        // Assert
+        assertion.Verify(typeof(ExceptionMessageSender));
+    }
 
-            // register recievers list for class ctor
-            this.Fixture.Register<IEnumerable<string>>(() => ToAddresses);
-        }
+    [Test]
+    public void Send_LoginWithDomain_MessageWasSent()
+    {
+        // Arrange
 
-        [Test]
-        public void PublicInterface_NullArguments_ArgumentNullException()
-        {
-            // Arrange
-            var assertion = new GuardClauseAssertion(this.Fixture);
+        // Act
 
-            // Act
+        // Assert
+        this.TestMessageWasSent(@"luxoft\John");
+    }
 
-            // Assert
-            assertion.Verify(typeof(ExceptionMessageSender));
-        }
+    [Test]
+    public void Send_LoginWithoutDomain_MessageWasSent()
+    {
+        // Arrange
 
-        [Test]
-        public void Send_LoginWithDomain_MessageWasSent()
-        {
-            // Arrange
+        // Act
 
-            // Act
+        // Assert
+        this.TestMessageWasSent(@"John");
+    }
 
-            // Assert
-            this.TestMessageWasSent(@"luxoft\John");
-        }
+    [Test]
+    public void Send_SomeException_CorrectMessageWasSent()
+    {
+        // Arrange
+        var exception = this.Fixture.Create<ArgumentOutOfRangeException>();
+        var sender = this.Fixture.Create<ExceptionMessageSender>();
 
-        [Test]
-        public void Send_LoginWithoutDomain_MessageWasSent()
-        {
-            // Arrange
+        this.authorizationBLLContext
+            .CurrentPrincipalName
+            .Returns(@"luxoft\John");
 
-            // Act
+        Message sendedMessage = null;
 
-            // Assert
-            this.TestMessageWasSent(@"John");
-        }
+        this.messageSender.Send(Arg.Do<Message>(m => sendedMessage = m));
 
-        [Test]
-        public void Send_SomeException_CorrectMessageWasSent()
-        {
-            // Arrange
-            var exception = this.Fixture.Create<ArgumentOutOfRangeException>();
-            var sender = this.Fixture.Create<ExceptionMessageSender>();
+        // Act
+        sender.Send(exception);
 
-            this.authorizationBLLContext
-                .CurrentPrincipalName
-                .Returns(@"luxoft\John");
+        // Assert
+        sendedMessage.Sender.Should().Be(FromAddress);
+        sendedMessage.Receivers.Select(r => r.Address).Should().BeEquivalentTo(ToAddresses);
+        sendedMessage.Subject.Should().Be("Exception (John) - ArgumentOutOfRangeException - Specified argument was out of");
+        sendedMessage.Body.Should().Be(exception.ToFormattedString());
+    }
 
-            Message sendedMessage = null;
+    [Test]
+    public void Send_InheritorSpecifiesExcludeExceptionType_MessageWasNotSent()
+    {
+        // Arrange
+        var sender = this.Fixture.Create<TestingExceptionMessageSender>();
+        sender.SetExceptTypes(typeof(InvalidOperationException));
 
-            this.messageSender.Send(Arg.Do<Message>(m => sendedMessage = m));
+        // Act
+        sender.Send(
+                    this.Fixture.Create<InvalidOperationException>());
 
-            // Act
-            sender.Send(exception);
+        // Assert
+        this.messageSender.DidNotReceive().Send(Arg.Any<Message>());
+    }
 
-            // Assert
-            sendedMessage.Sender.Should().Be(FromAddress);
-            sendedMessage.Receivers.Select(r => r.Address).Should().BeEquivalentTo(ToAddresses);
-            sendedMessage.Subject.Should().Be("Exception (John) - ArgumentOutOfRangeException - Specified argument was out of");
-            sendedMessage.Body.Should().Be(exception.ToFormattedString());
-        }
+    [Test]
+    public void Send_ValidationException_MessageWasNotSent()
+    {
+        // Arrange
 
-        [Test]
-        public void Send_InheritorSpecifiesExcludeExceptionType_MessageWasNotSent()
-        {
-            // Arrange
-            var sender = this.Fixture.Create<TestingExceptionMessageSender>();
-            sender.SetExceptTypes(typeof(InvalidOperationException));
+        // Act
 
-            // Act
-            sender.Send(
-                this.Fixture.Create<InvalidOperationException>());
+        // Assert
+        this.TestMessageWasNotSent(this.Fixture.Create<ValidationException>());
+    }
 
-            // Assert
-            this.messageSender.DidNotReceive().Send(Arg.Any<Message>());
-        }
+    [Test]
+    public void Send_AggregateValidationException_MessageWasNotSent()
+    {
+        // Arrange
 
-        [Test]
-        public void Send_ValidationException_MessageWasNotSent()
-        {
-            // Arrange
+        // Act
 
-            // Act
+        // Assert
+        this.TestMessageWasNotSent(new AggregateValidationException(Enumerable.Empty<ValidationExceptionBase>()));
+    }
 
-            // Assert
-            this.TestMessageWasNotSent(this.Fixture.Create<ValidationException>());
-        }
+    private void TestMessageWasNotSent(Exception exception)
+    {
+        // Arrange
+        var sender = this.Fixture.Create<ExceptionMessageSender>();
 
-        [Test]
-        public void Send_AggregateValidationException_MessageWasNotSent()
-        {
-            // Arrange
+        // Act
+        sender.Send(exception);
 
-            // Act
+        // Assert
+        this.messageSender.DidNotReceive().Send(Arg.Any<Message>());
+    }
 
-            // Assert
-            this.TestMessageWasNotSent(new AggregateValidationException(Enumerable.Empty<ValidationExceptionBase>()));
-        }
+    private void TestMessageWasSent(string login)
+    {
+        // Arrange
+        this.authorizationBLLContext
+            .CurrentPrincipalName
+            .Returns(login);
 
-        private void TestMessageWasNotSent(Exception exception)
-        {
-            // Arrange
-            var sender = this.Fixture.Create<ExceptionMessageSender>();
+        var sender = this.Fixture.Create<ExceptionMessageSender>();
 
-            // Act
-            sender.Send(exception);
+        // Act
+        sender.Send(
+                    this.Fixture.Create<ArgumentOutOfRangeException>());
 
-            // Assert
-            this.messageSender.DidNotReceive().Send(Arg.Any<Message>());
-        }
+        // Assert
+        this.messageSender.DidNotReceive().Send(Arg.Any<Message>());
+    }
 
-        private void TestMessageWasSent(string login)
-        {
-            // Arrange
-            this.authorizationBLLContext
-                .CurrentPrincipalName
-                .Returns(login);
+    public class TestingExceptionMessageSender : ExceptionMessageSender
+    {
+        private IEnumerable<Type> exceptTypes;
 
-            var sender = this.Fixture.Create<ExceptionMessageSender>();
-
-            // Act
-            sender.Send(
-                this.Fixture.Create<ArgumentOutOfRangeException>());
-
-            // Assert
-            this.messageSender.DidNotReceive().Send(Arg.Any<Message>());
-        }
-
-        public class TestingExceptionMessageSender : ExceptionMessageSender
-        {
-            private IEnumerable<Type> exceptTypes;
-
-            public TestingExceptionMessageSender(
+        public TestingExceptionMessageSender(
                 [NotNull] IConfigurationBLLContext context,
                 [NotNull] IMessageSender<Message> messageSender,
                 [NotNull] MailAddress fromAddress,
                 [NotNull] IEnumerable<string> toAddresses)
                 : base(context, messageSender, fromAddress, toAddresses)
-            {
-            }
+        {
+        }
 
-            public void SetExceptTypes(params Type[] exceptTypes)
-            {
-                this.exceptTypes = exceptTypes;
-            }
+        public void SetExceptTypes(params Type[] exceptTypes)
+        {
+            this.exceptTypes = exceptTypes;
+        }
 
-            protected override IEnumerable<Type> GetExceptTypes()
-            {
-                return this.exceptTypes;
-            }
+        protected override IEnumerable<Type> GetExceptTypes()
+        {
+            return this.exceptTypes;
         }
     }
 }

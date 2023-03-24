@@ -10,70 +10,69 @@ using SampleSystem.Domain;
 using SampleSystem.TypeScriptGenerate.Configurations.Environments;
 using SampleSystem.TypeScriptGenerate.Configurations.Services;
 
-namespace SampleSystem.TypeScriptGenerate.Configurations.DTO
+namespace SampleSystem.TypeScriptGenerate.Configurations.DTO;
+
+public class MainDTOGeneratorConfiguration : TypeScriptDTOGeneratorConfiguration<MainGenerationEnvironment>
 {
-    public class MainDTOGeneratorConfiguration : TypeScriptDTOGeneratorConfiguration<MainGenerationEnvironment>
-    {
-        public MainDTOGeneratorConfiguration(MainGenerationEnvironment environment)
+    public MainDTOGeneratorConfiguration(MainGenerationEnvironment environment)
             : base(environment)
-        {
-        }
+    {
+    }
 
-        public override bool GenerateClientMappingService { get; } = true;
-
-
-        //public override IEnumerable<RequireJsModule> GetModules()
-        //{
-        //    var data = new List<RequireJsModule>
-        //               {
-        //                   new RequireJsModule("{ Guid, Convert }", "luxite/system", string.Empty),
-        //                   new RequireJsModule("* as Framework", "luxite/framework/framework", string.Empty),
-        //                   new RequireJsModule("{ Core }", "luxite/framework/framework")
-        //               };
-        //    return data;
-        //}
+    public override bool GenerateClientMappingService { get; } = true;
 
 
-        //protected override IEnumerable<Type> GetDomainTypes()
-        //{
-        //    yield return typeof(TestBusinessUnit);
-        //    yield return typeof(TestBusinessUnitType);
-        //}
-
-        protected override IGeneratePolicy<RoleFileType> CreateGeneratePolicy()
-        {
-            var facadePolicy = new DTOTypeScriptServiceGeneratePolicy<MainFacadeConfiguration>(this.Environment.ClientMainFacade)
-                           .Or(new DTOTypeScriptServiceGeneratePolicy<MainQueryFacadeConfiguration>(this.Environment.ClientQueryMainFacade))
-                           //.Or(new DTORoleGeneratePolicy(DTORole.Client, ClientDTORole.Update))
-                           ;
-
-            var tempPolicy = new TypeScriptDependencyGeneratePolicy(facadePolicy, this.GetTypeMaps());
+    //public override IEnumerable<RequireJsModule> GetModules()
+    //{
+    //    var data = new List<RequireJsModule>
+    //               {
+    //                   new RequireJsModule("{ Guid, Convert }", "luxite/system", string.Empty),
+    //                   new RequireJsModule("* as Framework", "luxite/framework/framework", string.Empty),
+    //                   new RequireJsModule("{ Core }", "luxite/framework/framework")
+    //               };
+    //    return data;
+    //}
 
 
-            //var tempRes0 = tempPolicy.Used(typeof(Employee), FileType.RichDTO);
-            //var tempRes1 = tempPolicy.Used(typeof(SampleStruct), ClientFileType.Struct);
-            var tempRes2 = tempPolicy.Used(typeof(SampleEnumForStructDependency), ClientFileType.Enum);
-            //var tempRes2 = tempPolicy.Used(typeof(Employee), ObservableFileType.ObservableRichDTO);
+    //protected override IEnumerable<Type> GetDomainTypes()
+    //{
+    //    yield return typeof(TestBusinessUnit);
+    //    yield return typeof(TestBusinessUnitType);
+    //}
 
-            //var tempRes1 = tempPolicy.Used(typeof(TestBusinessUnitType), FileType.ProjectionDTO);
-            //var tempRes2 = tempPolicy.Used(typeof(TestBusinessUnitType), ObservableFileType.ObservableProjectionDTO);
-
-            return new TypeScriptDependencyGeneratePolicy(
-
-                facadePolicy,
-                    this.GetTypeMaps())//.Except((RoleFileType identity) => identity.Name.Contains("vable"))
+    protected override IGeneratePolicy<RoleFileType> CreateGeneratePolicy()
+    {
+        var facadePolicy = new DTOTypeScriptServiceGeneratePolicy<MainFacadeConfiguration>(this.Environment.ClientMainFacade)
+                        .Or(new DTOTypeScriptServiceGeneratePolicy<MainQueryFacadeConfiguration>(this.Environment.ClientQueryMainFacade))
+                //.Or(new DTORoleGeneratePolicy(DTORole.Client, ClientDTORole.Update))
                 ;
-        }
+
+        var tempPolicy = new TypeScriptDependencyGeneratePolicy(facadePolicy, this.GetTypeMaps());
 
 
-        public override IEnumerable<RequireJsModule> GetModules()
+        //var tempRes0 = tempPolicy.Used(typeof(Employee), FileType.RichDTO);
+        //var tempRes1 = tempPolicy.Used(typeof(SampleStruct), ClientFileType.Struct);
+        var tempRes2 = tempPolicy.Used(typeof(SampleEnumForStructDependency), ClientFileType.Enum);
+        //var tempRes2 = tempPolicy.Used(typeof(Employee), ObservableFileType.ObservableRichDTO);
+
+        //var tempRes1 = tempPolicy.Used(typeof(TestBusinessUnitType), FileType.ProjectionDTO);
+        //var tempRes2 = tempPolicy.Used(typeof(TestBusinessUnitType), ObservableFileType.ObservableProjectionDTO);
+
+        return new TypeScriptDependencyGeneratePolicy(
+
+                                                      facadePolicy,
+                                                      this.GetTypeMaps())//.Except((RoleFileType identity) => identity.Name.Contains("vable"))
+                ;
+    }
+
+
+    public override IEnumerable<RequireJsModule> GetModules()
+    {
+        foreach (var baseModule in base.GetModules())
         {
-            foreach (var baseModule in base.GetModules())
-            {
-                yield return baseModule;
-            }
-
-            yield return new RequireJsModule("* as FrameworkCore", "../../FrameworkCore");
+            yield return baseModule;
         }
+
+        yield return new RequireJsModule("* as FrameworkCore", "../../FrameworkCore");
     }
 }

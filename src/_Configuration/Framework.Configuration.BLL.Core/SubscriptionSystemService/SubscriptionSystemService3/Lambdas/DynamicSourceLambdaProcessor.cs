@@ -8,88 +8,87 @@ using Framework.DomainDriven;
 
 using JetBrains.Annotations;
 
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas
-{
-    /// <summary>
-    /// Процессор лямбда-выражения типа "DynamicSource".
-    /// </summary>
-    /// <seealso cref="LambdaProcessor" />
-    public class DynamicSourceLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLContext>
+namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
+
+/// <summary>
+/// Процессор лямбда-выражения типа "DynamicSource".
+/// </summary>
+/// <seealso cref="LambdaProcessor" />
+public class DynamicSourceLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLContext>
         where TBLLContext : class
-    {
-        /// <summary>Создаёт экземпляр класса <see cref="DynamicSourceLambdaProcessor"/>.</summary>
-        /// <param name="bllContext">Контекст бизнес-логики.</param>
-        public DynamicSourceLambdaProcessor(
+{
+    /// <summary>Создаёт экземпляр класса <see cref="DynamicSourceLambdaProcessor"/>.</summary>
+    /// <param name="bllContext">Контекст бизнес-логики.</param>
+    public DynamicSourceLambdaProcessor(
             TBLLContext bllContext)
             : base(bllContext)
-        {
-        }
+    {
+    }
 
-        /// <inheritdoc/>
-        protected override string LambdaName => "DynamicSource";
+    /// <inheritdoc/>
+    protected override string LambdaName => "DynamicSource";
 
-        /// <summary>Исполняет указанное в подписке ламбда-выражение типа "DynamicSource".</summary>
-        /// <typeparam name="T">Тип доменного объекта.</typeparam>
-        /// <param name="subscription">Подписка.</param>
-        /// <param name="versions">Версии доменного объекта.</param>
-        /// <returns>Результат исполнения лямбда-выражения.</returns>
-        /// <exception cref="ArgumentNullException">Аргумент
-        /// subscription
-        /// или
-        /// versions равен null.
-        /// </exception>
-        public virtual IEnumerable<FilterItemIdentity> Invoke<T>(
+    /// <summary>Исполняет указанное в подписке ламбда-выражение типа "DynamicSource".</summary>
+    /// <typeparam name="T">Тип доменного объекта.</typeparam>
+    /// <param name="subscription">Подписка.</param>
+    /// <param name="versions">Версии доменного объекта.</param>
+    /// <returns>Результат исполнения лямбда-выражения.</returns>
+    /// <exception cref="ArgumentNullException">Аргумент
+    /// subscription
+    /// или
+    /// versions равен null.
+    /// </exception>
+    public virtual IEnumerable<FilterItemIdentity> Invoke<T>(
             [NotNull] Subscription subscription,
             [NotNull] DomainObjectVersions<T> versions)
             where T : class
+    {
+        if (subscription == null)
         {
-            if (subscription == null)
-            {
-                throw new ArgumentNullException(nameof(subscription));
-            }
-
-            if (versions == null)
-            {
-                throw new ArgumentNullException(nameof(versions));
-            }
-
-            var lambda = subscription.DynamicSource;
-
-            if (!DomainObjectCompliesLambdaRequiredMode(lambda, versions))
-            {
-                return Enumerable.Empty<FilterItemIdentity>();
-            }
-
-            var result = this.TryInvoke(subscription, versions, this.InvokeInternal);
-
-            return result;
+            throw new ArgumentNullException(nameof(subscription));
         }
 
-        private IEnumerable<FilterItemIdentity> InvokeInternal<T>(
-            Subscription subscription,
-            DomainObjectVersions<T> versions)
-            where T : class
+        if (versions == null)
         {
-            var result = this.InvokeWithTypedContext(subscription, versions);
-
-            return result;
+            throw new ArgumentNullException(nameof(versions));
         }
 
+        var lambda = subscription.DynamicSource;
 
-        [UsedImplicitly]
-        private IEnumerable<FilterItemIdentity> InvokeWithTypedContext<T>(
-            Subscription subscription,
-            DomainObjectVersions<T> versions)
-            where T : class
+        if (!DomainObjectCompliesLambdaRequiredMode(lambda, versions))
         {
-            var funcValue = subscription.Attachment?.FuncValue;
-
-            if (funcValue != null)
-            {
-                return this.TryCast<IEnumerable<FilterItemIdentity>>(funcValue(this.BllContext, versions));
-            }
-
             return Enumerable.Empty<FilterItemIdentity>();
         }
+
+        var result = this.TryInvoke(subscription, versions, this.InvokeInternal);
+
+        return result;
+    }
+
+    private IEnumerable<FilterItemIdentity> InvokeInternal<T>(
+            Subscription subscription,
+            DomainObjectVersions<T> versions)
+            where T : class
+    {
+        var result = this.InvokeWithTypedContext(subscription, versions);
+
+        return result;
+    }
+
+
+    [UsedImplicitly]
+    private IEnumerable<FilterItemIdentity> InvokeWithTypedContext<T>(
+            Subscription subscription,
+            DomainObjectVersions<T> versions)
+            where T : class
+    {
+        var funcValue = subscription.Attachment?.FuncValue;
+
+        if (funcValue != null)
+        {
+            return this.TryCast<IEnumerable<FilterItemIdentity>>(funcValue(this.BllContext, versions));
+        }
+
+        return Enumerable.Empty<FilterItemIdentity>();
     }
 }

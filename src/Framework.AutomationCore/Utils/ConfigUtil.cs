@@ -9,75 +9,50 @@ namespace Automation.Utils;
 
 public class ConfigUtil
 {
-    private readonly Lazy<string> ServerRootFolderLazy;
-    private readonly Lazy<string> TempFolderLazy;
-    private readonly Lazy<string> DataDirectory;
-    private readonly Lazy<bool> UseLocalDbLazy;
-    private readonly Lazy<bool> TestsParallelizeLazy;
-    private readonly Lazy<string> SystemNameLazy;
-    private readonly Lazy<TestRunMode> TestRunModeLazy;
-
+    private readonly Lazy<string> tempFolderLazy;
+    private readonly Lazy<string> dataDirectory;
+    private readonly Lazy<bool> useLocalDbLazy;
+    private readonly Lazy<bool> testsParallelizeLazy;
+    private readonly Lazy<string> systemNameLazy;
+    private readonly Lazy<TestRunMode> testRunModeLazy;
+    private readonly IConfiguration configuration;
+    private readonly Lazy<string> databaseCollation;
     public ConfigUtil(IConfiguration configuration)
     {
-        this.Configuration = configuration;
-        this.ServerRootFolderLazy = new Lazy<string>(() => this.Configuration["TestRunServerRootFolder"]);
-        this.TempFolderLazy = new Lazy<string>(
-            () =>
-            {
-                var path = this.Configuration["TempFolder"];
+        this.configuration = configuration;
+        this.useLocalDbLazy = new Lazy<bool>(() => this.configuration.GetValue<bool>("UseLocalDb"));
+        this.testsParallelizeLazy = new Lazy<bool>(() => this.configuration.GetValue<bool>("TestsParallelize"));
+        this.systemNameLazy = new Lazy<string>(() => this.configuration.GetValue<string>("SystemName"));
+        this.databaseCollation = new Lazy<string>(() => this.configuration.GetValue<string>("DatabaseCollation"));
+        this.testRunModeLazy = new Lazy<TestRunMode>(
+            () => this.configuration.GetValue<TestRunMode>("TestRunMode", TestRunMode.DefaultRunModeOnEmptyDatabase));
 
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-
-                return path;
-            });
-        this.DataDirectory = new Lazy<string>(
-            () =>
-            {
-                if (!Directory.Exists(Path.Combine(this.ServerRootFolderLazy.Value, "data")))
-                {
-                    Directory.CreateDirectory(Path.Combine(this.ServerRootFolderLazy.Value, "data"));
-                }
-
-                return Path.Combine(this.ServerRootFolderLazy.Value, "data");
-            });
-        this.UseLocalDbLazy = new Lazy<bool>(() => bool.Parse(this.Configuration["UseLocalDb"]));
-
-        this.TestsParallelizeLazy = new Lazy<bool>(() => bool.Parse(this.Configuration["TestsParallelize"]));
-        this.SystemNameLazy = new Lazy<string>(() => this.Configuration["SystemName"]);
-        this.TestRunModeLazy = new Lazy<TestRunMode>(
-            () =>
-            {
-                if (!Enum.TryParse(this.Configuration["TestRunMode"], out TestRunMode runMode))
-                {
-                    runMode = TestRunMode.DefaultRunModeOnEmptyDatabase;
-                }
-
-                return runMode;
-            });
+        var serverRootFolderLazy = new Lazy<string>(() => this.configuration.GetValue<string>("TestRunServerRootFolder"));
+        this.dataDirectory = new Lazy<string>(
+            () => this.CheckDirectoryAndCreateIfNotExists(Path.Combine(serverRootFolderLazy.Value, "data")));
+        this.tempFolderLazy = new Lazy<string>(
+            () => this.CheckDirectoryAndCreateIfNotExists(Path.Combine(serverRootFolderLazy.Value, "temp")));
     }
-
-    private IConfiguration Configuration;
 
     public string ComputerName => Environment.MachineName;
 
-    public string DbDataDirectory => this.DataDirectory.Value;
+    public string DbDataDirectory => this.dataDirectory.Value;
 
-    public TestRunMode TestRunMode => this.TestRunModeLazy.Value;
+    public TestRunMode TestRunMode => this.testRunModeLazy.Value;
 
-    public string TempFolder => this.TempFolderLazy.Value;
+    public string TempFolder => this.tempFolderLazy.Value;
 
-    public bool UseLocalDb => this.UseLocalDbLazy.Value;
+    public bool UseLocalDb => this.useLocalDbLazy.Value;
 
-    public bool TestsParallelize => this.TestsParallelizeLazy.Value;
+    public bool TestsParallelize => this.testsParallelizeLazy.Value;
 
-    public string SystemName => this.SystemNameLazy.Value;
+    public string SystemName => this.systemNameLazy.Value;
+
+    public string DatabaseCollation => this.databaseCollation.Value;
 
     public string GetConnectionString(string connectionStringName)
     {
-        var connectionString = this.Configuration.GetConnectionString(connectionStringName);
+        var connectionString = this.configuration.GetConnectionString(connectionStringName);
 
         if (this.UseLocalDb)
         {
@@ -96,4 +71,14 @@ public class ConfigUtil
 
     public string GetDataSource(string connectionString) =>
         DataSourceRegex.Matches(connectionString).First().Value;
+
+    private string CheckDirectoryAndCreateIfNotExists(string path)
+    {
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path!);
+        }
+
+        return path;
+    }
 }

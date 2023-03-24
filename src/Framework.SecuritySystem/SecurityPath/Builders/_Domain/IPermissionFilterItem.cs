@@ -1,11 +1,10 @@
-﻿namespace Framework.SecuritySystem
+﻿namespace Framework.SecuritySystem;
+
+public interface IPermissionFilterItem<out TIdent>
 {
-    public interface IPermissionFilterItem<out TIdent>
-    {
-        IPermissionFilterEntity<TIdent> Entity { get; }
+    IPermissionFilterEntity<TIdent> Entity { get; }
 
-        TIdent ContextEntityId { get; }
+    TIdent ContextEntityId { get; }
 
-        IEntityType<TIdent> EntityType { get; }
-    }
+    IEntityType<TIdent> EntityType { get; }
 }

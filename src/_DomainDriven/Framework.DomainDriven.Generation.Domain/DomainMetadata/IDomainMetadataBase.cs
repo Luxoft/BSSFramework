@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Framework.DomainDriven.Generation.Domain
+namespace Framework.DomainDriven.Generation.Domain;
+
+public interface IDomainMetadataBase
 {
-    public interface IDomainMetadataBase
-    {
-        PropertyInfo IdentityProperty { get; }
+    PropertyInfo IdentityProperty { get; }
 
 
-        Type DomainObjectBaseType { get; }
+    Type DomainObjectBaseType { get; }
 
-        Type PersistentDomainObjectBaseType { get; }
+    Type PersistentDomainObjectBaseType { get; }
 
-        Type AuditPersistentDomainObjectBaseType { get; }
-    }
+    Type AuditPersistentDomainObjectBaseType { get; }
 }

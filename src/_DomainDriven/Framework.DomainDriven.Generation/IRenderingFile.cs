@@ -1,7 +1,6 @@
-﻿namespace Framework.DomainDriven.Generation
+﻿namespace Framework.DomainDriven.Generation;
+
+public interface IRenderingFile<out TRenderData> : IFileHeader
 {
-    public interface IRenderingFile<out TRenderData> : IFileHeader
-    {
-        TRenderData GetRenderData();
-    }
+    TRenderData GetRenderData();
 }

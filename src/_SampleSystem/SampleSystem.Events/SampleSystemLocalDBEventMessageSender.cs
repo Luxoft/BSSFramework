@@ -8,21 +8,20 @@ using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
 
-namespace SampleSystem.Events
-{
-    public class SampleSystemLocalDBEventMessageSender : LocalDBEventMessageSender<ISampleSystemBLLContext, PersistentDomainObjectBase, EventDTOBase>
-    {
-        public SampleSystemLocalDBEventMessageSender([NotNull] ISampleSystemBLLContext context, IConfigurationBLLContext configurationContext)
-            : base(context, configurationContext)
-        {
-        }
+namespace SampleSystem.Events;
 
-        protected override EventDTOBase ToEventDTOBase<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs)
-        {
-            return DomainEventDTOMapper<TDomainObject, TOperation>.MapToEventDTO(
-                new SampleSystemServerPrimitiveDTOMappingService(this.Context),
-                domainObjectEventArgs.DomainObject,
-                domainObjectEventArgs.Operation);
-        }
+public class SampleSystemLocalDBEventMessageSender : LocalDBEventMessageSender<ISampleSystemBLLContext, PersistentDomainObjectBase, EventDTOBase>
+{
+    public SampleSystemLocalDBEventMessageSender([NotNull] ISampleSystemBLLContext context, IConfigurationBLLContext configurationContext)
+            : base(context, configurationContext)
+    {
+    }
+
+    protected override EventDTOBase ToEventDTOBase<TDomainObject, TOperation>(IDomainOperationSerializeData<TDomainObject, TOperation> domainObjectEventArgs)
+    {
+        return DomainEventDTOMapper<TDomainObject, TOperation>.MapToEventDTO(
+                                                                             new SampleSystemServerPrimitiveDTOMappingService(this.Context),
+                                                                             domainObjectEventArgs.DomainObject,
+                                                                             domainObjectEventArgs.Operation);
     }
 }

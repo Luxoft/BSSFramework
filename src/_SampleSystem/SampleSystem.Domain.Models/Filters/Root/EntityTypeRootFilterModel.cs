@@ -1,7 +1,6 @@
-﻿namespace SampleSystem.Domain
-{
-    public class EmployeeRootFilterModel : DomainObjectRootFilterModel<Employee>
-    {
+﻿namespace SampleSystem.Domain;
 
-    }
+public class EmployeeRootFilterModel : DomainObjectRootFilterModel<Employee>
+{
+
 }

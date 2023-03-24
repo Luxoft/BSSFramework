@@ -1,18 +1,17 @@
 ﻿using System;
 
-namespace Framework.Security
+namespace Framework.Security;
+
+[AttributeUsage(AttributeTargets.Field)]
+public abstract class ApproveOperationAttribute : Attribute
 {
-    [AttributeUsage(AttributeTargets.Field)]
-    public abstract class ApproveOperationAttribute : Attribute
+    public readonly Enum Operation;
+
+
+    protected ApproveOperationAttribute(Enum operation)
     {
-        public readonly Enum Operation;
+        if (operation == null) throw new ArgumentNullException(nameof(operation));
 
-
-        protected ApproveOperationAttribute(Enum operation)
-        {
-            if (operation == null) throw new ArgumentNullException(nameof(operation));
-
-            this.Operation = operation;
-        }
+        this.Operation = operation;
     }
 }

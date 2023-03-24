@@ -1,11 +1,10 @@
 ﻿using Framework.DomainDriven.BLL;
 using Framework.Security;
 
-namespace SampleSystem.Domain
+namespace SampleSystem.Domain;
+
+[CustomContextSecurity]
+[BLLViewRole]
+public class TestCustomContextSecurityObj : BaseDirectory
 {
-    [CustomContextSecurity]
-    [BLLViewRole]
-    public class TestCustomContextSecurityObj : BaseDirectory
-    {
-    }
 }

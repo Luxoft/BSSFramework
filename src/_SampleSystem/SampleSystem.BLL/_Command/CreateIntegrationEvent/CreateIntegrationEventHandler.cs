@@ -24,7 +24,7 @@ public class CreateIntegrationEventHandler : IRequestHandler<CreateIntegrationEv
         this.countryBllFactory = countryBllFactory;
     }
 
-    public Task<Unit> Handle(CreateIntegrationEventCommand request, CancellationToken cancellationToken)
+    public Task Handle(CreateIntegrationEventCommand request, CancellationToken cancellationToken)
     {
         var country = new Country { Code = "test11", Name = "test11", Culture = "test11", NameNative = "test11" };
         this.countryBllFactory.Create()

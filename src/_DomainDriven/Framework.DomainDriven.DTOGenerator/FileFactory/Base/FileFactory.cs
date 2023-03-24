@@ -6,39 +6,38 @@ using System.Runtime.Serialization;
 using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
 
-namespace Framework.DomainDriven.DTOGenerator
-{
-    public abstract class FileFactory<TConfiguration, TFileType> : CodeFileFactory<TConfiguration, TFileType>, IFileFactory<TConfiguration, TFileType>
+namespace Framework.DomainDriven.DTOGenerator;
+
+public abstract class FileFactory<TConfiguration, TFileType> : CodeFileFactory<TConfiguration, TFileType>, IFileFactory<TConfiguration, TFileType>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
         where TFileType : FileType
-    {
-        protected FileFactory(TConfiguration configuration, Type domainType)
+{
+    protected FileFactory(TConfiguration configuration, Type domainType)
             : base(configuration, domainType)
-        {
-            this.CodeTypeReferenceService = new PropertyCodeTypeReferenceService<TConfiguration>(this.Configuration);
-        }
+    {
+        this.CodeTypeReferenceService = new PropertyCodeTypeReferenceService<TConfiguration>(this.Configuration);
+    }
 
 
-        public string FileTypeName => this.FileType.Name;
+    public string FileTypeName => this.FileType.Name;
 
-        public virtual IPropertyCodeTypeReferenceService CodeTypeReferenceService { get; }
+    public virtual IPropertyCodeTypeReferenceService CodeTypeReferenceService { get; }
 
 
-        protected CodeAttributeDeclaration GetDataContractCodeAttributeDeclaration(string overrideNamespace = null)
-        {
-            var attr = this.DomainType.Maybe(domainType => domainType.GetCustomAttribute<DataContractAttribute>());
+    protected CodeAttributeDeclaration GetDataContractCodeAttributeDeclaration(string overrideNamespace = null)
+    {
+        var attr = this.DomainType.Maybe(domainType => domainType.GetCustomAttribute<DataContractAttribute>());
 
-            return attr == null
-                 ? new CodeAttributeDeclaration(new CodeTypeReference(typeof(DataContractAttribute)),
-                                                new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(overrideNamespace ?? this.Configuration.DataContractNamespace)))
+        return attr == null
+                       ? new CodeAttributeDeclaration(new CodeTypeReference(typeof(DataContractAttribute)),
+                                                      new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(overrideNamespace ?? this.Configuration.DataContractNamespace)))
 
-                 : new CodeAttributeDeclaration(new CodeTypeReference(typeof(DataContractAttribute)),
+                       : new CodeAttributeDeclaration(new CodeTypeReference(typeof(DataContractAttribute)),
 
-                                                new[]
-                                                {
-                                                    attr.Name.Maybe(name => new CodeAttributeArgument("Name", new CodePrimitiveExpression(name))),
-                                                    attr.Namespace.Maybe(ns => new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(ns)))
-                                                }.Where(v => v != null).ToArray());
-        }
+                                                      new[]
+                                                      {
+                                                              attr.Name.Maybe(name => new CodeAttributeArgument("Name", new CodePrimitiveExpression(name))),
+                                                              attr.Namespace.Maybe(ns => new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(ns)))
+                                                      }.Where(v => v != null).ToArray());
     }
 }

@@ -1,14 +1,13 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Framework.Notification.DTO
-{
-    [DataContract]
-    public class NotificationMessage
-    {
-        [DataMember]
-        public bool IsBodyHtml;
+namespace Framework.Notification.DTO;
 
-        [DataMember]
-        public string Message;
-    }
+[DataContract]
+public class NotificationMessage
+{
+    [DataMember]
+    public bool IsBodyHtml;
+
+    [DataMember]
+    public string Message;
 }

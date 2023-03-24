@@ -9,17 +9,17 @@ using Framework.Validation;
 
 using JetBrains.Annotations;
 
-namespace Framework.DomainDriven.BLL.Security
-{
-    public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent, TBLLFactoryContainer> :
+namespace Framework.DomainDriven.BLL.Security;
+
+public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent, TBLLFactoryContainer> :
         DefaultBLLBaseContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent, TBLLFactoryContainer>,
         IAccessDeniedExceptionServiceContainer<TPersistentDomainObjectBase>
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
         where TDomainObjectBase : class
         where TBLLFactoryContainer : IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>
-    {
-        protected SecurityBLLBaseContext(
+{
+    protected SecurityBLLBaseContext(
             [NotNull] IServiceProvider serviceProvider,
             [NotNull] IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
             [NotNull] IObjectStateService objectStateService,
@@ -32,12 +32,11 @@ namespace Framework.DomainDriven.BLL.Security
 
             this.AccessDeniedExceptionService = accessDeniedExceptionService ?? throw new ArgumentNullException(nameof(accessDeniedExceptionService));
 
-        public virtual IAccessDeniedExceptionService<TPersistentDomainObjectBase> AccessDeniedExceptionService { get; }
+    public virtual IAccessDeniedExceptionService<TPersistentDomainObjectBase> AccessDeniedExceptionService { get; }
 
-        /// <inheritdoc />
-        public override bool AllowedExpandTreeParents<TDomainObject>() => false;
+    /// <inheritdoc />
+    public override bool AllowedExpandTreeParents<TDomainObject>() => false;
 
-        IAccessDeniedExceptionService IAccessDeniedExceptionServiceContainer.AccessDeniedExceptionService =>
+    IAccessDeniedExceptionService IAccessDeniedExceptionServiceContainer.AccessDeniedExceptionService =>
             this.AccessDeniedExceptionService;
-    }
 }

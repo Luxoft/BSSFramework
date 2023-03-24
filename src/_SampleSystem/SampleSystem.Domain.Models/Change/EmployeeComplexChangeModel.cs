@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace SampleSystem.Domain
+namespace SampleSystem.Domain;
+
+public class EmployeeComplexChangeModel : DomainObjectComplexChangeModel<Employee>
 {
-    public class EmployeeComplexChangeModel : DomainObjectComplexChangeModel<Employee>
-    {
-        public string Email { get; set; }
-    }
+    public string Email { get; set; }
 }

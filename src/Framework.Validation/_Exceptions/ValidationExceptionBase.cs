@@ -1,21 +1,20 @@
 ﻿using System;
 
-namespace Framework.Validation
+namespace Framework.Validation;
+
+public class ValidationExceptionBase : Exception
 {
-    public class ValidationExceptionBase : Exception
+    protected ValidationExceptionBase()
     {
-        protected ValidationExceptionBase()
-        {
-        }
+    }
 
-        protected ValidationExceptionBase(string message)
+    protected ValidationExceptionBase(string message)
             : base(message)
-        {
-        }
+    {
+    }
 
-        protected ValidationExceptionBase(string message, Exception inner)
+    protected ValidationExceptionBase(string message, Exception inner)
             : base(message, inner)
-        {
-        }
+    {
     }
 }

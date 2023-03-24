@@ -3,13 +3,12 @@ using System.Runtime.Serialization;
 using Framework.Authorization.Domain;
 using Framework.Persistent;
 
-namespace Framework.Authorization.Generated.DTO
+namespace Framework.Authorization.Generated.DTO;
+
+public partial struct SecurityEntityIdentityDTO
 {
-    public partial struct SecurityEntityIdentityDTO
+    public SecurityEntity ToDomainObject()
     {
-        public SecurityEntity ToDomainObject()
-        {
-            return new SecurityEntity { Id = this.Id };
-        }
+        return new SecurityEntity { Id = this.Id };
     }
 }

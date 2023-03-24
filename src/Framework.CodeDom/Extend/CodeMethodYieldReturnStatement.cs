@@ -1,9 +1,8 @@
 ﻿using System.CodeDom;
 
-namespace Framework.CodeDom
+namespace Framework.CodeDom;
+
+public class CodeMethodYieldReturnStatement : CodeStatement
 {
-    public class CodeMethodYieldReturnStatement : CodeStatement
-    {
-        public CodeExpression Expression { get; set; }
-    }
+    public CodeExpression Expression { get; set; }
 }

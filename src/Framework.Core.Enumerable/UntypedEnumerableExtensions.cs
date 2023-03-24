@@ -2,19 +2,18 @@
 using System.Collections;
 using System.Linq;
 
-namespace Framework.Core
+namespace Framework.Core;
+
+public static class UntypedEnumerableExtensions
 {
-    public static class UntypedEnumerableExtensions
+    public static Array ToArray(this IEnumerable source, Type elementType)
     {
-        public static Array ToArray(this IEnumerable source, Type elementType)
-        {
-            var sourceArr = source.OfType<object>().ToArray();
+        var sourceArr = source.OfType<object>().ToArray();
 
-            var array = Array.CreateInstance(elementType, sourceArr.Length);
+        var array = Array.CreateInstance(elementType, sourceArr.Length);
 
-            sourceArr.CopyTo(array, 0);
+        sourceArr.CopyTo(array, 0);
 
-            return array;
-        }
+        return array;
     }
 }

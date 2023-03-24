@@ -1,71 +1,67 @@
 ﻿using System;
 
 using ASP;
-using Automation.ServiceEnvironment;
 using FluentAssertions;
 
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SampleSystem.Domain;
-using SampleSystem.IntegrationTests.__Support.ServiceEnvironment;
 using SampleSystem.IntegrationTests.__Support.TestData;
 
-namespace SampleSystem.IntegrationTests
+namespace SampleSystem.IntegrationTests;
+
+[TestClass]
+public class SubscriptionCustomNotPersistentModelTests : TestBase
 {
-    [TestClass]
-    public class SubscriptionCustomNotPersistentModelTests : TestBase
+    [TestMethod]
+    public void CustomNotPersistentNotificationModel_Always_ShouldNotThrowException()
     {
-        [TestMethod]
-        public void CustomNotPersistentNotificationModel_Always_ShouldNotThrowException()
-        {
-            // Arrange
-            var countryId = this.Evaluate(DBSessionMode.Write, context =>
-            {
-                var country = new Country
-                {
-                    Code = Guid.NewGuid().ToString(),
-                    NameNative = Guid.NewGuid().ToString(),
-                    Culture = Guid.NewGuid().ToString(),
-                    Name = Guid.NewGuid().ToString()
-                };
+        // Arrange
+        var countryId = this.Evaluate(DBSessionMode.Write, context =>
+                                                           {
+                                                               var country = new Country
+                                                                             {
+                                                                                     Code = Guid.NewGuid().ToString(),
+                                                                                     NameNative = Guid.NewGuid().ToString(),
+                                                                                     Culture = Guid.NewGuid().ToString(),
+                                                                                     Name = Guid.NewGuid().ToString()
+                                                                             };
 
-                context.Logics.Country.Save(country);
+                                                               context.Logics.Country.Save(country);
 
-                for (var i = 0; i < 5; i++)
-                {
-                    context.Logics.Location.Save(new Location
-                    {
-                        Country = country,
-                        Name = Guid.NewGuid().ToString(),
-                        Code = i + 1,
-                        CloseDate = 15
-                    });
-                }
+                                                               for (var i = 0; i < 5; i++)
+                                                               {
+                                                                   context.Logics.Location.Save(new Location
+                                                                       {
+                                                                               Country = country,
+                                                                               Name = Guid.NewGuid().ToString(),
+                                                                               Code = i + 1,
+                                                                               CloseDate = 15
+                                                                       });
+                                                               }
 
-                return country.Id;
-            });
+                                                               return country.Id;
+                                                           });
 
-            this.ClearModifications();
+        this.ClearModifications();
 
-            // Act
-            this.Evaluate(DBSessionMode.Write, context =>
-            {
-                var bll = context.Logics.Country;
+        // Act
+        this.Evaluate(DBSessionMode.Write, context =>
+                                           {
+                                               var bll = context.Logics.Country;
 
-                var country = bll.GetById(countryId, true);
+                                               var country = bll.GetById(countryId, true);
 
-                country.Name = $"{country.Name} renamed";
+                                               country.Name = $"{country.Name} renamed";
 
-                bll.Save(country);
-            });
+                                               bll.Save(country);
+                                           });
 
-            this.GetConfigurationControllerEvaluator(DefaultConstants.NOTIFICATION_ADMIN).Evaluate(c => c.ProcessModifications(1000));
+        this.GetConfigurationControllerEvaluator(DefaultConstants.NOTIFICATION_ADMIN).Evaluate(c => c.ProcessModifications(1000));
 
-            var notifications = this.GetNotifications();
+        var notifications = this.GetNotifications();
 
-            // Assert
-            notifications.Should().Contain(x => x.TechnicalInformation.MessageTemplateCode == typeof(_DomainChangedByRecipients_NotPersistentCustomModel_MessageTemplate_cshtml).FullName);
-        }
+        // Assert
+        notifications.Should().Contain(x => x.TechnicalInformation.MessageTemplateCode == typeof(_DomainChangedByRecipients_NotPersistentCustomModel_MessageTemplate_cshtml).FullName);
     }
 }

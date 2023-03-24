@@ -1,39 +1,38 @@
 ﻿using Framework.Persistent;
 
-namespace SampleSystem.Domain
+namespace SampleSystem.Domain;
+
+public class HRDepartmentEmployeePosition : AuditPersistentDomainObjectBase, IDetail<HRDepartment>
 {
-    public class HRDepartmentEmployeePosition : AuditPersistentDomainObjectBase, IDetail<HRDepartment>
+    private EmployeePosition employeePosition;
+    private HRDepartment hrDepartment;
+
+    public HRDepartmentEmployeePosition(HRDepartment hrDepartment)
     {
-        private EmployeePosition employeePosition;
-        private HRDepartment hrDepartment;
+        this.hrDepartment = hrDepartment;
+        hrDepartment.AddDetail(this);
+    }
 
-        public HRDepartmentEmployeePosition(HRDepartment hrDepartment)
-        {
-            this.hrDepartment = hrDepartment;
-            hrDepartment.AddDetail(this);
-        }
+    public HRDepartmentEmployeePosition()
+    {
+    }
 
-        public HRDepartmentEmployeePosition()
-        {
-        }
+    [Framework.Restriction.UniqueElement]
+    public virtual EmployeePosition EmployeePosition
+    {
+        get { return this.employeePosition; }
+        set { this.employeePosition = value; }
+    }
 
-        [Framework.Restriction.UniqueElement]
-        public virtual EmployeePosition EmployeePosition
-        {
-            get { return this.employeePosition; }
-            set { this.employeePosition = value; }
-        }
+    [Framework.Restriction.UniqueElement]
+    public virtual HRDepartment HrDepartment
+    {
+        get { return this.hrDepartment; }
+        set { this.hrDepartment = value; }
+    }
 
-        [Framework.Restriction.UniqueElement]
-        public virtual HRDepartment HrDepartment
-        {
-            get { return this.hrDepartment; }
-            set { this.hrDepartment = value; }
-        }
-
-        HRDepartment IDetail<HRDepartment>.Master
-        {
-            get { return this.hrDepartment; }
-        }
+    HRDepartment IDetail<HRDepartment>.Master
+    {
+        get { return this.hrDepartment; }
     }
 }

@@ -7,86 +7,85 @@ using Framework.Restriction;
 
 using JetBrains.Annotations;
 
-namespace Framework.Configuration.Domain.Reports
+namespace Framework.Configuration.Domain.Reports;
+
+[UniqueGroup]
+[NotAuditedClass]
+[BLLViewRole]
+[ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.Disabled)]
+public class ReportParameter : AuditPersistentDomainObjectBase, IDetail<Report>
 {
-    [UniqueGroup]
-    [NotAuditedClass]
-    [BLLViewRole]
-    [ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.Disabled)]
-    public class ReportParameter : AuditPersistentDomainObjectBase, IDetail<Report>
+    private Report report;
+
+    private string typeName;
+
+    private string name;
+
+    private bool isRequired;
+
+    private int order;
+
+    private string displayValueProperty;
+
+    private bool isCollection;
+
+    public ReportParameter([NotNull] Report report)
     {
-        private Report report;
+        if (report == null) throw new ArgumentNullException(nameof(report));
 
-        private string typeName;
+        this.report = report;
+        this.report.AddDetail(this);
+    }
 
-        private string name;
+    protected internal ReportParameter()
+    {
+    }
 
-        private bool isRequired;
+    [UniqueElement]
+    public virtual Report Report
+    {
+        get { return this.report; }
+    }
 
-        private int order;
+    [UniqueElement]
+    public virtual string Name
+    {
+        get { return this.name; }
+        set { this.name = value; }
+    }
 
-        private string displayValueProperty;
+    public virtual string TypeName
+    {
+        get { return this.typeName; }
+        set { this.typeName = value; }
+    }
 
-        private bool isCollection;
+    public virtual bool IsCollection
+    {
+        get { return this.isCollection; }
+        set { this.isCollection = value; }
+    }
 
-        public ReportParameter([NotNull] Report report)
-        {
-            if (report == null) throw new ArgumentNullException(nameof(report));
+    public virtual bool IsRequired
+    {
+        get { return this.isRequired; }
+        set { this.isRequired = value; }
+    }
 
-            this.report = report;
-            this.report.AddDetail(this);
-        }
+    Report IDetail<Report>.Master
+    {
+        get { return this.Report; }
+    }
 
-        protected internal ReportParameter()
-        {
-        }
+    public virtual int Order
+    {
+        get { return this.order; }
+        set { this.order = value; }
+    }
 
-        [UniqueElement]
-        public virtual Report Report
-        {
-            get { return this.report; }
-        }
-
-        [UniqueElement]
-        public virtual string Name
-        {
-            get { return this.name; }
-            set { this.name = value; }
-        }
-
-        public virtual string TypeName
-        {
-            get { return this.typeName; }
-            set { this.typeName = value; }
-        }
-
-        public virtual bool IsCollection
-        {
-            get { return this.isCollection; }
-            set { this.isCollection = value; }
-        }
-
-        public virtual bool IsRequired
-        {
-            get { return this.isRequired; }
-            set { this.isRequired = value; }
-        }
-
-        Report IDetail<Report>.Master
-        {
-            get { return this.Report; }
-        }
-
-        public virtual int Order
-        {
-            get { return this.order; }
-            set { this.order = value; }
-        }
-
-        public virtual string DisplayValueProperty
-        {
-            get { return this.displayValueProperty; }
-            set { this.displayValueProperty = value; }
-        }
+    public virtual string DisplayValueProperty
+    {
+        get { return this.displayValueProperty; }
+        set { this.displayValueProperty = value; }
     }
 }

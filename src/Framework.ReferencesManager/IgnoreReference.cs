@@ -1,8 +1,7 @@
 ﻿using System;
 
-namespace Framework.ReferencesManager
+namespace Framework.ReferencesManager;
+
+public class IgnoreReference : Attribute
 {
-    public class IgnoreReference : Attribute
-    {
-    }
 }

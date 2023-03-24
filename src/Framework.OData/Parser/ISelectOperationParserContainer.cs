@@ -1,9 +1,8 @@
 ﻿using Framework.Core.Serialization;
 
-namespace Framework.OData
+namespace Framework.OData;
+
+public interface ISelectOperationParserContainer
 {
-    public interface ISelectOperationParserContainer
-    {
-        IParser<string, SelectOperation> SelectOperationParser { get; }
-    }
+    IParser<string, SelectOperation> SelectOperationParser { get; }
 }

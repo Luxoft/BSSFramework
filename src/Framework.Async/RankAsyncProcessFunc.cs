@@ -1,6 +1,5 @@
-﻿namespace Framework.Async
+﻿namespace Framework.Async;
+
+public static class RankAsyncProcessFunc
 {
-    public static class RankAsyncProcessFunc
-    {
-    }
 }

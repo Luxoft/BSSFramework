@@ -11,91 +11,90 @@ using Framework.Projection;
 
 using JetBrains.Annotations;
 
-namespace Framework.DomainDriven.ProjectionGenerator
-{
-    public class CustomProjectionFileFactoryBase<TConfiguration> : CodeFileFactory<TConfiguration, FileType>
+namespace Framework.DomainDriven.ProjectionGenerator;
+
+public class CustomProjectionFileFactoryBase<TConfiguration> : CodeFileFactory<TConfiguration, FileType>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
-    {
-        public CustomProjectionFileFactoryBase(TConfiguration configuration, [NotNull] Type domainType)
+{
+    public CustomProjectionFileFactoryBase(TConfiguration configuration, [NotNull] Type domainType)
             : base(configuration, domainType)
+    {
+    }
+
+
+    public override FileType FileType { get; } = FileType.CustomProjectionBase;
+
+    public override CodeTypeReference BaseReference => this.DomainType.BaseType.ToTypeReference(); // this.Configuration.Environment.GetProjectionBaseType(this.DomainType).ToTypeReference();
+
+
+    protected override CodeTypeDeclaration GetCodeTypeDeclaration()
+    {
+        return new CodeTypeDeclaration
+               {
+                       Name = this.Name,
+                       TypeAttributes = TypeAttributes.Public | TypeAttributes.Abstract,
+                       IsPartial = true,
+               };
+    }
+
+    protected override IEnumerable<CodeAttributeDeclaration> GetCustomAttributes()
+    {
         {
-        }
+            var projectionAttr = this.DomainType.GetCustomAttribute<ProjectionAttribute>();
 
-
-        public override FileType FileType { get; } = FileType.CustomProjectionBase;
-
-        public override CodeTypeReference BaseReference => this.DomainType.BaseType.ToTypeReference(); // this.Configuration.Environment.GetProjectionBaseType(this.DomainType).ToTypeReference();
-
-
-        protected override CodeTypeDeclaration GetCodeTypeDeclaration()
-        {
-            return new CodeTypeDeclaration
+            if (projectionAttr != null)
             {
-                Name = this.Name,
-                TypeAttributes = TypeAttributes.Public | TypeAttributes.Abstract,
-                IsPartial = true,
-            };
-        }
-
-        protected override IEnumerable<CodeAttributeDeclaration> GetCustomAttributes()
-        {
-            {
-                var projectionAttr = this.DomainType.GetCustomAttribute<ProjectionAttribute>();
-
-                if (projectionAttr != null)
-                {
-                    yield return projectionAttr.ToAttributeDeclaration();
-                }
+                yield return projectionAttr.ToAttributeDeclaration();
             }
         }
+    }
 
-        private IEnumerable<PropertyInfo> GetProperties(bool includeBase)
+    private IEnumerable<PropertyInfo> GetProperties(bool includeBase)
+    {
+        return this.Configuration.Environment.GetProjectionProperties(this.DomainType, includeBase, true);
+    }
+
+    protected override IEnumerable<CodeTypeMember> GetMembers()
+    {
+        foreach (var baseMember in base.GetMembers())
         {
-            return this.Configuration.Environment.GetProjectionProperties(this.DomainType, includeBase, true);
+            yield return baseMember;
         }
 
-        protected override IEnumerable<CodeTypeMember> GetMembers()
+        foreach (var property in this.GetProperties(false))
         {
-            foreach (var baseMember in base.GetMembers())
-            {
-                yield return baseMember;
-            }
+            var genProp = this.CreateCustomProperty(property);
 
-            foreach (var property in this.GetProperties(false))
-            {
-                var genProp = this.CreateCustomProperty(property);
+            genProp.CustomAttributes.AddRange(this.Configuration.GetPropertyAttributeDeclarations(property).ToArray());
 
-                genProp.CustomAttributes.AddRange(this.Configuration.GetPropertyAttributeDeclarations(property).ToArray());
-
-                yield return genProp;
-            }
+            yield return genProp;
         }
+    }
 
-        private CodeMemberProperty CreateCustomProperty([NotNull] PropertyInfo property)
-        {
-            if (property == null) throw new ArgumentNullException(nameof(property));
+    private CodeMemberProperty CreateCustomProperty([NotNull] PropertyInfo property)
+    {
+        if (property == null) throw new ArgumentNullException(nameof(property));
 
-            return new CodeMemberProperty
-            {
-                Name = property.Name,
+        return new CodeMemberProperty
+               {
+                       Name = property.Name,
 
-                Type = property.PropertyType.ToTypeReference(),
+                       Type = property.PropertyType.ToTypeReference(),
 
-                Attributes = MemberAttributes.Public | MemberAttributes.Abstract,
+                       Attributes = MemberAttributes.Public | MemberAttributes.Abstract,
 
-                HasGet = true,
+                       HasGet = true,
 
-                HasSet = property.HasSetMethod()
-            };
-        }
+                       HasSet = property.HasSetMethod()
+               };
+    }
 
 
-        protected override IEnumerable<CodeConstructor> GetConstructors()
-        {
-            yield return new CodeConstructor
-            {
-                Attributes = MemberAttributes.Family
-            };
-        }
+    protected override IEnumerable<CodeConstructor> GetConstructors()
+    {
+        yield return new CodeConstructor
+                     {
+                             Attributes = MemberAttributes.Family
+                     };
     }
 }

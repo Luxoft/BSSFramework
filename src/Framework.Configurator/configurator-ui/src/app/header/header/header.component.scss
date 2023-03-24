@@ -1,0 +1,5 @@
+@import 'mixins.scss';
+
+.active {
+  background-color: get-primary-color(800);
+}

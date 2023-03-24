@@ -1,9 +1,8 @@
-﻿namespace Framework.Notification.New
+﻿namespace Framework.Notification.New;
+
+public enum ReceiverRole
 {
-    public enum ReceiverRole
-    {
-        To,
-        Copy,
-        ReplyTo
-    }
+    To,
+    Copy,
+    ReplyTo
 }

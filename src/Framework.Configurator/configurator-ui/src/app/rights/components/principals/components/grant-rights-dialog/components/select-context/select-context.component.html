@@ -1,0 +1,8 @@
+<mat-form-field appearance="fill" class="tw-w-full">
+  <input matInput [formControl]="control" placeholder="Add context..." [matAutocomplete]="auto" />
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="select($event)">
+    <mat-option *ngFor="let entity of entities | async" [value]="entity">
+      {{ entity.Name }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

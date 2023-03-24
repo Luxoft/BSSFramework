@@ -2,22 +2,21 @@
 
 using Framework.DomainDriven.NHibernate;
 
-namespace Framework.DomainDriven.DBGenerator
+namespace Framework.DomainDriven.DBGenerator;
+
+public interface IAuditDBScriptGeneratorBuilder : IConfigurable
 {
-    public interface IAuditDBScriptGeneratorBuilder : IConfigurable
-    {
-        IAuditDBScriptGeneratorBuilder WithAuditPostfix(string auditTablePostfix = "Audit");
+    IAuditDBScriptGeneratorBuilder WithAuditPostfix(string auditTablePostfix = "Audit");
 
-        IAuditDBScriptGeneratorBuilder WithMappingSettings(IMappingSettings mappingSettingss);
+    IAuditDBScriptGeneratorBuilder WithMappingSettings(IMappingSettings mappingSettingss);
 
-        IAuditDBScriptGeneratorBuilder WithMappingSettings(IList<IMappingSettings> mappingSettings);
+    IAuditDBScriptGeneratorBuilder WithMappingSettings(IList<IMappingSettings> mappingSettings);
 
-        /// <summary>
-        /// Настройка, предотвращающая удаление временной БД, предназначенной для накатывания схемы.
-        /// </summary>
-        /// <returns><see cref="IAuditDBScriptGeneratorBuilder"/>.</returns>
-        IAuditDBScriptGeneratorBuilder WithPreserveSchemaDatabase();
+    /// <summary>
+    /// Настройка, предотвращающая удаление временной БД, предназначенной для накатывания схемы.
+    /// </summary>
+    /// <returns><see cref="IAuditDBScriptGeneratorBuilder"/>.</returns>
+    IAuditDBScriptGeneratorBuilder WithPreserveSchemaDatabase();
 
-        IMigrationScriptGeneratorBuilder MigrationBuilder { get; }
-    }
+    IMigrationScriptGeneratorBuilder MigrationBuilder { get; }
 }

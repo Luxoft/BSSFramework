@@ -6,71 +6,70 @@ using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
-namespace SampleSystem.Domain
+namespace SampleSystem.Domain;
+
+[BLLViewRole]
+[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeeView)]
+[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.EmployeeEdit)]
+public class EmployeePhoto : AuditPersistentDomainObjectBase, IDetail<Employee>, ITypeObject<EmployeePhotoType>
 {
-    [BLLViewRole]
-    [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeeView)]
-    [SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.EmployeeEdit)]
-    public class EmployeePhoto : AuditPersistentDomainObjectBase, IDetail<Employee>, ITypeObject<EmployeePhotoType>
+    private readonly Employee employee;
+
+    private string contentType;
+    private byte[] data = new byte[0];
+
+    private EmployeePhotoType type;
+
+    public EmployeePhoto(Employee employee)
     {
-        private readonly Employee employee;
-
-        private string contentType;
-        private byte[] data = new byte[0];
-
-        private EmployeePhotoType type;
-
-        public EmployeePhoto(Employee employee)
+        if (employee == null)
         {
-            if (employee == null)
-            {
-                throw new ArgumentNullException(nameof(employee));
-            }
-
-            this.employee = employee;
-            this.employee.AddDetail(this);
+            throw new ArgumentNullException(nameof(employee));
         }
 
-        protected EmployeePhoto()
-        {
-        }
+        this.employee = employee;
+        this.employee.AddDetail(this);
+    }
 
-        public virtual Employee Employee
-        {
-            get { return this.employee; }
-        }
+    protected EmployeePhoto()
+    {
+    }
 
-        [Framework.Restriction.Required]
-        public virtual string ContentType
-        {
-            get { return this.contentType.TrimNull(); }
-            protected internal set { this.contentType = value.TrimNull(); }
-        }
+    public virtual Employee Employee
+    {
+        get { return this.employee; }
+    }
 
-        public virtual bool IsDefault
-        {
-            get { return this.Type == EmployeePhotoType.Default; }
-        }
+    [Framework.Restriction.Required]
+    public virtual string ContentType
+    {
+        get { return this.contentType.TrimNull(); }
+        protected internal set { this.contentType = value.TrimNull(); }
+    }
 
-        [UniqueElement]
-        public virtual EmployeePhotoType Type
-        {
-            get { return this.type; }
-            protected internal set { this.type = value; }
-        }
+    public virtual bool IsDefault
+    {
+        get { return this.Type == EmployeePhotoType.Default; }
+    }
 
-        [Mapping(ColumnName = "Photo")]
-        [MaxLength(SampleSystemSystemConstant.DEFAULT_PHOTO_MAX_SIZE)]
-        [Framework.Restriction.Required]
-        public virtual byte[] Data
-        {
-            get { return this.data; }
-            set { this.data = value; }
-        }
+    [UniqueElement]
+    public virtual EmployeePhotoType Type
+    {
+        get { return this.type; }
+        protected internal set { this.type = value; }
+    }
 
-        Employee IDetail<Employee>.Master
-        {
-            get { return this.Employee; }
-        }
+    [Mapping(ColumnName = "Photo")]
+    [MaxLength(SampleSystemSystemConstant.DEFAULT_PHOTO_MAX_SIZE)]
+    [Framework.Restriction.Required]
+    public virtual byte[] Data
+    {
+        get { return this.data; }
+        set { this.data = value; }
+    }
+
+    Employee IDetail<Employee>.Master
+    {
+        get { return this.Employee; }
     }
 }

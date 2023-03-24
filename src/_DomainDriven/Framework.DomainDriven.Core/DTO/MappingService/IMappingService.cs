@@ -1,9 +1,8 @@
 ﻿using JetBrains.Annotations;
 
-namespace Framework.DomainDriven
+namespace Framework.DomainDriven;
+
+public interface IMappingService<in TSource, in TTarget>
 {
-    public interface IMappingService<in TSource, in TTarget>
-    {
-        void Map([NotNull]TSource source, [NotNull]TTarget target);
-    }
+    void Map([NotNull]TSource source, [NotNull]TTarget target);
 }

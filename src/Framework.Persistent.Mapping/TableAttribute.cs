@@ -1,14 +1,13 @@
 ﻿using System;
 
-namespace Framework.Persistent.Mapping
+namespace Framework.Persistent.Mapping;
+
+[AttributeUsage(AttributeTargets.Class)]
+public class TableAttribute : NamedAttribute
 {
-    [AttributeUsage(AttributeTargets.Class)]
-    public class TableAttribute : NamedAttribute
+    public string Schema
     {
-        public string Schema
-        {
-            get;
-            set;
-        }
+        get;
+        set;
     }
 }

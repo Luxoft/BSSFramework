@@ -1,7 +1,6 @@
-﻿namespace SampleSystem.Domain
+﻿namespace SampleSystem.Domain;
+
+public enum EmployeeLinkType
 {
-    public enum EmployeeLinkType
-    {
-        PersonalAssistant = 0
-    }
+    PersonalAssistant = 0
 }

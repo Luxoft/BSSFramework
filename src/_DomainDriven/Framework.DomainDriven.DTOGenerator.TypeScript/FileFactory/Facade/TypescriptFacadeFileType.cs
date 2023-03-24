@@ -1,7 +1,6 @@
-﻿namespace Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory.Facade
+﻿namespace Framework.DomainDriven.DTOGenerator.TypeScript.FileFactory.Facade;
+
+public enum TypeScriptFacadeFileType
 {
-    public enum TypeScriptFacadeFileType
-    {
-        Facade
-    }
+    Facade
 }

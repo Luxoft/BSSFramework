@@ -1,48 +1,47 @@
 ﻿using Framework.Core;
 using Framework.Persistent;
 
-namespace SampleSystem.Domain
+namespace SampleSystem.Domain;
+
+public class EmployeeAndEmployeeSpecializationLink : AuditPersistentDomainObjectBase, IDetail<Employee>
 {
-    public class EmployeeAndEmployeeSpecializationLink : AuditPersistentDomainObjectBase, IDetail<Employee>
+    private Employee employee;
+    private EmployeeSpecialization specialization;
+
+    public EmployeeAndEmployeeSpecializationLink(Employee employee)
     {
-        private Employee employee;
-        private EmployeeSpecialization specialization;
+        this.employee = employee;
+        this.employee.Maybe(z => z.AddDetail(this));
+    }
 
-        public EmployeeAndEmployeeSpecializationLink(Employee employee)
-        {
-            this.employee = employee;
-            this.employee.Maybe(z => z.AddDetail(this));
-        }
-
-        public EmployeeAndEmployeeSpecializationLink(Employee employee, EmployeeSpecialization specialization)
+    public EmployeeAndEmployeeSpecializationLink(Employee employee, EmployeeSpecialization specialization)
             : this(employee)
-        {
-            this.specialization = specialization;
-        }
+    {
+        this.specialization = specialization;
+    }
 
-        protected EmployeeAndEmployeeSpecializationLink()
-        {
-        }
+    protected EmployeeAndEmployeeSpecializationLink()
+    {
+    }
 
-        [Framework.Restriction.Required]
-        [Framework.Restriction.UniqueElement]
-        public virtual EmployeeSpecialization Specialization
-        {
-            get { return this.specialization; }
-            set { this.specialization = value; }
-        }
+    [Framework.Restriction.Required]
+    [Framework.Restriction.UniqueElement]
+    public virtual EmployeeSpecialization Specialization
+    {
+        get { return this.specialization; }
+        set { this.specialization = value; }
+    }
 
-        [Framework.Restriction.Required]
-        [Framework.Restriction.UniqueElement]
-        public virtual Employee Employee
-        {
-            get { return this.employee; }
-            set { this.employee = value; }
-        }
+    [Framework.Restriction.Required]
+    [Framework.Restriction.UniqueElement]
+    public virtual Employee Employee
+    {
+        get { return this.employee; }
+        set { this.employee = value; }
+    }
 
-        Employee IDetail<Employee>.Master
-        {
-            get { return this.Employee; }
-        }
+    Employee IDetail<Employee>.Master
+    {
+        get { return this.Employee; }
     }
 }

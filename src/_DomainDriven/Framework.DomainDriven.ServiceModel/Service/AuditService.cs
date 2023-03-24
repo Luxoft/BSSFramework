@@ -12,9 +12,9 @@ using Framework.Security;
 using Framework.Transfering;
 using Framework.Validation;
 
-namespace Framework.DomainDriven.ServiceModel.Service
-{
-    public class AuditService<TIdent, TBLLContext, TBLLFactoryContainer, TRootSecurityService, TSecurityOperationCode, TPersistentObjectBase, TDomainPropertyRevisionsDTO, TPropertyRevisionDTO>
+namespace Framework.DomainDriven.ServiceModel.Service;
+
+public class AuditService<TIdent, TBLLContext, TBLLFactoryContainer, TRootSecurityService, TSecurityOperationCode, TPersistentObjectBase, TDomainPropertyRevisionsDTO, TPropertyRevisionDTO>
         where TDomainPropertyRevisionsDTO : DomainObjectPropertiesRevisionDTO<TIdent, TPropertyRevisionDTO>, new()
         where TPropertyRevisionDTO : PropertyRevisionDTOBase
         where TPersistentObjectBase : class, IIdentityObject<TIdent>
@@ -24,120 +24,119 @@ namespace Framework.DomainDriven.ServiceModel.Service
         ISecurityServiceContainer<TRootSecurityService>
         where TRootSecurityService : IRootSecurityService<TBLLContext, TPersistentObjectBase, TSecurityOperationCode>
         where TSecurityOperationCode : struct, Enum
+{
+    private readonly static Lazy<Type> _genericTPropertyRevisionDTOType = new Lazy<Type>(
+     () => typeof(TPropertyRevisionDTO)
+           .Assembly
+           .GetTypes()
+           .Where(z => z.IsGenericType)
+           .Single(z => typeof(TPropertyRevisionDTO).IsAssignableFrom(z)), true);
+
+
+    private readonly TBLLContext _bllContext;
+
+
+
+    public AuditService(TBLLContext bllContext)
     {
-        private readonly static Lazy<Type> _genericTPropertyRevisionDTOType = new Lazy<Type>(
-    () => typeof(TPropertyRevisionDTO)
-                    .Assembly
-                    .GetTypes()
-                    .Where(z => z.IsGenericType)
-                    .Single(z => typeof(TPropertyRevisionDTO).IsAssignableFrom(z)), true);
+        this._bllContext = bllContext;
+    }
 
 
-        private readonly TBLLContext _bllContext;
+    public TDomainPropertyRevisionsDTO GetPropertyChanges<TDomain>(TIdent id, string propertyName, Period? period = null)
+            where TDomain : class, TPersistentObjectBase
+    {
+        var propertyInfo = typeof(TDomain).GetProperties().FirstOrDefault(z => string.Equals(z.Name, propertyName, StringComparison.InvariantCultureIgnoreCase));
 
-
-
-        public AuditService(TBLLContext bllContext)
+        if (null == propertyInfo)
         {
-            this._bllContext = bllContext;
+            throw new ValidationException("{0} {1}", typeof(TDomain).Name, propertyName);
         }
 
-
-        public TDomainPropertyRevisionsDTO GetPropertyChanges<TDomain>(TIdent id, string propertyName, Period? period = null)
-            where TDomain : class, TPersistentObjectBase
-        {
-            var propertyInfo = typeof(TDomain).GetProperties().FirstOrDefault(z => string.Equals(z.Name, propertyName, StringComparison.InvariantCultureIgnoreCase));
-
-            if (null == propertyInfo)
-            {
-                throw new ValidationException("{0} {1}", typeof(TDomain).Name, propertyName);
-            }
-
-            var methodDefinition = (((Func<TIdent, string, PropertyInfo, Period?, TDomainPropertyRevisionsDTO>)this.GetPropertyChanged<TDomain, object>))
+        var methodDefinition = (((Func<TIdent, string, PropertyInfo, Period?, TDomainPropertyRevisionsDTO>)this.GetPropertyChanged<TDomain, object>))
                 .CreateGenericMethod(typeof(TDomain), propertyInfo.PropertyType);
 
-            var result = methodDefinition.InvokeWithExceptionProcessed(this, id, propertyName, propertyInfo, period);
+        var result = methodDefinition.InvokeWithExceptionProcessed(this, id, propertyName, propertyInfo, period);
 
-            return (TDomainPropertyRevisionsDTO)result;
+        return (TDomainPropertyRevisionsDTO)result;
 
+    }
+
+    private TDomainPropertyRevisionsDTO GetPropertyChanged<TDomain, TProperty>(TIdent id, string propertyName, PropertyInfo propertyInfo, Period? period = null)
+            where TDomain : class, TPersistentObjectBase
+    {
+
+        var propertyChanged = this._bllContext.Logics.Default.Create<TDomain>().GetPropertyChanges<TProperty>(id, propertyName, period);
+
+        var domainObject = this._bllContext.Logics.Default.Create<TDomain>().GetById(id); //????
+
+        var result = new TDomainPropertyRevisionsDTO
+                     {
+                             Identity = propertyChanged.Identity,
+                             PropertyName = propertyChanged.PropertyName,
+                     };
+
+        if (propertyInfo.IsSecurity())
+        {
+            if (!this.HassAccess(domainObject, propertyInfo))
+            {
+                return result;
+            }
         }
 
-        private TDomainPropertyRevisionsDTO GetPropertyChanged<TDomain, TProperty>(TIdent id, string propertyName, PropertyInfo propertyInfo, Period? period = null)
-            where TDomain : class, TPersistentObjectBase
+        if (typeof(TProperty).IsDomainType(typeof(TPersistentObjectBase)))
         {
+            var dtoType = this._bllContext.TypeResolver.Resolve(typeof(TProperty).Name + MainDTOType.SimpleDTO.ToString(), true);
 
-            var propertyChanged = this._bllContext.Logics.Default.Create<TDomain>().GetPropertyChanges<TProperty>(id, propertyName, period);
-
-            var domainObject = this._bllContext.Logics.Default.Create<TDomain>().GetById(id); //????
-
-            var result = new TDomainPropertyRevisionsDTO
-            {
-                Identity = propertyChanged.Identity,
-                PropertyName = propertyChanged.PropertyName,
-            };
-
-            if (propertyInfo.IsSecurity())
-            {
-                if (!this.HassAccess(domainObject, propertyInfo))
-                {
-                    return result;
-                }
-            }
-
-            if (typeof(TProperty).IsDomainType(typeof(TPersistentObjectBase)))
-            {
-                var dtoType = this._bllContext.TypeResolver.Resolve(typeof(TProperty).Name + MainDTOType.SimpleDTO.ToString(), true);
-
-                var method =
+            var method =
                     ((Func<PropertyRevision<TIdent, TProperty>, TPropertyRevisionDTO>)
-                     (this.ToPropertyRevisionDTO<object, TProperty>))
-                        .CreateGenericMethod(dtoType, typeof(TProperty));
+                        (this.ToPropertyRevisionDTO<object, TProperty>))
+                    .CreateGenericMethod(dtoType, typeof(TProperty));
 
-                result.RevisionInfos = propertyChanged.RevisionInfos.Select(z => (TPropertyRevisionDTO)method.InvokeWithExceptionProcessed(this, z)).ToList();
-            }
-            else
-            {
-                result.RevisionInfos = propertyChanged.RevisionInfos.Select(z => this.CreateGenericProperptyRevisionDTO(z, z.Value)).ToList();
-            }
-
-            return result;
+            result.RevisionInfos = propertyChanged.RevisionInfos.Select(z => (TPropertyRevisionDTO)method.InvokeWithExceptionProcessed(this, z)).ToList();
         }
-        private bool HassAccess<TDomain>(TDomain domainObject, PropertyInfo propertyInfo)
-            where TDomain : class, TPersistentObjectBase
+        else
         {
-            var viewOperation = propertyInfo.GetViewDomainObjectCode();
+            result.RevisionInfos = propertyChanged.RevisionInfos.Select(z => this.CreateGenericProperptyRevisionDTO(z, z.Value)).ToList();
+        }
 
-            var castedViewOperation =
+        return result;
+    }
+    private bool HassAccess<TDomain>(TDomain domainObject, PropertyInfo propertyInfo)
+            where TDomain : class, TPersistentObjectBase
+    {
+        var viewOperation = propertyInfo.GetViewDomainObjectCode();
+
+        var castedViewOperation =
                 (TSecurityOperationCode)Convert.ChangeType(viewOperation, typeof(TSecurityOperationCode));
 
-            return this._bllContext.SecurityService.GetSecurityProvider<TDomain>(castedViewOperation).HasAccess(domainObject);
+        return this._bllContext.SecurityService.GetSecurityProvider<TDomain>(castedViewOperation).HasAccess(domainObject);
+    }
+
+    private TPropertyRevisionDTO ToPropertyRevisionDTO<TDTOProperty, TProperty>(
+            PropertyRevision<TIdent, TProperty> propertyRevision)
+    {
+        if (null == propertyRevision.Value)
+        {
+            return this.CreateGenericProperptyRevisionDTO(propertyRevision, default(TDTOProperty));
         }
 
-        private TPropertyRevisionDTO ToPropertyRevisionDTO<TDTOProperty, TProperty>(
-            PropertyRevision<TIdent, TProperty> propertyRevision)
-        {
-            if (null == propertyRevision.Value)
-            {
-                return this.CreateGenericProperptyRevisionDTO(propertyRevision, default(TDTOProperty));
-            }
-
-            var dtoPropertyValue =
+        var dtoPropertyValue =
                 (TDTOProperty)
                 Activator.CreateInstance(typeof(TDTOProperty), this._bllContext, propertyRevision.Value);
 
-            return this.CreateGenericProperptyRevisionDTO(propertyRevision, dtoPropertyValue);
-        }
-
-        private TPropertyRevisionDTO CreateGenericProperptyRevisionDTO<TValue>(RevisionInfoBase propertyRevisionInfo, TValue value)
-        {
-            var genericType = _genericTPropertyRevisionDTOType.Value.MakeGenericType(typeof(TValue));
-
-            var result = (TPropertyRevisionDTO)Activator.CreateInstance(genericType, propertyRevisionInfo);
-
-            genericType.GetField("Value", BindingFlags.Public | BindingFlags.Instance).SetValue(result, value);
-
-            return result;
-        }
-
+        return this.CreateGenericProperptyRevisionDTO(propertyRevision, dtoPropertyValue);
     }
+
+    private TPropertyRevisionDTO CreateGenericProperptyRevisionDTO<TValue>(RevisionInfoBase propertyRevisionInfo, TValue value)
+    {
+        var genericType = _genericTPropertyRevisionDTOType.Value.MakeGenericType(typeof(TValue));
+
+        var result = (TPropertyRevisionDTO)Activator.CreateInstance(genericType, propertyRevisionInfo);
+
+        genericType.GetField("Value", BindingFlags.Public | BindingFlags.Instance).SetValue(result, value);
+
+        return result;
+    }
+
 }

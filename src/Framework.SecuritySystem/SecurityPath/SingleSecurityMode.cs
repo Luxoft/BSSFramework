@@ -1,9 +1,8 @@
-namespace Framework.SecuritySystem
-{
-    public enum SingleSecurityMode
-    {
-        AllowNull,
+namespace Framework.SecuritySystem;
 
-        Strictly
-    }
+public enum SingleSecurityMode
+{
+    AllowNull,
+
+    Strictly
 }

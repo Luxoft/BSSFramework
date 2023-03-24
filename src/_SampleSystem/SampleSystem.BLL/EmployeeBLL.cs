@@ -7,66 +7,65 @@ using Framework.DomainDriven.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Filters;
 
-namespace SampleSystem.BLL
+namespace SampleSystem.BLL;
+
+public partial class EmployeeBLL
 {
-    public partial class EmployeeBLL
+    public Employee ChangeByEmail(EmployeeEmailChangeModel changeModel)
     {
-        public Employee ChangeByEmail(EmployeeEmailChangeModel changeModel)
-        {
-            throw new NotImplementedException();
-        }
+        throw new NotImplementedException();
+    }
 
-        public EmployeeEmailChangeModel GetChangeByEmail(Employee employee)
-        {
-            throw new NotImplementedException();
-        }
+    public EmployeeEmailChangeModel GetChangeByEmail(Employee employee)
+    {
+        throw new NotImplementedException();
+    }
 
-        public List<Employee> GetListBy(EmployeeFilterModel filter, IFetchContainer<Employee> fetchs)
-        {
-            throw new NotImplementedException();
-        }
+    public List<Employee> GetListBy(EmployeeFilterModel filter, IFetchContainer<Employee> fetchs)
+    {
+        throw new NotImplementedException();
+    }
 
-        public EmployeeEmailMassChangeModel GetMassChangeByEmail(List<Employee> employees)
-        {
-            if (employees == null) throw new ArgumentNullException(nameof(employees));
+    public EmployeeEmailMassChangeModel GetMassChangeByEmail(List<Employee> employees)
+    {
+        if (employees == null) throw new ArgumentNullException(nameof(employees));
 
-            return new EmployeeEmailMassChangeModel { ChangingObjects = employees };
-        }
+        return new EmployeeEmailMassChangeModel { ChangingObjects = employees };
+    }
 
-        public Employee IntegrationSave(EmployeeCustomIntegrationSaveModel integrationSaveModel)
-        {
-            throw new NotImplementedException();
-        }
+    public Employee IntegrationSave(EmployeeCustomIntegrationSaveModel integrationSaveModel)
+    {
+        throw new NotImplementedException();
+    }
 
-        /// <summary>
-        /// Изменением всем сотрудникам из модели email
-        /// </summary>
-        /// <param name="changeModel"></param>
-        /// <returns></returns>
-        public List<Employee> MassChangeByEmail(EmployeeEmailMassChangeModel changeModel)
-        {
-            if (changeModel == null) throw new ArgumentNullException(nameof(changeModel));
+    /// <summary>
+    /// Изменением всем сотрудникам из модели email
+    /// </summary>
+    /// <param name="changeModel"></param>
+    /// <returns></returns>
+    public List<Employee> MassChangeByEmail(EmployeeEmailMassChangeModel changeModel)
+    {
+        if (changeModel == null) throw new ArgumentNullException(nameof(changeModel));
 
-            changeModel.ChangingObjects.ForEach(employee => employee.Email = changeModel.Email);
+        changeModel.ChangingObjects.ForEach(employee => employee.Email = changeModel.Email);
 
-            this.Save(changeModel.ChangingObjects);
+        this.Save(changeModel.ChangingObjects);
 
-            return changeModel.ChangingObjects;
-        }
+        return changeModel.ChangingObjects;
+    }
 
-        public Employee ComplexChange(EmployeeComplexChangeModel changeModel)
-        {
-            if (changeModel == null) throw new ArgumentNullException(nameof(changeModel));
+    public Employee ComplexChange(EmployeeComplexChangeModel changeModel)
+    {
+        if (changeModel == null) throw new ArgumentNullException(nameof(changeModel));
 
-            changeModel.PrimaryChangingObject.Email = changeModel.Email;
+        changeModel.PrimaryChangingObject.Email = changeModel.Email;
 
-            this.Save(changeModel.PrimaryChangingObject);
+        this.Save(changeModel.PrimaryChangingObject);
 
-            changeModel.SecondaryChangingObjects.ForEach(employee => employee.Email = changeModel.Email);
+        changeModel.SecondaryChangingObjects.ForEach(employee => employee.Email = changeModel.Email);
 
-            this.Save(changeModel.SecondaryChangingObjects);
+        this.Save(changeModel.SecondaryChangingObjects);
 
-            return changeModel.PrimaryChangingObject;
-        }
+        return changeModel.PrimaryChangingObject;
     }
 }

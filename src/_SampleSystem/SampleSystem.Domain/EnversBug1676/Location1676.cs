@@ -5,24 +5,23 @@ using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 
-namespace SampleSystem.Domain.EnversBug1676
+namespace SampleSystem.Domain.EnversBug1676;
+
+[BLLViewRole]
+[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.Disabled)]
+public class Location1676 : BaseDirectory
 {
-    [BLLViewRole]
-    [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.Disabled)]
-    public class Location1676 : BaseDirectory
+    private readonly ICollection<WorkingCalendar1676> calendar = new List<WorkingCalendar1676>();
+
+    private Coefficient1676 coefficient;
+
+    [Mapping(IsOneToOne = true)]
+    [CustomSerialization(CustomSerializationMode.Ignore)]
+    public virtual Coefficient1676 Coefficient
     {
-        private readonly ICollection<WorkingCalendar1676> calendar = new List<WorkingCalendar1676>();
-
-        private Coefficient1676 coefficient;
-
-        [Mapping(IsOneToOne = true)]
-        [CustomSerialization(CustomSerializationMode.Ignore)]
-        public virtual Coefficient1676 Coefficient
-        {
-            get => this.coefficient;
-            protected internal set => this.coefficient = value;
-        }
-
-        public virtual IEnumerable<WorkingCalendar1676> Calendar => this.calendar;
+        get => this.coefficient;
+        protected internal set => this.coefficient = value;
     }
+
+    public virtual IEnumerable<WorkingCalendar1676> Calendar => this.calendar;
 }

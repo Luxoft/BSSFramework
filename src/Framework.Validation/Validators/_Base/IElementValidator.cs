@@ -1,12 +1,11 @@
-﻿namespace Framework.Validation
+﻿namespace Framework.Validation;
+
+public interface IElementValidator<in TValidationContext>
 {
-    public interface IElementValidator<in TValidationContext>
-    {
-        /// <summary>
-        /// Получение результата валидации
-        /// </summary>
-        /// <param name="validationContext">Валидационный контекст</param>
-        /// <returns></returns>
-        ValidationResult GetValidationResult(TValidationContext validationContext);
-    }
+    /// <summary>
+    /// Получение результата валидации
+    /// </summary>
+    /// <param name="validationContext">Валидационный контекст</param>
+    /// <returns></returns>
+    ValidationResult GetValidationResult(TValidationContext validationContext);
 }

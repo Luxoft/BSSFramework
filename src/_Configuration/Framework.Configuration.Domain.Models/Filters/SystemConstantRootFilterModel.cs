@@ -1,6 +1,5 @@
-﻿namespace Framework.Configuration.Domain
+﻿namespace Framework.Configuration.Domain;
+
+public class SystemConstantRootFilterModel : DomainObjectFilterModel<SystemConstant>
 {
-    public class SystemConstantRootFilterModel : DomainObjectFilterModel<SystemConstant>
-    {
-    }
 }

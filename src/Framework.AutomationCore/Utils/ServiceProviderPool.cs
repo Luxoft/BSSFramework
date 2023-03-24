@@ -1,50 +1,33 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using Automation.Utils;
-using Automation.Utils.DatabaseUtils;
-using Automation.Utils.DatabaseUtils.Interfaces;
-using Microsoft.Extensions.Configuration;
+using System.Threading;
 
 namespace Automation;
 
-public abstract class ServiceProviderPool
+public class ServiceProviderPool
 {
+    private readonly Func<IServiceProvider> createServiceProviderFunc;
     private readonly ConcurrentBag<IServiceProvider> providersCache = new ConcurrentBag<IServiceProvider>();
+    private readonly SemaphoreSlim semaphore;
 
-    private readonly Lazy<string> lazyDefaultConnectionString;
-
-    protected ServiceProviderPool(IConfiguration rootRootConfiguration, ConfigUtil configUtil)
+    internal ServiceProviderPool(Func<IServiceProvider> createServiceProviderFunc, bool parallelExecutionEnabled)
     {
-        this.RootConfiguration = rootRootConfiguration;
-        this.ConfigUtil = configUtil;
+        this.semaphore = parallelExecutionEnabled
+            ? new SemaphoreSlim(Environment.ProcessorCount, Environment.ProcessorCount)
+            : new SemaphoreSlim(1, 1);
 
-        this.lazyDefaultConnectionString = new Lazy<string>(this.BuildDefaultConnectionString);
+        this.createServiceProviderFunc = createServiceProviderFunc;
     }
 
-    protected IConfiguration RootConfiguration { get; }
-
-    protected ConfigUtil ConfigUtil { get; }
-
-    protected abstract IServiceProvider Build(IDatabaseContext databaseContext);
-
-    public IServiceProvider Get() => this.providersCache.TryTake(out var provider) ? provider : this.Build(this.BuildDatabaseContext());
-
-    public void Release(IServiceProvider serviceProvider) => this.providersCache.Add(serviceProvider);
-
-    protected virtual DatabaseContext BuildDatabaseContext()
+    public IServiceProvider Get()
     {
-        return new DatabaseContext(
-            this.ConfigUtil,
-            new DatabaseContextSettings(this.lazyDefaultConnectionString.Value, this.GetSecondaryDatabases()));
+        this.semaphore.Wait();
+        return this.providersCache.TryTake(out var provider) ? provider : this.createServiceProviderFunc.Invoke();
     }
 
-    protected virtual string BuildDefaultConnectionString()
+    public void Release(IServiceProvider serviceProvider)
     {
-        return this.ConfigUtil.GetConnectionString("DefaultConnection");
-    }
-
-    protected virtual string[] GetSecondaryDatabases()
-    {
-        return Array.Empty<string>();
+        this.providersCache.Add(serviceProvider);
+        this.semaphore.Release();
     }
 }

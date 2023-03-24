@@ -1,25 +1,24 @@
 ﻿using System;
 
-namespace Framework.Validation
+namespace Framework.Validation;
+
+[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+public class RequiredGroupValidatorAttribute : ClassValidatorAttribute
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public class RequiredGroupValidatorAttribute : ClassValidatorAttribute
+    public readonly RequiredGroupValidatorMode Mode;
+
+
+    public RequiredGroupValidatorAttribute(RequiredGroupValidatorMode mode)
     {
-        public readonly RequiredGroupValidatorMode Mode;
+        this.Mode = mode;
+    }
 
 
-        public RequiredGroupValidatorAttribute(RequiredGroupValidatorMode mode)
-        {
-            this.Mode = mode;
-        }
+    public string GroupKey { get; set; }
 
 
-        public string GroupKey { get; set; }
-
-
-        public override IClassValidator CreateValidator()
-        {
-            return new RequiredGroupValidator(this.Mode, this.GroupKey);
-        }
+    public override IClassValidator CreateValidator()
+    {
+        return new RequiredGroupValidator(this.Mode, this.GroupKey);
     }
 }

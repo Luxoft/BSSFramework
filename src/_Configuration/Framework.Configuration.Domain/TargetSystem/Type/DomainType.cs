@@ -8,101 +8,100 @@ using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Restriction;
 
-namespace Framework.Configuration.Domain
+namespace Framework.Configuration.Domain;
+
+/// <summary>
+/// Описание доменного типа целевой системы
+/// </summary>
+[BLLViewRole]
+//[ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.TargetSystemView)]
+//[ConfigurationEditDomainObject(ConfigurationSecurityOperationCode.TargetSystemEdit)]
+[NotAuditedClass]
+[ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.Disabled)]
+public class DomainType : BaseDirectory, ITargetSystemElement<TargetSystem>, IDetail<TargetSystem>, IMaster<DomainTypeEventOperation>, IDomainType
 {
-    /// <summary>
-    /// Описание доменного типа целевой системы
-    /// </summary>
-    [BLLViewRole]
-    //[ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.TargetSystemView)]
-    //[ConfigurationEditDomainObject(ConfigurationSecurityOperationCode.TargetSystemEdit)]
-    [NotAuditedClass]
-    [ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.Disabled)]
-    public class DomainType : BaseDirectory, ITargetSystemElement<TargetSystem>, IDetail<TargetSystem>, IMaster<DomainTypeEventOperation>, IDomainType
+    private readonly ICollection<DomainTypeEventOperation> eventOperations = new List<DomainTypeEventOperation>();
+
+    private readonly TargetSystem targetSystem;
+
+    private string nameSpace;
+
+    protected DomainType()
     {
-        private readonly ICollection<DomainTypeEventOperation> eventOperations = new List<DomainTypeEventOperation>();
+    }
 
-        private readonly TargetSystem targetSystem;
+    /// <summary>
+    /// Конструктор доменного типа целовой системы
+    /// </summary>
+    /// <param name="targetSystem">Целевая система</param>
+    public DomainType(TargetSystem targetSystem)
+    {
+        if (targetSystem == null) throw new ArgumentNullException(nameof(targetSystem));
 
-        private string nameSpace;
+        this.targetSystem = targetSystem;
+        this.targetSystem.AddDetail(this);
+    }
 
-        protected DomainType()
+    /// <summary>
+    /// Целевая система
+    /// </summary>
+    public virtual TargetSystem TargetSystem
+    {
+        get { return this.targetSystem; }
+    }
+
+    /// <summary>
+    /// Операции доменного типа
+    /// </summary>
+    [UniqueGroup]
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
+    public virtual IEnumerable<DomainTypeEventOperation> EventOperations => this.eventOperations;
+
+    /// <summary>
+    /// Название доменного типа
+    /// </summary>
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
+    public override string Name
+    {
+        get { return base.Name; }
+        set { base.Name = value; }
+    }
+
+    /// <summary>
+    /// Пространство имен
+    /// </summary>
+    [UniqueElement]
+    [CustomSerialization(CustomSerializationMode.ReadOnly)]
+    public virtual string NameSpace
+    {
+        get { return this.nameSpace.TrimNull(); }
+        set { this.nameSpace = value.TrimNull(); }
+    }
+
+    /// <summary>
+    /// Полное имя типа
+    /// </summary>
+    public virtual string FullTypeName
+    {
+        get
         {
-        }
-
-        /// <summary>
-        /// Конструктор доменного типа целовой системы
-        /// </summary>
-        /// <param name="targetSystem">Целевая система</param>
-        public DomainType(TargetSystem targetSystem)
-        {
-            if (targetSystem == null) throw new ArgumentNullException(nameof(targetSystem));
-
-            this.targetSystem = targetSystem;
-            this.targetSystem.AddDetail(this);
-        }
-
-        /// <summary>
-        /// Целевая система
-        /// </summary>
-        public virtual TargetSystem TargetSystem
-        {
-            get { return this.targetSystem; }
-        }
-
-        /// <summary>
-        /// Операции доменного типа
-        /// </summary>
-        [UniqueGroup]
-        [CustomSerialization(CustomSerializationMode.ReadOnly)]
-        public virtual IEnumerable<DomainTypeEventOperation> EventOperations => this.eventOperations;
-
-        /// <summary>
-        /// Название доменного типа
-        /// </summary>
-        [CustomSerialization(CustomSerializationMode.ReadOnly)]
-        public override string Name
-        {
-            get { return base.Name; }
-            set { base.Name = value; }
-        }
-
-        /// <summary>
-        /// Пространство имен
-        /// </summary>
-        [UniqueElement]
-        [CustomSerialization(CustomSerializationMode.ReadOnly)]
-        public virtual string NameSpace
-        {
-            get { return this.nameSpace.TrimNull(); }
-            set { this.nameSpace = value.TrimNull(); }
-        }
-
-        /// <summary>
-        /// Полное имя типа
-        /// </summary>
-        public virtual string FullTypeName
-        {
-            get
-            {
-                return string.IsNullOrEmpty(this.NameSpace)
+            return string.IsNullOrEmpty(this.NameSpace)
                            ? this.Name
                            : $"{this.NameSpace}.{this.Name}";
-            }
         }
+    }
 
-        #region IDetail<TargetSystem> Members
+    #region IDetail<TargetSystem> Members
 
-        TargetSystem IDetail<TargetSystem>.Master
-        {
-            get { return this.TargetSystem; }
-        }
+    TargetSystem IDetail<TargetSystem>.Master
+    {
+        get { return this.TargetSystem; }
+    }
 
-        #endregion
+    #endregion
 
-        ICollection<DomainTypeEventOperation> IMaster<DomainTypeEventOperation>.Details
-        {
-            get { return (ICollection<DomainTypeEventOperation>)this.EventOperations; }
-        }
+    ICollection<DomainTypeEventOperation> IMaster<DomainTypeEventOperation>.Details
+    {
+        get { return (ICollection<DomainTypeEventOperation>)this.EventOperations; }
     }
 }

@@ -1,11 +1,10 @@
 ﻿using Framework.Restriction;
 
-namespace Framework.DomainDriven
+namespace Framework.DomainDriven;
+
+[DirectMode(DirectMode.In)]
+public interface IDomainObjectIntegrationSaveModel<out TDomainObject>
 {
-    [DirectMode(DirectMode.In)]
-    public interface IDomainObjectIntegrationSaveModel<out TDomainObject>
-    {
-        [Required]
-        TDomainObject SavingObject { get; }
-    }
+    [Required]
+    TDomainObject SavingObject { get; }
 }

@@ -1,6 +1,5 @@
-﻿namespace Framework.OData.Tests.Unit.DomainModel
+﻿namespace Framework.OData.Tests.Unit.DomainModel;
+
+public class Location : Base
 {
-    public class Location : Base
-    {
-    }
 }

@@ -1,12 +1,11 @@
-﻿namespace Framework.Persistent
+﻿namespace Framework.Persistent;
+
+public interface ICodeObject<out TCode>
 {
-    public interface ICodeObject<out TCode>
-    {
-        TCode Code { get; }
-    }
+    TCode Code { get; }
+}
 
-    public interface ICodeObject : ICodeObject<string>
-    {
+public interface ICodeObject : ICodeObject<string>
+{
 
-    }
 }

@@ -10,56 +10,55 @@ using SampleSystem.DbGenerate;
 using SampleSystem.IntegrationTests.__Support;
 using Framework.DomainDriven.DBGenerator;
 
-namespace SampleSystem.IntegrationTests.DBGeneration
+namespace SampleSystem.IntegrationTests.DBGeneration;
+
+[TestClass]
+public class UniqueGroupDatabaseScriptGeneratorTests : TestBase
 {
-    [TestClass]
-    public class UniqueGroupDatabaseScriptGeneratorTests : TestBase
+    [TestMethod]
+    public void GenerateLocal_UniqueIndexExistsWithLessColumns_RecreatesColumns()
     {
-        [TestMethod]
-        public void GenerateLocal_UniqueIndexExistsWithLessColumns_RecreatesColumns()
-        {
-            // Arrange
-            var generator = new DbGeneratorTest();
+        // Arrange
+        var generator = new DbGeneratorTest();
 
-            var tableName = "RoleRoleDegreeLink";
+        var tableName = "RoleRoleDegreeLink";
 
-            var table = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+        var table = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
 
-            var indexName = "unilink_RoleRoleDegreeLink";
+        var indexName = "unilink_RoleRoleDegreeLink";
 
-            var index = table.Indexes[indexName];
-            index.Drop();
+        var index = table.Indexes[indexName];
+        index.Drop();
 
-            var newIndex = new Index(table, indexName)
-            {
-                IndexKeyType = IndexKeyType.DriUniqueKey
-            };
-            var column = new IndexedColumn(newIndex, "roleDegreeId");
-            newIndex.IndexedColumns.Add(column);
+        var newIndex = new Index(table, indexName)
+                       {
+                               IndexKeyType = IndexKeyType.DriUniqueKey
+                       };
+        var column = new IndexedColumn(newIndex, "roleDegreeId");
+        newIndex.IndexedColumns.Add(column);
 
-            newIndex.Create();
+        newIndex.Create();
 
-            // Act
-            generator.GenerateAllDB(
-                this.DatabaseContext.Main.DataSource,
-                this.DatabaseContext.Main.DatabaseName,
-                credential: UserCredential.Create(
-                    this.DatabaseContext.Main.UserId,
-                    this.DatabaseContext.Main.Password),
-                skipFrameworkDatabases: true);
+        // Act
+        generator.GenerateAllDB(
+                                this.DatabaseContext.Main.DataSource,
+                                this.DatabaseContext.Main.DatabaseName,
+                                credential: UserCredential.Create(
+                                                                  this.DatabaseContext.Main.UserId,
+                                                                  this.DatabaseContext.Main.Password),
+                                skipFrameworkDatabases: true);
 
-            var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
-          //  changedTable.Indexes.Refresh();
-            var indexes = changedTable.Indexes.Cast<Index>().ToList();
+        var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+        //  changedTable.Indexes.Refresh();
+        var indexes = changedTable.Indexes.Cast<Index>().ToList();
 
-            // Assert
-            indexes.Should().Contain(x => x.Name == indexName);
-            indexes.First(x => x.Name == indexName)
-                   .IndexedColumns.Cast<IndexedColumn>()
-                   .Should()
-                   .HaveCount(2)
-                   .And.Contain(x => x.Name == "roleDegreeId")
-                   .And.Contain(x => x.Name == "roleId");
-        }
+        // Assert
+        indexes.Should().Contain(x => x.Name == indexName);
+        indexes.First(x => x.Name == indexName)
+               .IndexedColumns.Cast<IndexedColumn>()
+               .Should()
+               .HaveCount(2)
+               .And.Contain(x => x.Name == "roleDegreeId")
+               .And.Contain(x => x.Name == "roleId");
     }
 }

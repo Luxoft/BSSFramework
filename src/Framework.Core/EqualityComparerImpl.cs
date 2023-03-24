@@ -3,61 +3,60 @@ using System.Collections.Generic;
 
 using JetBrains.Annotations;
 
-namespace Framework.Core
+namespace Framework.Core;
+
+public class PropertyEqualityComparer<T, TProperty> : EqualityComparer<T>
 {
-    public class PropertyEqualityComparer<T, TProperty> : EqualityComparer<T>
+    private readonly Func<T, TProperty> getPropertyFunc;
+
+    public PropertyEqualityComparer(Func<T, TProperty> getPropertyFunc)
     {
-        private readonly Func<T, TProperty> getPropertyFunc;
-
-        public PropertyEqualityComparer(Func<T, TProperty> getPropertyFunc)
-        {
-            this.getPropertyFunc = getPropertyFunc;
-        }
-
-        public override bool Equals(T x, T y)
-        {
-            var xValue = this.getPropertyFunc(x);
-            var yValue = this.getPropertyFunc(y);
-
-            return object.Equals(xValue, yValue);
-        }
-
-        public override int GetHashCode(T obj)
-        {
-            return 0;
-        }
+        this.getPropertyFunc = getPropertyFunc;
     }
 
-    public class EqualityComparerImpl<T> : EqualityComparer<T>
+    public override bool Equals(T x, T y)
     {
-        private readonly Func<T, T, bool> _equalsFunc;
-        private readonly Func<T, int> _getHashFunc;
+        var xValue = this.getPropertyFunc(x);
+        var yValue = this.getPropertyFunc(y);
 
-        public EqualityComparerImpl(Func<T, T, bool> equalsFunc, Func<T, int> getHashFunc = null)
-        {
-            if (equalsFunc == null) throw new ArgumentNullException(nameof(equalsFunc));
+        return object.Equals(xValue, yValue);
+    }
 
-            this._equalsFunc = equalsFunc;
-            this._getHashFunc = getHashFunc;
-        }
+    public override int GetHashCode(T obj)
+    {
+        return 0;
+    }
+}
 
-        public override bool Equals(T x, T y)
-        {
-            return this._equalsFunc(x, y);
-        }
+public class EqualityComparerImpl<T> : EqualityComparer<T>
+{
+    private readonly Func<T, T, bool> _equalsFunc;
+    private readonly Func<T, int> _getHashFunc;
 
-        public override int GetHashCode(T obj)
-        {
-            return this._getHashFunc.Maybe(v => v(obj));
-        }
+    public EqualityComparerImpl(Func<T, T, bool> equalsFunc, Func<T, int> getHashFunc = null)
+    {
+        if (equalsFunc == null) throw new ArgumentNullException(nameof(equalsFunc));
 
-        public static EqualityComparerImpl<T> Create<TKey>([NotNull] Func<T, TKey> keySelector)
-        {
-            if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
+        this._equalsFunc = equalsFunc;
+        this._getHashFunc = getHashFunc;
+    }
 
-            var keyComparer = EqualityComparer<TKey>.Default;
+    public override bool Equals(T x, T y)
+    {
+        return this._equalsFunc(x, y);
+    }
 
-            return new EqualityComparerImpl<T>((v1, v2) => keyComparer.Equals(keySelector(v1), keySelector(v2)));
-        }
+    public override int GetHashCode(T obj)
+    {
+        return this._getHashFunc.Maybe(v => v(obj));
+    }
+
+    public static EqualityComparerImpl<T> Create<TKey>([NotNull] Func<T, TKey> keySelector)
+    {
+        if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
+
+        var keyComparer = EqualityComparer<TKey>.Default;
+
+        return new EqualityComparerImpl<T>((v1, v2) => keyComparer.Equals(keySelector(v1), keySelector(v2)));
     }
 }

@@ -1,7 +1,6 @@
-﻿namespace Framework.Core
+﻿namespace Framework.Core;
+
+public interface ISwitchNameObject<out TOutputObject>
 {
-    public interface ISwitchNameObject<out TOutputObject>
-    {
-        TOutputObject SwitchName(string newName);
-    }
+    TOutputObject SwitchName(string newName);
 }

@@ -8,39 +8,38 @@ using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.TypeScriptGenerate.Configurations.Environments;
 
-namespace SampleSystem.TypeScriptGenerate.Configurations.Services
+namespace SampleSystem.TypeScriptGenerate.Configurations.Services;
+
+public class MainQueryFacadeConfiguration : BaseFacadeGenerationConfiguration<MainGenerationEnvironment>
 {
-    public class MainQueryFacadeConfiguration : BaseFacadeGenerationConfiguration<MainGenerationEnvironment>
-    {
-        internal MainQueryFacadeConfiguration(MainGenerationEnvironment environment)
+    internal MainQueryFacadeConfiguration(MainGenerationEnvironment environment)
             : base(environment)
-        {
-        }
+    {
+    }
 
-        public override IEnumerable<Type> GetFacadeTypes()
-        {
-            var t = typeof(SampleSystem.WebApiCore.Controllers.MainQuery.EmployeeQueryController);
+    public override IEnumerable<Type> GetFacadeTypes()
+    {
+        var t = typeof(SampleSystem.WebApiCore.Controllers.MainQuery.EmployeeQueryController);
 
-            return t.Assembly.GetTypes().Where(v => typeof(ControllerBase).IsAssignableFrom(v) && v.Namespace == t.Namespace);
-        }
+        return t.Assembly.GetTypes().Where(v => typeof(ControllerBase).IsAssignableFrom(v) && v.Namespace == t.Namespace);
+    }
 
-        public override IEnumerable<RequireJsModule> GetModules()
-        {
-            return base.GetModules()
-                       .Concat(
-                               new List<RequireJsModule>
-                               {
+    public override IEnumerable<RequireJsModule> GetModules()
+    {
+        return base.GetModules()
+                   .Concat(
+                           new List<RequireJsModule>
+                           {
                                    new RequireJsModule("* as dto", "../dto/entities.generated",
                                                        "SampleSystem.Generated.DTO",
                                                        "SampleSystem"),
                                    new RequireJsModule("* as persistent", "../../app/common/HierarchicalNode",
                                                        "Framework.Persistent")
-                               });
-        }
+                           });
+    }
 
-        public override string GetFacadeFileFactoryName()
-        {
-            return "Environment.current.context.facadeFactory";
-        }
+    public override string GetFacadeFileFactoryName()
+    {
+        return "Environment.current.context.facadeFactory";
     }
 }

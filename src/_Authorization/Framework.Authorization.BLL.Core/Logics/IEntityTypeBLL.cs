@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 
-namespace Framework.Authorization.BLL
+namespace Framework.Authorization.BLL;
+
+public partial interface IEntityTypeBLL
 {
-    public partial interface IEntityTypeBLL
-    {
-        void Register(IEnumerable<Assembly> assemblies);
-    }
+    void Register(IEnumerable<Assembly> assemblies);
 }

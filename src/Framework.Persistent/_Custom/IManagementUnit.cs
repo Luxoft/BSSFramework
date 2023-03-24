@@ -1,7 +1,6 @@
-﻿namespace Framework.Persistent
-{
-    public interface IManagementUnit
-    {
+﻿namespace Framework.Persistent;
 
-    }
+public interface IManagementUnit
+{
+
 }

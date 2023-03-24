@@ -52,6 +52,7 @@ public static class ServiceCollectionExtensions
         services.RegisterAuthorizationBLL();
         services.RegisterConfigurationBLL();
 
+        services.AddScoped<ILegacyGenericDisabledSecurityProviderFactory, LegacyGenericDisabledSecurityProviderFactory>();
         services.AddScoped<INotImplementedDomainSecurityServiceContainer, OnlyDisabledDomainSecurityServiceContainer>();
 
         return services;

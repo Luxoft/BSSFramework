@@ -149,6 +149,9 @@ public static class SampleSystemFrameworkExtensions
         // For expand tree
         services.RegisterHierarchicalObjectExpander<PersistentDomainObjectBase>();
 
+        // For repository
+        services.AddScoped(_ => new LegacyPersistentDomainObjectBaseList(typeof(PersistentDomainObjectBase)));
+
         return services;
     }
 }

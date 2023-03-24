@@ -2,18 +2,16 @@
 
 using Framework.Core;
 
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Framework.SecuritySystem;
 
 public class OnlyDisabledDomainSecurityService<TDomainObject, TSecurityOperationCode> : IDomainSecurityService<TDomainObject, TSecurityOperationCode>
         where TSecurityOperationCode : struct, Enum where TDomainObject : class
 {
-    private readonly IServiceProvider serviceProvider;
+    private readonly ILegacyGenericDisabledSecurityProviderFactory legacyGenericDisabledSecurityProviderFactory;
 
-    public OnlyDisabledDomainSecurityService(IServiceProvider serviceProvider)
+    public OnlyDisabledDomainSecurityService(ILegacyGenericDisabledSecurityProviderFactory legacyGenericDisabledSecurityProviderFactory)
     {
-        this.serviceProvider = serviceProvider;
+        this.legacyGenericDisabledSecurityProviderFactory = legacyGenericDisabledSecurityProviderFactory;
     }
 
     public ISecurityProvider<TDomainObject> GetSecurityProvider(BLLSecurityMode securityMode)
@@ -31,13 +29,13 @@ public class OnlyDisabledDomainSecurityService<TDomainObject, TSecurityOperation
         return this.GetSecurityProviderInternal(securityOperation.Code);
     }
 
-    public ISecurityProvider<TDomainObject> GetSecurityProviderInternal<T>(T securityMode)
+    public ISecurityProvider<TDomainObject> GetSecurityProviderInternal<TSecurityMode>(TSecurityMode securityMode)
     {
         if (!securityMode.IsDefault())
         {
             throw new InvalidOperationException($"Security mode \"{securityMode}\" not allowed");
         }
 
-        return ActivatorUtilities.CreateInstance<DisabledSecurityProvider<TDomainObject>>(this.serviceProvider);
+        return this.legacyGenericDisabledSecurityProviderFactory.GetDisabledSecurityProvider<TDomainObject>();
     }
 }

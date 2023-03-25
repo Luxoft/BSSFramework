@@ -9,9 +9,9 @@ public interface IAsyncDal<TDomainObject, in TIdent>
 {
     IQueryable<TDomainObject> GetQueryable();
 
-    TDomainObject Load(Guid id);
+    TDomainObject Load(object id);
 
-    Task<TDomainObject> LoadAsync(Guid id, CancellationToken cancellationToken = default);
+    Task<TDomainObject> LoadAsync(object id, CancellationToken cancellationToken = default);
 
     Task SaveAsync(TDomainObject domainObject, CancellationToken cancellationToken = default);
 

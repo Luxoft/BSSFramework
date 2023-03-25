@@ -19,6 +19,10 @@ public interface IRepository<TDomainObject, in TIdent>
 
     IQueryable<TDomainObject> GetQueryable();
 
+    TDomainObject Load(TIdent id);
+
+    Task<TDomainObject> LoadAsync(TIdent id, CancellationToken cancellationToken = default);
+
     /// <summary>
     /// Get Queryable by Specification https://github.com/NikitaEgorov/nuSpec
     /// </summary>

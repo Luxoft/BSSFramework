@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,9 +8,9 @@ public interface IAsyncDal<TDomainObject, in TIdent>
 {
     IQueryable<TDomainObject> GetQueryable();
 
-    TDomainObject Load(object id);
+    TDomainObject Load(TIdent id);
 
-    Task<TDomainObject> LoadAsync(object id, CancellationToken cancellationToken = default);
+    Task<TDomainObject> LoadAsync(TIdent id, CancellationToken cancellationToken = default);
 
     Task SaveAsync(TDomainObject domainObject, CancellationToken cancellationToken = default);
 

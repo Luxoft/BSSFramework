@@ -39,9 +39,9 @@ public class NHibAsyncDal<TDomainObject, TIdent> : IAsyncDal<TDomainObject, TIde
         return queryable;
     }
 
-    public virtual TDomainObject Load(object id) => this.NativeSession.Load<TDomainObject>(id);
+    public virtual TDomainObject Load(TIdent id) => this.NativeSession.Load<TDomainObject>(id);
 
-    public virtual async Task<TDomainObject> LoadAsync(object id, CancellationToken cancellationToken = default) =>
+    public virtual async Task<TDomainObject> LoadAsync(TIdent id, CancellationToken cancellationToken = default) =>
         await this.NativeSession.LoadAsync<TDomainObject>(id, cancellationToken);
 
     public virtual async Task SaveAsync(TDomainObject domainObject, CancellationToken cancellationToken = default)

@@ -11,7 +11,7 @@ public interface IAsyncDal<TDomainObject, in TIdent>
 
     TDomainObject Load(Guid id);
 
-    Task<TDomainObject> LoadAsync(Guid id);
+    Task<TDomainObject> LoadAsync(Guid id, CancellationToken cancellationToken = default);
 
     Task SaveAsync(TDomainObject domainObject, CancellationToken cancellationToken = default);
 

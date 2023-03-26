@@ -9,6 +9,6 @@
     <PackageReference Include="MSTest.TestFramework" Version="3.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SampleSystem.TypeScriptGenerate\SampleSystem.TypeScriptGenerate.csproj" />
+    <ProjectReference Include="..\SampleSystem.CodeGenerate\SampleSystem.CodeGenerate.csproj" />
   </ItemGroup>
 </Project>

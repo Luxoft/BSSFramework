@@ -2,13 +2,13 @@
 
 using FluentAssertions;
 
+using Framework.DomainDriven.DBGenerator;
+
 using Microsoft.SqlServer.Management.Smo;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.DbGenerate;
-using SampleSystem.IntegrationTests.__Support;
-using Framework.DomainDriven.DBGenerator;
+using SampleSystem.IntegrationTests.__Support.TestData;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;
 
@@ -30,10 +30,7 @@ public class UniqueGroupDatabaseScriptGeneratorTests : TestBase
         var index = table.Indexes[indexName];
         index.Drop();
 
-        var newIndex = new Index(table, indexName)
-                       {
-                               IndexKeyType = IndexKeyType.DriUniqueKey
-                       };
+        var newIndex = new Index(table, indexName) { IndexKeyType = IndexKeyType.DriUniqueKey };
         var column = new IndexedColumn(newIndex, "roleDegreeId");
         newIndex.IndexedColumns.Add(column);
 
@@ -41,14 +38,15 @@ public class UniqueGroupDatabaseScriptGeneratorTests : TestBase
 
         // Act
         generator.GenerateAllDB(
-                                this.DatabaseContext.Main.DataSource,
-                                this.DatabaseContext.Main.DatabaseName,
-                                credential: UserCredential.Create(
-                                                                  this.DatabaseContext.Main.UserId,
-                                                                  this.DatabaseContext.Main.Password),
-                                skipFrameworkDatabases: true);
+            this.DatabaseContext.Main.DataSource,
+            this.DatabaseContext.Main.DatabaseName,
+            credential: UserCredential.Create(
+                this.DatabaseContext.Main.UserId,
+                this.DatabaseContext.Main.Password),
+            skipFrameworkDatabases: true);
 
         var changedTable = this.DataHelper.GetTable(this.DatabaseContext.Main.DatabaseName, tableName);
+
         //  changedTable.Indexes.Refresh();
         var indexes = changedTable.Indexes.Cast<Index>().ToList();
 

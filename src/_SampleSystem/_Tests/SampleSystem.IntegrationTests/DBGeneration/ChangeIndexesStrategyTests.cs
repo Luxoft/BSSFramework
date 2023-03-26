@@ -10,6 +10,8 @@ using SampleSystem.DbGenerate;
 using SampleSystem.IntegrationTests.__Support;
 using Framework.DomainDriven.DBGenerator;
 
+using Index = Microsoft.SqlServer.Management.Smo.Index;
+
 namespace SampleSystem.IntegrationTests.DBGeneration;
 
 [TestClass]

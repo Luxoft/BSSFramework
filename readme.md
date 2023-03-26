@@ -15,8 +15,9 @@ Features:
 - **Notification**
 - **Reporting**
 - **Intergation**
-- ~~**Regular Jobs**~~ Hangfire
-- **Data Audit**
+- **Hangfire** https://www.hangfire.io/
+- **CAP** https://cap.dotnetcore.xyz/
+- **Data Audit** https://github.com/nhibernate/nhibernate-envers
 - **Logging**
 - **Validation**
 - **Code Generation**
@@ -24,6 +25,5 @@ Features:
     - DTO/Mapping Generation
     - ORM Mapping Generation
     - RestApi Generation
-    - TypeScript Generation
 - **Unit Testing**
 - **Integration Testing**

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using Framework.Core;
-
-namespace Framework.Persistent.Mapping;
+﻿namespace Framework.Persistent.Mapping;
 
 public static class TypeExtensions
 {

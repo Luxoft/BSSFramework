@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.QueryLanguage;
+﻿namespace Framework.QueryLanguage;
 
 public static class MethodExpressionTypeExtensions
 {

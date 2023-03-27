@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.DomainDriven.DAL.Sql;
+﻿using Framework.DomainDriven.DAL.Sql;
 using Framework.DomainDriven.DBGenerator.Team;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;

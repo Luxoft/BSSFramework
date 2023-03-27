@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.DomainDriven.Attributes;
+﻿using Framework.DomainDriven.Attributes;
 using Framework.Restriction;
 
 namespace Framework.Configuration.Domain;

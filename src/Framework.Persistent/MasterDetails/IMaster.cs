@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Framework.Persistent;
+﻿namespace Framework.Persistent;
 
 /// <summary>
 /// Описывает мастер-объект в связке мастер-деталь

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven;
+﻿namespace Framework.DomainDriven;
 
 /// <summary>
 /// Параметры управления генерацией по модели

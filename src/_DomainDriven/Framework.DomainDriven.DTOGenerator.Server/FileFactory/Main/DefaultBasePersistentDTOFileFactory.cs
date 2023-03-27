@@ -1,5 +1,4 @@
 ﻿using System.CodeDom;
-using System.Collections.Generic;
 
 using Framework.CodeDom;
 using Framework.DomainDriven.Generation.Domain;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.CodeDom;
+﻿using System.CodeDom;
 using System.Reflection;
 
 using Framework.CodeDom;
@@ -23,7 +22,7 @@ public class UpdateCodeTypeReferenceService<TConfiguration> : LayerCodeTypeRefer
         if (property == null) throw new ArgumentNullException(nameof(property));
 
         var isIdOrVersion = this.Configuration.IsIdentityOrVersionProperty(property);
-            
+
         var isCollection = property.PropertyType.GetCollectionElementType().Maybe(this.IsDomainType);
 
         return !isIdOrVersion && !isCollection;

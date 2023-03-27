@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-using FluentAssertions;
+﻿using FluentAssertions;
 
 using Framework.DomainDriven.DBGenerator;
 
@@ -9,6 +7,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.DbGenerate;
 using SampleSystem.IntegrationTests.__Support.TestData;
+
+using Index = Microsoft.SqlServer.Management.Smo.Index;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;
 

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+﻿using System.CodeDom;
 
 using Framework.Core;
 using Framework.CodeDom;
 using Framework.DomainDriven.BLLCoreGenerator;
-using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 

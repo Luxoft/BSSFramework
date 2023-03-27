@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Framework.DomainDriven.NHibernate;
+﻿using Framework.DomainDriven.NHibernate;
 
 namespace Framework.DomainDriven.DBGenerator;
 

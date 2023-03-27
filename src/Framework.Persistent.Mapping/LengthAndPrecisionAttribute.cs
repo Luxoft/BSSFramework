@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Persistent.Mapping;
+﻿namespace Framework.Persistent.Mapping;
 
 /// <summary>
 /// Указание размера и точности для decimal типа

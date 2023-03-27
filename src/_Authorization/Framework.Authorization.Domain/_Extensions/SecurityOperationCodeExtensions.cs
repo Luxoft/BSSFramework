@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.DomainDriven.BLL.Security;
+﻿using Framework.DomainDriven.BLL.Security;
 
 namespace Framework.Authorization.Domain;
 

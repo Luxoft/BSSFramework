@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Framework.Configuration.SubscriptionModeling;
+﻿using Framework.Configuration.SubscriptionModeling;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Authorization.Domain;
+﻿namespace Framework.Authorization.Domain;
 
 /// <summary>
 /// Перечень действий, который можно делать c объектом

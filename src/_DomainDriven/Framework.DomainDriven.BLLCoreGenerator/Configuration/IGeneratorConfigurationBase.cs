@@ -1,6 +1,4 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.CodeDom;
 using System.Collections.ObjectModel;
 using System.Reflection;
 
@@ -44,7 +42,7 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
     bool GenerateValidationMap { get; }
 
     bool GenerateValidator { get; }
-        
+
     bool GenerateFetchService { get; }
 
     ReadOnlyCollection<Type> BLLDomainTypes { get; }

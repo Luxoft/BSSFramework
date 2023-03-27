@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace Framework.Validation;
+﻿namespace Framework.Validation;
 
 [Flags]
 public enum SignType

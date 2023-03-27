@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 [Flags]
 public enum TypeSearchMode

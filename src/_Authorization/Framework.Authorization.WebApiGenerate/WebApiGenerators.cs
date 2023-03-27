@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
-using Framework.DomainDriven.Generation;
+﻿using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.WebApiGenerator.NetCore.SingleController;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;

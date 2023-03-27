@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Framework.Authorization.BLL;
+﻿using Framework.Authorization.BLL;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.DomainDriven;
 using Framework.DomainDriven.ServiceModel.IAD;

@@ -1,6 +1,4 @@
-﻿using System;
-
-using AutoFixture;
+﻿using AutoFixture;
 using AutoFixture.Idioms;
 
 using FluentAssertions;
@@ -12,7 +10,6 @@ using Framework.Notification;
 using Framework.UnitTesting;
 using NUnit.Framework;
 using NSubstitute;
-using NSubstitute.ExceptionExtensions;
 
 namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Services;
 
@@ -83,7 +80,7 @@ public class SubscriptionServicesFactoryTests : TestFixtureBase
         // Assert
         service.Should().NotBeNull();
     }
-        
+
     [Test]
     public void CreateRevisionServiceByType_Call_ServiceInstance()
     {

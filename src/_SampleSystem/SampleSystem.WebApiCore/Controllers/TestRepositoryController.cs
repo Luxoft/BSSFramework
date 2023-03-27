@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-
-using Framework.DomainDriven;
+﻿using Framework.DomainDriven;
 
 using Microsoft.AspNetCore.Mvc;
 

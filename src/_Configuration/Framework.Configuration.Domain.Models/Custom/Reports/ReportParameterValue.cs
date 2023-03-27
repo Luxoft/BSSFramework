@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Configuration.Domain.Reports;
+﻿using Framework.Configuration.Domain.Reports;
 using Framework.DomainDriven.Serialization;
 using Framework.Restriction;
 

@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using NHibernate.Event;
+﻿using NHibernate.Event;
 
 namespace NHibernate.Envers.Patch;
 

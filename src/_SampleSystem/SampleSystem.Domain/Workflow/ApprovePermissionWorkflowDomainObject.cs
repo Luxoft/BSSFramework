@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.DomainDriven.BLL;
+﻿using Framework.DomainDriven.BLL;
 
 namespace SampleSystem.Domain;
 

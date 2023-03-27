@@ -1,6 +1,5 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.BLL.Configuration;
-using Framework.Notification.New;
 using Framework.NotificationCore.Jobs;
 using Framework.NotificationCore.Senders;
 using Framework.NotificationCore.Services;

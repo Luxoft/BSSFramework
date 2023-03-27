@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.BLL;
+﻿namespace Framework.DomainDriven.BLL;
 
 public abstract class OperationBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObjectBase, TDomainObject, TOperation> : BLLContextContainer<TBLLContext>, IOperationBLLBase<TDomainObject>
 

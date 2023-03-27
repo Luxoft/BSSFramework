@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.ServiceModel.Tests.Unit;
+﻿namespace Framework.DomainDriven.ServiceModel.Tests.Unit;
 
 public class PersistentDomainObject
 {

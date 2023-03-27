@@ -1,10 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-
-using JetBrains.Annotations;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 public static class ArrayExtensions
 {

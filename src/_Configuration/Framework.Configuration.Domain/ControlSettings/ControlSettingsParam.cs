@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Framework.DomainDriven.Attributes;
+﻿using Framework.DomainDriven.Attributes;
 using Framework.Persistent;
 
 namespace Framework.Configuration.Domain;

@@ -1,5 +1,4 @@
-﻿using System;
-using Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
+﻿using Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
 
 namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy;
 

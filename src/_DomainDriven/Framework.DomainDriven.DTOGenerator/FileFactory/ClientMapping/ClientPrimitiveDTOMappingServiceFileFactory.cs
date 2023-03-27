@@ -1,9 +1,7 @@
-﻿using System;
-using System.CodeDom;
+﻿using System.CodeDom;
 using System.Reflection;
 
 using Framework.CodeDom;
-using Framework.Core;
 
 namespace Framework.DomainDriven.DTOGenerator;
 
@@ -29,7 +27,7 @@ public class ClientPrimitiveDTOMappingServiceFileFactory<TConfiguration> : FileF
                        IsPartial = true
                };
     }
-        
+
     protected override System.Collections.Generic.IEnumerable<CodeTypeMember> GetMembers()
     {
         var currentInstanceField = new CodeMemberField
@@ -39,7 +37,7 @@ public class ClientPrimitiveDTOMappingServiceFileFactory<TConfiguration> : FileF
                                            Type = this.CurrentReference,
                                            InitExpression = this.CurrentReference.ToObjectCreateExpression(),
                                    };
-            
+
         yield return currentInstanceField;
 
         yield return new CodeMemberProperty

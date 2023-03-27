@@ -1,8 +1,6 @@
-﻿using System.IO;
-using System.Text;
+﻿using System.Text;
 
 using Framework.Configuration.Core;
-using Framework.Configuration.Domain;
 
 using SampleSystem.BLL;
 
@@ -26,7 +24,7 @@ public sealed class AttachmentLambdaTemplateEvaluator : AttachmentLambdaBase<Dom
             DomainObjectVersions<Domain.Employee> versions)
     {
         var template = Encoding.UTF8.GetBytes($"Hello world! {versions.Current.NameNative}");
-            
+
         return new[] { new System.Net.Mail.Attachment(new MemoryStream(template), AttachmentLambdaTemplateEvaluator.AttachmentName) };
     }
 }

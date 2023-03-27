@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Configuration.BLL;
+﻿using Framework.Configuration.BLL;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.ServiceModel.Subscriptions;

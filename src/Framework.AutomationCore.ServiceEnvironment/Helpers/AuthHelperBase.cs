@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-using Automation.ServiceEnvironment.Services;
+﻿using Automation.ServiceEnvironment.Services;
 using Automation.Utils;
 
 using Framework.Authorization.BLL;

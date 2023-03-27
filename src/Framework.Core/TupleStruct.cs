@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 [Obsolete("v10 Use ValueTuple")]
 public static class TupleStruct

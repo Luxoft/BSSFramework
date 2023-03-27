@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Authorization.BLL;
+﻿using Framework.Authorization.BLL;
 using Framework.Authorization.Events;
 using Framework.Authorization.Generated.DTO;
 using Framework.Configuration.BLL;
@@ -19,7 +17,6 @@ using Framework.DomainDriven.WebApiNetCore;
 using Framework.Events;
 using Framework.Persistent;
 using Framework.QueryableSource;
-using Framework.Security;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Rules.Builders;
 

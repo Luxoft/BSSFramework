@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-using Automation.Utils;
+﻿using Automation.Utils;
 using Automation.Utils.DatabaseUtils;
 using Automation.Utils.DatabaseUtils.Interfaces;
 

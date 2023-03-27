@@ -1,9 +1,4 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-
-using Framework.CodeDom;
-using Framework.Core;
+﻿using System.CodeDom;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 

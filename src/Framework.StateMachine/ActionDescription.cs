@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.StateMachine;
+﻿namespace Framework.StateMachine;
 
 public class ActionDescription : ActionDescription<State>
 {

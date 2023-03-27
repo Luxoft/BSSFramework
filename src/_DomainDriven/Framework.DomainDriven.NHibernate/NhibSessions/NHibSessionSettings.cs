@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Core.Services;
+﻿using Framework.Core.Services;
 using Framework.DomainDriven.Audit;
 
 using JetBrains.Annotations;

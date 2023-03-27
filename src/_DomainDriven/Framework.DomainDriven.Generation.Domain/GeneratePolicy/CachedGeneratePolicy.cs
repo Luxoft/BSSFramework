@@ -1,5 +1,3 @@
-using System;
-
 using Framework.Core;
 
 namespace Framework.DomainDriven.Generation.Domain;

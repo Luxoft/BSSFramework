@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.DomainDriven.DAL.Revisions;
+﻿using Framework.DomainDriven.DAL.Revisions;
 
 using NHibernate.Envers;
 

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Validation;
+﻿namespace Framework.Validation;
 
 public class ALLPropertiesValidator<TProperty> : IPropertyValidator<object, TProperty>
         where TProperty : class

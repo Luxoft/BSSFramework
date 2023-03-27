@@ -1,6 +1,4 @@
-﻿using System;
-using Framework.DomainDriven.DBGenerator.Contracts;
-using Framework.DomainDriven.NHibernate;
+﻿using Framework.DomainDriven.DBGenerator.Contracts;
 
 namespace Framework.DomainDriven.DBGenerator;
 

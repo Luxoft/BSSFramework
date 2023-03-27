@@ -1,10 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 using Framework.Authorization.Domain;
 using Framework.Core;
-using Framework.DomainDriven.BLL.Security;
 using Framework.Persistent;
 using Framework.SecuritySystem;
 

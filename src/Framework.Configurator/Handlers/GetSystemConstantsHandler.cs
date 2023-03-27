@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-using Framework.Configuration.BLL;
+﻿using Framework.Configuration.BLL;
 using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
 using Framework.SecuritySystem;

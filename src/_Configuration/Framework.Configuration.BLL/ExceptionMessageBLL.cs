@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.Configuration.Domain;
 
 namespace Framework.Configuration.BLL;

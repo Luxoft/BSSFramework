@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Specialized;
-using System.Configuration;
-using System.Linq;
+﻿using System.Configuration;
+
 using Framework.Core.Serialization;
 
 namespace Framework.Core;

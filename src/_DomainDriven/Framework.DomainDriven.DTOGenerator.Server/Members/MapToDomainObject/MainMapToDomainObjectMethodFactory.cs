@@ -1,5 +1,5 @@
 ﻿using System.CodeDom;
-using System.Collections.Generic;
+
 using Framework.CodeDom;
 
 namespace Framework.DomainDriven.DTOGenerator.Server;

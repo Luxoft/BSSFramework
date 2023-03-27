@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Projection;
+﻿namespace Framework.Projection;
 
 /// <summary>
 /// Применимость фильтра проекций

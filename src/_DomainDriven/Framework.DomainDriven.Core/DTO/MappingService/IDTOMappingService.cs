@@ -1,6 +1,4 @@
-﻿using Framework.DomainDriven.BLL;
-
-namespace Framework.DomainDriven;
+﻿namespace Framework.DomainDriven;
 
 public interface IDTOMappingService<in TPersistentDomainObjectBase, in TIdent>
 {

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Mail;
+﻿using System.Net.Mail;
 
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;

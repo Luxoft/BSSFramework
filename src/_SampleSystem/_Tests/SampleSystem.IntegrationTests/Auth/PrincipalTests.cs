@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using FluentAssertions;
+﻿using FluentAssertions;
 
 using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
@@ -11,7 +7,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers;
-using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests.Auth;
 

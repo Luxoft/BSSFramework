@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Framework.DomainDriven;
+﻿using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 
 using SampleSystem.Domain;

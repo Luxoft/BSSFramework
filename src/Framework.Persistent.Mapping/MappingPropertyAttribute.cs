@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Persistent.Mapping;
+﻿namespace Framework.Persistent.Mapping;
 
 /// <summary>
 /// Update, Insert (optional - defaults to true): specifies that the mapped columns should be included in SQL UPDATE and/or INSERT statements. Setting both to false allows a pure "derived" property whose value is initialized from some other property that maps to the same column(s) or by a trigger or other application.

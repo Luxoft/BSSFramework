@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace Framework.DomainDriven.DBGenerator;
+﻿namespace Framework.DomainDriven.DBGenerator;
 
 [Obsolete("This type was renamed. Use UserCredential instead")]
 public class UserCredentional

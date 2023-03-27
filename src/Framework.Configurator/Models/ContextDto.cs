@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Framework.Configurator.Models;
+﻿namespace Framework.Configurator.Models;
 
 public class ContextDto : EntityDto
 {

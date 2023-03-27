@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 using FluentAssertions;
 
@@ -75,9 +71,9 @@ public class InlineEvalTests
     //    // Arrange
 
     //    var supportObjectsQ = new[] { new SupportObject() }.AsQueryable();
-        
+
     //    Expression<Func<TestObjectItem, int>> itemValueExpr = item => item.Value;
-        
+
     //    Expression<Func<TestObject, IEnumerable<TestObjectItem>>> itemsExpr = testObject => testObject.Items;
 
     //    Expression<Func<TestObjectItem, SupportObject, bool>> supportObjectConditionExpr = (item, itemSo) => supportObjectsQ.Any(so => so == itemSo && so.Value == itemValueExpr.Eval(item));

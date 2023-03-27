@@ -1,6 +1,4 @@
-﻿using SampleSystem.Domain.Inline;
-
-namespace SampleSystem.Domain;
+﻿namespace SampleSystem.Domain;
 
 public interface IExternalSynchronizable
 {

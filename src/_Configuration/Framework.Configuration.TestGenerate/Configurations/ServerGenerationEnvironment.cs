@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-
-using Framework.DomainDriven;
-using Framework.DomainDriven.Generation.Domain;
+﻿using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate;
 using Framework.Configuration.Domain;
 

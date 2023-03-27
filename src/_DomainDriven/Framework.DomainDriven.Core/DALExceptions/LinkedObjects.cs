@@ -1,5 +1,4 @@
-﻿using System;
-using Framework.Validation;
+﻿using Framework.Validation;
 
 namespace Framework.DomainDriven;
 

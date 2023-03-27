@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Persistent;
+﻿namespace Framework.Persistent;
 
 [AttributeUsage(AttributeTargets.Property)]
 public class MoneyAttribute : RoundDecimalAttribute

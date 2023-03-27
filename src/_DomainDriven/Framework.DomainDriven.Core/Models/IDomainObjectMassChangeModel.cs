@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Framework.Restriction;
+﻿using Framework.Restriction;
 
 namespace Framework.DomainDriven;
 

@@ -1,6 +1,4 @@
-﻿using Framework.DomainDriven.BLL;
-
-namespace Framework.Configuration.BLL;
+﻿namespace Framework.Configuration.BLL;
 
 public enum TargetEmailType
 {

@@ -1,7 +1,4 @@
-﻿using System;
-
-using Framework.Core;
-using Framework.DomainDriven.BLL;
+﻿using Framework.Core;
 using Framework.DomainDriven.BLL.Configuration;
 using Framework.Exceptions;
 using Framework.Notification;

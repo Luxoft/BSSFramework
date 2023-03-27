@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven;
+﻿namespace Framework.DomainDriven;
 
 public interface IOperationEventListener<in TPersistentDomainObjectBase>
         where TPersistentDomainObjectBase : class

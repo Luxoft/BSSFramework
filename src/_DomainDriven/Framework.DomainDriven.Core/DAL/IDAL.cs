@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-using Framework.DomainDriven.DAL.Revisions;
+﻿using Framework.DomainDriven.DAL.Revisions;
 
 namespace Framework.DomainDriven;
 

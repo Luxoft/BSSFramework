@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Persistent;
+﻿namespace Framework.Persistent;
 
 [Obsolete("Does not used anymore, will be removed in future version", false)]
 public class PersistentDomainObjectAttribute : Attribute

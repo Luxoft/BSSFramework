@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Framework.Configuration.SubscriptionModeling;
+﻿using Framework.Configuration.SubscriptionModeling;
 using Framework.Persistent;
 
 using DomainObjectChangeType = Framework.Configuration.SubscriptionModeling.DomainObjectChangeType;

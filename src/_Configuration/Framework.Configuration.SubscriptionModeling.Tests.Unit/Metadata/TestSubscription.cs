@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Framework.Notification;
+﻿using Framework.Notification;
 using Framework.SecuritySystem;
 
 namespace Framework.Configuration.SubscriptionModeling.Tests.Unit.Metadata;

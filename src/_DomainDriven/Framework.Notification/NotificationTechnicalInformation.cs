@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Notification;
+﻿namespace Framework.Notification;
 
 public struct NotificationTechnicalInformation
 {

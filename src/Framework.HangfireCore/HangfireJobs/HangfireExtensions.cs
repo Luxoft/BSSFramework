@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.HangfireCore;
+﻿using Framework.HangfireCore;
 
 using Hangfire;
 using Hangfire.Dashboard;

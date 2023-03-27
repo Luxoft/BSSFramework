@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Configuration.Domain;
+﻿using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Exceptions;
 using Framework.Validation;

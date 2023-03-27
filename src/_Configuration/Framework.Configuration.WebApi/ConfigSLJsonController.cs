@@ -1,6 +1,5 @@
 ﻿using Framework.Configuration.BLL;
 using Framework.Configuration.Generated.DTO;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.WebApi.Utils.SL;

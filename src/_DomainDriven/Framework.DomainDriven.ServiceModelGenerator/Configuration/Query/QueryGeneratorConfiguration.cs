@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Framework.Core;
-using Framework.DomainDriven.BLL;
-using Framework.Transfering;
-
-namespace Framework.DomainDriven.ServiceModelGenerator;
+﻿namespace Framework.DomainDriven.ServiceModelGenerator;
 
 public abstract class QueryGeneratorConfigurationBase<TEnvironment> : GeneratorConfigurationBase<TEnvironment>
         where TEnvironment : class, IGenerationEnvironmentBase

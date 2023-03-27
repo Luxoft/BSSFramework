@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using System.Runtime.Serialization;
-using Framework.Authorization.BLL;
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 
 namespace Framework.Authorization.Generated.DTO;
 

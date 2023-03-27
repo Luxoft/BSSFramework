@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Framework.SecuritySystem.DiTests;
+﻿namespace Framework.SecuritySystem.DiTests;
 
 public class ExamplePrincipalPermissionSource : IPrincipalPermissionSource<Guid>
 {

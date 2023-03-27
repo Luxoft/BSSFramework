@@ -1,12 +1,6 @@
-﻿using System;
-
-using Framework.Authorization.BLL;
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.ServiceModel.Service;
-using Framework.Exceptions;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +10,7 @@ namespace SampleSystem.WebApiCore.Controllers;
 public class AuthSLJsonController : Framework.Authorization.WebApi.AuthSLJsonController
 {
     public AuthSLJsonController()
-            
+
     {
     }
 

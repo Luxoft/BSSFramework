@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Framework.Configuration.Domain.Reports;
+﻿using Framework.Configuration.Domain.Reports;
 using Framework.DomainDriven;
 using Framework.DomainDriven.Serialization;
 

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Framework.SecuritySystem;
+﻿namespace Framework.SecuritySystem;
 
 public interface IPermission<out TIdent>
 {

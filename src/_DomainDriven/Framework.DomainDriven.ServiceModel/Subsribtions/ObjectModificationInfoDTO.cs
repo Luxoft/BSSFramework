@@ -1,5 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
 

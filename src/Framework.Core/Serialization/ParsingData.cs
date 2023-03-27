@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Framework.Core.Serialization;
+﻿namespace Framework.Core.Serialization;
 
 public class ParsingData<TParsingInfo, TParsingValue> : IEquatable<ParsingData<TParsingInfo, TParsingValue>>
 {

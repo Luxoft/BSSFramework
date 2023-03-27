@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Framework.Restriction;
+﻿using Framework.Restriction;
 using Framework.Validation;
 
 namespace Framework.Configuration.Domain;

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Framework.CodeDom;
+﻿using Framework.CodeDom;
 
 using JetBrains.Annotations;
 

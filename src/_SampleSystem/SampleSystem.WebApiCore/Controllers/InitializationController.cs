@@ -1,12 +1,8 @@
-﻿using System;
-
-using Framework.Authorization.BLL;
-using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+﻿using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.DomainDriven;
 using Framework.DomainDriven.ServiceModel.IAD;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
 using SampleSystem.ServiceEnvironment;

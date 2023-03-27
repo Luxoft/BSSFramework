@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SampleSystem.BLL;
+﻿namespace SampleSystem.BLL;
 
 public partial interface INamedLockBLL
 {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SampleSystem.Domain.Models.Custom;
+﻿namespace SampleSystem.Domain.Models.Custom;
 
 public class DateModel : DomainObjectBase
 {

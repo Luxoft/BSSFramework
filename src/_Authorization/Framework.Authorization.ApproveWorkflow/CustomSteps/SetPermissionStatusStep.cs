@@ -1,9 +1,7 @@
-﻿using System.Threading.Tasks;
-
-using Framework.Authorization.BLL;
+﻿using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
+
 using JetBrains.Annotations;
 
 using WorkflowCore.Interface;

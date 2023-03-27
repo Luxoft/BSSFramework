@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-using Automation.ServiceEnvironment;
+﻿using Automation.ServiceEnvironment;
 
 using FluentAssertions;
 

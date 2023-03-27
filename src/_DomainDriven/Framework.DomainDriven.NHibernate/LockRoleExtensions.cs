@@ -1,6 +1,4 @@
-﻿using System;
-
-using NHibernate;
+﻿using NHibernate;
 
 namespace Framework.DomainDriven.NHibernate;
 

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven;
+﻿namespace Framework.DomainDriven;
 
 public interface IDomainOperationEventArgs<out TDomainObject>
         where TDomainObject : class

@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace Framework.DomainDriven;
+﻿namespace Framework.DomainDriven;
 
 public interface IAsyncDal<TDomainObject, in TIdent>
 {

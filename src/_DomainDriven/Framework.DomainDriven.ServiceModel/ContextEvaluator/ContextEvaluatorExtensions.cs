@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.ServiceModel.Service;
 
 using JetBrains.Annotations;

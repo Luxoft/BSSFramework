@@ -1,5 +1,4 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven;
 using Framework.Persistent;
 using Framework.Projection.Contract;
 

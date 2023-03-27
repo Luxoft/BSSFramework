@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Configuration.Domain;
+﻿using Framework.Configuration.Domain;
 using Framework.Validation;
 
 namespace Framework.Configuration.BLL;

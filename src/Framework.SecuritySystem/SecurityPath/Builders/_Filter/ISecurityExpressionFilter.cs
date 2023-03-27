@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Framework.SecuritySystem.Rules.Builders;
+﻿namespace Framework.SecuritySystem.Rules.Builders;
 
 public interface ISecurityExpressionFilter<TDomainObject>
 {

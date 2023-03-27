@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using Framework.Validation;
-
-namespace Framework.Authorization.Domain;
+﻿namespace Framework.Authorization.Domain;
 
 public class UpdatePermissionDelegatesModel : DomainObjectBase
 {

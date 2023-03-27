@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.DomainDriven.BLL.Tracking;
+﻿using Framework.DomainDriven.BLL.Tracking;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.QueryLanguage;

@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Restriction;
+﻿using Framework.Restriction;
 
 namespace Framework.Validation;
 

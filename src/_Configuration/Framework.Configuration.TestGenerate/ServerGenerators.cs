@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-using Framework.DomainDriven.BLLCoreGenerator;
+﻿using Framework.DomainDriven.BLLCoreGenerator;
 using Framework.DomainDriven.BLLGenerator;
 using Framework.DomainDriven.DTOGenerator.Server;
 using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.NHibernate.DALGenerator;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using FileInfo = Framework.DomainDriven.Generation.FileInfo;
 
 namespace Framework.Configuration.TestGenerate;
 

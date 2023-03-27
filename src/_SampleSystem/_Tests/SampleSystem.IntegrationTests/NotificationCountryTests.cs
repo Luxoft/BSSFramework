@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using FluentAssertions;
+﻿using FluentAssertions;
 
 using Framework.Configuration.Domain;
 using Framework.DomainDriven;

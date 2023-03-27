@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.BLLCoreGenerator;
+﻿namespace Framework.DomainDriven.BLLCoreGenerator;
 
 public enum FileType
 {

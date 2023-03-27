@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Framework.Persistent.Mapping;
+﻿using Framework.Persistent.Mapping;
 using Framework.DomainDriven.Metadata;
 
 using Microsoft.SqlServer.Management.Smo;

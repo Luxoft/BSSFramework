@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
+﻿using Framework.DomainDriven;
 using Framework.OData;
 using Framework.Persistent;
 using Framework.Transfering;

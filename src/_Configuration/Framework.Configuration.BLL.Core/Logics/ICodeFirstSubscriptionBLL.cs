@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Framework.Configuration.Domain;
+﻿using Framework.Configuration.Domain;
 
 namespace Framework.Configuration.BLL;
 

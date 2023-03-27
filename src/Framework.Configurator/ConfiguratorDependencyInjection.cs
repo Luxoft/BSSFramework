@@ -1,11 +1,7 @@
 ﻿using System.Reflection;
 
-using Framework.Authorization.BLL;
-using Framework.Configuration.BLL;
 using Framework.Configurator.Handlers;
 using Framework.Configurator.Interfaces;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL.Security;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;

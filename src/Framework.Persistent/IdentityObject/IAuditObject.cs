@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Persistent;
+﻿namespace Framework.Persistent;
 
 public interface IAuditObject
 {

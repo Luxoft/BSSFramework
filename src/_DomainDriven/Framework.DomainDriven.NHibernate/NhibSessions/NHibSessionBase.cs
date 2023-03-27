@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.BLL.Tracking;
 using Framework.DomainDriven.DAL.Revisions;
 

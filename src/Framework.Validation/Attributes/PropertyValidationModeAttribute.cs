@@ -1,5 +1,3 @@
-using System;
-
 namespace Framework.Validation
 {
     /// <summary>

@@ -1,7 +1,4 @@
-﻿using System;
-
-using Framework.Core;
-using Framework.OData;
+﻿using Framework.OData;
 using Framework.Transfering;
 
 namespace Framework.DomainDriven;

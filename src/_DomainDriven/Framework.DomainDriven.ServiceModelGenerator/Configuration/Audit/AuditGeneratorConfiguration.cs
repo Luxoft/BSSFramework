@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Framework.Core;
-using Framework.DomainDriven.BLL;
-using Framework.Transfering;
-
-namespace Framework.DomainDriven.ServiceModelGenerator;
+﻿namespace Framework.DomainDriven.ServiceModelGenerator;
 
 public abstract class AuditGeneratorConfigurationBase<TEnvironment> : GeneratorConfigurationBase<TEnvironment>, IAuditGeneratorConfigurationBase<TEnvironment>
         where TEnvironment : class, IAuditGenerationEnvironmentBase

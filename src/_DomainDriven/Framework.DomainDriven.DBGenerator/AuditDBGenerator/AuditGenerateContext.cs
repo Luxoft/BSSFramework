@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
+﻿using System.Data.Common;
 using Framework.DomainDriven.DBGenerator.Contracts;
-using Framework.DomainDriven.NHibernate;
 
 using NHibernate.Cfg;
 using NHibernate.Dialect;
-using NHibernate.Dialect.Schema;
 using NHibernate.Engine;
 using NHibernate.Mapping;
 using NHibernate.Tool.hbm2ddl;

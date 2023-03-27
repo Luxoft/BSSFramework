@@ -1,5 +1,4 @@
-﻿using System;
-using Framework.Persistent;
+﻿using Framework.Persistent;
 
 namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3;
 

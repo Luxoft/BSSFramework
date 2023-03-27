@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.Serialization;
+﻿namespace Framework.DomainDriven.Serialization;
 
 [Flags]
 public enum DTORole

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core.Services;
-using Framework.DomainDriven;
+﻿using Framework.DomainDriven;
 using Framework.DomainDriven.DBGenerator;
 using Framework.DomainDriven.NHibernate;
 

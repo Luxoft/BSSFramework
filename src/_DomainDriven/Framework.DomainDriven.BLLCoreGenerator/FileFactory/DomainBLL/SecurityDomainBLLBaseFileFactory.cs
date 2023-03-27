@@ -1,7 +1,6 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 using Framework.CodeDom;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Generation.Domain;
 

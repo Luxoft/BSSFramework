@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
-using Framework.SecuritySystem;
+﻿using Framework.SecuritySystem;
 
 using MediatR;
 

@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.DomainDriven.ServiceModel;
+﻿using Framework.DomainDriven.ServiceModel;
 using Framework.DomainDriven.ServiceModel.Service;
 
 namespace Framework.DomainDriven.WebApiNetCore;

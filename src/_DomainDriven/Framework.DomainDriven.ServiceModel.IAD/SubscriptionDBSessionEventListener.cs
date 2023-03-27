@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Configuration.BLL;
+﻿using Framework.Configuration.BLL;
 using Framework.Core;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;

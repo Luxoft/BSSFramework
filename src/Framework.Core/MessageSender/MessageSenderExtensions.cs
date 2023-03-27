@@ -1,7 +1,4 @@
-﻿using System;
-using Framework.Core;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 public static class MessageSenderExtensions
 {

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace Framework.Authorization.Domain;
+﻿namespace Framework.Authorization.Domain;
 
 public class PermissionRootFilterModel : DomainObjectRootFilterModel<Permission>
 {

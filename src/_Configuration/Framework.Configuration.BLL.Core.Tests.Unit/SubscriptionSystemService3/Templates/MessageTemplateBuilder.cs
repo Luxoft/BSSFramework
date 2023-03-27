@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Framework.Configuration.Domain;
+﻿using Framework.Configuration.Domain;
 using Framework.Notification;
 
 namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Templates;

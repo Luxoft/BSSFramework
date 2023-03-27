@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Persistent;
+﻿using Framework.Persistent;
 using Framework.Validation;
 
 namespace Framework.DomainDriven.BLL;

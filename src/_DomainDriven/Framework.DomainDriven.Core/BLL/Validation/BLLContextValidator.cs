@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Framework.Core.Serialization;
+﻿using Framework.Core.Serialization;
 using Framework.Validation;
 
 using JetBrains.Annotations;

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Projection;
+﻿namespace Framework.Projection;
 
 /// <summary>
 /// Роль проекции
@@ -16,7 +14,7 @@ public enum ProjectionRole
     /// Автоматически достраиваемая проекция (для переходов через ExpandPath)
     /// </summary>
     AutoNode,
-        
+
     /// <summary>
     /// Проекция для безопасности
     /// </summary>

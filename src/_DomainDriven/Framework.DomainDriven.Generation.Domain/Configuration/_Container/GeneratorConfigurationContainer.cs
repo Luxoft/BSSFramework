@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.Generation.Domain;
+﻿namespace Framework.DomainDriven.Generation.Domain;
 
 public class GeneratorConfigurationContainer<TConfiguration> : IGeneratorConfigurationContainer<TConfiguration>
         where TConfiguration : class

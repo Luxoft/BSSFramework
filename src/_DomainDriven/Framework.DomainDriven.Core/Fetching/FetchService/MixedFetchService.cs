@@ -1,5 +1,4 @@
-﻿using System;
-using Framework.OData;
+﻿using Framework.OData;
 
 namespace Framework.DomainDriven;
 

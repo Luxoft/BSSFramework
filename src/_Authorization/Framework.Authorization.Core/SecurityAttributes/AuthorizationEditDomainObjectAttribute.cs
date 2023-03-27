@@ -1,5 +1,4 @@
-﻿using System;
-using Framework.Security;
+﻿using Framework.Security;
 
 namespace Framework.Authorization;
 

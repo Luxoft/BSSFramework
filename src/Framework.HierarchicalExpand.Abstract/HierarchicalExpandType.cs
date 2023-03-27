@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.HierarchicalExpand;
+﻿namespace Framework.HierarchicalExpand;
 
 /// <summary>
 /// Направление разворачивания иерархических объектов

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Automation.Enums;
+﻿using Automation.Enums;
 using Automation.Utils.DatabaseUtils;
 
 using Framework.Core;

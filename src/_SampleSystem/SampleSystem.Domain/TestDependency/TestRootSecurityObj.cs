@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-
-using Framework.DomainDriven.BLL;
+﻿using Framework.DomainDriven.BLL;
 using Framework.Persistent;
-using Framework.Persistent.Mapping;
 
 namespace SampleSystem.Domain;
 

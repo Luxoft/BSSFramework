@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Security;
+﻿namespace Framework.Security;
 
 [AttributeUsage(AttributeTargets.Field)]
 public abstract class ApproveOperationAttribute : Attribute

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-
-using AutoFixture;
+﻿using AutoFixture;
 using AutoFixture.Idioms;
 
 using FluentAssertions;
@@ -15,8 +10,6 @@ using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL.Security;
-using Framework.ExpressionParsers;
 using Framework.Persistent;
 using Framework.UnitTesting;
 using NUnit.Framework;

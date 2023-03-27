@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-
-using Framework.Core;
-using Framework.Core.Services;
+﻿using Framework.Core.Services;
 using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.BLL.Tracking;
 using Framework.DomainDriven.UnitTest.Mock;

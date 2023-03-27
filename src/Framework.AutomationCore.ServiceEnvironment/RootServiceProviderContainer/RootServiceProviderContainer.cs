@@ -1,6 +1,4 @@
-﻿using System;
-
-using Automation.Utils;
+﻿using Automation.Utils;
 using Automation.Utils.DatabaseUtils.Interfaces;
 
 using Framework.DomainDriven;

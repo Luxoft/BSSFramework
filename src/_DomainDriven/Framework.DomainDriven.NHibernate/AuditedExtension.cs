@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
-using Framework.Core.Services;
+﻿using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.NHibernate.Audit;
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-using Framework.Authorization.Generated.DAL.NHibernate;
+﻿using Framework.Authorization.Generated.DAL.NHibernate;
 using Framework.Configuration.Generated.DAL.NHibernate;
 using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate;

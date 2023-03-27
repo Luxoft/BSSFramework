@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Validation;
+﻿namespace Framework.Validation;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property)]
 public class CustomNameAttribute : Attribute

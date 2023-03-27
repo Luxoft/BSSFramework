@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SampleSystem.Domain;
+﻿namespace SampleSystem.Domain;
 
 [Flags]
 public enum BusinessUnitOptions

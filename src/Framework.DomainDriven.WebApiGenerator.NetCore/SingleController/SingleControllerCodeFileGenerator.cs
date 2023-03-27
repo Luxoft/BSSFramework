@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Framework.DomainDriven.Generation;
+﻿using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.ServiceModelGenerator;
 
 namespace Framework.DomainDriven.WebApiGenerator.NetCore.SingleController;

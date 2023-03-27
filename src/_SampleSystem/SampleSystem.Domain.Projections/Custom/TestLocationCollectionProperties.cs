@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-using Framework.Core;
+﻿using Framework.Core;
 
 namespace SampleSystem.Domain.Projections;
 

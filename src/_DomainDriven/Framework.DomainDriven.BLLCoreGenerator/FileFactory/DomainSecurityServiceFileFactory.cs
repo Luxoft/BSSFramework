@@ -1,13 +1,7 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.CodeDom;
 using System.Reflection;
 
-using Framework.CodeDom;
 using Framework.Core;
-
-using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 

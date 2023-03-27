@@ -1,7 +1,4 @@
-﻿using System;
-using System.Reflection;
-
-namespace Framework.Validation;
+﻿namespace Framework.Validation;
 
 public static class EnumExtensions
 {

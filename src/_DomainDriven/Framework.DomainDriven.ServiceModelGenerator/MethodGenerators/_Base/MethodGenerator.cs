@@ -1,8 +1,5 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.CodeDom;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.ServiceModel;
 
 using Framework.CodeDom;

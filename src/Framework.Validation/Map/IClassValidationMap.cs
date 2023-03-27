@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Framework.Validation;
+﻿namespace Framework.Validation;
 
 /// <summary>
 /// Метаданные валидируемого типа

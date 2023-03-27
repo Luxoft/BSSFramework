@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Automation.ServiceEnvironment;
+﻿namespace Automation.ServiceEnvironment;
 
 public abstract class IntegrationWebApiBase : WebApiBase
 {

@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-using Framework.Validation;
+﻿using Framework.Validation;
 
 using SampleSystem.Domain;
 

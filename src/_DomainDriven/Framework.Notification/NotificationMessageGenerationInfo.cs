@@ -1,14 +1,11 @@
-﻿using System.Collections.ObjectModel;
-
-namespace Framework.Notification;
+﻿namespace Framework.Notification;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core;
-using Framework.Core;
+
 using Framework.Persistent;
-using Persistent;
 
 public class NotificationMessageGenerationInfo
 {

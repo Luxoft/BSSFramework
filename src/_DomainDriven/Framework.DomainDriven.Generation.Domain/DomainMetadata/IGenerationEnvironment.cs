@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Framework.Projection;
+﻿using Framework.Projection;
 
 namespace Framework.DomainDriven.Generation.Domain;
 

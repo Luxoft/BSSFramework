@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
@@ -104,7 +99,7 @@ public partial class Permission : AuditPersistentDomainObjectBase,
     /// </summary>
     [UniqueGroup]
     public virtual IEnumerable<PermissionFilterItem> FilterItems => this.filterItems;
-        
+
     /// <summary>
     /// Коллекция пермиссий, которым данная пермиссия была делегирована
     /// </summary>

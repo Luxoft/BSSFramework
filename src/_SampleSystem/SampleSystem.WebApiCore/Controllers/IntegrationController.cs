@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Authorization.BLL;
+﻿using Framework.Authorization.BLL;
 using Framework.Authorization.Generated.DTO;
 using Framework.Core;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore.Integration;
 
 using Microsoft.AspNetCore.Mvc;
 
-using SampleSystem.BLL;
 using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.WebApiCore.Controllers;

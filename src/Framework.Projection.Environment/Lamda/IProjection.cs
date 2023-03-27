@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Framework.Projection.Lambda;
+﻿namespace Framework.Projection.Lambda;
 
 /// <summary>
 /// Интерфейс проекции

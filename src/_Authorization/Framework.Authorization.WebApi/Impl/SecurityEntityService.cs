@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Authorization.Generated.DTO;
+﻿using Framework.Authorization.Generated.DTO;
 using Framework.DomainDriven;
 
 using Microsoft.AspNetCore.Mvc;

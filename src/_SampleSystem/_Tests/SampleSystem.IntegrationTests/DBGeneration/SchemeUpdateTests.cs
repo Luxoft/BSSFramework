@@ -1,13 +1,9 @@
-﻿using System;
-
-using FluentAssertions;
+﻿using FluentAssertions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.DbGenerate;
-using Automation.Utils;
-using Microsoft.Extensions.Configuration;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;
 

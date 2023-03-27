@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Framework.DomainDriven.SerializeMetadata;
+﻿namespace Framework.DomainDriven.SerializeMetadata;
 
 public interface IDomainTypeMetadata : ITypeMetadata
 {

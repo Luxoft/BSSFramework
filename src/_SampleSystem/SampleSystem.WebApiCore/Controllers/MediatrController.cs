@@ -1,10 +1,6 @@
-﻿using System;
-
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
+﻿using Framework.DomainDriven;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
-using Framework.Exceptions;
 
 using MediatR;
 

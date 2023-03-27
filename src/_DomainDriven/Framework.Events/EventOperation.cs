@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Events;
+﻿namespace Framework.Events;
 
 /// <summary>
 /// Константы, описывающие тип события(event-a во внешнюю систему)

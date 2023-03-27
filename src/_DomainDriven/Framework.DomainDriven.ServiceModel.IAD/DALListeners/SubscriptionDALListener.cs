@@ -1,8 +1,5 @@
-﻿using System;
-
-using Framework.Configuration.BLL;
+﻿using Framework.Configuration.BLL;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.ServiceModel.Subscriptions;
 
 using JetBrains.Annotations;

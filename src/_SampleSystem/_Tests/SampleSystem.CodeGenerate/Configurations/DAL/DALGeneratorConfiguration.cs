@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.Metadata;
 
 namespace SampleSystem.CodeGenerate;
@@ -39,7 +35,7 @@ public class DALGeneratorConfiguration : Framework.DomainDriven.NHibernate.DALGe
     {
         return new (Type fromType, string propertyName)[0]
                {
-                       
+
                };
     }
 }

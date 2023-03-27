@@ -1,8 +1,6 @@
 ﻿using Framework.DomainDriven.Attributes;
-using Framework.Persistent;
 using Framework.Core;
 using Framework.Restriction;
-using Framework.Validation;
 
 namespace Framework.Configuration.Domain;
 

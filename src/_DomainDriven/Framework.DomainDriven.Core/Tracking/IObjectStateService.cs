@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Framework.DomainDriven.BLL.Tracking;
+﻿namespace Framework.DomainDriven.BLL.Tracking;
 
 public interface IObjectStateService
 {

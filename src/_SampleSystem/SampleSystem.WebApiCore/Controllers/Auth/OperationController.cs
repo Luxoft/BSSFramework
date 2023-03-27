@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Authorization.BLL;
+﻿using Framework.Authorization.BLL;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
 
 namespace Authorization.WebApi.Controllers;
 

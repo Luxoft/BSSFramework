@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Authorization.ApproveWorkflow;
+﻿namespace Framework.Authorization.ApproveWorkflow;
 public class ApproveOperationWorkflowObject
 {
     public string WorkflowInstanceId { get; set; }

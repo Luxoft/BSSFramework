@@ -1,14 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Reflection;
 
 using Framework.DomainDriven.DTOGenerator;
 using Framework.DomainDriven.DTOGenerator.Server;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.Serialization;
-
-using SampleSystem.CodeGenerate.Configurations.Services.Audit;
 
 using ServiceModelGenerator = Framework.DomainDriven.ServiceModelGenerator;
 

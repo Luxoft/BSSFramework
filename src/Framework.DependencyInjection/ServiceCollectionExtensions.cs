@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Core;
+﻿using Framework.Core;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;

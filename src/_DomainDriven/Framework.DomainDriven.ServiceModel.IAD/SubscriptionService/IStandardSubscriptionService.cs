@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.DomainDriven.ServiceModel.Subscriptions;
+﻿using Framework.DomainDriven.ServiceModel.Subscriptions;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 

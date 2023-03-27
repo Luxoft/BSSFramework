@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Persistent.Mapping;
+﻿namespace Framework.Persistent.Mapping;
 
 [AttributeUsage(AttributeTargets.Property)]
 public class MappingAttribute : Attribute

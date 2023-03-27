@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Persistent;
+﻿namespace Framework.Persistent;
 
 public interface IDenormalizedHierarchicalPersistentSource<TDenormalize, TAncestorChildLink, out TDomainObject, out TIdent> : IHierarchicalPersistentDomainObjectBase<TDomainObject, TIdent>
         where TDenormalize : IHierarchicalAncestorLink<TDomainObject, TAncestorChildLink, TIdent>

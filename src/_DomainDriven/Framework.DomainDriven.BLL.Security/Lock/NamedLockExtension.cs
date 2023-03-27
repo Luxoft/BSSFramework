@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Framework.Core;
+﻿using Framework.Core;
 
 namespace Framework.DomainDriven.BLL.Security.Lock;
 

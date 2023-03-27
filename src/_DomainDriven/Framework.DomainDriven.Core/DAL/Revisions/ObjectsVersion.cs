@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.Persistent;
 
 namespace Framework.DomainDriven.DAL.Revisions;

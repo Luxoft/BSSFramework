@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Framework.Core;
 using Framework.QueryLanguage;
 using NUnit.Framework;

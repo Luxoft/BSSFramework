@@ -1,5 +1,4 @@
 ﻿using AutoFixture;
-using AutoFixture.Idioms;
 
 using FluentAssertions;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;

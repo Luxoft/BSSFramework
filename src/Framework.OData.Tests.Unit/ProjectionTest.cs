@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
-
-using Framework.Core;
-using Framework.Persistent;
+﻿using Framework.Persistent;
 using Framework.QueryLanguage;
 
 using NUnit.Framework;

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Automation.Extensions.Excel;
+﻿namespace Automation.Extensions.Excel;
 
 [AttributeUsage(AttributeTargets.All)]
 public class Column : Attribute

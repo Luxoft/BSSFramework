@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Configuration.Core;
+﻿using Framework.Configuration.Core;
 
 using JetBrains.Annotations;
 

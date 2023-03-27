@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Configuration.SubscriptionModeling;
+﻿namespace Framework.Configuration.SubscriptionModeling;
 
 /// <summary>
 ///     Представляет интерфейс экземпляра конфигурации лямбда выражения подписки.

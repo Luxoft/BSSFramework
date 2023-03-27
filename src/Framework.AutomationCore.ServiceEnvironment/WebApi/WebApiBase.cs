@@ -1,8 +1,4 @@
-﻿using System;
-
-using Microsoft.AspNetCore.Mvc;
-
-namespace Automation.ServiceEnvironment;
+﻿namespace Automation.ServiceEnvironment;
 
 public abstract class WebApiBase : RootServiceProviderContainer
 {

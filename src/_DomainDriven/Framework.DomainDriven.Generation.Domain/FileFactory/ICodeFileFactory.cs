@@ -1,6 +1,4 @@
-﻿using System;
-using System.CodeDom;
-using Framework.Persistent;
+﻿using System.CodeDom;
 
 namespace Framework.DomainDriven.Generation.Domain;
 

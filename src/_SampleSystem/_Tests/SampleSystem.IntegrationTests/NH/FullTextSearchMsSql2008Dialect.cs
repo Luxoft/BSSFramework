@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.DomainDriven.NHibernate;
+﻿using Framework.DomainDriven.NHibernate;
 
 using NHibernate.Dialect.Function;
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using AutoFixture;
+﻿using AutoFixture;
 using AutoFixture.Idioms;
 using FluentAssertions;
 using Framework.Configuration.BLL.SubscriptionSystemService3;
@@ -13,7 +9,6 @@ using Framework.Core;
 using Framework.UnitTesting;
 using NUnit.Framework;
 using NSubstitute;
-using NSubstitute.ExceptionExtensions;
 
 namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3;
 

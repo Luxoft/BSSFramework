@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Events;
+﻿namespace Framework.Events;
 
 public class TypeEventDependency
 {

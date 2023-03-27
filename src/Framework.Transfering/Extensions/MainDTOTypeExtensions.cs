@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Transfering;
+﻿namespace Framework.Transfering;
 
 public static class MainDTOTypeExtensions
 {

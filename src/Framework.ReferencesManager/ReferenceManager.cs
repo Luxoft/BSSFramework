@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Framework.ReferencesManager;
+﻿namespace Framework.ReferencesManager;
 
 public class ReferenceManager
 {

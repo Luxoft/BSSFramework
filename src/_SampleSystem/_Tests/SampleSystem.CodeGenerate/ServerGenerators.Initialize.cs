@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.Generation;
 
 namespace SampleSystem.CodeGenerate;

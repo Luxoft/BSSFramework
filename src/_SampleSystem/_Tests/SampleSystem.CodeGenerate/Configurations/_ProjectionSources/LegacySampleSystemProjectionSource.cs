@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Projection;
+﻿using Framework.Projection;
 using Framework.Projection.Lambda;
 
 using SampleSystem.Domain;

@@ -1,9 +1,6 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.CodeDom;
 using System.Collections.ObjectModel;
 
-using Framework.CodeDom;
 using Framework.Core;
 
 namespace Framework.DomainDriven.DTOGenerator;

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core.StringParse;
+﻿using Framework.Core.StringParse;
 using Framework.Exceptions;
 
 using JetBrains.Annotations;

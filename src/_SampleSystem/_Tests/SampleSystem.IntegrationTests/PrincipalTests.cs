@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using FluentAssertions;
+﻿using FluentAssertions;
 
 using Framework.Authorization.Generated.DTO;
 using Framework.Core;

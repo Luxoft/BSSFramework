@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Framework.Configuration.SubscriptionModeling;
+﻿namespace Framework.Configuration.SubscriptionModeling;
 
 /// <summary>
 ///     Определяет интерфейс экземпляра метаданных Code first подписки.

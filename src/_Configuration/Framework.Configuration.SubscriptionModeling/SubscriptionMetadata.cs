@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Configuration.SubscriptionModeling;
+﻿namespace Framework.Configuration.SubscriptionModeling;
 
 /// <summary>
 ///     Базовый класс экземпляра метаданных Code first подписки.

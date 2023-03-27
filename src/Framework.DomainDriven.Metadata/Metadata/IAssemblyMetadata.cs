@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Framework.DomainDriven.Metadata;
+﻿namespace Framework.DomainDriven.Metadata;
 
 public interface IAssemblyMetadata
 {

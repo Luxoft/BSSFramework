@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Authorization.Domain;
+﻿namespace Framework.Authorization.Domain;
 
 /// <summary>
 /// Перечисление способов делегирования

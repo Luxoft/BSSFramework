@@ -1,6 +1,4 @@
 ﻿
-using SampleSystem.Domain;
-
 namespace SampleSystem.Domain;
 
 public enum NamedLockOperation

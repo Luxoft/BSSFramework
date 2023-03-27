@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SampleSystem.IntegrationTests.__Support.TestData;
+﻿namespace SampleSystem.IntegrationTests.__Support.TestData;
 
 public static class DefaultConstants
 {

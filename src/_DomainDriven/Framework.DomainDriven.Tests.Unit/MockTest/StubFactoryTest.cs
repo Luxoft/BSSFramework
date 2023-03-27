@@ -1,10 +1,6 @@
-﻿using System;
-
-using Framework.DomainDriven.UnitTest.Mock.StubProxy;
+﻿using Framework.DomainDriven.UnitTest.Mock.StubProxy;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using NSubstitute;
 
 namespace Framework.DomainDriven.UnitTest.MockTest;
 

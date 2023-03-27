@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Exceptions;
+﻿namespace Framework.Exceptions;
 
 /// <summary>
 /// Сервис для раскрытия шаблонных исключений

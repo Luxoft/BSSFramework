@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Framework.Persistent.Mapping;
+﻿using Framework.Persistent.Mapping;
 using Framework.DomainDriven.Metadata;
-using Framework.Core;
 
 namespace Framework.DomainDriven.DAL.Sql;
 

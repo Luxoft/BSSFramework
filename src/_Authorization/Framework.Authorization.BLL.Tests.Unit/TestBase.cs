@@ -1,5 +1,4 @@
-﻿using System;
-using Framework.Authorization.BLL.Tests.Unit.Support;
+﻿using Framework.Authorization.BLL.Tests.Unit.Support;
 using Framework.Authorization.Domain;
 using Framework.DomainDriven.UnitTest.Mock;
 using Framework.Persistent;

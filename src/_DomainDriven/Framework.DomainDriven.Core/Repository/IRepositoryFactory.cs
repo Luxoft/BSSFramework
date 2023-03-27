@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.SecuritySystem;
+﻿using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.Repository;
 

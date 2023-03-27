@@ -1,6 +1,5 @@
 ﻿#nullable enable
 
-using System.Collections.Generic;
 using System.Data;
 
 using Framework.Cap.Abstractions;

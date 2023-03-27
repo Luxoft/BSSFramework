@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-using Framework.Security;
+﻿using Framework.Security;
 
 namespace SampleSystem;
 

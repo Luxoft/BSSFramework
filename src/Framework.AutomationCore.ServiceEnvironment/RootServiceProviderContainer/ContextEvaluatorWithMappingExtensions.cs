@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.DomainDriven;
+﻿using Framework.DomainDriven;
 using Framework.DomainDriven.ServiceModel;
 
 namespace Automation.ServiceEnvironment;

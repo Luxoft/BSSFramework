@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Configuration.SubscriptionModeling;
+﻿namespace Framework.Configuration.SubscriptionModeling;
 
 /// <summary>
 /// Описывает тип изменения доменного объекта для которого должна срабатывать подписка.

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SampleSystem.Subscriptions.Metadata;
+﻿namespace SampleSystem.Subscriptions.Metadata;
 
 internal static class BusinessRole
 {

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace Framework.Configuration;
+﻿namespace Framework.Configuration;
 
 /// <summary>
 /// Перечисление принципов комбинации адресатов рассылки

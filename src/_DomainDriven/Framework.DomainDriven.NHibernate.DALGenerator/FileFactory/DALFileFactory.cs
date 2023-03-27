@@ -1,5 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 
 using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.Generation.Domain;

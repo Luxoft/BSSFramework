@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.Transfering;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;

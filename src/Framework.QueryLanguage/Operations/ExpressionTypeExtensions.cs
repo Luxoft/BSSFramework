@@ -1,6 +1,4 @@
-﻿using System;
-
-using SExpressions = System.Linq.Expressions;
+﻿using SExpressions = System.Linq.Expressions;
 
 namespace Framework.QueryLanguage;
 

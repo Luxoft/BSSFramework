@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.Attributes;
+﻿namespace Framework.DomainDriven.Attributes;
 
 [AttributeUsage(AttributeTargets.Property)]
 public class NotAuditedPropertyAttribute : Attribute

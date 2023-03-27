@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Framework.Core;
+﻿using Framework.Core;
 
 namespace SampleSystem.Domain.Projections;
 

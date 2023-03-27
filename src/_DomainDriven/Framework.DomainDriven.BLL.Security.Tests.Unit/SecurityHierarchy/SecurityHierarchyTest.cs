@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;

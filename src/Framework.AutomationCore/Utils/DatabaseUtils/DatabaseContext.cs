@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Automation.Utils.DatabaseUtils.Interfaces;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;

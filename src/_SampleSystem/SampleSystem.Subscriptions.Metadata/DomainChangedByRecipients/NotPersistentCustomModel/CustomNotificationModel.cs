@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using SampleSystem.BLL;
+﻿using SampleSystem.BLL;
 
 namespace SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel;
 

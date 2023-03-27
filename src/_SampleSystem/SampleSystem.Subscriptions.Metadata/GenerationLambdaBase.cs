@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Framework.Configuration.SubscriptionModeling;
+﻿using Framework.Configuration.SubscriptionModeling;
 using Framework.Notification;
 
 using SampleSystem.BLL;

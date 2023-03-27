@@ -1,6 +1,4 @@
-﻿using Framework.Core;
-
-namespace Framework.OData;
+﻿namespace Framework.OData;
 
 //public interface IDynamicSelectOperation<TDomainObject>
 //{

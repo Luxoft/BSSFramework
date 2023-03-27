@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Exceptions;
+﻿namespace Framework.Exceptions;
 
 /// <summary>
 /// Расширения для работы с сервисом исключений

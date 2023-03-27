@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Framework.Notification;
+﻿using Framework.Notification;
 
 namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Subscriptions.Metadata;
 

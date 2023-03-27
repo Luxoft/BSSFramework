@@ -1,10 +1,6 @@
-﻿using System;
-using System.Linq;
-
-using ASP;
+﻿using ASP;
 
 using SampleSystem.Subscriptions.Metadata.Employee.Update;
-using SampleSystem.Subscriptions.Metadata.Examples.Attachment;
 
 namespace SampleSystem.Subscriptions.Metadata.Examples.AttachmentTemplateEvaluator;
 

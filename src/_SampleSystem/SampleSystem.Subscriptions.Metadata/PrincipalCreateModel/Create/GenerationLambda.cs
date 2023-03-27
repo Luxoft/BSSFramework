@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Framework.Authorization.BLL;
+﻿using Framework.Authorization.BLL;
 using Framework.Configuration.Core;
 using Framework.Configuration.SubscriptionModeling;
 using Framework.Notification;

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.SerializeMetadata;
+﻿namespace Framework.DomainDriven.SerializeMetadata;
 
 [AttributeUsage(AttributeTargets.Property)]
 public class SourcePropertyNameAttribute : Attribute

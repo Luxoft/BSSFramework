@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.OData;
+﻿using Framework.OData;
 using Framework.QueryLanguage;
 
 namespace Framework.DomainDriven.BLL;

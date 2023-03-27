@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Framework.Validation;
+﻿using Framework.Validation;
 
 using SampleSystem.Domain;
 

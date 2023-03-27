@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Framework.DomainDriven.UnitTest.Mock.StubProxy;
+﻿using Framework.DomainDriven.UnitTest.Mock.StubProxy;
 
 namespace Framework.Authorization.BLL.Tests.Unit.Support;
 

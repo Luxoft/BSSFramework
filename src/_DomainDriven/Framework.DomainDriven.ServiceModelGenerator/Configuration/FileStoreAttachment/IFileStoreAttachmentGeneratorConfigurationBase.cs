@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.ServiceModelGenerator;
+﻿namespace Framework.DomainDriven.ServiceModelGenerator;
 
 public interface IFileStoreAttachmentGeneratorConfigurationBase<out TEnvironment> : IFileStoreAttachmentGeneratorConfigurationBase, IGeneratorConfigurationBase<TEnvironment>
         where TEnvironment : IFileStoreAttachmentGenerationEnvironmentBase

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using App.Metrics;
+﻿using App.Metrics;
 using App.Metrics.Formatters.Json;
 
 using Microsoft.Extensions.Configuration;

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Framework.DomainDriven.Generation;
+﻿namespace Framework.DomainDriven.Generation;
 
 public interface IFileGenerator<out TFileFactory>
 {

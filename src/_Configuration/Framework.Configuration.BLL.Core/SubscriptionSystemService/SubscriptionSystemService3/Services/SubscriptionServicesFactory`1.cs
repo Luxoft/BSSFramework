@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
+﻿using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Templates;

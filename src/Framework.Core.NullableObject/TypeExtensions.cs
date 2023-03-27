@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 public static class TypeExtensions
 {

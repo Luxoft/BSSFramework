@@ -1,6 +1,4 @@
-﻿using System;
-using System.CodeDom;
-using System.Linq;
+﻿using System.CodeDom;
 using System.Reflection;
 
 using Framework.CodeDom;
@@ -57,7 +55,7 @@ public class DiffUpdatePropertyAssigner<TConfiguration> : GeneratorConfiguration
         {
             return this.MappingServiceRefExpr.ToMethodInvokeExpression(
                                                                        "GetEqualsValue",
-                                                                       currentSourcePropertyRef, 
+                                                                       currentSourcePropertyRef,
                                                                        baseSourcePropertyRef,
                                                                        property.Name.ToPrimitiveExpression())
                        .ToAssignStatement(targetPropertyRef);
@@ -110,7 +108,7 @@ public class DiffUpdatePropertyAssigner<TConfiguration> : GeneratorConfiguration
                                                     Statements =
                                                     {
                                                             this.Configuration.GetCreateUpdateDTOExpression(
-                                                             elementType, 
+                                                             elementType,
                                                              currentSourceItemParam.ToVariableReferenceExpression(),
                                                              null,
                                                              this.MappingServiceRefExpr)

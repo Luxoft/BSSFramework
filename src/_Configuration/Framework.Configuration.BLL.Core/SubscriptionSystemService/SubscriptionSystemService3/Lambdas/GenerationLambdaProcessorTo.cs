@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Framework.Configuration.Domain;
-using Framework.Notification;
+﻿using Framework.Configuration.Domain;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 

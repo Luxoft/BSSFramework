@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Framework.OData.Tests.Unit;
 

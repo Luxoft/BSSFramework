@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SampleSystem.Domain;
+﻿namespace SampleSystem.Domain;
 
 /// <summary>
 /// Перечень действий, который можно делать c объектом

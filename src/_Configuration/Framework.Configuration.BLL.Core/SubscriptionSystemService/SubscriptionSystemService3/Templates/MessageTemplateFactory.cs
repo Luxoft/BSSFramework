@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
+﻿using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;

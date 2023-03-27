@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Framework.Core;
-using Framework.Core.Services;
+﻿using Framework.Core;
 using Framework.DomainDriven.DBGenerator.Contracts;
 using Framework.DomainDriven.DBGenerator.Team;
 using Framework.DomainDriven.Metadata;
 
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
-
-using NHibernate.Mapping.ByCode.Impl;
 
 namespace Framework.DomainDriven.DBGenerator.ScriptGenerators;
 

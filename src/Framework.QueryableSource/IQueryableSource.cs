@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace Framework.QueryableSource;
+﻿namespace Framework.QueryableSource;
 
 public interface IQueryableSource<in TPersistentDomainObjectBase>
 {

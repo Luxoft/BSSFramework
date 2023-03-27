@@ -1,12 +1,9 @@
 ﻿#pragma warning disable SA1600 // ElementsMustBeDocumented. Internal type does not require inline documentation by convention.
-using System.Collections.Generic;
-using System.Linq;
 using Framework.Authorization.BLL;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL.Security;
 using Framework.Persistent;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;

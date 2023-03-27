@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.WebApiNetCore;
+﻿namespace Framework.DomainDriven.WebApiNetCore;
 
 /// <summary>
 /// IAD Framework Internal Server Exception

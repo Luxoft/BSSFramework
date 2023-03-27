@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 

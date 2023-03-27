@@ -1,6 +1,4 @@
-﻿using System;
-
-using ASP;
+﻿using ASP;
 using FluentAssertions;
 
 using Framework.DomainDriven;

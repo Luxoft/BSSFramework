@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.ServiceModel.IAD;
+﻿namespace Framework.DomainDriven.ServiceModel.IAD;
 
 public class InitializeManager : IInitializeManager
 {

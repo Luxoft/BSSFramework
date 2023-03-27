@@ -1,6 +1,4 @@
-﻿using Framework.DomainDriven.BLL;
-
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 
 using NHibernate.Event;
 

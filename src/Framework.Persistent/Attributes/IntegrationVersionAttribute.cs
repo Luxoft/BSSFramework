@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Persistent;
+﻿namespace Framework.Persistent;
 
 /// <summary>
 /// Аттрибут, описывающий интеграционную версию объекта.

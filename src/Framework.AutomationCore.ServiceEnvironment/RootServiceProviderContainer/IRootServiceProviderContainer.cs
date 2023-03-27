@@ -1,13 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using Framework.DomainDriven;
+﻿using Framework.DomainDriven;
 using Framework.DomainDriven.ServiceModel;
 using Framework.DomainDriven.ServiceModel.Service;
 
 using JetBrains.Annotations;
 
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation.ServiceEnvironment;

@@ -1,8 +1,4 @@
-﻿using System;
-
-using Framework.DomainDriven.BLL;
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.WebApiNetCore;
 

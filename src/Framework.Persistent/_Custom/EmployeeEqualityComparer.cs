@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Framework.Persistent;
+﻿namespace Framework.Persistent;
 
 public abstract class EmployeeEqualityComparer : IEqualityComparer<IEmployee>
 {

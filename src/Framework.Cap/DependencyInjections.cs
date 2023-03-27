@@ -1,6 +1,4 @@
-﻿using System;
-
-using DotNetCore.CAP;
+﻿using DotNetCore.CAP;
 
 using Framework.Authorization.BLL;
 using Framework.Cap.Abstractions;

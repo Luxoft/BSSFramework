@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-
-using Framework.DomainDriven.Audit;
+﻿using Framework.DomainDriven.Audit;
 
 using NHibernate.Event;
 

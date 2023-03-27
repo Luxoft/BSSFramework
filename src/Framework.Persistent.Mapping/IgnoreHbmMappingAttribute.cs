@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Persistent.Mapping;
+﻿namespace Framework.Persistent.Mapping;
 
 /// <summary>
 /// Do not generate only HBM files!

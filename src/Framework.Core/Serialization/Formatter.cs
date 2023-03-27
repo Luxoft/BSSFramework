@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Core.Serialization;
+﻿namespace Framework.Core.Serialization;
 
 public class Formatter<TValue, TResult> : IFormatter<TValue, TResult>
 {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 public interface ITypeResolver<in T> : ITypeSource
 {

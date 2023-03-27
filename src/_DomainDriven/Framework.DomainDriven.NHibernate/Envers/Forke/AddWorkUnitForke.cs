@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using NHibernate.Engine;
+﻿using NHibernate.Engine;
 using NHibernate.Envers.Configuration;
 using NHibernate.Envers.Synchronization.Work;
 using NHibernate.Persister.Entity;

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Async;
+﻿namespace Framework.Async;
 
 public interface IAsyncProcessFunc<in TArg, out TResult>
 {

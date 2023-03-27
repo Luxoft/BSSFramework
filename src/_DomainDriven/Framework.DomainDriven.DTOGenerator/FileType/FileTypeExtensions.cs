@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
 
 namespace Framework.DomainDriven.DTOGenerator;

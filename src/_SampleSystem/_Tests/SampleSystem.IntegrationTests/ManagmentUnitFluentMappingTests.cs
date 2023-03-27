@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using FluentAssertions;
+﻿using FluentAssertions;
 
 using Framework.Core;
 using Framework.DomainDriven;

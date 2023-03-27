@@ -1,8 +1,4 @@
-﻿using System;
-
-using Framework.Core;
-
-namespace Framework.Events;
+﻿namespace Framework.Events;
 
 /// <summary>
 ///

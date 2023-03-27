@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.SecuritySystem;
+﻿namespace Framework.SecuritySystem;
 
 //public interface IDenormalizedPermissionItem<out TIdent>
 //{

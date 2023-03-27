@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Framework.DomainDriven.DBGenerator.Contracts;
+﻿using Framework.DomainDriven.DBGenerator.Contracts;
 
 namespace Framework.DomainDriven.DBGenerator;
 

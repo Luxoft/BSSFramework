@@ -1,5 +1,4 @@
-﻿using System;
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven;
 
 namespace Automation.ServiceEnvironment.Services;

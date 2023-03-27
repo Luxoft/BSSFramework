@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Framework.DomainDriven;
+﻿using Framework.DomainDriven;
 
 using SampleSystem.Domain.Models.Filters;
 using SampleSystem.Domain.Projections;

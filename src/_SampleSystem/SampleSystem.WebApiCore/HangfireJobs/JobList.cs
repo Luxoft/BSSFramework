@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Framework.HangfireCore;
+﻿using Framework.HangfireCore;
 using Framework.NotificationCore.Jobs;
 using Hangfire;
 using SampleSystem.BLL.Core.Jobs;

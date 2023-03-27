@@ -1,8 +1,4 @@
-﻿using System;
-
-using Framework.DomainDriven.BLL;
-
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.ServiceModel.Service;
 

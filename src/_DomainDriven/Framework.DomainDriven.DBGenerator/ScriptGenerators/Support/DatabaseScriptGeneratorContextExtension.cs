@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Framework.DomainDriven.DBGenerator.Contracts;
+﻿using Framework.DomainDriven.DBGenerator.Contracts;
 using Framework.Persistent.Mapping;
 using Microsoft.SqlServer.Management.Smo;
 

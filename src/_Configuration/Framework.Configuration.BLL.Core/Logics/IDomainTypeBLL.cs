@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Configuration.Domain;
+﻿using Framework.Configuration.Domain;
 using Framework.DomainDriven.BLL;
 
 using JetBrains.Annotations;

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Framework.Core.Serialization;
+﻿namespace Framework.Core.Serialization;
 
 public static class FormatterExtensions
 {

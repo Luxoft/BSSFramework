@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 /// <summary>
 /// Флаг размерностей "1 или больше"

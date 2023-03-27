@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using NHibernate.Envers.Query.Criteria;
+﻿using NHibernate.Envers.Query.Criteria;
 
 namespace NHibernate.Envers.Patch;
 

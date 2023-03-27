@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.DomainDriven.DTOGenerator;
+﻿using Framework.DomainDriven.DTOGenerator;
 using Framework.DomainDriven.DTOGenerator.Server;
 
 namespace SampleSystem.CodeGenerate.ServerDTO;

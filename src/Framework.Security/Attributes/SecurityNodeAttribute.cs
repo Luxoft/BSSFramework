@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Security;
+﻿namespace Framework.Security;
 
 /// <summary>
 /// Атрибут для описания универсального пути безопасности (для проекций)

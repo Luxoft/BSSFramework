@@ -1,9 +1,7 @@
-﻿using System;
-using System.CodeDom;
+﻿using System.CodeDom;
 
 using Framework.CodeDom;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
 
 namespace Framework.DomainDriven.DTOGenerator.Server;
 

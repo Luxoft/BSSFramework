@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Framework.Authorization.BLL;
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven;
 

@@ -7,8 +7,6 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-
 using Framework.Persistent;
 
 namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;

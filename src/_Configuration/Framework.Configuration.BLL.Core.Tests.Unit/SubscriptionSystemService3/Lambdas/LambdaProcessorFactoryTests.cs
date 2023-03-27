@@ -1,6 +1,4 @@
-﻿using AutoFixture.Idioms;
-
-using FluentAssertions;
+﻿using FluentAssertions;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 using Framework.UnitTesting;
 using NUnit.Framework;
@@ -29,7 +27,7 @@ public sealed class LambdaProcessorFactoryTests : TestFixtureBase
         // Assert
         this.factory.Create<ConditionLambdaProcessor<ITestBLLContext>>().Should().NotBeNull();
     }
-        
+
 
     [Test]
     public void Create_GenerationLambdaProcessorTo_ProcessorCreated()

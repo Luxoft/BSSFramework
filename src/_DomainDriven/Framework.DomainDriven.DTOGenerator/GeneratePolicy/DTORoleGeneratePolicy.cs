@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.DomainDriven.Generation.Domain;
+﻿using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.Serialization;
 
 namespace Framework.DomainDriven.DTOGenerator;

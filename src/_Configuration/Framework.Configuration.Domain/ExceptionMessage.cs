@@ -3,9 +3,7 @@ using Framework.DomainDriven.Attributes;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
-using Framework.Persistent.Mapping;
 using Framework.Restriction;
-using Framework.Validation;
 
 namespace Framework.Configuration.Domain;
 

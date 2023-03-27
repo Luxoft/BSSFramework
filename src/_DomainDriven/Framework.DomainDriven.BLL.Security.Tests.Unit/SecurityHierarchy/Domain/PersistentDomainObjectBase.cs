@@ -1,5 +1,4 @@
-﻿using System;
-using Framework.Persistent;
+﻿using Framework.Persistent;
 
 namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
 

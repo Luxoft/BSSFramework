@@ -1,9 +1,6 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.CodeDom;
 
 using Framework.CodeDom;
-using Framework.DomainDriven.DTOGenerator;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Transfering;
 

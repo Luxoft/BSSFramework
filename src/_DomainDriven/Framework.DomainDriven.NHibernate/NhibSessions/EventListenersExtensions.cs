@@ -1,9 +1,4 @@
-﻿using System;
-using System.Linq;
-
-using Framework.Core;
-
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 
 using NHibernate.Event;
 

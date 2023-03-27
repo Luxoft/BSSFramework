@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Framework.DomainDriven.Generation.Domain;
+﻿namespace Framework.DomainDriven.Generation.Domain;
 
 public interface IGeneratorConfiguration : IRenderingConfiguration
 {

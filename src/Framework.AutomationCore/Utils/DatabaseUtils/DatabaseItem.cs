@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using Automation.Utils.DatabaseUtils.Interfaces;
+﻿using Automation.Utils.DatabaseUtils.Interfaces;
 using Microsoft.Data.SqlClient;
 
 namespace Automation.Utils.DatabaseUtils;

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SampleSystem.Domain.UniqueByMaster;
+﻿namespace SampleSystem.Domain.UniqueByMaster;
 
 public class ParentEntity : AuditPersistentDomainObjectBase
 {

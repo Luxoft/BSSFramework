@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.DomainDriven.BLL.Configuration;
+﻿using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.BLL.Security;
 
 using Microsoft.AspNetCore.Mvc;

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.NHibernate.SqlExceptionProcessors;
+﻿namespace Framework.DomainDriven.NHibernate.SqlExceptionProcessors;
 
 internal interface ISqlExceptionProcessor
 {

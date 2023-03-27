@@ -1,8 +1,5 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.CodeDom;
 using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
 
 using Framework.CodeDom;
@@ -262,7 +259,7 @@ public class DefaultUpdateDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
         {
             var baseSourceParameter = this.Configuration.GetCodeTypeReference(this.DomainType, DTOGenerator.FileType.StrictDTO).ToParameterDeclarationExpression("baseSource");
             var baseSourceParameterRefExpr = baseSourceParameter.ToVariableReferenceExpression();
-                
+
             var propertyAssigner = new DiffUpdatePropertyAssigner<TConfiguration>(this);
 
             yield return new CodeMemberMethod

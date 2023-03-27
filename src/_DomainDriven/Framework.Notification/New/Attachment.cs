@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Notification.New;
+﻿namespace Framework.Notification.New;
 
 public class Attachment
 {

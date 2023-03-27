@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-using Framework.Persistent;
+﻿using Framework.Persistent;
 using Framework.QueryableSource;
 
 namespace Framework.DomainDriven.BLL;

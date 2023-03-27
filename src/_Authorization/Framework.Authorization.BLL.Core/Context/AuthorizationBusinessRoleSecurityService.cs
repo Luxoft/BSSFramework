@@ -1,11 +1,7 @@
-﻿using System;
-
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.SecuritySystem;
 
 using JetBrains.Annotations;
-
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.BLL;
 

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.BLL.Security.Lock;
+﻿namespace Framework.DomainDriven.BLL.Security.Lock;
 
 [AttributeUsage(AttributeTargets.Field)]
 public class GlobalLockAttribute : Attribute

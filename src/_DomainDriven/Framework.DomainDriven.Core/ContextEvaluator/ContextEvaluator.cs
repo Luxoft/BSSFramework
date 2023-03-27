@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using Framework.Core.Services;
+﻿using Framework.Core.Services;
 using JetBrains.Annotations;
 
 using Microsoft.Extensions.DependencyInjection;

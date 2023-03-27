@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.Persistent.Mapping;
 
 namespace Framework.DomainDriven.Metadata;

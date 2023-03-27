@@ -1,6 +1,4 @@
-﻿using Framework.Persistent;
-
-namespace SampleSystem.Domain.EnversBug1676;
+﻿namespace SampleSystem.Domain.EnversBug1676;
 
 public class Coefficient1676 : AuditPersistentDomainObjectBase
 {

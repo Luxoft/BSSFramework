@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Framework.DomainDriven;
+﻿namespace Framework.DomainDriven;
 
 public class IgnoreCollectionMappingService<TSource, TTarget> : ICollectionMappingService<TSource, TTarget>
 {

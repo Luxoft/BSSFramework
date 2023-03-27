@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Notification;
+﻿using Framework.Notification;
 
 using JetBrains.Annotations;
 

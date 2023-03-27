@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Parsing;
+﻿namespace Framework.Parsing;
 
 public static class ParserCombinatorsMonad
 {

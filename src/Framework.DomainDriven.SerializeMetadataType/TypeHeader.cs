@@ -1,7 +1,5 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
-using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 
 namespace Framework.DomainDriven.SerializeMetadata;

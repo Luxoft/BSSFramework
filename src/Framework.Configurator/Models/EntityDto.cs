@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Configurator.Models;
+﻿namespace Framework.Configurator.Models;
 
 public class EntityDto
 {

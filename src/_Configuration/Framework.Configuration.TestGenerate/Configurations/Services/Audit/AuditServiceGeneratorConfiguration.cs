@@ -1,5 +1,4 @@
-﻿using Framework.DomainDriven.DTOGenerator.Server;
-using Framework.DomainDriven.ServiceModelGenerator;
+﻿using Framework.DomainDriven.ServiceModelGenerator;
 
 namespace Framework.Configuration.TestGenerate;
 

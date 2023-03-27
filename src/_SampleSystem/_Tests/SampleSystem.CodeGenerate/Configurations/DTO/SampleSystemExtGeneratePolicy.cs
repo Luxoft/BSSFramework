@@ -1,5 +1,4 @@
-﻿using System;
-using Framework.DomainDriven.DTOGenerator;
+﻿using Framework.DomainDriven.DTOGenerator;
 using Framework.DomainDriven.Generation.Domain;
 
 using SampleSystem.Domain;

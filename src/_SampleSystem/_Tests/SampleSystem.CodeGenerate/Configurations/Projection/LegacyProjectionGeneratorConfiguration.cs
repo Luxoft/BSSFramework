@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SampleSystem.CodeGenerate;
+﻿namespace SampleSystem.CodeGenerate;
 
 public class LegacyProjectionGeneratorConfiguration : Framework.DomainDriven.ProjectionGenerator.GeneratorConfigurationBase<ServerGenerationEnvironment>
 {

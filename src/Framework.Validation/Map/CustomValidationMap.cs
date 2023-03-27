@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Validation;
+﻿namespace Framework.Validation;
 
 public abstract class CustomValidationMap : ValidationMapBase
 {

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Reflection;
-
-using Framework.Authorization.ApproveWorkflow;
+﻿using Framework.Authorization.ApproveWorkflow;
 using Framework.Authorization.BLL;
 using Framework.Cap;
 using Framework.DependencyInjection;
-
-using MediatR;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

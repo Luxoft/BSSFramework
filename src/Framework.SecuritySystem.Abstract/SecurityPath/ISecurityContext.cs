@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.SecuritySystem;
+﻿namespace Framework.SecuritySystem;
 
 /// <summary>
 /// Интерфейс доменного типа авторизации для типизированного контекста.

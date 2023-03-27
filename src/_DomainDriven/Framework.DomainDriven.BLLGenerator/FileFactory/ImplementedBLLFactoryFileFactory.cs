@@ -1,8 +1,5 @@
-﻿using System;
-using System.CodeDom;
-using System.Linq;
+﻿using System.CodeDom;
 
-using Framework.Core;
 using Framework.CodeDom;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;

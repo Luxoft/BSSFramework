@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven;
+﻿namespace Framework.DomainDriven;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
 public class DBSessionModeAttribute : Attribute

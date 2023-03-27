@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Core.Serialization;
+﻿namespace Framework.Core.Serialization;
 
 public class Parser<TValue, TResult> : IParser<TValue, TResult>
 {

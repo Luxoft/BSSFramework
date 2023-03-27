@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.SerializeMetadata.Tests.Unit;
+﻿namespace Framework.DomainDriven.SerializeMetadata.Tests.Unit;
 
 public class MyCustomTypeHeader : TypeHeader
 {

@@ -1,10 +1,6 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-
-using DotNetCore.CAP;
+﻿using DotNetCore.CAP;
 
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
 
 using JetBrains.Annotations;
 

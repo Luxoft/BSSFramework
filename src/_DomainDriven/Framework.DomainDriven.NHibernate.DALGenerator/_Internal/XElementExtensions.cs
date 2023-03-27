@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using Framework.Core;
 using Framework.DomainDriven.Metadata;
 using Framework.Persistent.Mapping;

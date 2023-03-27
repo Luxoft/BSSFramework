@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Framework.DomainDriven.BLL;
+﻿namespace Framework.DomainDriven.BLL;
 
 internal sealed class CustomOperationEventSender<TDomainObject, TOperation> : OperationEventSender<TDomainObject, TOperation>
 

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Projection;

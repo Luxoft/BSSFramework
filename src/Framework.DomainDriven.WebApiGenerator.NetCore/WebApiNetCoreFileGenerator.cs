@@ -1,6 +1,4 @@
 ﻿using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
 
 using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.Generation.Domain;

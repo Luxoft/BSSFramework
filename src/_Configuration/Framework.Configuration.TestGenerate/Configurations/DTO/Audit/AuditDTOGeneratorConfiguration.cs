@@ -1,5 +1,4 @@
 ﻿using Framework.DomainDriven.DTOGenerator.Audit;
-using Framework.DomainDriven.ServiceModelGenerator;
 
 namespace Framework.Configuration.TestGenerate;
 

@@ -1,10 +1,4 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
-using Framework.DomainDriven.BLL;
+﻿using Framework.Core;
 using Framework.DomainDriven.ServiceModelGenerator.MethodGenerators.FileStore;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;

@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Notification;
+﻿using Framework.Notification;
 
 namespace Framework.DomainDriven.WebApiNetCore;
 

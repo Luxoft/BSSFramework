@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Subscriptions.Metadata;
+﻿namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Subscriptions.Metadata;
 
 internal static class BusinessRole
 {

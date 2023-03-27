@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.Attributes;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Authorization.BLL;
+﻿using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
 using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.Persistent;
 using Framework.SecuritySystem;
@@ -229,7 +224,7 @@ public class ConfigurationContextFacade
 
         return result;
     }
-        
+
 
     /// <summary>
     /// Возвращает коды активных code first подписок.

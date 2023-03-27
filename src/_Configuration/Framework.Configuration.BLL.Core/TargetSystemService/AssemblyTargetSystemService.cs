@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
+﻿using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Core;
 using Framework.Configuration.Domain;

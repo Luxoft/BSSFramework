@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.BLL;
+﻿namespace Framework.DomainDriven.BLL;
 
 /// <summary>
 /// Маркер объектов отправляющих евенты в интеграцию

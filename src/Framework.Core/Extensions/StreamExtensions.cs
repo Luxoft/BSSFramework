@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 public static class StreamExtensions
 {

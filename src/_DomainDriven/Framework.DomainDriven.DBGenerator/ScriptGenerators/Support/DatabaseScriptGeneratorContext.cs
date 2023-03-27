@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.DomainDriven.DBGenerator.Contracts;
+﻿using Framework.DomainDriven.DBGenerator.Contracts;
 using Framework.DomainDriven.Metadata;
 
 using JetBrains.Annotations;

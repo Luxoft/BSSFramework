@@ -1,8 +1,5 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.CodeDom;
 using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
 
 using Framework.CodeDom;
@@ -174,7 +171,7 @@ public class DefaultStrictDTOFileFactory<TConfiguration> : DTOFileFactory<TConfi
     public IEnumerable<CodeMemberMethod> GetClientMappingServiceMethods()
     {
         var propertyAssigner = this.GetSecurityToSecurityPropertyAssigner();
-            
+
         foreach (var sourceFileType in this.GetActualStrictConstructorFileTypes())
         {
             var targetParameter = this.CurrentReference.ToParameterDeclarationExpression("target");

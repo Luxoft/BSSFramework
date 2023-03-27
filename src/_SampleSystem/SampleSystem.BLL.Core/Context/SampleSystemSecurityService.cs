@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-using Framework.SecuritySystem;
+﻿using Framework.SecuritySystem;
 
 using SampleSystem.Domain;
 

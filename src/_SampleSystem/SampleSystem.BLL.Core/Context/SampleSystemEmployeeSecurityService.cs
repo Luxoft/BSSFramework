@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.SecuritySystem;
+﻿using Framework.SecuritySystem;
 using Framework.SecuritySystem.Rules.Builders;
 
 using JetBrains.Annotations;

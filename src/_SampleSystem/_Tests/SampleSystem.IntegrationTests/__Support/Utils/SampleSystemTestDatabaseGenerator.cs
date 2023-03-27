@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Automation.Utils;
+﻿using Automation.Utils;
 using Automation.Utils.DatabaseUtils;
 using Automation.Utils.DatabaseUtils.Interfaces;
 using Framework.DomainDriven.DBGenerator;

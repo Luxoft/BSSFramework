@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.DomainDriven.DTOGenerator.Audit;
+﻿using Framework.DomainDriven.DTOGenerator.Audit;
 
 using TypeExtensions = Framework.Projection.TypeExtensions;
 

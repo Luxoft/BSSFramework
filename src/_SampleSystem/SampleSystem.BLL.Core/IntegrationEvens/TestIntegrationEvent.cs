@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Cap.Abstractions;
+﻿using Framework.Cap.Abstractions;
 
 namespace SampleSystem.BLL.Core.IntegrationEvens;
 

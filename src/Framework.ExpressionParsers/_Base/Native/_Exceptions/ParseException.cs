@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.ExpressionParsers;
+﻿namespace Framework.ExpressionParsers;
 
 public class ParseException : Exception
 {

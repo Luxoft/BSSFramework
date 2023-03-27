@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Authorization.BLL.Core.Context;
+﻿using Framework.Authorization.BLL.Core.Context;
 using Framework.Authorization.Domain;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;

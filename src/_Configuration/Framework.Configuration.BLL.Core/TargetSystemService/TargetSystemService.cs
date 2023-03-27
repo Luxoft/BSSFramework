@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Framework.Configuration.BLL.SubscriptionSystemService3;
+﻿using Framework.Configuration.BLL.SubscriptionSystemService3;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Domain;
@@ -13,8 +10,6 @@ using Framework.Notification;
 using Framework.Persistent;
 
 using JetBrains.Annotations;
-
-using Serilog;
 
 namespace Framework.Configuration.BLL;
 

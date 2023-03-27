@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Framework.DomainDriven.Metadata;
+﻿using Framework.DomainDriven.Metadata;
 
 namespace Framework.DomainDriven.DAL.Sql;
 

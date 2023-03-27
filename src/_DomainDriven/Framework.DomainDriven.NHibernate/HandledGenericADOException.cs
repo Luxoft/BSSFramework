@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.Data.SqlClient;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using Framework.Core;
 using NHibernate;
 

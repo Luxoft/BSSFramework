@@ -56,6 +56,11 @@ public class Repository<TDomainObject, TIdent> : IRepository<TDomainObject, TIde
 
     public IQueryable<TDomainObject> GetQueryable() => this.dal.GetQueryable().Pipe(this.securityProvider.InjectFilter);
 
+    public TDomainObject Load(TIdent id) => this.dal.Load(id);
+
+    public async Task<TDomainObject> LoadAsync(TIdent id, CancellationToken cancellationToken = default) =>
+        await this.dal.LoadAsync(id, cancellationToken);
+
     public IQueryable<TProjection> GetQueryable<TProjection>(Specification<TDomainObject, TProjection> specification)
         => this.specificationEvaluator.GetQuery(this.GetQueryable(), specification);
 

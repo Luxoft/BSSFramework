@@ -20,6 +20,18 @@ public interface IRepository<TDomainObject, in TIdent>
     IQueryable<TDomainObject> GetQueryable();
 
     /// <summary>
+    /// Load actually returns a proxy object and doesn't need to access the database right when you issue that Load call.
+    /// https://www.tutorialspoint.com/nhibernate/nhibernate_load_get.htm
+    /// </summary>
+    TDomainObject Load(TIdent id);
+
+    /// <summary>
+    /// Load actually returns a proxy object and doesn't need to access the database right when you issue that Load call.
+    /// https://www.tutorialspoint.com/nhibernate/nhibernate_load_get.htm
+    /// </summary>
+    Task<TDomainObject> LoadAsync(TIdent id, CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Get Queryable by Specification https://github.com/NikitaEgorov/nuSpec
     /// </summary>
     IQueryable<TProjection> GetQueryable<TProjection>(Specification<TDomainObject, TProjection> specification);

@@ -53,6 +53,9 @@ public static class ServiceCollectionExtensions
         services.RegisterAuthorizationBLL();
         services.RegisterConfigurationBLL();
 
+        services.AddScoped<ILegacyGenericDisabledSecurityProviderFactory, LegacyGenericDisabledSecurityProviderFactory>();
+        services.AddScoped<INotImplementedDomainSecurityServiceContainer, OnlyDisabledDomainSecurityServiceContainer>();
+
         return services;
     }
 
@@ -108,7 +111,7 @@ public static class ServiceCollectionExtensions
                .AddScoped<IAccessDeniedExceptionService<Framework.Authorization.Domain.PersistentDomainObjectBase>, AccessDeniedExceptionService<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
 
                .AddScoped(typeof(IAuthorizationRepositoryFactory<>), typeof(AuthorizationRepositoryFactory<>))
-               
+
                .Self(AuthorizationSecurityServiceBase.Register)
                .Self(AuthorizationBLLFactoryContainer.RegisterBLLFactory);
     }

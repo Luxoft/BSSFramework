@@ -636,6 +636,8 @@ namespace SampleSystem.Generated.DTO
         
         void MapNamedLock(SampleSystem.Domain.NamedLock domainObject, SampleSystem.Generated.DTO.NamedLockEventRichDTO mappingObject);
         
+        void MapNoSecurityObject(SampleSystem.Domain.NoSecurityObject domainObject, SampleSystem.Generated.DTO.NoSecurityObjectEventRichDTO mappingObject);
+        
         void MapParentEntity(SampleSystem.Domain.UniqueByMaster.ParentEntity domainObject, SampleSystem.Generated.DTO.ParentEntityEventRichDTO mappingObject);
         
         void MapParentEntity(SampleSystem.Domain.UniqueByMaster.ParentEntity domainObject, SampleSystem.Generated.DTO.ParentEntityEventSimpleDTO mappingObject);
@@ -1177,6 +1179,8 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.ManagementUnitToAncestorChildView ToManagementUnitToAncestorChildView(SampleSystem.Generated.DTO.ManagementUnitToAncestorChildViewIdentityDTO managementUnitToAncestorChildViewIdentityDTO);
         
         SampleSystem.Domain.NamedLock ToNamedLock(SampleSystem.Generated.DTO.NamedLockIdentityDTO namedLockIdentityDTO);
+        
+        SampleSystem.Domain.NoSecurityObject ToNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO noSecurityObjectIdentityDTO);
         
         SampleSystem.Domain.UniqueByMaster.ParentEntity ToParentEntity(SampleSystem.Generated.DTO.ParentEntityIdentityDTO parentEntityIdentityDTO);
         
@@ -6320,6 +6324,11 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Version = domainObject.Version;
         }
         
+        public virtual void MapNoSecurityObject(SampleSystem.Domain.NoSecurityObject domainObject, SampleSystem.Generated.DTO.NoSecurityObjectEventRichDTO mappingObject)
+        {
+            mappingObject.Id = domainObject.Id;
+        }
+        
         public virtual void MapParentEntity(SampleSystem.Domain.UniqueByMaster.ParentEntity domainObject, SampleSystem.Generated.DTO.ParentEntityEventRichDTO mappingObject)
         {
             mappingObject.Active = domainObject.Active;
@@ -8570,6 +8579,11 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.NamedLock ToNamedLock(SampleSystem.Generated.DTO.NamedLockIdentityDTO namedLockIdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.NamedLock>(namedLockIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.NoSecurityObject ToNoSecurityObject(SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO noSecurityObjectIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.NoSecurityObject>(noSecurityObjectIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.UniqueByMaster.ParentEntity ToParentEntity(SampleSystem.Generated.DTO.ParentEntityIdentityDTO parentEntityIdentityDTO)

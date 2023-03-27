@@ -4765,6 +4765,87 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.NoSecurityObject), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct NoSecurityObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO EmptyField = new SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO(System.Guid.Empty);
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id;
+        
+        public NoSecurityObjectIdentityDTO(System.Guid id)
+        {
+            this.Id = id;
+        }
+        
+        public NoSecurityObjectIdentityDTO(SampleSystem.Domain.NoSecurityObject domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this.Id = domainObject.Id;
+        }
+        
+        public NoSecurityObjectIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO.EmptyField;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO identity1, SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO identity1, SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.NoSecurityObjectIdentityDTO other)
+        {
+            return (this.Id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.NoSecurityObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToNoSecurityObject(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Principal), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]
     [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]

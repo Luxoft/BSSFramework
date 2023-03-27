@@ -17,10 +17,11 @@ public class RepositoryFactory<TDomainObject, TIdent, TSecurityOperationCode> : 
 
     public RepositoryFactory(
             IServiceProvider serviceProvider,
-            IDomainSecurityService<TDomainObject, TSecurityOperationCode> domainSecurityService)
+            INotImplementedDomainSecurityServiceContainer notImplementedDomainSecurityServiceContainer,
+            IDomainSecurityService<TDomainObject, TSecurityOperationCode>? domainSecurityService = null)
     {
         this.serviceProvider = serviceProvider;
-        this.domainSecurityService = domainSecurityService;
+        this.domainSecurityService = domainSecurityService ?? notImplementedDomainSecurityServiceContainer.GetNotImplementedDomainSecurityService<TDomainObject, TSecurityOperationCode>();
     }
 
     public IRepository<TDomainObject, TIdent> Create(ISecurityProvider<TDomainObject> securityProvider) =>

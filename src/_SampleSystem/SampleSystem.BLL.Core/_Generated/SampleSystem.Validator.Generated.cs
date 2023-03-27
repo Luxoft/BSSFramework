@@ -85,6 +85,7 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.Models.Filters.HierarchicalBusinessUnitFilterModel>(this.GetHierarchicalBusinessUnitFilterModelValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Models.Filters.SingleEmployeeFilterModel>(this.GetSingleEmployeeFilterModelValidationResult);
             base.RegisterHandler<SampleSystem.Domain.NamedLock>(this.GetNamedLockValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.NoSecurityObject>(this.GetNoSecurityObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Principal>(this.GetPrincipalValidationResult);
             base.RegisterHandler<SampleSystem.Domain.Project>(this.GetProjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.RoleRoleDegreeLink>(this.GetRoleRoleDegreeLinkValidationResult);
@@ -473,6 +474,11 @@ namespace SampleSystem.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetNamedLockValidationResult(SampleSystem.Domain.NamedLock source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetNoSecurityObjectValidationResult(SampleSystem.Domain.NoSecurityObject source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

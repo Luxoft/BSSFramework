@@ -19,6 +19,7 @@ using Framework.DomainDriven.WebApiNetCore;
 using Framework.Events;
 using Framework.Persistent;
 using Framework.QueryableSource;
+using Framework.Security;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Rules.Builders;
 
@@ -147,6 +148,9 @@ public static class SampleSystemFrameworkExtensions
 
         // For expand tree
         services.RegisterHierarchicalObjectExpander<PersistentDomainObjectBase>();
+
+        // For repository
+        services.AddScoped(_ => new LegacyPersistentDomainObjectBaseList(typeof(PersistentDomainObjectBase)));
 
         return services;
     }

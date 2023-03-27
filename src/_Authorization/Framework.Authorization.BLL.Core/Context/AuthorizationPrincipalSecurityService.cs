@@ -28,7 +28,7 @@ namespace Framework.Authorization.BLL
             switch (securityMode)
             {
                 case BLLSecurityMode.View:
-                    return this.Context.GetPrincipalSecurityProvider().Or(baseProvider, this.AccessDeniedExceptionService);
+                    return this.Context.GetPrincipalSecurityProvider().Or(baseProvider);
 
                 default:
                     return baseProvider;

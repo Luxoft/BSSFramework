@@ -11,6 +11,8 @@
 
   <ItemGroup>
     <EmbeddedResource Include="configurator-ui/dist/**/*" Exclude="**/*/*.txt;" />
+    <None Remove="Templates\Permissions.xlsx" />
+    <EmbeddedResource Include="Templates\Permissions.xlsx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +21,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\_Configuration\Framework.Configuration.BLL.Core\Framework.Configuration.BLL.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.97.0" />
   </ItemGroup>
 
 </Project>

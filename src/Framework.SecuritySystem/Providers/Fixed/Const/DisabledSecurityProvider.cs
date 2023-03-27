@@ -1,10 +1,11 @@
-﻿namespace Framework.SecuritySystem;
-
-public class DisabledSecurityProvider<TDomainObject> : ConstSecurityProvider<TDomainObject>
-        where TDomainObject : class
+﻿namespace Framework.SecuritySystem
 {
-    public DisabledSecurityProvider(IAccessDeniedExceptionService<TDomainObject> accessDeniedExceptionService)
-            : base(accessDeniedExceptionService, true)
+    public class DisabledSecurityProvider<TDomainObject> : ConstSecurityProvider<TDomainObject>
+        where TDomainObject : class
     {
+        public DisabledSecurityProvider()
+            : base(true)
+        {
+        }
     }
 }

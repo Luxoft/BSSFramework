@@ -4,83 +4,86 @@ using System.Linq.Expressions;
 
 using Framework.Core;
 
-namespace Framework.SecuritySystem;
-
-public abstract class SecurityProvider<TDomainObject> : SecurityProviderBase<TDomainObject>
-        where TDomainObject : class
+namespace Framework.SecuritySystem
 {
-    private readonly Lazy<Func<TDomainObject, bool>> lazyHasAccessFunc;
-
-
-    protected SecurityProvider(IAccessDeniedExceptionService<TDomainObject> accessDeniedExceptionService)
-            : base(accessDeniedExceptionService)
+    public abstract class SecurityProvider<TDomainObject> : ISecurityProvider<TDomainObject>
+        where TDomainObject : class
     {
-        this.lazyHasAccessFunc = LazyHelper.Create(() => this.SecurityFilter.Compile(this.CompileCache));
-    }
+        private readonly Lazy<Func<TDomainObject, bool>> lazyHasAccessFunc;
 
 
-    protected LambdaCompileCache CompileCache
-    {
-        get { return Caches[this.SecurityFilterCompileMode]; }
-    }
-
-    public abstract Expression<Func<TDomainObject, bool>> SecurityFilter { get; }
-
-    protected virtual LambdaCompileMode SecurityFilterCompileMode
-    {
-        get { return LambdaCompileMode.None; }
-    }
+        protected SecurityProvider()
+            : base()
+        {
+            this.lazyHasAccessFunc = LazyHelper.Create(() => this.SecurityFilter.Compile(this.CompileCache));
+        }
 
 
-    public override IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
-    {
-        if (queryable == null) throw new ArgumentNullException(nameof(queryable));
+        protected LambdaCompileCache CompileCache
+        {
+            get { return Caches[this.SecurityFilterCompileMode]; }
+        }
 
-        return queryable.Where(this.SecurityFilter);
-    }
+        public abstract Expression<Func<TDomainObject, bool>> SecurityFilter { get; }
 
-    public override bool HasAccess(TDomainObject domainObject)
-    {
-        return this.lazyHasAccessFunc.Value(domainObject);
-    }
+        protected virtual LambdaCompileMode SecurityFilterCompileMode
+        {
+            get { return LambdaCompileMode.None; }
+        }
 
-    private static readonly IDictionaryCache<LambdaCompileMode, LambdaCompileCache> Caches =
+
+        public virtual IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
+        {
+            if (queryable == null) throw new ArgumentNullException(nameof(queryable));
+
+            return queryable.Where(this.SecurityFilter);
+        }
+
+        public virtual bool HasAccess(TDomainObject domainObject)
+        {
+            return this.lazyHasAccessFunc.Value(domainObject);
+        }
+
+        public abstract UnboundedList<string> GetAccessors(TDomainObject domainObject);
+
+        private static readonly IDictionaryCache<LambdaCompileMode, LambdaCompileCache> Caches =
             new DictionaryCache<LambdaCompileMode, LambdaCompileCache>(mode => new LambdaCompileCache(mode)).WithLock();
 
 
-    public static SecurityProvider<TDomainObject> Create(IAccessDeniedExceptionService<TDomainObject> accessDeniedExceptionService, Expression<Func<TDomainObject, bool>> securityFilter, Func<TDomainObject, UnboundedList<string>> getAccessorsFunc = null, LambdaCompileMode securityFilterCompileMode = LambdaCompileMode.All)
-    {
-        return new DefaultSecurityProvider(accessDeniedExceptionService, securityFilter, getAccessorsFunc, securityFilterCompileMode);
-    }
-
-    private class DefaultSecurityProvider : SecurityProvider<TDomainObject>
-    {
-        private readonly Expression<Func<TDomainObject, bool>> securityFilter;
-        private readonly Func<TDomainObject, UnboundedList<string>> getAccessorsFunc;
-        private readonly LambdaCompileMode securityFilterCompileMode;
-
-        public DefaultSecurityProvider(IAccessDeniedExceptionService<TDomainObject> accessDeniedExceptionService, Expression<Func<TDomainObject, bool>> securityFilter, Func<TDomainObject, UnboundedList<string>> getAccessorsFunc, LambdaCompileMode securityFilterCompileMode)
-                : base(accessDeniedExceptionService)
+        public static SecurityProvider<TDomainObject> Create(Expression<Func<TDomainObject, bool>> securityFilter, Func<TDomainObject, UnboundedList<string>> getAccessorsFunc = null, LambdaCompileMode securityFilterCompileMode = LambdaCompileMode.All)
         {
-            this.securityFilter = securityFilter ?? throw new ArgumentNullException(nameof(securityFilter));
-            this.getAccessorsFunc = getAccessorsFunc ?? (domainObject => this.HasAccess(domainObject) ? UnboundedList<string>.Infinity : UnboundedList<string>.Empty);
-            this.securityFilterCompileMode = securityFilterCompileMode;
+            return new DefaultSecurityProvider(securityFilter, getAccessorsFunc, securityFilterCompileMode);
         }
 
-
-        public override Expression<Func<TDomainObject, bool>> SecurityFilter
+        private class DefaultSecurityProvider : SecurityProvider<TDomainObject>
         {
-            get { return this.securityFilter; }
-        }
+            private readonly Expression<Func<TDomainObject, bool>> securityFilter;
+            private readonly Func<TDomainObject, UnboundedList<string>> getAccessorsFunc;
+            private readonly LambdaCompileMode securityFilterCompileMode;
 
-        protected override LambdaCompileMode SecurityFilterCompileMode
-        {
-            get { return this.securityFilterCompileMode; }
-        }
+            public DefaultSecurityProvider(Expression<Func<TDomainObject, bool>> securityFilter, Func<TDomainObject, UnboundedList<string>> getAccessorsFunc, LambdaCompileMode securityFilterCompileMode)
+                : base()
+            {
+                this.securityFilter = securityFilter ?? throw new ArgumentNullException(nameof(securityFilter));
+                this.getAccessorsFunc = getAccessorsFunc ?? (domainObject => this.HasAccess(domainObject) ? UnboundedList<string>.Infinity : UnboundedList<string>.Empty);
+                this.securityFilterCompileMode = securityFilterCompileMode;
+            }
 
-        public override UnboundedList<string> GetAccessors(TDomainObject domainObject)
-        {
-            return this.getAccessorsFunc(domainObject);
+
+            public override Expression<Func<TDomainObject, bool>> SecurityFilter
+            {
+                get { return this.securityFilter; }
+            }
+
+            protected override LambdaCompileMode SecurityFilterCompileMode
+            {
+                get { return this.securityFilterCompileMode; }
+            }
+
+            public override UnboundedList<string> GetAccessors(TDomainObject domainObject)
+            {
+                return this.getAccessorsFunc(domainObject);
+            }
         }
     }
 }

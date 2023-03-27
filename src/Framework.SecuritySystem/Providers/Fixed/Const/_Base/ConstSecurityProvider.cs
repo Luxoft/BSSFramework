@@ -1,26 +1,26 @@
 ﻿using Framework.Core;
 
-namespace Framework.SecuritySystem;
-
-public class ConstSecurityProvider<TDomainObject> : FixedSecurityProvider<TDomainObject>
-        where TDomainObject : class
+namespace Framework.SecuritySystem
 {
-    private readonly bool hasAccess;
-
-    public ConstSecurityProvider(IAccessDeniedExceptionService<TDomainObject> accessDeniedExceptionService, bool hasAccess)
-            : base(accessDeniedExceptionService)
+    public class ConstSecurityProvider<TDomainObject> : FixedSecurityProvider<TDomainObject>
+        where TDomainObject : class
     {
-        this.hasAccess = hasAccess;
-    }
+        private readonly bool hasAccess;
+
+        public ConstSecurityProvider(bool hasAccess)
+        {
+            this.hasAccess = hasAccess;
+        }
 
 
-    protected sealed override bool HasAccess()
-    {
-        return this.hasAccess;
-    }
+        protected sealed override bool HasAccess()
+        {
+            return this.hasAccess;
+        }
 
-    public override UnboundedList<string> GetAccessors(TDomainObject domainObject)
-    {
-        return this.hasAccess ? UnboundedList<string>.Infinity : UnboundedList<string>.Empty;
+        public override UnboundedList<string> GetAccessors(TDomainObject domainObject)
+        {
+            return this.hasAccess ? UnboundedList<string>.Infinity : UnboundedList<string>.Empty;
+        }
     }
 }

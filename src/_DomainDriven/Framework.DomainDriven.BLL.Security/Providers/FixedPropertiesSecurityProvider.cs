@@ -1,60 +1,46 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+
 using Framework.Core;
 using Framework.DomainDriven.BLL.Tracking;
 using Framework.SecuritySystem;
 
-namespace Framework.DomainDriven.BLL.Security;
-
-internal class FixedPropertiesSecurityProvider<TBLLContext, TDomainObject> : SecurityProviderBase<TDomainObject>
+namespace Framework.DomainDriven.BLL.Security
+{
+    internal class FixedPropertiesSecurityProvider<TBLLContext, TDomainObject> : ISecurityProvider<TDomainObject>
         where TBLLContext : class, IAccessDeniedExceptionServiceContainer<TDomainObject>, ITrackingServiceContainer<TDomainObject>
         where TDomainObject : class
-{
-    private readonly ISecurityProvider<TDomainObject> baseSecurityProvider;
-
-    private readonly Expression<Func<TDomainObject, object>>[] allowedPropertiesForChangingExpressions;
-
-
-    public FixedPropertiesSecurityProvider(TBLLContext context, ISecurityProvider<TDomainObject> baseSecurityProvider, Expression<Func<TDomainObject, object>>[] allowedPropertiesForChangingExpressions)
-            : base(context.AccessDeniedExceptionService)
     {
-        this.Context = context;
-        this.baseSecurityProvider = baseSecurityProvider;
-        this.allowedPropertiesForChangingExpressions = allowedPropertiesForChangingExpressions;
-    }
+        private readonly ISecurityProvider<TDomainObject> baseSecurityProvider;
 
-    public TBLLContext Context { get; }
+        private readonly Expression<Func<TDomainObject, object>>[] allowedPropertiesForChangingExpressions;
 
 
-    public override IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
-    {
-        return this.baseSecurityProvider.InjectFilter(queryable);
-    }
-
-    public override bool HasAccess(TDomainObject domainObject)
-    {
-        return this.baseSecurityProvider.HasAccess(domainObject)
-               && !this.Context.TrackingService.GetChanges(domainObject).GetUnexpectedChangedProprties(this.allowedPropertiesForChangingExpressions).Any();
-    }
-
-    public override UnboundedList<string> GetAccessors(TDomainObject domainObject)
-    {
-        return this.baseSecurityProvider.GetAccessors(domainObject);
-    }
-
-    public override Exception GetAccessDeniedException(TDomainObject domainObject, Func<string, string> formatMessageFunc = null)
-    {
-        if (!this.baseSecurityProvider.HasAccess(domainObject))
+        public FixedPropertiesSecurityProvider(TBLLContext context, ISecurityProvider<TDomainObject> baseSecurityProvider, Expression<Func<TDomainObject, object>>[] allowedPropertiesForChangingExpressions)
         {
-            return this.baseSecurityProvider.GetAccessDeniedException(domainObject, formatMessageFunc);
+            this.Context = context;
+            this.baseSecurityProvider = baseSecurityProvider;
+            this.allowedPropertiesForChangingExpressions = allowedPropertiesForChangingExpressions;
         }
 
-        var unexpectedChanges = this.Context.TrackingService.GetChanges(domainObject).GetUnexpectedChangedProprties(this.allowedPropertiesForChangingExpressions)
-                                    .Where(p => !typeof(TDomainObject).GetProperty(p.PropertyName, true).HasAttribute<SystemPropertyAttribute>())
-                                    .ToArray();
+        public TBLLContext Context { get; }
 
-        return this.baseSecurityProvider.GetAccessDeniedException(domainObject, message =>
-                                                                                        $"{(formatMessageFunc == null ? message : formatMessageFunc(message))} (Can't changed properties: {unexpectedChanges.Join(", ", p => p.PropertyName)})");
+
+        public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
+        {
+            return this.baseSecurityProvider.InjectFilter(queryable);
+        }
+
+        public bool HasAccess(TDomainObject domainObject)
+        {
+            return this.baseSecurityProvider.HasAccess(domainObject)
+                   && !this.Context.TrackingService.GetChanges(domainObject).GetUnexpectedChangedProprties(this.allowedPropertiesForChangingExpressions).Any();
+        }
+
+        public UnboundedList<string> GetAccessors(TDomainObject domainObject)
+        {
+            return this.baseSecurityProvider.GetAccessors(domainObject);
+        }
     }
 }

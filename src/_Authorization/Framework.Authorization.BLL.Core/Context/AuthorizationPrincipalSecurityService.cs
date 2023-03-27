@@ -5,34 +5,34 @@ using Framework.SecuritySystem;
 
 using JetBrains.Annotations;
 
-namespace Framework.Authorization.BLL;
-
-public partial class AuthorizationPrincipalSecurityService
+namespace Framework.Authorization.BLL
 {
-    public AuthorizationPrincipalSecurityService(
-            IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
+    public partial class AuthorizationPrincipalSecurityService
+    {
+        public AuthorizationPrincipalSecurityService(
             IDisabledSecurityProviderContainer<PersistentDomainObjectBase> disabledSecurityProviderContainer,
             ISecurityOperationResolver<PersistentDomainObjectBase, AuthorizationSecurityOperationCode> securityOperationResolver,
             IAuthorizationSystem<Guid> authorizationSystem,
             [NotNull] IAuthorizationBLLContext context)
-            : base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
-    {
-        this.Context = context ?? throw new ArgumentNullException(nameof(context));
-    }
-
-    public IAuthorizationBLLContext Context { get; }
-
-    protected override ISecurityProvider<Principal> CreateSecurityProvider(BLLSecurityMode securityMode)
-    {
-        var baseProvider = base.CreateSecurityProvider(securityMode);
-
-        switch (securityMode)
+            : base(disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
-            case BLLSecurityMode.View:
-                return this.Context.GetPrincipalSecurityProvider().Or(baseProvider, this.AccessDeniedExceptionService);
+            this.Context = context ?? throw new ArgumentNullException(nameof(context));
+        }
 
-            default:
-                return baseProvider;
+        public IAuthorizationBLLContext Context { get; }
+
+        protected override ISecurityProvider<Principal> CreateSecurityProvider(BLLSecurityMode securityMode)
+        {
+            var baseProvider = base.CreateSecurityProvider(securityMode);
+
+            switch (securityMode)
+            {
+                case BLLSecurityMode.View:
+                    return this.Context.GetPrincipalSecurityProvider().Or(baseProvider, this.AccessDeniedExceptionService);
+
+                default:
+                    return baseProvider;
+            }
         }
     }
 }

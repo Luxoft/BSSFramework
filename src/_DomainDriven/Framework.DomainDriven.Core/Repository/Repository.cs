@@ -23,33 +23,37 @@ public class Repository<TDomainObject, TIdent> : IRepository<TDomainObject, TIde
 
     private readonly ISpecificationEvaluator specificationEvaluator;
 
+    private readonly IAccessDeniedExceptionFormatter accessDeniedExceptionFormatter;
+
     public Repository(
             ISecurityProvider<TDomainObject> securityProvider,
             IAsyncDal<TDomainObject, TIdent> dal,
-            ISpecificationEvaluator specificationEvaluator)
+            ISpecificationEvaluator specificationEvaluator,
+            IAccessDeniedExceptionFormatter accessDeniedExceptionFormatter)
     {
         this.securityProvider = securityProvider;
         this.dal = dal;
         this.specificationEvaluator = specificationEvaluator;
+        this.accessDeniedExceptionFormatter = accessDeniedExceptionFormatter;
     }
 
     public async Task SaveAsync(TDomainObject domainObject, CancellationToken cancellationToken)
     {
-        this.securityProvider.CheckAccess(domainObject);
+        this.securityProvider.CheckAccess(domainObject, this.accessDeniedExceptionFormatter);
 
         await this.dal.SaveAsync(domainObject, cancellationToken);
     }
 
     public async Task InsertAsync(TDomainObject domainObject, TIdent id, CancellationToken cancellationToken)
     {
-        this.securityProvider.CheckAccess(domainObject);
+        this.securityProvider.CheckAccess(domainObject, this.accessDeniedExceptionFormatter);
 
         await this.dal.InsertAsync(domainObject, id, cancellationToken);
     }
 
     public async Task RemoveAsync(TDomainObject domainObject, CancellationToken cancellationToken)
     {
-        this.securityProvider.CheckAccess(domainObject);
+        this.securityProvider.CheckAccess(domainObject, this.accessDeniedExceptionFormatter);
 
         await this.dal.RemoveAsync(domainObject, cancellationToken);
     }

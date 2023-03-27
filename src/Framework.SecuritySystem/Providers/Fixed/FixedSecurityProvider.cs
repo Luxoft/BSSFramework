@@ -1,46 +1,47 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Framework.SecuritySystem;
-
-/// <summary>
-/// Провайдер доступа с фиксированным ответом для одного типа
-/// </summary>
-/// <typeparam name="TDomainObject"></typeparam>
-public abstract class FixedSecurityProvider<TDomainObject> : SecurityProvider<TDomainObject>
-        where TDomainObject : class
+namespace Framework.SecuritySystem
 {
-    private readonly Lazy<bool> hasAccessLazy;
-
-    private readonly Lazy<Expression<Func<TDomainObject, bool>>> securityFilterLazy;
-
-
-    protected FixedSecurityProvider(IAccessDeniedExceptionService<TDomainObject> accessDeniedExceptionService)
-            : base(accessDeniedExceptionService)
+    /// <summary>
+    /// Провайдер доступа с фиксированным ответом для одного типа
+    /// </summary>
+    /// <typeparam name="TDomainObject"></typeparam>
+    public abstract class FixedSecurityProvider<TDomainObject> : SecurityProvider<TDomainObject>
+        where TDomainObject : class
     {
-        this.hasAccessLazy = new Lazy<bool>(this.HasAccess);
+        private readonly Lazy<bool> hasAccessLazy;
 
-        this.securityFilterLazy = new Lazy<Expression<Func<TDomainObject, bool>>>(() =>
-                                                                                  {
-                                                                                      var hasAccess = this.hasAccessLazy.Value;
-
-                                                                                      // For hibernate
-                                                                                      if (hasAccess) { return _ => true; }
-                                                                                      else { return _ => false; }
-                                                                                  });
-    }
+        private readonly Lazy<Expression<Func<TDomainObject, bool>>> securityFilterLazy;
 
 
-    protected abstract bool HasAccess();
+        protected FixedSecurityProvider()
+            : base()
+        {
+            this.hasAccessLazy = new Lazy<bool>(this.HasAccess);
+
+            this.securityFilterLazy = new Lazy<Expression<Func<TDomainObject, bool>>>(() =>
+            {
+                var hasAccess = this.hasAccessLazy.Value;
+
+                // For hibernate
+                if (hasAccess) { return _ => true; }
+                else { return _ => false; }
+            });
+        }
 
 
-    public override bool HasAccess(TDomainObject _)
-    {
-        return this.hasAccessLazy.Value;
-    }
+        protected abstract bool HasAccess();
 
-    public override Expression<Func<TDomainObject, bool>> SecurityFilter
-    {
-        get { return this.securityFilterLazy.Value; }
+
+        public override bool HasAccess(TDomainObject _)
+        {
+            return this.hasAccessLazy.Value;
+        }
+
+        public override Expression<Func<TDomainObject, bool>> SecurityFilter
+        {
+            get { return this.securityFilterLazy.Value; }
+        }
     }
 }

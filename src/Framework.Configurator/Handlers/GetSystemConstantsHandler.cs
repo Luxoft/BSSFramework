@@ -1,4 +1,5 @@
-﻿using Framework.Configuration.BLL;
+﻿using Framework.Configuration.BLL.Core.Context;
+using Framework.Configuration.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
 using Framework.SecuritySystem;
@@ -9,16 +10,16 @@ namespace Framework.Configurator.Handlers;
 
 public class GetSystemConstantsHandler : BaseReadHandler, IGetSystemConstantsHandler
 {
-    private readonly ISystemConstantBLLFactory systemConstantBllFactory;
+    private readonly IConfigurationRepositoryFactory<SystemConstant> systemConstantRepositoryFactory;
 
-    public GetSystemConstantsHandler(ISystemConstantBLLFactory systemConstantBllFactory) =>
-            this.systemConstantBllFactory = systemConstantBllFactory;
+    public GetSystemConstantsHandler(IConfigurationRepositoryFactory<SystemConstant> systemConstantRepositoryFactory) =>
+        this.systemConstantRepositoryFactory = systemConstantRepositoryFactory;
 
     protected override object GetData(HttpContext context) =>
-            this.systemConstantBllFactory.Create(BLLSecurityMode.View)
-                .GetSecureQueryable()
-                .Select(
-                        s => new SystemConstantDto { Id = s.Id, Name = s.Code, Description = s.Description, Value = s.Value })
-                .OrderBy(s => s.Name)
-                .ToList();
+        this.systemConstantRepositoryFactory.Create(BLLSecurityMode.View)
+            .GetQueryable()
+            .Select(
+                s => new SystemConstantDto { Id = s.Id, Name = s.Code, Description = s.Description, Value = s.Value })
+            .OrderBy(s => s.Name)
+            .ToList();
 }

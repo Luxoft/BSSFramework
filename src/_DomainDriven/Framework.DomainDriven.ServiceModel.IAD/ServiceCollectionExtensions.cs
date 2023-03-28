@@ -2,6 +2,7 @@
 using Framework.Authorization.BLL.Core.Context;
 using Framework.Authorization.Domain;
 using Framework.Configuration.BLL;
+using Framework.Configuration.BLL.Core.Context;
 using Framework.Configuration.BLL.Notification;
 using Framework.Core;
 using Framework.DependencyInjection;
@@ -141,6 +142,8 @@ public static class ServiceCollectionExtensions
                .AddScoped<IQueryableSource<Framework.Configuration.Domain.PersistentDomainObjectBase>, BLLQueryableSource<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectBase, Guid>>()
                .AddScoped<ISecurityExpressionBuilderFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>()
                .AddScoped<IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase>, AccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>()
+
+               .AddScoped(typeof(IConfigurationRepositoryFactory<>), typeof(ConfigurationRepositoryFactory<>))
 
                .Self(ConfigurationSecurityServiceBase.Register)
                .Self(ConfigurationBLLFactoryContainer.RegisterBLLFactory);

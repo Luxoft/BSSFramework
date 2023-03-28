@@ -25,5 +25,6 @@ Features:
     - DTO/Mapping Generation
     - ORM Mapping Generation
     - RestApi Generation
+    - TypeScript Generator https://github.com/Luxoft/gengen
 - **Unit Testing**
 - **Integration Testing**

@@ -72,7 +72,7 @@ export class PrincipalsComponent implements OnInit, OnDestroy {
   }
 
   public viewDetails(principal: IPrincipal): void {
-    this.dialog.open(ViewPrincipalDialogComponent, { data: principal, height: '800px', width: '1000px' });
+    this.dialog.open(ViewPrincipalDialogComponent, { data: principal, maxHeight: '90vh', width: '1000px' });
   }
 
   public add(): void {
@@ -123,7 +123,7 @@ export class PrincipalsComponent implements OnInit, OnDestroy {
 
   public grant(principal: IPrincipal): void {
     this.dialog
-      .open(GrantRightsDialogComponent, { data: principal, height: '800px', width: '1000px' })
+      .open(GrantRightsDialogComponent, { data: principal, height: '90vh', width: '90vw'  })
       .beforeClosed()
       .subscribe((x: IGrantedRight) => {
         if (!x) {

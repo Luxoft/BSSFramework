@@ -5,14 +5,14 @@
   <mat-form-field appearance="fill" class="tw-w-full">
     <input matInput type="text" [formControl]="control" [matAutocomplete]="auto" />
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-      <mat-option *ngFor="let role of roles" [value]="role">
+      <mat-option *ngFor="let role of roles$ | async | filterOptions : control.value" [value]="role">
         {{ role.Name }}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
 </div>
 
-<div mat-dialog-actions align="end">
+<div mat-dialog-actions class="tw-flex tw-justify-end">
   <button mat-button mat-dialog-close>Cancel</button>
   <button mat-raised-button color="primary" [mat-dialog-close]="control.value" cdkFocusInitial>Add</button>
 </div>

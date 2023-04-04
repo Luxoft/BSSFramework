@@ -1,0 +1,57 @@
+<h1 class="tw-text-2xl">Permission edit</h1>
+
+<div class="tw-grid tw-grid-cols-2 tw-gap-2">
+  <mat-form-field>
+    <mat-label>Role</mat-label>
+    <input matInput type="text" [value]="data.permission.Role" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Comment</mat-label>
+    <input matInput type="text" [ngModel]="data.permission.Comment" />
+  </mat-form-field>
+</div>
+<h3 class="tw-text-xl">Contexts</h3>
+<div class="tw-flex-1 tw-overflow-auto">
+  <div class="tw-flex tw-gap-4 tw-h-full">
+    <div *ngFor="let item of forms" class="tw-flex tw-flex-col">
+      {{ item.controls.unit.value.Name }}
+      <div class="flex">
+        <mat-form-field [subscriptSizing]="'dynamic'">
+          <mat-label>search</mat-label>
+          <input matInput #input type="text" />
+        </mat-form-field>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="add(item.controls.entities, null)">
+            <mat-icon>add</mat-icon>
+            <span>One paste</span>
+          </button>
+          <button mat-menu-item (click)="massInsert(item.controls.unit.value, item.controls.entities)">
+            <mat-icon>post_add</mat-icon>
+            <span>Massive paste</span>
+          </button>
+        </mat-menu>
+      </div>
+      <div class="tw-overflow-y-auto">
+        <div
+          *ngFor="let context of item.controls.entities.controls | filterContexts : input.value"
+          class="tw-flex tw-items-center tw-gap-1 tw-relative">
+          <app-select-entity [control]="context" [unitId]="item.controls.unit.value.Id"></app-select-entity>
+          <mat-icon
+            title="Remove"
+            (click)="remove(item.controls.entities, context)"
+            class="tw-opacity-50 hover:tw-opacity-100 tw-cursor-pointer"
+            >remove</mat-icon
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tw-flex tw-justify-end tw-gap-2">
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-raised-button (click)="save()" color="primary">Paste</button>
+</div>

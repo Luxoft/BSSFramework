@@ -61,11 +61,11 @@ export class SelectContextComponent implements OnInit {
     );
   }
 
-  public select(entyty: IEntity, entities: IEntity[]): void {
-    if (this.contextCheck.transform(entyty, entities)) {
-      this.removeContext.emit(entyty);
+  public select(entity: IEntity, entities: IEntity[]): void {
+    if (this.contextCheck.transform(entity, entities)) {
+      this.removeContext.emit(entity);
     } else {
-      this.selected.emit(entyty);
+      this.selected.emit(entity);
     }
   }
 

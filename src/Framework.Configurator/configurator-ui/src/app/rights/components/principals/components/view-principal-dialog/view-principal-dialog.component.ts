@@ -22,7 +22,7 @@ export interface IPermission {
   Contexts: IContext[];
 }
 
-interface IContext {
+export interface IContext {
   Id: string;
   Name: string;
   Entities: IEntity[];

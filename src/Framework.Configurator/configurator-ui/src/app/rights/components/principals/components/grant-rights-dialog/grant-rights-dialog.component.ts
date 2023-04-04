@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit }
 import { FormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
-import { BehaviorSubject, combineLatest, forkJoin, map, withLatestFrom } from 'rxjs';
+import { BehaviorSubject, combineLatest, filter, forkJoin, map, tap, withLatestFrom } from 'rxjs';
 
 import { IRole } from '../../../roles/roles.component';
 import { IPrincipal } from '../../principals.component';
@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { SearchFieldComponent } from './components/search-header/search-header.component';
+import { PermissionEditDialogComponent } from '../permission-edit-dialog/permission-edit-dialog.component';
 
 export interface IRoleContext {
   Id: string;
@@ -53,8 +54,8 @@ interface IGrantedContext {
 export class GrantRightsDialogComponent implements OnInit {
   public rightsSubject = new BehaviorSubject<IPrincipalDetails>({ Permissions: [] });
 
-  public allContexts: IRoleContext[] | undefined;
-  public displayedColumns = ['delete', 'Role', 'Comment', 'Contexts'];
+  public allContexts: IRoleContext[] = [];
+  public displayedColumns = ['edit', 'Role', 'Comment', 'Contexts'];
 
   public contextFilter = new BehaviorSubject<{ contextId: string; search: string }[]>([]);
   public roletFilter = new BehaviorSubject<string>('');
@@ -118,6 +119,29 @@ export class GrantRightsDialogComponent implements OnInit {
         this.rightsSubject.next(rights);
         this.roletFilter.next('');
       });
+  }
+
+  public edit(permission: IPermission, units: IRoleContext[]): void {
+    this.dialog
+      .open(PermissionEditDialogComponent, {
+        maxHeight: '90vh',
+        maxWidth: '90vw',
+        data: { permission, units },
+      })
+      .afterClosed()
+      .pipe(
+        filter((result) => Boolean(result)),
+        tap((result) => {
+          const rights = this.rightsSubject.value;
+          const findIndex = rights.Permissions.findIndex((x) => x.Id === result.Id);
+          if (findIndex > -1) {
+            rights.Permissions[findIndex] = result;
+            this.rightsSubject.next(rights);
+            this.roletFilter.next('');
+          }
+        })
+      )
+      .subscribe();
   }
 
   public removeContext(permission: IPermission, context: IRoleContext, entity: IEntity): void {

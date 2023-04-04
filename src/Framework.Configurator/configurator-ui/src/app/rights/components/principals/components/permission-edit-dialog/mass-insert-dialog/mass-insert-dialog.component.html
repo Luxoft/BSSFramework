@@ -1,0 +1,16 @@
+<div class="tw-p-4 tw-flex tw-flex-col tw-gap-2">
+  <h1 class="tw-text-2xl">{{ data.unit.Name }}</h1>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>List of contexts</mat-label>
+    <textarea matInput [(ngModel)]="value" rows="6"></textarea>
+  </mat-form-field>
+
+  <div class="tw-flex tw-justify-end tw-gap-2">
+    <button mat-button (click)="cancel()" [disabled]="loading">Cancel</button>
+    <button mat-raised-button (click)="save()" color="primary" [disabled]="loading">
+      <ng-container *ngIf="!loading"> Paste </ng-container>
+      <mat-progress-spinner *ngIf="loading" class="tw-h-4 tw-w-4 tw-top-0 tw-m-1" [mode]="'indeterminate'"> </mat-progress-spinner>
+    </button>
+  </div>
+</div>

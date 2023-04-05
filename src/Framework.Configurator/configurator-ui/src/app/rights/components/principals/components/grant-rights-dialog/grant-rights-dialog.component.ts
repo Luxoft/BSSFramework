@@ -16,6 +16,7 @@ import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-di
 import { MatButtonModule } from '@angular/material/button';
 import { SearchFieldComponent } from './components/search-header/search-header.component';
 import { PermissionEditDialogComponent } from '../permission-edit-dialog/permission-edit-dialog.component';
+import { ContextFilterPipe } from './context-filter.pipe';
 
 export interface IRoleContext {
   Id: string;
@@ -46,6 +47,7 @@ interface IGrantedContext {
     SearchFieldComponent,
     MatIconModule,
     MatButtonModule,
+    ContextFilterPipe,
   ],
   templateUrl: './grant-rights-dialog.component.html',
   styleUrls: ['./grant-rights-dialog.component.scss'],
@@ -55,10 +57,10 @@ export class GrantRightsDialogComponent implements OnInit {
   public rightsSubject = new BehaviorSubject<IPrincipalDetails>({ Permissions: [] });
 
   public allContexts: IRoleContext[] = [];
-  public displayedColumns = ['edit', 'Role', 'Comment', 'Contexts'];
-
+  public displayedColumns = ['delete', 'edit', 'Role', 'Comment', 'Contexts'];
   public contextFilter = new BehaviorSubject<{ contextId: string; search: string }[]>([]);
   public roletFilter = new BehaviorSubject<string>('');
+
   public rightsObj = combineLatest([this.contextFilter.asObservable(), this.roletFilter.asObservable()]).pipe(
     withLatestFrom(this.rightsSubject.asObservable()),
     map(([[filter, roleFilter], list]) => {
@@ -81,12 +83,7 @@ export class GrantRightsDialogComponent implements OnInit {
     })
   );
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: IPrincipal,
-    private readonly dialog: MatDialog,
-    private readonly http: HttpClient,
-    private readonly cdr: ChangeDetectorRef
-  ) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: IPrincipal, private readonly dialog: MatDialog, private readonly http: HttpClient) {}
 
   ngOnInit(): void {
     forkJoin([this.http.get<IPrincipalDetails>(`api/principal/${this.data.Id}`), this.http.get<IRoleContext[]>('api/contexts')]).subscribe(
@@ -96,10 +93,6 @@ export class GrantRightsDialogComponent implements OnInit {
         this.roletFilter.next('');
       }
     );
-  }
-
-  public getEntities(permission: IPermission, context: IRoleContext): IEntity[] {
-    return permission.Contexts.find((x) => x.Id === context.Id)?.Entities ?? [];
   }
 
   public remove(permission: IPermission): void {
@@ -142,44 +135,6 @@ export class GrantRightsDialogComponent implements OnInit {
         })
       )
       .subscribe();
-  }
-
-  public removeContext(permission: IPermission, context: IRoleContext, entity: IEntity): void {
-    const permissionContext = permission.Contexts.find((x) => x.Id === context.Id);
-    if (!permissionContext) {
-      return;
-    }
-    permissionContext.Entities = permissionContext.Entities.filter((x) => x.Id != entity.Id);
-
-    const rights = this.rightsSubject.value;
-    const findIndex = rights.Permissions.findIndex((x) => x.Id === permission.Id);
-    if (findIndex > -1) {
-      const permission = rights.Permissions[findIndex];
-
-      const permissionContext = permission.Contexts.find((x) => x.Id === context.Id);
-      if (!permissionContext) {
-        return;
-      }
-      permissionContext.Entities = permissionContext.Entities.filter((x) => x.Id != entity.Id);
-      rights.Permissions[findIndex] = permission;
-      this.rightsSubject.next(rights);
-    }
-  }
-
-  public addContext(permission: IPermission, context: IRoleContext, entity: IEntity): void {
-    let permissionContext = permission.Contexts.find((x) => x.Id === context.Id);
-    if (!permissionContext) {
-      permissionContext = { ...context, Entities: [] };
-      permission.Contexts.push(permissionContext);
-    }
-
-    permissionContext.Entities.push(entity);
-    const rights = this.rightsSubject.value;
-    const findIndex = rights.Permissions.findIndex((x) => x.Id === permission.Id);
-    if (findIndex > -1) {
-      rights.Permissions[findIndex] = permission;
-      this.rightsSubject.next(rights);
-    }
   }
 
   public add(): void {

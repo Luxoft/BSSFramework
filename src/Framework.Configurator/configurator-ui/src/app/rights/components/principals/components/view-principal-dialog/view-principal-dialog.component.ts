@@ -9,6 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { IPrincipal } from '../../principals.component';
+import { PrincipalApiService } from 'src/app/shared/api.services';
 
 export interface IPrincipalDetails {
   Permissions: IPermission[];
@@ -40,18 +41,19 @@ export interface IEntity {
   templateUrl: './view-principal-dialog.component.html',
   styleUrls: ['./view-principal-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [PrincipalApiService],
 })
 export class ViewPrincipalDialogComponent implements OnInit {
   public details: IPrincipalDetails | undefined;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: IPrincipal,
-    private readonly http: HttpClient,
+    private readonly principalApiService: PrincipalApiService,
     private readonly cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.http.get<IPrincipalDetails>(`api/principal/${this.data.Id}`).subscribe((x) => {
+    this.principalApiService.getPrincipal(this.data.Id || '').subscribe((x) => {
       this.details = x;
       this.cdr.markForCheck();
     });

@@ -1,48 +1,16 @@
-<div
-  (click)="isOpen = !isOpen"
-  cdkOverlayOrigin
-  #trigger="cdkOverlayOrigin"
-  class="tw-border tw-rounded tw-flex tw-flex-wrap tw-gap-1 tw-h-12 tw-p-1 tw-cursor-pointer">
-  <div
-    *ngFor="let entity of entitiesListCrop(entitiesList)"
-    class="tw-h-4 tw-flex tw-items-center tw-gap-2 tw-border tw-flex-row tw-rounded tw-px-2 tw-py-1 mat-elevation-z1 tw-cursor-text"
-    [style.max-width]="entitiesList.length > 2 ? '49%' : '100%'"
-    matRipple
-    [matRippleCentered]="true">
-    <div class="mat-caption tw-text-ellipsis tw-whitespace-nowrap tw-overflow-x-hidden">
-      {{ entity.Name }}
+<div class="tw-border tw-rounded tw-relative">
+  <div class="tw-flex tw-flex-wrap tw-gap-1 tw-p-1 tw-cursor-pointer tw-h-12 tw-overflow-hidden" [class.tw-mt-2]="entitiesList.length > 3">
+    <div
+      *ngFor="let entity of entitiesList"
+      class="tw-h-4 tw-flex tw-items-center tw-gap-2 tw-border tw-flex-row tw-rounded tw-px-2 tw-py-1 mat-elevation-z1 tw-cursor-text">
+      <div class="mat-caption tw-text-ellipsis tw-whitespace-nowrap tw-overflow-x-hidden">
+        {{ entity.Name }}
+      </div>
     </div>
-    <button (click)="removeContext.emit(entity)" class="tw-cursor-pointer">
-      <mat-icon fontIcon="close" class="tw-text-xs tw-w-3 tw-h-3"></mat-icon>
-    </button>
   </div>
-  <span *ngIf="entitiesList.length > 3" class="tw-h-4 tw-flex-auto tw-text-right">
-    + {{ entitiesList.length - 3 }}
-    others
+  <span *ngIf="entitiesList.length > 3" class="tw-h-4 tw-flex-auto tw-text-right tw-absolute tw-right-0 tw-top-0 tw-text-xs">
+    {{ entitiesList.length }}
+    total
   </span>
+  <div class="tw-h-6 tw-bottom-0 tw-right-0 tw-left-0 tw-absolute tw-mx-1 tw-bg-gradient-to-t tw-from-white tw-to-transparent"></div>
 </div>
-
-<ng-template
-  cdkConnectedOverlay
-  [cdkConnectedOverlayOrigin]="trigger"
-  [cdkConnectedOverlayOpen]="isOpen"
-  (overlayOutsideClick)="isOpen = !isOpen"
-  (attach)="focus()">
-  <mat-card style="width: 350px">
-    <mat-form-field class="tw-w-full" [subscriptSizing]="'dynamic'">
-      <mat-label>Contexts</mat-label>
-      <input matInput [formControl]="searchcontrol" placeholder="Type to search..." />
-    </mat-form-field>
-
-    <div class="tw-flex tw-flex-col tw-border tw-overflow-y-auto" style="max-height: 250px">
-      <ng-container *ngIf="entities | async as entities">
-        <mat-option *ngIf="entities.length === 0"> Nothing to find </mat-option>
-        <mat-option *ngFor="let entity of entities" class="" (click)="select(entity, entitiesList)">
-          <mat-checkbox class="example-margin" [checked]="entity | contextCheck : entitiesList">
-            {{ entity.Name }}
-          </mat-checkbox>
-        </mat-option>
-      </ng-container>
-    </div>
-  </mat-card>
-</ng-template>

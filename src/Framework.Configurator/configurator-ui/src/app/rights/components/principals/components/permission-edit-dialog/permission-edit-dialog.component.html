@@ -3,11 +3,11 @@
 <div class="tw-grid tw-grid-cols-2 tw-gap-2">
   <mat-form-field>
     <mat-label>Role</mat-label>
-    <input matInput type="text" [value]="data.permission.Role" />
+    <input matInput type="text" [value]="data.permission.Role" [disabled]="true" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Comment</mat-label>
-    <input matInput type="text" [ngModel]="data.permission.Comment" />
+    <input matInput type="text" [(ngModel)]="data.permission.Comment" />
   </mat-form-field>
 </div>
 <h3 class="tw-text-xl">Contexts</h3>
@@ -43,8 +43,8 @@
             title="Remove"
             (click)="remove(item.controls.entities, context)"
             class="tw-opacity-50 hover:tw-opacity-100 tw-cursor-pointer"
-            >remove</mat-icon
-          >
+            >remove
+          </mat-icon>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { IEntity, IPermission } from '../view-principal-dialog/view-principal-dialog.component';
-import { IRoleContext } from './grant-rights-dialog.component';
+import { IRoleContext } from './grant-rights-dialog.models';
 
 @Pipe({
   name: 'contextFilter',

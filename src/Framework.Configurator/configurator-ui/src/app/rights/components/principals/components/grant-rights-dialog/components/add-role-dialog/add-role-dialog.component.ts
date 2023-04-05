@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -30,7 +30,7 @@ export class AddRoleDialogComponent {
   public roles$ = this.http.get<IRole[]>('api/roles');
   public control = new FormControl('');
 
-  constructor(private readonly http: HttpClient, private readonly cdr: ChangeDetectorRef) {}
+  constructor(private readonly http: HttpClient) {}
 
   public displayFn(role: IRole): string {
     return role?.Name ?? '';

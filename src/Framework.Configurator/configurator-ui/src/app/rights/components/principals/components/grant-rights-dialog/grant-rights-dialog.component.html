@@ -1,16 +1,26 @@
 <h1 mat-dialog-title>{{ data.Name }}</h1>
 
 <div class="tw-flex tw-justify-end tw-mr-2">
-  <button mat-raised-button color="primary" (click)="add()">Add role</button>
+  <button mat-raised-button color="primary" (click)="grantRightsDialogService.addPermission()">Add permission</button>
 </div>
 <div class="tw-flex-1 tw-min-h-0 tw-overflow-auto">
-  <table *ngIf="rightsObj | async as rights" aria-describedby="permissions and contexts table" mat-table [dataSource]="rights.Permissions">
+  <table
+    *ngIf="{
+      rights: rights$ | async,
+      contextFilter: contextFilter | async,
+      roletFilter: roletFilter | async
+    } as context"
+    aria-describedby="permissions and contexts table"
+    mat-table
+    [dataSource]="context.rights?.Permissions | rightsFilter : context.contextFilter : context.roletFilter">
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
     <ng-container [matColumnDef]="'Role'">
       <th mat-header-cell *matHeaderCellDef>
-        <app-search-header [label]="'Role'" (search)="searchRole($event)" class="tw-block tw-h-12 role"> Role </app-search-header>
+        <app-search-header [label]="'Role'" (search)="grantRightsDialogService.searchRole($event)" class="tw-block tw-h-12 role">
+          Role
+        </app-search-header>
       </th>
       <td mat-cell *matCellDef="let element" class="tw-cursor-pointer">
         <div>{{ element.Role }}</div>
@@ -26,10 +36,10 @@
     <ng-container [matColumnDef]="'Contexts'">
       <th mat-header-cell *matHeaderCellDef>
         <div class="tw-flex tw-h-12 tw-items-center tw-cursor-pointer">
-          <span *ngFor="let context of allContexts" class="context tw-flex-1 tw-h-full">
+          <span *ngFor="let context of allContexts$ | async" class="context tw-flex-1 tw-h-full">
             <app-search-header
               [label]="context.Name + '\'s contexts'"
-              (search)="searchContext(context.Id, $event)"
+              (search)="grantRightsDialogService.searchContext(context.Id, $event)"
               class="tw-block tw-h-full">
               {{ context.Name + "'s contexts" }}
             </app-search-header>
@@ -39,7 +49,7 @@
       <td mat-cell *matCellDef="let element">
         <div class="tw-flex tw-gap-4 tw-my-1">
           <app-select-context
-            *ngFor="let context of allContexts"
+            *ngFor="let context of allContexts$ | async"
             class="context tw-flex-1"
             [entitiesList]="element | contextFilter : context">
           </app-select-context>
@@ -47,16 +57,22 @@
       </td>
     </ng-container>
 
-    <ng-container [matColumnDef]="'delete'">
+    <ng-container [matColumnDef]="'actions'">
       <th mat-header-cell *matHeaderCellDef> </th>
-      <td mat-cell *matCellDef="let element" class="tw-cursor-pointer">
-        <mat-icon fontIcon="delete" (click)="remove(element)"></mat-icon>
-      </td>
-    </ng-container>
-    <ng-container [matColumnDef]="'edit'">
-      <th mat-header-cell *matHeaderCellDef> </th>
-      <td mat-cell *matCellDef="let element" class="tw-cursor-pointer">
-        <mat-icon fontIcon="edit" (click)="edit(element, allContexts)"></mat-icon>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button *ngIf="allContexts$ | async as allContexts" mat-menu-item (click)="grantRightsDialogService.edit(element, allContexts)">
+            <mat-icon>edit</mat-icon>
+            <span>Edit</span>
+          </button>
+          <button mat-menu-item (click)="grantRightsDialogService.remove(element)">
+            <mat-icon>delete</mat-icon>
+            <span>Delete</span>
+          </button>
+        </mat-menu>
       </td>
     </ng-container>
   </table>
@@ -64,5 +80,5 @@
 
 <div mat-dialog-actions class="tw-flex tw-justify-end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="getResult()" cdkFocusInitial>Save</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="grantRightsDialogService.getResult()" cdkFocusInitial>Save</button>
 </div>

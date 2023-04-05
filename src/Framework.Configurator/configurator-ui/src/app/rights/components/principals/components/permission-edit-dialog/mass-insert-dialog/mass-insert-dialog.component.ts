@@ -1,50 +1,35 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatIconModule } from '@angular/material/icon';
+import { ChangeDetectionStrategy, Component, Inject, Self } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatCardModule } from '@angular/material/card';
-import { OverlayModule } from '@angular/cdk/overlay';
-import { MatRippleModule } from '@angular/material/core';
-import { IEntity } from '../../view-principal-dialog/view-principal-dialog.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { IRoleContext } from '../../grant-rights-dialog/grant-rights-dialog.component';
-import { forkJoin, map } from 'rxjs';
+import { BehaviorSubject, forkJoin, map, takeUntil, tap } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
-import { MatProgressSpinner, MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DestroyService } from 'src/app/shared/destroy.service';
+import { ContextsApiService } from 'src/app/shared/api.services';
+import { IRoleContext } from '../../grant-rights-dialog/grant-rights-dialog.models';
 
 @Component({
   selector: 'app-mass-insert-dialog[control][unitId]',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatInputModule,
-    MatAutocompleteModule,
-    ReactiveFormsModule,
-    MatIconModule,
-    OverlayModule,
-    MatCheckboxModule,
-    MatCardModule,
-    MatRippleModule,
-    FormsModule,
-    MatButtonModule,
-    MatProgressSpinnerModule,
-  ],
+  imports: [CommonModule, MatInputModule, FormsModule, MatButtonModule, MatProgressSpinnerModule],
   templateUrl: './mass-insert-dialog.component.html',
+  providers: [DestroyService, ContextsApiService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MassInsertDialogComponent {
   loading = false;
   value = '';
 
+  totalSubject = new BehaviorSubject<number>(0);
+  currentSubject = new BehaviorSubject<number>(0);
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { unit: IRoleContext },
     public dialogRef: MatDialogRef<MassInsertDialogComponent>,
-
-    private readonly http: HttpClient
+    @Self() private destroy$: DestroyService,
+    private readonly contextsApiService: ContextsApiService
   ) {}
 
   save() {
@@ -55,15 +40,20 @@ export class MassInsertDialogComponent {
     const matches = this.value.split(breakpoint).map((x) => x.trim());
 
     this.loading = true;
+    const matchesfiltred = [...new Set(matches)];
+    this.totalSubject.next(matchesfiltred.length);
     forkJoin(
-      [...new Set(matches)].map((s) =>
-        this.http
-          .get<IEntity[]>(`api/context/${this.data.unit.Id}/entities?searchToken=${s}`)
+      matchesfiltred.map((s) =>
+        this.contextsApiService
+          .getEntities(this.data.unit.Id, s)
           .pipe(map((res) => res.find((g) => g.Name === s) || s))
+          .pipe(tap(() => this.currentSubject.next(this.currentSubject.value + 1)))
       )
-    ).subscribe((x) => {
-      this.dialogRef.close(x);
-    });
+    )
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((x) => {
+        this.dialogRef.close(x);
+      });
   }
 
   cancel() {

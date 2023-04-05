@@ -13,8 +13,9 @@ import { BehaviorSubject, debounceTime, distinctUntilChanged, Observable, takeUn
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 
 import { EditPrincipalDialogComponent } from './components/edit-principal-dialog/edit-principal-dialog.component';
-import { GrantRightsDialogComponent, IGrantedRight } from './components/grant-rights-dialog/grant-rights-dialog.component';
+import { GrantRightsDialogComponent } from './components/grant-rights-dialog/grant-rights-dialog.component';
 import { ViewPrincipalDialogComponent } from './components/view-principal-dialog/view-principal-dialog.component';
+import { IGrantedRight } from './components/grant-rights-dialog/grant-rights-dialog.models';
 
 export interface IPrincipal {
   Id: string | undefined;
@@ -123,7 +124,7 @@ export class PrincipalsComponent implements OnInit, OnDestroy {
 
   public grant(principal: IPrincipal): void {
     this.dialog
-      .open(GrantRightsDialogComponent, { data: principal, height: '90vh', width: '90vw'  })
+      .open(GrantRightsDialogComponent, { data: principal, height: '90vh', width: '90vw' })
       .beforeClosed()
       .subscribe((x: IGrantedRight) => {
         if (!x) {

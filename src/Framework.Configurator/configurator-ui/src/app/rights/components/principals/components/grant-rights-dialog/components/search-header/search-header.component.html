@@ -1,9 +1,7 @@
 <div (click)="isOpen = !isOpen" cdkOverlayOrigin #trigger="cdkOverlayOrigin" class="tw-flex tw-items-center tw-h-full">
   <ng-content></ng-content>
-  <div class="tw-ml-2">
-    <mat-icon *ngIf="!searchcontrol.value" fontIcon="search"></mat-icon>
-    <mat-icon *ngIf="searchcontrol.value" fontIcon="search_off"></mat-icon>
-  </div>
+  <mat-icon class="tw-ml-2" *ngIf="!searchcontrol.value">arrow_drop_down</mat-icon>
+  <mat-icon class="tw-ml-2" *ngIf="searchcontrol.value" fontIcon="search_off"></mat-icon>
 </div>
 
 <ng-template

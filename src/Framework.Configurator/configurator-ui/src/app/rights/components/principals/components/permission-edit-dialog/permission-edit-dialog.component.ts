@@ -1,30 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormArray,
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  ValidationErrors,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, Self } from '@angular/core';
+import { AbstractControl, FormArray, FormControl, FormGroup, FormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { MatTableModule } from '@angular/material/table';
 import { IContext, IEntity, IPermission } from '../view-principal-dialog/view-principal-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { IRoleContext } from '../grant-rights-dialog/grant-rights-dialog.component';
 import { FilterContextsPipe } from 'src/app/shared/filter-contexts.pipe';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { filter, tap } from 'rxjs';
+import { filter, takeUntil, tap } from 'rxjs';
 import { SelectEntityComponent } from './select-entity/select-entity.component';
 import { MassInsertDialogComponent } from './mass-insert-dialog/mass-insert-dialog.component';
-import { MatMenuModule } from '@angular/material/menu';
+import { DestroyService } from 'src/app/shared/destroy.service';
+import { MatInputModule } from '@angular/material/input';
+import { IRoleContext } from '../grant-rights-dialog/grant-rights-dialog.models';
 
 export function forbiddenContextValidator(): ValidatorFn {
   return (control: AbstractControl<IEntity | null | string>): ValidationErrors | null => {
@@ -42,20 +30,17 @@ export function forbiddenContextValidator(): ValidatorFn {
     CommonModule,
     MatDialogModule,
     FormsModule,
-    MatTableModule,
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     FilterContextsPipe,
-    MatAutocompleteModule,
-    ReactiveFormsModule,
     SelectEntityComponent,
-    MatMenuModule,
   ],
   templateUrl: './permission-edit-dialog.component.html',
   styleUrls: ['./permission-edit-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService],
 })
 export class PermissionEditDialogComponent {
   public forms: FormGroup<{
@@ -67,6 +52,7 @@ export class PermissionEditDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: { permission: IPermission; units: IRoleContext[] },
     private readonly dialog: MatDialog,
     public dialogRef: MatDialogRef<PermissionEditDialogComponent>,
+    @Self() private destroy$: DestroyService,
     private readonly cdr: ChangeDetectorRef
   ) {
     this.data.units.forEach((unit) =>
@@ -74,7 +60,9 @@ export class PermissionEditDialogComponent {
         new FormGroup({
           unit: new FormControl<IRoleContext>(unit, { nonNullable: true }),
           entities: new FormArray<FormControl<IEntity | null>>(
-            this.getEntities(data.permission, unit).map((entity) => new FormControl<IEntity>(entity, this.validators))
+            this.getEntities(data.permission, unit).map(
+              (entity) => new FormControl<IEntity>({ ...entity, recentlySavedValue: true }, this.validators)
+            )
           ),
         })
       )
@@ -107,16 +95,14 @@ export class PermissionEditDialogComponent {
       .afterClosed()
       .pipe(
         filter((x) => Boolean(x)),
-        tap((mass: (IEntity | null)[]) => mass.forEach((x) => this.add(entities, x)))
+        tap((mass: (IEntity | null)[]) => mass.forEach((x) => this.add(entities, x))),
+        takeUntil(this.destroy$)
       )
       .subscribe();
   }
 
   save() {
     if (this.forms.find((f) => f.invalid)) {
-      this.forms.forEach((f) => f.markAllAsTouched());
-      this.forms.forEach((f) => f.controls.entities.controls.forEach((g) => g.setValue(g.value)));
-      this.cdr.markForCheck();
       return;
     }
     const Contexts: IContext[] = this.forms

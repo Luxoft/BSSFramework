@@ -6,7 +6,8 @@
     <textarea matInput [(ngModel)]="value" rows="6"></textarea>
   </mat-form-field>
 
-  <div class="tw-flex tw-justify-end tw-gap-2">
+  <div class="tw-flex tw-justify-end tw-gap-2 tw-items-center">
+    <div *ngIf="loading" class=""> {{ currentSubject | async }} / {{ totalSubject | async }} </div>
     <button mat-button (click)="cancel()" [disabled]="loading">Cancel</button>
     <button mat-raised-button (click)="save()" color="primary" [disabled]="loading">
       <ng-container *ngIf="!loading"> Paste </ng-container>

@@ -12,7 +12,7 @@ public class AuthorizationRepositoryFactory<TDomainObject> : RepositoryFactory<T
     public AuthorizationRepositoryFactory(
             IServiceProvider serviceProvider,
             INotImplementedDomainSecurityServiceContainer notImplementedDomainSecurityServiceContainer,
-            IDomainSecurityService<TDomainObject, AuthorizationSecurityOperationCode> domainSecurityService)
+            IDomainSecurityService<TDomainObject, AuthorizationSecurityOperationCode> domainSecurityService = null)
             : base(serviceProvider, notImplementedDomainSecurityServiceContainer, domainSecurityService)
     {
     }

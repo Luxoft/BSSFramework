@@ -4,9 +4,9 @@
 [assembly: AssemblyCompany("Luxoft")]
 [assembly: AssemblyCopyright("Copyright © Luxoft 2009-2023")]
 
-[assembly: AssemblyVersion("18.5.6.0")]
-[assembly: AssemblyFileVersion("18.5.6.0")]
-[assembly: AssemblyInformationalVersion("18.5.6")]
+[assembly: AssemblyVersion("18.5.7.0")]
+[assembly: AssemblyFileVersion("18.5.7.0")]
+[assembly: AssemblyInformationalVersion("18.5.7")]
 
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]

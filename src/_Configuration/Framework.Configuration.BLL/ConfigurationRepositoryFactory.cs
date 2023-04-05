@@ -12,7 +12,7 @@ public class ConfigurationRepositoryFactory<TDomainObject> : RepositoryFactory<T
     public ConfigurationRepositoryFactory(
         IServiceProvider serviceProvider,
         INotImplementedDomainSecurityServiceContainer notImplementedDomainSecurityServiceContainer,
-        IDomainSecurityService<TDomainObject, ConfigurationSecurityOperationCode> domainSecurityService)
+        IDomainSecurityService<TDomainObject, ConfigurationSecurityOperationCode> domainSecurityService = null)
         : base(serviceProvider, notImplementedDomainSecurityServiceContainer, domainSecurityService)
     {
     }

@@ -13,9 +13,9 @@ namespace Automation.ServiceEnvironment;
 public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderContainer<TBLLContext>
     where TBLLContext : IConfigurationBLLContextContainer<IConfigurationBLLContext>
 {
-    private readonly ServiceProviderPool rootServiceProviderPool;
+    private readonly IServiceProviderPool rootServiceProviderPool;
 
-    protected IntegrationTestBase(ServiceProviderPool rootServiceProviderPool)
+    protected IntegrationTestBase(IServiceProviderPool rootServiceProviderPool)
         : base(rootServiceProviderPool.Get())
     {
         this.rootServiceProviderPool = rootServiceProviderPool;
@@ -32,18 +32,25 @@ public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderCont
     {
         try
         {
-            if (this.ConfigUtil.UseLocalDb || this.ConfigUtil.TestRunMode == TestRunMode.DefaultRunModeOnEmptyDatabase)
-            {
-                AssemblyInitializeAndCleanup.RunAction("Drop Database", this.DatabaseContext.Drop);
-            }
-
+            this.DropDatabaseAfterTest();
             this.CleanupTestEnvironment();
         }
         finally
         {
-            this.rootServiceProviderPool.Release(this.RootServiceProvider);
+            this.ReleaseServiceProvider();
         }
     }
+
+    protected virtual void DropDatabaseAfterTest()
+    {
+        if (this.ConfigUtil.UseLocalDb || this.ConfigUtil.TestRunMode == TestRunMode.DefaultRunModeOnEmptyDatabase)
+        {
+            AssemblyInitializeAndCleanup.RunAction("Drop Database", this.DatabaseContext.Drop);
+        }
+    }
+
+    protected virtual void ReleaseServiceProvider()
+        => this.rootServiceProviderPool.Release(this.RootServiceProvider);
 
     protected virtual void ReattachDatabase()
     {

@@ -1,31 +1,36 @@
-﻿using Automation.Utils.DatabaseUtils;
+﻿using Automation.Utils;
+using Automation.Utils.DatabaseUtils;
+using Automation.Utils.DatabaseUtils.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Automation;
 
 public class TestEnvironmentBuilder
 {
-    private IConfiguration configuration;
-    private Func<IConfiguration, IServiceCollection, IServiceCollection> serviceProviderBuildFunc;
-    private Action<IServiceProvider> serviceProviderAfterBuildAction;
-    private Type databaseGenerator;
-    private string connectionStringName;
-    private string[] secondaryDatabases;
+    private IConfiguration withConfiguration;
+    private Func<IConfiguration, IServiceCollection, IServiceCollection> withServiceProviderBuildFunc;
+    private Action<IServiceProvider> withServiceProvAfterBuildAction;
+    private Type withDatabaseGenerator;
+    private string withConnectionStringName;
+    private string[] withSecondaryDatabases;
 
     public TestEnvironmentBuilder WithConfiguration(IConfiguration rootConfiguration)
     {
-        this.configuration = rootConfiguration;
+        this.withConfiguration = rootConfiguration;
 
         return this;
     }
 
-    public TestEnvironmentBuilder WithDefaultConfiguration(string environmentVariablesPrefix = "")
+    public TestEnvironmentBuilder WithDefaultConfiguration(
+        string environmentVariablesPrefix = "",
+        string settingsFileName = "appsettings.json")
     {
-        this.configuration = new ConfigurationBuilder()
+        this.withConfiguration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile($@"appsettings.json", false)
-            .AddJsonFile($@"{Environment.MachineName}.appsettings.json", true)
+            .AddJsonFile(settingsFileName, false)
+            .AddJsonFile($@"{Environment.MachineName}.{settingsFileName}", true)
             .AddEnvironmentVariables(environmentVariablesPrefix)
             .Build();
 
@@ -34,62 +39,135 @@ public class TestEnvironmentBuilder
 
     public TestEnvironmentBuilder WithSecondaryDatabases(string[] databaseNames)
     {
-        this.secondaryDatabases = databaseNames;
+        this.withSecondaryDatabases = databaseNames;
 
         return this;
     }
 
     public TestEnvironmentBuilder WithConnectionStringName(string name)
     {
-        this.connectionStringName = name;
+        this.withConnectionStringName = name;
 
         return this;
     }
 
     public TestEnvironmentBuilder WithServiceProviderBuildFunc(Func<IConfiguration, IServiceCollection, IServiceCollection> buildFunc)
     {
-        this.serviceProviderBuildFunc = buildFunc;
+        this.withServiceProviderBuildFunc = buildFunc;
 
         return this;
     }
 
     public TestEnvironmentBuilder WithServiceProviderAfterBuildAction(Action<IServiceProvider> afterBuildAction)
     {
-        this.serviceProviderAfterBuildAction = afterBuildAction;
+        this.withServiceProvAfterBuildAction = afterBuildAction;
 
         return this;
     }
 
     public TestEnvironmentBuilder WithDatabaseGenerator<T>() where T: TestDatabaseGenerator
     {
-        this.databaseGenerator = typeof(T);
+        this.withDatabaseGenerator = typeof(T);
 
         return this;
     }
 
     public TestEnvironment Build()
     {
-        if (this.configuration == null)
+        if (this.withConfiguration == null)
         {
             this.WithDefaultConfiguration();
         }
 
-        if (this.databaseGenerator == null)
+        if (this.withDatabaseGenerator == null)
         {
             throw new ArgumentException("Please provide DatabaseGenerator via '.WithDatabaseGenerator()'");
         }
 
-        if (this.serviceProviderBuildFunc == null)
+        if (this.withServiceProviderBuildFunc == null)
         {
             throw new ArgumentException("Please provide ServiceProvider build function via '.WithServiceProviderBuildFunc()'");
         }
 
+        var serviceProviderPool = this.GetServiceProviderPool(
+            this.withConfiguration,
+            this.withServiceProviderBuildFunc,
+            this.withServiceProvAfterBuildAction,
+            this.withDatabaseGenerator,
+            this.withConnectionStringName ?? "DefaultConnection",
+            this.withSecondaryDatabases);
+
         return new TestEnvironment(
-            this.configuration,
-            this.serviceProviderBuildFunc,
-            this.serviceProviderAfterBuildAction,
-            this.databaseGenerator,
-            this.connectionStringName ?? "DefaultConnection",
-            this.secondaryDatabases);
+            serviceProviderPool,
+            this.GetAssemblyInitializeAndCleanup(serviceProviderPool));
+    }
+
+    protected virtual AssemblyInitializeAndCleanup GetAssemblyInitializeAndCleanup(
+        IServiceProviderPool serviceProviderPool) =>
+        new AssemblyInitializeAndCleanup(
+            serviceProviderPool.Get,
+            serviceProviderPool.Release);
+
+    protected virtual IServiceProvider BuildServiceProvider(IServiceCollection serviceCollection) =>
+        serviceCollection.BuildServiceProvider(
+            new ServiceProviderOptions
+            {
+                ValidateOnBuild = true,
+                ValidateScopes = true
+            });
+
+    protected virtual IServiceProviderPool GetServiceProviderPool(
+        IConfiguration rootConfiguration,
+        Func<IConfiguration, IServiceCollection, IServiceCollection> serviceProviderBuildFunc,
+        Action<IServiceProvider> serviceProviderAfterBuildAction,
+        Type databaseGenerator,
+        string connectionStringName,
+        string[] secondaryDatabases) =>
+            new ServiceProviderPool(
+                () => this.ServiceProviderGenerationFunc(
+                    serviceProviderBuildFunc,
+                    serviceProviderAfterBuildAction,
+                    rootConfiguration,
+                    databaseGenerator,
+                    connectionStringName,
+                    secondaryDatabases),
+                rootConfiguration.GetValue<bool>("TestsParallelize"),
+                rootConfiguration.GetValue<bool>("DisableServiceProviderPoolLimiter"));
+
+    private IServiceProvider ServiceProviderGenerationFunc(
+            Func<IConfiguration, IServiceCollection, IServiceCollection> serviceProviderBuildFunc,
+            Action<IServiceProvider> serviceProviderAfterBuildAction,
+            IConfiguration rootConfiguration,
+            Type databaseGenerator,
+            string connectionStringName,
+            string[] secondaryDatabases)
+    {
+        var configUtil = new ConfigUtil(rootConfiguration);
+        var databaseContextSettings =
+                new DatabaseContextSettings(configUtil.GetConnectionString(connectionStringName), secondaryDatabases);
+        var databaseContext = new DatabaseContext(configUtil, databaseContextSettings);
+        var cfg = new ConfigurationBuilder()
+            .AddConfiguration(rootConfiguration)
+            .AddInMemoryCollection(
+                rootConfiguration.GetSection("ConnectionStrings")
+                    .GetChildren()
+                    .ToDictionary(
+                        x => $"ConnectionStrings:{x.Key}",
+                        _ => databaseContext.Main.ConnectionString))
+            .Build();
+
+        var environmentServices = new ServiceCollection();
+        serviceProviderBuildFunc.Invoke(cfg, environmentServices);
+        environmentServices.TryAddSingleton(databaseContextSettings);
+        environmentServices.TryAddSingleton<IDatabaseContext>(databaseContext);
+        environmentServices.AddSingleton<IConfiguration>(cfg)
+                           .AddSingleton<ConfigUtil>()
+                           .AddSingleton(typeof(TestDatabaseGenerator), databaseGenerator);
+
+        var environmentServiceProvider = this.BuildServiceProvider(environmentServices);
+
+        serviceProviderAfterBuildAction?.Invoke(environmentServiceProvider);
+
+        return environmentServiceProvider;
     }
 }

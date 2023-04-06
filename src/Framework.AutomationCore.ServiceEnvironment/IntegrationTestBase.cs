@@ -13,9 +13,9 @@ namespace Automation.ServiceEnvironment;
 public abstract class IntegrationTestBase<TBLLContext> : RootServiceProviderContainer<TBLLContext>
     where TBLLContext : IConfigurationBLLContextContainer<IConfigurationBLLContext>
 {
-    private readonly ServiceProviderPool rootServiceProviderPool;
+    private readonly IServiceProviderPool rootServiceProviderPool;
 
-    protected IntegrationTestBase(ServiceProviderPool rootServiceProviderPool)
+    protected IntegrationTestBase(IServiceProviderPool rootServiceProviderPool)
         : base(rootServiceProviderPool.Get())
     {
         this.rootServiceProviderPool = rootServiceProviderPool;

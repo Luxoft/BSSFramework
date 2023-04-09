@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, OnInit, Self } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { IPrincipal } from '../../principals.component';
@@ -13,6 +13,8 @@ import { RightsFilterPipe } from './rights-filter.pipe';
 import { DestroyService } from 'src/app/shared/destroy.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { GrantRightsDialogService } from './grant-rights-dialog.service';
+import { HighlightDirective } from 'src/app/shared/highlight.derective';
+import { ContextStringFilterPipe } from './context-string-filter.pipe';
 
 @Component({
   selector: 'app-grant-rights-dialog',
@@ -28,6 +30,8 @@ import { GrantRightsDialogService } from './grant-rights-dialog.service';
     ContextFilterPipe,
     RightsFilterPipe,
     MatMenuModule,
+    HighlightDirective,
+    ContextStringFilterPipe,
   ],
   providers: [PrincipalApiService, ContextsApiService, DestroyService, GrantRightsDialogService],
   templateUrl: './grant-rights-dialog.component.html',
@@ -37,8 +41,7 @@ import { GrantRightsDialogService } from './grant-rights-dialog.service';
 export class GrantRightsDialogComponent implements OnInit {
   rights$ = this.grantRightsDialogService.rightsSubject.asObservable();
   allContexts$ = this.grantRightsDialogService.allContextsSubject.asObservable();
-  contextFilter = this.grantRightsDialogService.contextFilter.asObservable();
-  roletFilter = this.grantRightsDialogService.roletFilter.asObservable();
+  filter$ = this.grantRightsDialogService.filter.asObservable();
 
   public displayedColumns = ['actions', 'Role', 'Comment', 'Contexts'];
 

@@ -14,8 +14,11 @@ import { IGrantedRight, IRoleContext } from './grant-rights-dialog.models';
 export class GrantRightsDialogService {
   public rightsSubject = new BehaviorSubject<IPrincipalDetails>({ Permissions: [] });
   public allContextsSubject = new BehaviorSubject<IRoleContext[]>([]);
-  public contextFilter = new BehaviorSubject<{ contextId: string; search: string }[]>([]);
-  public roletFilter = new BehaviorSubject<string>('');
+  public filter = new BehaviorSubject<{
+    contexts?: { contextId: string; search: string }[];
+    role?: string;
+    comment?: string;
+  }>({});
 
   constructor(
     @Self() private destroy$: DestroyService,
@@ -109,7 +112,7 @@ export class GrantRightsDialogService {
   }
 
   public searchContext(contextId: string, search: string) {
-    const contextFilter = this.contextFilter.value;
+    const contextFilter = this.filter.value.contexts || [];
     const index = contextFilter.findIndex((conext) => conext.contextId === contextId);
     if (index > -1) {
       contextFilter.splice(index, 1);
@@ -117,10 +120,14 @@ export class GrantRightsDialogService {
     if (search) {
       contextFilter.push({ contextId, search });
     }
-    this.contextFilter.next(contextFilter);
+    this.filter.next({ ...this.filter, contexts: contextFilter });
   }
 
   searchRole(search: string) {
-    this.roletFilter.next(search);
+    this.filter.next({ ...this.filter, role: search });
+  }
+
+  searchComment(search: string) {
+    this.filter.next({ ...this.filter, comment: search });
   }
 }

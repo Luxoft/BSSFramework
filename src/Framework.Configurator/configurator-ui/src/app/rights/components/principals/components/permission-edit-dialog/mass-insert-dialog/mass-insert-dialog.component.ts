@@ -9,11 +9,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DestroyService } from 'src/app/shared/destroy.service';
 import { ContextsApiService } from 'src/app/shared/api.services';
 import { IRoleContext } from '../../grant-rights-dialog/grant-rights-dialog.models';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
 @Component({
   selector: 'app-mass-insert-dialog[control][unitId]',
   standalone: true,
-  imports: [CommonModule, MatInputModule, FormsModule, MatButtonModule, MatProgressSpinnerModule],
+  imports: [CommonModule, MatInputModule, FormsModule, MatButtonModule, MatProgressSpinnerModule, MatCheckboxModule],
   templateUrl: './mass-insert-dialog.component.html',
   providers: [DestroyService, ContextsApiService],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,6 +24,8 @@ export class MassInsertDialogComponent {
 
   totalSubject = new BehaviorSubject<number>(0);
   currentSubject = new BehaviorSubject<number>(0);
+
+  excludeComma = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { unit: IRoleContext },
@@ -36,7 +38,8 @@ export class MassInsertDialogComponent {
     if (!this.value.trim()) {
       this.cancel();
     }
-    const breakpoint = /[\n,\t;]+(?=[^\n,\t;])/; // comma maybe incorrect!
+
+    const breakpoint = this.excludeComma ? new RegExp('[^\\n\\t;,]+', 'g') : new RegExp('[\\n,\\t;]+', 'g');
     const matches = this.value.split(breakpoint).map((x) => x.trim());
 
     this.loading = true;

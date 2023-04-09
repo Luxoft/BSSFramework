@@ -7,8 +7,7 @@
     <div
       *ngFor="let entity of entitiesList"
       class="tw-h-4 tw-flex tw-items-center tw-gap-2 tw-border tw-flex-row tw-rounded tw-px-2 tw-py-1 mat-elevation-z1 tw-cursor-text">
-      <div class="mat-caption tw-text-ellipsis tw-whitespace-nowrap tw-overflow-x-hidden">
-        {{ entity.Name }}
+      <div class="mat-caption tw-text-ellipsis tw-whitespace-nowrap tw-overflow-x-hidden" [appHighlight]="highlight" [text]="entity.Name">
       </div>
     </div>
   </div>

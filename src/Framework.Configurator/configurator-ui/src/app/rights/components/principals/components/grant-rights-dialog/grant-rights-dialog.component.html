@@ -7,15 +7,13 @@
   <table
     *ngIf="{
       rights: rights$ | async,
-      contextFilter: contextFilter | async,
-      roletFilter: roletFilter | async
-    } as context"
+      filter: filter$ | async
+    } as obj"
     aria-describedby="permissions and contexts table"
     mat-table
-    [dataSource]="context.rights?.Permissions | rightsFilter : context.contextFilter : context.roletFilter">
+    [dataSource]="obj.filter | rightsFilter : obj.rights?.Permissions">
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-
     <ng-container [matColumnDef]="'Role'">
       <th mat-header-cell *matHeaderCellDef>
         <app-search-header [label]="'Role'" (search)="grantRightsDialogService.searchRole($event)" class="tw-block tw-h-12 role">
@@ -23,14 +21,18 @@
         </app-search-header>
       </th>
       <td mat-cell *matCellDef="let element" class="tw-cursor-pointer">
-        <div>{{ element.Role }}</div>
+        <div [appHighlight]="obj.filter?.role" [text]="element.Role"> </div>
       </td>
     </ng-container>
 
     <ng-container [matColumnDef]="'Comment'">
-      <th mat-header-cell *matHeaderCellDef class="comment"> Comment </th>
+      <th mat-header-cell *matHeaderCellDef class="comment">
+        <app-search-header [label]="'Comment'" (search)="grantRightsDialogService.searchComment($event)" class="tw-block tw-h-12 role">
+          Comment
+        </app-search-header>
+      </th>
       <td mat-cell *matCellDef="let element">
-        {{ element.Comment }}
+        <div [appHighlight]="obj.filter?.comment" [text]="element.Comment"> </div>
       </td>
     </ng-container>
     <ng-container [matColumnDef]="'Contexts'">
@@ -51,6 +53,7 @@
           <app-select-context
             *ngFor="let context of allContexts$ | async"
             class="context tw-flex-1"
+            [highlight]="obj.filter?.contexts | contextStringFilter : context"
             [entitiesList]="element | contextFilter : context">
           </app-select-context>
         </div>

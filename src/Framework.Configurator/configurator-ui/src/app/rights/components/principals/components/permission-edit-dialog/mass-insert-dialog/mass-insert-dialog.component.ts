@@ -44,12 +44,15 @@ export class MassInsertDialogComponent {
 
     this.loading = true;
     const matchesfiltred = [...new Set(matches)];
+    if (!matchesfiltred[matchesfiltred.length - 1]) {
+      matchesfiltred.length = matchesfiltred.length - 1;
+    }
     this.totalSubject.next(matchesfiltred.length);
     forkJoin(
       matchesfiltred.map((s) =>
         this.contextsApiService
           .getEntities(this.data.unit.Id, s)
-          .pipe(map((res) => res.find((g) => g.Name === s) || s))
+          .pipe(map((res) => res.find((g) => g.Name.toLocaleLowerCase() === s.toLocaleLowerCase()) || s))
           .pipe(tap(() => this.currentSubject.next(this.currentSubject.value + 1)))
       )
     )

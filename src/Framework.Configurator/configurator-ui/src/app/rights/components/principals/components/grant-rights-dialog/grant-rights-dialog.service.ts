@@ -1,6 +1,6 @@
 import { Injectable, Self } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { BehaviorSubject, filter, forkJoin, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, forkJoin, takeUntil, tap } from 'rxjs';
 import { IRole } from '../../../roles/roles.component';
 import { IPermission, IPrincipalDetails } from '../view-principal-dialog/view-principal-dialog.component';
 import { AddRoleDialogComponent } from './components/add-role-dialog/add-role-dialog.component';
@@ -67,14 +67,19 @@ export class GrantRightsDialogService {
       })
       .afterClosed()
       .pipe(
-        filter((result) => Boolean(result)),
         tap((result) => {
-          const rights = this.rightsSubject.value;
-          const findIndex = rights.Permissions.findIndex((x) => x.Id === result.Id);
-          if (findIndex > -1) {
-            rights.Permissions[findIndex] = result;
-            this.rightsSubject.next(rights);
+          if (result) {
+            const rights = this.rightsSubject.value;
+            const findIndex = rights.Permissions.findIndex((x) => x.Id === result.Id);
+            if (findIndex > -1) {
+              rights.Permissions[findIndex] = result;
+              this.rightsSubject.next(rights);
+            }
           }
+          // TODO: fix next three lines
+          const filterValue = this.filter.value;
+          this.filter.next({ ...filterValue, comment: '' });
+          this.filter.next({ ...filterValue });
         }),
         takeUntil(this.destroy$)
       )
@@ -120,14 +125,14 @@ export class GrantRightsDialogService {
     if (search) {
       contextFilter.push({ contextId, search });
     }
-    this.filter.next({ ...this.filter, contexts: contextFilter });
+    this.filter.next({ ...this.filter.value, contexts: contextFilter });
   }
 
   searchRole(search: string) {
-    this.filter.next({ ...this.filter, role: search });
+    this.filter.next({ ...this.filter.value, role: search });
   }
 
   searchComment(search: string) {
-    this.filter.next({ ...this.filter, comment: search });
+    this.filter.next({ ...this.filter.value, comment: search });
   }
 }

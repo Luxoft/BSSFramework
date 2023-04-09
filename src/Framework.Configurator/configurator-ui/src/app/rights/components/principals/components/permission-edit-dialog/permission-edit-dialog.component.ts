@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { IContext, IEntity, IPermission } from '../view-principal-dialog/view-principal-dialog.component';
@@ -36,11 +36,16 @@ export class PermissionEditDialogComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { permission: IPermission; units: IRoleContext[] },
     public dialogRef: MatDialogRef<PermissionEditDialogComponent>,
-    public permissionEditDialogService: PermissionEditDialogService
+    public permissionEditDialogService: PermissionEditDialogService,
+    public cdr: ChangeDetectorRef
   ) {}
 
   save() {
     if (this.permissionEditDialogService.forms.find((f) => f.invalid)) {
+      // TODO: fix this
+      this.permissionEditDialogService.forms.forEach((f) => f.markAllAsTouched());
+      this.permissionEditDialogService.forms.forEach((f) => f.controls.entities.controls.forEach((g) => g.markAsTouched()));
+      this.cdr.markForCheck();
       return;
     }
     const Contexts: IContext[] = this.permissionEditDialogService.forms
@@ -48,7 +53,7 @@ export class PermissionEditDialogComponent {
       .map((v) => ({
         Id: v.unit?.Id || '',
         Name: v.unit?.Name || '',
-        Entities: (v.entities as IEntity[]) || [],
+        Entities: ((v.entities as IEntity[]) || []).filter((entity, index, arr) => arr.findIndex((x) => x.Id === entity.Id) === index),
       }));
     const permission: IPermission = { ...this.data.permission, Contexts };
     this.dialogRef.close(permission);

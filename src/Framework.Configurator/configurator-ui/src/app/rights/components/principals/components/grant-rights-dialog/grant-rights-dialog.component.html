@@ -3,7 +3,7 @@
 <div class="tw-flex tw-justify-end tw-mr-2">
   <button mat-raised-button color="primary" (click)="grantRightsDialogService.addPermission()">Add permission</button>
 </div>
-<div class="tw-flex-1 tw-min-h-0 tw-overflow-auto">
+<div class="tw-flex-1 tw-min-h-0 tw-overflow-auto" *ngIf="loaded$ | async; else loading">
   <table
     *ngIf="{
       rights: rights$ | async,
@@ -85,3 +85,9 @@
   <button mat-button mat-dialog-close>Cancel</button>
   <button mat-raised-button color="primary" [mat-dialog-close]="grantRightsDialogService.getResult()" cdkFocusInitial>Save</button>
 </div>
+
+<ng-template #loading>
+  <div class="tw-flex tw-items-center tw-justify-center tw-h-full">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

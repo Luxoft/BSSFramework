@@ -9,12 +9,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
-import { BehaviorSubject, debounceTime, distinctUntilChanged, Observable, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, debounceTime, startWith, switchMap } from 'rxjs';
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 
 import { EditPrincipalDialogComponent } from './components/edit-principal-dialog/edit-principal-dialog.component';
-import { GrantRightsDialogComponent, IGrantedRight } from './components/grant-rights-dialog/grant-rights-dialog.component';
+import { GrantRightsDialogComponent } from './components/grant-rights-dialog/grant-rights-dialog.component';
 import { ViewPrincipalDialogComponent } from './components/view-principal-dialog/view-principal-dialog.component';
+import { IGrantedRight } from './components/grant-rights-dialog/grant-rights-dialog.models';
 
 export interface IPrincipal {
   Id: string | undefined;
@@ -43,19 +44,18 @@ const DEBOUNCE = 300;
 export class PrincipalsComponent implements OnInit, OnDestroy {
   public displayedColumns: string[] = ['Name', 'action'];
   public control = new FormControl('');
-  private principals$ = new BehaviorSubject<IPrincipal[]>([]);
   private runAs$ = new BehaviorSubject<string>('');
   private readonly destroy$ = new EventEmitter();
+  public dataSource$: Observable<IPrincipal[]> = this.control.valueChanges.pipe(
+    debounceTime(DEBOUNCE),
+    startWith(''),
+    switchMap((x) => this.refresh(x || ''))
+  );
 
   constructor(private readonly http: HttpClient, private readonly dialog: MatDialog, private readonly snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
-    this.refresh();
     this.refreshRunAs();
-
-    this.control.valueChanges
-      .pipe(takeUntil(this.destroy$), distinctUntilChanged(), debounceTime(DEBOUNCE))
-      .subscribe((x) => this.refresh(x ?? ''));
   }
 
   ngOnDestroy(): void {
@@ -63,16 +63,12 @@ export class PrincipalsComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  public get dataSource(): Observable<IPrincipal[]> {
-    return this.principals$;
-  }
-
   public get runAsSource(): Observable<string> {
     return this.runAs$;
   }
 
   public viewDetails(principal: IPrincipal): void {
-    this.dialog.open(ViewPrincipalDialogComponent, { data: principal, height: '800px', width: '1000px' });
+    this.dialog.open(ViewPrincipalDialogComponent, { data: principal, maxHeight: '90vh', width: '1000px' });
   }
 
   public add(): void {
@@ -83,7 +79,6 @@ export class PrincipalsComponent implements OnInit, OnDestroy {
 
       this.http.post('api/principals', JSON.stringify(name)).subscribe(() => {
         this.snackBar.open('Principal has been added');
-        this.refresh();
       });
     });
   }
@@ -96,7 +91,7 @@ export class PrincipalsComponent implements OnInit, OnDestroy {
 
       this.http.post(`api/principal/${principal.Id}`, JSON.stringify(newName)).subscribe(() => {
         this.snackBar.open('Principal has been changed');
-        this.refresh();
+        this.control.setValue(this.control.value);
       });
     });
   }
@@ -116,14 +111,14 @@ export class PrincipalsComponent implements OnInit, OnDestroy {
 
         this.http.delete(`api/principal/${principal.Id}`).subscribe(() => {
           this.snackBar.open('Principal has been deleted');
-          this.refresh();
+          this.control.setValue(this.control.value);
         });
       });
   }
 
   public grant(principal: IPrincipal): void {
     this.dialog
-      .open(GrantRightsDialogComponent, { data: principal, height: '800px', width: '1000px' })
+      .open(GrantRightsDialogComponent, { data: principal, height: '90vh', width: '90vw' })
       .beforeClosed()
       .subscribe((x: IGrantedRight) => {
         if (!x) {
@@ -132,7 +127,7 @@ export class PrincipalsComponent implements OnInit, OnDestroy {
 
         this.http.post(`api/principal/${principal.Id}/permissions`, x).subscribe(() => {
           this.snackBar.open('Rights has been granted');
-          this.refresh();
+          this.control.setValue(this.control.value);
         });
       });
   }
@@ -158,8 +153,8 @@ export class PrincipalsComponent implements OnInit, OnDestroy {
       });
   }
 
-  private refresh(searchToken = ''): void {
-    this.http.get<IPrincipal[]>(`api/principals?searchToken=${searchToken}`).subscribe((x) => this.principals$.next(x));
+  private refresh(searchToken = ''): Observable<IPrincipal[]> {
+    return this.http.get<IPrincipal[]>(`api/principals?searchToken=${searchToken}`);
   }
 
   private refreshRunAs(): void {

@@ -1,0 +1,26 @@
+<form [title]="control.value?.Name || ''" class="tw-relative">
+  <input
+    (focus)="visible = false"
+    (blur)="visible = true"
+    #input
+    placeholder="Type to search"
+    type="text"
+    [class.tw-bg-amber-50]="!control.value?.recentlySavedValue"
+    [class.tw-border-red-600]="control.touched && control.invalid"
+    [formControl]="control"
+    [matAutocomplete]="auto"
+    class="tw-w-full tw-border-2 tw-py-2 tw-pl-3 tw-pr-6 tw-h-11 tw-box-border" />
+  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+      {{ option.Name }}
+    </mat-option>
+  </mat-autocomplete>
+  <mat-icon
+    *ngIf="!control.value?.Name && visible"
+    title="Context wasn't selected"
+    class="tw-absolute tw-right-0 tw-w-4 tw-h-4 tw-text-base tw-leading-4">
+    error
+  </mat-icon>
+  <mat-progress-spinner *ngIf="loading" class="tw-absolute tw-right-0 tw-h-4 tw-w-4 tw-top-0 tw-m-1" [mode]="'indeterminate'">
+  </mat-progress-spinner>
+</form>

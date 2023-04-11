@@ -57,19 +57,18 @@ export class EventsComponent implements OnInit, OnDestroy {
   }
 
   public openDialog(selectedItem: IDomainType): void {
-    this.dialog
-      .open(EventPushDialogComponent, { data: selectedItem, height: '560px', width: '500px' })
-      .beforeClosed()
-      .subscribe((result: IPushedOperation) => {
-        if (!result) {
-          return;
-        }
+    const dialogref = this.dialog.open(EventPushDialogComponent, { data: selectedItem, height: '560px', width: '500px' });
 
-        const dto = { Revision: result.revision, Ids: result.domainTypesIds };
-        this.http.post(`api/domainType/${selectedItem.Id}/operation/${result.operationId}`, dto).subscribe(() => {
-          this.snackBar.open(`Event '${selectedItem.Name}' has been pushed`);
-        });
+    dialogref.componentInstance.pushEvent.subscribe((result: IPushedOperation) => {
+      if (!result) {
+        return;
+      }
+
+      const dto = { Revision: result.revision, Ids: result.domainTypesIds };
+      this.http.post(`api/domainType/${selectedItem.Id}/operation/${result.operationId}`, dto).subscribe(() => {
+        this.snackBar.open(`Event '${selectedItem.Name}' has been pushed`);
       });
+    });
   }
 
   public get dataSource(): Observable<IDomainType[]> {
@@ -77,7 +76,11 @@ export class EventsComponent implements OnInit, OnDestroy {
   }
 
   private filter(searchToken: string | null): IDomainType[] {
-    return searchToken ? this.allItems.filter((x) => x.Name.toLowerCase().includes(searchToken.toLowerCase())) : this.allItems;
+    return searchToken
+      ? this.allItems.filter(
+          (x) => x.Name.toLowerCase().includes(searchToken.toLowerCase()) || x.Namespace.toLowerCase().includes(searchToken.toLowerCase())
+        )
+      : this.allItems;
   }
 
   private refresh(): void {

@@ -1,6 +1,6 @@
 <mat-card *ngIf="runAsSource | async as runAs" class="tw-mb-6 warning">
   <mat-card-content class="tw-flex tw-items-center tw-gap-4">
-    <div>You are logged in as {{runAs}}.</div>
+    <div>You are logged in as {{ runAs }}.</div>
     <button mat-raised-button color="primary" (click)="stopRunAs()">Log out</button>
   </mat-card-content>
 </mat-card>
@@ -15,7 +15,12 @@
 </mat-form-field>
 
 <div class="mat-elevation-z8 tw-overflow-auto" tabindex="0">
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table
+    *ngIf="dataSource$ | async as dataSource"
+    mat-table
+    [dataSource]="dataSource"
+    class="mat-elevation-z8"
+    aria-describedby="Principal table">
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 

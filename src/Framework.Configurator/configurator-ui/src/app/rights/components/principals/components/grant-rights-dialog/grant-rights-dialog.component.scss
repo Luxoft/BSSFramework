@@ -1,3 +1,18 @@
 :host {
-  @apply tw-flex tw-flex-col tw-h-full;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.context { 
+  min-width: 350px;
+}
+
+.role {
+  width: 100px;
+}
+
+.comment {
+  width: 200px;
 }

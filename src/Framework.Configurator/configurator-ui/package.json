@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 4201 --proxy-config proxy-local-back.conf.json",
+    "start:dev": "ng serve --port 4202 --proxy-config proxy-dev-back.conf.json",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint --max-warnings=0"
@@ -25,7 +26,7 @@
     "zone.js": "0.12.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "15.1.1",
+    "@angular-devkit/build-angular": "^15.2.4",
     "@angular-eslint/builder": "15.2.0",
     "@angular-eslint/eslint-plugin": "15.2.0",
     "@angular-eslint/eslint-plugin-template": "15.2.0",

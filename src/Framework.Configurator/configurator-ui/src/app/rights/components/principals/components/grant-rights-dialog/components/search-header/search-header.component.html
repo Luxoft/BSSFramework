@@ -1,0 +1,22 @@
+<!-- TODO: refactor -->
+<div (click)="isOpen = !isOpen" cdkOverlayOrigin #trigger="cdkOverlayOrigin" class="tw-flex tw-items-center tw-h-full">
+  <ng-content></ng-content>
+  <mat-icon class="tw-ml-2" *ngIf="!searchcontrol.value">arrow_drop_down</mat-icon>
+  <mat-icon class="tw-ml-2" *ngIf="searchcontrol.value" fontIcon="search_off"></mat-icon>
+</div>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayPositions]="positions"
+  [cdkConnectedOverlayOpen]="isOpen"
+  (overlayOutsideClick)="isOpen = !isOpen"
+  #overlay
+  (attach)="focus()">
+  <div style="width: 250px">
+    <mat-form-field class="tw-w-full" [subscriptSizing]="'dynamic'">
+      <mat-label>{{ label }}</mat-label>
+      <input matInput class="search-header-input" [formControl]="searchcontrol" placeholder="Type to search..." />
+    </mat-form-field>
+  </div>
+</ng-template>

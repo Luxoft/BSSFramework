@@ -1,37 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatChipsModule } from '@angular/material/chips';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { forkJoin } from 'rxjs';
-
-import { IRole } from '../../../roles/roles.component';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
 import { IPrincipal } from '../../principals.component';
-import { IEntity, IPermission, IPrincipalDetails } from '../view-principal-dialog/view-principal-dialog.component';
-import { AddRoleDialogComponent } from './components/add-role-dialog/add-role-dialog.component';
 import { SelectContextComponent } from './components/select-context/select-context.component';
-
-interface IRoleContext {
-  Id: string;
-  Name: string;
-}
-
-export interface IGrantedRight {
-  PermissionId: string;
-  RoleId: string;
-  Comment: string;
-  Contexts: IGrantedContext[];
-}
-
-interface IGrantedContext {
-  Id: string;
-  Entities: string[];
-}
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { SearchFieldComponent } from './components/search-header/search-header.component';
+import { ContextFilterPipe } from './context-filter.pipe';
+import { ContextsApiService, PrincipalApiService } from 'src/app/shared/api.services';
+import { RightsFilterPipe } from './rights-filter.pipe';
+import { DestroyService } from 'src/app/shared/destroy.service';
+import { MatMenuModule } from '@angular/material/menu';
+import { GrantRightsDialogService } from './grant-rights-dialog.service';
+import { HighlightDirective } from 'src/app/shared/highlight.derective';
+import { ContextStringFilterPipe } from './context-string-filter.pipe';
 
 @Component({
   selector: 'app-grant-rights-dialog',
@@ -39,86 +22,34 @@ interface IGrantedContext {
   imports: [
     CommonModule,
     MatDialogModule,
-    MatButtonModule,
-    MatCardModule,
-    MatChipsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
     SelectContextComponent,
+    MatTableModule,
+    SearchFieldComponent,
+    MatIconModule,
+    MatButtonModule,
+    ContextFilterPipe,
+    RightsFilterPipe,
+    MatMenuModule,
+    HighlightDirective,
+    ContextStringFilterPipe,
   ],
+  providers: [PrincipalApiService, ContextsApiService, DestroyService, GrantRightsDialogService],
   templateUrl: './grant-rights-dialog.component.html',
   styleUrls: ['./grant-rights-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GrantRightsDialogComponent implements OnInit {
-  public rights: IPrincipalDetails = { Permissions: [] };
-  public allContexts: IRoleContext[] | undefined;
+  rights$ = this.grantRightsDialogService.rightsSubject.asObservable();
+  allContexts$ = this.grantRightsDialogService.allContextsSubject.asObservable();
+  filter$ = this.grantRightsDialogService.filter.asObservable();
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: IPrincipal,
-    private readonly dialog: MatDialog,
-    private readonly http: HttpClient,
-    private readonly cdr: ChangeDetectorRef
-  ) {}
+  public displayedColumns = ['actions', 'Role', 'Comment', 'Contexts'];
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: IPrincipal, public readonly grantRightsDialogService: GrantRightsDialogService) {}
 
   ngOnInit(): void {
-    forkJoin([this.http.get<IPrincipalDetails>(`api/principal/${this.data.Id}`), this.http.get<IRoleContext[]>('api/contexts')]).subscribe(
-      ([rights, contexts]) => {
-        this.rights = rights;
-        this.allContexts = contexts;
-        this.cdr.markForCheck();
-      }
-    );
-  }
-
-  public getEntities(permission: IPermission, context: IRoleContext): IEntity[] {
-    return permission.Contexts.find((x) => x.Id === context.Id)?.Entities ?? [];
-  }
-
-  public remove(permission: IPermission): void {
-    this.rights.Permissions = this.rights.Permissions.filter((x) => x.Id != permission.Id);
-  }
-
-  public removeContext(permission: IPermission, context: IRoleContext, entity: IEntity): void {
-    const permissionContext = permission.Contexts.find((x) => x.Id === context.Id);
-    if (!permissionContext) {
-      return;
+    if (this.data.Id) {
+      this.grantRightsDialogService.init(this.data.Id);
     }
-
-    permissionContext.Entities = permissionContext.Entities.filter((x) => x.Id != entity.Id);
-  }
-
-  public addContext(permission: IPermission, context: IRoleContext, entity: IEntity): void {
-    let permissionContext = permission.Contexts.find((x) => x.Id === context.Id);
-    if (!permissionContext) {
-      permissionContext = { ...context, Entities: [] };
-      permission.Contexts.push(permissionContext);
-    }
-
-    permissionContext.Entities.push(entity);
-  }
-
-  public add(): void {
-    this.dialog
-      .open(AddRoleDialogComponent, { height: '250px', width: '400px' })
-      .afterClosed()
-      .subscribe((x: IRole | string) => {
-        if (!x || typeof x === 'string') {
-          return;
-        }
-
-        this.rights.Permissions.unshift({ Id: '', RoleId: x.Id ?? '', Role: x.Name ?? '', Comment: '', Contexts: [] });
-        this.cdr.markForCheck();
-      });
-  }
-
-  public getResult(): IGrantedRight[] {
-    return this.rights.Permissions.map((x) => ({
-      PermissionId: x.Id,
-      RoleId: x.RoleId ?? '',
-      Comment: x.Comment ?? '',
-      Contexts: x.Contexts.map((c) => ({ Id: c.Id, Entities: c.Entities.map((e) => e.Id) })),
-    }));
   }
 }

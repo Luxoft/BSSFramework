@@ -13,6 +13,7 @@ import { IGrantedRight, IRoleContext } from './grant-rights-dialog.models';
 @Injectable()
 export class GrantRightsDialogService {
   public rightsSubject = new BehaviorSubject<IPrincipalDetails>({ Permissions: [] });
+  public loadingSubject = new BehaviorSubject<boolean>(false);
   public allContextsSubject = new BehaviorSubject<IRoleContext[]>([]);
   public filter = new BehaviorSubject<{
     contexts?: { contextId: string; search: string }[];
@@ -28,9 +29,11 @@ export class GrantRightsDialogService {
   ) {}
 
   public init(principalId: string): void {
+    this.loadingSubject.next(true);
     forkJoin([this.principalApiService.getPrincipal(principalId), this.contextsApiService.getContexts()])
       .pipe(takeUntil(this.destroy$))
       .subscribe(([rights, contexts]) => {
+        this.loadingSubject.next(false);
         this.rightsSubject.next(rights);
         this.allContextsSubject.next(contexts);
       });

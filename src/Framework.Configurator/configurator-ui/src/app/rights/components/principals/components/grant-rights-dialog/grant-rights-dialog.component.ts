@@ -15,6 +15,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { GrantRightsDialogService } from './grant-rights-dialog.service';
 import { HighlightDirective } from 'src/app/shared/highlight.derective';
 import { ContextStringFilterPipe } from './context-string-filter.pipe';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-grant-rights-dialog',
@@ -32,6 +33,7 @@ import { ContextStringFilterPipe } from './context-string-filter.pipe';
     MatMenuModule,
     HighlightDirective,
     ContextStringFilterPipe,
+    MatProgressSpinnerModule,
   ],
   providers: [PrincipalApiService, ContextsApiService, DestroyService, GrantRightsDialogService],
   templateUrl: './grant-rights-dialog.component.html',
@@ -42,6 +44,7 @@ export class GrantRightsDialogComponent implements OnInit {
   rights$ = this.grantRightsDialogService.rightsSubject.asObservable();
   allContexts$ = this.grantRightsDialogService.allContextsSubject.asObservable();
   filter$ = this.grantRightsDialogService.filter.asObservable();
+  loading$ = this.grantRightsDialogService.loadingSubject.asObservable();
 
   public displayedColumns = ['actions', 'Role', 'Comment', 'Contexts'];
 

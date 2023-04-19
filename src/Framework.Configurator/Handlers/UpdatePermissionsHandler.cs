@@ -75,6 +75,7 @@ public record UpdatePermissionsHandler(
                                                        .SingleAsync(cancellationToken),
                                      Comment = dto.Comment,
                                      Status = PermissionStatus.Approved,
+                                     Period = dto.StartDate.ToPeriod(dto.EndDate),
                                      Active = true
                              };
 
@@ -111,18 +112,19 @@ public record UpdatePermissionsHandler(
         foreach (var item in updatedItems)
         {
             item.Item1.Comment = item.Item2.Comment;
+            item.Item1.Period = item.Item2.StartDate.ToPeriod(item.Item2.EndDate);
 
             var mergeResult = item.Item1.FilterItems
                                   .GetMergeResult(
-                                                  item.Item2.Contexts.SelectMany(
-                                                                                 x => x.Entities.Select(
-                                                                                  e => new
-                                                                                       {
-                                                                                               TypeId = new Guid(x.Id),
-                                                                                               ObjectId = new Guid(e)
-                                                                                       })),
-                                                  x => new { TypeId = x.EntityType.Id, ObjectId = x.Entity.EntityId },
-                                                  x => new { x.TypeId, x.ObjectId });
+                                      item.Item2.Contexts.SelectMany(
+                                          x => x.Entities.Select(
+                                              e => new
+                                                   {
+                                                       TypeId = new Guid(x.Id),
+                                                       ObjectId = new Guid(e)
+                                                   })),
+                                      x => new { TypeId = x.EntityType.Id, ObjectId = x.Entity.EntityId },
+                                      x => new { x.TypeId, x.ObjectId });
 
             foreach (var filterEntityItem in mergeResult.AddingItems)
             {
@@ -202,6 +204,10 @@ public record UpdatePermissionsHandler(
             get;
             set;
         } = default!;
+
+        public DateTime? EndDate { get; set; }
+
+        public DateTime StartDate { get; set; }
 
         public class ContextDto
         {

@@ -2,7 +2,9 @@
 
 namespace Framework.SecuritySystem.DiTests;
 
-public class BusinessUnit : PersistentDomainObjectBase, ISecurityContext, IHierarchicalPersistentDomainObjectBase<BusinessUnit, Guid>
+public class BusinessUnit : PersistentDomainObjectBase,
+                            ISecurityContext,
+                            IDenormalizedHierarchicalPersistentSource<BusinessUnitAncestorLink, BusinessUnitToAncestorChildView, BusinessUnit, Guid>
 {
     public BusinessUnit Parent { get; set; }
 

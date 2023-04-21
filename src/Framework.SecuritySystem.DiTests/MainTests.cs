@@ -57,7 +57,9 @@ public class MainTests
     {
         // Arrange
         await using var scope = this.rootServiceProvider.CreateAsyncScope();
+
         var employeeDomainSecurityService = scope.ServiceProvider.GetRequiredService<IDomainSecurityService<Employee, ExampleSecurityOperation>>();
+        var counterService = scope.ServiceProvider.GetRequiredService<BusinessUnitAncestorLinkSourceExecuteCounter>();
         var securityProvider = employeeDomainSecurityService.GetSecurityProvider(BLLSecurityMode.View);
 
         // Act
@@ -70,7 +72,7 @@ public class MainTests
         result2.Should().BeTrue();
         result3.Should().BeFalse();
 
-        scope.ServiceProvider.GetRequiredService<BusinessUnitAncestorLinkSourceExecuteCounter>().Count.Should().Be(1);
+        counterService.Count.Should().Be(1);
     }
 
     [Fact]
@@ -78,6 +80,7 @@ public class MainTests
     {
         // Arrange
         await using var scope = this.rootServiceProvider.CreateAsyncScope();
+
         var employeeDomainSecurityService = scope.ServiceProvider.GetRequiredService<IDomainSecurityService<Employee, ExampleSecurityOperation>>();
         var securityProvider = employeeDomainSecurityService.GetSecurityProvider(BLLSecurityMode.View);
 

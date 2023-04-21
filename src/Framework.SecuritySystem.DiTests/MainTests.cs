@@ -57,16 +57,15 @@ public class MainTests
     {
         // Arrange
         await using var scope = this.rootServiceProvider.CreateAsyncScope();
-
-        // Act
         var employeeDomainSecurityService = scope.ServiceProvider.GetRequiredService<IDomainSecurityService<Employee, ExampleSecurityOperation>>();
         var securityProvider = employeeDomainSecurityService.GetSecurityProvider(BLLSecurityMode.View);
 
-        // Assert
+        // Act
         var result1 = securityProvider.HasAccess(this.employee1);
         var result2 = securityProvider.HasAccess(this.employee2);
         var result3 = securityProvider.HasAccess(this.employee3);
 
+        // Assert
         result1.Should().BeTrue();
         result2.Should().BeTrue();
         result3.Should().BeFalse();
@@ -79,14 +78,13 @@ public class MainTests
     {
         // Arrange
         await using var scope = this.rootServiceProvider.CreateAsyncScope();
-
-        // Act
         var employeeDomainSecurityService = scope.ServiceProvider.GetRequiredService<IDomainSecurityService<Employee, ExampleSecurityOperation>>();
         var securityProvider = employeeDomainSecurityService.GetSecurityProvider(BLLSecurityMode.View);
 
-        // Assert
+        // Act
         var checkAccessAction = () => securityProvider.CheckAccess(this.employee3);
 
+        // Assert
         checkAccessAction.Should().Throw<AccessDeniedException<Guid>>();
     }
 

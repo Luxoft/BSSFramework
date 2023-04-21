@@ -10,7 +10,6 @@ using V1 = Framework.SecuritySystem.Rules.Builders.MaterializedPermissions;
 using Microsoft.Extensions.DependencyInjection;
 
 using NSubstitute;
-using NSubstitute.ExceptionExtensions;
 
 using Xunit;
 

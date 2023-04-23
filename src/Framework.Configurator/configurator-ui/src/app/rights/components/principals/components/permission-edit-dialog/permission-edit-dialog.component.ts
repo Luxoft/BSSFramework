@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { IContext, IEntity, IPermission } from '../view-principal-dialog/view-principal-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,9 +12,11 @@ import { DestroyService } from 'src/app/shared/destroy.service';
 import { MatInputModule } from '@angular/material/input';
 import { IRoleContext } from '../grant-rights-dialog/grant-rights-dialog.models';
 import { PermissionEditDialogService } from './permission-edit-dialog.service';
-
+import { SearchFieldComponent } from '../grant-rights-dialog/components/search-header/search-header.component';
+import { AddEntityControlComponent } from './add-entity-control/add-entity-control.component';
+import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
 @Component({
-  selector: 'app-grant-rights-dialog',
+  selector: 'app-permission-edit-dialog',
   standalone: true,
   imports: [
     CommonModule,
@@ -26,6 +28,11 @@ import { PermissionEditDialogService } from './permission-edit-dialog.service';
     MatInputModule,
     FilterContextsPipe,
     SelectEntityComponent,
+    SearchFieldComponent,
+    AddEntityControlComponent,
+    MatDatepickerModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   templateUrl: './permission-edit-dialog.component.html',
   styleUrls: ['./permission-edit-dialog.component.scss'],
@@ -40,7 +47,17 @@ export class PermissionEditDialogComponent {
     public cdr: ChangeDetectorRef
   ) {}
 
+  dates = new FormGroup({
+    start: new FormControl<Date>(new Date(), { nonNullable: true, validators: [Validators.required] }),
+    end: new FormControl<Date | null>(null),
+  });
+
   save() {
+    if (!this.dates.valid) {
+      this.dates.markAllAsTouched();
+      return;
+    }
+    const dates = this.dates.getRawValue();
     if (this.permissionEditDialogService.forms.find((f) => f.invalid)) {
       // TODO: fix this
       this.permissionEditDialogService.forms.forEach((f) => f.markAllAsTouched());
@@ -55,11 +72,32 @@ export class PermissionEditDialogComponent {
         Name: v.unit?.Name || '',
         Entities: ((v.entities as IEntity[]) || []).filter((entity, index, arr) => arr.findIndex((x) => x.Id === entity.Id) === index),
       }));
-    const permission: IPermission = { ...this.data.permission, Contexts };
+
+    const permission: IPermission = {
+      ...this.data.permission,
+      StartDate: this.dateToLocalString(dates.start),
+      EndDate: dates.end ? this.dateToLocalString(dates.end) : null,
+      Contexts,
+    };
     this.dialogRef.close(permission);
   }
 
   cancel() {
     this.dialogRef.close();
+  }
+
+  setToday(datepicker: MatDatepicker<Date>) {
+    datepicker.select(new Date());
+    datepicker.close();
+  }
+
+  dateToLocalString(date: Date) {
+    date.setHours(0);
+    date.setMinutes(0);
+    date.setSeconds(0);
+    date.setMilliseconds(0);
+
+    const tzoffset = date.getTimezoneOffset() * 60000;
+    return new Date(+date - tzoffset).toISOString().slice(0, -5);
   }
 }

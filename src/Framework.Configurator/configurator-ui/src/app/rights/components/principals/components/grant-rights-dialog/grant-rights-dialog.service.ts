@@ -116,6 +116,8 @@ export class GrantRightsDialogService {
       RoleId: x.RoleId ?? '',
       Comment: x.Comment ?? '',
       Contexts: x.Contexts.map((c) => ({ Id: c.Id, Entities: c.Entities.map((e) => e.Id) })),
+      StartDate: x.StartDate ? x.StartDate : null,
+      EndDate: x.EndDate ? x.EndDate : null,
     }));
   }
 

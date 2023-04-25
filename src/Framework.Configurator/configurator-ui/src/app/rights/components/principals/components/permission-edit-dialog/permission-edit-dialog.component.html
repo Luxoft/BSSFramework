@@ -10,16 +10,32 @@
     <input matInput type="text" [(ngModel)]="data.permission.Comment" />
   </mat-form-field>
 </div>
+<form class="tw-grid tw-grid-cols-2 tw-gap-2" [formGroup]="dates">
+  <mat-form-field appearance="fill" class="example-form-field">
+    <mat-label>Start date</mat-label>
+    <input matInput [matDatepicker]="datepickerStart" [formControlName]="'start'" />
+    <mat-datepicker-toggle matIconSuffix [for]="datepickerStart"></mat-datepicker-toggle>
+    <mat-datepicker #datepickerStart> </mat-datepicker>
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="example-form-field">
+    <mat-label>End date</mat-label>
+    <input matInput [matDatepicker]="datepickerEnd" [formControlName]="'end'" />
+    <mat-datepicker-toggle matIconSuffix [for]="datepickerEnd"></mat-datepicker-toggle>
+    <mat-datepicker #datepickerEnd> </mat-datepicker>
+  </mat-form-field>
+</form>
 <h3 class="tw-text-xl">Contexts</h3>
 <div class="tw-flex-1 tw-overflow-auto">
   <div class="tw-flex tw-gap-4 tw-h-full">
-    <div *ngFor="let item of permissionEditDialogService.forms" class="tw-flex tw-flex-col">
-      {{ item.controls.unit.value.Name }}
+    <div *ngFor="let item of permissionEditDialogService.forms" class="context tw-flex tw-flex-col">
       <div class="tw-flex tw-gap-1 tw-items-center tw-mb-2">
-        <mat-form-field [subscriptSizing]="'dynamic'" class="tw-h-12">
-          <mat-label>Search</mat-label>
-          <input matInput #input type="text" />
-        </mat-form-field>
+        <app-search-header
+          [label]="item.controls.unit.value.Name"
+          #searchHeader
+          class="tw-flex-1 tw-block tw-h-12 tw-cursor-pointer"
+          [width]="'200px'">
+          {{ item.controls.unit.value.Name }}
+        </app-search-header>
         <button
           class="tw-w-10 tw-h-10 tw-rounded hover:tw-bg-gray-100"
           aria-label="Massive paste"
@@ -28,9 +44,14 @@
           <mat-icon class="tw-mt-1">post_add</mat-icon>
         </button>
       </div>
+      <app-add-entity-control
+        class="tw-w-full"
+        [unitId]="item.controls.unit.value.Id"
+        (selected)="permissionEditDialogService.add(item.controls.entities, $event)">
+      </app-add-entity-control>
       <div class="tw-overflow-y-auto tw-pb-2">
         <div
-          *ngFor="let context of item.controls.entities.controls | filterContexts : input.value"
+          *ngFor="let context of item.controls.entities.controls | filterContexts : searchHeader.searchText"
           class="tw-flex tw-items-center tw-gap-1 tw-relative">
           <app-select-entity class="tw-w-full" [control]="context" [unitId]="item.controls.unit.value.Id"></app-select-entity>
           <mat-icon
@@ -40,10 +61,6 @@
             >delete
           </mat-icon>
         </div>
-        <button mat-button (click)="permissionEditDialogService.add(item.controls.entities, null)">
-          <mat-icon>add</mat-icon>
-          <span>Add context</span>
-        </button>
       </div>
     </div>
   </div>

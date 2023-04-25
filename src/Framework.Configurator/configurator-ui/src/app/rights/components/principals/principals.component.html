@@ -35,11 +35,10 @@
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element" class="tw-w-2/5">
         <div class="tw-flex tw-justify-end tw-gap-2">
-          <button mat-raised-button (click)="viewDetails(element)">Rights</button>
           <button mat-raised-button (click)="edit(element)">Edit</button>
           <button mat-raised-button color="warn" (click)="runAs(element)">Log in</button>
           <button mat-raised-button color="accent" (click)="remove(element)">Delete</button>
-          <button mat-raised-button color="primary" (click)="grant(element)">Grant rights</button>
+          <button mat-raised-button color="primary" (click)="grant(element)">View rights</button>
         </div>
       </td>
     </ng-container>

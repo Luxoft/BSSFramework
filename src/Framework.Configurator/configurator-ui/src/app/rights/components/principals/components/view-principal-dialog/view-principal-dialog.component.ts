@@ -16,6 +16,7 @@ export interface IPrincipalDetails {
   Permissions: IPermission[];
 }
 
+// TODO: refactor interfaces
 export interface IPermission {
   Id: string;
   Role: string;
@@ -24,6 +25,8 @@ export interface IPermission {
   EndDate?: Date | null;
   Comment: string | null;
   Contexts: IContext[];
+  StartDate?: string;
+  EndDate?: string | null;
 }
 
 export interface IContext {

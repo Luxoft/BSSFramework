@@ -1,0 +1,13 @@
+<form [title]="control.value?.Name || ''" class="tw-relative">
+  <mat-form-field [subscriptSizing]="'dynamic'" class="tw-w-full">
+    <mat-label>Add context</mat-label>
+    <input matInput placeholder="Type to search" type="text" [formControl]="control" [matAutocomplete]="auto" />
+    <mat-progress-spinner matSuffix class="tw-h-4 tw-w-4 tw-m-1" [class.tw-invisible]="loadedSubject | async" [mode]="'indeterminate'">
+    </mat-progress-spinner>
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onSetected()">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{ option.Name }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

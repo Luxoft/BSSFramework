@@ -3,7 +3,14 @@
 
   <div class="tw-flex tw-gap-5">
     <ng-container *ngFor="let item of menuItems">
-      <a mat-button [routerLink]="item.route" [routerLinkActive]="'active'" class="tw-px-3 tw-py-1 tw-rounded-lg">{{ item.title }}</a>
+      <a
+        mat-button
+        [routerLink]="item.route"
+        [routerLinkActive]="'active'"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="tw-px-3 tw-py-1 tw-rounded-lg">
+        {{ item.title }}
+      </a>
     </ng-container>
   </div>
 </mat-toolbar>

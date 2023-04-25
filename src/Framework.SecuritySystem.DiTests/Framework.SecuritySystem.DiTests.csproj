@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Framework.App.SecuritySystem\Framework.App.SecuritySystem.csproj" />
+    <ProjectReference Include="..\Framework.Core.AnonymousTypeBuilder\Framework.Core.AnonymousTypeBuilder.csproj" />
   </ItemGroup>
 
 </Project>

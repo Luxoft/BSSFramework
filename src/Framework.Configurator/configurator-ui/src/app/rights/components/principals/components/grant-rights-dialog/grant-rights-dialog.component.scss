@@ -5,14 +5,11 @@
   overflow: hidden;
 }
 
-.context { 
-  min-width: 350px;
+.contexts {
+  width: 350px;
 }
 
-.role {
-  width: 100px;
-}
-
-.comment {
-  width: 200px;
+.row {
+  display: grid;
+  grid-template-columns: 50px 150px 300px 1fr;
 }

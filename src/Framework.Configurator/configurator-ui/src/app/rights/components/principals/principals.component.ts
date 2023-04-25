@@ -9,7 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
-import { BehaviorSubject, Observable, debounceTime, startWith, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, debounceTime, startWith, switchMap, map } from 'rxjs';
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 
 import { EditPrincipalDialogComponent } from './components/edit-principal-dialog/edit-principal-dialog.component';
@@ -48,6 +48,7 @@ export class PrincipalsComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new EventEmitter();
   public dataSource$: Observable<IPrincipal[]> = this.control.valueChanges.pipe(
     debounceTime(DEBOUNCE),
+    map((x) => x?.trim()),
     startWith(''),
     switchMap((x) => this.refresh(x || ''))
   );
@@ -118,7 +119,7 @@ export class PrincipalsComponent implements OnInit, OnDestroy {
 
   public grant(principal: IPrincipal): void {
     this.dialog
-      .open(GrantRightsDialogComponent, { data: principal, height: '90vh', width: '90vw' })
+      .open(GrantRightsDialogComponent, { data: principal, height: '90vh', maxWidth: '90vw', minWidth: '1000px' })
       .beforeClosed()
       .subscribe((x: IGrantedRight) => {
         if (!x) {

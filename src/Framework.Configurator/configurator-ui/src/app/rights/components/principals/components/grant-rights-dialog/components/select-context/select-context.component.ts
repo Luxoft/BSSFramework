@@ -9,6 +9,7 @@ import { HighlightDirective } from 'src/app/shared/highlight.derective';
   standalone: true,
   imports: [CommonModule, MatIconModule, HighlightDirective],
   templateUrl: './select-context.component.html',
+  styleUrls: ['select-context.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectContextComponent {

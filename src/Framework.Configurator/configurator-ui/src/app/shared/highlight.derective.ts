@@ -7,7 +7,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class HighlightDirective implements OnChanges {
   @Input('appHighlight') searchTerm!: string | null | undefined;
-  @Input() text = '';
+  @Input() text!: string | null;
 
   constructor(private el: ElementRef, private sanitizer: DomSanitizer) {}
 

@@ -3,83 +3,73 @@
 <div class="tw-flex tw-justify-end tw-mr-2">
   <button mat-raised-button color="primary" (click)="grantRightsDialogService.addPermission()">Add permission</button>
 </div>
-<div class="tw-flex-1 tw-min-h-0 tw-overflow-auto" *ngIf="loaded$ | async; else loading">
-  <table
+<ng-container *ngIf="loaded$ | async; else loading">
+  <div
+    class="tw-flex-1 tw-min-h-0 tw-overflow-auto"
     *ngIf="{
       rights: rights$ | async,
       filter: filter$ | async
-    } as obj"
-    aria-describedby="permissions and contexts table"
-    mat-table
-    [dataSource]="obj.filter | rightsFilter : obj.rights?.Permissions">
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    <ng-container [matColumnDef]="'Role'">
-      <th mat-header-cell *matHeaderCellDef>
-        <app-search-header [label]="'Role'" (search)="grantRightsDialogService.searchRole($event)" class="tw-block tw-h-12 role">
-          Role
-        </app-search-header>
-      </th>
-      <td mat-cell *matCellDef="let element" class="tw-cursor-pointer">
-        <div [appHighlight]="obj.filter?.role" [text]="element.Role"> </div>
-      </td>
-    </ng-container>
+    } as obj">
+    <div class="row tw-p-3 tw-mx-4 tw-gap-4 tw-w-fit tw-sticky tw-top-0 tw-bg-white tw-z-10">
+      <div></div>
+      <app-search-header
+        [label]="'Role'"
+        (search)="grantRightsDialogService.searchRole($event)"
+        class="tw-block tw-h-12 tw-cursor-pointer"
+        [width]="'150px'">
+        Role
+      </app-search-header>
+      <app-search-header
+        [label]="'Comment'"
+        (search)="grantRightsDialogService.searchComment($event)"
+        class="tw-block tw-h-12 tw-cursor-pointer"
+        [width]="'300px'">
+        Comment
+      </app-search-header>
 
-    <ng-container [matColumnDef]="'Comment'">
-      <th mat-header-cell *matHeaderCellDef class="comment">
-        <app-search-header [label]="'Comment'" (search)="grantRightsDialogService.searchComment($event)" class="tw-block tw-h-12 role">
-          Comment
-        </app-search-header>
-      </th>
-      <td mat-cell *matCellDef="let element">
-        <div [appHighlight]="obj.filter?.comment" [text]="element.Comment"> </div>
-      </td>
-    </ng-container>
-    <ng-container [matColumnDef]="'Contexts'">
-      <th mat-header-cell *matHeaderCellDef>
-        <div class="tw-flex tw-h-12 tw-items-center tw-cursor-pointer">
-          <span *ngFor="let context of allContexts$ | async" class="context tw-flex-1 tw-h-full">
-            <app-search-header
-              [label]="context.Name + '\'s contexts'"
-              (search)="grantRightsDialogService.searchContext(context.Id, $event)"
-              class="tw-block tw-h-full">
-              {{ context.Name + "'s contexts" }}
-            </app-search-header>
-          </span>
-        </div>
-      </th>
-      <td mat-cell *matCellDef="let element">
+      <div class="tw-flex tw-h-12 tw-gap-4 tw-items-center tw-cursor-pointer">
+        <span *ngFor="let context of allContexts$ | async" class="contexts tw-flex-1 tw-h-full">
+          <app-search-header
+            [width]="'350px'"
+            [label]="context.Name + '\'s contexts'"
+            (search)="grantRightsDialogService.searchContext(context.Id, $event)"
+            class="tw-block tw-h-full">
+            {{ context.Name + "'s contexts" }}
+          </app-search-header>
+        </span>
+      </div>
+    </div>
+    <div
+      class="row tw-p-2 tw-mx-4 tw-gap-4 tw-w-fit tw-border-b last:tw-border-0"
+      *ngFor="let element of obj.filter | rightsFilter : obj.rights?.Permissions">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button *ngIf="allContexts$ | async as allContexts" mat-menu-item (click)="grantRightsDialogService.edit(element, allContexts)">
+          <mat-icon>edit</mat-icon>
+          <span>Edit</span>
+        </button>
+        <button mat-menu-item (click)="grantRightsDialogService.remove(element)">
+          <mat-icon>delete</mat-icon>
+          <span>Delete</span>
+        </button>
+      </mat-menu>
+      <div [appHighlight]="obj.filter?.role" [text]="element.Role"></div>
+      <div [appHighlight]="obj.filter?.comment" [text]="element.Comment"></div>
+      <div class="tw-flex tw-items-center">
         <div class="tw-flex tw-gap-4 tw-my-1">
           <app-select-context
             *ngFor="let context of allContexts$ | async"
-            class="context tw-flex-1"
+            class="contexts tw-flex-1"
             [highlight]="obj.filter?.contexts | contextStringFilter : context"
             [entitiesList]="element | contextFilter : context">
           </app-select-context>
         </div>
-      </td>
-    </ng-container>
-
-    <ng-container [matColumnDef]="'actions'">
-      <th mat-header-cell *matHeaderCellDef> </th>
-      <td mat-cell *matCellDef="let element">
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button *ngIf="allContexts$ | async as allContexts" mat-menu-item (click)="grantRightsDialogService.edit(element, allContexts)">
-            <mat-icon>edit</mat-icon>
-            <span>Edit</span>
-          </button>
-          <button mat-menu-item (click)="grantRightsDialogService.remove(element)">
-            <mat-icon>delete</mat-icon>
-            <span>Delete</span>
-          </button>
-        </mat-menu>
-      </td>
-    </ng-container>
-  </table>
-</div>
+      </div>
+    </div>
+  </div>
+</ng-container>
 
 <div mat-dialog-actions class="tw-flex tw-justify-end">
   <button mat-button mat-dialog-close>Cancel</button>

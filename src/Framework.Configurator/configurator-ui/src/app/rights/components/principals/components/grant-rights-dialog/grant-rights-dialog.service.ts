@@ -98,10 +98,8 @@ export class GrantRightsDialogService {
           if (!x || typeof x === 'string') {
             return;
           }
-          const StartDate = new Date();
-          StartDate.setHours(0, -1 * StartDate.getTimezoneOffset(), 0, 0);
 
-          const permission: IPermission = { Id: '', RoleId: x.Id ?? '', Role: x.Name ?? '', Comment: '', Contexts: [], StartDate };
+          const permission: IPermission = { Id: '', RoleId: x.Id ?? '', Role: x.Name ?? '', Comment: '', Contexts: [] };
           const rights = this.rightsSubject.value;
           rights.Permissions.unshift(permission);
           this.edit(permission, this.allContextsSubject.value);
@@ -118,8 +116,6 @@ export class GrantRightsDialogService {
       PermissionId: x.Id,
       RoleId: x.RoleId ?? '',
       Comment: x.Comment ?? '',
-      StartDate: x.StartDate,
-      EndDate: x.EndDate,
       Contexts: x.Contexts.map((c) => ({ Id: c.Id, Entities: c.Entities.map((e) => e.Id) })),
       StartDate: x.StartDate ? x.StartDate : null,
       EndDate: x.EndDate ? x.EndDate : null,

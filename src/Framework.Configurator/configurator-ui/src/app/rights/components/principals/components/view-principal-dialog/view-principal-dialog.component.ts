@@ -21,8 +21,6 @@ export interface IPermission {
   Id: string;
   Role: string;
   RoleId?: string;
-  StartDate: Date;
-  EndDate?: Date | null;
   Comment: string | null;
   Contexts: IContext[];
   StartDate?: string;

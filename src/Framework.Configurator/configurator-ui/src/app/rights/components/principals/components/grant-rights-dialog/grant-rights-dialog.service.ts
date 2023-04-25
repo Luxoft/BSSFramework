@@ -98,6 +98,7 @@ export class GrantRightsDialogService {
           if (!x || typeof x === 'string') {
             return;
           }
+
           const permission: IPermission = { Id: '', RoleId: x.Id ?? '', Role: x.Name ?? '', Comment: '', Contexts: [] };
           const rights = this.rightsSubject.value;
           rights.Permissions.unshift(permission);

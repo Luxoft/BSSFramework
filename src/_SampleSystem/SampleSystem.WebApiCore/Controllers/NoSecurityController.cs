@@ -25,7 +25,7 @@ public class NoSecurityController : ControllerBase
 
 
     [DBSessionMode(DBSessionMode.Write)]
-    [HttpPost(nameof(TestSave))]
+    [HttpPost(nameof(TestFaultSave))]
     public async Task<NoSecurityObjectIdentityDTO> TestFaultSave(CancellationToken cancellationToken = default)
     {
         var repository = this.repositoryFactory.Create(BLLSecurityMode.Edit);

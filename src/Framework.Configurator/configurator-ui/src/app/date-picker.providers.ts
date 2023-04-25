@@ -11,7 +11,10 @@ export class AppDateAdapter extends NativeDateAdapter {
     return this._to2digit(day) + '.' + this._to2digit(month) + '.' + year;
   }
 
-  override parse(dateString: string): Date {
+  override parse(dateString: string): Date | null {
+    if (!dateString) {
+      return null;
+    }
     const dateParts = dateString.split('.');
     return new Date(+dateParts[2], +dateParts[1] - 1, +dateParts[0]);
   }

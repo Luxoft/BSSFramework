@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { IContext, IEntity, IPermission } from '../view-principal-dialog/view-principal-dialog.component';
@@ -39,13 +39,20 @@ import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DestroyService, PermissionEditDialogService],
 })
-export class PermissionEditDialogComponent {
+export class PermissionEditDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { permission: IPermission; units: IRoleContext[] },
     public dialogRef: MatDialogRef<PermissionEditDialogComponent>,
     public permissionEditDialogService: PermissionEditDialogService,
     public cdr: ChangeDetectorRef
   ) {}
+
+  ngOnInit(): void {
+    this.dates.setValue({
+      start: new Date(this.data.permission.StartDate || ''),
+      end: this.data.permission.EndDate ? new Date(this.data.permission.EndDate) : null,
+    });
+  }
 
   dates = new FormGroup({
     start: new FormControl<Date>(new Date(), { nonNullable: true, validators: [Validators.required] }),

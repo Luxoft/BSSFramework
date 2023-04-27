@@ -49,7 +49,7 @@ export class PermissionEditDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.dates.setValue({
-      start: new Date(this.data.permission.StartDate || ''),
+      start: new Date(this.data.permission.StartDate || new Date()),
       end: this.data.permission.EndDate ? new Date(this.data.permission.EndDate) : null,
     });
   }

@@ -1,5 +1,4 @@
 ﻿using Framework.Authorization.BLL;
-using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
 using Framework.SecuritySystem;
@@ -12,7 +11,8 @@ public class GetBusinessRoleContextEntitiesHandler : BaseReadHandler, IGetBusine
 {
     private readonly IAuthorizationBLLContext authorizationBllContext;
 
-    public GetBusinessRoleContextEntitiesHandler(IAuthorizationBLLContext authorizationBllContext) => this.authorizationBllContext = authorizationBllContext;
+    public GetBusinessRoleContextEntitiesHandler(IAuthorizationBLLContext authorizationBllContext) => 
+        this.authorizationBllContext = authorizationBllContext;
 
     protected override object GetData(HttpContext context)
     {

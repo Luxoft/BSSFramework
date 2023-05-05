@@ -11,8 +11,8 @@ public class GetBusinessRoleContextEntitiesHandler : BaseReadHandler, IGetBusine
 {
     private readonly IAuthorizationBLLContext authorizationBllContext;
 
-    public GetBusinessRoleContextEntitiesHandler(IAuthorizationBLLContext authorizationBllContext) =>
-            this.authorizationBllContext = authorizationBllContext;
+    public GetBusinessRoleContextEntitiesHandler(IAuthorizationBLLContext authorizationBllContext) => 
+        this.authorizationBllContext = authorizationBllContext;
 
     protected override object GetData(HttpContext context)
     {
@@ -20,20 +20,22 @@ public class GetBusinessRoleContextEntitiesHandler : BaseReadHandler, IGetBusine
         var searchToken = context.Request.Query["searchToken"];
 
         var entityType = this.authorizationBllContext.Authorization.Logics.EntityTypeFactory
-                             .Create(BLLSecurityMode.View)
-                             .GetById(entityTypeId, true);
+            .Create(BLLSecurityMode.View)
+            .GetById(entityTypeId, true);
 
         var entities = this.authorizationBllContext.Authorization.ExternalSource.GetTyped(entityType)
-                           .GetSecurityEntities();
+            .GetSecurityEntities();
+
         if (!string.IsNullOrWhiteSpace(searchToken))
         {
             entities = entities.Where(p => p.Name.Contains(searchToken, StringComparison.OrdinalIgnoreCase));
         }
 
         return entities
-               .Select(r => new EntityDto { Id = r.Id, Name = r.Name })
-               .OrderBy(r => r.Name)
-               .Take(70)
-               .ToList();
+            .Select(r => new EntityDto { Id = r.Id, Name = r.Name })
+            .OrderByDescending(r => r.Name.Equals(searchToken, StringComparison.OrdinalIgnoreCase))
+            .ThenBy(r => r.Name)
+            .Take(70)
+            .ToList();
     }
 }

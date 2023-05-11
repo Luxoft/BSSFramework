@@ -27,4 +27,4 @@ Features:
     - RestApi Generation
     - TypeScript Generator https://github.com/Luxoft/gengen
 - **Unit Testing**
-- **Integration Testing**
+- [Integration Testing](docs/integrationtests.md)

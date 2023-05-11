@@ -7,6 +7,4 @@ public enum TestRunMode
     RestoreDatabaseUsingAttach = 1,
 
     GenerateTestDataOnExistingDatabase = 2,
-
-    RestoreDatabaseFromBackupAndUsingAttach = 3,
 }

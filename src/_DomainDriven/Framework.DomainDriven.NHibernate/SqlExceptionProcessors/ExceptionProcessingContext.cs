@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Linq;
+using System.Text;
 
 using NHibernate.Mapping;
 
@@ -63,9 +64,9 @@ public class ExceptionProcessingContext
         Func<Table, TableDescription> createTableDescriptionFunc = z => this.CreateTableDescription(z);
 
         this._tableNameToPersistentClass =
-                nhibernatePersistentClass
-                        .GroupBy(z=>z.Table)
-                        .ToDictionary(z=>createTableDescriptionFunc(z.Key), z => (IList<PersistentClass>)z.ToList());
+            nhibernatePersistentClass
+                .GroupBy(z => createTableDescriptionFunc(z.Table))
+                .ToDictionary(z => z.Key, z => (IList<PersistentClass>)z.ToList());
     }
 
     public TableDescription CreateTableDescription(Table table)

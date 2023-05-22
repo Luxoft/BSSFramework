@@ -1,15 +1,10 @@
 ﻿using FluentAssertions;
 
 using Framework.Core;
-using Framework.DomainDriven;
 using Framework.DomainDriven.DAL.Revisions;
-using Framework.DomainDriven.Repository;
 
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using SampleSystem.AuditDomain;
-using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
@@ -277,6 +272,6 @@ public class AuditTests : TestBase
                                 .EvaluateAsync(c => c.LoadFromCustomAuditMapping(newBu));
 
         // Assert
-        newBu.Should().Be(auditBu);
+        newBu.Should().Be(auditBu.BuIdent);
     }
 }

@@ -7,7 +7,7 @@
     <property name="RevisionDate" column="[RevisionDate]" type="timestamp" access="field.camelcase" />
   </class>
 
-  <class name="SampleSystem.AuditDomain.BusinessUnitAudit" table="[BusinessUnitAudit]">
+  <!--<class name="SampleSystem.AuditDomain.BusinessUnitAudit" table="[BusinessUnitAudit]">
 
     <composite-id name="Identifier" class="SampleSystem.AuditDomain.AuditIdentifier">
       <key-property name="Id" column="[id]" access="field.camelcase" />
@@ -19,6 +19,6 @@
     <property name="ModifiedBy" column="[modifiedBy]" access="field.camelcase" />
     <property name="ModifyDate" column="[modifyDate]" type="timestamp" access="field.camelcase" />
     <property name="RevType" column="[REVTYPE]" access="field.camelcase" />
-  </class>
+  </class>-->
 
 </hibernate-mapping>

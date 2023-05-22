@@ -1,4 +1,6 @@
 ﻿using Framework.DomainDriven.Repository;
+using Framework.Security;
+using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,16 +16,16 @@ public class BusinessUnitAuditController : ControllerBase
 {
     private readonly IRepository<BusinessUnitAudit, Guid> repository;
 
-    public BusinessUnitAuditController(IRepository<BusinessUnitAudit, Guid> repository)
+    public BusinessUnitAuditController(IRepositoryFactory<BusinessUnitAudit, Guid, SecurityOperationCode> repositoryFactory)
     {
-        this.repository = repository;
+        this.repository = repositoryFactory.Create(BLLSecurityMode.Disabled);
     }
 
     [HttpGet(nameof(LoadFromCustomAuditMapping))]
-    public async Task<BusinessUnitIdentityDTO> LoadFromCustomAuditMapping(BusinessUnitIdentityDTO bu)
+    public async Task<(string Author, long Revision, BusinessUnitIdentityDTO BuIdent)> LoadFromCustomAuditMapping(BusinessUnitIdentityDTO bu)
     {
-        var reloaded = await this.repository.LoadAsync(bu.Id);
+        var auditBu = await this.repository.LoadAsync(bu.Id);
 
-        return new BusinessUnitIdentityDTO(reloaded.Id);
+        return (auditBu.Revision.Author, auditBu.Revision.Id, new BusinessUnitIdentityDTO(auditBu.Id));
     }
 }

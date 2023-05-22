@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using nuSpec.Abstraction;
 using nuSpec.NHibernate;
 
+using SampleSystem.AuditDAL.NHibernate;
 using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DAL.NHibernate;
@@ -43,6 +44,9 @@ public static class SampleSystemFrameworkDatabaseExtensions
 
                                                                 .AddMapping(AuthorizationMappingSettings.CreateDefaultAudit(string.Empty))
                                                                 .AddMapping(ConfigurationMappingSettings.CreateDefaultAudit(string.Empty))
+
+                                                                .AddMapping(new SampleSystemSystemAuditMappingSettings(string.Empty))
+                                                                .AddMapping(new SampleSystemSystemRevisionAuditMappingSettings(string.Empty))
                                                                 .AddMapping(new SampleSystemMappingSettings(new DatabaseName(string.Empty, "app"), connectionString)));
     }
 

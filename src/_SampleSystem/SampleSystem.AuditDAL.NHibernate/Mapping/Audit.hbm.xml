@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="SampleSystem.AuditDomain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" auto-import="false" schema="[appAudit]" xmlns="urn:nhibernate-mapping-2.2">
+
+  <class name="SampleSystem.AuditDomain.SampleSystemAuditRevisionEntity" table="[AuditRevisionEntity]">
+    <id name="Id" column="[id]" access="field.camelcase" />
+    <property name="Author" column="[author]" access="field.camelcase" />
+    <property name="RevisionDate" column="[RevisionDate]" type="timestamp" access="field.camelcase" />
+  </class>
+
+  <class name="SampleSystem.AuditDomain.BusinessUnitAudit" table="[BusinessUnitAudit]">
+
+    <composite-id name="Identifier" class="SampleSystem.AuditDomain.AuditIdentifier">
+      <key-property name="Id" column="[id]" access="field.camelcase" />
+      <key-property name="RevNumber" column="[REV]" access="field.camelcase" />
+    </composite-id>
+
+    <property name="Id" column="[id]" insert="false" update="false" access="field.camelcase" />
+    <many-to-one name="Revision" column="[REV]" insert="false" update="false" class="SampleSystem.AuditDomain.SampleSystemAuditRevisionEntity" access="field.camelcase" />
+    <property name="ModifiedBy" column="[modifiedBy]" access="field.camelcase" />
+    <property name="ModifyDate" column="[modifyDate]" type="timestamp" access="field.camelcase" />
+    <property name="RevType" column="[REVTYPE]" access="field.camelcase" />
+  </class>
+
+</hibernate-mapping>

@@ -1,15 +1,21 @@
 ﻿using FluentAssertions;
 
 using Framework.Core;
+using Framework.DomainDriven;
 using Framework.DomainDriven.DAL.Revisions;
+using Framework.DomainDriven.Repository;
 
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using SampleSystem.AuditDomain;
+using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Audit;
+using SampleSystem.WebApiCore.Controllers.Main;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -257,5 +263,20 @@ public class AuditTests : TestBase
 
         afterFirstRevisions.Count.Should().Be(1);
         afterFirstRevisions.First().Should().Be(AuditRevisionType.Modified);
+    }
+
+
+    [TestMethod]
+    public async Task CrateNewBu_BuLoadedFromCustomMapping()
+    {
+        // Arrange
+        var newBu = this.DataHelper.SaveBusinessUnit();
+
+        // Act
+        var auditBu = await this.GetControllerEvaluator<BusinessUnitAuditController>()
+                                .EvaluateAsync(c => c.LoadFromCustomAuditMapping(newBu));
+
+        // Assert
+        newBu.Should().Be(auditBu);
     }
 }

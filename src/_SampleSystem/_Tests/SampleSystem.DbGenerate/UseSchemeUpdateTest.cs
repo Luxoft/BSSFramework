@@ -47,16 +47,17 @@ public class UseSchemeUpdateTest
 
         var services = new ServiceCollection();
 
-        services.AddDatabaseSettings(connectionString);
+        services.AddDatabaseSettings(connectionString, false);
 
         services.AddSingleton(_ => LazyInterfaceImplementHelper.CreateNotImplemented<IAuditRevisionUserAuthenticationService>());
-        services.AddSingleton<ICapTransactionManager, FakeCapTransactionManager>();
+        services.AddSingleton(_ => LazyInterfaceImplementHelper.CreateNotImplemented<ICapTransactionManager>());
         var provider = services.BuildServiceProvider(false);
 
         var dbSessionFactory = provider.GetService<NHibSessionEnvironment>();
-        var cfg = dbSessionFactory?.Configuration;
+        var cfg = dbSessionFactory.Configuration;
 
         var migrate = new SchemaUpdate(cfg);
+
         migrate.Execute(true, true);
 
         if (migrate.Exceptions.Any())
@@ -96,12 +97,5 @@ IF NOT EXISTS ( SELECT * FROM sys.schemas WHERE name = N'authAudit' ) EXEC('CREA
         }
 
         connection.Close();
-    }
-
-    private class FakeCapTransactionManager : ICapTransactionManager
-    {
-        public void Enlist(IDbTransaction dbTransaction)
-        {
-        }
     }
 }

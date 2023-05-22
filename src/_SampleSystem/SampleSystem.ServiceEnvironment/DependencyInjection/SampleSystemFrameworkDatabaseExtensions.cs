@@ -1,5 +1,6 @@
 ﻿using Framework.Authorization.Generated.DAL.NHibernate;
 using Framework.Configuration.Generated.DAL.NHibernate;
+using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.ServiceModel.IAD;
@@ -35,7 +36,7 @@ public static class SampleSystemFrameworkDatabaseExtensions
         return services.AddSingleton<ISpecificationEvaluator, NhSpecificationEvaluator>();
     }
 
-    public static IServiceCollection AddDatabaseSettings(this IServiceCollection services, string connectionString)
+    public static IServiceCollection AddDatabaseSettings(this IServiceCollection services, string connectionString, bool includeTypedAudit = true)
     {
         return services.AddDatabaseSettings(setupObj => setupObj.AddEventListener<DefaultDBSessionEventListener>()
                                                                 .AddEventListener<SubscriptionDBSessionEventListener>()
@@ -45,8 +46,12 @@ public static class SampleSystemFrameworkDatabaseExtensions
                                                                 .AddMapping(AuthorizationMappingSettings.CreateDefaultAudit(string.Empty))
                                                                 .AddMapping(ConfigurationMappingSettings.CreateDefaultAudit(string.Empty))
 
-                                                                .AddMapping(new SampleSystemSystemAuditMappingSettings(string.Empty))
-                                                                .AddMapping(new SampleSystemSystemRevisionAuditMappingSettings(string.Empty))
+                                                                .Pipe(includeTypedAudit, s => s
+
+                                                                    .AddMapping(new SampleSystemSystemAuditMappingSettings(string.Empty))
+                                                                    .AddMapping(new SampleSystemSystemRevisionAuditMappingSettings(string.Empty)))
+
+
                                                                 .AddMapping(new SampleSystemMappingSettings(new DatabaseName(string.Empty, "app"), connectionString)));
     }
 

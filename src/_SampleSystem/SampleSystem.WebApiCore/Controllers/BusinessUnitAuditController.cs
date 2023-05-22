@@ -1,4 +1,5 @@
-﻿using Framework.DomainDriven.Repository;
+﻿using Framework.DomainDriven;
+using Framework.DomainDriven.Repository;
 using Framework.Security;
 using Framework.SecuritySystem;
 
@@ -14,17 +15,17 @@ namespace SampleSystem.WebApiCore.Controllers.Main;
 [ApiController]
 public class BusinessUnitAuditController : ControllerBase
 {
-    private readonly IRepository<BusinessUnitAudit, Guid> repository;
+    private readonly IAsyncDal<BusinessUnitAudit, Guid> dal;
 
-    public BusinessUnitAuditController(IRepositoryFactory<BusinessUnitAudit, Guid, SecurityOperationCode> repositoryFactory)
+    public BusinessUnitAuditController(IAsyncDal<BusinessUnitAudit, Guid> dal)
     {
-        this.repository = repositoryFactory.Create(BLLSecurityMode.Disabled);
+        this.dal = dal;
     }
 
     [HttpGet(nameof(LoadFromCustomAuditMapping))]
-    public async Task<(string Author, long Revision, BusinessUnitIdentityDTO BuIdent)> LoadFromCustomAuditMapping(BusinessUnitIdentityDTO bu)
+    public (string Author, long Revision, BusinessUnitIdentityDTO BuIdent) LoadFromCustomAuditMapping(BusinessUnitIdentityDTO bu, long revNumber)
     {
-        var auditBu = await this.repository.LoadAsync(bu.Id);
+        var auditBu = this.dal.GetQueryable().Single(aBu => aBu.Identifier.Id == bu.Id && aBu.Identifier.RevNumber == revNumber);
 
         return (auditBu.Revision.Author, auditBu.Revision.Id, new BusinessUnitIdentityDTO(auditBu.Id));
     }

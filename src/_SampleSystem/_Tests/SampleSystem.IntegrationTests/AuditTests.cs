@@ -12,6 +12,8 @@ using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Audit;
 using SampleSystem.WebApiCore.Controllers.Main;
 
+using BusinessUnitController = SampleSystem.WebApiCore.Controllers.Audit.BusinessUnitController;
+
 namespace SampleSystem.IntegrationTests;
 
 [TestClass]
@@ -262,16 +264,22 @@ public class AuditTests : TestBase
 
 
     [TestMethod]
-    public async Task CrateNewBu_BuLoadedFromCustomMapping()
+    public void CrateNewBu_AuditBuLoadedFromCustomMapping()
     {
         // Arrange
         var newBu = this.DataHelper.SaveBusinessUnit();
+        var newBuRevInfo = this.GetControllerEvaluator<BusinessUnitController>()
+                           .Evaluate(c => c.GetBusinessUnitRevisions(newBu))
+                           .RevisionInfos
+                           .Single();
 
         // Act
-        var auditBu = await this.GetControllerEvaluator<BusinessUnitAuditController>()
-                                .EvaluateAsync(c => c.LoadFromCustomAuditMapping(newBu));
+        var auditBu = this.GetControllerEvaluator<BusinessUnitAuditController>()
+                                .Evaluate(c => c.LoadFromCustomAuditMapping(newBu, newBuRevInfo.RevisionNumber));
 
         // Assert
-        newBu.Should().Be(auditBu.BuIdent);
+        auditBu.Revision.Should().Be(newBuRevInfo.RevisionNumber);
+        auditBu.Author.Should().Be(newBuRevInfo.Author);
+        auditBu.BuIdent.Should().Be(newBu);
     }
 }

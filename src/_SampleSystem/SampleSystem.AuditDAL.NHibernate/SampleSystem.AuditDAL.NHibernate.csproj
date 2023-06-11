@@ -1,7 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
   <ItemGroup>
-    <EmbeddedResource Include="Mapping\Audit.hbm.xml" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.NHibernate\Framework.DomainDriven.NHibernate.csproj" />
+    <ProjectReference Include="..\SampleSystem.AuditDomain\SampleSystem.AuditDomain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -9,8 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.NHibernate\Framework.DomainDriven.NHibernate.csproj" />
-    <ProjectReference Include="..\SampleSystem.AuditDomain\SampleSystem.AuditDomain.csproj" />
+    <EmbeddedResource Include="Mapping\*.hbm.xml" />
   </ItemGroup>
 
 </Project>

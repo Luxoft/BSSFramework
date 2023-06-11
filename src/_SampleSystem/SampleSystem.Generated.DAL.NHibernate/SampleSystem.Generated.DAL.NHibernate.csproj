@@ -1,26 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-  <IsPackable>false</IsPackable>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="Mapping\Generated.SampleSystem.Domain.LegacyProjections.hbm.xml" />
-    <None Remove="Mapping\Generated.SampleSystem.Domain.ManualProjections.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.App.Dal\Framework.App.Dal.csproj" />
     <ProjectReference Include="..\SampleSystem.Domain.Projections\SampleSystem.Domain.Projections.csproj" />
     <ProjectReference Include="..\SampleSystem.Domain.LegacyProjections\SampleSystem.Domain.LegacyProjections.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mapping" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Mapping\*.hbm.xml" />
-  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="FluentNHibernate" Version="3.1.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Mapping\*.hbm.xml" />
+  </ItemGroup>
+
 </Project>

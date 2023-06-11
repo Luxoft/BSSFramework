@@ -90,6 +90,9 @@ public static class SampleSystemFrameworkExtensions
         services.AddScoped<IBeforeTransactionCompletedDALListener, FixDomainObjectEventRevisionNumberDALListener>();
         services.AddScoped<IBeforeTransactionCompletedDALListener, PermissionWorkflowDALListener>();
 
+        services.AddScoped<FaultDALListener>();
+        services.AddScopedFrom<IBeforeTransactionCompletedDALListener, FaultDALListener>();
+
         services.AddScoped<DefaultAuthDALListener>();
 
         services.AddScopedFrom<IBeforeTransactionCompletedDALListener, DefaultAuthDALListener>();

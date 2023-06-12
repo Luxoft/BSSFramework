@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 namespace Framework.Configurator.Handlers;
 
 public record CreatePrincipalHandler(
-        IAuthorizationRepositoryFactory<Principal> AuthorizationRepositoryFactory,
+        IRepositoryFactory<Principal> AuthorizationRepositoryFactory,
         IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, ICreatePrincipalHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)

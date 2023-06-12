@@ -1,20 +1,14 @@
-﻿using Framework.SecuritySystem;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace Framework.DomainDriven.Repository;
 
-public interface IRepositoryFactory<TDomainObject, in TIdent, TSecurityOperationCode>
-        where TSecurityOperationCode : struct, Enum
+[SuppressMessage("SonarQube", "S4023", Justification = "Interface to simplify working with Repository")]
+public interface IRepositoryFactory<TDomainObject> : ITemplateGenericRepositoryFactory<IRepository<TDomainObject>, TDomainObject, Guid>
 {
-    IRepository<TDomainObject, TIdent> Create(ISecurityProvider<TDomainObject> securityProvider);
+}
 
-    IRepository<TDomainObject, TIdent> Create(TSecurityOperationCode securityOperationCode);
-
-    IRepository<TDomainObject, TIdent> Create(SecurityOperation<TSecurityOperationCode> securityOperation);
-
-    IRepository<TDomainObject, TIdent> Create(BLLSecurityMode securityMode);
-
-    /// <summary>
-    /// Create new Repository without security filters
-    /// </summary>
-    IRepository<TDomainObject, TIdent> Create();
+[SuppressMessage("SonarQube", "S4023", Justification = "Interface to simplify working with Repository")]
+public interface IRepositoryFactory<TDomainObject, TSecurityOperationCode> : IRepositoryFactory<TDomainObject>, ITemplateGenericRepositoryFactory<IRepository<TDomainObject>, TDomainObject, Guid, TSecurityOperationCode>
+    where TSecurityOperationCode : struct, Enum
+{
 }

@@ -11,7 +11,7 @@ using NHibernate.Linq;
 namespace Framework.Configurator.Handlers;
 
 public record DownloadPermissionTemplateHandler
-    (IAuthorizationRepositoryFactory<EntityType> RepositoryFactory) : IDownloadPermissionTemplateHandler
+    (IRepositoryFactory<EntityType> RepositoryFactory) : IDownloadPermissionTemplateHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {

@@ -4,16 +4,18 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.Repository;
 
-public class RepositoryFactory<TDomainObject, TIdent, TSecurityOperationCode> : IRepositoryFactory<TDomainObject, TIdent,
-        TSecurityOperationCode>
+public class TemplateRepositoryFactory<TRepository, TTRepositoryImpl, TDomainObject, TIdent, TSecurityOperationCode> :
+    ITemplateGenericRepositoryFactory<TRepository, TDomainObject, TIdent, TSecurityOperationCode>
         where TDomainObject : class
         where TSecurityOperationCode : struct, Enum
+        where TRepository : IGenericRepository<TDomainObject, TIdent>
+        where TTRepositoryImpl : TRepository
 {
     private readonly IServiceProvider serviceProvider;
 
     private readonly IDomainSecurityService<TDomainObject, TSecurityOperationCode> domainSecurityService;
 
-    public RepositoryFactory(
+    public TemplateRepositoryFactory(
             IServiceProvider serviceProvider,
             INotImplementedDomainSecurityServiceContainer notImplementedDomainSecurityServiceContainer,
             IDomainSecurityService<TDomainObject, TSecurityOperationCode>? domainSecurityService = null)
@@ -22,18 +24,18 @@ public class RepositoryFactory<TDomainObject, TIdent, TSecurityOperationCode> : 
         this.domainSecurityService = domainSecurityService ?? notImplementedDomainSecurityServiceContainer.GetNotImplementedDomainSecurityService<TDomainObject, TSecurityOperationCode>();
     }
 
-    public IRepository<TDomainObject, TIdent> Create(ISecurityProvider<TDomainObject> securityProvider) =>
-            ActivatorUtilities.CreateInstance<Repository<TDomainObject, TIdent>>(this.serviceProvider, securityProvider);
+    public TRepository Create(ISecurityProvider<TDomainObject> securityProvider) =>
+            ActivatorUtilities.CreateInstance<TTRepositoryImpl>(this.serviceProvider, securityProvider);
 
-    public IRepository<TDomainObject, TIdent> Create(TSecurityOperationCode securityOperationCode) =>
+    public TRepository Create(TSecurityOperationCode securityOperationCode) =>
             this.Create(this.domainSecurityService.GetSecurityProvider(securityOperationCode));
 
-    public IRepository<TDomainObject, TIdent> Create(SecurityOperation<TSecurityOperationCode> securityOperation) =>
+    public TRepository Create(SecurityOperation<TSecurityOperationCode> securityOperation) =>
             this.Create(this.domainSecurityService.GetSecurityProvider(securityOperation));
 
-    public IRepository<TDomainObject, TIdent> Create(BLLSecurityMode securityMode) =>
+    public TRepository Create(BLLSecurityMode securityMode) =>
             this.Create(this.domainSecurityService.GetSecurityProvider(securityMode));
 
-    public IRepository<TDomainObject, TIdent> Create() =>
+    public TRepository Create() =>
             this.Create(this.domainSecurityService.GetSecurityProvider(BLLSecurityMode.Disabled));
 }

@@ -16,14 +16,14 @@ namespace SampleSystem.WebApiCore.Controllers.Main;
 [ApiController]
 public class EmployeeAsyncController : ControllerBase
 {
-    private readonly IRepositoryFactory<Employee, Guid, SampleSystemSecurityOperationCode> employeeRepositoryFactory;
+    private readonly IRepositoryFactory<Employee> employeeRepositoryFactory;
 
     private readonly IUserAuthenticationService userAuthenticationService;
 
     private readonly ISampleSystemDTOMappingService mappingService;
 
     public EmployeeAsyncController(
-            IRepositoryFactory<Employee, Guid, SampleSystemSecurityOperationCode> employeeRepositoryFactory,
+            IRepositoryFactory<Employee> employeeRepositoryFactory,
             IUserAuthenticationService userAuthenticationService,
             ISampleSystemDTOMappingService mappingService)
     {
@@ -47,5 +47,16 @@ public class EmployeeAsyncController : ControllerBase
                               .GetEnumerableAsync(cancellationToken);
 
         return employees.Single().ToSimpleDTO(this.mappingService);
+    }
+
+    private Employee Yoba (IRepositoryFactory<Employee> rr)
+    {
+        var xx = rr.Create();
+
+        return xx.Load(Guid.Empty);
+    }
+    private Employee Yoba2(IRepository<Employee> xx)
+    {
+        return xx.Load(Guid.Empty);
     }
 }

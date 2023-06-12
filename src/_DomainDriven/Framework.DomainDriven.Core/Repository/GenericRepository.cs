@@ -9,7 +9,7 @@ using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.Repository;
 
-public class Repository<TDomainObject, TIdent> : IRepository<TDomainObject, TIdent>
+public class GenericRepository<TDomainObject, TIdent> : IGenericRepository<TDomainObject, TIdent>
         where TDomainObject : class
 {
     private readonly ISecurityProvider<TDomainObject> securityProvider;
@@ -18,7 +18,7 @@ public class Repository<TDomainObject, TIdent> : IRepository<TDomainObject, TIde
 
     private readonly ISpecificationEvaluator specificationEvaluator;
 
-    public Repository(
+    public GenericRepository(
             ISecurityProvider<TDomainObject> securityProvider,
             IAsyncDal<TDomainObject, TIdent> dal,
             ISpecificationEvaluator specificationEvaluator)

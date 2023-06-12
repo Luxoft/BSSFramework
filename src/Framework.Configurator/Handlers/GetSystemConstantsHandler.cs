@@ -1,7 +1,7 @@
-﻿using Framework.Configuration.BLL.Core.Context;
-using Framework.Configuration.Domain;
+﻿using Framework.Configuration.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
+using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
@@ -10,9 +10,9 @@ namespace Framework.Configurator.Handlers;
 
 public class GetSystemConstantsHandler : BaseReadHandler, IGetSystemConstantsHandler
 {
-    private readonly IConfigurationRepositoryFactory<SystemConstant> systemConstantRepositoryFactory;
+    private readonly IRepositoryFactory<SystemConstant> systemConstantRepositoryFactory;
 
-    public GetSystemConstantsHandler(IConfigurationRepositoryFactory<SystemConstant> systemConstantRepositoryFactory) =>
+    public GetSystemConstantsHandler(IRepositoryFactory<SystemConstant> systemConstantRepositoryFactory) =>
         this.systemConstantRepositoryFactory = systemConstantRepositoryFactory;
 
     protected override object GetData(HttpContext context) =>

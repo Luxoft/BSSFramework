@@ -12,12 +12,12 @@ using NHibernate.Linq;
 namespace Framework.Configurator.Handlers;
 
 public record UpdatePermissionsHandler(
-        IRepositoryFactory<Principal> PrincipalRepositoryFactory,
-        IRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
-        IRepositoryFactory<Permission> PermissionRepositoryFactory,
-        IRepositoryFactory<PermissionFilterItem> PermissionFilterItemRepositoryFactory,
-        IRepositoryFactory<PermissionFilterEntity> PermissionFilterEntityRepositoryFactory,
-        IRepositoryFactory<EntityType> EntityTypeRepositoryFactory,
+        IDefaultRepositoryFactory<Principal> PrincipalRepositoryFactory,
+        IDefaultRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
+        IDefaultRepositoryFactory<Permission> PermissionRepositoryFactory,
+        IDefaultRepositoryFactory<PermissionFilterItem> PermissionFilterItemRepositoryFactory,
+        IDefaultRepositoryFactory<PermissionFilterEntity> PermissionFilterEntityRepositoryFactory,
+        IDefaultRepositoryFactory<EntityType> EntityTypeRepositoryFactory,
         IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IUpdatePermissionsHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)

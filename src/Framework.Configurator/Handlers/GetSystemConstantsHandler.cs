@@ -10,9 +10,9 @@ namespace Framework.Configurator.Handlers;
 
 public class GetSystemConstantsHandler : BaseReadHandler, IGetSystemConstantsHandler
 {
-    private readonly IRepositoryFactory<SystemConstant> systemConstantRepositoryFactory;
+    private readonly IDefaultRepositoryFactory<SystemConstant> systemConstantRepositoryFactory;
 
-    public GetSystemConstantsHandler(IRepositoryFactory<SystemConstant> systemConstantRepositoryFactory) =>
+    public GetSystemConstantsHandler(IDefaultRepositoryFactory<SystemConstant> systemConstantRepositoryFactory) =>
         this.systemConstantRepositoryFactory = systemConstantRepositoryFactory;
 
     protected override object GetData(HttpContext context) =>

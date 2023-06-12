@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-using Framework.Authorization.BLL.Core.Context;
 using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.Core;
+using Framework.DomainDriven.Repository;
 using Framework.Persistent;
 using Framework.SecuritySystem;
 

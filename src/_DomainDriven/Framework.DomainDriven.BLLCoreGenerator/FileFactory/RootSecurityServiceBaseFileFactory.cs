@@ -1,6 +1,7 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom;
+using Framework.DependencyInjection;
 using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -34,17 +35,9 @@ public class RootSecurityServiceBaseFileFactory<TConfiguration> : FileFactory<TC
 
         var addScopedStatements = from domainType in this.Configuration.SecurityServiceDomainTypes
 
-                                  let domainTypeServiceImpl = this.Configuration.GetCodeTypeReference(domainType, FileType.DomainSecurityService)
+                                  from domainTypeRegisterStatement in this.GetDomainTypeRegisterStatements(serviceCollectionParameter.ToVariableReferenceExpression(), domainType)
 
-                                  from domainSecurityServiceType in this.GetDomainSecurityServiceTypes(domainType)
-
-                                  let addScopedMethod = typeof(ServiceCollectionServiceExtensions).ToTypeReferenceExpression()
-                                          .ToMethodReferenceExpression(
-                                                                       nameof(ServiceCollectionServiceExtensions.AddScoped),
-                                                                       domainSecurityServiceType.ToTypeReference(),
-                                                                       domainTypeServiceImpl)
-
-                                  select serviceCollectionParameter.ToVariableReferenceExpression().ToStaticMethodInvokeExpression(addScopedMethod).ToExpressionStatement();
+                                  select domainTypeRegisterStatement;
 
         return new CodeMemberMethod
                {
@@ -54,15 +47,45 @@ public class RootSecurityServiceBaseFileFactory<TConfiguration> : FileFactory<TC
                }.WithStatements(addScopedStatements);
     }
 
-    private IEnumerable<Type> GetDomainSecurityServiceTypes(Type domainType)
+    private IEnumerable<CodeExpressionStatement> GetDomainTypeRegisterStatements(CodeExpression serviceCollectionExpr, Type domainType)
     {
-        yield return typeof(IDomainSecurityService<>).MakeGenericType(domainType);
+        var domainTypeServiceImpl = this.Configuration.GetCodeTypeReference(domainType, FileType.DomainSecurityService);
+
+        var baseDomainSecurityServiceType = typeof(IDomainSecurityService<>).MakeGenericType(domainType);
 
         if (this.Configuration.Environment.SecurityOperationCodeType.IsEnum)
         {
-            yield return typeof(IDomainSecurityService<,>).MakeGenericType(
+            var domainSecurityServiceType = typeof(IDomainSecurityService<,>).MakeGenericType(
                 domainType,
                 this.Configuration.Environment.SecurityOperationCodeType);
+
+            var addScopedMethod = typeof(ServiceCollectionServiceExtensions).ToTypeReferenceExpression()
+                                                                            .ToMethodReferenceExpression(
+                                                                                nameof(ServiceCollectionServiceExtensions.AddScoped),
+                                                                                domainSecurityServiceType.ToTypeReference(),
+                                                                                domainTypeServiceImpl);
+
+
+            var addScopedFromMethod = typeof(ServiceCollectionExtensions).ToTypeReferenceExpression()
+                                                                         .ToMethodReferenceExpression(
+                                                                             nameof(ServiceCollectionExtensions.AddScopedFrom),
+                                                                             baseDomainSecurityServiceType.ToTypeReference(),
+                                                                             domainSecurityServiceType.ToTypeReference());
+
+
+            yield return serviceCollectionExpr.ToStaticMethodInvokeExpression(addScopedMethod).ToExpressionStatement();
+
+            yield return serviceCollectionExpr.ToStaticMethodInvokeExpression(addScopedFromMethod).ToExpressionStatement();
+        }
+        else
+        {
+            var addScopedMethod = typeof(ServiceCollectionServiceExtensions).ToTypeReferenceExpression()
+                                                                            .ToMethodReferenceExpression(
+                                                                                nameof(ServiceCollectionServiceExtensions.AddScoped),
+                                                                                baseDomainSecurityServiceType.ToTypeReference(),
+                                                                                domainTypeServiceImpl);
+
+            yield return serviceCollectionExpr.ToStaticMethodInvokeExpression(addScopedMethod).ToExpressionStatement();
         }
     }
 

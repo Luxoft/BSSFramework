@@ -1,4 +1,6 @@
-﻿using Framework.Core.Services;
+﻿using System.Diagnostics.CodeAnalysis;
+
+using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
@@ -47,16 +49,5 @@ public class EmployeeAsyncController : ControllerBase
                               .GetEnumerableAsync(cancellationToken);
 
         return employees.Single().ToSimpleDTO(this.mappingService);
-    }
-
-    private Employee Yoba (IRepositoryFactory<Employee> rr)
-    {
-        var xx = rr.Create();
-
-        return xx.Load(Guid.Empty);
-    }
-    private Employee Yoba2(IRepository<Employee> xx)
-    {
-        return xx.Load(Guid.Empty);
     }
 }

@@ -2,8 +2,7 @@
 
 namespace Framework.DomainDriven.Repository;
 
-public interface ITemplateGenericRepositoryFactory<out TRepository, TDomainObject, in TIdent>
-    where TRepository : IGenericRepository<TDomainObject, TIdent>
+public interface ITemplateGenericRepositoryFactory<out TRepository, TDomainObject>
 {
     TRepository Create(ISecurityProvider<TDomainObject> securityProvider);
 
@@ -15,9 +14,8 @@ public interface ITemplateGenericRepositoryFactory<out TRepository, TDomainObjec
     TRepository Create();
 }
 
-public interface ITemplateGenericRepositoryFactory<out TRepository, TDomainObject, in TIdent, TSecurityOperationCode> : ITemplateGenericRepositoryFactory<TRepository, TDomainObject, TIdent>
+public interface ITemplateGenericRepositoryFactory<out TRepository, TDomainObject, TSecurityOperationCode> : ITemplateGenericRepositoryFactory<TRepository, TDomainObject>
     where TSecurityOperationCode : struct, Enum
-    where TRepository : IGenericRepository<TDomainObject, TIdent>
 {
     TRepository Create(TSecurityOperationCode securityOperationCode);
 

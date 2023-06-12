@@ -2,8 +2,28 @@
 
 namespace Framework.SecuritySystem;
 
-public class OnlyDisabledDomainSecurityService<TDomainObject, TSecurityOperationCode> : IDomainSecurityService<TDomainObject, TSecurityOperationCode>
-        where TSecurityOperationCode : struct, Enum where TDomainObject : class
+public class OnlyDisabledDomainSecurityService<TDomainObject, TSecurityOperationCode> : OnlyDisabledDomainSecurityService<TDomainObject>, IDomainSecurityService<TDomainObject, TSecurityOperationCode>
+        where TSecurityOperationCode : struct, Enum
+        where TDomainObject : class
+{
+    public OnlyDisabledDomainSecurityService(ILegacyGenericDisabledSecurityProviderFactory legacyGenericDisabledSecurityProviderFactory)
+        :base(legacyGenericDisabledSecurityProviderFactory)
+    {
+    }
+
+    public ISecurityProvider<TDomainObject> GetSecurityProvider(TSecurityOperationCode securityOperationCode)
+    {
+        return this.GetSecurityProviderInternal(securityOperationCode);
+    }
+
+    public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityOperation<TSecurityOperationCode> securityOperation)
+    {
+        return this.GetSecurityProviderInternal(securityOperation.Code);
+    }
+}
+
+public class OnlyDisabledDomainSecurityService<TDomainObject> : IDomainSecurityService<TDomainObject>
+    where TDomainObject : class
 {
     private readonly ILegacyGenericDisabledSecurityProviderFactory legacyGenericDisabledSecurityProviderFactory;
 
@@ -17,17 +37,7 @@ public class OnlyDisabledDomainSecurityService<TDomainObject, TSecurityOperation
         return this.GetSecurityProviderInternal(securityMode);
     }
 
-    public ISecurityProvider<TDomainObject> GetSecurityProvider(TSecurityOperationCode securityOperationCode)
-    {
-        return this.GetSecurityProviderInternal(securityOperationCode);
-    }
-
-    public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityOperation<TSecurityOperationCode> securityOperation)
-    {
-        return this.GetSecurityProviderInternal(securityOperation.Code);
-    }
-
-    public ISecurityProvider<TDomainObject> GetSecurityProviderInternal<TSecurityMode>(TSecurityMode securityMode)
+    protected ISecurityProvider<TDomainObject> GetSecurityProviderInternal<TSecurityMode>(TSecurityMode securityMode)
     {
         if (!securityMode.IsDefault())
         {

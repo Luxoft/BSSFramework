@@ -12,9 +12,15 @@ public class OnlyDisabledDomainSecurityServiceContainer : INotImplementedDomainS
     }
 
     public IDomainSecurityService<TDomainObject, TSecurityOperationCode> GetNotImplementedDomainSecurityService<TDomainObject, TSecurityOperationCode>()
-            where TDomainObject : class
-            where TSecurityOperationCode : struct, Enum
+        where TDomainObject : class
+        where TSecurityOperationCode : struct, Enum
     {
         return ActivatorUtilities.CreateInstance<OnlyDisabledDomainSecurityService<TDomainObject, TSecurityOperationCode>>(this.serviceProvider);
+    }
+
+    public IDomainSecurityService<TDomainObject> GetNotImplementedDomainSecurityService<TDomainObject>()
+        where TDomainObject : class
+    {
+        return ActivatorUtilities.CreateInstance<OnlyDisabledDomainSecurityService<TDomainObject>>(this.serviceProvider);
     }
 }

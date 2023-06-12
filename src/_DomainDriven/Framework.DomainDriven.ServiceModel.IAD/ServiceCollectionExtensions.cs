@@ -30,7 +30,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped(typeof(IDAL<,>), typeof(NHibDal<,>));
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
-        //services.AddScoped(typeof(IRepositoryFactory<,,>), typeof(RepositoryFactory<,,>));
+        services.AddScoped(typeof(IRepositoryFactory<>), typeof(RepositoryFactory<,>));
+        services.AddScoped(typeof(IRepositoryFactory<,>), typeof(RepositoryFactory<,>));
+        services.AddScoped(typeof(IGenericRepositoryFactory<,,>), typeof(GenericRepositoryFactory<,,>));
 
         services.AddSingleton<IExceptionExpander, ExceptionExpander>();
 

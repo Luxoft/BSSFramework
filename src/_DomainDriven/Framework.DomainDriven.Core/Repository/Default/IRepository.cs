@@ -4,11 +4,11 @@ using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.Repository;
 
-public interface IGenericRepository<TDomainObject, in TIdent>
+public interface IRepository<TDomainObject>
 {
     Task SaveAsync(TDomainObject domainObject, CancellationToken cancellationToken);
 
-    Task InsertAsync(TDomainObject domainObject, TIdent id, CancellationToken cancellationToken);
+    Task InsertAsync(TDomainObject domainObject, Guid id, CancellationToken cancellationToken);
 
     Task RemoveAsync(TDomainObject domainObject, CancellationToken cancellationToken);
 
@@ -18,13 +18,14 @@ public interface IGenericRepository<TDomainObject, in TIdent>
     /// Load actually returns a proxy object and doesn't need to access the database right when you issue that Load call.
     /// https://www.tutorialspoint.com/nhibernate/nhibernate_load_get.htm
     /// </summary>
-    TDomainObject Load(TIdent id);
+
+    TDomainObject Load(Guid id);
 
     /// <summary>
     /// Load actually returns a proxy object and doesn't need to access the database right when you issue that Load call.
     /// https://www.tutorialspoint.com/nhibernate/nhibernate_load_get.htm
     /// </summary>
-    Task<TDomainObject> LoadAsync(TIdent id, CancellationToken cancellationToken = default);
+    Task<TDomainObject> LoadAsync(Guid id, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get Queryable by Specification https://github.com/NikitaEgorov/nuSpec

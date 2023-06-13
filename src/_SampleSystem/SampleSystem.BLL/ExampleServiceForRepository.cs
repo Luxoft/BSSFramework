@@ -9,13 +9,13 @@ namespace SampleSystem.BLL;
 
 public class ExampleServiceForRepository : IExampleServiceForRepository
 {
-    private readonly IRepository<Employee, Guid> employeeRepository;
+    private readonly IRepository<Employee> employeeRepository;
 
-    private readonly IRepository<BusinessUnit, Guid> businessUnitRepository;
+    private readonly IRepository<BusinessUnit> businessUnitRepository;
 
     public ExampleServiceForRepository(
-            IRepositoryFactory<Employee, Guid, SampleSystemSecurityOperationCode> employeeRepositoryFactory,
-            IRepositoryFactory<BusinessUnit, Guid, SampleSystemSecurityOperationCode> businessUnitRepository)
+            IRepositoryFactory<Employee> employeeRepositoryFactory,
+            IRepositoryFactory<BusinessUnit, SampleSystemSecurityOperationCode> businessUnitRepository)
     {
         this.employeeRepository = employeeRepositoryFactory.Create(BLLSecurityMode.Disabled);
 

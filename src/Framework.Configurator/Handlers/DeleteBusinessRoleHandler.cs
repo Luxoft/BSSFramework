@@ -1,6 +1,6 @@
-﻿using Framework.Authorization.BLL.Core.Context;
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
+using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
@@ -11,7 +11,7 @@ namespace Framework.Configurator.Handlers;
 
 public record DeleteBusinessRoleHandler
         (
-        IAuthorizationRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
+        IRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
         IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IDeleteBusinessRoleHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)

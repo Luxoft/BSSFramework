@@ -1,8 +1,8 @@
 ﻿using ClosedXML.Excel;
 
-using Framework.Authorization.BLL.Core.Context;
 using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
+using Framework.DomainDriven.Repository;
 
 using Microsoft.AspNetCore.Http;
 
@@ -11,7 +11,7 @@ using NHibernate.Linq;
 namespace Framework.Configurator.Handlers;
 
 public record DownloadPermissionTemplateHandler
-    (IAuthorizationRepositoryFactory<EntityType> RepositoryFactory) : IDownloadPermissionTemplateHandler
+    (IRepositoryFactory<EntityType> RepositoryFactory) : IDownloadPermissionTemplateHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {

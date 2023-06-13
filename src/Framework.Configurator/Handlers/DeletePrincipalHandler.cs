@@ -1,6 +1,6 @@
-﻿using Framework.Authorization.BLL.Core.Context;
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
+using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
@@ -10,7 +10,7 @@ using NHibernate.Linq;
 namespace Framework.Configurator.Handlers;
 
 public record DeletePrincipalHandler(
-        IAuthorizationRepositoryFactory<Principal> PrincipalRepositoryFactory,
+        IRepositoryFactory<Principal> PrincipalRepositoryFactory,
         IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IDeletePrincipalHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)

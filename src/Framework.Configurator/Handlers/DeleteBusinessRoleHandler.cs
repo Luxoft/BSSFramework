@@ -11,7 +11,7 @@ namespace Framework.Configurator.Handlers;
 
 public record DeleteBusinessRoleHandler
         (
-        IDefaultRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
+        IRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
         IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IDeleteBusinessRoleHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)

@@ -4,18 +4,18 @@ using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.Repository;
 
-public class DefaultRepositoryFactory<TDomainObject, TSecurityOperationCode> : TemplateRepositoryFactory<
+public class RepositoryFactory<TDomainObject, TSecurityOperationCode> : TemplateRepositoryFactory<
                                                                                IRepository<TDomainObject>,
                                                                                Repository<TDomainObject>,
                                                                                TDomainObject,
                                                                                TSecurityOperationCode>,
 
-                                                                               IDefaultRepositoryFactory<TDomainObject, TSecurityOperationCode>
+                                                                               IRepositoryFactory<TDomainObject, TSecurityOperationCode>
 
     where TDomainObject : class
     where TSecurityOperationCode : struct, Enum
 {
-    public DefaultRepositoryFactory(
+    public RepositoryFactory(
         IServiceProvider serviceProvider,
         INotImplementedDomainSecurityServiceContainer notImplementedDomainSecurityServiceContainer,
         [CanBeNull] IDomainSecurityService<TDomainObject, TSecurityOperationCode> domainSecurityService = null)
@@ -24,15 +24,15 @@ public class DefaultRepositoryFactory<TDomainObject, TSecurityOperationCode> : T
     }
 }
 
-public class DefaultRepositoryFactory<TDomainObject> : TemplateRepositoryFactory<
+public class RepositoryFactory<TDomainObject> : TemplateRepositoryFactory<
                                                        IRepository<TDomainObject>,
                                                        Repository<TDomainObject>,
                                                        TDomainObject>,
-                                                       IDefaultRepositoryFactory<TDomainObject>
+                                                       IRepositoryFactory<TDomainObject>
 
     where TDomainObject : class
 {
-    public DefaultRepositoryFactory(
+    public RepositoryFactory(
         IServiceProvider serviceProvider,
         INotImplementedDomainSecurityServiceContainer notImplementedDomainSecurityServiceContainer,
         [CanBeNull] IDomainSecurityService<TDomainObject> domainSecurityService = null)

@@ -10,7 +10,7 @@ using NHibernate.Linq;
 namespace Framework.Configurator.Handlers;
 
 public record UpdatePrincipalHandler(
-        IDefaultRepositoryFactory<Principal> PrincipalRepositoryFactory,
+        IRepositoryFactory<Principal> PrincipalRepositoryFactory,
         IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IUpdatePrincipalHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)

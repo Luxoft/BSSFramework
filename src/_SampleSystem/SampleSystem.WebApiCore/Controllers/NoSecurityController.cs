@@ -16,9 +16,9 @@ namespace SampleSystem.WebApiCore.Controllers.Main;
 [ApiController]
 public class NoSecurityController : ControllerBase
 {
-    private readonly IDefaultRepositoryFactory<NoSecurityObject> repositoryFactory;
+    private readonly IRepositoryFactory<NoSecurityObject> repositoryFactory;
 
-    public NoSecurityController(IDefaultRepositoryFactory<NoSecurityObject> repositoryFactory)
+    public NoSecurityController(IRepositoryFactory<NoSecurityObject> repositoryFactory)
     {
         this.repositoryFactory = repositoryFactory;
     }

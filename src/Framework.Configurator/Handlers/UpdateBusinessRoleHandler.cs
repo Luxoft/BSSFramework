@@ -14,8 +14,8 @@ using NHibernate.Linq;
 namespace Framework.Configurator.Handlers;
 
 public record UpdateBusinessRoleHandler(
-        IDefaultRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
-        IDefaultRepositoryFactory<Operation> OperationRepositoryFactory,
+        IRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
+        IRepositoryFactory<Operation> OperationRepositoryFactory,
         IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IUpdateBusinessRoleHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)

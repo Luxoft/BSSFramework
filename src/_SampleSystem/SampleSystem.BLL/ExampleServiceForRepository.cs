@@ -14,8 +14,8 @@ public class ExampleServiceForRepository : IExampleServiceForRepository
     private readonly IRepository<BusinessUnit> businessUnitRepository;
 
     public ExampleServiceForRepository(
-            IDefaultRepositoryFactory<Employee> employeeRepositoryFactory,
-            IDefaultRepositoryFactory<BusinessUnit, SampleSystemSecurityOperationCode> businessUnitRepository)
+            IRepositoryFactory<Employee> employeeRepositoryFactory,
+            IRepositoryFactory<BusinessUnit, SampleSystemSecurityOperationCode> businessUnitRepository)
     {
         this.employeeRepository = employeeRepositoryFactory.Create(BLLSecurityMode.Disabled);
 

@@ -18,14 +18,14 @@ namespace SampleSystem.WebApiCore.Controllers.Main;
 [ApiController]
 public class EmployeeAsyncController : ControllerBase
 {
-    private readonly IDefaultRepositoryFactory<Employee> employeeRepositoryFactory;
+    private readonly IRepositoryFactory<Employee> employeeRepositoryFactory;
 
     private readonly IUserAuthenticationService userAuthenticationService;
 
     private readonly ISampleSystemDTOMappingService mappingService;
 
     public EmployeeAsyncController(
-            IDefaultRepositoryFactory<Employee> employeeRepositoryFactory,
+            IRepositoryFactory<Employee> employeeRepositoryFactory,
             IUserAuthenticationService userAuthenticationService,
             ISampleSystemDTOMappingService mappingService)
     {

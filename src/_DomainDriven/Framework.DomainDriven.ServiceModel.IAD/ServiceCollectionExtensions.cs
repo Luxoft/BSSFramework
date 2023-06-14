@@ -1,8 +1,6 @@
 ﻿using Framework.Authorization.BLL;
-using Framework.Authorization.BLL.Core.Context;
 using Framework.Authorization.Domain;
 using Framework.Configuration.BLL;
-using Framework.Configuration.BLL.Core.Context;
 using Framework.Configuration.BLL.Notification;
 using Framework.Core;
 using Framework.DependencyInjection;
@@ -31,7 +29,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped(typeof(IDAL<,>), typeof(NHibDal<,>));
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
-        services.AddScoped(typeof(IRepositoryFactory<,,>), typeof(RepositoryFactory<,,>));
+        services.AddScoped(typeof(IRepositoryFactory<>), typeof(RepositoryFactory<>));
+        services.AddScoped(typeof(IRepositoryFactory<,>), typeof(RepositoryFactory<,>));
+        services.AddScoped(typeof(IGenericRepositoryFactory<,,>), typeof(GenericRepositoryFactory<,,>));
 
         services.AddSingleton<IExceptionExpander, ExceptionExpander>();
 
@@ -109,8 +109,6 @@ public static class ServiceCollectionExtensions
                .AddScoped<ISecurityExpressionBuilderFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
                .AddScoped<IAccessDeniedExceptionService<Framework.Authorization.Domain.PersistentDomainObjectBase>, AccessDeniedExceptionService<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
 
-               .AddScoped(typeof(IAuthorizationRepositoryFactory<>), typeof(AuthorizationRepositoryFactory<>))
-
                .Self(AuthorizationSecurityServiceBase.Register)
                .Self(AuthorizationBLLFactoryContainer.RegisterBLLFactory);
     }
@@ -142,8 +140,6 @@ public static class ServiceCollectionExtensions
                .AddScoped<IQueryableSource<Framework.Configuration.Domain.PersistentDomainObjectBase>, BLLQueryableSource<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectBase, Guid>>()
                .AddScoped<ISecurityExpressionBuilderFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>()
                .AddScoped<IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase>, AccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>()
-
-               .AddScoped(typeof(IConfigurationRepositoryFactory<>), typeof(ConfigurationRepositoryFactory<>))
 
                .Self(ConfigurationSecurityServiceBase.Register)
                .Self(ConfigurationBLLFactoryContainer.RegisterBLLFactory);

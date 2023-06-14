@@ -1,6 +1,6 @@
-﻿using Framework.Authorization.BLL.Core.Context;
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
+using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 namespace Framework.Configurator.Handlers;
 
 public record CreatePrincipalHandler(
-        IAuthorizationRepositoryFactory<Principal> AuthorizationRepositoryFactory,
+        IRepositoryFactory<Principal> AuthorizationRepositoryFactory,
         IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, ICreatePrincipalHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)

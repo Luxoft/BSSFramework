@@ -4,11 +4,11 @@ using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.Repository;
 
-public interface IRepository<TDomainObject, in TIdent>
+public interface IRepository<TDomainObject>
 {
     Task SaveAsync(TDomainObject domainObject, CancellationToken cancellationToken);
 
-    Task InsertAsync(TDomainObject domainObject, TIdent id, CancellationToken cancellationToken);
+    Task InsertAsync(TDomainObject domainObject, Guid id, CancellationToken cancellationToken);
 
     Task RemoveAsync(TDomainObject domainObject, CancellationToken cancellationToken);
 
@@ -18,13 +18,14 @@ public interface IRepository<TDomainObject, in TIdent>
     /// Load actually returns a proxy object and doesn't need to access the database right when you issue that Load call.
     /// https://www.tutorialspoint.com/nhibernate/nhibernate_load_get.htm
     /// </summary>
-    TDomainObject Load(TIdent id);
+
+    TDomainObject Load(Guid id);
 
     /// <summary>
     /// Load actually returns a proxy object and doesn't need to access the database right when you issue that Load call.
     /// https://www.tutorialspoint.com/nhibernate/nhibernate_load_get.htm
     /// </summary>
-    Task<TDomainObject> LoadAsync(TIdent id, CancellationToken cancellationToken = default);
+    Task<TDomainObject> LoadAsync(Guid id, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get Queryable by Specification https://github.com/NikitaEgorov/nuSpec
@@ -35,36 +36,36 @@ public interface IRepository<TDomainObject, in TIdent>
     /// Get Single or default by Specification https://github.com/NikitaEgorov/nuSpec
     /// </summary>
     Task<TProjection?> SingleOrDefaultAsync<TProjection>(
-            Specification<TDomainObject, TProjection> specification,
-            CancellationToken cancellationToken);
+        Specification<TDomainObject, TProjection> specification,
+        CancellationToken cancellationToken);
 
     /// <summary>
     /// Get Single by Specification https://github.com/NikitaEgorov/nuSpec
     /// </summary>
     Task<TProjection> SingleAsync<TProjection>(
-            Specification<TDomainObject, TProjection> specification,
-            CancellationToken cancellationToken);
+        Specification<TDomainObject, TProjection> specification,
+        CancellationToken cancellationToken);
 
     /// <summary>
     /// Get First or default by Specification https://github.com/NikitaEgorov/nuSpec
     /// </summary>
     Task<TProjection?> FirstOrDefaultAsync<TProjection>(
-            Specification<TDomainObject, TProjection> specification,
-            CancellationToken cancellationToken);
+        Specification<TDomainObject, TProjection> specification,
+        CancellationToken cancellationToken);
 
     /// <summary>
     /// Get First by Specification https://github.com/NikitaEgorov/nuSpec
     /// </summary>
     Task<TProjection> FirstAsync<TProjection>(
-            Specification<TDomainObject, TProjection> specification,
-            CancellationToken cancellationToken);
+        Specification<TDomainObject, TProjection> specification,
+        CancellationToken cancellationToken);
 
     /// <summary>
     /// Get Count by Specification https://github.com/NikitaEgorov/nuSpec
     /// </summary>
     Task<int> CountAsync<TProjection>(
-            Specification<TDomainObject, TProjection> specification,
-            CancellationToken cancellationToken);
+        Specification<TDomainObject, TProjection> specification,
+        CancellationToken cancellationToken);
 
     /// <summary>
     /// Get Future query by Specification https://github.com/NikitaEgorov/nuSpec
@@ -85,6 +86,6 @@ public interface IRepository<TDomainObject, in TIdent>
     /// Get list by Specification https://github.com/NikitaEgorov/nuSpec
     /// </summary>
     Task<List<TProjection>> GetListAsync<TProjection>(
-            Specification<TDomainObject, TProjection> specification,
-            CancellationToken cancellationToken);
+        Specification<TDomainObject, TProjection> specification,
+        CancellationToken cancellationToken);
 }

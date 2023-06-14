@@ -1,7 +1,7 @@
-﻿using Framework.Authorization.BLL.Core.Context;
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.Core;
+using Framework.DomainDriven.Repository;
 using Framework.Persistent;
 using Framework.SecuritySystem;
 
@@ -12,12 +12,12 @@ using NHibernate.Linq;
 namespace Framework.Configurator.Handlers;
 
 public record UpdatePermissionsHandler(
-        IAuthorizationRepositoryFactory<Principal> PrincipalRepositoryFactory,
-        IAuthorizationRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
-        IAuthorizationRepositoryFactory<Permission> PermissionRepositoryFactory,
-        IAuthorizationRepositoryFactory<PermissionFilterItem> PermissionFilterItemRepositoryFactory,
-        IAuthorizationRepositoryFactory<PermissionFilterEntity> PermissionFilterEntityRepositoryFactory,
-        IAuthorizationRepositoryFactory<EntityType> EntityTypeRepositoryFactory,
+        IRepositoryFactory<Principal> PrincipalRepositoryFactory,
+        IRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
+        IRepositoryFactory<Permission> PermissionRepositoryFactory,
+        IRepositoryFactory<PermissionFilterItem> PermissionFilterItemRepositoryFactory,
+        IRepositoryFactory<PermissionFilterEntity> PermissionFilterEntityRepositoryFactory,
+        IRepositoryFactory<EntityType> EntityTypeRepositoryFactory,
         IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IUpdatePermissionsHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)

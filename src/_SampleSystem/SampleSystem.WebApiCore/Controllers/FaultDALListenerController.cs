@@ -16,9 +16,9 @@ public class FaultDALListenerController : ControllerBase
 {
     private readonly FaultDALListener listener;
 
-    private readonly IRepository<NoSecurityObject, Guid> repository;
+    private readonly IRepository<NoSecurityObject> repository;
 
-    public FaultDALListenerController(FaultDALListener listener, IRepositoryFactory<NoSecurityObject, Guid, SampleSystemSecurityOperationCode> repositoryFactory)
+    public FaultDALListenerController(FaultDALListener listener, IRepositoryFactory<NoSecurityObject> repositoryFactory)
     {
         this.listener = listener;
         this.repository = repositoryFactory.Create(BLLSecurityMode.Disabled);
@@ -26,10 +26,12 @@ public class FaultDALListenerController : ControllerBase
 
     [HttpPost(nameof(TestFault))]
     [DBSessionMode(DBSessionMode.Write)]
-    public async Task TestFault(CancellationToken cancellationToken)
+    public async Task<int> TestFault(bool raiseError, CancellationToken cancellationToken)
     {
         await this.repository.SaveAsync(new NoSecurityObject(), cancellationToken);
 
-        this.listener.Raise = true;
+        this.listener.Raise = raiseError;
+
+        return 123;
     }
 }

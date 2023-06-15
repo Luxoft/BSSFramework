@@ -18,7 +18,7 @@
     <ProjectReference Include="..\Framework.DomainDriven.Serialization\Framework.DomainDriven.Serialization.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="NHibernate" Version="5.4.1" />
+    <PackageReference Include="NHibernate" Version="5.4.2" />
     <PackageReference Include="nuSpec.Abstraction" Version="1.3.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
   </ItemGroup>

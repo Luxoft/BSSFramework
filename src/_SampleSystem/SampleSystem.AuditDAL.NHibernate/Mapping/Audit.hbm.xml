@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<hibernate-mapping assembly="SampleSystem.AuditDomain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" auto-import="false" schema="[appAudit]" xmlns="urn:nhibernate-mapping-2.2">
+<hibernate-mapping assembly="SampleSystem.AuditDomain" auto-import="false" schema="[appAudit]" xmlns="urn:nhibernate-mapping-2.2">
 
   <class name="SampleSystem.AuditDomain.SampleSystemAuditRevisionEntity" table="[AuditRevisionEntity]">
     <id name="Id" column="[id]" access="field.camelcase" />

@@ -3,6 +3,7 @@
 using Automation.ServiceEnvironment.Services;
 
 using Framework.Core;
+using Framework.DomainDriven;
 using Framework.DomainDriven.WebApiNetCore;
 
 using JetBrains.Annotations;
@@ -67,7 +68,7 @@ public class ControllerEvaluator<TController>
 
         await new WebApiInvoker(c, context => InvokeController(context, func))
               .WithMiddleware(next => new ImpersonateMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, this.customPrincipalName))
-              .WithMiddleware(next => new TryProcessDbSessionMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, httpContext.RequestServices.GetRequiredService<IWebApiDBSessionModeResolver>()))
+              .WithMiddleware(next => new TryProcessDbSessionMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, httpContext.RequestServices.GetRequiredService<IWebApiDBSessionModeResolver>(), httpContext.RequestServices.GetRequiredService<IDBSessionManager>()))
               .WithMiddleware(next => new InitCurrentMethodMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, invokeExpr))
               .WithMiddleware(next => new WebApiExceptionExpanderMiddleware(next), (middleware, httpContext) => middleware.Invoke(httpContext, httpContext.RequestServices.GetRequiredService<IWebApiExceptionExpander>()))
               .Invoke();
@@ -132,9 +133,18 @@ public class ControllerEvaluator<TController>
                                           .TryGetStartMethodInfo()
                                           .FromMaybe("Current controller method can't be extracted");
 
-            context.RequestServices.GetRequiredService<TestWebApiCurrentMethodResolver>().SetCurrentMethod(currentMethod);
+            var testWebApiCurrentMethodResolver = context.RequestServices.GetRequiredService<TestWebApiCurrentMethodResolver>();
 
-            await this.next(context);
+            testWebApiCurrentMethodResolver.SetCurrentMethod(currentMethod);
+
+            try
+            {
+                await this.next(context);
+            }
+            finally
+            {
+                testWebApiCurrentMethodResolver.ClearCurrentMethod();
+            }
         }
     }
 

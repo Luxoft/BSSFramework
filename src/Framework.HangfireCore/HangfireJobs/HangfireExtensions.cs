@@ -1,4 +1,5 @@
 ﻿using Framework.HangfireCore;
+using Framework.HangfireCore.JobServices;
 
 using Hangfire;
 using Hangfire.Dashboard;
@@ -45,6 +46,10 @@ public static class HangfireExtensions
             });
 
         services.AddHangfireServer();
+
+        services.AddScoped<IScopedJobExecutor, ScopedJobExecutor>();
+        services.AddSingleton(typeof(IServiceJobEvaluator<>), typeof(ServiceJobEvaluator<>));
+        services.AddSingleton<IServiceJobEvaluator, ServiceJobEvaluator>();
 
         return services;
     }

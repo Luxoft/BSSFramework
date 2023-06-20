@@ -50,6 +50,7 @@ public static class HangfireExtensions
         services.AddScoped<IScopedJobExecutor, ScopedJobExecutor>();
         services.AddSingleton(typeof(IServiceJobEvaluator<>), typeof(ServiceJobEvaluator<>));
         services.AddSingleton<IServiceJobEvaluator, ServiceJobEvaluator>();
+        services.AddSingleton<IHangfireCredentialSettings, HangfireCredentialSettings>();
 
         return services;
     }

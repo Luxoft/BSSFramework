@@ -2,8 +2,6 @@
 
 using Framework.DomainDriven.WebApiNetCore;
 
-using Microsoft.SqlServer.Management.Dmf;
-
 namespace Automation.ServiceEnvironment;
 
 public class TestWebApiCurrentMethodResolver : IWebApiCurrentMethodResolver
@@ -19,7 +17,7 @@ public class TestWebApiCurrentMethodResolver : IWebApiCurrentMethodResolver
     {
         if (this.currentMethod != null)
         {
-            throw new InvalidInOperatorException();
+            throw new InvalidOperationException();
         }
 
         this.currentMethod = methodInfo;
@@ -29,7 +27,7 @@ public class TestWebApiCurrentMethodResolver : IWebApiCurrentMethodResolver
     {
         if (this.currentMethod == null)
         {
-            throw new InvalidInOperatorException();
+            throw new InvalidOperationException();
         }
 
         this.currentMethod = null;

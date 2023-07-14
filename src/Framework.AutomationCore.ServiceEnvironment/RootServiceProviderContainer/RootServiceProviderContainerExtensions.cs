@@ -30,7 +30,7 @@ public static class RootServiceProviderContainerExtensions
 
     public static void SetCurrentDateTime(this IRootServiceProviderContainer rootServiceProviderContainer, DateTime newDateTime)
     {
-        rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IntegrationTestDateTimeService>().SetCurrentDateTime(newDateTime);
+        rootServiceProviderContainer.RootServiceProvider.GetRequiredService<IIntegrationTestDateTimeService>().SetCurrentDateTime(newDateTime);
     }
 
     public static TResult EvaluateController<TController, TResult>(

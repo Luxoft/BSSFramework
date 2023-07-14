@@ -15,7 +15,7 @@ namespace SampleSystem.IntegrationTests.Support.Utils;
 
 public class SampleSystemTestDatabaseGenerator : TestDatabaseGenerator
 {
-    protected override IEnumerable<string> TestServers => new List<string> { "." };
+    public override IEnumerable<string> TestServers => new List<string> { "." };
 
     private readonly IServiceProvider serviceProvider;
 

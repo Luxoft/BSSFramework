@@ -40,18 +40,16 @@ public static class ServiceProviderExtensions
         return services;
     }
 
-    public static IServiceCollection ApplyIntegrationTestServices(this IServiceCollection services)
-    {
-        return services.AddSingleton<IntegrationTestUserAuthenticationService>()
-                       .ReplaceSingletonFrom<IAuditRevisionUserAuthenticationService, IntegrationTestUserAuthenticationService>()
-                       .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IntegrationTestUserAuthenticationService>()
+    public static IServiceCollection ApplyIntegrationTestServices(this IServiceCollection services) =>
+        services.AddSingleton<IIntegrationTestUserAuthenticationService, IntegrationTestUserAuthenticationService>()
+                .ReplaceSingletonFrom<IAuditRevisionUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
+                .ReplaceSingletonFrom<IDefaultUserAuthenticationService, IIntegrationTestUserAuthenticationService>()
 
-                       .AddSingleton<IntegrationTestDateTimeService>()
-                       .ReplaceSingletonFrom<IDateTimeService, IntegrationTestDateTimeService>()
+                .AddSingleton<IIntegrationTestDateTimeService, IntegrationTestDateTimeService>()
+                .ReplaceSingletonFrom<IDateTimeService, IIntegrationTestDateTimeService>()
 
-                       .AddScoped<TestWebApiCurrentMethodResolver>()
-                       .ReplaceScopedFrom<IWebApiCurrentMethodResolver, TestWebApiCurrentMethodResolver>()
+                .AddScoped<TestWebApiCurrentMethodResolver>()
+                .ReplaceScopedFrom<IWebApiCurrentMethodResolver, TestWebApiCurrentMethodResolver>()
 
-                       .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>();;
-    }
+                .ReplaceSingleton<IWebApiExceptionExpander, TestWebApiExceptionExpander>();
 }

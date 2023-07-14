@@ -6,13 +6,15 @@ namespace Automation.ServiceEnvironment.Services;
 /// <summary>
 /// Реализация интерфейса <see cref="IDateTimeService"/> для интеграционных тестов
 /// </summary>
-public class IntegrationTestDateTimeService : IDateTimeService
+public class IntegrationTestDateTimeService : IIntegrationTestDateTimeService
 {
-    private Func<DateTime> GetNow;
+    private Func<DateTime> getNow;
 
-    public IntegrationTestDateTimeService() => this.GetNow = () => DateTime.Now;
+    public IntegrationTestDateTimeService() => this.Reset();
 
-    public DateTime Now => this.GetNow();
+    public void Reset() => this.getNow = () => DateTime.Now;
+
+    public DateTime Now => this.getNow();
 
     public Period CurrentFinancialYear => this.Now.ToFinancialYearPeriod();
 
@@ -32,6 +34,6 @@ public class IntegrationTestDateTimeService : IDateTimeService
     {
         var dateTimeDelta = dateTime - DateTime.Now;
 
-        this.GetNow = () => DateTime.Now + dateTimeDelta;
+        this.getNow = () => DateTime.Now + dateTimeDelta;
     }
 }

@@ -28,7 +28,7 @@ public abstract class AuthHelperBase<TBLLContext> : RootServiceProviderContainer
 
     public void LoginAs(string principalName = null)
     {
-        this.RootServiceProvider.GetRequiredService<IntegrationTestUserAuthenticationService>().CustomUserName = principalName;
+        this.RootServiceProvider.GetRequiredService<IIntegrationTestUserAuthenticationService>().SetUserName(principalName);
     }
 
     public PrincipalIdentityDTO SavePrincipal(string name, bool active, Guid? externalId = null)

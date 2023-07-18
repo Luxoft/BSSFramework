@@ -7297,6 +7297,9 @@ namespace SampleSystem.Generated.DTO
         public decimal Commission;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime? FirstNewBusinessStatusMonth;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -7453,6 +7456,9 @@ namespace SampleSystem.Generated.DTO
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public decimal Commission;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime? FirstNewBusinessStatusMonth;
@@ -14741,6 +14747,9 @@ namespace SampleSystem.Generated.DTO
         public bool ContainsOnlyInactiveChildren;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsFinancial;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -14855,6 +14864,9 @@ namespace SampleSystem.Generated.DTO
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public SampleSystem.Generated.DTO.CountryIdentityDTO Country;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Guid Id;
@@ -15030,6 +15042,9 @@ namespace SampleSystem.Generated.DTO
         public SampleSystem.Domain.BusinessUnitStatus BusinessUnitStatus;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsProduction;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -15132,6 +15147,9 @@ namespace SampleSystem.Generated.DTO
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public SampleSystem.Domain.BusinessUnitStatus BusinessUnitStatus;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO> HRDepartments = new System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO>();

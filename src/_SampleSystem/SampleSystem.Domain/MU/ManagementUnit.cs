@@ -17,6 +17,7 @@ public class ManagementUnit :
         IMaster<ManagementUnitAndBusinessUnitLink>,
         IMaster<ManagementUnitAndHRDepartmentLink>,
         IPeriodObject,
+        IModifiedIHierarchicalLevelObject,
         ISecurityContext
 {
     private readonly ICollection<ManagementUnit> children = new List<ManagementUnit>();
@@ -29,6 +30,14 @@ public class ManagementUnit :
     private Period period;
 
     private bool isProduction;
+
+    private int deepLevel;
+
+    public virtual int DeepLevel
+    {
+        get { return this.deepLevel; }
+        set { this.deepLevel = value; }
+    }
 
     public virtual Period Period
     {

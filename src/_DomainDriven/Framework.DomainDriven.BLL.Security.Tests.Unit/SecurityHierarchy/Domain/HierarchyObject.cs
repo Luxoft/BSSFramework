@@ -3,7 +3,8 @@
 namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
 
 public class HierarchyObject : PersistentDomainObjectBase,
-                               IDenormalizedHierarchicalPersistentSource<HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, HierarchyObject, Guid>
+                               IDenormalizedHierarchicalPersistentSource<HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, HierarchyObject, Guid>,
+                               IModifiedIHierarchicalLevelObject
 {
     private readonly IList<HierarchyObject> children = new List<HierarchyObject>();
 
@@ -29,6 +30,9 @@ public class HierarchyObject : PersistentDomainObjectBase,
     {
         this.children.Remove(f);
     }
+
+    public int DeepLevel { get; set; }
+
     public string Name
     {
         get; set;

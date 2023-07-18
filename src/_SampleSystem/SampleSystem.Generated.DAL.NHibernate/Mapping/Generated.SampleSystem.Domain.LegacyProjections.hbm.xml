@@ -4,6 +4,7 @@
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
+    <property name="DeepLevel_Security" column="deepLevel" insert="false" update="false" access="field.camelcase" />
     <many-to-one name="Parent_Security" column="parentId" class="SampleSystem.Domain.Projections.SecurityBusinessUnit" access="field.camelcase" insert="false" update="false" />
     <set name="Children_Security" inverse="true" access="field.camelcase" cascade="None">
       <key column="parentId" />
@@ -47,6 +48,7 @@
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />
     </id>
+    <property name="DeepLevel_Security" column="deepLevel" insert="false" update="false" access="field.camelcase" />
     <many-to-one name="Parent_Security" column="parentId" class="SampleSystem.Domain.Projections.SecurityLocation" access="field.camelcase" insert="false" update="false" />
     <set name="Children_Security" inverse="true" access="field.camelcase" cascade="None">
       <key column="parentId" />

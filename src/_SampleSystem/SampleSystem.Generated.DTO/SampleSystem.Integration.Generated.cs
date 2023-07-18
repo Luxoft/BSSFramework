@@ -35,6 +35,9 @@ namespace SampleSystem.Generated.DTO
         public string CreatedBy;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime? FirstNewBusinessStatusMonth;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -1434,6 +1437,9 @@ namespace SampleSystem.Generated.DTO
         public string CreatedBy;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Guid Id;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -1506,6 +1512,9 @@ namespace SampleSystem.Generated.DTO
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string CreatedBy;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Guid Id;

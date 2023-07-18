@@ -7,7 +7,7 @@ using NHibernate;
 namespace Framework.DomainDriven.NHibernate;
 
 public class NHibAsyncDal<TDomainObject, TIdent> : IAsyncDal<TDomainObject, TIdent>
-        where TDomainObject : class, IIdentityObject<TIdent>
+    where TDomainObject : class, IIdentityObject<TIdent>
 {
     private readonly INHibSession session;
 
@@ -20,7 +20,6 @@ public class NHibAsyncDal<TDomainObject, TIdent> : IAsyncDal<TDomainObject, TIde
         this.expressionVisitorContainer = expressionVisitorContainer;
     }
 
-
     private ISession NativeSession => this.session.NativeSession;
 
     public IQueryable<TDomainObject> GetQueryable()
@@ -28,8 +27,8 @@ public class NHibAsyncDal<TDomainObject, TIdent> : IAsyncDal<TDomainObject, TIde
         var queryable = this.NativeSession.Query<TDomainObject>();
 
         (queryable.Provider as VisitedQueryProvider)
-                .FromMaybe("Register VisitedQueryProvider in Nhib configuration")
-                .Visitor = this.expressionVisitorContainer.Visitor;
+            .FromMaybe("Register VisitedQueryProvider in Nhib configuration")
+            .Visitor = this.expressionVisitorContainer.Visitor;
 
         return queryable;
     }
@@ -38,6 +37,9 @@ public class NHibAsyncDal<TDomainObject, TIdent> : IAsyncDal<TDomainObject, TIde
 
     public virtual async Task<TDomainObject> LoadAsync(TIdent id, CancellationToken cancellationToken = default) =>
         await this.NativeSession.LoadAsync<TDomainObject>(id, cancellationToken);
+
+    public virtual async Task RefreshAsync(TDomainObject domainObject, CancellationToken cancellationToken = default) =>
+        await this.NativeSession.RefreshAsync(domainObject, cancellationToken);
 
     public virtual async Task SaveAsync(TDomainObject domainObject, CancellationToken cancellationToken = default)
     {

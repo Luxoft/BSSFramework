@@ -16,6 +16,11 @@ public interface IDAL<TDomainObject, TIdent> : IAuditDAL<TDomainObject, TIdent>
     /// assuming that the instance exists.
     TDomainObject Load(TIdent id);
 
+    /// <summary>
+    /// Re-read the state of the given instance from the underlying database.
+    /// </summary>
+    void Refresh(TDomainObject domainObject);
+
     void Lock(TDomainObject domainObject, LockRole lockRole);
 
     void Save(TDomainObject domainObject);

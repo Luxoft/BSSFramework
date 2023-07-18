@@ -438,6 +438,14 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         this.dal.Lock(domainObject, lockRole);
     }
 
+    /// <summary>
+    /// Re-read the state of the given instance from the underlying database.
+    /// </summary>
+    public void Refresh(TDomainObject domainObject)
+    {
+        this.dal.Refresh(domainObject);
+    }
+
     #region Revision
 
     public virtual TDomainObject GetObjectByRevision(TIdent id, long revision)

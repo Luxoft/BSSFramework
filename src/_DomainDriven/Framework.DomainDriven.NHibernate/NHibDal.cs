@@ -16,7 +16,7 @@ using NHibernate.Linq.Visitors;
 namespace Framework.DomainDriven.NHibernate;
 
 public class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
-        where TDomainObject : class, IIdentityObject<TIdent>
+    where TDomainObject : class, IIdentityObject<TIdent>
 {
     private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache();
 
@@ -39,6 +39,11 @@ public class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
         this.CheckWrite();
 
         this.NativeSession.Lock(domainObject, lockRole.ToLockMode());
+    }
+
+    public void Refresh(TDomainObject domainObject)
+    {
+        this.NativeSession.Refresh(domainObject);
     }
 
     public virtual void Save(TDomainObject domainObject)
@@ -73,33 +78,33 @@ public class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
     public TDomainObject GetObjectByRevision(TIdent id, long revision) => this.GetAuditReader().Find<TDomainObject>(id, revision);
 
     public IEnumerable<TDomainObject> GetObjectsByRevision(IEnumerable<TIdent> idCollection, long revisionNumber) =>
-            this.GetAuditReader().FindObjects<TDomainObject>(idCollection.Cast<object>(), revisionNumber);
+        this.GetAuditReader().FindObjects<TDomainObject>(idCollection.Cast<object>(), revisionNumber);
 
     public IEnumerable<long> GetRevisions(TIdent id) => this.GetAuditReader().GetRevisions(typeof(TDomainObject), id).ToList();
 
     public IList<Tuple<T, long>> GetDomainObjectRevisions<T>(TIdent id, int takeCount)
-            where T : class =>
-            this.GetAuditReader().GetDomainObjectRevisions<T>(id, takeCount);
+        where T : class =>
+        this.GetAuditReader().GetDomainObjectRevisions<T>(id, takeCount);
 
     public IEnumerable<long> GetRevisions(TIdent id, long maxRevision) =>
-            this.GetAuditReader().GetRevisions(typeof(TDomainObject), id, maxRevision).ToList();
+        this.GetAuditReader().GetRevisions(typeof(TDomainObject), id, maxRevision).ToList();
 
     public long? GetPreviousRevision(TIdent id, long maxRevision) =>
-            this.GetAuditReader().GetPreviusRevision(typeof(TDomainObject), id, maxRevision);
+        this.GetAuditReader().GetPreviusRevision(typeof(TDomainObject), id, maxRevision);
 
     public long GetCurrentRevision() => this.GetAuditReader().GetCurrentRevision<AuditRevisionEntity>(false).Id;
 
     public DomainObjectPropertyRevisions<TIdent, TProperty> GetPropertyRevisions<TProperty>(
-            TIdent id,
-            string propertyName,
-            Period? period = null)
+        TIdent id,
+        string propertyName,
+        Period? period = null)
     {
         var propertyInfo = typeof(TDomainObject).GetProperties()
                                                 .FirstOrDefault(
-                                                                z => string.Equals(
-                                                                                   z.Name,
-                                                                                   propertyName,
-                                                                                   StringComparison.InvariantCultureIgnoreCase));
+                                                    z => string.Equals(
+                                                        z.Name,
+                                                        propertyName,
+                                                        StringComparison.InvariantCultureIgnoreCase));
         if (null == propertyInfo)
         {
             throw new BusinessLogicException("{0} {1}", typeof(TDomainObject).Name, propertyName);
@@ -114,21 +119,21 @@ public class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
     }
 
     public IDomainObjectPropertyRevisionBase<TIdent, RevisionInfoBase> GetUntypedPropertyRevisions(
-            TIdent id,
-            string propertyName,
-            Period? period = null)
+        TIdent id,
+        string propertyName,
+        Period? period = null)
     {
         var propertyInfo = typeof(TDomainObject).GetProperties()
                                                 .First(
-                                                       z => string.Equals(
-                                                                          z.Name,
-                                                                          propertyName,
-                                                                          StringComparison.InvariantCultureIgnoreCase));
+                                                    z => string.Equals(
+                                                        z.Name,
+                                                        propertyName,
+                                                        StringComparison.InvariantCultureIgnoreCase));
 
         var genericMethodDefinition =
-                ((Func<TIdent, string, Period?, DomainObjectPropertyRevisions<TIdent, object>>)this.GetPropertyRevisions<object>)
-                .Method
-                .GetGenericMethodDefinition();
+            ((Func<TIdent, string, Period?, DomainObjectPropertyRevisions<TIdent, object>>)this.GetPropertyRevisions<object>)
+            .Method
+            .GetGenericMethodDefinition();
         var method = genericMethodDefinition.MakeGenericMethod(propertyInfo.PropertyType);
 
         var result = method.InvokeWithExceptionProcessed(this, id, propertyName, period);
@@ -137,9 +142,9 @@ public class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
     }
 
     public DomainObjectPropertyRevisions<TIdent, TProperty> GetPropertyRevisions<TProperty>(
-            TIdent id,
-            Expression<Func<TDomainObject, TProperty>> propertyExpression,
-            Period? period = null)
+        TIdent id,
+        Expression<Func<TDomainObject, TProperty>> propertyExpression,
+        Period? period = null)
     {
         var propertyPath = propertyExpression.ToPath();
 
@@ -154,8 +159,8 @@ public class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
         var rootPropertyName = new string(propertyPath.TakeWhile(z => z != '.').ToArray());
 
         var changeOrFirstCriterion = AuditEntity.Or(
-                                                    AuditEntity.Property(rootPropertyName).HasChanged(),
-                                                    AuditEntity.RevisionType().Eq(AuditRevisionType.Added));
+            AuditEntity.Property(rootPropertyName).HasChanged(),
+            AuditEntity.RevisionType().Eq(AuditRevisionType.Added));
 
         var query = queryCreator
                     .ForProjectingRevisionsOfEntity<TDomainObject>(false, true)
@@ -175,12 +180,12 @@ public class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
             var domainObject = (TDomainObject)queryResult[0];
             var auditRevisionEntiry = (AuditRevisionEntity)queryResult[1];
             new PropertyRevision<TIdent, TProperty>(
-                                                    result,
-                                                    getPropertyFunc(domainObject),
-                                                    AuditRevisionType.Modified,
-                                                    auditRevisionEntiry.Author,
-                                                    auditRevisionEntiry.RevisionDate,
-                                                    auditRevisionEntiry.Id);
+                result,
+                getPropertyFunc(domainObject),
+                AuditRevisionType.Modified,
+                auditRevisionEntiry.Author,
+                auditRevisionEntiry.RevisionDate,
+                auditRevisionEntiry.Id);
         }
 
         return result;
@@ -201,38 +206,38 @@ public class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
         var result = new DomainObjectRevision<TIdent>(identity);
 
         audited.Foreach(
-                        z =>
-                        {
-                            new DomainObjectRevisionInfo<TIdent>(
-                                                                 result,
-                                                                 z.Operation.ToAuditRevisionType(),
-                                                                 z.RevisionEntity.Author,
-                                                                 z.RevisionEntity.RevisionDate,
-                                                                 z.RevisionEntity.Id);
-                        });
+            z =>
+            {
+                new DomainObjectRevisionInfo<TIdent>(
+                    result,
+                    z.Operation.ToAuditRevisionType(),
+                    z.RevisionEntity.Author,
+                    z.RevisionEntity.RevisionDate,
+                    z.RevisionEntity.Id);
+            });
 
         return result;
     }
 
     public IEnumerable<TIdent> GetIdentiesWithHistory(Expression<Func<TDomainObject, bool>> query) =>
-            this.GetAuditReader().GetIdentiesBy<TDomainObject, TIdent>(query.ToCriterion());
+        this.GetAuditReader().GetIdentiesBy<TDomainObject, TIdent>(query.ToCriterion());
 
     public TDomainObject GetById(TIdent id) => this.NativeSession.Get<TDomainObject>(id);
 
     public TDomainObject Load(TIdent id) => this.NativeSession.Load<TDomainObject>(id);
 
     public DomainObjectPropertyRevisions<TIdent, TProperty> GetPrimitivePropertiesRevision<TProperty>(
-            TIdent id,
-            Expression<Func<TDomainObject, TProperty>> propertyExpression,
-            Period? period = null)
+        TIdent id,
+        Expression<Func<TDomainObject, TProperty>> propertyExpression,
+        Period? period = null)
     {
         var propertyName = propertyExpression.ToPath();
 
         var queryCreator = this.GetAuditReader().CreateQuery();
 
         var changeOrFirstCriterion = AuditEntity.Or(
-                                                    AuditEntity.Property(propertyName).HasChanged(),
-                                                    AuditEntity.RevisionType().Eq(AuditRevisionType.Added));
+            AuditEntity.Property(propertyName).HasChanged(),
+            AuditEntity.RevisionType().Eq(AuditRevisionType.Added));
 
         var query = queryCreator
                     .ForRevisionsOfEntity(typeof(TDomainObject), false, true)
@@ -270,11 +275,11 @@ public class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
     }
 
     private IEntityAuditQuery<T> TryInjectPeriodQuery<T>(IEntityAuditQuery<T> query, Period? period = null)
-            where T : class =>
-            this.GetPeriodAuditCriterions(period).Aggregate(query, (prevQuery, criterion) => prevQuery.Add(criterion));
+        where T : class =>
+        this.GetPeriodAuditCriterions(period).Aggregate(query, (prevQuery, criterion) => prevQuery.Add(criterion));
 
     private IAuditQuery TryInjectPeriodQuery(IAuditQuery query, Period? period = null) => this.GetPeriodAuditCriterions(period)
-            .Aggregate(query, (prevQuery, criterion) => prevQuery.Add(criterion));
+        .Aggregate(query, (prevQuery, criterion) => prevQuery.Add(criterion));
 
     private IEnumerable<IAuditCriterion> GetPeriodAuditCriterions(Period? period = null)
     {

@@ -100,6 +100,10 @@ public class MockDAL<TDomain, TIdent> : IMockDAL<TDomain, TIdent> where TDomain 
         throw new NotImplementedException();
     }
 
+    public void Refresh(TDomain domainObject)
+    {
+    }
+
     public void Lock(TDomain domainObject, LockRole lockRole)
     {
     }

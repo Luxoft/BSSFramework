@@ -56,6 +56,12 @@ public class GenericRepository<TDomainObject, TIdent> : IGenericRepository<TDoma
     public async Task<TDomainObject> LoadAsync(TIdent id, CancellationToken cancellationToken = default) =>
         await this.dal.LoadAsync(id, cancellationToken);
 
+    /// <summary>
+    /// Re-read the state of the given instance from the underlying database.
+    /// </summary>
+    public async Task RefreshAsync(TDomainObject domainObject, CancellationToken cancellationToken = default) =>
+        await this.dal.RefreshAsync(domainObject, cancellationToken);
+
     public IQueryable<TProjection> GetQueryable<TProjection>(Specification<TDomainObject, TProjection> specification)
         => this.specificationEvaluator.GetQuery(this.GetQueryable(), specification);
 

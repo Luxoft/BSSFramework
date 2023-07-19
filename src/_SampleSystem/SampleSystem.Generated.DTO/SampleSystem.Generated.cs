@@ -6603,6 +6603,411 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TypedAuth.TypedAuthPermission), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TypedAuthPermissionIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TypedAuthPermissionIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TypedAuthPermissionIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TypedAuthPermissionIdentityDTO(System.Guid.Empty);
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id;
+        
+        public TypedAuthPermissionIdentityDTO(System.Guid id)
+        {
+            this.Id = id;
+        }
+        
+        public TypedAuthPermissionIdentityDTO(SampleSystem.Domain.TypedAuth.TypedAuthPermission domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this.Id = domainObject.Id;
+        }
+        
+        public TypedAuthPermissionIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TypedAuthPermissionIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TypedAuthPermissionIdentityDTO.EmptyField;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TypedAuthPermissionIdentityDTO identity1, SampleSystem.Generated.DTO.TypedAuthPermissionIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TypedAuthPermissionIdentityDTO identity1, SampleSystem.Generated.DTO.TypedAuthPermissionIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TypedAuthPermissionIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TypedAuthPermissionIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TypedAuthPermissionIdentityDTO other)
+        {
+            return (this.Id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.TypedAuth.TypedAuthPermission ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTypedAuthPermission(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TypedAuth.TypedAuthPermissionBusinessUnit), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TypedAuthPermissionBusinessUnitIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TypedAuthPermissionBusinessUnitIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TypedAuthPermissionBusinessUnitIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TypedAuthPermissionBusinessUnitIdentityDTO(System.Guid.Empty);
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id;
+        
+        public TypedAuthPermissionBusinessUnitIdentityDTO(System.Guid id)
+        {
+            this.Id = id;
+        }
+        
+        public TypedAuthPermissionBusinessUnitIdentityDTO(SampleSystem.Domain.TypedAuth.TypedAuthPermissionBusinessUnit domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this.Id = domainObject.Id;
+        }
+        
+        public TypedAuthPermissionBusinessUnitIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TypedAuthPermissionBusinessUnitIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TypedAuthPermissionBusinessUnitIdentityDTO.EmptyField;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TypedAuthPermissionBusinessUnitIdentityDTO identity1, SampleSystem.Generated.DTO.TypedAuthPermissionBusinessUnitIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TypedAuthPermissionBusinessUnitIdentityDTO identity1, SampleSystem.Generated.DTO.TypedAuthPermissionBusinessUnitIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TypedAuthPermissionBusinessUnitIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TypedAuthPermissionBusinessUnitIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TypedAuthPermissionBusinessUnitIdentityDTO other)
+        {
+            return (this.Id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.TypedAuth.TypedAuthPermissionBusinessUnit ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTypedAuthPermissionBusinessUnit(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TypedAuth.TypedAuthPermissionEmployee), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TypedAuthPermissionEmployeeIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TypedAuthPermissionEmployeeIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TypedAuthPermissionEmployeeIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TypedAuthPermissionEmployeeIdentityDTO(System.Guid.Empty);
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id;
+        
+        public TypedAuthPermissionEmployeeIdentityDTO(System.Guid id)
+        {
+            this.Id = id;
+        }
+        
+        public TypedAuthPermissionEmployeeIdentityDTO(SampleSystem.Domain.TypedAuth.TypedAuthPermissionEmployee domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this.Id = domainObject.Id;
+        }
+        
+        public TypedAuthPermissionEmployeeIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TypedAuthPermissionEmployeeIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TypedAuthPermissionEmployeeIdentityDTO.EmptyField;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TypedAuthPermissionEmployeeIdentityDTO identity1, SampleSystem.Generated.DTO.TypedAuthPermissionEmployeeIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TypedAuthPermissionEmployeeIdentityDTO identity1, SampleSystem.Generated.DTO.TypedAuthPermissionEmployeeIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TypedAuthPermissionEmployeeIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TypedAuthPermissionEmployeeIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TypedAuthPermissionEmployeeIdentityDTO other)
+        {
+            return (this.Id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.TypedAuth.TypedAuthPermissionEmployee ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTypedAuthPermissionEmployee(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TypedAuth.TypedAuthPermissionLocation), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TypedAuthPermissionLocationIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TypedAuthPermissionLocationIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TypedAuthPermissionLocationIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TypedAuthPermissionLocationIdentityDTO(System.Guid.Empty);
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id;
+        
+        public TypedAuthPermissionLocationIdentityDTO(System.Guid id)
+        {
+            this.Id = id;
+        }
+        
+        public TypedAuthPermissionLocationIdentityDTO(SampleSystem.Domain.TypedAuth.TypedAuthPermissionLocation domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this.Id = domainObject.Id;
+        }
+        
+        public TypedAuthPermissionLocationIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TypedAuthPermissionLocationIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TypedAuthPermissionLocationIdentityDTO.EmptyField;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TypedAuthPermissionLocationIdentityDTO identity1, SampleSystem.Generated.DTO.TypedAuthPermissionLocationIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TypedAuthPermissionLocationIdentityDTO identity1, SampleSystem.Generated.DTO.TypedAuthPermissionLocationIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TypedAuthPermissionLocationIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TypedAuthPermissionLocationIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TypedAuthPermissionLocationIdentityDTO other)
+        {
+            return (this.Id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.TypedAuth.TypedAuthPermissionLocation ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTypedAuthPermissionLocation(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TypedAuth.TypedAuthPermissionManagementUnit), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct TypedAuthPermissionManagementUnitIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TypedAuthPermissionManagementUnitIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.TypedAuthPermissionManagementUnitIdentityDTO EmptyField = new SampleSystem.Generated.DTO.TypedAuthPermissionManagementUnitIdentityDTO(System.Guid.Empty);
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id;
+        
+        public TypedAuthPermissionManagementUnitIdentityDTO(System.Guid id)
+        {
+            this.Id = id;
+        }
+        
+        public TypedAuthPermissionManagementUnitIdentityDTO(SampleSystem.Domain.TypedAuth.TypedAuthPermissionManagementUnit domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this.Id = domainObject.Id;
+        }
+        
+        public TypedAuthPermissionManagementUnitIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.TypedAuthPermissionManagementUnitIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.TypedAuthPermissionManagementUnitIdentityDTO.EmptyField;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.TypedAuthPermissionManagementUnitIdentityDTO identity1, SampleSystem.Generated.DTO.TypedAuthPermissionManagementUnitIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.TypedAuthPermissionManagementUnitIdentityDTO identity1, SampleSystem.Generated.DTO.TypedAuthPermissionManagementUnitIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.TypedAuthPermissionManagementUnitIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.TypedAuthPermissionManagementUnitIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.TypedAuthPermissionManagementUnitIdentityDTO other)
+        {
+            return (this.Id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.TypedAuth.TypedAuthPermissionManagementUnit ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToTypedAuthPermissionManagementUnit(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.UniqueByMaster.ParentEntity), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct ParentEntityIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.ParentEntityIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>

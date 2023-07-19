@@ -1,20 +1,19 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Authorization.Domain;
-
 using JetBrains.Annotations;
 
-namespace Framework.Authorization.BLL;
+namespace Framework.Authorization.Notification;
 
-public partial interface IPermissionBLL
+public interface INotificationPrincipalExtractor
 {
     [NotNull]
     Expression<Func<Permission, bool>> GetRoleBaseNotificationFilter(Guid[] roleIdents);
 
     [NotNull]
-    IEnumerable<Principal> GetNotificationPrincipalsByRoles([NotNull]Guid[] roleIdents);
+    IEnumerable<Principal> GetNotificationPrincipalsByRoles([NotNull] Guid[] roleIdents);
 
-    [NotNull] IEnumerable<Principal> GetNotificationPrincipalsByRoles([NotNull] Guid[] roleIdents, [NotNull]IEnumerable<NotificationFilterGroup> notificationFilterGroups);
+    [NotNull] IEnumerable<Principal> GetNotificationPrincipalsByRoles([NotNull] Guid[] roleIdents, [NotNull] IEnumerable<NotificationFilterGroup> notificationFilterGroups);
 
     /// <summary>
     /// Получить все принципалы у которых есть доступ к роли <paramref name="relatedRoleId"/>
@@ -28,5 +27,5 @@ public partial interface IPermissionBLL
     IEnumerable<Principal> GetNotificationPrincipalsByRelatedRole([NotNull] Guid[] roleIdents, [NotNull] IEnumerable<string> principalNames, Guid relatedRoleId);
 
     [NotNull]
-    IEnumerable<Principal> GetNotificationPrincipalsByOperations([NotNull] Guid[] operationsIds, [NotNull]IEnumerable<NotificationFilterGroup> notificationFilterGroups);
+    IEnumerable<Principal> GetNotificationPrincipalsByOperations([NotNull] Guid[] operationsIds, [NotNull] IEnumerable<NotificationFilterGroup> notificationFilterGroups);
 }

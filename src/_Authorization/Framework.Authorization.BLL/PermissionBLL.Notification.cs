@@ -10,7 +10,7 @@ namespace Framework.Authorization.BLL;
 
 public partial class PermissionBLL
 {
-    private Expression<Func<Permission, bool>> GetRoleNotificationFilter(Guid[] roleIdents)
+    public Expression<Func<Permission, bool>> GetRoleBaseNotificationFilter(Guid[] roleIdents)
     {
         if (roleIdents == null) throw new ArgumentNullException(nameof(roleIdents));
 
@@ -35,7 +35,7 @@ public partial class PermissionBLL
     {
         if (roleIdents == null) throw new ArgumentNullException(nameof(roleIdents));
 
-        return this.GetNotificationPrincipalsByRoles(this.GetRoleNotificationFilter(roleIdents));
+        return this.GetNotificationPrincipalsByRoles(this.GetRoleBaseNotificationFilter(roleIdents));
     }
 
     public IEnumerable<Principal> GetNotificationPrincipalsByRoles(Guid[] roleIdents, [NotNull]IEnumerable<NotificationFilterGroup> notificationFilterGroups)
@@ -51,7 +51,7 @@ public partial class PermissionBLL
         if (roleIdents == null) throw new ArgumentNullException(nameof(roleIdents));
         if (baseNotificationFilterGroups == null) throw new ArgumentNullException(nameof(baseNotificationFilterGroups));
 
-        var baseNotificationFilter = this.GetRoleNotificationFilter(roleIdents);
+        var baseNotificationFilter = this.GetRoleBaseNotificationFilter(roleIdents);
 
         foreach (var notificationFilterGroups in baseNotificationFilterGroups.PermuteByExpand())
         {

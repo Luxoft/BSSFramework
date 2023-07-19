@@ -110,6 +110,11 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.TestSecuritySubObjItem2>(this.GetTestSecuritySubObjItem2ValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestSecuritySubObjItem3>(this.GetTestSecuritySubObjItem3ValidationResult);
             base.RegisterHandler<SampleSystem.Domain.TestUnpersistentObject>(this.GetTestUnpersistentObjectValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.TypedAuth.TypedAuthPermission>(this.GetTypedAuthPermissionValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.TypedAuth.TypedAuthPermissionBusinessUnit>(this.GetTypedAuthPermissionBusinessUnitValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.TypedAuth.TypedAuthPermissionEmployee>(this.GetTypedAuthPermissionEmployeeValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.TypedAuth.TypedAuthPermissionLocation>(this.GetTypedAuthPermissionLocationValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.TypedAuth.TypedAuthPermissionManagementUnit>(this.GetTypedAuthPermissionManagementUnitValidationResult);
             base.RegisterHandler<SampleSystem.Domain.UniqueByMaster.ParentEntity>(this.GetParentEntityValidationResult);
             base.RegisterHandler<SampleSystem.Domain.UniqueByParent.ChildEntity>(this.GetChildEntityValidationResult);
             base.RegisterHandler<SampleSystem.Domain.WorkflowCoreExecutionError>(this.GetWorkflowCoreExecutionErrorValidationResult);
@@ -594,6 +599,31 @@ namespace SampleSystem.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetTestUnpersistentObjectValidationResult(SampleSystem.Domain.TestUnpersistentObject source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetTypedAuthPermissionBusinessUnitValidationResult(SampleSystem.Domain.TypedAuth.TypedAuthPermissionBusinessUnit source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetTypedAuthPermissionEmployeeValidationResult(SampleSystem.Domain.TypedAuth.TypedAuthPermissionEmployee source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetTypedAuthPermissionLocationValidationResult(SampleSystem.Domain.TypedAuth.TypedAuthPermissionLocation source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetTypedAuthPermissionManagementUnitValidationResult(SampleSystem.Domain.TypedAuth.TypedAuthPermissionManagementUnit source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetTypedAuthPermissionValidationResult(SampleSystem.Domain.TypedAuth.TypedAuthPermission source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

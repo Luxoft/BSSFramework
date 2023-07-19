@@ -1269,6 +1269,55 @@
     <property name="Name" column="name" access="field.camelcase" />
     <many-to-one name="InnerMaster" column="innerMasterId" class="SampleSystem.Domain.TestSecurityObjItem" access="field.camelcase" />
   </class>
+  <class name="SampleSystem.Domain.TypedAuth.TypedAuthPermission" table="Permission" schema="auth">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <set name="BusinessUnitItems" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="permissionId" />
+      <one-to-many class="SampleSystem.Domain.TypedAuth.TypedAuthPermissionBusinessUnit" />
+    </set>
+    <set name="EmployeeItems" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="permissionId" />
+      <one-to-many class="SampleSystem.Domain.TypedAuth.TypedAuthPermissionEmployee" />
+    </set>
+    <set name="LocationItems" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="permissionId" />
+      <one-to-many class="SampleSystem.Domain.TypedAuth.TypedAuthPermissionLocation" />
+    </set>
+    <set name="ManagementUnitItems" inverse="true" access="field.camelcase" cascade="all-delete-orphan">
+      <key column="permissionId" />
+      <one-to-many class="SampleSystem.Domain.TypedAuth.TypedAuthPermissionManagementUnit" />
+    </set>
+  </class>
+  <class name="SampleSystem.Domain.TypedAuth.TypedAuthPermissionBusinessUnit" table="TypedAuthPermissionBusinessUnit" mutable="false" schema-action="none">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <many-to-one name="ContextEntity" column="contextEntityId" class="SampleSystem.Domain.BusinessUnit" access="field.camelcase" />
+    <many-to-one name="Permission" column="permissionId" class="SampleSystem.Domain.TypedAuth.TypedAuthPermission" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.TypedAuth.TypedAuthPermissionEmployee" table="TypedAuthPermissionEmployee" mutable="false" schema-action="none">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <many-to-one name="ContextEntity" column="contextEntityId" class="SampleSystem.Domain.Employee" access="field.camelcase" />
+    <many-to-one name="Permission" column="permissionId" class="SampleSystem.Domain.TypedAuth.TypedAuthPermission" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.TypedAuth.TypedAuthPermissionLocation" table="TypedAuthPermissionLocation" mutable="false" schema-action="none">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <many-to-one name="ContextEntity" column="contextEntityId" class="SampleSystem.Domain.Location" access="field.camelcase" />
+    <many-to-one name="Permission" column="permissionId" class="SampleSystem.Domain.TypedAuth.TypedAuthPermission" access="field.camelcase" />
+  </class>
+  <class name="SampleSystem.Domain.TypedAuth.TypedAuthPermissionManagementUnit" table="TypedAuthPermissionManagementUnit" mutable="false" schema-action="none">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <many-to-one name="ContextEntity" column="contextEntityId" class="SampleSystem.Domain.ManagementUnit" access="field.camelcase" />
+    <many-to-one name="Permission" column="permissionId" class="SampleSystem.Domain.TypedAuth.TypedAuthPermission" access="field.camelcase" />
+  </class>
   <class name="SampleSystem.Domain.UniqueByMaster.ParentEntity" table="ParentEntity">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />

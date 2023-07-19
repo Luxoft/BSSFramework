@@ -834,6 +834,18 @@ namespace SampleSystem.Generated.DTO
         
         void MapTestUnpersistentObject(SampleSystem.Domain.TestUnpersistentObject domainObject, SampleSystem.Generated.DTO.TestUnpersistentObjectEventRichDTO mappingObject);
         
+        void MapTypedAuthPermission(SampleSystem.Domain.TypedAuth.TypedAuthPermission domainObject, SampleSystem.Generated.DTO.TypedAuthPermissionEventRichDTO mappingObject);
+        
+        void MapTypedAuthPermission(SampleSystem.Domain.TypedAuth.TypedAuthPermission domainObject, SampleSystem.Generated.DTO.TypedAuthPermissionEventSimpleDTO mappingObject);
+        
+        void MapTypedAuthPermissionBusinessUnit(SampleSystem.Domain.TypedAuth.TypedAuthPermissionBusinessUnit domainObject, SampleSystem.Generated.DTO.TypedAuthPermissionBusinessUnitEventRichDTO mappingObject);
+        
+        void MapTypedAuthPermissionEmployee(SampleSystem.Domain.TypedAuth.TypedAuthPermissionEmployee domainObject, SampleSystem.Generated.DTO.TypedAuthPermissionEmployeeEventRichDTO mappingObject);
+        
+        void MapTypedAuthPermissionLocation(SampleSystem.Domain.TypedAuth.TypedAuthPermissionLocation domainObject, SampleSystem.Generated.DTO.TypedAuthPermissionLocationEventRichDTO mappingObject);
+        
+        void MapTypedAuthPermissionManagementUnit(SampleSystem.Domain.TypedAuth.TypedAuthPermissionManagementUnit domainObject, SampleSystem.Generated.DTO.TypedAuthPermissionManagementUnitEventRichDTO mappingObject);
+        
         void MapUnpersitentContainer(SampleSystem.Domain.Projections.UnpersitentContainer domainObject, SampleSystem.Generated.DTO.UnpersitentContainerProjectionDTO mappingObject);
         
         void MapVisualEmployee(SampleSystem.Domain.Projections.VisualEmployee domainObject, SampleSystem.Generated.DTO.VisualEmployeeProjectionDTO mappingObject);
@@ -1243,6 +1255,16 @@ namespace SampleSystem.Generated.DTO
         SampleSystem.Domain.TestSecuritySubObjItem2 ToTestSecuritySubObjItem2(SampleSystem.Generated.DTO.TestSecuritySubObjItem2IdentityDTO testSecuritySubObjItem2IdentityDTO);
         
         SampleSystem.Domain.TestSecuritySubObjItem3 ToTestSecuritySubObjItem3(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3IdentityDTO);
+        
+        SampleSystem.Domain.TypedAuth.TypedAuthPermission ToTypedAuthPermission(SampleSystem.Generated.DTO.TypedAuthPermissionIdentityDTO typedAuthPermissionIdentityDTO);
+        
+        SampleSystem.Domain.TypedAuth.TypedAuthPermissionBusinessUnit ToTypedAuthPermissionBusinessUnit(SampleSystem.Generated.DTO.TypedAuthPermissionBusinessUnitIdentityDTO typedAuthPermissionBusinessUnitIdentityDTO);
+        
+        SampleSystem.Domain.TypedAuth.TypedAuthPermissionEmployee ToTypedAuthPermissionEmployee(SampleSystem.Generated.DTO.TypedAuthPermissionEmployeeIdentityDTO typedAuthPermissionEmployeeIdentityDTO);
+        
+        SampleSystem.Domain.TypedAuth.TypedAuthPermissionLocation ToTypedAuthPermissionLocation(SampleSystem.Generated.DTO.TypedAuthPermissionLocationIdentityDTO typedAuthPermissionLocationIdentityDTO);
+        
+        SampleSystem.Domain.TypedAuth.TypedAuthPermissionManagementUnit ToTypedAuthPermissionManagementUnit(SampleSystem.Generated.DTO.TypedAuthPermissionManagementUnitIdentityDTO typedAuthPermissionManagementUnitIdentityDTO);
         
         SampleSystem.Domain.WorkflowCoreExecutionError ToWorkflowCoreExecutionError(SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorIdentityDTO workflowCoreExecutionErrorIdentityDTO);
         
@@ -7491,6 +7513,104 @@ namespace SampleSystem.Generated.DTO
             mappingObject.MapToDomainObject(this, domainObject);
         }
         
+        public virtual void MapTypedAuthPermission(SampleSystem.Domain.TypedAuth.TypedAuthPermission domainObject, SampleSystem.Generated.DTO.TypedAuthPermissionEventRichDTO mappingObject)
+        {
+            mappingObject.BusinessUnitItems = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.BusinessUnitItems, this);
+            mappingObject.EmployeeItems = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.EmployeeItems, this);
+            mappingObject.Id = domainObject.Id;
+            mappingObject.LocationItems = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.LocationItems, this);
+            mappingObject.ManagementUnitItems = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.ManagementUnitItems, this);
+        }
+        
+        public virtual void MapTypedAuthPermission(SampleSystem.Domain.TypedAuth.TypedAuthPermission domainObject, SampleSystem.Generated.DTO.TypedAuthPermissionEventSimpleDTO mappingObject)
+        {
+            mappingObject.Id = domainObject.Id;
+        }
+        
+        public virtual void MapTypedAuthPermissionBusinessUnit(SampleSystem.Domain.TypedAuth.TypedAuthPermissionBusinessUnit domainObject, SampleSystem.Generated.DTO.TypedAuthPermissionBusinessUnitEventRichDTO mappingObject)
+        {
+            if (!object.ReferenceEquals(domainObject.ContextEntity, null))
+            {
+                mappingObject.ContextEntity = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.ContextEntity, this);
+            }
+            else
+            {
+                mappingObject.ContextEntity = null;
+            }
+            mappingObject.Id = domainObject.Id;
+            if (!object.ReferenceEquals(domainObject.Permission, null))
+            {
+                mappingObject.Permission = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Permission, this);
+            }
+            else
+            {
+                mappingObject.Permission = null;
+            }
+        }
+        
+        public virtual void MapTypedAuthPermissionEmployee(SampleSystem.Domain.TypedAuth.TypedAuthPermissionEmployee domainObject, SampleSystem.Generated.DTO.TypedAuthPermissionEmployeeEventRichDTO mappingObject)
+        {
+            if (!object.ReferenceEquals(domainObject.ContextEntity, null))
+            {
+                mappingObject.ContextEntity = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.ContextEntity, this);
+            }
+            else
+            {
+                mappingObject.ContextEntity = null;
+            }
+            mappingObject.Id = domainObject.Id;
+            if (!object.ReferenceEquals(domainObject.Permission, null))
+            {
+                mappingObject.Permission = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Permission, this);
+            }
+            else
+            {
+                mappingObject.Permission = null;
+            }
+        }
+        
+        public virtual void MapTypedAuthPermissionLocation(SampleSystem.Domain.TypedAuth.TypedAuthPermissionLocation domainObject, SampleSystem.Generated.DTO.TypedAuthPermissionLocationEventRichDTO mappingObject)
+        {
+            if (!object.ReferenceEquals(domainObject.ContextEntity, null))
+            {
+                mappingObject.ContextEntity = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.ContextEntity, this);
+            }
+            else
+            {
+                mappingObject.ContextEntity = null;
+            }
+            mappingObject.Id = domainObject.Id;
+            if (!object.ReferenceEquals(domainObject.Permission, null))
+            {
+                mappingObject.Permission = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Permission, this);
+            }
+            else
+            {
+                mappingObject.Permission = null;
+            }
+        }
+        
+        public virtual void MapTypedAuthPermissionManagementUnit(SampleSystem.Domain.TypedAuth.TypedAuthPermissionManagementUnit domainObject, SampleSystem.Generated.DTO.TypedAuthPermissionManagementUnitEventRichDTO mappingObject)
+        {
+            if (!object.ReferenceEquals(domainObject.ContextEntity, null))
+            {
+                mappingObject.ContextEntity = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.ContextEntity, this);
+            }
+            else
+            {
+                mappingObject.ContextEntity = null;
+            }
+            mappingObject.Id = domainObject.Id;
+            if (!object.ReferenceEquals(domainObject.Permission, null))
+            {
+                mappingObject.Permission = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Permission, this);
+            }
+            else
+            {
+                mappingObject.Permission = null;
+            }
+        }
+        
         public virtual void MapUnpersitentContainer(SampleSystem.Domain.Projections.UnpersitentContainer domainObject, SampleSystem.Generated.DTO.UnpersitentContainerProjectionDTO mappingObject)
         {
             mappingObject.Locations = SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(domainObject.Locations, this);
@@ -8792,6 +8912,31 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.TestSecuritySubObjItem3 ToTestSecuritySubObjItem3(SampleSystem.Generated.DTO.TestSecuritySubObjItem3IdentityDTO testSecuritySubObjItem3IdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.TestSecuritySubObjItem3>(testSecuritySubObjItem3IdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.TypedAuth.TypedAuthPermission ToTypedAuthPermission(SampleSystem.Generated.DTO.TypedAuthPermissionIdentityDTO typedAuthPermissionIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.TypedAuth.TypedAuthPermission>(typedAuthPermissionIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.TypedAuth.TypedAuthPermissionBusinessUnit ToTypedAuthPermissionBusinessUnit(SampleSystem.Generated.DTO.TypedAuthPermissionBusinessUnitIdentityDTO typedAuthPermissionBusinessUnitIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.TypedAuth.TypedAuthPermissionBusinessUnit>(typedAuthPermissionBusinessUnitIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.TypedAuth.TypedAuthPermissionEmployee ToTypedAuthPermissionEmployee(SampleSystem.Generated.DTO.TypedAuthPermissionEmployeeIdentityDTO typedAuthPermissionEmployeeIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.TypedAuth.TypedAuthPermissionEmployee>(typedAuthPermissionEmployeeIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.TypedAuth.TypedAuthPermissionLocation ToTypedAuthPermissionLocation(SampleSystem.Generated.DTO.TypedAuthPermissionLocationIdentityDTO typedAuthPermissionLocationIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.TypedAuth.TypedAuthPermissionLocation>(typedAuthPermissionLocationIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.TypedAuth.TypedAuthPermissionManagementUnit ToTypedAuthPermissionManagementUnit(SampleSystem.Generated.DTO.TypedAuthPermissionManagementUnitIdentityDTO typedAuthPermissionManagementUnitIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.TypedAuth.TypedAuthPermissionManagementUnit>(typedAuthPermissionManagementUnitIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.WorkflowCoreExecutionError ToWorkflowCoreExecutionError(SampleSystem.Generated.DTO.WorkflowCoreExecutionErrorIdentityDTO workflowCoreExecutionErrorIdentityDTO)

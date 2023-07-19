@@ -63,6 +63,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPersistentItem>();
         services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPeriodItem>();
         services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDefaultItem>();
+        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerMathItem>();
 
         services.AddSingleton<IIdPropertyResolver, IdPropertyResolver>();
 

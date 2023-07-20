@@ -482,7 +482,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         return this.GetFullList(fetchs.ToFetchContainer());
     }
 
-    public void Lock(TDomainObject domainObject, LockRole lockRole)
+    public virtual void Lock(TDomainObject domainObject, LockRole lockRole)
     {
         this.dal.Lock(domainObject, lockRole);
     }

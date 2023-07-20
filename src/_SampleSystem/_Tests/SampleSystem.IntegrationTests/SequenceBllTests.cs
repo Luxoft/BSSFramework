@@ -1,9 +1,7 @@
 ﻿using FluentAssertions;
 
 using Framework.Configuration.BLL;
-using Framework.Configuration.Domain;
 using Framework.DomainDriven;
-using Framework.SecuritySystem;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -16,76 +14,115 @@ namespace SampleSystem.IntegrationTests;
 [TestClass]
 public class SequenceBllTests : TestBase
 {
-    [DataTestMethod]
-    [DataRow(true)]
-    [DataRow(false)]
-    public void GetEmployeeFromDB_FilterByAge_ReturnNotNulRecords(bool hasRefresh)
+    [TestMethod]
+    public void GetNextNumber_TwoCallsInParallelTransactions_ShouldGiveDifferentNumbers()
     {
         // Arrange
         const string name = "Test";
         this.Evaluate(DBSessionMode.Write, ctx => ctx.Configuration.Logics.Sequence.GetNextNumber(name));
 
-        var task1Number = 0L;
-        var task2Number = 0L;
+        var numberWithWait1 = 0L;
+        var numberWithWait2 = 0L;
+        var numberFast1 = 0L;
+        var numberFast2 = 0L;
 
         var autoResetEvent = new AutoResetEvent(false);
+        var autoResetEvent2 = new AutoResetEvent(false);
 
         // Act
-        var taskFirst = Task.Factory.StartNew(
+        var taskFast = Task.Factory.StartNew(
             () =>
             {
-                task1Number = this.Evaluate(
+                this.Evaluate(
+                    DBSessionMode.Write,
+                    ctx =>
+                    {
+                        var sequenceBllMock = new SequenceBllMock(autoResetEvent, ctx.Configuration);
+                        numberFast1 = sequenceBllMock.GetNextNumber(name);
+                        numberFast2 = sequenceBllMock.GetNextNumber(name);
+
+                        autoResetEvent2.WaitOne();
+                    });
+            });
+
+        var taskWithWait = Task.Factory.StartNew(
+            () =>
+            {
+                this.Evaluate(
                     DBSessionMode.Write,
                     ctx =>
                     {
                         autoResetEvent.WaitOne();
-                        return new SequenceBllMock(hasRefresh, ctx.Configuration, ctx.Configuration.Logics.Sequence.SecurityProvider)
-                            .GetNextNumber(name);
-                    });
-            });
 
-        var taskSecond = Task.Factory.StartNew(
-            () =>
-            {
-                task2Number = this.Evaluate(
-                    DBSessionMode.Write,
-                    ctx =>
-                    {
-                        var nextNumber = new SequenceBllMock(
-                                hasRefresh,
-                                ctx.Configuration,
-                                ctx.Configuration.Logics.Sequence.SecurityProvider)
-                            .GetNextNumber(name);
-
-                        autoResetEvent.Set();
-                        Thread.Sleep(100);
-                        return nextNumber;
+                        var sequenceBllMock = new SequenceBllMock(autoResetEvent2, ctx.Configuration);
+                        numberWithWait1 = sequenceBllMock.GetNextNumber(name);
+                        numberWithWait2 = sequenceBllMock.GetNextNumber(name);
                     });
             });
 
         // Assert
-        Task.WaitAll(taskFirst, taskSecond);
-        (task1Number != task2Number).Should().Be(hasRefresh);
+        Task.WaitAll(taskWithWait, taskFast);
+        new[] { numberFast1, numberFast2, numberWithWait1, numberWithWait2 }.Should().OnlyHaveUniqueItems();
+    }
+
+    [TestMethod]
+    public void GetNextNumber_TwoCallsOneTransaction_ShouldGiveDifferentNumbers()
+    {
+        // Arrange
+        const string name = "Test";
+        this.Evaluate(DBSessionMode.Write, ctx => ctx.Configuration.Logics.Sequence.GetNextNumber(name));
+
+        // Act
+        var numbers = this.Evaluate(
+            DBSessionMode.Write,
+            context =>
+            {
+                var number1 = context.Configuration.Logics.Sequence.GetNextNumber(name);
+                var number2 = context.Configuration.Logics.Sequence.GetNextNumber(name);
+                return (Number1: number1, Number2: number2);
+            });
+
+        // Assert
+        numbers.Number1.Should().Be(2);
+        numbers.Number2.Should().Be(3);
+    }
+
+    [TestMethod]
+    public void GetNextNumber_TwoCallsDifferentTransaction_ShouldGiveDifferentNumbers()
+    {
+        // Arrange
+        const string name = "Test";
+        this.Evaluate(DBSessionMode.Write, ctx => ctx.Configuration.Logics.Sequence.GetNextNumber(name));
+
+        var number1 = this.Evaluate(
+            DBSessionMode.Write,
+            context => context.Configuration.Logics.Sequence.GetNextNumber(name));
+
+        // Act
+        var number2 = this.Evaluate(
+            DBSessionMode.Write,
+            context => context.Configuration.Logics.Sequence.GetNextNumber(name));
+
+        // Assert
+        number1.Should().Be(2);
+        number2.Should().Be(3);
     }
 
     private class SequenceBllMock : SequenceBLL
     {
-        private readonly bool hasRefresh;
+        private readonly AutoResetEvent resetEvent;
 
         public SequenceBllMock(
-            bool hasRefresh,
+            AutoResetEvent resetEvent,
             IConfigurationBLLContext context,
-            ISecurityProvider<Sequence> securityProvider,
             ISpecificationEvaluator specificationEvaluator = null)
-            : base(context, securityProvider, specificationEvaluator) =>
-            this.hasRefresh = hasRefresh;
+            : base(context, context.Logics.Sequence.SecurityProvider, specificationEvaluator) =>
+            this.resetEvent = resetEvent;
 
-        public override void Refresh(Sequence domainObject)
+        protected override void LockSequence()
         {
-            if (this.hasRefresh)
-            {
-                base.Refresh(domainObject);
-            }
+            this.resetEvent.Set();
+            base.LockSequence();
         }
     }
 }

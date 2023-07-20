@@ -18,6 +18,7 @@
     <ProjectReference Include="..\..\Framework.App.ServiceEnvironment\Framework.App.ServiceEnvironment.csproj" />
     <ProjectReference Include="..\..\Framework.DomainDriven.WebApiNetCore\Framework.DomainDriven.WebApiNetCore.csproj" />
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.ApproveWorkflow\Framework.Authorization.ApproveWorkflow.csproj" />
+    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Notification\Framework.Authorization.Notification.csproj" />
 
     <ProjectReference Include="..\SampleSystem.BLL\SampleSystem.BLL.csproj" />
     <ProjectReference Include="..\SampleSystem.Events\SampleSystem.Events.csproj" />

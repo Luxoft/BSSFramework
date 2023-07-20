@@ -101,6 +101,7 @@ public static class ServiceCollectionExtensions
                .AddScoped<IRunAsManager, AuthorizationRunAsManger>()
                .AddScoped<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>()
                .AddScoped<INotificationPrincipalExtractor, LegacyNotificationPrincipalExtractor>()
+               .AddScoped<INotificationBasePermissionFilterSource, LegacyNotificationPrincipalExtractor>()
                .AddScoped<IAuthorizationBLLContextSettings, AuthorizationBLLContextSettings>()
 
                .AddScopedFromLazyInterfaceImplement<IAuthorizationBLLContext, AuthorizationBLLContext>()

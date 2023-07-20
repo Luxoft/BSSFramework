@@ -1,13 +1,9 @@
-﻿using System.Linq.Expressions;
-
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 
 namespace Framework.Authorization.Notification;
 
 public interface INotificationPrincipalExtractor
 {
-    Expression<Func<Permission, bool>> GetRoleBaseNotificationFilter(Guid[] roleIdents);
-
     IEnumerable<Principal> GetNotificationPrincipalsByRoles(Guid[] roleIdents);
 
     IEnumerable<Principal> GetNotificationPrincipalsByRoles(Guid[] roleIdents, IEnumerable<NotificationFilterGroup> notificationFilterGroups);

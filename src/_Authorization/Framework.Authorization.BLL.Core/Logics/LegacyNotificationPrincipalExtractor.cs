@@ -10,14 +10,14 @@ using JetBrains.Annotations;
 
 namespace Framework.Authorization.BLL;
 
-public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthorizationBLLContext>, INotificationPrincipalExtractor
+public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthorizationBLLContext>, INotificationPrincipalExtractor, INotificationBasePermissionFilterSource
 {
     public LegacyNotificationPrincipalExtractor([NotNull] IAuthorizationBLLContext context)
         : base(context)
     {
     }
 
-    public Expression<Func<Permission, bool>> GetRoleBaseNotificationFilter(Guid[] roleIdents)
+    public Expression<Func<Permission, bool>> GetBasePermissionFilter(Guid[] roleIdents)
     {
         if (roleIdents == null) throw new ArgumentNullException(nameof(roleIdents));
 
@@ -42,7 +42,7 @@ public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthori
     {
         if (roleIdents == null) throw new ArgumentNullException(nameof(roleIdents));
 
-        return this.GetNotificationPrincipalsByRoles(this.GetRoleBaseNotificationFilter(roleIdents));
+        return this.GetNotificationPrincipalsByRoles(this.GetBasePermissionFilter(roleIdents));
     }
 
     public IEnumerable<Principal> GetNotificationPrincipalsByRoles(Guid[] roleIdents, [NotNull] IEnumerable<NotificationFilterGroup> notificationFilterGroups)
@@ -58,7 +58,7 @@ public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthori
         if (roleIdents == null) throw new ArgumentNullException(nameof(roleIdents));
         if (baseNotificationFilterGroups == null) throw new ArgumentNullException(nameof(baseNotificationFilterGroups));
 
-        var baseNotificationFilter = this.GetRoleBaseNotificationFilter(roleIdents);
+        var baseNotificationFilter = this.GetBasePermissionFilter(roleIdents);
 
         foreach (var notificationFilterGroups in baseNotificationFilterGroups.PermuteByExpand())
         {

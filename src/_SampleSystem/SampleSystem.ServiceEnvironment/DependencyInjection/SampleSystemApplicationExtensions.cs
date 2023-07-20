@@ -1,5 +1,6 @@
 ﻿using Framework.Authorization.ApproveWorkflow;
 using Framework.Authorization.BLL;
+using Framework.Authorization.Notification;
 using Framework.Cap;
 using Framework.DependencyInjection;
 
@@ -9,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SampleSystem.BLL;
 using SampleSystem.BLL.Core.Jobs;
 using SampleSystem.BLL.Jobs;
+using SampleSystem.Domain;
 
 namespace SampleSystem.ServiceEnvironment;
 
@@ -31,6 +33,8 @@ public static class SampleSystemApplicationExtensions
         services.AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>();
 
         services.ReplaceScoped<IAuthorizationValidator, SampleSystemCustomAuthValidator>();
+
+        services.ReplaceScoped<INotificationPrincipalExtractor, NotificationPrincipalExtractor<PersistentDomainObjectBase>>();
 
         return services;
     }

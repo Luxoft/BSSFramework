@@ -13,7 +13,6 @@ namespace Framework.Authorization.Notification;
 
 public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
 {
-
     private const string LevelsSeparator = "|";
 
     private const string LevelValueSeparator = ":";

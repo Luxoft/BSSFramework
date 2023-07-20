@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Luxoft.Framework.DomainDriven.Tests.Unit</PackageId>
   </PropertyGroup>
@@ -8,13 +8,13 @@
 
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CommonServiceLocator" Version="2.0.7" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
-    <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
-    <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
-    <PackageReference Include="NSubstitute" Version="5.0.0" />
-    <PackageReference Include="Unity" Version="5.11.10" />
-    <PackageReference Include="Unity.Interception" Version="5.11.1" />
+    <PackageReference Include="CommonServiceLocator" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="MSTest.TestAdapter" />
+    <PackageReference Include="MSTest.TestFramework" />
+    <PackageReference Include="NSubstitute" />
+    <PackageReference Include="Unity" />
+    <PackageReference Include="Unity.Interception" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="CommonAssemblyInfo.cs" />

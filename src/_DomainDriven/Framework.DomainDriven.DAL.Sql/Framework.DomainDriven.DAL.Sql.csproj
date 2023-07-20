@@ -1,9 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Luxoft.Framework.DomainDriven.DAL.Sql</PackageId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="170.18.0" />
+    <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />

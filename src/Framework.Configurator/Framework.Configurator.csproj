@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Configurator</PackageId>
@@ -25,7 +25,7 @@
 
   <ItemGroup>
     <!-- TODO Upgrade after fix https://github.com/ClosedXML/ClosedXML.Report/issues/303-->
-    <PackageReference Include="ClosedXML" Version="0.97.0" />
+    <PackageReference Include="ClosedXML" />
   </ItemGroup>
 
 </Project>

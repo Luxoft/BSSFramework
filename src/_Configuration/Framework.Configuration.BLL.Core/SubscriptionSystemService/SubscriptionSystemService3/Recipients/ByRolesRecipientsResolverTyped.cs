@@ -2,6 +2,7 @@
 using System.Reflection;
 
 using Framework.Authorization.BLL;
+using Framework.Authorization.Notification;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;

@@ -44,7 +44,7 @@ public class DenormalizeHierarchicalDALListener<TBLLContext, TPersistentDomainOb
         TDomainObject[] modified,
         TDomainObject[] removing)
 
-        where TDomainObject : class, TPersistentDomainObjectBase, IDenormalizedHierarchicalPersistentSource<TAncestorChildLink, TSourceToAncestorOrChildLink, TDomainObject, Guid>, IModifiedIHierarchicalLevelObject
+        where TDomainObject : class, TPersistentDomainObjectBase, IDenormalizedHierarchicalPersistentSource<TAncestorChildLink, TSourceToAncestorOrChildLink, TDomainObject, Guid>
 
         where TAncestorChildLink : class, TPersistentDomainObjectBase, IModifiedHierarchicalAncestorLink<TDomainObject, TSourceToAncestorOrChildLink, Guid>, new()
 

@@ -1,4 +1,5 @@
-﻿using Framework.Persistent;
+﻿using Framework.Authorization.Notification;
+using Framework.Persistent;
 using Framework.Restriction;
 
 using JetBrains.Annotations;

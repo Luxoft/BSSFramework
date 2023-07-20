@@ -4,6 +4,7 @@ using AutoFixture.Idioms;
 using FluentAssertions;
 using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
+using Framework.Authorization.Notification;
 using Framework.Configuration.BLL.SubscriptionSystemService3;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 using Framework.Configuration.Domain;
@@ -23,7 +24,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
 {
     private IConfigurationBLLContext context;
     private IBLLSimpleQueryBase<IEmployee> simpleQuery;
-    private IPermissionBLL permissionBll;
+    private INotificationPrincipalExtractor notificationPrincipalExtractor;
     private ITypeResolver<EntityType> securityTypeResolver;
     private IAuthorizationBLLContext authorizationContext;
     private ITypeResolver<DomainType> domainTypeResolver;
@@ -35,7 +36,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
     public void SetUp()
     {
         this.simpleQuery = this.CreateStub<IBLLSimpleQueryBase<IEmployee>>();
-        this.permissionBll = this.CreateStub<IPermissionBLL>();
+        this.notificationPrincipalExtractor = this.CreateStub<INotificationPrincipalExtractor>();
         this.securityTypeResolver = this.CreateStub<ITypeResolver<EntityType>>();
         this.domainTypeResolver = this.CreateStub<ITypeResolver<DomainType>>();
         this.domainTypeBll = this.CreateStub<IDomainTypeBLL>();
@@ -47,11 +48,11 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
         configurationLogics.CodeFirstSubscription.Returns(this.codeFirstSubscriptionBLL);
 
         var authorizationLogics = this.CreateStub<IAuthorizationBLLFactoryContainer>();
-        authorizationLogics.Permission.Returns(this.permissionBll);
         authorizationLogics.EntityType.Returns(this.entityTypeBll);
 
         this.authorizationContext = this.CreateStub<IAuthorizationBLLContext>();
         this.authorizationContext.Logics.Returns(authorizationLogics);
+        this.authorizationContext.NotificationPrincipalExtractor.Returns(this.notificationPrincipalExtractor);
         this.authorizationContext.SecurityTypeResolver.Returns(this.securityTypeResolver);
 
         this.context = this.Fixture.RegisterStub<IConfigurationBLLContext>();
@@ -99,7 +100,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
         var idents = this.Fixture.CreateMany<Guid>().ToArray();
         var principals = this.Fixture.CreateMany<Principal>();
 
-        this.permissionBll
+        this.notificationPrincipalExtractor
             .GetNotificationPrincipalsByRoles(idents)
             .Returns(principals);
 
@@ -119,7 +120,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
         var notificationFilterGroups = this.Fixture.CreateMany<NotificationFilterGroup>();
         var principals = this.Fixture.CreateMany<Principal>();
 
-        this.permissionBll
+        this.notificationPrincipalExtractor
             .GetNotificationPrincipalsByRoles(idents, notificationFilterGroups)
             .Returns(principals);
 

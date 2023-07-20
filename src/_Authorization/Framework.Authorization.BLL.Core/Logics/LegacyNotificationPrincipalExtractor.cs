@@ -1,15 +1,22 @@
-﻿using System.Linq.Expressions;
-
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Core;
-using Framework.Persistent;
+
+using System.Linq.Expressions;
+
+using Framework.Authorization.Notification;
+using Framework.DomainDriven.BLL;
 
 using JetBrains.Annotations;
 
 namespace Framework.Authorization.BLL;
 
-public partial class PermissionBLL
+public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthorizationBLLContext>, INotificationPrincipalExtractor
 {
+    public LegacyNotificationPrincipalExtractor([NotNull] IAuthorizationBLLContext context)
+        : base(context)
+    {
+    }
+
     public Expression<Func<Permission, bool>> GetRoleBaseNotificationFilter(Guid[] roleIdents)
     {
         if (roleIdents == null) throw new ArgumentNullException(nameof(roleIdents));
@@ -25,7 +32,7 @@ public partial class PermissionBLL
     {
         if (filter == null) throw new ArgumentNullException(nameof(filter));
 
-        return this.GetUnsecureQueryable()
+        return this.Context.Logics.Permission.GetUnsecureQueryable()
                    .Where(filter)
                    .Select(permission => permission.Principal)
                    .Distinct();
@@ -38,7 +45,7 @@ public partial class PermissionBLL
         return this.GetNotificationPrincipalsByRoles(this.GetRoleBaseNotificationFilter(roleIdents));
     }
 
-    public IEnumerable<Principal> GetNotificationPrincipalsByRoles(Guid[] roleIdents, [NotNull]IEnumerable<NotificationFilterGroup> notificationFilterGroups)
+    public IEnumerable<Principal> GetNotificationPrincipalsByRoles(Guid[] roleIdents, [NotNull] IEnumerable<NotificationFilterGroup> notificationFilterGroups)
     {
         if (roleIdents == null) throw new ArgumentNullException(nameof(roleIdents));
         if (notificationFilterGroups == null) throw new ArgumentNullException(nameof(notificationFilterGroups));
@@ -46,7 +53,7 @@ public partial class PermissionBLL
         return this.GetInternalNotificationPrincipals(roleIdents, notificationFilterGroups).SelectMany(v => v).Distinct();
     }
 
-    private IEnumerable<Principal[]> GetInternalNotificationPrincipals(Guid[] roleIdents, [NotNull]IEnumerable<NotificationFilterGroup> baseNotificationFilterGroups)
+    private IEnumerable<Principal[]> GetInternalNotificationPrincipals(Guid[] roleIdents, [NotNull] IEnumerable<NotificationFilterGroup> baseNotificationFilterGroups)
     {
         if (roleIdents == null) throw new ArgumentNullException(nameof(roleIdents));
         if (baseNotificationFilterGroups == null) throw new ArgumentNullException(nameof(baseNotificationFilterGroups));
@@ -109,13 +116,13 @@ public partial class PermissionBLL
         if (notificationFilterGroups == null) throw new ArgumentNullException(nameof(notificationFilterGroups));
 
         var totalFilter = notificationFilterGroups.Aggregate(baseNotificationFilter, (accumFilter, group) =>
-                                                                                     {
-                                                                                         var entityType = this.Context.GetEntityType(group.EntityType);
+        {
+            var entityType = this.Context.GetEntityType(group.EntityType);
 
-                                                                                         var entityTypeFilter = this.GetDirectPermissionFilter(entityType, group.Idents, group.ExpandType.AllowEmpty());
+            var entityTypeFilter = this.GetDirectPermissionFilter(entityType, group.Idents, group.ExpandType.AllowEmpty());
 
-                                                                                         return accumFilter.BuildAnd(entityTypeFilter);
-                                                                                     });
+            return accumFilter.BuildAnd(entityTypeFilter);
+        });
 
         return this.GetNotificationPrincipalsByRoles(totalFilter);
     }
@@ -153,22 +160,22 @@ public partial class PermissionBLL
         var filterByPermFilters = this.GetPermissionsForRoles(roles, principals).BuildOr(perm =>
         {
             return perm.FilterItems.GroupBy(f => f.EntityType).BuildAnd(entityFilter =>
-                                                                        {
-                                                                            var entityIds = entityFilter.Select(z => z.Entity.EntityId).ToList();
+            {
+                var entityIds = entityFilter.Select(z => z.Entity.EntityId).ToList();
 
-                                                                            Expression<Func<Permission, bool>> addFilterExpression =
-                                                                                    z => z.FilterItems.Any(e => e.EntityType == entityFilter.Key && entityIds.Contains(e.Entity.EntityId))
-                                                                                        || z.FilterItems.All(e => e.EntityType != entityFilter.Key);
+                Expression<Func<Permission, bool>> addFilterExpression =
+                        z => z.FilterItems.Any(e => e.EntityType == entityFilter.Key && entityIds.Contains(e.Entity.EntityId))
+                            || z.FilterItems.All(e => e.EntityType != entityFilter.Key);
 
-                                                                            return addFilterExpression;
-                                                                        });
+                return addFilterExpression;
+            });
         });
 
         var today = this.Context.DateTimeService.Today;
 
         var query = filterExpression.BuildAnd(filterByPermFilters).BuildAnd(p => p.Status == PermissionStatus.Approved && p.Period.Contains(today));
 
-        return this.GetListBy(query, f => f.Select(l => l.Principal)).Select(z => z.Principal).Distinct();
+        return this.Context.Logics.Permission.GetListBy(query, f => f.Select(l => l.Principal)).Select(z => z.Principal).Distinct();
     }
 
     private IEnumerable<Permission> GetPermissionsForRoles([NotNull] ICollection<BusinessRole> roles, [NotNull] IEnumerable<Principal> principals)
@@ -184,7 +191,7 @@ public partial class PermissionBLL
 
         var today = this.Context.DateTimeService.Today;
 
-        var result = this.GetListBy(z => z.Status == PermissionStatus.Approved && allRoles.Contains(z.Role) && principalIds.Contains(z.Principal.Id) && z.Period.Contains(today));
+        var result = this.Context.Logics.Permission.GetListBy(z => z.Status == PermissionStatus.Approved && allRoles.Contains(z.Role) && principalIds.Contains(z.Principal.Id) && z.Period.Contains(today));
 
         return result;
     }

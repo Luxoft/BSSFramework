@@ -1,9 +1,11 @@
-﻿using System.Linq.Expressions;
+﻿using System.Linq.Dynamic.Core;
+using System.Linq.Expressions;
 using Automation.ServiceEnvironment;
 
 using FluentAssertions;
 
 using Framework.Authorization.BLL;
+using Framework.Authorization.Notification;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
@@ -51,8 +53,8 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         // Act
         var result = this.Evaluate(
             DBSessionMode.Read,
-            context => context.Authorization.Logics.Permission
-                .GetNotificationPrincipalsByOperations(new[] { operationId }, new[] { fbuChildFilter, locChildFilter })
+            context => context.Authorization.NotificationPrincipalExtractor
+                              .GetNotificationPrincipalsByOperations(new[] { operationId }, new[] { fbuChildFilter, locChildFilter })
                 .ToArray());
 
 
@@ -64,7 +66,7 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
 
                 var basePermissionQ = context.Authorization.Logics.Permission.GetUnsecureQueryable();
 
-                var basePermissionFilter = context.Authorization.Logics.Permission.GetRoleBaseNotificationFilter(new[] { role.Id });
+                var basePermissionFilter = context.Authorization.NotificationPrincipalExtractor.GetRoleBaseNotificationFilter(new[] { role.Id });
 
                 var basePermissionPreFilteredQ = basePermissionQ.Where(basePermissionFilter).Select(permission => permission.Id);
 
@@ -81,6 +83,8 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
                     fbuChildFilter,
                     (typedPermission, buLevel) => new { typedPermission, BuLevel = buLevel },
                     pair => pair.BuLevel);
+
+                var rr = typedPermissionRequestWithBu.ToList();
 
                 var typedPermissionRequestWithLoc = WithTypedAuthPermissionFilter(
                     context.HierarchicalObjectExpanderFactory,
@@ -126,7 +130,7 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
 
             let directLevel = securityItemsPath.Eval(typedPermission)
                                                .Where(secItem => expandedSecIdents.Contains(secItem.Id))
-                                               .Select(secItem => (int?)secItem.DeepLevel).Min()
+                                               .Select(secItem => (int?)secItem.DeepLevel).Max()
 
                               ?? PriorityLevels.Access_Denied
 

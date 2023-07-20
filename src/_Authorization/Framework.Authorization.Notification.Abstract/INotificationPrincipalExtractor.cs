@@ -1,19 +1,16 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Authorization.Domain;
-using JetBrains.Annotations;
 
 namespace Framework.Authorization.Notification;
 
 public interface INotificationPrincipalExtractor
 {
-    [NotNull]
     Expression<Func<Permission, bool>> GetRoleBaseNotificationFilter(Guid[] roleIdents);
 
-    [NotNull]
-    IEnumerable<Principal> GetNotificationPrincipalsByRoles([NotNull] Guid[] roleIdents);
+    IEnumerable<Principal> GetNotificationPrincipalsByRoles(Guid[] roleIdents);
 
-    [NotNull] IEnumerable<Principal> GetNotificationPrincipalsByRoles([NotNull] Guid[] roleIdents, [NotNull] IEnumerable<NotificationFilterGroup> notificationFilterGroups);
+    IEnumerable<Principal> GetNotificationPrincipalsByRoles(Guid[] roleIdents, IEnumerable<NotificationFilterGroup> notificationFilterGroups);
 
     /// <summary>
     /// Получить все принципалы у которых есть доступ к роли <paramref name="relatedRoleId"/>
@@ -23,9 +20,7 @@ public interface INotificationPrincipalExtractor
     /// <param name="principalNames">Список принципалов по которым получается список Entity с учетом <paramref name="roleIdents"/></param>
     /// <param name="relatedRoleId">Роль которая должна быть у результирующих принципалов</param>
     /// <returns></returns>
-    [NotNull]
-    IEnumerable<Principal> GetNotificationPrincipalsByRelatedRole([NotNull] Guid[] roleIdents, [NotNull] IEnumerable<string> principalNames, Guid relatedRoleId);
+    IEnumerable<Principal> GetNotificationPrincipalsByRelatedRole(Guid[] roleIdents, IEnumerable<string> principalNames, Guid relatedRoleId);
 
-    [NotNull]
-    IEnumerable<Principal> GetNotificationPrincipalsByOperations([NotNull] Guid[] operationsIds, [NotNull] IEnumerable<NotificationFilterGroup> notificationFilterGroups);
+    IEnumerable<Principal> GetNotificationPrincipalsByOperations(Guid[] operationsIds, IEnumerable<NotificationFilterGroup> notificationFilterGroups);
 }

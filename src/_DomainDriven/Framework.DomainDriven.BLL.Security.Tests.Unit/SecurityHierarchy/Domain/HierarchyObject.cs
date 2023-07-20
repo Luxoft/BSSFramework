@@ -3,8 +3,7 @@
 namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
 
 public class HierarchyObject : PersistentDomainObjectBase,
-                               IDenormalizedHierarchicalPersistentSource<HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, HierarchyObject, Guid>,
-                               IModifiedIHierarchicalLevelObject
+                               IDenormalizedHierarchicalPersistentSource<HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, HierarchyObject, Guid>
 {
     private readonly IList<HierarchyObject> children = new List<HierarchyObject>();
 

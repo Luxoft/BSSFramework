@@ -13,7 +13,7 @@ public class SyncDenormolizedValuesService<TBLLContext, TPersistentDomainObjectB
         where TBLLContext : class, IBLLBaseContextBase<TPersistentDomainObjectBase, TIdent>
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObjectAncestorLink : class, TPersistentDomainObjectBase, IModifiedHierarchicalAncestorLink<TDomainObject, TSourceToAncestorOrChildLink, TIdent>, new()
-        where TDomainObject : class, TPersistentDomainObjectBase, IDenormalizedHierarchicalPersistentSource<TDomainObjectAncestorLink, TSourceToAncestorOrChildLink, TDomainObject, TIdent>, IModifiedIHierarchicalLevelObject
+        where TDomainObject : class, TPersistentDomainObjectBase, IDenormalizedHierarchicalPersistentSource<TDomainObjectAncestorLink, TSourceToAncestorOrChildLink, TDomainObject, TIdent>
         where TIdent : struct, IComparable<TIdent>
         where TNamedLockObject : class, TPersistentDomainObjectBase, INamedLock<TNamedLockOperation>
         where TNamedLockOperation : struct, Enum
@@ -99,7 +99,10 @@ public class SyncDenormolizedValuesService<TBLLContext, TPersistentDomainObjectB
 
     private void UpdateDeepLevel(TDomainObject domainObject)
     {
-        domainObject.DeepLevel = domainObject.GetAllParents(true).Count();
+        if (domainObject is IModifiedIHierarchicalLevelObject deepLevelObject)
+        {
+            deepLevelObject.DeepLevel = domainObject.GetAllParents(true).Count();
+        }
     }
 
     private void Init()

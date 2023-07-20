@@ -15,6 +15,7 @@ using Framework.QueryLanguage;
 using Framework.SecuritySystem;
 
 using JetBrains.Annotations;
+using Framework.Authorization.Notification;
 
 namespace Framework.Authorization.BLL;
 
@@ -53,6 +54,7 @@ public partial class AuthorizationBLLContext
             [NotNull] IRunAsManager runAsManager,
             [NotNull] ISecurityTypeResolverContainer securityTypeResolverContainer,
             [NotNull] IRuntimePermissionOptimizationService optimizeRuntimePermissionService,
+            [NotNull] INotificationPrincipalExtractor notificationPrincipalExtractor,
             [NotNull] IAuthorizationBLLContextSettings settings)
             : base(
                    serviceProvider,
@@ -69,6 +71,8 @@ public partial class AuthorizationBLLContext
         this.SecurityService = securityService ?? throw new ArgumentNullException(nameof(securityService));
         this.logics = logics ?? throw new ArgumentNullException(nameof(logics));
         this.optimizeRuntimePermissionService = optimizeRuntimePermissionService ?? throw new ArgumentNullException(nameof(optimizeRuntimePermissionService));
+        this.NotificationPrincipalExtractor = notificationPrincipalExtractor;
+
         this.ExternalSource = externalSource ?? throw new ArgumentNullException(nameof(externalSource));
         this.RunAsManager = runAsManager ?? throw new ArgumentNullException(nameof(runAsManager));
         this.Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
@@ -102,6 +106,8 @@ public partial class AuthorizationBLLContext
     public ITypeResolver<EntityType> SecurityTypeResolver { get; }
 
     public IRunAsManager RunAsManager { get; }
+
+    public INotificationPrincipalExtractor NotificationPrincipalExtractor { get; }
 
     public string CurrentPrincipalName { get; }
 

@@ -1,5 +1,6 @@
 ﻿using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
+using Framework.Authorization.Notification;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
 using Framework.Core;
@@ -99,6 +100,7 @@ public static class ServiceCollectionExtensions
                .AddScoped<IAuthorizationBLLFactoryContainer, AuthorizationBLLFactoryContainer>()
                .AddScoped<IRunAsManager, AuthorizationRunAsManger>()
                .AddScoped<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>()
+               .AddScoped<INotificationPrincipalExtractor, LegacyNotificationPrincipalExtractor>()
                .AddScoped<IAuthorizationBLLContextSettings, AuthorizationBLLContextSettings>()
 
                .AddScopedFromLazyInterfaceImplement<IAuthorizationBLLContext, AuthorizationBLLContext>()

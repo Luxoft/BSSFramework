@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Authorization.Domain;
+using Framework.Authorization.Notification;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL.Configuration;
@@ -25,6 +26,8 @@ public partial interface IAuthorizationBLLContext :
     IDateTimeService DateTimeService { get; }
 
     IAuthorizationExternalSource ExternalSource { get; }
+
+    INotificationPrincipalExtractor NotificationPrincipalExtractor { get; }
 
     Principal CurrentPrincipal { get; }
 

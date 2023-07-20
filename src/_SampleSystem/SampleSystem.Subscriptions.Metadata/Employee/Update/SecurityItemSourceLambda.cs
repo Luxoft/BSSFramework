@@ -1,4 +1,5 @@
-﻿using Framework.Configuration.SubscriptionModeling;
+﻿using Framework.Authorization.Notification;
+using Framework.Configuration.SubscriptionModeling;
 using Framework.Persistent;
 
 using SampleSystem.Domain;

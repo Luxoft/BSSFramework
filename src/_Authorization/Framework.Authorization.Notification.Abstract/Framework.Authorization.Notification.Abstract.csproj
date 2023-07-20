@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.Authorization.Notification.Abstract</PackageId>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
+  </ItemGroup>
+</Project>

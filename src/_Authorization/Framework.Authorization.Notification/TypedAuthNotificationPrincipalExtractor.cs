@@ -10,7 +10,7 @@ using Framework.SecuritySystem;
 
 namespace Framework.Authorization.Notification;
 
-public class TypedAthNotificationPrincipalExtractor<TTypedAuthPermission> : INotificationPrincipalExtractor
+public class TypedAuthNotificationPrincipalExtractor<TTypedAuthPermission> : INotificationPrincipalExtractor
     where TTypedAuthPermission : IIdentityObject<Guid>
 {
     private readonly IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory;
@@ -19,7 +19,7 @@ public class TypedAthNotificationPrincipalExtractor<TTypedAuthPermission> : INot
 
     private readonly IRepository<TTypedAuthPermission> typedAuthPermissionRepository;
 
-    public TypedAthNotificationPrincipalExtractor(
+    public TypedAuthNotificationPrincipalExtractor(
         IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
         IRepositoryFactory<Permission> permissionRepositoryFactory,
         IRepositoryFactory<TTypedAuthPermission> typedAuthPermissionRepositoryFactory)
@@ -50,27 +50,27 @@ public class TypedAthNotificationPrincipalExtractor<TTypedAuthPermission> : INot
         var preFiltered = typedPermissionQ.Where(typedPermission => basePermissionPreFilteredQ.Contains(typedPermission.Id));
 
 
-        var typedPermissionRequestWithBu = WithTypedAuthPermissionFilter(
-            context.HierarchicalObjectExpanderFactory,
-            preFiltered,
-            pair => pair,
-            v => v.BusinessUnitItems.Select(item => item.ContextEntity),
-            fbuChildFilter,
-            (typedPermission, buLevel) => new { typedPermission, BuLevel = buLevel },
-            pair => pair.BuLevel);
+        //var typedPermissionRequestWithBu = this.WithTypedAuthPermissionFilter(
+        //    preFiltered,
+        //    pair => pair,
+        //    v => v.BusinessUnitItems.Select(item => item.ContextEntity),
+        //    fbuChildFilter,
+        //    (typedPermission, buLevel) => new { typedPermission, BuLevel = buLevel },
+        //    pair => pair.BuLevel);
 
-        var rr = typedPermissionRequestWithBu.ToList();
+        //var rr = typedPermissionRequestWithBu.ToList();
 
-        var typedPermissionRequestWithLoc = WithTypedAuthPermissionFilter(
-            context.HierarchicalObjectExpanderFactory,
-            typedPermissionRequestWithBu,
-            pair => pair.typedPermission,
-            v => v.LocationItems.Select(item => item.ContextEntity),
-            locChildFilter,
-            (pair, locLevel) => new { pair.typedPermission, pair.BuLevel, LocLecel = locLevel },
-            pair => pair.LocLecel);
+        //var typedPermissionRequestWithLoc = this.WithTypedAuthPermissionFilter(
+        //    typedPermissionRequestWithBu,
+        //    pair => pair.typedPermission,
+        //    v => v.LocationItems.Select(item => item.ContextEntity),
+        //    locChildFilter,
+        //    (pair, locLevel) => new { pair.typedPermission, pair.BuLevel, LocLecel = locLevel },
+        //    pair => pair.LocLecel);
 
-        var typedPermissions = typedPermissionRequestWithLoc.ToList();
+        //var typedPermissions = typedPermissionRequestWithLoc.ToList();
+
+        throw new NotImplementedException();
     }
 
     private IQueryable<TResult> WithTypedAuthPermissionFilter<TSource, TItem, TResult>(

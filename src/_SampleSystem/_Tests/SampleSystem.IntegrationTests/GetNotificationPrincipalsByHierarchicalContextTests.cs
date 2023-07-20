@@ -41,8 +41,8 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         var permissionToRootUnits = new SampleSystemPermission(TestBusinessRole.SystemIntegration, parentBusinessUnit, null, parentLocation);
         this.AuthHelper.SetUserRole(employeeLogin, permissionToRootUnits);
 
-        var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { childBusinessUnit.Id }, NotificationExpandType.DirectOrFirstParentOrEmpty);
-        var locChildFilter = new NotificationFilterGroup(typeof(Location), new[] { childLocation.Id }, NotificationExpandType.DirectOrFirstParentOrEmpty);
+        var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { childBusinessUnit.Id }, NotificationExpandType.DirectOrFirstParent);
+        var locChildFilter = new NotificationFilterGroup(typeof(Location), new[] { childLocation.Id }, NotificationExpandType.DirectOrFirstParent);
 
         var operationId = this.Evaluate(
             DBSessionMode.Read,
@@ -53,110 +53,13 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         // Act
         var result = this.Evaluate(
             DBSessionMode.Read,
-            context => context.Authorization.NotificationPrincipalExtractor
+            context => context.Authorization
+                              .NotificationPrincipalExtractor
                               .GetNotificationPrincipalsByOperations(new[] { operationId }, new[] { fbuChildFilter, locChildFilter })
-                .ToArray());
-
-
-        this.Evaluate(
-            DBSessionMode.Read,
-            context =>
-            {
-                var role = context.Authorization.Logics.BusinessRole.GetByName(TestBusinessRole.SystemIntegration.GetRoleName());
-
-                var basePermissionQ = context.Authorization.Logics.Permission.GetUnsecureQueryable();
-
-                var basePermissionFilter = context.Authorization.NotificationPrincipalExtractor.GetRoleBaseNotificationFilter(new[] { role.Id });
-
-                var basePermissionPreFilteredQ = basePermissionQ.Where(basePermissionFilter).Select(permission => permission.Id);
-
-                var typedPermissionQ = context.Logics.Default.Create<TypedAuthPermission>().GetUnsecureQueryable();
-
-                var preFiltered = typedPermissionQ.Where(typedPermission => basePermissionPreFilteredQ.Contains(typedPermission.Id));
-
-
-                var typedPermissionRequestWithBu = WithTypedAuthPermissionFilter(
-                    context.HierarchicalObjectExpanderFactory,
-                    preFiltered,
-                    pair => pair,
-                    v => v.BusinessUnitItems.Select(item => item.ContextEntity),
-                    fbuChildFilter,
-                    (typedPermission, buLevel) => new { typedPermission, BuLevel = buLevel },
-                    pair => pair.BuLevel);
-
-                var rr = typedPermissionRequestWithBu.ToList();
-
-                var typedPermissionRequestWithLoc = WithTypedAuthPermissionFilter(
-                    context.HierarchicalObjectExpanderFactory,
-                    typedPermissionRequestWithBu,
-                    pair => pair.typedPermission,
-                    v => v.LocationItems.Select(item => item.ContextEntity),
-                    locChildFilter,
-                    (pair, locLevel) => new { pair.typedPermission, pair.BuLevel, LocLecel = locLevel },
-                    pair => pair.LocLecel);
-
-                var typedPermissions = typedPermissionRequestWithLoc.ToList();
-
-                //var permissions = context.Authorization.Logics.Permission.GetListByIdents(typedPermissions.Select(pair => pair.Id));
-
-                return;
-            });
+                              .ToArray(p => p.Name));
 
         // Assert
-        result.Select(x => x.Name).Should().Contain(employeeLogin);
+        result.Length.Should().Be(1);
+        result.Single().Should().Be(employeeLogin);
     }
-
-    private static IQueryable<TResult> WithTypedAuthPermissionFilter<TSource, TItem, TResult>(
-        IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
-        IQueryable<TSource> source,
-        Expression<Func<TSource, TypedAuthPermission>> permissionPath,
-        Expression<Func<TypedAuthPermission, IEnumerable<TItem>>> securityItemsPath,
-        NotificationFilterGroup notificationFilterGroup,
-        Expression<Func<TSource, int, TResult>> resultSelector,
-        Expression<Func<TResult, int>> levelSelector)
-        where TItem : PersistentDomainObjectBase, IHierarchicalLevelObject, ISecurityContext
-    {
-        var expandedSecIdents = notificationFilterGroup.ExpandType.IsHierarchical()
-                                    ? hierarchicalObjectExpanderFactory.Create(typeof(TItem)).Expand(notificationFilterGroup.Idents, HierarchicalExpandType.Parents)
-                                    : notificationFilterGroup.Idents;
-
-        var grandAccess = notificationFilterGroup.ExpandType.AllowEmpty();
-
-        var selector =
-
-            from typedPermissionSource in ExpressionHelper.GetIdentity<TSource>()
-
-            let typedPermission = permissionPath.Eval(typedPermissionSource)
-
-            let directLevel = securityItemsPath.Eval(typedPermission)
-                                               .Where(secItem => expandedSecIdents.Contains(secItem.Id))
-                                               .Select(secItem => (int?)secItem.DeepLevel).Max()
-
-                              ?? PriorityLevels.Access_Denied
-
-            let grandLevel = grandAccess && !securityItemsPath.Eval(typedPermission).Any()
-                                 ? PriorityLevels.Grand_Access
-                                 : PriorityLevels.Access_Denied
-
-            let level = Math.Max(directLevel, grandLevel)
-
-            select resultSelector.Eval(typedPermissionSource, level);
-
-
-        var filter =
-
-            from level in levelSelector
-
-            select level != PriorityLevels.Access_Denied;
-
-        return source.Select(selector.ExpandConst().InlineEval())
-                     .Where(filter.ExpandConst().InlineEval());
-    }
-}
-
-public static class PriorityLevels
-{
-    public const int Grand_Access = -1;
-
-    public const int Access_Denied = -2;
 }

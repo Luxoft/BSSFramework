@@ -14,12 +14,10 @@ namespace SampleSystem.Domain.Projections
     [Framework.Persistent.Mapping.TableAttribute(Name="BusinessUnit")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.BusinessUnit), Framework.Projection.ProjectionRole.SecurityNode)]
     [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitView, SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitHrDepartmentView, SampleSystem.SampleSystemSecurityOperationCode.EmployeeEdit, SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitHrDepartmentEdit)]
-    public partial class SecurityBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext, SampleSystem.Domain.IBusinessUnitSecurityElement<SampleSystem.Domain.Projections.SecurityBusinessUnit>, Framework.Persistent.IDenormalizedHierarchicalPersistentSource<SampleSystem.Domain.Projections.SecurityBusinessUnitAncestorLink, SampleSystem.Domain.Projections.SecurityBusinessUnitToAncestorChildView, SampleSystem.Domain.Projections.SecurityBusinessUnit, System.Guid>, Framework.Persistent.IHierarchicalPersistentDomainObjectBase<SampleSystem.Domain.Projections.SecurityBusinessUnit, System.Guid>, Framework.Persistent.IHierarchicalSource<SampleSystem.Domain.Projections.SecurityBusinessUnit>, Framework.Persistent.IParentSource<SampleSystem.Domain.Projections.SecurityBusinessUnit>, Framework.Persistent.IChildrenSource<SampleSystem.Domain.Projections.SecurityBusinessUnit>, Framework.Persistent.IHierarchicalLevelObject
+    public partial class SecurityBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext, SampleSystem.Domain.IBusinessUnitSecurityElement<SampleSystem.Domain.Projections.SecurityBusinessUnit>, Framework.Persistent.IDenormalizedHierarchicalPersistentSource<SampleSystem.Domain.Projections.SecurityBusinessUnitAncestorLink, SampleSystem.Domain.Projections.SecurityBusinessUnitToAncestorChildView, SampleSystem.Domain.Projections.SecurityBusinessUnit, System.Guid>, Framework.Persistent.IHierarchicalPersistentDomainObjectBase<SampleSystem.Domain.Projections.SecurityBusinessUnit, System.Guid>, Framework.Persistent.IHierarchicalSource<SampleSystem.Domain.Projections.SecurityBusinessUnit>, Framework.Persistent.IParentSource<SampleSystem.Domain.Projections.SecurityBusinessUnit>, Framework.Persistent.IChildrenSource<SampleSystem.Domain.Projections.SecurityBusinessUnit>
     {
         
         private System.Collections.Generic.ICollection<SampleSystem.Domain.Projections.SecurityBusinessUnit> children_Security;
-        
-        private int deepLevel_Security;
         
         private SampleSystem.Domain.Projections.SecurityBusinessUnit parent_Security;
         
@@ -53,27 +51,6 @@ namespace SampleSystem.Domain.Projections
             get
             {
                 return this.children_Security;
-            }
-        }
-        
-        [Framework.Persistent.ExpandPathAttribute("DeepLevel_Security")]
-        int Framework.Persistent.IHierarchicalLevelObject.DeepLevel
-        {
-            get
-            {
-                return this.DeepLevel_Security;
-            }
-        }
-        
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
-        [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Security)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="deepLevel")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual int DeepLevel_Security
-        {
-            get
-            {
-                return this.deepLevel_Security;
             }
         }
         
@@ -383,12 +360,10 @@ namespace SampleSystem.Domain.Projections
     [Framework.Persistent.Mapping.TableAttribute(Name="Location")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.Location), Framework.Projection.ProjectionRole.SecurityNode)]
     [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.LocationView, SampleSystem.SampleSystemSecurityOperationCode.HRDepartmentEdit)]
-    public partial class SecurityLocation : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext, Framework.Persistent.IDenormalizedHierarchicalPersistentSource<SampleSystem.Domain.Projections.SecurityLocationAncestorLink, SampleSystem.Domain.Projections.SecurityLocationToAncestorChildView, SampleSystem.Domain.Projections.SecurityLocation, System.Guid>, Framework.Persistent.IHierarchicalPersistentDomainObjectBase<SampleSystem.Domain.Projections.SecurityLocation, System.Guid>, Framework.Persistent.IHierarchicalSource<SampleSystem.Domain.Projections.SecurityLocation>, Framework.Persistent.IParentSource<SampleSystem.Domain.Projections.SecurityLocation>, Framework.Persistent.IChildrenSource<SampleSystem.Domain.Projections.SecurityLocation>, Framework.Persistent.IHierarchicalLevelObject
+    public partial class SecurityLocation : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext, Framework.Persistent.IDenormalizedHierarchicalPersistentSource<SampleSystem.Domain.Projections.SecurityLocationAncestorLink, SampleSystem.Domain.Projections.SecurityLocationToAncestorChildView, SampleSystem.Domain.Projections.SecurityLocation, System.Guid>, Framework.Persistent.IHierarchicalPersistentDomainObjectBase<SampleSystem.Domain.Projections.SecurityLocation, System.Guid>, Framework.Persistent.IHierarchicalSource<SampleSystem.Domain.Projections.SecurityLocation>, Framework.Persistent.IParentSource<SampleSystem.Domain.Projections.SecurityLocation>, Framework.Persistent.IChildrenSource<SampleSystem.Domain.Projections.SecurityLocation>
     {
         
         private System.Collections.Generic.ICollection<SampleSystem.Domain.Projections.SecurityLocation> children_Security;
-        
-        private int deepLevel_Security;
         
         private SampleSystem.Domain.Projections.SecurityLocation parent_Security;
         
@@ -413,27 +388,6 @@ namespace SampleSystem.Domain.Projections
             get
             {
                 return this.children_Security;
-            }
-        }
-        
-        [Framework.Persistent.ExpandPathAttribute("DeepLevel_Security")]
-        int Framework.Persistent.IHierarchicalLevelObject.DeepLevel
-        {
-            get
-            {
-                return this.DeepLevel_Security;
-            }
-        }
-        
-        [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
-        [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Security)]
-        [Framework.Persistent.Mapping.MappingAttribute(ColumnName="deepLevel")]
-        [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
-        public virtual int DeepLevel_Security
-        {
-            get
-            {
-                return this.deepLevel_Security;
             }
         }
         

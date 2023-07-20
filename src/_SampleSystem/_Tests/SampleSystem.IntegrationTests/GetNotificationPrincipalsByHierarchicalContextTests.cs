@@ -21,19 +21,19 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
     public void GetPrincipalsWithPermissionToTwoRootUnits_By_Roles()
     {
         // Arrange
-        var employeeLogin = "employee";
+        var employeeLogin = "GetNotificationPrincipalsByHierarchicalContextTests_Employee";
 
-        var parentLocation = this.DataHelper.SaveLocation();
-        var childLocation = this.DataHelper.SaveLocation(parent: parentLocation);
+        var rootBusinessUnit = this.DataHelper.SaveBusinessUnit(id: DefaultConstants.BUSINESS_UNIT_PARENT_CC_ID);
+        var childBusinessUnit = this.DataHelper.SaveBusinessUnit(parent: rootBusinessUnit);
 
-        var parentBusinessUnit = this.DataHelper.SaveBusinessUnit();
-        var childBusinessUnit = this.DataHelper.SaveBusinessUnit(parent: parentBusinessUnit);
+        var rootLocation = this.DataHelper.SaveLocation(DefaultConstants.LOCATION_PARENT_ID);
+        var childLocation = this.DataHelper.SaveLocation(parent: rootLocation);
 
-        var permissionToRootUnits = new SampleSystemPermission(TestBusinessRole.SystemIntegration, parentBusinessUnit, null, parentLocation);
+        var permissionToRootUnits = new SampleSystemPermission(TestBusinessRole.SystemIntegration, childBusinessUnit, null, childLocation);
         this.AuthHelper.SetUserRole(employeeLogin, permissionToRootUnits);
 
-        var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { childBusinessUnit.Id }, NotificationExpandType.DirectOrFirstParent);
-        var locChildFilter = new NotificationFilterGroup(typeof(Location), new[] { childLocation.Id }, NotificationExpandType.DirectOrFirstParent);
+        var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { childBusinessUnit.Id }, NotificationExpandType.Direct);
+        var locChildFilter = new NotificationFilterGroup(typeof(Location), new[] { childLocation.Id }, NotificationExpandType.Direct);
         var securityFilters = new[] { fbuChildFilter, locChildFilter };
 
         var roleId = this.EvaluateRead(

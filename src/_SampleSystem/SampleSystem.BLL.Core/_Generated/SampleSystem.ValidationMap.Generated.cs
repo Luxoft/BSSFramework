@@ -2839,26 +2839,6 @@ namespace SampleSystem.BLL
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTestUnpersistentObjectValidationMap()));
             }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.TypedAuth.TypedAuthPermission)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTypedAuthPermissionValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.TypedAuth.TypedAuthPermissionBusinessUnit)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTypedAuthPermissionBusinessUnitValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.TypedAuth.TypedAuthPermissionEmployee)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTypedAuthPermissionEmployeeValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.TypedAuth.TypedAuthPermissionLocation)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTypedAuthPermissionLocationValidationMap()));
-            }
-            else if ((typeof(TSource) == typeof(SampleSystem.Domain.TypedAuth.TypedAuthPermissionManagementUnit)))
-            {
-                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetTypedAuthPermissionManagementUnitValidationMap()));
-            }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.UniqueByMaster.ParentEntity)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetParentEntityValidationMap()));
@@ -4236,59 +4216,6 @@ namespace SampleSystem.BLL
         protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestUnpersistentObject> GetTestUnpersistentObjectValidationMap()
         {
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.TestUnpersistentObject>(this.GetTestUnpersistentObjectProperties);
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TypedAuth.TypedAuthPermission, System.Collections.Generic.IEnumerable<SampleSystem.Domain.TypedAuth.TypedAuthPermissionBusinessUnit>>> GetTypedAuthPermission_BusinessUnitItemsValidators()
-        {
-            yield return new Framework.Validation.DeepCollectionValidator<SampleSystem.Domain.TypedAuth.TypedAuthPermission, System.Collections.Generic.IEnumerable<SampleSystem.Domain.TypedAuth.TypedAuthPermissionBusinessUnit>, SampleSystem.Domain.TypedAuth.TypedAuthPermissionBusinessUnit>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TypedAuth.TypedAuthPermission, System.Collections.Generic.IEnumerable<SampleSystem.Domain.TypedAuth.TypedAuthPermissionEmployee>>> GetTypedAuthPermission_EmployeeItemsValidators()
-        {
-            yield return new Framework.Validation.DeepCollectionValidator<SampleSystem.Domain.TypedAuth.TypedAuthPermission, System.Collections.Generic.IEnumerable<SampleSystem.Domain.TypedAuth.TypedAuthPermissionEmployee>, SampleSystem.Domain.TypedAuth.TypedAuthPermissionEmployee>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TypedAuth.TypedAuthPermission, System.Collections.Generic.IEnumerable<SampleSystem.Domain.TypedAuth.TypedAuthPermissionLocation>>> GetTypedAuthPermission_LocationItemsValidators()
-        {
-            yield return new Framework.Validation.DeepCollectionValidator<SampleSystem.Domain.TypedAuth.TypedAuthPermission, System.Collections.Generic.IEnumerable<SampleSystem.Domain.TypedAuth.TypedAuthPermissionLocation>, SampleSystem.Domain.TypedAuth.TypedAuthPermissionLocation>();
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TypedAuth.TypedAuthPermission, System.Collections.Generic.IEnumerable<SampleSystem.Domain.TypedAuth.TypedAuthPermissionManagementUnit>>> GetTypedAuthPermission_ManagementUnitItemsValidators()
-        {
-            yield return new Framework.Validation.DeepCollectionValidator<SampleSystem.Domain.TypedAuth.TypedAuthPermission, System.Collections.Generic.IEnumerable<SampleSystem.Domain.TypedAuth.TypedAuthPermissionManagementUnit>, SampleSystem.Domain.TypedAuth.TypedAuthPermissionManagementUnit>();
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TypedAuth.TypedAuthPermissionBusinessUnit> GetTypedAuthPermissionBusinessUnitValidationMap()
-        {
-            return Framework.Validation.ClassValidationMap<SampleSystem.Domain.TypedAuth.TypedAuthPermissionBusinessUnit>.Empty;
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TypedAuth.TypedAuthPermissionEmployee> GetTypedAuthPermissionEmployeeValidationMap()
-        {
-            return Framework.Validation.ClassValidationMap<SampleSystem.Domain.TypedAuth.TypedAuthPermissionEmployee>.Empty;
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TypedAuth.TypedAuthPermissionLocation> GetTypedAuthPermissionLocationValidationMap()
-        {
-            return Framework.Validation.ClassValidationMap<SampleSystem.Domain.TypedAuth.TypedAuthPermissionLocation>.Empty;
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TypedAuth.TypedAuthPermissionManagementUnit> GetTypedAuthPermissionManagementUnitValidationMap()
-        {
-            return Framework.Validation.ClassValidationMap<SampleSystem.Domain.TypedAuth.TypedAuthPermissionManagementUnit>.Empty;
-        }
-        
-        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.TypedAuth.TypedAuthPermission>> GetTypedAuthPermissionProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.TypedAuth.TypedAuthPermission> currentClass)
-        {
-            yield return new Framework.Validation.CollectionPropertyValidationMap<SampleSystem.Domain.TypedAuth.TypedAuthPermission, System.Collections.Generic.IEnumerable<SampleSystem.Domain.TypedAuth.TypedAuthPermissionBusinessUnit>, SampleSystem.Domain.TypedAuth.TypedAuthPermissionBusinessUnit>(source => source.BusinessUnitItems, currentClass, this.GetTypedAuthPermission_BusinessUnitItemsValidators(), this.GetClassMap<SampleSystem.Domain.TypedAuth.TypedAuthPermissionBusinessUnit>(true));
-            yield return new Framework.Validation.CollectionPropertyValidationMap<SampleSystem.Domain.TypedAuth.TypedAuthPermission, System.Collections.Generic.IEnumerable<SampleSystem.Domain.TypedAuth.TypedAuthPermissionEmployee>, SampleSystem.Domain.TypedAuth.TypedAuthPermissionEmployee>(source => source.EmployeeItems, currentClass, this.GetTypedAuthPermission_EmployeeItemsValidators(), this.GetClassMap<SampleSystem.Domain.TypedAuth.TypedAuthPermissionEmployee>(true));
-            yield return new Framework.Validation.CollectionPropertyValidationMap<SampleSystem.Domain.TypedAuth.TypedAuthPermission, System.Collections.Generic.IEnumerable<SampleSystem.Domain.TypedAuth.TypedAuthPermissionLocation>, SampleSystem.Domain.TypedAuth.TypedAuthPermissionLocation>(source => source.LocationItems, currentClass, this.GetTypedAuthPermission_LocationItemsValidators(), this.GetClassMap<SampleSystem.Domain.TypedAuth.TypedAuthPermissionLocation>(true));
-            yield return new Framework.Validation.CollectionPropertyValidationMap<SampleSystem.Domain.TypedAuth.TypedAuthPermission, System.Collections.Generic.IEnumerable<SampleSystem.Domain.TypedAuth.TypedAuthPermissionManagementUnit>, SampleSystem.Domain.TypedAuth.TypedAuthPermissionManagementUnit>(source => source.ManagementUnitItems, currentClass, this.GetTypedAuthPermission_ManagementUnitItemsValidators(), this.GetClassMap<SampleSystem.Domain.TypedAuth.TypedAuthPermissionManagementUnit>(true));
-        }
-        
-        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.TypedAuth.TypedAuthPermission> GetTypedAuthPermissionValidationMap()
-        {
-            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.TypedAuth.TypedAuthPermission>(this.GetTypedAuthPermissionProperties);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.WorkflowCoreExecutionError, System.DateTime>> GetWorkflowCoreExecutionError_ErrorTimeValidators()

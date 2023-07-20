@@ -10,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using SampleSystem.BLL;
 using SampleSystem.BLL.Core.Jobs;
 using SampleSystem.BLL.Jobs;
-using SampleSystem.Domain;
 
 namespace SampleSystem.ServiceEnvironment;
 
@@ -34,7 +33,7 @@ public static class SampleSystemApplicationExtensions
 
         services.ReplaceScoped<IAuthorizationValidator, SampleSystemCustomAuthValidator>();
 
-        services.ReplaceScoped<INotificationPrincipalExtractor, NotificationPrincipalExtractor<PersistentDomainObjectBase>>();
+        services.ReplaceScoped<INotificationPrincipalExtractor, NotificationPrincipalExtractor>();
 
         return services;
     }

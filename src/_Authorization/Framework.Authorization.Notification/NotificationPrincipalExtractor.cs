@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 
 using Framework.Authorization.Domain;
 using Framework.Core;
@@ -10,16 +11,20 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Authorization.Notification;
 
-public class NotificationPrincipalExtractor<TPersistentDomainObjectBase> : INotificationPrincipalExtractor
-    where TPersistentDomainObjectBase : IIdentityObject<Guid>
+public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
 {
+
+    private const string LevelsSeparator = "|";
+
+    private const string LevelValueSeparator = ":";
+
     private readonly IServiceProvider serviceProvider;
 
     private readonly IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory;
 
     private readonly INotificationBasePermissionFilterSource notificationBasePermissionFilterSource;
 
-    private readonly IRepository<Permission> permissionRepository;
+    private readonly IRepositoryFactory<Permission> permissionRepositoryFactory;
 
     public NotificationPrincipalExtractor(
         IServiceProvider serviceProvider,
@@ -30,33 +35,83 @@ public class NotificationPrincipalExtractor<TPersistentDomainObjectBase> : INoti
         this.serviceProvider = serviceProvider;
         this.hierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
         this.notificationBasePermissionFilterSource = notificationBasePermissionFilterSource;
-        this.permissionRepository = permissionRepositoryFactory.Create();
+        this.permissionRepositoryFactory = permissionRepositoryFactory;
     }
 
     public IEnumerable<Principal> GetNotificationPrincipalsByRoles(Guid[] roleIdents) => throw new NotImplementedException();
 
-    public IEnumerable<Principal> GetNotificationPrincipalsByOperations(Guid[] operationsIds, IEnumerable<NotificationFilterGroup> notificationFilterGroups) => throw new NotImplementedException();
+    public IEnumerable<Principal> GetNotificationPrincipalsByOperations(
+        Guid[] operationsIds,
+        IEnumerable<NotificationFilterGroup> notificationFilterGroups) => throw new NotImplementedException();
 
-    public IEnumerable<Principal> GetNotificationPrincipalsByRelatedRole(Guid[] roleIdents, IEnumerable<string> principalNames, Guid relatedRoleId) => throw new NotImplementedException();
+    public IEnumerable<Principal> GetNotificationPrincipalsByRelatedRole(
+        Guid[] roleIdents,
+        IEnumerable<string> principalNames,
+        Guid relatedRoleId) => throw new NotImplementedException();
 
-    public IEnumerable<Principal> GetNotificationPrincipalsByRoles(Guid[] roleIdents, IEnumerable<NotificationFilterGroup> notificationFilterGroups)
+    public IEnumerable<Principal> GetNotificationPrincipalsByRoles(
+        Guid[] roleIdents,
+        IEnumerable<NotificationFilterGroup> preNotificationFilterGroups)
     {
-        var startPermissionQ = this.permissionRepository.GetQueryable()
+        var notificationFilterGroups = preNotificationFilterGroups.ToArray();
+
+        var startPermissionQ = this.permissionRepositoryFactory.Create().GetQueryable()
                                    .Where(this.notificationBasePermissionFilterSource.GetBasePermissionFilter(roleIdents))
                                    .Select(p => new PermissionLevelInfo { Permission = p, LevelInfo = "" });
 
-        var permissionInfoResult = notificationFilterGroups.Aggregate(startPermissionQ, this.ApplyNotificationFilter).ToList();
+        var principalInfoResult = notificationFilterGroups.Aggregate(startPermissionQ, this.ApplyNotificationFilter)
+                                                          .Select(pair => new { pair.Permission.Principal, pair.LevelInfo })
+                                                          .ToList();
 
-        var principalInfoResult = permissionInfoResult.Select(pair => new { pair.Permission.Principal, pair.LevelInfo }).ToList();
 
-        //var parsedResult = principalInfoResult.gr
 
-        throw new NotImplementedException();
+        var typeDict = notificationFilterGroups.Select(g => g.EntityType).ToDictionary(g => g.Name);
+
+        var parsedLevelInfoResult =
+            principalInfoResult
+                .Select(principalInfo => new
+                                         {
+                                             principalInfo.Principal,
+                                             LevelInfo = principalInfo.LevelInfo
+                                                                      .Split(LevelsSeparator, StringSplitOptions.RemoveEmptyEntries)
+                                                                      .Select(levelData => levelData.Split(LevelValueSeparator))
+                                                                      .ToDictionary(
+                                                                          levelParts => typeDict[levelParts[0]],
+                                                                          levelParts => int.Parse(levelParts[1]))
+                                         })
+                .ToList();
+
+
+        var optimalRequest = notificationFilterGroups.Aggregate(
+            parsedLevelInfoResult,
+            (state, notificationFilterGroup) =>
+            {
+                if (notificationFilterGroup.ExpandType == NotificationExpandType.All || !state.Any())
+                {
+                    return state;
+                }
+                else
+                {
+                    var request = from pair in state
+
+                                  group pair by pair.LevelInfo[notificationFilterGroup.EntityType] into levelGroup
+
+                                  orderby levelGroup.Key descending
+
+                                  select levelGroup;
+
+                    return request.First().ToList();
+                }
+            });
+
+        var result = optimalRequest.Select(pair => pair.Principal).Distinct().ToList();
+
+        return result;
     }
 
     private IQueryable<PermissionLevelInfo> ApplyNotificationFilter(
-      IQueryable<PermissionLevelInfo> source,
-      NotificationFilterGroup notificationFilterGroup)
+        IQueryable<PermissionLevelInfo> source,
+        NotificationFilterGroup notificationFilterGroup)
     {
         var genericMethod = this.GetType().GetMethod(
             nameof(this.ApplyNotificationFilterTyped),
@@ -70,11 +125,13 @@ public class NotificationPrincipalExtractor<TPersistentDomainObjectBase> : INoti
     private IQueryable<PermissionLevelInfo> ApplyNotificationFilterTyped<TSecurityContext>(
         IQueryable<PermissionLevelInfo> source,
         NotificationFilterGroup notificationFilterGroup)
-        where TSecurityContext : TPersistentDomainObjectBase, ISecurityContext, IHierarchicalLevelObject
+        where TSecurityContext : IIdentityObject<Guid>, ISecurityContext, IHierarchicalLevelObject
     {
 
         var expandedSecIdents = notificationFilterGroup.ExpandType.IsHierarchical()
-                                    ? this.hierarchicalObjectExpanderFactory.Create(notificationFilterGroup.EntityType).Expand(notificationFilterGroup.Idents, HierarchicalExpandType.Parents)
+                                    ? this.hierarchicalObjectExpanderFactory.Create(notificationFilterGroup.EntityType).Expand(
+                                        notificationFilterGroup.Idents,
+                                        HierarchicalExpandType.Parents)
                                     : notificationFilterGroup.Idents;
 
         var grandAccess = notificationFilterGroup.ExpandType.AllowEmpty();
@@ -87,25 +144,28 @@ public class NotificationPrincipalExtractor<TPersistentDomainObjectBase> : INoti
 
                let permissionSecurityContextItems = securityContextQ.Where(
                    securityContext => permission.FilterItems
-                                                 .Any(fi => fi.EntityType.Name == typeof(TSecurityContext).Name && fi.ContextEntityId == securityContext.Id))
+                                                .Any(
+                                                    fi => fi.EntityType.Name == typeof(TSecurityContext).Name
+                                                          && fi.ContextEntityId == securityContext.Id))
 
 
                let directLevel = permissionSecurityContextItems.Where(securityContext => expandedSecIdents.Contains(securityContext.Id))
-                                                                 .Select(secItem => (int?)secItem.DeepLevel).Max()
-                                   ?? -2
+                                                               .Select(secItem => (int?)secItem.DeepLevel).Max()
+                                 ?? PriorityLevels.Access_Denied
 
                let grandLevel = grandAccess && permission.FilterItems.All(fi => fi.EntityType.Name != typeof(TSecurityContext).Name)
-                                      ? -1
-                                      : -2
+                                    ? PriorityLevels.Grand_Access
+                                    : PriorityLevels.Access_Denied
 
                let level = Math.Max(directLevel, grandLevel)
 
-               where level != -2
+               where level != PriorityLevels.Access_Denied
 
                select new PermissionLevelInfo
-               {
-                   Permission = permission,
-                   LevelInfo = permissionInfo.LevelInfo + $"|{typeof(TSecurityContext).Name}:{level}"
-               };
+                      {
+                          Permission = permission,
+                          LevelInfo = permissionInfo.LevelInfo
+                                      + $"{LevelsSeparator}{typeof(TSecurityContext).Name}{LevelValueSeparator}{level}"
+                      };
     }
 }

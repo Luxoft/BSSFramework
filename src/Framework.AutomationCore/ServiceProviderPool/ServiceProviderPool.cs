@@ -29,7 +29,20 @@ public class ServiceProviderPool : IServiceProviderPool
             this.semaphore.Wait();
         }
 
-        return this.providersCache.TryTake(out var provider) ? provider : this.createServiceProviderFunc.Invoke();
+        try
+        {
+            return this.providersCache.TryTake(out var provider) ? provider : this.createServiceProviderFunc.Invoke();
+        }
+        catch (Exception e)
+        {
+            if (this.enableLimiter)
+            {
+                this.semaphore.Release();
+            }
+
+            throw;
+        }
+
     }
 
     public void Release(IServiceProvider serviceProvider)

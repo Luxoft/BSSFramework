@@ -219,7 +219,7 @@ public class ConfigurationContextFacade
             throw new ArgumentNullException(nameof(roleIdents));
         }
 
-        var result = this.context.Authorization.NotificationPrincipalExtractor.GetNotificationPrincipalsByRoles(roleIdents);
+        var result = this.context.Authorization.NotificationPrincipalExtractor.GetNotificationPrincipalsByRoles(roleIdents, Array.Empty<NotificationFilterGroup>());
 
         return result;
     }

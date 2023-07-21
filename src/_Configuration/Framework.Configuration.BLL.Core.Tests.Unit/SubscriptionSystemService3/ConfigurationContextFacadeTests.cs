@@ -101,7 +101,7 @@ public sealed class ConfigurationContextFacadeTests : TestFixtureBase
         var principals = this.Fixture.CreateMany<Principal>();
 
         this.notificationPrincipalExtractor
-            .GetNotificationPrincipalsByRoles(idents)
+            .GetNotificationPrincipalsByRoles(idents, Array.Empty<NotificationFilterGroup>())
             .Returns(principals);
 
         // Act

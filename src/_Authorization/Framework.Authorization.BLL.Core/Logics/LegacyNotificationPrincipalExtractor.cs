@@ -28,22 +28,18 @@ public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthori
                                                                                 .BuildAnd(permission => expandedRoles.Contains(permission.Role));
     }
 
-    private IEnumerable<Principal> GetNotificationPrincipalsByRoles(Expression<Func<Permission, bool>> filter)
+    public IEnumerable<Principal> GetNotificationPrincipalsByOperations(Guid[] operationsIds, IEnumerable<NotificationFilterGroup> notificationFilterGroups)
     {
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
+        if (operationsIds == null) throw new ArgumentNullException(nameof(operationsIds));
+        if (notificationFilterGroups == null) throw new ArgumentNullException(nameof(notificationFilterGroups));
 
-        return this.Context.Logics.Permission.GetUnsecureQueryable()
-                   .Where(filter)
-                   .Select(permission => permission.Principal)
-                   .Distinct();
+        var operations = this.Context.Logics.Operation.GetListByIdents(operationsIds).ToArray();
+
+        var roleIdents = this.Context.Logics.BusinessRole.GetListBy(role => role.BusinessRoleOperationLinks.Any(link => operations.Contains(link.Operation))).ToArray(role => role.Id);
+
+        return this.GetNotificationPrincipalsByRoles(roleIdents, notificationFilterGroups);
     }
 
-    public IEnumerable<Principal> GetNotificationPrincipalsByRoles(Guid[] roleIdents)
-    {
-        if (roleIdents == null) throw new ArgumentNullException(nameof(roleIdents));
-
-        return this.GetNotificationPrincipalsByRoles(this.GetBasePermissionFilter(roleIdents));
-    }
 
     public IEnumerable<Principal> GetNotificationPrincipalsByRoles(Guid[] roleIdents, [NotNull] IEnumerable<NotificationFilterGroup> notificationFilterGroups)
     {
@@ -136,75 +132,13 @@ public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthori
                              || (allowEmpty && permission.FilterItems.All(fi => fi.EntityType != entityType));
     }
 
-    public IEnumerable<Principal> GetNotificationPrincipalsByRelatedRole(Guid[] roleIdents, IEnumerable<string> principalNames, Guid relatedRoleId)
+    private IEnumerable<Principal> GetNotificationPrincipalsByRoles(Expression<Func<Permission, bool>> filter)
     {
-        if (roleIdents == null) throw new ArgumentNullException(nameof(roleIdents));
-        if (principalNames == null) throw new ArgumentNullException(nameof(principalNames));
-        if (relatedRoleId.IsDefault()) throw new System.ArgumentException("relatedRoleId");
+        if (filter == null) throw new ArgumentNullException(nameof(filter));
 
-        var roles = this.Context.Logics.BusinessRole.GetListByIdents(roleIdents).ToArray();
-        var relatedRole = this.Context.Logics.BusinessRole.GetById(relatedRoleId, true);
-        var principals = this.Context.Logics.Principal.GetListBy(z => principalNames.Contains(z.Name)).ToArray();
-
-        return this.GetNotificationPrincipalsByRelatedRole(roles, principals, relatedRole);
-    }
-
-    private IEnumerable<Principal> GetNotificationPrincipalsByRelatedRole([NotNull] IList<BusinessRole> roles, [NotNull] IEnumerable<Principal> principals, [NotNull] BusinessRole relatedRole)
-    {
-        if (roles == null) throw new ArgumentNullException(nameof(roles));
-        if (principals == null) throw new ArgumentNullException(nameof(principals));
-        if (relatedRole == null) throw new ArgumentNullException(nameof(relatedRole));
-
-        Expression<Func<Permission, bool>> filterExpression = z => z.Role == relatedRole;
-
-        var filterByPermFilters = this.GetPermissionsForRoles(roles, principals).BuildOr(perm =>
-        {
-            return perm.FilterItems.GroupBy(f => f.EntityType).BuildAnd(entityFilter =>
-            {
-                var entityIds = entityFilter.Select(z => z.Entity.EntityId).ToList();
-
-                Expression<Func<Permission, bool>> addFilterExpression =
-                        z => z.FilterItems.Any(e => e.EntityType == entityFilter.Key && entityIds.Contains(e.Entity.EntityId))
-                            || z.FilterItems.All(e => e.EntityType != entityFilter.Key);
-
-                return addFilterExpression;
-            });
-        });
-
-        var today = this.Context.DateTimeService.Today;
-
-        var query = filterExpression.BuildAnd(filterByPermFilters).BuildAnd(p => p.Status == PermissionStatus.Approved && p.Period.Contains(today));
-
-        return this.Context.Logics.Permission.GetListBy(query, f => f.Select(l => l.Principal)).Select(z => z.Principal).Distinct();
-    }
-
-    private IEnumerable<Permission> GetPermissionsForRoles([NotNull] ICollection<BusinessRole> roles, [NotNull] IEnumerable<Principal> principals)
-    {
-        if (roles == null) throw new ArgumentNullException(nameof(roles));
-        if (principals == null) throw new ArgumentNullException(nameof(principals));
-
-        if (!roles.Any()) return Enumerable.Empty<Permission>();
-
-        var principalIds = principals.Select(z => z.Id).ToList();
-
-        var allRoles = this.Context.Logics.BusinessRole.GetParents(roles).ToArray();
-
-        var today = this.Context.DateTimeService.Today;
-
-        var result = this.Context.Logics.Permission.GetListBy(z => z.Status == PermissionStatus.Approved && allRoles.Contains(z.Role) && principalIds.Contains(z.Principal.Id) && z.Period.Contains(today));
-
-        return result;
-    }
-
-    public IEnumerable<Principal> GetNotificationPrincipalsByOperations(Guid[] operationsIds, IEnumerable<NotificationFilterGroup> notificationFilterGroups)
-    {
-        if (operationsIds == null) throw new ArgumentNullException(nameof(operationsIds));
-        if (notificationFilterGroups == null) throw new ArgumentNullException(nameof(notificationFilterGroups));
-
-        var operations = this.Context.Logics.Operation.GetListByIdents(operationsIds).ToArray();
-
-        var roleIdents = this.Context.Logics.BusinessRole.GetListBy(role => role.BusinessRoleOperationLinks.Any(link => operations.Contains(link.Operation))).ToArray(role => role.Id);
-
-        return this.GetNotificationPrincipalsByRoles(roleIdents, notificationFilterGroups);
+        return this.Context.Logics.Permission.GetUnsecureQueryable()
+                   .Where(filter)
+                   .Select(permission => permission.Principal)
+                   .Distinct();
     }
 }

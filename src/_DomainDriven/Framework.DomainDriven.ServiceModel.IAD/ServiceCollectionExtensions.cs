@@ -100,7 +100,7 @@ public static class ServiceCollectionExtensions
                .AddScoped<IAuthorizationBLLFactoryContainer, AuthorizationBLLFactoryContainer>()
                .AddScoped<IRunAsManager, AuthorizationRunAsManger>()
                .AddScoped<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>()
-               .AddScoped<INotificationPrincipalExtractor, LegacyNotificationPrincipalExtractor>()
+               //.AddScoped<INotificationPrincipalExtractor, LegacyNotificationPrincipalExtractor>()
                .AddScoped<INotificationBasePermissionFilterSource, LegacyNotificationPrincipalExtractor>()
                .AddScoped<IAuthorizationBLLContextSettings, AuthorizationBLLContextSettings>()
 

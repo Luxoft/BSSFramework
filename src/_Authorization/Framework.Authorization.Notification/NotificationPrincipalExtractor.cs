@@ -24,28 +24,32 @@ public class NotificationPrincipalExtractor : INotificationPrincipalExtractor
 
     private readonly IRepositoryFactory<Permission> permissionRepositoryFactory;
 
+    private readonly IRepositoryFactory<BusinessRole> businessRoleRepositoryFactory;
+
     public NotificationPrincipalExtractor(
         IServiceProvider serviceProvider,
         IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
         INotificationBasePermissionFilterSource notificationBasePermissionFilterSource,
-        IRepositoryFactory<Permission> permissionRepositoryFactory)
+        IRepositoryFactory<Permission> permissionRepositoryFactory,
+        IRepositoryFactory<BusinessRole> businessRoleRepositoryFactory)
     {
         this.serviceProvider = serviceProvider;
         this.hierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
         this.notificationBasePermissionFilterSource = notificationBasePermissionFilterSource;
         this.permissionRepositoryFactory = permissionRepositoryFactory;
+        this.businessRoleRepositoryFactory = businessRoleRepositoryFactory;
     }
-
-    public IEnumerable<Principal> GetNotificationPrincipalsByRoles(Guid[] roleIdents) => throw new NotImplementedException();
 
     public IEnumerable<Principal> GetNotificationPrincipalsByOperations(
         Guid[] operationsIds,
-        IEnumerable<NotificationFilterGroup> notificationFilterGroups) => throw new NotImplementedException();
+        IEnumerable<NotificationFilterGroup> notificationFilterGroups)
+    {
+        var roleIdents = this.businessRoleRepositoryFactory.Create().GetQueryable()
+                             .Where(role => role.BusinessRoleOperationLinks.Any(link => operationsIds.Contains(link.Operation.Id)))
+                             .ToArray(role => role.Id);
 
-    public IEnumerable<Principal> GetNotificationPrincipalsByRelatedRole(
-        Guid[] roleIdents,
-        IEnumerable<string> principalNames,
-        Guid relatedRoleId) => throw new NotImplementedException();
+        return this.GetNotificationPrincipalsByRoles(roleIdents, notificationFilterGroups);
+    }
 
     public IEnumerable<Principal> GetNotificationPrincipalsByRoles(
         Guid[] roleIdents,

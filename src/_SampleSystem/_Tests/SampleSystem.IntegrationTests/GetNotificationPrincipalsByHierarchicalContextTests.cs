@@ -311,6 +311,7 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
             DBSessionMode.Read,
             context => context.Authorization
                               .NotificationPrincipalExtractor
+                              //.GetNotificationPrincipalsByOperations(new Guid[] { this.searchNotificationOperation.Id }, notificationFilterGroups)
                               .GetNotificationPrincipalsByRoles(new Guid[] { this.searchNotificationRole.Id }, notificationFilterGroups)
                               .ToArray(p => p.Name));
     }

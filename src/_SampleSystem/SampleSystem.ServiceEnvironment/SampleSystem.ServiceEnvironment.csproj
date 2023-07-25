@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
@@ -9,9 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="nuSpec.NHibernate" Version="1.3.0" />
-    <PackageReference Include="WorkflowCore" Version="3.9.0" />
-    <PackageReference Include="WorkflowCore.Persistence.SqlServer" Version="3.9.0" />
+    <PackageReference Include="nuSpec.NHibernate" />
+    <PackageReference Include="WorkflowCore" />
+    <PackageReference Include="WorkflowCore.Persistence.SqlServer" />
   </ItemGroup>
 
   <ItemGroup>

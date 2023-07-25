@@ -18,7 +18,6 @@ public interface IRepository<TDomainObject>
     /// Load actually returns a proxy object and doesn't need to access the database right when you issue that Load call.
     /// https://www.tutorialspoint.com/nhibernate/nhibernate_load_get.htm
     /// </summary>
-
     TDomainObject Load(Guid id);
 
     /// <summary>
@@ -26,6 +25,11 @@ public interface IRepository<TDomainObject>
     /// https://www.tutorialspoint.com/nhibernate/nhibernate_load_get.htm
     /// </summary>
     Task<TDomainObject> LoadAsync(Guid id, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///     Re-read the state of the given instance from the underlying database.
+    /// </summary>
+    Task RefreshAsync(TDomainObject domainObject, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Get Queryable by Specification https://github.com/NikitaEgorov/nuSpec

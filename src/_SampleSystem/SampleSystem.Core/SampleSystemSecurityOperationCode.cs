@@ -204,6 +204,10 @@ public enum SampleSystemSecurityOperationCode
 
     #endregion
 
+
+    [SecurityOperation("SearchNotification", false, "{E66C1E91-6290-4192-BDE7-074634562288}", nameof(SearchNotificationOperation), adminHasAccess: false)]
+    SearchNotificationOperation,
+
     [SecurityOperation(SecurityOperationCode.AuthorizationImpersonate)]
     AuthorizationImpersonate,
 

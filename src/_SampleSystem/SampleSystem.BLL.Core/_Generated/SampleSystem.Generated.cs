@@ -96,6 +96,8 @@ namespace SampleSystem.BLL
         
         private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _managementUnitView = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitView, Framework.HierarchicalExpand.HierarchicalExpandType.All);
         
+        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _searchNotificationOperation = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.SearchNotificationOperation);
+        
         private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _systemIntegration = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.SystemIntegration);
         
         public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> ApproveWorkflowOperation
@@ -418,6 +420,14 @@ namespace SampleSystem.BLL
             }
         }
         
+        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> SearchNotificationOperation
+        {
+            get
+            {
+                return _searchNotificationOperation;
+            }
+        }
+        
         public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> SystemIntegration
         {
             get
@@ -567,6 +577,10 @@ namespace SampleSystem.BLL
             else if ((code == SampleSystem.SampleSystemSecurityOperationCode.EmployeePositionEdit))
             {
                 return SampleSystem.BLL.SampleSystemSecurityOperation.EmployeePositionEdit;
+            }
+            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.SearchNotificationOperation))
+            {
+                return SampleSystem.BLL.SampleSystemSecurityOperation.SearchNotificationOperation;
             }
             else if ((code == SampleSystem.SampleSystemSecurityOperationCode.AuthorizationImpersonate))
             {

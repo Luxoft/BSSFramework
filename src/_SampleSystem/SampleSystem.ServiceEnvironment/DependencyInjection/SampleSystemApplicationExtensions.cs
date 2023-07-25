@@ -34,6 +34,7 @@ public static class SampleSystemApplicationExtensions
         services.ReplaceScoped<IAuthorizationValidator, SampleSystemCustomAuthValidator>();
 
         services.AddScoped<INotificationPrincipalExtractor, NotificationPrincipalExtractor>();
+        //services.AddScoped<INotificationPrincipalExtractor, LegacyNotificationPrincipalExtractor>();
 
         return services;
     }

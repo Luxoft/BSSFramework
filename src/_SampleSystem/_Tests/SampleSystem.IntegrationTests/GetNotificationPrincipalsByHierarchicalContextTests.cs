@@ -39,7 +39,6 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
     private ManagementUnitIdentityDTO child_2_0_ManagementUnit;
     private ManagementUnitIdentityDTO child_2_1_ManagementUnit;
 
-
     private OperationIdentityDTO searchNotificationOperation;
 
     private TestBusinessRole searchTestBusinessRole = new TestBusinessRole(nameof(searchNotificationRole));

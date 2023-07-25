@@ -1460,7 +1460,6 @@ namespace SampleSystem.Generated.DTO
             }
             domainObject.BusinessUnitStatus = mappingObject.BusinessUnitStatus;
             domainObject.Commission = mappingObject.Commission;
-            domainObject.DeepLevel = mappingObject.DeepLevel;
             domainObject.FirstNewBusinessStatusMonth = mappingObject.FirstNewBusinessStatusMonth;
             domainObject.IsNewBusiness = mappingObject.IsNewBusiness;
             domainObject.IsPool = mappingObject.IsPool;
@@ -1515,7 +1514,6 @@ namespace SampleSystem.Generated.DTO
         {
             domainObject.BusinessUnitStatus = mappingObject.BusinessUnitStatus;
             domainObject.Commission = mappingObject.Commission;
-            domainObject.DeepLevel = mappingObject.DeepLevel;
             domainObject.FirstNewBusinessStatusMonth = mappingObject.FirstNewBusinessStatusMonth;
             domainObject.IsNewBusiness = mappingObject.IsNewBusiness;
             domainObject.IsPool = mappingObject.IsPool;
@@ -5744,7 +5742,6 @@ namespace SampleSystem.Generated.DTO
             {
                 domainObject.Country = null;
             }
-            domainObject.DeepLevel = mappingObject.DeepLevel;
             domainObject.IsFinancial = mappingObject.IsFinancial;
             domainObject.LocationType = mappingObject.LocationType;
             domainObject.Name = mappingObject.Name;
@@ -5781,7 +5778,6 @@ namespace SampleSystem.Generated.DTO
             domainObject.Active = mappingObject.Active;
             domainObject.CloseDate = mappingObject.CloseDate;
             domainObject.Code = mappingObject.Code;
-            domainObject.DeepLevel = mappingObject.DeepLevel;
             domainObject.IsFinancial = mappingObject.IsFinancial;
             domainObject.LocationType = mappingObject.LocationType;
             domainObject.Name = mappingObject.Name;
@@ -5982,7 +5978,6 @@ namespace SampleSystem.Generated.DTO
                 this.GetCollectionMappingService<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkStrictDTO, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>(detailDTO => this.ToManagementUnitAndBusinessUnitLink(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.ManagementUnit, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>(domainObject, detail)).Map(mappingObject.BusinessUnits, domainObject.BusinessUnits);
             }
             domainObject.BusinessUnitStatus = mappingObject.BusinessUnitStatus;
-            domainObject.DeepLevel = mappingObject.DeepLevel;
             if (!object.ReferenceEquals(mappingObject.HRDepartments, null))
             {
                 this.GetCollectionMappingService<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkStrictDTO, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(detailDTO => this.ToManagementUnitAndHRDepartmentLink(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<SampleSystem.Domain.ManagementUnit, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>(domainObject, detail)).Map(mappingObject.HRDepartments, domainObject.HRDepartments);
@@ -6010,7 +6005,6 @@ namespace SampleSystem.Generated.DTO
         public virtual void MapManagementUnit(SampleSystem.Generated.DTO.ManagementUnitIntegrationSimpleDTO mappingObject, SampleSystem.Domain.ManagementUnit domainObject)
         {
             domainObject.BusinessUnitStatus = mappingObject.BusinessUnitStatus;
-            domainObject.DeepLevel = mappingObject.DeepLevel;
             domainObject.IsProduction = mappingObject.IsProduction;
             domainObject.Name = mappingObject.Name;
             domainObject.Period = mappingObject.Period;

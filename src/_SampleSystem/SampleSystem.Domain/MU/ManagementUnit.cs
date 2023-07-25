@@ -17,7 +17,7 @@ public class ManagementUnit :
         IMaster<ManagementUnitAndBusinessUnitLink>,
         IMaster<ManagementUnitAndHRDepartmentLink>,
         IPeriodObject,
-        IModifiedIHierarchicalLevelObject,
+        IHierarchicalLevelObjectDenomalized,
         ISecurityContext
 {
     private readonly ICollection<ManagementUnit> children = new List<ManagementUnit>();
@@ -36,7 +36,7 @@ public class ManagementUnit :
     public virtual int DeepLevel
     {
         get { return this.deepLevel; }
-        set { this.deepLevel = value; }
+        protected set { this.deepLevel = value; }
     }
 
     public virtual Period Period
@@ -75,6 +75,8 @@ public class ManagementUnit :
     [CustomSerialization(CustomSerializationMode.ReadOnly, DTORole.Client | DTORole.Report)]
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Event | DTORole.Integration)]
     public virtual IEnumerable<ManagementUnit> Children => this.children;
+
+    public virtual void SetDeepLevel(int value) => this.DeepLevel = value;
 
     ManagementUnit IUnit<ManagementUnit>.CurrentObject => this;
 

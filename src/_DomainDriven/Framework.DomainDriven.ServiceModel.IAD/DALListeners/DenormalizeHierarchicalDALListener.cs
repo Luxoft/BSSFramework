@@ -52,7 +52,7 @@ public class DenormalizeHierarchicalDALListener<TBLLContext, TPersistentDomainOb
     {
         var service = ActivatorUtilities
             .CreateInstance<
-                SyncDenormolizedValuesService<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TAncestorChildLink,
+                SyncDenormolizedValuesService<TPersistentDomainObjectBase, TDomainObject, TAncestorChildLink,
                 TSourceToAncestorOrChildLink, Guid, TNamedLockObject, TNamedLockOperation>>(this.Context.ServiceProvider);
 
         service.Sync(modified, removing);

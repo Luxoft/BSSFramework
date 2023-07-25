@@ -2727,7 +2727,6 @@ namespace SampleSystem.Generated.DTO
             }
             target.BusinessUnitStatus = source.BusinessUnitStatus;
             target.Commission = source.Commission;
-            target.DeepLevel = source.DeepLevel;
             target.FirstNewBusinessStatusMonth = source.FirstNewBusinessStatusMonth;
             target.IsNewBusiness = source.IsNewBusiness;
             target.IsPool = source.IsPool;
@@ -3095,7 +3094,6 @@ namespace SampleSystem.Generated.DTO
             }
             target.CloseDate = source.CloseDate;
             target.Code = source.Code;
-            target.DeepLevel = source.DeepLevel;
             target.IsFinancial = source.IsFinancial;
             target.LocationType = source.LocationType;
             target.Name = source.Name;
@@ -3112,7 +3110,6 @@ namespace SampleSystem.Generated.DTO
                 throw new System.ArgumentNullException("target");
             }
             target.BusinessUnitStatus = source.BusinessUnitStatus;
-            target.DeepLevel = source.DeepLevel;
             target.IsProduction = source.IsProduction;
             target.Name = source.Name;
             target.Period = source.Period;

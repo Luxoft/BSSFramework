@@ -1,6 +1,6 @@
 ﻿namespace Framework.Persistent;
 
-public interface IModifiedIHierarchicalLevelObject : IHierarchicalLevelObject
+public interface IHierarchicalLevelObjectDenomalized : IHierarchicalLevelObject
 {
-    new int DeepLevel { get; set; }
+    void SetDeepLevel(int value);
 }

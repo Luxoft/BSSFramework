@@ -7,10 +7,9 @@ using Framework.Persistent;
 
 namespace Framework.DomainDriven.BLL.Security;
 
-public class SyncDenormolizedValuesService<TBLLContext, TPersistentDomainObjectBase, TDomainObject,
+public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomainObject,
                                            TDomainObjectAncestorLink,
                                            TSourceToAncestorOrChildLink, TIdent, TNamedLockObject, TNamedLockOperation>
-        where TBLLContext : class, IBLLBaseContextBase<TPersistentDomainObjectBase, TIdent>
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObjectAncestorLink : class, TPersistentDomainObjectBase, IModifiedHierarchicalAncestorLink<TDomainObject, TSourceToAncestorOrChildLink, TIdent>, new()
         where TDomainObject : class, TPersistentDomainObjectBase, IDenormalizedHierarchicalPersistentSource<TDomainObjectAncestorLink, TSourceToAncestorOrChildLink, TDomainObject, TIdent>
@@ -99,9 +98,9 @@ public class SyncDenormolizedValuesService<TBLLContext, TPersistentDomainObjectB
 
     private void UpdateDeepLevel(TDomainObject domainObject)
     {
-        if (domainObject is IModifiedIHierarchicalLevelObject deepLevelObject)
+        if (domainObject is IHierarchicalLevelObjectDenomalized objectDenomalized)
         {
-            deepLevelObject.DeepLevel = domainObject.GetAllParents(true).Count();
+            objectDenomalized.SetDeepLevel(domainObject.GetAllParents(true).Count());
         }
     }
 

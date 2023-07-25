@@ -18,7 +18,7 @@ public class Location :
         IDefaultHierarchicalPersistentDomainObjectBase<Location>,
         IMaster<Location>,
         IDetail<Location>,
-        IModifiedIHierarchicalLevelObject,
+        IHierarchicalLevelObjectDenomalized,
         ISecurityContext
 {
     private readonly ICollection<Location> children = new List<Location>();
@@ -50,7 +50,7 @@ public class Location :
     public virtual int DeepLevel
     {
         get { return this.deepLevel; }
-        set { this.deepLevel = value; }
+        protected set { this.deepLevel = value; }
     }
 
     public virtual byte[] BinaryData
@@ -134,6 +134,7 @@ public class Location :
         get { return base.Active; }
         set { base.Active = value; }
     }
+    public virtual void SetDeepLevel(int value) => this.DeepLevel = value;
 
     Location IDetail<Location>.Master
     {

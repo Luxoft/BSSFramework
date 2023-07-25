@@ -24,7 +24,7 @@ public partial class BusinessUnit :
         IMaster<BusinessUnit>,
         IMaster<Project>,
         IDetail<BusinessUnit>,
-        IHierarchicalLevelObjectDenomalized,
+        IHierarchicalLevelObjectDenormalized,
         ISecurityContext
 {
     private readonly ICollection<BusinessUnitEmployeeRole> businessUnitEmployeeRoles = new List<BusinessUnitEmployeeRole>();

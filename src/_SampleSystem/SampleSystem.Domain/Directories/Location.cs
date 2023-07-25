@@ -18,7 +18,7 @@ public class Location :
         IDefaultHierarchicalPersistentDomainObjectBase<Location>,
         IMaster<Location>,
         IDetail<Location>,
-        IHierarchicalLevelObjectDenomalized,
+        IHierarchicalLevelObjectDenormalized,
         ISecurityContext
 {
     private readonly ICollection<Location> children = new List<Location>();

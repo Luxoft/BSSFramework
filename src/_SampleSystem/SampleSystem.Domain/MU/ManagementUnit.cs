@@ -17,7 +17,7 @@ public class ManagementUnit :
         IMaster<ManagementUnitAndBusinessUnitLink>,
         IMaster<ManagementUnitAndHRDepartmentLink>,
         IPeriodObject,
-        IHierarchicalLevelObjectDenomalized,
+        IHierarchicalLevelObjectDenormalized,
         ISecurityContext
 {
     private readonly ICollection<ManagementUnit> children = new List<ManagementUnit>();

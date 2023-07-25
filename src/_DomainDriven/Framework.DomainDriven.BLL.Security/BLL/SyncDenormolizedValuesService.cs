@@ -98,7 +98,7 @@ public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomain
 
     private void UpdateDeepLevel(TDomainObject domainObject)
     {
-        if (domainObject is IHierarchicalLevelObjectDenomalized objectDenomalized)
+        if (domainObject is IHierarchicalLevelObjectDenormalized objectDenomalized)
         {
             objectDenomalized.SetDeepLevel(domainObject.GetAllParents(true).Count());
         }

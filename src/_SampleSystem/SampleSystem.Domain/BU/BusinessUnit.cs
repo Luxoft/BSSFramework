@@ -24,6 +24,7 @@ public partial class BusinessUnit :
         IMaster<BusinessUnit>,
         IMaster<Project>,
         IDetail<BusinessUnit>,
+        IHierarchicalLevelObjectDenormalized,
         ISecurityContext
 {
     private readonly ICollection<BusinessUnitEmployeeRole> businessUnitEmployeeRoles = new List<BusinessUnitEmployeeRole>();
@@ -50,6 +51,8 @@ public partial class BusinessUnit :
     private bool isProduction;
     private Period period;
 
+    private int deepLevel;
+
     public BusinessUnit()
     {
     }
@@ -65,6 +68,12 @@ public partial class BusinessUnit :
 
     [Framework.Restriction.UniqueGroup]
     public virtual IEnumerable<ManagementUnitAndBusinessUnitLink> ManagementUnits { get; } = new List<ManagementUnitAndBusinessUnitLink>();
+
+    public virtual int DeepLevel
+    {
+        get { return this.deepLevel; }
+        protected set { this.deepLevel = value; }
+    }
 
     public virtual DateTime? LastBusinessUnitHasNoLinkedProjectsWarningCheckDate
     {
@@ -454,6 +463,7 @@ public partial class BusinessUnit :
 
     ////    yield return new NotificationMessageGenerationInfo(recipients, this, prev);
     ////}
+    public virtual void SetDeepLevel(int value) => this.DeepLevel = value;
 
     public override string ToString()
     {

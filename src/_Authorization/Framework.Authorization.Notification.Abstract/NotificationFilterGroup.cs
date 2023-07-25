@@ -3,7 +3,7 @@
 using Framework.Core;
 using Framework.Persistent;
 
-namespace Framework.Authorization.BLL;
+namespace Framework.Authorization.Notification;
 
 public class NotificationFilterGroup<TDomainObject> : NotificationFilterGroup
         where TDomainObject : IIdentityObject<Guid>

@@ -18,6 +18,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Remove="__Support\Scripts\SampleSystem\Create TypedAuthPermissionBusinessUnit.sql" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\..\Framework.AutomationCore.ServiceEnvironment\Framework.AutomationCore.ServiceEnvironment.csproj" />
     <ProjectReference Include="..\..\..\Framework.AutomationCore\Framework.AutomationCore.csproj" />
     <ProjectReference Include="..\..\SampleSystem.WebApiCore\SampleSystem.WebApiCore.csproj" />

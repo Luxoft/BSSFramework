@@ -1388,6 +1388,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.BusinessUnitStatus = domainObject.BusinessUnitStatus;
             mappingObject.BusinessUnitTypeName = domainObject.BusinessUnitTypeName;
             mappingObject.Commission = domainObject.Commission;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.FirstNewBusinessStatusMonth = domainObject.FirstNewBusinessStatusMonth;
             mappingObject.IsNewBusiness = domainObject.IsNewBusiness;
             mappingObject.IsPool = domainObject.IsPool;
@@ -1488,6 +1489,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Commission = domainObject.Commission;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.FirstNewBusinessStatusMonth = domainObject.FirstNewBusinessStatusMonth;
             mappingObject.Id = domainObject.Id;
             mappingObject.IsNewBusiness = domainObject.IsNewBusiness;
@@ -1570,6 +1572,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Commission = domainObject.Commission;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.FirstNewBusinessStatusMonth = domainObject.FirstNewBusinessStatusMonth;
             mappingObject.Id = domainObject.Id;
             mappingObject.IsNewBusiness = domainObject.IsNewBusiness;
@@ -1642,6 +1645,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Commission = domainObject.Commission;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.FirstNewBusinessStatusMonth = domainObject.FirstNewBusinessStatusMonth;
             mappingObject.Id = domainObject.Id;
             mappingObject.IsNewBusiness = domainObject.IsNewBusiness;
@@ -5690,6 +5694,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.CloseDate = domainObject.CloseDate;
             mappingObject.Code = domainObject.Code;
             mappingObject.ContainsOnlyInactiveChildren = domainObject.ContainsOnlyInactiveChildren;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.IsFinancial = domainObject.IsFinancial;
             mappingObject.IsLeaf = domainObject.IsLeaf;
             mappingObject.LocationType = domainObject.LocationType;
@@ -5758,6 +5763,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.ContainsOnlyInactiveChildren = domainObject.ContainsOnlyInactiveChildren;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.Id = domainObject.Id;
             mappingObject.IsFinancial = domainObject.IsFinancial;
             mappingObject.IsLeaf = domainObject.IsLeaf;
@@ -5795,6 +5801,7 @@ namespace SampleSystem.Generated.DTO
             }
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.Id = domainObject.Id;
             mappingObject.IsFinancial = domainObject.IsFinancial;
             mappingObject.IsLeaf = domainObject.IsLeaf;
@@ -5821,6 +5828,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.ContainsOnlyInactiveChildren = domainObject.ContainsOnlyInactiveChildren;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.Id = domainObject.Id;
             mappingObject.IsFinancial = domainObject.IsFinancial;
             mappingObject.IsLeaf = domainObject.IsLeaf;
@@ -5937,6 +5945,7 @@ namespace SampleSystem.Generated.DTO
         public virtual void MapManagementUnit(SampleSystem.Domain.ManagementUnit domainObject, SampleSystem.Generated.DTO.ManagementUnitSimpleDTO mappingObject)
         {
             mappingObject.BusinessUnitStatus = domainObject.BusinessUnitStatus;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.IsProduction = domainObject.IsProduction;
             mappingObject.Name = domainObject.Name;
             mappingObject.Period = domainObject.Period;
@@ -5984,6 +5993,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.BusinessUnitStatus = domainObject.BusinessUnitStatus;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.Id = domainObject.Id;
             mappingObject.IsProduction = domainObject.IsProduction;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
@@ -6007,6 +6017,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.BusinessUnitStatus = domainObject.BusinessUnitStatus;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.HRDepartments = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.HRDepartments, this);
             mappingObject.Id = domainObject.Id;
             mappingObject.IsProduction = domainObject.IsProduction;
@@ -6031,6 +6042,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.BusinessUnitStatus = domainObject.BusinessUnitStatus;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.Id = domainObject.Id;
             mappingObject.IsProduction = domainObject.IsProduction;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;

@@ -7297,6 +7297,9 @@ namespace SampleSystem.Generated.DTO
         public decimal Commission;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime? FirstNewBusinessStatusMonth;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -14741,6 +14744,9 @@ namespace SampleSystem.Generated.DTO
         public bool ContainsOnlyInactiveChildren;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsFinancial;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -15028,6 +15034,9 @@ namespace SampleSystem.Generated.DTO
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public SampleSystem.Domain.BusinessUnitStatus BusinessUnitStatus;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsProduction;

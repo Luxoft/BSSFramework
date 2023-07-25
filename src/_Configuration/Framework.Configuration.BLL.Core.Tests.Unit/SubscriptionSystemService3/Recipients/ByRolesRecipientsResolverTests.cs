@@ -4,6 +4,7 @@ using AutoFixture.Idioms;
 using FluentAssertions;
 using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
+using Framework.Authorization.Notification;
 using Framework.Configuration.BLL.SubscriptionSystemService3;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;

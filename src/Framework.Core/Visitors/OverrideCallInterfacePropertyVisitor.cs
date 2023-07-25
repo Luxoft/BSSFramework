@@ -35,7 +35,7 @@ public class OverrideCallInterfacePropertyVisitor : ExpressionVisitor
                                    ? (node.Expression as UnaryExpression).Operand
                                    : node.Expression;
 
-                return Expression.Property(expr, expr.Type.GetImplementedProperty(this._property));
+                return Expression.Property(expr, expr.Type.GetImplementedProperty(property));
             }
         }
 

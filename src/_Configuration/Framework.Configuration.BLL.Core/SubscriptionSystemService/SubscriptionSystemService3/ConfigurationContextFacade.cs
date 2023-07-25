@@ -1,5 +1,6 @@
 ﻿using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
+using Framework.Authorization.Notification;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
@@ -200,8 +201,7 @@ public class ConfigurationContextFacade
             throw new ArgumentNullException(nameof(notificationFilterGroups));
         }
 
-        var result = this.context.Authorization.Logics.Permission
-                         .GetNotificationPrincipalsByRoles(roleIdents, notificationFilterGroups);
+        var result = this.context.Authorization.NotificationPrincipalExtractor.GetNotificationPrincipalsByRoles(roleIdents, notificationFilterGroups);
 
         return result;
     }
@@ -219,8 +219,7 @@ public class ConfigurationContextFacade
             throw new ArgumentNullException(nameof(roleIdents));
         }
 
-        var result = this.context.Authorization.Logics.Permission
-                         .GetNotificationPrincipalsByRoles(roleIdents);
+        var result = this.context.Authorization.NotificationPrincipalExtractor.GetNotificationPrincipalsByRoles(roleIdents, Array.Empty<NotificationFilterGroup>());
 
         return result;
     }

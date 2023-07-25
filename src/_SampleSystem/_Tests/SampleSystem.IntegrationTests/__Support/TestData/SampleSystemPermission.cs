@@ -20,13 +20,15 @@ public class SampleSystemPermission : IPermissionDefinition
     public SampleSystemPermission(
             TestBusinessRole role,
             BusinessUnitIdentityDTO? businessUnit,
-            ManagementUnitIdentityDTO? managementUnit,
-            LocationIdentityDTO? location)
+            ManagementUnitIdentityDTO? managementUnit = null,
+            LocationIdentityDTO? location = null,
+            EmployeeIdentityDTO? employee = null)
     {
         this.Role = role;
         this.BusinessUnit = businessUnit;
         this.ManagementUnit = managementUnit;
         this.Location = location;
+        this.Employee = employee;
     }
 
     public TestBusinessRole Role { get; set; }
@@ -37,21 +39,28 @@ public class SampleSystemPermission : IPermissionDefinition
 
     public LocationIdentityDTO? Location { get; set; }
 
+    public EmployeeIdentityDTO? Employee { get; set; }
+
     public IEnumerable<Tuple<string, Guid>> GetEntities()
     {
-        if (this.ManagementUnit != null)
-        {
-            yield return Tuple.Create(DefaultConstants.ENTITY_TYPE_MANAGEMENT_UNIT_NAME, ((ManagementUnitIdentityDTO)this.ManagementUnit).Id);
-        }
-
         if (this.BusinessUnit != null)
         {
-            yield return Tuple.Create(DefaultConstants.ENTITY_TYPE_FINANCIAL_BUSINESS_UNIT_NAME, ((BusinessUnitIdentityDTO)this.BusinessUnit).Id);
+            yield return Tuple.Create(nameof(SampleSystem.Domain.BusinessUnit), ((BusinessUnitIdentityDTO)this.BusinessUnit).Id);
+        }
+
+        if (this.ManagementUnit != null)
+        {
+            yield return Tuple.Create(nameof(SampleSystem.Domain.ManagementUnit), ((ManagementUnitIdentityDTO)this.ManagementUnit).Id);
         }
 
         if (this.Location != null)
         {
-            yield return Tuple.Create(DefaultConstants.ENTITY_TYPE_LOCATION_NAME, ((LocationIdentityDTO)this.Location).Id);
+            yield return Tuple.Create(nameof(SampleSystem.Domain.Location), ((LocationIdentityDTO)this.Location).Id);
+        }
+
+        if (this.Employee != null)
+        {
+            yield return Tuple.Create(nameof(SampleSystem.Domain.Employee), ((EmployeeIdentityDTO)this.Employee).Id);
         }
     }
 

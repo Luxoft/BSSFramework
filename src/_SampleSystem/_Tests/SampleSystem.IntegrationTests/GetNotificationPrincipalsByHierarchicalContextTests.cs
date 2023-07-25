@@ -25,19 +25,14 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
     private BusinessUnitIdentityDTO child_2_0_BusinessUnit;
     private BusinessUnitIdentityDTO child_2_1_BusinessUnit;
 
-    private LocationIdentityDTO rootLocation;
-
-    private LocationIdentityDTO child_1_0_Location;
-    private LocationIdentityDTO child_1_1_Location;
-    private LocationIdentityDTO child_2_0_Location;
-    private LocationIdentityDTO child_2_1_Location;
-
     private ManagementUnitIdentityDTO rootManagementUnit;
 
     private ManagementUnitIdentityDTO child_1_0_ManagementUnit;
     private ManagementUnitIdentityDTO child_1_1_ManagementUnit;
     private ManagementUnitIdentityDTO child_2_0_ManagementUnit;
     private ManagementUnitIdentityDTO child_2_1_ManagementUnit;
+
+    private EmployeeIdentityDTO rootEmployee;
 
     private OperationIdentityDTO searchNotificationOperation;
 
@@ -57,17 +52,13 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         this.child_2_0_BusinessUnit = this.DataHelper.SaveBusinessUnit(parent: this.rootBusinessUnit);
         this.child_2_1_BusinessUnit = this.DataHelper.SaveBusinessUnit(parent: this.child_2_0_BusinessUnit);
 
-        this.rootLocation = this.DataHelper.SaveLocation(id: DefaultConstants.LOCATION_PARENT_ID);
-        this.child_1_0_Location = this.DataHelper.SaveLocation(parent: this.rootLocation);
-        this.child_1_1_Location = this.DataHelper.SaveLocation(parent: this.child_1_0_Location);
-        this.child_2_0_Location = this.DataHelper.SaveLocation(parent: this.rootLocation);
-        this.child_2_1_Location = this.DataHelper.SaveLocation(parent: this.child_2_0_Location);
-
         this.rootManagementUnit = this.DataHelper.SaveManagementUnit(id: DefaultConstants.MANAGEMENT_UNIT_PARENT_COMPANY_ID);
         this.child_1_0_ManagementUnit = this.DataHelper.SaveManagementUnit(parent: this.rootManagementUnit);
         this.child_1_1_ManagementUnit = this.DataHelper.SaveManagementUnit(parent: this.child_1_0_ManagementUnit);
         this.child_2_0_ManagementUnit = this.DataHelper.SaveManagementUnit(parent: this.rootManagementUnit);
         this.child_2_1_ManagementUnit = this.DataHelper.SaveManagementUnit(parent: this.child_2_0_ManagementUnit);
+
+        this.rootEmployee = this.DataHelper.SaveEmployee();
 
         var authFacade = this.GetAuthControllerEvaluator();
 
@@ -93,22 +84,21 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
                 this.searchTestBusinessRole,
                 this.child_1_1_BusinessUnit,
                 this.child_1_1_ManagementUnit,
-                this.child_1_1_Location));
+                employee: this.rootEmployee));
 
         this.AuthHelper.SetUserRole(
             this.searchNotificationEmployeeLogin2,
             new SampleSystemPermission(
                 this.searchTestBusinessRole,
                 this.rootBusinessUnit,
-                this.child_1_1_ManagementUnit,
-                this.child_1_1_Location));
+                this.child_1_1_ManagementUnit));
 
         var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { this.child_1_1_BusinessUnit.Id }, NotificationExpandType.Direct);
         var mbuChildFilter = new NotificationFilterGroup(typeof(ManagementUnit), new[] { this.child_1_1_ManagementUnit.Id }, NotificationExpandType.Direct);
-        var locChildFilter = new NotificationFilterGroup(typeof(Location), new[] { this.child_1_1_Location.Id }, NotificationExpandType.Direct);
+        var employeeFilter = new NotificationFilterGroup(typeof(Employee), new[] { this.rootEmployee.Id }, NotificationExpandType.DirectOrFirstParent);
 
         // Act
-        var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter, locChildFilter);
+        var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter, employeeFilter);
 
         // Assert
         result.Length.Should().Be(1);
@@ -124,18 +114,61 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
             new SampleSystemPermission(
                 this.searchTestBusinessRole,
                 this.rootBusinessUnit,
-                this.child_1_1_ManagementUnit,
-                this.child_1_1_Location));
+                this.child_1_1_ManagementUnit));
 
         var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { this.child_1_1_BusinessUnit.Id }, NotificationExpandType.Direct);
         var mbuChildFilter = new NotificationFilterGroup(typeof(ManagementUnit), new[] { this.child_1_1_ManagementUnit.Id }, NotificationExpandType.Direct);
-        var locChildFilter = new NotificationFilterGroup(typeof(Location), new[] { this.child_1_1_Location.Id }, NotificationExpandType.Direct);
 
         // Act
-        var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter, locChildFilter);
+        var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter);
 
         // Assert
         result.Length.Should().Be(0);
+    }
+
+    [TestMethod]
+    public void GetPrincipals_Direct_Test3_Missed()
+    {
+        // Arrange
+        this.AuthHelper.SetUserRole(
+            this.searchNotificationEmployeeLogin1,
+            new SampleSystemPermission(
+                this.searchTestBusinessRole,
+                this.rootBusinessUnit,
+                this.child_1_1_ManagementUnit));
+
+        var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { this.child_1_1_BusinessUnit.Id }, NotificationExpandType.DirectOrEmpty);
+        var mbuChildFilter = new NotificationFilterGroup(typeof(ManagementUnit), new[] { this.child_1_1_ManagementUnit.Id }, NotificationExpandType.DirectOrEmpty);
+        var employeeChildFilter = new NotificationFilterGroup(typeof(Employee), new[] { this.rootEmployee.Id }, NotificationExpandType.Direct);
+
+        // Act
+        var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter, employeeChildFilter);
+
+        // Assert
+        result.Length.Should().Be(0);
+    }
+
+    [TestMethod]
+    public void GetPrincipals_Direct_Test4_Searched()
+    {
+        // Arrange
+        this.AuthHelper.SetUserRole(
+            this.searchNotificationEmployeeLogin1,
+            new SampleSystemPermission(
+                this.searchTestBusinessRole,
+                this.rootBusinessUnit,
+                this.child_1_1_ManagementUnit,
+                employee: this.rootEmployee));
+
+        var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { this.child_1_1_BusinessUnit.Id }, NotificationExpandType.DirectOrFirstParentOrEmpty);
+        var mbuChildFilter = new NotificationFilterGroup(typeof(ManagementUnit), new[] { this.child_1_1_ManagementUnit.Id }, NotificationExpandType.DirectOrFirstParentOrEmpty);
+        var employeeChildFilter = new NotificationFilterGroup(typeof(Employee), new[] { this.rootEmployee.Id }, NotificationExpandType.Direct);
+
+        // Act
+        var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter, employeeChildFilter);
+
+        // Assert
+        result.Length.Should().Be(1);
     }
 
     [TestMethod]
@@ -147,23 +180,20 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
             new SampleSystemPermission(
                 this.searchTestBusinessRole,
                 null,
-                this.child_1_1_ManagementUnit,
-                this.child_1_1_Location));
+                this.child_1_1_ManagementUnit));
 
         this.AuthHelper.SetUserRole(
             this.searchNotificationEmployeeLogin2,
             new SampleSystemPermission(
                 this.searchTestBusinessRole,
                 this.rootBusinessUnit,
-                this.child_1_1_ManagementUnit,
-                this.child_1_1_Location));
+                this.child_1_1_ManagementUnit));
 
         var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { this.child_1_1_BusinessUnit.Id }, NotificationExpandType.DirectOrEmpty);
         var mbuChildFilter = new NotificationFilterGroup(typeof(ManagementUnit), new[] { this.child_1_1_ManagementUnit.Id }, NotificationExpandType.Direct);
-        var locChildFilter = new NotificationFilterGroup(typeof(Location), new[] { this.child_1_1_Location.Id }, NotificationExpandType.Direct);
 
         // Act
-        var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter, locChildFilter);
+        var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter);
 
         // Assert
         result.Length.Should().Be(1);
@@ -180,23 +210,20 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
             new SampleSystemPermission(
                 this.searchTestBusinessRole,
                 this.child_1_0_BusinessUnit,
-                this.child_1_1_ManagementUnit,
-                this.child_1_1_Location));
+                this.child_1_1_ManagementUnit));
 
         this.AuthHelper.SetUserRole(
             this.searchNotificationEmployeeLogin2,
             new SampleSystemPermission(
                 this.searchTestBusinessRole,
                 this.rootBusinessUnit,
-                this.child_1_1_ManagementUnit,
-                this.child_1_1_Location));
+                this.child_1_1_ManagementUnit));
 
         var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { this.child_1_1_BusinessUnit.Id }, NotificationExpandType.DirectOrFirstParentOrEmpty);
         var mbuChildFilter = new NotificationFilterGroup(typeof(ManagementUnit), new[] { this.child_1_1_ManagementUnit.Id }, NotificationExpandType.Direct);
-        var locChildFilter = new NotificationFilterGroup(typeof(Location), new[] { this.child_1_1_Location.Id }, NotificationExpandType.Direct);
 
         // Act
-        var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter, locChildFilter);
+        var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter);
 
         // Assert
         result.Length.Should().Be(1);
@@ -212,23 +239,20 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
             new SampleSystemPermission(
                 this.searchTestBusinessRole,
                 this.rootBusinessUnit,
-                this.child_1_0_ManagementUnit,
-                this.child_1_1_Location));
+                this.child_1_0_ManagementUnit));
 
         this.AuthHelper.SetUserRole(
             this.searchNotificationEmployeeLogin2,
             new SampleSystemPermission(
                 this.searchTestBusinessRole,
                 this.rootBusinessUnit,
-                this.rootManagementUnit,
-                this.child_1_1_Location));
+                this.rootManagementUnit));
 
         var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { this.child_1_1_BusinessUnit.Id }, NotificationExpandType.DirectOrFirstParentOrEmpty);
         var mbuChildFilter = new NotificationFilterGroup(typeof(ManagementUnit), new[] { this.child_1_1_ManagementUnit.Id }, NotificationExpandType.DirectOrFirstParentOrEmpty);
-        var locChildFilter = new NotificationFilterGroup(typeof(Location), new[] { this.child_1_1_Location.Id }, NotificationExpandType.Direct);
 
         // Act
-        var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter, locChildFilter);
+        var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter);
 
         // Assert
         result.Length.Should().Be(1);
@@ -246,25 +270,22 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
             new SampleSystemPermission(
                 this.searchTestBusinessRole,
                 this.child_1_0_BusinessUnit,
-                this.rootManagementUnit,
-                this.child_1_1_Location));
+                this.rootManagementUnit));
 
         this.AuthHelper.SetUserRole(
             this.searchNotificationEmployeeLogin2,
             new SampleSystemPermission(
                 this.searchTestBusinessRole,
                 this.rootBusinessUnit,
-                this.child_1_0_ManagementUnit,
-                this.child_1_1_Location));
+                this.child_1_0_ManagementUnit));
 
         var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { this.child_1_1_BusinessUnit.Id }, NotificationExpandType.DirectOrFirstParentOrEmpty);
         var mbuChildFilter = new NotificationFilterGroup(typeof(ManagementUnit), new[] { this.child_1_1_ManagementUnit.Id }, NotificationExpandType.DirectOrFirstParentOrEmpty);
-        var locChildFilter = new NotificationFilterGroup(typeof(Location), new[] { this.child_1_1_Location.Id }, NotificationExpandType.Direct);
 
         // Act
         var result = swapPriority
-                         ? this.GetNotificationPrincipalsByRoles(mbuChildFilter, fbuChildFilter, locChildFilter)
-                         : this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter, locChildFilter);
+                         ? this.GetNotificationPrincipalsByRoles(mbuChildFilter, fbuChildFilter)
+                         : this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter);
 
         // Assert
         result.Length.Should().Be(1);
@@ -280,23 +301,20 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
             new SampleSystemPermission(
                 this.searchTestBusinessRole,
                 this.child_1_0_BusinessUnit,
-                this.child_1_1_ManagementUnit,
-                this.child_1_1_Location));
+                this.child_1_1_ManagementUnit));
 
         this.AuthHelper.SetUserRole(
             this.searchNotificationEmployeeLogin2,
             new SampleSystemPermission(
                 this.searchTestBusinessRole,
                 this.rootBusinessUnit,
-                this.child_1_1_ManagementUnit,
-                this.child_1_1_Location));
+                this.child_1_1_ManagementUnit));
 
         var fbuChildFilter = new NotificationFilterGroup(typeof(BusinessUnit), new[] { this.child_1_1_BusinessUnit.Id }, NotificationExpandType.All);
         var mbuChildFilter = new NotificationFilterGroup(typeof(ManagementUnit), new[] { this.child_1_1_ManagementUnit.Id }, NotificationExpandType.Direct);
-        var locChildFilter = new NotificationFilterGroup(typeof(Location), new[] { this.child_1_1_Location.Id }, NotificationExpandType.Direct);
 
         // Act
-        var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter, locChildFilter);
+        var result = this.GetNotificationPrincipalsByRoles(fbuChildFilter, mbuChildFilter);
 
         // Assert
         result.Length.Should().Be(2);

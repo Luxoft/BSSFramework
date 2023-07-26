@@ -47,10 +47,8 @@ public static class HangfireExtensions
 
         services.AddHangfireServer();
 
-        services.AddScoped<IScopedJobExecutor, ScopedJobExecutor>();
         services.AddSingleton(typeof(IServiceJobEvaluator<>), typeof(ServiceJobEvaluator<>));
         services.AddSingleton<IServiceJobEvaluator, ServiceJobEvaluator>();
-        services.AddSingleton<IHangfireCredentialSettings, HangfireCredentialSettings>();
 
         return services;
     }
@@ -62,7 +60,6 @@ public static class HangfireExtensions
     public static IApplicationBuilder UseHangfireBss(
         this IApplicationBuilder app,
         IConfiguration configuration,
-        Action<JobTiming[]> runJobsFunc,
         string dashboardUrl = "/admin/jobs",
         IDashboardAuthorizationFilter authorizationFilter = null)
     {
@@ -75,8 +72,6 @@ public static class HangfireExtensions
 
         var settings = new HangfireSettings();
         configuration.GetSection("Hangfire").Bind(settings);
-
-        runJobsFunc(settings.JobTimings);
 
         return app;
     }

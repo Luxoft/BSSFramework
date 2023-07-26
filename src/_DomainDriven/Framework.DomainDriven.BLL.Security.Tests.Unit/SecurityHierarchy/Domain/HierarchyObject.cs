@@ -29,6 +29,9 @@ public class HierarchyObject : PersistentDomainObjectBase,
     {
         this.children.Remove(f);
     }
+
+    public int DeepLevel { get; set; }
+
     public string Name
     {
         get; set;

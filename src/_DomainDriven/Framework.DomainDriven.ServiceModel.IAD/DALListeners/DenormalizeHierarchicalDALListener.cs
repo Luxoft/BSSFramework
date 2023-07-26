@@ -40,13 +40,20 @@ public class DenormalizeHierarchicalDALListener<TBLLContext, TPersistentDomainOb
         }
     }
 
-    private void Denormalize<TDomainObject, TAncestorChildLink, TSourceToAncestorOrChildLink>(TDomainObject[] modified, TDomainObject[] removing)
+    private void Denormalize<TDomainObject, TAncestorChildLink, TSourceToAncestorOrChildLink>(
+        TDomainObject[] modified,
+        TDomainObject[] removing)
 
-            where TDomainObject : class, TPersistentDomainObjectBase, IDenormalizedHierarchicalPersistentSource<TAncestorChildLink, TSourceToAncestorOrChildLink, TDomainObject, Guid>
-            where TAncestorChildLink : class, TPersistentDomainObjectBase, IModifiedHierarchicalAncestorLink<TDomainObject, TSourceToAncestorOrChildLink, Guid>, new()
-            where TSourceToAncestorOrChildLink : IHierarchicalToAncestorOrChildLink<TDomainObject, Guid>
+        where TDomainObject : class, TPersistentDomainObjectBase, IDenormalizedHierarchicalPersistentSource<TAncestorChildLink, TSourceToAncestorOrChildLink, TDomainObject, Guid>
+
+        where TAncestorChildLink : class, TPersistentDomainObjectBase, IModifiedHierarchicalAncestorLink<TDomainObject, TSourceToAncestorOrChildLink, Guid>, new()
+
+        where TSourceToAncestorOrChildLink : IHierarchicalToAncestorOrChildLink<TDomainObject, Guid>
     {
-        var service = ActivatorUtilities.CreateInstance<SyncDenormolizedValuesService<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TAncestorChildLink, TSourceToAncestorOrChildLink, Guid, TNamedLockObject, TNamedLockOperation>>(this.Context.ServiceProvider);
+        var service = ActivatorUtilities
+            .CreateInstance<
+                SyncDenormolizedValuesService<TPersistentDomainObjectBase, TDomainObject, TAncestorChildLink,
+                TSourceToAncestorOrChildLink, Guid, TNamedLockObject, TNamedLockOperation>>(this.Context.ServiceProvider);
 
         service.Sync(modified, removing);
     }

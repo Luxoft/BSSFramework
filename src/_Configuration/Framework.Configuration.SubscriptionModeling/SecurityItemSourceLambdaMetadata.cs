@@ -1,4 +1,4 @@
-﻿using Framework.Persistent;
+﻿using Framework.Authorization.Notification;
 using Framework.SecuritySystem;
 
 namespace Framework.Configuration.SubscriptionModeling;

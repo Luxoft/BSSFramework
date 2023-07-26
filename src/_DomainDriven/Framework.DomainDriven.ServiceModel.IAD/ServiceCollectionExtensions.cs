@@ -1,5 +1,6 @@
 ﻿using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
+using Framework.Authorization.Notification;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
 using Framework.Core;
@@ -63,6 +64,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPersistentItem>();
         services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerPeriodItem>();
         services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDefaultItem>();
+        services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerMathItem>();
 
         services.AddSingleton<IIdPropertyResolver, IdPropertyResolver>();
 
@@ -98,6 +100,8 @@ public static class ServiceCollectionExtensions
                .AddScoped<IAuthorizationBLLFactoryContainer, AuthorizationBLLFactoryContainer>()
                .AddScoped<IRunAsManager, AuthorizationRunAsManger>()
                .AddScoped<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>()
+               //.AddScoped<INotificationPrincipalExtractor, LegacyNotificationPrincipalExtractor>()
+               .AddScoped<INotificationBasePermissionFilterSource, LegacyNotificationPrincipalExtractor>()
                .AddScoped<IAuthorizationBLLContextSettings, AuthorizationBLLContextSettings>()
 
                .AddScopedFromLazyInterfaceImplement<IAuthorizationBLLContext, AuthorizationBLLContext>()

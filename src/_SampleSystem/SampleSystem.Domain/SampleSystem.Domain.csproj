@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
   <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -6,10 +6,11 @@
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="WorkflowCore" Version="3.9.0" />
+    <PackageReference Include="WorkflowCore" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.App.Domain\Framework.App.Domain.csproj" />
+    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
     <ProjectReference Include="..\SampleSystem.Core\SampleSystem.Core.csproj" />
   </ItemGroup>
 </Project>

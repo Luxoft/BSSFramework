@@ -1,5 +1,6 @@
 ﻿using Framework.Authorization.ApproveWorkflow;
 using Framework.Authorization.BLL;
+using Framework.Authorization.Notification;
 using Framework.Cap;
 using Framework.DependencyInjection;
 
@@ -31,6 +32,9 @@ public static class SampleSystemApplicationExtensions
         services.AddScoped<IExampleServiceForRepository, ExampleServiceForRepository>();
 
         services.ReplaceScoped<IAuthorizationValidator, SampleSystemCustomAuthValidator>();
+
+        services.AddScoped<INotificationPrincipalExtractor, NotificationPrincipalExtractor>();
+        //services.AddScoped<INotificationPrincipalExtractor, LegacyNotificationPrincipalExtractor>();
 
         return services;
     }

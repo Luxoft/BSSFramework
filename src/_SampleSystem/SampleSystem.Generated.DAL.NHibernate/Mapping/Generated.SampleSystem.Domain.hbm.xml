@@ -62,6 +62,7 @@
     <property name="Commission" column="commission" precision="19" scale="4" access="field.camelcase" />
     <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
     <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="DeepLevel" column="deepLevel" access="field.camelcase" />
     <property name="FirstNewBusinessStatusMonth" column="firstNewBusinessStatusMonth" type="timestamp" access="field.camelcase" />
     <property name="IsNewBusiness" column="isNewBusiness" access="field.camelcase" />
     <property name="IsProduction" column="isProduction" access="field.camelcase" />
@@ -809,6 +810,7 @@
     <property name="Code" column="code" access="field.camelcase" />
     <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
     <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="DeepLevel" column="deepLevel" access="field.camelcase" />
     <property name="IsFinancial" column="isFinancial" access="field.camelcase" />
     <property name="LocationType" column="locationType" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
@@ -862,6 +864,7 @@
     <property name="BusinessUnitStatus" column="businessUnitStatus" access="field.camelcase" />
     <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
     <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="DeepLevel" column="deepLevel" access="field.camelcase" />
     <property name="IsProduction" column="isProduction" access="field.camelcase" />
     <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
     <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />

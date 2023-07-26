@@ -5,7 +5,7 @@ namespace SampleSystem.Domain;
 /// <summary>
 ///
 /// </summary>
-/// <seealso cref="SampleSystem.Domain.DomainObjectRootFilterModel{SampleSystem.Domain.BusinessUnit}" />
+/// <seealso cref="BusinessUnit" />
 public class BusinessUnitRootFilterModel : DomainObjectRootFilterModel<BusinessUnit>
 {
     /// <summary>

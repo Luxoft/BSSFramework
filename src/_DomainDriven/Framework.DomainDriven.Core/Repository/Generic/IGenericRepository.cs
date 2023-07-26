@@ -28,6 +28,11 @@ public interface IGenericRepository<TDomainObject, in TIdent>
     Task<TDomainObject> LoadAsync(TIdent id, CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Re-read the state of the given instance from the underlying database.
+    /// </summary>
+    Task RefreshAsync(TDomainObject domainObject, CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Get Queryable by Specification https://github.com/NikitaEgorov/nuSpec
     /// </summary>
     IQueryable<TProjection> GetQueryable<TProjection>(Specification<TDomainObject, TProjection> specification);

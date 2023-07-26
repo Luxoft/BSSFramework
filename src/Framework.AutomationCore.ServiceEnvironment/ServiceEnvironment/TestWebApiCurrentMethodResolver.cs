@@ -15,6 +15,21 @@ public class TestWebApiCurrentMethodResolver : IWebApiCurrentMethodResolver
 
     public void SetCurrentMethod(MethodInfo methodInfo)
     {
+        if (this.currentMethod != null)
+        {
+            throw new InvalidOperationException();
+        }
+
         this.currentMethod = methodInfo;
+    }
+
+    public void ClearCurrentMethod()
+    {
+        if (this.currentMethod == null)
+        {
+            throw new InvalidOperationException();
+        }
+
+        this.currentMethod = null;
     }
 }

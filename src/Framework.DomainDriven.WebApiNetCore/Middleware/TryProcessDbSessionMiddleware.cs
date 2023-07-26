@@ -12,7 +12,7 @@ public class TryProcessDbSessionMiddleware
         this.next = next;
     }
 
-    public async Task Invoke(HttpContext context, IWebApiDBSessionModeResolver sessionModeResolver)
+    public async Task Invoke(HttpContext context, IWebApiDBSessionModeResolver sessionModeResolver, IDBSessionManager dbSessionManager)
     {
         try
         {
@@ -39,12 +39,12 @@ public class TryProcessDbSessionMiddleware
         }
         catch
         {
-            context.RequestServices.TryFaultDbSession();
+            dbSessionManager.TryFaultDbSession();
             throw;
         }
         finally
         {
-            await context.RequestServices.TryCloseDbSessionAsync(context.RequestAborted);
+            await dbSessionManager.TryCloseDbSessionAsync(context.RequestAborted);
         }
     }
 }

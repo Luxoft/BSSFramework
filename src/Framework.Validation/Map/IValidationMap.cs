@@ -1,6 +1,8 @@
-﻿namespace Framework.Validation;
+﻿using Framework.Core;
 
-public interface IValidationMap : IExtendedValidationDataContainer
+namespace Framework.Validation;
+
+public interface IValidationMap : IServiceProviderContainer
 {
     IClassValidationMap GetClassMap(Type type);
 }

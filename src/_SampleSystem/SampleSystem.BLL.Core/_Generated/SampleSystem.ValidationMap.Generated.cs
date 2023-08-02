@@ -16,10 +16,10 @@ namespace SampleSystem.BLL
         
         private Framework.Validation.IValidationMap _defaultValidatorMap;
         
-        protected SampleSystemValidationMapBase(Framework.Core.IDynamicSource extendedValidationData) : 
-                base(extendedValidationData)
+        protected SampleSystemValidationMapBase(System.IServiceProvider serviceProvider) : 
+                base(serviceProvider)
         {
-            this._defaultValidatorMap = new Framework.Validation.ValidationMap(extendedValidationData);
+            this._defaultValidatorMap = new Framework.Validation.ValidationMap(serviceProvider);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.Address, string>> GetAddress_CityNameValidators()
@@ -3729,12 +3729,12 @@ namespace SampleSystem.BLL
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestImmutableObj, string>> GetTestImmutableObj_TestImmutablePrimitivePropertyValidators()
         {
             yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestImmutableObj>(this.AvailableValues.GetAvailableSize<string>());
-            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<SampleSystem.Domain.TestImmutableObj, string, System.Guid>(source => source.TestImmutablePrimitiveProperty);
+            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<SampleSystem.Domain.TestImmutableObj, string, System.Guid, SampleSystem.Domain.PersistentDomainObjectBase>(source => source.TestImmutablePrimitiveProperty);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestImmutableObj, SampleSystem.Domain.Employee>> GetTestImmutableObj_TestImmutableRefPropertyValidators()
         {
-            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<SampleSystem.Domain.TestImmutableObj, SampleSystem.Domain.Employee, System.Guid>(source => source.TestImmutableRefProperty);
+            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<SampleSystem.Domain.TestImmutableObj, SampleSystem.Domain.Employee, System.Guid, SampleSystem.Domain.PersistentDomainObjectBase>(source => source.TestImmutableRefProperty);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.TestImmutableObj>> GetTestImmutableObjProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestImmutableObj> currentClass)
@@ -4304,8 +4304,8 @@ namespace SampleSystem.BLL
     public partial class SampleSystemValidationMap : SampleSystem.BLL.SampleSystemValidationMapBase
     {
         
-        public SampleSystemValidationMap(Framework.Core.IDynamicSource extendedValidationData) : 
-                base(extendedValidationData)
+        public SampleSystemValidationMap(System.IServiceProvider serviceProvider) : 
+                base(serviceProvider)
         {
         }
     }

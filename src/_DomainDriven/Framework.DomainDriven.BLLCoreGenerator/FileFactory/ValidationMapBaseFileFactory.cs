@@ -51,7 +51,7 @@ public class ValidationMapBaseFileFactory<TConfiguration> : FileFactory<TConfigu
         yield return defaultValidatorMapField;
 
         {
-            var extendedValidationDataParam = typeof(IDynamicSource).ToTypeReference().ToParameterDeclarationExpression("extendedValidationData");
+            var extendedValidationDataParam = typeof(IServiceProvider).ToTypeReference().ToParameterDeclarationExpression("serviceProvider");
 
             yield return new CodeConstructor
                          {

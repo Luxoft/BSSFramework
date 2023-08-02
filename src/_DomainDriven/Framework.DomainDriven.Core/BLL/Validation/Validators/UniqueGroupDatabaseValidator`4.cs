@@ -3,6 +3,7 @@
 using Framework.Core;
 using Framework.Persistent;
 using Framework.Validation;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.BLL;
 
@@ -56,7 +57,7 @@ public class UniqueGroupDatabaseValidator<TBLLContext, TPersistentDomainObjectBa
     /// <returns>Экземпляр <see cref="ValidationResult"/>.</returns>
     public ValidationResult GetValidationResult(IClassValidationContext<TDomainObject> validationContext)
     {
-        var context = validationContext.ExtendedValidationData.GetValue<TBLLContext>(true);
+        var context = validationContext.ServiceProvider.GetRequiredService<TBLLContext>();
 
         var query = context.Logics.Default.Create<TDomainObject>().GetUnsecureQueryable();
 

@@ -1,4 +1,7 @@
 ﻿using Framework.Validation;
+
+using Microsoft.Extensions.DependencyInjection;
+
 using SampleSystem.Domain;
 
 namespace SampleSystem.BLL;
@@ -14,7 +17,7 @@ public class EmployeeExternalIdValidator : IPropertyValidator<Employee, long>
             return ValidationResult.Success;
         }
 
-        var context = validationContext.ExtendedValidationData.GetValue<ISampleSystemBLLContext>();
+        var context = validationContext.ServiceProvider.GetRequiredService<ISampleSystemBLLContext>();
         var exists = context.Logics.Employee.GetUnsecureQueryable().Any(e => e.ExternalId == source.ExternalId);
 
         if (exists)

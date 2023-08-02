@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven.BLL;
+﻿using Framework.Core;
 using Framework.DomainDriven.ServiceModel.Service;
 
 using Microsoft.Extensions.DependencyInjection;

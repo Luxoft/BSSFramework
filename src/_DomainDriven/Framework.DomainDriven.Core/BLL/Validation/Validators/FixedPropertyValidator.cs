@@ -6,6 +6,8 @@ using Framework.DomainDriven.BLL.Tracking;
 using Framework.Persistent;
 using Framework.Validation;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.DomainDriven.BLL;
 
 /// <summary>
@@ -13,20 +15,25 @@ namespace Framework.DomainDriven.BLL;
 /// </summary>
 public class FixedPropertyValidator : IDynamicPropertyValidator
 {
-    public IPropertyValidator GetValidator(PropertyInfo property, IDynamicSource extendedValidationData)
+    public IPropertyValidator GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
     {
         var identType = property.DeclaringType.GetIdentType();
 
-        return (IPropertyValidator)Activator.CreateInstance(typeof(FixedPropertyValidator<,,>)
-                                                                    .MakeGenericType(property.ReflectedType, property.PropertyType, identType), property.ToLambdaExpression());
+        var persistentDomainObjectBaseTypeResolver = serviceProvider.GetRequiredService<IPersistentDomainObjectBaseTypeResolver>();
+
+        var persistentDomainObjectBaseType = persistentDomainObjectBaseTypeResolver.Resolve(property.ReflectedType);
+
+        return (IPropertyValidator)Activator.CreateInstance(typeof(FixedPropertyValidator<,,,>)
+                                                                    .MakeGenericType(property.ReflectedType, property.PropertyType, identType, persistentDomainObjectBaseType), property.ToLambdaExpression());
     }
 }
 
 /// <summary>
 /// Валидатор проверки неизменяемости свойства
 /// </summary>
-public class FixedPropertyValidator<TSource, TProperty, TIdent> : IPropertyValidator<TSource, TProperty>
-        where TSource : IIdentityObject<TIdent>
+public class FixedPropertyValidator<TSource, TProperty, TIdent, TPersistentDomainObjectBase> : IPropertyValidator<TSource, TProperty>
+    where TSource : TPersistentDomainObjectBase
+    where TPersistentDomainObjectBase : IIdentityObject<TIdent>
 {
     private readonly Expression<Func<TSource, TProperty>> propertyPath;
 
@@ -37,7 +44,7 @@ public class FixedPropertyValidator<TSource, TProperty, TIdent> : IPropertyValid
 
     public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, TProperty> validationContext)
     {
-        var trackingServiceContainer = validationContext.ExtendedValidationData.GetValue<ITrackingServiceContainer<TSource>>(true);
+        var trackingServiceContainer = validationContext.ServiceProvider.GetRequiredService<ITrackingServiceContainer<TPersistentDomainObjectBase>>();
 
         return ValidationResult.FromCondition(
                                               trackingServiceContainer.TrackingService.GetPersistentState(validationContext.Source) == PersistentLifeObjectState.NotPersistent

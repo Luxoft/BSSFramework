@@ -9,6 +9,8 @@ using Framework.Persistent;
 using Framework.Restriction;
 using Framework.Validation;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using ValidatorPairExpr = System.Collections.Generic.KeyValuePair<System.CodeDom.CodeExpression, Framework.Validation.IValidationData>;
 using ValidatorExpr = System.Collections.Generic.IReadOnlyDictionary<System.CodeDom.CodeExpression, Framework.Validation.IValidationData>;
 
@@ -169,7 +171,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
-        var instanceType = attribute.CreateValidator().GetLastPropertyValidator(property, DynamicSource.Empty).GetType();
+        var instanceType = attribute.CreateValidator().GetLastPropertyValidator(property, new ServiceCollection().BuildServiceProvider()).GetType();
 
         if (instanceType.IsInterfaceImplementation(typeof(IPropertyValidator<,>)))
         {
@@ -366,7 +368,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
         var identType = property.DeclaringType.GetIdentType();
 
-        var validatorType = typeof(FixedPropertyValidator<,,>).MakeGenericType(property.ReflectedType, property.PropertyType, identType);
+        var validatorType = typeof(FixedPropertyValidator<,,,>).MakeGenericType(property.ReflectedType, property.PropertyType, identType, this.Configuration.Environment.PersistentDomainObjectBaseType);
 
         var propertyExprLambda = new CodeParameterDeclarationExpression { Name = "source" }.Pipe(p => new CodeLambdaExpression
             {

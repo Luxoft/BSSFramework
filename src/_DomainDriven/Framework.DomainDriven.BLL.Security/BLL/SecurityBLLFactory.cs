@@ -1,4 +1,5 @@
-﻿using Framework.SecuritySystem;
+﻿using Framework.Core;
+using Framework.SecuritySystem;
 
 using JetBrains.Annotations;
 

@@ -66,7 +66,7 @@ public static class ValidationMapExtensions
         }
 
 
-        public IDynamicSource ExtendedValidationData => this._baseValidationMap.ExtendedValidationData;
+        public IServiceProvider ServiceProvider => this._baseValidationMap.ServiceProvider;
 
 
         public IClassValidationMap GetClassMap(Type type)

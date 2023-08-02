@@ -2,12 +2,14 @@
 
 using Framework.Core;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.Validation;
 
 public class ValidationMap : ValidationMapBase
 {
-    public ValidationMap(IDynamicSource extendedValidationData)
-            : base(extendedValidationData)
+    public ValidationMap(IServiceProvider serviceProvider)
+            : base(serviceProvider)
     {
     }
 
@@ -91,7 +93,7 @@ public class ValidationMap : ValidationMapBase
 
                               where pair.Key is IClassValidator<TSource> || pair.Key is IDynamicClassValidator
 
-                              let baseClassValidator = pair.Key.GetLastClassValidator(typeof(TSource), this.ExtendedValidationData)
+                              let baseClassValidator = pair.Key.GetLastClassValidator(typeof(TSource), this.ServiceProvider)
 
                               let classValidator = (IClassValidator<TSource>)baseClassValidator
 
@@ -112,7 +114,7 @@ public class ValidationMap : ValidationMapBase
 
         return this.GetClassValidatorDict<TSource, IManyPropertyDynamicClassValidator>().Select(pair =>
         {
-            var basePropertyValidator = pair.Key.GetLastPropertyValidator(property, this.ExtendedValidationData);
+            var basePropertyValidator = pair.Key.GetLastPropertyValidator(property, this.ServiceProvider);
 
             try
             {
@@ -131,7 +133,7 @@ public class ValidationMap : ValidationMapBase
 
         return this.GetPropertyValidatorDict(property).Select(pair =>
                                                               {
-                                                                  var basePropertyValidator = pair.Key.GetLastPropertyValidator(property, this.ExtendedValidationData);
+                                                                  var basePropertyValidator = pair.Key.GetLastPropertyValidator(property, this.ServiceProvider);
 
                                                                   try
                                                                   {
@@ -183,5 +185,5 @@ public class ValidationMap : ValidationMapBase
     }
 
 
-    public static readonly ValidationMap Default = new ValidationMap(DynamicSource.Empty);
+    public static readonly ValidationMap Default = new ValidationMap(new ServiceCollection().BuildServiceProvider());
 }

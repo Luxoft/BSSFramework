@@ -108,7 +108,7 @@ public static class ServiceCollectionExtensions
 
                .AddScopedFromLazyInterfaceImplement<IAuthorizationBLLContext, AuthorizationBLLContext>()
 
-               .AddScopedFrom<ITrackingServiceContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>, IAuthorizationBLLContext>()
+               .AddScopedFrom((IAuthorizationBLLContext context) => context.TrackingService)
 
                .AddScopedFrom<ISecurityOperationResolver<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode>, IAuthorizationBLLContext>()
                .AddScopedFrom<IDisabledSecurityProviderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>, IAuthorizationSecurityService>()
@@ -141,7 +141,7 @@ public static class ServiceCollectionExtensions
                .AddScoped<IConfigurationBLLContextSettings, ConfigurationBLLContextSettings>()
                .AddScopedFromLazyInterfaceImplement<IConfigurationBLLContext, ConfigurationBLLContext>()
 
-               .AddScopedFrom<ITrackingServiceContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>, IConfigurationBLLContext>()
+               .AddScopedFrom((IConfigurationBLLContext context) => context.TrackingService)
 
                .AddScopedFrom<Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContext, IConfigurationBLLContext>()
 

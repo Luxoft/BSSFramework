@@ -44,11 +44,11 @@ public class FixedPropertyValidator<TSource, TProperty, TIdent, TPersistentDomai
 
     public ValidationResult GetValidationResult(IPropertyValidationContext<TSource, TProperty> validationContext)
     {
-        var trackingServiceContainer = validationContext.ServiceProvider.GetRequiredService<ITrackingServiceContainer<TPersistentDomainObjectBase>>();
+        var trackingService = validationContext.ServiceProvider.GetRequiredService<ITrackingService<TPersistentDomainObjectBase>>();
 
         return ValidationResult.FromCondition(
-                                              trackingServiceContainer.TrackingService.GetPersistentState(validationContext.Source) == PersistentLifeObjectState.NotPersistent
-                                              || !trackingServiceContainer.TrackingService.GetChanges(validationContext.Source).HasChange(this.propertyPath),
-                                              () => $"{validationContext.GetPropertyName()} field in {validationContext.GetPropertyTypeName()} can't be changed");
+            trackingService.GetPersistentState(validationContext.Source) == PersistentLifeObjectState.NotPersistent
+            || !trackingService.GetChanges(validationContext.Source).HasChange(this.propertyPath),
+            () => $"{validationContext.GetPropertyName()} field in {validationContext.GetPropertyTypeName()} can't be changed");
     }
 }

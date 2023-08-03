@@ -5,6 +5,8 @@ using Framework.Core;
 using Framework.Persistent;
 using Framework.Validation;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.DomainDriven.BLL;
 
 /// <summary>
@@ -29,19 +31,19 @@ public class UniqueGroupDatabaseValidator : IDynamicClassValidator
     /// Возвращает экземпляр валидатора..
     /// </summary>
     /// <param name="domainObjectType">Тип доменного объекта.</param>
-    /// <param name="extendedValidationData">Данные, необходимые для создания валидатора.</param>
+    /// <param name="serviceProvider">Данные, необходимые для создания валидатора.</param>
     /// <returns>Экземпляр <see cref="IClassValidator"/>.</returns>
     /// <exception cref="ArgumentNullException">Аргумент
     /// <paramref name="domainObjectType"/>
     /// или
-    /// <paramref name="extendedValidationData"/> равен null.
+    /// <paramref name="serviceProvider"/> равен null.
     /// </exception>
-    public IClassValidator GetValidator(Type domainObjectType, IDynamicSource extendedValidationData)
+    public IClassValidator GetValidator(Type domainObjectType, IServiceProvider serviceProvider)
     {
         if (domainObjectType == null) throw new ArgumentNullException(nameof(domainObjectType));
-        if (extendedValidationData == null) throw new ArgumentNullException(nameof(extendedValidationData));
+        if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
 
-        var contexTypeData = extendedValidationData.GetValue<BLLContextTypeData>(true);
+        var contexTypeData = serviceProvider.GetRequiredService<BLLContextTypeData>();
 
         var internalValidatorType = typeof(UniqueGroupDatabaseValidator<,,,>)
                 .MakeGenericType(

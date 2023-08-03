@@ -9,6 +9,7 @@ using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.BLL.Tracking;
 using Framework.DomainDriven.Serialization;
 using Framework.DomainDriven.SerializeMetadata;
 using Framework.DomainDriven.ServiceModel.IAD;
@@ -49,7 +50,7 @@ public static class SampleSystemFrameworkExtensions
     private static IServiceCollection RegisterMainBLLContext(this IServiceCollection services)
     {
         return services
-
+               .AddSingleton<SampleSystemValidationMap>()
                .AddSingleton<SampleSystemValidatorCompileCache>()
 
                .AddScoped<ISampleSystemValidator, SampleSystemValidator>()
@@ -60,9 +61,12 @@ public static class SampleSystemFrameworkExtensions
                .AddScoped<ISampleSystemBLLContextSettings>(_ => new SampleSystemBLLContextSettings { TypeResolver = new[] { new SampleSystemBLLContextSettings().TypeResolver, TypeSource.FromSample<BusinessUnitSimpleDTO>().ToDefaultTypeResolver() }.ToComposite() })
                .AddScopedFromLazyInterfaceImplement<ISampleSystemBLLContext, SampleSystemBLLContext>()
 
+               .AddScopedFrom((ISampleSystemBLLContext context) => context.TrackingService)
+
                .AddScopedFrom<ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode>, ISampleSystemBLLContext>()
                .AddScopedFrom<IDisabledSecurityProviderContainer<PersistentDomainObjectBase>, ISampleSystemSecurityService>()
                .AddScopedFrom<ISampleSystemSecurityPathContainer, ISampleSystemSecurityService>()
+
                .AddScoped<IQueryableSource<PersistentDomainObjectBase>, BLLQueryableSource<ISampleSystemBLLContext, PersistentDomainObjectBase, DomainObjectBase, Guid>>()
                .AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
                .AddScoped<IAccessDeniedExceptionService<PersistentDomainObjectBase>, AccessDeniedExceptionService<PersistentDomainObjectBase, Guid>>()

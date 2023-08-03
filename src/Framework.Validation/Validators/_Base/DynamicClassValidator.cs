@@ -4,15 +4,15 @@ namespace Framework.Validation;
 
 public abstract class DynamicClassValidator : IDynamicClassValidator
 {
-    public IClassValidator GetValidator(Type type, IDynamicSource extendedValidationData)
+    public IClassValidator GetValidator(Type type, IServiceProvider serviceProvider)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
-        if (extendedValidationData == null) throw new ArgumentNullException(nameof(extendedValidationData));
+        if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
 
-        return new Func<IDynamicSource, IClassValidator>(this.GetValidator<object>)
+        return new Func<IServiceProvider, IClassValidator>(this.GetValidator<object>)
                .CreateGenericMethod(type)
-               .Invoke<IClassValidator>(this, extendedValidationData);
+               .Invoke<IClassValidator>(this, serviceProvider);
     }
 
-    protected abstract IClassValidator GetValidator<TSource>(IDynamicSource extendedValidationData);
+    protected abstract IClassValidator GetValidator<TSource>(IServiceProvider serviceProvider);
 }

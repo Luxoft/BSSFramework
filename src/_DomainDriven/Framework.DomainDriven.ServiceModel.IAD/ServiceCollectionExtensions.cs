@@ -7,6 +7,7 @@ using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
+using Framework.DomainDriven.BLL.Tracking;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
 using Framework.HierarchicalExpand;
@@ -92,6 +93,7 @@ public static class ServiceCollectionExtensions
     {
         return services
 
+               .AddSingleton<AuthorizationValidationMap>()
                .AddSingleton<AuthorizationValidatorCompileCache>()
                .AddScoped<IAuthorizationValidator, AuthorizationValidator>()
 
@@ -105,6 +107,8 @@ public static class ServiceCollectionExtensions
                .AddScoped<IAuthorizationBLLContextSettings, AuthorizationBLLContextSettings>()
 
                .AddScopedFromLazyInterfaceImplement<IAuthorizationBLLContext, AuthorizationBLLContext>()
+
+               .AddScopedFrom((IAuthorizationBLLContext context) => context.TrackingService)
 
                .AddScopedFrom<ISecurityOperationResolver<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode>, IAuthorizationBLLContext>()
                .AddScopedFrom<IDisabledSecurityProviderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>, IAuthorizationSecurityService>()
@@ -121,6 +125,7 @@ public static class ServiceCollectionExtensions
     {
         return services
 
+               .AddSingleton<ConfigurationValidationMap>()
                .AddSingleton<ConfigurationValidatorCompileCache>()
                .AddScoped<IConfigurationValidator, ConfigurationValidator>()
 
@@ -135,6 +140,8 @@ public static class ServiceCollectionExtensions
 
                .AddScoped<IConfigurationBLLContextSettings, ConfigurationBLLContextSettings>()
                .AddScopedFromLazyInterfaceImplement<IConfigurationBLLContext, ConfigurationBLLContext>()
+
+               .AddScopedFrom((IConfigurationBLLContext context) => context.TrackingService)
 
                .AddScopedFrom<Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContext, IConfigurationBLLContext>()
 

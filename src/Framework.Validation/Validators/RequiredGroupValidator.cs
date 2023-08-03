@@ -22,9 +22,9 @@ public class RequiredGroupValidator : DynamicClassValidator
     }
 
 
-    protected override IClassValidator GetValidator<TSource>(IDynamicSource extendedValidationData)
+    protected override IClassValidator GetValidator<TSource>(IServiceProvider serviceProvider)
     {
-        if (extendedValidationData == null) throw new ArgumentNullException(nameof(extendedValidationData));
+        if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
 
         var uniProperties = typeof(TSource).GetUniqueElementPropeties(this._groupKey, true);
 

@@ -1,12 +1,13 @@
-﻿using Framework.Core.Serialization;
+﻿using Framework.Core;
+using Framework.Core.Serialization;
 using Framework.Validation;
 
 using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.BLL;
 
-public class BLLContextValidator<TBLLContext, TOperationContext> : BLLContextContainer<TBLLContext>, IValidator, IExtendedValidationDataContainer
-        where TBLLContext : class
+public class BLLContextValidator<TBLLContext, TOperationContext> : BLLContextContainer<TBLLContext>, IValidator, IServiceProviderContainer
+        where TBLLContext : class, IServiceProviderContainer
         where TOperationContext : struct, Enum
 {
     private static readonly ISerializer<int, TOperationContext> OperationSerializer = Serializer.GetDefault<int, TOperationContext>();
@@ -36,14 +37,14 @@ public class BLLContextValidator<TBLLContext, TOperationContext> : BLLContextCon
 
     #region IExtendedValidationDataContainer Members
 
-    Framework.Core.IDynamicSource IExtendedValidationDataContainer.ExtendedValidationData => new Framework.Core.DynamicSource(new object[] { this.Context });
+    IServiceProvider IServiceProviderContainer.ServiceProvider => this.Context.ServiceProvider;
 
     #endregion
 }
 
 
 public class BLLContextHandlerValidator<TBLLContext, TOperationContext> : BLLContextValidator<TBLLContext, TOperationContext>
-        where TBLLContext : class
+        where TBLLContext : class, IServiceProviderContainer
         where TOperationContext : struct, Enum
 {
     private readonly Dictionary<Type, Delegate> handlers = new Dictionary<Type, Delegate>();

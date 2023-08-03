@@ -16,10 +16,10 @@ namespace Framework.Configuration.BLL
         
         private Framework.Validation.IValidationMap _defaultValidatorMap;
         
-        protected ConfigurationValidationMapBase(Framework.Core.IDynamicSource extendedValidationData) : 
-                base(extendedValidationData)
+        protected ConfigurationValidationMapBase(System.IServiceProvider serviceProvider) : 
+                base(serviceProvider)
         {
-            this._defaultValidatorMap = new Framework.Validation.ValidationMap(extendedValidationData);
+            this._defaultValidatorMap = new Framework.Validation.ValidationMap(serviceProvider);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight, System.DateTime?>> GetAccessableBusinessRoleReportRight_CreateDateValidators()
@@ -228,7 +228,7 @@ namespace Framework.Configuration.BLL
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettings, Framework.Configuration.Domain.ControlSettings>> GetControlSettings_ParentValidators()
         {
-            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<Framework.Configuration.Domain.ControlSettings, Framework.Configuration.Domain.ControlSettings, System.Guid>(source => source.Parent);
+            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<Framework.Configuration.Domain.ControlSettings, Framework.Configuration.Domain.ControlSettings, System.Guid, Framework.Configuration.Domain.PersistentDomainObjectBase>(source => source.Parent);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettingsParam, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParamValue>>> GetControlSettingsParam_ControlSettingsParamValuesValidators()
@@ -1581,8 +1581,8 @@ namespace Framework.Configuration.BLL
     public partial class ConfigurationValidationMap : Framework.Configuration.BLL.ConfigurationValidationMapBase
     {
         
-        public ConfigurationValidationMap(Framework.Core.IDynamicSource extendedValidationData) : 
-                base(extendedValidationData)
+        public ConfigurationValidationMap(System.IServiceProvider serviceProvider) : 
+                base(serviceProvider)
         {
         }
     }

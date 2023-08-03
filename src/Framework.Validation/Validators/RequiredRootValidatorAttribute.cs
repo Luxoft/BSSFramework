@@ -15,10 +15,10 @@ public class RequiredRootValidatorAttribute : PropertyValidatorAttribute
 
     private class RequiredRootValidator : IDynamicPropertyValidator
     {
-        public IPropertyValidator GetValidator(PropertyInfo propertyInfo, IDynamicSource extendedValidationData)
+        public IPropertyValidator GetValidator(PropertyInfo propertyInfo, IServiceProvider serviceProvider)
         {
             if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
-            if (extendedValidationData == null) throw new ArgumentNullException(nameof(extendedValidationData));
+            if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
 
             var sourceType = propertyInfo.ReflectedType;
 

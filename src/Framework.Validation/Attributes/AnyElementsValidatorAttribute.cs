@@ -15,10 +15,10 @@ public class AnyElementsValidatorAttribute : PropertyValidatorAttribute
 
 public class AnyElementsValidator : IDynamicPropertyValidator
 {
-    public IPropertyValidator GetValidator(PropertyInfo property, IDynamicSource extendedValidationData)
+    public IPropertyValidator GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
-        if (extendedValidationData == null) throw new ArgumentNullException(nameof(extendedValidationData));
+        if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
 
         var elementType = property.PropertyType.GetCollectionElementType();
 

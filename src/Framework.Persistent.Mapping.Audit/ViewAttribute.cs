@@ -1,9 +1,9 @@
 ﻿namespace Framework.Persistent.Mapping;
 
 [AttributeUsage(AttributeTargets.Class)]
-public class TableAttribute : NamedAttribute
+public class ViewAttribute :Attribute
 {
-    public string Schema
+    public string Name
     {
         get;
         set;

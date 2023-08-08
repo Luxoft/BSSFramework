@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModel.IAD.DTO\Framework.DomainDriven.ServiceModel.IAD.DTO.csproj" />
-    <ProjectReference Include="..\Framework.Configuration.BLL.Core\Framework.Configuration.BLL.Core.csproj" />
   </ItemGroup>
 
 </Project>

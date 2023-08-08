@@ -16,6 +16,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Tests.Unit\Framework.DomainDriven.Tests.Unit.csproj" />
-    <ProjectReference Include="..\Framework.Authorization.BLL\Framework.Authorization.BLL.csproj" />
   </ItemGroup>
 </Project>

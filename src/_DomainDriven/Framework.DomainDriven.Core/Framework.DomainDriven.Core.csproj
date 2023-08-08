@@ -1,21 +1,21 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Luxoft.Framework.DomainDriven.Core</PackageId>
     <RootNamespace>Framework.DomainDriven</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="BLL\**" />
+    <EmbeddedResource Remove="BLL\**" />
+    <None Remove="BLL\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.HierarchicalExpand\Framework.HierarchicalExpand.csproj" />
-    <ProjectReference Include="..\..\Framework.OData\Framework.OData.csproj" />
-    <ProjectReference Include="..\..\Framework.Persistent.Mapping\Framework.Persistent.Mapping.csproj" />
-    <ProjectReference Include="..\..\Framework.Projection\Framework.Projection.csproj" />
     <ProjectReference Include="..\..\Framework.SecuritySystem\Framework.SecuritySystem.csproj" />
     <ProjectReference Include="..\..\Framework.Security\Framework.Security.csproj" />
-    <ProjectReference Include="..\..\Framework.Transfering\Framework.Transfering.csproj" />
     <ProjectReference Include="..\..\Framework.Validation\Framework.Validation.csproj" />
-    <ProjectReference Include="..\Framework.DomainDriven.Serialization\Framework.DomainDriven.Serialization.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NHibernate" />

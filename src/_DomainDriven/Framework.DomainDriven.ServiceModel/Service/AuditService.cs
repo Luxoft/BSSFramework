@@ -82,7 +82,7 @@ public class AuditService<TIdent, TBLLContext, TBLLFactoryContainer, TRootSecuri
             }
         }
 
-        if (typeof(TProperty).IsDomainType(typeof(TPersistentObjectBase)))
+        if (typeof(TPersistentObjectBase).IsAssignableFrom(typeof(TProperty)))
         {
             var dtoType = this._bllContext.TypeResolver.Resolve(typeof(TProperty).Name + MainDTOType.SimpleDTO.ToString(), true);
 

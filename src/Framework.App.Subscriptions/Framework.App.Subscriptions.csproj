@@ -6,7 +6,4 @@
   <PropertyGroup>
   <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\_Configuration\Framework.Configuration.BLL.Core\Framework.Configuration.BLL.Core.csproj" />
-  </ItemGroup>
 </Project>

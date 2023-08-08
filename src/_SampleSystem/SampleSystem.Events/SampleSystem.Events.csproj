@@ -7,6 +7,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.App.Events\Framework.App.Events.csproj" />
-    <ProjectReference Include="..\SampleSystem.Generated.DTO\SampleSystem.Generated.DTO.csproj" />
   </ItemGroup>
 </Project>

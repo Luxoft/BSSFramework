@@ -13,7 +13,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework.App.Sdk\Framework.App.Sdk.csproj" />
-    <ProjectReference Include="..\..\SampleSystem.Domain.ManualProjections\SampleSystem.Domain.ManualProjections.csproj" />
-    <ProjectReference Include="..\..\SampleSystem.Domain.Models\SampleSystem.Domain.Models.csproj" />
   </ItemGroup>
 </Project>

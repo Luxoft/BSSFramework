@@ -6,7 +6,6 @@
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.App.BLLCore\Framework.App.BLLCore.csproj" />
     <ProjectReference Include="..\..\Framework.Cap\Framework.Cap.csproj" />
     <ProjectReference Include="..\SampleSystem.Domain.Projections\SampleSystem.Domain.Projections.csproj" />
     <ProjectReference Include="..\SampleSystem.Domain.LegacyProjections\SampleSystem.Domain.LegacyProjections.csproj" />

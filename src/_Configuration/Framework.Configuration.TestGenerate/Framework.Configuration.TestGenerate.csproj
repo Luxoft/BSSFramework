@@ -10,11 +10,4 @@
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.DBGenerator\Framework.DomainDriven.DBGenerator.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.NHibernate.DALGenerator\Framework.DomainDriven.NHibernate.DALGenerator.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModelGenerator\Framework.DomainDriven.ServiceModelGenerator.csproj" />
-
-    <ProjectReference Include="..\Framework.Configuration.Domain.Models\Framework.Configuration.Domain.Models.csproj" />
-  </ItemGroup>
 </Project>

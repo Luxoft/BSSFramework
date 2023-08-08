@@ -8,7 +8,4 @@
       <DependentUpon>SubscriptionBLL.cs</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Framework.Configuration.BLL.Core\Framework.Configuration.BLL.Core.csproj" />
-  </ItemGroup>
 </Project>

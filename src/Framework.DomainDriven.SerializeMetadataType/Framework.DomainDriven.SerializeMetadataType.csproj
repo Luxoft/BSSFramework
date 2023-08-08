@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-    <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.Serialization\Framework.DomainDriven.Serialization.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,7 +8,5 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.Core.AnonymousTypeBuilder\Framework.Core.AnonymousTypeBuilder.csproj" />
     <ProjectReference Include="..\..\Framework.DomainDriven.SerializeMetadataType\Framework.DomainDriven.SerializeMetadataType.csproj" />
-    <ProjectReference Include="..\Framework.DomainDriven.BLL.Configuration\Framework.DomainDriven.BLL.Configuration.csproj" />
-    <ProjectReference Include="..\Framework.DomainDriven.BLL.Security\Framework.DomainDriven.BLL.Security.csproj" />
   </ItemGroup>
 </Project>

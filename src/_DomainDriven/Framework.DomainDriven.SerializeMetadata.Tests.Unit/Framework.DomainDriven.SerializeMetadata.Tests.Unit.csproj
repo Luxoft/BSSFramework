@@ -15,7 +15,4 @@
     <PackageReference Include="NUnit" />
     <PackageReference Include="NUnit3TestAdapter" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Framework.DomainDriven.SerializeMetadata\Framework.DomainDriven.SerializeMetadata.csproj" />
-  </ItemGroup>
 </Project>

@@ -21,13 +21,13 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TDomai
     protected SecurityBLLBaseContext(
             [NotNull] IServiceProvider serviceProvider,
             [NotNull] IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
-            [NotNull] IObjectStateService objectStateService,
+            [NotNull] ITrackingService<TPersistentDomainObjectBase> trackingService,
             [NotNull] IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
             [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
             [NotNull] IValidator validator,
             [NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
             [NotNull] IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
-            : base(serviceProvider, operationSenders, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
+            : base(serviceProvider, operationSenders, trackingService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
     {
     }
 

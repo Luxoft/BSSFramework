@@ -51,17 +51,15 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TDomain
     protected DefaultBLLBaseContext(
             [NotNull] IServiceProvider serviceProvider,
             [NotNull] IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
-            [NotNull] IObjectStateService objectStateService,
+            [NotNull] ITrackingService<TPersistentDomainObjectBase> trackingService,
             [NotNull] IStandartExpressionBuilder standardExpressionBuilder,
             [NotNull] IValidator validator,
             [NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
             [NotNull] IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
     {
-        if (objectStateService == null) throw new ArgumentNullException(nameof(objectStateService));
-
         this.ServiceProvider = serviceProvider;
         this.OperationSenders = operationSenders ?? throw new ArgumentNullException(nameof(operationSenders));
-        this.TrackingService = new TrackingService<TPersistentDomainObjectBase>(objectStateService);
+        this.TrackingService = trackingService;
 
         this.StandartExpressionBuilder = standardExpressionBuilder ?? throw new ArgumentNullException(nameof(standardExpressionBuilder));
         this.Validator = validator;
@@ -115,12 +113,12 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TDomain
     protected DefaultBLLBaseContext(
             [NotNull] IServiceProvider serviceProvider,
             [NotNull] IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
-            [NotNull] IObjectStateService objectStateService,
+            [NotNull] ITrackingService<TPersistentDomainObjectBase> trackingService,
             [NotNull] IStandartExpressionBuilder standardExpressionBuilder,
             [NotNull] IValidator validator,
             [NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
             [NotNull] IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
-            : base(serviceProvider, operationSenders, objectStateService, standardExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
+            : base(serviceProvider, operationSenders, trackingService, standardExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
     {
     }
 

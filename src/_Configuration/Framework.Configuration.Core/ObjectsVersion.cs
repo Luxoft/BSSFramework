@@ -1,7 +1,6 @@
 ﻿using Framework.Core;
-using Framework.Persistent;
 
-namespace Framework.DomainDriven.DAL.Revisions;
+namespace Framework.Configuration;
 
 public class ObjectsVersion : IObjectsVersion
 {

@@ -6,9 +6,15 @@
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework.Persistent.LegacyContext\Framework.Persistent.LegacyContext.csproj" />
+    <ProjectReference Include="..\..\Framework.Persistent.Mapping.Audit\Framework.Persistent.Mapping.Audit.csproj" />
+    <ProjectReference Include="..\..\Framework.Persistent.Mapping\Framework.Persistent.Mapping.csproj" />
+    <ProjectReference Include="..\..\Framework.Restriction\Framework.Restriction.csproj" />
+    <ProjectReference Include="..\..\Framework.Validation\Framework.Validation.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL\Framework.DomainDriven.BLL.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Core.LegacyValidators\Framework.DomainDriven.Core.LegacyValidators.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Serialization\Framework.DomainDriven.Serialization.csproj" />
     <ProjectReference Include="..\Framework.Configuration.Core\Framework.Configuration.Core.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Reports\ReportClassDiagram.cd" />
+    <ProjectReference Include="..\Framework.Configuration.LegacyAttributes\Framework.Configuration.LegacyAttributes.csproj" />
   </ItemGroup>
 </Project>

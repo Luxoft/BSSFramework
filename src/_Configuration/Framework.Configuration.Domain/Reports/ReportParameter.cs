@@ -1,6 +1,6 @@
-﻿using Framework.DomainDriven.Attributes;
-using Framework.DomainDriven.BLL;
+﻿using Framework.DomainDriven.BLL;
 using Framework.Persistent;
+using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
 using JetBrains.Annotations;

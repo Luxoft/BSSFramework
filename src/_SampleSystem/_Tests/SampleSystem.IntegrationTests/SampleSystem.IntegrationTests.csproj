@@ -25,8 +25,6 @@
     <ProjectReference Include="..\..\..\Framework.AutomationCore\Framework.AutomationCore.csproj" />
     <ProjectReference Include="..\..\SampleSystem.BLL.Core\SampleSystem.BLL.Core.csproj" />
     <ProjectReference Include="..\..\SampleSystem.WebApiCore\SampleSystem.WebApiCore.csproj" />
-
-    <ProjectReference Include="..\SampleSystem.DbGenerate\SampleSystem.DbGenerate.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="appsettings.json">

@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.DomainDriven.Core.LegacyValidators</PackageId>
+    <RootNamespace>Framework.DomainDriven</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework.Persistent.LegacyContext\Framework.Persistent.LegacyContext.csproj" />
+    <ProjectReference Include="..\..\Framework.Validation\Framework.Validation.csproj" />
+    <ProjectReference Include="..\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
+  </ItemGroup>
+
+</Project>

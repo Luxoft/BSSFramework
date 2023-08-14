@@ -1,10 +1,10 @@
-﻿using Framework.DomainDriven.Attributes;
-using Framework.DomainDriven.BLL;
+﻿using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Restriction;
 using Framework.Configuration.Core;
 using Framework.Core;
 using Framework.DomainDriven.Serialization;
+using Framework.Persistent.Mapping;
 
 namespace Framework.Configuration.Domain.Reports;
 

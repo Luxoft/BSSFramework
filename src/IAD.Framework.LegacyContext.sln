@@ -362,6 +362,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Security.LegacyAt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Authorization.LegacyAttributes", "_Authorization\Framework.Authorization.LegacyAttributes\Framework.Authorization.LegacyAttributes.csproj", "{3134E0E9-4609-454C-82E8-B1001D994953}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DomainDriven.Core.LegacyValidators", "_DomainDriven\Framework.DomainDriven.Core.LegacyValidators\Framework.DomainDriven.Core.LegacyValidators.csproj", "{F487A52A-4DE5-4C5F-AE4C-A23C95276306}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -3342,6 +3344,26 @@ Global
 		{3134E0E9-4609-454C-82E8-B1001D994953}.Release|x64.Build.0 = Release|Any CPU
 		{3134E0E9-4609-454C-82E8-B1001D994953}.Release|x86.ActiveCfg = Release|Any CPU
 		{3134E0E9-4609-454C-82E8-B1001D994953}.Release|x86.Build.0 = Release|Any CPU
+		{F487A52A-4DE5-4C5F-AE4C-A23C95276306}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F487A52A-4DE5-4C5F-AE4C-A23C95276306}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F487A52A-4DE5-4C5F-AE4C-A23C95276306}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{F487A52A-4DE5-4C5F-AE4C-A23C95276306}.Debug|ARM.Build.0 = Debug|Any CPU
+		{F487A52A-4DE5-4C5F-AE4C-A23C95276306}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F487A52A-4DE5-4C5F-AE4C-A23C95276306}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F487A52A-4DE5-4C5F-AE4C-A23C95276306}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F487A52A-4DE5-4C5F-AE4C-A23C95276306}.Debug|x64.Build.0 = Debug|Any CPU
+		{F487A52A-4DE5-4C5F-AE4C-A23C95276306}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F487A52A-4DE5-4C5F-AE4C-A23C95276306}.Debug|x86.Build.0 = Debug|Any CPU
+		{F487A52A-4DE5-4C5F-AE4C-A23C95276306}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F487A52A-4DE5-4C5F-AE4C-A23C95276306}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F487A52A-4DE5-4C5F-AE4C-A23C95276306}.Release|ARM.ActiveCfg = Release|Any CPU
+		{F487A52A-4DE5-4C5F-AE4C-A23C95276306}.Release|ARM.Build.0 = Release|Any CPU
+		{F487A52A-4DE5-4C5F-AE4C-A23C95276306}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F487A52A-4DE5-4C5F-AE4C-A23C95276306}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F487A52A-4DE5-4C5F-AE4C-A23C95276306}.Release|x64.ActiveCfg = Release|Any CPU
+		{F487A52A-4DE5-4C5F-AE4C-A23C95276306}.Release|x64.Build.0 = Release|Any CPU
+		{F487A52A-4DE5-4C5F-AE4C-A23C95276306}.Release|x86.ActiveCfg = Release|Any CPU
+		{F487A52A-4DE5-4C5F-AE4C-A23C95276306}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -3458,6 +3480,7 @@ Global
 		{1A0FD394-F8E0-4349-9A24-B6C6660488E4} = {BD23CE26-E161-47F1-826E-BD37F4F51C9E}
 		{3022B610-9A85-4802-A483-3C617DF11346} = {BD23CE26-E161-47F1-826E-BD37F4F51C9E}
 		{3134E0E9-4609-454C-82E8-B1001D994953} = {9FBDE8A9-8E9D-4B0E-8415-A6335F732358}
+		{F487A52A-4DE5-4C5F-AE4C-A23C95276306} = {BD23CE26-E161-47F1-826E-BD37F4F51C9E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {68BB011C-6BAC-4558-903A-BF29D2F8046F}

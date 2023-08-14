@@ -7,6 +7,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.Transfering\Framework.Transfering.csproj" />
-    <ProjectReference Include="..\Framework.DomainDriven.Core.LegacyContext\Framework.DomainDriven.Core.LegacyContext.csproj" />
   </ItemGroup>
 </Project>

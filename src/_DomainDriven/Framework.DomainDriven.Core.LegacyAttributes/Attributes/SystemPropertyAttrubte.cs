@@ -1,4 +1,4 @@
-﻿namespace Framework.Persistent;
+﻿namespace Framework.DomainDriven.Attributes;
 
 [AttributeUsage(AttributeTargets.Property)]
 public class SystemPropertyAttribute : Attribute

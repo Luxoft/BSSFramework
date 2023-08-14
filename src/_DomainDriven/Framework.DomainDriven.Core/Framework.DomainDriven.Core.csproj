@@ -1,24 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.DomainDriven.Core</PackageId>
     <RootNamespace>Framework.DomainDriven</RootNamespace>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Remove="BLL\**" />
-    <EmbeddedResource Remove="BLL\**" />
-    <None Remove="BLL\**" />
-  </ItemGroup>
+
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.HierarchicalExpand\Framework.HierarchicalExpand.csproj" />
     <ProjectReference Include="..\..\Framework.Persistent\Framework.Persistent.csproj" />
     <ProjectReference Include="..\..\Framework.SecuritySystem\Framework.SecuritySystem.csproj" />
   </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="NHibernate" />
     <PackageReference Include="nuSpec.Abstraction" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
   </ItemGroup>
+
 </Project>

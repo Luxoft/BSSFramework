@@ -9,6 +9,8 @@
 
   <ItemGroup>
 
+    <ProjectReference Include="..\Framework.Security\Framework.Security.csproj" />
+
     <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.NHibernate\Framework.DomainDriven.NHibernate.csproj" />
   </ItemGroup>
 

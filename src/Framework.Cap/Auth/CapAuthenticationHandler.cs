@@ -1,8 +1,7 @@
 ﻿using System.Text.Encodings.Web;
 
-using Framework.Authorization.BLL;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL.Security;
+using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
@@ -10,24 +9,22 @@ using Microsoft.Extensions.Options;
 
 namespace Framework.Cap.Auth;
 
-public class CapAuthenticationHandler<TBllContext> : AuthenticationHandler<AuthenticationSchemeOptions>
-        where TBllContext : IAuthorizationBLLContextContainer<IAuthorizationBLLContext>
+public class CapAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
-    private readonly TBllContext context;
+    private readonly IAuthorizationSystem authorizationSystem;
 
     private readonly IDBSession dbSession;
 
     public CapAuthenticationHandler(
-            IServiceProvider rootServiceProvider,
             IOptionsMonitor<AuthenticationSchemeOptions> options,
             ILoggerFactory logger,
             UrlEncoder encoder,
             ISystemClock clock,
-            TBllContext context,
+            IAuthorizationSystem authorizationSystem,
             IDBSession dbSession)
             : base(options, logger, encoder, clock)
     {
-        this.context = context;
+        this.authorizationSystem = authorizationSystem;
         this.dbSession = dbSession;
     }
 
@@ -42,9 +39,7 @@ public class CapAuthenticationHandler<TBllContext> : AuthenticationHandler<Authe
 
         this.dbSession.AsReadOnly();
 
-        var isAdmin = this.context.Authorization.Logics.BusinessRole.HasAdminRole();
-
-        if (!isAdmin)
+        if (!this.authorizationSystem.IsAdmin())
         {
             return Task.FromResult(AuthenticateResult.NoResult());
         }

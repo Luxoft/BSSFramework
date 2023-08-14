@@ -18,4 +18,6 @@ public interface IAsyncDal<TDomainObject, in TIdent>
     Task InsertAsync(TDomainObject domainObject, TIdent id, CancellationToken cancellationToken = default);
 
     Task RemoveAsync(TDomainObject domainObject, CancellationToken cancellationToken = default);
+
+    Task LockAsync(TDomainObject domain, LockRole lockRole, CancellationToken cancellationToken = default);
 }

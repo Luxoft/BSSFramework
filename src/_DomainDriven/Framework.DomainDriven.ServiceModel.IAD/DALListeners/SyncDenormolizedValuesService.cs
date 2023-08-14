@@ -1,11 +1,11 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Core;
-using Framework.DomainDriven.BLL.Security.Lock;
+using Framework.DomainDriven.Lock;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 
-namespace Framework.DomainDriven.BLL.Security;
+namespace Framework.DomainDriven.ServiceModel.IAD;
 
 public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomainObject,
                                            TDomainObjectAncestorLink,
@@ -18,19 +18,19 @@ public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomain
         where TNamedLockOperation : struct, Enum
         where TSourceToAncestorOrChildLink : IHierarchicalToAncestorOrChildLink<TDomainObject, TIdent>
 {
-    private readonly IDAL<TDomainObject, Guid> domainObjectDal;
+    private readonly IAsyncDal<TDomainObject, Guid> domainObjectDal;
 
-    private readonly IDAL<TDomainObjectAncestorLink, Guid> domainObjectAncestorLinkDal;
+    private readonly IAsyncDal<TDomainObjectAncestorLink, Guid> domainObjectAncestorLinkDal;
 
-    private readonly IDAL<TNamedLockObject, Guid> namedLockObjectDal;
+    private readonly IAsyncDal<TNamedLockObject, Guid> namedLockObjectDal;
 
     private MemberExpression identityPropertyExpression;
 
 
     public SyncDenormolizedValuesService(
-            IDAL<TDomainObject, Guid> domainObjectDal,
-            IDAL<TDomainObjectAncestorLink, Guid> domainObjectAncestorLinkDal,
-            IDAL<TNamedLockObject, Guid> namedLockObjectDal)
+        IAsyncDal<TDomainObject, Guid> domainObjectDal,
+        IAsyncDal<TDomainObjectAncestorLink, Guid> domainObjectAncestorLinkDal,
+        IAsyncDal<TNamedLockObject, Guid> namedLockObjectDal)
     {
         this.domainObjectDal = domainObjectDal;
         this.domainObjectAncestorLinkDal = domainObjectAncestorLinkDal;
@@ -69,7 +69,7 @@ public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomain
     {
         this.LockChanges();
 
-        foreach (var domainObject in this.domainObjectDal.GetQueryable(LockRole.None).ToList())
+        foreach (var domainObject in this.domainObjectDal.GetQueryable().ToList())
         {
             this.SyncUp(domainObject);
         }
@@ -122,7 +122,7 @@ public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomain
         var domainObjectIdents = domainObjects.Select(z => z.Id).ToList();
 
         var removingAncestors = this.domainObjectAncestorLinkDal
-                                    .GetQueryable(LockRole.None)
+                                    .GetQueryable()
                                     .Where(z => domainObjectIdents.Contains(z.Ancestor.Id) || domainObjectIdents.Contains(z.Child.Id)).ToList();
 
         return new SyncResult(new AncestorLink[0], removingAncestors);
@@ -168,7 +168,7 @@ public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomain
                                                                                       typeof(TDomainObjectAncestorLink))
                         };
 
-        var queryable = this.namedLockObjectDal.GetQueryable(LockRole.None);
+        var queryable = this.namedLockObjectDal.GetQueryable();
 
         var allNamed = queryable.Where(z => collectin.Contains(z.LockOperation)).ToList();
 
@@ -176,7 +176,7 @@ public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomain
                                         () => new System.ArgumentException($"System must have namedLock for {typeof(TDomainObjectAncestorLink).Name} global lock "),
                                         () => new System.ArgumentException($"System have more then one namedLock for {typeof(TDomainObjectAncestorLink).Name} global lock "));
 
-        this.namedLockObjectDal.Lock(namedLock, LockRole.Update);
+        this.namedLockObjectDal.LockAsync(namedLock, LockRole.Update).GetAwaiter().GetResult();
     }
 
     /// <summary>
@@ -195,7 +195,7 @@ public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomain
             throw new ArgumentNullException(nameof(domainObject));
         }
 
-        var ancestorLogic = this.domainObjectAncestorLinkDal.GetQueryable(LockRole.None);
+        var ancestorLogic = this.domainObjectAncestorLinkDal.GetQueryable();
 
         var actualAncestors = domainObject.GetAllParents().Select(z => new AncestorLink(child: domainObject, ancestor: z)).ToList();
 
@@ -208,12 +208,12 @@ public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomain
 
     private void RemoveAncestor(TDomainObjectAncestorLink domainObjectAncestorLink)
     {
-        this.domainObjectAncestorLinkDal.Remove(domainObjectAncestorLink);
+        this.domainObjectAncestorLinkDal.RemoveAsync(domainObjectAncestorLink).GetAwaiter().GetResult();
     }
 
     private void SaveAncestor(TDomainObjectAncestorLink domainObjectAncestorLink)
     {
-        this.domainObjectAncestorLinkDal.Save(domainObjectAncestorLink);
+        this.domainObjectAncestorLinkDal.SaveAsync(domainObjectAncestorLink).GetAwaiter().GetResult();
     }
 
     private Expression<Func<TDomainObject, bool>> GetEqualsIdentityExpression(TDomainObject domainObject)

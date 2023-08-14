@@ -3,7 +3,6 @@ using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
-using Framework.QueryLanguage;
 using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -27,8 +26,6 @@ public static class ServiceCollectionExtensions
         services.RegisterAuthorizationSystem();
 
         services.AddSingleton<IDateTimeService>(DateTimeService.Default);
-
-        services.RegisterAuthorizationBLL();
 
         services.AddScoped<ILegacyGenericDisabledSecurityProviderFactory, LegacyGenericDisabledSecurityProviderFactory>();
         services.AddScoped<INotImplementedDomainSecurityServiceContainer, OnlyDisabledDomainSecurityServiceContainer>();
@@ -62,6 +59,7 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection RegisterAuthorizationSystem(this IServiceCollection services)
     {
-        return services.AddScopedFrom<IAuthorizationSystem<Guid>, IAuthorizationBLLContext>();
+        return services;
+        //return services.AddScopedFrom<IAuthorizationSystem<Guid>, IAuthorizationBLLContext>();
     }
 }

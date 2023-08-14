@@ -4,6 +4,8 @@ namespace Framework.SecuritySystem;
 
 public interface IAuthorizationSystem
 {
+    bool IsAdmin();
+
     bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation)
             where TSecurityOperationCode : struct, Enum;
 

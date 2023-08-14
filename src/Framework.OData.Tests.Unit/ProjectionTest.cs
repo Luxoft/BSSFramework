@@ -120,6 +120,11 @@ public interface ITestLocation : IDefaultIdentityObject, IVisualIdentityObject, 
     ITestDepartment Department { get; }
 }
 
+public interface ILocation : IDefaultIdentityObject, IVisualIdentityObject
+{
+}
+
+
 public interface ITestDepartment : IDefaultIdentityObject, IVisualIdentityObject
 {
 

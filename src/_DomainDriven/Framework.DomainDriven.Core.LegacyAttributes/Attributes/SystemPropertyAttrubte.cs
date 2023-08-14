@@ -3,5 +3,4 @@
 [AttributeUsage(AttributeTargets.Property)]
 public class SystemPropertyAttribute : Attribute
 {
-
 }

@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Luxoft.Framework.Notification.DTO</PackageId>
+    <PackageId>Luxoft.Framework.DomainDriven.WebApiNetCore.LegacyContext</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
+
 </Project>

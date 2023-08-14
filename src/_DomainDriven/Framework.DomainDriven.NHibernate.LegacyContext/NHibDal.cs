@@ -36,9 +36,7 @@ public class NHibDal<TDomainObject, TIdent> : IDAL<TDomainObject, TIdent>
 
     public void Lock(TDomainObject domainObject, LockRole lockRole)
     {
-        this.CheckWrite();
-
-        this.NativeSession.Lock(domainObject, lockRole.ToLockMode());
+        this.asyncDal.LockAsync(domainObject, lockRole).GetAwaiter().GetResult();
     }
 
     public void Refresh(TDomainObject domainObject)

@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.NHibernate\Framework.DomainDriven.NHibernate.csproj" />
-    <ProjectReference Include="..\SampleSystem.AuditDomain\SampleSystem.AuditDomain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

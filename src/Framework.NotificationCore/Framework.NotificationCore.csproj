@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Framework.App.Events\Framework.App.Events.csproj" />
+    <ProjectReference Include="..\_DomainDriven\Framework.Notification.DTO\Framework.Notification.DTO.csproj" />
   </ItemGroup>
 
 </Project>

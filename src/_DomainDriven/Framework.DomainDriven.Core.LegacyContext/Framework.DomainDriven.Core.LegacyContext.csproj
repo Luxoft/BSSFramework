@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.OData\Framework.OData.csproj" />
     <ProjectReference Include="..\..\Framework.Persistent.Mapping\Framework.Persistent.Mapping.csproj" />
+    <ProjectReference Include="..\..\Framework.Validation\Framework.Validation.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
 
     <ProjectReference Include="..\..\Framework.Projection\Framework.Projection.csproj" />

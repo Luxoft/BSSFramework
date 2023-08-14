@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Authorization.TestGenerate</PackageId>
   </PropertyGroup>
@@ -7,6 +7,16 @@
     <PackageReference Include="MSTest.TestAdapter" />
     <PackageReference Include="MSTest.TestFramework" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.DBGenerator\Framework.DomainDriven.DBGenerator.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.NHibernate.DALGenerator\Framework.DomainDriven.NHibernate.DALGenerator.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModelGenerator\Framework.DomainDriven.ServiceModelGenerator.csproj" />
+
+    <ProjectReference Include="..\Framework.Authorization.Domain.Models\Framework.Authorization.Domain.Models.csproj" />
+  </ItemGroup>
+
+
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>

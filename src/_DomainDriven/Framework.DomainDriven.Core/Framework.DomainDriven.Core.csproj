@@ -13,9 +13,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.HierarchicalExpand\Framework.HierarchicalExpand.csproj" />
+    <ProjectReference Include="..\..\Framework.Persistent\Framework.Persistent.csproj" />
     <ProjectReference Include="..\..\Framework.SecuritySystem\Framework.SecuritySystem.csproj" />
-    <ProjectReference Include="..\..\Framework.Security\Framework.Security.csproj" />
-    <ProjectReference Include="..\..\Framework.Validation\Framework.Validation.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NHibernate" />

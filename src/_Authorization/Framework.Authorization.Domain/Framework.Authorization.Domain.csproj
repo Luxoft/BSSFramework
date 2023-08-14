@@ -6,7 +6,16 @@
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework.Restriction\Framework.Restriction.csproj" />
     <ProjectReference Include="..\..\Framework.SecuritySystem\Framework.SecuritySystem.csproj" />
-    <ProjectReference Include="..\Framework.Authorization.Core\Framework.Authorization.Core.csproj" />
+
+    <!-- LegacyAttributes -->
+
+    <ProjectReference Include="..\Framework.Authorization.LegacyAttributes\Framework.Authorization.LegacyAttributes.csproj" />
+
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL\Framework.DomainDriven.BLL.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Serialization\Framework.DomainDriven.Serialization.csproj" />
+    <ProjectReference Include="..\..\Framework.Persistent.Mapping\Framework.Persistent.Mapping.csproj" />
+
   </ItemGroup>
 </Project>

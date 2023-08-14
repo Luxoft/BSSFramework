@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 
 using Framework.Core;
+using Framework.DomainDriven.DALExceptions;
 using Framework.Exceptions;
 using Framework.Persistent.Mapping;
 

@@ -1,6 +1,4 @@
-﻿using Framework.Validation;
-
-namespace Framework.DomainDriven;
+﻿namespace Framework.DomainDriven.DALExceptions;
 
 public class LinkedObjects
 {
@@ -31,7 +29,7 @@ public class LinkedObjects
     }
 }
 
-public abstract class DALException<T> : DALException, Framework.Core.IConvertible<ValidationException>
+public abstract class DALException<T> : DALException
 {
     private readonly T _args;
 
@@ -44,6 +42,4 @@ public abstract class DALException<T> : DALException, Framework.Core.IConvertibl
     {
         get { return this._args; }
     }
-
-    public abstract ValidationException Convert();
 }

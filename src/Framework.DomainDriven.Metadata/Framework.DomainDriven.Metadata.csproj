@@ -6,6 +6,8 @@
     <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Framework.Persistent.LegacyContext\Framework.Persistent.LegacyContext.csproj" />
+    <ProjectReference Include="..\Framework.Persistent.Mapping.Audit\Framework.Persistent.Mapping.Audit.csproj" />
     <ProjectReference Include="..\Framework.Persistent.Mapping\Framework.Persistent.Mapping.csproj" />
     <ProjectReference Include="..\Framework.Persistent\Framework.Persistent.csproj" />
   </ItemGroup>

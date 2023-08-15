@@ -19,7 +19,7 @@ public static class TypeExtensions
 
         var mode = attr.Maybe(v => v.Mode, eventType != null ? EventRoleMode.ALL : 0);
 
-        var operationType = attr.Maybe(v => v.EventOperationType, eventType);
+        var operationType = attr.Maybe(v => v.EventOperationType) ?? eventType;
 
         return operationType.Maybe(EnumHelper.GetValuesE)
                             .EmptyIfNull()

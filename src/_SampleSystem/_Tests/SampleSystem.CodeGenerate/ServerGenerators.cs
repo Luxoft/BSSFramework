@@ -3,6 +3,7 @@
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven;
+using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLLGenerator;
 using Framework.DomainDriven.DTOGenerator;
 using Framework.DomainDriven.DTOGenerator.Audit;
@@ -15,6 +16,8 @@ using Framework.DomainDriven.WebApiGenerator.NetCore;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using SampleSystem.Domain;
 
 using FileInfo = Framework.DomainDriven.Generation.FileInfo;
 using FileType = Framework.DomainDriven.DTOGenerator.FileType;

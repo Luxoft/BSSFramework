@@ -8,4 +8,9 @@
     <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Core\Framework.Core.csproj" />
+    <ProjectReference Include="..\Framework.Persistent.Idents\Framework.Persistent.Idents.csproj" />
+  </ItemGroup>
+
 </Project>

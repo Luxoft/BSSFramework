@@ -11,6 +11,12 @@ namespace Framework.Authorization.Domain;
 /// <summary>
 ///     Идентификатор (логин) пользователя в системе
 /// </summary>
+[DomainType("{fa27cd64-c5e6-4356-9efa-a35b00ff69dd}")]
+[AuthorizationViewDomainObject(AuthorizationSecurityOperationCode.PrincipalView)]
+[AuthorizationEditDomainObject(AuthorizationSecurityOperationCode.PrincipalEdit)]
+[BLLViewRole]
+[BLLSaveRole]
+[BLLRemoveRole]
 [DebuggerDisplay("{Name}, RunAs={RunAs}")]
 public class Principal : BaseDirectory, IMaster<Permission>, IPrincipal<Guid>
 {

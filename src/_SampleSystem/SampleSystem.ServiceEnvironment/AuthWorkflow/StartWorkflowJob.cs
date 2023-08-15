@@ -25,9 +25,9 @@ public class StartWorkflowJob
         this.workflowApproveProcessor = workflowApproveProcessor;
     }
 
-    public Task<Dictionary<Guid, Guid>> Start()
+    public async Task<Dictionary<Guid, Guid>> Start()
     {
-        return this.contextEvaluator.EvaluateAsync(DBSessionMode.Write, (ctx, _) =>
+        return await this.contextEvaluator.EvaluateAsync(DBSessionMode.Write, (ctx, _) =>
         {
             var permQ = ctx.Authorization.Logics.Permission.GetUnsecureQueryable();
 

@@ -1,6 +1,7 @@
 ﻿using Framework.Authorization.BLL;
 using Framework.Authorization.Events;
 using Framework.Authorization.Generated.DTO;
+using Framework.Configuration;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
@@ -16,7 +17,6 @@ using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Events;
-using Framework.Persistent;
 using Framework.QueryableSource;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Rules.Builders;
@@ -35,6 +35,8 @@ public static class SampleSystemFrameworkExtensions
     public static IServiceCollection RegisterGeneralBssFramework(this IServiceCollection services)
     {
         return services.RegisterGenericServices()
+                       .RegisterLegacyGenericServices()
+
                        .RegisterWebApiGenericServices()
 
                        .RegisterMainBLLContext()
@@ -90,7 +92,7 @@ public static class SampleSystemFrameworkExtensions
     {
         services.AddSingleton<IInitializeManager, InitializeManager>();
 
-        services.AddScoped<IBeforeTransactionCompletedDALListener, DenormalizeHierarchicalDALListener<ISampleSystemBLLContext, PersistentDomainObjectBase, NamedLock, NamedLockOperation>>();
+        services.AddScoped<IBeforeTransactionCompletedDALListener, DenormalizeHierarchicalDALListener<PersistentDomainObjectBase, NamedLock, NamedLockOperation>>();
         services.AddScoped<IBeforeTransactionCompletedDALListener, FixDomainObjectEventRevisionNumberDALListener>();
         services.AddScoped<IBeforeTransactionCompletedDALListener, PermissionWorkflowDALListener>();
 

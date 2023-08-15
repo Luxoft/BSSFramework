@@ -1,8 +1,6 @@
 ﻿using Framework.Authorization.BLL;
 using Framework.DomainDriven;
 
-using JetBrains.Annotations;
-
 using WorkflowCore.Interface;
 using WorkflowCore.Models;
 using WorkflowCore.Primitives;
@@ -13,7 +11,7 @@ public class CalcHasAccessStep : WaitFor
 {
     private readonly IContextEvaluator<IAuthorizationBLLContext> contextEvaluator;
 
-    public CalcHasAccessStep([NotNull] IContextEvaluator<IAuthorizationBLLContext> contextEvaluator)
+    public CalcHasAccessStep(IContextEvaluator<IAuthorizationBLLContext> contextEvaluator)
     {
         this.contextEvaluator = contextEvaluator ?? throw new ArgumentNullException(nameof(contextEvaluator));
     }

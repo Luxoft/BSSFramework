@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <PackageId>Luxoft.Framework.NotificationCore</PackageId>
@@ -21,6 +21,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Framework.App.Events\Framework.App.Events.csproj" />
+    <ProjectReference Include="..\_Configuration\Framework.Configuration.BLL\Framework.Configuration.BLL.csproj" />
+    <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.BLL.Configuration\Framework.DomainDriven.BLL.Configuration.csproj" />
     <ProjectReference Include="..\_DomainDriven\Framework.Notification.DTO\Framework.Notification.DTO.csproj" />
   </ItemGroup>
 

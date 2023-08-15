@@ -1,8 +1,6 @@
 ﻿using Framework.Authorization.BLL;
 using Framework.DomainDriven;
 
-using JetBrains.Annotations;
-
 using WorkflowCore.Interface;
 using WorkflowCore.Models;
 
@@ -16,8 +14,8 @@ public class CanAutoApproveStep : IStepBody
 
     private readonly IDBSession dbSession;
 
-    public CanAutoApproveStep([NotNull] IAuthorizationBLLContext context,
-                              [NotNull] IWorkflowApproveProcessor workflowApproveProcessor,
+    public CanAutoApproveStep(IAuthorizationBLLContext context,
+                              IWorkflowApproveProcessor workflowApproveProcessor,
                               IDBSession dbSession)
     {
         this.context = context ?? throw new ArgumentNullException(nameof(context));

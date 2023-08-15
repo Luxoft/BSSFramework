@@ -10,6 +10,7 @@ using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.BLL.Tracking;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
+using Framework.Exceptions;
 using Framework.HierarchicalExpand;
 using Framework.Notification;
 using Framework.Persistent;

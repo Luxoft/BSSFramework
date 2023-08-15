@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Framework.Core;
+using Framework.DomainDriven.Attributes;
 using Framework.DomainDriven.BLL.Tracking;
 using Framework.SecuritySystem;
 

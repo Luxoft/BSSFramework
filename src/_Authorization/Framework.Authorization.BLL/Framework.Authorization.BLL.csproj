@@ -6,6 +6,7 @@
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL.Security\Framework.DomainDriven.BLL.Security.csproj" />
     <ProjectReference Include="..\Framework.Authorization.BLL.Core\Framework.Authorization.BLL.Core.csproj" />
   </ItemGroup>
 </Project>

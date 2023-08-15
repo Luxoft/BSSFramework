@@ -1,5 +1,6 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.BLL.Configuration;
+using Framework.DomainDriven.DALExceptions;
 using Framework.Exceptions;
 using Framework.Notification;
 using Framework.Validation;

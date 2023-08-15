@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.BLL.Security\Framework.DomainDriven.BLL.Security.csproj" />
+    <ProjectReference Include="..\Framework.DomainDriven.Core.LegacyValidators\Framework.DomainDriven.Core.LegacyValidators.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.Generation.Domain\Framework.DomainDriven.Generation.Domain.csproj" />
   </ItemGroup>
 </Project>

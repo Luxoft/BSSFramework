@@ -1,4 +1,6 @@
-﻿namespace Framework.Notification;
+﻿using Framework.Configuration;
+
+namespace Framework.Notification;
 
 using System;
 using System.Collections.Generic;
@@ -36,7 +38,7 @@ public class NotificationMessageGenerationInfo
     public object PreviousRoot { get; private set; }
 
 
-    private class DefaultEmployee : IIntegrationEmployee
+    private class DefaultEmployee : IEmployee
     {
         private DefaultEmployee(string email)
         {
@@ -49,15 +51,6 @@ public class NotificationMessageGenerationInfo
         public string Email { get; private set; }
 
         public string Login { get; private set; }
-
-        public int? Pin { get; private set; }
-
-
-        public int? GetPin()
-        {
-            return this.Pin;
-        }
-
 
         public static IEnumerable<DefaultEmployee> CreateMany(string emails)
         {

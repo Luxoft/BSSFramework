@@ -2,7 +2,7 @@
 
 namespace Framework.DomainDriven.BLL.Security;
 
-public static class AuthorizationBLLContextExtensions
+public static class AuthorizationSystemExtensions
 {
     public static void CheckAccess<TSecurityOperationCode>(
             this IAuthorizationSystem authorizationSystem,

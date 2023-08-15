@@ -16,7 +16,7 @@ public class BLLFileFactory<TConfiguration> : FileFactory<TConfiguration>
     {
     }
 
-    private Type EventOperationType => this.DomainType.GetEventOperationType(true);
+    private Type EventOperationType => this.DomainType.GetEventOperationType() ?? typeof(BLLBaseOperation);
 
     public override FileType FileType => FileType.BLL;
 

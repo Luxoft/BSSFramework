@@ -7,6 +7,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.Security\Framework.Security.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL.Security\Framework.DomainDriven.BLL.Security.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Core.LegacyContext\Framework.DomainDriven.Core.LegacyContext.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
   </ItemGroup>
 </Project>

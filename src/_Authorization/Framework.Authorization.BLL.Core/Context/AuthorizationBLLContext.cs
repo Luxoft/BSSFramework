@@ -38,7 +38,7 @@ public partial class AuthorizationBLLContext
     public AuthorizationBLLContext(
             [NotNull] IServiceProvider serviceProvider,
             [NotNull] IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
-            [NotNull] IObjectStateService objectStateService,
+            [NotNull] ITrackingService<PersistentDomainObjectBase> trackingService,
             [NotNull] IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
             [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
             [NotNull] IAuthorizationValidator validator,
@@ -59,7 +59,7 @@ public partial class AuthorizationBLLContext
             : base(
                    serviceProvider,
                    operationSenders,
-                   objectStateService,
+                   trackingService,
                    accessDeniedExceptionService,
                    standartExpressionBuilder,
                    validator,
@@ -175,6 +175,11 @@ public partial class AuthorizationBLLContext
                                                                                     securityOperation.Code);
 
         return this.HasAccess(filter);
+    }
+
+    public bool IsAdmin()
+    {
+        return this.Logics.BusinessRole.HasAdminRole();
     }
 
     public bool HasAccess<TSecurityOperationCode>([NotNull] NonContextSecurityOperation<TSecurityOperationCode> securityOperation)

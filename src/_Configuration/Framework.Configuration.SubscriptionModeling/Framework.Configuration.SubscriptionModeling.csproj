@@ -8,6 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Core\Framework.Authorization.Core.csproj" />
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Notification.Abstract\Framework.Authorization.Notification.Abstract.csproj" />
-    <ProjectReference Include="..\Framework.Configuration.Domain\Framework.Configuration.Domain.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.Notification\Framework.Notification.csproj" />
   </ItemGroup>
 </Project>

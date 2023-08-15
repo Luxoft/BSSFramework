@@ -7,8 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Core;
 
-using Framework.Persistent;
-
 public class NotificationMessageGenerationInfo
 {
     public NotificationMessageGenerationInfo(string emails, object currentRoot, object previousRoot)

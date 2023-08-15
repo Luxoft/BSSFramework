@@ -3,9 +3,11 @@
     <PackageId>Luxoft.Framework.Configuration.WebApi</PackageId>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework.DomainDriven.WebApiNetCore.LegacyContext\Framework.DomainDriven.WebApiNetCore.LegacyContext.csproj" />
     <ProjectReference Include="..\..\Framework.DomainDriven.WebApiNetCore\Framework.DomainDriven.WebApiNetCore.csproj" />
     <ProjectReference Include="..\..\Framework.WebApi.Utils\Framework.WebApi.Utils.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModel.IAD\Framework.DomainDriven.ServiceModel.IAD.csproj" />
+    <ProjectReference Include="..\Framework.Configuration.BLL\Framework.Configuration.BLL.csproj" />
     <ProjectReference Include="..\Framework.Configuration.Generated.DTO\Framework.Configuration.Generated.DTO.csproj" />
   </ItemGroup>
 

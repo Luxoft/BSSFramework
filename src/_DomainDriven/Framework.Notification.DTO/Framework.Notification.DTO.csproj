@@ -7,4 +7,8 @@
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Notification\Framework.Notification.csproj" />
+  </ItemGroup>
 </Project>

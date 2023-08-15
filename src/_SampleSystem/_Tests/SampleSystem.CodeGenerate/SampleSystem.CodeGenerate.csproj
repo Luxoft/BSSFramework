@@ -1,17 +1,35 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-  <IsPackable>false</IsPackable>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="MSTest.TestAdapter" />
     <PackageReference Include="MSTest.TestFramework" />
     <PackageReference Include="CommandLineParser" />
   </ItemGroup>
+
   <ItemGroup>
     <Compile Include="..\..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework.App.Sdk\Framework.App.Sdk.csproj" />
+    <ProjectReference Include="..\..\..\_Authorization\Framework.Authorization.TestGenerate\Framework.Authorization.TestGenerate.csproj" />
+    <ProjectReference Include="..\..\..\_Configuration\Framework.Configuration.TestGenerate\Framework.Configuration.TestGenerate.csproj" />
+    <ProjectReference Include="..\..\..\_DomainDriven\Framework.DomainDriven.ProjectionGenerator\Framework.DomainDriven.ProjectionGenerator.csproj" />
+
+    <ProjectReference Include="..\..\SampleSystem.Domain.ManualProjections\SampleSystem.Domain.ManualProjections.csproj" />
+    <ProjectReference Include="..\..\SampleSystem.Domain.Models\SampleSystem.Domain.Models.csproj" />
+
+    <ProjectReference Include="..\..\..\_DomainDriven\Framework.DomainDriven.NHibernate.DALGenerator\Framework.DomainDriven.NHibernate.DALGenerator.csproj" />
+    <ProjectReference Include="..\..\..\_DomainDriven\Framework.DomainDriven.ServiceModelGenerator\Framework.DomainDriven.ServiceModelGenerator.csproj" />
+    <ProjectReference Include="..\..\..\Framework.DomainDriven.WebApiGenerator.NetCore\Framework.DomainDriven.WebApiGenerator.NetCore.csproj" />
+
   </ItemGroup>
+
+
+
 </Project>

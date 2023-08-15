@@ -18,4 +18,11 @@ public class NotificationTechnicalInformationDTO
     {
 
     }
+
+    public NotificationTechnicalInformationDTO(NotificationTechnicalInformation information)
+    {
+        this.MessageTemplateCode = information.MessageTemplateCode;
+        this.ContextObjectId = information.ContextObjectId;
+        this.ContextObjectType = information.ContextObjectType;
+    }
 }

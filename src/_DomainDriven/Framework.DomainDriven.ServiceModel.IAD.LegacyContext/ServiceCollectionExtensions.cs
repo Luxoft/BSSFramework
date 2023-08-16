@@ -33,6 +33,8 @@ public static class ServiceCollectionExtensions
 
         services.AddSingleton<IExceptionExpander, ExceptionExpander>();
 
+        services.AddSingleton<IStandartExpressionBuilder, StandartExpressionBuilder>();
+
         services.AddScoped<IStandardSubscriptionService, LocalDBSubscriptionService>();
 
         services.RegisterAuthorizationSystem();
@@ -50,8 +52,7 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection RegisterLegacyHierarchicalObjectExpander<TPersistentDomainObjectBase>(this IServiceCollection services)
-            where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
+    public static IServiceCollection RegisterLegacyHierarchicalObjectExpander(this IServiceCollection services)
     {
         return services.ReplaceSingleton<IHierarchicalRealTypeResolver, ProjectionHierarchicalRealTypeResolver>();
     }
@@ -88,6 +89,8 @@ public static class ServiceCollectionExtensions
                .AddScoped<IQueryableSource<Framework.Authorization.Domain.PersistentDomainObjectBase>, BLLQueryableSource<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.DomainObjectBase, Guid>>()
                .AddScoped<ISecurityExpressionBuilderFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
                .AddScoped<IAccessDeniedExceptionService<Framework.Authorization.Domain.PersistentDomainObjectBase>, AccessDeniedExceptionService<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
+
+               .AddScopedFrom<IAccessDeniedExceptionService, IAccessDeniedExceptionService<Framework.Authorization.Domain.PersistentDomainObjectBase>> ()
 
                .Self(AuthorizationSecurityServiceBase.Register)
                .Self(AuthorizationBLLFactoryContainer.RegisterBLLFactory);

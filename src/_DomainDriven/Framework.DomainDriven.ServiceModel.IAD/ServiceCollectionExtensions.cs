@@ -59,7 +59,6 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection RegisterAuthorizationSystem(this IServiceCollection services)
     {
-        return services;
-        //return services.AddScopedFrom<IAuthorizationSystem<Guid>, IAuthorizationBLLContext>();
+        return services.AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>();
     }
 }

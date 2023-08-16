@@ -4,7 +4,6 @@ using Framework.Configuration.BLL;
 using Framework.Configuration.Generated.DTO;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.ServiceModel.Service;
-using Framework.DomainDriven.WebApiNetCore.Integration;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,7 +11,7 @@ namespace Framework.DomainDriven.WebApiNetCore;
 
 public static class ServiceCollectionExtensions
 {
-    private static IServiceCollection RegisterContextEvaluators(this IServiceCollection services)
+    public static IServiceCollection RegisterContextEvaluators(this IServiceCollection services)
     {
         services.AddSingleton<IContextEvaluator<IAuthorizationBLLContext>, ContextEvaluator<IAuthorizationBLLContext>>();
         services.AddSingleton<IContextEvaluator<IConfigurationBLLContext>, ContextEvaluator<IConfigurationBLLContext>>();

@@ -35,18 +35,21 @@ public static class SampleSystemFrameworkExtensions
     public static IServiceCollection RegisterGeneralBssFramework(this IServiceCollection services)
     {
         return services.RegisterGenericServices()
-                       .RegisterLegacyGenericServices()
-
                        .RegisterWebApiGenericServices()
+                       .RegisterListeners()
+                       .RegisterSupportServices()
+
+                       // Legacy
+
+                       .RegisterLegacyGenericServices()
+                       .RegisterLegacyHierarchicalObjectExpander()
+                       .RegisterContextEvaluators()
 
                        .RegisterMainBLLContext()
                        .RegisterConfigurationTargetSystems()
-                       .RegisterListeners()
                        .RegisterContextEvaluator()
 
-                       .RegisterCustomReports()
-
-                       .RegisterSupportServices();
+                       .RegisterCustomReports();
     }
 
     private static IServiceCollection RegisterMainBLLContext(this IServiceCollection services)

@@ -3,6 +3,7 @@
 using System.Data;
 
 using Framework.Cap.Abstractions;
+using Framework.DomainDriven.DALExceptions;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.NHibernate.Audit;
 
@@ -17,8 +18,9 @@ public class SampleSystemNHibSessionEnvironment : NHibSessionEnvironment
             IEnumerable<IMappingSettings> mappingSettings,
             IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService,
             ICapTransactionManager manager,
-            INHibSessionEnvironmentSettings settings)
-                : base(connectionSettings, mappingSettings, auditRevisionUserAuthenticationService, settings) =>
+            INHibSessionEnvironmentSettings settings,
+            IDalValidationIdentitySource dalValidationIdentitySource)
+                : base(connectionSettings, mappingSettings, auditRevisionUserAuthenticationService, settings, dalValidationIdentitySource) =>
             this.manager = manager;
 
     public override void ProcessTransaction(IDbTransaction dbTransaction)

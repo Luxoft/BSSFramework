@@ -1,6 +1,8 @@
-﻿using Framework.Core.Services;
+﻿using Framework.Authorization.BLL;
+using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.NotificationCore.Monitoring;
+using Framework.SecuritySystem;
 
 using Hangfire.Dashboard;
 
@@ -14,25 +16,29 @@ namespace SampleSystem.WebApiCore;
 /// </summary>
 public class SampleSystemHangfireAuthorization : IDashboardAuthorizationFilter
 {
-    private readonly IContextEvaluator<ISampleSystemBLLContext> contextEvaluator;
+    private readonly IDBSessionEvaluator dbSessionEvaluator;
 
     private readonly IDashboardAuthorizationFilter baseFilter;
 
-    public SampleSystemHangfireAuthorization(IContextEvaluator<ISampleSystemBLLContext> contextEvaluator)
+    public SampleSystemHangfireAuthorization(IDBSessionEvaluator dbSessionEvaluator)
     {
-        this.baseFilter = new AdminHangfireAuthorization<ISampleSystemBLLContext>(contextEvaluator);
+        this.baseFilter = new AdminHangfireAuthorization(dbSessionEvaluator);
 
-        this.contextEvaluator = contextEvaluator;
+        this.dbSessionEvaluator = dbSessionEvaluator;
     }
 
     public bool Authorize(DashboardContext context)
     {
-        return this.contextEvaluator.Evaluate(
-                                              DBSessionMode.Read,
-                                              z =>
-                                              {
-                                                  return this.baseFilter.Authorize(context)
-                                                         || string.Compare(z.Authorization.CurrentPrincipalName, new DomainDefaultUserAuthenticationService().GetUserName(), StringComparison.InvariantCultureIgnoreCase) == 0;
-                                              });
+        return this.dbSessionEvaluator.EvaluateAsync(
+            DBSessionMode.Read,
+            async (sp, _) =>
+            {
+                return this.baseFilter.Authorize(context)
+                       || string.Compare(
+                           sp.GetRequiredService<IAuthorizationBLLContext>().CurrentPrincipalName,
+                           new DomainDefaultUserAuthenticationService().GetUserName(),
+                           StringComparison.InvariantCultureIgnoreCase)
+                       == 0;
+            }).GetAwaiter().GetResult();
     }
 }

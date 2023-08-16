@@ -1,5 +1,5 @@
-﻿using Framework.DomainDriven.BLL.Security.Lock;
-using Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
+﻿using Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
+using Framework.DomainDriven.Lock;
 
 namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy;
 

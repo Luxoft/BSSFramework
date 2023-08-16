@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework.DomainDriven.WebApiGenerator.NetCore\Framework.DomainDriven.WebApiGenerator.NetCore.csproj" />
     <ProjectReference Include="..\Framework.Authorization.TestGenerate\Framework.Authorization.TestGenerate.csproj" />
   </ItemGroup>
 

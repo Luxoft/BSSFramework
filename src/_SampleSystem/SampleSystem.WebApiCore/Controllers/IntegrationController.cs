@@ -3,6 +3,7 @@ using Framework.Authorization.Generated.DTO;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.WebApiNetCore.Integration;
+using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,10 +17,11 @@ namespace SampleSystem.WebApiCore.Controllers;
 public class IntegrationController : IntegrationSchemaControllerBase
 {
     public IntegrationController(
-            IAuthorizationBLLContext context,
-            IDateTimeService dateTimeService,
-            IEventXsdExporter2 eventXsdExporter)
-            : base(context, dateTimeService, eventXsdExporter)
+        IAuthorizationSystem authorizationSystem,
+        IAccessDeniedExceptionService accessDeniedExceptionService,
+        IDateTimeService dateTimeService,
+        IEventXsdExporter2 eventXsdExporter)
+        : base(authorizationSystem, accessDeniedExceptionService, dateTimeService, eventXsdExporter)
     {
     }
 

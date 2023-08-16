@@ -122,9 +122,7 @@ public class Startup
                                           new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
 
                 return serviceProvider
-                    .GetRequiredService<
-                        IContextEvaluator<
-                        ISampleSystemBLLContext>>();
+                    .GetRequiredService<IDBSessionEvaluator>();
             });
 
         app.UseHangfireBss(

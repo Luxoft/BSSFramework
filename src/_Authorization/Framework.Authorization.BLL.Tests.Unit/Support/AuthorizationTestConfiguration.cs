@@ -53,7 +53,7 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
     public AuthorizationTestConfiguration WithTrackingChange(IObjectStateService objectStateService = null)
     {
         this.Context.TrackingService
-            .Returns(new TrackingService<PersistentDomainObjectBase>(objectStateService ?? Substitute.For<IObjectStateService>()))
+            .Returns(new TrackingService<PersistentDomainObjectBase>(objectStateService ?? Substitute.For<IObjectStateService>(), Substitute.For<IPersistentInfoService>()))
                 ;
 
         return this;

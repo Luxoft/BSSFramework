@@ -1,8 +1,11 @@
 ﻿using Framework.Core;
 using Framework.DependencyInjection;
+using Framework.DomainDriven.BLL.Tracking;
 using Framework.DomainDriven.DALExceptions;
 
 using Microsoft.Extensions.DependencyInjection;
+
+using NHibernate;
 
 namespace Framework.DomainDriven.NHibernate;
 
@@ -18,6 +21,9 @@ public static class DependencyInjectionExtensions
         services.AddScopedFromLazyObject<INHibSession, NHibSession>();
         services.AddScopedFrom<ILazyObject<IDBSession>, ILazyObject<INHibSession>>();
         services.AddScopedFrom((ILazyObject<IDBSession> lazyDbSession) => lazyDbSession.Value);
+
+        services.AddScopedFrom<ISession, INHibSession>(session => session.NativeSession);
+        services.AddScopedFrom<IObjectStateService, NHibObjectStatesService>();
 
         services.AddSingleton<INHibSessionEnvironmentSettings, NHibSessionEnvironmentSettings>();
         services.AddSingleton<NHibConnectionSettings>();

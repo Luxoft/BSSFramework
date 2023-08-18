@@ -1,5 +1,4 @@
 ﻿using Framework.Authorization.BLL;
-using Framework.Authorization.Domain;
 using Framework.Authorization.Notification;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
@@ -9,11 +8,8 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.BLL.Tracking;
 using Framework.DomainDriven.NHibernate;
-using Framework.DomainDriven.Repository;
 using Framework.Exceptions;
 using Framework.HierarchicalExpand;
-using Framework.Notification;
-using Framework.Persistent;
 using Framework.QueryableSource;
 using Framework.QueryLanguage;
 using Framework.SecuritySystem;
@@ -42,6 +38,8 @@ public static class ServiceCollectionExtensions
         services.AddSingleton(AvailableValuesHelper.AvailableValues.ToValidation());
 
         services.AddSingleton<IDateTimeService>(DateTimeService.Default);
+
+        services.AddSingleton<IPersistentInfoService, PersistentInfoService>();
 
         services.RegisterAuthorizationBLL();
         services.RegisterConfigurationBLL();
@@ -81,7 +79,7 @@ public static class ServiceCollectionExtensions
 
                .AddScopedFromLazyInterfaceImplement<IAuthorizationBLLContext, AuthorizationBLLContext>()
 
-               .AddScopedFrom((IAuthorizationBLLContext context) => context.TrackingService)
+               .AddScoped<ITrackingService<Framework.Authorization.Domain.PersistentDomainObjectBase>, TrackingService<Framework.Authorization.Domain.PersistentDomainObjectBase>>()
 
                .AddScopedFrom<ISecurityOperationResolver<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode>, IAuthorizationBLLContext>()
                .AddScopedFrom<IDisabledSecurityProviderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>, IAuthorizationSecurityService>()
@@ -116,7 +114,7 @@ public static class ServiceCollectionExtensions
                .AddScoped<IConfigurationBLLContextSettings, ConfigurationBLLContextSettings>()
                .AddScopedFromLazyInterfaceImplement<IConfigurationBLLContext, ConfigurationBLLContext>()
 
-               .AddScopedFrom((IConfigurationBLLContext context) => context.TrackingService)
+               .AddScoped<ITrackingService<Framework.Configuration.Domain.PersistentDomainObjectBase>, TrackingService<Framework.Configuration.Domain.PersistentDomainObjectBase>>()
 
                .AddScopedFrom<Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContext, IConfigurationBLLContext>()
 

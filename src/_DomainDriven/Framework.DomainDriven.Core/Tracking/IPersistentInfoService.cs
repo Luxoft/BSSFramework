@@ -6,5 +6,5 @@ public interface IPersistentInfoService
 {
     bool IsPersistent(Type type);
 
-    bool IsPersistent(PropertyInfo pePropertyInfo);
+    bool IsPersistent(PropertyInfo propertyInfo);
 }

@@ -25,7 +25,7 @@ jobs:
       - name: Restore dependencies
         working-directory: ./src
         run: |
-          dotnet restore -s /IAD.Framework.LegacyContext.sln
+          dotnet restore
 
       - name: Build
         working-directory: ./src

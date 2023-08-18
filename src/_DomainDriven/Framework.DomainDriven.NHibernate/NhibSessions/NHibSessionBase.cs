@@ -57,11 +57,6 @@ public abstract class NHibSessionBase : INHibSession
     /// <inheritdoc />
     public abstract void AsWritable();
 
-    public IObjectStateService GetObjectStateService()
-    {
-        return new NHibObjectStatesService(this.NativeSession);
-    }
-
     public abstract Task CloseAsync(CancellationToken cancellationToken = default);
 
     public async ValueTask DisposeAsync()

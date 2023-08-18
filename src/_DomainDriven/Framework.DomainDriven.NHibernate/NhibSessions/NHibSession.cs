@@ -1,5 +1,4 @@
-﻿using Framework.DomainDriven.BLL.Tracking;
-using Framework.DomainDriven.DAL.Revisions;
+﻿using Framework.DomainDriven.DAL.Revisions;
 
 using JetBrains.Annotations;
 
@@ -45,11 +44,6 @@ public class NHibSession : INHibSession
     public void RegisterModified<TDomainObject>(TDomainObject domainObject, ModificationType modificationType)
     {
         this.lazyInnerSession.Value.RegisterModified(domainObject, modificationType);
-    }
-
-    public IObjectStateService GetObjectStateService()
-    {
-        return this.InnerSession.GetObjectStateService();
     }
 
     public async Task FlushAsync(CancellationToken cancellationToken = default)

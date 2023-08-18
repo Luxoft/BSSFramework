@@ -23,7 +23,7 @@ public static class DependencyInjectionExtensions
         services.AddScopedFrom((ILazyObject<IDBSession> lazyDbSession) => lazyDbSession.Value);
 
         services.AddScopedFrom<ISession, INHibSession>(session => session.NativeSession);
-        services.AddScopedFrom<IObjectStateService, NHibObjectStatesService>();
+        services.AddScoped<IObjectStateService, NHibObjectStatesService>();
 
         services.AddSingleton<INHibSessionEnvironmentSettings, NHibSessionEnvironmentSettings>();
         services.AddSingleton<NHibConnectionSettings>();

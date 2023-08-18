@@ -19,8 +19,6 @@ public static class ServiceCollectionExtensions
         services.AddScoped(typeof(IRepositoryFactory<,>), typeof(RepositoryFactory<,>));
         services.AddScoped(typeof(IGenericRepositoryFactory<,,>), typeof(GenericRepositoryFactory<,,>));
 
-        services.AddScopedFrom((IDBSession session) => session.GetObjectStateService());
-
         services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();
 
         services.RegisterAuthorizationSystem();

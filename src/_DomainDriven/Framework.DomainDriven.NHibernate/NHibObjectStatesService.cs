@@ -11,7 +11,7 @@ using NHibernate.Engine;
 
 namespace Framework.DomainDriven.NHibernate;
 
-internal class NHibObjectStatesService : IObjectStateService
+public class NHibObjectStatesService : IObjectStateService
 {
     private readonly ISession session;
 

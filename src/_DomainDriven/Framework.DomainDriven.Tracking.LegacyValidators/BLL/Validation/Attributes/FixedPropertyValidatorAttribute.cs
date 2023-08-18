@@ -1,6 +1,6 @@
 ﻿using Framework.Validation;
 
-namespace Framework.DomainDriven.BLL;
+namespace Framework.DomainDriven.Tracking.LegacyValidators;
 
 /// <summary>
 /// Атрибут для проверки неизменяемости свойства

@@ -12,7 +12,7 @@
 
     <ProjectReference Include="..\..\Framework.SecuritySystem\Framework.SecuritySystem.csproj" />
 
-    <!-- LegacyAttributes -->
+      <!-- LegacyAttributes -->
 
     <ProjectReference Include="..\Framework.Authorization.LegacyAttributes\Framework.Authorization.LegacyAttributes.csproj" />
 
@@ -21,9 +21,9 @@
     <ProjectReference Include="..\..\Framework.Persistent.Mapping\Framework.Persistent.Mapping.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL\Framework.DomainDriven.BLL.csproj" />
     <ProjectReference Include="..\..\Framework.Validation\Framework.Validation.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Core.LegacyValidators\Framework.DomainDriven.Core.LegacyValidators.csproj" />
     <ProjectReference Include="..\..\Framework.Restriction\Framework.Restriction.csproj" />
 
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Tracking.LegacyValidators\Framework.DomainDriven.Tracking.LegacyValidators.csproj" />
   </ItemGroup>
 
 </Project>

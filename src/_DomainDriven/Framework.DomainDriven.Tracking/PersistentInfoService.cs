@@ -1,10 +1,9 @@
 ﻿using System.Reflection;
 
 using Framework.Core;
-using Framework.DomainDriven.BLL.Tracking;
 using Framework.Persistent.Mapping;
 
-namespace Framework.DomainDriven;
+namespace Framework.DomainDriven.Tracking;
 
 public class PersistentInfoService : IPersistentInfoService
 {

@@ -1,29 +1,30 @@
 ﻿using System.Globalization;
 
-namespace Framework.DomainDriven.BLL.Tracking;
+using Framework.Core;
+
+namespace Framework.DomainDriven.Tracking;
 
 /// <summary>
-/// Obsolete structure. Don't use this
+/// Defines property changes
 /// </summary>
 /// <typeparam name="T"></typeparam>
-[Obsolete("Use TrackingProperty")]
-public struct ObsoleteTrackingProperty<T>
+public struct TrackingProperty<T>
 {
     private readonly string propertyName;
 
     private readonly string lowPropertyName;
 
-    private readonly T previusValue;
+    private readonly Maybe<T> previusValue;
 
-    private readonly T currentValue;
+    private readonly Maybe<T> currentValue;
 
     /// <summary>
-    /// Initializes new ObsoleteTrackingProperty instance
+    /// Initializes new TrackingProperty instance
     /// </summary>
     /// <param name="propertyName">Property name</param>
     /// <param name="previusValue">Property's prev value</param>
     /// <param name="currentValue">Property's current value</param>
-    internal ObsoleteTrackingProperty(string propertyName, T previusValue, T currentValue)
+    internal TrackingProperty(string propertyName, Maybe<T> previusValue, Maybe<T> currentValue)
             : this()
     {
         this.propertyName = propertyName;
@@ -38,17 +39,17 @@ public struct ObsoleteTrackingProperty<T>
     public string PropertyName => this.propertyName;
 
     /// <summary>
-    /// Gets property name in low case
+    /// Gets property name in lower case
     /// </summary>
     public string LowPropertyName => this.lowPropertyName;
 
     /// <summary>
-    /// Gets prev value
+    /// Gets property's previous value
     /// </summary>
-    public T PreviusValue => this.previusValue;
+    public Maybe<T> PreviusValue => this.previusValue;
 
     /// <summary>
-    /// Gets current value
+    /// Gets property's current value
     /// </summary>
-    public T CurrentValue => this.currentValue;
+    public Maybe<T> CurrentValue => this.currentValue;
 }

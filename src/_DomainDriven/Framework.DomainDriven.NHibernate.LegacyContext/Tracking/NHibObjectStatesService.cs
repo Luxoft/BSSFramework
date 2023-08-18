@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 
 using Framework.Core;
-using Framework.DomainDriven.BLL.Tracking;
+using Framework.DomainDriven.Tracking;
 
 using JetBrains.Annotations;
 

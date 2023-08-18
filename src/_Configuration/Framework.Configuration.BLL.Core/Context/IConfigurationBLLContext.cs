@@ -3,7 +3,7 @@ using Framework.Core;
 using Framework.Core.Serialization;
 using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.BLL.Tracking;
+using Framework.DomainDriven.Tracking;
 
 using Framework.Notification;
 using Framework.Configuration.Domain;

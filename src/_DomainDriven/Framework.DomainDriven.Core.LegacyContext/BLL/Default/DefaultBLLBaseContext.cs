@@ -1,5 +1,5 @@
 ﻿using Framework.Core.Serialization;
-using Framework.DomainDriven.BLL.Tracking;
+using Framework.DomainDriven.Tracking;
 using Framework.HierarchicalExpand;
 using Framework.OData;
 using Framework.Persistent;

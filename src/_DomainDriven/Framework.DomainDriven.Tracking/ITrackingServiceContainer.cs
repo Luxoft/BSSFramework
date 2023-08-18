@@ -1,4 +1,4 @@
-﻿namespace Framework.DomainDriven.BLL.Tracking;
+﻿namespace Framework.DomainDriven.Tracking;
 
 public interface ITrackingServiceContainer<in TPersistentDomainObjectBase>
 {

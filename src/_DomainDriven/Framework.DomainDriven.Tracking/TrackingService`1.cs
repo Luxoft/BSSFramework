@@ -2,7 +2,7 @@
 
 using JetBrains.Annotations;
 
-namespace Framework.DomainDriven.BLL.Tracking;
+namespace Framework.DomainDriven.Tracking;
 
 /// <summary>
 /// Represents tracking serivice. Tracking service helps track domain object changes during DB session

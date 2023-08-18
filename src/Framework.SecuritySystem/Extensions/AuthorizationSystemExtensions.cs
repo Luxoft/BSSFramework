@@ -1,6 +1,4 @@
-﻿using Framework.SecuritySystem;
-
-namespace Framework.DomainDriven.BLL.Security;
+﻿namespace Framework.SecuritySystem;
 
 public static class AuthorizationSystemExtensions
 {

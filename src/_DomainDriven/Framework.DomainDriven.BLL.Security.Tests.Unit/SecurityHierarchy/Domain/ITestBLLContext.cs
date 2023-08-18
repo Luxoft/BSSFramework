@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Framework.DomainDriven.BLL.Tracking;
+using Framework.DomainDriven.Tracking;
 
 namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
 

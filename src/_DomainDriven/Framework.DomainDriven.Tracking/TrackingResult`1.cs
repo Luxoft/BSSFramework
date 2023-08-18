@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 using Framework.Core;
 
-namespace Framework.DomainDriven.BLL.Tracking;
+namespace Framework.DomainDriven.Tracking;
 
 /// <summary>
 /// Represents modified properties info

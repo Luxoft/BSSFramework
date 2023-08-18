@@ -24,7 +24,6 @@
     <ProjectReference Include="..\..\Framework.Restriction\Framework.Restriction.csproj" />
     <ProjectReference Include="..\..\Framework.Validation\Framework.Validation.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL\Framework.DomainDriven.BLL.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Core.LegacyValidators\Framework.DomainDriven.Core.LegacyValidators.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Serialization\Framework.DomainDriven.Serialization.csproj" />
 
   </ItemGroup>

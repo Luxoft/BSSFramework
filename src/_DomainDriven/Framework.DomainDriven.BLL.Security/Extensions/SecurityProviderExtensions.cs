@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.DomainDriven.BLL.Tracking;
+using Framework.DomainDriven.Tracking;
 using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.BLL.Security;

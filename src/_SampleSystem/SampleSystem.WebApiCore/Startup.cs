@@ -15,7 +15,6 @@ using Microsoft.OpenApi.Models;
 
 using Newtonsoft.Json;
 
-using SampleSystem.BLL;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.NewtonsoftJson;
 using SampleSystem.WebApiCore.Services;

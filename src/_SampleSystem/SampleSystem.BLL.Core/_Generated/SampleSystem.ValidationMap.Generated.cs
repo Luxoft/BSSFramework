@@ -3729,12 +3729,12 @@ namespace SampleSystem.BLL
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestImmutableObj, string>> GetTestImmutableObj_TestImmutablePrimitivePropertyValidators()
         {
             yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.TestImmutableObj>(this.AvailableValues.GetAvailableSize<string>());
-            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<SampleSystem.Domain.TestImmutableObj, string, System.Guid, SampleSystem.Domain.PersistentDomainObjectBase>(source => source.TestImmutablePrimitiveProperty);
+            yield return new Framework.DomainDriven.Tracking.LegacyValidators.FixedPropertyValidator<SampleSystem.Domain.TestImmutableObj, string, System.Guid, SampleSystem.Domain.PersistentDomainObjectBase>(source => source.TestImmutablePrimitiveProperty);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.TestImmutableObj, SampleSystem.Domain.Employee>> GetTestImmutableObj_TestImmutableRefPropertyValidators()
         {
-            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<SampleSystem.Domain.TestImmutableObj, SampleSystem.Domain.Employee, System.Guid, SampleSystem.Domain.PersistentDomainObjectBase>(source => source.TestImmutableRefProperty);
+            yield return new Framework.DomainDriven.Tracking.LegacyValidators.FixedPropertyValidator<SampleSystem.Domain.TestImmutableObj, SampleSystem.Domain.Employee, System.Guid, SampleSystem.Domain.PersistentDomainObjectBase>(source => source.TestImmutableRefProperty);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.TestImmutableObj>> GetTestImmutableObjProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.TestImmutableObj> currentClass)

@@ -10,13 +10,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.OData\Framework.OData.csproj" />
-    <ProjectReference Include="..\..\Framework.Persistent.Mapping\Framework.Persistent.Mapping.csproj" />
-    <ProjectReference Include="..\..\Framework.Validation\Framework.Validation.csproj" />
-    <ProjectReference Include="..\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
+    <PackageReference Include="nuSpec.Abstraction" />
+  </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework.OData\Framework.OData.csproj" />
     <ProjectReference Include="..\..\Framework.Projection\Framework.Projection.csproj" />
     <ProjectReference Include="..\..\Framework.Transfering\Framework.Transfering.csproj" />
+    <ProjectReference Include="..\..\Framework.Validation\Framework.Validation.csproj" />
+    <ProjectReference Include="..\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.Serialization\Framework.DomainDriven.Serialization.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.Tracking\Framework.DomainDriven.Tracking.csproj" />
   </ItemGroup>

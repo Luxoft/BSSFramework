@@ -17,8 +17,6 @@ using Framework.DomainDriven.WebApiGenerator.NetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using SampleSystem.Domain;
-
 using FileInfo = Framework.DomainDriven.Generation.FileInfo;
 using FileType = Framework.DomainDriven.DTOGenerator.FileType;
 

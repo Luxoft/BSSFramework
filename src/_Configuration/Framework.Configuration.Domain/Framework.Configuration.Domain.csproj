@@ -10,6 +10,10 @@
 
   <ItemGroup>
 
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
+
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Tracking.LegacyValidators\Framework.DomainDriven.Tracking.LegacyValidators.csproj" />
+
     <ProjectReference Include="..\Framework.Configuration.Core\Framework.Configuration.Core.csproj" />
 
     <!-- LegacyAttributes -->

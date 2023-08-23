@@ -1,11 +1,7 @@
-﻿using Framework.Configuration;
+﻿using Framework.Core;
+using Framework.Configuration;
 
 namespace Framework.Notification;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Core;
 
 public class NotificationMessageGenerationInfo
 {

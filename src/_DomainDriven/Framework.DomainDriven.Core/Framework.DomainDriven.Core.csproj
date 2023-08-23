@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Luxoft.Framework.DomainDriven.Core</PackageId>
     <RootNamespace>Framework.DomainDriven</RootNamespace>
@@ -15,6 +15,7 @@
     <ProjectReference Include="..\..\Framework.Security\Framework.Security.csproj" />
     <ProjectReference Include="..\..\Framework.Transfering\Framework.Transfering.csproj" />
     <ProjectReference Include="..\..\Framework.Validation\Framework.Validation.csproj" />
+    <ProjectReference Include="..\..\_Configuration\Framework.Configuration.Core\Framework.Configuration.Core.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.Serialization\Framework.DomainDriven.Serialization.csproj" />
   </ItemGroup>
   <ItemGroup>

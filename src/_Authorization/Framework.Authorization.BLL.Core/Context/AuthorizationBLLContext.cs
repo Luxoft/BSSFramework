@@ -8,6 +8,7 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.BLL.Security;
 using Framework.SecuritySystem.Rules.Builders;
+using Framework.DomainDriven.Tracking;
 using Framework.HierarchicalExpand;
 using Framework.Projection;
 using Framework.QueryLanguage;
@@ -15,7 +16,6 @@ using Framework.SecuritySystem;
 
 using JetBrains.Annotations;
 using Framework.Authorization.Notification;
-using Framework.DomainDriven.BLL.Tracking;
 
 namespace Framework.Authorization.BLL;
 
@@ -38,7 +38,7 @@ public partial class AuthorizationBLLContext
     public AuthorizationBLLContext(
             [NotNull] IServiceProvider serviceProvider,
             [NotNull] IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
-            [NotNull] IObjectStateService objectStateService,
+            [NotNull] ITrackingService<PersistentDomainObjectBase> trackingService,
             [NotNull] IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
             [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
             [NotNull] IAuthorizationValidator validator,
@@ -59,7 +59,7 @@ public partial class AuthorizationBLLContext
             : base(
                    serviceProvider,
                    operationSenders,
-                   objectStateService,
+                   trackingService,
                    accessDeniedExceptionService,
                    standartExpressionBuilder,
                    validator,

@@ -4,6 +4,7 @@ using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.ServiceModel.IAD;
+using Framework.DomainDriven.Tracking;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,6 +39,8 @@ public static class SampleSystemFrameworkDatabaseExtensions
 
     public static IServiceCollection AddDatabaseSettings(this IServiceCollection services, string connectionString, bool includeTypedAudit = true)
     {
+        services.AddScoped<IObjectStateService, NHibObjectStatesService>();
+
         return services.AddDatabaseSettings(setupObj => setupObj.AddEventListener<DefaultDBSessionEventListener>()
                                                                 .AddEventListener<SubscriptionDBSessionEventListener>()
 

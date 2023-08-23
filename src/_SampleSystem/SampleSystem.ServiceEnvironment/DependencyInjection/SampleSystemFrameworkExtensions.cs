@@ -14,6 +14,7 @@ using Framework.DomainDriven.Serialization;
 using Framework.DomainDriven.SerializeMetadata;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.ServiceModel.Service;
+using Framework.DomainDriven.Tracking;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Events;
 using Framework.QueryableSource;
@@ -60,7 +61,7 @@ public static class SampleSystemFrameworkExtensions
                .AddScoped<ISampleSystemBLLContextSettings>(_ => new SampleSystemBLLContextSettings { TypeResolver = new[] { new SampleSystemBLLContextSettings().TypeResolver, TypeSource.FromSample<BusinessUnitSimpleDTO>().ToDefaultTypeResolver() }.ToComposite() })
                .AddScopedFromLazyInterfaceImplement<ISampleSystemBLLContext, SampleSystemBLLContext>()
 
-               .AddScopedFrom((ISampleSystemBLLContext context) => context.TrackingService)
+               .AddScoped<ITrackingService<PersistentDomainObjectBase>, TrackingService<PersistentDomainObjectBase>>()
 
                .AddScopedFrom<ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode>, ISampleSystemBLLContext>()
                .AddScopedFrom<IDisabledSecurityProviderContainer<PersistentDomainObjectBase>, ISampleSystemSecurityService>()
@@ -89,7 +90,7 @@ public static class SampleSystemFrameworkExtensions
     {
         services.AddSingleton<IInitializeManager, InitializeManager>();
 
-        services.AddScoped<IBeforeTransactionCompletedDALListener, DenormalizeHierarchicalDALListener<ISampleSystemBLLContext, PersistentDomainObjectBase, NamedLock, NamedLockOperation>>();
+        services.AddScoped<IBeforeTransactionCompletedDALListener, DenormalizeHierarchicalDALListener<PersistentDomainObjectBase, NamedLock, NamedLockOperation>>();
         services.AddScoped<IBeforeTransactionCompletedDALListener, FixDomainObjectEventRevisionNumberDALListener>();
         services.AddScoped<IBeforeTransactionCompletedDALListener, PermissionWorkflowDALListener>();
 

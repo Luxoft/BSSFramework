@@ -3,7 +3,7 @@ using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.SecuritySystem.Rules.Builders;
-using Framework.DomainDriven.BLL.Tracking;
+using Framework.DomainDriven.Tracking;
 using Framework.HierarchicalExpand;
 using Framework.QueryLanguage;
 using Framework.SecuritySystem;
@@ -20,7 +20,7 @@ public partial class SampleSystemBLLContext
     public SampleSystemBLLContext(
             IServiceProvider serviceProvider,
             [NotNull] IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
-            [NotNull] IObjectStateService objectStateService,
+            [NotNull] ITrackingService<PersistentDomainObjectBase> trackingService,
             [NotNull] IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
             [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
             [NotNull] ISampleSystemValidator validator,
@@ -32,7 +32,7 @@ public partial class SampleSystemBLLContext
             [NotNull] IAuthorizationBLLContext authorization,
             [NotNull] Framework.Configuration.BLL.IConfigurationBLLContext configuration,
             [NotNull] ISampleSystemBLLContextSettings settings)
-            : base(serviceProvider, operationSenders, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
+            : base(serviceProvider, operationSenders, trackingService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
     {
         this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
 

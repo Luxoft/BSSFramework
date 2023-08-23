@@ -228,7 +228,7 @@ namespace Framework.Configuration.BLL
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettings, Framework.Configuration.Domain.ControlSettings>> GetControlSettings_ParentValidators()
         {
-            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<Framework.Configuration.Domain.ControlSettings, Framework.Configuration.Domain.ControlSettings, System.Guid, Framework.Configuration.Domain.PersistentDomainObjectBase>(source => source.Parent);
+            yield return new Framework.DomainDriven.Tracking.LegacyValidators.FixedPropertyValidator<Framework.Configuration.Domain.ControlSettings, Framework.Configuration.Domain.ControlSettings, System.Guid, Framework.Configuration.Domain.PersistentDomainObjectBase>(source => source.Parent);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Configuration.Domain.ControlSettingsParam, System.Collections.Generic.IEnumerable<Framework.Configuration.Domain.ControlSettingsParamValue>>> GetControlSettingsParam_ControlSettingsParamValuesValidators()

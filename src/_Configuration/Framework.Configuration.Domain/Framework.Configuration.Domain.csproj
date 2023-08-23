@@ -9,6 +9,7 @@
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL.Configuration\Framework.DomainDriven.BLL.Configuration.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL.Security\Framework.DomainDriven.BLL.Security.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL\Framework.DomainDriven.BLL.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Tracking.LegacyValidators\Framework.DomainDriven.Tracking.LegacyValidators.csproj" />
     <ProjectReference Include="..\Framework.Configuration.Core\Framework.Configuration.Core.csproj" />
   </ItemGroup>
   <ItemGroup>

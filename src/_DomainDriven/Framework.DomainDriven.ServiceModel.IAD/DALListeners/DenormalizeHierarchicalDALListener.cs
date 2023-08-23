@@ -1,28 +1,25 @@
 ﻿using System.Reflection;
 
 using Framework.Core;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.BLL.Security.Lock;
-using Framework.DomainDriven.BLL.Tracking;
+using Framework.DomainDriven.BLL.Security;
 using Framework.Persistent;
-
-using JetBrains.Annotations;
 
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
-public class DenormalizeHierarchicalDALListener<TBLLContext, TPersistentDomainObjectBase, TNamedLockObject, TNamedLockOperation> : BLLContextContainer<TBLLContext>, IBeforeTransactionCompletedDALListener
+public class DenormalizeHierarchicalDALListener<TPersistentDomainObjectBase, TNamedLockObject, TNamedLockOperation> : IBeforeTransactionCompletedDALListener
 
-        where TBLLContext : class, IBLLBaseContextBase<TPersistentDomainObjectBase, Guid>, ITrackingServiceContainer<TPersistentDomainObjectBase>
         where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
         where TNamedLockObject : class, TPersistentDomainObjectBase, INamedLock<TNamedLockOperation>
         where TNamedLockOperation : struct, Enum
 {
-    public DenormalizeHierarchicalDALListener([NotNull]TBLLContext context)
-            : base(context)
+    private readonly IServiceProvider serviceProvider;
+
+    public DenormalizeHierarchicalDALListener(IServiceProvider serviceProvider)
     {
+        this.serviceProvider = serviceProvider;
     }
 
     public void Process(DALChangesEventArgs eventArgs)
@@ -32,11 +29,11 @@ public class DenormalizeHierarchicalDALListener<TBLLContext, TPersistentDomainOb
         foreach (var typeGroup in eventArgs.Changes.GetSubset(typeof(TPersistentDomainObjectBase)).GroupByType())
         {
             DenormalizeCache.DenormalizeMethods[typeGroup.Key].Maybe(method =>
-                                                                     {
-                                                                         var values = typeGroup.Value.ToChangeTypeDict().Partial(pair => pair.Value == DALObjectChangeType.Created || pair.Value == DALObjectChangeType.Updated, (modified, removing) => new { Modified = modified, Removing = removing });
+            {
+                var values = typeGroup.Value.ToChangeTypeDict().Partial(pair => pair.Value == DALObjectChangeType.Created || pair.Value == DALObjectChangeType.Updated, (modified, removing) => new { Modified = modified, Removing = removing });
 
-                                                                         method.Invoke(this, new object[] { values.Modified.Select(z => z.Key).ToArray(typeGroup.Key), values.Removing.Select(z => z.Key).ToArray(typeGroup.Key) });
-                                                                     });
+                method.Invoke(this, new object[] { values.Modified.Select(z => z.Key).ToArray(typeGroup.Key), values.Removing.Select(z => z.Key).ToArray(typeGroup.Key) });
+            });
         }
     }
 
@@ -53,14 +50,14 @@ public class DenormalizeHierarchicalDALListener<TBLLContext, TPersistentDomainOb
         var service = ActivatorUtilities
             .CreateInstance<
                 SyncDenormolizedValuesService<TPersistentDomainObjectBase, TDomainObject, TAncestorChildLink,
-                TSourceToAncestorOrChildLink, Guid, TNamedLockObject, TNamedLockOperation>>(this.Context.ServiceProvider);
+                TSourceToAncestorOrChildLink, Guid, TNamedLockObject, TNamedLockOperation>>(this.serviceProvider);
 
         service.Sync(modified, removing);
     }
 
     private static class DenormalizeCache
     {
-        private static readonly MethodInfo DenormalizeMethod = typeof(DenormalizeHierarchicalDALListener<TBLLContext, TPersistentDomainObjectBase, TNamedLockObject, TNamedLockOperation>).GetMethod(nameof(Denormalize), BindingFlags.NonPublic | BindingFlags.Instance, true);
+        private static readonly MethodInfo DenormalizeMethod = typeof(DenormalizeHierarchicalDALListener<TPersistentDomainObjectBase, TNamedLockObject, TNamedLockOperation>).GetMethod(nameof(Denormalize), BindingFlags.NonPublic | BindingFlags.Instance, true);
 
         public static readonly IDictionaryCache<Type, MethodInfo> DenormalizeMethods = new DictionaryCache<Type, MethodInfo>(type =>
                 type.GetInterfaceImplementationArguments(typeof(IDenormalizedHierarchicalPersistentSource<,,,>))

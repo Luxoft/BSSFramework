@@ -1,22 +1,18 @@
-﻿namespace Framework.Notification;
+﻿using Framework.Core;
+using Framework.Configuration;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Core;
-
-using Framework.Persistent;
+namespace Framework.Notification;
 
 public class NotificationMessageGenerationInfo
 {
     public NotificationMessageGenerationInfo(string emails, object currentRoot, object previousRoot)
-            : this(DefaultEmployee.CreateMany(emails), currentRoot, previousRoot)
+        : this(DefaultEmployee.CreateMany(emails), currentRoot, previousRoot)
     {
 
     }
 
     public NotificationMessageGenerationInfo(IEmployee recipient, object currentRoot, object previousRoot)
-            : this(recipient.MaybeYield(), currentRoot, previousRoot)
+        : this(recipient.MaybeYield(), currentRoot, previousRoot)
     {
 
     }
@@ -36,7 +32,7 @@ public class NotificationMessageGenerationInfo
     public object PreviousRoot { get; private set; }
 
 
-    private class DefaultEmployee : IIntegrationEmployee
+    private class DefaultEmployee : IEmployee
     {
         private DefaultEmployee(string email)
         {
@@ -49,15 +45,6 @@ public class NotificationMessageGenerationInfo
         public string Email { get; private set; }
 
         public string Login { get; private set; }
-
-        public int? Pin { get; private set; }
-
-
-        public int? GetPin()
-        {
-            return this.Pin;
-        }
-
 
         public static IEnumerable<DefaultEmployee> CreateMany(string emails)
         {

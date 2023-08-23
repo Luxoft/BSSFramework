@@ -8,5 +8,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.Persistent\Framework.Persistent.csproj" />
+    <ProjectReference Include="..\..\_Configuration\Framework.Configuration.Core\Framework.Configuration.Core.csproj" />
   </ItemGroup>
 </Project>

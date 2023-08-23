@@ -188,6 +188,22 @@ public partial class AuthorizationBLLContext
         return this.HasAccess(securityOperation, true);
     }
 
+    public void CheckAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> operation)
+        where TSecurityOperationCode : struct, Enum
+    {
+        this.CheckAccess(operation, true);
+    }
+
+    public void CheckAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> operation, bool withRunAs)
+        where TSecurityOperationCode : struct, Enum
+    {
+        if (!this.HasAccess(operation, withRunAs))
+        {
+            IAccessDeniedExceptionService accessDeniedExceptionService = this.AccessDeniedExceptionService;
+
+            throw accessDeniedExceptionService.GetAccessDeniedException($"You are not authorized to perform {operation} operation");
+        }
+    }
 
     public Guid ResolveSecurityTypeId(Type type)
     {

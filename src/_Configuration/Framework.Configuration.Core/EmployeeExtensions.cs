@@ -1,6 +1,4 @@
-﻿using Framework.Persistent;
-
-namespace Framework.Configuration;
+﻿namespace Framework.Configuration;
 
 public static class EmployeeExtensions
 {

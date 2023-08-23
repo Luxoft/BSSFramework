@@ -12,7 +12,4 @@
     <ProjectReference Include="..\Framework.HierarchicalExpand.Abstract\Framework.HierarchicalExpand.Abstract.csproj" />
     <ProjectReference Include="..\Framework.Persistent.Idents\Framework.Persistent.Idents.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="_Custom\" />
-  </ItemGroup>
 </Project>

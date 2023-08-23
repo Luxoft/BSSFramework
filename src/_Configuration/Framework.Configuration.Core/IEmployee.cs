@@ -1,4 +1,4 @@
-﻿namespace Framework.Persistent;
+﻿namespace Framework.Configuration;
 
 public interface IEmployee
 {

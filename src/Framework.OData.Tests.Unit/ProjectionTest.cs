@@ -115,7 +115,7 @@ public interface ITestEmployee : IDefaultIdentityObject, IVisualIdentityObject, 
 
 }
 
-public interface ITestLocation : IDefaultIdentityObject, IVisualIdentityObject, IHierarchicalSource<ITestLocation>, ILocation
+public interface ITestLocation : IDefaultIdentityObject, IVisualIdentityObject, IHierarchicalSource<ITestLocation>
 {
     ITestDepartment Department { get; }
 }

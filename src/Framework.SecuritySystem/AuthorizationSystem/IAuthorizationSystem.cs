@@ -9,6 +9,9 @@ public interface IAuthorizationSystem
     bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation)
         where TSecurityOperationCode : struct, Enum;
 
+    void CheckAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> operation)
+        where TSecurityOperationCode : struct, Enum;
+
     string ResolveSecurityTypeName(Type type);
 }
 

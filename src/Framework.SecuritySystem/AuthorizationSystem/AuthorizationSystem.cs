@@ -28,6 +28,9 @@ public abstract class AuthorizationSystem<TIdent> : IAuthorizationSystem<TIdent>
     public abstract bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation)
             where TSecurityOperationCode : struct, Enum;
 
+    public abstract void CheckAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> operation)
+        where TSecurityOperationCode : struct, Enum;
+
     public string ResolveSecurityTypeName([NotNull] Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));

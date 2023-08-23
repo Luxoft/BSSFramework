@@ -17,10 +17,9 @@ public class IntegrationController : IntegrationSchemaControllerBase
 {
     public IntegrationController(
         IAuthorizationSystem authorizationSystem,
-        IAccessDeniedExceptionService accessDeniedExceptionService,
         IDateTimeService dateTimeService,
         IEventXsdExporter2 eventXsdExporter)
-        : base(authorizationSystem, accessDeniedExceptionService, dateTimeService, eventXsdExporter)
+        : base(authorizationSystem, dateTimeService, eventXsdExporter)
     {
     }
 

@@ -8,7 +8,6 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.BLL.Security;
 using Framework.SecuritySystem.Rules.Builders;
-using Framework.DomainDriven.BLL.Tracking;
 using Framework.HierarchicalExpand;
 using Framework.Projection;
 using Framework.QueryLanguage;
@@ -16,6 +15,7 @@ using Framework.SecuritySystem;
 
 using JetBrains.Annotations;
 using Framework.Authorization.Notification;
+using Framework.DomainDriven.BLL.Tracking;
 
 namespace Framework.Authorization.BLL;
 
@@ -188,6 +188,22 @@ public partial class AuthorizationBLLContext
         return this.HasAccess(securityOperation, true);
     }
 
+    public void CheckAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> operation)
+        where TSecurityOperationCode : struct, Enum
+    {
+        this.CheckAccess(operation, true);
+    }
+
+    public void CheckAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> operation, bool withRunAs)
+        where TSecurityOperationCode : struct, Enum
+    {
+        if (!this.HasAccess(operation, withRunAs))
+        {
+            IAccessDeniedExceptionService accessDeniedExceptionService = this.AccessDeniedExceptionService;
+
+            throw accessDeniedExceptionService.GetAccessDeniedException($"You are not authorized to perform {operation} operation");
+        }
+    }
 
     public Guid ResolveSecurityTypeId(Type type)
     {

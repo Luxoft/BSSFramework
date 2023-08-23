@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Framework.DomainDriven.BLL.Tracking;
+namespace Framework.DomainDriven.Tracking;
 
 /// <summary>
 /// Define tracking serice interface. Tracking service is a service that helps track domain object changes during DB session.

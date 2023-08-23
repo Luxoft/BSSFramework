@@ -2,7 +2,7 @@
 
 using JetBrains.Annotations;
 
-namespace Framework.DomainDriven.BLL.Tracking;
+namespace Framework.DomainDriven.Tracking;
 
 /// <summary>
 /// Represents tracking serivice. Tracking service helps track domain object changes during DB session
@@ -12,13 +12,16 @@ public class TrackingService<TPersistentDomainObjectBase> : ITrackingService<TPe
 {
     private readonly IObjectStateService objectStatesService;
 
+    private readonly IPersistentInfoService persistentInfoService;
+
     /// <summary>
     /// Creates new tracking service instance
     /// </summary>
     /// <param name="objectStatesService">Object states service implementation</param>
-    public TrackingService(IObjectStateService objectStatesService)
+    public TrackingService(IObjectStateService objectStatesService, IPersistentInfoService persistentInfoService)
     {
         this.objectStatesService = objectStatesService ?? throw new ArgumentNullException(nameof(objectStatesService));
+        this.persistentInfoService = persistentInfoService;
     }
 
     /// <inheritdoc />
@@ -27,7 +30,7 @@ public class TrackingService<TPersistentDomainObjectBase> : ITrackingService<TPe
     {
         if (this.GetPersistentState(value) == PersistentLifeObjectState.NotPersistent)
         {
-            return TrackingResult.Create(value, mode);
+            return TrackingResult.Create(this.persistentInfoService, value, mode);
         }
 
         var trackingProperties = this.GetModifiedObjectStates(value).Select(z => new TrackingProperty(z.PropertyName, z.PreviusValue, z.CurrentValue));

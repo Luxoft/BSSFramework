@@ -2,7 +2,7 @@
 
 using Framework.Core;
 
-namespace Framework.DomainDriven.BLL.Tracking;
+namespace Framework.DomainDriven.Tracking;
 
 public struct ObjectState
 {

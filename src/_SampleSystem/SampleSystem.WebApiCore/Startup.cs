@@ -15,7 +15,6 @@ using Microsoft.OpenApi.Models;
 
 using Newtonsoft.Json;
 
-using SampleSystem.BLL;
 using SampleSystem.ServiceEnvironment;
 using SampleSystem.WebApiCore.NewtonsoftJson;
 using SampleSystem.WebApiCore.Services;
@@ -122,9 +121,7 @@ public class Startup
                                           new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
 
                 return serviceProvider
-                    .GetRequiredService<
-                        IContextEvaluator<
-                        ISampleSystemBLLContext>>();
+                    .GetRequiredService<IDBSessionEvaluator>();
             });
 
         app.UseHangfireBss(

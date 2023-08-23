@@ -17,18 +17,14 @@ public abstract class IntegrationSchemaControllerBase : ControllerBase
 
     private readonly IAuthorizationSystem authorizationSystem;
 
-    private readonly IAccessDeniedExceptionService accessDeniedExceptionService;
-
     private const string AuthIntegrationNamespace = "http://authorization.luxoft.com/IntegrationEvent";
 
     protected IntegrationSchemaControllerBase(
         IAuthorizationSystem authorizationSystem,
-        IAccessDeniedExceptionService accessDeniedExceptionService,
         IDateTimeService dateTimeService,
         IEventXsdExporter2 eventXsdExporter)
     {
         this.authorizationSystem = authorizationSystem;
-        this.accessDeniedExceptionService = accessDeniedExceptionService;
         this.dateTimeService = dateTimeService ?? throw new ArgumentNullException(nameof(dateTimeService));
         this.eventXsdExporter = eventXsdExporter;
     }
@@ -40,7 +36,7 @@ public abstract class IntegrationSchemaControllerBase : ControllerBase
 
     private IActionResult DownloadKnownTypesWsdl(string xsdNamespace, IReadOnlyCollection<Type> eventTypes)
     {
-        this.authorizationSystem.CheckAccess(this.accessDeniedExceptionService, new NonContextSecurityOperation<SecurityOperationCode>(SecurityOperationCode.SystemIntegration));
+        this.authorizationSystem.CheckAccess(new NonContextSecurityOperation<SecurityOperationCode>(SecurityOperationCode.SystemIntegration));
 
         var content = this.eventXsdExporter.Export(xsdNamespace, "IntegrationEvent", eventTypes);
 

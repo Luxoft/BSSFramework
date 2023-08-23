@@ -17,6 +17,7 @@ public class ExampleAuthorizationSystem : AuthorizationSystem<Guid>
 
     public override bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation) => throw new NotImplementedException();
 
+    public override void CheckAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> operation) => throw new NotImplementedException();
 
     public override IEnumerable<string> GetAccessors<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode, Expression<Func<IPrincipal<Guid>, bool>> principalFilter) => throw new NotImplementedException();
 }

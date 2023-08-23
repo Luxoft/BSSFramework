@@ -23,6 +23,8 @@ public abstract class AuthorizationSystem<TIdent> : IAuthorizationSystem<TIdent>
 
     public abstract TIdent ResolveSecurityTypeId(Type type);
 
+    public abstract bool IsAdmin();
+
     public abstract bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation)
             where TSecurityOperationCode : struct, Enum;
 
@@ -32,8 +34,6 @@ public abstract class AuthorizationSystem<TIdent> : IAuthorizationSystem<TIdent>
 
         return type.Name;
     }
-
-    public abstract TIdent GrandAccessIdent { get; }
 
     public abstract IEnumerable<string> GetAccessors<TSecurityOperationCode>(
             TSecurityOperationCode securityOperationCode,

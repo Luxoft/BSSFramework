@@ -7,7 +7,6 @@ using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.BLL.Tracking;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
 using Framework.HierarchicalExpand;
@@ -86,7 +85,10 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection RegisterAuthorizationSystem(this IServiceCollection services)
     {
-        return services.AddScopedFrom<IAuthorizationSystem<Guid>, IAuthorizationBLLContext>();
+        services.AddScopedFrom<IAuthorizationSystem<Guid>, IAuthorizationBLLContext>();
+        services.AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>();
+
+        return services;
     }
 
     public static IServiceCollection RegisterAuthorizationBLL(this IServiceCollection services)

@@ -177,6 +177,11 @@ public partial class AuthorizationBLLContext
         return this.HasAccess(filter);
     }
 
+    public bool IsAdmin()
+    {
+        return this.Logics.BusinessRole.HasAdminRole();
+    }
+
     public bool HasAccess<TSecurityOperationCode>([NotNull] NonContextSecurityOperation<TSecurityOperationCode> securityOperation)
             where TSecurityOperationCode : struct, Enum
     {

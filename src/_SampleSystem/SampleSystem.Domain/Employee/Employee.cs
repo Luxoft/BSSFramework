@@ -1,4 +1,5 @@
-﻿using Framework.Core;
+﻿using Framework.Configuration;
+using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;

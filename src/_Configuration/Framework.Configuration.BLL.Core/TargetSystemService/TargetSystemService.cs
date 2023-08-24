@@ -61,11 +61,11 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : Tar
 
         var domainType = this.TypeResolver.Resolve(operation.DomainType);
 
-        var operationType = domainType.GetEventOperationType(true);
+        var operationType = domainType.GetEventOperationType() ?? typeof(BLLBaseOperation);
 
         new Action<string, long?, Guid>(this.ForceEvent<TPersistentDomainObjectBase, TypeCode>)
-                .CreateGenericMethod(domainType, operationType)
-                .Invoke(this, new object[] { operation.Name, revision, domainObjectId });
+            .CreateGenericMethod(domainType, operationType)
+            .Invoke(this, new object[] { operation.Name, revision, domainObjectId });
     }
 
     private void ForceEvent<TDomainObject, TOperation>(string operationName, long? revision, Guid domainObjectId)

@@ -49,15 +49,15 @@ public partial class TargetSystemBLL
         foreach (var newItem in mergeResult.AddingItems)
         {
             var newDomainType = new DomainType(targetSystem)
-                                {
-                                        Id = newItem.Key,
-                                        Name = newItem.Value.Name,
-                                        NameSpace = newItem.Value.Namespace
-                                };
+            {
+                Id = newItem.Key,
+                Name = newItem.Value.Name,
+                NameSpace = newItem.Value.Namespace
+            };
 
             if (!isBase)
             {
-                newItem.Value.GetEventOperations(true).Foreach(value => new DomainTypeEventOperation(newDomainType, value));
+                newItem.Value.GetEventOperations(typeof(BLLBaseOperation)).Foreach(value => new DomainTypeEventOperation(newDomainType, value));
             }
 
             this.Context.Logics.DomainType.Insert(newDomainType);
@@ -71,7 +71,7 @@ public partial class TargetSystemBLL
 
             var changedName = domainType.Name != type.Name || domainType.NameSpace != type.Namespace;
 
-            var mergeEventResult = domainType.EventOperations.GetMergeResult(type.GetEventOperations(true), operation => operation.Name, value => value.ToString());
+            var mergeEventResult = domainType.EventOperations.GetMergeResult(type.GetEventOperations(typeof(BLLBaseOperation)), operation => operation.Name, value => value.ToString());
 
             if (changedName || (!isBase && !mergeEventResult.IsEmpty))
             {

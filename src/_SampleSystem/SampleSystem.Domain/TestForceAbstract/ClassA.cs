@@ -1,4 +1,4 @@
-﻿using Framework.DomainDriven.Attributes;
+﻿using Framework.Persistent.Mapping;
 
 namespace SampleSystem.Domain.TestForceAbstract;
 

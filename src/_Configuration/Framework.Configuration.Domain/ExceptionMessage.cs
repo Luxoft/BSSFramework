@@ -1,8 +1,8 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.Attributes;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
+using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
 namespace Framework.Configuration.Domain;

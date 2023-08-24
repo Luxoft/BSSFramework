@@ -137,7 +137,7 @@ public abstract class ServerGeneratorConfigurationBase<TEnvironment> : Generator
         {
             if (!domainType.IsProjection())
             {
-                foreach (var eventOperationCode in domainType.GetEventOperations(true))
+                foreach (var eventOperationCode in domainType.GetEventOperations(typeof(BLLBaseOperation)))
                 {
                     yield return this.GetTypeMap(domainType, new DomainOperationEventDTOFileType(eventOperationCode));
                 }

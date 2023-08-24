@@ -10,6 +10,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.App.Domain\Framework.App.Domain.csproj" />
+    <ProjectReference Include="..\..\Framework.Persistent.Mapping.Audit\Framework.Persistent.Mapping.Audit.csproj" />
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
     <ProjectReference Include="..\SampleSystem.Core\SampleSystem.Core.csproj" />
   </ItemGroup>

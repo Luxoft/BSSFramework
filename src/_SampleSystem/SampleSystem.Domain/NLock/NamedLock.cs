@@ -3,7 +3,7 @@
 namespace SampleSystem.Domain;
 
 [BLLRole]
-public class NamedLock : AuditPersistentDomainObjectBase, Framework.DomainDriven.BLL.Security.Lock.INamedLock<NamedLockOperation>
+public class NamedLock : AuditPersistentDomainObjectBase, Framework.DomainDriven.Lock.INamedLock<NamedLockOperation>
 {
     private NamedLockOperation lockOperation;
 

@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Core;
-using Framework.DomainDriven.BLL.Security.Lock;
+using Framework.DomainDriven.Lock;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 

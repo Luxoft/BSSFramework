@@ -1,5 +1,5 @@
 ﻿using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security.Lock;
+using Framework.DomainDriven.Lock;
 
 namespace Framework.Configuration.Domain;
 

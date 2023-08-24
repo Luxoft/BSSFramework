@@ -120,7 +120,7 @@ public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
     {
         var subNodesRequest = from property in domainType.GetSerializationProperties()
 
-                              where !property.GetPrivateField().Maybe(field => field.HasAttribute<NotPersistentFieldAttribute>())
+                              where property.IsPersistent()
 
                               where subPropertyFilter == null || subPropertyFilter(property)
 

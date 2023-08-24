@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Authorization.ApproveWorkflow</PackageId>
@@ -9,13 +9,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Framework.Authorization.BLL.Core\Framework.Authorization.BLL.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="Microsoft.Extensions.Logging" />
     <PackageReference Include="WorkflowCore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Core.LegacyContext\Framework.DomainDriven.Core.LegacyContext.csproj" />
+
+    <ProjectReference Include="..\Framework.Authorization.BLL.Core\Framework.Authorization.BLL.Core.csproj" />
   </ItemGroup>
 
 </Project>

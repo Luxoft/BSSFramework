@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
+
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.Common;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.ServiceModel.Subscriptions;
 using Framework.Persistent;
@@ -69,10 +69,10 @@ public class AuditService<TIdent, TBLLContext, TBLLFactoryContainer, TRootSecuri
         var domainObject = this._bllContext.Logics.Default.Create<TDomain>().GetById(id); //????
 
         var result = new TDomainPropertyRevisionsDTO
-                     {
-                             Identity = propertyChanged.Identity,
-                             PropertyName = propertyChanged.PropertyName,
-                     };
+        {
+            Identity = propertyChanged.Identity,
+            PropertyName = propertyChanged.PropertyName,
+        };
 
         if (propertyInfo.IsSecurity())
         {
@@ -82,7 +82,7 @@ public class AuditService<TIdent, TBLLContext, TBLLFactoryContainer, TRootSecuri
             }
         }
 
-        if (typeof(TProperty).IsDomainType(typeof(TPersistentObjectBase)))
+        if (typeof(TPersistentObjectBase).IsAssignableFrom(typeof(TProperty)))
         {
             var dtoType = this._bllContext.TypeResolver.Resolve(typeof(TProperty).Name + MainDTOType.SimpleDTO.ToString(), true);
 

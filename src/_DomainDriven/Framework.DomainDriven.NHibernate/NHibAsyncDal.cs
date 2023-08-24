@@ -73,6 +73,13 @@ public class NHibAsyncDal<TDomainObject, TIdent> : IAsyncDal<TDomainObject, TIde
         await this.NativeSession.DeleteAsync(domainObject, cancellationToken);
     }
 
+    public virtual async Task LockAsync(TDomainObject domainObject, LockRole lockRole, CancellationToken cancellationToken)
+    {
+        this.CheckWrite();
+
+        await this.NativeSession.LockAsync(domainObject, lockRole.ToLockMode(), cancellationToken);
+    }
+
     private void CheckWrite()
     {
         if (this.session.SessionMode != DBSessionMode.Write)

@@ -16,13 +16,13 @@ public class CapAuthenticationHandler : AuthenticationHandler<AuthenticationSche
     private readonly IDBSession dbSession;
 
     public CapAuthenticationHandler(
-            IOptionsMonitor<AuthenticationSchemeOptions> options,
-            ILoggerFactory logger,
-            UrlEncoder encoder,
-            ISystemClock clock,
-            IAuthorizationSystem authorizationSystem,
-            IDBSession dbSession)
-            : base(options, logger, encoder, clock)
+        IOptionsMonitor<AuthenticationSchemeOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder,
+        ISystemClock clock,
+        IAuthorizationSystem authorizationSystem,
+        IDBSession dbSession)
+        : base(options, logger, encoder, clock)
     {
         this.authorizationSystem = authorizationSystem;
         this.dbSession = dbSession;

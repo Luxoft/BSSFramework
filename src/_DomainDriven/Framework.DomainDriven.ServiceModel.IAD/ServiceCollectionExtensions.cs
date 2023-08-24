@@ -31,11 +31,6 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection RegisterLegacyHierarchicalObjectExpander(this IServiceCollection services)
-    {
-        return services.ReplaceSingleton<IHierarchicalRealTypeResolver, ProjectionHierarchicalRealTypeResolver>();
-    }
-
     public static IServiceCollection RegistryGenericDatabaseVisitors(this IServiceCollection services)
     {
         services.AddSingleton<IExpressionVisitorContainerItem, ExpressionVisitorContainerDomainIdentItem<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>();

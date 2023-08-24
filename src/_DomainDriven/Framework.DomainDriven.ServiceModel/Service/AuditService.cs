@@ -69,10 +69,10 @@ public class AuditService<TIdent, TBLLContext, TBLLFactoryContainer, TRootSecuri
         var domainObject = this._bllContext.Logics.Default.Create<TDomain>().GetById(id); //????
 
         var result = new TDomainPropertyRevisionsDTO
-                     {
-                             Identity = propertyChanged.Identity,
-                             PropertyName = propertyChanged.PropertyName,
-                     };
+        {
+            Identity = propertyChanged.Identity,
+            PropertyName = propertyChanged.PropertyName,
+        };
 
         if (propertyInfo.IsSecurity())
         {

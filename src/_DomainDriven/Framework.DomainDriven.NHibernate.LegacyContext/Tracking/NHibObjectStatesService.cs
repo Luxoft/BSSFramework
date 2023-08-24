@@ -56,78 +56,78 @@ public class NHibObjectStatesService : IObjectStateService
         var modifiedIndexies = (dirtyIndexies ?? new int[0]).ToHashSet();
 
         Func<int, bool> isModifiedPropertyFunc = (index) =>
-                                                 {
+        {
 
-                                                     if (modifiedIndexies.Contains(index))
-                                                     {
-                                                         return true;
-                                                     }
+            if (modifiedIndexies.Contains(index))
+            {
+                return true;
+            }
 
-                                                     var propertyType = persister.PropertyTypes[index];
+            var propertyType = persister.PropertyTypes[index];
 
-                                                     if (propertyType.IsCollectionType)
-                                                     {
-                                                         IList<object> currentCollection = null;
-                                                         object unTypedStateCollection = currentState[index];
+            if (propertyType.IsCollectionType)
+            {
+                IList<object> currentCollection = null;
+                object unTypedStateCollection = currentState[index];
 
-                                                         if (unTypedStateCollection is IPersistentCollection)
-                                                         {
+                if (unTypedStateCollection is IPersistentCollection)
+                {
 
-                                                             var persistentCollection = (IPersistentCollection)currentState[index];
-                                                             if (persistentCollection == null)
-                                                             {
-                                                                 return false;
-                                                             }
-                                                             var result = persistentCollection.IsDirty;
-                                                             if (result)
-                                                             {
-                                                                 return result;
-                                                             }
+                    var persistentCollection = (IPersistentCollection)currentState[index];
+                    if (persistentCollection == null)
+                    {
+                        return false;
+                    }
+                    var result = persistentCollection.IsDirty;
+                    if (result)
+                    {
+                        return result;
+                    }
 
-                                                             var collectionPersistent = sessionImpl.Factory.GetCollectionPersister(persistentCollection.Role);
+                    var collectionPersistent = sessionImpl.Factory.GetCollectionPersister(persistentCollection.Role);
 
 
-                                                             var enumerable = persistentCollection.Entries(collectionPersistent);
+                    var enumerable = persistentCollection.Entries(collectionPersistent);
 
-                                                             if (null == enumerable)
-                                                             {
-                                                                 return false;
-                                                             }
-                                                             currentCollection = enumerable.Cast<object>().ToList();
+                    if (null == enumerable)
+                    {
+                        return false;
+                    }
+                    currentCollection = enumerable.Cast<object>().ToList();
 
-                                                         }
-                                                         else
-                                                         {
-                                                             currentCollection = (currentState[index] as IList<object>) ?? (((IEnumerable)currentState[index]).Cast<object>().ToList());
-                                                         }
+                }
+                else
+                {
+                    currentCollection = (currentState[index] as IList<object>) ?? (((IEnumerable)currentState[index]).Cast<object>().ToList());
+                }
 
-                                                         return currentCollection
-                                                                .SelectMany(z => this.session.GetEntityEntry(z) != null ? this.GetModifiedObjectStates(z) : new[] { new ObjectState(), })
-                                                                .Any();
-                                                     }
+                return currentCollection
+                       .SelectMany(z => this.session.GetEntityEntry(z) != null ? this.GetModifiedObjectStates(z) : new[] { new ObjectState(), })
+                       .Any();
+            }
 
-                                                     return false;
-                                                 };
+            return false;
+        };
 
         return persister.PropertyNames
                         .Select(TupleStruct.Create)
                         .Where(z => isModifiedPropertyFunc(z.Item2))
                         .Select(z =>
-                                {
-                                    var previusState = oldState[z.Item2];
-                                    var currentValue = currentState[z.Item2];
+                        {
+                            var previusState = oldState[z.Item2];
+                            var currentValue = currentState[z.Item2];
 
-                                    if (persister.PropertyTypes[z.Item2].IsCollectionType && currentValue is IPersistentCollection)
-                                    {
-                                        previusState = ((IPersistentCollection)currentValue).StoredSnapshot;
-                                    }
+                            if (persister.PropertyTypes[z.Item2].IsCollectionType && currentValue is IPersistentCollection)
+                            {
+                                previusState = ((IPersistentCollection)currentValue).StoredSnapshot;
+                            }
 
-                                    return new ObjectState(
-                                                           z.Item1,
-                                                           currentValue,
-                                                           previusState,
-                                                           true);
-                                });
+                            return new ObjectState(
+                                                   z.Item1,
+                                                   currentValue,
+                                                   previusState,
+                                                   true);
+                        });
     }
 
     public bool IsNew([NotNull] object entity)

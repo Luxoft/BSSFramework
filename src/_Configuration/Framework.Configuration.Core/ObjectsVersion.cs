@@ -79,7 +79,7 @@ public class ObjectsVersion : IObjectsVersion
 
     public static ObjectsVersion<T> Create<T>(T previous, T current, params IEmployee[] recipients)
     {
-        return Create(previous, current, (IEnumerable<IEmployee>) recipients);
+        return Create(previous, current, (IEnumerable<IEmployee>)recipients);
     }
 
     public static ObjectsVersion<T> Create<T>(T previous, T current, IEnumerable<IEmployee> recipients)

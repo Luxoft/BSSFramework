@@ -13,15 +13,15 @@ namespace Framework.Configuration.BLL;
 
 public partial interface IConfigurationBLLContext :
 
-        Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContext,
+    Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContext,
 
-        ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, DomainObjectBase, Guid>,
+    ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, DomainObjectBase, Guid>,
 
-        ITypeResolverContainer<string>,
+    ITypeResolverContainer<string>,
 
-        ITrackingServiceContainer<PersistentDomainObjectBase>,
+    ITrackingServiceContainer<PersistentDomainObjectBase>,
 
-        IConfigurationBLLContextContainer<IConfigurationBLLContext>
+    IConfigurationBLLContextContainer<IConfigurationBLLContext>
 {
     IMessageSender<MessageTemplateNotification> SubscriptionSender { get; }
 

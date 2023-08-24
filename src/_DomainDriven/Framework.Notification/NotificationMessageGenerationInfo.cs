@@ -6,13 +6,13 @@ namespace Framework.Notification;
 public class NotificationMessageGenerationInfo
 {
     public NotificationMessageGenerationInfo(string emails, object currentRoot, object previousRoot)
-            : this(DefaultEmployee.CreateMany(emails), currentRoot, previousRoot)
+        : this(DefaultEmployee.CreateMany(emails), currentRoot, previousRoot)
     {
 
     }
 
     public NotificationMessageGenerationInfo(IEmployee recipient, object currentRoot, object previousRoot)
-            : this(recipient.MaybeYield(), currentRoot, previousRoot)
+        : this(recipient.MaybeYield(), currentRoot, previousRoot)
     {
 
     }

@@ -4,6 +4,7 @@ using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.ServiceModel.IAD;
+using Framework.DomainDriven.Tracking;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -49,8 +50,8 @@ public static class SampleSystemFrameworkDatabaseExtensions
 
                                                                 .Pipe(includeTypedAudit, s => s
 
-                                                                    .AddMapping(new SampleSystemSystemAuditMappingSettings(string.Empty))
-                                                                    .AddMapping(new SampleSystemSystemRevisionAuditMappingSettings(string.Empty)))
+                                                                                             .AddMapping(new SampleSystemSystemAuditMappingSettings(string.Empty))
+                                                                                             .AddMapping(new SampleSystemSystemRevisionAuditMappingSettings(string.Empty)))
 
 
                                                                 .AddMapping(new SampleSystemMappingSettings(new DatabaseName(string.Empty, "app"), connectionString)));

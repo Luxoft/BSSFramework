@@ -1,10 +1,9 @@
 ﻿using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Lock;
 
 namespace SampleSystem.Domain;
 
 [BLLRole]
-public class NamedLock : AuditPersistentDomainObjectBase, INamedLock<NamedLockOperation>
+public class NamedLock : AuditPersistentDomainObjectBase, Framework.DomainDriven.Lock.INamedLock<NamedLockOperation>
 {
     private NamedLockOperation lockOperation;
 

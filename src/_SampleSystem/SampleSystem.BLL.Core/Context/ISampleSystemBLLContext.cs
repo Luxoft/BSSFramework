@@ -10,16 +10,16 @@ namespace SampleSystem.BLL;
 
 public partial interface ISampleSystemBLLContext :
 
-        ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, DomainObjectBase, Guid>,
+    ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, DomainObjectBase, Guid>,
 
-        ITrackingServiceContainer<PersistentDomainObjectBase>,
+    ITrackingServiceContainer<PersistentDomainObjectBase>,
 
-        ITypeResolverContainer<string>,
+    ITypeResolverContainer<string>,
 
-        Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContextContainer<Framework.Configuration.BLL.IConfigurationBLLContext>,
+    Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContextContainer<Framework.Configuration.BLL.IConfigurationBLLContext>,
 
-        IDefaultHierarchicalBLLContext<PersistentDomainObjectBase, Guid>,
+    IDefaultHierarchicalBLLContext<PersistentDomainObjectBase, Guid>,
 
-        ISecurityTypeResolverContainer
+    ISecurityTypeResolverContainer
 {
 }

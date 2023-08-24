@@ -1,16 +1,14 @@
 ﻿
-using Framework.DomainDriven.Lock;
-
 namespace SampleSystem.Domain;
 
 public enum NamedLockOperation
 {
-    [GlobalLock(typeof(BusinessUnitAncestorLink))]
+    [Framework.DomainDriven.Lock.GlobalLockAttribute(typeof(BusinessUnitAncestorLink))]
     BusinessUnitAncestorLock,
 
-    [GlobalLockAttribute(typeof(ManagementUnitAncestorLink))]
+    [Framework.DomainDriven.Lock.GlobalLockAttribute(typeof(ManagementUnitAncestorLink))]
     ManagementUnitAncestorLock,
 
-    [GlobalLockAttribute(typeof(LocationAncestorLink))]
+    [Framework.DomainDriven.Lock.GlobalLockAttribute(typeof(LocationAncestorLink))]
     LocationAncestorLock,
 }

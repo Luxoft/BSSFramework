@@ -7,7 +7,7 @@ namespace Framework.SecuritySystem.DiTests;
 public class ExampleAuthorizationSystem : AuthorizationSystem<Guid>
 {
     public ExampleAuthorizationSystem(IPrincipalPermissionSource<Guid> principalPermissionSource, IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory)
-            : base(principalPermissionSource, hierarchicalObjectExpanderFactory)
+        : base(principalPermissionSource, hierarchicalObjectExpanderFactory)
     {
     }
 

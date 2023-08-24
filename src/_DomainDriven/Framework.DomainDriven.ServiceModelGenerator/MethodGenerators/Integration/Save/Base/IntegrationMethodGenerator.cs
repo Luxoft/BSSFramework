@@ -6,11 +6,11 @@ using Framework.DomainDriven.BLL;
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
 public abstract class IntegrationMethodGenerator<TConfiguration, TBLLRoleAttribute> : MethodGenerator<TConfiguration, TBLLRoleAttribute>
-        where TConfiguration : class, IIntegrationGeneratorConfigurationBase<IGenerationEnvironmentBase>
-        where TBLLRoleAttribute : BLLServiceRoleAttribute
+    where TConfiguration : class, IIntegrationGeneratorConfigurationBase<IGenerationEnvironmentBase>
+    where TBLLRoleAttribute : BLLServiceRoleAttribute
 {
     protected IntegrationMethodGenerator(TConfiguration configuration, Type domainType)
-            : base(configuration, domainType)
+        : base(configuration, domainType)
     {
     }
 

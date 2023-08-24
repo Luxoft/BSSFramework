@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
 
-namespace Framework.DomainDriven.BLL.Security.Lock;
+namespace Framework.DomainDriven.Lock;
 
 public static class NamedLockExtension
 {

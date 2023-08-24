@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 
 using Framework.Core;
-using Framework.DomainDriven.BLL.Security.Lock;
+using Framework.DomainDriven.Lock;
 using Framework.DomainDriven.BLL.Security;
 using Framework.Persistent;
 

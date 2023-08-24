@@ -8,7 +8,7 @@ public class BLLEventRoleAttribute : Attribute
     /// <summary>
     /// Пользовательский enum-тип с перечнем евентов
     /// </summary>
-    public Type EventOperationType { get; set; } = typeof(BLLBaseOperation);
+    public Type EventOperationType { get; set; }
 
     /// <summary>
     /// Фильтрация оправляемых евентов

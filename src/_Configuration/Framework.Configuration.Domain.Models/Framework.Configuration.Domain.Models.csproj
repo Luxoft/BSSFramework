@@ -7,6 +7,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.DomainDriven.SerializeMetadataType\Framework.DomainDriven.SerializeMetadataType.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Core.LegacyContext\Framework.DomainDriven.Core.LegacyContext.csproj" />
     <ProjectReference Include="..\Framework.Configuration.Domain\Framework.Configuration.Domain.csproj" />
   </ItemGroup>
 </Project>

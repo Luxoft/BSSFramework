@@ -6,7 +6,7 @@ namespace Framework.DomainDriven.BLL;
 
 public class OverrideHasFlagVisitor : ExpressionVisitor
 {
-    private static readonly MethodInfo EnumHasFlagMethod = new Func<Enum, bool>(BLLBaseOperation.Save.HasFlag).Method;
+    private static readonly MethodInfo EnumHasFlagMethod = new Func<Enum, bool>(ConsoleColor.Blue.HasFlag).Method;
 
 
     private OverrideHasFlagVisitor()

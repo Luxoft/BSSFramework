@@ -1,6 +1,7 @@
 ﻿using System.Data;
 
 using Framework.Core;
+using Framework.DomainDriven.DALExceptions;
 using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.NHibernate.SqlExceptionProcessors;
 using Framework.Exceptions;
@@ -35,7 +36,8 @@ public class NHibSessionEnvironment : IDisposable
             [NotNull] NHibConnectionSettings connectionSettings,
             [NotNull] IEnumerable<IMappingSettings> mappingSettings,
             IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService,
-            INHibSessionEnvironmentSettings settings)
+            INHibSessionEnvironmentSettings settings,
+            IDalValidationIdentitySource dalValidationIdentitySource)
     {
         this.ConnectionSettings = connectionSettings ?? throw new ArgumentNullException(nameof(connectionSettings));
 
@@ -69,7 +71,7 @@ public class NHibSessionEnvironment : IDisposable
 
             this.InternalSessionFactory = this.cfg.BuildSessionFactory();
 
-            this.ExceptionProcessor = new SqlExceptionProcessorInterceptor(this.InternalSessionFactory, this.cfg);
+            this.ExceptionProcessor = new SqlExceptionProcessorInterceptor(this.InternalSessionFactory, this.cfg, dalValidationIdentitySource);
         }
         catch (Exception ex)
         {

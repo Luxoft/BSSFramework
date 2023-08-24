@@ -39,8 +39,6 @@ public static class SampleSystemFrameworkDatabaseExtensions
 
     public static IServiceCollection AddDatabaseSettings(this IServiceCollection services, string connectionString, bool includeTypedAudit = true)
     {
-        services.AddScoped<IObjectStateService, NHibObjectStatesService>();
-
         return services.AddDatabaseSettings(setupObj => setupObj.AddEventListener<DefaultDBSessionEventListener>()
                                                                 .AddEventListener<SubscriptionDBSessionEventListener>()
 
@@ -51,8 +49,8 @@ public static class SampleSystemFrameworkDatabaseExtensions
 
                                                                 .Pipe(includeTypedAudit, s => s
 
-                                                                    .AddMapping(new SampleSystemSystemAuditMappingSettings(string.Empty))
-                                                                    .AddMapping(new SampleSystemSystemRevisionAuditMappingSettings(string.Empty)))
+                                                                                             .AddMapping(new SampleSystemSystemAuditMappingSettings(string.Empty))
+                                                                                             .AddMapping(new SampleSystemSystemRevisionAuditMappingSettings(string.Empty)))
 
 
                                                                 .AddMapping(new SampleSystemMappingSettings(new DatabaseName(string.Empty, "app"), connectionString)));

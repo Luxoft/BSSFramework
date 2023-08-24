@@ -6,6 +6,7 @@
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework.Persistent.Mapping.Audit\Framework.Persistent.Mapping.Audit.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL.Configuration\Framework.DomainDriven.BLL.Configuration.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL.Security\Framework.DomainDriven.BLL.Security.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL\Framework.DomainDriven.BLL.csproj" />

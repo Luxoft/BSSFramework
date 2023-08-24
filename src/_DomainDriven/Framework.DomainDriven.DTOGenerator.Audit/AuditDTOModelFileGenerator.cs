@@ -9,6 +9,7 @@ using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.Serialization;
 using Framework.DomainDriven.ServiceModel.Subscriptions;
+using Framework.Persistent.Mapping;
 using Framework.Projection;
 
 namespace Framework.DomainDriven.DTOGenerator.Audit;

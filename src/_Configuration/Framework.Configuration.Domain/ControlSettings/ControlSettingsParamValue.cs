@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.Attributes;
 using Framework.Persistent;
+using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
 namespace Framework.Configuration.Domain;

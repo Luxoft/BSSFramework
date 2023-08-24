@@ -2,12 +2,12 @@
 using System.Reflection;
 
 using Framework.Core;
-using Framework.DomainDriven.Attributes;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.DBGenerator;
 using Framework.DomainDriven.DBGenerator.Contracts;
 using Framework.DomainDriven.DBGenerator.Team;
 using Framework.DomainDriven.NHibernate.Audit;
+using Framework.Persistent.Mapping;
 using Framework.Projection;
 
 using JetBrains.Annotations;

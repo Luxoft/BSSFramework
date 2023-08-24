@@ -26,22 +26,35 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterGenericServices(this IServiceCollection services)
     {
-        services.AddScoped(typeof(IOperationEventSenderContainer<>), typeof(OperationEventSenderContainer<>));
-
-        services.AddScoped(typeof(IDAL<,>), typeof(NHibDal<,>));
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
         services.AddScoped(typeof(IRepositoryFactory<>), typeof(RepositoryFactory<>));
         services.AddScoped(typeof(IRepositoryFactory<,>), typeof(RepositoryFactory<,>));
         services.AddScoped(typeof(IGenericRepositoryFactory<,,>), typeof(GenericRepositoryFactory<,,>));
 
+        services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();
+
+        services.RegisterAuthorizationSystem();
+
+        services.AddSingleton<IDateTimeService>(DateTimeService.Default);
+
+        services.AddScoped<ILegacyGenericDisabledSecurityProviderFactory, LegacyGenericDisabledSecurityProviderFactory>();
+        services.AddScoped<INotImplementedDomainSecurityServiceContainer, OnlyDisabledDomainSecurityServiceContainer>();
+
+        return services;
+    }
+
+    public static IServiceCollection RegisterLegacyGenericServices(this IServiceCollection services)
+    {
+        services.AddScoped(typeof(IOperationEventSenderContainer<>), typeof(OperationEventSenderContainer<>));
+
+        services.AddScoped(typeof(IDAL<,>), typeof(NHibDal<,>));
+
         services.AddSingleton<IExceptionExpander, ExceptionExpander>();
 
         services.AddSingleton<IStandartExpressionBuilder, StandartExpressionBuilder>();
 
         services.AddScoped<IStandardSubscriptionService, LocalDBSubscriptionService>();
-
-        services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();
 
         services.RegisterAuthorizationSystem();
 
@@ -58,6 +71,11 @@ public static class ServiceCollectionExtensions
         services.AddScoped<INotImplementedDomainSecurityServiceContainer, OnlyDisabledDomainSecurityServiceContainer>();
 
         return services;
+    }
+
+    public static IServiceCollection RegisterLegacyHierarchicalObjectExpander(this IServiceCollection services)
+    {
+        return services.ReplaceSingleton<IHierarchicalRealTypeResolver, ProjectionHierarchicalRealTypeResolver>();
     }
 
     public static IServiceCollection RegistryGenericDatabaseVisitors(this IServiceCollection services)

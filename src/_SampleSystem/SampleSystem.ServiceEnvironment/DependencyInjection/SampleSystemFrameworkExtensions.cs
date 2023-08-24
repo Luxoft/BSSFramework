@@ -10,11 +10,11 @@ using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.Tracking;
 using Framework.DomainDriven.Serialization;
 using Framework.DomainDriven.SerializeMetadata;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.ServiceModel.Service;
-using Framework.DomainDriven.Tracking;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Events;
 using Framework.QueryableSource;
@@ -36,15 +36,20 @@ public static class SampleSystemFrameworkExtensions
     {
         return services.RegisterGenericServices()
                        .RegisterWebApiGenericServices()
+                       .RegisterListeners()
+                       .RegisterSupportServices()
+
+                       // Legacy
+
+                       .RegisterLegacyGenericServices()
+                       .RegisterLegacyHierarchicalObjectExpander()
+                       .RegisterContextEvaluators()
 
                        .RegisterMainBLLContext()
                        .RegisterConfigurationTargetSystems()
-                       .RegisterListeners()
                        .RegisterContextEvaluator()
 
-                       .RegisterCustomReports()
-
-                       .RegisterSupportServices();
+                       .RegisterCustomReports();
     }
 
     private static IServiceCollection RegisterMainBLLContext(this IServiceCollection services)

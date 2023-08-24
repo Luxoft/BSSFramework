@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 
-using Framework.DomainDriven;
+using Framework.DomainDriven.DALExceptions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

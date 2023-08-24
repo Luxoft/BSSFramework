@@ -1,4 +1,6 @@
-﻿namespace Framework.DomainDriven.NHibernate.SqlExceptionProcessors;
+﻿using Framework.DomainDriven.DALExceptions;
+
+namespace Framework.DomainDriven.NHibernate.SqlExceptionProcessors;
 
 internal class ArifmeticOverflowSqlProcessor : ISqlExceptionProcessor
 {

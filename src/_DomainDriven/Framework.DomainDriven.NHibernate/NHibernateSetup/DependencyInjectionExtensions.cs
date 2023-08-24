@@ -1,5 +1,7 @@
 ﻿using Framework.Core;
 using Framework.DependencyInjection;
+using Framework.DomainDriven.DALExceptions;
+using Framework.DomainDriven.Tracking;
 
 using Microsoft.Extensions.DependencyInjection;
 using NHibernate;
@@ -23,6 +25,9 @@ public static class DependencyInjectionExtensions
 
         services.AddSingleton<INHibSessionEnvironmentSettings, NHibSessionEnvironmentSettings>();
         services.AddSingleton<NHibConnectionSettings>();
+
+        services.AddScoped<IObjectStateService, NHibObjectStatesService>();
+        services.AddSingleton<IDalValidationIdentitySource, LegacyDalValidationIdentitySource>();
 
         setup(setupObject);
 

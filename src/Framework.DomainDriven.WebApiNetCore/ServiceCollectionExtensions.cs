@@ -14,4 +14,6 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection RegisterXsdExport(this IServiceCollection services) =>
             services.AddSingleton<IEventXsdExporter2, EventXsdExporter2>();
+        return services;
+    }
 }

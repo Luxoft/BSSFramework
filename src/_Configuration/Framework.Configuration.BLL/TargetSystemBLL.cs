@@ -49,11 +49,11 @@ public partial class TargetSystemBLL
         foreach (var newItem in mergeResult.AddingItems)
         {
             var newDomainType = new DomainType(targetSystem)
-                                {
-                                        Id = newItem.Key,
-                                        Name = newItem.Value.Name,
-                                        NameSpace = newItem.Value.Namespace
-                                };
+            {
+                Id = newItem.Key,
+                Name = newItem.Value.Name,
+                NameSpace = newItem.Value.Namespace
+            };
 
             if (!isBase)
             {

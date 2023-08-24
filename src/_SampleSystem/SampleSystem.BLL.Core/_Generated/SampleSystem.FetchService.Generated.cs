@@ -145,8 +145,10 @@ namespace SampleSystem.BLL
                     fetchRootRule => fetchRootRule.SelectMany(businessUnit => businessUnit.Children).SelectMany(businessUnit => businessUnit.BusinessUnitEmployeeRoles).SelectNested(businessUnitEmployeeRole => businessUnitEmployeeRole.Employee).SelectNested(employee => employee.CoreBusinessUnit),
                     fetchRootRule => fetchRootRule.SelectMany(businessUnit => businessUnit.Children).SelectMany(businessUnit => businessUnit.BusinessUnitEmployeeRoles).SelectNested(businessUnitEmployeeRole => businessUnitEmployeeRole.Employee).SelectNested(employee => employee.HRDepartment).SelectNested(hRDepartment => hRDepartment.Location),
                     fetchRootRule => fetchRootRule.SelectMany(businessUnit => businessUnit.Children).SelectNested(businessUnit => businessUnit.BusinessUnitType),
+                    fetchRootRule => fetchRootRule.SelectMany(businessUnit => businessUnit.Children).SelectMany(businessUnit => businessUnit.ManagementUnits).SelectNested(managementUnitAndBusinessUnitLink => managementUnitAndBusinessUnitLink.ManagementUnit),
                     fetchRootRule => fetchRootRule.SelectMany(businessUnit => businessUnit.Children).SelectMany(businessUnit => businessUnit.ManagerCommissions).SelectNested(businessUnitManagerCommissionLink => businessUnitManagerCommissionLink.Manager).SelectNested(employee => employee.CoreBusinessUnit),
                     fetchRootRule => fetchRootRule.SelectMany(businessUnit => businessUnit.Children).SelectMany(businessUnit => businessUnit.ManagerCommissions).SelectNested(businessUnitManagerCommissionLink => businessUnitManagerCommissionLink.Manager).SelectNested(employee => employee.HRDepartment).SelectNested(hRDepartment => hRDepartment.Location),
+                    fetchRootRule => fetchRootRule.SelectMany(businessUnit => businessUnit.ManagementUnits).SelectNested(managementUnitAndBusinessUnitLink => managementUnitAndBusinessUnitLink.ManagementUnit),
                     fetchRootRule => fetchRootRule.SelectMany(businessUnit => businessUnit.ManagerCommissions).SelectNested(businessUnitManagerCommissionLink => businessUnitManagerCommissionLink.Manager).SelectNested(employee => employee.CoreBusinessUnit),
                     fetchRootRule => fetchRootRule.SelectMany(businessUnit => businessUnit.ManagerCommissions).SelectNested(businessUnitManagerCommissionLink => businessUnitManagerCommissionLink.Manager).SelectNested(employee => employee.HRDepartment).SelectNested(hRDepartment => hRDepartment.Location),
                     fetchRootRule => fetchRootRule.SelectNested(businessUnit => businessUnit.Parent));
@@ -1176,6 +1178,7 @@ namespace SampleSystem.BLL
             {
                 return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.Employee>(
                     fetchRootRule => fetchRootRule.SelectNested(employee => employee.CoreBusinessUnit),
+                    fetchRootRule => fetchRootRule.SelectMany(employee => employee.EmployeeToEmployeeLinks).SelectNested(employeeToEmployeeLink => employeeToEmployeeLink.LinkedEmployee),
                     fetchRootRule => fetchRootRule.SelectNested(employee => employee.HRDepartment).SelectNested(hRDepartment => hRDepartment.Location),
                     fetchRootRule => fetchRootRule.SelectNested(employee => employee.ManagementUnit),
                     fetchRootRule => fetchRootRule.SelectNested(employee => employee.Position),
@@ -2478,7 +2481,7 @@ namespace SampleSystem.BLL
             {
                 return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.Projections.TestEmployee>(
                     fetchRootRule => fetchRootRule.SelectNested(testEmployee => testEmployee.CoreBusinessUnit),
-                    fetchRootRule => fetchRootRule.SelectNested(testEmployee => testEmployee.CoreBusinessUnit_Auto),
+                    fetchRootRule => fetchRootRule.SelectNested(testEmployee => testEmployee.CoreBusinessUnit_Auto).SelectMany(testEmployee_AutoProp_CoreBusinessUnit => testEmployee_AutoProp_CoreBusinessUnit.Projects_Last_CoreBusinessUnitProjects),
                     fetchRootRule => fetchRootRule.SelectNested(testEmployee => testEmployee.Position_Auto),
                     fetchRootRule => fetchRootRule.SelectNested(testEmployee => testEmployee.Ppm_Auto),
                     fetchRootRule => fetchRootRule.SelectNested(testEmployee => testEmployee.Role_Auto));
@@ -2487,7 +2490,7 @@ namespace SampleSystem.BLL
             {
                 return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.Projections.TestEmployee>(
                     fetchRootRule => fetchRootRule.SelectNested(testEmployee => testEmployee.CoreBusinessUnit),
-                    fetchRootRule => fetchRootRule.SelectNested(testEmployee => testEmployee.CoreBusinessUnit_Auto),
+                    fetchRootRule => fetchRootRule.SelectNested(testEmployee => testEmployee.CoreBusinessUnit_Auto).SelectMany(testEmployee_AutoProp_CoreBusinessUnit => testEmployee_AutoProp_CoreBusinessUnit.Projects_Last_CoreBusinessUnitProjects),
                     fetchRootRule => fetchRootRule.SelectNested(testEmployee => testEmployee.Position_Auto),
                     fetchRootRule => fetchRootRule.SelectNested(testEmployee => testEmployee.Ppm_Auto),
                     fetchRootRule => fetchRootRule.SelectNested(testEmployee => testEmployee.Role_Auto));
@@ -2860,7 +2863,7 @@ namespace SampleSystem.BLL
                 return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.TestRootSecurityObj>(
                     fetchRootRule => fetchRootRule.SelectNested(testRootSecurityObj => testRootSecurityObj.BusinessUnit),
                     fetchRootRule => fetchRootRule.SelectMany(testRootSecurityObj => testRootSecurityObj.Items).SelectMany(testSecurityObjItem => testSecurityObjItem.Items),
-                    fetchRootRule => fetchRootRule.SelectMany(testRootSecurityObj => testRootSecurityObj.Items).SelectMany(testSecurityObjItem => testSecurityObjItem.Items2),
+                    fetchRootRule => fetchRootRule.SelectMany(testRootSecurityObj => testRootSecurityObj.Items).SelectMany(testSecurityObjItem => testSecurityObjItem.Items2).SelectNested(testSecuritySubObjItem2 => testSecuritySubObjItem2.InnerMaster).SelectNested(testSecurityObjItem => testSecurityObjItem.FirstMaster),
                     fetchRootRule => fetchRootRule.SelectMany(testRootSecurityObj => testRootSecurityObj.Items).SelectMany(testSecurityObjItem => testSecurityObjItem.Items3),
                     fetchRootRule => fetchRootRule.SelectNested(testRootSecurityObj => testRootSecurityObj.Location).SelectMany(location => location.Children),
                     fetchRootRule => fetchRootRule.SelectNested(testRootSecurityObj => testRootSecurityObj.ManagementUnitFluentMapping));
@@ -2890,7 +2893,7 @@ namespace SampleSystem.BLL
                 return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.TestSecurityObjItem>(
                     fetchRootRule => fetchRootRule.SelectNested(testSecurityObjItem => testSecurityObjItem.FirstMaster),
                     fetchRootRule => fetchRootRule.SelectMany(testSecurityObjItem => testSecurityObjItem.Items),
-                    fetchRootRule => fetchRootRule.SelectMany(testSecurityObjItem => testSecurityObjItem.Items2),
+                    fetchRootRule => fetchRootRule.SelectMany(testSecurityObjItem => testSecurityObjItem.Items2).SelectNested(testSecuritySubObjItem2 => testSecuritySubObjItem2.InnerMaster).SelectNested(testSecurityObjItem => testSecurityObjItem.FirstMaster),
                     fetchRootRule => fetchRootRule.SelectMany(testSecurityObjItem => testSecurityObjItem.Items3));
             }
             else
@@ -2939,11 +2942,11 @@ namespace SampleSystem.BLL
             }
             else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
             {
-                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.TestSecuritySubObjItem2>(fetchRootRule => fetchRootRule.SelectNested(testSecuritySubObjItem2 => testSecuritySubObjItem2.InnerMaster));
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.TestSecuritySubObjItem2>(fetchRootRule => fetchRootRule.SelectNested(testSecuritySubObjItem2 => testSecuritySubObjItem2.InnerMaster).SelectNested(testSecurityObjItem => testSecurityObjItem.FirstMaster));
             }
             else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
             {
-                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.TestSecuritySubObjItem2>(fetchRootRule => fetchRootRule.SelectNested(testSecuritySubObjItem2 => testSecuritySubObjItem2.InnerMaster));
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.TestSecuritySubObjItem2>(fetchRootRule => fetchRootRule.SelectNested(testSecuritySubObjItem2 => testSecuritySubObjItem2.InnerMaster).SelectNested(testSecurityObjItem => testSecurityObjItem.FirstMaster));
             }
             else
             {

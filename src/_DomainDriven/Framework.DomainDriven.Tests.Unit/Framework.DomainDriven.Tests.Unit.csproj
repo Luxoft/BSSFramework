@@ -1,12 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.DomainDriven.Tests.Unit</PackageId>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <ProjectGuid>{6E5D27A8-3D46-488C-A7C2-A65C2AC0B633}</ProjectGuid>
-
-  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="CommonServiceLocator" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
@@ -16,11 +13,13 @@
     <PackageReference Include="Unity" />
     <PackageReference Include="Unity.Interception" />
   </ItemGroup>
+
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="CommonAssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Framework.DomainDriven.Core.LegacyContext\Framework.DomainDriven.Core.LegacyContext.csproj" />
-    <ProjectReference Include="..\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
   </ItemGroup>
+
 </Project>

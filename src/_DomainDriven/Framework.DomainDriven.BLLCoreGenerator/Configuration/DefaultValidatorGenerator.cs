@@ -5,6 +5,7 @@ using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Generation.Domain;
+using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.Persistent;
 using Framework.Restriction;
 using Framework.Validation;
@@ -152,18 +153,18 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
                 return this.GetFixedPropertyValidator(property, fixedPropertyValidatorAttribute);
 
             default:
-            {
-                var autoExpr = this.TryAutoExpandPropertyAttributes(property, attribute);
+                {
+                    var autoExpr = this.TryAutoExpandPropertyAttributes(property, attribute);
 
-                if (autoExpr != null)
-                {
-                    return autoExpr;
+                    if (autoExpr != null)
+                    {
+                        return autoExpr;
+                    }
+                    else
+                    {
+                        throw new ArgumentOutOfRangeException(nameof(attribute));
+                    }
                 }
-                else
-                {
-                    throw new ArgumentOutOfRangeException(nameof(attribute));
-                }
-            }
         }
     }
 
@@ -343,10 +344,10 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
 
         var createTupleExpr = new CodeParameterDeclarationExpression { Name = "source" }.Pipe(param => new CodeLambdaExpression
-            {
-                    Parameters = { param },
+        {
+            Parameters = { param },
 
-                    Statements = { groupElementType.ToTypeReference().ToObjectCreateExpression(
+            Statements = { groupElementType.ToTypeReference().ToObjectCreateExpression(
 
                                         uniProperties.ToArray(prop => param.ToVariableReferenceExpression()
                                                                            .ToPropertyReference(prop)
@@ -355,7 +356,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
                                        ).ToMethodReturnStatement() }
 
-            });
+        });
 
         return internalPropertyValidatorType
                .ToTypeReference()
@@ -371,10 +372,10 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
         var validatorType = typeof(FixedPropertyValidator<,,,>).MakeGenericType(property.ReflectedType, property.PropertyType, identType, this.Configuration.Environment.PersistentDomainObjectBaseType);
 
         var propertyExprLambda = new CodeParameterDeclarationExpression { Name = "source" }.Pipe(p => new CodeLambdaExpression
-            {
-                    Parameters = { p },
-                    Statements = { p.ToVariableReferenceExpression().ToPropertyReference(property) }
-            });
+        {
+            Parameters = { p },
+            Statements = { p.ToVariableReferenceExpression().ToPropertyReference(property) }
+        });
 
         return validatorType.ToTypeReference().ToObjectCreateExpression(propertyExprLambda);
     }
@@ -417,10 +418,10 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
                                                                      domainObjectParameter.ToVariableReferenceExpression().ToPropertyReference(property)));
 
         return new CodeLambdaExpression
-               {
-                       Parameters = { domainObjectParameter },
-                       Statements = { newValuesArrExpr }
-               };
+        {
+            Parameters = { domainObjectParameter },
+            Statements = { newValuesArrExpr }
+        };
     }
 
     private static CodeLambdaExpression GetGetFilterExpression(Type domainObjectType, Type identType, IEnumerable<PropertyInfo> properties)
@@ -448,16 +449,16 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
 
         var duplicateLambda = new CodeLambdaExpression
-                              {
-                                      Parameters = { filterDomainObjectParameter },
-                                      Statements = { duplicateFilter }
-                              };
+        {
+            Parameters = { filterDomainObjectParameter },
+            Statements = { duplicateFilter }
+        };
 
         return new CodeLambdaExpression
-               {
-                       Parameters = { sourceDomainObjectParameter },
-                       Statements = { duplicateLambda }
-               };
+        {
+            Parameters = { sourceDomainObjectParameter },
+            Statements = { duplicateLambda }
+        };
     }
 
     private CodeExpression GetUniDbGroupValidator(UniDBGroupValidatorAttribute attribute)
@@ -491,17 +492,17 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
         var sourceParam = new CodeParameterDeclarationExpression { Name = "source" };
 
         var propertyValidatorDict = uniProperties.ToDictionary(property => property.Name, property => new CodeLambdaExpression
-                                                                   {
-                                                                           Parameters = { sourceParam },
+        {
+            Parameters = { sourceParam },
 
-                                                                           Statements =
+            Statements =
                                                                            {
 
                                                                                    typeof(RequiredHelper).ToTypeReferenceExpression().ToMethodInvokeExpression("IsValid",
                                                                                        sourceParam.ToVariableReferenceExpression().ToPropertyReference(property),
                                                                                        RequiredMode.Default.ToPrimitiveExpression())
                                                                            }
-                                                                   });
+        });
 
 
 

@@ -1,5 +1,4 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.BLL.Tracking;
 using Framework.DomainDriven.DAL.Revisions;
 
 using NHibernate;
@@ -56,11 +55,6 @@ public abstract class NHibSessionBase : INHibSession
 
     /// <inheritdoc />
     public abstract void AsWritable();
-
-    public IObjectStateService GetObjectStateService()
-    {
-        return new NHibObjectStatesService(this.NativeSession);
-    }
 
     public abstract Task CloseAsync(CancellationToken cancellationToken = default);
 

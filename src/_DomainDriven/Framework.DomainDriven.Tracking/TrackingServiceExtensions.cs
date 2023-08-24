@@ -6,7 +6,7 @@ using Framework.Persistent;
 
 using JetBrains.Annotations;
 
-namespace Framework.DomainDriven.BLL.Tracking;
+namespace Framework.DomainDriven.Tracking;
 
 public static class TrackingServiceExtensions
 {

@@ -150,7 +150,7 @@ namespace Framework.Authorization.BLL
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.BusinessRoleOperationLink, Framework.Authorization.Domain.Operation>> GetBusinessRoleOperationLink_OperationValidators()
         {
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.BusinessRoleOperationLink, Framework.Authorization.Domain.Operation>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<Framework.Authorization.Domain.BusinessRoleOperationLink, Framework.Authorization.Domain.Operation, System.Guid, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.Operation);
+            yield return new Framework.DomainDriven.Tracking.LegacyValidators.FixedPropertyValidator<Framework.Authorization.Domain.BusinessRoleOperationLink, Framework.Authorization.Domain.Operation, System.Guid, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.Operation);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Authorization.Domain.BusinessRoleOperationLink>> GetBusinessRoleOperationLinkProperties(Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.BusinessRoleOperationLink> currentClass)
@@ -483,7 +483,7 @@ namespace Framework.Authorization.BLL
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.Permission, Framework.Authorization.Domain.BusinessRole>> GetPermission_RoleValidators()
         {
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.Permission, Framework.Authorization.Domain.BusinessRole>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<Framework.Authorization.Domain.Permission, Framework.Authorization.Domain.BusinessRole, System.Guid, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.Role);
+            yield return new Framework.DomainDriven.Tracking.LegacyValidators.FixedPropertyValidator<Framework.Authorization.Domain.Permission, Framework.Authorization.Domain.BusinessRole, System.Guid, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.Role);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionDirectFilterModel, System.Guid>> GetPermissionDirectFilterModel_EntityIdValidators()
@@ -520,7 +520,7 @@ namespace Framework.Authorization.BLL
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionFilterEntity, System.Guid>> GetPermissionFilterEntity_EntityIdValidators()
         {
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.PermissionFilterEntity, System.Guid>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<Framework.Authorization.Domain.PermissionFilterEntity, System.Guid, System.Guid, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.EntityId);
+            yield return new Framework.DomainDriven.Tracking.LegacyValidators.FixedPropertyValidator<Framework.Authorization.Domain.PermissionFilterEntity, System.Guid, System.Guid, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.EntityId);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionFilterEntity, Framework.Authorization.Domain.EntityType>> GetPermissionFilterEntity_EntityTypeValidators()
@@ -556,7 +556,7 @@ namespace Framework.Authorization.BLL
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionFilterItem, System.Guid>> GetPermissionFilterItem_ContextEntityIdValidators()
         {
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.PermissionFilterItem, System.Guid>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<Framework.Authorization.Domain.PermissionFilterItem, System.Guid, System.Guid, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.ContextEntityId);
+            yield return new Framework.DomainDriven.Tracking.LegacyValidators.FixedPropertyValidator<Framework.Authorization.Domain.PermissionFilterItem, System.Guid, System.Guid, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.ContextEntityId);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionFilterItem, System.DateTime?>> GetPermissionFilterItem_CreateDateValidators()
@@ -572,13 +572,13 @@ namespace Framework.Authorization.BLL
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionFilterItem, Framework.Authorization.Domain.EntityType>> GetPermissionFilterItem_EntityTypeValidators()
         {
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.PermissionFilterItem, Framework.Authorization.Domain.EntityType>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<Framework.Authorization.Domain.PermissionFilterItem, Framework.Authorization.Domain.EntityType, System.Guid, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.EntityType);
+            yield return new Framework.DomainDriven.Tracking.LegacyValidators.FixedPropertyValidator<Framework.Authorization.Domain.PermissionFilterItem, Framework.Authorization.Domain.EntityType, System.Guid, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.EntityType);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionFilterItem, Framework.Authorization.Domain.PermissionFilterEntity>> GetPermissionFilterItem_EntityValidators()
         {
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.PermissionFilterItem, Framework.Authorization.Domain.PermissionFilterEntity>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<Framework.Authorization.Domain.PermissionFilterItem, Framework.Authorization.Domain.PermissionFilterEntity, System.Guid, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.Entity);
+            yield return new Framework.DomainDriven.Tracking.LegacyValidators.FixedPropertyValidator<Framework.Authorization.Domain.PermissionFilterItem, Framework.Authorization.Domain.PermissionFilterEntity, System.Guid, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.Entity);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.PermissionFilterItem, string>> GetPermissionFilterItem_ModifiedByValidators()
@@ -774,7 +774,7 @@ namespace Framework.Authorization.BLL
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<Framework.Authorization.Domain.SubBusinessRoleLink, Framework.Authorization.Domain.BusinessRole>> GetSubBusinessRoleLink_SubBusinessRoleValidators()
         {
             yield return new Framework.Validation.RequiredValidator<Framework.Authorization.Domain.SubBusinessRoleLink, Framework.Authorization.Domain.BusinessRole>(Framework.Restriction.RequiredMode.Default);
-            yield return new Framework.DomainDriven.BLL.FixedPropertyValidator<Framework.Authorization.Domain.SubBusinessRoleLink, Framework.Authorization.Domain.BusinessRole, System.Guid, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.SubBusinessRole);
+            yield return new Framework.DomainDriven.Tracking.LegacyValidators.FixedPropertyValidator<Framework.Authorization.Domain.SubBusinessRoleLink, Framework.Authorization.Domain.BusinessRole, System.Guid, Framework.Authorization.Domain.PersistentDomainObjectBase>(source => source.SubBusinessRole);
         }
         
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<Framework.Authorization.Domain.SubBusinessRoleLink>> GetSubBusinessRoleLinkProperties(Framework.Validation.IClassValidationMap<Framework.Authorization.Domain.SubBusinessRoleLink> currentClass)

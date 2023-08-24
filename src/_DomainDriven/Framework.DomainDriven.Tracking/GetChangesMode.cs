@@ -1,4 +1,4 @@
-﻿namespace Framework.DomainDriven.BLL.Tracking;
+﻿namespace Framework.DomainDriven.Tracking;
 
 /// <summary>
 /// Defines GetChanges method working mode for not persistent objects

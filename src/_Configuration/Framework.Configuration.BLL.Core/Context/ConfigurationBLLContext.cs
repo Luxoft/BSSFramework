@@ -8,7 +8,7 @@ using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Configuration;
 using Framework.SecuritySystem.Rules.Builders;
-using Framework.DomainDriven.BLL.Tracking;
+using Framework.DomainDriven.Tracking;
 using Framework.Exceptions;
 using Framework.HierarchicalExpand;
 using Framework.Notification;
@@ -35,7 +35,7 @@ public partial class ConfigurationBLLContext
     public ConfigurationBLLContext(
             IServiceProvider serviceProvider,
             [NotNull] IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
-            [NotNull] IObjectStateService objectStateService,
+            [NotNull] ITrackingService<PersistentDomainObjectBase> trackingService,
             [NotNull] IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
             [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
             [NotNull] IConfigurationValidator validator,
@@ -50,7 +50,7 @@ public partial class ConfigurationBLLContext
             [NotNull] IEnumerable<ITargetSystemService> targetSystemServices,
             [NotNull] IConfigurationBLLContextSettings settings,
             [NotNull] ICurrentRevisionService currentRevisionService)
-            : base(serviceProvider, operationSenders, objectStateService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
+            : base(serviceProvider, operationSenders, trackingService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
     {
         this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
         this.SubscriptionSender = subscriptionSender ?? throw new ArgumentNullException(nameof(subscriptionSender));

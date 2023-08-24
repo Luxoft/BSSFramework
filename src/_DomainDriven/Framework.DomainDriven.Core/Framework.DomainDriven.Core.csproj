@@ -16,6 +16,7 @@
     <ProjectReference Include="..\..\Framework.Transfering\Framework.Transfering.csproj" />
     <ProjectReference Include="..\..\Framework.Validation\Framework.Validation.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.Serialization\Framework.DomainDriven.Serialization.csproj" />
+    <ProjectReference Include="..\Framework.DomainDriven.Tracking\Framework.DomainDriven.Tracking.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NHibernate" />

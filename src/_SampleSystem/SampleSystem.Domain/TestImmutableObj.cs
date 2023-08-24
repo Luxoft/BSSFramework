@@ -1,4 +1,5 @@
 ﻿using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.Tracking.LegacyValidators;
 
 namespace SampleSystem.Domain;
 

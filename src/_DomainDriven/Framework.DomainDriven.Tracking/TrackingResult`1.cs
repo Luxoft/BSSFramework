@@ -4,9 +4,8 @@ using System.Globalization;
 using System.Linq.Expressions;
 
 using Framework.Core;
-using Framework.Persistent.Mapping;
 
-namespace Framework.DomainDriven.BLL.Tracking;
+namespace Framework.DomainDriven.Tracking;
 
 /// <summary>
 /// Represents modified properties info
@@ -188,11 +187,11 @@ internal static class TrackingResult
     /// </summary>
     /// <param name="source">Domain object</param>
     /// <param name="mode">Mode that defines changes detection algorithm on not persistent objects (that not exist in DB)</param>
-    public static TrackingResult<TDomainObject> Create<TDomainObject>(TDomainObject source, GetChangesMode mode)
+    public static TrackingResult<TDomainObject> Create<TDomainObject>(IPersistentInfoService persistentInfoService, TDomainObject source, GetChangesMode mode)
     {
         var allProperties =
                 typeof(TDomainObject).GetProperties()
-                                     .Where(prop => prop.IsPersistent())
+                                     .Where(persistentInfoService.IsPersistent)
                                      .Select(z => new { Type = z.PropertyType, Value = z.GetValue(source, new object[0]), Name = z.Name })
                                      .Where(z => mode == GetChangesMode.Default || !object.Equals(z.Value, GetDefault(z.Type)))
                                      .Select(z => new TrackingProperty(z.Name, null, z.Value))

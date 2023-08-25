@@ -1,4 +1,5 @@
-﻿using Framework.Persistent.Mapping;
+﻿using Framework.DomainDriven.BLL;
+using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
 namespace Framework.Configuration.Domain;
@@ -7,6 +8,7 @@ namespace Framework.Configuration.Domain;
 /// Сообщение, отправленное пользователю
 /// </summary>
 [NotAuditedClass]
+[BLLRole]
 public class SentMessage : AuditPersistentDomainObjectBase
 {
     private readonly string from;

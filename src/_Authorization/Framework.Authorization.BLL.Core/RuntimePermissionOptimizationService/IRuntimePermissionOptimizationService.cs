@@ -1,4 +1,4 @@
-﻿namespace Framework.Authorization.Domain;
+﻿namespace Framework.Authorization.BLL;
 
 public interface IRuntimePermissionOptimizationService
 {

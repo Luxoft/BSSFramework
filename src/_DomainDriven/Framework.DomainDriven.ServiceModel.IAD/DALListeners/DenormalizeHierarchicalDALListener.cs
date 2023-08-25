@@ -2,7 +2,6 @@
 
 using Framework.Core;
 using Framework.DomainDriven.Lock;
-using Framework.DomainDriven.BLL.Security;
 using Framework.Persistent;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -29,11 +28,11 @@ public class DenormalizeHierarchicalDALListener<TPersistentDomainObjectBase, TNa
         foreach (var typeGroup in eventArgs.Changes.GetSubset(typeof(TPersistentDomainObjectBase)).GroupByType())
         {
             DenormalizeCache.DenormalizeMethods[typeGroup.Key].Maybe(method =>
-            {
-                var values = typeGroup.Value.ToChangeTypeDict().Partial(pair => pair.Value == DALObjectChangeType.Created || pair.Value == DALObjectChangeType.Updated, (modified, removing) => new { Modified = modified, Removing = removing });
+                                                                     {
+                                                                         var values = typeGroup.Value.ToChangeTypeDict().Partial(pair => pair.Value == DALObjectChangeType.Created || pair.Value == DALObjectChangeType.Updated, (modified, removing) => new { Modified = modified, Removing = removing });
 
-                method.Invoke(this, new object[] { values.Modified.Select(z => z.Key).ToArray(typeGroup.Key), values.Removing.Select(z => z.Key).ToArray(typeGroup.Key) });
-            });
+                                                                         method.Invoke(this, new object[] { values.Modified.Select(z => z.Key).ToArray(typeGroup.Key), values.Removing.Select(z => z.Key).ToArray(typeGroup.Key) });
+                                                                     });
         }
     }
 

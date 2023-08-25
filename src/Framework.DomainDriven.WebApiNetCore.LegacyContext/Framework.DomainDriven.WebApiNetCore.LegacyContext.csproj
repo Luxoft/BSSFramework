@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.DomainDriven.WebApiNetCore.LegacyContext</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
+    <ProjectReference Include="..\Framework.DomainDriven.WebApiNetCore\Framework.DomainDriven.WebApiNetCore.csproj" />
+    <ProjectReference Include="..\_Authorization\Framework.Authorization.BLL.Core\Framework.Authorization.BLL.Core.csproj" />
+
+    <ProjectReference Include="..\_Authorization\Framework.Authorization.Generated.DTO\Framework.Authorization.Generated.DTO.csproj" />
+
+    <ProjectReference Include="..\_Configuration\Framework.Configuration.BLL.Core\Framework.Configuration.BLL.Core.csproj" />
+    <ProjectReference Include="..\_Configuration\Framework.Configuration.Generated.DTO\Framework.Configuration.Generated.DTO.csproj" />
+
+    <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.BLL.Security\Framework.DomainDriven.BLL.Security.csproj" />
+    <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.ServiceModel\Framework.DomainDriven.ServiceModel.csproj" />
+  </ItemGroup>
+
+</Project>

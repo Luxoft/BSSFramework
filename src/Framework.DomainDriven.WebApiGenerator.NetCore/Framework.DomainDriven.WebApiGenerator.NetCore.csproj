@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Framework.DomainDriven.WebApiNetCore.LegacyContext\Framework.DomainDriven.WebApiNetCore.LegacyContext.csproj" />
-    <ProjectReference Include="..\Framework.DomainDriven.WebApiNetCore\Framework.DomainDriven.WebApiNetCore.csproj" />
     <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.ServiceModelGenerator\Framework.DomainDriven.ServiceModelGenerator.csproj" />
   </ItemGroup>
 

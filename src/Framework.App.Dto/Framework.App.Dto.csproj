@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.App.Dto</PackageId>
   </PropertyGroup>
 
   <PropertyGroup>
-    <IncludeBuildOutput>false</IncludeBuildOutput>
+  <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
 
   <ItemGroup>

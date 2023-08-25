@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
@@ -26,20 +26,15 @@
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.SerializeMetadata\Framework.DomainDriven.SerializeMetadata.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModel.IAD.LegacyContext\Framework.DomainDriven.ServiceModel.IAD.LegacyContext.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModel\Framework.DomainDriven.ServiceModel.csproj" />
-    <ProjectReference Include="..\SampleSystem.AuditDAL.NHibernate\SampleSystem.AuditDAL.NHibernate.csproj" />
 
     <ProjectReference Include="..\..\Framework.NotificationCore\Framework.NotificationCore.csproj" />
 
+    <ProjectReference Include="..\SampleSystem.AuditDAL.NHibernate\SampleSystem.AuditDAL.NHibernate.csproj" />
     <ProjectReference Include="..\SampleSystem.BLL.Core\SampleSystem.BLL.Core.csproj" />
-
     <ProjectReference Include="..\SampleSystem.BLL\SampleSystem.BLL.csproj" />
-
     <ProjectReference Include="..\SampleSystem.Events\SampleSystem.Events.csproj" />
-
     <ProjectReference Include="..\SampleSystem.Generated.DAL.NHibernate\SampleSystem.Generated.DAL.NHibernate.csproj" />
-
     <ProjectReference Include="..\SampleSystem.Generated.DTO\SampleSystem.Generated.DTO.csproj" />
-
     <ProjectReference Include="..\SampleSystem.Subscriptions.Metadata\SampleSystem.Subscriptions.Metadata.csproj" />
   </ItemGroup>
 

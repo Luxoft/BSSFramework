@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Framework.DomainDriven.WebApiGenerator.NetCore.LegacyContext\Framework.DomainDriven.WebApiGenerator.NetCore.LegacyContext.csproj" />
+    <ProjectReference Include="..\Framework.DomainDriven.WebApiGenerator.NetCore\Framework.DomainDriven.WebApiGenerator.NetCore.csproj" />
 
     <ProjectReference Include="..\_Authorization\Framework.Authorization.TestGenerate\Framework.Authorization.TestGenerate.csproj" />
     <ProjectReference Include="..\_Configuration\Framework.Configuration.TestGenerate\Framework.Configuration.TestGenerate.csproj" />

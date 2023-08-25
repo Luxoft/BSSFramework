@@ -1,5 +1,4 @@
 ﻿using Framework.Core;
-using Framework.DomainDriven.BLL.Configuration;
 using Framework.NotificationCore.Jobs;
 using Framework.NotificationCore.Senders;
 using Framework.NotificationCore.Services;
@@ -7,8 +6,6 @@ using Framework.NotificationCore.Settings;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
-using IConfigurationBLLContext = Framework.Configuration.BLL.IConfigurationBLLContext;
 
 namespace Framework.DependencyInjection;
 

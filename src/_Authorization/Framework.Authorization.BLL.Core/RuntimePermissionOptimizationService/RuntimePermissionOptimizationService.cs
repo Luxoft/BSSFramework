@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
 
-namespace Framework.Authorization.Domain;
+namespace Framework.Authorization.BLL;
 
 public class RuntimePermissionOptimizationService : IRuntimePermissionOptimizationService
 {

@@ -3,7 +3,7 @@
     <PackageId>Luxoft.Framework.App.ServiceEnvironment</PackageId>
   </PropertyGroup>
   <PropertyGroup>
-  <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\_Authorization\Framework.Authorization.Events\Framework.Authorization.Events.csproj" />

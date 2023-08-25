@@ -4,7 +4,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-  <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
 
   <ItemGroup>

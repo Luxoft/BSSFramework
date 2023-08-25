@@ -16,10 +16,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.App.ServiceEnvironment\Framework.App.ServiceEnvironment.csproj" />
-    <ProjectReference Include="..\..\Framework.DomainDriven.WebApiNetCore\Framework.DomainDriven.WebApiNetCore.csproj" />
+    <ProjectReference Include="..\..\Framework.DomainDriven.WebApiNetCore.LegacyContext\Framework.DomainDriven.WebApiNetCore.LegacyContext.csproj" />
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.ApproveWorkflow\Framework.Authorization.ApproveWorkflow.csproj" />
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Notification\Framework.Authorization.Notification.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.NHibernate.LegacyContext\Framework.DomainDriven.NHibernate.LegacyContext.csproj" />
 
     <ProjectReference Include="..\SampleSystem.BLL\SampleSystem.BLL.csproj" />
     <ProjectReference Include="..\SampleSystem.Events\SampleSystem.Events.csproj" />

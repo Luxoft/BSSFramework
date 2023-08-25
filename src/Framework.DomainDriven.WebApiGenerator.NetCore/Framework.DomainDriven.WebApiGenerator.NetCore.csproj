@@ -1,15 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.DomainDriven.WebApiGenerator.NetCore</PackageId>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\Framework.DomainDriven.WebApiNetCore\Framework.DomainDriven.WebApiNetCore.csproj" />
+    <ProjectReference Include="..\Framework.DomainDriven.WebApiNetCore.LegacyContext\Framework.DomainDriven.WebApiNetCore.LegacyContext.csproj" />
     <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.ServiceModelGenerator\Framework.DomainDriven.ServiceModelGenerator.csproj" />
   </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" />
   </ItemGroup>
+
 </Project>

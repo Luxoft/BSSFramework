@@ -1,6 +1,4 @@
-﻿using Framework.Exceptions;
-
-namespace Framework.Notification;
+﻿namespace Framework.Exceptions;
 
 /// <summary>
 /// Сервис обработки исключений в рамках скоупа

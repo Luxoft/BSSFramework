@@ -37,7 +37,7 @@ jobs:
       - name: Build
         working-directory: ./src
         run: |
-          dotnet build ./IAD.Framework.LegacyContext.sln --no-restore
+          dotnet build ./IAD.Framework.sln --no-restore
 
       - name: Integration Tests
         run: |

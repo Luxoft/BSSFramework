@@ -725,6 +725,16 @@ namespace Framework.Configuration.BLL
             get;
         }
         
+        Framework.Configuration.BLL.ISentMessageBLL SentMessage
+        {
+            get;
+        }
+        
+        Framework.Configuration.BLL.ISentMessageBLLFactory SentMessageFactory
+        {
+            get;
+        }
+        
         Framework.Configuration.BLL.ISequenceBLL Sequence
         {
             get;
@@ -841,6 +851,14 @@ namespace Framework.Configuration.BLL
     }
     
     public partial interface IReportPropertyBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IReportPropertyBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Reports.ReportProperty>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IReportPropertyBLL, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IReportPropertyBLL, Framework.SecuritySystem.SecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IReportPropertyBLL, Framework.SecuritySystem.BLLSecurityMode>
+    {
+    }
+    
+    public partial interface ISentMessageBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.SentMessage, System.Guid>
+    {
+    }
+    
+    public partial interface ISentMessageBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ISentMessageBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.SentMessage>>
     {
     }
     

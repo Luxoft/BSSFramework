@@ -1,21 +1,20 @@
-﻿using Framework.Core;
+﻿using Framework.Configuration.BLL;
+using Framework.Core;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL.Configuration;
 using Framework.Notification;
 
 using JetBrains.Annotations;
 
 namespace Framework.NotificationCore.Jobs;
 
-public class SendNotificationsJob<TBLLContext> : ISendNotificationsJob
-        where TBLLContext: IConfigurationBLLContextContainer<Framework.Configuration.BLL.IConfigurationBLLContext>
+public class SendNotificationsJob : ISendNotificationsJob
 {
-    private readonly IContextEvaluator<TBLLContext> contextEvaluator;
+    private readonly IContextEvaluator<IConfigurationBLLContext> contextEvaluator;
 
     private readonly IExceptionStorage exceptionStorage;
 
     public SendNotificationsJob(
-            [NotNull] IContextEvaluator<TBLLContext> contextEvaluator,
+            [NotNull] IContextEvaluator<IConfigurationBLLContext> contextEvaluator,
             [NotNull] IExceptionStorage exceptionStorage = null)
     {
         this.contextEvaluator = contextEvaluator ?? throw new ArgumentNullException(nameof(contextEvaluator));
@@ -27,7 +26,7 @@ public class SendNotificationsJob<TBLLContext> : ISendNotificationsJob
         var result = this.contextEvaluator.Evaluate(
                                                     DBSessionMode.Write,
                                                     // todo: нужен рефакторинг - хотим разделить создание и отправку нотификаций, а то сейчас всё в кучу свалено
-                                                    z => z.Configuration.Logics.DomainObjectModification.Process());
+                                                    context => context.Logics.DomainObjectModification.Process());
 
         if (this.exceptionStorage != null)
         {

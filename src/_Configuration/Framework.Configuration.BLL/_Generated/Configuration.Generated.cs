@@ -242,6 +242,27 @@ namespace Framework.Configuration.BLL
         }
     }
     
+    public partial class SentMessageBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.SentMessage, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.ISentMessageBLL
+    {
+        
+		partial void Initialize();
+        
+        public SentMessageBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.SentMessage> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
+                base(context, securityProvider, specificationEvaluator)
+        {
+            this.Initialize();
+        }
+    }
+    
+    public partial class SentMessageBLLFactory : Framework.DomainDriven.BLL.Security.BLLFactoryBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.ISentMessageBLL, Framework.Configuration.BLL.SentMessageBLL, Framework.Configuration.Domain.SentMessage>, Framework.Configuration.BLL.ISentMessageBLLFactory
+    {
+        
+        public SentMessageBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
+                base(context)
+        {
+        }
+    }
+    
     public partial class SequenceBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.Sequence, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.ISequenceBLL
     {
         
@@ -333,6 +354,8 @@ namespace Framework.Configuration.BLL
         private Framework.Configuration.BLL.IReportParameterBLL reportParameterBLL;
         
         private Framework.Configuration.BLL.IReportPropertyBLL reportPropertyBLL;
+        
+        private Framework.Configuration.BLL.ISentMessageBLL sentMessageBLL;
         
         private Framework.Configuration.BLL.ISequenceBLL sequenceBLL;
         
@@ -589,6 +612,26 @@ namespace Framework.Configuration.BLL
             }
         }
         
+        public Framework.Configuration.BLL.ISentMessageBLL SentMessage
+        {
+            get
+            {
+                if (object.ReferenceEquals(this.sentMessageBLL, null))
+                {
+                    this.sentMessageBLL = this.SentMessageFactory.Create();
+                }
+                return this.sentMessageBLL;
+            }
+        }
+        
+        public Framework.Configuration.BLL.ISentMessageBLLFactory SentMessageFactory
+        {
+            get
+            {
+                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Framework.Configuration.BLL.ISentMessageBLLFactory>(this.Context.ServiceProvider);
+            }
+        }
+        
         public Framework.Configuration.BLL.ISequenceBLL Sequence
         {
             get
@@ -662,6 +705,7 @@ namespace Framework.Configuration.BLL
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IReportFilterBLLFactory, Framework.Configuration.BLL.ReportFilterBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IReportParameterBLLFactory, Framework.Configuration.BLL.ReportParameterBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IReportPropertyBLLFactory, Framework.Configuration.BLL.ReportPropertyBLLFactory>(serviceCollection);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ISentMessageBLLFactory, Framework.Configuration.BLL.SentMessageBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ISequenceBLLFactory, Framework.Configuration.BLL.SequenceBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ISystemConstantBLLFactory, Framework.Configuration.BLL.SystemConstantBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ITargetSystemBLLFactory, Framework.Configuration.BLL.TargetSystemBLLFactory>(serviceCollection);
@@ -736,6 +780,10 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ReportProperty));
             }
+            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SentMessage)))
+            {
+                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SentMessage));
+            }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Sequence)))
             {
                 return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.Sequence));
@@ -799,6 +847,10 @@ namespace Framework.Configuration.BLL
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.ReportProperty)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ReportPropertyFactory.Create(((Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Reports.ReportProperty>)(securityProvider)))));
+            }
+            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SentMessage)))
+            {
+                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SentMessageFactory.Create()));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Sequence)))
             {
@@ -864,6 +916,10 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ReportPropertyFactory.Create(securityOperation)));
             }
+            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SentMessage)))
+            {
+                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SentMessageFactory.Create()));
+            }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Sequence)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SequenceFactory.Create(securityOperation)));
@@ -927,6 +983,10 @@ namespace Framework.Configuration.BLL
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.ReportProperty)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ReportPropertyFactory.Create(bllSecurityMode)));
+            }
+            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SentMessage)))
+            {
+                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SentMessageFactory.Create()));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Sequence)))
             {

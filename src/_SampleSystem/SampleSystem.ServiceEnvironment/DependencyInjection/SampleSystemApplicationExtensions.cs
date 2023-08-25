@@ -41,7 +41,7 @@ public static class SampleSystemApplicationExtensions
 
     private static IServiceCollection RegisterSmtpNotification(this IServiceCollection services, IConfiguration configuration)
     {
-        services.RegisterNotificationJob<ISampleSystemBLLContext>();
+        services.RegisterNotificationJob();
         services.RegisterNotificationSmtp(configuration);
         services.RegisterRewriteReceiversDependencies(configuration);
 

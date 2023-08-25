@@ -1,17 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.App.Sdk</PackageId>
   </PropertyGroup>
+
   <PropertyGroup>
-  <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\Framework.DomainDriven.WebApiGenerator.NetCore\Framework.DomainDriven.WebApiGenerator.NetCore.csproj" />
+    <ProjectReference Include="..\Framework.DomainDriven.WebApiGenerator.NetCore.LegacyContext\Framework.DomainDriven.WebApiGenerator.NetCore.LegacyContext.csproj" />
 
     <ProjectReference Include="..\_Authorization\Framework.Authorization.TestGenerate\Framework.Authorization.TestGenerate.csproj" />
     <ProjectReference Include="..\_Configuration\Framework.Configuration.TestGenerate\Framework.Configuration.TestGenerate.csproj" />
     <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.ProjectionGenerator\Framework.DomainDriven.ProjectionGenerator.csproj" />
-
-
   </ItemGroup>
+
 </Project>

@@ -1,11 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.App.Events</PackageId>
   </PropertyGroup>
+
   <PropertyGroup>
-  <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.ServiceModel.IAD.LegacyContext\Framework.DomainDriven.ServiceModel.IAD.LegacyContext.csproj" />
   </ItemGroup>
+
 </Project>

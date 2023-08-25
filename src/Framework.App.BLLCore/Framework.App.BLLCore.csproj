@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.App.BLLCore</PackageId>
   </PropertyGroup>
@@ -6,7 +7,9 @@
   <PropertyGroup>
     <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\_Configuration\Framework.Configuration.BLL.Core\Framework.Configuration.BLL.Core.csproj" />
   </ItemGroup>
+
 </Project>

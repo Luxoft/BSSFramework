@@ -12,8 +12,6 @@ using NHibernate;
 using NHibernate.Event;
 using NHibernate.Impl;
 
-using IsolationLevel = System.Transactions.IsolationLevel;
-
 namespace Framework.DomainDriven.NHibernate;
 
 public class WriteNHibSession : NHibSessionBase
@@ -168,15 +166,6 @@ public class WriteNHibSession : NHibSessionBase
 
         return dbCommand.Transaction;
     }
-
-    private TransactionScope CreateTransactionScope() =>
-            new(
-                TransactionScopeOption.Required,
-                new TransactionOptions
-                {
-                        Timeout = this.Environment.TransactionTimeout,
-                        IsolationLevel = IsolationLevel.Serializable
-                });
 
     public override async Task FlushAsync(CancellationToken cancellationToken = default)
     {

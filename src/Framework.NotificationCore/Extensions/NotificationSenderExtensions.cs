@@ -14,10 +14,9 @@ namespace Framework.DependencyInjection;
 
 public static class NotificationSenderExtensions
 {
-    public static void RegisterNotificationJob<TBLLContext>(this IServiceCollection services)
-        where TBLLContext : IConfigurationBLLContextContainer<IConfigurationBLLContext>
+    public static void RegisterNotificationJob(this IServiceCollection services)
     {
-        services.AddScoped<ISendNotificationsJob, SendNotificationsJob<TBLLContext>>();
+        services.AddScoped<ISendNotificationsJob, SendNotificationsJob>();
     }
 
     public static void RegisterNotificationSmtp(this IServiceCollection services, IConfiguration configuration)
@@ -30,8 +29,8 @@ public static class NotificationSenderExtensions
     /// Дефолтный сервис по подмене получателей нотификаций. Работает на основе конфигурации RewriteReceiversSettings
     /// </summary>
     public static void RegisterRewriteReceiversDependencies(
-        this IServiceCollection services,
-        IConfiguration configuration)
+            this IServiceCollection services,
+            IConfiguration configuration)
     {
         services.Configure<RewriteReceiversSettings>(configuration.GetSection("RewriteReceiversSettings"));
         services.AddSingleton<IRewriteReceiversService, RewriteReceiversService>();

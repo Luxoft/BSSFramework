@@ -22,7 +22,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Framework.App.Events\Framework.App.Events.csproj" />
     <ProjectReference Include="..\_Configuration\Framework.Configuration.BLL.Core\Framework.Configuration.BLL.Core.csproj" />
-    <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.BLL.Configuration\Framework.DomainDriven.BLL.Configuration.csproj" />
     <ProjectReference Include="..\_DomainDriven\Framework.Notification.DTO\Framework.Notification.DTO.csproj" />
   </ItemGroup>
 

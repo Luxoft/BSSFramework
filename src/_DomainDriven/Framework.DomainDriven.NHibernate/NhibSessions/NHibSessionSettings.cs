@@ -1,16 +1,16 @@
 ﻿using Framework.Core.Services;
 using Framework.DomainDriven.Audit;
 
-using JetBrains.Annotations;
+
 
 namespace Framework.DomainDriven.NHibernate;
 
 public class NHibSessionSettings : INHibSessionSetup
 {
-    [NotNull]
+    
     private readonly IUserAuthenticationService userAuthenticationService;
 
-    [NotNull]
+    
     private readonly IDateTimeService dateTimeService;
 
     public NHibSessionSettings(

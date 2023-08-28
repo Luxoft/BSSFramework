@@ -1,6 +1,6 @@
 ﻿using Framework.SecuritySystem;
 
-using JetBrains.Annotations;
+
 
 namespace Framework.DomainDriven.Repository;
 
@@ -18,7 +18,7 @@ public class GenericRepositoryFactory<TDomainObject, TIdent, TSecurityOperationC
     public GenericRepositoryFactory(
         IServiceProvider serviceProvider,
         INotImplementedDomainSecurityServiceContainer notImplementedDomainSecurityServiceContainer,
-        [CanBeNull] IDomainSecurityService<TDomainObject, TSecurityOperationCode> domainSecurityService = null)
+        IDomainSecurityService<TDomainObject, TSecurityOperationCode> domainSecurityService = null)
         : base(serviceProvider, notImplementedDomainSecurityServiceContainer, domainSecurityService)
     {
     }

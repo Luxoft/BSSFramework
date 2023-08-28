@@ -2,8 +2,6 @@
 
 using Framework.DomainDriven;
 
-using JetBrains.Annotations;
-
 using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +11,6 @@ using SampleSystem.BLL.Core.IntegrationEvens;
 
 namespace SampleSystem.WebApiCore;
 
-[PublicAPI]
 public class CapIntegrationController
 {
     private readonly IMediator mediator;

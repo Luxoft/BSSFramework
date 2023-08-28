@@ -4,7 +4,7 @@ using Framework.Core;
 using Framework.Persistent;
 using Framework.Security;
 
-using JetBrains.Annotations;
+
 
 namespace Framework.Projection.Lambda;
 
@@ -76,7 +76,7 @@ internal class GeneratedType : BaseTypeImpl
                                         && !this.environment.UseDependencySecurity
                                         && this.Projection.SourceType.HasSecurityNodeInterfaces();
 
-    [NotNull]
+    
     public override Type BaseType =>
 
             this.isPersistent ? this.HasBaseSecurityType ? this.environment.GetSecurityProjectionType(this.SourceType) : this.environment.PersistentDomainObjectBaseType

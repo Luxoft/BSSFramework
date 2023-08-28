@@ -21,7 +21,7 @@
 //        internal readonly SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> Factory;
 
 //        protected SecurityExpressionBuilderBase(
-//            [JetBrains.Annotations.NotNull] SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory)
+//            SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory)
 //        {
 //            this.Factory = factory ?? throw new ArgumentNullException(nameof(factory));
 //        }
@@ -65,7 +65,7 @@
 //    {
 //        protected readonly TPath Path;
 
-//        protected SecurityExpressionBuilderBase([JetBrains.Annotations.NotNull] SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory,
+//        protected SecurityExpressionBuilderBase(SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory,
 //                                                TPath path) : base(factory)
 //        {
 //            this.Path = path ?? throw new ArgumentNullException(nameof(path));

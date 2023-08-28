@@ -1,6 +1,6 @@
 ﻿using Framework.SecuritySystem;
 
-using JetBrains.Annotations;
+
 
 namespace Framework.DomainDriven.Repository;
 
@@ -18,7 +18,7 @@ public class RepositoryFactory<TDomainObject, TSecurityOperationCode> : Template
     public RepositoryFactory(
         IServiceProvider serviceProvider,
         INotImplementedDomainSecurityServiceContainer notImplementedDomainSecurityServiceContainer,
-        [CanBeNull] IDomainSecurityService<TDomainObject, TSecurityOperationCode> domainSecurityService = null)
+        IDomainSecurityService<TDomainObject, TSecurityOperationCode> domainSecurityService = null)
         : base(serviceProvider, notImplementedDomainSecurityServiceContainer, domainSecurityService)
     {
     }
@@ -35,7 +35,7 @@ public class RepositoryFactory<TDomainObject> : TemplateRepositoryFactory<
     public RepositoryFactory(
         IServiceProvider serviceProvider,
         INotImplementedDomainSecurityServiceContainer notImplementedDomainSecurityServiceContainer,
-        [CanBeNull] IDomainSecurityService<TDomainObject> domainSecurityService = null)
+        IDomainSecurityService<TDomainObject> domainSecurityService = null)
         : base(serviceProvider, notImplementedDomainSecurityServiceContainer, domainSecurityService)
     {
     }

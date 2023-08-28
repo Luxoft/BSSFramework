@@ -2,7 +2,7 @@
 using Framework.Configuration.Domain;
 using Framework.Notification;
 
-using JetBrains.Annotations;
+
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 
@@ -67,7 +67,6 @@ public abstract class GenerationLambdaProcessorBase<TBLLContext> : LambdaProcess
     /// <param name="subscription">Подписка.</param>
     /// <param name="versions">Версии доменного объекта.</param>
     /// <returns>Результат вызова лямбда-выражения.</returns>
-    [UsedImplicitly]
     protected IEnumerable<NotificationMessageGenerationInfo> InvokeWithTypedContext<T>(
             Subscription subscription,
             DomainObjectVersions<T> versions)

@@ -5,8 +5,6 @@ using Automation.ServiceEnvironment.Services;
 using Framework.Core;
 using Framework.DomainDriven.WebApiNetCore;
 
-using JetBrains.Annotations;
-
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -86,7 +84,7 @@ public class ControllerEvaluator<TController>
         context.Items["Result"] = res;
     }
 
-    public ControllerEvaluator<TController> WithImpersonate([CanBeNull] string newCustomPrincipalName)
+    public ControllerEvaluator<TController> WithImpersonate(string newCustomPrincipalName)
     {
         return new ControllerEvaluator<TController>(this.rootServiceProvider, newCustomPrincipalName);
     }

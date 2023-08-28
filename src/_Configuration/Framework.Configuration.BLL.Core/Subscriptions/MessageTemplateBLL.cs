@@ -10,7 +10,7 @@ using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.Notification;
 
-using JetBrains.Annotations;
+
 
 using MAttachment = System.Net.Mail.Attachment;
 
@@ -279,7 +279,6 @@ public class MessageTemplateBLL : BLLContextContainer<IConfigurationBLLContext>
         return result;
     }
 
-    [UsedImplicitly]
     private IRazorTemplate GetRazorTemplate<TSourceDomainObjectType, TModelObjectType>(MessageTemplateNotification messageTemplate)
             where TModelObjectType : class
     {

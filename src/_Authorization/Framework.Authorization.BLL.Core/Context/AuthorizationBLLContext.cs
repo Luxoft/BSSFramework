@@ -14,7 +14,7 @@ using Framework.Projection;
 using Framework.QueryLanguage;
 using Framework.SecuritySystem;
 
-using JetBrains.Annotations;
+
 using Framework.Authorization.Notification;
 
 namespace Framework.Authorization.BLL;
@@ -121,7 +121,7 @@ public partial class AuthorizationBLLContext
 
     public Principal CurrentPrincipal => this.lazyCurrentPrincipal.Value;
 
-    [NotNull]
+    
     public IDateTimeService DateTimeService { get; }
 
     public ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory { get; }

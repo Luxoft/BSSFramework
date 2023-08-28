@@ -71,7 +71,7 @@ public abstract class NonContextDomainSecurityService<TPersistentDomainObjectBas
 {
     private readonly IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer;
 
-    [NotNull]
+    
     private readonly IAuthorizationSystem<TIdent> authorizationSystem;
 
     private readonly IDictionaryCache<NonContextSecurityOperation<TSecurityOperationCode>, ISecurityProvider<TDomainObject>> providersCache;

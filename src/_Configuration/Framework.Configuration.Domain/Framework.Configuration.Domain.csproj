@@ -9,26 +9,11 @@
   </ItemGroup>
 
   <ItemGroup>
-
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
-
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Tracking.LegacyValidators\Framework.DomainDriven.Tracking.LegacyValidators.csproj" />
-
-    <ProjectReference Include="..\Framework.Configuration.Core\Framework.Configuration.Core.csproj" />
-
-    <!-- LegacyAttributes -->
-
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Core.LegacyAttributes\Framework.DomainDriven.Core.LegacyAttributes.csproj" />
-
-    <ProjectReference Include="..\Framework.Configuration.LegacyAttributes\Framework.Configuration.LegacyAttributes.csproj" />
-
-    <ProjectReference Include="..\..\Framework.Persistent.LegacyContext\Framework.Persistent.LegacyContext.csproj" />
     <ProjectReference Include="..\..\Framework.Persistent.Mapping.Audit\Framework.Persistent.Mapping.Audit.csproj" />
-    <ProjectReference Include="..\..\Framework.Persistent.Mapping\Framework.Persistent.Mapping.csproj" />
-    <ProjectReference Include="..\..\Framework.Restriction\Framework.Restriction.csproj" />
-    <ProjectReference Include="..\..\Framework.Validation\Framework.Validation.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL.Security\Framework.DomainDriven.BLL.Security.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL\Framework.DomainDriven.BLL.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Tracking.LegacyValidators\Framework.DomainDriven.Tracking.LegacyValidators.csproj" />
+
     <ProjectReference Include="..\Framework.Configuration.Core\Framework.Configuration.Core.csproj" />
     <ProjectReference Include="..\Framework.Configuration.LegacyAttributes\Framework.Configuration.LegacyAttributes.csproj" />
   </ItemGroup>

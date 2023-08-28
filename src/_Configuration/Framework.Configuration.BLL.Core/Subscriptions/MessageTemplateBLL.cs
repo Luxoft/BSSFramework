@@ -8,7 +8,6 @@ using Framework.Configuration.Domain;
 using Framework.Configuration.SubscriptionModeling;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.DAL.Revisions;
 using Framework.Notification;
 
 using JetBrains.Annotations;

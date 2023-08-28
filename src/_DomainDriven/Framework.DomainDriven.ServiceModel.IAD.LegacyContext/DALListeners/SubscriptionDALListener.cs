@@ -2,8 +2,6 @@
 using Framework.Core;
 using Framework.DomainDriven.ServiceModel.Subscriptions;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
 public class SubscriptionDALListener : IBeforeTransactionCompletedDALListener
@@ -12,7 +10,7 @@ public class SubscriptionDALListener : IBeforeTransactionCompletedDALListener
 
     private readonly IStandardSubscriptionService subscriptionService;
 
-    public SubscriptionDALListener([NotNull] IPersistentTargetSystemService targetSystemService, [NotNull] IStandardSubscriptionService subscriptionService)
+    public SubscriptionDALListener(IPersistentTargetSystemService targetSystemService, IStandardSubscriptionService subscriptionService)
     {
         this.targetSystemService = targetSystemService ?? throw new ArgumentNullException(nameof(targetSystemService));
         this.subscriptionService = subscriptionService ?? throw new ArgumentNullException(nameof(subscriptionService));

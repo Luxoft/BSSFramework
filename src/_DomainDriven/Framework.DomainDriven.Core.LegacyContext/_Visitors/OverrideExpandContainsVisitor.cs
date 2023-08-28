@@ -4,8 +4,6 @@ using System.Reflection;
 using Framework.Core;
 using Framework.HierarchicalExpand;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.BLL;
 
 internal class OverrideExpandContainsVisitor<TBLLContext, TIdent> : ExpressionVisitor
@@ -17,7 +15,7 @@ internal class OverrideExpandContainsVisitor<TBLLContext, TIdent> : ExpressionVi
     private readonly PropertyInfo idProperty;
 
 
-    public OverrideExpandContainsVisitor([NotNull] TBLLContext context, PropertyInfo idProperty)
+    public OverrideExpandContainsVisitor(TBLLContext context, PropertyInfo idProperty)
     {
         this.context = context ?? throw new ArgumentNullException(nameof(context));
         this.idProperty = idProperty;

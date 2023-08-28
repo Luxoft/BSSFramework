@@ -2,8 +2,6 @@
 
 using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.Persistent;
 
 public static class TypeExtensions
@@ -40,7 +38,7 @@ public static class TypeExtensions
                select propertyGroup.Count() == 1 ? propertyGroup.Single() : propertyGroup.Single(property => property.HasPrivateField());
     }
 
-    public static Guid GetTargetSystemId([NotNull] this Type type)
+    public static Guid GetTargetSystemId(this Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
@@ -49,7 +47,7 @@ public static class TypeExtensions
                    : type.GetCustomAttribute<TargetSystemAttribute>().Maybe(attr => attr.Id);
     }
 
-    public static string GetTargetSystemName([NotNull] this Type type)
+    public static string GetTargetSystemName(this Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 

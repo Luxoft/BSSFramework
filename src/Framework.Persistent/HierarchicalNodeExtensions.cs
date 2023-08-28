@@ -1,10 +1,8 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.Persistent;
+﻿namespace Framework.Persistent;
 
 public static class HierarchicalNodeExtensions
 {
-    public static List<HierarchicalNode<TResult, TIdent>> ToList<TSource, TResult, TIdent>([NotNull] this IEnumerable<HierarchicalNode<TSource, TIdent>> source, [NotNull] Func<TSource, TResult> selector)
+    public static List<HierarchicalNode<TResult, TIdent>> ToList<TSource, TResult, TIdent>(this IEnumerable<HierarchicalNode<TSource, TIdent>> source, Func<TSource, TResult> selector)
             where TResult : IIdentityObject<TIdent>
             where TSource : IIdentityObject<TIdent>
     {

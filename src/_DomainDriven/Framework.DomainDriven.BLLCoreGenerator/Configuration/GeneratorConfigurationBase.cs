@@ -15,8 +15,6 @@ using Framework.SecuritySystem;
 using Framework.Transfering;
 using Framework.Validation;
 
-using JetBrains.Annotations;
-
 #pragma warning disable S100 // Methods and properties should be named in camel case
 namespace Framework.DomainDriven.BLLCoreGenerator;
 
@@ -677,7 +675,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         return true;
     }
 
-    public virtual bool GenerateDomainServiceConstructor([NotNull] Type domainType)
+    public virtual bool GenerateDomainServiceConstructor(Type domainType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
 

@@ -12,8 +12,6 @@ using Framework.Notification.New;
 using Framework.UnitTesting;
 using Framework.Validation;
 
-using JetBrains.Annotations;
-
 using NSubstitute;
 
 using NUnit.Framework;
@@ -178,10 +176,10 @@ public sealed class ExceptionMessageSenderTests : TestFixtureBase
         private IEnumerable<Type> exceptTypes;
 
         public TestingExceptionMessageSender(
-                [NotNull] IConfigurationBLLContext context,
-                [NotNull] IMessageSender<Message> messageSender,
-                [NotNull] MailAddress fromAddress,
-                [NotNull] IEnumerable<string> toAddresses)
+                IConfigurationBLLContext context,
+                IMessageSender<Message> messageSender,
+                MailAddress fromAddress,
+                IEnumerable<string> toAddresses)
                 : base(context, messageSender, fromAddress, toAddresses)
         {
         }

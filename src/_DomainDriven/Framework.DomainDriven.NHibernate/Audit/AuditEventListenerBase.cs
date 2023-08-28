@@ -1,8 +1,6 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.Audit;
 
-using JetBrains.Annotations;
-
 using NHibernate.Event;
 using NHibernate.Persister.Entity;
 
@@ -15,7 +13,7 @@ public abstract class AuditEventListenerBase
     private readonly IDictionaryCache<IEntityPersister, Action<AbstractPreDatabaseOperationEvent, object[]>> _setCache;
 
 
-    protected AuditEventListenerBase([NotNull] IEnumerable<IAuditProperty> auditProperties)
+    protected AuditEventListenerBase(IEnumerable<IAuditProperty> auditProperties)
     {
         if (auditProperties == null) throw new ArgumentNullException(nameof(auditProperties));
 

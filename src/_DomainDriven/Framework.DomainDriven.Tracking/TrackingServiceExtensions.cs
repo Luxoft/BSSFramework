@@ -4,15 +4,13 @@ using System.Reflection;
 using Framework.Core;
 using Framework.Persistent;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.Tracking;
 
 public static class TrackingServiceExtensions
 {
     public static IEnumerable<TRemovedItem> GetRemovedItems<TPersistentDomainObjectBase, TDomainObject, TRemovedItem>(
-            [NotNull] this ITrackingService<TPersistentDomainObjectBase> trackingService,
-            [NotNull] TDomainObject source)
+            this ITrackingService<TPersistentDomainObjectBase> trackingService,
+            TDomainObject source)
             where TPersistentDomainObjectBase : class
             where TDomainObject : class, TPersistentDomainObjectBase
             where TRemovedItem : class, TPersistentDomainObjectBase
@@ -35,7 +33,7 @@ public static class TrackingServiceExtensions
             return typeof(TDomainObject).GetPropertyPaths(typeof(TRemovedItem)).Select(GetSourceFunc).Sum();
         }
 
-        private static Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>> GetSourceFunc([NotNull] PropertyPath propertyPath)
+        private static Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>> GetSourceFunc(PropertyPath propertyPath)
         {
             if (propertyPath == null) throw new ArgumentNullException(nameof(propertyPath));
 
@@ -59,7 +57,7 @@ public static class TrackingServiceExtensions
             }
         }
 
-        private static Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>> GetSourceFuncDirect<TDetail>([NotNull] PropertyPath propertyPath, [NotNull] Expression<Func<TDomainObject, IEnumerable<TDetail>>> propertyExpression)
+        private static Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>> GetSourceFuncDirect<TDetail>(PropertyPath propertyPath, Expression<Func<TDomainObject, IEnumerable<TDetail>>> propertyExpression)
         {
             if (propertyPath == null) throw new ArgumentNullException(nameof(propertyPath));
             if (propertyExpression == null) throw new ArgumentNullException(nameof(propertyExpression));
@@ -84,7 +82,7 @@ public static class TrackingServiceExtensions
         }
 
 
-        private static Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>> GetSourceFuncSubMerge<TDetail>([NotNull] PropertyPath propertyPath, [NotNull] Expression<Func<TDomainObject, IEnumerable<TDetail>>> propertyExpression)
+        private static Func<ITrackingService<TPersistentDomainObjectBase>, TDomainObject, IEnumerable<TRemovedItem>> GetSourceFuncSubMerge<TDetail>(PropertyPath propertyPath, Expression<Func<TDomainObject, IEnumerable<TDetail>>> propertyExpression)
                 where TDetail : class, TPersistentDomainObjectBase
         {
             if (propertyPath == null) throw new ArgumentNullException(nameof(propertyPath));
@@ -113,7 +111,7 @@ public static class TrackingServiceExtensions
 
 
 
-    private static IEnumerable<PropertyPath> GetPropertyPaths([NotNull] this Type sourceType, [NotNull] Type targetType)
+    private static IEnumerable<PropertyPath> GetPropertyPaths(this Type sourceType, Type targetType)
     {
         if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
         if (targetType == null) throw new ArgumentNullException(nameof(targetType));
@@ -123,7 +121,7 @@ public static class TrackingServiceExtensions
                          .SelectMany(prop => prop.GetPropertyPaths(targetType));
     }
 
-    private static IEnumerable<PropertyPath> GetPropertyPaths([NotNull] this PropertyInfo propertyInfo, [NotNull] Type targetType)
+    private static IEnumerable<PropertyPath> GetPropertyPaths(this PropertyInfo propertyInfo, Type targetType)
     {
         if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
         if (targetType == null) throw new ArgumentNullException(nameof(targetType));
@@ -144,7 +142,7 @@ public static class TrackingServiceExtensions
     }
 
 
-    internal static Func<IEnumerable<TSource>, IEnumerable<TElement>> GetAllElements<TSource, TElement>([NotNull] this PropertyPath propertyPath)
+    internal static Func<IEnumerable<TSource>, IEnumerable<TElement>> GetAllElements<TSource, TElement>(this PropertyPath propertyPath)
     {
         if (propertyPath == null) throw new ArgumentNullException(nameof(propertyPath));
 
@@ -153,7 +151,7 @@ public static class TrackingServiceExtensions
         return (Func<IEnumerable<TSource>, IEnumerable<TElement>>)baseSource;
     }
 
-    internal static Delegate GetAllElements([NotNull] this PropertyPath propertyPath)
+    internal static Delegate GetAllElements(this PropertyPath propertyPath)
     {
         if (propertyPath == null) throw new ArgumentNullException(nameof(propertyPath));
 

@@ -4,13 +4,11 @@ using Framework.Authorization.Generated.DTO;
 using Framework.Core;
 using Framework.Events;
 
-using JetBrains.Annotations;
-
 namespace Framework.Authorization.Events;
 
 public class AuthorizationEventDTOMessageSender : EventDTOMessageSender<IAuthorizationBLLContext, PersistentDomainObjectBase, EventDTOBase>
 {
-    public AuthorizationEventDTOMessageSender(IAuthorizationBLLContext context, [NotNull] IMessageSender<EventDTOBase> messageSender)
+    public AuthorizationEventDTOMessageSender(IAuthorizationBLLContext context, IMessageSender<EventDTOBase> messageSender)
             : base(context, messageSender)
     {
     }

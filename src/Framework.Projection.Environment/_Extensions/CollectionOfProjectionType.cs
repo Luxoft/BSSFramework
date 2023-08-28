@@ -2,8 +2,6 @@
 
 using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.Projection;
 
 internal class CollectionOfProjectionType : BaseTypeImpl
@@ -13,7 +11,7 @@ internal class CollectionOfProjectionType : BaseTypeImpl
     private readonly Type checkCollectionBlankType;
     private readonly Type elementType;
 
-    public CollectionOfProjectionType([NotNull] Type originalType)
+    public CollectionOfProjectionType(Type originalType)
     {
         this.originalType = originalType ?? throw new ArgumentNullException(nameof(originalType));
 

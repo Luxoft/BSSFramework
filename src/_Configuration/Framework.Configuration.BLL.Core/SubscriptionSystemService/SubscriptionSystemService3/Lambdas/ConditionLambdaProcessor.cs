@@ -32,7 +32,7 @@ public class ConditionLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLContext
     /// или
     /// versions равен null.
     /// </exception>
-    public virtual bool Invoke<T>([NotNull] Subscription subscription, [NotNull] DomainObjectVersions<T> versions)
+    public virtual bool Invoke<T>(Subscription subscription, DomainObjectVersions<T> versions)
             where T : class
     {
         if (subscription == null)

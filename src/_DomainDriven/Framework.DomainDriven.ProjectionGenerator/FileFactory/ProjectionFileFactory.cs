@@ -8,8 +8,6 @@ using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Projection;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.ProjectionGenerator;
 
 public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfiguration, FileType>
@@ -21,7 +19,7 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
 
     private readonly Type contractType;
 
-    public ProjectionFileFactory(TConfiguration configuration, [NotNull] Type domainType)
+    public ProjectionFileFactory(TConfiguration configuration, Type domainType)
             : base(configuration, domainType)
     {
         this.sourceType = this.DomainType.GetProjectionSourceType();
@@ -163,7 +161,7 @@ public class ProjectionFileFactory<TConfiguration> : CodeFileFactory<TConfigurat
         }
     }
 
-    private CodeMemberProperty CreateExpandProperty([NotNull] PropertyInfo property, bool withAttr)
+    private CodeMemberProperty CreateExpandProperty(PropertyInfo property, bool withAttr)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 

@@ -11,7 +11,6 @@ using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DAL.Revisions;
-using Framework.Persistent;
 using Framework.UnitTesting;
 using NUnit.Framework;
 

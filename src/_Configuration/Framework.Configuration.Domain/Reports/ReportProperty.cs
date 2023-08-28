@@ -2,8 +2,6 @@
 using Framework.Persistent;
 using Framework.Restriction;
 
-using JetBrains.Annotations;
-
 namespace Framework.Configuration.Domain.Reports;
 
 [BLLViewRole]
@@ -18,7 +16,7 @@ public class ReportProperty : AuditPersistentDomainObjectBase, IDetail<Report>
     private int sortType;
     private string formula;
 
-    public ReportProperty([NotNull] Report report)
+    public ReportProperty(Report report)
     {
         if (report == null) throw new ArgumentNullException(nameof(report));
 

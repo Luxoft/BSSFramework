@@ -1,6 +1,5 @@
 ﻿using Framework.Authorization.Notification;
 using Framework.Configuration.Core;
-using Framework.Persistent;
 
 namespace Framework.Configuration.SubscriptionModeling.Tests.Unit.Metadata;
 

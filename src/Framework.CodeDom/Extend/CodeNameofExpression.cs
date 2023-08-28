@@ -1,7 +1,5 @@
 ﻿using System.CodeDom;
 
-using JetBrains.Annotations;
-
 namespace Framework.CodeDom;
 
 public class CodeNameofExpression : CodeExpression
@@ -10,7 +8,7 @@ public class CodeNameofExpression : CodeExpression
     {
     }
 
-    public CodeNameofExpression([NotNull] string value)
+    public CodeNameofExpression(string value)
     {
         this.Value = value ?? throw new ArgumentNullException(nameof(value));
     }

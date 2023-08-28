@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 
@@ -12,8 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.DomainDriven.WebApiGenerator.NetCore\Framework.DomainDriven.WebApiGenerator.NetCore.csproj" />
     <ProjectReference Include="..\Framework.Authorization.TestGenerate\Framework.Authorization.TestGenerate.csproj" />
+
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.WebApiGenerator.NetCore\Framework.DomainDriven.WebApiGenerator.NetCore.csproj" />
   </ItemGroup>
 
 </Project>

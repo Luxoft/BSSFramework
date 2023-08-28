@@ -1,7 +1,5 @@
 ﻿using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.Projection.Lambda;
 
 internal class InjectAttributesProjectionSource : IProjectionSource
@@ -10,7 +8,7 @@ internal class InjectAttributesProjectionSource : IProjectionSource
 
     private readonly ProjectionLambdaEnvironment environment;
 
-    public InjectAttributesProjectionSource([NotNull] IProjectionSource baseSource, ProjectionLambdaEnvironment environment)
+    public InjectAttributesProjectionSource(IProjectionSource baseSource, ProjectionLambdaEnvironment environment)
     {
         this.baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
         this.environment = environment ?? throw new ArgumentNullException(nameof(environment));

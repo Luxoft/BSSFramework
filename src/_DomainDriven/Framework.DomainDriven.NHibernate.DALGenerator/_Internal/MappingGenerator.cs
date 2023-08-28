@@ -9,8 +9,6 @@ using Framework.DomainDriven.Metadata;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
-using JetBrains.Annotations;
-
 using Microsoft.SqlServer.Management.Smo;
 
 namespace Framework.DomainDriven.NHibernate.DALGenerator;
@@ -30,7 +28,7 @@ public class MappingGenerator : IMappingGenerator
 
     private readonly bool useSmartUpdate;
 
-    public MappingGenerator([NotNull] IGrouping<IAssemblyInfo, DomainTypeMetadata> assemblyGroup, [NotNull] DatabaseName schema, bool useSmartUpdate)
+    public MappingGenerator(IGrouping<IAssemblyInfo, DomainTypeMetadata> assemblyGroup, DatabaseName schema, bool useSmartUpdate)
     {
         this.assemblyGroup = assemblyGroup ?? throw new ArgumentNullException(nameof(assemblyGroup));
         this.schema = schema ?? throw new ArgumentNullException(nameof(schema));

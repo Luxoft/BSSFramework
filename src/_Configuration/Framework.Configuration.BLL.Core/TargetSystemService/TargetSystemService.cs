@@ -9,8 +9,6 @@ using Framework.Events;
 using Framework.Notification;
 using Framework.Persistent;
 
-using JetBrains.Annotations;
-
 namespace Framework.Configuration.BLL;
 
 public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : TargetSystemService<TBLLContext>, IPersistentTargetSystemService
@@ -54,7 +52,7 @@ public class TargetSystemService<TBLLContext, TPersistentDomainObjectBase> : Tar
         return this.subscriptionService;
     }
 
-    public void ForceEvent([NotNull] DomainTypeEventOperation operation, long? revision, Guid domainObjectId)
+    public void ForceEvent(DomainTypeEventOperation operation, long? revision, Guid domainObjectId)
     {
         if (operation == null) throw new ArgumentNullException(nameof(operation));
         if (domainObjectId.IsDefault()) throw new ArgumentOutOfRangeException(nameof(domainObjectId));

@@ -20,12 +20,12 @@ public class ControllerEvaluator<TController>
 
     private readonly string customPrincipalName;
 
-    public ControllerEvaluator([NotNull] IServiceProvider rootServiceProvider)
+    public ControllerEvaluator(IServiceProvider rootServiceProvider)
             : this(rootServiceProvider, null)
     {
     }
 
-    private ControllerEvaluator([NotNull] IServiceProvider rootServiceProvider, string customPrincipalName)
+    private ControllerEvaluator(IServiceProvider rootServiceProvider, string customPrincipalName)
     {
         this.rootServiceProvider = rootServiceProvider ?? throw new ArgumentNullException(nameof(rootServiceProvider));
         this.customPrincipalName = customPrincipalName;

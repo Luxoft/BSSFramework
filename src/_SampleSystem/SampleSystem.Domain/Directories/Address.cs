@@ -2,8 +2,6 @@
 using Framework.Persistent;
 using Framework.Restriction;
 
-using JetBrains.Annotations;
-
 namespace SampleSystem.Domain;
 
 public class Address : AuditPersistentDomainObjectBase, IDetail<LegalEntityBase>
@@ -16,7 +14,7 @@ public class Address : AuditPersistentDomainObjectBase, IDetail<LegalEntityBase>
     private string street;
     private string zip;
 
-    public Address([NotNull] LegalEntityBase legalEntity)
+    public Address(LegalEntityBase legalEntity)
     {
         if (legalEntity == null) throw new ArgumentNullException(nameof(legalEntity));
 
@@ -24,7 +22,7 @@ public class Address : AuditPersistentDomainObjectBase, IDetail<LegalEntityBase>
         this.legalEntity.AddDetail(this);
     }
 
-    public Address(Guid id, [NotNull] LegalEntityBase legalEntity)
+    public Address(Guid id, LegalEntityBase legalEntity)
             : this(legalEntity)
     {
         this.Id = id;

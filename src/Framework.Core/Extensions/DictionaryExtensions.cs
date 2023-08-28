@@ -1,7 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 
-using JetBrains.Annotations;
-
 namespace Framework.Core;
 
 public static class DictionaryExtensions
@@ -111,7 +109,7 @@ public static class DictionaryExtensions
         return new System.Collections.Generic.SortedDictionary<TKey, TValue>(source.Clone());
     }
 
-    public static Dictionary<TKey, TValue> AggregateValues<TKey, TValue>([NotNull] this IEnumerable<IReadOnlyDictionary<TKey, TValue>> dicts, [NotNull] Func<TKey, TValue, TValue, TValue> aggregateFunc)
+    public static Dictionary<TKey, TValue> AggregateValues<TKey, TValue>(this IEnumerable<IReadOnlyDictionary<TKey, TValue>> dicts, Func<TKey, TValue, TValue, TValue> aggregateFunc)
     {
         if (dicts == null) throw new ArgumentNullException(nameof(dicts));
         if (aggregateFunc == null) throw new ArgumentNullException(nameof(aggregateFunc));
@@ -144,7 +142,7 @@ public static class DictionaryExtensions
         return dicts.AggregateValues((v1, v2) => v1 * v2);
     }
 
-    public static Dictionary<TKey, TValue> AggregateValues<TKey, TValue>([NotNull] this IEnumerable<IReadOnlyDictionary<TKey, TValue>> dicts, [NotNull] Func<TValue, TValue, TValue> aggregateFunc)
+    public static Dictionary<TKey, TValue> AggregateValues<TKey, TValue>(this IEnumerable<IReadOnlyDictionary<TKey, TValue>> dicts, Func<TValue, TValue, TValue> aggregateFunc)
     {
         if (dicts == null) throw new ArgumentNullException(nameof(dicts));
         if (aggregateFunc == null) throw new ArgumentNullException(nameof(aggregateFunc));
@@ -163,7 +161,7 @@ public static class DictionaryExtensions
         return Enumerable.Range(0, dict.Count).ToArray(i => dict[i]);
     }
 
-    public static IReadOnlyDictionary<TKey, TNewValue> ToCovarianceReadOnlyDictionary<TKey, TNewValue, TOldValue>([NotNull] this IReadOnlyDictionary<TKey, TOldValue> dict, [NotNull] Func<TOldValue, TNewValue> selector)
+    public static IReadOnlyDictionary<TKey, TNewValue> ToCovarianceReadOnlyDictionary<TKey, TNewValue, TOldValue>(this IReadOnlyDictionary<TKey, TOldValue> dict, Func<TOldValue, TNewValue> selector)
     {
         if (dict == null) throw new ArgumentNullException(nameof(dict));
         if (selector == null) throw new ArgumentNullException(nameof(selector));
@@ -171,7 +169,7 @@ public static class DictionaryExtensions
         return new CovarianceReadOnlyDictionary<TKey, TNewValue, TOldValue>(dict, selector);
     }
 
-    public static IReadOnlyDictionary<TKey, TNewValue> ToCovarianceReadOnlyDictionary<TKey, TNewValue, TOldValue>([NotNull] this IReadOnlyDictionary<TKey, TOldValue> dict)
+    public static IReadOnlyDictionary<TKey, TNewValue> ToCovarianceReadOnlyDictionary<TKey, TNewValue, TOldValue>(this IReadOnlyDictionary<TKey, TOldValue> dict)
             where TOldValue : TNewValue
     {
         if (dict == null) throw new ArgumentNullException(nameof(dict));
@@ -185,7 +183,7 @@ public static class DictionaryExtensions
 
         private readonly Func<TOldValue, TNewValue> _selector;
 
-        public CovarianceReadOnlyDictionary([NotNull] IReadOnlyDictionary<TKey, TOldValue> dict, [NotNull] Func<TOldValue, TNewValue> selector)
+        public CovarianceReadOnlyDictionary(IReadOnlyDictionary<TKey, TOldValue> dict, Func<TOldValue, TNewValue> selector)
         {
             if (dict == null) throw new ArgumentNullException(nameof(dict));
             if (selector == null) throw new ArgumentNullException(nameof(selector));

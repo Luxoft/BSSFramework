@@ -5,8 +5,6 @@ using Framework.Core;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 
-using JetBrains.Annotations;
-
 namespace Framework.SecuritySystem.Rules.Builders.MaterializedPermissions;
 
 public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent>
@@ -19,7 +17,7 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
     internal readonly SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> Factory;
 
     protected SecurityExpressionBuilderBase(
-            [NotNull] SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory)
+            SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory)
     {
         this.Factory = factory ?? throw new ArgumentNullException(nameof(factory));
     }
@@ -63,7 +61,7 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
 {
     protected readonly TPath Path;
 
-    protected SecurityExpressionBuilderBase([NotNull] SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory,
+    protected SecurityExpressionBuilderBase(SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory,
                                             TPath path) : base(factory)
     {
         this.Path = path ?? throw new ArgumentNullException(nameof(path));

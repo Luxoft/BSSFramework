@@ -2,8 +2,6 @@
 
 using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.DTOGenerator;
 
 public class ProjectionCodeTypeReferenceService<TConfiguration> : MainCodeTypeReferenceService<TConfiguration>
@@ -32,7 +30,7 @@ public class ProjectionCodeTypeReferenceService<TConfiguration> : MainCodeTypeRe
         }
     }
 
-    public override RoleFileType GetCollectionFileType([NotNull] PropertyInfo property)
+    public override RoleFileType GetCollectionFileType(PropertyInfo property)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 

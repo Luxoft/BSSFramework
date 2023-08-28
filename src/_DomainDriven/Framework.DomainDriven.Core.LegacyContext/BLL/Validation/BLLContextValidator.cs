@@ -2,8 +2,6 @@
 using Framework.Core.Serialization;
 using Framework.Validation;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.BLL;
 
 public class BLLContextValidator<TBLLContext, TOperationContext> : BLLContextContainer<TBLLContext>, IValidator, IServiceProviderContainer
@@ -15,7 +13,7 @@ public class BLLContextValidator<TBLLContext, TOperationContext> : BLLContextCon
     private readonly ValidatorCompileCache cache;
 
 
-    protected BLLContextValidator([NotNull] TBLLContext context, ValidatorCompileCache cache)
+    protected BLLContextValidator(TBLLContext context, ValidatorCompileCache cache)
             : base(context)
     {
         if (cache == null) throw new ArgumentNullException(nameof(cache));

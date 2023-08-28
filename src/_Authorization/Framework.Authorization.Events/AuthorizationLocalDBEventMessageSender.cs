@@ -5,15 +5,13 @@ using Framework.Configuration.BLL;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.Events;
 
-using JetBrains.Annotations;
-
 namespace Framework.Authorization.Events;
 
 public class AuthorizationLocalDBEventMessageSender : LocalDBEventMessageSender<IAuthorizationBLLContext, PersistentDomainObjectBase, EventDTOBase>
 {
     private readonly bool shrinkDto;
 
-    public AuthorizationLocalDBEventMessageSender([NotNull] IAuthorizationBLLContext context, [NotNull] IConfigurationBLLContext configurationContext, [NotNull] string queueTag = "authDALQuery", bool shrinkDto = true)
+    public AuthorizationLocalDBEventMessageSender(IAuthorizationBLLContext context, IConfigurationBLLContext configurationContext, string queueTag = "authDALQuery", bool shrinkDto = true)
             : base(context, configurationContext, queueTag) =>
             this.shrinkDto = shrinkDto;
 

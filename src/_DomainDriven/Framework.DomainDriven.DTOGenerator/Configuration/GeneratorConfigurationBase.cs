@@ -11,8 +11,6 @@ using Framework.Projection;
 using Framework.Security;
 using Framework.Transfering;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.DTOGenerator;
 
 public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<TEnvironment, FileType>, IGeneratorConfigurationBase<TEnvironment>
@@ -143,7 +141,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         return new Dictionary<Type, ReadOnlyCollection<Enum>>();
     }
 
-    public IEnumerable<PropertyInfo> GetDomainTypeProperties([NotNull] Type domainType, [NotNull] DTOFileType fileType)
+    public IEnumerable<PropertyInfo> GetDomainTypeProperties(Type domainType, DTOFileType fileType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));

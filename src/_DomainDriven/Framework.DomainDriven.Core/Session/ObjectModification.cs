@@ -1,7 +1,5 @@
 ﻿using Framework.DomainDriven.DAL.Revisions;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven;
 
 public class ObjectModification : IEquatable<ObjectModification>
@@ -11,7 +9,7 @@ public class ObjectModification : IEquatable<ObjectModification>
     private readonly Type _objectType;
 
 
-    public ObjectModification(object @object, [NotNull] Type objectType, ModificationType modificationType)
+    public ObjectModification(object @object, Type objectType, ModificationType modificationType)
     {
         if (@object == null) throw new ArgumentNullException(nameof(@object));
         if (objectType == null) throw new ArgumentNullException(nameof(objectType));

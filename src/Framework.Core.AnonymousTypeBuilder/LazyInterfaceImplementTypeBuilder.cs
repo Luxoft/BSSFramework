@@ -1,8 +1,6 @@
 ﻿using System.Reflection;
 using System.Reflection.Emit;
 
-using JetBrains.Annotations;
-
 namespace Framework.Core;
 
 /// <summary>
@@ -22,7 +20,7 @@ public class LazyInterfaceImplementTypeBuilder : InterfaceImplementTypeBuilder
     /// Конструктор
     /// </summary>
     /// <param name="moduleBuilder">Модуль, где будет генерировать анонимный тип</param>
-    public LazyInterfaceImplementTypeBuilder([NotNull] ModuleBuilder moduleBuilder)
+    public LazyInterfaceImplementTypeBuilder(ModuleBuilder moduleBuilder)
             :base(moduleBuilder, typeof(Lazy<>))
     {
     }

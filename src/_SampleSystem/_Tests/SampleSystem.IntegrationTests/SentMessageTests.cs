@@ -2,7 +2,6 @@
 
 using FluentAssertions;
 
-using Framework.Configuration.BLL;
 using Framework.Notification.DTO;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;

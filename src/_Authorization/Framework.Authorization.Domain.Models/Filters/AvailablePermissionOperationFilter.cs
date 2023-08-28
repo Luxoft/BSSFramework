@@ -3,15 +3,13 @@
 using Framework.Core;
 using Framework.DomainDriven;
 
-using JetBrains.Annotations;
-
 namespace Framework.Authorization.Domain;
 
 public class AvailablePermissionOperationFilter : AvailablePermissionFilter
 {
     private readonly Operation operation;
 
-    public AvailablePermissionOperationFilter([NotNull] IDateTimeService dateTimeService, string principalName, Operation operation)
+    public AvailablePermissionOperationFilter(IDateTimeService dateTimeService, string principalName, Operation operation)
             : base(dateTimeService, principalName)
     {
         if (operation == null) throw new ArgumentNullException(nameof(operation));

@@ -14,8 +14,8 @@ public class NHibSessionSettings : INHibSessionSetup
     private readonly IDateTimeService dateTimeService;
 
     public NHibSessionSettings(
-            [NotNull] IUserAuthenticationService userAuthenticationService,
-            [NotNull] IDateTimeService dateTimeService)
+            IUserAuthenticationService userAuthenticationService,
+            IDateTimeService dateTimeService)
     {
         this.userAuthenticationService = userAuthenticationService ?? throw new ArgumentNullException(nameof(userAuthenticationService));
         this.dateTimeService = dateTimeService ?? throw new ArgumentNullException(nameof(dateTimeService));

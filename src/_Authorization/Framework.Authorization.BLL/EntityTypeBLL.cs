@@ -6,13 +6,11 @@ using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.SecuritySystem;
 
-using JetBrains.Annotations;
-
 namespace Framework.Authorization.BLL;
 
 public partial class EntityTypeBLL
 {
-    public void Register([NotNull] IEnumerable<Assembly> assemblies)
+    public void Register(IEnumerable<Assembly> assemblies)
     {
         if (assemblies == null) throw new ArgumentNullException(nameof(assemblies));
 

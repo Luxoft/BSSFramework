@@ -2,8 +2,6 @@
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 
-using JetBrains.Annotations;
-
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Events;
@@ -19,7 +17,7 @@ public abstract class EventsSubscriptionManagerBase<TPersistentDomainObjectBase>
 
     private readonly Lazy<IServiceProvider> cache;
 
-    protected EventsSubscriptionManagerBase([NotNull] IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender)
+    protected EventsSubscriptionManagerBase(IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>> messageSender)
     {
         this.MessageSender = messageSender ?? throw new ArgumentNullException(nameof(messageSender));
 

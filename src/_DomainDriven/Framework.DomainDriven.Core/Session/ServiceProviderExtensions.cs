@@ -1,7 +1,5 @@
 ﻿using Framework.Core;
 
-using JetBrains.Annotations;
-
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven;
@@ -13,7 +11,7 @@ public static class ServiceProviderExtensions
     /// </summary>
     /// <param name="serviceProvider"></param>
     /// <exception cref="ArgumentNullException"></exception>
-    public static async Task TryCloseDbSessionAsync([NotNull] this IServiceProvider serviceProvider, CancellationToken cancellationToken = default)
+    public static async Task TryCloseDbSessionAsync(this IServiceProvider serviceProvider, CancellationToken cancellationToken = default)
     {
         if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
 
@@ -30,7 +28,7 @@ public static class ServiceProviderExtensions
     /// </summary>
     /// <param name="serviceProvider"></param>
     /// <exception cref="ArgumentNullException"></exception>
-    public static void TryFaultDbSession([NotNull] this IServiceProvider serviceProvider)
+    public static void TryFaultDbSession(this IServiceProvider serviceProvider)
     {
         if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
 

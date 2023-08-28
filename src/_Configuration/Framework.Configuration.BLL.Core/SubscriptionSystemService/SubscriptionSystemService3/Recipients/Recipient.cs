@@ -1,6 +1,4 @@
-﻿using Framework.Persistent;
-
-namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
+﻿namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 
 /// <summary>
 /// Получатель уведомления по подписке.

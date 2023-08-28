@@ -4,13 +4,11 @@ using Framework.Core;
 using Framework.Exceptions;
 using Framework.Persistent;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.BLL;
 
 public static class DefaultDomainBLLBaseExtensions
 {
-    public static TDomainObject GetById<TPersistentDomainObjectBase, TDomainObject>(this IDefaultDomainBLLQueryBase<TPersistentDomainObjectBase, TDomainObject, Guid> bll, [NotNull] string id)
+    public static TDomainObject GetById<TPersistentDomainObjectBase, TDomainObject>(this IDefaultDomainBLLQueryBase<TPersistentDomainObjectBase, TDomainObject, Guid> bll, string id)
             where TDomainObject : class, TPersistentDomainObjectBase
             where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
     {

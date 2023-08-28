@@ -1,21 +1,21 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <IsPackable>false</IsPackable>
-
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="MSTest.TestAdapter" />
     <PackageReference Include="MSTest.TestFramework" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
-  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.HierarchicalExpand\Framework.HierarchicalExpand.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.BLL.Security\Framework.DomainDriven.BLL.Security.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.ServiceModel.IAD\Framework.DomainDriven.ServiceModel.IAD.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.Tests.Unit\Framework.DomainDriven.Tests.Unit.csproj" />
   </ItemGroup>
+
 </Project>

@@ -1,8 +1,6 @@
 ﻿using Framework.Core;
 using Framework.SecuritySystem;
 
-using JetBrains.Annotations;
-
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.BLL.Security;
@@ -13,7 +11,7 @@ public abstract class BLLFactoryBase<TBLLContext, TBLL, TBLLImpl, TDomainObject>
         where TBLLImpl : TBLL
         where TDomainObject : class
 {
-    protected BLLFactoryBase([NotNull] TBLLContext context) : base(context)
+    protected BLLFactoryBase(TBLLContext context) : base(context)
     {
     }
 
@@ -37,7 +35,7 @@ public abstract class SecurityBLLFactoryBase<TBLLContext, TBLL, TBLLImpl, TDomai
         where TDomainObject : class
         where TBLLImpl : TBLL
 {
-    protected SecurityBLLFactoryBase([NotNull] TBLLContext context)
+    protected SecurityBLLFactoryBase(TBLLContext context)
             : base(context)
     {
     }
@@ -56,7 +54,7 @@ public abstract class SecurityBLLFactory<TBLLContext, TBLL, TBLLImpl, TDomainObj
         where TSecurityOperationCode : struct, Enum
         where TBLLImpl : TBLL
 {
-    protected SecurityBLLFactory([NotNull] TBLLContext context)
+    protected SecurityBLLFactory(TBLLContext context)
             : base(context)
     {
     }

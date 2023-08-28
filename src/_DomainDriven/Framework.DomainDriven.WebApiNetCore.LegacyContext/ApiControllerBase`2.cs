@@ -2,8 +2,6 @@
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.ServiceModel.Service;
 
-using JetBrains.Annotations;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -65,7 +63,7 @@ public abstract class ApiControllerBase<TBLLContext, TEvaluatedData> : ApiContro
     /// Open DB Session and run action for only Read operations
     /// </summary>
     [NonAction]
-    public void EvaluateRead([NotNull] Action<TEvaluatedData> action)
+    public void EvaluateRead(Action<TEvaluatedData> action)
     {
         if (action == null)
         {
@@ -79,7 +77,7 @@ public abstract class ApiControllerBase<TBLLContext, TEvaluatedData> : ApiContro
     /// Open DB Session and run action for only Read operations
     /// </summary>
     [NonAction]
-    public TResult EvaluateRead<TResult>([NotNull] Func<TEvaluatedData, TResult> getResult)
+    public TResult EvaluateRead<TResult>(Func<TEvaluatedData, TResult> getResult)
     {
         if (getResult == null)
         {
@@ -93,7 +91,7 @@ public abstract class ApiControllerBase<TBLLContext, TEvaluatedData> : ApiContro
     /// Open DB Session and run action for only Read/Write operations
     /// </summary>
     [NonAction]
-    public void EvaluateWrite([NotNull] Action<TEvaluatedData> action)
+    public void EvaluateWrite(Action<TEvaluatedData> action)
     {
         if (action == null)
         {
@@ -107,7 +105,7 @@ public abstract class ApiControllerBase<TBLLContext, TEvaluatedData> : ApiContro
     /// Open DB Session and run action for only Read/Write operations
     /// </summary>
     [NonAction]
-    public TResult EvaluateWrite<TResult>([NotNull] Func<TEvaluatedData, TResult> getResult)
+    public TResult EvaluateWrite<TResult>(Func<TEvaluatedData, TResult> getResult)
     {
         if (getResult == null)
         {

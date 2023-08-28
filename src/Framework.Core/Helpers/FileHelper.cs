@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 public static class FileHelper
 {
@@ -29,7 +27,7 @@ public static class FileHelper
         }
     }
 
-    public static TResult TempProcess<TResult>([NotNull] Func<string, TResult> getResult, string pureExtension = null, byte[] content = null)
+    public static TResult TempProcess<TResult>(Func<string, TResult> getResult, string pureExtension = null, byte[] content = null)
     {
         if (getResult == null) throw new ArgumentNullException(nameof(getResult));
 
@@ -50,7 +48,7 @@ public static class FileHelper
         }
     }
 
-    public static byte[] TempProcessBinary([NotNull] Action<string> action, string pureExtension = null, byte[] content = null)
+    public static byte[] TempProcessBinary(Action<string> action, string pureExtension = null, byte[] content = null)
     {
         if (action == null) throw new ArgumentNullException(nameof(action));
 
@@ -65,7 +63,7 @@ public static class FileHelper
     ///<summary>
     ///Remove file
     ///</summary>
-    public static void SafeRemove([NotNull] string fileName)
+    public static void SafeRemove(string fileName)
     {
         if (fileName == null) throw new ArgumentNullException(nameof(fileName));
 

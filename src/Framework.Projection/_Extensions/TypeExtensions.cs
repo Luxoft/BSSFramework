@@ -1,8 +1,6 @@
 ﻿using Framework.Core;
 using Framework.Projection.Contract;
 
-using JetBrains.Annotations;
-
 namespace Framework.Projection;
 
 public static class TypeExtensions
@@ -13,7 +11,7 @@ public static class TypeExtensions
     /// <param name="projectionType">Тип проекции</param>
     /// <param name="target">Применимость фильтра</param>
     /// <returns></returns>
-    public static IEnumerable<Type> GetProjectionFilters([NotNull] this Type projectionType, ProjectionFilterTargets target = ProjectionFilterTargets.All)
+    public static IEnumerable<Type> GetProjectionFilters(this Type projectionType, ProjectionFilterTargets target = ProjectionFilterTargets.All)
     {
         if (projectionType == null) throw new ArgumentNullException(nameof(projectionType));
 
@@ -28,7 +26,7 @@ public static class TypeExtensions
     /// <param name="contractType">Тип контракта проекции</param>
     /// <param name="raiseIfNull">Проверка на существоание</param>
     /// <returns></returns>
-    public static Type GetProjectionContractSourceType([NotNull] this Type contractType, bool raiseIfNull = true)
+    public static Type GetProjectionContractSourceType(this Type contractType, bool raiseIfNull = true)
     {
         if (contractType == null) throw new ArgumentNullException(nameof(contractType));
 
@@ -66,7 +64,7 @@ public static class TypeExtensions
     /// <param name="type">Тип проекции</param>
     /// <param name="raiseIfNull">Проверка на существоание</param>
     /// <returns></returns>
-    public static Type GetProjectionSourceType([NotNull] this Type type, bool raiseIfNull = true)
+    public static Type GetProjectionSourceType(this Type type, bool raiseIfNull = true)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
@@ -94,7 +92,7 @@ public static class TypeExtensions
     /// </summary>
     /// <param name="type">Тип проекции</param>
     /// <returns></returns>
-    public static Type GetProjectionSourceTypeOrSelf([NotNull] this Type type)
+    public static Type GetProjectionSourceTypeOrSelf(this Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
@@ -107,7 +105,7 @@ public static class TypeExtensions
     /// <param name="type">Тип проекции</param>
     /// <param name="raiseIfNull">Проверка на существоание</param>
     /// <returns></returns>
-    public static Type GetProjectionContractType([NotNull] this Type type, bool raiseIfNull = true)
+    public static Type GetProjectionContractType(this Type type, bool raiseIfNull = true)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
@@ -135,7 +133,7 @@ public static class TypeExtensions
     /// </summary>
     /// <param name="type">Тип проекции</param>
     /// <returns></returns>
-    public static bool IsProjection([NotNull] this Type type)
+    public static bool IsProjection(this Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
@@ -148,7 +146,7 @@ public static class TypeExtensions
     /// <param name="type">Тип проекции</param>
     /// <param name="condition">Условие на базовый тип</param>
     /// <returns></returns>
-    public static bool IsProjection([NotNull] this Type type, Func<Type, bool> condition)
+    public static bool IsProjection(this Type type, Func<Type, bool> condition)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 

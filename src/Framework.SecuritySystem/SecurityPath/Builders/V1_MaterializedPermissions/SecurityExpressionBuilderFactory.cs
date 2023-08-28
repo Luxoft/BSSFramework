@@ -1,15 +1,13 @@
 ﻿using Framework.HierarchicalExpand;
 using Framework.Persistent;
 
-using JetBrains.Annotations;
-
 namespace Framework.SecuritySystem.Rules.Builders.MaterializedPermissions;
 
 public class SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> : SecurityExpressionBuilderFactoryBase<TPersistentDomainObjectBase, TIdent>
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
-    public SecurityExpressionBuilderFactory([NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory, [NotNull] IAuthorizationSystem<TIdent> authorizationSystem)
+    public SecurityExpressionBuilderFactory(IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory, IAuthorizationSystem<TIdent> authorizationSystem)
     {
         this.HierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory ?? throw new ArgumentNullException(nameof(hierarchicalObjectExpanderFactory));
         this.AuthorizationSystem = authorizationSystem;

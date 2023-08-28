@@ -1,7 +1,5 @@
 ﻿using System.Linq.Expressions;
 
-using JetBrains.Annotations;
-
 namespace Framework.ExpressionParsers;
 
 public class CSharpNativeExpressionParser : INativeExpressionParser
@@ -18,7 +16,7 @@ public class CSharpNativeExpressionParser : INativeExpressionParser
 
 
 
-    public LambdaExpression Parse([NotNull] NativeExpressionParsingData input)
+    public LambdaExpression Parse(NativeExpressionParsingData input)
     {
         if (input == null) throw new ArgumentNullException(nameof(input));
 

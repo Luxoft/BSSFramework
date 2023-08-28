@@ -1,7 +1,4 @@
-﻿using System.Reflection;
-using Framework.CodeDom;
-
-using JetBrains.Annotations;
+﻿using Framework.CodeDom;
 
 namespace Framework.DomainDriven.Generation.Domain;
 
@@ -12,7 +9,7 @@ namespace Framework.DomainDriven.Generation.Domain;
 public abstract class CodeFileGenerator<TConfiguration> : GeneratorConfigurationContainer<TConfiguration>, IFileGenerator<ICodeFile, CodeDomRenderer>
         where TConfiguration : class
 {
-    protected CodeFileGenerator([NotNull] TConfiguration configuration)
+    protected CodeFileGenerator(TConfiguration configuration)
             : base(configuration)
     {
     }

@@ -2,8 +2,6 @@
 using Framework.DomainDriven.DALExceptions;
 using Framework.Exceptions;
 
-using JetBrains.Annotations;
-
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Exceptions;
@@ -21,7 +19,7 @@ internal class SqlExceptionProcessorInterceptor : IExceptionProcessor
     private readonly ExceptionProcessingContext _context;
 
 
-    internal SqlExceptionProcessorInterceptor([NotNull] ISessionFactory factory, [NotNull] Configuration cfg, IDalValidationIdentitySource dalValidationIdentitySource)
+    internal SqlExceptionProcessorInterceptor(ISessionFactory factory, Configuration cfg, IDalValidationIdentitySource dalValidationIdentitySource)
     {
         if (factory == null) throw new ArgumentNullException(nameof(factory));
         if (cfg == null) throw new ArgumentNullException(nameof(cfg));
@@ -61,7 +59,7 @@ internal class SqlExceptionProcessorInterceptor : IExceptionProcessor
     }
 
 
-    public Exception Process([NotNull] Exception exception)
+    public Exception Process(Exception exception)
     {
         if (exception == null) throw new ArgumentNullException(nameof(exception));
 

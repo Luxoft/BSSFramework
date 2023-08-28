@@ -1,5 +1,3 @@
-using JetBrains.Annotations;
-
 namespace Framework.Projection.Contract;
 
 /// <summary>
@@ -12,7 +10,7 @@ public class ProjectionContractAttribute : Attribute
     /// Конструктор
     /// </summary>
     /// <param name="sourceType">Исходный тип, по которому будет строиться проекция</param>
-    public ProjectionContractAttribute([NotNull] Type sourceType)
+    public ProjectionContractAttribute(Type sourceType)
     {
         if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
 

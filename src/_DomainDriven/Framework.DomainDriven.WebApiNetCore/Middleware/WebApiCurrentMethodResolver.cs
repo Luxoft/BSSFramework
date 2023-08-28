@@ -1,7 +1,5 @@
 ﻿using System.Reflection;
 
-using JetBrains.Annotations;
-
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Controllers;
 
@@ -11,7 +9,7 @@ public class WebApiCurrentMethodResolver : IWebApiCurrentMethodResolver
 {
     private readonly IHttpContextAccessor httpContextAccessor;
 
-    public WebApiCurrentMethodResolver([NotNull] IHttpContextAccessor httpContextAccessor)
+    public WebApiCurrentMethodResolver(IHttpContextAccessor httpContextAccessor)
     {
         this.httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
     }

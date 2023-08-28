@@ -1,20 +1,18 @@
 ﻿using System.Collections.ObjectModel;
 using System.Reflection;
 
-using JetBrains.Annotations;
-
 namespace Framework.Core;
 
 public static class TypeExtensions
 {
-    public static Dictionary<MethodInfo, MethodInfo> GetInterfaceMapDictionary([NotNull] this Type type)
+    public static Dictionary<MethodInfo, MethodInfo> GetInterfaceMapDictionary(this Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
         return type.GetAllInterfaces().SelectMany(type.GetInterfaceMapDictionary).ToDictionary();
     }
 
-    public static Dictionary<MethodInfo, MethodInfo> GetInterfaceMapDictionary([NotNull] this Type type, [NotNull] Type interfaceType)
+    public static Dictionary<MethodInfo, MethodInfo> GetInterfaceMapDictionary(this Type type, Type interfaceType)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (interfaceType == null) throw new ArgumentNullException(nameof(interfaceType));
@@ -24,14 +22,14 @@ public static class TypeExtensions
         return interfaceMap.InterfaceMethods.ZipStrong(interfaceMap.TargetMethods, (m1, m2) => m1.ToKeyValuePair(m2)).ToDictionary();
     }
 
-    public static IEnumerable<MemberInfo> GetMemberAccessors([NotNull] this Type type, BindingFlags flags = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public)
+    public static IEnumerable<MemberInfo> GetMemberAccessors(this Type type, BindingFlags flags = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
         return type.GetFields(flags).Concat<MemberInfo>(type.GetProperties(flags));
     }
 
-    public static PropertyInfo GetImplementedProperty([NotNull] this Type type, [NotNull] PropertyInfo property)
+    public static PropertyInfo GetImplementedProperty(this Type type, PropertyInfo property)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (property == null) throw new ArgumentNullException(nameof(property));
@@ -177,7 +175,7 @@ public static class TypeExtensions
         }
     }
 
-    public static IEnumerable<FieldInfo> ExpandFields([NotNull] this Type source)
+    public static IEnumerable<FieldInfo> ExpandFields(this Type source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
@@ -230,7 +228,7 @@ public static class TypeExtensions
         return type.IsArray(v => v.IsValueType);
     }
 
-    public static Type GetTopDeclaringType([NotNull] this PropertyInfo property)
+    public static Type GetTopDeclaringType(this PropertyInfo property)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 

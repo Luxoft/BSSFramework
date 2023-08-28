@@ -1,7 +1,5 @@
 ﻿using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.Projection.Lambda;
 
 internal class GenerateTypeResolver : ITypeResolver<IProjection>
@@ -11,13 +9,13 @@ internal class GenerateTypeResolver : ITypeResolver<IProjection>
     private readonly Dictionary<IProjection, GeneratedType> generateTypes = new Dictionary<IProjection, GeneratedType>();
 
 
-    public GenerateTypeResolver([NotNull] ProjectionLambdaEnvironment environment)
+    public GenerateTypeResolver(ProjectionLambdaEnvironment environment)
     {
         this.environment = environment ?? throw new ArgumentNullException(nameof(environment));
     }
 
 
-    public Type Resolve([NotNull] IProjection projection)
+    public Type Resolve(IProjection projection)
     {
         if (projection == null) throw new ArgumentNullException(nameof(projection));
 

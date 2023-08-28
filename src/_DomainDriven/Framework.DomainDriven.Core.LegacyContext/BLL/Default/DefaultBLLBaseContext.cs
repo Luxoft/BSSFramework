@@ -6,8 +6,6 @@ using Framework.Persistent;
 using Framework.QueryLanguage;
 using Framework.Validation;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.BLL;
 
 public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent> :
@@ -49,13 +47,13 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TDomain
     /// or
     /// dateTimeService</exception>
     protected DefaultBLLBaseContext(
-            [NotNull] IServiceProvider serviceProvider,
-            [NotNull] IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
-            [NotNull] ITrackingService<TPersistentDomainObjectBase> trackingService,
-            [NotNull] IStandartExpressionBuilder standardExpressionBuilder,
-            [NotNull] IValidator validator,
-            [NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
-            [NotNull] IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
+            IServiceProvider serviceProvider,
+            IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
+            ITrackingService<TPersistentDomainObjectBase> trackingService,
+            IStandartExpressionBuilder standardExpressionBuilder,
+            IValidator validator,
+            IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
+            IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
     {
         this.ServiceProvider = serviceProvider;
         this.OperationSenders = operationSenders ?? throw new ArgumentNullException(nameof(operationSenders));
@@ -111,13 +109,13 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TDomain
 {
     /// <inheritdoc />
     protected DefaultBLLBaseContext(
-            [NotNull] IServiceProvider serviceProvider,
-            [NotNull] IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
-            [NotNull] ITrackingService<TPersistentDomainObjectBase> trackingService,
-            [NotNull] IStandartExpressionBuilder standardExpressionBuilder,
-            [NotNull] IValidator validator,
-            [NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
-            [NotNull] IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
+            IServiceProvider serviceProvider,
+            IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
+            ITrackingService<TPersistentDomainObjectBase> trackingService,
+            IStandartExpressionBuilder standardExpressionBuilder,
+            IValidator validator,
+            IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
+            IFetchService<TPersistentDomainObjectBase, FetchBuildRule> fetchService)
             : base(serviceProvider, operationSenders, trackingService, standardExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
     {
     }

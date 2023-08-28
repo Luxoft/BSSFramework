@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.Projection.Lambda;
+﻿namespace Framework.Projection.Lambda;
 
 internal class CreateAutoNodesProjectionSource : IProjectionSource
 {
@@ -8,7 +6,7 @@ internal class CreateAutoNodesProjectionSource : IProjectionSource
 
     private readonly ProjectionLambdaEnvironment environment;
 
-    public CreateAutoNodesProjectionSource([NotNull] IProjectionSource baseSource, [NotNull] ProjectionLambdaEnvironment environment)
+    public CreateAutoNodesProjectionSource(IProjectionSource baseSource, ProjectionLambdaEnvironment environment)
     {
         this.baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
         this.environment = environment ?? throw new ArgumentNullException(nameof(environment));

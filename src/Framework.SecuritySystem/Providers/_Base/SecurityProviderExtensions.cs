@@ -2,8 +2,6 @@
 
 using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.SecuritySystem;
 
 public static class SecurityProviderExtensions
@@ -58,7 +56,7 @@ public static class SecurityProviderExtensions
         return new CompositeSecurityProvider<TDomainObject>(accessDeniedExceptionService, securityProvider, otherSecurityProvider, false);
     }
 
-    public static ISecurityProvider<TDomainObject> And<TDomainObject>([NotNull] this IEnumerable<ISecurityProvider<TDomainObject>> securityProviders, IAccessDeniedExceptionService<TDomainObject> accessDeniedExceptionService)
+    public static ISecurityProvider<TDomainObject> And<TDomainObject>(this IEnumerable<ISecurityProvider<TDomainObject>> securityProviders, IAccessDeniedExceptionService<TDomainObject> accessDeniedExceptionService)
 
             where TDomainObject : class
     {
@@ -69,7 +67,7 @@ public static class SecurityProviderExtensions
                                        many   => many.Aggregate((v1, v2) => v1.And(v2, accessDeniedExceptionService)));
     }
 
-    public static ISecurityProvider<TDomainObject> Or<TDomainObject>([NotNull] this IEnumerable<ISecurityProvider<TDomainObject>> securityProviders, IAccessDeniedExceptionService<TDomainObject> accessDeniedExceptionService)
+    public static ISecurityProvider<TDomainObject> Or<TDomainObject>(this IEnumerable<ISecurityProvider<TDomainObject>> securityProviders, IAccessDeniedExceptionService<TDomainObject> accessDeniedExceptionService)
 
             where TDomainObject : class
     {

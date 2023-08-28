@@ -1,10 +1,8 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 public static class StringExtensions
 {
-    public static string ReplaceAny([NotNull] this string source, [NotNull] IEnumerable<char> oldChars, char newChar)
+    public static string ReplaceAny(this string source, IEnumerable<char> oldChars, char newChar)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (oldChars == null) throw new ArgumentNullException(nameof(oldChars));

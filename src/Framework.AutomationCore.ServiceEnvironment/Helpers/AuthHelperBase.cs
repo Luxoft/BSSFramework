@@ -8,7 +8,6 @@ using Framework.Authorization.Generated.DTO;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 
-using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation.ServiceEnvironment;
@@ -42,7 +41,7 @@ public abstract class AuthHelperBase<TBLLContext> : RootServiceProviderContainer
                                   });
     }
 
-    public void AddUserRole(string principalName, [NotNull] params IPermissionDefinition[] permissions)
+    public void AddUserRole(string principalName, params IPermissionDefinition[] permissions)
     {
         foreach (IPermissionDefinition permission in permissions)
         {
@@ -77,7 +76,7 @@ public abstract class AuthHelperBase<TBLLContext> : RootServiceProviderContainer
         this.SetUserRole(default(string), permissions);
     }
 
-    public void SetUserRole(string principalName, [NotNull] params IPermissionDefinition[] permissions)
+    public void SetUserRole(string principalName, params IPermissionDefinition[] permissions)
     {
         if (permissions == null)
         {

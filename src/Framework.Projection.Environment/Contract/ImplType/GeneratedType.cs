@@ -7,7 +7,7 @@ using Framework.Persistent.Mapping;
 using Framework.Security;
 using Framework.Validation;
 
-using JetBrains.Annotations;
+
 
 namespace Framework.Projection.Contract;
 
@@ -65,7 +65,7 @@ internal class GeneratedType : BaseTypeImpl
 
     public override Type UnderlyingSystemType => this.BaseType;
 
-    [NotNull]
+    
     public override Type BaseType => this.isPersistent ? this.environment.PersistentDomainObjectBaseType : this.environment.DomainObjectBaseType;
 
     public override Assembly Assembly { get; } = null;

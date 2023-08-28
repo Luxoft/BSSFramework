@@ -1,7 +1,7 @@
 ﻿using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 
-using JetBrains.Annotations;
+
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 
@@ -66,8 +66,6 @@ public class ConditionLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLContext
         return result;
     }
 
-
-    [UsedImplicitly]
     private bool InvokeWithTypedContext<T>(
             Subscription subscription,
             DomainObjectVersions<T> versions)

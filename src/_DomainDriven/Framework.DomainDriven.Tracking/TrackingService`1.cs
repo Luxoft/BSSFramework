@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-using JetBrains.Annotations;
+
 
 namespace Framework.DomainDriven.Tracking;
 
@@ -77,7 +77,7 @@ public class TrackingService<TPersistentDomainObjectBase> : ITrackingService<TPe
         return changes.GetPrevValue(propertyExpression, defaultValue);
     }
 
-    [NotNull]
+    
     private IEnumerable<ObjectState> GetModifiedObjectStates<TDomainObject>(TDomainObject value)
             where TDomainObject : TPersistentDomainObjectBase
     {

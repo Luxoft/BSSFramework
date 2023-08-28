@@ -6,8 +6,6 @@ using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.Persistent;
 
-using JetBrains.Annotations;
-
 using Serilog;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Services;
@@ -66,7 +64,6 @@ public class RevisionService<T>
     ///     Найденный экземпляр <see cref="DomainObjectVersions{T}"/> или null,
     ///     если для найденного типа доменного объекта не найдено ни одной активной подписки.
     /// </returns>
-    [CanBeNull]
     public virtual DomainObjectVersions<T> GetDomainObjectVersions(Guid domainObjectId, long? revisionNumber)
     {
         if (!this.subscriptionResolver.IsActiveSubscriptionForTypeExists(typeof(T)))

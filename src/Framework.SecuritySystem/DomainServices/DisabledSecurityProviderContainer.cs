@@ -7,7 +7,7 @@ public class DisabledSecurityProviderContainer<TPersistentDomainObjectBase> : ID
     private readonly IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService;
 
     public DisabledSecurityProviderContainer(
-            [NotNull]
+            
             IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService)
     {
         this.accessDeniedExceptionService = accessDeniedExceptionService ?? throw new ArgumentNullException(nameof(accessDeniedExceptionService));

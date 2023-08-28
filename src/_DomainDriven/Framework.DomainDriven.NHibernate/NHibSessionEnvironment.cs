@@ -6,7 +6,7 @@ using Framework.DomainDriven.NHibernate.Audit;
 using Framework.DomainDriven.NHibernate.SqlExceptionProcessors;
 using Framework.Exceptions;
 
-using JetBrains.Annotations;
+
 
 using NHibernate;
 using NHibernate.Cfg;
@@ -79,7 +79,7 @@ public class NHibSessionEnvironment : IDisposable
         }
     }
 
-    [NotNull]
+    
     public NHibConnectionSettings ConnectionSettings { get; }
 
     internal TimeSpan TransactionTimeout { get; }

@@ -2,7 +2,7 @@
 using Framework.Configuration.Domain;
 using Framework.DomainDriven;
 
-using JetBrains.Annotations;
+
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 
@@ -71,8 +71,6 @@ public class DynamicSourceLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLCon
         return result;
     }
 
-
-    [UsedImplicitly]
     private IEnumerable<FilterItemIdentity> InvokeWithTypedContext<T>(
             Subscription subscription,
             DomainObjectVersions<T> versions)

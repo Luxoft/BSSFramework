@@ -9,10 +9,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.DomainDriven.WebApiNetCore.LegacyContext\Framework.DomainDriven.WebApiNetCore.LegacyContext.csproj" />
-    <ProjectReference Include="..\..\Framework.WebApi.Utils\Framework.WebApi.Utils.csproj" />
-    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModel.IAD.LegacyContext\Framework.DomainDriven.ServiceModel.IAD.LegacyContext.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Generated.DTO\Framework.Authorization.Generated.DTO.csproj" />
+
+    <ProjectReference Include="..\..\Framework.WebApi.Utils\Framework.WebApi.Utils.csproj" />
+
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModel.IAD.LegacyContext\Framework.DomainDriven.ServiceModel.IAD.LegacyContext.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.WebApiNetCore.LegacyContext\Framework.DomainDriven.WebApiNetCore.LegacyContext.csproj" />
   </ItemGroup>
 
 </Project>

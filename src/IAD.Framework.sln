@@ -242,13 +242,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Core.Maybe", "Fra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Core.Reflection", "Framework.Core.Reflection\Framework.Core.Reflection.csproj", "{5B30A244-BFD0-4D0E-BF37-D446C7E659BF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DomainDriven.Metadata", "Framework.DomainDriven.Metadata\Framework.DomainDriven.Metadata.csproj", "{464D26DB-6FDF-4B1E-8FB1-D53516DF080C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DomainDriven.Metadata", "_DomainDriven\Framework.DomainDriven.Metadata\Framework.DomainDriven.Metadata.csproj", "{464D26DB-6FDF-4B1E-8FB1-D53516DF080C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DomainDriven.SerializeMetadataType", "Framework.DomainDriven.SerializeMetadataType\Framework.DomainDriven.SerializeMetadataType.csproj", "{5E041071-1BCC-4FCD-B2BB-DCB1B0339445}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DomainDriven.SerializeMetadataType", "_DomainDriven\Framework.DomainDriven.SerializeMetadataType\Framework.DomainDriven.SerializeMetadataType.csproj", "{5E041071-1BCC-4FCD-B2BB-DCB1B0339445}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DomainDriven.WebApiGenerator.NetCore", "Framework.DomainDriven.WebApiGenerator.NetCore\Framework.DomainDriven.WebApiGenerator.NetCore.csproj", "{DC8ED81B-E4F6-4214-92C3-B6E09E19A17C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DomainDriven.WebApiGenerator.NetCore", "_DomainDriven\Framework.DomainDriven.WebApiGenerator.NetCore\Framework.DomainDriven.WebApiGenerator.NetCore.csproj", "{DC8ED81B-E4F6-4214-92C3-B6E09E19A17C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DomainDriven.WebApiNetCore", "Framework.DomainDriven.WebApiNetCore\Framework.DomainDriven.WebApiNetCore.csproj", "{89921B90-1566-4FB7-AFE7-0508EF3ABC7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DomainDriven.WebApiNetCore", "_DomainDriven\Framework.DomainDriven.WebApiNetCore\Framework.DomainDriven.WebApiNetCore.csproj", "{89921B90-1566-4FB7-AFE7-0508EF3ABC7D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.WebApi.Utils", "Framework.WebApi.Utils\Framework.WebApi.Utils.csproj", "{A1FDF70C-5490-410B-B5AC-3A8B108FB4F8}"
 EndProject
@@ -366,7 +366,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DomainDriven.NHib
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DomainDriven.ServiceModel.IAD.LegacyContext", "_DomainDriven\Framework.DomainDriven.ServiceModel.IAD.LegacyContext\Framework.DomainDriven.ServiceModel.IAD.LegacyContext.csproj", "{8867FEAD-0AE7-4AD9-A9FE-2B08621CB83B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DomainDriven.WebApiNetCore.LegacyContext", "Framework.DomainDriven.WebApiNetCore.LegacyContext\Framework.DomainDriven.WebApiNetCore.LegacyContext.csproj", "{CBF242E8-A310-43C0-8EC9-07BDC9212816}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.DomainDriven.WebApiNetCore.LegacyContext", "_DomainDriven\Framework.DomainDriven.WebApiNetCore.LegacyContext\Framework.DomainDriven.WebApiNetCore.LegacyContext.csproj", "{CBF242E8-A310-43C0-8EC9-07BDC9212816}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

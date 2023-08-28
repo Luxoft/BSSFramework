@@ -1,7 +1,5 @@
 ﻿using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.Projection.Contract;
 
 internal class GeneratedField : BaseFieldInfoImpl
@@ -10,7 +8,7 @@ internal class GeneratedField : BaseFieldInfoImpl
 
     private readonly GeneratedProperty property;
 
-    public GeneratedField([NotNull] ProjectionContractEnvironment environment, [NotNull] GeneratedProperty property, GeneratedType reflectedType)
+    public GeneratedField(ProjectionContractEnvironment environment, GeneratedProperty property, GeneratedType reflectedType)
     {
         if (environment == null) throw new ArgumentNullException(nameof(environment));
         if (property == null) throw new ArgumentNullException(nameof(property));

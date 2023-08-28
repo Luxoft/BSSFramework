@@ -14,7 +14,7 @@ namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 public class AttachmentLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLContext>
         where TBLLContext : class
 {
-    public AttachmentLambdaProcessor([NotNull] TBLLContext bllContext)
+    public AttachmentLambdaProcessor(TBLLContext bllContext)
             : base(bllContext)
     {
     }
@@ -22,8 +22,8 @@ public class AttachmentLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLContex
     protected override string LambdaName => "Attachment";
 
     public virtual IEnumerable<NativeAttachment> Invoke<T>(
-            [NotNull] Subscription subscription,
-            [NotNull] DomainObjectVersions<T> versions)
+            Subscription subscription,
+            DomainObjectVersions<T> versions)
             where T : class
     {
         if (versions == null)

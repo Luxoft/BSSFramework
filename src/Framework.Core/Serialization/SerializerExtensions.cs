@@ -1,24 +1,22 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.Core.Serialization;
+﻿namespace Framework.Core.Serialization;
 
 public static class SerializerExtensions
 {
-    public static TSerializedValue Serialize<TSerializedValue, TValue>([NotNull] this ISerializer<TSerializedValue, TValue> serializer, TValue value)
+    public static TSerializedValue Serialize<TSerializedValue, TValue>(this ISerializer<TSerializedValue, TValue> serializer, TValue value)
     {
         if (serializer == null) throw new ArgumentNullException(nameof(serializer));
 
         return serializer.Format(value);
     }
 
-    public static TValue Deserialize<TSerializedValue, TValue>([NotNull] this ISerializer<TSerializedValue, TValue> serializer, TSerializedValue value)
+    public static TValue Deserialize<TSerializedValue, TValue>(this ISerializer<TSerializedValue, TValue> serializer, TSerializedValue value)
     {
         if (serializer == null) throw new ArgumentNullException(nameof(serializer));
 
         return serializer.Parse(value);
     }
 
-    public static ISerializer<TValue, TResult> WithParseCache<TValue, TResult>([NotNull] this ISerializer<TValue, TResult> serializer)
+    public static ISerializer<TValue, TResult> WithParseCache<TValue, TResult>(this ISerializer<TValue, TResult> serializer)
     {
         if (serializer == null) throw new ArgumentNullException(nameof(serializer));
 
@@ -33,7 +31,7 @@ public static class SerializerExtensions
     //    return new Serializer<TValue, TResult>(FuncHelper.Create((TValue value) => serializer.Format(value)).WithLock());
     //}
 
-    public static ISerializer<TS2, TValue> Select<TS1, TS2, TValue>([NotNull] this ISerializer<TS1, TValue> serializer, [NotNull] ISerializer<TS2, TS1> nextSerializer)
+    public static ISerializer<TS2, TValue> Select<TS1, TS2, TValue>(this ISerializer<TS1, TValue> serializer, ISerializer<TS2, TS1> nextSerializer)
     {
         if (serializer == null) throw new ArgumentNullException(nameof(serializer));
         if (nextSerializer == null) throw new ArgumentNullException(nameof(nextSerializer));

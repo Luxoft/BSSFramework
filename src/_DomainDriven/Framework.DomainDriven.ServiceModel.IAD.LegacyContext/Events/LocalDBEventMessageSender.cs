@@ -3,8 +3,6 @@ using Framework.Core;
 using Framework.Events;
 using Framework.Persistent;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
 /// <summary>
@@ -27,7 +25,7 @@ public abstract class LocalDBEventMessageSender<TBLLContext, TPersistentDomainOb
     /// <param name="context">Контекст системы</param>
     /// <param name="configurationContext">Контекст утилит</param>
     /// <param name="queueTag">Таг, маркирующий очередь евентов</param>
-    protected LocalDBEventMessageSender([NotNull] TBLLContext context, [NotNull] IConfigurationBLLContext configurationContext, [NotNull] string queueTag = "default")
+    protected LocalDBEventMessageSender(TBLLContext context, IConfigurationBLLContext configurationContext, string queueTag = "default")
             : base(context)
     {
         if (string.IsNullOrWhiteSpace(queueTag)) { throw new ArgumentException("Value cannot be null or whitespace.", nameof(queueTag)); }

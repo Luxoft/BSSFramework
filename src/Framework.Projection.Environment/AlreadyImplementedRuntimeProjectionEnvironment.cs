@@ -1,7 +1,5 @@
 ﻿using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.Projection;
 
 /// <summary>
@@ -11,7 +9,7 @@ public class AlreadyImplementedRuntimeProjectionEnvironment : IProjectionEnviron
 {
     private readonly IProjectionEnvironment baseEnvironment;
 
-    public AlreadyImplementedRuntimeProjectionEnvironment([NotNull] IProjectionEnvironment baseEnvironment)
+    public AlreadyImplementedRuntimeProjectionEnvironment(IProjectionEnvironment baseEnvironment)
     {
         this.baseEnvironment = baseEnvironment ?? throw new ArgumentNullException(nameof(baseEnvironment));
 

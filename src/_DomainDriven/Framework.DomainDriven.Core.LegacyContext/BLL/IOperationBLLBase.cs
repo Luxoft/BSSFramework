@@ -1,20 +1,18 @@
 ﻿using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.BLL;
 
 public interface IOperationBLLBase<in TDomainObject>
 {
-    void Save([NotNull] TDomainObject domainObject);
+    void Save(TDomainObject domainObject);
 
 
-    void Remove([NotNull] TDomainObject domainObject);
+    void Remove(TDomainObject domainObject);
 }
 
 public static class OperationBLLBaseExtensions
 {
-    public static void Save<TDomainObject>([NotNull] this IOperationBLLBase<TDomainObject> bll, [NotNull] IEnumerable<TDomainObject> domainObjects)
+    public static void Save<TDomainObject>(this IOperationBLLBase<TDomainObject> bll, IEnumerable<TDomainObject> domainObjects)
     {
         if (bll == null) throw new ArgumentNullException(nameof(bll));
         if (domainObjects == null) throw new ArgumentNullException(nameof(domainObjects));
@@ -22,7 +20,7 @@ public static class OperationBLLBaseExtensions
         domainObjects.Foreach(bll.Save);
     }
 
-    public static void Remove<TDomainObject>([NotNull] this IOperationBLLBase<TDomainObject> bll, [NotNull] IEnumerable<TDomainObject> domainObjects)
+    public static void Remove<TDomainObject>(this IOperationBLLBase<TDomainObject> bll, IEnumerable<TDomainObject> domainObjects)
     {
         if (bll == null) throw new ArgumentNullException(nameof(bll));
         if (domainObjects == null) throw new ArgumentNullException(nameof(domainObjects));

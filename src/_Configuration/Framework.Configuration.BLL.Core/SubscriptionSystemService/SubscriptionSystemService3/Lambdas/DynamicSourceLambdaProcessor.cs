@@ -35,8 +35,8 @@ public class DynamicSourceLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLCon
     /// versions равен null.
     /// </exception>
     public virtual IEnumerable<FilterItemIdentity> Invoke<T>(
-            [NotNull] Subscription subscription,
-            [NotNull] DomainObjectVersions<T> versions)
+            Subscription subscription,
+            DomainObjectVersions<T> versions)
             where T : class
     {
         if (subscription == null)

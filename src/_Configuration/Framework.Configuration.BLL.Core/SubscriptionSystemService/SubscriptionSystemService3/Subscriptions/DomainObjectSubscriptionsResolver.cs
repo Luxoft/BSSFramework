@@ -1,8 +1,6 @@
 ﻿using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 
-using JetBrains.Annotations;
-
 using Serilog;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
@@ -19,7 +17,7 @@ public sealed class DomainObjectSubscriptionsResolver : SubscriptionResolver
     /// <summary>Создает экземпляр класса <see cref="DomainObjectSubscriptionsResolver"/>.</summary>
     /// <param name="configurationContextFacade">Фасад контекста конфигурации.</param>
     /// <exception cref="ArgumentNullException">Аргумент configurationContextFacade равен null.</exception>
-    public DomainObjectSubscriptionsResolver([NotNull] ConfigurationContextFacade configurationContextFacade)
+    public DomainObjectSubscriptionsResolver(ConfigurationContextFacade configurationContextFacade)
     {
         if (configurationContextFacade == null)
         {
@@ -32,21 +30,21 @@ public sealed class DomainObjectSubscriptionsResolver : SubscriptionResolver
     }
 
     /// <inheritdoc/>
-    public override IEnumerable<Subscription> Resolve<T>([NotNull] DomainObjectVersions<T> versions)
+    public override IEnumerable<Subscription> Resolve<T>(DomainObjectVersions<T> versions)
     {
         yield break;
     }
 
     /// <inheritdoc/>
-    public override bool IsActiveSubscriptionForTypeExists([NotNull] Type domainObjectType)
+    public override bool IsActiveSubscriptionForTypeExists(Type domainObjectType)
     {
         return false;
     }
 
     /// <inheritdoc/>
     public override Subscription Resolve<T>(
-            [NotNull] string subscriptionCode,
-            [NotNull] DomainObjectVersions<T> versions)
+            string subscriptionCode,
+            DomainObjectVersions<T> versions)
     {
         if (subscriptionCode == null)
         {

@@ -1,8 +1,6 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 public interface IQueryableProcessor<T>
 {
-    IQueryable<T> Process([NotNull] IQueryable<T> baseQueryable);
+    IQueryable<T> Process(IQueryable<T> baseQueryable);
 }

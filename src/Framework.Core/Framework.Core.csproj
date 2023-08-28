@@ -1,14 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Core</PackageId>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" />
-  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Framework.Core.Maybe\Framework.Core.Maybe.csproj" />
     <ProjectReference Include="..\Framework.Core.DictionaryCache\Framework.Core.DictionaryCache.csproj" />
@@ -22,4 +21,5 @@
     <ProjectReference Include="..\Framework.Core.NullableObject\Framework.Core.NullableObject.csproj" />
     <ProjectReference Include="..\Framework.Core.Delegate\Framework.Core.Delegate.csproj" />
   </ItemGroup>
+
 </Project>

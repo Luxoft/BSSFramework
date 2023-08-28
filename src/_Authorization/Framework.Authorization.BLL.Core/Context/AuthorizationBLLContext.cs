@@ -36,26 +36,26 @@ public partial class AuthorizationBLLContext
     private readonly ISecurityProvider<Operation> operationSecurityProvider;
 
     public AuthorizationBLLContext(
-            [NotNull] IServiceProvider serviceProvider,
-            [NotNull] IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
-            [NotNull] ITrackingService<PersistentDomainObjectBase> trackingService,
-            [NotNull] IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
-            [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
-            [NotNull] IAuthorizationValidator validator,
-            [NotNull] IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
-            [NotNull] IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
-            [NotNull] IDateTimeService dateTimeService,
-            [NotNull] IUserAuthenticationService userAuthenticationService,
-            [NotNull] ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
-            [NotNull] IConfigurationBLLContext configuration,
-            [NotNull] IAuthorizationSecurityService securityService,
-            [NotNull] IAuthorizationBLLFactoryContainer logics,
-            [NotNull] IAuthorizationExternalSource externalSource,
-            [NotNull] IRunAsManager runAsManager,
-            [NotNull] ISecurityTypeResolverContainer securityTypeResolverContainer,
-            [NotNull] IRuntimePermissionOptimizationService optimizeRuntimePermissionService,
-            [NotNull] INotificationPrincipalExtractor notificationPrincipalExtractor,
-            [NotNull] IAuthorizationBLLContextSettings settings)
+            IServiceProvider serviceProvider,
+            IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
+            ITrackingService<PersistentDomainObjectBase> trackingService,
+            IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
+            IStandartExpressionBuilder standartExpressionBuilder,
+            IAuthorizationValidator validator,
+            IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
+            IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
+            IDateTimeService dateTimeService,
+            IUserAuthenticationService userAuthenticationService,
+            ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
+            IConfigurationBLLContext configuration,
+            IAuthorizationSecurityService securityService,
+            IAuthorizationBLLFactoryContainer logics,
+            IAuthorizationExternalSource externalSource,
+            IRunAsManager runAsManager,
+            ISecurityTypeResolverContainer securityTypeResolverContainer,
+            IRuntimePermissionOptimizationService optimizeRuntimePermissionService,
+            INotificationPrincipalExtractor notificationPrincipalExtractor,
+            IAuthorizationBLLContextSettings settings)
             : base(
                    serviceProvider,
                    operationSenders,
@@ -161,7 +161,7 @@ public partial class AuthorizationBLLContext
         return this.HasAccess(new AvailablePermissionOperationFilter(this.DateTimeService, this.RunAsManager.PrincipalName, operation));
     }
 
-    public bool HasAccess<TSecurityOperationCode>([NotNull] NonContextSecurityOperation<TSecurityOperationCode> securityOperation, bool withRunAs)
+    public bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation, bool withRunAs)
             where TSecurityOperationCode : struct, Enum
     {
         if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
@@ -182,7 +182,7 @@ public partial class AuthorizationBLLContext
         return this.Logics.BusinessRole.HasAdminRole();
     }
 
-    public bool HasAccess<TSecurityOperationCode>([NotNull] NonContextSecurityOperation<TSecurityOperationCode> securityOperation)
+    public bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation)
             where TSecurityOperationCode : struct, Enum
     {
         return this.HasAccess(securityOperation, true);
@@ -324,7 +324,7 @@ public partial class AuthorizationBLLContext
         return this.GetPermissionVisualParts(permission).Join(separator);
     }
 
-    private IEnumerable<string> GetPermissionVisualParts([NotNull] Permission permission)
+    private IEnumerable<string> GetPermissionVisualParts(Permission permission)
     {
         if (permission == null) throw new ArgumentNullException(nameof(permission));
 

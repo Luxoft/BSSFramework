@@ -5,8 +5,6 @@ using Framework.Core;
 using Framework.DomainDriven.BLL.Security;
 using Framework.Security;
 
-using JetBrains.Annotations;
-
 namespace Framework.Authorization.BLL;
 
 public static class OperationBLLExtensions
@@ -34,7 +32,7 @@ public static class OperationBLLExtensions
                   .OrderBy(v => v);
     }
 
-    private static IEnumerable<TSecurityOperationCode> ToSecurityOperationCodes<TSecurityOperationCode>([NotNull] this IEnumerable<Operation> operations)
+    private static IEnumerable<TSecurityOperationCode> ToSecurityOperationCodes<TSecurityOperationCode>(this IEnumerable<Operation> operations)
             where TSecurityOperationCode : struct, Enum
     {
         if (operations == null) throw new ArgumentNullException(nameof(operations));
@@ -42,7 +40,7 @@ public static class OperationBLLExtensions
         return operations.Select(operation => operation.Id.ToSecurityOperation<TSecurityOperationCode>()).CollectMaybe();
     }
 
-    private static IEnumerable<Enum> ToSecurityOperationCodes([NotNull] this IEnumerable<Operation> operations, [NotNull] Type securityOperationType)
+    private static IEnumerable<Enum> ToSecurityOperationCodes(this IEnumerable<Operation> operations, Type securityOperationType)
     {
         if (operations == null) throw new ArgumentNullException(nameof(operations));
         if (securityOperationType == null) throw new ArgumentNullException(nameof(securityOperationType));

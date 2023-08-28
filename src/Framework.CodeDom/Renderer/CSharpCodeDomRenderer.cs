@@ -3,8 +3,6 @@ using System.CodeDom.Compiler;
 
 using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.CodeDom;
 
 public class CSharpCodeDomRenderer : CodeDomProviderRenderer
@@ -256,7 +254,7 @@ public class CSharpCodeDomRenderer : CodeDomProviderRenderer
             return codeStatements.ToArray(this.Renderer.Render);
         }
 
-        protected override CodeTypeDeclaration NormalizeStaticClass([NotNull] CodeTypeDeclaration decl)
+        protected override CodeTypeDeclaration NormalizeStaticClass(CodeTypeDeclaration decl)
         {
             if (decl == null) throw new ArgumentNullException(nameof(decl));
 

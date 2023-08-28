@@ -2,8 +2,6 @@
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 
-using JetBrains.Annotations;
-
 using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
@@ -13,7 +11,7 @@ namespace SampleSystem.ServiceEnvironment;
 
 public class PermissionWorkflowDALListener : BLLContextContainer<ISampleSystemBLLContext>, IBeforeTransactionCompletedDALListener
 {
-    public PermissionWorkflowDALListener([NotNull] ISampleSystemBLLContext context)
+    public PermissionWorkflowDALListener(ISampleSystemBLLContext context)
         : base(context)
     {
     }

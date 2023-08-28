@@ -5,8 +5,6 @@ using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Notification;
 
-using JetBrains.Annotations;
-
 using Serilog;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Services;
@@ -39,10 +37,10 @@ public class SubscriptionNotificationService<TBLLContext>
     /// равен null.
     /// </exception>
     public SubscriptionNotificationService(
-            [NotNull] SubscriptionResolver subscriptionsResolver,
-            [NotNull] MessageTemplateFactory<TBLLContext> templateFactory,
-            [NotNull] IMessageSender<MessageTemplateNotification> sender,
-            [NotNull] ConfigurationContextFacade configurationContextFacade)
+            SubscriptionResolver subscriptionsResolver,
+            MessageTemplateFactory<TBLLContext> templateFactory,
+            IMessageSender<MessageTemplateNotification> sender,
+            ConfigurationContextFacade configurationContextFacade)
     {
         if (subscriptionsResolver == null)
         {
@@ -80,7 +78,7 @@ public class SubscriptionNotificationService<TBLLContext>
     /// </returns>
     /// <exception cref="ArgumentNullException">Аргумент versions равен null.</exception>
     public virtual IList<ITryResult<Subscription>> NotifyDomainObjectChanged<T>(
-            [NotNull] DomainObjectVersions<T> versions)
+            DomainObjectVersions<T> versions)
             where T : class
     {
         if (versions == null)
@@ -98,8 +96,8 @@ public class SubscriptionNotificationService<TBLLContext>
     /// <param name="versions">Версии доменного объекта.</param>
     /// <exception cref="ArgumentNullException">Аргумент subscription или versions равен null.</exception>
     public virtual void NotifyDomainObjectChanged<T>(
-            [NotNull] Subscription subscription,
-            [NotNull] DomainObjectVersions<T> versions)
+            Subscription subscription,
+            DomainObjectVersions<T> versions)
             where T : class
     {
         if (subscription == null)

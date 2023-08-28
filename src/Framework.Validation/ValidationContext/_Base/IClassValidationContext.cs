@@ -1,6 +1,4 @@
-﻿using Framework.Core;
-
-namespace Framework.Validation;
+﻿namespace Framework.Validation;
 
 public interface IClassValidationContext<out TSource> : IValidationContext<TSource, IClassValidationMap>
 {

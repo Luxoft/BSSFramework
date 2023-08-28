@@ -1,13 +1,11 @@
 ﻿using Framework.Configuration.Domain;
 using Framework.DomainDriven.BLL;
 
-using JetBrains.Annotations;
-
 namespace Framework.Configuration.BLL;
 
 public partial interface IDomainTypeBLL : IPathBLL<DomainType>
 {
-    DomainType GetByType([NotNull] Type domainObjectType);
+    DomainType GetByType(Type domainObjectType);
 
     /// <summary>
     /// Ручное инициирование события

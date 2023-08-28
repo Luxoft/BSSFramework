@@ -1,7 +1,5 @@
 ﻿using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.Projection.Lambda;
 
 /// <summary>
@@ -16,7 +14,7 @@ public abstract class AttributeSourceBase<TProjectionValue> : IAttributeSource
     /// </summary>
     /// <param name="environment">Окружение</param>
     /// <param name="projectionValue">Проекционный объект</param>
-    protected AttributeSourceBase([NotNull] ProjectionLambdaEnvironment environment, [NotNull] TProjectionValue projectionValue)
+    protected AttributeSourceBase(ProjectionLambdaEnvironment environment, TProjectionValue projectionValue)
     {
         this.Environment = environment ?? throw new ArgumentNullException(nameof(environment));
         this.ProjectionValue = projectionValue ?? throw new ArgumentNullException(nameof(projectionValue));

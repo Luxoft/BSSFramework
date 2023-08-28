@@ -4,7 +4,6 @@ using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.ServiceModel.IAD;
-using Framework.DomainDriven.Tracking;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

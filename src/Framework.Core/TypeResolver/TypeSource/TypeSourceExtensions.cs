@@ -1,10 +1,8 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 public static class TypeSourceExtensions
 {
-    public static ITypeResolver<string> ToDefaultTypeResolver([NotNull] this ITypeSource typeSource)
+    public static ITypeResolver<string> ToDefaultTypeResolver(this ITypeSource typeSource)
     {
         if (typeSource == null) throw new ArgumentNullException(nameof(typeSource));
 

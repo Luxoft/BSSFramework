@@ -3,8 +3,6 @@
 using Framework.Core;
 using Framework.Persistent;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven;
 
 public class ExpandFetchPathFactory : DTOFetchPathFactory, IFetchPathFactory<FetchBuildRule.DTOFetchBuildRule>
@@ -16,7 +14,7 @@ public class ExpandFetchPathFactory : DTOFetchPathFactory, IFetchPathFactory<Fet
     }
 
 
-    protected override PropertyLoadNode ExpandNode([NotNull] PropertyLoadNode node)
+    protected override PropertyLoadNode ExpandNode(PropertyLoadNode node)
     {
         if (node == null) throw new ArgumentNullException(nameof(node));
 
@@ -36,7 +34,7 @@ public class ExpandFetchPathFactory : DTOFetchPathFactory, IFetchPathFactory<Fet
         return preResult.SelectN(this.ExpandNode, false);
     }
 
-    private IEnumerable<PropertyPath> ExpandProperty([NotNull] PropertyInfo property)
+    private IEnumerable<PropertyPath> ExpandProperty(PropertyInfo property)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
@@ -55,7 +53,7 @@ public class ExpandFetchPathFactory : DTOFetchPathFactory, IFetchPathFactory<Fet
         }
     }
 
-    private PropertyLoadNode ToLoadNode(Type domainType, [NotNull] PropertyPath propertyPath)
+    private PropertyLoadNode ToLoadNode(Type domainType, PropertyPath propertyPath)
     {
         if (propertyPath == null) throw new ArgumentNullException(nameof(propertyPath));
 

@@ -1,7 +1,5 @@
 ﻿using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.Events;
 
 /// <summary>
@@ -16,7 +14,7 @@ public abstract class EventDTOMessageSender<TBLLContext, TPersistentDomainObject
 {
     private readonly IMessageSender<TEventDTOBase> messageSender;
 
-    protected EventDTOMessageSender(TBLLContext context, [NotNull] IMessageSender<TEventDTOBase> messageSender)
+    protected EventDTOMessageSender(TBLLContext context, IMessageSender<TEventDTOBase> messageSender)
             : base(context)
     {
         this.messageSender = messageSender ?? throw new ArgumentNullException(nameof(messageSender));

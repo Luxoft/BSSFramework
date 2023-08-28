@@ -8,8 +8,6 @@ using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Transfering;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven;
 
 public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
@@ -46,7 +44,7 @@ public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
     }
 
 
-    protected virtual bool IsTransferType([NotNull] Type type)
+    protected virtual bool IsTransferType(Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
@@ -185,7 +183,7 @@ public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
 
     protected class PropertyLoadNode
     {
-        public PropertyLoadNode([NotNull] Type domainType, [NotNull] IReadOnlyDictionary<PropertyInfo, PropertyLoadNode> properties, [NotNull] IEnumerable<PropertyInfo> primitiveProperties)
+        public PropertyLoadNode(Type domainType, IReadOnlyDictionary<PropertyInfo, PropertyLoadNode> properties, IEnumerable<PropertyInfo> primitiveProperties)
         {
             if (domainType == null) throw new ArgumentNullException(nameof(domainType));
             if (properties == null) throw new ArgumentNullException(nameof(properties));
@@ -203,7 +201,7 @@ public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
         public ReadOnlyCollection<PropertyInfo> PrimitiveProperties { get; private set; }
 
 
-        public PropertyLoadNode WhereP([NotNull] Func<PropertyInfo, bool> propertyFilter, bool recurse)
+        public PropertyLoadNode WhereP(Func<PropertyInfo, bool> propertyFilter, bool recurse)
         {
             if (propertyFilter == null) throw new ArgumentNullException(nameof(propertyFilter));
 
@@ -216,7 +214,7 @@ public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
                                         this.PrimitiveProperties.Where(propertyFilter));
         }
 
-        public PropertyLoadNode SelectN([NotNull] Func<PropertyLoadNode, PropertyLoadNode> nodeSelector, bool recurse)
+        public PropertyLoadNode SelectN(Func<PropertyLoadNode, PropertyLoadNode> nodeSelector, bool recurse)
         {
             if (nodeSelector == null) throw new ArgumentNullException(nameof(nodeSelector));
 
@@ -230,7 +228,7 @@ public class DTOFetchPathFactory : IFetchPathFactory<ViewDTOType>
         }
 
 
-        public static PropertyLoadNode operator +([NotNull] PropertyLoadNode node1, [NotNull] PropertyLoadNode node2)
+        public static PropertyLoadNode operator +(PropertyLoadNode node1, PropertyLoadNode node2)
         {
             if (node1 == null) throw new ArgumentNullException(nameof(node1));
             if (node2 == null) throw new ArgumentNullException(nameof(node2));

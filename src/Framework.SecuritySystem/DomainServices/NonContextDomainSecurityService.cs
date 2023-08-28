@@ -27,9 +27,9 @@ public abstract class NonContextDomainSecurityServiceBase<TPersistentDomainObjec
 
 
     protected NonContextDomainSecurityServiceBase(
-            [NotNull] IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
+            IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
             IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
-            [NotNull] ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver)
+            ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver)
             : base(disabledSecurityProviderContainer)
     {
         this.AccessDeniedExceptionService = accessDeniedExceptionService;
@@ -48,7 +48,7 @@ public abstract class NonContextDomainSecurityServiceBase<TPersistentDomainObjec
     protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityOperation<TSecurityOperationCode> securityOperation);
 
 
-    public ISecurityProvider<TDomainObject> GetSecurityProvider([NotNull] SecurityOperation<TSecurityOperationCode> securityOperation)
+    public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityOperation<TSecurityOperationCode> securityOperation)
     {
         if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
 
@@ -79,10 +79,10 @@ public abstract class NonContextDomainSecurityService<TPersistentDomainObjectBas
 
 
     protected NonContextDomainSecurityService(
-            [NotNull] IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
-            [NotNull] IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
-            [NotNull] ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver,
-            [NotNull] IAuthorizationSystem<TIdent> authorizationSystem)
+            IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
+            IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
+            ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver,
+            IAuthorizationSystem<TIdent> authorizationSystem)
             : base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver)
     {
         this.disabledSecurityProviderContainer = disabledSecurityProviderContainer;

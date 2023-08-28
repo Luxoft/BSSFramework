@@ -1,11 +1,9 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.DomainDriven.BLL;
+﻿namespace Framework.DomainDriven.BLL;
 
 public class BLLContextContainer<TBLLContext> : IBLLContextContainer<TBLLContext>
         where TBLLContext : class
 {
-    public BLLContextContainer([NotNull] TBLLContext context)
+    public BLLContextContainer(TBLLContext context)
     {
         if (context == null) throw new ArgumentNullException(nameof(context));
 

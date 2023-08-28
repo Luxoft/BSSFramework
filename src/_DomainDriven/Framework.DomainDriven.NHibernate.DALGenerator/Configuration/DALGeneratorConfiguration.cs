@@ -2,8 +2,6 @@
 using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.Metadata;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.NHibernate.DALGenerator;
 
 public class GeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<TEnvironment>, IGeneratorConfigurationBase<TEnvironment>
@@ -48,7 +46,7 @@ public class GeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<T
 
     protected virtual AssemblyMetadata CreateAssemblyMetadata(IAssemblyInfo assembly) => MetadataReader.GetAssemblyMetadata(this.Environment.PersistentDomainObjectBaseType, assembly);
 
-    private IMappingGenerator GetMappingGenerator([NotNull] IAssemblyInfo assembly)
+    private IMappingGenerator GetMappingGenerator(IAssemblyInfo assembly)
     {
         if (assembly == null) throw new ArgumentNullException(nameof(assembly));
 

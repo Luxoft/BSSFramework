@@ -3,8 +3,6 @@ using Framework.Core;
 using Framework.DomainDriven;
 using Framework.Notification;
 
-using JetBrains.Annotations;
-
 namespace Framework.NotificationCore.Jobs;
 
 public class SendNotificationsJob : ISendNotificationsJob
@@ -14,8 +12,8 @@ public class SendNotificationsJob : ISendNotificationsJob
     private readonly IExceptionStorage exceptionStorage;
 
     public SendNotificationsJob(
-            [NotNull] IContextEvaluator<IConfigurationBLLContext> contextEvaluator,
-            [NotNull] IExceptionStorage exceptionStorage = null)
+            IContextEvaluator<IConfigurationBLLContext> contextEvaluator,
+            IExceptionStorage exceptionStorage = null)
     {
         this.contextEvaluator = contextEvaluator ?? throw new ArgumentNullException(nameof(contextEvaluator));
         this.exceptionStorage = exceptionStorage;

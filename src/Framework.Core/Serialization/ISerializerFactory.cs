@@ -1,7 +1,5 @@
 ﻿using System.Reflection;
 
-using JetBrains.Annotations;
-
 namespace Framework.Core.Serialization;
 
 public interface ISerializerFactory<TSerializedValue>
@@ -18,7 +16,7 @@ public static class SerializerFactoryExtensions
         return serializerFactory.Create<TValue>().Serialize(value);
     }
 
-    public static void Validate<TSerializedValue>([NotNull] this ISerializerFactory<TSerializedValue> serializerFactory, [NotNull] Type valueType, TSerializedValue serializedValue)
+    public static void Validate<TSerializedValue>(this ISerializerFactory<TSerializedValue> serializerFactory, Type valueType, TSerializedValue serializedValue)
     {
         if (serializerFactory == null) throw new ArgumentNullException(nameof(serializerFactory));
         if (serializedValue == null) throw new ArgumentNullException(nameof(serializedValue));
@@ -35,7 +33,7 @@ public static class SerializerFactoryExtensions
         }
     }
 
-    private static void InternalValidate<TSerializedValue, TValue>([NotNull] this ISerializerFactory<TSerializedValue> serializerFactory, TSerializedValue serializedValue)
+    private static void InternalValidate<TSerializedValue, TValue>(this ISerializerFactory<TSerializedValue> serializerFactory, TSerializedValue serializedValue)
     {
         if (serializerFactory == null) throw new ArgumentNullException(nameof(serializerFactory));
         if (serializedValue == null) throw new ArgumentNullException(nameof(serializedValue));

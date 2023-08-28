@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.DomainDriven.Generation;
+﻿namespace Framework.DomainDriven.Generation;
 
 public static class CheckOutServiceExtensions
 {
@@ -14,7 +12,7 @@ public static class CheckOutServiceExtensions
         private readonly ICheckOutService _baseCheckOutService;
 
 
-        public TraceCheckOutService([NotNull] ICheckOutService baseCheckOutService)
+        public TraceCheckOutService(ICheckOutService baseCheckOutService)
         {
             this._baseCheckOutService = baseCheckOutService;
 

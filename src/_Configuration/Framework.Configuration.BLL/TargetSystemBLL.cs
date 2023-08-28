@@ -7,8 +7,6 @@ using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Transfering;
 
-using JetBrains.Annotations;
-
 namespace Framework.Configuration.BLL;
 
 public partial class TargetSystemBLL
@@ -37,7 +35,7 @@ public partial class TargetSystemBLL
         return this.Register(typeof(TPersistentDomainObjectBase).GetTargetSystemName(), false, isMain, isRevision, typeof(TPersistentDomainObjectBase).GetTargetSystemId(), request.ToDictionary().Concat(extTypes ?? new Dictionary<Guid, Type>()));
     }
 
-    private TargetSystem Register([NotNull] string targetSystemName, bool isBase, bool isMain, bool isRevision, Guid id, [NotNull] IReadOnlyDictionary<Guid, Type> domainTypes)
+    private TargetSystem Register(string targetSystemName, bool isBase, bool isMain, bool isRevision, Guid id, IReadOnlyDictionary<Guid, Type> domainTypes)
     {
         if (targetSystemName == null) throw new ArgumentNullException(nameof(targetSystemName));
         if (domainTypes == null) throw new ArgumentNullException(nameof(domainTypes));

@@ -2,8 +2,6 @@
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.NHibernate.Audit;
 
-using JetBrains.Annotations;
-
 using NHibernate.Cfg;
 using NHibernate.Envers.Configuration;
 using NHibernate.Envers.Configuration.Store;
@@ -14,7 +12,7 @@ namespace Framework.DomainDriven.NHibernate;
 
 public static class AuditedExtension
 {
-    public static void InitializeAudit([NotNull] this Configuration configuration, [NotNull] IEnumerable<IMappingSettings> preMappingSettings, [NotNull] IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService)
+    public static void InitializeAudit(this Configuration configuration, IEnumerable<IMappingSettings> preMappingSettings, IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService)
     {
         if (configuration == null)
         {

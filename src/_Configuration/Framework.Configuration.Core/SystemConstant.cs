@@ -2,8 +2,6 @@
 
 using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.Configuration;
 
 public class SystemConstant<T>
@@ -14,7 +12,7 @@ public class SystemConstant<T>
 
     }
 
-    public SystemConstant([NotNull] string code, T defaultValue, string description)
+    public SystemConstant(string code, T defaultValue, string description)
     {
         if (code == null) throw new ArgumentNullException(nameof(code));
 

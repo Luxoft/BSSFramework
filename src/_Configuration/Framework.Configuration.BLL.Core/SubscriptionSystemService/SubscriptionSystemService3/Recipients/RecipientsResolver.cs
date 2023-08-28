@@ -2,8 +2,6 @@
 using Framework.Configuration.Domain;
 using Framework.Core;
 
-using JetBrains.Annotations;
-
 using Serilog;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
@@ -35,9 +33,9 @@ public class RecipientsResolver<TBLLContext>
     /// configurationContextFacade равен null.
     /// </exception>
     public RecipientsResolver(
-            [NotNull] GenerationRecipientsResolver<TBLLContext> generationResolver,
-            [NotNull] ByRolesRecipientsResolver<TBLLContext> rolesResolver,
-            [NotNull] ConfigurationContextFacade configurationContextFacade)
+            GenerationRecipientsResolver<TBLLContext> generationResolver,
+            ByRolesRecipientsResolver<TBLLContext> rolesResolver,
+            ConfigurationContextFacade configurationContextFacade)
     {
         if (generationResolver == null)
         {
@@ -72,8 +70,8 @@ public class RecipientsResolver<TBLLContext>
     ///     versions равен null.
     /// </exception>
     public virtual IEnumerable<RecipientsResolverResult> Resolve<T>(
-            [NotNull] Subscription subscription,
-            [NotNull] DomainObjectVersions<T> versions)
+            Subscription subscription,
+            DomainObjectVersions<T> versions)
             where T : class
     {
         if (subscription == null)

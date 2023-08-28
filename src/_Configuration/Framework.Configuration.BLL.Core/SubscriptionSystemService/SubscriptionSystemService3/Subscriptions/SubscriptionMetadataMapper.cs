@@ -1,8 +1,6 @@
 ﻿using Framework.Configuration.Domain;
 using Framework.Configuration.SubscriptionModeling;
 
-using JetBrains.Annotations;
-
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 
 /// <summary>
@@ -35,7 +33,7 @@ public class SubscriptionMetadataMapper
     /// <exception cref="System.ArgumentNullException">
     ///     Аргумент <paramref name="configurationContextFacade" /> равен null.
     /// </exception>
-    public SubscriptionMetadataMapper([NotNull] ConfigurationContextFacade configurationContextFacade)
+    public SubscriptionMetadataMapper(ConfigurationContextFacade configurationContextFacade)
     {
         if (configurationContextFacade == null)
         {
@@ -52,7 +50,7 @@ public class SubscriptionMetadataMapper
     /// <param name="metadata">Описание подписки.</param>
     /// <returns>Экземпляр <see cref="Subscription" />, созданный на основе описания</returns>
     /// <exception cref="System.ArgumentNullException">Параметр <paramref name="metadata" /> равен null.</exception>
-    public virtual Subscription Map([NotNull] ISubscriptionMetadata metadata)
+    public virtual Subscription Map(ISubscriptionMetadata metadata)
     {
         if (metadata == null)
         {

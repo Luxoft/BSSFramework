@@ -1,5 +1,4 @@
 ﻿using Framework.Core.Services;
-using JetBrains.Annotations;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,7 +8,7 @@ public class ContextEvaluator<TBLLContext> : IContextEvaluator<TBLLContext>
 {
     private readonly IDBSessionEvaluator dbSessionEvaluator;
 
-    public ContextEvaluator([NotNull] IDBSessionEvaluator dbSessionEvaluator)
+    public ContextEvaluator(IDBSessionEvaluator dbSessionEvaluator)
     {
         this.dbSessionEvaluator = dbSessionEvaluator ?? throw new ArgumentNullException(nameof(dbSessionEvaluator));
     }

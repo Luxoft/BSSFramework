@@ -3,8 +3,6 @@ using System.Reflection;
 
 using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven;
 
 public static class FetchContainerExtensions
@@ -50,7 +48,7 @@ public static class FetchContainerExtensions
         return container.Fetchs.SelectMany(f => f.ToPropertyPaths());
     }
 
-    public static IFetchContainer<TDomainObject> Compress<TDomainObject>([NotNull] this IFetchContainer<TDomainObject> container)
+    public static IFetchContainer<TDomainObject> Compress<TDomainObject>(this IFetchContainer<TDomainObject> container)
     {
         if (container == null) throw new ArgumentNullException(nameof(container));
 

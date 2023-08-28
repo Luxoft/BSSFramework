@@ -7,8 +7,6 @@ using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.UnitTesting;
 
-using JetBrains.Annotations;
-
 using NUnit.Framework;
 
 namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Lambdas;
@@ -77,7 +75,7 @@ public sealed class LambdaProcessorTests : TestFixtureBase
 
     public class TestLambdaProcessor : LambdaProcessor<ITestBLLContext>
     {
-        public TestLambdaProcessor([NotNull] ITestBLLContext bllContext)
+        public TestLambdaProcessor(ITestBLLContext bllContext)
                 : base(bllContext)
         {
         }

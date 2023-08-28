@@ -2,8 +2,6 @@
 using Framework.Persistent;
 using Framework.Security;
 
-using JetBrains.Annotations;
-
 namespace Framework.Projection.Lambda;
 
 internal class CreateSecurityNodesProjectionSource : IProjectionSource
@@ -13,7 +11,7 @@ internal class CreateSecurityNodesProjectionSource : IProjectionSource
     private readonly ProjectionLambdaEnvironment environment;
 
 
-    public CreateSecurityNodesProjectionSource([NotNull] IProjectionSource baseSource, ProjectionLambdaEnvironment environment)
+    public CreateSecurityNodesProjectionSource(IProjectionSource baseSource, ProjectionLambdaEnvironment environment)
     {
         this.baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
         this.environment = environment ?? throw new ArgumentNullException(nameof(environment));
@@ -41,7 +39,7 @@ internal class CreateSecurityNodesProjectionSource : IProjectionSource
         }
     }
 
-    private ProjectionBuilder FillSecurityProjection([NotNull] Type sourceType, IReadOnlyDictionary<Type, ProjectionBuilder> securityProjections)
+    private ProjectionBuilder FillSecurityProjection(Type sourceType, IReadOnlyDictionary<Type, ProjectionBuilder> securityProjections)
     {
         if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
         if (securityProjections == null) throw new ArgumentNullException(nameof(securityProjections));

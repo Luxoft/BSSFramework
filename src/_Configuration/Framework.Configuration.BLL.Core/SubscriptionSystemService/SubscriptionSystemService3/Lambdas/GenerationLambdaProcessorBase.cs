@@ -31,8 +31,8 @@ public abstract class GenerationLambdaProcessorBase<TBLLContext> : LambdaProcess
     /// versions равен null.
     /// </exception>
     public virtual IEnumerable<NotificationMessageGenerationInfo> Invoke<T>(
-            [NotNull] Subscription subscription,
-            [NotNull] DomainObjectVersions<T> versions)
+            Subscription subscription,
+            DomainObjectVersions<T> versions)
             where T : class
     {
         if (subscription == null)

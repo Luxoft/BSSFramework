@@ -1,17 +1,15 @@
 ﻿using Framework.SecuritySystem.Rules.Builders;
 
-using JetBrains.Annotations;
-
 namespace Framework.SecuritySystem.DiTests;
 
 public class EmployeeSecurityService : ContextDomainSecurityService<PersistentDomainObjectBase, Employee, Guid, ExampleSecurityOperation>
 {
     public EmployeeSecurityService(
-            [NotNull] IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
-            [NotNull] IDisabledSecurityProviderContainer<PersistentDomainObjectBase> disabledSecurityProviderContainer,
-            [NotNull] ISecurityOperationResolver<PersistentDomainObjectBase, ExampleSecurityOperation> securityOperationResolver,
-            [NotNull] IAuthorizationSystem<Guid> authorizationSystem,
-            [NotNull] ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory)
+            IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
+            IDisabledSecurityProviderContainer<PersistentDomainObjectBase> disabledSecurityProviderContainer,
+            ISecurityOperationResolver<PersistentDomainObjectBase, ExampleSecurityOperation> securityOperationResolver,
+            IAuthorizationSystem<Guid> authorizationSystem,
+            ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory)
 
             : base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
     {

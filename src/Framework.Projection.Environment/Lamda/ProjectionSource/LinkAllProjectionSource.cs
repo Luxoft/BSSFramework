@@ -1,12 +1,10 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.Projection.Lambda;
+﻿namespace Framework.Projection.Lambda;
 
 internal class LinkAllProjectionSource : IProjectionSource
 {
     private readonly IProjectionSource baseSource;
 
-    public LinkAllProjectionSource([NotNull] IProjectionSource baseSource)
+    public LinkAllProjectionSource(IProjectionSource baseSource)
     {
         this.baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
     }
@@ -23,7 +21,7 @@ internal class LinkAllProjectionSource : IProjectionSource
         return graph;
     }
 
-    public void FillProjectionsGraph([NotNull] IProjection projection, [NotNull] HashSet<IProjection> graph)
+    public void FillProjectionsGraph(IProjection projection, HashSet<IProjection> graph)
     {
         if (projection == null) { throw new ArgumentNullException(nameof(projection)); }
 

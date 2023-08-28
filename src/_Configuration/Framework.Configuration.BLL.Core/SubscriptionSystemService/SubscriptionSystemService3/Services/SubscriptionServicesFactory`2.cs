@@ -3,8 +3,6 @@ using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 
-using JetBrains.Annotations;
-
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Services;
 
 /// <summary>
@@ -35,7 +33,7 @@ public class SubscriptionServicesFactory<TBLLContext, T> : SubscriptionServicesF
     /// равен null.</exception>
     public SubscriptionServicesFactory(
             IConfigurationBLLContext configurationContext,
-            [NotNull] IDefaultBLLFactory<T, Guid> defaultBllFactory,
+            IDefaultBLLFactory<T, Guid> defaultBllFactory,
             TBLLContext bllContext,
             SubscriptionMetadataStore subscriptionMetadataStore)
             : base(configurationContext, bllContext, subscriptionMetadataStore)

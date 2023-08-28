@@ -6,8 +6,6 @@ using Framework.Core;
 using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.ServiceModel.IAD;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
 public static class ServiceModelFileGeneratorExtensions
@@ -21,7 +19,7 @@ public static class ServiceModelFileGeneratorExtensions
     {
         private readonly IFileGenerator<ICodeFile, CodeDomRenderer> baseCodeFileGenerator;
 
-        public AutoRequestCodeFileGenerator([NotNull] IFileGenerator<ICodeFile, CodeDomRenderer> baseCodeFileGenerator)
+        public AutoRequestCodeFileGenerator(IFileGenerator<ICodeFile, CodeDomRenderer> baseCodeFileGenerator)
         {
             this.baseCodeFileGenerator = baseCodeFileGenerator ?? throw new ArgumentNullException(nameof(baseCodeFileGenerator));
         }
@@ -40,7 +38,7 @@ public static class ServiceModelFileGeneratorExtensions
     {
         private readonly ICodeFile baseCodeFile;
 
-        public AutoRequestFileFactory([NotNull] ICodeFile baseCodeFile)
+        public AutoRequestFileFactory(ICodeFile baseCodeFile)
         {
             this.baseCodeFile = baseCodeFile ?? throw new ArgumentNullException(nameof(baseCodeFile));
         }
@@ -72,7 +70,7 @@ public static class ServiceModelFileGeneratorExtensions
 
             return ns;
         }
-        private CodeTypeDeclaration GetAutoRequestType([NotNull] CodeMemberMethod method)
+        private CodeTypeDeclaration GetAutoRequestType(CodeMemberMethod method)
         {
             if (method == null) throw new ArgumentNullException(nameof(method));
 

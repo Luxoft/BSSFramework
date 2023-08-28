@@ -1,7 +1,5 @@
 ﻿using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.BLL;
 
 public sealed class OperationEventSenderContainer<TPersistentDomainObjectBase> : IOperationEventSenderContainer<TPersistentDomainObjectBase>
@@ -14,7 +12,7 @@ public sealed class OperationEventSenderContainer<TPersistentDomainObjectBase> :
     private readonly Dictionary<Type, Dictionary<Type, OperationEventSender>> _cache = new Dictionary<Type, Dictionary<Type, OperationEventSender>>();
 
 
-    public OperationEventSenderContainer([NotNull] IEnumerable<IOperationEventListener<TPersistentDomainObjectBase>> eventListeners)
+    public OperationEventSenderContainer(IEnumerable<IOperationEventListener<TPersistentDomainObjectBase>> eventListeners)
     {
         this.eventListeners = (eventListeners ?? throw new ArgumentNullException(nameof(eventListeners))).ToArray();
     }

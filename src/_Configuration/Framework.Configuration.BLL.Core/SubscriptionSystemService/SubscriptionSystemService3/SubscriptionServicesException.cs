@@ -1,7 +1,5 @@
 ﻿using System.Runtime.Serialization;
 
-using JetBrains.Annotations;
-
 namespace Framework.Configuration.BLL.SubscriptionSystemService3;
 
 /// <summary>
@@ -51,7 +49,7 @@ public class SubscriptionServicesException : Exception
     ///     Объект <see cref="T:System.Runtime.Serialization.StreamingContext" />,
     ///     содержащий контекстные сведения об источнике или назначении.
     /// </param>
-    protected SubscriptionServicesException([NotNull] SerializationInfo info, StreamingContext context)
+    protected SubscriptionServicesException(SerializationInfo info, StreamingContext context)
             : base(info, context)
     {
     }

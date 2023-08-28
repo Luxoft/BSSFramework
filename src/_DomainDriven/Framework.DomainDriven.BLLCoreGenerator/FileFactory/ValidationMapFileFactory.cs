@@ -1,7 +1,6 @@
 ﻿using System.CodeDom;
 
 using Framework.CodeDom;
-using Framework.Core;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 

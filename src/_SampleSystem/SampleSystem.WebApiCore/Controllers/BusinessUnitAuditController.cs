@@ -1,7 +1,4 @@
 ﻿using Framework.DomainDriven;
-using Framework.DomainDriven.Repository;
-using Framework.Security;
-using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 

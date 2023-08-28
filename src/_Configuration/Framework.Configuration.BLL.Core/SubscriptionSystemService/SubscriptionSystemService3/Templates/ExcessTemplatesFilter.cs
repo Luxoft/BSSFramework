@@ -1,7 +1,5 @@
 ﻿using Framework.Notification;
 
-using JetBrains.Annotations;
-
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Templates;
 
 /// <summary>
@@ -31,7 +29,7 @@ public class ExcessTemplatesFilter
     /// <returns>Список шаблонов уведомлений без дубликатов.</returns>
     /// <exception cref="ArgumentNullException">Аргумент templates равен null.</exception>
     public virtual IEnumerable<MessageTemplateNotification> FilterTemplates(
-            [NotNull] IEnumerable<MessageTemplateNotification> templates)
+            IEnumerable<MessageTemplateNotification> templates)
     {
         if (templates == null)
         {

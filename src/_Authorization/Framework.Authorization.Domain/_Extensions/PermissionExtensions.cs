@@ -1,15 +1,13 @@
 ﻿using Framework.Projection;
 using Framework.SecuritySystem;
 
-using JetBrains.Annotations;
-
 using DPermission = System.Collections.Generic.Dictionary<System.Type, System.Collections.Generic.List<System.Guid>>;
 
 namespace Framework.Authorization.Domain;
 
 public static class PermissionExtensions
 {
-    public static IEnumerable<Guid> GetOrderedEntityIdents([NotNull] this Permission permission)
+    public static IEnumerable<Guid> GetOrderedEntityIdents(this Permission permission)
     {
         if (permission == null) throw new ArgumentNullException(nameof(permission));
 

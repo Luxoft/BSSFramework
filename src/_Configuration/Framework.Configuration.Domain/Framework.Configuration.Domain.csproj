@@ -1,10 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Configuration.Domain</PackageId>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.Persistent.Mapping.Audit\Framework.Persistent.Mapping.Audit.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL.Configuration\Framework.DomainDriven.BLL.Configuration.csproj" />
@@ -13,7 +16,5 @@
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Tracking.LegacyValidators\Framework.DomainDriven.Tracking.LegacyValidators.csproj" />
     <ProjectReference Include="..\Framework.Configuration.Core\Framework.Configuration.Core.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Reports\ReportClassDiagram.cd" />
-  </ItemGroup>
+
 </Project>

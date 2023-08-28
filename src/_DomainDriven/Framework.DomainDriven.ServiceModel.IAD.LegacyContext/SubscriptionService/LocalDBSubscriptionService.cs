@@ -3,8 +3,6 @@ using Framework.Configuration.Domain;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.ServiceModel.Subscriptions;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
 /// <summary>
@@ -21,7 +19,7 @@ public class LocalDBSubscriptionService : BLLContextContainer<IConfigurationBLLC
     {
     }
 
-    public void ProcessChanged([NotNull] ObjectModificationInfoDTO<Guid> changedObjectInfo)
+    public void ProcessChanged(ObjectModificationInfoDTO<Guid> changedObjectInfo)
     {
         if (changedObjectInfo == null) throw new ArgumentNullException(nameof(changedObjectInfo));
 

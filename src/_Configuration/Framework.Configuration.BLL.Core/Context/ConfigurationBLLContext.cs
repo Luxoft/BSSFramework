@@ -16,8 +16,6 @@ using Framework.Persistent;
 using Framework.QueryLanguage;
 using Framework.SecuritySystem;
 
-using JetBrains.Annotations;
-
 namespace Framework.Configuration.BLL;
 
 public partial class ConfigurationBLLContext
@@ -34,22 +32,22 @@ public partial class ConfigurationBLLContext
 
     public ConfigurationBLLContext(
             IServiceProvider serviceProvider,
-            [NotNull] IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
-            [NotNull] ITrackingService<PersistentDomainObjectBase> trackingService,
-            [NotNull] IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
-            [NotNull] IStandartExpressionBuilder standartExpressionBuilder,
-            [NotNull] IConfigurationValidator validator,
-            [NotNull] IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
-            [NotNull] IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
-            [NotNull] ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
-            [NotNull] IMessageSender<MessageTemplateNotification> subscriptionSender,
-            [NotNull] IConfigurationSecurityService securityService,
-            [NotNull] IConfigurationBLLFactoryContainer logics,
-            [NotNull] IAuthorizationBLLContext authorization,
-            [NotNull] IBLLSimpleQueryBase<IEmployee> employeeSource,
-            [NotNull] IEnumerable<ITargetSystemService> targetSystemServices,
-            [NotNull] IConfigurationBLLContextSettings settings,
-            [NotNull] ICurrentRevisionService currentRevisionService)
+            IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
+            ITrackingService<PersistentDomainObjectBase> trackingService,
+            IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
+            IStandartExpressionBuilder standartExpressionBuilder,
+            IConfigurationValidator validator,
+            IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
+            IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
+            ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
+            IMessageSender<MessageTemplateNotification> subscriptionSender,
+            IConfigurationSecurityService securityService,
+            IConfigurationBLLFactoryContainer logics,
+            IAuthorizationBLLContext authorization,
+            IBLLSimpleQueryBase<IEmployee> employeeSource,
+            IEnumerable<ITargetSystemService> targetSystemServices,
+            IConfigurationBLLContextSettings settings,
+            ICurrentRevisionService currentRevisionService)
             : base(serviceProvider, operationSenders, trackingService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
     {
         this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));

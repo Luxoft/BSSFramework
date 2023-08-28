@@ -1,20 +1,18 @@
 ﻿using System.Xml;
 using System.Xml.Linq;
 
-using JetBrains.Annotations;
-
 namespace Framework.Core;
 
 public static class XDocumentExtensions
 {
-    public static XDocument OverrideChildrenNamespace([NotNull] this XDocument xDocument)
+    public static XDocument OverrideChildrenNamespace(this XDocument xDocument)
     {
         if (xDocument == null) throw new ArgumentNullException(nameof(xDocument));
 
         return new XDocument(xDocument.Root.OverrideNamespace(xDocument.Root.Name.Namespace));
     }
 
-    private static XElement OverrideNamespace([NotNull] this XElement xElement, [NotNull] XNamespace xNamespace)
+    private static XElement OverrideNamespace(this XElement xElement, XNamespace xNamespace)
     {
         if (xElement == null) throw new ArgumentNullException(nameof(xElement));
         if (xNamespace == null) throw new ArgumentNullException(nameof(xNamespace));

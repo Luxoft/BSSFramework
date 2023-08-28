@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-using Framework.Core;
+﻿using Framework.Core;
 
 namespace Framework.SecuritySystem;
 
@@ -10,17 +8,17 @@ public abstract class SecurityProviderBase<TDomainObject> : ISecurityProvider<TD
 {
     protected readonly IAccessDeniedExceptionService<TDomainObject> AccessDeniedExceptionService;
 
-    protected SecurityProviderBase([NotNull] IAccessDeniedExceptionService<TDomainObject> accessDeniedExceptionService)
+    protected SecurityProviderBase(IAccessDeniedExceptionService<TDomainObject> accessDeniedExceptionService)
     {
         this.AccessDeniedExceptionService = accessDeniedExceptionService ?? throw new ArgumentNullException(nameof(accessDeniedExceptionService));
     }
 
 
-    public abstract IQueryable<TDomainObject> InjectFilter([NotNull] IQueryable<TDomainObject> queryable);
+    public abstract IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable);
 
-    public abstract bool HasAccess([NotNull] TDomainObject domainObject);
+    public abstract bool HasAccess(TDomainObject domainObject);
 
-    public abstract UnboundedList<string> GetAccessors([NotNull] TDomainObject domainObject);
+    public abstract UnboundedList<string> GetAccessors(TDomainObject domainObject);
 
 
     public virtual Exception GetAccessDeniedException(TDomainObject domainObject, Func<string, string> formatMessageFunc = null)

@@ -8,8 +8,6 @@ using Framework.Restriction;
 using Framework.SecuritySystem;
 using Framework.Transfering;
 
-using JetBrains.Annotations;
-
 namespace Framework.Authorization.Domain;
 
 /// <summary>
@@ -205,7 +203,7 @@ public partial class Permission : AuditPersistentDomainObjectBase,
     /// </summary>
     /// <param name="otherPermission">Другая пермиссия</param>
     /// <returns></returns>
-    public virtual bool IsDuplicate([NotNull] Permission otherPermission)
+    public virtual bool IsDuplicate(Permission otherPermission)
     {
         if (otherPermission == null) throw new ArgumentNullException(nameof(otherPermission));
 

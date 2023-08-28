@@ -6,14 +6,12 @@ using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Projection;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.ProjectionGenerator;
 
 public class CustomProjectionFileFactoryBase<TConfiguration> : CodeFileFactory<TConfiguration, FileType>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    public CustomProjectionFileFactoryBase(TConfiguration configuration, [NotNull] Type domainType)
+    public CustomProjectionFileFactoryBase(TConfiguration configuration, Type domainType)
             : base(configuration, domainType)
     {
     }
@@ -68,7 +66,7 @@ public class CustomProjectionFileFactoryBase<TConfiguration> : CodeFileFactory<T
         }
     }
 
-    private CodeMemberProperty CreateCustomProperty([NotNull] PropertyInfo property)
+    private CodeMemberProperty CreateCustomProperty(PropertyInfo property)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 

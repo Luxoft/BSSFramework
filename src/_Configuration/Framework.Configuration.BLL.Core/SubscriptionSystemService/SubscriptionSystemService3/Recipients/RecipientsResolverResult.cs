@@ -1,7 +1,5 @@
 ﻿using Framework.Configuration.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 
 /// <summary>
@@ -19,8 +17,8 @@ public class RecipientsResolverResult
     ///     <paramref name="domainObjectVersions" /> равен null.
     /// </exception>
     public RecipientsResolverResult(
-            [NotNull] RecipientsBag recipientsBag,
-            [NotNull] DomainObjectVersions<object> domainObjectVersions)
+            RecipientsBag recipientsBag,
+            DomainObjectVersions<object> domainObjectVersions)
     {
         if (recipientsBag == null)
         {

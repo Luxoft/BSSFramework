@@ -4,8 +4,6 @@ using Framework.Core;
 using Framework.Persistent;
 using Framework.QueryableSource;
 
-using JetBrains.Annotations;
-
 namespace Framework.HierarchicalExpand;
 
 public class HierarchicalObjectAncestorLinkExpander<TPersistentDomainObjectBase, TDomainObject, TDomainObjectAncestorLink, TDomainObjectAncestorChildLink, TIdent> : IHierarchicalObjectExpander<TIdent>, IHierarchicalObjectQueryableExpander<TIdent>
@@ -17,7 +15,7 @@ public class HierarchicalObjectAncestorLinkExpander<TPersistentDomainObjectBase,
 {
     private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
 
-    public HierarchicalObjectAncestorLinkExpander([NotNull] IQueryableSource<TPersistentDomainObjectBase> queryableSource)
+    public HierarchicalObjectAncestorLinkExpander(IQueryableSource<TPersistentDomainObjectBase> queryableSource)
     {
         this.queryableSource = queryableSource ?? throw new ArgumentNullException(nameof(queryableSource));
     }

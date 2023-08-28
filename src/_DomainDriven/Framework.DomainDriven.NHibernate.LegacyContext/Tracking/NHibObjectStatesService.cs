@@ -3,8 +3,6 @@
 using Framework.Core;
 using Framework.DomainDriven.Tracking;
 
-using JetBrains.Annotations;
-
 using NHibernate;
 using NHibernate.Collection;
 using NHibernate.Engine;
@@ -16,7 +14,7 @@ public class NHibObjectStatesService : IObjectStateService
     private readonly ISession session;
 
 
-    public NHibObjectStatesService([NotNull] ISession session)
+    public NHibObjectStatesService(ISession session)
     {
         this.session = session ?? throw new ArgumentNullException(nameof(session));
     }
@@ -130,7 +128,7 @@ public class NHibObjectStatesService : IObjectStateService
                         });
     }
 
-    public bool IsNew([NotNull] object entity)
+    public bool IsNew(object entity)
     {
         if (entity == null) throw new ArgumentNullException(nameof(entity));
 
@@ -144,7 +142,7 @@ public class NHibObjectStatesService : IObjectStateService
         return !oldEntry.ExistsInDatabase;
     }
 
-    public bool IsRemoving([NotNull] object entity)
+    public bool IsRemoving(object entity)
     {
         if (entity == null) throw new ArgumentNullException(nameof(entity));
 

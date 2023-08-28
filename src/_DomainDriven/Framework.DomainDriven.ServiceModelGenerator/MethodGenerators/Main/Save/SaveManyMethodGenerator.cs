@@ -4,8 +4,6 @@ using Framework.CodeDom;
 using Framework.Core;
 using Framework.Transfering;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
 public class SaveManyMethodGenerator<TConfiguration> : BaseSaveMethodGenerator<TConfiguration>
@@ -14,7 +12,7 @@ public class SaveManyMethodGenerator<TConfiguration> : BaseSaveMethodGenerator<T
     private readonly SaveMethodGenerator<TConfiguration> _singleSaveGenerator;
 
 
-    public SaveManyMethodGenerator([NotNull] SaveMethodGenerator<TConfiguration> singleSaveGenerator)
+    public SaveManyMethodGenerator(SaveMethodGenerator<TConfiguration> singleSaveGenerator)
             : base(singleSaveGenerator.Configuration, singleSaveGenerator.DomainType)
     {
         if (singleSaveGenerator == null) throw new ArgumentNullException(nameof(singleSaveGenerator));

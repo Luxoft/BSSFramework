@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SampleSystem.AuditDomain
+﻿namespace SampleSystem.AuditDomain
 {
     public struct AuditIdentifier
     {

@@ -2,7 +2,6 @@
 
 using Framework.Authorization.Notification;
 using Framework.Core;
-using Framework.DomainDriven.Attributes;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Notification;

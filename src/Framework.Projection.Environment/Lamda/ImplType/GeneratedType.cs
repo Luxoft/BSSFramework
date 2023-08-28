@@ -33,7 +33,7 @@ internal class GeneratedType : BaseTypeImpl
     private readonly Attribute[] customAttributes;
 
 
-    public GeneratedType(ProjectionLambdaEnvironment environment, [NotNull] IProjection projection, Dictionary<IProjection, GeneratedType> preGenerateTypes)
+    public GeneratedType(ProjectionLambdaEnvironment environment, IProjection projection, Dictionary<IProjection, GeneratedType> preGenerateTypes)
     {
         if (projection == null) throw new ArgumentNullException(nameof(projection));
 
@@ -259,7 +259,7 @@ internal class GeneratedType : BaseTypeImpl
                ?? this.BaseType.GetProperty(name, bindingAttr);
     }
 
-    public override InterfaceMapping GetInterfaceMap([NotNull] Type interfaceType)
+    public override InterfaceMapping GetInterfaceMap(Type interfaceType)
     {
         if (interfaceType == null) throw new ArgumentNullException(nameof(interfaceType));
 

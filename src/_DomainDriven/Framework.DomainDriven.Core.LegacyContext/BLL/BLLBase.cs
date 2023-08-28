@@ -7,8 +7,6 @@ using Framework.Exceptions;
 using Framework.OData;
 using Framework.Persistent;
 
-using JetBrains.Annotations;
-
 using Microsoft.Extensions.DependencyInjection;
 
 using nuSpec.Abstraction;
@@ -102,7 +100,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         SelectOperation<TProjection> selectOperation,
         Expression<Func<TDomainObject, TProjection>> projectionSelector);
 
-    protected void SaveWithoutCascade([NotNull] TDomainObject domainObject)
+    protected void SaveWithoutCascade(TDomainObject domainObject)
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
@@ -120,14 +118,14 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
         }
     }
 
-    protected void InsertWithoutCascade([NotNull] TDomainObject domainObject)
+    protected void InsertWithoutCascade(TDomainObject domainObject)
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
         this.InsertWithoutCascade(domainObject, domainObject.Id);
     }
 
-    protected void InsertWithoutCascade([NotNull] TDomainObject domainObject, TIdent id)
+    protected void InsertWithoutCascade(TDomainObject domainObject, TIdent id)
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
@@ -343,7 +341,7 @@ public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainO
     }
 
     protected IQueryable<TDomainObject> GetSecureQueryable(
-        [NotNull] IQueryableProcessor<TDomainObject> baseProcessor,
+        IQueryableProcessor<TDomainObject> baseProcessor,
         IFetchContainer<TDomainObject> fetchContainer = null)
     {
         if (baseProcessor == null) throw new ArgumentNullException(nameof(baseProcessor));

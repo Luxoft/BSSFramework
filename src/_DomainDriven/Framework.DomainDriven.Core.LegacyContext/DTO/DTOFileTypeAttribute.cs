@@ -1,7 +1,5 @@
 ﻿using Framework.DomainDriven.Serialization;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven;
 
 /// <summary>
@@ -15,7 +13,7 @@ public class DTOFileTypeAttribute : Attribute
     /// <param name="domainType">Доменный тип</param>
     /// <param name="name">Генерируемый тип</param>
     /// <param name="role">Роль</param>
-    public DTOFileTypeAttribute([NotNull] Type domainType, [NotNull] string name, DTORole role)
+    public DTOFileTypeAttribute(Type domainType, string name, DTORole role)
     {
         this.DomainType = domainType ?? throw new ArgumentNullException(nameof(domainType));
         this.Name = name ?? throw new ArgumentNullException(nameof(name));

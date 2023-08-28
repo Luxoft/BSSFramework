@@ -3,8 +3,6 @@
 using Framework.Core;
 using Framework.DomainDriven;
 
-using JetBrains.Annotations;
-
 namespace Framework.Authorization.Domain;
 
 public class AvailablePermissionFilter : IDomainObjectFilterModel<Permission>
@@ -13,7 +11,7 @@ public class AvailablePermissionFilter : IDomainObjectFilterModel<Permission>
 
     private readonly string principalName;
 
-    public AvailablePermissionFilter([NotNull] IDateTimeService dateTimeService, string principalName)
+    public AvailablePermissionFilter(IDateTimeService dateTimeService, string principalName)
     {
         if (dateTimeService == null) throw new ArgumentNullException(nameof(dateTimeService));
 

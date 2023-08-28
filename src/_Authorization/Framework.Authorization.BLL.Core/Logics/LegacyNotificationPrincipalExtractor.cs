@@ -6,13 +6,11 @@ using System.Linq.Expressions;
 using Framework.Authorization.Notification;
 using Framework.DomainDriven.BLL;
 
-using JetBrains.Annotations;
-
 namespace Framework.Authorization.BLL;
 
 public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthorizationBLLContext>, INotificationPrincipalExtractor, INotificationBasePermissionFilterSource
 {
-    public LegacyNotificationPrincipalExtractor([NotNull] IAuthorizationBLLContext context)
+    public LegacyNotificationPrincipalExtractor(IAuthorizationBLLContext context)
         : base(context)
     {
     }
@@ -41,7 +39,7 @@ public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthori
     }
 
 
-    public IEnumerable<Principal> GetNotificationPrincipalsByRoles(Guid[] roleIdents, [NotNull] IEnumerable<NotificationFilterGroup> notificationFilterGroups)
+    public IEnumerable<Principal> GetNotificationPrincipalsByRoles(Guid[] roleIdents, IEnumerable<NotificationFilterGroup> notificationFilterGroups)
     {
         if (roleIdents == null) throw new ArgumentNullException(nameof(roleIdents));
         if (notificationFilterGroups == null) throw new ArgumentNullException(nameof(notificationFilterGroups));
@@ -49,7 +47,7 @@ public class LegacyNotificationPrincipalExtractor : BLLContextContainer<IAuthori
         return this.GetInternalNotificationPrincipals(roleIdents, notificationFilterGroups).SelectMany(v => v).Distinct();
     }
 
-    private IEnumerable<Principal[]> GetInternalNotificationPrincipals(Guid[] roleIdents, [NotNull] IEnumerable<NotificationFilterGroup> baseNotificationFilterGroups)
+    private IEnumerable<Principal[]> GetInternalNotificationPrincipals(Guid[] roleIdents, IEnumerable<NotificationFilterGroup> baseNotificationFilterGroups)
     {
         if (roleIdents == null) throw new ArgumentNullException(nameof(roleIdents));
         if (baseNotificationFilterGroups == null) throw new ArgumentNullException(nameof(baseNotificationFilterGroups));

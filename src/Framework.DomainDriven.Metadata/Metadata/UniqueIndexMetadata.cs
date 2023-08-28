@@ -1,7 +1,5 @@
 ﻿using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.Metadata;
 
 public class UniqueIndexMetadata
@@ -10,7 +8,7 @@ public class UniqueIndexMetadata
     private readonly string _name;
     private readonly IList<FieldMetadata> _fields;
 
-    internal UniqueIndexMetadata([NotNull] DomainTypeMetadata domainTypeMetadata, string name, IEnumerable<FieldMetadata> fields)
+    internal UniqueIndexMetadata(DomainTypeMetadata domainTypeMetadata, string name, IEnumerable<FieldMetadata> fields)
     {
         if (domainTypeMetadata == null) throw new ArgumentNullException(nameof(domainTypeMetadata));
         this._domainTypeMetadata = domainTypeMetadata;

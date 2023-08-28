@@ -2,13 +2,11 @@
 
 using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven;
 
 public class DALChanges<T>
 {
-    public DALChanges([NotNull] IEnumerable<T> createdItems, [NotNull] IEnumerable<T> updatedItems, [NotNull] IEnumerable<T> removedItems)
+    public DALChanges(IEnumerable<T> createdItems, IEnumerable<T> updatedItems, IEnumerable<T> removedItems)
     {
         if (createdItems == null) throw new ArgumentNullException(nameof(createdItems));
         if (updatedItems == null) throw new ArgumentNullException(nameof(updatedItems));
@@ -19,7 +17,7 @@ public class DALChanges<T>
         this.RemovedItems = removedItems.ToReadOnlyCollection();
     }
 
-    public DALChanges([NotNull] IReadOnlyDictionary<T, DALObjectChangeType> dalChanges)
+    public DALChanges(IReadOnlyDictionary<T, DALObjectChangeType> dalChanges)
     {
         if (dalChanges == null) throw new ArgumentNullException(nameof(dalChanges));
 
@@ -61,7 +59,7 @@ public class DALChanges : DALChanges<IDALObject>
     {
     }
 
-    public DALChanges([NotNull] IEnumerable<IDALObject> createdItems, [NotNull] IEnumerable<IDALObject> updatedItems, [NotNull] IEnumerable<IDALObject> removedItems)
+    public DALChanges(IEnumerable<IDALObject> createdItems, IEnumerable<IDALObject> updatedItems, IEnumerable<IDALObject> removedItems)
             : base(createdItems, updatedItems, removedItems)
     {
         this._subsetCache = new DictionaryCache<Type, DALChanges>(t => new DALChanges(this.Where(dalObject => t.IsAssignableFrom(dalObject.Type)))).WithLock();

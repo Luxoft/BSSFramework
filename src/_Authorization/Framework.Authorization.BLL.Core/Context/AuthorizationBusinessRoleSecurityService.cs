@@ -1,8 +1,6 @@
 ﻿using Framework.Authorization.Domain;
 using Framework.SecuritySystem;
 
-using JetBrains.Annotations;
-
 namespace Framework.Authorization.BLL;
 
 public partial class AuthorizationBusinessRoleSecurityService
@@ -12,7 +10,7 @@ public partial class AuthorizationBusinessRoleSecurityService
             IDisabledSecurityProviderContainer<PersistentDomainObjectBase> disabledSecurityProviderContainer,
             ISecurityOperationResolver<PersistentDomainObjectBase, AuthorizationSecurityOperationCode> securityOperationResolver,
             IAuthorizationSystem<Guid> authorizationSystem,
-            [NotNull] IAuthorizationBLLContext context)
+            IAuthorizationBLLContext context)
 
             : base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
     {

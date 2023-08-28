@@ -3,8 +3,6 @@ using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.Notification.DTO;
 
-using JetBrains.Annotations;
-
 namespace Framework.Configuration.BLL;
 
 /// <summary>
@@ -16,13 +14,13 @@ public class LocalDBNotificationEventDTOMessageSender : BLLContextContainer<ICon
     /// Конструктор
     /// </summary>
     /// <param name="context">Контекст утилит</param>
-    public LocalDBNotificationEventDTOMessageSender([NotNull] IConfigurationBLLContext context)
+    public LocalDBNotificationEventDTOMessageSender(IConfigurationBLLContext context)
             : base(context)
     {
     }
 
     /// <inheritdoc />
-    public void Send([NotNull] NotificationEventDTO dto)
+    public void Send(NotificationEventDTO dto)
     {
         if (dto == null)
         {

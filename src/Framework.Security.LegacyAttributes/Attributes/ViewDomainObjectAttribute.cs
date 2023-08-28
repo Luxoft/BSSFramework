@@ -2,8 +2,6 @@
 
 using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.Security;
 
 /// <summary>
@@ -49,7 +47,7 @@ public class ViewDomainObjectAttribute : DomainObjectAccessAttribute
     /// </summary>
     /// <param name="primarySecurityOperationCode">Операция просмотра</param>
     /// <param name="baseSecondaryOperations">Дополнительные операции для просмотра</param>
-    public ViewDomainObjectAttribute(Enum primarySecurityOperationCode, [NotNull] IEnumerable<Enum> baseSecondaryOperations)
+    public ViewDomainObjectAttribute(Enum primarySecurityOperationCode, IEnumerable<Enum> baseSecondaryOperations)
             : base(primarySecurityOperationCode)
     {
         if (baseSecondaryOperations == null) throw new ArgumentNullException(nameof(baseSecondaryOperations));
@@ -94,7 +92,7 @@ public class ViewDomainObjectAttribute : DomainObjectAccessAttribute
 
     private bool IsContext { get; }
 
-    private void CheckSecondaryOperations([NotNull] IEnumerable<Enum> secondaryOperations)
+    private void CheckSecondaryOperations(IEnumerable<Enum> secondaryOperations)
     {
         if (secondaryOperations == null) throw new ArgumentNullException(nameof(secondaryOperations));
 

@@ -4,13 +4,11 @@ using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Projection;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.ProjectionGenerator;
 
 internal static class DomainMetadataExtensions
 {
-    public static bool HasCustomProjectionProperties([NotNull] this IDomainMetadata environment, [NotNull] Type domainType)
+    public static bool HasCustomProjectionProperties(this IDomainMetadata environment, Type domainType)
     {
         if (environment == null) throw new ArgumentNullException(nameof(environment));
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
@@ -18,7 +16,7 @@ internal static class DomainMetadataExtensions
         return environment.GetProjectionProperties(domainType, false, true).Any();
     }
 
-    public static IEnumerable<PropertyInfo> GetProjectionProperties([NotNull] this IDomainMetadata environment, [NotNull] Type domainType, bool includeBase, bool? customPropFilter)
+    public static IEnumerable<PropertyInfo> GetProjectionProperties(this IDomainMetadata environment, Type domainType, bool includeBase, bool? customPropFilter)
     {
         if (environment == null) { throw new ArgumentNullException(nameof(environment)); }
         if (domainType == null) { throw new ArgumentNullException(nameof(domainType)); }

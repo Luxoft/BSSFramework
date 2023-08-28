@@ -1,8 +1,6 @@
 ﻿using System.Reflection;
 using System.Reflection.Emit;
 
-using JetBrains.Annotations;
-
 namespace Framework.Core;
 
 /// <summary>
@@ -22,7 +20,7 @@ public class CallProxyInterfaceImplementTypeBuilder : InterfaceImplementTypeBuil
     /// Конструктор
     /// </summary>
     /// <param name="moduleBuilder">Модуль, где будет генерировать анонимный тип</param>
-    public CallProxyInterfaceImplementTypeBuilder([NotNull] ModuleBuilder moduleBuilder)
+    public CallProxyInterfaceImplementTypeBuilder(ModuleBuilder moduleBuilder)
             : base(moduleBuilder, typeof(CallProxy<>))
     {
     }

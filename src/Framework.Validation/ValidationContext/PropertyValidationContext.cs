@@ -1,6 +1,4 @@
-﻿using Framework.Core;
-
-namespace Framework.Validation;
+﻿namespace Framework.Validation;
 
 public class PropertyValidationContext<TSource, TProperty> : ValidationContext<TSource, IPropertyValidationMap>, IPropertyValidationContext<TSource, TProperty>
 {

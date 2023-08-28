@@ -3,8 +3,6 @@
 using Framework.Persistent;
 using Framework.QueryableSource;
 
-using JetBrains.Annotations;
-
 namespace Framework.SecuritySystem;
 
 public abstract class DependencyDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent, TSecurityOperationCode> :
@@ -21,10 +19,10 @@ public abstract class DependencyDomainSecurityService<TPersistentDomainObjectBas
     private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
 
     protected DependencyDomainSecurityService(
-            [NotNull] IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
+            IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
             IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
-            [NotNull] IDomainSecurityService<TBaseDomainObject, TSecurityOperationCode> baseDomainSecurityService,
-            [NotNull] IQueryableSource<TPersistentDomainObjectBase> queryableSource)
+            IDomainSecurityService<TBaseDomainObject, TSecurityOperationCode> baseDomainSecurityService,
+            IQueryableSource<TPersistentDomainObjectBase> queryableSource)
 
             : base(disabledSecurityProviderContainer, baseDomainSecurityService)
     {

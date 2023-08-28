@@ -1,10 +1,8 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.HierarchicalExpand;
+﻿namespace Framework.HierarchicalExpand;
 
 public interface IHierarchicalObjectExpanderFactory<TIdent>
 {
-    IHierarchicalObjectExpander<TIdent> Create([NotNull] Type domainType);
+    IHierarchicalObjectExpander<TIdent> Create(Type domainType);
 
-    IHierarchicalObjectQueryableExpander<TIdent> CreateQuery([NotNull] Type domainType);
+    IHierarchicalObjectQueryableExpander<TIdent> CreateQuery(Type domainType);
 }

@@ -1,13 +1,11 @@
 ﻿using Framework.DomainDriven.Generation.Domain;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.DTOGenerator.Audit;
 
 public abstract class AuditDTOGeneratorConfigurationBase<TEnvironment> : GeneratorConfiguration<TEnvironment>, IAuditDTOGeneratorConfigurationBase<TEnvironment>
         where TEnvironment : class, IAuditDTOGenerationEnvironmentBase
 {
-    protected AuditDTOGeneratorConfigurationBase([NotNull] TEnvironment environment)
+    protected AuditDTOGeneratorConfigurationBase(TEnvironment environment)
             : base(environment)
     {
     }

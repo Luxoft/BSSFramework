@@ -6,8 +6,6 @@ using Framework.OData;
 using Framework.Security;
 using Framework.Transfering;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
 public abstract class GetByODataQueryWithFilterMethodGeneratorBase<TConfiguration> : ViewMethodGenerator<TConfiguration>
@@ -16,7 +14,7 @@ public abstract class GetByODataQueryWithFilterMethodGeneratorBase<TConfiguratio
     protected readonly Type FilterType;
 
 
-    protected GetByODataQueryWithFilterMethodGeneratorBase(TConfiguration configuration, Type domainType, ViewDTOType dtoType, [NotNull] Type filterType)
+    protected GetByODataQueryWithFilterMethodGeneratorBase(TConfiguration configuration, Type domainType, ViewDTOType dtoType, Type filterType)
             : base(configuration, domainType, dtoType)
     {
         if (filterType == null) throw new ArgumentNullException(nameof(filterType));

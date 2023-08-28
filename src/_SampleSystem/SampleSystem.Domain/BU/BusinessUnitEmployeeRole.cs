@@ -2,8 +2,6 @@
 using Framework.Persistent;
 using Framework.Restriction;
 
-using JetBrains.Annotations;
-
 namespace SampleSystem.Domain;
 
 public class BusinessUnitEmployeeRole : AuditPersistentDomainObjectBase, IDetail<BusinessUnit>
@@ -12,7 +10,7 @@ public class BusinessUnitEmployeeRole : AuditPersistentDomainObjectBase, IDetail
     private Employee employee;
     private BusinessUnitEmployeeRoleType role;
 
-    public BusinessUnitEmployeeRole([NotNull] BusinessUnit businessUnit)
+    public BusinessUnitEmployeeRole(BusinessUnit businessUnit)
     {
         if (businessUnit == null) throw new ArgumentNullException(nameof(businessUnit));
 
@@ -49,8 +47,8 @@ public class BusinessUnitEmployeeRole : AuditPersistentDomainObjectBase, IDetail
     }
 
     public static BusinessUnitEmployeeRole Create(
-            [NotNull] BusinessUnit businessUnit,
-            [NotNull] Employee employee,
+            BusinessUnit businessUnit,
+            Employee employee,
             BusinessUnitEmployeeRoleType role)
     {
         if (businessUnit == null)

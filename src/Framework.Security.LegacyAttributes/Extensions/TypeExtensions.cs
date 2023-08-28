@@ -3,8 +3,6 @@
 using Framework.Core;
 using Framework.SecuritySystem;
 
-using JetBrains.Annotations;
-
 namespace Framework.Security;
 
 public static class TypeExtensions
@@ -28,21 +26,21 @@ public static class TypeExtensions
         return null;
     }
 
-    public static bool HasSecurityNodeInterfaces([NotNull] this Type sourceType)
+    public static bool HasSecurityNodeInterfaces(this Type sourceType)
     {
         if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
 
         return sourceType.GetSecurityNodeInterfaces().Any();
     }
 
-    public static IEnumerable<Type> GetSecurityNodeInterfaces([NotNull] this Type sourceType)
+    public static IEnumerable<Type> GetSecurityNodeInterfaces(this Type sourceType)
     {
         if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
 
         return sourceType.GetAllInterfaces().Where(i => (i.IsGenericType ? i.GetGenericTypeDefinition() : i).HasAttribute<SecurityNodeAttribute>() || i == typeof(ISecurityContext));
     }
 
-    public static IEnumerable<Type> GetGenericSecurityNodeInterfaces([NotNull] this Type sourceType)
+    public static IEnumerable<Type> GetGenericSecurityNodeInterfaces(this Type sourceType)
     {
         if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
 
@@ -73,7 +71,7 @@ public static class TypeExtensions
         }
     }
 
-    public static Dictionary<Type, ReadOnlyCollection<Enum>> GetTypesWithSecondarySecurityOperations([NotNull] this IEnumerable<Type> source)
+    public static Dictionary<Type, ReadOnlyCollection<Enum>> GetTypesWithSecondarySecurityOperations(this IEnumerable<Type> source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 

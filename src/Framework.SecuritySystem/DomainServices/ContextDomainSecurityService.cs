@@ -4,8 +4,6 @@ using Framework.Core;
 using Framework.SecuritySystem.Rules.Builders;
 using Framework.Persistent;
 
-using JetBrains.Annotations;
-
 namespace Framework.SecuritySystem;
 
 /// <summary>
@@ -28,11 +26,11 @@ public abstract class ContextDomainSecurityServiceBase<TPersistentDomainObjectBa
     private readonly IDictionaryCache<ContextSecurityOperation<TSecurityOperationCode>, ISecurityProvider<TDomainObject>> providersCache;
 
     protected ContextDomainSecurityServiceBase(
-            [NotNull] IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
-            [NotNull] IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
-            [NotNull] ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver,
-            [NotNull] IAuthorizationSystem<TIdent> authorizationSystem,
-            [NotNull] ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
+            IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
+            IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
+            ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver,
+            IAuthorizationSystem<TIdent> authorizationSystem,
+            ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
 
             : base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
     {
@@ -109,11 +107,11 @@ public abstract class ContextDomainSecurityService<TPersistentDomainObjectBase, 
 {
     protected ContextDomainSecurityService(
 
-            [NotNull] IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
-            [NotNull] IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
-            [NotNull] ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver,
-            [NotNull] IAuthorizationSystem<TIdent> authorizationSystem,
-            [NotNull] ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
+            IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
+            IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
+            ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver,
+            IAuthorizationSystem<TIdent> authorizationSystem,
+            ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
             : base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
     {
     }

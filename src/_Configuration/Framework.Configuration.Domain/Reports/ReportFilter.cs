@@ -3,8 +3,6 @@ using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
-using JetBrains.Annotations;
-
 namespace Framework.Configuration.Domain.Reports;
 
 [NotAuditedClass]
@@ -24,7 +22,7 @@ public class ReportFilter : AuditPersistentDomainObjectBase, IDetail<Report>
     private string value;
     private bool isValueFromParameters;
 
-    public ReportFilter([NotNull] Report report)
+    public ReportFilter(Report report)
     {
         if (report == null) throw new ArgumentNullException(nameof(report));
         this.report = report;

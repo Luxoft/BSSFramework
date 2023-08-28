@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 public class PropertyEqualityComparer<T, TProperty> : EqualityComparer<T>
 {
@@ -48,7 +46,7 @@ public class EqualityComparerImpl<T> : EqualityComparer<T>
         return this._getHashFunc.Maybe(v => v(obj));
     }
 
-    public static EqualityComparerImpl<T> Create<TKey>([NotNull] Func<T, TKey> keySelector)
+    public static EqualityComparerImpl<T> Create<TKey>(Func<T, TKey> keySelector)
     {
         if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
 

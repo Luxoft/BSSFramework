@@ -1,8 +1,6 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.Audit;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.NHibernate.Audit;
 
 /// <summary> Setter of Audit properties (<seealso cref="IAuditProperty"/>) into NHibernate domain object state collection
@@ -14,7 +12,7 @@ internal sealed partial class AuditPropertiesSetter
 {
     private readonly IDictionaryCache<DomainObjectDescription, Func<object[], bool>> setCache;
 
-    public AuditPropertiesSetter([NotNull] IEnumerable<IAuditProperty> auditProperties)
+    public AuditPropertiesSetter(IEnumerable<IAuditProperty> auditProperties)
     {
         if (auditProperties == null)
         {

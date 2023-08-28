@@ -2,8 +2,6 @@
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 
-using JetBrains.Annotations;
-
 using Attachment = System.Net.Mail.Attachment;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Services;
@@ -13,14 +11,14 @@ public class AttachmentsResolver<TBLLContext>
 {
     private readonly LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory;
 
-    public AttachmentsResolver([NotNull] LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
+    public AttachmentsResolver(LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
     {
         this.lambdaProcessorFactory = lambdaProcessorFactory;
     }
 
     public virtual IEnumerable<Attachment> Resolve<T>(
-            [NotNull] Subscription subscription,
-            [NotNull] DomainObjectVersions<T> versions)
+            Subscription subscription,
+            DomainObjectVersions<T> versions)
             where T : class
     {
         if (subscription == null)

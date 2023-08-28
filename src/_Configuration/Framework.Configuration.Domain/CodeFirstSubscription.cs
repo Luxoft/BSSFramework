@@ -5,8 +5,6 @@ using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
-using JetBrains.Annotations;
-
 namespace Framework.Configuration.Domain;
 
 /// <summary>
@@ -31,7 +29,7 @@ public class CodeFirstSubscription : AuditPersistentDomainObjectBase, ICodeObjec
     {
     }
 
-    public CodeFirstSubscription([NotNull] string code, [NotNull] DomainType domainType)
+    public CodeFirstSubscription(string code, DomainType domainType)
     {
         if (string.IsNullOrWhiteSpace(code))
         {

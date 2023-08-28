@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-using Framework.Core.Services;
+﻿using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;

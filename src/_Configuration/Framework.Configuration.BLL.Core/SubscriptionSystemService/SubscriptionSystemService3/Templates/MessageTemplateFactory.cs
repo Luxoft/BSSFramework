@@ -39,10 +39,10 @@ public class MessageTemplateFactory<TBLLContext>
     ///     Аргумент recipientsResolver или templatesFilter или configurationContextFacade равен null.
     /// </exception>
     public MessageTemplateFactory(
-            [NotNull] RecipientsResolver<TBLLContext> recipientsResolver,
-            [NotNull] AttachmentsResolver<TBLLContext> attachmentResolver,
-            [NotNull] ExcessTemplatesFilter templatesFilter,
-            [NotNull] ConfigurationContextFacade configurationContextFacade)
+            RecipientsResolver<TBLLContext> recipientsResolver,
+            AttachmentsResolver<TBLLContext> attachmentResolver,
+            ExcessTemplatesFilter templatesFilter,
+            ConfigurationContextFacade configurationContextFacade)
     {
         if (configurationContextFacade == null)
         {
@@ -71,8 +71,8 @@ public class MessageTemplateFactory<TBLLContext>
     ///     Список исключений, которые возникли при получении шаблонов уведомлений по каждой подписке.
     /// </exception>
     public virtual IEnumerable<MessageTemplateNotification> Create<T>(
-            [NotNull] IEnumerable<Subscription> subscriptions,
-            [NotNull] DomainObjectVersions<T> versions)
+            IEnumerable<Subscription> subscriptions,
+            DomainObjectVersions<T> versions)
             where T : class
     {
         if (subscriptions == null)

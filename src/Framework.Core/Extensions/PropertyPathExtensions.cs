@@ -1,13 +1,11 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
-using JetBrains.Annotations;
-
 namespace Framework.Core;
 
 public static class PropertyPathExtensions
 {
-    public static IEnumerable<Node<PropertyInfo>> ToNodes([NotNull] this IEnumerable<PropertyPath> paths)
+    public static IEnumerable<Node<PropertyInfo>> ToNodes(this IEnumerable<PropertyPath> paths)
     {
         if (paths == null) throw new ArgumentNullException(nameof(paths));
 
@@ -20,7 +18,7 @@ public static class PropertyPathExtensions
                select new Node<PropertyInfo>(g.Key, g.ToNodes());
     }
 
-    public static bool HasReferenceResult([NotNull] this PropertyPath path)
+    public static bool HasReferenceResult(this PropertyPath path)
     {
         if (path == null) { throw new ArgumentNullException(nameof(path)); }
 
@@ -32,7 +30,7 @@ public static class PropertyPathExtensions
     /// </summary>
     /// <param name="node">Узел</param>
     /// <returns></returns>
-    public static IEnumerable<PropertyPath> ToPaths([NotNull] this Node<PropertyInfo> node)
+    public static IEnumerable<PropertyPath> ToPaths(this Node<PropertyInfo> node)
     {
         if (node == null) throw new ArgumentNullException(nameof(node));
 
@@ -52,7 +50,7 @@ public static class PropertyPathExtensions
     /// <param name="propertyPath">Путь</param>
     /// <param name="sourceType">Стартовый тип от которого строится лямбда</param>
     /// <returns></returns>
-    public static LambdaExpression ToLambdaExpression([NotNull] this PropertyPath propertyPath, Type sourceType = null)
+    public static LambdaExpression ToLambdaExpression(this PropertyPath propertyPath, Type sourceType = null)
     {
         if (propertyPath == null) throw new ArgumentNullException(nameof(propertyPath));
 
@@ -66,7 +64,7 @@ public static class PropertyPathExtensions
     /// </summary>
     /// <param name="properties">Коллекция свойств</param>
     /// <returns></returns>
-    public static PropertyPath ToPropertyPath([NotNull] this IEnumerable<PropertyInfo> properties)
+    public static PropertyPath ToPropertyPath(this IEnumerable<PropertyInfo> properties)
     {
         if (properties == null) throw new ArgumentNullException(nameof(properties));
 

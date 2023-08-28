@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.DomainDriven;
+﻿namespace Framework.DomainDriven;
 
 public abstract class MainFetchServiceBase<TPersistentDomainObjectBase> : IFetchService<TPersistentDomainObjectBase, FetchBuildRule.DTOFetchBuildRule>
 {
@@ -8,7 +6,7 @@ public abstract class MainFetchServiceBase<TPersistentDomainObjectBase> : IFetch
     {
     }
 
-    public IFetchContainer<TDomainObject> GetContainer<TDomainObject>([NotNull] FetchBuildRule.DTOFetchBuildRule rule)
+    public IFetchContainer<TDomainObject> GetContainer<TDomainObject>(FetchBuildRule.DTOFetchBuildRule rule)
             where TDomainObject : TPersistentDomainObjectBase
     {
         if (rule == null) throw new ArgumentNullException(nameof(rule));

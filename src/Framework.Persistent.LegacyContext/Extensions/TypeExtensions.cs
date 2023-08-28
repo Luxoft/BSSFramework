@@ -2,8 +2,6 @@
 
 using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.Persistent;
 
 public static class TypeExtensions
@@ -60,7 +58,7 @@ public static class TypeExtensions
         return type.IsPropertyImplement(typeof(IVisualIdentityObject));
     }
 
-    public static Guid GetDomainTypeId([NotNull] this Type type, bool throwIfDefault = false)
+    public static Guid GetDomainTypeId(this Type type, bool throwIfDefault = false)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 

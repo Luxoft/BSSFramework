@@ -32,7 +32,7 @@ internal class GeneratedType : BaseTypeImpl
     private readonly Attribute[] customAttributes;
 
 
-    public GeneratedType(ProjectionContractEnvironment environment, [NotNull] Type contractType, Dictionary<Type, GeneratedType> preGenerateTypes)
+    public GeneratedType(ProjectionContractEnvironment environment, Type contractType, Dictionary<Type, GeneratedType> preGenerateTypes)
     {
         if (contractType == null) throw new ArgumentNullException(nameof(contractType));
 

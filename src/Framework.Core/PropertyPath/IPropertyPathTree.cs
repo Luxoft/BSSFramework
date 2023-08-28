@@ -1,8 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 
-using JetBrains.Annotations;
-
 namespace Framework.Core;
 
 public interface IPropertyPathTree<TDomainObject> : IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>>
@@ -11,7 +9,7 @@ public interface IPropertyPathTree<TDomainObject> : IEnumerable<Expression<Actio
 
 public class PropertyPathTree<TDomainObject> : ReadOnlyCollection<Expression<Action<IPropertyPathNode<TDomainObject>>>>, IPropertyPathTree<TDomainObject>
 {
-    public PropertyPathTree([NotNull] IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> source)
+    public PropertyPathTree(IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> source)
             : base(source.ToList())
     {
     }
@@ -21,14 +19,14 @@ public class PropertyPathTree<TDomainObject> : ReadOnlyCollection<Expression<Act
 
 public static class PropertyPathTreeExtensions
 {
-    public static IPropertyPathTree<TDomainObject> ToTree<TDomainObject>([NotNull] this IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> nodes)
+    public static IPropertyPathTree<TDomainObject> ToTree<TDomainObject>(this IEnumerable<Expression<Action<IPropertyPathNode<TDomainObject>>>> nodes)
     {
         if (nodes == null) throw new ArgumentNullException(nameof(nodes));
 
         return new PropertyPathTree<TDomainObject>(nodes);
     }
 
-    public static IPropertyPathTree<TOutput> Covariance<TDomainObject, TOutput>([NotNull] this IPropertyPathTree<TDomainObject> propertyPathTree)
+    public static IPropertyPathTree<TOutput> Covariance<TDomainObject, TOutput>(this IPropertyPathTree<TDomainObject> propertyPathTree)
             where TOutput : TDomainObject
     {
         if (propertyPathTree == null) throw new ArgumentNullException(nameof(propertyPathTree));

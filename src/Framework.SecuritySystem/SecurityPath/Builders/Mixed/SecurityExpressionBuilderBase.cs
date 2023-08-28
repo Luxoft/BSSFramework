@@ -1,7 +1,5 @@
 ﻿using Framework.Persistent;
 
-using JetBrains.Annotations;
-
 namespace Framework.SecuritySystem.Rules.Builders.Mixed;
 
 public class SecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent>
@@ -16,8 +14,8 @@ public class SecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObjec
     private readonly ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> queryBuilder;
 
     public SecurityExpressionBuilder(
-            [NotNull] ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> hasAccessBuilder,
-            [NotNull] ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> queryBuilder)
+            ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> hasAccessBuilder,
+            ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> queryBuilder)
     {
         this.hasAccessBuilder = hasAccessBuilder ?? throw new ArgumentNullException(nameof(hasAccessBuilder));
         this.queryBuilder = queryBuilder ?? throw new ArgumentNullException(nameof(queryBuilder));

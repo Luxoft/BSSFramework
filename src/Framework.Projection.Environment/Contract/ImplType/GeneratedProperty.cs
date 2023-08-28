@@ -2,8 +2,6 @@
 
 using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.Projection.Contract;
 
 internal class GeneratedProperty : BasePropertyInfoImpl
@@ -17,7 +15,7 @@ internal class GeneratedProperty : BasePropertyInfoImpl
     private readonly Lazy<Type> lazyPropertyType;
 
 
-    public GeneratedProperty([NotNull] ProjectionContractEnvironment environment, [NotNull] PropertyInfo contractProperty, [NotNull] GeneratedType reflectedType)
+    public GeneratedProperty(ProjectionContractEnvironment environment, PropertyInfo contractProperty, GeneratedType reflectedType)
     {
         if (environment == null) throw new ArgumentNullException(nameof(environment));
         if (contractProperty == null) throw new ArgumentNullException(nameof(contractProperty));

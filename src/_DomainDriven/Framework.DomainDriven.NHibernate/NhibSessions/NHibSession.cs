@@ -1,7 +1,5 @@
 ﻿using Framework.DomainDriven.DAL.Revisions;
 
-using JetBrains.Annotations;
-
 using NHibernate;
 using NHibernate.Envers.Patch;
 
@@ -13,7 +11,7 @@ public class NHibSession : INHibSession
 
     private readonly Lazy<INHibSession> lazyInnerSession;
 
-    public NHibSession([NotNull] NHibSessionEnvironment environment, INHibSessionSetup settings, IEnumerable<IDBSessionEventListener> eventListeners)
+    public NHibSession(NHibSessionEnvironment environment, INHibSessionSetup settings, IEnumerable<IDBSessionEventListener> eventListeners)
     {
         if (environment == null) throw new ArgumentNullException(nameof(environment));
 

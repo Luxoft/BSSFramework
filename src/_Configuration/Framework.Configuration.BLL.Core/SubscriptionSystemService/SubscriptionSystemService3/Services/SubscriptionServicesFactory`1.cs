@@ -3,8 +3,6 @@ using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Templates;
 
-using JetBrains.Annotations;
-
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Services;
 
 /// <summary>
@@ -33,9 +31,9 @@ public class SubscriptionServicesFactory<TBLLContext>
     ///     <cref>System.ArgumentNullException</cref>
     /// </exception>
     public SubscriptionServicesFactory(
-            [NotNull] IConfigurationBLLContext configurationContext,
-            [NotNull] TBLLContext bllContext,
-            [NotNull] SubscriptionMetadataStore subscriptionMetadataStore)
+            IConfigurationBLLContext configurationContext,
+            TBLLContext bllContext,
+            SubscriptionMetadataStore subscriptionMetadataStore)
     {
         this.configurationContext = configurationContext ?? throw new ArgumentNullException(nameof(configurationContext));
         this.bllContext = bllContext ?? throw new ArgumentNullException(nameof(bllContext));

@@ -1,8 +1,6 @@
 ﻿using Framework.Persistent;
 using Framework.QueryableSource;
 
-using JetBrains.Annotations;
-
 namespace Framework.HierarchicalExpand;
 
 public class HierarchicalObjectLayerExpander<TPersistentDomainObjectBase, TDomainObject, TIdent> : IHierarchicalObjectExpander<TIdent>
@@ -12,7 +10,7 @@ public class HierarchicalObjectLayerExpander<TPersistentDomainObjectBase, TDomai
 {
     private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
 
-    public HierarchicalObjectLayerExpander([NotNull] IQueryableSource<TPersistentDomainObjectBase> queryableSource)
+    public HierarchicalObjectLayerExpander(IQueryableSource<TPersistentDomainObjectBase> queryableSource)
     {
         this.queryableSource = queryableSource ?? throw new ArgumentNullException(nameof(queryableSource));
     }

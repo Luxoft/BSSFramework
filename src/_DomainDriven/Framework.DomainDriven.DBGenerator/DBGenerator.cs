@@ -3,15 +3,13 @@ using Framework.DomainDriven.DBGenerator.Contracts;
 using Framework.DomainDriven.Metadata;
 using Framework.DomainDriven.NHibernate;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.DBGenerator;
 
 public class DBGenerator
 {
     private readonly IMappingSettings _settings;
 
-    public DBGenerator([NotNull] IMappingSettings settings) =>
+    public DBGenerator(IMappingSettings settings) =>
             this._settings = settings ?? throw new ArgumentNullException(nameof(settings));
 
     protected virtual void Init(

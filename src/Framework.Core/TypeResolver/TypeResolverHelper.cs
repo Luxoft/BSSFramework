@@ -1,17 +1,15 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 public class TypeResolverHelper
 {
-    public static ITypeResolver<T> Create<T>([NotNull] IReadOnlyDictionary<T, Type> dict)
+    public static ITypeResolver<T> Create<T>(IReadOnlyDictionary<T, Type> dict)
     {
         if (dict == null) throw new ArgumentNullException(nameof(dict));
 
         return Create<T>(dict.GetValueOrDefault, () => dict.Values);
     }
 
-    public static ITypeResolver<string> Create([NotNull] ITypeSource typeSource, TypeSearchMode searchMode)
+    public static ITypeResolver<string> Create(ITypeSource typeSource, TypeSearchMode searchMode)
     {
         if (typeSource == null) throw new ArgumentNullException(nameof(typeSource));
 
@@ -27,7 +25,7 @@ public class TypeResolverHelper
     }
 
 
-    public static ITypeResolver<string> CreateDefault([NotNull] ITypeSource typeSource)
+    public static ITypeResolver<string> CreateDefault(ITypeSource typeSource)
     {
         if (typeSource == null) throw new ArgumentNullException(nameof(typeSource));
 

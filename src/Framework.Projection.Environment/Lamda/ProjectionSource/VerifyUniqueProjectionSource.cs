@@ -1,7 +1,5 @@
 ﻿using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.Projection.Lambda;
 
 internal class VerifyUniqueProjectionSource : IProjectionSource
@@ -9,7 +7,7 @@ internal class VerifyUniqueProjectionSource : IProjectionSource
     private readonly IProjectionSource baseSource;
 
 
-    public VerifyUniqueProjectionSource([NotNull] IProjectionSource baseSource)
+    public VerifyUniqueProjectionSource(IProjectionSource baseSource)
     {
         this.baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
     }

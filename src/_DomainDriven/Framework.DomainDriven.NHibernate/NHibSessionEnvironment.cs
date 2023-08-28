@@ -33,8 +33,8 @@ public class NHibSessionEnvironment : IDisposable
     /// <exception cref="System.ArgumentException">All mapping settings has equal database with schema. Utilities, Workflow has domain object with same names</exception>
     /// <exception cref="ApplicationException">Could not initialize ServiceFactory.</exception>
     public NHibSessionEnvironment(
-            [NotNull] NHibConnectionSettings connectionSettings,
-            [NotNull] IEnumerable<IMappingSettings> mappingSettings,
+            NHibConnectionSettings connectionSettings,
+            IEnumerable<IMappingSettings> mappingSettings,
             IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService,
             INHibSessionEnvironmentSettings settings,
             IDalValidationIdentitySource dalValidationIdentitySource)

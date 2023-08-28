@@ -2,7 +2,7 @@
 using AutoFixture.Idioms;
 
 using FluentAssertions;
-using Framework.Authorization.BLL;
+
 using Framework.Authorization.Domain;
 using Framework.Authorization.Notification;
 using Framework.Configuration.BLL.SubscriptionSystemService3;
@@ -11,7 +11,6 @@ using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven;
-using Framework.Persistent;
 using Framework.UnitTesting;
 using NUnit.Framework;
 using NSubstitute;

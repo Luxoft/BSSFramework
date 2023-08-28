@@ -1,12 +1,10 @@
 ﻿using System.Reflection;
 
-using JetBrains.Annotations;
-
 namespace Framework.Core;
 
 public static class AssemblyExtensions
 {
-    public static Assembly TryLoad([NotNull] this AssemblyName assemblyName)
+    public static Assembly TryLoad(this AssemblyName assemblyName)
     {
         if (assemblyName == null) throw new ArgumentNullException(nameof(assemblyName));
 

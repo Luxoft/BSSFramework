@@ -1,6 +1,4 @@
-﻿using Automation.Utils;
-
-namespace Automation;
+﻿namespace Automation;
 
 public class TestEnvironment
 {

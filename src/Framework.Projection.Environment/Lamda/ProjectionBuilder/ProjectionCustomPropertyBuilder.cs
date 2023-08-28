@@ -1,10 +1,8 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.Projection.Lambda;
+﻿namespace Framework.Projection.Lambda;
 
 internal class ProjectionCustomPropertyBuilder : IProjectionCustomProperty
 {
-    public ProjectionCustomPropertyBuilder([NotNull] IProjectionCustomProperty customProperty)
+    public ProjectionCustomPropertyBuilder(IProjectionCustomProperty customProperty)
     {
         if (customProperty == null) { throw new ArgumentNullException(nameof(customProperty)); }
 

@@ -14,7 +14,7 @@ public class SetPermissionStatusStep : IStepBody
     [NotNull]
     private readonly IContextEvaluator<IAuthorizationBLLContext> contextEvaluator;
 
-    public SetPermissionStatusStep([NotNull] IContextEvaluator<IAuthorizationBLLContext> contextEvaluator)
+    public SetPermissionStatusStep(IContextEvaluator<IAuthorizationBLLContext> contextEvaluator)
     {
         this.contextEvaluator = contextEvaluator;
     }

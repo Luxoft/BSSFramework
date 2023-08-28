@@ -3,8 +3,6 @@ using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
 
-using JetBrains.Annotations;
-
 namespace Framework.Configuration.Domain.Reports;
 
 [UniqueGroup]
@@ -27,7 +25,7 @@ public class ReportParameter : AuditPersistentDomainObjectBase, IDetail<Report>
 
     private bool isCollection;
 
-    public ReportParameter([NotNull] Report report)
+    public ReportParameter(Report report)
     {
         if (report == null) throw new ArgumentNullException(nameof(report));
 

@@ -1,13 +1,11 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 
-using JetBrains.Annotations;
-
 namespace Framework.Core;
 
 public static class PropertyInfoExtensions
 {
-    public static bool IsHierarchical([NotNull] this PropertyInfo propertyInfo)
+    public static bool IsHierarchical(this PropertyInfo propertyInfo)
     {
         if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
 
@@ -139,28 +137,28 @@ public static class PropertyInfoExtensions
         return request.SingleOrDefault();
     }
 
-    public static LambdaExpression ToSetLambdaExpression([NotNull] this PropertyInfo property, Type sourceType = null)
+    public static LambdaExpression ToSetLambdaExpression(this PropertyInfo property, Type sourceType = null)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
         return PropertyLambdaCache.SetLambdaCache.GetValue(property, sourceType ?? property.ReflectedType);
     }
 
-    public static Expression<Action<TSource, TProperty>> ToSetLambdaExpression<TSource, TProperty>([NotNull] this PropertyInfo property)
+    public static Expression<Action<TSource, TProperty>> ToSetLambdaExpression<TSource, TProperty>(this PropertyInfo property)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
         return PropertyLambdaCache<TSource, TProperty>.SetLambdaCache[property];
     }
 
-    public static LambdaExpression ToLambdaExpression([NotNull] this PropertyInfo property, Type sourceType = null)
+    public static LambdaExpression ToLambdaExpression(this PropertyInfo property, Type sourceType = null)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
         return PropertyLambdaCache.LambdaCache.GetValue(property, sourceType ?? property.ReflectedType);
     }
 
-    public static Expression<Func<TSource, TProperty>> ToLambdaExpression<TSource, TProperty>([NotNull] this PropertyInfo property)
+    public static Expression<Func<TSource, TProperty>> ToLambdaExpression<TSource, TProperty>(this PropertyInfo property)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 

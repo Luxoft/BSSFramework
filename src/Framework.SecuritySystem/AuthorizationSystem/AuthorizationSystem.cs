@@ -3,8 +3,6 @@
 using Framework.Core;
 using Framework.HierarchicalExpand;
 
-using JetBrains.Annotations;
-
 namespace Framework.SecuritySystem;
 
 public abstract class AuthorizationSystem<TIdent> : IAuthorizationSystem<TIdent>
@@ -31,7 +29,7 @@ public abstract class AuthorizationSystem<TIdent> : IAuthorizationSystem<TIdent>
     public abstract void CheckAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> operation)
         where TSecurityOperationCode : struct, Enum;
 
-    public string ResolveSecurityTypeName([NotNull] Type type)
+    public string ResolveSecurityTypeName(Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 

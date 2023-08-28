@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.Security;
+﻿namespace Framework.Security;
 
 [AttributeUsage(AttributeTargets.Enum, AllowMultiple = true)]
 public class BaseSecurityOperationTypeAttribute : Attribute
@@ -11,7 +9,7 @@ public class BaseSecurityOperationTypeAttribute : Attribute
 
     }
 
-    public BaseSecurityOperationTypeAttribute([NotNull] Type baseSecurityOperationType)
+    public BaseSecurityOperationTypeAttribute(Type baseSecurityOperationType)
     {
         if (baseSecurityOperationType == null) throw new ArgumentNullException(nameof(baseSecurityOperationType));
 

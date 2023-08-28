@@ -1,7 +1,5 @@
 ﻿using Framework.Persistent;
 
-using JetBrains.Annotations;
-
 namespace Framework.Configuration.Domain;
 
 /// <summary>
@@ -32,7 +30,7 @@ public class DomainTypeEventOperation : BaseDirectory, IDetail<DomainType>
     /// </summary>
     /// <param name="domainType">Доменный тип</param>
     /// <param name="operation">Операция</param>
-    public DomainTypeEventOperation(DomainType domainType, [NotNull] Enum operation)
+    public DomainTypeEventOperation(DomainType domainType, Enum operation)
             : this(domainType)
     {
         if (operation == null) throw new ArgumentNullException(nameof(operation));

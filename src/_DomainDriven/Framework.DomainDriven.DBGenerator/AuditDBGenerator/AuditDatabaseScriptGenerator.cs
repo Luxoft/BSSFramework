@@ -10,8 +10,6 @@ using Framework.DomainDriven.NHibernate.Audit;
 using Framework.Persistent.Mapping;
 using Framework.Projection;
 
-using JetBrains.Annotations;
-
 using NHibernate.Cfg;
 using NHibernate.Dialect;
 using NHibernate.Dialect.Schema;
@@ -36,7 +34,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
     {
     }
 
-    public AuditDatabaseScriptGenerator([NotNull] IEnumerable<IMappingSettings> mappingSettings,
+    public AuditDatabaseScriptGenerator(IEnumerable<IMappingSettings> mappingSettings,
                                         string auditTablePostfix)
     {
         if (mappingSettings == null) throw new ArgumentNullException(nameof(mappingSettings));

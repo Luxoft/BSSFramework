@@ -2,9 +2,6 @@
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Notification;
-using Framework.Persistent;
-
-using JetBrains.Annotations;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 
@@ -19,7 +16,7 @@ public class GenerationRecipientsResolver<TBLLContext>
     /// <summary>Создаёт экземпляр класса <see cref="GenerationRecipientsResolver" />.</summary>
     /// <param name="lambdaProcessorFactory">Фабрика процессоров лямбда-выражений.</param>
     /// <exception cref="System.ArgumentNullException">Аргумент lambdaProcessorFactory равен null.</exception>
-    public GenerationRecipientsResolver([NotNull] LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
+    public GenerationRecipientsResolver(LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
     {
         if (lambdaProcessorFactory == null)
         {
@@ -41,8 +38,8 @@ public class GenerationRecipientsResolver<TBLLContext>
     ///     versions равен null.
     /// </exception>
     public virtual IEnumerable<RecipientsResolverResult> Resolve<T>(
-            [NotNull] Subscription subscription,
-            [NotNull] DomainObjectVersions<T> versions)
+            Subscription subscription,
+            DomainObjectVersions<T> versions)
             where T : class
     {
         if (subscription == null)

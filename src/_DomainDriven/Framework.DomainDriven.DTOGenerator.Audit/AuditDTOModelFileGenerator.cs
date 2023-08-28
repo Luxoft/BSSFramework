@@ -3,7 +3,6 @@ using System.Runtime.Serialization;
 
 using Framework.CodeDom;
 using Framework.Core;
-using Framework.DomainDriven.Attributes;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.Generation.Domain;

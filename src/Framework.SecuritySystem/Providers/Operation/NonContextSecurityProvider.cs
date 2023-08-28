@@ -1,9 +1,6 @@
 ﻿using Framework.Core;
 using Framework.Persistent;
 
-
-using JetBrains.Annotations;
-
 namespace Framework.SecuritySystem;
 
 /// <summary>
@@ -26,7 +23,7 @@ public class NonContextSecurityProvider<TPersistentDomainObjectBase, TDomainObje
     public NonContextSecurityProvider(
             IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
             NonContextSecurityOperation<TSecurityOperationCode> securityOperation,
-            [NotNull] IAuthorizationSystem<TIdent> authorizationSystem)
+            IAuthorizationSystem<TIdent> authorizationSystem)
             : base(accessDeniedExceptionService)
     {
         if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));

@@ -2,8 +2,6 @@
 using Framework.DomainDriven.ServiceModel;
 using Framework.DomainDriven.ServiceModel.Service;
 
-using JetBrains.Annotations;
-
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Automation.ServiceEnvironment;
@@ -18,7 +16,7 @@ public interface IRootServiceProviderContainer<out TBLLContext> : IRootServicePr
     Task<TResult> IContextEvaluator<TBLLContext>.EvaluateAsync<TResult>(
             DBSessionMode sessionMode,
             string customPrincipalName,
-            [NotNull] Func<TBLLContext, IDBSession, Task<TResult>> getResult)
+            Func<TBLLContext, IDBSession, Task<TResult>> getResult)
     {
         return this.RootServiceProvider.GetRequiredService<IContextEvaluator<TBLLContext>>().EvaluateAsync(sessionMode, customPrincipalName, getResult);
     }

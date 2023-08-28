@@ -4,13 +4,11 @@ using System.Reflection;
 using Framework.Core;
 using Framework.Persistent;
 
-using JetBrains.Annotations;
-
 namespace Framework.Projection.Lambda;
 
 internal class ProjectionPropertyBuilder : IProjectionProperty
 {
-    public ProjectionPropertyBuilder([NotNull] IProjectionProperty projectionProperty)
+    public ProjectionPropertyBuilder(IProjectionProperty projectionProperty)
     {
         if (projectionProperty == null) throw new ArgumentNullException(nameof(projectionProperty));
 
@@ -27,7 +25,7 @@ internal class ProjectionPropertyBuilder : IProjectionProperty
         this.VirtualExplicitInterfaceProperty = projectionProperty.VirtualExplicitInterfaceProperty;
     }
 
-    public ProjectionPropertyBuilder([NotNull] LambdaExpression path, string namePostfix = null)
+    public ProjectionPropertyBuilder(LambdaExpression path, string namePostfix = null)
     {
         this.Expression = path ?? throw new ArgumentNullException(nameof(path));
         this.SourceType = path.Parameters.Single().Type;

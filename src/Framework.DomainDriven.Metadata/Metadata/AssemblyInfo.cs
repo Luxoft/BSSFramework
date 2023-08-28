@@ -2,15 +2,13 @@
 
 using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.DomainDriven.Metadata;
 
 public class AssemblyInfo : IAssemblyInfo
 {
     private readonly ITypeSource typeSource;
 
-    public AssemblyInfo([NotNull] string name, [NotNull] string fullName, ITypeSource typeSource)
+    public AssemblyInfo(string name, string fullName, ITypeSource typeSource)
     {
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Value cannot be null or whitespace.", nameof(name));
         if (string.IsNullOrWhiteSpace(fullName)) throw new ArgumentException("Value cannot be null or whitespace.", nameof(fullName));
@@ -31,7 +29,7 @@ public class AssemblyInfo : IAssemblyInfo
         return this.typeSource.GetTypes();
     }
 
-    public static AssemblyInfo Create([NotNull] Assembly assembly, Func<Type, bool> typeFilter = null)
+    public static AssemblyInfo Create(Assembly assembly, Func<Type, bool> typeFilter = null)
     {
         if (assembly == null) throw new ArgumentNullException(nameof(assembly));
 

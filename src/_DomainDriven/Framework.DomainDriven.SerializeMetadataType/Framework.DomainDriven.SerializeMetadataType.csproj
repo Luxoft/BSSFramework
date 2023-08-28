@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>Luxoft.Framework.DomainDriven.Serialization</PackageId>
+    <PackageId>Luxoft.Framework.DomainDriven.SerializeMetadataType</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework.Persistent.LegacyContext\Framework.Persistent.LegacyContext.csproj" />
+    <ProjectReference Include="..\Framework.DomainDriven.Serialization\Framework.DomainDriven.Serialization.csproj" />
   </ItemGroup>
 
 </Project>

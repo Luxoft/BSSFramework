@@ -14,13 +14,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SampleSystem.ServiceEnvironment\SampleSystem.ServiceEnvironment.csproj" />
+
     <ProjectReference Include="..\..\Framework.Cap\Framework.Cap.csproj" />
     <ProjectReference Include="..\..\Framework.Configurator\Framework.Configurator.csproj" />
     <ProjectReference Include="..\..\Framework.HangfireCore\Framework.HangfireCore.csproj" />
     <ProjectReference Include="..\..\Framework.NotificationCore\Framework.NotificationCore.csproj" />
+
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.WebApi\Framework.Authorization.WebApi.csproj" />
     <ProjectReference Include="..\..\_Configuration\Framework.Configuration.WebApi\Framework.Configuration.WebApi.csproj" />
+
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.ServiceModel.IAD.DTO\Framework.DomainDriven.ServiceModel.IAD.DTO.csproj" />
-    <ProjectReference Include="..\SampleSystem.ServiceEnvironment\SampleSystem.ServiceEnvironment.csproj" />
   </ItemGroup>
 </Project>

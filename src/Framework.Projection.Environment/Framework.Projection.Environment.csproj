@@ -7,9 +7,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Framework.Core.Reflection\Framework.Core.Reflection.csproj" />
-    <ProjectReference Include="..\Framework.DomainDriven.Metadata\Framework.DomainDriven.Metadata.csproj" />
     <ProjectReference Include="..\Framework.Projection\Framework.Projection.csproj" />
     <ProjectReference Include="..\Framework.Security.LegacyAttributes\Framework.Security.LegacyAttributes.csproj" />
+
+    <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.Metadata\Framework.DomainDriven.Metadata.csproj" />
     <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.BLL\Framework.DomainDriven.BLL.csproj" />
     <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.Core.LegacyContext\Framework.DomainDriven.Core.LegacyContext.csproj" />
     <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.Serialization\Framework.DomainDriven.Serialization.csproj" />

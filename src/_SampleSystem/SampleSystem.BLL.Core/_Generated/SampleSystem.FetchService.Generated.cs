@@ -90,6 +90,40 @@ namespace SampleSystem.BLL
             }
         }
         
+        protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.AuthPerformanceObject> GetAuthPerformanceObjectContainer(Framework.Transfering.ViewDTOType rule)
+        {
+            if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.AuthPerformanceObject>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.SimpleDTO))
+            {
+                return Framework.DomainDriven.FetchContainer<SampleSystem.Domain.AuthPerformanceObject>.Empty;
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.FullDTO))
+            {
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.AuthPerformanceObject>(
+                    fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.BusinessUnit),
+                    fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.Employee).SelectNested(employee => employee.CoreBusinessUnit),
+                    fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.Employee).SelectNested(employee => employee.HRDepartment).SelectNested(hRDepartment => hRDepartment.Location),
+                    fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.Location).SelectMany(location => location.Children),
+                    fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.ManagementUnit));
+            }
+            else if ((rule == Framework.Transfering.ViewDTOType.RichDTO))
+            {
+                return Framework.DomainDriven.FetchContainer.Create<SampleSystem.Domain.AuthPerformanceObject>(
+                    fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.BusinessUnit),
+                    fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.Employee).SelectNested(employee => employee.CoreBusinessUnit),
+                    fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.Employee).SelectNested(employee => employee.HRDepartment).SelectNested(hRDepartment => hRDepartment.Location),
+                    fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.Location).SelectMany(location => location.Children),
+                    fetchRootRule => fetchRootRule.SelectNested(authPerformanceObject => authPerformanceObject.ManagementUnit));
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException("rule");
+            }
+        }
+        
         protected virtual Framework.DomainDriven.IFetchContainer<SampleSystem.Domain.BusinessUnitAncestorLink> GetBusinessUnitAncestorLinkContainer(Framework.Transfering.ViewDTOType rule)
         {
             if ((rule == Framework.Transfering.ViewDTOType.VisualDTO))
@@ -603,6 +637,10 @@ namespace SampleSystem.BLL
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject)))
             {
                 return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetApprovePermissionWorkflowDomainObjectContainer(rule)));
+            }
+            else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.AuthPerformanceObject)))
+            {
+                return ((Framework.DomainDriven.IFetchContainer<TDomainObject>)(this.GetAuthPerformanceObjectContainer(rule)));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.BusinessUnit)))
             {

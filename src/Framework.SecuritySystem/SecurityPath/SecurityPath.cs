@@ -3,7 +3,6 @@
 using Framework.Core;
 using Framework.Persistent;
 
-
 namespace Framework.SecuritySystem;
 
 /// <summary>

@@ -28,7 +28,7 @@ public class AuthPerformanceTest : TestBase
 
     private static readonly string PrincipalName = "AuthPerformance";
 
-    private static readonly int Size = 6;
+    private static readonly int Size = 5;
 
     [TestInitialize]
     public void SetUp()

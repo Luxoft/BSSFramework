@@ -56,7 +56,7 @@ public class Principal : BaseDirectory, IMaster<Permission>, IPrincipal<Guid>
     public virtual Principal RunAs
     {
         get { return this.runAs; }
-        internal protected set { this.runAs = value; }
+        set { this.runAs = value; }
     }
 
     ICollection<Permission> IMaster<Permission>.Details

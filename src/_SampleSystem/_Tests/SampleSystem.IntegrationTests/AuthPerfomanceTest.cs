@@ -51,7 +51,7 @@ public class AuthPerformanceTest : TestBase
     }
 
     [TestMethod]
-    public async Task TestSaveLocation_LocationSaved()
+    public async Task LoadGenerateAuthPerformanceObjects_CountEquals()
     {
         // Arrange
         var authPerfCount = await this.GenerateAuthPerformanceObject();

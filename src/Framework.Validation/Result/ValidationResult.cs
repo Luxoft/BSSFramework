@@ -3,8 +3,6 @@ using System.Diagnostics;
 
 using Framework.Core;
 
-using JetBrains.Annotations;
-
 namespace Framework.Validation;
 
 public class ValidationResult
@@ -78,7 +76,6 @@ public class ValidationResult
         }
     }
 
-    [StringFormatMethod("format")]
     public static ValidationResult CreateError(string format, params object[] args)
     {
         return CreateError(string.Format(format, args));

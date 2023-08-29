@@ -8,10 +8,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Framework.Core.Pipe\Framework.Core.Pipe.csproj" />
   </ItemGroup>
 

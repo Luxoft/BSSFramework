@@ -5,7 +5,7 @@ using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Notification;
 
-using JetBrains.Annotations;
+
 
 using Serilog;
 
@@ -172,7 +172,6 @@ public class MessageTemplateFactory<TBLLContext>
         return result;
     }
 
-    [UsedImplicitly]
     private IEnumerable<MessageTemplateNotification> CreateImplicit<TSourceDomainObjectType, TModelObjectType>(
             Subscription subscription,
             DomainObjectVersions<TModelObjectType> versions,

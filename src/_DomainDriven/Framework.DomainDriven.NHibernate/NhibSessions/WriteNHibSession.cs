@@ -5,7 +5,7 @@ using Framework.DomainDriven.Audit;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.NHibernate.Audit;
 
-using JetBrains.Annotations;
+
 
 using NHibernate;
 using NHibernate.Event;
@@ -17,10 +17,10 @@ public class WriteNHibSession : NHibSessionBase
 {
     private readonly IDBSessionEventListener[] eventListeners;
 
-    [NotNull]
+    
     private readonly AuditPropertyPair modifyAuditProperties;
 
-    [NotNull]
+    
     private readonly AuditPropertyPair createAuditProperties;
 
     private readonly ISet<ObjectModification> modifiedObjectsFromLogic = new HashSet<ObjectModification>();

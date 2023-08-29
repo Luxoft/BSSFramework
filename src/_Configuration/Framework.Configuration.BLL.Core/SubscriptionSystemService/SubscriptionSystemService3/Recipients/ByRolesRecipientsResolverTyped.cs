@@ -7,7 +7,7 @@ using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Persistent;
 
-using JetBrains.Annotations;
+
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 
@@ -62,7 +62,6 @@ internal sealed class ByRolesRecipientsResolverTyped<TBLLContext> : ByRolesRecip
         return notificationFilterGroup;
     }
 
-    [UsedImplicitly]
     private NotificationFilterGroup GetNotificationFilterGroupTyped<T, TSecurityItem>(
             SubscriptionSecurityItem securityItem,
             DomainObjectVersions<T> versions)

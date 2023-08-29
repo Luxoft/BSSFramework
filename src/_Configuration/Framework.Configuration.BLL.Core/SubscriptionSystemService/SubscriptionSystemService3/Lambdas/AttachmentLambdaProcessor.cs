@@ -1,7 +1,7 @@
 ﻿using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 
-using JetBrains.Annotations;
+
 
 using NativeAttachment = System.Net.Mail.Attachment;
 
@@ -48,7 +48,6 @@ public class AttachmentLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLContex
     /// <param name="subscription">Подписка.</param>
     /// <param name="versions">Версии доменного объекта.</param>
     /// <returns>Результат вызова лямбда-выражения.</returns>
-    [UsedImplicitly]
     protected IEnumerable<NativeAttachment> InvokeWithTypedContext<T>(
             Subscription subscription,
             DomainObjectVersions<T> versions)

@@ -38,7 +38,7 @@ public abstract class SecurityExpressionBuilderFactoryBase<TPersistentDomainObje
         {
             var func = new Func<SecurityPath<TDomainObject>.NestedManySecurityPath<TDomainObject>, ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent>>(this.CreateNestedBuilder);
 
-            var args = pathType.GetGenericArguments().ElementsAt(1, 3).ToArray();
+            var args = pathType.GetGenericArguments().ToArray();
 
             var method = func.Method.GetGenericMethodDefinition().MakeGenericMethod(args);
 
@@ -48,7 +48,7 @@ public abstract class SecurityExpressionBuilderFactoryBase<TPersistentDomainObje
         {
             var genericMethod = typeof(SecurityExpressionBuilderFactoryBase<TPersistentDomainObjectBase, TIdent>).GetMethod(nameof(this.CreateGenericBuilder), BindingFlags.Instance | BindingFlags.NonPublic);
 
-            var args = pathType.GetGenericArguments().ElementsAt(1, 3).ToArray();
+            var args = pathType.GetGenericArguments().ToArray();
 
             var method = genericMethod.GetGenericMethodDefinition().MakeGenericMethod(args);
 
@@ -62,7 +62,7 @@ public abstract class SecurityExpressionBuilderFactoryBase<TPersistentDomainObje
 
     private ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateGenericBuilder<TDomainObject, TSecurityContext>(
             SecurityPath<TDomainObject>.FilterSecurityPath<TSecurityContext> path)
-            where TSecurityContext : class, ISecurityContext
+            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
             where TDomainObject : class, TPersistentDomainObjectBase
     {
         if (path == null) throw new ArgumentNullException(nameof(path));

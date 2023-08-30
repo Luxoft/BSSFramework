@@ -366,21 +366,6 @@ namespace Framework.Configuration.BLL
     }
     #endregion
     
-    public partial class ConfigurationSecurityPath<TDomainObject> : Framework.SecuritySystem.SecurityPathWrapper<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>
-        where TDomainObject : Framework.Configuration.Domain.PersistentDomainObjectBase
-    {
-        
-        private ConfigurationSecurityPath(Framework.SecuritySystem.SecurityPath<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> securityPath) : 
-                base(securityPath)
-        {
-        }
-        
-        public static implicit operator Framework.Configuration.BLL.ConfigurationSecurityPath<TDomainObject> (Framework.SecuritySystem.SecurityPath<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> securityPath)
-        {
-            return new Framework.Configuration.BLL.ConfigurationSecurityPath<TDomainObject>(securityPath);
-        }
-    }
-    
     public partial class ConfigurationBLLContext : Framework.DomainDriven.BLL.Security.SecurityBLLBaseContext<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectBase, System.Guid, Framework.Configuration.BLL.IConfigurationBLLFactoryContainer, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode, System.Guid>>>, Framework.Configuration.BLL.IConfigurationBLLContext
     {
         

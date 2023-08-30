@@ -6,87 +6,87 @@ namespace SampleSystem.BLL;
 
 public partial class SampleSystemSecurityService
 {
-    public override SampleSystemSecurityPath<TDomainObject> GetEmployeeSecurityPath<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>()
+    public override SecurityPath<TDomainObject> GetEmployeeSecurityPath<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>()
     {
-        return SampleSystemSecurityPath<TDomainObject>.Create(v => v.Employee).And(v => v.BusinessUnit).And(v => v.Department.Location);
+        return SecurityPath<TDomainObject>.Create(v => v.Employee).And(v => v.BusinessUnit).And(v => v.Department.Location);
     }
 
-    public override SampleSystemSecurityPath<BusinessUnit> GetBusinessUnitSecurityPath()
+    public override SecurityPath<BusinessUnit> GetBusinessUnitSecurityPath()
     {
-        return SampleSystemSecurityPath<BusinessUnit>.Create(v => v);
+        return SecurityPath<BusinessUnit>.Create(v => v);
     }
 
-    public override SampleSystemSecurityPath<EmployeeCellPhone> GetEmployeeCellPhoneSecurityPath()
+    public override SecurityPath<EmployeeCellPhone> GetEmployeeCellPhoneSecurityPath()
     {
         return this.GetEmployeeSecurityPath<Employee, BusinessUnit, HRDepartment, Location, Employee>().OverrideInput<EmployeeCellPhone>(cellPhone => cellPhone.Employee);
     }
 
-    public override SampleSystemSecurityPath<AuthPerformanceObject> GetAuthPerformanceObjectSecurityPath()
+    public override SecurityPath<AuthPerformanceObject> GetAuthPerformanceObjectSecurityPath()
     {
-        return SampleSystemSecurityPath<AuthPerformanceObject>.Create(v => v.BusinessUnit)
+        return SecurityPath<AuthPerformanceObject>.Create(v => v.BusinessUnit)
                                                               .And(v => v.ManagementUnit)
                                                               .And(v => v.Location)
                                                               .And(v => v.Employee);
     }
 
-    public override SampleSystemSecurityPath<BusinessUnitHrDepartment> GetBusinessUnitHrDepartmentSecurityPath()
+    public override SecurityPath<BusinessUnitHrDepartment> GetBusinessUnitHrDepartmentSecurityPath()
     {
-        return SampleSystemSecurityPath<BusinessUnitHrDepartment>.Create(v => v.BusinessUnit).And(v => v.HRDepartment.Location);
+        return SecurityPath<BusinessUnitHrDepartment>.Create(v => v.BusinessUnit).And(v => v.HRDepartment.Location);
     }
 
-    public override SampleSystemSecurityPath<BusinessUnitManagerCommissionLink> GetBusinessUnitManagerCommissionLinkSecurityPath()
+    public override SecurityPath<BusinessUnitManagerCommissionLink> GetBusinessUnitManagerCommissionLinkSecurityPath()
     {
-        return SampleSystemSecurityPath<BusinessUnitManagerCommissionLink>.Create(v => v.BusinessUnit);
+        return SecurityPath<BusinessUnitManagerCommissionLink>.Create(v => v.BusinessUnit);
     }
 
-    public override SampleSystemSecurityPath<EmployeePhoto> GetEmployeePhotoSecurityPath()
+    public override SecurityPath<EmployeePhoto> GetEmployeePhotoSecurityPath()
     {
-        return SampleSystemSecurityPath<EmployeePhoto>.Create(employeePhoto => employeePhoto.Employee.CoreBusinessUnit);
+        return SecurityPath<EmployeePhoto>.Create(employeePhoto => employeePhoto.Employee.CoreBusinessUnit);
     }
 
-    public override SampleSystemSecurityPath<EmployeePosition> GetEmployeePositionSecurityPath()
+    public override SecurityPath<EmployeePosition> GetEmployeePositionSecurityPath()
     {
-        return SampleSystemSecurityPath<EmployeePosition>.Create(position => position.Location);
+        return SecurityPath<EmployeePosition>.Create(position => position.Location);
     }
 
-    public override SampleSystemSecurityPath<ManagementUnitFluentMapping> GetManagementUnitFluentMappingSecurityPath()
+    public override SecurityPath<ManagementUnitFluentMapping> GetManagementUnitFluentMappingSecurityPath()
     {
-        return SampleSystemSecurityPath<ManagementUnitFluentMapping>.Create(v => v);
+        return SecurityPath<ManagementUnitFluentMapping>.Create(v => v);
     }
 
-    public override SampleSystemSecurityPath<ManagementUnit> GetManagementUnitSecurityPath()
+    public override SecurityPath<ManagementUnit> GetManagementUnitSecurityPath()
     {
-        return SampleSystemSecurityPath<ManagementUnit>.Create(v => v);
+        return SecurityPath<ManagementUnit>.Create(v => v);
     }
 
-    public override SampleSystemSecurityPath<TestPerformanceObject> GetTestPerformanceObjectSecurityPath()
+    public override SecurityPath<TestPerformanceObject> GetTestPerformanceObjectSecurityPath()
     {
-        return SampleSystemSecurityPath<TestPerformanceObject>.Create(v => v.Location, SingleSecurityMode.Strictly)
+        return SecurityPath<TestPerformanceObject>.Create(v => v.Location, SingleSecurityMode.Strictly)
                                                               .And(v => v.Employee, SingleSecurityMode.Strictly)
                                                               .And(v => v.BusinessUnit, SingleSecurityMode.Strictly)
                                                               .And(v => v.ManagementUnit, SingleSecurityMode.Strictly);
     }
 
 
-    public override SampleSystemSecurityPath<TestPlainAuthObject> GetTestPlainAuthObjectSecurityPath()
+    public override SecurityPath<TestPlainAuthObject> GetTestPlainAuthObjectSecurityPath()
     {
-        return SampleSystemSecurityPath<TestPlainAuthObject>.Create(v => v.Location)
+        return SecurityPath<TestPlainAuthObject>.Create(v => v.Location)
                                                             .And(v => v.Items.Select(item => item.BusinessUnit), ManySecurityPathMode.All)
                                                             .And(v => v.Items.Select(item => item.ManagementUnit), ManySecurityPathMode.All);
     }
 
-    public override SampleSystemSecurityPath<TestRootSecurityObj> GetTestRootSecurityObjSecurityPath()
+    public override SecurityPath<TestRootSecurityObj> GetTestRootSecurityObjSecurityPath()
     {
-        return SampleSystemSecurityPath<TestRootSecurityObj>.Create(v => v.BusinessUnit).And(v => v.Location);
+        return SecurityPath<TestRootSecurityObj>.Create(v => v.BusinessUnit).And(v => v.Location);
     }
 
-    public override SampleSystemSecurityPath<ManagementUnitAndBusinessUnitLink> GetManagementUnitAndBusinessUnitLinkSecurityPath()
+    public override SecurityPath<ManagementUnitAndBusinessUnitLink> GetManagementUnitAndBusinessUnitLinkSecurityPath()
     {
-        return SampleSystemSecurityPath<ManagementUnitAndBusinessUnitLink>.Create(v => v.BusinessUnit).And(v => v.ManagementUnit);
+        return SecurityPath<ManagementUnitAndBusinessUnitLink>.Create(v => v.BusinessUnit).And(v => v.ManagementUnit);
     }
 
-    public override SampleSystemSecurityPath<ManagementUnitAndHRDepartmentLink> GetManagementUnitAndHRDepartmentLinkSecurityPath()
+    public override SecurityPath<ManagementUnitAndHRDepartmentLink> GetManagementUnitAndHRDepartmentLinkSecurityPath()
     {
-        return SampleSystemSecurityPath<ManagementUnitAndHRDepartmentLink>.Create(v => v.ManagementUnit).And(v => v.HRDepartment.Location);
+        return SecurityPath<ManagementUnitAndHRDepartmentLink>.Create(v => v.ManagementUnit).And(v => v.HRDepartment.Location);
     }
 }

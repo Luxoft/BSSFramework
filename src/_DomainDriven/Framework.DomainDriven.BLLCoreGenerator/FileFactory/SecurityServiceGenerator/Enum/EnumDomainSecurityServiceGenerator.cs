@@ -44,7 +44,7 @@ public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurity
                                          {
                                                  Name = "GetSecurityPath",
                                                  Attributes = MemberAttributes.Family | MemberAttributes.Override,
-                                                 ReturnType = typeof(SecurityPathBase<,,>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(), this.DomainTypeReference, this.Configuration.Environment.GetIdentityType().ToTypeReference()),
+                                                 ReturnType = typeof(SecurityPath<>).ToTypeReference(this.DomainTypeReference),
                                                  Statements =
                                                  {
                                                          new CodeThisReferenceExpression().ToFieldReference(this.securityPathContainerField).ToMethodReferenceExpression(domainType.ToGetSecurityPathMethodName(), genericTypes).ToMethodInvokeExpression().ToMethodReturnStatement()

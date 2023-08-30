@@ -15,8 +15,8 @@ public class EmployeeSecurityService : ContextDomainSecurityService<PersistentDo
     {
     }
 
-    protected override SecurityPathBase<PersistentDomainObjectBase, Employee, Guid> GetSecurityPath()
+    protected override SecurityPath<Employee> GetSecurityPath()
     {
-        return SecurityPath<PersistentDomainObjectBase, Employee, Guid>.Create(v => v.BusinessUnit);
+        return SecurityPath<Employee>.Create(v => v.BusinessUnit);
     }
 }

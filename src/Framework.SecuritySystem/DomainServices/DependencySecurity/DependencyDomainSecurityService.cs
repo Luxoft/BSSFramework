@@ -2,6 +2,7 @@
 
 using Framework.Persistent;
 using Framework.QueryableSource;
+using Framework.SecuritySystem.AccessDeniedExceptionService;
 
 namespace Framework.SecuritySystem;
 

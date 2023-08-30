@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
-using Framework.SecuritySystem.Rules.Builders;
+﻿using Framework.Core;
 using Framework.Persistent;
+using Framework.SecuritySystem.Rules.Builders;
 
-namespace Framework.SecuritySystem
+namespace Framework.SecuritySystem.Providers.Operation
 {
     /// <summary>
     /// Контекстный провайдер доступа
@@ -34,7 +30,7 @@ namespace Framework.SecuritySystem
 
 
         public SecurityPathProvider(
-            SecurityPathBase<TPersistentDomainObjectBase, TDomainObject, TIdent> securityPathBase,
+            SecurityPath<TDomainObject> securityPathBase,
             ContextSecurityOperation<TSecurityOperationCode> securityOperation,
             ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory,
             IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService)

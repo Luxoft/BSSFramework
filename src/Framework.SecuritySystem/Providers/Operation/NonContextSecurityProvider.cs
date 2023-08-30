@@ -29,7 +29,7 @@ namespace Framework.SecuritySystem
 
         public NonContextSecurityProvider(
             NonContextSecurityOperation<TSecurityOperationCode> securityOperation,
-            [NotNull] IAuthorizationSystem<TIdent> authorizationSystem)
+            IAuthorizationSystem<TIdent> authorizationSystem)
         {
             if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
             if (authorizationSystem == null) throw new ArgumentNullException(nameof(authorizationSystem));

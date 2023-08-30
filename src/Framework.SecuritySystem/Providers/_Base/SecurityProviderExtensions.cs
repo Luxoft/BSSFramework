@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 
 using Framework.Core;
-
-using JetBrains.Annotations;
 
 namespace Framework.SecuritySystem
 {
@@ -66,7 +62,7 @@ namespace Framework.SecuritySystem
             return new CompositeSecurityProvider<TDomainObject>(securityProvider, otherSecurityProvider, false);
         }
 
-        public static ISecurityProvider<TDomainObject> And<TDomainObject>([NotNull] this IEnumerable<ISecurityProvider<TDomainObject>> securityProviders)
+        public static ISecurityProvider<TDomainObject> And<TDomainObject>(this IEnumerable<ISecurityProvider<TDomainObject>> securityProviders)
 
             where TDomainObject : class
         {
@@ -77,7 +73,7 @@ namespace Framework.SecuritySystem
                                            many   => many.Aggregate((v1, v2) => v1.And(v2)));
         }
 
-        public static ISecurityProvider<TDomainObject> Or<TDomainObject>([NotNull] this IEnumerable<ISecurityProvider<TDomainObject>> securityProviders)
+        public static ISecurityProvider<TDomainObject> Or<TDomainObject>(this IEnumerable<ISecurityProvider<TDomainObject>> securityProviders)
 
             where TDomainObject : class
         {

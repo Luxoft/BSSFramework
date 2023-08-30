@@ -13,7 +13,7 @@ namespace Framework.Authorization.BLL
             IDisabledSecurityProviderContainer<PersistentDomainObjectBase> disabledSecurityProviderContainer,
             ISecurityOperationResolver<PersistentDomainObjectBase, AuthorizationSecurityOperationCode> securityOperationResolver,
             IAuthorizationSystem<Guid> authorizationSystem,
-            [NotNull] IAuthorizationBLLContext context)
+            IAuthorizationBLLContext context)
 
             : base(disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {

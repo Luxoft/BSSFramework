@@ -1,4 +1,5 @@
 ﻿using Framework.SecuritySystem;
+using Framework.SecuritySystem.AccessDeniedExceptionService;
 using Framework.SecuritySystem.Rules.Builders;
 
 using SampleSystem.Domain;

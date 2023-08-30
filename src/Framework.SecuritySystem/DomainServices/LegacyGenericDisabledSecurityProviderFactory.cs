@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 
+using Framework.SecuritySystem.AccessDeniedExceptionService;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.SecuritySystem;

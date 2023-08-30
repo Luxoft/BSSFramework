@@ -15,6 +15,7 @@ using Framework.Notification;
 using Framework.Persistent;
 using Framework.QueryLanguage;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.AccessDeniedExceptionService;
 
 namespace Framework.Configuration.BLL;
 

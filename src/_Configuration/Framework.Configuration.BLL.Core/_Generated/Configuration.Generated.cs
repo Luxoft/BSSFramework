@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Framework.SecuritySystem.AccessDeniedExceptionService;
+
 namespace Framework.Configuration.BLL
 {
     
@@ -510,7 +512,7 @@ namespace Framework.Configuration.BLL
     public partial class ConfigurationCodeFirstSubscriptionSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.CodeFirstSubscription, System.Guid, Framework.Configuration.ConfigurationSecurityOperationCode>
     {
         
-        public ConfigurationCodeFirstSubscriptionSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public ConfigurationCodeFirstSubscriptionSecurityService(IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -519,7 +521,7 @@ namespace Framework.Configuration.BLL
     public partial class ConfigurationDomainTypeSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainType, System.Guid, Framework.Configuration.ConfigurationSecurityOperationCode>
     {
         
-        public ConfigurationDomainTypeSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public ConfigurationDomainTypeSecurityService(IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -528,7 +530,7 @@ namespace Framework.Configuration.BLL
     public partial class ConfigurationExceptionMessageSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.ExceptionMessage, System.Guid, Framework.Configuration.ConfigurationSecurityOperationCode>
     {
         
-        public ConfigurationExceptionMessageSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public ConfigurationExceptionMessageSecurityService(IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -537,7 +539,7 @@ namespace Framework.Configuration.BLL
     public partial class ConfigurationReportSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.Reports.Report, System.Guid, Framework.Configuration.ConfigurationSecurityOperationCode>
     {
         
-        public ConfigurationReportSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public ConfigurationReportSecurityService(IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -546,7 +548,7 @@ namespace Framework.Configuration.BLL
     public partial class ConfigurationReportFilterSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.Reports.ReportFilter, System.Guid, Framework.Configuration.ConfigurationSecurityOperationCode>
     {
         
-        public ConfigurationReportFilterSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public ConfigurationReportFilterSecurityService(IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -555,7 +557,7 @@ namespace Framework.Configuration.BLL
     public partial class ConfigurationReportParameterSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.Reports.ReportParameter, System.Guid, Framework.Configuration.ConfigurationSecurityOperationCode>
     {
         
-        public ConfigurationReportParameterSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public ConfigurationReportParameterSecurityService(IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -564,7 +566,7 @@ namespace Framework.Configuration.BLL
     public partial class ConfigurationReportPropertySecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.Reports.ReportProperty, System.Guid, Framework.Configuration.ConfigurationSecurityOperationCode>
     {
         
-        public ConfigurationReportPropertySecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public ConfigurationReportPropertySecurityService(IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -573,7 +575,7 @@ namespace Framework.Configuration.BLL
     public partial class ConfigurationSequenceSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.Sequence, System.Guid, Framework.Configuration.ConfigurationSecurityOperationCode>
     {
         
-        public ConfigurationSequenceSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public ConfigurationSequenceSecurityService(IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -582,7 +584,7 @@ namespace Framework.Configuration.BLL
     public partial class ConfigurationSystemConstantSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.SystemConstant, System.Guid, Framework.Configuration.ConfigurationSecurityOperationCode>
     {
         
-        public ConfigurationSystemConstantSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public ConfigurationSystemConstantSecurityService(IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -591,7 +593,7 @@ namespace Framework.Configuration.BLL
     public partial class ConfigurationTargetSystemSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.TargetSystem, System.Guid, Framework.Configuration.ConfigurationSecurityOperationCode>
     {
         
-        public ConfigurationTargetSystemSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public ConfigurationTargetSystemSecurityService(IAccessDeniedExceptionService<Framework.Configuration.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }

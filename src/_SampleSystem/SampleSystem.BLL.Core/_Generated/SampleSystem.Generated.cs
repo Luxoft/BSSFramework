@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Framework.SecuritySystem.AccessDeniedExceptionService;
+
 namespace SampleSystem.BLL
 {
     
@@ -1186,7 +1188,7 @@ namespace SampleSystem.BLL
         
         private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
         
-        public SampleSystemAuthPerformanceObjectSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemAuthPerformanceObjectSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
         {
             this.securityPathContainer = securityPathContainer;
@@ -1203,7 +1205,7 @@ namespace SampleSystem.BLL
         
         private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
         
-        public SampleSystemBusinessUnitSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemBusinessUnitSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
         {
             this.securityPathContainer = securityPathContainer;
@@ -1220,7 +1222,7 @@ namespace SampleSystem.BLL
         
         private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
         
-        public SampleSystemBusinessUnitHrDepartmentSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemBusinessUnitHrDepartmentSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
         {
             this.securityPathContainer = securityPathContainer;
@@ -1237,7 +1239,7 @@ namespace SampleSystem.BLL
         
         private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
         
-        public SampleSystemBusinessUnitManagerCommissionLinkSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemBusinessUnitManagerCommissionLinkSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
         {
             this.securityPathContainer = securityPathContainer;
@@ -1252,7 +1254,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemBusinessUnitTypeSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitType, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemBusinessUnitTypeSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemBusinessUnitTypeSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -1261,7 +1263,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemCompanyLegalEntitySecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.CompanyLegalEntity, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemCompanyLegalEntitySecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemCompanyLegalEntitySecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -1270,7 +1272,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemCountrySecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Country, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemCountrySecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemCountrySecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -1297,7 +1299,7 @@ namespace SampleSystem.BLL
         
         private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
         
-        public SampleSystemEmployeeCellPhoneSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemEmployeeCellPhoneSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
         {
             this.securityPathContainer = securityPathContainer;
@@ -1312,7 +1314,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemEmployeeInformationSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeInformation, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemEmployeeInformationSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemEmployeeInformationSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -1321,7 +1323,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemEmployeePersonalCellPhoneSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePersonalCellPhone, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemEmployeePersonalCellPhoneSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemEmployeePersonalCellPhoneSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -1332,7 +1334,7 @@ namespace SampleSystem.BLL
         
         private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
         
-        public SampleSystemEmployeePhotoSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemEmployeePhotoSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
         {
             this.securityPathContainer = securityPathContainer;
@@ -1349,7 +1351,7 @@ namespace SampleSystem.BLL
         
         private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
         
-        public SampleSystemEmployeePositionSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemEmployeePositionSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
         {
             this.securityPathContainer = securityPathContainer;
@@ -1364,7 +1366,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemEmployeeRegistrationTypeSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeRegistrationType, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemEmployeeRegistrationTypeSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemEmployeeRegistrationTypeSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -1373,7 +1375,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemEmployeeRoleSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeRole, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemEmployeeRoleSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemEmployeeRoleSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -1382,7 +1384,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemEmployeeRoleDegreeSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeRoleDegree, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemEmployeeRoleDegreeSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemEmployeeRoleDegreeSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -1391,7 +1393,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemEmployeeSpecializationSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeSpecialization, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemEmployeeSpecializationSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemEmployeeSpecializationSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -1400,7 +1402,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemLocation1676SecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EnversBug1676.Location1676, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemLocation1676SecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemLocation1676SecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -1409,7 +1411,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemWorkingCalendar1676SecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EnversBug1676.WorkingCalendar1676, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemWorkingCalendar1676SecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemWorkingCalendar1676SecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -1418,7 +1420,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemExample1SecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Example1, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemExample1SecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemExample1SecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -1427,7 +1429,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemHRDepartmentSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.HRDepartment, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemHRDepartmentSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemHRDepartmentSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -1436,7 +1438,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemIMRequestSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IMRequest, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemIMRequestSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemIMRequestSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -1445,7 +1447,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemInformationSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Information, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemInformationSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemInformationSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -1454,7 +1456,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemLocationSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Location, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemLocationSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemLocationSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -1465,7 +1467,7 @@ namespace SampleSystem.BLL
         
         private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
         
-        public SampleSystemManagementUnitSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemManagementUnitSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
         {
             this.securityPathContainer = securityPathContainer;
@@ -1482,7 +1484,7 @@ namespace SampleSystem.BLL
         
         private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
         
-        public SampleSystemManagementUnitAndBusinessUnitLinkSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemManagementUnitAndBusinessUnitLinkSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
         {
             this.securityPathContainer = securityPathContainer;
@@ -1499,7 +1501,7 @@ namespace SampleSystem.BLL
         
         private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
         
-        public SampleSystemManagementUnitAndHRDepartmentLinkSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemManagementUnitAndHRDepartmentLinkSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
         {
             this.securityPathContainer = securityPathContainer;
@@ -1516,7 +1518,7 @@ namespace SampleSystem.BLL
         
         private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
         
-        public SampleSystemManagementUnitFluentMappingSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemManagementUnitFluentMappingSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
         {
             this.securityPathContainer = securityPathContainer;
@@ -1531,7 +1533,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemTestManualEmployeeProjectionSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection, SampleSystem.Domain.Employee, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemTestManualEmployeeProjectionSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestManualEmployeeProjectionSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
         {
         }
@@ -1540,7 +1542,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemPrincipalSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Principal, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemPrincipalSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemPrincipalSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -1549,7 +1551,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemBusinessUnitIdentitySecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.BusinessUnitIdentity, SampleSystem.Domain.BusinessUnit, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemBusinessUnitIdentitySecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemBusinessUnitIdentitySecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
         {
         }
@@ -1558,7 +1560,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemBusinessUnitProgramClassSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.BusinessUnitProgramClass, SampleSystem.Domain.BusinessUnit, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemBusinessUnitProgramClassSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemBusinessUnitProgramClassSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
         {
         }
@@ -1567,7 +1569,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemCustomCompanyLegalEntitySecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.CustomCompanyLegalEntity, SampleSystem.Domain.CompanyLegalEntity, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemCustomCompanyLegalEntitySecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.CompanyLegalEntity, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemCustomCompanyLegalEntitySecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.CompanyLegalEntity, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
         {
         }
@@ -1576,7 +1578,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemHerBusinessUnitSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.HerBusinessUnit, SampleSystem.Domain.BusinessUnit, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemHerBusinessUnitSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemHerBusinessUnitSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
         {
         }
@@ -1585,7 +1587,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemTestBusinessUnitSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestBusinessUnit, SampleSystem.Domain.BusinessUnit, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemTestBusinessUnitSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestBusinessUnitSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
         {
         }
@@ -1594,7 +1596,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemTestBusinessUnitTypeSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestBusinessUnitType, SampleSystem.Domain.BusinessUnitType, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemTestBusinessUnitTypeSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitType, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestBusinessUnitTypeSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitType, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
         {
         }
@@ -1603,7 +1605,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemTestCustomContextSecurityObjProjectionSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection, SampleSystem.Domain.TestCustomContextSecurityObj, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemTestCustomContextSecurityObjProjectionSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestCustomContextSecurityObj, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestCustomContextSecurityObjProjectionSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestCustomContextSecurityObj, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
         {
         }
@@ -1612,7 +1614,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemTestDepartmentSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestDepartment, SampleSystem.Domain.HRDepartment, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemTestDepartmentSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.HRDepartment, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestDepartmentSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.HRDepartment, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
         {
         }
@@ -1621,7 +1623,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemTestEmployeeSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestEmployee, SampleSystem.Domain.Employee, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemTestEmployeeSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestEmployeeSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
         {
         }
@@ -1630,7 +1632,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemTestIMRequestSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestIMRequest, SampleSystem.Domain.IMRequest, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemTestIMRequestSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.IMRequest, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestIMRequestSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.IMRequest, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
         {
         }
@@ -1639,7 +1641,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemTestLocationSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestLocation, SampleSystem.Domain.Location, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemTestLocationSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Location, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestLocationSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Location, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
         {
         }
@@ -1648,7 +1650,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemTestLocationCollectionPropertiesSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestLocationCollectionProperties, SampleSystem.Domain.Location, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemTestLocationCollectionPropertiesSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Location, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestLocationCollectionPropertiesSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Location, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
         {
         }
@@ -1657,7 +1659,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemTestSecurityObjItemProjectionSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestSecurityObjItemProjection, SampleSystem.Domain.TestSecurityObjItem, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemTestSecurityObjItemProjectionSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecurityObjItem, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestSecurityObjItemProjectionSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecurityObjItem, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
         {
         }
@@ -1666,7 +1668,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemVisualEmployeeSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.VisualEmployee, SampleSystem.Domain.Employee, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemVisualEmployeeSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemVisualEmployeeSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
         {
         }
@@ -1675,7 +1677,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemSqlParserTestObjSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.SqlParserTestObj, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemSqlParserTestObjSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemSqlParserTestObjSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -1684,7 +1686,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemSqlParserTestObjContainerSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.SqlParserTestObjContainer, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemSqlParserTestObjContainerSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemSqlParserTestObjContainerSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -1693,7 +1695,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemTestCustomContextSecurityObjSecurityService : Framework.SecuritySystem.ContextDomainSecurityServiceBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestCustomContextSecurityObj, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemTestCustomContextSecurityObjSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory) : 
+        public SampleSystemTestCustomContextSecurityObjSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
         {
         }
@@ -1702,7 +1704,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemTestImmutableObjSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestImmutableObj, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemTestImmutableObjSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemTestImmutableObjSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
         }
@@ -1713,7 +1715,7 @@ namespace SampleSystem.BLL
         
         private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
         
-        public SampleSystemTestPerformanceObjectSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemTestPerformanceObjectSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
         {
             this.securityPathContainer = securityPathContainer;
@@ -1730,7 +1732,7 @@ namespace SampleSystem.BLL
         
         private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
         
-        public SampleSystemTestPlainAuthObjectSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemTestPlainAuthObjectSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
         {
             this.securityPathContainer = securityPathContainer;
@@ -1747,7 +1749,7 @@ namespace SampleSystem.BLL
         
         private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
         
-        public SampleSystemTestRootSecurityObjSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemTestRootSecurityObjSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
         {
             this.securityPathContainer = securityPathContainer;
@@ -1762,7 +1764,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemTestSecurityObjItemSecurityService : Framework.SecuritySystem.DependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecurityObjItem, SampleSystem.Domain.TestRootSecurityObj, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemTestSecurityObjItemSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestSecurityObjItemSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
         {
         }
@@ -1779,7 +1781,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemTestSecuritySubObjItemSecurityService : Framework.SecuritySystem.DependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecuritySubObjItem, SampleSystem.Domain.TestSecurityObjItem, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemTestSecuritySubObjItemSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecurityObjItem, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestSecuritySubObjItemSecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecurityObjItem, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
         {
         }
@@ -1796,7 +1798,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemTestSecuritySubObjItem2SecurityService : Framework.SecuritySystem.DependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecuritySubObjItem2, SampleSystem.Domain.TestRootSecurityObj, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemTestSecuritySubObjItem2SecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestSecuritySubObjItem2SecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
         {
         }
@@ -1813,7 +1815,7 @@ namespace SampleSystem.BLL
     public partial class SampleSystemTestSecuritySubObjItem3SecurityService : Framework.SecuritySystem.DependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecuritySubObjItem3, SampleSystem.Domain.TestRootSecurityObj, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
     {
         
-        public SampleSystemTestSecuritySubObjItem3SecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestSecuritySubObjItem3SecurityService(IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj, SampleSystem.SampleSystemSecurityOperationCode> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
                 base(accessDeniedExceptionService, disabledSecurityProviderContainer, baseDomainSecurityService, queryableSource)
         {
         }

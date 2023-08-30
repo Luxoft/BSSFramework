@@ -7,6 +7,7 @@ using Framework.DomainDriven.Tracking;
 using Framework.HierarchicalExpand;
 using Framework.QueryLanguage;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.AccessDeniedExceptionService;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Projections;

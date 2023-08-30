@@ -3,7 +3,6 @@ using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
 using Framework.Core.Services;
 using Framework.DomainDriven;
-using Framework.SecuritySystem.Exceptions;
 
 using Microsoft.AspNetCore.Mvc;
 

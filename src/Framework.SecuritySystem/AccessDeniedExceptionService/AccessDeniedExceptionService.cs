@@ -1,9 +1,7 @@
 ﻿using Framework.Core;
 using Framework.Persistent;
 
-using Framework.SecuritySystem.Exceptions;
-
-namespace Framework.SecuritySystem
+namespace Framework.SecuritySystem.AccessDeniedExceptionService
 {
     public class AccessDeniedExceptionService<TPersistentDomainObjectBase, TIdent> : IAccessDeniedExceptionService<TPersistentDomainObjectBase>
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>

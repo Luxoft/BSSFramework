@@ -4,6 +4,7 @@ using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.AccessDeniedExceptionService;
 using Framework.SecuritySystem.Rules.Builders;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;

@@ -16,6 +16,7 @@ using Framework.SecuritySystem;
 
 
 using Framework.Authorization.Notification;
+using Framework.SecuritySystem.AccessDeniedExceptionService;
 
 namespace Framework.Authorization.BLL;
 

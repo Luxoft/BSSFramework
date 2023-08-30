@@ -9,16 +9,16 @@ namespace Framework.SecuritySystem.DiTests
     public class EmployeeSecurityService : ContextDomainSecurityService<PersistentDomainObjectBase, Employee, Guid, ExampleSecurityOperation>
     {
         public EmployeeSecurityService(
-            [NotNull] IDisabledSecurityProviderContainer<PersistentDomainObjectBase> disabledSecurityProviderContainer,
-            [NotNull] ISecurityOperationResolver<PersistentDomainObjectBase, ExampleSecurityOperation> securityOperationResolver,
-            [NotNull] IAuthorizationSystem<Guid> authorizationSystem,
-            [NotNull] ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory)
+            IDisabledSecurityProviderContainer<PersistentDomainObjectBase> disabledSecurityProviderContainer,
+            ISecurityOperationResolver<PersistentDomainObjectBase, ExampleSecurityOperation> securityOperationResolver,
+            IAuthorizationSystem<Guid> authorizationSystem,
+            ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory)
 
             : base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
         {
         }
 
-        protected override SecurityPathBase<PersistentDomainObjectBase, Employee, Guid> GetSecurityPath()
+        protected override SecurityPath<PersistentDomainObjectBase, Employee, Guid> GetSecurityPath()
         {
             return SecurityPath<PersistentDomainObjectBase, Employee, Guid>.Create(v => v.BusinessUnit);
         }

@@ -30,10 +30,10 @@ namespace Framework.SecuritySystem
         private readonly IDictionaryCache<ContextSecurityOperation<TSecurityOperationCode>, ISecurityProvider<TDomainObject>> providersCache;
 
         protected ContextDomainSecurityServiceBase(
-            [NotNull] IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
-            [NotNull] ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver,
-            [NotNull] IAuthorizationSystem<TIdent> authorizationSystem,
-            [NotNull] ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
+            IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
+            ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver,
+            IAuthorizationSystem<TIdent> authorizationSystem,
+            ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
 
             : base(disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
         {
@@ -81,7 +81,7 @@ namespace Framework.SecuritySystem
             return this.Create(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.Create(securityPath), securityOperation);
         }
 
-        protected virtual ISecurityProvider<TDomainObject> Create(SecurityPathBase<TPersistentDomainObjectBase, TDomainObject, TIdent> securityPath, ContextSecurityOperation<TSecurityOperationCode> securityOperation)
+        protected virtual ISecurityProvider<TDomainObject> Create(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> securityPath, ContextSecurityOperation<TSecurityOperationCode> securityOperation)
         {
             if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
             if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
@@ -109,15 +109,15 @@ namespace Framework.SecuritySystem
         where TSecurityOperationCode : struct, Enum
     {
         protected ContextDomainSecurityService(
-            [NotNull] IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
-            [NotNull] ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver,
-            [NotNull] IAuthorizationSystem<TIdent> authorizationSystem,
-            [NotNull] ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
+            IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
+            ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver,
+            IAuthorizationSystem<TIdent> authorizationSystem,
+            ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
             : base(disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
         {
         }
 
-        protected abstract SecurityPathBase<TPersistentDomainObjectBase, TDomainObject, TIdent> GetSecurityPath();
+        protected abstract SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> GetSecurityPath();
 
 
 

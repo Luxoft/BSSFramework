@@ -13,6 +13,7 @@ using Framework.HierarchicalExpand;
 using Framework.QueryableSource;
 using Framework.QueryLanguage;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.AccessDeniedExceptionService;
 using Framework.SecuritySystem.Rules.Builders;
 
 using Microsoft.Extensions.DependencyInjection;

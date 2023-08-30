@@ -3,6 +3,7 @@ using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.QueryLanguage;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.AccessDeniedExceptionService;
 using Framework.Validation;
 
 namespace Framework.DomainDriven.BLL.Security;

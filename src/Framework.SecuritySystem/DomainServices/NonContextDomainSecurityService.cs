@@ -32,7 +32,7 @@ namespace Framework.SecuritySystem
 
         protected NonContextDomainSecurityServiceBase(
             IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
-            [NotNull] ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver)
+            ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver)
             : base(disabledSecurityProviderContainer)
         {
             this.securityOperationResolver = securityOperationResolver ?? throw new ArgumentNullException(nameof(securityOperationResolver));
@@ -48,7 +48,7 @@ namespace Framework.SecuritySystem
         protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityOperation<TSecurityOperationCode> securityOperation);
 
 
-        public ISecurityProvider<TDomainObject> GetSecurityProvider([NotNull] SecurityOperation<TSecurityOperationCode> securityOperation)
+        public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityOperation<TSecurityOperationCode> securityOperation)
         {
             if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
 
@@ -79,9 +79,9 @@ namespace Framework.SecuritySystem
 
 
         protected NonContextDomainSecurityService(
-            [NotNull] IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
-            [NotNull] ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver,
-            [NotNull] IAuthorizationSystem<TIdent> authorizationSystem)
+            IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
+            ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver,
+            IAuthorizationSystem<TIdent> authorizationSystem)
             : base(disabledSecurityProviderContainer, securityOperationResolver)
         {
             this.disabledSecurityProviderContainer = disabledSecurityProviderContainer;

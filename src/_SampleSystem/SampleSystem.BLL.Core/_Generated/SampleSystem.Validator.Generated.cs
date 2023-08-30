@@ -20,6 +20,7 @@ namespace SampleSystem.BLL
             base.RegisterHandler<SampleSystem.Domain.Address>(this.GetAddressValidationResult);
             base.RegisterHandler<SampleSystem.Domain.AnotherSqlParserTestObj>(this.GetAnotherSqlParserTestObjValidationResult);
             base.RegisterHandler<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>(this.GetApprovePermissionWorkflowDomainObjectValidationResult);
+            base.RegisterHandler<SampleSystem.Domain.AuthPerformanceObject>(this.GetAuthPerformanceObjectValidationResult);
             base.RegisterHandler<SampleSystem.Domain.BusinessUnit>(this.GetBusinessUnitValidationResult);
             base.RegisterHandler<SampleSystem.Domain.BusinessUnitAncestorLink>(this.GetBusinessUnitAncestorLinkValidationResult);
             base.RegisterHandler<SampleSystem.Domain.BusinessUnitEmployeeRole>(this.GetBusinessUnitEmployeeRoleValidationResult);
@@ -129,6 +130,11 @@ namespace SampleSystem.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetApprovePermissionWorkflowDomainObjectValidationResult(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
+        {
+            return base.GetValidationResult(source, operationContext, ownerState, false);
+        }
+        
+        protected virtual Framework.Validation.ValidationResult GetAuthPerformanceObjectValidationResult(SampleSystem.Domain.AuthPerformanceObject source, SampleSystem.Domain.SampleSystemOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

@@ -21,6 +21,14 @@ public partial class SampleSystemSecurityService
         return this.GetEmployeeSecurityPath<Employee, BusinessUnit, HRDepartment, Location, Employee>().OverrideInput<EmployeeCellPhone>(cellPhone => cellPhone.Employee);
     }
 
+    public override SampleSystemSecurityPath<AuthPerformanceObject> GetAuthPerformanceObjectSecurityPath()
+    {
+        return SampleSystemSecurityPath<AuthPerformanceObject>.Create(v => v.BusinessUnit)
+                                                              .And(v => v.ManagementUnit)
+                                                              .And(v => v.Location)
+                                                              .And(v => v.Employee);
+    }
+
     public override SampleSystemSecurityPath<BusinessUnitHrDepartment> GetBusinessUnitHrDepartmentSecurityPath()
     {
         return SampleSystemSecurityPath<BusinessUnitHrDepartment>.Create(v => v.BusinessUnit).And(v => v.HRDepartment.Location);

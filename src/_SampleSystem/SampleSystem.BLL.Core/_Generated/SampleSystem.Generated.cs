@@ -628,7 +628,11 @@ namespace SampleSystem.BLL
         
         public static SampleSystem.SampleSystemSecurityOperationCode GetCodeByMode(System.Type domainType, Framework.SecuritySystem.BLLSecurityMode mode)
         {
-            if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.BusinessUnit) == domainType))
+            if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.AuthPerformanceObject) == domainType))
+            {
+                return SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitView;
+            }
+            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.BusinessUnit) == domainType))
             {
                 return SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitView;
             }
@@ -999,6 +1003,8 @@ namespace SampleSystem.BLL
         
         public static void Register(Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection)
         {
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.AuthPerformanceObject, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemAuthPerformanceObjectSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.AuthPerformanceObject>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.AuthPerformanceObject, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemBusinessUnitSecurityService>(serviceCollection);
             Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitHrDepartment, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemBusinessUnitHrDepartmentSecurityService>(serviceCollection);
@@ -1111,6 +1117,8 @@ namespace SampleSystem.BLL
             Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem3>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem3, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
         }
         
+        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.AuthPerformanceObject> GetAuthPerformanceObjectSecurityPath();
+        
         public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnitHrDepartment> GetBusinessUnitHrDepartmentSecurityPath();
         
         public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnitManagerCommissionLink> GetBusinessUnitManagerCommissionLinkSecurityPath();
@@ -1152,6 +1160,8 @@ namespace SampleSystem.BLL
     public partial interface ISampleSystemSecurityPathContainer
     {
         
+        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.AuthPerformanceObject> GetAuthPerformanceObjectSecurityPath();
+        
         SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnitHrDepartment> GetBusinessUnitHrDepartmentSecurityPath();
         
         SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnitManagerCommissionLink> GetBusinessUnitManagerCommissionLinkSecurityPath();
@@ -1184,6 +1194,23 @@ namespace SampleSystem.BLL
         SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestPlainAuthObject> GetTestPlainAuthObjectSecurityPath();
         
         SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestRootSecurityObj> GetTestRootSecurityObjSecurityPath();
+    }
+    
+    public partial class SampleSystemAuthPerformanceObjectSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.AuthPerformanceObject, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
+    {
+        
+        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
+        
+        public SampleSystemAuthPerformanceObjectSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+        {
+            this.securityPathContainer = securityPathContainer;
+        }
+        
+        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.AuthPerformanceObject, System.Guid> GetSecurityPath()
+        {
+            return this.securityPathContainer.GetAuthPerformanceObjectSecurityPath();
+        }
     }
     
     public partial class SampleSystemBusinessUnitSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnit, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>

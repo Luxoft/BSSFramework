@@ -30,8 +30,6 @@ public class BLLCoreFileGenerator<TConfiguration> : CodeFileGenerator<TConfigura
         if (this.Configuration.Environment.SecurityOperationCodeType.IsEnum)
         {
             yield return new SecurityOperationFileFactory<TConfiguration>(this.Configuration);
-
-            yield return new SecurityPathFileFactory<TConfiguration>(this.Configuration);
         }
 
         yield return new BLLContextFileFactory<TConfiguration>(this.Configuration);

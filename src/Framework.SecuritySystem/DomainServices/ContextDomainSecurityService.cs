@@ -61,24 +61,24 @@ public abstract class ContextDomainSecurityServiceBase<TPersistentDomainObjectBa
     }
 
     protected ISecurityProvider<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, TSecurityContext>> securityPath, ContextSecurityOperation<TSecurityOperationCode> securityOperation)
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
+            where TSecurityContext : class, ISecurityContext
     {
         if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
         if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
 
-        return this.Create(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.Create(securityPath), securityOperation);
+        return this.Create(SecurityPath<TDomainObject>.Create(securityPath), securityOperation);
     }
 
     protected ISecurityProvider<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, ContextSecurityOperation<TSecurityOperationCode> securityOperation)
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
+            where TSecurityContext : class, ISecurityContext
     {
         if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
         if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
 
-        return this.Create(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.Create(securityPath), securityOperation);
+        return this.Create(SecurityPath<TDomainObject>.Create(securityPath), securityOperation);
     }
 
-    protected virtual ISecurityProvider<TDomainObject> Create(SecurityPathBase<TPersistentDomainObjectBase, TDomainObject, TIdent> securityPath, ContextSecurityOperation<TSecurityOperationCode> securityOperation)
+    protected virtual ISecurityProvider<TDomainObject> Create(SecurityPath<TDomainObject> securityPath, ContextSecurityOperation<TSecurityOperationCode> securityOperation)
     {
         if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
         if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
@@ -116,7 +116,7 @@ public abstract class ContextDomainSecurityService<TPersistentDomainObjectBase, 
     {
     }
 
-    protected abstract SecurityPathBase<TPersistentDomainObjectBase, TDomainObject, TIdent> GetSecurityPath();
+    protected abstract SecurityPath<TDomainObject> GetSecurityPath();
 
 
 

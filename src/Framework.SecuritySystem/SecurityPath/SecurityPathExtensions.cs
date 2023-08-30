@@ -6,7 +6,7 @@ namespace Framework.SecuritySystem;
 public static class SecurityPathExtensions
 {
     public static ISecurityProvider<TDomainObject> ToProvider<TSecurityOperationCode, TPersistentDomainObjectBase, TDomainObject, TIdent>(
-            this SecurityPathBase<TPersistentDomainObjectBase, TDomainObject, TIdent> securityPath,
+            this SecurityPath<TDomainObject> securityPath,
             ContextSecurityOperation<TSecurityOperationCode> operation,
             ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory,
             IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService)

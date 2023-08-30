@@ -202,21 +202,6 @@ namespace Framework.Authorization.BLL
     }
     #endregion
     
-    public partial class AuthorizationSecurityPath<TDomainObject> : Framework.SecuritySystem.SecurityPathWrapper<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>
-        where TDomainObject : Framework.Authorization.Domain.PersistentDomainObjectBase
-    {
-        
-        private AuthorizationSecurityPath(Framework.SecuritySystem.SecurityPath<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> securityPath) : 
-                base(securityPath)
-        {
-        }
-        
-        public static implicit operator Framework.Authorization.BLL.AuthorizationSecurityPath<TDomainObject> (Framework.SecuritySystem.SecurityPath<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> securityPath)
-        {
-            return new Framework.Authorization.BLL.AuthorizationSecurityPath<TDomainObject>(securityPath);
-        }
-    }
-    
     public partial class AuthorizationBLLContext : Framework.DomainDriven.BLL.Security.SecurityBLLBaseContext<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.DomainObjectBase, System.Guid, Framework.Authorization.BLL.IAuthorizationBLLFactoryContainer, Framework.Authorization.AuthorizationSecurityOperationCode>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode, System.Guid>>>, Framework.Authorization.BLL.IAuthorizationBLLContext
     {
         

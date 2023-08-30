@@ -18,7 +18,7 @@ public class SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIden
         this.queryFactory = queryFactory ?? throw new ArgumentNullException(nameof(queryFactory));
     }
 
-    public ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPathBase<TPersistentDomainObjectBase, TDomainObject, TIdent> path)
+    public ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPath<TDomainObject> path)
             where TDomainObject : class, TPersistentDomainObjectBase
     {
         var hasAccessBuilder = this.hasAccessFactory.CreateBuilder(path);

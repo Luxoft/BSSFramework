@@ -1,8 +1,8 @@
-﻿using System.Reflection;
+﻿using System.ComponentModel.Design;
+using System.Reflection;
 
 using Framework.Core;
 using Framework.Persistent;
-
 
 namespace Framework.SecuritySystem.Rules.Builders;
 
@@ -15,36 +15,28 @@ public abstract class SecurityExpressionBuilderFactoryBase<TPersistentDomainObje
     {
     }
 
-    public ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPathBase<TPersistentDomainObjectBase, TDomainObject, TIdent> path)
+    public ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPath<TDomainObject> path)
             where TDomainObject : class, TPersistentDomainObjectBase
     {
         if (path == null) throw new ArgumentNullException(nameof(path));
 
-        if (path is SecurityPathWrapper<TPersistentDomainObjectBase, TDomainObject, TIdent>)
-        {
-            return this.CreateBuilder(path as SecurityPathWrapper<TPersistentDomainObjectBase, TDomainObject, TIdent>);
-        }
-
-        if (path is SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.ConditionPath)
-        {
-            return this.CreateBuilder(path as SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.ConditionPath);
-        }
-
-        if (path is SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.AndSecurityPath)
-        {
-            return this.CreateBuilder(path as SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.AndSecurityPath);
-        }
-
-        if (path is SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.OrSecurityPath)
-        {
-            return this.CreateBuilder(path as SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.OrSecurityPath);
-        }
-
         var pathType = path.GetType();
 
-        if (pathType.IsGenericTypeImplementation(typeof(SecurityPath<,,>.NestedManySecurityPath<>)))
+        if (path is SecurityPath<TDomainObject>.ConditionPath)
         {
-            var func = new Func<SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.NestedManySecurityPath<TDomainObject>, ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent>>(this.CreateNestedBuilder);
+            return this.CreateBuilder(path as SecurityPath<TDomainObject>.ConditionPath);
+        }
+        else if (path is SecurityPath<TDomainObject>.AndSecurityPath)
+        {
+            return this.CreateBuilder(path as SecurityPath<TDomainObject>.AndSecurityPath);
+        }
+        else if (path is SecurityPath<TDomainObject>.OrSecurityPath)
+        {
+            return this.CreateBuilder(path as SecurityPath<TDomainObject>.OrSecurityPath);
+        }
+        else if (pathType.IsGenericTypeImplementation(typeof(SecurityPath<>.NestedManySecurityPath<>)))
+        {
+            var func = new Func<SecurityPath<TDomainObject>.NestedManySecurityPath<TDomainObject>, ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent>>(this.CreateNestedBuilder);
 
             var args = pathType.GetGenericArguments().ElementsAt(1, 3).ToArray();
 
@@ -52,8 +44,7 @@ public abstract class SecurityExpressionBuilderFactoryBase<TPersistentDomainObje
 
             return method.Invoke(this, new object[] { path }) as ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent>;
         }
-
-        if (pathType.BaseType.Maybe(baseType => baseType.IsGenericTypeImplementation(typeof(SecurityPath<,,>.FilterSecurityPath<>))))
+        else if (pathType.BaseType.Maybe(baseType => baseType.IsGenericTypeImplementation(typeof(SecurityPath<>.FilterSecurityPath<>))))
         {
             var genericMethod = typeof(SecurityExpressionBuilderFactoryBase<TPersistentDomainObjectBase, TIdent>).GetMethod(nameof(this.CreateGenericBuilder), BindingFlags.Instance | BindingFlags.NonPublic);
 
@@ -63,28 +54,26 @@ public abstract class SecurityExpressionBuilderFactoryBase<TPersistentDomainObje
 
             return method.Invoke(this, new object[] { path }) as ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent>;
         }
-
-        throw new ArgumentOutOfRangeException(nameof(path));
+        else
+        {
+            throw new ArgumentOutOfRangeException(nameof(path));
+        }
     }
 
     private ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateGenericBuilder<TDomainObject, TSecurityContext>(
-            SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.FilterSecurityPath<TSecurityContext> path)
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
+            SecurityPath<TDomainObject>.FilterSecurityPath<TSecurityContext> path)
+            where TSecurityContext : class, ISecurityContext
             where TDomainObject : class, TPersistentDomainObjectBase
     {
         if (path == null) throw new ArgumentNullException(nameof(path));
 
-        if (path is SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.ManySecurityPath<TSecurityContext>)
+        if (path is SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext>)
         {
-            return this.CreateBuilder(path as SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.ManySecurityPath<TSecurityContext>);
+            return this.CreateBuilder(path as SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext>);
         }
-        else if (path is SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.SingleSecurityPath<TSecurityContext>)
+        else if (path is SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext>)
         {
-            return this.CreateBuilder(path as SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.SingleSecurityPath<TSecurityContext>);
-        }
-        else if (path is SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.SecurityPathByIdents<TSecurityContext>)
-        {
-            return this.CreateBuilder(path as SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.SecurityPathByIdents<TSecurityContext>);
+            return this.CreateBuilder(path as SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext>);
         }
         else
         {
@@ -93,7 +82,7 @@ public abstract class SecurityExpressionBuilderFactoryBase<TPersistentDomainObje
     }
 
     private ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateNestedBuilder<TDomainObject, TNestedObject>(
-            SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.NestedManySecurityPath<TNestedObject> path)
+            SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> path)
             where TNestedObject : class, TPersistentDomainObjectBase
             where TDomainObject : class, TPersistentDomainObjectBase
     {
@@ -102,36 +91,24 @@ public abstract class SecurityExpressionBuilderFactoryBase<TPersistentDomainObje
         return this.CreateBuilder(path);
     }
 
-    protected virtual ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPathWrapper<TPersistentDomainObjectBase, TDomainObject, TIdent> securityPath)
-            where TDomainObject : class, TPersistentDomainObjectBase
-    {
-        if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
-
-        return this.CreateBuilder(securityPath.SecurityPath);
-    }
-
-    protected abstract ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.ConditionPath securityPath)
+    protected abstract ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPath<TDomainObject>.ConditionPath securityPath)
             where TDomainObject : class, TPersistentDomainObjectBase;
 
-    protected abstract ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject, TSecurityContext>(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.SecurityPathByIdents<TSecurityContext> securityPath)
+    protected abstract ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject, TSecurityContext>(SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext> securityPath)
             where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
             where TDomainObject : class, TPersistentDomainObjectBase;
 
-    protected abstract ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject, TSecurityContext>(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.ManySecurityPath<TSecurityContext> securityPath)
+    protected abstract ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject, TSecurityContext>(SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> securityPath)
             where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
             where TDomainObject : class, TPersistentDomainObjectBase;
 
-    protected abstract ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject, TSecurityContext>(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.SingleSecurityPath<TSecurityContext> securityPath)
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
+    protected abstract ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPath<TDomainObject>.OrSecurityPath securityPath)
             where TDomainObject : class, TPersistentDomainObjectBase;
 
-    protected abstract ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.OrSecurityPath securityPath)
+    protected abstract ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPath<TDomainObject>.AndSecurityPath securityPath)
             where TDomainObject : class, TPersistentDomainObjectBase;
 
-    protected abstract ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.AndSecurityPath securityPath)
-            where TDomainObject : class, TPersistentDomainObjectBase;
-
-    protected abstract ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject, TNestedObject>(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.NestedManySecurityPath<TNestedObject> securityPath)
+    protected abstract ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject, TNestedObject>(SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> securityPath)
             where TNestedObject : class, TPersistentDomainObjectBase
             where TDomainObject : class, TPersistentDomainObjectBase;
 }

@@ -1,5 +1,4 @@
 ﻿using Framework.DomainDriven;
-using Framework.Persistent;
 
 namespace SampleSystem.Domain;
 

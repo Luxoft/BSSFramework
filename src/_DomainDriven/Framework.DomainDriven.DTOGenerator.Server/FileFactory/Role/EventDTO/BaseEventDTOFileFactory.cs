@@ -1,6 +1,4 @@
-﻿using System;
-using System.CodeDom;
-using System.Linq;
+﻿using System.CodeDom;
 using System.Reflection;
 
 using Framework.DomainDriven.BLL;
@@ -31,7 +29,7 @@ public class DefaultBaseEventDTOFileFactory<TConfiguration> : FileFactory<IServe
 
                 where !domainType.IsProjection()
 
-                from eventOperationCode in domainType.GetEventOperations(true)
+                from eventOperationCode in domainType.GetEventOperations(typeof(BLLBaseOperation))
 
                 let fileType = new DomainOperationEventDTOFileType(eventOperationCode)
 

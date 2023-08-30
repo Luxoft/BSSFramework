@@ -1,5 +1,4 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Net.Mail;
 
 using Framework.Configuration.BLL;
@@ -71,7 +70,7 @@ public class SmtpNotificationMessageSender : IMessageSender<NotificationEventDTO
     }
 
     protected virtual void SaveSentMessage(SentMessage message) =>
-            new SentMessageBLL(this.context).Save(message);
+        this.context.Logics.SentMessage.Save(message);
 
     // TODO: Move creation of SmtpClient to DI
     protected virtual SmtpClient GetSmtpClient()

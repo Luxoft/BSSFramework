@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Security;
-
-using JetBrains.Annotations;
 
 namespace Framework.Projection.Lambda;
 
@@ -22,7 +16,7 @@ public class ProjectionPropertyAttributeSource : AttributeSourceBase<IProjection
     /// </summary>
     /// <param name="environment">Окружение</param>
     /// <param name="projectionProperty">Свойство проекции</param>
-    public ProjectionPropertyAttributeSource([NotNull] ProjectionLambdaEnvironment environment, [NotNull] IProjectionProperty projectionProperty)
+    public ProjectionPropertyAttributeSource(ProjectionLambdaEnvironment environment, IProjectionProperty projectionProperty)
             : base(environment, projectionProperty)
     {
         this.ExpandPathHead = this.ProjectionValue.Path.TakeWhile(prop => this.Environment.IsPersistent(prop.PropertyType)).ToPropertyPath();

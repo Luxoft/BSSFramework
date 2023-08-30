@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.DomainDriven;
-
-using JetBrains.Annotations;
+﻿using Framework.DomainDriven;
 
 namespace Framework.Projection.Lambda;
 
@@ -18,7 +12,7 @@ public class ProjectionCustomPropertyAttributeSource : AttributeSourceBase<IProj
     /// </summary>
     /// <param name="environment">Окружение</param>
     /// <param name="customProjectionProperty">Кастомное свойство проекции</param>
-    public ProjectionCustomPropertyAttributeSource([NotNull] ProjectionLambdaEnvironment environment, [NotNull] IProjectionCustomProperty customProjectionProperty)
+    public ProjectionCustomPropertyAttributeSource(ProjectionLambdaEnvironment environment, IProjectionCustomProperty customProjectionProperty)
             : base(environment, customProjectionProperty)
     {
     }

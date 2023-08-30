@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Configuration.Core;
+﻿using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven;
 
-using JetBrains.Annotations;
+
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 
@@ -39,8 +35,8 @@ public class DynamicSourceLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLCon
     /// versions равен null.
     /// </exception>
     public virtual IEnumerable<FilterItemIdentity> Invoke<T>(
-            [NotNull] Subscription subscription,
-            [NotNull] DomainObjectVersions<T> versions)
+            Subscription subscription,
+            DomainObjectVersions<T> versions)
             where T : class
     {
         if (subscription == null)
@@ -75,8 +71,6 @@ public class DynamicSourceLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLCon
         return result;
     }
 
-
-    [UsedImplicitly]
     private IEnumerable<FilterItemIdentity> InvokeWithTypedContext<T>(
             Subscription subscription,
             DomainObjectVersions<T> versions)

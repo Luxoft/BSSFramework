@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.SecuritySystem;
+﻿using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.BLL.Security;
 
@@ -18,8 +16,12 @@ public interface IAuthorizationBLLContextBase : IAuthorizationSystem
     {
         get;
     }
+
     bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation, bool withRunAs)
-            where TSecurityOperationCode : struct, Enum;
+        where TSecurityOperationCode : struct, Enum;
+
+    void CheckAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> operation, bool withRunAs)
+        where TSecurityOperationCode : struct, Enum;
 }
 
 public interface IAuthorizationBLLContext<TIdent> : IAuthorizationBLLContextBase, IAuthorizationSystem<TIdent>, IHierarchicalObjectExpanderFactoryContainer<TIdent>

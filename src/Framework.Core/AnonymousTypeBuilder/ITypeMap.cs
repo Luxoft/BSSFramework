@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 public interface ITypeMap
 {

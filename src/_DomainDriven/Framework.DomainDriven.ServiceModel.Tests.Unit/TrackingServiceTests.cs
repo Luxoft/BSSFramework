@@ -1,9 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using FluentAssertions;
 
-using FluentAssertions;
-
-using Framework.DomainDriven.BLL.Tracking;
+using Framework.DomainDriven.Tracking;
 
 using NSubstitute;
 
@@ -18,11 +15,13 @@ public class TrackingServiceTests
 
     private TrackingService<PersistentDomainObject> trackingService;
 
+    private IPersistentInfoService persistentInfoService = new PersistentInfoService();
+
     [SetUp]
     public void Initialize()
     {
         this.objectStateService = Substitute.For<IObjectStateService>();
-        this.trackingService = new TrackingService<PersistentDomainObject>(this.objectStateService);
+        this.trackingService = new TrackingService<PersistentDomainObject>(this.objectStateService, this.persistentInfoService);
     }
 
     [Test]
@@ -303,7 +302,7 @@ public class TrackingServiceTests
         // Assert
         result.Should().BeTrue();
     }
-        
+
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
@@ -322,7 +321,7 @@ public class TrackingServiceTests
         // Assert
         result.Should().BeTrue();
     }
-        
+
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
@@ -341,7 +340,7 @@ public class TrackingServiceTests
         // Assert
         result.Should().BeTrue();
     }
-        
+
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
@@ -379,7 +378,7 @@ public class TrackingServiceTests
         // Assert
         result.Should().BeFalse();
     }
-        
+
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
@@ -398,7 +397,7 @@ public class TrackingServiceTests
         // Assert
         result.Should().BeTrue();
     }
-        
+
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
@@ -417,7 +416,7 @@ public class TrackingServiceTests
         // Assert
         result.Should().BeFalse();
     }
-        
+
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
@@ -436,7 +435,7 @@ public class TrackingServiceTests
         // Assert
         result.Should().BeTrue();
     }
-        
+
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
@@ -455,7 +454,7 @@ public class TrackingServiceTests
         // Assert
         result.Should().BeFalse();
     }
-        
+
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
@@ -493,7 +492,7 @@ public class TrackingServiceTests
         // Assert
         result.Should().BeFalse();
     }
-        
+
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
@@ -531,7 +530,7 @@ public class TrackingServiceTests
         // Assert
         result.Should().BeTrue();
     }
-        
+
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
@@ -550,7 +549,7 @@ public class TrackingServiceTests
         // Assert
         result.Should().BeTrue();
     }
-        
+
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
@@ -569,7 +568,7 @@ public class TrackingServiceTests
         // Assert
         result.Should().BeTrue();
     }
-        
+
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
@@ -607,7 +606,7 @@ public class TrackingServiceTests
         // Assert
         result.Should().BeFalse();
     }
-        
+
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
@@ -626,7 +625,7 @@ public class TrackingServiceTests
         // Assert
         result.Should().BeTrue();
     }
-        
+
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
@@ -645,7 +644,7 @@ public class TrackingServiceTests
         // Assert
         result.Should().BeFalse();
     }
-        
+
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
@@ -664,7 +663,7 @@ public class TrackingServiceTests
         // Assert
         result.Should().BeTrue();
     }
-        
+
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
@@ -683,7 +682,7 @@ public class TrackingServiceTests
         // Assert
         result.Should().BeFalse();
     }
-        
+
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
@@ -702,7 +701,7 @@ public class TrackingServiceTests
         // Assert
         result.Should().BeTrue();
     }
-        
+
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>
@@ -721,7 +720,7 @@ public class TrackingServiceTests
         // Assert
         result.Should().BeFalse();
     }
-        
+
     /// <summary>
     /// IADFRAME-300 TrackingResult.HasChange() и несохранённый объект
     /// </summary>

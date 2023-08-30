@@ -1,14 +1,9 @@
-﻿using System;
-
-using Framework.Core;
-using Framework.DomainDriven.Attributes;
+﻿using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
-
-using JetBrains.Annotations;
 
 namespace Framework.Configuration.Domain;
 
@@ -34,7 +29,7 @@ public class CodeFirstSubscription : AuditPersistentDomainObjectBase, ICodeObjec
     {
     }
 
-    public CodeFirstSubscription([NotNull] string code, [NotNull] DomainType domainType)
+    public CodeFirstSubscription(string code, DomainType domainType)
     {
         if (string.IsNullOrWhiteSpace(code))
         {

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Framework.Configuration.Core;
+﻿namespace Framework.Configuration.Core;
 
 /// <summary>
 /// Контейнер версий доменного объекта.

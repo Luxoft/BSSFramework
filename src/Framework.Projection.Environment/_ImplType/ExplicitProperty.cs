@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 
 using Framework.Core;
 using Framework.Persistent;
-
-using JetBrains.Annotations;
 
 namespace Framework.Projection;
 
@@ -21,7 +16,7 @@ internal class ExplicitProperty : BasePropertyInfoImpl
     private readonly PropertyMethodInfoImpl getMethod = new PropertyMethodInfoImpl();
 
 
-    public ExplicitProperty([NotNull] PropertyInfo interfaceProp, Type reflectedType, string baseName, Type propertyType, PropertyPath customPropertyPath = null)
+    public ExplicitProperty(PropertyInfo interfaceProp, Type reflectedType, string baseName, Type propertyType, PropertyPath customPropertyPath = null)
     {
         this.ReflectedType = reflectedType ?? throw new ArgumentNullException(nameof(reflectedType));
         this.InterfaceProp = this.GetGenericInterfaceProp(interfaceProp ?? throw new ArgumentNullException(nameof(interfaceProp)));

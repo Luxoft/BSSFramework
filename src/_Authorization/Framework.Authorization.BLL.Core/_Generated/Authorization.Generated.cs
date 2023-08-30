@@ -202,21 +202,6 @@ namespace Framework.Authorization.BLL
     }
     #endregion
     
-    public partial class AuthorizationSecurityPath<TDomainObject> : Framework.SecuritySystem.SecurityPathWrapper<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>
-        where TDomainObject : Framework.Authorization.Domain.PersistentDomainObjectBase
-    {
-        
-        private AuthorizationSecurityPath(Framework.SecuritySystem.SecurityPath<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> securityPath) : 
-                base(securityPath)
-        {
-        }
-        
-        public static implicit operator Framework.Authorization.BLL.AuthorizationSecurityPath<TDomainObject> (Framework.SecuritySystem.SecurityPath<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> securityPath)
-        {
-            return new Framework.Authorization.BLL.AuthorizationSecurityPath<TDomainObject>(securityPath);
-        }
-    }
-    
     public partial class AuthorizationBLLContext : Framework.DomainDriven.BLL.Security.SecurityBLLBaseContext<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.DomainObjectBase, System.Guid, Framework.Authorization.BLL.IAuthorizationBLLFactoryContainer, Framework.Authorization.AuthorizationSecurityOperationCode>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode, System.Guid>>>, Framework.Authorization.BLL.IAuthorizationBLLContext
     {
         
@@ -328,12 +313,19 @@ namespace Framework.Authorization.BLL
         public static void Register(Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection)
         {
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.BusinessRole, Framework.Authorization.AuthorizationSecurityOperationCode>, Framework.Authorization.BLL.AuthorizationBusinessRoleSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.BusinessRole>, Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.BusinessRole, Framework.Authorization.AuthorizationSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.EntityType, Framework.Authorization.AuthorizationSecurityOperationCode>, Framework.Authorization.BLL.AuthorizationEntityTypeSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.EntityType>, Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.EntityType, Framework.Authorization.AuthorizationSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.Operation, Framework.Authorization.AuthorizationSecurityOperationCode>, Framework.Authorization.BLL.AuthorizationOperationSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.Operation>, Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.Operation, Framework.Authorization.AuthorizationSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.Permission, Framework.Authorization.AuthorizationSecurityOperationCode>, Framework.Authorization.BLL.AuthorizationPermissionSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.Permission>, Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.Permission, Framework.Authorization.AuthorizationSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.PermissionFilterEntity, Framework.Authorization.AuthorizationSecurityOperationCode>, Framework.Authorization.BLL.AuthorizationPermissionFilterEntitySecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.PermissionFilterEntity>, Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.PermissionFilterEntity, Framework.Authorization.AuthorizationSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.PermissionFilterItem, Framework.Authorization.AuthorizationSecurityOperationCode>, Framework.Authorization.BLL.AuthorizationPermissionFilterItemSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.PermissionFilterItem>, Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.PermissionFilterItem, Framework.Authorization.AuthorizationSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.Principal, Framework.Authorization.AuthorizationSecurityOperationCode>, Framework.Authorization.BLL.AuthorizationPrincipalSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.Principal>, Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.Principal, Framework.Authorization.AuthorizationSecurityOperationCode>>(serviceCollection);
         }
     }
     

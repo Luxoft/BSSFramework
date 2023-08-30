@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
-
-namespace SampleSystem.Domain;
+﻿namespace SampleSystem.Domain;
 
 public class TestEmployeeFilter : DomainObjectBase
 {

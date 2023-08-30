@@ -1,11 +1,9 @@
-﻿using System;
-using System.CodeDom;
+﻿using System.CodeDom;
 
 using Framework.CodeDom;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.BLLCoreGenerator;
 using Framework.Security;
-using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.BLLGenerator;
 

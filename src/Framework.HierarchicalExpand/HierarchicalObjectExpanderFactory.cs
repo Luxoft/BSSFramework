@@ -1,11 +1,8 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 
 using Framework.Core;
 using Framework.Persistent;
 using Framework.QueryableSource;
-
-using JetBrains.Annotations;
 
 namespace Framework.HierarchicalExpand;
 
@@ -26,8 +23,8 @@ public class HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, TIde
     private static readonly MethodInfo GenericCreateHierarchicalWithAncestorLinkMethod = typeof(HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, TIdent>).GetMethod(nameof(CreateHierarchicalWithAncestorLink), BindingFlags.NonPublic | BindingFlags.Instance, true);
 
 
-    public HierarchicalObjectExpanderFactory([NotNull] IQueryableSource<TPersistentDomainObjectBase> queryableSource,
-                                             [NotNull] IHierarchicalRealTypeResolver realTypeResolver)
+    public HierarchicalObjectExpanderFactory(IQueryableSource<TPersistentDomainObjectBase> queryableSource,
+                                             IHierarchicalRealTypeResolver realTypeResolver)
     {
         this.queryableSource = queryableSource ?? throw new ArgumentNullException(nameof(queryableSource));
         this.realTypeResolver = realTypeResolver ?? throw new ArgumentNullException(nameof(realTypeResolver));

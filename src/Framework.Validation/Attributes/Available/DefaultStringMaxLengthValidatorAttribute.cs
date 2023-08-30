@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Validation;
+﻿namespace Framework.Validation;
 
 /// <summary>
 /// Ограничение максимальной длинны строк, применяемое для всех строковых свойств, на которых нет явного аттрибута ограничения Framework.Restriction.MaxLengthAttribute

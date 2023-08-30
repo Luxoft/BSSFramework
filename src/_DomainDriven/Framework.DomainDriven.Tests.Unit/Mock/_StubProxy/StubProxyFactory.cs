@@ -1,5 +1,4 @@
-﻿using System;
-using Framework.Core;
+﻿using Framework.Core;
 
 using Unity.Interception;
 using Unity.Interception.Interceptors.InstanceInterceptors.InterfaceInterception;

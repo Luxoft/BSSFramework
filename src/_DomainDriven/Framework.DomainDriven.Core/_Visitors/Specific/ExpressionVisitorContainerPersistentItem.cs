@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 using Framework.Core;
 using Framework.Persistent;
@@ -19,7 +17,7 @@ public class ExpressionVisitorContainerPersistentItem : IExpressionVisitorContai
                        typeof(IIdentityObject<>),
                        typeof(IParentSource<>),
                        typeof(IChildrenSource<>),
-                       typeof(IEmployee)
+                       //typeof(IEmployee)
                }.ToReadOnlyCollection(type => new OverrideCallInterfacePropertiesVisitor(type));
     }
 }

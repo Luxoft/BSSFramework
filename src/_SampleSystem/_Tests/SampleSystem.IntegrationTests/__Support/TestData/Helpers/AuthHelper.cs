@@ -1,6 +1,4 @@
-﻿using System;
-
-using Automation.ServiceEnvironment;
+﻿using Automation.ServiceEnvironment;
 
 using SampleSystem.BLL;
 

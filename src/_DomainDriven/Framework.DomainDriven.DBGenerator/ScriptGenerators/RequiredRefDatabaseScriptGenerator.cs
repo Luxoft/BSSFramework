@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.DAL.Sql;
 using Framework.DomainDriven.DBGenerator.Contracts;
 using Framework.DomainDriven.DBGenerator.ScriptGenerators;
 using Framework.DomainDriven.Metadata;
 using Framework.Restriction;
-
-using JetBrains.Annotations;
 
 using Microsoft.SqlServer.Management.Smo;
 
@@ -23,7 +17,7 @@ public class RequiredRefDatabaseScriptGenerator : PostDatabaseScriptGeneratorBas
 {
     private readonly HashSet<IgnoreLink> _ignoreDomainTypeLinksHash;
 
-    public RequiredRefDatabaseScriptGenerator([NotNull] IEnumerable<IgnoreLink> ignoreDomainTypeLinks)
+    public RequiredRefDatabaseScriptGenerator(IEnumerable<IgnoreLink> ignoreDomainTypeLinks)
     {
         if (ignoreDomainTypeLinks == null) throw new ArgumentNullException(nameof(ignoreDomainTypeLinks));
 

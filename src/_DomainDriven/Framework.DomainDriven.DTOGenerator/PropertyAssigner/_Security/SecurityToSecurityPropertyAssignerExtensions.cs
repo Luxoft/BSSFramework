@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.DTOGenerator;
+﻿namespace Framework.DomainDriven.DTOGenerator;
 
 public static class SecurityToSecurityPropertyAssignerExtensions
 {

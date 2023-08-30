@@ -1,12 +1,8 @@
-﻿using System;
-
-using JetBrains.Annotations;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 public static class DelegateExtensions
 {
-    public static System.Reflection.MethodInfo CreateGenericMethod([NotNull] this System.Delegate source, [NotNull] params Type[] types)
+    public static System.Reflection.MethodInfo CreateGenericMethod(this System.Delegate source, params Type[] types)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (types == null) throw new ArgumentNullException(nameof(types));

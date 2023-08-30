@@ -1,9 +1,5 @@
-﻿using System;
-
-using Framework.SecuritySystem;
+﻿using Framework.SecuritySystem;
 using Framework.SecuritySystem.Rules.Builders;
-
-using JetBrains.Annotations;
 
 using SampleSystem.Domain;
 
@@ -12,13 +8,13 @@ namespace SampleSystem.BLL;
 public partial class SampleSystemEmployeeSecurityService<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>
 {
     public SampleSystemEmployeeSecurityService(
-            [NotNull] IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
-            [NotNull] IDisabledSecurityProviderContainer<PersistentDomainObjectBase> disabledSecurityProviderContainer,
-            [NotNull] ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode> securityOperationResolver,
-            [NotNull] IAuthorizationSystem<Guid> authorizationSystem,
-            [NotNull] ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
-            [NotNull] ISampleSystemSecurityPathContainer securityPathContainer,
-            [NotNull] ISampleSystemBLLContext context)
+            IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
+            IDisabledSecurityProviderContainer<PersistentDomainObjectBase> disabledSecurityProviderContainer,
+            ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode> securityOperationResolver,
+            IAuthorizationSystem<Guid> authorizationSystem,
+            ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
+            ISampleSystemSecurityPathContainer securityPathContainer,
+            ISampleSystemBLLContext context)
 
             : base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
     {

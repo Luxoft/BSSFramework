@@ -1,5 +1,4 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Framework.Configuration.SubscriptionModeling.Tests.Unit.Metadata;
 using NUnit.Framework;
 

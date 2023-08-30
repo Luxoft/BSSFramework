@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Framework.SecuritySystem;
+﻿namespace Framework.SecuritySystem;
 
 /// <summary>
 /// Операция доступа

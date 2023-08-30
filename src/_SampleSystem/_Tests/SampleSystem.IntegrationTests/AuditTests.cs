@@ -1,13 +1,8 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-
-using FluentAssertions;
+﻿using FluentAssertions;
 
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
 
-using Microsoft.SqlServer.Management.Smo;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.Domain;
@@ -15,8 +10,9 @@ using SampleSystem.Domain.Inline;
 using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Audit;
+using SampleSystem.WebApiCore.Controllers.Main;
 
-using EmployeeController = SampleSystem.WebApiCore.Controllers.Main.EmployeeController;
+using BusinessUnitController = SampleSystem.WebApiCore.Controllers.Audit.BusinessUnitController;
 
 namespace SampleSystem.IntegrationTests;
 
@@ -264,5 +260,26 @@ public class AuditTests : TestBase
 
         afterFirstRevisions.Count.Should().Be(1);
         afterFirstRevisions.First().Should().Be(AuditRevisionType.Modified);
+    }
+
+
+    [TestMethod]
+    public void CrateNewBu_AuditBuLoadedFromCustomMapping()
+    {
+        // Arrange
+        var newBu = this.DataHelper.SaveBusinessUnit();
+        var newBuRevInfo = this.GetControllerEvaluator<BusinessUnitController>()
+                           .Evaluate(c => c.GetBusinessUnitRevisions(newBu))
+                           .RevisionInfos
+                           .Single();
+
+        // Act
+        var auditBu = this.GetControllerEvaluator<BusinessUnitAuditController>()
+                                .Evaluate(c => c.LoadFromCustomAuditMapping(newBu, newBuRevInfo.RevisionNumber));
+
+        // Assert
+        auditBu.Revision.Should().Be(newBuRevInfo.RevisionNumber);
+        auditBu.Author.Should().Be(newBuRevInfo.Author);
+        auditBu.BuIdent.Should().Be(newBu);
     }
 }

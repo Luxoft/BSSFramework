@@ -1,9 +1,5 @@
-﻿using System;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.Persistent;
-
-using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.DAL.Revisions;
 
@@ -13,7 +9,7 @@ public class TypeInfoDescription : IDomainType
     {
     }
 
-    public TypeInfoDescription([NotNull] Type type)
+    public TypeInfoDescription(Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
@@ -21,7 +17,7 @@ public class TypeInfoDescription : IDomainType
         this.NameSpace = type.Namespace;
     }
 
-    public TypeInfoDescription([NotNull] IDomainType domainType)
+    public TypeInfoDescription(IDomainType domainType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
 

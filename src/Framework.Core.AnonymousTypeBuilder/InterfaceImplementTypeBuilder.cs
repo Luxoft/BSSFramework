@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Reflection.Emit;
-
-using JetBrains.Annotations;
 
 namespace Framework.Core;
 
@@ -23,7 +18,7 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
     /// Конструктор
     /// </summary>
     /// <param name="moduleBuilder">Модуль, где будет генерировать анонимный тип</param>
-    protected InterfaceImplementTypeBuilder([NotNull] ModuleBuilder moduleBuilder, [NotNull] Type baseType)
+    protected InterfaceImplementTypeBuilder(ModuleBuilder moduleBuilder, Type baseType)
     {
         if (moduleBuilder == null) throw new ArgumentNullException(nameof(moduleBuilder));
 
@@ -46,7 +41,7 @@ public abstract class InterfaceImplementTypeBuilder : IAnonymousTypeBuilder<Type
     /// </summary>
     /// <param name="sourceType">Тип базого интерфейса</param>
     /// <returns></returns>
-    public Delegate GetCreateProxyFunc([NotNull] Type sourceType)
+    public Delegate GetCreateProxyFunc(Type sourceType)
     {
         if (sourceType == null) throw new ArgumentNullException(nameof(sourceType));
 

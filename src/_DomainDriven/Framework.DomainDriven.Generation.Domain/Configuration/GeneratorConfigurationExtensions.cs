@@ -1,11 +1,8 @@
-﻿using System;
-using System.CodeDom;
+﻿using System.CodeDom;
 using System.Reflection;
 
 using Framework.CodeDom;
 using Framework.Persistent;
-
-using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.Generation.Domain;
 
@@ -31,7 +28,7 @@ public static class GeneratorConfigurationExtensions
         return typeof(IIdentityObject<>).MakeGenericType(configuration.Environment.IdentityProperty.PropertyType).ToTypeReference();
     }
 
-    public static bool IsIdentityProperty(this IGeneratorConfiguration<IGenerationEnvironment> configuration, [NotNull] PropertyInfo property)
+    public static bool IsIdentityProperty(this IGeneratorConfiguration<IGenerationEnvironment> configuration, PropertyInfo property)
     {
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
         if (property == null) throw new ArgumentNullException(nameof(property));

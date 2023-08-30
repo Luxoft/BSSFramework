@@ -1,8 +1,4 @@
-﻿using System;
-
-using Framework.Core;
-
-using JetBrains.Annotations;
+﻿using Framework.Core;
 
 namespace Framework.DomainDriven;
 
@@ -26,14 +22,14 @@ public class DateTimeService : IDateTimeService
 
 
     public DateTimeService(
-            [NotNull] Func<DateTime> getNow,
-            [NotNull] Func<DateTime> getToday,
-            [NotNull] Func<DateTime> getUtcNow,
-            [NotNull] Func<Period> getCurrentFinancialYear,
-            [NotNull] Func<Period> getCurrentMonth,
-            [NotNull] Func<Period> getCurrentYear,
-            [NotNull] Func<Period> getNextMonth,
-            [NotNull] Func<Period> getPrevMonth)
+            Func<DateTime> getNow,
+            Func<DateTime> getToday,
+            Func<DateTime> getUtcNow,
+            Func<Period> getCurrentFinancialYear,
+            Func<Period> getCurrentMonth,
+            Func<Period> getCurrentYear,
+            Func<Period> getNextMonth,
+            Func<Period> getPrevMonth)
     {
         this._getNow = getNow ?? throw new ArgumentNullException(nameof(getNow));
         this._getToday = getToday ?? throw new ArgumentNullException(nameof(getToday));

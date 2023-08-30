@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.UnitTest.Mock;
+﻿namespace Framework.DomainDriven.UnitTest.Mock;
 
 public class DALTestConfiguration<TIdent>
 {
@@ -8,7 +6,7 @@ public class DALTestConfiguration<TIdent>
     {
         return new DALTestConfiguration(typeof(TDomainObject), mockDAL);
     }
-        
+
 }
 public struct DALTestConfiguration
 {

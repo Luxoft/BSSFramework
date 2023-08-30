@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Projection;
@@ -32,8 +30,6 @@ public class BLLCoreFileGenerator<TConfiguration> : CodeFileGenerator<TConfigura
         if (this.Configuration.Environment.SecurityOperationCodeType.IsEnum)
         {
             yield return new SecurityOperationFileFactory<TConfiguration>(this.Configuration);
-
-            yield return new SecurityPathFileFactory<TConfiguration>(this.Configuration);
         }
 
         yield return new BLLContextFileFactory<TConfiguration>(this.Configuration);

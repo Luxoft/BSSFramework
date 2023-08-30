@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.ServiceModel.IAD;
+﻿namespace Framework.DomainDriven.ServiceModel.IAD;
 
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
 public class AutoRequestPropertyAttribute : Attribute

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 
 using Framework.Authorization.Domain;
 using Framework.Core;
@@ -9,13 +6,11 @@ using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.SecuritySystem;
 
-using JetBrains.Annotations;
-
 namespace Framework.Authorization.BLL;
 
 public partial class EntityTypeBLL
 {
-    public void Register([NotNull] IEnumerable<Assembly> assemblies)
+    public void Register(IEnumerable<Assembly> assemblies)
     {
         if (assemblies == null) throw new ArgumentNullException(nameof(assemblies));
 

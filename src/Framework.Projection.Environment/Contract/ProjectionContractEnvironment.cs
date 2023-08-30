@@ -1,16 +1,11 @@
-﻿using System;
-using System.Linq;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.Metadata;
-
-using JetBrains.Annotations;
 
 namespace Framework.Projection.Contract;
 
 public abstract class ProjectionContractEnvironment : ProjectionEnvironmentBase
 {
-    protected ProjectionContractEnvironment([NotNull] ITypeSource typeSource)
+    protected ProjectionContractEnvironment(ITypeSource typeSource)
     {
         if (typeSource == null) throw new ArgumentNullException(nameof(typeSource));
 
@@ -30,12 +25,12 @@ public abstract class ProjectionContractEnvironment : ProjectionEnvironmentBase
 
 
     public static ProjectionContractEnvironment Create(
-            [NotNull] ITypeSource typeSource,
-            [NotNull] string assemblyName,
-            [NotNull] string assemblyFullName,
-            [NotNull] Type domainObjectBaseType,
-            [NotNull] Type persistentDomainObjectBaseType,
-            [NotNull] string @namespace,
+            ITypeSource typeSource,
+            string assemblyName,
+            string assemblyFullName,
+            Type domainObjectBaseType,
+            Type persistentDomainObjectBaseType,
+            string @namespace,
             bool useDependencySecurity = true)
     {
         return new DefaultProjectionContractEnvironment(
@@ -51,12 +46,12 @@ public abstract class ProjectionContractEnvironment : ProjectionEnvironmentBase
     private class DefaultProjectionContractEnvironment : ProjectionContractEnvironment
     {
         public DefaultProjectionContractEnvironment(
-                [NotNull] ITypeSource typeSource,
-                [NotNull] string assemblyName,
-                [NotNull] string assemblyFullName,
-                [NotNull] Type domainObjectBaseType,
-                [NotNull] Type persistentDomainObjectBaseType,
-                [NotNull] string @namespace,
+                ITypeSource typeSource,
+                string assemblyName,
+                string assemblyFullName,
+                Type domainObjectBaseType,
+                Type persistentDomainObjectBaseType,
+                string @namespace,
                 bool useDependencySecurity)
                 : base(typeSource)
         {

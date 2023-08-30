@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
-using Framework.Authorization.Domain;
-using Framework.Persistent;
+﻿using Framework.Authorization.Domain;
 
 namespace Framework.Authorization.Generated.DTO;
 

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Framework.DomainDriven;
+﻿using Framework.DomainDriven;
 using Framework.OData;
 
 using SampleSystem.Domain;

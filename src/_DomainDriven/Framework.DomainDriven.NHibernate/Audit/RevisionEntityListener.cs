@@ -1,10 +1,4 @@
-﻿using System;
-
-using Framework.Core.Services;
-
-using JetBrains.Annotations;
-
-using NHibernate.Envers;
+﻿using NHibernate.Envers;
 
 namespace Framework.DomainDriven.NHibernate.Audit;
 
@@ -14,7 +8,7 @@ namespace Framework.DomainDriven.NHibernate.Audit;
 /// <typeparam name="T"></typeparam>
 public abstract class RevisionEntityListener<T> : IEntityTrackingRevisionListener
 {
-    protected RevisionEntityListener([NotNull] IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService)
+    protected RevisionEntityListener(IAuditRevisionUserAuthenticationService auditRevisionUserAuthenticationService)
     {
         this.AuditRevisionUserAuthenticationService = auditRevisionUserAuthenticationService ?? throw new ArgumentNullException(nameof(auditRevisionUserAuthenticationService));
     }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Framework.Configurator.Models;
+﻿namespace Framework.Configurator.Models;
 
 public class PermissionDto
 {
@@ -28,4 +25,8 @@ public class PermissionDto
         get;
         set;
     }
+
+    public DateTime? EndDate { get; set; }
+
+    public DateTime StartDate { get; set; }
 }

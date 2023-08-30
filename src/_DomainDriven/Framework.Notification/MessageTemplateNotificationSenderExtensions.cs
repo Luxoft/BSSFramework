@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Mail;
+﻿using System.Net.Mail;
 using Framework.Core;
 using Attachment = Framework.Notification.New.Attachment;
 

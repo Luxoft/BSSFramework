@@ -1,15 +1,10 @@
-﻿using System;
-
-using JetBrains.Annotations;
-
-namespace Framework.Validation;
+﻿namespace Framework.Validation;
 
 /// <summary>
 /// Legacy
 /// </summary>
 public class ValidationException : ValidationExceptionBase
 {
-    [StringFormatMethod("format")]
     public ValidationException(string format, params object[] args)
             : this(string.Format(format, args))
     {

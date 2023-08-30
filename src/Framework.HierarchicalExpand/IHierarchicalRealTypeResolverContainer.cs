@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.HierarchicalExpand;
+﻿namespace Framework.HierarchicalExpand;
 
 /// <summary>
 /// Интерфейс для получнения реального разворачиваемого типа

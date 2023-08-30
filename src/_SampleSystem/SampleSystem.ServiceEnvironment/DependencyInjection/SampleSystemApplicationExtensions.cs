@@ -1,12 +1,8 @@
-﻿using System;
-using System.Reflection;
-
-using Framework.Authorization.ApproveWorkflow;
+﻿using Framework.Authorization.ApproveWorkflow;
 using Framework.Authorization.BLL;
+using Framework.Authorization.Notification;
 using Framework.Cap;
 using Framework.DependencyInjection;
-
-using MediatR;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,12 +33,15 @@ public static class SampleSystemApplicationExtensions
 
         services.ReplaceScoped<IAuthorizationValidator, SampleSystemCustomAuthValidator>();
 
+        services.AddScoped<INotificationPrincipalExtractor, NotificationPrincipalExtractor>();
+        //services.AddScoped<INotificationPrincipalExtractor, LegacyNotificationPrincipalExtractor>();
+
         return services;
     }
 
     private static IServiceCollection RegisterSmtpNotification(this IServiceCollection services, IConfiguration configuration)
     {
-        services.RegisterNotificationJob<ISampleSystemBLLContext>();
+        services.RegisterNotificationJob();
         services.RegisterNotificationSmtp(configuration);
         services.RegisterRewriteReceiversDependencies(configuration);
 

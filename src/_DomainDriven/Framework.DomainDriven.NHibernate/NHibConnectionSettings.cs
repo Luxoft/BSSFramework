@@ -1,8 +1,4 @@
-﻿using System;
-
-using Framework.Core;
-
-using JetBrains.Annotations;
+﻿using Framework.Core;
 
 using NHibernate.Cfg;
 
@@ -14,7 +10,7 @@ public class NHibConnectionSettings
 
     public NHibConnectionSettings() => this._initAction = _ => { };
 
-    public NHibConnectionSettings([NotNull] string serverAddress, [NotNull] string database)
+    public NHibConnectionSettings(string serverAddress, string database)
     {
         if (serverAddress == null) throw new ArgumentNullException(nameof(serverAddress));
         if (database == null) throw new ArgumentNullException(nameof(database));
@@ -26,7 +22,7 @@ public class NHibConnectionSettings
                            };
     }
 
-    public NHibConnectionSettings([NotNull] Action<Configuration> initAction)
+    public NHibConnectionSettings(Action<Configuration> initAction)
     {
         if (initAction == null) throw new ArgumentNullException(nameof(initAction));
 
@@ -41,7 +37,7 @@ public class NHibConnectionSettings
     [Obsolete("For backward compatibility only, will be removed in future version")]
     public bool UseEventListenerInsteadOfInterceptorForAudit { get; set; } = false;
 
-    public void Init([NotNull] Configuration configuration)
+    public void Init(Configuration configuration)
     {
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 

@@ -1,6 +1,4 @@
 ﻿using ASP;
-using System;
-using System.Linq;
 
 namespace SampleSystem.Subscriptions.Metadata.DomainChangedByRecipients.NotPersistentCustomModel;
 

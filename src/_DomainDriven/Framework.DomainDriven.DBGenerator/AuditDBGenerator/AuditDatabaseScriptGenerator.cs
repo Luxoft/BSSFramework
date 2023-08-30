@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Reflection;
 
 using Framework.Core;
-using Framework.DomainDriven.Attributes;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.DomainDriven.DBGenerator;
 using Framework.DomainDriven.DBGenerator.Contracts;
 using Framework.DomainDriven.DBGenerator.Team;
 using Framework.DomainDriven.NHibernate.Audit;
+using Framework.Persistent.Mapping;
 using Framework.Projection;
-
-using JetBrains.Annotations;
 
 using NHibernate.Cfg;
 using NHibernate.Dialect;
@@ -39,7 +34,7 @@ public class AuditDatabaseScriptGenerator : IDatabaseScriptGenerator
     {
     }
 
-    public AuditDatabaseScriptGenerator([NotNull] IEnumerable<IMappingSettings> mappingSettings,
+    public AuditDatabaseScriptGenerator(IEnumerable<IMappingSettings> mappingSettings,
                                         string auditTablePostfix)
     {
         if (mappingSettings == null) throw new ArgumentNullException(nameof(mappingSettings));

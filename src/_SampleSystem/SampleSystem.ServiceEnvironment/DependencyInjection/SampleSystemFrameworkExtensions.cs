@@ -1,8 +1,7 @@
-﻿using System;
-
-using Framework.Authorization.BLL;
+﻿using Framework.Authorization.BLL;
 using Framework.Authorization.Events;
 using Framework.Authorization.Generated.DTO;
+using Framework.Configuration;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
@@ -11,13 +10,13 @@ using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.Tracking;
 using Framework.DomainDriven.Serialization;
 using Framework.DomainDriven.SerializeMetadata;
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Events;
-using Framework.Persistent;
 using Framework.QueryableSource;
 using Framework.Security;
 using Framework.SecuritySystem;
@@ -38,21 +37,26 @@ public static class SampleSystemFrameworkExtensions
     {
         return services.RegisterGenericServices()
                        .RegisterWebApiGenericServices()
+                       .RegisterListeners()
+                       .RegisterSupportServices()
+
+                       // Legacy
+
+                       .RegisterLegacyGenericServices()
+                       .RegisterLegacyHierarchicalObjectExpander()
+                       .RegisterContextEvaluators()
 
                        .RegisterMainBLLContext()
                        .RegisterConfigurationTargetSystems()
-                       .RegisterListeners()
                        .RegisterContextEvaluator()
 
-                       .RegisterCustomReports()
-
-                       .RegisterSupportServices();
+                       .RegisterCustomReports();
     }
 
     private static IServiceCollection RegisterMainBLLContext(this IServiceCollection services)
     {
         return services
-
+               .AddSingleton<SampleSystemValidationMap>()
                .AddSingleton<SampleSystemValidatorCompileCache>()
 
                .AddScoped<ISampleSystemValidator, SampleSystemValidator>()
@@ -63,11 +67,16 @@ public static class SampleSystemFrameworkExtensions
                .AddScoped<ISampleSystemBLLContextSettings>(_ => new SampleSystemBLLContextSettings { TypeResolver = new[] { new SampleSystemBLLContextSettings().TypeResolver, TypeSource.FromSample<BusinessUnitSimpleDTO>().ToDefaultTypeResolver() }.ToComposite() })
                .AddScopedFromLazyInterfaceImplement<ISampleSystemBLLContext, SampleSystemBLLContext>()
 
+               .AddScoped<ITrackingService<PersistentDomainObjectBase>, TrackingService<PersistentDomainObjectBase>>()
+
                .AddScopedFrom<ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode>, ISampleSystemBLLContext>()
                .AddScopedFrom<IDisabledSecurityProviderContainer<PersistentDomainObjectBase>, ISampleSystemSecurityService>()
                .AddScopedFrom<ISampleSystemSecurityPathContainer, ISampleSystemSecurityService>()
+
                .AddScoped<IQueryableSource<PersistentDomainObjectBase>, BLLQueryableSource<ISampleSystemBLLContext, PersistentDomainObjectBase, DomainObjectBase, Guid>>()
                .AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
+               //.AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, SampleSystemSecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
+
                .AddScoped<IAccessDeniedExceptionService<PersistentDomainObjectBase>, AccessDeniedExceptionService<PersistentDomainObjectBase, Guid>>()
 
                .Self(SampleSystemSecurityServiceBase.Register)
@@ -89,9 +98,12 @@ public static class SampleSystemFrameworkExtensions
     {
         services.AddSingleton<IInitializeManager, InitializeManager>();
 
-        services.AddScoped<IBeforeTransactionCompletedDALListener, DenormalizeHierarchicalDALListener<ISampleSystemBLLContext, PersistentDomainObjectBase, NamedLock, NamedLockOperation>>();
+        services.AddScoped<IBeforeTransactionCompletedDALListener, DenormalizeHierarchicalDALListener<PersistentDomainObjectBase, NamedLock, NamedLockOperation>>();
         services.AddScoped<IBeforeTransactionCompletedDALListener, FixDomainObjectEventRevisionNumberDALListener>();
         services.AddScoped<IBeforeTransactionCompletedDALListener, PermissionWorkflowDALListener>();
+
+        services.AddScoped<FaultDALListener>();
+        services.AddScopedFrom<IBeforeTransactionCompletedDALListener, FaultDALListener>();
 
         services.AddScoped<DefaultAuthDALListener>();
 

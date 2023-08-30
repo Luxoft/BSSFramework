@@ -1,12 +1,8 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.CodeDom;
 using System.Collections.ObjectModel;
 using System.Reflection;
 
 using Framework.DomainDriven.Generation.Domain;
-
-using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.DTOGenerator;
 
@@ -43,7 +39,7 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
     bool ForceGenerateProperties(Type domainType, DTOFileType fileType);
 
 
-    IEnumerable<PropertyInfo> GetDomainTypeProperties([NotNull] Type domainType, [NotNull] DTOFileType fileType);
+    IEnumerable<PropertyInfo> GetDomainTypeProperties(Type domainType, DTOFileType fileType);
 
     IEnumerable<PropertyInfo> GetDomainTypeProperties(Type domainType, DTOFileType fileType, bool isWritable);
 
@@ -60,5 +56,5 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
             CodeExpression baseStrictSource,
             CodeExpression mappingService);
 
-    //GenerateTypeMap GetTypeMap([NotNull] Type domainType, [NotNull] DTOFileType fileType);
+    //GenerateTypeMap GetTypeMap(Type domainType, DTOFileType fileType);
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-
-using Framework.Core;
-using Framework.DomainDriven.BLL.Tracking;
+﻿using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
 
 using NHibernate;
@@ -61,11 +55,6 @@ public abstract class NHibSessionBase : INHibSession
 
     /// <inheritdoc />
     public abstract void AsWritable();
-
-    public IObjectStateService GetObjectStateService()
-    {
-        return new NHibObjectStatesService(this.NativeSession);
-    }
 
     public abstract Task CloseAsync(CancellationToken cancellationToken = default);
 

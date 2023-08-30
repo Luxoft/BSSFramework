@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
-
-using JetBrains.Annotations;
+﻿using Framework.Core;
 
 using NHibernate.Cfg;
 using NHibernate.Envers.Configuration.Store;
@@ -22,7 +16,7 @@ public static class MetaDataProviderExtension
     {
         private IList<IMetaDataProvider> _providers;
 
-        public MetaDataProviderComposite([NotNull] IEnumerable<IMetaDataProvider> providers)
+        public MetaDataProviderComposite(IEnumerable<IMetaDataProvider> providers)
         {
             if (providers == null)
             {

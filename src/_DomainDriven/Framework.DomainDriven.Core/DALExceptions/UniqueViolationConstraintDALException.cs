@@ -1,26 +1,17 @@
-﻿using System;
+﻿using Framework.Core;
 
-using Framework.Core;
-using Framework.Exceptions;
-using Framework.Validation;
-
-namespace Framework.DomainDriven;
+namespace Framework.DomainDriven.DALExceptions;
 
 public class UniqueViolationConstraintDALException : DALException<UniqueConstraint>
 {
-    public UniqueViolationConstraintDALException(UniqueConstraint args)
-            : base(args, GetMessage(args))
+    public UniqueViolationConstraintDALException(UniqueConstraint args, IDalValidationIdentitySource validationIdentitySource)
+            : base(args, GetMessage(args, validationIdentitySource))
     {
 
     }
 
-    public override ValidationException Convert()
+    private static string GetMessage(UniqueConstraint constraint, IDalValidationIdentitySource validationIdentitySource)
     {
-        return new ValidationException(GetMessage(this.Args));
-    }
-
-    private static string GetMessage(UniqueConstraint constraint)
-    {
-        return $"{constraint.ObjectInfo.Type.GetValidationName()} with same:'{constraint.Properties.Join(",")}' already exists";
+        return $"{validationIdentitySource.GetTypeValidationName(constraint.ObjectInfo.Type)} with same:'{constraint.Properties.Join(",")}' already exists";
     }
 }

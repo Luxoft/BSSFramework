@@ -1,7 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-
-namespace Framework.Cap.Abstractions;
+﻿namespace Framework.Cap.Abstractions;
 
 public interface IIntegrationEventBus
 {

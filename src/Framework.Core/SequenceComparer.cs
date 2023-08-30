@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 public class SequenceComparer<T> : IEqualityComparer<IEnumerable<T>>
 {

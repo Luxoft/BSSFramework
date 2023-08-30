@@ -1,8 +1,5 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.CodeDom;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reflection;
 
 using Framework.CodeDom;
@@ -17,8 +14,6 @@ using Framework.Security;
 using Framework.SecuritySystem;
 using Framework.Transfering;
 using Framework.Validation;
-
-using JetBrains.Annotations;
 
 #pragma warning disable S100 // Methods and properties should be named in camel case
 namespace Framework.DomainDriven.BLLCoreGenerator;
@@ -153,11 +148,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     protected virtual ICodeFileFactoryHeader<FileType> DefaultOperationSecurityDomainBLLBaseFileFactoryHeader { get; } =
 
         new CodeFileFactoryHeader<FileType>(FileType.DefaultOperationSecurityDomainBLLBase, string.Empty, _ => FileType.SecurityDomainBLLBase.ToString());
-
-    protected virtual ICodeFileFactoryHeader<FileType> SecurityPathFileFactoryHeader =>
-
-            FileType.SecurityPath.ToHeader(this.Environment.TargetSystemName);
-
+    
     protected virtual ICodeFileFactoryHeader<FileType> BLLInterfaceFileFactoryHeader { get; } =
 
         new CodeFileFactoryHeader<FileType>(FileType.BLLInterface, string.Empty, domainType => $"I{domainType.Name}BLL");
@@ -354,8 +345,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
                        this.DefaultOperationDomainBLLBaseFileFactoryHeader,
                        this.SecurityDomainBLLBaseFileFactoryHeader,
                        this.DefaultOperationSecurityDomainBLLBaseFileFactoryHeader,
-
-                       this.SecurityPathFileFactoryHeader,
 
                        this.BLLInterfaceFileFactoryHeader,
                        this.BLLFactoryInterfaceFileFactoryHeader,
@@ -680,7 +669,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         return true;
     }
 
-    public virtual bool GenerateDomainServiceConstructor([NotNull] Type domainType)
+    public virtual bool GenerateDomainServiceConstructor(Type domainType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
 

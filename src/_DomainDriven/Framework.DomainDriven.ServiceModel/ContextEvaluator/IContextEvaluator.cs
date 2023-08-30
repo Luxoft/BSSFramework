@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using Framework.DomainDriven.ServiceModel.Service;
+﻿using Framework.DomainDriven.ServiceModel.Service;
 
 namespace Framework.DomainDriven.ServiceModel;
 

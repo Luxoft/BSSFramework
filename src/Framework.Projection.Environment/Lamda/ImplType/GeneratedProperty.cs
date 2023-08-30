@@ -1,10 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 
 using Framework.Core;
-
-using JetBrains.Annotations;
 
 namespace Framework.Projection.Lambda;
 
@@ -21,7 +17,7 @@ internal class GeneratedProperty : BasePropertyInfoImpl
     private readonly PropertyMethodInfoImpl getMethod = new PropertyMethodInfoImpl();
 
 
-    public GeneratedProperty([NotNull] ProjectionLambdaEnvironment environment, [NotNull] IProjectionProperty projectionProperty, [NotNull] GeneratedType reflectedType)
+    public GeneratedProperty(ProjectionLambdaEnvironment environment, IProjectionProperty projectionProperty, GeneratedType reflectedType)
     {
         this.environment = environment ?? throw new ArgumentNullException(nameof(environment));
         this.projectionProperty = projectionProperty ?? throw new ArgumentNullException(nameof(projectionProperty));

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Framework.Configuration.Core;
+﻿using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;

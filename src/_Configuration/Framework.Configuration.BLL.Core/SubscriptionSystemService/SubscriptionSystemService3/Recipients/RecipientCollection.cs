@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-
-using JetBrains.Annotations;
+﻿using System.Collections;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 
@@ -26,7 +21,7 @@ public sealed class RecipientCollection : IEnumerable<Recipient>
     ///     Коллекция получателей уведомлений, которая будет использована для инициализации создаваемого экземпляра.
     /// </param>
     /// <exception cref="ArgumentNullException">Аргумент recipients равен null.</exception>
-    public RecipientCollection([NotNull] IEnumerable<Recipient> recipients)
+    public RecipientCollection(IEnumerable<Recipient> recipients)
     {
         if (recipients == null)
         {

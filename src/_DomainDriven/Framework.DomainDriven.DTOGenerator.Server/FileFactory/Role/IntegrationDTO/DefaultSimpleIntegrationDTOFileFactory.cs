@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.DTOGenerator.Server;
+﻿namespace Framework.DomainDriven.DTOGenerator.Server;
 
 public class DefaultSimpleIntegrationDTOFileFactory<TConfiguration> : IntegrationDTOFileFactory<TConfiguration>
         where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>

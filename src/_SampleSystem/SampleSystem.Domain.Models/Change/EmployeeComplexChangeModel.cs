@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace SampleSystem.Domain;
+﻿namespace SampleSystem.Domain;
 
 public class EmployeeComplexChangeModel : DomainObjectComplexChangeModel<Employee>
 {

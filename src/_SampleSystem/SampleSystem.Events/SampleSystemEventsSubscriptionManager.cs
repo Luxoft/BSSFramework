@@ -1,10 +1,6 @@
-﻿using System;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.Events;
-
-using JetBrains.Annotations;
 
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
@@ -16,8 +12,8 @@ public class SampleSystemEventsSubscriptionManager : EventsSubscriptionManagerBa
     private readonly ISampleSystemDTOMappingService mappingService;
 
     public SampleSystemEventsSubscriptionManager(
-            [NotNull] IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>> messageSender,
-            [NotNull] ISampleSystemDTOMappingService mappingService)
+            IMessageSender<IDomainOperationSerializeData<PersistentDomainObjectBase>> messageSender,
+            ISampleSystemDTOMappingService mappingService)
             : base(messageSender)
     {
         this.mappingService = mappingService ?? throw new ArgumentNullException(nameof(mappingService));

@@ -1,8 +1,4 @@
-﻿using System;
-
-using Framework.Core;
-
-namespace Framework.Validation;
+﻿namespace Framework.Validation;
 
 public abstract class ValidatorBase : IValidator
 {

@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 
-using Framework.DomainDriven.NHibernate;
+using Framework.DomainDriven;
 
 using NUnit.Framework;
 

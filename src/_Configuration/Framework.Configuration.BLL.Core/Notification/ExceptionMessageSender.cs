@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
+﻿using System.Net.Mail;
 
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.Validation;
-
-using JetBrains.Annotations;
 
 using Attachment = Framework.Notification.New.Attachment;
 
@@ -46,10 +41,10 @@ public class ExceptionMessageSender : BLLContextContainer<IConfigurationBLLConte
     /// <paramref name="toAddresses"/> равен null.
     /// </exception>
     public ExceptionMessageSender(
-            [NotNull] IConfigurationBLLContext context,
-            [NotNull] IMessageSender<Framework.Notification.New.Message> messageSender,
-            [NotNull] MailAddress fromAddress,
-            [NotNull] IEnumerable<string> toAddresses)
+            IConfigurationBLLContext context,
+            IMessageSender<Framework.Notification.New.Message> messageSender,
+            MailAddress fromAddress,
+            IEnumerable<string> toAddresses)
             : base(context)
     {
         if (toAddresses == null)

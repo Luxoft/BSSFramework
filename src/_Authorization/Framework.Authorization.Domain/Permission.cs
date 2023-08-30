@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Serialization;
+using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
 using Framework.SecuritySystem;
 using Framework.Transfering;
-
-using JetBrains.Annotations;
 
 namespace Framework.Authorization.Domain;
 
@@ -104,7 +98,7 @@ public partial class Permission : AuditPersistentDomainObjectBase,
     /// </summary>
     [UniqueGroup]
     public virtual IEnumerable<PermissionFilterItem> FilterItems => this.filterItems;
-        
+
     /// <summary>
     /// Коллекция пермиссий, которым данная пермиссия была делегирована
     /// </summary>
@@ -209,7 +203,7 @@ public partial class Permission : AuditPersistentDomainObjectBase,
     /// </summary>
     /// <param name="otherPermission">Другая пермиссия</param>
     /// <returns></returns>
-    public virtual bool IsDuplicate([NotNull] Permission otherPermission)
+    public virtual bool IsDuplicate(Permission otherPermission)
     {
         if (otherPermission == null) throw new ArgumentNullException(nameof(otherPermission));
 

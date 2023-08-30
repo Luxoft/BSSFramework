@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Automation.ServiceEnvironment;
+﻿using Automation.ServiceEnvironment;
 using Framework.Authorization.Domain;
 using Framework.Configuration.BLL;
 using Framework.Configuration.Domain;

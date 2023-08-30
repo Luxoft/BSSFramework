@@ -1,18 +1,11 @@
-﻿using System;
-
-using Framework.Core;
-using Framework.Validation;
-
-using Framework.DomainDriven.BLL;
+﻿using Framework.Validation;
 
 namespace SampleSystem.BLL;
 
 public class SampleSystemValidatorCompileCache : ValidatorCompileCache
 {
-    public SampleSystemValidatorCompileCache(IAvailableValues availableValues) :
-            base(availableValues
-                 .ToBLLContextValidationExtendedData<ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, Guid>()
-                 .Pipe(extendedValidationData => new SampleSystemValidationMap(extendedValidationData)))
+    public SampleSystemValidatorCompileCache(SampleSystemValidationMap sampleSystemValidationMap) :
+            base(sampleSystemValidationMap)
     {
     }
 }

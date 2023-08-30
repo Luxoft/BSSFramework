@@ -1,17 +1,12 @@
-﻿using System;
-using System.Linq;
-
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.Validation;
-
-using JetBrains.Annotations;
 
 namespace Framework.Authorization.BLL;
 
 public partial class AuthorizationValidator
 {
-    protected override ValidationResult GetPrincipalValidationResult([NotNull] Principal principal, AuthorizationOperationContext operationContext, IValidationState ownerState)
+    protected override ValidationResult GetPrincipalValidationResult(Principal principal, AuthorizationOperationContext operationContext, IValidationState ownerState)
     {
         if (principal == null) throw new ArgumentNullException(nameof(principal));
 
@@ -27,7 +22,7 @@ public partial class AuthorizationValidator
     /// </summary>
     /// <param name="principal">Проверяемый принципал</param>
     /// <returns></returns>
-    protected virtual ValidationResult GetUniquePermissionsValidationResult([NotNull] Principal principal)
+    protected virtual ValidationResult GetUniquePermissionsValidationResult(Principal principal)
     {
         if (principal == null) throw new ArgumentNullException(nameof(principal));
 

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
   <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -6,7 +6,7 @@
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="NHibernate" Version="5.4.1" />
+    <PackageReference Include="NHibernate" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.App.BLL\Framework.App.BLL.csproj" />

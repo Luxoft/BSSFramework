@@ -1,12 +1,8 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.CodeDom;
 
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.Transfering;
-
-using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
@@ -15,7 +11,7 @@ public class RemoveManyMethodGenerator<TConfiguration> : BaseRemoveMethodGenerat
 {
     private readonly RemoveMethodGenerator<TConfiguration> _singleRemoveGenerator;
 
-    public RemoveManyMethodGenerator([NotNull] RemoveMethodGenerator<TConfiguration> singleRemoveGenerator)
+    public RemoveManyMethodGenerator(RemoveMethodGenerator<TConfiguration> singleRemoveGenerator)
             : base(singleRemoveGenerator.Configuration, singleRemoveGenerator.DomainType)
     {
         if (singleRemoveGenerator == null) throw new ArgumentNullException(nameof(singleRemoveGenerator));

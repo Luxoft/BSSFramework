@@ -1,9 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Text;
+﻿using System.Text;
 using System.Xml.Linq;
-
-using JetBrains.Annotations;
 
 namespace Framework.Core;
 
@@ -12,7 +8,7 @@ public class XDocumentFileRenderer : IFileRenderer<XDocument, string>
     private readonly Func<StringBuilder, TextWriter> _createWriter;
 
 
-    public XDocumentFileRenderer([NotNull] Func<StringBuilder, TextWriter> createWriter)
+    public XDocumentFileRenderer(Func<StringBuilder, TextWriter> createWriter)
     {
         this._createWriter = createWriter ?? throw new ArgumentNullException(nameof(createWriter));
     }
@@ -27,7 +23,7 @@ public class XDocumentFileRenderer : IFileRenderer<XDocument, string>
     public string FileExtension => "xml";
 
 
-    public string Render([NotNull] XDocument document)
+    public string Render(XDocument document)
     {
         if (document == null) throw new ArgumentNullException(nameof(document));
 

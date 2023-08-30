@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Framework.Core;
-
-using JetBrains.Annotations;
+﻿using Framework.Core;
 
 namespace Framework.Projection.Lambda;
 
@@ -14,7 +9,7 @@ internal class GeneratedField : BaseFieldInfoImpl
     private readonly GeneratedProperty property;
 
 
-    public GeneratedField([NotNull] ProjectionLambdaEnvironment environment, [NotNull] GeneratedProperty property, GeneratedType reflectedType)
+    public GeneratedField(ProjectionLambdaEnvironment environment, GeneratedProperty property, GeneratedType reflectedType)
     {
         this.environment = environment ?? throw new ArgumentNullException(nameof(environment));
         this.property = property ?? throw new ArgumentNullException(nameof(property));

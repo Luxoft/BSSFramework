@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Authorization.BLL;
+﻿using Framework.Authorization.BLL;
 using Framework.Configurator.Interfaces;
 using Framework.Configurator.Models;
 using Framework.SecuritySystem;
@@ -37,6 +33,8 @@ public class GetPrincipalHandler : BaseReadHandler, IGetPrincipalHandler
                                      Id = x.Id,
                                      Role = x.Role.Name,
                                      Comment = x.Comment,
+                                     StartDate = x.Period.StartDate,
+                                     EndDate = x.Period.EndDate,
                                      Contexts = x.FilterItems
                                                  .Select(
                                                          f => new KeyValuePair<Guid, Guid>(
@@ -73,24 +71,26 @@ public class GetPrincipalHandler : BaseReadHandler, IGetPrincipalHandler
                                          Id = x.Id,
                                          Role = x.Role,
                                          Comment = x.Comment,
+                                         StartDate = x.StartDate,
+                                         EndDate = x.EndDate,
                                          Contexts = x.Contexts
                                                      .GroupBy(c => c.Key, c => c.Value)
                                                      .Select(
-                                                             g => new ContextDto
-                                                                  {
-                                                                          Id = g.Key,
-                                                                          Name = contexts[g.Key].Context,
-                                                                          Entities = g
-                                                                                     .Select(
-                                                                                      e => new EntityDto
-                                                                                          {
-                                                                                                  Id = e,
-                                                                                                  Name = contexts[g.Key]
-                                                                                                          .Entities[e]
-                                                                                          })
-                                                                                     .OrderBy(e => e.Name)
-                                                                                     .ToList()
-                                                                  })
+                                                         g => new ContextDto
+                                                              {
+                                                                  Id = g.Key,
+                                                                  Name = contexts[g.Key].Context,
+                                                                  Entities = g
+                                                                             .Select(
+                                                                                 e => new EntityDto
+                                                                                      {
+                                                                                          Id = e,
+                                                                                          Name = contexts[g.Key]
+                                                                                              .Entities[e]
+                                                                                      })
+                                                                             .OrderBy(e => e.Name)
+                                                                             .ToList()
+                                                              })
                                                      .OrderBy(c => c.Name)
                                                      .ToList()
                                  })
@@ -122,5 +122,9 @@ public class GetPrincipalHandler : BaseReadHandler, IGetPrincipalHandler
             get;
             set;
         }
+
+        public DateTime? EndDate { get; set; }
+
+        public DateTime StartDate { get; set; }
     }
 }

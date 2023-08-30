@@ -1,8 +1,4 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.CodeDom;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -55,7 +51,7 @@ public class ValidationMapBaseFileFactory<TConfiguration> : FileFactory<TConfigu
         yield return defaultValidatorMapField;
 
         {
-            var extendedValidationDataParam = typeof(IDynamicSource).ToTypeReference().ToParameterDeclarationExpression("extendedValidationData");
+            var extendedValidationDataParam = typeof(IServiceProvider).ToTypeReference().ToParameterDeclarationExpression("serviceProvider");
 
             yield return new CodeConstructor
                          {

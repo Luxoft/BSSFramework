@@ -1,6 +1,4 @@
-﻿using System;
-
-using SampleSystem.Domain;
+﻿using SampleSystem.Domain;
 
 namespace SampleSystem.CodeGenerate;
 

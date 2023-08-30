@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Net.Mail;
+﻿using System.Net.Mail;
 using Framework.Core;
 
 namespace Framework.Notification.New;

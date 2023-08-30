@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.BLL.Tracking;
+using Framework.DomainDriven.Tracking;
 using Framework.DomainDriven.UnitTest.Mock;
 using Framework.DomainDriven.UnitTest.Mock.StubProxy;
 using Framework.Validation;
@@ -56,7 +53,7 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
     public AuthorizationTestConfiguration WithTrackingChange(IObjectStateService objectStateService = null)
     {
         this.Context.TrackingService
-            .Returns(new TrackingService<PersistentDomainObjectBase>(objectStateService ?? Substitute.For<IObjectStateService>()))
+            .Returns(new TrackingService<PersistentDomainObjectBase>(objectStateService ?? Substitute.For<IObjectStateService>(), Substitute.For<IPersistentInfoService>()))
                 ;
 
         return this;

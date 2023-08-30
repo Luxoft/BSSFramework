@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-using Framework.Core;
+﻿using Framework.Core;
 
 namespace Framework.Validation;
 
@@ -60,12 +57,25 @@ public class ValidatorCompileCache
 
     private IClassValidationContext<TSource> CreateClassValidationContext<TSource>(IValidationContextBase<TSource> context, IValidationState ownerState, IClassValidationMap<TSource> map)
     {
-        return new ClassValidationContext<TSource>(context.Validator, context.OperationContext, context.Source, ownerState, map, this.validationMap.ExtendedValidationData.TryAdd(context.Validator as IExtendedValidationDataContainer));
+        return new ClassValidationContext<TSource>(
+            context.Validator,
+            context.OperationContext,
+            context.Source,
+            ownerState,
+            map,
+            (context.Validator as IServiceProviderContainer)?.ServiceProvider ?? this.validationMap.ServiceProvider);
     }
 
     private IPropertyValidationContext<TSource, TProperty> CreatePropertyValidationContext<TSource, TProperty>(IValidationContextBase<TSource> context, IValidationState ownerState, IPropertyValidationMap<TSource, TProperty> map, TProperty value)
     {
-        return new PropertyValidationContext<TSource, TProperty>(context.Validator, context.OperationContext, context.Source, ownerState, map, this.validationMap.ExtendedValidationData.TryAdd(context.Validator as IExtendedValidationDataContainer), value);
+        return new PropertyValidationContext<TSource, TProperty>(
+            context.Validator,
+            context.OperationContext,
+            context.Source,
+            ownerState,
+            map,
+            (context.Validator as IServiceProviderContainer)?.ServiceProvider ?? this.validationMap.ServiceProvider,
+            value);
     }
 
     private Func<IValidationContextBase<TSource>, ValidationResult> GetClassValidationFunc<TSource>(IClassValidationMap<TSource> classMap)

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-
-using JetBrains.Annotations;
+﻿using System.Collections.ObjectModel;
 
 namespace Framework.Core;
 
@@ -315,7 +310,7 @@ public static class EnumerableExtensions
         return source.Select(selector).ToReadOnlyCollection();
     }
 
-    public static IEnumerable<TResult> EmptyIfNull<TResult>([CanBeNull] this IEnumerable<TResult> source)
+    public static IEnumerable<TResult> EmptyIfNull<TResult>(this IEnumerable<TResult> source)
     {
         return source ?? Enumerable.Empty<TResult>();
     }

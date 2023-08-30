@@ -1,9 +1,6 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.CodeDom;
 
 using Framework.CodeDom;
-using Framework.Core;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 
@@ -41,7 +38,7 @@ public class ValidationMapFileFactory<TConfiguration> : FileFactory<TConfigurati
 
         {
             var extendedValidationDataParam =
-                    typeof(IDynamicSource).ToTypeReference().ToParameterDeclarationExpression("extendedValidationData");
+                    typeof(IServiceProvider).ToTypeReference().ToParameterDeclarationExpression("serviceProvider");
 
 
             yield return new CodeConstructor

@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
-
-using JetBrains.Annotations;
+﻿using Framework.Core;
 
 namespace Framework.Projection.Lambda;
 
 internal static class PropertyNodeValueExtensions
 {
-    public static IEnumerable<Node<ProjectionNodeValue>> ToNodes([NotNull] this IEnumerable<ProjectionPath> paths)
+    public static IEnumerable<Node<ProjectionNodeValue>> ToNodes(this IEnumerable<ProjectionPath> paths)
     {
         if (paths == null) throw new ArgumentNullException(nameof(paths));
 
@@ -29,7 +23,7 @@ internal static class PropertyNodeValueExtensions
                select new Node<ProjectionNodeValue>(currentNodeValue, g.Select(pair => new ProjectionPath(pair.SubPath, pair.LastProperty)).ToNodes());
     }
 
-    public static IEnumerable<ProjectionPath> ToPaths([NotNull] this Node<ProjectionNodeValue> node)
+    public static IEnumerable<ProjectionPath> ToPaths(this Node<ProjectionNodeValue> node)
     {
         if (node == null) throw new ArgumentNullException(nameof(node));
 

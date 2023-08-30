@@ -1,14 +1,10 @@
-﻿using System;
-
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
+﻿using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
+using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.Persistent;
 using Framework.Restriction;
 using Framework.Security;
 using Framework.SecuritySystem;
-
-using JetBrains.Annotations;
 
 namespace Framework.Authorization.Domain;
 
@@ -49,7 +45,7 @@ public partial class PermissionFilterItem : AuditPersistentDomainObjectBase, IDe
     /// </summary>
     /// <param name="permission">Пермиссия</param>
     /// <param name="entity">Контекст</param>
-    public PermissionFilterItem(Permission permission, [NotNull] PermissionFilterEntity entity)
+    public PermissionFilterItem(Permission permission, PermissionFilterEntity entity)
             : this(permission)
     {
         this.entity = entity ?? throw new ArgumentNullException(nameof(entity));

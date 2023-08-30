@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
 using Framework.Core;
-using Framework.Validation;
 
-namespace Framework.DomainDriven;
+namespace Framework.DomainDriven.DALExceptions;
 
 public class RemoveLinkedObjectsDALException : DALException<LinkedObjects>
 {
@@ -18,11 +14,6 @@ public class RemoveLinkedObjectsDALException : DALException<LinkedObjects>
     }
 
     public override string Message => $"{this.Args.Target.Name} cannot be removed because it is used in {this.Args.Source.Name}";
-
-    public override ValidationException Convert()
-    {
-        return new ValidationException(this.Message);
-    }
 }
 
 public struct DomainObjectInfo
@@ -43,12 +34,12 @@ public struct UniqueConstraint
 {
     private static readonly Regex FieldNameRegex = new Regex("(\\S*)Id");
 
-    public UniqueConstraint(DomainObjectInfo domainObjectInfo, string name, IEnumerable<string> properties)
+    public UniqueConstraint(DomainObjectInfo domainObjectInfo, string name, IEnumerable<string> properties, IDalValidationIdentitySource validationIdentitySource)
             : this()
     {
         this.Name = name;
         this.ObjectInfo = domainObjectInfo;
-        this.Properties = properties.Select(x => GetName(domainObjectInfo.Type.GetProperties(), x.Trim('[', ']'))).ToReadOnlyCollection();
+        this.Properties = properties.Select(x => GetName(domainObjectInfo.Type.GetProperties(), x.Trim('[', ']'), validationIdentitySource)).ToReadOnlyCollection();
     }
 
     public DomainObjectInfo ObjectInfo { get; }
@@ -57,11 +48,11 @@ public struct UniqueConstraint
 
     public ReadOnlyCollection<string> Properties { get; }
 
-    private static string GetName(ICollection<PropertyInfo> properties, string columnName)
+    private static string GetName(ICollection<PropertyInfo> properties, string columnName, IDalValidationIdentitySource validationIdentitySource)
     {
         var property = properties.FirstOrDefault(x => string.Equals(x.Name, GetFieldName(columnName), StringComparison.InvariantCultureIgnoreCase));
 
-        return property != null ? property.GetValidationName() : columnName;
+        return property != null ? validationIdentitySource.GetPropertyValidationName(property) : columnName;
     }
 
     private static string GetFieldName(string columnName)

@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
-
-using JetBrains.Annotations;
+﻿using Framework.Core;
 
 namespace Framework.Projection.Lambda;
 
 internal static class ProjectionExtensions
 {
-    public static T GetSecurityProjection<T>([NotNull] this IEnumerable<T> source, [NotNull] Type arg)
+    public static T GetSecurityProjection<T>(this IEnumerable<T> source, Type arg)
             where T : IProjection
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
@@ -19,7 +13,7 @@ internal static class ProjectionExtensions
         return source.GetProjectionByRole(arg, ProjectionRole.SecurityNode);
     }
 
-    public static T GetProjectionByRole<T>([NotNull] this IEnumerable<T> source, [NotNull] Type sourceType, ProjectionRole role)
+    public static T GetProjectionByRole<T>(this IEnumerable<T> source, Type sourceType, ProjectionRole role)
             where T : IProjection
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
@@ -39,7 +33,7 @@ internal static class ProjectionExtensions
         return allProjections;
     }
 
-    private static void FillProjectionList([NotNull] this IProjection projection, HashSet<IProjection> allProjections)
+    private static void FillProjectionList(this IProjection projection, HashSet<IProjection> allProjections)
     {
         if (projection == null) throw new ArgumentNullException(nameof(projection));
         if (allProjections == null) throw new ArgumentNullException(nameof(allProjections));

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven;
 
@@ -10,7 +6,7 @@ public class DBSessionEvaluator : IDBSessionEvaluator
 {
     private readonly IServiceProvider rootServiceProvider;
 
-    public DBSessionEvaluator([NotNull] IServiceProvider rootServiceProvider)
+    public DBSessionEvaluator(IServiceProvider rootServiceProvider)
     {
         this.rootServiceProvider = rootServiceProvider ?? throw new ArgumentNullException(nameof(rootServiceProvider));
     }

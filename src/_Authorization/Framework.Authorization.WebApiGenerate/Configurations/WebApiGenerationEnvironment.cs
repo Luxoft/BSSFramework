@@ -1,5 +1,4 @@
-﻿using System;
-using Framework.Authorization.TestGenerate;
+﻿using Framework.Authorization.TestGenerate;
 
 namespace Framework.Authorization.WebApiGenerate;
 

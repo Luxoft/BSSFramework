@@ -21,16 +21,16 @@ namespace SampleSystem.WebApiCore.Controllers.Main;
 [ApiController]
 public class NoSecurityController : ControllerBase
 {
-    private readonly IRepositoryFactory<NoSecurityObject, Guid, SampleSystemSecurityOperationCode> repositoryFactory;
+    private readonly IRepositoryFactory<NoSecurityObject> repositoryFactory;
 
-    public NoSecurityController(IRepositoryFactory<NoSecurityObject, Guid, SampleSystemSecurityOperationCode> repositoryFactory)
+    public NoSecurityController(IRepositoryFactory<NoSecurityObject> repositoryFactory)
     {
         this.repositoryFactory = repositoryFactory;
     }
 
 
     [DBSessionMode(DBSessionMode.Write)]
-    [HttpPost(nameof(TestSave))]
+    [HttpPost(nameof(TestFaultSave))]
     public async Task<NoSecurityObjectIdentityDTO> TestFaultSave(CancellationToken cancellationToken = default)
     {
         var repository = this.repositoryFactory.Create(BLLSecurityMode.Edit);

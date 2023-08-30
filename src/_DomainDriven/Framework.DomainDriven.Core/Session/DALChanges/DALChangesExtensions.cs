@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
-
-using JetBrains.Annotations;
 
 namespace Framework.DomainDriven;
 
 public static class DALChangesExtensions
 {
-    public static DALChanges<TResult> Select<TSource, TResult>([NotNull] this DALChanges<TSource> source, [NotNull] Func<TSource, TResult> selector)
+    public static DALChanges<TResult> Select<TSource, TResult>(this DALChanges<TSource> source, Func<TSource, TResult> selector)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (selector == null) throw new ArgumentNullException(nameof(selector));
@@ -19,7 +13,7 @@ public static class DALChangesExtensions
         return new DALChanges<TResult>(source.CreatedItems.Select(selector), source.UpdatedItems.Select(selector), source.RemovedItems.Select(selector));
     }
 
-    public static DALChanges<T> Where<T>([NotNull] this DALChanges<T> source, [NotNull] Func<T, bool> filter)
+    public static DALChanges<T> Where<T>(this DALChanges<T> source, Func<T, bool> filter)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
         if (filter == null) throw new ArgumentNullException(nameof(filter));
@@ -27,7 +21,7 @@ public static class DALChangesExtensions
         return new DALChanges<T>(source.CreatedItems.Where(filter), source.UpdatedItems.Where(filter), source.RemovedItems.Where(filter));
     }
 
-    public static Dictionary<T, DALObjectChangeType> ToChangeTypeDict<T>([NotNull] this DALChanges<T> source)
+    public static Dictionary<T, DALObjectChangeType> ToChangeTypeDict<T>(this DALChanges<T> source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
@@ -38,7 +32,7 @@ public static class DALChangesExtensions
         return request.ToDictionary(pair => pair.Key, pair => pair.Value);
     }
 
-    public static IEnumerable<TupleStruct<T, DALObjectChangeType>> ToPlainValues<T>([NotNull] this DALChanges<T> source)
+    public static IEnumerable<TupleStruct<T, DALObjectChangeType>> ToPlainValues<T>(this DALChanges<T> source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 

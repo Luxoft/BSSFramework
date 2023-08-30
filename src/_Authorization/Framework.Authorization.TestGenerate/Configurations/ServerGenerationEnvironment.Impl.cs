@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Authorization.TestGenerate;
+﻿namespace Framework.Authorization.TestGenerate;
 
 public partial class ServerGenerationEnvironment :
 

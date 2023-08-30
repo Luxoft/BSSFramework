@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Authorization.BLL;
+﻿namespace Framework.Authorization.BLL;
 
 [Flags]
 public enum InitSecurityOperationMode

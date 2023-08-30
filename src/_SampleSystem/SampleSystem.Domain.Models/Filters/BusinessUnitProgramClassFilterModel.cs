@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SampleSystem.Domain.Models.Filters;
+﻿namespace SampleSystem.Domain.Models.Filters;
 
 public class BusinessUnitProgramClassFilterModel : DomainObjectBase
 {

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Cap</PackageId>
   </PropertyGroup>
@@ -6,16 +6,14 @@
     <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DotNetCore.CAP" Version="7.1.0" />
-    <PackageReference Include="DotNetCore.CAP.Dashboard" Version="7.1.0" />
-    <PackageReference Include="DotNetCore.CAP.SqlServer" Version="7.1.0" />
-    <PackageReference Include="Savorboard.CAP.InMemoryMessageQueue" Version="7.0.0" />
-    <PackageReference Include="MediatR" Version="12.0.1" />
+    <PackageReference Include="DotNetCore.CAP" />
+    <PackageReference Include="DotNetCore.CAP.Dashboard" />
+    <PackageReference Include="DotNetCore.CAP.SqlServer" />
+    <PackageReference Include="Savorboard.CAP.InMemoryMessageQueue" />
+    <PackageReference Include="MediatR" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\_Authorization\Framework.Authorization.BLL.Core\Framework.Authorization.BLL.Core.csproj" />
-    <ProjectReference Include="..\_Authorization\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
-    <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.ServiceModel\Framework.DomainDriven.ServiceModel.csproj" />
+    <ProjectReference Include="..\_DomainDriven\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
   </ItemGroup>
 </Project>

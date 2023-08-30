@@ -6,7 +6,7 @@
 //using Framework.Restriction;
 //using Framework.SecuritySystem;
 
-//using JetBrains.Annotations;
+//
 
 //namespace Framework.Authorization.Domain;
 
@@ -33,7 +33,7 @@
 //    /// Конструктор создает контекст с ссылкой на пермиссию
 //    /// </summary>
 //    /// <param name="permission">Пермиссия</param>
-//    public DenormalizedPermissionItem(Permission permission, [NotNull] EntityType entityType, Guid entityId)
+//    public DenormalizedPermissionItem(Permission permission, EntityType entityType, Guid entityId)
 //    {
 //        this.permission = permission ?? throw new ArgumentNullException(nameof(permission));
 //        this.entityType = entityType ?? throw new ArgumentNullException(nameof(entityType));

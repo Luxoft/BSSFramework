@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Mail;
+﻿using System.Net.Mail;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -12,10 +8,9 @@ using Framework.Configuration.Domain;
 using Framework.Configuration.SubscriptionModeling;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.DAL.Revisions;
 using Framework.Notification;
 
-using JetBrains.Annotations;
+
 
 using MAttachment = System.Net.Mail.Attachment;
 
@@ -284,7 +279,6 @@ public class MessageTemplateBLL : BLLContextContainer<IConfigurationBLLContext>
         return result;
     }
 
-    [UsedImplicitly]
     private IRazorTemplate GetRazorTemplate<TSourceDomainObjectType, TModelObjectType>(MessageTemplateNotification messageTemplate)
             where TModelObjectType : class
     {

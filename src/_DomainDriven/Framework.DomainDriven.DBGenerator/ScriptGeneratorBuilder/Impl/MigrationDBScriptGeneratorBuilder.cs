@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.DBGenerator.Contracts;
 using Framework.DomainDriven.DBGenerator.Team;
-
-using JetBrains.Annotations;
 
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
@@ -73,7 +67,7 @@ internal class MigrationDBScriptGeneratorBuilder : IMigrationScriptGeneratorBuil
         private readonly string _tableName;
 
         public DatabaseScriptGeneratorAdapter(
-                [NotNull] IMigrationScriptReader migrationScriptReader,
+                IMigrationScriptReader migrationScriptReader,
                 string tableName)
         {
             if (migrationScriptReader == null)

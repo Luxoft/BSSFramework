@@ -1,19 +1,14 @@
-﻿using System;
-using System.CodeDom;
+﻿using System.CodeDom;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
 
 using Framework.Core;
-
-using JetBrains.Annotations;
 
 namespace Framework.CodeDom;
 
 public static class EnumerableExtensions
 {
-    internal static void CopyUserDataFrom([NotNull] this CodeObject targetCodeObject, [NotNull] CodeObject sourceCodeObject)
+    internal static void CopyUserDataFrom(this CodeObject targetCodeObject, CodeObject sourceCodeObject)
     {
         if (targetCodeObject == null) throw new ArgumentNullException(nameof(targetCodeObject));
         if (sourceCodeObject == null) throw new ArgumentNullException(nameof(sourceCodeObject));
@@ -21,7 +16,7 @@ public static class EnumerableExtensions
         targetCodeObject.UserData.CopyFrom(sourceCodeObject.UserData);
     }
 
-    internal static T WithCopyUserDataFrom<T>([NotNull] this T targetCodeObject, [NotNull] T sourceCodeObject)
+    internal static T WithCopyUserDataFrom<T>(this T targetCodeObject, T sourceCodeObject)
             where T : CodeObject
     {
         if (targetCodeObject == null) throw new ArgumentNullException(nameof(targetCodeObject));
@@ -34,7 +29,7 @@ public static class EnumerableExtensions
 
 
 
-    internal static void CopyFrom([NotNull] this IDictionary targetDictionary, [NotNull] IDictionary sourceDictionary)
+    internal static void CopyFrom(this IDictionary targetDictionary, IDictionary sourceDictionary)
     {
         if (targetDictionary == null) throw new ArgumentNullException(nameof(targetDictionary));
         if (sourceDictionary == null) throw new ArgumentNullException(nameof(sourceDictionary));
@@ -45,7 +40,7 @@ public static class EnumerableExtensions
         }
     }
 
-    public static void AddComments([NotNull] this CodeCommentStatementCollection collection, [NotNull] IEnumerable<string> comments, bool docComment = true, bool summary = true)
+    public static void AddComments(this CodeCommentStatementCollection collection, IEnumerable<string> comments, bool docComment = true, bool summary = true)
     {
         if (collection == null) throw new ArgumentNullException(nameof(collection));
         if (comments == null) throw new ArgumentNullException(nameof(comments));

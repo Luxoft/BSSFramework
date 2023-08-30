@@ -1,9 +1,7 @@
-﻿using System;
-
-using Framework.Configuration.Core;
+﻿using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 
-using JetBrains.Annotations;
+
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 
@@ -34,7 +32,7 @@ public class ConditionLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLContext
     /// или
     /// versions равен null.
     /// </exception>
-    public virtual bool Invoke<T>([NotNull] Subscription subscription, [NotNull] DomainObjectVersions<T> versions)
+    public virtual bool Invoke<T>(Subscription subscription, DomainObjectVersions<T> versions)
             where T : class
     {
         if (subscription == null)
@@ -68,8 +66,6 @@ public class ConditionLambdaProcessor<TBLLContext> : LambdaProcessor<TBLLContext
         return result;
     }
 
-
-    [UsedImplicitly]
     private bool InvokeWithTypedContext<T>(
             Subscription subscription,
             DomainObjectVersions<T> versions)

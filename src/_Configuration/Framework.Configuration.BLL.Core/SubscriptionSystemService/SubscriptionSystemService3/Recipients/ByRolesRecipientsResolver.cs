@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
+﻿using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
-
-using JetBrains.Annotations;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 
@@ -37,8 +32,8 @@ public class ByRolesRecipientsResolver<TBLLContext>
     /// lambdaProcessorFactory равен null.
     /// </exception>
     public ByRolesRecipientsResolver(
-            [NotNull] ConfigurationContextFacade configurationContextFacade,
-            [NotNull] LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
+            ConfigurationContextFacade configurationContextFacade,
+            LambdaProcessorFactory<TBLLContext> lambdaProcessorFactory)
     {
         this.configurationContextFacade = configurationContextFacade ?? throw new ArgumentNullException(nameof(configurationContextFacade));
         this.lambdaProcessorFactory = lambdaProcessorFactory ?? throw new ArgumentNullException(nameof(lambdaProcessorFactory));
@@ -55,8 +50,8 @@ public class ByRolesRecipientsResolver<TBLLContext>
     /// versions равен null.
     /// </exception>
     public virtual RecipientCollection Resolve<T>(
-            [NotNull] Subscription subscription,
-            [NotNull] DomainObjectVersions<T> versions)
+            Subscription subscription,
+            DomainObjectVersions<T> versions)
             where T : class
     {
         if (subscription == null)

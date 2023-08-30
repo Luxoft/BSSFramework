@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-
-using JetBrains.Annotations;
+﻿using System.Linq.Expressions;
 
 namespace Framework.Core;
 
@@ -21,7 +17,7 @@ public static class ExpressionHelper
         return Expression.Lambda<Func<T, T, bool>>(Expression.Equal(p1, p2), p1, p2);
     }
 
-    public static MemberExpression PropertyOrFieldAuto(Expression expr, [NotNull] string memberName)
+    public static MemberExpression PropertyOrFieldAuto(Expression expr, string memberName)
     {
         if (expr == null) throw new ArgumentNullException(nameof(expr));
         if (memberName == null) throw new ArgumentNullException(nameof(memberName));

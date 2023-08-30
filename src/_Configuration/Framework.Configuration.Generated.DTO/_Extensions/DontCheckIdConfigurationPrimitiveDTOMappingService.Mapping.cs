@@ -1,7 +1,4 @@
-﻿using System;
-
-using Framework.DomainDriven.BLL;
-using Framework.Configuration.BLL;
+﻿using Framework.Configuration.BLL;
 using Framework.DomainDriven;
 
 namespace Framework.Configuration.Generated.DTO;

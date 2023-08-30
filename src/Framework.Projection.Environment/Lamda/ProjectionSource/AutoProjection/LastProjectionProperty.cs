@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Projection.Lambda;
+﻿namespace Framework.Projection.Lambda;
 
 internal class LastProjectionProperty
 {

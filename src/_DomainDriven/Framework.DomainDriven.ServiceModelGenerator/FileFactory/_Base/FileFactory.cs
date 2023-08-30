@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Framework.DomainDriven.Generation.Domain;
+﻿using Framework.DomainDriven.Generation.Domain;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 

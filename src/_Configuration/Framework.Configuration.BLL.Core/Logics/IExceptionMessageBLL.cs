@@ -1,7 +1,4 @@
-﻿using System;
-using Framework.Configuration.Domain;
-
-namespace Framework.Configuration.BLL;
+﻿namespace Framework.Configuration.BLL;
 
 public partial interface IExceptionMessageBLL
 {

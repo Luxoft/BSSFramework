@@ -1,16 +1,11 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.CodeDom;
 
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.DTOGenerator;
 using Framework.DomainDriven.DTOGenerator.Audit;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.ServiceModel.Service;
-using Framework.Persistent;
 using Framework.Transfering;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Linq;
-
-using Framework.Core;
-using Framework.Persistent;
+﻿using Framework.Core;
 using Framework.Configuration.Domain;
 using Framework.DomainDriven.BLL;
-using Framework.Validation;
-using Framework.Exceptions;
 
 namespace Framework.Configuration.BLL;
 

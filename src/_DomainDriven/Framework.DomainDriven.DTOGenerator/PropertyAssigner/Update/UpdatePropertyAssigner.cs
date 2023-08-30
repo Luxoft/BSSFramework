@@ -1,5 +1,4 @@
-﻿using System;
-using System.CodeDom;
+﻿using System.CodeDom;
 using System.Reflection;
 
 using Framework.CodeDom;
@@ -81,7 +80,7 @@ public class UpdatePropertyAssigner<TConfiguration> : PropertyAssigner<TConfigur
 
         var extractMethodExpr = this.MappingServiceRefExpr.ToMethodReferenceExpression(extractMethodName, sourceElementTypeRef, targetElementIdentityTypeRef, targetElementTypeRef)
                                     .ToMethodInvokeExpression(sourcePropertyRef, lambda);
-            
+
         return extractMethodExpr.ToAssignStatement(targetPropertyRef);
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.DomainDriven.DTOGenerator.Audit;
+﻿using Framework.DomainDriven.DTOGenerator.Audit;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 

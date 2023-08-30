@@ -1,14 +1,9 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.CodeDom;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
 using Framework.Core;
-
-using JetBrains.Annotations;
 
 namespace Framework.CodeDom;
 
@@ -56,7 +51,7 @@ public static class CodeTypeReferenceExtensions
         return new CodeTypeReference(typeof(Just<>)) { TypeArguments = { typeArgument } };
     }
 
-    public static CodeExpression ToJustCodeExpression([NotNull] this CodeExpression sourceExpression, CodeTypeReference typeArgument)
+    public static CodeExpression ToJustCodeExpression(this CodeExpression sourceExpression, CodeTypeReference typeArgument)
     {
         if (sourceExpression == null) { throw new ArgumentNullException(nameof(sourceExpression)); }
         if (typeArgument == null) throw new ArgumentNullException(nameof(typeArgument));
@@ -151,7 +146,7 @@ public static class CodeTypeReferenceExtensions
 
 
 
-    public static CodeTypeReference ToTypeReference(this Type type, [NotNull] params CodeTypeReference[] typeArguments)
+    public static CodeTypeReference ToTypeReference(this Type type, params CodeTypeReference[] typeArguments)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (typeArguments == null) throw new ArgumentNullException(nameof(typeArguments));
@@ -159,14 +154,14 @@ public static class CodeTypeReferenceExtensions
         return new CodeTypeReference(type).Self(v => v.TypeArguments.AddRange(typeArguments));
     }
 
-    public static CodeTypeReference ToTypeReference(this Type type, [NotNull] Type typeArgument)
+    public static CodeTypeReference ToTypeReference(this Type type, Type typeArgument)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
         return type.ToTypeReference(typeArgument.ToTypeReference());
     }
 
-    public static CodeTypeReference ToTypeReference(this Type type, [NotNull] Type typeArgument1, [NotNull] Type typeArgument2)
+    public static CodeTypeReference ToTypeReference(this Type type, Type typeArgument1, Type typeArgument2)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (typeArgument2 == null) throw new ArgumentNullException(nameof(typeArgument2));
@@ -175,7 +170,7 @@ public static class CodeTypeReferenceExtensions
     }
 
 
-    public static CodeTypeReference ToTypeReference(this Type type, [NotNull] Type[] typeArguments)
+    public static CodeTypeReference ToTypeReference(this Type type, Type[] typeArguments)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
@@ -421,7 +416,7 @@ public static class CodeTypeReferenceExtensions
 
 
 
-    public static CodeStatement ToResultStatement(this CodeExpression expression, [NotNull] CodeTypeReference returnType)
+    public static CodeStatement ToResultStatement(this CodeExpression expression, CodeTypeReference returnType)
     {
         if (expression == null) throw new ArgumentNullException(nameof(expression));
         if (returnType == null) throw new ArgumentNullException(nameof(returnType));
@@ -540,7 +535,7 @@ public static class CodeTypeReferenceExtensions
         return value is bool b && b;
     }
 
-    public static CodeMemberMethod MarkAsExtension([NotNull] this CodeMemberMethod method)
+    public static CodeMemberMethod MarkAsExtension(this CodeMemberMethod method)
     {
         if (method == null) throw new ArgumentNullException(nameof(method));
 
@@ -549,7 +544,7 @@ public static class CodeTypeReferenceExtensions
         return method;
     }
 
-    public static CodeMemberMethod UnmarkAsExtension([NotNull] this CodeMemberMethod method)
+    public static CodeMemberMethod UnmarkAsExtension(this CodeMemberMethod method)
     {
         if (method == null) throw new ArgumentNullException(nameof(method));
 

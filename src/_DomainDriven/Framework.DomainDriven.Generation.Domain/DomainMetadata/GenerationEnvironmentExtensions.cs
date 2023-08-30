@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-
-using Framework.Projection;
+﻿using Framework.Projection;
 using Framework.Security;
 
 namespace Framework.DomainDriven.Generation.Domain;

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Framework.DomainDriven.DBGenerator.Contracts;
+﻿using Framework.DomainDriven.DBGenerator.Contracts;
 using Framework.DomainDriven.DBGenerator.Team;
 using Framework.DomainDriven.NHibernate;
 

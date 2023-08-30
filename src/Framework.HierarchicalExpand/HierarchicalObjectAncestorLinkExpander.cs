@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 using Framework.Core;
 using Framework.Persistent;
 using Framework.QueryableSource;
-
-using JetBrains.Annotations;
 
 namespace Framework.HierarchicalExpand;
 
@@ -20,7 +15,7 @@ public class HierarchicalObjectAncestorLinkExpander<TPersistentDomainObjectBase,
 {
     private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
 
-    public HierarchicalObjectAncestorLinkExpander([NotNull] IQueryableSource<TPersistentDomainObjectBase> queryableSource)
+    public HierarchicalObjectAncestorLinkExpander(IQueryableSource<TPersistentDomainObjectBase> queryableSource)
     {
         this.queryableSource = queryableSource ?? throw new ArgumentNullException(nameof(queryableSource));
     }

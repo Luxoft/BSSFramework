@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using System.Reflection;
-
-using JetBrains.Annotations;
 
 namespace Framework.Core;
 
 public static class CoreExpressionExtensions
 {
-    public static PropertyPath ToPropertyPath([NotNull] this LambdaExpression source)
+    public static PropertyPath ToPropertyPath(this LambdaExpression source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 

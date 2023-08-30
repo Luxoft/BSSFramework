@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-using Framework.Core;
+﻿using Framework.Core;
 
 using NHibernate.Engine;
 using NHibernate.Envers.Event;

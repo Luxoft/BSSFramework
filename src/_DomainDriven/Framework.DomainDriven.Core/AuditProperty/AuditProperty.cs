@@ -1,13 +1,10 @@
-﻿using System;
-using System.Linq.Expressions;
-
-using JetBrains.Annotations;
+﻿using System.Linq.Expressions;
 
 namespace Framework.DomainDriven.Audit;
 
 public class AuditProperty<TDomainObject, TProperty> : IAuditProperty<TDomainObject, TProperty>
 {
-    public AuditProperty([NotNull] Expression<Func<TDomainObject, TProperty>> propertyExpr, [NotNull] Func<TProperty> getCurrentValue)
+    public AuditProperty(Expression<Func<TDomainObject, TProperty>> propertyExpr, Func<TProperty> getCurrentValue)
     {
         if (propertyExpr == null) throw new ArgumentNullException(nameof(propertyExpr));
         if (getCurrentValue == null) throw new ArgumentNullException(nameof(getCurrentValue));

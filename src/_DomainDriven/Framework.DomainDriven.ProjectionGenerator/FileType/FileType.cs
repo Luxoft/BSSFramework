@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.ProjectionGenerator;
+﻿namespace Framework.DomainDriven.ProjectionGenerator;
 
 /// <summary>
 /// Тип проекции

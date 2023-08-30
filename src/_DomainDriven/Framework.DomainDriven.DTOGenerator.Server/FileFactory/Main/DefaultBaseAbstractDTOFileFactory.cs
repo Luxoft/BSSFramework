@@ -1,9 +1,4 @@
-﻿using System.CodeDom;
-using System.Reflection;
-
-using Framework.DomainDriven.Generation.Domain;
-
-namespace Framework.DomainDriven.DTOGenerator.Server;
+﻿namespace Framework.DomainDriven.DTOGenerator.Server;
 
 public class DefaultBaseAbstractDTOFileFactory<TConfiguration> : MainDTOFileFactory<TConfiguration>
         where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>

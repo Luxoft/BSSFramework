@@ -3,7 +3,6 @@
 @using Framework.Configuration.SubscriptionModeling
 @using SampleSystem.Domain
 @using SampleSystem.Subscriptions.Metadata.Examples.Attachment
-@using SampleSystem.Subscriptions.Metadata.Examples.AttachmentInline
 @inherits RazorTemplate<Employee>
 @functions {
     public override string Subject => $"Employee {Current.NameNative} has been changed. Inline attach test";

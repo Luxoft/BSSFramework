@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.DomainDriven.Core.LegacyContext</PackageId>
+    <RootNamespace>Framework.DomainDriven</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="nuSpec.Abstraction" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework.OData\Framework.OData.csproj" />
+    <ProjectReference Include="..\..\Framework.Projection\Framework.Projection.csproj" />
+    <ProjectReference Include="..\..\Framework.Transfering\Framework.Transfering.csproj" />
+    <ProjectReference Include="..\..\Framework.Validation\Framework.Validation.csproj" />
+
+    <ProjectReference Include="..\Framework.DomainDriven.Core\Framework.DomainDriven.Core.csproj" />
+    <ProjectReference Include="..\Framework.DomainDriven.Serialization\Framework.DomainDriven.Serialization.csproj" />
+    <ProjectReference Include="..\Framework.DomainDriven.Tracking\Framework.DomainDriven.Tracking.csproj" />
+  </ItemGroup>
+
+</Project>

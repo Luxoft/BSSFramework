@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -10,8 +7,6 @@ using Framework.Persistent;
 using Framework.Projection;
 using Framework.Projection.Contract;
 using Framework.Projection.Lambda;
-
-using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.Generation.Domain;
 
@@ -120,7 +115,7 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
     /// </summary>
     /// <param name="projectionSource"></param>
     /// <returns></returns>
-    protected IProjectionEnvironment CreateDefaultProjectionLambdaEnvironment([NotNull] IProjectionSource projectionSource, CreateProjectionLambdaSetupParams createParams)
+    protected IProjectionEnvironment CreateDefaultProjectionLambdaEnvironment(IProjectionSource projectionSource, CreateProjectionLambdaSetupParams createParams)
     {
         if (projectionSource == null) throw new ArgumentNullException(nameof(projectionSource));
         if (createParams == null) throw new ArgumentNullException(nameof(createParams));
@@ -141,7 +136,7 @@ public abstract class GenerationEnvironment<TDomainObjectBase, TPersistentDomain
     /// </summary>
     /// <param name="projectionSource"></param>
     /// <returns></returns>
-    protected IProjectionEnvironment CreateDefaultProjectionLambdaEnvironment([NotNull] IProjectionSource projectionSource, Action<CreateProjectionLambdaSetupParams> setupAction = null)
+    protected IProjectionEnvironment CreateDefaultProjectionLambdaEnvironment(IProjectionSource projectionSource, Action<CreateProjectionLambdaSetupParams> setupAction = null)
     {
         if (projectionSource == null) { throw new ArgumentNullException(nameof(projectionSource)); }
 

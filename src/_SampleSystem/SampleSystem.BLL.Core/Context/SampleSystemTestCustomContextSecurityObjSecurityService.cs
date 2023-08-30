@@ -1,5 +1,4 @@
-﻿using Framework.DomainDriven.BLL.Security;
-using Framework.SecuritySystem;
+﻿using Framework.SecuritySystem;
 
 using SampleSystem.Domain;
 

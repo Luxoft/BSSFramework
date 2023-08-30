@@ -1,8 +1,4 @@
-﻿using System;
-
-using Framework.Persistent;
-
-using JetBrains.Annotations;
+﻿using Framework.Persistent;
 
 namespace SampleSystem.Domain;
 
@@ -18,7 +14,7 @@ public class TestItemAuthObject : AuditPersistentDomainObjectBase, IDetail<TestP
     {
     }
 
-    public TestItemAuthObject([NotNull] TestPlainAuthObject master)
+    public TestItemAuthObject(TestPlainAuthObject master)
     {
         this.master = master ?? throw new ArgumentNullException(nameof(master));
         this.master.AddDetail(this);

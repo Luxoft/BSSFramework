@@ -1,13 +1,9 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
 using Automation.ServiceEnvironment.Services;
 
 using Framework.Core;
 using Framework.DomainDriven.WebApiNetCore;
-
-using JetBrains.Annotations;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,12 +18,12 @@ public class ControllerEvaluator<TController>
 
     private readonly string customPrincipalName;
 
-    public ControllerEvaluator([NotNull] IServiceProvider rootServiceProvider)
+    public ControllerEvaluator(IServiceProvider rootServiceProvider)
             : this(rootServiceProvider, null)
     {
     }
 
-    private ControllerEvaluator([NotNull] IServiceProvider rootServiceProvider, string customPrincipalName)
+    private ControllerEvaluator(IServiceProvider rootServiceProvider, string customPrincipalName)
     {
         this.rootServiceProvider = rootServiceProvider ?? throw new ArgumentNullException(nameof(rootServiceProvider));
         this.customPrincipalName = customPrincipalName;
@@ -88,7 +84,7 @@ public class ControllerEvaluator<TController>
         context.Items["Result"] = res;
     }
 
-    public ControllerEvaluator<TController> WithImpersonate([CanBeNull] string newCustomPrincipalName)
+    public ControllerEvaluator<TController> WithImpersonate(string newCustomPrincipalName)
     {
         return new ControllerEvaluator<TController>(this.rootServiceProvider, newCustomPrincipalName);
     }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-
-using JetBrains.Annotations;
+﻿using System.Linq.Expressions;
 
 namespace Framework.Core;
 
@@ -17,7 +12,7 @@ public static class ExpressionVisitorExtensions
         return new[] { visitor }.Concat(otherVisitors).ToComposite();
     }
 
-    public static ExpressionVisitor ToComposite([NotNull] this IEnumerable<ExpressionVisitor> visitors)
+    public static ExpressionVisitor ToComposite(this IEnumerable<ExpressionVisitor> visitors)
     {
         if (visitors == null) throw new ArgumentNullException(nameof(visitors));
 

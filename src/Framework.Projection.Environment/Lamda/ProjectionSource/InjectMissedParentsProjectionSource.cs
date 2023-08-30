@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
-
-using JetBrains.Annotations;
 
 namespace Framework.Projection.Lambda;
 
@@ -15,7 +9,7 @@ internal class InjectMissedParentsProjectionSource : IProjectionSource
     private readonly IProjectionSource baseSource;
 
 
-    public InjectMissedParentsProjectionSource([NotNull] IProjectionSource baseSource)
+    public InjectMissedParentsProjectionSource(IProjectionSource baseSource)
     {
         this.baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
     }

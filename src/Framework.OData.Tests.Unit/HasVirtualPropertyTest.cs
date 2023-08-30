@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using Framework.OData.Tests.Unit.DomainModel;
 using NUnit.Framework;
 

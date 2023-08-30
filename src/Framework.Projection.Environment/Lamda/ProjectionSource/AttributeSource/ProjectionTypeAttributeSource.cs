@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 
 using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Security;
 using Framework.Validation;
-
-using JetBrains.Annotations;
 
 namespace Framework.Projection.Lambda;
 
@@ -23,7 +18,7 @@ public class ProjectionTypeAttributeSource : AttributeSourceBase<IProjection>
     /// </summary>
     /// <param name="environment">Окружение</param>
     /// <param name="projection">Тип на основе которого строится проекция</param>
-    public ProjectionTypeAttributeSource([NotNull] ProjectionLambdaEnvironment environment, [NotNull] IProjection projection)
+    public ProjectionTypeAttributeSource(ProjectionLambdaEnvironment environment, IProjection projection)
             : base(environment, projection)
     {
     }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven;
+﻿namespace Framework.DomainDriven.DALExceptions;
 
 public abstract class DALException : Exception
 {

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Framework.DomainDriven.BLL;
+﻿using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Restriction;
-
-using JetBrains.Annotations;
 
 namespace SampleSystem.Domain;
 
@@ -56,7 +51,7 @@ public partial class BusinessUnitType :
     {
     }
 
-    public BusinessUnitType([NotNull] string name)
+    public BusinessUnitType(string name)
     {
         if (name == null)
         {

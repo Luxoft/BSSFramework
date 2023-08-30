@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Reflection;
 
 using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
 using Framework.Configuration.Domain;
@@ -8,8 +6,6 @@ using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.Persistent;
-
-using JetBrains.Annotations;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3;
 
@@ -31,7 +27,7 @@ public class RevisionSubscriptionSystemService<TBLLContext, T> : SubscriptionSys
     /// <param name="servicesFactory">Фабрика служб, используемая <see cref="RevisionSubscriptionSystemService{T}"/>.</param>
     /// <exception cref="ArgumentNullException">Аргумент servicesFactory равен null.</exception>
     public RevisionSubscriptionSystemService(
-            [NotNull] SubscriptionServicesFactory<TBLLContext, T> servicesFactory)
+            SubscriptionServicesFactory<TBLLContext, T> servicesFactory)
             : base(servicesFactory)
     {
         if (servicesFactory == null)
@@ -67,7 +63,7 @@ public class RevisionSubscriptionSystemService<TBLLContext, T> : SubscriptionSys
     /// <param name="changedObjectInfo">Данные об изменяемом доменном объекте.</param>
     /// <returns>Экземпляр <see cref="IList{ITryResult}"/>.</returns>
     /// <exception cref="ArgumentNullException">Аргумент changedObjectInfo равен null.</exception>
-    public IList<ITryResult<Subscription>> Process([NotNull] ObjectModificationInfo<Guid> changedObjectInfo)
+    public IList<ITryResult<Subscription>> Process(ObjectModificationInfo<Guid> changedObjectInfo)
     {
         if (changedObjectInfo == null)
         {

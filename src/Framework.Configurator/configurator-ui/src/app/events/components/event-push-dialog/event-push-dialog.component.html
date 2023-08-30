@@ -14,6 +14,7 @@
   <div class="mat-caption tw-mt-5">Id(s)</div>
   <mat-form-field class="tw-w-full">
     <textarea matInput [(ngModel)]="result.domainTypesIds"></textarea>
+    <mat-hint> You can add multiple Ids using comma</mat-hint>
   </mat-form-field>
 
   <div class="mat-caption tw-mt-5">Revision</div>
@@ -22,7 +23,13 @@
   </mat-form-field>
 </div>
 
-<div mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-raised-button color="primary" cdkFocusInitial [mat-dialog-close]="result">Push</button>
+<div mat-dialog-actions class="tw-flex tw-justify-between">
+  <button mat-raised-button (click)="close(result, false)">
+    <mat-icon> add </mat-icon>
+    Push, and push another
+  </button>
+  <div>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button color="primary" cdkFocusInitial (click)="close(result, true)">Push</button>
+  </div>
 </div>

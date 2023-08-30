@@ -1,10 +1,8 @@
-﻿using System;
-
-using Automation.ServiceEnvironment;
+﻿using Automation.ServiceEnvironment;
 
 using FluentAssertions;
 
-using Framework.DomainDriven;
+using Framework.DomainDriven.DALExceptions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

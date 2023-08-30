@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Framework.DomainDriven;
+﻿using Framework.DomainDriven;
 
 namespace SampleSystem.Domain;
 

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Framework.QueryLanguage;
+﻿using Framework.QueryLanguage;
 
 namespace Framework.OData;
 

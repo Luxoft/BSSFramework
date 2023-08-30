@@ -1,12 +1,19 @@
-﻿using System;
-using System.Linq;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
+
+using Framework.DomainDriven.DALExceptions;
 
 namespace Framework.DomainDriven.NHibernate.SqlExceptionProcessors;
 
 internal class UniqueIndexSqlProcessor : ISqlExceptionProcessor
 {
+    private readonly IDalValidationIdentitySource dalValidationIdentitySource;
+
     public int ErrorNumber => 2627;
+
+    public UniqueIndexSqlProcessor(IDalValidationIdentitySource dalValidationIdentitySource)
+    {
+        this.dalValidationIdentitySource = dalValidationIdentitySource;
+    }
 
     public Exception Process(HandledGenericADOException genericAdoException, ExceptionProcessingContext context)
     {
@@ -44,12 +51,14 @@ internal class UniqueIndexSqlProcessor : ISqlExceptionProcessor
         if (uniqueKey != null)
         {
             return new UniqueViolationConstraintDALException(
-                                                             new UniqueConstraint(
-                                                                                  new DomainObjectInfo(
-                                                                                   persistentClass.MappedClass,
-                                                                                   genericAdoException.EntityId),
-                                                                                  uniqueKey.Name,
-                                                                                  uniqueKey.ColumnIterator.Select(z => z.Name)));
+                new UniqueConstraint(
+                    new DomainObjectInfo(
+                        persistentClass.MappedClass,
+                        genericAdoException.EntityId),
+                    uniqueKey.Name,
+                    uniqueKey.ColumnIterator.Select(z => z.Name),
+                    this.dalValidationIdentitySource),
+                this.dalValidationIdentitySource);
         }
 
         return sqlException;

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Linq;
-
-using Framework.Core.Services;
+﻿using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
@@ -21,14 +16,14 @@ namespace SampleSystem.WebApiCore.Controllers.Main;
 [ApiController]
 public class EmployeeAsyncController : ControllerBase
 {
-    private readonly IRepositoryFactory<Employee, Guid, SampleSystemSecurityOperationCode> employeeRepositoryFactory;
+    private readonly IRepositoryFactory<Employee> employeeRepositoryFactory;
 
     private readonly IUserAuthenticationService userAuthenticationService;
 
     private readonly ISampleSystemDTOMappingService mappingService;
 
     public EmployeeAsyncController(
-            IRepositoryFactory<Employee, Guid, SampleSystemSecurityOperationCode> employeeRepositoryFactory,
+            IRepositoryFactory<Employee> employeeRepositoryFactory,
             IUserAuthenticationService userAuthenticationService,
             ISampleSystemDTOMappingService mappingService)
     {

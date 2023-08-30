@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
+﻿using Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Notification;
 
-using JetBrains.Annotations;
+
 
 using Serilog;
 
@@ -43,10 +39,10 @@ public class MessageTemplateFactory<TBLLContext>
     ///     Аргумент recipientsResolver или templatesFilter или configurationContextFacade равен null.
     /// </exception>
     public MessageTemplateFactory(
-            [NotNull] RecipientsResolver<TBLLContext> recipientsResolver,
-            [NotNull] AttachmentsResolver<TBLLContext> attachmentResolver,
-            [NotNull] ExcessTemplatesFilter templatesFilter,
-            [NotNull] ConfigurationContextFacade configurationContextFacade)
+            RecipientsResolver<TBLLContext> recipientsResolver,
+            AttachmentsResolver<TBLLContext> attachmentResolver,
+            ExcessTemplatesFilter templatesFilter,
+            ConfigurationContextFacade configurationContextFacade)
     {
         if (configurationContextFacade == null)
         {
@@ -75,8 +71,8 @@ public class MessageTemplateFactory<TBLLContext>
     ///     Список исключений, которые возникли при получении шаблонов уведомлений по каждой подписке.
     /// </exception>
     public virtual IEnumerable<MessageTemplateNotification> Create<T>(
-            [NotNull] IEnumerable<Subscription> subscriptions,
-            [NotNull] DomainObjectVersions<T> versions)
+            IEnumerable<Subscription> subscriptions,
+            DomainObjectVersions<T> versions)
             where T : class
     {
         if (subscriptions == null)
@@ -176,7 +172,6 @@ public class MessageTemplateFactory<TBLLContext>
         return result;
     }
 
-    [UsedImplicitly]
     private IEnumerable<MessageTemplateNotification> CreateImplicit<TSourceDomainObjectType, TModelObjectType>(
             Subscription subscription,
             DomainObjectVersions<TModelObjectType> versions,

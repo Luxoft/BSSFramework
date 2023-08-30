@@ -1,14 +1,9 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.CodeDom;
 
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DTOGenerator.Server;
-using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Transfering;
 

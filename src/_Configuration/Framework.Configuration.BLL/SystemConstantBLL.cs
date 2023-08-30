@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
-
-using JetBrains.Annotations;
 
 namespace Framework.Configuration.BLL;
 
@@ -25,7 +20,7 @@ public partial class SystemConstantBLL
         base.Save(systemConstant);
     }
 
-    public T GetValue<T>([NotNull] SystemConstant<T> typedSystemConstant)
+    public T GetValue<T>(SystemConstant<T> typedSystemConstant)
     {
         if (typedSystemConstant == null) throw new ArgumentNullException(nameof(typedSystemConstant));
 
@@ -36,7 +31,7 @@ public partial class SystemConstantBLL
         return serializer.Parse(systemConstant.Value);
     }
 
-    public IList<SystemConstant> Initialize([NotNull] Type systemConstantContainerType)
+    public IList<SystemConstant> Initialize(Type systemConstantContainerType)
     {
         if (systemConstantContainerType == null) throw new ArgumentNullException(nameof(systemConstantContainerType));
 
@@ -60,7 +55,7 @@ public partial class SystemConstantBLL
         return request.ToList();
     }
 
-    private SystemConstant Initialize<T>([NotNull] SystemConstant<T> typedSystemConstant, [NotNull] IList<SystemConstant> systemConstants)
+    private SystemConstant Initialize<T>(SystemConstant<T> typedSystemConstant, IList<SystemConstant> systemConstants)
     {
         if (typedSystemConstant == null) throw new ArgumentNullException(nameof(typedSystemConstant));
         if (systemConstants == null) throw new ArgumentNullException(nameof(systemConstants));

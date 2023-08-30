@@ -1,8 +1,4 @@
-﻿using System;
-
-using Framework.Core;
-
-using JetBrains.Annotations;
+﻿using Framework.Core;
 
 namespace Framework.Restriction;
 
@@ -32,7 +28,7 @@ public enum RequiredMode
 
 public static class RequiredModeExtensions
 {
-    public static void ValidateAppliedType(this RequiredMode requiredMode, [NotNull] Type appliedType)
+    public static void ValidateAppliedType(this RequiredMode requiredMode, Type appliedType)
     {
         if (appliedType == null) throw new ArgumentNullException(nameof(appliedType));
 
@@ -42,7 +38,7 @@ public static class RequiredModeExtensions
         }
     }
 
-    public static bool IsValidAppliedType(this RequiredMode requiredMode, [NotNull] Type appliedType)
+    public static bool IsValidAppliedType(this RequiredMode requiredMode, Type appliedType)
     {
         if (appliedType == null) throw new ArgumentNullException(nameof(appliedType));
 

@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
-using JetBrains.Annotations;
+﻿using System.Reflection;
 
 namespace Framework.Core;
 
 public static class TypeExtensions
 {
 
-    public static bool IsGenericTypeImplementation([NotNull] this Type type, [NotNull] Type genericTypeDefinition, Type[] implementArguments = null)
+    public static bool IsGenericTypeImplementation(this Type type, Type genericTypeDefinition, Type[] implementArguments = null)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (genericTypeDefinition == null) throw new ArgumentNullException(nameof(genericTypeDefinition));
@@ -19,7 +14,7 @@ public static class TypeExtensions
                                   && (implementArguments == null || type.GetGenericArguments().SequenceEqual(implementArguments));
     }
 
-    public static Type GetGenericTypeImplementationArgument([NotNull] this Type type, [NotNull] Type genericTypeDefinition)
+    public static Type GetGenericTypeImplementationArgument(this Type type, Type genericTypeDefinition)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
         if (genericTypeDefinition == null) throw new ArgumentNullException(nameof(genericTypeDefinition));
@@ -27,7 +22,7 @@ public static class TypeExtensions
         return type.GetGenericTypeImplementationArguments(genericTypeDefinition, args => args.Single());
     }
 
-    public static TResult GetGenericTypeImplementationArguments<TResult>([NotNull] this Type type, [NotNull] Type genericTypeDefinition, Func<Type[], TResult> getResult)
+    public static TResult GetGenericTypeImplementationArguments<TResult>(this Type type, Type genericTypeDefinition, Func<Type[], TResult> getResult)
             where TResult : class
     {
         if (type == null) throw new ArgumentNullException(nameof(type));

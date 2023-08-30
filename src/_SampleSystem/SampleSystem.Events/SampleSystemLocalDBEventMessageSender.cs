@@ -2,8 +2,6 @@
 using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.Events;
 
-using JetBrains.Annotations;
-
 using SampleSystem.BLL;
 using SampleSystem.Domain;
 using SampleSystem.Generated.DTO;
@@ -12,7 +10,7 @@ namespace SampleSystem.Events;
 
 public class SampleSystemLocalDBEventMessageSender : LocalDBEventMessageSender<ISampleSystemBLLContext, PersistentDomainObjectBase, EventDTOBase>
 {
-    public SampleSystemLocalDBEventMessageSender([NotNull] ISampleSystemBLLContext context, IConfigurationBLLContext configurationContext)
+    public SampleSystemLocalDBEventMessageSender(ISampleSystemBLLContext context, IConfigurationBLLContext configurationContext)
             : base(context, configurationContext)
     {
     }

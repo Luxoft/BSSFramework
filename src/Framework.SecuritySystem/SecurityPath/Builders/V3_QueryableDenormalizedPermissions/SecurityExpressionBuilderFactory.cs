@@ -3,7 +3,7 @@
 //using Framework.HierarchicalExpand;
 //using Framework.Persistent;
 
-//using JetBrains.Annotations;
+//
 
 //namespace Framework.SecuritySystem.Rules.Builders.QueryableDenormalizedPermissions
 //{
@@ -11,7 +11,7 @@
 
 //        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 //    {
-//        public SecurityExpressionBuilderFactory([NotNull] IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory, [NotNull] IAuthorizationSystem<TIdent> authorizationSystem)
+//        public SecurityExpressionBuilderFactory(IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory, IAuthorizationSystem<TIdent> authorizationSystem)
 //        {
 //            this.HierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory ?? throw new ArgumentNullException(nameof(hierarchicalObjectExpanderFactory));
 //            this.AuthorizationSystem = authorizationSystem;
@@ -21,45 +21,45 @@
 
 //        public IAuthorizationSystem<TIdent> AuthorizationSystem { get; }
 
-//        protected override ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.ConditionPath securityPath)
+//        protected override ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPath<TDomainObject>.ConditionPath securityPath)
 //        {
-//            return new SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.ConditionPath>
+//            return new SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent, SecurityPath<TDomainObject>.ConditionPath>
 //                  .ConditionBinarySecurityPathExpressionBuilder(this, securityPath);
 //        }
 
-//        protected override ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject, TSecurityContext>(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.SecurityPathByIdents<TSecurityContext> securityPath)
+//        protected override ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject, TSecurityContext>(SecurityPath<TDomainObject>.SecurityPathByIdents<TSecurityContext> securityPath)
 //        {
-//            return new SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.SecurityPathByIdents<TSecurityContext>>
+//            return new SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent, SecurityPath<TDomainObject>.SecurityPathByIdents<TSecurityContext>>
 //                  .SecurityByIdentsExpressionBuilder<TSecurityContext>(this, securityPath);
 //        }
 
-//        protected override ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject, TSecurityContext>(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.ManySecurityPath<TSecurityContext> securityPath)
+//        protected override ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject, TSecurityContext>(SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext> securityPath)
 //        {
-//            return new SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.SecurityPathByIdents<TSecurityContext>>
+//            return new SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent, SecurityPath<TDomainObject>.SecurityPathByIdents<TSecurityContext>>
 //                  .ManySecurityExpressionBuilder<TSecurityContext>(this, securityPath);
 //        }
 
-//        protected override ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject, TSecurityContext>(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.SingleSecurityPath<TSecurityContext> securityPath)
+//        protected override ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject, TSecurityContext>(SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> securityPath)
 //        {
-//            return new SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.SecurityPathByIdents<TSecurityContext>>
+//            return new SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent, SecurityPath<TDomainObject>.SecurityPathByIdents<TSecurityContext>>
 //                  .SingleSecurityExpressionBuilder<TSecurityContext>(this, securityPath);
 //        }
 
-//        protected override ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.OrSecurityPath securityPath)
+//        protected override ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPath<TDomainObject>.OrSecurityPath securityPath)
 //        {
-//            return new SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.OrSecurityPath>
+//            return new SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent, SecurityPath<TDomainObject>.OrSecurityPath>
 //                  .OrBinarySecurityPathExpressionBuilder(this, securityPath);
 //        }
 
-//        protected override ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.AndSecurityPath securityPath)
+//        protected override ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPath<TDomainObject>.AndSecurityPath securityPath)
 //        {
-//            return new SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.AndSecurityPath>
+//            return new SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent, SecurityPath<TDomainObject>.AndSecurityPath>
 //                  .AndBinarySecurityPathExpressionBuilder(this, securityPath);
 //        }
 
-//        protected override ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject, TNestedObject>(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.NestedManySecurityPath<TNestedObject> securityPath)
+//        protected override ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject, TNestedObject>(SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> securityPath)
 //        {
-//            return new SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.NestedManySecurityPath<TNestedObject>>
+//            return new SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent, SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject>>
 //                  .NestedManySecurityExpressionBuilder<TNestedObject>(this, securityPath);
 //        }
 //    }

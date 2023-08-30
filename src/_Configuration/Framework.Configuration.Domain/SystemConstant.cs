@@ -1,12 +1,8 @@
-﻿using System;
-
-using Framework.Core;
-using Framework.DomainDriven.Attributes;
+﻿using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.Persistent;
+using Framework.Persistent.Mapping;
 using Framework.Restriction;
-
-using JetBrains.Annotations;
 
 namespace Framework.Configuration.Domain;
 
@@ -46,7 +42,7 @@ public class SystemConstant :
     /// </summary>
     /// <param name="code">Код</param>
     /// <param name="type">Тип</param>
-    public SystemConstant([NotNull] string code, [NotNull] DomainType type)
+    public SystemConstant(string code, DomainType type)
     {
         if (code == null) throw new ArgumentNullException(nameof(code));
         if (type == null) throw new ArgumentNullException(nameof(type));

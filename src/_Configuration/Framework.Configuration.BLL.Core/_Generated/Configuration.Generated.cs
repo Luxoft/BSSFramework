@@ -366,21 +366,6 @@ namespace Framework.Configuration.BLL
     }
     #endregion
     
-    public partial class ConfigurationSecurityPath<TDomainObject> : Framework.SecuritySystem.SecurityPathWrapper<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>
-        where TDomainObject : Framework.Configuration.Domain.PersistentDomainObjectBase
-    {
-        
-        private ConfigurationSecurityPath(Framework.SecuritySystem.SecurityPath<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> securityPath) : 
-                base(securityPath)
-        {
-        }
-        
-        public static implicit operator Framework.Configuration.BLL.ConfigurationSecurityPath<TDomainObject> (Framework.SecuritySystem.SecurityPath<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> securityPath)
-        {
-            return new Framework.Configuration.BLL.ConfigurationSecurityPath<TDomainObject>(securityPath);
-        }
-    }
-    
     public partial class ConfigurationBLLContext : Framework.DomainDriven.BLL.Security.SecurityBLLBaseContext<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectBase, System.Guid, Framework.Configuration.BLL.IConfigurationBLLFactoryContainer, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode, System.Guid>>>, Framework.Configuration.BLL.IConfigurationBLLContext
     {
         
@@ -492,15 +477,25 @@ namespace Framework.Configuration.BLL
         public static void Register(Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection)
         {
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.CodeFirstSubscription, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationCodeFirstSubscriptionSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.CodeFirstSubscription>, Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.CodeFirstSubscription, Framework.Configuration.ConfigurationSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.DomainType, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationDomainTypeSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.DomainType>, Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.DomainType, Framework.Configuration.ConfigurationSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.ExceptionMessage, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationExceptionMessageSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.ExceptionMessage>, Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.ExceptionMessage, Framework.Configuration.ConfigurationSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Reports.Report, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationReportSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Reports.Report>, Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Reports.Report, Framework.Configuration.ConfigurationSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Reports.ReportFilter, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationReportFilterSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Reports.ReportFilter>, Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Reports.ReportFilter, Framework.Configuration.ConfigurationSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Reports.ReportParameter, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationReportParameterSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Reports.ReportParameter>, Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Reports.ReportParameter, Framework.Configuration.ConfigurationSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Reports.ReportProperty, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationReportPropertySecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Reports.ReportProperty>, Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Reports.ReportProperty, Framework.Configuration.ConfigurationSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Sequence, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationSequenceSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Sequence>, Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Sequence, Framework.Configuration.ConfigurationSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.SystemConstant, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationSystemConstantSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.SystemConstant>, Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.SystemConstant, Framework.Configuration.ConfigurationSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.TargetSystem, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.ConfigurationTargetSystemSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.TargetSystem>, Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.TargetSystem, Framework.Configuration.ConfigurationSecurityOperationCode>>(serviceCollection);
         }
     }
     
@@ -715,6 +710,16 @@ namespace Framework.Configuration.BLL
             get;
         }
         
+        Framework.Configuration.BLL.ISentMessageBLL SentMessage
+        {
+            get;
+        }
+        
+        Framework.Configuration.BLL.ISentMessageBLLFactory SentMessageFactory
+        {
+            get;
+        }
+        
         Framework.Configuration.BLL.ISequenceBLL Sequence
         {
             get;
@@ -831,6 +836,14 @@ namespace Framework.Configuration.BLL
     }
     
     public partial interface IReportPropertyBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IReportPropertyBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Reports.ReportProperty>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IReportPropertyBLL, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IReportPropertyBLL, Framework.SecuritySystem.SecurityOperation<Framework.Configuration.ConfigurationSecurityOperationCode>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IReportPropertyBLL, Framework.SecuritySystem.BLLSecurityMode>
+    {
+    }
+    
+    public partial interface ISentMessageBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.SentMessage, System.Guid>
+    {
+    }
+    
+    public partial interface ISentMessageBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ISentMessageBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.SentMessage>>
     {
     }
     

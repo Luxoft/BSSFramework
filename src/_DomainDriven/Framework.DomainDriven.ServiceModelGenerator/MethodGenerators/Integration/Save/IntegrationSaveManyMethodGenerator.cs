@@ -1,12 +1,8 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.CodeDom;
 
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.Transfering;
-
-using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
@@ -15,7 +11,7 @@ public class IntegrationSaveManyMethodGenerator<TConfiguration> : IntegrationBas
 {
     private readonly IntegrationSaveMethodGenerator<TConfiguration> _singleSaveGenerator;
 
-    public IntegrationSaveManyMethodGenerator([NotNull] IntegrationSaveMethodGenerator<TConfiguration> singleSaveGenerator)
+    public IntegrationSaveManyMethodGenerator(IntegrationSaveMethodGenerator<TConfiguration> singleSaveGenerator)
             : base(singleSaveGenerator.Configuration, singleSaveGenerator.DomainType)
     {
         if (singleSaveGenerator == null) throw new ArgumentNullException(nameof(singleSaveGenerator));

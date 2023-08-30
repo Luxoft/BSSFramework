@@ -15,8 +15,9 @@ Features:
 - **Notification**
 - **Reporting**
 - **Intergation**
-- ~~**Regular Jobs**~~ Hangfire
-- **Data Audit**
+- **Hangfire** https://www.hangfire.io/
+- **CAP** https://cap.dotnetcore.xyz/
+- **Data Audit** https://github.com/nhibernate/nhibernate-envers
 - **Logging**
 - **Validation**
 - **Code Generation**
@@ -24,6 +25,6 @@ Features:
     - DTO/Mapping Generation
     - ORM Mapping Generation
     - RestApi Generation
-    - TypeScript Generation
+    - TypeScript Generator https://github.com/Luxoft/gengen
 - **Unit Testing**
-- **Integration Testing**
+- [Integration Testing](docs/integrationtests.md)

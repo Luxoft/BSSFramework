@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace Framework.Configuration.SubscriptionModeling;
+﻿namespace Framework.Configuration.SubscriptionModeling;
 
 /// <summary>
 ///     Интерфейс Razor шаблона сообщения.

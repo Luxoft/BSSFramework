@@ -1,12 +1,7 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.CodeDom;
 using System.Reflection;
 
 using Framework.Core;
-
-using JetBrains.Annotations;
 
 namespace Framework.CodeDom;
 
@@ -55,14 +50,14 @@ public static class CodeExpressionExtensions
         return codeExpression.ToMethodInvokeExpression("ToString");
     }
 
-    public static CodeStatementCollection ToStatementCollection([NotNull] this IEnumerable<CodeStatement> codeStatements)
+    public static CodeStatementCollection ToStatementCollection(this IEnumerable<CodeStatement> codeStatements)
     {
         if (codeStatements == null) throw new ArgumentNullException(nameof(codeStatements));
 
         return new CodeStatementCollection(codeStatements.ToArray());
     }
 
-    public static CodeLambdaExpression ToCodeLambdaExpression([NotNull] this PropertyInfo property, [NotNull] string varName = "source")
+    public static CodeLambdaExpression ToCodeLambdaExpression(this PropertyInfo property, string varName = "source")
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
         if (string.IsNullOrWhiteSpace(varName)) throw new ArgumentException("Value cannot be null or whitespace.", nameof(varName));

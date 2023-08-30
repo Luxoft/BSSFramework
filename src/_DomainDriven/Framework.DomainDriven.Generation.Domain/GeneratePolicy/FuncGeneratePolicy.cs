@@ -1,5 +1,3 @@
-using System;
-
 namespace Framework.DomainDriven.Generation.Domain;
 
 public class FuncGeneratePolicy<TIdent> : GeneratePolicy<TIdent>

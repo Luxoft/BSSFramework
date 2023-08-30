@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-
-using Framework.Core;
+﻿using System.Reflection;
 
 namespace Framework.Validation;
 
@@ -17,10 +13,10 @@ public class MaxLengthValidator : IDynamicPropertyValidator
         this._maxLength = maxLength;
     }
 
-    public IPropertyValidator GetValidator(PropertyInfo property, IDynamicSource extendedValidationData)
+    public IPropertyValidator GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
-        if (extendedValidationData == null) throw new ArgumentNullException(nameof(extendedValidationData));
+        if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
 
         var validatorType = this.GetValidatorType(property);
 

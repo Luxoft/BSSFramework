@@ -1,8 +1,5 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.CodeDom;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reflection;
 
 using Framework.CodeDom;
@@ -13,8 +10,6 @@ using Framework.Persistent;
 using Framework.Projection;
 using Framework.Security;
 using Framework.Transfering;
-
-using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.DTOGenerator;
 
@@ -146,7 +141,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         return new Dictionary<Type, ReadOnlyCollection<Enum>>();
     }
 
-    public IEnumerable<PropertyInfo> GetDomainTypeProperties([NotNull] Type domainType, [NotNull] DTOFileType fileType)
+    public IEnumerable<PropertyInfo> GetDomainTypeProperties(Type domainType, DTOFileType fileType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (fileType == null) throw new ArgumentNullException(nameof(fileType));

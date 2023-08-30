@@ -1,9 +1,6 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 using Framework.Core;
-
-using JetBrains.Annotations;
 
 namespace Framework.Projection.Lambda;
 
@@ -28,7 +25,7 @@ public abstract class TypeReferenceBase
     /// </summary>
     public class FixedTypeReference : TypeReferenceBase
     {
-        public FixedTypeReference([NotNull] Type propertyType)
+        public FixedTypeReference(Type propertyType)
         {
             this.PropertyType = propertyType ?? throw new ArgumentNullException(nameof(propertyType));
         }
@@ -43,7 +40,7 @@ public abstract class TypeReferenceBase
             return this.PropertyType.ToString();
         }
 
-        public override TypeReferenceBase TryOverrideElementProjection([NotNull] Func<IProjection, IProjection> mapFunc)
+        public override TypeReferenceBase TryOverrideElementProjection(Func<IProjection, IProjection> mapFunc)
         {
             if (mapFunc == null) { throw new ArgumentNullException(nameof(mapFunc)); }
 
@@ -56,7 +53,7 @@ public abstract class TypeReferenceBase
     /// </summary>
     public class BuildTypeReference : TypeReferenceBase
     {
-        public BuildTypeReference([NotNull] Type elementType, Type collectionType, bool isNullable, IProjection elementProjection)
+        public BuildTypeReference(Type elementType, Type collectionType, bool isNullable, IProjection elementProjection)
         {
             this.ElementType = elementType ?? throw new ArgumentNullException(nameof(elementType));
             this.CollectionType = collectionType;
@@ -64,7 +61,7 @@ public abstract class TypeReferenceBase
             this.ElementProjection = elementProjection;
         }
 
-        public BuildTypeReference([NotNull] LambdaExpression expression)
+        public BuildTypeReference(LambdaExpression expression)
         {
             if (expression == null) { throw new ArgumentNullException(nameof(expression)); }
 
@@ -104,7 +101,7 @@ public abstract class TypeReferenceBase
             return $"ElementType = {this.ElementType}, IsCollection = {this.IsCollection} | IsNullable = {this.IsNullable} | ElementProjection = {this.ElementProjection}";
         }
 
-        public override TypeReferenceBase TryOverrideElementProjection([NotNull] Func<IProjection, IProjection> mapFunc)
+        public override TypeReferenceBase TryOverrideElementProjection(Func<IProjection, IProjection> mapFunc)
         {
             if (mapFunc == null) { throw new ArgumentNullException(nameof(mapFunc)); }
 

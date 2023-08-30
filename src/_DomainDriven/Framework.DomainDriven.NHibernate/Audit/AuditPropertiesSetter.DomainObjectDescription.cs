@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
-
-using JetBrains.Annotations;
+﻿using System.Collections.Concurrent;
 
 namespace Framework.DomainDriven.NHibernate.Audit;
 
@@ -11,7 +8,7 @@ internal partial class AuditPropertiesSetter
     {
         private static readonly ConcurrentDictionary<Type, DomainObjectDescription> Cache = new ConcurrentDictionary<Type, DomainObjectDescription>();
 
-        private DomainObjectDescription([NotNull] Type type, [NotNull] string[] propertyNames)
+        private DomainObjectDescription(Type type, string[] propertyNames)
         {
             if (type == null)
             {

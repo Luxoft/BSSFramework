@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Exceptions;
+﻿namespace Framework.Exceptions;
 
 public class ObjectByIdNotFoundException<TIdent> : BusinessLogicException
 {

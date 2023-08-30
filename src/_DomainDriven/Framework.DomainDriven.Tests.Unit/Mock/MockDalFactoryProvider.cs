@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using Framework.Core;
-using Framework.DomainDriven.BLL;
 using Framework.Persistent;
-using NSubstitute;
-using NSubstitute.Core;
 
 namespace Framework.DomainDriven.UnitTest.Mock;
 

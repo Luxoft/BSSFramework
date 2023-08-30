@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-using Framework.Notification.DTO;
+﻿using Framework.Notification.DTO;
 using Framework.Notification.New;
 using Framework.Configuration.Domain;
 

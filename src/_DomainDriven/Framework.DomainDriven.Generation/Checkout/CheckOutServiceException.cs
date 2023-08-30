@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.Generation;
+﻿namespace Framework.DomainDriven.Generation;
 
 public class CheckOutServiceException : Exception
 {

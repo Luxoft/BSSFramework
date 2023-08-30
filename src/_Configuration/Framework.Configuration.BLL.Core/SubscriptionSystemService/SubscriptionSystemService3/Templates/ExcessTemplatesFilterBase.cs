@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Framework.Notification;
+﻿using Framework.Notification;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Templates;
 

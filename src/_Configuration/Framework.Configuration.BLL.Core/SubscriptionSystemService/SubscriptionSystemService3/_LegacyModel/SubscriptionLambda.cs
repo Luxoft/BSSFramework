@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Configuration.Domain;
+﻿namespace Framework.Configuration.Domain;
 
 /// <summary>
 /// Функция определенного вида, используемая в подписках в качестве: условия выполнения подписки, получения её адресатов или контекстов ролей
@@ -8,11 +6,11 @@ namespace Framework.Configuration.Domain;
 public class SubscriptionLambda
 {
     private Func<object, object, object> funcValue;
-        
+
     private Type authDomainType;
-        
+
     private Type metadataSourceType;
-        
+
     /// <summary>Получает делегат, исполняющий лямбду.</summary>
     /// <value>Делегат, исполняющий лямбду.</value>
     public virtual Func<object, object, object> FuncValue

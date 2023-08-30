@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Configuration.Core;
+﻿using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Configuration.SubscriptionModeling;
-
-using JetBrains.Annotations;
 
 using Serilog;
 
@@ -46,10 +40,10 @@ public sealed class SubscriptionMetadataSubscriptionResolver : SubscriptionResol
     ///     равен null.
     /// </exception>
     public SubscriptionMetadataSubscriptionResolver(
-            [NotNull] SubscriptionResolver resolver,
-            [NotNull] SubscriptionMetadataStore metadataStore,
-            [NotNull] SubscriptionMetadataMapper metadataMapper,
-            [NotNull] ConfigurationContextFacade configurationContextFacade)
+            SubscriptionResolver resolver,
+            SubscriptionMetadataStore metadataStore,
+            SubscriptionMetadataMapper metadataMapper,
+            ConfigurationContextFacade configurationContextFacade)
     {
         if (resolver == null)
         {
@@ -80,7 +74,7 @@ public sealed class SubscriptionMetadataSubscriptionResolver : SubscriptionResol
     }
 
     /// <inheritdoc />
-    public override IEnumerable<Subscription> Resolve<T>([NotNull] DomainObjectVersions<T> versions)
+    public override IEnumerable<Subscription> Resolve<T>(DomainObjectVersions<T> versions)
     {
         if (versions == null)
         {
@@ -96,8 +90,8 @@ public sealed class SubscriptionMetadataSubscriptionResolver : SubscriptionResol
 
     /// <inheritdoc />
     public override Subscription Resolve<T>(
-            [NotNull] string subscriptionCode,
-            [NotNull] DomainObjectVersions<T> versions)
+            string subscriptionCode,
+            DomainObjectVersions<T> versions)
     {
         if (subscriptionCode == null)
         {
@@ -117,7 +111,7 @@ public sealed class SubscriptionMetadataSubscriptionResolver : SubscriptionResol
     }
 
     /// <inheritdoc />
-    public override bool IsActiveSubscriptionForTypeExists([NotNull] Type domainObjectType)
+    public override bool IsActiveSubscriptionForTypeExists(Type domainObjectType)
     {
         if (domainObjectType == null)
         {

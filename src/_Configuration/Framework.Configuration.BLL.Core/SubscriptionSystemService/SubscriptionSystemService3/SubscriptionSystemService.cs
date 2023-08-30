@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
+﻿using Framework.Configuration.BLL.SubscriptionSystemService3.Services;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Core;
-
-using JetBrains.Annotations;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3;
 
@@ -24,7 +19,7 @@ public class SubscriptionSystemService<TBLLContext> : ISubscriptionSystemService
     /// </summary>
     /// <param name="servicesFactory">Фабрика служб, используемая <see cref="SubscriptionSystemService"/>.</param>
     /// <exception cref="ArgumentNullException">Аргумент servicesFactory равен null.</exception>
-    public SubscriptionSystemService([NotNull] SubscriptionServicesFactory<TBLLContext> servicesFactory)
+    public SubscriptionSystemService(SubscriptionServicesFactory<TBLLContext> servicesFactory)
     {
         if (servicesFactory == null)
         {
@@ -52,10 +47,10 @@ public class SubscriptionSystemService<TBLLContext> : ISubscriptionSystemService
     /// subscriptionCode равен null.
     /// </exception>
     public SubscriptionRecipientInfo GetRecipientsUntyped(
-            [NotNull] Type type,
+            Type type,
             object prev,
             object next,
-            [NotNull] string subscriptionCode)
+            string subscriptionCode)
     {
         if (type == null)
         {
@@ -91,7 +86,7 @@ public class SubscriptionSystemService<TBLLContext> : ISubscriptionSystemService
     public IList<ITryResult<Subscription>> ProcessChangedObjectUntyped(
             object prev,
             object next,
-            [NotNull] Type type)
+            Type type)
     {
         if (type == null)
         {

@@ -1,10 +1,8 @@
-﻿using System.Threading.Tasks;
-
-using Framework.Authorization.BLL;
+﻿using Framework.Authorization.BLL;
 using Framework.Authorization.Domain;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
-using JetBrains.Annotations;
+
+
 
 using WorkflowCore.Interface;
 using WorkflowCore.Models;
@@ -13,10 +11,10 @@ namespace Framework.Authorization.ApproveWorkflow;
 
 public class SetPermissionStatusStep : IStepBody
 {
-    [NotNull]
+    
     private readonly IContextEvaluator<IAuthorizationBLLContext> contextEvaluator;
 
-    public SetPermissionStatusStep([NotNull] IContextEvaluator<IAuthorizationBLLContext> contextEvaluator)
+    public SetPermissionStatusStep(IContextEvaluator<IAuthorizationBLLContext> contextEvaluator)
     {
         this.contextEvaluator = contextEvaluator;
     }

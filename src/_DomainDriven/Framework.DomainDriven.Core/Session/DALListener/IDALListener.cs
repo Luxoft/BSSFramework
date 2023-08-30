@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace Framework.DomainDriven;
+﻿namespace Framework.DomainDriven;
 
 /// <summary>
 /// Потребитель DAL-евентов
@@ -11,5 +9,5 @@ public interface IDALListener
     /// Обработка евента
     /// </summary>
     /// <param name="eventArgs">Даннные о DAL-изменениях</param>
-    void Process([NotNull] DALChangesEventArgs eventArgs);
+    void Process(DALChangesEventArgs eventArgs);
 }

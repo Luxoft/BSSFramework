@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+﻿using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 using Framework.Configuration.Core;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.Persistent;
-
-using JetBrains.Annotations;
 
 using Serilog;
 
@@ -36,9 +30,9 @@ public class RevisionService<T>
     ///     <paramref name="configurationContextFacade" /> равен null.
     /// </exception>
     public RevisionService(
-            [NotNull] IRevisionBLL<T, Guid> revisionBll,
-            [NotNull] ConfigurationContextFacade configurationContextFacade,
-            [NotNull] SubscriptionResolver subscriptionResolver)
+            IRevisionBLL<T, Guid> revisionBll,
+            ConfigurationContextFacade configurationContextFacade,
+            SubscriptionResolver subscriptionResolver)
     {
         if (revisionBll == null)
         {
@@ -70,7 +64,6 @@ public class RevisionService<T>
     ///     Найденный экземпляр <see cref="DomainObjectVersions{T}"/> или null,
     ///     если для найденного типа доменного объекта не найдено ни одной активной подписки.
     /// </returns>
-    [CanBeNull]
     public virtual DomainObjectVersions<T> GetDomainObjectVersions(Guid domainObjectId, long? revisionNumber)
     {
         if (!this.subscriptionResolver.IsActiveSubscriptionForTypeExists(typeof(T)))
@@ -97,7 +90,7 @@ public class RevisionService<T>
     /// <param name="changes">Описатель операций, проведенных над объектом в слое доступа к данным.</param>
     /// <returns>Экземпляр <see cref="IEnumerable{ObjectModificationInfo}" />.</returns>
     /// <exception cref="ArgumentNullException">Аргумент changes равен null.</exception>
-    public virtual IEnumerable<ObjectModificationInfo<Guid>> GetObjectModifications([NotNull] DALChanges changes)
+    public virtual IEnumerable<ObjectModificationInfo<Guid>> GetObjectModifications(DALChanges changes)
     {
         if (changes == null)
         {

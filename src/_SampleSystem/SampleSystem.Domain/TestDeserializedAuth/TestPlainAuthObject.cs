@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Runtime.InteropServices;
-
-using Framework.DomainDriven.BLL;
+﻿using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 
 namespace SampleSystem.Domain;
@@ -15,7 +12,7 @@ public class TestPlainAuthObject : BaseDirectory, IMaster<TestItemAuthObject>
     private Location location;
 
     private Employee employee;
-        
+
 
     public virtual Location Location
     {

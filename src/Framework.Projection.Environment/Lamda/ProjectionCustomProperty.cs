@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
-
-using JetBrains.Annotations;
+﻿using Framework.Core;
 
 namespace Framework.Projection.Lambda;
 
@@ -22,7 +16,7 @@ public class ProjectionCustomProperty<TProperty> : IProjectionCustomProperty
     /// <param name="getPropProjection">Проекция на тип свойства</param>
     /// <param name="fetchs">Дополнительная подгрузка свойств</param>
     /// <param name="attributes">Дополнительные атрибуты генерации</param>
-    public ProjectionCustomProperty([NotNull] string name, bool writable = false, Func<Projection<TProperty>> getPropProjection = null, Type collectionType = null, IEnumerable<string> fetchs = null, IEnumerable<Attribute> attributes = null)
+    public ProjectionCustomProperty(string name, bool writable = false, Func<Projection<TProperty>> getPropProjection = null, Type collectionType = null, IEnumerable<string> fetchs = null, IEnumerable<Attribute> attributes = null)
     {
         if (string.IsNullOrWhiteSpace(name)) { throw new ArgumentException("Value cannot be null or whitespace.", nameof(name)); }
 

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
-using Framework.Security;
 using Framework.SecuritySystem;
 
 namespace SampleSystem.Domain;
@@ -21,6 +17,7 @@ public class ManagementUnit :
         IMaster<ManagementUnitAndBusinessUnitLink>,
         IMaster<ManagementUnitAndHRDepartmentLink>,
         IPeriodObject,
+        IHierarchicalLevelObjectDenormalized,
         ISecurityContext
 {
     private readonly ICollection<ManagementUnit> children = new List<ManagementUnit>();
@@ -33,6 +30,14 @@ public class ManagementUnit :
     private Period period;
 
     private bool isProduction;
+
+    private int deepLevel;
+
+    public virtual int DeepLevel
+    {
+        get { return this.deepLevel; }
+        protected set { this.deepLevel = value; }
+    }
 
     public virtual Period Period
     {
@@ -70,6 +75,8 @@ public class ManagementUnit :
     [CustomSerialization(CustomSerializationMode.ReadOnly, DTORole.Client | DTORole.Report)]
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Event | DTORole.Integration)]
     public virtual IEnumerable<ManagementUnit> Children => this.children;
+
+    public virtual void SetDeepLevel(int value) => this.DeepLevel = value;
 
     ManagementUnit IUnit<ManagementUnit>.CurrentObject => this;
 

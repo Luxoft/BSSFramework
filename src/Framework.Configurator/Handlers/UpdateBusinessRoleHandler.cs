@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
 
-using Framework.Authorization.BLL.Core.Context;
 using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
 using Framework.Core;
+using Framework.DomainDriven.Repository;
 using Framework.Persistent;
 using Framework.SecuritySystem;
 
@@ -19,8 +14,8 @@ using NHibernate.Linq;
 namespace Framework.Configurator.Handlers;
 
 public record UpdateBusinessRoleHandler(
-        IAuthorizationRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
-        IAuthorizationRepositoryFactory<Operation> OperationRepositoryFactory,
+        IRepositoryFactory<BusinessRole> BusinessRoleRepositoryFactory,
+        IRepositoryFactory<Operation> OperationRepositoryFactory,
         IConfiguratorIntegrationEvents? ConfiguratorIntegrationEvents = null) : BaseWriteHandler, IUpdateBusinessRoleHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)

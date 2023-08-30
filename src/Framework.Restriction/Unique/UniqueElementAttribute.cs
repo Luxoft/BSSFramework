@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Restriction;
+﻿namespace Framework.Restriction;
 
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
 public class UniqueElementAttribute : Attribute, IUniqueAttribute

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Framework.DomainDriven.Attributes;
-using Framework.Persistent;
+﻿using Framework.Persistent;
+using Framework.Persistent.Mapping;
 
 namespace Framework.Configuration.Domain;
 

@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Framework.Authorization.Domain;
-
-namespace Framework.Configurator.Models;
+﻿namespace Framework.Configurator.Models;
 
 public class OperationDetailsDto
 {

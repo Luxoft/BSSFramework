@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 using Framework.DomainDriven.DBGenerator.Contracts;
-
-using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.DBGenerator.Team;
 
@@ -14,7 +8,7 @@ public class FileScriptReader : IMigrationScriptReader
 {
     private readonly string _directoryPath;
 
-    public FileScriptReader([NotNull] string directoryPath)
+    public FileScriptReader(string directoryPath)
     {
         if (directoryPath == null)
         {
@@ -75,7 +69,7 @@ public class FileScriptReader : IMigrationScriptReader
         return new MigrationDbScript(fileName, runalways, applyMode, scheme, fileversion, body);
     }
 
-    private T GetValue<T>([NotNull] IEnumerable<string> commands, [NotNull] string param, Func<string, T> convert)
+    private T GetValue<T>(IEnumerable<string> commands, string param, Func<string, T> convert)
     {
         if (commands == null)
         {

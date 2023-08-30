@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Framework.Notification;
+﻿namespace Framework.Notification;
 
 public class NotificationMessage
 {

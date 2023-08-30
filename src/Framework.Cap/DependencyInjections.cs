@@ -1,12 +1,8 @@
-﻿using System;
+﻿using DotNetCore.CAP;
 
-using DotNetCore.CAP;
-
-using Framework.Authorization.BLL;
 using Framework.Cap.Abstractions;
 using Framework.Cap.Auth;
 using Framework.Cap.Impl;
-using Framework.DomainDriven.BLL.Security;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection;
@@ -61,11 +57,10 @@ public static class DependencyInjections
     /// <summary>
     /// Add CAP authentication (User with role Administrator has access only)
     /// </summary>
-    public static AuthenticationBuilder AddCapAuth<TBllContext>(
+    public static AuthenticationBuilder AddCapAuth(
             this AuthenticationBuilder builder,
-            Action<AuthenticationSchemeOptions> configureOptions = null)
-            where TBllContext : IAuthorizationBLLContextContainer<IAuthorizationBLLContext> =>
-            builder.AddScheme<AuthenticationSchemeOptions, CapAuthenticationHandler<TBllContext>>(
+            Action<AuthenticationSchemeOptions> configureOptions = null) =>
+            builder.AddScheme<AuthenticationSchemeOptions, CapAuthenticationHandler>(
              CapAuthenticationScheme,
              CapAuthenticationScheme,
              configureOptions);

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-
-using JetBrains.Annotations;
+﻿using System.Linq.Expressions;
 
 namespace Framework.ExpressionParsers;
 
@@ -21,7 +16,7 @@ public class CSharpNativeExpressionParser : INativeExpressionParser
 
 
 
-    public LambdaExpression Parse([NotNull] NativeExpressionParsingData input)
+    public LambdaExpression Parse(NativeExpressionParsingData input)
     {
         if (input == null) throw new ArgumentNullException(nameof(input));
 

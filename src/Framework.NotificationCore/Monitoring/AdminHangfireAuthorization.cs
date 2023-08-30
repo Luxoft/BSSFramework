@@ -1,20 +1,17 @@
-﻿using System;
-
-using Framework.Authorization.BLL;
-using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
+﻿using Framework.DomainDriven;
+using Framework.SecuritySystem;
 
 using Hangfire.Dashboard;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.NotificationCore.Monitoring;
 
-public class AdminHangfireAuthorization<TBllContext> : IDashboardAuthorizationFilter
-        where TBllContext : IAuthorizationBLLContextContainer<IAuthorizationBLLContext>
+public class AdminHangfireAuthorization : IDashboardAuthorizationFilter
 {
-    private readonly IContextEvaluator<TBllContext> contextEvaluator;
+    private readonly IDBSessionEvaluator dbSessionEvaluator;
 
-    public AdminHangfireAuthorization(IContextEvaluator<TBllContext> contextEvaluator) => this.contextEvaluator = contextEvaluator;
+    public AdminHangfireAuthorization(IDBSessionEvaluator dbSessionEvaluator) => this.dbSessionEvaluator = dbSessionEvaluator;
 
     public bool Authorize(DashboardContext context)
     {
@@ -25,6 +22,8 @@ public class AdminHangfireAuthorization<TBllContext> : IDashboardAuthorizationFi
             return false;
         }
 
-        return this.contextEvaluator.Evaluate(DBSessionMode.Read, z => z.Authorization.Logics.BusinessRole.HasAdminRole());
+        return this.dbSessionEvaluator.EvaluateAsync(
+            DBSessionMode.Read,
+            (sp, _) => Task.FromResult(sp.GetRequiredService<IAuthorizationSystem>().IsAdmin())).GetAwaiter().GetResult();
     }
 }

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 using Framework.Core;
 using Framework.HierarchicalExpand;
-
-using JetBrains.Annotations;
 
 namespace Framework.SecuritySystem;
 
@@ -26,17 +21,20 @@ public abstract class AuthorizationSystem<TIdent> : IAuthorizationSystem<TIdent>
 
     public abstract TIdent ResolveSecurityTypeId(Type type);
 
+    public abstract bool IsAdmin();
+
     public abstract bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation)
             where TSecurityOperationCode : struct, Enum;
 
-    public string ResolveSecurityTypeName([NotNull] Type type)
+    public abstract void CheckAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> operation)
+        where TSecurityOperationCode : struct, Enum;
+
+    public string ResolveSecurityTypeName(Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
         return type.Name;
     }
-
-    public abstract TIdent GrandAccessIdent { get; }
 
     public abstract IEnumerable<string> GetAccessors<TSecurityOperationCode>(
             TSecurityOperationCode securityOperationCode,

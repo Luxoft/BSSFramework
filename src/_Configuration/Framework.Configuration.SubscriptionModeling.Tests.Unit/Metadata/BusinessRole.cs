@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Configuration.SubscriptionModeling.Tests.Unit.Metadata;
+﻿namespace Framework.Configuration.SubscriptionModeling.Tests.Unit.Metadata;
 
 internal static class BusinessRole
 {

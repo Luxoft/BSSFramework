@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SampleSystem.IntegrationTests.__Support.TestData;
+﻿namespace SampleSystem.IntegrationTests.__Support.TestData;
 
 public static class DefaultConstants
 {
@@ -67,16 +65,6 @@ public static class DefaultConstants
 
     // Legal Entity name
     public const string COMPANY_LEGAL_ENTITY_NAME = "Legal Entity";
-
-    // Database Name
-    public const string MainDatabaseName = "SampleSystem";
-
-    // Entity Type
-    public const string ENTITY_TYPE_MANAGEMENT_UNIT_NAME = "ManagementUnit";
-
-    public const string ENTITY_TYPE_FINANCIAL_BUSINESS_UNIT_NAME = "BusinessUnit";
-
-    public const string ENTITY_TYPE_LOCATION_NAME = "Location";
 
     // My Employee
     public const string EMPLOYEE_MY_LOGIN = "MyLogin";

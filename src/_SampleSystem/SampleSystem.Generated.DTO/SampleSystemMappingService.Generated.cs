@@ -30,6 +30,8 @@ namespace SampleSystem.Generated.DTO
         
         void MapAuditPersistentDomainObjectBase(SampleSystem.Domain.AuditPersistentDomainObjectBase domainObject, SampleSystem.Generated.DTO.BaseAuditPersistentDTO mappingObject);
         
+        void MapAuthPerformanceObject(SampleSystem.Domain.AuthPerformanceObject domainObject, SampleSystem.Generated.DTO.AuthPerformanceObjectEventRichDTO mappingObject);
+        
         void MapBusinessUnit(SampleSystem.Domain.BusinessUnit domainObject, SampleSystem.Generated.DTO.BusinessUnitVisualDTO mappingObject);
         
         void MapBusinessUnit(SampleSystem.Domain.BusinessUnit domainObject, SampleSystem.Generated.DTO.BusinessUnitSimpleDTO mappingObject);
@@ -868,6 +870,8 @@ namespace SampleSystem.Generated.DTO
         
         SampleSystem.Domain.ApprovePermissionWorkflowDomainObject ToApprovePermissionWorkflowDomainObject(SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectIdentityDTO approvePermissionWorkflowDomainObjectIdentityDTO);
         
+        SampleSystem.Domain.AuthPerformanceObject ToAuthPerformanceObject(SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO authPerformanceObjectIdentityDTO);
+        
         SampleSystem.Domain.BusinessUnit ToBusinessUnit(SampleSystem.Generated.DTO.BusinessUnitIdentityDTO businessUnitIdentityDTO);
         
         SampleSystem.Domain.BusinessUnit ToBusinessUnit(SampleSystem.Generated.DTO.BusinessUnitStrictDTO businessUnitStrictDTO);
@@ -1378,6 +1382,49 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Version = domainObject.Version;
         }
         
+        public virtual void MapAuthPerformanceObject(SampleSystem.Domain.AuthPerformanceObject domainObject, SampleSystem.Generated.DTO.AuthPerformanceObjectEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            if (!object.ReferenceEquals(domainObject.BusinessUnit, null))
+            {
+                mappingObject.BusinessUnit = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.BusinessUnit, this);
+            }
+            else
+            {
+                mappingObject.BusinessUnit = null;
+            }
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            if (!object.ReferenceEquals(domainObject.Employee, null))
+            {
+                mappingObject.Employee = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Employee, this);
+            }
+            else
+            {
+                mappingObject.Employee = null;
+            }
+            mappingObject.Id = domainObject.Id;
+            if (!object.ReferenceEquals(domainObject.Location, null))
+            {
+                mappingObject.Location = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Location, this);
+            }
+            else
+            {
+                mappingObject.Location = null;
+            }
+            if (!object.ReferenceEquals(domainObject.ManagementUnit, null))
+            {
+                mappingObject.ManagementUnit = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.ManagementUnit, this);
+            }
+            else
+            {
+                mappingObject.ManagementUnit = null;
+            }
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Version = domainObject.Version;
+        }
+        
         public virtual void MapBusinessUnit(SampleSystem.Domain.BusinessUnit domainObject, SampleSystem.Generated.DTO.BusinessUnitVisualDTO mappingObject)
         {
             mappingObject.Name = domainObject.Name;
@@ -1388,6 +1435,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.BusinessUnitStatus = domainObject.BusinessUnitStatus;
             mappingObject.BusinessUnitTypeName = domainObject.BusinessUnitTypeName;
             mappingObject.Commission = domainObject.Commission;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.FirstNewBusinessStatusMonth = domainObject.FirstNewBusinessStatusMonth;
             mappingObject.IsNewBusiness = domainObject.IsNewBusiness;
             mappingObject.IsPool = domainObject.IsPool;
@@ -1488,6 +1536,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Commission = domainObject.Commission;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.FirstNewBusinessStatusMonth = domainObject.FirstNewBusinessStatusMonth;
             mappingObject.Id = domainObject.Id;
             mappingObject.IsNewBusiness = domainObject.IsNewBusiness;
@@ -1570,6 +1619,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Commission = domainObject.Commission;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.FirstNewBusinessStatusMonth = domainObject.FirstNewBusinessStatusMonth;
             mappingObject.Id = domainObject.Id;
             mappingObject.IsNewBusiness = domainObject.IsNewBusiness;
@@ -1642,6 +1692,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Commission = domainObject.Commission;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.FirstNewBusinessStatusMonth = domainObject.FirstNewBusinessStatusMonth;
             mappingObject.Id = domainObject.Id;
             mappingObject.IsNewBusiness = domainObject.IsNewBusiness;
@@ -5690,6 +5741,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.CloseDate = domainObject.CloseDate;
             mappingObject.Code = domainObject.Code;
             mappingObject.ContainsOnlyInactiveChildren = domainObject.ContainsOnlyInactiveChildren;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.IsFinancial = domainObject.IsFinancial;
             mappingObject.IsLeaf = domainObject.IsLeaf;
             mappingObject.LocationType = domainObject.LocationType;
@@ -5758,6 +5810,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.ContainsOnlyInactiveChildren = domainObject.ContainsOnlyInactiveChildren;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.Id = domainObject.Id;
             mappingObject.IsFinancial = domainObject.IsFinancial;
             mappingObject.IsLeaf = domainObject.IsLeaf;
@@ -5795,6 +5848,7 @@ namespace SampleSystem.Generated.DTO
             }
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.Id = domainObject.Id;
             mappingObject.IsFinancial = domainObject.IsFinancial;
             mappingObject.IsLeaf = domainObject.IsLeaf;
@@ -5821,6 +5875,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.ContainsOnlyInactiveChildren = domainObject.ContainsOnlyInactiveChildren;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.Id = domainObject.Id;
             mappingObject.IsFinancial = domainObject.IsFinancial;
             mappingObject.IsLeaf = domainObject.IsLeaf;
@@ -5937,6 +5992,7 @@ namespace SampleSystem.Generated.DTO
         public virtual void MapManagementUnit(SampleSystem.Domain.ManagementUnit domainObject, SampleSystem.Generated.DTO.ManagementUnitSimpleDTO mappingObject)
         {
             mappingObject.BusinessUnitStatus = domainObject.BusinessUnitStatus;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.IsProduction = domainObject.IsProduction;
             mappingObject.Name = domainObject.Name;
             mappingObject.Period = domainObject.Period;
@@ -5984,6 +6040,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.BusinessUnitStatus = domainObject.BusinessUnitStatus;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.Id = domainObject.Id;
             mappingObject.IsProduction = domainObject.IsProduction;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
@@ -6007,6 +6064,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.BusinessUnitStatus = domainObject.BusinessUnitStatus;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.HRDepartments = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTOList(domainObject.HRDepartments, this);
             mappingObject.Id = domainObject.Id;
             mappingObject.IsProduction = domainObject.IsProduction;
@@ -6031,6 +6089,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.BusinessUnitStatus = domainObject.BusinessUnitStatus;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.DeepLevel = domainObject.DeepLevel;
             mappingObject.Id = domainObject.Id;
             mappingObject.IsProduction = domainObject.IsProduction;
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
@@ -7603,6 +7662,11 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.ApprovePermissionWorkflowDomainObject ToApprovePermissionWorkflowDomainObject(SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectIdentityDTO approvePermissionWorkflowDomainObjectIdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>(approvePermissionWorkflowDomainObjectIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.AuthPerformanceObject ToAuthPerformanceObject(SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO authPerformanceObjectIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.AuthPerformanceObject>(authPerformanceObjectIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.BusinessUnit ToBusinessUnit(SampleSystem.Generated.DTO.BusinessUnitIdentityDTO businessUnitIdentityDTO)

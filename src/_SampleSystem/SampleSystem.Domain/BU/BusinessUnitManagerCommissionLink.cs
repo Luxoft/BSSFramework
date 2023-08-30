@@ -1,12 +1,8 @@
-﻿using System;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Validation;
-
-using JetBrains.Annotations;
 
 namespace SampleSystem.Domain;
 
@@ -28,7 +24,7 @@ public class BusinessUnitManagerCommissionLink : AuditPersistentDomainObjectBase
     {
     }
 
-    public BusinessUnitManagerCommissionLink([NotNull] BusinessUnit businessUnit)
+    public BusinessUnitManagerCommissionLink(BusinessUnit businessUnit)
     {
         if (businessUnit == null)
         {
@@ -41,9 +37,9 @@ public class BusinessUnitManagerCommissionLink : AuditPersistentDomainObjectBase
     }
 
     public BusinessUnitManagerCommissionLink(
-            [NotNull] BusinessUnit businessUnit,
+            BusinessUnit businessUnit,
             decimal commission,
-            [NotNull] Employee manager,
+            Employee manager,
             Period period)
             : this(businessUnit)
     {

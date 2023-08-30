@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 public class ObjectConverter<TSource, TTarget> : ExpressionConverter<TSource, TTarget>, IConverter<TSource, TTarget>
 {

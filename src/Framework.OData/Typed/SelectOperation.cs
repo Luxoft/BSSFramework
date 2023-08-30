@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 
 using Framework.Core;
-
-using JetBrains.Annotations;
 
 namespace Framework.OData;
 
@@ -68,21 +63,21 @@ public class SelectOperation<TDomainObject> : IDynamicSelectOperation, IQueryabl
 
     private ReadOnlyCollection<Framework.QueryLanguage.LambdaExpression> Selects { get; set; }
 
-    public SelectOperation<TDomainObject> AddFilter([NotNull] Expression<Func<TDomainObject, bool>> filter)
+    public SelectOperation<TDomainObject> AddFilter(Expression<Func<TDomainObject, bool>> filter)
     {
         if (filter == null) throw new ArgumentNullException(nameof(filter));
 
         return this.OverrideFilter(this.Filter.BuildAnd(filter));
     }
 
-    public SelectOperation<TDomainObject> OverrideFilter([NotNull] Expression<Func<TDomainObject, bool>> filter)
+    public SelectOperation<TDomainObject> OverrideFilter(Expression<Func<TDomainObject, bool>> filter)
     {
         if (filter == null) throw new ArgumentNullException(nameof(filter));
 
         return new SelectOperation<TDomainObject>(filter, this.Orders, this.Expands, this.Selects, this.SkipCount, this.TakeCount);
     }
 
-    public SelectOperation<TDomainObject> AddOrder<TOrderKey>([NotNull] Expression<Func<TDomainObject, TOrderKey>> order, OrderType type)
+    public SelectOperation<TDomainObject> AddOrder<TOrderKey>(Expression<Func<TDomainObject, TOrderKey>> order, OrderType type)
     {
         if (order == null) throw new ArgumentNullException(nameof(order));
 
@@ -104,7 +99,7 @@ public class SelectOperation<TDomainObject> : IDynamicSelectOperation, IQueryabl
         return new SelectOperation<TDomainObject>(this.Filter, Default.Orders, Default.Expands, Default.Selects, Default.SkipCount, Default.TakeCount);
     }
 
-    public SelectOperation<TDomainObject> Visit([NotNull] ExpressionVisitor visitor)
+    public SelectOperation<TDomainObject> Visit(ExpressionVisitor visitor)
     {
         if (visitor == null) throw new ArgumentNullException(nameof(visitor));
 

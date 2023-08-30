@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
-
-using JetBrains.Annotations;
+﻿using System.Runtime.Serialization;
 
 namespace Framework.Configuration.SubscriptionModeling;
 
@@ -52,7 +49,7 @@ public class SubscriptionModelingException : Exception
     ///     Объект <see cref="T:System.Runtime.Serialization.StreamingContext" />,
     ///     содержащий контекстные сведения об источнике или назначении.
     /// </param>
-    protected SubscriptionModelingException([NotNull] SerializationInfo info, StreamingContext context)
+    protected SubscriptionModelingException(SerializationInfo info, StreamingContext context)
             : base(info, context)
     {
     }

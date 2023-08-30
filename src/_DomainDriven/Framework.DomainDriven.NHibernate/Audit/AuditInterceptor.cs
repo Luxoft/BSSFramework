@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Framework.DomainDriven.Audit;
+﻿using Framework.DomainDriven.Audit;
 using Framework.Persistent;
 
 using NHibernate;

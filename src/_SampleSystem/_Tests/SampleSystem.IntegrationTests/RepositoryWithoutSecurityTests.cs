@@ -1,14 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using FluentAssertions;
+﻿using FluentAssertions;
 
 using Framework.SecuritySystem;
 
-using Microsoft.SqlServer.Management.XEvent;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using SampleSystem.Generated.DTO;
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.WebApiCore.Controllers.Main;
 

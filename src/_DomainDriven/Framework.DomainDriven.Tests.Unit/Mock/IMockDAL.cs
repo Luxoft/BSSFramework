@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.UnitTest.Mock;
+﻿namespace Framework.DomainDriven.UnitTest.Mock;
 
 public interface IMockDAL
 {

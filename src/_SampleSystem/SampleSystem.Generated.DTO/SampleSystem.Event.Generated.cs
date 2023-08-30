@@ -19,6 +19,8 @@ namespace SampleSystem.Generated.DTO
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AnotherSqlParserTestObjRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectRemoveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AuthPerformanceObjectSaveEventDTO))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.AuthPerformanceObjectRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitSaveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitRemoveEventDTO))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(SampleSystem.Generated.DTO.BusinessUnitAncestorLinkSaveEventDTO))]
@@ -459,6 +461,90 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.AuthPerformanceObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AuthPerformanceObjectSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.AuthPerformanceObjectEventRichDTO AuthPerformanceObject;
+        
+        public AuthPerformanceObjectSaveEventDTO()
+        {
+        }
+        
+        public AuthPerformanceObjectSaveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.AuthPerformanceObject domainObject)
+        {
+            this.AuthPerformanceObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.AuthPerformanceObject), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Remove")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AuthPerformanceObjectRemoveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.AuthPerformanceObjectEventRichDTO AuthPerformanceObject;
+        
+        public AuthPerformanceObjectRemoveEventDTO()
+        {
+        }
+        
+        public AuthPerformanceObjectRemoveEventDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.AuthPerformanceObject domainObject)
+        {
+            this.AuthPerformanceObject = SampleSystem.Generated.DTO.LambdaHelper.ToRichEventDTO(domainObject, mappingService);
+        }
+    }
+    
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.AuthPerformanceObject), "RichEventDTO", Framework.DomainDriven.Serialization.DTORole.Event)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
+    public partial class AuthPerformanceObjectEventRichDTO
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Active;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.BusinessUnitEventSimpleDTO BusinessUnit;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? CreateDate;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CreatedBy;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.EmployeeEventSimpleDTO Employee;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.LocationEventSimpleDTO Location;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SampleSystem.Generated.DTO.ManagementUnitEventSimpleDTO ManagementUnit;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedBy;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime? ModifyDate;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Version;
+        
+        public AuthPerformanceObjectEventRichDTO()
+        {
+        }
+        
+        public AuthPerformanceObjectEventRichDTO(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService, SampleSystem.Domain.AuthPerformanceObject domainObject)
+        {
+            mappingService.MapAuthPerformanceObject(domainObject, this);
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnit), "OperationEventDTO", Framework.DomainDriven.Serialization.DTORole.Event, ExternalData="Operation = Save")]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="")]
     public partial class BusinessUnitSaveEventDTO : SampleSystem.Generated.DTO.EventDTOBase
@@ -544,6 +630,9 @@ namespace SampleSystem.Generated.DTO
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string CreatedBy;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime? FirstNewBusinessStatusMonth;
@@ -679,6 +768,9 @@ namespace SampleSystem.Generated.DTO
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string CreatedBy;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime? FirstNewBusinessStatusMonth;
@@ -5535,6 +5627,9 @@ namespace SampleSystem.Generated.DTO
         public string CreatedBy;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Guid Id;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -5593,6 +5688,9 @@ namespace SampleSystem.Generated.DTO
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string CreatedBy;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Guid Id;
@@ -5841,6 +5939,9 @@ namespace SampleSystem.Generated.DTO
         public string CreatedBy;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Collections.Generic.List<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkEventRichDTO> HRDepartments;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -5893,6 +5994,9 @@ namespace SampleSystem.Generated.DTO
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string CreatedBy;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DeepLevel;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Guid Id;

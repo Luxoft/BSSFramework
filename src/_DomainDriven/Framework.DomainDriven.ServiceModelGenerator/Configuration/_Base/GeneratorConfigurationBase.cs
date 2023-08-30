@@ -1,13 +1,8 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.CodeDom;
 
 using Framework.CodeDom;
-using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.DomainDriven.ServiceModel.Service;
-using Framework.Security;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
@@ -28,7 +23,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     public abstract string ImplementClassName { get; }
 
     public virtual string ServiceContractNamespace { get; } = null;
-        
+
     protected virtual ICodeFileFactoryHeader<FileType> ImplementServiceFileFactoryHeader { get; } =
 
         new CodeFileFactoryHeader<FileType>(FileType.Implement, @"Implement\", domainType => domainType.Name + "Service");

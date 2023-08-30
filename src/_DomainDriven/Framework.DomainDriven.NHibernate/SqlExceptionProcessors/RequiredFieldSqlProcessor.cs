@@ -1,6 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
+
+using Framework.DomainDriven.DALExceptions;
 
 using NHibernate.Mapping;
 

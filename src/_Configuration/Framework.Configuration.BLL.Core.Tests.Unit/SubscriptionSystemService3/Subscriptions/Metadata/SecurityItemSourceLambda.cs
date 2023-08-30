@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-
+﻿using Framework.Authorization.Notification;
 using Framework.Configuration.SubscriptionModeling;
-using Framework.Persistent;
 
 using DomainObjectChangeType = Framework.Configuration.SubscriptionModeling.DomainObjectChangeType;
 

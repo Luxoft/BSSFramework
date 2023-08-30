@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 
 using Framework.Core;
 using Framework.Restriction;
-
-using JetBrains.Annotations;
 
 namespace Framework.Validation;
 
@@ -17,7 +12,7 @@ public static class TypeExtensions
     /// </summary>
     /// <param name="type">Тип</param>
     /// <returns></returns>
-    public static bool HasExpandValidation([NotNull] this Type type)
+    public static bool HasExpandValidation(this Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 

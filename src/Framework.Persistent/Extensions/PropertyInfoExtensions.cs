@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 
 using Framework.Core;
 
@@ -29,19 +28,5 @@ public static class PropertyInfoExtensions
                              ?? propertyInfo.DeclaringType.GetCustomAttribute<DetailRoleAttribute>(false);
 
         return detailRoleAttr.Maybe(attr => attr.HasValue(value));
-    }
-
-    public static bool IsVisualIdentity(this PropertyInfo propertyInfo)
-    {
-        if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
-
-        return propertyInfo.HasAttribute<VisualIdentityAttribute>();
-    }
-
-    public static bool IsMaster(this PropertyInfo propertyInfo)
-    {
-        if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
-
-        return propertyInfo.HasAttribute<IsMasterAttribute>();
     }
 }

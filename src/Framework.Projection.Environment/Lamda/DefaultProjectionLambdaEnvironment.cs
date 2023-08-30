@@ -1,21 +1,17 @@
-﻿using System;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.Metadata;
-
-using JetBrains.Annotations;
 
 namespace Framework.Projection.Lambda;
 
 public class DefaultProjectionLambdaEnvironment : ProjectionLambdaEnvironment
 {
     public DefaultProjectionLambdaEnvironment(
-            [NotNull] IProjectionSource projectionSource,
-            [NotNull] string assemblyName,
-            [NotNull] string assemblyFullName,
-            [NotNull] Type domainObjectBaseType,
-            [NotNull] Type persistentDomainObjectBaseType,
-            [NotNull] string @namespace,
+            IProjectionSource projectionSource,
+            string assemblyName,
+            string assemblyFullName,
+            Type domainObjectBaseType,
+            Type persistentDomainObjectBaseType,
+            string @namespace,
             bool useDependencySecurity)
             : base(projectionSource)
     {

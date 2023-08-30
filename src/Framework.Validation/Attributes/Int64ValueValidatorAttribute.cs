@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Validation;
+﻿namespace Framework.Validation;
 
 [AttributeUsage(AttributeTargets.Property)]
 public class Int64ValueValidatorAttribute : PropertyValidatorAttribute

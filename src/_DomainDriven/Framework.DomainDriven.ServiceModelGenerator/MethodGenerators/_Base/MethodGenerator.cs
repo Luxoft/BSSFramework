@@ -1,8 +1,5 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.CodeDom;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.ServiceModel;
 
 using Framework.CodeDom;
@@ -10,8 +7,6 @@ using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Security;
-
-using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
@@ -146,7 +141,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
         }
     }
 
-    protected CodeVariableDeclarationStatement GetCreateDefaultBLLVariableDeclaration([NotNull] CodeExpression evaluateDataExpr, string varName, Type objectType, params CodeExpression[] parameters)
+    protected CodeVariableDeclarationStatement GetCreateDefaultBLLVariableDeclaration(CodeExpression evaluateDataExpr, string varName, Type objectType, params CodeExpression[] parameters)
     {
         var bllRef = new CodeTypeReference("var");
 
@@ -201,7 +196,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
                 .WithStatements(this.GetFacadeMethodInternalStatements(evaluateDataExpr, bllDecl.Maybe(v => v.ToVariableReferenceExpression())));
     }
 
-    protected CodeVariableDeclarationStatement GetBLLVariableDeclaration([NotNull] CodeExpression evaluateDataExpr, CodeParameterDeclarationExpression bllParameterExpr, bool isEdit)
+    protected CodeVariableDeclarationStatement GetBLLVariableDeclaration(CodeExpression evaluateDataExpr, CodeParameterDeclarationExpression bllParameterExpr, bool isEdit)
     {
         if (evaluateDataExpr == null) throw new ArgumentNullException(nameof(evaluateDataExpr));
 
@@ -213,7 +208,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
         return bllParameterExpr.Type.ToVariableDeclarationStatement(bllParameterExpr.Name, bllCreateExpr);
     }
 
-    protected CodeVariableDeclarationStatement GetDefaultBLLVariableDeclaration([NotNull] CodeExpression evaluateDataExpr, string varName, Type objectType, params CodeExpression[] parameters)
+    protected CodeVariableDeclarationStatement GetDefaultBLLVariableDeclaration(CodeExpression evaluateDataExpr, string varName, Type objectType, params CodeExpression[] parameters)
     {
         var bllRef = this.Configuration.Environment.BLLCore.GetCodeTypeReference(objectType, BLLCoreGenerator.FileType.BLLInterface);
 

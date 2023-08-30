@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Security;
+﻿using Framework.Security;
 using Framework.SecuritySystem;
 
 namespace SampleSystem.Domain;

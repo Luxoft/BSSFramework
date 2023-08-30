@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NHibernate.Linq.Visitors;
+﻿namespace NHibernate.Linq.Visitors;
 
 internal class Immutable<T>
         where T : class

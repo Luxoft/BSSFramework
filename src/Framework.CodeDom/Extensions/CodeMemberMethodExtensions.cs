@@ -1,17 +1,12 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.CodeDom;
 
 using Framework.Core;
-
-using JetBrains.Annotations;
 
 namespace Framework.CodeDom;
 
 public static class CodeMemberMethodExtensions
 {
-    public static CodeMemberMethod WithTypeParameters([NotNull] this CodeMemberMethod codeMemberMethod, [NotNull] IEnumerable<CodeTypeParameter> typeParameters)
+    public static CodeMemberMethod WithTypeParameters(this CodeMemberMethod codeMemberMethod, IEnumerable<CodeTypeParameter> typeParameters)
     {
         if (codeMemberMethod == null) throw new ArgumentNullException(nameof(codeMemberMethod));
         if (typeParameters == null) throw new ArgumentNullException(nameof(typeParameters));
@@ -21,7 +16,7 @@ public static class CodeMemberMethodExtensions
         return codeMemberMethod;
     }
 
-    public static TMethod WithParameters<TMethod>([NotNull] this TMethod codeMemberMethod, [NotNull] IEnumerable<CodeParameterDeclarationExpression> parameters)
+    public static TMethod WithParameters<TMethod>(this TMethod codeMemberMethod, IEnumerable<CodeParameterDeclarationExpression> parameters)
             where TMethod : CodeMemberMethod
     {
         if (codeMemberMethod == null) throw new ArgumentNullException(nameof(codeMemberMethod));
@@ -32,7 +27,7 @@ public static class CodeMemberMethodExtensions
         return codeMemberMethod;
     }
 
-    public static TMethod WithStatements<TMethod>([NotNull] this TMethod codeMemberMethod, [NotNull] IEnumerable<CodeStatement> statements)
+    public static TMethod WithStatements<TMethod>(this TMethod codeMemberMethod, IEnumerable<CodeStatement> statements)
             where TMethod : CodeMemberMethod
     {
         if (codeMemberMethod == null) throw new ArgumentNullException(nameof(codeMemberMethod));
@@ -43,7 +38,7 @@ public static class CodeMemberMethodExtensions
         return codeMemberMethod;
     }
 
-    public static TMethod WithStatement<TMethod>([NotNull] this TMethod codeMemberMethod, [NotNull] CodeStatement statement)
+    public static TMethod WithStatement<TMethod>(this TMethod codeMemberMethod, CodeStatement statement)
             where TMethod : CodeMemberMethod
     {
         if (codeMemberMethod == null) throw new ArgumentNullException(nameof(codeMemberMethod));
@@ -54,7 +49,7 @@ public static class CodeMemberMethodExtensions
         return codeMemberMethod;
     }
 
-    public static TMethod WithStatement<TMethod>([NotNull] this TMethod codeMemberMethod, bool condition, [NotNull] Func<CodeStatement> getStatement)
+    public static TMethod WithStatement<TMethod>(this TMethod codeMemberMethod, bool condition, Func<CodeStatement> getStatement)
             where TMethod : CodeMemberMethod
     {
         if (codeMemberMethod == null) throw new ArgumentNullException(nameof(codeMemberMethod));
@@ -68,7 +63,7 @@ public static class CodeMemberMethodExtensions
         return codeMemberMethod;
     }
 
-    public static TMethod WithStatements<TMethod>([NotNull] this TMethod codeMemberMethod, bool condition, [NotNull] Func<IEnumerable<CodeStatement>> getStatements)
+    public static TMethod WithStatements<TMethod>(this TMethod codeMemberMethod, bool condition, Func<IEnumerable<CodeStatement>> getStatements)
             where TMethod : CodeMemberMethod
     {
         if (codeMemberMethod == null) throw new ArgumentNullException(nameof(codeMemberMethod));
@@ -82,7 +77,7 @@ public static class CodeMemberMethodExtensions
         return codeMemberMethod;
     }
 
-    public static TMethod WithComment<TMethod>([NotNull] this TMethod codeMemberMethod, string comment)
+    public static TMethod WithComment<TMethod>(this TMethod codeMemberMethod, string comment)
             where TMethod : CodeMemberMethod
     {
         if (codeMemberMethod == null) throw new ArgumentNullException(nameof(codeMemberMethod));
@@ -95,7 +90,7 @@ public static class CodeMemberMethodExtensions
         return codeMemberMethod;
     }
 
-    public static TMethod WithTryBreak<TMethod>([NotNull] this TMethod codeMemberMethod)
+    public static TMethod WithTryBreak<TMethod>(this TMethod codeMemberMethod)
             where TMethod : CodeMemberMethod
     {
         if (codeMemberMethod == null) throw new ArgumentNullException(nameof(codeMemberMethod));
@@ -109,7 +104,7 @@ public static class CodeMemberMethodExtensions
     }
 
 
-    public static TMethod WithYield<TMethod>([NotNull] this TMethod codeMemberMethod, [NotNull] IEnumerable<CodeExpression> expressions, bool autoBreak = true)
+    public static TMethod WithYield<TMethod>(this TMethod codeMemberMethod, IEnumerable<CodeExpression> expressions, bool autoBreak = true)
             where TMethod : CodeMemberMethod
     {
         if (codeMemberMethod == null) throw new ArgumentNullException(nameof(codeMemberMethod));

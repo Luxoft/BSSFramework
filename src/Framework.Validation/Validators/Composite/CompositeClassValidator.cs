@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Framework.Validation;
+﻿namespace Framework.Validation;
 
 public class CompositeClassValidator<TSource> : IClassValidator<TSource>
         where TSource : class

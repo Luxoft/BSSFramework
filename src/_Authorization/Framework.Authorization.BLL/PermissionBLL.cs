@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.Exceptions;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.Validation;
-
-using JetBrains.Annotations;
 
 namespace Framework.Authorization.BLL;
 
@@ -50,7 +44,7 @@ public partial class PermissionBLL
         base.PreRecalculate(permission);
     }
 
-    public void DenormalizePermission([NotNull] Permission permission)
+    public void DenormalizePermission(Permission permission)
     {
         this.DenormalizePermissionFilterItems(permission);
 
@@ -65,7 +59,7 @@ public partial class PermissionBLL
                                        });
     }
 
-    //public void RecalculateDenormalizedItems([NotNull] Permission permission)
+    //public void RecalculateDenormalizedItems(Permission permission)
     //{
     //    if (permission == null) throw new ArgumentNullException(nameof(permission));
 
@@ -202,7 +196,7 @@ public partial class PermissionBLL
         }
     }
 
-    private bool IsCorrentPeriodSubset([NotNull] Permission permission)
+    private bool IsCorrentPeriodSubset(Permission permission)
     {
         if (permission == null) throw new ArgumentNullException(nameof(permission));
 
@@ -211,7 +205,7 @@ public partial class PermissionBLL
         return this.IsCorrentPeriodSubset(permission, delegatedFromPermission);
     }
 
-    private bool IsCorrentPeriodSubset([NotNull] Permission subPermission, [NotNull] Permission parentPermission)
+    private bool IsCorrentPeriodSubset(Permission subPermission, Permission parentPermission)
     {
         if (subPermission == null) throw new ArgumentNullException(nameof(subPermission));
         if (parentPermission == null) throw new ArgumentNullException(nameof(parentPermission));
@@ -228,7 +222,7 @@ public partial class PermissionBLL
         return this.GetInvalidDelegatedPermissionSecurities(permission, delegatedFromPermission);
     }
 
-    private Dictionary<EntityType, IEnumerable<SecurityEntity>> GetInvalidDelegatedPermissionSecurities(Permission subPermission, [NotNull] Permission parentPermission)
+    private Dictionary<EntityType, IEnumerable<SecurityEntity>> GetInvalidDelegatedPermissionSecurities(Permission subPermission, Permission parentPermission)
     {
         if (subPermission == null) throw new ArgumentNullException(nameof(subPermission));
         if (parentPermission == null) throw new ArgumentNullException(nameof(parentPermission));
@@ -362,7 +356,7 @@ public partial class PermissionBLL
 }
 public static class DateTimeServiceExtensions
 {
-    public static bool IsActivePeriod(this IDateTimeService dateTimeService, [NotNull] IPeriodObject periodObject)
+    public static bool IsActivePeriod(this IDateTimeService dateTimeService, IPeriodObject periodObject)
     {
         if (periodObject == null) throw new ArgumentNullException(nameof(periodObject));
         if (dateTimeService == null) throw new ArgumentNullException(nameof(dateTimeService));

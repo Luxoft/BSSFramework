@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.Generation.Domain;
+﻿namespace Framework.DomainDriven.Generation.Domain;
 
 public interface IDomainTypeContainer
 {

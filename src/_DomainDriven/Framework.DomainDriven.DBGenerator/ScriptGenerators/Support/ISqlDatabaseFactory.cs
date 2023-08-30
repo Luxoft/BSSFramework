@@ -1,5 +1,4 @@
-﻿using Framework.DomainDriven.NHibernate;
-using Microsoft.SqlServer.Management.Smo;
+﻿using Microsoft.SqlServer.Management.Smo;
 
 namespace Framework.DomainDriven.DBGenerator;
 

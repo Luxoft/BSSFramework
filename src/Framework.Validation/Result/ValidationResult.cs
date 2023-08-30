@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
 
 using Framework.Core;
-
-using JetBrains.Annotations;
 
 namespace Framework.Validation;
 
@@ -81,7 +76,6 @@ public class ValidationResult
         }
     }
 
-    [StringFormatMethod("format")]
     public static ValidationResult CreateError(string format, params object[] args)
     {
         return CreateError(string.Format(format, args));

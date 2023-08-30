@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Restriction;
+﻿namespace Framework.Restriction;
 
 /// <summary>
 ///     Проверка на уникальность по набору полей. Генерация констрейнта на таблице. Применяется как на сам объект, так и на

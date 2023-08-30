@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Xml.Linq;
 
 using Framework.Core;
-
-using JetBrains.Annotations;
 
 using NHibernate.Cfg;
 
@@ -18,9 +13,9 @@ public class MappingSettings : IMappingSettings
     private readonly Action<Configuration> _initMappingAction;
 
     public MappingSettings(
-            [NotNull] Type persistentDomainObjectBaseType,
-            [NotNull] Assembly mappingAssembly,
-            [NotNull] DatabaseName databaseName,
+            Type persistentDomainObjectBaseType,
+            Assembly mappingAssembly,
+            DatabaseName databaseName,
             AuditDatabaseName auditDatabaseName = null,
             IEnumerable<Type> types = null)
             : this(persistentDomainObjectBaseType, GetInitAction(mappingAssembly, databaseName), databaseName, auditDatabaseName, types)
@@ -28,9 +23,9 @@ public class MappingSettings : IMappingSettings
     }
 
     public MappingSettings(
-            [NotNull] Type persistentDomainObjectBaseType,
-            [NotNull] IEnumerable<XDocument> mappingXmls,
-            [NotNull] DatabaseName databaseName,
+            Type persistentDomainObjectBaseType,
+            IEnumerable<XDocument> mappingXmls,
+            DatabaseName databaseName,
             AuditDatabaseName auditDatabaseName = null,
             IEnumerable<Type> types = null)
             : this(persistentDomainObjectBaseType, GetInitAction(mappingXmls, databaseName), databaseName, auditDatabaseName, types)
@@ -38,9 +33,9 @@ public class MappingSettings : IMappingSettings
     }
 
     public MappingSettings(
-            [NotNull] Type persistentDomainObjectBaseType,
-            [NotNull] Action<Configuration> initMappingAction,
-            [NotNull] DatabaseName databaseName,
+            Type persistentDomainObjectBaseType,
+            Action<Configuration> initMappingAction,
+            DatabaseName databaseName,
             AuditDatabaseName auditDatabaseName = null,
             IEnumerable<Type> types = null)
     {
@@ -67,7 +62,7 @@ public class MappingSettings : IMappingSettings
     public ReadOnlyCollection<Type> Types { get; }
 
 
-    public virtual void InitMapping([NotNull] Configuration cfg)
+    public virtual void InitMapping(Configuration cfg)
     {
         if (cfg == null) throw new ArgumentNullException(nameof(cfg));
 
@@ -79,7 +74,7 @@ public class MappingSettings : IMappingSettings
         return new DefaultAuditTypeFilter();
     }
 
-    private static Action<Configuration> GetInitAction([NotNull] Assembly mappingAssembly, DatabaseName database)
+    private static Action<Configuration> GetInitAction(Assembly mappingAssembly, DatabaseName database)
     {
         if (mappingAssembly == null) throw new ArgumentNullException(nameof(mappingAssembly));
 
@@ -99,7 +94,7 @@ public class MappingSettings : IMappingSettings
                };
     }
 
-    private static Action<Configuration> GetInitAction([NotNull] IEnumerable<XDocument> mappingXmls, DatabaseName database)
+    private static Action<Configuration> GetInitAction(IEnumerable<XDocument> mappingXmls, DatabaseName database)
     {
         if (mappingXmls == null) throw new ArgumentNullException(nameof(mappingXmls));
 

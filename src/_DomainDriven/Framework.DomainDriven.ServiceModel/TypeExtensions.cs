@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace Framework.DomainDriven.ServiceModel;
+﻿namespace Framework.DomainDriven.ServiceModel;
 
 public static class TypeExtensions
 {

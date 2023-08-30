@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 
 using Framework.Core;
 
@@ -96,7 +93,7 @@ internal static class CompileReferenceExtensions
     }
 
 
-    ////private static Assembly TryLoad(this AppDomain appDomain, [NotNull] AssemblyName assemblyName)
+    ////private static Assembly TryLoad(this AppDomain appDomain, AssemblyName assemblyName)
     ////{
     ////    try
     ////    {

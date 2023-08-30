@@ -1,10 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Text;
+﻿using System.Text;
 
 using Framework.Core;
 
-using JetBrains.Annotations;
+
 
 namespace Framework.DomainDriven.Generation;
 
@@ -76,7 +74,7 @@ public class FileInfo
         return this;
     }
 
-    private void InternalSave(string absolutePath, ICheckOutService checkOutService, [NotNull]Encoding encoding)
+    private void InternalSave(string absolutePath, ICheckOutService checkOutService, Encoding encoding)
     {
         if (absolutePath == null) throw new ArgumentNullException(nameof(absolutePath));
         if (encoding == null) throw new ArgumentNullException(nameof(encoding));

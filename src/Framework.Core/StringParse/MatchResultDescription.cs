@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Core.StringParse;
+﻿namespace Framework.Core.StringParse;
 
 [Obsolete("v10 This method will be protected in future")]
 public class MatchResultDescription

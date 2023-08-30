@@ -1,9 +1,5 @@
-﻿using System;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.BLL;
-
-using JetBrains.Annotations;
 
 namespace Framework.Events;
 
@@ -40,7 +36,7 @@ public abstract class EventDTOMessageSenderBase<TBLLContext, TPersistentDomainOb
         this.Send(new DomainOperationSerializeData<TDomainObject, TOperation> { DomainObject = domainObject, Operation = operation, CustomSendObject = customSendObject});
     }
 
-    void IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>>.Send([NotNull] IDomainOperationSerializeData<TPersistentDomainObjectBase> domainObjectEventArgs)
+    void IMessageSender<IDomainOperationSerializeData<TPersistentDomainObjectBase>>.Send(IDomainOperationSerializeData<TPersistentDomainObjectBase> domainObjectEventArgs)
     {
         if (domainObjectEventArgs == null) throw new ArgumentNullException(nameof(domainObjectEventArgs));
 

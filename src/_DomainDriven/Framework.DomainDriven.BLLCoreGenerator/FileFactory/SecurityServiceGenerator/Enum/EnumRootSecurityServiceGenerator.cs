@@ -1,7 +1,4 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.CodeDom;
 
 using Framework.CodeDom;
 using Framework.Core;
@@ -69,7 +66,7 @@ public class EnumRootSecurityServiceGenerator<TConfiguration> : RootSecurityServ
                       {
                               Name = domainType.ToGetSecurityPathMethodName(),
                               Attributes = MemberAttributes.Public | MemberAttributes.Abstract,
-                              ReturnType = this.Configuration.GetCodeTypeReference(null, FileType.SecurityPath).ToTypeReference(domainTypeRef),
+                              ReturnType = typeof(SecurityPath<>).ToTypeReference(domainTypeRef),
                       }.WithTypeParameters(typeParameters);
     }
 

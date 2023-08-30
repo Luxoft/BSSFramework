@@ -6,9 +6,9 @@ public static class MiddlewareExtensions
 {
     /// <summary>
     /// Turn on default errors handling behavior for web requests.
-    /// Error will be converted to JSON Web Response. 
+    /// Error will be converted to JSON Web Response.
     /// </summary>
-    public static IApplicationBuilder UseDefaultExceptionsHandling(this IApplicationBuilder builder) => builder.UseMiddleware<ErrorHandling>();
+    public static IApplicationBuilder UseDefaultExceptionsHandling(this IApplicationBuilder builder) => builder.UseMiddleware<ExceptionHandlingMiddleware>();
 
     /// <summary>
     /// Adds correlation id to web request headers and to logs.

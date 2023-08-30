@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 
 using Framework.Core;
 using Framework.Persistent;
-
-using JetBrains.Annotations;
 
 namespace Framework.Validation;
 
@@ -21,7 +16,7 @@ public static class PropertyInfoExtensions
         return withBrackets ? $"({body})" : body;
     }
 
-    public static bool HasDeepValidation([NotNull] this PropertyInfo property)
+    public static bool HasDeepValidation(this PropertyInfo property)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 

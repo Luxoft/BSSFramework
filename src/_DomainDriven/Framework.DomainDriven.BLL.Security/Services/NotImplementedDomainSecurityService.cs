@@ -1,9 +1,5 @@
-﻿using System;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.SecuritySystem;
-
-using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.BLL.Security;
 
@@ -44,7 +40,7 @@ public class NotImplementedDomainSecurityService<TBLLContext, TDomainObject, TSe
     }
 
 
-    public ISecurityProvider<TDomainObject> GetSecurityProvider([NotNull] SecurityOperation<TSecurityOperationCode> securityOperation)
+    public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityOperation<TSecurityOperationCode> securityOperation)
     {
         if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
 

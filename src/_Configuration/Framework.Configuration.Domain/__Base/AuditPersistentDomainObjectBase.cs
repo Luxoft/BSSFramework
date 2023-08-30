@@ -1,11 +1,10 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 using Framework.Core;
-using Framework.DomainDriven;
 using Framework.DomainDriven.Attributes;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
+using Framework.Persistent.Mapping;
 
 namespace Framework.Configuration.Domain;
 

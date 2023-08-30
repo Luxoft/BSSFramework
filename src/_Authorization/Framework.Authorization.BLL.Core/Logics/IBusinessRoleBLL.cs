@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Framework.Authorization.Domain;
-
-using JetBrains.Annotations;
+﻿using Framework.Authorization.Domain;
 
 namespace Framework.Authorization.BLL;
 
@@ -22,5 +18,5 @@ public partial interface IBusinessRoleBLL
 
     BusinessRole Save(BusinessRoleNode businessRoleNode);
 
-    IEnumerable<BusinessRole> GetParents([NotNull] ICollection<BusinessRole> businessRoles);
+    IEnumerable<BusinessRole> GetParents(ICollection<BusinessRole> businessRoles);
 }

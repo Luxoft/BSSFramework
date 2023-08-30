@@ -1,5 +1,4 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 
 using Framework.DomainDriven;
 using Framework.SecuritySystem;
@@ -27,7 +26,7 @@ public class SecurityPathTests : TestBase
                                    DBSessionMode.Read,
                                    context =>
                                    {
-                                       var securityProvider = SampleSystemSecurityPath<Employee>.Create(x => x.Location)
+                                       var securityProvider = SecurityPath<Employee>.Create(x => x.Location)
                                                .Or(_ => false)
                                                .ToProvider(SampleSystemSecurityOperation.EmployeeView, context.SecurityExpressionBuilderFactory, context.AccessDeniedExceptionService);
 

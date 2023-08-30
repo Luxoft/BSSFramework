@@ -1,9 +1,7 @@
-﻿using System;
-using System.CodeDom;
+﻿using System.CodeDom;
 using System.Reflection;
 
 using Framework.CodeDom;
-using Framework.Security;
 
 namespace Framework.DomainDriven.DTOGenerator.Server;
 

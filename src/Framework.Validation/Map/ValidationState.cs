@@ -1,8 +1,4 @@
-﻿using System;
-
-using JetBrains.Annotations;
-
-namespace Framework.Validation;
+﻿namespace Framework.Validation;
 
 /// <summary>
 /// Текущая позиция валидации
@@ -15,7 +11,7 @@ public class ValidationState : IValidationState
     /// <param name="parent">Стейт верхнего уровня</param>
     /// <param name="propertyMap">Валидируемое свойство</param>
     /// <param name="source">Валидируемый объект</param>
-    public ValidationState(IValidationState parent, [NotNull] IPropertyValidationMap propertyMap, [NotNull] object source)
+    public ValidationState(IValidationState parent, IPropertyValidationMap propertyMap, object source)
     {
         if (propertyMap == null) throw new ArgumentNullException(nameof(propertyMap));
         if (source == null) throw new ArgumentNullException(nameof(source));

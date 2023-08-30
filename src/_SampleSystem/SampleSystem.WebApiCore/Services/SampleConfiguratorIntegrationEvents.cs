@@ -1,10 +1,5 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Configurator.Interfaces;
-
-using Microsoft.Extensions.Logging;
 
 namespace SampleSystem.WebApiCore.Services;
 

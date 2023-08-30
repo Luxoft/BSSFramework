@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Reflection;
-
-using JetBrains.Annotations;
 
 namespace Framework.Core;
 
@@ -34,7 +29,7 @@ public static class EnumHelper
         }
     }
 
-    public static object[] GetValues([NotNull] Type enumType)
+    public static object[] GetValues(Type enumType)
     {
         if (enumType == null) throw new ArgumentNullException(nameof(enumType));
 

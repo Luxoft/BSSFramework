@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 public class ReferenceComparer<T> : IEqualityComparer<T>
         where T : class

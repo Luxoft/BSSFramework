@@ -1,7 +1,4 @@
-﻿using System;
-
-using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Serialization;
+﻿using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 
 namespace SampleSystem.Domain;

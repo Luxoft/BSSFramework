@@ -1,14 +1,12 @@
-﻿using System;
-
-using Framework.SecuritySystem.Rules.Builders;
+﻿using Framework.SecuritySystem.Rules.Builders;
 using Framework.Persistent;
 
-namespace Framework.SecuritySystem
+namespace Framework.SecuritySystem;
+
+public static class SecurityPathExtensions
 {
-    public static class SecurityPathExtensions
-    {
-        public static ISecurityProvider<TDomainObject> ToProvider<TSecurityOperationCode, TPersistentDomainObjectBase, TDomainObject, TIdent>(
-            this SecurityPathBase<TPersistentDomainObjectBase, TDomainObject, TIdent> securityPath,
+    public static ISecurityProvider<TDomainObject> ToProvider<TSecurityOperationCode, TPersistentDomainObjectBase, TDomainObject, TIdent>(
+            this SecurityPath<TDomainObject> securityPath,
             ContextSecurityOperation<TSecurityOperationCode> operation,
             ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
 

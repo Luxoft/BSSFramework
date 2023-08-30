@@ -1,11 +1,7 @@
-﻿using System;
-
-using Framework.Configuration.Domain;
+﻿using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.Exceptions;
 using Framework.Validation;
-
-using JetBrains.Annotations;
 
 namespace Framework.Configuration.BLL;
 
@@ -50,7 +46,7 @@ public partial class DomainTypeBLL
     }
 
     /// <inheritdoc />
-    public void ForceEvent([NotNull] DomainTypeEventModel eventModel)
+    public void ForceEvent(DomainTypeEventModel eventModel)
     {
         if (eventModel == null) throw new ArgumentNullException(nameof(eventModel));
 

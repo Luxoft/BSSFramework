@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.DTOGenerator.Server;
+﻿namespace Framework.DomainDriven.DTOGenerator.Server;
 
 public class DefaultSimpleEventDTOFileFactory<TConfiguration> : EventDTOFileFactory<TConfiguration>
         where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>

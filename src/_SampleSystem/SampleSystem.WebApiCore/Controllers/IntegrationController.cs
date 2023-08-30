@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Authorization.BLL;
-using Framework.Authorization.Generated.DTO;
+﻿using Framework.Authorization.Generated.DTO;
 using Framework.Core;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore.Integration;
+using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 
-using SampleSystem.BLL;
 using SampleSystem.Generated.DTO;
 
 namespace SampleSystem.WebApiCore.Controllers;
@@ -23,24 +16,24 @@ namespace SampleSystem.WebApiCore.Controllers;
 public class IntegrationController : IntegrationSchemaControllerBase
 {
     public IntegrationController(
-            IAuthorizationBLLContext context,
-            IDateTimeService dateTimeService,
-            IEventXsdExporter2 eventXsdExporter)
-            : base(context, dateTimeService, eventXsdExporter)
+        IAuthorizationSystem authorizationSystem,
+        IDateTimeService dateTimeService,
+        IEventXsdExporter2 eventXsdExporter)
+        : base(authorizationSystem, dateTimeService, eventXsdExporter)
     {
     }
 
     protected override string IntegrationNamespace => "http://sampleSystem.example.com/integrationEvent";
 
     protected override IReadOnlyCollection<Type> GetEventDTOTypes() =>
-            TypeSource.FromSample(typeof(EmployeeSaveEventDTO))
-                      .GetTypes()
-                      .Where(z => typeof(Generated.DTO.EventDTOBase).IsAssignableFrom(z))
-                      .ToList();
+        TypeSource.FromSample(typeof(EmployeeSaveEventDTO))
+                  .GetTypes()
+                  .Where(z => typeof(Generated.DTO.EventDTOBase).IsAssignableFrom(z))
+                  .ToList();
 
     protected override IReadOnlyCollection<Type> GetAuthEventDTOTypes() =>
-            TypeSource.FromSample(typeof(PermissionSaveEventDTO))
-                      .GetTypes()
-                      .Where(z => typeof(Framework.Authorization.Generated.DTO.EventDTOBase).IsAssignableFrom(z))
-                      .ToList();
+        TypeSource.FromSample(typeof(PermissionSaveEventDTO))
+                  .GetTypes()
+                  .Where(z => typeof(Framework.Authorization.Generated.DTO.EventDTOBase).IsAssignableFrom(z))
+                  .ToList();
 }

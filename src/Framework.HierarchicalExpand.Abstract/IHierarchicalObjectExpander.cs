@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-
-namespace Framework.HierarchicalExpand;
+﻿namespace Framework.HierarchicalExpand;
 
 public interface IHierarchicalObjectExpander<TIdent>
 {
@@ -12,7 +8,7 @@ public interface IHierarchicalObjectExpander<TIdent>
     /// <param name="idents">Список базовых идентефикаторов</param>
     /// <param name="expandType">Тип разворачивания</param>
     /// <returns>HashSet/IQueryable></returns>
-    IEnumerable<TIdent> Expand([NotNull] IEnumerable<TIdent> idents, HierarchicalExpandType expandType);
+    IEnumerable<TIdent> Expand(IEnumerable<TIdent> idents, HierarchicalExpandType expandType);
 
     /// <summary>
     /// Получение полного списка связанных идентефикаторов вместе с родителем
@@ -20,7 +16,7 @@ public interface IHierarchicalObjectExpander<TIdent>
     /// <param name="idents">Список базовых идентефикаторов</param>
     /// <param name="expandType">Тип разворачивания</param>
     /// <returns></returns>
-    Dictionary<TIdent, TIdent> ExpandWithParents([NotNull] IEnumerable<TIdent> idents, HierarchicalExpandType expandType);
+    Dictionary<TIdent, TIdent> ExpandWithParents(IEnumerable<TIdent> idents, HierarchicalExpandType expandType);
 
     /// <summary>
     /// Получение полного списка связанных идентефикаторов вместе с родителем
@@ -28,5 +24,5 @@ public interface IHierarchicalObjectExpander<TIdent>
     /// <param name="idents">Список базовых идентефикаторов</param>
     /// <param name="expandType">Тип разворачивания</param>
     /// <returns></returns>
-    Dictionary<TIdent, TIdent> ExpandWithParents([NotNull] IQueryable<TIdent> idents, HierarchicalExpandType expandType);
+    Dictionary<TIdent, TIdent> ExpandWithParents(IQueryable<TIdent> idents, HierarchicalExpandType expandType);
 }

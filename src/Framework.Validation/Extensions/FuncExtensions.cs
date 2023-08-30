@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
-
-namespace Framework.Validation;
+﻿namespace Framework.Validation;
 
 internal static class FuncExtensions
 {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.NHibernate;
+﻿namespace Framework.DomainDriven.NHibernate;
 
 public interface INHibSessionEnvironmentSettings
 {

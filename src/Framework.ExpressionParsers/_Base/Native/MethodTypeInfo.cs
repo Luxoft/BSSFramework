@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 
 using Framework.Core;
-
-using JetBrains.Annotations;
 
 namespace Framework.ExpressionParsers;
 
 public class MethodTypeInfo : IEquatable<MethodTypeInfo>
 {
-    public MethodTypeInfo([NotNull] MethodInfo methodInfo)
+    public MethodTypeInfo(MethodInfo methodInfo)
     {
         if (methodInfo == null) throw new ArgumentNullException(nameof(methodInfo));
 
@@ -19,7 +14,7 @@ public class MethodTypeInfo : IEquatable<MethodTypeInfo>
         this.ReturnType = methodInfo.ReturnType;
     }
 
-    public MethodTypeInfo([NotNull] IEnumerable<Type> inputTypes, [NotNull] Type returnType)
+    public MethodTypeInfo(IEnumerable<Type> inputTypes, Type returnType)
     {
         if (inputTypes == null) throw new ArgumentNullException(nameof(inputTypes));
         if (returnType == null) throw new ArgumentNullException(nameof(returnType));

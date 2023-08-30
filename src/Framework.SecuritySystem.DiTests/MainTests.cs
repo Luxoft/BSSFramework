@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using FluentAssertions;
+﻿using FluentAssertions;
 
 using Framework.HierarchicalExpand;
 using Framework.QueryableSource;
@@ -30,7 +26,7 @@ public class MainTests
     private readonly Employee employee2;
     private readonly Employee employee3;
 
-    private readonly IServiceProvider serviceProvider;
+    private readonly IServiceProvider rootServiceProvider;
 
     public MainTests()
     {
@@ -51,49 +47,56 @@ public class MainTests
         this.employee2 = new Employee() { Id = Guid.NewGuid(), BusinessUnit = this.bu2 };
         this.employee3 = new Employee() { Id = Guid.NewGuid(), BusinessUnit = this.bu3 };
 
-        this.serviceProvider = this.BuildServiceProvider().CreateScope().ServiceProvider;
+        this.rootServiceProvider = this.BuildRootServiceProvider();
     }
 
     [Fact]
-    public void TestEmployeesSecurity_EmployeeHasAccessCorrect()
+    public async Task TestEmployeesSecurity_EmployeeHasAccessCorrect()
     {
         // Arrange
+        await using var scope = this.rootServiceProvider.CreateAsyncScope();
+
+        var employeeDomainSecurityService = scope.ServiceProvider.GetRequiredService<IDomainSecurityService<Employee, ExampleSecurityOperation>>();
+        var counterService = scope.ServiceProvider.GetRequiredService<BusinessUnitAncestorLinkSourceExecuteCounter>();
+        var securityProvider = employeeDomainSecurityService.GetSecurityProvider(BLLSecurityMode.View);
 
         // Act
-        var employeeDomainSecurityService = this.serviceProvider.GetRequiredService<IDomainSecurityService<Employee, ExampleSecurityOperation>>();
-        var provider = employeeDomainSecurityService.GetSecurityProvider(BLLSecurityMode.View);
+        var result1 = securityProvider.HasAccess(this.employee1);
+        var result2 = securityProvider.HasAccess(this.employee2);
+        var result3 = securityProvider.HasAccess(this.employee3);
 
         // Assert
-        var result1 = provider.HasAccess(this.employee1);
-        var result2 = provider.HasAccess(this.employee2);
-        var result3 = provider.HasAccess(this.employee3);
-
         result1.Should().BeTrue();
         result2.Should().BeTrue();
         result3.Should().BeFalse();
+
+        counterService.Count.Should().Be(1);
     }
 
     [Fact]
-    public void CheckEmployeeWithoutSecurity_ExceptionRaised()
+    public async Task CheckEmployeeWithoutSecurity_ExceptionRaised()
     {
         // Arrange
+        await using var scope = this.rootServiceProvider.CreateAsyncScope();
+
+        var employeeDomainSecurityService = scope.ServiceProvider.GetRequiredService<IDomainSecurityService<Employee, ExampleSecurityOperation>>();
+        var securityProvider = employeeDomainSecurityService.GetSecurityProvider(BLLSecurityMode.View);
 
         // Act
-        var employeeDomainSecurityService = this.serviceProvider.GetRequiredService<IDomainSecurityService<Employee, ExampleSecurityOperation>>();
-        var provider = employeeDomainSecurityService.GetSecurityProvider(BLLSecurityMode.View);
+        var checkAccessAction = () => securityProvider.CheckAccess(this.employee3);
 
         // Assert
-        var checkAccessAction = () => provider.CheckAccess(this.employee3);
-
         checkAccessAction.Should().Throw<AccessDeniedException<Guid>>();
     }
 
 
-    private IServiceProvider BuildServiceProvider()
+    private IServiceProvider BuildRootServiceProvider()
     {
         return new ServiceCollection()
 
-               .AddScoped(_ => this.BuildQueryableSource())
+               .AddScoped<BusinessUnitAncestorLinkSourceExecuteCounter>()
+
+               .AddScoped(this.BuildQueryableSource)
                .AddScoped<IPrincipalPermissionSource<Guid>>(_ => new ExamplePrincipalPermissionSource(this.permissions))
 
                .AddScoped<IDisabledSecurityProviderContainer<PersistentDomainObjectBase>, DisabledSecurityProviderContainer<PersistentDomainObjectBase>>()
@@ -107,14 +110,30 @@ public class MainTests
                .BuildServiceProvider(new ServiceProviderOptions{ ValidateOnBuild = true, ValidateScopes = true });
     }
 
-    private IQueryableSource<PersistentDomainObjectBase> BuildQueryableSource()
+    private IQueryableSource<PersistentDomainObjectBase> BuildQueryableSource(IServiceProvider serviceProvider)
     {
         var queryableSource = Substitute.For<IQueryableSource<PersistentDomainObjectBase>>();
 
-        queryableSource.GetQueryable<BusinessUnit>().Returns(new[] { this.bu1, this.bu2, this.bu3 }.AsQueryable());
-
+        queryableSource.GetQueryable<BusinessUnitAncestorLink>().Returns(this.GetBusinessUnitAncestorLinkSource(serviceProvider).AsQueryable());
         queryableSource.GetQueryable<Employee>().Returns(new[] { this.employee1, this.employee2, this.employee3 }.AsQueryable());
 
         return queryableSource;
+    }
+
+    private IEnumerable<BusinessUnitAncestorLink> GetBusinessUnitAncestorLinkSource(IServiceProvider serviceProvider)
+    {
+        var counter = serviceProvider.GetRequiredService<BusinessUnitAncestorLinkSourceExecuteCounter>();
+        counter.Count++;
+
+        yield return new BusinessUnitAncestorLink { Ancestor = this.bu1, Child = this.bu1 };
+        yield return new BusinessUnitAncestorLink { Ancestor = this.bu2, Child = this.bu2 };
+        yield return new BusinessUnitAncestorLink { Ancestor = this.bu3, Child = this.bu3 };
+
+        yield return new BusinessUnitAncestorLink { Ancestor = this.bu1, Child = this.bu2 };
+    }
+
+    private class BusinessUnitAncestorLinkSourceExecuteCounter
+    {
+        public int Count { get; set; }
     }
 }

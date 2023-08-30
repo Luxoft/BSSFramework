@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-using Framework.DomainDriven.Serialization;
+﻿using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 
 namespace Framework.Authorization.Domain;

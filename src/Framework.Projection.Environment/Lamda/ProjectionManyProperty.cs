@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-
-using JetBrains.Annotations;
+﻿using System.Linq.Expressions;
 
 namespace Framework.Projection.Lambda;
 
@@ -13,7 +9,7 @@ namespace Framework.Projection.Lambda;
 /// <typeparam name="TElement">Тип элемента коллекции</typeparam>
 public class ProjectionManyProperty<TDomainObject, TElement> : ProjectionProperty<Expression<Func<TDomainObject, IEnumerable<TElement>>>, TElement>
 {
-    public ProjectionManyProperty(Expression<Func<TDomainObject, IEnumerable<TElement>>> path, string name, [NotNull] Func<Projection<TElement>> getPropProjection, bool ignoreSerialization, IEnumerable<Attribute> attributes)
+    public ProjectionManyProperty(Expression<Func<TDomainObject, IEnumerable<TElement>>> path, string name, Func<Projection<TElement>> getPropProjection, bool ignoreSerialization, IEnumerable<Attribute> attributes)
             : base(path, name, getPropProjection, ignoreSerialization, attributes)
     {
         if (getPropProjection == null) throw new ArgumentNullException(nameof(getPropProjection));

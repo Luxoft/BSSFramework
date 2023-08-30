@@ -1,11 +1,7 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.CodeDom;
 
 using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
-
-using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.BLLGenerator;
 
@@ -28,7 +24,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     protected override string NamespacePostfix { get; } = "BLL";
 
 
-    public virtual bool GenerateBllConstructor([NotNull] Type domainType)
+    public virtual bool GenerateBllConstructor(Type domainType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
 

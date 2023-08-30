@@ -1,16 +1,16 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.CodeDom;
 using System.Reflection;
 
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Generation.Domain;
+using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.Persistent;
 using Framework.Restriction;
 using Framework.Validation;
+
+using Microsoft.Extensions.DependencyInjection;
 
 using ValidatorPairExpr = System.Collections.Generic.KeyValuePair<System.CodeDom.CodeExpression, Framework.Validation.IValidationData>;
 using ValidatorExpr = System.Collections.Generic.IReadOnlyDictionary<System.CodeDom.CodeExpression, Framework.Validation.IValidationData>;
@@ -153,18 +153,18 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
                 return this.GetFixedPropertyValidator(property, fixedPropertyValidatorAttribute);
 
             default:
-            {
-                var autoExpr = this.TryAutoExpandPropertyAttributes(property, attribute);
+                {
+                    var autoExpr = this.TryAutoExpandPropertyAttributes(property, attribute);
 
-                if (autoExpr != null)
-                {
-                    return autoExpr;
+                    if (autoExpr != null)
+                    {
+                        return autoExpr;
+                    }
+                    else
+                    {
+                        throw new ArgumentOutOfRangeException(nameof(attribute));
+                    }
                 }
-                else
-                {
-                    throw new ArgumentOutOfRangeException(nameof(attribute));
-                }
-            }
         }
     }
 
@@ -172,7 +172,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
-        var instanceType = attribute.CreateValidator().GetLastPropertyValidator(property, DynamicSource.Empty).GetType();
+        var instanceType = attribute.CreateValidator().GetLastPropertyValidator(property, new ServiceCollection().BuildServiceProvider()).GetType();
 
         if (instanceType.IsInterfaceImplementation(typeof(IPropertyValidator<,>)))
         {
@@ -344,10 +344,10 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
 
         var createTupleExpr = new CodeParameterDeclarationExpression { Name = "source" }.Pipe(param => new CodeLambdaExpression
-            {
-                    Parameters = { param },
+        {
+            Parameters = { param },
 
-                    Statements = { groupElementType.ToTypeReference().ToObjectCreateExpression(
+            Statements = { groupElementType.ToTypeReference().ToObjectCreateExpression(
 
                                         uniProperties.ToArray(prop => param.ToVariableReferenceExpression()
                                                                            .ToPropertyReference(prop)
@@ -356,7 +356,7 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
                                        ).ToMethodReturnStatement() }
 
-            });
+        });
 
         return internalPropertyValidatorType
                .ToTypeReference()
@@ -369,13 +369,13 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
         var identType = property.DeclaringType.GetIdentType();
 
-        var validatorType = typeof(FixedPropertyValidator<,,>).MakeGenericType(property.ReflectedType, property.PropertyType, identType);
+        var validatorType = typeof(FixedPropertyValidator<,,,>).MakeGenericType(property.ReflectedType, property.PropertyType, identType, this.Configuration.Environment.PersistentDomainObjectBaseType);
 
         var propertyExprLambda = new CodeParameterDeclarationExpression { Name = "source" }.Pipe(p => new CodeLambdaExpression
-            {
-                    Parameters = { p },
-                    Statements = { p.ToVariableReferenceExpression().ToPropertyReference(property) }
-            });
+        {
+            Parameters = { p },
+            Statements = { p.ToVariableReferenceExpression().ToPropertyReference(property) }
+        });
 
         return validatorType.ToTypeReference().ToObjectCreateExpression(propertyExprLambda);
     }
@@ -418,10 +418,10 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
                                                                      domainObjectParameter.ToVariableReferenceExpression().ToPropertyReference(property)));
 
         return new CodeLambdaExpression
-               {
-                       Parameters = { domainObjectParameter },
-                       Statements = { newValuesArrExpr }
-               };
+        {
+            Parameters = { domainObjectParameter },
+            Statements = { newValuesArrExpr }
+        };
     }
 
     private static CodeLambdaExpression GetGetFilterExpression(Type domainObjectType, Type identType, IEnumerable<PropertyInfo> properties)
@@ -449,16 +449,16 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
 
 
         var duplicateLambda = new CodeLambdaExpression
-                              {
-                                      Parameters = { filterDomainObjectParameter },
-                                      Statements = { duplicateFilter }
-                              };
+        {
+            Parameters = { filterDomainObjectParameter },
+            Statements = { duplicateFilter }
+        };
 
         return new CodeLambdaExpression
-               {
-                       Parameters = { sourceDomainObjectParameter },
-                       Statements = { duplicateLambda }
-               };
+        {
+            Parameters = { sourceDomainObjectParameter },
+            Statements = { duplicateLambda }
+        };
     }
 
     private CodeExpression GetUniDbGroupValidator(UniDBGroupValidatorAttribute attribute)
@@ -492,17 +492,17 @@ public class DefaultValidatorGenerator<TConfiguration> : GeneratorConfigurationC
         var sourceParam = new CodeParameterDeclarationExpression { Name = "source" };
 
         var propertyValidatorDict = uniProperties.ToDictionary(property => property.Name, property => new CodeLambdaExpression
-                                                                   {
-                                                                           Parameters = { sourceParam },
+        {
+            Parameters = { sourceParam },
 
-                                                                           Statements =
+            Statements =
                                                                            {
 
                                                                                    typeof(RequiredHelper).ToTypeReferenceExpression().ToMethodInvokeExpression("IsValid",
                                                                                        sourceParam.ToVariableReferenceExpression().ToPropertyReference(property),
                                                                                        RequiredMode.Default.ToPrimitiveExpression())
                                                                            }
-                                                                   });
+        });
 
 
 

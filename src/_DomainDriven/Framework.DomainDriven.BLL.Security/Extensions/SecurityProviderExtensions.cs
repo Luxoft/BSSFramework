@@ -1,7 +1,6 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
-using Framework.DomainDriven.BLL.Tracking;
+using Framework.DomainDriven.Tracking;
 using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.BLL.Security;
@@ -9,12 +8,12 @@ namespace Framework.DomainDriven.BLL.Security;
 public static class SecurityProviderExtensions
 {
     public static ISecurityProvider<TDomainObject> WithFixedProperties<TBLLContext, TDomainObject>(
-            this ISecurityProvider<TDomainObject> securityProvider,
-            TBLLContext context,
-            params Expression<Func<TDomainObject, object>>[] allowedPropertiesForChangingExpressions)
+        this ISecurityProvider<TDomainObject> securityProvider,
+        TBLLContext context,
+        params Expression<Func<TDomainObject, object>>[] allowedPropertiesForChangingExpressions)
 
-            where TBLLContext : class, IAccessDeniedExceptionServiceContainer<TDomainObject>, ITrackingServiceContainer<TDomainObject>
-            where TDomainObject : class
+        where TBLLContext : class, IAccessDeniedExceptionServiceContainer<TDomainObject>, ITrackingServiceContainer<TDomainObject>
+        where TDomainObject : class
     {
         if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
         if (context == null) throw new ArgumentNullException(nameof(context));

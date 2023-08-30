@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Framework.Core;
-using Framework.Persistent;
+﻿using Framework.Persistent;
 
 namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
 
@@ -33,6 +29,9 @@ public class HierarchyObject : PersistentDomainObjectBase,
     {
         this.children.Remove(f);
     }
+
+    public int DeepLevel { get; set; }
+
     public string Name
     {
         get; set;

@@ -22,7 +22,7 @@
         protected virtual SampleSystem.Generated.DTO.IntegrationVersionContainer2IdentityDTO SaveIntegrationVersionContainer2Internal(SampleSystem.Generated.DTO.IntegrationVersionContainer2IntegrationRichDTO integrationVersionContainer2, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IIntegrationVersionContainer2BLL bll = evaluateData.Context.Logics.IntegrationVersionContainer2;
-            Framework.DomainDriven.BLL.Security.AuthorizationBLLContextExtensions.CheckAccess(evaluateData.Context.Authorization, SampleSystem.BLL.SampleSystemSecurityOperation.SystemIntegration);
+            evaluateData.Context.Authorization.CheckAccess(SampleSystem.BLL.SampleSystemSecurityOperation.SystemIntegration);
             return this.SaveIntegrationVersionContainer2Internal(integrationVersionContainer2, evaluateData, bll);
         }
         

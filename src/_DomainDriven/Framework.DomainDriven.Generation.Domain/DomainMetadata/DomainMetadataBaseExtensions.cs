@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 
 using Framework.Core;
 using Framework.Projection;
-
-using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.Generation.Domain;
 
 public static class DomainMetadataBaseExtensions
 {
-    public static Type GetIdentityType([NotNull] this IDomainMetadataBase domainMetadata)
+    public static Type GetIdentityType(this IDomainMetadataBase domainMetadata)
     {
         if (domainMetadata == null) throw new ArgumentNullException(nameof(domainMetadata));
 
         return domainMetadata.IdentityProperty.PropertyType;
     }
 
-    public static IEnumerable<Type> GetDefaultDomainTypes([NotNull] this IDomainMetadata domainMetadata, bool onlyPersistent = true)
+    public static IEnumerable<Type> GetDefaultDomainTypes(this IDomainMetadata domainMetadata, bool onlyPersistent = true)
     {
         if (domainMetadata == null) throw new ArgumentNullException(nameof(domainMetadata));
 
@@ -36,7 +31,7 @@ public static class DomainMetadataBaseExtensions
                select type;
     }
 
-    public static IEnumerable<Type> GetModelTypes([NotNull] this IDomainMetadata domainMetadata, Type domainType, Type modelType)
+    public static IEnumerable<Type> GetModelTypes(this IDomainMetadata domainMetadata, Type domainType, Type modelType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
 
@@ -58,7 +53,7 @@ public static class DomainMetadataBaseExtensions
                select type;
     }
 
-    public static bool IsDomainObjectBaseProperty ([NotNull] this IDomainMetadata domainMetadata, PropertyInfo prop)
+    public static bool IsDomainObjectBaseProperty (this IDomainMetadata domainMetadata, PropertyInfo prop)
     {
         if (domainMetadata == null) throw new ArgumentNullException(nameof(domainMetadata));
         if (prop == null) throw new ArgumentNullException(nameof(prop));
@@ -68,7 +63,7 @@ public static class DomainMetadataBaseExtensions
         return declareType.IsAssignableFrom(domainMetadata.DomainObjectBaseType);
     }
 
-    public static bool IsPersistentDomainObjectBaseProperty([NotNull] this IDomainMetadata domainMetadata, PropertyInfo prop)
+    public static bool IsPersistentDomainObjectBaseProperty(this IDomainMetadata domainMetadata, PropertyInfo prop)
     {
         if (domainMetadata == null) throw new ArgumentNullException(nameof(domainMetadata));
         if (prop == null) throw new ArgumentNullException(nameof(prop));
@@ -83,7 +78,7 @@ public static class DomainMetadataBaseExtensions
         return declareType.IsAssignableFrom(domainMetadata.PersistentDomainObjectBaseType);
     }
 
-    public static bool IsAuditPersistentDomainObjectBaseProperty([NotNull] this IDomainMetadata domainMetadata, PropertyInfo prop)
+    public static bool IsAuditPersistentDomainObjectBaseProperty(this IDomainMetadata domainMetadata, PropertyInfo prop)
     {
         if (domainMetadata == null) throw new ArgumentNullException(nameof(domainMetadata));
         if (prop == null) throw new ArgumentNullException(nameof(prop));
@@ -98,7 +93,7 @@ public static class DomainMetadataBaseExtensions
         return declareType.IsAssignableFrom(domainMetadata.AuditPersistentDomainObjectBaseType);
     }
 
-    public static Type GetProjectionBaseType([NotNull] this IDomainMetadata domainMetadata, [NotNull] Type projectionType)
+    public static Type GetProjectionBaseType(this IDomainMetadata domainMetadata, Type projectionType)
     {
         if (domainMetadata == null) throw new ArgumentNullException(nameof(domainMetadata));
         if (projectionType == null) throw new ArgumentNullException(nameof(projectionType));
@@ -117,7 +112,7 @@ public static class DomainMetadataBaseExtensions
         }
     }
 
-    public static bool IsIdentityProperty(this IDomainMetadata domainMetadata, [NotNull] PropertyInfo property)
+    public static bool IsIdentityProperty(this IDomainMetadata domainMetadata, PropertyInfo property)
     {
         if (domainMetadata == null) throw new ArgumentNullException(nameof(domainMetadata));
         if (property == null) throw new ArgumentNullException(nameof(property));

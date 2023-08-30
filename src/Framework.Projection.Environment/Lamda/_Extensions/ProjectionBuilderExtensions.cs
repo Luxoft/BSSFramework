@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
-
-using JetBrains.Annotations;
+﻿using Framework.Core;
 
 namespace Framework.Projection.Lambda;
 
 internal static class ProjectionBuilderExtensions
 {
-    public static IReadOnlyCollection<ProjectionBuilder> ToBuilders([NotNull] this IEnumerable<IProjection> projections)
+    public static IReadOnlyCollection<ProjectionBuilder> ToBuilders(this IEnumerable<IProjection> projections)
     {
         if (projections == null) throw new ArgumentNullException(nameof(projections));
 

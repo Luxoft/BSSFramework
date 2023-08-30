@@ -1,16 +1,13 @@
 ﻿#pragma warning disable SA1600 // ElementsMustBeDocumented. Internal type does not require inline documentation by convention.
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
-using Framework.Authorization.BLL;
+using Framework.Authorization.Notification;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Persistent;
 
-using JetBrains.Annotations;
+
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Recipients;
 
@@ -65,7 +62,6 @@ internal sealed class ByRolesRecipientsResolverTyped<TBLLContext> : ByRolesRecip
         return notificationFilterGroup;
     }
 
-    [UsedImplicitly]
     private NotificationFilterGroup GetNotificationFilterGroupTyped<T, TSecurityItem>(
             SubscriptionSecurityItem securityItem,
             DomainObjectVersions<T> versions)

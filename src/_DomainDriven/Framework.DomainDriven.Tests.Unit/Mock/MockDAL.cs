@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using System.Reflection;
 using Framework.Core;
 using Framework.DomainDriven.DAL.Revisions;
@@ -101,6 +98,10 @@ public class MockDAL<TDomain, TIdent> : IMockDAL<TDomain, TIdent> where TDomain 
     public IEnumerable<TIdent> GetIdentiesWithHistory(Expression<Func<TDomain, bool>> query, Period? period = null)
     {
         throw new NotImplementedException();
+    }
+
+    public void Refresh(TDomain domainObject)
+    {
     }
 
     public void Lock(TDomain domainObject, LockRole lockRole)

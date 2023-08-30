@@ -1,15 +1,7 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
+﻿using System.CodeDom;
 
 using Framework.CodeDom;
-using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.Generation.Domain;
 using Framework.Validation;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;

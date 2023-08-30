@@ -1,10 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 
 using Framework.Core;
-
-using JetBrains.Annotations;
 
 namespace Framework.Projection.Lambda;
 
@@ -21,7 +17,7 @@ internal class GeneratedCustomProperty : BasePropertyInfoImpl
     private readonly PropertyMethodInfoImpl setMethod;
 
 
-    public GeneratedCustomProperty([NotNull] ProjectionLambdaEnvironment environment, [NotNull] IProjectionCustomProperty customProperty, [NotNull] GeneratedType reflectedType)
+    public GeneratedCustomProperty(ProjectionLambdaEnvironment environment, IProjectionCustomProperty customProperty, GeneratedType reflectedType)
     {
         this.environment = environment ?? throw new ArgumentNullException(nameof(environment));
         this.customProjectionProperty = customProperty ?? throw new ArgumentNullException(nameof(customProperty));

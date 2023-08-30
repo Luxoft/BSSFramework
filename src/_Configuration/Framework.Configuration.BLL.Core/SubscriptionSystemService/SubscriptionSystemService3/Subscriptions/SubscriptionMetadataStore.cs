@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Configuration.Domain;
+﻿using Framework.Configuration.Domain;
 using Framework.Configuration.SubscriptionModeling;
 using Framework.Core;
-
-using JetBrains.Annotations;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
 
@@ -24,7 +18,7 @@ public class SubscriptionMetadataStore
     /// <exception cref="ArgumentNullException">
     ///     Аргумент <paramref name="subscriptionMetadataFinder" /> равен null.
     /// </exception>
-    public SubscriptionMetadataStore([NotNull] ISubscriptionMetadataFinder subscriptionMetadataFinder)
+    public SubscriptionMetadataStore(ISubscriptionMetadataFinder subscriptionMetadataFinder)
     {
         if (subscriptionMetadataFinder == null)
         {
@@ -49,7 +43,7 @@ public class SubscriptionMetadataStore
     /// <exception cref="ArgumentNullException">
     ///     Аргумент <paramref name="domainObjectType" /> равен null.
     /// </exception>
-    public virtual IEnumerable<ISubscriptionMetadata> Get([NotNull] Type domainObjectType)
+    public virtual IEnumerable<ISubscriptionMetadata> Get(Type domainObjectType)
     {
         if (domainObjectType == null)
         {
@@ -61,8 +55,8 @@ public class SubscriptionMetadataStore
     }
 
     public virtual void RegisterCodeFirstSubscriptions(
-            [NotNull] ICodeFirstSubscriptionBLL bll,
-            [NotNull] IConfigurationBLLContext context)
+            ICodeFirstSubscriptionBLL bll,
+            IConfigurationBLLContext context)
     {
         if (bll == null)
         {

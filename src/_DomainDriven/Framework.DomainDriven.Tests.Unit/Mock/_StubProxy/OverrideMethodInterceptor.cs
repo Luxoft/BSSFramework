@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Framework.Core;
+﻿using Framework.Core;
 
 using Unity.Interception.InterceptionBehaviors;
 using Unity.Interception.Interceptors.TypeInterceptors.VirtualMethodInterception;
@@ -36,7 +33,7 @@ internal class OverrideMethodInterceptor : IInterceptionBehavior
                                                                                return isEqual;
                                                                            });
 
-        return overrideMethodInfo.Maybe(z=>new VirtualMethodReturn(input, z.ReturnValue, new object[0])) 
+        return overrideMethodInfo.Maybe(z=>new VirtualMethodReturn(input, z.ReturnValue, new object[0]))
                ?? getNext()(input, getNext);
     }
 
@@ -45,7 +42,7 @@ internal class OverrideMethodInterceptor : IInterceptionBehavior
         yield break;
     }
 
-    public bool WillExecute 
+    public bool WillExecute
     {
         get { return true; }
     }

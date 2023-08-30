@@ -1,5 +1,4 @@
-﻿using System;
-using Framework.DomainDriven.Generation.Domain;
+﻿using Framework.DomainDriven.Generation.Domain;
 
 namespace Framework.DomainDriven.DTOGenerator.Audit;
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using System.Reflection;
 
 using Framework.Core;
@@ -20,10 +17,10 @@ public class UniqueCollectionValidator : IDynamicPropertyValidator
     }
 
 
-    public IPropertyValidator GetValidator(PropertyInfo property, IDynamicSource extendedValidationData)
+    public IPropertyValidator GetValidator(PropertyInfo property, IServiceProvider serviceProvider)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
-        if (extendedValidationData == null) throw new ArgumentNullException(nameof(extendedValidationData));
+        if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
 
         var elementType = property.PropertyType.GetCollectionElementType();
 

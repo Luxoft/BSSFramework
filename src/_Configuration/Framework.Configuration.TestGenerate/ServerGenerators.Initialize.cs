@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Configuration.TestGenerate;
+﻿namespace Framework.Configuration.TestGenerate;
 
 public partial class ServerGenerators : GeneratorsBase
 {

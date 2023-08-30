@@ -1,9 +1,4 @@
-﻿using System;
-using System.Linq;
-
-using Framework.Core;
-
-using JetBrains.Annotations;
+﻿using Framework.Core;
 
 namespace Framework.Exceptions;
 
@@ -25,14 +20,14 @@ public static class TypeExtensions
     }
 
 
-    public static bool IsDetailException([NotNull] this Type type)
+    public static bool IsDetailException(this Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 
         return type.GetExceptionDetailType() != null;
     }
 
-    public static Type GetExceptionDetailType([NotNull] this Type type)
+    public static Type GetExceptionDetailType(this Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 

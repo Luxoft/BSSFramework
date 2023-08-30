@@ -1,11 +1,6 @@
-﻿using System;
-using System.IO;
-
-using Framework.WebApi.Utils;
+﻿using Framework.WebApi.Utils;
 
 using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 
 using Serilog;
 

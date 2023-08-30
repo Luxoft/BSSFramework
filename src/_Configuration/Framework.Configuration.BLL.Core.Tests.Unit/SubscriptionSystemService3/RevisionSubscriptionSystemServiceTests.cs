@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using AutoFixture;
+﻿using AutoFixture;
 using AutoFixture.Idioms;
 
 using FluentAssertions;
@@ -12,7 +8,6 @@ using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
 using Framework.Core;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.DAL.Revisions;
 using Framework.UnitTesting;
 using NUnit.Framework;

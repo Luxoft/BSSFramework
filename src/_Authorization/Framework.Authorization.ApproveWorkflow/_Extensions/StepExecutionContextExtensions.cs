@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-using WorkflowCore.Interface;
+﻿using WorkflowCore.Interface;
 
 namespace Framework.Authorization.ApproveWorkflow;
 

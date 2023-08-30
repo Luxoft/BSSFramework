@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-
-using JetBrains.Annotations;
+﻿using System.ComponentModel;
 
 namespace Framework.Projection;
 
@@ -17,7 +14,7 @@ public class ProjectionAttribute : Attribute
     /// <param name="sourceType">Исходный тип, по которому строилась проекция</param>
     /// <param name="role">Роль проекции</param>
     /// <param name="contractType">Контракт, по которому строилась проекция</param>
-    public ProjectionAttribute([NotNull] Type sourceType, ProjectionRole role, Type contractType = null)
+    public ProjectionAttribute(Type sourceType, ProjectionRole role, Type contractType = null)
     {
         if (!Enum.IsDefined(typeof(ProjectionRole), role)) { throw new InvalidEnumArgumentException(nameof(role), (int)role, typeof(ProjectionRole)); }
 

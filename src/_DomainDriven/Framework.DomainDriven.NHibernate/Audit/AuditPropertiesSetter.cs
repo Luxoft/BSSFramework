@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.Audit;
-
-using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.NHibernate.Audit;
 
@@ -18,7 +12,7 @@ internal sealed partial class AuditPropertiesSetter
 {
     private readonly IDictionaryCache<DomainObjectDescription, Func<object[], bool>> setCache;
 
-    public AuditPropertiesSetter([NotNull] IEnumerable<IAuditProperty> auditProperties)
+    public AuditPropertiesSetter(IEnumerable<IAuditProperty> auditProperties)
     {
         if (auditProperties == null)
         {

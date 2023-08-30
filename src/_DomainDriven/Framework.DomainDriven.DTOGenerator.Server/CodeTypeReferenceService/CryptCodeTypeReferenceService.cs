@@ -1,7 +1,5 @@
 ﻿using System.Reflection;
 
-using Framework.CodeDom;
-
 namespace Framework.DomainDriven.DTOGenerator.Server;
 
 public class CryptCodeTypeReferenceService<TConfiguration> : DynamicCodeTypeReferenceService<TConfiguration>

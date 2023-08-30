@@ -1,7 +1,4 @@
-﻿using System;
-
-using Framework.DomainDriven.BLL;
-using Framework.Persistent;
+﻿using Framework.DomainDriven.BLL;
 
 namespace SampleSystem.Domain.EnversBug1676;
 

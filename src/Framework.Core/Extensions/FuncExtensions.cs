@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-
-using JetBrains.Annotations;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 public static class FuncExtensions
 {
-    public static Func<T> WithTryFinally<T>([NotNull] this Func<T> f, [NotNull] Action tryAction, Action finallyAction = null)
+    public static Func<T> WithTryFinally<T>(this Func<T> f, Action tryAction, Action finallyAction = null)
     {
         if (f == null) throw new ArgumentNullException(nameof(f));
         if (tryAction == null) throw new ArgumentNullException(nameof(tryAction));
@@ -184,14 +177,14 @@ public static class FuncExtensions
         return (arg1, arg2) => cacheFunc (Tuple.Create(arg1, arg2));
     }
 
-    public static Func<TArg, IEnumerable<TResult>> Sum<TArg, TResult>([NotNull] this IEnumerable<Func<TArg, IEnumerable<TResult>>> funcs)
+    public static Func<TArg, IEnumerable<TResult>> Sum<TArg, TResult>(this IEnumerable<Func<TArg, IEnumerable<TResult>>> funcs)
     {
         if (funcs == null) throw new ArgumentNullException(nameof(funcs));
 
         return funcs.Aggregate(FuncHelper.Create((TArg _) => Enumerable.Empty<TResult>()), (f1, f2) => arg => f1(arg).Concat(f2(arg)));
     }
 
-    public static Func<TArg1, TArg2, IEnumerable<TResult>> Sum<TArg1, TArg2, TResult>([NotNull] this IEnumerable<Func<TArg1, TArg2, IEnumerable<TResult>>> funcs)
+    public static Func<TArg1, TArg2, IEnumerable<TResult>> Sum<TArg1, TArg2, TResult>(this IEnumerable<Func<TArg1, TArg2, IEnumerable<TResult>>> funcs)
     {
         if (funcs == null) throw new ArgumentNullException(nameof(funcs));
 

@@ -1,14 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageId>Luxoft.Framework.Configuration.BLL.Core</PackageId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Serilog" Version="2.12.0" />
+    <PackageReference Include="Serilog" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework.DependencyInjection\Framework.DependencyInjection.csproj" />
     <ProjectReference Include="..\..\Framework.ExpressionParsers\Framework.ExpressionParsers.csproj" />
     <ProjectReference Include="..\..\_Authorization\Framework.Authorization.BLL.Core\Framework.Authorization.BLL.Core.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.Events\Framework.Events.csproj" />

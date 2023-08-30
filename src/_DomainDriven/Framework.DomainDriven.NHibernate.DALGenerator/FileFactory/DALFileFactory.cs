@@ -1,10 +1,7 @@
-﻿using System;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 
 using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.Generation.Domain;
-
-using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.NHibernate.DALGenerator;
 
@@ -14,7 +11,7 @@ public class DALFileFactory<TConfiguration> : GeneratorConfigurationContainer<TC
     private readonly IMappingGenerator _mappingGenerator;
 
 
-    public DALFileFactory(TConfiguration configuration, [NotNull] IMappingGenerator mappingGenerator)
+    public DALFileFactory(TConfiguration configuration, IMappingGenerator mappingGenerator)
             : base(configuration)
     {
         this._mappingGenerator = mappingGenerator ?? throw new ArgumentNullException(nameof(mappingGenerator));

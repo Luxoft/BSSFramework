@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
-
-using JetBrains.Annotations;
+﻿using System.Runtime.Serialization;
 
 namespace Framework.Persistent;
 
@@ -18,7 +15,7 @@ public struct HierarchicalNode<TValue, TIdent>
     [DataMember]
     public bool OnlyView { get; set; }
 
-    public HierarchicalNode<TNewItem, TIdent> ChangeItem<TNewItem>([NotNull] Func<TValue, TNewItem> selector)
+    public HierarchicalNode<TNewItem, TIdent> ChangeItem<TNewItem>(Func<TValue, TNewItem> selector)
             where TNewItem : IIdentityObject<TIdent>
     {
         if (selector == null) throw new ArgumentNullException(nameof(selector));

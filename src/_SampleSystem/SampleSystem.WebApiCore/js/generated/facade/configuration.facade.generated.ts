@@ -28,10 +28,7 @@ export let checkReportPropertyAccessAsyncFunc = _checkReportPropertyAccess();
 export let checkSequenceAccessAsyncFunc = _checkSequenceAccess();
 export let checkSystemConstantAccessAsyncFunc = _checkSystemConstantAccess();
 export let checkTargetSystemAccessAsyncFunc = _checkTargetSystemAccess();
-export let checkUserActionAccessAsyncFunc = _checkUserActionAccess();
-export let checkUserActionObjectAccessAsyncFunc = _checkUserActionObjectAccess();
 export let createSequenceAsyncFunc = _createSequence();
-export let createUserActionAsyncFunc = _createUserAction();
 export let getFullCodeFirstSubscriptionAsyncFunc = _getFullCodeFirstSubscription();
 export let getFullCodeFirstSubscriptionByCodeAsyncFunc = _getFullCodeFirstSubscriptionByCode();
 export let getFullCodeFirstSubscriptionsAsyncFunc = _getFullCodeFirstSubscriptions();
@@ -73,15 +70,6 @@ export let getFullTargetSystemByNameAsyncFunc = _getFullTargetSystemByName();
 export let getFullTargetSystemsAsyncFunc = _getFullTargetSystems();
 export let getFullTargetSystemsByIdentsAsyncFunc = _getFullTargetSystemsByIdents();
 export let getFullTargetSystemsByRootFilterAsyncFunc = _getFullTargetSystemsByRootFilter();
-export let getFullUserActionAsyncFunc = _getFullUserAction();
-export let getFullUserActionByNameAsyncFunc = _getFullUserActionByName();
-export let getFullUserActionObjectAsyncFunc = _getFullUserActionObject();
-export let getFullUserActionObjectByNameAsyncFunc = _getFullUserActionObjectByName();
-export let getFullUserActionObjectsAsyncFunc = _getFullUserActionObjects();
-export let getFullUserActionObjectsByIdentsAsyncFunc = _getFullUserActionObjectsByIdents();
-export let getFullUserActionObjectsByRootFilterAsyncFunc = _getFullUserActionObjectsByRootFilter();
-export let getFullUserActionsAsyncFunc = _getFullUserActions();
-export let getFullUserActionsByIdentsAsyncFunc = _getFullUserActionsByIdents();
 export let getRichCodeFirstSubscriptionAsyncFunc = _getRichCodeFirstSubscription();
 export let getRichCodeFirstSubscriptionByCodeAsyncFunc = _getRichCodeFirstSubscriptionByCode();
 export let getRichDomainTypeAsyncFunc = _getRichDomainType();
@@ -97,10 +85,6 @@ export let getRichSystemConstantAsyncFunc = _getRichSystemConstant();
 export let getRichSystemConstantByCodeAsyncFunc = _getRichSystemConstantByCode();
 export let getRichTargetSystemAsyncFunc = _getRichTargetSystem();
 export let getRichTargetSystemByNameAsyncFunc = _getRichTargetSystemByName();
-export let getRichUserActionAsyncFunc = _getRichUserAction();
-export let getRichUserActionByNameAsyncFunc = _getRichUserActionByName();
-export let getRichUserActionObjectAsyncFunc = _getRichUserActionObject();
-export let getRichUserActionObjectByNameAsyncFunc = _getRichUserActionObjectByName();
 export let getSimpleCodeFirstSubscriptionAsyncFunc = _getSimpleCodeFirstSubscription();
 export let getSimpleCodeFirstSubscriptionByCodeAsyncFunc = _getSimpleCodeFirstSubscriptionByCode();
 export let getSimpleCodeFirstSubscriptionsAsyncFunc = _getSimpleCodeFirstSubscriptions();
@@ -142,15 +126,6 @@ export let getSimpleTargetSystemByNameAsyncFunc = _getSimpleTargetSystemByName()
 export let getSimpleTargetSystemsAsyncFunc = _getSimpleTargetSystems();
 export let getSimpleTargetSystemsByIdentsAsyncFunc = _getSimpleTargetSystemsByIdents();
 export let getSimpleTargetSystemsByRootFilterAsyncFunc = _getSimpleTargetSystemsByRootFilter();
-export let getSimpleUserActionAsyncFunc = _getSimpleUserAction();
-export let getSimpleUserActionByNameAsyncFunc = _getSimpleUserActionByName();
-export let getSimpleUserActionObjectAsyncFunc = _getSimpleUserActionObject();
-export let getSimpleUserActionObjectByNameAsyncFunc = _getSimpleUserActionObjectByName();
-export let getSimpleUserActionObjectsAsyncFunc = _getSimpleUserActionObjects();
-export let getSimpleUserActionObjectsByIdentsAsyncFunc = _getSimpleUserActionObjectsByIdents();
-export let getSimpleUserActionObjectsByRootFilterAsyncFunc = _getSimpleUserActionObjectsByRootFilter();
-export let getSimpleUserActionsAsyncFunc = _getSimpleUserActions();
-export let getSimpleUserActionsByIdentsAsyncFunc = _getSimpleUserActionsByIdents();
 export let getVisualDomainTypeAsyncFunc = _getVisualDomainType();
 export let getVisualDomainTypeByNameAsyncFunc = _getVisualDomainTypeByName();
 export let getVisualDomainTypesAsyncFunc = _getVisualDomainTypes();
@@ -181,8 +156,6 @@ export let hasReportPropertyAccessAsyncFunc = _hasReportPropertyAccess();
 export let hasSequenceAccessAsyncFunc = _hasSequenceAccess();
 export let hasSystemConstantAccessAsyncFunc = _hasSystemConstantAccess();
 export let hasTargetSystemAccessAsyncFunc = _hasTargetSystemAccess();
-export let hasUserActionAccessAsyncFunc = _hasUserActionAccess();
-export let hasUserActionObjectAccessAsyncFunc = _hasUserActionObjectAccess();
 export let removeReportAsyncFunc = _removeReport();
 export let removeSequenceAsyncFunc = _removeSequence();
 export let saveCodeFirstSubscriptionAsyncFunc = _saveCodeFirstSubscription();
@@ -271,35 +244,11 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
         });
     }
 
-    function _checkUserActionAccess(): async.SimpleAsyncFunc3<dto.UserActionIdentityDTO, dto.ConfigurationSecurityOperationCode, void> {
-        return new async.SimpleAsyncFunc3((userActionIdent: dto.UserActionIdentityDTO, securityOperationCode: dto.ConfigurationSecurityOperationCode) => {
-            let baseParameters = {userActionIdent : userActionIdent, securityOperationCode : securityOperationCode};
-            let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('UserAction/CheckUserActionAccess', baseParameters);
-        });
-    }
-
-    function _checkUserActionObjectAccess(): async.SimpleAsyncFunc3<dto.UserActionObjectIdentityDTO, dto.ConfigurationSecurityOperationCode, void> {
-        return new async.SimpleAsyncFunc3((userActionObjectIdent: dto.UserActionObjectIdentityDTO, securityOperationCode: dto.ConfigurationSecurityOperationCode) => {
-            let baseParameters = {userActionObjectIdent : userActionObjectIdent, securityOperationCode : securityOperationCode};
-            let service = Environment.current.context.facadeFactory.createSimpleService<void>();
-            return service.getData('UserActionObject/CheckUserActionObjectAccess', baseParameters);
-        });
-    }
-
     function _createSequence(): async.AsyncFunc3<dto.SequenceCreateModelStrictDTO, dto.SequenceRichDTO, dto.SequenceObservableRichDTO, dto.SequenceRichDTO, dto.SequenceObservableRichDTO> {
         return new async.AsyncFunc3((sequenceCreateModel: dto.SequenceCreateModelStrictDTO) => {
             let baseParameters = sequenceCreateModel.toNativeJson();
             let service = Environment.current.context.facadeFactory.createService<dto.SequenceRichDTO, dto.SequenceObservableRichDTO, dto.SequenceRichDTO, dto.SequenceObservableRichDTO>();
             return service.getData('Sequence/CreateSequence', {plain : dto.SequenceRichDTO, observable : dto.SequenceObservableRichDTO}, baseParameters);
-        });
-    }
-
-    function _createUserAction(): async.AsyncFunc3<dto.UserActionCreateModelStrictDTO, dto.UserActionRichDTO, dto.UserActionObservableRichDTO, dto.UserActionRichDTO, dto.UserActionObservableRichDTO> {
-        return new async.AsyncFunc3((userActionCreateModel: dto.UserActionCreateModelStrictDTO) => {
-            let baseParameters = userActionCreateModel.toNativeJson();
-            let service = Environment.current.context.facadeFactory.createService<dto.UserActionRichDTO, dto.UserActionObservableRichDTO, dto.UserActionRichDTO, dto.UserActionObservableRichDTO>();
-            return service.getData('UserAction/CreateUserAction', {plain : dto.UserActionRichDTO, observable : dto.UserActionObservableRichDTO}, baseParameters);
         });
     }
 
@@ -631,78 +580,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
         });
     }
 
-    function _getFullUserAction(): async.AsyncFunc3<dto.UserActionIdentityDTO, dto.UserActionFullDTO, dto.UserActionObservableFullDTO, dto.UserActionFullDTO, dto.UserActionObservableFullDTO> {
-        return new async.AsyncFunc3((userActionIdentity: dto.UserActionIdentityDTO) => {
-            let baseParameters = userActionIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.UserActionFullDTO, dto.UserActionObservableFullDTO, dto.UserActionFullDTO, dto.UserActionObservableFullDTO>();
-            return service.getData('UserAction/GetFullUserAction', {plain : dto.UserActionFullDTO, observable : dto.UserActionObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullUserActionByName(): async.AsyncFunc3<string, dto.UserActionFullDTO, dto.UserActionObservableFullDTO, dto.UserActionFullDTO, dto.UserActionObservableFullDTO> {
-        return new async.AsyncFunc3((userActionName: string) => {
-            let baseParameters = userActionName;
-            let service = Environment.current.context.facadeFactory.createService<dto.UserActionFullDTO, dto.UserActionObservableFullDTO, dto.UserActionFullDTO, dto.UserActionObservableFullDTO>();
-            return service.getData('UserAction/GetFullUserActionByName', {plain : dto.UserActionFullDTO, observable : dto.UserActionObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullUserActionObject(): async.AsyncFunc3<dto.UserActionObjectIdentityDTO, dto.UserActionObjectFullDTO, dto.UserActionObjectObservableFullDTO, dto.UserActionObjectFullDTO, dto.UserActionObjectObservableFullDTO> {
-        return new async.AsyncFunc3((userActionObjectIdentity: dto.UserActionObjectIdentityDTO) => {
-            let baseParameters = userActionObjectIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.UserActionObjectFullDTO, dto.UserActionObjectObservableFullDTO, dto.UserActionObjectFullDTO, dto.UserActionObjectObservableFullDTO>();
-            return service.getData('UserActionObject/GetFullUserActionObject', {plain : dto.UserActionObjectFullDTO, observable : dto.UserActionObjectObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullUserActionObjectByName(): async.AsyncFunc3<string, dto.UserActionObjectFullDTO, dto.UserActionObjectObservableFullDTO, dto.UserActionObjectFullDTO, dto.UserActionObjectObservableFullDTO> {
-        return new async.AsyncFunc3((userActionObjectName: string) => {
-            let baseParameters = userActionObjectName;
-            let service = Environment.current.context.facadeFactory.createService<dto.UserActionObjectFullDTO, dto.UserActionObjectObservableFullDTO, dto.UserActionObjectFullDTO, dto.UserActionObjectObservableFullDTO>();
-            return service.getData('UserActionObject/GetFullUserActionObjectByName', {plain : dto.UserActionObjectFullDTO, observable : dto.UserActionObjectObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullUserActionObjects(): async.AsyncFunc2<Array<dto.UserActionObjectFullDTO>, Array<dto.UserActionObjectObservableFullDTO>, dto.UserActionObjectFullDTO, dto.UserActionObjectObservableFullDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.UserActionObjectFullDTO>, Array<dto.UserActionObjectObservableFullDTO>, dto.UserActionObjectFullDTO, dto.UserActionObjectObservableFullDTO>();
-            return service.getData('UserActionObject/GetFullUserActionObjects', {plain : dto.UserActionObjectFullDTO, observable : dto.UserActionObjectObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullUserActionObjectsByIdents(): async.AsyncFunc3<dto.UserActionObjectIdentityDTO[], Array<dto.UserActionObjectFullDTO>, Array<dto.UserActionObjectObservableFullDTO>, dto.UserActionObjectFullDTO, dto.UserActionObjectObservableFullDTO> {
-        return new async.AsyncFunc3((userActionObjectIdents: dto.UserActionObjectIdentityDTO[]) => {
-            let baseParameters = userActionObjectIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.UserActionObjectFullDTO>, Array<dto.UserActionObjectObservableFullDTO>, dto.UserActionObjectFullDTO, dto.UserActionObjectObservableFullDTO>();
-            return service.getData('UserActionObject/GetFullUserActionObjectsByIdents', {plain : dto.UserActionObjectFullDTO, observable : dto.UserActionObjectObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullUserActionObjectsByRootFilter(): async.AsyncFunc3<dto.UserActionObjectRootFilterModelStrictDTO, Array<dto.UserActionObjectFullDTO>, Array<dto.UserActionObjectObservableFullDTO>, dto.UserActionObjectFullDTO, dto.UserActionObjectObservableFullDTO> {
-        return new async.AsyncFunc3((filter: dto.UserActionObjectRootFilterModelStrictDTO) => {
-            let baseParameters = filter.toNativeJson();
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.UserActionObjectFullDTO>, Array<dto.UserActionObjectObservableFullDTO>, dto.UserActionObjectFullDTO, dto.UserActionObjectObservableFullDTO>();
-            return service.getData('UserActionObject/GetFullUserActionObjectsByRootFilter', {plain : dto.UserActionObjectFullDTO, observable : dto.UserActionObjectObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullUserActions(): async.AsyncFunc2<Array<dto.UserActionFullDTO>, Array<dto.UserActionObservableFullDTO>, dto.UserActionFullDTO, dto.UserActionObservableFullDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.UserActionFullDTO>, Array<dto.UserActionObservableFullDTO>, dto.UserActionFullDTO, dto.UserActionObservableFullDTO>();
-            return service.getData('UserAction/GetFullUserActions', {plain : dto.UserActionFullDTO, observable : dto.UserActionObservableFullDTO}, baseParameters);
-        });
-    }
-
-    function _getFullUserActionsByIdents(): async.AsyncFunc3<dto.UserActionIdentityDTO[], Array<dto.UserActionFullDTO>, Array<dto.UserActionObservableFullDTO>, dto.UserActionFullDTO, dto.UserActionObservableFullDTO> {
-        return new async.AsyncFunc3((userActionIdents: dto.UserActionIdentityDTO[]) => {
-            let baseParameters = userActionIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.UserActionFullDTO>, Array<dto.UserActionObservableFullDTO>, dto.UserActionFullDTO, dto.UserActionObservableFullDTO>();
-            return service.getData('UserAction/GetFullUserActionsByIdents', {plain : dto.UserActionFullDTO, observable : dto.UserActionObservableFullDTO}, baseParameters);
-        });
-    }
-
     function _getRichCodeFirstSubscription(): async.AsyncFunc3<dto.CodeFirstSubscriptionIdentityDTO, dto.CodeFirstSubscriptionRichDTO, dto.CodeFirstSubscriptionObservableRichDTO, dto.CodeFirstSubscriptionRichDTO, dto.CodeFirstSubscriptionObservableRichDTO> {
         return new async.AsyncFunc3((codeFirstSubscriptionIdentity: dto.CodeFirstSubscriptionIdentityDTO) => {
             let baseParameters = codeFirstSubscriptionIdentity;
@@ -820,38 +697,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
             let baseParameters = targetSystemName;
             let service = Environment.current.context.facadeFactory.createService<dto.TargetSystemRichDTO, dto.TargetSystemObservableRichDTO, dto.TargetSystemRichDTO, dto.TargetSystemObservableRichDTO>();
             return service.getData('TargetSystem/GetRichTargetSystemByName', {plain : dto.TargetSystemRichDTO, observable : dto.TargetSystemObservableRichDTO}, baseParameters);
-        });
-    }
-
-    function _getRichUserAction(): async.AsyncFunc3<dto.UserActionIdentityDTO, dto.UserActionRichDTO, dto.UserActionObservableRichDTO, dto.UserActionRichDTO, dto.UserActionObservableRichDTO> {
-        return new async.AsyncFunc3((userActionIdentity: dto.UserActionIdentityDTO) => {
-            let baseParameters = userActionIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.UserActionRichDTO, dto.UserActionObservableRichDTO, dto.UserActionRichDTO, dto.UserActionObservableRichDTO>();
-            return service.getData('UserAction/GetRichUserAction', {plain : dto.UserActionRichDTO, observable : dto.UserActionObservableRichDTO}, baseParameters);
-        });
-    }
-
-    function _getRichUserActionByName(): async.AsyncFunc3<string, dto.UserActionRichDTO, dto.UserActionObservableRichDTO, dto.UserActionRichDTO, dto.UserActionObservableRichDTO> {
-        return new async.AsyncFunc3((userActionName: string) => {
-            let baseParameters = userActionName;
-            let service = Environment.current.context.facadeFactory.createService<dto.UserActionRichDTO, dto.UserActionObservableRichDTO, dto.UserActionRichDTO, dto.UserActionObservableRichDTO>();
-            return service.getData('UserAction/GetRichUserActionByName', {plain : dto.UserActionRichDTO, observable : dto.UserActionObservableRichDTO}, baseParameters);
-        });
-    }
-
-    function _getRichUserActionObject(): async.AsyncFunc3<dto.UserActionObjectIdentityDTO, dto.UserActionObjectRichDTO, dto.UserActionObjectObservableRichDTO, dto.UserActionObjectRichDTO, dto.UserActionObjectObservableRichDTO> {
-        return new async.AsyncFunc3((userActionObjectIdentity: dto.UserActionObjectIdentityDTO) => {
-            let baseParameters = userActionObjectIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.UserActionObjectRichDTO, dto.UserActionObjectObservableRichDTO, dto.UserActionObjectRichDTO, dto.UserActionObjectObservableRichDTO>();
-            return service.getData('UserActionObject/GetRichUserActionObject', {plain : dto.UserActionObjectRichDTO, observable : dto.UserActionObjectObservableRichDTO}, baseParameters);
-        });
-    }
-
-    function _getRichUserActionObjectByName(): async.AsyncFunc3<string, dto.UserActionObjectRichDTO, dto.UserActionObjectObservableRichDTO, dto.UserActionObjectRichDTO, dto.UserActionObjectObservableRichDTO> {
-        return new async.AsyncFunc3((userActionObjectName: string) => {
-            let baseParameters = userActionObjectName;
-            let service = Environment.current.context.facadeFactory.createService<dto.UserActionObjectRichDTO, dto.UserActionObjectObservableRichDTO, dto.UserActionObjectRichDTO, dto.UserActionObjectObservableRichDTO>();
-            return service.getData('UserActionObject/GetRichUserActionObjectByName', {plain : dto.UserActionObjectRichDTO, observable : dto.UserActionObjectObservableRichDTO}, baseParameters);
         });
     }
 
@@ -1183,78 +1028,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
         });
     }
 
-    function _getSimpleUserAction(): async.AsyncFunc3<dto.UserActionIdentityDTO, dto.UserActionSimpleDTO, dto.UserActionObservableSimpleDTO, dto.UserActionSimpleDTO, dto.UserActionObservableSimpleDTO> {
-        return new async.AsyncFunc3((userActionIdentity: dto.UserActionIdentityDTO) => {
-            let baseParameters = userActionIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.UserActionSimpleDTO, dto.UserActionObservableSimpleDTO, dto.UserActionSimpleDTO, dto.UserActionObservableSimpleDTO>();
-            return service.getData('UserAction/GetSimpleUserAction', {plain : dto.UserActionSimpleDTO, observable : dto.UserActionObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleUserActionByName(): async.AsyncFunc3<string, dto.UserActionSimpleDTO, dto.UserActionObservableSimpleDTO, dto.UserActionSimpleDTO, dto.UserActionObservableSimpleDTO> {
-        return new async.AsyncFunc3((userActionName: string) => {
-            let baseParameters = userActionName;
-            let service = Environment.current.context.facadeFactory.createService<dto.UserActionSimpleDTO, dto.UserActionObservableSimpleDTO, dto.UserActionSimpleDTO, dto.UserActionObservableSimpleDTO>();
-            return service.getData('UserAction/GetSimpleUserActionByName', {plain : dto.UserActionSimpleDTO, observable : dto.UserActionObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleUserActionObject(): async.AsyncFunc3<dto.UserActionObjectIdentityDTO, dto.UserActionObjectSimpleDTO, dto.UserActionObjectObservableSimpleDTO, dto.UserActionObjectSimpleDTO, dto.UserActionObjectObservableSimpleDTO> {
-        return new async.AsyncFunc3((userActionObjectIdentity: dto.UserActionObjectIdentityDTO) => {
-            let baseParameters = userActionObjectIdentity;
-            let service = Environment.current.context.facadeFactory.createService<dto.UserActionObjectSimpleDTO, dto.UserActionObjectObservableSimpleDTO, dto.UserActionObjectSimpleDTO, dto.UserActionObjectObservableSimpleDTO>();
-            return service.getData('UserActionObject/GetSimpleUserActionObject', {plain : dto.UserActionObjectSimpleDTO, observable : dto.UserActionObjectObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleUserActionObjectByName(): async.AsyncFunc3<string, dto.UserActionObjectSimpleDTO, dto.UserActionObjectObservableSimpleDTO, dto.UserActionObjectSimpleDTO, dto.UserActionObjectObservableSimpleDTO> {
-        return new async.AsyncFunc3((userActionObjectName: string) => {
-            let baseParameters = userActionObjectName;
-            let service = Environment.current.context.facadeFactory.createService<dto.UserActionObjectSimpleDTO, dto.UserActionObjectObservableSimpleDTO, dto.UserActionObjectSimpleDTO, dto.UserActionObjectObservableSimpleDTO>();
-            return service.getData('UserActionObject/GetSimpleUserActionObjectByName', {plain : dto.UserActionObjectSimpleDTO, observable : dto.UserActionObjectObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleUserActionObjects(): async.AsyncFunc2<Array<dto.UserActionObjectSimpleDTO>, Array<dto.UserActionObjectObservableSimpleDTO>, dto.UserActionObjectSimpleDTO, dto.UserActionObjectObservableSimpleDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.UserActionObjectSimpleDTO>, Array<dto.UserActionObjectObservableSimpleDTO>, dto.UserActionObjectSimpleDTO, dto.UserActionObjectObservableSimpleDTO>();
-            return service.getData('UserActionObject/GetSimpleUserActionObjects', {plain : dto.UserActionObjectSimpleDTO, observable : dto.UserActionObjectObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleUserActionObjectsByIdents(): async.AsyncFunc3<dto.UserActionObjectIdentityDTO[], Array<dto.UserActionObjectSimpleDTO>, Array<dto.UserActionObjectObservableSimpleDTO>, dto.UserActionObjectSimpleDTO, dto.UserActionObjectObservableSimpleDTO> {
-        return new async.AsyncFunc3((userActionObjectIdents: dto.UserActionObjectIdentityDTO[]) => {
-            let baseParameters = userActionObjectIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.UserActionObjectSimpleDTO>, Array<dto.UserActionObjectObservableSimpleDTO>, dto.UserActionObjectSimpleDTO, dto.UserActionObjectObservableSimpleDTO>();
-            return service.getData('UserActionObject/GetSimpleUserActionObjectsByIdents', {plain : dto.UserActionObjectSimpleDTO, observable : dto.UserActionObjectObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleUserActionObjectsByRootFilter(): async.AsyncFunc3<dto.UserActionObjectRootFilterModelStrictDTO, Array<dto.UserActionObjectSimpleDTO>, Array<dto.UserActionObjectObservableSimpleDTO>, dto.UserActionObjectSimpleDTO, dto.UserActionObjectObservableSimpleDTO> {
-        return new async.AsyncFunc3((filter: dto.UserActionObjectRootFilterModelStrictDTO) => {
-            let baseParameters = filter.toNativeJson();
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.UserActionObjectSimpleDTO>, Array<dto.UserActionObjectObservableSimpleDTO>, dto.UserActionObjectSimpleDTO, dto.UserActionObjectObservableSimpleDTO>();
-            return service.getData('UserActionObject/GetSimpleUserActionObjectsByRootFilter', {plain : dto.UserActionObjectSimpleDTO, observable : dto.UserActionObjectObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleUserActions(): async.AsyncFunc2<Array<dto.UserActionSimpleDTO>, Array<dto.UserActionObservableSimpleDTO>, dto.UserActionSimpleDTO, dto.UserActionObservableSimpleDTO> {
-        return new async.AsyncFunc2(() => {
-            let baseParameters = {};
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.UserActionSimpleDTO>, Array<dto.UserActionObservableSimpleDTO>, dto.UserActionSimpleDTO, dto.UserActionObservableSimpleDTO>();
-            return service.getData('UserAction/GetSimpleUserActions', {plain : dto.UserActionSimpleDTO, observable : dto.UserActionObservableSimpleDTO}, baseParameters);
-        });
-    }
-
-    function _getSimpleUserActionsByIdents(): async.AsyncFunc3<dto.UserActionIdentityDTO[], Array<dto.UserActionSimpleDTO>, Array<dto.UserActionObservableSimpleDTO>, dto.UserActionSimpleDTO, dto.UserActionObservableSimpleDTO> {
-        return new async.AsyncFunc3((userActionIdents: dto.UserActionIdentityDTO[]) => {
-            let baseParameters = userActionIdents;
-            let service = Environment.current.context.facadeFactory.createService<Array<dto.UserActionSimpleDTO>, Array<dto.UserActionObservableSimpleDTO>, dto.UserActionSimpleDTO, dto.UserActionObservableSimpleDTO>();
-            return service.getData('UserAction/GetSimpleUserActionsByIdents', {plain : dto.UserActionSimpleDTO, observable : dto.UserActionObservableSimpleDTO}, baseParameters);
-        });
-    }
-
     function _getVisualDomainType(): async.AsyncFunc3<dto.DomainTypeIdentityDTO, dto.DomainTypeVisualDTO, dto.DomainTypeObservableVisualDTO, dto.DomainTypeVisualDTO, dto.DomainTypeObservableVisualDTO> {
         return new async.AsyncFunc3((domainTypeIdentity: dto.DomainTypeIdentityDTO) => {
             let baseParameters = domainTypeIdentity;
@@ -1492,22 +1265,6 @@ function _checkCodeFirstSubscriptionAccess(): async.SimpleAsyncFunc3<dto.CodeFir
             let baseParameters = {targetSystemIdent : targetSystemIdent, securityOperationCode : securityOperationCode};
             let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
             return service.getData('TargetSystem/HasTargetSystemAccess', baseParameters);
-        });
-    }
-
-    function _hasUserActionAccess(): async.SimpleAsyncFunc3<dto.UserActionIdentityDTO, dto.ConfigurationSecurityOperationCode, boolean> {
-        return new async.SimpleAsyncFunc3((userActionIdent: dto.UserActionIdentityDTO, securityOperationCode: dto.ConfigurationSecurityOperationCode) => {
-            let baseParameters = {userActionIdent : userActionIdent, securityOperationCode : securityOperationCode};
-            let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('UserAction/HasUserActionAccess', baseParameters);
-        });
-    }
-
-    function _hasUserActionObjectAccess(): async.SimpleAsyncFunc3<dto.UserActionObjectIdentityDTO, dto.ConfigurationSecurityOperationCode, boolean> {
-        return new async.SimpleAsyncFunc3((userActionObjectIdent: dto.UserActionObjectIdentityDTO, securityOperationCode: dto.ConfigurationSecurityOperationCode) => {
-            let baseParameters = {userActionObjectIdent : userActionObjectIdent, securityOperationCode : securityOperationCode};
-            let service = Environment.current.context.facadeFactory.createSimpleService<boolean>();
-            return service.getData('UserActionObject/HasUserActionObjectAccess', baseParameters);
         });
     }
 

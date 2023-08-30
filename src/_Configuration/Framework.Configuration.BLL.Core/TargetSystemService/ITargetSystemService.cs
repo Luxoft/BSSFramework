@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.Notification;
 using Framework.Persistent;
 using Framework.Configuration.Domain;

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Persistent;
-
-using JetBrains.Annotations;
+﻿using Framework.Persistent;
 
 namespace Framework.SecuritySystem.Rules.Builders.Mixed;
 
@@ -18,8 +12,8 @@ public class SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject
     private readonly ISecurityExpressionFilter<TDomainObject> queryFilter;
 
     public SecurityExpressionFilter(
-            [NotNull] ISecurityExpressionFilter<TDomainObject> hasAccessFilter,
-            [NotNull] ISecurityExpressionFilter<TDomainObject> queryFilter)
+            ISecurityExpressionFilter<TDomainObject> hasAccessFilter,
+            ISecurityExpressionFilter<TDomainObject> queryFilter)
     {
         this.hasAccessFilter = hasAccessFilter ?? throw new ArgumentNullException(nameof(hasAccessFilter));
         this.queryFilter = queryFilter ?? throw new ArgumentNullException(nameof(queryFilter));

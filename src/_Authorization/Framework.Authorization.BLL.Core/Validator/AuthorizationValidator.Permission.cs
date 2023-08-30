@@ -1,10 +1,5 @@
-﻿using System;
-using System.Linq;
-
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Validation;
-
-using JetBrains.Annotations;
 
 namespace Framework.Authorization.BLL;
 
@@ -25,7 +20,7 @@ public partial class AuthorizationValidator
     /// </summary>
     /// <param name="permission">Проверяемый пермишшион</param>
     /// <returns></returns>
-    protected virtual ValidationResult GetUniqueValidationResult([NotNull] Permission permission)
+    protected virtual ValidationResult GetUniqueValidationResult(Permission permission)
     {
         if (permission == null) throw new ArgumentNullException(nameof(permission));
 

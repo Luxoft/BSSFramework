@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Framework.Core;
@@ -36,7 +35,7 @@ public class OverrideCallInterfacePropertyVisitor : ExpressionVisitor
                                    ? (node.Expression as UnaryExpression).Operand
                                    : node.Expression;
 
-                return Expression.Property(expr, expr.Type.GetImplementedProperty(this._property));
+                return Expression.Property(expr, expr.Type.GetImplementedProperty(property));
             }
         }
 

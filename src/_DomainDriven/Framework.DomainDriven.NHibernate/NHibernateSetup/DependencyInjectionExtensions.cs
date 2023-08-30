@@ -1,9 +1,10 @@
-﻿using System;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DependencyInjection;
+using Framework.DomainDriven.DALExceptions;
 
 using Microsoft.Extensions.DependencyInjection;
+
+using NHibernate;
 
 namespace Framework.DomainDriven.NHibernate;
 
@@ -20,8 +21,12 @@ public static class DependencyInjectionExtensions
         services.AddScopedFrom<ILazyObject<IDBSession>, ILazyObject<INHibSession>>();
         services.AddScopedFrom((ILazyObject<IDBSession> lazyDbSession) => lazyDbSession.Value);
 
+        services.AddScopedFrom<ISession, INHibSession>(session => session.NativeSession);
+
         services.AddSingleton<INHibSessionEnvironmentSettings, NHibSessionEnvironmentSettings>();
         services.AddSingleton<NHibConnectionSettings>();
+
+        services.AddSingleton<IDalValidationIdentitySource, DalValidationIdentitySource>();
 
         setup(setupObject);
 

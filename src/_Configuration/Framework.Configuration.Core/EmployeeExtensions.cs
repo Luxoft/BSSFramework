@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Persistent;
-
-namespace Framework.Configuration;
+﻿namespace Framework.Configuration;
 
 public static class EmployeeExtensions
 {

@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-using Framework.DomainDriven.DBGenerator;
+﻿using Framework.DomainDriven.DBGenerator;
 using Framework.DomainDriven.Metadata;
 using Framework.DomainDriven.NHibernate;
 using Framework.Persistent.Mapping;

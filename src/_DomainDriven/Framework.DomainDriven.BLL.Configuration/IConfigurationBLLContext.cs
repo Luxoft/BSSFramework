@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.Persistent;
+﻿using Framework.Configuration;
 
 namespace Framework.DomainDriven.BLL.Configuration;
 

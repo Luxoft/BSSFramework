@@ -1,5 +1,4 @@
 ﻿using Framework.Persistent;
-using Framework.Security;
 
 namespace SampleSystem.Domain;
 

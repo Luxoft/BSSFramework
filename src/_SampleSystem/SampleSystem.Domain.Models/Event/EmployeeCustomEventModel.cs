@@ -1,8 +1,4 @@
-﻿using System;
-
-using JetBrains.Annotations;
-
-namespace SampleSystem.Domain;
+﻿namespace SampleSystem.Domain;
 
 public class EmployeeCustomEventModel : DomainObjectBase
 {
@@ -10,7 +6,7 @@ public class EmployeeCustomEventModel : DomainObjectBase
     {
     }
 
-    public EmployeeCustomEventModel([NotNull] Employee employee)
+    public EmployeeCustomEventModel(Employee employee)
     {
         if (employee == null) { throw new ArgumentNullException(nameof(employee)); }
 

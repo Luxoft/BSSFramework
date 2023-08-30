@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Framework.DomainDriven.DALExceptions;
 
 namespace Framework.DomainDriven.NHibernate.SqlExceptionProcessors;
 

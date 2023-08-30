@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.DomainDriven;
-using Framework.OData;
 using Framework.Validation;
 
 namespace Framework.Authorization.BLL;

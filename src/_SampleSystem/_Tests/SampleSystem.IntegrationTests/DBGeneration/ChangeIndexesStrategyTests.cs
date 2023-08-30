@@ -1,14 +1,14 @@
-﻿using System.Linq;
-
-using FluentAssertions;
+﻿using FluentAssertions;
 
 using Microsoft.SqlServer.Management.Smo;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SampleSystem.IntegrationTests.__Support.TestData;
 using SampleSystem.DbGenerate;
-using SampleSystem.IntegrationTests.__Support;
+
 using Framework.DomainDriven.DBGenerator;
+
+using Index = Microsoft.SqlServer.Management.Smo.Index;
 
 namespace SampleSystem.IntegrationTests.DBGeneration;
 

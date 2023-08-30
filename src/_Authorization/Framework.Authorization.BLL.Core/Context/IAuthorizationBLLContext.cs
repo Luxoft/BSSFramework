@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 using Framework.Authorization.Domain;
+using Framework.Authorization.Notification;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.BLL.Tracking;
+using Framework.DomainDriven.Tracking;
 using Framework.SecuritySystem;
 
 namespace Framework.Authorization.BLL;
@@ -27,6 +26,8 @@ public partial interface IAuthorizationBLLContext :
     IDateTimeService DateTimeService { get; }
 
     IAuthorizationExternalSource ExternalSource { get; }
+
+    INotificationPrincipalExtractor NotificationPrincipalExtractor { get; }
 
     Principal CurrentPrincipal { get; }
 

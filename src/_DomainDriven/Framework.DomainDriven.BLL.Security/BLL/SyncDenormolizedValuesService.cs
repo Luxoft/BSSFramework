@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 using Framework.Core;
-using Framework.DomainDriven.BLL.Security.Lock;
+using Framework.DomainDriven.Lock;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 
 namespace Framework.DomainDriven.BLL.Security;
 
-public class SyncDenormolizedValuesService<TBLLContext, TPersistentDomainObjectBase, TDomainObject,
+public class SyncDenormolizedValuesService< TPersistentDomainObjectBase, TDomainObject,
                                            TDomainObjectAncestorLink,
                                            TSourceToAncestorOrChildLink, TIdent, TNamedLockObject, TNamedLockOperation>
-        where TBLLContext : class, IBLLBaseContextBase<TPersistentDomainObjectBase, TIdent>
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObjectAncestorLink : class, TPersistentDomainObjectBase, IModifiedHierarchicalAncestorLink<TDomainObject, TSourceToAncestorOrChildLink, TIdent>, new()
         where TDomainObject : class, TPersistentDomainObjectBase, IDenormalizedHierarchicalPersistentSource<TDomainObjectAncestorLink, TSourceToAncestorOrChildLink, TDomainObject, TIdent>
@@ -79,9 +75,11 @@ public class SyncDenormolizedValuesService<TBLLContext, TPersistentDomainObjectB
         }
     }
 
-    public void Sync(IEnumerable<TDomainObject> updatedDomainObjects, IEnumerable<TDomainObject> removedDomainObjects)
+    public void Sync(IEnumerable<TDomainObject> updatedDomainObjectsBase, IEnumerable<TDomainObject> removedDomainObjects)
     {
         this.LockChanges();
+
+        var updatedDomainObjects = updatedDomainObjectsBase.ToList();
 
         var fromSyncResult = updatedDomainObjects.Select(this.GetSyncResult).ToList();
 
@@ -94,6 +92,16 @@ public class SyncDenormolizedValuesService<TBLLContext, TPersistentDomainObjectB
         newAncestorLinks.Foreach(this.SaveAncestor);
 
         combine.Removing.Foreach(this.RemoveAncestor);
+
+        updatedDomainObjects.Foreach(this.UpdateDeepLevel);
+    }
+
+    private void UpdateDeepLevel(TDomainObject domainObject)
+    {
+        if (domainObject is IHierarchicalLevelObjectDenormalized objectDenomalized)
+        {
+            objectDenomalized.SetDeepLevel(domainObject.GetAllParents(true).Count());
+        }
     }
 
     private void Init()

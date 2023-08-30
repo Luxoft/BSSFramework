@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using System.Reflection;
 
 using Framework.Core;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
-
-using JetBrains.Annotations;
 
 namespace Framework.SecuritySystem.Rules.Builders.MaterializedPermissions;
 
@@ -22,7 +17,7 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
     internal readonly SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> Factory;
 
     protected SecurityExpressionBuilderBase(
-            [NotNull] SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory)
+            SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory)
     {
         this.Factory = factory ?? throw new ArgumentNullException(nameof(factory));
     }
@@ -62,11 +57,11 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase
-        where TPath : SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>
+        where TPath : SecurityPath<TDomainObject>
 {
     protected readonly TPath Path;
 
-    protected SecurityExpressionBuilderBase([NotNull] SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory,
+    protected SecurityExpressionBuilderBase(SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory,
                                             TPath path) : base(factory)
     {
         this.Path = path ?? throw new ArgumentNullException(nameof(path));
@@ -80,7 +75,7 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
 
 
     public abstract class SecurityPathExpressionBuilderBase<TInnerPath> : SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent, TInnerPath>
-            where TInnerPath : SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>
+            where TInnerPath : SecurityPath<TDomainObject>
     {
         protected SecurityPathExpressionBuilderBase(SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory, TInnerPath path): base(factory, path)
         {
@@ -90,7 +85,7 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
 
     public abstract class SecurityByIdentsExpressionBuilderBase<TSecurityContext, TInnerPath> : SecurityPathExpressionBuilderBase<TInnerPath>
             where TSecurityContext : TPersistentDomainObjectBase, ISecurityContext
-            where TInnerPath : SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>
+            where TInnerPath : SecurityPath<TDomainObject>
     {
         protected SecurityByIdentsExpressionBuilderBase(SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory, TInnerPath path)
                 : base(factory, path)
@@ -145,31 +140,9 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
         }
     }
 
-    public class SecurityByIdentsExpressionBuilder<TSecurityContext> : SecurityByIdentsExpressionBuilderBase<TSecurityContext, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.SecurityPathByIdents<TSecurityContext>>
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
+    public class ConditionBinarySecurityPathExpressionBuilder : SecurityPathExpressionBuilderBase<SecurityPath<TDomainObject>.ConditionPath>
     {
-        public SecurityByIdentsExpressionBuilder(SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.SecurityPathByIdents<TSecurityContext> path)
-                : base(factory, path)
-        {
-
-        }
-
-
-        protected override Func<IEnumerable<TIdent>, Expression<Func<TDomainObject, bool>>> SecurityFilter
-        {
-            get { return this.Path.SecurityFilter; }
-        }
-
-
-        protected override IEnumerable<TSecurityContext> GetSecurityObjects(TDomainObject domainObject)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class ConditionBinarySecurityPathExpressionBuilder : SecurityPathExpressionBuilderBase<SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.ConditionPath>
-    {
-        public ConditionBinarySecurityPathExpressionBuilder(SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.ConditionPath path)
+        public ConditionBinarySecurityPathExpressionBuilder(SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory, SecurityPath<TDomainObject>.ConditionPath path)
                 : base(factory, path)
         {
 
@@ -192,10 +165,10 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
         private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.All);
     }
 
-    public class SingleSecurityExpressionBuilder<TSecurityContext> : SecurityByIdentsExpressionBuilderBase<TSecurityContext, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.SingleSecurityPath<TSecurityContext>>
+    public class SingleSecurityExpressionBuilder<TSecurityContext> : SecurityByIdentsExpressionBuilderBase<TSecurityContext, SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext>>
             where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
     {
-        public SingleSecurityExpressionBuilder(SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.SingleSecurityPath<TSecurityContext> path)
+        public SingleSecurityExpressionBuilder(SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory, SecurityPath<TDomainObject>.SingleSecurityPath<TSecurityContext> path)
                 : base(factory, path)
         {
         }
@@ -239,11 +212,11 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
         private static readonly LambdaCompileCache LambdaCompileCache = new LambdaCompileCache(LambdaCompileMode.All);
     }
 
-    public class ManySecurityExpressionBuilder<TSecurityContext> : SecurityByIdentsExpressionBuilderBase<TSecurityContext, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.ManySecurityPath<TSecurityContext>>
+    public class ManySecurityExpressionBuilder<TSecurityContext> : SecurityByIdentsExpressionBuilderBase<TSecurityContext, SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext>>
 
             where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
     {
-        public ManySecurityExpressionBuilder(SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.ManySecurityPath<TSecurityContext> path)
+        public ManySecurityExpressionBuilder(SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory, SecurityPath<TDomainObject>.ManySecurityPath<TSecurityContext> path)
                 : base(factory, path)
         {
 
@@ -332,7 +305,7 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
     }
 
 
-    public class NestedManySecurityExpressionBuilder<TNestedObject> : SecurityPathExpressionBuilderBase<SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.NestedManySecurityPath<TNestedObject>>
+    public class NestedManySecurityExpressionBuilder<TNestedObject> : SecurityPathExpressionBuilderBase<SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject>>
             where TNestedObject : class, TPersistentDomainObjectBase
     {
         private readonly SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TNestedObject, TIdent> _nestedBuilder;
@@ -372,7 +345,7 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
 
         public NestedManySecurityExpressionBuilder(
                 SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory,
-                SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.NestedManySecurityPath<TNestedObject> path)
+                SecurityPath<TDomainObject>.NestedManySecurityPath<TNestedObject> path)
                 : base(factory, path)
         {
             this._nestedBuilder = (SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TNestedObject, TIdent>)this.Factory.CreateBuilder(this.Path.NestedSecurityPath);
@@ -490,7 +463,7 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
     }
 
     public abstract class SecurityBinaryExpressionBuilder<TBinaryPath> : SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent, TBinaryPath>
-            where TBinaryPath : SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.BinarySecurityPath
+            where TBinaryPath : SecurityPath<TDomainObject>.BinarySecurityPath
     {
         protected readonly SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent> LeftBuilder;
         protected readonly SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent> RightBuilder;
@@ -527,9 +500,9 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
         }
     }
 
-    public class AndBinarySecurityPathExpressionBuilder : SecurityBinaryExpressionBuilder<SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.AndSecurityPath>
+    public class AndBinarySecurityPathExpressionBuilder : SecurityBinaryExpressionBuilder<SecurityPath<TDomainObject>.AndSecurityPath>
     {
-        public AndBinarySecurityPathExpressionBuilder(SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.AndSecurityPath path)
+        public AndBinarySecurityPathExpressionBuilder(SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory, SecurityPath<TDomainObject>.AndSecurityPath path)
                 : base(factory, path)
         {
 
@@ -542,9 +515,9 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
         }
     }
 
-    public class OrBinarySecurityPathExpressionBuilder : SecurityBinaryExpressionBuilder<SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.OrSecurityPath>
+    public class OrBinarySecurityPathExpressionBuilder : SecurityBinaryExpressionBuilder<SecurityPath<TDomainObject>.OrSecurityPath>
     {
-        public OrBinarySecurityPathExpressionBuilder(SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.OrSecurityPath path)
+        public OrBinarySecurityPathExpressionBuilder(SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> factory, SecurityPath<TDomainObject>.OrSecurityPath path)
                 : base(factory, path)
         {
 

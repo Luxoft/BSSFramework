@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Framework.Persistent;
+﻿using Framework.Persistent;
 
 namespace Framework.SecuritySystem.DiTests;
 
-public class BusinessUnit : PersistentDomainObjectBase, ISecurityContext, IHierarchicalPersistentDomainObjectBase<BusinessUnit, Guid>
+public class BusinessUnit : PersistentDomainObjectBase,
+                            ISecurityContext,
+                            IDenormalizedHierarchicalPersistentSource<BusinessUnitAncestorLink, BusinessUnitToAncestorChildView, BusinessUnit, Guid>
 {
     public BusinessUnit Parent { get; set; }
 

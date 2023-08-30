@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
+﻿using System.Net.Mail;
 
 using AutoFixture;
 using AutoFixture.Idioms;
@@ -14,8 +11,6 @@ using Framework.Core;
 using Framework.Notification.New;
 using Framework.UnitTesting;
 using Framework.Validation;
-
-using JetBrains.Annotations;
 
 using NSubstitute;
 
@@ -181,10 +176,10 @@ public sealed class ExceptionMessageSenderTests : TestFixtureBase
         private IEnumerable<Type> exceptTypes;
 
         public TestingExceptionMessageSender(
-                [NotNull] IConfigurationBLLContext context,
-                [NotNull] IMessageSender<Message> messageSender,
-                [NotNull] MailAddress fromAddress,
-                [NotNull] IEnumerable<string> toAddresses)
+                IConfigurationBLLContext context,
+                IMessageSender<Message> messageSender,
+                MailAddress fromAddress,
+                IEnumerable<string> toAddresses)
                 : base(context, messageSender, fromAddress, toAddresses)
         {
         }

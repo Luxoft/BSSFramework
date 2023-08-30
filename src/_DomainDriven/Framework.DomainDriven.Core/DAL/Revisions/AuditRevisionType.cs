@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.DAL.Revisions;
+﻿namespace Framework.DomainDriven.DAL.Revisions;
 
 public enum AuditRevisionType
 {

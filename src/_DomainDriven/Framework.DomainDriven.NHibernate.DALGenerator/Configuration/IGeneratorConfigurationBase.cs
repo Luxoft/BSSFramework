@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Framework.DomainDriven.Generation.Domain;
 
 namespace Framework.DomainDriven.NHibernate.DALGenerator;

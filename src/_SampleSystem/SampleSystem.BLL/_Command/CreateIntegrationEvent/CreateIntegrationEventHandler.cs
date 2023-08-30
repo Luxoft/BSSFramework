@@ -1,7 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-
-using Framework.Cap.Abstractions;
+﻿using Framework.Cap.Abstractions;
 
 using MediatR;
 

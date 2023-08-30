@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
-using JetBrains.Annotations;
+﻿using System.Reflection;
 
 namespace Framework.Core;
 
@@ -12,7 +7,7 @@ public class TypeSource : ITypeSource
     private readonly IEnumerable<Type> _types;
 
 
-    public TypeSource([NotNull] IEnumerable<Type> types)
+    public TypeSource(IEnumerable<Type> types)
     {
         if (types == null) throw new ArgumentNullException(nameof(types));
 
@@ -20,7 +15,7 @@ public class TypeSource : ITypeSource
     }
 
 
-    public TypeSource([NotNull] IEnumerable<Assembly> assemblies)
+    public TypeSource(IEnumerable<Assembly> assemblies)
             : this(assemblies.SelectMany(assembly => assembly.GetTypes()))
     {
 
@@ -32,13 +27,13 @@ public class TypeSource : ITypeSource
 
     }
 
-    public TypeSource([NotNull] params Type[] types)
+    public TypeSource(params Type[] types)
             : this((IEnumerable<Type>)types)
     {
 
     }
 
-    public TypeSource([NotNull] params Assembly[] assemblies)
+    public TypeSource(params Assembly[] assemblies)
             : this((IEnumerable<Assembly>)assemblies)
     {
 
@@ -59,7 +54,7 @@ public class TypeSource : ITypeSource
 
 
 
-    public static TypeSource FromSample([NotNull] Type sampleType)
+    public static TypeSource FromSample(Type sampleType)
     {
         if (sampleType == null) throw new ArgumentNullException(nameof(sampleType));
 

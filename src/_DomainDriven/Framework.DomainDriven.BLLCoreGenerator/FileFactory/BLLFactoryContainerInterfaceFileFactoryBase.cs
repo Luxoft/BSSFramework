@@ -1,7 +1,4 @@
 ﻿using System.CodeDom;
-using System.Collections.Generic;
-using Framework.CodeDom;
-using Framework.DomainDriven.BLL;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 

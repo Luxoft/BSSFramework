@@ -1,5 +1,4 @@
-﻿using System;
-using Framework.Configuration.TestGenerate;
+﻿using Framework.Configuration.TestGenerate;
 
 namespace Framework.Configuration.WebApiGenerate;
 

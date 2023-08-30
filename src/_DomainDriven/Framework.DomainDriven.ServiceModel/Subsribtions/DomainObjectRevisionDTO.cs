@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using Framework.DomainDriven.DAL.Revisions;
 
 namespace Framework.DomainDriven.ServiceModel.Subscriptions;

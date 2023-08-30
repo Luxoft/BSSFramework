@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 public static class TryResult
 {

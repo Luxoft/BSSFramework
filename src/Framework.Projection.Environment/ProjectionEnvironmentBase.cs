@@ -1,9 +1,6 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 
 using Framework.Core;
-
-using JetBrains.Annotations;
 
 namespace Framework.Projection;
 
@@ -40,7 +37,7 @@ public abstract class ProjectionEnvironmentBase : IProjectionEnvironment
     /// </summary>
     /// <param name="property">свойство</param>
     /// <returns></returns>
-    public virtual bool IsIdentityProperty([NotNull] PropertyInfo property)
+    public virtual bool IsIdentityProperty(PropertyInfo property)
     {
         if (property == null) throw new ArgumentNullException(nameof(property));
 
@@ -52,7 +49,7 @@ public abstract class ProjectionEnvironmentBase : IProjectionEnvironment
     /// </summary>
     /// <param name="type">проверяемый тип</param>
     /// <returns></returns>
-    public bool IsPersistent([NotNull] Type type)
+    public bool IsPersistent(Type type)
     {
         if (type == null) { throw new ArgumentNullException(nameof(type)); }
 

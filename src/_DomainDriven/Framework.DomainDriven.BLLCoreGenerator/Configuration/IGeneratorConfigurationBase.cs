@@ -1,13 +1,9 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.CodeDom;
 using System.Collections.ObjectModel;
 using System.Reflection;
 
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Transfering;
-
-using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 
@@ -44,7 +40,7 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
     bool GenerateValidationMap { get; }
 
     bool GenerateValidator { get; }
-        
+
     bool GenerateFetchService { get; }
 
     ReadOnlyCollection<Type> BLLDomainTypes { get; }
@@ -132,7 +128,7 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
     /// </summary>
     /// <param name="domainType"></param>
     /// <returns></returns>
-    IEnumerable<CodeTypeParameter> GetDomainTypeSecurityParameters([NotNull] Type domainType);
+    IEnumerable<CodeTypeParameter> GetDomainTypeSecurityParameters(Type domainType);
 
     /// <summary>
     /// Валидация виртуальных свойств (свойства, без одноимённого поля). По умолчанию включена только для свойств с хотя бы одним явно указаным атрибутом валидации "PropertyValidatorAttribute" или "IRestrictionAttribute"

@@ -1,5 +1,3 @@
-using System;
-
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
 public interface IFileStoreGeneratorConfigurationBase<out TEnvironment> : IFileStoreGeneratorConfigurationBase, IGeneratorConfigurationBase<TEnvironment>

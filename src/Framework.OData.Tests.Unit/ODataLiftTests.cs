@@ -1,11 +1,6 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.QueryLanguage;
 using NUnit.Framework;
-using FluentAssertions;
 
 using Framework.Persistent;
 

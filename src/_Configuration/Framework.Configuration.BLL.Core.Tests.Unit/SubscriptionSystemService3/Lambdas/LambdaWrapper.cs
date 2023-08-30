@@ -1,5 +1,4 @@
-﻿using System;
-using Framework.Configuration.Core;
+﻿using Framework.Configuration.Core;
 
 namespace Framework.Configuration.BLL.Core.Tests.Unit.SubscriptionSystemService3.Lambdas;
 

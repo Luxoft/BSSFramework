@@ -96,6 +96,8 @@ namespace SampleSystem.BLL
         
         private static Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _managementUnitView = new Framework.SecuritySystem.ContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitView, Framework.HierarchicalExpand.HierarchicalExpandType.All);
         
+        private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _searchNotificationOperation = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.SearchNotificationOperation);
+        
         private static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> _systemIntegration = new Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode>(SampleSystem.SampleSystemSecurityOperationCode.SystemIntegration);
         
         public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> ApproveWorkflowOperation
@@ -418,6 +420,14 @@ namespace SampleSystem.BLL
             }
         }
         
+        public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> SearchNotificationOperation
+        {
+            get
+            {
+                return _searchNotificationOperation;
+            }
+        }
+        
         public static Framework.SecuritySystem.NonContextSecurityOperation<SampleSystem.SampleSystemSecurityOperationCode> SystemIntegration
         {
             get
@@ -568,6 +578,10 @@ namespace SampleSystem.BLL
             {
                 return SampleSystem.BLL.SampleSystemSecurityOperation.EmployeePositionEdit;
             }
+            else if ((code == SampleSystem.SampleSystemSecurityOperationCode.SearchNotificationOperation))
+            {
+                return SampleSystem.BLL.SampleSystemSecurityOperation.SearchNotificationOperation;
+            }
             else if ((code == SampleSystem.SampleSystemSecurityOperationCode.AuthorizationImpersonate))
             {
                 return SampleSystem.BLL.SampleSystemSecurityOperation.AuthorizationImpersonate;
@@ -614,7 +628,11 @@ namespace SampleSystem.BLL
         
         public static SampleSystem.SampleSystemSecurityOperationCode GetCodeByMode(System.Type domainType, Framework.SecuritySystem.BLLSecurityMode mode)
         {
-            if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.BusinessUnit) == domainType))
+            if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.AuthPerformanceObject) == domainType))
+            {
+                return SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitView;
+            }
+            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.BusinessUnit) == domainType))
             {
                 return SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitView;
             }
@@ -860,21 +878,6 @@ namespace SampleSystem.BLL
     }
     #endregion
     
-    public partial class SampleSystemSecurityPath<TDomainObject> : Framework.SecuritySystem.SecurityPathWrapper<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>
-        where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
-    {
-        
-        private SampleSystemSecurityPath(Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> securityPath) : 
-                base(securityPath)
-        {
-        }
-        
-        public static implicit operator SampleSystem.BLL.SampleSystemSecurityPath<TDomainObject> (Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> securityPath)
-        {
-            return new SampleSystem.BLL.SampleSystemSecurityPath<TDomainObject>(securityPath);
-        }
-    }
-    
     public partial class SampleSystemBLLContext : Framework.DomainDriven.BLL.Security.SecurityBLLBaseContext<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.DomainObjectBase, System.Guid, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode, System.Guid>>>, SampleSystem.BLL.ISampleSystemBLLContext
     {
         
@@ -985,95 +988,154 @@ namespace SampleSystem.BLL
         
         public static void Register(Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection)
         {
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.AuthPerformanceObject, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemAuthPerformanceObjectSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.AuthPerformanceObject>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.AuthPerformanceObject, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemBusinessUnitSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitHrDepartment, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemBusinessUnitHrDepartmentSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitHrDepartment>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitHrDepartment, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitManagerCommissionLink, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemBusinessUnitManagerCommissionLinkSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitManagerCommissionLink>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitManagerCommissionLink, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitType, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemBusinessUnitTypeSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitType>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitType, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.CompanyLegalEntity, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemCompanyLegalEntitySecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.CompanyLegalEntity>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.CompanyLegalEntity, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Country, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemCountrySecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Country>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Country, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeeSecurityService<SampleSystem.Domain.Employee, SampleSystem.Domain.BusinessUnit, SampleSystem.Domain.HRDepartment, SampleSystem.Domain.Location, SampleSystem.Domain.Employee>>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeCellPhone, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeeCellPhoneSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeCellPhone>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeCellPhone, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeInformation, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeeInformationSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeInformation>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeInformation, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePersonalCellPhone, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeePersonalCellPhoneSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePersonalCellPhone>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePersonalCellPhone, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePhoto, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeePhotoSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePhoto>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePhoto, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePosition, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeePositionSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePosition>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePosition, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRegistrationType, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeeRegistrationTypeSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRegistrationType>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRegistrationType, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRole, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeeRoleSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRole>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRole, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRoleDegree, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeeRoleDegreeSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRoleDegree>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRoleDegree, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeSpecialization, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeeSpecializationSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeSpecialization>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeSpecialization, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EnversBug1676.Location1676, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemLocation1676SecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EnversBug1676.Location1676>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EnversBug1676.Location1676, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemWorkingCalendar1676SecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Example1, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemExample1SecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Example1>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Example1, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.HRDepartment, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemHRDepartmentSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.HRDepartment>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.HRDepartment, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.IMRequest, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemIMRequestSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.IMRequest>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.IMRequest, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Information, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemInformationSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Information>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Information, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Location, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemLocationSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Location>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Location, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnit, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemManagementUnitSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnit>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnit, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemManagementUnitAndBusinessUnitLinkSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemManagementUnitAndHRDepartmentLinkSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitFluentMapping, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemManagementUnitFluentMappingSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitFluentMapping>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitFluentMapping, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestManualEmployeeProjectionSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Principal, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemPrincipalSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Principal>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Principal, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.BusinessUnitIdentity, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemBusinessUnitIdentitySecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.BusinessUnitIdentity>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.BusinessUnitIdentity, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.BusinessUnitProgramClass, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemBusinessUnitProgramClassSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.BusinessUnitProgramClass>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.BusinessUnitProgramClass, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.CustomCompanyLegalEntity, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemCustomCompanyLegalEntitySecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.CustomCompanyLegalEntity, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.HerBusinessUnit, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemHerBusinessUnitSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.HerBusinessUnit>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.HerBusinessUnit, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestBusinessUnit, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestBusinessUnitSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestBusinessUnit>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestBusinessUnit, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestBusinessUnitType, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestBusinessUnitTypeSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestBusinessUnitType>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestBusinessUnitType, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestCustomContextSecurityObjProjectionSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestDepartment, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestDepartmentSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestDepartment>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestDepartment, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestEmployee, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestEmployeeSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestEmployee>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestEmployee, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestIMRequest, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestIMRequestSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestIMRequest>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestIMRequest, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLegacyEmployee, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemEmployeeSecurityService<SampleSystem.Domain.Projections.TestLegacyEmployee, SampleSystem.Domain.Projections.SecurityBusinessUnit, SampleSystem.Domain.Projections.SecurityHRDepartment, SampleSystem.Domain.Projections.SecurityLocation, SampleSystem.Domain.Projections.SecurityEmployee>>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLegacyEmployee>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLegacyEmployee, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLocation, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestLocationSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLocation>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLocation, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLocationCollectionProperties, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestLocationCollectionPropertiesSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLocationCollectionProperties>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLocationCollectionProperties, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestSecurityObjItemProjection, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestSecurityObjItemProjectionSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestSecurityObjItemProjection, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.VisualEmployee, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemVisualEmployeeSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.VisualEmployee>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.VisualEmployee, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SqlParserTestObj, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemSqlParserTestObjSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SqlParserTestObj>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SqlParserTestObj, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SqlParserTestObjContainer, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemSqlParserTestObjContainerSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SqlParserTestObjContainer>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SqlParserTestObjContainer, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestCustomContextSecurityObj, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestCustomContextSecurityObjSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestCustomContextSecurityObj>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestCustomContextSecurityObj, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestImmutableObj, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestImmutableObjSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestImmutableObj>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestImmutableObj, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestPerformanceObject, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestPerformanceObjectSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestPerformanceObject>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestPerformanceObject, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestPlainAuthObject, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestPlainAuthObjectSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestPlainAuthObject>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestPlainAuthObject, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestRootSecurityObjSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecurityObjItem, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestSecurityObjItemSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecurityObjItem>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecurityObjItem, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestSecuritySubObjItemSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem2, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestSecuritySubObjItem2SecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem2>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem2, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem3, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemTestSecuritySubObjItem3SecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem3>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem3, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
         }
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnitHrDepartment> GetBusinessUnitHrDepartmentSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.AuthPerformanceObject> GetAuthPerformanceObjectSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnitManagerCommissionLink> GetBusinessUnitManagerCommissionLinkSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.BusinessUnitHrDepartment> GetBusinessUnitHrDepartmentSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnit> GetBusinessUnitSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.BusinessUnitManagerCommissionLink> GetBusinessUnitManagerCommissionLinkSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.EmployeeCellPhone> GetEmployeeCellPhoneSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.BusinessUnit> GetBusinessUnitSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.EmployeePhoto> GetEmployeePhotoSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.EmployeeCellPhone> GetEmployeeCellPhoneSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.EmployeePosition> GetEmployeePositionSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.EmployeePhoto> GetEmployeePhotoSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<TDomainObject> GetEmployeeSecurityPath<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>()
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.EmployeePosition> GetEmployeePositionSecurityPath();
+        
+        public abstract Framework.SecuritySystem.SecurityPath<TDomainObject> GetEmployeeSecurityPath<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>()
             where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IEmployeeSecurity<TBusinessUnit, TDepartment, TLocation>, SampleSystem.Domain.IBusinessUnitSecurityElement<TBusinessUnit>, SampleSystem.Domain.IDepartmentSecurityElement<TDepartment>, SampleSystem.Domain.IEmployeeSecurityElement<TEmployee, TBusinessUnit, TDepartment, TLocation>, SampleSystem.Domain.IEmployeeSecurityElement<TEmployee>
             where TBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext
             where TDepartment : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ILocationSecurityElement<TLocation>
             where TLocation : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext
             where TEmployee : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IEmployeeSecurity<TBusinessUnit, TDepartment, TLocation>, Framework.SecuritySystem.ISecurityContext;
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink> GetManagementUnitAndBusinessUnitLinkSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink> GetManagementUnitAndBusinessUnitLinkSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> GetManagementUnitAndHRDepartmentLinkSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> GetManagementUnitAndHRDepartmentLinkSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnitFluentMapping> GetManagementUnitFluentMappingSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnitFluentMapping> GetManagementUnitFluentMappingSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnit> GetManagementUnitSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnit> GetManagementUnitSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestPerformanceObject> GetTestPerformanceObjectSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestPerformanceObject> GetTestPerformanceObjectSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestPlainAuthObject> GetTestPlainAuthObjectSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestPlainAuthObject> GetTestPlainAuthObjectSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestRootSecurityObj> GetTestRootSecurityObjSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestRootSecurityObj> GetTestRootSecurityObjSecurityPath();
     }
     
     public partial interface ISampleSystemSecurityService : Framework.DomainDriven.BLL.Security.IRootSecurityService<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.ISampleSystemSecurityPathContainer
@@ -1083,38 +1145,57 @@ namespace SampleSystem.BLL
     public partial interface ISampleSystemSecurityPathContainer
     {
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnitHrDepartment> GetBusinessUnitHrDepartmentSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.AuthPerformanceObject> GetAuthPerformanceObjectSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnitManagerCommissionLink> GetBusinessUnitManagerCommissionLinkSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.BusinessUnitHrDepartment> GetBusinessUnitHrDepartmentSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnit> GetBusinessUnitSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.BusinessUnitManagerCommissionLink> GetBusinessUnitManagerCommissionLinkSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.EmployeeCellPhone> GetEmployeeCellPhoneSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.BusinessUnit> GetBusinessUnitSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.EmployeePhoto> GetEmployeePhotoSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.EmployeeCellPhone> GetEmployeeCellPhoneSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.EmployeePosition> GetEmployeePositionSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.EmployeePhoto> GetEmployeePhotoSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<TDomainObject> GetEmployeeSecurityPath<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>()
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.EmployeePosition> GetEmployeePositionSecurityPath();
+        
+        Framework.SecuritySystem.SecurityPath<TDomainObject> GetEmployeeSecurityPath<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>()
             where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IEmployeeSecurity<TBusinessUnit, TDepartment, TLocation>, SampleSystem.Domain.IBusinessUnitSecurityElement<TBusinessUnit>, SampleSystem.Domain.IDepartmentSecurityElement<TDepartment>, SampleSystem.Domain.IEmployeeSecurityElement<TEmployee, TBusinessUnit, TDepartment, TLocation>, SampleSystem.Domain.IEmployeeSecurityElement<TEmployee>
             where TBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext
             where TDepartment : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ILocationSecurityElement<TLocation>
             where TLocation : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext
             where TEmployee : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IEmployeeSecurity<TBusinessUnit, TDepartment, TLocation>, Framework.SecuritySystem.ISecurityContext;
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink> GetManagementUnitAndBusinessUnitLinkSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink> GetManagementUnitAndBusinessUnitLinkSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> GetManagementUnitAndHRDepartmentLinkSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> GetManagementUnitAndHRDepartmentLinkSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnitFluentMapping> GetManagementUnitFluentMappingSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnitFluentMapping> GetManagementUnitFluentMappingSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnit> GetManagementUnitSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnit> GetManagementUnitSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestPerformanceObject> GetTestPerformanceObjectSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestPerformanceObject> GetTestPerformanceObjectSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestPlainAuthObject> GetTestPlainAuthObjectSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestPlainAuthObject> GetTestPlainAuthObjectSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestRootSecurityObj> GetTestRootSecurityObjSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestRootSecurityObj> GetTestRootSecurityObjSecurityPath();
+    }
+    
+    public partial class SampleSystemAuthPerformanceObjectSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.AuthPerformanceObject, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
+    {
+        
+        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
+        
+        public SampleSystemAuthPerformanceObjectSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+        {
+            this.securityPathContainer = securityPathContainer;
+        }
+        
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.AuthPerformanceObject> GetSecurityPath()
+        {
+            return this.securityPathContainer.GetAuthPerformanceObjectSecurityPath();
+        }
     }
     
     public partial class SampleSystemBusinessUnitSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnit, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
@@ -1128,7 +1209,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnit, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.BusinessUnit> GetSecurityPath()
         {
             return this.securityPathContainer.GetBusinessUnitSecurityPath();
         }
@@ -1145,7 +1226,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitHrDepartment, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.BusinessUnitHrDepartment> GetSecurityPath()
         {
             return this.securityPathContainer.GetBusinessUnitHrDepartmentSecurityPath();
         }
@@ -1162,7 +1243,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitManagerCommissionLink, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.BusinessUnitManagerCommissionLink> GetSecurityPath()
         {
             return this.securityPathContainer.GetBusinessUnitManagerCommissionLinkSecurityPath();
         }
@@ -1205,7 +1286,7 @@ namespace SampleSystem.BLL
         
         private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<TDomainObject> GetSecurityPath()
         {
             return this.securityPathContainer.GetEmployeeSecurityPath<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>();
         }
@@ -1222,7 +1303,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeCellPhone, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.EmployeeCellPhone> GetSecurityPath()
         {
             return this.securityPathContainer.GetEmployeeCellPhoneSecurityPath();
         }
@@ -1257,7 +1338,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePhoto, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.EmployeePhoto> GetSecurityPath()
         {
             return this.securityPathContainer.GetEmployeePhotoSecurityPath();
         }
@@ -1274,7 +1355,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePosition, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.EmployeePosition> GetSecurityPath()
         {
             return this.securityPathContainer.GetEmployeePositionSecurityPath();
         }
@@ -1390,7 +1471,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnit, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnit> GetSecurityPath()
         {
             return this.securityPathContainer.GetManagementUnitSecurityPath();
         }
@@ -1407,7 +1488,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink> GetSecurityPath()
         {
             return this.securityPathContainer.GetManagementUnitAndBusinessUnitLinkSecurityPath();
         }
@@ -1424,7 +1505,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> GetSecurityPath()
         {
             return this.securityPathContainer.GetManagementUnitAndHRDepartmentLinkSecurityPath();
         }
@@ -1441,7 +1522,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitFluentMapping, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnitFluentMapping> GetSecurityPath()
         {
             return this.securityPathContainer.GetManagementUnitFluentMappingSecurityPath();
         }
@@ -1638,7 +1719,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPerformanceObject, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestPerformanceObject> GetSecurityPath()
         {
             return this.securityPathContainer.GetTestPerformanceObjectSecurityPath();
         }
@@ -1655,7 +1736,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPlainAuthObject, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestPlainAuthObject> GetSecurityPath()
         {
             return this.securityPathContainer.GetTestPlainAuthObjectSecurityPath();
         }
@@ -1672,7 +1753,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestRootSecurityObj, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestRootSecurityObj> GetSecurityPath()
         {
             return this.securityPathContainer.GetTestRootSecurityObjSecurityPath();
         }

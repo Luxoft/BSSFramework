@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 /// <summary>
 /// Класс, для автоматического создания Lazy-адаптера интерфейса

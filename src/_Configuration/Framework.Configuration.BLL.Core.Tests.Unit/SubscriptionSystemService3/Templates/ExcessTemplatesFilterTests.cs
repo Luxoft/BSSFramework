@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-using AutoFixture;
+﻿using AutoFixture;
 
 using FluentAssertions;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Templates;

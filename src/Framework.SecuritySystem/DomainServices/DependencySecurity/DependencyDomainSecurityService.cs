@@ -1,14 +1,11 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 using Framework.Persistent;
 using Framework.QueryableSource;
 
-using JetBrains.Annotations;
+namespace Framework.SecuritySystem;
 
-namespace Framework.SecuritySystem
-{
-    public abstract class DependencyDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent, TSecurityOperationCode> :
+public abstract class DependencyDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent, TSecurityOperationCode> :
 
         DependencyDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent, TSecurityOperationCode>
 
@@ -19,10 +16,11 @@ namespace Framework.SecuritySystem
     {
         private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
 
-        protected DependencyDomainSecurityService(
+    protected DependencyDomainSecurityService(
+            IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
             IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
-            [NotNull] IDomainSecurityService<TBaseDomainObject, TSecurityOperationCode> baseDomainSecurityService,
-            [NotNull] IQueryableSource<TPersistentDomainObjectBase> queryableSource)
+            IDomainSecurityService<TBaseDomainObject, TSecurityOperationCode> baseDomainSecurityService,
+            IQueryableSource<TPersistentDomainObjectBase> queryableSource)
 
             : base(disabledSecurityProviderContainer, baseDomainSecurityService)
         {

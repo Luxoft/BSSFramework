@@ -1,8 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using Framework.DomainDriven;
-using Framework.DomainDriven.BLL;
 using Framework.OData;
 using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Filters;

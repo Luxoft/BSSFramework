@@ -1,12 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL.Security;
-
-using JetBrains.Annotations;
 
 namespace Framework.Authorization.Domain;
 
@@ -15,7 +11,7 @@ public class AvailablePermissionOperationFilter<TSecurityOperationCode> : Availa
 {
     private readonly Guid securityOperationId;
 
-    public AvailablePermissionOperationFilter([NotNull] IDateTimeService dateTimeService, string principalName, TSecurityOperationCode securityOperationCode)
+    public AvailablePermissionOperationFilter(IDateTimeService dateTimeService, string principalName, TSecurityOperationCode securityOperationCode)
             : base(dateTimeService, principalName)
     {
         if (securityOperationCode.IsDefault()) throw new ArgumentOutOfRangeException(nameof(securityOperationCode));

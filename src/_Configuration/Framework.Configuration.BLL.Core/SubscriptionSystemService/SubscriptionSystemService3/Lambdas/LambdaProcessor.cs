@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Reflection;
 
 using Framework.Configuration.Core;
 using Framework.Configuration.Domain;
-
-using JetBrains.Annotations;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3.Lambdas;
 
@@ -25,7 +21,7 @@ public abstract class LambdaProcessor<TBLLContext>
     ///     или
     ///     parserFactory равен null.
     /// </exception>
-    protected LambdaProcessor([NotNull] TBLLContext bllContext)
+    protected LambdaProcessor(TBLLContext bllContext)
     {
         this.BllContext = bllContext ?? throw new ArgumentNullException(nameof(bllContext));
     }

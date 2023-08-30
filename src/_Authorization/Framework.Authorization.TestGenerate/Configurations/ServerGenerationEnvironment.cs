@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate;
 using Framework.Persistent;

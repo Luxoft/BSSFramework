@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
-
-using JetBrains.Annotations;
 
 namespace Framework.Core;
 
@@ -86,7 +81,7 @@ public class PropertyPath : ReadOnlyCollection<PropertyInfo>, IEquatable<Propert
         return this.Count;
     }
 
-    public bool StartsWith([NotNull] PropertyPath otherPath)
+    public bool StartsWith(PropertyPath otherPath)
     {
         if (otherPath == null) throw new ArgumentNullException(nameof(otherPath));
 
@@ -94,7 +89,7 @@ public class PropertyPath : ReadOnlyCollection<PropertyInfo>, IEquatable<Propert
     }
 
 
-    public static PropertyPath operator +([NotNull] PropertyInfo propertyInfo, [NotNull] PropertyPath path)
+    public static PropertyPath operator +(PropertyInfo propertyInfo, PropertyPath path)
     {
         if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
         if (path == null) throw new ArgumentNullException(nameof(path));
@@ -102,7 +97,7 @@ public class PropertyPath : ReadOnlyCollection<PropertyInfo>, IEquatable<Propert
         return new[] { propertyInfo }.Concat(path).ToPropertyPath();
     }
 
-    public static PropertyPath operator +([NotNull] PropertyPath path, [NotNull] PropertyInfo propertyInfo)
+    public static PropertyPath operator +(PropertyPath path, PropertyInfo propertyInfo)
     {
         if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
         if (path == null) throw new ArgumentNullException(nameof(path));
@@ -110,12 +105,12 @@ public class PropertyPath : ReadOnlyCollection<PropertyInfo>, IEquatable<Propert
         return path.Concat(new[] { propertyInfo }).ToPropertyPath();
     }
 
-    public static bool operator ==([NotNull] PropertyPath path1, [NotNull] PropertyPath path2)
+    public static bool operator ==(PropertyPath path1, PropertyPath path2)
     {
         return object.ReferenceEquals(path1, path2) || (!object.ReferenceEquals(path1, null) && path1.Equals(path2));
     }
 
-    public static bool operator !=([NotNull] PropertyPath path1, [NotNull] PropertyPath path2)
+    public static bool operator !=(PropertyPath path1, PropertyPath path2)
     {
         return !(path1 == path2);
     }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.DomainDriven.BLL;
+﻿namespace Framework.DomainDriven.BLL;
 
 /// <summary>
 /// Маркер объектов отправляющих евенты в интеграцию
@@ -10,7 +8,7 @@ public class BLLEventRoleAttribute : Attribute
     /// <summary>
     /// Пользовательский enum-тип с перечнем евентов
     /// </summary>
-    public Type EventOperationType { get; set; } = typeof(BLLBaseOperation);
+    public Type EventOperationType { get; set; }
 
     /// <summary>
     /// Фильтрация оправляемых евентов

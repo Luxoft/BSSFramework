@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
-
-using JetBrains.Annotations;
+﻿using Framework.Core;
 
 namespace Framework.Projection.Lambda;
 
@@ -14,7 +8,7 @@ internal class InjectAttributesProjectionSource : IProjectionSource
 
     private readonly ProjectionLambdaEnvironment environment;
 
-    public InjectAttributesProjectionSource([NotNull] IProjectionSource baseSource, ProjectionLambdaEnvironment environment)
+    public InjectAttributesProjectionSource(IProjectionSource baseSource, ProjectionLambdaEnvironment environment)
     {
         this.baseSource = baseSource ?? throw new ArgumentNullException(nameof(baseSource));
         this.environment = environment ?? throw new ArgumentNullException(nameof(environment));

@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.DomainDriven.Metadata;
 using Framework.Persistent.Mapping;
 
 using Microsoft.SqlServer.Management.Smo;
+
+using Index = Microsoft.SqlServer.Management.Smo.Index;
 
 namespace Framework.DomainDriven.DBGenerator;
 

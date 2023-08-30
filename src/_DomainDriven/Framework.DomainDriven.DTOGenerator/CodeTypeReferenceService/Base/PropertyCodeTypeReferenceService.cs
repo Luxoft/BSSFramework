@@ -1,14 +1,10 @@
-﻿using System;
-using System.CodeDom;
-using System.Linq;
+﻿using System.CodeDom;
 using System.Reflection;
 
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Security;
-
-using JetBrains.Annotations;
 
 namespace Framework.DomainDriven.DTOGenerator;
 
@@ -51,7 +47,7 @@ public class PropertyCodeTypeReferenceService<TConfiguration> : CodeTypeReferenc
         return withOptional && this.IsOptional(property) ? typeRef.ToMaybeReference() : typeRef;
     }
 
-    protected virtual bool IsDomainType([NotNull] Type type)
+    protected virtual bool IsDomainType(Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
 

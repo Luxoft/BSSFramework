@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Configuration.Domain;
+﻿namespace Framework.Configuration.Domain;
 
 /// <summary>
 /// Состояние обработки очереди

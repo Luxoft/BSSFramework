@@ -1,14 +1,10 @@
-﻿using System;
-
-using Framework.Authorization.Domain;
-
-using JetBrains.Annotations;
+﻿using Framework.Authorization.Domain;
 
 namespace Framework.Authorization.ApproveWorkflow;
 
 public interface IWorkflowApproveProcessor
 {
-    bool CanAutoApprove([NotNull] Permission permission, [NotNull] Operation approveOperation);
+    bool CanAutoApprove(Permission permission, Operation approveOperation);
 
-    ApprovePermissionWorkflowObject GetPermissionStartupObject([NotNull] Permission permission);
+    ApprovePermissionWorkflowObject GetPermissionStartupObject(Permission permission);
 }

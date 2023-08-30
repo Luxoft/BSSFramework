@@ -1,9 +1,5 @@
-﻿using System;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.Persistent;
-
-using JetBrains.Annotations;
 
 namespace Framework.SecuritySystem;
 
@@ -24,7 +20,7 @@ public abstract class DependencyDomainSecurityServiceBase<TPersistentDomainObjec
 
     protected DependencyDomainSecurityServiceBase(
             IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
-            [NotNull] IDomainSecurityService<TBaseDomainObject, TSecurityOperationCode> baseDomainSecurityService)
+            IDomainSecurityService<TBaseDomainObject, TSecurityOperationCode> baseDomainSecurityService)
             : base(disabledSecurityProviderContainer)
     {
         this.baseDomainSecurityService = baseDomainSecurityService ?? throw new ArgumentNullException(nameof(baseDomainSecurityService));

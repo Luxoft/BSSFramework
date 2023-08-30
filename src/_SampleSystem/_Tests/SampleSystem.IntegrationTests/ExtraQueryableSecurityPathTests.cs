@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-using Automation.ServiceEnvironment;
+﻿using Automation.ServiceEnvironment;
 
 using FluentAssertions;
 
@@ -68,7 +66,7 @@ public class ExtraQueryableSecurityPathTests : TestBase
                                                    {
                                                        var extraQueryableSecurity = context.Logics.Location.GetUnsecureQueryable().Where(l => l.Id == this.loc1Ident.Id);
 
-                                                       var extraSecurityPath = SampleSystemSecurityPath<Employee>.Create(e => e.CoreBusinessUnit, SingleSecurityMode.Strictly)
+                                                       var extraSecurityPath = SecurityPath<Employee>.Create(e => e.CoreBusinessUnit, SingleSecurityMode.Strictly)
                                                                .And(e => e.Location, SingleSecurityMode.Strictly)
                                                                .And(_ => extraQueryableSecurity, ManySecurityPathMode.Any);
 

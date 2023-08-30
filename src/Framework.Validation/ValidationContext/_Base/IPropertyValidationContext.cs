@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
+﻿using Framework.Core;
 
 namespace Framework.Validation;
 
@@ -149,7 +145,7 @@ public static class PropertyValidationContextExtensions
             this.Source = convertSource(baseContext.Source);
             this.Map = baseContext.Map;
             this.Value = convertProperty(baseContext.Value);
-            this.ExtendedValidationData = baseContext.ExtendedValidationData;
+            this.ServiceProvider = baseContext.ServiceProvider;
         }
 
 
@@ -165,6 +161,6 @@ public static class PropertyValidationContextExtensions
 
         public TExpectedProperty Value { get; }
 
-        public IDynamicSource ExtendedValidationData { get; }
+        public IServiceProvider ServiceProvider { get; }
     }
 }

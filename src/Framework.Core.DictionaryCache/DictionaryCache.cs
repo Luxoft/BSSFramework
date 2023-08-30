@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Framework.Core;
+﻿namespace Framework.Core;
 
 public class DictionaryCache<TKey, TValue> : IDictionaryCache<TKey, TValue>
 {

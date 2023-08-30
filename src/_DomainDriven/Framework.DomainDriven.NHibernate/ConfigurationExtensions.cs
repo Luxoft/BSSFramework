@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 
 using Framework.Core;
-
-using JetBrains.Annotations;
 
 using NHibernate.Cfg;
 
@@ -12,7 +8,7 @@ namespace Framework.DomainDriven.NHibernate;
 
 public static class ConfigurationExtensions
 {
-    public static void AddDocument([NotNull] this Configuration configuration, [NotNull] XDocument document)
+    public static void AddDocument(this Configuration configuration, XDocument document)
     {
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
         if (document == null) throw new ArgumentNullException(nameof(document));
@@ -20,7 +16,7 @@ public static class ConfigurationExtensions
         configuration.AddDocument(document.ToXmlDocument());
     }
 
-    public static void AddDocuments(this Configuration configuration, [NotNull] IEnumerable<XDocument> documents)
+    public static void AddDocuments(this Configuration configuration, IEnumerable<XDocument> documents)
     {
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
         if (documents == null) throw new ArgumentNullException(nameof(documents));

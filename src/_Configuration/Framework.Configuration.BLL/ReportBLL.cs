@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.Validation;
 
 namespace Framework.Configuration.BLL;

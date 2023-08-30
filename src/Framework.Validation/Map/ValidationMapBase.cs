@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Framework.Core;
 
-using Framework.Core;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.Validation;
 
@@ -9,11 +9,11 @@ public abstract class ValidationMapBase : IValidationMap
     private readonly IDictionaryCache<Type, IClassValidationMap> _cache;
 
 
-    protected ValidationMapBase(IDynamicSource extendedValidationData)
+    protected ValidationMapBase(IServiceProvider serviceProvider)
     {
-        this.ExtendedValidationData = extendedValidationData ?? throw new ArgumentNullException(nameof(extendedValidationData));
+        this.ServiceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
 
-        this.AvailableValues = LazyInterfaceImplementHelper.CreateProxy(() => this.ExtendedValidationData.GetValue<IAvailableValues>(true));
+        this.AvailableValues = LazyInterfaceImplementHelper.CreateProxy(() => this.ServiceProvider.GetRequiredService<IAvailableValues>());
 
 
         this._cache = new LazyImplementDictionaryCache<Type, IClassValidationMap>(type =>
@@ -27,7 +27,7 @@ public abstract class ValidationMapBase : IValidationMap
     }
 
 
-    public IDynamicSource ExtendedValidationData { get; }
+    public IServiceProvider ServiceProvider { get; }
 
     protected IAvailableValues AvailableValues { get; }
 

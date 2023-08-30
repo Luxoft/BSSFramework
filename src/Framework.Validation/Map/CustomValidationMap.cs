@@ -1,16 +1,14 @@
-﻿using System;
-
-namespace Framework.Validation;
+﻿namespace Framework.Validation;
 
 public abstract class CustomValidationMap : ValidationMapBase
 {
     private readonly Framework.Validation.IValidationMap _defaultValidatorMap;
 
 
-    protected CustomValidationMap(Framework.Core.IDynamicSource extendedValidationData) :
-            base(extendedValidationData)
+    protected CustomValidationMap(IServiceProvider serviceProvider) :
+            base(serviceProvider)
     {
-        this._defaultValidatorMap = new Framework.Validation.ValidationMap(extendedValidationData);
+        this._defaultValidatorMap = new Framework.Validation.ValidationMap(serviceProvider);
     }
 
 

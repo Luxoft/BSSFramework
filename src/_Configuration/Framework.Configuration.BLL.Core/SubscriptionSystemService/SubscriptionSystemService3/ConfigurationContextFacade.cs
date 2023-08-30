@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Authorization.BLL;
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
+using Framework.Authorization.Notification;
 using Framework.Configuration.Domain;
 using Framework.Core;
-using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.DAL.Revisions;
-using Framework.Persistent;
 using Framework.SecuritySystem;
-
-using JetBrains.Annotations;
 
 namespace Framework.Configuration.BLL.SubscriptionSystemService3;
 
@@ -27,7 +19,7 @@ public class ConfigurationContextFacade
     /// </summary>
     /// <param name="context">Контекст конфигурации.</param>
     /// <exception cref="ArgumentNullException">Аргумент context равен null.</exception>
-    public ConfigurationContextFacade([NotNull] IConfigurationBLLContext context)
+    public ConfigurationContextFacade(IConfigurationBLLContext context)
     {
         if (context == null)
         {
@@ -43,7 +35,7 @@ public class ConfigurationContextFacade
     /// <param name="principals">Cписок экземпляров <see cref="IPrincipal{Guid}" />.</param>
     /// <returns>Экземпляр <see cref="IEnumerable{IEmployee}" />.</returns>
     /// <exception cref="ArgumentNullException">Аргумент principals равен null.</exception>
-    public virtual IEnumerable<IEmployee> ConvertPrincipals([NotNull] IEnumerable<IPrincipal<Guid>> principals)
+    public virtual IEnumerable<IEmployee> ConvertPrincipals(IEnumerable<IPrincipal<Guid>> principals)
     {
         if (principals == null)
         {
@@ -87,7 +79,7 @@ public class ConfigurationContextFacade
     /// <param name="entityType">Описатель доменного типа.</param>
     /// <returns>Экземпляр <see cref="Type" />.</returns>
     /// <exception cref="ArgumentNullException">Аргумент entityType равен null.</exception>
-    public virtual Type GetSecurityType([NotNull] EntityType entityType)
+    public virtual Type GetSecurityType(EntityType entityType)
     {
         if (entityType == null)
         {
@@ -104,7 +96,7 @@ public class ConfigurationContextFacade
     /// <param name="domainTypeName">Имя доменного типа.</param>
     /// <returns>Экземпляр <see cref="EntityType" />.</returns>
     /// <exception cref="ArgumentNullException">Аргумент domainTypeName равен null.</exception>
-    public virtual EntityType GetEntityType([NotNull] string domainTypeName)
+    public virtual EntityType GetEntityType(string domainTypeName)
     {
         if (domainTypeName == null)
         {
@@ -121,7 +113,7 @@ public class ConfigurationContextFacade
     /// <param name="domainObjectType">Тип для которого будет произведен поиск описателя доменного объекта.</param>
     /// <returns>Экземпляр <see cref="DomainType" />.</returns>
     /// <exception cref="ArgumentNullException">Аргумент domainObjectType равен null.</exception>
-    public virtual DomainType GetDomainType([NotNull] Type domainObjectType)
+    public virtual DomainType GetDomainType(Type domainObjectType)
     {
         if (domainObjectType == null)
         {
@@ -140,7 +132,7 @@ public class ConfigurationContextFacade
     /// <exception cref="SubscriptionServicesException">
     ///     Реальный тип, соответствующий описанию доменного типа, не найден.
     /// </exception>
-    public virtual Type GetDomainObjectType([NotNull] TypeInfoDescription description)
+    public virtual Type GetDomainObjectType(TypeInfoDescription description)
     {
         if (description == null)
         {
@@ -162,7 +154,7 @@ public class ConfigurationContextFacade
     /// <exception cref="SubscriptionServicesException">
     ///     Реальный тип, соответствующий описанию доменного типа, не найден.
     /// </exception>
-    public virtual Type GetDomainObjectType([NotNull] DomainType domainType)
+    public virtual Type GetDomainObjectType(DomainType domainType)
     {
         if (domainType == null)
         {
@@ -192,8 +184,8 @@ public class ConfigurationContextFacade
     ///     notificationFilterGroups равен null.
     /// </exception>
     public virtual IEnumerable<Principal> GetNotificationPrincipals(
-            [NotNull] Guid[] roleIdents,
-            [NotNull] IEnumerable<NotificationFilterGroup> notificationFilterGroups)
+            Guid[] roleIdents,
+            IEnumerable<NotificationFilterGroup> notificationFilterGroups)
     {
         if (roleIdents == null)
         {
@@ -205,8 +197,7 @@ public class ConfigurationContextFacade
             throw new ArgumentNullException(nameof(notificationFilterGroups));
         }
 
-        var result = this.context.Authorization.Logics.Permission
-                         .GetNotificationPrincipalsByRoles(roleIdents, notificationFilterGroups);
+        var result = this.context.Authorization.NotificationPrincipalExtractor.GetNotificationPrincipalsByRoles(roleIdents, notificationFilterGroups);
 
         return result;
     }
@@ -217,19 +208,18 @@ public class ConfigurationContextFacade
     /// <param name="roleIdents">Идентификаторы ролей получателей.</param>
     /// <returns>Экземпляр <see cref="IEnumerable{Principal}" />.</returns>
     /// <exception cref="ArgumentNullException">Аргумент roleIdents равен null.</exception>
-    public virtual IEnumerable<Principal> GetNotificationPrincipals([NotNull] Guid[] roleIdents)
+    public virtual IEnumerable<Principal> GetNotificationPrincipals(Guid[] roleIdents)
     {
         if (roleIdents == null)
         {
             throw new ArgumentNullException(nameof(roleIdents));
         }
 
-        var result = this.context.Authorization.Logics.Permission
-                         .GetNotificationPrincipalsByRoles(roleIdents);
+        var result = this.context.Authorization.NotificationPrincipalExtractor.GetNotificationPrincipalsByRoles(roleIdents, Array.Empty<NotificationFilterGroup>());
 
         return result;
     }
-        
+
 
     /// <summary>
     /// Возвращает коды активных code first подписок.

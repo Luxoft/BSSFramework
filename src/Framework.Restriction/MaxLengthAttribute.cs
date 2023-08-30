@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.Restriction;
+﻿namespace Framework.Restriction;
 
 [AttributeUsage(AttributeTargets.Property)]
 public class MaxLengthAttribute : Attribute, IRestrictionAttribute

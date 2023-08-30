@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
+﻿using Framework.Core;
 using Framework.Persistent;
-
-using JetBrains.Annotations;
 
 namespace Framework.Projection.Lambda;
 
@@ -55,7 +49,7 @@ internal class AutoProjectionFactory : IFactory<ProjectionBuilder>
                };
     }
 
-    private IEnumerable<ProjectionPropertyBuilder> InternalCreateProperties([NotNull] Type domainType, [NotNull] string projectionName, [NotNull] Node<ProjectionNodeValue> node)
+    private IEnumerable<ProjectionPropertyBuilder> InternalCreateProperties(Type domainType, string projectionName, Node<ProjectionNodeValue> node)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (projectionName == null) throw new ArgumentNullException(nameof(projectionName));

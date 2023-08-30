@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-using Framework.DomainDriven.Attributes;
+﻿using Framework.Persistent.Mapping;
 
 namespace SampleSystem.Domain.TestForceAbstract;
 

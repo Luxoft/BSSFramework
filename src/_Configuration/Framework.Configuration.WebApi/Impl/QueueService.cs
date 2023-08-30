@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Framework.Core;
-using Framework.DomainDriven.BLL.Security;
-
+﻿using Framework.Core;
 using Framework.Configuration.BLL;
 using Framework.Configuration.Generated.DTO;
 using Framework.DomainDriven;

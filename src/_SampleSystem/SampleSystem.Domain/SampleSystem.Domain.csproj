@@ -1,15 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-  <IsPackable>false</IsPackable>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="WorkflowCore" Version="3.8.1" />
+    <PackageReference Include="WorkflowCore" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.App.Domain\Framework.App.Domain.csproj" />
+    <ProjectReference Include="..\..\Framework.Persistent.Mapping.Audit\Framework.Persistent.Mapping.Audit.csproj" />
+    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Domain\Framework.Authorization.Domain.csproj" />
+    <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Core.LegacyContext\Framework.DomainDriven.Core.LegacyContext.csproj" />
     <ProjectReference Include="..\SampleSystem.Core\SampleSystem.Core.csproj" />
   </ItemGroup>
 </Project>

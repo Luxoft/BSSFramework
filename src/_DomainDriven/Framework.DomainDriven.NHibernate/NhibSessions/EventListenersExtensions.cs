@@ -1,17 +1,10 @@
-﻿using System;
-using System.Linq;
-
-using Framework.Core;
-
-using JetBrains.Annotations;
-
-using NHibernate.Event;
+﻿using NHibernate.Event;
 
 namespace Framework.DomainDriven.NHibernate;
 
 public static class EventListenersExtensions
 {
-    internal static EventListeners Clone([NotNull] this EventListeners eventListeners)
+    internal static EventListeners Clone(this EventListeners eventListeners)
     {
         if (eventListeners == null) throw new ArgumentNullException(nameof(eventListeners));
 

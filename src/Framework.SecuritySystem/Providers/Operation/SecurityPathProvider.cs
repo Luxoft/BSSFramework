@@ -28,7 +28,7 @@ public class SecurityPathProvider<TPersistentDomainObjectBase, TDomainObject, TI
 
     public SecurityPathProvider(
             IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
-            SecurityPathBase<TPersistentDomainObjectBase, TDomainObject, TIdent> securityPathBase,
+            SecurityPath<TDomainObject> securityPathBase,
             ContextSecurityOperation<TSecurityOperationCode> securityOperation,
             ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
             : base(accessDeniedExceptionService)

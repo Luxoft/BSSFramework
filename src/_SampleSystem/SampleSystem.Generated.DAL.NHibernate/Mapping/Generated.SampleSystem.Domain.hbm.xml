@@ -50,6 +50,23 @@
     <property name="PermissionId" column="permissionId" access="field.camelcase" />
     <property name="WorkflowInstanceId" column="workflowInstanceId" access="field.camelcase" />
   </class>
+  <class name="SampleSystem.Domain.AuthPerformanceObject" table="AuthPerformanceObject">
+    <id name="Id" column="id" type="Guid" access="field.camelcase">
+      <generator class="guid.comb" />
+    </id>
+    <version name="Version" generated="never" type="Int64">
+      <column name="Version" not-null="false" sql-type="bigint" />
+    </version>
+    <property name="Active" column="active" access="field.camelcase" />
+    <property name="CreateDate" column="createDate" type="timestamp" access="field.camelcase" />
+    <property name="CreatedBy" column="createdBy" access="field.camelcase" />
+    <property name="ModifiedBy" column="modifiedBy" access="field.camelcase" />
+    <property name="ModifyDate" column="modifyDate" type="timestamp" access="field.camelcase" />
+    <many-to-one name="BusinessUnit" column="businessUnitId" class="SampleSystem.Domain.BusinessUnit" access="field.camelcase" />
+    <many-to-one name="Employee" column="employeeId" class="SampleSystem.Domain.Employee" access="field.camelcase" />
+    <many-to-one name="Location" column="locationId" class="SampleSystem.Domain.Location" access="field.camelcase" />
+    <many-to-one name="ManagementUnit" column="managementUnitId" class="SampleSystem.Domain.ManagementUnit" access="field.camelcase" />
+  </class>
   <class name="SampleSystem.Domain.BusinessUnit" table="BusinessUnit">
     <id name="Id" column="id" type="Guid" access="field.camelcase">
       <generator class="guid.comb" />

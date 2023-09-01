@@ -329,6 +329,88 @@ namespace SampleSystem.Generated.DTO
         }
     }
     
+    [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.AuthPerformanceObject), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
+    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitView)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
+    public struct AuthPerformanceObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
+    {
+        
+        private static SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO EmptyField = new SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO(System.Guid.Empty);
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id;
+        
+        public AuthPerformanceObjectIdentityDTO(System.Guid id)
+        {
+            this.Id = id;
+        }
+        
+        public AuthPerformanceObjectIdentityDTO(SampleSystem.Domain.AuthPerformanceObject domainObject)
+        {
+            if (object.ReferenceEquals(domainObject, null))
+            {
+                throw new System.ArgumentNullException("domainObject");
+            }
+            this.Id = domainObject.Id;
+        }
+        
+        public AuthPerformanceObjectIdentityDTO(string id) : 
+                this(new System.Guid(id))
+        {
+        }
+        
+        public static SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO Empty
+        {
+            get
+            {
+                return SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO.EmptyField;
+            }
+        }
+        
+        System.Guid Framework.Persistent.IIdentityObject<System.Guid>.Id
+        {
+            get
+            {
+                return this.Id;
+            }
+        }
+        
+        public static bool operator !=(SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO identity1, SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO identity2)
+        {
+            return !(identity1 == identity2);
+        }
+        
+        public static bool operator ==(SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO identity1, SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO identity2)
+        {
+            return identity1.Equals(identity2);
+        }
+        
+        public override bool Equals(object other)
+        {
+            return !object.ReferenceEquals(other, null) && (typeof(SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO) == other.GetType()) && this.Equals(((SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO)(other)));
+        }
+        
+        public bool Equals(SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO other)
+        {
+            return (this.Id == other.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+        
+        public SampleSystem.Domain.AuthPerformanceObject ToDomainObject(SampleSystem.Generated.DTO.ISampleSystemDTOMappingService mappingService)
+        {
+            return mappingService.ToAuthPerformanceObject(this);
+        }
+        
+        public override string ToString()
+        {
+            return this.Id.ToString();
+        }
+    }
+    
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnit), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitEdit)]
     [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitView)]

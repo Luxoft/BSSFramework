@@ -1,111 +1,86 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Core;
-using Framework.Persistent;
-
 
 namespace Framework.SecuritySystem;
 
 /// <summary>
 /// Контекстное правило доступа (лямбды)
 /// </summary>
-/// <typeparam name="TPersistentDomainObjectBase"></typeparam>
 /// <typeparam name="TDomainObject"></typeparam>
-/// <typeparam name="TIdent"></typeparam>
-public abstract class SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> : SecurityPathBase<TPersistentDomainObjectBase, TDomainObject, TIdent>
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase
+public abstract class SecurityPath<TDomainObject>
+    where TDomainObject : class
 {
     protected SecurityPath()
     {
     }
 
-    public abstract SecurityPath<TPersistentDomainObjectBase, TNewDomainObject, TIdent> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
-            where TNewDomainObject : class, TPersistentDomainObjectBase;
+    public abstract SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
+        where TNewDomainObject : class;
 
+
+    public IEnumerable<Type> GetUsedTypes()
+    {
+        return this.GetInternalUsedTypes().Distinct();
+    }
+
+    protected internal abstract IEnumerable<Type> GetInternalUsedTypes();
 
     #region Create
 
-    public static SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TSecurityContext>(
-            Func<IEnumerable<TIdent>, Expression<Func<TDomainObject, bool>>> securityFilter)
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
-    {
-        return new SecurityPathByIdents<TSecurityContext>(securityFilter);
-    }
 
-
-    public SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> And<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath)
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
+    public SecurityPath<TDomainObject> And<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath)
+            where TSecurityContext : class, ISecurityContext
     {
         return this.And(securityPath, ManySecurityPathMode.Any);
     }
 
-    public SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> And<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, ManySecurityPathMode mode)
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
+    public SecurityPath<TDomainObject> And<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, ManySecurityPathMode mode)
+            where TSecurityContext : class, ISecurityContext
     {
         return this.And(Create(securityPath, mode));
     }
 
-    public SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> And<TSecurityContext>(Func<IEnumerable<TIdent>, Expression<Func<TDomainObject, bool>>> otherSecurityFilter)
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
-    {
-        if (otherSecurityFilter == null) throw new ArgumentNullException(nameof(otherSecurityFilter));
-
-        return new AndSecurityPath(this, Create<TSecurityContext>(otherSecurityFilter));
-    }
-
-
-
-    public SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> Or<TSecurityContext>(
-            Func<IEnumerable<TIdent>, Expression<Func<TDomainObject, bool>>> otherSecurityFilter)
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
-    {
-        if (otherSecurityFilter == null) throw new ArgumentNullException(nameof(otherSecurityFilter));
-
-        return new OrSecurityPath(this, Create<TSecurityContext>(otherSecurityFilter));
-    }
-
-
-    public SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> Or<TSecurityContext>(Expression<Func<TDomainObject, TSecurityContext>> securityPath)
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
+    public SecurityPath<TDomainObject> Or<TSecurityContext>(Expression<Func<TDomainObject, TSecurityContext>> securityPath)
+            where TSecurityContext : class, ISecurityContext
     {
         return this.Or(Create(securityPath));
     }
 
-    public SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> Or<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath)
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
+    public SecurityPath<TDomainObject> Or<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath)
+            where TSecurityContext : class, ISecurityContext
     {
         return this.Or(securityPath, ManySecurityPathMode.Any);
     }
 
-    public SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> Or<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, ManySecurityPathMode mode)
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
+    public SecurityPath<TDomainObject> Or<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, ManySecurityPathMode mode)
+            where TSecurityContext : class, ISecurityContext
     {
         return this.Or(Create(securityPath, mode));
     }
 
 
-    public SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> Or(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> other)
+    public SecurityPath<TDomainObject> Or(SecurityPath<TDomainObject> other)
     {
         if (other == null) throw new ArgumentNullException(nameof(other));
 
         return new OrSecurityPath(this, other);
     }
 
-    public SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> And<TSecurityContext>(Expression<Func<TDomainObject, TSecurityContext>> securityPath, SingleSecurityMode mode = SingleSecurityMode.AllowNull)
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
+    public SecurityPath<TDomainObject> And<TSecurityContext>(Expression<Func<TDomainObject, TSecurityContext>> securityPath, SingleSecurityMode mode = SingleSecurityMode.AllowNull)
+            where TSecurityContext : class, ISecurityContext
     {
         return this.And(Create(securityPath, mode));
     }
 
-    public SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> And(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> other)
+    public SecurityPath<TDomainObject> And(SecurityPath<TDomainObject> other)
     {
         if (other == null) throw new ArgumentNullException(nameof(other));
 
         return new AndSecurityPath(this, other);
     }
 
-    public SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> And(Expression<Func<TDomainObject, bool>> securityFilter)
+    public SecurityPath<TDomainObject> And(Expression<Func<TDomainObject, bool>> securityFilter)
     {
         if (securityFilter == null) throw new ArgumentNullException(nameof(securityFilter));
 
@@ -114,7 +89,7 @@ public abstract class SecurityPath<TPersistentDomainObjectBase, TDomainObject, T
         return new AndSecurityPath(this, condPath);
     }
 
-    public SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> Or(Expression<Func<TDomainObject, bool>> securityFilter)
+    public SecurityPath<TDomainObject> Or(Expression<Func<TDomainObject, bool>> securityFilter)
     {
         if (securityFilter == null) throw new ArgumentNullException(nameof(securityFilter));
 
@@ -123,25 +98,25 @@ public abstract class SecurityPath<TPersistentDomainObjectBase, TDomainObject, T
         return new OrSecurityPath(this, condPath);
     }
 
-    public static SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TSecurityContext>(Expression<Func<TDomainObject, TSecurityContext>> securityPath, SingleSecurityMode mode = SingleSecurityMode.AllowNull)
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
+    public static SecurityPath<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, TSecurityContext>> securityPath, SingleSecurityMode mode = SingleSecurityMode.AllowNull)
+            where TSecurityContext : class, ISecurityContext
     {
         return new SingleSecurityPath<TSecurityContext>(securityPath, mode);
     }
 
-    public static SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath)
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
+    public static SecurityPath<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath)
+            where TSecurityContext : class, ISecurityContext
     {
         return Create(securityPath, ManySecurityPathMode.Any);
     }
 
-    public static SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, ManySecurityPathMode mode)
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
+    public static SecurityPath<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, ManySecurityPathMode mode)
+            where TSecurityContext : class, ISecurityContext
     {
         return new ManySecurityPath<TSecurityContext>(securityPath, mode);
     }
 
-    public static SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> Condition(Expression<Func<TDomainObject, bool>> securityFilter)
+    public static SecurityPath<TDomainObject> Condition(Expression<Func<TDomainObject, bool>> securityFilter)
     {
         return new ConditionPath(securityFilter);
     }
@@ -150,7 +125,7 @@ public abstract class SecurityPath<TPersistentDomainObjectBase, TDomainObject, T
     #endregion
 
 
-    public class ConditionPath : SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>
+    public class ConditionPath : SecurityPath<TDomainObject>
     {
         public readonly Expression<Func<TDomainObject, bool>> SecurityFilter;
 
@@ -166,20 +141,20 @@ public abstract class SecurityPath<TPersistentDomainObjectBase, TDomainObject, T
             yield break;
         }
 
-        public override SecurityPath<TPersistentDomainObjectBase, TNewDomainObject, TIdent> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
+        public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
         {
-            return new SecurityPath<TPersistentDomainObjectBase, TNewDomainObject, TIdent>.ConditionPath(this.SecurityFilter.OverrideInput(selector));
+            return new SecurityPath<TNewDomainObject>.ConditionPath(this.SecurityFilter.OverrideInput(selector));
         }
     }
 
-    public abstract class BinarySecurityPath : SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>
+    public abstract class BinarySecurityPath : SecurityPath<TDomainObject>
     {
-        public readonly SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> Left;
+        public readonly SecurityPath<TDomainObject> Left;
 
-        public readonly SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> Right;
+        public readonly SecurityPath<TDomainObject> Right;
 
 
-        protected BinarySecurityPath(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> left, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> right)
+        protected BinarySecurityPath(SecurityPath<TDomainObject> left, SecurityPath<TDomainObject> right)
         {
             this.Left = left ?? throw new ArgumentNullException(nameof(left));
             this.Right = right ?? throw new ArgumentNullException(nameof(right));
@@ -193,32 +168,32 @@ public abstract class SecurityPath<TPersistentDomainObjectBase, TDomainObject, T
 
     public class OrSecurityPath : BinarySecurityPath
     {
-        internal OrSecurityPath(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> path, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> otherPath)
+        internal OrSecurityPath(SecurityPath<TDomainObject> path, SecurityPath<TDomainObject> otherPath)
                 : base(path, otherPath)
         {
         }
 
-        public override SecurityPath<TPersistentDomainObjectBase, TNewDomainObject, TIdent> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
+        public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
         {
-            return new SecurityPath<TPersistentDomainObjectBase, TNewDomainObject, TIdent>.OrSecurityPath(this.Left.OverrideInput(selector), this.Right.OverrideInput(selector));
+            return new SecurityPath<TNewDomainObject>.OrSecurityPath(this.Left.OverrideInput(selector), this.Right.OverrideInput(selector));
         }
     }
 
     public class AndSecurityPath : BinarySecurityPath
     {
-        internal AndSecurityPath(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> path, SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> otherPath)
+        internal AndSecurityPath(SecurityPath<TDomainObject> path, SecurityPath<TDomainObject> otherPath)
                 : base(path, otherPath)
         {
         }
 
-        public override SecurityPath<TPersistentDomainObjectBase, TNewDomainObject, TIdent> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
+        public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
         {
-            return new SecurityPath<TPersistentDomainObjectBase, TNewDomainObject, TIdent>.AndSecurityPath(this.Left.OverrideInput(selector), this.Right.OverrideInput(selector));
+            return new SecurityPath<TNewDomainObject>.AndSecurityPath(this.Left.OverrideInput(selector), this.Right.OverrideInput(selector));
         }
     }
 
 
-    public abstract class FilterSecurityPath<TSecurityContext> : SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>
+    public abstract class FilterSecurityPath<TSecurityContext> : SecurityPath<TDomainObject>
     {
         protected internal override IEnumerable<Type> GetInternalUsedTypes()
         {
@@ -227,26 +202,8 @@ public abstract class SecurityPath<TPersistentDomainObjectBase, TDomainObject, T
     }
 
 
-    public class SecurityPathByIdents<TSecurityContext> : FilterSecurityPath<TSecurityContext>
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
-    {
-        public readonly Func<IEnumerable<TIdent>, Expression<Func<TDomainObject, bool>>> SecurityFilter;
-
-
-        internal SecurityPathByIdents(Func<IEnumerable<TIdent>, Expression<Func<TDomainObject, bool>>> securityFilter)
-        {
-            this.SecurityFilter = securityFilter ?? throw new ArgumentNullException(nameof(securityFilter));
-        }
-
-        public override SecurityPath<TPersistentDomainObjectBase, TNewDomainObject, TIdent> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
-        {
-            return new SecurityPath<TPersistentDomainObjectBase, TNewDomainObject, TIdent>.SecurityPathByIdents<TSecurityContext>(idents => this.SecurityFilter(idents).OverrideInput(selector));
-        }
-    }
-
-
     public class SingleSecurityPath<TSecurityContext> : FilterSecurityPath<TSecurityContext>
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
+            where TSecurityContext : class, ISecurityContext
     {
         public readonly Expression<Func<TDomainObject, TSecurityContext>> SecurityPath;
 
@@ -261,14 +218,14 @@ public abstract class SecurityPath<TPersistentDomainObjectBase, TDomainObject, T
         }
 
 
-        public override SecurityPath<TPersistentDomainObjectBase, TNewDomainObject, TIdent> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
+        public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
         {
-            return new SecurityPath<TPersistentDomainObjectBase, TNewDomainObject, TIdent>.SingleSecurityPath<TSecurityContext>(this.SecurityPath.OverrideInput(selector), this.Mode);
+            return new SecurityPath<TNewDomainObject>.SingleSecurityPath<TSecurityContext>(this.SecurityPath.OverrideInput(selector), this.Mode);
         }
     }
 
     public class ManySecurityPath<TSecurityContext> : FilterSecurityPath<TSecurityContext>
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
+            where TSecurityContext : class, ISecurityContext
     {
         public readonly Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> SecurityPath;
 
@@ -296,25 +253,25 @@ public abstract class SecurityPath<TPersistentDomainObjectBase, TDomainObject, T
         }
 
 
-        public override SecurityPath<TPersistentDomainObjectBase, TNewDomainObject, TIdent> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
+        public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
         {
-            return new SecurityPath<TPersistentDomainObjectBase, TNewDomainObject, TIdent>.ManySecurityPath<TSecurityContext>(this.SecurityPath.OverrideInput(selector), this.Mode);
+            return new SecurityPath<TNewDomainObject>.ManySecurityPath<TSecurityContext>(this.SecurityPath.OverrideInput(selector), this.Mode);
         }
     }
 
-    public class NestedManySecurityPath<TNestedObject> : SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>
-            where TNestedObject : class, TPersistentDomainObjectBase
+    public class NestedManySecurityPath<TNestedObject> : SecurityPath<TDomainObject>
+        where TNestedObject : class
     {
         public readonly Expression<Func<TDomainObject, IEnumerable<TNestedObject>>> NestedObjectsPath;
 
-        public readonly SecurityPath<TPersistentDomainObjectBase, TNestedObject, TIdent> NestedSecurityPath;
+        public readonly SecurityPath<TNestedObject> NestedSecurityPath;
 
         public readonly ManySecurityPathMode Mode;
 
 
         internal NestedManySecurityPath(
                 Expression<Func<TDomainObject, IEnumerable<TNestedObject>>> nestedObjectsPath,
-                SecurityPath<TPersistentDomainObjectBase, TNestedObject, TIdent> nestedSecurityPath,
+                SecurityPath<TNestedObject> nestedSecurityPath,
                 ManySecurityPathMode mode)
         {
             this.NestedObjectsPath = nestedObjectsPath ?? throw new ArgumentNullException(nameof(nestedObjectsPath));
@@ -327,9 +284,9 @@ public abstract class SecurityPath<TPersistentDomainObjectBase, TDomainObject, T
             return this.NestedSecurityPath.GetInternalUsedTypes();
         }
 
-        public override SecurityPath<TPersistentDomainObjectBase, TNewDomainObject, TIdent> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
+        public override SecurityPath<TNewDomainObject> OverrideInput<TNewDomainObject>(Expression<Func<TNewDomainObject, TDomainObject>> selector)
         {
-            return new SecurityPath<TPersistentDomainObjectBase, TNewDomainObject, TIdent>.NestedManySecurityPath<TNestedObject>(this.NestedObjectsPath.OverrideInput(selector), this.NestedSecurityPath, this.Mode);
+            return new SecurityPath<TNewDomainObject>.NestedManySecurityPath<TNestedObject>(this.NestedObjectsPath.OverrideInput(selector), this.NestedSecurityPath, this.Mode);
         }
     }
 }

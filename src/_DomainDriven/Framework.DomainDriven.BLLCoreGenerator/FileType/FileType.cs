@@ -21,11 +21,6 @@ public enum FileType
     DomainSecurityService,
 
 
-
-
-    SecurityPath,
-
-
     DomainBLLBase,
 
     SecurityDomainBLLBase,

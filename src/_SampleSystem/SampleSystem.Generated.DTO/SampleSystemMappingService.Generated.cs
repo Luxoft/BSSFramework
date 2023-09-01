@@ -30,6 +30,8 @@ namespace SampleSystem.Generated.DTO
         
         void MapAuditPersistentDomainObjectBase(SampleSystem.Domain.AuditPersistentDomainObjectBase domainObject, SampleSystem.Generated.DTO.BaseAuditPersistentDTO mappingObject);
         
+        void MapAuthPerformanceObject(SampleSystem.Domain.AuthPerformanceObject domainObject, SampleSystem.Generated.DTO.AuthPerformanceObjectEventRichDTO mappingObject);
+        
         void MapBusinessUnit(SampleSystem.Domain.BusinessUnit domainObject, SampleSystem.Generated.DTO.BusinessUnitVisualDTO mappingObject);
         
         void MapBusinessUnit(SampleSystem.Domain.BusinessUnit domainObject, SampleSystem.Generated.DTO.BusinessUnitSimpleDTO mappingObject);
@@ -868,6 +870,8 @@ namespace SampleSystem.Generated.DTO
         
         SampleSystem.Domain.ApprovePermissionWorkflowDomainObject ToApprovePermissionWorkflowDomainObject(SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectIdentityDTO approvePermissionWorkflowDomainObjectIdentityDTO);
         
+        SampleSystem.Domain.AuthPerformanceObject ToAuthPerformanceObject(SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO authPerformanceObjectIdentityDTO);
+        
         SampleSystem.Domain.BusinessUnit ToBusinessUnit(SampleSystem.Generated.DTO.BusinessUnitIdentityDTO businessUnitIdentityDTO);
         
         SampleSystem.Domain.BusinessUnit ToBusinessUnit(SampleSystem.Generated.DTO.BusinessUnitStrictDTO businessUnitStrictDTO);
@@ -1373,6 +1377,49 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Active = domainObject.Active;
             mappingObject.CreateDate = domainObject.CreateDate;
             mappingObject.CreatedBy = domainObject.CreatedBy;
+            mappingObject.ModifiedBy = domainObject.ModifiedBy;
+            mappingObject.ModifyDate = domainObject.ModifyDate;
+            mappingObject.Version = domainObject.Version;
+        }
+        
+        public virtual void MapAuthPerformanceObject(SampleSystem.Domain.AuthPerformanceObject domainObject, SampleSystem.Generated.DTO.AuthPerformanceObjectEventRichDTO mappingObject)
+        {
+            mappingObject.Active = domainObject.Active;
+            if (!object.ReferenceEquals(domainObject.BusinessUnit, null))
+            {
+                mappingObject.BusinessUnit = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.BusinessUnit, this);
+            }
+            else
+            {
+                mappingObject.BusinessUnit = null;
+            }
+            mappingObject.CreateDate = domainObject.CreateDate;
+            mappingObject.CreatedBy = domainObject.CreatedBy;
+            if (!object.ReferenceEquals(domainObject.Employee, null))
+            {
+                mappingObject.Employee = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Employee, this);
+            }
+            else
+            {
+                mappingObject.Employee = null;
+            }
+            mappingObject.Id = domainObject.Id;
+            if (!object.ReferenceEquals(domainObject.Location, null))
+            {
+                mappingObject.Location = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.Location, this);
+            }
+            else
+            {
+                mappingObject.Location = null;
+            }
+            if (!object.ReferenceEquals(domainObject.ManagementUnit, null))
+            {
+                mappingObject.ManagementUnit = SampleSystem.Generated.DTO.LambdaHelper.ToSimpleEventDTO(domainObject.ManagementUnit, this);
+            }
+            else
+            {
+                mappingObject.ManagementUnit = null;
+            }
             mappingObject.ModifiedBy = domainObject.ModifiedBy;
             mappingObject.ModifyDate = domainObject.ModifyDate;
             mappingObject.Version = domainObject.Version;
@@ -7615,6 +7662,11 @@ namespace SampleSystem.Generated.DTO
         public virtual SampleSystem.Domain.ApprovePermissionWorkflowDomainObject ToApprovePermissionWorkflowDomainObject(SampleSystem.Generated.DTO.ApprovePermissionWorkflowDomainObjectIdentityDTO approvePermissionWorkflowDomainObjectIdentityDTO)
         {
             return this.GetById<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>(approvePermissionWorkflowDomainObjectIdentityDTO.Id);
+        }
+        
+        public virtual SampleSystem.Domain.AuthPerformanceObject ToAuthPerformanceObject(SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO authPerformanceObjectIdentityDTO)
+        {
+            return this.GetById<SampleSystem.Domain.AuthPerformanceObject>(authPerformanceObjectIdentityDTO.Id);
         }
         
         public virtual SampleSystem.Domain.BusinessUnit ToBusinessUnit(SampleSystem.Generated.DTO.BusinessUnitIdentityDTO businessUnitIdentityDTO)

@@ -148,11 +148,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     protected virtual ICodeFileFactoryHeader<FileType> DefaultOperationSecurityDomainBLLBaseFileFactoryHeader { get; } =
 
         new CodeFileFactoryHeader<FileType>(FileType.DefaultOperationSecurityDomainBLLBase, string.Empty, _ => FileType.SecurityDomainBLLBase.ToString());
-
-    protected virtual ICodeFileFactoryHeader<FileType> SecurityPathFileFactoryHeader =>
-
-            FileType.SecurityPath.ToHeader(this.Environment.TargetSystemName);
-
+    
     protected virtual ICodeFileFactoryHeader<FileType> BLLInterfaceFileFactoryHeader { get; } =
 
         new CodeFileFactoryHeader<FileType>(FileType.BLLInterface, string.Empty, domainType => $"I{domainType.Name}BLL");
@@ -349,8 +345,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
                        this.DefaultOperationDomainBLLBaseFileFactoryHeader,
                        this.SecurityDomainBLLBaseFileFactoryHeader,
                        this.DefaultOperationSecurityDomainBLLBaseFileFactoryHeader,
-
-                       this.SecurityPathFileFactoryHeader,
 
                        this.BLLInterfaceFileFactoryHeader,
                        this.BLLFactoryInterfaceFileFactoryHeader,

@@ -163,6 +163,39 @@ namespace SampleSystem.BLL
             return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.ApprovePermissionWorkflowDomainObject>(this.GetApprovePermissionWorkflowDomainObjectProperties);
         }
         
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.AuthPerformanceObject, System.DateTime?>> GetAuthPerformanceObject_CreateDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.AuthPerformanceObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.AuthPerformanceObject, string>> GetAuthPerformanceObject_CreatedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.AuthPerformanceObject>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.AuthPerformanceObject, string>> GetAuthPerformanceObject_ModifiedByValidators()
+        {
+            yield return new Framework.Validation.MaxLengthValidator.StringMaxLengthValidator<SampleSystem.Domain.AuthPerformanceObject>(this.AvailableValues.GetAvailableSize<string>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.AuthPerformanceObject, System.DateTime?>> GetAuthPerformanceObject_ModifyDateValidators()
+        {
+            yield return Framework.Validation.RangePropertyValidatorHelper.DateTime.CreateNullable<SampleSystem.Domain.AuthPerformanceObject>(this.AvailableValues.GetAvailableRange<System.DateTime>());
+        }
+        
+        protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidationMap<SampleSystem.Domain.AuthPerformanceObject>> GetAuthPerformanceObjectProperties(Framework.Validation.IClassValidationMap<SampleSystem.Domain.AuthPerformanceObject> currentClass)
+        {
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.AuthPerformanceObject, System.DateTime?>(source => source.CreateDate, currentClass, this.GetAuthPerformanceObject_CreateDateValidators(), this.GetClassMap<System.DateTime?>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.AuthPerformanceObject, string>(source => source.CreatedBy, currentClass, this.GetAuthPerformanceObject_CreatedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.AuthPerformanceObject, string>(source => source.ModifiedBy, currentClass, this.GetAuthPerformanceObject_ModifiedByValidators(), this.GetClassMap<string>(true));
+            yield return new Framework.Validation.SinglePropertyValidationMap<SampleSystem.Domain.AuthPerformanceObject, System.DateTime?>(source => source.ModifyDate, currentClass, this.GetAuthPerformanceObject_ModifyDateValidators(), this.GetClassMap<System.DateTime?>(true));
+        }
+        
+        protected virtual Framework.Validation.IClassValidationMap<SampleSystem.Domain.AuthPerformanceObject> GetAuthPerformanceObjectValidationMap()
+        {
+            return new Framework.Validation.ClassValidationMap<SampleSystem.Domain.AuthPerformanceObject>(this.GetAuthPerformanceObjectProperties);
+        }
+        
         protected virtual System.Collections.Generic.IEnumerable<Framework.Validation.IPropertyValidator<SampleSystem.Domain.BusinessUnit, System.Collections.Generic.IEnumerable<SampleSystem.Domain.BusinessUnitEmployeeRole>>> GetBusinessUnit_BusinessUnitEmployeeRolesValidators()
         {
             yield return new Framework.Validation.DeepCollectionValidator<SampleSystem.Domain.BusinessUnit, System.Collections.Generic.IEnumerable<SampleSystem.Domain.BusinessUnitEmployeeRole>, SampleSystem.Domain.BusinessUnitEmployeeRole>();
@@ -2478,6 +2511,10 @@ namespace SampleSystem.BLL
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.ApprovePermissionWorkflowDomainObject)))
             {
                 return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetApprovePermissionWorkflowDomainObjectValidationMap()));
+            }
+            else if ((typeof(TSource) == typeof(SampleSystem.Domain.AuthPerformanceObject)))
+            {
+                return ((Framework.Validation.IClassValidationMap<TSource>)(this.GetAuthPerformanceObjectValidationMap()));
             }
             else if ((typeof(TSource) == typeof(SampleSystem.Domain.BusinessUnit)))
             {

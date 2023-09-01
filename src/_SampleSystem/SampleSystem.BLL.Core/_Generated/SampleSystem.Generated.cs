@@ -628,7 +628,11 @@ namespace SampleSystem.BLL
         
         public static SampleSystem.SampleSystemSecurityOperationCode GetCodeByMode(System.Type domainType, Framework.SecuritySystem.BLLSecurityMode mode)
         {
-            if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.BusinessUnit) == domainType))
+            if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.AuthPerformanceObject) == domainType))
+            {
+                return SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitView;
+            }
+            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.BusinessUnit) == domainType))
             {
                 return SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitView;
             }
@@ -874,21 +878,6 @@ namespace SampleSystem.BLL
     }
     #endregion
     
-    public partial class SampleSystemSecurityPath<TDomainObject> : Framework.SecuritySystem.SecurityPathWrapper<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>
-        where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
-    {
-        
-        private SampleSystemSecurityPath(Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> securityPath) : 
-                base(securityPath)
-        {
-        }
-        
-        public static implicit operator SampleSystem.BLL.SampleSystemSecurityPath<TDomainObject> (Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> securityPath)
-        {
-            return new SampleSystem.BLL.SampleSystemSecurityPath<TDomainObject>(securityPath);
-        }
-    }
-    
     public partial class SampleSystemBLLContext : Framework.DomainDriven.BLL.Security.SecurityBLLBaseContext<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.DomainObjectBase, System.Guid, SampleSystem.BLL.ISampleSystemBLLFactoryContainer, SampleSystem.SampleSystemSecurityOperationCode>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode, System.Guid>>>, SampleSystem.BLL.ISampleSystemBLLContext
     {
         
@@ -999,6 +988,8 @@ namespace SampleSystem.BLL
         
         public static void Register(Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection)
         {
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.AuthPerformanceObject, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemAuthPerformanceObjectSecurityService>(serviceCollection);
+            Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.AuthPerformanceObject>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.AuthPerformanceObject, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemBusinessUnitSecurityService>(serviceCollection);
             Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitHrDepartment, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.SampleSystemBusinessUnitHrDepartmentSecurityService>(serviceCollection);
@@ -1111,38 +1102,40 @@ namespace SampleSystem.BLL
             Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem3>, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem3, SampleSystem.SampleSystemSecurityOperationCode>>(serviceCollection);
         }
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnitHrDepartment> GetBusinessUnitHrDepartmentSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.AuthPerformanceObject> GetAuthPerformanceObjectSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnitManagerCommissionLink> GetBusinessUnitManagerCommissionLinkSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.BusinessUnitHrDepartment> GetBusinessUnitHrDepartmentSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnit> GetBusinessUnitSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.BusinessUnitManagerCommissionLink> GetBusinessUnitManagerCommissionLinkSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.EmployeeCellPhone> GetEmployeeCellPhoneSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.BusinessUnit> GetBusinessUnitSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.EmployeePhoto> GetEmployeePhotoSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.EmployeeCellPhone> GetEmployeeCellPhoneSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.EmployeePosition> GetEmployeePositionSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.EmployeePhoto> GetEmployeePhotoSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<TDomainObject> GetEmployeeSecurityPath<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>()
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.EmployeePosition> GetEmployeePositionSecurityPath();
+        
+        public abstract Framework.SecuritySystem.SecurityPath<TDomainObject> GetEmployeeSecurityPath<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>()
             where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IEmployeeSecurity<TBusinessUnit, TDepartment, TLocation>, SampleSystem.Domain.IBusinessUnitSecurityElement<TBusinessUnit>, SampleSystem.Domain.IDepartmentSecurityElement<TDepartment>, SampleSystem.Domain.IEmployeeSecurityElement<TEmployee, TBusinessUnit, TDepartment, TLocation>, SampleSystem.Domain.IEmployeeSecurityElement<TEmployee>
             where TBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext
             where TDepartment : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ILocationSecurityElement<TLocation>
             where TLocation : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext
             where TEmployee : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IEmployeeSecurity<TBusinessUnit, TDepartment, TLocation>, Framework.SecuritySystem.ISecurityContext;
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink> GetManagementUnitAndBusinessUnitLinkSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink> GetManagementUnitAndBusinessUnitLinkSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> GetManagementUnitAndHRDepartmentLinkSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> GetManagementUnitAndHRDepartmentLinkSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnitFluentMapping> GetManagementUnitFluentMappingSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnitFluentMapping> GetManagementUnitFluentMappingSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnit> GetManagementUnitSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnit> GetManagementUnitSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestPerformanceObject> GetTestPerformanceObjectSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestPerformanceObject> GetTestPerformanceObjectSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestPlainAuthObject> GetTestPlainAuthObjectSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestPlainAuthObject> GetTestPlainAuthObjectSecurityPath();
         
-        public abstract SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestRootSecurityObj> GetTestRootSecurityObjSecurityPath();
+        public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestRootSecurityObj> GetTestRootSecurityObjSecurityPath();
     }
     
     public partial interface ISampleSystemSecurityService : Framework.DomainDriven.BLL.Security.IRootSecurityService<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.ISampleSystemSecurityPathContainer
@@ -1152,38 +1145,57 @@ namespace SampleSystem.BLL
     public partial interface ISampleSystemSecurityPathContainer
     {
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnitHrDepartment> GetBusinessUnitHrDepartmentSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.AuthPerformanceObject> GetAuthPerformanceObjectSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnitManagerCommissionLink> GetBusinessUnitManagerCommissionLinkSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.BusinessUnitHrDepartment> GetBusinessUnitHrDepartmentSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.BusinessUnit> GetBusinessUnitSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.BusinessUnitManagerCommissionLink> GetBusinessUnitManagerCommissionLinkSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.EmployeeCellPhone> GetEmployeeCellPhoneSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.BusinessUnit> GetBusinessUnitSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.EmployeePhoto> GetEmployeePhotoSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.EmployeeCellPhone> GetEmployeeCellPhoneSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.EmployeePosition> GetEmployeePositionSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.EmployeePhoto> GetEmployeePhotoSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<TDomainObject> GetEmployeeSecurityPath<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>()
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.EmployeePosition> GetEmployeePositionSecurityPath();
+        
+        Framework.SecuritySystem.SecurityPath<TDomainObject> GetEmployeeSecurityPath<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>()
             where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IEmployeeSecurity<TBusinessUnit, TDepartment, TLocation>, SampleSystem.Domain.IBusinessUnitSecurityElement<TBusinessUnit>, SampleSystem.Domain.IDepartmentSecurityElement<TDepartment>, SampleSystem.Domain.IEmployeeSecurityElement<TEmployee, TBusinessUnit, TDepartment, TLocation>, SampleSystem.Domain.IEmployeeSecurityElement<TEmployee>
             where TBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext
             where TDepartment : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ILocationSecurityElement<TLocation>
             where TLocation : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext
             where TEmployee : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IEmployeeSecurity<TBusinessUnit, TDepartment, TLocation>, Framework.SecuritySystem.ISecurityContext;
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink> GetManagementUnitAndBusinessUnitLinkSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink> GetManagementUnitAndBusinessUnitLinkSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> GetManagementUnitAndHRDepartmentLinkSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> GetManagementUnitAndHRDepartmentLinkSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnitFluentMapping> GetManagementUnitFluentMappingSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnitFluentMapping> GetManagementUnitFluentMappingSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.ManagementUnit> GetManagementUnitSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnit> GetManagementUnitSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestPerformanceObject> GetTestPerformanceObjectSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestPerformanceObject> GetTestPerformanceObjectSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestPlainAuthObject> GetTestPlainAuthObjectSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestPlainAuthObject> GetTestPlainAuthObjectSecurityPath();
         
-        SampleSystem.BLL.SampleSystemSecurityPath<SampleSystem.Domain.TestRootSecurityObj> GetTestRootSecurityObjSecurityPath();
+        Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestRootSecurityObj> GetTestRootSecurityObjSecurityPath();
+    }
+    
+    public partial class SampleSystemAuthPerformanceObjectSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.AuthPerformanceObject, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
+    {
+        
+        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
+        
+        public SampleSystemAuthPerformanceObjectSecurityService(Framework.SecuritySystem.IAccessDeniedExceptionService<SampleSystem.Domain.PersistentDomainObjectBase> accessDeniedExceptionService, Framework.SecuritySystem.IDisabledSecurityProviderContainer<SampleSystem.Domain.PersistentDomainObjectBase> disabledSecurityProviderContainer, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+                base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+        {
+            this.securityPathContainer = securityPathContainer;
+        }
+        
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.AuthPerformanceObject> GetSecurityPath()
+        {
+            return this.securityPathContainer.GetAuthPerformanceObjectSecurityPath();
+        }
     }
     
     public partial class SampleSystemBusinessUnitSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnit, System.Guid, SampleSystem.SampleSystemSecurityOperationCode>
@@ -1197,7 +1209,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnit, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.BusinessUnit> GetSecurityPath()
         {
             return this.securityPathContainer.GetBusinessUnitSecurityPath();
         }
@@ -1214,7 +1226,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitHrDepartment, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.BusinessUnitHrDepartment> GetSecurityPath()
         {
             return this.securityPathContainer.GetBusinessUnitHrDepartmentSecurityPath();
         }
@@ -1231,7 +1243,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitManagerCommissionLink, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.BusinessUnitManagerCommissionLink> GetSecurityPath()
         {
             return this.securityPathContainer.GetBusinessUnitManagerCommissionLinkSecurityPath();
         }
@@ -1274,7 +1286,7 @@ namespace SampleSystem.BLL
         
         private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<TDomainObject> GetSecurityPath()
         {
             return this.securityPathContainer.GetEmployeeSecurityPath<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>();
         }
@@ -1291,7 +1303,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeCellPhone, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.EmployeeCellPhone> GetSecurityPath()
         {
             return this.securityPathContainer.GetEmployeeCellPhoneSecurityPath();
         }
@@ -1326,7 +1338,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePhoto, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.EmployeePhoto> GetSecurityPath()
         {
             return this.securityPathContainer.GetEmployeePhotoSecurityPath();
         }
@@ -1343,7 +1355,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePosition, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.EmployeePosition> GetSecurityPath()
         {
             return this.securityPathContainer.GetEmployeePositionSecurityPath();
         }
@@ -1459,7 +1471,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnit, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnit> GetSecurityPath()
         {
             return this.securityPathContainer.GetManagementUnitSecurityPath();
         }
@@ -1476,7 +1488,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink> GetSecurityPath()
         {
             return this.securityPathContainer.GetManagementUnitAndBusinessUnitLinkSecurityPath();
         }
@@ -1493,7 +1505,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> GetSecurityPath()
         {
             return this.securityPathContainer.GetManagementUnitAndHRDepartmentLinkSecurityPath();
         }
@@ -1510,7 +1522,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitFluentMapping, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnitFluentMapping> GetSecurityPath()
         {
             return this.securityPathContainer.GetManagementUnitFluentMappingSecurityPath();
         }
@@ -1707,7 +1719,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPerformanceObject, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestPerformanceObject> GetSecurityPath()
         {
             return this.securityPathContainer.GetTestPerformanceObjectSecurityPath();
         }
@@ -1724,7 +1736,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPlainAuthObject, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestPlainAuthObject> GetSecurityPath()
         {
             return this.securityPathContainer.GetTestPlainAuthObjectSecurityPath();
         }
@@ -1741,7 +1753,7 @@ namespace SampleSystem.BLL
             this.securityPathContainer = securityPathContainer;
         }
         
-        protected override Framework.SecuritySystem.SecurityPathBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestRootSecurityObj, System.Guid> GetSecurityPath()
+        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestRootSecurityObj> GetSecurityPath()
         {
             return this.securityPathContainer.GetTestRootSecurityObjSecurityPath();
         }

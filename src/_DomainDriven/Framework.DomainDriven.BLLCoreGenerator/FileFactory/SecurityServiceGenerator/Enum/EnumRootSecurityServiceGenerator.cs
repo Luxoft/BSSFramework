@@ -66,7 +66,7 @@ public class EnumRootSecurityServiceGenerator<TConfiguration> : RootSecurityServ
                       {
                               Name = domainType.ToGetSecurityPathMethodName(),
                               Attributes = MemberAttributes.Public | MemberAttributes.Abstract,
-                              ReturnType = this.Configuration.GetCodeTypeReference(null, FileType.SecurityPath).ToTypeReference(domainTypeRef),
+                              ReturnType = typeof(SecurityPath<>).ToTypeReference(domainTypeRef),
                       }.WithTypeParameters(typeParameters);
     }
 

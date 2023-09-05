@@ -118,9 +118,9 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
 
             var securityObjects = this.GetSecurityObjects(domainObject).ToArray();
 
-            var securityObjectName = this.Factory.AuthorizationSystem.ResolveSecurityTypeName(typeof(TSecurityContext));
+            var securityContextTypeName = this.Factory.AuthorizationSystem.GetSecurityContextInfo(typeof(TSecurityContext)).Name;
 
-            var fullAccessFilter = ExpressionHelper.Create((IPermission<TIdent> permission) => permission.FilterItems.All(filterItem => filterItem.Entity.EntityType.Name != securityObjectName));
+            var fullAccessFilter = ExpressionHelper.Create((IPermission<TIdent> permission) => permission.FilterItems.All(filterItem => filterItem.Entity.EntityType.Name != securityContextTypeName));
 
             if (securityObjects.Any())
             {
@@ -130,7 +130,7 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
 
                 return fullAccessFilter.BuildOr(permission =>
 
-                                                        permission.FilterItems.Any(filterItem => filterItem.Entity.EntityType.Name == securityObjectName
+                                                        permission.FilterItems.Any(filterItem => filterItem.Entity.EntityType.Name == securityContextTypeName
                                                                                        && securityIdents.Contains(filterItem.Entity.EntityId)));
             }
             else

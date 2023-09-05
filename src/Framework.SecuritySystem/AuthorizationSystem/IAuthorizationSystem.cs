@@ -11,8 +11,6 @@ public interface IAuthorizationSystem
 
     void CheckAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> operation)
         where TSecurityOperationCode : struct, Enum;
-
-    string ResolveSecurityTypeName(Type type);
 }
 
 public interface IAuthorizationSystem<TIdent> : IAuthorizationSystem
@@ -29,6 +27,4 @@ public interface IAuthorizationSystem<TIdent> : IAuthorizationSystem
 
     IQueryable<IPermission<TIdent>> GetPermissionQuery<TSecurityOperationCode>(ContextSecurityOperation<TSecurityOperationCode> securityOperation)
         where TSecurityOperationCode : struct, Enum;
-
-    TIdent ResolveSecurityTypeId(Type type);
 }

@@ -47,21 +47,6 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         }
     }
 
-    public string ResolveSecurityTypeName(Type type)
-    {
-        return this.ResolveEntityType(type).Name;
-    }
-
-    public Guid ResolveSecurityTypeId(Type type)
-    {
-        return this.ResolveEntityType(type).Id;
-    }
-
-    private EntityType ResolveEntityType(Type type)
-    {
-
-    }
-
     public IEnumerable<string> GetAccessors<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode, Expression<Func<IPrincipal<Guid>, bool>> principalFilter)
         where TSecurityOperationCode : struct, Enum =>
         throw new NotImplementedException();

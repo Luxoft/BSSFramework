@@ -11,7 +11,10 @@ public class ExampleAuthorizationSystem : AuthorizationSystem<Guid>
     {
     }
 
-    public override Guid ResolveSecurityTypeId(Type type) => throw new NotImplementedException();
+    public override SecurityContextInfo<Guid> GetSecurityContextInfo(Type type)
+    {
+        return new SecurityContextInfo<Guid>(Guid.Empty, type.Name);
+    }
 
     public override bool IsAdmin() => throw new NotImplementedException();
 

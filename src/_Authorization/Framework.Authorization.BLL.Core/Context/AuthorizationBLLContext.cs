@@ -121,7 +121,7 @@ public partial class AuthorizationBLLContext
 
     public Principal CurrentPrincipal => this.lazyCurrentPrincipal.Value;
 
-    
+
     public IDateTimeService DateTimeService { get; }
 
     public ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory { get; }
@@ -205,14 +205,11 @@ public partial class AuthorizationBLLContext
         }
     }
 
-    public Guid ResolveSecurityTypeId(Type type)
+    public SecurityContextInfo<Guid> GetSecurityContextInfo(Type type)
     {
-        return this.GetEntityType(type.GetProjectionSourceTypeOrSelf()).Id;
-    }
+        var entity = this.GetEntityType(type);
 
-    public string ResolveSecurityTypeName(Type type)
-    {
-        return type.GetProjectionSourceTypeOrSelf().Name;
+        return new SecurityContextInfo<Guid>(entity.Id, entity.Name);
     }
 
     public List<Dictionary<Type, IEnumerable<Guid>>> GetPermissions<TSecurityOperationCode>(

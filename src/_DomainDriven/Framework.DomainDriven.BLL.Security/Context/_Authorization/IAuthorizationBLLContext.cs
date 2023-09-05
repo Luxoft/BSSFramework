@@ -7,15 +7,9 @@ namespace Framework.DomainDriven.BLL.Security;
 /// </summary>
 public interface IAuthorizationBLLContextBase : IAuthorizationSystem
 {
-    IRunAsManager RunAsManager
-    {
-        get;
-    }
+    IRunAsManager RunAsManager { get; }
 
-    string CurrentPrincipalName
-    {
-        get;
-    }
+    string CurrentPrincipalName { get; }
 
     bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation, bool withRunAs)
         where TSecurityOperationCode : struct, Enum;
@@ -24,6 +18,9 @@ public interface IAuthorizationBLLContextBase : IAuthorizationSystem
         where TSecurityOperationCode : struct, Enum;
 }
 
-public interface IAuthorizationBLLContext<TIdent> : IAuthorizationBLLContextBase, IAuthorizationSystem<TIdent>, IHierarchicalObjectExpanderFactoryContainer<TIdent>
+public interface IAuthorizationBLLContext<TIdent> : IAuthorizationBLLContextBase,
+                                                    IAuthorizationSystem<TIdent>,
+                                                    IHierarchicalObjectExpanderFactoryContainer<TIdent>,
+                                                    ISecurityContextInfoService<TIdent>
 {
 }

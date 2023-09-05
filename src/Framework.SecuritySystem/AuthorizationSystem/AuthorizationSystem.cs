@@ -18,9 +18,6 @@ public abstract class AuthorizationSystem<TIdent> : IAuthorizationSystem<TIdent>
         this.hierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
     }
 
-
-    public abstract TIdent ResolveSecurityTypeId(Type type);
-
     public abstract bool IsAdmin();
 
     public abstract bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation)
@@ -28,13 +25,6 @@ public abstract class AuthorizationSystem<TIdent> : IAuthorizationSystem<TIdent>
 
     public abstract void CheckAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> operation)
         where TSecurityOperationCode : struct, Enum;
-
-    public string ResolveSecurityTypeName(Type type)
-    {
-        if (type == null) throw new ArgumentNullException(nameof(type));
-
-        return type.Name;
-    }
 
     public abstract IEnumerable<string> GetAccessors<TSecurityOperationCode>(
             TSecurityOperationCode securityOperationCode,

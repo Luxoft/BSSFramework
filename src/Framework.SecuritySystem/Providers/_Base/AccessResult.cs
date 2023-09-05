@@ -1,6 +1,4 @@
-﻿using System;
-
-using Framework.SecuritySystem.AccessDeniedExceptionService;
+﻿using Framework.SecuritySystem.AccessDeniedExceptionService;
 
 namespace Framework.SecuritySystem;
 

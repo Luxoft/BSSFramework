@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 using Framework.Core;
 using Framework.SecuritySystem.Rules.Builders;
 using Framework.Persistent;
-
-using JetBrains.Annotations;
 
 namespace Framework.SecuritySystem
 {

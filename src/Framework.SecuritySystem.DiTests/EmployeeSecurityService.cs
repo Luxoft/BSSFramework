@@ -1,8 +1,4 @@
-﻿using System;
-
-using Framework.SecuritySystem.Rules.Builders;
-
-using JetBrains.Annotations;
+﻿using Framework.SecuritySystem.Rules.Builders;
 
 namespace Framework.SecuritySystem.DiTests
 {

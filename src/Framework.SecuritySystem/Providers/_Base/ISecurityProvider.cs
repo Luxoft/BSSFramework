@@ -18,21 +18,21 @@ namespace Framework.SecuritySystem
         IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable);
 
         /// <summary>
-        /// Получение результа проверки доступа к объекту для текущего пользователя
+        /// Проверка наличия доступа на объект для текущего пользователя с ошибкой в виде результата при отсутствие доступа
         /// </summary>
         /// <param name="domainObject"></param>
         /// <returns></returns>
-        AccessResult GetAccessResult(TDomainObject domainObject);
-
-        /// <summary>
-        /// Проверка наличия доступа на объект
-        /// </summary>
-        /// <param name="domainObject"></param>
-        /// <returns></returns>
-        bool HasAccess(TDomainObject domainObject)
+        AccessResult GetAccessResult(TDomainObject domainObject, IAccessDeniedExceptionFormatter accessDeniedExceptionFormatter)
         {
             return this.GetAccessResult(domainObject) is AccessResult.AccessGrantedResult;
         }
+
+        /// <summary>
+        /// Проверка наличия доступа на объект для текущего пользователя
+        /// </summary>
+        /// <param name="domainObject"></param>
+        /// <returns></returns>
+        bool HasAccess(TDomainObject domainObject);
 
         /// <summary>
         /// Получение списка пользователей имеющих доступ к обьекту

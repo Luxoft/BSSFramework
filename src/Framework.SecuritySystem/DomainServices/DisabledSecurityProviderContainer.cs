@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Framework.SecuritySystem
+﻿namespace Framework.SecuritySystem
 {
     public class DisabledSecurityProviderContainer<TPersistentDomainObjectBase> : IDisabledSecurityProviderContainer<TPersistentDomainObjectBase>
     {

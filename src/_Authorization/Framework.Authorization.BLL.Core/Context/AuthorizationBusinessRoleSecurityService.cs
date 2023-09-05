@@ -1,9 +1,5 @@
-﻿using System;
-
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.SecuritySystem;
-
-using JetBrains.Annotations;
 
 namespace Framework.Authorization.BLL
 {

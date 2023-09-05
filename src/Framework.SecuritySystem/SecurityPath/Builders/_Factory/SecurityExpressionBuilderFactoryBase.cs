@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Design;
-using System.Reflection;
+﻿using System.Reflection;
 
 using Framework.Core;
 using Framework.Persistent;

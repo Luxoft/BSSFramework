@@ -18,7 +18,6 @@ using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Events;
 using Framework.QueryableSource;
-using Framework.Security;
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.AccessDeniedExceptionService;
 using Framework.SecuritySystem.Rules.Builders;

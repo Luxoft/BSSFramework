@@ -6,7 +6,6 @@ using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.Tracking;
 using Framework.HierarchicalExpand;
 using Framework.QueryLanguage;
-using Framework.SecuritySystem;
 using Framework.SecuritySystem.AccessDeniedExceptionService;
 
 using SampleSystem.Domain;

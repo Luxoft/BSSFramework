@@ -1,5 +1,4 @@
-﻿using Framework.SecuritySystem;
-using Framework.SecuritySystem.AccessDeniedExceptionService;
+﻿using Framework.SecuritySystem.AccessDeniedExceptionService;
 
 namespace Framework.DomainDriven.BLL.Security;
 

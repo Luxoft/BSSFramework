@@ -6,7 +6,6 @@ using Framework.HierarchicalExpand;
 using Framework.OData;
 using Framework.QueryableSource;
 using Framework.QueryLanguage;
-using Framework.SecuritySystem;
 using Framework.SecuritySystem.AccessDeniedExceptionService;
 using Framework.Validation;
 

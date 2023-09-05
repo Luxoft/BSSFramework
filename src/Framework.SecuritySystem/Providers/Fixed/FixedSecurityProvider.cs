@@ -15,7 +15,6 @@ namespace Framework.SecuritySystem
 
 
         protected FixedSecurityProvider()
-            : base()
         {
             this.hasAccessLazy = new Lazy<bool>(this.HasAccess);
 

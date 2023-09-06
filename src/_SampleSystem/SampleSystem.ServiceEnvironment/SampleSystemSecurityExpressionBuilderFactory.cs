@@ -1,16 +1,15 @@
-﻿using Framework.HierarchicalExpand;
-using Framework.Persistent;
-using Framework.SecuritySystem;
+﻿using Framework.Persistent;
 
 namespace SampleSystem.ServiceEnvironment;
 
-public class SampleSystemSecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> : Framework.SecuritySystem.Rules.Builders.Mixed.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+public class SampleSystemSecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> : Framework.SecuritySystem.Rules.Builders.
+    Mixed.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>
+    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
-    public SampleSystemSecurityExpressionBuilderFactory(IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory, IAuthorizationSystem<TIdent> authorizationSystem)
-            : base(
-                   new Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>(hierarchicalObjectExpanderFactory, authorizationSystem),
-                   new Framework.SecuritySystem.Rules.Builders.QueryablePermissions.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>(hierarchicalObjectExpanderFactory, authorizationSystem))
+    public SampleSystemSecurityExpressionBuilderFactory(
+        Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> hasAccessFactory,
+        Framework.SecuritySystem.Rules.Builders.QueryablePermissions.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> queryFactory)
+        : base(hasAccessFactory, queryFactory)
     {
     }
 }

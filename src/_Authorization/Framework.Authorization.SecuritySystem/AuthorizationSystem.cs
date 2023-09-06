@@ -43,7 +43,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
     {
         if (!this.HasAccess(operation))
         {
-            throw this.accessDeniedExceptionService.GetAccessDeniedException($"You are not authorized to perform {operation} operation");
+            throw this.accessDeniedExceptionService.GetAccessDeniedException(new AccessResult.AccessDeniedResult { SecurityOperation = operation });
         }
     }
 

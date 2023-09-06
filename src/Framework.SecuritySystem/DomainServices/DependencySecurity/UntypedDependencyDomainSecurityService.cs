@@ -17,7 +17,6 @@ public class UntypedDependencyDomainSecurityService<TPersistentDomainObjectBase,
     private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
 
     public UntypedDependencyDomainSecurityService(
-        IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
         IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
         IDomainSecurityService<TBaseDomainObject, TSecurityOperationCode> baseDomainSecurityService,
         IQueryableSource<TPersistentDomainObjectBase> queryableSource)

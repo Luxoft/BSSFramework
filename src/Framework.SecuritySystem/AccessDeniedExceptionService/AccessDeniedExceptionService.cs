@@ -7,19 +7,16 @@ public class AccessDeniedExceptionService<TPersistentDomainObjectBase, TIdent> :
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
     public Exception BuildAccessDeniedException(string message) =>
-        new AccessDeniedException<TIdent>(string.Empty, default, message);
+        new AccessDeniedException(message);
 
-    public Exception BuildAccessDeniedException<TDomainObject>(TDomainObject domainObject, IReadOnlyDictionary<string, object> extensions = null, Func<string, string> formatMessageFunc = null)
+    public Exception BuildAccessDeniedException<TDomainObject>(TDomainObject domainObject, IReadOnlyDictionary<string, object> extensions = null)
         where TDomainObject : class, TPersistentDomainObjectBase =>
-        new AccessDeniedException<TIdent>(
-            typeof(TDomainObject).Name,
-            domainObject.Id,
+        new AccessDeniedException(
             this.GetAccessDeniedExceptionMessage(
                 domainObject,
-                extensions,
-                formatMessageFunc ?? (v => v)));
+                extensions));
 
-    protected virtual string GetAccessDeniedExceptionMessage<TDomainObject>(TDomainObject domainObject, IReadOnlyDictionary<string, object> extensions = null, Func<string, string> formatMessageFunc = null)
+    protected virtual string GetAccessDeniedExceptionMessage<TDomainObject>(TDomainObject domainObject, IReadOnlyDictionary<string, object> extensions = null)
         where TDomainObject : class, TPersistentDomainObjectBase
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
@@ -38,9 +35,7 @@ public class AccessDeniedExceptionService<TPersistentDomainObjectBase, TIdent> :
 
                                        var messagePostfix = other.Any() ? $" ({other.Join(", ", pair => this.PrintElement(pair.Key, pair.Value))})" : "";
 
-                                       var realFormatMessageFunc = formatMessageFunc ?? (v => v);
-
-                                       return realFormatMessageFunc(messagePrefix + messageBody + messagePostfix);
+                                       return messagePrefix + messageBody + messagePostfix;
                                    });
     }
 

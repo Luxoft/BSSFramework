@@ -19,7 +19,6 @@ public abstract class DependencyDomainSecurityService<TPersistentDomainObjectBas
     private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
 
     protected DependencyDomainSecurityService(
-        IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
         IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
         IDomainSecurityService<TBaseDomainObject, TSecurityOperationCode> baseDomainSecurityService,
         IQueryableSource<TPersistentDomainObjectBase> queryableSource)

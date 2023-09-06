@@ -3,8 +3,10 @@
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
-using Framework.SecuritySystem;
+using Framework.DomainDriven.BLL.Security;
 using Framework.Transfering;
+
+using SecurityProviderExtensions = Framework.SecuritySystem.SecurityProviderExtensions;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
@@ -57,7 +59,7 @@ public class CheckAccessMethodGenerator<TConfiguration> : MethodGenerator<TConfi
         yield return this.Configuration.Environment.BLLCore.GetGetSecurityProviderMethodReferenceExpression(evaluateDataExpr.GetContext(), this.DomainType)
                          .ToMethodInvokeExpression(this.SecurityOperationCodeParameter.ToVariableReferenceExpression())
                          //.ToMethodInvokeExpression("CheckAccess", domainObjectVarDecl.ToVariableReferenceExpression())
-                         .ToStaticMethodInvokeExpression(method, domainObjectVarDecl.ToVariableReferenceExpression())
+                         .ToStaticMethodInvokeExpression(method, domainObjectVarDecl.ToVariableReferenceExpression(), evaluateDataExpr.GetContext().ToPropertyReference((IAccessDeniedExceptionServiceContainer c) => c.AccessDeniedExceptionService))
                          .ToExpressionStatement();
     }
 }

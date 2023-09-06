@@ -8,15 +8,15 @@ namespace SampleSystem.BLL;
 public partial class SampleSystemEmployeeSecurityService<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>
 {
     public SampleSystemEmployeeSecurityService(
-            IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
-            IDisabledSecurityProviderContainer<PersistentDomainObjectBase> disabledSecurityProviderContainer,
+            IAccessDeniedExceptionService accessDeniedExceptionService,
+            IDisabledSecurityProviderSource disabledSecurityProviderSource,
             ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode> securityOperationResolver,
             IAuthorizationSystem<Guid> authorizationSystem,
             ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
             ISampleSystemSecurityPathContainer securityPathContainer,
             ISampleSystemBLLContext context)
 
-            : base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+            : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
     {
         this.securityPathContainer = securityPathContainer ?? throw new ArgumentNullException(nameof(securityPathContainer));
         this.Context = context ?? throw new ArgumentNullException(nameof(context));
@@ -31,7 +31,7 @@ public partial class SampleSystemEmployeeSecurityService<TDomainObject, TBusines
 
         if (securityOperation == SampleSystemSecurityOperation.EmployeeView)
         {
-            return baseProvider.Or(employee => employee.Login == this.Context.Authorization.RunAsManager.PrincipalName, this.AccessDeniedExceptionService);
+            return baseProvider.Or(employee => employee.Login == this.Context.Authorization.RunAsManager.PrincipalName);
         }
         else
         {

@@ -2,7 +2,6 @@
 
 using Framework.HierarchicalExpand;
 using Framework.QueryableSource;
-using Framework.SecuritySystem.Exceptions;
 using Framework.SecuritySystem.Rules.Builders;
 using V1 = Framework.SecuritySystem.Rules.Builders.MaterializedPermissions;
 
@@ -80,13 +79,16 @@ public class MainTests
         await using var scope = this.rootServiceProvider.CreateAsyncScope();
 
         var employeeDomainSecurityService = scope.ServiceProvider.GetRequiredService<IDomainSecurityService<Employee, ExampleSecurityOperation>>();
+        var accessDeniedExceptionService = scope.ServiceProvider.GetRequiredService<IAccessDeniedExceptionService>();
+
         var securityProvider = employeeDomainSecurityService.GetSecurityProvider(BLLSecurityMode.View);
 
+
         // Act
-        var checkAccessAction = () => securityProvider.CheckAccess(this.employee3);
+        var checkAccessAction = () => securityProvider.CheckAccess(this.employee3, accessDeniedExceptionService);
 
         // Assert
-        checkAccessAction.Should().Throw<AccessDeniedException<Guid>>();
+        checkAccessAction.Should().Throw<AccessDeniedException>();
     }
 
 
@@ -99,8 +101,10 @@ public class MainTests
                .AddScoped(this.BuildQueryableSource)
                .AddScoped<IPrincipalPermissionSource<Guid>>(_ => new ExamplePrincipalPermissionSource(this.permissions))
 
-               .AddScoped<IDisabledSecurityProviderContainer<PersistentDomainObjectBase>, DisabledSecurityProviderContainer<PersistentDomainObjectBase>>()
-               .AddScoped<IAccessDeniedExceptionService<PersistentDomainObjectBase>, AccessDeniedExceptionService<PersistentDomainObjectBase, Guid>>()
+               .AddSingleton<IDomainObjectIdentResolver, DomainObjectIdentResolver<Guid>>()
+               .AddScoped<IAccessDeniedExceptionService, AccessDeniedExceptionService>()
+
+               .AddScoped<IDisabledSecurityProviderSource, DisabledSecurityProviderSource>()
                .AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, V1.SecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
                .AddScoped<IAuthorizationSystem<Guid>, ExampleAuthorizationSystem>()
                .AddScoped<IHierarchicalObjectExpanderFactory<Guid>, HierarchicalObjectExpanderFactory<PersistentDomainObjectBase, Guid>>()

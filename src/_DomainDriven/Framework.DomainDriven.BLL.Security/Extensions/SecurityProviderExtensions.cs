@@ -12,7 +12,7 @@ public static class SecurityProviderExtensions
         TBLLContext context,
         params Expression<Func<TDomainObject, object>>[] allowedPropertiesForChangingExpressions)
 
-        where TBLLContext : class, IAccessDeniedExceptionServiceContainer<TDomainObject>, ITrackingServiceContainer<TDomainObject>
+        where TBLLContext : class, IAccessDeniedExceptionServiceContainer, ITrackingServiceContainer<TDomainObject>
         where TDomainObject : class
     {
         if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));

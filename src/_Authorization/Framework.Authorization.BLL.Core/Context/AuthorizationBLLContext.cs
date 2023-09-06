@@ -39,7 +39,7 @@ public partial class AuthorizationBLLContext
             IServiceProvider serviceProvider,
             IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
             ITrackingService<PersistentDomainObjectBase> trackingService,
-            IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
+            IAccessDeniedExceptionService accessDeniedExceptionService,
             IStandartExpressionBuilder standartExpressionBuilder,
             IAuthorizationValidator validator,
             IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
@@ -199,9 +199,7 @@ public partial class AuthorizationBLLContext
     {
         if (!this.HasAccess(operation, withRunAs))
         {
-            IAccessDeniedExceptionService accessDeniedExceptionService = this.AccessDeniedExceptionService;
-
-            throw accessDeniedExceptionService.GetAccessDeniedException($"You are not authorized to perform {operation} operation");
+            throw this.AccessDeniedExceptionService.GetAccessDeniedException(new AccessResult.AccessDeniedResult { SecurityOperation = operation });
         }
     }
 

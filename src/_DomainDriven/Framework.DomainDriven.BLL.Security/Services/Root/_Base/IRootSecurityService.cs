@@ -2,7 +2,7 @@
 
 namespace Framework.DomainDriven.BLL.Security;
 
-public interface IRootSecurityService<out TBLLContext, in TPersistentDomainObjectBase> : IBLLContextContainer<TBLLContext>, IDisabledSecurityProviderContainer<TPersistentDomainObjectBase>
+public interface IRootSecurityService<out TBLLContext, in TPersistentDomainObjectBase> : IBLLContextContainer<TBLLContext>, IDisabledSecurityProviderSource
 {
     ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(BLLSecurityMode securityMode)
             where TDomainObject : class, TPersistentDomainObjectBase;

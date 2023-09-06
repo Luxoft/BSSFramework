@@ -2,7 +2,6 @@
 using Framework.Configuration.BLL;
 using Framework.Configuration.Domain;
 using Framework.Configurator.Interfaces;
-using Framework.SecuritySystem.Exceptions;
 
 using Microsoft.AspNetCore.Http;
 
@@ -15,13 +14,7 @@ public record ForcePushEventHandler(
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        if (!this.AuthorizationSystem.HasAccess(ConfigurationSecurityOperation.ForceDomainTypeEvent))
-        {
-            throw new AccessDeniedException<Guid>(
-                                                  string.Empty,
-                                                  Guid.Empty,
-                                                  $"You are not authorized to perform {ConfigurationSecurityOperation.ForceDomainTypeEvent} operation");
-        }
+        this.AuthorizationSystem.CheckAccess(ConfigurationSecurityOperation.ForceDomainTypeEvent);
 
         var operationId = (string?)context.Request.RouteValues["operationId"] ?? throw new InvalidOperationException();
         var body = await this.ParseRequestBodyAsync<RequestBodyDto>(context);

@@ -34,7 +34,7 @@ public partial class ConfigurationBLLContext
             IServiceProvider serviceProvider,
             IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
             ITrackingService<PersistentDomainObjectBase> trackingService,
-            IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
+            IAccessDeniedExceptionService accessDeniedExceptionService,
             IStandartExpressionBuilder standartExpressionBuilder,
             IConfigurationValidator validator,
             IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,

@@ -1,4 +1,5 @@
-﻿using Framework.SecuritySystem;
+﻿using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
+using Framework.SecuritySystem;
 
 
 
@@ -17,9 +18,9 @@ public class RepositoryFactory<TDomainObject, TSecurityOperationCode> : Template
 {
     public RepositoryFactory(
         IServiceProvider serviceProvider,
-        INotImplementedDomainSecurityServiceContainer notImplementedDomainSecurityServiceContainer,
+        INotImplementedDomainSecurityService<TDomainObject, TSecurityOperationCode> notImplementedDomainSecurityService,
         IDomainSecurityService<TDomainObject, TSecurityOperationCode> domainSecurityService = null)
-        : base(serviceProvider, notImplementedDomainSecurityServiceContainer, domainSecurityService)
+        : base(serviceProvider, notImplementedDomainSecurityService, domainSecurityService)
     {
     }
 }
@@ -34,9 +35,9 @@ public class RepositoryFactory<TDomainObject> : TemplateRepositoryFactory<
 {
     public RepositoryFactory(
         IServiceProvider serviceProvider,
-        INotImplementedDomainSecurityServiceContainer notImplementedDomainSecurityServiceContainer,
+        INotImplementedDomainSecurityService<TDomainObject> notImplementedDomainSecurityService,
         IDomainSecurityService<TDomainObject> domainSecurityService = null)
-        : base(serviceProvider, notImplementedDomainSecurityServiceContainer, domainSecurityService)
+        : base(serviceProvider, notImplementedDomainSecurityService, domainSecurityService)
     {
     }
 }

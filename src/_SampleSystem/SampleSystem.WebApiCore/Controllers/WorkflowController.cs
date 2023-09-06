@@ -3,7 +3,7 @@ using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
 using Framework.Core.Services;
 using Framework.DomainDriven;
-using Framework.SecuritySystem.Exceptions;
+using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -136,7 +136,8 @@ public class WorkflowController : ControllerBase
 
                 if (error != null)
                 {
-                    throw new AccessDeniedException<Guid>(nameof(Permission), permissionIdentity.Id, error.Message);
+                    throw ctx.AccessDeniedExceptionService.GetAccessDeniedException(
+                        new AccessResult.AccessDeniedResult { CustomMessage = error.Message });
                 }
             });
     }

@@ -1,6 +1,5 @@
 ﻿using Framework.Core;
 using Framework.Persistent;
-using Framework.SecuritySystem.AccessDeniedExceptionService;
 using Framework.SecuritySystem.Rules.Builders;
 
 namespace Framework.SecuritySystem.Providers.Operation
@@ -22,9 +21,8 @@ namespace Framework.SecuritySystem.Providers.Operation
     {
         private readonly ContextSecurityOperation<TSecurityOperationCode> securityOperation;
 
-        private readonly IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService;
-
         private readonly Lazy<Func<IQueryable<TDomainObject>, IQueryable<TDomainObject>>> injectFilterFunc;
+
         private readonly Lazy<ISecurityExpressionFilter<TDomainObject>> lazyFilter;
 
         private readonly ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> securityExpressionBuilder;
@@ -33,14 +31,12 @@ namespace Framework.SecuritySystem.Providers.Operation
         public SecurityPathProvider(
             SecurityPath<TDomainObject> securityPathBase,
             ContextSecurityOperation<TSecurityOperationCode> securityOperation,
-            ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory,
-            IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService)
+            ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
         {
             if (securityPathBase == null) throw new ArgumentNullException(nameof(securityPathBase));
             if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
 
             this.securityOperation = securityOperation;
-            this.accessDeniedExceptionService = accessDeniedExceptionService;
 
             this.securityExpressionBuilder = securityExpressionBuilderFactory.CreateBuilder(securityPathBase);
 
@@ -55,13 +51,24 @@ namespace Framework.SecuritySystem.Providers.Operation
             return this.injectFilterFunc.Value(queryable);
         }
 
+        public bool HasAccess(TDomainObject domainObject)
+        {
+            return this.lazyFilter.Value.HasAccessFunc(domainObject);
+        }
+
         public AccessResult GetAccessResult(TDomainObject domainObject)
         {
-            return AccessResult.Create(
-                this.lazyFilter.Value.HasAccessFunc(domainObject),
-                () => this.accessDeniedExceptionService.BuildAccessDeniedException(
-                        domainObject,
-                        new Dictionary<string, object> { { "SecurityOperation", this.securityOperation } }));
+            if (this.HasAccess(domainObject))
+            {
+                return AccessResult.AccessGrantedResult.Default;
+            }
+            else
+            {
+                return new AccessResult.AccessDeniedResult
+                       {
+                           SecurityOperation = this.securityOperation, DomainObjectInfo = (domainObject, typeof(TDomainObject))
+                       };
+            }
         }
 
         public UnboundedList<string> GetAccessors(TDomainObject domainObject)

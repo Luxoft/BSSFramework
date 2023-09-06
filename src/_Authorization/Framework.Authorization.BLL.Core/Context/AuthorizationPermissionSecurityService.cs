@@ -6,11 +6,11 @@ namespace Framework.Authorization.BLL
     public partial class AuthorizationPermissionSecurityService
     {
         public AuthorizationPermissionSecurityService(
-            IDisabledSecurityProviderContainer<PersistentDomainObjectBase> disabledSecurityProviderContainer,
+            IDisabledSecurityProviderSource<PersistentDomainObjectBase> disabledSecurityProviderSource,
             ISecurityOperationResolver<PersistentDomainObjectBase, AuthorizationSecurityOperationCode> securityOperationResolver,
             IAuthorizationSystem<Guid> authorizationSystem,
             IAuthorizationBLLContext context)
-            : base( disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
+            : base( disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
             this.Context = context ?? throw new ArgumentNullException(nameof(context));
         }

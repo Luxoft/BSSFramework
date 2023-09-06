@@ -1,41 +1,33 @@
-﻿using Framework.SecuritySystem.AccessDeniedExceptionService;
-
-namespace Framework.SecuritySystem;
+﻿namespace Framework.SecuritySystem;
 
 public abstract record AccessResult
 {
     public record AccessGrantedResult : AccessResult
     {
-        public override AccessResult Or(Func<AccessResult> _) => this;
+        public override AccessResult Or(AccessResult otherAccessResult) => this;
 
-        public override AccessResult And(Func<AccessResult> getOtherAccessResult) => getOtherAccessResult();
+        public override AccessResult And(AccessResult otherAccessResult) => otherAccessResult;
+
+        public static readonly AccessGrantedResult Default = new AccessGrantedResult();
     }
 
-    public record AccessDeniedResult(Exception Reason) : AccessResult
+    public record AccessDeniedResult : AccessResult
     {
-        public override AccessResult Or(Func<AccessResult> getOtherAccessResult) => getOtherAccessResult();
+        public ISecurityOperation SecurityOperation { get; init; }
 
-        public override AccessResult And(Func<AccessResult> _) => this;
+        public string CustomMessage { get; init; }
+
+        public (object DomainObject, Type DomainObjectType)? DomainObjectInfo { get; init; }
+
+
+        public override AccessResult Or(AccessResult otherAccessResult) => otherAccessResult;
+
+        public override AccessResult And(AccessResult otherAccessResult) => this;
+
+        public static readonly AccessDeniedResult Default = new AccessDeniedResult();
     }
 
-    public static AccessResult Create(bool grantAccess, Func<string> buildAccessDeniedMessage)
-    {
-        return Create(grantAccess, () => new AccessDeniedException(buildAccessDeniedMessage()));
-    }
+    public abstract AccessResult And(AccessResult otherAccessResult);
 
-    public static AccessResult Create(bool grantAccess, Func<Exception> buildAccessDeniedException)
-    {
-        if (grantAccess)
-        {
-            return new AccessGrantedResult();
-        }
-        else
-        {
-            return new AccessDeniedResult(buildAccessDeniedException());
-        }
-    }
-
-    public abstract AccessResult And(Func<AccessResult> getOtherAccessResult);
-
-    public abstract AccessResult Or(Func<AccessResult> getOtherAccessResult);
+    public abstract AccessResult Or(AccessResult otherAccessResult);
 }

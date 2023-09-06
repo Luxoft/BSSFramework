@@ -30,9 +30,9 @@ namespace Framework.SecuritySystem
 
 
         protected NonContextDomainSecurityServiceBase(
-            IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
+            IDisabledSecurityProviderSource disabledSecurityProviderSource,
             ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver)
-            : base(disabledSecurityProviderContainer)
+            : base(disabledSecurityProviderSource)
         {
             this.securityOperationResolver = securityOperationResolver ?? throw new ArgumentNullException(nameof(securityOperationResolver));
 
@@ -68,7 +68,7 @@ namespace Framework.SecuritySystem
         where TDomainObject : class, TPersistentDomainObjectBase
         where TSecurityOperationCode : struct, Enum
     {
-        private readonly IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer;
+        private readonly IDisabledSecurityProviderSource disabledSecurityProviderSource;
 
         [NotNull]
         private readonly IAuthorizationSystem<TIdent> authorizationSystem;
@@ -78,12 +78,12 @@ namespace Framework.SecuritySystem
 
 
         protected NonContextDomainSecurityService(
-            IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
+            IDisabledSecurityProviderSource disabledSecurityProviderSource,
             ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver,
             IAuthorizationSystem<TIdent> authorizationSystem)
-            : base(disabledSecurityProviderContainer, securityOperationResolver)
+            : base(disabledSecurityProviderSource, securityOperationResolver)
         {
-            this.disabledSecurityProviderContainer = disabledSecurityProviderContainer;
+            this.disabledSecurityProviderSource = disabledSecurityProviderSource;
             this.authorizationSystem = authorizationSystem ?? throw new ArgumentNullException(nameof(authorizationSystem));
 
             this.providersCache = new DictionaryCache<NonContextSecurityOperation<TSecurityOperationCode>, ISecurityProvider<TDomainObject>>(this.CreateSecurityProvider).WithLock();
@@ -117,7 +117,7 @@ namespace Framework.SecuritySystem
 
             if (securityOperation is DisabledSecurityOperation<TSecurityOperationCode>)
             {
-                return this.disabledSecurityProviderContainer.GetDisabledSecurityProvider<TDomainObject>();
+                return this.disabledSecurityProviderSource.GetDisabledSecurityProvider<TDomainObject>();
             }
             else
             {

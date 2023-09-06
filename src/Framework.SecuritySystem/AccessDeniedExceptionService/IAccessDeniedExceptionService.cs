@@ -1,14 +1,6 @@
-﻿namespace Framework.SecuritySystem.AccessDeniedExceptionService;
+﻿namespace Framework.SecuritySystem;
 
 public interface IAccessDeniedExceptionService
 {
-    Exception BuildAccessDeniedException(string message);
-}
-
-public interface IAccessDeniedExceptionService<in TPersistentDomainObjectBase> : IAccessDeniedExceptionService
-{
-    Exception BuildAccessDeniedException<TDomainObject>(
-        TDomainObject domainObject,
-        IReadOnlyDictionary<string, object> parameters = null)
-        where TDomainObject : class, TPersistentDomainObjectBase;
+    Exception GetAccessDeniedException(AccessResult.AccessDeniedResult accessDeniedResult);
 }

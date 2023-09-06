@@ -19,21 +19,21 @@ namespace Framework.SecuritySystem
         where TDomainObject : class, TPersistentDomainObjectBase
         where TSecurityOperationCode : struct, Enum
     {
-        private readonly IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer;
+        private readonly IDisabledSecurityProviderSource disabledSecurityProviderSource;
 
         private readonly ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory;
 
         private readonly IDictionaryCache<ContextSecurityOperation<TSecurityOperationCode>, ISecurityProvider<TDomainObject>> providersCache;
 
         protected ContextDomainSecurityServiceBase(
-            IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
+            IDisabledSecurityProviderSource disabledSecurityProviderSource,
             ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver,
             IAuthorizationSystem<TIdent> authorizationSystem,
             ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
 
-            : base(disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem)
+            : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
-            this.disabledSecurityProviderContainer = disabledSecurityProviderContainer ?? throw new ArgumentNullException(nameof(disabledSecurityProviderContainer));
+            this.disabledSecurityProviderSource = disabledSecurityProviderSource ?? throw new ArgumentNullException(nameof(disabledSecurityProviderSource));
             this.securityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
             this.providersCache = new DictionaryCache<ContextSecurityOperation<TSecurityOperationCode>, ISecurityProvider<TDomainObject>>(this.CreateSecurityProvider).WithLock();
         }
@@ -52,7 +52,7 @@ namespace Framework.SecuritySystem
                     return this.GetSecurityProvider(securityOperation);
 
                 case DisabledSecurityOperation<TSecurityOperationCode> securityOperation:
-                    return this.disabledSecurityProviderContainer.GetDisabledSecurityProvider<TDomainObject>();
+                    return this.disabledSecurityProviderSource.GetDisabledSecurityProvider<TDomainObject>();
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(operation));
@@ -105,11 +105,11 @@ namespace Framework.SecuritySystem
         where TSecurityOperationCode : struct, Enum
     {
         protected ContextDomainSecurityService(
-            IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
+            IDisabledSecurityProviderSource disabledSecurityProviderSource,
             ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver,
             IAuthorizationSystem<TIdent> authorizationSystem,
             ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
-            : base(disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+            : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
         {
         }
 

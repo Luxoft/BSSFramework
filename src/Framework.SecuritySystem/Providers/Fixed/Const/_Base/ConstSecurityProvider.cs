@@ -3,7 +3,6 @@
 namespace Framework.SecuritySystem
 {
     public class ConstSecurityProvider<TDomainObject> : FixedSecurityProvider<TDomainObject>
-        where TDomainObject : class
     {
         private readonly bool hasAccess;
 

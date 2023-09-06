@@ -5,12 +5,12 @@ namespace Framework.SecuritySystem.DiTests
     public class EmployeeSecurityService : ContextDomainSecurityService<PersistentDomainObjectBase, Employee, Guid, ExampleSecurityOperation>
     {
         public EmployeeSecurityService(
-            IDisabledSecurityProviderContainer<PersistentDomainObjectBase> disabledSecurityProviderContainer,
+            IDisabledSecurityProviderSource<PersistentDomainObjectBase> disabledSecurityProviderSource,
             ISecurityOperationResolver<PersistentDomainObjectBase, ExampleSecurityOperation> securityOperationResolver,
             IAuthorizationSystem<Guid> authorizationSystem,
             ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory)
 
-            : base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+            : base(accessDeniedExceptionService, disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
         {
         }
 

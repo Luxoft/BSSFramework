@@ -83,7 +83,7 @@ public static class ServiceCollectionExtensions
                .AddScoped<ITrackingService<Framework.Authorization.Domain.PersistentDomainObjectBase>, TrackingService<Framework.Authorization.Domain.PersistentDomainObjectBase>>()
 
                .AddScopedFrom<ISecurityOperationResolver<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode>, IAuthorizationBLLContext>()
-               .AddScopedFrom<IDisabledSecurityProviderContainer<Framework.Authorization.Domain.PersistentDomainObjectBase>, IAuthorizationSecurityService>()
+               .AddScopedFrom<IDisabledSecurityProviderSource<Framework.Authorization.Domain.PersistentDomainObjectBase>, IAuthorizationSecurityService>()
                .AddScopedFrom<IAuthorizationSecurityPathContainer, IAuthorizationSecurityService>()
                .AddScoped<IQueryableSource<Framework.Authorization.Domain.PersistentDomainObjectBase>, BLLQueryableSource<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.DomainObjectBase, Guid>>()
                .AddScoped<ISecurityExpressionBuilderFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
@@ -120,7 +120,7 @@ public static class ServiceCollectionExtensions
                .AddScopedFrom<Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContext, IConfigurationBLLContext>()
 
                .AddScopedFrom<ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode>, IConfigurationBLLContext>()
-               .AddScopedFrom<IDisabledSecurityProviderContainer<Framework.Configuration.Domain.PersistentDomainObjectBase>, IConfigurationSecurityService>()
+               .AddScopedFrom<IDisabledSecurityProviderSource<Framework.Configuration.Domain.PersistentDomainObjectBase>, IConfigurationSecurityService>()
                .AddScopedFrom<IConfigurationSecurityPathContainer, IConfigurationSecurityService>()
                .AddScoped<IQueryableSource<Framework.Configuration.Domain.PersistentDomainObjectBase>, BLLQueryableSource<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectBase, Guid>>()
                .AddScoped<ISecurityExpressionBuilderFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>()

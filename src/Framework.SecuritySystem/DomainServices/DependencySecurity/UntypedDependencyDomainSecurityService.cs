@@ -1,6 +1,5 @@
 ﻿using Framework.Persistent;
 using Framework.QueryableSource;
-using Framework.SecuritySystem.AccessDeniedExceptionService;
 
 namespace Framework.SecuritySystem;
 
@@ -17,11 +16,11 @@ public class UntypedDependencyDomainSecurityService<TPersistentDomainObjectBase,
     private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
 
     public UntypedDependencyDomainSecurityService(
-        IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
+        IDisabledSecurityProviderSource disabledSecurityProviderSource,
         IDomainSecurityService<TBaseDomainObject, TSecurityOperationCode> baseDomainSecurityService,
         IQueryableSource<TPersistentDomainObjectBase> queryableSource)
 
-        : base(disabledSecurityProviderContainer, baseDomainSecurityService)
+        : base(disabledSecurityProviderSource, baseDomainSecurityService)
     {
         this.queryableSource = queryableSource ?? throw new ArgumentNullException(nameof(queryableSource));
     }

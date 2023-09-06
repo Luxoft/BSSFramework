@@ -2,14 +2,16 @@
 
 namespace Framework.SecuritySystem;
 
-public class OnlyDisabledDomainSecurityService<TDomainObject, TSecurityOperationCode> : IDomainSecurityService<TDomainObject, TSecurityOperationCode>
-        where TSecurityOperationCode : struct, Enum where TDomainObject : class
+public class OnlyDisabledDomainSecurityService<TDomainObject, TSecurityOperationCode> : IDomainSecurityService<TDomainObject,
+    TSecurityOperationCode>
+    where TSecurityOperationCode : struct, Enum
+    where TDomainObject : class
 {
-    private readonly ILegacyGenericDisabledSecurityProviderFactory legacyGenericDisabledSecurityProviderFactory;
+    private readonly IDisabledSecurityProviderSource disabledSecurityProviderSource;
 
-    public OnlyDisabledDomainSecurityService(ILegacyGenericDisabledSecurityProviderFactory legacyGenericDisabledSecurityProviderFactory)
+    public OnlyDisabledDomainSecurityService(IDisabledSecurityProviderSource disabledSecurityProviderSource)
     {
-        this.legacyGenericDisabledSecurityProviderFactory = legacyGenericDisabledSecurityProviderFactory;
+        this.disabledSecurityProviderSource = disabledSecurityProviderSource;
     }
 
     public ISecurityProvider<TDomainObject> GetSecurityProvider(BLLSecurityMode securityMode)
@@ -34,6 +36,6 @@ public class OnlyDisabledDomainSecurityService<TDomainObject, TSecurityOperation
             throw new InvalidOperationException($"Security mode \"{securityMode}\" not allowed");
         }
 
-        return this.legacyGenericDisabledSecurityProviderFactory.GetDisabledSecurityProvider<TDomainObject>();
+        return this.disabledSecurityProviderSource.GetDisabledSecurityProvider<TDomainObject>();
     }
 }

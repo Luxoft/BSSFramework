@@ -6,12 +6,7 @@ namespace Framework.SecuritySystem
 {
     public static class SecurityProviderExtensions
     {
-        public static bool HasAccess<TDomainObject>(this ISecurityProvider<TDomainObject> securityProvider, TDomainObject domainObject)
-        {
-            return securityProvider.GetAccessResult(domainObject) is AccessResult.AccessGrantedResult;
-        }
-
-        public static void CheckAccess<TDomainObject>(this ISecurityProvider<TDomainObject> securityProvider, TDomainObject domainObject, IAccessDeniedExceptionFormatter accessDeniedExceptionFormatter)
+        public static void CheckAccess<TDomainObject>(this ISecurityProvider<TDomainObject> securityProvider, TDomainObject domainObject, IAccessDeniedExceptionService accessDeniedExceptionService)
             where TDomainObject : class
         {
             if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
@@ -19,7 +14,7 @@ namespace Framework.SecuritySystem
 
             if (!securityProvider.HasAccess(domainObject))
             {
-                throw accessDeniedExceptionFormatter.GetAccessDeniedException(domainObject);
+                throw accessDeniedExceptionService.GetAccessDeniedException(new AccessResult.AccessDeniedResult { DomainObjectInfo = (domainObject, typeof(TDomainObject)) });
             }
         }
 
@@ -40,8 +35,6 @@ namespace Framework.SecuritySystem
 
             return securityProvider.Or(SecurityProvider<TDomainObject>.Create(securityFilter, getAccessorsFunc, securityFilterCompileMode));
         }
-
-
 
         public static ISecurityProvider<TDomainObject> And<TDomainObject>(this ISecurityProvider<TDomainObject> securityProvider, ISecurityProvider<TDomainObject> otherSecurityProvider)
             where TDomainObject : class
@@ -94,7 +87,6 @@ namespace Framework.SecuritySystem
 
 
             public CompositeSecurityProvider(ISecurityProvider<TDomainObject> securityProvider, ISecurityProvider<TDomainObject> otherSecurityProvider, bool orAnd)
-                : base()
             {
                 this.securityProvider = securityProvider;
                 this.otherSecurityProvider = otherSecurityProvider;
@@ -110,8 +102,8 @@ namespace Framework.SecuritySystem
 
             public AccessResult GetAccessResult(TDomainObject domainObject)
             {
-                return this.orAnd ? this.securityProvider.GetAccessResult(domainObject).And(() => this.otherSecurityProvider.GetAccessResult(domainObject))
-                                   : this.securityProvider.GetAccessResult(domainObject).Or(() => this.otherSecurityProvider.GetAccessResult(domainObject));
+                return this.orAnd ? this.securityProvider.GetAccessResult(domainObject).And(this.otherSecurityProvider.GetAccessResult(domainObject))
+                                   : this.securityProvider.GetAccessResult(domainObject).Or(this.otherSecurityProvider.GetAccessResult(domainObject));
             }
 
             public bool HasAccess(TDomainObject domainObject)

@@ -99,7 +99,7 @@ public class MainTests
                .AddScoped(this.BuildQueryableSource)
                .AddScoped<IPrincipalPermissionSource<Guid>>(_ => new ExamplePrincipalPermissionSource(this.permissions))
 
-               .AddScoped<IDisabledSecurityProviderContainer<PersistentDomainObjectBase>, DisabledSecurityProviderContainer<PersistentDomainObjectBase>>()
+               .AddScoped<IDisabledSecurityProviderSource<PersistentDomainObjectBase>, DisabledSecurityProviderContainer<PersistentDomainObjectBase>>()
                .AddScoped<IAccessDeniedExceptionService<PersistentDomainObjectBase>, AccessDeniedExceptionService<PersistentDomainObjectBase, Guid>>()
                .AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, V1.SecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
                .AddScoped<IAuthorizationSystem<Guid>, ExampleAuthorizationSystem>()

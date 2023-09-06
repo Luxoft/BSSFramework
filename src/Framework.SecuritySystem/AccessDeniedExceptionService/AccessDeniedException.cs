@@ -1,4 +1,4 @@
-﻿namespace Framework.SecuritySystem.AccessDeniedExceptionService;
+﻿namespace Framework.SecuritySystem;
 
 public class AccessDeniedException : Exception
 {

@@ -5,7 +5,6 @@ using Framework.Core;
 namespace Framework.SecuritySystem
 {
     public abstract class SecurityProvider<TDomainObject> : ISecurityProvider<TDomainObject>
-        where TDomainObject : class
     {
         private readonly Lazy<Func<TDomainObject, bool>> lazyHasAccessFunc;
 
@@ -40,6 +39,18 @@ namespace Framework.SecuritySystem
         public virtual bool HasAccess(TDomainObject domainObject)
         {
             return this.lazyHasAccessFunc.Value(domainObject);
+        }
+
+        public virtual AccessResult GetAccessResult(TDomainObject domainObject)
+        {
+            if (this.HasAccess(domainObject))
+            {
+                return AccessResult.AccessGrantedResult.Default;
+            }
+            else
+            {
+                return AccessResult.AccessDeniedResult.Default;
+            }
         }
 
         public abstract UnboundedList<string> GetAccessors(TDomainObject domainObject);

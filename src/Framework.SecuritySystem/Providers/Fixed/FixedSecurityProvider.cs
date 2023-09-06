@@ -7,7 +7,6 @@ namespace Framework.SecuritySystem
     /// </summary>
     /// <typeparam name="TDomainObject"></typeparam>
     public abstract class FixedSecurityProvider<TDomainObject> : SecurityProvider<TDomainObject>
-        where TDomainObject : class
     {
         private readonly Lazy<bool> hasAccessLazy;
 

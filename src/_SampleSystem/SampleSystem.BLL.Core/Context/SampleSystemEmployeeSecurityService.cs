@@ -10,14 +10,14 @@ public partial class SampleSystemEmployeeSecurityService<TDomainObject, TBusines
 {
     public SampleSystemEmployeeSecurityService(
             IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
-            IDisabledSecurityProviderContainer<PersistentDomainObjectBase> disabledSecurityProviderContainer,
+            IDisabledSecurityProviderSource<PersistentDomainObjectBase> disabledSecurityProviderSource,
             ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode> securityOperationResolver,
             IAuthorizationSystem<Guid> authorizationSystem,
             ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
             ISampleSystemSecurityPathContainer securityPathContainer,
             ISampleSystemBLLContext context)
 
-            : base(accessDeniedExceptionService, disabledSecurityProviderContainer, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+            : base(accessDeniedExceptionService, disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
     {
         this.securityPathContainer = securityPathContainer ?? throw new ArgumentNullException(nameof(securityPathContainer));
         this.Context = context ?? throw new ArgumentNullException(nameof(context));

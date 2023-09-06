@@ -37,6 +37,20 @@ namespace Framework.SecuritySystem
         {
             return this.authorizationSystem.HasAccess(this.securityOperation);
         }
+        public override AccessResult GetAccessResult(TDomainObject domainObject)
+        {
+            if (this.HasAccess(domainObject))
+            {
+                return AccessResult.AccessGrantedResult.Default;
+            }
+            else
+            {
+                return new AccessResult.AccessDeniedResult
+                       {
+                           SecurityOperation = this.securityOperation, DomainObjectInfo = (domainObject, typeof(TDomainObject))
+                       };
+            }
+        }
 
 
         public override UnboundedList<string> GetAccessors(TDomainObject domainObject)

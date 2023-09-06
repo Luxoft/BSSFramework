@@ -41,18 +41,6 @@ namespace Framework.SecuritySystem
             return this.lazyHasAccessFunc.Value(domainObject);
         }
 
-        public virtual AccessResult GetAccessResult(TDomainObject domainObject)
-        {
-            if (this.HasAccess(domainObject))
-            {
-                return AccessResult.AccessGrantedResult.Default;
-            }
-            else
-            {
-                return AccessResult.AccessDeniedResult.Default;
-            }
-        }
-
         public abstract UnboundedList<string> GetAccessors(TDomainObject domainObject);
 
         private static readonly IDictionaryCache<LambdaCompileMode, LambdaCompileCache> Caches =

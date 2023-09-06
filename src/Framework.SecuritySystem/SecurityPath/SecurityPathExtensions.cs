@@ -15,7 +15,7 @@ public static class SecurityPathExtensions
         where TDomainObject : class, TPersistentDomainObjectBase
         where TSecurityOperationCode : struct, Enum
     {
-        return new SecurityPathProvider<TPersistentDomainObjectBase, TDomainObject, TIdent, TSecurityOperationCode>(
+        return new ContextSecurityPathProvider<TPersistentDomainObjectBase, TDomainObject, TIdent, TSecurityOperationCode>(
             securityPath,
             operation,
             securityExpressionBuilderFactory);

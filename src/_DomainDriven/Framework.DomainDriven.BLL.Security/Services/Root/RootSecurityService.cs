@@ -7,7 +7,7 @@ namespace Framework.DomainDriven.BLL.Security;
 
 public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<TBLLContext>, IRootSecurityService<TBLLContext, TPersistentDomainObjectBase>
 
-        where TBLLContext : class, IAccessDeniedExceptionServiceContainer<TPersistentDomainObjectBase>
+        where TBLLContext : class, IAccessDeniedExceptionServiceContainer
         where TPersistentDomainObjectBase : class
 {
     private readonly IDictionaryCache<Type, object> domainSecurityServiceCache;
@@ -41,11 +41,9 @@ public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBa
     }
 
     public virtual ISecurityProvider<TDomainObject> GetDisabledSecurityProvider<TDomainObject>()
-            where TDomainObject : class, TPersistentDomainObjectBase
     {
-        return new DisabledSecurityProvider<TDomainObject>(this.Context.AccessDeniedExceptionService);
+        return new DisabledSecurityProvider<TDomainObject>();
     }
-
 
     protected IDomainSecurityService<TDomainObject> GetDomainSecurityServiceBase<TDomainObject>()
             where TDomainObject : class, TPersistentDomainObjectBase
@@ -70,7 +68,7 @@ public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBa
 
     IRootSecurityService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>
 
-        where TBLLContext : class, ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode>, IAccessDeniedExceptionServiceContainer<TPersistentDomainObjectBase>, IServiceProviderContainer
+        where TBLLContext : class, ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode>, IAccessDeniedExceptionServiceContainer, IServiceProviderContainer
         where TSecurityOperationCode : struct, Enum
         where TPersistentDomainObjectBase : class
 {

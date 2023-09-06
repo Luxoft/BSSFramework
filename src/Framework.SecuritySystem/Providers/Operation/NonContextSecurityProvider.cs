@@ -10,7 +10,7 @@ namespace Framework.SecuritySystem
     /// <typeparam name="TDomainObject"></typeparam>
     /// <typeparam name="TIdent"></typeparam>
     /// <typeparam name="TSecurityOperationCode"></typeparam>
-    public class NonContextSecurityProvider<TPersistentDomainObjectBase, TDomainObject, TIdent, TSecurityOperationCode> : FixedSecurityProvider<TDomainObject>
+    public class NonContextSecurityProvider<TPersistentDomainObjectBase, TDomainObject, TIdent, TSecurityOperationCode> : FixedSecurityProvider<TDomainObject>, ISecurityProvider<TDomainObject>
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase
 
@@ -37,7 +37,8 @@ namespace Framework.SecuritySystem
         {
             return this.authorizationSystem.HasAccess(this.securityOperation);
         }
-        public override AccessResult GetAccessResult(TDomainObject domainObject)
+
+        public AccessResult GetAccessResult(TDomainObject domainObject)
         {
             if (this.HasAccess(domainObject))
             {

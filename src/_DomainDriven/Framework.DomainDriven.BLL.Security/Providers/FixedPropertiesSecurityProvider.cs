@@ -7,7 +7,7 @@ using Framework.SecuritySystem;
 namespace Framework.DomainDriven.BLL.Security
 {
     internal class FixedPropertiesSecurityProvider<TBLLContext, TDomainObject> : ISecurityProvider<TDomainObject>
-        where TBLLContext : class, IAccessDeniedExceptionServiceContainer<TDomainObject>, ITrackingServiceContainer<TDomainObject>
+        where TBLLContext : class, IAccessDeniedExceptionServiceContainer, ITrackingServiceContainer<TDomainObject>
         where TDomainObject : class
     {
         private readonly ISecurityProvider<TDomainObject> baseSecurityProvider;
@@ -28,11 +28,6 @@ namespace Framework.DomainDriven.BLL.Security
         public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
         {
             return this.baseSecurityProvider.InjectFilter(queryable);
-        }
-
-        public AccessResult GetAccessResult(TDomainObject domainObject)
-        {
-
         }
 
         public bool HasAccess(TDomainObject domainObject)

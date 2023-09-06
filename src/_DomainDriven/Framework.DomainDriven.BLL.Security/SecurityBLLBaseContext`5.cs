@@ -3,7 +3,6 @@ using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.QueryLanguage;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.AccessDeniedExceptionService;
 using Framework.Validation;
 
 namespace Framework.DomainDriven.BLL.Security;
@@ -21,7 +20,7 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TDomai
             IServiceProvider serviceProvider,
             IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
             ITrackingService<TPersistentDomainObjectBase> trackingService,
-            IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
+            IAccessDeniedExceptionService accessDeniedExceptionService,
             IStandartExpressionBuilder standartExpressionBuilder,
             IValidator validator,
             IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,

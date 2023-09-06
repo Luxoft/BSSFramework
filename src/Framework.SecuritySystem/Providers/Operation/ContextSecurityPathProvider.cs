@@ -12,7 +12,7 @@ namespace Framework.SecuritySystem.Providers.Operation
     /// <typeparam name="TDomainObject"></typeparam>
     /// <typeparam name="TIdent"></typeparam>
     /// <typeparam name="TSecurityOperationCode"></typeparam>
-    public class SecurityPathProvider<TPersistentDomainObjectBase, TDomainObject, TIdent, TSecurityOperationCode> : ISecurityProvider<TDomainObject>
+    public class ContextSecurityPathProvider<TPersistentDomainObjectBase, TDomainObject, TIdent, TSecurityOperationCode> : ISecurityProvider<TDomainObject>
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase
@@ -28,7 +28,7 @@ namespace Framework.SecuritySystem.Providers.Operation
         private readonly ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> securityExpressionBuilder;
 
 
-        public SecurityPathProvider(
+        public ContextSecurityPathProvider(
             SecurityPath<TDomainObject> securityPathBase,
             ContextSecurityOperation<TSecurityOperationCode> securityOperation,
             ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)

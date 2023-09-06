@@ -40,11 +40,11 @@ namespace Framework.DomainDriven.BLL.Security
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
         where TDomainObject : class, TPersistentDomainObjectBase
         where TOperation : struct, Enum
-        where TBLLContext : class, ISecurityBLLContext<IAuthorizationBLLContext<TIdent>, TPersistentDomainObjectBase, TDomainObjectBase, TIdent>, IAccessDeniedExceptionServiceContainer<TPersistentDomainObjectBase>, IHierarchicalObjectExpanderFactoryContainer<TIdent>
+        where TBLLContext : class, ISecurityBLLContext<IAuthorizationBLLContext<TIdent>, TPersistentDomainObjectBase, TDomainObjectBase, TIdent>, IAccessDeniedExceptionServiceContainer, IHierarchicalObjectExpanderFactoryContainer<TIdent>
 
     {
         protected DefaultSecurityDomainBLLBase(TBLLContext context, ISpecificationEvaluator specificationEvaluator = null)
-            : this(context, new DisabledSecurityProvider<TDomainObject>(context.AccessDeniedExceptionService), specificationEvaluator)
+            : this(context, new DisabledSecurityProvider<TDomainObject>(), specificationEvaluator)
         {
         }
 
@@ -108,7 +108,11 @@ namespace Framework.DomainDriven.BLL.Security
         {
             var request = from objectWithoutPermission in this.Context.Logics.Default.Create<TDomainObject>().GetById(id).ToMaybe()
 
-                          select this.SecurityProvider.GetAccessDeniedException(objectWithoutPermission);
+                          let accessDeniedResult = this.SecurityProvider.GetAccessResult(objectWithoutPermission) as AccessResult.AccessDeniedResult
+
+                          where accessDeniedResult != null
+
+                          select this.Context.AccessDeniedExceptionService.GetAccessDeniedException(accessDeniedResult);
 
             return request.GetValueOrDefault(() => base.GetMissingObjectException(id));
         }

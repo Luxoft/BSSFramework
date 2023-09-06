@@ -20,17 +20,19 @@ namespace Framework.SecuritySystem
         /// </summary>
         /// <param name="domainObject"></param>
         /// <returns></returns>
-        AccessResult GetAccessResult(TDomainObject domainObject);
+        AccessResult GetAccessResult(TDomainObject domainObject)
+        {
+            return this.HasAccess(domainObject)
+                       ? AccessResult.AccessDeniedResult.Default
+                       : new AccessResult.AccessDeniedResult { DomainObjectInfo = (domainObject, typeof(TDomainObject)) };
+        }
 
         /// <summary>
         /// Проверка наличия доступа на объект для текущего пользователя
         /// </summary>
         /// <param name="domainObject"></param>
         /// <returns></returns>
-        bool HasAccess(TDomainObject domainObject)
-        {
-            return this.GetAccessResult(domainObject) is AccessResult.AccessGrantedResult;
-        }
+        bool HasAccess(TDomainObject domainObject);
 
         /// <summary>
         /// Получение списка пользователей имеющих доступ к обьекту

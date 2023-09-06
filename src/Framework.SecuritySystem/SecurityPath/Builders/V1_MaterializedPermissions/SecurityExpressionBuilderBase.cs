@@ -118,7 +118,7 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
 
             var securityObjects = this.GetSecurityObjects(domainObject).ToArray();
 
-            var securityContextTypeName = this.Factory.AuthorizationSystem.GetSecurityContextInfo(typeof(TSecurityContext)).Name;
+            var securityContextTypeName = this.Factory.SecurityContextInfoService.GetSecurityContextInfo(typeof(TSecurityContext)).Name;
 
             var fullAccessFilter = ExpressionHelper.Create((IPermission<TIdent> permission) => permission.FilterItems.All(filterItem => filterItem.Entity.EntityType.Name != securityContextTypeName));
 

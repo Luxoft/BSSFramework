@@ -6,5 +6,4 @@ public interface IPrincipalPermissionSource<TIdent>
 
     IQueryable<IPermission<TIdent>> GetPermissionQuery<TSecurityOperationCode>(ContextSecurityOperation<TSecurityOperationCode> securityOperation)
             where TSecurityOperationCode : struct, Enum;
-
 }

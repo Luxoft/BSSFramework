@@ -94,7 +94,7 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
 
             var securityObjects = this.GetSecurityObjects(domainObject).ToArray();
 
-            var securityContextTypeName = this.Factory.AuthorizationSystem.GetSecurityContextInfo(typeof(TSecurityContext)).Name;
+            var securityContextTypeName = this.Factory.SecurityContextInfoService.GetSecurityContextInfo(typeof(TSecurityContext)).Name;
 
             var fullAccessFilter = ExpressionHelper.Create((IPermission<TIdent> permission) => permission.FilterItems.All(filterItem => filterItem.Entity.EntityType.Name != securityContextTypeName));
 
@@ -152,7 +152,7 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
 
         public override Expression<Func<TDomainObject, IPermission<TIdent>, bool>> GetSecurityFilterExpression(HierarchicalExpandType expandType)
         {
-            var securityContextTypeId = this.Factory.AuthorizationSystem.GetSecurityContextInfo(typeof(TSecurityContext)).Id;
+            var securityContextTypeId = this.Factory.SecurityContextInfoService.GetSecurityContextInfo(typeof(TSecurityContext)).Id;
 
             var eqIdentsExpr = ExpressionHelper.GetEquality<TIdent>();
 
@@ -223,7 +223,7 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
 
         public override Expression<Func<TDomainObject, IPermission<TIdent>, bool>> GetSecurityFilterExpression(HierarchicalExpandType expandType)
         {
-            var securityContextTypeId = this.Factory.AuthorizationSystem.GetSecurityContextInfo(typeof(TSecurityContext)).Id;
+            var securityContextTypeId = this.Factory.SecurityContextInfoService.GetSecurityContextInfo(typeof(TSecurityContext)).Id;
 
             var eqIdentsExpr = ExpressionHelper.GetEquality<TIdent>();
 

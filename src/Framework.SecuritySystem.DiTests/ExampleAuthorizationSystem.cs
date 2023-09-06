@@ -11,11 +11,6 @@ public class ExampleAuthorizationSystem : AuthorizationSystem<Guid>
     {
     }
 
-    public override SecurityContextInfo<Guid> GetSecurityContextInfo(Type type)
-    {
-        return new SecurityContextInfo<Guid>(Guid.Empty, type.Name);
-    }
-
     public override bool IsAdmin() => throw new NotImplementedException();
 
     public override bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation) => throw new NotImplementedException();

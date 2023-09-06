@@ -136,7 +136,7 @@ public class WorkflowController : ControllerBase
 
                 if (error != null)
                 {
-                    ctx.AccessDeniedExceptionService.GetAccessDeniedException(
+                    throw ctx.AccessDeniedExceptionService.GetAccessDeniedException(
                         new AccessResult.AccessDeniedResult { CustomMessage = error.Message });
                 }
             });

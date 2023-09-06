@@ -79,7 +79,6 @@ public static class ServiceCollectionExtensions
                .AddScoped<ITrackingService<Framework.Authorization.Domain.PersistentDomainObjectBase>, TrackingService<Framework.Authorization.Domain.PersistentDomainObjectBase>>()
 
                .AddScopedFrom<ISecurityOperationResolver<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode>, IAuthorizationBLLContext>()
-               .AddScopedFrom<IDisabledSecurityProviderSource, IAuthorizationSecurityService>()
                .AddScopedFrom<IAuthorizationSecurityPathContainer, IAuthorizationSecurityService>()
                .AddScoped<IQueryableSource<Framework.Authorization.Domain.PersistentDomainObjectBase>, BLLQueryableSource<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.DomainObjectBase, Guid>>()
                .AddScoped<ISecurityExpressionBuilderFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()

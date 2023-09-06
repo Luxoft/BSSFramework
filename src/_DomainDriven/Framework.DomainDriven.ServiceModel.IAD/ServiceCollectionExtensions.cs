@@ -62,8 +62,8 @@ public static class ServiceCollectionExtensions
         return services.AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>()
 
                        .AddSingleton<IDomainObjectIdentResolver, DomainObjectIdentResolver<Guid>>()
-                       .AddScoped<IAccessDeniedExceptionService, AccessDeniedExceptionService>()
+                       .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService>()
 
-                       .AddScoped<IDisabledSecurityProviderSource, DisabledSecurityProviderSource>();
+                       .AddSingleton<IDisabledSecurityProviderSource, DisabledSecurityProviderSource>();
     }
 }

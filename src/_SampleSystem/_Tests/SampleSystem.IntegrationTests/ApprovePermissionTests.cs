@@ -4,6 +4,7 @@ using FluentAssertions;
 using Framework.Authorization.ApproveWorkflow;
 using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
+using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -244,7 +245,7 @@ public class ApprovePermissionTests : TestBase
                          };
 
         // Assert
-        await tryApprove.Should().ThrowAsync<Exception>($"Permission:{permissionIdentity.Id:D} | Access denied with eventId {wfObjects.Single().ApproveEventId}");
+        await tryApprove.Should().ThrowAsync<AccessDeniedException>($"Permission:{permissionIdentity.Id:D} | Access denied with eventId {wfObjects.Single().ApproveEventId}");
     }
 
     private PrincipalRichDTO CreateTestPermission()

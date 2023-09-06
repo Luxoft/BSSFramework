@@ -19,9 +19,9 @@ public abstract class DependencyDomainSecurityServiceBase<TPersistentDomainObjec
     private readonly IDictionaryCache<TSecurityOperationCode, ISecurityProvider<TDomainObject>> providersByOperationCodeCache;
 
     protected DependencyDomainSecurityServiceBase(
-            IDisabledSecurityProviderContainer<TPersistentDomainObjectBase> disabledSecurityProviderContainer,
+            IDisabledSecurityProviderSource disabledSecurityProviderSource,
             IDomainSecurityService<TBaseDomainObject, TSecurityOperationCode> baseDomainSecurityService)
-            : base(disabledSecurityProviderContainer)
+            : base(disabledSecurityProviderSource)
     {
         this.baseDomainSecurityService = baseDomainSecurityService ?? throw new ArgumentNullException(nameof(baseDomainSecurityService));
 

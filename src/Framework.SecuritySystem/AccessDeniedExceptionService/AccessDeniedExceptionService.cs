@@ -1,68 +1,91 @@
 ﻿using Framework.Core;
 using Framework.Persistent;
 
-using Framework.SecuritySystem.Exceptions;
-
 namespace Framework.SecuritySystem;
 
-public class AccessDeniedExceptionService<TPersistentDomainObjectBase, TIdent> : IAccessDeniedExceptionService<TPersistentDomainObjectBase>
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+public class AccessDeniedExceptionService : IAccessDeniedExceptionService
 {
-    public Exception GetAccessDeniedException(string message) =>
-            new AccessDeniedException<TIdent>(string.Empty, default, message);
+    private readonly IDomainObjectIdentResolver domainObjectIdentResolver;
 
-    public Exception GetAccessDeniedException<TDomainObject>(TDomainObject domainObject, IReadOnlyDictionary<string, object> extensions = null, Func<string, string> formatMessageFunc = null)
-            where TDomainObject : class, TPersistentDomainObjectBase =>
-            new AccessDeniedException<TIdent>(
-                                              typeof(TDomainObject).Name,
-                                              domainObject.Id,
-                                              this.GetAccessDeniedExceptionMessage(
-                                                                                   domainObject,
-                                                                                   extensions,
-                                                                                   formatMessageFunc ?? (v => v)));
+    public AccessDeniedExceptionService(IDomainObjectIdentResolver domainObjectIdentResolver)
+    {
+        this.domainObjectIdentResolver = domainObjectIdentResolver;
+    }
 
-    protected virtual string GetAccessDeniedExceptionMessage<TDomainObject>(TDomainObject domainObject, IReadOnlyDictionary<string, object> extensions = null, Func<string, string> formatMessageFunc = null)
-            where TDomainObject : class, TPersistentDomainObjectBase
+    public Exception GetAccessDeniedException(AccessResult.AccessDeniedResult accessDeniedResult)
+    {
+        return new AccessDeniedException(this.GetAccessDeniedExceptionMessage(accessDeniedResult));
+    }
+
+    public string GetAccessDeniedExceptionMessage(AccessResult.AccessDeniedResult accessDeniedResult)
+    {
+        if (accessDeniedResult.CustomMessage != null)
+        {
+            return accessDeniedResult.CustomMessage;
+        }
+        else
+        {
+            var securityOperationCode = accessDeniedResult.SecurityOperation?.Code;
+
+            if (accessDeniedResult.DomainObjectInfo == null)
+            {
+                return $"You are not authorized to perform '{securityOperationCode}' operation";
+            }
+            else
+            {
+                var info = accessDeniedResult.DomainObjectInfo.Value;
+
+                return this.GetAccessDeniedExceptionMessage(info.DomainObject, info.DomainObjectType, securityOperationCode);
+            }
+        }
+    }
+
+    protected virtual string GetAccessDeniedExceptionMessage(object domainObject, Type domainObjectType, Enum securityOperationCode)
     {
         if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-        var displayExtensions = extensions.EmptyIfNull().Where(pair => !pair.Key.EndsWith("_Raw")).ToDictionary();
-
-        var elements = this.GetAccessDeniedExceptionMessageElements(domainObject).Concat(displayExtensions).ToDictionary();
+        var elements = this.GetAccessDeniedExceptionMessageElements(domainObject, domainObjectType, securityOperationCode).ToDictionary();
 
         return elements.GetByFirst((first, other) =>
                                    {
-                                       var messagePrefix = domainObject.Id.IsDefault() ? "You have no permissions to create object"
+                                       var messagePrefix = this.domainObjectIdentResolver.HasDefaultIdent(domainObject) ? "You have no permissions to create object"
 
-                                                                   : "You have no permissions to access object";
+                                                               : "You have no permissions to access object";
 
                                        var messageBody = $" with {this.PrintElement(first.Key, first.Value)}";
 
                                        var messagePostfix = other.Any() ? $" ({other.Join(", ", pair => this.PrintElement(pair.Key, pair.Value))})" : "";
 
-                                       var realFormatMessageFunc = formatMessageFunc ?? (v => v);
-
-                                       return realFormatMessageFunc(messagePrefix + messageBody + messagePostfix);
+                                       return messagePrefix + messageBody + messagePostfix;
                                    });
     }
 
-    protected virtual string PrintElement(string key, object value)
+    protected string PrintElement(string key, object value)
     {
         return $"{key} = '{value}'";
     }
 
-    protected virtual IEnumerable<KeyValuePair<string, object>> GetAccessDeniedExceptionMessageElements<TDomainObject>(TDomainObject domainObject)
-            where TDomainObject : class, TPersistentDomainObjectBase
+    protected IEnumerable<KeyValuePair<string, object>> GetAccessDeniedExceptionMessageElements(object domainObject, Type domainObjectType, Enum securityOperationCode)
     {
-        if (domainObject is IVisualIdentityObject identityObject)
+        if (domainObject is IVisualIdentityObject visualIdentityObject)
         {
-            var name = identityObject.Name;
+            var name = visualIdentityObject.Name;
 
             yield return new KeyValuePair<string, object>("name", name);
         }
 
-        yield return new KeyValuePair<string, object>("type", typeof(TDomainObject).Name);
+        yield return new KeyValuePair<string, object>("type", domainObjectType);
 
-        yield return new KeyValuePair<string, object>("id", domainObject.Id);
+        var ident = this.domainObjectIdentResolver.TryGetIdent(domainObject);
+
+        if (ident != null)
+        {
+            yield return new KeyValuePair<string, object>("id", ident);
+        }
+
+        if (securityOperationCode != null)
+        {
+            yield return new KeyValuePair<string, object>("securityOperation", securityOperationCode);
+        }
     }
 }

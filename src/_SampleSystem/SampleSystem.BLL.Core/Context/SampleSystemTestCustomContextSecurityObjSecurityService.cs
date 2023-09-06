@@ -8,6 +8,6 @@ public partial class SampleSystemTestCustomContextSecurityObjSecurityService
 {
     protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(ContextSecurityOperation<SampleSystemSecurityOperationCode> securityOperation)
     {
-        return new ConstSecurityProvider<TestCustomContextSecurityObj>(this.AccessDeniedExceptionService, false);
+        return new ConstSecurityProvider<TestCustomContextSecurityObj>(false);
     }
 }

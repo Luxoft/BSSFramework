@@ -26,7 +26,7 @@
             SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676;
             Framework.Security.TransferEnumHelper.Check(securityOperationCode);
             SampleSystem.Domain.EnversBug1676.Location1676 domainObject = bll.GetById(location1676Ident.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.EnversBug1676.Location1676>(securityOperationCode), domainObject);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.EnversBug1676.Location1676>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>

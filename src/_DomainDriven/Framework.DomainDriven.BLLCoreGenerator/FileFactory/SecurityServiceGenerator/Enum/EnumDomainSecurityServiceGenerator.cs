@@ -80,8 +80,7 @@ public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurity
 
     public override IEnumerable<(CodeTypeReference ParameterType, string Name)> GetBaseTypeConstructorParameters()
     {
-        yield return (typeof(IAccessDeniedExceptionService<>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType), "accessDeniedExceptionService");
-        yield return (typeof(IDisabledSecurityProviderContainer<>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType), "disabledSecurityProviderContainer");
+        yield return (typeof(IDisabledSecurityProviderSource).ToTypeReference(), "disabledSecurityProviderSource");
         yield return (typeof(ISecurityOperationResolver<,>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType, this.Configuration.Environment.SecurityOperationCodeType), "securityOperationResolver");
         yield return (typeof(IAuthorizationSystem<>).ToTypeReference(this.Configuration.Environment.GetIdentityType()), "authorizationSystem");
 

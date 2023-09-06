@@ -8,13 +8,13 @@ public abstract class DomainSecurityService<TDomainObject> : IDomainSecurityServ
     private readonly IDictionaryCache<BLLSecurityMode, ISecurityProvider<TDomainObject>> providersCache;
 
 
-    protected DomainSecurityService(IDisabledSecurityProviderContainer<TDomainObject> disabledSecurityProviderContainer)
+    protected DomainSecurityService(IDisabledSecurityProviderSource disabledSecurityProviderSource)
     {
         this.providersCache = new DictionaryCache<BLLSecurityMode, ISecurityProvider<TDomainObject>>(securityMode =>
         {
             if (securityMode == BLLSecurityMode.Disabled)
             {
-                return disabledSecurityProviderContainer.GetDisabledSecurityProvider<TDomainObject>();
+                return disabledSecurityProviderSource.GetDisabledSecurityProvider<TDomainObject>();
             }
             else
             {

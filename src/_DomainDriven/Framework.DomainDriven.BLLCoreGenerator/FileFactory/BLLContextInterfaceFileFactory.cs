@@ -33,7 +33,7 @@ public class BLLContextInterfaceFileFactory<TConfiguration> : FileFactory<TConfi
     {
         var securityServiceFieldTypeRef = this.Configuration.GetCodeTypeReference(null, FileType.RootSecurityServiceInterface);
 
-        yield return new CodeTypeReference(typeof(IAccessDeniedExceptionServiceContainer<>)) { TypeArguments = { this.Configuration.Environment.PersistentDomainObjectBaseType } };
+        yield return new CodeTypeReference(typeof(IAccessDeniedExceptionServiceContainer));
 
         yield return new CodeTypeReference(typeof(ISecurityServiceContainer<>)) { TypeArguments = { securityServiceFieldTypeRef } };
         yield return typeof(IBLLFactoryContainerContext<>).ToTypeReference(this.Configuration.GetCodeTypeReference(null, FileType.BLLFactoryContainerInterface));

@@ -26,7 +26,7 @@
             Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityType;
             Framework.Security.TransferEnumHelper.Check(securityOperationCode);
             Framework.Authorization.Domain.EntityType domainObject = bll.GetById(entityTypeIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.EntityType>(securityOperationCode), domainObject);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.EntityType>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>

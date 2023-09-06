@@ -26,7 +26,7 @@
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.Principal;
             Framework.Security.TransferEnumHelper.Check(securityOperationCode);
             Framework.Authorization.Domain.Principal domainObject = bll.GetById(principalIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Principal>(securityOperationCode), domainObject);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Principal>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>

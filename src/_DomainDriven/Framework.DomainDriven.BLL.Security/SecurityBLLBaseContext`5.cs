@@ -20,7 +20,7 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TDomai
             IServiceProvider serviceProvider,
             IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
             ITrackingService<TPersistentDomainObjectBase> trackingService,
-            IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
+            IAccessDeniedExceptionService accessDeniedExceptionService,
             IStandartExpressionBuilder standartExpressionBuilder,
             IValidator validator,
             IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,

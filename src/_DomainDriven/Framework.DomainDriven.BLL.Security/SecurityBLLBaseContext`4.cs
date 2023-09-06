@@ -9,7 +9,7 @@ namespace Framework.DomainDriven.BLL.Security;
 
 public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent, TBLLFactoryContainer> :
         DefaultBLLBaseContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent, TBLLFactoryContainer>,
-        IAccessDeniedExceptionServiceContainer<TPersistentDomainObjectBase>
+        IAccessDeniedExceptionServiceContainer
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
         where TDomainObjectBase : class
@@ -19,7 +19,7 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TDomai
             IServiceProvider serviceProvider,
             IOperationEventSenderContainer<TPersistentDomainObjectBase> operationSenders,
             ITrackingService<TPersistentDomainObjectBase> trackingService,
-            IAccessDeniedExceptionService<TPersistentDomainObjectBase> accessDeniedExceptionService,
+            IAccessDeniedExceptionService accessDeniedExceptionService,
             IStandartExpressionBuilder standartExpressionBuilder,
             IValidator validator,
             IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
@@ -28,7 +28,7 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TDomai
 
             this.AccessDeniedExceptionService = accessDeniedExceptionService ?? throw new ArgumentNullException(nameof(accessDeniedExceptionService));
 
-    public virtual IAccessDeniedExceptionService<TPersistentDomainObjectBase> AccessDeniedExceptionService { get; }
+    public virtual IAccessDeniedExceptionService AccessDeniedExceptionService { get; }
 
     /// <inheritdoc />
     public override bool AllowedExpandTreeParents<TDomainObject>() => false;

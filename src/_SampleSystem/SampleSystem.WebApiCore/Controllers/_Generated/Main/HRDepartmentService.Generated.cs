@@ -26,7 +26,7 @@
             SampleSystem.BLL.IHRDepartmentBLL bll = evaluateData.Context.Logics.HRDepartment;
             Framework.Security.TransferEnumHelper.Check(securityOperationCode);
             SampleSystem.Domain.HRDepartment domainObject = bll.GetById(hRDepartmentIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.HRDepartment>(securityOperationCode), domainObject);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.HRDepartment>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>

@@ -19,7 +19,7 @@ public partial class SampleSystemBLLContext
             IServiceProvider serviceProvider,
             IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
             ITrackingService<PersistentDomainObjectBase> trackingService,
-            IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
+            IAccessDeniedExceptionService accessDeniedExceptionService,
             IStandartExpressionBuilder standartExpressionBuilder,
             ISampleSystemValidator validator,
             IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,

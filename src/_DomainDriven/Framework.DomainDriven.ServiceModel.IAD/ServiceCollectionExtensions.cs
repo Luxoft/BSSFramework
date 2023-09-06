@@ -1,6 +1,8 @@
 ﻿using Framework.DependencyInjection;
+using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
+using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.SecuritySystem;
@@ -25,8 +27,8 @@ public static class ServiceCollectionExtensions
 
         services.AddSingleton<IDateTimeService>(DateTimeService.Default);
 
-        services.AddScoped<ILegacyGenericDisabledSecurityProviderFactory, LegacyGenericDisabledSecurityProviderFactory>();
-        services.AddScoped<INotImplementedDomainSecurityServiceContainer, OnlyDisabledDomainSecurityServiceContainer>();
+        services.AddScoped(typeof(INotImplementedDomainSecurityService<>), typeof(OnlyDisabledDomainSecurityService<>));
+        services.AddScoped(typeof(INotImplementedDomainSecurityService<,>), typeof(OnlyDisabledDomainSecurityService<,>));
 
         return services;
     }
@@ -57,6 +59,11 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection RegisterAuthorizationSystem(this IServiceCollection services)
     {
-        return services.AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>();
+        return services.AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>()
+
+                       .AddSingleton<IDomainObjectIdentResolver, DomainObjectIdentResolver<Guid>>()
+                       .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService>()
+
+                       .AddSingleton<IDisabledSecurityProviderSource, DisabledSecurityProviderSource>();
     }
 }

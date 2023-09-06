@@ -1,4 +1,5 @@
-﻿using Framework.SecuritySystem;
+﻿using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
+using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,11 +15,11 @@ public abstract class TemplateRepositoryFactory<TRepository, TTRepositoryImpl, T
 
     protected TemplateRepositoryFactory(
             IServiceProvider serviceProvider,
-            INotImplementedDomainSecurityServiceContainer notImplementedDomainSecurityServiceContainer,
+            INotImplementedDomainSecurityService<TDomainObject, TSecurityOperationCode> notImplementedDomainSecurityService,
             IDomainSecurityService<TDomainObject, TSecurityOperationCode>? domainSecurityService = null)
-        :base(serviceProvider, notImplementedDomainSecurityServiceContainer, domainSecurityService)
+        :base(serviceProvider, notImplementedDomainSecurityService, domainSecurityService)
     {
-        this.domainSecurityService = domainSecurityService ?? notImplementedDomainSecurityServiceContainer.GetNotImplementedDomainSecurityService<TDomainObject, TSecurityOperationCode>();
+        this.domainSecurityService = domainSecurityService ?? notImplementedDomainSecurityService;
     }
 
     public TRepository Create(TSecurityOperationCode securityOperationCode) =>
@@ -39,11 +40,11 @@ public abstract class TemplateRepositoryFactory<TRepository, TTRepositoryImpl, T
 
     protected TemplateRepositoryFactory(
         IServiceProvider serviceProvider,
-        INotImplementedDomainSecurityServiceContainer notImplementedDomainSecurityServiceContainer,
+        INotImplementedDomainSecurityService<TDomainObject> notImplementedDomainSecurityService,
         IDomainSecurityService<TDomainObject>? domainSecurityService = null)
     {
         this.serviceProvider = serviceProvider;
-        this.domainSecurityService = domainSecurityService ?? notImplementedDomainSecurityServiceContainer.GetNotImplementedDomainSecurityService<TDomainObject>();
+        this.domainSecurityService = domainSecurityService ?? notImplementedDomainSecurityService;
     }
 
     public TRepository Create(ISecurityProvider<TDomainObject> securityProvider) =>

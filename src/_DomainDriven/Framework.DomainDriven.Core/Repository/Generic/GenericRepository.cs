@@ -18,35 +18,44 @@ public class GenericRepository<TDomainObject, TIdent> : IGenericRepository<TDoma
 
     private readonly ISpecificationEvaluator specificationEvaluator;
 
+    private readonly IAccessDeniedExceptionService accessDeniedExceptionService;
+
     public GenericRepository(
             ISecurityProvider<TDomainObject> securityProvider,
             IAsyncDal<TDomainObject, TIdent> dal,
-            ISpecificationEvaluator specificationEvaluator)
+            ISpecificationEvaluator specificationEvaluator,
+            IAccessDeniedExceptionService accessDeniedExceptionService)
     {
         this.securityProvider = securityProvider;
         this.dal = dal;
         this.specificationEvaluator = specificationEvaluator;
+        this.accessDeniedExceptionService = accessDeniedExceptionService;
     }
 
     public async Task SaveAsync(TDomainObject domainObject, CancellationToken cancellationToken)
     {
-        this.securityProvider.CheckAccess(domainObject);
+        this.CheckAccess(domainObject);
 
         await this.dal.SaveAsync(domainObject, cancellationToken);
     }
 
     public async Task InsertAsync(TDomainObject domainObject, TIdent id, CancellationToken cancellationToken)
     {
-        this.securityProvider.CheckAccess(domainObject);
+        this.CheckAccess(domainObject);
 
         await this.dal.InsertAsync(domainObject, id, cancellationToken);
     }
 
     public async Task RemoveAsync(TDomainObject domainObject, CancellationToken cancellationToken)
     {
-        this.securityProvider.CheckAccess(domainObject);
+        this.CheckAccess(domainObject);
 
         await this.dal.RemoveAsync(domainObject, cancellationToken);
+    }
+
+    private void CheckAccess(TDomainObject domainObject)
+    {
+        this.securityProvider.CheckAccess(domainObject, this.accessDeniedExceptionService);
     }
 
     public IQueryable<TDomainObject> GetQueryable() => this.dal.GetQueryable().Pipe(this.securityProvider.InjectFilter);

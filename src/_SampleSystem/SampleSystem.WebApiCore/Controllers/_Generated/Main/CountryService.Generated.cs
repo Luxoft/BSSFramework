@@ -26,7 +26,7 @@
             SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.Country;
             Framework.Security.TransferEnumHelper.Check(securityOperationCode);
             SampleSystem.Domain.Country domainObject = bll.GetById(countryIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Country>(securityOperationCode), domainObject);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Country>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>

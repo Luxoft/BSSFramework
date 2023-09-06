@@ -69,14 +69,11 @@ public static class SampleSystemFrameworkExtensions
                .AddScoped<ITrackingService<PersistentDomainObjectBase>, TrackingService<PersistentDomainObjectBase>>()
 
                .AddScopedFrom<ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode>, ISampleSystemBLLContext>()
-               .AddScopedFrom<IDisabledSecurityProviderContainer<PersistentDomainObjectBase>, ISampleSystemSecurityService>()
                .AddScopedFrom<ISampleSystemSecurityPathContainer, ISampleSystemSecurityService>()
 
                .AddScoped<IQueryableSource<PersistentDomainObjectBase>, BLLQueryableSource<ISampleSystemBLLContext, PersistentDomainObjectBase, DomainObjectBase, Guid>>()
                .AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
                //.AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, SampleSystemSecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
-
-               .AddScoped<IAccessDeniedExceptionService<PersistentDomainObjectBase>, AccessDeniedExceptionService<PersistentDomainObjectBase, Guid>>()
 
                .Self(SampleSystemSecurityServiceBase.Register)
                .Self(SampleSystemBLLFactoryContainer.RegisterBLLFactory);
@@ -159,9 +156,6 @@ public static class SampleSystemFrameworkExtensions
 
         // For expand tree
         services.RegisterHierarchicalObjectExpander<PersistentDomainObjectBase>();
-
-        // For repository
-        services.AddScoped(_ => new LegacyPersistentDomainObjectBaseList(typeof(PersistentDomainObjectBase)));
 
         return services;
     }

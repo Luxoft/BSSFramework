@@ -66,7 +66,7 @@
             SampleSystem.BLL.IEmployeeBLL bll = evaluateData.Context.Logics.Employee;
             Framework.Security.TransferEnumHelper.Check(securityOperationCode);
             SampleSystem.Domain.Employee domainObject = bll.GetById(employeeIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(securityOperationCode), domainObject);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>

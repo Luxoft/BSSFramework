@@ -13,10 +13,10 @@ using Framework.HierarchicalExpand;
 using Framework.QueryableSource;
 using Framework.QueryLanguage;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.AccessDeniedExceptionService;
 using Framework.SecuritySystem.Rules.Builders;
 
 using Microsoft.Extensions.DependencyInjection;
+using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
@@ -46,7 +46,7 @@ public static class ServiceCollectionExtensions
         services.RegisterConfigurationBLL();
 
         services.AddScoped<ILegacyGenericDisabledSecurityProviderFactory, LegacyGenericDisabledSecurityProviderFactory>();
-        services.AddScoped<INotImplementedDomainSecurityServiceContainer, OnlyDisabledDomainSecurityServiceContainer>();
+        services.AddScoped<INotImplementedDomainSecurityServiceSource, OnlyDisabledDomainSecurityServiceContainer>();
 
         return services;
     }

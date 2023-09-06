@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Core;
+using Framework.DomainDriven.Tracking;
 using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.BLL.Security
@@ -27,6 +28,11 @@ namespace Framework.DomainDriven.BLL.Security
         public IQueryable<TDomainObject> InjectFilter(IQueryable<TDomainObject> queryable)
         {
             return this.baseSecurityProvider.InjectFilter(queryable);
+        }
+
+        public AccessResult GetAccessResult(TDomainObject domainObject)
+        {
+
         }
 
         public bool HasAccess(TDomainObject domainObject)

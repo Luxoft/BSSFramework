@@ -65,7 +65,7 @@ namespace Framework.SecuritySystem
             if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
             if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
 
-            return this.Create(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.Create(securityPath), securityOperation);
+            return this.Create(SecurityPath<TDomainObject>.Create(securityPath), securityOperation);
         }
 
         protected ISecurityProvider<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, ContextSecurityOperation<TSecurityOperationCode> securityOperation)
@@ -74,10 +74,10 @@ namespace Framework.SecuritySystem
             if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
             if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
 
-            return this.Create(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent>.Create(securityPath), securityOperation);
+            return this.Create(SecurityPath<TDomainObject>.Create(securityPath), securityOperation);
         }
 
-        protected virtual ISecurityProvider<TDomainObject> Create(SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> securityPath, ContextSecurityOperation<TSecurityOperationCode> securityOperation)
+        protected virtual ISecurityProvider<TDomainObject> Create(SecurityPath<TDomainObject> securityPath, ContextSecurityOperation<TSecurityOperationCode> securityOperation)
         {
             if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
             if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
@@ -113,7 +113,7 @@ namespace Framework.SecuritySystem
         {
         }
 
-        protected abstract SecurityPath<TPersistentDomainObjectBase, TDomainObject, TIdent> GetSecurityPath();
+        protected abstract SecurityPath<TDomainObject> GetSecurityPath();
 
 
 

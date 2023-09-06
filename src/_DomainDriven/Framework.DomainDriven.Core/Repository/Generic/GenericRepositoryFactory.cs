@@ -1,4 +1,5 @@
-﻿using Framework.SecuritySystem;
+﻿using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
+using Framework.SecuritySystem;
 
 
 
@@ -17,9 +18,9 @@ public class GenericRepositoryFactory<TDomainObject, TIdent, TSecurityOperationC
 {
     public GenericRepositoryFactory(
         IServiceProvider serviceProvider,
-        INotImplementedDomainSecurityServiceContainer notImplementedDomainSecurityServiceContainer,
+        INotImplementedDomainSecurityService<TDomainObject, TSecurityOperationCode> notImplementedDomainSecurityService,
         IDomainSecurityService<TDomainObject, TSecurityOperationCode> domainSecurityService = null)
-        : base(serviceProvider, notImplementedDomainSecurityServiceContainer, domainSecurityService)
+        : base(serviceProvider, notImplementedDomainSecurityService, domainSecurityService)
     {
     }
 }

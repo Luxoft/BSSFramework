@@ -1,6 +1,7 @@
 ﻿using Framework.DependencyInjection;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
+using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.SecuritySystem;
@@ -26,7 +27,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IDateTimeService>(DateTimeService.Default);
 
         services.AddScoped<ILegacyGenericDisabledSecurityProviderFactory, LegacyGenericDisabledSecurityProviderFactory>();
-        services.AddScoped<INotImplementedDomainSecurityServiceContainer, OnlyDisabledDomainSecurityServiceContainer>();
+        services.AddScoped<INotImplementedDomainSecurityServiceSource, OnlyDisabledDomainSecurityServiceContainer>();
 
         return services;
     }

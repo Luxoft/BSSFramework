@@ -1,11 +1,10 @@
 ﻿using Framework.Core;
+using Framework.SecuritySystem;
 
-namespace Framework.SecuritySystem;
+namespace Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
 
-public class OnlyDisabledDomainSecurityService<TDomainObject, TSecurityOperationCode> : IDomainSecurityService<TDomainObject,
-    TSecurityOperationCode>
+public class OnlyDisabledDomainSecurityService<TDomainObject, TSecurityOperationCode> : INotImplementedDomainSecurityService<TDomainObject, TSecurityOperationCode>
     where TSecurityOperationCode : struct, Enum
-    where TDomainObject : class
 {
     private readonly IDisabledSecurityProviderSource disabledSecurityProviderSource;
 

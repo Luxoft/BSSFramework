@@ -6,7 +6,7 @@ namespace Framework.Authorization.BLL
     public partial class AuthorizationBusinessRoleSecurityService
     {
         public AuthorizationBusinessRoleSecurityService(
-            IDisabledSecurityProviderSource<PersistentDomainObjectBase> disabledSecurityProviderSource,
+            IDisabledSecurityProviderSource disabledSecurityProviderSource,
             ISecurityOperationResolver<PersistentDomainObjectBase, AuthorizationSecurityOperationCode> securityOperationResolver,
             IAuthorizationSystem<Guid> authorizationSystem,
             IAuthorizationBLLContext context)
@@ -25,7 +25,7 @@ namespace Framework.Authorization.BLL
             switch (securityMode)
             {
                 case BLLSecurityMode.View:
-                    return this.Context.GetBusinessRoleSecurityProvider().Or(baseProvider, this.AccessDeniedExceptionService);
+                    return this.Context.GetBusinessRoleSecurityProvider().Or(baseProvider);
 
                 default:
                     return baseProvider;

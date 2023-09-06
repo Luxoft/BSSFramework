@@ -6,7 +6,7 @@ using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.Tracking;
 using Framework.HierarchicalExpand;
 using Framework.QueryLanguage;
-using Framework.SecuritySystem.AccessDeniedExceptionService;
+using Framework.SecuritySystem;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Projections;
@@ -19,7 +19,7 @@ public partial class SampleSystemBLLContext
             IServiceProvider serviceProvider,
             IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
             ITrackingService<PersistentDomainObjectBase> trackingService,
-            IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
+            IAccessDeniedExceptionService accessDeniedExceptionService,
             IStandartExpressionBuilder standartExpressionBuilder,
             ISampleSystemValidator validator,
             IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,

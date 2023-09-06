@@ -26,7 +26,7 @@
             SampleSystem.BLL.IEmployeeRegistrationTypeBLL bll = evaluateData.Context.Logics.EmployeeRegistrationType;
             Framework.Security.TransferEnumHelper.Check(securityOperationCode);
             SampleSystem.Domain.EmployeeRegistrationType domainObject = bll.GetById(employeeRegistrationTypeIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.EmployeeRegistrationType>(securityOperationCode), domainObject);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.EmployeeRegistrationType>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>

@@ -26,7 +26,7 @@
             SampleSystem.BLL.ITestPerformanceObjectBLL bll = evaluateData.Context.Logics.TestPerformanceObject;
             Framework.Security.TransferEnumHelper.Check(securityOperationCode);
             SampleSystem.Domain.TestPerformanceObject domainObject = bll.GetById(testPerformanceObjectIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.TestPerformanceObject>(securityOperationCode), domainObject);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.TestPerformanceObject>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>

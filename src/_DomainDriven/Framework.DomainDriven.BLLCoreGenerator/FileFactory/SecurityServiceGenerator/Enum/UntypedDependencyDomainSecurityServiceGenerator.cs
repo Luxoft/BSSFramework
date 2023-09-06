@@ -40,7 +40,7 @@ namespace Framework.DomainDriven.BLLCoreGenerator
 
         public override IEnumerable<(CodeTypeReference ParameterType, string Name)> GetBaseTypeConstructorParameters()
         {
-            yield return (typeof(IDisabledSecurityProviderSource<>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType), "disabledSecurityProviderSource");
+            yield return (typeof(IDisabledSecurityProviderSource).ToTypeReference(), "disabledSecurityProviderSource");
             yield return (typeof(IDomainSecurityService<,>).ToTypeReference(this.dependencySecurityAttr.SourceType, this.Configuration.Environment.SecurityOperationCodeType), "baseDomainSecurityService");
             yield return (typeof(IQueryableSource<>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType), "queryableSource");
         }

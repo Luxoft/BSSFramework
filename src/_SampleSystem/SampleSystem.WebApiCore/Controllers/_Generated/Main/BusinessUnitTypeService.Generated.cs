@@ -26,7 +26,7 @@
             SampleSystem.BLL.IBusinessUnitTypeBLL bll = evaluateData.Context.Logics.BusinessUnitType;
             Framework.Security.TransferEnumHelper.Check(securityOperationCode);
             SampleSystem.Domain.BusinessUnitType domainObject = bll.GetById(businessUnitTypeIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.BusinessUnitType>(securityOperationCode), domainObject);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.BusinessUnitType>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>

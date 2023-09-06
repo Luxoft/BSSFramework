@@ -6,7 +6,7 @@ using Framework.HierarchicalExpand;
 using Framework.OData;
 using Framework.QueryableSource;
 using Framework.QueryLanguage;
-using Framework.SecuritySystem.AccessDeniedExceptionService;
+using Framework.SecuritySystem;
 using Framework.Validation;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +17,7 @@ namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
 
 using Framework.Core.Serialization;
 
-public class TestBllContext : ITestBLLContext, ISecurityBLLContext<IAuthorizationBLLContext<Guid>, PersistentDomainObjectBase, DomainObjectBase, Guid>, IAccessDeniedExceptionServiceContainer<PersistentDomainObjectBase>
+public class TestBllContext : ITestBLLContext, ISecurityBLLContext<IAuthorizationBLLContext<Guid>, PersistentDomainObjectBase, DomainObjectBase, Guid>, IAccessDeniedExceptionServiceContainer
 {
     private readonly Lazy<SyncDenormolizedValuesService<PersistentDomainObjectBase, HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid, NamedLockObject, NamedLockOperation>> syncHierarchyService;
 
@@ -77,7 +77,7 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<IAuthorizatio
         get;
     }
 
-    public IAccessDeniedExceptionService<PersistentDomainObjectBase> AccessDeniedExceptionService => new AccessDeniedExceptionService<PersistentDomainObjectBase, Guid>();
+    public IAccessDeniedExceptionService AccessDeniedExceptionService => new AccessDeniedExceptionService(new DomainObjectIdentResolver<Guid>());
 
     public IStandartExpressionBuilder StandartExpressionBuilder => new StandartExpressionBuilder();
 
@@ -105,8 +105,6 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<IAuthorizatio
     public ITrackingService<PersistentDomainObjectBase> TrackingService { get; private set; }
 
     public IHierarchicalObjectExpanderFactory<Guid> HierarchicalObjectExpanderFactory => new HierarchicalObjectExpanderFactory<PersistentDomainObjectBase, Guid>(this.GetQueryableSource(), new ProjectionHierarchicalRealTypeResolver());
-
-    IAccessDeniedExceptionService IAccessDeniedExceptionServiceContainer.AccessDeniedExceptionService => this.AccessDeniedExceptionService;
 
     public IServiceProvider ServiceProvider { get; }
 }

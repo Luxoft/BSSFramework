@@ -4,7 +4,6 @@ using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.AccessDeniedExceptionService;
 using Framework.SecuritySystem.Rules.Builders;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
@@ -81,8 +80,7 @@ public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurity
 
     public override IEnumerable<(CodeTypeReference ParameterType, string Name)> GetBaseTypeConstructorParameters()
     {
-        yield return (typeof(IAccessDeniedExceptionService<>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType), "accessDeniedExceptionService");
-        yield return (typeof(IDisabledSecurityProviderSource<>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType), "disabledSecurityProviderSource");
+        yield return (typeof(IDisabledSecurityProviderSource).ToTypeReference(), "disabledSecurityProviderSource");
         yield return (typeof(ISecurityOperationResolver<,>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType, this.Configuration.Environment.SecurityOperationCodeType), "securityOperationResolver");
         yield return (typeof(IAuthorizationSystem<>).ToTypeReference(this.Configuration.Environment.GetIdentityType()), "authorizationSystem");
 

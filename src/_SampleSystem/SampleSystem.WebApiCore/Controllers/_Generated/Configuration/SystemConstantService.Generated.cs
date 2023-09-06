@@ -26,7 +26,7 @@
             Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstant;
             Framework.Security.TransferEnumHelper.Check(securityOperationCode);
             Framework.Configuration.Domain.SystemConstant domainObject = bll.GetById(systemConstantIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.SystemConstant>(securityOperationCode), domainObject);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.SystemConstant>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>

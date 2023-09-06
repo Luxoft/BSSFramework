@@ -26,7 +26,7 @@
             SampleSystem.BLL.IWorkingCalendar1676BLL bll = evaluateData.Context.Logics.WorkingCalendar1676;
             Framework.Security.TransferEnumHelper.Check(securityOperationCode);
             SampleSystem.Domain.EnversBug1676.WorkingCalendar1676 domainObject = bll.GetById(workingCalendar1676Ident.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>(securityOperationCode), domainObject);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>

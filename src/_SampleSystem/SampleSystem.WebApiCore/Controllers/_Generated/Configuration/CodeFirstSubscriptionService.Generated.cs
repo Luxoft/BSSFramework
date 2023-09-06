@@ -26,7 +26,7 @@
             Framework.Configuration.BLL.ICodeFirstSubscriptionBLL bll = evaluateData.Context.Logics.CodeFirstSubscription;
             Framework.Security.TransferEnumHelper.Check(securityOperationCode);
             Framework.Configuration.Domain.CodeFirstSubscription domainObject = bll.GetById(codeFirstSubscriptionIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.CodeFirstSubscription>(securityOperationCode), domainObject);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.CodeFirstSubscription>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>

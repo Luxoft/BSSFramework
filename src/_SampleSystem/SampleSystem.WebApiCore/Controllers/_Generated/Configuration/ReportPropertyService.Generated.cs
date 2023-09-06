@@ -26,7 +26,7 @@
             Framework.Configuration.BLL.IReportPropertyBLL bll = evaluateData.Context.Logics.ReportProperty;
             Framework.Security.TransferEnumHelper.Check(securityOperationCode);
             Framework.Configuration.Domain.Reports.ReportProperty domainObject = bll.GetById(reportPropertyIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Reports.ReportProperty>(securityOperationCode), domainObject);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Reports.ReportProperty>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>

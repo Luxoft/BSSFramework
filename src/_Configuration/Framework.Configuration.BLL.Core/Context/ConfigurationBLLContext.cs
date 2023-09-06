@@ -14,7 +14,7 @@ using Framework.HierarchicalExpand;
 using Framework.Notification;
 using Framework.Persistent;
 using Framework.QueryLanguage;
-using Framework.SecuritySystem.AccessDeniedExceptionService;
+using Framework.SecuritySystem;
 
 namespace Framework.Configuration.BLL;
 
@@ -34,7 +34,7 @@ public partial class ConfigurationBLLContext
             IServiceProvider serviceProvider,
             IOperationEventSenderContainer<PersistentDomainObjectBase> operationSenders,
             ITrackingService<PersistentDomainObjectBase> trackingService,
-            IAccessDeniedExceptionService<PersistentDomainObjectBase> accessDeniedExceptionService,
+            IAccessDeniedExceptionService accessDeniedExceptionService,
             IStandartExpressionBuilder standartExpressionBuilder,
             IConfigurationValidator validator,
             IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,

@@ -26,7 +26,7 @@
             SampleSystem.BLL.ILocationBLL bll = evaluateData.Context.Logics.Location;
             Framework.Security.TransferEnumHelper.Check(securityOperationCode);
             SampleSystem.Domain.Location domainObject = bll.GetById(locationIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Location>(securityOperationCode), domainObject);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Location>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>

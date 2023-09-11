@@ -12,9 +12,9 @@ namespace Framework.SecuritySystem
             if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
             if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-            if (!securityProvider.HasAccess(domainObject))
+            if (securityProvider.GetAccessResult(domainObject) is AccessResult.AccessDeniedResult accessDenied)
             {
-                throw accessDeniedExceptionService.GetAccessDeniedException(new AccessResult.AccessDeniedResult { DomainObjectInfo = (domainObject, typeof(TDomainObject)) });
+                throw accessDeniedExceptionService.GetAccessDeniedException(accessDenied);
             }
         }
 

@@ -499,7 +499,7 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial interface IConfigurationSecurityService : Framework.DomainDriven.BLL.Security.IRootSecurityService<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.IConfigurationSecurityPathContainer
+    public partial interface IConfigurationSecurityService : Framework.DomainDriven.BLL.Security.IRootSecurityService<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.ConfigurationSecurityOperationCode>, Framework.Configuration.BLL.IConfigurationSecurityPathContainer
     {
     }
     

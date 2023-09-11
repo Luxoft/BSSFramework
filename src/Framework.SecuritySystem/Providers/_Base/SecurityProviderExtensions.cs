@@ -12,9 +12,16 @@ namespace Framework.SecuritySystem
             if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
             if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
 
-            if (securityProvider.GetAccessResult(domainObject) is AccessResult.AccessDeniedResult accessDenied)
+            switch (securityProvider.GetAccessResult(domainObject))
             {
-                throw accessDeniedExceptionService.GetAccessDeniedException(accessDenied);
+                case AccessResult.AccessDeniedResult accessDenied:
+                    throw accessDeniedExceptionService.GetAccessDeniedException(accessDenied);
+
+                case AccessResult.AccessGrantedResult:
+                    break;
+
+                default:
+                    throw new InvalidOperationException("unknown access result");
             }
         }
 

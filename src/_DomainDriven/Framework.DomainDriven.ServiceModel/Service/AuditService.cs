@@ -20,7 +20,7 @@ public class AuditService<TIdent, TBLLContext, TBLLFactoryContainer, TRootSecuri
         where TBLLContext : IBLLFactoryContainerContext<TBLLFactoryContainer>,
         ITypeResolverContainer<string>,
         ISecurityServiceContainer<TRootSecurityService>
-        where TRootSecurityService : IRootSecurityService<TBLLContext, TPersistentObjectBase, TSecurityOperationCode>
+        where TRootSecurityService : IRootSecurityService<TPersistentObjectBase, TSecurityOperationCode>
         where TSecurityOperationCode : struct, Enum
 {
     private readonly static Lazy<Type> _genericTPropertyRevisionDTOType = new Lazy<Type>(

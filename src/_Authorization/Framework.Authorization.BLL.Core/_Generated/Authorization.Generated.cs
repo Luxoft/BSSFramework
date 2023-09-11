@@ -329,7 +329,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial interface IAuthorizationSecurityService : Framework.DomainDriven.BLL.Security.IRootSecurityService<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode>, Framework.Authorization.BLL.IAuthorizationSecurityPathContainer
+    public partial interface IAuthorizationSecurityService : Framework.DomainDriven.BLL.Security.IRootSecurityService<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode>, Framework.Authorization.BLL.IAuthorizationSecurityPathContainer
     {
     }
     

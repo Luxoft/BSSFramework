@@ -1,92 +1,55 @@
 ﻿using Framework.Core;
+using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
 using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.BLL.Security;
 
-public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<TBLLContext>, IRootSecurityService<TBLLContext, TPersistentDomainObjectBase>
+public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<TBLLContext>,
+                                                                                      IRootSecurityService<TPersistentDomainObjectBase>
 
-        where TBLLContext : class, IAccessDeniedExceptionServiceContainer
-        where TPersistentDomainObjectBase : class
+    where TBLLContext : class, IServiceProviderContainer
+    where TPersistentDomainObjectBase : class
 {
-    private readonly IDictionaryCache<Type, object> domainSecurityServiceCache;
-
-
     protected RootSecurityService(TBLLContext context)
-            : base(context)
+        : base(context)
     {
-        this.domainSecurityServiceCache = new DictionaryCache<Type, object>(domainType =>
-
-                                                                                    new Func<IDomainSecurityService<TPersistentDomainObjectBase>>(this.CreateDomainSecurityServiceBase<TPersistentDomainObjectBase>)
-                                                                                            .CreateGenericMethod(domainType).Invoke(this, new object[0])).WithLock();
     }
 
 
     public virtual ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(BLLSecurityMode securityMode)
-            where TDomainObject : class, TPersistentDomainObjectBase
+        where TDomainObject : TPersistentDomainObjectBase
     {
-        if (securityMode == BLLSecurityMode.Disabled)
-        {
-            return this.GetDisabledSecurityProvider<TDomainObject>();
-        }
-
         return this.GetDomainSecurityServiceBase<TDomainObject>().GetSecurityProvider(securityMode);
     }
 
-    public virtual ISecurityProvider<TDomainObject> GetNotImplementedSecurityProvider<TDomainObject>(object data)
-            where TDomainObject : class, TPersistentDomainObjectBase
-    {
-        throw new Exception($"SecurityProvider not implemented for {typeof(TDomainObject).Name}");
-    }
-
-    public virtual ISecurityProvider<TDomainObject> GetDisabledSecurityProvider<TDomainObject>()
-    {
-        return new DisabledSecurityProvider<TDomainObject>();
-    }
-
     protected IDomainSecurityService<TDomainObject> GetDomainSecurityServiceBase<TDomainObject>()
-            where TDomainObject : class, TPersistentDomainObjectBase
+        where TDomainObject : TPersistentDomainObjectBase
     {
-        return (IDomainSecurityService<TDomainObject>)this.domainSecurityServiceCache[typeof(TDomainObject)];
-    }
-
-    protected virtual IDomainSecurityService<TDomainObject> CreateDomainSecurityServiceBase<TDomainObject>()
-            where TDomainObject : class, TPersistentDomainObjectBase
-    {
-        return new NotImplementedDomainSecurityService<TBLLContext, TDomainObject>(this);
-    }
-
-    IDomainSecurityService<TDomainObject> IRootSecurityService<TBLLContext, TPersistentDomainObjectBase>.GetDomainSecurityService<TDomainObject>()
-    {
-        return this.GetDomainSecurityServiceBase<TDomainObject>();
+        return this.Context.ServiceProvider.GetService<IDomainSecurityService<TDomainObject>>()
+               ?? this.Context.ServiceProvider.GetRequiredService<INotImplementedDomainSecurityService<TDomainObject>>();
     }
 }
 
+public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> :
+    RootSecurityService<TBLLContext, TPersistentDomainObjectBase>,
 
-public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> : RootSecurityService<TBLLContext, TPersistentDomainObjectBase>,
+    IRootSecurityService<TPersistentDomainObjectBase, TSecurityOperationCode>
 
-    IRootSecurityService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>
-
-        where TBLLContext : class, ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode>, IAccessDeniedExceptionServiceContainer, IServiceProviderContainer
-        where TSecurityOperationCode : struct, Enum
-        where TPersistentDomainObjectBase : class
+    where TBLLContext : class, ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode>,
+    IAccessDeniedExceptionServiceContainer, IServiceProviderContainer
+    where TSecurityOperationCode : struct, Enum
+    where TPersistentDomainObjectBase : class
 {
-    private readonly IDictionaryCache<Type, object> domainSecurityServiceCache;
-
-
     protected RootSecurityService(TBLLContext context)
-            : base(context)
+        : base(context)
     {
-        this.domainSecurityServiceCache = new DictionaryCache<Type, object>(domainType =>
-
-                                                                                    new Func<IDomainSecurityService<TPersistentDomainObjectBase, TSecurityOperationCode>>(this.CreateDomainSecurityService<TPersistentDomainObjectBase>)
-                                                                                            .CreateGenericMethod(domainType).Invoke(this, new object[0])).WithLock();
     }
 
 
     public ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityOperation<TSecurityOperationCode> securityOperation)
-            where TDomainObject : class, TPersistentDomainObjectBase
+        where TDomainObject : TPersistentDomainObjectBase
     {
         if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
 
@@ -94,26 +57,16 @@ public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBa
     }
 
     public ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(TSecurityOperationCode securityOperationCode)
-            where TDomainObject : class, TPersistentDomainObjectBase
+        where TDomainObject : TPersistentDomainObjectBase
     {
         return this.GetDomainSecurityService<TDomainObject>().GetSecurityProvider(securityOperationCode);
     }
 
 
-    public IDomainSecurityService<TDomainObject, TSecurityOperationCode> GetDomainSecurityService<TDomainObject>()
-    {
-        return (IDomainSecurityService<TDomainObject, TSecurityOperationCode>)this.domainSecurityServiceCache[typeof(TDomainObject)];
-    }
-
-    protected sealed override IDomainSecurityService<TDomainObject> CreateDomainSecurityServiceBase<TDomainObject>()
-    {
-        return this.GetDomainSecurityService<TDomainObject>();
-    }
-
-    protected virtual IDomainSecurityService<TDomainObject, TSecurityOperationCode> CreateDomainSecurityService<TDomainObject>()
-            where TDomainObject : class, TPersistentDomainObjectBase
+    protected IDomainSecurityService<TDomainObject, TSecurityOperationCode> GetDomainSecurityService<TDomainObject>()
     {
         return this.Context.ServiceProvider.GetService<IDomainSecurityService<TDomainObject, TSecurityOperationCode>>()
-               ?? new NotImplementedDomainSecurityService<TBLLContext, TDomainObject, TSecurityOperationCode>(this);
+               ?? this.Context.ServiceProvider
+                      .GetRequiredService<INotImplementedDomainSecurityService<TDomainObject, TSecurityOperationCode>>();
     }
 }

@@ -1138,7 +1138,7 @@ namespace SampleSystem.BLL
         public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestRootSecurityObj> GetTestRootSecurityObjSecurityPath();
     }
     
-    public partial interface ISampleSystemSecurityService : Framework.DomainDriven.BLL.Security.IRootSecurityService<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.ISampleSystemSecurityPathContainer
+    public partial interface ISampleSystemSecurityService : Framework.DomainDriven.BLL.Security.IRootSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.SampleSystemSecurityOperationCode>, SampleSystem.BLL.ISampleSystemSecurityPathContainer
     {
     }
     

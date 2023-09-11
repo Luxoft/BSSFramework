@@ -7,7 +7,7 @@ namespace Framework.DomainDriven.BLL.Security;
 
 public abstract class BLLFactoryBase<TBLLContext, TBLL, TBLLImpl, TDomainObject> : BLLContextContainer<TBLLContext>, ISecurityBLLFactory<TBLL, ISecurityProvider<TDomainObject>>
 
-        where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService<TBLLContext, TDomainObject>>, IServiceProviderContainer
+        where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService<TDomainObject>>, IServiceProviderContainer
         where TBLLImpl : TBLL
         where TDomainObject : class
 {
@@ -31,7 +31,7 @@ public abstract class BLLFactoryBase<TBLLContext, TBLL, TBLLImpl, TDomainObject>
 
 public abstract class SecurityBLLFactoryBase<TBLLContext, TBLL, TBLLImpl, TDomainObject> : BLLFactoryBase<TBLLContext, TBLL, TBLLImpl, TDomainObject>, ISecurityBLLFactory<TBLL, BLLSecurityMode>
 
-        where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService<TBLLContext, TDomainObject>>, IServiceProviderContainer
+        where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService<TDomainObject>>, IServiceProviderContainer
         where TDomainObject : class
         where TBLLImpl : TBLL
 {
@@ -49,7 +49,7 @@ public abstract class SecurityBLLFactoryBase<TBLLContext, TBLL, TBLLImpl, TDomai
 
 public abstract class SecurityBLLFactory<TBLLContext, TBLL, TBLLImpl, TDomainObject, TSecurityOperationCode> : SecurityBLLFactoryBase<TBLLContext, TBLL, TBLLImpl, TDomainObject>, ISecurityBLLFactory<TBLL, TSecurityOperationCode>, ISecurityBLLFactory<TBLL, SecurityOperation<TSecurityOperationCode>>
 
-        where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService<TBLLContext, TDomainObject, TSecurityOperationCode>>, IServiceProviderContainer
+        where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService<TDomainObject, TSecurityOperationCode>>, IServiceProviderContainer
         where TDomainObject : class
         where TSecurityOperationCode : struct, Enum
         where TBLLImpl : TBLL

@@ -29,7 +29,14 @@ public class AccessDeniedExceptionService : IAccessDeniedExceptionService
 
             if (accessDeniedResult.DomainObjectInfo == null)
             {
-                return $"You are not authorized to perform '{securityOperationCode}' operation";
+                if (securityOperationCode == null)
+                {
+                    return $"You are not authorized to perform operation";
+                }
+                else
+                {
+                    return $"You are not authorized to perform '{securityOperationCode}' operation";
+                }
             }
             else
             {

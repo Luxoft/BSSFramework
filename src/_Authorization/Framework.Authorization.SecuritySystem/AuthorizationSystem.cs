@@ -59,3 +59,23 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         where TSecurityOperationCode : struct, Enum =>
         throw new NotImplementedException();
 }
+
+public class AvailablePermissionSpecification<TSecurityOperationCode> : AvailablePermissionFilter
+    where TSecurityOperationCode : struct, Enum
+{
+    private readonly Guid securityOperationId;
+
+    public AvailablePermissionOperationFilter(IDateTimeService dateTimeService, string principalName, TSecurityOperationCode securityOperationCode)
+        : base(dateTimeService, principalName)
+    {
+        if (securityOperationCode.IsDefault()) throw new ArgumentOutOfRangeException(nameof(securityOperationCode));
+
+        this.securityOperationId = securityOperationCode.ToGuid();
+    }
+
+    public override Expression<Func<Permission, bool>> ToFilterExpression()
+    {
+        return base.ToFilterExpression()
+                   .BuildAnd(permission => permission.Role.BusinessRoleOperationLinks.Any(link => link.Operation.Id == this.securityOperationId));
+    }
+}

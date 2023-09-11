@@ -2,8 +2,7 @@
 
 namespace SampleSystem.ServiceEnvironment;
 
-public class SampleSystemSecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> : Framework.SecuritySystem.Rules.Builders.
-    Mixed.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>
+public class SampleSystemSecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> : Framework.SecuritySystem.Rules.Builders.Mixed.SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent>
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
     public SampleSystemSecurityExpressionBuilderFactory(

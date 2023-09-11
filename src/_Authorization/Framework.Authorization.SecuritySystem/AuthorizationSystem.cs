@@ -1,6 +1,8 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Authorization.Domain;
+using Framework.Core;
+using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 

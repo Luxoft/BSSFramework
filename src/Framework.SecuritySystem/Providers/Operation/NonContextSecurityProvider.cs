@@ -35,7 +35,7 @@ namespace Framework.SecuritySystem
 
         protected override bool HasAccess()
         {
-            return this.authorizationSystem.HasAccess(this.securityOperation);
+            return this.authorizationSystem.HasAccess(this.securityOperation.Code);
         }
 
         public AccessResult GetAccessResult(TDomainObject domainObject)

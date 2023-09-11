@@ -6,10 +6,21 @@ public interface IAuthorizationSystem
 {
     bool IsAdmin();
 
-    bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation)
+    /// <summary>
+    /// NonContext checking
+    /// </summary>
+    /// <typeparam name="TSecurityOperationCode"></typeparam>
+    /// <param name="securityOperationCode"></param>
+    /// <returns></returns>
+    bool HasAccess<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode)
         where TSecurityOperationCode : struct, Enum;
 
-    void CheckAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> operation)
+    /// <summary>
+    /// NonContext checking
+    /// </summary>
+    /// <typeparam name="TSecurityOperationCode"></typeparam>
+    /// <param name="securityOperationCode"></param>
+    void CheckAccess<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode)
         where TSecurityOperationCode : struct, Enum;
 
     string ResolveSecurityTypeName(Type type);

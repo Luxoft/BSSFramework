@@ -49,7 +49,7 @@ public class WorkflowController : ControllerBase
                                                   ctx =>
                                                                       {
                                                                           ctx.Authorization.CheckAccess(
-                                                                           SampleSystemSecurityOperation.SystemIntegration);
+                                                                           SampleSystemSecurityOperationCode.SystemIntegration);
                                                                           return Task.CompletedTask;
                                                                       });
 

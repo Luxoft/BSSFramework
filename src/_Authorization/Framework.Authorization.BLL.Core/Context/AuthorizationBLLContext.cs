@@ -161,18 +161,17 @@ public partial class AuthorizationBLLContext
         return this.HasAccess(new AvailablePermissionOperationFilter(this.DateTimeService, this.RunAsManager.PrincipalName, operation));
     }
 
-    public bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation, bool withRunAs)
+    public bool HasAccess<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode, bool withRunAs)
             where TSecurityOperationCode : struct, Enum
     {
-        if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
-        if (securityOperation.Code.IsDefault()) { throw new ArgumentOutOfRangeException(); }
+        if (securityOperationCode.IsDefault()) { throw new ArgumentOutOfRangeException(); }
 
         var principalName = withRunAs ? this.RunAsManager.PrincipalName : this.CurrentPrincipalName;
 
         var filter = new AvailablePermissionOperationFilter<TSecurityOperationCode>(
                                                                                     this.DateTimeService,
                                                                                     principalName,
-                                                                                    securityOperation.Code);
+                                                                                    securityOperationCode);
 
         return this.HasAccess(filter);
     }
@@ -182,24 +181,28 @@ public partial class AuthorizationBLLContext
         return this.Logics.BusinessRole.HasAdminRole();
     }
 
-    public bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation)
+    public bool HasAccess<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode)
             where TSecurityOperationCode : struct, Enum
     {
-        return this.HasAccess(securityOperation, true);
+        return this.HasAccess(securityOperationCode, true);
     }
 
-    public void CheckAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> operation)
+    public void CheckAccess<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode)
         where TSecurityOperationCode : struct, Enum
     {
-        this.CheckAccess(operation, true);
+        this.CheckAccess(securityOperationCode, true);
     }
 
-    public void CheckAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> operation, bool withRunAs)
+    public void CheckAccess<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode, bool withRunAs)
         where TSecurityOperationCode : struct, Enum
     {
-        if (!this.HasAccess(operation, withRunAs))
+        if (!this.HasAccess(securityOperationCode, withRunAs))
         {
-            throw this.AccessDeniedExceptionService.GetAccessDeniedException(new AccessResult.AccessDeniedResult { SecurityOperation = operation });
+            throw this.AccessDeniedExceptionService.GetAccessDeniedException(
+                new AccessResult.AccessDeniedResult
+                {
+                    SecurityOperation = new NonContextSecurityOperation<TSecurityOperationCode>(securityOperationCode)
+                });
         }
     }
 

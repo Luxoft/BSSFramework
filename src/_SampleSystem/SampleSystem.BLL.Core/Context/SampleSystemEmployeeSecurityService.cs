@@ -29,7 +29,7 @@ public partial class SampleSystemEmployeeSecurityService<TDomainObject, TBusines
     {
         var baseProvider = base.CreateSecurityProvider(securityOperation);
 
-        if (securityOperation == SampleSystemSecurityOperation.EmployeeView)
+        if (securityOperation.Code == SampleSystemSecurityOperationCode.EmployeeView)
         {
             return baseProvider.Or(employee => employee.Login == this.Context.Authorization.RunAsManager.PrincipalName);
         }

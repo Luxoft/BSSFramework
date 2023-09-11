@@ -27,7 +27,7 @@ public abstract class IntegrationGeneratorConfigurationBase<TEnvironment> : Gene
     public virtual string SaveMethodName { get; } = "Save";
 
 
-    public virtual CodeExpression IntegrationSecurityOperation => this.Environment.BLLCore.SecurityOperationTypeReference
+    public virtual CodeExpression IntegrationSecurityOperation => this.Environment.SecurityOperationCodeType
                                                                       .ToTypeReferenceExpression()
                                                                       .ToPropertyReference(SecurityOperationCode.SystemIntegration.ToString());
 

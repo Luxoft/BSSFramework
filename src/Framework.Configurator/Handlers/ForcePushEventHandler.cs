@@ -1,4 +1,5 @@
 ﻿using Framework.Authorization.BLL;
+using Framework.Configuration;
 using Framework.Configuration.BLL;
 using Framework.Configuration.Domain;
 using Framework.Configurator.Interfaces;
@@ -14,7 +15,7 @@ public record ForcePushEventHandler(
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        this.AuthorizationSystem.CheckAccess(ConfigurationSecurityOperation.ForceDomainTypeEvent);
+        this.AuthorizationSystem.CheckAccess(ConfigurationSecurityOperationCode.ForceDomainTypeEvent);
 
         var operationId = (string?)context.Request.RouteValues["operationId"] ?? throw new InvalidOperationException();
         var body = await this.ParseRequestBodyAsync<RequestBodyDto>(context);

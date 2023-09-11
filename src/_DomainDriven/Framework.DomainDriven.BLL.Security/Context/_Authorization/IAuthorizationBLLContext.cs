@@ -17,10 +17,23 @@ public interface IAuthorizationBLLContextBase : IAuthorizationSystem
         get;
     }
 
-    bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation, bool withRunAs)
+    /// <summary>
+    /// NonContext checking
+    /// </summary>
+    /// <typeparam name="TSecurityOperationCode"></typeparam>
+    /// <param name="securityOperationCode"></param>
+    /// <param name="withRunAs"></param>
+    /// <returns></returns>
+    bool HasAccess<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode, bool withRunAs)
         where TSecurityOperationCode : struct, Enum;
 
-    void CheckAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> operation, bool withRunAs)
+    /// <summary>
+    /// NonContext checking
+    /// </summary>
+    /// <typeparam name="TSecurityOperationCode"></typeparam>
+    /// <param name="securityOperationCode"></param>
+    /// <param name="withRunAs"></param>
+    void CheckAccess<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode, bool withRunAs)
         where TSecurityOperationCode : struct, Enum;
 }
 

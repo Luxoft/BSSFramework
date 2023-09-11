@@ -36,7 +36,7 @@ public abstract class IntegrationSchemaControllerBase : ControllerBase
 
     private IActionResult DownloadKnownTypesWsdl(string xsdNamespace, IReadOnlyCollection<Type> eventTypes)
     {
-        this.authorizationSystem.CheckAccess(new NonContextSecurityOperation<SecurityOperationCode>(SecurityOperationCode.SystemIntegration));
+        this.authorizationSystem.CheckAccess(SecurityOperationCode.SystemIntegration);
 
         var content = this.eventXsdExporter.Export(xsdNamespace, "IntegrationEvent", eventTypes);
 

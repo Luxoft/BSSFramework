@@ -149,7 +149,7 @@ public class EnumRootSecurityServiceGenerator<TConfiguration> : RootSecurityServ
 
     public override CodeTypeReference GetGenericRootSecurityServiceInterfaceType()
     {
-        return typeof(IRootSecurityService<,,>).ToTypeReference(this.Configuration.BLLContextInterfaceTypeReference, this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(), this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference());
+        return typeof(IRootSecurityService<,>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(), this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference());
     }
 
     public override CodeTypeReference GetDomainInterfaceBaseServiceType()

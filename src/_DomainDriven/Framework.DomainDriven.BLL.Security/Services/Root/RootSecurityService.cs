@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.BLL.Security;
 
-public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<TBLLContext>, IRootSecurityService<TBLLContext, TPersistentDomainObjectBase>
+public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<TBLLContext>, IRootSecurityService<TPersistentDomainObjectBase>
 
         where TBLLContext : class, IAccessDeniedExceptionServiceContainer
         where TPersistentDomainObjectBase : class
@@ -34,12 +34,6 @@ public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBa
         return this.GetDomainSecurityServiceBase<TDomainObject>().GetSecurityProvider(securityMode);
     }
 
-    public virtual ISecurityProvider<TDomainObject> GetNotImplementedSecurityProvider<TDomainObject>(object data)
-            where TDomainObject : class, TPersistentDomainObjectBase
-    {
-        throw new Exception($"SecurityProvider not implemented for {typeof(TDomainObject).Name}");
-    }
-
     public virtual ISecurityProvider<TDomainObject> GetDisabledSecurityProvider<TDomainObject>()
     {
         return new DisabledSecurityProvider<TDomainObject>();
@@ -54,19 +48,14 @@ public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBa
     protected virtual IDomainSecurityService<TDomainObject> CreateDomainSecurityServiceBase<TDomainObject>()
             where TDomainObject : class, TPersistentDomainObjectBase
     {
-        return new NotImplementedDomainSecurityService<TBLLContext, TDomainObject>(this);
-    }
-
-    IDomainSecurityService<TDomainObject> IRootSecurityService<TBLLContext, TPersistentDomainObjectBase>.GetDomainSecurityService<TDomainObject>()
-    {
-        return this.GetDomainSecurityServiceBase<TDomainObject>();
+        return new NotImplementedDomainSecurityService<TDomainObject>(this);
     }
 }
 
 
 public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> : RootSecurityService<TBLLContext, TPersistentDomainObjectBase>,
 
-    IRootSecurityService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode>
+    IRootSecurityService<TPersistentDomainObjectBase, TSecurityOperationCode>
 
         where TBLLContext : class, ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode>, IAccessDeniedExceptionServiceContainer, IServiceProviderContainer
         where TSecurityOperationCode : struct, Enum
@@ -114,6 +103,6 @@ public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBa
             where TDomainObject : class, TPersistentDomainObjectBase
     {
         return this.Context.ServiceProvider.GetService<IDomainSecurityService<TDomainObject, TSecurityOperationCode>>()
-               ?? new NotImplementedDomainSecurityService<TBLLContext, TDomainObject, TSecurityOperationCode>(this);
+               ?? new NotImplementedDomainSecurityService<TDomainObject, TSecurityOperationCode>(this);
     }
 }

@@ -11,10 +11,10 @@ public class AnonTypeConverter<TBLLContext, TPersistentDomainObjectBase, TSecuri
         where TSecurityOperationCode : struct, Enum
         where TPersistentDomainObjectBase : class
 {
-    private readonly IRootSecurityService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> _securityService;
+    private readonly IRootSecurityService<TPersistentDomainObjectBase, TSecurityOperationCode> _securityService;
 
 
-    public AnonTypeConverter(ILambdaCompileCache compileCache, IRootSecurityService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> securityService)
+    public AnonTypeConverter(ILambdaCompileCache compileCache, IRootSecurityService<TPersistentDomainObjectBase, TSecurityOperationCode> securityService)
             : base(compileCache)
     {
         if (securityService == null) throw new ArgumentNullException(nameof(securityService));

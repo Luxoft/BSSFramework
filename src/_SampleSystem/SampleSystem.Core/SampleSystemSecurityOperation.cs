@@ -150,7 +150,7 @@ public static class SampleSystemSecurityOperation
 
     public static NonContextSecurityOperation<Guid> AuthorizationImpersonate { get; } = AuthorizationSecurityOperation.AuthorizationImpersonate;
 
-    public static NonContextSecurityOperation<Guid> EmployeePersonalCellPhoneView { get; } = new(nameof(EmployeePersonalCellPhoneView), new Guid("{E66C1E91-6290-4192-BDE7-074634562288}"));
+    public static NonContextSecurityOperation<Guid> EmployeePersonalCellPhoneView { get; } = new(nameof(EmployeePersonalCellPhoneView), new Guid("{EF42631D-0B49-4418-A3A7-4EE413ACEDF0}"));
 
     public static NonContextSecurityOperation<Guid> EmployeePersonalCellPhoneEdit { get; } = new(nameof(EmployeePersonalCellPhoneEdit), new Guid("{A30BB9DE-578F-485B-BFFF-1CE6256F34F6}"));
 

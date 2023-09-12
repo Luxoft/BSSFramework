@@ -9,12 +9,12 @@ namespace Framework.Authorization.BLL;
 
 public static class OperationBLLExtensions
 {
-    public static IEnumerable<TSecurityOperationCode> GetAvailableOperationCodes<TSecurityOperationCode>(this IOperationBLL bll)
+    public static IEnumerable GetAvailableOperationCodes(this IOperationBLL bll)
             where TSecurityOperationCode : struct, Enum
     {
         if (bll == null) throw new ArgumentNullException(nameof(bll));
 
-        return bll.GetAvailableOperations().ToSecurityOperationCodes<TSecurityOperationCode>();
+        return bll.GetAvailableOperations().ToSecurityOperationCodes();
     }
 
     public static IEnumerable<string> GetAvailableOperationCodes(this IOperationBLL bll)
@@ -32,12 +32,12 @@ public static class OperationBLLExtensions
                   .OrderBy(v => v);
     }
 
-    private static IEnumerable<TSecurityOperationCode> ToSecurityOperationCodes<TSecurityOperationCode>(this IEnumerable<Operation> operations)
+    private static IEnumerable ToSecurityOperationCodes(this IEnumerable<Operation> operations)
             where TSecurityOperationCode : struct, Enum
     {
         if (operations == null) throw new ArgumentNullException(nameof(operations));
 
-        return operations.Select(operation => operation.Id.ToSecurityOperation<TSecurityOperationCode>()).CollectMaybe();
+        return operations.Select(operation => operation.Id.ToSecurityOperation()).CollectMaybe();
     }
 
     private static IEnumerable<Enum> ToSecurityOperationCodes(this IEnumerable<Operation> operations, Type securityOperationType)

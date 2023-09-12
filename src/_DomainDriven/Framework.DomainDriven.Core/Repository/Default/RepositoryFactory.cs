@@ -5,21 +5,21 @@ using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.Repository;
 
-public class RepositoryFactory<TDomainObject, TSecurityOperationCode> : TemplateRepositoryFactory<
+public class RepositoryFactory<TDomainObject> : TemplateRepositoryFactory<
                                                                                IRepository<TDomainObject>,
                                                                                Repository<TDomainObject>,
                                                                                TDomainObject,
                                                                                TSecurityOperationCode>,
 
-                                                                               IRepositoryFactory<TDomainObject, TSecurityOperationCode>
+                                                                               IRepositoryFactory<TDomainObject>
 
     where TDomainObject : class
     where TSecurityOperationCode : struct, Enum
 {
     public RepositoryFactory(
         IServiceProvider serviceProvider,
-        INotImplementedDomainSecurityService<TDomainObject, TSecurityOperationCode> notImplementedDomainSecurityService,
-        IDomainSecurityService<TDomainObject, TSecurityOperationCode> domainSecurityService = null)
+        INotImplementedDomainSecurityService<TDomainObject> notImplementedDomainSecurityService,
+        IDomainSecurityService<TDomainObject> domainSecurityService = null)
         : base(serviceProvider, notImplementedDomainSecurityService, domainSecurityService)
     {
     }

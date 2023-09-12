@@ -4,7 +4,7 @@ namespace Framework.Security;
 
 public static class TransferEnumHelper
 {
-    public static void Check<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode)
+    public static void Check(SecurityOperation securityOperation)
             where TSecurityOperationCode : struct, Enum
     {
         if (securityOperationCode.IsDefault() || !Enum.IsDefined(typeof(TSecurityOperationCode), securityOperationCode))

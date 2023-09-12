@@ -6,7 +6,7 @@ namespace Framework.SecuritySystem;
 public class UntypedDependencyDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent,
                                                     TSecurityOperationCode> :
 
-    DependencyDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent, TSecurityOperationCode>
+    DependencyDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent>
 
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     where TDomainObject : class, TPersistentDomainObjectBase
@@ -17,7 +17,7 @@ public class UntypedDependencyDomainSecurityService<TPersistentDomainObjectBase,
 
     public UntypedDependencyDomainSecurityService(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
-        IDomainSecurityService<TBaseDomainObject, TSecurityOperationCode> baseDomainSecurityService,
+        IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService,
         IQueryableSource<TPersistentDomainObjectBase> queryableSource)
 
         : base(disabledSecurityProviderSource, baseDomainSecurityService)

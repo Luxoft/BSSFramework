@@ -3,9 +3,9 @@ using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.BLL.Security;
 
-public abstract class DefaultSecurityBLLFactory<TBLLContext, TPersistentDomainObjectBase, TDomainObjectBase, TSecurityOperationCode, TIdent> : BLLContextContainer<TBLLContext>,
+public abstract class DefaultSecurityBLLFactory<TBLLContext, TPersistentDomainObjectBase, TDomainObjectBase, TIdent> : BLLContextContainer<TBLLContext>,
 
-    IDefaultSecurityBLLFactory<TPersistentDomainObjectBase, TSecurityOperationCode, TIdent>
+    IDefaultSecurityBLLFactory<TPersistentDomainObjectBase, TIdent>
 
         where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent>
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
@@ -35,13 +35,13 @@ public abstract class DefaultSecurityBLLFactory<TBLLContext, TPersistentDomainOb
         throw new NotImplementedException();
     }
 
-    public virtual IDefaultSecurityDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>(TSecurityOperationCode securityOperationCode)
+    public virtual IDefaultSecurityDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>(SecurityOperation securityOperation)
             where TDomainObject : class, TPersistentDomainObjectBase
     {
         throw new NotImplementedException();
     }
 
-    public virtual IDefaultSecurityDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>(SecurityOperation<TSecurityOperationCode> securityOperation)
+    public virtual IDefaultSecurityDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>(SecurityOperation securityOperation)
             where TDomainObject : class, TPersistentDomainObjectBase
     {
         throw new NotImplementedException();

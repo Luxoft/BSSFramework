@@ -10,14 +10,14 @@ public interface IRootSecurityService<in TPersistentDomainObjectBase>
 }
 
 public interface
-    IRootSecurityService<in TPersistentDomainObjectBase, TSecurityOperationCode> : IRootSecurityService<TPersistentDomainObjectBase>
+    IRootSecurityService<in TPersistentDomainObjectBase> : IRootSecurityService<TPersistentDomainObjectBase>
 
     where TSecurityOperationCode : struct, Enum
     where TPersistentDomainObjectBase : class
 {
-    ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityOperation<TSecurityOperationCode> securityOperation)
+    ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityOperation securityOperation)
         where TDomainObject : TPersistentDomainObjectBase;
 
-    ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(TSecurityOperationCode securityOperationCode)
+    ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityOperation securityOperation)
         where TDomainObject : TPersistentDomainObjectBase;
 }

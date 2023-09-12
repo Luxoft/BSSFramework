@@ -14,7 +14,7 @@ public partial class PrincipalBLL
         return new Principal();
     }
 
-    public IEnumerable<Principal> GetAvailablePrincipals<TSecurityOperationCode>(params TSecurityOperationCode[] securityOperationCodes)
+    public IEnumerable<Principal> GetAvailablePrincipals(params TSecurityOperationCode[] securityOperationCodes)
             where TSecurityOperationCode : struct, Enum
     {
         if (securityOperationCodes == null) throw new ArgumentNullException(nameof(securityOperationCodes));

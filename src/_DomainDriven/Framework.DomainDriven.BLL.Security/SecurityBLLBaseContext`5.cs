@@ -7,9 +7,9 @@ using Framework.Validation;
 
 namespace Framework.DomainDriven.BLL.Security;
 
-public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent, TBLLFactoryContainer, TSecurityOperationCode> :
+public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent, TBLLFactoryContainer> :
 
-        SecurityBLLBaseContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent, TBLLFactoryContainer>, ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode>
+        SecurityBLLBaseContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent, TBLLFactoryContainer>, ISecurityOperationResolver<TPersistentDomainObjectBase>
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
         where TDomainObjectBase : class
@@ -34,11 +34,11 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TDomai
     {
         var viewOperation = this.GetSecurityOperation<TDomainObject>(BLLSecurityMode.View);
 
-        if (viewOperation is ContextSecurityOperation<TSecurityOperationCode>)
+        if (viewOperation is ContextSecurityOperation)
         {
-            var contextOperation = viewOperation as ContextSecurityOperation<TSecurityOperationCode>;
+            var contextOperation = viewOperation as ContextSecurityOperation;
 
-            return contextOperation.SecurityExpandType.HasFlag(HierarchicalExpandType.Parents);
+            return contextOperation.ExpandType.HasFlag(HierarchicalExpandType.Parents);
         }
         else
         {
@@ -46,8 +46,8 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TDomai
         }
     }
 
-    public abstract SecurityOperation<TSecurityOperationCode> GetSecurityOperation(TSecurityOperationCode securityOperationCode);
+    public abstract SecurityOperation GetSecurityOperation(SecurityOperation securityOperation);
 
-    public abstract SecurityOperation<TSecurityOperationCode> GetSecurityOperation<TDomainObject>(BLLSecurityMode securityMode)
+    public abstract SecurityOperation GetSecurityOperation<TDomainObject>(BLLSecurityMode securityMode)
             where TDomainObject : TPersistentDomainObjectBase;
 }

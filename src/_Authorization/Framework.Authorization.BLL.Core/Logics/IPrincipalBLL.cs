@@ -10,6 +10,6 @@ public partial interface IPrincipalBLL
 
     Principal GetCurrent(bool autoSave = false);
 
-    IEnumerable<Principal> GetAvailablePrincipals<TSecurityOperationCode>(params TSecurityOperationCode[] securityOperationCodes)
+    IEnumerable<Principal> GetAvailablePrincipals(params TSecurityOperationCode[] securityOperationCodes)
             where TSecurityOperationCode : struct, Enum;
 }

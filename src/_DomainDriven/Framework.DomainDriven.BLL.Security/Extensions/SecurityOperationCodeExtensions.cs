@@ -5,22 +5,22 @@ namespace Framework.DomainDriven.BLL.Security;
 
 public static class SecurityOperationCodeExtensions
 {
-    public static Maybe<TSecurityOperationCode> ToSecurityOperation<TSecurityOperationCode>(this Guid guid)
+    public static Maybe ToSecurityOperation(this Guid guid)
             where TSecurityOperationCode : struct, Enum
     {
-        return Helper<TSecurityOperationCode>.ByGuidDictionary.GetMaybeValue(guid);
+        return Helper.ByGuidDictionary.GetMaybeValue(guid);
     }
 
-    public static Guid ToGuid<TSecurityOperationCode>(this TSecurityOperationCode securityOperations)
+    public static Guid ToGuid(this TSecurityOperationCode securityOperations)
             where TSecurityOperationCode : struct, Enum
     {
-        return Helper<TSecurityOperationCode>.Dictionary[securityOperations].Guid;
+        return Helper.Dictionary[securityOperations].Guid;
     }
 
-    public static string GetDescription<TSecurityOperationCode>(this TSecurityOperationCode securityOperations)
+    public static string GetDescription(this TSecurityOperationCode securityOperations)
             where TSecurityOperationCode : struct, Enum
     {
-        var securityOperationAttribute = Helper<TSecurityOperationCode>.Dictionary[securityOperations];
+        var securityOperationAttribute = Helper.Dictionary[securityOperations];
 
         if (string.IsNullOrWhiteSpace(securityOperationAttribute.Description))
         {
@@ -30,10 +30,10 @@ public static class SecurityOperationCodeExtensions
         return securityOperationAttribute.Description;
     }
 
-    public static IReadOnlyDictionary<TSecurityOperationCode, SecurityOperationAttribute> GetDictionary<TSecurityOperationCode>()
+    public static IReadOnlyDictionary<SecurityOperationAttribute> GetDictionary()
             where TSecurityOperationCode : struct, Enum
     {
-        return Helper<TSecurityOperationCode>.Dictionary;
+        return Helper.Dictionary;
     }
 
     public static IReadOnlyDictionary<Enum, SecurityOperationAttribute> GetDictionary(Type type, bool withBase, bool removeDuplicate)
@@ -61,21 +61,21 @@ public static class SecurityOperationCodeExtensions
         }
     }
 
-    private static Dictionary<Enum, SecurityOperationAttribute> GetUntypeDictionary<TSecurityOperationCode>()
+    private static Dictionary<Enum, SecurityOperationAttribute> GetUntypeDictionary()
             where TSecurityOperationCode : struct, Enum
     {
-        return GetDictionary<TSecurityOperationCode>().ToDictionary(pair => (Enum)pair.Key, pair => pair.Value);
+        return GetDictionary().ToDictionary(pair => (Enum)pair.Key, pair => pair.Value);
     }
 
-    private static class Helper<TSecurityOperationCode>
+    private static class Helper
             where TSecurityOperationCode : struct, Enum
     {
-        public static readonly IReadOnlyDictionary<TSecurityOperationCode, SecurityOperationAttribute> Dictionary = CreateDictionary();
+        public static readonly IReadOnlyDictionary<SecurityOperationAttribute> Dictionary = CreateDictionary();
 
-        public static readonly IReadOnlyDictionary<Guid, TSecurityOperationCode> ByGuidDictionary = CreateGuidDictionary();
+        public static readonly IReadOnlyDictionary<Guid> ByGuidDictionary = CreateGuidDictionary();
 
 
-        private static Dictionary<Guid, TSecurityOperationCode> CreateGuidDictionary()
+        private static Dictionary<Guid> CreateGuidDictionary()
         {
             var groupedRequest = from pair in Dictionary
 
@@ -92,7 +92,7 @@ public static class SecurityOperationCodeExtensions
             return pairs.UniOperations.ToDictionary(g => g.Key, g => g.Single());
         }
 
-        private static Dictionary<TSecurityOperationCode, SecurityOperationAttribute> CreateDictionary()
+        private static Dictionary<SecurityOperationAttribute> CreateDictionary()
         {
             var requst = from fieldName in Enum.GetNames(typeof(TSecurityOperationCode))
 

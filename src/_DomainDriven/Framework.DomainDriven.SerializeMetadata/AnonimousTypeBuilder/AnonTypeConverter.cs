@@ -7,14 +7,14 @@ using Framework.Security;
 
 namespace Framework.DomainDriven.SerializeMetadata;
 
-public class AnonTypeConverter<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode, TSource, TTarget> : ObjectConverter<TSource, TTarget>
+public class AnonTypeConverter<TBLLContext, TPersistentDomainObjectBase, TSource, TTarget> : ObjectConverter<TSource, TTarget>
         where TSecurityOperationCode : struct, Enum
         where TPersistentDomainObjectBase : class
 {
-    private readonly IRootSecurityService<TPersistentDomainObjectBase, TSecurityOperationCode> _securityService;
+    private readonly IRootSecurityService<TPersistentDomainObjectBase> _securityService;
 
 
-    public AnonTypeConverter(ILambdaCompileCache compileCache, IRootSecurityService<TPersistentDomainObjectBase, TSecurityOperationCode> securityService)
+    public AnonTypeConverter(ILambdaCompileCache compileCache, IRootSecurityService<TPersistentDomainObjectBase> securityService)
             : base(compileCache)
     {
         if (securityService == null) throw new ArgumentNullException(nameof(securityService));
@@ -25,7 +25,7 @@ public class AnonTypeConverter<TBLLContext, TPersistentDomainObjectBase, TSecuri
 
     protected override ExpressionConverter<TSubSource, TSubTarget> GetSubConverter<TSubSource, TSubTarget>()
     {
-        return new AnonTypeConverter<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode, TSubSource, TSubTarget>(this.CompileCache, this._securityService);
+        return new AnonTypeConverter<TBLLContext, TPersistentDomainObjectBase, TSubSource, TSubTarget>(this.CompileCache, this._securityService);
     }
 
 
@@ -60,7 +60,7 @@ public class AnonTypeConverter<TBLLContext, TPersistentDomainObjectBase, TSecuri
             {
                 var operation = (TSecurityOperationCode)(object)viewDomainObjectAttribute.SecurityOperationCode;
 
-                var method = new Func<TSecurityOperationCode, Expression>(this.GetSecurityMemberBindExpression<TPersistentDomainObjectBase, object>)
+                var method = new Func<Expression>(this.GetSecurityMemberBindExpression<TPersistentDomainObjectBase, object>)
                              .Method
                              .GetGenericMethodDefinition()
                              .MakeGenericMethod(domainType, sourcePropExpr.Type);

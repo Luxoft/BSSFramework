@@ -8,7 +8,7 @@ using Framework.HierarchicalExpand;
 
 namespace Framework.DomainDriven.ServiceModel.IAD;
 
-public class AuthorizationExternalSource<TBLLContext, TPersistentDomainObjectBase, TAuditPersistentDomainObjectBase, TSecurityOperationCode> : BLLContextContainer<TBLLContext>, IAuthorizationExternalSource
+public class AuthorizationExternalSource<TBLLContext, TPersistentDomainObjectBase, TAuditPersistentDomainObjectBase> : BLLContextContainer<TBLLContext>, IAuthorizationExternalSource
         where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, Guid>, IBLLBaseContextBase<TPersistentDomainObjectBase, Guid>
 
         where TPersistentDomainObjectBase : class, IDefaultIdentityObject

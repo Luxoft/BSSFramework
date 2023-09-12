@@ -32,12 +32,12 @@ public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBa
     }
 }
 
-public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBase, TSecurityOperationCode> :
+public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBase> :
     RootSecurityService<TBLLContext, TPersistentDomainObjectBase>,
 
-    IRootSecurityService<TPersistentDomainObjectBase, TSecurityOperationCode>
+    IRootSecurityService<TPersistentDomainObjectBase>
 
-    where TBLLContext : class, ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode>,
+    where TBLLContext : class, ISecurityOperationResolver<TPersistentDomainObjectBase>,
     IAccessDeniedExceptionServiceContainer, IServiceProviderContainer
     where TSecurityOperationCode : struct, Enum
     where TPersistentDomainObjectBase : class
@@ -48,7 +48,7 @@ public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBa
     }
 
 
-    public ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityOperation<TSecurityOperationCode> securityOperation)
+    public ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityOperation securityOperation)
         where TDomainObject : TPersistentDomainObjectBase
     {
         if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
@@ -56,17 +56,17 @@ public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBa
         return this.GetDomainSecurityService<TDomainObject>().GetSecurityProvider(securityOperation);
     }
 
-    public ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(TSecurityOperationCode securityOperationCode)
+    public ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityOperation securityOperation)
         where TDomainObject : TPersistentDomainObjectBase
     {
         return this.GetDomainSecurityService<TDomainObject>().GetSecurityProvider(securityOperationCode);
     }
 
 
-    protected IDomainSecurityService<TDomainObject, TSecurityOperationCode> GetDomainSecurityService<TDomainObject>()
+    protected IDomainSecurityService<TDomainObject> GetDomainSecurityService<TDomainObject>()
     {
-        return this.Context.ServiceProvider.GetService<IDomainSecurityService<TDomainObject, TSecurityOperationCode>>()
+        return this.Context.ServiceProvider.GetService<IDomainSecurityService<TDomainObject>>()
                ?? this.Context.ServiceProvider
-                      .GetRequiredService<INotImplementedDomainSecurityService<TDomainObject, TSecurityOperationCode>>();
+                      .GetRequiredService<INotImplementedDomainSecurityService<TDomainObject>>();
     }
 }

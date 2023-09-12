@@ -24,7 +24,7 @@ public interface IAuthorizationBLLContextBase : IAuthorizationSystem
     /// <param name="securityOperationCode"></param>
     /// <param name="withRunAs"></param>
     /// <returns></returns>
-    bool HasAccess<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode, bool withRunAs)
+    bool HasAccess(SecurityOperation securityOperation, bool withRunAs)
         where TSecurityOperationCode : struct, Enum;
 
     /// <summary>
@@ -33,7 +33,7 @@ public interface IAuthorizationBLLContextBase : IAuthorizationSystem
     /// <typeparam name="TSecurityOperationCode"></typeparam>
     /// <param name="securityOperationCode"></param>
     /// <param name="withRunAs"></param>
-    void CheckAccess<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode, bool withRunAs)
+    void CheckAccess(SecurityOperation securityOperation, bool withRunAs)
         where TSecurityOperationCode : struct, Enum;
 }
 

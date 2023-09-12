@@ -22,17 +22,16 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
         this.Factory = factory ?? throw new ArgumentNullException(nameof(factory));
     }
 
-    public ISecurityExpressionFilter<TDomainObject> GetFilter<TSecurityOperationCode>(ContextSecurityOperation<TSecurityOperationCode> securityOperation)
-            where TSecurityOperationCode : struct, Enum
+    public ISecurityExpressionFilter<TDomainObject> GetFilter(ContextSecurityOperation securityOperation)
     {
-        return new SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject, TSecurityOperationCode, TIdent>(this, securityOperation);
+        return new SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject, TIdent>(this, securityOperation);
     }
 
 
-    public Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression<TSecurityOperation>(ContextSecurityOperation<TSecurityOperation> securityOperation)
+    public Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression<TSecurityOperation>(ContextSecurityOperation securityOperation)
             where TSecurityOperation : struct, Enum
     {
-        var filterExpression = this.GetSecurityFilterExpression(securityOperation.SecurityExpandType).ExpandConst().InlineEval();
+        var filterExpression = this.GetSecurityFilterExpression(securityOperation.ExpandType).ExpandConst().InlineEval();
 
         var baseQuery = this.Factory.AuthorizationSystem.GetPermissionQuery(securityOperation);
 

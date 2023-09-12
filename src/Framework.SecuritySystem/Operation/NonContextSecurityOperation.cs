@@ -1,17 +1,12 @@
-﻿using Framework.Core;
-
-namespace Framework.SecuritySystem;
+﻿namespace Framework.SecuritySystem;
 
 /// <summary>
 /// Неконстектстная операция доступа
 /// </summary>
-/// <typeparam name="TSecurityOperationCode">Код контекстной операции (Enum)</typeparam>
-public class NonContextSecurityOperation<TSecurityOperationCode> : SecurityOperation<TSecurityOperationCode>
-        where TSecurityOperationCode : struct, Enum
+public abstract record NonContextSecurityOperation(string Name) : SecurityOperation(Name)
 {
-    public NonContextSecurityOperation(TSecurityOperationCode code)
-            : base(code)
-    {
-        if (this.Code.IsDefault()) { throw new ArgumentOutOfRangeException(nameof(code)); }
-    }
+}
+
+public record NonContextSecurityOperation<TIdent>(string Name, TIdent Id) : NonContextSecurityOperation(Name)
+{
 }

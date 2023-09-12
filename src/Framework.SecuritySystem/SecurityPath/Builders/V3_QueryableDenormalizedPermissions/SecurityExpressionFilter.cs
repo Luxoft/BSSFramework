@@ -10,7 +10,7 @@
 
 //namespace Framework.SecuritySystem.Rules.Builders.QueryableDenormalizedPermissions
 //{
-//    public class SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject, TSecurityOperationCode, TIdent> : ISecurityExpressionFilter<TDomainObject>
+//    public class SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject, TIdent> : ISecurityExpressionFilter<TDomainObject>
 
 //        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 //        where TDomainObject : class, TPersistentDomainObjectBase
@@ -26,7 +26,7 @@
 
 //        public SecurityExpressionFilter(
 //            SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent> builder,
-//            ContextSecurityOperation<TSecurityOperationCode> securityOperation)
+//            ContextSecurityOperation securityOperation)
 //        {
 //            if (builder == null) throw new ArgumentNullException(nameof(builder));
 //            if (securityOperation == null) throw new
@@ -42,7 +42,7 @@
 
 //            this.getAccessorsFunc = LazyHelper.Create(() => FuncHelper.Create((TDomainObject domainObject) =>
 //            {
-//                var baseFilter = builder.GetAccessorsFilterMany(domainObject, securityOperation.SecurityExpandType);
+//                var baseFilter = builder.GetAccessorsFilterMany(domainObject, securityOperation.ExpandType);
 
 //                var filter = baseFilter.OverrideInput((IPrincipal<TIdent> principal) => principal.Permissions);
 

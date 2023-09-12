@@ -3,7 +3,7 @@ using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
 
-public class OnlyDisabledDomainSecurityService<TDomainObject, TSecurityOperationCode> : OnlyDisabledDomainSecurityService<TDomainObject>, INotImplementedDomainSecurityService<TDomainObject, TSecurityOperationCode>
+public class OnlyDisabledDomainSecurityService<TDomainObject> : OnlyDisabledDomainSecurityService<TDomainObject>, INotImplementedDomainSecurityService<TDomainObject>
     where TSecurityOperationCode : struct, Enum
 {
     public OnlyDisabledDomainSecurityService(IDisabledSecurityProviderSource disabledSecurityProviderSource)
@@ -11,12 +11,12 @@ public class OnlyDisabledDomainSecurityService<TDomainObject, TSecurityOperation
     {
     }
 
-    public ISecurityProvider<TDomainObject> GetSecurityProvider(TSecurityOperationCode securityOperationCode)
+    public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityOperation securityOperation)
     {
         return this.GetSecurityProviderInternal(securityOperationCode);
     }
 
-    public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityOperation<TSecurityOperationCode> securityOperation)
+    public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityOperation securityOperation)
     {
         return this.GetSecurityProviderInternal(securityOperation.Code);
     }

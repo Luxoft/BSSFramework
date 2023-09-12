@@ -4,9 +4,9 @@ public interface IRepositoryFactory<TDomainObject> : ITemplateGenericRepositoryF
 {
 }
 
-public interface IRepositoryFactory<TDomainObject, TSecurityOperationCode> : IRepositoryFactory<TDomainObject>,
+public interface IRepositoryFactory<TDomainObject> : IRepositoryFactory<TDomainObject>,
                                                                                     ITemplateGenericRepositoryFactory<IRepository<TDomainObject>,
-                                                                                    TDomainObject, TSecurityOperationCode>
+                                                                                    TDomainObject>
     where TSecurityOperationCode : struct, Enum
 {
 }

@@ -7,7 +7,7 @@ namespace Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
 /// </summary>
 /// <typeparam name="TDomainObject"></typeparam>
 /// <typeparam name="TSecurityOperationCode"></typeparam>
-public interface INotImplementedDomainSecurityService<TDomainObject, TSecurityOperationCode> : IDomainSecurityService<TDomainObject, TSecurityOperationCode>, INotImplementedDomainSecurityService<TDomainObject>
+public interface INotImplementedDomainSecurityService<TDomainObject> : IDomainSecurityService<TDomainObject>, INotImplementedDomainSecurityService<TDomainObject>
     where TSecurityOperationCode : struct, Enum
 {
 

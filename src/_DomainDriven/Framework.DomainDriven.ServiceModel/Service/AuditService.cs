@@ -12,7 +12,7 @@ using Framework.Validation;
 
 namespace Framework.DomainDriven.ServiceModel.Service;
 
-public class AuditService<TIdent, TBLLContext, TBLLFactoryContainer, TRootSecurityService, TSecurityOperationCode, TPersistentObjectBase, TDomainPropertyRevisionsDTO, TPropertyRevisionDTO>
+public class AuditService<TIdent, TBLLContext, TBLLFactoryContainer, TRootSecurityService, TPersistentObjectBase, TDomainPropertyRevisionsDTO, TPropertyRevisionDTO>
         where TDomainPropertyRevisionsDTO : DomainObjectPropertiesRevisionDTO<TIdent, TPropertyRevisionDTO>, new()
         where TPropertyRevisionDTO : PropertyRevisionDTOBase
         where TPersistentObjectBase : class, IIdentityObject<TIdent>
@@ -20,7 +20,7 @@ public class AuditService<TIdent, TBLLContext, TBLLFactoryContainer, TRootSecuri
         where TBLLContext : IBLLFactoryContainerContext<TBLLFactoryContainer>,
         ITypeResolverContainer<string>,
         ISecurityServiceContainer<TRootSecurityService>
-        where TRootSecurityService : IRootSecurityService<TPersistentObjectBase, TSecurityOperationCode>
+        where TRootSecurityService : IRootSecurityService<TPersistentObjectBase>
         where TSecurityOperationCode : struct, Enum
 {
     private readonly static Lazy<Type> _genericTPropertyRevisionDTOType = new Lazy<Type>(

@@ -14,10 +14,10 @@ public interface ITemplateGenericRepositoryFactory<out TRepository, TDomainObjec
     TRepository Create();
 }
 
-public interface ITemplateGenericRepositoryFactory<out TRepository, TDomainObject, TSecurityOperationCode> : ITemplateGenericRepositoryFactory<TRepository, TDomainObject>
+public interface ITemplateGenericRepositoryFactory<out TRepository, TDomainObject> : ITemplateGenericRepositoryFactory<TRepository, TDomainObject>
     where TSecurityOperationCode : struct, Enum
 {
-    TRepository Create(TSecurityOperationCode securityOperationCode);
+    TRepository Create(SecurityOperation securityOperation);
 
-    TRepository Create(SecurityOperation<TSecurityOperationCode> securityOperation);
+    TRepository Create(SecurityOperation securityOperation);
 }

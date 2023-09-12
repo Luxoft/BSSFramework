@@ -8,7 +8,7 @@ namespace Framework.SecuritySystem;
 public abstract class DependencyDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent,
                                                       TSecurityOperationCode> :
 
-    DependencyDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent, TSecurityOperationCode>
+    DependencyDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent>
 
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     where TDomainObject : class, TPersistentDomainObjectBase
@@ -19,7 +19,7 @@ public abstract class DependencyDomainSecurityService<TPersistentDomainObjectBas
 
     protected DependencyDomainSecurityService(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
-        IDomainSecurityService<TBaseDomainObject, TSecurityOperationCode> baseDomainSecurityService,
+        IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService,
         IQueryableSource<TPersistentDomainObjectBase> queryableSource)
 
         : base(disabledSecurityProviderSource, baseDomainSecurityService)

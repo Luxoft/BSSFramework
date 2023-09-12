@@ -6,12 +6,12 @@ using Framework.DomainDriven.BLL.Security;
 
 namespace Framework.Authorization.Domain;
 
-public class AvailablePermissionOperationFilter<TSecurityOperationCode> : AvailablePermissionFilter
+public class AvailablePermissionOperationFilter : AvailablePermissionFilter
         where TSecurityOperationCode : struct, Enum
 {
     private readonly Guid securityOperationId;
 
-    public AvailablePermissionOperationFilter(IDateTimeService dateTimeService, string principalName, TSecurityOperationCode securityOperationCode)
+    public AvailablePermissionOperationFilter(IDateTimeService dateTimeService, string principalName, SecurityOperation securityOperation)
             : base(dateTimeService, principalName)
     {
         if (securityOperationCode.IsDefault()) throw new ArgumentOutOfRangeException(nameof(securityOperationCode));

@@ -5,7 +5,7 @@ public interface IGenericRepositoryFactory<TDomainObject, in TIdent> : ITemplate
 {
 }
 
-public interface IGenericRepositoryFactory<TDomainObject, in TIdent, TSecurityOperationCode> : IGenericRepositoryFactory<TDomainObject, TIdent>, ITemplateGenericRepositoryFactory<IGenericRepository<TDomainObject, TIdent>, TDomainObject, TSecurityOperationCode>
+public interface IGenericRepositoryFactory<TDomainObject, in TIdent> : IGenericRepositoryFactory<TDomainObject, TIdent>, ITemplateGenericRepositoryFactory<IGenericRepository<TDomainObject, TIdent>, TDomainObject>
     where TSecurityOperationCode : struct, Enum
 {
 }

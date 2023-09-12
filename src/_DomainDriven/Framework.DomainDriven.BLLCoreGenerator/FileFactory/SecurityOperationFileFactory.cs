@@ -74,7 +74,7 @@ public class SecurityOperationFileFactory<TConfiguration> : FileFactory<TConfigu
 
                let expandType =
 
-                       securityOperationAttribute.OverridedSecurityExpandType ? securityOperationAttribute.SecurityExpandType
+                       securityOperationAttribute.OverridedSecurityExpandType ? securityOperationAttribute.ExpandType
                        : isContextHierarchicalView ? HierarchicalExpandType.All
                        : HierarchicalExpandType.Children
 

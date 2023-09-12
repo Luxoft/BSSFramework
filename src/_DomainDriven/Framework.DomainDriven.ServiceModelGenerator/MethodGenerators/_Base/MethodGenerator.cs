@@ -7,6 +7,7 @@ using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Security;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
@@ -221,16 +222,14 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
     {
         return typeof(TransferEnumHelper).ToTypeReferenceExpression()
                                          .ToMethodReferenceExpression(nameof(TransferEnumHelper.Check))
-                                         .ToMethodInvokeExpression(this.Parameters[parameterIndex].ToVariableReferenceExpression())
+                                         .ToMethodInvokeExpression(this.Parameters[parameterIndex].ToVariableReferenceExpression(), this.Configuration.Environment.SecurityOperationType.ToTypeReferenceExpression())
                                          .ToExpressionStatement();
     }
 
-    protected CodeExpression GetConvertSecurityOperationCodeParameterExpression(int parameterIndex, Type targetSecurityOperationType = null)
+    protected CodeExpression GetConvertSecurityOperationCodeParameterExpression(int parameterIndex)
     {
-        var realTargetSecurityOperationType = targetSecurityOperationType ?? this.Configuration.Environment.SecurityOperationCodeType;
-
         return typeof(TransferEnumHelper).ToTypeReferenceExpression()
-                                         .ToMethodReferenceExpression(nameof(TransferEnumHelper.Convert), this.Parameters[parameterIndex].Type, realTargetSecurityOperationType.ToTypeReference())
-                                         .ToMethodInvokeExpression(this.Parameters[parameterIndex].ToVariableReferenceExpression());
+                                         .ToMethodReferenceExpression(nameof(TransferEnumHelper.Convert))
+                                         .ToMethodInvokeExpression(this.Parameters[parameterIndex].ToVariableReferenceExpression(), this.Configuration.Environment.SecurityOperationType.ToTypeReferenceExpression());
     }
 }

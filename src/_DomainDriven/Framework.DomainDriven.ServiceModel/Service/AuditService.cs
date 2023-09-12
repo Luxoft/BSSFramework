@@ -104,10 +104,7 @@ public class AuditService<TIdent, TBLLContext, TBLLFactoryContainer, TRootSecuri
     {
         var viewOperation = propertyInfo.GetViewSecurityOperation();
 
-        var castedViewOperation =
-                (TSecurityOperationCode)Convert.ChangeType(viewOperation, typeof(TSecurityOperationCode));
-
-        return this._bllContext.SecurityService.GetSecurityProvider<TDomain>(castedViewOperation).HasAccess(domainObject);
+        return this._bllContext.SecurityService.GetSecurityProvider<TDomain>(viewOperation).HasAccess(domainObject);
     }
 
     private TPropertyRevisionDTO ToPropertyRevisionDTO<TDTOProperty, TProperty>(

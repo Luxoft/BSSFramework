@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Luxoft.Framework.SecuritySystem.Bss</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.SecuritySystem\Framework.SecuritySystem.csproj" />
+  </ItemGroup>
+
+</Project>

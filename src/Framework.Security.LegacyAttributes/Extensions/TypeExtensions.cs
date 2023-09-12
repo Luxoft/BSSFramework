@@ -7,6 +7,11 @@ namespace Framework.Security;
 
 public static class TypeExtensions
 {
+    internal static SecurityOperation GetSecurityOperation(this Type securityOperationType, string name)
+    {
+        return (SecurityOperation)securityOperationType.GetProperty(name)!.GetValue(null);
+    }
+
     public static Type GetDependencySecuritySourceType(this Type type, bool recurse)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));
@@ -58,20 +63,7 @@ public static class TypeExtensions
                select securityOperationCode;
     }
 
-    public static IEnumerable<Type> GetSecurityOperationTypes(this Type type)
-    {
-        yield return type;
-
-        foreach (var attr in type.GetCustomAttributes<BaseSecurityOperationTypeAttribute>())
-        {
-            foreach (var baseType in attr.BaseSecurityOperationType.GetSecurityOperationTypes())
-            {
-                yield return baseType;
-            }
-        }
-    }
-
-    public static Dictionary<Type, ReadOnlyCollection<Enum>> GetTypesWithSecondarySecurityOperations(this IEnumerable<Type> source)
+    public static Dictionary<Type, ReadOnlyCollection<SecurityOperation>> GetTypesWithSecondarySecurityOperations(this IEnumerable<Type> source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 

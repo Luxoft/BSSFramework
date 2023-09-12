@@ -11,26 +11,26 @@ namespace Framework.Security;
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct | AttributeTargets.Property)]
 public class ViewDomainObjectAttribute : DomainObjectAccessAttribute
 {
-    private readonly ReadOnlyCollection<Enum> baseSecondaryOperations;
+    private readonly ReadOnlyCollection<SecurityOperation> baseSecondaryOperations;
 
     private Type[] sourceTypes;
 
-    private ReadOnlyCollection<Enum> editSourceOperations = new ReadOnlyCollection<Enum>(new List<Enum>());
+    private ReadOnlyCollection<SecurityOperation> editSourceOperations = new ReadOnlyCollection<SecurityOperation>(new List<SecurityOperation>());
 
     /// <summary>
     /// Пустой констуктор для кастомной безопасности
     /// </summary>
     public ViewDomainObjectAttribute()
-            : this(default(Enum))
+        : this(null)
     {
     }
 
     /// <summary>
     /// Констуктор с доступом по операции
     /// </summary>
-    /// <param name="primarySecurityOperationCode">Операция просмотра</param>
-    public ViewDomainObjectAttribute(Enum primarySecurityOperationCode)
-            : this(primarySecurityOperationCode, new Enum[0])
+    /// <param name="primarySecurityOperation">Операция просмотра</param>
+    public ViewDomainObjectAttribute(Type securityOperationType, string primarySecurityOperation)
+        : this(securityOperationType, primarySecurityOperation, new string[0])
     {
     }
 
@@ -39,23 +39,31 @@ public class ViewDomainObjectAttribute : DomainObjectAccessAttribute
     /// </summary>
     /// <param name="viewSecurityType">Доменный тип</param>
     public ViewDomainObjectAttribute(Type viewSecurityType)
-            : this(viewSecurityType.GetViewDomainObjectCode(true))
+        : base(viewSecurityType.GetViewSecurityOperation(true))
     {
     }
 
     /// <summary>
     /// Констуктор с доступом по операциям
     /// </summary>
-    /// <param name="primarySecurityOperationCode">Операция просмотра</param>
+    /// <param name="primarySecurityOperation">Операция просмотра</param>
     /// <param name="baseSecondaryOperations">Дополнительные операции для просмотра</param>
-    public ViewDomainObjectAttribute(SecurityOperation primarySecurityOperationCode, IEnumerable<SecurityOperation> baseSecondaryOperations)
-            : base(primarySecurityOperationCode)
+    public ViewDomainObjectAttribute(
+        Type securityOperationType,
+        string primarySecurityOperation,
+        IEnumerable<string> baseSecondaryOperations)
+        : this(
+            securityOperationType.Maybe(v => v.GetSecurityOperation(primarySecurityOperation)),
+            baseSecondaryOperations.Select(v => securityOperationType.GetSecurityOperation(v)))
+    {
+    }
+
+    protected ViewDomainObjectAttribute(SecurityOperation primarySecurityOperation, IEnumerable<SecurityOperation> baseSecondaryOperations)
+        : base(primarySecurityOperation)
     {
         if (baseSecondaryOperations == null) throw new ArgumentNullException(nameof(baseSecondaryOperations));
 
         this.baseSecondaryOperations = baseSecondaryOperations.ToReadOnlyCollection();
-
-        this.IsContext = this.SecurityOperationCode.Maybe(code => code.GetSecurityOperationAttribute().IsContext);
 
         this.CheckSecondaryOperations(this.baseSecondaryOperations);
     }
@@ -63,26 +71,22 @@ public class ViewDomainObjectAttribute : DomainObjectAccessAttribute
     /// <summary>
     /// Дополнительные операции для просмотра
     /// </summary>
-    public IEnumerable<Enum> SecondaryOperations => this.baseSecondaryOperations.Concat(this.editSourceOperations).Distinct();
+    public IEnumerable<SecurityOperation> SecondaryOperations => this.baseSecondaryOperations.Concat(this.editSourceOperations).Distinct();
 
     /// <summary>
     /// Все операции для просмотра объекта
     /// </summary>
-    public IEnumerable<Enum> AllOperations => new[] { this.SecurityOperationCode }.Concat(this.SecondaryOperations).Distinct();
+    public IEnumerable<SecurityOperation> AllOperations => new[] { this.SecurityOperation }.Concat(this.SecondaryOperations).Distinct();
 
     /// <summary>
     /// Типы, для редактирования которых требуется данный объекта (из типов забираются edit-операции)
     /// </summary>
     public Type[] SourceTypes
     {
-        get
-        {
-            return this.sourceTypes.ToArray();
-        }
-
+        get { return this.sourceTypes.ToArray(); }
         set
         {
-            var operations = value.ToReadOnlyCollection(type => type.GetEditDomainObjectCode(true));
+            var operations = value.ToReadOnlyCollection(type => type.GetEditSecurityOperation(true));
 
             this.CheckSecondaryOperations(operations);
 
@@ -91,15 +95,13 @@ public class ViewDomainObjectAttribute : DomainObjectAccessAttribute
         }
     }
 
-    private bool IsContext { get; }
-
-    private void CheckSecondaryOperations(IEnumerable<Enum> secondaryOperations)
+    private void CheckSecondaryOperations(IEnumerable<SecurityOperation> secondaryOperations)
     {
         if (secondaryOperations == null) throw new ArgumentNullException(nameof(secondaryOperations));
 
-        if (this.IsContext)
+        if (this.HasContext)
         {
-            var nonContextOperations = secondaryOperations.Where(operation => !operation.GetSecurityOperationAttribute().IsContext).ToList();
+            var nonContextOperations = secondaryOperations.Where(operation => !(operation is ContextSecurityOperation)).ToList();
 
             if (nonContextOperations.Any())
             {

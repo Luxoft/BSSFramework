@@ -102,7 +102,7 @@ public class AuditService<TIdent, TBLLContext, TBLLFactoryContainer, TRootSecuri
     private bool HassAccess<TDomain>(TDomain domainObject, PropertyInfo propertyInfo)
             where TDomain : class, TPersistentObjectBase
     {
-        var viewOperation = propertyInfo.GetViewDomainObjectCode();
+        var viewOperation = propertyInfo.GetViewSecurityOperation();
 
         var castedViewOperation =
                 (TSecurityOperationCode)Convert.ChangeType(viewOperation, typeof(TSecurityOperationCode));

@@ -491,8 +491,8 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
             return false;
         }
 
-        var viewCode = domainType.GetViewDomainObjectCode();
-        var editCode = domainType.GetEditDomainObjectCode();
+        var viewCode = domainType.GetViewSecurityOperation();
+        var editCode = domainType.GetEditSecurityOperation();
 
         var membersRequest = from securityOperationCode in this.Environment.GetSecurityOperationCodes()
 

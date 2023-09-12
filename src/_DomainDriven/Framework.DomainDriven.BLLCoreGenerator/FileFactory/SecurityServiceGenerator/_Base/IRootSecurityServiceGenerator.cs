@@ -14,13 +14,8 @@ public interface IRootSecurityServiceGenerator
 
     IEnumerable<CodeTypeReference> GetBLLContextBaseTypes();
 
-    IEnumerable<CodeTypeMember> GetBLLContextMembers();
-
 
     CodeTypeReference GetGenericRootSecurityServiceType();
 
     CodeTypeReference GetGenericRootSecurityServiceInterfaceType();
-
-
-    CodeTypeReference GetDomainInterfaceBaseServiceType();
 }

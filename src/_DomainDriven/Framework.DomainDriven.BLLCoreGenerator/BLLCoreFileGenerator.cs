@@ -27,10 +27,7 @@ public class BLLCoreFileGenerator<TConfiguration> : CodeFileGenerator<TConfigura
 
     protected override IEnumerable<ICodeFile> GetInternalFileGenerators()
     {
-        if (this.Configuration.Environment.SecurityOperationCodeType.IsEnum)
-        {
-            yield return new SecurityOperationFileFactory<TConfiguration>(this.Configuration);
-        }
+        yield return new SecurityOperationResolverFileFactory<TConfiguration>(this.Configuration);
 
         yield return new BLLContextFileFactory<TConfiguration>(this.Configuration);
         yield return new BLLContextInterfaceFileFactory<TConfiguration>(this.Configuration);

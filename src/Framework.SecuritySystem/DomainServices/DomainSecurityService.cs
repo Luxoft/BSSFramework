@@ -20,7 +20,17 @@ public abstract class DomainSecurityService<TPersistentDomainObjectBase, TDomain
         this.disabledSecurityProviderSource = disabledSecurityProviderSource;
         this.securityOperationResolver = securityOperationResolver ?? throw new ArgumentNullException(nameof(securityOperationResolver));
 
-        this.operationsProvidersCache = new DictionaryCache<SecurityOperation, ISecurityProvider<TDomainObject>>(this.CreateSecurityProvider).WithLock();
+        this.operationsProvidersCache = new DictionaryCache<SecurityOperation, ISecurityProvider<TDomainObject>>(securityOperation =>
+        {
+            if (securityOperation is DisabledSecurityOperation)
+            {
+                return disabledSecurityProviderSource.GetDisabledSecurityProvider<TDomainObject>();
+            }
+            else
+            {
+                return this.CreateSecurityProvider(securityOperation);
+            }
+        }).WithLock();
 
         this.modeProvidersCache = new DictionaryCache<BLLSecurityMode, ISecurityProvider<TDomainObject>>(securityMode =>
         {

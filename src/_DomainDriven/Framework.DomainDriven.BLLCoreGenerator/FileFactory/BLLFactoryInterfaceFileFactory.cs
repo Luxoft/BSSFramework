@@ -47,12 +47,7 @@ public class BLLFactoryInterfaceFileFactory<TConfiguration> : FileFactory<TConfi
 
         if (this.DomainType.IsSecurity())
         {
-            if (this.Configuration.Environment.SecurityOperationCodeType.IsEnum)
-            {
-                yield return toSecurityBLLContainerTypeRef(this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference());
-
-                yield return toSecurityBLLContainerTypeRef(typeof(SecurityOperation<>).MakeGenericType(this.Configuration.Environment.SecurityOperationCodeType).ToTypeReference());
-            }
+            yield return toSecurityBLLContainerTypeRef(typeof(SecurityOperation).ToTypeReference());
 
             yield return toSecurityBLLContainerTypeRef(this.Configuration.GetBLLSecurityModeType(this.DomainType).ToTypeReference());
         }

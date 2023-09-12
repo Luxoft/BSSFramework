@@ -41,11 +41,7 @@ public abstract class RootSecurityServiceGenerator<TConfiguration> : GeneratorCo
 
     public abstract IEnumerable<CodeTypeReference> GetBLLContextBaseTypes();
 
-    public abstract IEnumerable<CodeTypeMember> GetBLLContextMembers();
-
     public abstract CodeTypeReference GetGenericRootSecurityServiceType();
 
     public abstract CodeTypeReference GetGenericRootSecurityServiceInterfaceType();
-
-    public abstract CodeTypeReference GetDomainInterfaceBaseServiceType();
 }

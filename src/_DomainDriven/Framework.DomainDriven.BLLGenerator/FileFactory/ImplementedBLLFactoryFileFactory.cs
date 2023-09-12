@@ -26,17 +26,15 @@ public class ImplementedBLLFactoryFileFactory<TConfiguration> : FileFactory<TCon
         var contextParameter = contextTypeRef.ToParameterDeclarationExpression("context");
         var contextParameterRefExpr = contextParameter.ToVariableReferenceExpression();
 
-        var baseTypeRef = typeof(DefaultSecurityBLLFactory<,,,,>)
+        var baseTypeRef = typeof(DefaultSecurityBLLFactory<,,,>)
                 .ToTypeReference(this.Configuration.BLLContextTypeReference,
                                  this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
                                  this.Configuration.Environment.DomainObjectBaseType.ToTypeReference(),
-                                 this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference(),
                                  this.Configuration.Environment.GetIdentityType().ToTypeReference());
 
-        var interfaceBase = typeof(IDefaultSecurityBLLFactory<,,>).
+        var interfaceBase = typeof(IDefaultSecurityBLLFactory<,>).
                 ToTypeReference(
                                 this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
-                                this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference(),
                                 this.Configuration.Environment.GetIdentityType().ToTypeReference());
 
         return new CodeTypeDeclaration

@@ -28,12 +28,11 @@ public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurity
 
         this.hasContext = this.Configuration.HasSecurityContext(this.DomainType);
 
-        this.BaseServiceType = (this.hasContext ? typeof(ContextDomainSecurityService<,,,>) : typeof(NonContextDomainSecurityService<,,,>)).ToTypeReference(
+        this.BaseServiceType = (this.hasContext ? typeof(ContextDomainSecurityServiceBase<,,>) : typeof(NonContextDomainSecurityService<,,>)).ToTypeReference(
 
          this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
          this.DomainTypeReference,
-         this.Configuration.Environment.GetIdentityType().ToTypeReference(),
-         this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference());
+         this.Configuration.Environment.GetIdentityType().ToTypeReference());
 
 
         if (this.hasContext)
@@ -81,7 +80,7 @@ public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurity
     public override IEnumerable<(CodeTypeReference ParameterType, string Name)> GetBaseTypeConstructorParameters()
     {
         yield return (typeof(IDisabledSecurityProviderSource).ToTypeReference(), "disabledSecurityProviderSource");
-        yield return (typeof(ISecurityOperationResolver<,>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType, this.Configuration.Environment.SecurityOperationCodeType), "securityOperationResolver");
+        yield return (typeof(ISecurityOperationResolver<>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType), "securityOperationResolver");
         yield return (typeof(IAuthorizationSystem<>).ToTypeReference(this.Configuration.Environment.GetIdentityType()), "authorizationSystem");
 
         if (this.hasContext)

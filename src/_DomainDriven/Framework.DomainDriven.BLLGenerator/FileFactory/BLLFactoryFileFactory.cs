@@ -27,20 +27,11 @@ public class BLLFactoryFileFactory<TConfiguration> : FileFactory<TConfiguration>
     public CodeTypeReference BLLFactoryInterfaceRef => this.Configuration.Environment.BLLCore.GetCodeTypeReference(this.DomainType, BLLCoreGenerator.FileType.BLLFactoryInterface);
 
 
-    private Type SecurityCodeType => this.Configuration.Environment.SecurityOperationCodeType;
-
     private CodeTypeReference GetBaseReference()
     {
         if (this.DomainType.IsSecurity())
         {
-            if (this.Configuration.Environment.SecurityOperationCodeType.IsEnum)
-            {
-                return typeof(SecurityBLLFactory<,,,,>).ToTypeReference(this.Configuration.BLLContextTypeReference, this.BLLInterfaceRef, this.BLLRef, this.DomainType.ToTypeReference(), this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference());
-            }
-            else
-            {
-                return typeof(SecurityBLLFactoryBase<,,,>).ToTypeReference(this.Configuration.BLLContextTypeReference, this.BLLInterfaceRef, this.BLLRef, this.DomainType.ToTypeReference());
-            }
+            return typeof(SecurityBLLFactoryBase<,,,>).ToTypeReference(this.Configuration.BLLContextTypeReference, this.BLLInterfaceRef, this.BLLRef, this.DomainType.ToTypeReference());
         }
         else
         {

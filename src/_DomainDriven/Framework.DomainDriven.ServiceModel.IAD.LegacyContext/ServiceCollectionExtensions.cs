@@ -112,7 +112,7 @@ public static class ServiceCollectionExtensions
 
                .AddScopedFrom<Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContext, IConfigurationBLLContext>()
 
-               .AddScopedFrom<ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase>, ConfigurationSecurityOperationResolver>()
+               .AddSingleton<ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase>, ConfigurationSecurityOperationResolver>()
 
                .AddScopedFrom<IConfigurationSecurityPathContainer, IConfigurationSecurityService>()
                .AddScoped<IQueryableSource<Framework.Configuration.Domain.PersistentDomainObjectBase>, BLLQueryableSource<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectBase, Guid>>()

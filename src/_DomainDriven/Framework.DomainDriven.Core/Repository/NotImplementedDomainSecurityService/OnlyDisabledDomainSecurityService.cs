@@ -13,21 +13,23 @@ public class OnlyDisabledDomainSecurityService<TDomainObject> : INotImplementedD
 
     public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityOperation securityOperation)
     {
-        return this.GetSecurityProviderInternal(securityOperation);
+        return this.GetSecurityProviderInternal(securityOperation, securityOperation is DisabledSecurityOperation);
     }
 
     public ISecurityProvider<TDomainObject> GetSecurityProvider(BLLSecurityMode securityMode)
     {
-        return this.GetSecurityProviderInternal(securityMode);
+        return this.GetSecurityProviderInternal(securityMode, securityMode == BLLSecurityMode.Disabled);
     }
 
-    public ISecurityProvider<TDomainObject> GetSecurityProviderInternal<TSecurityMode>(TSecurityMode securityMode)
+    private ISecurityProvider<TDomainObject> GetSecurityProviderInternal<TSecurityMode>(TSecurityMode securityMode, bool isDisabled)
     {
-        if (!(securityMode is DisabledSecurityOperation))
+        if (isDisabled)
+        {
+            return this.disabledSecurityProviderSource.GetDisabledSecurityProvider<TDomainObject>();
+        }
+        else
         {
             throw new InvalidOperationException($"Security mode \"{securityMode}\" not allowed");
         }
-
-        return this.disabledSecurityProviderSource.GetDisabledSecurityProvider<TDomainObject>();
     }
 }

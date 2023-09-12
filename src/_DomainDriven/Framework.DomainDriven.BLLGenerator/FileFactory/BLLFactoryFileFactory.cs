@@ -29,14 +29,7 @@ public class BLLFactoryFileFactory<TConfiguration> : FileFactory<TConfiguration>
 
     private CodeTypeReference GetBaseReference()
     {
-        if (this.DomainType.IsSecurity())
-        {
-            return typeof(SecurityBLLFactoryBase<,,,>).ToTypeReference(this.Configuration.BLLContextTypeReference, this.BLLInterfaceRef, this.BLLRef, this.DomainType.ToTypeReference());
-        }
-        else
-        {
-            return typeof(BLLFactoryBase<,,,>).ToTypeReference(this.Configuration.BLLContextTypeReference, this.BLLInterfaceRef, this.BLLRef, this.DomainType.ToTypeReference());
-        }
+        return typeof(SecurityBLLFactory<,,,>).ToTypeReference(this.Configuration.BLLContextTypeReference, this.BLLInterfaceRef, this.BLLRef, this.DomainType.ToTypeReference());
     }
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()

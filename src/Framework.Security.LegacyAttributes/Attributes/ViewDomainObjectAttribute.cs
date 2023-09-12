@@ -21,7 +21,7 @@ public class ViewDomainObjectAttribute : DomainObjectAccessAttribute
     /// Пустой констуктор для кастомной безопасности
     /// </summary>
     public ViewDomainObjectAttribute()
-        : this(null)
+        : base(null)
     {
     }
 

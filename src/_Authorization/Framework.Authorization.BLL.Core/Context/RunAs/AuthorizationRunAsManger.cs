@@ -25,7 +25,7 @@ public class AuthorizationRunAsManger : BLLContextContainer<IAuthorizationBLLCon
 
         lock (this._locker)
         {
-            this.Context.CheckAccess(AuthorizationSecurityOperationCode.AuthorizationImpersonate, false);
+            this.Context.CheckAccess(AuthorizationSecurityOperation.AuthorizationImpersonate, false);
 
             if (string.Equals(principalName, this._cache.Maybe(v => v.Item1), StringComparison.CurrentCultureIgnoreCase))
             {

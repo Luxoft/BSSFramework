@@ -11,7 +11,7 @@ using Framework.SecuritySystem;
 
 namespace Framework.Authorization.BLL;
 
-public partial interface IAuthorizationBLLContext :
+public partial interface IAuthorizationBLLContext:
 
         IAuthorizationBLLContext<Guid>,
 

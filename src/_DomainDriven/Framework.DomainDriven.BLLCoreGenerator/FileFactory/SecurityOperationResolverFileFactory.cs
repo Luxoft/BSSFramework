@@ -75,7 +75,7 @@ public class SecurityOperationResolverFileFactory<TConfiguration> : FileFactory<
                {
                        Attributes = MemberAttributes.Public,
 
-                       Name = "GetCodeByMode",
+                       Name = "GetSecurityOperation",
 
                        ReturnType = typeof(SecurityOperation).ToTypeReference(),
 
@@ -99,12 +99,12 @@ public class SecurityOperationResolverFileFactory<TConfiguration> : FileFactory<
                                          Condition = new CodeValueEqualityOperatorExpression(modeParameterRefExpr, BLLSecurityMode.Disabled.ToDynamicPrimitiveExpression()),
                                          TrueStatements =
                                          {
-                                             this.Configuration.GetDisabledSecurityCodeExpression()
+                                             this.Configuration.GetDisabledSecurityCodeExpression().ToMethodReturnStatement()
                                          },
 
                                          FalseStatements =
                                          {
-                                             new CodeThisReferenceExpression().ToMethodInvokeExpression(getCodeByModeMethodName, genericDomainObjectParameterTypeRefExpr, modeParameterRefExpr)
+                                             new CodeThisReferenceExpression().ToMethodInvokeExpression(getCodeByModeMethodName, genericDomainObjectParameterTypeRefExpr, modeParameterRefExpr).ToMethodReturnStatement()
                                          }
                                  };
 

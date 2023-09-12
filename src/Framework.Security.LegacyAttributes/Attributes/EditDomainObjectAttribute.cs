@@ -10,7 +10,7 @@ public class EditDomainObjectAttribute : DomainObjectAccessAttribute
     /// Пустой констуктор для кастомной безопасности
     /// </summary>
     public EditDomainObjectAttribute()
-        : this(null, null)
+        : base(null)
     {
     }
 

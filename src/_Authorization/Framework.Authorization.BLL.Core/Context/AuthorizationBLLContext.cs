@@ -161,17 +161,16 @@ public partial class AuthorizationBLLContext
         return this.HasAccess(new AvailablePermissionOperationFilter(this.DateTimeService, this.RunAsManager.PrincipalName, operation));
     }
 
-    public bool HasAccess(SecurityOperation securityOperation, bool withRunAs)
-            where TSecurityOperationCode : struct, Enum
+    public bool HasAccess(NonContextSecurityOperation securityOperation, bool withRunAs)
     {
-        if (securityOperationCode.IsDefault()) { throw new ArgumentOutOfRangeException(); }
+        var typedSecurityOperation = (NonContextSecurityOperation<Guid>)securityOperation;
 
         var principalName = withRunAs ? this.RunAsManager.PrincipalName : this.CurrentPrincipalName;
 
         var filter = new AvailablePermissionOperationFilter(
-                                                                                    this.DateTimeService,
-                                                                                    principalName,
-                                                                                    securityOperationCode);
+            this.DateTimeService,
+            principalName,
+            typedSecurityOperation.Id);
 
         return this.HasAccess(filter);
     }
@@ -181,27 +180,24 @@ public partial class AuthorizationBLLContext
         return this.Logics.BusinessRole.HasAdminRole();
     }
 
-    public bool HasAccess(SecurityOperation securityOperation)
-            where TSecurityOperationCode : struct, Enum
+    public bool HasAccess(NonContextSecurityOperation securityOperation)
     {
-        return this.HasAccess(securityOperationCode, true);
+        return this.HasAccess(securityOperation, true);
     }
 
-    public void CheckAccess(SecurityOperation securityOperation)
-        where TSecurityOperationCode : struct, Enum
+    public void CheckAccess(NonContextSecurityOperation securityOperation)
     {
-        this.CheckAccess(securityOperationCode, true);
+        this.CheckAccess(securityOperation, true);
     }
 
-    public void CheckAccess(SecurityOperation securityOperation, bool withRunAs)
-        where TSecurityOperationCode : struct, Enum
+    public void CheckAccess(NonContextSecurityOperation securityOperation, bool withRunAs)
     {
-        if (!this.HasAccess(securityOperationCode, withRunAs))
+        if (!this.HasAccess(securityOperation, withRunAs))
         {
             throw this.AccessDeniedExceptionService.GetAccessDeniedException(
                 new AccessResult.AccessDeniedResult
                 {
-                    SecurityOperation = new NonContextSecurityOperation(securityOperationCode)
+                    SecurityOperation = securityOperation
                 });
         }
     }
@@ -219,13 +215,15 @@ public partial class AuthorizationBLLContext
     public List<Dictionary<Type, IEnumerable<Guid>>> GetPermissions(
             ContextSecurityOperation securityOperation,
             IEnumerable<Type> securityTypes)
-            where TSecurityOperationCode : struct, Enum
     {
-        if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
         if (securityTypes == null) throw new ArgumentNullException(nameof(securityTypes));
 
+        var typedSecurityOperation = (ContextSecurityOperation<Guid>)securityOperation;
+
         var filter = new AvailablePermissionOperationFilter(
-                                                                                    this.DateTimeService, this.RunAsManager.PrincipalName, securityOperation.Code);
+            this.DateTimeService,
+            this.RunAsManager.PrincipalName,
+            typedSecurityOperation.Id);
 
         var permissions = this.Logics.Permission.GetListBy(
                                                            filter, z => z.SelectMany(q => q.FilterItems).SelectNested(q => q.Entity).Select(q => q.EntityType));
@@ -239,10 +237,14 @@ public partial class AuthorizationBLLContext
     }
 
     public IQueryable<IPermission<Guid>> GetPermissionQuery(ContextSecurityOperation securityOperation)
-            where TSecurityOperationCode : struct, Enum
     {
+
+        var typedSecurityOperation = (ContextSecurityOperation<Guid>)securityOperation;
+
         var filter = new AvailablePermissionOperationFilter(
-                                                                                    this.DateTimeService, this.RunAsManager.PrincipalName, securityOperation.Code);
+            this.DateTimeService,
+            this.RunAsManager.PrincipalName,
+            typedSecurityOperation.Id);
 
         return this.Logics.Permission.GetUnsecureQueryable().Where(filter.ToFilterExpression());
     }
@@ -273,16 +275,15 @@ public partial class AuthorizationBLLContext
     //public Guid GrandAccessIdent { get; } = DenormalizedPermissionItem.GrandAccessGuid;
 
     public IEnumerable<string> GetAccessors(
-            SecurityOperation securityOperation, Expression<Func<IPrincipal<Guid>, bool>> principalFilter)
-            where TSecurityOperationCode : struct, Enum
+            NonContextSecurityOperation securityOperation, Expression<Func<IPrincipal<Guid>, bool>> principalFilter)
     {
         if (principalFilter == null) throw new ArgumentNullException(nameof(principalFilter));
 
-
+        var typedSecurityOperation = (NonContextSecurityOperation<Guid>)securityOperation;
 
         return this.GetAccessors(
                                  (Expression<Func<Principal, bool>>)AuthVisitor.Visit(principalFilter),
-                                 new AvailablePermissionOperationFilter(this.DateTimeService, null, securityOperationCode));
+                                 new AvailablePermissionOperationFilter(this.DateTimeService, null, typedSecurityOperation.Id));
     }
 
     private Dictionary<Type, IEnumerable<Guid>> TryExpandPermission(Dictionary<Type, List<Guid>> permission, HierarchicalExpandType expandType)

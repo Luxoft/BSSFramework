@@ -6,7 +6,7 @@ public static class AuthorizationSecurityOperation
 {
     public static DisabledSecurityOperation Disabled { get; } = new();
 
-    public static NonContextSecurityOperation<Guid> PrincipalView { get; } = new(nameof(PrincipalView), new Guid("{5031A272-B730-4E65-9D56-50B3E0441C4F"));
+    public static NonContextSecurityOperation<Guid> PrincipalView { get; } = new(nameof(PrincipalView), new Guid("{5031A272-B730-4E65-9D56-50B3E0441C4F}"));
 
     public static NonContextSecurityOperation<Guid> PrincipalEdit { get; } = new(nameof(PrincipalEdit), new Guid("{3DC58D7B-85A0-43E1-8E54-E23F9A360E7B}"));
 

@@ -77,7 +77,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     protected override string NamespacePostfix { get; } = "BLL";
 
-    public virtual string GetOperationByModeMethodName { get; } = "GetByMode";
+    public virtual string GetOperationByModeMethodName { get; } = "GetSecurityOperation";
 
     public ReadOnlyCollection<Type> SecurityServiceDomainTypes => this.lazySecurityServiceDomainTypes.Value;
 

@@ -5,13 +5,18 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.BLL.Security;
 
-public abstract class BLLFactoryBase<TBLLContext, TBLL, TBLLImpl, TDomainObject> : BLLContextContainer<TBLLContext>, ISecurityBLLFactory<TBLL, ISecurityProvider<TDomainObject>>
+public abstract class SecurityBLLFactory<TBLLContext, TBLL, TBLLImpl, TDomainObject> :
+    BLLContextContainer<TBLLContext>,
+    ISecurityBLLFactory<TBLL, BLLSecurityMode>,
+    ISecurityBLLFactory<TBLL, SecurityOperation>,
+    ISecurityBLLFactory<TBLL, ISecurityProvider<TDomainObject>>
 
-        where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService<TDomainObject>>, IServiceProviderContainer
-        where TBLLImpl : TBLL
-        where TDomainObject : class
+    where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService<TDomainObject>>, IServiceProviderContainer
+    where TDomainObject : class
+    where TBLLImpl : TBLL
 {
-    protected BLLFactoryBase(TBLLContext context) : base(context)
+    protected SecurityBLLFactory(TBLLContext context)
+        : base(context)
     {
     }
 
@@ -22,44 +27,18 @@ public abstract class BLLFactoryBase<TBLLContext, TBLL, TBLLImpl, TDomainObject>
         return this.Create(disabledProvider);
     }
 
-    public virtual TBLL Create(ISecurityProvider<TDomainObject> securityProvider)
-    {
-        return ActivatorUtilities.CreateInstance<TBLLImpl>(this.Context.ServiceProvider, securityProvider);
-    }
-}
-
-
-public abstract class SecurityBLLFactoryBase<TBLLContext, TBLL, TBLLImpl, TDomainObject> : BLLFactoryBase<TBLLContext, TBLL, TBLLImpl, TDomainObject>, ISecurityBLLFactory<TBLL, BLLSecurityMode>
-
-        where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService<TDomainObject>>, IServiceProviderContainer
-        where TDomainObject : class
-        where TBLLImpl : TBLL
-{
-    protected SecurityBLLFactoryBase(TBLLContext context)
-            : base(context)
-    {
-    }
-
     public TBLL Create(BLLSecurityMode securityMode)
     {
         return this.Create(this.Context.SecurityService.GetSecurityProvider<TDomainObject>(securityMode));
-    }
-}
-
-
-public abstract class SecurityBLLFactory<TBLLContext, TBLL, TBLLImpl, TDomainObject> : SecurityBLLFactoryBase<TBLLContext, TBLL, TBLLImpl, TDomainObject>, ISecurityBLLFactory<TBLL, SecurityOperation>
-
-        where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService<TDomainObject>>, IServiceProviderContainer
-        where TDomainObject : class
-        where TBLLImpl : TBLL
-{
-    protected SecurityBLLFactory(TBLLContext context)
-            : base(context)
-    {
     }
 
     public TBLL Create(SecurityOperation securityOperation)
     {
         return this.Create(this.Context.SecurityService.GetSecurityProvider<TDomainObject>(securityOperation));
+    }
+
+    public virtual TBLL Create(ISecurityProvider<TDomainObject> securityProvider)
+    {
+        return ActivatorUtilities.CreateInstance<TBLLImpl>(this.Context.ServiceProvider, securityProvider);
     }
 }

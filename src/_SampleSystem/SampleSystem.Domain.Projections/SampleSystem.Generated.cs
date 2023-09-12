@@ -768,7 +768,7 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation), "EmployeePositionEdit")]
+        [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation), "EmployeePositionView")]
         [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.AutoNode)]
         [Framework.Persistent.Mapping.MappingAttribute(ColumnName="positionId")]
@@ -781,7 +781,7 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation), "EmployeePositionEdit")]
+        [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation), "EmployeePositionView")]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
         [Framework.Persistent.ExpandPathAttribute("Position_Auto.Name_Last_PositionName")]
         [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]

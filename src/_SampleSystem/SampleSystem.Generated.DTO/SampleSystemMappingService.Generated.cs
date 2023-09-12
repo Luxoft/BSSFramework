@@ -2838,7 +2838,7 @@ namespace SampleSystem.Generated.DTO
             {
                 mappingObject.PersonalAssistant = null;
             }
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeePositionEdit).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeePositionView).HasAccess(domainObject))
             {
                 SampleSystem.Generated.DTO.EmployeePositionSimpleDTO resultPosition;
                 if (!object.ReferenceEquals(domainObject.Position, null))
@@ -3017,7 +3017,7 @@ namespace SampleSystem.Generated.DTO
             Framework.Core.Just<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO> justPosition = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>>(mappingObject.Position);
             if (!object.ReferenceEquals(justPosition, null))
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeePositionView).HasAccess(domainObject))
+                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeePositionEdit).HasAccess(domainObject))
                 {
                     if (!object.Equals(justPosition.Value, default(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO)))
                     {
@@ -3149,7 +3149,7 @@ namespace SampleSystem.Generated.DTO
             Framework.Core.Just<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO> justPosition = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>>(mappingObject.Position);
             if (!object.ReferenceEquals(justPosition, null))
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeePositionView).HasAccess(domainObject))
+                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeePositionEdit).HasAccess(domainObject))
                 {
                     if (!object.Equals(justPosition.Value, default(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO)))
                     {
@@ -6722,7 +6722,7 @@ namespace SampleSystem.Generated.DTO
                 mappingObject.Login = Framework.Core.Maybe<string>.Nothing;
             }
             mappingObject.NameEngFirstName = domainObject.NameEngFirstName;
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestEmployee>(SampleSystem.SampleSystemSecurityOperation.EmployeePositionEdit).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestEmployee>(SampleSystem.SampleSystemSecurityOperation.EmployeePositionView).HasAccess(domainObject))
             {
                 string resultPositionName;
                 resultPositionName = domainObject.PositionName;

@@ -346,8 +346,8 @@ public partial class Employee :
         set { this.lastActionDate = value; }
     }
 
-    [ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeePositionEdit))]
-    [EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeePositionView))]
+    [ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeePositionView))]
+    [EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeePositionEdit))]
     public virtual EmployeePosition Position
     {
         get { return this.position; }

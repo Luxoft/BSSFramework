@@ -11,7 +11,6 @@ namespace Framework.SecuritySystem.Providers.Operation
     /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
     /// <typeparam name="TDomainObject"></typeparam>
     /// <typeparam name="TIdent"></typeparam>
-    /// <typeparam name="TSecurityOperationCode"></typeparam>
     public class ContextSecurityPathProvider<TPersistentDomainObjectBase, TDomainObject, TIdent> : ISecurityProvider<TDomainObject>
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>

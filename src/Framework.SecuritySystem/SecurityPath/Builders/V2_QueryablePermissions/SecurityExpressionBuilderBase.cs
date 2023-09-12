@@ -28,8 +28,7 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
     }
 
 
-    public Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression<TSecurityOperation>(ContextSecurityOperation securityOperation)
-            where TSecurityOperation : struct, Enum
+    public Expression<Func<TDomainObject, bool>> GetSecurityFilterExpression(ContextSecurityOperation securityOperation)
     {
         var filterExpression = this.GetSecurityFilterExpression(securityOperation.ExpandType).ExpandConst().InlineEval();
 

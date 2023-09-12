@@ -39,7 +39,7 @@ public class SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject
 
                                                                               var filter = baseFilter.OverrideInput((IPrincipal<TIdent> principal) => principal.Permissions);
 
-                                                                              return builder.Factory.AuthorizationSystem.GetAccessors(securityOperation.Code, filter);
+                                                                              return builder.Factory.AuthorizationSystem.GetAccessors(securityOperation.ToNonContext(), filter);
                                                                           }));
     }
 

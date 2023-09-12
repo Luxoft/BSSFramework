@@ -6,6 +6,5 @@ public interface ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomain
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase
 {
-    ISecurityExpressionFilter<TDomainObject> GetFilter(ContextSecurityOperation securityOperation)
-            where TSecurityOperationCode : struct, Enum;
+    ISecurityExpressionFilter<TDomainObject> GetFilter(ContextSecurityOperation securityOperation);
 }

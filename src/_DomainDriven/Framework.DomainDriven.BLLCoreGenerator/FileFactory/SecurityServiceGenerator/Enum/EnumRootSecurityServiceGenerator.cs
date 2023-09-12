@@ -89,7 +89,7 @@ public class EnumRootSecurityServiceGenerator<TConfiguration> : RootSecurityServ
 
     public override IEnumerable<CodeTypeReference> GetBLLContextBaseTypes()
     {
-        yield return typeof(ISecurityOperationResolver<,>).MakeGenericType(this.Configuration.Environment.PersistentDomainObjectBaseType, this.Configuration.Environment.SecurityOperationCodeType).ToTypeReference();
+        yield return typeof(ISecurityOperationResolver<>).MakeGenericType(this.Configuration.Environment.PersistentDomainObjectBaseType, this.Configuration.Environment.SecurityOperationCodeType).ToTypeReference();
     }
 
     public override IEnumerable<CodeTypeMember> GetBLLContextMembers()

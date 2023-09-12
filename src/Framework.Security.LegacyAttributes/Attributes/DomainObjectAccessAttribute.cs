@@ -1,4 +1,4 @@
-﻿using Framework.Core;
+﻿using Framework.SecuritySystem;
 
 namespace Framework.Security;
 
@@ -10,17 +10,17 @@ public class DomainObjectAccessAttribute : Attribute
 
     }
 
-    protected DomainObjectAccessAttribute(Enum securityOperationCode)
+    protected DomainObjectAccessAttribute(SecurityOperation securityOperation)
     {
-        this.SecurityOperationCode = securityOperationCode;
+        this.SecurityOperation = securityOperation;
     }
 
 
-    public Enum SecurityOperationCode { get; private set; }
+    public SecurityOperation SecurityOperation { get; private set; }
 
 
     public bool HasContext
     {
-        get { return this.SecurityOperationCode.Maybe(v => v.ToFieldInfo().HasAttribute<SecurityOperationAttribute>(attr => attr.IsContext)); }
+        get { return this.SecurityOperation is ContextSecurityOperation; }
     }
 }

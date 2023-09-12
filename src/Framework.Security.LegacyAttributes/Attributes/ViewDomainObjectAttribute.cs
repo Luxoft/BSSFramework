@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 
 using Framework.Core;
+using Framework.SecuritySystem;
 
 namespace Framework.Security;
 
@@ -47,7 +48,7 @@ public class ViewDomainObjectAttribute : DomainObjectAccessAttribute
     /// </summary>
     /// <param name="primarySecurityOperationCode">Операция просмотра</param>
     /// <param name="baseSecondaryOperations">Дополнительные операции для просмотра</param>
-    public ViewDomainObjectAttribute(Enum primarySecurityOperationCode, IEnumerable<Enum> baseSecondaryOperations)
+    public ViewDomainObjectAttribute(SecurityOperation primarySecurityOperationCode, IEnumerable<SecurityOperation> baseSecondaryOperations)
             : base(primarySecurityOperationCode)
     {
         if (baseSecondaryOperations == null) throw new ArgumentNullException(nameof(baseSecondaryOperations));

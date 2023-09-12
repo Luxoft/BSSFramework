@@ -15,7 +15,7 @@ public record ForcePushEventHandler(
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        this.AuthorizationSystem.CheckAccess(ConfigurationSecurityOperationCode.ForceDomainTypeEvent);
+        this.AuthorizationSystem.CheckAccess(ConfigurationSecurityOperation.ForceDomainTypeEvent);
 
         var operationId = (string?)context.Request.RouteValues["operationId"] ?? throw new InvalidOperationException();
         var body = await this.ParseRequestBodyAsync<RequestBodyDto>(context);

@@ -24,7 +24,7 @@
         protected virtual void CheckEmployeePhotoAccessInternal(SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePhotoBLL bll = evaluateData.Context.Logics.EmployeePhoto;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(SampleSystem.SampleSystemSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
             SampleSystem.Domain.EmployeePhoto domainObject = bll.GetById(employeePhotoIdent.Id, true);
             Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.EmployeePhoto>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
@@ -159,7 +159,7 @@
         protected virtual bool HasEmployeePhotoAccessInternal(SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO employeePhotoIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeePhotoBLL bll = evaluateData.Context.Logics.EmployeePhoto;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(SampleSystem.SampleSystemSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
             SampleSystem.Domain.EmployeePhoto domainObject = bll.GetById(employeePhotoIdent.Id, true);
             return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.EmployeePhoto>(operation).HasAccess(domainObject);
         }

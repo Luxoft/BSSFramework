@@ -24,7 +24,7 @@
         protected virtual void CheckInformationAccessInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IInformationBLL bll = evaluateData.Context.Logics.Information;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(SampleSystem.SampleSystemSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
             SampleSystem.Domain.Information domainObject = bll.GetById(informationIdent.Id, true);
             Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Information>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
@@ -276,7 +276,7 @@
         protected virtual bool HasInformationAccessInternal(SampleSystem.Generated.DTO.InformationIdentityDTO informationIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IInformationBLL bll = evaluateData.Context.Logics.Information;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(SampleSystem.SampleSystemSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
             SampleSystem.Domain.Information domainObject = bll.GetById(informationIdent.Id, true);
             return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Information>(operation).HasAccess(domainObject);
         }

@@ -24,7 +24,7 @@
         protected virtual void CheckReportPropertyAccessInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.IReportPropertyBLL bll = evaluateData.Context.Logics.ReportProperty;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(Framework.Configuration.ConfigurationSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Configuration.ConfigurationSecurityOperation), securityOperationName);
             Framework.Configuration.Domain.Reports.ReportProperty domainObject = bll.GetById(reportPropertyIdent.Id, true);
             Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Reports.ReportProperty>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
@@ -159,7 +159,7 @@
         protected virtual bool HasReportPropertyAccessInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.IReportPropertyBLL bll = evaluateData.Context.Logics.ReportProperty;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(Framework.Configuration.ConfigurationSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Configuration.ConfigurationSecurityOperation), securityOperationName);
             Framework.Configuration.Domain.Reports.ReportProperty domainObject = bll.GetById(reportPropertyIdent.Id, true);
             return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Reports.ReportProperty>(operation).HasAccess(domainObject);
         }

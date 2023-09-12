@@ -24,7 +24,7 @@
         protected virtual void CheckLocationAccessInternal(SampleSystem.Generated.DTO.LocationIdentityDTO locationIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ILocationBLL bll = evaluateData.Context.Logics.Location;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(SampleSystem.SampleSystemSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
             SampleSystem.Domain.Location domainObject = bll.GetById(locationIdent.Id, true);
             Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Location>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
@@ -101,7 +101,7 @@
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.LocationFullDTO> GetFullLocationsByOperationInternal(SampleSystem.Generated.DTO.SampleSystemLocationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ILocationBLL bll = evaluateData.Context.Logics.LocationFactory.Create(Framework.Security.SecurityOperationHelper.Parse(securityOperationCode, typeof(SampleSystem.SampleSystemSecurityOperation)));
+            SampleSystem.BLL.ILocationBLL bll = evaluateData.Context.Logics.LocationFactory.Create(Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationCode));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Location>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
@@ -217,7 +217,7 @@
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.LocationSimpleDTO> GetSimpleLocationsByOperationInternal(SampleSystem.Generated.DTO.SampleSystemLocationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ILocationBLL bll = evaluateData.Context.Logics.LocationFactory.Create(Framework.Security.SecurityOperationHelper.Parse(securityOperationCode, typeof(SampleSystem.SampleSystemSecurityOperation)));
+            SampleSystem.BLL.ILocationBLL bll = evaluateData.Context.Logics.LocationFactory.Create(Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationCode));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Location>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
@@ -299,7 +299,7 @@
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.LocationVisualDTO> GetVisualLocationsByOperationInternal(SampleSystem.Generated.DTO.SampleSystemLocationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ILocationBLL bll = evaluateData.Context.Logics.LocationFactory.Create(Framework.Security.SecurityOperationHelper.Parse(securityOperationCode, typeof(SampleSystem.SampleSystemSecurityOperation)));
+            SampleSystem.BLL.ILocationBLL bll = evaluateData.Context.Logics.LocationFactory.Create(Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationCode));
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Location>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
@@ -324,7 +324,7 @@
         protected virtual bool HasLocationAccessInternal(SampleSystem.Generated.DTO.LocationIdentityDTO locationIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ILocationBLL bll = evaluateData.Context.Logics.Location;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(SampleSystem.SampleSystemSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
             SampleSystem.Domain.Location domainObject = bll.GetById(locationIdent.Id, true);
             return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Location>(operation).HasAccess(domainObject);
         }
@@ -404,7 +404,7 @@
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestLocationProjectionDTO> GetTestLocationsByOperationInternal(SampleSystem.Generated.DTO.SampleSystemLocationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ITestLocationBLL bll = evaluateData.Context.Logics.TestLocationFactory.Create(Framework.Security.SecurityOperationHelper.Parse(securityOperationCode, typeof(SampleSystem.SampleSystemSecurityOperation)));
+            SampleSystem.BLL.ITestLocationBLL bll = evaluateData.Context.Logics.TestLocationFactory.Create(Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationCode));
             return SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.TestLocation>(Framework.Transfering.ViewDTOType.ProjectionDTO)), evaluateData.MappingService);
         }
         
@@ -437,7 +437,7 @@
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.TestLocationCollectionPropertiesProjectionDTO> GetTestLocationCollectionPropertiessByOperationInternal(SampleSystem.Generated.DTO.SampleSystemLocationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.ITestLocationCollectionPropertiesBLL bll = evaluateData.Context.Logics.TestLocationCollectionPropertiesFactory.Create(Framework.Security.SecurityOperationHelper.Parse(securityOperationCode, typeof(SampleSystem.SampleSystemSecurityOperation)));
+            SampleSystem.BLL.ITestLocationCollectionPropertiesBLL bll = evaluateData.Context.Logics.TestLocationCollectionPropertiesFactory.Create(Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationCode));
             return SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.Projections.TestLocationCollectionProperties>(Framework.Transfering.ViewDTOType.ProjectionDTO)), evaluateData.MappingService);
         }
     }

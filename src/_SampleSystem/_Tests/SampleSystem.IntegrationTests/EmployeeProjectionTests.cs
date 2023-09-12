@@ -78,7 +78,7 @@ public class EmployeeProjectionTests : TestBase
 
                           var role1 = new BusinessRole { Name = TestEmployee1Login };
 
-                          var employeeView = authContext.Logics.Operation.GetByName(SampleSystemSecurityOperationCode.EmployeeView.ToString());
+                          var employeeView = authContext.Logics.Operation.GetByName(SampleSystemSecurityOperation.EmployeeView.ToString());
 
                           var link1 = new BusinessRoleOperationLink(role1) { Operation = employeeView };
 
@@ -88,7 +88,7 @@ public class EmployeeProjectionTests : TestBase
 
                           var role2 = new BusinessRole { Name = TestEmployee3Login };
 
-                          var employeePositionView = authContext.Logics.Operation.GetByName(SampleSystemSecurityOperationCode.EmployeePositionView.ToString());
+                          var employeePositionView = authContext.Logics.Operation.GetByName(SampleSystemSecurityOperation.EmployeePositionView.ToString());
 
                           var link2 = new BusinessRoleOperationLink(role2) { Operation = employeePositionView };
 

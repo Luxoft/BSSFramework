@@ -32,6 +32,8 @@ public static class SampleSystemSecurityOperation
 
     #region BusinessUnitType
 
+    public static NonContextSecurityOperation<Guid> BusinessUnitTypeModuleOpen { get; } = new(nameof(BusinessUnitTypeModuleOpen), new Guid("E4243A14-615E-40a8-809E-C7F3D6DF67B0")) { IsClient = true };
+
     public static NonContextSecurityOperation<Guid> BusinessUnitTypeView { get; } = new(nameof(BusinessUnitTypeView), new Guid("E4243A14-615E-40a8-809E-C7F3D6DF67B1"));
 
     public static NonContextSecurityOperation<Guid> BusinessUnitTypeEdit { get; } = new(nameof(BusinessUnitTypeEdit), new Guid("E4243A14-615E-40a8-809E-C7F3D6DF67B2"));

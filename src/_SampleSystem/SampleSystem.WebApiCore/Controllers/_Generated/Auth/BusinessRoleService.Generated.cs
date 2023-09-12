@@ -24,7 +24,7 @@
         protected virtual void CheckBusinessRoleAccessInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRole;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Authorization.AuthorizationSecurityOperation), securityOperationName);
             Framework.Authorization.Domain.BusinessRole domainObject = bll.GetById(businessRoleIdent.Id, true);
             Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.BusinessRole>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
@@ -346,7 +346,7 @@
         protected virtual bool HasBusinessRoleAccessInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRole;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Authorization.AuthorizationSecurityOperation), securityOperationName);
             Framework.Authorization.Domain.BusinessRole domainObject = bll.GetById(businessRoleIdent.Id, true);
             return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.BusinessRole>(operation).HasAccess(domainObject);
         }

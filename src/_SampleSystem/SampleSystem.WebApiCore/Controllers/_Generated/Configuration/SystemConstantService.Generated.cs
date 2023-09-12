@@ -24,7 +24,7 @@
         protected virtual void CheckSystemConstantAccessInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstant;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(Framework.Configuration.ConfigurationSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Configuration.ConfigurationSecurityOperation), securityOperationName);
             Framework.Configuration.Domain.SystemConstant domainObject = bll.GetById(systemConstantIdent.Id, true);
             Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.SystemConstant>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
@@ -327,7 +327,7 @@
         protected virtual bool HasSystemConstantAccessInternal(Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO systemConstantIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.ISystemConstantBLL bll = evaluateData.Context.Logics.SystemConstant;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(Framework.Configuration.ConfigurationSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Configuration.ConfigurationSecurityOperation), securityOperationName);
             Framework.Configuration.Domain.SystemConstant domainObject = bll.GetById(systemConstantIdent.Id, true);
             return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.SystemConstant>(operation).HasAccess(domainObject);
         }

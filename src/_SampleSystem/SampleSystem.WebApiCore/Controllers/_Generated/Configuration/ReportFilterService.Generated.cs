@@ -24,7 +24,7 @@
         protected virtual void CheckReportFilterAccessInternal(Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.IReportFilterBLL bll = evaluateData.Context.Logics.ReportFilter;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(Framework.Configuration.ConfigurationSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Configuration.ConfigurationSecurityOperation), securityOperationName);
             Framework.Configuration.Domain.Reports.ReportFilter domainObject = bll.GetById(reportFilterIdent.Id, true);
             Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Reports.ReportFilter>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
@@ -159,7 +159,7 @@
         protected virtual bool HasReportFilterAccessInternal(Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO reportFilterIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.IReportFilterBLL bll = evaluateData.Context.Logics.ReportFilter;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(Framework.Configuration.ConfigurationSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Configuration.ConfigurationSecurityOperation), securityOperationName);
             Framework.Configuration.Domain.Reports.ReportFilter domainObject = bll.GetById(reportFilterIdent.Id, true);
             return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Reports.ReportFilter>(operation).HasAccess(domainObject);
         }

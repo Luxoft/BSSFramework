@@ -25,7 +25,7 @@ public class BusinessRoleTests : TestBase
                                                                             this.DataHelper.GetEmployeeByLogin(this.AuthHelper.GetCurrentUserLogin())));
 
         var operation = authController.Evaluate(c => c.GetSimpleOperationByName(
-                                                                                SampleSystemSecurityOperationCode.BusinessUnitTypeModuleOpen.ToString()));
+                                                                                SampleSystemSecurityOperation.BusinessUnitTypeModuleOpen.ToString()));
 
         var oprManager = authController.Evaluate(c => c.GetRichBusinessRoleByName(RoleName));
         oprManager.BusinessRoleOperationLinks.Add(new BusinessRoleOperationLinkRichDTO
@@ -127,7 +127,7 @@ public class BusinessRoleTests : TestBase
     {
         // Arrange
         var operationIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleOperationByName(
-                                                                            SampleSystemSecurityOperationCode.EmployeeView.ToString())).Identity;
+                                                                            SampleSystemSecurityOperation.EmployeeView.ToString())).Identity;
 
         var oprManager = this.GetAuthControllerEvaluator().Evaluate(c => c.GetRichBusinessRoleByName(RoleName));
 

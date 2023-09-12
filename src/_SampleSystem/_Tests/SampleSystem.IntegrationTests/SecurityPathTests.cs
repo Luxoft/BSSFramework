@@ -30,8 +30,7 @@ public class SecurityPathTests : TestBase
                                        var securityProvider = SecurityPath<Employee>.Create(x => x.Location)
                                                                                     .Or(_ => false)
                                                                                     .ToProvider(
-                                                                                        (ContextSecurityOperation)
-                                                                                        context.GetSecurityOperation(SampleSystemSecurityOperationCode.EmployeeView),
+                                                                                        SampleSystemSecurityOperation.EmployeeView,
                                                                                         context.SecurityExpressionBuilderFactory);
 
                                        var employeeBll = context.Logics.EmployeeFactory.Create(securityProvider);

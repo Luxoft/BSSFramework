@@ -24,7 +24,7 @@
         protected virtual void CheckManagementUnitAccessInternal(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnit;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(SampleSystem.SampleSystemSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
             SampleSystem.Domain.ManagementUnit domainObject = bll.GetById(managementUnitIdent.Id, true);
             Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.ManagementUnit>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
@@ -101,7 +101,7 @@
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.ManagementUnitFullDTO> GetFullManagementUnitsByOperationInternal(SampleSystem.Generated.DTO.SampleSystemManagementUnitSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(Framework.Security.SecurityOperationHelper.Parse(securityOperationCode, typeof(SampleSystem.SampleSystemSecurityOperation)));
+            SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationCode));
             return SampleSystem.Generated.DTO.LambdaHelper.ToFullDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.ManagementUnit>(Framework.Transfering.ViewDTOType.FullDTO)), evaluateData.MappingService);
         }
         
@@ -123,7 +123,7 @@
         
         protected virtual System.Collections.Generic.List<Framework.Persistent.HierarchicalNode<SampleSystem.Generated.DTO.ManagementUnitFullDTO, System.Guid>> GetFullManagementUnitTreeByOperationInternal(SampleSystem.Generated.DTO.SampleSystemManagementUnitSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(Framework.Security.SecurityOperationHelper.Parse(securityOperationCode, typeof(SampleSystem.SampleSystemSecurityOperation)));
+            SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationCode));
             var tree = bll.GetTree(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.ManagementUnit>(Framework.Transfering.ViewDTOType.FullDTO));
             return Framework.Persistent.HierarchicalNodeExtensions.ToList(tree, managementUnit => SampleSystem.Generated.DTO.LambdaHelper.ToFullDTO(managementUnit, evaluateData.MappingService));
         }
@@ -234,7 +234,7 @@
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.ManagementUnitSimpleDTO> GetSimpleManagementUnitsByOperationInternal(SampleSystem.Generated.DTO.SampleSystemManagementUnitSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(Framework.Security.SecurityOperationHelper.Parse(securityOperationCode, typeof(SampleSystem.SampleSystemSecurityOperation)));
+            SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationCode));
             return SampleSystem.Generated.DTO.LambdaHelper.ToSimpleDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.ManagementUnit>(Framework.Transfering.ViewDTOType.SimpleDTO)), evaluateData.MappingService);
         }
         
@@ -316,7 +316,7 @@
         
         protected virtual System.Collections.Generic.IEnumerable<SampleSystem.Generated.DTO.ManagementUnitVisualDTO> GetVisualManagementUnitsByOperationInternal(SampleSystem.Generated.DTO.SampleSystemManagementUnitSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
-            SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(Framework.Security.SecurityOperationHelper.Parse(securityOperationCode, typeof(SampleSystem.SampleSystemSecurityOperation)));
+            SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnitFactory.Create(Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationCode));
             return SampleSystem.Generated.DTO.LambdaHelper.ToVisualDTOList(bll.GetFullList(evaluateData.Context.FetchService.GetContainer<SampleSystem.Domain.ManagementUnit>(Framework.Transfering.ViewDTOType.VisualDTO)), evaluateData.MappingService);
         }
         
@@ -341,7 +341,7 @@
         protected virtual bool HasManagementUnitAccessInternal(SampleSystem.Generated.DTO.ManagementUnitIdentityDTO managementUnitIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IManagementUnitBLL bll = evaluateData.Context.Logics.ManagementUnit;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(SampleSystem.SampleSystemSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
             SampleSystem.Domain.ManagementUnit domainObject = bll.GetById(managementUnitIdent.Id, true);
             return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.ManagementUnit>(operation).HasAccess(domainObject);
         }

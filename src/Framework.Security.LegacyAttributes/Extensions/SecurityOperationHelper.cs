@@ -26,4 +26,9 @@ public static class SecurityOperationHelper
 
         return securityOperation;
     }
+
+    public static SecurityOperation Parse(Type securityOperationType, Enum value)
+    {
+        return Parse(securityOperationType, value.ToString());
+    }
 }

@@ -1,10 +1,12 @@
-﻿namespace Framework.SecuritySystem.DiTests;
+﻿using Framework.HierarchicalExpand;
 
-public enum ExampleSecurityOperation
+namespace Framework.SecuritySystem.DiTests;
+
+public static class ExampleSecurityOperation
 {
-    Disabled,
+    public static DisabledSecurityOperation Disabled { get; } = new DisabledSecurityOperation();
 
-    EmployeeView,
+    public static ContextSecurityOperation<Guid> EmployeeView { get; } = new ContextSecurityOperation<Guid>(nameof(EmployeeView), HierarchicalExpandType.Children, Guid.NewGuid());
 
-    EmployeeEdit,
+    public static ContextSecurityOperation<Guid> EmployeeEdit { get; } = new ContextSecurityOperation<Guid>(nameof(EmployeeEdit), HierarchicalExpandType.Children, Guid.NewGuid());
 }

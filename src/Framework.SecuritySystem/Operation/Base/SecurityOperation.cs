@@ -3,7 +3,7 @@
 /// <summary>
 /// Операция доступа
 /// </summary>
-public abstract record SecurityOperation(string Name)
+public abstract record SecurityOperation(string Name) : ISecurityOperation
 {
     public bool AdminHasAccess { get; init; } = true;
 

@@ -7,6 +7,6 @@ public abstract record NonContextSecurityOperation(string Name) : SecurityOperat
 {
 }
 
-public record NonContextSecurityOperation<TIdent>(string Name, TIdent Id) : NonContextSecurityOperation(Name)
+public record NonContextSecurityOperation<TIdent>(string Name, TIdent Id) : NonContextSecurityOperation(Name), ISecurityOperation<TIdent>
 {
 }

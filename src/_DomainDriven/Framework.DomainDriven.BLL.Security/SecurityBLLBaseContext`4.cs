@@ -31,7 +31,26 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TDomai
     public virtual IAccessDeniedExceptionService AccessDeniedExceptionService { get; }
 
     /// <inheritdoc />
-    public override bool AllowedExpandTreeParents<TDomainObject>() => false;
+    public override bool AllowedExpandTreeParents<TDomainObject>()
+    {
+        var viewOperation = this.GetSecurityOperation<TDomainObject>(BLLSecurityMode.View);
+
+        if (viewOperation is ContextSecurityOperation)
+        {
+            var contextOperation = viewOperation as ContextSecurityOperation;
+
+            return contextOperation.ExpandType.HasFlag(HierarchicalExpandType.Parents);
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public abstract SecurityOperation GetSecurityOperation(SecurityOperation securityOperation);
+
+    public abstract SecurityOperation GetSecurityOperation<TDomainObject>(BLLSecurityMode securityMode)
+        where TDomainObject : TPersistentDomainObjectBase;
 
     IAccessDeniedExceptionService IAccessDeniedExceptionServiceContainer.AccessDeniedExceptionService =>
             this.AccessDeniedExceptionService;

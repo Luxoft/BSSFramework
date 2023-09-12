@@ -21,7 +21,6 @@ public class AuditService<TIdent, TBLLContext, TBLLFactoryContainer, TRootSecuri
         ITypeResolverContainer<string>,
         ISecurityServiceContainer<TRootSecurityService>
         where TRootSecurityService : IRootSecurityService<TPersistentObjectBase>
-        where TSecurityOperationCode : struct, Enum
 {
     private readonly static Lazy<Type> _genericTPropertyRevisionDTOType = new Lazy<Type>(
      () => typeof(TPropertyRevisionDTO)

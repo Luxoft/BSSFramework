@@ -47,21 +47,15 @@ public abstract class SecurityBLLFactoryBase<TBLLContext, TBLL, TBLLImpl, TDomai
 }
 
 
-public abstract class SecurityBLLFactory<TBLLContext, TBLL, TBLLImpl, TDomainObject> : SecurityBLLFactoryBase<TBLLContext, TBLL, TBLLImpl, TDomainObject>, ISecurityBLLFactory<TBLL>, ISecurityBLLFactory<TBLL, SecurityOperation>
+public abstract class SecurityBLLFactory<TBLLContext, TBLL, TBLLImpl, TDomainObject> : SecurityBLLFactoryBase<TBLLContext, TBLL, TBLLImpl, TDomainObject>, ISecurityBLLFactory<TBLL, SecurityOperation>
 
         where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService<TDomainObject>>, IServiceProviderContainer
         where TDomainObject : class
-        where TSecurityOperationCode : struct, Enum
         where TBLLImpl : TBLL
 {
     protected SecurityBLLFactory(TBLLContext context)
             : base(context)
     {
-    }
-
-    public TBLL Create(SecurityOperation securityOperation)
-    {
-        return this.Create(this.Context.SecurityService.GetSecurityProvider<TDomainObject>(securityOperationCode));
     }
 
     public TBLL Create(SecurityOperation securityOperation)

@@ -10,7 +10,6 @@ public abstract class DefaultSecurityBLLFactory<TBLLContext, TPersistentDomainOb
         where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent>
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
         where TDomainObjectBase : class
-        where TSecurityOperationCode : struct, Enum
 {
     protected DefaultSecurityBLLFactory(TBLLContext context)
             : base(context)
@@ -30,12 +29,6 @@ public abstract class DefaultSecurityBLLFactory<TBLLContext, TPersistentDomainOb
     }
 
     public virtual IDefaultSecurityDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>(ISecurityProvider<TDomainObject> securityProvider)
-            where TDomainObject : class, TPersistentDomainObjectBase
-    {
-        throw new NotImplementedException();
-    }
-
-    public virtual IDefaultSecurityDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent> Create<TDomainObject>(SecurityOperation securityOperation)
             where TDomainObject : class, TPersistentDomainObjectBase
     {
         throw new NotImplementedException();

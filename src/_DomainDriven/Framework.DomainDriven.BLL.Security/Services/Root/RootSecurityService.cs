@@ -21,32 +21,8 @@ public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBa
     public virtual ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(BLLSecurityMode securityMode)
         where TDomainObject : TPersistentDomainObjectBase
     {
-        return this.GetDomainSecurityServiceBase<TDomainObject>().GetSecurityProvider(securityMode);
+        return this.GetDomainSecurityService<TDomainObject>().GetSecurityProvider(securityMode);
     }
-
-    protected IDomainSecurityService<TDomainObject> GetDomainSecurityServiceBase<TDomainObject>()
-        where TDomainObject : TPersistentDomainObjectBase
-    {
-        return this.Context.ServiceProvider.GetService<IDomainSecurityService<TDomainObject>>()
-               ?? this.Context.ServiceProvider.GetRequiredService<INotImplementedDomainSecurityService<TDomainObject>>();
-    }
-}
-
-public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBase> :
-    RootSecurityService<TBLLContext, TPersistentDomainObjectBase>,
-
-    IRootSecurityService<TPersistentDomainObjectBase>
-
-    where TBLLContext : class, ISecurityOperationResolver<TPersistentDomainObjectBase>,
-    IAccessDeniedExceptionServiceContainer, IServiceProviderContainer
-    where TSecurityOperationCode : struct, Enum
-    where TPersistentDomainObjectBase : class
-{
-    protected RootSecurityService(TBLLContext context)
-        : base(context)
-    {
-    }
-
 
     public ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityOperation securityOperation)
         where TDomainObject : TPersistentDomainObjectBase
@@ -56,17 +32,10 @@ public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBa
         return this.GetDomainSecurityService<TDomainObject>().GetSecurityProvider(securityOperation);
     }
 
-    public ISecurityProvider<TDomainObject> GetSecurityProvider<TDomainObject>(SecurityOperation securityOperation)
+    protected IDomainSecurityService<TDomainObject> GetDomainSecurityService<TDomainObject>()
         where TDomainObject : TPersistentDomainObjectBase
     {
-        return this.GetDomainSecurityService<TDomainObject>().GetSecurityProvider(securityOperationCode);
-    }
-
-
-    protected IDomainSecurityService<TDomainObject> GetDomainSecurityService<TDomainObject>()
-    {
         return this.Context.ServiceProvider.GetService<IDomainSecurityService<TDomainObject>>()
-               ?? this.Context.ServiceProvider
-                      .GetRequiredService<INotImplementedDomainSecurityService<TDomainObject>>();
+               ?? this.Context.ServiceProvider.GetRequiredService<INotImplementedDomainSecurityService<TDomainObject>>();
     }
 }

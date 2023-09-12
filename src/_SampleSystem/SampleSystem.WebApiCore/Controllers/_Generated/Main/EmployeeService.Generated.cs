@@ -64,7 +64,7 @@
         protected virtual void CheckEmployeeAccessInternal(SampleSystem.Generated.DTO.EmployeeIdentityDTO employeeIdent, SampleSystem.SampleSystemSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeBLL bll = evaluateData.Context.Logics.Employee;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.Security.SecurityOperationParser.Check(securityOperationCode);
             SampleSystem.Domain.Employee domainObject = bll.GetById(employeeIdent.Id, true);
             Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
@@ -267,7 +267,7 @@
         protected virtual bool HasEmployeeAccessInternal(SampleSystem.Generated.DTO.EmployeeIdentityDTO employeeIdent, SampleSystem.SampleSystemSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeBLL bll = evaluateData.Context.Logics.Employee;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.Security.SecurityOperationParser.Check(securityOperationCode);
             SampleSystem.Domain.Employee domainObject = bll.GetById(employeeIdent.Id, true);
             return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(securityOperationCode).HasAccess(domainObject);
         }

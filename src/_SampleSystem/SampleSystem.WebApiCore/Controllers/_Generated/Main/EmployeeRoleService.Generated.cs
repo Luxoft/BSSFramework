@@ -24,7 +24,7 @@
         protected virtual void CheckEmployeeRoleAccessInternal(SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO employeeRoleIdent, SampleSystem.SampleSystemSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRoleBLL bll = evaluateData.Context.Logics.EmployeeRole;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.Security.SecurityOperationParser.Check(securityOperationCode);
             SampleSystem.Domain.EmployeeRole domainObject = bll.GetById(employeeRoleIdent.Id, true);
             Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.EmployeeRole>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
@@ -276,7 +276,7 @@
         protected virtual bool HasEmployeeRoleAccessInternal(SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO employeeRoleIdent, SampleSystem.SampleSystemSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IEmployeeRoleBLL bll = evaluateData.Context.Logics.EmployeeRole;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.Security.SecurityOperationParser.Check(securityOperationCode);
             SampleSystem.Domain.EmployeeRole domainObject = bll.GetById(employeeRoleIdent.Id, true);
             return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.EmployeeRole>(securityOperationCode).HasAccess(domainObject);
         }

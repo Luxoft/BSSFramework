@@ -24,7 +24,7 @@
         protected virtual void CheckReportPropertyAccessInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.IReportPropertyBLL bll = evaluateData.Context.Logics.ReportProperty;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.Security.SecurityOperationParser.Check(securityOperationCode);
             Framework.Configuration.Domain.Reports.ReportProperty domainObject = bll.GetById(reportPropertyIdent.Id, true);
             Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Reports.ReportProperty>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
@@ -159,7 +159,7 @@
         protected virtual bool HasReportPropertyAccessInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.IReportPropertyBLL bll = evaluateData.Context.Logics.ReportProperty;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.Security.SecurityOperationParser.Check(securityOperationCode);
             Framework.Configuration.Domain.Reports.ReportProperty domainObject = bll.GetById(reportPropertyIdent.Id, true);
             return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Reports.ReportProperty>(securityOperationCode).HasAccess(domainObject);
         }

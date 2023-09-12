@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Net.Mime;
 
-using Framework.Security;
+using Framework.Core;
 using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Mvc;
@@ -36,7 +36,7 @@ public abstract class IntegrationSchemaControllerBase : ControllerBase
 
     private IActionResult DownloadKnownTypesWsdl(string xsdNamespace, IReadOnlyCollection<Type> eventTypes)
     {
-        this.authorizationSystem.CheckAccess(SecurityOperationCode.SystemIntegration);
+        this.authorizationSystem.CheckAccess(BssSecurityOperation.SystemIntegration);
 
         var content = this.eventXsdExporter.Export(xsdNamespace, "IntegrationEvent", eventTypes);
 

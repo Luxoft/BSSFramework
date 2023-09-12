@@ -31,7 +31,7 @@ public class GetODataListByQueryStringWithOperationMethodGenerator<TConfiguratio
 
     protected override object GetBLLSecurityParameter()
     {
-        return this.GetConvertSecurityOperationCodeParameterExpression(1);
+        return this.GetConvertToSecurityOperationCodeParameterExpression(1);
     }
 
     protected override string GetComment()

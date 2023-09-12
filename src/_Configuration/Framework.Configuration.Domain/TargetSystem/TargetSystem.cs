@@ -3,6 +3,7 @@ using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
+using Framework.Security;
 
 namespace Framework.Configuration.Domain;
 
@@ -14,8 +15,8 @@ namespace Framework.Configuration.Domain;
 /// </remarks>
 [BLLViewRole, BLLSaveRole(AllowCreate = false)]
 [UniqueGroup]
-[ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.TargetSystemView)]
-[ConfigurationEditDomainObject(ConfigurationSecurityOperationCode.TargetSystemEdit)]
+[ViewDomainObject(typeof(ConfigurationSecurityOperation), nameof(ConfigurationSecurityOperation.TargetSystemView))]
+[EditDomainObject(typeof(ConfigurationSecurityOperation), nameof(ConfigurationSecurityOperation.TargetSystemEdit))]
 [NotAuditedClass]
 public class TargetSystem : BaseDirectory, IMaster<DomainType>
 {

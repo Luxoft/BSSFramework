@@ -24,7 +24,7 @@
         protected virtual void CheckPermissionAccessInternal(Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.Permission;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.Security.SecurityOperationParser.Check(securityOperationCode);
             Framework.Authorization.Domain.Permission domainObject = bll.GetById(permissionIdent.Id, true);
             Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Permission>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
@@ -293,7 +293,7 @@
         protected virtual bool HasPermissionAccessInternal(Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.Permission;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.Security.SecurityOperationParser.Check(securityOperationCode);
             Framework.Authorization.Domain.Permission domainObject = bll.GetById(permissionIdent.Id, true);
             return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Permission>(securityOperationCode).HasAccess(domainObject);
         }

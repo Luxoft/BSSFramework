@@ -24,7 +24,7 @@
         protected virtual void CheckPrincipalAccessInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.Principal;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.Security.SecurityOperationParser.Check(securityOperationCode);
             Framework.Authorization.Domain.Principal domainObject = bll.GetById(principalIdent.Id, true);
             Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Principal>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
@@ -346,7 +346,7 @@
         protected virtual bool HasPrincipalAccessInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.Principal;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.Security.SecurityOperationParser.Check(securityOperationCode);
             Framework.Authorization.Domain.Principal domainObject = bll.GetById(principalIdent.Id, true);
             return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Principal>(securityOperationCode).HasAccess(domainObject);
         }

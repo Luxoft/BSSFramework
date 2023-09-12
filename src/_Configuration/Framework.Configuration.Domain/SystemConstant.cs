@@ -3,6 +3,7 @@ using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
+using Framework.Security;
 
 namespace Framework.Configuration.Domain;
 
@@ -10,8 +11,8 @@ namespace Framework.Configuration.Domain;
 /// Константа системы
 /// </summary>
 [BLLViewRole, BLLSaveRole(AllowCreate = false)]
-[ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.SystemConstantView)]
-[ConfigurationEditDomainObject(ConfigurationSecurityOperationCode.SystemConstantEdit)]
+[ViewDomainObject(typeof(ConfigurationSecurityOperation), nameof(ConfigurationSecurityOperation.SystemConstantView))]
+[EditDomainObject(typeof(ConfigurationSecurityOperation), nameof(ConfigurationSecurityOperation.SystemConstantEdit))]
 [UniqueGroup]
 [NotAuditedClass]
 [DomainType("{42C47133-A8C5-4E8E-9D46-385038BFE2B9}")]

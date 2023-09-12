@@ -24,7 +24,7 @@
         protected virtual void CheckLocation1676AccessInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Ident, SampleSystem.SampleSystemSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.Security.SecurityOperationParser.Check(securityOperationCode);
             SampleSystem.Domain.EnversBug1676.Location1676 domainObject = bll.GetById(location1676Ident.Id, true);
             Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.EnversBug1676.Location1676>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
@@ -276,7 +276,7 @@
         protected virtual bool HasLocation1676AccessInternal(SampleSystem.Generated.DTO.Location1676IdentityDTO location1676Ident, SampleSystem.SampleSystemSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ILocation1676BLL bll = evaluateData.Context.Logics.Location1676;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.Security.SecurityOperationParser.Check(securityOperationCode);
             SampleSystem.Domain.EnversBug1676.Location1676 domainObject = bll.GetById(location1676Ident.Id, true);
             return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.EnversBug1676.Location1676>(securityOperationCode).HasAccess(domainObject);
         }

@@ -4,6 +4,7 @@ using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
+using Framework.SecuritySystem;
 using Framework.Transfering;
 
 using SecurityProviderExtensions = Framework.SecuritySystem.SecurityProviderExtensions;
@@ -49,7 +50,9 @@ public class CheckAccessMethodGenerator<TConfiguration> : MethodGenerator<TConfi
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
     {
-        yield return this.GetCheckSecurityOperationCodeParameterStatement(1);
+        var operationVarStatement = new CodeVariableDeclarationStatement(typeof(SecurityOperation), "operation", this.GetConvertToSecurityOperationCodeParameterExpression(1));
+
+        yield return operationVarStatement;
 
         var domainObjectVarDecl = this.ToDomainObjectVarDeclById(bllRefExpr);
         var method = typeof(SecurityProviderExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression(nameof(SecurityProviderExtensions.CheckAccess));
@@ -57,8 +60,7 @@ public class CheckAccessMethodGenerator<TConfiguration> : MethodGenerator<TConfi
         yield return domainObjectVarDecl;
 
         yield return this.Configuration.Environment.BLLCore.GetGetSecurityProviderMethodReferenceExpression(evaluateDataExpr.GetContext(), this.DomainType)
-                         .ToMethodInvokeExpression(this.SecurityOperationCodeParameter.ToVariableReferenceExpression())
-                         //.ToMethodInvokeExpression("CheckAccess", domainObjectVarDecl.ToVariableReferenceExpression())
+                         .ToMethodInvokeExpression(operationVarStatement.ToVariableReferenceExpression())
                          .ToStaticMethodInvokeExpression(method, domainObjectVarDecl.ToVariableReferenceExpression(), evaluateDataExpr.GetContext().ToPropertyReference((IAccessDeniedExceptionServiceContainer c) => c.AccessDeniedExceptionService))
                          .ToExpressionStatement();
     }

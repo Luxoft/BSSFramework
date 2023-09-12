@@ -5,11 +5,12 @@ using Framework.Configuration.Core;
 using Framework.Core;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent.Mapping;
+using Framework.Security;
 
 namespace Framework.Configuration.Domain.Reports;
 
-[ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.ReportView)]
-[ConfigurationEditDomainObject(ConfigurationSecurityOperationCode.ReportEdit)]
+[ViewDomainObject(typeof(ConfigurationSecurityOperation), nameof(ConfigurationSecurityOperation.ReportView))]
+[EditDomainObject(typeof(ConfigurationSecurityOperation), nameof(ConfigurationSecurityOperation.ReportEdit))]
 [BLLViewRole, BLLSaveRole, BLLRemoveRole]
 [NotAuditedClass]
 public class Report : AuditPersistentDomainObjectBase,

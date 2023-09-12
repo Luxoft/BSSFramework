@@ -18,8 +18,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped(typeof(IAsyncDal<,>), typeof(NHibAsyncDal<,>));
 
         services.AddScoped(typeof(IRepositoryFactory<>), typeof(RepositoryFactory<>));
-        services.AddScoped(typeof(IRepositoryFactory<,>), typeof(RepositoryFactory<,>));
-        services.AddScoped(typeof(IGenericRepositoryFactory<,,>), typeof(GenericRepositoryFactory<,,>));
+        services.AddScoped(typeof(IGenericRepositoryFactory<,>), typeof(GenericRepositoryFactory<,>));
 
         services.AddSingleton<IDBSessionEvaluator, DBSessionEvaluator>();
 
@@ -28,7 +27,6 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IDateTimeService>(DateTimeService.Default);
 
         services.AddScoped(typeof(INotImplementedDomainSecurityService<>), typeof(OnlyDisabledDomainSecurityService<>));
-        services.AddScoped(typeof(INotImplementedDomainSecurityService<,>), typeof(OnlyDisabledDomainSecurityService<,>));
 
         return services;
     }

@@ -39,7 +39,7 @@ public class GetListByOperationMethodGenerator<TConfiguration> : ViewCollectionM
 
     protected override object GetBLLSecurityParameter()
     {
-        return this.GetConvertSecurityOperationCodeParameterExpression(0);
+        return this.GetConvertToSecurityOperationCodeParameterExpression(0);
     }
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)

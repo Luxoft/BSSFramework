@@ -2,12 +2,13 @@
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
+using Framework.Security;
 
 namespace Framework.Configuration.Domain.Reports;
 
 [NotAuditedClass]
 [BLLViewRole]
-[ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.Disabled)]
+[ViewDomainObject(typeof(ConfigurationSecurityOperation), nameof(ConfigurationSecurityOperation.Disabled))]
 public class ReportFilter : AuditPersistentDomainObjectBase, IDetail<Report>
 {
     public const string IsBeforeOrNullOperator = "isnullorlt";

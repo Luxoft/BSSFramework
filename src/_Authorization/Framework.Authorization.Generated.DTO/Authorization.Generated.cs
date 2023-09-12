@@ -1529,8 +1529,6 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.Authorization.AuthorizationEditDomainObjectAttribute(Framework.Authorization.AuthorizationSecurityOperationCode.BusinessRoleEdit)]
-    [Framework.Authorization.AuthorizationViewDomainObjectAttribute(Framework.Authorization.AuthorizationSecurityOperationCode.BusinessRoleView)]
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.BusinessRole), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     public class BusinessRoleIdentityDTO : System.IEquatable<Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
@@ -1743,7 +1741,6 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.Authorization.AuthorizationViewDomainObjectAttribute(Framework.Authorization.AuthorizationSecurityOperationCode.Disabled)]
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.EntityType), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     public class EntityTypeIdentityDTO : System.IEquatable<Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
@@ -1850,8 +1847,6 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.Authorization.AuthorizationEditDomainObjectAttribute(Framework.Authorization.AuthorizationSecurityOperationCode.OperationEdit)]
-    [Framework.Authorization.AuthorizationViewDomainObjectAttribute(Framework.Authorization.AuthorizationSecurityOperationCode.OperationView)]
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Operation), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     public class OperationIdentityDTO : System.IEquatable<Framework.Authorization.Generated.DTO.OperationIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
@@ -1958,8 +1953,6 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.Authorization.AuthorizationEditDomainObjectAttribute(Framework.Authorization.AuthorizationSecurityOperationCode.PrincipalEdit)]
-    [Framework.Authorization.AuthorizationViewDomainObjectAttribute(Framework.Authorization.AuthorizationSecurityOperationCode.PrincipalView)]
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Permission), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     public class PermissionIdentityDTO : System.IEquatable<Framework.Authorization.Generated.DTO.PermissionIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
@@ -2067,7 +2060,6 @@ namespace Framework.Authorization.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionFilterEntity), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [Framework.Security.ViewDomainObjectAttribute()]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     public class PermissionFilterEntityIdentityDTO : System.IEquatable<Framework.Authorization.Generated.DTO.PermissionFilterEntityIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -2174,7 +2166,6 @@ namespace Framework.Authorization.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.PermissionFilterItem), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [Framework.Security.ViewDomainObjectAttribute()]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     public class PermissionFilterItemIdentityDTO : System.IEquatable<Framework.Authorization.Generated.DTO.PermissionFilterItemIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -2280,8 +2271,6 @@ namespace Framework.Authorization.Generated.DTO
         }
     }
     
-    [Framework.Authorization.AuthorizationEditDomainObjectAttribute(Framework.Authorization.AuthorizationSecurityOperationCode.PrincipalEdit)]
-    [Framework.Authorization.AuthorizationViewDomainObjectAttribute(Framework.Authorization.AuthorizationSecurityOperationCode.PrincipalView)]
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Authorization.Domain.Principal), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Auth")]
     public class PrincipalIdentityDTO : System.IEquatable<Framework.Authorization.Generated.DTO.PrincipalIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>

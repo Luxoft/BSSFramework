@@ -218,18 +218,10 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
         return bllRef.ToVariableDeclarationStatement(varName, bllCreateExpr);
     }
 
-    protected CodeStatement GetCheckSecurityOperationCodeParameterStatement(int parameterIndex)
+    protected CodeExpression GetConvertToSecurityOperationCodeParameterExpression(int parameterIndex)
     {
-        return typeof(TransferEnumHelper).ToTypeReferenceExpression()
-                                         .ToMethodReferenceExpression(nameof(TransferEnumHelper.Check))
-                                         .ToMethodInvokeExpression(this.Parameters[parameterIndex].ToVariableReferenceExpression(), this.Configuration.Environment.SecurityOperationType.ToTypeReferenceExpression())
-                                         .ToExpressionStatement();
-    }
-
-    protected CodeExpression GetConvertSecurityOperationCodeParameterExpression(int parameterIndex)
-    {
-        return typeof(TransferEnumHelper).ToTypeReferenceExpression()
-                                         .ToMethodReferenceExpression(nameof(TransferEnumHelper.Convert))
-                                         .ToMethodInvokeExpression(this.Parameters[parameterIndex].ToVariableReferenceExpression(), this.Configuration.Environment.SecurityOperationType.ToTypeReferenceExpression());
+        return typeof(SecurityOperationParser).ToTypeReferenceExpression()
+                                         .ToMethodReferenceExpression(nameof(SecurityOperationParser.ConvertToOperation))
+                                         .ToMethodInvokeExpression(this.Parameters[parameterIndex].ToVariableReferenceExpression(), this.Configuration.Environment.SecurityOperationType.ToTypeOfExpression());
     }
 }

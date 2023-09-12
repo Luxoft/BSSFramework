@@ -33,9 +33,6 @@ public class AuthorizationExternalSource<TBLLContext, TPersistentDomainObjectBas
         this._typedCache = new DictionaryCache<EntityType, IAuthorizationTypedExternalSource>(entityType => this.GetTypedInternal(entityType, true));
     }
 
-
-    public Type SecurityOperationCodeType => typeof(TSecurityOperationCode);
-
     public IAuthorizationTypedExternalSource GetTyped(EntityType entityType, bool withCache = true)
     {
         if (entityType == null) throw new ArgumentNullException(nameof(entityType));
@@ -55,7 +52,7 @@ public class AuthorizationExternalSource<TBLLContext, TPersistentDomainObjectBas
                                                            : typeof(PlainAuthorizationTypedExternalSource<>);
 
 
-        var authorizationTypedExternalSourceImplType = authorizationTypedExternalSourceType.MakeGenericType(typeof(TBLLContext), typeof(TPersistentDomainObjectBase), typeof(TAuditPersistentDomainObjectBase), typeof(TSecurityOperationCode), domainType);
+        var authorizationTypedExternalSourceImplType = authorizationTypedExternalSourceType.MakeGenericType(typeof(TBLLContext), typeof(TPersistentDomainObjectBase), typeof(TAuditPersistentDomainObjectBase), domainType);
 
         var authorizationTypedExternalSourceImplTypeCtor = authorizationTypedExternalSourceImplType.GetConstructors().Single();
 

@@ -11,7 +11,7 @@ namespace Framework.Security;
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct | AttributeTargets.Property)]
 public class ViewDomainObjectAttribute : DomainObjectAccessAttribute
 {
-    private readonly ReadOnlyCollection<SecurityOperation> baseSecondaryOperations;
+    private readonly ReadOnlyCollection<SecurityOperation> baseSecondaryOperations = new ReadOnlyCollection<SecurityOperation>(new List<SecurityOperation>());
 
     private Type[] sourceTypes;
 

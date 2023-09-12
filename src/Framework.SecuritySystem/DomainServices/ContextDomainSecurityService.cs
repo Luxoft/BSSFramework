@@ -16,8 +16,6 @@ public abstract class ContextDomainSecurityServiceBase<TPersistentDomainObjectBa
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     where TDomainObject : class, TPersistentDomainObjectBase
 {
-    private readonly IDisabledSecurityProviderSource disabledSecurityProviderSource;
-
     private readonly ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory;
 
     protected ContextDomainSecurityServiceBase(
@@ -28,7 +26,6 @@ public abstract class ContextDomainSecurityServiceBase<TPersistentDomainObjectBa
 
         : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
     {
-        this.disabledSecurityProviderSource = disabledSecurityProviderSource ?? throw new ArgumentNullException(nameof(disabledSecurityProviderSource));
         this.securityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
     }
 

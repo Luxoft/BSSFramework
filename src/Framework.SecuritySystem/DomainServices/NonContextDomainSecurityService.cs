@@ -8,9 +8,7 @@ namespace Framework.SecuritySystem;
 /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
 /// <typeparam name="TDomainObject"></typeparam>
 /// <typeparam name="TIdent"></typeparam>
-public abstract class
-    NonContextDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TIdent> : DomainSecurityService<TPersistentDomainObjectBase,
-        TDomainObject>
+public abstract class NonContextDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TIdent> : DomainSecurityService<TPersistentDomainObjectBase, TDomainObject>
 
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     where TDomainObject : class, TPersistentDomainObjectBase
@@ -38,9 +36,6 @@ public abstract class
         {
             case NonContextSecurityOperation nonContextSecurityOperation:
                 return this.CreateSecurityProvider(nonContextSecurityOperation);
-
-            case ContextSecurityOperation contextSecurityOperation:
-                return this.CreateSecurityProvider(contextSecurityOperation.ToNonContext());
 
             case DisabledSecurityOperation:
                 return this.disabledSecurityProviderSource.GetDisabledSecurityProvider<TDomainObject>();

@@ -13,5 +13,5 @@ public abstract record SecurityOperation(string Name) : ISecurityOperation
 
     public SecurityOperation ApproveOperation { get; init; }
 
-    public override string ToString() => this.Name;
+    public sealed override string ToString() => this.Name;
 }

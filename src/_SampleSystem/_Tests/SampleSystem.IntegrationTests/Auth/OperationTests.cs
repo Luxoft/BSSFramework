@@ -10,7 +10,8 @@ namespace SampleSystem.IntegrationTests.Auth;
 public class OperationTests : TestBase
 {
     private const string NewDescription = "test_description";
-    private const string Name = "HRDepartmentEdit";
+
+    private static string Name = SampleSystemSecurityOperation.HRDepartmentEdit.Name;
 
     [TestMethod]
     public void SaveOperation_CheckOperationChanges()

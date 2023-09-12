@@ -44,7 +44,7 @@ public class ApprovePermissionTests : TestBase
     {
         this.authFacade = this.GetAuthControllerEvaluator();
 
-        this.approveOperation = this.authFacade.Evaluate(c => c.GetSimpleOperationByName(nameof(SampleSystemSecurityOperation.ApproveWorkflowOperation)));
+        this.approveOperation = this.authFacade.Evaluate(c => c.GetSimpleOperationByName(SampleSystemSecurityOperation.ApproveWorkflowOperation.Name));
 
         this.approveRole = this.authFacade.Evaluate(c => c.SaveBusinessRole(new BusinessRoleStrictDTO
                                                                             {
@@ -67,7 +67,7 @@ public class ApprovePermissionTests : TestBase
                                                                                       }
                                                                               }));
 
-        var approvingOperation = this.authFacade.Evaluate(c => c.GetSimpleOperationByName(nameof(SampleSystemSecurityOperation.ApprovingWorkflowOperation)));
+        var approvingOperation = this.authFacade.Evaluate(c => c.GetSimpleOperationByName(SampleSystemSecurityOperation.ApprovingWorkflowOperation.Name));
 
         this.approvingRole = this.authFacade.Evaluate(c => c.SaveBusinessRole(new BusinessRoleStrictDTO
                                                                               {

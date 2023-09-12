@@ -1,10 +1,11 @@
 ﻿using Framework.DomainDriven.BLL;
 using Framework.Persistent;
+using Framework.Security;
 
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeeView)]
+[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeeView))]
 public class TestPlainAuthObject : BaseDirectory, IMaster<TestItemAuthObject>
 {
     private readonly ICollection<TestItemAuthObject> items = new List<TestItemAuthObject>();

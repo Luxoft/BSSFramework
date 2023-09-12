@@ -6,6 +6,7 @@ using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
+using Framework.Security;
 using Framework.SecuritySystem;
 using Framework.Transfering;
 using Framework.Validation;
@@ -20,8 +21,8 @@ namespace SampleSystem.Domain;
 [UniqueGroup(UseDbEvaluation = true)]
 [BLLViewRole(Max = MainDTOType.FullDTO)]
 [BLLSaveRole(SaveType = BLLSaveType.Both)]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeeView)]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.EmployeeEdit)]
+[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeeView))]
+[EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeeEdit))]
 [BLLEventRole(Mode = EventRoleMode.Save)]
 [BLLIntegrationSaveRole]
 [DomainType("{AA46DA53-9B21-4DEC-9C70-720BDA1CB198}")]
@@ -129,8 +130,8 @@ public partial class Employee :
     }
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Event | DTORole.Integration)]
-    [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneView)]
-    [SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneEdit)]
+    [ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeePersonalCellPhoneView))]
+    [EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeePersonalCellPhoneEdit))]
     public virtual IEnumerable<EmployeePersonalCellPhone> PersonalCellPhones
     {
         get { return this.personalCellPhones; }
@@ -203,8 +204,8 @@ public partial class Employee :
 
     [MaxLength(30)]
     [UniqueElement]
-    [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeeView)]
-    [SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.EmployeeEdit)]
+    [ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeeView))]
+    [EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeeEdit))]
     public virtual string Login
     {
         get { return this.login.TrimNull(); }
@@ -233,7 +234,7 @@ public partial class Employee :
     }
 
     [CustomSerialization(CustomSerializationMode.Ignore, DTORole.Event | DTORole.Integration)]
-    [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneView)]
+    [ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeePersonalCellPhoneView))]
     public virtual string PersonalCellPhone
     {
         get { return this.personalCellPhone.TrimNull(); }
@@ -345,8 +346,8 @@ public partial class Employee :
         set { this.lastActionDate = value; }
     }
 
-    [SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.EmployeePositionEdit)]
-    [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeePositionView)]
+    [ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeePositionEdit))]
+    [EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeePositionView))]
     public virtual EmployeePosition Position
     {
         get { return this.position; }

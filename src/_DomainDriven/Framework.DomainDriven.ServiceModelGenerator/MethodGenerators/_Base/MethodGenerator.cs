@@ -220,8 +220,8 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
 
     protected CodeExpression GetConvertToSecurityOperationCodeParameterExpression(int parameterIndex)
     {
-        return typeof(SecurityOperationParser).ToTypeReferenceExpression()
-                                         .ToMethodReferenceExpression(nameof(SecurityOperationParser.ConvertToOperation))
-                                         .ToMethodInvokeExpression(this.Parameters[parameterIndex].ToVariableReferenceExpression(), this.Configuration.Environment.SecurityOperationType.ToTypeOfExpression());
+        return typeof(SecurityOperationHelper).ToTypeReferenceExpression()
+                                         .ToMethodReferenceExpression(nameof(SecurityOperationHelper.Parse))
+                                         .ToMethodInvokeExpression(this.Configuration.Environment.SecurityOperationType.ToTypeOfExpression(), this.Parameters[parameterIndex].ToVariableReferenceExpression());
     }
 }

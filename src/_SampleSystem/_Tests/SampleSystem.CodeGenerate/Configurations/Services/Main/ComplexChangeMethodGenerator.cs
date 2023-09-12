@@ -86,6 +86,6 @@ public class ComplexChangeMethodGenerator : ModelMethodGenerator<MainServiceGene
             return base.GetBLLSecurityParameter();
         }
 
-        return modelSecurityAttribute.SecurityOperationCode;
+        return modelSecurityAttribute.SecurityOperation;
     }
 }

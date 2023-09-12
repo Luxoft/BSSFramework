@@ -16,17 +16,17 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("CheckReportPropertyAccess")]
         public virtual void CheckReportPropertyAccess(CheckReportPropertyAccessAutoRequest checkReportPropertyAccessAutoRequest)
         {
-            Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode = checkReportPropertyAccessAutoRequest.securityOperationCode;
+            string securityOperationName = checkReportPropertyAccessAutoRequest.securityOperationName;
             Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent = checkReportPropertyAccessAutoRequest.reportPropertyIdent;
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckReportPropertyAccessInternal(reportPropertyIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckReportPropertyAccessInternal(reportPropertyIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual void CheckReportPropertyAccessInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual void CheckReportPropertyAccessInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.IReportPropertyBLL bll = evaluateData.Context.Logics.ReportProperty;
-            Framework.Security.SecurityOperationParser.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(Framework.Configuration.ConfigurationSecurityOperation));
             Framework.Configuration.Domain.Reports.ReportProperty domainObject = bll.GetById(reportPropertyIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Reports.ReportProperty>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Reports.ReportProperty>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>
@@ -151,17 +151,17 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("HasReportPropertyAccess")]
         public virtual bool HasReportPropertyAccess(HasReportPropertyAccessAutoRequest hasReportPropertyAccessAutoRequest)
         {
-            Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode = hasReportPropertyAccessAutoRequest.securityOperationCode;
+            string securityOperationName = hasReportPropertyAccessAutoRequest.securityOperationName;
             Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent = hasReportPropertyAccessAutoRequest.reportPropertyIdent;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasReportPropertyAccessInternal(reportPropertyIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasReportPropertyAccessInternal(reportPropertyIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual bool HasReportPropertyAccessInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent, Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
+        protected virtual bool HasReportPropertyAccessInternal(Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO reportPropertyIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Generated.DTO.IConfigurationDTOMappingService> evaluateData)
         {
             Framework.Configuration.BLL.IReportPropertyBLL bll = evaluateData.Context.Logics.ReportProperty;
-            Framework.Security.SecurityOperationParser.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(Framework.Configuration.ConfigurationSecurityOperation));
             Framework.Configuration.Domain.Reports.ReportProperty domainObject = bll.GetById(reportPropertyIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Reports.ReportProperty>(securityOperationCode).HasAccess(domainObject);
+            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Reports.ReportProperty>(operation).HasAccess(domainObject);
         }
     }
     
@@ -176,7 +176,7 @@
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode;
+        public string securityOperationName;
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -190,6 +190,6 @@
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public Framework.Configuration.ConfigurationSecurityOperationCode securityOperationCode;
+        public string securityOperationName;
     }
 }

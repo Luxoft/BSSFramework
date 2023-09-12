@@ -1,6 +1,7 @@
 ﻿using Framework.Core;
 using Framework.Projection;
 using Framework.Projection.Lambda;
+using Framework.Security;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Models.Filters;
@@ -78,7 +79,7 @@ public class SampleSystemProjectionSource : ProjectionSource
                                                 .CustomProperty<Guid[]>("Child_Identities")
                                                 .CustomProperty<Period[]>("Child_Periods")
                                                 .CustomProperty<DateTime[]>("Date_Intervals")
-                                                .CustomProperty<SampleSystemSecurityOperationCode[]>("Security_Codes");
+                                                .CustomProperty<string[]>("Security_Codes");
 
         this.TestIMRequest = new Projection<IMRequest>(() => this.TestIMRequest, true)
                              .Property(request => request.Message)
@@ -88,8 +89,8 @@ public class SampleSystemProjectionSource : ProjectionSource
 
         this.CustomCompanyLegalEntity = new Projection<CompanyLegalEntity>(() => this.CustomCompanyLegalEntity, true)
                                         .Attribute(new ExampleCustomProjectionAttribute()) // Добавлям кастомный атрибут в проекцию
-                                        .Attribute(new SampleSystemViewDomainObjectAttribute(SampleSystemSecurityOperationCode.AuthorizationImpersonate)) // Подменяем атрибут доступа проекции
-                                        .Property(legalEntity => legalEntity.Code, propertyAttributes: new Attribute[] { new SampleSystemViewDomainObjectAttribute(SampleSystemSecurityOperationCode.CompanyLegalEntityView) }) // Добавляем свойство и атрибут доступа к нему
+                                        .Attribute(new ViewDomainObjectAttribute(SampleSystemSecurityOperation.AuthorizationImpersonate)) // Подменяем атрибут доступа проекции
+                                        .Property(legalEntity => legalEntity.Code, propertyAttributes: new Attribute[] { new ViewDomainObjectAttribute(SampleSystemSecurityOperation.CompanyLegalEntityView) }) // Добавляем свойство и атрибут доступа к нему
                                         .Property(legalEntity => legalEntity.Name)
                                         .Property(legalEntity => legalEntity.NameEnglish)
                                         .Property(legalEntity => legalEntity.CurrentObj, () => this.CustomTestObjForNested)

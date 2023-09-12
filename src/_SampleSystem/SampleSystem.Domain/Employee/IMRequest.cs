@@ -3,11 +3,12 @@ using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
+using Framework.Security;
 
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.Disabled)]
+[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.Disabled))]
 public class IMRequest : Information
 {
     private string message;

@@ -71,7 +71,7 @@ public class ExtraQueryableSecurityPathTests : TestBase
                                                                .And(_ => extraQueryableSecurity, ManySecurityPathMode.Any);
 
                                                        return extraSecurityPath.ToProvider(
-                                                           (ContextSecurityOperation<SampleSystemSecurityOperationCode>)
+                                                           (ContextSecurityOperation)
                                                            context.GetSecurityOperation(SampleSystemSecurityOperationCode.EmployeeView),
                                                            context.SecurityExpressionBuilderFactory);
                                                    });

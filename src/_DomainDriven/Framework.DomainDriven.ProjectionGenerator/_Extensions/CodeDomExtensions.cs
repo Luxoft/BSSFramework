@@ -25,8 +25,17 @@ internal static class CodeDomExtensions
         {
             yield return viewAttr.GetType().ToTypeReference().ToAttributeDeclaration(
 
-                viewAttr.AllOperations.ToArray(operation =>
-                                                                                             new CodeAttributeArgument { Value = operation.Name.ToPrimitiveExpression() }));
+                viewAttr.GetViewSecurityAttributesArguments(securityOperationType).ToArray());
+        }
+    }
+
+    private static IEnumerable<CodeAttributeArgument> GetViewSecurityAttributesArguments(this ViewDomainObjectAttribute viewAttr, Type securityOperationType)
+    {
+        yield return new CodeAttributeArgument { Value = securityOperationType.ToTypeOfExpression() };
+
+        foreach (var operation in viewAttr.AllOperations)
+        {
+            yield return new CodeAttributeArgument { Value = operation.Name.ToPrimitiveExpression() };
         }
     }
 

@@ -8,9 +8,8 @@ namespace SampleSystem.BLL;
 public partial class SampleSystemEmployeeSecurityService<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>
 {
     public SampleSystemEmployeeSecurityService(
-            IAccessDeniedExceptionService accessDeniedExceptionService,
             IDisabledSecurityProviderSource disabledSecurityProviderSource,
-            ISecurityOperationResolver<PersistentDomainObjectBase, SampleSystemSecurityOperationCode> securityOperationResolver,
+            ISecurityOperationResolver<PersistentDomainObjectBase> securityOperationResolver,
             IAuthorizationSystem<Guid> authorizationSystem,
             ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
             ISampleSystemSecurityPathContainer securityPathContainer,
@@ -25,11 +24,11 @@ public partial class SampleSystemEmployeeSecurityService<TDomainObject, TBusines
     public ISampleSystemBLLContext Context { get; }
 
 
-    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(ContextSecurityOperation<SampleSystemSecurityOperationCode> securityOperation)
+    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(ContextSecurityOperation securityOperation)
     {
         var baseProvider = base.CreateSecurityProvider(securityOperation);
 
-        if (securityOperation.Code == SampleSystemSecurityOperationCode.EmployeeView)
+        if (securityOperation == SampleSystemSecurityOperation.EmployeeView)
         {
             return baseProvider.Or(employee => employee.Login == this.Context.Authorization.RunAsManager.PrincipalName);
         }

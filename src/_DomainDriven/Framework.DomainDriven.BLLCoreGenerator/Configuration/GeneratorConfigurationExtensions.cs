@@ -1,6 +1,7 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
+using Framework.Core;
 using Framework.CodeDom;
 using Framework.DomainDriven.BLL;
 using Framework.SecuritySystem;
@@ -16,7 +17,7 @@ public static class GeneratorConfigurationExtensions
         var realSecurityOperationType = securityOperationType ?? configuration.Environment.SecurityOperationType;
 
         var prop = realSecurityOperationType.GetProperties()
-                                            .Single(p => (SecurityOperation)p.GetValue(null) == securityOperation);
+                                            .Single(p => (SecurityOperation)p.GetValue(null) == securityOperation, () => new Exception($"Type '{realSecurityOperationType}' does not contains operation '{securityOperation}'"));
 
         return realSecurityOperationType.ToTypeReferenceExpression().ToPropertyReference(prop);
     }

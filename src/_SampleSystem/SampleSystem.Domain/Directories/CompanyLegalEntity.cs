@@ -2,12 +2,13 @@
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Restriction;
+using Framework.Security;
 
 namespace SampleSystem.Domain;
 
 [BLLViewRole, BLLSaveRole, BLLRemoveRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.CompanyLegalEntityView)]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.CompanyLegalEntityEdit)]
+[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.CompanyLegalEntityView))]
+[EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.CompanyLegalEntityEdit))]
 [UniqueGroup]
 public class CompanyLegalEntity :
         LegalEntityBase,

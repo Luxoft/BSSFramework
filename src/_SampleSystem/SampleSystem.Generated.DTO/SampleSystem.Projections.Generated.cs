@@ -546,7 +546,7 @@ namespace SampleSystem.Generated.DTO
         public string Name;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleSystem.SampleSystemSecurityOperationCode[] Security_Codes;
+        public string[] Security_Codes;
         
         public TestLocationCollectionPropertiesProjectionDTO()
         {

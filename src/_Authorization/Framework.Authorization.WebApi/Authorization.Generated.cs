@@ -26,7 +26,7 @@ namespace Framework.Authorization.WebApi
         protected virtual void CheckBusinessRoleAccessInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRole;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationParser.ConvertToOperation(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
             Framework.Authorization.Domain.BusinessRole domainObject = bll.GetById(businessRoleIdent.Id, true);
             Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.BusinessRole>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
@@ -327,7 +327,7 @@ namespace Framework.Authorization.WebApi
         protected virtual bool HasBusinessRoleAccessInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRole;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationParser.ConvertToOperation(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
             Framework.Authorization.Domain.BusinessRole domainObject = bll.GetById(businessRoleIdent.Id, true);
             return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.BusinessRole>(operation).HasAccess(domainObject);
         }
@@ -392,7 +392,7 @@ namespace Framework.Authorization.WebApi
         protected virtual void CheckEntityTypeAccessInternal(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityType;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationParser.ConvertToOperation(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
             Framework.Authorization.Domain.EntityType domainObject = bll.GetById(entityTypeIdent.Id, true);
             Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.EntityType>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
@@ -675,7 +675,7 @@ namespace Framework.Authorization.WebApi
         protected virtual bool HasEntityTypeAccessInternal(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityType;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationParser.ConvertToOperation(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
             Framework.Authorization.Domain.EntityType domainObject = bll.GetById(entityTypeIdent.Id, true);
             return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.EntityType>(operation).HasAccess(domainObject);
         }
@@ -696,7 +696,7 @@ namespace Framework.Authorization.WebApi
         protected virtual void CheckOperationAccessInternal(Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IOperationBLL bll = evaluateData.Context.Logics.Operation;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationParser.ConvertToOperation(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
             Framework.Authorization.Domain.Operation domainObject = bll.GetById(operationIdent.Id, true);
             Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Operation>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
@@ -979,7 +979,7 @@ namespace Framework.Authorization.WebApi
         protected virtual bool HasOperationAccessInternal(Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IOperationBLL bll = evaluateData.Context.Logics.Operation;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationParser.ConvertToOperation(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
             Framework.Authorization.Domain.Operation domainObject = bll.GetById(operationIdent.Id, true);
             return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Operation>(operation).HasAccess(domainObject);
         }
@@ -1023,7 +1023,7 @@ namespace Framework.Authorization.WebApi
         protected virtual void CheckPermissionAccessInternal(Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.Permission;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationParser.ConvertToOperation(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
             Framework.Authorization.Domain.Permission domainObject = bll.GetById(permissionIdent.Id, true);
             Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Permission>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
@@ -1274,7 +1274,7 @@ namespace Framework.Authorization.WebApi
         protected virtual bool HasPermissionAccessInternal(Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.Permission;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationParser.ConvertToOperation(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
             Framework.Authorization.Domain.Permission domainObject = bll.GetById(permissionIdent.Id, true);
             return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Permission>(operation).HasAccess(domainObject);
         }
@@ -1316,7 +1316,7 @@ namespace Framework.Authorization.WebApi
         protected virtual void CheckPrincipalAccessInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.Principal;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationParser.ConvertToOperation(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
             Framework.Authorization.Domain.Principal domainObject = bll.GetById(principalIdent.Id, true);
             Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Principal>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
@@ -1617,7 +1617,7 @@ namespace Framework.Authorization.WebApi
         protected virtual bool HasPrincipalAccessInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.Principal;
-            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationParser.ConvertToOperation(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(Framework.Authorization.AuthorizationSecurityOperation));
             Framework.Authorization.Domain.Principal domainObject = bll.GetById(principalIdent.Id, true);
             return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Principal>(operation).HasAccess(domainObject);
         }

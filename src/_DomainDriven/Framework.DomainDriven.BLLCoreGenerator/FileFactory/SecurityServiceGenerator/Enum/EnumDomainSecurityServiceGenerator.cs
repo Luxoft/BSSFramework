@@ -28,7 +28,7 @@ public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurity
 
         this.hasContext = this.Configuration.HasSecurityContext(this.DomainType);
 
-        this.BaseServiceType = (this.hasContext ? typeof(ContextDomainSecurityServiceBase<,,>) : typeof(NonContextDomainSecurityService<,,>)).ToTypeReference(
+        this.BaseServiceType = (this.hasContext ? typeof(ContextDomainSecurityService<,,>) : typeof(NonContextDomainSecurityService<,,>)).ToTypeReference(
 
          this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
          this.DomainTypeReference,

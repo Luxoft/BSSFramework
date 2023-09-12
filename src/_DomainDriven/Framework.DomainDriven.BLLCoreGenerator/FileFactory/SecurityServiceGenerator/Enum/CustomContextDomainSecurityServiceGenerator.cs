@@ -18,7 +18,7 @@ namespace Framework.DomainDriven.BLLCoreGenerator
 
             this.DomainTypeReference = genericTypes.FirstOr(() => this.DomainType.ToTypeReference());
 
-            this.BaseServiceType = typeof(DomainSecurityService<,>).ToTypeReference(
+            this.BaseServiceType = typeof(ContextDomainSecurityServiceBase<,,>).ToTypeReference(
                 this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
                 this.DomainTypeReference,
                 this.Configuration.Environment.GetIdentityType().ToTypeReference());

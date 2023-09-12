@@ -1,9 +1,10 @@
 ﻿using Framework.DomainDriven.BLL;
+using Framework.Security;
 
 namespace SampleSystem.Domain.EnversBug1676;
 
 [BLLViewRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.Disabled)]
+[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.Disabled))]
 public class WorkingCalendar1676 : BaseDirectory
 {
     private readonly Location1676 location;

@@ -1,10 +1,11 @@
 ﻿using Framework.DomainDriven.BLL;
 using Framework.Persistent;
+using Framework.Security;
 
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeeView)]
+[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeeView))]
 public class TestRootSecurityObj : BaseDirectory, IMaster<TestSecurityObjItem>
 {
     private BusinessUnit businessUnit;

@@ -15,11 +15,11 @@ public class ExampleServiceForRepository : IExampleServiceForRepository
 
     public ExampleServiceForRepository(
             IRepositoryFactory<Employee> employeeRepositoryFactory,
-            IRepositoryFactory<BusinessUnit, SampleSystemSecurityOperationCode> businessUnitRepository)
+            IRepositoryFactory<BusinessUnit> businessUnitRepository)
     {
         this.employeeRepository = employeeRepositoryFactory.Create(BLLSecurityMode.Disabled);
 
-        this.businessUnitRepository = businessUnitRepository.Create(SampleSystemSecurityOperationCode.BusinessUnitView);
+        this.businessUnitRepository = businessUnitRepository.Create(SampleSystemSecurityOperation.BusinessUnitView);
     }
 
     public async Task<(List<Employee> Employees, List<BusinessUnit> BusinessUnits)> LoadPair(CancellationToken cancellationToken = default)

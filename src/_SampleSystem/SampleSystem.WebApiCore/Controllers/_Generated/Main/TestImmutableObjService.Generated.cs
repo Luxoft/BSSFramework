@@ -16,17 +16,17 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("CheckTestImmutableObjAccess")]
         public virtual void CheckTestImmutableObjAccess(CheckTestImmutableObjAccessAutoRequest checkTestImmutableObjAccessAutoRequest)
         {
-            SampleSystem.SampleSystemSecurityOperationCode securityOperationCode = checkTestImmutableObjAccessAutoRequest.securityOperationCode;
+            string securityOperationName = checkTestImmutableObjAccessAutoRequest.securityOperationName;
             SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdent = checkTestImmutableObjAccessAutoRequest.testImmutableObjIdent;
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckTestImmutableObjAccessInternal(testImmutableObjIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckTestImmutableObjAccessInternal(testImmutableObjIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual void CheckTestImmutableObjAccessInternal(SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdent, SampleSystem.SampleSystemSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual void CheckTestImmutableObjAccessInternal(SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestImmutableObjBLL bll = evaluateData.Context.Logics.TestImmutableObj;
-            Framework.Security.SecurityOperationParser.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(SampleSystem.SampleSystemSecurityOperation));
             SampleSystem.Domain.TestImmutableObj domainObject = bll.GetById(testImmutableObjIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.TestImmutableObj>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.TestImmutableObj>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>
@@ -151,17 +151,17 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("HasTestImmutableObjAccess")]
         public virtual bool HasTestImmutableObjAccess(HasTestImmutableObjAccessAutoRequest hasTestImmutableObjAccessAutoRequest)
         {
-            SampleSystem.SampleSystemSecurityOperationCode securityOperationCode = hasTestImmutableObjAccessAutoRequest.securityOperationCode;
+            string securityOperationName = hasTestImmutableObjAccessAutoRequest.securityOperationName;
             SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdent = hasTestImmutableObjAccessAutoRequest.testImmutableObjIdent;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasTestImmutableObjAccessInternal(testImmutableObjIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasTestImmutableObjAccessInternal(testImmutableObjIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual bool HasTestImmutableObjAccessInternal(SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdent, SampleSystem.SampleSystemSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual bool HasTestImmutableObjAccessInternal(SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestImmutableObjBLL bll = evaluateData.Context.Logics.TestImmutableObj;
-            Framework.Security.SecurityOperationParser.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(securityOperationName, typeof(SampleSystem.SampleSystemSecurityOperation));
             SampleSystem.Domain.TestImmutableObj domainObject = bll.GetById(testImmutableObjIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.TestImmutableObj>(securityOperationCode).HasAccess(domainObject);
+            return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.TestImmutableObj>(operation).HasAccess(domainObject);
         }
         
         /// <summary>
@@ -200,7 +200,7 @@
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public SampleSystem.SampleSystemSecurityOperationCode securityOperationCode;
+        public string securityOperationName;
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -214,6 +214,6 @@
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public SampleSystem.SampleSystemSecurityOperationCode securityOperationCode;
+        public string securityOperationName;
     }
 }

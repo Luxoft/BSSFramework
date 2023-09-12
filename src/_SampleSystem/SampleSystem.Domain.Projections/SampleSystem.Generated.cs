@@ -139,8 +139,8 @@ namespace SampleSystem.Domain.Projections
     [Framework.Persistent.Mapping.TableAttribute(Name="CompanyLegalEntity")]
     [Framework.Projection.ProjectionAttribute(typeof(SampleSystem.Domain.CompanyLegalEntity), Framework.Projection.ProjectionRole.Default)]
     [Framework.Security.DependencySecurityAttribute(typeof(SampleSystem.Domain.CompanyLegalEntity))]
+    [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation), "BusinessRoleEdit")]
     [SampleSystem.Domain.ExampleCustomProjectionAttribute()]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.AuthorizationImpersonate)]
     public partial class CustomCompanyLegalEntity : SampleSystem.Domain.PersistentDomainObjectBase
     {
         
@@ -195,7 +195,7 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.CompanyLegalEntityView)]
+        [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation), "CompanyLegalEntityView")]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
         [Framework.Persistent.Mapping.MappingAttribute(ColumnName="code")]
         [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
@@ -745,7 +745,7 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.EmployeeView)]
+        [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation), "EmployeeView")]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
         [Framework.Persistent.Mapping.MappingAttribute(ColumnName="login")]
         [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
@@ -768,7 +768,7 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.EmployeePositionView)]
+        [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation), "EmployeePositionEdit")]
         [Framework.DomainDriven.Serialization.CustomSerializationAttribute(Framework.DomainDriven.Serialization.CustomSerializationMode.Ignore)]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.AutoNode)]
         [Framework.Persistent.Mapping.MappingAttribute(ColumnName="positionId")]
@@ -781,7 +781,7 @@ namespace SampleSystem.Domain.Projections
             }
         }
         
-        [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.EmployeePositionView)]
+        [Framework.Security.ViewDomainObjectAttribute(typeof(SampleSystem.SampleSystemSecurityOperation), "EmployeePositionEdit")]
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Default)]
         [Framework.Persistent.ExpandPathAttribute("Position_Auto.Name_Last_PositionName")]
         [Framework.Persistent.Mapping.MappingPropertyAttribute(CanInsert=false, CanUpdate=false)]
@@ -1114,7 +1114,7 @@ namespace SampleSystem.Domain.Projections
         
         [Framework.Projection.ProjectionPropertyAttribute(Framework.Projection.ProjectionPropertyRole.Custom)]
         [Framework.DomainDriven.IgnoreFetchAttribute()]
-        public abstract SampleSystem.SampleSystemSecurityOperationCode[] Security_Codes
+        public abstract string[] Security_Codes
         {
             get;
         }

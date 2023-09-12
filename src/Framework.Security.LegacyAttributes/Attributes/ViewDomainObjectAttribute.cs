@@ -51,14 +51,14 @@ public class ViewDomainObjectAttribute : DomainObjectAccessAttribute
     public ViewDomainObjectAttribute(
         Type securityOperationType,
         string primarySecurityOperation,
-        IEnumerable<string> baseSecondaryOperations)
+        params string[] baseSecondaryOperations)
         : this(
             securityOperationType.Maybe(v => v.GetSecurityOperation(primarySecurityOperation)),
-            baseSecondaryOperations.Select(v => securityOperationType.GetSecurityOperation(v)))
+            baseSecondaryOperations.ToArray(v => securityOperationType.GetSecurityOperation(v)))
     {
     }
 
-    protected ViewDomainObjectAttribute(SecurityOperation primarySecurityOperation, IEnumerable<SecurityOperation> baseSecondaryOperations)
+    public ViewDomainObjectAttribute(SecurityOperation primarySecurityOperation, params SecurityOperation[] baseSecondaryOperations)
         : base(primarySecurityOperation)
     {
         if (baseSecondaryOperations == null) throw new ArgumentNullException(nameof(baseSecondaryOperations));

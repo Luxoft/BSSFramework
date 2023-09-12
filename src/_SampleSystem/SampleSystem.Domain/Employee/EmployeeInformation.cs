@@ -1,11 +1,12 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.Restriction;
+using Framework.Security;
 
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.Disabled)]
+[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.Disabled))]
 public class EmployeeInformation : Information
 {
     private string personalEmail;

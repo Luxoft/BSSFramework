@@ -4,11 +4,11 @@ using System.Reflection;
 using Framework.Core;
 using Framework.DomainDriven.BLL.Security;
 using Framework.Security;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.SerializeMetadata;
 
 public class AnonTypeConverter<TBLLContext, TPersistentDomainObjectBase, TSource, TTarget> : ObjectConverter<TSource, TTarget>
-        where TSecurityOperationCode : struct, Enum
         where TPersistentDomainObjectBase : class
 {
     private readonly IRootSecurityService<TPersistentDomainObjectBase> _securityService;
@@ -58,9 +58,9 @@ public class AnonTypeConverter<TBLLContext, TPersistentDomainObjectBase, TSource
             }
             else
             {
-                var operation = (TSecurityOperationCode)(object)viewDomainObjectAttribute.SecurityOperationCode;
+                var operation = viewDomainObjectAttribute.SecurityOperation;
 
-                var method = new Func<Expression>(this.GetSecurityMemberBindExpression<TPersistentDomainObjectBase, object>)
+                var method = new Func<SecurityOperation, Expression>(this.GetSecurityMemberBindExpression<TPersistentDomainObjectBase, object>)
                              .Method
                              .GetGenericMethodDefinition()
                              .MakeGenericMethod(domainType, sourcePropExpr.Type);
@@ -85,7 +85,7 @@ public class AnonTypeConverter<TBLLContext, TPersistentDomainObjectBase, TSource
         return base.GetMemberBindExpression(sourcePropExpr, targetPropType);
     }
 
-    private Expression<Func<TDomainObject, TPropValue, Maybe<TPropValue>>> GetSecurityMemberBindExpression<TDomainObject, TPropValue>(TSecurityOperationCode securityOperation)
+    private Expression<Func<TDomainObject, TPropValue, Maybe<TPropValue>>> GetSecurityMemberBindExpression<TDomainObject, TPropValue>(SecurityOperation securityOperation)
             where TDomainObject : class, TPersistentDomainObjectBase
     {
         return (domainObject, propValue) =>

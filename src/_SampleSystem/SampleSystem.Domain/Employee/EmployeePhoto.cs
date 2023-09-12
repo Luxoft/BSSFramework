@@ -3,12 +3,13 @@ using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
+using Framework.Security;
 
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.EmployeeView)]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.EmployeeEdit)]
+[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeeView))]
+[EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.EmployeeEdit))]
 public class EmployeePhoto : AuditPersistentDomainObjectBase, IDetail<Employee>, ITypeObject<EmployeePhotoType>
 {
     private readonly Employee employee;

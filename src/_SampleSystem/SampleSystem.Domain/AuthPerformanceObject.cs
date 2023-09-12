@@ -1,6 +1,8 @@
-﻿namespace SampleSystem.Domain;
+﻿using Framework.Security;
 
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.BusinessUnitView)]
+namespace SampleSystem.Domain;
+
+[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.BusinessUnitView))]
 public class AuthPerformanceObject : AuditPersistentDomainObjectBase
 {
     private BusinessUnit businessUnit;

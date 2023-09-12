@@ -2707,7 +2707,7 @@ namespace SampleSystem.Generated.DTO
             {
                 mappingObject.BaseObj = null;
             }
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>(SampleSystem.SampleSystemSecurityOperationCode.CompanyLegalEntityView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>(SampleSystem.SampleSystemSecurityOperation.CompanyLegalEntityView).HasAccess(domainObject))
             {
                 string resultCode;
                 resultCode = domainObject.Code;
@@ -2765,7 +2765,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.Landlinephone = domainObject.Landlinephone;
             mappingObject.LastActionDate = domainObject.LastActionDate;
             mappingObject.LocationCode = domainObject.LocationCode;
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeeView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeeView).HasAccess(domainObject))
             {
                 string resultLogin;
                 resultLogin = domainObject.Login;
@@ -2780,7 +2780,7 @@ namespace SampleSystem.Generated.DTO
             mappingObject.NameNative = domainObject.NameNative;
             mappingObject.NameRussian = domainObject.NameRussian;
             mappingObject.NonValidateVirtualProp = domainObject.NonValidateVirtualProp;
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeePersonalCellPhoneView).HasAccess(domainObject))
             {
                 string resultPersonalCellPhone;
                 resultPersonalCellPhone = domainObject.PersonalCellPhone;
@@ -2838,7 +2838,7 @@ namespace SampleSystem.Generated.DTO
             {
                 mappingObject.PersonalAssistant = null;
             }
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeePositionView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeePositionEdit).HasAccess(domainObject))
             {
                 SampleSystem.Generated.DTO.EmployeePositionSimpleDTO resultPosition;
                 if (!object.ReferenceEquals(domainObject.Position, null))
@@ -2901,7 +2901,7 @@ namespace SampleSystem.Generated.DTO
         {
             mappingObject.CellPhones = SampleSystem.Generated.DTO.LambdaHelper.ToRichDTOList(domainObject.CellPhones, this);
             mappingObject.EmployeeToEmployeeLinks = SampleSystem.Generated.DTO.LambdaHelper.ToRichDTOList(domainObject.EmployeeToEmployeeLinks, this);
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeePersonalCellPhoneView).HasAccess(domainObject))
             {
                 System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneRichDTO> resultPersonalCellPhones;
                 resultPersonalCellPhones = SampleSystem.Generated.DTO.LambdaHelper.ToRichDTOList(domainObject.PersonalCellPhones, this);
@@ -2990,7 +2990,7 @@ namespace SampleSystem.Generated.DTO
             Framework.Core.Just<string> justLogin = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<string>>(mappingObject.Login);
             if (!object.ReferenceEquals(justLogin, null))
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeeEdit).HasAccess(domainObject))
+                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeeEdit).HasAccess(domainObject))
                 {
                     domainObject.Login = justLogin.Value;
                 }
@@ -3002,7 +3002,7 @@ namespace SampleSystem.Generated.DTO
             Framework.Core.Just<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO>> justPersonalCellPhones = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<System.Collections.Generic.List<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneStrictDTO>>>(mappingObject.PersonalCellPhones);
             if (!object.ReferenceEquals(justPersonalCellPhones, null))
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneEdit).HasAccess(domainObject))
+                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeePersonalCellPhoneEdit).HasAccess(domainObject))
                 {
                     if (!object.ReferenceEquals(justPersonalCellPhones.Value, null))
                     {
@@ -3017,7 +3017,7 @@ namespace SampleSystem.Generated.DTO
             Framework.Core.Just<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO> justPosition = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>>(mappingObject.Position);
             if (!object.ReferenceEquals(justPosition, null))
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeePositionEdit).HasAccess(domainObject))
+                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeePositionView).HasAccess(domainObject))
                 {
                     if (!object.Equals(justPosition.Value, default(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO)))
                     {
@@ -3107,7 +3107,7 @@ namespace SampleSystem.Generated.DTO
             Framework.Core.Just<string> justLogin = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<string>>(mappingObject.Login);
             if (!object.ReferenceEquals(justLogin, null))
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeeEdit).HasAccess(domainObject))
+                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeeEdit).HasAccess(domainObject))
                 {
                     domainObject.Login = justLogin.Value;
                 }
@@ -3149,7 +3149,7 @@ namespace SampleSystem.Generated.DTO
             Framework.Core.Just<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO> justPosition = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>>(mappingObject.Position);
             if (!object.ReferenceEquals(justPosition, null))
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeePositionEdit).HasAccess(domainObject))
+                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Employee>(SampleSystem.SampleSystemSecurityOperation.EmployeePositionView).HasAccess(domainObject))
                 {
                     if (!object.Equals(justPosition.Value, default(SampleSystem.Generated.DTO.EmployeePositionIdentityDTO)))
                     {
@@ -4752,7 +4752,7 @@ namespace SampleSystem.Generated.DTO
         {
             mappingObject.Field1 = domainObject.Field1;
             mappingObject.Field2 = domainObject.Field2;
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(SampleSystem.SampleSystemSecurityOperationCode.LocationView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(SampleSystem.SampleSystemSecurityOperation.LocationView).HasAccess(domainObject))
             {
                 System.Guid resultField3;
                 resultField3 = domainObject.Field3;
@@ -4785,7 +4785,7 @@ namespace SampleSystem.Generated.DTO
             Framework.Core.Just<System.Guid> justField3 = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<System.Guid>>(mappingObject.Field3);
             if (!object.ReferenceEquals(justField3, null))
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(SampleSystem.SampleSystemSecurityOperationCode.LocationEdit).HasAccess(domainObject))
+                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(SampleSystem.SampleSystemSecurityOperation.LocationEdit).HasAccess(domainObject))
                 {
                     domainObject.Field3 = justField3.Value;
                 }
@@ -4816,7 +4816,7 @@ namespace SampleSystem.Generated.DTO
             Framework.Core.Just<System.Guid> justField3 = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<System.Guid>>(mappingObject.Field3);
             if (!object.ReferenceEquals(justField3, null))
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(SampleSystem.SampleSystemSecurityOperationCode.LocationEdit).HasAccess(domainObject))
+                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Example1>(SampleSystem.SampleSystemSecurityOperation.LocationEdit).HasAccess(domainObject))
                 {
                     domainObject.Field3 = justField3.Value;
                 }
@@ -4978,7 +4978,7 @@ namespace SampleSystem.Generated.DTO
             {
                 mappingObject.ApprovedBy = null;
             }
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.HRDepartment>(SampleSystem.SampleSystemSecurityOperationCode.CompanyLegalEntityView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.HRDepartment>(SampleSystem.SampleSystemSecurityOperation.CompanyLegalEntityView).HasAccess(domainObject))
             {
                 SampleSystem.Generated.DTO.CompanyLegalEntitySimpleDTO resultCompanyLegalEntity;
                 if (!object.ReferenceEquals(domainObject.CompanyLegalEntity, null))
@@ -5084,7 +5084,7 @@ namespace SampleSystem.Generated.DTO
             Framework.Core.Just<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO> justCompanyLegalEntity = Framework.Core.PipeObjectExtensions.AsCast<Framework.Core.Just<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>>(mappingObject.CompanyLegalEntity);
             if (!object.ReferenceEquals(justCompanyLegalEntity, null))
             {
-                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.HRDepartment>(SampleSystem.SampleSystemSecurityOperationCode.CompanyLegalEntityEdit).HasAccess(domainObject))
+                if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.HRDepartment>(SampleSystem.SampleSystemSecurityOperation.CompanyLegalEntityEdit).HasAccess(domainObject))
                 {
                     if (!object.Equals(justCompanyLegalEntity.Value, default(SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO)))
                     {
@@ -6711,7 +6711,7 @@ namespace SampleSystem.Generated.DTO
             }
             mappingObject.CoreBusinessUnitName = domainObject.CoreBusinessUnitName;
             mappingObject.CoreBusinessUnitProjects = SampleSystem.Generated.DTO.LambdaHelper.ToProjectionDTOList(domainObject.CoreBusinessUnitProjects, this);
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestEmployee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeeView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestEmployee>(SampleSystem.SampleSystemSecurityOperation.EmployeeView).HasAccess(domainObject))
             {
                 string resultLogin;
                 resultLogin = domainObject.Login;
@@ -6722,7 +6722,7 @@ namespace SampleSystem.Generated.DTO
                 mappingObject.Login = Framework.Core.Maybe<string>.Nothing;
             }
             mappingObject.NameEngFirstName = domainObject.NameEngFirstName;
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestEmployee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeePositionView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestEmployee>(SampleSystem.SampleSystemSecurityOperation.EmployeePositionEdit).HasAccess(domainObject))
             {
                 string resultPositionName;
                 resultPositionName = domainObject.PositionName;
@@ -6942,7 +6942,7 @@ namespace SampleSystem.Generated.DTO
         
         public virtual void MapTestLegacyEmployee(SampleSystem.Domain.Projections.TestLegacyEmployee domainObject, SampleSystem.Generated.DTO.TestLegacyEmployeeProjectionDTO mappingObject)
         {
-            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestLegacyEmployee>(SampleSystem.SampleSystemSecurityOperationCode.EmployeeView).HasAccess(domainObject))
+            if (this.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Projections.TestLegacyEmployee>(SampleSystem.SampleSystemSecurityOperation.EmployeeView).HasAccess(domainObject))
             {
                 string resultLogin;
                 resultLogin = domainObject.Login;

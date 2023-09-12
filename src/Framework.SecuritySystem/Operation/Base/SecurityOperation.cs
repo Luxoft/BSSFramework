@@ -3,9 +3,15 @@
 /// <summary>
 /// Операция доступа
 /// </summary>
-public abstract record SecurityOperation (string Name)
+public abstract record SecurityOperation(string Name)
 {
     public bool AdminHasAccess { get; init; } = true;
+
+    public string Description { get; init; }
+
+    public bool IsClient { get; init; }
+
+    public SecurityOperation ApproveOperation { get; init; }
 
     public override string ToString() => this.Name;
 }

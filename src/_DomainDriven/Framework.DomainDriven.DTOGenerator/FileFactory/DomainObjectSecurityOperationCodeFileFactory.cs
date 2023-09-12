@@ -51,7 +51,6 @@ public class DomainObjectSecurityOperationCodeFileFactory<TConfiguration> : File
                select new CodeMemberField
                       {
                               Name = securityOperation.Name,
-                              //InitExpression = securityOperationCode.ToPrimitiveExpression(),
                               CustomAttributes =
                               {
                                       new CodeAttributeDeclaration (new CodeTypeReference(typeof(EnumMemberAttribute)))

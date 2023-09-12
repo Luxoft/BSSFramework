@@ -21,6 +21,11 @@ public abstract class DependencyDomainSecurityServiceBase<TPersistentDomainObjec
         this.baseDomainSecurityService = baseDomainSecurityService ?? throw new ArgumentNullException(nameof(baseDomainSecurityService));
     }
 
+    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(BLLSecurityMode securityMode)
+    {
+        return this.CreateDependencySecurityProvider(this.baseDomainSecurityService.GetSecurityProvider(securityMode));
+    }
+
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityOperation securityOperation)
     {
         return this.CreateDependencySecurityProvider(this.baseDomainSecurityService.GetSecurityProvider(securityOperation));

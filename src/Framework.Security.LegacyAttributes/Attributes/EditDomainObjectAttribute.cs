@@ -17,7 +17,6 @@ public class EditDomainObjectAttribute : DomainObjectAccessAttribute
     /// <summary>
     /// Констуктор с доступом по операции
     /// </summary>
-    /// <param name="securityOperationCode">Операция просмотра</param>
     public EditDomainObjectAttribute(Type securityOperationType, string name)
         : base(securityOperationType, name)
     {

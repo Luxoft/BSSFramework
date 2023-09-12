@@ -52,17 +52,6 @@ public static class TypeExtensions
         return sourceType.GetSecurityNodeInterfaces().Where(interfaceType => interfaceType.IsGenericType);
     }
 
-    public static IEnumerable<Enum> GetSecurityOperationCodes(this Type enumType)
-    {
-        if (enumType == null) throw new ArgumentNullException(nameof(enumType));
-
-        return from Enum securityOperationCode in Enum.GetValues(enumType)
-
-               //where !securityOperationCode.IsDefaultEnumValue()
-
-               select securityOperationCode;
-    }
-
     public static Dictionary<Type, ReadOnlyCollection<SecurityOperation>> GetTypesWithSecondarySecurityOperations(this IEnumerable<Type> source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));

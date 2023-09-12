@@ -156,8 +156,6 @@ public class ImplementedBLLFactoryFileFactory<TConfiguration> : FileFactory<TCon
     {
         var genericDomainTypeRef = new CodeTypeParameter("TDomainObject");
 
-        var securityOperationModeTypeRef = this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference();
-
         var securityOperationModeParamName = "securityOperation";
 
 
@@ -200,7 +198,7 @@ public class ImplementedBLLFactoryFileFactory<TConfiguration> : FileFactory<TCon
                        ReturnType = resultType,
                        Statements = { request.ToSwitchExpressionStatement(lastSwitchElement) },
                        TypeParameters = { genericDomainTypeRef, },
-                       Parameters = { new CodeParameterDeclarationExpression(securityOperationModeTypeRef, securityOperationModeParamName) }
+                       Parameters = { new CodeParameterDeclarationExpression(typeof(SecurityOperation), securityOperationModeParamName) }
                };
     }
 

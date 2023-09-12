@@ -68,6 +68,6 @@ public class GetChangeModelMethodGenerator<TConfiguration> : ModelMethodGenerato
             return base.GetBLLSecurityParameter();
         }
 
-        return modelSecurityAttribute.SecurityOperationCode;
+        return modelSecurityAttribute.SecurityOperation;
     }
 }

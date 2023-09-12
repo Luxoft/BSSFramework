@@ -76,6 +76,6 @@ public class MassChangeMethodGenerator<TConfiguration> : ModelMethodGenerator<TC
             return base.GetBLLSecurityParameter();
         }
 
-        return modelSecurityAttribute.SecurityOperationCode;
+        return modelSecurityAttribute.SecurityOperation;
     }
 }

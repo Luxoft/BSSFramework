@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Reflection;
 
 using Framework.DomainDriven.Generation.Domain;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.DTOGenerator;
 
@@ -19,7 +20,7 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
 
     IReadOnlyCollection<Type> ProjectionTypes { get; }
 
-    IReadOnlyDictionary<Type, ReadOnlyCollection<Enum>> TypesWithSecondarySecurityOperations { get; }
+    IReadOnlyDictionary<Type, ReadOnlyCollection<SecurityOperation>> TypesWithSecondarySecurityOperations { get; }
 
     bool ExpandStrictMaybeToDefault { get; }
 

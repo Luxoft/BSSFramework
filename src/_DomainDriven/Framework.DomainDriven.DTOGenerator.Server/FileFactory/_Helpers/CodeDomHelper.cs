@@ -2,6 +2,8 @@
 
 using Framework.CodeDom;
 using Framework.Core;
+using Framework.DomainDriven.BLLCoreGenerator;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.DTOGenerator.Server;
 
@@ -52,10 +54,10 @@ internal static class CodeDomHelper
 
 
 
-    public static CodeExpression ToHasAccessMethod(this IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase> configuration, CodeExpression contextRef, Enum securityOperationCode, Type domainType, CodeParameterDeclarationExpression domainObjectParameter)
+    public static CodeExpression ToHasAccessMethod(this IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase> configuration, CodeExpression contextRef, SecurityOperation securityOperation, Type domainType, CodeParameterDeclarationExpression domainObjectParameter)
     {
         return configuration.Environment.BLLCore.GetGetSecurityProviderMethodReferenceExpression(contextRef, domainType)
-                            .ToMethodInvokeExpression(securityOperationCode.ToPrimitiveExpression())
+                            .ToMethodInvokeExpression(configuration.Environment.BLLCore.GetSecurityCodeExpression(securityOperation))
                             .ToMethodInvokeExpression("HasAccess", domainObjectParameter.ToVariableReferenceExpression());
     }
 

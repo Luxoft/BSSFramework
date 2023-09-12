@@ -120,7 +120,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
 
             if (securityOperationAttr != null && altSecurityAttr)
             {
-                return securityOperationAttr.SecurityOperationCode;
+                return securityOperationAttr.SecurityOperation;
             }
             else if (securityOperationAttr != null || altSecurityAttr)
             {

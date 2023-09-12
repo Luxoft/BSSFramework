@@ -37,7 +37,7 @@ public abstract class GetByODataQueryWithFilterMethodGeneratorBase<TConfiguratio
             return base.GetBLLSecurityParameter();
         }
 
-        return modelSecurityAttribute.SecurityOperationCode;
+        return modelSecurityAttribute.SecurityOperation;
 
     }
 

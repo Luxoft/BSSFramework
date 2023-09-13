@@ -32,19 +32,8 @@ namespace Framework.Configuration.BLL
             base.RegisterHandler<Framework.Configuration.Domain.ExceptionMessage>(this.GetExceptionMessageValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.ExceptionMessageRootFilterModel>(this.GetExceptionMessageRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.LogMessage>(this.GetLogMessageValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationModel>(this.GetReportGenerationModelValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationRequestModel>(this.GetReportGenerationRequestModelValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationValue>(this.GetReportGenerationValueValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.Models.Custom.Reports.ReportParameterValue>(this.GetReportParameterValueValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.NamedLock>(this.GetNamedLockValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.QueueProcessingState>(this.GetQueueProcessingStateValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight>(this.GetAccessableBusinessRoleReportRightValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.Reports.AccessableOperationReportRight>(this.GetAccessableOperationReportRightValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight>(this.GetAccessablePrincipalReportRightValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.Reports.Report>(this.GetReportValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.Reports.ReportFilter>(this.GetReportFilterValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.Reports.ReportParameter>(this.GetReportParameterValidationResult);
-            base.RegisterHandler<Framework.Configuration.Domain.Reports.ReportProperty>(this.GetReportPropertyValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.SentMessage>(this.GetSentMessageValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.Sequence>(this.GetSequenceValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.SequenceCreateModel>(this.GetSequenceCreateModelValidationResult);
@@ -53,21 +42,6 @@ namespace Framework.Configuration.BLL
             base.RegisterHandler<Framework.Configuration.Domain.SystemConstantRootFilterModel>(this.GetSystemConstantRootFilterModelValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.TargetSystem>(this.GetTargetSystemValidationResult);
             base.RegisterHandler<Framework.Configuration.Domain.TargetSystemRootFilterModel>(this.GetTargetSystemRootFilterModelValidationResult);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetAccessableBusinessRoleReportRightValidationResult(Framework.Configuration.Domain.Reports.AccessableBusinessRoleReportRight source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetAccessableOperationReportRightValidationResult(Framework.Configuration.Domain.Reports.AccessableOperationReportRight source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetAccessablePrincipalReportRightValidationResult(Framework.Configuration.Domain.Reports.AccessablePrincipalReportRight source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
         }
         
         protected virtual Framework.Validation.ValidationResult GetCodeFirstSubscriptionRootFilterModelValidationResult(Framework.Configuration.Domain.CodeFirstSubscriptionRootFilterModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
@@ -151,46 +125,6 @@ namespace Framework.Configuration.BLL
         }
         
         protected virtual Framework.Validation.ValidationResult GetQueueProcessingStateValidationResult(Framework.Configuration.Domain.QueueProcessingState source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetReportFilterValidationResult(Framework.Configuration.Domain.Reports.ReportFilter source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetReportGenerationModelValidationResult(Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetReportGenerationRequestModelValidationResult(Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationRequestModel source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetReportGenerationValueValidationResult(Framework.Configuration.Domain.Models.Custom.Reports.ReportGenerationValue source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetReportParameterValidationResult(Framework.Configuration.Domain.Reports.ReportParameter source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetReportParameterValueValidationResult(Framework.Configuration.Domain.Models.Custom.Reports.ReportParameterValue source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetReportPropertyValidationResult(Framework.Configuration.Domain.Reports.ReportProperty source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
-        {
-            return base.GetValidationResult(source, operationContext, ownerState, false);
-        }
-        
-        protected virtual Framework.Validation.ValidationResult GetReportValidationResult(Framework.Configuration.Domain.Reports.Report source, Framework.Configuration.Domain.ConfigurationOperationContext operationContext, Framework.Validation.IValidationState ownerState)
         {
             return base.GetValidationResult(source, operationContext, ownerState, false);
         }

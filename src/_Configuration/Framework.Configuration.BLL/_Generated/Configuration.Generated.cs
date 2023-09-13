@@ -158,90 +158,6 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class ReportBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.Reports.Report, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IReportBLL
-    {
-        
-		partial void Initialize();
-        
-        public ReportBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Reports.Report> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityProvider, specificationEvaluator)
-        {
-            this.Initialize();
-        }
-    }
-    
-    public partial class ReportBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.IReportBLL, Framework.Configuration.BLL.ReportBLL, Framework.Configuration.Domain.Reports.Report>, Framework.Configuration.BLL.IReportBLLFactory
-    {
-        
-        public ReportBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
-    public partial class ReportFilterBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.Reports.ReportFilter, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IReportFilterBLL
-    {
-        
-		partial void Initialize();
-        
-        public ReportFilterBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Reports.ReportFilter> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityProvider, specificationEvaluator)
-        {
-            this.Initialize();
-        }
-    }
-    
-    public partial class ReportFilterBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.IReportFilterBLL, Framework.Configuration.BLL.ReportFilterBLL, Framework.Configuration.Domain.Reports.ReportFilter>, Framework.Configuration.BLL.IReportFilterBLLFactory
-    {
-        
-        public ReportFilterBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
-    public partial class ReportParameterBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.Reports.ReportParameter, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IReportParameterBLL
-    {
-        
-		partial void Initialize();
-        
-        public ReportParameterBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Reports.ReportParameter> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityProvider, specificationEvaluator)
-        {
-            this.Initialize();
-        }
-    }
-    
-    public partial class ReportParameterBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.IReportParameterBLL, Framework.Configuration.BLL.ReportParameterBLL, Framework.Configuration.Domain.Reports.ReportParameter>, Framework.Configuration.BLL.IReportParameterBLLFactory
-    {
-        
-        public ReportParameterBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
-    public partial class ReportPropertyBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.Reports.ReportProperty, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.IReportPropertyBLL
-    {
-        
-		partial void Initialize();
-        
-        public ReportPropertyBLL(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Reports.ReportProperty> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityProvider, specificationEvaluator)
-        {
-            this.Initialize();
-        }
-    }
-    
-    public partial class ReportPropertyBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.BLL.IReportPropertyBLL, Framework.Configuration.BLL.ReportPropertyBLL, Framework.Configuration.Domain.Reports.ReportProperty>, Framework.Configuration.BLL.IReportPropertyBLLFactory
-    {
-        
-        public ReportPropertyBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
     public partial class SentMessageBLL : Framework.Configuration.BLL.SecurityDomainBLLBase<Framework.Configuration.Domain.SentMessage, Framework.DomainDriven.BLL.BLLBaseOperation>, Framework.Configuration.BLL.ISentMessageBLL
     {
         
@@ -346,14 +262,6 @@ namespace Framework.Configuration.BLL
         private Framework.Configuration.BLL.ConfigurationImplementedBLLFactory implementedBLLFactory;
         
         private Framework.Configuration.BLL.INamedLockBLL namedLockBLL;
-        
-        private Framework.Configuration.BLL.IReportBLL reportBLL;
-        
-        private Framework.Configuration.BLL.IReportFilterBLL reportFilterBLL;
-        
-        private Framework.Configuration.BLL.IReportParameterBLL reportParameterBLL;
-        
-        private Framework.Configuration.BLL.IReportPropertyBLL reportPropertyBLL;
         
         private Framework.Configuration.BLL.ISentMessageBLL sentMessageBLL;
         
@@ -532,86 +440,6 @@ namespace Framework.Configuration.BLL
             }
         }
         
-        public Framework.Configuration.BLL.IReportBLL Report
-        {
-            get
-            {
-                if (object.ReferenceEquals(this.reportBLL, null))
-                {
-                    this.reportBLL = this.ReportFactory.Create();
-                }
-                return this.reportBLL;
-            }
-        }
-        
-        public Framework.Configuration.BLL.IReportBLLFactory ReportFactory
-        {
-            get
-            {
-                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Framework.Configuration.BLL.IReportBLLFactory>(this.Context.ServiceProvider);
-            }
-        }
-        
-        public Framework.Configuration.BLL.IReportFilterBLL ReportFilter
-        {
-            get
-            {
-                if (object.ReferenceEquals(this.reportFilterBLL, null))
-                {
-                    this.reportFilterBLL = this.ReportFilterFactory.Create();
-                }
-                return this.reportFilterBLL;
-            }
-        }
-        
-        public Framework.Configuration.BLL.IReportFilterBLLFactory ReportFilterFactory
-        {
-            get
-            {
-                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Framework.Configuration.BLL.IReportFilterBLLFactory>(this.Context.ServiceProvider);
-            }
-        }
-        
-        public Framework.Configuration.BLL.IReportParameterBLL ReportParameter
-        {
-            get
-            {
-                if (object.ReferenceEquals(this.reportParameterBLL, null))
-                {
-                    this.reportParameterBLL = this.ReportParameterFactory.Create();
-                }
-                return this.reportParameterBLL;
-            }
-        }
-        
-        public Framework.Configuration.BLL.IReportParameterBLLFactory ReportParameterFactory
-        {
-            get
-            {
-                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Framework.Configuration.BLL.IReportParameterBLLFactory>(this.Context.ServiceProvider);
-            }
-        }
-        
-        public Framework.Configuration.BLL.IReportPropertyBLL ReportProperty
-        {
-            get
-            {
-                if (object.ReferenceEquals(this.reportPropertyBLL, null))
-                {
-                    this.reportPropertyBLL = this.ReportPropertyFactory.Create();
-                }
-                return this.reportPropertyBLL;
-            }
-        }
-        
-        public Framework.Configuration.BLL.IReportPropertyBLLFactory ReportPropertyFactory
-        {
-            get
-            {
-                return Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<Framework.Configuration.BLL.IReportPropertyBLLFactory>(this.Context.ServiceProvider);
-            }
-        }
-        
         public Framework.Configuration.BLL.ISentMessageBLL SentMessage
         {
             get
@@ -701,10 +529,6 @@ namespace Framework.Configuration.BLL
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IDomainTypeBLLFactory, Framework.Configuration.BLL.DomainTypeBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IExceptionMessageBLLFactory, Framework.Configuration.BLL.ExceptionMessageBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.INamedLockBLLFactory, Framework.Configuration.BLL.NamedLockBLLFactory>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IReportBLLFactory, Framework.Configuration.BLL.ReportBLLFactory>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IReportFilterBLLFactory, Framework.Configuration.BLL.ReportFilterBLLFactory>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IReportParameterBLLFactory, Framework.Configuration.BLL.ReportParameterBLLFactory>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.IReportPropertyBLLFactory, Framework.Configuration.BLL.ReportPropertyBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ISentMessageBLLFactory, Framework.Configuration.BLL.SentMessageBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ISequenceBLLFactory, Framework.Configuration.BLL.SequenceBLLFactory>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.Configuration.BLL.ISystemConstantBLLFactory, Framework.Configuration.BLL.SystemConstantBLLFactory>(serviceCollection);
@@ -764,22 +588,6 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.NamedLock));
             }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.Report)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.Report));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.ReportFilter)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ReportFilter));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.ReportParameter)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ReportParameter));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.ReportProperty)))
-            {
-                return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ReportProperty));
-            }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SentMessage)))
             {
                 return ((Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SentMessage));
@@ -831,22 +639,6 @@ namespace Framework.Configuration.BLL
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.NamedLock)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.NamedLockFactory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.Report)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ReportFactory.Create(((Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Reports.Report>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.ReportFilter)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ReportFilterFactory.Create(((Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Reports.ReportFilter>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.ReportParameter)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ReportParameterFactory.Create(((Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Reports.ReportParameter>)(securityProvider)))));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.ReportProperty)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ReportPropertyFactory.Create(((Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Reports.ReportProperty>)(securityProvider)))));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SentMessage)))
             {
@@ -900,22 +692,6 @@ namespace Framework.Configuration.BLL
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.NamedLockFactory.Create()));
             }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.Report)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ReportFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.ReportFilter)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ReportFilterFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.ReportParameter)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ReportParameterFactory.Create(securityOperation)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.ReportProperty)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ReportPropertyFactory.Create(securityOperation)));
-            }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SentMessage)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.SentMessageFactory.Create()));
@@ -967,22 +743,6 @@ namespace Framework.Configuration.BLL
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.NamedLock)))
             {
                 return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.NamedLockFactory.Create()));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.Report)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ReportFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.ReportFilter)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ReportFilterFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.ReportParameter)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ReportParameterFactory.Create(bllSecurityMode)));
-            }
-            else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.Reports.ReportProperty)))
-            {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.ReportPropertyFactory.Create(bllSecurityMode)));
             }
             else if ((typeof(TDomainObject) == typeof(Framework.Configuration.Domain.SentMessage)))
             {

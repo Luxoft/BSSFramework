@@ -49,16 +49,6 @@ public static class ConfigurationSecurityOperation
 
     #endregion
 
-    #region Report
-
-    public static NonContextSecurityOperation<Guid> ReportView { get; } = new(nameof(ReportView), new Guid("62BA8B83-152D-47A6-A412-52BAC8E451FA"));
-
-    public static NonContextSecurityOperation<Guid> ReportEdit { get; } = new(nameof(ReportEdit), new Guid("933920E2-ED24-4F8F-90B9-4B3CB2A9F74B"));
-
-    public static NonContextSecurityOperation<Guid> ReportGeneration { get; } = new(nameof(ReportGeneration), new Guid("76C6BC45-C2B6-4271-AEAA-445457579EB0"));
-
-    #endregion
-
     /// <summary>
     /// Отображение внутренних серверных ошибок клиенту
     /// </summary>

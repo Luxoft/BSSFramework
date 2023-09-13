@@ -2,7 +2,6 @@
 using Automation.Utils;
 
 using Framework.Configuration.Domain;
-using Framework.Configuration.Domain.Reports;
 using Framework.Configuration.Generated.DTO;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
@@ -497,106 +496,5 @@ public partial class DataHelper
                                         });
 
         return result;
-    }
-
-    public ReportIdentityDTO SaveReport(
-            Guid? id = null,
-            string name = null,
-            string description = "",
-            string domainTypeName = nameof(Employee),
-            string owner = "")
-    {
-        return this.EvaluateWrite(
-                                  eval =>
-                                  {
-                                      var report = new Report()
-                                                   {
-                                                           Name = name ?? TextRandomizer.UniqueString(nameof(Report)),
-                                                           Description = description,
-                                                           DomainTypeName = domainTypeName,
-                                                           Owner = owner
-                                                   };
-                                      eval.Configuration.Logics.Report.Insert(report, id ?? Guid.NewGuid());
-
-                                      return report.ToIdentityDTO();
-                                  });
-    }
-
-    public ReportParameterIdentityDTO SaveReportParameter(
-            ReportIdentityDTO reportIdentity,
-            Guid? id = null,
-            string name = null,
-            string typeName = nameof(Location),
-            string displayValueProperty = nameof(Location.Name))
-    {
-        return this.EvaluateWrite(
-                                  eval =>
-                                  {
-                                      var report = eval.Configuration.Logics.Report.GetById(reportIdentity.Id, true);
-
-                                      var parameter = new ReportParameter(report)
-                                                      {
-                                                              Name = name ?? TextRandomizer.UniqueString(nameof(ReportParameter)),
-                                                              TypeName = typeName,
-                                                              DisplayValueProperty = displayValueProperty
-                                                      };
-
-                                      eval.Configuration.Logics.ReportParameter.Insert(parameter, id ?? Guid.NewGuid());
-
-                                      return parameter.ToIdentityDTO();
-                                  });
-    }
-
-    public void SaveReportProperty(
-            ReportIdentityDTO reportIdentity,
-            string propertyPath,
-            Guid? id = null,
-            string alias = null,
-            string formula = null,
-            int order = 0,
-            int sortOrdered = 0,
-            int sortType = 0)
-    {
-        this.EvaluateWrite(
-                           eval =>
-                           {
-                               var report = eval.Configuration.Logics.Report.GetById(reportIdentity.Id, true);
-
-                               var property = new ReportProperty(report)
-                                              {
-                                                      PropertyPath = propertyPath,
-                                                      Alias = alias ?? propertyPath,
-                                                      Formula = formula,
-                                                      Order = order,
-                                                      SortOrdered = sortOrdered,
-                                                      SortType = sortType
-                                              };
-
-                               eval.Configuration.Logics.ReportProperty.Insert(property, id ?? Guid.NewGuid());
-                           });
-    }
-
-    public void SaveReportFilter(
-            ReportIdentityDTO reportIdentity,
-            ReportParameterIdentityDTO parameterIdentity,
-            Guid? id = null,
-            string property = nameof(Employee.Location),
-            string filterOperator = "eq")
-    {
-        this.EvaluateWrite(
-                           eval =>
-                           {
-                               var report = eval.Configuration.Logics.Report.GetById(reportIdentity.Id, true);
-                               var parameter = eval.Configuration.Logics.ReportParameter.GetById(parameterIdentity.Id, true);
-
-                               eval.Configuration.Logics.ReportFilter.Save(new ReportFilter(report)
-                                                                           {
-                                                                                   IsValueFromParameters = true,
-                                                                                   Value = parameter.Name,
-                                                                                   Property = property,
-                                                                                   FilterOperator = filterOperator
-                                                                           });
-                           });
-
     }
 }

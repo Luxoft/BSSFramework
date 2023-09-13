@@ -32,26 +32,6 @@ namespace Framework.Configuration.BLL
             {
                 return Framework.Configuration.ConfigurationSecurityOperation.ExceptionMessageView;
             }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(Framework.Configuration.Domain.Reports.Report) == domainType))
-            {
-                return Framework.Configuration.ConfigurationSecurityOperation.ReportView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(Framework.Configuration.Domain.Reports.Report) == domainType))
-            {
-                return Framework.Configuration.ConfigurationSecurityOperation.ReportEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(Framework.Configuration.Domain.Reports.ReportFilter) == domainType))
-            {
-                return Framework.Configuration.ConfigurationSecurityOperation.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(Framework.Configuration.Domain.Reports.ReportParameter) == domainType))
-            {
-                return Framework.Configuration.ConfigurationSecurityOperation.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(Framework.Configuration.Domain.Reports.ReportProperty) == domainType))
-            {
-                return Framework.Configuration.ConfigurationSecurityOperation.Disabled;
-            }
             else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(Framework.Configuration.Domain.Sequence) == domainType))
             {
                 return Framework.Configuration.ConfigurationSecurityOperation.SequenceView;
@@ -199,10 +179,6 @@ namespace Framework.Configuration.BLL
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.CodeFirstSubscription>, Framework.Configuration.BLL.ConfigurationCodeFirstSubscriptionSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.DomainType>, Framework.Configuration.BLL.ConfigurationDomainTypeSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.ExceptionMessage>, Framework.Configuration.BLL.ConfigurationExceptionMessageSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Reports.Report>, Framework.Configuration.BLL.ConfigurationReportSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Reports.ReportFilter>, Framework.Configuration.BLL.ConfigurationReportFilterSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Reports.ReportParameter>, Framework.Configuration.BLL.ConfigurationReportParameterSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Reports.ReportProperty>, Framework.Configuration.BLL.ConfigurationReportPropertySecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Sequence>, Framework.Configuration.BLL.ConfigurationSequenceSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.SystemConstant>, Framework.Configuration.BLL.ConfigurationSystemConstantSecurityService>(serviceCollection);
             Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.TargetSystem>, Framework.Configuration.BLL.ConfigurationTargetSystemSecurityService>(serviceCollection);
@@ -239,42 +215,6 @@ namespace Framework.Configuration.BLL
     {
         
         public ConfigurationExceptionMessageSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class ConfigurationReportSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.Reports.Report, System.Guid>
-    {
-        
-        public ConfigurationReportSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class ConfigurationReportFilterSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.Reports.ReportFilter, System.Guid>
-    {
-        
-        public ConfigurationReportFilterSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class ConfigurationReportParameterSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.Reports.ReportParameter, System.Guid>
-    {
-        
-        public ConfigurationReportParameterSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class ConfigurationReportPropertySecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.Reports.ReportProperty, System.Guid>
-    {
-        
-        public ConfigurationReportPropertySecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
@@ -380,46 +320,6 @@ namespace Framework.Configuration.BLL
             get;
         }
         
-        Framework.Configuration.BLL.IReportBLL Report
-        {
-            get;
-        }
-        
-        Framework.Configuration.BLL.IReportBLLFactory ReportFactory
-        {
-            get;
-        }
-        
-        Framework.Configuration.BLL.IReportFilterBLL ReportFilter
-        {
-            get;
-        }
-        
-        Framework.Configuration.BLL.IReportFilterBLLFactory ReportFilterFactory
-        {
-            get;
-        }
-        
-        Framework.Configuration.BLL.IReportParameterBLL ReportParameter
-        {
-            get;
-        }
-        
-        Framework.Configuration.BLL.IReportParameterBLLFactory ReportParameterFactory
-        {
-            get;
-        }
-        
-        Framework.Configuration.BLL.IReportPropertyBLL ReportProperty
-        {
-            get;
-        }
-        
-        Framework.Configuration.BLL.IReportPropertyBLLFactory ReportPropertyFactory
-        {
-            get;
-        }
-        
         Framework.Configuration.BLL.ISentMessageBLL SentMessage
         {
             get;
@@ -514,38 +414,6 @@ namespace Framework.Configuration.BLL
     }
     
     public partial interface INamedLockBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.INamedLockBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.NamedLock>>
-    {
-    }
-    
-    public partial interface IReportBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.Reports.Report, System.Guid>
-    {
-    }
-    
-    public partial interface IReportBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IReportBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Reports.Report>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IReportBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IReportBLL, Framework.SecuritySystem.BLLSecurityMode>
-    {
-    }
-    
-    public partial interface IReportFilterBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.Reports.ReportFilter, System.Guid>
-    {
-    }
-    
-    public partial interface IReportFilterBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IReportFilterBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Reports.ReportFilter>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IReportFilterBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IReportFilterBLL, Framework.SecuritySystem.BLLSecurityMode>
-    {
-    }
-    
-    public partial interface IReportParameterBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.Reports.ReportParameter, System.Guid>
-    {
-    }
-    
-    public partial interface IReportParameterBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IReportParameterBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Reports.ReportParameter>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IReportParameterBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IReportParameterBLL, Framework.SecuritySystem.BLLSecurityMode>
-    {
-    }
-    
-    public partial interface IReportPropertyBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.Reports.ReportProperty, System.Guid>
-    {
-    }
-    
-    public partial interface IReportPropertyBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IReportPropertyBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Reports.ReportProperty>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IReportPropertyBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IReportPropertyBLL, Framework.SecuritySystem.BLLSecurityMode>
     {
     }
     

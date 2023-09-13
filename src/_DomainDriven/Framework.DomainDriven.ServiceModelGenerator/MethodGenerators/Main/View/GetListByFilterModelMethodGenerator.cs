@@ -64,6 +64,6 @@ public class GetListByFilterModelMethodGenerator<TConfiguration> : ViewCollectio
             return base.GetBLLSecurityParameter();
         }
 
-        return modelSecurityAttribute.SecurityOperationCode;
+        return modelSecurityAttribute.SecurityOperation;
     }
 }

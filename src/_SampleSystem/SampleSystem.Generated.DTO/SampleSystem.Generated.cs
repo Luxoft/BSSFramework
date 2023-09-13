@@ -13,68 +13,68 @@ namespace SampleSystem.Generated.DTO
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnit), "DomainObjectSecurityOperationCode", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public enum SampleSystemBusinessUnitSecurityOperationCode : int
+    public enum SampleSystemBusinessUnitSecurityOperationCode
     {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        BusinessUnitHrDepartmentEdit = SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitHrDepartmentEdit,
+        BusinessUnitHrDepartmentEdit,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        BusinessUnitHrDepartmentView = SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitHrDepartmentView,
+        BusinessUnitHrDepartmentView,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        BusinessUnitView = SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitView,
+        BusinessUnitView,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        EmployeeEdit = SampleSystem.SampleSystemSecurityOperationCode.EmployeeEdit,
+        EmployeeEdit,
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment), "DomainObjectSecurityOperationCode", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public enum SampleSystemHRDepartmentSecurityOperationCode : int
+    public enum SampleSystemHRDepartmentSecurityOperationCode
     {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        EmployeeEdit = SampleSystem.SampleSystemSecurityOperationCode.EmployeeEdit,
+        EmployeeEdit,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        HRDepartmentView = SampleSystem.SampleSystemSecurityOperationCode.HRDepartmentView,
+        HRDepartmentView,
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Location), "DomainObjectSecurityOperationCode", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public enum SampleSystemLocationSecurityOperationCode : int
+    public enum SampleSystemLocationSecurityOperationCode
     {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        HRDepartmentEdit = SampleSystem.SampleSystemSecurityOperationCode.HRDepartmentEdit,
+        HRDepartmentEdit,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        LocationView = SampleSystem.SampleSystemSecurityOperationCode.LocationView,
+        LocationView,
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnit), "DomainObjectSecurityOperationCode", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public enum SampleSystemManagementUnitSecurityOperationCode : int
+    public enum SampleSystemManagementUnitSecurityOperationCode
     {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        EmployeeEdit = SampleSystem.SampleSystemSecurityOperationCode.EmployeeEdit,
+        EmployeeEdit,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        ManagementUnitView = SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitView,
+        ManagementUnitView,
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitFluentMapping), "DomainObjectSecurityOperationCode", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
-    public enum SampleSystemManagementUnitFluentMappingSecurityOperationCode : int
+    public enum SampleSystemManagementUnitFluentMappingSecurityOperationCode
     {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        EmployeeEdit = SampleSystem.SampleSystemSecurityOperationCode.EmployeeEdit,
+        EmployeeEdit,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        ManagementUnitView = SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitView,
+        ManagementUnitView,
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Address), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
@@ -330,7 +330,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.AuthPerformanceObject), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct AuthPerformanceObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.AuthPerformanceObjectIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -412,8 +411,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnit), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitEdit)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct BusinessUnitIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.BusinessUnitIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -675,8 +672,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitHrDepartment), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitHrDepartmentEdit)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitHrDepartmentView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct BusinessUnitHrDepartmentIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.BusinessUnitHrDepartmentIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -767,8 +762,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitManagerCommissionLink), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitManagerCommissionLinkView)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitManagerCommissionLinkEdit)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct BusinessUnitManagerCommissionLinkIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.BusinessUnitManagerCommissionLinkIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -940,8 +933,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.BusinessUnitType), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitTypeEdit)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.BusinessUnitTypeView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct BusinessUnitTypeIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.BusinessUnitTypeIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -1302,8 +1293,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.CompanyLegalEntity), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.CompanyLegalEntityEdit)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.CompanyLegalEntityView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct CompanyLegalEntityIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.CompanyLegalEntityIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -1394,8 +1383,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Country), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.CountryEdit)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.CountryView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct CountryIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.CountryIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -1486,8 +1473,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Employee), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.EmployeeEdit)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.EmployeeView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeeIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeeIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -1668,7 +1653,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeCellPhone), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.EmployeeView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeeCellPhoneIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeeCellPhoneIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -1840,7 +1824,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeInformation), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeeInformationIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeeInformationIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -1931,8 +1914,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePersonalCellPhone), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneEdit)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.EmployeePersonalCellPhoneView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeePersonalCellPhoneIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeePersonalCellPhoneIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -2023,8 +2004,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePhoto), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.EmployeeEdit)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.EmployeeView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeePhotoIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeePhotoIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -2115,8 +2094,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeePosition), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.EmployeePositionEdit)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.EmployeePositionView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeePositionIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeePositionIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -2207,7 +2184,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRegistrationType), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeeRegistrationTypeIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeeRegistrationTypeIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -2298,7 +2274,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRole), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.EmployeeRoleView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeeRoleIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeeRoleIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -2389,7 +2364,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeRoleDegree), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.EmployeeRoleDegreeView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeeRoleDegreeIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeeRoleDegreeIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -2480,7 +2454,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EmployeeSpecialization), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.EmployeeSpecializationView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct EmployeeSpecializationIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.EmployeeSpecializationIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -2742,7 +2715,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EnversBug1676.Location1676), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct Location1676IdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.Location1676IdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -2833,7 +2805,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct WorkingCalendar1676IdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.WorkingCalendar1676IdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -2924,8 +2895,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Example1), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.LocationEdit)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.LocationView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct Example1IdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.Example1IdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -3106,8 +3075,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.HRDepartment), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.HRDepartmentEdit)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.HRDepartmentView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct HRDepartmentIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.HRDepartmentIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -3378,7 +3345,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.IMRequest), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct IMRequestIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.IMRequestIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -3559,7 +3525,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Information), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct InformationIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.InformationIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -3983,8 +3948,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Location), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.LocationEdit)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.LocationView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct LocationIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.LocationIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -4237,8 +4200,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnit), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitEdit)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct ManagementUnitIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.ManagementUnitIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -4410,8 +4371,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitAndBusinessUnitLink), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitAndBusinessUnitLinkEdit)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitAndBusinessUnitLinkView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct ManagementUnitAndBusinessUnitLinkIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.ManagementUnitAndBusinessUnitLinkIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -4502,8 +4461,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitAndHRDepartmentLink), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitAndHRDepartmentLinkEdit)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitAndHRDepartmentLinkView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct ManagementUnitAndHRDepartmentLinkIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.ManagementUnitAndHRDepartmentLinkIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -4594,8 +4551,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.ManagementUnitFluentMapping), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitEdit)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.ManagementUnitView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct ManagementUnitFluentMappingIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.ManagementUnitFluentMappingIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -4929,8 +4884,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.Principal), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct PrincipalIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.PrincipalIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -5183,8 +5136,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.SqlParserTestObj), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct SqlParserTestObjIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.SqlParserTestObjIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -5275,8 +5226,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.SqlParserTestObjContainer), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct SqlParserTestObjContainerIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -5700,8 +5649,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestImmutableObj), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemEditDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.Disabled)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct TestImmutableObjIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -6053,7 +6000,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPerformanceObject), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.EmployeeView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct TestPerformanceObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestPerformanceObjectIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -6144,7 +6090,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestPlainAuthObject), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.EmployeeView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct TestPlainAuthObjectIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestPlainAuthObjectIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {
@@ -6235,7 +6180,6 @@ namespace SampleSystem.Generated.DTO
     }
     
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(SampleSystem.Domain.TestRootSecurityObj), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
-    [SampleSystem.SampleSystemViewDomainObjectAttribute(SampleSystem.SampleSystemSecurityOperationCode.EmployeeView)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="SampleSystem")]
     public struct TestRootSecurityObjIdentityDTO : System.IEquatable<SampleSystem.Generated.DTO.TestRootSecurityObjIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
     {

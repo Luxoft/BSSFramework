@@ -17,24 +17,9 @@ public interface IAuthorizationBLLContextBase : IAuthorizationSystem
         get;
     }
 
-    /// <summary>
-    /// NonContext checking
-    /// </summary>
-    /// <typeparam name="TSecurityOperationCode"></typeparam>
-    /// <param name="securityOperationCode"></param>
-    /// <param name="withRunAs"></param>
-    /// <returns></returns>
-    bool HasAccess<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode, bool withRunAs)
-        where TSecurityOperationCode : struct, Enum;
+    bool HasAccess(NonContextSecurityOperation securityOperation, bool withRunAs);
 
-    /// <summary>
-    /// NonContext checking
-    /// </summary>
-    /// <typeparam name="TSecurityOperationCode"></typeparam>
-    /// <param name="securityOperationCode"></param>
-    /// <param name="withRunAs"></param>
-    void CheckAccess<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode, bool withRunAs)
-        where TSecurityOperationCode : struct, Enum;
+    void CheckAccess(NonContextSecurityOperation securityOperation, bool withRunAs);
 }
 
 public interface IAuthorizationBLLContext<TIdent> : IAuthorizationBLLContextBase, IAuthorizationSystem<TIdent>, IHierarchicalObjectExpanderFactoryContainer<TIdent>

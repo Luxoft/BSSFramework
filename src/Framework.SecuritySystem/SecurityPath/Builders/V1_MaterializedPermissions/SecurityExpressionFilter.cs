@@ -4,11 +4,10 @@ using Framework.Persistent;
 
 namespace Framework.SecuritySystem.Rules.Builders.MaterializedPermissions;
 
-public class SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject, TSecurityOperationCode, TIdent> : ISecurityExpressionFilter<TDomainObject>
+public class SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject, TIdent> : ISecurityExpressionFilter<TDomainObject>
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase
-        where TSecurityOperationCode : struct, Enum
 {
     private readonly Lazy<Func<TDomainObject, IEnumerable<string>>> getAccessorsFunc;
 
@@ -18,7 +17,7 @@ public class SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject
 
     public SecurityExpressionFilter(
             SecurityExpressionBuilderBase<TPersistentDomainObjectBase, TDomainObject, TIdent> builder,
-            ContextSecurityOperation<TSecurityOperationCode> securityOperation)
+            ContextSecurityOperation securityOperation)
     {
         if (builder == null) throw new ArgumentNullException(nameof(builder));
         if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
@@ -35,11 +34,11 @@ public class SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject
 
         this.getAccessorsFunc = LazyHelper.Create(() => FuncHelper.Create((TDomainObject domainObject) =>
                                                                           {
-                                                                              var baseFilter = builder.GetAccessorsFilterMany(domainObject, securityOperation.SecurityExpandType);
+                                                                              var baseFilter = builder.GetAccessorsFilterMany(domainObject, securityOperation.ExpandType);
 
                                                                               var filter = baseFilter.OverrideInput((IPrincipal<TIdent> principal) => principal.Permissions);
 
-                                                                              return builder.Factory.AuthorizationSystem.GetAccessors(securityOperation.Code, filter);
+                                                                              return builder.Factory.AuthorizationSystem.GetAccessors(securityOperation.ToNonContext(), filter);
                                                                           }));
     }
 

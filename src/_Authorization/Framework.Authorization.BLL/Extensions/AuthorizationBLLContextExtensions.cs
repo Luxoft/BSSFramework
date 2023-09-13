@@ -1,6 +1,10 @@
-﻿using Framework.Authorization.Domain;
+﻿using System.Linq;
+using System.Reflection;
+
+using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.Security;
+using Framework.SecuritySystem;
 
 using Serilog;
 
@@ -8,26 +12,34 @@ namespace Framework.Authorization.BLL;
 
 public static class AuthorizationBLLContextExtensions
 {
-    public static void InitSecurityOperations(this IAuthorizationBLLContext context, InitSecurityOperationMode initSecurityOperationMode = InitSecurityOperationMode.Add)
+    public static void InitSecurityOperations(this IAuthorizationBLLContext context, Type[] securityOperationTypes, InitSecurityOperationMode initSecurityOperationMode = InitSecurityOperationMode.Add)
     {
         if (context == null) throw new ArgumentNullException(nameof(context));
 
         var dbOperations = context.Logics.Operation.GetFullList();
 
-        var operationDict = Framework.DomainDriven.BLL.Security.SecurityOperationCodeExtensions.GetDictionary(context.ExternalSource.SecurityOperationCodeType, true, true);
+        var securityOperations = securityOperationTypes.SelectMany(SecurityOperationHelper.GetSecurityOperations).Distinct()
+                                                       .OfType<ISecurityOperation<Guid>>();
 
-        var mergeResult = dbOperations.GetMergeResult(operationDict, operation => operation.Id, pair => pair.Value.Guid);
+        var mergeResult = dbOperations.GetMergeResult(securityOperations, operation => operation.Id, operation => operation.Id);
 
-        var addingOperationPairs = mergeResult.AddingItems.Select(pair => new
-                                                                          {
-                                                                                  Attribute = pair.Value,
-                                                                                  Operation = new Operation
-                                                                                      {
-                                                                                              Name = pair.Key.ToString(),
-                                                                                              Description = pair.Value.Description,
-                                                                                      },
-                                                                                  Code = pair.Key
-                                                                          }).Where(pair => initSecurityOperationMode.HasFlag(InitSecurityOperationMode.Remove) || !dbOperations.Select(dbOperation => dbOperation.Name).Contains(pair.Operation.Name, StringComparer.CurrentCultureIgnoreCase)).ToArray();
+        var addingOperationPairs = mergeResult.AddingItems
+                                              .Select(
+                                                  securityOperation => new
+                                                                       {
+                                                                           AuthOperation = new Operation
+                                                                                           {
+                                                                                               Name = securityOperation.Name,
+                                                                                               Description = securityOperation.Description,
+                                                                                           },
+                                                                           SecurityOperation = securityOperation
+                                                                       })
+                                              .Where(
+                                                  pair => initSecurityOperationMode.HasFlag(InitSecurityOperationMode.Remove)
+                                                          || !dbOperations.Select(dbOperation => dbOperation.Name).Contains(
+                                                              pair.AuthOperation.Name,
+                                                              StringComparer.CurrentCultureIgnoreCase))
+                                              .ToArray();
 
         if (initSecurityOperationMode.HasFlag(InitSecurityOperationMode.Remove))
         {
@@ -42,74 +54,24 @@ public static class AuthorizationBLLContextExtensions
         {
             foreach (var addingOperationPair in addingOperationPairs)
             {
-                var approveAttr = addingOperationPair.Code.ToFieldInfo().GetCustomAttribute<ApproveOperationAttribute>();
-
-                if (approveAttr != null)
+                if (addingOperationPair.SecurityOperation.ApproveOperation is ISecurityOperation<Guid> approveOperation)
                 {
-                    addingOperationPair.Operation.ApproveOperation = addingOperationPairs.SingleOrDefault(pair => approveAttr.Operation.Equals(pair.Code)).Maybe(pair => pair.Operation)
-                                                                     ?? context.Logics.Operation.GetById(operationDict[approveAttr.Operation].Guid, true);
+                    addingOperationPair.AuthOperation.ApproveOperation = addingOperationPairs.SingleOrDefault(pair => approveOperation.Id == pair.SecurityOperation.Id).Maybe(pair => pair.AuthOperation)
+                                                                     ?? dbOperations.Single(dbOperation => dbOperation.Id == approveOperation.Id);
                 }
 
-                Log.Verbose("Add Operation: {OperationName} {AttributeGuid}", addingOperationPair.Operation.Name, addingOperationPair.Attribute.Guid);
-                context.Logics.Operation.Insert(addingOperationPair.Operation, addingOperationPair.Attribute.Guid);
+                Log.Verbose("Add Operation: {OperationName} {AttributeGuid}", addingOperationPair.SecurityOperation.Name, addingOperationPair.SecurityOperation.Id);
+                context.Logics.Operation.Insert(addingOperationPair.AuthOperation, addingOperationPair.SecurityOperation.Id);
             }
 
             var admRole = context.Logics.BusinessRole.GetOrCreateAdminRole();
 
-            addingOperationPairs.Where(pair => pair.Attribute.AdminHasAccess).Foreach(pair => new BusinessRoleOperationLink(admRole)
-                                                                                          {
-                                                                                                  Operation = pair.Operation
-                                                                                          });
+            addingOperationPairs.Where(pair => pair.SecurityOperation.AdminHasAccess).Foreach(pair => new BusinessRoleOperationLink(admRole)
+            {
+                Operation = pair.AuthOperation
+            });
 
             context.Logics.BusinessRole.Save(admRole);
-        }
-    }
-
-    public static void InitApproveOperations(this IAuthorizationBLLContext context)
-    {
-        if (context == null) throw new ArgumentNullException(nameof(context));
-
-        var bll = context.Logics.Operation;
-
-        var dbOperations = bll.GetFullList();
-
-        var operationDict = Framework.DomainDriven.BLL.Security.SecurityOperationCodeExtensions.GetDictionary(context.ExternalSource.SecurityOperationCodeType, true, true);
-
-        var pairRequest = from operation in dbOperations
-
-                          join pair in operationDict on operation.Id equals pair.Value.Guid
-
-                          let field = context.ExternalSource.SecurityOperationCodeType.GetField(pair.Key.ToString())
-
-                          let approveOperationRequest = from approveAtttribute in field.GetCustomAttribute<ApproveOperationAttribute>().ToMaybe()
-
-                                                        let approveOperationCode = approveAtttribute.Operation
-
-                                                        let approvePair = operationDict[approveOperationCode]
-
-                                                        let dbOperation = dbOperations.SingleOrDefault(dbOperation => dbOperation.Id == approvePair.Guid)
-
-                                                        where dbOperation != null
-
-                                                        select dbOperation
-
-                          let approveOperation = approveOperationRequest.GetValueOrDefault()
-
-                          where operation.ApproveOperation != approveOperation
-
-                          select new
-                                 {
-                                         Operation = operation,
-                                         ApproveOperation = approveOperation
-                                 };
-
-        var pairs = pairRequest.ToList();
-
-        foreach (var pair in pairs)
-        {
-            pair.Operation.ApproveOperation = pair.ApproveOperation;
-
-            bll.Save(pair.Operation);
         }
     }
 }

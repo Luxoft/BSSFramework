@@ -3,7 +3,6 @@
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL.Security;
-using Framework.DomainDriven.Generation.Domain;
 using Framework.Projection;
 using Framework.Security;
 using Framework.SecuritySystem;
@@ -70,95 +69,19 @@ public class EnumRootSecurityServiceGenerator<TConfiguration> : RootSecurityServ
                       }.WithTypeParameters(typeParameters);
     }
 
-    protected override bool IsSecurityServiceDomainType(Type domainType)
-    {
-        var enumOperationsRequest = from securityOperationCode in this.Configuration.Environment.GetSecurityOperationCodes()
-
-                                    let fieldInfo = securityOperationCode.ToFieldInfo()
-
-                                    let securityOperationAttribute = securityOperationCode.GetSecurityOperationAttribute()
-
-                                    where securityOperationAttribute != null
-                                          && !securityOperationAttribute.IsClient
-                                          && domainType.Name.Equals(securityOperationAttribute.DomainType, StringComparison.CurrentCultureIgnoreCase)
-
-                                    select securityOperationCode;
-
-        return base.IsSecurityServiceDomainType(domainType) || enumOperationsRequest.Any();
-    }
-
     public override IEnumerable<CodeTypeReference> GetBLLContextBaseTypes()
     {
-        yield return typeof(ISecurityOperationResolver<,>).MakeGenericType(this.Configuration.Environment.PersistentDomainObjectBaseType, this.Configuration.Environment.SecurityOperationCodeType).ToTypeReference();
-    }
-
-    public override IEnumerable<CodeTypeMember> GetBLLContextMembers()
-    {
-        var securityOperationType = typeof(SecurityOperation<>).MakeGenericType(this.Configuration.Environment.SecurityOperationCodeType).ToTypeReference();
-
-        {
-            var codeParameter = this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference().ToParameterDeclarationExpression("securityOperationCode");
-            var codeParameterRefExp = codeParameter.ToVariableReferenceExpression();
-
-            yield return new CodeMemberMethod
-                         {
-                                 Attributes = MemberAttributes.Public | MemberAttributes.Override,
-                                 ReturnType = securityOperationType,
-                                 Name = "GetSecurityOperation",
-                                 Parameters = { codeParameter },
-                                 Statements =
-                                 {
-                                         this.Configuration.SecurityOperationTypeReference
-                                             .ToTypeReferenceExpression()
-                                             .ToMethodInvokeExpression(this.Configuration.GetOperationByCodeMethodName, codeParameterRefExp)
-                                             .ToMethodReturnStatement()
-                                 }
-                         };
-        }
-
-        {
-            var modeParameter = typeof(BLLSecurityMode).ToTypeReference().ToParameterDeclarationExpression("securitMode");
-            var modeParameterRefExp = modeParameter.ToVariableReferenceExpression();
-
-            var genericDomainObjectParameter = this.GetDomainObjectCodeTypeParameter(false);
-            var genericDomainObjectParameterTypeRef = genericDomainObjectParameter.ToTypeReference();
-
-            yield return new CodeMemberMethod
-                         {
-                                 Attributes = MemberAttributes.Public | MemberAttributes.Override,
-                                 ReturnType = securityOperationType,
-                                 Name = "GetSecurityOperation",
-                                 Parameters = { modeParameter },
-                                 Statements =
-                                 {
-                                         this.Configuration.SecurityOperationTypeReference
-                                             .ToTypeReferenceExpression()
-                                             .ToMethodReferenceExpression(this.Configuration.GetOperationByModeMethodName, genericDomainObjectParameterTypeRef)
-                                             .ToMethodInvokeExpression(modeParameterRefExp)
-                                             .ToMethodReturnStatement()
-                                 },
-                                 TypeParameters = { genericDomainObjectParameter }
-                         };
-        }
+        yield break;
+        //yield return typeof(ISecurityOperationResolver<>).MakeGenericType(this.Configuration.Environment.PersistentDomainObjectBaseType).ToTypeReference();
     }
 
     public override CodeTypeReference GetGenericRootSecurityServiceType()
     {
-        return typeof(RootSecurityService<,,>).ToTypeReference(this.Configuration.BLLContextInterfaceTypeReference, this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(), this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference());
+        return typeof(RootSecurityService<,>).ToTypeReference(this.Configuration.BLLContextInterfaceTypeReference, this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference());
     }
 
     public override CodeTypeReference GetGenericRootSecurityServiceInterfaceType()
     {
-        return typeof(IRootSecurityService<,>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(), this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference());
-    }
-
-    public override CodeTypeReference GetDomainInterfaceBaseServiceType()
-    {
-        var genericDomainObjectParameter = this.GetDomainObjectCodeTypeParameter(false);
-        var genericDomainObjectParameterTypeRef = genericDomainObjectParameter.ToTypeReference();
-
-        return typeof(IDomainSecurityService<,>)
-                .ToTypeReference(genericDomainObjectParameterTypeRef,
-                                 this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference());
+        return typeof(IRootSecurityService<>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference());
     }
 }

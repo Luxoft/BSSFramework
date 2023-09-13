@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework.SecuritySystem.Bss\Framework.SecuritySystem.Bss.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.BLLGenerator\Framework.DomainDriven.BLLGenerator.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.DTOGenerator.Audit\Framework.DomainDriven.DTOGenerator.Audit.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.ServiceModel.IAD.DTO\Framework.DomainDriven.ServiceModel.IAD.DTO.csproj" />

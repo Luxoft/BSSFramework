@@ -2,26 +2,14 @@
 
 namespace Framework.SecuritySystem.DiTests;
 
-public class ExampleSecurityOperationResolver : ISecurityOperationResolver<PersistentDomainObjectBase, ExampleSecurityOperation>
+public class ExampleSecurityOperationResolver : ISecurityOperationResolver<PersistentDomainObjectBase>
 {
-    public SecurityOperation<ExampleSecurityOperation> GetSecurityOperation(ExampleSecurityOperation securityOperationCode)
-    {
-        switch (securityOperationCode)
-        {
-            case ExampleSecurityOperation.EmployeeView:
-                return new ContextSecurityOperation<ExampleSecurityOperation>(ExampleSecurityOperation.EmployeeView, HierarchicalExpandType.Children);
-
-            default:
-                throw new NotImplementedException();
-        }
-    }
-
-    public SecurityOperation<ExampleSecurityOperation> GetSecurityOperation<TDomainObject>(BLLSecurityMode securityMode)
+    public SecurityOperation GetSecurityOperation<TDomainObject>(BLLSecurityMode securityMode)
             where TDomainObject : PersistentDomainObjectBase
     {
         if (typeof(TDomainObject) == typeof(Employee) && securityMode == BLLSecurityMode.View)
         {
-            return this.GetSecurityOperation(ExampleSecurityOperation.EmployeeView);
+            return ExampleSecurityOperation.EmployeeView;
         }
         else
         {

@@ -55,7 +55,7 @@ public class MainTests
         // Arrange
         await using var scope = this.rootServiceProvider.CreateAsyncScope();
 
-        var employeeDomainSecurityService = scope.ServiceProvider.GetRequiredService<IDomainSecurityService<Employee, ExampleSecurityOperation>>();
+        var employeeDomainSecurityService = scope.ServiceProvider.GetRequiredService<IDomainSecurityService<Employee>>();
         var counterService = scope.ServiceProvider.GetRequiredService<BusinessUnitAncestorLinkSourceExecuteCounter>();
         var securityProvider = employeeDomainSecurityService.GetSecurityProvider(BLLSecurityMode.View);
 
@@ -78,7 +78,7 @@ public class MainTests
         // Arrange
         await using var scope = this.rootServiceProvider.CreateAsyncScope();
 
-        var employeeDomainSecurityService = scope.ServiceProvider.GetRequiredService<IDomainSecurityService<Employee, ExampleSecurityOperation>>();
+        var employeeDomainSecurityService = scope.ServiceProvider.GetRequiredService<IDomainSecurityService<Employee>>();
         var accessDeniedExceptionService = scope.ServiceProvider.GetRequiredService<IAccessDeniedExceptionService>();
 
         var securityProvider = employeeDomainSecurityService.GetSecurityProvider(BLLSecurityMode.View);
@@ -108,8 +108,8 @@ public class MainTests
                .AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, V1.SecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
                .AddScoped<IAuthorizationSystem<Guid>, ExampleAuthorizationSystem>()
                .AddScoped<IHierarchicalObjectExpanderFactory<Guid>, HierarchicalObjectExpanderFactory<PersistentDomainObjectBase, Guid>>()
-               .AddScoped<IDomainSecurityService<Employee, ExampleSecurityOperation>, EmployeeSecurityService>()
-               .AddScoped<ISecurityOperationResolver<PersistentDomainObjectBase, ExampleSecurityOperation>, ExampleSecurityOperationResolver>()
+               .AddScoped<IDomainSecurityService<Employee>, EmployeeSecurityService>()
+               .AddScoped<ISecurityOperationResolver<PersistentDomainObjectBase>, ExampleSecurityOperationResolver>()
                .AddScoped<IHierarchicalRealTypeResolver, IdentityHierarchicalRealTypeResolver>()
                .BuildServiceProvider(new ServiceProviderOptions{ ValidateOnBuild = true, ValidateScopes = true });
     }

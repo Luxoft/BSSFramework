@@ -11,7 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Framework.Persistent\Framework.Persistent.csproj" />
     <ProjectReference Include="..\Framework.SecuritySystem.Abstract\Framework.SecuritySystem.Abstract.csproj" />
-    <ProjectReference Include="..\Framework.Security\Framework.Security.csproj" />
+    <ProjectReference Include="..\Framework.SecuritySystem\Framework.SecuritySystem.csproj" />
   </ItemGroup>
 
 </Project>

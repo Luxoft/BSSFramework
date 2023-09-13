@@ -1,11 +1,12 @@
 ﻿using Framework.DomainDriven.BLL;
 using Framework.Persistent;
 using Framework.Restriction;
+using Framework.Security;
 
 namespace Framework.Configuration.Domain.Reports;
 
 [BLLViewRole]
-[ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.Disabled)]
+[ViewDomainObject(typeof(ConfigurationSecurityOperation), nameof(ConfigurationSecurityOperation.Disabled))]
 public class ReportProperty : AuditPersistentDomainObjectBase, IDetail<Report>
 {
     private Report report;

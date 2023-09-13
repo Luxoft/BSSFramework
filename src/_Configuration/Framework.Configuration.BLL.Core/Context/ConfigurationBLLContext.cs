@@ -103,7 +103,7 @@ public partial class ConfigurationBLLContext
 
     public ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory { get; }
 
-    public bool DisplayInternalError => this.Authorization.HasAccess(ConfigurationSecurityOperationCode.DisplayInternalError);
+    public bool DisplayInternalError => this.Authorization.HasAccess(ConfigurationSecurityOperation.DisplayInternalError);
 
     public ISerializerFactory<string> SystemConstantSerializerFactory { get; }
 

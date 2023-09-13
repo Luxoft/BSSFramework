@@ -5,6 +5,7 @@ using Framework.DomainDriven.Serialization;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.Restriction;
+using Framework.Security;
 using Framework.SecuritySystem;
 using Framework.Validation;
 
@@ -12,8 +13,8 @@ namespace SampleSystem.Domain;
 
 [DomainType("5C326B10-B4B4-402C-BCCE-A311016CB715")]
 [BLLViewRole, BLLSaveRole(AllowCreate = false)]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.BusinessUnitView, SampleSystemSecurityOperationCode.BusinessUnitHrDepartmentView, SourceTypes = new[] { typeof(Employee), typeof(BusinessUnitHrDepartment) })]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.BusinessUnitEdit)]
+[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.BusinessUnitView), nameof(SampleSystemSecurityOperation.BusinessUnitHrDepartmentView), SourceTypes = new[] { typeof(Employee), typeof(BusinessUnitHrDepartment) })]
+[EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.BusinessUnitEdit))]
 public partial class BusinessUnit :
         CommonUnitBase,
         IDenormalizedHierarchicalPersistentSource<BusinessUnitAncestorLink, BusinessUnitToAncestorChildView, BusinessUnit, Guid>,

@@ -4,6 +4,7 @@ using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 using Framework.Exceptions;
 using Framework.Persistent;
+using Framework.SecuritySystem;
 
 namespace Framework.Authorization.BLL;
 
@@ -12,24 +13,6 @@ public partial class PrincipalBLL
     public Principal Create(PrincipalCreateModel createModel)
     {
         return new Principal();
-    }
-
-    public IEnumerable<Principal> GetAvailablePrincipals<TSecurityOperationCode>(params TSecurityOperationCode[] securityOperationCodes)
-            where TSecurityOperationCode : struct, Enum
-    {
-        if (securityOperationCodes == null) throw new ArgumentNullException(nameof(securityOperationCodes));
-
-        var securityOperationIdents = securityOperationCodes.ToList(v => v.ToGuid());
-
-        var today = this.Context.DateTimeService.Today;
-
-        return from principal in this.GetUnsecureQueryable()
-
-               where principal.Permissions.Any(permission => permission.Status == PermissionStatus.Approved
-                                                             && permission.Period.Contains(today)
-                                                             && permission.Role.BusinessRoleOperationLinks.Any(link => securityOperationIdents.Contains(link.Operation.Id)))
-
-               select principal;
     }
 
     public override void Save(Principal principal)

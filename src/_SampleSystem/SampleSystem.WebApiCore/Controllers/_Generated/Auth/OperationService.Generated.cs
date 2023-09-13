@@ -16,17 +16,17 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("CheckOperationAccess")]
         public virtual void CheckOperationAccess(CheckOperationAccessAutoRequest checkOperationAccessAutoRequest)
         {
-            Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode = checkOperationAccessAutoRequest.securityOperationCode;
+            string securityOperationName = checkOperationAccessAutoRequest.securityOperationName;
             Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent = checkOperationAccessAutoRequest.operationIdent;
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckOperationAccessInternal(operationIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckOperationAccessInternal(operationIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual void CheckOperationAccessInternal(Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual void CheckOperationAccessInternal(Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IOperationBLL bll = evaluateData.Context.Logics.Operation;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Authorization.AuthorizationSecurityOperation), securityOperationName);
             Framework.Authorization.Domain.Operation domainObject = bll.GetById(operationIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Operation>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Operation>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>
@@ -319,17 +319,17 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("HasOperationAccess")]
         public virtual bool HasOperationAccess(HasOperationAccessAutoRequest hasOperationAccessAutoRequest)
         {
-            Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode = hasOperationAccessAutoRequest.securityOperationCode;
+            string securityOperationName = hasOperationAccessAutoRequest.securityOperationName;
             Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent = hasOperationAccessAutoRequest.operationIdent;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasOperationAccessInternal(operationIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasOperationAccessInternal(operationIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual bool HasOperationAccessInternal(Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual bool HasOperationAccessInternal(Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IOperationBLL bll = evaluateData.Context.Logics.Operation;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Authorization.AuthorizationSecurityOperation), securityOperationName);
             Framework.Authorization.Domain.Operation domainObject = bll.GetById(operationIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Operation>(securityOperationCode).HasAccess(domainObject);
+            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Operation>(operation).HasAccess(domainObject);
         }
         
         /// <summary>
@@ -368,7 +368,7 @@
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode;
+        public string securityOperationName;
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -382,6 +382,6 @@
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode;
+        public string securityOperationName;
     }
 }

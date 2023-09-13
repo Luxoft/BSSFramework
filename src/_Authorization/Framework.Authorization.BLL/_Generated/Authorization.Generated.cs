@@ -23,7 +23,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class BusinessRoleBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.BLL.IBusinessRoleBLL, Framework.Authorization.BLL.BusinessRoleBLL, Framework.Authorization.Domain.BusinessRole, Framework.Authorization.AuthorizationSecurityOperationCode>, Framework.Authorization.BLL.IBusinessRoleBLLFactory
+    public partial class BusinessRoleBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.BLL.IBusinessRoleBLL, Framework.Authorization.BLL.BusinessRoleBLL, Framework.Authorization.Domain.BusinessRole>, Framework.Authorization.BLL.IBusinessRoleBLLFactory
     {
         
         public BusinessRoleBLLFactory(Framework.Authorization.BLL.IAuthorizationBLLContext context) : 
@@ -44,7 +44,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class EntityTypeBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.BLL.IEntityTypeBLL, Framework.Authorization.BLL.EntityTypeBLL, Framework.Authorization.Domain.EntityType, Framework.Authorization.AuthorizationSecurityOperationCode>, Framework.Authorization.BLL.IEntityTypeBLLFactory
+    public partial class EntityTypeBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.BLL.IEntityTypeBLL, Framework.Authorization.BLL.EntityTypeBLL, Framework.Authorization.Domain.EntityType>, Framework.Authorization.BLL.IEntityTypeBLLFactory
     {
         
         public EntityTypeBLLFactory(Framework.Authorization.BLL.IAuthorizationBLLContext context) : 
@@ -65,7 +65,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class OperationBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.BLL.IOperationBLL, Framework.Authorization.BLL.OperationBLL, Framework.Authorization.Domain.Operation, Framework.Authorization.AuthorizationSecurityOperationCode>, Framework.Authorization.BLL.IOperationBLLFactory
+    public partial class OperationBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.BLL.IOperationBLL, Framework.Authorization.BLL.OperationBLL, Framework.Authorization.Domain.Operation>, Framework.Authorization.BLL.IOperationBLLFactory
     {
         
         public OperationBLLFactory(Framework.Authorization.BLL.IAuthorizationBLLContext context) : 
@@ -86,7 +86,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class PermissionBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.BLL.IPermissionBLL, Framework.Authorization.BLL.PermissionBLL, Framework.Authorization.Domain.Permission, Framework.Authorization.AuthorizationSecurityOperationCode>, Framework.Authorization.BLL.IPermissionBLLFactory
+    public partial class PermissionBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.BLL.IPermissionBLL, Framework.Authorization.BLL.PermissionBLL, Framework.Authorization.Domain.Permission>, Framework.Authorization.BLL.IPermissionBLLFactory
     {
         
         public PermissionBLLFactory(Framework.Authorization.BLL.IAuthorizationBLLContext context) : 
@@ -107,7 +107,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class PermissionFilterEntityBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.BLL.IPermissionFilterEntityBLL, Framework.Authorization.BLL.PermissionFilterEntityBLL, Framework.Authorization.Domain.PermissionFilterEntity, Framework.Authorization.AuthorizationSecurityOperationCode>, Framework.Authorization.BLL.IPermissionFilterEntityBLLFactory
+    public partial class PermissionFilterEntityBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.BLL.IPermissionFilterEntityBLL, Framework.Authorization.BLL.PermissionFilterEntityBLL, Framework.Authorization.Domain.PermissionFilterEntity>, Framework.Authorization.BLL.IPermissionFilterEntityBLLFactory
     {
         
         public PermissionFilterEntityBLLFactory(Framework.Authorization.BLL.IAuthorizationBLLContext context) : 
@@ -128,7 +128,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class PermissionFilterItemBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.BLL.IPermissionFilterItemBLL, Framework.Authorization.BLL.PermissionFilterItemBLL, Framework.Authorization.Domain.PermissionFilterItem, Framework.Authorization.AuthorizationSecurityOperationCode>, Framework.Authorization.BLL.IPermissionFilterItemBLLFactory
+    public partial class PermissionFilterItemBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.BLL.IPermissionFilterItemBLL, Framework.Authorization.BLL.PermissionFilterItemBLL, Framework.Authorization.Domain.PermissionFilterItem>, Framework.Authorization.BLL.IPermissionFilterItemBLLFactory
     {
         
         public PermissionFilterItemBLLFactory(Framework.Authorization.BLL.IAuthorizationBLLContext context) : 
@@ -149,7 +149,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class PrincipalBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.BLL.IPrincipalBLL, Framework.Authorization.BLL.PrincipalBLL, Framework.Authorization.Domain.Principal, Framework.Authorization.AuthorizationSecurityOperationCode>, Framework.Authorization.BLL.IPrincipalBLLFactory
+    public partial class PrincipalBLLFactory : Framework.DomainDriven.BLL.Security.SecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.BLL.IPrincipalBLL, Framework.Authorization.BLL.PrincipalBLL, Framework.Authorization.Domain.Principal>, Framework.Authorization.BLL.IPrincipalBLLFactory
     {
         
         public PrincipalBLLFactory(Framework.Authorization.BLL.IAuthorizationBLLContext context) : 
@@ -204,7 +204,7 @@ namespace Framework.Authorization.BLL
             }
         }
         
-        public Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode, System.Guid> Default
+        public Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid> Default
         {
             get
             {
@@ -236,7 +236,7 @@ namespace Framework.Authorization.BLL
             }
         }
         
-        public Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode, System.Guid> Implemented
+        public Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid> Implemented
         {
             get
             {
@@ -360,7 +360,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class AuthorizationDefaultBLLFactory : Framework.DomainDriven.BLL.Security.DefaultSecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.DomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode, System.Guid>, Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode, System.Guid>
+    public partial class AuthorizationDefaultBLLFactory : Framework.DomainDriven.BLL.Security.DefaultSecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.DomainObjectBase, System.Guid>, Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid>
     {
         
         public AuthorizationDefaultBLLFactory(Framework.Authorization.BLL.IAuthorizationBLLContext context) : 
@@ -374,7 +374,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class AuthorizationImplementedBLLFactory : Framework.DomainDriven.BLL.Security.DefaultSecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.DomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode, System.Guid>, Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.AuthorizationSecurityOperationCode, System.Guid>
+    public partial class AuthorizationImplementedBLLFactory : Framework.DomainDriven.BLL.Security.DefaultSecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.DomainObjectBase, System.Guid>, Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid>
     {
         
         public AuthorizationImplementedBLLFactory(Framework.Authorization.BLL.IAuthorizationBLLContext context) : 
@@ -454,7 +454,7 @@ namespace Framework.Authorization.BLL
             }
         }
         
-        public override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(Framework.Authorization.AuthorizationSecurityOperationCode securityOperation)
+        public override Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>(Framework.SecuritySystem.SecurityOperation securityOperation)
         {
             if ((typeof(TDomainObject) == typeof(Framework.Authorization.Domain.BusinessRole)))
             {

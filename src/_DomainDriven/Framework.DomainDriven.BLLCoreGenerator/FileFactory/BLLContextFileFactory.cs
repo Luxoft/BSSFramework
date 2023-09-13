@@ -30,23 +30,11 @@ public class BLLContextFileFactory<TConfiguration> : FileFactory<TConfiguration>
 
     protected override System.Collections.Generic.IEnumerable<CodeTypeReference> GetBaseTypes()
     {
-        if (this.Configuration.Environment.SecurityOperationCodeType.IsEnum)
-        {
-            yield return typeof(SecurityBLLBaseContext<,,,,>).ToTypeReference(
-                                                                              this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
-                                                                              this.Configuration.Environment.DomainObjectBaseType.ToTypeReference(),
-                                                                              this.Configuration.Environment.GetIdentityType().ToTypeReference(),
-                                                                              this.Configuration.GetCodeTypeReference(null, FileType.BLLFactoryContainerInterface),
-                                                                              this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference());
-        }
-        else
-        {
-            yield return typeof(SecurityBLLBaseContext<,,,>).ToTypeReference(
-                                                                             this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
-                                                                             this.Configuration.Environment.DomainObjectBaseType.ToTypeReference(),
-                                                                             this.Configuration.Environment.GetIdentityType().ToTypeReference(),
-                                                                             this.Configuration.GetCodeTypeReference(null, FileType.BLLFactoryContainerInterface));
-        }
+        yield return typeof(SecurityBLLBaseContext<,,,>).ToTypeReference(
+            this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
+            this.Configuration.Environment.DomainObjectBaseType.ToTypeReference(),
+            this.Configuration.Environment.GetIdentityType().ToTypeReference(),
+            this.Configuration.GetCodeTypeReference(null, FileType.BLLFactoryContainerInterface));
 
         yield return typeof(IBLLFactoryContainerContext<>).ToTypeReference(this.Configuration.SecurityBLLFactoryContainerType);
 
@@ -55,11 +43,6 @@ public class BLLContextFileFactory<TConfiguration> : FileFactory<TConfiguration>
 
     protected override System.Collections.Generic.IEnumerable<CodeTypeMember> GetMembers()
     {
-        foreach (var member in this.Configuration.RootSecurityServerGenerator.GetBLLContextMembers())
-        {
-            yield return member;
-        }
-
         var pairs = new[] { this.Configuration.DefaultBLLFactoryContainerType, this.Configuration.SecurityBLLFactoryContainerType }
                 .Select(z => new
                              {

@@ -16,17 +16,17 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("CheckCountryAccess")]
         public virtual void CheckCountryAccess(CheckCountryAccessAutoRequest checkCountryAccessAutoRequest)
         {
-            SampleSystem.SampleSystemSecurityOperationCode securityOperationCode = checkCountryAccessAutoRequest.securityOperationCode;
+            string securityOperationName = checkCountryAccessAutoRequest.securityOperationName;
             SampleSystem.Generated.DTO.CountryIdentityDTO countryIdent = checkCountryAccessAutoRequest.countryIdent;
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckCountryAccessInternal(countryIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckCountryAccessInternal(countryIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual void CheckCountryAccessInternal(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdent, SampleSystem.SampleSystemSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual void CheckCountryAccessInternal(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.Country;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
             SampleSystem.Domain.Country domainObject = bll.GetById(countryIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Country>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Country>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>
@@ -336,17 +336,17 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("HasCountryAccess")]
         public virtual bool HasCountryAccess(HasCountryAccessAutoRequest hasCountryAccessAutoRequest)
         {
-            SampleSystem.SampleSystemSecurityOperationCode securityOperationCode = hasCountryAccessAutoRequest.securityOperationCode;
+            string securityOperationName = hasCountryAccessAutoRequest.securityOperationName;
             SampleSystem.Generated.DTO.CountryIdentityDTO countryIdent = hasCountryAccessAutoRequest.countryIdent;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasCountryAccessInternal(countryIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasCountryAccessInternal(countryIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual bool HasCountryAccessInternal(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdent, SampleSystem.SampleSystemSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual bool HasCountryAccessInternal(SampleSystem.Generated.DTO.CountryIdentityDTO countryIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ICountryBLL bll = evaluateData.Context.Logics.Country;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
             SampleSystem.Domain.Country domainObject = bll.GetById(countryIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Country>(securityOperationCode).HasAccess(domainObject);
+            return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Country>(operation).HasAccess(domainObject);
         }
         
         /// <summary>
@@ -407,7 +407,7 @@
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public SampleSystem.SampleSystemSecurityOperationCode securityOperationCode;
+        public string securityOperationName;
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -421,6 +421,6 @@
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public SampleSystem.SampleSystemSecurityOperationCode securityOperationCode;
+        public string securityOperationName;
     }
 }

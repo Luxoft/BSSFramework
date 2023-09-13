@@ -33,7 +33,7 @@ public partial class SampleSystemSecurityService
     {
         return SecurityPath<BusinessUnitHrDepartment>.Create(v => v.BusinessUnit).And(v => v.HRDepartment.Location);
     }
-
+    
     public override SecurityPath<BusinessUnitManagerCommissionLink> GetBusinessUnitManagerCommissionLinkSecurityPath()
     {
         return SecurityPath<BusinessUnitManagerCommissionLink>.Create(v => v.BusinessUnit);

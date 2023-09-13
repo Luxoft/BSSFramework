@@ -3,24 +3,23 @@ using Framework.QueryableSource;
 
 namespace Framework.SecuritySystem;
 
-public class UntypedDependencyDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent,
-                                                    TSecurityOperationCode> :
+public class UntypedDependencyDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent> :
 
-    DependencyDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent, TSecurityOperationCode>
+    DependencyDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent>
 
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     where TDomainObject : class, TPersistentDomainObjectBase
-    where TSecurityOperationCode : struct, Enum
     where TBaseDomainObject : class, TPersistentDomainObjectBase
 {
     private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
 
     public UntypedDependencyDomainSecurityService(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
-        IDomainSecurityService<TBaseDomainObject, TSecurityOperationCode> baseDomainSecurityService,
+        ISecurityOperationResolver<TPersistentDomainObjectBase> securityOperationResolver,
+        IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService,
         IQueryableSource<TPersistentDomainObjectBase> queryableSource)
 
-        : base(disabledSecurityProviderSource, baseDomainSecurityService)
+        : base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService)
     {
         this.queryableSource = queryableSource ?? throw new ArgumentNullException(nameof(queryableSource));
     }

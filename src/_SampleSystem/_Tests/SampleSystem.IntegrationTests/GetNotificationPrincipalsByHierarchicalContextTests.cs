@@ -63,7 +63,7 @@ public class GetNotificationPrincipalsByHierarchicalContextTests : TestBase
         var authFacade = this.GetAuthControllerEvaluator();
 
         this.searchNotificationOperation = authFacade.Evaluate(
-            c => c.GetSimpleOperationByName(nameof(SampleSystemSecurityOperationCode.SearchNotificationOperation))).Identity;
+            c => c.GetSimpleOperationByName(SampleSystemSecurityOperation.SearchNotificationOperation.Name)).Identity;
 
         this.searchNotificationRole = authFacade.Evaluate(
             c => c.SaveBusinessRole(

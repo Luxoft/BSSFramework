@@ -1,6 +1,7 @@
 ﻿using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Projection;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.DTOGenerator;
 
@@ -21,7 +22,7 @@ public abstract class FileGenerator<TConfiguration> : CodeFileGenerator<TConfigu
         return new DefaultIdentityDTOFileFactory<TConfiguration>(this.Configuration, domainType);
     }
 
-    protected virtual ICodeFileFactory<RoleFileType> GetDomainObjectSecurityOperationCodeFileFactory(Type domainType, IEnumerable<Enum> securityOperations)
+    protected virtual ICodeFileFactory<RoleFileType> GetDomainObjectSecurityOperationCodeFileFactory(Type domainType, IEnumerable<SecurityOperation> securityOperations)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
         if (securityOperations == null) throw new ArgumentNullException(nameof(securityOperations));
@@ -89,14 +90,11 @@ public abstract class FileGenerator<TConfiguration> : CodeFileGenerator<TConfigu
 
     private IEnumerable<ICodeFileFactory<RoleFileType>> GetDomainObjectSecurityOperationCodeFileGenerators()
     {
-        if (this.Configuration.Environment.SecurityOperationCodeType.IsEnum)
+        foreach (var pair in this.Configuration.TypesWithSecondarySecurityOperations)
         {
-            foreach (var pair in this.Configuration.TypesWithSecondarySecurityOperations)
+            if (!pair.Key.IsProjection())
             {
-                if (!pair.Key.IsProjection())
-                {
-                    yield return this.GetDomainObjectSecurityOperationCodeFileFactory(pair.Key, pair.Value);
-                }
+                yield return this.GetDomainObjectSecurityOperationCodeFileFactory(pair.Key, pair.Value);
             }
         }
     }

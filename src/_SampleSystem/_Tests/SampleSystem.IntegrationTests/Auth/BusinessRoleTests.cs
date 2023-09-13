@@ -21,11 +21,9 @@ public class BusinessRoleTests : TestBase
         // Arrange
         var authController = this.GetAuthControllerEvaluator();
         var employeeController = this.MainWebApi.Employee;
-        var currentUser = employeeController.Evaluate(c=> c.GetFullEmployee(
-                                                                            this.DataHelper.GetEmployeeByLogin(this.AuthHelper.GetCurrentUserLogin())));
+        var currentUser = employeeController.Evaluate(c=> c.GetFullEmployee(this.DataHelper.GetEmployeeByLogin(this.AuthHelper.GetCurrentUserLogin())));
 
-        var operation = authController.Evaluate(c => c.GetSimpleOperationByName(
-                                                                                SampleSystemSecurityOperationCode.BusinessUnitTypeModuleOpen.ToString()));
+        var operation = authController.Evaluate(c => c.GetSimpleOperationByName(SampleSystemSecurityOperation.BusinessUnitTypeModuleOpen.ToString()));
 
         var oprManager = authController.Evaluate(c => c.GetRichBusinessRoleByName(RoleName));
         oprManager.BusinessRoleOperationLinks.Add(new BusinessRoleOperationLinkRichDTO
@@ -126,8 +124,7 @@ public class BusinessRoleTests : TestBase
     public void SaveBusinessRole_CheckOperationRemoval()
     {
         // Arrange
-        var operationIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleOperationByName(
-                                                                            SampleSystemSecurityOperationCode.EmployeeView.ToString())).Identity;
+        var operationIdentity = this.GetAuthControllerEvaluator().Evaluate(c => c.GetSimpleOperationByName(SampleSystemSecurityOperation.EmployeeView.Name)).Identity;
 
         var oprManager = this.GetAuthControllerEvaluator().Evaluate(c => c.GetRichBusinessRoleByName(RoleName));
 

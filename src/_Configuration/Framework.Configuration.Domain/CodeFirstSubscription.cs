@@ -4,6 +4,7 @@ using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
+using Framework.Security;
 
 namespace Framework.Configuration.Domain;
 
@@ -14,8 +15,8 @@ namespace Framework.Configuration.Domain;
 /// <seealso cref="DomainObjectBase" />
 [BLLViewRole]
 [BLLSaveRole(AllowCreate = false)]
-[ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.SubscriptionView)]
-[ConfigurationEditDomainObject(ConfigurationSecurityOperationCode.SubscriptionEdit)]
+[ViewDomainObject(typeof(ConfigurationSecurityOperation), nameof(ConfigurationSecurityOperation.SubscriptionView))]
+[EditDomainObject(typeof(ConfigurationSecurityOperation), nameof(ConfigurationSecurityOperation.SubscriptionEdit))]
 [UniqueGroup]
 [NotAuditedClass]
 public class CodeFirstSubscription : AuditPersistentDomainObjectBase, ICodeObject<string>

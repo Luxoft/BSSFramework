@@ -1,33 +1,25 @@
-﻿using Framework.Core;
-using Framework.HierarchicalExpand;
+﻿using Framework.HierarchicalExpand;
 
 namespace Framework.SecuritySystem;
 
 /// <summary>
 /// Констектстная операция доступа
 /// </summary>
-/// <typeparam name="TSecurityOperationCode">Код контекстной операции (Enum)</typeparam>
-public class ContextSecurityOperation<TSecurityOperationCode> : SecurityOperation<TSecurityOperationCode>
-        where TSecurityOperationCode : struct, Enum
+/// <param name="Name">Имя операции</param>
+/// <param name="ExpandType">Тип разворачивания деревьев (как правило для операции просмотра самого дерева выбирается HierarchicalExpandType.All)</param>
+public abstract record ContextSecurityOperation(string Name, HierarchicalExpandType ExpandType) : SecurityOperation(Name)
 {
-    public ContextSecurityOperation(TSecurityOperationCode code, HierarchicalExpandType securityExpandType)
-            : base(code)
-    {
-        if (this.Code.IsDefault()) { throw new ArgumentOutOfRangeException(nameof(code)); }
+    public abstract NonContextSecurityOperation ToNonContext();
+}
 
-        this.SecurityExpandType = securityExpandType;
-    }
-
-    public HierarchicalExpandType SecurityExpandType { get; private set; }
-
-
-    public override string ToString()
-    {
-        return $"{base.ToString()} | ExpandType = {this.SecurityExpandType}";
-    }
-
-    public ContextSecurityOperation<TSecurityOperationCode> OverrideExpand(HierarchicalExpandType securityExpandType)
-    {
-        return new ContextSecurityOperation<TSecurityOperationCode>(this.Code, securityExpandType);
-    }
+/// <summary>
+/// Констектстная операция доступа
+/// </summary>
+/// <typeparam name="TIdent"></typeparam>
+/// <param name="Name">Имя операции</param>
+/// <param name="ExpandType">Тип разворачивания деревьев (как правило для операции просмотра самого дерева выбирается HierarchicalExpandType.All)</param>
+/// <param name="Id"></param>
+public record ContextSecurityOperation<TIdent>(string Name, HierarchicalExpandType ExpandType, TIdent Id) : ContextSecurityOperation(Name, ExpandType), ISecurityOperation<TIdent>
+{
+    public override NonContextSecurityOperation ToNonContext() => new NonContextSecurityOperation<TIdent>(this.Name, this.Id);
 }

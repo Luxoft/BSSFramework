@@ -16,17 +16,17 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("CheckPrincipalAccess")]
         public virtual void CheckPrincipalAccess(CheckPrincipalAccessAutoRequest checkPrincipalAccessAutoRequest)
         {
-            SampleSystem.SampleSystemSecurityOperationCode securityOperationCode = checkPrincipalAccessAutoRequest.securityOperationCode;
+            string securityOperationName = checkPrincipalAccessAutoRequest.securityOperationName;
             SampleSystem.Generated.DTO.PrincipalIdentityDTO principalIdent = checkPrincipalAccessAutoRequest.principalIdent;
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckPrincipalAccessInternal(principalIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckPrincipalAccessInternal(principalIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual void CheckPrincipalAccessInternal(SampleSystem.Generated.DTO.PrincipalIdentityDTO principalIdent, SampleSystem.SampleSystemSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual void CheckPrincipalAccessInternal(SampleSystem.Generated.DTO.PrincipalIdentityDTO principalIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.Principal;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
             SampleSystem.Domain.Principal domainObject = bll.GetById(principalIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Principal>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Principal>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>
@@ -151,17 +151,17 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("HasPrincipalAccess")]
         public virtual bool HasPrincipalAccess(HasPrincipalAccessAutoRequest hasPrincipalAccessAutoRequest)
         {
-            SampleSystem.SampleSystemSecurityOperationCode securityOperationCode = hasPrincipalAccessAutoRequest.securityOperationCode;
+            string securityOperationName = hasPrincipalAccessAutoRequest.securityOperationName;
             SampleSystem.Generated.DTO.PrincipalIdentityDTO principalIdent = hasPrincipalAccessAutoRequest.principalIdent;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasPrincipalAccessInternal(principalIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasPrincipalAccessInternal(principalIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual bool HasPrincipalAccessInternal(SampleSystem.Generated.DTO.PrincipalIdentityDTO principalIdent, SampleSystem.SampleSystemSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual bool HasPrincipalAccessInternal(SampleSystem.Generated.DTO.PrincipalIdentityDTO principalIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.Principal;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
             SampleSystem.Domain.Principal domainObject = bll.GetById(principalIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Principal>(securityOperationCode).HasAccess(domainObject);
+            return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.Principal>(operation).HasAccess(domainObject);
         }
         
         /// <summary>
@@ -200,7 +200,7 @@
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public SampleSystem.SampleSystemSecurityOperationCode securityOperationCode;
+        public string securityOperationName;
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -214,6 +214,6 @@
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public SampleSystem.SampleSystemSecurityOperationCode securityOperationCode;
+        public string securityOperationName;
     }
 }

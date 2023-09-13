@@ -2405,8 +2405,6 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.Configuration.ConfigurationEditDomainObjectAttribute(Framework.Configuration.ConfigurationSecurityOperationCode.SubscriptionEdit)]
-    [Framework.Configuration.ConfigurationViewDomainObjectAttribute(Framework.Configuration.ConfigurationSecurityOperationCode.SubscriptionView)]
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.CodeFirstSubscription), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     public class CodeFirstSubscriptionIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.CodeFirstSubscriptionIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
@@ -3149,7 +3147,6 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.Configuration.ConfigurationViewDomainObjectAttribute(Framework.Configuration.ConfigurationSecurityOperationCode.Disabled)]
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.DomainType), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     public class DomainTypeIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.DomainTypeIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
@@ -3362,7 +3359,6 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.Configuration.ConfigurationViewDomainObjectAttribute(Framework.Configuration.ConfigurationSecurityOperationCode.ExceptionMessageView)]
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.ExceptionMessage), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     public class ExceptionMessageIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.ExceptionMessageIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
@@ -3999,8 +3995,6 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.Configuration.ConfigurationEditDomainObjectAttribute(Framework.Configuration.ConfigurationSecurityOperationCode.ReportEdit)]
-    [Framework.Configuration.ConfigurationViewDomainObjectAttribute(Framework.Configuration.ConfigurationSecurityOperationCode.ReportView)]
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Reports.Report), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     public class ReportIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.ReportIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
@@ -4107,7 +4101,6 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.Configuration.ConfigurationViewDomainObjectAttribute(Framework.Configuration.ConfigurationSecurityOperationCode.Disabled)]
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Reports.ReportFilter), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     public class ReportFilterIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.ReportFilterIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
@@ -4214,7 +4207,6 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.Configuration.ConfigurationViewDomainObjectAttribute(Framework.Configuration.ConfigurationSecurityOperationCode.Disabled)]
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Reports.ReportParameter), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     public class ReportParameterIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.ReportParameterIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
@@ -4321,7 +4313,6 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.Configuration.ConfigurationViewDomainObjectAttribute(Framework.Configuration.ConfigurationSecurityOperationCode.Disabled)]
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Reports.ReportProperty), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     public class ReportPropertyIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.ReportPropertyIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
@@ -4534,8 +4525,6 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.Configuration.ConfigurationEditDomainObjectAttribute(Framework.Configuration.ConfigurationSecurityOperationCode.SequenceEdit)]
-    [Framework.Configuration.ConfigurationViewDomainObjectAttribute(Framework.Configuration.ConfigurationSecurityOperationCode.SequenceView)]
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.Sequence), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     public class SequenceIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.SequenceIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
@@ -4642,8 +4631,6 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.Configuration.ConfigurationEditDomainObjectAttribute(Framework.Configuration.ConfigurationSecurityOperationCode.SystemConstantEdit)]
-    [Framework.Configuration.ConfigurationViewDomainObjectAttribute(Framework.Configuration.ConfigurationSecurityOperationCode.SystemConstantView)]
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.SystemConstant), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     public class SystemConstantIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.SystemConstantIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>
@@ -4750,8 +4737,6 @@ namespace Framework.Configuration.Generated.DTO
         }
     }
     
-    [Framework.Configuration.ConfigurationEditDomainObjectAttribute(Framework.Configuration.ConfigurationSecurityOperationCode.TargetSystemEdit)]
-    [Framework.Configuration.ConfigurationViewDomainObjectAttribute(Framework.Configuration.ConfigurationSecurityOperationCode.TargetSystemView)]
     [Framework.DomainDriven.DTOFileTypeAttribute(typeof(Framework.Configuration.Domain.TargetSystem), "IdentityDTO", Framework.DomainDriven.Serialization.DTORole.Client)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="Configuration")]
     public class TargetSystemIdentityDTO : System.IEquatable<Framework.Configuration.Generated.DTO.TargetSystemIdentityDTO>, Framework.Persistent.IIdentityObject<System.Guid>

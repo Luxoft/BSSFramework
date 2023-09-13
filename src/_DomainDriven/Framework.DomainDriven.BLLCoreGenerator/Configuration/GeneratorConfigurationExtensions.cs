@@ -1,26 +1,34 @@
 ﻿using System.CodeDom;
 using System.Reflection;
 
+using Framework.Core;
 using Framework.CodeDom;
 using Framework.DomainDriven.BLL;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 
 public static class GeneratorConfigurationExtensions
 {
+    public static CodeExpression GetSecurityCodeExpression(this IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration, SecurityOperation securityOperation, Type securityOperationType = null)
+    {
+        if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+
+        var realSecurityOperationType = securityOperationType ?? configuration.Environment.SecurityOperationType;
+
+        var prop = realSecurityOperationType.GetProperties()
+                                            .Single(p => (SecurityOperation)p.GetValue(null) == securityOperation, () => new Exception($"Type '{realSecurityOperationType}' does not contains operation '{securityOperation}'"));
+
+        return realSecurityOperationType.ToTypeReferenceExpression().ToPropertyReference(prop);
+    }
+
     public static CodeExpression GetDisabledSecurityCodeExpression(this IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
     {
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-        return configuration.GetDisabledSecurityCodeValue().ToPrimitiveExpression();
+        return configuration.GetSecurityCodeExpression(new DisabledSecurityOperation());
     }
 
-    public static Enum GetDisabledSecurityCodeValue(this IGeneratorConfigurationBase<IGenerationEnvironmentBase> configuration)
-    {
-        if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-
-        return ((Enum)Activator.CreateInstance(configuration.Environment.SecurityOperationCodeType));
-    }
 
     public static CodeTypeDeclaration GetBLLContextContainerCodeTypeDeclaration(this IGeneratorConfigurationBase configuration, string typeName, bool asAbstract, CodeTypeReference containerType = null)
     {

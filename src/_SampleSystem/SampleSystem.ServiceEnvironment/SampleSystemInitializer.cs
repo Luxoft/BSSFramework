@@ -1,5 +1,8 @@
-﻿using Framework.Authorization.BLL;
+﻿using Framework.Authorization;
+using Framework.Authorization.BLL;
+using Framework.Configuration;
 using Framework.Configuration.BLL.SubscriptionSystemService3.Subscriptions;
+using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.ServiceModel.IAD;
 
@@ -47,7 +50,13 @@ public class SampleSystemInitializer
                                        DBSessionMode.Write,
                                        context =>
                                        {
-                                           context.Authorization.InitSecurityOperations();
+                                           context.Authorization.InitSecurityOperations(
+                                               new[]
+                                               {
+                                                   typeof(AuthorizationSecurityOperation),
+                                                   typeof(ConfigurationSecurityOperation),
+                                                   typeof(SampleSystemSecurityOperation)
+                                               });
 
                                            context.Configuration.Logics.TargetSystem.RegisterBase();
                                            context.Configuration.Logics.TargetSystem.Register<SampleSystem.Domain.PersistentDomainObjectBase>(true, true);

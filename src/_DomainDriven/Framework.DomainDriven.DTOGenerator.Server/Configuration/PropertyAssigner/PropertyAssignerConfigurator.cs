@@ -27,7 +27,7 @@ public class PropertyAssignerConfigurator<TConfiguration> : PropertyAssignerConf
             throw new Exception("Secondary operations not allowed for column security");
         }
 
-        return this.Configuration.ToHasAccessMethod(propertyAssigner.ContextRef, attr.SecurityOperationCode, propertyAssigner.DomainType, propertyAssigner.DomainParameter);
+        return this.Configuration.ToHasAccessMethod(propertyAssigner.ContextRef, attr.SecurityOperation, propertyAssigner.DomainType, propertyAssigner.DomainParameter);
     }
 
     private DomainObjectAccessAttribute GetDomainObjectAttribute(IServerPropertyAssigner propertyAssigner, PropertyInfo property, bool isEdit)

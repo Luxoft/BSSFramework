@@ -7,5 +7,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.App.Core\Framework.App.Core.csproj" />
+    <ProjectReference Include="..\..\Framework.SecuritySystem.Bss\Framework.SecuritySystem.Bss.csproj" />
+    <ProjectReference Include="..\..\_Authorization\Framework.Authorization.Core\Framework.Authorization.Core.csproj" />
   </ItemGroup>
 </Project>

@@ -18,9 +18,6 @@ namespace Framework.Configuration.Domain;
 [RequiredGroupValidator(RequiredGroupValidatorMode.AllOrNothing, GroupKey = "DynamicSourceMode")]
 [RequiredGroupValidator(RequiredGroupValidatorMode.AllOrNothing, GroupKey = "Sender")]
 [UniqueGroup]
-[ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.SubscriptionView)]
-[ConfigurationEditDomainObject(ConfigurationSecurityOperationCode.SubscriptionEdit)]
-[BLLViewRole, BLLSaveRole, BLLRemoveRole]
 [NotAuditedClass]
 public class Subscription : ISubscription
 {

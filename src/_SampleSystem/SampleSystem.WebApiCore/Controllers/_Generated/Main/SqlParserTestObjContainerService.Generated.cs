@@ -16,17 +16,17 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("CheckSqlParserTestObjContainerAccess")]
         public virtual void CheckSqlParserTestObjContainerAccess(CheckSqlParserTestObjContainerAccessAutoRequest checkSqlParserTestObjContainerAccessAutoRequest)
         {
-            SampleSystem.SampleSystemSecurityOperationCode securityOperationCode = checkSqlParserTestObjContainerAccessAutoRequest.securityOperationCode;
+            string securityOperationName = checkSqlParserTestObjContainerAccessAutoRequest.securityOperationName;
             SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdent = checkSqlParserTestObjContainerAccessAutoRequest.sqlParserTestObjContainerIdent;
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckSqlParserTestObjContainerAccessInternal(sqlParserTestObjContainerIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckSqlParserTestObjContainerAccessInternal(sqlParserTestObjContainerIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual void CheckSqlParserTestObjContainerAccessInternal(SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdent, SampleSystem.SampleSystemSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual void CheckSqlParserTestObjContainerAccessInternal(SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ISqlParserTestObjContainerBLL bll = evaluateData.Context.Logics.SqlParserTestObjContainer;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
             SampleSystem.Domain.SqlParserTestObjContainer domainObject = bll.GetById(sqlParserTestObjContainerIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.SqlParserTestObjContainer>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.SqlParserTestObjContainer>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>
@@ -134,17 +134,17 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("HasSqlParserTestObjContainerAccess")]
         public virtual bool HasSqlParserTestObjContainerAccess(HasSqlParserTestObjContainerAccessAutoRequest hasSqlParserTestObjContainerAccessAutoRequest)
         {
-            SampleSystem.SampleSystemSecurityOperationCode securityOperationCode = hasSqlParserTestObjContainerAccessAutoRequest.securityOperationCode;
+            string securityOperationName = hasSqlParserTestObjContainerAccessAutoRequest.securityOperationName;
             SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdent = hasSqlParserTestObjContainerAccessAutoRequest.sqlParserTestObjContainerIdent;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasSqlParserTestObjContainerAccessInternal(sqlParserTestObjContainerIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasSqlParserTestObjContainerAccessInternal(sqlParserTestObjContainerIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual bool HasSqlParserTestObjContainerAccessInternal(SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdent, SampleSystem.SampleSystemSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        protected virtual bool HasSqlParserTestObjContainerAccessInternal(SampleSystem.Generated.DTO.SqlParserTestObjContainerIdentityDTO sqlParserTestObjContainerIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ISqlParserTestObjContainerBLL bll = evaluateData.Context.Logics.SqlParserTestObjContainer;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
             SampleSystem.Domain.SqlParserTestObjContainer domainObject = bll.GetById(sqlParserTestObjContainerIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.SqlParserTestObjContainer>(securityOperationCode).HasAccess(domainObject);
+            return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.SqlParserTestObjContainer>(operation).HasAccess(domainObject);
         }
         
         /// <summary>
@@ -183,7 +183,7 @@
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public SampleSystem.SampleSystemSecurityOperationCode securityOperationCode;
+        public string securityOperationName;
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -197,6 +197,6 @@
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public SampleSystem.SampleSystemSecurityOperationCode securityOperationCode;
+        public string securityOperationName;
     }
 }

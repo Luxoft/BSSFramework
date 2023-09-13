@@ -16,17 +16,17 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("CheckPermissionAccess")]
         public virtual void CheckPermissionAccess(CheckPermissionAccessAutoRequest checkPermissionAccessAutoRequest)
         {
-            Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode = checkPermissionAccessAutoRequest.securityOperationCode;
+            string securityOperationName = checkPermissionAccessAutoRequest.securityOperationName;
             Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent = checkPermissionAccessAutoRequest.permissionIdent;
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckPermissionAccessInternal(permissionIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckPermissionAccessInternal(permissionIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual void CheckPermissionAccessInternal(Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual void CheckPermissionAccessInternal(Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.Permission;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Authorization.AuthorizationSecurityOperation), securityOperationName);
             Framework.Authorization.Domain.Permission domainObject = bll.GetById(permissionIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Permission>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Permission>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>
@@ -285,17 +285,17 @@
         [Microsoft.AspNetCore.Mvc.RouteAttribute("HasPermissionAccess")]
         public virtual bool HasPermissionAccess(HasPermissionAccessAutoRequest hasPermissionAccessAutoRequest)
         {
-            Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode = hasPermissionAccessAutoRequest.securityOperationCode;
+            string securityOperationName = hasPermissionAccessAutoRequest.securityOperationName;
             Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent = hasPermissionAccessAutoRequest.permissionIdent;
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasPermissionAccessInternal(permissionIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasPermissionAccessInternal(permissionIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual bool HasPermissionAccessInternal(Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual bool HasPermissionAccessInternal(Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.Permission;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Authorization.AuthorizationSecurityOperation), securityOperationName);
             Framework.Authorization.Domain.Permission domainObject = bll.GetById(permissionIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Permission>(securityOperationCode).HasAccess(domainObject);
+            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Permission>(operation).HasAccess(domainObject);
         }
         
         /// <summary>
@@ -332,7 +332,7 @@
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode;
+        public string securityOperationName;
     }
     
     [System.Runtime.Serialization.DataContractAttribute()]
@@ -346,6 +346,6 @@
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
-        public Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode;
+        public string securityOperationName;
     }
 }

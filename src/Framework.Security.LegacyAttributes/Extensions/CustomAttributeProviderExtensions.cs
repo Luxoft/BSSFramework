@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 
 using Framework.Core;
+using Framework.SecuritySystem;
 
 namespace Framework.Security;
 
@@ -12,11 +13,11 @@ public static class CustomAttributeProviderExtensions
     /// <param name="source">Источник</param>
     /// <param name="throwIfNull">Ошибка, если операция отсутствует</param>
     /// <returns></returns>
-    public static Enum GetViewDomainObjectCode(this ICustomAttributeProvider source, bool throwIfNull = false)
+    public static SecurityOperation GetViewSecurityOperation(this ICustomAttributeProvider source, bool throwIfNull = false)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
-        var res = source.GetViewDomainObjectAttribute().Maybe(attr => attr.SecurityOperationCode);
+        var res = source.GetViewDomainObjectAttribute().Maybe(attr => attr.SecurityOperation);
 
         if (res == null && throwIfNull)
         {
@@ -32,11 +33,11 @@ public static class CustomAttributeProviderExtensions
     /// <param name="source">Источник</param>
     /// <param name="throwIfNull">Ошибка, если операция отсутствует</param>
     /// <returns></returns>
-    public static Enum GetEditDomainObjectCode(this ICustomAttributeProvider source, bool throwIfNull = false)
+    public static SecurityOperation GetEditSecurityOperation(this ICustomAttributeProvider source, bool throwIfNull = false)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
-        var res = source.GetEditDomainObjectAttribute().Maybe(attr => attr.SecurityOperationCode);
+        var res = source.GetEditDomainObjectAttribute().Maybe(attr => attr.SecurityOperation);
 
         if (res == null && throwIfNull)
         {
@@ -46,12 +47,12 @@ public static class CustomAttributeProviderExtensions
         return res;
     }
 
-    public static Enum GetDomainObjectCode(this ICustomAttributeProvider source, bool isEdit)
+    public static SecurityOperation GetSecurityOperation(this ICustomAttributeProvider source, bool isEdit)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));
 
-        return isEdit ? source.GetEditDomainObjectCode()
-                       : source.GetViewDomainObjectCode();
+        return isEdit ? source.GetEditSecurityOperation()
+                       : source.GetViewSecurityOperation();
     }
 
     public static ViewDomainObjectAttribute GetViewDomainObjectAttribute(this ICustomAttributeProvider source)

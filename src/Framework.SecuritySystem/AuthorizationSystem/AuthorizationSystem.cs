@@ -12,7 +12,9 @@ public abstract class AuthorizationSystem<TIdent> : IAuthorizationSystem<TIdent>
     private readonly IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory;
 
 
-    protected AuthorizationSystem(IPrincipalPermissionSource<TIdent> principalPermissionSource, IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory)
+    protected AuthorizationSystem(
+        IPrincipalPermissionSource<TIdent> principalPermissionSource,
+        IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory)
     {
         this.principalPermissionSource = principalPermissionSource;
         this.hierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
@@ -23,11 +25,9 @@ public abstract class AuthorizationSystem<TIdent> : IAuthorizationSystem<TIdent>
 
     public abstract bool IsAdmin();
 
-    public abstract bool HasAccess<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode)
-            where TSecurityOperationCode : struct, Enum;
+    public abstract bool HasAccess(NonContextSecurityOperation securityOperation);
 
-    public abstract void CheckAccess<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode)
-        where TSecurityOperationCode : struct, Enum;
+    public abstract void CheckAccess(NonContextSecurityOperation securityOperation);
 
     public string ResolveSecurityTypeName(Type type)
     {
@@ -36,30 +36,32 @@ public abstract class AuthorizationSystem<TIdent> : IAuthorizationSystem<TIdent>
         return type.Name;
     }
 
-    public abstract IEnumerable<string> GetAccessors<TSecurityOperationCode>(
-            TSecurityOperationCode securityOperationCode,
-            Expression<Func<IPrincipal<TIdent>, bool>> principalFilter)
-            where TSecurityOperationCode : struct, Enum;
+    public abstract IEnumerable<string> GetAccessors(
+        NonContextSecurityOperation securityOperation,
+        Expression<Func<IPrincipal<TIdent>, bool>> principalFilter);
 
-    public List<Dictionary<Type, IEnumerable<TIdent>>> GetPermissions<TSecurityOperationCode>(ContextSecurityOperation<TSecurityOperationCode> securityOperation, IEnumerable<Type> securityTypes)
-            where TSecurityOperationCode : struct, Enum
+    public List<Dictionary<Type, IEnumerable<TIdent>>> GetPermissions(
+        ContextSecurityOperation securityOperation,
+        IEnumerable<Type> securityTypes)
     {
-        return this.principalPermissionSource.GetPermissions().ToList(permission => this.TryExpandPermission(permission, securityOperation.SecurityExpandType));
+        return this.principalPermissionSource.GetPermissions()
+                   .ToList(permission => this.TryExpandPermission(permission, securityOperation.ExpandType));
     }
 
-    public IQueryable<IPermission<TIdent>> GetPermissionQuery<TSecurityOperationCode>(
-            ContextSecurityOperation<TSecurityOperationCode> securityOperation)
-            where TSecurityOperationCode : struct, Enum
+    public IQueryable<IPermission<TIdent>> GetPermissionQuery(
+        ContextSecurityOperation securityOperation)
     {
         return this.principalPermissionSource.GetPermissionQuery(securityOperation);
     }
 
-    private Dictionary<Type, IEnumerable<TIdent>> TryExpandPermission(Dictionary<Type, List<TIdent>> permission, HierarchicalExpandType expandType)
+    private Dictionary<Type, IEnumerable<TIdent>> TryExpandPermission(
+        Dictionary<Type, List<TIdent>> permission,
+        HierarchicalExpandType expandType)
     {
         if (permission == null) throw new ArgumentNullException(nameof(permission));
 
         return permission.ToDictionary(
-                                       pair => pair.Key,
-                                       pair => this.hierarchicalObjectExpanderFactory.Create(pair.Key).Expand(pair.Value, expandType));
+            pair => pair.Key,
+            pair => this.hierarchicalObjectExpanderFactory.Create(pair.Key).Expand(pair.Value, expandType));
     }
 }

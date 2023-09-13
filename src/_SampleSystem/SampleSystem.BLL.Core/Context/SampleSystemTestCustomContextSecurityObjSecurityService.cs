@@ -6,7 +6,7 @@ namespace SampleSystem.BLL;
 
 public partial class SampleSystemTestCustomContextSecurityObjSecurityService
 {
-    protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(ContextSecurityOperation<SampleSystemSecurityOperationCode> securityOperation)
+    protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(ContextSecurityOperation securityOperation)
     {
         return new ConstSecurityProvider<TestCustomContextSecurityObj>(false);
     }

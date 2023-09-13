@@ -10,5 +10,5 @@ public partial class TestLocationCollectionProperties
 
     public override DateTime[] Date_Intervals { get; }
 
-    public override SampleSystemSecurityOperationCode[] Security_Codes { get; }
+    public override string[] Security_Codes { get; }
 }

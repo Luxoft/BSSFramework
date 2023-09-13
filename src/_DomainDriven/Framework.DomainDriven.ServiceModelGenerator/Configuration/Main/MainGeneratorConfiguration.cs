@@ -96,7 +96,7 @@ public abstract class MainGeneratorConfigurationBase<TEnvironment> : GeneratorCo
 
         if (!domainType.IsProjection())
         {
-            if (this.Environment.SecurityOperationCodeType.IsEnum && domainType.HasAttribute<DomainObjectAccessAttribute>())
+            if (domainType.HasAttribute<DomainObjectAccessAttribute>())
             {
                 yield return new HasAccessMethodGenerator<MainGeneratorConfigurationBase<TEnvironment>>(this, domainType);
                 yield return new CheckAccessMethodGenerator<MainGeneratorConfigurationBase<TEnvironment>>(this, domainType);

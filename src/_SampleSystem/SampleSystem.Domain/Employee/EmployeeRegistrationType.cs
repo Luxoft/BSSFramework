@@ -1,11 +1,12 @@
 ﻿using Framework.DomainDriven.BLL;
 using Framework.Restriction;
+using Framework.Security;
 
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
 [UniqueGroup]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.Disabled)]
+[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.Disabled))]
 public class EmployeeRegistrationType : BaseDirectory, IExternalSynchronizable
 {
     private long externalId;

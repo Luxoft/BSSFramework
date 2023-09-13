@@ -11,15 +11,12 @@ namespace Framework.SecuritySystem.Providers.Operation
     /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
     /// <typeparam name="TDomainObject"></typeparam>
     /// <typeparam name="TIdent"></typeparam>
-    /// <typeparam name="TSecurityOperationCode"></typeparam>
-    public class ContextSecurityPathProvider<TPersistentDomainObjectBase, TDomainObject, TIdent, TSecurityOperationCode> : ISecurityProvider<TDomainObject>
+    public class ContextSecurityPathProvider<TPersistentDomainObjectBase, TDomainObject, TIdent> : ISecurityProvider<TDomainObject>
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase
-
-        where TSecurityOperationCode : struct, Enum
     {
-        private readonly ContextSecurityOperation<TSecurityOperationCode> securityOperation;
+        private readonly ContextSecurityOperation securityOperation;
 
         private readonly Lazy<Func<IQueryable<TDomainObject>, IQueryable<TDomainObject>>> injectFilterFunc;
 
@@ -30,7 +27,7 @@ namespace Framework.SecuritySystem.Providers.Operation
 
         public ContextSecurityPathProvider(
             SecurityPath<TDomainObject> securityPathBase,
-            ContextSecurityOperation<TSecurityOperationCode> securityOperation,
+            ContextSecurityOperation securityOperation,
             ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
         {
             if (securityPathBase == null) throw new ArgumentNullException(nameof(securityPathBase));

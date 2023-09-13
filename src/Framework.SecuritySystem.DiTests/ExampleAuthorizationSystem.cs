@@ -15,9 +15,9 @@ public class ExampleAuthorizationSystem : AuthorizationSystem<Guid>
 
     public override bool IsAdmin() => throw new NotImplementedException();
 
-    public override bool HasAccess<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode) => throw new NotImplementedException();
+    public override bool HasAccess(NonContextSecurityOperation securityOperation) => throw new NotImplementedException();
 
-    public override void CheckAccess<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode) => throw new NotImplementedException();
+    public override void CheckAccess(NonContextSecurityOperation securityOperation) => throw new NotImplementedException();
 
-    public override IEnumerable<string> GetAccessors<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode, Expression<Func<IPrincipal<Guid>, bool>> principalFilter) => throw new NotImplementedException();
+    public override IEnumerable<string> GetAccessors(NonContextSecurityOperation securityOperation, Expression<Func<IPrincipal<Guid>, bool>> principalFilter) => throw new NotImplementedException();
 }

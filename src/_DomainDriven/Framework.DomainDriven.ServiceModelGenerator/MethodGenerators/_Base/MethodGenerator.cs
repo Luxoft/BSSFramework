@@ -7,6 +7,7 @@ using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Generation.Domain;
 using Framework.Security;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
@@ -120,7 +121,7 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
 
             if (securityOperationAttr != null && altSecurityAttr)
             {
-                return securityOperationAttr.SecurityOperationCode;
+                return securityOperationAttr.SecurityOperation;
             }
             else if (securityOperationAttr != null || altSecurityAttr)
             {
@@ -217,20 +218,10 @@ public abstract class MethodGenerator<TConfiguration, TBLLRoleAttribute> : Gener
         return bllRef.ToVariableDeclarationStatement(varName, bllCreateExpr);
     }
 
-    protected CodeStatement GetCheckSecurityOperationCodeParameterStatement(int parameterIndex)
+    protected CodeExpression GetConvertToSecurityOperationCodeParameterExpression(int parameterIndex)
     {
-        return typeof(TransferEnumHelper).ToTypeReferenceExpression()
-                                         .ToMethodReferenceExpression(nameof(TransferEnumHelper.Check))
-                                         .ToMethodInvokeExpression(this.Parameters[parameterIndex].ToVariableReferenceExpression())
-                                         .ToExpressionStatement();
-    }
-
-    protected CodeExpression GetConvertSecurityOperationCodeParameterExpression(int parameterIndex, Type targetSecurityOperationType = null)
-    {
-        var realTargetSecurityOperationType = targetSecurityOperationType ?? this.Configuration.Environment.SecurityOperationCodeType;
-
-        return typeof(TransferEnumHelper).ToTypeReferenceExpression()
-                                         .ToMethodReferenceExpression(nameof(TransferEnumHelper.Convert), this.Parameters[parameterIndex].Type, realTargetSecurityOperationType.ToTypeReference())
-                                         .ToMethodInvokeExpression(this.Parameters[parameterIndex].ToVariableReferenceExpression());
+        return typeof(SecurityOperationHelper).ToTypeReferenceExpression()
+                                         .ToMethodReferenceExpression(nameof(SecurityOperationHelper.Parse))
+                                         .ToMethodInvokeExpression(this.Configuration.Environment.SecurityOperationType.ToTypeOfExpression(), this.Parameters[parameterIndex].ToVariableReferenceExpression());
     }
 }

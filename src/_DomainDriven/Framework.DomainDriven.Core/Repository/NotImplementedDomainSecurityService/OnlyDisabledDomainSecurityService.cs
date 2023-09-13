@@ -1,26 +1,6 @@
-﻿using Framework.Core;
-using Framework.SecuritySystem;
+﻿using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
-
-public class OnlyDisabledDomainSecurityService<TDomainObject, TSecurityOperationCode> : OnlyDisabledDomainSecurityService<TDomainObject>, INotImplementedDomainSecurityService<TDomainObject, TSecurityOperationCode>
-    where TSecurityOperationCode : struct, Enum
-{
-    public OnlyDisabledDomainSecurityService(IDisabledSecurityProviderSource disabledSecurityProviderSource)
-        : base(disabledSecurityProviderSource)
-    {
-    }
-
-    public ISecurityProvider<TDomainObject> GetSecurityProvider(TSecurityOperationCode securityOperationCode)
-    {
-        return this.GetSecurityProviderInternal(securityOperationCode);
-    }
-
-    public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityOperation<TSecurityOperationCode> securityOperation)
-    {
-        return this.GetSecurityProviderInternal(securityOperation.Code);
-    }
-}
 
 public class OnlyDisabledDomainSecurityService<TDomainObject> : INotImplementedDomainSecurityService<TDomainObject>
 {
@@ -31,18 +11,25 @@ public class OnlyDisabledDomainSecurityService<TDomainObject> : INotImplementedD
         this.disabledSecurityProviderSource = disabledSecurityProviderSource;
     }
 
-    public ISecurityProvider<TDomainObject> GetSecurityProvider(BLLSecurityMode securityMode)
+    public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityOperation securityOperation)
     {
-        return this.GetSecurityProviderInternal(securityMode);
+        return this.GetSecurityProviderInternal(securityOperation, securityOperation is DisabledSecurityOperation);
     }
 
-    public ISecurityProvider<TDomainObject> GetSecurityProviderInternal<TSecurityMode>(TSecurityMode securityMode)
+    public ISecurityProvider<TDomainObject> GetSecurityProvider(BLLSecurityMode securityMode)
     {
-        if (!securityMode.IsDefault())
+        return this.GetSecurityProviderInternal(securityMode, securityMode == BLLSecurityMode.Disabled);
+    }
+
+    private ISecurityProvider<TDomainObject> GetSecurityProviderInternal<TSecurityMode>(TSecurityMode securityMode, bool isDisabled)
+    {
+        if (isDisabled)
+        {
+            return this.disabledSecurityProviderSource.GetDisabledSecurityProvider<TDomainObject>();
+        }
+        else
         {
             throw new InvalidOperationException($"Security mode \"{securityMode}\" not allowed");
         }
-
-        return this.disabledSecurityProviderSource.GetDisabledSecurityProvider<TDomainObject>();
     }
 }

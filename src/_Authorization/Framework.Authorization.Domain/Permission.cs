@@ -5,6 +5,7 @@ using Framework.DomainDriven.Tracking.LegacyValidators;
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
+using Framework.Security;
 using Framework.SecuritySystem;
 using Framework.Transfering;
 
@@ -18,12 +19,12 @@ namespace Framework.Authorization.Domain;
 /// </remarks>
 /// <seealso cref="EntityType"/>
 [DomainType("{5d774041-bc69-4841-b64e-a2ee0131e632}")]
-[AuthorizationViewDomainObject(typeof(Principal))]
-[AuthorizationEditDomainObject(typeof(Principal))]
+[ViewDomainObject(typeof(Principal))]
+[EditDomainObject(typeof(Principal))]
 [BLLViewRole(MaxCollection = MainDTOType.RichDTO)]
 [BLLRemoveRole]
 [System.Diagnostics.DebuggerDisplay("Principal={Principal.Name}, Role={Role.Name}")]
-public partial class Permission : AuditPersistentDomainObjectBase,
+public class Permission : AuditPersistentDomainObjectBase,
 
                                   IDetail<Principal>,
 

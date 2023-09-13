@@ -2,17 +2,17 @@
 using System.Reflection;
 using System.Runtime.Serialization;
 
-using Framework.CodeDom;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.DTOGenerator;
 
 public class DomainObjectSecurityOperationCodeFileFactory<TConfiguration> : FileFactory<TConfiguration, RoleFileType>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    protected readonly IReadOnlyCollection<Enum> SecurityOperations;
+    protected readonly IReadOnlyCollection<SecurityOperation> SecurityOperations;
 
 
-    public DomainObjectSecurityOperationCodeFileFactory(TConfiguration configuration, Type domainType, IEnumerable<Enum> securityOperations)
+    public DomainObjectSecurityOperationCodeFileFactory(TConfiguration configuration, Type domainType, IEnumerable<SecurityOperation> securityOperations)
             : base(configuration, domainType)
     {
         if (securityOperations == null) throw new ArgumentNullException(nameof(securityOperations));
@@ -35,7 +35,7 @@ public class DomainObjectSecurityOperationCodeFileFactory<TConfiguration> : File
 
     protected override IEnumerable<CodeTypeReference> GetBaseTypes()
     {
-        yield return Enum.GetUnderlyingType(this.Configuration.Environment.SecurityOperationCodeType).ToTypeReference();
+        yield break;
     }
 
     protected override IEnumerable<CodeAttributeDeclaration> GetCustomAttributes()
@@ -46,12 +46,11 @@ public class DomainObjectSecurityOperationCodeFileFactory<TConfiguration> : File
 
     protected override IEnumerable<CodeTypeMember> GetMembers()
     {
-        return from securityOperationCode in this.SecurityOperations
+        return from securityOperation in this.SecurityOperations
 
                select new CodeMemberField
                       {
-                              Name = securityOperationCode.ToString(),
-                              InitExpression = securityOperationCode.ToPrimitiveExpression(),
+                              Name = securityOperation.Name,
                               CustomAttributes =
                               {
                                       new CodeAttributeDeclaration (new CodeTypeReference(typeof(EnumMemberAttribute)))

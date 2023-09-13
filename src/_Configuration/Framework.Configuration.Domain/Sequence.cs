@@ -2,6 +2,7 @@
 using Framework.Persistent;
 using Framework.Persistent.Mapping;
 using Framework.Restriction;
+using Framework.Security;
 using Framework.Validation;
 
 namespace Framework.Configuration.Domain;
@@ -11,8 +12,8 @@ namespace Framework.Configuration.Domain;
 /// </summary>
 [UniqueGroup]
 [BLLViewRole, BLLSaveRole, BLLRemoveRole]
-[ConfigurationViewDomainObject(ConfigurationSecurityOperationCode.SequenceView)]
-[ConfigurationEditDomainObject(ConfigurationSecurityOperationCode.SequenceEdit)]
+[ViewDomainObject(typeof(ConfigurationSecurityOperation), nameof(ConfigurationSecurityOperation.SequenceView))]
+[EditDomainObject(typeof(ConfigurationSecurityOperation), nameof(ConfigurationSecurityOperation.SequenceEdit))]
 [NotAuditedClass]
 public class Sequence : BaseDirectory, INumberObject<long>
 {

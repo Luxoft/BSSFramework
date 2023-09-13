@@ -7,6 +7,8 @@ using FluentNHibernate.Conventions.AcceptanceCriteria;
 using FluentNHibernate.Conventions.Inspections;
 using FluentNHibernate.Conventions.Instances;
 
+using Framework.Authorization.Generated.DAL.NHibernate.Mapping;
+using Framework.Configuration.Generated.DAL.NHibernate.Mapping;
 using Framework.DomainDriven;
 using Framework.DomainDriven.NHibernate;
 
@@ -56,6 +58,8 @@ public class SampleSystemMappingSettings : MappingSettings<PersistentDomainObjec
                           m =>
                           {
                               m.FluentMappings.AddFromAssemblyOf<SampleSystemMappingSettings>()
+                               .AddFromAssemblyOf<BusinessRoleMapping>()
+                               .AddFromAssemblyOf<NamedLockMapping>()
                                .Conventions.AddFromAssemblyOf<EnumConvention>();
                           })
                 .ExposeConfiguration(

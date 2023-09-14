@@ -1,7 +1,6 @@
 ﻿#nullable enable
 
 using Framework.SecuritySystem;
-
 using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.Repository;

@@ -1,6 +1,6 @@
 ﻿using Framework.Core;
 using Framework.SecuritySystem;
-
+using Framework.SecuritySystem;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.BLL.Security;

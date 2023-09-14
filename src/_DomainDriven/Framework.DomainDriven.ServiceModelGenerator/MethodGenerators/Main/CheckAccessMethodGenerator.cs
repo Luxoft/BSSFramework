@@ -55,7 +55,7 @@ public class CheckAccessMethodGenerator<TConfiguration> : MethodGenerator<TConfi
         yield return operationVarStatement;
 
         var domainObjectVarDecl = this.ToDomainObjectVarDeclById(bllRefExpr);
-        var method = typeof(SecurityProviderExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression(nameof(SecurityProviderExtensions.CheckAccess));
+        var method = typeof(SecurityProviderBaseExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression(nameof(SecurityProviderBaseExtensions.CheckAccess));
 
         yield return domainObjectVarDecl;
 

@@ -4,7 +4,6 @@ using Framework.Authorization.Generated.DTO;
 using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.SecuritySystem;
-
 using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.BLL;

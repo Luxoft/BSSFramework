@@ -1,7 +1,6 @@
 ﻿using Framework.Core;
 using Framework.Persistent;
 using Framework.SecuritySystem;
-
 using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.BLL.Security

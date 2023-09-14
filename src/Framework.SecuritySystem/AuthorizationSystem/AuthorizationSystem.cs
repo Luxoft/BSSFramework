@@ -26,13 +26,6 @@ public abstract class AuthorizationSystem<TIdent> : IAuthorizationSystem<TIdent>
 
     public abstract void CheckAccess(NonContextSecurityOperation securityOperation);
 
-    public string ResolveSecurityTypeName(Type type)
-    {
-        if (type == null) throw new ArgumentNullException(nameof(type));
-
-        return type.Name;
-    }
-
     public abstract IEnumerable<string> GetAccessors(
         NonContextSecurityOperation securityOperation,
         Expression<Func<IPrincipal<TIdent>, bool>> principalFilter);

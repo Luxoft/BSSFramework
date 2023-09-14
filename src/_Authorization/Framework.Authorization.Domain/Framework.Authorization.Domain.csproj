@@ -9,10 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework.SecuritySystem\Framework.SecuritySystem.csproj" />
     <ProjectReference Include="..\Framework.Authorization.Core\Framework.Authorization.Core.csproj" />
     <ProjectReference Include="..\Framework.Authorization.LegacyAttributes\Framework.Authorization.LegacyAttributes.csproj" />
-
-    <ProjectReference Include="..\..\Framework.SecuritySystem\Framework.SecuritySystem.csproj" />
 
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.BLL\Framework.DomainDriven.BLL.csproj" />
     <ProjectReference Include="..\..\_DomainDriven\Framework.DomainDriven.Core.LegacyAttributes\Framework.DomainDriven.Core.LegacyAttributes.csproj" />

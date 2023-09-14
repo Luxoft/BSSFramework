@@ -1,5 +1,5 @@
 ﻿using Framework.SecuritySystem;
-
+using Framework.SecuritySystem;
 using SampleSystem.Domain;
 
 namespace SampleSystem.BLL;

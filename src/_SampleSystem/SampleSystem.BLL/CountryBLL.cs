@@ -1,5 +1,4 @@
 ﻿using Framework.SecuritySystem;
-
 using nuSpec.Abstraction;
 
 using SampleSystem.Domain;

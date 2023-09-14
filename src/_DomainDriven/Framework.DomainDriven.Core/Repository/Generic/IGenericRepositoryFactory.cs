@@ -4,8 +4,3 @@ public interface IGenericRepositoryFactory<TDomainObject, in TIdent> : ITemplate
         TDomainObject>
 {
 }
-
-public interface IGenericRepositoryFactory<TDomainObject, in TIdent, TSecurityOperationCode> : IGenericRepositoryFactory<TDomainObject, TIdent>, ITemplateGenericRepositoryFactory<IGenericRepository<TDomainObject, TIdent>, TDomainObject, TSecurityOperationCode>
-    where TSecurityOperationCode : struct, Enum
-{
-}

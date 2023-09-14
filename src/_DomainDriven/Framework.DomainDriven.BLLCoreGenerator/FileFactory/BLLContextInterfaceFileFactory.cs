@@ -58,14 +58,4 @@ public class BLLContextInterfaceFileFactory<TConfiguration> : FileFactory<TConfi
                              HasGet = true
                      };
     }
-
-    //SecurityOperation<ConfigurationSecurityOperationCode> ISecurityOperationResolver<PersistentDomainObjectBase, ConfigurationSecurityOperationCode>.GetSecurityOperation(ConfigurationSecurityOperationCode securityOperationCode)
-    //{
-    //    return ConfigurationSecurityOperation.GetByCode(securityOperationCode);
-    //}
-
-    //SecurityOperation<ConfigurationSecurityOperationCode> ISecurityOperationResolver<PersistentDomainObjectBase, ConfigurationSecurityOperationCode>.GetSecurityOperation<TDomainObject>(BLLSecurityMode securityMode)
-    //{
-    //    return ConfigurationSecurityOperation.GetByCode<TDomainObject>(securityMode);
-    //}
 }

@@ -1,128 +1,52 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
+﻿using Framework.Persistent;
 
-using Framework.Core;
-using Framework.Persistent;
+namespace Framework.SecuritySystem;
 
-namespace Framework.SecuritySystem
+/// <summary>
+/// Сервис с кешированием доступа к неконтекстным операциям
+/// </summary>
+/// <typeparam name="TPersistentDomainObjectBase"></typeparam>
+/// <typeparam name="TDomainObject"></typeparam>
+/// <typeparam name="TIdent"></typeparam>
+public abstract class NonContextDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TIdent> : DomainSecurityService<TPersistentDomainObjectBase, TDomainObject>
+
+    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+    where TDomainObject : class, TPersistentDomainObjectBase
 {
-    /// <summary>
-    /// Сервис с кешированием доступа к неконтекстным операциям
-    /// </summary>
+    private readonly IDisabledSecurityProviderSource disabledSecurityProviderSource;
 
-    /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
-    /// <typeparam name="TDomainObject"></typeparam>
-    /// <typeparam name="TIdent"></typeparam>
+    private readonly IAuthorizationSystem<TIdent> authorizationSystem;
 
-    /// <typeparam name="TSecurityOperationCode"></typeparam>
 
-    public abstract class NonContextDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TIdent, TSecurityOperationCode> : DomainSecurityService<TDomainObject>,
-
-        IDomainSecurityService<TDomainObject, TSecurityOperationCode>
-
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase
-        where TSecurityOperationCode : struct, Enum
+    protected NonContextDomainSecurityService(
+        IDisabledSecurityProviderSource disabledSecurityProviderSource,
+        ISecurityOperationResolver<TPersistentDomainObjectBase> securityOperationResolver,
+        IAuthorizationSystem<TIdent> authorizationSystem)
+        : base(disabledSecurityProviderSource, securityOperationResolver)
     {
-        private readonly ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver;
+        this.disabledSecurityProviderSource = disabledSecurityProviderSource;
+        this.authorizationSystem = authorizationSystem ?? throw new ArgumentNullException(nameof(authorizationSystem));
+    }
 
-        private readonly IDictionaryCache<SecurityOperation<TSecurityOperationCode>, ISecurityProvider<TDomainObject>> providersCache;
+    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityOperation securityOperation)
+    {
+        if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
 
-
-        protected NonContextDomainSecurityServiceBase(
-            IDisabledSecurityProviderSource disabledSecurityProviderSource,
-            ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver)
-            : base(disabledSecurityProviderSource)
+        switch (securityOperation)
         {
-            this.securityOperationResolver = securityOperationResolver ?? throw new ArgumentNullException(nameof(securityOperationResolver));
+            case NonContextSecurityOperation nonContextSecurityOperation:
+                return this.CreateSecurityProvider(nonContextSecurityOperation);
 
-            this.providersCache = new DictionaryCache<SecurityOperation<TSecurityOperationCode>, ISecurityProvider<TDomainObject>>(this.CreateSecurityProvider).WithLock();
-        }
+            case DisabledSecurityOperation:
+                return this.disabledSecurityProviderSource.GetDisabledSecurityProvider<TDomainObject>();
 
-        protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(BLLSecurityMode securityMode)
-        {
-            return this.GetSecurityProvider(this.securityOperationResolver.GetSecurityOperation<TDomainObject>(securityMode));
-        }
-
-        protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityOperation<TSecurityOperationCode> securityOperation);
-
-
-        public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityOperation<TSecurityOperationCode> securityOperation)
-        {
-            if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
-
-            return this.providersCache[securityOperation];
-        }
-
-        public ISecurityProvider<TDomainObject> GetSecurityProvider(TSecurityOperationCode securityOperationCode)
-        {
-            return this.GetSecurityProvider(this.securityOperationResolver.GetSecurityOperation(securityOperationCode));
+            default:
+                throw new InvalidOperationException($"invalid operation: {securityOperation}");
         }
     }
 
-    public abstract class NonContextDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TIdent, TSecurityOperationCode> : NonContextDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TIdent, TSecurityOperationCode>,
-
-        IDomainSecurityService<TDomainObject, TSecurityOperationCode>
-
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase
-        where TSecurityOperationCode : struct, Enum
+    protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(NonContextSecurityOperation securityOperation)
     {
-        private readonly IDisabledSecurityProviderSource disabledSecurityProviderSource;
-
-        [NotNull]
-        private readonly IAuthorizationSystem<TIdent> authorizationSystem;
-
-        private readonly IDictionaryCache<NonContextSecurityOperation<TSecurityOperationCode>, ISecurityProvider<TDomainObject>> providersCache;
-
-
-
-        protected NonContextDomainSecurityService(
-            IDisabledSecurityProviderSource disabledSecurityProviderSource,
-            ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver,
-            IAuthorizationSystem<TIdent> authorizationSystem)
-            : base(disabledSecurityProviderSource, securityOperationResolver)
-        {
-            this.disabledSecurityProviderSource = disabledSecurityProviderSource;
-            this.authorizationSystem = authorizationSystem ?? throw new ArgumentNullException(nameof(authorizationSystem));
-
-            this.providersCache = new DictionaryCache<NonContextSecurityOperation<TSecurityOperationCode>, ISecurityProvider<TDomainObject>>(this.CreateSecurityProvider).WithLock();
-        }
-
-
-
-        protected ISecurityProvider<TDomainObject> Create(Expression<Func<TDomainObject, bool>> securityFilter, TSecurityOperationCode securityOperationCode)
-        {
-            if (securityFilter == null) throw new ArgumentNullException(nameof(securityFilter));
-
-            return new NonContextSecurityProvider<TPersistentDomainObjectBase, TDomainObject, TIdent, TSecurityOperationCode>(new NonContextSecurityOperation<TSecurityOperationCode>(securityOperationCode), this.authorizationSystem)
-                  .And(securityFilter);
-        }
-
-        public ISecurityProvider<TDomainObject> GetSecurityProvider(NonContextSecurityOperation<TSecurityOperationCode> securityOperation)
-        {
-            if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
-
-            return this.providersCache[securityOperation];
-        }
-
-        protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(NonContextSecurityOperation<TSecurityOperationCode> securityOperation)
-        {
-            return new NonContextSecurityProvider<TPersistentDomainObjectBase, TDomainObject, TIdent, TSecurityOperationCode>(securityOperation, this.authorizationSystem);
-        }
-
-        protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityOperation<TSecurityOperationCode> securityOperation)
-        {
-            if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
-
-            if (securityOperation is DisabledSecurityOperation<TSecurityOperationCode>)
-            {
-                return this.disabledSecurityProviderSource.GetDisabledSecurityProvider<TDomainObject>();
-            }
-            else
-            {
-                return this.GetSecurityProvider(new NonContextSecurityOperation<TSecurityOperationCode>(securityOperation.Code));
-            }
-        }
+        return new NonContextSecurityProvider<TPersistentDomainObjectBase, TDomainObject, TIdent>(securityOperation, this.authorizationSystem);
     }
 }

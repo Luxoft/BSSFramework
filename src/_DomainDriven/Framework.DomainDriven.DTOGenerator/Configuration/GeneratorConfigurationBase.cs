@@ -9,6 +9,7 @@ using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
 using Framework.Projection;
 using Framework.Security;
+using Framework.SecuritySystem;
 using Framework.Transfering;
 
 namespace Framework.DomainDriven.DTOGenerator;
@@ -27,7 +28,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
         this.DefaultCodeTypeReferenceService = new ConfigurationCodeTypeReferenceService<GeneratorConfigurationBase<TEnvironment>>(this);
 
-        this.DomainObjectSecurityOperationCodeFileFactoryHeader = new CodeFileFactoryHeader<RoleFileType>(FileType.DomainObjectSecurityOperationCode, string.Empty, domainType => $"{this.Environment.TargetSystemName}{domainType.Name}{typeof(SecurityOperationCode).Name}");
+        this.DomainObjectSecurityOperationCodeFileFactoryHeader = new CodeFileFactoryHeader<RoleFileType>(FileType.DomainObjectSecurityOperationCode, string.Empty, domainType => $"{this.Environment.TargetSystemName}{domainType.Name}SecurityOperationCode");
 
         this.ProjectionTypes = LazyInterfaceImplementHelper.CreateProxy(() => this.GetProjectionTypes().ToReadOnlyCollectionI());
 
@@ -47,7 +48,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     public IReadOnlyCollection<Type> ProjectionTypes { get; }
 
-    public IReadOnlyDictionary<Type, ReadOnlyCollection<Enum>> TypesWithSecondarySecurityOperations { get; }
+    public IReadOnlyDictionary<Type, ReadOnlyCollection<SecurityOperation>> TypesWithSecondarySecurityOperations { get; }
 
     public virtual bool ExpandStrictMaybeToDefault { get; } = false;
 
@@ -114,31 +115,26 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
         return false;
     }
 
-    protected virtual IEnumerable<KeyValuePair<Type, ReadOnlyCollection<Enum>>> GetTypesWithSecondarySecurityOperations()
+    protected virtual IEnumerable<KeyValuePair<Type, ReadOnlyCollection<SecurityOperation>>> GetTypesWithSecondarySecurityOperations()
     {
-        if (this.Environment.SecurityOperationCodeType.IsEnum)
-        {
-            var mainResult = this.DomainTypes.GetTypesWithSecondarySecurityOperations();
+        var mainResult = this.DomainTypes.GetTypesWithSecondarySecurityOperations();
 
-            var dependencyRequest = from domainType in this.GetDomainTypes()
+        var dependencyRequest = from domainType in this.GetDomainTypes()
 
-                                    where !mainResult.ContainsKey(domainType)
+                                where !mainResult.ContainsKey(domainType)
 
-                                    let rootSourceType = domainType.GetDependencySecuritySourceType(true)
+                                let rootSourceType = domainType.GetDependencySecuritySourceType(true)
 
-                                    where rootSourceType != null
+                                where rootSourceType != null
 
-                                    let mainPair = mainResult.GetValueOrDefault(rootSourceType)
+                                let mainPair = mainResult.GetValueOrDefault(rootSourceType)
 
-                                    where mainPair != null
+                                where mainPair != null
 
-                                    select domainType.ToKeyValuePair(mainPair);
+                                select domainType.ToKeyValuePair(mainPair);
 
 
-            return mainResult.Concat(dependencyRequest);
-        }
-
-        return new Dictionary<Type, ReadOnlyCollection<Enum>>();
+        return mainResult.Concat(dependencyRequest);
     }
 
     public IEnumerable<PropertyInfo> GetDomainTypeProperties(Type domainType, DTOFileType fileType)

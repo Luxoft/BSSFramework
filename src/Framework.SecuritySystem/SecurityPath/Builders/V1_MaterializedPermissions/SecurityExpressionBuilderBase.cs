@@ -22,10 +22,9 @@ public abstract class SecurityExpressionBuilderBase<TPersistentDomainObjectBase,
         this.Factory = factory ?? throw new ArgumentNullException(nameof(factory));
     }
 
-    public ISecurityExpressionFilter<TDomainObject> GetFilter<TSecurityOperationCode>(ContextSecurityOperation<TSecurityOperationCode> securityOperation)
-            where TSecurityOperationCode : struct, Enum
+    public ISecurityExpressionFilter<TDomainObject> GetFilter(ContextSecurityOperation securityOperation)
     {
-        return new SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject, TSecurityOperationCode, TIdent>(this, securityOperation);
+        return new SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject, TIdent>(this, securityOperation);
     }
 
 

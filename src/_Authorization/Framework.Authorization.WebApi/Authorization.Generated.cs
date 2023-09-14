@@ -18,17 +18,17 @@ namespace Framework.Authorization.WebApi
         /// Check BusinessRole access
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckBusinessRoleAccess))]
-        public virtual void CheckBusinessRoleAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode)
+        public virtual void CheckBusinessRoleAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] string securityOperationName)
         {
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckBusinessRoleAccessInternal(businessRoleIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckBusinessRoleAccessInternal(businessRoleIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual void CheckBusinessRoleAccessInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual void CheckBusinessRoleAccessInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRole;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Authorization.AuthorizationSecurityOperation), securityOperationName);
             Framework.Authorization.Domain.BusinessRole domainObject = bll.GetById(businessRoleIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.BusinessRole>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.BusinessRole>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>
@@ -319,17 +319,17 @@ namespace Framework.Authorization.WebApi
         /// Check access for BusinessRole
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasBusinessRoleAccess))]
-        public virtual bool HasBusinessRoleAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode)
+        public virtual bool HasBusinessRoleAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] string securityOperationName)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasBusinessRoleAccessInternal(businessRoleIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasBusinessRoleAccessInternal(businessRoleIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual bool HasBusinessRoleAccessInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual bool HasBusinessRoleAccessInternal(Framework.Authorization.Generated.DTO.BusinessRoleIdentityDTO businessRoleIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IBusinessRoleBLL bll = evaluateData.Context.Logics.BusinessRole;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Authorization.AuthorizationSecurityOperation), securityOperationName);
             Framework.Authorization.Domain.BusinessRole domainObject = bll.GetById(businessRoleIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.BusinessRole>(securityOperationCode).HasAccess(domainObject);
+            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.BusinessRole>(operation).HasAccess(domainObject);
         }
         
         /// <summary>
@@ -384,17 +384,17 @@ namespace Framework.Authorization.WebApi
         /// Check EntityType access
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckEntityTypeAccess))]
-        public virtual void CheckEntityTypeAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode)
+        public virtual void CheckEntityTypeAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] string securityOperationName)
         {
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckEntityTypeAccessInternal(entityTypeIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckEntityTypeAccessInternal(entityTypeIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual void CheckEntityTypeAccessInternal(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual void CheckEntityTypeAccessInternal(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityType;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Authorization.AuthorizationSecurityOperation), securityOperationName);
             Framework.Authorization.Domain.EntityType domainObject = bll.GetById(entityTypeIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.EntityType>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.EntityType>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>
@@ -667,17 +667,17 @@ namespace Framework.Authorization.WebApi
         /// Check access for EntityType
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasEntityTypeAccess))]
-        public virtual bool HasEntityTypeAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode)
+        public virtual bool HasEntityTypeAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] string securityOperationName)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasEntityTypeAccessInternal(entityTypeIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasEntityTypeAccessInternal(entityTypeIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual bool HasEntityTypeAccessInternal(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual bool HasEntityTypeAccessInternal(Framework.Authorization.Generated.DTO.EntityTypeIdentityDTO entityTypeIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IEntityTypeBLL bll = evaluateData.Context.Logics.EntityType;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Authorization.AuthorizationSecurityOperation), securityOperationName);
             Framework.Authorization.Domain.EntityType domainObject = bll.GetById(entityTypeIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.EntityType>(securityOperationCode).HasAccess(domainObject);
+            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.EntityType>(operation).HasAccess(domainObject);
         }
     }
     
@@ -688,17 +688,17 @@ namespace Framework.Authorization.WebApi
         /// Check Operation access
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckOperationAccess))]
-        public virtual void CheckOperationAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode)
+        public virtual void CheckOperationAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] string securityOperationName)
         {
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckOperationAccessInternal(operationIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckOperationAccessInternal(operationIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual void CheckOperationAccessInternal(Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual void CheckOperationAccessInternal(Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IOperationBLL bll = evaluateData.Context.Logics.Operation;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Authorization.AuthorizationSecurityOperation), securityOperationName);
             Framework.Authorization.Domain.Operation domainObject = bll.GetById(operationIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Operation>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Operation>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>
@@ -971,17 +971,17 @@ namespace Framework.Authorization.WebApi
         /// Check access for Operation
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasOperationAccess))]
-        public virtual bool HasOperationAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode)
+        public virtual bool HasOperationAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] string securityOperationName)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasOperationAccessInternal(operationIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasOperationAccessInternal(operationIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual bool HasOperationAccessInternal(Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual bool HasOperationAccessInternal(Framework.Authorization.Generated.DTO.OperationIdentityDTO operationIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IOperationBLL bll = evaluateData.Context.Logics.Operation;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Authorization.AuthorizationSecurityOperation), securityOperationName);
             Framework.Authorization.Domain.Operation domainObject = bll.GetById(operationIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Operation>(securityOperationCode).HasAccess(domainObject);
+            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Operation>(operation).HasAccess(domainObject);
         }
         
         /// <summary>
@@ -1015,17 +1015,17 @@ namespace Framework.Authorization.WebApi
         /// Check Permission access
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckPermissionAccess))]
-        public virtual void CheckPermissionAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode)
+        public virtual void CheckPermissionAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] string securityOperationName)
         {
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckPermissionAccessInternal(permissionIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckPermissionAccessInternal(permissionIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual void CheckPermissionAccessInternal(Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual void CheckPermissionAccessInternal(Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.Permission;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Authorization.AuthorizationSecurityOperation), securityOperationName);
             Framework.Authorization.Domain.Permission domainObject = bll.GetById(permissionIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Permission>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Permission>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>
@@ -1266,17 +1266,17 @@ namespace Framework.Authorization.WebApi
         /// Check access for Permission
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasPermissionAccess))]
-        public virtual bool HasPermissionAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode)
+        public virtual bool HasPermissionAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] string securityOperationName)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasPermissionAccessInternal(permissionIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasPermissionAccessInternal(permissionIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual bool HasPermissionAccessInternal(Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual bool HasPermissionAccessInternal(Framework.Authorization.Generated.DTO.PermissionIdentityDTO permissionIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.Permission;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Authorization.AuthorizationSecurityOperation), securityOperationName);
             Framework.Authorization.Domain.Permission domainObject = bll.GetById(permissionIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Permission>(securityOperationCode).HasAccess(domainObject);
+            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Permission>(operation).HasAccess(domainObject);
         }
         
         /// <summary>
@@ -1308,17 +1308,17 @@ namespace Framework.Authorization.WebApi
         /// Check Principal access
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(CheckPrincipalAccess))]
-        public virtual void CheckPrincipalAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode)
+        public virtual void CheckPrincipalAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] string securityOperationName)
         {
-            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckPrincipalAccessInternal(principalIdent, securityOperationCode, evaluateData));
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckPrincipalAccessInternal(principalIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual void CheckPrincipalAccessInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual void CheckPrincipalAccessInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.Principal;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Authorization.AuthorizationSecurityOperation), securityOperationName);
             Framework.Authorization.Domain.Principal domainObject = bll.GetById(principalIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Principal>(securityOperationCode), domainObject, evaluateData.Context.AccessDeniedExceptionService);
+            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Principal>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>
@@ -1609,17 +1609,17 @@ namespace Framework.Authorization.WebApi
         /// Check access for Principal
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute(nameof(HasPrincipalAccess))]
-        public virtual bool HasPrincipalAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode)
+        public virtual bool HasPrincipalAccess([Microsoft.AspNetCore.Mvc.FromFormAttribute()] Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdent, [Microsoft.AspNetCore.Mvc.FromFormAttribute()] string securityOperationName)
         {
-            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasPrincipalAccessInternal(principalIdent, securityOperationCode, evaluateData));
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasPrincipalAccessInternal(principalIdent, securityOperationName, evaluateData));
         }
         
-        protected virtual bool HasPrincipalAccessInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdent, Framework.Authorization.AuthorizationSecurityOperationCode securityOperationCode, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
+        protected virtual bool HasPrincipalAccessInternal(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO principalIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Generated.DTO.IAuthorizationDTOMappingService> evaluateData)
         {
             Framework.Authorization.BLL.IPrincipalBLL bll = evaluateData.Context.Logics.Principal;
-            Framework.Security.TransferEnumHelper.Check(securityOperationCode);
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Authorization.AuthorizationSecurityOperation), securityOperationName);
             Framework.Authorization.Domain.Principal domainObject = bll.GetById(principalIdent.Id, true);
-            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Principal>(securityOperationCode).HasAccess(domainObject);
+            return evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Principal>(operation).HasAccess(domainObject);
         }
         
         /// <summary>

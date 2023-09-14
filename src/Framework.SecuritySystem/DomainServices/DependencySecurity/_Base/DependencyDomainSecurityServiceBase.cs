@@ -1,52 +1,35 @@
-﻿using Framework.Core;
-using Framework.Persistent;
+﻿using Framework.Persistent;
 
 namespace Framework.SecuritySystem;
 
-public abstract class DependencyDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent, TSecurityOperationCode> :
+public abstract class DependencyDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent> :
 
-        DomainSecurityService<TDomainObject>, IDomainSecurityService<TDomainObject, TSecurityOperationCode>
+    DomainSecurityService<TPersistentDomainObjectBase, TDomainObject>
 
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase
-        where TSecurityOperationCode : struct, Enum
-        where TBaseDomainObject : class, TPersistentDomainObjectBase
+    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+    where TDomainObject : class, TPersistentDomainObjectBase
+    where TBaseDomainObject : class, TPersistentDomainObjectBase
 {
-    private readonly IDomainSecurityService<TBaseDomainObject, TSecurityOperationCode> baseDomainSecurityService;
-
-    private readonly IDictionaryCache<SecurityOperation<TSecurityOperationCode>, ISecurityProvider<TDomainObject>> providersByOperationCache;
-
-    private readonly IDictionaryCache<TSecurityOperationCode, ISecurityProvider<TDomainObject>> providersByOperationCodeCache;
+    private readonly IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService;
 
     protected DependencyDomainSecurityServiceBase(
-            IDisabledSecurityProviderSource disabledSecurityProviderSource,
-            IDomainSecurityService<TBaseDomainObject, TSecurityOperationCode> baseDomainSecurityService)
-            : base(disabledSecurityProviderSource)
+        IDisabledSecurityProviderSource disabledSecurityProviderSource,
+        ISecurityOperationResolver<TPersistentDomainObjectBase> securityOperationResolver,
+        IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService)
+        : base(disabledSecurityProviderSource, securityOperationResolver)
     {
         this.baseDomainSecurityService = baseDomainSecurityService ?? throw new ArgumentNullException(nameof(baseDomainSecurityService));
-
-        this.providersByOperationCache = new DictionaryCache<SecurityOperation<TSecurityOperationCode>, ISecurityProvider<TDomainObject>>(
-         securityOperation => this.CreateDependencySecurityProvider(this.baseDomainSecurityService.GetSecurityProvider(securityOperation))).WithLock();
-
-        this.providersByOperationCodeCache = new DictionaryCache<TSecurityOperationCode, ISecurityProvider<TDomainObject>>(
-         securityOperationCode => this.CreateDependencySecurityProvider(this.baseDomainSecurityService.GetSecurityProvider(securityOperationCode))).WithLock();
-    }
-
-
-    protected abstract ISecurityProvider<TDomainObject> CreateDependencySecurityProvider(ISecurityProvider<TBaseDomainObject> baseProvider);
-
-    public ISecurityProvider<TDomainObject> GetSecurityProvider(SecurityOperation<TSecurityOperationCode> securityOperation)
-    {
-        return this.providersByOperationCache[securityOperation];
-    }
-
-    public ISecurityProvider<TDomainObject> GetSecurityProvider(TSecurityOperationCode securityOperationCode)
-    {
-        return this.providersByOperationCodeCache[securityOperationCode];
     }
 
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(BLLSecurityMode securityMode)
     {
         return this.CreateDependencySecurityProvider(this.baseDomainSecurityService.GetSecurityProvider(securityMode));
     }
+
+    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityOperation securityOperation)
+    {
+        return this.CreateDependencySecurityProvider(this.baseDomainSecurityService.GetSecurityProvider(securityOperation));
+    }
+
+    protected abstract ISecurityProvider<TDomainObject> CreateDependencySecurityProvider(ISecurityProvider<TBaseDomainObject> baseProvider);
 }

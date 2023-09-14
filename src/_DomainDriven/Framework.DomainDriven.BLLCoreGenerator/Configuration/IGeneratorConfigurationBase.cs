@@ -47,15 +47,11 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
 
     ReadOnlyCollection<Type> SecurityServiceDomainTypes { get; }
 
-    string GetOperationByCodeMethodName { get; }
-
     string GetOperationByModeMethodName { get; }
 
     CodeTypeReference BLLContextInterfaceTypeReference { get; }
 
     CodeTypeReference BLLFactoryInterfaceTypeReference { get; }
-
-    CodeTypeReference SecurityOperationTypeReference { get; }
 
     CodeTypeReference RootSecurityServiceInterface { get; }
 

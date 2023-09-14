@@ -14,8 +14,7 @@ public class ExamplePrincipalPermissionSource : IPrincipalPermissionSource<Guid>
         return this.permissions;
     }
 
-    public IQueryable<IPermission<Guid>> GetPermissionQuery<TSecurityOperationCode>(ContextSecurityOperation<TSecurityOperationCode> securityOperation)
-            where TSecurityOperationCode : struct, Enum
+    public IQueryable<IPermission<Guid>> GetPermissionQuery(ContextSecurityOperation securityOperation)
     {
         throw new NotImplementedException();
     }

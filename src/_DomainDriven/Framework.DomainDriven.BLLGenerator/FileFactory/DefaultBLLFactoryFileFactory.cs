@@ -29,11 +29,10 @@ public class DefaultBLLFactoryFileFactory<TConfiguration> : FileFactory<TConfigu
 
         var contextFieldRefExpr = new CodeThisReferenceExpression().ToFieldReference("Context");
 
-        var baseTypeRef = typeof(DefaultSecurityBLLFactory<,,,,>)
+        var baseTypeRef = typeof(DefaultSecurityBLLFactory<,,,>)
                 .ToTypeReference(this.Configuration.BLLContextTypeReference,
                                  this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
                                  this.Configuration.Environment.DomainObjectBaseType.ToTypeReference(),
-                                 this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference(),
                                  this.Configuration.Environment.GetIdentityType().ToTypeReference());
 
 
@@ -41,10 +40,9 @@ public class DefaultBLLFactoryFileFactory<TConfiguration> : FileFactory<TConfigu
         var genericDomainObjectParameter = new CodeTypeParameter("TDomainObject");
         var genericDomainObjectParameterTypeRef = genericDomainObjectParameter.ToTypeReference();
 
-        var interfaceBase = typeof(IDefaultSecurityBLLFactory<,,>).
+        var interfaceBase = typeof(IDefaultSecurityBLLFactory<,>).
                 ToTypeReference(
                                 this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
-                                this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference(),
                                 this.Configuration.Environment.GetIdentityType().ToTypeReference());
 
 

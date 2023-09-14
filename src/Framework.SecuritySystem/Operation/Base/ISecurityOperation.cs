@@ -2,5 +2,13 @@
 
 public interface ISecurityOperation
 {
-    Enum Code { get; }
+    string Name { get; }
+
+    public bool AdminHasAccess { get; }
+
+    public string Description { get; }
+
+    public bool IsClient { get; }
+
+    public SecurityOperation ApproveOperation { get; }
 }

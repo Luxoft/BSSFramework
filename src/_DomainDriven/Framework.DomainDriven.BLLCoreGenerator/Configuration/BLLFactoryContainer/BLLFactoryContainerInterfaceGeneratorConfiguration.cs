@@ -3,6 +3,7 @@
 using Framework.CodeDom;
 using Framework.DomainDriven.Generation;
 using Framework.DomainDriven.Generation.Domain;
+using Framework.SecuritySystem;
 
 namespace Framework.DomainDriven.BLLCoreGenerator;
 
@@ -36,10 +37,15 @@ public class BLLFactoryContainerInterfaceGeneratorConfiguration<TConfiguration> 
         {
             return logicExpressionSource.ToPropertyReference(domainType.Name);
         }
-        else if (securitySource is Enum)
+        else if (securitySource is SecurityOperation securityOperation)
         {
             return logicExpressionSource.ToPropertyReference(domainType.Name + "Factory")
-                                        .ToMethodInvokeExpression("Create", (securitySource as Enum).ToPrimitiveExpression());
+                                        .ToMethodInvokeExpression("Create", this.Configuration.GetSecurityCodeExpression(securityOperation));
+        }
+        else if (securitySource is BLLSecurityMode securityMode)
+        {
+            return logicExpressionSource.ToPropertyReference(domainType.Name + "Factory")
+                                        .ToMethodInvokeExpression("Create", securityMode.ToPrimitiveExpression());
         }
         else if (securitySource is CodeExpression)
         {

@@ -2,13 +2,14 @@
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.Serialization;
 using Framework.Persistent;
+using Framework.Security;
 using Framework.Validation;
 
 namespace SampleSystem.Domain;
 
 [BLLViewRole]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.BusinessUnitManagerCommissionLinkEdit)]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.BusinessUnitManagerCommissionLinkView)]
+[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.BusinessUnitManagerCommissionLinkView))]
+[EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.BusinessUnitManagerCommissionLinkEdit))]
 [CustomName("Manager Commissions")]
 public class BusinessUnitManagerCommissionLink : AuditPersistentDomainObjectBase, IDetail<BusinessUnit>
 {

@@ -1,126 +1,95 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.Core;
 using Framework.SecuritySystem.Rules.Builders;
 using Framework.Persistent;
 
-namespace Framework.SecuritySystem
+namespace Framework.SecuritySystem;
+
+/// <summary>
+/// Сервис с кешированием доступа к контекстным операциям
+/// </summary>
+/// <typeparam name="TPersistentDomainObjectBase"></typeparam>
+/// <typeparam name="TDomainObject"></typeparam>
+/// <typeparam name="TIdent"></typeparam>
+public abstract class ContextDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TIdent> : NonContextDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TIdent>
+
+    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+    where TDomainObject : class, TPersistentDomainObjectBase
 {
-    /// <summary>
-    /// Сервис с кешированием доступа к контекстным операциям
-    /// </summary>
-    /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
-    /// <typeparam name="TDomainObject"></typeparam>
-    /// <typeparam name="TIdent"></typeparam>
-    /// <typeparam name="TSecurityOperationCode"></typeparam>
-    public abstract class ContextDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TIdent, TSecurityOperationCode> : NonContextDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TIdent, TSecurityOperationCode>
+    private readonly ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory;
 
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase
-        where TSecurityOperationCode : struct, Enum
+    protected ContextDomainSecurityServiceBase(
+        IDisabledSecurityProviderSource disabledSecurityProviderSource,
+        ISecurityOperationResolver<TPersistentDomainObjectBase> securityOperationResolver,
+        IAuthorizationSystem<TIdent> authorizationSystem,
+        ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
+
+        : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
     {
-        private readonly IDisabledSecurityProviderSource disabledSecurityProviderSource;
+        this.securityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
+    }
 
-        private readonly ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory;
+    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityOperation securityOperation)
+    {
+        if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
 
-        private readonly IDictionaryCache<ContextSecurityOperation<TSecurityOperationCode>, ISecurityProvider<TDomainObject>> providersCache;
-
-        protected ContextDomainSecurityServiceBase(
-            IDisabledSecurityProviderSource disabledSecurityProviderSource,
-            ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver,
-            IAuthorizationSystem<TIdent> authorizationSystem,
-            ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
-
-            : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
+        switch (securityOperation)
         {
-            this.disabledSecurityProviderSource = disabledSecurityProviderSource ?? throw new ArgumentNullException(nameof(disabledSecurityProviderSource));
-            this.securityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
-            this.providersCache = new DictionaryCache<ContextSecurityOperation<TSecurityOperationCode>, ISecurityProvider<TDomainObject>>(this.CreateSecurityProvider).WithLock();
-        }
+            case ContextSecurityOperation contextSecurityOperation:
+                return this.CreateSecurityProvider(contextSecurityOperation);
 
-
-        protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityOperation<TSecurityOperationCode> operation)
-        {
-            if (operation == null) throw new ArgumentNullException(nameof(operation));
-
-            switch (operation)
-            {
-                case ContextSecurityOperation<TSecurityOperationCode> securityOperation:
-                    return this.GetSecurityProvider(securityOperation);
-
-                case NonContextSecurityOperation<TSecurityOperationCode> securityOperation:
-                    return this.GetSecurityProvider(securityOperation);
-
-                case DisabledSecurityOperation<TSecurityOperationCode> securityOperation:
-                    return this.disabledSecurityProviderSource.GetDisabledSecurityProvider<TDomainObject>();
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(operation));
-            }
-        }
-
-        protected ISecurityProvider<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, TSecurityContext>> securityPath, ContextSecurityOperation<TSecurityOperationCode> securityOperation)
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
-        {
-            if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
-            if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
-
-            return this.Create(SecurityPath<TDomainObject>.Create(securityPath), securityOperation);
-        }
-
-        protected ISecurityProvider<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, ContextSecurityOperation<TSecurityOperationCode> securityOperation)
-            where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
-        {
-            if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
-            if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
-
-            return this.Create(SecurityPath<TDomainObject>.Create(securityPath), securityOperation);
-        }
-
-        protected virtual ISecurityProvider<TDomainObject> Create(SecurityPath<TDomainObject> securityPath, ContextSecurityOperation<TSecurityOperationCode> securityOperation)
-        {
-            if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
-            if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
-
-            return securityPath.ToProvider(securityOperation, this.securityExpressionBuilderFactory);
-        }
-
-
-        protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(ContextSecurityOperation<TSecurityOperationCode> securityOperation);
-
-
-        public ISecurityProvider<TDomainObject> GetSecurityProvider(ContextSecurityOperation<TSecurityOperationCode> securityOperation)
-        {
-            if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
-
-
-            return this.providersCache[securityOperation];
+            default:
+                return base.CreateSecurityProvider(securityOperation);
         }
     }
 
-    public abstract class ContextDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TIdent, TSecurityOperationCode> : ContextDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TIdent, TSecurityOperationCode>
-
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase
-        where TSecurityOperationCode : struct, Enum
+    protected ISecurityProvider<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, TSecurityContext>> securityPath, ContextSecurityOperation securityOperation)
+        where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
     {
-        protected ContextDomainSecurityService(
-            IDisabledSecurityProviderSource disabledSecurityProviderSource,
-            ISecurityOperationResolver<TPersistentDomainObjectBase, TSecurityOperationCode> securityOperationResolver,
-            IAuthorizationSystem<TIdent> authorizationSystem,
-            ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
-            : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
-        {
-        }
+        if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
+        if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
 
-        protected abstract SecurityPath<TDomainObject> GetSecurityPath();
+        return this.Create(SecurityPath<TDomainObject>.Create(securityPath), securityOperation);
+    }
 
+    protected ISecurityProvider<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, ContextSecurityOperation securityOperation)
+        where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
+    {
+        if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
+        if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
 
+        return this.Create(SecurityPath<TDomainObject>.Create(securityPath), securityOperation);
+    }
 
-        protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(ContextSecurityOperation<TSecurityOperationCode> securityOperation)
-        {
+    protected virtual ISecurityProvider<TDomainObject> Create(SecurityPath<TDomainObject> securityPath, ContextSecurityOperation securityOperation)
+    {
+        if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
+        if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
 
-            return this.Create(this.GetSecurityPath(), securityOperation);
-        }
+        return securityPath.ToProvider(securityOperation, this.securityExpressionBuilderFactory);
+    }
+
+    protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(ContextSecurityOperation securityOperation);
+}
+
+public abstract class ContextDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TIdent> : ContextDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TIdent>
+
+    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+    where TDomainObject : class, TPersistentDomainObjectBase
+{
+    protected ContextDomainSecurityService(
+        IDisabledSecurityProviderSource disabledSecurityProviderSource,
+        ISecurityOperationResolver<TPersistentDomainObjectBase> securityOperationResolver,
+        IAuthorizationSystem<TIdent> authorizationSystem,
+        ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
+        : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+    {
+    }
+
+    protected abstract SecurityPath<TDomainObject> GetSecurityPath();
+
+    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(ContextSecurityOperation securityOperation)
+    {
+        return this.Create(this.GetSecurityPath(), securityOperation);
     }
 }

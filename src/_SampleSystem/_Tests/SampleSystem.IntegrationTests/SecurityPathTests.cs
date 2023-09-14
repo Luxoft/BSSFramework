@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 
 using Framework.DomainDriven;
+using Framework.HierarchicalExpand;
 using Framework.SecuritySystem;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -27,8 +28,10 @@ public class SecurityPathTests : TestBase
                                    context =>
                                    {
                                        var securityProvider = SecurityPath<Employee>.Create(x => x.Location)
-                                               .Or(_ => false)
-                                               .ToProvider(SampleSystemSecurityOperation.EmployeeView, context.SecurityExpressionBuilderFactory);
+                                                                                    .Or(_ => false)
+                                                                                    .ToProvider(
+                                                                                        SampleSystemSecurityOperation.EmployeeView,
+                                                                                        context.SecurityExpressionBuilderFactory);
 
                                        var employeeBll = context.Logics.EmployeeFactory.Create(securityProvider);
 

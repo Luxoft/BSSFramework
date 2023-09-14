@@ -1,11 +1,13 @@
 ﻿using Framework.DomainDriven.BLL;
 using Framework.Persistent;
+using Framework.Security;
 
 namespace SampleSystem.Domain;
 
 [BLLViewRole, BLLSaveRole(SaveType = BLLSaveType.Both)]
-[SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.LocationView)]
-[SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.LocationEdit)]
+
+[ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.LocationView))]
+[EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.LocationEdit))]
 public class Example1 : AuditPersistentDomainObjectBase, IMaster<Example2>
 {
     private readonly ICollection<Example2> items2 = new HashSet<Example2>();
@@ -30,8 +32,8 @@ public class Example1 : AuditPersistentDomainObjectBase, IMaster<Example2>
         set { this.field2 = value; }
     }
 
-    [SampleSystemViewDomainObject(SampleSystemSecurityOperationCode.LocationView)]
-    [SampleSystemEditDomainObject(SampleSystemSecurityOperationCode.LocationEdit)]
+    [ViewDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.LocationView))]
+    [EditDomainObject(typeof(SampleSystemSecurityOperation), nameof(SampleSystemSecurityOperation.LocationEdit))]
     public virtual Guid Field3
     {
         get { return this.field3; }

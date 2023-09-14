@@ -6,16 +6,15 @@ namespace Framework.SecuritySystem;
 
 public static class SecurityPathExtensions
 {
-    public static ISecurityProvider<TDomainObject> ToProvider<TSecurityOperationCode, TPersistentDomainObjectBase, TDomainObject, TIdent>(
+    public static ISecurityProvider<TDomainObject> ToProvider<TPersistentDomainObjectBase, TDomainObject, TIdent>(
         this SecurityPath<TDomainObject> securityPath,
-        ContextSecurityOperation<TSecurityOperationCode> operation,
+        ContextSecurityOperation operation,
         ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase
-        where TSecurityOperationCode : struct, Enum
     {
-        return new ContextSecurityPathProvider<TPersistentDomainObjectBase, TDomainObject, TIdent, TSecurityOperationCode>(
+        return new ContextSecurityPathProvider<TPersistentDomainObjectBase, TDomainObject, TIdent>(
             securityPath,
             operation,
             securityExpressionBuilderFactory);

@@ -1,6 +1,4 @@
-﻿using Framework.Core;
-
-namespace Framework.Security;
+﻿namespace Framework.Security;
 
 /// <summary>
 /// Атрибут для редактирования объекта (или его свойства)
@@ -12,16 +10,15 @@ public class EditDomainObjectAttribute : DomainObjectAccessAttribute
     /// Пустой констуктор для кастомной безопасности
     /// </summary>
     public EditDomainObjectAttribute()
-            : this(default(Enum))
+        : base(null)
     {
     }
 
     /// <summary>
     /// Констуктор с доступом по операции
     /// </summary>
-    /// <param name="securityOperationCode">Операция просмотра</param>
-    public EditDomainObjectAttribute(Enum securityOperationCode)
-            : base(securityOperationCode)
+    public EditDomainObjectAttribute(Type securityOperationType, string name)
+        : base(securityOperationType, name)
     {
     }
 
@@ -30,7 +27,7 @@ public class EditDomainObjectAttribute : DomainObjectAccessAttribute
     /// </summary>
     /// <param name="editSecurityType">Доменный тип</param>
     public EditDomainObjectAttribute(Type editSecurityType)
-            : this(editSecurityType.FromMaybe(() => new NullReferenceException("editSecurityType")).GetEditDomainObjectCode())
+        : base(editSecurityType.GetEditSecurityOperation(true))
     {
     }
 }

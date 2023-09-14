@@ -59,6 +59,6 @@ public class GetSingleByFilterModelMethodGenerator<TConfiguration> : ViewMethodG
             return base.GetBLLSecurityParameter();
         }
 
-        return modelSecurityAttribute.SecurityOperationCode;
+        return modelSecurityAttribute.SecurityOperation;
     }
 }

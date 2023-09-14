@@ -70,7 +70,9 @@ public class ExtraQueryableSecurityPathTests : TestBase
                                                                .And(e => e.Location, SingleSecurityMode.Strictly)
                                                                .And(_ => extraQueryableSecurity, ManySecurityPathMode.Any);
 
-                                                       return extraSecurityPath.ToProvider(SampleSystemSecurityOperation.EmployeeView, context.SecurityExpressionBuilderFactory);
+                                                       return extraSecurityPath.ToProvider(
+                                                           SampleSystemSecurityOperation.EmployeeView,
+                                                           context.SecurityExpressionBuilderFactory);
                                                    });
 
         // Act

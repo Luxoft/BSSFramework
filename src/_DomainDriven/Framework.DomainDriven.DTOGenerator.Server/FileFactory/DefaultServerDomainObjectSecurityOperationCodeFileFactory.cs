@@ -1,11 +1,13 @@
 ﻿using System.CodeDom;
 
+using Framework.SecuritySystem;
+
 namespace Framework.DomainDriven.DTOGenerator.Server;
 
 public class DefaultServerDomainObjectSecurityOperationCodeFileFactory<TConfiguration> : DomainObjectSecurityOperationCodeFileFactory<TConfiguration>
         where TConfiguration : class, IServerGeneratorConfigurationBase<IServerGenerationEnvironmentBase>
 {
-    public DefaultServerDomainObjectSecurityOperationCodeFileFactory(TConfiguration configuration, Type domainType, IEnumerable<Enum> securityOperations)
+    public DefaultServerDomainObjectSecurityOperationCodeFileFactory(TConfiguration configuration, Type domainType, IEnumerable<SecurityOperation> securityOperations)
             : base(configuration, domainType, securityOperations)
     {
     }

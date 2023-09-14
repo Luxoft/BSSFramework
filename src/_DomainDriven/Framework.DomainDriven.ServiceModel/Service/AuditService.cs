@@ -12,7 +12,7 @@ using Framework.Validation;
 
 namespace Framework.DomainDriven.ServiceModel.Service;
 
-public class AuditService<TIdent, TBLLContext, TBLLFactoryContainer, TRootSecurityService, TSecurityOperationCode, TPersistentObjectBase, TDomainPropertyRevisionsDTO, TPropertyRevisionDTO>
+public class AuditService<TIdent, TBLLContext, TBLLFactoryContainer, TRootSecurityService, TPersistentObjectBase, TDomainPropertyRevisionsDTO, TPropertyRevisionDTO>
         where TDomainPropertyRevisionsDTO : DomainObjectPropertiesRevisionDTO<TIdent, TPropertyRevisionDTO>, new()
         where TPropertyRevisionDTO : PropertyRevisionDTOBase
         where TPersistentObjectBase : class, IIdentityObject<TIdent>
@@ -20,8 +20,7 @@ public class AuditService<TIdent, TBLLContext, TBLLFactoryContainer, TRootSecuri
         where TBLLContext : IBLLFactoryContainerContext<TBLLFactoryContainer>,
         ITypeResolverContainer<string>,
         ISecurityServiceContainer<TRootSecurityService>
-        where TRootSecurityService : IRootSecurityService<TPersistentObjectBase, TSecurityOperationCode>
-        where TSecurityOperationCode : struct, Enum
+        where TRootSecurityService : IRootSecurityService<TPersistentObjectBase>
 {
     private readonly static Lazy<Type> _genericTPropertyRevisionDTOType = new Lazy<Type>(
      () => typeof(TPropertyRevisionDTO)
@@ -103,12 +102,9 @@ public class AuditService<TIdent, TBLLContext, TBLLFactoryContainer, TRootSecuri
     private bool HassAccess<TDomain>(TDomain domainObject, PropertyInfo propertyInfo)
             where TDomain : class, TPersistentObjectBase
     {
-        var viewOperation = propertyInfo.GetViewDomainObjectCode();
+        var viewOperation = propertyInfo.GetViewSecurityOperation();
 
-        var castedViewOperation =
-                (TSecurityOperationCode)Convert.ChangeType(viewOperation, typeof(TSecurityOperationCode));
-
-        return this._bllContext.SecurityService.GetSecurityProvider<TDomain>(castedViewOperation).HasAccess(domainObject);
+        return this._bllContext.SecurityService.GetSecurityProvider<TDomain>(viewOperation).HasAccess(domainObject);
     }
 
     private TPropertyRevisionDTO ToPropertyRevisionDTO<TDTOProperty, TProperty>(

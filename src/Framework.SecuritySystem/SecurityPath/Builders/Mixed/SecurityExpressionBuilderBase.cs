@@ -21,8 +21,7 @@ public class SecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObjec
         this.queryBuilder = queryBuilder ?? throw new ArgumentNullException(nameof(queryBuilder));
     }
 
-    public ISecurityExpressionFilter<TDomainObject> GetFilter<TSecurityOperationCode>(ContextSecurityOperation<TSecurityOperationCode> securityOperation)
-            where TSecurityOperationCode : struct, Enum
+    public ISecurityExpressionFilter<TDomainObject> GetFilter(ContextSecurityOperation securityOperation)
     {
         var hasAccessFilter = this.hasAccessBuilder.GetFilter(securityOperation);
         var queryFilter = this.queryBuilder.GetFilter(securityOperation);

@@ -53,40 +53,13 @@ public class RootSecurityServiceBaseFileFactory<TConfiguration> : FileFactory<TC
 
         var baseDomainSecurityServiceType = typeof(IDomainSecurityService<>).MakeGenericType(domainType);
 
-        if (this.Configuration.Environment.SecurityOperationCodeType.IsEnum)
-        {
-            var domainSecurityServiceType = typeof(IDomainSecurityService<,>).MakeGenericType(
-                domainType,
-                this.Configuration.Environment.SecurityOperationCodeType);
+        var addScopedMethod = typeof(ServiceCollectionServiceExtensions).ToTypeReferenceExpression()
+                                                                        .ToMethodReferenceExpression(
+                                                                            nameof(ServiceCollectionServiceExtensions.AddScoped),
+                                                                            baseDomainSecurityServiceType.ToTypeReference(),
+                                                                            domainTypeServiceImpl);
 
-            var addScopedMethod = typeof(ServiceCollectionServiceExtensions).ToTypeReferenceExpression()
-                                                                            .ToMethodReferenceExpression(
-                                                                                nameof(ServiceCollectionServiceExtensions.AddScoped),
-                                                                                domainSecurityServiceType.ToTypeReference(),
-                                                                                domainTypeServiceImpl);
-
-
-            var addScopedFromMethod = typeof(ServiceCollectionExtensions).ToTypeReferenceExpression()
-                                                                         .ToMethodReferenceExpression(
-                                                                             nameof(ServiceCollectionExtensions.AddScopedFrom),
-                                                                             baseDomainSecurityServiceType.ToTypeReference(),
-                                                                             domainSecurityServiceType.ToTypeReference());
-
-
-            yield return serviceCollectionExpr.ToStaticMethodInvokeExpression(addScopedMethod).ToExpressionStatement();
-
-            yield return serviceCollectionExpr.ToStaticMethodInvokeExpression(addScopedFromMethod).ToExpressionStatement();
-        }
-        else
-        {
-            var addScopedMethod = typeof(ServiceCollectionServiceExtensions).ToTypeReferenceExpression()
-                                                                            .ToMethodReferenceExpression(
-                                                                                nameof(ServiceCollectionServiceExtensions.AddScoped),
-                                                                                baseDomainSecurityServiceType.ToTypeReference(),
-                                                                                domainTypeServiceImpl);
-
-            yield return serviceCollectionExpr.ToStaticMethodInvokeExpression(addScopedMethod).ToExpressionStatement();
-        }
+        yield return serviceCollectionExpr.ToStaticMethodInvokeExpression(addScopedMethod).ToExpressionStatement();
     }
 
     protected override System.Collections.Generic.IEnumerable<CodeTypeMember> GetMembers()

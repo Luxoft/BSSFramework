@@ -3,6 +3,7 @@
 using Framework.CodeDom;
 using Framework.Core;
 using Framework.DomainDriven.BLL;
+using Framework.SecuritySystem;
 using Framework.Transfering;
 
 namespace Framework.DomainDriven.ServiceModelGenerator;
@@ -33,7 +34,7 @@ public class HasAccessMethodGenerator<TConfiguration> : MethodGenerator<TConfigu
         return $"Check access for {this.DomainType.Name}";
     }
 
-    private CodeParameterDeclarationExpression SecurityOperationCodeParameter => this.Configuration.Environment.SecurityOperationCodeType.ToTypeReference().ToParameterDeclarationExpression("securityOperationCode");
+    private CodeParameterDeclarationExpression SecurityOperationCodeParameter => typeof(string).ToTypeReference().ToParameterDeclarationExpression("securityOperationName");
 
     protected override IEnumerable<CodeParameterDeclarationExpression> GetParameters()
     {
@@ -46,14 +47,16 @@ public class HasAccessMethodGenerator<TConfiguration> : MethodGenerator<TConfigu
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
     {
-        yield return this.GetCheckSecurityOperationCodeParameterStatement(1);
+        var operationVarStatement = new CodeVariableDeclarationStatement(typeof(SecurityOperation), "operation", this.GetConvertToSecurityOperationCodeParameterExpression(1));
+
+        yield return operationVarStatement;
 
         var domainObjectVarDecl = this.ToDomainObjectVarDeclById(bllRefExpr);
 
         yield return domainObjectVarDecl;
 
         yield return this.Configuration.Environment.BLLCore.GetGetSecurityProviderMethodReferenceExpression(evaluateDataExpr.GetContext(), this.DomainType)
-                         .ToMethodInvokeExpression(this.SecurityOperationCodeParameter.ToVariableReferenceExpression())
+                         .ToMethodInvokeExpression(operationVarStatement.ToVariableReferenceExpression())
                          .ToMethodInvokeExpression("HasAccess", domainObjectVarDecl.ToVariableReferenceExpression())
                          .ToMethodReturnStatement();
     }

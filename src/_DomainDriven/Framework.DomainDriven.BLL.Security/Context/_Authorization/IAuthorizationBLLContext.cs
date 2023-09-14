@@ -11,11 +11,9 @@ public interface IAuthorizationBLLContextBase : IAuthorizationSystem
 
     string CurrentPrincipalName { get; }
 
-    bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation, bool withRunAs)
-        where TSecurityOperationCode : struct, Enum;
+    bool HasAccess(NonContextSecurityOperation securityOperation, bool withRunAs);
 
-    void CheckAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> operation, bool withRunAs)
-        where TSecurityOperationCode : struct, Enum;
+    void CheckAccess(NonContextSecurityOperation securityOperation, bool withRunAs);
 }
 
 public interface IAuthorizationBLLContext<TIdent> : IAuthorizationBLLContextBase,

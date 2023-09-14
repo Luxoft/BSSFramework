@@ -7,8 +7,6 @@ namespace Framework.Authorization.BLL;
 
 public interface IAuthorizationExternalSource
 {
-    Type SecurityOperationCodeType { get; }
-
     IAuthorizationTypedExternalSource GetTyped(EntityType entityType, bool withCache = true);
 }
 

@@ -32,7 +32,7 @@ public class GetTreeByOperationMethodGenerator<TConfiguration> : ViewMethodGener
 
     protected override object GetBLLSecurityParameter()
     {
-        return this.GetConvertSecurityOperationCodeParameterExpression(0);
+        return this.GetConvertToSecurityOperationCodeParameterExpression(0);
     }
 
     protected override string GetComment()

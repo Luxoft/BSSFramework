@@ -39,11 +39,13 @@ namespace Framework.Authorization.BLL
         {
             if (operation == null) throw new ArgumentNullException(nameof(operation));
 
-            return this.Context.Logics.Permission.GetAvailablePermissionsQueryable(new AvailablePermissionFilter(this.Context.DateTimeService, null))
-                                                 .Where(permission => permission.Role.BusinessRoleOperationLinks.Any(link => link.Operation == operation))
-                                                 .Select(permission => permission.Principal.Name)
-                                                 .Distinct()
-                                                 .ToUnboundedList();
+            return this.Context
+                       .Logics
+                       .Permission
+                       .GetAvailablePermissionsQueryable(new AvailablePermissionFilter(this.Context.DateTimeService.Today) { SecurityOperationId = operation.Id })
+                       .Select(permission => permission.Principal.Name)
+                       .Distinct()
+                       .ToUnboundedList();
         }
     }
 }

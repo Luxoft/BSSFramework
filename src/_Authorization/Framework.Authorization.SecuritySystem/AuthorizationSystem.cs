@@ -1,8 +1,6 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Authorization.Domain;
-using Framework.Core;
-using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
 using Framework.SecuritySystem;
 
@@ -12,7 +10,7 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
 {
     private readonly IAvailablePermissionSource availablePermissionSource;
 
-    private readonly IOperationResolver operationResolver;
+    private readonly IAuthOperationResolver authOperationResolver;
 
     private readonly IAccessDeniedExceptionService accessDeniedExceptionService;
 
@@ -20,28 +18,26 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
 
     public AuthorizationSystem(
         IAvailablePermissionSource availablePermissionSource,
-        IOperationResolver operationResolver,
+        IAuthOperationResolver authOperationResolver,
         IAccessDeniedExceptionService accessDeniedExceptionService)
     {
         this.availablePermissionSource = availablePermissionSource;
-        this.operationResolver = operationResolver;
+        this.authOperationResolver = authOperationResolver;
         this.accessDeniedExceptionService = accessDeniedExceptionService;
     }
 
     public bool IsAdmin() => this.availablePermissionSource.GetAvailablePermissionsQueryable()
                                  .Any(permission => permission.Role.Name == BusinessRole.AdminRoleName);
 
-    public bool HasAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> securityOperation)
-        where TSecurityOperationCode : struct, Enum
+    public bool HasAccess(NonContextSecurityOperation securityOperation)
     {
-        var authOperation = this.operationResolver.GetByCode(securityOperation.Code);
+        var authOperation = this.authOperationResolver.GetAuthOperation(securityOperation);
 
-        return this.availablePermissionSource.GetAvailablePermissionsQueryable()
+        return this.availablePermissionSource.GetAvailablePermissionsQueryable(operationId: authOperation.Id)
                    .Any(permission => permission.Role.BusinessRoleOperationLinks.Any(link => link.Operation == authOperation));
     }
 
-    public void CheckAccess<TSecurityOperationCode>(NonContextSecurityOperation<TSecurityOperationCode> operation)
-        where TSecurityOperationCode : struct, Enum
+    public void CheckAccess(NonContextSecurityOperation operation)
     {
         if (!this.HasAccess(operation))
         {
@@ -49,35 +45,9 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         }
     }
 
-    public IEnumerable<string> GetAccessors<TSecurityOperationCode>(TSecurityOperationCode securityOperationCode, Expression<Func<IPrincipal<Guid>, bool>> principalFilter)
-        where TSecurityOperationCode : struct, Enum =>
-        throw new NotImplementedException();
+    public IEnumerable<string> GetAccessors(NonContextSecurityOperation securityOperation, Expression<Func<IPrincipal<Guid>, bool>> principalFilter) => throw new NotImplementedException();
 
-    public List<Dictionary<Type, IEnumerable<Guid>>> GetPermissions<TSecurityOperationCode>(ContextSecurityOperation<TSecurityOperationCode> securityOperation, IEnumerable<Type> securityTypes)
-        where TSecurityOperationCode : struct, Enum =>
-        throw new NotImplementedException();
+    public List<Dictionary<Type, IEnumerable<Guid>>> GetPermissions(ContextSecurityOperation securityOperation, IEnumerable<Type> securityTypes) => throw new NotImplementedException();
 
-    public IQueryable<IPermission<Guid>> GetPermissionQuery<TSecurityOperationCode>(ContextSecurityOperation<TSecurityOperationCode> securityOperation)
-        where TSecurityOperationCode : struct, Enum =>
-        throw new NotImplementedException();
-}
-
-public class AvailablePermissionSpecification<TSecurityOperationCode> : AvailablePermissionFilter
-    where TSecurityOperationCode : struct, Enum
-{
-    private readonly Guid securityOperationId;
-
-    public AvailablePermissionOperationFilter(IDateTimeService dateTimeService, string principalName, TSecurityOperationCode securityOperationCode)
-        : base(dateTimeService, principalName)
-    {
-        if (securityOperationCode.IsDefault()) throw new ArgumentOutOfRangeException(nameof(securityOperationCode));
-
-        this.securityOperationId = securityOperationCode.ToGuid();
-    }
-
-    public override Expression<Func<Permission, bool>> ToFilterExpression()
-    {
-        return base.ToFilterExpression()
-                   .BuildAnd(permission => permission.Role.BusinessRoleOperationLinks.Any(link => link.Operation.Id == this.securityOperationId));
-    }
+    public IQueryable<IPermission<Guid>> GetPermissionQuery(ContextSecurityOperation securityOperation) => throw new NotImplementedException();
 }

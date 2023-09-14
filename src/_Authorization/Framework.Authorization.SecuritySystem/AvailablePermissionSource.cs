@@ -1,7 +1,7 @@
-﻿using System.Linq.Expressions;
+﻿using System.Linq;
+using System.Linq.Expressions;
 
 using Framework.Authorization.Domain;
-using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
 
@@ -31,17 +31,16 @@ public class AvailablePermissionSource : IAvailablePermissionSource
 
     public IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true)
     {
-        return this.permissionRepository.GetQueryable().Where(this.GetFilterExpression(withRunAs));
+        var filter = new AvailablePermissionFilter(this.dateTimeService.Today)
+                     {
+                         PrincipalName = withRunAs ? this.runAsManager.PrincipalName : this.currentPrincipalSource.CurrentPrincipal.Name
+                     };
+
+        return this.GetAvailablePermissionsQueryable(filter);
     }
 
-    private Expression<Func<Permission, bool>> GetFilterExpression(bool withRunAs = true)
+    public IQueryable<Permission> GetAvailablePermissionsQueryable(AvailablePermissionFilter filter)
     {
-        var principalName = withRunAs ? this.runAsManager.PrincipalName : this.currentPrincipalSource.CurrentPrincipal.Name;
-
-        var dateTime = this.dateTimeService.Today;
-
-        return permission => principalName == permission.Principal.Name
-                             && permission.Status == PermissionStatus.Approved
-                             && permission.Period.Contains(dateTime);
+        return this.permissionRepository.GetQueryable().Where(filter.ToFilterExpression());
     }
 }

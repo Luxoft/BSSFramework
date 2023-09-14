@@ -147,18 +147,25 @@ public partial class AuthorizationBLLContext
         return this.entityTypeByIdCache[domainTypeId];
     }
 
-    private bool HasAccess(AvailablePermissionFilter filter)
+    public bool IsAdmin()
     {
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
-
-        return this.Logics.Permission.GetSecureQueryable().Where(filter.ToFilterExpression()).Any();
+        return this.Logics.BusinessRole.HasAdminRole();
     }
 
     public bool HasAccess(Operation operation)
     {
         if (operation == null) throw new ArgumentNullException(nameof(operation));
 
-        return this.HasAccess(new AvailablePermissionOperationFilter(this.DateTimeService, this.RunAsManager.PrincipalName, operation));
+        return this.HasAccess(
+            new AvailablePermissionFilter(this.DateTimeService.Today)
+            {
+                PrincipalName = this.RunAsManager.PrincipalName, SecurityOperationId = operation.Id
+            });
+    }
+
+    public bool HasAccess(NonContextSecurityOperation securityOperation)
+    {
+        return this.HasAccess(securityOperation, true);
     }
 
     public bool HasAccess(NonContextSecurityOperation securityOperation, bool withRunAs)
@@ -167,22 +174,12 @@ public partial class AuthorizationBLLContext
 
         var principalName = withRunAs ? this.RunAsManager.PrincipalName : this.CurrentPrincipalName;
 
-        var filter = new AvailablePermissionOperationFilter(
-            this.DateTimeService,
-            principalName,
-            typedSecurityOperation.Id);
+        var filter = new AvailablePermissionFilter(this.DateTimeService.Today)
+                     {
+                         PrincipalName = principalName, SecurityOperationId = typedSecurityOperation.Id
+                     };
 
         return this.HasAccess(filter);
-    }
-
-    public bool IsAdmin()
-    {
-        return this.Logics.BusinessRole.HasAdminRole();
-    }
-
-    public bool HasAccess(NonContextSecurityOperation securityOperation)
-    {
-        return this.HasAccess(securityOperation, true);
     }
 
     public void CheckAccess(NonContextSecurityOperation securityOperation)
@@ -202,6 +199,13 @@ public partial class AuthorizationBLLContext
         }
     }
 
+    private bool HasAccess(AvailablePermissionFilter filter)
+    {
+        if (filter == null) throw new ArgumentNullException(nameof(filter));
+
+        return this.Logics.Permission.GetSecureQueryable().Where(filter.ToFilterExpression()).Any();
+    }
+
     public SecurityContextInfo<Guid> GetSecurityContextInfo(Type type)
     {
         var entity = this.GetEntityType(type);
@@ -217,13 +221,14 @@ public partial class AuthorizationBLLContext
 
         var typedSecurityOperation = (ContextSecurityOperation<Guid>)securityOperation;
 
-        var filter = new AvailablePermissionOperationFilter(
-            this.DateTimeService,
-            this.RunAsManager.PrincipalName,
-            typedSecurityOperation.Id);
+        var filter = new AvailablePermissionFilter(this.DateTimeService.Today)
+                     {
+                         PrincipalName = this.RunAsManager.PrincipalName,
+                         SecurityOperationId = typedSecurityOperation.Id
+                     };
 
         var permissions = this.Logics.Permission.GetListBy(
-                                                           filter, z => z.SelectMany(q => q.FilterItems).SelectNested(q => q.Entity).Select(q => q.EntityType));
+                                                           filter.ToFilterExpression(), z => z.SelectMany(q => q.FilterItems).SelectNested(q => q.Entity).Select(q => q.EntityType));
 
         var securityTypesCache = securityTypes.ToReadOnlyCollection();
 
@@ -238,10 +243,10 @@ public partial class AuthorizationBLLContext
 
         var typedSecurityOperation = (ContextSecurityOperation<Guid>)securityOperation;
 
-        var filter = new AvailablePermissionOperationFilter(
-            this.DateTimeService,
-            this.RunAsManager.PrincipalName,
-            typedSecurityOperation.Id);
+        var filter = new AvailablePermissionFilter(this.DateTimeService.Today)
+                     {
+                         PrincipalName = this.RunAsManager.PrincipalName, SecurityOperationId = typedSecurityOperation.Id
+                     };
 
         return this.Logics.Permission.GetUnsecureQueryable().Where(filter.ToFilterExpression());
     }
@@ -266,7 +271,9 @@ public partial class AuthorizationBLLContext
         if (operation == null) throw new ArgumentNullException(nameof(operation));
         if (principalFilter == null) throw new ArgumentNullException(nameof(principalFilter));
 
-        return this.GetAccessors(principalFilter, new AvailablePermissionOperationFilter(this.DateTimeService, null, operation));
+        return this.GetAccessors(
+            principalFilter,
+            new AvailablePermissionFilter(this.DateTimeService.Today) { SecurityOperationId = operation.Id });
     }
 
     //public Guid GrandAccessIdent { get; } = DenormalizedPermissionItem.GrandAccessGuid;
@@ -279,8 +286,8 @@ public partial class AuthorizationBLLContext
         var typedSecurityOperation = (NonContextSecurityOperation<Guid>)securityOperation;
 
         return this.GetAccessors(
-                                 (Expression<Func<Principal, bool>>)AuthVisitor.Visit(principalFilter),
-                                 new AvailablePermissionOperationFilter(this.DateTimeService, null, typedSecurityOperation.Id));
+            (Expression<Func<Principal, bool>>)AuthVisitor.Visit(principalFilter),
+            new AvailablePermissionFilter(this.DateTimeService.Today) { SecurityOperationId = typedSecurityOperation.Id });
     }
 
     private Dictionary<Type, IEnumerable<Guid>> TryExpandPermission(Dictionary<Type, List<Guid>> permission, HierarchicalExpandType expandType)

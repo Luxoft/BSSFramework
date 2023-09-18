@@ -15,6 +15,7 @@ using Framework.SecuritySystem;
 
 
 using Framework.Authorization.Notification;
+using Framework.Authorization.SecuritySystem;
 
 namespace Framework.Authorization.BLL;
 
@@ -42,17 +43,16 @@ public partial class AuthorizationBLLContext
             IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
             IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
             IDateTimeService dateTimeService,
-            IUserAuthenticationService userAuthenticationService,
             ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
             IConfigurationBLLContext configuration,
             IAuthorizationSecurityService securityService,
             IAuthorizationBLLFactoryContainer logics,
             IAuthorizationExternalSource externalSource,
-            IRunAsManager runAsManager,
             ISecurityTypeResolverContainer securityTypeResolverContainer,
             INotificationPrincipalExtractor notificationPrincipalExtractor,
             IAuthorizationBLLContextSettings settings,
-            IAuthorizationSystem<Guid> authorizationSystem)
+            IRunAsAuthorizationSystem authorizationSystem,
+            IAvailablePermissionSource availablePermissionSource)
             : base(
                    serviceProvider,
                    operationSenders,
@@ -67,16 +67,15 @@ public partial class AuthorizationBLLContext
         this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
         this.SecurityService = securityService ?? throw new ArgumentNullException(nameof(securityService));
         this.logics = logics ?? throw new ArgumentNullException(nameof(logics));
+        this.AvailablePermissionSource = availablePermissionSource;
         this.NotificationPrincipalExtractor = notificationPrincipalExtractor;
         this.AuthorizationSystem = authorizationSystem;
 
         this.ExternalSource = externalSource ?? throw new ArgumentNullException(nameof(externalSource));
-        this.RunAsManager = runAsManager ?? throw new ArgumentNullException(nameof(runAsManager));
         this.Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
         this.lazyCurrentPrincipal = LazyHelper.Create(() => this.Logics.Principal.GetCurrent());
 
-        this.CurrentPrincipalName = userAuthenticationService.GetUserName();
 
         this.SecurityTypeResolver = securityTypeResolverContainer.SecurityTypeResolver.OverrideInput((EntityType entityType) => entityType.Name);
 
@@ -102,13 +101,11 @@ public partial class AuthorizationBLLContext
 
     public ITypeResolver<EntityType> SecurityTypeResolver { get; }
 
-    public IRunAsManager RunAsManager { get; }
-
     public INotificationPrincipalExtractor NotificationPrincipalExtractor { get; }
 
-    public IAuthorizationSystem<Guid> AuthorizationSystem { get; }
+    public IRunAsAuthorizationSystem AuthorizationSystem { get; }
 
-    public string CurrentPrincipalName { get; }
+    public IAvailablePermissionSource AvailablePermissionSource { get; }
 
     public IAuthorizationSecurityService SecurityService { get; }
 
@@ -144,54 +141,6 @@ public partial class AuthorizationBLLContext
         if (domainTypeId.IsDefault()) throw new ArgumentOutOfRangeException(nameof(domainTypeId));
 
         return this.entityTypeByIdCache[domainTypeId];
-    }
-
-    public bool IsAdmin()
-    {
-        return this.Logics.BusinessRole.HasAdminRole();
-    }
-
-    public bool HasAccess(NonContextSecurityOperation securityOperation)
-    {
-        return this.HasAccess(securityOperation, true);
-    }
-
-    public bool HasAccess(NonContextSecurityOperation securityOperation, bool withRunAs)
-    {
-        var typedSecurityOperation = (NonContextSecurityOperation<Guid>)securityOperation;
-
-        var principalName = withRunAs ? this.RunAsManager.PrincipalName : this.CurrentPrincipalName;
-
-        var filter = new AvailablePermissionFilter(this.DateTimeService.Today)
-                     {
-                         PrincipalName = principalName, SecurityOperationId = typedSecurityOperation.Id
-                     };
-
-        return this.HasAccess(filter);
-    }
-
-    public void CheckAccess(NonContextSecurityOperation securityOperation)
-    {
-        this.CheckAccess(securityOperation, true);
-    }
-
-    public void CheckAccess(NonContextSecurityOperation securityOperation, bool withRunAs)
-    {
-        if (!this.HasAccess(securityOperation, withRunAs))
-        {
-            throw this.AccessDeniedExceptionService.GetAccessDeniedException(
-                new AccessResult.AccessDeniedResult
-                {
-                    SecurityOperation = securityOperation
-                });
-        }
-    }
-
-    private bool HasAccess(AvailablePermissionFilter filter)
-    {
-        if (filter == null) throw new ArgumentNullException(nameof(filter));
-
-        return this.Logics.Permission.GetSecureQueryable().Where(filter.ToFilterExpression()).Any();
     }
 
     public ISecurityProvider<TDomainObject> GetPrincipalSecurityProvider<TDomainObject>(

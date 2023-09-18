@@ -341,20 +341,6 @@ public partial class PermissionBLL
 
         this.Save(permission);
     }
-
-    public IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true)
-    {
-        return this.GetAvailablePermissionsQueryable(
-            new AvailablePermissionFilter(this.Context.DateTimeService.Today)
-            {
-                PrincipalName = withRunAs ? this.Context.RunAsManager.PrincipalName : this.Context.CurrentPrincipalName
-            });
-    }
-
-    public IQueryable<Permission> GetAvailablePermissionsQueryable(AvailablePermissionFilter filter)
-    {
-        return this.GetSecureQueryable().Where(filter.ToFilterExpression());
-    }
 }
 public static class DateTimeServiceExtensions
 {

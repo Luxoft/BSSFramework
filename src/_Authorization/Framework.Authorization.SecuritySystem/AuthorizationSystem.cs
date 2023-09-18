@@ -2,6 +2,7 @@
 
 using Framework.Authorization.Domain;
 using Framework.Core;
+using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
 using Framework.HierarchicalExpand;
@@ -21,8 +22,6 @@ public class AuthorizationSystem : IRunAsAuthorizationSystem
 
     private readonly IDateTimeService dateTimeService;
 
-    private readonly IRunAsManager runAsManager;
-
     private readonly IRepositoryFactory<Permission> permissionRepositoryFactory;
 
     private readonly IRuntimePermissionOptimizationService runtimePermissionOptimizationService;
@@ -36,51 +35,69 @@ public class AuthorizationSystem : IRunAsAuthorizationSystem
         IAuthOperationResolver authOperationResolver,
         IAccessDeniedExceptionService accessDeniedExceptionService,
         IDateTimeService dateTimeService,
-        IRunAsManager runAsManager,
         IRepositoryFactory<Permission> permissionRepositoryFactory,
         IRuntimePermissionOptimizationService runtimePermissionOptimizationService,
         IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
-        IRealTypeResolver realTypeResolver)
+        IRealTypeResolver realTypeResolver,
+        IUserAuthenticationService userAuthenticationService,
+        IRunAsManager runAsManager)
     {
         this.availablePermissionSource = availablePermissionSource;
         this.authOperationResolver = authOperationResolver;
         this.accessDeniedExceptionService = accessDeniedExceptionService;
         this.dateTimeService = dateTimeService;
-        this.runAsManager = runAsManager;
         this.permissionRepositoryFactory = permissionRepositoryFactory;
         this.runtimePermissionOptimizationService = runtimePermissionOptimizationService;
         this.hierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
         this.realTypeResolver = realTypeResolver;
+
+        this.CurrentPrincipalName = userAuthenticationService.GetUserName();
+
+        this.RunAsManager = runAsManager;
     }
 
-    public bool IsAdmin() => this.availablePermissionSource.GetAvailablePermissionsQueryable()
-                                 .Any(permission => permission.Role.Name == BusinessRole.AdminRoleName);
+    public string CurrentPrincipalName { get; }
 
-    public bool HasAccess(NonContextSecurityOperation securityOperation)
+    public IRunAsManager RunAsManager { get; }
+
+    public bool IsAdmin() => this.IsAdmin(true);
+
+    public bool IsAdmin(bool withRunAs) => this.availablePermissionSource.GetAvailablePermissionsQueryable(withRunAs)
+                                               .Any(permission => permission.Role.Name == BusinessRole.AdminRoleName);
+
+    public bool HasAccess(NonContextSecurityOperation securityOperation) => this.HasAccess(securityOperation, true);
+
+    public bool HasAccess(NonContextSecurityOperation securityOperation, bool withRunAs)
     {
-        var authOperation = this.authOperationResolver.GetAuthOperation(securityOperation);
+        var typedOperation = (NonContextSecurityOperation<Guid>)securityOperation;
 
-        return this.availablePermissionSource.GetAvailablePermissionsQueryable(securityOperationId: authOperation.Id).Any();
+        return this.availablePermissionSource.GetAvailablePermissionsQueryable(securityOperationId: typedOperation.Id).Any();
     }
 
-    public void CheckAccess(NonContextSecurityOperation operation)
+    public void CheckAccess(NonContextSecurityOperation securityOperation) => this.CheckAccess(securityOperation, true);
+
+    public void CheckAccess(NonContextSecurityOperation securityOperation, bool withRunAs)
     {
-        if (!this.HasAccess(operation))
+        if (!this.HasAccess(securityOperation, withRunAs))
         {
-            throw this.accessDeniedExceptionService.GetAccessDeniedException(new AccessResult.AccessDeniedResult { SecurityOperation = operation });
+            throw this.accessDeniedExceptionService.GetAccessDeniedException(
+                new AccessResult.AccessDeniedResult { SecurityOperation = securityOperation });
         }
     }
 
-    public IEnumerable<string> GetAccessors(NonContextSecurityOperation securityOperation, Expression<Func<IPrincipal<Guid>, bool>> principalFilter) => throw new NotImplementedException();
+    public IEnumerable<string> GetAccessors(
+        NonContextSecurityOperation securityOperation,
+        Expression<Func<IPrincipal<Guid>, bool>> principalFilter) => throw new NotImplementedException();
 
-    public List<Dictionary<Type, IEnumerable<Guid>>> GetPermissions(ContextSecurityOperation securityOperation, IEnumerable<Type> securityTypes)
+    public List<Dictionary<Type, IEnumerable<Guid>>> GetPermissions(
+        ContextSecurityOperation securityOperation,
+        IEnumerable<Type> securityTypes)
     {
         var typedSecurityOperation = (ContextSecurityOperation<Guid>)securityOperation;
 
         var filter = new AvailablePermissionFilter(this.dateTimeService.Today)
                      {
-                         PrincipalName = this.runAsManager.PrincipalName,
-                         SecurityOperationId = typedSecurityOperation.Id
+                         PrincipalName = this.RunAsManager.PrincipalName, SecurityOperationId = typedSecurityOperation.Id
                      };
 
         var permissions = this.permissionRepositoryFactory.Create().GetQueryable().Where(filter.ToFilterExpression())
@@ -97,11 +114,14 @@ public class AuthorizationSystem : IRunAsAuthorizationSystem
                .ToList(permission => this.TryExpandPermission(permission, securityOperation.ExpandType));
     }
 
-    public IQueryable<IPermission<Guid>> GetPermissionQuery(ContextSecurityOperation securityOperation) => throw new NotImplementedException();
+    public IQueryable<IPermission<Guid>> GetPermissionQuery(ContextSecurityOperation securityOperation) =>
+        throw new NotImplementedException();
 
 
 
-    private Dictionary<Type, IEnumerable<Guid>> TryExpandPermission(Dictionary<Type, List<Guid>> permission, HierarchicalExpandType expandType)
+    private Dictionary<Type, IEnumerable<Guid>> TryExpandPermission(
+        Dictionary<Type, List<Guid>> permission,
+        HierarchicalExpandType expandType)
     {
         if (permission == null) throw new ArgumentNullException(nameof(permission));
 

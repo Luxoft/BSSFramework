@@ -2,6 +2,7 @@
 
 using Framework.Authorization.Domain;
 using Framework.Authorization.Notification;
+using Framework.Authorization.SecuritySystem;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL.Configuration;
@@ -13,17 +14,23 @@ namespace Framework.Authorization.BLL;
 
 public partial interface IAuthorizationBLLContext :
 
-        IAuthorizationBLLContextBase,
-
-        ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, DomainObjectBase, Guid>,
+        ISecurityBLLContext<PersistentDomainObjectBase, DomainObjectBase, Guid>,
 
         ITrackingServiceContainer<PersistentDomainObjectBase>,
 
         ITypeResolverContainer<string>,
 
-        IConfigurationBLLContextContainer<IConfigurationBLLContext>
+        IConfigurationBLLContextContainer<IConfigurationBLLContext>,
+
+        IAuthorizationBLLContextContainer<IAuthorizationBLLContext>
 {
-    IAuthorizationSystem<Guid> AuthorizationSystem { get; }
+    string CurrentPrincipalName => this.AuthorizationSystem.CurrentPrincipalName;
+
+    IRunAsManager RunAsManager => this.AuthorizationSystem.RunAsManager;
+
+    IRunAsAuthorizationSystem AuthorizationSystem { get; }
+
+    IAvailablePermissionSource AvailablePermissionSource { get; }
 
     IDateTimeService DateTimeService { get; }
 

@@ -81,7 +81,7 @@ public partial class BusinessRoleBLL
     {
         if (roleName == null) throw new ArgumentNullException(nameof(roleName));
 
-        return this.Context.Logics.Permission.GetAvailablePermissionsQueryable(withRunAs)
+        return this.Context.AvailablePermissionSource.GetAvailablePermissionsQueryable(withRunAs)
                    .Any(permission => permission.Role.Name == roleName);
     }
 

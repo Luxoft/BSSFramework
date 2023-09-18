@@ -17,11 +17,6 @@ public partial interface IPermissionBLL
     void UpdateDelegatePermissions(UpdatePermissionDelegatesModel updatePermissionDelegatesModel);
 
     void WithdrawDelegation(Permission permission);
-
-
-    IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true);
-
-    IQueryable<Permission> GetAvailablePermissionsQueryable(AvailablePermissionFilter filter);
 }
 
 

@@ -3,14 +3,11 @@ using Framework.Persistent;
 
 namespace Framework.DomainDriven.BLL.Security;
 
-public interface ISecurityBLLContext<out TAuthorizationBLLContext, TPersistentDomainObjectBase, TIdent> :
+public interface ISecurityBLLContext<TPersistentDomainObjectBase, TIdent> :
 
-        IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>,
-
-        IAuthorizationBLLContextContainer<TAuthorizationBLLContext>
+        IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TAuthorizationBLLContext : IAuthorizationBLLContextBase
 {
     ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> SecurityExpressionBuilderFactory { get; }
 }
@@ -19,13 +16,11 @@ public interface ISecurityBLLContext<out TAuthorizationBLLContext, TPersistentDo
 /// Констекст с безопасностью
 /// </summary>
 /// <typeparam name="TAuthorizationBLLContext"></typeparam>
-public interface ISecurityBLLContext<out TAuthorizationBLLContext, TPersistentDomainObjectBase, TDomainObjectBase, TIdent> :
+public interface ISecurityBLLContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent> :
 
-        IDefaultBLLContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent>,
-        ISecurityBLLContext<TAuthorizationBLLContext, TPersistentDomainObjectBase, TIdent>
+        IDefaultBLLContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent>
 
         where TDomainObjectBase : class
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
-        where TAuthorizationBLLContext : IAuthorizationBLLContextBase
 {
 }

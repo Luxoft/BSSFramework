@@ -1,4 +1,5 @@
-﻿using Framework.DependencyInjection;
+﻿using Framework.Authorization.SecuritySystem;
+using Framework.DependencyInjection;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
@@ -61,6 +62,8 @@ public static class ServiceCollectionExtensions
 
                        .AddSingleton<IDomainObjectIdentResolver, DomainObjectIdentResolver<Guid>>()
                        .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService>()
+
+                       .AddScoped<ISecurityContextInfoService<Guid>, SecurityContextInfoService>()
 
                        .AddSingleton<IDisabledSecurityProviderSource, DisabledSecurityProviderSource>();
     }

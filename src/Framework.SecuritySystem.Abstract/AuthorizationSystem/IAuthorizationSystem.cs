@@ -2,8 +2,6 @@
 
 public interface IAuthorizationSystem
 {
-    public string CurrentPrincipalName { get; }
-
     bool IsAdmin();
 
     bool HasAccess(NonContextSecurityOperation securityOperation);

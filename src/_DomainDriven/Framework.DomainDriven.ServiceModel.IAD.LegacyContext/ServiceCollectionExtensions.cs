@@ -49,7 +49,7 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection RegisterLegacyHierarchicalObjectExpander(this IServiceCollection services)
     {
-        return services.ReplaceSingleton<IHierarchicalRealTypeResolver, ProjectionHierarchicalRealTypeResolver>();
+        return services.ReplaceSingleton<IRealTypeResolver, ProjectionRealTypeResolver>();
     }
 
     private static IServiceCollection RegisterAuthorizationSystem(this IServiceCollection services)

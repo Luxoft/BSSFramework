@@ -1,6 +1,6 @@
 ﻿namespace Framework.HierarchicalExpand;
 
-public class IdentityHierarchicalRealTypeResolver : IHierarchicalRealTypeResolver
+public class IdentityRealTypeResolver : IRealTypeResolver
 {
     public Type Resolve(Type identity)
     {

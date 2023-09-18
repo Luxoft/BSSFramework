@@ -272,7 +272,7 @@ namespace SampleSystem.BLL
         }
     }
     
-    public partial class SampleSystemBLLContext : Framework.DomainDriven.BLL.Security.SecurityBLLBaseContext<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.DomainObjectBase, System.Guid, SampleSystem.BLL.ISampleSystemBLLFactoryContainer>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>>>, SampleSystem.BLL.ISampleSystemBLLContext
+    public partial class SampleSystemBLLContext : Framework.DomainDriven.BLL.Security.SecurityBLLBaseContext<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid, SampleSystem.BLL.ISampleSystemBLLFactoryContainer>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>>>, SampleSystem.BLL.ISampleSystemBLLContext
     {
         
         Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.IDefaultBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>> Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.IDefaultBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>>>.Logics
@@ -301,7 +301,7 @@ namespace SampleSystem.BLL
         }
     }
     
-    public partial class DomainBLLBase<TDomainObject, TOperation> : Framework.DomainDriven.BLL.DefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.DomainObjectBase, TDomainObject, System.Guid, TOperation>
+    public partial class DomainBLLBase<TDomainObject, TOperation> : Framework.DomainDriven.BLL.DefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid, TOperation>
         where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
         where TOperation :  struct, System.Enum
     {
@@ -312,7 +312,7 @@ namespace SampleSystem.BLL
         }
     }
     
-    public abstract partial class SecurityDomainBLLBase<TDomainObject, TOperation> : Framework.DomainDriven.BLL.Security.DefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.DomainObjectBase, TDomainObject, System.Guid, TOperation>
+    public abstract partial class SecurityDomainBLLBase<TDomainObject, TOperation> : Framework.DomainDriven.BLL.Security.DefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid, TOperation>
         where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
         where TOperation :  struct, System.Enum
     {

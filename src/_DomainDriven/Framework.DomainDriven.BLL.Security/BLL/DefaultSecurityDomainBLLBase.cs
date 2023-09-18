@@ -6,7 +6,9 @@ using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.BLL.Security
 {
-    public interface IDefaultSecurityDomainBLLBase<in TPersistentDomainObjectBase, TDomainObject, TIdent> : IDefaultDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent>
+    public interface
+        IDefaultSecurityDomainBLLBase<in TPersistentDomainObjectBase, TDomainObject, TIdent> : IDefaultDomainBLLBase<
+            TPersistentDomainObjectBase, TDomainObject, TIdent>
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase
     {
@@ -21,6 +23,7 @@ namespace Framework.DomainDriven.BLL.Security
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase
+        where TBLLContext : IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
     {
 
     }
@@ -31,16 +34,17 @@ namespace Framework.DomainDriven.BLL.Security
     /// <typeparam name="TBLLContext"></typeparam>
     /// <typeparam name="TDomainObject"></typeparam>
     /// <typeparam name="TOperation"></typeparam>
-    public class DefaultSecurityDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObjectBase, TDomainObject, TIdent, TOperation>
-        : DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObjectBase, TDomainObject, TIdent, TOperation>,
+    public class DefaultSecurityDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent, TOperation>
+        : DefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent, TOperation>,
 
-        IDefaultSecurityDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent>
+          IDefaultSecurityDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent>
 
-        where TDomainObjectBase : class
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
+        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase
         where TOperation : struct, Enum
-        where TBLLContext : class, ISecurityBLLContext<IAuthorizationBLLContext<TIdent>, TPersistentDomainObjectBase, TDomainObjectBase, TIdent>, IAccessDeniedExceptionServiceContainer, IHierarchicalObjectExpanderFactoryContainer<TIdent>
+        where TBLLContext : class, ISecurityBLLContext<IAuthorizationBLLContext<TIdent>, TPersistentDomainObjectBase, TIdent>,
+        IAccessDeniedExceptionServiceContainer, IHierarchicalObjectExpanderFactoryContainer<TIdent>,
+        IBLLBaseContext<TPersistentDomainObjectBase, TIdent>
 
     {
         protected DefaultSecurityDomainBLLBase(TBLLContext context, ISpecificationEvaluator specificationEvaluator = null)
@@ -48,7 +52,10 @@ namespace Framework.DomainDriven.BLL.Security
         {
         }
 
-        protected DefaultSecurityDomainBLLBase(TBLLContext context, ISecurityProvider<TDomainObject> securityProvider, ISpecificationEvaluator specificationEvaluator = null)
+        protected DefaultSecurityDomainBLLBase(
+            TBLLContext context,
+            ISecurityProvider<TDomainObject> securityProvider,
+            ISpecificationEvaluator specificationEvaluator = null)
             : base(context, specificationEvaluator)
         {
             this.SecurityProvider = securityProvider;
@@ -108,7 +115,8 @@ namespace Framework.DomainDriven.BLL.Security
         {
             var request = from objectWithoutPermission in this.Context.Logics.Default.Create<TDomainObject>().GetById(id).ToMaybe()
 
-                          let accessDeniedResult = this.SecurityProvider.GetAccessResult(objectWithoutPermission) as AccessResult.AccessDeniedResult
+                          let accessDeniedResult =
+                              this.SecurityProvider.GetAccessResult(objectWithoutPermission) as AccessResult.AccessDeniedResult
 
                           where accessDeniedResult != null
 

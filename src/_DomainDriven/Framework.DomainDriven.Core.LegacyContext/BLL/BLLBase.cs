@@ -13,12 +13,11 @@ using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.BLL;
 
-public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObjectBase, TDomainObject, TIdent, TOperation> :
-    OperationBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObjectBase, TDomainObject, TOperation>,
+public abstract class BLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent, TOperation> :
+    OperationBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TOperation>,
     IBLLBase<TBLLContext, TDomainObject>
-    where TBLLContext : class, IBLLBaseContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent>
-    where TDomainObjectBase : class
-    where TPersistentDomainObjectBase : class, TDomainObjectBase, IIdentityObject<TIdent>
+    where TBLLContext : class, IBLLBaseContext<TPersistentDomainObjectBase, TIdent>, IBLLOperationEventContext<TPersistentDomainObjectBase>
+    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     where TDomainObject : class, TPersistentDomainObjectBase
     where TOperation : struct, Enum
 {

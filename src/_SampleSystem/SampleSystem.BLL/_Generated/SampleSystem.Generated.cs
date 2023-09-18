@@ -2510,7 +2510,7 @@ namespace SampleSystem.BLL
         }
     }
     
-    public partial class SampleSystemDefaultBLLFactory : Framework.DomainDriven.BLL.Security.DefaultSecurityBLLFactory<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.DomainObjectBase, System.Guid>, Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>
+    public partial class SampleSystemDefaultBLLFactory : Framework.DomainDriven.BLL.Security.DefaultSecurityBLLFactory<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>, Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>
     {
         
         public SampleSystemDefaultBLLFactory(SampleSystem.BLL.ISampleSystemBLLContext context) : 
@@ -2524,7 +2524,7 @@ namespace SampleSystem.BLL
         }
     }
     
-    public partial class SampleSystemImplementedBLLFactory : Framework.DomainDriven.BLL.Security.DefaultSecurityBLLFactory<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.DomainObjectBase, System.Guid>, Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>
+    public partial class SampleSystemImplementedBLLFactory : Framework.DomainDriven.BLL.Security.DefaultSecurityBLLFactory<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>, Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>
     {
         
         public SampleSystemImplementedBLLFactory(SampleSystem.BLL.ISampleSystemBLLContext context) : 

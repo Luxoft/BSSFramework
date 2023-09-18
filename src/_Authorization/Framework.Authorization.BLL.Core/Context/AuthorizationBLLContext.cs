@@ -121,7 +121,8 @@ public partial class AuthorizationBLLContext
 
 
     public IDateTimeService DateTimeService { get; }
-    
+
+
     public EntityType GetEntityType(Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));

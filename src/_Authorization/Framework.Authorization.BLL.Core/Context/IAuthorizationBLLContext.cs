@@ -15,7 +15,7 @@ public partial interface IAuthorizationBLLContext:
 
         IAuthorizationBLLContext<Guid>,
 
-        ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, DomainObjectBase, Guid>,
+        ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, Guid>,
 
         ITrackingServiceContainer<PersistentDomainObjectBase>,
 

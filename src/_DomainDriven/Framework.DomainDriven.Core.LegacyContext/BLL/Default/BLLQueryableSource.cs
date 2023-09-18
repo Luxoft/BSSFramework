@@ -3,11 +3,10 @@ using Framework.QueryableSource;
 
 namespace Framework.DomainDriven.BLL;
 
-public class BLLQueryableSource<TBLLContext, TPersistentDomainObjectBase, TDomainObjectBase, TIdent> : BLLContextContainer<TBLLContext>, IQueryableSource<TPersistentDomainObjectBase>
+public class BLLQueryableSource<TBLLContext, TPersistentDomainObjectBase, TIdent> : BLLContextContainer<TBLLContext>, IQueryableSource<TPersistentDomainObjectBase>
 
-        where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent>
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
-        where TDomainObjectBase : class
+        where TBLLContext : class, IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
+        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
     public BLLQueryableSource(TBLLContext context)
             : base(context)

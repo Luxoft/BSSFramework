@@ -9,12 +9,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.BLL.Security;
 
-public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent, TBLLFactoryContainer> :
-        DefaultBLLBaseContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent, TBLLFactoryContainer>,
+public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer> :
+        DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer>,
         IAccessDeniedExceptionServiceContainer
 
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
-        where TDomainObjectBase : class
+        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TBLLFactoryContainer : IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>
 {
     protected SecurityBLLBaseContext(

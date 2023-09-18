@@ -49,9 +49,8 @@ public class DomainBLLBaseFileFactory<TConfiguration> : FileFactory<TConfigurati
                        IsPartial = true,
                        BaseTypes =
                        {
-                               typeof(DefaultDomainBLLBase<,,,,,>).ToTypeReference(this.Configuration.BLLContextInterfaceTypeReference,
+                               typeof(DefaultDomainBLLBase<,,,,>).ToTypeReference(this.Configuration.BLLContextInterfaceTypeReference,
                                                                                    this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
-                                                                                   this.Configuration.Environment.DomainObjectBaseType.ToTypeReference(),
                                                                                    genericDomainObjectParameterTypeRef,
                                                                                    this.Configuration.Environment.GetIdentityType().ToTypeReference(),
                                                                                    genericOperationParameterTypeRef)

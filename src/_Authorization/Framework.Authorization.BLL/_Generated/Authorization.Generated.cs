@@ -360,7 +360,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class AuthorizationDefaultBLLFactory : Framework.DomainDriven.BLL.Security.DefaultSecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.DomainObjectBase, System.Guid>, Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid>
+    public partial class AuthorizationDefaultBLLFactory : Framework.DomainDriven.BLL.Security.DefaultSecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid>, Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid>
     {
         
         public AuthorizationDefaultBLLFactory(Framework.Authorization.BLL.IAuthorizationBLLContext context) : 
@@ -374,7 +374,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class AuthorizationImplementedBLLFactory : Framework.DomainDriven.BLL.Security.DefaultSecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.DomainObjectBase, System.Guid>, Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid>
+    public partial class AuthorizationImplementedBLLFactory : Framework.DomainDriven.BLL.Security.DefaultSecurityBLLFactory<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid>, Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid>
     {
         
         public AuthorizationImplementedBLLFactory(Framework.Authorization.BLL.IAuthorizationBLLContext context) : 

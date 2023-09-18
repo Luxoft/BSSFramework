@@ -52,9 +52,8 @@ public class SecurityDomainBLLBaseFileFactory<TConfiguration> : FileFactory<TCon
                        IsPartial = true,
                        BaseTypes =
                        {
-                               typeof(DefaultSecurityDomainBLLBase<,,,,,>).ToTypeReference(this.Configuration.BLLContextInterfaceTypeReference,
+                               typeof(DefaultSecurityDomainBLLBase<,,,,>).ToTypeReference(this.Configuration.BLLContextInterfaceTypeReference,
                                    this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
-                                   this.Configuration.Environment.DomainObjectBaseType.ToTypeReference(),
                                    genericDomainObjectParameterTypeRef,
                                    this.Configuration.Environment.GetIdentityType().ToTypeReference(),
                                    genericOperationParameterTypeRef)

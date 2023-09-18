@@ -10,7 +10,7 @@ public interface ISecurityBLLContext<out TAuthorizationBLLContext, TPersistentDo
         IAuthorizationBLLContextContainer<TAuthorizationBLLContext>
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TAuthorizationBLLContext : IAuthorizationBLLContext<TIdent>
+        where TAuthorizationBLLContext : IAuthorizationBLLContextBase
 {
     ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> SecurityExpressionBuilderFactory { get; }
 }
@@ -26,6 +26,6 @@ public interface ISecurityBLLContext<out TAuthorizationBLLContext, TPersistentDo
 
         where TDomainObjectBase : class
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
-        where TAuthorizationBLLContext : IAuthorizationBLLContext<TIdent>
+        where TAuthorizationBLLContext : IAuthorizationBLLContextBase
 {
 }

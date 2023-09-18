@@ -3,7 +3,7 @@
 /// <summary>
 /// Интерфейс для получнения реального разворачиваемого типа
 /// </summary>
-public interface IHierarchicalRealTypeResolver
+public interface IRealTypeResolver
 {
     Type Resolve(Type identity);
 }

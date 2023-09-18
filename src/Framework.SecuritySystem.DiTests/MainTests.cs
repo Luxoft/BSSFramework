@@ -115,7 +115,7 @@ public class MainTests
                .AddScoped<IHierarchicalObjectExpanderFactory<Guid>, HierarchicalObjectExpanderFactory<PersistentDomainObjectBase, Guid>>()
                .AddScoped<IDomainSecurityService<Employee>, EmployeeSecurityService>()
                .AddScoped<ISecurityOperationResolver<PersistentDomainObjectBase>, ExampleSecurityOperationResolver>()
-               .AddScoped<IHierarchicalRealTypeResolver, IdentityHierarchicalRealTypeResolver>()
+               .AddScoped<IRealTypeResolver, IdentityRealTypeResolver>()
 
                .AddScoped(_ => securityContextInfoService)
 

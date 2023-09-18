@@ -5,7 +5,7 @@ namespace Framework.DomainDriven.BLL.Security;
 /// <summary>
 /// Авторизационный контекст
 /// </summary>
-public interface IAuthorizationBLLContextBase : IAuthorizationSystem
+public interface IAuthorizationBLLContextBase
 {
     IRunAsManager RunAsManager { get; }
 
@@ -14,11 +14,4 @@ public interface IAuthorizationBLLContextBase : IAuthorizationSystem
     bool HasAccess(NonContextSecurityOperation securityOperation, bool withRunAs);
 
     void CheckAccess(NonContextSecurityOperation securityOperation, bool withRunAs);
-}
-
-public interface IAuthorizationBLLContext<TIdent> : IAuthorizationBLLContextBase,
-                                                    IAuthorizationSystem<TIdent>,
-                                                    IHierarchicalObjectExpanderFactoryContainer<TIdent>,
-                                                    ISecurityContextInfoService<TIdent>
-{
 }

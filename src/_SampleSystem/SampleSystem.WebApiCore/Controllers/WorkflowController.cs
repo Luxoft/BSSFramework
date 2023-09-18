@@ -1,5 +1,4 @@
 ﻿using Framework.Authorization.ApproveWorkflow;
-using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
 using Framework.Core.Services;
 using Framework.DomainDriven;

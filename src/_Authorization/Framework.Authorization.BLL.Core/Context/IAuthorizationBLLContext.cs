@@ -11,9 +11,9 @@ using Framework.SecuritySystem;
 
 namespace Framework.Authorization.BLL;
 
-public partial interface IAuthorizationBLLContext:
+public partial interface IAuthorizationBLLContext :
 
-        IAuthorizationBLLContext<Guid>,
+        IAuthorizationBLLContextBase,
 
         ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, DomainObjectBase, Guid>,
 
@@ -23,6 +23,8 @@ public partial interface IAuthorizationBLLContext:
 
         IConfigurationBLLContextContainer<IConfigurationBLLContext>
 {
+    IAuthorizationSystem<Guid> AuthorizationSystem { get; }
+
     IDateTimeService DateTimeService { get; }
 
     IAuthorizationExternalSource ExternalSource { get; }
@@ -41,11 +43,6 @@ public partial interface IAuthorizationBLLContext:
             where TDomainObject : PersistentDomainObjectBase;
 
     ISecurityProvider<Operation> GetOperationSecurityProvider();
-
-
-    bool HasAccess(Operation operation);
-
-    IEnumerable<string> GetAccessors(Operation operation, Expression<Func<Principal, bool>> principalFilter);
 
 
     ITypeResolver<EntityType> SecurityTypeResolver { get; }

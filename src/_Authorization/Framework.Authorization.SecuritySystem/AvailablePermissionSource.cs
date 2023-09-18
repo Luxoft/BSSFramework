@@ -29,11 +29,12 @@ public class AvailablePermissionSource : IAvailablePermissionSource
         this.currentPrincipalSource = currentPrincipalSource;
     }
 
-    public IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true)
+    public IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true, Guid securityOperationId = default)
     {
         var filter = new AvailablePermissionFilter(this.dateTimeService.Today)
                      {
-                         PrincipalName = withRunAs ? this.runAsManager.PrincipalName : this.currentPrincipalSource.CurrentPrincipal.Name
+                         PrincipalName = withRunAs ? this.runAsManager.PrincipalName : this.currentPrincipalSource.CurrentPrincipal.Name,
+                         SecurityOperationId = securityOperationId
                      };
 
         return this.GetAvailablePermissionsQueryable(filter);

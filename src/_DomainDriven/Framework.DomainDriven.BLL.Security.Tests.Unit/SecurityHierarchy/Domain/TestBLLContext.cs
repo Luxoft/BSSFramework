@@ -17,7 +17,7 @@ namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
 
 using Framework.Core.Serialization;
 
-public class TestBllContext : ITestBLLContext, ISecurityBLLContext<IAuthorizationBLLContext<Guid>, PersistentDomainObjectBase, DomainObjectBase, Guid>, IAccessDeniedExceptionServiceContainer
+public class TestBllContext : ITestBLLContext, ISecurityBLLContext<IAuthorizationBLLContextBase, PersistentDomainObjectBase, DomainObjectBase, Guid>, IAccessDeniedExceptionServiceContainer
 {
     private readonly Lazy<SyncDenormolizedValuesService<PersistentDomainObjectBase, HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid, NamedLockObject, NamedLockOperation>> syncHierarchyService;
 
@@ -70,7 +70,7 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<IAuthorizatio
 
     public IBLLFactoryContainer<IDefaultBLLFactory<PersistentDomainObjectBase, Guid>> Logics => this.defaultFactoryContainer;
 
-    public IAuthorizationBLLContext<Guid> Authorization { get; private set; }
+    public IAuthorizationBLLContextBase Authorization { get; private set; }
 
     public ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory
     {
@@ -104,7 +104,7 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<IAuthorizatio
 
     public ITrackingService<PersistentDomainObjectBase> TrackingService { get; private set; }
 
-    public IHierarchicalObjectExpanderFactory<Guid> HierarchicalObjectExpanderFactory => new HierarchicalObjectExpanderFactory<PersistentDomainObjectBase, Guid>(this.GetQueryableSource(), new ProjectionHierarchicalRealTypeResolver());
+    public IHierarchicalObjectExpanderFactory<Guid> HierarchicalObjectExpanderFactory => new HierarchicalObjectExpanderFactory<PersistentDomainObjectBase, Guid>(this.GetQueryableSource(), new ProjectionRealTypeResolver());
 
     public IServiceProvider ServiceProvider { get; }
 }

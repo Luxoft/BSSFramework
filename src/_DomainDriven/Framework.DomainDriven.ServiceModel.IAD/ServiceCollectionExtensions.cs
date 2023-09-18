@@ -51,7 +51,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection RegisterHierarchicalObjectExpander<TPersistentDomainObjectBase>(this IServiceCollection services)
             where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
     {
-        return services.AddSingleton<IHierarchicalRealTypeResolver, IdentityHierarchicalRealTypeResolver>()
+        return services.AddSingleton<IRealTypeResolver, IdentityRealTypeResolver>()
                        .AddScoped<IHierarchicalObjectExpanderFactory<Guid>, HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, Guid>>();
     }
 

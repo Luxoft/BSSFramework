@@ -10,7 +10,6 @@ using Framework.DomainDriven.BLL.Security;
 using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.Tracking;
 using Framework.HierarchicalExpand;
-using Framework.Projection;
 using Framework.QueryLanguage;
 using Framework.SecuritySystem;
 
@@ -22,8 +21,6 @@ namespace Framework.Authorization.BLL;
 public partial class AuthorizationBLLContext
 {
     private readonly IAuthorizationBLLFactoryContainer logics;
-
-    private readonly IRuntimePermissionOptimizationService optimizeRuntimePermissionService;
 
     private readonly Lazy<Principal> lazyCurrentPrincipal;
 
@@ -53,9 +50,9 @@ public partial class AuthorizationBLLContext
             IAuthorizationExternalSource externalSource,
             IRunAsManager runAsManager,
             ISecurityTypeResolverContainer securityTypeResolverContainer,
-            IRuntimePermissionOptimizationService optimizeRuntimePermissionService,
             INotificationPrincipalExtractor notificationPrincipalExtractor,
-            IAuthorizationBLLContextSettings settings)
+            IAuthorizationBLLContextSettings settings,
+            IAuthorizationSystem<Guid> authorizationSystem)
             : base(
                    serviceProvider,
                    operationSenders,
@@ -70,8 +67,8 @@ public partial class AuthorizationBLLContext
         this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
         this.SecurityService = securityService ?? throw new ArgumentNullException(nameof(securityService));
         this.logics = logics ?? throw new ArgumentNullException(nameof(logics));
-        this.optimizeRuntimePermissionService = optimizeRuntimePermissionService ?? throw new ArgumentNullException(nameof(optimizeRuntimePermissionService));
         this.NotificationPrincipalExtractor = notificationPrincipalExtractor;
+        this.AuthorizationSystem = authorizationSystem;
 
         this.ExternalSource = externalSource ?? throw new ArgumentNullException(nameof(externalSource));
         this.RunAsManager = runAsManager ?? throw new ArgumentNullException(nameof(runAsManager));
@@ -108,6 +105,8 @@ public partial class AuthorizationBLLContext
     public IRunAsManager RunAsManager { get; }
 
     public INotificationPrincipalExtractor NotificationPrincipalExtractor { get; }
+
+    public IAuthorizationSystem<Guid> AuthorizationSystem { get; }
 
     public string CurrentPrincipalName { get; }
 
@@ -152,17 +151,6 @@ public partial class AuthorizationBLLContext
         return this.Logics.BusinessRole.HasAdminRole();
     }
 
-    public bool HasAccess(Operation operation)
-    {
-        if (operation == null) throw new ArgumentNullException(nameof(operation));
-
-        return this.HasAccess(
-            new AvailablePermissionFilter(this.DateTimeService.Today)
-            {
-                PrincipalName = this.RunAsManager.PrincipalName, SecurityOperationId = operation.Id
-            });
-    }
-
     public bool HasAccess(NonContextSecurityOperation securityOperation)
     {
         return this.HasAccess(securityOperation, true);
@@ -204,99 +192,6 @@ public partial class AuthorizationBLLContext
         if (filter == null) throw new ArgumentNullException(nameof(filter));
 
         return this.Logics.Permission.GetSecureQueryable().Where(filter.ToFilterExpression()).Any();
-    }
-
-    public SecurityContextInfo<Guid> GetSecurityContextInfo(Type type)
-    {
-        var entity = this.GetEntityType(type);
-
-        return new SecurityContextInfo<Guid>(entity.Id, entity.Name);
-    }
-
-    public List<Dictionary<Type, IEnumerable<Guid>>> GetPermissions(
-            ContextSecurityOperation securityOperation,
-            IEnumerable<Type> securityTypes)
-    {
-        if (securityTypes == null) throw new ArgumentNullException(nameof(securityTypes));
-
-        var typedSecurityOperation = (ContextSecurityOperation<Guid>)securityOperation;
-
-        var filter = new AvailablePermissionFilter(this.DateTimeService.Today)
-                     {
-                         PrincipalName = this.RunAsManager.PrincipalName,
-                         SecurityOperationId = typedSecurityOperation.Id
-                     };
-
-        var permissions = this.Logics.Permission.GetListBy(
-                                                           filter.ToFilterExpression(), z => z.SelectMany(q => q.FilterItems).SelectNested(q => q.Entity).Select(q => q.EntityType));
-
-        var securityTypesCache = securityTypes.ToReadOnlyCollection();
-
-        return permissions
-               .Select(permission => permission.ToDictionary(securityTypesCache))
-               .Pipe(this.optimizeRuntimePermissionService.Optimize)
-               .ToList(permission => this.TryExpandPermission(permission, securityOperation.ExpandType));
-    }
-
-    public IQueryable<IPermission<Guid>> GetPermissionQuery(ContextSecurityOperation securityOperation)
-    {
-
-        var typedSecurityOperation = (ContextSecurityOperation<Guid>)securityOperation;
-
-        var filter = new AvailablePermissionFilter(this.DateTimeService.Today)
-                     {
-                         PrincipalName = this.RunAsManager.PrincipalName, SecurityOperationId = typedSecurityOperation.Id
-                     };
-
-        return this.Logics.Permission.GetUnsecureQueryable().Where(filter.ToFilterExpression());
-    }
-
-    private IEnumerable<string> GetAccessors(Expression<Func<Principal, bool>> principalFilter, AvailablePermissionFilter permissionFilter)
-    {
-        if (principalFilter == null) throw new ArgumentNullException(nameof(principalFilter));
-        if (permissionFilter == null) throw new ArgumentNullException(nameof(permissionFilter));
-
-        var extraPrincipalFilter =
-                principalFilter.UpdateBody(
-                                           new OverridePropertyInfoVisitor<Principal, IEnumerable<Permission>>(
-                                            principal => principal.Permissions, permissionFilter.ToFilterExpression().ToCollectionFilter()));
-
-        var principals = this.Logics.Principal.GetListBy(extraPrincipalFilter);
-
-        return principals.Select(principal => principal.Name);
-    }
-
-    public IEnumerable<string> GetAccessors(Operation operation, Expression<Func<Principal, bool>> principalFilter)
-    {
-        if (operation == null) throw new ArgumentNullException(nameof(operation));
-        if (principalFilter == null) throw new ArgumentNullException(nameof(principalFilter));
-
-        return this.GetAccessors(
-            principalFilter,
-            new AvailablePermissionFilter(this.DateTimeService.Today) { SecurityOperationId = operation.Id });
-    }
-
-    //public Guid GrandAccessIdent { get; } = DenormalizedPermissionItem.GrandAccessGuid;
-
-    public IEnumerable<string> GetAccessors(
-            NonContextSecurityOperation securityOperation, Expression<Func<IPrincipal<Guid>, bool>> principalFilter)
-    {
-        if (principalFilter == null) throw new ArgumentNullException(nameof(principalFilter));
-
-        var typedSecurityOperation = (NonContextSecurityOperation<Guid>)securityOperation;
-
-        return this.GetAccessors(
-            (Expression<Func<Principal, bool>>)AuthVisitor.Visit(principalFilter),
-            new AvailablePermissionFilter(this.DateTimeService.Today) { SecurityOperationId = typedSecurityOperation.Id });
-    }
-
-    private Dictionary<Type, IEnumerable<Guid>> TryExpandPermission(Dictionary<Type, List<Guid>> permission, HierarchicalExpandType expandType)
-    {
-        if (permission == null) throw new ArgumentNullException(nameof(permission));
-
-        return permission.ToDictionary(
-                                       pair => pair.Key,
-                                       pair => this.HierarchicalObjectExpanderFactory.Create(pair.Key).Expand(pair.Value, expandType));
     }
 
     public ISecurityProvider<TDomainObject> GetPrincipalSecurityProvider<TDomainObject>(

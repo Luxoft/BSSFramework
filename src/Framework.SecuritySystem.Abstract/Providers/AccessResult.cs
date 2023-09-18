@@ -9,7 +9,7 @@ public abstract record AccessResult
         public override AccessResult And(AccessResult otherAccessResult) => otherAccessResult;
 
 
-        public static readonly AccessGrantedResult Default = new ();
+        public static readonly AccessGrantedResult Default = new();
     }
 
     public record AccessDeniedResult : AccessResult
@@ -26,7 +26,7 @@ public abstract record AccessResult
         public override AccessResult And(AccessResult otherAccessResult) => this;
 
 
-        public static readonly AccessDeniedResult Default = new ();
+        public static readonly AccessDeniedResult Default = new();
     }
 
     public abstract AccessResult And(AccessResult otherAccessResult);

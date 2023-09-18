@@ -2,7 +2,6 @@
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.Tracking;
 using Framework.HierarchicalExpand;
 using Framework.QueryLanguage;
@@ -25,15 +24,12 @@ public partial class SampleSystemBLLContext
             IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
             IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
             ISampleSystemSecurityService securityService,
-            ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
             ISampleSystemBLLFactoryContainer logics,
             IAuthorizationBLLContext authorization,
             Framework.Configuration.BLL.IConfigurationBLLContext configuration,
             ISampleSystemBLLContextSettings settings)
             : base(serviceProvider, operationSenders, trackingService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
     {
-        this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
-
         this.SecurityService = securityService ?? throw new ArgumentNullException(nameof(securityService));
         this.Logics = logics ?? throw new ArgumentNullException(nameof(logics));
 
@@ -44,8 +40,6 @@ public partial class SampleSystemBLLContext
     }
 
     public ISampleSystemSecurityService SecurityService { get; }
-
-    public ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory { get; }
 
     public override ISampleSystemBLLFactoryContainer Logics { get; }
 

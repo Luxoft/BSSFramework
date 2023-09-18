@@ -10,7 +10,6 @@ public abstract class SecurityExpressionBuilderFactoryBase<TPersistentDomainObje
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
     protected SecurityExpressionBuilderFactoryBase()
-            : base()
     {
     }
 

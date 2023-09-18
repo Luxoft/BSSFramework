@@ -46,7 +46,6 @@ public partial class AuthorizationBLLContext
             IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
             IDateTimeService dateTimeService,
             IUserAuthenticationService userAuthenticationService,
-            ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
             IConfigurationBLLContext configuration,
             IAuthorizationSecurityService securityService,
             IAuthorizationBLLFactoryContainer logics,
@@ -67,7 +66,6 @@ public partial class AuthorizationBLLContext
                    fetchService)
     {
         this.DateTimeService = dateTimeService;
-        this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
         this.SecurityService = securityService ?? throw new ArgumentNullException(nameof(securityService));
         this.logics = logics ?? throw new ArgumentNullException(nameof(logics));
         this.optimizeRuntimePermissionService = optimizeRuntimePermissionService ?? throw new ArgumentNullException(nameof(optimizeRuntimePermissionService));
@@ -123,9 +121,7 @@ public partial class AuthorizationBLLContext
 
 
     public IDateTimeService DateTimeService { get; }
-
-    public ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory { get; }
-
+    
     public EntityType GetEntityType(Type type)
     {
         if (type == null) throw new ArgumentNullException(nameof(type));

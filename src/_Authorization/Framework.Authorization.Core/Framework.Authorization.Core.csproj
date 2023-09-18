@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.Security.LegacyAttributes\Framework.Security.LegacyAttributes.csproj" />
-    <ProjectReference Include="..\..\Framework.SecuritySystem\Framework.SecuritySystem.csproj" />
+    <ProjectReference Include="..\..\Framework.SecuritySystem.Abstract\Framework.SecuritySystem.Abstract.csproj" />
   </ItemGroup>
 
 </Project>

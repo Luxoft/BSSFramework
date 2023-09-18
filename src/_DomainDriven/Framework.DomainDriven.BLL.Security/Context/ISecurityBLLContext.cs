@@ -1,9 +1,8 @@
-﻿using Framework.SecuritySystem.Rules.Builders;
-using Framework.Persistent;
+﻿using Framework.Persistent;
 
 namespace Framework.DomainDriven.BLL.Security;
 
-public interface ISecurityBLLContext<out TAuthorizationBLLContext, TPersistentDomainObjectBase, TIdent> :
+public interface ISecurityBLLContext<out TAuthorizationBLLContext, in TPersistentDomainObjectBase, TIdent> :
 
         IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>,
 
@@ -12,7 +11,6 @@ public interface ISecurityBLLContext<out TAuthorizationBLLContext, TPersistentDo
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TAuthorizationBLLContext : IAuthorizationBLLContext<TIdent>
 {
-    ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> SecurityExpressionBuilderFactory { get; }
 }
 
 /// <summary>

@@ -6,25 +6,6 @@ namespace Framework.SecuritySystem
 {
     public static class SecurityProviderExtensions
     {
-        public static void CheckAccess<TDomainObject>(this ISecurityProvider<TDomainObject> securityProvider, TDomainObject domainObject, IAccessDeniedExceptionService accessDeniedExceptionService)
-            where TDomainObject : class
-        {
-            if (securityProvider == null) throw new ArgumentNullException(nameof(securityProvider));
-            if (domainObject == null) throw new ArgumentNullException(nameof(domainObject));
-
-            switch (securityProvider.GetAccessResult(domainObject))
-            {
-                case AccessResult.AccessDeniedResult accessDenied:
-                    throw accessDeniedExceptionService.GetAccessDeniedException(accessDenied);
-
-                case AccessResult.AccessGrantedResult:
-                    break;
-
-                default:
-                    throw new InvalidOperationException("unknown access result");
-            }
-        }
-
         public static ISecurityProvider<TDomainObject> And<TDomainObject>(this ISecurityProvider<TDomainObject> securityProvider, Expression<Func<TDomainObject, bool>> securityFilter, Func<TDomainObject, UnboundedList<string>> getAccessorsFunc = null, LambdaCompileMode securityFilterCompileMode = LambdaCompileMode.All)
 
             where TDomainObject : class
@@ -67,9 +48,9 @@ namespace Framework.SecuritySystem
         {
             if (securityProviders == null) throw new ArgumentNullException(nameof(securityProviders));
 
-            return securityProviders.Match(()     => new DisabledSecurityProvider<TDomainObject>(),
+            return securityProviders.Match(() => new DisabledSecurityProvider<TDomainObject>(),
                                            single => single,
-                                           many   => many.Aggregate((v1, v2) => v1.And(v2)));
+                                           many => many.Aggregate((v1, v2) => v1.And(v2)));
         }
 
         public static ISecurityProvider<TDomainObject> Or<TDomainObject>(this IEnumerable<ISecurityProvider<TDomainObject>> securityProviders)
@@ -78,9 +59,9 @@ namespace Framework.SecuritySystem
         {
             if (securityProviders == null) throw new ArgumentNullException(nameof(securityProviders));
 
-            return securityProviders.Match(()     => new AccessDeniedSecurityProvider<TDomainObject>(),
+            return securityProviders.Match(() => new AccessDeniedSecurityProvider<TDomainObject>(),
                                            single => single,
-                                           many   => many.Aggregate((v1, v2) => v1.Or(v2)));
+                                           many => many.Aggregate((v1, v2) => v1.Or(v2)));
         }
 
         private class CompositeSecurityProvider<TDomainObject> : ISecurityProvider<TDomainObject>

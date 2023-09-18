@@ -11,7 +11,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Framework.Core.Expression\Framework.Core.Expression.csproj" />
     <ProjectReference Include="..\Framework.Core.Maybe\Framework.Core.Maybe.csproj" />
-    <ProjectReference Include="..\Framework.HierarchicalExpand.Abstract\Framework.HierarchicalExpand.Abstract.csproj" />
     <ProjectReference Include="..\Framework.Persistent.Idents\Framework.Persistent.Idents.csproj" />
     <ProjectReference Include="..\Framework.QueryableSource\Framework.QueryableSource.csproj" />
     <ProjectReference Include="..\Framework.SecuritySystem.Abstract\Framework.SecuritySystem.Abstract.csproj" />

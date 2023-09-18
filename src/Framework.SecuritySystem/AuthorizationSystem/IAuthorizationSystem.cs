@@ -2,17 +2,6 @@
 
 namespace Framework.SecuritySystem;
 
-public interface IAuthorizationSystem
-{
-    bool IsAdmin();
-
-    bool HasAccess(NonContextSecurityOperation securityOperation);
-
-    void CheckAccess(NonContextSecurityOperation securityOperation);
-
-    string ResolveSecurityTypeName(Type type);
-}
-
 public interface IAuthorizationSystem<TIdent> : IAuthorizationSystem
 {
     IEnumerable<string> GetAccessors(
@@ -24,6 +13,4 @@ public interface IAuthorizationSystem<TIdent> : IAuthorizationSystem
         IEnumerable<Type> securityTypes);
 
     IQueryable<IPermission<TIdent>> GetPermissionQuery(ContextSecurityOperation securityOperation);
-
-    TIdent ResolveSecurityTypeId(Type type);
 }

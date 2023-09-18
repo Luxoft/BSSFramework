@@ -12,7 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.HierarchicalExpand\Framework.HierarchicalExpand.csproj" />
     <ProjectReference Include="..\..\Framework.Persistent\Framework.Persistent.csproj" />
-    <ProjectReference Include="..\..\Framework.SecuritySystem\Framework.SecuritySystem.csproj" />
+    <ProjectReference Include="..\..\Framework.SecuritySystem.Abstract\Framework.SecuritySystem.Abstract.csproj" />
   </ItemGroup>
 
   <ItemGroup>

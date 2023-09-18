@@ -1,4 +1,5 @@
-﻿using Framework.DependencyInjection;
+﻿using Framework.Authorization.SecuritySystem;
+using Framework.DependencyInjection;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
@@ -57,7 +58,9 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection RegisterAuthorizationSystem(this IServiceCollection services)
     {
-        return services.AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>()
+        return services.AddScoped<IRunAsAuthorizationSystem, AuthorizationSystem>()
+                       .AddScopedFrom<IAuthorizationSystem<Guid>, IRunAsAuthorizationSystem>()
+                       .AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>()
 
                        .AddSingleton<IDomainObjectIdentResolver, DomainObjectIdentResolver<Guid>>()
                        .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService>()

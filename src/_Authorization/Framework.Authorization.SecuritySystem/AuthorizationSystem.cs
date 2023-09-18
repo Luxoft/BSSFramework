@@ -3,8 +3,6 @@
 using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.Core.Services;
-using Framework.DomainDriven;
-using Framework.DomainDriven.Repository;
 using Framework.HierarchicalExpand;
 using Framework.SecuritySystem;
 
@@ -16,13 +14,7 @@ public class AuthorizationSystem : IRunAsAuthorizationSystem
 {
     private readonly IAvailablePermissionSource availablePermissionSource;
 
-    private readonly IAuthOperationResolver authOperationResolver;
-
     private readonly IAccessDeniedExceptionService accessDeniedExceptionService;
-
-    private readonly IDateTimeService dateTimeService;
-
-    private readonly IRepositoryFactory<Permission> permissionRepositoryFactory;
 
     private readonly IRuntimePermissionOptimizationService runtimePermissionOptimizationService;
 
@@ -32,10 +24,7 @@ public class AuthorizationSystem : IRunAsAuthorizationSystem
 
     public AuthorizationSystem(
         IAvailablePermissionSource availablePermissionSource,
-        IAuthOperationResolver authOperationResolver,
         IAccessDeniedExceptionService accessDeniedExceptionService,
-        IDateTimeService dateTimeService,
-        IRepositoryFactory<Permission> permissionRepositoryFactory,
         IRuntimePermissionOptimizationService runtimePermissionOptimizationService,
         IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
         IRealTypeResolver realTypeResolver,
@@ -43,10 +32,7 @@ public class AuthorizationSystem : IRunAsAuthorizationSystem
         IRunAsManager runAsManager)
     {
         this.availablePermissionSource = availablePermissionSource;
-        this.authOperationResolver = authOperationResolver;
         this.accessDeniedExceptionService = accessDeniedExceptionService;
-        this.dateTimeService = dateTimeService;
-        this.permissionRepositoryFactory = permissionRepositoryFactory;
         this.runtimePermissionOptimizationService = runtimePermissionOptimizationService;
         this.hierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
         this.realTypeResolver = realTypeResolver;
@@ -95,12 +81,7 @@ public class AuthorizationSystem : IRunAsAuthorizationSystem
     {
         var typedSecurityOperation = (ContextSecurityOperation<Guid>)securityOperation;
 
-        var filter = new AvailablePermissionFilter(this.dateTimeService.Today)
-                     {
-                         PrincipalName = this.RunAsManager.PrincipalName, SecurityOperationId = typedSecurityOperation.Id
-                     };
-
-        var permissions = this.permissionRepositoryFactory.Create().GetQueryable().Where(filter.ToFilterExpression())
+        var permissions = this.availablePermissionSource.GetAvailablePermissionsQueryable(true, typedSecurityOperation.Id)
                               .FetchMany(q => q.FilterItems)
                               .ThenFetch(q => q.Entity)
                               .ThenFetch(q => q.EntityType)

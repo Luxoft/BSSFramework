@@ -17,7 +17,7 @@ namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
 
 using Framework.Core.Serialization;
 
-public class TestBllContext : ITestBLLContext, ISecurityBLLContext<IAuthorizationBLLContext<Guid>, PersistentDomainObjectBase, DomainObjectBase, Guid>, IAccessDeniedExceptionServiceContainer
+public class TestBllContext : ITestBLLContext, ISecurityBLLContext<IAuthorizationBLLContext<Guid>, PersistentDomainObjectBase, Guid>, IAccessDeniedExceptionServiceContainer
 {
     private readonly Lazy<SyncDenormolizedValuesService<PersistentDomainObjectBase, HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid, NamedLockObject, NamedLockOperation>> syncHierarchyService;
 
@@ -72,11 +72,6 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<IAuthorizatio
 
     public IAuthorizationBLLContext<Guid> Authorization { get; private set; }
 
-    public ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory
-    {
-        get;
-    }
-
     public IAccessDeniedExceptionService AccessDeniedExceptionService => new AccessDeniedExceptionService(new DomainObjectIdentResolver<Guid>());
 
     public IStandartExpressionBuilder StandartExpressionBuilder => new StandartExpressionBuilder();
@@ -87,7 +82,7 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<IAuthorizatio
 
     public IUserAuthenticationService UserAuthenticationService => Framework.Core.Services.UserAuthenticationService.CreateFor("testUser");
 
-    public IQueryableSource<PersistentDomainObjectBase> GetQueryableSource() => new BLLQueryableSource<TestBllContext, PersistentDomainObjectBase, DomainObjectBase, Guid>(this);
+    public IQueryableSource<PersistentDomainObjectBase> GetQueryableSource() => new BLLQueryableSource<TestBllContext, PersistentDomainObjectBase, Guid>(this);
 
     public IValidator Validator => ValidatorBase.Success;
 

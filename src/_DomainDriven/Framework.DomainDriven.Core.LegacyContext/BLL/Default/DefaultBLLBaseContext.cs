@@ -8,19 +8,18 @@ using Framework.Validation;
 
 namespace Framework.DomainDriven.BLL;
 
-public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent> :
+public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent> :
 
-        IDefaultBLLContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent>,
+        IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>,
 
         ITrackingServiceContainer<TPersistentDomainObjectBase>,
 
         IFetchServiceContainer<TPersistentDomainObjectBase, FetchBuildRule>
 
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
-        where TDomainObjectBase : class
+        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="DefaultBLLBaseContext&lt;TPersistentDomainObjectBase, TDomainObjectBase, TIdent, TBLLFactoryContainer&gt;" /> class.
+    /// Initializes a new instance of the <see cref="DefaultBLLBaseContext&lt;TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer&gt;" /> class.
     /// </summary>
     /// <param name="serviceProvider">DI interface.</param>
     /// <param name="dalFactory">The dal factory.</param>
@@ -99,12 +98,11 @@ public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TDomain
     IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>> IBLLFactoryContainerContext<IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>>.Logics => this.BaseLogics;
 }
 
-public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent, TBLLFactoryContainer> : DefaultBLLBaseContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent>,
+public abstract class DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer> : DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent>,
 
     IBLLFactoryContainerContext<TBLLFactoryContainer>
 
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
-        where TDomainObjectBase : class
+        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TBLLFactoryContainer : IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>
 {
     /// <inheritdoc />

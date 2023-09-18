@@ -72,7 +72,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class AuthorizationBLLContext : Framework.DomainDriven.BLL.Security.SecurityBLLBaseContext<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.DomainObjectBase, System.Guid, Framework.Authorization.BLL.IAuthorizationBLLFactoryContainer>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid>>>, Framework.Authorization.BLL.IAuthorizationBLLContext
+    public partial class AuthorizationBLLContext : Framework.DomainDriven.BLL.Security.SecurityBLLBaseContext<Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid, Framework.Authorization.BLL.IAuthorizationBLLFactoryContainer>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid>>>, Framework.Authorization.BLL.IAuthorizationBLLContext
     {
         
         Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.IDefaultBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid>> Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.IDefaultBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid>>>.Logics
@@ -101,7 +101,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public partial class DomainBLLBase<TDomainObject, TOperation> : Framework.DomainDriven.BLL.DefaultDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.DomainObjectBase, TDomainObject, System.Guid, TOperation>
+    public partial class DomainBLLBase<TDomainObject, TOperation> : Framework.DomainDriven.BLL.DefaultDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid, TOperation>
         where TDomainObject : Framework.Authorization.Domain.PersistentDomainObjectBase
         where TOperation :  struct, System.Enum
     {
@@ -112,7 +112,7 @@ namespace Framework.Authorization.BLL
         }
     }
     
-    public abstract partial class SecurityDomainBLLBase<TDomainObject, TOperation> : Framework.DomainDriven.BLL.Security.DefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.DomainObjectBase, TDomainObject, System.Guid, TOperation>
+    public abstract partial class SecurityDomainBLLBase<TDomainObject, TOperation> : Framework.DomainDriven.BLL.Security.DefaultSecurityDomainBLLBase<Framework.Authorization.BLL.IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid, TOperation>
         where TDomainObject : Framework.Authorization.Domain.PersistentDomainObjectBase
         where TOperation :  struct, System.Enum
     {

@@ -6,7 +6,7 @@ using NSubstitute;
 
 namespace Framework.DomainDriven.UnitTest.Mock;
 
-public abstract class BLLContextConfiguration<TBLLContext, TPersistentDomainObjectBase> : BLLContextConfiguration<TBLLContext, TPersistentDomainObjectBase, Guid> where TBLLContext : class, IBLLBaseContextBase<TPersistentDomainObjectBase, Guid> where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
+public abstract class BLLContextConfiguration<TBLLContext, TPersistentDomainObjectBase> : BLLContextConfiguration<TBLLContext, TPersistentDomainObjectBase, Guid> where TBLLContext : class, IBLLBaseContext<TPersistentDomainObjectBase, Guid> where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
 {
     protected BLLContextConfiguration(IEnumerable<Assembly> domainAssemblies) : base(domainAssemblies)
     {
@@ -16,7 +16,7 @@ public abstract class BLLContextConfiguration<TBLLContext, TPersistentDomainObje
 
 public abstract class BLLContextConfiguration<TBLLContext, TPersistentDomainObjectBase, TIdent>
 
-        where TBLLContext : class, IBLLBaseContextBase<TPersistentDomainObjectBase, TIdent>
+        where TBLLContext : class, IBLLBaseContext<TPersistentDomainObjectBase, TIdent>
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
     private readonly Lazy<TBLLContext> _bllContextLazy;

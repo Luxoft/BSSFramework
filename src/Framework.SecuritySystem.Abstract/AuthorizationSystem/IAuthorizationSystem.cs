@@ -1,12 +1,6 @@
 ﻿namespace Framework.SecuritySystem;
 
-public interface IAuthorizationSystem
+public interface IAuthorizationSystem : IOperationAccessor
 {
     public string CurrentPrincipalName { get; }
-
-    bool IsAdmin();
-
-    bool HasAccess(NonContextSecurityOperation securityOperation);
-
-    void CheckAccess(NonContextSecurityOperation securityOperation);
 }

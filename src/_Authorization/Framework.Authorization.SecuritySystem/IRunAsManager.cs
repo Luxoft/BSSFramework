@@ -1,8 +1,10 @@
-﻿namespace Framework.Authorization.SecuritySystem;
+﻿using Framework.Authorization.Domain;
+
+namespace Framework.Authorization.SecuritySystem;
 
 public interface IRunAsManager
 {
-    string PrincipalName { get; }
+    Principal ActualPrincipal { get; }
 
     bool IsRunningAs { get; }
 

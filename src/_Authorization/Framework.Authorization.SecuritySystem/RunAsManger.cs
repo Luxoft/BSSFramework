@@ -6,7 +6,7 @@ namespace Framework.Authorization.SecuritySystem;
 
 public class RunAsManger : IRunAsManager
 {
-    private readonly IRunAsAuthorizationSystem runAsAuthorizationSystem;
+    private readonly IRunAsDisabledOperationAccessor runAsDisabledOperationAccessor;
 
     private readonly IRepository<Principal> principalRepository;
 
@@ -15,17 +15,17 @@ public class RunAsManger : IRunAsManager
     public RunAsManger(
         IRepositoryFactory<Principal> principalRepositoryFactory,
         ICurrentPrincipalSource currentPrincipalSource,
-        IRunAsAuthorizationSystem runAsAuthorizationSystem,
+        IRunAsDisabledOperationAccessor runAsDisabledOperationAccessor,
         Principal customCurrentPrincipal = null)
     {
-        this.runAsAuthorizationSystem = runAsAuthorizationSystem;
+        this.runAsDisabledOperationAccessor = runAsDisabledOperationAccessor;
         this.principalRepository = principalRepositoryFactory.Create();
 
         this.currentPrincipal = customCurrentPrincipal ?? currentPrincipalSource.CurrentPrincipal;
     }
 
 
-    public string PrincipalName => (this.currentPrincipal.RunAs ?? this.currentPrincipal).Name;
+    public Principal ActualPrincipal => this.currentPrincipal.RunAs ?? this.currentPrincipal;
 
     public bool IsRunningAs => this.currentPrincipal.RunAs != null;
 
@@ -34,7 +34,7 @@ public class RunAsManger : IRunAsManager
     {
         if (principalName == null) throw new ArgumentNullException(nameof(principalName));
 
-        this.runAsAuthorizationSystem.CheckAccess(AuthorizationSecurityOperation.AuthorizationImpersonate, false);
+        this.runAsDisabledOperationAccessor.CheckAccess(AuthorizationSecurityOperation.AuthorizationImpersonate);
 
         if (string.Equals(principalName, this.currentPrincipal.RunAs?.Name, StringComparison.CurrentCultureIgnoreCase))
         {

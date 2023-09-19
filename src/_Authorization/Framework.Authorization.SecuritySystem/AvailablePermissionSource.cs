@@ -34,7 +34,7 @@ public class AvailablePermissionSource : IAvailablePermissionSource
     {
         var filter = new AvailablePermissionFilter(this.dateTimeService.Today)
                      {
-                         PrincipalName = withRunAs ? this.runAsManager.PrincipalName : this.userAuthenticationService.GetUserName(),
+                         PrincipalName = withRunAs ? this.runAsManager.ActualPrincipal.Name : this.userAuthenticationService.GetUserName(),
                          SecurityOperationId = securityOperationId
                      };
 

@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
 
-using Framework.Authorization.Domain;
 using Framework.Core;
 using Framework.Core.Services;
 using Framework.HierarchicalExpand;
@@ -10,7 +9,7 @@ using NHibernate.Linq;
 
 namespace Framework.Authorization.SecuritySystem;
 
-public class AuthorizationSystem : IAuthorizationSystem<Guid>, IRunAsAuthorizationSystem
+public class AuthorizationSystem : IAuthorizationSystem<Guid>
 {
     private readonly IAvailablePermissionSource availablePermissionSource;
 
@@ -41,30 +40,6 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>, IRunAsAuthorizati
 
     public string CurrentPrincipalName { get; }
 
-    public bool IsAdmin() => this.IsAdmin(true);
-
-    public bool IsAdmin(bool withRunAs) => this.availablePermissionSource.GetAvailablePermissionsQueryable(withRunAs)
-                                               .Any(permission => permission.Role.Name == BusinessRole.AdminRoleName);
-
-    public bool HasAccess(NonContextSecurityOperation securityOperation) => this.HasAccess(securityOperation, true);
-
-    public bool HasAccess(NonContextSecurityOperation securityOperation, bool withRunAs)
-    {
-        var typedOperation = (NonContextSecurityOperation<Guid>)securityOperation;
-
-        return this.availablePermissionSource.GetAvailablePermissionsQueryable(securityOperationId: typedOperation.Id).Any();
-    }
-
-    public void CheckAccess(NonContextSecurityOperation securityOperation) => this.CheckAccess(securityOperation, true);
-
-    public void CheckAccess(NonContextSecurityOperation securityOperation, bool withRunAs)
-    {
-        if (!this.HasAccess(securityOperation, withRunAs))
-        {
-            throw this.accessDeniedExceptionService.GetAccessDeniedException(
-                new AccessResult.AccessDeniedResult { SecurityOperation = securityOperation });
-        }
-    }
 
     public IEnumerable<string> GetAccessors(
         NonContextSecurityOperation securityOperation,

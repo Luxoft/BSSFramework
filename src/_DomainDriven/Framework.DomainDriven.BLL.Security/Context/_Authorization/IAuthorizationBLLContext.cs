@@ -22,6 +22,6 @@ public interface IAuthorizationBLLContextBase : IAuthorizationSystem
     void CheckAccess(NonContextSecurityOperation securityOperation, bool withRunAs);
 }
 
-public interface IAuthorizationBLLContext<TIdent> : IAuthorizationBLLContextBase, IAuthorizationSystem<TIdent>, IHierarchicalObjectExpanderFactoryContainer<TIdent>
+public interface IAuthorizationBLLContext<TIdent> : IAuthorizationBLLContextBase, IHierarchicalObjectExpanderFactoryContainer<TIdent>
 {
 }

@@ -26,7 +26,7 @@
             Framework.Configuration.BLL.ISequenceBLL bll = evaluateData.Context.Logics.Sequence;
             Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Configuration.ConfigurationSecurityOperation), securityOperationName);
             Framework.Configuration.Domain.Sequence domainObject = bll.GetById(sequenceIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Sequence>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
+            Framework.SecuritySystem.SecurityProviderBaseExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Configuration.Domain.Sequence>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>

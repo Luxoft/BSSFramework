@@ -7,7 +7,6 @@ using Framework.Core.Serialization;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Configuration;
-using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.Tracking;
 using Framework.Exceptions;
 using Framework.HierarchicalExpand;
@@ -98,7 +97,7 @@ public partial class ConfigurationBLLContext
     public override IConfigurationBLLFactoryContainer Logics { get; }
 
     public IAuthorizationBLLContext Authorization { get; }
-    
+
     public bool DisplayInternalError => this.Authorization.HasAccess(ConfigurationSecurityOperation.DisplayInternalError);
 
     public ISerializerFactory<string> SystemConstantSerializerFactory { get; }

@@ -99,7 +99,7 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<IAuthorizatio
 
     public ITrackingService<PersistentDomainObjectBase> TrackingService { get; private set; }
 
-    public IHierarchicalObjectExpanderFactory<Guid> HierarchicalObjectExpanderFactory => new HierarchicalObjectExpanderFactory<PersistentDomainObjectBase, Guid>(this.GetQueryableSource(), new ProjectionHierarchicalRealTypeResolver());
+    public IHierarchicalObjectExpanderFactory<Guid> HierarchicalObjectExpanderFactory => new HierarchicalObjectExpanderFactory<PersistentDomainObjectBase, Guid>(this.GetQueryableSource(), new ProjectionRealTypeResolver());
 
     public IServiceProvider ServiceProvider { get; }
 }

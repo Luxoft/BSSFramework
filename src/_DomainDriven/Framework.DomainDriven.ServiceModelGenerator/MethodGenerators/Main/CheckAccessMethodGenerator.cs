@@ -7,8 +7,6 @@ using Framework.DomainDriven.BLL.Security;
 using Framework.SecuritySystem;
 using Framework.Transfering;
 
-using SecurityProviderExtensions = Framework.SecuritySystem.SecurityProviderExtensions;
-
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
 public class CheckAccessMethodGenerator<TConfiguration> : MethodGenerator<TConfiguration, BLLViewRoleAttribute>
@@ -55,7 +53,7 @@ public class CheckAccessMethodGenerator<TConfiguration> : MethodGenerator<TConfi
         yield return operationVarStatement;
 
         var domainObjectVarDecl = this.ToDomainObjectVarDeclById(bllRefExpr);
-        var method = typeof(SecurityProviderExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression(nameof(SecurityProviderExtensions.CheckAccess));
+        var method = typeof(SecurityProviderBaseExtensions).ToTypeReferenceExpression().ToMethodReferenceExpression(nameof(SecurityProviderBaseExtensions.CheckAccess));
 
         yield return domainObjectVarDecl;
 

@@ -3,7 +3,7 @@
 namespace Framework.SecuritySystem
 {
     /// <summary>
-    /// Провайдер доступа к элементам
+    /// Провайдер доступа к объектам
     /// </summary>
     /// <typeparam name="TDomainObject"></typeparam>
     public interface ISecurityProvider<TDomainObject>

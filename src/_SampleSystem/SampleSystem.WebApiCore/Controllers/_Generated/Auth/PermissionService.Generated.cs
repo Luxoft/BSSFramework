@@ -26,7 +26,7 @@
             Framework.Authorization.BLL.IPermissionBLL bll = evaluateData.Context.Logics.Permission;
             Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(Framework.Authorization.AuthorizationSecurityOperation), securityOperationName);
             Framework.Authorization.Domain.Permission domainObject = bll.GetById(permissionIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Permission>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
+            Framework.SecuritySystem.SecurityProviderBaseExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<Framework.Authorization.Domain.Permission>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>

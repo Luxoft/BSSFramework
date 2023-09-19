@@ -94,6 +94,11 @@ public class MainTests
 
     private IServiceProvider BuildRootServiceProvider()
     {
+        var securityContextInfoService = Substitute.For<ISecurityContextInfoService<Guid>>();
+
+        securityContextInfoService.GetSecurityContextInfo(Arg.Any<Type>())
+                                  .Returns(callInfo => new SecurityContextInfo<Guid>(Guid.Empty, ((Type)callInfo[0]).Name));
+
         return new ServiceCollection()
 
                .AddScoped<BusinessUnitAncestorLinkSourceExecuteCounter>()
@@ -102,16 +107,19 @@ public class MainTests
                .AddScoped<IPrincipalPermissionSource<Guid>>(_ => new ExamplePrincipalPermissionSource(this.permissions))
 
                .AddSingleton<IDomainObjectIdentResolver, DomainObjectIdentResolver<Guid>>()
-               .AddScoped<IAccessDeniedExceptionService, AccessDeniedExceptionService>()
+               .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService>()
+               .AddSingleton<IDisabledSecurityProviderSource, DisabledSecurityProviderSource>()
 
-               .AddScoped<IDisabledSecurityProviderSource, DisabledSecurityProviderSource>()
                .AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, V1.SecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
                .AddScoped<IAuthorizationSystem<Guid>, ExampleAuthorizationSystem>()
                .AddScoped<IHierarchicalObjectExpanderFactory<Guid>, HierarchicalObjectExpanderFactory<PersistentDomainObjectBase, Guid>>()
                .AddScoped<IDomainSecurityService<Employee>, EmployeeSecurityService>()
                .AddScoped<ISecurityOperationResolver<PersistentDomainObjectBase>, ExampleSecurityOperationResolver>()
-               .AddScoped<IHierarchicalRealTypeResolver, IdentityHierarchicalRealTypeResolver>()
-               .BuildServiceProvider(new ServiceProviderOptions{ ValidateOnBuild = true, ValidateScopes = true });
+               .AddScoped<IRealTypeResolver, IdentityRealTypeResolver>()
+
+               .AddScoped(_ => securityContextInfoService)
+
+               .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
     }
 
     private IQueryableSource<PersistentDomainObjectBase> BuildQueryableSource(IServiceProvider serviceProvider)

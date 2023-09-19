@@ -1,9 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <PackageId>Luxoft.Framework.SecuritySystem.Abstract</PackageId>
+    <RootNamespace>Framework.SecuritySystem</RootNamespace>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="..\__SolutionItems\CommonAssemblyInfo.cs" Link="Properties\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.HierarchicalExpand.Abstract\Framework.HierarchicalExpand.Abstract.csproj" />
   </ItemGroup>
 
 </Project>

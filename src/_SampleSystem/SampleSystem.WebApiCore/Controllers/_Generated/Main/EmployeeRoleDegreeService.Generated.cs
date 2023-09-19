@@ -26,7 +26,7 @@
             SampleSystem.BLL.IEmployeeRoleDegreeBLL bll = evaluateData.Context.Logics.EmployeeRoleDegree;
             Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
             SampleSystem.Domain.EmployeeRoleDegree domainObject = bll.GetById(employeeRoleDegreeIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.EmployeeRoleDegree>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
+            Framework.SecuritySystem.SecurityProviderBaseExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.EmployeeRoleDegree>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>

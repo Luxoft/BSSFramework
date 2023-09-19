@@ -26,7 +26,7 @@
             SampleSystem.BLL.IEmployeeSpecializationBLL bll = evaluateData.Context.Logics.EmployeeSpecialization;
             Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
             SampleSystem.Domain.EmployeeSpecialization domainObject = bll.GetById(employeeSpecializationIdent.Id, true);
-            Framework.SecuritySystem.SecurityProviderExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.EmployeeSpecialization>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
+            Framework.SecuritySystem.SecurityProviderBaseExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.EmployeeSpecialization>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
         }
         
         /// <summary>

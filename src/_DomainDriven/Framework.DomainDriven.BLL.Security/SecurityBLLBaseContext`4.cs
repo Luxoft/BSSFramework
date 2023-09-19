@@ -5,13 +5,10 @@ using Framework.QueryLanguage;
 using Framework.SecuritySystem;
 using Framework.Validation;
 
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Framework.DomainDriven.BLL.Security;
 
 public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer> :
-        DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer>,
-        IAccessDeniedExceptionServiceContainer
+        DefaultBLLBaseContext<TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer>, IAccessDeniedExceptionServiceContainer, ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TBLLFactoryContainer : IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>
@@ -34,8 +31,7 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent
     /// <inheritdoc />
     public override bool AllowedExpandTreeParents<TDomainObject>()
     {
-        var viewOperation = this.ServiceProvider.GetRequiredService<ISecurityOperationResolver<TPersistentDomainObjectBase>>()
-                                .GetSecurityOperation<TDomainObject>(BLLSecurityMode.View);
+        var viewOperation = ((ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>)this).SecurityOperationResolver.GetSecurityOperation<TDomainObject>(BLLSecurityMode.View);
 
         if (viewOperation is ContextSecurityOperation)
         {

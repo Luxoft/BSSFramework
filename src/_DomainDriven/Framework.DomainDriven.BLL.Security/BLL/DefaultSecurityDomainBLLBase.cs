@@ -2,6 +2,8 @@
 using Framework.Persistent;
 using Framework.SecuritySystem;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.BLL.Security
@@ -48,7 +50,7 @@ namespace Framework.DomainDriven.BLL.Security
 
     {
         protected DefaultSecurityDomainBLLBase(TBLLContext context, ISpecificationEvaluator specificationEvaluator = null)
-            : this(context, new DisabledSecurityProvider<TDomainObject>(), specificationEvaluator)
+            : this(context, context.DisabledSecurityProviderSource.GetDisabledSecurityProvider<TDomainObject>(), specificationEvaluator)
         {
         }
 

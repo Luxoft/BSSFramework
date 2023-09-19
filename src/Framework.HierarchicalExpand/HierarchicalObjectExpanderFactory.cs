@@ -12,7 +12,7 @@ public class HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, TIde
 {
     private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
 
-    private readonly IHierarchicalRealTypeResolver realTypeResolver;
+    private readonly IRealTypeResolver realTypeResolver;
 
     private static readonly MethodInfo GenericCreateMethod = typeof(HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, TIdent>).GetMethod(nameof(Create), BindingFlags.Public | BindingFlags.Instance, true);
 
@@ -24,7 +24,7 @@ public class HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, TIde
 
 
     public HierarchicalObjectExpanderFactory(IQueryableSource<TPersistentDomainObjectBase> queryableSource,
-                                             IHierarchicalRealTypeResolver realTypeResolver)
+                                             IRealTypeResolver realTypeResolver)
     {
         this.queryableSource = queryableSource ?? throw new ArgumentNullException(nameof(queryableSource));
         this.realTypeResolver = realTypeResolver ?? throw new ArgumentNullException(nameof(realTypeResolver));

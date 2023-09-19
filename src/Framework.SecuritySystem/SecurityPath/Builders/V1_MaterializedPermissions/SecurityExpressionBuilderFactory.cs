@@ -7,15 +7,21 @@ public class SecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIden
 
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
-    public SecurityExpressionBuilderFactory(IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory, IAuthorizationSystem<TIdent> authorizationSystem)
+    public SecurityExpressionBuilderFactory(
+        IHierarchicalObjectExpanderFactory<TIdent> hierarchicalObjectExpanderFactory,
+        IAuthorizationSystem<TIdent> authorizationSystem,
+        ISecurityContextInfoService<TIdent> securityContextInfoService)
     {
-        this.HierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory ?? throw new ArgumentNullException(nameof(hierarchicalObjectExpanderFactory));
+        this.HierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
         this.AuthorizationSystem = authorizationSystem;
+        this.SecurityContextInfoService = securityContextInfoService;
     }
 
     public IHierarchicalObjectExpanderFactory<TIdent> HierarchicalObjectExpanderFactory { get; }
 
     public IAuthorizationSystem<TIdent> AuthorizationSystem { get; }
+
+    public ISecurityContextInfoService<TIdent> SecurityContextInfoService { get; }
 
     protected override ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> CreateBuilder<TDomainObject>(SecurityPath<TDomainObject>.ConditionPath securityPath)
     {

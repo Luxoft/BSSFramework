@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Framework.Security.LegacyAttributes\Framework.Security.LegacyAttributes.csproj" />
+    <ProjectReference Include="..\..\Framework.SecuritySystem.Abstract\Framework.SecuritySystem.Abstract.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.Core.LegacyAttributes\Framework.DomainDriven.Core.LegacyAttributes.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.Core.LegacyContext\Framework.DomainDriven.Core.LegacyContext.csproj" />
   </ItemGroup>

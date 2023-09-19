@@ -192,14 +192,4 @@ public partial class AuthorizationBLLContext
     }
 
     IAuthorizationBLLContext IAuthorizationBLLContextContainer<IAuthorizationBLLContext>.Authorization => this;
-
-    private static readonly ExpressionVisitor AuthVisitor = new OverrideParameterTypeVisitor(
-     new Dictionary<Type, Type>
-     {
-             { typeof(IPrincipal<Guid>), typeof(Principal) },
-             { typeof(IPermission<Guid>), typeof(Permission) },
-             { typeof(IPermissionFilterItem<Guid>), typeof(PermissionFilterItem) },
-             { typeof(IPermissionFilterEntity<Guid>), typeof(PermissionFilterEntity) },
-             { typeof(IEntityType<Guid>), typeof(EntityType) },
-     });
 }

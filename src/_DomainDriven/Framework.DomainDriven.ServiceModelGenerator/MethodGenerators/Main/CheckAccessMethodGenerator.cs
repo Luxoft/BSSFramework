@@ -7,8 +7,6 @@ using Framework.DomainDriven.BLL.Security;
 using Framework.SecuritySystem;
 using Framework.Transfering;
 
-using SecurityProviderExtensions = Framework.SecuritySystem.SecurityProviderExtensions;
-
 namespace Framework.DomainDriven.ServiceModelGenerator;
 
 public class CheckAccessMethodGenerator<TConfiguration> : MethodGenerator<TConfiguration, BLLViewRoleAttribute>

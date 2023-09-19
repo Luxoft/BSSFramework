@@ -1,27 +1,17 @@
-﻿using Framework.Core;
-using Framework.Persistent;
+﻿using Framework.Persistent;
 using Framework.Validation;
 
 namespace Framework.DomainDriven.BLL;
 
-public interface IDefaultBLLContext<in TPersistentDomainObjectBase, TIdent> :
+public interface IDefaultBLLContext<in TPersistentDomainObjectBase, TIdent> : IBLLBaseContext<TPersistentDomainObjectBase, TIdent>,
 
-        IBLLFactoryContainerContext<IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>>, IValidatorContainer, IServiceProviderContainer
+    IBLLFactoryContainerContext<IBLLFactoryContainer<IDefaultBLLFactory<TPersistentDomainObjectBase, TIdent>>>,
 
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-{
-}
+    IHierarchicalObjectExpanderFactoryContainer<TIdent>,
 
-public interface IDefaultBLLContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent> :
+    IValidatorContainer
 
-        IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>,
-
-        IBLLBaseContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent>,
-
-        IHierarchicalObjectExpanderFactoryContainer<TIdent>
-
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
-        where TDomainObjectBase : class
+    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
     /// <summary>
     /// Разрешение разворачивания доменного объекта вверх
@@ -29,12 +19,6 @@ public interface IDefaultBLLContext<TPersistentDomainObjectBase, TDomainObjectBa
     /// <typeparam name="TDomainObject">Доменный тип</typeparam>
     /// <returns></returns>
     bool AllowedExpandTreeParents<TDomainObject>()
-            where TDomainObject : TPersistentDomainObjectBase;
+        where TDomainObject : TPersistentDomainObjectBase;
 
-}
-
-public interface IDefaultHierarchicalBLLContext<in TPersistentDomainObjectBase, TIdent> : IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
-
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-{
 }

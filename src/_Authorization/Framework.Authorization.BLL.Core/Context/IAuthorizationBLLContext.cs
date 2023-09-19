@@ -14,15 +14,13 @@ namespace Framework.Authorization.BLL;
 
 public partial interface IAuthorizationBLLContext :
 
-        ISecurityBLLContext<PersistentDomainObjectBase, DomainObjectBase, Guid>,
+    ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, Guid>,
 
-        ITrackingServiceContainer<PersistentDomainObjectBase>,
+    ITrackingServiceContainer<PersistentDomainObjectBase>,
 
-        ITypeResolverContainer<string>,
+    ITypeResolverContainer<string>,
 
-        IConfigurationBLLContextContainer<IConfigurationBLLContext>,
-
-        IAuthorizationBLLContextContainer<IAuthorizationBLLContext>
+    IConfigurationBLLContextContainer<IConfigurationBLLContext>
 {
     string CurrentPrincipalName => this.AuthorizationSystem.CurrentPrincipalName;
 
@@ -43,11 +41,13 @@ public partial interface IAuthorizationBLLContext :
     Settings Settings { get; }
 
 
-    ISecurityProvider<TDomainObject> GetPrincipalSecurityProvider<TDomainObject>(Expression<Func<TDomainObject, Principal>> principalSecurityPath)
-            where TDomainObject : PersistentDomainObjectBase;
+    ISecurityProvider<TDomainObject> GetPrincipalSecurityProvider<TDomainObject>(
+        Expression<Func<TDomainObject, Principal>> principalSecurityPath)
+        where TDomainObject : PersistentDomainObjectBase;
 
-    ISecurityProvider<TDomainObject> GetBusinessRoleSecurityProvider<TDomainObject>(Expression<Func<TDomainObject, BusinessRole>> businessRoleSecurityPath)
-            where TDomainObject : PersistentDomainObjectBase;
+    ISecurityProvider<TDomainObject> GetBusinessRoleSecurityProvider<TDomainObject>(
+        Expression<Func<TDomainObject, BusinessRole>> businessRoleSecurityPath)
+        where TDomainObject : PersistentDomainObjectBase;
 
     ISecurityProvider<Operation> GetOperationSecurityProvider();
 

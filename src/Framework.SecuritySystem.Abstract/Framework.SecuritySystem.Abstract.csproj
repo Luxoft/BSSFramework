@@ -13,8 +13,4 @@
     <ProjectReference Include="..\Framework.HierarchicalExpand.Abstract\Framework.HierarchicalExpand.Abstract.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Providers\_Base\" />
-  </ItemGroup>
-
 </Project>

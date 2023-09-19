@@ -7,7 +7,6 @@ using Framework.Core.Serialization;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Configuration;
-using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.Tracking;
 using Framework.Exceptions;
 using Framework.HierarchicalExpand;
@@ -39,7 +38,6 @@ public partial class ConfigurationBLLContext
             IConfigurationValidator validator,
             IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
             IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
-            ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
             IMessageSender<MessageTemplateNotification> subscriptionSender,
             IConfigurationSecurityService securityService,
             IConfigurationBLLFactoryContainer logics,
@@ -50,7 +48,6 @@ public partial class ConfigurationBLLContext
             ICurrentRevisionService currentRevisionService)
             : base(serviceProvider, operationSenders, trackingService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
     {
-        this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
         this.SubscriptionSender = subscriptionSender ?? throw new ArgumentNullException(nameof(subscriptionSender));
 
         this.SecurityService = securityService;
@@ -100,8 +97,6 @@ public partial class ConfigurationBLLContext
     public override IConfigurationBLLFactoryContainer Logics { get; }
 
     public IAuthorizationBLLContext Authorization { get; }
-
-    public ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory { get; }
 
     public bool DisplayInternalError => this.Authorization.HasAccess(ConfigurationSecurityOperation.DisplayInternalError);
 

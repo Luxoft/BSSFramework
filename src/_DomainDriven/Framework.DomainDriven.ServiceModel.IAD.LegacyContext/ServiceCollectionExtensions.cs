@@ -80,7 +80,7 @@ public static class ServiceCollectionExtensions
 
                .AddSingleton<ISecurityOperationResolver<Framework.Authorization.Domain.PersistentDomainObjectBase>, AuthorizationSecurityOperationResolver>()
                .AddScopedFrom<IAuthorizationSecurityPathContainer, IAuthorizationSecurityService>()
-               .AddScoped<IQueryableSource<Framework.Authorization.Domain.PersistentDomainObjectBase>, BLLQueryableSource<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.DomainObjectBase, Guid>>()
+               .AddScoped<IQueryableSource<Framework.Authorization.Domain.PersistentDomainObjectBase>, BLLQueryableSource<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
                .AddScoped<ISecurityExpressionBuilderFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
 
 
@@ -115,7 +115,7 @@ public static class ServiceCollectionExtensions
                .AddSingleton<ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase>, ConfigurationSecurityOperationResolver>()
 
                .AddScopedFrom<IConfigurationSecurityPathContainer, IConfigurationSecurityService>()
-               .AddScoped<IQueryableSource<Framework.Configuration.Domain.PersistentDomainObjectBase>, BLLQueryableSource<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectBase, Guid>>()
+               .AddScoped<IQueryableSource<Framework.Configuration.Domain.PersistentDomainObjectBase>, BLLQueryableSource<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>()
                .AddScoped<ISecurityExpressionBuilderFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>()
 
                .Self(ConfigurationSecurityServiceBase.Register)

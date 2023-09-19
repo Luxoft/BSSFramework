@@ -96,19 +96,8 @@ public interface IDefaultDomainBLLBase<out TBLLContext, in TPersistentDomainObje
         IDefaultDomainBLLBase<TPersistentDomainObjectBase, TDomainObject, TIdent>,
         IDefaultDomainBLLQueryBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent>
 
+        where TBLLContext : IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase
-{
-}
-
-public interface IDefaultDomainBLLBase<out TBLLContext, in TPersistentDomainObjectBase, TDomainObjectBase, TDomainObject, TIdent> :
-
-        IDefaultDomainBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TIdent>
-
-        where TBLLContext : IDefaultBLLContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent>
-
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
-        where TDomainObjectBase : class
         where TDomainObject : class, TPersistentDomainObjectBase
 {
 }

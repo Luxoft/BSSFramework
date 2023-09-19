@@ -1,26 +1,27 @@
-﻿using Framework.SecuritySystem.Rules.Builders;
-using Framework.Persistent;
+﻿using Framework.Persistent;
+using Framework.SecuritySystem;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.BLL.Security;
 
-public interface ISecurityBLLContext<TPersistentDomainObjectBase, TIdent> :
+public interface ISecurityBLLContext<in TPersistentDomainObjectBase, TIdent> :
 
-        IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
+    IDefaultBLLContext<TPersistentDomainObjectBase, TIdent>
 
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
-    ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> SecurityExpressionBuilderFactory { get; }
+    IDisabledSecurityProviderSource DisabledSecurityProviderSource => this.ServiceProvider.GetRequiredService<IDisabledSecurityProviderSource>();
+
+    ISecurityOperationResolver<TPersistentDomainObjectBase> SecurityOperationResolver => this.ServiceProvider.GetRequiredService<ISecurityOperationResolver<TPersistentDomainObjectBase>>();
 }
 
-/// <summary>
-/// Констекст с безопасностью
-/// </summary>
-/// <typeparam name="TAuthorizationBLLContext"></typeparam>
-public interface ISecurityBLLContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent> :
 
-        IDefaultBLLContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent>
+public interface ISecurityBLLContext<out TAuthorizationBLLContext, in TPersistentDomainObjectBase, TIdent> : ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>,
 
-        where TDomainObjectBase : class
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>, TDomainObjectBase
+    IAuthorizationBLLContextContainer<TAuthorizationBLLContext>
+
+    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+    where TAuthorizationBLLContext : IAuthorizationBLLContext<TIdent>
 {
 }

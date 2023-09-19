@@ -536,7 +536,7 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class ConfigurationDefaultBLLFactory : Framework.DomainDriven.BLL.Security.DefaultSecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectBase, System.Guid>, Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>
+    public partial class ConfigurationDefaultBLLFactory : Framework.DomainDriven.BLL.Security.DefaultSecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>, Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>
     {
         
         public ConfigurationDefaultBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
@@ -550,7 +550,7 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class ConfigurationImplementedBLLFactory : Framework.DomainDriven.BLL.Security.DefaultSecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectBase, System.Guid>, Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>
+    public partial class ConfigurationImplementedBLLFactory : Framework.DomainDriven.BLL.Security.DefaultSecurityBLLFactory<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>, Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>
     {
         
         public ConfigurationImplementedBLLFactory(Framework.Configuration.BLL.IConfigurationBLLContext context) : 

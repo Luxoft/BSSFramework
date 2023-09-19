@@ -2,11 +2,11 @@
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
-using Framework.SecuritySystem.Rules.Builders;
 using Framework.DomainDriven.Tracking;
 using Framework.HierarchicalExpand;
 using Framework.QueryLanguage;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.Rules.Builders;
 
 using SampleSystem.Domain;
 using SampleSystem.Domain.Projections;
@@ -25,33 +25,32 @@ public partial class SampleSystemBLLContext
             IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
             IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
             ISampleSystemSecurityService securityService,
-            ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
             ISampleSystemBLLFactoryContainer logics,
             IAuthorizationBLLContext authorization,
             Framework.Configuration.BLL.IConfigurationBLLContext configuration,
-            ISampleSystemBLLContextSettings settings)
+            ISampleSystemBLLContextSettings settings,
+            ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory)
             : base(serviceProvider, operationSenders, trackingService, accessDeniedExceptionService, standartExpressionBuilder, validator, hierarchicalObjectExpanderFactory, fetchService)
     {
-        this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory ?? throw new ArgumentNullException(nameof(securityExpressionBuilderFactory));
-
         this.SecurityService = securityService ?? throw new ArgumentNullException(nameof(securityService));
         this.Logics = logics ?? throw new ArgumentNullException(nameof(logics));
 
         this.Authorization = authorization ?? throw new ArgumentNullException(nameof(authorization));
         this.Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+        this.SecurityExpressionBuilderFactory = securityExpressionBuilderFactory;
 
         this.TypeResolver = settings.TypeResolver;
     }
 
     public ISampleSystemSecurityService SecurityService { get; }
 
-    public ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory { get; }
-
     public override ISampleSystemBLLFactoryContainer Logics { get; }
 
     public IAuthorizationBLLContext Authorization { get; }
 
     public Framework.Configuration.BLL.IConfigurationBLLContext Configuration { get; }
+
+    public ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory { get; }
 
     public ITypeResolver<string> TypeResolver { get; }
 

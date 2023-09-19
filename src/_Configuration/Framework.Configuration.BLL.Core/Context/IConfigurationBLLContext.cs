@@ -15,7 +15,7 @@ public partial interface IConfigurationBLLContext :
 
     Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContext,
 
-    ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, DomainObjectBase, Guid>,
+    ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, Guid>,
 
     ITypeResolverContainer<string>,
 

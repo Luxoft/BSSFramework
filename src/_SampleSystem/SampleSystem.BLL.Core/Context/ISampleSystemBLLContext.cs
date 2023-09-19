@@ -3,6 +3,7 @@ using Framework.Core;
 using Framework.DomainDriven.BLL;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
+using Framework.SecuritySystem.Rules.Builders;
 
 using SampleSystem.Domain;
 
@@ -10,7 +11,7 @@ namespace SampleSystem.BLL;
 
 public partial interface ISampleSystemBLLContext :
 
-    ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, DomainObjectBase, Guid>,
+    ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, Guid>,
 
     ITrackingServiceContainer<PersistentDomainObjectBase>,
 
@@ -22,4 +23,5 @@ public partial interface ISampleSystemBLLContext :
 
     ISecurityTypeResolverContainer
 {
+    ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory { get; }
 }

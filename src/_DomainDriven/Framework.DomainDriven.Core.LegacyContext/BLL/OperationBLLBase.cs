@@ -1,9 +1,8 @@
 ﻿namespace Framework.DomainDriven.BLL;
 
-public abstract class OperationBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObjectBase, TDomainObject, TOperation> : BLLContextContainer<TBLLContext>, IOperationBLLBase<TDomainObject>
+public abstract class OperationBLLBase<TBLLContext, TPersistentDomainObjectBase, TDomainObject, TOperation> : BLLContextContainer<TBLLContext>, IOperationBLLBase<TDomainObject>
 
-        where TPersistentDomainObjectBase : class, TDomainObjectBase
-        where TDomainObjectBase : class
+        where TPersistentDomainObjectBase : class
 
         where TDomainObject : class, TPersistentDomainObjectBase
         where TOperation : struct, Enum

@@ -65,6 +65,8 @@ public static class ServiceCollectionExtensions
                        .AddSingleton<IDomainObjectIdentResolver, DomainObjectIdentResolver<Guid>>()
                        .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService>()
 
+                       .AddScoped<ISecurityContextInfoService<Guid>, SecurityContextInfoService>()
+
                        .AddSingleton<IDisabledSecurityProviderSource, DisabledSecurityProviderSource>();
     }
 }

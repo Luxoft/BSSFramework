@@ -46,7 +46,7 @@ public class WorkflowController : ControllerBase
         await this.contextEvaluator.EvaluateAsync(DBSessionMode.Read,
                                                   ctx =>
                                                                       {
-                                                                          ctx.Authorization.CheckAccess(
+                                                                          ctx.Authorization.AuthorizationSystem.CheckAccess(
                                                                            SampleSystemSecurityOperation.SystemIntegration);
                                                                           return Task.CompletedTask;
                                                                       });

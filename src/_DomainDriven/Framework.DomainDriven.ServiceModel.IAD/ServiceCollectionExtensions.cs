@@ -67,6 +67,9 @@ public static class ServiceCollectionExtensions
 
                        .AddScoped<ISecurityContextInfoService<Guid>, SecurityContextInfoService>()
 
-                       .AddSingleton<IDisabledSecurityProviderSource, DisabledSecurityProviderSource>();
+                       .AddSingleton<IDisabledSecurityProviderSource, DisabledSecurityProviderSource>()
+
+                       .AddScoped<IRunAsManager, RunAsManger>()
+                       .AddScoped<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>();
     }
 }

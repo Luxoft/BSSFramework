@@ -1,4 +1,5 @@
 ﻿using Framework.Authorization.Domain;
+
 using Framework.DomainDriven.Repository;
 
 namespace Framework.Authorization.SecuritySystem;
@@ -25,7 +26,7 @@ public class RunAsManger : IRunAsManager
     public bool IsRunningAs => this.currentPrincipal.RunAs != null;
 
 
-    public async Task StartRunAsUser(string principalName, CancellationToken cancellationToken)
+    public async Task StartRunAsUserAsync(string principalName, CancellationToken cancellationToken)
     {
         if (principalName == null) throw new ArgumentNullException(nameof(principalName));
 
@@ -35,7 +36,7 @@ public class RunAsManger : IRunAsManager
         }
         else if (string.Equals(principalName, this.currentPrincipal.Name, StringComparison.CurrentCultureIgnoreCase))
         {
-            await this.FinishRunAsUser(cancellationToken);
+            await this.FinishRunAsUserAsync(cancellationToken);
         }
         else
         {
@@ -46,7 +47,7 @@ public class RunAsManger : IRunAsManager
         }
     }
 
-    public async Task FinishRunAsUser(CancellationToken cancellationToken)
+    public async Task FinishRunAsUserAsync(CancellationToken cancellationToken)
     {
         this.currentPrincipal.RunAs = null;
 

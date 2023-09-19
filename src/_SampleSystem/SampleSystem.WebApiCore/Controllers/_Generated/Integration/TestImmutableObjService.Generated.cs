@@ -22,7 +22,7 @@
         protected virtual SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO SaveTestImmutableObjInternal(SampleSystem.Generated.DTO.TestImmutableObjIntegrationRichDTO testImmutableObj, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
         {
             SampleSystem.BLL.ITestImmutableObjBLL bll = evaluateData.Context.Logics.TestImmutableObj;
-            evaluateData.Context.Authorization.CheckAccess(Framework.Core.BssSecurityOperation.SystemIntegration);
+            evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(Framework.Core.BssSecurityOperation.SystemIntegration);
             return this.SaveTestImmutableObjInternal(testImmutableObj, evaluateData, bll);
         }
         

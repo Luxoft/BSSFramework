@@ -6,7 +6,7 @@ public interface IRunAsManager
 
     bool IsRunningAs { get; }
 
-    Task StartRunAsUser(string principalName, CancellationToken cancellationToken = default);
+    Task StartRunAsUserAsync(string principalName, CancellationToken cancellationToken = default);
 
-    Task FinishRunAsUser(CancellationToken cancellationToken = default);
+    Task FinishRunAsUserAsync(CancellationToken cancellationToken = default);
 }

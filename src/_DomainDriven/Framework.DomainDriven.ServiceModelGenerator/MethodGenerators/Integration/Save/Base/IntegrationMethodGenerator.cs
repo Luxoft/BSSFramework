@@ -22,7 +22,9 @@ public abstract class IntegrationMethodGenerator<TConfiguration, TBLLRoleAttribu
 
     protected override IEnumerable<CodeStatement> GetFacadeMethodInternalStatements(CodeExpression evaluateDataExpr, CodeExpression bllRefExpr)
     {
-        yield return evaluateDataExpr.GetContext().ToPropertyReference("Authorization")
+        yield return evaluateDataExpr.GetContext()
+                                     .ToPropertyReference("Authorization")
+                                     .ToPropertyReference("AuthorizationSystem")
                                      .ToMethodInvokeExpression("CheckAccess", this.Configuration.IntegrationSecurityOperation)
                                      .ToExpressionStatement();
     }

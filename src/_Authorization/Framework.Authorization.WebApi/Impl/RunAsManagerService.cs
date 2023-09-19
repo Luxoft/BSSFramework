@@ -14,13 +14,13 @@ public partial class AuthSLJsonController
                                             {
                                                 var runAsPrincipal = context.Logics.Principal.GetById(principal.Id, true);
 
-                                                context.RunAsManager.StartRunAsUser(runAsPrincipal.Name);
+                                                context.RunAsManager.StartRunAsUserAsync(runAsPrincipal.Name).GetAwaiter().GetResult();
                                             });
     }
 
     [Microsoft.AspNetCore.Mvc.HttpPost(nameof(FinishRunAsUser))]
     public void FinishRunAsUser()
     {
-        this.Evaluate(DBSessionMode.Write, evaluateData => evaluateData.Context.RunAsManager.FinishRunAsUser());
+        this.Evaluate(DBSessionMode.Write, evaluateData => evaluateData.Context.RunAsManager.FinishRunAsUserAsync().GetAwaiter().GetResult());
     }
 }

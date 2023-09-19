@@ -28,8 +28,6 @@ public partial interface IAuthorizationBLLContext :
 
     IAuthorizationSystem<Guid> AuthorizationSystem { get; }
 
-    IRunAsAuthorizationSystem RunAsAuthorizationSystem { get; }
-
     IAvailablePermissionSource AvailablePermissionSource { get; }
 
     IDateTimeService DateTimeService { get; }

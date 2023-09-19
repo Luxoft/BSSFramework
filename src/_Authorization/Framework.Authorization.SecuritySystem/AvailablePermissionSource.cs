@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using System.Linq.Expressions;
-
-using Framework.Authorization.Domain;
+﻿using Framework.Authorization.Domain;
 using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;

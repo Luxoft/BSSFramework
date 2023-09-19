@@ -21,19 +21,23 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
 
     private readonly IRealTypeResolver realTypeResolver;
 
+    private readonly IOperationAccessorFactory operationAccessorFactory;
+
     public AuthorizationSystem(
         IAvailablePermissionSource availablePermissionSource,
         IAccessDeniedExceptionService accessDeniedExceptionService,
         IRuntimePermissionOptimizationService runtimePermissionOptimizationService,
         IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
         IRealTypeResolver realTypeResolver,
-        IUserAuthenticationService userAuthenticationService)
+        IUserAuthenticationService userAuthenticationService,
+        IOperationAccessorFactory operationAccessorFactory)
     {
         this.availablePermissionSource = availablePermissionSource;
         this.accessDeniedExceptionService = accessDeniedExceptionService;
         this.runtimePermissionOptimizationService = runtimePermissionOptimizationService;
         this.hierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
         this.realTypeResolver = realTypeResolver;
+        this.operationAccessorFactory = operationAccessorFactory;
 
         this.CurrentPrincipalName = userAuthenticationService.GetUserName();
     }
@@ -80,4 +84,10 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
             pair => pair.Key,
             pair => this.hierarchicalObjectExpanderFactory.Create(pair.Key).Expand(pair.Value, expandType));
     }
+
+    public bool IsAdmin() => this.operationAccessorFactory.Create(true).IsAdmin();
+
+    public bool HasAccess(NonContextSecurityOperation securityOperation) => this.operationAccessorFactory.Create(true).HasAccess(securityOperation);
+
+    public void CheckAccess(NonContextSecurityOperation securityOperation) => this.operationAccessorFactory.Create(true).CheckAccess(securityOperation);
 }

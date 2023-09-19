@@ -58,10 +58,9 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection RegisterAuthorizationSystem(this IServiceCollection services)
     {
-        return services.AddScoped<AuthorizationSystem>()
-                       .AddScopedFrom<IRunAsAuthorizationSystem, AuthorizationSystem>()
-                       .AddScopedFrom<IAuthorizationSystem<Guid>, AuthorizationSystem>()
-                       .AddScopedFrom<IAuthorizationSystem, AuthorizationSystem>()
+        return services.AddScoped<IAuthorizationSystem<Guid>, AuthorizationSystem>()
+                       .AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>()
+                       .AddScopedFrom<IOperationAccessor, IAuthorizationSystem>()
 
                        .AddSingleton<IDomainObjectIdentResolver, DomainObjectIdentResolver<Guid>>()
                        .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService>()
@@ -73,7 +72,11 @@ public static class ServiceCollectionExtensions
                        .AddScoped<IRunAsManager, RunAsManger>()
                        .AddScoped<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>()
 
+                       .AddScoped<IOperationAccessorFactory>()
+
                        .AddScoped<IAvailablePermissionSource, AvailablePermissionSource>()
-                       .AddScoped<ICurrentPrincipalSource, CurrentPrincipalSource>();
+                       .AddScoped<ICurrentPrincipalSource, CurrentPrincipalSource>()
+
+                       .AddScoped<IOperationAccessorFactory, OperationAccessorFactory>();
     }
 }

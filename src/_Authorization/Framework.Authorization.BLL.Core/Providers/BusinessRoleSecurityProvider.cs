@@ -26,7 +26,7 @@ namespace Framework.Authorization.BLL
 
             this.lazySecurityFilter = LazyHelper.Create(() =>
             {
-                var principalName = this.Context.RunAsManager.PrincipalName;
+                var principalName = this.Context.RunAsManager.ActualPrincipal.Name;
 
                 var today = context.DateTimeService.Today;
 

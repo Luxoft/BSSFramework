@@ -23,9 +23,9 @@ namespace Framework.Authorization.BLL
 
             this.lazySecurityFilter = LazyHelper.Create(() =>
                                                         {
-                                                            var principalName = this.Context.RunAsManager.PrincipalName;
+                                                            var actualPrincipalName = this.Context.RunAsManager.ActualPrincipal.Name;
 
-                                                            Expression<Func<Principal, bool>> principalFilter = principal => principal.Name == principalName;
+                                                            Expression<Func<Principal, bool>> principalFilter = principal => principal.Name == actualPrincipalName;
 
                                                             return principalFilter.OverrideInput(principalSecurityPath);
                                                         });
@@ -45,7 +45,7 @@ namespace Framework.Authorization.BLL
 
         public override UnboundedList<string> GetAccessors(TDomainObject domainObject)
         {
-            return UnboundedList.Yeild(this.Context.RunAsManager.PrincipalName);
+            return UnboundedList.Yeild(this.Context.RunAsManager.ActualPrincipal.Name);
         }
     }
 }

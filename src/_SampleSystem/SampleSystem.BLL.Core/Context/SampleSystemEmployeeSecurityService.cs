@@ -30,7 +30,7 @@ public partial class SampleSystemEmployeeSecurityService<TDomainObject, TBusines
 
         if (securityOperation == SampleSystemSecurityOperation.EmployeeView)
         {
-            return baseProvider.Or(employee => employee.Login == this.Context.Authorization.RunAsManager.PrincipalName);
+            return baseProvider.Or(employee => employee.Login == this.Context.Authorization.RunAsManager.ActualPrincipal.Name);
         }
         else
         {

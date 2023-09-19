@@ -1,7 +1,7 @@
 ﻿namespace Framework.HierarchicalExpand;
 
 /// <summary>
-/// Интерфейс для получнения реального разворачиваемого типа
+/// Интерфейс для получнения реального типа
 /// </summary>
 public interface IRealTypeResolver
 {

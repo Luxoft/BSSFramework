@@ -41,7 +41,7 @@ namespace Framework.DomainDriven.BLL.Security
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase
         where TOperation : struct, Enum
-        where TBLLContext : class, ISecurityBLLContext<TPersistentDomainObjectBase, TDomainObjectBase, TIdent>, IAccessDeniedExceptionServiceContainer, IHierarchicalObjectExpanderFactoryContainer<TIdent>
+        where TBLLContext : class, ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>, IAccessDeniedExceptionServiceContainer, IHierarchicalObjectExpanderFactoryContainer<TIdent>
 
     {
         protected DefaultSecurityDomainBLLBase(TBLLContext context, ISpecificationEvaluator specificationEvaluator = null)

@@ -1,4 +1,5 @@
-﻿using Framework.DomainDriven.BLL.Configuration;
+﻿using Framework.Authorization.BLL;
+using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.ServiceModel.Service;
 
@@ -15,7 +16,7 @@ namespace Framework.DomainDriven.WebApiNetCore;
 /// <typeparam name="TEvaluatedData">The type of the t evaluated data.</typeparam>
 /// <seealso cref="ApiControllerBase{TBLLContext}" />
 public abstract class ApiControllerBase<TBLLContext, TEvaluatedData> : ApiControllerBase<TBLLContext>
-        where TBLLContext : class, IConfigurationBLLContextContainer<IConfigurationBLLContext>, IAuthorizationBLLContextContainer<IAuthorizationBLLContextBase>
+        where TBLLContext : class, IConfigurationBLLContextContainer<IConfigurationBLLContext>, IAuthorizationBLLContextContainer<IAuthorizationBLLContext>
         where TEvaluatedData : EvaluatedData<TBLLContext>
 {
     /// <inheritdoc />

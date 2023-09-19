@@ -1,21 +1,20 @@
 ﻿using Framework.SecuritySystem;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.Authorization.SecuritySystem;
 
 public class OperationAccessorFactory : IOperationAccessorFactory
 {
-    private readonly IAvailablePermissionSource availablePermissionSource;
+    private readonly IServiceProvider serviceProvider;
 
-    private readonly IAccessDeniedExceptionService accessDeniedExceptionService;
-
-    public OperationAccessorFactory(IAvailablePermissionSource availablePermissionSource, IAccessDeniedExceptionService accessDeniedExceptionService)
+    public OperationAccessorFactory(IServiceProvider serviceProvider)
     {
-        this.availablePermissionSource = availablePermissionSource;
-        this.accessDeniedExceptionService = accessDeniedExceptionService;
+        this.serviceProvider = serviceProvider;
     }
 
     public IOperationAccessor Create(bool withRunAs)
     {
-        return new OperationAccessor(this.availablePermissionSource, this.accessDeniedExceptionService, withRunAs);
+        return ActivatorUtilities.CreateInstance<OperationAccessor>(this.serviceProvider, withRunAs);
     }
 }

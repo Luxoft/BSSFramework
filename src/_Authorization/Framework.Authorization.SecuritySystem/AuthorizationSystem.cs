@@ -13,8 +13,6 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
 {
     private readonly IAvailablePermissionSource availablePermissionSource;
 
-    private readonly IAccessDeniedExceptionService accessDeniedExceptionService;
-
     private readonly IRuntimePermissionOptimizationService runtimePermissionOptimizationService;
 
     private readonly IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory;
@@ -25,7 +23,6 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
 
     public AuthorizationSystem(
         IAvailablePermissionSource availablePermissionSource,
-        IAccessDeniedExceptionService accessDeniedExceptionService,
         IRuntimePermissionOptimizationService runtimePermissionOptimizationService,
         IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
         IRealTypeResolver realTypeResolver,
@@ -33,7 +30,6 @@ public class AuthorizationSystem : IAuthorizationSystem<Guid>
         IOperationAccessorFactory operationAccessorFactory)
     {
         this.availablePermissionSource = availablePermissionSource;
-        this.accessDeniedExceptionService = accessDeniedExceptionService;
         this.runtimePermissionOptimizationService = runtimePermissionOptimizationService;
         this.hierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
         this.realTypeResolver = realTypeResolver;

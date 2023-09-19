@@ -759,6 +759,14 @@ namespace Framework.Authorization.Generated.DTO
             {
                 throw new System.ArgumentNullException("target");
             }
+            if (!object.ReferenceEquals(source.RunAs, null))
+            {
+                target.RunAs = source.RunAs.Identity;
+            }
+            else
+            {
+                target.RunAs = default(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO);
+            }
         }
         
         public virtual void MapFullToStrictForPrincipalCreateModel(Framework.Authorization.Generated.DTO.PrincipalCreateModelStrictDTO target, Framework.Authorization.Generated.DTO.PrincipalCreateModelFullDTO source)
@@ -10675,6 +10683,8 @@ namespace Framework.Authorization.Generated.DTO
         
         private System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionStrictDTO> _permissions = new System.Collections.Generic.List<Framework.Authorization.Generated.DTO.PermissionStrictDTO>();
         
+        private Framework.Authorization.Generated.DTO.PrincipalIdentityDTO _runAs;
+        
         public PrincipalStrictDTO()
         {
         }
@@ -10831,6 +10841,19 @@ namespace Framework.Authorization.Generated.DTO
             set
             {
                 this._permissions = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Framework.Authorization.Generated.DTO.PrincipalIdentityDTO RunAs
+        {
+            get
+            {
+                return this._runAs;
+            }
+            set
+            {
+                this._runAs = value;
             }
         }
         
@@ -16695,6 +16718,14 @@ namespace Framework.Authorization.Generated.DTO
             if (!object.ReferenceEquals(mappingObject.Permissions, null))
             {
                 this.GetCollectionMappingService<Framework.Authorization.Generated.DTO.PermissionStrictDTO, Framework.Authorization.Domain.Permission>(detailDTO => this.ToPermission(detailDTO, domainObject), detail => Framework.Persistent.AddRemoveDetailHelper.RemoveDetail<Framework.Authorization.Domain.Principal, Framework.Authorization.Domain.Permission>(domainObject, detail)).Map(mappingObject.Permissions, domainObject.Permissions);
+            }
+            if (!object.Equals(mappingObject.RunAs, default(Framework.Authorization.Generated.DTO.PrincipalIdentityDTO)))
+            {
+                domainObject.RunAs = this.ToPrincipal(mappingObject.RunAs);
+            }
+            else
+            {
+                domainObject.RunAs = null;
             }
         }
         

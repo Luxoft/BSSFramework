@@ -58,13 +58,23 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection RegisterAuthorizationSystem(this IServiceCollection services)
     {
-        return services.AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>()
+        return services.AddScopedFromLazyInterfaceImplement<IAuthorizationSystem<Guid>, AuthorizationSystem>() //TODO: Temp hack
+                       .AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>()
+                       .AddScopedFrom<IOperationAccessor, IAuthorizationSystem>()
 
                        .AddSingleton<IDomainObjectIdentResolver, DomainObjectIdentResolver<Guid>>()
                        .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService>()
 
                        .AddScoped<ISecurityContextInfoService<Guid>, SecurityContextInfoService>()
 
-                       .AddSingleton<IDisabledSecurityProviderSource, DisabledSecurityProviderSource>();
+                       .AddSingleton<IDisabledSecurityProviderSource, DisabledSecurityProviderSource>()
+
+                       .AddScoped<IRunAsManager, RunAsManger>()
+                       .AddScoped<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>()
+
+                       .AddScoped<IAvailablePermissionSource, AvailablePermissionSource>()
+                       .AddScoped<ICurrentPrincipalSource, CurrentPrincipalSource>()
+
+                       .AddScoped<IOperationAccessorFactory, OperationAccessorFactory>();
     }
 }

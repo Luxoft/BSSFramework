@@ -3,6 +3,7 @@ using Framework.Configuration;
 using Framework.Configuration.BLL;
 using Framework.Configuration.Domain;
 using Framework.Configurator.Interfaces;
+using Framework.SecuritySystem;
 
 using Microsoft.AspNetCore.Http;
 
@@ -11,7 +12,7 @@ namespace Framework.Configurator.Handlers;
 public record ForcePushEventHandler(
         IDomainTypeBLLFactory DomainTypeBllFactory,
         IConfigurationBLLFactoryContainer ConfigurationBllFactoryContainer,
-        IAuthorizationBLLContext AuthorizationSystem) : BaseWriteHandler, IForcePushEventHandler
+        IAuthorizationSystem AuthorizationSystem) : BaseWriteHandler, IForcePushEventHandler
 {
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {

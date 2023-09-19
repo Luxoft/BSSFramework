@@ -11,6 +11,7 @@ public class ExampleAuthorizationSystem : IAuthorizationSystem<Guid>
 
     private readonly IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory;
 
+    public string CurrentPrincipalName => throw new NotImplementedException();
 
     public ExampleAuthorizationSystem(
         IPrincipalPermissionSource<Guid> principalPermissionSource,

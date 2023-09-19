@@ -7,9 +7,8 @@ namespace Framework.Configurator.Handlers;
 
 public record StopRunAsHandler(IAuthorizationBLLContext AuthorizationBllContext) : BaseWriteHandler, IStopRunAsHandler
 {
-    public Task Execute(HttpContext context, CancellationToken cancellationToken)
+    public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
-        this.AuthorizationBllContext.Authorization.RunAsManager.FinishRunAsUser();
-        return Task.CompletedTask;
+        await this.AuthorizationBllContext.Authorization.RunAsManager.FinishRunAsUserAsync(cancellationToken);
     }
 }

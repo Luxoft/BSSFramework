@@ -7,7 +7,7 @@ public partial class OperationBLL
 {
     public IEnumerable<Operation> GetAvailableOperations()
     {
-        return this.Context.Logics.Permission.GetAvailablePermissionsQueryable()
+        return this.Context.AvailablePermissionSource.GetAvailablePermissionsQueryable()
                    .Select(permission => permission.Role)
                    .SelectMany(businessRole => businessRole.BusinessRoleOperationLinks)
                    .Select(link => link.Operation)

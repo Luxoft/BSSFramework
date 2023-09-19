@@ -119,7 +119,7 @@ public class MainTests
 
                .AddScoped(_ => securityContextInfoService)
 
-               .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
+               .BuildServiceProvider(new ServiceProviderOptions{ ValidateOnBuild = true, ValidateScopes = true });
     }
 
     private IQueryableSource<PersistentDomainObjectBase> BuildQueryableSource(IServiceProvider serviceProvider)

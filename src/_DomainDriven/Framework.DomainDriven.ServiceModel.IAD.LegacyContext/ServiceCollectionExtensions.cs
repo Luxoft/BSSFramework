@@ -33,8 +33,6 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<IStandardSubscriptionService, LocalDBSubscriptionService>();
 
-        services.RegisterAuthorizationSystem();
-
         services.AddSingleton(AvailableValuesHelper.AvailableValues.ToValidation());
 
         services.AddSingleton<IDateTimeService>(DateTimeService.Default);
@@ -52,11 +50,6 @@ public static class ServiceCollectionExtensions
         return services.ReplaceSingleton<IRealTypeResolver, ProjectionRealTypeResolver>();
     }
 
-    private static IServiceCollection RegisterAuthorizationSystem(this IServiceCollection services)
-    {
-        return services.AddScopedFrom<IAuthorizationSystem<Guid>, IAuthorizationBLLContext>();
-    }
-
     public static IServiceCollection RegisterAuthorizationBLL(this IServiceCollection services)
     {
         return services
@@ -68,8 +61,6 @@ public static class ServiceCollectionExtensions
                .AddSingleton(new AuthorizationMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<Framework.Authorization.Domain.PersistentDomainObjectBase>.OData))
                .AddScoped<IAuthorizationSecurityService, AuthorizationSecurityService>()
                .AddScoped<IAuthorizationBLLFactoryContainer, AuthorizationBLLFactoryContainer>()
-               .AddScoped<IRunAsManager, AuthorizationRunAsManger>()
-               .AddScoped<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>()
                //.AddScoped<INotificationPrincipalExtractor, LegacyNotificationPrincipalExtractor>()
                .AddScoped<INotificationBasePermissionFilterSource, LegacyNotificationPrincipalExtractor>()
                .AddScoped<IAuthorizationBLLContextSettings, AuthorizationBLLContextSettings>()

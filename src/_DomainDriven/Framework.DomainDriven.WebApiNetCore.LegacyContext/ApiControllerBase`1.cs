@@ -1,4 +1,5 @@
-﻿using Framework.DomainDriven.BLL.Configuration;
+﻿using Framework.Authorization.BLL;
+using Framework.DomainDriven.BLL.Configuration;
 using Framework.DomainDriven.BLL.Security;
 
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ namespace Framework.DomainDriven.WebApiNetCore;
 /// <typeparam name="TBLLContext">The type of the TBLL context.</typeparam>
 public abstract class ApiControllerBase<TBLLContext> : ControllerBase
         where TBLLContext : class, IConfigurationBLLContextContainer<IConfigurationBLLContext>,
-        IAuthorizationBLLContextContainer<IAuthorizationBLLContextBase>
+        IAuthorizationBLLContextContainer<IAuthorizationBLLContext>
 {
     /// <summary>
     ///     Open DB Session and run Action with pass BLLContext to him

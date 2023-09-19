@@ -1,4 +1,5 @@
 ﻿using Framework.Authorization.Domain;
+using Framework.Authorization.SecuritySystem;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
@@ -155,7 +156,7 @@ public class AuthorizationTestConfiguration : BLLContextConfiguration<IAuthoriza
             var result = Substitute.For<IAuthorizationBLLContext>();
             var runAsManager = Substitute.For<IRunAsManager>();
 
-            runAsManager.PrincipalName.Returns("testUser");
+            runAsManager.ActualPrincipal.Returns(new Principal { Name = "testUser" });
 
             result.RunAsManager.Returns(runAsManager);
 

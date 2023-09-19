@@ -2,6 +2,7 @@
 
 using Framework.Authorization.Domain;
 using Framework.Authorization.Notification;
+using Framework.Authorization.SecuritySystem;
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL.Configuration;
@@ -13,10 +14,6 @@ namespace Framework.Authorization.BLL;
 
 public partial interface IAuthorizationBLLContext :
 
-    IAuthorizationBLLContext<Guid>,
-
-    IAuthorizationSystem<Guid>,
-
     ISecurityBLLContext<IAuthorizationBLLContext, PersistentDomainObjectBase, Guid>,
 
     ITrackingServiceContainer<PersistentDomainObjectBase>,
@@ -25,6 +22,14 @@ public partial interface IAuthorizationBLLContext :
 
     IConfigurationBLLContextContainer<IConfigurationBLLContext>
 {
+    string CurrentPrincipalName => this.AuthorizationSystem.CurrentPrincipalName;
+
+    IRunAsManager RunAsManager { get; }
+
+    IAuthorizationSystem<Guid> AuthorizationSystem { get; }
+
+    IAvailablePermissionSource AvailablePermissionSource { get; }
+
     IDateTimeService DateTimeService { get; }
 
     IAuthorizationExternalSource ExternalSource { get; }
@@ -45,11 +50,6 @@ public partial interface IAuthorizationBLLContext :
         where TDomainObject : PersistentDomainObjectBase;
 
     ISecurityProvider<Operation> GetOperationSecurityProvider();
-
-
-    bool HasAccess(Operation operation);
-
-    IEnumerable<string> GetAccessors(Operation operation, Expression<Func<Principal, bool>> principalFilter);
 
 
     ITypeResolver<EntityType> SecurityTypeResolver { get; }

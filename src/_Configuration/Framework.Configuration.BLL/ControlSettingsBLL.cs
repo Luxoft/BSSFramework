@@ -16,7 +16,7 @@ public class ControlSettingsBLL : DomainBLLBase<ControlSettings>
 
     public ControlSettings GetRootControlSettingsForCurrentPrincipal(string name)
     {
-        var currentPrincipalName = this.Context.Authorization.RunAsManager.PrincipalName;
+        var currentPrincipalName = this.Context.Authorization.RunAsManager.ActualPrincipal.Name;
 
         return this.GetRootControlSettings(name, currentPrincipalName);
     }

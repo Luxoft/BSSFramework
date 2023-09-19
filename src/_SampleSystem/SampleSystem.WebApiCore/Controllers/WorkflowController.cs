@@ -1,10 +1,8 @@
 ﻿using Framework.Authorization.ApproveWorkflow;
-using Framework.Authorization.Domain;
 using Framework.Authorization.Generated.DTO;
 using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.SecuritySystem;
-
 using Microsoft.AspNetCore.Mvc;
 
 using SampleSystem.BLL;
@@ -48,7 +46,7 @@ public class WorkflowController : ControllerBase
         await this.contextEvaluator.EvaluateAsync(DBSessionMode.Read,
                                                   ctx =>
                                                                       {
-                                                                          ctx.Authorization.CheckAccess(
+                                                                          ctx.Authorization.AuthorizationSystem.CheckAccess(
                                                                            SampleSystemSecurityOperation.SystemIntegration);
                                                                           return Task.CompletedTask;
                                                                       });

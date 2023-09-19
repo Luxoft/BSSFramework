@@ -10,6 +10,6 @@ public record RunAsHandler(IAuthorizationBLLContext AuthorizationBllContext) : B
     public async Task Execute(HttpContext context, CancellationToken cancellationToken)
     {
         var principal = await this.ParseRequestBodyAsync<string>(context);
-        this.AuthorizationBllContext.Authorization.RunAsManager.StartRunAsUser(principal);
+        await this.AuthorizationBllContext.Authorization.RunAsManager.StartRunAsUserAsync(principal, cancellationToken);
     }
 }

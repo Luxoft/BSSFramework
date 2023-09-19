@@ -1,0 +1,134 @@
+﻿using System.Linq.Expressions;
+
+using Framework.Authorization.Domain;
+using Framework.Core;
+using Framework.Core.Services;
+using Framework.DomainDriven;
+using Framework.DomainDriven.Repository;
+using Framework.HierarchicalExpand;
+using Framework.SecuritySystem;
+
+using NHibernate.Linq;
+
+namespace Framework.Authorization.SecuritySystem;
+
+public class AuthorizationSystem : IAuthorizationSystem<Guid>
+{
+    private readonly IAvailablePermissionSource availablePermissionSource;
+
+    private readonly IRuntimePermissionOptimizationService runtimePermissionOptimizationService;
+
+    private readonly IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory;
+
+    private readonly IRealTypeResolver realTypeResolver;
+
+    private readonly IOperationAccessorFactory operationAccessorFactory;
+
+    private readonly IRepositoryFactory<Principal> principalRepositoryFactory;
+
+    private readonly IDateTimeService dateTimeService;
+
+    public AuthorizationSystem(
+        IAvailablePermissionSource availablePermissionSource,
+        IRuntimePermissionOptimizationService runtimePermissionOptimizationService,
+        IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
+        IRealTypeResolver realTypeResolver,
+        IUserAuthenticationService userAuthenticationService,
+        IOperationAccessorFactory operationAccessorFactory,
+        IRepositoryFactory<Principal> principalRepositoryFactory,
+        IDateTimeService dateTimeService)
+    {
+        this.availablePermissionSource = availablePermissionSource;
+        this.runtimePermissionOptimizationService = runtimePermissionOptimizationService;
+        this.hierarchicalObjectExpanderFactory = hierarchicalObjectExpanderFactory;
+        this.realTypeResolver = realTypeResolver;
+        this.operationAccessorFactory = operationAccessorFactory;
+        this.principalRepositoryFactory = principalRepositoryFactory;
+        this.dateTimeService = dateTimeService;
+
+        this.CurrentPrincipalName = userAuthenticationService.GetUserName();
+    }
+
+    public string CurrentPrincipalName { get; }
+
+    private IEnumerable<string> GetAccessors(Expression<Func<Principal, bool>> principalFilter, AvailablePermissionFilter permissionFilter)
+    {
+        if (principalFilter == null) throw new ArgumentNullException(nameof(principalFilter));
+        if (permissionFilter == null) throw new ArgumentNullException(nameof(permissionFilter));
+
+        var extraPrincipalFilter =
+            principalFilter.UpdateBody(
+                new OverridePropertyInfoVisitor<Principal, IEnumerable<Permission>>(
+                    principal => principal.Permissions, permissionFilter.ToFilterExpression().ToCollectionFilter()));
+
+        var principals = this.principalRepositoryFactory.Create().GetQueryable().Where(extraPrincipalFilter).ToList();
+
+        return principals.Select(principal => principal.Name);
+    }
+
+    public IEnumerable<string> GetAccessors(
+        NonContextSecurityOperation securityOperation, Expression<Func<IPrincipal<Guid>, bool>> principalFilter)
+    {
+        if (principalFilter == null) throw new ArgumentNullException(nameof(principalFilter));
+
+        var typedSecurityOperation = (NonContextSecurityOperation<Guid>)securityOperation;
+
+        return this.GetAccessors(
+            (Expression<Func<Principal, bool>>)AuthVisitor.Visit(principalFilter),
+            new AvailablePermissionFilter(this.dateTimeService.Today) { SecurityOperationId = typedSecurityOperation.Id });
+    }
+
+    public List<Dictionary<Type, IEnumerable<Guid>>> GetPermissions(
+        ContextSecurityOperation securityOperation,
+        IEnumerable<Type> securityTypes)
+    {
+        var typedSecurityOperation = (ContextSecurityOperation<Guid>)securityOperation;
+
+        var permissions = this.availablePermissionSource.GetAvailablePermissionsQueryable(true, typedSecurityOperation.Id)
+                              .FetchMany(q => q.FilterItems)
+                              .ThenFetch(q => q.Entity)
+                              .ThenFetch(q => q.EntityType)
+                              .ToList();
+
+        var securityTypesCache = securityTypes.ToReadOnlyCollection();
+
+        return permissions
+               .Select(permission => permission.ToDictionary(this.realTypeResolver, securityTypesCache))
+               .Pipe(this.runtimePermissionOptimizationService.Optimize)
+               .ToList(permission => this.TryExpandPermission(permission, securityOperation.ExpandType));
+    }
+
+    public IQueryable<IPermission<Guid>> GetPermissionQuery(ContextSecurityOperation securityOperation)
+    {
+        var typedSecurityOperation = (ContextSecurityOperation<Guid>)securityOperation;
+
+        return this.availablePermissionSource.GetAvailablePermissionsQueryable(securityOperationId: typedSecurityOperation.Id);
+    }
+
+    private Dictionary<Type, IEnumerable<Guid>> TryExpandPermission(
+        Dictionary<Type, List<Guid>> permission,
+        HierarchicalExpandType expandType)
+    {
+        if (permission == null) throw new ArgumentNullException(nameof(permission));
+
+        return permission.ToDictionary(
+            pair => pair.Key,
+            pair => this.hierarchicalObjectExpanderFactory.Create(pair.Key).Expand(pair.Value, expandType));
+    }
+
+    public bool IsAdmin() => this.operationAccessorFactory.Create(true).IsAdmin();
+
+    public bool HasAccess(NonContextSecurityOperation securityOperation) => this.operationAccessorFactory.Create(true).HasAccess(securityOperation);
+
+    public void CheckAccess(NonContextSecurityOperation securityOperation) => this.operationAccessorFactory.Create(true).CheckAccess(securityOperation);
+
+    private static readonly ExpressionVisitor AuthVisitor = new OverrideParameterTypeVisitor(
+        new Dictionary<Type, Type>
+        {
+            { typeof(IPrincipal<Guid>), typeof(Principal) },
+            { typeof(IPermission<Guid>), typeof(Permission) },
+            { typeof(IPermissionFilterItem<Guid>), typeof(PermissionFilterItem) },
+            { typeof(IPermissionFilterEntity<Guid>), typeof(PermissionFilterEntity) },
+            { typeof(IEntityType<Guid>), typeof(EntityType) },
+        });
+}

@@ -15,7 +15,7 @@ namespace Framework.Authorization.BLL
             this.Context = context;
             this.lazyOperations = LazyHelper.Create(() =>
 
-                                                        this.Context.Logics.Permission.GetAvailablePermissionsQueryable()
+                                                        this.Context.AvailablePermissionSource.GetAvailablePermissionsQueryable()
                                                             .SelectMany(permission => permission.Role.BusinessRoleOperationLinks)
                                                             .Select(link => link.Operation)
                                                             .Distinct()
@@ -39,11 +39,12 @@ namespace Framework.Authorization.BLL
         {
             if (operation == null) throw new ArgumentNullException(nameof(operation));
 
-            return this.Context.Logics.Permission.GetAvailablePermissionsQueryable(new AvailablePermissionFilter(this.Context.DateTimeService, null))
-                                                 .Where(permission => permission.Role.BusinessRoleOperationLinks.Any(link => link.Operation == operation))
-                                                 .Select(permission => permission.Principal.Name)
-                                                 .Distinct()
-                                                 .ToUnboundedList();
+            return this.Context
+                       .AvailablePermissionSource
+                       .GetAvailablePermissionsQueryable(securityOperationId: operation.Id)
+                       .Select(permission => permission.Principal.Name)
+                       .Distinct()
+                       .ToUnboundedList();
         }
     }
 }

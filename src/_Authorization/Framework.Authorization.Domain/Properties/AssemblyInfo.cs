@@ -1,9 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Framework.Authorization.Domain")]
-[assembly: ComVisible(false)]
 
 [assembly: InternalsVisibleTo("Framework.Authorization.BLL")]
 [assembly: InternalsVisibleTo("Framework.Authorization.BLL.Core")]

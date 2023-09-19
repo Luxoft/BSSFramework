@@ -17,7 +17,7 @@ namespace Framework.DomainDriven.BLL.Security.Test.SecurityHierarchy.Domain;
 
 using Framework.Core.Serialization;
 
-public class TestBllContext : ITestBLLContext, ISecurityBLLContext<IAuthorizationBLLContext<Guid>, PersistentDomainObjectBase, Guid>, IAccessDeniedExceptionServiceContainer
+public class TestBllContext : ITestBLLContext, ISecurityBLLContext<PersistentDomainObjectBase, Guid>, IAccessDeniedExceptionServiceContainer
 {
     private readonly Lazy<SyncDenormolizedValuesService<PersistentDomainObjectBase, HierarchyObject, HierarchyObjectAncestorLink, HierarchyObjectToAncestorOrChildLink, Guid, NamedLockObject, NamedLockOperation>> syncHierarchyService;
 
@@ -69,8 +69,6 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<IAuthorizatio
     public IOperationEventSenderContainer<PersistentDomainObjectBase> OperationSenders => new OperationEventSenderContainer<DomainObjectBase>(new List<IOperationEventListener<DomainObjectBase>>());
 
     public IBLLFactoryContainer<IDefaultBLLFactory<PersistentDomainObjectBase, Guid>> Logics => this.defaultFactoryContainer;
-
-    public IAuthorizationBLLContext<Guid> Authorization { get; private set; }
 
     public IAccessDeniedExceptionService AccessDeniedExceptionService => new AccessDeniedExceptionService(new DomainObjectIdentResolver<Guid>());
 

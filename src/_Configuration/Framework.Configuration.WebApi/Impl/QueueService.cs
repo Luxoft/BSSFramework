@@ -16,7 +16,7 @@ public partial class ConfigSLJsonController
                                                          {
                                                              using (LogContext.PushProperty("Method", nameof(ConfigurationSecurityOperation.ProcessModifications)))
                                                              {
-                                                                 context.Authorization.CheckAccess(ConfigurationSecurityOperation.ProcessModifications);
+                                                                 context.Authorization.AuthorizationSystem.CheckAccess(ConfigurationSecurityOperation.ProcessModifications);
 
                                                                  return context.Logics.DomainObjectModification.Process(limit == default(int) ? 1000 : limit);
                                                              }
@@ -30,7 +30,7 @@ public partial class ConfigSLJsonController
     {
         return this.Evaluate(DBSessionMode.Read, evaluateData =>
                                                  {
-                                                     evaluateData.Context.Authorization.CheckAccess(ConfigurationSecurityOperation.QueueMonitoring);
+                                                     evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(ConfigurationSecurityOperation.QueueMonitoring);
 
                                                      return evaluateData.Context.Logics.DomainObjectEvent.GetProcessingState().ToSimpleDTO(evaluateData.MappingService);
                                                  });
@@ -41,7 +41,7 @@ public partial class ConfigSLJsonController
     {
         return this.Evaluate(DBSessionMode.Read, evaluateData =>
                                                  {
-                                                     evaluateData.Context.Authorization.CheckAccess(ConfigurationSecurityOperation.QueueMonitoring);
+                                                     evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(ConfigurationSecurityOperation.QueueMonitoring);
 
                                                      return evaluateData.Context.Logics.DomainObjectModification.GetProcessingState().ToSimpleDTO(evaluateData.MappingService);
                                                  });
@@ -52,7 +52,7 @@ public partial class ConfigSLJsonController
     {
         return this.Evaluate(DBSessionMode.Read, evaluateData =>
                                                  {
-                                                     evaluateData.Context.Authorization.CheckAccess(ConfigurationSecurityOperation.QueueMonitoring);
+                                                     evaluateData.Context.Authorization.AuthorizationSystem.CheckAccess(ConfigurationSecurityOperation.QueueMonitoring);
 
                                                      return evaluateData.Context.Logics.DomainObjectNotification.GetProcessingState().ToSimpleDTO(evaluateData.MappingService);
                                                  });

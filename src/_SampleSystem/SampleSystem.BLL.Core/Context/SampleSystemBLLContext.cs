@@ -2,6 +2,7 @@
 using Framework.Core;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 using Framework.HierarchicalExpand;
 using Framework.QueryLanguage;
@@ -24,7 +25,7 @@ public partial class SampleSystemBLLContext
             ISampleSystemValidator validator,
             IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
             IFetchService<PersistentDomainObjectBase, FetchBuildRule> fetchService,
-            ISampleSystemSecurityService securityService,
+            IRootSecurityService<PersistentDomainObjectBase> securityService,
             ISampleSystemBLLFactoryContainer logics,
             IAuthorizationBLLContext authorization,
             Framework.Configuration.BLL.IConfigurationBLLContext configuration,
@@ -42,7 +43,7 @@ public partial class SampleSystemBLLContext
         this.TypeResolver = settings.TypeResolver;
     }
 
-    public ISampleSystemSecurityService SecurityService { get; }
+    public IRootSecurityService<PersistentDomainObjectBase> SecurityService { get; }
 
     public override ISampleSystemBLLFactoryContainer Logics { get; }
 

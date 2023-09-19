@@ -1,28 +1,34 @@
-﻿using Framework.SecuritySystem;
+﻿using Framework.Authorization.SecuritySystem;
+using Framework.SecuritySystem;
 using Framework.SecuritySystem.Rules.Builders;
 
 using SampleSystem.Domain;
 
 namespace SampleSystem.BLL;
 
-public partial class SampleSystemEmployeeSecurityService<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>
+public class SampleSystemEmployeeSecurityService<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee> : ContextDomainSecurityService<PersistentDomainObjectBase, TDomainObject, Guid>
+    where TDomainObject : PersistentDomainObjectBase, IEmployeeSecurity<TBusinessUnit, TDepartment, TLocation>, IBusinessUnitSecurityElement<TBusinessUnit>, IDepartmentSecurityElement<TDepartment>, IEmployeeSecurityElement<TEmployee, TBusinessUnit, TDepartment, TLocation>, IEmployeeSecurityElement<TEmployee>
+    where TBusinessUnit : PersistentDomainObjectBase, ISecurityContext
+    where TDepartment : PersistentDomainObjectBase, ILocationSecurityElement<TLocation>
+    where TLocation : PersistentDomainObjectBase, ISecurityContext
+    where TEmployee : PersistentDomainObjectBase, IEmployeeSecurity<TBusinessUnit, TDepartment, TLocation>, ISecurityContext
 {
+    private readonly IRunAsManager runAsManager;
+
     public SampleSystemEmployeeSecurityService(
             IDisabledSecurityProviderSource disabledSecurityProviderSource,
             ISecurityOperationResolver<PersistentDomainObjectBase> securityOperationResolver,
             IAuthorizationSystem<Guid> authorizationSystem,
             ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
-            ISampleSystemSecurityPathContainer securityPathContainer,
-            ISampleSystemBLLContext context)
+            IRunAsManager runAsManager)
 
             : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
     {
-        this.securityPathContainer = securityPathContainer ?? throw new ArgumentNullException(nameof(securityPathContainer));
-        this.Context = context ?? throw new ArgumentNullException(nameof(context));
+        this.runAsManager = runAsManager;
     }
 
-    public ISampleSystemBLLContext Context { get; }
-
+    protected override SecurityPath<TDomainObject> GetSecurityPath() => SecurityPath<TDomainObject>.Create(v => v.Employee)
+        .And(v => v.BusinessUnit).And(v => v.Department.Location);
 
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(ContextSecurityOperation securityOperation)
     {
@@ -30,7 +36,7 @@ public partial class SampleSystemEmployeeSecurityService<TDomainObject, TBusines
 
         if (securityOperation == SampleSystemSecurityOperation.EmployeeView)
         {
-            return baseProvider.Or(employee => employee.Login == this.Context.Authorization.RunAsManager.ActualPrincipal.Name);
+            return baseProvider.Or(employee => employee.Login == this.runAsManager.ActualPrincipal.Name);
         }
         else
         {

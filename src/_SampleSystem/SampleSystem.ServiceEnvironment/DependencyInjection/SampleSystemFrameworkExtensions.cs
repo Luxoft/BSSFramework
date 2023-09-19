@@ -10,6 +10,7 @@ using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven;
 using Framework.DomainDriven.BLL;
+using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 using Framework.DomainDriven.Serialization;
 using Framework.DomainDriven.SerializeMetadata;
@@ -61,21 +62,17 @@ public static class SampleSystemFrameworkExtensions
                .AddScoped<ISampleSystemValidator, SampleSystemValidator>()
 
                .AddSingleton(new SampleSystemMainFetchService().WithCompress().WithCache().WithLock().Add(FetchService<PersistentDomainObjectBase>.OData))
-               .AddScoped<ISampleSystemSecurityService, SampleSystemSecurityService>()
+               .AddScoped<IRootSecurityService<PersistentDomainObjectBase>, RootSecurityService<ISampleSystemBLLContext, PersistentDomainObjectBase>>()
                .AddScoped<ISampleSystemBLLFactoryContainer, SampleSystemBLLFactoryContainer>()
                .AddScoped<ISampleSystemBLLContextSettings>(_ => new SampleSystemBLLContextSettings { TypeResolver = new[] { new SampleSystemBLLContextSettings().TypeResolver, TypeSource.FromSample<BusinessUnitSimpleDTO>().ToDefaultTypeResolver() }.ToComposite() })
                .AddScopedFromLazyInterfaceImplement<ISampleSystemBLLContext, SampleSystemBLLContext>()
 
                .AddScoped<ITrackingService<PersistentDomainObjectBase>, TrackingService<PersistentDomainObjectBase>>()
 
-               .AddSingleton<ISecurityOperationResolver<PersistentDomainObjectBase>, SampleSystemSecurityOperationResolver>()
-               .AddScopedFrom<ISampleSystemSecurityPathContainer, ISampleSystemSecurityService>()
-
                .AddScoped<IQueryableSource<PersistentDomainObjectBase>, BLLQueryableSource<ISampleSystemBLLContext, PersistentDomainObjectBase, Guid>>()
                .AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
                //.AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, SampleSystemSecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
 
-               .Self(SampleSystemSecurityServiceBase.Register)
                .Self(SampleSystemBLLFactoryContainer.RegisterBLLFactory);
     }
 
@@ -158,5 +155,13 @@ public static class SampleSystemFrameworkExtensions
         services.RegisterHierarchicalObjectExpander<PersistentDomainObjectBase>();
 
         return services;
+    }
+}
+
+public class DomainTypeSecurityBuilder
+{
+    public DomainTypeSecurityBuilder Add<TDomainObject>()
+    {
+        return this;
     }
 }

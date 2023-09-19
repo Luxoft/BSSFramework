@@ -77,4 +77,23 @@ public static class ServiceCollectionExtensions
 
                        .AddScoped<IOperationAccessorFactory, OperationAccessorFactory>();
     }
+
+    public static IServiceCollection RegisterAuthorizationSystemDomainServices(
+        IServiceCollection services,
+        Action<AuthorizationSystemDomainServiceBuilder> setupAction)
+    {
+        var builder = new AuthorizationSystemDomainServiceBuilder();
+
+        setupAction(builder);
+
+        return services;
+    }
+}
+
+public class AuthorizationSystemDomainServiceBuilder
+{
+    public AuthorizationSystemDomainServiceBuilder Add<TDomainObject>()
+    {
+        return this;
+    }
 }

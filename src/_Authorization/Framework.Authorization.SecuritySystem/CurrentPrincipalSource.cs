@@ -23,8 +23,8 @@ public class CurrentPrincipalSource : ICurrentPrincipalSource
 
         this.currentPrincipalLazy = LazyHelper.Create(
             () => this.principalRepository.Create()
-                      .GetQueryable().SingleOrDefault(principal => principal.Name == this.userAuthenticationService.GetUserName()));
+                      .GetQueryable().SingleOrDefault(principal => principal.Name == userName));
     }
 
-    public Principal CurrentPrincipal { get; }
+    public Principal CurrentPrincipal => this.currentPrincipalLazy.Value;
 }

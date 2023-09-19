@@ -71,6 +71,9 @@ public static class ServiceCollectionExtensions
                        .AddSingleton<IDisabledSecurityProviderSource, DisabledSecurityProviderSource>()
 
                        .AddScoped<IRunAsManager, RunAsManger>()
-                       .AddScoped<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>();
+                       .AddScoped<IRuntimePermissionOptimizationService, RuntimePermissionOptimizationService>()
+
+                       .AddScoped<IAvailablePermissionSource, AvailablePermissionSource>()
+                       .AddScoped<ICurrentPrincipalSource, CurrentPrincipalSource>();
     }
 }

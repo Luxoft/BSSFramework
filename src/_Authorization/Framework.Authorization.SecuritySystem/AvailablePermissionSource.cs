@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 
 using Framework.Authorization.Domain;
+using Framework.Core.Services;
 using Framework.DomainDriven;
 using Framework.DomainDriven.Repository;
 
@@ -15,25 +16,25 @@ public class AvailablePermissionSource : IAvailablePermissionSource
 
     private readonly IRunAsManager runAsManager;
 
-    private readonly ICurrentPrincipalSource currentPrincipalSource;
+    private readonly IUserAuthenticationService userAuthenticationService;
 
     public AvailablePermissionSource(
         IRepositoryFactory<Permission> permissionRepositoryFactory,
         IDateTimeService dateTimeService,
         IRunAsManager runAsManager,
-        ICurrentPrincipalSource currentPrincipalSource)
+        IUserAuthenticationService userAuthenticationService)
     {
         this.permissionRepository = permissionRepositoryFactory.Create();
         this.dateTimeService = dateTimeService;
         this.runAsManager = runAsManager;
-        this.currentPrincipalSource = currentPrincipalSource;
+        this.userAuthenticationService = userAuthenticationService;
     }
 
     public IQueryable<Permission> GetAvailablePermissionsQueryable(bool withRunAs = true, Guid securityOperationId = default)
     {
         var filter = new AvailablePermissionFilter(this.dateTimeService.Today)
                      {
-                         PrincipalName = withRunAs ? this.runAsManager.PrincipalName : this.currentPrincipalSource.CurrentPrincipal.Name,
+                         PrincipalName = withRunAs ? this.runAsManager.PrincipalName : this.userAuthenticationService.GetUserName(),
                          SecurityOperationId = securityOperationId
                      };
 

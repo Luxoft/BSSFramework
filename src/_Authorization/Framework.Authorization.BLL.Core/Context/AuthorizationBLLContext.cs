@@ -50,7 +50,9 @@ public partial class AuthorizationBLLContext
             ISecurityTypeResolverContainer securityTypeResolverContainer,
             INotificationPrincipalExtractor notificationPrincipalExtractor,
             IAuthorizationBLLContextSettings settings,
-            IRunAsAuthorizationSystem authorizationSystem,
+            IAuthorizationSystem<Guid> authorizationSystem,
+            IRunAsAuthorizationSystem runAsAuthorizationSystem,
+            IRunAsManager runAsManager,
             IAvailablePermissionSource availablePermissionSource)
             : base(
                    serviceProvider,
@@ -68,6 +70,8 @@ public partial class AuthorizationBLLContext
         this.AvailablePermissionSource = availablePermissionSource;
         this.NotificationPrincipalExtractor = notificationPrincipalExtractor;
         this.AuthorizationSystem = authorizationSystem;
+        this.RunAsAuthorizationSystem = runAsAuthorizationSystem;
+        this.RunAsManager = runAsManager;
 
         this.ExternalSource = externalSource ?? throw new ArgumentNullException(nameof(externalSource));
         this.Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
@@ -101,7 +105,12 @@ public partial class AuthorizationBLLContext
 
     public INotificationPrincipalExtractor NotificationPrincipalExtractor { get; }
 
-    public IRunAsAuthorizationSystem AuthorizationSystem { get; }
+
+    public IRunAsAuthorizationSystem RunAsAuthorizationSystem { get; }
+
+    public IAuthorizationSystem<Guid> AuthorizationSystem { get; }
+
+    public IRunAsManager RunAsManager { get; }
 
     public IAvailablePermissionSource AvailablePermissionSource { get; }
 

@@ -2,10 +2,8 @@
 
 namespace Framework.Authorization.SecuritySystem;
 
-public interface IRunAsAuthorizationSystem : IAuthorizationSystem<Guid>
+public interface IRunAsAuthorizationSystem
 {
-    IRunAsManager RunAsManager { get; }
-
     public bool IsAdmin(bool withRunAs);
 
     bool HasAccess(NonContextSecurityOperation securityOperation, bool withRunAs);

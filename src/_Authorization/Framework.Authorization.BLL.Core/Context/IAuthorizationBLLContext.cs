@@ -24,9 +24,11 @@ public partial interface IAuthorizationBLLContext :
 {
     string CurrentPrincipalName => this.AuthorizationSystem.CurrentPrincipalName;
 
-    IRunAsManager RunAsManager => this.AuthorizationSystem.RunAsManager;
+    IRunAsManager RunAsManager { get; }
 
-    IRunAsAuthorizationSystem AuthorizationSystem { get; }
+    IAuthorizationSystem<Guid> AuthorizationSystem { get; }
+
+    IRunAsAuthorizationSystem RunAsAuthorizationSystem { get; }
 
     IAvailablePermissionSource AvailablePermissionSource { get; }
 

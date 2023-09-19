@@ -6,6 +6,8 @@ namespace Framework.Authorization.SecuritySystem;
 
 public class RunAsManger : IRunAsManager
 {
+    private readonly IRunAsAuthorizationSystem runAsAuthorizationSystem;
+
     private readonly IRepository<Principal> principalRepository;
 
     private readonly Principal currentPrincipal;
@@ -13,8 +15,10 @@ public class RunAsManger : IRunAsManager
     public RunAsManger(
         IRepositoryFactory<Principal> principalRepositoryFactory,
         ICurrentPrincipalSource currentPrincipalSource,
+        IRunAsAuthorizationSystem runAsAuthorizationSystem,
         Principal customCurrentPrincipal = null)
     {
+        this.runAsAuthorizationSystem = runAsAuthorizationSystem;
         this.principalRepository = principalRepositoryFactory.Create();
 
         this.currentPrincipal = customCurrentPrincipal ?? currentPrincipalSource.CurrentPrincipal;
@@ -29,6 +33,8 @@ public class RunAsManger : IRunAsManager
     public async Task StartRunAsUserAsync(string principalName, CancellationToken cancellationToken)
     {
         if (principalName == null) throw new ArgumentNullException(nameof(principalName));
+
+        this.runAsAuthorizationSystem.CheckAccess(AuthorizationSecurityOperation.AuthorizationImpersonate, false);
 
         if (string.Equals(principalName, this.currentPrincipal.RunAs?.Name, StringComparison.CurrentCultureIgnoreCase))
         {

@@ -10,7 +10,7 @@ using NHibernate.Linq;
 
 namespace Framework.Authorization.SecuritySystem;
 
-public class AuthorizationSystem : IRunAsAuthorizationSystem
+public class AuthorizationSystem : IAuthorizationSystem<Guid>, IRunAsAuthorizationSystem
 {
     private readonly IAvailablePermissionSource availablePermissionSource;
 
@@ -28,8 +28,7 @@ public class AuthorizationSystem : IRunAsAuthorizationSystem
         IRuntimePermissionOptimizationService runtimePermissionOptimizationService,
         IHierarchicalObjectExpanderFactory<Guid> hierarchicalObjectExpanderFactory,
         IRealTypeResolver realTypeResolver,
-        IUserAuthenticationService userAuthenticationService,
-        IRunAsManager runAsManager)
+        IUserAuthenticationService userAuthenticationService)
     {
         this.availablePermissionSource = availablePermissionSource;
         this.accessDeniedExceptionService = accessDeniedExceptionService;
@@ -38,13 +37,9 @@ public class AuthorizationSystem : IRunAsAuthorizationSystem
         this.realTypeResolver = realTypeResolver;
 
         this.CurrentPrincipalName = userAuthenticationService.GetUserName();
-
-        this.RunAsManager = runAsManager;
     }
 
     public string CurrentPrincipalName { get; }
-
-    public IRunAsManager RunAsManager { get; }
 
     public bool IsAdmin() => this.IsAdmin(true);
 

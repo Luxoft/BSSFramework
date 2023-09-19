@@ -58,9 +58,10 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection RegisterAuthorizationSystem(this IServiceCollection services)
     {
-        return services.AddScoped<IRunAsAuthorizationSystem, AuthorizationSystem>()
-                       .AddScopedFrom<IAuthorizationSystem<Guid>, IRunAsAuthorizationSystem>()
-                       .AddScopedFrom<IAuthorizationSystem, IAuthorizationSystem<Guid>>()
+        return services.AddScoped<AuthorizationSystem>()
+                       .AddScopedFrom<IRunAsAuthorizationSystem, AuthorizationSystem>()
+                       .AddScopedFrom<IAuthorizationSystem<Guid>, AuthorizationSystem>()
+                       .AddScopedFrom<IAuthorizationSystem, AuthorizationSystem>()
 
                        .AddSingleton<IDomainObjectIdentResolver, DomainObjectIdentResolver<Guid>>()
                        .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService>()

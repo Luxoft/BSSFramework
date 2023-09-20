@@ -18,8 +18,7 @@ namespace Framework.DomainDriven.BLLCoreGenerator
 
             this.DomainTypeReference = genericTypes.FirstOr(() => this.DomainType.ToTypeReference());
 
-            this.BaseServiceType = typeof(ContextDomainSecurityServiceBase<,,>).ToTypeReference(
-                this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
+            this.BaseServiceType = typeof(ContextDomainSecurityServiceBase<,>).ToTypeReference(
                 this.DomainTypeReference,
                 this.Configuration.Environment.GetIdentityType().ToTypeReference());
         }
@@ -45,9 +44,9 @@ namespace Framework.DomainDriven.BLLCoreGenerator
         public override IEnumerable<(CodeTypeReference ParameterType, string Name, CodeExpression CustomBaseInvoke)> GetBaseTypeConstructorParameters()
         {
             yield return (typeof(IDisabledSecurityProviderSource).ToTypeReference(), "disabledSecurityProviderSource", null);
-            yield return (typeof(ISecurityOperationResolver<>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType), "securityOperationResolver", null);
+            yield return (typeof(ISecurityOperationResolver).ToTypeReference(), "securityOperationResolver", null);
             yield return (typeof(IAuthorizationSystem<>).ToTypeReference(this.Configuration.Environment.GetIdentityType()), "authorizationSystem", null);
-            yield return (typeof(ISecurityExpressionBuilderFactory<,>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType, this.Configuration.Environment.GetIdentityType()), "securityExpressionBuilderFactory", null);
+            yield return (typeof(ISecurityExpressionBuilderFactory).ToTypeReference(), "securityExpressionBuilderFactory", null);
         }
     }
 }

@@ -48,6 +48,5 @@ public class SecurityOperationResolver : ISecurityOperationResolver
 
 
         return request.ToDictionary();
-
     }
 }

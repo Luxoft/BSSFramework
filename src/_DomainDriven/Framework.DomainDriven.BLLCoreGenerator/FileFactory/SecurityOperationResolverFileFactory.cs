@@ -18,8 +18,7 @@ public class SecurityOperationResolverFileFactory<TConfiguration> : FileFactory<
 
     public override FileType FileType => FileType.SecurityOperationResolver;
 
-    public override CodeTypeReference BaseReference => typeof(ISecurityOperationResolver<>)
-                                                       .MakeGenericType(this.Configuration.Environment.PersistentDomainObjectBaseType)
+    public override CodeTypeReference BaseReference => typeof(ISecurityOperationResolver)
                                                        .ToTypeReference();
 
     protected override CodeTypeDeclaration GetCodeTypeDeclaration()

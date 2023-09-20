@@ -6,25 +6,23 @@ using Framework.QueryableSource;
 
 namespace Framework.HierarchicalExpand;
 
-public class HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, TIdent> : IHierarchicalObjectExpanderFactory<TIdent>
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+public class HierarchicalObjectExpanderFactory<TIdent> : IHierarchicalObjectExpanderFactory<TIdent>
         where TIdent : struct
 {
     private readonly IQueryableSource queryableSource;
 
     private readonly IRealTypeResolver realTypeResolver;
 
-    private static readonly MethodInfo GenericCreateMethod = typeof(HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, TIdent>).GetMethod(nameof(Create), BindingFlags.Public | BindingFlags.Instance, true);
+    private static readonly MethodInfo GenericCreateMethod = typeof(HierarchicalObjectExpanderFactory<TIdent>).GetMethod(nameof(Create), BindingFlags.Public | BindingFlags.Instance, true);
 
-    private static readonly MethodInfo GenericQueryCreateMethod = typeof(HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, TIdent>).GetMethod(nameof(CreateQuery), BindingFlags.Public | BindingFlags.Instance, true);
+    private static readonly MethodInfo GenericQueryCreateMethod = typeof(HierarchicalObjectExpanderFactory<TIdent>).GetMethod(nameof(CreateQuery), BindingFlags.Public | BindingFlags.Instance, true);
 
-    private static readonly MethodInfo GenericCreateHierarchicalMethod = typeof(HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, TIdent>).GetMethod(nameof(CreateHierarchical), BindingFlags.NonPublic | BindingFlags.Instance, true);
+    private static readonly MethodInfo GenericCreateHierarchicalMethod = typeof(HierarchicalObjectExpanderFactory<TIdent>).GetMethod(nameof(CreateHierarchical), BindingFlags.NonPublic | BindingFlags.Instance, true);
 
-    private static readonly MethodInfo GenericCreateHierarchicalWithAncestorLinkMethod = typeof(HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, TIdent>).GetMethod(nameof(CreateHierarchicalWithAncestorLink), BindingFlags.NonPublic | BindingFlags.Instance, true);
+    private static readonly MethodInfo GenericCreateHierarchicalWithAncestorLinkMethod = typeof(HierarchicalObjectExpanderFactory<TIdent>).GetMethod(nameof(CreateHierarchicalWithAncestorLink), BindingFlags.NonPublic | BindingFlags.Instance, true);
 
 
-    public HierarchicalObjectExpanderFactory(IQueryableSource queryableSource,
-                                             IRealTypeResolver realTypeResolver)
+    public HierarchicalObjectExpanderFactory(IQueryableSource queryableSource, IRealTypeResolver realTypeResolver)
     {
         this.queryableSource = queryableSource ?? throw new ArgumentNullException(nameof(queryableSource));
         this.realTypeResolver = realTypeResolver ?? throw new ArgumentNullException(nameof(realTypeResolver));
@@ -32,7 +30,7 @@ public class HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, TIde
 
 
     public virtual IHierarchicalObjectExpander<TIdent> Create<TDomainObject>()
-            where TDomainObject : class, TPersistentDomainObjectBase
+            where TDomainObject : class, IIdentityObject<TIdent>
     {
         var realType = this.realTypeResolver.Resolve(typeof(TDomainObject));
 
@@ -61,39 +59,34 @@ public class HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, TIde
 
 
     public virtual IHierarchicalObjectQueryableExpander<TIdent> CreateQuery<TDomainObject>()
-            where TDomainObject : class, TPersistentDomainObjectBase
+            where TDomainObject : class, IIdentityObject<TIdent>
     {
         return (IHierarchicalObjectQueryableExpander<TIdent>)this.Create<TDomainObject>();
     }
 
     protected virtual IHierarchicalObjectExpander<TIdent> CreatePlain<TDomainObject>()
-            where TDomainObject : class, TPersistentDomainObjectBase
+            where TDomainObject : class, IIdentityObject<TIdent>
     {
         return new PlainHierarchicalObjectExpander<TIdent>();
     }
 
     protected virtual IHierarchicalObjectExpander<TIdent> CreateHierarchical<TDomainObject>()
-            where TDomainObject : class, TPersistentDomainObjectBase, IHierarchicalPersistentDomainObjectBase<TDomainObject, TIdent>
+            where TDomainObject : class, IHierarchicalPersistentDomainObjectBase<TDomainObject, TIdent>
     {
-        return new HierarchicalObjectLayerExpander<TPersistentDomainObjectBase, TDomainObject, TIdent>(this.queryableSource);
+        return new HierarchicalObjectLayerExpander<TDomainObject, TIdent>(this.queryableSource);
     }
 
     protected virtual IHierarchicalObjectExpander<TIdent> CreateHierarchicalWithAncestorLink<TDomainObject, TDomainObjectAncestorLink, TDomainObjectAncestorChildLink>()
-            where TDomainObject : class, TPersistentDomainObjectBase, IHierarchicalPersistentDomainObjectBase<TDomainObject, TIdent>
-            where TDomainObjectAncestorLink : class, TPersistentDomainObjectBase, IHierarchicalAncestorLink<TDomainObject, TDomainObjectAncestorChildLink, TIdent>
-            where TDomainObjectAncestorChildLink : class, TPersistentDomainObjectBase, IHierarchicalToAncestorOrChildLink<TDomainObject, TIdent>
+            where TDomainObject : class, IHierarchicalPersistentDomainObjectBase<TDomainObject, TIdent>
+            where TDomainObjectAncestorLink : class, IHierarchicalAncestorLink<TDomainObject, TDomainObjectAncestorChildLink, TIdent>
+            where TDomainObjectAncestorChildLink : class, IHierarchicalToAncestorOrChildLink<TDomainObject, TIdent>
     {
-        return new HierarchicalObjectAncestorLinkExpander<TPersistentDomainObjectBase, TDomainObject, TDomainObjectAncestorLink, TDomainObjectAncestorChildLink, TIdent>(this.queryableSource);
+        return new HierarchicalObjectAncestorLinkExpander<TDomainObject, TDomainObjectAncestorLink, TDomainObjectAncestorChildLink, TIdent>(this.queryableSource);
     }
 
     IHierarchicalObjectExpander<TIdent> IHierarchicalObjectExpanderFactory<TIdent>.Create(Type domainType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-
-        if (!typeof(TPersistentDomainObjectBase).IsAssignableFrom(domainType))
-        {
-            throw new InvalidOperationException($"Domain Type {domainType.Name} must be derived from {typeof(TPersistentDomainObjectBase).Name}");
-        }
 
         return (IHierarchicalObjectExpander<TIdent>)GenericCreateMethod.MakeGenericMethod(domainType).Invoke(this, Array.Empty<object>());
     }
@@ -101,11 +94,6 @@ public class HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, TIde
     IHierarchicalObjectQueryableExpander<TIdent> IHierarchicalObjectExpanderFactory<TIdent>.CreateQuery(Type domainType)
     {
         if (domainType == null) throw new ArgumentNullException(nameof(domainType));
-
-        if (!typeof(TPersistentDomainObjectBase).IsAssignableFrom(domainType))
-        {
-            throw new InvalidOperationException($"Domain Type {domainType.Name} must be derived from {typeof(TPersistentDomainObjectBase).Name}");
-        }
 
         return (IHierarchicalObjectQueryableExpander<TIdent>)GenericQueryCreateMethod.MakeGenericMethod(domainType).Invoke(this, Array.Empty<object>());
     }

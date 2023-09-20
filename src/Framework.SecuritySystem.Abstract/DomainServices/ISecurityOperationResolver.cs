@@ -13,5 +13,5 @@ public static class SecurityOperationResolverExtensions
         this ISecurityOperationResolver resolver,
         BLLSecurityMode securityMode) =>
         resolver.TryGetSecurityOperation<TDomainObject>(securityMode)
-        ?? throw new Exception($"SecurityOperation with mode {securityMode} not founded for type {typeof(TDomainObject).Name}");
+        ?? throw new Exception($"SecurityOperation with mode '{securityMode}' not found for type '{typeof(TDomainObject).Name}'");
 }

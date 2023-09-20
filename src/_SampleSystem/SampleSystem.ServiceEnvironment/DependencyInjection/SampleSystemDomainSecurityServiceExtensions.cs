@@ -152,6 +152,11 @@ public static class SampleSystemDomainSecurityServiceExtensions
                             .SetEdit(SampleSystemSecurityOperation.LocationEdit))
 
                   .Add<TestCustomContextSecurityObj>(b => b.SetCustomService<SampleSystemTestCustomContextSecurityObjSecurityService>())
+
+                  .Add<TestSecurityObjItem>(b => b.SetDependency(v => v.FirstMaster))
+                  .Add<TestSecuritySubObjItem>(b => b.SetDependency(v => v.InnerMaster))
+                  .Add<TestSecuritySubObjItem2>(b => b.SetDependency(v => v.RootSecurityObj))
+                  .Add<TestSecuritySubObjItem3>(b => b.SetDependency(v => v.InnerMaster.FirstMaster))
             );
     }
 

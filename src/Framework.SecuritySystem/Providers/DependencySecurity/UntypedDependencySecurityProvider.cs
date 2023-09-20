@@ -4,18 +4,17 @@ using Framework.QueryableSource;
 
 namespace Framework.SecuritySystem
 {
-    public class UntypedDependencySecurityProvider<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent> : ISecurityProvider<TDomainObject>
-        where TDomainObject : class, TPersistentDomainObjectBase
-        where TBaseDomainObject : class, TPersistentDomainObjectBase
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+    public class UntypedDependencySecurityProvider<TDomainObject, TBaseDomainObject, TIdent> : ISecurityProvider<TDomainObject>
+        where TDomainObject : class, IIdentityObject<TIdent>
+        where TBaseDomainObject : class, IIdentityObject<TIdent>
     {
         private readonly ISecurityProvider<TBaseDomainObject> baseSecurityProvider;
 
-        private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
+        private readonly IQueryableSource queryableSource;
 
         private readonly Lazy<HashSet<TIdent>> lazyAvailableIdents;
 
-        public UntypedDependencySecurityProvider(ISecurityProvider<TBaseDomainObject> baseSecurityProvider, IQueryableSource<TPersistentDomainObjectBase> queryableSource)
+        public UntypedDependencySecurityProvider(ISecurityProvider<TBaseDomainObject> baseSecurityProvider, IQueryableSource queryableSource)
         {
             this.baseSecurityProvider = baseSecurityProvider;
             this.queryableSource = queryableSource;

@@ -13,9 +13,9 @@ public class HierarchicalObjectAncestorLinkExpander<TPersistentDomainObjectBase,
         where TDomainObjectAncestorChildLink : class, TPersistentDomainObjectBase, IHierarchicalToAncestorOrChildLink<TDomainObject, TIdent>
         where TIdent : struct
 {
-    private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
+    private readonly IQueryableSource queryableSource;
 
-    public HierarchicalObjectAncestorLinkExpander(IQueryableSource<TPersistentDomainObjectBase> queryableSource)
+    public HierarchicalObjectAncestorLinkExpander(IQueryableSource queryableSource)
     {
         this.queryableSource = queryableSource ?? throw new ArgumentNullException(nameof(queryableSource));
     }

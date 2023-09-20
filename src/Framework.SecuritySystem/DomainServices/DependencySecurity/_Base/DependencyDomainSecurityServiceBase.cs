@@ -1,14 +1,8 @@
-﻿using Framework.Persistent;
+﻿namespace Framework.SecuritySystem;
 
-namespace Framework.SecuritySystem;
+public abstract class DependencyDomainSecurityServiceBase<TDomainObject, TBaseDomainObject> :
 
-public abstract class DependencyDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent> :
-
-    DomainSecurityService<TPersistentDomainObjectBase, TDomainObject>
-
-    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-    where TDomainObject : class, TPersistentDomainObjectBase
-    where TBaseDomainObject : class, TPersistentDomainObjectBase
+    DomainSecurityService<TDomainObject>
 {
     private readonly IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService;
 

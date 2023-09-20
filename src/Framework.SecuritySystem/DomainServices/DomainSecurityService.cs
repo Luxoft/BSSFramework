@@ -2,11 +2,8 @@
 
 namespace Framework.SecuritySystem;
 
-public abstract class DomainSecurityService<TPersistentDomainObjectBase, TDomainObject> : IDomainSecurityService<TDomainObject>
-        where TDomainObject : TPersistentDomainObjectBase
+public abstract class DomainSecurityService<TDomainObject> : IDomainSecurityService<TDomainObject>
 {
-    private readonly IDisabledSecurityProviderSource disabledSecurityProviderSource;
-
     private readonly ISecurityOperationResolver securityOperationResolver;
 
     private readonly IDictionaryCache<BLLSecurityMode, ISecurityProvider<TDomainObject>> modeProvidersCache;
@@ -17,7 +14,6 @@ public abstract class DomainSecurityService<TPersistentDomainObjectBase, TDomain
     protected DomainSecurityService(IDisabledSecurityProviderSource disabledSecurityProviderSource,
                                     ISecurityOperationResolver securityOperationResolver)
     {
-        this.disabledSecurityProviderSource = disabledSecurityProviderSource;
         this.securityOperationResolver = securityOperationResolver ?? throw new ArgumentNullException(nameof(securityOperationResolver));
 
         this.operationsProvidersCache = new DictionaryCache<SecurityOperation, ISecurityProvider<TDomainObject>>(securityOperation =>

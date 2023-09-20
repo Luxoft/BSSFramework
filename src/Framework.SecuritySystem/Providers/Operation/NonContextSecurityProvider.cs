@@ -19,11 +19,8 @@ namespace Framework.SecuritySystem
             NonContextSecurityOperation securityOperation,
             IAuthorizationSystem<TIdent> authorizationSystem)
         {
-            if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
-            if (authorizationSystem == null) throw new ArgumentNullException(nameof(authorizationSystem));
-
-            this.securityOperation = securityOperation;
-            this.authorizationSystem = authorizationSystem;
+            this.securityOperation = securityOperation ?? throw new ArgumentNullException(nameof(securityOperation));
+            this.authorizationSystem = authorizationSystem ?? throw new ArgumentNullException(nameof(authorizationSystem));
         }
 
 

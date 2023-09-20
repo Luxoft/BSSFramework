@@ -7,14 +7,8 @@ namespace Framework.SecuritySystem.Providers.Operation
     /// <summary>
     /// Контекстный провайдер доступа
     /// </summary>
-
-    /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
     /// <typeparam name="TDomainObject"></typeparam>
-    /// <typeparam name="TIdent"></typeparam>
-    public class ContextSecurityPathProvider<TPersistentDomainObjectBase, TDomainObject, TIdent> : ISecurityProvider<TDomainObject>
-
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase
+    public class ContextSecurityPathProvider<TDomainObject> : ISecurityProvider<TDomainObject>
     {
         private readonly ContextSecurityOperation securityOperation;
 
@@ -22,13 +16,13 @@ namespace Framework.SecuritySystem.Providers.Operation
 
         private readonly Lazy<ISecurityExpressionFilter<TDomainObject>> lazyFilter;
 
-        private readonly ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> securityExpressionBuilder;
+        private readonly ISecurityExpressionBuilder<TDomainObject> securityExpressionBuilder;
 
 
         public ContextSecurityPathProvider(
             SecurityPath<TDomainObject> securityPathBase,
             ContextSecurityOperation securityOperation,
-            ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
+            ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
         {
             if (securityPathBase == null) throw new ArgumentNullException(nameof(securityPathBase));
             if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));

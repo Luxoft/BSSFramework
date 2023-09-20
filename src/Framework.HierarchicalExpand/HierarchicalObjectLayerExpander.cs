@@ -8,9 +8,9 @@ public class HierarchicalObjectLayerExpander<TPersistentDomainObjectBase, TDomai
         where TDomainObject : class, TPersistentDomainObjectBase, IHierarchicalPersistentDomainObjectBase<TDomainObject, TIdent>
         where TIdent : struct
 {
-    private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
+    private readonly IQueryableSource queryableSource;
 
-    public HierarchicalObjectLayerExpander(IQueryableSource<TPersistentDomainObjectBase> queryableSource)
+    public HierarchicalObjectLayerExpander(IQueryableSource queryableSource)
     {
         this.queryableSource = queryableSource ?? throw new ArgumentNullException(nameof(queryableSource));
     }

@@ -1,11 +1,6 @@
-﻿using Framework.Persistent;
+﻿namespace Framework.SecuritySystem.Rules.Builders.Mixed;
 
-namespace Framework.SecuritySystem.Rules.Builders.Mixed;
-
-public class SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject, TIdent> : ISecurityExpressionFilter<TDomainObject>
-
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase
+public class SecurityExpressionFilter<TDomainObject> : ISecurityExpressionFilter<TDomainObject>
 {
     private readonly ISecurityExpressionFilter<TDomainObject> hasAccessFilter;
 

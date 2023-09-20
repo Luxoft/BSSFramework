@@ -10,7 +10,7 @@ public class HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, TIde
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TIdent : struct
 {
-    private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
+    private readonly IQueryableSource queryableSource;
 
     private readonly IRealTypeResolver realTypeResolver;
 
@@ -23,7 +23,7 @@ public class HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, TIde
     private static readonly MethodInfo GenericCreateHierarchicalWithAncestorLinkMethod = typeof(HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, TIdent>).GetMethod(nameof(CreateHierarchicalWithAncestorLink), BindingFlags.NonPublic | BindingFlags.Instance, true);
 
 
-    public HierarchicalObjectExpanderFactory(IQueryableSource<TPersistentDomainObjectBase> queryableSource,
+    public HierarchicalObjectExpanderFactory(IQueryableSource queryableSource,
                                              IRealTypeResolver realTypeResolver)
     {
         this.queryableSource = queryableSource ?? throw new ArgumentNullException(nameof(queryableSource));

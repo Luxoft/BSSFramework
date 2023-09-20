@@ -15,6 +15,7 @@ public class SampleSystemTestCustomContextSecurityObjSecurityService : ContextDo
         : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
     {
     }
+
     protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(ContextSecurityOperation securityOperation)
     {
         return new AccessDeniedSecurityProvider<TestCustomContextSecurityObj>();

@@ -125,7 +125,7 @@ public static class ServiceCollectionExtensions
         {
             services.AddScoped(
                 typeof(IDomainSecurityService<>).MakeGenericType(pair.DomainType),
-                typeof(DependencyDomainSecurityService<,>).MakeGenericType(pair.DomainType, pair.SourceType));
+                typeof(UntypedDependencyDomainSecurityService<,,>).MakeGenericType(pair.DomainType, pair.SourceType, typeof(Guid)));
 
             if (pair.CustomViewSecurityOperation != null)
             {

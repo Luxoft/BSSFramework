@@ -10,6 +10,7 @@ public static class SampleSystemGeneralDependencyInjectionExtensions
         return services
                .RegisterGeneralBssFramework()
                .RegisterGeneralDatabaseSettings(configuration)
-               .RegisterGeneralApplicationServices(configuration);
+               .RegisterGeneralApplicationServices(configuration)
+               .RegisterDomainSecurityServices();
     }
 }

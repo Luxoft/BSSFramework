@@ -30,14 +30,7 @@ public static class SampleSystemDomainSecurityServiceExtensions
 
             rb =>
 
-                rb.Add<Employee>(
-                      b =>
-                          b.SetView(SampleSystemSecurityOperation.EmployeeView)
-                           .SetEdit(SampleSystemSecurityOperation.EmployeeEdit)
-                           .SetPath(
-                               SecurityPath<Employee>.Create(employee => employee).And(employee => employee.CoreBusinessUnit)
-                                                     .And(employee => employee.Location))
-                           .SetCustomService<SampleSystemEmployeeSecurityService>())
+                rb.AddEmployee()
 
                   .Add<BusinessUnit>(
                       b => b.SetView(SampleSystemSecurityOperation.BusinessUnitView)

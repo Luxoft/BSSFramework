@@ -27,6 +27,9 @@ public interface IDomainSecurityServiceBuilder<TDomainObject, in TIdent>
 
     IDomainSecurityServiceBuilder<TDomainObject, TIdent> SetCustomService<TDomainSecurityService>()
         where TDomainSecurityService : IDomainSecurityService<TDomainObject>;
+
+    IDomainSecurityServiceBuilder<TDomainObject, TIdent> Override<TSecurityFunctor>()
+        where TSecurityFunctor : IOverrideSecurityFunctor<TDomainObject>;
 }
 
 public interface IDomainSecurityServiceBuilder

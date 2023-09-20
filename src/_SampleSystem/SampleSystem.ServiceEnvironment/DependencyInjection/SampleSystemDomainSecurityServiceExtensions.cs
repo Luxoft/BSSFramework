@@ -9,6 +9,7 @@ using SampleSystem.Domain.Projections;
 
 using Framework.SecuritySystem.DependencyInjection;
 using SampleSystem.Domain.EnversBug1676;
+using SampleSystem.Domain.ManualProjections;
 
 namespace SampleSystem.ServiceEnvironment;
 
@@ -19,7 +20,8 @@ public static class SampleSystemDomainSecurityServiceExtensions
         return services.RegisterMainDomainSecurityServices()
                        .RegisterDisabledDomainSecurityServices()
                        .RegisterLegacyProjectionDomainSecurityServices()
-                       .RegisterProjectionDomainSecurityServices(typeof(TestBusinessUnit).Assembly);
+                       .RegisterProjectionDomainSecurityServices(typeof(TestBusinessUnit).Assembly)
+                       .RegisterProjectionDomainSecurityServices(typeof(TestManualEmployeeProjection).Assembly);
     }
 
     private static IServiceCollection RegisterMainDomainSecurityServices(this IServiceCollection services)

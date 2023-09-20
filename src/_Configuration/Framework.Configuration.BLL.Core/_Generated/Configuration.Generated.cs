@@ -11,23 +11,6 @@ namespace Framework.Configuration.BLL
 {
     
     
-    #region 
-	static
-    public class ConfigurationSecurityOperationHelper
-    {
-        
-        public static void RegisterDomainObjectSecurityOperations(Microsoft.Extensions.DependencyInjection.IServiceCollection services)
-        {
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Configuration.Domain.CodeFirstSubscription), Framework.Configuration.ConfigurationSecurityOperation.SubscriptionView, Framework.Configuration.ConfigurationSecurityOperation.SubscriptionEdit));
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Configuration.Domain.DomainType), Framework.Configuration.ConfigurationSecurityOperation.Disabled, null));
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Configuration.Domain.ExceptionMessage), Framework.Configuration.ConfigurationSecurityOperation.ExceptionMessageView, null));
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Configuration.Domain.Sequence), Framework.Configuration.ConfigurationSecurityOperation.SequenceView, Framework.Configuration.ConfigurationSecurityOperation.SequenceEdit));
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Configuration.Domain.SystemConstant), Framework.Configuration.ConfigurationSecurityOperation.SystemConstantView, Framework.Configuration.ConfigurationSecurityOperation.SystemConstantEdit));
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Configuration.Domain.TargetSystem), Framework.Configuration.ConfigurationSecurityOperation.TargetSystemView, Framework.Configuration.ConfigurationSecurityOperation.TargetSystemEdit));
-        }
-    }
-    #endregion
-    
     public partial class ConfigurationBLLContext : Framework.DomainDriven.BLL.Security.SecurityBLLBaseContext<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid, Framework.Configuration.BLL.IConfigurationBLLFactoryContainer>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>>>, Framework.Configuration.BLL.IConfigurationBLLContext
     {
         
@@ -105,96 +88,6 @@ namespace Framework.Configuration.BLL
         
         public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityOperation) : 
                 base(context, securityOperation)
-        {
-        }
-    }
-    
-    public partial class ConfigurationSecurityService : Framework.Configuration.BLL.ConfigurationSecurityServiceBase, Framework.Configuration.BLL.IConfigurationSecurityService
-    {
-        
-        public ConfigurationSecurityService(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
-                base(context)
-        {
-        }
-    }
-    
-    public abstract partial class ConfigurationSecurityServiceBase : Framework.DomainDriven.BLL.Security.RootSecurityService<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase>
-    {
-        
-        protected ConfigurationSecurityServiceBase(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
-                base(context)
-        {
-        }
-        
-        public static void Register(Microsoft.Extensions.DependencyInjection.IServiceCollection services)
-        {
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.CodeFirstSubscription>, Framework.Configuration.BLL.ConfigurationCodeFirstSubscriptionSecurityService>(services);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.DomainType>, Framework.Configuration.BLL.ConfigurationDomainTypeSecurityService>(services);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.ExceptionMessage>, Framework.Configuration.BLL.ConfigurationExceptionMessageSecurityService>(services);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Sequence>, Framework.Configuration.BLL.ConfigurationSequenceSecurityService>(services);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.SystemConstant>, Framework.Configuration.BLL.ConfigurationSystemConstantSecurityService>(services);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.TargetSystem>, Framework.Configuration.BLL.ConfigurationTargetSystemSecurityService>(services);
-        }
-    }
-    
-    public partial interface IConfigurationSecurityService : Framework.DomainDriven.BLL.Security.IRootSecurityService<Framework.Configuration.Domain.PersistentDomainObjectBase>, Framework.Configuration.BLL.IConfigurationSecurityPathContainer
-    {
-    }
-    
-    public partial interface IConfigurationSecurityPathContainer
-    {
-    }
-    
-    public partial class ConfigurationCodeFirstSubscriptionSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.CodeFirstSubscription, System.Guid>
-    {
-        
-        public ConfigurationCodeFirstSubscriptionSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class ConfigurationDomainTypeSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.DomainType, System.Guid>
-    {
-        
-        public ConfigurationDomainTypeSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class ConfigurationExceptionMessageSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.ExceptionMessage, System.Guid>
-    {
-        
-        public ConfigurationExceptionMessageSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class ConfigurationSequenceSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.Sequence, System.Guid>
-    {
-        
-        public ConfigurationSequenceSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class ConfigurationSystemConstantSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.SystemConstant, System.Guid>
-    {
-        
-        public ConfigurationSystemConstantSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
-        {
-        }
-    }
-    
-    public partial class ConfigurationTargetSystemSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.TargetSystem, System.Guid>
-    {
-        
-        public ConfigurationTargetSystemSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
@@ -401,5 +294,112 @@ namespace Framework.Configuration.BLL
     
     public partial interface ITargetSystemBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ITargetSystemBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.TargetSystem>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ITargetSystemBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ITargetSystemBLL, Framework.SecuritySystem.BLLSecurityMode>
     {
+    }
+    
+    #region 
+	static
+    public class ConfigurationSecurityOperationHelper
+    {
+        
+        public static void RegisterDomainObjectSecurityOperations(Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+        {
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Configuration.Domain.CodeFirstSubscription), Framework.Configuration.ConfigurationSecurityOperation.SubscriptionView, Framework.Configuration.ConfigurationSecurityOperation.SubscriptionEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Configuration.Domain.DomainType), Framework.Configuration.ConfigurationSecurityOperation.Disabled, null));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Configuration.Domain.ExceptionMessage), Framework.Configuration.ConfigurationSecurityOperation.ExceptionMessageView, null));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Configuration.Domain.Sequence), Framework.Configuration.ConfigurationSecurityOperation.SequenceView, Framework.Configuration.ConfigurationSecurityOperation.SequenceEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Configuration.Domain.SystemConstant), Framework.Configuration.ConfigurationSecurityOperation.SystemConstantView, Framework.Configuration.ConfigurationSecurityOperation.SystemConstantEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Configuration.Domain.TargetSystem), Framework.Configuration.ConfigurationSecurityOperation.TargetSystemView, Framework.Configuration.ConfigurationSecurityOperation.TargetSystemEdit));
+        }
+    }
+    #endregion
+    
+    public partial class ConfigurationSecurityService : Framework.Configuration.BLL.ConfigurationSecurityServiceBase, Framework.Configuration.BLL.IConfigurationSecurityService
+    {
+        
+        public ConfigurationSecurityService(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
+                base(context)
+        {
+        }
+    }
+    
+    public abstract partial class ConfigurationSecurityServiceBase : Framework.DomainDriven.BLL.Security.RootSecurityService<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase>
+    {
+        
+        protected ConfigurationSecurityServiceBase(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
+                base(context)
+        {
+        }
+        
+        public static void Register(Microsoft.Extensions.DependencyInjection.IServiceCollection services)
+        {
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.CodeFirstSubscription>, Framework.Configuration.BLL.ConfigurationCodeFirstSubscriptionSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.DomainType>, Framework.Configuration.BLL.ConfigurationDomainTypeSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.ExceptionMessage>, Framework.Configuration.BLL.ConfigurationExceptionMessageSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Sequence>, Framework.Configuration.BLL.ConfigurationSequenceSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.SystemConstant>, Framework.Configuration.BLL.ConfigurationSystemConstantSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.TargetSystem>, Framework.Configuration.BLL.ConfigurationTargetSystemSecurityService>(services);
+        }
+    }
+    
+    public partial interface IConfigurationSecurityService : Framework.DomainDriven.BLL.Security.IRootSecurityService<Framework.Configuration.Domain.PersistentDomainObjectBase>, Framework.Configuration.BLL.IConfigurationSecurityPathContainer
+    {
+    }
+    
+    public partial interface IConfigurationSecurityPathContainer
+    {
+    }
+    
+    public partial class ConfigurationCodeFirstSubscriptionSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.CodeFirstSubscription, System.Guid>
+    {
+        
+        public ConfigurationCodeFirstSubscriptionSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
+        {
+        }
+    }
+    
+    public partial class ConfigurationDomainTypeSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.DomainType, System.Guid>
+    {
+        
+        public ConfigurationDomainTypeSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
+        {
+        }
+    }
+    
+    public partial class ConfigurationExceptionMessageSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.ExceptionMessage, System.Guid>
+    {
+        
+        public ConfigurationExceptionMessageSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
+        {
+        }
+    }
+    
+    public partial class ConfigurationSequenceSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.Sequence, System.Guid>
+    {
+        
+        public ConfigurationSequenceSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
+        {
+        }
+    }
+    
+    public partial class ConfigurationSystemConstantSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.SystemConstant, System.Guid>
+    {
+        
+        public ConfigurationSystemConstantSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
+        {
+        }
+    }
+    
+    public partial class ConfigurationTargetSystemSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Configuration.Domain.TargetSystem, System.Guid>
+    {
+        
+        public ConfigurationTargetSystemSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
+        {
+        }
     }
 }

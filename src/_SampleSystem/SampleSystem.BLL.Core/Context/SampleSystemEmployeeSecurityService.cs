@@ -2,9 +2,11 @@
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Rules.Builders;
 
+using SampleSystem.Domain;
+
 namespace SampleSystem.BLL;
 
-public class SampleSystemEmployeeSecurityService : ContextDomainSecurityService<PersistentDomainObjectBase, Employee, Guid>
+public class SampleSystemEmployeeSecurityService : ContextDomainSecurityService<Employee, Guid>
 {
     private readonly IRunAsManager runAsManager;
 
@@ -12,15 +14,14 @@ public class SampleSystemEmployeeSecurityService : ContextDomainSecurityService<
             IDisabledSecurityProviderSource disabledSecurityProviderSource,
             ISecurityOperationResolver securityOperationResolver,
             IAuthorizationSystem<Guid> authorizationSystem,
-            ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
+            ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
+            SecurityPath<Employee> securityPath,
+            IRunAsManager runAsManager)
 
-            : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetEmployeeSecurityPath<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>())
+            : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPath)
     {
         this.runAsManager = runAsManager;
     }
-
-    protected override SecurityPath<Employee> GetSecurityPath() => SecurityPath<Employee>.Create(employee => employee)
-        .And(employee => employee.CoreBusinessUnit).And(employee => employee.Location);
 
     protected override ISecurityProvider<Employee> CreateSecurityProvider(ContextSecurityOperation securityOperation)
     {

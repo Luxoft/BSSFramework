@@ -4,6 +4,7 @@ using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
 using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
+using Framework.DomainDriven.ServiceModel.IAD.DomainServiceBuilder;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.QueryableSource;
@@ -93,6 +94,8 @@ public static class ServiceCollectionExtensions
         var builder = new AuthorizationSystemRootDomainServiceBuilder();
 
         setupAction(builder);
+
+        builder.Register(services);
 
         return services;
     }

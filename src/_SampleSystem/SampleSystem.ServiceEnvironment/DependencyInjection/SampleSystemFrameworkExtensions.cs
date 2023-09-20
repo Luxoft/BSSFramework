@@ -171,6 +171,7 @@ public static class SampleSystemFrameworkExtensions
                       b =>
                           b.SetView(SampleSystemSecurityOperation.EmployeeView)
                             .SetEdit(SampleSystemSecurityOperation.EmployeeEdit)
+                            .SetPath(SecurityPath<Employee>.Create(employee => employee).And(employee => employee.CoreBusinessUnit).And(employee => employee.Location))
                             .SetCustomService<SampleSystemEmployeeSecurityService>())
 
                   .Add<BusinessUnit>(

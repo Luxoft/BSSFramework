@@ -5,20 +5,18 @@ using SampleSystem.Domain;
 
 namespace SampleSystem.BLL;
 
-public partial class SampleSystemTestCustomContextSecurityObjSecurityService : ContextDomainSecurityServiceBase<
-    PersistentDomainObjectBase, TestCustomContextSecurityObj, Guid>
+public class SampleSystemTestCustomContextSecurityObjSecurityService : ContextDomainSecurityServiceBase<TestCustomContextSecurityObj, Guid>
 {
-    protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(ContextSecurityOperation securityOperation)
-    {
-        return new ConstSecurityProvider<TestCustomContextSecurityObj>(false);
-    }
-
     public SampleSystemTestCustomContextSecurityObjSecurityService(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
-        ISecurityOperationResolver<PersistentDomainObjectBase> securityOperationResolver,
+        ISecurityOperationResolver securityOperationResolver,
         IAuthorizationSystem<Guid> authorizationSystem,
-        ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory)
+        ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
         : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
     {
+    }
+    protected override ISecurityProvider<TestCustomContextSecurityObj> CreateSecurityProvider(ContextSecurityOperation securityOperation)
+    {
+        return new AccessDeniedSecurityProvider<TestCustomContextSecurityObj>();
     }
 }

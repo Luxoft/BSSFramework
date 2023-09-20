@@ -1,14 +1,17 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Framework.Persistent;
+
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.ServiceModel.IAD.DomainServiceBuilder;
 
-public class AuthorizationSystemRootDomainServiceBuilder : IAuthorizationSystemRootDomainServiceBuilder
+public class AuthorizationSystemRootDomainServiceBuilder<TIdent> : IAuthorizationSystemRootDomainServiceBuilder<TIdent>
 {
     private readonly List<IAuthorizationSystemDomainServiceBuilder> domainBuilders = new ();
 
-    public IAuthorizationSystemRootDomainServiceBuilder Add<TDomainObject>(Action<IAuthorizationSystemDomainServiceBuilder<TDomainObject>> setup)
+    public IAuthorizationSystemRootDomainServiceBuilder<TIdent> Add<TDomainObject>(Action<IAuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent>> setup)
+        where TDomainObject : IIdentityObject<TIdent>
     {
-        var builder = new AuthorizationSystemDomainServiceBuilder<TDomainObject>();
+        var builder = new AuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent>();
 
         setup(builder);
 

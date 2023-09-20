@@ -163,7 +163,7 @@ public static class SampleSystemFrameworkExtensions
 
     private static IServiceCollection RegisterDomainServices(this IServiceCollection services)
     {
-        return services.RegisterAuthorizationSystemDomainServices(
+        return services.RegisterAuthorizationSystemDomainServices<Guid>(
 
             rb =>
 
@@ -285,7 +285,7 @@ public static class SampleSystemFrameworkExtensions
 
     private static IServiceCollection RegisterLegacyProjectionDomainServices(this IServiceCollection services)
     {
-        return services.RegisterAuthorizationSystemDomainServices(
+        return services.RegisterAuthorizationSystemDomainServices<Guid>(
 
             rb =>
 

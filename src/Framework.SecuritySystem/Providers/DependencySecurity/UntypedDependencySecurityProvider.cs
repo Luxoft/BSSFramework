@@ -5,7 +5,7 @@ using Framework.QueryableSource;
 namespace Framework.SecuritySystem
 {
     public class UntypedDependencySecurityProvider<TDomainObject, TBaseDomainObject, TIdent> : ISecurityProvider<TDomainObject>
-        where TDomainObject : class, IIdentityObject<TIdent>
+        where TDomainObject : IIdentityObject<TIdent>
         where TBaseDomainObject : class, IIdentityObject<TIdent>
     {
         private readonly ISecurityProvider<TBaseDomainObject> baseSecurityProvider;
@@ -46,7 +46,10 @@ namespace Framework.SecuritySystem
 
         private TBaseDomainObject GetBaseObject(TDomainObject domainObject)
         {
-            return this.queryableSource.GetQueryable<TBaseDomainObject>().SingleOrDefault(v => v.Id.Equals(domainObject.Id)).FromMaybe(() => $"Object with id = '{domainObject.Id}' not found");
+            return this.queryableSource
+                       .GetQueryable<TBaseDomainObject>()
+                       .SingleOrDefault(v => v.Id.Equals(domainObject.Id))
+                       .FromMaybe(() => $"Object with id = '{domainObject.Id}' not found");
         }
 
         protected virtual IQueryable<TIdent> GetAvailableIdents()

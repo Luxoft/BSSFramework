@@ -1,12 +1,14 @@
 ﻿using System.Linq.Expressions;
 
+using Framework.Persistent;
 using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.ServiceModel.IAD.DomainServiceBuilder;
 
-public class AuthorizationSystemDomainServiceBuilder<TDomainObject> : IAuthorizationSystemDomainServiceBuilder<TDomainObject>, IAuthorizationSystemDomainServiceBuilder
+public class AuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent> : IAuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent>, IAuthorizationSystemDomainServiceBuilder
+    where TDomainObject : IIdentityObject<TIdent>
 {
     public SecurityOperation ViewSecurityOperation { get; private set; }
 
@@ -14,11 +16,11 @@ public class AuthorizationSystemDomainServiceBuilder<TDomainObject> : IAuthoriza
 
     public SecurityPath<TDomainObject> SecurityPath { get; private set; }
 
-    public Type DependencySourceType { get; private set; }
-
     public object DependencySourcePath { get; private set; }
 
     public Type CustomServiceType { get; private set; }
+
+    public Type DependencyServiceType { get; private set; }
 
 
     public void Register(IServiceCollection services)
@@ -33,7 +35,12 @@ public class AuthorizationSystemDomainServiceBuilder<TDomainObject> : IAuthoriza
             services.AddSingleton(this.SecurityPath);
         }
 
-        services.AddScoped(typeof(IDomainSecurityService<TDomainObject>), this.GetDomainServiceType());
+        if (this.DependencySourcePath != null)
+        {
+            services.AddSingleton(this.DependencySourcePath.GetType(), this.DependencySourcePath);
+        }
+
+        services.AddScoped(typeof(IDomainSecurityService<TDomainObject>), sp => ActivatorUtilities.CreateInstance(sp, this.GetDomainServiceType()));
     }
 
     private Type GetDomainServiceType()
@@ -42,64 +49,58 @@ public class AuthorizationSystemDomainServiceBuilder<TDomainObject> : IAuthoriza
         {
             return this.CustomServiceType;
         }
-        else if (this.DependencySourceType != null)
+        else if (this.DependencyServiceType != null)
         {
-            if (this.DependencySourcePath == null)
-            {
-                return typeof(UntypedDependencyDomainSecurityService<,,>).MakeGenericType(typeof(TDomainObject), this.DependencySourceType, typeof(Guid));
-            }
-            else
-            {
-                return typeof(DependencyDomainSecurityService<,>).MakeGenericType(typeof(TDomainObject), this.DependencySourceType);
-            }
+            return this.DependencyServiceType;
         }
         else if (this.SecurityPath != null)
         {
-            return typeof(ContextDomainSecurityService<,>).MakeGenericType(typeof(TDomainObject), typeof(Guid));
+            return typeof(ContextDomainSecurityService<TDomainObject, TIdent>);
         }
         else
         {
-            return typeof(NonContextDomainSecurityService<,>).MakeGenericType(typeof(TDomainObject), typeof(Guid));
+            return typeof(NonContextDomainSecurityService<TDomainObject, TIdent>);
         }
     }
 
-    public IAuthorizationSystemDomainServiceBuilder<TDomainObject> SetView(SecurityOperation securityOperation)
+    public IAuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent> SetView(SecurityOperation securityOperation)
     {
         this.ViewSecurityOperation = securityOperation;
 
         return this;
     }
 
-    public IAuthorizationSystemDomainServiceBuilder<TDomainObject> SetEdit(SecurityOperation securityOperation)
+    public IAuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent> SetEdit(SecurityOperation securityOperation)
     {
         this.EditSecurityOperation = securityOperation;
 
         return this;
     }
 
-    public IAuthorizationSystemDomainServiceBuilder<TDomainObject> SetPath(SecurityPath<TDomainObject> securityPath)
+    public IAuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent> SetPath(SecurityPath<TDomainObject> securityPath)
     {
         this.SecurityPath = securityPath;
 
         return this;
     }
 
-    public IAuthorizationSystemDomainServiceBuilder<TDomainObject> SetDependency<TSource>(Expression<Func<TDomainObject, TSource>> dependencyPath)
+    public IAuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent> SetDependency<TSource>(Expression<Func<TDomainObject, TSource>> dependencyPath)
     {
-        this.DependencySourceType = typeof(TSource);
+        this.DependencyServiceType = typeof(DependencyDomainSecurityService<TDomainObject, TSource>);
         this.DependencySourcePath = new DependencyDomainSecurityServicePath<TDomainObject, TSource>(dependencyPath);
 
         return this;
     }
 
-    public IAuthorizationSystemDomainServiceBuilder<TDomainObject> SetUntypedDependency<TSource>()
+    public IAuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent> SetUntypedDependency<TSource>()
+        where TSource : class, IIdentityObject<TIdent>
     {
-        this.DependencySourceType = typeof(TSource);
+        this.DependencyServiceType = typeof(UntypedDependencyDomainSecurityService<TDomainObject, TSource, TIdent>);
 
         return this;
     }
 
-    public IAuthorizationSystemDomainServiceBuilder<TDomainObject> SetCustomService<TDomainSecurityService>()
+    public IAuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent> SetCustomService<TDomainSecurityService>()
         where TDomainSecurityService : IDomainSecurityService<TDomainObject>
     {
         this.CustomServiceType = typeof(TDomainSecurityService);

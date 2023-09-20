@@ -87,11 +87,11 @@ public static class ServiceCollectionExtensions
                        .AddSingleton<ISecurityOperationResolver, SecurityOperationResolver>();
     }
 
-    public static IServiceCollection RegisterAuthorizationSystemDomainServices(
+    public static IServiceCollection RegisterAuthorizationSystemDomainServices<TIdent>(
         this IServiceCollection services,
-        Action<IAuthorizationSystemRootDomainServiceBuilder> setupAction)
+        Action<IAuthorizationSystemRootDomainServiceBuilder<TIdent>> setupAction)
     {
-        var builder = new AuthorizationSystemRootDomainServiceBuilder();
+        var builder = new AuthorizationSystemRootDomainServiceBuilder<TIdent>();
 
         setupAction(builder);
 

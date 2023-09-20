@@ -1,6 +1,9 @@
-﻿namespace Framework.DomainDriven.ServiceModel.IAD.DomainServiceBuilder;
+﻿using Framework.Persistent;
 
-public interface IAuthorizationSystemRootDomainServiceBuilder
+namespace Framework.DomainDriven.ServiceModel.IAD.DomainServiceBuilder;
+
+public interface IAuthorizationSystemRootDomainServiceBuilder<TIdent>
 {
-    IAuthorizationSystemRootDomainServiceBuilder Add<TDomainObject>(Action<IAuthorizationSystemDomainServiceBuilder<TDomainObject>> setup);
+    IAuthorizationSystemRootDomainServiceBuilder<TIdent> Add<TDomainObject>(Action<IAuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent>> setup)
+        where TDomainObject : IIdentityObject<TIdent>;
 }

@@ -26,6 +26,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using SampleSystem.BLL;
 using SampleSystem.Domain;
+using SampleSystem.Domain.Projections;
 using SampleSystem.Events;
 using SampleSystem.Generated.DTO;
 
@@ -36,10 +37,14 @@ public static class SampleSystemFrameworkExtensions
     public static IServiceCollection RegisterGeneralBssFramework(this IServiceCollection services)
     {
         return services.RegisterGenericServices()
-                       .RegisterDomainServices()
                        .RegisterWebApiGenericServices()
                        .RegisterListeners()
                        .RegisterSupportServices()
+
+                       // Security
+
+                       .RegisterDomainServices()
+                       .RegisterLegacyProjectionDomainServices()
 
                        // Legacy
 
@@ -165,114 +170,138 @@ public static class SampleSystemFrameworkExtensions
             rb =>
 
                 rb.Add<Employee>(
-                      db =>
-                          db.SetView(SampleSystemSecurityOperation.EmployeeView)
+                      b =>
+                          b.SetView(SampleSystemSecurityOperation.EmployeeView)
                             .SetEdit(SampleSystemSecurityOperation.EmployeeEdit)
                             .SetCustomService<SampleSystemEmployeeSecurityService>())
 
                   .Add<BusinessUnit>(
-                      db => db.SetView(SampleSystemSecurityOperation.BusinessUnitView)
+                      b => b.SetView(SampleSystemSecurityOperation.BusinessUnitView)
                               .SetEdit(SampleSystemSecurityOperation.BusinessUnitEdit)
                               .SetPath(SecurityPath<BusinessUnit>.Create(fbu => fbu)))
 
                   .Add<BusinessUnitType>(
-                      db => db.SetView(SampleSystemSecurityOperation.BusinessUnitTypeView)
+                      b => b.SetView(SampleSystemSecurityOperation.BusinessUnitTypeView)
                               .SetEdit(SampleSystemSecurityOperation.BusinessUnitTypeEdit))
 
                   .Add<BusinessUnitManagerCommissionLink>(
-                      db => db.SetView(SampleSystemSecurityOperation.BusinessUnitManagerCommissionLinkView)
+                      b => b.SetView(SampleSystemSecurityOperation.BusinessUnitManagerCommissionLinkView)
                               .SetEdit(SampleSystemSecurityOperation.BusinessUnitManagerCommissionLinkEdit)
                               .SetPath(SecurityPath<BusinessUnitManagerCommissionLink>.Create(v => v.BusinessUnit)))
 
                   .Add<BusinessUnitHrDepartment>(
-                      db => db.SetView(SampleSystemSecurityOperation.BusinessUnitHrDepartmentView)
+                      b => b.SetView(SampleSystemSecurityOperation.BusinessUnitHrDepartmentView)
                               .SetEdit(SampleSystemSecurityOperation.BusinessUnitHrDepartmentEdit)
                               .SetPath(SecurityPath<BusinessUnitHrDepartment>.Create(v => v.BusinessUnit).And(v => v.HRDepartment.Location)))
 
                   .Add<ManagementUnit>(
-                      db => db.SetView(SampleSystemSecurityOperation.ManagementUnitView)
+                      b => b.SetView(SampleSystemSecurityOperation.ManagementUnitView)
                               .SetEdit(SampleSystemSecurityOperation.ManagementUnitEdit)
                               .SetPath(SecurityPath<ManagementUnit>.Create(mbu => mbu)))
 
                   .Add<ManagementUnitAndBusinessUnitLink>(
-                      db => db.SetView(SampleSystemSecurityOperation.ManagementUnitAndBusinessUnitLinkView)
+                      b => b.SetView(SampleSystemSecurityOperation.ManagementUnitAndBusinessUnitLinkView)
                               .SetEdit(SampleSystemSecurityOperation.ManagementUnitAndBusinessUnitLinkEdit)
                               .SetPath(SecurityPath<ManagementUnitAndBusinessUnitLink>.Create(v => v.BusinessUnit).And(v => v.ManagementUnit)))
 
                   .Add<ManagementUnitAndHRDepartmentLink>(
-                      db => db.SetView(SampleSystemSecurityOperation.ManagementUnitAndHRDepartmentLinkView)
+                      b => b.SetView(SampleSystemSecurityOperation.ManagementUnitAndHRDepartmentLinkView)
                               .SetEdit(SampleSystemSecurityOperation.ManagementUnitAndHRDepartmentLinkEdit)
                               .SetPath(SecurityPath<ManagementUnitAndHRDepartmentLink>.Create(v => v.ManagementUnit).And(v => v.HRDepartment.Location)))
 
                   .Add<EmployeeSpecialization>(
-                      db => db.SetView(SampleSystemSecurityOperation.EmployeeSpecializationView))
+                      b => b.SetView(SampleSystemSecurityOperation.EmployeeSpecializationView))
 
                   .Add<EmployeeRole>(
-                      db => db.SetView(SampleSystemSecurityOperation.EmployeeRoleView))
+                      b => b.SetView(SampleSystemSecurityOperation.EmployeeRoleView))
 
                   .Add<EmployeeRoleDegree>(
-                      db => db.SetView(SampleSystemSecurityOperation.EmployeeRoleDegreeView))
+                      b => b.SetView(SampleSystemSecurityOperation.EmployeeRoleDegreeView))
 
                   .Add<HRDepartment>(
-                      db => db.SetView(SampleSystemSecurityOperation.HRDepartmentView)
+                      b => b.SetView(SampleSystemSecurityOperation.HRDepartmentView)
                               .SetEdit(SampleSystemSecurityOperation.HRDepartmentEdit))
 
                   .Add<Location>(
-                      db => db.SetView(SampleSystemSecurityOperation.LocationView)
+                      b => b.SetView(SampleSystemSecurityOperation.LocationView)
                               .SetEdit(SampleSystemSecurityOperation.LocationEdit))
 
                   .Add<Country>(
-                      db => db.SetView(SampleSystemSecurityOperation.CountryView)
+                      b => b.SetView(SampleSystemSecurityOperation.CountryView)
                               .SetEdit(SampleSystemSecurityOperation.CountryEdit))
 
                   .Add<CompanyLegalEntity>(
-                      db => db.SetView(SampleSystemSecurityOperation.CompanyLegalEntityView)
+                      b => b.SetView(SampleSystemSecurityOperation.CompanyLegalEntityView)
                               .SetEdit(SampleSystemSecurityOperation.CompanyLegalEntityEdit))
 
                   .Add<EmployeePosition>(
-                      db => db.SetView(SampleSystemSecurityOperation.EmployeePositionView)
+                      b => b.SetView(SampleSystemSecurityOperation.EmployeePositionView)
                               .SetEdit(SampleSystemSecurityOperation.EmployeePositionEdit)
                               .SetPath(SecurityPath<EmployeePosition>.Create(position => position.Location)))
 
                   .Add<EmployeePersonalCellPhone>(
-                      db => db.SetView(SampleSystemSecurityOperation.EmployeePersonalCellPhoneView)
+                      b => b.SetView(SampleSystemSecurityOperation.EmployeePersonalCellPhoneView)
                               .SetEdit(SampleSystemSecurityOperation.EmployeePersonalCellPhoneEdit))
 
                   .Add<TestRootSecurityObj>(
-                      db => db.SetView(SampleSystemSecurityOperation.EmployeeView)
+                      b => b.SetView(SampleSystemSecurityOperation.EmployeeView)
                               .SetPath(SecurityPath<TestRootSecurityObj>.Create(v => v.BusinessUnit).And(v => v.Location)))
 
                   .Add<TestPerformanceObject>(
-                      db => db.SetView(SampleSystemSecurityOperation.EmployeeView)
+                      b => b.SetView(SampleSystemSecurityOperation.EmployeeView)
                               .SetPath(SecurityPath<TestPerformanceObject>.Create(v => v.Location, SingleSecurityMode.Strictly)
                                                                           .And(v => v.Employee, SingleSecurityMode.Strictly)
                                                                           .And(v => v.BusinessUnit, SingleSecurityMode.Strictly)
                                                                           .And(v => v.ManagementUnit, SingleSecurityMode.Strictly)))
 
                   .Add<TestPlainAuthObject>(
-                      db => db.SetView(SampleSystemSecurityOperation.EmployeeView)
+                      b => b.SetView(SampleSystemSecurityOperation.EmployeeView)
                               .SetPath(SecurityPath<TestPlainAuthObject>.Create(v => v.Location)
                                                                         .And(v => v.Items.Select(item => item.BusinessUnit), ManySecurityPathMode.All)
                                                                         .And(v => v.Items.Select(item => item.ManagementUnit), ManySecurityPathMode.All)))
 
                   .Add<AuthPerformanceObject>(
-                      db => db.SetView(SampleSystemSecurityOperation.BusinessUnitView)
+                      b => b.SetView(SampleSystemSecurityOperation.BusinessUnitView)
                               .SetPath(SecurityPath<AuthPerformanceObject>.Create(v => v.BusinessUnit)
                                                                           .And(v => v.ManagementUnit)
                                                                           .And(v => v.Location)
                                                                           .And(v => v.Employee)))
 
                   .Add<EmployeePhoto>(
-                      db => db.SetView(SampleSystemSecurityOperation.EmployeeView)
+                      b => b.SetView(SampleSystemSecurityOperation.EmployeeView)
                               .SetPath(SecurityPath<EmployeePhoto>.Create(employeePhoto => employeePhoto.Employee.CoreBusinessUnit)))
 
                   .Add<ManagementUnitFluentMapping>(
-                      db => db.SetView(SampleSystemSecurityOperation.ManagementUnitView)
+                      b => b.SetView(SampleSystemSecurityOperation.ManagementUnitView)
                               .SetEdit(SampleSystemSecurityOperation.ManagementUnitEdit))
 
                   .Add<Example1>(
-                      db => db.SetView(SampleSystemSecurityOperation.LocationView)
+                      b => b.SetView(SampleSystemSecurityOperation.LocationView)
                               .SetEdit(SampleSystemSecurityOperation.LocationEdit))
+
+            );
+    }
+
+    private static IServiceCollection RegisterLegacyProjectionDomainServices(this IServiceCollection services)
+    {
+        return services.RegisterAuthorizationSystemDomainServices(
+
+            rb =>
+
+                rb.Add<SecurityBusinessUnit>(
+                      b => b.SetUntypedDependency<BusinessUnit>())
+
+                  .Add<SecurityEmployee>(
+                      b => b.SetUntypedDependency<Employee>())
+
+                  .Add<SecurityHRDepartment>(
+                      b => b.SetUntypedDependency<HRDepartment>())
+
+                  .Add<SecurityLocation>(
+                      b => b.SetUntypedDependency<Location>())
+
+                  .Add<TestLegacyEmployee>(
+                      b => b.SetUntypedDependency<Employee>())
             );
     }
 }

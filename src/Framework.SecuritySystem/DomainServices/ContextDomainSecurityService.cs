@@ -20,7 +20,7 @@ public abstract class ContextDomainSecurityServiceBase<TPersistentDomainObjectBa
 
     protected ContextDomainSecurityServiceBase(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
-        ISecurityOperationResolver<TPersistentDomainObjectBase> securityOperationResolver,
+        ISecurityOperationResolver securityOperationResolver,
         IAuthorizationSystem<TIdent> authorizationSystem,
         ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
 
@@ -81,7 +81,7 @@ public class ContextDomainSecurityService<TPersistentDomainObjectBase, TDomainOb
 
     public ContextDomainSecurityService(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
-        ISecurityOperationResolver<TPersistentDomainObjectBase> securityOperationResolver,
+        ISecurityOperationResolver securityOperationResolver,
         IAuthorizationSystem<TIdent> authorizationSystem,
         ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory,
         SecurityPath<TDomainObject> securityPath)

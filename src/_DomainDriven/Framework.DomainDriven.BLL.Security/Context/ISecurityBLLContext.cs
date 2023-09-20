@@ -13,7 +13,7 @@ public interface ISecurityBLLContext<in TPersistentDomainObjectBase, TIdent> :
 {
     IDisabledSecurityProviderSource DisabledSecurityProviderSource => this.ServiceProvider.GetRequiredService<IDisabledSecurityProviderSource>();
 
-    ISecurityOperationResolver<TPersistentDomainObjectBase> SecurityOperationResolver => this.ServiceProvider.GetRequiredService<ISecurityOperationResolver<TPersistentDomainObjectBase>>();
+    ISecurityOperationResolver SecurityOperationResolver => this.ServiceProvider.GetRequiredService<ISecurityOperationResolver>();
 }
 
 

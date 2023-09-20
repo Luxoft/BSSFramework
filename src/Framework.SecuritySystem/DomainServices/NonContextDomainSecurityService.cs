@@ -20,7 +20,7 @@ public abstract class NonContextDomainSecurityService<TPersistentDomainObjectBas
 
     protected NonContextDomainSecurityService(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
-        ISecurityOperationResolver<TPersistentDomainObjectBase> securityOperationResolver,
+        ISecurityOperationResolver securityOperationResolver,
         IAuthorizationSystem<TIdent> authorizationSystem)
         : base(disabledSecurityProviderSource, securityOperationResolver)
     {

@@ -17,7 +17,7 @@ public class DependencyDomainSecurityService<TPersistentDomainObjectBase, TDomai
 
     public DependencyDomainSecurityService(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
-        ISecurityOperationResolver<TPersistentDomainObjectBase> securityOperationResolver,
+        ISecurityOperationResolver securityOperationResolver,
         IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService,
         IQueryableSource<TPersistentDomainObjectBase> queryableSource,
         DependencyDomainSecurityServicePath<TDomainObject, TBaseDomainObject> path)

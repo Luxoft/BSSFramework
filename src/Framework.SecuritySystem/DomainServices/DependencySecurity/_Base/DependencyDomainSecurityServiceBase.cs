@@ -14,7 +14,7 @@ public abstract class DependencyDomainSecurityServiceBase<TPersistentDomainObjec
 
     protected DependencyDomainSecurityServiceBase(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
-        ISecurityOperationResolver<TPersistentDomainObjectBase> securityOperationResolver,
+        ISecurityOperationResolver securityOperationResolver,
         IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService)
         : base(disabledSecurityProviderSource, securityOperationResolver)
     {

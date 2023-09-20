@@ -6,12 +6,10 @@ namespace Framework.SecuritySystem
     /// <summary>
     /// Неконтекстный провайдер доступа
     /// </summary>
-    /// <typeparam name="TPersistentDomainObjectBase"></typeparam>
     /// <typeparam name="TDomainObject"></typeparam>
     /// <typeparam name="TIdent"></typeparam>
-    public class NonContextSecurityProvider<TPersistentDomainObjectBase, TDomainObject, TIdent> : FixedSecurityProvider<TDomainObject>, ISecurityProvider<TDomainObject>
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase
+    public class NonContextSecurityProvider<TDomainObject, TIdent> : FixedSecurityProvider<TDomainObject>, ISecurityProvider<TDomainObject>
+        where TDomainObject : class, IIdentityObject<TIdent>
     {
         private readonly NonContextSecurityOperation securityOperation;
 

@@ -113,7 +113,10 @@ public class MainTests
                .AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, V1.SecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
                .AddScoped<IAuthorizationSystem<Guid>, ExampleAuthorizationSystem>()
                .AddScoped<IHierarchicalObjectExpanderFactory<Guid>, HierarchicalObjectExpanderFactory<PersistentDomainObjectBase, Guid>>()
+
+               .AddSingleton(SecurityPath<Employee>.Create(v => v.BusinessUnit))
                .AddScoped<IDomainSecurityService<Employee>, EmployeeSecurityService>()
+
                .AddScoped<ISecurityOperationResolver<PersistentDomainObjectBase>, ExampleSecurityOperationResolver>()
                .AddScoped<IRealTypeResolver, IdentityRealTypeResolver>()
 

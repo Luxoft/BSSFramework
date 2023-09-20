@@ -8,15 +8,11 @@ namespace Framework.SecuritySystem.DiTests
             IDisabledSecurityProviderSource disabledSecurityProviderSource,
             ISecurityOperationResolver<PersistentDomainObjectBase> securityOperationResolver,
             IAuthorizationSystem<Guid> authorizationSystem,
-            ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory)
+            ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
+            SecurityPath<Employee> securityPath)
 
-            : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+            : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPath)
         {
-        }
-
-        protected override SecurityPath<Employee> GetSecurityPath()
-        {
-            return SecurityPath<Employee>.Create(v => v.BusinessUnit);
         }
     }
 }

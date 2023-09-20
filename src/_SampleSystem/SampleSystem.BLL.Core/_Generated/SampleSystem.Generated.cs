@@ -512,68 +512,36 @@ namespace SampleSystem.BLL
     public partial class SampleSystemAuthPerformanceObjectSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.AuthPerformanceObject, System.Guid>
     {
         
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
         public SampleSystemAuthPerformanceObjectSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetAuthPerformanceObjectSecurityPath())
         {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.AuthPerformanceObject> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetAuthPerformanceObjectSecurityPath();
         }
     }
     
     public partial class SampleSystemBusinessUnitSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnit, System.Guid>
     {
         
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
         public SampleSystemBusinessUnitSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetBusinessUnitSecurityPath())
         {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.BusinessUnit> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetBusinessUnitSecurityPath();
         }
     }
     
     public partial class SampleSystemBusinessUnitHrDepartmentSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitHrDepartment, System.Guid>
     {
         
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
         public SampleSystemBusinessUnitHrDepartmentSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetBusinessUnitHrDepartmentSecurityPath())
         {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.BusinessUnitHrDepartment> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetBusinessUnitHrDepartmentSecurityPath();
         }
     }
     
     public partial class SampleSystemBusinessUnitManagerCommissionLinkSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitManagerCommissionLink, System.Guid>
     {
         
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
         public SampleSystemBusinessUnitManagerCommissionLinkSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetBusinessUnitManagerCommissionLinkSecurityPath())
         {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.BusinessUnitManagerCommissionLink> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetBusinessUnitManagerCommissionLinkSecurityPath();
         }
     }
     
@@ -611,29 +579,14 @@ namespace SampleSystem.BLL
         where TLocation : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext
         where TEmployee : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IEmployeeSecurity<TBusinessUnit, TDepartment, TLocation>, Framework.SecuritySystem.ISecurityContext
     {
-        
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
-        protected override Framework.SecuritySystem.SecurityPath<TDomainObject> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetEmployeeSecurityPath<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>();
-        }
     }
     
     public partial class SampleSystemEmployeeCellPhoneSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeCellPhone, System.Guid>
     {
         
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
         public SampleSystemEmployeeCellPhoneSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetEmployeeCellPhoneSecurityPath())
         {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.EmployeeCellPhone> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetEmployeeCellPhoneSecurityPath();
         }
     }
     
@@ -658,34 +611,18 @@ namespace SampleSystem.BLL
     public partial class SampleSystemEmployeePhotoSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePhoto, System.Guid>
     {
         
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
         public SampleSystemEmployeePhotoSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetEmployeePhotoSecurityPath())
         {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.EmployeePhoto> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetEmployeePhotoSecurityPath();
         }
     }
     
     public partial class SampleSystemEmployeePositionSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePosition, System.Guid>
     {
         
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
         public SampleSystemEmployeePositionSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetEmployeePositionSecurityPath())
         {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.EmployeePosition> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetEmployeePositionSecurityPath();
         }
     }
     
@@ -791,68 +728,36 @@ namespace SampleSystem.BLL
     public partial class SampleSystemManagementUnitSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnit, System.Guid>
     {
         
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
         public SampleSystemManagementUnitSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetManagementUnitSecurityPath())
         {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnit> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetManagementUnitSecurityPath();
         }
     }
     
     public partial class SampleSystemManagementUnitAndBusinessUnitLinkSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink, System.Guid>
     {
         
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
         public SampleSystemManagementUnitAndBusinessUnitLinkSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetManagementUnitAndBusinessUnitLinkSecurityPath())
         {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetManagementUnitAndBusinessUnitLinkSecurityPath();
         }
     }
     
     public partial class SampleSystemManagementUnitAndHRDepartmentLinkSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink, System.Guid>
     {
         
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
         public SampleSystemManagementUnitAndHRDepartmentLinkSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetManagementUnitAndHRDepartmentLinkSecurityPath())
         {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetManagementUnitAndHRDepartmentLinkSecurityPath();
         }
     }
     
     public partial class SampleSystemManagementUnitFluentMappingSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitFluentMapping, System.Guid>
     {
         
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
         public SampleSystemManagementUnitFluentMappingSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetManagementUnitFluentMappingSecurityPath())
         {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.ManagementUnitFluentMapping> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetManagementUnitFluentMappingSecurityPath();
         }
     }
     
@@ -1039,51 +944,27 @@ namespace SampleSystem.BLL
     public partial class SampleSystemTestPerformanceObjectSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPerformanceObject, System.Guid>
     {
         
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
         public SampleSystemTestPerformanceObjectSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetTestPerformanceObjectSecurityPath())
         {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestPerformanceObject> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetTestPerformanceObjectSecurityPath();
         }
     }
     
     public partial class SampleSystemTestPlainAuthObjectSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPlainAuthObject, System.Guid>
     {
         
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
         public SampleSystemTestPlainAuthObjectSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetTestPlainAuthObjectSecurityPath())
         {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestPlainAuthObject> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetTestPlainAuthObjectSecurityPath();
         }
     }
     
     public partial class SampleSystemTestRootSecurityObjSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestRootSecurityObj, System.Guid>
     {
         
-        private SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer;
-        
         public SampleSystemTestRootSecurityObjSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+                base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetTestRootSecurityObjSecurityPath())
         {
-            this.securityPathContainer = securityPathContainer;
-        }
-        
-        protected override Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestRootSecurityObj> GetSecurityPath()
-        {
-            return this.securityPathContainer.GetTestRootSecurityObjSecurityPath();
         }
     }
     
@@ -1091,16 +972,8 @@ namespace SampleSystem.BLL
     {
         
         public SampleSystemTestSecurityObjItemSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource)
+                base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource, new Framework.SecuritySystem.DependencyDomainSecurityServicePath<SampleSystem.Domain.TestSecurityObjItem, SampleSystem.Domain.TestRootSecurityObj>(domainObject => domainObject.FirstMaster))
         {
-        }
-        
-        protected override System.Linq.Expressions.Expression<System.Func<SampleSystem.Domain.TestSecurityObjItem, SampleSystem.Domain.TestRootSecurityObj>> Selector
-        {
-            get
-            {
-                return domainObject => domainObject.FirstMaster;
-            }
         }
     }
     
@@ -1108,16 +981,8 @@ namespace SampleSystem.BLL
     {
         
         public SampleSystemTestSecuritySubObjItemSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecurityObjItem> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource)
+                base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource, new Framework.SecuritySystem.DependencyDomainSecurityServicePath<SampleSystem.Domain.TestSecuritySubObjItem, SampleSystem.Domain.TestSecurityObjItem>(domainObject => domainObject.InnerMaster))
         {
-        }
-        
-        protected override System.Linq.Expressions.Expression<System.Func<SampleSystem.Domain.TestSecuritySubObjItem, SampleSystem.Domain.TestSecurityObjItem>> Selector
-        {
-            get
-            {
-                return domainObject => domainObject.InnerMaster;
-            }
         }
     }
     
@@ -1125,16 +990,8 @@ namespace SampleSystem.BLL
     {
         
         public SampleSystemTestSecuritySubObjItem2SecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource)
+                base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource, new Framework.SecuritySystem.DependencyDomainSecurityServicePath<SampleSystem.Domain.TestSecuritySubObjItem2, SampleSystem.Domain.TestRootSecurityObj>(domainObject => domainObject.RootSecurityObj))
         {
-        }
-        
-        protected override System.Linq.Expressions.Expression<System.Func<SampleSystem.Domain.TestSecuritySubObjItem2, SampleSystem.Domain.TestRootSecurityObj>> Selector
-        {
-            get
-            {
-                return domainObject => domainObject.RootSecurityObj;
-            }
         }
     }
     
@@ -1142,16 +999,8 @@ namespace SampleSystem.BLL
     {
         
         public SampleSystemTestSecuritySubObjItem3SecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
-                base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource)
+                base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource, new Framework.SecuritySystem.DependencyDomainSecurityServicePath<SampleSystem.Domain.TestSecuritySubObjItem3, SampleSystem.Domain.TestRootSecurityObj>(domainObject => domainObject.InnerMaster.FirstMaster))
         {
-        }
-        
-        protected override System.Linq.Expressions.Expression<System.Func<SampleSystem.Domain.TestSecuritySubObjItem3, SampleSystem.Domain.TestRootSecurityObj>> Selector
-        {
-            get
-            {
-                return domainObject => domainObject.InnerMaster.FirstMaster;
-            }
         }
     }
     

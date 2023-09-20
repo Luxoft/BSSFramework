@@ -1,11 +1,9 @@
-﻿using System.Linq.Expressions;
-
-using Framework.Persistent;
+﻿using Framework.Persistent;
 using Framework.QueryableSource;
 
 namespace Framework.SecuritySystem;
 
-public abstract class DependencyDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent> :
+public class DependencyDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent> :
 
     DependencyDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent>
 
@@ -15,24 +13,26 @@ public abstract class DependencyDomainSecurityService<TPersistentDomainObjectBas
 {
     private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
 
+    private readonly DependencyDomainSecurityServicePath<TDomainObject, TBaseDomainObject> path;
+
     protected DependencyDomainSecurityService(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
         ISecurityOperationResolver<TPersistentDomainObjectBase> securityOperationResolver,
         IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService,
-        IQueryableSource<TPersistentDomainObjectBase> queryableSource)
+        IQueryableSource<TPersistentDomainObjectBase> queryableSource,
+        DependencyDomainSecurityServicePath<TDomainObject, TBaseDomainObject> path)
 
         : base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService)
     {
         this.queryableSource = queryableSource ?? throw new ArgumentNullException(nameof(queryableSource));
+        this.path = path;
     }
-
-    protected abstract Expression<Func<TDomainObject, TBaseDomainObject>> Selector { get; }
 
     protected override ISecurityProvider<TDomainObject> CreateDependencySecurityProvider(ISecurityProvider<TBaseDomainObject> baseProvider)
     {
         return new DependencySecurityProvider<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent>(
             baseProvider,
-            this.Selector,
+            this.path.Selector,
             this.queryableSource);
     }
 }

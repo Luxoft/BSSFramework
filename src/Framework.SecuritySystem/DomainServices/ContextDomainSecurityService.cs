@@ -8,21 +8,19 @@ namespace Framework.SecuritySystem;
 /// <summary>
 /// Сервис с кешированием доступа к контекстным операциям
 /// </summary>
-/// <typeparam name="TPersistentDomainObjectBase"></typeparam>
 /// <typeparam name="TDomainObject"></typeparam>
 /// <typeparam name="TIdent"></typeparam>
-public abstract class ContextDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TIdent> : NonContextDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TIdent>
+public abstract class ContextDomainSecurityServiceBase<TDomainObject, TIdent> : NonContextDomainSecurityService<TDomainObject, TIdent>
 
-    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-    where TDomainObject : class, TPersistentDomainObjectBase
+    where TDomainObject : class, IIdentityObject<TIdent>
 {
-    private readonly ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory;
+    private readonly ISecurityExpressionBuilderFactory securityExpressionBuilderFactory;
 
     protected ContextDomainSecurityServiceBase(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
-        ISecurityOperationResolver<TPersistentDomainObjectBase> securityOperationResolver,
+        ISecurityOperationResolver securityOperationResolver,
         IAuthorizationSystem<TIdent> authorizationSystem,
-        ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
+        ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
 
         : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
     {
@@ -44,7 +42,7 @@ public abstract class ContextDomainSecurityServiceBase<TPersistentDomainObjectBa
     }
 
     protected ISecurityProvider<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, TSecurityContext>> securityPath, ContextSecurityOperation securityOperation)
-        where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
+        where TSecurityContext : class, ISecurityContext
     {
         if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
         if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
@@ -53,7 +51,7 @@ public abstract class ContextDomainSecurityServiceBase<TPersistentDomainObjectBa
     }
 
     protected ISecurityProvider<TDomainObject> Create<TSecurityContext>(Expression<Func<TDomainObject, IEnumerable<TSecurityContext>>> securityPath, ContextSecurityOperation securityOperation)
-        where TSecurityContext : class, TPersistentDomainObjectBase, ISecurityContext
+        where TSecurityContext : class, ISecurityContext
     {
         if (securityPath == null) throw new ArgumentNullException(nameof(securityPath));
         if (securityOperation == null) throw new ArgumentNullException(nameof(securityOperation));
@@ -72,18 +70,17 @@ public abstract class ContextDomainSecurityServiceBase<TPersistentDomainObjectBa
     protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(ContextSecurityOperation securityOperation);
 }
 
-public class ContextDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TIdent> : ContextDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TIdent>
+public class ContextDomainSecurityService<TDomainObject, TIdent> : ContextDomainSecurityServiceBase<TDomainObject, TIdent>
 
-    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-    where TDomainObject : class, TPersistentDomainObjectBase
+    where TDomainObject : class, IIdentityObject<TIdent>
 {
     private readonly SecurityPath<TDomainObject> securityPath;
 
     public ContextDomainSecurityService(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
-        ISecurityOperationResolver<TPersistentDomainObjectBase> securityOperationResolver,
+        ISecurityOperationResolver securityOperationResolver,
         IAuthorizationSystem<TIdent> authorizationSystem,
-        ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory,
+        ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
         SecurityPath<TDomainObject> securityPath)
         : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
     {

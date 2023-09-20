@@ -9,7 +9,6 @@ namespace Framework.SecuritySystem;
 /// </summary>
 /// <typeparam name="TDomainObject"></typeparam>
 public abstract class SecurityPath<TDomainObject>
-    where TDomainObject : class
 {
     protected SecurityPath()
     {

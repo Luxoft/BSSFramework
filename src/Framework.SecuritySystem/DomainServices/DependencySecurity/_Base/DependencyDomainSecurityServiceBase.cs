@@ -1,29 +1,35 @@
-﻿using Framework.Persistent;
+﻿namespace Framework.SecuritySystem;
 
-namespace Framework.SecuritySystem;
+public abstract class DependencyDomainSecurityServiceBase<TDomainObject, TBaseDomainObject> :
 
-public abstract class DependencyDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent> :
-
-    DomainSecurityService<TPersistentDomainObjectBase, TDomainObject>
-
-    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-    where TDomainObject : class, TPersistentDomainObjectBase
-    where TBaseDomainObject : class, TPersistentDomainObjectBase
+    DomainSecurityService<TDomainObject>
 {
+    private readonly ISecurityOperationResolver securityOperationResolver;
+
     private readonly IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService;
 
     protected DependencyDomainSecurityServiceBase(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
-        ISecurityOperationResolver<TPersistentDomainObjectBase> securityOperationResolver,
+        ISecurityOperationResolver securityOperationResolver,
         IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService)
         : base(disabledSecurityProviderSource, securityOperationResolver)
     {
+        this.securityOperationResolver = securityOperationResolver;
         this.baseDomainSecurityService = baseDomainSecurityService ?? throw new ArgumentNullException(nameof(baseDomainSecurityService));
     }
 
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(BLLSecurityMode securityMode)
     {
-        return this.CreateDependencySecurityProvider(this.baseDomainSecurityService.GetSecurityProvider(securityMode));
+        var customSecurityOperation = this.securityOperationResolver.TryGetSecurityOperation<TDomainObject>(securityMode);
+
+        if (customSecurityOperation == null)
+        {
+            return this.CreateDependencySecurityProvider(this.baseDomainSecurityService.GetSecurityProvider(securityMode));
+        }
+        else
+        {
+            return this.CreateSecurityProvider(customSecurityOperation);
+        }
     }
 
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityOperation securityOperation)

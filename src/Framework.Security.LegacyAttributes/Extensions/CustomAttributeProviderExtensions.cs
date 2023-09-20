@@ -47,14 +47,6 @@ public static class CustomAttributeProviderExtensions
         return res;
     }
 
-    public static SecurityOperation GetSecurityOperation(this ICustomAttributeProvider source, bool isEdit)
-    {
-        if (source == null) throw new ArgumentNullException(nameof(source));
-
-        return isEdit ? source.GetEditSecurityOperation()
-                       : source.GetViewSecurityOperation();
-    }
-
     public static ViewDomainObjectAttribute GetViewDomainObjectAttribute(this ICustomAttributeProvider source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));

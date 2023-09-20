@@ -6,7 +6,9 @@ using Framework.DomainDriven.Repository;
 using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
+using Framework.QueryableSource;
 using Framework.SecuritySystem;
+using Framework.SecuritySystem.Rules.Builders;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -53,7 +55,7 @@ public static class ServiceCollectionExtensions
             where TPersistentDomainObjectBase : class, IIdentityObject<Guid>
     {
         return services.AddSingleton<IRealTypeResolver, IdentityRealTypeResolver>()
-                       .AddScoped<IHierarchicalObjectExpanderFactory<Guid>, HierarchicalObjectExpanderFactory<TPersistentDomainObjectBase, Guid>>();
+                       .AddScoped<IHierarchicalObjectExpanderFactory<Guid>, HierarchicalObjectExpanderFactory<Guid>>();
     }
 
     private static IServiceCollection RegisterAuthorizationSystem(this IServiceCollection services)
@@ -75,6 +77,12 @@ public static class ServiceCollectionExtensions
                        .AddScoped<IAvailablePermissionSource, AvailablePermissionSource>()
                        .AddScoped<ICurrentPrincipalSource, CurrentPrincipalSource>()
 
-                       .AddScoped<IOperationAccessorFactory, OperationAccessorFactory>();
+                       .AddScoped<IOperationAccessorFactory, OperationAccessorFactory>()
+
+                       .AddScoped<IQueryableSource, RepositoryQueryableSource>()
+
+                       .AddScoped<ISecurityExpressionBuilderFactory, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Guid>>()
+
+                       .AddSingleton<ISecurityOperationResolver, SecurityOperationResolver>();
     }
 }

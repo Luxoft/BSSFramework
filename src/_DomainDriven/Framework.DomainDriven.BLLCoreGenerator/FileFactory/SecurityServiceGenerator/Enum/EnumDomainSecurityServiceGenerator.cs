@@ -24,9 +24,7 @@ public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurity
 
         this.hasContext = this.Configuration.HasSecurityContext(this.DomainType);
 
-        this.BaseServiceType = (this.hasContext ? typeof(ContextDomainSecurityService<,,>) : typeof(NonContextDomainSecurityService<,,>)).ToTypeReference(
-
-         this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
+        this.BaseServiceType = (this.hasContext ? typeof(ContextDomainSecurityService<,>) : typeof(NonContextDomainSecurityService<,>)).ToTypeReference(
          this.DomainTypeReference,
          this.Configuration.Environment.GetIdentityType().ToTypeReference());
     }
@@ -51,12 +49,12 @@ public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurity
     public override IEnumerable<(CodeTypeReference ParameterType, string Name, CodeExpression CustomBaseInvoke)> GetBaseTypeConstructorParameters()
     {
         yield return (typeof(IDisabledSecurityProviderSource).ToTypeReference(), "disabledSecurityProviderSource", null);
-        yield return (typeof(ISecurityOperationResolver<>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType), "securityOperationResolver", null);
+        yield return (typeof(ISecurityOperationResolver).ToTypeReference(), "securityOperationResolver", null);
         yield return (typeof(IAuthorizationSystem<>).ToTypeReference(this.Configuration.Environment.GetIdentityType()), "authorizationSystem", null);
 
         if (this.hasContext)
         {
-            yield return (typeof(ISecurityExpressionBuilderFactory<,>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType, this.Configuration.Environment.GetIdentityType()), "securityExpressionBuilderFactory", null);
+            yield return (typeof(ISecurityExpressionBuilderFactory).ToTypeReference(), "securityExpressionBuilderFactory", null);
 
             var securityPathContainerParam = new CodeParameterDeclarationExpression(this.Configuration.GetCodeTypeReference(null, FileType.RootSecurityServicePathContainerInterface), "securityPathContainer");
 

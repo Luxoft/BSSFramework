@@ -110,24 +110,27 @@ public class MainTests
                .AddSingleton<IAccessDeniedExceptionService, AccessDeniedExceptionService>()
                .AddSingleton<IDisabledSecurityProviderSource, DisabledSecurityProviderSource>()
 
-               .AddScoped<ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>, V1.SecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid>>()
+               .AddScoped<ISecurityExpressionBuilderFactory, V1.SecurityExpressionBuilderFactory<Guid>>()
                .AddScoped<IAuthorizationSystem<Guid>, ExampleAuthorizationSystem>()
-               .AddScoped<IHierarchicalObjectExpanderFactory<Guid>, HierarchicalObjectExpanderFactory<PersistentDomainObjectBase, Guid>>()
+               .AddScoped<IHierarchicalObjectExpanderFactory<Guid>, HierarchicalObjectExpanderFactory<Guid>>()
 
                .AddSingleton(SecurityPath<Employee>.Create(v => v.BusinessUnit))
                .AddScoped<IDomainSecurityService<Employee>, EmployeeSecurityService>()
 
-               .AddScoped<ISecurityOperationResolver<PersistentDomainObjectBase>, ExampleSecurityOperationResolver>()
-               .AddScoped<IRealTypeResolver, IdentityRealTypeResolver>()
+
+               .AddSingleton(new DomainObjectSecurityOperationInfo(typeof(Employee), ExampleSecurityOperation.EmployeeView, ExampleSecurityOperation.EmployeeEdit))
+               .AddSingleton<ISecurityOperationResolver, SecurityOperationResolver>()
+
+               .AddSingleton<IRealTypeResolver, IdentityRealTypeResolver>()
 
                .AddScoped(_ => securityContextInfoService)
 
                .BuildServiceProvider(new ServiceProviderOptions{ ValidateOnBuild = true, ValidateScopes = true });
     }
 
-    private IQueryableSource<PersistentDomainObjectBase> BuildQueryableSource(IServiceProvider serviceProvider)
+    private IQueryableSource BuildQueryableSource(IServiceProvider serviceProvider)
     {
-        var queryableSource = Substitute.For<IQueryableSource<PersistentDomainObjectBase>>();
+        var queryableSource = Substitute.For<IQueryableSource>();
 
         queryableSource.GetQueryable<BusinessUnitAncestorLink>().Returns(this.GetBusinessUnitAncestorLinkSource(serviceProvider).AsQueryable());
         queryableSource.GetQueryable<Employee>().Returns(new[] { this.employee1, this.employee2, this.employee3 }.AsQueryable());

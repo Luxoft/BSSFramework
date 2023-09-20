@@ -20,11 +20,9 @@ namespace Framework.DomainDriven.BLLCoreGenerator
         {
             this.dependencySecurityAttr = dependencySecurityAttr ?? throw new ArgumentNullException(nameof(dependencySecurityAttr));
 
-            this.BaseServiceType = typeof(DependencyDomainSecurityService<,,,>).MakeGenericType(
-                    this.Configuration.Environment.PersistentDomainObjectBaseType,
+            this.BaseServiceType = typeof(DependencyDomainSecurityService<,>).MakeGenericType(
                     this.DomainType,
-                    this.dependencySecurityAttr.SourceType,
-                    this.Configuration.Environment.GetIdentityType()).ToTypeReference();
+                    this.dependencySecurityAttr.SourceType).ToTypeReference();
         }
 
         public override CodeTypeReference BaseServiceType { get; }
@@ -42,9 +40,9 @@ namespace Framework.DomainDriven.BLLCoreGenerator
         public override IEnumerable<(CodeTypeReference ParameterType, string Name, CodeExpression CustomBaseInvoke)> GetBaseTypeConstructorParameters()
         {
             yield return (typeof(IDisabledSecurityProviderSource).ToTypeReference(), "disabledSecurityProviderSource", null);
-            yield return (typeof(ISecurityOperationResolver<>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType), "securityOperationResolver", null);
+            yield return (typeof(ISecurityOperationResolver).ToTypeReference(), "securityOperationResolver", null);
             yield return (typeof(IDomainSecurityService<>).ToTypeReference(this.dependencySecurityAttr.SourceType), "baseDomainSecurityService", null);
-            yield return (typeof(IQueryableSource<>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType), "queryableSource", null);
+            yield return (typeof(IQueryableSource).ToTypeReference(), "queryableSource", null);
 
             yield return (null, null, this.BuildDependencyExpressionPath());
         }

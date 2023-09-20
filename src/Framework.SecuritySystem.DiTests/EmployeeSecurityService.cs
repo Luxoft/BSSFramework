@@ -2,13 +2,13 @@
 
 namespace Framework.SecuritySystem.DiTests
 {
-    public class EmployeeSecurityService : ContextDomainSecurityService<PersistentDomainObjectBase, Employee, Guid>
+    public class EmployeeSecurityService : ContextDomainSecurityService<Employee, Guid>
     {
         public EmployeeSecurityService(
             IDisabledSecurityProviderSource disabledSecurityProviderSource,
-            ISecurityOperationResolver<PersistentDomainObjectBase> securityOperationResolver,
+            ISecurityOperationResolver securityOperationResolver,
             IAuthorizationSystem<Guid> authorizationSystem,
-            ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
+            ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
             SecurityPath<Employee> securityPath)
 
             : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPath)

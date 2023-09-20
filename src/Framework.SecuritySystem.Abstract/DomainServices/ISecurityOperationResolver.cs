@@ -1,7 +1,17 @@
-﻿namespace Framework.SecuritySystem;
+﻿#nullable enable
 
-public interface ISecurityOperationResolver<in TPersistentDomainObjectBase>
+namespace Framework.SecuritySystem;
+
+public interface ISecurityOperationResolver
 {
-    SecurityOperation GetSecurityOperation<TDomainObject>(BLLSecurityMode securityMode)
-        where TDomainObject : TPersistentDomainObjectBase;
+    SecurityOperation? TryGetSecurityOperation<TDomainObject>(BLLSecurityMode securityMode);
+}
+
+public static class SecurityOperationResolverExtensions
+{
+    public static SecurityOperation GetSecurityOperation<TDomainObject>(
+        this ISecurityOperationResolver resolver,
+        BLLSecurityMode securityMode) =>
+        resolver.TryGetSecurityOperation<TDomainObject>(securityMode)
+        ?? throw new Exception($"SecurityOperation with mode '{securityMode}' not found for type '{typeof(TDomainObject).Name}'");
 }

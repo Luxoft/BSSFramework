@@ -1,8 +1,6 @@
 ﻿using Framework.Persistent;
 using Framework.SecuritySystem;
 
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Framework.DomainDriven.BLL.Security;
 
 public interface ISecurityBLLContext<in TPersistentDomainObjectBase, TIdent> :
@@ -11,9 +9,9 @@ public interface ISecurityBLLContext<in TPersistentDomainObjectBase, TIdent> :
 
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
 {
-    IDisabledSecurityProviderSource DisabledSecurityProviderSource => this.ServiceProvider.GetRequiredService<IDisabledSecurityProviderSource>();
+    IDisabledSecurityProviderSource DisabledSecurityProviderSource { get; }
 
-    ISecurityOperationResolver<TPersistentDomainObjectBase> SecurityOperationResolver => this.ServiceProvider.GetRequiredService<ISecurityOperationResolver<TPersistentDomainObjectBase>>();
+    ISecurityOperationResolver SecurityOperationResolver { get; }
 }
 
 

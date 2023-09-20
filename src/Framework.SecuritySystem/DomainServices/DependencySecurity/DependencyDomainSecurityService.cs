@@ -1,25 +1,20 @@
-﻿using Framework.Persistent;
-using Framework.QueryableSource;
+﻿using Framework.QueryableSource;
 
 namespace Framework.SecuritySystem;
 
-public class DependencyDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent> :
+public class DependencyDomainSecurityService<TDomainObject, TBaseDomainObject> :
 
-    DependencyDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent>
-
-    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-    where TDomainObject : class, TPersistentDomainObjectBase
-    where TBaseDomainObject : class, TPersistentDomainObjectBase
+    DependencyDomainSecurityServiceBase<TDomainObject, TBaseDomainObject>
 {
-    private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
+    private readonly IQueryableSource queryableSource;
 
     private readonly DependencyDomainSecurityServicePath<TDomainObject, TBaseDomainObject> path;
 
     public DependencyDomainSecurityService(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
-        ISecurityOperationResolver<TPersistentDomainObjectBase> securityOperationResolver,
+        ISecurityOperationResolver securityOperationResolver,
         IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService,
-        IQueryableSource<TPersistentDomainObjectBase> queryableSource,
+        IQueryableSource queryableSource,
         DependencyDomainSecurityServicePath<TDomainObject, TBaseDomainObject> path)
 
         : base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService)
@@ -30,7 +25,7 @@ public class DependencyDomainSecurityService<TPersistentDomainObjectBase, TDomai
 
     protected override ISecurityProvider<TDomainObject> CreateDependencySecurityProvider(ISecurityProvider<TBaseDomainObject> baseProvider)
     {
-        return new DependencySecurityProvider<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent>(
+        return new DependencySecurityProvider<TDomainObject, TBaseDomainObject>(
             baseProvider,
             this.path.Selector,
             this.queryableSource);

@@ -11,66 +11,21 @@ namespace Framework.Authorization.BLL
 {
     
     
-    public class AuthorizationSecurityOperationResolver : Framework.SecuritySystem.ISecurityOperationResolver<Framework.Authorization.Domain.PersistentDomainObjectBase>
+    #region 
+	static
+    public class AuthorizationSecurityOperationHelper
     {
         
-        public virtual Framework.SecuritySystem.SecurityOperation GetSecurityOperation(System.Type domainType, Framework.SecuritySystem.BLLSecurityMode mode)
+        public static void RegisterDomainObjectSecurityOperations(Microsoft.Extensions.DependencyInjection.IServiceCollection services)
         {
-            if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(Framework.Authorization.Domain.BusinessRole) == domainType))
-            {
-                return Framework.Authorization.AuthorizationSecurityOperation.BusinessRoleView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(Framework.Authorization.Domain.BusinessRole) == domainType))
-            {
-                return Framework.Authorization.AuthorizationSecurityOperation.BusinessRoleEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(Framework.Authorization.Domain.EntityType) == domainType))
-            {
-                return Framework.Authorization.AuthorizationSecurityOperation.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(Framework.Authorization.Domain.Operation) == domainType))
-            {
-                return Framework.Authorization.AuthorizationSecurityOperation.OperationView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(Framework.Authorization.Domain.Operation) == domainType))
-            {
-                return Framework.Authorization.AuthorizationSecurityOperation.OperationEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(Framework.Authorization.Domain.Permission) == domainType))
-            {
-                return Framework.Authorization.AuthorizationSecurityOperation.PrincipalView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(Framework.Authorization.Domain.Permission) == domainType))
-            {
-                return Framework.Authorization.AuthorizationSecurityOperation.PrincipalEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(Framework.Authorization.Domain.Principal) == domainType))
-            {
-                return Framework.Authorization.AuthorizationSecurityOperation.PrincipalView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(Framework.Authorization.Domain.Principal) == domainType))
-            {
-                return Framework.Authorization.AuthorizationSecurityOperation.PrincipalEdit;
-            }
-            else
-            {
-                return Framework.Authorization.AuthorizationSecurityOperation.Disabled;
-            }
-        }
-        
-        public virtual Framework.SecuritySystem.SecurityOperation GetSecurityOperation<TDomainObject>(Framework.SecuritySystem.BLLSecurityMode mode)
-            where TDomainObject : Framework.Authorization.Domain.PersistentDomainObjectBase
-        {
-            if ((mode == Framework.SecuritySystem.BLLSecurityMode.Disabled))
-            {
-                return Framework.Authorization.AuthorizationSecurityOperation.Disabled;
-            }
-            else
-            {
-                return this.GetSecurityOperation(typeof(TDomainObject), mode);
-            }
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Authorization.Domain.BusinessRole), Framework.Authorization.AuthorizationSecurityOperation.BusinessRoleView, Framework.Authorization.AuthorizationSecurityOperation.BusinessRoleEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Authorization.Domain.EntityType), Framework.Authorization.AuthorizationSecurityOperation.Disabled, null));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Authorization.Domain.Operation), Framework.Authorization.AuthorizationSecurityOperation.OperationView, Framework.Authorization.AuthorizationSecurityOperation.OperationEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Authorization.Domain.Permission), Framework.Authorization.AuthorizationSecurityOperation.PrincipalView, Framework.Authorization.AuthorizationSecurityOperation.PrincipalEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Authorization.Domain.Principal), Framework.Authorization.AuthorizationSecurityOperation.PrincipalView, Framework.Authorization.AuthorizationSecurityOperation.PrincipalEdit));
         }
     }
+    #endregion
     
     public partial class AuthorizationBLLContext : Framework.DomainDriven.BLL.Security.SecurityBLLBaseContext<Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid, Framework.Authorization.BLL.IAuthorizationBLLFactoryContainer>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, System.Guid>>>, Framework.Authorization.BLL.IAuthorizationBLLContext
     {
@@ -170,15 +125,15 @@ namespace Framework.Authorization.BLL
         {
         }
         
-        public static void Register(Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection)
+        public static void Register(Microsoft.Extensions.DependencyInjection.IServiceCollection services)
         {
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.BusinessRole>, Framework.Authorization.BLL.AuthorizationBusinessRoleSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.EntityType>, Framework.Authorization.BLL.AuthorizationEntityTypeSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.Operation>, Framework.Authorization.BLL.AuthorizationOperationSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.Permission>, Framework.Authorization.BLL.AuthorizationPermissionSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.PermissionFilterEntity>, Framework.Authorization.BLL.AuthorizationPermissionFilterEntitySecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.PermissionFilterItem>, Framework.Authorization.BLL.AuthorizationPermissionFilterItemSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.Principal>, Framework.Authorization.BLL.AuthorizationPrincipalSecurityService>(serviceCollection);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.BusinessRole>, Framework.Authorization.BLL.AuthorizationBusinessRoleSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.EntityType>, Framework.Authorization.BLL.AuthorizationEntityTypeSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.Operation>, Framework.Authorization.BLL.AuthorizationOperationSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.Permission>, Framework.Authorization.BLL.AuthorizationPermissionSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.PermissionFilterEntity>, Framework.Authorization.BLL.AuthorizationPermissionFilterEntitySecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.PermissionFilterItem>, Framework.Authorization.BLL.AuthorizationPermissionFilterItemSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Authorization.Domain.Principal>, Framework.Authorization.BLL.AuthorizationPrincipalSecurityService>(services);
         }
     }
     
@@ -190,51 +145,51 @@ namespace Framework.Authorization.BLL
     {
     }
     
-    public partial class AuthorizationBusinessRoleSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.BusinessRole, System.Guid>
+    public partial class AuthorizationBusinessRoleSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Authorization.Domain.BusinessRole, System.Guid>
     {
     }
     
-    public partial class AuthorizationEntityTypeSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.EntityType, System.Guid>
+    public partial class AuthorizationEntityTypeSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Authorization.Domain.EntityType, System.Guid>
     {
         
-        public AuthorizationEntityTypeSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Authorization.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public AuthorizationEntityTypeSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class AuthorizationOperationSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.Operation, System.Guid>
+    public partial class AuthorizationOperationSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Authorization.Domain.Operation, System.Guid>
     {
         
-        public AuthorizationOperationSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Authorization.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public AuthorizationOperationSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class AuthorizationPermissionSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.Permission, System.Guid>
+    public partial class AuthorizationPermissionSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Authorization.Domain.Permission, System.Guid>
     {
     }
     
-    public partial class AuthorizationPermissionFilterEntitySecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.PermissionFilterEntity, System.Guid>
+    public partial class AuthorizationPermissionFilterEntitySecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Authorization.Domain.PermissionFilterEntity, System.Guid>
     {
         
-        public AuthorizationPermissionFilterEntitySecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Authorization.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public AuthorizationPermissionFilterEntitySecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class AuthorizationPermissionFilterItemSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.PermissionFilterItem, System.Guid>
+    public partial class AuthorizationPermissionFilterItemSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Authorization.Domain.PermissionFilterItem, System.Guid>
     {
         
-        public AuthorizationPermissionFilterItemSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<Framework.Authorization.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public AuthorizationPermissionFilterItemSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class AuthorizationPrincipalSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Authorization.Domain.PersistentDomainObjectBase, Framework.Authorization.Domain.Principal, System.Guid>
+    public partial class AuthorizationPrincipalSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<Framework.Authorization.Domain.Principal, System.Guid>
     {
     }
     

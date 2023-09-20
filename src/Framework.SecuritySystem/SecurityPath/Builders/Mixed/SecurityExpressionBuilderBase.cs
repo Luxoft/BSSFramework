@@ -1,21 +1,14 @@
-﻿using Framework.Persistent;
+﻿namespace Framework.SecuritySystem.Rules.Builders.Mixed;
 
-namespace Framework.SecuritySystem.Rules.Builders.Mixed;
-
-public class SecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent>
-        : ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent>
-
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase
-
+public class SecurityExpressionBuilder<TDomainObject> : ISecurityExpressionBuilder<TDomainObject>
 {
-    private readonly ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> hasAccessBuilder;
+    private readonly ISecurityExpressionBuilder<TDomainObject> hasAccessBuilder;
 
-    private readonly ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> queryBuilder;
+    private readonly ISecurityExpressionBuilder<TDomainObject> queryBuilder;
 
     public SecurityExpressionBuilder(
-            ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> hasAccessBuilder,
-            ISecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObject, TIdent> queryBuilder)
+        ISecurityExpressionBuilder<TDomainObject> hasAccessBuilder,
+        ISecurityExpressionBuilder<TDomainObject> queryBuilder)
     {
         this.hasAccessBuilder = hasAccessBuilder ?? throw new ArgumentNullException(nameof(hasAccessBuilder));
         this.queryBuilder = queryBuilder ?? throw new ArgumentNullException(nameof(queryBuilder));
@@ -26,6 +19,6 @@ public class SecurityExpressionBuilder<TPersistentDomainObjectBase, TDomainObjec
         var hasAccessFilter = this.hasAccessBuilder.GetFilter(securityOperation);
         var queryFilter = this.queryBuilder.GetFilter(securityOperation);
 
-        return new SecurityExpressionFilter<TPersistentDomainObjectBase, TDomainObject, TIdent>(hasAccessFilter, queryFilter);
+        return new SecurityExpressionFilter<TDomainObject>(hasAccessFilter, queryFilter);
     }
 }

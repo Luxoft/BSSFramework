@@ -3,14 +3,13 @@ using Framework.QueryableSource;
 
 namespace Framework.HierarchicalExpand;
 
-public class HierarchicalObjectLayerExpander<TPersistentDomainObjectBase, TDomainObject, TIdent> : IHierarchicalObjectExpander<TIdent>
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase, IHierarchicalPersistentDomainObjectBase<TDomainObject, TIdent>
+public class HierarchicalObjectLayerExpander<TDomainObject, TIdent> : IHierarchicalObjectExpander<TIdent>
+        where TDomainObject : class, IHierarchicalPersistentDomainObjectBase<TDomainObject, TIdent>
         where TIdent : struct
 {
-    private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
+    private readonly IQueryableSource queryableSource;
 
-    public HierarchicalObjectLayerExpander(IQueryableSource<TPersistentDomainObjectBase> queryableSource)
+    public HierarchicalObjectLayerExpander(IQueryableSource queryableSource)
     {
         this.queryableSource = queryableSource ?? throw new ArgumentNullException(nameof(queryableSource));
     }

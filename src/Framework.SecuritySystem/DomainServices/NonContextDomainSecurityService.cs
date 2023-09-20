@@ -5,13 +5,10 @@ namespace Framework.SecuritySystem;
 /// <summary>
 /// Сервис с кешированием доступа к неконтекстным операциям
 /// </summary>
-/// <typeparam name="TPersistentDomainObjectBase"></typeparam>
 /// <typeparam name="TDomainObject"></typeparam>
 /// <typeparam name="TIdent"></typeparam>
-public abstract class NonContextDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TIdent> : DomainSecurityService<TPersistentDomainObjectBase, TDomainObject>
-
-    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-    where TDomainObject : class, TPersistentDomainObjectBase
+public abstract class NonContextDomainSecurityService<TDomainObject, TIdent> : DomainSecurityService<TDomainObject>
+    where TDomainObject : class, IIdentityObject<TIdent>
 {
     private readonly IDisabledSecurityProviderSource disabledSecurityProviderSource;
 
@@ -20,7 +17,7 @@ public abstract class NonContextDomainSecurityService<TPersistentDomainObjectBas
 
     protected NonContextDomainSecurityService(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
-        ISecurityOperationResolver<TPersistentDomainObjectBase> securityOperationResolver,
+        ISecurityOperationResolver securityOperationResolver,
         IAuthorizationSystem<TIdent> authorizationSystem)
         : base(disabledSecurityProviderSource, securityOperationResolver)
     {
@@ -47,6 +44,6 @@ public abstract class NonContextDomainSecurityService<TPersistentDomainObjectBas
 
     protected virtual ISecurityProvider<TDomainObject> CreateSecurityProvider(NonContextSecurityOperation securityOperation)
     {
-        return new NonContextSecurityProvider<TPersistentDomainObjectBase, TDomainObject, TIdent>(securityOperation, this.authorizationSystem);
+        return new NonContextSecurityProvider<TDomainObject, TIdent>(securityOperation, this.authorizationSystem);
     }
 }

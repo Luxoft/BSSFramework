@@ -115,9 +115,9 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
             new CodeFileFactoryHeader<FileType>(FileType.RootSecurityService, string.Empty, _ => $"{this.Environment.TargetSystemName}SecurityService");
 
-    protected virtual ICodeFileFactoryHeader<FileType> SecurityOperationResolverFileFactoryHeader =>
+    protected virtual ICodeFileFactoryHeader<FileType> SecurityOperationHelperFactoryHeader =>
 
-            new CodeFileFactoryHeader<FileType>(FileType.SecurityOperationResolver, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.SecurityOperationResolver}");
+            new CodeFileFactoryHeader<FileType>(FileType.SecurityOperationHelper, string.Empty, _ => $"{this.Environment.TargetSystemName}{FileType.SecurityOperationHelper}");
 
     protected virtual ICodeFileFactoryHeader<FileType> RootSecurityServiceBaseFileFactoryHeader =>
 
@@ -319,7 +319,7 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     {
         return new[]
                {
-                      this.SecurityOperationResolverFileFactoryHeader,
+                      this.SecurityOperationHelperFactoryHeader,
 
                        this.BLLContextFileFactoryHeader,
                        this.BLLContextInterfaceFileFactoryHeader,

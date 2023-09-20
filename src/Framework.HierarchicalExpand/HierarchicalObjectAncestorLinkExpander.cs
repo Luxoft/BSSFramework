@@ -6,16 +6,15 @@ using Framework.QueryableSource;
 
 namespace Framework.HierarchicalExpand;
 
-public class HierarchicalObjectAncestorLinkExpander<TPersistentDomainObjectBase, TDomainObject, TDomainObjectAncestorLink, TDomainObjectAncestorChildLink, TIdent> : IHierarchicalObjectExpander<TIdent>, IHierarchicalObjectQueryableExpander<TIdent>
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase, IHierarchicalPersistentDomainObjectBase<TDomainObject, TIdent>
-        where TDomainObjectAncestorLink : class, TPersistentDomainObjectBase, IHierarchicalAncestorLink<TDomainObject, TDomainObjectAncestorChildLink, TIdent>
-        where TDomainObjectAncestorChildLink : class, TPersistentDomainObjectBase, IHierarchicalToAncestorOrChildLink<TDomainObject, TIdent>
+public class HierarchicalObjectAncestorLinkExpander<TDomainObject, TDomainObjectAncestorLink, TDomainObjectAncestorChildLink, TIdent> : IHierarchicalObjectExpander<TIdent>, IHierarchicalObjectQueryableExpander<TIdent>
+        where TDomainObject : class, IHierarchicalPersistentDomainObjectBase<TDomainObject, TIdent>
+        where TDomainObjectAncestorLink : class, IHierarchicalAncestorLink<TDomainObject, TDomainObjectAncestorChildLink, TIdent>
+        where TDomainObjectAncestorChildLink : class, IHierarchicalToAncestorOrChildLink<TDomainObject, TIdent>
         where TIdent : struct
 {
-    private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
+    private readonly IQueryableSource queryableSource;
 
-    public HierarchicalObjectAncestorLinkExpander(IQueryableSource<TPersistentDomainObjectBase> queryableSource)
+    public HierarchicalObjectAncestorLinkExpander(IQueryableSource queryableSource)
     {
         this.queryableSource = queryableSource ?? throw new ArgumentNullException(nameof(queryableSource));
     }

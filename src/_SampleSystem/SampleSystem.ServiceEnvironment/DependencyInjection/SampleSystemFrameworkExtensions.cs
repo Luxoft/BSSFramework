@@ -18,9 +18,7 @@ using Framework.DomainDriven.ServiceModel.IAD;
 using Framework.DomainDriven.ServiceModel.Service;
 using Framework.DomainDriven.WebApiNetCore;
 using Framework.Events;
-using Framework.QueryableSource;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem.Rules.Builders;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -29,6 +27,7 @@ using SampleSystem.Domain;
 using SampleSystem.Domain.Projections;
 using SampleSystem.Events;
 using SampleSystem.Generated.DTO;
+using Framework.SecuritySystem.DependencyInjection;
 
 namespace SampleSystem.ServiceEnvironment;
 
@@ -43,8 +42,9 @@ public static class SampleSystemFrameworkExtensions
 
                        // Security
 
-                       .RegisterDomainServices()
-                       .RegisterLegacyProjectionDomainServices()
+                       .RegisterDomainSecurityServices()
+                       .RegisterLegacyProjectionDomainSecurityServices()
+                       .RegisterProjectionDomainSecurityServices(typeof(TestBusinessUnit).Assembly)
 
                        // Legacy
 
@@ -161,9 +161,9 @@ public static class SampleSystemFrameworkExtensions
         return services;
     }
 
-    private static IServiceCollection RegisterDomainServices(this IServiceCollection services)
+    private static IServiceCollection RegisterDomainSecurityServices(this IServiceCollection services)
     {
-        return services.RegisterAuthorizationSystemDomainServices<Guid>(
+        return services.RegisterDomainSecurityServices<Guid>(
 
             rb =>
 
@@ -283,9 +283,9 @@ public static class SampleSystemFrameworkExtensions
             );
     }
 
-    private static IServiceCollection RegisterLegacyProjectionDomainServices(this IServiceCollection services)
+    private static IServiceCollection RegisterLegacyProjectionDomainSecurityServices(this IServiceCollection services)
     {
-        return services.RegisterAuthorizationSystemDomainServices<Guid>(
+        return services.RegisterDomainSecurityServices<Guid>(
 
             rb =>
 

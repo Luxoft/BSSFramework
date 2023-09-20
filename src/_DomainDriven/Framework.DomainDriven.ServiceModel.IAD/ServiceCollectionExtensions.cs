@@ -1,10 +1,8 @@
 ﻿using Framework.Authorization.SecuritySystem;
 using Framework.DependencyInjection;
-using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
 using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
-using Framework.DomainDriven.ServiceModel.IAD.DomainServiceBuilder;
 using Framework.HierarchicalExpand;
 using Framework.Persistent;
 using Framework.QueryableSource;
@@ -85,18 +83,5 @@ public static class ServiceCollectionExtensions
                        .AddScoped<ISecurityExpressionBuilderFactory, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Guid>>()
 
                        .AddSingleton<ISecurityOperationResolver, SecurityOperationResolver>();
-    }
-
-    public static IServiceCollection RegisterAuthorizationSystemDomainServices<TIdent>(
-        this IServiceCollection services,
-        Action<IAuthorizationSystemRootDomainServiceBuilder<TIdent>> setupAction)
-    {
-        var builder = new AuthorizationSystemRootDomainServiceBuilder<TIdent>();
-
-        setupAction(builder);
-
-        builder.Register(services);
-
-        return services;
     }
 }

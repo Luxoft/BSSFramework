@@ -1,13 +1,12 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Persistent;
-using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Framework.DomainDriven.ServiceModel.IAD.DomainServiceBuilder;
+namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
-public class AuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent> : IAuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent>, IAuthorizationSystemDomainServiceBuilder
+internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecurityServiceBuilder<TDomainObject, TIdent>, IDomainSecurityServiceBuilder
     where TDomainObject : IIdentityObject<TIdent>
 {
     public SecurityOperation ViewSecurityOperation { get; private set; }
@@ -63,28 +62,28 @@ public class AuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent> : IA
         }
     }
 
-    public IAuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent> SetView(SecurityOperation securityOperation)
+    public IDomainSecurityServiceBuilder<TDomainObject, TIdent> SetView(SecurityOperation securityOperation)
     {
         this.ViewSecurityOperation = securityOperation;
 
         return this;
     }
 
-    public IAuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent> SetEdit(SecurityOperation securityOperation)
+    public IDomainSecurityServiceBuilder<TDomainObject, TIdent> SetEdit(SecurityOperation securityOperation)
     {
         this.EditSecurityOperation = securityOperation;
 
         return this;
     }
 
-    public IAuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent> SetPath(SecurityPath<TDomainObject> securityPath)
+    public IDomainSecurityServiceBuilder<TDomainObject, TIdent> SetPath(SecurityPath<TDomainObject> securityPath)
     {
         this.SecurityPath = securityPath;
 
         return this;
     }
 
-    public IAuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent> SetDependency<TSource>(Expression<Func<TDomainObject, TSource>> dependencyPath)
+    public IDomainSecurityServiceBuilder<TDomainObject, TIdent> SetDependency<TSource>(Expression<Func<TDomainObject, TSource>> dependencyPath)
     {
         this.DependencyServiceType = typeof(DependencyDomainSecurityService<TDomainObject, TSource>);
         this.DependencySourcePath = new DependencyDomainSecurityServicePath<TDomainObject, TSource>(dependencyPath);
@@ -92,7 +91,7 @@ public class AuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent> : IA
         return this;
     }
 
-    public IAuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent> SetUntypedDependency<TSource>()
+    public IDomainSecurityServiceBuilder<TDomainObject, TIdent> SetUntypedDependency<TSource>()
         where TSource : class, IIdentityObject<TIdent>
     {
         this.DependencyServiceType = typeof(UntypedDependencyDomainSecurityService<TDomainObject, TSource, TIdent>);
@@ -100,7 +99,7 @@ public class AuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent> : IA
         return this;
     }
 
-    public IAuthorizationSystemDomainServiceBuilder<TDomainObject, TIdent> SetCustomService<TDomainSecurityService>()
+    public IDomainSecurityServiceBuilder<TDomainObject, TIdent> SetCustomService<TDomainSecurityService>()
         where TDomainSecurityService : IDomainSecurityService<TDomainObject>
     {
         this.CustomServiceType = typeof(TDomainSecurityService);

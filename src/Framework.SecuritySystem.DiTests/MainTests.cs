@@ -2,6 +2,7 @@
 
 using Framework.HierarchicalExpand;
 using Framework.QueryableSource;
+using Framework.SecuritySystem.DependencyInjection;
 using Framework.SecuritySystem.Rules.Builders;
 using V1 = Framework.SecuritySystem.Rules.Builders.MaterializedPermissions;
 
@@ -114,18 +115,20 @@ public class MainTests
                .AddScoped<IAuthorizationSystem<Guid>, ExampleAuthorizationSystem>()
                .AddScoped<IHierarchicalObjectExpanderFactory<Guid>, HierarchicalObjectExpanderFactory<Guid>>()
 
-               .AddSingleton(SecurityPath<Employee>.Create(v => v.BusinessUnit))
-               .AddScoped<IDomainSecurityService<Employee>, EmployeeSecurityService>()
+               .RegisterDomainSecurityServices<Guid>(
+                   rb =>
+                       rb.Add<Employee>(
+                           b => b.SetView(ExampleSecurityOperation.EmployeeView)
+                                 .SetEdit(ExampleSecurityOperation.EmployeeEdit)
+                                 .SetPath(SecurityPath<Employee>.Create(v => v.BusinessUnit))))
 
-
-               .AddSingleton(new DomainObjectSecurityOperationInfo(typeof(Employee), ExampleSecurityOperation.EmployeeView, ExampleSecurityOperation.EmployeeEdit))
                .AddSingleton<ISecurityOperationResolver, SecurityOperationResolver>()
 
                .AddSingleton<IRealTypeResolver, IdentityRealTypeResolver>()
 
                .AddScoped(_ => securityContextInfoService)
 
-               .BuildServiceProvider(new ServiceProviderOptions{ ValidateOnBuild = true, ValidateScopes = true });
+               .BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
     }
 
     private IQueryableSource BuildQueryableSource(IServiceProvider serviceProvider)

@@ -81,6 +81,8 @@ public static class ServiceCollectionExtensions
 
                        .AddScoped<IQueryableSource, RepositoryQueryableSource>()
 
-                       .AddScoped<ISecurityExpressionBuilderFactory, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Guid>>();
+                       .AddScoped<ISecurityExpressionBuilderFactory, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Guid>>()
+
+                       .AddSingleton<ISecurityOperationResolver, SecurityOperationResolver>();
     }
 }

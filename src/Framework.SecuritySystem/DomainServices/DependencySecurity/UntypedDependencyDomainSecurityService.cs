@@ -3,21 +3,20 @@ using Framework.QueryableSource;
 
 namespace Framework.SecuritySystem;
 
-public class UntypedDependencyDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent> :
+public class UntypedDependencyDomainSecurityService<TDomainObject, TBaseDomainObject, TIdent> :
 
-    DependencyDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent>
+    DependencyDomainSecurityServiceBase<TDomainObject, TBaseDomainObject>
 
-    where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-    where TDomainObject : class, TPersistentDomainObjectBase
-    where TBaseDomainObject : class, TPersistentDomainObjectBase
+    where TDomainObject : class, IIdentityObject<TIdent>
+    where TBaseDomainObject : class, IIdentityObject<TIdent>
 {
-    private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
+    private readonly IQueryableSource queryableSource;
 
     public UntypedDependencyDomainSecurityService(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
-        ISecurityOperationResolver<TPersistentDomainObjectBase> securityOperationResolver,
+        ISecurityOperationResolver securityOperationResolver,
         IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService,
-        IQueryableSource<TPersistentDomainObjectBase> queryableSource)
+        IQueryableSource queryableSource)
 
         : base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService)
     {
@@ -26,7 +25,7 @@ public class UntypedDependencyDomainSecurityService<TPersistentDomainObjectBase,
 
     protected override ISecurityProvider<TDomainObject> CreateDependencySecurityProvider(ISecurityProvider<TBaseDomainObject> baseProvider)
     {
-        return new UntypedDependencySecurityProvider<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent>(
+        return new UntypedDependencySecurityProvider<TDomainObject, TBaseDomainObject, TIdent>(
             baseProvider,
             this.queryableSource);
     }

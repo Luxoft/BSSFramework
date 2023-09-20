@@ -25,7 +25,7 @@ public abstract class DomainSecurityServiceGenerator<TConfiguration> : Generator
 
     public abstract IEnumerable<CodeTypeReference> GetBaseTypes();
 
-    public abstract IEnumerable<(CodeTypeReference ParameterType, string Name)> GetBaseTypeConstructorParameters();
+    public abstract IEnumerable<(CodeTypeReference ParameterType, string Name, CodeExpression CustomBaseInvoke)> GetBaseTypeConstructorParameters();
 
     public virtual CodeConstructor GetConstructor()
     {
@@ -33,10 +33,14 @@ public abstract class DomainSecurityServiceGenerator<TConfiguration> : Generator
 
         foreach (var baseTypedParameter in this.GetBaseTypeConstructorParameters())
         {
-            var resultParameter = baseTypedParameter.ParameterType.ToParameterDeclarationExpression(baseTypedParameter.Name);
+            var resultParameter = baseTypedParameter.ParameterType?.ToParameterDeclarationExpression(baseTypedParameter.Name);
 
-            resultCtor.Parameters.Add(resultParameter);
-            resultCtor.BaseConstructorArgs.Add(resultParameter.ToVariableReferenceExpression());
+            if (resultParameter != null)
+            {
+                resultCtor.Parameters.Add(resultParameter);
+            }
+
+            resultCtor.BaseConstructorArgs.Add(baseTypedParameter.CustomBaseInvoke ?? resultParameter.ToVariableReferenceExpression());
         }
 
         return resultCtor;

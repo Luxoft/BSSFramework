@@ -6,7 +6,7 @@ public enum FileType
 
     BLLContextInterface,
 
-    SecurityOperationResolver,
+    SecurityOperationHelper,
 
     RootSecurityServicePathContainerInterface,
 

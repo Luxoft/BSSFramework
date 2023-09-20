@@ -2,8 +2,6 @@
 using Framework.SecuritySystem;
 using Framework.SecuritySystem.Rules.Builders;
 
-using SampleSystem.Domain;
-
 namespace SampleSystem.BLL;
 
 public class SampleSystemEmployeeSecurityService : ContextDomainSecurityService<PersistentDomainObjectBase, Employee, Guid>
@@ -12,12 +10,11 @@ public class SampleSystemEmployeeSecurityService : ContextDomainSecurityService<
 
     public SampleSystemEmployeeSecurityService(
             IDisabledSecurityProviderSource disabledSecurityProviderSource,
-            ISecurityOperationResolver<PersistentDomainObjectBase> securityOperationResolver,
+            ISecurityOperationResolver securityOperationResolver,
             IAuthorizationSystem<Guid> authorizationSystem,
-            ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
-            IRunAsManager runAsManager)
+            ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
 
-            : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+            : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetEmployeeSecurityPath<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>())
     {
         this.runAsManager = runAsManager;
     }

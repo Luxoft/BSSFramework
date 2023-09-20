@@ -1,20 +1,16 @@
 ﻿using Framework.SecuritySystem.Rules.Builders;
-using Framework.Persistent;
 using Framework.SecuritySystem.Providers.Operation;
 
 namespace Framework.SecuritySystem;
 
 public static class SecurityPathExtensions
 {
-    public static ISecurityProvider<TDomainObject> ToProvider<TPersistentDomainObjectBase, TDomainObject, TIdent>(
+    public static ISecurityProvider<TDomainObject> ToProvider<TDomainObject>(
         this SecurityPath<TDomainObject> securityPath,
         ContextSecurityOperation operation,
-        ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
-
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
-        where TDomainObject : class, TPersistentDomainObjectBase
+        ISecurityExpressionBuilderFactory securityExpressionBuilderFactory)
     {
-        return new ContextSecurityPathProvider<TPersistentDomainObjectBase, TDomainObject, TIdent>(
+        return new ContextSecurityPathProvider<TDomainObject>(
             securityPath,
             operation,
             securityExpressionBuilderFactory);

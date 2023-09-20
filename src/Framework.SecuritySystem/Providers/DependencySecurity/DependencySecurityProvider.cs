@@ -1,24 +1,19 @@
 ﻿using System.Linq.Expressions;
 
 using Framework.Core;
-using Framework.Persistent;
 using Framework.QueryableSource;
 
 namespace Framework.SecuritySystem
 {
-    public class DependencySecurityProvider<TPersistentDomainObjectBase, TDomainObject, TBaseDomainObject, TIdent> : ISecurityProvider<TDomainObject>
-
-        where TDomainObject : class, TPersistentDomainObjectBase
-        where TBaseDomainObject : class, TPersistentDomainObjectBase
-        where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
+    public class DependencySecurityProvider<TDomainObject, TBaseDomainObject> : ISecurityProvider<TDomainObject>
     {
         private readonly Expression<Func<TDomainObject, TBaseDomainObject>> selector;
 
-        private readonly IQueryableSource<TPersistentDomainObjectBase> queryableSource;
+        private readonly IQueryableSource queryableSource;
 
         private readonly ISecurityProvider<TBaseDomainObject> baseSecurityProvider;
 
-        public DependencySecurityProvider(ISecurityProvider<TBaseDomainObject> baseSecurityProvider, Expression<Func<TDomainObject, TBaseDomainObject>> selector, IQueryableSource<TPersistentDomainObjectBase> queryableSource)
+        public DependencySecurityProvider(ISecurityProvider<TBaseDomainObject> baseSecurityProvider, Expression<Func<TDomainObject, TBaseDomainObject>> selector, IQueryableSource queryableSource)
         {
             this.baseSecurityProvider = baseSecurityProvider ?? throw new ArgumentNullException(nameof(baseSecurityProvider));
             this.selector = selector ?? throw new ArgumentNullException(nameof(selector));

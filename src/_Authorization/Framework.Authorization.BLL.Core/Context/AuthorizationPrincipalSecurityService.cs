@@ -7,7 +7,7 @@ namespace Framework.Authorization.BLL
     {
         public AuthorizationPrincipalSecurityService(
             IDisabledSecurityProviderSource disabledSecurityProviderSource,
-            ISecurityOperationResolver<PersistentDomainObjectBase> securityOperationResolver,
+            ISecurityOperationResolver securityOperationResolver,
             IAuthorizationSystem<Guid> authorizationSystem,
             IAuthorizationBLLContext context)
             : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)

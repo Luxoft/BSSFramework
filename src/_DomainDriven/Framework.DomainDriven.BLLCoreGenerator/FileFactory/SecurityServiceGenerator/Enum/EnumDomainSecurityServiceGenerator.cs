@@ -11,10 +11,6 @@ namespace Framework.DomainDriven.BLLCoreGenerator;
 public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurityServiceGenerator<TConfiguration>
         where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
 {
-    private readonly CodeMemberMethod getSecurityPathMethod;
-
-    private readonly CodeMemberField securityPathContainerField;
-
     private readonly bool hasContext;
 
 
@@ -28,28 +24,9 @@ public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurity
 
         this.hasContext = this.Configuration.HasSecurityContext(this.DomainType);
 
-        this.BaseServiceType = (this.hasContext ? typeof(ContextDomainSecurityService<,,>) : typeof(NonContextDomainSecurityService<,,>)).ToTypeReference(
-
-         this.Configuration.Environment.PersistentDomainObjectBaseType.ToTypeReference(),
+        this.BaseServiceType = (this.hasContext ? typeof(ContextDomainSecurityService<,>) : typeof(NonContextDomainSecurityService<,>)).ToTypeReference(
          this.DomainTypeReference,
          this.Configuration.Environment.GetIdentityType().ToTypeReference());
-
-
-        if (this.hasContext)
-        {
-            this.securityPathContainerField = this.Configuration.GetCodeTypeReference(null, FileType.RootSecurityServicePathContainerInterface).ToMemberField("securityPathContainer");
-
-            this.getSecurityPathMethod = new CodeMemberMethod
-                                         {
-                                                 Name = "GetSecurityPath",
-                                                 Attributes = MemberAttributes.Family | MemberAttributes.Override,
-                                                 ReturnType = typeof(SecurityPath<>).ToTypeReference(this.DomainTypeReference),
-                                                 Statements =
-                                                 {
-                                                         new CodeThisReferenceExpression().ToFieldReference(this.securityPathContainerField).ToMethodReferenceExpression(domainType.ToGetSecurityPathMethodName(), genericTypes).ToMethodInvokeExpression().ToMethodReturnStatement()
-                                                 }
-                                         };
-        }
     }
 
 
@@ -61,15 +38,7 @@ public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurity
 
     public override IEnumerable<CodeTypeMember> GetMembers()
     {
-        if (this.securityPathContainerField != null)
-        {
-            yield return this.securityPathContainerField;
-        }
-
-        if (this.getSecurityPathMethod != null)
-        {
-            yield return this.getSecurityPathMethod;
-        }
+        yield break;
     }
 
     public override IEnumerable<CodeTypeReference> GetBaseTypes()
@@ -77,30 +46,23 @@ public class EnumDomainSecurityServiceGenerator<TConfiguration> : DomainSecurity
         yield break;
     }
 
-    public override IEnumerable<(CodeTypeReference ParameterType, string Name)> GetBaseTypeConstructorParameters()
+    public override IEnumerable<(CodeTypeReference ParameterType, string Name, CodeExpression CustomBaseInvoke)> GetBaseTypeConstructorParameters()
     {
-        yield return (typeof(IDisabledSecurityProviderSource).ToTypeReference(), "disabledSecurityProviderSource");
-        yield return (typeof(ISecurityOperationResolver<>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType), "securityOperationResolver");
-        yield return (typeof(IAuthorizationSystem<>).ToTypeReference(this.Configuration.Environment.GetIdentityType()), "authorizationSystem");
+        yield return (typeof(IDisabledSecurityProviderSource).ToTypeReference(), "disabledSecurityProviderSource", null);
+        yield return (typeof(ISecurityOperationResolver).ToTypeReference(), "securityOperationResolver", null);
+        yield return (typeof(IAuthorizationSystem<>).ToTypeReference(this.Configuration.Environment.GetIdentityType()), "authorizationSystem", null);
 
         if (this.hasContext)
         {
-            yield return (typeof(ISecurityExpressionBuilderFactory<,>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType, this.Configuration.Environment.GetIdentityType()), "securityExpressionBuilderFactory");
+            yield return (typeof(ISecurityExpressionBuilderFactory).ToTypeReference(), "securityExpressionBuilderFactory", null);
+
+            var securityPathContainerParam = new CodeParameterDeclarationExpression(this.Configuration.GetCodeTypeReference(null, FileType.RootSecurityServicePathContainerInterface), "securityPathContainer");
+
+            yield return (
+                             securityPathContainerParam.Type,
+                             securityPathContainerParam.Name,
+                             securityPathContainerParam.ToVariableReferenceExpression().ToMethodInvokeExpression(this.DomainType.ToGetSecurityPathMethodName())
+                             );
         }
-    }
-
-    public override CodeConstructor GetConstructor()
-    {
-        var ctor = base.GetConstructor();
-
-        if (this.securityPathContainerField != null)
-        {
-            var initFieldParameter = this.securityPathContainerField.Type.ToParameterDeclarationExpression(this.securityPathContainerField.Name);
-
-            ctor.Parameters.Add(initFieldParameter);
-            ctor.Statements.Add(initFieldParameter.ToVariableReferenceExpression().ToAssignStatement(new CodeThisReferenceExpression().ToFieldReference(this.securityPathContainerField)));
-        }
-
-        return ctor;
     }
 }

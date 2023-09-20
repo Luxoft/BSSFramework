@@ -31,7 +31,7 @@ public class RootSecurityServiceBaseFileFactory<TConfiguration> : FileFactory<TC
     {
         var methodName = "Register";
 
-        var serviceCollectionParameter = new CodeParameterDeclarationExpression(typeof(IServiceCollection), "serviceCollection");
+        var serviceCollectionParameter = new CodeParameterDeclarationExpression(typeof(IServiceCollection), "services");
 
         var addScopedStatements = from domainType in this.Configuration.SecurityServiceDomainTypes
 

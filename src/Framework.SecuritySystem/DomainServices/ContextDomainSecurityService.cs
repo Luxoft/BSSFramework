@@ -79,7 +79,7 @@ public class ContextDomainSecurityService<TPersistentDomainObjectBase, TDomainOb
 {
     private readonly SecurityPath<TDomainObject> securityPath;
 
-    protected ContextDomainSecurityService(
+    public ContextDomainSecurityService(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
         ISecurityOperationResolver<TPersistentDomainObjectBase> securityOperationResolver,
         IAuthorizationSystem<TIdent> authorizationSystem,

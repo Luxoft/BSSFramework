@@ -15,7 +15,7 @@ public class DependencyDomainSecurityService<TPersistentDomainObjectBase, TDomai
 
     private readonly DependencyDomainSecurityServicePath<TDomainObject, TBaseDomainObject> path;
 
-    protected DependencyDomainSecurityService(
+    public DependencyDomainSecurityService(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
         ISecurityOperationResolver<TPersistentDomainObjectBase> securityOperationResolver,
         IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService,

@@ -5,6 +5,8 @@ using Framework.QueryLanguage;
 using Framework.SecuritySystem;
 using Framework.Validation;
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Framework.DomainDriven.BLL.Security;
 
 public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent, TBLLFactoryContainer> :
@@ -28,15 +30,17 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent
 
     public virtual IAccessDeniedExceptionService AccessDeniedExceptionService { get; }
 
+    public virtual IDisabledSecurityProviderSource DisabledSecurityProviderSource => this.ServiceProvider.GetRequiredService<IDisabledSecurityProviderSource>();
+
+    public virtual ISecurityOperationResolver SecurityOperationResolver => this.ServiceProvider.GetRequiredService<ISecurityOperationResolver>();
+
     /// <inheritdoc />
     public override bool AllowedExpandTreeParents<TDomainObject>()
     {
-        var viewOperation = ((ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>)this).SecurityOperationResolver.GetSecurityOperation<TDomainObject>(BLLSecurityMode.View);
+        var viewOperation = this.SecurityOperationResolver.TryGetSecurityOperation<TDomainObject>(BLLSecurityMode.View);
 
-        if (viewOperation is ContextSecurityOperation)
+        if (viewOperation is ContextSecurityOperation contextOperation)
         {
-            var contextOperation = viewOperation as ContextSecurityOperation;
-
             return contextOperation.ExpandType.HasFlag(HierarchicalExpandType.Parents);
         }
         else
@@ -44,7 +48,4 @@ public abstract class SecurityBLLBaseContext<TPersistentDomainObjectBase, TIdent
             return true;
         }
     }
-
-    IAccessDeniedExceptionService IAccessDeniedExceptionServiceContainer.AccessDeniedExceptionService =>
-            this.AccessDeniedExceptionService;
 }

@@ -121,7 +121,6 @@ public class MainTests
                .AddSingleton(new DomainObjectSecurityOperationInfo(typeof(Employee), ExampleSecurityOperation.EmployeeView, ExampleSecurityOperation.EmployeeEdit))
                .AddSingleton<ISecurityOperationResolver, SecurityOperationResolver>()
 
-
                .AddSingleton<IRealTypeResolver, IdentityRealTypeResolver>()
 
                .AddScoped(_ => securityContextInfoService)

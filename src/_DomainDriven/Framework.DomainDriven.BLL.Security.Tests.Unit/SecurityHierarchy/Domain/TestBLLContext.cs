@@ -100,4 +100,8 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<PersistentDom
     public IHierarchicalObjectExpanderFactory<Guid> HierarchicalObjectExpanderFactory => new HierarchicalObjectExpanderFactory<Guid>(this.GetQueryableSource(), new ProjectionRealTypeResolver());
 
     public IServiceProvider ServiceProvider { get; }
+
+    public IDisabledSecurityProviderSource DisabledSecurityProviderSource => this.ServiceProvider.GetRequiredService<IDisabledSecurityProviderSource>();
+
+    public ISecurityOperationResolver SecurityOperationResolver => this.ServiceProvider.GetRequiredService<ISecurityOperationResolver>();
 }

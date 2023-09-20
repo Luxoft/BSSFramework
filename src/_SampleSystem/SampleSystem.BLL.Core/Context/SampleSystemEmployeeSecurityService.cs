@@ -1,17 +1,15 @@
 ﻿using Framework.SecuritySystem;
 using Framework.SecuritySystem.Rules.Builders;
 
-using SampleSystem.Domain;
-
 namespace SampleSystem.BLL;
 
 public partial class SampleSystemEmployeeSecurityService<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>
 {
     public SampleSystemEmployeeSecurityService(
             IDisabledSecurityProviderSource disabledSecurityProviderSource,
-            ISecurityOperationResolver<PersistentDomainObjectBase> securityOperationResolver,
+            ISecurityOperationResolver securityOperationResolver,
             IAuthorizationSystem<Guid> authorizationSystem,
-            ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> securityExpressionBuilderFactory,
+            ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
             ISampleSystemSecurityPathContainer securityPathContainer,
             ISampleSystemBLLContext context)
 

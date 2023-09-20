@@ -80,7 +80,7 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<PersistentDom
 
     public IUserAuthenticationService UserAuthenticationService => Framework.Core.Services.UserAuthenticationService.CreateFor("testUser");
 
-    public IQueryableSource<PersistentDomainObjectBase> GetQueryableSource() => new BLLQueryableSource<TestBllContext, PersistentDomainObjectBase, Guid>(this);
+    public IQueryableSource GetQueryableSource() => new RepositoryQueryableSource(this.ServiceProvider);
 
     public IValidator Validator => ValidatorBase.Success;
 
@@ -97,7 +97,7 @@ public class TestBllContext : ITestBLLContext, ISecurityBLLContext<PersistentDom
 
     public ITrackingService<PersistentDomainObjectBase> TrackingService { get; private set; }
 
-    public IHierarchicalObjectExpanderFactory<Guid> HierarchicalObjectExpanderFactory => new HierarchicalObjectExpanderFactory<PersistentDomainObjectBase, Guid>(this.GetQueryableSource(), new ProjectionRealTypeResolver());
+    public IHierarchicalObjectExpanderFactory<Guid> HierarchicalObjectExpanderFactory => new HierarchicalObjectExpanderFactory<Guid>(this.GetQueryableSource(), new ProjectionRealTypeResolver());
 
     public IServiceProvider ServiceProvider { get; }
 }

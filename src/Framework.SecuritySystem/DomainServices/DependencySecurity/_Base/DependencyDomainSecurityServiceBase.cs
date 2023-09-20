@@ -4,6 +4,8 @@ public abstract class DependencyDomainSecurityServiceBase<TDomainObject, TBaseDo
 
     DomainSecurityService<TDomainObject>
 {
+    private readonly ISecurityOperationResolver securityOperationResolver;
+
     private readonly IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService;
 
     protected DependencyDomainSecurityServiceBase(
@@ -12,12 +14,22 @@ public abstract class DependencyDomainSecurityServiceBase<TDomainObject, TBaseDo
         IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService)
         : base(disabledSecurityProviderSource, securityOperationResolver)
     {
+        this.securityOperationResolver = securityOperationResolver;
         this.baseDomainSecurityService = baseDomainSecurityService ?? throw new ArgumentNullException(nameof(baseDomainSecurityService));
     }
 
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(BLLSecurityMode securityMode)
     {
-        return this.CreateDependencySecurityProvider(this.baseDomainSecurityService.GetSecurityProvider(securityMode));
+        var customSecurityOperation = this.securityOperationResolver.TryGetSecurityOperation<TDomainObject>(securityMode);
+
+        if (customSecurityOperation == null)
+        {
+            return this.CreateDependencySecurityProvider(this.baseDomainSecurityService.GetSecurityProvider(securityMode));
+        }
+        else
+        {
+            return this.CreateSecurityProvider(customSecurityOperation);
+        }
     }
 
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(SecurityOperation securityOperation)

@@ -23,5 +23,5 @@ public partial interface ISampleSystemBLLContext :
 
     ISecurityTypeResolverContainer
 {
-    ISecurityExpressionBuilderFactory<PersistentDomainObjectBase, Guid> SecurityExpressionBuilderFactory { get; }
+    ISecurityExpressionBuilderFactory SecurityExpressionBuilderFactory { get; }
 }

@@ -5,15 +5,11 @@ using Framework.Configuration.BLL.Notification;
 using Framework.Core;
 using Framework.DependencyInjection;
 using Framework.DomainDriven.BLL;
-using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.Tracking;
 using Framework.DomainDriven.NHibernate;
 using Framework.Exceptions;
 using Framework.HierarchicalExpand;
-using Framework.QueryableSource;
 using Framework.QueryLanguage;
-using Framework.SecuritySystem;
-using Framework.SecuritySystem.Rules.Builders;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -69,12 +65,7 @@ public static class ServiceCollectionExtensions
 
                .AddScoped<ITrackingService<Framework.Authorization.Domain.PersistentDomainObjectBase>, TrackingService<Framework.Authorization.Domain.PersistentDomainObjectBase>>()
 
-               .AddSingleton<ISecurityOperationResolver<Framework.Authorization.Domain.PersistentDomainObjectBase>, AuthorizationSecurityOperationResolver>()
-               .AddScopedFrom<IAuthorizationSecurityPathContainer, IAuthorizationSecurityService>()
-               .AddScoped<IQueryableSource<Framework.Authorization.Domain.PersistentDomainObjectBase>, BLLQueryableSource<IAuthorizationBLLContext, Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
-               .AddScoped<ISecurityExpressionBuilderFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Framework.Authorization.Domain.PersistentDomainObjectBase, Guid>>()
-
-
+               .Self(AuthorizationSecurityOperationHelper.RegisterDomainObjectSecurityOperations)
                .Self(AuthorizationSecurityServiceBase.Register)
                .Self(AuthorizationBLLFactoryContainer.RegisterBLLFactory);
     }
@@ -103,12 +94,9 @@ public static class ServiceCollectionExtensions
 
                .AddScopedFrom<Framework.DomainDriven.BLL.Configuration.IConfigurationBLLContext, IConfigurationBLLContext>()
 
-               .AddSingleton<ISecurityOperationResolver<Framework.Configuration.Domain.PersistentDomainObjectBase>, ConfigurationSecurityOperationResolver>()
-
                .AddScopedFrom<IConfigurationSecurityPathContainer, IConfigurationSecurityService>()
-               .AddScoped<IQueryableSource<Framework.Configuration.Domain.PersistentDomainObjectBase>, BLLQueryableSource<IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>()
-               .AddScoped<ISecurityExpressionBuilderFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>, Framework.SecuritySystem.Rules.Builders.MaterializedPermissions.SecurityExpressionBuilderFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, Guid>>()
 
+               .Self(ConfigurationSecurityOperationHelper.RegisterDomainObjectSecurityOperations)
                .Self(ConfigurationSecurityServiceBase.Register)
                .Self(ConfigurationBLLFactoryContainer.RegisterBLLFactory);
     }

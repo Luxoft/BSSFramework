@@ -11,266 +11,53 @@ namespace SampleSystem.BLL
 {
     
     
-    public class SampleSystemSecurityOperationResolver : Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase>
+    #region 
+	static
+    public class SampleSystemSecurityOperationHelper
     {
         
-        public virtual Framework.SecuritySystem.SecurityOperation GetSecurityOperation(System.Type domainType, Framework.SecuritySystem.BLLSecurityMode mode)
+        public static void RegisterDomainObjectSecurityOperations(Microsoft.Extensions.DependencyInjection.IServiceCollection services)
         {
-            if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.AuthPerformanceObject) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.BusinessUnitView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.BusinessUnit) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.BusinessUnitView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.BusinessUnit) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.BusinessUnitEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.BusinessUnitHrDepartment) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.BusinessUnitHrDepartmentView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.BusinessUnitHrDepartment) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.BusinessUnitHrDepartmentEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.BusinessUnitManagerCommissionLink) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.BusinessUnitManagerCommissionLinkView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.BusinessUnitManagerCommissionLink) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.BusinessUnitManagerCommissionLinkEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.BusinessUnitType) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.BusinessUnitTypeView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.BusinessUnitType) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.BusinessUnitTypeEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.CompanyLegalEntity) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.CompanyLegalEntityView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.CompanyLegalEntity) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.CompanyLegalEntityEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.Country) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.CountryView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.Country) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.CountryEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.Employee) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.EmployeeView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.Employee) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.EmployeeEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EmployeeCellPhone) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.EmployeeView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EmployeeInformation) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EmployeePersonalCellPhone) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.EmployeePersonalCellPhoneView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.EmployeePersonalCellPhone) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.EmployeePersonalCellPhoneEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EmployeePhoto) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.EmployeeView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.EmployeePhoto) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.EmployeeEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EmployeePosition) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.EmployeePositionView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.EmployeePosition) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.EmployeePositionEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EmployeeRegistrationType) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EmployeeRole) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.EmployeeRoleView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EmployeeRoleDegree) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.EmployeeRoleDegreeView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EmployeeSpecialization) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.EmployeeSpecializationView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EnversBug1676.Location1676) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.Example1) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.LocationView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.Example1) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.LocationEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.HRDepartment) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.HRDepartmentView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.HRDepartment) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.HRDepartmentEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.IMRequest) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.Information) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.Location) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.LocationView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.Location) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.LocationEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.ManagementUnit) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.ManagementUnitView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.ManagementUnit) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.ManagementUnitEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.ManagementUnitAndBusinessUnitLink) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.ManagementUnitAndBusinessUnitLinkView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.ManagementUnitAndBusinessUnitLink) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.ManagementUnitAndBusinessUnitLinkEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.ManagementUnitAndHRDepartmentLink) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.ManagementUnitAndHRDepartmentLinkView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.ManagementUnitAndHRDepartmentLink) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.ManagementUnitAndHRDepartmentLinkEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.ManagementUnitFluentMapping) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.ManagementUnitView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.ManagementUnitFluentMapping) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.ManagementUnitEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.Principal) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.Principal) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.Projections.CustomCompanyLegalEntity) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.AuthorizationImpersonate;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.Projections.TestLegacyEmployee) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.EmployeeView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.Projections.TestLegacyEmployee) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.EmployeeEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.SqlParserTestObj) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.SqlParserTestObj) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.SqlParserTestObjContainer) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.SqlParserTestObjContainer) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.TestImmutableObj) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(SampleSystem.Domain.TestImmutableObj) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.TestPerformanceObject) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.EmployeeView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.TestPlainAuthObject) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.EmployeeView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(SampleSystem.Domain.TestRootSecurityObj) == domainType))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.EmployeeView;
-            }
-            else
-            {
-                return SampleSystem.SampleSystemSecurityOperation.Disabled;
-            }
-        }
-        
-        public virtual Framework.SecuritySystem.SecurityOperation GetSecurityOperation<TDomainObject>(Framework.SecuritySystem.BLLSecurityMode mode)
-            where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase
-        {
-            if ((mode == Framework.SecuritySystem.BLLSecurityMode.Disabled))
-            {
-                return SampleSystem.SampleSystemSecurityOperation.Disabled;
-            }
-            else
-            {
-                return this.GetSecurityOperation(typeof(TDomainObject), mode);
-            }
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.AuthPerformanceObject), SampleSystem.SampleSystemSecurityOperation.BusinessUnitView, null));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.BusinessUnit), SampleSystem.SampleSystemSecurityOperation.BusinessUnitView, SampleSystem.SampleSystemSecurityOperation.BusinessUnitEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.BusinessUnitHrDepartment), SampleSystem.SampleSystemSecurityOperation.BusinessUnitHrDepartmentView, SampleSystem.SampleSystemSecurityOperation.BusinessUnitHrDepartmentEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.BusinessUnitManagerCommissionLink), SampleSystem.SampleSystemSecurityOperation.BusinessUnitManagerCommissionLinkView, SampleSystem.SampleSystemSecurityOperation.BusinessUnitManagerCommissionLinkEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.BusinessUnitType), SampleSystem.SampleSystemSecurityOperation.BusinessUnitTypeView, SampleSystem.SampleSystemSecurityOperation.BusinessUnitTypeEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.CompanyLegalEntity), SampleSystem.SampleSystemSecurityOperation.CompanyLegalEntityView, SampleSystem.SampleSystemSecurityOperation.CompanyLegalEntityEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.Country), SampleSystem.SampleSystemSecurityOperation.CountryView, SampleSystem.SampleSystemSecurityOperation.CountryEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.Employee), SampleSystem.SampleSystemSecurityOperation.EmployeeView, SampleSystem.SampleSystemSecurityOperation.EmployeeEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.EmployeeCellPhone), SampleSystem.SampleSystemSecurityOperation.EmployeeView, null));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.EmployeeInformation), SampleSystem.SampleSystemSecurityOperation.Disabled, null));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.EmployeePersonalCellPhone), SampleSystem.SampleSystemSecurityOperation.EmployeePersonalCellPhoneView, SampleSystem.SampleSystemSecurityOperation.EmployeePersonalCellPhoneEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.EmployeePhoto), SampleSystem.SampleSystemSecurityOperation.EmployeeView, SampleSystem.SampleSystemSecurityOperation.EmployeeEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.EmployeePosition), SampleSystem.SampleSystemSecurityOperation.EmployeePositionView, SampleSystem.SampleSystemSecurityOperation.EmployeePositionEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.EmployeeRegistrationType), SampleSystem.SampleSystemSecurityOperation.Disabled, null));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.EmployeeRole), SampleSystem.SampleSystemSecurityOperation.EmployeeRoleView, null));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.EmployeeRoleDegree), SampleSystem.SampleSystemSecurityOperation.EmployeeRoleDegreeView, null));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.EmployeeSpecialization), SampleSystem.SampleSystemSecurityOperation.EmployeeSpecializationView, null));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.EnversBug1676.Location1676), SampleSystem.SampleSystemSecurityOperation.Disabled, null));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.EnversBug1676.WorkingCalendar1676), SampleSystem.SampleSystemSecurityOperation.Disabled, null));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.Example1), SampleSystem.SampleSystemSecurityOperation.LocationView, SampleSystem.SampleSystemSecurityOperation.LocationEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.HRDepartment), SampleSystem.SampleSystemSecurityOperation.HRDepartmentView, SampleSystem.SampleSystemSecurityOperation.HRDepartmentEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.IMRequest), SampleSystem.SampleSystemSecurityOperation.Disabled, null));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.Information), SampleSystem.SampleSystemSecurityOperation.Disabled, null));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.Location), SampleSystem.SampleSystemSecurityOperation.LocationView, SampleSystem.SampleSystemSecurityOperation.LocationEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.ManagementUnit), SampleSystem.SampleSystemSecurityOperation.ManagementUnitView, SampleSystem.SampleSystemSecurityOperation.ManagementUnitEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.ManagementUnitAndBusinessUnitLink), SampleSystem.SampleSystemSecurityOperation.ManagementUnitAndBusinessUnitLinkView, SampleSystem.SampleSystemSecurityOperation.ManagementUnitAndBusinessUnitLinkEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.ManagementUnitAndHRDepartmentLink), SampleSystem.SampleSystemSecurityOperation.ManagementUnitAndHRDepartmentLinkView, SampleSystem.SampleSystemSecurityOperation.ManagementUnitAndHRDepartmentLinkEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.ManagementUnitFluentMapping), SampleSystem.SampleSystemSecurityOperation.ManagementUnitView, SampleSystem.SampleSystemSecurityOperation.ManagementUnitEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.Principal), SampleSystem.SampleSystemSecurityOperation.Disabled, SampleSystem.SampleSystemSecurityOperation.Disabled));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.Projections.CustomCompanyLegalEntity), SampleSystem.SampleSystemSecurityOperation.AuthorizationImpersonate, null));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.Projections.TestLegacyEmployee), SampleSystem.SampleSystemSecurityOperation.EmployeeView, SampleSystem.SampleSystemSecurityOperation.EmployeeEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.SqlParserTestObj), SampleSystem.SampleSystemSecurityOperation.Disabled, SampleSystem.SampleSystemSecurityOperation.Disabled));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.SqlParserTestObjContainer), SampleSystem.SampleSystemSecurityOperation.Disabled, SampleSystem.SampleSystemSecurityOperation.Disabled));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.TestImmutableObj), SampleSystem.SampleSystemSecurityOperation.Disabled, SampleSystem.SampleSystemSecurityOperation.Disabled));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.TestPerformanceObject), SampleSystem.SampleSystemSecurityOperation.EmployeeView, null));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.TestPlainAuthObject), SampleSystem.SampleSystemSecurityOperation.EmployeeView, null));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(SampleSystem.Domain.TestRootSecurityObj), SampleSystem.SampleSystemSecurityOperation.EmployeeView, null));
         }
     }
+    #endregion
     
     public partial class SampleSystemBLLContext : Framework.DomainDriven.BLL.Security.SecurityBLLBaseContext<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid, SampleSystem.BLL.ISampleSystemBLLFactoryContainer>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid>>>, SampleSystem.BLL.ISampleSystemBLLContext
     {
@@ -370,64 +157,64 @@ namespace SampleSystem.BLL
         {
         }
         
-        public static void Register(Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection)
+        public static void Register(Microsoft.Extensions.DependencyInjection.IServiceCollection services)
         {
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.AuthPerformanceObject>, SampleSystem.BLL.SampleSystemAuthPerformanceObjectSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit>, SampleSystem.BLL.SampleSystemBusinessUnitSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitHrDepartment>, SampleSystem.BLL.SampleSystemBusinessUnitHrDepartmentSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitManagerCommissionLink>, SampleSystem.BLL.SampleSystemBusinessUnitManagerCommissionLinkSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitType>, SampleSystem.BLL.SampleSystemBusinessUnitTypeSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.CompanyLegalEntity>, SampleSystem.BLL.SampleSystemCompanyLegalEntitySecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Country>, SampleSystem.BLL.SampleSystemCountrySecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee>, SampleSystem.BLL.SampleSystemEmployeeSecurityService<SampleSystem.Domain.Employee, SampleSystem.Domain.BusinessUnit, SampleSystem.Domain.HRDepartment, SampleSystem.Domain.Location, SampleSystem.Domain.Employee>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeCellPhone>, SampleSystem.BLL.SampleSystemEmployeeCellPhoneSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeInformation>, SampleSystem.BLL.SampleSystemEmployeeInformationSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePersonalCellPhone>, SampleSystem.BLL.SampleSystemEmployeePersonalCellPhoneSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePhoto>, SampleSystem.BLL.SampleSystemEmployeePhotoSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePosition>, SampleSystem.BLL.SampleSystemEmployeePositionSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRegistrationType>, SampleSystem.BLL.SampleSystemEmployeeRegistrationTypeSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRole>, SampleSystem.BLL.SampleSystemEmployeeRoleSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRoleDegree>, SampleSystem.BLL.SampleSystemEmployeeRoleDegreeSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeSpecialization>, SampleSystem.BLL.SampleSystemEmployeeSpecializationSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EnversBug1676.Location1676>, SampleSystem.BLL.SampleSystemLocation1676SecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>, SampleSystem.BLL.SampleSystemWorkingCalendar1676SecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Example1>, SampleSystem.BLL.SampleSystemExample1SecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.HRDepartment>, SampleSystem.BLL.SampleSystemHRDepartmentSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.IMRequest>, SampleSystem.BLL.SampleSystemIMRequestSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Information>, SampleSystem.BLL.SampleSystemInformationSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Location>, SampleSystem.BLL.SampleSystemLocationSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnit>, SampleSystem.BLL.SampleSystemManagementUnitSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>, SampleSystem.BLL.SampleSystemManagementUnitAndBusinessUnitLinkSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>, SampleSystem.BLL.SampleSystemManagementUnitAndHRDepartmentLinkSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitFluentMapping>, SampleSystem.BLL.SampleSystemManagementUnitFluentMappingSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>, SampleSystem.BLL.SampleSystemTestManualEmployeeProjectionSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Principal>, SampleSystem.BLL.SampleSystemPrincipalSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.BusinessUnitIdentity>, SampleSystem.BLL.SampleSystemBusinessUnitIdentitySecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.BusinessUnitProgramClass>, SampleSystem.BLL.SampleSystemBusinessUnitProgramClassSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>, SampleSystem.BLL.SampleSystemCustomCompanyLegalEntitySecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.HerBusinessUnit>, SampleSystem.BLL.SampleSystemHerBusinessUnitSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestBusinessUnit>, SampleSystem.BLL.SampleSystemTestBusinessUnitSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestBusinessUnitType>, SampleSystem.BLL.SampleSystemTestBusinessUnitTypeSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>, SampleSystem.BLL.SampleSystemTestCustomContextSecurityObjProjectionSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestDepartment>, SampleSystem.BLL.SampleSystemTestDepartmentSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestEmployee>, SampleSystem.BLL.SampleSystemTestEmployeeSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestIMRequest>, SampleSystem.BLL.SampleSystemTestIMRequestSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLegacyEmployee>, SampleSystem.BLL.SampleSystemEmployeeSecurityService<SampleSystem.Domain.Projections.TestLegacyEmployee, SampleSystem.Domain.Projections.SecurityBusinessUnit, SampleSystem.Domain.Projections.SecurityHRDepartment, SampleSystem.Domain.Projections.SecurityLocation, SampleSystem.Domain.Projections.SecurityEmployee>>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLocation>, SampleSystem.BLL.SampleSystemTestLocationSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLocationCollectionProperties>, SampleSystem.BLL.SampleSystemTestLocationCollectionPropertiesSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>, SampleSystem.BLL.SampleSystemTestSecurityObjItemProjectionSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.VisualEmployee>, SampleSystem.BLL.SampleSystemVisualEmployeeSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SqlParserTestObj>, SampleSystem.BLL.SampleSystemSqlParserTestObjSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SqlParserTestObjContainer>, SampleSystem.BLL.SampleSystemSqlParserTestObjContainerSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestCustomContextSecurityObj>, SampleSystem.BLL.SampleSystemTestCustomContextSecurityObjSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestImmutableObj>, SampleSystem.BLL.SampleSystemTestImmutableObjSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestPerformanceObject>, SampleSystem.BLL.SampleSystemTestPerformanceObjectSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestPlainAuthObject>, SampleSystem.BLL.SampleSystemTestPlainAuthObjectSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj>, SampleSystem.BLL.SampleSystemTestRootSecurityObjSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecurityObjItem>, SampleSystem.BLL.SampleSystemTestSecurityObjItemSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem>, SampleSystem.BLL.SampleSystemTestSecuritySubObjItemSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem2>, SampleSystem.BLL.SampleSystemTestSecuritySubObjItem2SecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem3>, SampleSystem.BLL.SampleSystemTestSecuritySubObjItem3SecurityService>(serviceCollection);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.AuthPerformanceObject>, SampleSystem.BLL.SampleSystemAuthPerformanceObjectSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit>, SampleSystem.BLL.SampleSystemBusinessUnitSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitHrDepartment>, SampleSystem.BLL.SampleSystemBusinessUnitHrDepartmentSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitManagerCommissionLink>, SampleSystem.BLL.SampleSystemBusinessUnitManagerCommissionLinkSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitType>, SampleSystem.BLL.SampleSystemBusinessUnitTypeSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.CompanyLegalEntity>, SampleSystem.BLL.SampleSystemCompanyLegalEntitySecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Country>, SampleSystem.BLL.SampleSystemCountrySecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee>, SampleSystem.BLL.SampleSystemEmployeeSecurityService<SampleSystem.Domain.Employee, SampleSystem.Domain.BusinessUnit, SampleSystem.Domain.HRDepartment, SampleSystem.Domain.Location, SampleSystem.Domain.Employee>>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeCellPhone>, SampleSystem.BLL.SampleSystemEmployeeCellPhoneSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeInformation>, SampleSystem.BLL.SampleSystemEmployeeInformationSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePersonalCellPhone>, SampleSystem.BLL.SampleSystemEmployeePersonalCellPhoneSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePhoto>, SampleSystem.BLL.SampleSystemEmployeePhotoSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeePosition>, SampleSystem.BLL.SampleSystemEmployeePositionSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRegistrationType>, SampleSystem.BLL.SampleSystemEmployeeRegistrationTypeSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRole>, SampleSystem.BLL.SampleSystemEmployeeRoleSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeRoleDegree>, SampleSystem.BLL.SampleSystemEmployeeRoleDegreeSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EmployeeSpecialization>, SampleSystem.BLL.SampleSystemEmployeeSpecializationSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EnversBug1676.Location1676>, SampleSystem.BLL.SampleSystemLocation1676SecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676>, SampleSystem.BLL.SampleSystemWorkingCalendar1676SecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Example1>, SampleSystem.BLL.SampleSystemExample1SecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.HRDepartment>, SampleSystem.BLL.SampleSystemHRDepartmentSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.IMRequest>, SampleSystem.BLL.SampleSystemIMRequestSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Information>, SampleSystem.BLL.SampleSystemInformationSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Location>, SampleSystem.BLL.SampleSystemLocationSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnit>, SampleSystem.BLL.SampleSystemManagementUnitSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink>, SampleSystem.BLL.SampleSystemManagementUnitAndBusinessUnitLinkSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink>, SampleSystem.BLL.SampleSystemManagementUnitAndHRDepartmentLinkSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManagementUnitFluentMapping>, SampleSystem.BLL.SampleSystemManagementUnitFluentMappingSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection>, SampleSystem.BLL.SampleSystemTestManualEmployeeProjectionSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Principal>, SampleSystem.BLL.SampleSystemPrincipalSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.BusinessUnitIdentity>, SampleSystem.BLL.SampleSystemBusinessUnitIdentitySecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.BusinessUnitProgramClass>, SampleSystem.BLL.SampleSystemBusinessUnitProgramClassSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.CustomCompanyLegalEntity>, SampleSystem.BLL.SampleSystemCustomCompanyLegalEntitySecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.HerBusinessUnit>, SampleSystem.BLL.SampleSystemHerBusinessUnitSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestBusinessUnit>, SampleSystem.BLL.SampleSystemTestBusinessUnitSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestBusinessUnitType>, SampleSystem.BLL.SampleSystemTestBusinessUnitTypeSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection>, SampleSystem.BLL.SampleSystemTestCustomContextSecurityObjProjectionSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestDepartment>, SampleSystem.BLL.SampleSystemTestDepartmentSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestEmployee>, SampleSystem.BLL.SampleSystemTestEmployeeSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestIMRequest>, SampleSystem.BLL.SampleSystemTestIMRequestSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLegacyEmployee>, SampleSystem.BLL.SampleSystemEmployeeSecurityService<SampleSystem.Domain.Projections.TestLegacyEmployee, SampleSystem.Domain.Projections.SecurityBusinessUnit, SampleSystem.Domain.Projections.SecurityHRDepartment, SampleSystem.Domain.Projections.SecurityLocation, SampleSystem.Domain.Projections.SecurityEmployee>>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLocation>, SampleSystem.BLL.SampleSystemTestLocationSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestLocationCollectionProperties>, SampleSystem.BLL.SampleSystemTestLocationCollectionPropertiesSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.TestSecurityObjItemProjection>, SampleSystem.BLL.SampleSystemTestSecurityObjItemProjectionSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Projections.VisualEmployee>, SampleSystem.BLL.SampleSystemVisualEmployeeSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SqlParserTestObj>, SampleSystem.BLL.SampleSystemSqlParserTestObjSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.SqlParserTestObjContainer>, SampleSystem.BLL.SampleSystemSqlParserTestObjContainerSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestCustomContextSecurityObj>, SampleSystem.BLL.SampleSystemTestCustomContextSecurityObjSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestImmutableObj>, SampleSystem.BLL.SampleSystemTestImmutableObjSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestPerformanceObject>, SampleSystem.BLL.SampleSystemTestPerformanceObjectSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestPlainAuthObject>, SampleSystem.BLL.SampleSystemTestPlainAuthObjectSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj>, SampleSystem.BLL.SampleSystemTestRootSecurityObjSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecurityObjItem>, SampleSystem.BLL.SampleSystemTestSecurityObjItemSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem>, SampleSystem.BLL.SampleSystemTestSecuritySubObjItemSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem2>, SampleSystem.BLL.SampleSystemTestSecuritySubObjItem2SecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem3>, SampleSystem.BLL.SampleSystemTestSecuritySubObjItem3SecurityService>(services);
         }
         
         public abstract Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.AuthPerformanceObject> GetAuthPerformanceObjectSecurityPath();
@@ -509,70 +296,70 @@ namespace SampleSystem.BLL
         Framework.SecuritySystem.SecurityPath<SampleSystem.Domain.TestRootSecurityObj> GetTestRootSecurityObjSecurityPath();
     }
     
-    public partial class SampleSystemAuthPerformanceObjectSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.AuthPerformanceObject, System.Guid>
+    public partial class SampleSystemAuthPerformanceObjectSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.AuthPerformanceObject, System.Guid>
     {
         
-        public SampleSystemAuthPerformanceObjectSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemAuthPerformanceObjectSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetAuthPerformanceObjectSecurityPath())
         {
         }
     }
     
-    public partial class SampleSystemBusinessUnitSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnit, System.Guid>
+    public partial class SampleSystemBusinessUnitSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.BusinessUnit, System.Guid>
     {
         
-        public SampleSystemBusinessUnitSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemBusinessUnitSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetBusinessUnitSecurityPath())
         {
         }
     }
     
-    public partial class SampleSystemBusinessUnitHrDepartmentSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitHrDepartment, System.Guid>
+    public partial class SampleSystemBusinessUnitHrDepartmentSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.BusinessUnitHrDepartment, System.Guid>
     {
         
-        public SampleSystemBusinessUnitHrDepartmentSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemBusinessUnitHrDepartmentSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetBusinessUnitHrDepartmentSecurityPath())
         {
         }
     }
     
-    public partial class SampleSystemBusinessUnitManagerCommissionLinkSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitManagerCommissionLink, System.Guid>
+    public partial class SampleSystemBusinessUnitManagerCommissionLinkSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.BusinessUnitManagerCommissionLink, System.Guid>
     {
         
-        public SampleSystemBusinessUnitManagerCommissionLinkSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemBusinessUnitManagerCommissionLinkSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetBusinessUnitManagerCommissionLinkSecurityPath())
         {
         }
     }
     
-    public partial class SampleSystemBusinessUnitTypeSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.BusinessUnitType, System.Guid>
+    public partial class SampleSystemBusinessUnitTypeSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.BusinessUnitType, System.Guid>
     {
         
-        public SampleSystemBusinessUnitTypeSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemBusinessUnitTypeSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class SampleSystemCompanyLegalEntitySecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.CompanyLegalEntity, System.Guid>
+    public partial class SampleSystemCompanyLegalEntitySecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.CompanyLegalEntity, System.Guid>
     {
         
-        public SampleSystemCompanyLegalEntitySecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemCompanyLegalEntitySecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class SampleSystemCountrySecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Country, System.Guid>
+    public partial class SampleSystemCountrySecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.Country, System.Guid>
     {
         
-        public SampleSystemCountrySecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemCountrySecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class SampleSystemEmployeeSecurityService<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee> : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>
+    public partial class SampleSystemEmployeeSecurityService<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee> : Framework.SecuritySystem.ContextDomainSecurityService<TDomainObject, System.Guid>
         where TDomainObject : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IEmployeeSecurity<TBusinessUnit, TDepartment, TLocation>, SampleSystem.Domain.IBusinessUnitSecurityElement<TBusinessUnit>, SampleSystem.Domain.IDepartmentSecurityElement<TDepartment>, SampleSystem.Domain.IEmployeeSecurityElement<TEmployee, TBusinessUnit, TDepartment, TLocation>, SampleSystem.Domain.IEmployeeSecurityElement<TEmployee>
         where TBusinessUnit : SampleSystem.Domain.PersistentDomainObjectBase, Framework.SecuritySystem.ISecurityContext
         where TDepartment : SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ILocationSecurityElement<TLocation>
@@ -581,424 +368,424 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial class SampleSystemEmployeeCellPhoneSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeCellPhone, System.Guid>
+    public partial class SampleSystemEmployeeCellPhoneSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.EmployeeCellPhone, System.Guid>
     {
         
-        public SampleSystemEmployeeCellPhoneSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemEmployeeCellPhoneSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetEmployeeCellPhoneSecurityPath())
         {
         }
     }
     
-    public partial class SampleSystemEmployeeInformationSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeInformation, System.Guid>
+    public partial class SampleSystemEmployeeInformationSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.EmployeeInformation, System.Guid>
     {
         
-        public SampleSystemEmployeeInformationSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemEmployeeInformationSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class SampleSystemEmployeePersonalCellPhoneSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePersonalCellPhone, System.Guid>
+    public partial class SampleSystemEmployeePersonalCellPhoneSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.EmployeePersonalCellPhone, System.Guid>
     {
         
-        public SampleSystemEmployeePersonalCellPhoneSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemEmployeePersonalCellPhoneSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class SampleSystemEmployeePhotoSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePhoto, System.Guid>
+    public partial class SampleSystemEmployeePhotoSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.EmployeePhoto, System.Guid>
     {
         
-        public SampleSystemEmployeePhotoSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemEmployeePhotoSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetEmployeePhotoSecurityPath())
         {
         }
     }
     
-    public partial class SampleSystemEmployeePositionSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeePosition, System.Guid>
+    public partial class SampleSystemEmployeePositionSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.EmployeePosition, System.Guid>
     {
         
-        public SampleSystemEmployeePositionSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemEmployeePositionSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetEmployeePositionSecurityPath())
         {
         }
     }
     
-    public partial class SampleSystemEmployeeRegistrationTypeSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeRegistrationType, System.Guid>
+    public partial class SampleSystemEmployeeRegistrationTypeSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.EmployeeRegistrationType, System.Guid>
     {
         
-        public SampleSystemEmployeeRegistrationTypeSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemEmployeeRegistrationTypeSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class SampleSystemEmployeeRoleSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeRole, System.Guid>
+    public partial class SampleSystemEmployeeRoleSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.EmployeeRole, System.Guid>
     {
         
-        public SampleSystemEmployeeRoleSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemEmployeeRoleSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class SampleSystemEmployeeRoleDegreeSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeRoleDegree, System.Guid>
+    public partial class SampleSystemEmployeeRoleDegreeSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.EmployeeRoleDegree, System.Guid>
     {
         
-        public SampleSystemEmployeeRoleDegreeSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemEmployeeRoleDegreeSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class SampleSystemEmployeeSpecializationSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EmployeeSpecialization, System.Guid>
+    public partial class SampleSystemEmployeeSpecializationSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.EmployeeSpecialization, System.Guid>
     {
         
-        public SampleSystemEmployeeSpecializationSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemEmployeeSpecializationSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class SampleSystemLocation1676SecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EnversBug1676.Location1676, System.Guid>
+    public partial class SampleSystemLocation1676SecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.EnversBug1676.Location1676, System.Guid>
     {
         
-        public SampleSystemLocation1676SecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemLocation1676SecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class SampleSystemWorkingCalendar1676SecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.EnversBug1676.WorkingCalendar1676, System.Guid>
+    public partial class SampleSystemWorkingCalendar1676SecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.EnversBug1676.WorkingCalendar1676, System.Guid>
     {
         
-        public SampleSystemWorkingCalendar1676SecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemWorkingCalendar1676SecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class SampleSystemExample1SecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Example1, System.Guid>
+    public partial class SampleSystemExample1SecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.Example1, System.Guid>
     {
         
-        public SampleSystemExample1SecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemExample1SecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class SampleSystemHRDepartmentSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.HRDepartment, System.Guid>
+    public partial class SampleSystemHRDepartmentSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.HRDepartment, System.Guid>
     {
         
-        public SampleSystemHRDepartmentSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemHRDepartmentSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class SampleSystemIMRequestSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.IMRequest, System.Guid>
+    public partial class SampleSystemIMRequestSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.IMRequest, System.Guid>
     {
         
-        public SampleSystemIMRequestSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemIMRequestSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class SampleSystemInformationSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Information, System.Guid>
+    public partial class SampleSystemInformationSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.Information, System.Guid>
     {
         
-        public SampleSystemInformationSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemInformationSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class SampleSystemLocationSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Location, System.Guid>
+    public partial class SampleSystemLocationSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.Location, System.Guid>
     {
         
-        public SampleSystemLocationSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemLocationSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class SampleSystemManagementUnitSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnit, System.Guid>
+    public partial class SampleSystemManagementUnitSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.ManagementUnit, System.Guid>
     {
         
-        public SampleSystemManagementUnitSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemManagementUnitSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetManagementUnitSecurityPath())
         {
         }
     }
     
-    public partial class SampleSystemManagementUnitAndBusinessUnitLinkSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitAndBusinessUnitLink, System.Guid>
+    public partial class SampleSystemManagementUnitAndBusinessUnitLinkSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.ManagementUnitAndBusinessUnitLink, System.Guid>
     {
         
-        public SampleSystemManagementUnitAndBusinessUnitLinkSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemManagementUnitAndBusinessUnitLinkSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetManagementUnitAndBusinessUnitLinkSecurityPath())
         {
         }
     }
     
-    public partial class SampleSystemManagementUnitAndHRDepartmentLinkSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitAndHRDepartmentLink, System.Guid>
+    public partial class SampleSystemManagementUnitAndHRDepartmentLinkSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.ManagementUnitAndHRDepartmentLink, System.Guid>
     {
         
-        public SampleSystemManagementUnitAndHRDepartmentLinkSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemManagementUnitAndHRDepartmentLinkSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetManagementUnitAndHRDepartmentLinkSecurityPath())
         {
         }
     }
     
-    public partial class SampleSystemManagementUnitFluentMappingSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManagementUnitFluentMapping, System.Guid>
+    public partial class SampleSystemManagementUnitFluentMappingSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.ManagementUnitFluentMapping, System.Guid>
     {
         
-        public SampleSystemManagementUnitFluentMappingSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemManagementUnitFluentMappingSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetManagementUnitFluentMappingSecurityPath())
         {
         }
     }
     
-    public partial class SampleSystemTestManualEmployeeProjectionSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection, SampleSystem.Domain.Employee, System.Guid>
+    public partial class SampleSystemTestManualEmployeeProjectionSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.ManualProjections.TestManualEmployeeProjection, SampleSystem.Domain.Employee, System.Guid>
     {
         
-        public SampleSystemTestManualEmployeeProjectionSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestManualEmployeeProjectionSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource queryableSource) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource)
         {
         }
     }
     
-    public partial class SampleSystemPrincipalSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Principal, System.Guid>
+    public partial class SampleSystemPrincipalSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.Principal, System.Guid>
     {
         
-        public SampleSystemPrincipalSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemPrincipalSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class SampleSystemBusinessUnitIdentitySecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.BusinessUnitIdentity, SampleSystem.Domain.BusinessUnit, System.Guid>
+    public partial class SampleSystemBusinessUnitIdentitySecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.Projections.BusinessUnitIdentity, SampleSystem.Domain.BusinessUnit, System.Guid>
     {
         
-        public SampleSystemBusinessUnitIdentitySecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemBusinessUnitIdentitySecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource queryableSource) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource)
         {
         }
     }
     
-    public partial class SampleSystemBusinessUnitProgramClassSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.BusinessUnitProgramClass, SampleSystem.Domain.BusinessUnit, System.Guid>
+    public partial class SampleSystemBusinessUnitProgramClassSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.Projections.BusinessUnitProgramClass, SampleSystem.Domain.BusinessUnit, System.Guid>
     {
         
-        public SampleSystemBusinessUnitProgramClassSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemBusinessUnitProgramClassSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource queryableSource) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource)
         {
         }
     }
     
-    public partial class SampleSystemCustomCompanyLegalEntitySecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.CustomCompanyLegalEntity, SampleSystem.Domain.CompanyLegalEntity, System.Guid>
+    public partial class SampleSystemCustomCompanyLegalEntitySecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.Projections.CustomCompanyLegalEntity, SampleSystem.Domain.CompanyLegalEntity, System.Guid>
     {
         
-        public SampleSystemCustomCompanyLegalEntitySecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.CompanyLegalEntity> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemCustomCompanyLegalEntitySecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.CompanyLegalEntity> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource queryableSource) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource)
         {
         }
     }
     
-    public partial class SampleSystemHerBusinessUnitSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.HerBusinessUnit, SampleSystem.Domain.BusinessUnit, System.Guid>
+    public partial class SampleSystemHerBusinessUnitSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.Projections.HerBusinessUnit, SampleSystem.Domain.BusinessUnit, System.Guid>
     {
         
-        public SampleSystemHerBusinessUnitSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemHerBusinessUnitSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource queryableSource) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource)
         {
         }
     }
     
-    public partial class SampleSystemTestBusinessUnitSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestBusinessUnit, SampleSystem.Domain.BusinessUnit, System.Guid>
+    public partial class SampleSystemTestBusinessUnitSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.Projections.TestBusinessUnit, SampleSystem.Domain.BusinessUnit, System.Guid>
     {
         
-        public SampleSystemTestBusinessUnitSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestBusinessUnitSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnit> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource queryableSource) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource)
         {
         }
     }
     
-    public partial class SampleSystemTestBusinessUnitTypeSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestBusinessUnitType, SampleSystem.Domain.BusinessUnitType, System.Guid>
+    public partial class SampleSystemTestBusinessUnitTypeSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.Projections.TestBusinessUnitType, SampleSystem.Domain.BusinessUnitType, System.Guid>
     {
         
-        public SampleSystemTestBusinessUnitTypeSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitType> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestBusinessUnitTypeSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.BusinessUnitType> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource queryableSource) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource)
         {
         }
     }
     
-    public partial class SampleSystemTestCustomContextSecurityObjProjectionSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection, SampleSystem.Domain.TestCustomContextSecurityObj, System.Guid>
+    public partial class SampleSystemTestCustomContextSecurityObjProjectionSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.Projections.TestCustomContextSecurityObjProjection, SampleSystem.Domain.TestCustomContextSecurityObj, System.Guid>
     {
         
-        public SampleSystemTestCustomContextSecurityObjProjectionSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestCustomContextSecurityObj> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestCustomContextSecurityObjProjectionSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestCustomContextSecurityObj> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource queryableSource) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource)
         {
         }
     }
     
-    public partial class SampleSystemTestDepartmentSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestDepartment, SampleSystem.Domain.HRDepartment, System.Guid>
+    public partial class SampleSystemTestDepartmentSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.Projections.TestDepartment, SampleSystem.Domain.HRDepartment, System.Guid>
     {
         
-        public SampleSystemTestDepartmentSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.HRDepartment> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestDepartmentSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.HRDepartment> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource queryableSource) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource)
         {
         }
     }
     
-    public partial class SampleSystemTestEmployeeSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestEmployee, SampleSystem.Domain.Employee, System.Guid>
+    public partial class SampleSystemTestEmployeeSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.Projections.TestEmployee, SampleSystem.Domain.Employee, System.Guid>
     {
         
-        public SampleSystemTestEmployeeSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestEmployeeSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource queryableSource) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource)
         {
         }
     }
     
-    public partial class SampleSystemTestIMRequestSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestIMRequest, SampleSystem.Domain.IMRequest, System.Guid>
+    public partial class SampleSystemTestIMRequestSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.Projections.TestIMRequest, SampleSystem.Domain.IMRequest, System.Guid>
     {
         
-        public SampleSystemTestIMRequestSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.IMRequest> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestIMRequestSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.IMRequest> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource queryableSource) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource)
         {
         }
     }
     
-    public partial class SampleSystemTestLocationSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestLocation, SampleSystem.Domain.Location, System.Guid>
+    public partial class SampleSystemTestLocationSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.Projections.TestLocation, SampleSystem.Domain.Location, System.Guid>
     {
         
-        public SampleSystemTestLocationSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Location> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestLocationSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Location> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource queryableSource) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource)
         {
         }
     }
     
-    public partial class SampleSystemTestLocationCollectionPropertiesSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestLocationCollectionProperties, SampleSystem.Domain.Location, System.Guid>
+    public partial class SampleSystemTestLocationCollectionPropertiesSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.Projections.TestLocationCollectionProperties, SampleSystem.Domain.Location, System.Guid>
     {
         
-        public SampleSystemTestLocationCollectionPropertiesSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Location> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestLocationCollectionPropertiesSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Location> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource queryableSource) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource)
         {
         }
     }
     
-    public partial class SampleSystemTestSecurityObjItemProjectionSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.TestSecurityObjItemProjection, SampleSystem.Domain.TestSecurityObjItem, System.Guid>
+    public partial class SampleSystemTestSecurityObjItemProjectionSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.Projections.TestSecurityObjItemProjection, SampleSystem.Domain.TestSecurityObjItem, System.Guid>
     {
         
-        public SampleSystemTestSecurityObjItemProjectionSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecurityObjItem> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestSecurityObjItemProjectionSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecurityObjItem> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource queryableSource) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource)
         {
         }
     }
     
-    public partial class SampleSystemVisualEmployeeSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.Projections.VisualEmployee, SampleSystem.Domain.Employee, System.Guid>
+    public partial class SampleSystemVisualEmployeeSecurityService : Framework.SecuritySystem.UntypedDependencyDomainSecurityService<SampleSystem.Domain.Projections.VisualEmployee, SampleSystem.Domain.Employee, System.Guid>
     {
         
-        public SampleSystemVisualEmployeeSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemVisualEmployeeSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.Employee> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource queryableSource) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource)
         {
         }
     }
     
-    public partial class SampleSystemSqlParserTestObjSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.SqlParserTestObj, System.Guid>
+    public partial class SampleSystemSqlParserTestObjSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.SqlParserTestObj, System.Guid>
     {
         
-        public SampleSystemSqlParserTestObjSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemSqlParserTestObjSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class SampleSystemSqlParserTestObjContainerSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.SqlParserTestObjContainer, System.Guid>
+    public partial class SampleSystemSqlParserTestObjContainerSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.SqlParserTestObjContainer, System.Guid>
     {
         
-        public SampleSystemSqlParserTestObjContainerSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemSqlParserTestObjContainerSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class SampleSystemTestCustomContextSecurityObjSecurityService : Framework.SecuritySystem.ContextDomainSecurityServiceBase<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestCustomContextSecurityObj, System.Guid>
+    public partial class SampleSystemTestCustomContextSecurityObjSecurityService : Framework.SecuritySystem.ContextDomainSecurityServiceBase<SampleSystem.Domain.TestCustomContextSecurityObj, System.Guid>
     {
         
-        public SampleSystemTestCustomContextSecurityObjSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory) : 
+        public SampleSystemTestCustomContextSecurityObjSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory securityExpressionBuilderFactory) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
         {
         }
     }
     
-    public partial class SampleSystemTestImmutableObjSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestImmutableObj, System.Guid>
+    public partial class SampleSystemTestImmutableObjSecurityService : Framework.SecuritySystem.NonContextDomainSecurityService<SampleSystem.Domain.TestImmutableObj, System.Guid>
     {
         
-        public SampleSystemTestImmutableObjSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
+        public SampleSystemTestImmutableObjSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem)
         {
         }
     }
     
-    public partial class SampleSystemTestPerformanceObjectSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPerformanceObject, System.Guid>
+    public partial class SampleSystemTestPerformanceObjectSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.TestPerformanceObject, System.Guid>
     {
         
-        public SampleSystemTestPerformanceObjectSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemTestPerformanceObjectSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetTestPerformanceObjectSecurityPath())
         {
         }
     }
     
-    public partial class SampleSystemTestPlainAuthObjectSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestPlainAuthObject, System.Guid>
+    public partial class SampleSystemTestPlainAuthObjectSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.TestPlainAuthObject, System.Guid>
     {
         
-        public SampleSystemTestPlainAuthObjectSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemTestPlainAuthObjectSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetTestPlainAuthObjectSecurityPath())
         {
         }
     }
     
-    public partial class SampleSystemTestRootSecurityObjSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestRootSecurityObj, System.Guid>
+    public partial class SampleSystemTestRootSecurityObjSecurityService : Framework.SecuritySystem.ContextDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj, System.Guid>
     {
         
-        public SampleSystemTestRootSecurityObjSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory<SampleSystem.Domain.PersistentDomainObjectBase, System.Guid> securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
+        public SampleSystemTestRootSecurityObjSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IAuthorizationSystem<System.Guid> authorizationSystem, Framework.SecuritySystem.Rules.Builders.ISecurityExpressionBuilderFactory securityExpressionBuilderFactory, SampleSystem.BLL.ISampleSystemSecurityPathContainer securityPathContainer) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetTestRootSecurityObjSecurityPath())
         {
         }
     }
     
-    public partial class SampleSystemTestSecurityObjItemSecurityService : Framework.SecuritySystem.DependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecurityObjItem, SampleSystem.Domain.TestRootSecurityObj, System.Guid>
+    public partial class SampleSystemTestSecurityObjItemSecurityService : Framework.SecuritySystem.DependencyDomainSecurityService<SampleSystem.Domain.TestSecurityObjItem, SampleSystem.Domain.TestRootSecurityObj>
     {
         
-        public SampleSystemTestSecurityObjItemSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestSecurityObjItemSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource queryableSource) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource, new Framework.SecuritySystem.DependencyDomainSecurityServicePath<SampleSystem.Domain.TestSecurityObjItem, SampleSystem.Domain.TestRootSecurityObj>(domainObject => domainObject.FirstMaster))
         {
         }
     }
     
-    public partial class SampleSystemTestSecuritySubObjItemSecurityService : Framework.SecuritySystem.DependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecuritySubObjItem, SampleSystem.Domain.TestSecurityObjItem, System.Guid>
+    public partial class SampleSystemTestSecuritySubObjItemSecurityService : Framework.SecuritySystem.DependencyDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem, SampleSystem.Domain.TestSecurityObjItem>
     {
         
-        public SampleSystemTestSecuritySubObjItemSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecurityObjItem> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestSecuritySubObjItemSecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestSecurityObjItem> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource queryableSource) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource, new Framework.SecuritySystem.DependencyDomainSecurityServicePath<SampleSystem.Domain.TestSecuritySubObjItem, SampleSystem.Domain.TestSecurityObjItem>(domainObject => domainObject.InnerMaster))
         {
         }
     }
     
-    public partial class SampleSystemTestSecuritySubObjItem2SecurityService : Framework.SecuritySystem.DependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecuritySubObjItem2, SampleSystem.Domain.TestRootSecurityObj, System.Guid>
+    public partial class SampleSystemTestSecuritySubObjItem2SecurityService : Framework.SecuritySystem.DependencyDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem2, SampleSystem.Domain.TestRootSecurityObj>
     {
         
-        public SampleSystemTestSecuritySubObjItem2SecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestSecuritySubObjItem2SecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource queryableSource) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource, new Framework.SecuritySystem.DependencyDomainSecurityServicePath<SampleSystem.Domain.TestSecuritySubObjItem2, SampleSystem.Domain.TestRootSecurityObj>(domainObject => domainObject.RootSecurityObj))
         {
         }
     }
     
-    public partial class SampleSystemTestSecuritySubObjItem3SecurityService : Framework.SecuritySystem.DependencyDomainSecurityService<SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestSecuritySubObjItem3, SampleSystem.Domain.TestRootSecurityObj, System.Guid>
+    public partial class SampleSystemTestSecuritySubObjItem3SecurityService : Framework.SecuritySystem.DependencyDomainSecurityService<SampleSystem.Domain.TestSecuritySubObjItem3, SampleSystem.Domain.TestRootSecurityObj>
     {
         
-        public SampleSystemTestSecuritySubObjItem3SecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver<SampleSystem.Domain.PersistentDomainObjectBase> securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource<SampleSystem.Domain.PersistentDomainObjectBase> queryableSource) : 
+        public SampleSystemTestSecuritySubObjItem3SecurityService(Framework.SecuritySystem.IDisabledSecurityProviderSource disabledSecurityProviderSource, Framework.SecuritySystem.ISecurityOperationResolver securityOperationResolver, Framework.SecuritySystem.IDomainSecurityService<SampleSystem.Domain.TestRootSecurityObj> baseDomainSecurityService, Framework.QueryableSource.IQueryableSource queryableSource) : 
                 base(disabledSecurityProviderSource, securityOperationResolver, baseDomainSecurityService, queryableSource, new Framework.SecuritySystem.DependencyDomainSecurityServicePath<SampleSystem.Domain.TestSecuritySubObjItem3, SampleSystem.Domain.TestRootSecurityObj>(domainObject => domainObject.InnerMaster.FirstMaster))
         {
         }

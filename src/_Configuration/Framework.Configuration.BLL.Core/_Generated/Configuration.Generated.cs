@@ -11,70 +11,22 @@ namespace Framework.Configuration.BLL
 {
     
     
-    public class ConfigurationSecurityOperationResolver : Framework.SecuritySystem.ISecurityOperationResolver
+    #region 
+	static
+    public class ConfigurationSecurityOperationHelper
     {
         
-        public virtual Framework.SecuritySystem.SecurityOperation GetSecurityOperation(System.Type domainType, Framework.SecuritySystem.BLLSecurityMode mode)
+        public static void RegisterDomainObjectSecurityOperations(Microsoft.Extensions.DependencyInjection.IServiceCollection services)
         {
-            if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(Framework.Configuration.Domain.CodeFirstSubscription) == domainType))
-            {
-                return Framework.Configuration.ConfigurationSecurityOperation.SubscriptionView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(Framework.Configuration.Domain.CodeFirstSubscription) == domainType))
-            {
-                return Framework.Configuration.ConfigurationSecurityOperation.SubscriptionEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(Framework.Configuration.Domain.DomainType) == domainType))
-            {
-                return Framework.Configuration.ConfigurationSecurityOperation.Disabled;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(Framework.Configuration.Domain.ExceptionMessage) == domainType))
-            {
-                return Framework.Configuration.ConfigurationSecurityOperation.ExceptionMessageView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(Framework.Configuration.Domain.Sequence) == domainType))
-            {
-                return Framework.Configuration.ConfigurationSecurityOperation.SequenceView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(Framework.Configuration.Domain.Sequence) == domainType))
-            {
-                return Framework.Configuration.ConfigurationSecurityOperation.SequenceEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(Framework.Configuration.Domain.SystemConstant) == domainType))
-            {
-                return Framework.Configuration.ConfigurationSecurityOperation.SystemConstantView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(Framework.Configuration.Domain.SystemConstant) == domainType))
-            {
-                return Framework.Configuration.ConfigurationSecurityOperation.SystemConstantEdit;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.View) && (typeof(Framework.Configuration.Domain.TargetSystem) == domainType))
-            {
-                return Framework.Configuration.ConfigurationSecurityOperation.TargetSystemView;
-            }
-            else if ((mode == Framework.SecuritySystem.BLLSecurityMode.Edit) && (typeof(Framework.Configuration.Domain.TargetSystem) == domainType))
-            {
-                return Framework.Configuration.ConfigurationSecurityOperation.TargetSystemEdit;
-            }
-            else
-            {
-                return Framework.Configuration.ConfigurationSecurityOperation.Disabled;
-            }
-        }
-        
-        public virtual Framework.SecuritySystem.SecurityOperation GetSecurityOperation<TDomainObject>(Framework.SecuritySystem.BLLSecurityMode mode)
-            where TDomainObject : Framework.Configuration.Domain.PersistentDomainObjectBase
-        {
-            if ((mode == Framework.SecuritySystem.BLLSecurityMode.Disabled))
-            {
-                return Framework.Configuration.ConfigurationSecurityOperation.Disabled;
-            }
-            else
-            {
-                return this.GetSecurityOperation(typeof(TDomainObject), mode);
-            }
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Configuration.Domain.CodeFirstSubscription), Framework.Configuration.ConfigurationSecurityOperation.SubscriptionView, Framework.Configuration.ConfigurationSecurityOperation.SubscriptionEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Configuration.Domain.DomainType), Framework.Configuration.ConfigurationSecurityOperation.Disabled, null));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Configuration.Domain.ExceptionMessage), Framework.Configuration.ConfigurationSecurityOperation.ExceptionMessageView, null));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Configuration.Domain.Sequence), Framework.Configuration.ConfigurationSecurityOperation.SequenceView, Framework.Configuration.ConfigurationSecurityOperation.SequenceEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Configuration.Domain.SystemConstant), Framework.Configuration.ConfigurationSecurityOperation.SystemConstantView, Framework.Configuration.ConfigurationSecurityOperation.SystemConstantEdit));
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, new Framework.SecuritySystem.DomainObjectSecurityOperationInfo(typeof(Framework.Configuration.Domain.TargetSystem), Framework.Configuration.ConfigurationSecurityOperation.TargetSystemView, Framework.Configuration.ConfigurationSecurityOperation.TargetSystemEdit));
         }
     }
+    #endregion
     
     public partial class ConfigurationBLLContext : Framework.DomainDriven.BLL.Security.SecurityBLLBaseContext<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid, Framework.Configuration.BLL.IConfigurationBLLFactoryContainer>, Framework.DomainDriven.BLL.IBLLFactoryContainerContext<Framework.DomainDriven.BLL.IBLLFactoryContainer<Framework.DomainDriven.BLL.Security.IDefaultSecurityBLLFactory<Framework.Configuration.Domain.PersistentDomainObjectBase, System.Guid>>>, Framework.Configuration.BLL.IConfigurationBLLContext
     {
@@ -174,14 +126,14 @@ namespace Framework.Configuration.BLL
         {
         }
         
-        public static void Register(Microsoft.Extensions.DependencyInjection.IServiceCollection serviceCollection)
+        public static void Register(Microsoft.Extensions.DependencyInjection.IServiceCollection services)
         {
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.CodeFirstSubscription>, Framework.Configuration.BLL.ConfigurationCodeFirstSubscriptionSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.DomainType>, Framework.Configuration.BLL.ConfigurationDomainTypeSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.ExceptionMessage>, Framework.Configuration.BLL.ConfigurationExceptionMessageSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Sequence>, Framework.Configuration.BLL.ConfigurationSequenceSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.SystemConstant>, Framework.Configuration.BLL.ConfigurationSystemConstantSecurityService>(serviceCollection);
-            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.TargetSystem>, Framework.Configuration.BLL.ConfigurationTargetSystemSecurityService>(serviceCollection);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.CodeFirstSubscription>, Framework.Configuration.BLL.ConfigurationCodeFirstSubscriptionSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.DomainType>, Framework.Configuration.BLL.ConfigurationDomainTypeSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.ExceptionMessage>, Framework.Configuration.BLL.ConfigurationExceptionMessageSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.Sequence>, Framework.Configuration.BLL.ConfigurationSequenceSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.SystemConstant>, Framework.Configuration.BLL.ConfigurationSystemConstantSecurityService>(services);
+            Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped<Framework.SecuritySystem.IDomainSecurityService<Framework.Configuration.Domain.TargetSystem>, Framework.Configuration.BLL.ConfigurationTargetSystemSecurityService>(services);
         }
     }
     

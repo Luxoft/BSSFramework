@@ -6,12 +6,7 @@ using SampleSystem.Domain;
 
 namespace SampleSystem.BLL;
 
-public class SampleSystemEmployeeSecurityService<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee> : ContextDomainSecurityService<PersistentDomainObjectBase, TDomainObject, Guid>
-    where TDomainObject : PersistentDomainObjectBase, IEmployeeSecurity<TBusinessUnit, TDepartment, TLocation>, IBusinessUnitSecurityElement<TBusinessUnit>, IDepartmentSecurityElement<TDepartment>, IEmployeeSecurityElement<TEmployee, TBusinessUnit, TDepartment, TLocation>, IEmployeeSecurityElement<TEmployee>
-    where TBusinessUnit : PersistentDomainObjectBase, ISecurityContext
-    where TDepartment : PersistentDomainObjectBase, ILocationSecurityElement<TLocation>
-    where TLocation : PersistentDomainObjectBase, ISecurityContext
-    where TEmployee : PersistentDomainObjectBase, IEmployeeSecurity<TBusinessUnit, TDepartment, TLocation>, ISecurityContext
+public class SampleSystemEmployeeSecurityService : ContextDomainSecurityService<PersistentDomainObjectBase, Employee, Guid>
 {
     private readonly IRunAsManager runAsManager;
 
@@ -27,10 +22,10 @@ public class SampleSystemEmployeeSecurityService<TDomainObject, TBusinessUnit, T
         this.runAsManager = runAsManager;
     }
 
-    protected override SecurityPath<TDomainObject> GetSecurityPath() => SecurityPath<TDomainObject>.Create(v => v.Employee)
-        .And(v => v.BusinessUnit).And(v => v.Department.Location);
+    protected override SecurityPath<Employee> GetSecurityPath() => SecurityPath<Employee>.Create(employee => employee)
+        .And(employee => employee.CoreBusinessUnit).And(employee => employee.Location);
 
-    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(ContextSecurityOperation securityOperation)
+    protected override ISecurityProvider<Employee> CreateSecurityProvider(ContextSecurityOperation securityOperation)
     {
         var baseProvider = base.CreateSecurityProvider(securityOperation);
 

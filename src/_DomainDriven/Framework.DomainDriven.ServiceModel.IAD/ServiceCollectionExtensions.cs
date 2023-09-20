@@ -79,21 +79,13 @@ public static class ServiceCollectionExtensions
     }
 
     public static IServiceCollection RegisterAuthorizationSystemDomainServices(
-        IServiceCollection services,
-        Action<AuthorizationSystemDomainServiceBuilder> setupAction)
+        this IServiceCollection services,
+        Action<IAuthorizationSystemRootDomainServiceBuilder> setupAction)
     {
-        var builder = new AuthorizationSystemDomainServiceBuilder();
+        var builder = new AuthorizationSystemRootDomainServiceBuilder();
 
         setupAction(builder);
 
         return services;
-    }
-}
-
-public class AuthorizationSystemDomainServiceBuilder
-{
-    public AuthorizationSystemDomainServiceBuilder Add<TDomainObject>()
-    {
-        return this;
     }
 }

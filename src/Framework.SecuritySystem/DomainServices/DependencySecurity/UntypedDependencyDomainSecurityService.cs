@@ -7,7 +7,7 @@ public class UntypedDependencyDomainSecurityService<TDomainObject, TBaseDomainOb
 
     DependencyDomainSecurityServiceBase<TDomainObject, TBaseDomainObject>
 
-    where TDomainObject : class, IIdentityObject<TIdent>
+    where TDomainObject : IIdentityObject<TIdent>
     where TBaseDomainObject : class, IIdentityObject<TIdent>
 {
     private readonly IQueryableSource queryableSource;

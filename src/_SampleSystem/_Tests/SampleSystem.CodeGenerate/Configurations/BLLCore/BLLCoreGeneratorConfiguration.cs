@@ -11,6 +11,7 @@ public class BLLCoreGeneratorConfiguration : Framework.DomainDriven.BLLCoreGener
     {
     }
 
+    public override bool GenerateAuthServices { get; } = false;
 
     public override Type FilterModelType { get; } = typeof(DomainObjectFilterModel<>);
 

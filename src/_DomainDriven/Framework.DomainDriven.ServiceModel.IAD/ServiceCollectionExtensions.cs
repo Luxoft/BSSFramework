@@ -1,6 +1,5 @@
 ﻿using Framework.Authorization.SecuritySystem;
 using Framework.DependencyInjection;
-using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.NHibernate;
 using Framework.DomainDriven.Repository;
 using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;

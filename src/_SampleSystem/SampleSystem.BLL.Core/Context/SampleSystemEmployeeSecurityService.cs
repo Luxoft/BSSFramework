@@ -1,33 +1,35 @@
-﻿using Framework.SecuritySystem;
+﻿using Framework.Authorization.SecuritySystem;
+using Framework.SecuritySystem;
 using Framework.SecuritySystem.Rules.Builders;
+
+using SampleSystem.Domain;
 
 namespace SampleSystem.BLL;
 
-public partial class SampleSystemEmployeeSecurityService<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>
+public class SampleSystemEmployeeSecurityService : ContextDomainSecurityService<Employee, Guid>
 {
+    private readonly IRunAsManager runAsManager;
+
     public SampleSystemEmployeeSecurityService(
             IDisabledSecurityProviderSource disabledSecurityProviderSource,
             ISecurityOperationResolver securityOperationResolver,
             IAuthorizationSystem<Guid> authorizationSystem,
             ISecurityExpressionBuilderFactory securityExpressionBuilderFactory,
-            ISampleSystemSecurityPathContainer securityPathContainer,
-            ISampleSystemBLLContext context)
+            SecurityPath<Employee> securityPath,
+            IRunAsManager runAsManager)
 
-            : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetEmployeeSecurityPath<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>())
+            : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPath)
     {
-        this.Context = context ?? throw new ArgumentNullException(nameof(context));
+        this.runAsManager = runAsManager;
     }
 
-    public ISampleSystemBLLContext Context { get; }
-
-
-    protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(ContextSecurityOperation securityOperation)
+    protected override ISecurityProvider<Employee> CreateSecurityProvider(ContextSecurityOperation securityOperation)
     {
         var baseProvider = base.CreateSecurityProvider(securityOperation);
 
         if (securityOperation == SampleSystemSecurityOperation.EmployeeView)
         {
-            return baseProvider.Or(employee => employee.Login == this.Context.Authorization.RunAsManager.ActualPrincipal.Name);
+            return baseProvider.Or(employee => employee.Login == this.runAsManager.ActualPrincipal.Name);
         }
         else
         {

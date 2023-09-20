@@ -27,7 +27,6 @@ public class BLLCoreFileGenerator<TConfiguration> : CodeFileGenerator<TConfigura
 
     protected override IEnumerable<ICodeFile> GetInternalFileGenerators()
     {
-        yield return new SecurityOperationHelperFileFactory<TConfiguration>(this.Configuration);
 
         yield return new BLLContextFileFactory<TConfiguration>(this.Configuration);
         yield return new BLLContextInterfaceFileFactory<TConfiguration>(this.Configuration);
@@ -38,30 +37,34 @@ public class BLLCoreFileGenerator<TConfiguration> : CodeFileGenerator<TConfigura
         yield return new DefaultOperationDomainBLLBaseFileFactory<TConfiguration>(this.Configuration);
         yield return new DefaultOperationSecurityDomainBLLBaseFileFactory<TConfiguration>(this.Configuration);
 
-
-        yield return new RootSecurityServiceFileFactory<TConfiguration>(this.Configuration);
-        yield return new RootSecurityServiceBaseFileFactory<TConfiguration>(this.Configuration);
-        yield return new RootSecurityServiceInterfaceFileFactory<TConfiguration>(this.Configuration);
-
-        yield return new RootSecurityPathContainerFileFactory<TConfiguration>(this.Configuration);
-
-        foreach (var domainType in this.Configuration.SecurityServiceDomainTypes)
-        {
-            var useDependencySecurity = this.Configuration.Environment.GetProjectionEnvironment(domainType).Maybe(v => v.UseDependencySecurity);
-
-            var isGenericProjection = !useDependencySecurity && domainType.HasSecurityNodeInterfaces() && domainType.IsProjection();
-
-            if (!isGenericProjection)
-            {
-                yield return new DomainSecurityServiceFileFactory<TConfiguration>(this.Configuration, domainType);
-            }
-        }
-
         foreach (var fileFactory in this.Configuration.Logics.GetFileFactories())
         {
             yield return fileFactory;
         }
 
+
+        if (this.Configuration.GenerateAuthServices)
+        {
+            yield return new SecurityOperationHelperFileFactory<TConfiguration>(this.Configuration);
+
+            yield return new RootSecurityServiceFileFactory<TConfiguration>(this.Configuration);
+            yield return new RootSecurityServiceBaseFileFactory<TConfiguration>(this.Configuration);
+            yield return new RootSecurityServiceInterfaceFileFactory<TConfiguration>(this.Configuration);
+
+            yield return new RootSecurityPathContainerFileFactory<TConfiguration>(this.Configuration);
+
+            foreach (var domainType in this.Configuration.SecurityServiceDomainTypes)
+            {
+                var useDependencySecurity = this.Configuration.Environment.GetProjectionEnvironment(domainType).Maybe(v => v.UseDependencySecurity);
+
+                var isGenericProjection = !useDependencySecurity && domainType.HasSecurityNodeInterfaces() && domainType.IsProjection();
+
+                if (!isGenericProjection)
+                {
+                    yield return new DomainSecurityServiceFileFactory<TConfiguration>(this.Configuration, domainType);
+                }
+            }
+        }
 
         if (this.Configuration.GenerateValidationMap)
         {

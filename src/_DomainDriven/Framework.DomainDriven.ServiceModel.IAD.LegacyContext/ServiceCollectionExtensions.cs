@@ -1,4 +1,6 @@
-﻿using Framework.Authorization.BLL;
+﻿using System.Reflection;
+
+using Framework.Authorization.BLL;
 using Framework.Authorization.Notification;
 using Framework.Configuration.BLL;
 using Framework.Configuration.BLL.Notification;
@@ -9,7 +11,10 @@ using Framework.DomainDriven.Tracking;
 using Framework.DomainDriven.NHibernate;
 using Framework.Exceptions;
 using Framework.HierarchicalExpand;
+using Framework.Projection;
 using Framework.QueryLanguage;
+using Framework.Security;
+using Framework.SecuritySystem;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -99,5 +104,35 @@ public static class ServiceCollectionExtensions
                .Self(ConfigurationSecurityOperationHelper.RegisterDomainObjectSecurityOperations)
                .Self(ConfigurationSecurityServiceBase.Register)
                .Self(ConfigurationBLLFactoryContainer.RegisterBLLFactory);
+    }
+
+    public static IServiceCollection RegisterProjectionDomainSecurityServices(this IServiceCollection services, Assembly assembly)
+    {
+        var projectionsRequest = from type in assembly.GetTypes()
+
+                                 let projectionAttr = type.GetCustomAttribute<ProjectionAttribute>()
+
+                                 where projectionAttr != null && type.HasAttribute<DependencySecurityAttribute>()
+
+                                 select new
+                                        {
+                                            DomainType = type,
+                                            SourceType = projectionAttr.SourceType,
+                                            CustomViewSecurityOperation = type.GetViewSecurityOperation()
+                                        };
+
+        foreach (var pair in projectionsRequest)
+        {
+            services.AddScoped(
+                typeof(IDomainSecurityService<>).MakeGenericType(pair.DomainType),
+                typeof(UntypedDependencyDomainSecurityService<,,>).MakeGenericType(pair.DomainType, pair.SourceType, typeof(Guid)));
+
+            if (pair.CustomViewSecurityOperation != null)
+            {
+                services.AddSingleton(new DomainObjectSecurityOperationInfo(pair.DomainType, pair.CustomViewSecurityOperation, null));
+            }
+        }
+
+        return services;
     }
 }

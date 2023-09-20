@@ -18,5 +18,5 @@ public static class AuthorizationSecurityOperation
 
     public static NonContextSecurityOperation<Guid> OperationEdit { get; } = new(nameof(OperationEdit), new Guid("{7D148DAD-D4F7-45E3-B087-2125ABCD8A58}"));
 
-    public static NonContextSecurityOperation<Guid> AuthorizationImpersonate { get; } = new(nameof(BusinessRoleEdit), new Guid("{E48D7030-FC38-4416-8C7F-F08764D884E3}"));
+    public static NonContextSecurityOperation<Guid> AuthorizationImpersonate { get; } = new(nameof(AuthorizationImpersonate), new Guid("{E48D7030-FC38-4416-8C7F-F08764D884E3}"));
 }

@@ -15,6 +15,10 @@ public interface IGeneratorConfigurationBase<out TEnvironment> : IGeneratorConfi
 #pragma warning disable S100 // Methods and properties should be named in camel case
 public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTypeReferenceService<FileType>
 {
+    CodeTypeReference ActualRootSecurityServiceInterfaceType { get; }
+
+    bool GenerateAuthServices { get; }
+
     /// <summary>
     /// Добавление глобальных валидаторов для классов
     /// </summary>
@@ -52,8 +56,6 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
     CodeTypeReference BLLContextInterfaceTypeReference { get; }
 
     CodeTypeReference BLLFactoryInterfaceTypeReference { get; }
-
-    CodeTypeReference RootSecurityServiceInterface { get; }
 
     CodeTypeReference DomainBLLBaseTypeReference { get; }
 

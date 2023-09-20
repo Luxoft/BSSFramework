@@ -31,7 +31,7 @@ public class BLLContextInterfaceFileFactory<TConfiguration> : FileFactory<TConfi
 
     protected override System.Collections.Generic.IEnumerable<CodeTypeReference> GetBaseTypes()
     {
-        var securityServiceFieldTypeRef = this.Configuration.GetCodeTypeReference(null, FileType.RootSecurityServiceInterface);
+        var securityServiceFieldTypeRef = this.Configuration.ActualRootSecurityServiceInterfaceType;
 
         yield return new CodeTypeReference(typeof(IAccessDeniedExceptionServiceContainer));
 

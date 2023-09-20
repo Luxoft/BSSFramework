@@ -43,7 +43,7 @@ public abstract class GetObjectPropertyRevisionsMethodGeneratorBase<TConfigurati
                                         .Self(z => z.TypeArguments.Add(this.Configuration.Environment.GetIdentityType()))
                                         .Self(z => z.TypeArguments.Add(this.Configuration.Environment.BLLCore.BLLContextInterfaceTypeReference))
                                         .Self(z => z.TypeArguments.Add(this.Configuration.Environment.BLLCore.BLLFactoryInterfaceTypeReference))
-                                        .Self(z => z.TypeArguments.Add(this.Configuration.Environment.BLLCore.RootSecurityServiceInterface))
+                                        .Self(z => z.TypeArguments.Add(this.Configuration.Environment.BLLCore.ActualRootSecurityServiceInterfaceType))
 
                                         .Self(z => z.TypeArguments.Add(this.Configuration.Environment.PersistentDomainObjectBaseType))
                                         .Self(z => z.TypeArguments.Add(this.dtoConfiguration.DomainObjectPropertiesRevisionDTOFullTypeName))

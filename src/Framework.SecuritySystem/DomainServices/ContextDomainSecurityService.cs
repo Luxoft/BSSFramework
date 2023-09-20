@@ -12,7 +12,7 @@ namespace Framework.SecuritySystem;
 /// <typeparam name="TIdent"></typeparam>
 public abstract class ContextDomainSecurityServiceBase<TDomainObject, TIdent> : NonContextDomainSecurityService<TDomainObject, TIdent>
 
-    where TDomainObject : class, IIdentityObject<TIdent>
+    where TDomainObject : IIdentityObject<TIdent>
 {
     private readonly ISecurityExpressionBuilderFactory securityExpressionBuilderFactory;
 
@@ -72,7 +72,7 @@ public abstract class ContextDomainSecurityServiceBase<TDomainObject, TIdent> : 
 
 public class ContextDomainSecurityService<TDomainObject, TIdent> : ContextDomainSecurityServiceBase<TDomainObject, TIdent>
 
-    where TDomainObject : class, IIdentityObject<TIdent>
+    where TDomainObject : IIdentityObject<TIdent>
 {
     private readonly SecurityPath<TDomainObject> securityPath;
 

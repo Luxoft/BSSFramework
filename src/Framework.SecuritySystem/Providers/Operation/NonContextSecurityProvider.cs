@@ -9,7 +9,7 @@ namespace Framework.SecuritySystem
     /// <typeparam name="TDomainObject"></typeparam>
     /// <typeparam name="TIdent"></typeparam>
     public class NonContextSecurityProvider<TDomainObject, TIdent> : FixedSecurityProvider<TDomainObject>, ISecurityProvider<TDomainObject>
-        where TDomainObject : class, IIdentityObject<TIdent>
+        where TDomainObject : IIdentityObject<TIdent>
     {
         private readonly NonContextSecurityOperation securityOperation;
 

@@ -7,15 +7,14 @@ namespace Framework.SecuritySystem;
 /// </summary>
 /// <typeparam name="TDomainObject"></typeparam>
 /// <typeparam name="TIdent"></typeparam>
-public abstract class NonContextDomainSecurityService<TDomainObject, TIdent> : DomainSecurityService<TDomainObject>
-    where TDomainObject : class, IIdentityObject<TIdent>
+public class NonContextDomainSecurityService<TDomainObject, TIdent> : DomainSecurityService<TDomainObject>
+    where TDomainObject : IIdentityObject<TIdent>
 {
     private readonly IDisabledSecurityProviderSource disabledSecurityProviderSource;
 
     private readonly IAuthorizationSystem<TIdent> authorizationSystem;
 
-
-    protected NonContextDomainSecurityService(
+    public NonContextDomainSecurityService(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
         ISecurityOperationResolver securityOperationResolver,
         IAuthorizationSystem<TIdent> authorizationSystem)

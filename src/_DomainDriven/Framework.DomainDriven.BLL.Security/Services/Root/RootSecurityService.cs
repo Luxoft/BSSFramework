@@ -1,18 +1,18 @@
 ﻿using Framework.Core;
 using Framework.DomainDriven.Repository.NotImplementedDomainSecurityService;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.BLL.Security;
 
-public abstract class RootSecurityService<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<TBLLContext>,
-                                                                                      IRootSecurityService<TPersistentDomainObjectBase>
+public class RootSecurityService<TBLLContext, TPersistentDomainObjectBase> : BLLContextContainer<TBLLContext>,
+                                                                             IRootSecurityService<TPersistentDomainObjectBase>
 
     where TBLLContext : class, IServiceProviderContainer
     where TPersistentDomainObjectBase : class
 {
-    protected RootSecurityService(TBLLContext context)
+    public RootSecurityService(TBLLContext context)
         : base(context)
     {
     }

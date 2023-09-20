@@ -54,6 +54,14 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     /// <inheritdoc />
     public virtual bool GenerateExternalPropertyValidators { get; } = false;
 
+    public virtual bool GenerateAuthServices { get; } = true;
+
+    public CodeTypeReference ActualRootSecurityServiceInterfaceType =>
+
+        this.GenerateAuthServices
+            ? this.GetCodeTypeReference(null, FileType.RootSecurityServiceInterface)
+            : typeof(IRootSecurityService<>).MakeGenericType(this.Environment.PersistentDomainObjectBaseType).ToTypeReference();
+
     /// <inheritdoc />
     public virtual bool GenerateExternalClassValidators { get; } = false;
 
@@ -357,8 +365,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     public CodeTypeReference BLLContextInterfaceTypeReference => this.GetCodeTypeReference(null, FileType.BLLContextInterface);
 
     public CodeTypeReference BLLFactoryInterfaceTypeReference => this.GetCodeTypeReference(null, FileType.BLLFactoryContainerInterface);
-
-    public CodeTypeReference RootSecurityServiceInterface => this.GetCodeTypeReference(null, FileType.RootSecurityServiceInterface);
 
     public CodeTypeReference DomainBLLBaseTypeReference => this.GetCodeTypeReference(null, FileType.DomainBLLBase);
 

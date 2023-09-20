@@ -46,20 +46,20 @@ public class AuthorizationSystemDomainServiceBuilder<TDomainObject> : IAuthoriza
         {
             if (this.DependencySourcePath == null)
             {
-                return typeof(UntypedDependencySecurityProvider<,,>).MakeGenericType(typeof(TDomainObject), this.DependencySourceType, typeof(Guid));
+                return typeof(UntypedDependencyDomainSecurityService<,,>).MakeGenericType(typeof(TDomainObject), this.DependencySourceType, typeof(Guid));
             }
             else
             {
-                return typeof(DependencySecurityProvider<,>).MakeGenericType(typeof(TDomainObject), this.DependencySourceType);
+                return typeof(DependencyDomainSecurityService<,>).MakeGenericType(typeof(TDomainObject), this.DependencySourceType);
             }
         }
         else if (this.SecurityPath != null)
         {
-            return typeof(ContextSecurityOperation<Guid>);
+            return typeof(ContextDomainSecurityService<,>).MakeGenericType(typeof(TDomainObject), typeof(Guid));
         }
         else
         {
-            return typeof(NonContextSecurityOperation<Guid>);
+            return typeof(NonContextDomainSecurityService<,>).MakeGenericType(typeof(TDomainObject), typeof(Guid));
         }
     }
 

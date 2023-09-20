@@ -8,7 +8,7 @@ namespace Framework.SecuritySystem;
 /// <typeparam name="TDomainObject"></typeparam>
 /// <typeparam name="TIdent"></typeparam>
 public abstract class NonContextDomainSecurityService<TDomainObject, TIdent> : DomainSecurityService<TDomainObject>
-    where TDomainObject : class, IIdentityObject<TIdent>
+    where TDomainObject : IIdentityObject<TIdent>
 {
     private readonly IDisabledSecurityProviderSource disabledSecurityProviderSource;
 

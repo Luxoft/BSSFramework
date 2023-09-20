@@ -72,24 +72,26 @@ public abstract class ContextDomainSecurityServiceBase<TPersistentDomainObjectBa
     protected abstract ISecurityProvider<TDomainObject> CreateSecurityProvider(ContextSecurityOperation securityOperation);
 }
 
-public abstract class ContextDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TIdent> : ContextDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TIdent>
+public class ContextDomainSecurityService<TPersistentDomainObjectBase, TDomainObject, TIdent> : ContextDomainSecurityServiceBase<TPersistentDomainObjectBase, TDomainObject, TIdent>
 
     where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
     where TDomainObject : class, TPersistentDomainObjectBase
 {
-    protected ContextDomainSecurityService(
+    private readonly SecurityPath<TDomainObject> securityPath;
+
+    public ContextDomainSecurityService(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
         ISecurityOperationResolver<TPersistentDomainObjectBase> securityOperationResolver,
         IAuthorizationSystem<TIdent> authorizationSystem,
-        ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory)
+        ISecurityExpressionBuilderFactory<TPersistentDomainObjectBase, TIdent> securityExpressionBuilderFactory,
+        SecurityPath<TDomainObject> securityPath)
         : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
     {
+        this.securityPath = securityPath;
     }
-
-    protected abstract SecurityPath<TDomainObject> GetSecurityPath();
 
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(ContextSecurityOperation securityOperation)
     {
-        return this.Create(this.GetSecurityPath(), securityOperation);
+        return this.Create(this.securityPath, securityOperation);
     }
 }

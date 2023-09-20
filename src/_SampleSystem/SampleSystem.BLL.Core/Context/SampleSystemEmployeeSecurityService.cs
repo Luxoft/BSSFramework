@@ -15,9 +15,8 @@ public partial class SampleSystemEmployeeSecurityService<TDomainObject, TBusines
             ISampleSystemSecurityPathContainer securityPathContainer,
             ISampleSystemBLLContext context)
 
-            : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory)
+            : base(disabledSecurityProviderSource, securityOperationResolver, authorizationSystem, securityExpressionBuilderFactory, securityPathContainer.GetEmployeeSecurityPath<TDomainObject, TBusinessUnit, TDepartment, TLocation, TEmployee>())
     {
-        this.securityPathContainer = securityPathContainer ?? throw new ArgumentNullException(nameof(securityPathContainer));
         this.Context = context ?? throw new ArgumentNullException(nameof(context));
     }
 

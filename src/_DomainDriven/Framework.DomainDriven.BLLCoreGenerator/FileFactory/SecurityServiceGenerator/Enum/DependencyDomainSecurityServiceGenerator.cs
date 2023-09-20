@@ -1,5 +1,4 @@
 ﻿using System.CodeDom;
-using System.Linq.Expressions;
 
 using Framework.CodeDom;
 using Framework.Core;
@@ -32,20 +31,7 @@ namespace Framework.DomainDriven.BLLCoreGenerator
 
         public override IEnumerable<CodeTypeMember> GetMembers()
         {
-            yield return new CodeMemberProperty
-            {
-                Name = "Selector",
-                Attributes = MemberAttributes.Family | MemberAttributes.Override,
-                Type = typeof(Expression<>).MakeGenericType(typeof(Func<,>).MakeGenericType(this.DomainType, this.dependencySecurityAttr.SourceType)).ToTypeReference(),
-                GetStatements =
-                {
-                    new CodeParameterDeclarationExpression{ Name = "domainObject" }.Pipe(param => new CodeLambdaExpression
-                    {
-                        Parameters = { param },
-                        Statements = { this.DomainType.GetPropertyPath<DependencySecurityAttribute>().Aggregate((CodeExpression)param.ToVariableReferenceExpression(), (state, prop) => state.ToPropertyReference(prop)) }
-                    }).ToMethodReturnStatement()
-                }
-            };
+            yield break;
         }
 
         public override IEnumerable<CodeTypeReference> GetBaseTypes()
@@ -53,12 +39,28 @@ namespace Framework.DomainDriven.BLLCoreGenerator
             yield break;
         }
 
-        public override IEnumerable<(CodeTypeReference ParameterType, string Name)> GetBaseTypeConstructorParameters()
+        public override IEnumerable<(CodeTypeReference ParameterType, string Name, CodeExpression CustomBaseInvoke)> GetBaseTypeConstructorParameters()
         {
-            yield return (typeof(IDisabledSecurityProviderSource).ToTypeReference(), "disabledSecurityProviderSource");
-            yield return (typeof(ISecurityOperationResolver<>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType), "securityOperationResolver");
-            yield return (typeof(IDomainSecurityService<>).ToTypeReference(this.dependencySecurityAttr.SourceType), "baseDomainSecurityService");
-            yield return (typeof(IQueryableSource<>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType), "queryableSource");
+            yield return (typeof(IDisabledSecurityProviderSource).ToTypeReference(), "disabledSecurityProviderSource", null);
+            yield return (typeof(ISecurityOperationResolver<>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType), "securityOperationResolver", null);
+            yield return (typeof(IDomainSecurityService<>).ToTypeReference(this.dependencySecurityAttr.SourceType), "baseDomainSecurityService", null);
+            yield return (typeof(IQueryableSource<>).ToTypeReference(this.Configuration.Environment.PersistentDomainObjectBaseType), "queryableSource", null);
+
+            yield return (null, null, this.BuildDependencyExpressionPath());
+        }
+
+        private CodeExpression BuildDependencyExpressionPath()
+        {
+            var lambdaExpr = new CodeParameterDeclarationExpression { Name = "domainObject" }.Pipe(param => new CodeLambdaExpression
+                    {
+                        Parameters = { param },
+                        Statements = { this.DomainType.GetPropertyPath<DependencySecurityAttribute>().Aggregate((CodeExpression)param.ToVariableReferenceExpression(), (state, prop) => state.ToPropertyReference(prop)) }
+                    });
+
+
+            return typeof(DependencyDomainSecurityServicePath<,>).MakeGenericType(this.DomainType, this.dependencySecurityAttr.SourceType)
+                                                                 .ToTypeReference()
+                                                                 .ToObjectCreateExpression(lambdaExpr);
         }
     }
 }

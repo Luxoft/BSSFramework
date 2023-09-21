@@ -1,6 +1,6 @@
 ﻿namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
-public class DomainSecurityServiceWithFunctor<TOriginalDomainSecurityService, TDomainObject> : DomainSecurityServiceBase<TDomainObject>
+public class DomainSecurityServiceWithFunctor<TOriginalDomainSecurityService, TDomainObject> : DomainSecurityService<TDomainObject>
     where TOriginalDomainSecurityService : IDomainSecurityService<TDomainObject>
 {
     private readonly TOriginalDomainSecurityService originalDomainSecurityService;
@@ -9,10 +9,11 @@ public class DomainSecurityServiceWithFunctor<TOriginalDomainSecurityService, TD
 
     public DomainSecurityServiceWithFunctor(
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
+        ISecurityOperationResolver securityOperationResolver,
         TOriginalDomainSecurityService originalDomainSecurityService,
         IEnumerable<IOverrideSecurityProviderFunctor<TDomainObject>> functorList)
 
-        : base(disabledSecurityProviderSource)
+        : base(disabledSecurityProviderSource, securityOperationResolver)
     {
         this.originalDomainSecurityService = originalDomainSecurityService;
         this.functorList = functorList;
@@ -29,10 +30,10 @@ public class DomainSecurityServiceWithFunctor<TOriginalDomainSecurityService, TD
 
     protected override ISecurityProvider<TDomainObject> CreateSecurityProvider(BLLSecurityMode securityMode)
     {
-        var originalSecurityProvider = this.originalDomainSecurityService.GetSecurityProvider(securityMode);
+        var baseSecurityProvider = base.CreateSecurityProvider(securityMode);
 
         return this.functorList.Aggregate(
-            originalSecurityProvider,
+            baseSecurityProvider,
             (provider, functor) => functor.OverrideSecurityProvider(provider, securityMode));
     }
 }

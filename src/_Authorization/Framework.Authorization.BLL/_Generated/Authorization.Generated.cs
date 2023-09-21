@@ -384,7 +384,7 @@ namespace Framework.Authorization.BLL
         
         public override Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Authorization.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid> Create<TDomainObject>()
         {
-            return new Framework.Authorization.BLL.DomainBLLBase<TDomainObject>(this.Context);
+            return new Framework.Authorization.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context);
         }
     }
     
@@ -428,7 +428,7 @@ namespace Framework.Authorization.BLL
             }
             else
             {
-                return new Framework.Authorization.BLL.DomainBLLBase<TDomainObject>(this.Context);
+                return new Framework.Authorization.BLL.SecurityDomainBLLBase<TDomainObject>(this.Context);
             }
         }
         

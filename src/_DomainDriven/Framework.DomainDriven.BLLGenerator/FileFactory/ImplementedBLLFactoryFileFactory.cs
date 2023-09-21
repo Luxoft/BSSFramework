@@ -85,7 +85,7 @@ public class ImplementedBLLFactoryFileFactory<TConfiguration> : FileFactory<TCon
                       select Tuple.Create((CodeExpression)condition, (CodeStatement)bllRef.ToCastExpression(resultType).ToMethodReturnStatement());
 
         var lastSwitchElement = this.Configuration.Environment.BLLCore
-                                    .DefaultOperationDomainBLLBaseTypeReference
+                                    .DefaultOperationSecurityDomainBLLBaseTypeReference
                                     .ToTypeReference(genericDomainTypeRefExpr)
                                     .ToObjectCreateExpression(contextRefExpr)
                                     .ToMethodReturnStatement();

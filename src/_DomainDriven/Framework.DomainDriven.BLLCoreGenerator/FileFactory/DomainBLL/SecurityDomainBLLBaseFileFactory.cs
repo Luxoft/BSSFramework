@@ -46,7 +46,7 @@ public class SecurityDomainBLLBaseFileFactory<TConfiguration> : FileFactory<TCon
                                genericDomainObjectParameter, genericOperationParameter
                        },
 
-                       TypeAttributes = TypeAttributes.Abstract | TypeAttributes.Public,
+                       TypeAttributes = TypeAttributes.Public,
                        Name = this.Name,
                        IsClass = true,
                        IsPartial = true,
@@ -62,7 +62,7 @@ public class SecurityDomainBLLBaseFileFactory<TConfiguration> : FileFactory<TCon
                        {
                                new CodeConstructor
                                {
-                                       Attributes = MemberAttributes.Family,
+                                       Attributes = MemberAttributes.Public,
                                        Parameters = { contextParameter, specificationEvaluatorParameter },
                                        BaseConstructorArgs = { contextParameterRefExpr, specificationEvaluatorParameterArg }
                                },

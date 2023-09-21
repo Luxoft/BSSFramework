@@ -4,7 +4,7 @@ namespace Framework.SecuritySystem.DiTests;
 
 public static class ExampleSecurityOperation
 {
-    public static DisabledSecurityOperation Disabled { get; } = new DisabledSecurityOperation();
+    public static DisabledSecurityOperation Disabled { get; } = SecurityOperation.Disabled;
 
     public static ContextSecurityOperation<Guid> EmployeeView { get; } = new ContextSecurityOperation<Guid>(nameof(EmployeeView), HierarchicalExpandType.Children, Guid.NewGuid());
 

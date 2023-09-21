@@ -4,7 +4,7 @@ namespace Framework.Authorization;
 
 public static class AuthorizationSecurityOperation
 {
-    public static DisabledSecurityOperation Disabled { get; } = new();
+    public static DisabledSecurityOperation Disabled { get; } = SecurityOperation.Disabled;
 
     public static NonContextSecurityOperation<Guid> PrincipalView { get; } = new(nameof(PrincipalView), new Guid("{5031A272-B730-4E65-9D56-50B3E0441C4F}"));
 

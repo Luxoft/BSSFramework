@@ -54,7 +54,7 @@ public class DefaultBLLFactoryFileFactory<TConfiguration> : FileFactory<TConfigu
                                  Statements =
                                  {
                                          this.Configuration.Environment.BLLCore
-                                             .DefaultOperationDomainBLLBaseTypeReference
+                                             .DefaultOperationSecurityDomainBLLBaseTypeReference
                                              .ToTypeReference(genericDomainObjectParameterTypeRef)
                                              .ToObjectCreateExpression(contextFieldRefExpr)
                                              .ToMethodReturnStatement()

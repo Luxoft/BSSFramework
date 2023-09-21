@@ -135,14 +135,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
             new CodeFileFactoryHeader<FileType>(FileType.DomainSecurityService, string.Empty, domainType => $"{this.Environment.TargetSystemName}{domainType.Name}SecurityService");
 
-    protected virtual ICodeFileFactoryHeader<FileType> DomainBLLBaseFileFactoryHeader { get; } =
-
-        new CodeFileFactoryHeader<FileType>(FileType.DomainBLLBase, string.Empty, _ => FileType.DomainBLLBase.ToString());
-
-    protected virtual ICodeFileFactoryHeader<FileType> DefaultOperationDomainBLLBaseFileFactoryHeader { get; } =
-
-        new CodeFileFactoryHeader<FileType>(FileType.DefaultOperationDomainBLLBase, string.Empty, _ => FileType.DomainBLLBase.ToString());
-
     protected virtual ICodeFileFactoryHeader<FileType> SecurityDomainBLLBaseFileFactoryHeader { get; } =
 
         new CodeFileFactoryHeader<FileType>(FileType.SecurityDomainBLLBase, string.Empty, _ => FileType.SecurityDomainBLLBase.ToString());
@@ -335,8 +327,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
                        this.RootSecurityServiceBaseFileFactoryHeader,
                        this.DomainSecurityServiceFileFactoryHeader,
 
-                       this.DomainBLLBaseFileFactoryHeader,
-                       this.DefaultOperationDomainBLLBaseFileFactoryHeader,
                        this.SecurityDomainBLLBaseFileFactoryHeader,
                        this.DefaultOperationSecurityDomainBLLBaseFileFactoryHeader,
 
@@ -366,8 +356,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
 
     public CodeTypeReference BLLFactoryInterfaceTypeReference => this.GetCodeTypeReference(null, FileType.BLLFactoryContainerInterface);
 
-    public CodeTypeReference DomainBLLBaseTypeReference => this.GetCodeTypeReference(null, FileType.DomainBLLBase);
-
     public CodeTypeReference SecurityDomainBLLBaseTypeReference => this.GetSecurityDomainBLLBaseTypeReference(null);
 
     public CodeTypeReference GetSecurityDomainBLLBaseTypeReference(Type type)
@@ -379,8 +367,6 @@ public abstract class GeneratorConfigurationBase<TEnvironment> : GeneratorConfig
     {
         return this.GetCodeTypeReference(type, FileType.SecurityHierarchyDomainBLLBase);
     }
-
-    public CodeTypeReference DefaultOperationDomainBLLBaseTypeReference => this.GetCodeTypeReference(null, FileType.DefaultOperationDomainBLLBase);
 
     public CodeTypeReference DefaultOperationSecurityDomainBLLBaseTypeReference => this.GetCodeTypeReference(null, FileType.DefaultOperationSecurityDomainBLLBase);
 

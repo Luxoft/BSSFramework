@@ -2,7 +2,7 @@
 
 public abstract class DependencyDomainSecurityServiceBase<TDomainObject, TBaseDomainObject> :
 
-    DomainSecurityService<TDomainObject>
+    DomainSecurityServiceBase<TDomainObject>
 {
     private readonly ISecurityOperationResolver securityOperationResolver;
 
@@ -12,7 +12,7 @@ public abstract class DependencyDomainSecurityServiceBase<TDomainObject, TBaseDo
         IDisabledSecurityProviderSource disabledSecurityProviderSource,
         ISecurityOperationResolver securityOperationResolver,
         IDomainSecurityService<TBaseDomainObject> baseDomainSecurityService)
-        : base(disabledSecurityProviderSource, securityOperationResolver)
+        : base(disabledSecurityProviderSource)
     {
         this.securityOperationResolver = securityOperationResolver;
         this.baseDomainSecurityService = baseDomainSecurityService ?? throw new ArgumentNullException(nameof(baseDomainSecurityService));

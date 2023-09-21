@@ -1,15 +1,13 @@
 ﻿using Framework.Core;
 using Framework.SecuritySystem;
-using Framework.SecuritySystem;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.BLL.Security;
 
 public abstract class SecurityBLLFactory<TBLLContext, TBLL, TBLLImpl, TDomainObject> :
     BLLContextContainer<TBLLContext>,
-    ISecurityBLLFactory<TBLL, BLLSecurityMode>,
-    ISecurityBLLFactory<TBLL, SecurityOperation>,
-    ISecurityBLLFactory<TBLL, ISecurityProvider<TDomainObject>>
+    ISecurityBLLFactory<TBLL, TDomainObject>
 
     where TBLLContext : class, ISecurityServiceContainer<IRootSecurityService<TDomainObject>>, IServiceProviderContainer
     where TDomainObject : class

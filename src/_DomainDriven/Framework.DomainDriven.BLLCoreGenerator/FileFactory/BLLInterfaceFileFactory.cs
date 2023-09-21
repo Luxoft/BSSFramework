@@ -40,7 +40,7 @@ public class BLLInterfaceFileFactory<TConfiguration> : FileFactory<TConfiguratio
 
                        BaseTypes =
                        {
-                               (this.DomainType.IsSecurity() ? typeof(IDefaultSecurityDomainBLLBase<,,,>) : typeof(IDefaultDomainBLLBase<,,,>))
+                               typeof(IDefaultSecurityDomainBLLBase<,,,>)
                                .ToTypeReference(
 
                                                 this.Configuration.BLLContextInterfaceTypeReference,

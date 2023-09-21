@@ -14,4 +14,7 @@ public abstract record SecurityOperation(string Name) : ISecurityOperation
     public SecurityOperation ApproveOperation { get; init; }
 
     public sealed override string ToString() => this.Name;
+
+
+    public static DisabledSecurityOperation Disabled { get; } = new ();
 }

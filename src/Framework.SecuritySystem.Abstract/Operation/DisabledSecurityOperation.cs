@@ -3,6 +3,4 @@
 /// <summary>
 /// Специальная операция для отключённой безопасности
 /// </summary>
-public record DisabledSecurityOperation() : SecurityOperation("Disabled")
-{
-}
+public record DisabledSecurityOperation() : SecurityOperation("Disabled");

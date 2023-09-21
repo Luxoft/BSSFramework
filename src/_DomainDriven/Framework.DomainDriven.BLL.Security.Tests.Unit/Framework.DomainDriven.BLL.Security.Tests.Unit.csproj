@@ -15,6 +15,7 @@
     <ProjectReference Include="..\..\Framework.HierarchicalExpand\Framework.HierarchicalExpand.csproj" />
     <ProjectReference Include="..\..\Framework.SecuritySystem\Framework.SecuritySystem.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.BLL.Security\Framework.DomainDriven.BLL.Security.csproj" />
+    <ProjectReference Include="..\Framework.DomainDriven.ServiceModel.IAD\Framework.DomainDriven.ServiceModel.IAD.csproj" />
     <ProjectReference Include="..\Framework.DomainDriven.Tests.Unit\Framework.DomainDriven.Tests.Unit.csproj" />
   </ItemGroup>
 

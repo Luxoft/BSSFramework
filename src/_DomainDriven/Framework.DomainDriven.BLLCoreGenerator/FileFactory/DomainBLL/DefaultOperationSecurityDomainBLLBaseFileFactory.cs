@@ -14,7 +14,6 @@ public class DefaultOperationSecurityDomainBLLBaseFileFactory<TConfiguration> : 
 
     }
 
-
     public override FileType FileType => FileType.DefaultOperationSecurityDomainBLLBase;
 
 

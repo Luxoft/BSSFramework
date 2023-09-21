@@ -1,12 +1,12 @@
 ﻿using Framework.Core;
 using Framework.Persistent;
 using Framework.SecuritySystem;
+
 using nuSpec.Abstraction;
 
 namespace Framework.DomainDriven.BLL.Security
 {
-    public interface
-        IDefaultSecurityDomainBLLBase<in TPersistentDomainObjectBase, TDomainObject, TIdent> : IDefaultDomainBLLBase<
+    public interface IDefaultSecurityDomainBLLBase<in TPersistentDomainObjectBase, TDomainObject, TIdent> : IDefaultDomainBLLBase<
             TPersistentDomainObjectBase, TDomainObject, TIdent>
         where TPersistentDomainObjectBase : class, IIdentityObject<TIdent>
         where TDomainObject : class, TPersistentDomainObjectBase
@@ -42,7 +42,6 @@ namespace Framework.DomainDriven.BLL.Security
         where TDomainObject : class, TPersistentDomainObjectBase
         where TOperation : struct, Enum
         where TBLLContext : class, ISecurityBLLContext<TPersistentDomainObjectBase, TIdent>, IAccessDeniedExceptionServiceContainer, IHierarchicalObjectExpanderFactoryContainer<TIdent>
-
     {
         protected DefaultSecurityDomainBLLBase(TBLLContext context, ISpecificationEvaluator specificationEvaluator = null)
             : this(context, context.DisabledSecurityProviderSource.GetDisabledSecurityProvider<TDomainObject>(), specificationEvaluator)
@@ -59,7 +58,7 @@ namespace Framework.DomainDriven.BLL.Security
         }
 
 
-        public ISecurityProvider<TDomainObject> SecurityProvider { get; private set; }
+        public ISecurityProvider<TDomainObject> SecurityProvider { get; }
 
 
         protected override IQueryable<TDomainObject> ProcessSecurity(IQueryable<TDomainObject> queryable)

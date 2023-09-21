@@ -4,7 +4,7 @@ namespace Framework.Configuration;
 
 public static class ConfigurationSecurityOperation
 {
-    public static DisabledSecurityOperation Disabled { get; } = new();
+    public static DisabledSecurityOperation Disabled { get; } = SecurityOperation.Disabled;
 
 
     #region ExceptionMessage

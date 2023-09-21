@@ -6,7 +6,8 @@ using Framework.Persistent;
 
 namespace Framework.DomainDriven.UnitTest.Mock;
 
-public class MockDAL<TDomain, TIdent> : IMockDAL<TDomain, TIdent> where TDomain : IIdentityObject<TIdent>
+public class MockDAL<TDomain, TIdent> : IMockDAL<TDomain, TIdent>
+    where TDomain : IIdentityObject<TIdent>
 {
     private readonly HashSet<TDomain> _collection = new HashSet<TDomain>();
 
@@ -126,10 +127,24 @@ public class MockDAL<TDomain, TIdent> : IMockDAL<TDomain, TIdent> where TDomain 
         return this._collection.FirstOrDefault(z => EqualityComparer<TIdent>.Default.Equals(z.Id, id));
     }
 
+    public IQueryable<TDomain> GetQueryable() => throw new NotImplementedException();
+
     public TDomain Load(TIdent id)
     {
         return this.GetById(id, LockRole.None);
     }
+
+    public Task<TDomain> LoadAsync(TIdent id, CancellationToken cancellationToken = default) => throw new NotImplementedException();
+
+    public Task RefreshAsync(TDomain domainObject, CancellationToken cancellationToken = default) => throw new NotImplementedException();
+
+    public Task SaveAsync(TDomain domainObject, CancellationToken cancellationToken = default) => throw new NotImplementedException();
+
+    public Task InsertAsync(TDomain domainObject, TIdent id, CancellationToken cancellationToken = default) => throw new NotImplementedException();
+
+    public Task RemoveAsync(TDomain domainObject, CancellationToken cancellationToken = default) => throw new NotImplementedException();
+
+    public Task LockAsync(TDomain domain, LockRole lockRole, CancellationToken cancellationToken = default) => throw new NotImplementedException();
 
     public virtual void Save(TDomain domainObject)
     {

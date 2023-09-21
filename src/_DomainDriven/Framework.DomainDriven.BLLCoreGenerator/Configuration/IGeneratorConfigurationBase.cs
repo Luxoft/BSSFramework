@@ -57,11 +57,7 @@ public interface IGeneratorConfigurationBase : IGeneratorConfiguration, ICodeTyp
 
     CodeTypeReference BLLFactoryInterfaceTypeReference { get; }
 
-    CodeTypeReference DomainBLLBaseTypeReference { get; }
-
     CodeTypeReference SecurityDomainBLLBaseTypeReference { get; }
-
-    CodeTypeReference DefaultOperationDomainBLLBaseTypeReference { get; }
 
     CodeTypeReference DefaultOperationSecurityDomainBLLBaseTypeReference { get; }
 

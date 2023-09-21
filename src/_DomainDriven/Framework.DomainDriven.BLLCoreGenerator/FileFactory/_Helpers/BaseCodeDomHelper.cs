@@ -11,8 +11,6 @@ internal static class BaseCodeDomHelper
 {
     private const string ContextParameterNameBase = "context";
 
-    private const string SecurityOperationNameBase = "securityOperation";
-
     public static CodeParameterDeclarationExpression GetContextParameter<TConfiguration>(this FileFactory<TConfiguration> fileFactory)
             where TConfiguration : class, IGeneratorConfigurationBase<IGenerationEnvironmentBase>
     {
@@ -28,7 +26,7 @@ internal static class BaseCodeDomHelper
         if (domainObjectParameter == null) throw new ArgumentNullException(nameof(domainObjectParameter));
 
         return typeof(ISecurityProvider<>).ToTypeReference(domainObjectParameter.ToTypeReference())
-                                          .ToParameterDeclarationExpression(SecurityOperationNameBase);
+                                          .ToParameterDeclarationExpression("securityProvider");
     }
 
     public static CodeTypeParameter GetDomainObjectCodeTypeParameter<TConfiguration>(this IGeneratorConfigurationContainer<TConfiguration> fileFactory, bool withConstraints = true)

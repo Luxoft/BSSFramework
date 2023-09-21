@@ -26,7 +26,7 @@ public static class GeneratorConfigurationExtensions
     {
         if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-        return configuration.GetSecurityCodeExpression(new DisabledSecurityOperation());
+        return configuration.GetSecurityCodeExpression(SecurityOperation.Disabled);
     }
 
 

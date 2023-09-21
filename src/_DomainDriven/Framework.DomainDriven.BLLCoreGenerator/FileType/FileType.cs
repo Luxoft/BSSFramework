@@ -21,13 +21,7 @@ public enum FileType
     DomainSecurityService,
 
 
-    DomainBLLBase,
-
     SecurityDomainBLLBase,
-
-
-
-    DefaultOperationDomainBLLBase,
 
     DefaultOperationSecurityDomainBLLBase,
 

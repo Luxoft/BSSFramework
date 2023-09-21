@@ -10,7 +10,7 @@ public static class SampleSystemSecurityOperation
     /// <summary>
     /// Специальная операция для отключения безопасности
     /// </summary>
-    public static DisabledSecurityOperation Disabled { get; } = new();
+    public static DisabledSecurityOperation Disabled { get; } = SecurityOperation.Disabled;
 
     #region Employee
 

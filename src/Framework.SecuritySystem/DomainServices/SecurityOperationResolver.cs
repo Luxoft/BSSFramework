@@ -23,7 +23,7 @@ public class SecurityOperationResolver : ISecurityOperationResolver
         switch (securityMode)
         {
             case BLLSecurityMode.Disabled:
-                return new DisabledSecurityOperation();
+                return SecurityOperation.Disabled;
 
             case BLLSecurityMode.View:
                 return this.viewDict.GetValueOrDefault(typeof(TDomainObject));

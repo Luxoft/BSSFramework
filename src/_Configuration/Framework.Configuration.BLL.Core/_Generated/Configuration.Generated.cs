@@ -40,39 +40,18 @@ namespace Framework.Configuration.BLL
         }
     }
     
-    public partial class DomainBLLBase<TDomainObject, TOperation> : Framework.DomainDriven.BLL.DefaultDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid, TOperation>
+    public partial class SecurityDomainBLLBase<TDomainObject, TOperation> : Framework.DomainDriven.BLL.Security.DefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid, TOperation>
         where TDomainObject : Framework.Configuration.Domain.PersistentDomainObjectBase
         where TOperation :  struct, System.Enum
     {
         
-        public DomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, specificationEvaluator)
-        {
-        }
-    }
-    
-    public abstract partial class SecurityDomainBLLBase<TDomainObject, TOperation> : Framework.DomainDriven.BLL.Security.DefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid, TOperation>
-        where TDomainObject : Framework.Configuration.Domain.PersistentDomainObjectBase
-        where TOperation :  struct, System.Enum
-    {
-        
-        protected SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
+        public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
                 base(context, specificationEvaluator)
         {
         }
         
-        protected SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityOperation, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
-                base(context, securityOperation, specificationEvaluator)
-        {
-        }
-    }
-    
-    public partial class DomainBLLBase<TDomainObject> : Framework.Configuration.BLL.DomainBLLBase<TDomainObject, Framework.DomainDriven.BLL.BLLBaseOperation>
-        where TDomainObject : Framework.Configuration.Domain.PersistentDomainObjectBase
-    {
-        
-        public DomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context) : 
-                base(context)
+        public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider, nuSpec.Abstraction.ISpecificationEvaluator specificationEvaluator = null) : 
+                base(context, securityProvider, specificationEvaluator)
         {
         }
     }
@@ -86,8 +65,8 @@ namespace Framework.Configuration.BLL
         {
         }
         
-        public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityOperation) : 
-                base(context, securityOperation)
+        public SecurityDomainBLLBase(Framework.Configuration.BLL.IConfigurationBLLContext context, Framework.SecuritySystem.ISecurityProvider<TDomainObject> securityProvider) : 
+                base(context, securityProvider)
         {
         }
     }
@@ -210,31 +189,31 @@ namespace Framework.Configuration.BLL
     {
     }
     
-    public partial interface ICodeFirstSubscriptionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ICodeFirstSubscriptionBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.CodeFirstSubscription>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ICodeFirstSubscriptionBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ICodeFirstSubscriptionBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ICodeFirstSubscriptionBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ICodeFirstSubscriptionBLL, Framework.Configuration.Domain.CodeFirstSubscription>
     {
     }
     
-    public partial interface IDomainObjectEventBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectEvent, System.Guid>
+    public partial interface IDomainObjectEventBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectEvent, System.Guid>
     {
     }
     
-    public partial interface IDomainObjectEventBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IDomainObjectEventBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.DomainObjectEvent>>
+    public partial interface IDomainObjectEventBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IDomainObjectEventBLL, Framework.Configuration.Domain.DomainObjectEvent>
     {
     }
     
-    public partial interface IDomainObjectModificationBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectModification, System.Guid>
+    public partial interface IDomainObjectModificationBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectModification, System.Guid>
     {
     }
     
-    public partial interface IDomainObjectModificationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IDomainObjectModificationBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.DomainObjectModification>>
+    public partial interface IDomainObjectModificationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IDomainObjectModificationBLL, Framework.Configuration.Domain.DomainObjectModification>
     {
     }
     
-    public partial interface IDomainObjectNotificationBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectNotification, System.Guid>
+    public partial interface IDomainObjectNotificationBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.DomainObjectNotification, System.Guid>
     {
     }
     
-    public partial interface IDomainObjectNotificationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IDomainObjectNotificationBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.DomainObjectNotification>>
+    public partial interface IDomainObjectNotificationBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IDomainObjectNotificationBLL, Framework.Configuration.Domain.DomainObjectNotification>
     {
     }
     
@@ -242,7 +221,7 @@ namespace Framework.Configuration.BLL
     {
     }
     
-    public partial interface IDomainTypeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IDomainTypeBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.DomainType>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IDomainTypeBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IDomainTypeBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IDomainTypeBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IDomainTypeBLL, Framework.Configuration.Domain.DomainType>
     {
     }
     
@@ -250,23 +229,23 @@ namespace Framework.Configuration.BLL
     {
     }
     
-    public partial interface IExceptionMessageBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IExceptionMessageBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.ExceptionMessage>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IExceptionMessageBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IExceptionMessageBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface IExceptionMessageBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.IExceptionMessageBLL, Framework.Configuration.Domain.ExceptionMessage>
     {
     }
     
-    public partial interface INamedLockBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.NamedLock, System.Guid>
+    public partial interface INamedLockBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.NamedLock, System.Guid>
     {
     }
     
-    public partial interface INamedLockBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.INamedLockBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.NamedLock>>
+    public partial interface INamedLockBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.INamedLockBLL, Framework.Configuration.Domain.NamedLock>
     {
     }
     
-    public partial interface ISentMessageBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.SentMessage, System.Guid>
+    public partial interface ISentMessageBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<Framework.Configuration.BLL.IConfigurationBLLContext, Framework.Configuration.Domain.PersistentDomainObjectBase, Framework.Configuration.Domain.SentMessage, System.Guid>
     {
     }
     
-    public partial interface ISentMessageBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ISentMessageBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.SentMessage>>
+    public partial interface ISentMessageBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ISentMessageBLL, Framework.Configuration.Domain.SentMessage>
     {
     }
     
@@ -276,7 +255,7 @@ namespace Framework.Configuration.BLL
         Framework.Configuration.Domain.Sequence Create(Framework.Configuration.Domain.SequenceCreateModel createModel);
     }
     
-    public partial interface ISequenceBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ISequenceBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.Sequence>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ISequenceBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ISequenceBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ISequenceBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ISequenceBLL, Framework.Configuration.Domain.Sequence>
     {
     }
     
@@ -284,7 +263,7 @@ namespace Framework.Configuration.BLL
     {
     }
     
-    public partial interface ISystemConstantBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ISystemConstantBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.SystemConstant>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ISystemConstantBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ISystemConstantBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ISystemConstantBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ISystemConstantBLL, Framework.Configuration.Domain.SystemConstant>
     {
     }
     
@@ -292,7 +271,7 @@ namespace Framework.Configuration.BLL
     {
     }
     
-    public partial interface ITargetSystemBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ITargetSystemBLL, Framework.SecuritySystem.ISecurityProvider<Framework.Configuration.Domain.TargetSystem>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ITargetSystemBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ITargetSystemBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITargetSystemBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<Framework.Configuration.BLL.ITargetSystemBLL, Framework.Configuration.Domain.TargetSystem>
     {
     }
     

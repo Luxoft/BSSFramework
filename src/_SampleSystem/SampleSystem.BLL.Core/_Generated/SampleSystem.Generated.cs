@@ -1054,11 +1054,11 @@ namespace SampleSystem.BLL
     {
     }
     
-    public partial interface ITestImmutableObjBLL : Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestImmutableObj, System.Guid>
+    public partial interface ITestImmutableObjBLL : Framework.DomainDriven.BLL.IDefaultDomainBLLBase<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Domain.PersistentDomainObjectBase, SampleSystem.Domain.TestImmutableObj, System.Guid>
     {
     }
     
-    public partial interface ITestImmutableObjBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestImmutableObjBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestImmutableObj>>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestImmutableObjBLL, Framework.SecuritySystem.SecurityOperation>, Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestImmutableObjBLL, Framework.SecuritySystem.BLLSecurityMode>
+    public partial interface ITestImmutableObjBLLFactory : Framework.DomainDriven.BLL.Security.ISecurityBLLFactory<SampleSystem.BLL.ITestImmutableObjBLL, Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestImmutableObj>>
     {
     }
     

@@ -2952,7 +2952,7 @@ namespace SampleSystem.BLL
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestImmutableObj)))
             {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestImmutableObjFactory.Create(((Framework.SecuritySystem.ISecurityProvider<SampleSystem.Domain.TestImmutableObj>)(securityProvider)))));
+                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestImmutableObjFactory.Create()));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestPerformanceObject)))
             {
@@ -3184,7 +3184,7 @@ namespace SampleSystem.BLL
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestImmutableObj)))
             {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestImmutableObjFactory.Create(securityOperation)));
+                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestImmutableObjFactory.Create()));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestPerformanceObject)))
             {
@@ -3416,7 +3416,7 @@ namespace SampleSystem.BLL
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestImmutableObj)))
             {
-                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestImmutableObjFactory.Create(bllSecurityMode)));
+                return ((Framework.DomainDriven.BLL.Security.IDefaultSecurityDomainBLLBase<SampleSystem.Domain.PersistentDomainObjectBase, TDomainObject, System.Guid>)(this.Context.Logics.TestImmutableObjFactory.Create()));
             }
             else if ((typeof(TDomainObject) == typeof(SampleSystem.Domain.TestPerformanceObject)))
             {

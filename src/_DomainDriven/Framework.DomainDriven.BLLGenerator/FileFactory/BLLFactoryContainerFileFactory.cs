@@ -2,9 +2,8 @@
 
 using Framework.Core;
 using Framework.CodeDom;
+using Framework.DomainDriven.BLL.Security;
 using Framework.DomainDriven.BLLCoreGenerator;
-
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.DomainDriven.BLLGenerator;
 
@@ -32,9 +31,9 @@ public class BLLFactoryContainerFileFactory<TConfiguration> : BLLFactoryContaine
         {
             var bllFactoryInterfaceTypeRef = this.Configuration.Environment.BLLCore.GetCodeTypeReference(domainType, BLLCoreGenerator.FileType.BLLFactoryInterface);
 
-            var getRequiredServiceMethod = typeof(ServiceProviderServiceExtensions).ToTypeReferenceExpression()
+            var getRequiredServiceMethod = typeof(Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions).ToTypeReferenceExpression()
                                                                                    .ToMethodReferenceExpression(
-                                                                                    nameof(ServiceProviderServiceExtensions.GetRequiredService),
+                                                                                    nameof(Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService),
                                                                                     bllFactoryInterfaceTypeRef);
 
             var factoryProperty = new CodeMemberProperty
@@ -115,21 +114,13 @@ public class BLLFactoryContainerFileFactory<TConfiguration> : BLLFactoryContaine
     {
         var methodName = "RegisterBLLFactory";
 
-        var serviceCollectionParameter = new CodeParameterDeclarationExpression(typeof(IServiceCollection), "serviceCollection");
+        var serviceCollectionParameter = new CodeParameterDeclarationExpression(typeof(Microsoft.Extensions.DependencyInjection.IServiceCollection), "serviceCollection");
 
         var addScopedStatements = from domainType in this.Configuration.DomainTypes
 
-                                  let factoryDecl = this.Configuration.Environment.BLLCore.GetCodeTypeReference(domainType, BLLCoreGenerator.FileType.BLLFactoryInterface)
+                                  from statement in this.GetRegisterBLLStatements(serviceCollectionParameter, domainType)
 
-                                  let factoryImpl = this.Configuration.GetCodeTypeReference(domainType, FileType.BLLFactory)
-
-                                  let addScopedMethod = typeof(ServiceCollectionServiceExtensions).ToTypeReferenceExpression()
-                                          .ToMethodReferenceExpression(
-                                                                       nameof(ServiceCollectionServiceExtensions.AddScoped),
-                                                                       factoryDecl,
-                                                                       factoryImpl)
-
-                                  select serviceCollectionParameter.ToVariableReferenceExpression().ToStaticMethodInvokeExpression(addScopedMethod).ToExpressionStatement();
+                                  select statement;
 
         return new CodeMemberMethod
                {
@@ -137,5 +128,42 @@ public class BLLFactoryContainerFileFactory<TConfiguration> : BLLFactoryContaine
                        Attributes = MemberAttributes.Public | MemberAttributes.Static,
                        Parameters = { serviceCollectionParameter },
                }.WithStatements(addScopedStatements);
+    }
+
+
+
+    private IEnumerable<CodeExpressionStatement> GetRegisterBLLStatements(CodeParameterDeclarationExpression serviceCollectionParameter, Type domainType)
+    {
+        var factoryDecl = this.Configuration.Environment.BLLCore.GetCodeTypeReference(domainType, BLLCoreGenerator.FileType.BLLFactoryInterface);
+
+        var factoryImpl = this.Configuration.GetCodeTypeReference(domainType, FileType.BLLFactory);
+
+        var addScopedMethod = typeof(Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions).ToTypeReferenceExpression()
+                                                                        .ToMethodReferenceExpression(
+                                                                            nameof(Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped),
+                                                                            factoryDecl,
+                                                                            factoryImpl);
+
+        yield return serviceCollectionParameter.ToVariableReferenceExpression().ToStaticMethodInvokeExpression(addScopedMethod).ToExpressionStatement();
+
+        var bllDecl = this.Configuration.Environment.BLLCore.GetCodeTypeReference(domainType, BLLCoreGenerator.FileType.BLLInterface);
+
+        var baseFactoryDecl = typeof(ISecurityBLLFactory<,>).ToTypeReference(bllDecl, domainType.ToTypeReference());
+
+        var addScopedFromMethod = typeof(Framework.DependencyInjection.ServiceCollectionExtensions).ToTypeReferenceExpression()
+            .ToMethodReferenceExpression(
+                nameof(Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom),
+                baseFactoryDecl,
+                factoryDecl);
+
+        yield return serviceCollectionParameter.ToVariableReferenceExpression().ToStaticMethodInvokeExpression(addScopedFromMethod).ToExpressionStatement();
+
+        var addbaseScopedFromMethod = typeof(Framework.DependencyInjection.ServiceCollectionExtensions).ToTypeReferenceExpression()
+            .ToMethodReferenceExpression(
+                nameof(Framework.DependencyInjection.ServiceCollectionExtensions.AddScopedFrom),
+                typeof(ISecurityBLLFactory<>).ToTypeReference(bllDecl),
+                baseFactoryDecl);
+
+        yield return serviceCollectionParameter.ToVariableReferenceExpression().ToStaticMethodInvokeExpression(addbaseScopedFromMethod).ToExpressionStatement();
     }
 }

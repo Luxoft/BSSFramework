@@ -10,6 +10,26 @@
     {
         
         /// <summary>
+        /// Check TestImmutableObj access
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
+        [Microsoft.AspNetCore.Mvc.RouteAttribute("CheckTestImmutableObjAccess")]
+        public virtual void CheckTestImmutableObjAccess(CheckTestImmutableObjAccessAutoRequest checkTestImmutableObjAccessAutoRequest)
+        {
+            string securityOperationName = checkTestImmutableObjAccessAutoRequest.securityOperationName;
+            SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdent = checkTestImmutableObjAccessAutoRequest.testImmutableObjIdent;
+            this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.CheckTestImmutableObjAccessInternal(testImmutableObjIdent, securityOperationName, evaluateData));
+        }
+        
+        protected virtual void CheckTestImmutableObjAccessInternal(SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        {
+            SampleSystem.BLL.ITestImmutableObjBLL bll = evaluateData.Context.Logics.TestImmutableObj;
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
+            SampleSystem.Domain.TestImmutableObj domainObject = bll.GetById(testImmutableObjIdent.Id, true);
+            Framework.SecuritySystem.SecurityProviderBaseExtensions.CheckAccess(evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.TestImmutableObj>(operation), domainObject, evaluateData.Context.AccessDeniedExceptionService);
+        }
+        
+        /// <summary>
         /// Get TestImmutableObj (FullDTO) by identity
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -125,6 +145,26 @@
         }
         
         /// <summary>
+        /// Check access for TestImmutableObj
+        /// </summary>
+        [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
+        [Microsoft.AspNetCore.Mvc.RouteAttribute("HasTestImmutableObjAccess")]
+        public virtual bool HasTestImmutableObjAccess(HasTestImmutableObjAccessAutoRequest hasTestImmutableObjAccessAutoRequest)
+        {
+            string securityOperationName = hasTestImmutableObjAccessAutoRequest.securityOperationName;
+            SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdent = hasTestImmutableObjAccessAutoRequest.testImmutableObjIdent;
+            return this.Evaluate(Framework.DomainDriven.DBSessionMode.Read, evaluateData => this.HasTestImmutableObjAccessInternal(testImmutableObjIdent, securityOperationName, evaluateData));
+        }
+        
+        protected virtual bool HasTestImmutableObjAccessInternal(SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdent, string securityOperationName, Framework.DomainDriven.ServiceModel.Service.EvaluatedData<SampleSystem.BLL.ISampleSystemBLLContext, SampleSystem.Generated.DTO.ISampleSystemDTOMappingService> evaluateData)
+        {
+            SampleSystem.BLL.ITestImmutableObjBLL bll = evaluateData.Context.Logics.TestImmutableObj;
+            Framework.SecuritySystem.SecurityOperation operation = Framework.Security.SecurityOperationHelper.Parse(typeof(SampleSystem.SampleSystemSecurityOperation), securityOperationName);
+            SampleSystem.Domain.TestImmutableObj domainObject = bll.GetById(testImmutableObjIdent.Id, true);
+            return evaluateData.Context.SecurityService.GetSecurityProvider<SampleSystem.Domain.TestImmutableObj>(operation).HasAccess(domainObject);
+        }
+        
+        /// <summary>
         /// Save TestImmutableObjs
         /// </summary>
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute()]
@@ -147,5 +187,33 @@
             bll.Save(domainObject);
             return SampleSystem.Generated.DTO.LambdaHelper.ToIdentityDTO(domainObject);
         }
+    }
+    
+    [System.Runtime.Serialization.DataContractAttribute()]
+    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    public partial class CheckTestImmutableObjAccessAutoRequest
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
+        public SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdent;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
+        public string securityOperationName;
+    }
+    
+    [System.Runtime.Serialization.DataContractAttribute()]
+    [Framework.DomainDriven.ServiceModel.IAD.AutoRequestAttribute()]
+    public partial class HasTestImmutableObjAccessAutoRequest
+    {
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=0)]
+        public SampleSystem.Generated.DTO.TestImmutableObjIdentityDTO testImmutableObjIdent;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        [Framework.DomainDriven.ServiceModel.IAD.AutoRequestPropertyAttribute(OrderIndex=1)]
+        public string securityOperationName;
     }
 }

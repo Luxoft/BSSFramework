@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
-internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecurityServiceBuilder<TDomainObject, TIdent>, IDomainSecurityServiceBuilder
+internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecurityServiceBuilder<TDomainObject>, IDomainSecurityServiceBuilder
     where TDomainObject : IIdentityObject<TIdent>
 {
     public SecurityOperation ViewSecurityOperation { get; private set; }
@@ -39,7 +39,7 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
             services.AddSingleton(this.DependencySourcePath.GetType(), this.DependencySourcePath);
         }
 
-        services.AddScoped(typeof(IDomainSecurityService<TDomainObject>), sp => ActivatorUtilities.CreateInstance(sp, this.GetDomainServiceType()));
+        services.AddScoped(typeof(IDomainSecurityService<TDomainObject>), this.GetDomainServiceType());
     }
 
     private Type GetDomainServiceType()
@@ -62,28 +62,28 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
         }
     }
 
-    public IDomainSecurityServiceBuilder<TDomainObject, TIdent> SetView(SecurityOperation securityOperation)
+    public IDomainSecurityServiceBuilder<TDomainObject> SetView(SecurityOperation securityOperation)
     {
         this.ViewSecurityOperation = securityOperation;
 
         return this;
     }
 
-    public IDomainSecurityServiceBuilder<TDomainObject, TIdent> SetEdit(SecurityOperation securityOperation)
+    public IDomainSecurityServiceBuilder<TDomainObject> SetEdit(SecurityOperation securityOperation)
     {
         this.EditSecurityOperation = securityOperation;
 
         return this;
     }
 
-    public IDomainSecurityServiceBuilder<TDomainObject, TIdent> SetPath(SecurityPath<TDomainObject> securityPath)
+    public IDomainSecurityServiceBuilder<TDomainObject> SetPath(SecurityPath<TDomainObject> securityPath)
     {
         this.SecurityPath = securityPath;
 
         return this;
     }
 
-    public IDomainSecurityServiceBuilder<TDomainObject, TIdent> SetDependency<TSource>(Expression<Func<TDomainObject, TSource>> dependencyPath)
+    public IDomainSecurityServiceBuilder<TDomainObject> SetDependency<TSource>(Expression<Func<TDomainObject, TSource>> dependencyPath)
     {
         this.DependencyServiceType = typeof(DependencyDomainSecurityService<TDomainObject, TSource>);
         this.DependencySourcePath = new DependencyDomainSecurityServicePath<TDomainObject, TSource>(dependencyPath);
@@ -91,19 +91,22 @@ internal class DomainSecurityServiceBuilder<TDomainObject, TIdent> : IDomainSecu
         return this;
     }
 
-    public IDomainSecurityServiceBuilder<TDomainObject, TIdent> SetUntypedDependency<TSource>()
-        where TSource : class, IIdentityObject<TIdent>
+    public IDomainSecurityServiceBuilder<TDomainObject> SetUntypedDependency<TSource>()
     {
-        this.DependencyServiceType = typeof(UntypedDependencyDomainSecurityService<TDomainObject, TSource, TIdent>);
+        this.DependencyServiceType = typeof(UntypedDependencyDomainSecurityService<,,>).MakeGenericType(typeof(TDomainObject), typeof(TSource), typeof(TIdent));
 
         return this;
     }
 
-    public IDomainSecurityServiceBuilder<TDomainObject, TIdent> SetCustomService<TDomainSecurityService>()
+    public IDomainSecurityServiceBuilder<TDomainObject> SetCustomService<TDomainSecurityService>()
         where TDomainSecurityService : IDomainSecurityService<TDomainObject>
     {
         this.CustomServiceType = typeof(TDomainSecurityService);
 
         return this;
     }
+
+    public IDomainSecurityServiceBuilder<TDomainObject> Override<TSecurityFunctor>()
+        where TSecurityFunctor : IOverrideSecurityFunctor<TDomainObject> =>
+        throw new NotImplementedException();
 }

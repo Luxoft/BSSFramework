@@ -8,7 +8,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection RegisterDomainSecurityServices<TIdent>(
         this IServiceCollection services,
-        Action<IDomainSecurityServiceRootBuilder<TIdent>> setupAction)
+        Action<IDomainSecurityServiceRootBuilder> setupAction)
     {
         var builder = new DomainSecurityServiceRootBuilder<TIdent>();
 

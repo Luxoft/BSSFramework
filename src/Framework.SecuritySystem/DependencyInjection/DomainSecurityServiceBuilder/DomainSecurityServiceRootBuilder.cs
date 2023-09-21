@@ -1,15 +1,12 @@
-﻿using Framework.Persistent;
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Framework.SecuritySystem.DependencyInjection.DomainSecurityServiceBuilder;
 
-internal class DomainSecurityServiceRootBuilder<TIdent> : IDomainSecurityServiceRootBuilder<TIdent>
+internal class DomainSecurityServiceRootBuilder<TIdent> : IDomainSecurityServiceRootBuilder
 {
     private readonly List<IDomainSecurityServiceBuilder> domainBuilders = new();
 
-    public IDomainSecurityServiceRootBuilder<TIdent> Add<TDomainObject>(Action<IDomainSecurityServiceBuilder<TDomainObject, TIdent>> setup)
-        where TDomainObject : IIdentityObject<TIdent>
+    public IDomainSecurityServiceRootBuilder Add<TDomainObject>(Action<IDomainSecurityServiceBuilder<TDomainObject>> setup)
     {
         var builder = new DomainSecurityServiceBuilder<TDomainObject, TIdent>();
 

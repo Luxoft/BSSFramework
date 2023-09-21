@@ -30,7 +30,8 @@ public static class SampleSystemDomainSecurityServiceExtensions
 
             rb =>
 
-                rb.AddEmployee()
+                rb.AddMetadata<SampleSystemEmployeeDomainSecurityServiceMetadata>()
+                //rb.AddEmployee()
 
                   .Add<BusinessUnit>(
                       b => b.SetView(SampleSystemSecurityOperation.BusinessUnitView)
